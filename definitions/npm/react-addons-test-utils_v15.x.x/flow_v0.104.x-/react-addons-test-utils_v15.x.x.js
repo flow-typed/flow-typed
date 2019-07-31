@@ -1,9 +1,7 @@
 import React from "react";
 
 declare module "react-addons-test-utils" {
-  declare var Simulate: {
-    [eventName: string]: (element: Element, eventData?: Object) => void
-  };
+  declare var Simulate: { [eventName: string]: (element: Element, eventData?: Object) => void, ... };
   declare function renderIntoDocument(
     instance: React.Element<any>
   ): React.Component;

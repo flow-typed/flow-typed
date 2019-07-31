@@ -17,7 +17,7 @@ declare module '@react-navigation/core' {
     | false
     | ''
     | $ReadOnlyArray<StyleObj>
-    | { [name: string]: any };
+    | { [name: string]: any, ... };
   declare type ViewStyleProp = StyleObj;
   declare type TextStyleProp = StyleObj;
   declare type AnimatedTextStyleProp = StyleObj;
@@ -32,6 +32,7 @@ declare module '@react-navigation/core' {
     extrapolate?: ExtrapolateType,
     extrapolateLeft?: ExtrapolateType,
     extrapolateRight?: ExtrapolateType,
+    ...
   };
   declare class AnimatedInterpolation {
     interpolate(config: InterpolationConfigType): AnimatedInterpolation;
@@ -39,7 +40,7 @@ declare module '@react-navigation/core' {
 
   // This is copied from
   // react-native/Libraries/Animated/src/animations/Animation.js
-  declare type EndResult = { finished: boolean };
+  declare type EndResult = { finished: boolean, ... };
   declare type EndCallback = (result: EndResult) => void;
   declare class Animation {
     start(
@@ -67,7 +68,7 @@ declare module '@react-navigation/core' {
 
   // This is vaguely copied from
   // react-native/Libraries/Animated/src/nodes/AnimatedValue.js
-  declare type ValueListenerCallback = (state: { value: number }) => void;
+  declare type ValueListenerCallback = (state: { value: number, ... }) => void;
   declare class AnimatedValue {
     constructor(value: number): void;
     setValue(value: number): void;
@@ -93,9 +94,7 @@ declare module '@react-navigation/core' {
    * Navigation State + Action
    */
 
-  declare export type NavigationParams = {
-    [key: string]: mixed,
-  };
+  declare export type NavigationParams = { [key: string]: mixed, ... };
 
   declare export type NavigationBackAction = {|
     type: 'Navigation/BACK',
@@ -217,6 +216,7 @@ declare module '@react-navigation/core' {
     index: number,
     routes: Array<NavigationRoute>,
     isTransitioning?: bool,
+    ...
   };
 
   declare export type NavigationRoute =
@@ -254,19 +254,18 @@ declare module '@react-navigation/core' {
    * Router
    */
 
-  declare export type NavigationScreenOptionsGetter<Options: {}> = (
+  declare export type NavigationScreenOptionsGetter<Options: {...}> = (
     navigation: NavigationScreenProp<NavigationRoute>,
-    screenProps?: {}
+    screenProps?: {...}
   ) => Options;
 
-  declare export type NavigationRouter<State: NavigationState, Options: {}> = {
+  declare export type NavigationRouter<State: NavigationState, Options: {...}> = {
     /**
      * The reducer that outputs the new navigation state for a given action,
      * with an optional previous state. When the action is considered handled
      * but the state is unchanged, the output state is null.
      */
     getStateForAction: (action: NavigationAction, lastState: ?State) => ?State,
-
     /**
      * Maps a URI-like string to an action. This can be mapped to a state
      * using `getStateForAction`.
@@ -275,18 +274,15 @@ declare module '@react-navigation/core' {
       path: string,
       params?: NavigationParams
     ) => ?NavigationAction,
-
     getPathAndParamsForState: (
       state: State
     ) => {
       path: string,
       params?: NavigationParams,
+      ...
     },
-
     getComponentForRouteName: (routeName: string) => NavigationComponent,
-
     getComponentForState: (state: State) => NavigationComponent,
-
     /**
      * Gets the screen navigation options for a given screen.
      *
@@ -296,29 +292,31 @@ declare module '@react-navigation/core' {
      *  {routeName: 'Foo', key: '123'}
      */
     getScreenOptions: NavigationScreenOptionsGetter<Options>,
+    ...
   };
 
   declare export type NavigationScreenDetails<T> = {
     options: T,
     state: NavigationRoute,
     navigation: NavigationScreenProp<NavigationRoute>,
+    ...
   };
 
-  declare export type NavigationScreenOptions = {
-    title?: string,
-  };
+  declare export type NavigationScreenOptions = { title?: string, ... };
 
   declare export type NavigationScreenConfigProps = $Shape<{
     navigation: NavigationScreenProp<NavigationRoute>,
-    screenProps: {},
+    screenProps: {...},
+    ...
   }>;
 
   declare export type NavigationScreenConfig<Options> =
     | Options
     | (({
-        ...$Exact<NavigationScreenConfigProps>,
-        navigationOptions: Options,
-      }) => Options);
+    ...$Exact<NavigationScreenConfigProps>,
+    navigationOptions: Options,
+    ...
+  }) => Options);
 
   declare export type NavigationComponent =
     | NavigationScreenComponent<NavigationRoute, *, *>
@@ -330,7 +328,7 @@ declare module '@react-navigation/core' {
 
   declare export type NavigationScreenComponent<
     Route: NavigationRoute,
-    Options: {},
+    Options: {...},
     Props: NavigationNavigatorProps<Options, Route>,
   > = React$ComponentType<Props> &
     withOptionalNavigationOptions<Options>;
@@ -341,7 +339,7 @@ declare module '@react-navigation/core' {
 
   declare export type NavigationNavigator<
     State: NavigationState,
-    Options: {},
+    Options: {...},
     Props: NavigationNavigatorProps<Options, State>,
   > = React$ComponentType<Props> &
     withRouter<State, Options> &
@@ -350,25 +348,18 @@ declare module '@react-navigation/core' {
   declare export type NavigationRouteConfig =
     | NavigationComponent
     | ({
-        navigationOptions?: NavigationScreenConfig<*>,
-        path?: string,
-      } & NavigationScreenRouteConfig);
+    navigationOptions?: NavigationScreenConfig<*>,
+    path?: string,
+    ...
+  } & NavigationScreenRouteConfig);
 
   declare export type NavigationScreenRouteConfig =
-    | {
-        screen: NavigationComponent,
-      }
-    | {
-        getScreen: () => NavigationComponent,
-      };
+    | { screen: NavigationComponent, ... }
+    | { getScreen: () => NavigationComponent, ... };
 
-  declare export type NavigationPathsConfig = {
-    [routeName: string]: string,
-  };
+  declare export type NavigationPathsConfig = { [routeName: string]: string, ... };
 
-  declare export type NavigationRouteConfigMap = {
-    [routeName: string]: NavigationRouteConfig,
-  };
+  declare export type NavigationRouteConfigMap = { [routeName: string]: NavigationRouteConfig, ... };
 
   /**
    * Header
@@ -383,9 +374,10 @@ declare module '@react-navigation/core' {
       getScreenDetails: NavigationScene => NavigationScreenDetails<
         NavigationStackScreenOptions
       >,
-      leftInterpolator: (props: NavigationSceneRendererProps) => {},
-      titleInterpolator: (props: NavigationSceneRendererProps) => {},
-      rightInterpolator: (props: NavigationSceneRendererProps) => {},
+      leftInterpolator: (props: NavigationSceneRendererProps) => {...},
+      titleInterpolator: (props: NavigationSceneRendererProps) => {...},
+      rightInterpolator: (props: NavigationSceneRendererProps) => {...},
+      ...
     }
   >;
 
@@ -411,8 +403,13 @@ declare module '@react-navigation/core' {
     headerForceInset?: _SafeAreaViewInsets,
     headerBackground?: React$Node | React$ElementType,
     gesturesEnabled?: boolean,
-    gestureResponseDistance?: { vertical?: number, horizontal?: number },
+    gestureResponseDistance?: {
+      vertical?: number,
+      horizontal?: number,
+      ...
+    },
     gestureDirection?: 'default' | 'inverted',
+    ...
   };
 
   declare export type NavigationStackRouterConfig = {|
@@ -449,6 +446,7 @@ declare module '@react-navigation/core' {
   declare export type NavigationProp<S> = {
     +state: S,
     dispatch: NavigationDispatch,
+    ...
   };
 
   declare export type EventType =
@@ -463,15 +461,14 @@ declare module '@react-navigation/core' {
     action: NavigationAction,
     state: NavigationState,
     lastState: ?NavigationState,
+    ...
   };
 
   declare export type NavigationEventCallback = (
     payload: NavigationEventPayload
   ) => void;
 
-  declare export type NavigationEventSubscription = {
-    remove: () => void,
-  };
+  declare export type NavigationEventSubscription = { remove: () => void, ... };
 
   declare export type NavigationScreenProp<+S> = {
     +state: S,
@@ -485,7 +482,7 @@ declare module '@react-navigation/core' {
       fallback?: $ElementType<
         $PropertyType<
           {|
-            ...{| params: { } |},
+            ...{| params: {...} |},
             ...$Exact<S>,
           |},
           'params'
@@ -495,7 +492,7 @@ declare module '@react-navigation/core' {
     ) => $ElementType<
       $PropertyType<
         {|
-          ...{| params: { } |},
+          ...{| params: {...} |},
           ...$Exact<S>,
         |},
         'params'
@@ -510,18 +507,19 @@ declare module '@react-navigation/core' {
       routeName:
         | string
         | {
-            routeName: string,
-            params?: NavigationParams,
-            action?: NavigationNavigateAction,
-            key?: string,
-          },
+        routeName: string,
+        params?: NavigationParams,
+        action?: NavigationNavigateAction,
+        key?: string,
+        ...
+      },
       params?: NavigationParams,
       action?: NavigationNavigateAction
     ) => boolean,
     setParams: (newParams: NavigationParams) => boolean,
     // StackRouter action creators
-    pop?: (n?: number, params?: { immediate?: boolean }) => boolean,
-    popToTop?: (params?: { immediate?: boolean }) => boolean,
+    pop?: (n?: number, params?: { immediate?: boolean, ... }) => boolean,
+    popToTop?: (params?: { immediate?: boolean, ... }) => boolean,
     push?: (
       routeName: string,
       params?: NavigationParams,
@@ -538,12 +536,14 @@ declare module '@react-navigation/core' {
     openDrawer?: () => boolean,
     closeDrawer?: () => boolean,
     toggleDrawer?: () => boolean,
+    ...
   };
 
-  declare export type NavigationNavigatorProps<O: {}, S: {}> = $Shape<{
+  declare export type NavigationNavigatorProps<O: {...}, S: {...}> = $Shape<{
     navigation: NavigationScreenProp<S>,
-    screenProps?: {},
+    screenProps?: {...},
     navigationOptions?: O,
+    ...
   }>;
 
   /**
@@ -556,6 +556,7 @@ declare module '@react-navigation/core' {
     onDidFocus?: NavigationEventCallback,
     onWillBlur?: NavigationEventCallback,
     onDidBlur?: NavigationEventCallback,
+    ...
   };
   declare export var NavigationEvents: React$ComponentType<
     _NavigationEventsProps
@@ -567,13 +568,13 @@ declare module '@react-navigation/core' {
 
   declare export type NavigationContainer<
     State: NavigationState,
-    Options: {},
+    Options: {...},
     Props: NavigationContainerProps<Options, State>,
   > = React$ComponentType<Props> &
     withRouter<State, Options> &
     withOptionalNavigationOptions<Options>;
 
-  declare export type NavigationContainerProps<S: {}, O: {}> = $Shape<{
+  declare export type NavigationContainerProps<S: {...}, O: {...}> = $Shape<{
     uriPrefix?: string | RegExp,
     onNavigationStateChange?: ?(
       NavigationState,
@@ -582,9 +583,10 @@ declare module '@react-navigation/core' {
     ) => void,
     navigation?: NavigationScreenProp<S>,
     persistenceKey?: ?string,
-    renderLoadingExperimental?: React$ComponentType<{}>,
+    renderLoadingExperimental?: React$ComponentType<{...}>,
     screenProps?: *,
     navigationOptions?: O,
+    ...
   }>;
 
   /**
@@ -599,6 +601,7 @@ declare module '@react-navigation/core' {
     initWidth: number,
     isMeasured: boolean,
     width: AnimatedValue,
+    ...
   };
 
   declare export type NavigationScene = {
@@ -608,28 +611,24 @@ declare module '@react-navigation/core' {
     key: string,
     route: NavigationRoute,
     descriptor: ?NavigationDescriptor,
+    ...
   };
 
   declare export type NavigationTransitionProps = $Shape<{
     // The layout of the screen container
     layout: NavigationLayout,
-
     // The destination navigation state of the transition
     navigation: NavigationScreenProp<NavigationState>,
-
     // The progressive index of the transitioner's navigation state.
     position: AnimatedValue,
-
     // The value that represents the progress of the transition when navigation
     // state changes from one to another. Its numeric value will range from 0
     // to 1.
     //  progress.__getAnimatedValue() < 1 : transition is happening.
     //  progress.__getAnimatedValue() == 1 : transition completes.
     progress: AnimatedValue,
-
     // All the scenes of the transitioner.
     scenes: Array<NavigationScene>,
-
     // The active scene, corresponding to the route at
     // `navigation.state.routes[navigation.state.index]`. When rendering
     // NavigationSceneRendererPropsIndex, the scene does not refer to the active
@@ -637,8 +636,8 @@ declare module '@react-navigation/core' {
     // is the index of the scene
     scene: NavigationScene,
     index: number,
-
-    screenProps?: {},
+    screenProps?: {...},
+    ...
   }>;
 
   // The scene renderer props are nearly identical to the props used for
@@ -676,6 +675,7 @@ declare module '@react-navigation/core' {
       routes: Array<NavigationRoute>,
       index?: number
     ) => NavigationState,
+    ...
   };
 
   declare export var NavigationActions: {
@@ -683,19 +683,21 @@ declare module '@react-navigation/core' {
     INIT: 'Navigation/INIT',
     NAVIGATE: 'Navigation/NAVIGATE',
     SET_PARAMS: 'Navigation/SET_PARAMS',
-
-    back: (payload?: { key?: ?string }) => NavigationBackAction,
-    init: (payload?: { params?: NavigationParams }) => NavigationInitAction,
+    back: (payload?: { key?: ?string, ... }) => NavigationBackAction,
+    init: (payload?: { params?: NavigationParams, ... }) => NavigationInitAction,
     navigate: (payload: {
       routeName: string,
       params?: ?NavigationParams,
       action?: ?NavigationNavigateAction,
       key?: string,
+      ...
     }) => NavigationNavigateAction,
     setParams: (payload: {
       key: string,
       params: NavigationParams,
+      ...
     }) => NavigationSetParamsAction,
+    ...
   };
 
   declare export var StackActions: {
@@ -705,47 +707,49 @@ declare module '@react-navigation/core' {
     RESET: 'Navigation/RESET',
     REPLACE: 'Navigation/REPLACE',
     COMPLETE_TRANSITION: 'Navigation/COMPLETE_TRANSITION',
-
     pop: (payload: {
       n?: number,
       immediate?: boolean,
+      ...
     }) => NavigationPopAction,
-    popToTop: (payload: {
-      immediate?: boolean,
-    }) => NavigationPopToTopAction,
+    popToTop: (payload: { immediate?: boolean, ... }) => NavigationPopToTopAction,
     push: (payload: {
       routeName: string,
       params?: NavigationParams,
       action?: NavigationNavigateAction,
       key?: string,
+      ...
     }) => NavigationPushAction,
     reset: (payload: {
       index: number,
       key?: ?string,
       actions: Array<NavigationNavigateAction>,
+      ...
     }) => NavigationResetAction,
     replace: (payload: {
       key?: string,
       routeName: string,
       params?: NavigationParams,
       action?: NavigationNavigateAction,
+      ...
     }) => NavigationReplaceAction,
-    completeTransition: (payload: {
-      key?: string,
-    }) => NavigationCompleteTransitionAction,
+    completeTransition: (payload: { key?: string, ... }) => NavigationCompleteTransitionAction,
+    ...
   };
 
   declare export type NavigationDescriptor = {
     key: string,
     state: NavigationRoute,
     navigation: NavigationScreenProp<*>,
-    getComponent: () => React$ComponentType<{}>,
+    getComponent: () => React$ComponentType<{...}>,
+    ...
   };
 
   declare type NavigationView<O, S> = React$ComponentType<{
-    descriptors: { [key: string]: NavigationDescriptor },
+    descriptors: { [key: string]: NavigationDescriptor, ... },
     navigation: NavigationScreenProp<S>,
     navigationConfig: *,
+    ...
   }>;
 
   declare export function createNavigator<O: *, S: *, NavigatorConfig: *>(
@@ -772,36 +776,35 @@ declare module '@react-navigation/core' {
     right: _SafeAreaViewForceInsetValue,
     vertical: _SafeAreaViewForceInsetValue,
     horizontal: _SafeAreaViewForceInsetValue,
+    ...
   }>;
 
-  declare export function withNavigation<Props: {}, ComponentType: React$ComponentType<Props>>(
+  declare export function withNavigation<Props: {...}, ComponentType: React$ComponentType<Props>>(
     Component: ComponentType
   ): React$ComponentType<
     $Diff<
       React$ElementConfig<ComponentType>,
-      {
-        navigation: NavigationScreenProp<NavigationStateRoute> | void,
-      }
+      { navigation: NavigationScreenProp<NavigationStateRoute> | void, ... }
     >
   >;
-  declare export function withNavigationFocus<Props: {}, ComponentType: React$ComponentType<Props>>(
+  declare export function withNavigationFocus<Props: {...}, ComponentType: React$ComponentType<Props>>(
     Component: ComponentType
-  ): React$ComponentType<$Diff<React$ElementConfig<ComponentType>, { isFocused: boolean | void }>>;
+  ): React$ComponentType<$Diff<React$ElementConfig<ComponentType>, { isFocused: boolean | void, ... }>>;
 
-  declare export function getNavigation<State: NavigationState, Options: {}>(
+  declare export function getNavigation<State: NavigationState, Options: {...}>(
     router: NavigationRouter<State, Options>,
     state: State,
     dispatch: NavigationDispatch,
     actionSubscribers: Set<NavigationEventCallback>,
-    getScreenProps: () => {},
+    getScreenProps: () => {...},
     getCurrentNavigation: () => ?NavigationScreenProp<State>
   ): NavigationScreenProp<State>;
 
   declare export function getActiveChildNavigationOptions<
     State: NavigationState,
-    Options: {}
+    Options: {...}
   >(
     navigation: NavigationScreenProp<State>,
-    screenProps?: {}
+    screenProps?: {...}
   ): Options;
 }

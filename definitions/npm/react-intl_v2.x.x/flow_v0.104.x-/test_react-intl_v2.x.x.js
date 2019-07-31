@@ -110,7 +110,11 @@ const messageDescriptorMap5 = defineMessages({
   <div />
 </IntlProvider>;
 
-class TestComponent extends React.Component<{ name: string, intl: IntlShape }> {
+class TestComponent extends React.Component<{
+  name: string,
+  intl: IntlShape,
+  ...
+}> {
   render() {
     const { formatMessage } = this.props.intl;
 
@@ -136,7 +140,11 @@ class TestComponentWithExactProps extends React.Component<{| name: string, intl:
   }
 }
 
-class TestComponentWithDefaultProps extends React.Component<{ name: string, intl: IntlShape }> {
+class TestComponentWithDefaultProps extends React.Component<{
+  name: string,
+  intl: IntlShape,
+  ...
+}> {
   static defaultProps = {
     name: 'some name',
   };
@@ -153,7 +161,11 @@ class TestComponentWithDefaultProps extends React.Component<{ name: string, intl
   }
 }
 
-class TestComponentWithMaybeProp extends React.Component<{ name?: string, intl: IntlShape }> {
+class TestComponentWithMaybeProp extends React.Component<{
+  name?: string,
+  intl: IntlShape,
+  ...
+}> {
   render() {
     const { formatMessage } = this.props.intl;
 
@@ -283,7 +295,11 @@ describe("react-intl", () => {
 
     describe('Functional Component with single required prop "name"', () => {
       const Component = injectIntl(
-        (props: { intl: IntlShape, name: string }) => {
+        (props: {
+          intl: IntlShape,
+          name: string,
+          ...
+        }) => {
           const { formatMessage } = props.intl;
 
           return (
@@ -316,7 +332,11 @@ describe("react-intl", () => {
     });
 
     describe('Functional Component with default props', () => {
-      const FuncComponent = (props: { intl: IntlShape, name: string }) => {
+      const FuncComponent = (props: {
+        intl: IntlShape,
+        name: string,
+        ...
+      }) => {
         const { formatMessage } = props.intl;
 
         return (
@@ -354,7 +374,7 @@ describe("react-intl", () => {
     describe('intl methods', () => {
 
       it('formatDate', () => {
-        const DateComponent: React.ComponentType<{}> = injectIntl((props: { intl: IntlShape }) => {
+        const DateComponent: React.ComponentType<{...}> = injectIntl((props: { intl: IntlShape, ... }) => {
           const { formatDate } = props.intl;
           return (
             <div>
@@ -367,7 +387,7 @@ describe("react-intl", () => {
       });
 
       it('formatTime', () => {
-        const TimeComponent: React.ComponentType<{}> = injectIntl((props: { intl: IntlShape }) => {
+        const TimeComponent: React.ComponentType<{...}> = injectIntl((props: { intl: IntlShape, ... }) => {
           const { formatTime } = props.intl;
           return (
             <div>
@@ -380,7 +400,7 @@ describe("react-intl", () => {
       });
 
       it('formatRelative', () => {
-        const RelativeComponent: React.ComponentType<{}> = injectIntl((props: { intl: IntlShape }) => {
+        const RelativeComponent: React.ComponentType<{...}> = injectIntl((props: { intl: IntlShape, ... }) => {
           const { formatRelative } = props.intl;
           return (
             <div>
@@ -393,7 +413,7 @@ describe("react-intl", () => {
       });
 
       it('formatNumber', () => {
-        const NumberComponent: React.ComponentType<{}> = injectIntl((props: { intl: IntlShape }) => {
+        const NumberComponent: React.ComponentType<{...}> = injectIntl((props: { intl: IntlShape, ... }) => {
           const { formatNumber } = props.intl;
           return (
             <div>
@@ -406,7 +426,7 @@ describe("react-intl", () => {
       });
 
       it('formatNumber', () => {
-        const PluralComponent: React.ComponentType<{}> = injectIntl((props: { intl: IntlShape }) => {
+        const PluralComponent: React.ComponentType<{...}> = injectIntl((props: { intl: IntlShape, ... }) => {
           const { formatPlural } = props.intl;
           return (
             <div>

@@ -93,9 +93,9 @@ declare module 'react-native-video' {
 
   declare export type VideoSource =
     | number
-    | {| uri: string, headers?: { [key: string]: string | number } |};
+    | {| uri: string, headers?: { [key: string]: string | number, ... } |};
 
-  declare export type VideoEvent<T: {}> = $ReadOnly<{|
+  declare export type VideoEvent<T: {...}> = $ReadOnly<{|
     target: number,
     ...$Exact<T>,
   |}>;
@@ -117,6 +117,7 @@ declare module 'react-native-video' {
         width: number,
       |}>,
       textTracks: $ReadOnlyArray<TrackDescriptor>,
+      ...
     }>
   >;
 
@@ -124,58 +125,50 @@ declare module 'react-native-video' {
     +currentTime: number,
     +playableDuration: number,
     +seekableDuration: number,
+    ...
   }>;
 
-  declare export type AudioFocusChangedEvent = VideoEvent<{
-    +hasAudioFocus: boolean,
-  }>;
+  declare export type AudioFocusChangedEvent = VideoEvent<{ +hasAudioFocus: boolean, ... }>;
 
-  declare export type BufferEvent = VideoEvent<{ +isBuffering: boolean }>;
+  declare export type BufferEvent = VideoEvent<{ +isBuffering: boolean, ... }>;
 
   declare export type LoadStartEvent = VideoEvent<{
     +isNetwork: boolean,
     +type: string,
     +uri: string,
+    ...
   }>;
 
-  declare export type PlaybackRateEvent = VideoEvent<{
-    +playbackRate: number,
-  }>;
+  declare export type PlaybackRateEvent = VideoEvent<{ +playbackRate: number, ... }>;
 
-  declare export type ErrorEvent = VideoEvent<{
-    +error: {|
-      +domain: string,
-      +code: number,
-    |},
-  }>;
+  declare export type ErrorEvent = VideoEvent<{ +error: {|
+    +domain: string,
+    +code: number,
+  |}, ... }>;
 
-  declare export type BandwidthUpdateEvent = VideoEvent<{
-    +bitrate: number,
-  }>;
+  declare export type BandwidthUpdateEvent = VideoEvent<{ +bitrate: number, ... }>;
 
   declare export type SeekEvent = VideoEvent<{
     +currentTime: number,
     +seekTime: number,
+    ...
   }>;
 
   declare export type TimedMetadata = {| +value: string, +identifier: string |};
 
-  declare export type TimedMetadataEvent = VideoEvent<{
-    +metadata: $ReadOnlyArray<TimedMetadata>,
-  }>;
+  declare export type TimedMetadataEvent = VideoEvent<{ +metadata: $ReadOnlyArray<TimedMetadata>, ... }>;
 
-  declare export type ExternalPlaybackActiveEvent = VideoEvent<{
-    +isExternalPlaybackActive: boolean,
-  }>;
+  declare export type ExternalPlaybackActiveEvent = VideoEvent<{ +isExternalPlaybackActive: boolean, ... }>;
 
-  declare export type EventWithoutData = VideoEvent<{}>;
+  declare export type EventWithoutData = VideoEvent<{...}>;
 
   declare export type VideoProps = $ReadOnly<{
-    source: VideoSource, // Required prop
-
+    // Required prop
+    source: VideoSource,
     controls?: boolean,
     audioOnly?: boolean,
-    id?: string, // for Web platform
+    // for Web platform
+    id?: string,
     maxBitRate?: number,
     muted?: boolean,
     paused?: boolean,
@@ -190,7 +183,6 @@ declare module 'react-native-video' {
     selectedTextTrack?: SelectedTrackDescriptor,
     textTracks?: Array<TrackDescriptor>,
     volume?: number,
-
     // IOS only
     allowsExternalPlayback?: boolean,
     filter?: $Values<FilterTypes>,
@@ -202,19 +194,18 @@ declare module 'react-native-video' {
     playWhenInactive?: boolean,
     pictureInPicture?: boolean,
     onPictureInPictureStatusChanged?: (
-      VideoEvent<{ isActive: boolean }>
+      VideoEvent<{ isActive: boolean, ... }>
     ) => void,
     onRestoreUserInterfaceForPictureInPictureStop?: () => void,
-
     // Android only
     minLoadRetryCount?: number,
     bufferConfig?: BufferConfigDescriptor,
     hideShutterView?: boolean,
     reportBandwidth?: number,
     selectedVideoTrack?: SelectedVideoTrackDescriptor,
-    stereoPan?: number, // Android MediaPlayer
+    // Android MediaPlayer
+    stereoPan?: number,
     useTextureView?: boolean,
-
     // Event props
     onAudioFocusChanged?: AudioFocusChangedEvent => void,
     onBandwidthUpdate?: BandwidthUpdateEvent => void,
@@ -233,10 +224,10 @@ declare module 'react-native-video' {
     onReadyForDisplay?: EventWithoutData => void,
     onSeek?: SeekEvent => void,
     onTimedMetadata?: TimedMetadataEvent => void,
-
     onAudioBecomingNoisy?: () => void,
     onPlaybackResume?: () => void,
     onPlaybackStalled?: () => void,
+    ...
   }>;
 
   declare export type VideoState = {|
@@ -256,7 +247,7 @@ declare module 'react-native-video' {
     seek(seconds: number): void;
 
     // IOS only
-    save(): Promise<{ uri: string }>;
+    save(): Promise<{ uri: string, ... }>;
     seek(seconds: number, toleranceIOS: number): void;
     restoreUserInterfaceForPictureInPictureStopCompleted(
       restored: boolean

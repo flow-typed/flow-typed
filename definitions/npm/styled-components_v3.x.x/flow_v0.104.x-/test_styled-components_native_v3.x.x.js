@@ -126,7 +126,7 @@ const NativeWithComponentError1: NativeReactComponentStyled<*> = nativeStyled.Vi
 // $ExpectError
 const NativeWithComponentError2: NativeReactComponentStyled<*> = nativeStyled.View.withComponent('NotHere');
 
-class NativeCustomComponentError3 extends React.Component<{ foo: string }> {
+class NativeCustomComponentError3 extends React.Component<{ foo: string, ... }> {
   render() { return <div />; }
 }
 
@@ -142,7 +142,7 @@ const NativeWithComponentError6 = nativeStyled(NativeCustomComponentError3).with
 const NativeWithComponentError7 = nativeStyled(NativeCustomComponentError3).withComponent('NotHere');
 
 // ---- WithTheme ----
-const NativeComponent: NativeReactComponentFunctionalUndefinedDefaultProps<{ theme: NativeTheme }> = ({ theme }) => (
+const NativeComponent: NativeReactComponentFunctionalUndefinedDefaultProps<{ theme: NativeTheme, ... }> = ({ theme }) => (
   <NativeThemeProvider theme={theme}>
     <NativeWrapper>
       <NativeTitleStyled>Hello World, this is my first styled component!</NativeTitleStyled>
@@ -150,9 +150,9 @@ const NativeComponent: NativeReactComponentFunctionalUndefinedDefaultProps<{ the
   </NativeThemeProvider>
 );
 
-const NativeComponentWithTheme: NativeReactComponentFunctionalUndefinedDefaultProps<{}> = nativeWithTheme(NativeComponent);
+const NativeComponentWithTheme: NativeReactComponentFunctionalUndefinedDefaultProps<{...}> = nativeWithTheme(NativeComponent);
 
-const NativeComponent2: NativeReactComponentFunctionalUndefinedDefaultProps<{}> = () => (
+const NativeComponent2: NativeReactComponentFunctionalUndefinedDefaultProps<{...}> = () => (
   <NativeThemeProvider theme={outerTheme => outerTheme}>
     <NativeWrapper>
       <NativeTitleStyled>Hello World, this is my first styled component!</NativeTitleStyled>
@@ -186,34 +186,50 @@ const NativeNumberWrapper = nativeStyled(nativeNum)`
 `;
 
 // ---- COMPONENT CLASS TESTS ----
-class NativeNeedsThemeReactClass extends React.Component<{ foo: string, theme: NativeTheme }> {
+class NativeNeedsThemeReactClass extends React.Component<{
+  foo: string,
+  theme: NativeTheme,
+  ...
+}> {
   render() { return <div />; }
 }
 
-class NativeReactClass extends React.Component<{ foo: string }> {
+class NativeReactClass extends React.Component<{ foo: string, ... }> {
   render() { return <div />; }
 }
 
-const NativeStyledClass: NativeReactComponentClass<{ foo: string, theme: NativeTheme }> = nativeStyled(NativeNeedsThemeReactClass)`
+const NativeStyledClass: NativeReactComponentClass<{
+  foo: string,
+  theme: NativeTheme,
+  ...
+}> = nativeStyled(NativeNeedsThemeReactClass)`
   color: red;
 `;
 
-const NativeNeedsFoo1Class: NativeReactComponentClass<{ foo: string }, { theme: NativeTheme }> = nativeWithTheme(NativeNeedsThemeReactClass);
+const NativeNeedsFoo1Class: NativeReactComponentClass<{ foo: string, ... }, { theme: NativeTheme, ... }> = nativeWithTheme(NativeNeedsThemeReactClass);
 
 // $ExpectError
-const NativeNeedsFoo0ClassError: NativeReactComponentClass<{ foo: string }> = nativeWithTheme(NativeReactClass);
+const NativeNeedsFoo0ClassError: NativeReactComponentClass<{ foo: string, ... }> = nativeWithTheme(NativeReactClass);
 // $ExpectError
-const NativeNeedsFoo1ClassError: NativeReactComponentClass<{ foo: string }> = nativeWithTheme(NeedsFoo1Class);
+const NativeNeedsFoo1ClassError: NativeReactComponentClass<{ foo: string, ... }> = nativeWithTheme(NeedsFoo1Class);
 // $ExpectError
-const NativeNeedsFoo1ErrorClass: NativeReactComponentClass<{ foo: number }> = nativeWithTheme(NativeNeedsThemeReactClass);
+const NativeNeedsFoo1ErrorClass: NativeReactComponentClass<{ foo: number, ... }> = nativeWithTheme(NativeNeedsThemeReactClass);
 // $ExpectError
-const NativeNeedsFoo2ErrorClass: NativeReactComponentClass<{ foo: string }, { theme: string }> = nativeWithTheme(NativeNeedsThemeReactClass);
+const NativeNeedsFoo2ErrorClass: NativeReactComponentClass<{ foo: string, ... }, { theme: string, ... }> = nativeWithTheme(NativeNeedsThemeReactClass);
 // $ExpectError
-const NativeNeedsFoo3ErrorClass: NativeReactComponentClass<{ foo: string, theme: NativeTheme }> = nativeWithTheme(NativeNeedsFoo1Class);
+const NativeNeedsFoo3ErrorClass: NativeReactComponentClass<{
+  foo: string,
+  theme: NativeTheme,
+  ...
+}> = nativeWithTheme(NativeNeedsFoo1Class);
 // $ExpectError
-const NativeNeedsFoo4ErrorClass: NativeReactComponentClass<{ foo: number }> = nativeWithTheme(NativeNeedsFoo1Class);
+const NativeNeedsFoo4ErrorClass: NativeReactComponentClass<{ foo: number, ... }> = nativeWithTheme(NativeNeedsFoo1Class);
 // $ExpectError
-const NativeNeedsFoo5ErrorClass: NativeReactComponentClass<{ foo: string, theme: string }> = nativeWithTheme(NativeNeedsFoo1Class);
+const NativeNeedsFoo5ErrorClass: NativeReactComponentClass<{
+  foo: string,
+  theme: string,
+  ...
+}> = nativeWithTheme(NativeNeedsFoo1Class);
 
 // ---- INTERPOLATION TESTS ----
 const nativeInterpolation: Array<NativeInterpolation> = nativeStyled.css`
@@ -227,53 +243,77 @@ const nativeInterpolationError: Array<NativeInterpolation | boolean> = nativeSty
 
 
 // ---- DEFAULT COMPONENT TESTS ----
-const NativeDefaultComponent: NativeReactComponentIntersection<{}> = nativeStyled.View`
+const NativeDefaultComponent: NativeReactComponentIntersection<{...}> = nativeStyled.View`
   background-color: red;
 `;
 
 // $ExpectError
-const NativeDefaultComponentError: {} => string = nativeStyled.View`
+const NativeDefaultComponentError: {...} => string = nativeStyled.View`
   background-color: red;
 `;
 
 // ---- FUNCTIONAL COMPONENT TESTS ----
-declare var View: ({}) => React$Element<*>
-const NativeFunctionalComponent: NativeReactComponentFunctionalUndefinedDefaultProps<{ foo: string, theme: NativeTheme }> = props => <View />;
+declare var View: ({...}) => React$Element<*>
+const NativeFunctionalComponent: NativeReactComponentFunctionalUndefinedDefaultProps<{
+  foo: string,
+  theme: NativeTheme,
+  ...
+}> = props => <View />;
 
-const NativeNeedsFoo1: NativeReactComponentFunctionalUndefinedDefaultProps<{ foo: string, theme: NativeTheme }> = nativeStyled(NativeFunctionalComponent)`
+const NativeNeedsFoo1: NativeReactComponentFunctionalUndefinedDefaultProps<{
+  foo: string,
+  theme: NativeTheme,
+  ...
+}> = nativeStyled(NativeFunctionalComponent)`
   background-color: red;
 `;
 // $ExpectError
-const NativeNeedsFoo1Error: NativeReactComponentFunctionalUndefinedDefaultProps<{ foo: number }> = nativeStyled(NativeFunctionalComponent)`
+const NativeNeedsFoo1Error: NativeReactComponentFunctionalUndefinedDefaultProps<{ foo: number, ... }> = nativeStyled(NativeFunctionalComponent)`
   background-color: red;
 `;
 
-const NativeNeedsFoo2: NativeReactComponentFunctionalUndefinedDefaultProps<{ foo: string, theme: NativeTheme }> = nativeStyled(NativeNeedsFoo1)`
+const NativeNeedsFoo2: NativeReactComponentFunctionalUndefinedDefaultProps<{
+  foo: string,
+  theme: NativeTheme,
+  ...
+}> = nativeStyled(NativeNeedsFoo1)`
   background-color: red;
 `;
 // $ExpectError
-const NativeNeedsFoo2Error: NativeReactComponentFunctionalUndefinedDefaultProps<{ foo: number }> = nativeStyled(NativeNeedsFoo1)`
+const NativeNeedsFoo2Error: NativeReactComponentFunctionalUndefinedDefaultProps<{ foo: number, ... }> = nativeStyled(NativeNeedsFoo1)`
   background-color: red;
 `;
 
 const NativeNeedsNothingInferred = nativeStyled(() => <View />);
 
 // ---- FUNCTIONAL COMPONENT TESTS (nativeWithTheme)----
-const NativeNeedsFoo1Functional: NativeReactComponentFunctionalUndefinedDefaultProps<{ foo: string, theme: NativeTheme }> = nativeWithTheme(NativeFunctionalComponent);
-const NativeNeedsFoo2Functional: NativeReactComponentFunctionalUndefinedDefaultProps<{ foo: string }> = nativeWithTheme(NativeNeedsFoo1Functional);
+const NativeNeedsFoo1Functional: NativeReactComponentFunctionalUndefinedDefaultProps<{
+  foo: string,
+  theme: NativeTheme,
+  ...
+}> = nativeWithTheme(NativeFunctionalComponent);
+const NativeNeedsFoo2Functional: NativeReactComponentFunctionalUndefinedDefaultProps<{ foo: string, ... }> = nativeWithTheme(NativeNeedsFoo1Functional);
 
-const NativeNeedsFoo1FunctionalDefaultProps: NativeReactComponentFunctional<{ foo: string, theme: NativeTheme }, { theme: NativeTheme }> = nativeWithTheme(NativeFunctionalComponent);
-const NativeNeedsFoo2FunctionalDefaultProps: NativeReactComponentFunctional<{ foo: string }, { theme: NativeTheme }> = nativeWithTheme(NativeNeedsFoo1FunctionalDefaultProps);
+const NativeNeedsFoo1FunctionalDefaultProps: NativeReactComponentFunctional<{
+  foo: string,
+  theme: NativeTheme,
+  ...
+}, { theme: NativeTheme, ... }> = nativeWithTheme(NativeFunctionalComponent);
+const NativeNeedsFoo2FunctionalDefaultProps: NativeReactComponentFunctional<{ foo: string, ... }, { theme: NativeTheme, ... }> = nativeWithTheme(NativeNeedsFoo1FunctionalDefaultProps);
 
 // $ExpectError
-const NativeNeedsFoo1ErrorFunctional: NativeReactComponentFunctionalUndefinedDefaultProps<{ foo: number }> = nativeWithTheme(NativeFunctionalComponent);
+const NativeNeedsFoo1ErrorFunctional: NativeReactComponentFunctionalUndefinedDefaultProps<{ foo: number, ... }> = nativeWithTheme(NativeFunctionalComponent);
 // $ExpectError
-const NativeNeedsFoo2ErrorFunctional: NativeReactComponentFunctional<{ foo: string }, { theme: string }> = nativeWithTheme(NativeFunctionalComponent);
+const NativeNeedsFoo2ErrorFunctional: NativeReactComponentFunctional<{ foo: string, ... }, { theme: string, ... }> = nativeWithTheme(NativeFunctionalComponent);
 // $ExpectError
-const NativeNeedsFoo3ErrorFunctional: NativeReactComponentFunctionalUndefinedDefaultProps<{ foo: number, theme: NativeTheme }> = nativeWithTheme(NativeFunctionalComponent);
+const NativeNeedsFoo3ErrorFunctional: NativeReactComponentFunctionalUndefinedDefaultProps<{
+  foo: number,
+  theme: NativeTheme,
+  ...
+}> = nativeWithTheme(NativeFunctionalComponent);
 // $ExpectError
-const NativeNeedsFoo4ErrorFunctional: NativeReactComponentFunctionalUndefinedDefaultProps<{ foo: number }> = nativeWithTheme(NativeNeedsFoo1Functional);
+const NativeNeedsFoo4ErrorFunctional: NativeReactComponentFunctionalUndefinedDefaultProps<{ foo: number, ... }> = nativeWithTheme(NativeNeedsFoo1Functional);
 // $ExpectError
-const NativeNeedsFoo5ErrorFunctional: NativeReactComponentFunctional<{ foo: string }, { theme: string }> = nativeWithTheme(NativeNeedsFoo1Functional);
+const NativeNeedsFoo5ErrorFunctional: NativeReactComponentFunctional<{ foo: string, ... }, { theme: string, ... }> = nativeWithTheme(NativeNeedsFoo1Functional);
 // $ExpectError
-const NativeNeedsFoo6ErrorFunctional: NativeReactComponentFunctional<{ foo: number }, { theme: NativeTheme }> = nativeWithTheme(NativeNeedsFoo1Functional);
+const NativeNeedsFoo6ErrorFunctional: NativeReactComponentFunctional<{ foo: number, ... }, { theme: NativeTheme, ... }> = nativeWithTheme(NativeNeedsFoo1Functional);

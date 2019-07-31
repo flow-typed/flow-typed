@@ -86,9 +86,9 @@ declare module "graceful-fs" {
   declare function readdir(path: string, callback: (err: ?ErrnoError, files: Array<string>) => void): void;
   declare function readdir(
     path: string,
-    options: string | { encoding: string },
+    options: string | { encoding: string, ... },
     callback: (err: ?ErrnoError, files: Array<string>) => void): void;
-  declare function readdirSync(path: string, options?: string | { encoding: string }, ): Array<string>;
+  declare function readdirSync(path: string, options?: string | { encoding: string, ... }, ): Array<string>;
   declare function close(fd: number, callback?: (err: ?ErrnoError) => void): void;
   declare function closeSync(fd: number): void;
   declare function open(
@@ -139,18 +139,30 @@ declare module "graceful-fs" {
   ): void;
   declare function readFile(
     filename: string,
-    options: { encoding: string; flag?: string },
+    options: {
+      encoding: string,
+      flag?: string,
+      ...
+    },
     callback: (err: ?ErrnoError, data: string) => void
   ): void;
   declare function readFile(
     filename: string,
-    options: { flag?: string },
+    options: { flag?: string, ... },
     callback: (err: ?ErrnoError, data: Buffer) => void
   ): void;
   declare function readFileSync(filename: string, _: void): Buffer;
   declare function readFileSync(filename: string, encoding: string): string;
-  declare function readFileSync(filename: string, options: { encoding: string, flag?: string }): string;
-  declare function readFileSync(filename: string, options: { encoding?: void, flag?: string }): Buffer;
+  declare function readFileSync(filename: string, options: {
+    encoding: string,
+    flag?: string,
+    ...
+  }): string;
+  declare function readFileSync(filename: string, options: {
+    encoding?: void,
+    flag?: string,
+    ...
+  }): Buffer;
   declare function writeFile(
     filename: string,
     data: Buffer | string,

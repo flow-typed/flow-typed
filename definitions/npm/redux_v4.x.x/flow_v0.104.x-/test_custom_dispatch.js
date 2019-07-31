@@ -3,7 +3,7 @@ import type { Store as ReduxStore, DispatchAPI, MiddlewareAPI, StoreEnhancer } f
 import { applyMiddleware, bindActionCreators, createStore } from 'redux'
 
 type State = Array<number>;
-type Action = { type: 'A' };
+type Action = { type: 'A', ... };
 type Thunk = (dispatch: Dispatch, getState: () => State) => void;
 type Dispatch = DispatchAPI<Action | Thunk>;
 type Store = ReduxStore<State, Action, Dispatch>;

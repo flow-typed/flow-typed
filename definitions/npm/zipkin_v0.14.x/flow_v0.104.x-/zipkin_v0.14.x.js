@@ -29,7 +29,15 @@ declare module 'zipkin' {
     }
 
     declare export class Tracer {
-        constructor({ ctxImpl: Context<TraceId>, recorder: Recorder, sampler?: $Sampler, traceId128Bit?: boolean, localServiceName?: string, localEndpoint?: model$Endpoint }): this;
+        constructor({
+            ctxImpl: Context<TraceId>,
+            recorder: Recorder,
+            sampler?: $Sampler,
+            traceId128Bit?: boolean,
+            localServiceName?: string,
+            localEndpoint?: model$Endpoint,
+            ...
+        }): this;
         id: TraceId;
 
         scoped<V>(callback: () => V): V;
@@ -63,7 +71,8 @@ declare module 'zipkin' {
             parentId?: option$Option<string>,
             spanId?: string,
             sampled?: option$Option<boolean>,
-            flags?: number
+            flags?: number,
+            ...
         }): this;
 
         toString(): string;
@@ -109,7 +118,12 @@ declare module 'zipkin' {
     declare type option$Option<T> = option$None<T> | option$Some<T>
 
     declare class model$Endpoint {
-        constructor({ serviceName?: string, ipv4?: string, port?: number }): this;
+        constructor({
+            serviceName?: string,
+            ipv4?: string,
+            port?: number,
+            ...
+        }): this;
 
         setServiceName(serviceName: string): void;
         setIpv4(ipv4: string): void;
@@ -134,7 +148,7 @@ declare module 'zipkin' {
         +localEndpoint?: model$Endpoint;
         +remoteEndpoint?: model$Endpoint;
         +annotations: model$Annotation[];
-        +tags: { [ key: string ]: string };
+        +tags: { [ key: string ]: string, ... };
         +debug: boolean;
         +shared: boolean;
 
@@ -207,12 +221,21 @@ declare module 'zipkin' {
     }
 
     declare class Annotation$ClientAddr implements $Annotation {
-        constructor(args: { host: InetAddress, port: number }): this;
+        constructor(args: {
+            host: InetAddress,
+            port: number,
+            ...
+        }): this;
         +annotationType: string;
     }
 
     declare class Annotation$ServerAddr implements $Annotation {
-        constructor(args: { serviceName: string, host?: InetAddress, port?: number }): this;
+        constructor(args: {
+            serviceName: string,
+            host?: InetAddress,
+            port?: number,
+            ...
+        }): this;
         +annotationType: string;
         serviceName: string;
         host: InetAddress;
@@ -220,7 +243,11 @@ declare module 'zipkin' {
     }
 
     declare class Annotation$LocalAddr implements $Annotation {
-        constructor(args?: { host?: InetAddress, port?: number }): this;
+        constructor(args?: {
+            host?: InetAddress,
+            port?: number,
+            ...
+        }): this;
         +annotationType: string;
         host: InetAddress;
         port: number;
@@ -234,11 +261,12 @@ declare module 'zipkin' {
     }
 
     declare export var HttpHeaders: {
-        TraceId: string;
-        SpanId: string;
-        ParentSpanId: string;
-        Sampled: string;
-        Flags: string;
+        TraceId: string,
+        SpanId: string,
+        ParentSpanId: string,
+        Sampled: string,
+        Flags: string,
+        ...
     };
 
     declare export interface Record {
@@ -253,7 +281,11 @@ declare module 'zipkin' {
     }
 
     declare export class BatchRecorder implements Recorder {
-        constructor({ logger: Logger, timeout?: number }): this;
+        constructor({
+            logger: Logger,
+            timeout?: number,
+            ...
+        }): this;
         record: (rec: Record) => void;
     }
 
@@ -270,19 +302,22 @@ declare module 'zipkin' {
     }
 
     declare export type ZipkinHeaders = {
-      'X-B3-TraceId': string,
-      'X-B3-SpanId': string,
-      'X-B3-ParentSpanId'?: string,
-      'X-B3-Sampled'?: '1' | '0'
+        'X-B3-TraceId': string,
+        'X-B3-SpanId': string,
+        'X-B3-ParentSpanId'?: string,
+        'X-B3-Sampled'?: '1' | '0',
+        ...
     }
 
-    declare type $GenericHeaders = { [string]: string }
-    declare export type RequestZipkinHeaders<T = {}, H = $GenericHeaders> = T & {
-        headers: H & ZipkinHeaders
-    };
+    declare type $GenericHeaders = { [string]: string, ... }
+    declare export type RequestZipkinHeaders<T = {}, H = $GenericHeaders> = T & { headers: H & ZipkinHeaders, ... };
 
     declare class Instrumentation$HttpServer {
-      constructor({ tracer: Tracer, port: number }): this;
+      constructor({
+          tracer: Tracer,
+          port: number,
+          ...
+      }): this;
 
       recordRequest(
         method: string,
@@ -293,7 +328,11 @@ declare module 'zipkin' {
     }
 
     declare class Instrumentation$HttpClient {
-      constructor({ tracer: Tracer, remoteServiceName?: string }): this;
+      constructor({
+          tracer: Tracer,
+          remoteServiceName?: string,
+          ...
+      }): this;
 
       recordRequest<T>(
         request: T,
@@ -348,34 +387,41 @@ declare module 'zipkin' {
         ServerAddr: Class<Annotation$ServerAddr>,
         LocalAddr: Class<Annotation$LocalAddr>,
         BinaryAnnotation: Class<Annotation$BinaryAnnotation>,
+        ...
     }
 
     declare export var sampler: {
         Sampler: Class<sampler$Sampler>,
         CountingSampler: Class<sampler$CountingSampler>,
         neverSample: TraceId => boolean,
-        alwaysSample: TraceId => boolean
+        alwaysSample: TraceId => boolean,
+        ...
     }
 
-    declare export var Request: {
-        addZipkinHeaders: <T, H>(req: T & { headers?: $GenericHeaders }, traceId: TraceId) => RequestZipkinHeaders<T, H>
-    }
+    declare export var Request: { addZipkinHeaders: <T, H>(req: T & { headers?: $GenericHeaders, ... }, traceId: TraceId) => RequestZipkinHeaders<T, H>, ... }
 
     declare export var Instrumentation: {
         HttpServer: Class<Instrumentation$HttpServer>,
-        HttpClient: Class<Instrumentation$HttpClient>
+        HttpClient: Class<Instrumentation$HttpClient>,
+        ...
     }
 
     declare export var model: {
         Endpoint: Class<model$Endpoint>,
         Annotation: Class<model$Annotation>,
-        Span: Class<model$Span>
+        Span: Class<model$Span>,
+        ...
     }
     
     declare export var jsonEncoder: {
         JSON_V1: JsonEncoder,
-        JSON_V2: JsonEncoder
+        JSON_V2: JsonEncoder,
+        ...
     }
 
-    declare export function parseRequestUrl (requestUrl: string): { host: string, path: string };
+    declare export function parseRequestUrl (requestUrl: string): {
+        host: string,
+        path: string,
+        ...
+    };
 }

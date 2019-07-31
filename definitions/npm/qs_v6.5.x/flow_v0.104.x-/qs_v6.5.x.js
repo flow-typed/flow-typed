@@ -10,7 +10,8 @@ declare module "qs" {
     strictNullHandling?: boolean,
     ignoreQueryPrefix?: boolean,
     parseArrays?: boolean,
-    allowDots?: boolean
+    allowDots?: boolean,
+    ...
   };
 
   declare type ArrayFormat = "brackets" | "indices" | "repeat";
@@ -32,7 +33,8 @@ declare module "qs" {
     format?: string,
     addQueryPrefix?: boolean,
     arrayFormat?: ArrayFormat,
-    filter?: Filter
+    filter?: Filter,
+    ...
   };
 
   declare type Formatter = (any) => string;
@@ -43,13 +45,16 @@ declare module "qs" {
     "default": string,
     formatters: {
       RFC1738: Formatter,
-      RFC3986: Formatter
-    }
+      RFC3986: Formatter,
+      ...
+    },
+    ...
   };
 
   declare module.exports: {
     parse(str: string, opts?: ParseOptions): Object,
     stringify(obj: Object | Array<any>, opts?: StringifyOptions): string,
-    formats: Formats
+    formats: Formats,
+    ...
   };
 }

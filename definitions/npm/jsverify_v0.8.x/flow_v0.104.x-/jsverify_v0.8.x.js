@@ -80,7 +80,7 @@ declare interface jsverify$GeneratorFunctions {
 
   array<U>(gen: jsverify$Generator<U>): jsverify$Generator<U[]>,
   nearray<U>(gen: jsverify$Generator<U>): jsverify$Generator<U[]>,
-  dict<U>(gen: jsverify$Generator<U>): jsverify$Generator<{ [key: string]: U }>,
+  dict<U>(gen: jsverify$Generator<U>): jsverify$Generator<{ [key: string]: U, ... }>,
 
   unit: jsverify$Generator<any>,
 
@@ -245,7 +245,6 @@ declare module "jsverify" {
       arb: jsverify$Arbitrary<U>,
       predicate: (u: U) => boolean
     ) => jsverify$Arbitrary<U>,
-
     integer: jsverify$Arbitrary<number> &
       jsverify$integerFn &
       jsverify$integerFn2,
@@ -253,28 +252,23 @@ declare module "jsverify" {
     number: jsverify$Arbitrary<number> &
       jsverify$integerFn &
       jsverify$integerFn2,
-
     uint8: jsverify$Arbitrary<number>,
     uint16: jsverify$Arbitrary<number>,
     uint32: jsverify$Arbitrary<number>,
     int8: jsverify$Arbitrary<number>,
     int16: jsverify$Arbitrary<number>,
     int32: jsverify$Arbitrary<number>,
-
     bool: jsverify$Arbitrary<boolean>,
     datetime: jsverify$Arbitrary<Date>,
-
     elements: <T>(args: T[]) => jsverify$Arbitrary<T>,
     falsy: jsverify$Arbitrary<any>,
     constant: <T>(x: T) => jsverify$Arbitrary<T>,
-
     char: jsverify$Arbitrary<string>,
     asciichar: jsverify$Arbitrary<string>,
     string: jsverify$Arbitrary<string>,
     nestring: jsverify$Arbitrary<string>,
     asciistring: jsverify$Arbitrary<string>,
     asciinestring: jsverify$Arbitrary<string>,
-
     nonShrink: <T>(arb: jsverify$Arbitrary<T>) => jsverify$Arbitrary<T>,
     either: <T, U>(
       arbA: jsverify$Arbitrary<T>,
@@ -284,26 +278,21 @@ declare module "jsverify" {
       arbA: jsverify$Arbitrary<T>,
       arbB: jsverify$Arbitrary<U>
     ) => jsverify$Arbitrary<[T, U]>,
-
     tuple: (arbs: jsverify$Arbitrary<any>[]) => jsverify$Arbitrary<any[]>,
     sum: (arbs: jsverify$Arbitrary<any>[]) => jsverify$Arbitrary<any>,
-
     dict: <T>(
       arb: jsverify$Arbitrary<T>
-    ) => jsverify$Arbitrary<{ [s: string]: T }>,
+    ) => jsverify$Arbitrary<{ [s: string]: T, ... }>,
     array: <T>(arb: jsverify$Arbitrary<T>) => jsverify$Arbitrary<T[]>,
     nearray: <T>(arb: jsverify$Arbitrary<T>) => jsverify$Arbitrary<T[]>,
     fn: <T>(arb: jsverify$Arbitrary<T>) => jsverify$Arbitrary<(a: any) => T>,
     fun: <T>(arb: jsverify$Arbitrary<T>) => jsverify$Arbitrary<(a: any) => T>,
-
     json: jsverify$Arbitrary<any>,
     unit: jsverify$Arbitrary<any>,
-
     oneof: <T>(gs: jsverify$Arbitrary<T>[]) => jsverify$Arbitrary<T>,
     record: <T>(
       arbs: $ObjMap<T, jsverify$arbitraryOf>
     ) => jsverify$Arbitrary<T>,
-
     forall: <A, T>(
       arb1: jsverify$Arbitrary<A>,
       prop: (t: A) => jsverify$Property<T>
@@ -419,9 +408,7 @@ declare module "jsverify" {
         f: J
       ) => jsverify$Property<T>
     ) => jsverify$Property<T>,
-
     forall: (...args: any[]) => jsverify$Property<any>,
-
     assertForall: <A, T>(
       arb1: jsverify$Arbitrary<A>,
       prop: (t: A) => jsverify$Property<T>
@@ -537,9 +524,7 @@ declare module "jsverify" {
         f: J
       ) => jsverify$Property<T>
     ) => T,
-
     assertForall: (...args: any[]) => any,
-
     checkForall: <A>(
       arb1: jsverify$Arbitrary<A>,
       prop: (t: A) => jsverify$Property<A>
@@ -655,9 +640,7 @@ declare module "jsverify" {
         f: J
       ) => jsverify$Property<any>
     ) => Result<any>,
-
     checkForall: (...args: any[]) => jsverify$Result<any>,
-
     property: <A>(
       description: String,
       arb1: jsverify$Arbitrary<A>,
@@ -783,18 +766,16 @@ declare module "jsverify" {
         f: J
       ) => jsverify$Property<any>
     ) => any,
-
     property: (...args: any[]) => jsverify$Result<any>,
-
     check: <T>(
       prop: jsverify$Property<T>,
       opts?: jsverify$Options
     ) => jsverify$Result<T>,
     assert: <T>(prop: jsverify$Property<T>, opts?: jsverify$Options) => T,
-
     generator: jsverify$GeneratorFunctions,
     shrink: jsverify$ShrinkFunctions,
     show: jsverify$ShowFunctions,
-    random: jsverify$Random
+    random: jsverify$Random,
+    ...
   };
 }

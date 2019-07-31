@@ -1,7 +1,8 @@
 declare module "react-native-audio-toolkit" {
   declare type PlaybackOptions = {
     autoDestroy?: boolean,
-    continuesToPlayInBackground?: boolean
+    continuesToPlayInBackground?: boolean,
+    ...
   };
 
   declare type RecorderOptions = {
@@ -10,7 +11,8 @@ declare module "react-native-audio-toolkit" {
     sampleRate?: number,
     format?: string,
     encoder?: string,
-    quality?: string
+    quality?: string,
+    ...
   };
 
   declare class Player {

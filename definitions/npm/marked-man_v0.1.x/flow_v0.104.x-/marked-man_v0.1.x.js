@@ -42,30 +42,56 @@ type marked$MarkedOptions = {
   pedantic?: boolean,
   sanitize?: boolean,
   smartLists?: boolean,
-  smartypants?: boolean
+  smartypants?: boolean,
+  ...
 };
 
 /*
  * marked$Tokens
  */
 
-type marked$Space = { type: "space" };
-type marked$Code = { type: "code", text: string, lang?: string };
-type marked$Heading = { type: "heading", depth: number, text: string };
+type marked$Space = { type: "space", ... };
+type marked$Code = {
+  type: "code",
+  text: string,
+  lang?: string,
+  ...
+};
+type marked$Heading = {
+  type: "heading",
+  depth: number,
+  text: string,
+  ...
+};
 type marked$Table = {
   type: "table",
   header: string,
   align: Array<marked$AlignFlag>,
-  cells: Array<Array<string>>
+  cells: Array<Array<string>>,
+  ...
 };
-type marked$Hr = { type: "hr" };
-type marked$BlockquoteStart = { type: "blockquote_start" };
-type marked$BlockquoteEnd = { type: "blockquote_end" };
-type marked$ListStart = { type: "list_start" };
-type marked$ListEnd = { type: "list_end" };
-type marked$Paragraph = { type: "paragraph", pre: boolean, text: string };
-type marked$Html = { type: "paragraph", pre: boolean, text: string };
-type marked$Text = { type: "text", text: string };
+type marked$Hr = { type: "hr", ... };
+type marked$BlockquoteStart = { type: "blockquote_start", ... };
+type marked$BlockquoteEnd = { type: "blockquote_end", ... };
+type marked$ListStart = { type: "list_start", ... };
+type marked$ListEnd = { type: "list_end", ... };
+type marked$Paragraph = {
+  type: "paragraph",
+  pre: boolean,
+  text: string,
+  ...
+};
+type marked$Html = {
+  type: "paragraph",
+  pre: boolean,
+  text: string,
+  ...
+};
+type marked$Text = {
+  type: "text",
+  text: string,
+  ...
+};
 
 type marked$Token =
   | marked$Space
@@ -83,14 +109,16 @@ type marked$Token =
 
 type marked$Link = {
   title: ?string,
-  href: string
+  href: string,
+  ...
 };
 
-type marked$Tokens = { links: Array<marked$Link> } & Array<marked$Token>;
+type marked$Tokens = { links: Array<marked$Link>, ... } & Array<marked$Token>;
 
 type marked$NoopRule = {
   (i: mixed): void,
-  exec: (i: mixed) => void
+  exec: (i: mixed) => void,
+  ...
 };
 
 type marked$Rule = RegExp | marked$NoopRule;
@@ -99,8 +127,8 @@ type marked$lex = (t: string) => marked$Tokens;
 
 declare class marked$Lexer {
   static lexer: (t: string, o?: marked$MarkedOptions) => marked$Tokens;
-  static rules: { [key: string]: marked$Rule };
-  rules: { [key: string]: marked$Rule };
+  static rules: { [key: string]: marked$Rule, ... };
+  rules: { [key: string]: marked$Rule, ... };
   constructor(o?: marked$MarkedOptions): marked$Lexer;
   lex: marked$lex;
   tokens: marked$Tokens;
@@ -155,7 +183,8 @@ type marked$Marked = {
   InlineLexer: typeof marked$InlineLexer,
   inlinelexer: typeof marked$InlineLexer.output,
   Renderer: typeof marked$Renderer,
-  parse: marked$Marked
+  parse: marked$Marked,
+  ...
 };
 /* END copied over from marked libdef */
 
@@ -184,7 +213,8 @@ declare module "marked-man" {
     (md: string, cb: marked$NodeCallback<string>): void,
     (md: string, o?: MarkedManOptions): string,
     setOptions: (o: MarkedManOptions) => void,
-    defaults: MarkedManOptions
+    defaults: MarkedManOptions,
+    ...
   };
 
   declare export default MarkedMan;

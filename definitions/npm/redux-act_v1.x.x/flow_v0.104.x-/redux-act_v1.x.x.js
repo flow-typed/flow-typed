@@ -14,18 +14,16 @@ declare module "redux-act" {
       defaultState?: ReducerState
     ): {
       (): (state: ReducerState, payload?: mixed, meta?: mixed) => ReducerState,
-
-      // TODO: Document parameters & add tests
       options: () => mixed,
       has: (actionCreator: mixed) => boolean,
       on: Reducer$On<ReducerState>,
       off: Reducer$Off,
-      assignAll: ({} | Array<mixed>, {} | Array<mixed>) => mixed,
-      bindAll: ({} | Array<mixed>, {} | Array<mixed>) => mixed,
-      batch: ({} | Array<mixed>) => mixed,
-      disbatch: (mixed, void | Array<mixed>) => mixed
+      assignAll: ({...} | Array<mixed>, {...} | Array<mixed>) => mixed,
+      bindAll: ({...} | Array<mixed>, {...} | Array<mixed>) => mixed,
+      batch: ({...} | Array<mixed>) => mixed,
+      disbatch: (mixed, void | Array<mixed>) => mixed,
+      ...
     },
-
     createAction<ActionArgs, ReducerPayload, ReducerMetadata>(
       description: string,
       payloadReducer?: (...ActionArgs) => ReducerPayload,
@@ -33,26 +31,31 @@ declare module "redux-act" {
     ): {
       (
         ...ActionArgs
-      ): { type: string, payload: ReducerPayload, meta?: ReducerMetadata },
+      ): {
+        type: string,
+        payload: ReducerPayload,
+        meta?: ReducerMetadata,
+        ...
+      },
       toString: () => string,
       getType: () => string,
-
-      // TODO: Document parameters & add tests
       assignTo: mixed => void,
       bindTo: mixed => mixed,
       assigned: () => boolean,
       bound: () => boolean,
       dispatched: () => boolean,
-      raw: () => mixed
+      raw: () => mixed,
+      ...
     },
-
     // TODO: Document properties & add tests
     types: {
       add: string => void,
       remove: string => void,
       has: string => boolean,
       all: () => Array<string>,
-      clear: () => void
-    }
+      clear: () => void,
+      ...
+    },
+    ...
   };
 }

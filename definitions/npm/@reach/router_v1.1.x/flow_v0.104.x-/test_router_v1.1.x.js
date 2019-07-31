@@ -130,7 +130,11 @@ describe('@reach/router', () => {
     });
 
     describe('generic magic', () => {
-      type Params = { articleId: string, commentId: string };
+      type Params = {
+        articleId: string,
+        commentId: string,
+        ...
+      };
 
       /*
       In the future (https://github.com/facebook/flow/issues/7672) we can use this syntax:

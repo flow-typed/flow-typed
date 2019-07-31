@@ -229,9 +229,7 @@ declare interface npm$joiBrowser$ObjectSchema
     schema: npm$joiBrowser$Schema,
     message?: string
   ): npm$joiBrowser$ObjectSchema,
-  keys(schema?: {
-    [key: string]: npm$joiBrowser$Schema
-  }): npm$joiBrowser$ObjectSchema,
+  keys(schema?: { [key: string]: npm$joiBrowser$Schema, ... }): npm$joiBrowser$ObjectSchema,
   length(limit: number): npm$joiBrowser$ObjectSchema,
   max(limit: number): npm$joiBrowser$ObjectSchema,
   min(limit: number): npm$joiBrowser$ObjectSchema,
@@ -321,9 +319,7 @@ declare module "joi-browser" {
     date(): npm$joiBrowser$DateSchema,
     func(): npm$joiBrowser$FunctionSchema,
     number(): npm$joiBrowser$NumberSchema,
-    object(schema?: {
-      [key: string]: npm$joiBrowser$Schema
-    }): npm$joiBrowser$ObjectSchema,
+    object(schema?: { [key: string]: npm$joiBrowser$Schema, ... }): npm$joiBrowser$ObjectSchema,
     ref(key: string, options?: ReferenceOptions): Reference,
     string(): npm$joiBrowser$StringSchema,
     validate<T>(
@@ -341,6 +337,7 @@ declare module "joi-browser" {
       schema: Object,
       options?: ValidationOptions,
       callback?: (err: ValidationError, value: T) => void
-    ): ValidationResult<T>
+    ): ValidationResult<T>,
+    ...
   };
 }

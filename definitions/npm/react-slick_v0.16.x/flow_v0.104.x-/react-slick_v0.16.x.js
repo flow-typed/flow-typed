@@ -4,12 +4,14 @@ declare module "react-slick" {
     style?: CSSStyleDeclaration,
     onClick?: (e: SyntheticMouseEvent<*>) => void,
     currentSlide?: number,
-    slideCount?: number
+    slideCount?: number,
+    ...
   };
 
   declare export type ResponsiveObject = {
     breakpoint: number,
-    settings: "unslick" | Props
+    settings: "unslick" | Props,
+    ...
   };
 
   declare export type SwipeDirection =
@@ -62,7 +64,8 @@ declare module "react-slick" {
     waitForAnimate?: boolean,
     edgeEvent?: (swipeDirection: SwipeDirection) => void,
     swipeEvent?: (swipeDirection: SwipeDirection) => void,
-    init?: () => void
+    init?: () => void,
+    ...
   };
 
   declare export default class Slider extends React$Component<Props> {

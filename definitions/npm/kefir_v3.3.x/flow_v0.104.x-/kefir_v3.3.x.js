@@ -37,9 +37,13 @@ declare module kefir {
     delay(wait: number): this;
     throttle(
       wait: number,
-      options?: { leading?: boolean, trailing?: boolean }
+      options?: {
+        leading?: boolean,
+        trailing?: boolean,
+        ...
+      }
     ): this;
-    debounce(wait: number, options?: { immediate?: boolean }): this;
+    debounce(wait: number, options?: { immediate?: boolean, ... }): this;
     ignoreValues(): this;
     ignoreErrors(): this;
     ignoreEnd(): this;
@@ -97,16 +101,16 @@ declare module kefir {
     slidingWindow(max: number, min?: number): Stream<T[], E>;
     bufferWhile(
       predicate?: ?(value: T) => boolean,
-      options?: { flushOnEnd?: boolean }
+      options?: { flushOnEnd?: boolean, ... }
     ): Stream<T[], E>;
     bufferWithCount(
       count: number,
-      options?: { flushOnEnd?: boolean }
+      options?: { flushOnEnd?: boolean, ... }
     ): Stream<T[], E>;
     bufferWithTimeOrCount(
       period: number,
       count: number,
-      options?: { flushOnEnd?: boolean }
+      options?: { flushOnEnd?: boolean, ... }
     ): Stream<T[], E>;
     withHandler<U, F>(
       handler: (e: Emitter<U, F>, event: Event<T, E>) => any
@@ -116,13 +120,14 @@ declare module kefir {
 
     bufferBy(
       obs: Observable<any, any>,
-      options?: { flushOnEnd?: boolean }
+      options?: { flushOnEnd?: boolean, ... }
     ): Stream<T[], E>;
     bufferWhileBy(
       obs: Observable<any, any>,
       options?: {
         flushOnEnd?: boolean,
-        flushOnChange?: boolean
+        flushOnChange?: boolean,
+        ...
       }
     ): Stream<T[], E>;
   }
@@ -141,16 +146,16 @@ declare module kefir {
     slidingWindow(max: number, min?: number): Property<T[], E>;
     bufferWhile(
       predicate?: ?(value: T) => boolean,
-      options?: { flushOnEnd?: boolean }
+      options?: { flushOnEnd?: boolean, ... }
     ): Property<T[], E>;
     bufferWithCount(
       count: number,
-      options?: { flushOnEnd?: boolean }
+      options?: { flushOnEnd?: boolean, ... }
     ): Property<T[], E>;
     bufferWithTimeOrCount(
       period: number,
       count: number,
-      options?: { flushOnEnd?: boolean }
+      options?: { flushOnEnd?: boolean, ... }
     ): Property<T[], E>;
     withHandler<U, F>(
       handler: (e: Emitter<U, F>, event: Event<T, E>) => any
@@ -160,13 +165,14 @@ declare module kefir {
 
     bufferBy(
       obs: Observable<any, any>,
-      options?: { flushOnEnd?: boolean }
+      options?: { flushOnEnd?: boolean, ... }
     ): Property<T[], E>;
     bufferWhileBy(
       obs: Observable<any, any>,
       options?: {
         flushOnEnd?: boolean,
-        flushOnChange?: boolean
+        flushOnChange?: boolean,
+        ...
       }
     ): Property<T[], E>;
   }
@@ -180,13 +186,26 @@ declare module kefir {
     error(err: E): void,
     end(): void,
     event(event: Event<T, E>): void,
-    emitEvent(event: Event<T, E>): void
+    emitEvent(event: Event<T, E>): void,
+    ...
   };
 
   declare type Event<T, E> =
-    | { type: "value", value: T }
-    | { type: "error", value: E }
-    | { type: "end", value: void };
+    | {
+    type: "value",
+    value: T,
+    ...
+  }
+    | {
+    type: "error",
+    value: E,
+    ...
+  }
+    | {
+    type: "end",
+    value: void,
+    ...
+  };
 
   /* Create a stream */
 
@@ -287,7 +306,8 @@ declare module kefir {
 
   declare function pool<T, E>(): Stream<T, E> & {
     plug: (obs: Observable<T, E>) => void,
-    unplug: (obs: Observable<T, E>) => void
+    unplug: (obs: Observable<T, E>) => void,
+    ...
   };
   declare function repeat<T, E>(
     generator: (iteration: number) => ?(Observable<T, E> | boolean)
@@ -297,13 +317,12 @@ declare module kefir {
 
   declare function fromPromise<T>(promise: Promise<T>): Property<T, any>;
 
-  declare type ESObservable<T, E> = {
-    subscribe(callbacks: {
-      next(value: T): any,
-      error(error: E): any,
-      complete(): any
-    }): { unsubscribe: () => void }
-  };
+  declare type ESObservable<T, E> = { subscribe(callbacks: {
+    next(value: T): any,
+    error(error: E): any,
+    complete(): any,
+    ...
+  }): { unsubscribe: () => void, ... }, ... };
 
   declare function fromESObservable<T, E>(
     observable: ESObservable<T, E>

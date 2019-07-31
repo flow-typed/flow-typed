@@ -17,7 +17,7 @@ declare module "object-hash" {
   |};
 
   declare export default (
-    value: { +[string]: mixed } | Array<mixed>,
+    value: { +[string]: mixed, ... } | Array<mixed>,
     options?: Options
   ) => string;
 }

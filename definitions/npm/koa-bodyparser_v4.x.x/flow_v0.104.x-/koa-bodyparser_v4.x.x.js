@@ -16,7 +16,8 @@ declare module "koa-bodyparser" {
     extendTypes?: {
       json?: Array<string>,
       form?: Array<string>,
-      text?: Array<string>
+      text?: Array<string>,
+      ...
     },
     onerror?: (err: Error, ctx: Context) => void
   |};

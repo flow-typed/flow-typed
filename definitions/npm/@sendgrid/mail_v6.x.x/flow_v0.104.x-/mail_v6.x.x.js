@@ -4,8 +4,9 @@ declare module '@sendgrid/mail' {
     code: number;
     message: string;
     response: {
-      headers: { [key: string]: string; };
-      body: string;
+      headers: { [key: string]: string, ... },
+      body: string,
+      ...
     };
   }
 
@@ -14,9 +15,9 @@ declare module '@sendgrid/mail' {
     cc?: EmailData | EmailData[],
     bcc?: EmailData | EmailData[],
     subject?: string;
-    headers?: { [key: string]: string };
-    substitutions?: { [key: string]: string };
-    customArgs?: { [key: string]: string };
+    headers?: { [key: string]: string, ... };
+    substitutions?: { [key: string]: string, ... };
+    customArgs?: { [key: string]: string, ... };
     sendAt?: number;
   }
 
@@ -35,53 +36,60 @@ declare module '@sendgrid/mail' {
 
   declare interface MailSettings {
     bcc?: {
-      enable?: boolean;
-      email?: string;
+      enable?: boolean,
+      email?: string,
+      ...
     };
-    bypassListManagement?: {
-      enable?: boolean;
-    };
+    bypassListManagement?: { enable?: boolean, ... };
     footer?: {
-      enable?: boolean;
-      text?: string;
-      html?: string;
+      enable?: boolean,
+      text?: string,
+      html?: string,
+      ...
     };
-    sandboxMode?: {
-      enable?: boolean;
-    };
+    sandboxMode?: { enable?: boolean, ... };
     spamCheck?: {
-      enable?: boolean;
-      threshold?: number;
-      postToUrl?: string;
+      enable?: boolean,
+      threshold?: number,
+      postToUrl?: string,
+      ...
     };
   }
 
   declare interface TrackingSettings {
     clickTracking?: {
-      enable?: boolean;
-      enableText?: boolean;
+      enable?: boolean,
+      enableText?: boolean,
+      ...
     };
     openTracking?: {
-      enable?: boolean;
-      substitutionTag?: string;
+      enable?: boolean,
+      substitutionTag?: string,
+      ...
     };
     subscriptionTracking?: {
-      enable?: boolean;
-      text?: string;
-      html?: string;
-      substitutionTag?: string;
+      enable?: boolean,
+      text?: string,
+      html?: string,
+      substitutionTag?: string,
+      ...
     };
     ganalytics?: {
-      enable?: boolean;
-      utmSource?: string;
-      utmMedium?: string;
-      utmTerm?: string;
-      utmContent?: string;
-      utmCampaign?: string;
+      enable?: boolean,
+      utmSource?: string,
+      utmMedium?: string,
+      utmTerm?: string,
+      utmContent?: string,
+      utmCampaign?: string,
+      ...
     };
   }
 
-  declare export type EmailData = string | { name?: string; email: string; };
+  declare export type EmailData = string | {
+    name?: string,
+    email: string,
+    ...
+  };
 
   declare interface MailContent {
     type: string;
@@ -92,47 +100,37 @@ declare module '@sendgrid/mail' {
     to?: EmailData | EmailData[],
     cc?: EmailData | EmailData[],
     bcc?: EmailData | EmailData[],
-
     from: EmailData,
     replyTo?: EmailData,
-
     sendAt?: number,
-
     subject?: string,
     text?: string,
     html?: string,
     content?: MailContent[],
     templateId?: string,
-
     personalizations?: PersonalizationData[],
     attachments?: AttachmentData[],
-
     ipPoolName?: string,
     batchId?: string,
-
-    sections?: { [key: string]: string },
-    headers?: { [key: string]: string },
-
+    sections?: { [key: string]: string, ... },
+    headers?: { [key: string]: string, ... },
     categories?: string[],
     category?: string,
-
-    customArgs?: { [key: string]: any },
+    customArgs?: { [key: string]: any, ... },
     asm?: ASMOptions,
-
     mailSettings?: MailSettings,
     trackingSettings?: TrackingSettings,
-
-    substitutions?: { [key: string]: string },
+    substitutions?: { [key: string]: string, ... },
     substitutionWrappers?: string[],
-
     isMultiple?: boolean,
+    ...
   }
 
   declare class MailService {
     setApiKey(apiKey: string): void;
     setSubstitutionWrappers(left: string, right: string): void;
-    send(data: MailData | MailData[], isMultiple?: boolean, cb?: (err: Error | ResponseError, result: [http$ServerResponse, {}]) => void): Promise<[http$ServerResponse, {}]>;
+    send(data: MailData | MailData[], isMultiple?: boolean, cb?: (err: Error | ResponseError, result: [http$ServerResponse, {...}]) => void): Promise<[http$ServerResponse, {...}]>;
   }
 
-  declare export default MailService & { MailService: MailService };
+  declare export default MailService & { MailService: MailService, ... };
 }

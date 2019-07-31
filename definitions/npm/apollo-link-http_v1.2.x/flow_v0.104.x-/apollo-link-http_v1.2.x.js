@@ -1,7 +1,7 @@
 // @flow
 
 declare module "apollo-link-http" {
-  declare type $Record<T, U> = {[key: $Keys<T>]: U};
+  declare type $Record<T, U> = { [key: $Keys<T>]: U, ... };
 
   declare type NextLink = (operation: Operation) => any;
 
@@ -57,12 +57,13 @@ declare module "apollo-link-http" {
   }
 
   declare export type FetchOptions = {
-    uri?: string | UriFunction;
-    fetch?: any;
-    includeExtensions?: boolean;
-    credentials?: string;
-    headers?: any;
-    fetchOptions?: any;
+    uri?: string | UriFunction,
+    fetch?: any,
+    includeExtensions?: boolean,
+    credentials?: string,
+    headers?: any,
+    fetchOptions?: any,
+    ...
   }
 
   declare export function createHttpLink(opts: FetchOptions): ApolloLink;

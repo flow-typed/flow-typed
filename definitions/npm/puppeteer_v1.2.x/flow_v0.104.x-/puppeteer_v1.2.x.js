@@ -17,148 +17,143 @@ declare module 'puppeteer' {
 
   /** Keyboard provides an api for managing a virtual keyboard. */
   declare type Keyboard = {
-    /**
-     * Dispatches a keydown event.
-     * @param key Name of key to press, such as ArrowLeft.
-     * @param options Specifies a input text event.
-     */
-    down(key: string, options?: { text?: string }): Promise<void>,
-
-    /** Shortcut for `keyboard.down` and `keyboard.up`. */
-    press(key: string, options?: { delay?: number, text?: string }): Promise<void>,
-
-    /** Dispatches a `keypress` and `input` event. This does not send a `keydown` or keyup `event`. */
-    sendCharacter(char: string): Promise<void>,
-
-    /**
-     * Sends a keydown, keypress/input, and keyup event for each character in the text.
-     * @param text A text to type into a focused element.
-     * @param options Specifies the typing options.
-     */
-    type(text: string, options?: { delay?: number }): Promise<void>,
-
-    /**
-     * Dispatches a keyup event.
-     * @param key Name of key to release, such as ArrowLeft.
-     */
-    up(key: string): Promise<void>,
+   /**
+    * Dispatches a keydown event.
+    * @param key Name of key to press, such as ArrowLeft.
+    * @param options Specifies a input text event.
+    */
+   down(key: string, options?: { text?: string, ... }): Promise<void>,
+   /** Shortcut for `keyboard.down` and `keyboard.up`. */
+   press(key: string, options?: {
+    delay?: number,
+    text?: string,
+    ...
+   }): Promise<void>,
+   /** Dispatches a `keypress` and `input` event. This does not send a `keydown` or keyup `event`. */
+   sendCharacter(char: string): Promise<void>,
+   /**
+    * Sends a keydown, keypress/input, and keyup event for each character in the text.
+    * @param text A text to type into a focused element.
+    * @param options Specifies the typing options.
+    */
+   type(text: string, options?: { delay?: number, ... }): Promise<void>,
+   /**
+    * Dispatches a keyup event.
+    * @param key Name of key to release, such as ArrowLeft.
+    */
+   up(key: string): Promise<void>,
+   ...
   };
 
   declare type MousePressOptions = {
-    /**
-     * left, right, or middle.
-     * @default left
-     */
-    button?: MouseButtons,
-
-    /**
-     * The number of clicks.
-     * @default 1
-     */
-    clickCount?: number,
+   /**
+    * left, right, or middle.
+    * @default left
+    */
+   button?: MouseButtons,
+   /**
+    * The number of clicks.
+    * @default 1
+    */
+   clickCount?: number,
+   ...
   };
 
   declare type Mouse = {
-    /**
-     * Shortcut for `mouse.move`, `mouse.down` and `mouse.up`.
-     * @param x The x position.
-     * @param y The y position.
-     * @param options The click options.
-     */
-    click(x: number, y: number, options?: ClickOptions): Promise<void>,
-
-    /**
-     * Dispatches a `mousedown` event.
-     * @param options The mouse press options.
-     */
-    down(options?: MousePressOptions): Promise<void>,
-
-    /**
-     * Dispatches a `mousemove` event.
-     * @param x The x position.
-     * @param y The y position.
-     * @param options The mouse move options.
-     */
-    move(x: number, y: number, options?: { steps: number }): Promise<void>,
-    /**
-     * Dispatches a `mouseup` event.
-     * @param options The mouse press options.
-     */
-    up(options?: MousePressOptions): Promise<void>,
+   /**
+    * Shortcut for `mouse.move`, `mouse.down` and `mouse.up`.
+    * @param x The x position.
+    * @param y The y position.
+    * @param options The click options.
+    */
+   click(x: number, y: number, options?: ClickOptions): Promise<void>,
+   /**
+    * Dispatches a `mousedown` event.
+    * @param options The mouse press options.
+    */
+   down(options?: MousePressOptions): Promise<void>,
+   /**
+    * Dispatches a `mousemove` event.
+    * @param x The x position.
+    * @param y The y position.
+    * @param options The mouse move options.
+    */
+   move(x: number, y: number, options?: { steps: number, ... }): Promise<void>,
+   /**
+    * Dispatches a `mouseup` event.
+    * @param options The mouse press options.
+    */
+   up(options?: MousePressOptions): Promise<void>,
+   ...
   };
 
-  declare type Touchscreen = {
-    /**
-     * Dispatches a touchstart and touchend event.
-     * @param x The x position.
-     * @param y The y position.
-     */
-    tap(x: number, y: number): Promise<void>,
-  };
+  declare type Touchscreen = { /**
+   * Dispatches a touchstart and touchend event.
+   * @param x The x position.
+   * @param y The y position.
+   */
+  tap(x: number, y: number): Promise<void>, ... };
 
   /**
    * You can use `tracing.start` and `tracing.stop` to create a trace file which can be opened in Chrome DevTools or timeline viewer.
    */
   declare type Tracing = {
-    start(options: TracingStartOptions): Promise<void>,
-
-    stop(): Promise<void>,
+   start(options: TracingStartOptions): Promise<void>,
+   stop(): Promise<void>,
+   ...
   };
 
   declare type TracingStartOptions = {
-    categories?: Array<string>,
-    path: string,
-    screenshots?: boolean,
+   categories?: Array<string>,
+   path: string,
+   screenshots?: boolean,
+   ...
   };
 
   /** Dialog objects are dispatched by page via the 'dialog' event. */
   declare type Dialog = {
-    /**
-     * Accepts the dialog.
-     * @param promptText A text to enter in prompt. Does not cause any effects if the dialog's type is not prompt.
-     */
-    accept(promptText?: string): Promise<void>,
-
-    /** If dialog is prompt, returns default prompt value. Otherwise, returns empty string. */
-    defaultValue(): string,
-
-    /** Dismiss the dialog */
-    dismiss(): Promise<void>,
-
-    /** Returns the message displayed in the dialog. */
-    message(): string,
-
-    /** The dialog type. Dialog's type, can be one of `alert`, `beforeunload`, `confirm` or `prompt`. */
-    type(): 'alert' | 'beforeunload' | 'confirm' | 'prompt',
+   /**
+    * Accepts the dialog.
+    * @param promptText A text to enter in prompt. Does not cause any effects if the dialog's type is not prompt.
+    */
+   accept(promptText?: string): Promise<void>,
+   /** If dialog is prompt, returns default prompt value. Otherwise, returns empty string. */
+   defaultValue(): string,
+   /** Dismiss the dialog */
+   dismiss(): Promise<void>,
+   /** Returns the message displayed in the dialog. */
+   message(): string,
+   /** The dialog type. Dialog's type, can be one of `alert`, `beforeunload`, `confirm` or `prompt`. */
+   type(): 'alert' | 'beforeunload' | 'confirm' | 'prompt',
+   ...
   };
 
   /** ConsoleMessage objects are dispatched by page via the 'console' event. */
   declare type ConsoleMessage = {
-    /** The message arguments. */
-    args(): Array<JSHandle>,
-
-    /** The message text. */
-    text(): string,
-
-    type():
-      | 'log'
-      | 'debug'
-      | 'info'
-      | 'error'
-      | 'warning'
-      | 'dir'
-      | 'dirxml'
-      | 'table'
-      | 'trace'
-      | 'clear'
-      | 'startGroup'
-      | 'startGroupCollapsed'
-      | 'endGroup'
-      | 'assert'
-      | 'profile'
-      | 'profileEnd'
-      | 'count'
-      | 'timeEnd',
+   /** The message arguments. */
+   args(): Array<JSHandle>,
+   /** The message text. */
+   text(): string,
+   type():
+     | 'log'
+     | 'debug'
+     | 'info'
+     | 'error'
+     | 'warning'
+     | 'dir'
+     | 'dirxml'
+     | 'table'
+     | 'trace'
+     | 'clear'
+     | 'startGroup'
+     | 'startGroupCollapsed'
+     | 'endGroup'
+     | 'assert'
+     | 'profile'
+     | 'profileEnd'
+     | 'count'
+     | 'timeEnd',
+   ...
   };
 
   declare type PageEvents =
@@ -182,130 +177,114 @@ declare module 'puppeteer' {
     | 'targetdestroyed';
 
   declare type AuthOptions = {
-    password: string,
-    username: string,
+   password: string,
+   username: string,
+   ...
   };
 
   declare type MouseButtons = 'left' | 'right' | 'middle';
 
   declare type ClickOptions = {
-    /** defaults to left */
-    button?: MouseButtons,
-
-    /** defaults to 1 */
-    clickCount?: number,
-
-    /**
-     * Time to wait between mousedown and mouseup in milliseconds.
-     * Defaults to 0.
-     */
-    delay?: number,
+   /** defaults to left */
+   button?: MouseButtons,
+   /** defaults to 1 */
+   clickCount?: number,
+   /**
+    * Time to wait between mousedown and mouseup in milliseconds.
+    * Defaults to 0.
+    */
+   delay?: number,
+   ...
   };
 
   /** Represents a browser cookie. */
   declare type Cookie = {
-    /** The cookie domain. */
-    domain: string,
-
-    /** The cookie Unix expiration time in seconds. */
-    expires: number,
-
-    /** The cookie http only flag. */
-    httpOnly: boolean,
-
-    /** The cookie name. */
-    name: string,
-
-    /** The cookie path. */
-    path: string,
-
-    /** The cookie same site definition. */
-    sameSite: 'Strict' | 'Lax',
-
-    /** The cookie secure flag. */
-    secure: boolean,
-
-    /** The cookie value. */
-    value: string,
+   /** The cookie domain. */
+   domain: string,
+   /** The cookie Unix expiration time in seconds. */
+   expires: number,
+   /** The cookie http only flag. */
+   httpOnly: boolean,
+   /** The cookie name. */
+   name: string,
+   /** The cookie path. */
+   path: string,
+   /** The cookie same site definition. */
+   sameSite: 'Strict' | 'Lax',
+   /** The cookie secure flag. */
+   secure: boolean,
+   /** The cookie value. */
+   value: string,
+   ...
   };
 
   declare type DeleteCookie = {
-    domain?: string,
-    /** The cookie name. */
-    name: string,
-    path?: string,
-    secure?: boolean,
-    url?: string,
+   domain?: string,
+   /** The cookie name. */
+   name: string,
+   path?: string,
+   secure?: boolean,
+   url?: string,
+   ...
   };
 
   declare type SetCookie = {
-    /** The cookie domain. */
-    domain?: string,
-
-    /** The cookie Unix expiration time in seconds. */
-    expires?: number,
-
-    /** The cookie http only flag. */
-    httpOnly?: boolean,
-
-    /** The cookie name. */
-    name: string,
-
-    /** The cookie path. */
-    path?: string,
-
-    /** The cookie same site definition. */
-    sameSite?: 'Strict' | 'Lax',
-
-    /** The cookie secure flag. */
-    secure?: boolean,
-
-    /** The request-URI to associate with the setting of the cookie. This value can affect the default domain and path values of the created cookie. */
-    url?: string,
-
-    /** The cookie value. */
-    value: string,
+   /** The cookie domain. */
+   domain?: string,
+   /** The cookie Unix expiration time in seconds. */
+   expires?: number,
+   /** The cookie http only flag. */
+   httpOnly?: boolean,
+   /** The cookie name. */
+   name: string,
+   /** The cookie path. */
+   path?: string,
+   /** The cookie same site definition. */
+   sameSite?: 'Strict' | 'Lax',
+   /** The cookie secure flag. */
+   secure?: boolean,
+   /** The request-URI to associate with the setting of the cookie. This value can affect the default domain and path values of the created cookie. */
+   url?: string,
+   /** The cookie value. */
+   value: string,
+   ...
   };
 
   declare type Viewport = {
-    /**
-     * Specify device scale factor (can be thought of as dpr).
-     * @default 1
-     */
-    deviceScaleFactor?: number,
-
-    /**
-     * Specifies if viewport supports touch events.
-     * @default false
-     */
-    hasTouch?: boolean,
-
-    /** The page height in pixels. */
-    height: number,
-
-    /**
-     * Specifies if viewport is in landscape mode.
-     * @default false
-     */
-    isLandscape?: boolean,
-
-    /**
-     * Whether the `meta viewport` tag is taken into account.
-     * @default false
-     */
-    isMobile?: boolean,
-
-    /** The page width in pixels. */
-    width: number,
+   /**
+    * Specify device scale factor (can be thought of as dpr).
+    * @default 1
+    */
+   deviceScaleFactor?: number,
+   /**
+    * Specifies if viewport supports touch events.
+    * @default false
+    */
+   hasTouch?: boolean,
+   /** The page height in pixels. */
+   height: number,
+   /**
+    * Specifies if viewport is in landscape mode.
+    * @default false
+    */
+   isLandscape?: boolean,
+   /**
+    * Whether the `meta viewport` tag is taken into account.
+    * @default false
+    */
+   isMobile?: boolean,
+   /** The page width in pixels. */
+   width: number,
+   ...
   };
 
   /** Page emulation options. */
   declare type EmulateOptions = {
-    /** The emulated user-agent. */
-    userAgent?: string,
-
-    /** The viewport emulation options. */
-    viewport?: Viewport,
+   /** The emulated user-agent. */
+   userAgent?: string,
+   /** The viewport emulation options. */
+   viewport?: Viewport,
+   ...
   };
 
   declare type EvaluateFn = string | ((...args: Array<mixed>) => mixed);
@@ -314,16 +293,17 @@ declare module 'puppeteer' {
 
   /** The navigation options. */
   declare type NavigationOptions = {
-    /**
-     * Maximum navigation time in milliseconds, pass 0 to disable timeout.
-     * @default 30000
-     */
-    timeout?: number,
-    /**
-     * When to consider navigation succeeded.
-     * @default load Navigation is consider when the `load` event is fired.
-     */
-    waitUntil?: LoadEvent | Array<LoadEvent>,
+   /**
+    * Maximum navigation time in milliseconds, pass 0 to disable timeout.
+    * @default 30000
+    */
+   timeout?: number,
+   /**
+    * When to consider navigation succeeded.
+    * @default load Navigation is consider when the `load` event is fired.
+    */
+   waitUntil?: LoadEvent | Array<LoadEvent>,
+   ...
   };
 
   declare type PDFFormat =
@@ -339,342 +319,301 @@ declare module 'puppeteer' {
     | 'A5';
 
   declare type PDFOptions = {
-    /**
-     * Display header and footer.
-     * @default false
-     */
-    displayHeaderFooter?: boolean,
-
-    /**
-     * HTML template for the print footer. Should be valid HTML markup with following classes used to inject printing values into them:
-     * - `date` formatted print date
-     * - `title` document title
-     * - `url` document location
-     * - `pageNumber` current page number
-     * - `totalPages` total pages in the document
-     */
-    footerTemplate?: string,
-
-    /** Paper format. If set, takes priority over width or height options. Defaults to 'Letter'. */
-    format?: PDFFormat,
-
-    /**
-     * HTML template for the print header. Should be valid HTML markup with following classes used to inject printing values into them:
-     * - `date` formatted print date
-     * - `title` document title
-     * - `url` document location
-     * - `pageNumber` current page number
-     * - `totalPages` total pages in the document
-     */
-    headerTemplate?: string,
-
-    /** Paper height, accepts values labeled with units. */
-    height?: string,
-
-    /**
-     * Paper orientation.
-     * @default false
-     */
-    landscape?: boolean,
-
-    /** Paper margins, defaults to none.  */
-    margin?: {
-      /** Bottom margin, accepts values labeled with units. */
-      bottom?: string,
-
-      /** Left margin, accepts values labeled with units. */
-      left?: string,
-
-      /** Right margin, accepts values labeled with units. */
-      right?: string,
-
-      /** Top margin, accepts values labeled with units. */
-      top?: string,
-    },
-
-    /**
-     * Paper ranges to print, e.g., '1-5, 8, 11-13'. Defaults to the empty
-     * string, which means print all pages.
-     */
-    pageRanges?: string,
-
-    /**
-     * The file path to save the PDF to.
-     * If `path` is a relative path, then it is resolved relative to current working directory.
-     * If no path is provided, the PDF won't be saved to the disk.
-     */
-    path?: string,
-
-    /**
-     * Print background graphics.
-     * @default false
-     */
-    printBackground?: boolean,
-
-    /**
-     * Scale of the webpage rendering.
-     * @default 1
-     */
-    scale?: number,
-
-    /** Paper width, accepts values labeled with units. */
-    width?: string,
+   /**
+    * Display header and footer.
+    * @default false
+    */
+   displayHeaderFooter?: boolean,
+   /**
+    * HTML template for the print footer. Should be valid HTML markup with following classes used to inject printing values into them:
+    * - `date` formatted print date
+    * - `title` document title
+    * - `url` document location
+    * - `pageNumber` current page number
+    * - `totalPages` total pages in the document
+    */
+   footerTemplate?: string,
+   /** Paper format. If set, takes priority over width or height options. Defaults to 'Letter'. */
+   format?: PDFFormat,
+   /**
+    * HTML template for the print header. Should be valid HTML markup with following classes used to inject printing values into them:
+    * - `date` formatted print date
+    * - `title` document title
+    * - `url` document location
+    * - `pageNumber` current page number
+    * - `totalPages` total pages in the document
+    */
+   headerTemplate?: string,
+   /** Paper height, accepts values labeled with units. */
+   height?: string,
+   /**
+    * Paper orientation.
+    * @default false
+    */
+   landscape?: boolean,
+   /** Paper margins, defaults to none.  */
+   margin?: {
+    /** Bottom margin, accepts values labeled with units. */
+    bottom?: string,
+    /** Left margin, accepts values labeled with units. */
+    left?: string,
+    /** Right margin, accepts values labeled with units. */
+    right?: string,
+    /** Top margin, accepts values labeled with units. */
+    top?: string,
+    ...
+   },
+   /**
+    * Paper ranges to print, e.g., '1-5, 8, 11-13'. Defaults to the empty
+    * string, which means print all pages.
+    */
+   pageRanges?: string,
+   /**
+    * The file path to save the PDF to.
+    * If `path` is a relative path, then it is resolved relative to current working directory.
+    * If no path is provided, the PDF won't be saved to the disk.
+    */
+   path?: string,
+   /**
+    * Print background graphics.
+    * @default false
+    */
+   printBackground?: boolean,
+   /**
+    * Scale of the webpage rendering.
+    * @default 1
+    */
+   scale?: number,
+   /** Paper width, accepts values labeled with units. */
+   width?: string,
+   ...
   };
 
   /** Defines the screenshot options. */
   declare type ScreenshotOptions = {
-    /**
-     * An object which specifies clipping region of the page.
-     */
-    clip?: BoundingBox,
-
-    /**
-     * When true, takes a screenshot of the full scrollable page.
-     * @default false
-     */
-    fullPage?: boolean,
-
-    /**
-     * Hides default white background and allows capturing screenshots with transparency.
-     * @default false
-     */
-    omitBackground?: boolean,
-
-    /**
-     * The file path to save the image to. The screenshot type will be inferred from file extension.
-     * If `path` is a relative path, then it is resolved relative to current working directory.
-     * If no path is provided, the image won't be saved to the disk.
-     */
-    path?: string,
-
-    /** The quality of the image, between 0-100. Not applicable to png images. */
-    quality?: number,
-
-    /**
-     * The screenshot type.
-     * @default png
-     */
-    type?: 'jpeg' | 'png',
+   /**
+    * An object which specifies clipping region of the page.
+    */
+   clip?: BoundingBox,
+   /**
+    * When true, takes a screenshot of the full scrollable page.
+    * @default false
+    */
+   fullPage?: boolean,
+   /**
+    * Hides default white background and allows capturing screenshots with transparency.
+    * @default false
+    */
+   omitBackground?: boolean,
+   /**
+    * The file path to save the image to. The screenshot type will be inferred from file extension.
+    * If `path` is a relative path, then it is resolved relative to current working directory.
+    * If no path is provided, the image won't be saved to the disk.
+    */
+   path?: string,
+   /** The quality of the image, between 0-100. Not applicable to png images. */
+   quality?: number,
+   /**
+    * The screenshot type.
+    * @default png
+    */
+   type?: 'jpeg' | 'png',
+   ...
   };
 
   /** Options for `addStyleTag` */
   declare type StyleTagOptions = {
-    /** Raw CSS content to be injected into frame. */
-    content?: string,
-
-    /** Path to the CSS file to be injected into frame. If `path` is a relative path, then it is resolved relative to current working directory. */
-    path?: string,
-
-    /** Url of the <link> tag. */
-    url?: string,
+   /** Raw CSS content to be injected into frame. */
+   content?: string,
+   /** Path to the CSS file to be injected into frame. If `path` is a relative path, then it is resolved relative to current working directory. */
+   path?: string,
+   /** Url of the <link> tag. */
+   url?: string,
+   ...
   };
   /** Options for `addScriptTag` */
   declare type ScriptTagOptions = {
-    /** Raw JavaScript content to be injected into frame. */
-    content?: string,
-
-    /** Path to the JavaScript file to be injected into frame. If `path` is a relative path, then it is resolved relative to current working directory. */
-    path?: string,
-
-    /** Script type. Use 'module' in order to load a Javascript ES6 module. */
-    type?: string,
-
-    /** Url of a script to be added. */
-    url?: string,
+   /** Raw JavaScript content to be injected into frame. */
+   content?: string,
+   /** Path to the JavaScript file to be injected into frame. If `path` is a relative path, then it is resolved relative to current working directory. */
+   path?: string,
+   /** Script type. Use 'module' in order to load a Javascript ES6 module. */
+   type?: string,
+   /** Url of a script to be added. */
+   url?: string,
+   ...
   };
 
   declare type PageFnOptions = {
-    polling?: 'raf' | 'mutation' | number,
-    timeout?: number,
+   polling?: 'raf' | 'mutation' | number,
+   timeout?: number,
+   ...
   };
 
   declare type BoundingBox = {
-    /** The height. */
-    height: number,
-
-    /** The width. */
-    width: number,
-
-    /** The x-coordinate of top-left corner. */
-    x: number,
-
-    /** The y-coordinate of top-left corner. */
-    y: number,
+   /** The height. */
+   height: number,
+   /** The width. */
+   width: number,
+   /** The x-coordinate of top-left corner. */
+   x: number,
+   /** The y-coordinate of top-left corner. */
+   y: number,
+   ...
   };
 
   /**
    * Represents an in-page DOM element. ElementHandles can be created with the page.$ method.
    */
   declare type ElementHandle = JSHandle & {
-    /**
-     * The method runs element.querySelector within the page. If no element matches the selector, the return value resolve to null.
-     * @param selector A selector to query element for
-     * @since 0.13.0
-     */
-    $(selector: string): Promise<ElementHandle | null>,
-
-    /**
-     * The method runs element.querySelectorAll within the page. If no elements match the selector, the return value resolve to [].
-     * @param selector A selector to query element for
-     * @since 0.13.0
-     */
-    $$(selector: string): Promise<Array<ElementHandle>>,
-
-    /**
-     * @param selector XPath expression to evaluate.
-     */
-    $x(expression: string): Promise<Array<ElementHandle>>,
-
-    /**
-     * This method returns the value resolve to the bounding box of the element (relative to the main frame), or null if the element is not visible.
-     */
-    boundingBox(): Promise<BoundingBox | null>,
-
-    /**
-     * This method scrolls element into view if needed, and then uses page.mouse to click in the center of the element.
-     * If the element is detached from DOM, the method throws an error.
-     * @param options Specifies the options.
-     * @since 0.9.0
-     */
-    click(options?: ClickOptions): Promise<void>,
-
-    /**
-     * @returns Resolves to the content frame for element handles referencing iframe nodes, or null otherwise.
-     * @since 1.2.0
-     */
-    contentFrame(): Promise<?Frame>,
-
-    /**
-     * Calls focus on the element.
-     */
-    focus(): Promise<void>,
-
-    /**
-     * This method scrolls element into view if needed, and then uses page.mouse to hover over the center of the element.
-     * If the element is detached from DOM, the method throws an error.
-     */
-    hover(): Promise<void>,
-
-    /**
-     * Focuses the element, and then uses keyboard.down and keyboard.up.
-     * @param key Name of key to press, such as ArrowLeft. See USKeyboardLayout for a list of all key names.
-     * @param options The text and delay options.
-     */
-    press(key: string, options?: { delay?: number, text?: string }): Promise<void>,
-
-    /**
-     * This method scrolls element into view if needed, and then uses page.screenshot to take a screenshot of the element.
-     * If the element is detached from DOM, the method throws an error.
-     * @param options Same options as in page.screenshot.
-     */
-    screenshot(options?: ScreenshotOptions): Promise<Buffer>,
-
-    /**
-     * This method scrolls element into view if needed, and then uses touchscreen.tap to tap in the center of the element.
-     * If the element is detached from DOM, the method throws an error.
-     */
-    tap(): Promise<void>,
-
-    toString(): string,
-
-    /**
-     * Focuses the element, and then sends a keydown, keypress/input, and keyup event for each character in the text.
-     * @param text A text to type into a focused element.
-     * @param options The typing options.
-     */
-    type(text: string, options?: { delay: number }): Promise<void>,
-
-    /**
-     * This method expects elementHandle to point to an input element.
-     * @param filePaths Sets the value of the file input these paths. If some of the filePaths are relative paths, then they are resolved relative to current working directory.
-     */
-    uploadFile(...filePaths: Array<string>): Promise<void>,
+   /**
+    * The method runs element.querySelector within the page. If no element matches the selector, the return value resolve to null.
+    * @param selector A selector to query element for
+    * @since 0.13.0
+    */
+   $(selector: string): Promise<ElementHandle | null>,
+   /**
+    * The method runs element.querySelectorAll within the page. If no elements match the selector, the return value resolve to [].
+    * @param selector A selector to query element for
+    * @since 0.13.0
+    */
+   $$(selector: string): Promise<Array<ElementHandle>>,
+   /**
+    * @param selector XPath expression to evaluate.
+    */
+   $x(expression: string): Promise<Array<ElementHandle>>,
+   /**
+    * This method returns the value resolve to the bounding box of the element (relative to the main frame), or null if the element is not visible.
+    */
+   boundingBox(): Promise<BoundingBox | null>,
+   /**
+    * This method scrolls element into view if needed, and then uses page.mouse to click in the center of the element.
+    * If the element is detached from DOM, the method throws an error.
+    * @param options Specifies the options.
+    * @since 0.9.0
+    */
+   click(options?: ClickOptions): Promise<void>,
+   /**
+    * @returns Resolves to the content frame for element handles referencing iframe nodes, or null otherwise.
+    * @since 1.2.0
+    */
+   contentFrame(): Promise<?Frame>,
+   /**
+    * Calls focus on the element.
+    */
+   focus(): Promise<void>,
+   /**
+    * This method scrolls element into view if needed, and then uses page.mouse to hover over the center of the element.
+    * If the element is detached from DOM, the method throws an error.
+    */
+   hover(): Promise<void>,
+   /**
+    * Focuses the element, and then uses keyboard.down and keyboard.up.
+    * @param key Name of key to press, such as ArrowLeft. See USKeyboardLayout for a list of all key names.
+    * @param options The text and delay options.
+    */
+   press(key: string, options?: {
+    delay?: number,
+    text?: string,
+    ...
+   }): Promise<void>,
+   /**
+    * This method scrolls element into view if needed, and then uses page.screenshot to take a screenshot of the element.
+    * If the element is detached from DOM, the method throws an error.
+    * @param options Same options as in page.screenshot.
+    */
+   screenshot(options?: ScreenshotOptions): Promise<Buffer>,
+   /**
+    * This method scrolls element into view if needed, and then uses touchscreen.tap to tap in the center of the element.
+    * If the element is detached from DOM, the method throws an error.
+    */
+   tap(): Promise<void>,
+   toString(): string,
+   /**
+    * Focuses the element, and then sends a keydown, keypress/input, and keyup event for each character in the text.
+    * @param text A text to type into a focused element.
+    * @param options The typing options.
+    */
+   type(text: string, options?: { delay: number, ... }): Promise<void>,
+   /**
+    * This method expects elementHandle to point to an input element.
+    * @param filePaths Sets the value of the file input these paths. If some of the filePaths are relative paths, then they are resolved relative to current working directory.
+    */
+   uploadFile(...filePaths: Array<string>): Promise<void>,
+   ...
   };
 
   /** The class represents a context for JavaScript execution. */
   declare type ExecutionContext = {
-    evaluate(fn: EvaluateFn, ...args: Array<mixed>): Promise<mixed>,
-    evaluateHandle(fn: EvaluateFn, ...args: Array<mixed>): Promise<JSHandle>,
-    queryObjects(prototypeHandle: JSHandle): JSHandle,
+   evaluate(fn: EvaluateFn, ...args: Array<mixed>): Promise<mixed>,
+   evaluateHandle(fn: EvaluateFn, ...args: Array<mixed>): Promise<JSHandle>,
+   queryObjects(prototypeHandle: JSHandle): JSHandle,
+   ...
   };
 
   /** JSHandle represents an in-page JavaScript object. */
   declare type JSHandle = {
-    /**
-     * Returns a ElementHandle
-     */
-    asElement(): ElementHandle | null,
-
-    /**
-     * Stops referencing the element handle.
-     */
-    dispose(): Promise<void>,
-
-    /**
-     * Gets the execution context.
-     */
-    executionContext(): ExecutionContext,
-
-    /**
-     * Returns a map with property names as keys and JSHandle instances for the property values.
-     */
-    getProperties(): Promise<Map<string, JSHandle>>,
-
-    /**
-     * Fetches a single property from the objectHandle.
-     * @param propertyName The property to get.
-     */
-    getProperty(propertyName: string): Promise<JSHandle>,
-
-    /**
-     * Returns a JSON representation of the object.
-     * The JSON is generated by running JSON.stringify on the object in page and consequent JSON.parse in puppeteer.
-     * @throws The method will throw if the referenced object is not stringifiable.
-     */
-    jsonValue(): Promise<mixed>,
+   /**
+    * Returns a ElementHandle
+    */
+   asElement(): ElementHandle | null,
+   /**
+    * Stops referencing the element handle.
+    */
+   dispose(): Promise<void>,
+   /**
+    * Gets the execution context.
+    */
+   executionContext(): ExecutionContext,
+   /**
+    * Returns a map with property names as keys and JSHandle instances for the property values.
+    */
+   getProperties(): Promise<Map<string, JSHandle>>,
+   /**
+    * Fetches a single property from the objectHandle.
+    * @param propertyName The property to get.
+    */
+   getProperty(propertyName: string): Promise<JSHandle>,
+   /**
+    * Returns a JSON representation of the object.
+    * The JSON is generated by running JSON.stringify on the object in page and consequent JSON.parse in puppeteer.
+    * @throws The method will throw if the referenced object is not stringifiable.
+    */
+   jsonValue(): Promise<mixed>,
+   ...
   };
 
   declare type Metrics = {
-    /** Number of documents in the page. */
-    Documents: number,
-
-    /** Number of frames in the page. */
-    Frames: number,
-
-    /** Number of events in the page. */
-    JSEventListeners: number,
-
-    /** Total JavaScript heap size. */
-    JSHeapTotalSize: number,
-
-    /** Used JavaScript heap size. */
-    JSHeapUsedSize: number,
-    /** Total number of full or partial page layout. */
-    LayoutCount: number,
-
-    /** Combined durations of all page layouts. */
-    LayoutDuration: number,
-
-    /** Number of DOM nodes in the page. */
-    Nodes: number,
-
-    /** Total number of page style recalculations. */
-    RecalcStyleCount: number,
-
-    /** Combined duration of all page style recalculations. */
-    RecalcStyleDuration: number,
-
-    /** Combined duration of JavaScript execution. */
-    ScriptDuration: number,
-
-    /** Combined duration of all tasks performed by the browser. */
-    TaskDuration: number,
-
-    /** The timestamp when the metrics sample was taken. */
-    Timestamp: number,
+   /** Number of documents in the page. */
+   Documents: number,
+   /** Number of frames in the page. */
+   Frames: number,
+   /** Number of events in the page. */
+   JSEventListeners: number,
+   /** Total JavaScript heap size. */
+   JSHeapTotalSize: number,
+   /** Used JavaScript heap size. */
+   JSHeapUsedSize: number,
+   /** Total number of full or partial page layout. */
+   LayoutCount: number,
+   /** Combined durations of all page layouts. */
+   LayoutDuration: number,
+   /** Number of DOM nodes in the page. */
+   Nodes: number,
+   /** Total number of page style recalculations. */
+   RecalcStyleCount: number,
+   /** Combined duration of all page style recalculations. */
+   RecalcStyleDuration: number,
+   /** Combined duration of JavaScript execution. */
+   ScriptDuration: number,
+   /** Combined duration of all tasks performed by the browser. */
+   TaskDuration: number,
+   /** The timestamp when the metrics sample was taken. */
+   Timestamp: number,
+   ...
   };
 
-  declare type Headers = { [key: string]: string };
+  declare type Headers = { [key: string]: string, ... };
   declare type HttpMethod = 'GET' | 'POST' | 'PATCH' | 'PUT' | 'DELETE' | 'OPTIONS';
 
   declare type ResourceType =
@@ -693,127 +632,110 @@ declare module 'puppeteer' {
     | 'other';
 
   declare type Overrides = {
-    headers?: Headers,
-    method?: HttpMethod,
-    postData?: string,
-    url?: string,
+   headers?: Headers,
+   method?: HttpMethod,
+   postData?: string,
+   url?: string,
+   ...
   };
 
   /** Represents a page request. */
   declare type Request = {
-    /**
-     * Aborts request.
-     * To use this, request interception should be enabled with `page.setRequestInterception`.
-     * @throws An exception is immediately thrown if the request interception is not enabled.
-     */
-    abort(): Promise<void>,
+   /**
+    * Aborts request.
+    * To use this, request interception should be enabled with `page.setRequestInterception`.
+    * @throws An exception is immediately thrown if the request interception is not enabled.
+    */
+   abort(): Promise<void>,
+   /**
+    * Continues request with optional request overrides.
+    * To use this, request interception should be enabled with `page.setRequestInterception`.
+    * @throws An exception is immediately thrown if the request interception is not enabled.
+    */
+   continue(overrides?: Overrides): Promise<void>,
+   /**
+    * @returns The `Frame` object that initiated the request, or `null` if navigating to error pages
+    */
+   frame(): Promise<?Frame>,
+   /**
+    * An object with HTTP headers associated with the request.
+    * All header names are lower-case.
+    */
+   headers(): Headers,
+   /** Returns the request's method (GET, POST, etc.) */
 
-    /**
-     * Continues request with optional request overrides.
-     * To use this, request interception should be enabled with `page.setRequestInterception`.
-     * @throws An exception is immediately thrown if the request interception is not enabled.
-     */
-    continue(overrides?: Overrides): Promise<void>,
-
-    /**
-     * @returns The `Frame` object that initiated the request, or `null` if navigating to error pages
-     */
-    frame(): Promise<?Frame>,
-
-    /**
-     * An object with HTTP headers associated with the request.
-     * All header names are lower-case.
-     */
-    headers(): Headers,
-    /** Returns the request's method (GET, POST, etc.) */
-
-    method(): HttpMethod,
-
-    /** Contains the request's post body, if any. */
-    postData(): ?string,
-
-    /**
-     * A `redirectChain` is a chain of requests initiated to fetch a resource.
-     *
-     * - If there are no redirects and the request was successful, the chain will be empty.
-     * - If a server responds with at least a single redirect, then the chain will contain all the requests that were redirected.
-     *
-     * `redirectChain` is shared between all the requests of the same chain.
-     *
-     * @since 1.2.0
-     */
-    redirectChain(): Array<Request>,
-
-    /** Contains the request's resource type as it was perceived by the rendering engine.  */
-    resourceType(): ResourceType,
-
-    /**
-     * Fulfills request with given response.
-     * To use this, request interception should be enabled with `page.setRequestInterception`.
-     * @throws An exception is immediately thrown if the request interception is not enabled.
-     * @param response The response options that will fulfill this request.
-     */
-    respond(response: RespondOptions): Promise<void>,
-
-    /** A matching `Response` object, or `null` if the response has not been received yet. */
-    response(): ?Response,
-
-    /** Contains the URL of the request. */
-    url(): string,
+   method(): HttpMethod,
+   /** Contains the request's post body, if any. */
+   postData(): ?string,
+   /**
+    * A `redirectChain` is a chain of requests initiated to fetch a resource.
+    *
+    * - If there are no redirects and the request was successful, the chain will be empty.
+    * - If a server responds with at least a single redirect, then the chain will contain all the requests that were redirected.
+    *
+    * `redirectChain` is shared between all the requests of the same chain.
+    *
+    * @since 1.2.0
+    */
+   redirectChain(): Array<Request>,
+   /** Contains the request's resource type as it was perceived by the rendering engine.  */
+   resourceType(): ResourceType,
+   /**
+    * Fulfills request with given response.
+    * To use this, request interception should be enabled with `page.setRequestInterception`.
+    * @throws An exception is immediately thrown if the request interception is not enabled.
+    * @param response The response options that will fulfill this request.
+    */
+   respond(response: RespondOptions): Promise<void>,
+   /** A matching `Response` object, or `null` if the response has not been received yet. */
+   response(): ?Response,
+   /** Contains the URL of the request. */
+   url(): string,
+   ...
   };
 
   /** Options for `Request.respond` method */
   declare type RespondOptions = {
-    /** Specifies the response body. */
-    body?: Buffer | string,
-
-    /** Specifies the Content-Type response header. */
-    contentType?: string,
-
-    /** Specifies the response headers. */
-    headers?: Headers,
-
-    /**
-     * Specifies the response status code.
-     * @default 200
-     */
-    status?: number,
+   /** Specifies the response body. */
+   body?: Buffer | string,
+   /** Specifies the Content-Type response header. */
+   contentType?: string,
+   /** Specifies the response headers. */
+   headers?: Headers,
+   /**
+    * Specifies the response status code.
+    * @default 200
+    */
+   status?: number,
+   ...
   };
 
   /** Response class represents responses which are received by page. */
   declare type Response = {
-    /** Promise which resolves to a buffer with response body. */
-    buffer(): Promise<Buffer>,
-
-    /** True if the response was served from either the browser's disk cache or memory cache. */
-    fromCache(): boolean,
-
-    /** True if the response was served by a service worker. */
-    fromServiceWorker(): boolean,
-
-    /** An object with HTTP headers associated with the response. All header names are lower-case. */
-    headers(): Headers,
-
-    /**
-     * Promise which resolves to a JSON representation of response body.
-     * @throws This method will throw if the response body is not parsable via `JSON.parse`.
-     */
-    json(): Promise<mixed>,
-
-    /** Contains a boolean stating whether the response was successful (status in the range 200-299) or not. */
-    ok(): boolean,
-
-    /** A matching Request object. */
-    request(): Request,
-
-    /** Contains the status code of the response (e.g., 200 for a success). */
-    status(): number,
-
-    /** Promise which resolves to a text representation of response body. */
-    text(): Promise<string>,
-
-    /** Contains the URL of the response. */
-    url(): string,
+   /** Promise which resolves to a buffer with response body. */
+   buffer(): Promise<Buffer>,
+   /** True if the response was served from either the browser's disk cache or memory cache. */
+   fromCache(): boolean,
+   /** True if the response was served by a service worker. */
+   fromServiceWorker(): boolean,
+   /** An object with HTTP headers associated with the response. All header names are lower-case. */
+   headers(): Headers,
+   /**
+    * Promise which resolves to a JSON representation of response body.
+    * @throws This method will throw if the response body is not parsable via `JSON.parse`.
+    */
+   json(): Promise<mixed>,
+   /** Contains a boolean stating whether the response was successful (status in the range 200-299) or not. */
+   ok(): boolean,
+   /** A matching Request object. */
+   request(): Request,
+   /** Contains the status code of the response (e.g., 200 for a success). */
+   status(): number,
+   /** Promise which resolves to a text representation of response body. */
+   text(): Promise<string>,
+   /** Contains the URL of the response. */
+   url(): string,
+   ...
   };
 
   declare class FrameBase {
@@ -909,77 +831,72 @@ declare module 'puppeteer' {
 
     waitForSelector: (
       selector: string,
-      options?: {hidden?: boolean, timeout?: number, visible?: boolean}
+      options?: {
+       hidden?: boolean,
+       timeout?: number,
+       visible?: boolean,
+       ...
+      }
     ) => Promise<ElementHandle>;
   }
 
   declare type Frame = FrameBase & {
-    childFrames(): Array<Frame>,
-
-    /** Execution context associated with this frame. */
-    executionContext(): ExecutionContext,
-
-    /** Returns `true` if the frame has been detached, or `false` otherwise. */
-    isDetached(): boolean,
-
-    /** Returns frame's name attribute as specified in the tag. */
-    name(): string,
-
-    /** Returns parent frame, if any. Detached frames and main frames return null. */
-    parentFrame(): ?Frame,
+   childFrames(): Array<Frame>,
+   /** Execution context associated with this frame. */
+   executionContext(): ExecutionContext,
+   /** Returns `true` if the frame has been detached, or `false` otherwise. */
+   isDetached(): boolean,
+   /** Returns frame's name attribute as specified in the tag. */
+   name(): string,
+   /** Returns parent frame, if any. Detached frames and main frames return null. */
+   parentFrame(): ?Frame,
+   ...
   };
 
   declare type PageEventObj = {
-    /**
-     * Emitted when JavaScript within the page calls one of console API methods, e.g. console.log or console.dir.
-     * Also emitted if the page throws an error or a warning.
-     */
-    console: ConsoleMessage,
-
-    /**
-     * Emitted when a JavaScript dialog appears, such as alert, prompt, confirm or beforeunload.
-     * Puppeteer can respond to the dialog via Dialog's accept or dismiss methods.
-     */
-    dialog: Dialog,
-
-    /** Emitted when the page crashes. */
-    error: Error,
-
-    /** Emitted when a frame is attached. */
-    frameattached: Frame,
-
-    /** Emitted when a frame is detached. */
-    framedetached: Frame,
-
-    /** Emitted when a frame is navigated to a new url. */
-    framenavigated: Frame,
-
-    /** Emitted when the JavaScript load event is dispatched. */
-    load: void,
-
-    /**
-     * Emitted when the JavaScript code makes a call to `console.timeStamp`.
-     * For the list of metrics see `page.metrics`.
-     */
-    metrics: { metrics: mixed, title: string },
-
-    /** Emitted when an uncaught exception happens within the page. */
-    pageerror: string,
-
-    /**
-     * Emitted when a page issues a request. The request object is read-only.
-     * In order to intercept and mutate requests, see page.setRequestInterceptionEnabled.
-     */
-    request: Request,
-
-    /** Emitted when a request fails, for example by timing out. */
-    requestfailed: Request,
-
-    /** Emitted when a request finishes successfully. */
-    requestfinished: Request,
-
-    /** Emitted when a response is received. */
-    response: Response,
+   /**
+    * Emitted when JavaScript within the page calls one of console API methods, e.g. console.log or console.dir.
+    * Also emitted if the page throws an error or a warning.
+    */
+   console: ConsoleMessage,
+   /**
+    * Emitted when a JavaScript dialog appears, such as alert, prompt, confirm or beforeunload.
+    * Puppeteer can respond to the dialog via Dialog's accept or dismiss methods.
+    */
+   dialog: Dialog,
+   /** Emitted when the page crashes. */
+   error: Error,
+   /** Emitted when a frame is attached. */
+   frameattached: Frame,
+   /** Emitted when a frame is detached. */
+   framedetached: Frame,
+   /** Emitted when a frame is navigated to a new url. */
+   framenavigated: Frame,
+   /** Emitted when the JavaScript load event is dispatched. */
+   load: void,
+   /**
+    * Emitted when the JavaScript code makes a call to `console.timeStamp`.
+    * For the list of metrics see `page.metrics`.
+    */
+   metrics: {
+    metrics: mixed,
+    title: string,
+    ...
+   },
+   /** Emitted when an uncaught exception happens within the page. */
+   pageerror: string,
+   /**
+    * Emitted when a page issues a request. The request object is read-only.
+    * In order to intercept and mutate requests, see page.setRequestInterceptionEnabled.
+    */
+   request: Request,
+   /** Emitted when a request fails, for example by timing out. */
+   requestfailed: Request,
+   /** Emitted when a request finishes successfully. */
+   requestfinished: Request,
+   /** Emitted when a response is received. */
+   response: Response,
+   ...
   };
 
   /** Page provides methods to interact with a single tab in Chromium. One Browser instance might have multiple Page instances. */
@@ -1241,7 +1158,7 @@ declare module 'puppeteer' {
      * @param text: A text to type into a focused element.
      * @param options: The typing parameters.
      */
-    type(selector: string, text: string, options?: { delay: number }): Promise<void>;
+    type(selector: string, text: string, options?: { delay: number, ... }): Promise<void>;
 
     /**
      * The page's URL. This is a shortcut for `page.mainFrame().url()`
@@ -1321,105 +1238,88 @@ declare module 'puppeteer' {
   }
 
   declare type BrowserEventObj = {
-    /** Emitted when puppeteer gets disconnected from the browser instance. */
-    disconnected: void,
-
-    /** Emitted when the url of a target changes. */
-    targetchanged: Target,
-
-    /** Emitted when a target is created, for example when a new page is opened by `window.open` or `browser.newPage`. */
-    targetcreated: Target,
-
-    /** Emitted when a target is destroyed, for example when a page is closed. */
-    targetdestroyed: Target,
+   /** Emitted when puppeteer gets disconnected from the browser instance. */
+   disconnected: void,
+   /** Emitted when the url of a target changes. */
+   targetchanged: Target,
+   /** Emitted when a target is created, for example when a new page is opened by `window.open` or `browser.newPage`. */
+   targetcreated: Target,
+   /** Emitted when a target is destroyed, for example when a page is closed. */
+   targetdestroyed: Target,
+   ...
   };
 
   declare type Target = {
-    /** Creates a Chrome Devtools Protocol session attached to the target. */
-    createCDPSession(): Promise<CDPSession>,
-
-    /** Returns the target `Page` or a `null` if the type of the page is not "page". */
-    page(): Promise<Page>,
-
-    /** Identifies what kind of target this is.  */
-    type(): 'page' | 'service_worker' | 'other',
-
-    /** Returns the target URL. */
-    url(): string,
+   /** Creates a Chrome Devtools Protocol session attached to the target. */
+   createCDPSession(): Promise<CDPSession>,
+   /** Returns the target `Page` or a `null` if the type of the page is not "page". */
+   page(): Promise<Page>,
+   /** Identifies what kind of target this is.  */
+   type(): 'page' | 'service_worker' | 'other',
+   /** Returns the target URL. */
+   url(): string,
+   ...
   };
 
   declare type LaunchOptions = {
-    /** Whether to open chrome in appMode. Defaults to false. */
-    appMode?: boolean,
-
-    /**
-     * Additional arguments to pass to the Chromium instance. List of Chromium
-     * flags can be found here.
-     */
-    args?: Array<string>,
-
-    /** Whether to auto-open DevTools panel for each tab. If this option is true, the headless option will be set false. */
-    devtools?: boolean,
-
-    /**
-     * Whether to pipe browser process stdout and stderr into process.stdout and
-     * process.stderr. Defaults to false.
-     */
-    dumpio?: boolean,
-
-    /** Specify environment variables that will be visible to Chromium. Defaults to process.env. */
-    env?: mixed,
-
-    /**
-     * Path to a Chromium executable to run instead of bundled Chromium. If
-     * executablePath is a relative path, then it is resolved relative to current
-     * working directory.
-     */
-    executablePath?: string,
-
-    /** Close chrome process on SIGHUP. Defaults to true. */
-    handleSIGHUP?: boolean,
-
-    /** Close chrome process on Ctrl-C. Defaults to true. */
-    handleSIGINT?: boolean,
-
-    /** Close chrome process on SIGTERM. Defaults to true. */
-    handleSIGTERM?: boolean,
-
-    /** Whether to run Chromium in headless mode. Defaults to true. */
-    headless?: boolean,
-
-    /** Do not use `puppeteer.defaultArgs()` for launching Chromium. Defaults to false. */
-    ignoreDefaultArgs?: boolean,
-
-    /** Whether to ignore HTTPS errors during navigation. Defaults to false. */
-    ignoreHTTPSErrors?: boolean,
-
-    /**
-     * Slows down Puppeteer operations by the specified amount of milliseconds.
-     * Useful so that you can see what is going on.
-     */
-    slowMo?: number,
-
-    /**
-     * Maximum time in milliseconds to wait for the Chrome instance to start.
-     * Defaults to 30000 (30 seconds). Pass 0 to disable timeout.
-     */
-    timeout?: number,
-
-    /** Path to a User Data Directory. */
-    userDataDir?: string,
+   /** Whether to open chrome in appMode. Defaults to false. */
+   appMode?: boolean,
+   /**
+    * Additional arguments to pass to the Chromium instance. List of Chromium
+    * flags can be found here.
+    */
+   args?: Array<string>,
+   /** Whether to auto-open DevTools panel for each tab. If this option is true, the headless option will be set false. */
+   devtools?: boolean,
+   /**
+    * Whether to pipe browser process stdout and stderr into process.stdout and
+    * process.stderr. Defaults to false.
+    */
+   dumpio?: boolean,
+   /** Specify environment variables that will be visible to Chromium. Defaults to process.env. */
+   env?: mixed,
+   /**
+    * Path to a Chromium executable to run instead of bundled Chromium. If
+    * executablePath is a relative path, then it is resolved relative to current
+    * working directory.
+    */
+   executablePath?: string,
+   /** Close chrome process on SIGHUP. Defaults to true. */
+   handleSIGHUP?: boolean,
+   /** Close chrome process on Ctrl-C. Defaults to true. */
+   handleSIGINT?: boolean,
+   /** Close chrome process on SIGTERM. Defaults to true. */
+   handleSIGTERM?: boolean,
+   /** Whether to run Chromium in headless mode. Defaults to true. */
+   headless?: boolean,
+   /** Do not use `puppeteer.defaultArgs()` for launching Chromium. Defaults to false. */
+   ignoreDefaultArgs?: boolean,
+   /** Whether to ignore HTTPS errors during navigation. Defaults to false. */
+   ignoreHTTPSErrors?: boolean,
+   /**
+    * Slows down Puppeteer operations by the specified amount of milliseconds.
+    * Useful so that you can see what is going on.
+    */
+   slowMo?: number,
+   /**
+    * Maximum time in milliseconds to wait for the Chrome instance to start.
+    * Defaults to 30000 (30 seconds). Pass 0 to disable timeout.
+    */
+   timeout?: number,
+   /** Path to a User Data Directory. */
+   userDataDir?: string,
+   ...
   };
 
   declare type ConnectOptions = {
-    /** A browser websocket endpoint to connect to. */
-    browserWSEndpoint?: string,
-
-    /**
-     * Whether to ignore HTTPS errors during navigation.
-     * @default false
-     */
-    ignoreHTTPSErrors?: boolean,
+   /** A browser websocket endpoint to connect to. */
+   browserWSEndpoint?: string,
+   /**
+    * Whether to ignore HTTPS errors during navigation.
+    * @default false
+    */
+   ignoreHTTPSErrors?: boolean,
+   ...
   };
 
   declare interface CDPSession extends events$EventEmitter {
@@ -1437,21 +1337,25 @@ declare module 'puppeteer' {
   }
 
   declare type Coverage = {
-    startCSSCoverage(options?: StartCoverageOptions): Promise<void>,
-    startJSCoverage(options?: StartCoverageOptions): Promise<void>,
-    stopCSSCoverage(): Promise<Array<CoverageEntry>>,
-    stopJSCoverage(): Promise<Array<CoverageEntry>>,
+   startCSSCoverage(options?: StartCoverageOptions): Promise<void>,
+   startJSCoverage(options?: StartCoverageOptions): Promise<void>,
+   stopCSSCoverage(): Promise<Array<CoverageEntry>>,
+   stopJSCoverage(): Promise<Array<CoverageEntry>>,
+   ...
   };
 
-  declare type StartCoverageOptions = {
-    /** Whether to reset coverage on every navigation. Defaults to `true`. */
-    resetOnNavigation?: boolean,
-  };
+  declare type StartCoverageOptions = { /** Whether to reset coverage on every navigation. Defaults to `true`. */
+  resetOnNavigation?: boolean, ... };
 
   declare type CoverageEntry = {
-    ranges: Array<{ end: number, start: number }>,
-    text: string,
-    url: string,
+   ranges: Array<{
+    end: number,
+    start: number,
+    ...
+   }>,
+   text: string,
+   url: string,
+   ...
   };
 
   /** Attaches Puppeteer to an existing Chromium instance */

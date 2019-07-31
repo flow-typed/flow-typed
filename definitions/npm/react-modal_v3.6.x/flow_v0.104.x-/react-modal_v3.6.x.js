@@ -11,32 +11,30 @@ declare module 'react-modal' {
     shouldReturnFocusAfterClose?: boolean,
     parentSelector?: () => HTMLElement | null,
     style?: {
-      content?: {
-        [key: string]: string | number
-      },
-      overlay?: {
-        [key: string]: string | number
-      }
+      content?: { [key: string]: string | number, ... },
+      overlay?: { [key: string]: string | number, ... },
+      ...
     },
     className?: string | {
       base: string,
       afterOpen: string,
-      beforeClose: string
+      beforeClose: string,
+      ...
     },
     overlayClassName?: string | {
       base: string,
       afterOpen: string,
-      beforeClose: string
+      beforeClose: string,
+      ...
     },
     onAfterOpen?: () => void | Promise<void>,
     onRequestClose?: (SyntheticEvent<>) => void,
-    aria?: {
-      [key: string]: string
-    },
+    aria?: { [key: string]: string, ... },
     role?: string,
     contentLabel?: string,
     overlayRef?: (node: ?HTMLElement) => mixed,
     containerRef?: (node: ?HTMLElement) => mixed,
+    ...
   };
 
   declare class Modal extends React$Component<ModalProps> {

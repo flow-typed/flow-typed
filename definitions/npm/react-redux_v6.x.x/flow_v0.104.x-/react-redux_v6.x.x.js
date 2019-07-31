@@ -202,6 +202,7 @@ declare module "react-redux" {
   declare export class Provider<Store> extends React$Component<{
     store: Store,
     children?: React$Node,
+    ...
   }> {}
 
   declare export function createProvider(
@@ -220,6 +221,7 @@ declare module "react-redux" {
     shouldHandleStateChanges?: boolean,
     storeKey?: string,
     forwardRef?: boolean,
+    ...
   };
 
   declare type SelectorFactoryOptions<Com> = {
@@ -232,6 +234,7 @@ declare module "react-redux" {
     displayName: string,
     wrappedComponentName: string,
     WrappedComponent: Com,
+    ...
   };
 
   declare type MapStateToPropsEx<S: Object, SP: Object, RSP: Object> = (
@@ -258,7 +261,7 @@ declare module "react-redux" {
     OP: Object,
     CP: Object,
     EFO: Object,
-    ST: { [_: $Keys<Com>]: any },
+    ST: { [_: $Keys<Com>]: any, ... },
   >(
     selectorFactory: SelectorFactory<Com, D, S, OP, EFO, CP>,
     connectAdvancedOptions: ?(ConnectAdvancedOptions & EFO),
@@ -269,5 +272,6 @@ declare module "react-redux" {
     createProvider: typeof createProvider,
     connect: typeof connect,
     connectAdvanced: typeof connectAdvanced,
+    ...
   };
 }

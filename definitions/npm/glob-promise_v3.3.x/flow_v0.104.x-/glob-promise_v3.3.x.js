@@ -7,7 +7,8 @@ declare module "glob-promise" {
     glob: globPromise$Glob,
     sync: globPromise$Sync,
     hasMagic: globPromise$hasMagic,
-    Glob: Class<globPromise$GlobClass>
+    Glob: Class<globPromise$GlobClass>,
+    ...
   };
 }
 
@@ -55,7 +56,7 @@ declare type globPromise$Options = {|
   strict?: boolean,
   cache?: boolean,
   statCache?: globPromise$StatCache,
-  symlinks?: { [string]: boolean },
+  symlinks?: { [string]: boolean, ... },
   sync?: boolean,
   nounique?: boolean,
   nonull?: boolean,

@@ -6,7 +6,8 @@ declare module "fetch-jsonp" {
   declare type Options = {
     timeout?: number,
     jsonpCallback?: string,
-    jsonpCallbackFunction?: string
+    jsonpCallbackFunction?: string,
+    ...
   };
 
   declare class Response {

@@ -16,7 +16,8 @@ declare type $npm$nock$RecordedCall = {
   status: number,
   response: any,
   headers: Object,
-  reqheader: Object
+  reqheader: Object,
+  ...
 };
 
 declare class $npm$nock$Recorder {
@@ -25,7 +26,8 @@ declare class $npm$nock$Recorder {
     output_objects?: boolean,
     enable_reqheaders_recording?: boolean,
     logging?: (content: any) => any,
-    use_separator: boolean
+    use_separator: boolean,
+    ...
   }): void;
   play(): $npm$nock$RecordedCall[];
 }
@@ -34,7 +36,8 @@ declare type $npm$nock$InterceptorOptions = {
   hostname: string,
   path: string,
   method: string,
-  proto: string
+  proto: string,
+  ...
 };
 
 declare class $npm$nock$NockBack {
@@ -50,7 +53,8 @@ declare class $npm$nock$Nock {
       reqheaders?: Object,
       badheaders?: string[],
       filteringScope?: (scope: string) => boolean,
-      allowUnmocked?: boolean
+      allowUnmocked?: boolean,
+      ...
     }
   ): $npm$nock$Nock;
   static restore(): void;
@@ -97,11 +101,10 @@ declare class $npm$nock$Nock {
   replyWithError(error: mixed): this;
   basicAuth(auth: {
     user: string,
-    pass: string
+    pass: string,
+    ...
   }): this;
-  defaultReplyHeaders(header: {
-    [key: string]: string | ((req: any, res: any, body: any) => any)
-  }): this;
+  defaultReplyHeaders(header: { [key: string]: string | ((req: any, res: any, body: any) => any), ... }): this;
   replyContentLength(): this;
   replyDate(date?: Date): this;
   intercept(
@@ -116,7 +119,11 @@ declare class $npm$nock$Nock {
   thrice(): this;
   delayBody(delay: number): this;
   delayConnection(delay: number): this;
-  delay(delay: number | { head: number, body: number }): this;
+  delay(delay: number | {
+    head: number,
+    body: number,
+    ...
+  }): this;
   socketDelay(delay: number): this;
   filteringPath(path: RegExp, replace: string): this;
   filteringPath(fn: (path: string) => string): this;

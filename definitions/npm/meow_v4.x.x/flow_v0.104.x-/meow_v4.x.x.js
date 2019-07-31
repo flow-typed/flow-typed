@@ -2,14 +2,16 @@ declare module "meow" {
   declare type MinimistOption = "string" | "boolean" | {
     type?: "string" | "boolean",
     alias?: string | Array<string>,
-    default?: any
+    default?: any,
+    ...
   };
 
   declare type MinimistOptions = {
+    [key: string]: MinimistOption,
     stopEarly?: boolean,
     unknown?: (arg: string) => boolean,
     "--"?: boolean,
-    [key: string]: MinimistOption
+    ...
   };
 
   declare type Options = {|
@@ -26,11 +28,12 @@ declare module "meow" {
 
   declare type Result = {
     input: Array<string>,
-    flags: { [name: string]: any },
+    flags: { [name: string]: any, ... },
     pkg: Object,
     help: string,
     showHelp: (code?: number) => void,
-    showVersion: () => void
+    showVersion: () => void,
+    ...
   };
 
   declare type Meow =

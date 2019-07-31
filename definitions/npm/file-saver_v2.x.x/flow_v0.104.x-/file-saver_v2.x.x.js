@@ -7,6 +7,7 @@ declare function saveAs(
 declare module "file-saver" {
   declare module.exports: {
     [[call]]: typeof saveAs,
-    saveAs: typeof saveAs
+    saveAs: typeof saveAs,
+    ...
   };
 }

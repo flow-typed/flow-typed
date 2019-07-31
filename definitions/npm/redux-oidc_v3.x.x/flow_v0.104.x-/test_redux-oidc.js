@@ -60,12 +60,8 @@ if (state.user) {
   console.log(state.user.expired);
 }
 
-type Action = {
-  type: "foo"
-};
-type State = {
-  foo: string
-};
+type Action = { type: "foo", ... };
+type State = { foo: string, ... };
 
 // redux-oidc provides some components.
 const reducer = (state: State, action: Action) => action;
@@ -84,9 +80,7 @@ const StatelessComponent = () => {
   );
 };
 
-type Props = {
-  redirectToLink: (user?: User<*>) => void
-};
+type Props = { redirectToLink: (user?: User<*>) => void, ... };
 
 const ExampleComponent = ({ redirectToLink }: Props) => {
   return (

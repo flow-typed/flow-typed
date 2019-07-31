@@ -26,12 +26,10 @@ function onlyDispatchFunction_samePropsAreOK() {
     thunk: () => dispatch(thunk())
   });
 
-  type Props = {
-    // in the case of a function passed to `connect()` Flow infers
-    // the same type of function is both the Props and DispatchProps objects
-    // (see the testDispatchThunk() to get the difference)
-    ...DispatchProps
-  };
+  type Props = { // in the case of a function passed to `connect()` Flow infers
+  // the same type of function is both the Props and DispatchProps objects
+  // (see the testDispatchThunk() to get the difference)
+  ...DispatchProps, ... };
   class Com extends React.Component<Props> {}
 
   const Connected = connect<Props, {||}, _,DispatchProps,_,Dispatch>(null, mapDispatchToProps)(Com);
@@ -67,6 +65,7 @@ function onlyDispatchObject_differentDispatchPropsAreOK() {
     // ... and here the property returns a return value of thunk
     // as dispatch calls it for us with `dispatch` and `getState`
     thunk: () => Promise<number>,
+    ...
   };
   class Com extends React.Component<Props> {}
 
@@ -98,10 +97,8 @@ function onlyDispatchObject_sameDispatchPropsAreErroneous() {
     thunk
   };
 
-  type Props = {
-    // trying to pass the not passed to dispatch types (against the redux dispatch monad)
-    ...DispatchProps,
-  };
+  type Props = { // trying to pass the not passed to dispatch types (against the redux dispatch monad)
+  ...DispatchProps, ... };
   class Com extends React.Component<Props> {}
 
   const Connected = connect<Props, {||}, _,DispatchProps,_,Dispatch>(null, mapDispatchToProps)(Com);
@@ -147,6 +144,7 @@ function stateAndDispatchObject_differentDispatchPropsAreOK() {
     // ... and here the property returns a return value of thunk
     // as dispatch calls it for us with `dispatch` and `getState`
     thunk: () => Promise<number>,
+    ...
   };
   class Com extends React.Component<Props> {}
 
@@ -189,6 +187,7 @@ function stateAndDispatchObject_sameDispatchPropsAreErroneous() {
     ...StateProps,
     // trying to pass the not passed to dispatch types (against the redux dispatch monad)
     ...DispatchProps,
+    ...
   };
   class Com extends React.Component<Props> {}
 

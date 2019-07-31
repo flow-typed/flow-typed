@@ -24,7 +24,7 @@ const customCardType: ICardType = {
     size: 3
   }
 };
-const typesMap: {[key: string]: ICardType} = types;
+const typesMap: { [key: string]: ICardType, ... } = types;
 const visaType: ICardType | void = types['VISA'];
 const resolvedTypes: ICardType[] = creditCardType('4111111111111111');
 const foundByType: ICardType | null = getTypeInfo('VISA');

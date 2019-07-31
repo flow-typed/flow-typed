@@ -1,11 +1,5 @@
 declare module 'intl-messageformat' {
-  declare type FormatsObject = {
-    [type: string]: {
-      [style: string]: {
-        [options: string]: string
-      }
-    }
-  };
+  declare type FormatsObject = { [type: string]: { [style: string]: { [options: string]: string, ... }, ... }, ... };
 
   declare class IntlMessageFormat {
     constructor(message: string, locales: string | Array<string>, formats?: ?FormatsObject): IntlMessageFormat;
@@ -18,7 +12,7 @@ declare module 'intl-messageformat' {
     /**
      * Once the message is created, formatting the message is done by calling the format() method on the instance and passing a collection of values.
      */
-    format(values: { [key: string]: any }): string;
+    format(values: { [key: string]: any, ... }): string;
   }
 
   declare module.exports: Class<IntlMessageFormat>;

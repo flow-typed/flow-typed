@@ -5,12 +5,12 @@ type PartialConfig = {
   storeName?: string,
   version?: string,
   description?: string,
+  ...
 };
 
 type Driver = {
   _driver: string,
   _initStorage(config: PartialConfig): void,
-
   getItem<T>(
     key: string,
     successCallback?: (err?: Error, value?: T) => mixed,
@@ -33,13 +33,13 @@ type Driver = {
   keys(
     successCallback?: (keyNames: Array<string>) => mixed,
   ): ?Promise<Array<string>>,
+  ...
 };
 
 type localforageInstance = {
   INDEXEDDB: 'asyncStorage',
   WEBSQL: 'webSQLStorage',
   LOCALSTORAGE: 'localStorageWrapper',
-
   getItem<T>(
     key: string,
     successCallback?: (err?: Error, value?: T) => mixed,
@@ -74,6 +74,7 @@ type localforageInstance = {
   supports(driverName: string): boolean,
   createInstance(config?: PartialConfig): localforageInstance,
   dropInstance(config?: PartialConfig): Promise<void>,
+  ...
 };
 
 declare module 'localforage' {

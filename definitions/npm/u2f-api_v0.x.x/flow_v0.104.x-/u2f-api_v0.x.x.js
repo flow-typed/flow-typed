@@ -25,12 +25,14 @@ declare module "u2f-api" {
     version?: string,
     keyHandle?: string,
     transports?: ?Transports,
-    appId?: ?string
+    appId?: ?string,
+    ...
   };
 
   declare type RegisterRequest = {
     version?: string,
-    challenge?: string
+    challenge?: string,
+    ...
   };
 
   declare type RegisterResponse = {
@@ -38,7 +40,8 @@ declare module "u2f-api" {
     registrationData?: string,
     clientData?: string,
     errorCode?: ?ErrorCode,
-    errorMessage?: ?string
+    errorMessage?: ?string,
+    ...
   };
 
   declare type SignResponse = {
@@ -46,12 +49,11 @@ declare module "u2f-api" {
     signatureData?: string,
     clientData?: string,
     errorCode?: ?ErrorCode,
-    errorMessage?: ?string
+    errorMessage?: ?string,
+    ...
   };
 
-  declare type CancellablePromise<T> = Promise<T> & {
-    cancel(): void
-  };
+  declare type CancellablePromise<T> = Promise<T> & { cancel(): void, ... };
 
   declare function isSupported(): CancellablePromise<boolean>;
 

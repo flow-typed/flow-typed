@@ -22,25 +22,30 @@ declare module "mysql" {
     supportBigNumbers?: boolean,
     bigNumberStrings?: boolean,
     dateStrings?: boolean | Array<string>,
-    debug?: boolean | Array<string>, // Array form contains ids of packets for logging
+    // Array form contains ids of packets for logging
+    debug?: boolean | Array<string>,
     trace?: boolean,
     multipleStatements?: boolean,
     flags?: string,
-    ssl?: string | Object
+    ssl?: string | Object,
+    ...
   };
 
   declare type QueryOptions = {
     sql: string,
     typeCast?: boolean | ((field: Object, next: Function) => any),
-    nestTables?: boolean | string, // string form is a separator used to produce column names
+    // string form is a separator used to produce column names
+    nestTables?: boolean | string,
     values?: Array<mixed>,
-    timeout?: number
+    timeout?: number,
+    ...
   } | string;
 
   declare type QueryResults = Array<Object> & {
     insertId?: string | number,
     affectedRows?: number,
-    changedRows?: number
+    changedRows?: number,
+    ...
   };
 
   declare type QueryField = {
@@ -48,7 +53,8 @@ declare module "mysql" {
     type: string,
     length: number,
     table: string,
-    db: string
+    db: string,
+    ...
   };
 
   declare class Query extends events$EventEmitter {
@@ -77,7 +83,8 @@ declare module "mysql" {
         user?: string,
         password?: string,
         charset?: string,
-        database?: string
+        database?: string,
+        ...
       },
       callback: (error: ?Error) => *
     ): void;
@@ -117,7 +124,8 @@ declare module "mysql" {
     acquireTimeout?: number,
     connectionLimit?: number,
     waitForConnections?: boolean,
-    queueLimit?: number
+    queueLimit?: number,
+    ...
   };
 
   declare type PoolClusterSelector = "RR" | "ORDER" | "RANDOM";
@@ -126,7 +134,8 @@ declare module "mysql" {
     defaultSelector?: PoolClusterSelector,
     canRetry?: boolean,
     removeNodeErrorCount?: number,
-    restoreNodeTimeout?: number
+    restoreNodeTimeout?: number,
+    ...
   };
 
   declare type QueryCallback = (
@@ -171,5 +180,5 @@ declare module "mysql" {
   ): Connection;
   declare function createPool(options: PoolOptions | string): Pool;
   declare function createPoolCluster(options?: PoolClusterOptions): PoolCluster;
-  declare function raw(sql: string): { toSqlString: () => string };
+  declare function raw(sql: string): { toSqlString: () => string, ... };
 }

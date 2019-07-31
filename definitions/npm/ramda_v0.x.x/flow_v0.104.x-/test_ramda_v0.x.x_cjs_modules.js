@@ -14,16 +14,28 @@ const str2: string = _.compose(_.replace("3", "4"), _.toLower, _.trim)(
   " 1,2,3 "
 );
 
-const zipped: Array<{ s: number, y: string }> = _.zipWith(
+const zipped: Array<{
+  s: number,
+  y: string,
+  ...
+}> = _.zipWith(
   (a, b) => ({ s: a, y: b }),
   [1, 2, 3],
   ["1", "2", "3"]
 );
-const zipped2: Array<{ s: number, y: string }> = zipWith(
+const zipped2: Array<{
+  s: number,
+  y: string,
+  ...
+}> = zipWith(
   (a, b) => ({ s: a, y: b }),
   [1, 2, 3]
 )(["1", "2", "3"]);
-const zipped3: Array<{ s: number, y: string }> = _.zipWith((a, b) => ({
+const zipped3: Array<{
+  s: number,
+  y: string,
+  ...
+}> = _.zipWith((a, b) => ({
   s: a,
   y: b
 }))([1, 2, 3])(["1", "2", "3"]);

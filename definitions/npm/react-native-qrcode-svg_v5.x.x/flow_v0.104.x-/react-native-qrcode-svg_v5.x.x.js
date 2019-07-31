@@ -1,5 +1,5 @@
 declare module "react-native-qrcode-svg" {
-  declare export type ImageSourcePropType = number | { uri: string };
+  declare export type ImageSourcePropType = number | { uri: string, ... };
 
   declare export type QRCodeSvgProps = {
     /* what the qr code stands for */
@@ -24,7 +24,8 @@ declare module "react-native-qrcode-svg" {
     /* get svg ref for further usage */
     getRef?: (ref: any) => void,
     /* error correction level */
-    ecl?: "L" | "M" | "Q" | "H"
+    ecl?: "L" | "M" | "Q" | "H",
+    ...
   };
 
   declare class QRCodeSvg extends React$PureComponent<QRCodeSvgProps> {}

@@ -9,6 +9,7 @@ declare module "redux-saga-thunk" {
     isPending<State>(state: State, name?: string | string[]): boolean,
     hasFailed<State>(state: State, name?: string | string[]): boolean,
     isDone<State>(state: State, name?: string | string[]): boolean,
-    isComplete<State>(state: State, name?: string | string[]): boolean
+    isComplete<State>(state: State, name?: string | string[]): boolean,
+    ...
   };
 }

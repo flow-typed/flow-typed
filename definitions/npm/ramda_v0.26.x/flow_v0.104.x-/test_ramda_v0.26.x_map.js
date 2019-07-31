@@ -21,9 +21,9 @@ describe("R.map()", () => {
         d: { key: 3 }
       });
 
-      (R.map(R.prop("key"), Obj): { [key: string]: number });
+      (R.map(R.prop("key"), Obj): { [key: string]: number, ... });
 
-      (R.map(R.prop("key"))(Obj): { [key: string]: number });
+      (R.map(R.prop("key"))(Obj): { [key: string]: number, ... });
     });
 
     describe("{}::map(fn)", () => {
@@ -66,9 +66,9 @@ describe("R.map()", () => {
         d: { key: 3 }
       });
 
-      (R.map(R.prop("key"), readOnlyObj): $ReadOnly<{ [key: string]: number }>);
+      (R.map(R.prop("key"), readOnlyObj): $ReadOnly<{ [key: string]: number, ... }>);
 
-      (R.map(R.prop("key"))(readOnlyObj): $ReadOnly<{ [key: string]: number }>);
+      (R.map(R.prop("key"))(readOnlyObj): $ReadOnly<{ [key: string]: number, ... }>);
     });
 
     describe("{}::map(fn)", () => {

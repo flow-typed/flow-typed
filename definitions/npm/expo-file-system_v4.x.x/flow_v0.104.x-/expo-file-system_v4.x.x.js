@@ -3,17 +3,13 @@ declare module 'expo-file-system' {
   declare export type DownloadOptions = {|
     md5?: boolean,
     cache?: boolean,
-    headers?: {
-      [name: string]: string,
-    },
+    headers?: { [name: string]: string, ... },
   |};
 
   declare export type DownloadResult = {|
     uri: string,
     status: number,
-    headers: {
-      [name: string]: string,
-    },
+    headers: { [name: string]: string, ... },
     md5?: string,
   |};
 

@@ -35,7 +35,8 @@ declare module "luxon" {
       ts: number,
       opts?: {
         format?: ?string,
-        localeCode?: ?string
+        localeCode?: ?string,
+        ...
       }
     ): string;
     +isValid: boolean;
@@ -71,7 +72,8 @@ declare module "luxon" {
     static features(): {
       intl: boolean,
       intlTokens: boolean,
-      timezones: boolean
+      timezones: boolean,
+      ...
     };
     static hasDST(zone: string | Zone): boolean;
     static meridiems(options?: {| locale?: ?string |}): Array<string>;
@@ -222,13 +224,15 @@ declare module "luxon" {
     hours?: number,
     minutes?: number,
     seconds?: number,
-    milliseconds?: number
+    milliseconds?: number,
+    ...
   };
 
   declare export type DurationConfig = {
     locale: string,
     numberingSystem: ?string,
-    conversionAccuracy: ConversionAccuracy
+    conversionAccuracy: ConversionAccuracy,
+    ...
   };
 
   declare export class Duration {
@@ -352,19 +356,22 @@ declare module "luxon" {
     hour: number,
     minute: number,
     second: number,
-    millisecond: number
+    millisecond: number,
+    ...
   };
 
   declare export type DateTimeConfig = {
     locale: string,
     outputCalendar: ?string,
-    numberingSystem: ?string
+    numberingSystem: ?string,
+    ...
   };
 
   declare export type ResolvedLocaleOptions = {
     locale: string,
     outputCalendar: string,
-    numberingSystem: string
+    numberingSystem: string,
+    ...
   };
 
   declare export class DateTime {
@@ -427,12 +434,17 @@ declare module "luxon" {
       options?: DateTimeFromOptions
     ): {
       input: string,
-      tokens: Array<{ literal: boolean, val: string }>,
+      tokens: Array<{
+        literal: boolean,
+        val: string,
+        ...
+      }>,
       regex: RegExp,
       rawMatches: ?Array<string>,
       matches: Object,
-      result: { [unit: DateTimeUnit]: number },
-      zone: ?Zone
+      result: { [unit: DateTimeUnit]: number, ... },
+      zone: ?Zone,
+      ...
     };
     static invalid(reason: string): DateTime;
     static max(first: DateTime, ...rest: Array<DateTime>): DateTime;
@@ -486,7 +498,7 @@ declare module "luxon" {
     resolvedLocaleOpts(
       options?: IntlDateTimeFormatOptions
     ): ResolvedLocaleOptions;
-    set(values: { [unit: DateTimeUnit]: number }): DateTime;
+    set(values: { [unit: DateTimeUnit]: number, ... }): DateTime;
     setLocale(locale: string): DateTime;
     setZone(zone: string | Zone, options?: SetZoneOptions): DateTime;
     startOf(unit: DateTimeUnit): DateTime;
@@ -500,7 +512,11 @@ declare module "luxon" {
     toLocal(): DateTime;
     toLocaleParts(
       options?: IntlDateTimeFormatOptions
-    ): Array<{ type: string, value: number }>;
+    ): Array<{
+      type: string,
+      value: number,
+      ...
+    }>;
     toLocaleString(options?: IntlDateTimeFormatOptions): string;
     toObject(options: {| includeConfig: true |}): DateTimeObject &
       DateTimeConfig;

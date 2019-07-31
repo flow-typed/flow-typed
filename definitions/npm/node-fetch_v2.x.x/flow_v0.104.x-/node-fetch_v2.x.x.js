@@ -3,7 +3,7 @@ declare module 'node-fetch' {
   import type https from 'https';
 
   declare export class Request mixins Body {
-    constructor(input: string | { href: string } | Request, init?: RequestInit): this;
+    constructor(input: string | { href: string, ... } | Request, init?: RequestInit): this;
     context: RequestContext;
     headers: Headers;
     method: string;
@@ -23,9 +23,7 @@ declare module 'node-fetch' {
     timeout: number;
   }
 
-  declare type HeaderObject = {
-    [index: string]: string,
-  }
+  declare type HeaderObject = { [index: string]: string, ... }
 
   declare interface RequestInit {
     body?: BodyInit,
@@ -58,7 +56,7 @@ declare module 'node-fetch' {
     get(name: string): string;
     getAll(name: string): Array<string>;
     has(name: string): boolean;
-    raw(): { [k: string]: string[] };
+    raw(): { [k: string]: string[], ... };
     set(name: string, value: string): void;
   }
 

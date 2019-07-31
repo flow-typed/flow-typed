@@ -13,6 +13,7 @@ declare module 'diskusage' {
 
     declare module.exports: {
         check: typeof checkWithPromise & typeof checkWithCallback,
-        checkSync: typeof checkSync
+        checkSync: typeof checkSync,
+        ...
     };
 }

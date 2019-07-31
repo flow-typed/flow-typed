@@ -24,7 +24,7 @@ declare module "rethinkdb" {
   declare class SequenceOp<T> {
     contains (value: T | Predicate<T>): Op<bool>;
 
-    filter (Predicate<T>, options?: { default: boolean | ErrorControlStructure }): SequenceOp<T>;
+    filter (Predicate<T>, options?: { default: boolean | ErrorControlStructure, ... }): SequenceOp<T>;
 
     slice (startOffset: number, options?: SliceOptions): SequenceOp<T>;
 
@@ -95,7 +95,7 @@ declare module "rethinkdb" {
     primaryKey?: string,
     durability?: Durability,
     shards?: number,
-    replicas?: number | { [string]: number },
+    replicas?: number | { [string]: number, ... },
     primaryReplicaTag?: string
   |};
 
@@ -178,13 +178,29 @@ declare module "rethinkdb" {
   }
 
   declare class R {
-    tableCreate (tableName: string, options?: TableCreateOptions): Op<{ tables_created: 1, config_changes: ChangeSet<TableConfig, null> }>;
+    tableCreate (tableName: string, options?: TableCreateOptions): Op<{
+      tables_created: 1,
+      config_changes: ChangeSet<TableConfig, null>,
+      ...
+    }>;
     dbList (): SequenceOp<string>;
     tableList (): Op<string[]>;
     branch<TTest, TTrue, TFalse> (test: Op<TTest>, trueAction: Op<TTrue> | TTrue, falseAction: Op<TFalse> | TFalse): Op<TTrue | TFalse>;
     connect (options?: ConnectOptions | string): Promise<Connection>;
-    dbCreate (dbName: string): Op<{ dbs_created: 1, config_changes: [{ old_val: null, new_val: DatabaseConfig }] }>;
-    table (tableName: string, options?: { readMode?: 'single' | 'majority' | 'outdated', identifierFormat?: 'name' | 'uuid' }): TableOp<any, any, any>;
+    dbCreate (dbName: string): Op<{
+      dbs_created: 1,
+      config_changes: [{
+        old_val: null,
+        new_val: DatabaseConfig,
+        ...
+      }],
+      ...
+    }>;
+    table (tableName: string, options?: {
+      readMode?: 'single' | 'majority' | 'outdated',
+      identifierFormat?: 'name' | 'uuid',
+      ...
+    }): TableOp<any, any, any>;
     error (): ErrorControlStructure;
   }
 

@@ -1,7 +1,7 @@
 declare module 'clsx' {
   declare type Classes = 
     | Array<Classes>
-    | { [className: string]: * }
+    | { [className: string]: *, ... }
     | string
     | number
     | boolean

@@ -6,7 +6,7 @@ declare module "backbone" {
   declare var version: string;
 
   declare type EventCallback = (event: Event) => void | mixed;
-  declare type Backbone$Attrs = {[name: string]: mixed};
+  declare type Backbone$Attrs = { [name: string]: mixed, ... };
   declare type CRUDMethod = "create" | "read" | "update" | "delete";
 
   /**
@@ -56,9 +56,10 @@ declare module "backbone" {
    * Model Class - http://backbonejs.org/#Model
    */
   declare type ModelOpts = {
+    [optionName: string]: mixed,
     collection?: Collection<*>,
     parse?: Function,
-    [optionName: string]: mixed,
+    ...
   };
 
   declare class Model extends Events {
@@ -74,7 +75,7 @@ declare module "backbone" {
     set(attr: string, value: mixed, options?: Object): this;
     escape(attr: string): mixed;
     has(attr: string): boolean;
-    unset(attr: string, options?: {unset?: boolean}): this;
+    unset(attr: string, options?: { unset?: boolean, ... }): this;
     clear(options?: Object): this;
     id: string | number;
     idAttribute: string;
@@ -85,6 +86,7 @@ declare module "backbone" {
     defaults: {
       (): Backbone$Attrs,
       ...Backbone$Attrs,
+      ...
     };
     toJSON(): Backbone$Attrs;
     sync: typeof sync;
@@ -104,7 +106,7 @@ declare module "backbone" {
     clone(): this;
     isNew(): boolean;
     hasChanged(attribute?: string): boolean;
-    changedAttributes(attributes?: {[attr: string]: mixed}): boolean;
+    changedAttributes(attributes?: { [attr: string]: mixed, ... }): boolean;
     previous(attribute: string): mixed;
     previousAttributes(): Backbone$Attrs;
     // Start Underscore methods
@@ -187,8 +189,8 @@ declare module "backbone" {
     comparator: string | Comparator<TModel>;
     sort(options?: Object): Array<TModel>;
     pluck(attribute: string): Array<TModel>;
-    where(attributes: {[attributeName: string]: mixed}): Array<TModel>;
-    findWhere(attributes: {[attributeName: string]: mixed}): TModel;
+    where(attributes: { [attributeName: string]: mixed, ... }): Array<TModel>;
+    findWhere(attributes: { [attributeName: string]: mixed, ... }): TModel;
     url: () => string | string;
     parse(response: Object, options: Object): Object;
     clone(): this;
@@ -204,9 +206,7 @@ declare module "backbone" {
       instanceProperies: P,
       classProperties?: CP
     ): Class<Router & P> & CP;
-    routes: {
-      [route: string]: string | ((e: Event) => mixed | void),
-    };
+    routes: { [route: string]: string | ((e: Event) => mixed | void), ... };
     constructor(options?: Object): this;
     initialize(options?: Object): this;
     route(
@@ -216,7 +216,11 @@ declare module "backbone" {
     ): this;
     navigate(
       fragment: string,
-      options?: {trigger?: boolean, replace?: boolean}
+      options?: {
+        trigger?: boolean,
+        replace?: boolean,
+        ...
+      }
     ): this;
     execute(callback: Function, args: Array<mixed>, name: string): void | mixed;
   }
@@ -236,10 +240,15 @@ declare module "backbone" {
       pushState?: boolean,
       hashChange?: boolean,
       root?: string,
+      ...
     }): this;
     navigate(
       fragment: string,
-      options?: {trigger?: boolean, replace?: boolean}
+      options?: {
+        trigger?: boolean,
+        replace?: boolean,
+        ...
+      }
     ): boolean | void;
     loadUrl(fragment: string): boolean;
     route(route: string, callback: Function): void;
@@ -264,12 +273,8 @@ declare module "backbone" {
   /**
    * View -
    */
-  declare type AttributesHasMap = {
-    [attribute: string]: mixed,
-  };
-  declare type EventsHash = {
-    [event: string]: string | Function,
-  };
+  declare type AttributesHasMap = { [attribute: string]: mixed, ... };
+  declare type EventsHash = { [event: string]: string | Function, ... };
   declare class View extends Events {
     static extend<P, CP>(
       instanceProperies: P,

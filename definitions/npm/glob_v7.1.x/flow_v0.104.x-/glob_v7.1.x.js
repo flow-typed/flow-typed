@@ -23,14 +23,10 @@ declare module "glob" {
     stat?: boolean,
     silent?: boolean,
     strict?: boolean,
-    cache?: {
-      [path: string]: boolean | "DIR" | "FILE" | $ReadOnlyArray<string>
-    },
-    statCache?: {
-      [path: string]: boolean | { isDirectory(): boolean } | void
-    },
-    symlinks?: { [path: string]: boolean | void },
-    realpathCache?: { [path: string]: string },
+    cache?: { [path: string]: boolean | "DIR" | "FILE" | $ReadOnlyArray<string>, ... },
+    statCache?: { [path: string]: boolean | { isDirectory(): boolean, ... } | void, ... },
+    symlinks?: { [path: string]: boolean | void, ... },
+    realpathCache?: { [path: string]: string, ... },
     sync?: boolean,
     nounique?: boolean,
     nodir?: boolean,
@@ -52,17 +48,13 @@ declare module "glob" {
     constructor(pattern: string, callback: CallBack): this;
     constructor(pattern: string, options: Options, callback: CallBack): this;
 
-    minimatch: {};
+    minimatch: {...};
     options: Options;
     aborted: boolean;
-    cache: {
-      [path: string]: boolean | "DIR" | "FILE" | $ReadOnlyArray<string>
-    };
-    statCache: {
-      [path: string]: boolean | { isDirectory(): boolean } | void
-    };
-    symlinks: { [path: string]: boolean | void };
-    realpathCache: { [path: string]: string };
+    cache: { [path: string]: boolean | "DIR" | "FILE" | $ReadOnlyArray<string>, ... };
+    statCache: { [path: string]: boolean | { isDirectory(): boolean, ... } | void, ... };
+    symlinks: { [path: string]: boolean | void, ... };
+    realpathCache: { [path: string]: string, ... };
     found: Array<string>;
 
     pause(): void;

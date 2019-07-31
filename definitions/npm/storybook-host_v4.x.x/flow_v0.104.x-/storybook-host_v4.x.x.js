@@ -1,5 +1,9 @@
 declare module "storybook-host" {
-  declare type Context = { kind: string, story: string };
+  declare type Context = {
+    kind: string,
+    story: string,
+    ...
+  };
   declare type Renderable = React$Element<*>;
   declare type RenderFunction = () => Renderable | Array<Renderable>;
 

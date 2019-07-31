@@ -7,7 +7,8 @@ declare module "react-custom-scrollbars" {
     scrollWidth: number,
     scrollHeight: number,
     scrollLeft: number,
-    scrollTop: number
+    scrollTop: number,
+    ...
   };
 
   declare type Props = {
@@ -30,7 +31,8 @@ declare module "react-custom-scrollbars" {
     universal?: boolean,
     autoHeight?: boolean,
     autoHeightMin?: number | string,
-    autoHeightMax?: number | string
+    autoHeightMax?: number | string,
+    ...
   };
 
   declare export default class Scrollbars extends React$Component<Props> {

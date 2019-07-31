@@ -129,7 +129,7 @@ declare module 'prismic.io' {
   }
   declare type $ImageView = ImageView;
 
-  declare type ImageViews = { [key: string] : ImageView };
+  declare type ImageViews = { [key: string] : ImageView, ... };
 
   declare class ImageEl mixins Htmlable, Textable {
     constructor(main: ImageView, views: ?ImageViews) : void;
@@ -256,6 +256,7 @@ declare module 'prismic.io' {
     GeoPoint: GeoPoint,
     Slice: Slice,
     SliceZone: SliceZone,
+    ...
   }
 
   declare type PredicateQuery = Array<string>;
@@ -324,7 +325,8 @@ declare module 'prismic.io' {
     req?: any,
     apiCache?: any,
     requestHandler?: any,
-    apiDataTTL?: number
+    apiDataTTL?: number,
+    ...
   }
 
   declare class API {
@@ -353,13 +355,16 @@ declare module 'prismic.io' {
     previewCookie: 'io.prismic.preview',
     Document: Document,
     SearchForm: SearchForm,
-    Form: any, // I think this is for Prismic's internal mainly.
-    Experiments: any, // I think this is for Prismic's internal mainly.
+    // I think this is for Prismic's internal mainly.
+    Form: any,
+    // I think this is for Prismic's internal mainly.
+    Experiments: any,
     Predicates: Predicates,
     Fragments: Fragments,
     api: getAPI,
     Api: getAPI,
-    parseDoc: (json: Object) => Document
+    parseDoc: (json: Object) => Document,
+    ...
   }
 
   declare module.exports: Prismic;

@@ -5,21 +5,20 @@
 
 declare module 'inquirer' {
   declare class BottomBar {
-    constructor(opt?: { bottomBar: string }): BottomBar;
+    constructor(opt?: { bottomBar: string, ... }): BottomBar;
     log: stream$Writable;
     updateBottomBar(input: mixed): void;
   }
 
   declare type SessionT = any;
 
-  declare type AnswersT = {
-    [key: string]: ?boolean | ?string | ?{
-      confirm?: boolean,
-      input?: string,
-      rawList?: string,
-      list?: string,
-    }
-  };
+  declare type AnswersT = { [key: string]: ?boolean | ?string | ?{
+    confirm?: boolean,
+    input?: string,
+    rawList?: string,
+    list?: string,
+    ...
+  }, ... };
 
   declare class Separator {
     constructor(sep ?: string): void;
@@ -29,6 +28,7 @@ declare module 'inquirer' {
     name: string,
     value?: string,
     short?: string,
+    ...
   };
 
   declare type QuestionKindT =
@@ -51,7 +51,6 @@ declare module 'inquirer' {
     message: string | (a: AnswersT) => void,
     default?: mixed | (a: AnswersT) => mixed,
     choices?: Array<ChoiceT>,
-
     // true => okay
     // false => general error message
     // string => specific error message
@@ -59,12 +58,12 @@ declare module 'inquirer' {
     filter?: (input: string) => BasicT | Promise<BasicT>,
     when?: boolean | (answers: AnswersT) => (boolean | Promise<boolean>),
     pageSize?: number,
+    ...
   };
 
   declare interface Prompt extends Promise<AnswersT> {
-    ui: {
-      process: any, // For observable interface
-    },
+    ui: { // For observable interface
+    process: any, ... },
   }
 
   declare type PromptFn = (questions: QuestionT | Array<QuestionT>) => Prompt;
@@ -72,8 +71,7 @@ declare module 'inquirer' {
   declare module.exports: {
     Separator: typeof Separator,
     prompt: PromptFn,
-    ui: {
-      BottomBar: typeof BottomBar,
-    },
+    ui: { BottomBar: typeof BottomBar, ... },
+    ...
   };
 }

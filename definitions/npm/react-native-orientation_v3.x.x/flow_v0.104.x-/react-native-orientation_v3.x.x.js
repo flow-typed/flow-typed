@@ -30,6 +30,7 @@ declare module "react-native-orientation" {
     ): void,
     removeSpecificOrientationListener(
       (payload?: SpecificOrientations) => void
-    ): void
+    ): void,
+    ...
   };
 }

@@ -8,7 +8,8 @@ declare module "node-geocoder" {
     httpAdapter?: geocoderAdapter,
     apiKey?: string,
     formatter?: ?geocoderFormatter,
-    formatterPattern?: string
+    formatterPattern?: string,
+    ...
   };
 
   declare type geocoderResultItem = {
@@ -24,22 +25,23 @@ declare module "node-geocoder" {
       level1long: string,
       level1short: string,
       level2long: string,
-      level2short: string
+      level2short: string,
+      ...
     },
-    provider: geocoderProvider
+    provider: geocoderProvider,
+    ...
   };
   declare type geocoderResult = Array<geocoderResultItem>;
 
   declare type geocoderError = {
     Error: string,
-    isOperational: boolean
+    isOperational: boolean,
+    ...
   };
 
   declare type geocoderCB = (err: ?geocoderError, res: ?geocoderResult) => any;
 
   declare module.exports: (
     options: geocoderOptions
-  ) => {
-    geocode: (address: string, cb?: geocoderCB) => Promise<geocoderResult>
-  };
+  ) => { geocode: (address: string, cb?: geocoderCB) => Promise<geocoderResult>, ... };
 }

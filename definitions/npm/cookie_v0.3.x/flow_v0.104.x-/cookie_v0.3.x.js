@@ -7,17 +7,17 @@ type SerializeOptions = {
   path?: string,
   sameSite?: boolean | 'lax' | 'strict',
   secure?: boolean,
+  ...
 };
 
-type ParseOptions = {
-  // Library itself does not specify output for decode function.
-  // Because of simplicity is output set to string which is default settings and best for working with cookies.
-  decode?: (stringToDecode: string) => string,
-};
+type ParseOptions = { // Library itself does not specify output for decode function.
+// Because of simplicity is output set to string which is default settings and best for working with cookies.
+decode?: (stringToDecode: string) => string, ... };
 
 declare module 'cookie' {
   declare module.exports: {
     serialize(name: string, val: string, options: ?SerializeOptions): string,
-    parse(data: string, options: ?ParseOptions): {[string]: string},
+    parse(data: string, options: ?ParseOptions): { [string]: string, ... },
+    ...
   };
 };

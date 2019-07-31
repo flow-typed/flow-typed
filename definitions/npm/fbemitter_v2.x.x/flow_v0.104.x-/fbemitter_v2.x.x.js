@@ -7,7 +7,7 @@ declare module 'fbemitter' {
 
   declare export class EmitterSubscription {
     // a context for listener to be called with
-    context?: { [key: string]: any };
+    context?: { [key: string]: any, ... };
     listener: Callback;
   }
 

@@ -12,6 +12,7 @@ declare module "mousetrap" {
     ): void,
     unbind(key: string | Array<string>): void,
     trigger(key: string): void,
-    reset(): void
+    reset(): void,
+    ...
   };
 }

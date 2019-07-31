@@ -20,6 +20,7 @@ declare module 'react-helmet' {
     title?: string,
     titleAttributes?: Object,
     titleTemplate?: string,
+    ...
   }
 
   declare interface TagMethods {
@@ -29,7 +30,7 @@ declare module 'react-helmet' {
 
   declare interface AttributeTagMethods {
     toString(): string;
-    toComponent(): {[string]: *};
+    toComponent(): { [string]: *, ... };
   }
 
   declare interface StateOnServer {

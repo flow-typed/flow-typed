@@ -6,7 +6,8 @@ type $npm$pify$Options = {
   exclude?: Array<string | RegExp>,
   excludeMain?: boolean,
   errorFirst?: boolean,
-  promiseModule?: () => any
+  promiseModule?: () => any,
+  ...
 };
 
 type $npm$pify$PromisifiedFunction = (...args: any[]) => Promise<*>;

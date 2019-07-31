@@ -10,9 +10,7 @@ declare module 'opentok' {
   |};
 
   // https://tokbox.com/developer/sdks/node/reference/Session.html
-  declare export type Session = {
-    sessionId: string
-  };
+  declare export type Session = { sessionId: string, ... };
 
   // https://tokbox.com/developer/sdks/node/reference/OpenTok.html#generateToken
   declare export type GenerateTokenOptions = {|
@@ -52,17 +50,19 @@ declare module 'opentok' {
 
   // https://tokbox.com/developer/sdks/node/reference/OpenTok.html#dial
   declare export type DialOptions = {|
-    headers?: {[string]: any},
+    headers?: { [string]: any, ... },
     auth?: {
       username: string,
-      password: string
+      password: string,
+      ...
     },
     secure?: boolean
   |};
   declare export type SipInterconnect = {
     id: string,
     connectionId: string,
-    streamId: string
+    streamId: string,
+    ...
   };
 
   // https://tokbox.com/developer/sdks/node/reference/Archive.html
@@ -96,8 +96,9 @@ declare module 'opentok' {
   |};
   declare export type StartBroadcastOptions = {|
     outputs: {
-      hls?: {},
+      hls?: {...},
       rtmp?: Array<BroadcastRtmpOutput>,
+      ...
     },
     maxDuration?: number,
     resolution?: string,

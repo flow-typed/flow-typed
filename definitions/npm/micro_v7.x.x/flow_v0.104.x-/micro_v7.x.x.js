@@ -25,7 +25,8 @@ declare module "micro" {
       statusCode?: number,
       status?: number,
       message?: string,
-      stack?: string
+      stack?: string,
+      ...
     }
   ): Promise<void>;
 
@@ -33,21 +34,37 @@ declare module "micro" {
     code: number,
     msg: string,
     orig?: Error
-  ): Error & { statusCode: number, originalError?: Error };
+  ): Error & {
+    statusCode: number,
+    originalError?: Error,
+    ...
+  };
 
   declare export function buffer(
     req: IncomingMessage,
-    info?: { limit?: string, encoding?: string }
+    info?: {
+      limit?: string,
+      encoding?: string,
+      ...
+    }
   ): Promise<Buffer | string>;
 
   declare export function text(
     req: IncomingMessage,
-    info?: { limit?: string, encoding?: string }
+    info?: {
+      limit?: string,
+      encoding?: string,
+      ...
+    }
   ): Promise<string>;
 
   declare export function json(
     req: IncomingMessage,
-    info?: { limit?: string, encoding?: string }
+    info?: {
+      limit?: string,
+      encoding?: string,
+      ...
+    }
   ): Promise<Object>;
 
   declare export default function serve(fn: RequestHandler): Server;

@@ -20,7 +20,8 @@ type moment$MomentOptions = {
   seconds?: number | string,
   ms?: number | string,
   millisecond?: number | string,
-  milliseconds?: number | string
+  milliseconds?: number | string,
+  ...
 };
 
 type moment$MomentObject = {
@@ -30,7 +31,8 @@ type moment$MomentObject = {
   hours: number,
   minutes: number,
   seconds: number,
-  milliseconds: number
+  milliseconds: number,
+  ...
 };
 
 type moment$MomentCreationData = {
@@ -38,7 +40,8 @@ type moment$MomentCreationData = {
   format: string,
   locale: Object,
   isUTC: boolean,
-  strict: boolean
+  strict: boolean,
+  ...
 };
 
 type moment$CalendarFormat = string | ((moment: moment$Moment) => string);
@@ -49,7 +52,8 @@ type moment$CalendarFormats = {
   nextWeek?: moment$CalendarFormat,
   lastDay?: moment$CalendarFormat,
   lastWeek?: moment$CalendarFormat,
-  sameElse?: moment$CalendarFormat
+  sameElse?: moment$CalendarFormat,
+  ...
 };
 
 type moment$Inclusivity = "()" | "[)" | "()" | "(]" | "[]";
@@ -130,10 +134,10 @@ declare class moment$Moment {
       | null
       | void
       | []
-      | {}
+      | {...}
   ): moment$Moment;
   static (array: []): moment$Moment;
-  static (object: {}): moment$Moment;
+  static (object: {...}): moment$Moment;
   static (string: ?string, format: string | Array<string>): moment$Moment;
   static (
     string: ?string,
@@ -262,7 +266,7 @@ declare class moment$Moment {
   isoWeeksInYear(): number;
   get(string: string): number;
   set(unit: string, value: number): this;
-  set(options: { [unit: string]: number }): this;
+  set(options: { [unit: string]: number, ... }): this;
   static max(...dates: Array<moment$Moment>): moment$Moment;
   static max(dates: Array<moment$Moment>): moment$Moment;
   static min(...dates: Array<moment$Moment>): moment$Moment;

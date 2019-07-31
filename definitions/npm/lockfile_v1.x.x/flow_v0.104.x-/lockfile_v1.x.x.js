@@ -6,6 +6,7 @@ declare module "lockfile" {
     stale?: number,
     retries?: number,
     retryWait?: number,
+    ...
   };
   declare interface LockFileExport {
     lock(fileName: string, opts: LockOptions, cb: Callback): void;

@@ -36,17 +36,17 @@ declare module "underscore" {
     & (<A, B, C>(bc: UnaryFn<B, C>, ab: UnaryFn<A, B>, ...rest: Array<void>) => UnaryFn<A, C>)
     & (<A, B>(ab: UnaryFn<A, B>, ...rest: Array<void>) => UnaryFn<A, B>)
 
-  declare function $underscore$Extend<A: {}>(a: A, ...rest: Array<void>): A;
-  declare function $underscore$Extend<A: {}, B: {}>(a: A, b: B, ...rest: Array<void>): A & B;
-  declare function $underscore$Extend<A: {}, B: {}, C: {}>(a: A, b: B, c: C, ...rest: Array<void>): A & B & C;
-  declare function $underscore$Extend<A: {}, B: {}, C: {}, D: {}>(a: A, b: B, c: C, d: D, ...rest: Array<void>): A & B & C & D;
-  declare function $underscore$Extend<A: {}, B: {}, C: {}, D: {}, E: {}>(a: A, b: B, c: C, d: D, e: E, ...rest: Array<void>): A & B & C & D & E;
+  declare function $underscore$Extend<A: {...}>(a: A, ...rest: Array<void>): A;
+  declare function $underscore$Extend<A: {...}, B: {...}>(a: A, b: B, ...rest: Array<void>): A & B;
+  declare function $underscore$Extend<A: {...}, B: {...}, C: {...}>(a: A, b: B, c: C, ...rest: Array<void>): A & B & C;
+  declare function $underscore$Extend<A: {...}, B: {...}, C: {...}, D: {...}>(a: A, b: B, c: C, d: D, ...rest: Array<void>): A & B & C & D;
+  declare function $underscore$Extend<A: {...}, B: {...}, C: {...}, D: {...}, E: {...}>(a: A, b: B, c: C, d: D, e: E, ...rest: Array<void>): A & B & C & D & E;
 
-  declare function $underscore$ExtendParameterized<A: {}>(...rest: Array<void>): A;
-  declare function $underscore$ExtendParameterized<A: {}, B: {}>(b: B, ...rest: Array<void>): A & B;
-  declare function $underscore$ExtendParameterized<A: {}, B: {}, C: {}>(b: B, c: C, ...rest: Array<void>): A & B & C;
-  declare function $underscore$ExtendParameterized<A: {}, B: {}, C: {}, D: {}>(b: B, c: C, d: D, ...rest: Array<void>): A & B & C & D;
-  declare function $underscore$ExtendParameterized<A: {}, B: {}, C: {}, D: {}, E: {}>(b: B, c: C, d: D, e: E, ...rest: Array<void>): A & B & C & D & E;
+  declare function $underscore$ExtendParameterized<A: {...}>(...rest: Array<void>): A;
+  declare function $underscore$ExtendParameterized<A: {...}, B: {...}>(b: B, ...rest: Array<void>): A & B;
+  declare function $underscore$ExtendParameterized<A: {...}, B: {...}, C: {...}>(b: B, c: C, ...rest: Array<void>): A & B & C;
+  declare function $underscore$ExtendParameterized<A: {...}, B: {...}, C: {...}, D: {...}>(b: B, c: C, d: D, ...rest: Array<void>): A & B & C & D;
+  declare function $underscore$ExtendParameterized<A: {...}, B: {...}, C: {...}, D: {...}, E: {...}>(b: B, c: C, d: D, e: E, ...rest: Array<void>): A & B & C & D & E;
 
 
   declare var compose: Compose;
@@ -81,11 +81,11 @@ declare module "underscore" {
     sortBy<U>(iteratee: (value: T) => number): Array<U>;
     sortBy<U>(iteratee: string): Array<U>;
     // TODO: UnderscoreWrapTheseObjects
-    groupBy<U>(iteratee: (value: T) => U, context?: mixed): { [key: U]: T };
-    groupBy(iteratee: string, context?: mixed): { [key: any]: T };
-    indexBy<U>(iteratee: (value: T) => U, context?: mixed): { [key: U]: T };
-    indexBy(iteratee: string, context?: mixed): { [key: any]: T };
-    countBy<U>(iteratee: (value: T) => U, context?: mixed): { [key: U]: T };
+    groupBy<U>(iteratee: (value: T) => U, context?: mixed): { [key: U]: T, ... };
+    groupBy(iteratee: string, context?: mixed): { [key: any]: T, ... };
+    indexBy<U>(iteratee: (value: T) => U, context?: mixed): { [key: U]: T, ... };
+    indexBy(iteratee: string, context?: mixed): { [key: any]: T, ... };
+    countBy<U>(iteratee: (value: T) => U, context?: mixed): { [key: U]: T, ... };
     shuffle(): Array<T>;
     sample(n?: number): Array<T>;
     toArray(): Array<T>;
@@ -178,11 +178,11 @@ declare module "underscore" {
     sortBy<U>(iteratee: (value: T) => number): UnderscoreChainedList<U>;
     sortBy<U>(iteratee: string): UnderscoreChainedList<U>;
     // TODO: UnderscoreWrapTheseObjects
-    groupBy<U>(iteratee: (value: T) => U, context?: mixed): UnderscoreChainedValue<{ [key: U]: T }>;
-    groupBy(iteratee: string, context?: mixed): UnderscoreChainedValue<{ [key: any]: T }>;
-    indexBy<U>(iteratee: (value: T) => U, context?: mixed): UnderscoreChainedValue<{ [key: U]: T }>;
-    indexBy(iteratee: string, context?: mixed): UnderscoreChainedValue<{ [key: any]: T }>;
-    countBy<U>(iteratee: (value: T) => U, context?: mixed): UnderscoreChainedValue<{ [key: U]: T }>;
+    groupBy<U>(iteratee: (value: T) => U, context?: mixed): UnderscoreChainedValue<{ [key: U]: T, ... }>;
+    groupBy(iteratee: string, context?: mixed): UnderscoreChainedValue<{ [key: any]: T, ... }>;
+    indexBy<U>(iteratee: (value: T) => U, context?: mixed): UnderscoreChainedValue<{ [key: U]: T, ... }>;
+    indexBy(iteratee: string, context?: mixed): UnderscoreChainedValue<{ [key: any]: T, ... }>;
+    countBy<U>(iteratee: (value: T) => U, context?: mixed): UnderscoreChainedValue<{ [key: U]: T, ... }>;
     shuffle(): UnderscoreChainedList<T>;
     sample(n?: number): UnderscoreChainedList<T>;
     toArray(): UnderscoreChainedList<T>;
@@ -263,16 +263,16 @@ declare module "underscore" {
 
     // Handle Collections functions
 
-    each<T>(o: {[key:string]: T}, iteratee: (val: T, key: string)=>void): void;
+    each<T>(o: { [key:string]: T, ... }, iteratee: (val: T, key: string)=>void): void;
     each<T>(a: T[], iteratee: (val: T, key: string)=>void): void;
     each(list: Object, iteratee: (val: mixed, key: mixed, list: Object) => void): void;
-    forEach<T>(o: {[key:string]: T}, iteratee: (val: T, key: string)=>void): void;
+    forEach<T>(o: { [key:string]: T, ... }, iteratee: (val: T, key: string)=>void): void;
     forEach<T>(a: T[], iteratee: (val: T, key: string)=>void): void;
 
     map<T, U>(a: T[], iteratee: (val: T, n: number)=>U): U[];
-    map<K, T, U>(a: {[key:K]: T}, iteratee: (val: T, k: K)=>U): U[];
+    map<K, T, U>(a: { [key:K]: T, ... }, iteratee: (val: T, k: K)=>U): U[];
     collect<T, U>(a: T[], iteratee: (val: T, n: number)=>U): U[];
-    collect<K, T, U>(a: {[key:K]: T}, iteratee: (val: T, k: K)=>U): U[];
+    collect<K, T, U>(a: { [key:K]: T, ... }, iteratee: (val: T, k: K)=>U): U[];
 
     reduce<T, MemoT>(a: Array<T>, iterator: (m: MemoT, o: T)=>MemoT, initialMemo?: MemoT): MemoT;
     inject<T, MemoT>(a: Array<T>, iterator: (m: MemoT, o: T)=>MemoT, initialMemo?: MemoT): MemoT;
@@ -284,16 +284,16 @@ declare module "underscore" {
     find<T>(list: T[], predicate: (val: T)=>boolean): ?T;
     detect<T>(list: T[], predicate: (val: T)=>boolean): ?T;
 
-    filter<T>(o: {[key:string]: T}, pred: (val: T, k: string, o: {[string]: T})=>boolean): T[];
+    filter<T>(o: { [key:string]: T, ... }, pred: (val: T, k: string, o: { [string]: T, ... })=>boolean): T[];
     filter<T>(a: T[], pred: (val: T, k: number, a: T[])=>boolean): T[];
-    filter<T>(o: {[string]: T}[], pred: {[string]: T}): T[];
-    select<T>(o: {[key:string]: T}, pred: (val: T, k: string, o: {[string]: T})=>boolean): T[];
+    filter<T>(o: { [string]: T, ... }[], pred: { [string]: T, ... }): T[];
+    select<T>(o: { [key:string]: T, ... }, pred: (val: T, k: string, o: { [string]: T, ... })=>boolean): T[];
     select<T>(a: T[], pred: (val: T, k: number, a: T[])=>boolean): T[];
-    select<T>(o: {[string]: T}[], pred: {[string]: T}): T[];
+    select<T>(o: { [string]: T, ... }[], pred: { [string]: T, ... }): T[];
     where<T>(list: Array<T>, properties: Object): Array<T>;
-    findWhere<T>(list: Array<T>, properties: {[key:string]: any}): ?T;
+    findWhere<T>(list: Array<T>, properties: { [key:string]: any, ... }): ?T;
 
-    reject<T>(o: {[key:string]: T}, pred: (val: T, k: string)=>boolean): T[];
+    reject<T>(o: { [key:string]: T, ... }, pred: (val: T, k: string)=>boolean): T[];
     reject<T>(a: T[], pred: (val: T, k: string)=>boolean): T[];
 
     every<T>(a: Array<T>, pred?: (val: T)=>boolean): boolean;
@@ -309,23 +309,23 @@ declare module "underscore" {
 
     pluck(a: Array<any>, propertyName: string): Array <any>;
 
-    max<T>(a: Array<T>|{[key:any]: T}): T;
-    min<T>(a: Array<T>|{[key:any]: T}): T;
+    max<T>(a: Array<T>|{ [key:any]: T, ... }): T;
+    min<T>(a: Array<T>|{ [key:any]: T, ... }): T;
 
     sortBy<T>(a: T[], property: any): T[];
     sortBy<T>(a: T[], iteratee: (val: T)=>any): T[];
-    groupBy<T>(a: Array<T>, iteratee: string | (val: T, index: number)=>any): {[key:string]: T[]};
-    indexBy<T>(a: Array<T>, iteratee: string | (val: T, index: number)=>any): {[key:string]: T[]};
-    countBy<T>(a: Array<T>, iteratee: (val: T, index: number)=>any): {[key:string]: T[]};
+    groupBy<T>(a: Array<T>, iteratee: string | (val: T, index: number)=>any): { [key:string]: T[], ... };
+    indexBy<T>(a: Array<T>, iteratee: string | (val: T, index: number)=>any): { [key:string]: T[], ... };
+    countBy<T>(a: Array<T>, iteratee: (val: T, index: number)=>any): { [key:string]: T[], ... };
     shuffle<T>(list: ?Array<T>): Array<T>;
     sample<T>(a: T[]): T;
 
-    toArray<T>(a: Iterable<T>|{[key:any]: T}): Array<T>;
+    toArray<T>(a: Iterable<T>|{ [key:any]: T, ... }): Array<T>;
 
     size(o: Object): number;
     size(o: Array<any>): number;
 
-    partition<T>(o: {[key:string]: T}, pred: (val: T, k: string)=>boolean): [T[], T[]];
+    partition<T>(o: { [key:string]: T, ... }, pred: (val: T, k: string)=>boolean): [T[], T[]];
     partition<T>(o: Array<T>, pred: (val: T)=>boolean): [T[], T[]];
 
     // Handle Array function
@@ -367,8 +367,8 @@ declare module "underscore" {
     zip<S, T>(a1: S[], a2: T[]): Array<[S, T]>;
     unzip(array: Array<Array<any>>): Array<Array<any>>;
 
-    object<T>(a: Array<[string, T]>): {[key:string]: T};
-    object<T>(list: Array<string>, values?: Array<T>): {[key: string]: T};
+    object<T>(a: Array<[string, T]>): { [key:string]: T, ... };
+    object<T>(list: Array<string>, values?: Array<T>): { [key: string]: T, ... };
 
     indexOf<T>(list: T[], val: T, isSorted?: boolean): number;
     lastIndexOf<T>(array: Array<T>, value: T, fromIndex?: number): number;
@@ -404,7 +404,11 @@ declare module "underscore" {
     memoize(func: Function, hashFunction?: Function): Function;
     delay(func: Function, wait: number, ...arguments: Array<any>): void;
     defer(func: Function, ...arguments: Array<any>): void;
-    throttle(func: Function, wait: number, options?: {leading: boolean, trailing: boolean}): Function;
+    throttle(func: Function, wait: number, options?: {
+      leading: boolean,
+      trailing: boolean,
+      ...
+    }): Function;
     debounce(func: Function, wait: number, immediate?: boolean): Function;
     once(func: Function): Function;
     after(count: number, func: Function): Function;
@@ -434,28 +438,28 @@ declare module "underscore" {
   }
 
   declare class UnderscoreObject {
-    keys<K, V>(object: {[keys: K]: V}): Array<K>;
-    allKeys<K, V>(object: {[keys: K]: V}): Array<K>;
-    values<K, V>(object: {[keys: K]: V}): Array<V>;
+    keys<K, V>(object: { [keys: K]: V, ... }): Array<K>;
+    allKeys<K, V>(object: { [keys: K]: V, ... }): Array<K>;
+    values<K, V>(object: { [keys: K]: V, ... }): Array<V>;
     mapObject(
       object: Object,
       iteratee: (val: any, key: string) => mixed,
       context?: mixed
     ): Object;
-    pairs<K, V>(object: {[keys: K]: V}): Array<[K, V]>;
-    invert<K, V>(object: {[keys: K]: V}): {[keys: V]: K};
+    pairs<K, V>(object: { [keys: K]: V, ... }): Array<[K, V]>;
+    invert<K, V>(object: { [keys: K]: V, ... }): { [keys: V]: K, ... };
     // TODO: _.create
     functions(object: Object): Array<string>;
-    findKey<K, V>(object: {[keys: K]: V}, predicate: (V, K, {[keys: K]: V}) => boolean, context?: mixed): ?string;
+    findKey<K, V>(object: { [keys: K]: V, ... }, predicate: (V, K, { [keys: K]: V, ... }) => boolean, context?: mixed): ?string;
     extend: typeof $underscore$Extend;
     extendOwn: typeof $underscore$Extend;
-    pick<K, V>(object: {[keys: K]: V}, predicate?: K): {[keys: K]: V};
-    omit<K, V>(object: {[keys: K]: V}, predicate?: K): {[keys: K]: V};
+    pick<K, V>(object: { [keys: K]: V, ... }, predicate?: K): { [keys: K]: V, ... };
+    omit<K, V>(object: { [keys: K]: V, ... }, predicate?: K): { [keys: K]: V, ... };
     defaults(defaults: ?Object, ...mores?: Array<Object>): Object;
-    clone<O: {}>(object: O): O;
+    clone<O: {...}>(object: O): O;
     tap<O>(object: O): O;
     has(object: Object, key: string): boolean;
-    property<K: string, V>(key: K): (obj: { [key: K]: V }) => V;
+    property<K: string, V>(key: K): (obj: { [key: K]: V, ... }) => V;
     // TODO _.propertyOf
     // TODO _.matcher, _.matches
     isEqual(object: Object, b: Object): boolean;
@@ -478,7 +482,7 @@ declare module "underscore" {
     isUndefined(object: any): boolean;
   }
 
-  declare class UnderscoreChainedObject<WrappedObj: {}> {
+  declare class UnderscoreChainedObject<WrappedObj: {...}> {
     value(): WrappedObj;
     keys(): UnderscoreChainedList<$Keys<WrappedObj>>;
     allKeys(): UnderscoreChainedList<$Keys<WrappedObj>>;
@@ -528,7 +532,7 @@ declare module "underscore" {
     isUndefined(): UnderscoreChainedValue<boolean>;
   }
 
-  declare class UnderscoreWrappedObject<WrappedObj: {}> {
+  declare class UnderscoreWrappedObject<WrappedObj: {...}> {
     chain(): UnderscoreChainedObject<WrappedObj>;
 
     map<R>(fn: (v: any, k: $Keys<WrappedObj>) => R): Array<R>;
@@ -541,7 +545,7 @@ declare module "underscore" {
       context?: mixed
     ): NewObj;
     pairs<K, V>(): Array<[K, V]>;
-    invert<K, V>(): {[keys: V]: K};
+    invert<K, V>(): { [keys: V]: K, ... };
     // TODO: _.create
     functions(): Array<string>;
     find(predicate: (v: any, k: $Keys<WrappedObj>, obj: WrappedObj) => boolean): ?any;
@@ -594,7 +598,7 @@ declare module "underscore" {
     unescape(string: string): string;
     // TODO: _.result
     now(): number;
-    template(templateText: string): (values: {[key: string]: string}) => string;
+    template(templateText: string): (values: { [key: string]: string, ... }) => string;
   }
 
   declare class UnderscoreWrappedList<T> {
@@ -612,7 +616,7 @@ declare module "underscore" {
     reduceRight<U>(iteratee: (memo: U, value: T, index?: number) => U, init: U): U;
     find(predicate: (value: T) => boolean): ?T;
     filter(predicate: (value: T) => boolean): Array<T>;
-    filter(predicate: {[string]: T}): Array<T>;
+    filter(predicate: { [string]: T, ... }): Array<T>;
     where(properties: Object): Array<T>;
     findWhere(properties: $Shape<T>): ?T;
     reject(predicate: (value: T) => boolean, context?: mixed): Array<T>;
@@ -626,11 +630,11 @@ declare module "underscore" {
     sortBy<U>(iteratee: (value: T) => number): Array<U>;
     sortBy<U>(iteratee: string): Array<U>;
     // TODO: UnderscoreWrapTheseObjects
-    groupBy<U>(iteratee: (value: T) => U, context?: mixed): { [key: U]: T };
-    groupBy(iteratee: string, context?: mixed): { [key: any]: T };
-    indexBy<U>(iteratee: (value: T) => U, context?: mixed): { [key: U]: T };
-    indexBy(iteratee: string, context?: mixed): { [key: any]: T };
-    countBy<U>(iteratee: (value: T) => U, context?: mixed): { [key: U]: T };
+    groupBy<U>(iteratee: (value: T) => U, context?: mixed): { [key: U]: T, ... };
+    groupBy(iteratee: string, context?: mixed): { [key: any]: T, ... };
+    indexBy<U>(iteratee: (value: T) => U, context?: mixed): { [key: U]: T, ... };
+    indexBy(iteratee: string, context?: mixed): { [key: any]: T, ... };
+    countBy<U>(iteratee: (value: T) => U, context?: mixed): { [key: U]: T, ... };
     shuffle(): Array<T>;
     sample(n?: number): Array<T>;
     toArray(): Array<T>;
@@ -675,16 +679,14 @@ declare module "underscore" {
 
   // Have to use a type with [[call]] instead of function type because otherwise this will cause us to lose type
   // information. see: https://github.com/facebook/flow/issues/3781
-  declare type WrappedExports = {
-    [[call]]:
-      // A type that can be an object or an array (usually 'any') should have both return types.
-      & (<AnyType: {} & []>(arg: AnyType) => UnderscoreWrappedObject<AnyType> & UnderscoreWrappedList<AnyType>)
-      // It's important that UnderscoreWrappedObject, UnderscoreWrappedList takes precedence over UnderscoreWrappedValue
-      & (<WrappedObj: {}>(arg: WrappedObj) => UnderscoreWrappedObject<WrappedObj>)
-      & (<T>(arg: Array<T>) => UnderscoreWrappedList<T>)
-      & (<T>(arg: [T]) => UnderscoreWrappedList<T>)
-      & (<T>(arg: T) => UnderscoreWrappedValue<T>)
-  }
+  declare type WrappedExports = { [[call]]:
+    // A type that can be an object or an array (usually 'any') should have both return types.
+    & (<AnyType: {...} & []>(arg: AnyType) => UnderscoreWrappedObject<AnyType> & UnderscoreWrappedList<AnyType>)
+    // It's important that UnderscoreWrappedObject, UnderscoreWrappedList takes precedence over UnderscoreWrappedValue
+    & (<WrappedObj: {...}>(arg: WrappedObj) => UnderscoreWrappedObject<WrappedObj>)
+    & (<T>(arg: Array<T>) => UnderscoreWrappedList<T>)
+    & (<T>(arg: [T]) => UnderscoreWrappedList<T>)
+    & (<T>(arg: T) => UnderscoreWrappedValue<T>), ... }
 
   declare type Underscore =
     & UnderscoreList

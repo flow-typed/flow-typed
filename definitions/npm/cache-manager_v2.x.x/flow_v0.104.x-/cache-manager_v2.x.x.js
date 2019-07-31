@@ -1,15 +1,16 @@
 declare module 'cache-manager' {
-  declare type _CacheOptions = {
-    ttl?: number,
-  }
+  declare type _CacheOptions = { ttl?: number, ... }
   /*declare type CacheOptions = $Shape<_CacheOptions> | Object*/
   declare type CacheOptions = Object
   declare type CachingOptions = _CacheOptions & {
     ignoreCacheErrors?: bool,
     isCacheableValue?: (value: mixed) => bool,
-    promiseDependency?: any, // typeof Promise?
+    // typeof Promise?
+    promiseDependency?: any,
     max?: number,
-    store: any //any because this can be specified by a lot
+    //any because this can be specified by a lot
+    store: any,
+    ...
   }
   declare class Cache {
     get(key: mixed, options?: CacheOptions): Promise<mixed>;
@@ -29,5 +30,6 @@ declare module 'cache-manager' {
     Cache: typeof Cache,
     caching: typeof caching,
     multiCaching: typeof multiCaching,
+    ...
   }
 }

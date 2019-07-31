@@ -33,14 +33,16 @@ declare module "next" {
       res: http$ServerResponse,
       pathname: string,
       query?: Object
-    ): string
+    ): string,
+    ...
   };
 
   declare export type Options = {
     dev?: boolean,
     dir?: string,
     quiet?: boolean,
-    staticMarkup?: boolean
+    staticMarkup?: boolean,
+    ...
   };
 
   declare export default (opts: Options) => NextApp
@@ -62,7 +64,8 @@ declare module "next/link" {
     +pathname?: string,
     +search?: string,
     +query?: Object,
-    +hash?: string
+    +hash?: string,
+    ...
   };
 
   declare export type Props = {
@@ -73,14 +76,15 @@ declare module "next/link" {
     onError?: (error: any) => void,
     href: string | URLObject,
     as?: string | URLObject,
-    passHref?: boolean
+    passHref?: boolean,
+    ...
   };
 
   declare export default Class<React$Component<Props>>
 }
 
 declare module "next/router" {
-  declare export type RouteError = Error & { cancelled: boolean };
+  declare export type RouteError = Error & { cancelled: boolean, ... };
   declare export type RouteCallback = (url: string) => void;
   declare export type RouteErrorCallback = (
     err: RouteError,
@@ -88,8 +92,9 @@ declare module "next/router" {
   ) => void;
 
   declare export type EventChangeOptions = {
+    [key: string]: any,
     shallow?: boolean,
-    [key: string]: any
+    ...
   };
 
   declare export type Router = {
@@ -111,11 +116,12 @@ declare module "next/router" {
       url: string,
       as: ?string,
       options?: EventChangeOptions
-    ): Promise<boolean>
+    ): Promise<boolean>,
+    ...
   };
 
   declare export function withRouter<T>(
-    Component: React$ComponentType<T & { router: Router }>
+    Component: React$ComponentType<T & { router: Router, ... }>
   ): Class<React$Component<T>>;
 
   declare export default Router
@@ -128,7 +134,8 @@ declare module "next/document" {
     +req?: any,
     +res?: any,
     +xhr?: any,
-    +err?: any
+    +err?: any,
+    ...
   };
 
   declare export var Head: Class<React$Component<any, any>>;
@@ -136,6 +143,7 @@ declare module "next/document" {
   declare export var NextScript: Class<React$Component<any, any>>;
   declare export default Class<React$Component<any, any>> & {
     getInitialProps: (ctx: Context) => Promise<*>,
-    renderPage(cb: Function): void
+    renderPage(cb: Function): void,
+    ...
   }
 }

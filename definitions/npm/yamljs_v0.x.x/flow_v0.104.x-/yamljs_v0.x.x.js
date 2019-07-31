@@ -10,6 +10,7 @@ declare module "yamljs" {
   declare export default {
     load: Load,
     parse: Parse,
-    stringify: Stringify
-  }
+    stringify: Stringify,
+    ...
+  };
 }

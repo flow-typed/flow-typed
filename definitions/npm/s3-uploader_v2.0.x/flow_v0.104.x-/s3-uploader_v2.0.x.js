@@ -4,7 +4,8 @@ declare module 's3-uploader' {
     suffix?: string,
     quality?: number,
     maxWidth?: number,
-    maxHeight?: number
+    maxHeight?: number,
+    ...
   };
 
   declare export type S3UploaderOptions = {
@@ -20,7 +21,8 @@ declare module 's3-uploader' {
     tmpDir?: string,
     workers?: number,
     url?: string,
-    versions?: S3UploaderVersion
+    versions?: S3UploaderVersion,
+    ...
   };
 
   declare export type Meta = {
@@ -30,12 +32,14 @@ declare module 's3-uploader' {
     orientation: string,
     colorSpace: string,
     compression: string,
-    quallity: string
+    quallity: string,
+    ...
   };
 
   declare export type imageSize = {
     height: number,
-    width: number
+    width: number,
+    ...
   };
 
   declare export type image = {
@@ -47,7 +51,8 @@ declare module 's3-uploader' {
     size: string,
     src: string,
     url: string,
-    width: number
+    width: number,
+    ...
   };
 
   declare export default class Upload {

@@ -1,6 +1,7 @@
 type $npm$HumanizeNumber$Options = {
   delimiter?: string,
-  separator?: string
+  separator?: string,
+  ...
 };
 
 declare module "humanize-number" {

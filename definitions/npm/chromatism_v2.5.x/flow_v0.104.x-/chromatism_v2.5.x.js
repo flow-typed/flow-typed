@@ -11,7 +11,12 @@ declare module 'chromatism' {
    * @example
    * { r:255, g: 200, b: 55 }
    */
-  declare export type RGBColourMode = { r: number, g: number, b: number };
+  declare export type RGBColourMode = {
+   r: number,
+   g: number,
+   b: number,
+   ...
+  };
 
   /**
    * CSS RGB Color String
@@ -25,63 +30,109 @@ declare module 'chromatism' {
    * @example
    * { h: 44, s: 100, l: 61 }
    */
-  declare export type HSLColourMode = { h: number, s: number, l: number };
+  declare export type HSLColourMode = {
+   h: number,
+   s: number,
+   l: number,
+   ...
+  };
 
   /**
    * CSS HSL Color String
    * @example
    * "hsl(44,100,61)"
    */
-  declare export type CSSHSLColourMode = { h: number, s: number, l: number };
+  declare export type CSSHSLColourMode = {
+   h: number,
+   s: number,
+   l: number,
+   ...
+  };
 
   /**
    * HSV Color Object
    * @example
    * { h: 44, s: 78, v: 100 }
    */
-  declare export type HSVColourMode = { h: number, s: number, v: number };
+  declare export type HSVColourMode = {
+   h: number,
+   s: number,
+   v: number,
+   ...
+  };
 
   /**
    * CMYK Color Object
    * @example
    * { c: 0.5, m: 1, y: 0.2, k: 0.45 }
    */
-  declare export type CMYKColourMode = { c: number, m: number, y: number, k: number };
+  declare export type CMYKColourMode = {
+   c: number,
+   m: number,
+   y: number,
+   k: number,
+   ...
+  };
 
   /**
    * YIQ Color Object
    * @example
    * { y: 0.132, i: 0.0222, q: 0.195 }
    */
-  declare export type YIQColourMode = { y: number, i: number, q: number };
+  declare export type YIQColourMode = {
+   y: number,
+   i: number,
+   q: number,
+   ...
+  };
 
   /**
    * XYZ Color Object
    * @example
    * { X: 41.24, Y: 21.26, Z: 1.93 }
    */
-  declare export type XYZColourMode = { X: number, Y: number, Z: number };
+  declare export type XYZColourMode = {
+   X: number,
+   Y: number,
+   Z: number,
+   ...
+  };
 
   /**
    * xyY Color Object
    * @example
    * { x: 0.64, y: 0.33, Y: 21.26 }
    */
-  declare export type XYYColourMode = { x: number, y: number, Y: number };
+  declare export type XYYColourMode = {
+   x: number,
+   y: number,
+   Y: number,
+   ...
+  };
 
   /**
    * LMS Color Object
    * @example
    * { rho: 42.266, gamma: 5.561, beta: 2.135 }
    */
-  declare export type LMSColourMode = { rho: number, gamma: number, beta: number };
+  declare export type LMSColourMode = {
+   rho: number,
+   gamma: number,
+   beta: number,
+   ...
+  };
 
   /**
    * CIELAB (L*a*b*) Color Object
    * @example
    * { L: 53.23, a: 80.11, b: 67.22 }
    */
-  declare export type CIELABColourMode = { L: number, a: number, b: number };
+  declare export type CIELABColourMode = {
+   L: number,
+   a: number,
+   b: number,
+   ...
+  };
 
 
   /**
@@ -89,21 +140,36 @@ declare module 'chromatism' {
    * @example
    * { L: 53.23, u: 175.05, v: 37.75 }
    */
-  declare export type CIELUVColourMode = { L: number, u: number, v: number };
+  declare export type CIELUVColourMode = {
+   L: number,
+   u: number,
+   v: number,
+   ...
+  };
 
   /**
    * CIELCH (L*C*h*) Color Object
    * @example
    * { L: 53.23, C: 179.08, h: 12.17 }
    */
-  declare export type CIELCHColourMode = { L: number, C: number, h: number };
+  declare export type CIELCHColourMode = {
+   L: number,
+   C: number,
+   h: number,
+   ...
+  };
 
   /**
    * HSLuv Color Object
    * @example
    * { L: 53.23, C: 179.08, h: 12.17 }
    */
-  declare export type HSLUVColourMode = { hu: number, s: number, l: number };
+  declare export type HSLUVColourMode = {
+   hu: number,
+   s: number,
+   l: number,
+   ...
+  };
 
   /**
    * Represents all available color modes.
@@ -129,69 +195,73 @@ declare module 'chromatism' {
    * All functions return an object containing all modes of the result.
    */
   declare export type ColourObject = {
-    hex: HEXColourMode,
-    rgb: RGBColourMode,
-    cssrgb: CSSRGBColourMode,
-    hsl: HSLColourMode,
-    csshsl: CSSHSLColourMode,
-    hsv: HSVColourMode,
-    cmyk: CMYKColourMode,
-    yiq: YIQColourMode,
-    XYZ: XYZColourMode,
-    xyY: XYYColourMode,
-    lms: LMSColourMode,
-    cielab: CIELABColourMode,
-    cieluv: CIELUVColourMode,
-    cielch: CIELCHColourMode,
-    hsluv: HSLUVColourMode,
+   hex: HEXColourMode,
+   rgb: RGBColourMode,
+   cssrgb: CSSRGBColourMode,
+   hsl: HSLColourMode,
+   csshsl: CSSHSLColourMode,
+   hsv: HSVColourMode,
+   cmyk: CMYKColourMode,
+   yiq: YIQColourMode,
+   XYZ: XYZColourMode,
+   xyY: XYYColourMode,
+   lms: LMSColourMode,
+   cielab: CIELABColourMode,
+   cieluv: CIELUVColourMode,
+   cielch: CIELCHColourMode,
+   hsluv: HSLUVColourMode,
+   ...
   };
 
   /**
    * Helper type for functions that return multiple colour values.
    */
   declare export type ColourObjectArray = {
-    hex: Array<HEXColourMode>,
-    rgb: Array<RGBColourMode>,
-    cssrgb: Array<CSSRGBColourMode>,
-    hsl: Array<HSLColourMode>,
-    csshsl: Array<CSSHSLColourMode>,
-    hsv: Array<HSVColourMode>,
-    cmyk: Array<CMYKColourMode>,
-    yiq: Array<YIQColourMode>,
-    XYZ: Array<XYZColourMode>,
-    xyY: Array<XYYColourMode>,
-    lms: Array<LMSColourMode>,
-    cielab: Array<CIELABColourMode>,
-    cieluv: Array<CIELUVColourMode>,
-    cielch: Array<CIELCHColourMode>,
-    hsluv: Array<HSLUVColourMode>,
+   hex: Array<HEXColourMode>,
+   rgb: Array<RGBColourMode>,
+   cssrgb: Array<CSSRGBColourMode>,
+   hsl: Array<HSLColourMode>,
+   csshsl: Array<CSSHSLColourMode>,
+   hsv: Array<HSVColourMode>,
+   cmyk: Array<CMYKColourMode>,
+   yiq: Array<YIQColourMode>,
+   XYZ: Array<XYZColourMode>,
+   xyY: Array<XYYColourMode>,
+   lms: Array<LMSColourMode>,
+   cielab: Array<CIELABColourMode>,
+   cieluv: Array<CIELUVColourMode>,
+   cielch: Array<CIELCHColourMode>,
+   hsluv: Array<HSLUVColourMode>,
+   ...
   };
 
   /**
    * Properties representing standard CIE illuminants constants
    */
   declare export var ILLUMINANTS: {
-    A: XYZColourMode,
-    B: XYZColourMode,
-    C: XYZColourMode,
-    D50: XYZColourMode,
-    D55: XYZColourMode,
-    D65: XYZColourMode,
-    D75: XYZColourMode,
-    E: XYZColourMode,
-    F2: XYZColourMode,
-    F7: XYZColourMode,
-    F11: XYZColourMode,
+   A: XYZColourMode,
+   B: XYZColourMode,
+   C: XYZColourMode,
+   D50: XYZColourMode,
+   D55: XYZColourMode,
+   D65: XYZColourMode,
+   D75: XYZColourMode,
+   E: XYZColourMode,
+   F2: XYZColourMode,
+   F7: XYZColourMode,
+   F11: XYZColourMode,
+   ...
   };
 
   /**
    * Properties representing useful transform matricies
    */
   declare export var TRANSFORMS: {
-    BRADFORD: Array<number>,
-    INVERSE_BRADFORD: Array<number>,
-    SRGB_XYZ: Array<number>,
-    INVERSE_SRGB_XYZ: Array<number>,
+   BRADFORD: Array<number>,
+   INVERSE_BRADFORD: Array<number>,
+   SRGB_XYZ: Array<number>,
+   INVERSE_SRGB_XYZ: Array<number>,
+   ...
   };
 
   /**

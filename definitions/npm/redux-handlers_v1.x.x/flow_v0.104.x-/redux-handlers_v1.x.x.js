@@ -5,7 +5,8 @@ declare module 'redux-handlers' {
 
   declare type HandlerSystem = {
     registerHandler: (string, typeof HandlerFn) => void,
-    createReducer: (State) => (state: State, action: {}) => State
+    createReducer: (State) => (state: State, action: {...}) => State,
+    ...
   }
 
   declare export function createHandlers(): HandlerSystem

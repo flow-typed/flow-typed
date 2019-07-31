@@ -1,7 +1,8 @@
 declare module "react-native-section-list-get-item-layout" {
   declare export type SectionListData = Array<{
     title: string,
-    data: Array<any>
+    data: Array<any>,
+    ...
   }>;
 
   declare export type Parameters = {|
@@ -24,6 +25,7 @@ declare module "react-native-section-list-get-item-layout" {
   ) => {
     length: number,
     offset: number,
-    index: number
+    index: number,
+    ...
   };
 }

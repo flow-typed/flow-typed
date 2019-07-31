@@ -60,7 +60,13 @@ render(
   <CompactPicker
     onChangeComplete={color => {
       (color.hex: string);
-      (color.hsl: { h: number, s: number, l: number, a?: number });
+      (color.hsl: {
+        h: number,
+        s: number,
+        l: number,
+        a?: number,
+        ...
+      });
       // $ExpectError (rgb should be an RGBColor object)
       (color.rgb: string);
     }}
@@ -127,7 +133,7 @@ render(<TwitterPicker colors={["#111", "#222"]} />, root);
  * Test custom picker
  */
 
-type MyPickerProps = InjectedColorProps & { ownProp: boolean };
+type MyPickerProps = InjectedColorProps & { ownProp: boolean, ... };
 const MyPicker = ({ hex, hsl, hsv, onChange }: MyPickerProps) => {
  const styles = {
    hue: {

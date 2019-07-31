@@ -34,14 +34,16 @@ declare module "next" {
       res: http$ServerResponse,
       pathname: string,
       query?: Object
-    ): string
+    ): string,
+    ...
   };
 
   declare export type Options = {
     dev?: boolean,
     dir?: string,
     quiet?: boolean,
-    staticMarkup?: boolean
+    staticMarkup?: boolean,
+    ...
   };
 
   declare export type Context = {
@@ -50,12 +52,14 @@ declare module "next" {
     +req?: any,
     +res?: any,
     +xhr?: any,
-    +err?: any
+    +err?: any,
+    ...
   };
 
   declare export type Page<T, S> = {
     ...React$Component<T, S>,
-    getInitialProps: (ctx: Context) => Promise<*>
+    getInitialProps: (ctx: Context) => Promise<*>,
+    ...
   };
 
   declare export default (opts: Options) => NextApp;
@@ -67,8 +71,9 @@ declare module "next/head" {
 
 declare module "next/config" {
   declare module.exports: () => {
-    publicRuntimeConfig: { [string]: string },
-    serverRuntimeConfig: { [string]: string }
+    publicRuntimeConfig: { [string]: string, ... },
+    serverRuntimeConfig: { [string]: string, ... },
+    ...
   };
 }
 
@@ -83,7 +88,8 @@ declare type URLObject = {
   +pathname?: string,
   +search?: string,
   +query?: Object,
-  +hash?: string
+  +hash?: string,
+  ...
 };
 
 declare module "next/link" {
@@ -95,14 +101,15 @@ declare module "next/link" {
     onError?: (error: any) => void,
     href: string | URLObject,
     as?: string | URLObject,
-    passHref?: boolean
+    passHref?: boolean,
+    ...
   };
 
   declare export default Class<React$Component<Props>>;
 }
 
 declare module "next/router" {
-  declare export type RouteError = Error & { cancelled: boolean };
+  declare export type RouteError = Error & { cancelled: boolean, ... };
   declare export type RouteCallback = (url: string) => void;
   declare export type RouteErrorCallback = (
     err: RouteError,
@@ -126,14 +133,16 @@ declare module "next/router" {
   }
 
   declare export type EventChangeOptions = {
+    [key: string]: any,
     shallow?: boolean,
-    [key: string]: any
+    ...
   };
 
   declare export type BeforePopStateCallback = (options: {
     url: string,
     as: ?string,
-    options: EventChangeOptions
+    options: EventChangeOptions,
+    ...
   }) => boolean;
 
   declare export type Router = {
@@ -153,11 +162,12 @@ declare module "next/router" {
       options?: EventChangeOptions
     ): Promise<boolean>,
     prefetch(url: string): Promise<*>,
-    beforePopState(cb: BeforePopStateCallback): void
+    beforePopState(cb: BeforePopStateCallback): void,
+    ...
   };
 
   declare export function withRouter<T>(
-    Component: React$ComponentType<T & { router: Router }>
+    Component: React$ComponentType<T & { router: Router, ... }>
   ): Class<React$Component<T>>;
 
   declare export default Router;
@@ -171,7 +181,8 @@ declare module "next/document" {
   declare export var NextScript: Class<React$Component<any, any>>;
   declare export default Class<React$Component<any, any>> & {
     getInitialProps: (ctx: Context) => Promise<*>,
-    renderPage(cb: Function): void
+    renderPage(cb: Function): void,
+    ...
   };
 }
 
@@ -184,19 +195,16 @@ declare module "next/app" {
   declare export type AppInitialProps = {
     Component: Page<any, any>,
     router: Router,
-    ctx: Context
+    ctx: Context,
+    ...
   };
 
-  declare export default Class<React$Component<any, any>> & {
-    getInitialProps: (appInitialProps: AppInitialProps) => Promise<*>
-  };
+  declare export default Class<React$Component<any, any>> & { getInitialProps: (appInitialProps: AppInitialProps) => Promise<*>, ... };
 }
 
 declare module "next/dynamic" {
   declare type ImportedComponent = Promise<null | React$ElementType>;
-  declare type ComponentMapping = {
-    [componentName: string]: ImportedComponent
-  };
+  declare type ComponentMapping = { [componentName: string]: ImportedComponent, ... };
 
   declare type NextDynamicOptions = {
     loader?: ComponentMapping | (() => ImportedComponent),
@@ -206,13 +214,15 @@ declare module "next/dynamic" {
     ssr?: boolean,
     render?: (
       props: any,
-      loaded: { [componentName: string]: React$ElementType }
+      loaded: { [componentName: string]: React$ElementType, ... }
     ) => React$ElementType,
     modules?: () => ComponentMapping,
     loadableGenerated?: {
       webpack?: any,
-      modules?: any
-    }
+      modules?: any,
+      ...
+    },
+    ...
   };
 
   declare export default function dynamic(

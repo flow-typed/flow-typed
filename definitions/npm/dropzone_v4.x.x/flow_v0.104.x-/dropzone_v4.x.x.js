@@ -3,7 +3,8 @@ type $npm$dropzone$DrawImageOptions = {
   srcX: number,
   srcY: number,
   srcWidth: number,
-  srcHeight: number
+  srcHeight: number,
+  ...
 };
 
 type $npm$dropzone$DropzoneOptions = {
@@ -14,7 +15,7 @@ type $npm$dropzone$DropzoneOptions = {
   filesizeBase?: number,
   paramName?: string,
   uploadMultiple?: boolean,
-  headers?: { [key: string]: string },
+  headers?: { [key: string]: string, ... },
   addRemoveLinks?: boolean,
   previewsContainer?: HTMLElement | string,
   clickable?: boolean,
@@ -39,7 +40,8 @@ type $npm$dropzone$DropzoneOptions = {
   dictCancelUpload?: string,
   dictCancelUploadConfirmation?: string,
   dictRemoveFile?: string,
-  dictMaxFilesExceeded?: string
+  dictMaxFilesExceeded?: string,
+  ...
 };
 
 declare module "dropzone" {

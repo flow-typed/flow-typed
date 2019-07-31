@@ -6,11 +6,10 @@ declare module "react-dropzone" {
     isDragActive: boolean,
     isDragAccept: boolean,
     isDragReject: boolean,
+    ...
   }
 
-  declare type DropzoneFile = File & {
-    preview?: string;
-  }
+  declare type DropzoneFile = File & { preview?: string, ... }
 
   declare type DropzoneProps = {
     accept?: string,
@@ -43,6 +42,7 @@ declare module "react-dropzone" {
     onDragOver?: (event: SyntheticDragEvent<>) => mixed,
     onDragLeave?: (event: SyntheticDragEvent<>) => mixed,
     onFileDialogCancel?: () => mixed,
+    ...
   };
 
   declare class Dropzone extends React$Component<DropzoneProps> {

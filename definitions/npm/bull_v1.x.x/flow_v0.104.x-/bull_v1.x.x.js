@@ -14,7 +14,8 @@ declare type $npm$bull$jobPriority =
 
 declare type $npm$bull$jobOptions = {
   priority: $npm$bull$jobPriority,
-  attempts: number
+  attempts: number,
+  ...
 };
 
 declare module "bull" {

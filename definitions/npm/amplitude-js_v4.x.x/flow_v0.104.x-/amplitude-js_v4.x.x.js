@@ -3,33 +3,34 @@
 declare module 'amplitude-js' {
   declare type SimplePropertyValue = string | number;
   declare type PropertyValue = SimplePropertyValue | $ReadOnlyArray<SimplePropertyValue>;
-  declare type PropertyObject = { +[name: string]: PropertyValue };
+  declare type PropertyObject = { +[name: string]: PropertyValue, ... };
   declare type CompoundPropertyValue = PropertyValue | PropertyObject;
   declare type EventCallback = (responseCode: number, responseBody: string) => mixed;
-  declare type GroupsMap = { +[name: string]: string | $ReadOnlyArray<string> };
+  declare type GroupsMap = { +[name: string]: string | $ReadOnlyArray<string>, ... };
 
   declare type AmplitudeConfig = {
-    +batchEvents?: boolean,
-    +cookieExpiration?: number,
-    +cookieName?: string,
-    +deviceId?: string,
-    +deviceIdFromUrlParam?: boolean,
-    +domain?: string,
-    +eventUploadPeriodMillis?: number,
-    +eventUploadThreshold?: number,
-    +forceHttps?: boolean,
-    +includeGclid?: boolean,
-    +includeReferrer?: boolean,
-    +includeUtm?: boolean,
-    +language?: string,
-    +logLevel?: string,
-    +optOut?: boolean,
-    +platform?: string,
-    +saveEvents?: boolean,
-    +savedMaxCount?: number,
-    +saveParamsReferrerOncePerSession?: boolean,
-    +sessionTimeout?: number,
-    +uploadBatchSize?: number,
+   +batchEvents?: boolean,
+   +cookieExpiration?: number,
+   +cookieName?: string,
+   +deviceId?: string,
+   +deviceIdFromUrlParam?: boolean,
+   +domain?: string,
+   +eventUploadPeriodMillis?: number,
+   +eventUploadThreshold?: number,
+   +forceHttps?: boolean,
+   +includeGclid?: boolean,
+   +includeReferrer?: boolean,
+   +includeUtm?: boolean,
+   +language?: string,
+   +logLevel?: string,
+   +optOut?: boolean,
+   +platform?: string,
+   +saveEvents?: boolean,
+   +savedMaxCount?: number,
+   +saveParamsReferrerOncePerSession?: boolean,
+   +sessionTimeout?: number,
+   +uploadBatchSize?: number,
+   ...
   };
 
   /**

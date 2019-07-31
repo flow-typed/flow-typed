@@ -1,17 +1,15 @@
 /* @flow */
 
-declare type config = {
-  configurations: {
-    device?: {
-      name: string,
-      type: string
-    }
-  }
-};
+declare type config = { configurations: { device?: {
+  name: string,
+  type: string,
+  ...
+}, ... }, ... };
 
 declare type initGlobals = {
   initGlobals?: boolean,
-  launchApp?: boolean
+  launchApp?: boolean,
+  ...
 };
 
 declare type initFunc = (config: config, initGlobals?: initGlobals) => void;
@@ -23,9 +21,10 @@ declare type launchParamsType = {
   newInstance?: boolean,
   permissions?: permissionsType,
   url?: string,
-  userNotification?: {},
+  userNotification?: {...},
   delete?: boolean,
-  launchArgs?: {}
+  launchArgs?: {...},
+  ...
 };
 declare type permissionsType = {
   calendar?: permissionValues,
@@ -41,34 +40,39 @@ declare type permissionsType = {
   photos?: permissionValues,
   reminders?: permissionValues,
   siri?: permissionValues,
-  speech?: permissionValues
+  speech?: permissionValues,
+  ...
 };
 declare type openURLType = {
   url: string,
-  sourceApp?: string
+  sourceApp?: string,
+  ...
 };
 declare type notificationType = {
   trigger: {
     type: "push" | "calendar" | "timeInterval" | "location",
     timeInterval?: number,
-    "date-components"?: {},
+    "date-components"?: {...},
     region?: {
-      center: {},
+      center: {...},
       radius: number,
       notifyOnEntry?: boolean,
-      notifyOnExit?: boolean
+      notifyOnExit?: boolean,
+      ...
     },
-    repeats?: boolean
+    repeats?: boolean,
+    ...
   },
   title?: string,
   subtitle?: string,
   body?: string,
   badge?: number,
-  payload?: {},
+  payload?: {...},
   category?: string,
   "user-text"?: string,
   "content-available"?: number,
-  "action-identifier"?: string
+  "action-identifier"?: string,
+  ...
 };
 
 declare type deviceMethods = {
@@ -87,7 +91,8 @@ declare type deviceMethods = {
   setOrientation: orientationTypes => Promise<void>,
   setURLBlacklist: (urls: string[]) => Promise<void>,
   terminateApp: (bundleID?: string) => Promise<void>,
-  uninstallApp: (bundleID?: string) => Promise<void>
+  uninstallApp: (bundleID?: string) => Promise<void>,
+  ...
 };
 
 declare type directionTypes = "left" | "right" | "top" | "down";
@@ -95,10 +100,11 @@ declare type edgeTypes = "left" | "right" | "top" | "bottom";
 declare type speedTypes = "fast" | "slow";
 declare type coordinateTypes = {
   x: number,
-  y: number
+  y: number,
+  ...
 };
 
-declare type elementActions = {};
+declare type elementActions = {...};
 
 declare module "detox" {
   declare function cleanup(): Promise<void>;
@@ -116,7 +122,8 @@ declare module "detox" {
     text: inputString,
     traits: inputArrString,
     type: inputString,
-    value: inputString
+    value: inputString,
+    ...
   };
 
   declare class Matcher {}
@@ -179,6 +186,7 @@ declare module "detox" {
     element: (matcher: Matcher) => Element,
     expect: (element: Element) => ExpectElement,
     init: initFunc,
-    waitFor: (element: Element) => WaitForElement
+    waitFor: (element: Element) => WaitForElement,
+    ...
   };
 }

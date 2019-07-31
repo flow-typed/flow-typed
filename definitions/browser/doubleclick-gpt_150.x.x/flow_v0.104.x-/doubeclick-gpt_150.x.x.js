@@ -116,10 +116,11 @@ interface PubAdsService extends Service {
   ): Slot;
   enableAsyncRendering(): boolean;
   enableLazyLoad(opt_config?: {
-        fetchMarginPercent?: number,
-        renderMarginPercent?: number,
-        mobileScaling?: number
-    }): PubAdsService;
+    fetchMarginPercent?: number,
+    renderMarginPercent?: number,
+    mobileScaling?: number,
+    ...
+  }): PubAdsService;
   enableSingleRequest(): boolean;
   enableSyncRendering(): boolean;
   enableVideoAds(): void;
@@ -129,7 +130,7 @@ interface PubAdsService extends Service {
   getTargetingKeys(): string[];
   refresh(
     opt_slots?: Slot[],
-    opt_options?: { changeCorrelator: boolean }
+    opt_options?: { changeCorrelator: boolean, ... }
   ): void;
   set(key: string, value: string): PubAdsService;
   setCategoryExclusion(categoryExclusion: string): PubAdsService;

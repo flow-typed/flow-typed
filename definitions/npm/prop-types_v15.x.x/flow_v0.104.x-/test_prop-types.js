@@ -18,16 +18,10 @@ describe('PropType Primitives', () => {
 
     const FooShape = {
       foo: (PropTypes.shape(XShape)
-        .isRequired: React$PropType$Primitive$Required<{
-        x: number,
-      }>),
+        .isRequired: React$PropType$Primitive$Required<{ x: number, ... }>),
     };
 
-    (PropTypes.shape(FooShape): React$PropType$Primitive<{
-      foo: {
-        x: number,
-      },
-    }>);
+    (PropTypes.shape(FooShape): React$PropType$Primitive<{ foo: { x: number, ... }, ... }>);
   });
 });
 

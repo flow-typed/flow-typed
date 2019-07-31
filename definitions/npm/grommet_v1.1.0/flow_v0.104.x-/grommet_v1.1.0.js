@@ -9,7 +9,8 @@ declare module "grommet/components/Accordion" {
     active?: number | number[],
     animate?: boolean,
     onActive?: Function,
-    openMulti?: boolean
+    openMulti?: boolean,
+    ...
   };
 
   declare class Accordion extends React$Component<Grommet$AccordionProps> {}
@@ -24,7 +25,8 @@ declare module "grommet/components/AccordionPanel" {
     animate?: boolean,
     heading?: ReactNode,
     onChange?: Function,
-    pad?: any
+    pad?: any,
+    ...
   };
 
   declare class AccordionPanel extends React$Component<
@@ -40,7 +42,8 @@ declare module "grommet/components/Animate" {
     enter?: GrommetCustomTypes$AnimationDetails,
     keep?: boolean,
     leave?: GrommetCustomTypes$AnimationDetails,
-    visible?: "scroll" | boolean
+    visible?: "scroll" | boolean,
+    ...
   };
 
   declare class Animate extends React$Component<Grommet$AnimateProps> {}
@@ -51,7 +54,8 @@ declare module "grommet/components/Animate" {
 declare module "grommet/components/App" {
   declare type Grommet$AppProps = {
     centered?: boolean,
-    inline?: boolean
+    inline?: boolean,
+    ...
   };
 
   declare class App extends React$Component<Grommet$AppProps> {}
@@ -75,7 +79,8 @@ declare module "grommet/components/Anchor" {
     primary?: boolean,
     reverse?: boolean,
     tag?: string,
-    target?: string
+    target?: string,
+    ...
   };
 
   declare class Anchor extends React$Component<Grommet$AnchorProps> {}
@@ -89,7 +94,8 @@ declare module "grommet/components/Article" {
     onProgress?: Function,
     onSelect?: Function,
     scrollStep?: boolean,
-    selected?: number
+    selected?: number,
+    ...
   } & Grommet$BoxProps<Article> &
     Grommet$BoxFull;
   declare class Article extends React$Component<Grommet$ArticleProps> {}
@@ -122,7 +128,8 @@ declare module "grommet/components/Button" {
     primary?: boolean,
     reverse?: boolean,
     secondary?: boolean,
-    type?: "button" | "reset" | "submit"
+    type?: "button" | "reset" | "submit",
+    ...
   };
 
   declare class Button extends React$Component<Grommet$ButtonProps> {}
@@ -135,11 +142,11 @@ declare module "grommet/components/Card" {
     contentPad?:
       | GrommetBoxTypes$PadSizes
       | {
-          between?: GrommetBoxTypes$PadSizes,
-          horizontal?: GrommetBoxTypes$PadSizes,
-          vertical?: GrommetBoxTypes$PadSizes
-        },
-
+      between?: GrommetBoxTypes$PadSizes,
+      horizontal?: GrommetBoxTypes$PadSizes,
+      vertical?: GrommetBoxTypes$PadSizes,
+      ...
+    },
     description?: string | React$Element<any>,
     heading?: string | React$Element<any>,
     headingStrong?: boolean,
@@ -150,10 +157,12 @@ declare module "grommet/components/Card" {
     truncate?: boolean,
     video?:
       | {
-          source: string,
-          type?: string
-        }
-      | React$Element<any>
+      source: string,
+      type?: string,
+      ...
+    }
+      | React$Element<any>,
+    ...
   } & Grommet$BoxProps<Card> &
     Grommet$BoxFull;
 
@@ -168,7 +177,8 @@ declare module "grommet/components/Carousel" {
     autoplay?: boolean,
     autoplaySpeed?: number,
     infinite?: boolean,
-    persistentNav?: boolean
+    persistentNav?: boolean,
+    ...
   };
 
   declare class Carousel extends React$Component<Grommet$CarouselProps> {}
@@ -190,13 +200,14 @@ declare module "grommet/components/chart/Axis" {
     labels: Array<{
       colorIndex?: string,
       index: number,
-      label: ReactNode
+      label: ReactNode,
+      ...
     }>,
-
     reverse?: boolean,
     ticks?: boolean,
     tickAlign?: "start" | "end",
-    vertical?: boolean
+    vertical?: boolean,
+    ...
   };
 
   declare class Axis extends React$Component<Grommet$Chart$AxisProps> {}
@@ -214,7 +225,8 @@ declare module "grommet/components/chart/Base" {
   declare type Grommet$Chart$BaseProps = {
     height?: "xxsmall" | "xsmall" | "small" | "medium" | "large" | "sparkline",
     vertical?: boolean,
-    width?: "small" | "medium" | "large" | "full"
+    width?: "small" | "medium" | "large" | "full",
+    ...
   };
 
   declare class Base extends React$Component<Grommet$Chart$BaseProps> {}
@@ -237,7 +249,8 @@ declare module "grommet/components/chart/Graph" {
 declare module "grommet/components/chart/Grid" {
   declare type Grommet$Chart$GridProps = {
     columns?: number,
-    row?: number
+    row?: number,
+    ...
   };
 
   declare class Grid extends React$Component<Grommet$Chart$GridProps> {}
@@ -252,7 +265,8 @@ declare module "grommet/components/chart/HotSpots" {
     count: number,
     onActive?: Function,
     onClick?: Function,
-    vertical?: boolean
+    vertical?: boolean,
+    ...
   };
 
   declare class HotSpots extends React$Component<$Grommet$Chart$HotSpots> {}
@@ -263,7 +277,8 @@ declare module "grommet/components/chart/HotSpots" {
 declare module "grommet/components/chart/Layers" {
   declare type Grommet$Chart$LayersProps = {
     height?: number,
-    width?: number
+    width?: number,
+    ...
   };
 
   declare class Layers extends React$Component<Grommet$Chart$LayersProps> {}
@@ -286,7 +301,8 @@ declare module "grommet/components/chart/Marker" {
     min?: number,
     reverse?: boolean,
     value?: number,
-    vertical?: boolean
+    vertical?: boolean,
+    ...
   };
 
   declare class Marker extends React$Component<$Grommet$Chart$MarkerProps> {}
@@ -305,7 +321,8 @@ declare module "grommet/components/chart/MarkerLabel" {
     min?: number,
     reverse?: boolean,
     value?: number,
-    vertical?: boolean
+    vertical?: boolean,
+    ...
   };
 
   declare class MarkerLabel extends React$Component<
@@ -319,12 +336,13 @@ declare module "grommet/components/chart/Range" {
   declare type $Grommet$Chart$RangeProps = {
     active?: {
       end: number,
-      start: number
+      start: number,
+      ...
     },
-
     count: number,
     onActive?: Function,
-    vertical?: boolean
+    vertical?: boolean,
+    ...
   };
 
   declare class Range extends React$Component<$Grommet$Chart$RangeProps> {}
@@ -340,7 +358,8 @@ declare module "grommet/components/CheckBox" {
     name?: string,
     onChange?: Function,
     reverse?: boolean,
-    toggle?: boolean
+    toggle?: boolean,
+    ...
   };
 
   declare class CheckBox extends React$Component<Grommet$CheckBoxProps> {}
@@ -355,7 +374,8 @@ declare module "grommet/components/Columns" {
     masonry?: boolean,
     maxCount?: number,
     responsive?: boolean,
-    size?: "small" | "medium" | "large"
+    size?: "small" | "medium" | "large",
+    ...
   };
 
   declare class Columns extends React$Component<Grommet$ColumnsProps> {}
@@ -370,7 +390,8 @@ declare module "grommet/components/DateTime" {
     name?: string,
     onChange?: Function,
     step?: number,
-    value?: string | {}
+    value?: string | {...},
+    ...
   };
 
   declare class DateTime extends React$Component<Grommet$DateTimeProps> {}
@@ -391,13 +412,15 @@ declare module "grommet/components/Distribution" {
       icon?: {
         width?: number,
         height?: number,
-        svgElement?: ReactNode
-      }
+        svgElement?: ReactNode,
+        ...
+      },
+      ...
     }>,
-
     size?: "small" | "medium" | "large" | "full",
     units?: string,
-    vertical?: boolean
+    vertical?: boolean,
+    ...
   };
 
   declare class Distribution extends React$Component<
@@ -412,7 +435,8 @@ declare module "grommet/components/Footer" {
     fixed?: boolean,
     float?: boolean,
     primary?: boolean,
-    size?: "small" | "medium" | "large"
+    size?: "small" | "medium" | "large",
+    ...
   } & Grommet$BoxProps<Footer> &
     Grommet$BoxFull;
 
@@ -429,9 +453,11 @@ declare module "grommet/components/Form" {
     pad?:
       | GrommetCustomTypes$FormPadding
       | {
-          horizontal?: GrommetCustomTypes$FormPadding,
-          vertical?: GrommetCustomTypes$FormPadding
-        }
+      horizontal?: GrommetCustomTypes$FormPadding,
+      vertical?: GrommetCustomTypes$FormPadding,
+      ...
+    },
+    ...
   };
 
   declare class Form extends React$Component<Grommet$FormProps> {}
@@ -442,7 +468,8 @@ declare module "grommet/components/Form" {
 declare module "grommet/components/FormattedMessage" {
   declare type Grommet$FormattedMessageProps = {
     id: string,
-    defaultMessage?: string
+    defaultMessage?: string,
+    ...
   };
 
   declare class FormattedMessage extends React$Component<
@@ -460,7 +487,8 @@ declare module "grommet/components/FormField" {
     htmlFor?: string,
     label?: ReactNode,
     size?: "medium" | "large",
-    strong?: boolean
+    strong?: boolean,
+    ...
   };
 
   declare class FormField extends React$Component<Grommet$FormFieldProps> {}
@@ -471,7 +499,8 @@ declare module "grommet/components/FormField" {
 declare module "grommet/components/FormFields" {
   declare type Grommet$FormFieldsProps = {
     children?: ReactNode,
-    className?: string
+    className?: string,
+    ...
   };
 
   declare class FormFields extends React$Component<Grommet$FormFieldsProps> {}
@@ -484,7 +513,8 @@ declare module "grommet/components/Header" {
     fixed?: boolean,
     float?: boolean,
     size?: "small" | "medium" | "large",
-    splash?: boolean
+    splash?: boolean,
+    ...
   } & Grommet$BoxProps<Header> &
     Grommet$BoxFull;
   declare class Header extends React$Component<Grommet$HeaderProps> {}
@@ -500,7 +530,8 @@ declare module "grommet/components/Heading" {
     strong?: boolean,
     tag?: string,
     truncate?: boolean,
-    uppercase?: boolean
+    uppercase?: boolean,
+    ...
   };
 
   declare class Heading extends React$Component<Grommet$HeadingProps> {}
@@ -513,7 +544,8 @@ declare module "grommet/components/Headline" {
     align?: "start" | "center" | "end",
     margin?: "none" | "small" | "medium" | "large",
     size?: "small" | "medium" | "large" | "xlarge",
-    strong?: boolean
+    strong?: boolean,
+    ...
   };
 
   declare class Headline extends React$Component<Grommet$HeadlineProps> {}
@@ -534,7 +566,8 @@ declare module "grommet/components/Hero" {
     image?: string,
     justify?: "start" | "center" | "end",
     responsiveBackgroundPosition?: "left" | "center" | "right",
-    separator?: boolean
+    separator?: boolean,
+    ...
   };
 
   declare class Hero extends React$Component<Grommet$HeroProps> {}
@@ -3196,9 +3229,9 @@ declare module "grommet/components/Image" {
       bottom?: boolean,
       left?: boolean,
       right?: boolean,
-      top?: boolean
+      top?: boolean,
+      ...
     },
-
     alt?: string,
     caption?: boolean | string,
     fit?: "contain" | "cover",
@@ -3206,7 +3239,8 @@ declare module "grommet/components/Image" {
     mask?: boolean,
     size?: "small" | "medium" | "large" | "thumb",
     src?: string,
-    title?: string
+    title?: string,
+    ...
   };
 
   declare class Image extends React$Component<Grommet$ImageProps> {}
@@ -3221,7 +3255,8 @@ declare module "grommet/components/Label" {
     margin?: "none" | "small" | "medium" | "large",
     size?: "small" | "medium",
     truncate?: boolean,
-    uppercase?: boolean
+    uppercase?: boolean,
+    ...
   };
 
   declare class Label extends React$Component<Grommet$LabelProps> {}
@@ -3236,7 +3271,8 @@ declare module "grommet/components/Layer" {
     flush?: boolean,
     hidden?: boolean,
     peek?: boolean,
-    onClose?: Function
+    onClose?: Function,
+    ...
   };
 
   declare class Layer extends React$Component<Grommet$LayerProps> {}
@@ -3256,21 +3292,23 @@ declare module "grommet/components/Legend" {
         | number
         | ReactNode
         | {
-            prefix?: string,
-            suffix?: string
-          },
-
+        prefix?: string,
+        suffix?: string,
+        ...
+      },
       colorIndex?: number | string,
-      onClick?: Function
+      onClick?: Function,
+      ...
     }>,
-
     total?: boolean | ReactNode,
     units?:
       | string
       | {
-          prefix?: string,
-          suffix?: string
-        }
+      prefix?: string,
+      suffix?: string,
+      ...
+    },
+    ...
   };
 
   declare class Legend extends React$Component<Grommet$LegendProps> {}
@@ -3284,7 +3322,8 @@ declare module "grommet/components/List" {
     onMore?: Function,
     onSelect?: Function,
     selectable?: boolean | "multiple",
-    selected?: number | number[]
+    selected?: number | number[],
+    ...
   };
 
   declare class List extends React$Component<Grommet$ListProps> {}
@@ -3301,9 +3340,9 @@ declare module "grommet/components/LoginForm" {
     align?: "start" | "center" | "end" | "stretch",
     defaultValues?: {
       username?: string,
-      rememberMe?: boolean
+      rememberMe?: boolean,
+      ...
     },
-
     errors?: string[],
     forgotPassword?: ReactNode,
     logo?: ReactNode,
@@ -3312,7 +3351,8 @@ declare module "grommet/components/LoginForm" {
     rememberMe?: boolean,
     secondaryText?: string,
     title?: string,
-    usernameType?: string
+    usernameType?: string,
+    ...
   };
 
   declare class LoginForm extends React$Component<Grommet$LoginFormProps> {}
@@ -3330,20 +3370,23 @@ declare module "grommet/components/Map" {
         items: Array<{
           id?: string,
           label?: string,
-          node?: ReactNode
-        }>
+          node?: ReactNode,
+          ...
+        }>,
+        ...
       }>,
-
       links: Array<{
         childId: string,
         colorIndex?: string,
-        parentId: string
-      }>
+        parentId: string,
+        ...
+      }>,
+      ...
     },
-
     linkColorIndex?: string,
     onActive?: Function,
-    vertical?: boolean
+    vertical?: boolean,
+    ...
   };
 
   declare class Map extends React$Component<Grommet$MapProps> {}
@@ -3354,9 +3397,8 @@ declare module "grommet/components/Map" {
 declare module "grommet/components/Markdown" {
   declare type Grommet$MarkdownProps = {
     content?: string,
-    components?: {
-      props?: {}
-    }
+    components?: { props?: {...}, ... },
+    ...
   };
 
   declare class Markdown extends React$Component<Grommet$MarkdownProps> {}
@@ -3371,16 +3413,17 @@ declare module "grommet/components/Menu" {
       top?: GrommetCustomTypes$VERTICAL_ALIGN_OPTIONS,
       bottom?: GrommetCustomTypes$VERTICAL_ALIGN_OPTIONS,
       left?: GrommetCustomTypes$HORIZONTAL_ALIGN_OPTIONS,
-      right?: GrommetCustomTypes$HORIZONTAL_ALIGN_OPTIONS
+      right?: GrommetCustomTypes$HORIZONTAL_ALIGN_OPTIONS,
+      ...
     },
-
     dropColorIndex?: string,
     icon?: ReactNode,
     id?: string,
     inline?: boolean | "expand",
     fill?: boolean,
     label?: string,
-    size?: "small" | "medium" | "large"
+    size?: "small" | "medium" | "large",
+    ...
   };
 
   declare class Menu extends React$Component<Grommet$MenuProps> {}
@@ -3402,22 +3445,23 @@ declare module "grommet/components/Meter" {
       colorIndex?: string,
       onClick?: Function,
       label?: string,
-      value: number
+      value: number,
+      ...
     }>,
-
     size?: "xsmall" | "small" | "medium" | "large" | "xlarge",
     stacked?: boolean,
     tabIndex?: string,
     threshold?: number,
     thresholds?: Array<{
       value: number,
-      colorIndex?: string
+      colorIndex?: string,
+      ...
     }>,
-
     type?: "bar" | "arc" | "circle" | "spiral",
     value?: number,
     vertical?: boolean,
-    responsive?: boolean
+    responsive?: boolean,
+    ...
   };
 
   declare class Meter extends React$Component<Grommet$MeterProps> {}
@@ -3463,7 +3507,8 @@ declare module "grommet/components/Notification" {
     size?: "small" | "medium" | "large",
     state?: string,
     status?: string,
-    timestamp?: {} | string
+    timestamp?: {...} | string,
+    ...
   } & Grommet$BoxProps<Notification> &
     Grommet$BoxFull;
   declare class Notification extends React$Component<
@@ -3483,7 +3528,8 @@ declare module "grommet/components/NumberInput" {
     name?: string,
     onChange?: Function,
     step?: number,
-    value?: number | string
+    value?: number | string,
+    ...
   };
 
   declare class NumberInput extends React$Component<Grommet$NumberInputProps> {}
@@ -3492,9 +3538,7 @@ declare module "grommet/components/NumberInput" {
 }
 
 declare module "grommet/components/Object" {
-  declare type Grommet$ObjectProps = {
-    data: {}
-  };
+  declare type Grommet$ObjectProps = { data: {...}, ... };
 
   declare class Object extends React$Component<Grommet$ObjectProps> {}
 
@@ -3506,7 +3550,8 @@ declare module "grommet/components/Paragraph" {
     align?: "start" | "center" | "end",
     margin?: "none" | "small" | "medium" | "large",
     size?: "small" | "medium" | "large" | "xlarge",
-    width?: "small" | "medium" | "large"
+    width?: "small" | "medium" | "large",
+    ...
   };
 
   declare class Paragraph extends React$Component<Grommet$ParagraphProps> {}
@@ -3519,7 +3564,8 @@ declare module "grommet/components/Quote" {
     borderColorIndex?: string,
     size?: "small" | "medium" | "large" | "full",
     credit?: string | React$Element<any>,
-    emphasizeCredit?: boolean
+    emphasizeCredit?: boolean,
+    ...
   } & Grommet$BoxFull &
     Grommet$BoxProps<Quote>;
   declare class Quote extends React$Component<Grommet$QuoteProps> {}
@@ -3536,7 +3582,8 @@ declare module "grommet/components/RadioButton" {
     label: ReactNode,
     name?: string,
     onChange?: Function,
-    value?: string
+    value?: string,
+    ...
   };
 
   declare class RadioButton extends React$Component<Grommet$RadioButtonProps> {}
@@ -3552,9 +3599,9 @@ declare module "grommet/components/Search" {
       top?: GrommetCustomTypes$VERTICAL_ALIGN_OPTIONS,
       bottom?: GrommetCustomTypes$VERTICAL_ALIGN_OPTIONS,
       left?: GrommetCustomTypes$HORIZONTAL_ALIGN_OPTIONS,
-      right?: GrommetCustomTypes$HORIZONTAL_ALIGN_OPTIONS
+      right?: GrommetCustomTypes$HORIZONTAL_ALIGN_OPTIONS,
+      ...
     },
-
     dropColorIndex?: string,
     fill?: boolean,
     iconAlign?: "start" | "end",
@@ -3569,12 +3616,14 @@ declare module "grommet/components/Search" {
     size?: "small" | "medium" | "large",
     suggestions?: Array<
       | {
-          label?: ReactNode,
-          value?: any
-        }
+      label?: ReactNode,
+      value?: any,
+      ...
+    }
       | string
     >,
-    value?: string
+    value?: string,
+    ...
   };
 
   declare class Search extends React$Component<Grommet$SearchProps> {}
@@ -3591,7 +3640,8 @@ declare module "grommet/components/SearchInput" {
     onSelect?: Function,
     placeHolder?: string,
     suggestions?: Array<GrommetCustomTypes$SearchInputValue | string>,
-    value?: GrommetCustomTypes$SearchInputValue | string
+    value?: GrommetCustomTypes$SearchInputValue | string,
+    ...
   };
 
   declare class SearchInput extends React$Component<Grommet$SearchInputProps> {}
@@ -3615,7 +3665,8 @@ declare module "grommet/components/Select" {
     options: GrommetCustomTypes$SelectValueType[],
     value?:
       | GrommetCustomTypes$SelectValueType
-      | GrommetCustomTypes$SelectValueType[]
+      | GrommetCustomTypes$SelectValueType[],
+    ...
   };
 
   declare class Select extends React$Component<Grommet$SelectProps> {}
@@ -3627,7 +3678,8 @@ declare module "grommet/components/Sidebar" {
   declare type Grommet$SidebarProps = Grommet$BoxProps<Sidebar> & {
     fixed?: boolean,
     size?: "xsmall" | "small" | "medium" | "large",
-    full?: boolean
+    full?: boolean,
+    ...
   };
 
   declare class Sidebar extends React$Component<Grommet$SidebarProps> {}
@@ -3636,9 +3688,7 @@ declare module "grommet/components/Sidebar" {
 }
 
 declare module "grommet/components/SkipLinkAnchor" {
-  declare type Grommet$SkipLinkAnchorProps = {
-    label: ReactNode
-  };
+  declare type Grommet$SkipLinkAnchorProps = { label: ReactNode, ... };
 
   declare class SkipLinkAnchor extends React$Component<
     Grommet$SkipLinkAnchorProps
@@ -3659,7 +3709,8 @@ declare module "grommet/components/SocialShare" {
     link: string,
     text?: string,
     title?: string,
-    type: "email" | "facebook" | "twitter" | "linkedin" | "google"
+    type: "email" | "facebook" | "twitter" | "linkedin" | "google",
+    ...
   };
 
   declare class SocialShare extends React$Component<Grommet$SocialShareProps> {}
@@ -3674,7 +3725,8 @@ declare module "grommet/components/Split" {
     onResponsive?: Function,
     priority?: "left" | "right",
     separator?: boolean,
-    showOnResponsive?: "priority" | "both"
+    showOnResponsive?: "priority" | "both",
+    ...
   };
 
   declare class Split extends React$Component<Grommet$SplitProps> {}
@@ -3687,16 +3739,17 @@ declare module "grommet/components/SunBurst" {
     a11yTitle?: string,
     active?: number[],
     data?: Array<{
-      children?: Array<{}>,
+      children?: Array<{...}>,
       colorIndex?: string,
       total?: number,
-      value: number
+      value: number,
+      ...
     }>,
-
     label?: ReactNode,
     onActive?: Function,
     onClick?: Function,
-    size?: "small" | "medium" | "large" | "xlarge" | "full"
+    size?: "small" | "medium" | "large" | "xlarge" | "full",
+    ...
   };
 
   declare class SunBurst extends React$Component<Grommet$SunBurstProps> {}
@@ -3709,7 +3762,8 @@ declare module "grommet/components/SVGIcon" {
     a11yTitle?: string,
     colorIndex?: string,
     size?: "small" | "medium" | "large" | "xlarge" | "huge",
-    type?: "control" | "logo" | "status"
+    type?: "control" | "logo" | "status",
+    ...
   };
 
   declare class SVGIcon extends React$Component<Grommet$SVGIconProps> {}
@@ -3737,7 +3791,8 @@ declare module "grommet/components/Table" {
     onSelect?: Function,
     scrollable?: boolean,
     selectable?: boolean | "multiple",
-    selected?: number | number[]
+    selected?: number | number[],
+    ...
   };
 
   declare class Table extends React$Component<Grommet$TableProps> {}
@@ -3750,7 +3805,8 @@ declare module "grommet/components/TableHeader" {
     labels: ReactNode[],
     onSort?: Function,
     sortAscending?: boolean,
-    sortIndex?: number
+    sortIndex?: number,
+    ...
   };
 
   declare class TableHeader extends React$Component<Grommet$TableHeaderProps> {}
@@ -3759,9 +3815,7 @@ declare module "grommet/components/TableHeader" {
 }
 
 declare module "grommet/components/TableRow" {
-  declare type Grommet$TableRowProps = {
-    onClick?: Function
-  };
+  declare type Grommet$TableRowProps = { onClick?: Function, ... };
 
   declare class TableRow extends React$Component<Grommet$TableRowProps> {}
 
@@ -3773,7 +3827,8 @@ declare module "grommet/components/Tabs" {
     activeIndex?: number,
     justify?: "start" | "center" | "end",
     responsive?: boolean,
-    onActive?: Function
+    onActive?: Function,
+    ...
   };
 
   declare class Tabs extends React$Component<Grommet$TabsProps> {}
@@ -3792,12 +3847,13 @@ declare module "grommet/components/TextInput" {
     suggestions?: Array<
       | string
       | {
-          label?: ReactNode,
-          value?: any
-        }
+      label?: ReactNode,
+      value?: any,
+      ...
+    }
     >,
-
-    value?: string
+    value?: string,
+    ...
   };
 
   declare class TextInput extends React$Component<Grommet$TextInputProps> {}
@@ -3811,7 +3867,8 @@ declare module "grommet/components/Tile" {
     hoverColorIndex?: string,
     hoverBorder?: boolean,
     hoverBorderSize?: "small" | "medium" | "large",
-    wide?: boolean
+    wide?: boolean,
+    ...
   } & Grommet$BoxFull &
     Grommet$BoxProps<Tile>;
   declare class Tile extends React$Component<Grommet$TileProps> {}
@@ -3826,7 +3883,8 @@ declare module "grommet/components/Tiles" {
     onMore?: Function,
     onSelect?: Function,
     selectable?: boolean | "multiple",
-    selected?: number | number[]
+    selected?: number | number[],
+    ...
   } & Grommet$BoxFull &
     Grommet$BoxProps<Tiles>;
   declare class Tiles extends React$Component<Grommet$TilesProps> {}
@@ -3840,7 +3898,8 @@ declare module "grommet/components/Timestamp" {
     fields?:
       | GrommetCustomTypes$TIME_STAMP_FIELD_TYPES[]
       | GrommetCustomTypes$TIME_STAMP_FIELD_TYPES,
-    value: string | {}
+    value: string | {...},
+    ...
   };
 
   declare class Timestamp extends React$Component<Grommet$TimestampProps> {}
@@ -3852,7 +3911,8 @@ declare module "grommet/components/Tip" {
   declare type Grommet$TipProps = {
     colorIndex?: string,
     onClose: Function,
-    target: string
+    target: string,
+    ...
   };
 
   declare class Tip extends React$Component<Grommet$TipProps> {}
@@ -3865,7 +3925,8 @@ declare module "grommet/components/Title" {
     a11yTitle?: string,
     onClick?: Function,
     responsive?: boolean,
-    truncate?: boolean
+    truncate?: boolean,
+    ...
   };
 
   declare class Title extends React$Component<Grommet$TitleProps> {}
@@ -3876,7 +3937,8 @@ declare module "grommet/components/Title" {
 declare module "grommet/components/Toast" {
   declare type Grommet$ToastProps = {
     onClose?: Function,
-    status?: string
+    status?: string,
+    ...
   };
 
   declare class Toast extends React$Component<Grommet$ToastProps> {}
@@ -3889,10 +3951,11 @@ declare module "grommet/components/Topology" {
     a11yTitle?: string,
     links?: Array<{
       colorIndex?: string,
-      ids: string[]
+      ids: string[],
+      ...
     }>,
-
-    linkOffset?: number
+    linkOffset?: number,
+    ...
   };
 
   declare class Topology extends React$Component<Grommet$TopologyProps> {}
@@ -3912,7 +3975,8 @@ declare module "grommet/components/Value" {
     size?: "xsmall" | "small" | "medium" | "large" | "xlarge",
     trendIcon?: ReactNode,
     value?: ReactNode | number | string,
-    units?: ReactNode | string
+    units?: ReactNode | string,
+    ...
   };
 
   declare class Value extends React$Component<Grommet$ValueProps> {}
@@ -3926,9 +3990,9 @@ declare module "grommet/components/Video" {
       bottom?: boolean,
       left?: boolean,
       right?: boolean,
-      top?: boolean
+      top?: boolean,
+      ...
     },
-
     allowFullScreen?: boolean,
     autoPlay?: boolean,
     colorIndex?: string,
@@ -3944,10 +4008,11 @@ declare module "grommet/components/Video" {
     size?: "small" | "medium" | "large",
     timeline?: Array<{
       label?: string,
-      time?: number
+      time?: number,
+      ...
     }>,
-
-    title?: ReactNode
+    title?: ReactNode,
+    ...
   };
 
   declare class Video extends React$Component<Grommet$VideoProps> {}
@@ -3984,19 +4049,18 @@ declare module "grommet/components/video/Time" {
 }
 
 declare module "grommet/components/WorldMap" {
-  declare type Grommet$WorldMapProps = {
-    series?: Array<{
-      continent?:
-        | "NorthAmerica"
-        | "SouthAmerica"
-        | "Europe"
-        | "Africa"
-        | "Asia"
-        | "Australia",
-      colorIndex?: string,
-      onClick?: Function
-    }>
-  };
+  declare type Grommet$WorldMapProps = { series?: Array<{
+    continent?:
+      | "NorthAmerica"
+      | "SouthAmerica"
+      | "Europe"
+      | "Africa"
+      | "Asia"
+      | "Australia",
+    colorIndex?: string,
+    onClick?: Function,
+    ...
+  }>, ... };
 
   declare class WorldMap extends React$Component<Grommet$WorldMapProps> {}
 
@@ -6122,9 +6186,10 @@ declare type GrommetBoxTypes$Size =
 
 declare type GrommetCustomTypes$SelectValueType =
   | {
-      label?: string,
-      value?: any
-    }
+  label?: string,
+  value?: any,
+  ...
+}
   | string
   | number;
 
@@ -6183,7 +6248,8 @@ declare type Grommet$Chart$GraphProps<T> = {
   values: Array<number>,
   type?: "area" | "line" | "bar",
   vertical?: boolean,
-  width?: number
+  width?: number,
+  ...
 };
 
 declare type Grommet$Icons$IconSize =
@@ -6196,7 +6262,8 @@ declare type Grommet$Icons$GenericProps = {
   a11yTitle?: string,
   colorIndex?: string,
   size?: Grommet$Icons$IconSize,
-  responsive?: boolean
+  responsive?: boolean,
+  ...
 };
 
 declare type ReactNode = ReactNode | React$Element<any>;
@@ -6220,22 +6287,22 @@ declare type Grommet$BoxProps<T> = {
   margin?:
     | GrommetBoxTypes$MarginSizes
     | {
-        bottom?: GrommetBoxTypes$MarginSizes,
-        horizontal?: GrommetBoxTypes$MarginSizes,
-        left?: GrommetBoxTypes$MarginSizes,
-        right?: GrommetBoxTypes$MarginSizes,
-        top?: GrommetBoxTypes$MarginSizes,
-        vertical?: GrommetBoxTypes$MarginSizes
-      },
-
+    bottom?: GrommetBoxTypes$MarginSizes,
+    horizontal?: GrommetBoxTypes$MarginSizes,
+    left?: GrommetBoxTypes$MarginSizes,
+    right?: GrommetBoxTypes$MarginSizes,
+    top?: GrommetBoxTypes$MarginSizes,
+    vertical?: GrommetBoxTypes$MarginSizes,
+    ...
+  },
   pad?:
     | GrommetBoxTypes$PadSizes
     | {
-        between?: GrommetBoxTypes$PadSizes,
-        horizontal?: GrommetBoxTypes$PadSizes,
-        vertical?: GrommetBoxTypes$PadSizes
-      },
-
+    between?: GrommetBoxTypes$PadSizes,
+    horizontal?: GrommetBoxTypes$PadSizes,
+    vertical?: GrommetBoxTypes$PadSizes,
+    ...
+  },
   primary?: boolean,
   reverse?: boolean,
   responsive?: boolean,
@@ -6253,27 +6320,26 @@ declare type Grommet$BoxProps<T> = {
   textAlign?: "left" | "center" | "right",
   texture?: ReactNode | string,
   wrap?: boolean,
-  onFocus?: Function
+  onFocus?: Function,
+  ...
 };
 
-declare type Grommet$BoxFull = {
-  full?: "horizontal" | "vertical" | boolean
-};
+declare type Grommet$BoxFull = { full?: "horizontal" | "vertical" | boolean, ... };
 
-declare type Grommet$BoxSizing = {
-  size?: {
-    height?:
-      | GrommetBoxTypes$Size
-      | {
-          max?: GrommetBoxTypes$FixedSizes,
-          min?: GrommetBoxTypes$FixedSizes
-        },
-
-    width?:
-      | GrommetBoxTypes$Size
-      | {
-          max?: GrommetBoxTypes$FixedSizes,
-          min?: GrommetBoxTypes$FixedSizes
-        }
-  }
-};
+declare type Grommet$BoxSizing = { size?: {
+  height?:
+    | GrommetBoxTypes$Size
+    | {
+    max?: GrommetBoxTypes$FixedSizes,
+    min?: GrommetBoxTypes$FixedSizes,
+    ...
+  },
+  width?:
+    | GrommetBoxTypes$Size
+    | {
+    max?: GrommetBoxTypes$FixedSizes,
+    min?: GrommetBoxTypes$FixedSizes,
+    ...
+  },
+  ...
+}, ... };

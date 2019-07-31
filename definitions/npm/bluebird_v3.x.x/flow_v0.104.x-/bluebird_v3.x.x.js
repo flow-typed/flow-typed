@@ -4,20 +4,15 @@ type Bluebird$TimeoutError = Error;
 type Bluebird$RejectionError = Error;
 type Bluebird$OperationalError = Error;
 
-type Bluebird$ConcurrencyOption = {
-  concurrency: number
-};
-type Bluebird$SpreadOption = {
-  spread: boolean
-};
-type Bluebird$MultiArgsOption = {
-  multiArgs: boolean
-};
+type Bluebird$ConcurrencyOption = { concurrency: number, ... };
+type Bluebird$SpreadOption = { spread: boolean, ... };
+type Bluebird$MultiArgsOption = { multiArgs: boolean, ... };
 type Bluebird$BluebirdConfig = {
   warnings?: boolean,
   longStackTraces?: boolean,
   cancellation?: boolean,
-  monitoring?: boolean
+  monitoring?: boolean,
+  ...
 };
 
 declare class Bluebird$PromiseInspection<T> {
@@ -43,7 +38,8 @@ declare type Bluebird$PromisifyAllOptions = {
     passesDefaultFilter?: boolean
   ) => boolean,
   // The promisifier gets a reference to the original method and should return a function which returns a promise
-  promisifier?: (originalMethod: Function) => () => Bluebird$Promise<any>
+  promisifier?: (originalMethod: Function) => () => Bluebird$Promise<any>,
+  ...
 };
 
 declare type $Promisable<T> = Promise<T> | T;

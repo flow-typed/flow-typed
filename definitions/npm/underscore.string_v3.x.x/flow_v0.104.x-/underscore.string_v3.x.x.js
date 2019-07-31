@@ -6,6 +6,7 @@ declare module "underscore.string" {
     trailingSpaces?: boolean,
     cut?: boolean,
     preserveSpaces?: boolean,
+    ...
   };
   declare type $npm$pad$type = 'left' | 'right' | 'both';
 
@@ -94,7 +95,6 @@ declare module "underscore.string" {
   declare module.exports: {
     // If we're called, we're a function that returns an instance of Chain
     (str: string): Chain,
-
     // Otherwise lots of "static" methods...
     numberFormat(number: number, decimals?: number, decimalSeparator?: string, orderSeparator?: string): string,
     levenshtein(string1: string, string2: string): number,
@@ -104,7 +104,8 @@ declare module "underscore.string" {
     clean(string: string): string,
     swapCase(string: string): string,
     include(string: string, substring: string): boolean,
-    contains(string: string, substring: string): boolean, // Alias
+    // Alias
+    contains(string: string, substring: string): boolean,
     count(string: string, substring: string): number,
     escapeHTML(string: string): string,
     unescapeHTML(string: string): string,
@@ -123,28 +124,35 @@ declare module "underscore.string" {
     succ(string: string): string,
     titleize(string: string): string,
     camelize(string: string, decapitalize?: boolean): string,
-    camelcase(string: string, decapitalize?: boolean): string, // Alias
+    // Alias
+    camelcase(string: string, decapitalize?: boolean): string,
     classify(string: string): string,
     underscored(string: string): string,
     dasherize(string: string): string,
     humanize(string: string): string,
     trim(string: string, characters?: string): string,
-    strip(string: string, characters?: string): string, // Alias
+    // Alias
+    strip(string: string, characters?: string): string,
     ltrim(string: string, characters?: string): string,
-    lstrip(string: string, characters?: string): string, // Alias
+    // Alias
+    lstrip(string: string, characters?: string): string,
     rtrim(string: string, characters?: string): string,
-    rstrip(string: string, characters?: string): string, // Alias
+    // Alias
+    rstrip(string: string, characters?: string): string,
     truncate(string: string, length: number, truncateString?: string): string,
     prune(string: string, length: number, pruneString: string): string,
     words(string: string, delimiter: string|RegExp): Array<string>,
     sprintf(string: string, ...arguments: Array<*>): string,
     pad(string: string, length: number, padStr?: string, type?: $npm$pad$type): string,
     lpad(string: string, length: number, padStr?: string): string,
-    rjust(string: string, length: number, padStr?: string): string, // Alias
+    // Alias
+    rjust(string: string, length: number, padStr?: string): string,
     rpad(string: string, length: number, padStr?: string): string,
-    ljust(string: string, length: number, padStr?: string): string, // Alias
+    // Alias
+    ljust(string: string, length: number, padStr?: string): string,
     lrpad(string: string, length: number, padStr?: string): string,
-    center(string: string, length: number, padStr?: string): string, // Alias
+    // Alias
+    center(string: string, length: number, padStr?: string): string,
     toNumber(string: string, decimals?: number): number,
     strRight(string: string, pattern: string): string,
     strRightBack(string: string, pattern: string): string,
@@ -156,12 +164,15 @@ declare module "underscore.string" {
     repeat(string: string, count: number, separator?: string): string,
     surround(string: string, wrap: string): string,
     quote(string: string, quoteChar?: string): string,
-    q(string: string, quoteChar?: string): string, // Alias
+    // Alias
+    q(string: string, quoteChar?: string): string,
     unquote(string: string, quoteChar?: string): string,
     slugify(string: string): string,
     naturalCmp(string1: string, string2: string): number,
     toBoolean(string: string, truthy?: Array<string|RegExp>, falsy?: Array<string|RegExp>): ?boolean,
-    toBool(string: string, truthy?: Array<string|RegExp>, falsy?: Array<string|RegExp>): ?boolean, // Alias
-    map(string: string, iteratee: (character: string) => string): string
+    // Alias
+    toBool(string: string, truthy?: Array<string|RegExp>, falsy?: Array<string|RegExp>): ?boolean,
+    map(string: string, iteratee: (character: string) => string): string,
+    ...
   }
 }

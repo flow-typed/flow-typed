@@ -4,6 +4,8 @@ declare module 'fuzzaldrin' {
     filter<T: string|Object>(candidates: Array<T>, query: string, options?: {
       key?: string,
       maxResults?: number,
+      ...
     }): Array<T>,
+    ...
   }
 }

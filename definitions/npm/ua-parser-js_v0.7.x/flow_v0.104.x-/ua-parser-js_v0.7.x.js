@@ -2,11 +2,10 @@ declare module 'ua-parser-js' {
   declare type UABrowser = {
     name: string,
     version: string,
+    ...
   };
 
-  declare type UACpu = {
-    architecture: string,
-  };
+  declare type UACpu = { architecture: string, ... };
 
   declare type UADevice = {
     model: string,
@@ -18,16 +17,19 @@ declare module 'ua-parser-js' {
       | 'wearable'
       | 'embedded',
     vendor: string,
+    ...
   };
 
   declare type UAEngine = {
     name: string,
     version: string,
+    ...
   };
 
   declare type UAOs = {
     name: string,
     version: string,
+    ...
   };
 
   declare type UAResult = {
@@ -37,6 +39,7 @@ declare module 'ua-parser-js' {
     engine: UAEngine,
     os: UAOs,
     ua: string,
+    ...
   };
 
   declare class UAParser {

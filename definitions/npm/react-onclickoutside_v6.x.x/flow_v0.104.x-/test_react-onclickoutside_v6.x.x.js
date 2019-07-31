@@ -12,7 +12,7 @@ describe('react-onclickoutside', () => {
 
   it('should not to wrap a component with preventDefault props of incorrect type', () => {
     // $ExpectError Cannot call `onClickOutside` because string [1] is incompatible with boolean [2].
-    class FailComponent extends React.Component<{ preventDefault: string }> {
+    class FailComponent extends React.Component<{ preventDefault: string, ... }> {
       render() {
         return <div/>;
       }
@@ -22,7 +22,11 @@ describe('react-onclickoutside', () => {
   });
 
   describe('should wrap a component and', () => {
-    class A extends React.Component<{a: string, preventDefault: boolean }> {
+    class A extends React.Component<{
+      a: string,
+      preventDefault: boolean,
+      ...
+    }> {
       render() {
         return this.props.preventDefault ? <div>{this.props.a}</div> : null;
       }

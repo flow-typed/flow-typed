@@ -1,13 +1,15 @@
 declare module 'tape-cup' {
   declare type tape$TestOpts =
     | {
-        skip: boolean,
-        timeout?: number,
-      }
+    skip: boolean,
+    timeout?: number,
+    ...
+  }
     | {
-        skip?: boolean,
-        timeout: number,
-      };
+    skip?: boolean,
+    timeout: number,
+    ...
+  };
 
   declare type tape$TestCb = (t: tape$Context) => mixed;
   declare type tape$TestFn = (
@@ -94,9 +96,7 @@ declare module 'tape-cup' {
   }
   
   declare type TestHarness = Tape;
-  declare type StreamOpts = {
-    objectMode?: boolean,
-  };
+  declare type StreamOpts = { objectMode?: boolean, ... };
 
   declare type Tape = {
     (
@@ -115,6 +115,7 @@ declare module 'tape-cup' {
       c?: tape$TestCb,
       ...rest: Array<void>
     ) => void,
+    ...
   };
 
   declare module.exports: Tape;

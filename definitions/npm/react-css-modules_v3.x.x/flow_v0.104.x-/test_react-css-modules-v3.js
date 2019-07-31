@@ -10,6 +10,7 @@ describe('React Component', () => {
   class ExampleModule extends Component<{
     foo: string,
     styles: typeof styles,
+    ...
   }> {
     render() {
       return <div className={this.props.styles}>{this.props.foo}</div>;
@@ -19,7 +20,7 @@ describe('React Component', () => {
   it('React Component can be declared', () => {
     const ExampleCSSModules = CSSModules(ExampleModule, styles);
     const ExampleCSSModules2 = CSSModules(ExampleModule, styles, { allowMultiple: true });
-    class Working extends Component<{}> {
+    class Working extends Component<{...}> {
       render() {
         return <ExampleCSSModules foo="bar" />;
       }
@@ -31,7 +32,7 @@ describe('React Component', () => {
     // $ExpectError invalid module option.
     const BustedCSSModule = CSSModules(ExampleModule, styles, { wubbaLubba: 'dub-dub' });
     
-    class Failure1 extends Component<{}> {
+    class Failure1 extends Component<{...}> {
       render() {
     
         // $ExpectError Missing prop `foo` will be caught.
@@ -39,7 +40,7 @@ describe('React Component', () => {
       }
     }
     
-    class Failure2 extends Component<{}> {
+    class Failure2 extends Component<{...}> {
       render() {
     
         // $ExpectError Unwrapped component won't be passed `styles`.
@@ -54,8 +55,9 @@ describe('Stateless Functional Component', () => {
   type Props = {
     foo: string,
     styles: typeof styles,
+    ...
   };
-  type State = {};
+  type State = {...};
 
   // Props and State
   const StatelessComponent = (props: Props, state: State) => {
@@ -72,7 +74,7 @@ describe('Stateless Functional Component', () => {
     CSSModules(StatelessComponentPropsOnly, styles);
     CSSModules(StatelessComponentPropsOnly, styles, { allowMultiple: true });
 
-    class Working extends Component<{}> {
+    class Working extends Component<{...}> {
       render() {
         return <StatelessCSSComponent foo="bar" />;
       }
@@ -80,7 +82,7 @@ describe('Stateless Functional Component', () => {
   });
 
   it('Stateless Functional Component can be undeclared', () => {
-    class Failure extends Component<{}> {
+    class Failure extends Component<{...}> {
       render() {
         // $ExpectError Unwrapped component won't be passed `styles`.
         return <StatelessComponent foo="bar" />;

@@ -7,14 +7,16 @@ declare module "react-router" {
     search: string,
     hash: string,
     state?: any,
-    key?: string
+    key?: string,
+    ...
   };
 
   declare export type LocationShape = {
     pathname?: string,
     search?: string,
     hash?: string,
-    state?: any
+    state?: any,
+    ...
   };
 
   declare export type HistoryAction = "PUSH" | "REPLACE" | "POP";
@@ -37,14 +39,16 @@ declare module "react-router" {
     ): () => void,
     // createMemoryHistory
     index?: number,
-    entries?: Array<Location>
+    entries?: Array<Location>,
+    ...
   };
 
   declare export type Match = {
-    params: { [key: string]: ?string },
+    params: { [key: string]: ?string, ... },
     isExact: boolean,
     path: string,
-    url: string
+    url: string,
+    ...
   };
 
   declare export type ContextRouter = {|
@@ -59,15 +63,14 @@ declare module "react-router" {
     callback: (confirmed: boolean) => void
   ) => void;
 
-  declare type StaticRouterContext = {
-    url?: string
-  };
+  declare type StaticRouterContext = { url?: string, ... };
 
   declare export class StaticRouter extends React$Component<{
     basename?: string,
     location?: string | Location,
     context: StaticRouterContext,
-    children?: React$Node
+    children?: React$Node,
+    ...
   }> {}
 
   declare export class MemoryRouter extends React$Component<{
@@ -75,17 +78,20 @@ declare module "react-router" {
     initialIndex?: number,
     getUserConfirmation?: GetUserConfirmation,
     keyLength?: number,
-    children?: React$Node
+    children?: React$Node,
+    ...
   }> {}
 
   declare export class Router extends React$Component<{
     history: RouterHistory,
-    children?: React$Node
+    children?: React$Node,
+    ...
   }> {}
 
   declare export class Prompt extends React$Component<{
     message: string | ((location: Location) => string | true),
-    when?: boolean
+    when?: boolean,
+    ...
   }> {}
 
   declare export class Redirect extends React$Component<{|
@@ -121,7 +127,8 @@ declare module "react-router" {
     path?: string,
     exact?: boolean,
     strict?: boolean,
-    sensitive?: boolean
+    sensitive?: boolean,
+    ...
   };
 
   declare export function matchPath(

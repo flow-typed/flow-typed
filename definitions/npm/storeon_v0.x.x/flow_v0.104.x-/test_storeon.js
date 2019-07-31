@@ -14,7 +14,8 @@ describe("storeon", () => {
   it('storeon', () => {
       type State = {
           a: number,
-          b: string
+          b: string,
+          ...
       }
 
       // Reducer typed as a Module
@@ -68,9 +69,7 @@ describe("storeon", () => {
   });
 
   it("storeon/react", () => {
-      type State = {
-          a: number
-      }
+      type State = { a: number, ... }
 
       function init(store: Store<State>) {
           store.on('@init', () => ({ a: 0 }))

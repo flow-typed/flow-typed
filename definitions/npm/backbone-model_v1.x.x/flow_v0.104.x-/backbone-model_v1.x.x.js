@@ -6,9 +6,7 @@ type Comparator<T> = (attr: string) => any | ((attrA: T, attrB: T) => number);
 
 declare module "backbone-model" {
   declare type EventCallback = (event: Event) => void | mixed;
-  declare type Backbone$Attrs = {
-    [name: string]: mixed
-  };
+  declare type Backbone$Attrs = { [name: string]: mixed, ... };
   declare type CRUDMethod = "create" | "read" | "update" | "delete";
 
   /**
@@ -58,9 +56,10 @@ declare module "backbone-model" {
    * Model Class - http://backbonejs.org/#Model
    */
   declare type ModelOpts = {
+    [optionName: string]: mixed,
     collection?: Collection<*>,
     parse?: Function,
-    [optionName: string]: mixed
+    ...
   };
 
   declare class Model {
@@ -76,7 +75,7 @@ declare module "backbone-model" {
     set(attr: string, value: mixed, options?: Object): this;
     escape(attr: string): mixed;
     has(attr: string): boolean;
-    unset(attr: string, options?: { unset?: boolean }): this;
+    unset(attr: string, options?: { unset?: boolean, ... }): this;
     clear(options?: Object): this;
     id: string | number;
     idAttribute: string;
@@ -103,7 +102,7 @@ declare module "backbone-model" {
     clone(): this;
     isNew(): boolean;
     hasChanged(attribute?: string): boolean;
-    changedAttributes(attributes?: { [attr: string]: mixed }): boolean;
+    changedAttributes(attributes?: { [attr: string]: mixed, ... }): boolean;
     previous(attribute: string): mixed;
     previousAttributes(): Backbone$Attrs;
     // Start Underscore methods
@@ -186,8 +185,8 @@ declare module "backbone-model" {
     comparator: string | Comparator<TModel>;
     sort(options?: Object): Array<TModel>;
     pluck(attribute: string): Array<TModel>;
-    where(attributes: { [attributeName: string]: mixed }): Array<TModel>;
-    findWhere(attributes: { [attributeName: string]: mixed }): TModel;
+    where(attributes: { [attributeName: string]: mixed, ... }): Array<TModel>;
+    findWhere(attributes: { [attributeName: string]: mixed, ... }): TModel;
     url: () => string | string;
     parse(response: Object, options: Object): Object;
     clone(): this;

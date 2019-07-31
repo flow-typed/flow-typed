@@ -1,7 +1,11 @@
 type NodeModule = typeof module;
 
 declare module '@storybook/react' {
-  declare type Context = { kind: string, story: string };
+  declare type Context = {
+    kind: string,
+    story: string,
+    ...
+  };
   declare type Renderable = React$Element<*>;
   declare type RenderCallback = (
     context: Context

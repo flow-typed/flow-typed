@@ -20,7 +20,7 @@ declare module 'cb-fetch' {
 
   declare type Parameters =
     | string
-    | { [string]: ?string | string[] }
+    | { [string]: ?string | string[], ... }
     | URLSearchParams
 
   declare type RequestURL =
@@ -45,12 +45,12 @@ declare module 'cb-fetch' {
     XSLPattern: boolean;
   |}
 
-  declare type JSONValue = null | void | string | number | boolean | $Shape<{ [string]: JSONValue }> | Array<JSONValue>
+  declare type JSONValue = null | void | string | number | boolean | $Shape<{ [string]: JSONValue, ... }> | Array<JSONValue>
   declare class AnonXMLHttpRequest extends XMLHttpRequest {}
 
   declare type NormalizedResponse<T> = {|
     body: JSONValue | Blob | Document | FormData | ReadableStream | ArrayBuffer;
-    headers: { [string]: string } | T;
+    headers: { [string]: string, ... } | T;
     instance: XMLHttpRequest | XDomainRequest | Response | AnonXMLHttpRequest;
     statusCode?: number;
     statusText?: string;
@@ -75,7 +75,8 @@ declare module 'cb-fetch' {
       success?: onSuccess,
       error?:   onError,
       timeout?: () => any,
-      abort?:   (event?: Event) => any
+      abort?:   (event?: Event) => any,
+      ...
     }): Abort;
   }
 

@@ -5,7 +5,6 @@ declare module "faker" {
     seedValue: ?SeedType,
     seed: (SeedType) => void,
     setLocale: (string) => void,
-
     address: {
       zipCode: (localeFormat?: string) => string,
       city: (mustacheTemplate?: string) => string,
@@ -22,7 +21,8 @@ declare module "faker" {
       state: (useAbbr?: boolean) => string,
       stateAbbr: () => string,
       latitude: () => string,
-      longitude: () => string
+      longitude: () => string,
+      ...
     },
     commerce: {
       color: () => string,
@@ -36,7 +36,8 @@ declare module "faker" {
       ) => string,
       productAdjective: () => string,
       productMaterial: () => string,
-      product: () => string
+      product: () => string,
+      ...
     },
     company: {
       suffixes: () => string,
@@ -49,13 +50,15 @@ declare module "faker" {
       catchPhraseNoun: () => string,
       bsAdjective: () => string,
       bsBuzz: () => string,
-      bsNoun: () => string
+      bsNoun: () => string,
+      ...
     },
     database: {
       column: () => string,
       type: () => string,
       collation: () => string,
-      engine: () => string
+      engine: () => string,
+      ...
     },
     date: {
       past: (years?: ?number, refDate?: Date) => Date,
@@ -64,7 +67,8 @@ declare module "faker" {
       recent: (days?: number) => Date,
       soon: () => Date,
       month: (options?: {| abbr?: boolean, context?: "wide" |}) => Date,
-      weekday: (options?: {| abbr?: boolean, context?: "wide" |}) => Date
+      weekday: (options?: {| abbr?: boolean, context?: "wide" |}) => Date,
+      ...
     },
     fake: (mustacheTemplate: string) => string,
     finance: {
@@ -84,7 +88,8 @@ declare module "faker" {
       bitcoinAddress: () => string,
       ethereumAddress: () => string,
       iban: () => string,
-      bic: () => string
+      bic: () => string,
+      ...
     },
     hacker: {
       abbreviation: () => string,
@@ -92,7 +97,8 @@ declare module "faker" {
       noun: () => string,
       verb: () => string,
       ingverb: () => string,
-      phrase: () => string
+      phrase: () => string,
+      ...
     },
     helpers: {
       randomize: <Element>(Array<Element>) => Element,
@@ -104,7 +110,8 @@ declare module "faker" {
       createCard: () => string,
       contextualCard: () => string,
       userCard: () => string,
-      createTransaction: () => string
+      createTransaction: () => string,
+      ...
     },
     image: {
       image: (width?: ?number, height?: ?number, randomize?: boolean) => string,
@@ -172,7 +179,8 @@ declare module "faker" {
         height?: ?number,
         randomize?: boolean
       ) => string,
-      dataUri: (width?: ?number, height?: ?number) => string
+      dataUri: (width?: ?number, height?: ?number) => string,
+      ...
     },
     internet: {
       avatar: () => string,
@@ -202,7 +210,8 @@ declare module "faker" {
         memorable?: ?boolean,
         pattern?: ?string,
         prefix?: ?string
-      ) => string
+      ) => string,
+      ...
     },
     lorem: {
       word: (count?: number) => string,
@@ -213,7 +222,8 @@ declare module "faker" {
       paragraph: (sentenceCount?: number) => string,
       paragraphs: (paragraphCount?: ?number, separator?: string) => string,
       text: (times?: number) => string,
-      lines: (lineCount?: number) => string
+      lines: (lineCount?: number) => string,
+      ...
     },
     name: {
       firstName: (gender?: mixed) => string,
@@ -229,12 +239,14 @@ declare module "faker" {
       title: () => string,
       jobDescriptor: () => string,
       jobArea: () => string,
-      jobType: () => string
+      jobType: () => string,
+      ...
     },
     phone: {
       phoneNumber: (format?: string) => string,
       phoneNumberFormat: (formatArrayIndex?: number) => string,
-      phoneFormats: () => string
+      phoneFormats: () => string,
+      ...
     },
     random: {
       number: (
@@ -242,7 +254,7 @@ declare module "faker" {
       ) => number,
       arrayElement: <Element>(Array<Element>) => Element,
       objectElement: <Key, Value>(
-        object: { [Key]: Value },
+        object: { [Key]: Value, ... },
         field: Key
       ) => Value,
       uuid: () => string,
@@ -252,7 +264,8 @@ declare module "faker" {
       image: () => string,
       locale: () => string,
       alphaNumeric: (count?: number) => string,
-      hexaDecimal: () => string
+      hexaDecimal: () => string,
+      ...
     },
     system: {
       fileName: (ext?: ?string, type?: string) => string,
@@ -264,7 +277,9 @@ declare module "faker" {
       fileExt: (mimeType?: string) => string,
       directoryPath: () => string,
       filePath: () => string,
-      semver: () => string
-    }
+      semver: () => string,
+      ...
+    },
+    ...
   };
 }

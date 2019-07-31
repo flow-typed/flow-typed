@@ -1,11 +1,7 @@
 declare module "formik" {
-  declare export type FormikErrors<Values> = {
-    [field: $Keys<Values>]: ?string
-  };
+  declare export type FormikErrors<Values> = { [field: $Keys<Values>]: ?string, ... };
 
-  declare export type FormikTouched<Values> = {
-    [field: $Keys<Values>]: boolean
-  };
+  declare export type FormikTouched<Values> = { [field: $Keys<Values>]: boolean, ... };
 
   /**
    * Using interface here because interfaces support overloaded method signatures
@@ -62,106 +58,104 @@ declare module "formik" {
   }
 
   declare export type FormikSharedConfig = {
-    /** Tells Formik to validate the form on each input's onChange event */
-    validateOnChange?: boolean,
-    /** Tells Formik to validate the form on each input's onBlur event */
-    validateOnBlur?: boolean,
-    /** Tell Formik if initial form values are valid or not on first render */
-    isInitialValid?: boolean | ((props: {}) => boolean | void),
-    /** Should Formik reset the form when new initialValues change */
-    enableReinitialize?: boolean
+   /** Tells Formik to validate the form on each input's onChange event */
+   validateOnChange?: boolean,
+   /** Tells Formik to validate the form on each input's onBlur event */
+   validateOnBlur?: boolean,
+   /** Tell Formik if initial form values are valid or not on first render */
+   isInitialValid?: boolean | ((props: {...}) => boolean | void),
+   /** Should Formik reset the form when new initialValues change */
+   enableReinitialize?: boolean,
+   ...
   };
 
   declare export type FormikConfig<Values: Object> = FormikSharedConfig & {
-    /**
-     * Initial values of the form
-     */
-    initialValues?: Values,
-
-    /**
-     * Reset handler
-     */
-    onReset?: (values: Values, formikActions: FormikActions<Values>) => void,
-
-    /**
-     * Submission handler
-     */
-    onSubmit: (values: Values, formikActions: FormikActions<Values>) => any,
-
-    /**
-     * Form component to render
-     */
-    component?: React$ComponentType<FormikProps<Values>> | React$Node,
-
-    /**
-     * Render prop (works like React router's <Route render={props =>} />)
-     */
-    render?: (props: FormikProps<Values>) => React$Node,
-
-    /**
-     * A Yup Schema or a function that returns a Yup schema
-     */
-    validationSchema?: any | (() => any),
-
-    /**
-     * Validation function. Must return an error object or promise that
-     * throws an error object where that object keys map to corresponding value.
-     */
-    validate?: (values: Values) => void | FormikErrors<Values> | Promise<any>,
-
-    /**
-     * React children or child render callback
-     */
-    children?: ((props: FormikProps<Values>) => React$Node) | React$Node
+   /**
+    * Initial values of the form
+    */
+   initialValues?: Values,
+   /**
+    * Reset handler
+    */
+   onReset?: (values: Values, formikActions: FormikActions<Values>) => void,
+   /**
+    * Submission handler
+    */
+   onSubmit: (values: Values, formikActions: FormikActions<Values>) => any,
+   /**
+    * Form component to render
+    */
+   component?: React$ComponentType<FormikProps<Values>> | React$Node,
+   /**
+    * Render prop (works like React router's <Route render={props =>} />)
+    */
+   render?: (props: FormikProps<Values>) => React$Node,
+   /**
+    * A Yup Schema or a function that returns a Yup schema
+    */
+   validationSchema?: any | (() => any),
+   /**
+    * Validation function. Must return an error object or promise that
+    * throws an error object where that object keys map to corresponding value.
+    */
+   validate?: (values: Values) => void | FormikErrors<Values> | Promise<any>,
+   /**
+    * React children or child render callback
+    */
+   children?: ((props: FormikProps<Values>) => React$Node) | React$Node,
+   ...
   };
 
   /**
    * Formik state tree
    */
   declare export type FormikState<Values> = {
-    /** Form values */
-    values: Values,
-    /**
-     * Top level error, in case you need it
-     * @deprecated since 0.8.0
-     */
-    error?: any,
-    /** map of field names to specific error for that field */
-    errors: FormikErrors<Values>,
-    /** map of field names to whether the field has been touched */
-    touched: FormikTouched<Values>,
-    /** whether the form is currently submitting */
-    isSubmitting: boolean,
-    /** Top level status state, in case you need it */
-    status?: any,
-    /** Number of times user tried to submit the form */
-    submitCount: number
+   /** Form values */
+   values: Values,
+   /**
+    * Top level error, in case you need it
+    * @deprecated since 0.8.0
+    */
+   error?: any,
+   /** map of field names to specific error for that field */
+   errors: FormikErrors<Values>,
+   /** map of field names to whether the field has been touched */
+   touched: FormikTouched<Values>,
+   /** whether the form is currently submitting */
+   isSubmitting: boolean,
+   /** Top level status state, in case you need it */
+   status?: any,
+   /** Number of times user tried to submit the form */
+   submitCount: number,
+   ...
   };
 
   /**
    * Formik computed properties. These are read-only.
    */
   declare export type FormikComputedProps<Values> = {
-    /** True if any input has been touched. False otherwise. */
-    +dirty: boolean,
-    /** Result of isInitiallyValid on mount, then whether true values pass validation. */
-    +isValid: boolean,
-    /** initialValues */
-    +initialValues: Values
+   /** True if any input has been touched. False otherwise. */
+   +dirty: boolean,
+   /** Result of isInitiallyValid on mount, then whether true values pass validation. */
+   +isValid: boolean,
+   /** initialValues */
+   +initialValues: Values,
+   ...
   };
 
   /**
    * Formik form event handlers
    */
   declare export type FormikHandlers = {
-    /** Form submit handler */
-    handleSubmit: (e: SyntheticEvent<any>) => any,
-    /** Classic React change handler, keyed by input name */
-    handleChange: (e: SyntheticEvent<any>) => any,
-    /** Classic React blur handler */
-    handleBlur: (e: any) => void,
-    /** Reset form event handler  */
-    handleReset: () => void
+   /** Form submit handler */
+   handleSubmit: (e: SyntheticEvent<any>) => any,
+   /** Classic React change handler, keyed by input name */
+   handleChange: (e: SyntheticEvent<any>) => any,
+   /** Classic React blur handler */
+   handleBlur: (e: any) => void,
+   /** Reset form event handler  */
+   handleReset: () => void,
+   ...
   };
 
   declare export type FormikProps<Values> = FormikState<Values> &
@@ -196,18 +190,20 @@ declare module "formik" {
    *   </div>
    */
   declare export type FieldProps = {
-    field: {
-      /** Classic React change handler, keyed by input name */
-      // TODO: React.ChangeEvent<any>
-      onChange: (e: any) => any,
-      /** Mark input as touched */
-      onBlur: (e: any) => any,
-      /** Value of the input */
-      value: any,
-      /* name of the input */
-      name: string
-    },
-    form: FormikProps<any>
+   field: {
+    /** Classic React change handler, keyed by input name */
+    // TODO: React.ChangeEvent<any>
+    onChange: (e: any) => any,
+    /** Mark input as touched */
+    onBlur: (e: any) => any,
+    /** Value of the input */
+    value: any,
+    /* name of the input */
+    name: string,
+    ...
+   },
+   form: FormikProps<any>,
+   ...
   };
 
   /*
@@ -236,7 +232,7 @@ declare module "formik" {
   /**
    * Formik actions + { props }
    */
-  declare export type FormikBag<P, V> = { props: P } & FormikActions<V>;
+  declare export type FormikBag<P, V> = { props: P, ... } & FormikActions<V>;
 
   /**
    * withFormik() configuration options. Backwards compatible.
@@ -245,31 +241,28 @@ declare module "formik" {
     Props,
     Values,
   > = FormikSharedConfig & {
-    /**
-     * Set the display name of the component. Useful for React DevTools.
-     */
-    displayName?: string,
-
-    /**
-     * Submission handler
-     */
-    handleSubmit: (values: Values, formikBag: FormikBag<Props, Values>) => void,
-
-    /**
-     * Map props to the form values
-     */
-    mapPropsToValues?: (props: Props) => Values,
-
-    /**
-     * A Yup Schema or a function that returns a Yup schema
-     */
-    validationSchema?: any | ((props: Props) => any),
-
-    /**
-     * Validation function. Must return an error object or promise that
-     * throws an error object where that object keys map to corresponding value.
-     */
-    validate?: (values: Values) => void | FormikErrors<Values> | Promise<any>,
+   /**
+    * Set the display name of the component. Useful for React DevTools.
+    */
+   displayName?: string,
+   /**
+    * Submission handler
+    */
+   handleSubmit: (values: Values, formikBag: FormikBag<Props, Values>) => void,
+   /**
+    * Map props to the form values
+    */
+   mapPropsToValues?: (props: Props) => Values,
+   /**
+    * A Yup Schema or a function that returns a Yup schema
+    */
+   validationSchema?: any | ((props: Props) => any),
+   /**
+    * Validation function. Must return an error object or promise that
+    * throws an error object where that object keys map to corresponding value.
+    */
+   validate?: (values: Values) => void | FormikErrors<Values> | Promise<any>,
+   ...
   }
 
   declare type TypeOrVoid = <V>(V) => (V | void)

@@ -12,5 +12,6 @@ declare module 'tabbable' {
     (el: Node, options?: ?TabbableOptions): Array<Node>,
     isTabbable(node: Node, untouchabilityChecker?: ?UntouchabilityChecker): boolean,
     isFocusable(node: Node, untouchabilityChecker?: ?UntouchabilityChecker): boolean,
+    ...
   };
 }

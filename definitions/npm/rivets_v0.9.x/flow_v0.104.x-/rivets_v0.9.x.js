@@ -51,21 +51,13 @@ declare module 'rivets' {
     configure(options: ConfigurationOptions): void;
     init(componentName: string, element: HTMLElement, data: Object): View;
 
-    binders: {
-      [key: string]: TwoWayBinder | (el: HTMLElement, value: any) => void
-    };
+    binders: { [key: string]: TwoWayBinder | (el: HTMLElement, value: any) => void, ... };
 
-    formatters: {
-      [key: string]: TwoWayFormatter | (...value: any) => any
-    };
+    formatters: { [key: string]: TwoWayFormatter | (...value: any) => any, ... };
 
-    components: {
-      [key: string]: Component<*>
-    };
+    components: { [key: string]: Component<*>, ... };
 
-    adapters: {
-      [key: string]: Adapter
-    };
+    adapters: { [key: string]: Adapter, ... };
   }
 
   declare export default Rivets;

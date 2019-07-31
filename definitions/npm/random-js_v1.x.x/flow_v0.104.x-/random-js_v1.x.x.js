@@ -12,7 +12,8 @@ declare module "random-js" {
     static engines: {
       +nativeMath: Engine,
       +browserCrypto: Engine,
-      +mt19937: MtEngine
+      +mt19937: MtEngine,
+      ...
     };
     static (engine?: Engine): Random;
     constructor(engine?: Engine): Random;

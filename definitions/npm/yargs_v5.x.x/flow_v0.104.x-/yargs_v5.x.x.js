@@ -1,12 +1,16 @@
 declare module "yargs" {
-  declare type Argv = { _: Array<string>, [key: string]: mixed };
+  declare type Argv = {
+    [key: string]: mixed,
+    _: Array<string>,
+    ...
+  };
 
   declare type Options = $Shape<{
     alias: string,
     array: boolean,
     choices: Array<any>,
     config: boolean,
-    configParser: (configPath: string) => { [key: string]: mixed },
+    configParser: (configPath: string) => { [key: string]: mixed, ... },
     count: boolean,
     default: boolean,
     defaultDescription: string,
@@ -23,7 +27,8 @@ declare module "yargs" {
     required: boolean,
     requiresArg: boolean,
     string: boolean,
-    type: "array" | "boolean" | "count" | "number" | "string"
+    type: "array" | "boolean" | "count" | "number" | "string",
+    ...
   }>;
 
   declare type DescParseFn = (configPath: string) => Object;
@@ -31,8 +36,9 @@ declare module "yargs" {
   declare type ModuleObject = {
     command: string,
     describe: string,
-    builder: { [key: string]: Options } | ((yargsInstance: Yargs) => mixed),
-    handler: (argv: Argv) => void
+    builder: { [key: string]: Options, ... } | ((yargsInstance: Yargs) => mixed),
+    handler: (argv: Argv) => void,
+    ...
   };
 
   declare class Yargs {
@@ -46,7 +52,7 @@ declare module "yargs" {
     command(
       cmd: string,
       desc: string | false,
-      builder?: { [key: string]: Options } | ((yargsInstance: Yargs) => mixed),
+      builder?: { [key: string]: Options, ... } | ((yargsInstance: Yargs) => mixed),
       handler?: Function
     ): this;
 
@@ -72,7 +78,7 @@ declare module "yargs" {
 
     count(name: string): this;
 
-    default(defaultObject: { [paramter: string]: any }): this;
+    default(defaultObject: { [paramter: string]: any, ... }): this;
     default(parameter: string, value: any): this;
 
     // Alias of require()!
@@ -80,7 +86,7 @@ declare module "yargs" {
     demand(count: number, max?: number, msg?: string | boolean): this;
 
     describe(key: string, desc: string): this;
-    describe(describeObject: { [key: string]: string }): this;
+    describe(describeObject: { [key: string]: string, ... }): this;
 
     detectLocale(shouldI: boolean): this;
 
@@ -102,7 +108,7 @@ declare module "yargs" {
     help(option?: string, desc?: string): this;
 
     implies(keyA: string, keyB: string): this;
-    implies(keys: { [key: string]: string }): this;
+    implies(keys: { [key: string]: string, ... }): this;
 
     locale(
       locale: | "de"
@@ -130,10 +136,10 @@ declare module "yargs" {
     number(key: string | Array<string>): this;
 
     option(key: string, options: Options): this;
-    option(optionMap: { [key: string]: Options }): this;
+    option(optionMap: { [key: string]: Options, ... }): this;
 
     options(key: string, options: Options): this;
-    options(optionMap: { [key: string]: Options }): this;
+    options(optionMap: { [key: string]: Options, ... }): this;
 
     parse(args: string | Array<string>): Argv;
 
@@ -157,10 +163,10 @@ declare module "yargs" {
 
     string(key: string | Array<string>): this;
 
-    updateLocale(obj: { [key: string]: string }): this;
-    updateStrings(obj: { [key: string]: string }): this;
+    updateLocale(obj: { [key: string]: string, ... }): this;
+    updateStrings(obj: { [key: string]: string, ... }): this;
 
-    usage(message: string, opts?: { [key: string]: Options }): this;
+    usage(message: string, opts?: { [key: string]: Options, ... }): this;
 
     version(
       option?: string | (() => string),

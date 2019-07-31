@@ -61,37 +61,39 @@ const msg1:MessageDescriptor = messageDescriptorMap.messagekey1;
 const msg2:MessageDescriptor = messageDescriptorMap.messagekey2_foo;
 const msg3:MessageDescriptor = messageDescriptorMap.messagekey3;
 
-class TestComponent extends React.Component<{ name: string, intl: IntlShape }> {
+class TestComponent extends React.Component<{
+  name: string,
+  intl: IntlShape,
+  ...
+}> {
   render() {
     return React.createElement("div", {}, `Hello ${this.props.name}`);
   }
 }
 
-const InjectedTestComponent: React.ComponentType<{ name: string }> = injectIntl(
+const InjectedTestComponent: React.ComponentType<{ name: string, ... }> = injectIntl(
   TestComponent
 );
 
-const InjectedTestComponentWithRef: React.ComponentType<{
-  name: string
-}> = injectIntl(TestComponent, {
+const InjectedTestComponentWithRef: React.ComponentType<{ name: string, ... }> = injectIntl(TestComponent, {
   withRef: true
 });
 
 // $ExpectError This type is incompatible
-const BadPropsComponent: React.ComponentType<{ name: number }> = injectIntl(
+const BadPropsComponent: React.ComponentType<{ name: number, ... }> = injectIntl(
   TestComponent
 );
 
 // $ExpectError This type is incompatible
-const ExtraPropsComponent: React.ComponentType<{ foo: number }> = injectIntl(
+const ExtraPropsComponent: React.ComponentType<{ foo: number, ... }> = injectIntl(
   TestComponent
 );
 
 // $ExpectError void. This type is incompatible
 const FailingInjectedTestComponent: void = injectIntl(TestComponent);
 
-const MessageComponent: React.ComponentType<{}> = injectIntl(
-  (props: { intl: IntlShape }) => {
+const MessageComponent: React.ComponentType<{...}> = injectIntl(
+  (props: { intl: IntlShape, ... }) => {
     const { formatMessage } = props.intl;
     return (
       <div>
@@ -104,9 +106,10 @@ const MessageComponent: React.ComponentType<{}> = injectIntl(
 type WithDefaultProps = {
   defaultProp: number,
   normalProp: number,
+  ...
 };
 
-class TestComponentWithDefault extends React.Component<WithDefaultProps & { intl: IntlShape }> {
+class TestComponentWithDefault extends React.Component<WithDefaultProps & { intl: IntlShape, ... }> {
   static defaultProps = { defaultProp: 1 };
 
   render() {
@@ -115,7 +118,7 @@ class TestComponentWithDefault extends React.Component<WithDefaultProps & { intl
 }
 
 const InjectedTestComponentWithDefault
-  : IntlInjectedComponentClass<WithDefaultProps, { defaultProp: number }>
+  : IntlInjectedComponentClass<WithDefaultProps, { defaultProp: number, ... }>
   = injectIntl(TestComponentWithDefault);
 
 // const HTMLMessageComponent: React.ComponentType<
@@ -126,7 +129,7 @@ const InjectedTestComponentWithDefault
 // });
 const DateComponent: React.ComponentType<
   *
-> = injectIntl((props: { intl: IntlShape }) => {
+> = injectIntl((props: { intl: IntlShape, ... }) => {
   const { formatDate } = props.intl;
   return (
     <div>
@@ -136,7 +139,7 @@ const DateComponent: React.ComponentType<
 });
 const TimeComponent: React.ComponentType<
   *
-> = injectIntl((props: { intl: IntlShape }) => {
+> = injectIntl((props: { intl: IntlShape, ... }) => {
   const { formatTime } = props.intl;
   return (
     <div>
@@ -146,7 +149,7 @@ const TimeComponent: React.ComponentType<
 });
 const RelativeComponent: React.ComponentType<
   *
-> = injectIntl((props: { intl: IntlShape }) => {
+> = injectIntl((props: { intl: IntlShape, ... }) => {
   const { formatRelative } = props.intl;
   return (
     <div>
@@ -156,7 +159,7 @@ const RelativeComponent: React.ComponentType<
 });
 const NumberComponent: React.ComponentType<
   *
-> = injectIntl((props: { intl: IntlShape }) => {
+> = injectIntl((props: { intl: IntlShape, ... }) => {
   const { formatNumber } = props.intl;
   return (
     <div>
@@ -166,7 +169,7 @@ const NumberComponent: React.ComponentType<
 });
 const PluralComponent: React.ComponentType<
   *
-> = injectIntl((props: { intl: IntlShape }) => {
+> = injectIntl((props: { intl: IntlShape, ... }) => {
   const { formatPlural } = props.intl;
   return (
     <div>

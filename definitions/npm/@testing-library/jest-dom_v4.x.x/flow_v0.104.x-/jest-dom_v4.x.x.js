@@ -2,6 +2,7 @@ declare module '@testing-library/jest-dom' {
   declare type JestMatcherResult = {
     message?: string | (() => string),
     pass: boolean,
+    ...
   };
 
   declare type Result = JestMatcherResult | Promise<JestMatcherResult>;
@@ -25,11 +26,11 @@ declare module '@testing-library/jest-dom' {
     toHaveAttribute(attr: string, value?: any): Result,
     toHaveClass(...classNames: string[]): Result,
     toHaveFocus(): Result,
-    toHaveFormValues(expectedValues: { [name: string]: any }): Result,
+    toHaveFormValues(expectedValues: { [name: string]: any, ... }): Result,
     toHaveStyle(css: string): Result,
     toHaveTextContent(
       text: string | RegExp,
-      options?: { normalizeWhitespace: boolean }
+      options?: { normalizeWhitespace: boolean, ... }
     ): Result,
     toHaveValue(value?: string | string[] | number): Result,
   |};

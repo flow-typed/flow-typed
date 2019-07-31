@@ -4,19 +4,19 @@ type AutoBreadcrumbOptions = {
   xhr?: boolean,
   console?: boolean,
   dom?: boolean,
-  location?: boolean
+  location?: boolean,
+  ...
 };
 
-type RavenInstrumentationOptions = {
-  tryCatch?: boolean
-};
+type RavenInstrumentationOptions = { tryCatch?: boolean, ... };
 
 type Breadcrumb = {
   message?: string,
   category?: string,
   level?: LogLevel,
   data?: any,
-  type?: BreadcrumbType
+  type?: BreadcrumbType,
+  ...
 };
 
 type BreadcrumbType = "navigation" | "http";
@@ -24,67 +24,46 @@ type BreadcrumbType = "navigation" | "http";
 type RavenOptions = {
   /** The log level associated with this event. Default: error */
   level?: LogLevel,
-
   /** The name of the logger used by Sentry. Default: javascript */
   logger?: string,
-
   /** The environment of the application you are monitoring with Sentry */
   environment?: string,
-
   /** The release version of the application you are monitoring with Sentry */
   release?: string,
-
   /** The name of the server or device that the client is running on */
   serverName?: string,
-
   /** List of messages to be filtered out before being sent to Sentry. */
   ignoreErrors?: (RegExp | string)[],
-
   /** Similar to ignoreErrors, but will ignore errors from whole urls patching a regex pattern. */
   ignoreUrls?: (RegExp | string)[],
-
   /** The inverse of ignoreUrls. Only report errors from whole urls matching a regex pattern. */
   whitelistUrls?: (RegExp | string)[],
-
   /** An array of regex patterns to indicate which urls are a part of your app. */
   includePaths?: (RegExp | string)[],
-
   /** Additional data to be tagged onto the error. */
-  tags?: {
-    [id: string]: string
-  },
-
+  tags?: { [id: string]: string, ... },
   /** set to true to get the stack trace of your message */
   stacktrace?: boolean,
-
   extra?: any,
-
   /** In some cases you may see issues where Sentry groups multiple events together when they should be separate entities. In other cases, Sentry simply doesn’t group events together because they’re so sporadic that they never look the same. */
   fingerprint?: string[],
-
   /** A function which allows mutation of the data payload right before being sent to Sentry */
   dataCallback?: (data: any) => any,
-
   /** A callback function that allows you to apply your own filters to determine if the message should be sent to Sentry. */
   shouldSendCallback?: (data: any) => boolean,
-
   /** By default, Raven does not truncate messages. If you need to truncate characters for whatever reason, you may set this to limit the length. */
   maxMessageLength?: number,
-
   /** By default, Raven will truncate URLs as they appear in breadcrumbs and other meta interfaces to 250 characters in order to minimize bytes over the wire. This does *not* affect URLs in stack traces. */
   maxUrlLength?: number,
-
   /** Override the default HTTP data transport handler. */
   transport?: (options: RavenTransportOptions) => void,
-
   /** Allow use of private/secretKey. */
   allowSecretKey?: boolean,
-
   /** Enables/disables instrumentation of globals. */
   instrument?: boolean | RavenInstrumentationOptions,
-
   /** Enables/disables automatic collection of breadcrumbs. */
-  autoBreadcrumbs?: boolean | AutoBreadcrumbOptions
+  autoBreadcrumbs?: boolean | AutoBreadcrumbOptions,
+  ...
 };
 
 type RavenTransportOptions = {
@@ -93,22 +72,22 @@ type RavenTransportOptions = {
   auth: {
     sentry_version: string,
     sentry_client: string,
-    sentry_key: string
+    sentry_key: string,
+    ...
   },
   onSuccess: () => void,
-  onFailure: () => void
+  onFailure: () => void,
+  ...
 };
 
 declare module "raven-js" {
-  declare type RavenPlugin = {
-    (raven: Raven, ...args: any[]): Raven
-  };
+  declare type RavenPlugin = { (raven: Raven, ...args: any[]): Raven, ... };
 
   declare class Raven {
     /** Raven.js version. */
     VERSION: string,
 
-    Plugins: { [id: string]: RavenPlugin },
+    Plugins: { [id: string]: RavenPlugin, ... },
 
     /*
      * Allow Raven to be configured as soon as it is loaded
@@ -170,7 +149,8 @@ declare module "raven-js" {
     setUserContext(user: {
       id?: string,
       username?: string,
-      email?: string
+      email?: string,
+      ...
     }): this,
 
     /** Merge extra attributes to be sent along with the payload. */
@@ -215,13 +195,15 @@ declare module "raven-js" {
     setShouldSendCallback(data: any, orig?: any): this,
 
     /** Show Sentry user feedback dialog */
-    showReportDialog(options?: { 
-      eventId?: string, 
-      dsn?: string, 
-      user?: { 
-        name?: string, 
-        email?: string 
-      } 
+    showReportDialog(options?: {
+      eventId?: string,
+      dsn?: string,
+      user?: {
+        name?: string,
+        email?: string,
+        ...
+      },
+      ...
     }): void,
 
     /** Configure Raven DSN */

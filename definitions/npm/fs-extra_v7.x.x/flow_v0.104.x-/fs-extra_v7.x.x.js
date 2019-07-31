@@ -15,20 +15,18 @@ declare module "fs-extra" {
     overwrite?: boolean,
     preserveTimestamps?: boolean,
     errorOnExist?: boolean,
-    recursive?: boolean
+    recursive?: boolean,
+    ...
   };
 
-  declare export type CopyOptionsAync = CopyOptions & {
-    filter?: CopyFilterSync | CopyFilterAsync
-  };
+  declare export type CopyOptionsAync = CopyOptions & { filter?: CopyFilterSync | CopyFilterAsync, ... };
 
-  declare export type CopyOptionsSync = CopyOptions & {
-    filter?: CopyFilterSync
-  };
+  declare export type CopyOptionsSync = CopyOptions & { filter?: CopyFilterSync, ... };
 
   declare export type MoveOptions = {
     overwrite?: boolean,
-    limit?: number
+    limit?: number,
+    ...
   };
 
   declare export type ReadOptions = {
@@ -36,30 +34,35 @@ declare module "fs-extra" {
     fs?: Object,
     reviver?: any,
     encoding?: string,
-    flag?: string
+    flag?: string,
+    ...
   };
 
   declare export type WriteFileOptions = {
     encoding?: string,
     flag?: string,
-    mode?: number
+    mode?: number,
+    ...
   };
 
   declare export type WriteOptions = WriteFileOptions & {
     fs?: Object,
     replacer?: any,
     spaces?: number | string,
-    EOL?: string
+    EOL?: string,
+    ...
   };
 
   declare export type ReadResult = {
     bytesRead: number,
-    buffer: Buffer
+    buffer: Buffer,
+    ...
   };
 
   declare export type WriteResult = {
     bytesWritten: number,
-    buffer: Buffer
+    buffer: Buffer,
+    ...
   };
 
   declare export function copy(
@@ -359,7 +362,12 @@ declare module "fs-extra" {
   declare export function appendFile(
     file: string | Buffer | number,
     data: any,
-    options: { encoding?: string, mode?: number | string, flag?: string },
+    options: {
+      encoding?: string,
+      mode?: number | string,
+      flag?: string,
+      ...
+    },
     callback: (err: ErrnoError) => void
   ): void;
   declare export function appendFile(
@@ -370,7 +378,12 @@ declare module "fs-extra" {
   declare export function appendFile(
     file: string | Buffer | number,
     data: any,
-    options?: { encoding?: string, mode?: number | string, flag?: string }
+    options?: {
+      encoding?: string,
+      mode?: number | string,
+      flag?: string,
+      ...
+    }
   ): Promise<void>;
 
   declare export function chmod(
@@ -555,12 +568,20 @@ declare module "fs-extra" {
   ): void;
   declare export function readFile(
     file: string | Buffer | number,
-    options: { flag?: string } | { encoding: string, flag?: string },
+    options: { flag?: string, ... } | {
+      encoding: string,
+      flag?: string,
+      ...
+    },
     callback: (err: ErrnoError, data: Buffer) => void
   ): void;
   declare export function readFile(
     file: string | Buffer | number,
-    options: { flag?: string } | { encoding: string, flag?: string }
+    options: { flag?: string, ... } | {
+      encoding: string,
+      flag?: string,
+      ...
+    }
   ): Promise<string>;
   declare export function readFile(
     file: string | Buffer | number,
@@ -588,12 +609,12 @@ declare module "fs-extra" {
   ): void;
   declare export function realpath(
     path: string | Buffer,
-    cache: { [path: string]: string },
+    cache: { [path: string]: string, ... },
     callback: (err: ErrnoError, resolvedPath: string) => any
   ): void;
   declare export function realpath(
     path: string | Buffer,
-    cache?: { [path: string]: string }
+    cache?: { [path: string]: string, ... }
   ): Promise<string>;
 
   declare export function rename(

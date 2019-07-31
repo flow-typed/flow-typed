@@ -38,7 +38,7 @@ describe('askAsync', () => {
 
       (result.status: 'undetermined' | 'granted' | 'denied');
       (result.expires: 'never' | number);
-      (result.permissions: {});
+      (result.permissions: {...});
     });
   });
 
@@ -70,7 +70,7 @@ describe('getAsync', () => {
 
       (result.status: 'undetermined' | 'granted' | 'denied');
       (result.expires: 'never' | number);
-      (result.permissions: {});
+      (result.permissions: {...});
     });
   });
 

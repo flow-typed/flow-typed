@@ -1,13 +1,13 @@
 declare module 'phoenix' {
   declare export class Push {
-    constructor(channel: Channel, event: string, payload: { [key: string]: any }, timeout: number): this;
+    constructor(channel: Channel, event: string, payload: { [key: string]: any, ... }, timeout: number): this;
     send(): void;
     resend(timeout: number): void;
     receive(status: string, callback: (response?: any) => any): this;
   }
 
   declare export class Channel {
-    constructor(topic: string, params?: { [key: string]: any } | (() => { [key: string]: any }), socket: Socket): this;
+    constructor(topic: string, params?: { [key: string]: any, ... } | (() => { [key: string]: any, ... }), socket: Socket): this;
     join(timeout?: number): Push;
     leave(timeout?: number): Push;
     onClose(callback: (payload: any, ref: any, joinRef: any) => void): void;
@@ -15,7 +15,7 @@ declare module 'phoenix' {
     onMessage(event: string, payload: any, ref: any): any;
     on(event: string, callback: (response?: any) => void): number;
     off(event: string): void;
-    push(event: string, payload: { [key: string]: any }, timeout?: number): Push;
+    push(event: string, payload: { [key: string]: any, ... }, timeout?: number): Push;
   }
 
   declare export type BinaryType = "arraybuffer" | "blob";
@@ -23,12 +23,12 @@ declare module 'phoenix' {
 
   declare export interface SocketConnectOption {
     binaryType: BinaryType,
-    params: { [key: string]: any } | (() => { [key: string]: any }),
+    params: { [key: string]: any, ... } | (() => { [key: string]: any, ... }),
     transport: string,
     timeout: number,
     heartbeatIntervalMs: number,
     longpollerTimeout: number,
-    encode: (payload: { [key: string]: any }, callback: (encoded: any) => void) => void,
+    encode: (payload: { [key: string]: any, ... }, callback: (encoded: any) => void) => void,
     decode: (payload: string, callback: (decoded: any) => void) => void,
     logger: (kind: string, message: string, data: any) => void,
     reconnectAfterMs: (tries: number) => number,
@@ -36,7 +36,7 @@ declare module 'phoenix' {
   }
 
   declare export class Socket {
-    constructor(endPoint: string, opts?: $Rest<SocketConnectOption, {}>): this;
+    constructor(endPoint: string, opts?: $Rest<SocketConnectOption, {...}>): this;
     protocol(): string;
     endPointURL(): string;
     connect(params?: any): void;
@@ -44,8 +44,8 @@ declare module 'phoenix' {
     connectionState(): ConnectionState;
     isConnected(): boolean;
     remove(channel: Channel): void;
-    channel(topic: string, chanParams?: { [key: string]: any }): Channel;
-    push(data: { [key: string]: any }): void;
+    channel(topic: string, chanParams?: { [key: string]: any, ... }): Channel;
+    push(data: { [key: string]: any, ... }): void;
     log(kind: string, message: string, data: any): void;
     hasLogger(): boolean;
     onOpen(callback: () => void): void;
@@ -67,9 +67,7 @@ declare module 'phoenix' {
   }
 
   declare export class Ajax {
-    static states: {
-      [state: string]: number
-    };
+    static states: { [state: string]: number, ... };
     static request(
       method: string,
       endPoint: string,
@@ -108,20 +106,21 @@ declare module 'phoenix' {
     list<T>(chooser?: (key: string, presence: any) => T): T[];
     inPendingSyncState(): boolean;
     static syncState(
-      currentState: { [key: string]: any },
-      newState: { [key: string]: any },
+      currentState: { [key: string]: any, ... },
+      newState: { [key: string]: any, ... },
       onJoin?: PresenceOnJoinCallback,
       onLeave?: PresenceOnLeaveCallback): any;
     static syncDiff(
-      currentState: { [key: string]: any },
+      currentState: { [key: string]: any, ... },
       diff: {
-        joins: { [key: string]: any },
-        leaves: { [key: string]: any }
+        joins: { [key: string]: any, ... },
+        leaves: { [key: string]: any, ... },
+        ...
       },
       onJoin?: PresenceOnJoinCallback,
       onLeave?: PresenceOnLeaveCallback): any;
     static list<T>(
-      presences: { [key: string]: any },
+      presences: { [key: string]: any, ... },
       chooser?: (key: string, presence: any) => T): T[]
   }
 
@@ -131,7 +130,8 @@ declare module 'phoenix' {
   declare export interface PresenceOpts {
     events?: {
       state: string,
-      diff: string
+      diff: string,
+      ...
     }
   }
 }

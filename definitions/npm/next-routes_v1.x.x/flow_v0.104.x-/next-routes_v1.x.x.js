@@ -12,7 +12,8 @@ declare module 'next-routes' {
     +pathname?: string,
     +search?: string,
     +query?: Object,
-    +hash?: string
+    +hash?: string,
+    ...
   };
 
   declare export type LinkProps = {
@@ -23,12 +24,13 @@ declare module 'next-routes' {
     onError?: (error: any) => void,
     href: string | URLObject,
     as?: string | URLObject,
-    passHref?: boolean
+    passHref?: boolean,
+    ...
   };
 
   declare export type NextLink = Class<React$Component<LinkProps>>;
 
-  declare export type RouteError = Error & { cancelled: boolean };
+  declare export type RouteError = Error & { cancelled: boolean, ... };
   declare export type RouteCallback = (url: string) => void;
   declare export type RouteErrorCallback = (
     err: RouteError,
@@ -36,8 +38,9 @@ declare module 'next-routes' {
   ) => void;
 
   declare export type EventChangeOptions = {
+    [key: string]: any,
     shallow?: boolean,
-    [key: string]: any
+    ...
   };
 
   declare export interface RouterEvents {
@@ -80,30 +83,33 @@ declare module 'next-routes' {
     prefetch(url: string): Promise<*>,
     pushRoute(
       route: string,
-      params?: { [name: string]: string },
+      params?: { [name: string]: string, ... },
       options?: any
     ): Promise<boolean>,
     replaceRoute(
       route: string,
-      params?: { [name: string]: string },
+      params?: { [name: string]: string, ... },
       options?: any
     ): Promise<boolean>,
     prefetchRoute(
       route: string,
-      params?: { [name: string]: string },
+      params?: { [name: string]: string, ... },
       options?: any
     ): Promise<*>,
+    ...
   };
 
   declare type RoutesOpt = {
     Link: NextLink,
-    Router: NextRouter
+    Router: NextRouter,
+    ...
   };
 
   declare type Route = {
     name: string,
     pattern: string,
-    page: string
+    page: string,
+    ...
   };
 
   declare interface Routes {

@@ -1,10 +1,8 @@
 declare module "colors" {
   declare type Color = {
     (text: string): string,
-
     strip: Color,
     stripColors: Color,
-
     black: Color,
     red: Color,
     green: Color,
@@ -15,7 +13,6 @@ declare module "colors" {
     white: Color,
     gray: Color,
     grey: Color,
-
     bgBlack: Color,
     bgRed: Color,
     bgGreen: Color,
@@ -24,7 +21,6 @@ declare module "colors" {
     bgMagenta: Color,
     bgCyan: Color,
     bgWhite: Color,
-
     reset: Color,
     bold: Color,
     dim: Color,
@@ -33,25 +29,23 @@ declare module "colors" {
     inverse: Color,
     hidden: Color,
     strikethrough: Color,
-
     rainbow: Color,
     zebra: Color,
     america: Color,
     trap: Color,
     random: Color,
     zalgo: Color,
+    ...
   };
 
   declare module.exports: {
     enabled: boolean,
-    themes: {},
+    themes: {...},
     enable(): void,
     disable(): void,
-    setTheme(theme: {}): void,
-
+    setTheme(theme: {...}): void,
     strip: Color,
     stripColors: Color,
-
     black: Color,
     red: Color,
     green: Color,
@@ -62,7 +56,6 @@ declare module "colors" {
     white: Color,
     gray: Color,
     grey: Color,
-
     bgBlack: Color,
     bgRed: Color,
     bgGreen: Color,
@@ -71,7 +64,6 @@ declare module "colors" {
     bgMagenta: Color,
     bgCyan: Color,
     bgWhite: Color,
-
     reset: Color,
     bold: Color,
     dim: Color,
@@ -80,13 +72,13 @@ declare module "colors" {
     inverse: Color,
     hidden: Color,
     strikethrough: Color,
-
     rainbow: Color,
     zebra: Color,
     america: Color,
     trap: Color,
     random: Color,
     zalgo: Color,
+    ...
   };
 }
 

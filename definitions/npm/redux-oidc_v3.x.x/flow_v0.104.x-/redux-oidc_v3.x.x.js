@@ -4,11 +4,7 @@ declare module "redux-oidc" {
   declare type UserManager = {
     getUser: () => Promise<User<*>>,
     removeUser: () => Promise<*>,
-    signinRedirect: (data?: {
-      data: {
-        redirectUrl: string
-      }
-    }) => Promise<*>,
+    signinRedirect: (data?: { data: { redirectUrl: string, ... }, ... }) => Promise<*>,
     signinSilent: () => Promise<*>,
     signinPopup: () => Promise<*>,
     signoutRedirect: () => Promise<*>,
@@ -16,7 +12,8 @@ declare module "redux-oidc" {
     querySessionStatus: () => Promise<*>,
     startSilentRenew: () => Promise<*>,
     stopSilentRenew: () => Promise<*>,
-    clearStaleState: () => Promise<*>
+    clearStaleState: () => Promise<*>,
+    ...
   };
   declare type User<P> = {
     id_token: string,
@@ -28,9 +25,8 @@ declare module "redux-oidc" {
     +expired: ?boolean,
     +scopes: Array<string>,
     profile: P,
-    state: {
-      redirectUrl: string
-    }
+    state: { redirectUrl: string, ... },
+    ...
   };
   declare type UserManagerSettings = {|
     client_id: string,
@@ -46,9 +42,7 @@ declare module "redux-oidc" {
     filterProtocolClaims?: boolean,
     post_logout_redirect_uri?: string
   |};
-  declare type OidcReducerState = {
-    user: ?User<*>
-  };
+  declare type OidcReducerState = { user: ?User<*>, ... };
   declare type OidcReducer = Reducer<OidcReducerState, *>;
 
   declare function createUserManager(
@@ -59,12 +53,14 @@ declare module "redux-oidc" {
   declare class CallbackComponent extends React$Component<{
     userManager: UserManager,
     successCallback: (user?: User<*>) => mixed,
-    errorCallback?: () => mixed
+    errorCallback?: () => mixed,
+    ...
   }> {}
 
   declare class OidcProvider extends React$Component<{
     store: Store<*, *>,
-    userManager: UserManager
+    userManager: UserManager,
+    ...
   }> {}
 
   declare function processSilentRenew(): void;

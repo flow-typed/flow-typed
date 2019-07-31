@@ -1,20 +1,22 @@
 declare module "jest-mock-axios" {
   declare type HttpResponse = {
-    data?: {},
+    data?: {...},
     status?: number,
     statusText?: string,
-    headers?: {},
-    config?: {}
+    headers?: {...},
+    config?: {...},
+    ...
   };
-  declare type SyncPromise = {};
+  declare type SyncPromise = {...};
   declare type AxiosMockQueueItem = {
     promise: SyncPromise,
     url: string,
-    data?: {},
-    config?: {}
+    data?: {...},
+    config?: {...},
+    ...
   };
   declare type AnyFn = (...args: any[]) => any;
-  declare type SpyFn = AnyFn & { mockClear: AnyFn };
+  declare type SpyFn = AnyFn & { mockClear: AnyFn, ... };
   declare type AxiosFn = (...args: any[]) => SpyFn;
   declare type AxiosAPI = {
     get?: SpyFn,
@@ -25,7 +27,8 @@ declare module "jest-mock-axios" {
     request?: SpyFn,
     head?: SpyFn,
     options?: SpyFn,
-    patch?: SpyFn
+    patch?: SpyFn,
+    ...
   };
   declare type AxiosMockAPI = {
     mockResponse?: (
@@ -33,14 +36,15 @@ declare module "jest-mock-axios" {
       queueItem?: SyncPromise | AxiosMockQueueItem
     ) => void,
     mockError?: (
-      error?: {},
+      error?: {...},
       queueItem?: SyncPromise | AxiosMockQueueItem
     ) => void,
     lastPromiseGet?: () => SyncPromise,
     popPromise?: (promise?: SyncPromise) => SyncPromise,
     lastReqGet?: () => AxiosMockQueueItem,
     popPromise?: (promise?: SyncPromise) => SyncPromise,
-    reset?: () => void
+    reset?: () => void,
+    ...
   };
   declare type AxiosMockType = AxiosFn & AxiosAPI & AxiosMockAPI;
 

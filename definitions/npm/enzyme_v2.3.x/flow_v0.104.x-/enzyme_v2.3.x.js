@@ -6,7 +6,7 @@ declare module "enzyme" {
     index: number
   ) => boolean;
   declare type NodeOrNodes = React.Node | Array<React.Node>;
-  declare type EnzymeSelector = string | Class<React.Component<*, *>> | {};
+  declare type EnzymeSelector = string | Class<React.Component<*, *>> | {...};
 
   // CheerioWrapper is a type alias for an actual cheerio instance
   // TODO: Reference correct type from cheerio's type declarations
@@ -21,7 +21,7 @@ declare module "enzyme" {
     containsMatchingElement(node: React.Node): boolean,
     containsAllMatchingElements(nodes: NodeOrNodes): boolean,
     containsAnyMatchingElements(nodes: NodeOrNodes): boolean,
-    dive(option?: { context?: Object }): this,
+    dive(option?: { context?: Object, ... }): this,
     exists(): boolean,
     matchesElement(node: React.Node): boolean,
     hasClass(className: string): boolean,
@@ -50,8 +50,8 @@ declare module "enzyme" {
     prop(key: string): any,
     key(): string,
     simulate(event: string, ...args: Array<any>): this,
-    setState(state: {}, callback?: Function): this,
-    setProps(props: {}): this,
+    setState(state: {...}, callback?: Function): this,
+    setProps(props: {...}): this,
     setContext(context: Object): this,
     instance(): React.Component<*, *>,
     update(): this,
@@ -85,23 +85,24 @@ declare module "enzyme" {
   declare export class ShallowWrapper extends Wrapper {
     constructor(nodes: NodeOrNodes, root: any, options?: ?Object): ShallowWrapper;
     equals(node: React.Node): boolean,
-    shallow(options?: { context?: Object }): ShallowWrapper
+    shallow(options?: { context?: Object, ... }): ShallowWrapper
   }
 
   declare export function shallow(
     node: React.Node,
-    options?: { context?: Object }
+    options?: { context?: Object, ... }
   ): ShallowWrapper;
   declare export function mount(
     node: React.Node,
     options?: {
       context?: Object,
       attachTo?: HTMLElement,
-      childContextTypes?: Object
+      childContextTypes?: Object,
+      ...
     }
   ): ReactWrapper;
   declare export function render(
     node: React.Node,
-    options?: { context?: Object }
+    options?: { context?: Object, ... }
   ): CheerioWrapper;
 }

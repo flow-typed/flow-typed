@@ -7,26 +7,24 @@ import { DragSource, DropTarget, DragLayer, DragDropContext } from "react-dnd";
 // Test Drag Source Component with default props
 // ----------------------------------------------------------------------
 
-type KnightDefaultProps = {
-  color: string
-};
+type KnightDefaultProps = { color: string, ... };
 
 type KnightOrigProps = KnightDefaultProps & {
   title: string,
-  count?: number
+  count?: number,
+  ...
 };
 
 type KnightCollectProps = {
   connectDragSource: (e: React.Element<any>) => null | React.Node,
   connectDragPreview: (e: Image) => ?Image,
-  isDragging: boolean
+  isDragging: boolean,
+  ...
 };
 
 type KnightProps = KnightOrigProps & KnightCollectProps;
 
-type KnightState = {
-  num: number
-};
+type KnightState = { num: number, ... };
 
 const knightSource = {
   beginDrag() {
@@ -299,9 +297,7 @@ function canMoveKnight(toX: number, toY: number) {
   return true;
 }
 
-type SquareProps = {
-  black: boolean
-};
+type SquareProps = { black: boolean, ... };
 
 class Square extends React.Component<SquareProps> {
   static defaultProps: SquareProps = {
@@ -316,16 +312,15 @@ class Square extends React.Component<SquareProps> {
   }
 }
 
-type BoardSquareDefaultProps = {
-  x: number
-};
+type BoardSquareDefaultProps = { x: number, ... };
 
 type BoardSquareProps = BoardSquareDefaultProps & {
   y: number,
   count?: number,
   connectDropTarget: (e: React.Element<any>) => null | React.Node,
   isOver: boolean,
-  canDrop: boolean
+  canDrop: boolean,
+  ...
 };
 
 const boardSquareTarget = {
@@ -419,7 +414,8 @@ const DndBoardSquare = DropTarget(
 
 type CustomDragLayerProps = {
   isDragging: boolean,
-  title: string
+  title: string,
+  ...
 };
 
 function dragLayerCollect(monitor) {
@@ -454,7 +450,8 @@ const DndCustomDragLayer = DragLayer(dragLayerCollect)(CustomDragLayer);
 
 type BoardProps = {
   width: number,
-  height: number
+  height: number,
+  ...
 };
 
 class Board extends React.Component<BoardProps> {

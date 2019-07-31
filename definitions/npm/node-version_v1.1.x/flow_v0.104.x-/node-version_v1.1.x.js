@@ -5,7 +5,8 @@ declare module "node-version" {
     long: string,
     major: string,
     minor: string,
-    build: string
+    build: string,
+    ...
   };
 }
 

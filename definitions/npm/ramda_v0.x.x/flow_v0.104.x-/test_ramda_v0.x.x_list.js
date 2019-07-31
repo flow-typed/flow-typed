@@ -17,9 +17,9 @@ import { describe, it } from 'flow-typed-test';
 
 const ns: Array<number> = [1, 2, 3, 4, 5];
 const ss: Array<string> = ["one", "two", "three", "four"];
-const obj: { [k: string]: number } = { a: 1, c: 2 };
-const objMixed: { [k: string]: mixed } = { a: 1, c: "d" };
-const os: Array<{ [k: string]: number | string }> = [
+const obj: { [k: string]: number, ... } = { a: 1, c: 2 };
+const objMixed: { [k: string]: mixed, ... } = { a: 1, c: "d" };
+const os: Array<{ [k: string]: number | string, ... }> = [
   { a: 1, c: "d" },
   { b: 2 }
 ];
@@ -125,11 +125,11 @@ const str: string = "hello world";
   const chainxs: number[] = _.chain((n) => [n, n], [1, 2])
   const chainxs1: number[] = _.chain((n) => [n, n])([1, 2])
 
-  const findxs: ?{ [k: string]: number | string } = _.find(
+  const findxs: ?{ [k: string]: number | string, ... } = _.find(
     _.propEq("a", 2),
     os
   );
-  const findxs1: ?{ [k: string]: number | string } = _.find(_.propEq("a", 4))(
+  const findxs1: ?{ [k: string]: number | string, ... } = _.find(_.propEq("a", 4))(
     os
   );
   // Ramda doesn't strictly break if you pass it an object, but it always
@@ -137,11 +137,11 @@ const str: string = "hello world";
   // $ExpectError
   const findObj = find(o => o == "bar", { foo: "bar" });
 
-  const findxs2: ?{ [k: string]: number | string } = _.findLast(
+  const findxs2: ?{ [k: string]: number | string, ... } = _.findLast(
     _.propEq("a", 2),
     os
   );
-  const findxs3: ?{ [k: string]: number | string } = _.findLast(
+  const findxs3: ?{ [k: string]: number | string, ... } = _.findLast(
     _.propEq("a", 4)
   )(os);
   const findxs4: number = _.findIndex(_.propEq("a", 2), os);
@@ -188,19 +188,19 @@ const str: string = "hello world";
 
   const s4 = _.find(x => x === "2", ["1", "2"]);
   //$ExpectError
-  const s5: ?{ [key: string]: string } = _.find(x => x === "2", { a: 1, b: 2 });
+  const s5: ?{ [key: string]: string, ... } = _.find(x => x === "2", { a: 1, b: 2 });
   const s6: number = _.findIndex(x => x === "2", ["1", "2"]);
   const s7: number = _.findIndex(x => x === "2", { a: "1", b: "2" });
   const forEachxs = _.forEach(x => console.log(x), ns);
 
   const forEachObj = _.forEachObjIndexed((value, key) => {}, { x: 1, y: 2 });
 
-  const groupedBy: { [k: string]: Array<number> } = _.groupBy(
+  const groupedBy: { [k: string]: Array<number>, ... } = _.groupBy(
     x => (x > 1 ? "more" : "less"),
     ns
   );
   //$ExpectError
-  const groupedBy1: { [k: string]: Array<string> } = _.groupBy(
+  const groupedBy1: { [k: string]: Array<string>, ... } = _.groupBy(
     x => (x > 1 ? "more" : "less")
   )(ns);
 
@@ -221,11 +221,11 @@ const str: string = "hello world";
 
   const ind: number = _.indexOf(1, ns);
   const ind1: number = _.indexOf(str)(ss);
-  const ind2: { [key: string]: { [k: string]: number | string } } = _.indexBy(
+  const ind2: { [key: string]: { [k: string]: number | string, ... }, ... } = _.indexBy(
     x => "s",
     os
   );
-  const ind3: { [key: string]: { [k: string]: number | string } } = _.indexBy(
+  const ind3: { [key: string]: { [k: string]: number | string, ... }, ... } = _.indexBy(
     x => "s"
   )(os);
   const ind4: number = _.indexOf(null)(ss);
@@ -252,10 +252,26 @@ const str: string = "hello world";
 
   const mapxs: Array<number> = _.map(x => x + 1, ns);
 
-  const someObj: { a: string, b: number } = { a: 'a', b: 2 }
-  const someMap: { [string]: { a: string, b: number } } = { so: someObj }
-  const mapObj: { [string]: string } = _.map((x: { a: string, b: number }): string => x.a)(someMap)
-  const mapObj2: { [string]: string } = _.map((x: { a: string, b: number }): string => x.a, someMap)
+  const someObj: {
+    a: string,
+    b: number,
+    ...
+  } = { a: 'a', b: 2 }
+  const someMap: { [string]: {
+    a: string,
+    b: number,
+    ...
+  }, ... } = { so: someObj }
+  const mapObj: { [string]: string, ... } = _.map((x: {
+    a: string,
+    b: number,
+    ...
+  }): string => x.a)(someMap)
+  const mapObj2: { [string]: string, ... } = _.map((x: {
+    a: string,
+    b: number,
+    ...
+  }): string => x.a, someMap)
 
   const functor = {
     x: 1,
@@ -294,8 +310,8 @@ const str: string = "hello world";
     "bars"
   ]);
   const partxs1: [
-    { [k: string]: string },
-    { [k: string]: string }
+    { [k: string]: string, ... },
+    { [k: string]: string, ... }
   ] = _.partition(_.contains("s"), { a: "sss", b: "ttt", foo: "bars" });
 
   const pl: Array<number | string> = _.pluck("a")([{ a: "1" }, { a: 2 }]);
@@ -400,7 +416,7 @@ const str: string = "hello world";
     { name: "Drew", score: 85 },
     { name: "Bart", score: 62 }
   ];
-  const names1: { [k: string]: Array<string> } = namesByGrade(students);
+  const names1: { [k: string]: Array<string>, ... } = namesByGrade(students);
 
   const isOdd = (acc, x) => x % 2 === 1;
   const reduceWhile1: number = _.reduceWhile(isOdd, _.add, 0, [1, 3, 5, 60, 777, 800]);
@@ -454,7 +470,7 @@ const str: string = "hello world";
   const unw3 = _.uniqWith(strEq)(["1", 1, 1]);
 
   //$ExpectError
-  const ys6: { [key: string]: string } = _.fromPairs([["h", 2]]);
+  const ys6: { [key: string]: string, ... } = _.fromPairs([["h", 2]]);
 
   const withoutxs: Array<number> = _.without([1, 2], ns);
   const withoutxs1: Array<string> = _.without(["a"], ss);
@@ -467,19 +483,31 @@ const str: string = "hello world";
   //$ExpectError
   const zipxs1: Array<[number, string]> = _.zip([true, false])(["a", "b"]);
 
-  const zipos: { [k: string]: number } = _.zipObj(["a", "b", "c"], [1, 2, 3]);
+  const zipos: { [k: string]: number, ... } = _.zipObj(["a", "b", "c"], [1, 2, 3]);
 
-  const ys9: { [k: string]: number } = _.zipObj(["me", "you"], [1, 2]);
-  const zipped: Array<{ s: number, y: string }> = zipWith(
+  const ys9: { [k: string]: number, ... } = _.zipObj(["me", "you"], [1, 2]);
+  const zipped: Array<{
+    s: number,
+    y: string,
+    ...
+  }> = zipWith(
     (a, b) => ({ s: a, y: b }),
     [1, 2, 3],
     ["1", "2", "3"]
   );
-  const zipped2: Array<{ s: number, y: string }> = _.zipWith(
+  const zipped2: Array<{
+    s: number,
+    y: string,
+    ...
+  }> = _.zipWith(
     (a, b) => ({ s: a, y: b }),
     [1, 2, 3]
   )(["1", "2", "3"]);
-  const zipped3: Array<{ s: number, y: string }> = _.zipWith((a, b) => ({
+  const zipped3: Array<{
+    s: number,
+    y: string,
+    ...
+  }> = _.zipWith((a, b) => ({
     s: a,
     y: b
   }))([1, 2, 3])(["1", "2", "3"]);

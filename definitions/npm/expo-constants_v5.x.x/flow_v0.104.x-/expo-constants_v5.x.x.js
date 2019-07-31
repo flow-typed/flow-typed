@@ -9,13 +9,12 @@ declare module 'expo-constants' {
     model: string,
     userInterfaceIdiom: UserInterfaceIdiom,
     systemVersion: string,
+    ...
   };
 
-  declare export type AndroidManifest = {
-    versionCode: number,
-  };
+  declare export type AndroidManifest = { versionCode: number, ... };
 
-  declare export type WebManifest = {};
+  declare export type WebManifest = {...};
 
   declare export type AppManifest = {
     releaseChannel?: string,
@@ -30,10 +29,9 @@ declare module 'expo-constants' {
     notification?: {
       icon?: string,
       color?: string,
+      ...
     },
-    loading?: {
-      icon?: string,
-    },
+    loading?: { icon?: string, ... },
     entryPoint?: string,
     packagerOpts?: {
       hostType?: string,
@@ -43,28 +41,27 @@ declare module 'expo-constants' {
       urlType?: string,
       urlRandomness?: string,
       lanType?: string,
+      ...
     },
     xde?: boolean,
-    developer?: {
-      tool?: string,
-    },
+    developer?: { tool?: string, ... },
     bundleUrl: string,
     debuggerHost?: string,
     mainModuleName?: string,
     logUrl?: string,
+    ...
   };
 
   declare export type PlatformManifest = {
     ios?: IOSManifest,
     android?: AndroidManifest,
     web?: WebManifest,
-    detach?: {
-      scheme?: string,
-    },
+    detach?: { scheme?: string, ... },
     logUrl?: string,
     scheme?: string,
     hostUri?: string,
     developer?: string,
+    ...
   };
 
   declare export type NativeConstants = {
@@ -80,8 +77,8 @@ declare module 'expo-constants' {
     isDevice: boolean,
     isHeadless: boolean,
     linkingUri: string,
-    nativeAppVersion: string;
-    nativeBuildVersion: string;
+    nativeAppVersion: string,
+    nativeBuildVersion: string,
     sessionId: string,
     statusBarHeight: number,
     systemVersion?: number,
@@ -90,10 +87,12 @@ declare module 'expo-constants' {
     manifest: AppManifest,
     platform?: PlatformManifest,
     getWebViewUserAgentAsync: () => Promise<string | null>,
+    ...
   };
 
   declare export default {
     deviceId?: string,
     linkingUrl?: string,
+    ...
   } & NativeConstants;
 }

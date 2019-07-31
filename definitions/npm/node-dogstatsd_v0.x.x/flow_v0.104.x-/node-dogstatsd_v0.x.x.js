@@ -6,9 +6,7 @@ declare module 'node-dogstatsd' {
 
 
 declare module 'node-dogstatsd/lib/statsd' {
-  declare type ClientOptions = {
-    global_tags: string[]
-  }
+  declare type ClientOptions = { global_tags: string[], ... }
 
   declare class Client {
     constructor(host?: string, port?: number, socket?: Socket, options?: ClientOptions): void;
@@ -26,9 +24,7 @@ declare module 'node-dogstatsd/lib/statsd' {
     close(): void;
   }
 
-  declare module.exports: {
-    StatsD: typeof Client
-  };
+  declare module.exports: { StatsD: typeof Client, ... };
 }
 
 declare module 'node-dogstatsd/lib/statsd.js' {

@@ -23,9 +23,7 @@ declare module 'node-fetch' {
     size: number
   }
 
-  declare type HeaderObject = {
-    [index: string]: string
-  }
+  declare type HeaderObject = { [index: string]: string, ... }
 
   declare interface RequestInit {
     method?: string,

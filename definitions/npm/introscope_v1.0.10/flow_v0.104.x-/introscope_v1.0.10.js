@@ -3,8 +3,8 @@ declare module 'introscope' {
     // some developers require only part of their tests
     // to have strict types.
     // eslint-disable-next-line flowtype/no-weak-types
-    declare type AnyScope = { [string]: any };
+    declare type AnyScope = { [string]: any, ... };
     declare function introscope(scope: AnyScope): AnyScope => AnyScope;
 
-    declare function scope<Scope: {}>(scope: Scope): ($Shape<Scope>) => Scope;
+    declare function scope<Scope: {...}>(scope: Scope): ($Shape<Scope>) => Scope;
 }

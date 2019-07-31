@@ -113,7 +113,6 @@ declare module 'styled-components' {
     var: React$ElementRef<'var'>,
     video: React$ElementRef<'video'>,
     wbr: React$ElementRef<'wbr'>,
-
     // SVG
     circle: React$ElementRef<'circle'>,
     clipPath: React$ElementRef<'clipPath'>,
@@ -134,10 +133,10 @@ declare module 'styled-components' {
     svg: React$ElementRef<'svg'>,
     text: React$ElementRef<'text'>,
     tspan: React$ElementRef<'tspan'>,
-
     // Deprecated, should be HTMLUnknownElement, but Flow doesn't support it
     keygen: React$ElementRef<'keygen'>,
     menuitem: React$ElementRef<'menuitem'>,
+    ...
   }
 
   declare type BuiltinElementType<ElementName: string> = $ElementType<BuiltinElementInstances, ElementName>
@@ -188,10 +187,10 @@ declare module 'styled-components' {
     id : number;
     forceServer : boolean;
     target : ?HTMLElement;
-    tagMap : {[string]: Tag<any>}; // eslint-disable-line flowtype/no-weak-types
-    deferred: { [string]: string[] | void };
-    rehydratedNames: { [string]: boolean };
-    ignoreRehydratedNames: { [string]: boolean };
+    tagMap : { [string]: Tag<any>, ... }; // eslint-disable-line flowtype/no-weak-types
+    deferred: { [string]: string[] | void, ... };
+    rehydratedNames: { [string]: boolean, ... };
+    ignoreRehydratedNames: { [string]: boolean, ... };
     tags: Tag<any>[]; // eslint-disable-line flowtype/no-weak-types
     importRuleTag: Tag<any>; // eslint-disable-line flowtype/no-weak-types
     capacity: number;
@@ -229,7 +228,11 @@ declare module 'styled-components' {
   declare export var css : CSSConstructor;
   declare export var keyframes : KeyFramesConstructor;
   declare export var createGlobalStyle : CreateGlobalStyleConstructor
-  declare export var ThemeProvider: React$ComponentType<{children?: ?React$Node, theme: mixed | (mixed) => mixed}>
+  declare export var ThemeProvider: React$ComponentType<{
+    children?: ?React$Node,
+    theme: mixed | (mixed) => mixed,
+    ...
+  }>
 
   declare type ThemeProps<T> = {|
     theme: T
@@ -240,12 +243,12 @@ declare module 'styled-components' {
     ...$Exact<Props>
   |}
 
-  declare export function withTheme<Theme, Config: {}, Instance>(Component: React$AbstractComponent<Config, Instance>): React$AbstractComponent<$Diff<Config, ThemeProps<Theme | void>>, Instance>
+  declare export function withTheme<Theme, Config: {...}, Instance>(Component: React$AbstractComponent<Config, Instance>): React$AbstractComponent<$Diff<Config, ThemeProps<Theme | void>>, Instance>
 
   declare export type StyledComponent<Props, Theme, Instance> = React$AbstractComponent<Props, Instance> & InterpolatableComponent<Props>
   declare interface StyledFactory<StyleProps, Props, Theme, Instance> {
     [[call]]: TaggedTemplateLiteral<PropsWithTheme<StyleProps, Theme>, StyledComponent<StyleProps, Theme, Instance>>;
-    +attrs: <A: {}>(A | (StyleProps) => A) => React$AbstractComponent<$Diff<StyleProps, A>, Instance>;
+    +attrs: <A: {...}>(A | (StyleProps) => A) => React$AbstractComponent<$Diff<StyleProps, A>, Instance>;
   }
 
 
@@ -258,8 +261,8 @@ declare module 'styled-components' {
    >
 
   declare interface Styled {
-    <StyleProps, Theme, ElementName: $Keys<BuiltinElementInstances>>(ElementName): StyledFactory<StyleProps, {}, Theme, BuiltinElementType<ElementName>>;
-    <StyleProps, Theme, OwnProps: {}, Comp: React$ComponentType<OwnProps>>(Comp): StyledFactory<StyleProps, OwnProps, Theme, React$ComponentType<Comp>>;
+    <StyleProps, Theme, ElementName: $Keys<BuiltinElementInstances>>(ElementName): StyledFactory<StyleProps, {...}, Theme, BuiltinElementType<ElementName>>;
+    <StyleProps, Theme, OwnProps: {...}, Comp: React$ComponentType<OwnProps>>(Comp): StyledFactory<StyleProps, OwnProps, Theme, React$ComponentType<Comp>>;
   }
 
   declare export default Styled & ConvenientShorthands
@@ -313,10 +316,10 @@ declare module 'styled-components/native' {
     id : number;
     forceServer : boolean;
     target : ?HTMLElement;
-    tagMap : {[string]: Tag<any>}; // eslint-disable-line flowtype/no-weak-types
-    deferred: { [string]: string[] | void };
-    rehydratedNames: { [string]: boolean };
-    ignoreRehydratedNames: { [string]: boolean };
+    tagMap : { [string]: Tag<any>, ... }; // eslint-disable-line flowtype/no-weak-types
+    deferred: { [string]: string[] | void, ... };
+    rehydratedNames: { [string]: boolean, ... };
+    ignoreRehydratedNames: { [string]: boolean, ... };
     tags: Tag<any>[]; // eslint-disable-line flowtype/no-weak-types
     importRuleTag: Tag<any>; // eslint-disable-line flowtype/no-weak-types
     capacity: number;
@@ -354,7 +357,11 @@ declare module 'styled-components/native' {
   declare export var css : CSSConstructor;
   declare export var keyframes : KeyFramesConstructor;
   declare export var createGlobalStyle : CreateGlobalStyleConstructor
-  declare export var ThemeProvider: React$ComponentType<{children?: ?React$Node, theme: mixed | (mixed) => mixed}>
+  declare export var ThemeProvider: React$ComponentType<{
+    children?: ?React$Node,
+    theme: mixed | (mixed) => mixed,
+    ...
+  }>
 
   declare type ThemeProps<T> = {|
     theme: T
@@ -365,63 +372,64 @@ declare module 'styled-components/native' {
     ...$Exact<Props>
   |}
 
-  declare export function withTheme<Theme, Config: {}, Instance>(Component: React$AbstractComponent<Config, Instance>): React$AbstractComponent<$Diff<Config, ThemeProps<Theme | void>>, Instance>
+  declare export function withTheme<Theme, Config: {...}, Instance>(Component: React$AbstractComponent<Config, Instance>): React$AbstractComponent<$Diff<Config, ThemeProps<Theme | void>>, Instance>
 
   declare export type StyledComponent<Props, Theme, Instance> = React$AbstractComponent<Props, Instance> & InterpolatableComponent<Props>
   declare interface StyledFactory<StyleProps, Props, Theme, Instance> {
     [[call]]: TaggedTemplateLiteral<PropsWithTheme<StyleProps, Theme>, StyledComponent<StyleProps, Theme, Instance>>;
-    +attrs: <A: {}>(A | (StyleProps) => A) => React$AbstractComponent<$Diff<StyleProps, A>, Instance>;
+    +attrs: <A: {...}>(A | (StyleProps) => A) => React$AbstractComponent<$Diff<StyleProps, A>, Instance>;
   }
 
   declare type BuiltinElementInstances = {
-    ActivityIndicator:             React$ComponentType<{}>,
-    ActivityIndicatorIOS:          React$ComponentType<{}>,
-    ART:                           React$ComponentType<{}>,
-    Button:                        React$ComponentType<{}>,
-    DatePickerIOS:                 React$ComponentType<{}>,
-    DrawerLayoutAndroid:           React$ComponentType<{}>,
-    Image:                         React$ComponentType<{}>,
-    ImageBackground:               React$ComponentType<{}>,
-    ImageEditor:                   React$ComponentType<{}>,
-    ImageStore:                    React$ComponentType<{}>,
-    KeyboardAvoidingView:          React$ComponentType<{}>,
-    ListView:                      React$ComponentType<{}>,
-    MapView:                       React$ComponentType<{}>,
-    Modal:                         React$ComponentType<{}>,
-    NavigatorIOS:                  React$ComponentType<{}>,
-    Picker:                        React$ComponentType<{}>,
-    PickerIOS:                     React$ComponentType<{}>,
-    ProgressBarAndroid:            React$ComponentType<{}>,
-    ProgressViewIOS:               React$ComponentType<{}>,
-    ScrollView:                    React$ComponentType<{}>,
-    SegmentedControlIOS:           React$ComponentType<{}>,
-    Slider:                        React$ComponentType<{}>,
-    SliderIOS:                     React$ComponentType<{}>,
-    SnapshotViewIOS:               React$ComponentType<{}>,
-    Switch:                        React$ComponentType<{}>,
-    RecyclerViewBackedScrollView:  React$ComponentType<{}>,
-    RefreshControl:                React$ComponentType<{}>,
-    SafeAreaView:                  React$ComponentType<{}>,
-    StatusBar:                     React$ComponentType<{}>,
-    SwipeableListView:             React$ComponentType<{}>,
-    SwitchAndroid:                 React$ComponentType<{}>,
-    SwitchIOS:                     React$ComponentType<{}>,
-    TabBarIOS:                     React$ComponentType<{}>,
-    Text:                          React$ComponentType<{}>,
-    TextInput:                     React$ComponentType<{}>,
-    ToastAndroid:                  React$ComponentType<{}>,
-    ToolbarAndroid:                React$ComponentType<{}>,
-    Touchable:                     React$ComponentType<{}>,
-    TouchableHighlight:            React$ComponentType<{}>,
-    TouchableNativeFeedback:       React$ComponentType<{}>,
-    TouchableOpacity:              React$ComponentType<{}>,
-    TouchableWithoutFeedback:      React$ComponentType<{}>,
-    View:                          React$ComponentType<{}>,
-    ViewPagerAndroid:              React$ComponentType<{}>,
-    WebView:                       React$ComponentType<{}>,
-    FlatList:                      React$ComponentType<{}>,
-    SectionList:                   React$ComponentType<{}>,
-    VirtualizedList:               React$ComponentType<{}>,
+    ActivityIndicator:             React$ComponentType<{...}>,
+    ActivityIndicatorIOS:          React$ComponentType<{...}>,
+    ART:                           React$ComponentType<{...}>,
+    Button:                        React$ComponentType<{...}>,
+    DatePickerIOS:                 React$ComponentType<{...}>,
+    DrawerLayoutAndroid:           React$ComponentType<{...}>,
+    Image:                         React$ComponentType<{...}>,
+    ImageBackground:               React$ComponentType<{...}>,
+    ImageEditor:                   React$ComponentType<{...}>,
+    ImageStore:                    React$ComponentType<{...}>,
+    KeyboardAvoidingView:          React$ComponentType<{...}>,
+    ListView:                      React$ComponentType<{...}>,
+    MapView:                       React$ComponentType<{...}>,
+    Modal:                         React$ComponentType<{...}>,
+    NavigatorIOS:                  React$ComponentType<{...}>,
+    Picker:                        React$ComponentType<{...}>,
+    PickerIOS:                     React$ComponentType<{...}>,
+    ProgressBarAndroid:            React$ComponentType<{...}>,
+    ProgressViewIOS:               React$ComponentType<{...}>,
+    ScrollView:                    React$ComponentType<{...}>,
+    SegmentedControlIOS:           React$ComponentType<{...}>,
+    Slider:                        React$ComponentType<{...}>,
+    SliderIOS:                     React$ComponentType<{...}>,
+    SnapshotViewIOS:               React$ComponentType<{...}>,
+    Switch:                        React$ComponentType<{...}>,
+    RecyclerViewBackedScrollView:  React$ComponentType<{...}>,
+    RefreshControl:                React$ComponentType<{...}>,
+    SafeAreaView:                  React$ComponentType<{...}>,
+    StatusBar:                     React$ComponentType<{...}>,
+    SwipeableListView:             React$ComponentType<{...}>,
+    SwitchAndroid:                 React$ComponentType<{...}>,
+    SwitchIOS:                     React$ComponentType<{...}>,
+    TabBarIOS:                     React$ComponentType<{...}>,
+    Text:                          React$ComponentType<{...}>,
+    TextInput:                     React$ComponentType<{...}>,
+    ToastAndroid:                  React$ComponentType<{...}>,
+    ToolbarAndroid:                React$ComponentType<{...}>,
+    Touchable:                     React$ComponentType<{...}>,
+    TouchableHighlight:            React$ComponentType<{...}>,
+    TouchableNativeFeedback:       React$ComponentType<{...}>,
+    TouchableOpacity:              React$ComponentType<{...}>,
+    TouchableWithoutFeedback:      React$ComponentType<{...}>,
+    View:                          React$ComponentType<{...}>,
+    ViewPagerAndroid:              React$ComponentType<{...}>,
+    WebView:                       React$ComponentType<{...}>,
+    FlatList:                      React$ComponentType<{...}>,
+    SectionList:                   React$ComponentType<{...}>,
+    VirtualizedList:               React$ComponentType<{...}>,
+    ...
   }
 
   declare type BuiltinElementType<ElementName: string> = $ElementType<BuiltinElementInstances, ElementName>
@@ -435,8 +443,8 @@ declare module 'styled-components/native' {
    >
 
   declare interface Styled {
-    <StyleProps, Theme, ElementName: $Keys<BuiltinElementInstances>>(ElementName): StyledFactory<StyleProps, {}, Theme, BuiltinElementType<ElementName>>;
-    <StyleProps, Theme, OwnProps: {}, Comp: React$ComponentType<OwnProps>>(Comp): StyledFactory<StyleProps, OwnProps, Theme, React$ComponentType<Comp>>;
+    <StyleProps, Theme, ElementName: $Keys<BuiltinElementInstances>>(ElementName): StyledFactory<StyleProps, {...}, Theme, BuiltinElementType<ElementName>>;
+    <StyleProps, Theme, OwnProps: {...}, Comp: React$ComponentType<OwnProps>>(Comp): StyledFactory<StyleProps, OwnProps, Theme, React$ComponentType<Comp>>;
   }
 
   declare export default Styled & ConvenientShorthands

@@ -11,6 +11,7 @@ declare module 'twit' {
       access_token_secret: string,
       timeout_ms?: number,
       trusted_cert_fingerprints?: string[],
+      ...
     }): Twit;
     post(endpoint: string, options: Object, cb?: (err: ?Error, data: any, response: any) => mixed): Promise<any>;
     postMediaChunked(options: Object, cb?: (err: ?Error, data: any, response: any) => mixed): Promise<any>;

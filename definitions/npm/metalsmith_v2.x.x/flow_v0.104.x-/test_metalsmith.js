@@ -19,7 +19,7 @@ const file: File = {
 
 const dummyPlugin = (files: FilesMap, ms: Metalsmith, done: DoneCallback) => {
   const dest: string = ms.destination();
-  const meta: {} = ms.metadata();
+  const meta: {...} = ms.metadata();
   // $ExpectError
   const src: number = ms.source();
 

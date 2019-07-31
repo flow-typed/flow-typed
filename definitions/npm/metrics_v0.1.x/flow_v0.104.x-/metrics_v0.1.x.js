@@ -5,20 +5,21 @@ declare module 'metrics' {
 
   declare type MeterPrintObj = {
     type: 'histogram',
-
     count: number,
     m1: number,
     m5: number,
     m15: number,
     mean: number,
-    unit: 'seconds'
+    unit: 'seconds',
+    ...
   };
 
   declare type Rates = {
-    '1': number;
-    '5': number;
-    '15': number;
-    mean: number;
+    '1': number,
+    '5': number,
+    '15': number,
+    mean: number,
+    ...
   };
 
   declare class Meter {
@@ -46,7 +47,7 @@ declare module 'metrics' {
     max(): number;
     mean(): number;
     stdDev(): number;
-    percentiles(percentiles: number[]): { [percentile: number]: number };
+    percentiles(percentiles: number[]): { [percentile: number]: number, ... };
     values(): number[];
 
     oneMinuteRate(): number;
@@ -58,8 +59,9 @@ declare module 'metrics' {
 
     printObj(): {
       type: 'timer',
-      duration: HistogramPrintObj;
-      rate: MeterPrintObj;
+      duration: HistogramPrintObj,
+      rate: MeterPrintObj,
+      ...
     };
   }
 
@@ -71,14 +73,14 @@ declare module 'metrics' {
     inc(): void;
     dec(): void;
     printObj(): ({
-      type: 'counter';
-      count: number;
+      type: 'counter',
+      count: number,
+      ...
     });
   }
 
   declare type HistogramPrintObj = {
     type: 'histogram',
-
     min: number,
     max: number,
     sum: number,
@@ -90,7 +92,8 @@ declare module 'metrics' {
     p75: number,
     p95: number,
     p99: number,
-    p999: number
+    p999: number,
+    ...
   };
 
   declare class Histogram {
@@ -105,7 +108,7 @@ declare module 'metrics' {
     update(value: number, timestamp?: number): void;
     updateVariance(value: number): void;
 
-    percentiles(percentiles: number[]): { [percentile: number]: number };
+    percentiles(percentiles: number[]): { [percentile: number]: number, ... };
     variance(): number | null;
     mean(): number | null;
     stdDev(): number | null;
@@ -115,10 +118,10 @@ declare module 'metrics' {
   }
 
   declare interface Metrics {
-    meters: (Meter & { name: string })[];
-    timers: (Timer & { name: string })[];
-    counters: (Counter & { name: string })[];
-    histograms: (Histogram & { name: string })[];
+    meters: (Meter & { name: string, ... })[];
+    timers: (Timer & { name: string, ... })[];
+    counters: (Counter & { name: string, ... })[];
+    histograms: (Histogram & { name: string, ... })[];
   }
 
   declare class ScheduledReporter extends events.EventEmitter {
@@ -152,7 +155,7 @@ declare module 'metrics' {
   declare class Report {
     addMetric(eventName: string, metric: Metric): void;
     getMetric(eventName: string): Metric;
-    summary(): { [namespace: string]: { [name: string]: Metric } };
+    summary(): { [namespace: string]: { [name: string]: Metric, ... }, ... };
   }
 
   declare class EWMA {

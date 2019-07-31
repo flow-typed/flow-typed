@@ -10,7 +10,11 @@ function testPassingPropsToConnectedComponent() {
     passthroughWithDefaultProp?: number,
     forMapStateToProps: string
   |}
-  type Props = { ...OwnProps, fromStateToProps: string};
+  type Props = {
+    ...OwnProps,
+    fromStateToProps: string,
+    ...
+  };
   class Com extends React.Component<Props> {
     static defaultProps = { passthroughWithDefaultProp: 123 };
     render() {
@@ -18,10 +22,8 @@ function testPassingPropsToConnectedComponent() {
     }
   }
 
-  type State = {a: number};
-  type InputProps = {
-    forMapStateToProps: string
-  };
+  type State = { a: number, ... };
+  type InputProps = { forMapStateToProps: string, ... };
   const mapStateToProps = (state: State, props: InputProps) => {
     return {
       fromStateToProps: 'str' + state.a
@@ -50,15 +52,13 @@ function testPassingPropsToConnectedComponent() {
 }
 
 function doesNotRequireDefinedComponentToTypeCheck1case() {
-  type Props = {
-    stringProp: string,
-  };
+  type Props = { stringProp: string, ... };
 
   const Component = ({ stringProp }: Props) => {
     return <span>{stringProp}</span>;
   };
 
-  const mapStateToProps = (state: {}) => ({
+  const mapStateToProps = (state: {...}) => ({
     // $ExpectError wrong type for stringProp
     stringProp: false,
   });
@@ -69,9 +69,7 @@ function doesNotRequireDefinedComponentToTypeCheck1case() {
 }
 
 function doesNotRequireDefinedComponentToTypeCheck2case() {
-  type Props = {
-    numProp: string,
-  };
+  type Props = { numProp: string, ... };
 
   const Component = ({ numProp }: Props) => {
     return <span>{numProp}</span>;
@@ -90,14 +88,15 @@ function doesNotRequireDefinedComponentToTypeCheck2case() {
 function doesNotRequireDefinedComponentToTypeCheck3case() {
   type Props = {
     stringProp: string,
-    numProp: number
+    numProp: number,
+    ...
   };
 
   const Component = ({ stringProp }: Props) => {
     return <span>{stringProp}</span>;
   };
 
-  const mapStateToProps = (state: {}) => ({
+  const mapStateToProps = (state: {...}) => ({
     // $ExpectError wrong type for stringProp
     stringProp: false,
   });
@@ -113,15 +112,13 @@ function doesNotRequireDefinedComponentToTypeCheck3case() {
 }
 
 function doesNotRequireDefinedComponentToTypeCheck4case() {
-  type Props = {
-    stringProp: string,
-  };
+  type Props = { stringProp: string, ... };
 
   const Component = ({ stringProp }: Props) => {
     return <span>{stringProp}</span>;
   };
 
-  const mapStateToProps = (state: {}) => ({
+  const mapStateToProps = (state: {...}) => ({
     // $ExpectError wrong type for stringProp
     stringProp: false,
   });
@@ -132,9 +129,7 @@ function doesNotRequireDefinedComponentToTypeCheck4case() {
 }
 
 function doesNotRequireDefinedComponentToTypeCheck5case() {
-  type Props = {
-    stringProp: string
-  };
+  type Props = { stringProp: string, ... };
 
   const Component = ({ stringProp }: Props) => {
     return <span>{stringProp}</span>;
@@ -171,7 +166,7 @@ function testExactProps() {
     }
   }
 
-  type State = {a: number};
+  type State = { a: number, ... };
   type InputProps = {|
     forMapStateToProps: string,
     passthrough: number,
@@ -203,10 +198,13 @@ function testInexactOwnProps() {
   type OwnProps = {
     passthrough: number,
     forMapStateToProps: string,
+    ...
   };
   type Props = {
-    ...$Exact<OwnProps>, // to eliminate the cripy `undefined`
-    fromStateToProps: string
+    // to eliminate the cripy `undefined`
+    ...$Exact<OwnProps>,
+    fromStateToProps: string,
+    ...
   };
 
   class Com extends React.Component<Props> {
@@ -215,10 +213,11 @@ function testInexactOwnProps() {
     }
   }
 
-  type State = {a: number};
+  type State = { a: number, ... };
   type InputProps = {
     forMapStateToProps: string,
     passthrough: number,
+    ...
   };
 
   const mapStateToProps = (state: State, props: InputProps) => {
@@ -250,14 +249,13 @@ function testWithStatelessFunctionalComponent() {
   |};
   type Props = {
     ...OwnProps,
-    fromStateToProps: string
+    fromStateToProps: string,
+    ...
   };
   const Com = (props: Props) => <div>{props.passthrough} {props.fromStateToProps}</div>
 
-  type State = {a: number};
-  type InputProps = {
-    forMapStateToProps: string
-  };
+  type State = { a: number, ... };
+  type InputProps = { forMapStateToProps: string, ... };
   const mapStateToProps = (state: State, props: InputProps) => {
     return {
       fromStateToProps: 'str' + state.a
@@ -286,7 +284,8 @@ function testMapStateToPropsDoesNotNeedProps() {
   |};
   type Props = {
     ...OwnProps,
-    fromStateToProps: string
+    fromStateToProps: string,
+    ...
   };
   class Com extends React.Component<Props> {
     render() {
@@ -294,7 +293,7 @@ function testMapStateToPropsDoesNotNeedProps() {
     }
   }
 
-  type State = {a: string}
+  type State = { a: string, ... }
   const mapStateToProps = (state: State) => {
     return {
       fromStateToProps: state.a
@@ -317,7 +316,8 @@ function testMapDispatchToProps() {
   type Props = {
     ...OwnProps,
     fromMapDispatchToProps: string,
-    fromMapStateToProps: string
+    fromMapStateToProps: string,
+    ...
   };
   class Com extends React.Component<Props> {
     render() {
@@ -329,14 +329,14 @@ function testMapDispatchToProps() {
     }
   }
 
-  type State = {a: number}
-  type MapStateToPropsProps = {forMapStateToProps: string}
+  type State = { a: number, ... }
+  type MapStateToPropsProps = { forMapStateToProps: string, ... }
   const mapStateToProps = (state: State, props: MapStateToPropsProps) => {
     return {
       fromMapStateToProps: 'str' + state.a
     }
   }
-  type MapDispatchToPropsProps = {forMapDispatchToProps: string}
+  type MapDispatchToPropsProps = { forMapDispatchToProps: string, ... }
   const mapDispatchToProps = (dispatch: *, ownProps: MapDispatchToPropsProps) => {
     return {fromMapDispatchToProps: ownProps.forMapDispatchToProps}
   }
@@ -379,7 +379,8 @@ function testMapDispatchToPropsWithoutMapStateToProps() {
   |};
   type Props = {
     ...OwnProps,
-    fromMapDispatchToProps: string
+    fromMapDispatchToProps: string,
+    ...
   };
   class Com extends React.Component<Props> {
     render() {
@@ -390,7 +391,7 @@ function testMapDispatchToPropsWithoutMapStateToProps() {
     }
   }
 
-  type MapDispatchToPropsProps = {forMapDispatchToProps: string};
+  type MapDispatchToPropsProps = { forMapDispatchToProps: string, ... };
   const mapDispatchToProps = (dispatch: *, ownProps: MapDispatchToPropsProps) => {
     return {fromMapDispatchToProps: ownProps.forMapDispatchToProps}
   }
@@ -410,7 +411,8 @@ function testMapDispatchToPropsPassesActionCreators() {
   type Props = {
     ...OwnProps,
     dispatch1: (num: number) => void,
-    dispatch2: () => void
+    dispatch2: () => void,
+    ...
   };
   class Com extends React.Component<Props> {
     render() {
@@ -455,15 +457,16 @@ function testMapDispatchToPropsPassesActionCreatorsWithMapStateToProps() {
     ...OwnProps,
     dispatch1: () => void,
     dispatch2: () => void,
-    fromMapStateToProps: number
+    fromMapStateToProps: number,
+    ...
   };
   class Com extends React.Component<Props> {
     render() {
       return <div>{this.props.passthrough}</div>;
     }
   }
-  type State = {a: number}
-  type MapStateToPropsProps = {forMapStateToProps: string}
+  type State = { a: number, ... }
+  type MapStateToPropsProps = { forMapStateToProps: string, ... }
   const mapStateToProps = (state: State, props: MapStateToPropsProps) => {
     return {
       fromMapStateToProps: state.a
@@ -503,15 +506,16 @@ function testMapDispatchToPropsPassesActionCreatorsWithMapStateToPropsAndMergePr
     dispatch1: () => void,
     dispatch2: () => void,
     fromMapStateToProps: number,
-    fromMergeProps: number
+    fromMergeProps: number,
+    ...
   };
   class Com extends React.Component<Props> {
     render() {
       return <div>{this.props.passthrough}</div>;
     }
   }
-  type State = {a: number}
-  type MapStateToPropsProps = {forMapStateToProps: string}
+  type State = { a: number, ... }
+  type MapStateToPropsProps = { forMapStateToProps: string, ... }
   const mapStateToProps = (state: State, props: MapStateToPropsProps) => {
     return {
       fromMapStateToProps: state.a
@@ -521,7 +525,7 @@ function testMapDispatchToPropsPassesActionCreatorsWithMapStateToPropsAndMergePr
     dispatch1: () => {},
     dispatch2: () => {}
   };
-  const mergeProps = (stateProps, dispatchProps, ownProps: {forMergeProps: number}) => {
+  const mergeProps = (stateProps, dispatchProps, ownProps: { forMergeProps: number, ... }) => {
     return Object.assign({}, stateProps, dispatchProps, { fromMergeProps: 123 });
   }
   const Connected = connect<Props, OwnProps1, _,_,_,_>(mapStateToProps, mapDispatchToProps, mergeProps)(Com);
@@ -551,9 +555,7 @@ function testMergeProps() {
     forMapDispatchToProps: string,
     forMergeProps: number
   |};
-  type Props = {
-    fromMergeProps: number,
-  };
+  type Props = { fromMergeProps: number, ... };
   class Com extends React.Component<Props> {
     render() {
       return <div>
@@ -562,18 +564,18 @@ function testMergeProps() {
     }
   }
 
-  type State = {a: number}
-  type MapStateToPropsProps = {forMapStateToProps: string}
+  type State = { a: number, ... }
+  type MapStateToPropsProps = { forMapStateToProps: string, ... }
   const mapStateToProps = (state: State, props: MapStateToPropsProps) => {
     return {
       fromMapStateToProps: state.a
     }
   }
-  type MapDispatchToPropsProps = {forMapDispatchToProps: string}
+  type MapDispatchToPropsProps = { forMapDispatchToProps: string, ... }
   const mapDispatchToProps = (dispatch: *, ownProps: MapDispatchToPropsProps) => {
     return {fromMapDispatchToProps: ownProps.forMapDispatchToProps}
   }
-  const mergeProps = (stateProps, dispatchProps, ownProps: {forMergeProps: number}) => {
+  const mergeProps = (stateProps, dispatchProps, ownProps: { forMergeProps: number, ... }) => {
     return {fromMergeProps: 123};
   }
   const Connected = connect<Props, OwnProps, _,_,_,_>(mapStateToProps, mapDispatchToProps, mergeProps)(Com);
@@ -590,7 +592,7 @@ function testMergeProps() {
 }
 
 function testOptions() {
-  class Com extends React.Component<{}> {
+  class Com extends React.Component<{...}> {
     render() {
       return <div></div>;
     }
@@ -608,9 +610,7 @@ function testOptions() {
 }
 
 function testDispatch() {
-  type Props = {
-    dispatch: empty => empty
-  }
+  type Props = { dispatch: empty => empty, ... }
   class Com extends React.Component<Props> {
     render() {
       return <div></div>;
@@ -637,7 +637,8 @@ function testHoistConnectedComponent() {
   |};
   type Props = {
     ...OwnProps,
-    fromStateToProps: string
+    fromStateToProps: string,
+    ...
   };
   class Com extends React.Component<Props> {
     static defaultProps = { passthroughWithDefaultProp: 123 };
@@ -648,10 +649,8 @@ function testHoistConnectedComponent() {
     }
   }
 
-  type State = {a: number};
-  type InputProps = {
-    forMapStateToProps: string
-  };
+  type State = { a: number, ... };
+  type InputProps = { forMapStateToProps: string, ... };
   const mapStateToProps = (state: State, props: InputProps) => {
     return {
       fromStateToProps: 'str' + state.a
@@ -669,9 +668,7 @@ function testHoistConnectedComponent() {
 }
 
 function itsOkToReturnMoreThanNeededPropsFromMapStateToProps() {
-  type Props = {
-    stringProp: string,
-  };
+  type Props = { stringProp: string, ... };
 
   const Component = ({ stringProp }: Props) => {
     return <span>{stringProp}</span>;
@@ -695,7 +692,8 @@ function itsOkToReturnMoreThanNeededPropsFromMapStateToProps() {
 function doesNotRequireDefinedComponentToTypeCheck2case() {
   type Props = {
     stringProp: string,
-    numProp: number
+    numProp: number,
+    ...
   };
 
   const Component = ({ stringProp }: Props) => {
@@ -719,10 +717,8 @@ function doesNotRequireDefinedComponentToTypeCheck2case() {
 }
 
 function checkIfStateTypeIsRespectedAgain() {
-  type State = {
-    //$ExpectError number [1] is incompatible with string [2] in property `str`
-    num: number
-  };
+  type State = { //$ExpectError number [1] is incompatible with string [2] in property `str`
+  num: number, ... };
 
   const mapStateToProps = (state: State) => {
     return {
@@ -730,9 +726,7 @@ function checkIfStateTypeIsRespectedAgain() {
     }
   };
 
-  type Props = {
-    str: string
-  };
+  type Props = { str: string, ... };
 
   class Com extends React.Component<Props> {
     render() {
@@ -755,8 +749,8 @@ function testPassingDispatchPropWithoutDispatchFunction() {
     }
   }
 
-  type State = {a: number};
-  type InputProps = {};
+  type State = { a: number, ... };
+  type InputProps = {...};
   const mapStateToProps = (state: State, props: InputProps) => {
     return {}
   };

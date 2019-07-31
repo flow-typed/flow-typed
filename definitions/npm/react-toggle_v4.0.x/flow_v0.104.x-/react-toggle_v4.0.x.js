@@ -1,7 +1,8 @@
 declare module "react-toggle" {
   declare type Icons = {
     checked?: React$Node,
-    unchecked?: React$Node
+    unchecked?: React$Node,
+    ...
   };
 
   declare type Props = {
@@ -16,7 +17,8 @@ declare module "react-toggle" {
     icons?: Icons | boolean,
     "aria-labelledby"?: string,
     "aria-label"?: string,
-    disabled?: boolean
+    disabled?: boolean,
+    ...
   };
 
   declare export default class Toggle extends React$Component<Props> {}

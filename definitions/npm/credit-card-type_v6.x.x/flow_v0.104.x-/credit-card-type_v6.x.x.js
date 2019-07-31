@@ -8,20 +8,21 @@ declare module 'credit-card-type' {
     lengths: number[],
     code: {
       name: string,
-      size: number
-    }
+      size: number,
+      ...
+    },
+    ...
   }
 
   declare type ILibrary = {
-    (cardNumber: string): ICardType[];
-    types: {
-      [key: string]: ICardType
-    };
-    getTypeInfo: (type: string) => ICardType | null;
-    removeCard: (name: string) => void;
-    addCard: (config: ICardType) => void;
-    changeOrder: (name: string, position: number) => void;
-    resetModifications: () => void;
+    (cardNumber: string): ICardType[],
+    types: { [key: string]: ICardType, ... },
+    getTypeInfo: (type: string) => ICardType | null,
+    removeCard: (name: string) => void,
+    addCard: (config: ICardType) => void,
+    changeOrder: (name: string, position: number) => void,
+    resetModifications: () => void,
+    ...
   }
 
   declare module.exports: ILibrary

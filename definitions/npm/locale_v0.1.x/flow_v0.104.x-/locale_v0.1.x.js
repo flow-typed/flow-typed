@@ -1,6 +1,6 @@
 declare module 'locale' {
   /* Type Helpers */
-  declare type ObjectMap<TProp, TVal> = { [TProp]: TVal };
+  declare type ObjectMap<TProp, TVal> = { [TProp]: TVal, ... };
 
   declare class Locale {
     constructor(str: string): Locale;

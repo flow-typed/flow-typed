@@ -13,9 +13,7 @@ jest.atoMockOff();
 const mockFn = jest.fn();
 mockFn.mock.calls.map(String).map(a => a + a);
 
-type Foo = {
-  doStuff: string => number
-};
+type Foo = { doStuff: string => number, ... };
 const foo: Foo = {
   doStuff(str: string): number {
     return 5;

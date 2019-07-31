@@ -13,7 +13,7 @@ declare module 'use-clipboard-copy' {
     copied: boolean,
     copy: (text?: string) => void,
     isSupported: () => boolean,
-    target: { current: T | null },
+    target: { current: T | null, ... },
   |};
 
   declare export function useClipboard<T>(

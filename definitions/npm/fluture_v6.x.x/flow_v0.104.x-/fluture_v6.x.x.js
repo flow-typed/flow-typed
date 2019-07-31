@@ -52,6 +52,7 @@ declare module fluture {
   }
 
   declare module.exports: {
+    <Rej, Res>(fn: Computation<Rej, Res>): Fluture<Rej, Res>,
     of: <T>(a: T) => Fluture<*, T>,
     reject: <T>(a: T) => Fluture<T, *>,
     after: <T>(a: number, b: T) => Fluture<void, T>,
@@ -62,7 +63,6 @@ declare module fluture {
     try: <T>(() => T) => Fluture<void, T>,
     tryP: <T>(() => Promise<T>) => Fluture<void, T>,
     node: <Rej, Res>((done: NodeBack<Rej, Res>) => void) => Fluture<Rej, Res>,
-
     encase: <A, B>(fn: (a: A) => B) => (a: A) => Fluture<*, B>,
     encase2: <A1, A2, B>(
       fn: (a1: A1, a2: A2) => B,
@@ -86,24 +86,19 @@ declare module fluture {
     encaseN3: <A1, A2, A3, Rej, Res>(
       fn: (a1: A1, a2: A2, a3: A3, done: NodeBack<Rej, Res>) => void,
     ) => (a1: A1, a2: A2, a3: A3) => Fluture<Rej, Res>,
-
     hook: <A, B, C, D>(
       f1: Fluture<A, B>,
       f2: (b: B) => Fluture<A, C>,
     ) => (f3: (c: B) => Fluture<A, D>) => Fluture<A, D>,
-
     both: <A, B>(a: Fluture<A, B>, Fluture<A, B>) => Fluture<A, B>,
     // We can't infer the combined types of all futures
     parallel: (a: number, b: Array<Fluture<*, *>>) => Fluture<*, *>,
-
     // No idea how to type this
     Par: any,
     seq: any,
-
     isFuture: (a: *) => boolean,
     isNever: (a: *) => boolean,
     never: () => Fluture<void, void>,
-
-    <Rej, Res>(fn: Computation<Rej, Res>): Fluture<Rej, Res>,
+    ...
   }
 }

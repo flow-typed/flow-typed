@@ -11,7 +11,7 @@ declare module 'prop-types' {
   declare var bool: React$PropType$Primitive<boolean>;
   declare var func: React$PropType$Primitive<(...a: Array<any>) => mixed>;
   declare var number: React$PropType$Primitive<number>;
-  declare var object: React$PropType$Primitive<{ +[string]: mixed }>;
+  declare var object: React$PropType$Primitive<{ +[string]: mixed, ... }>;
   declare var string: React$PropType$Primitive<string>;
   declare var symbol: React$PropType$Primitive<Symbol>;
   declare var any: React$PropType$Primitive<any>;
@@ -25,7 +25,7 @@ declare module 'prop-types' {
   declare var shape: React$PropType$Shape;
 
   declare function checkPropTypes<V>(
-    propTypes: { [key: $Keys<V>]: $npm$propTypes$ReactPropsCheckType },
+    propTypes: { [key: $Keys<V>]: $npm$propTypes$ReactPropsCheckType, ... },
     values: V,
     location: string,
     componentName: string,

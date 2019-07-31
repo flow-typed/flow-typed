@@ -8,22 +8,25 @@ declare module "react-bootstrap" {
     onDismiss?: Function,
     closeLabel?: string,
     bsStyle?: 'success' | 'warning' | 'danger' | 'info',
-    bsClass?: string
+    bsClass?: string,
+    ...
   }> {}
 
   declare export class Badge extends React$Component<{
     pullRight?: boolean,
-    bsClass?: string
+    bsClass?: string,
+    ...
   }> {}
 
   declare class BreadcrumbItem extends React$Component<{
     active?: boolean,
     href: string,
     title: Node,
-    target: string
+    target: string,
+    ...
   }> {}
 
-  declare export class Breadcrumb extends React$Component<{}> {
+  declare export class Breadcrumb extends React$Component<{...}> {
     static Item: Class<BreadcrumbItem>;
   }
 
@@ -38,24 +41,25 @@ declare module "react-bootstrap" {
     bsStyle?: 'default' | 'primary' | 'success' | 'info' | 'warning' | 'danger' | 'link',
     bsSize?: BsStyle,
     bsClass?: string,
+    ...
   }> {}
 
   declare export class ButtonGroup extends React$Component<{
     vertical?: boolean,
     justified?: boolean,
     block?: boolean,
-    bsClass?: string
+    bsClass?: string,
+    ...
   }> {}
 
-  declare export class ButtonToolbar extends React$Component<{
-    bsClass?: string
-  }> {}
+  declare export class ButtonToolbar extends React$Component<{ bsClass?: string, ... }> {}
 
   declare export class ButtonToolbar extends React$Component<{
     name?: string,
     value?: any,
     onChange?: Function,
-    type: 'checkbox' | 'radio'
+    type: 'checkbox' | 'radio',
+    ...
   }> {}
 
   declare export class ToggleButton extends React$Component<{
@@ -64,12 +68,14 @@ declare module "react-bootstrap" {
     checker?: boolean,
     disabled?: boolean,
     onChange?: Function,
-    value: any
+    value: any,
+    ...
   }> {}
 
   declare class CarouselItem extends React$Component<{
     componentClass?: ElementType,
-    bsClass?: string
+    bsClass?: string,
+    ...
   }> {}
 
   declare class CarouselCaption extends React$Component<{
@@ -78,7 +84,8 @@ declare module "react-bootstrap" {
     active?: boolean,
     animateIn?: boolean,
     animateOut?: boolean,
-    index: number
+    index: number,
+    ...
   }> {}
 
   declare export class Carousel extends React$Component<{
@@ -98,7 +105,8 @@ declare module "react-bootstrap" {
     prevLabel?: string,
     nextIcon?: Node,
     nextLabel?: string,
-    bsClass?: string
+    bsClass?: string,
+    ...
   }> {
     static Item: Class<CarouselItem>;
     static Caption: Class<CarouselCaption>;
@@ -108,7 +116,8 @@ declare module "react-bootstrap" {
     bsStyle?: string,
     bsSize?: string,
     title: Node,
-    noCaret?: boolean
+    noCaret?: boolean,
+    ...
   }> {}
 
   declare export class SplitButton extends React$Component<{
@@ -117,11 +126,12 @@ declare module "react-bootstrap" {
     href?: string,
     onClick?: Function,
     title: Node,
-    toggleLabel?: string
+    toggleLabel?: string,
+    ...
   }> {}
 
-  declare class DropdownMenu extends React$Component<{}> {}
-  declare class DropdownToggle extends React$Component<{}> {}
+  declare class DropdownMenu extends React$Component<{...}> {}
+  declare class DropdownToggle extends React$Component<{...}> {}
 
   declare export class Dropdown extends React$Component<{
     dropup?: boolean,
@@ -137,7 +147,8 @@ declare module "react-bootstrap" {
     role?: string,
     rootCloseEvent?: 'click' | 'mousedown',
     onMouseEnter?: Function,
-    onMouseLeave?: Function
+    onMouseLeave?: Function,
+    ...
   }> {
     static Menu: Class<DropdownMenu>;
     static Toggle: Class<DropdownToggle>;
@@ -146,30 +157,32 @@ declare module "react-bootstrap" {
   declare export class MenuItem extends React$Component<{
     active?: boolean,
     disabled?: boolean,
-    divider?: any, //TODO: figure out proper type
+    //TODO: figure out proper type
+    divider?: any,
     eventKey?: any,
     header?: boolean,
     href?: string,
     onClick?: Function,
     onSelect?: Function,
-    bsClass?: string
+    bsClass?: string,
+    ...
   }> {}
 
   declare export class FormGroup extends React$Component<{
     controlId?: string,
     validationState?: 'success' | 'warning' | 'error' | null,
     bsSize?: BsSize,
-    bsClass?: string
+    bsClass?: string,
+    ...
   }> {}
 
   declare class FormControlStatic extends React$Component<{
     componentClass?: ElementType,
-    bsClass?: string
+    bsClass?: string,
+    ...
   }> {}
 
-  declare class FormControlFeedback extends React$Component<{
-    bsClass?: string
-  }> {}
+  declare class FormControlFeedback extends React$Component<{ bsClass?: string, ... }> {}
 
   declare export class FormControl extends React$Component<{
     componentClass?: ElementType,
@@ -178,6 +191,7 @@ declare module "react-bootstrap" {
     inputRef?: Ref<'input'>,
     bsSize?: BsSize,
     bsClass?: string,
+    ...
   }> {
     static Static: Class<FormControlStatic>;
     static Feedback: Class<FormControlFeedback>;
@@ -186,7 +200,8 @@ declare module "react-bootstrap" {
   declare export class ControlLabel extends React$Component<{
     htmlFor?: string,
     srOnly?: boolean,
-    bsClass?: string
+    bsClass?: string,
+    ...
   }> {}
 
   declare export class Checkbox extends React$Component<{
@@ -195,7 +210,8 @@ declare module "react-bootstrap" {
     title?: string,
     validateState?: 'success' | 'warning' | 'error' | null,
     inputRef?: Ref<'input'>,
-    bsClass?: string
+    bsClass?: string,
+    ...
   }> {}
 
   declare export class Radio extends React$Component<{
@@ -204,31 +220,28 @@ declare module "react-bootstrap" {
     title?: string,
     validateState?: 'success' | 'warning' | 'error' | null,
     inputRef?: Ref<'input'>,
-    bsClass?: string
+    bsClass?: string,
+    ...
   }> {}
 
-  declare export class HelpBlock extends React$Component<{
-    bsClass?: string
-  }> {}
+  declare export class HelpBlock extends React$Component<{ bsClass?: string, ... }> {}
 
   declare export class Form extends React$Component<{
     horizontal?: boolean,
     inline?: boolean,
     componentClass?: ElementType,
-    bsClass?: string
+    bsClass?: string,
+    ...
   }> {}
 
-  declare class InputGroupAddon extends React$Component<{
-    bsClass?: string
-  }> {}
+  declare class InputGroupAddon extends React$Component<{ bsClass?: string, ... }> {}
 
-  declare class InputGroupButton extends React$Component<{
-    bsClass?: string
-  }> {}
+  declare class InputGroupButton extends React$Component<{ bsClass?: string, ... }> {}
 
   declare export class InputGroup extends React$Component<{
     bsSize?: BsSize,
-    bsClass?: string
+    bsClass?: string,
+    ...
   }> {
     static Addon: Class<InputGroupAddon>;
     static Button: Class<InputGroupButton>;
@@ -239,7 +252,8 @@ declare module "react-bootstrap" {
     rounded?: boolean,
     circle?: boolean,
     thumbnail?: boolean,
-    bsClass?: string
+    bsClass?: string,
+    ...
   }> {}
 
   declare export class Thumbnail extends React$Component<{
@@ -248,22 +262,26 @@ declare module "react-bootstrap" {
     href?: string,
     onError?: Function,
     onLoad?: Function,
-    bsClass?: string
+    bsClass?: string,
+    ...
   }> {}
 
   declare export class Jumbotron extends React$Component<{
     componentClass?: ElementType,
-    bsClass?: string
+    bsClass?: string,
+    ...
   }> {}
 
   declare export class Label extends React$Component<{
     bsStyle?: 'success' | 'warning' | 'danger' | 'info' | 'default' | 'primary',
-    bsClass?: string
+    bsClass?: string,
+    ...
   }> {}
 
   declare export class ListGroup extends React$Component<{
     componentClass?: ElementType,
-    bsClass?: string
+    bsClass?: string,
+    ...
   }> {}
 
   declare export class ListGroupItem extends React$Component<{
@@ -275,22 +293,26 @@ declare module "react-bootstrap" {
     href?: string,
     type?: string,
     bsStyle?: 'success' | 'warning' | 'danger' | 'info',
-    bsClass?: string
+    bsClass?: string,
+    ...
   }> {}
 
 
   declare class MediaBody extends React$Component<{
     align?: 'top' | 'middle' | 'bottom',
     componentClass?: ElementType,
-    bsClass?: string
+    bsClass?: string,
+    ...
   }> {}
   declare class MediaLeft extends React$Component<{
     align?: 'top' | 'middle' | 'bottom',
-    bsClass?: string
+    bsClass?: string,
+    ...
   }> {}
   declare export class Media extends React$Component<{
     componentClass?: ElementType,
-    bsClass?: string
+    bsClass?: string,
+    ...
   }> {
     static Body: Class<MediaBody>;
     static Left: Class<MediaLeft>;
@@ -299,25 +321,30 @@ declare module "react-bootstrap" {
   declare class Dialog extends React$Component<{
     dialogClassName?: string,
     bsSize?: BsSize,
-    bsClass?: string
+    bsClass?: string,
+    ...
   }> {}
   declare class Header extends React$Component<{
     closeLabel?: string,
     closeButton?: boolean,
     onHide?: Function,
-    bsClass?: string
+    bsClass?: string,
+    ...
   }> {}
   declare class Title extends React$Component<{
     componentClass?: ElementType,
-    bsClass?: string
+    bsClass?: string,
+    ...
   }> {}
   declare class Body extends React$Component<{
     componentClass?: ElementType,
-    bsClass?: string
+    bsClass?: string,
+    ...
   }> {}
   declare class Footer extends React$Component<{
     componentClass?: ElementType,
-    bsClass?: string
+    bsClass?: string,
+    ...
   }> {}
   declare export class Modal extends React$Component<{
     backdrop?: 'static' | boolean,
@@ -338,7 +365,8 @@ declare module "react-bootstrap" {
     onExited?: Function,
     container?: Node | Component<*> | (...args: Array<any>) => Node,
     bsSize?: BsSize,
-    bsClass?: string
+    bsClass?: string,
+    ...
   }> {
     static Dialog: Class<Dialog>;
     static Header: Class<Header>;
@@ -350,17 +378,19 @@ declare module "react-bootstrap" {
   declare export class Nav extends React$Component<{
     activeKey?: any,
     activeHref?: string,
-    justified?: any, // TODO: figure out proper type
+    // TODO: figure out proper type
+    justified?: any,
     onSelect?: Function,
     role?: string,
     navbar?: boolean,
     pullRight?: boolean,
     pullLeft?: boolean,
     bsStyle?: 'tabs' | 'pills',
-    bsClass?: string
+    bsClass?: string,
+    ...
   }> {}
 
-  declare export class NavDropdown extends React$Component<{}> {}
+  declare export class NavDropdown extends React$Component<{...}> {}
 
   declare export class NavItem extends React$Component<{
     active?: boolean,
@@ -369,18 +399,17 @@ declare module "react-bootstrap" {
     href?: string,
     onClick?: Function,
     onSelect?: Function,
-    eventKey?: any
+    eventKey?: any,
+    ...
   }> {}
 
-  declare class NavbarHeader extends React$Component<{}> {}
-  declare class NavbarBrand extends React$Component<{}> {}
-  declare class NavbarToggle extends React$Component<{
-    onClick?: Function
-  }> {}
-  declare class NavbarCollapse extends React$Component<{}> {}
-  declare class NavbarForm extends React$Component<{}> {}
-  declare class NavbarLink extends React$Component<{}> {}
-  declare class NavbarText extends React$Component<{}> {}
+  declare class NavbarHeader extends React$Component<{...}> {}
+  declare class NavbarBrand extends React$Component<{...}> {}
+  declare class NavbarToggle extends React$Component<{ onClick?: Function, ... }> {}
+  declare class NavbarCollapse extends React$Component<{...}> {}
+  declare class NavbarForm extends React$Component<{...}> {}
+  declare class NavbarLink extends React$Component<{...}> {}
+  declare class NavbarText extends React$Component<{...}> {}
 
   declare export class Navbar extends React$Component<{
     fixedTop?: boolean,
@@ -394,7 +423,8 @@ declare module "react-bootstrap" {
     collapseOnSelect?: boolean,
     expanded?: boolean,
     role?: string,
-    bsStyle?: 'default' | 'inverse'
+    bsStyle?: 'default' | 'inverse',
+    ...
   }> {
     static Header: Class<NavbarHeader>;
     static Brand: Class<NavbarBrand>;
@@ -415,12 +445,11 @@ declare module "react-bootstrap" {
     onEntered?: Function,
     onExit?: Function,
     onExiting?: Function,
-    placement?: 'top' | 'right' | 'bottom' | 'left'
+    placement?: 'top' | 'right' | 'bottom' | 'left',
+    ...
   }> {}
 
-  declare export class PageHeader extends React$Component<{
-    bsClass?: string
-  }> {}
+  declare export class PageHeader extends React$Component<{ bsClass?: string, ... }> {}
 
   declare class PagerItem extends React$Component<{
     disabled?: boolean,
@@ -428,44 +457,32 @@ declare module "react-bootstrap" {
     next?: boolean,
     onClick?: Function,
     onSelect?: Function,
-    eventKey?: any
+    eventKey?: any,
+    ...
   }> {}
 
   declare export class Pager extends React$Component<{
     onSelect?: Function,
-    bsClass?: string
+    bsClass?: string,
+    ...
   }> {
     static Item: Class<PagerItem>;
   }
 
-  declare class PaginationItem extends React$Component<{
-    bsClass?: string
-  }> {}
+  declare class PaginationItem extends React$Component<{ bsClass?: string, ... }> {}
 
-  declare class PaginationFirst extends React$Component<{
-    bsClass?: string
-  }> {}
+  declare class PaginationFirst extends React$Component<{ bsClass?: string, ... }> {}
 
   
-  declare class PaginationLast extends React$Component<{
-    bsClass?: string
-  }> {}
+  declare class PaginationLast extends React$Component<{ bsClass?: string, ... }> {}
   
-  declare class PaginationPrev extends React$Component<{
-    bsClass?: string
-  }> {}
+  declare class PaginationPrev extends React$Component<{ bsClass?: string, ... }> {}
   
-  declare class PaginationNext extends React$Component<{
-    bsClass?: string
-  }> {}
+  declare class PaginationNext extends React$Component<{ bsClass?: string, ... }> {}
   
-  declare class PaginationEllipsis extends React$Component<{
-    bsClass?: string
-  }> {}
+  declare class PaginationEllipsis extends React$Component<{ bsClass?: string, ... }> {}
 
-  declare export class Pagination extends React$Component<{
-    bsClass?: string
-  }> {
+  declare export class Pagination extends React$Component<{ bsClass?: string, ... }> {
     static Item: Class<PaginationItem>;
     static First: Class<PaginationFirst>;
     static Last: Class<PaginationLast>;
@@ -477,16 +494,18 @@ declare module "react-bootstrap" {
   declare class PanelHeading extends React$Component<{
     componentClass?: ElementType,
     bsClass?: string,
-
+    ...
   }> {}
   declare class PanelBody extends React$Component<{
     collapsible: boolean,
-    bsClass?: string
+    bsClass?: string,
+    ...
   }> {}
   declare class PanelTitle extends React$Component<{
     componentClass?: ElementType,
     toggle?: boolean,
-    bsClass?: string
+    bsClass?: string,
+    ...
   }> {}
   declare class PanelCollapse extends React$Component<{
     onEnter?: Function,
@@ -495,20 +514,21 @@ declare module "react-bootstrap" {
     onExit?: Function,
     onExiting?: Function,
     onExited?: Function,
-    bsClass?: string
+    bsClass?: string,
+    ...
   }> {}
   declare class PanelToggle extends React$Component<{
     onClick?: Function,
-    componentClass?: ElementType
+    componentClass?: ElementType,
+    ...
   }> {}
-  declare class PanelFooter extends React$Component<{
-    bsClass?: string
-  }> {}
+  declare class PanelFooter extends React$Component<{ bsClass?: string, ... }> {}
   declare export class Panel extends React$Component<{
     expanded?: boolean,
     onToggle?: Function,
     eventKey?: any,
-    id?: string
+    id?: string,
+    ...
   }> {
     static Heading: Class<PanelHeading>;
     static Body: Class<PanelBody>;
@@ -524,7 +544,8 @@ declare module "react-bootstrap" {
     onSelect?: Function,
     role?: string,
     generateChildId?: (eventKey: string, type: string) => string,
-    id?: string
+    id?: string,
+    ...
   }> {}
 
   declare export class Popover extends React$Component<{
@@ -535,7 +556,8 @@ declare module "react-bootstrap" {
     arrowOffsetTop?: string | number,
     arrowOffsetLeft?: string | number,
     title?: Node,
-    bsClass?: string
+    bsClass?: string,
+    ...
   }> {}
 
   declare export class ProgressBar extends React$Component<{
@@ -549,7 +571,8 @@ declare module "react-bootstrap" {
     children?: Element<typeof ProgressBar>,
     isChild?: boolean,
     bsStyle?: 'success' | 'warning' | 'danger' | 'info',
-    bsClass?: string
+    bsClass?: string,
+    ...
   }> {}
 
   declare export class Table extends React$Component<{
@@ -558,7 +581,8 @@ declare module "react-bootstrap" {
     condensed?: boolean,
     hover?: boolean,
     responsive?: boolean,
-    bsClass?: string
+    bsClass?: string,
+    ...
   }> {}
 
   declare export class Tabs extends React$Component<{
@@ -569,21 +593,23 @@ declare module "react-bootstrap" {
     onSelect?: Function,
     mountOnEnter?: boolean,
     unmountOnExit?: boolean,
-
+    ...
   }> {}
 
   declare export class Tab extends React$Component<{
     disabled?: boolean,
     title?: Node,
     tabClassName?: string,
-    bsClass?: string
+    bsClass?: string,
+    ...
   }> {}
 
   declare export class TabContainer extends React$Component<{
     id: string,
     generateChildId?: (eventKey: string, type: string) => string,
     onSelect?: Function,
-    activeKey?: any
+    activeKey?: any,
+    ...
   }> {}
 
   declare export class TabContent extends React$Component<{
@@ -591,7 +617,8 @@ declare module "react-bootstrap" {
     animation?: boolean | ElementType,
     mountOnEnter?: boolean,
     unmountOnExit?: boolean,
-    bsClass?: string
+    bsClass?: string,
+    ...
   }> {}
 
   declare export class TabPane extends React$Component<{
@@ -607,7 +634,8 @@ declare module "react-bootstrap" {
     onExiting?: Function,
     onExited?: Function,
     mountOnEnter?: boolean,
-    unmountOnExit?: boolean
+    unmountOnExit?: boolean,
+    ...
   }> {}
 
   declare export class OverlayTrigger extends React$Component<{
@@ -624,7 +652,8 @@ declare module "react-bootstrap" {
     onMouseOver?: Function,
     target?: null,
     onHide?: null,
-    show?: null
+    show?: null,
+    ...
   }> {}
 
   declare export class Tooltip extends React$Component<{
@@ -634,12 +663,14 @@ declare module "react-bootstrap" {
     positionLeft?: string | number,
     arrowOffsetTop?: string | number,
     arrowOffsetLeft?: string | number,
-    bsClass?: string
+    bsClass?: string,
+    ...
   }> {}
 
   declare export class Well extends React$Component<{
     bsSize?: BsSize,
-    bsClass?: string
+    bsClass?: string,
+    ...
   }> {}
 
   declare export class Collapse extends React$Component<{
@@ -656,7 +687,8 @@ declare module "react-bootstrap" {
     onExited?: Function,
     dimension?: 'height' | 'width' | Function,
     getDimensionValue?: Function,
-    role?: string
+    role?: string,
+    ...
   }> {}
 
   declare export class Fade extends React$Component<{
@@ -673,18 +705,21 @@ declare module "react-bootstrap" {
     onExited?: Function,
     dimension?: 'height' | 'width' | Function,
     getDimensionValue?: Function,
-    role?: string
+    role?: string,
+    ...
   }> {}
 
   declare export class Grid extends React$Component<{
     fluid?: boolean,
     componentClass?: ElementType,
-    bsClass?: string
+    bsClass?: string,
+    ...
   }> {}
 
   declare export class Row extends React$Component<{
     componentClass?: ElementType,
-    bsClass?: string
+    bsClass?: string,
+    ...
   }> {}
 
   declare export class Col extends React$Component<{
@@ -709,7 +744,8 @@ declare module "react-bootstrap" {
     smPull?: number,
     mdPull?: number,
     lgPull?: number,
-    bsClass?: string
+    bsClass?: string,
+    ...
   }> {}
 
   declare export class Row extends React$Component<{
@@ -718,10 +754,9 @@ declare module "react-bootstrap" {
     visibleSmBlock?: boolean,
     visibleMdBlock?: boolean,
     visibleLgBlock?: boolean,
-    bsClass?: string
+    bsClass?: string,
+    ...
   }> {}
 
-  declare export class Glyphicon extends React$Component<{
-      glyph: string
-  }> {}
+  declare export class Glyphicon extends React$Component<{ glyph: string, ... }> {}
 }

@@ -7,18 +7,21 @@ declare module 'redux-observable' {
 
   declare export type EpicMiddlewareAdapter<A> = {
     input: Observable<A> => Observable<A>,
-    output: Observable<A> => Observable<A>
+    output: Observable<A> => Observable<A>,
+    ...
   };
   declare export type EpicMiddlewareOptions<A, D> = {
     adapter?: EpicMiddlewareAdapter<A>,
-    dependencies?: D
+    dependencies?: D,
+    ...
   };
   declare export type EpicMiddleware<S, A> = {
-    (api: MiddlewareAPI<S, A>): (next: Dispatch<A>) => Dispatch<A>;
-    replaceEpic<D>(epic: Epic<S, A, D>): void;
+    (api: MiddlewareAPI<S, A>): (next: Dispatch<A>) => Dispatch<A>,
+    replaceEpic<D>(epic: Epic<S, A, D>): void,
+    ...
   }
 
-  declare export class ActionsObservable<A: { +type: $Subtype<string> }> extends Observable<A> {
+  declare export class ActionsObservable<A: { +type: $Subtype<string>, ... }> extends Observable<A> {
     static of(...actions: Array<A>): ActionsObservable<A>;
     static from(actions: Iterable<A>, scheduler: rxjs$SchedulerClass): ActionsObservable<A>;
     constructor(actionsSubject: Observable<A>): void;

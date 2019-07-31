@@ -60,7 +60,8 @@ declare module "klasa" {
       MessageCollector: typeof MessageCollector,
       Webhook: typeof WebhookClient,
       CommandMessage: typeof CommandMessage,
-      util: Util
+      util: Util,
+      ...
     },
     settings: StringMappedType<SettingGateway<string>>,
     application: OAuth2Application,
@@ -400,7 +401,8 @@ declare module "klasa" {
       userOrMember: RegExp,
       channel: RegExp,
       role: RegExp,
-      snowflake: RegExp
+      snowflake: RegExp,
+      ...
     }
   }
 
@@ -715,7 +717,8 @@ declare module "klasa" {
       name: string,
       minMax: {
         min: number,
-        max: number
+        max: number,
+        ...
       }
     ): Promise<string>,
     integer(input: string | number): Promise<number>,
@@ -725,7 +728,8 @@ declare module "klasa" {
       name: string,
       minMax: {
         min: number,
-        max: number
+        max: number,
+        ...
       }
     ): Promise<number>,
     float(input: string | number): Promise<number>,
@@ -735,7 +739,8 @@ declare module "klasa" {
       name: string,
       minMax: {
         min: number,
-        max: number
+        max: number,
+        ...
       }
     ): Promise<number>,
     url(input: string): Promise<string>,
@@ -868,7 +873,8 @@ declare module "klasa" {
     defaultDataSchema: {
       prefix: SchemaPiece,
       language: SchemaPiece,
-      disabledCommands: SchemaPiece
+      disabledCommands: SchemaPiece,
+      ...
     }
   }
 
@@ -1327,7 +1333,8 @@ declare module "klasa" {
     commandMessageSweep?: number,
     provider?: {
       engine: string,
-      cache: string
+      cache: string,
+      ...
     },
     console?: KlasaConsoleConfig,
     consoleEvents?: KlasaConsoleEvents,
@@ -1339,7 +1346,8 @@ declare module "klasa" {
     typing?: boolean,
     quotedStringSupport?: boolean,
     readyMessage?: string | Function,
-    ownerID?: string
+    ownerID?: string,
+    ...
   } & ClientOptions;
 
   declare export type KlasaConsoleConfig = {
@@ -1347,7 +1355,8 @@ declare module "klasa" {
     stderr?: stream$Writable,
     useColor?: boolean,
     colors?: Colors,
-    timestamps?: boolean | string
+    timestamps?: boolean | string,
+    ...
   };
 
   declare export type KlasaConsoleEvents = {
@@ -1356,17 +1365,20 @@ declare module "klasa" {
     error?: boolean,
     debug?: boolean,
     verbose?: boolean,
-    wtf?: boolean
+    wtf?: boolean,
+    ...
   };
 
   declare export type PermissionLevel = {
     break: boolean,
-    check: Function
+    check: Function,
+    ...
   };
 
   declare export type permissionLevelResponse = {
     broke: boolean,
-    permission: boolean
+    permission: boolean,
+    ...
   };
 
   declare export type MessageCommandProxy = CommandMessage & ExtendedMessage;
@@ -1384,48 +1396,56 @@ declare module "klasa" {
     usage?: string,
     usageDelim?: string,
     extendedHelp?: string,
-    quotedStringSupport?: boolean
+    quotedStringSupport?: boolean,
+    ...
   };
 
   declare export type EventOptions = {
     enabled?: boolean,
-    name?: string
+    name?: string,
+    ...
   };
 
   declare export type ExtendableOptions = {
     enabled?: boolean,
     name?: string,
-    klasa?: boolean
+    klasa?: boolean,
+    ...
   };
 
   declare export type FinalizerOptions = {
     enabled?: boolean,
-    name?: string
+    name?: string,
+    ...
   };
 
   declare export type InhibitorOptions = {
     enabled?: boolean,
     name?: string,
-    spamProtection?: boolean
+    spamProtection?: boolean,
+    ...
   };
 
   declare export type LanguageOptions = {
     enabled?: boolean,
-    name?: string
+    name?: string,
+    ...
   };
 
   declare export type MonitorOptions = {
     enabled?: boolean,
     name?: string,
     ignoreBots?: boolean,
-    ignoreSelf?: boolean
+    ignoreSelf?: boolean,
+    ...
   };
 
   declare export type ProviderOptions = {
     enabled?: boolean,
     name?: string,
     description?: string,
-    sql?: boolean
+    sql?: boolean,
+    ...
   };
 
   declare export type AddOptions = {
@@ -1434,7 +1454,8 @@ declare module "klasa" {
     min?: number,
     max?: number,
     array?: boolean,
-    sql?: string
+    sql?: string,
+    ...
   };
 
   declare export type SchemaPiece = {
@@ -1443,7 +1464,8 @@ declare module "klasa" {
     min: number,
     max: number,
     array: boolean,
-    sql: string
+    sql: string,
+    ...
   };
 
   declare export type SettingGatewayGuildResolvable =
@@ -1462,7 +1484,8 @@ declare module "klasa" {
     last: emoji,
     jump: emoji,
     info: emoji,
-    stop: emoji
+    stop: emoji,
+    ...
   };
 
   declare export type RichMenuEmojisObject = {
@@ -1475,7 +1498,8 @@ declare module "klasa" {
     six: emoji,
     seven: emoji,
     eight: emoji,
-    nine: emoji
+    nine: emoji,
+    ...
   } & RichDisplayEmojisObject;
 
   declare export type RichDisplayRunOptions = {
@@ -1488,13 +1512,15 @@ declare module "klasa" {
     max?: number,
     maxEmojis?: number,
     maxUsers?: number,
-    time?: number
+    time?: number,
+    ...
   };
 
   declare export type MenuOption = {
     name: string,
     body: string,
-    inline?: boolean
+    inline?: boolean,
+    ...
   };
 
   declare export type RichMenuRunOptions = {
@@ -1505,7 +1531,8 @@ declare module "klasa" {
     max?: number,
     maxEmojis?: number,
     maxUsers?: number,
-    time?: number
+    time?: number,
+    ...
   };
 
   declare export type ReactionHandlerOptions = {
@@ -1516,7 +1543,8 @@ declare module "klasa" {
     max?: number,
     maxEmojis?: number,
     maxUsers?: number,
-    time?: number
+    time?: number,
+    ...
   };
 
   declare export type ColorsClose = {
@@ -1529,7 +1557,8 @@ declare module "klasa" {
     hidden: 28,
     strikethrough: 29,
     text: 39,
-    background: 49
+    background: 49,
+    ...
   };
 
   declare export type ColorsStyles = {
@@ -1540,7 +1569,8 @@ declare module "klasa" {
     underline: 4,
     inverse: 7,
     hidden: 8,
-    strikethrough: 9
+    strikethrough: 9,
+    ...
   };
 
   declare export type ColorsTexts = {
@@ -1561,7 +1591,8 @@ declare module "klasa" {
     lightblue: 94,
     lightmagenta: 95,
     lightcyan: 96,
-    white: 97
+    white: 97,
+    ...
   };
 
   declare export type ColorsBackgrounds = {
@@ -1582,13 +1613,15 @@ declare module "klasa" {
     lightblue: 104,
     lightmagenta: 105,
     lightcyan: 106,
-    white: 107
+    white: 107,
+    ...
   };
 
   declare export type ColorsFormatOptions = {
     style: string | string[],
     background: string | number | string[],
-    text: string | number | string[]
+    text: string | number | string[],
+    ...
   };
 
   declare export type KlasaConsoleColorsOption =
@@ -1602,25 +1635,29 @@ declare module "klasa" {
     log: KlasaConsoleColorObjects,
     verbose: KlasaConsoleColorObjects,
     warn: KlasaConsoleColorObjects,
-    wtf: KlasaConsoleColorObjects
+    wtf: KlasaConsoleColorObjects,
+    ...
   };
 
   declare export type KlasaConsoleColorObjects = {
     log?: string,
     message?: KlasaConsoleMessageObject,
-    time?: KlasaConsoleTimeObject
+    time?: KlasaConsoleTimeObject,
+    ...
   };
 
   declare export type KlasaConsoleMessageObject = {
     background?: BackgroundColorTypes,
     text?: TextColorTypes,
-    style?: StyleTypes
+    style?: StyleTypes,
+    ...
   };
 
   declare export type KlasaConsoleTimeObject = {
     background?: BackgroundColorTypes,
     text?: TextColorTypes,
-    style?: StyleTypes
+    style?: StyleTypes,
+    ...
   };
 
   declare export type TextColorTypes =
@@ -1675,9 +1712,7 @@ declare module "klasa" {
     | "hidden"
     | "strikethrough";
 
-  declare type StringMappedType<T> = {
-    [key: string]: T
-  };
+  declare type StringMappedType<T> = { [key: string]: T, ... };
 
   declare export type GuildSettings = StringMappedType<any>;
 
@@ -1709,12 +1744,14 @@ declare module "klasa" {
     sendMessage(
       content?: string,
       options?: MessageOptions
-    ): Promise<SentMessage>
+    ): Promise<SentMessage>,
+    ...
   } & DiscordMessage;
 
   declare export type ExtendedGuild = {
     language: Language,
-    settings: GuildSettings
+    settings: GuildSettings,
+    ...
   } & DiscordGuild;
 
   declare export type ExtendedUser = {
@@ -1752,7 +1789,8 @@ declare module "klasa" {
       content?: string,
       options?: MessageOptions
     ): Promise<SentMessage>,
-    sendMessage(options: MessageOptions): Promise<SentMessage>
+    sendMessage(options: MessageOptions): Promise<SentMessage>,
+    ...
   } & DiscordUser;
 
   declare export type ExtendedTextChannel = {
@@ -1794,12 +1832,11 @@ declare module "klasa" {
       content?: string,
       options?: MessageOptions
     ): Promise<SentMessage>,
-    sendMessage(options: MessageOptions): Promise<SentMessage>
+    sendMessage(options: MessageOptions): Promise<SentMessage>,
+    ...
   } & DiscordTextChannel;
 
-  declare export type ExtendedVoiceChannel = {
-    guild: ExtendedGuild
-  } & DiscordVoiceChannel;
+  declare export type ExtendedVoiceChannel = { guild: ExtendedGuild, ... } & DiscordVoiceChannel;
 
   declare export type ExtendedDMChannel = {
     attachable: boolean,
@@ -1839,7 +1876,8 @@ declare module "klasa" {
       content?: string,
       options?: MessageOptions
     ): Promise<SentMessage>,
-    sendMessage(options: MessageOptions): Promise<SentMessage>
+    sendMessage(options: MessageOptions): Promise<SentMessage>,
+    ...
   } & DiscordDMChannel;
 
   declare export type ExtendedGroupDMChannel = {
@@ -1880,7 +1918,8 @@ declare module "klasa" {
       content?: string,
       options?: MessageOptions
     ): Promise<SentMessage>,
-    sendMessage(options: MessageOptions): Promise<SentMessage>
+    sendMessage(options: MessageOptions): Promise<SentMessage>,
+    ...
   } & DiscordGroupDMChannel;
 
   declare export type SentMessage = ExtendedMessage | ExtendedMessage[];

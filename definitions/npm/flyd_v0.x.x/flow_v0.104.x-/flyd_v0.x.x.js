@@ -15,8 +15,8 @@ type MapFn = (*) => *;
 type ScanFn = (*, *) => *;
 type LiftFn = (...args: Array<*>) => *;
 
-type RegularObj = { [key: string]: * | RegularObj };
-type StreamObj = { [key: string]: Stream | StreamObj };
+type RegularObj = { [key: string]: * | RegularObj, ... };
+type StreamObj = { [key: string]: Stream | StreamObj, ... };
 
 declare module 'flyd' {
   declare type Stream = Stream;
@@ -34,6 +34,7 @@ declare module 'flyd' {
     merge: CurriedFunction2<Stream, Stream, Stream>,
     transduce: CurriedFunction2<MapFn | Function, Stream, Stream>,
     curryN(length: number, fn: (...args: Array<*>) => *): Function,
+    ...
   };
 }
 
@@ -49,6 +50,7 @@ declare module 'flyd/module/droprepeats' {
   declare module.exports: {
     dropRepeats: (s: Stream) => Stream,
     dropRepeatsWith: CurriedFunction2<(*) => boolean, Stream, Stream>,
+    ...
   };
 }
 
@@ -89,6 +91,7 @@ declare module 'flyd/module/obj' {
     streamProps(obj: RegularObj): StreamObj,
     extractProps(obj: StreamObj): RegularObj,
     stream(obj: StreamObj): Stream,
+    ...
   };
 }
 

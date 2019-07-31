@@ -19,12 +19,16 @@ import YouTube, {
   showinfo
   controls={1}
   style={{ height: 300, width: 400 }}
-  onError={(e: { error: string }) => {}}
-  onReady={(e: { target: number }) => {}}
-  onChangeState={(e: { state: string }) => {}}
-  onChangeQuality={(e: { quality: string }) => {}}
-  onChangeFullscreen={(e: { isFullscreen: boolean }) => {}}
-  onProgress={(e: { duration: number, currentTime: number }) => {}}
+  onError={(e: { error: string, ... }) => {}}
+  onReady={(e: { target: number, ... }) => {}}
+  onChangeState={(e: { state: string, ... }) => {}}
+  onChangeQuality={(e: { quality: string, ... }) => {}}
+  onChangeFullscreen={(e: { isFullscreen: boolean, ... }) => {}}
+  onProgress={(e: {
+    duration: number,
+    currentTime: number,
+    ...
+  }) => {}}
 />;
 
 // $ExpectError

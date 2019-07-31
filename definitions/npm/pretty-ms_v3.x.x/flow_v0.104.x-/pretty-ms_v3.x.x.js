@@ -2,7 +2,8 @@ type Options = {
   secDecimalDigits?: number,
   msDecimalDigits?: number,
   compact?: boolean,
-  verbose?: boolean
+  verbose?: boolean,
+  ...
 };
 
 declare module 'pretty-ms' {

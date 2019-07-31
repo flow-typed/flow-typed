@@ -13,9 +13,9 @@ import _, {
 
 const ns: Array<number> = [1, 2, 3, 4, 5];
 const ss: Array<string> = ["one", "two", "three", "four"];
-const obj: { [k: string]: number } = { a: 1, c: 2 };
-const objMixed: { [k: string]: mixed } = { a: 1, c: "d" };
-const os: Array<{ [k: string]: * }> = [{ a: 1, c: "d" }, { b: 2 }];
+const obj: { [k: string]: number, ... } = { a: 1, c: 2 };
+const objMixed: { [k: string]: mixed, ... } = { a: 1, c: "d" };
+const os: Array<{ [k: string]: *, ... }> = [{ a: 1, c: "d" }, { b: 2 }];
 const str: string = "hello world";
 
 // Math
@@ -48,7 +48,7 @@ const str: string = "hello world";
   const x1: boolean = isNil(1);
 
   // should refine type
-  const x1a: ?{ a: number } = { a: 1 };
+  const x1a: ?{ a: number, ... } = { a: 1 };
   //$ExpectError
   x1a.a;
   if (!isNil(x1a)) {

@@ -28,6 +28,7 @@ import '@testing-library/jest-dom/extend-expect';
 type JestMatcherResult = {
   message?: string | (() => string),
   pass: boolean,
+  ...
 };
 
 type JestMatcher = (
@@ -35,9 +36,7 @@ type JestMatcher = (
   ...actual: Array<any>
 ) => JestMatcherResult | Promise<JestMatcherResult>;
 
-declare var expect: {
-  extend(matchers: { [name: string]: JestMatcher }): void,
-};
+declare var expect: { extend(matchers: { [name: string]: JestMatcher, ... }): void, ... };
 
 describe('jest-dom', () => {
   it('should validate on default extend usage', () => {

@@ -58,21 +58,23 @@ declare module 'punycode' {
   declare function toASCII(input: string): string;
 
   declare module.exports: {
-    /**
-     * A string representing the current Punycode.js version number.
-     */
-    version: string,
-    /**
-     * An object of methods to convert from JavaScript's internal character
-     * representation (UCS-2) to Unicode code points, and back.
-     */
-    ucs2: {
-      decode: typeof ucs2decode,
-      encode: typeof ucs2encode,
-    },
-    decode: typeof decode,
-    encode: typeof encode,
-    toASCII: typeof toASCII,
-    toUnicode: typeof toUnicode,
+   /**
+    * A string representing the current Punycode.js version number.
+    */
+   version: string,
+   /**
+    * An object of methods to convert from JavaScript's internal character
+    * representation (UCS-2) to Unicode code points, and back.
+    */
+   ucs2: {
+    decode: typeof ucs2decode,
+    encode: typeof ucs2encode,
+    ...
+   },
+   decode: typeof decode,
+   encode: typeof encode,
+   toASCII: typeof toASCII,
+   toUnicode: typeof toUnicode,
+   ...
   };
 }

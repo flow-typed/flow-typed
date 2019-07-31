@@ -4,7 +4,7 @@ import React from 'react';
 import Loadable, { type MapModules } from 'react-loadable';
 import { describe, it } from 'flow-typed-test';
 
-type Props = { a: string };
+type Props = { a: string, ... };
 class Component extends React.Component<Props> {}
 
 describe('options', () => {
@@ -99,7 +99,11 @@ describe('options', () => {
 });
 
 describe('props refinements', () => {
-  class SyncComponent extends React.Component<{ a: string, b: number }> {}
+  class SyncComponent extends React.Component<{
+    a: string,
+    b: number,
+    ...
+  }> {}
 
   it('should refine props type from render function', () => {
     const LoadableComponent = Loadable({
@@ -154,7 +158,11 @@ describe('result component', () => {
 });
 
 it('Loadable.Map() should work', () => {
-  class Component extends React.Component<{ a: string, b: number }> {}
+  class Component extends React.Component<{
+    a: string,
+    b: number,
+    ...
+  }> {}
 
   const LoadableMap = Loadable.Map({
     loading: () => null,
@@ -162,14 +170,26 @@ it('Loadable.Map() should work', () => {
       Cmp: () => Promise.resolve({ foo: Component }),
       b: () => Promise.resolve(1)
     },
-    render: (loaded: { Cmp: { foo: React$ComponentType<{ a: string, b: number }> }, b: number }, props: { a: string }) => <loaded.Cmp.foo a={props.a} b={loaded.b} />
+    render: (loaded: {
+      Cmp: { foo: React$ComponentType<{
+        a: string,
+        b: number,
+        ...
+      }>, ... },
+      b: number,
+      ...
+    }, props: { a: string, ... }) => <loaded.Cmp.foo a={props.a} b={loaded.b} />
   });
 
   <LoadableMap a="foo" />
 });
 
 it('Loadable.Map() can infer type of modules', () => {
-  class Component extends React.Component<{ a: string, b: number }> {}
+  class Component extends React.Component<{
+    a: string,
+    b: number,
+    ...
+  }> {}
   const loader = {
     Cmp: () => Promise.resolve({ foo: Component }),
     b: () => Promise.resolve(1)
@@ -181,7 +201,15 @@ it('Loadable.Map() can infer type of modules', () => {
     render: (loaded, props) => {
       // $ExpectError
       (loaded: empty);
-      (loaded: { Cmp: { foo: React$ComponentType<{ a: string, b: number }> }, b: number });
+      (loaded: {
+        Cmp: { foo: React$ComponentType<{
+          a: string,
+          b: number,
+          ...
+        }>, ... },
+        b: number,
+        ...
+      });
       return <loaded.Cmp.foo a={props.a} b={loaded.b} />;
     }
   });

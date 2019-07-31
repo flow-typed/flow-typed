@@ -237,9 +237,7 @@ declare module 'puppeteer' {
      */
     down(
       key: string,
-      options?: {
-        text?: string,
-      }
+      options?: { text?: string, ... }
     ): Promise<void>;
 
     /**
@@ -248,8 +246,9 @@ declare module 'puppeteer' {
     press(
       key: string,
       options?: {
-        text?: string,
-        delay?: number,
+       text?: string,
+       delay?: number,
+       ...
       }
     ): Promise<void>;
 
@@ -265,9 +264,7 @@ declare module 'puppeteer' {
      */
     type(
       text: string,
-      options?: {
-        delay?: number,
-      }
+      options?: { delay?: number, ... }
     ): Promise<void>;
 
     /**
@@ -277,17 +274,17 @@ declare module 'puppeteer' {
     up(key: string): Promise<void>;
   }
   declare export type MousePressOptions = {
-    /**
-     * left, right, or middle.
-     * @default left
-     */
-    button?: MouseButtons,
-
-    /**
-     * The number of clicks.
-     * @default 1
-     */
-    clickCount?: number,
+   /**
+    * left, right, or middle.
+    * @default left
+    */
+   button?: MouseButtons,
+   /**
+    * The number of clicks.
+    * @default 1
+    */
+   clickCount?: number,
+   ...
   };
   declare export interface Mouse {
     /**
@@ -313,9 +310,7 @@ declare module 'puppeteer' {
     move(
       x: number,
       y: number,
-      options?: {
-        steps: number,
-      }
+      options?: { steps: number, ... }
     ): Promise<void>;
 
     /**
@@ -341,9 +336,10 @@ declare module 'puppeteer' {
     stop(): Promise<Buffer>;
   }
   declare export type TracingStartOptions = {
-    path: string,
-    screenshots?: boolean,
-    categories?: string[],
+   path: string,
+   screenshots?: boolean,
+   categories?: string[],
+   ...
   };
   declare export type DialogType =
     | 'alert'
@@ -438,26 +434,26 @@ declare module 'puppeteer' {
     | 'targetcreated'
     | 'targetdestroyed';
   declare export type AuthOptions = {
-    username: string,
-    password: string,
+   username: string,
+   password: string,
+   ...
   };
   declare export type MouseButtons = 'left' | 'right' | 'middle';
   declare export type ClickOptions = {
-    /**
-     * @default MouseButtons.Left
-     */
-    button?: MouseButtons,
-
-    /**
-     * @default 1
-     */
-    clickCount?: number,
-
-    /**
-     * Time to wait between mousedown and mouseup in milliseconds.
-     * @default 0
-     */
-    delay?: number,
+   /**
+    * @default MouseButtons.Left
+    */
+   button?: MouseButtons,
+   /**
+    * @default 1
+    */
+   clickCount?: number,
+   /**
+    * Time to wait between mousedown and mouseup in milliseconds.
+    * @default 0
+    */
+   delay?: number,
+   ...
   };
   declare export type SameSiteSetting = 'Strict' | 'Lax';
 
@@ -615,15 +611,15 @@ declare module 'puppeteer' {
    * Page emulation options.
    */
   declare export type EmulateOptions = {
-    /**
-     * The viewport emulation options.
-     */
-    viewport?: Viewport,
-
-    /**
-     * The emulated user-agent.
-     */
-    userAgent?: string,
+   /**
+    * The viewport emulation options.
+    */
+   viewport?: Viewport,
+   /**
+    * The emulated user-agent.
+    */
+   userAgent?: string,
+   ...
   };
   declare export type EvaluateFn = string | ((...args: mixed[]) => mixed);
   declare export type LoadEvent =
@@ -631,37 +627,37 @@ declare module 'puppeteer' {
     | 'domcontentloaded'
     | 'networkidle0'
     | 'networkidle2';
-  declare export type Timeoutable = {
-    /**
-     * Maximum navigation time in milliseconds, pass 0 to disable timeout.
-     * @default 30000
-     */
-    timeout?: number,
-  };
+  declare export type Timeoutable = { /**
+   * Maximum navigation time in milliseconds, pass 0 to disable timeout.
+   * @default 30000
+   */
+  timeout?: number, ... };
 
   /**
    * The navigation options.
    */
   declare export type NavigationOptions = {
-    ...$Exact<Timeoutable>,
-    /**
-     * When to consider navigation succeeded.
-     * @default load Navigation is consider when the `load` event is fired.
-     */
-    waitUntil?: LoadEvent | LoadEvent[],
+   ...$Exact<Timeoutable>,
+   /**
+    * When to consider navigation succeeded.
+    * @default load Navigation is consider when the `load` event is fired.
+    */
+   waitUntil?: LoadEvent | LoadEvent[],
+   ...
   };
 
   /**
    * Navigation options for `page.goto`.
    */
   declare export type DirectNavigationOptions = {
-    ...$Exact<NavigationOptions>,
-    /**
-     * Referer header value.
-     * If provided it will take preference over the referer header value set by
-     * [page.setExtraHTTPHeaders()](#pagesetextrahttpheadersheaders).
-     */
-    referer?: string,
+   ...$Exact<NavigationOptions>,
+   /**
+    * Referer header value.
+    * If provided it will take preference over the referer header value set by
+    * [page.setExtraHTTPHeaders()](#pagesetextrahttpheadersheaders).
+    */
+   referer?: string,
+   ...
   };
 
   /**
@@ -680,214 +676,196 @@ declare module 'puppeteer' {
     | 'A4'
     | 'A5';
   declare export type PDFOptions = {
+   /**
+    * The file path to save the PDF to.
+    * If `path` is a relative path, then it is resolved relative to current working directory.
+    * If no path is provided, the PDF won't be saved to the disk.
+    */
+   path?: string,
+   /**
+    * Scale of the webpage rendering.
+    * @default 1
+    */
+   scale?: number,
+   /**
+    * Display header and footer.
+    * @default false
+    */
+   displayHeaderFooter?: boolean,
+   /**
+    * HTML template for the print header. Should be valid HTML markup with following classes used to inject printing values into them:
+    * - `date` formatted print date
+    * - `title` document title
+    * - `url` document location
+    * - `pageNumber` current page number
+    * - `totalPages` total pages in the document
+    */
+   headerTemplate?: string,
+   /**
+    * HTML template for the print footer. Should be valid HTML markup with following classes used to inject printing values into them:
+    * - `date` formatted print date
+    * - `title` document title
+    * - `url` document location
+    * - `pageNumber` current page number
+    * - `totalPages` total pages in the document
+    */
+   footerTemplate?: string,
+   /**
+    * Print background graphics.
+    * @default false
+    */
+   printBackground?: boolean,
+   /**
+    * Paper orientation.
+    * @default false
+    */
+   landscape?: boolean,
+   /**
+    * Paper ranges to print, e.g., '1-5, 8, 11-13'.
+    * @default '' which means print all pages.
+    */
+   pageRanges?: string,
+   /**
+    * Paper format. If set, takes priority over width or height options.
+    * @default 'Letter'
+    */
+   format?: PDFFormat,
+   /**
+    * Paper width.
+    */
+   width?: LayoutDimension,
+   /**
+    * Paper height.
+    */
+   height?: LayoutDimension,
+   /**
+    * Paper margins, defaults to none.
+    */
+   margin?: {
     /**
-     * The file path to save the PDF to.
-     * If `path` is a relative path, then it is resolved relative to current working directory.
-     * If no path is provided, the PDF won't be saved to the disk.
+     * Top margin.
      */
-    path?: string,
-
+    top?: LayoutDimension,
     /**
-     * Scale of the webpage rendering.
-     * @default 1
+     * Right margin.
      */
-    scale?: number,
-
+    right?: LayoutDimension,
     /**
-     * Display header and footer.
-     * @default false
+     * Bottom margin.
      */
-    displayHeaderFooter?: boolean,
-
+    bottom?: LayoutDimension,
     /**
-     * HTML template for the print header. Should be valid HTML markup with following classes used to inject printing values into them:
-     * - `date` formatted print date
-     * - `title` document title
-     * - `url` document location
-     * - `pageNumber` current page number
-     * - `totalPages` total pages in the document
+     * Left margin.
      */
-    headerTemplate?: string,
-
-    /**
-     * HTML template for the print footer. Should be valid HTML markup with following classes used to inject printing values into them:
-     * - `date` formatted print date
-     * - `title` document title
-     * - `url` document location
-     * - `pageNumber` current page number
-     * - `totalPages` total pages in the document
-     */
-    footerTemplate?: string,
-
-    /**
-     * Print background graphics.
-     * @default false
-     */
-    printBackground?: boolean,
-
-    /**
-     * Paper orientation.
-     * @default false
-     */
-    landscape?: boolean,
-
-    /**
-     * Paper ranges to print, e.g., '1-5, 8, 11-13'.
-     * @default '' which means print all pages.
-     */
-    pageRanges?: string,
-
-    /**
-     * Paper format. If set, takes priority over width or height options.
-     * @default 'Letter'
-     */
-    format?: PDFFormat,
-
-    /**
-     * Paper width.
-     */
-    width?: LayoutDimension,
-
-    /**
-     * Paper height.
-     */
-    height?: LayoutDimension,
-
-    /**
-     * Paper margins, defaults to none.
-     */
-    margin?: {
-      /**
-       * Top margin.
-       */
-      top?: LayoutDimension,
-
-      /**
-       * Right margin.
-       */
-      right?: LayoutDimension,
-
-      /**
-       * Bottom margin.
-       */
-      bottom?: LayoutDimension,
-
-      /**
-       * Left margin.
-       */
-      left?: LayoutDimension,
-    },
-
-    /**
-     * Give any CSS @page size declared in the page priority over what is declared in width and
-     * height or format options.
-     * @default false which will scale the content to fit the paper size.
-     */
-    preferCSSPageSize?: boolean,
+    left?: LayoutDimension,
+    ...
+   },
+   /**
+    * Give any CSS @page size declared in the page priority over what is declared in width and
+    * height or format options.
+    * @default false which will scale the content to fit the paper size.
+    */
+   preferCSSPageSize?: boolean,
+   ...
   };
 
   /**
    * Defines the screenshot options.
    */
   declare export type ScreenshotOptions = {
-    /**
-     * The file path to save the image to. The screenshot type will be inferred from file extension.
-     * If `path` is a relative path, then it is resolved relative to current working directory.
-     * If no path is provided, the image won't be saved to the disk.
-     */
-    path?: string,
-
-    /**
-     * The screenshot type.
-     * @default png
-     */
-    type?: 'jpeg' | 'png',
-
-    /**
-     * The quality of the image, between 0-100. Not applicable to png images.
-     */
-    quality?: number,
-
-    /**
-     * When true, takes a screenshot of the full scrollable page.
-     * @default false
-     */
-    fullPage?: boolean,
-
-    /**
-     * An object which specifies clipping region of the page.
-     */
-    clip?: BoundingBox,
-
-    /**
-     * Hides default white background and allows capturing screenshots with transparency.
-     * @default false
-     */
-    omitBackground?: boolean,
-
-    /**
-     * The encoding of the image, can be either base64 or binary.
-     * @default binary
-     */
-    encoding?: 'base64' | 'binary',
+   /**
+    * The file path to save the image to. The screenshot type will be inferred from file extension.
+    * If `path` is a relative path, then it is resolved relative to current working directory.
+    * If no path is provided, the image won't be saved to the disk.
+    */
+   path?: string,
+   /**
+    * The screenshot type.
+    * @default png
+    */
+   type?: 'jpeg' | 'png',
+   /**
+    * The quality of the image, between 0-100. Not applicable to png images.
+    */
+   quality?: number,
+   /**
+    * When true, takes a screenshot of the full scrollable page.
+    * @default false
+    */
+   fullPage?: boolean,
+   /**
+    * An object which specifies clipping region of the page.
+    */
+   clip?: BoundingBox,
+   /**
+    * Hides default white background and allows capturing screenshots with transparency.
+    * @default false
+    */
+   omitBackground?: boolean,
+   /**
+    * The encoding of the image, can be either base64 or binary.
+    * @default binary
+    */
+   encoding?: 'base64' | 'binary',
+   ...
   };
   declare export type BinaryScreenShotOptions = {
-    ...$Exact<ScreenshotOptions>,
-    encoding?: 'binary',
+   ...$Exact<ScreenshotOptions>,
+   encoding?: 'binary',
+   ...
   };
 
   declare export type Base64ScreenShotOptions = {
-    ...$Exact<ScreenshotOptions>,
-    encoding: 'base64',
+   ...$Exact<ScreenshotOptions>,
+   encoding: 'base64',
+   ...
   };
 
   /**
    * Options for `addStyleTag`
    */
   declare export type StyleTagOptions = {
-    /**
-     * Url of the <link> tag.
-     */
-    url?: string,
-
-    /**
-     * Path to the CSS file to be injected into frame. If `path` is a relative path, then it is resolved relative to current working directory.
-     */
-    path?: string,
-
-    /**
-     * Raw CSS content to be injected into frame.
-     */
-    content?: string,
+   /**
+    * Url of the <link> tag.
+    */
+   url?: string,
+   /**
+    * Path to the CSS file to be injected into frame. If `path` is a relative path, then it is resolved relative to current working directory.
+    */
+   path?: string,
+   /**
+    * Raw CSS content to be injected into frame.
+    */
+   content?: string,
+   ...
   };
 
   /**
    * Options for `addScriptTag`
    */
   declare export type ScriptTagOptions = {
-    /**
-     * Url of a script to be added.
-     */
-    url?: string,
-
-    /**
-     * Path to the JavaScript file to be injected into frame. If `path` is a relative path, then it is resolved relative to current working directory.
-     */
-    path?: string,
-
-    /**
-     * Raw JavaScript content to be injected into frame.
-     */
-    content?: string,
-
-    /**
-     * Script type. Use 'module' in order to load a Javascript ES6 module.
-     */
-    type?: string,
+   /**
+    * Url of a script to be added.
+    */
+   url?: string,
+   /**
+    * Path to the JavaScript file to be injected into frame. If `path` is a relative path, then it is resolved relative to current working directory.
+    */
+   path?: string,
+   /**
+    * Raw JavaScript content to be injected into frame.
+    */
+   content?: string,
+   /**
+    * Script type. Use 'module' in order to load a Javascript ES6 module.
+    */
+   type?: string,
+   ...
   };
   declare export type PageFnOptions = {
-    ...$Exact<Timeoutable>,
-    polling?: 'raf' | 'mutation' | number,
+   ...$Exact<Timeoutable>,
+   polling?: 'raf' | 'mutation' | number,
+   ...
   };
 
   declare export interface BoundingBox {
@@ -1043,8 +1021,9 @@ declare module 'puppeteer' {
     press(
       key: string,
       options?: {
-        text?: string,
-        delay?: number,
+       text?: string,
+       delay?: number,
+       ...
       }
     ): Promise<void>;
 
@@ -1071,9 +1050,7 @@ declare module 'puppeteer' {
      */
     type(
       text: string,
-      options?: {
-        delay: number,
-      }
+      options?: { delay: number, ... }
     ): Promise<void>;
 
     /**
@@ -1195,7 +1172,7 @@ declare module 'puppeteer' {
      */
     JSHeapTotalSize: number;
   }
-  declare export type Headers = { [key: string]: string };
+  declare export type Headers = { [key: string]: string, ... };
   declare export type HttpMethod =
     | 'GET'
     | 'POST'
@@ -1260,9 +1237,7 @@ declare module 'puppeteer' {
     /**
      * @returns An object if the request failed, null otherwise.
      */
-    failure(): {
-      errorText: string,
-    } | null;
+    failure(): { errorText: string, ... } | null;
 
     /**
      * @returns The `Frame` object that initiated the request, or `null` if navigating to error pages
@@ -1329,26 +1304,24 @@ declare module 'puppeteer' {
    * Options for `Request.respond` method
    */
   declare export type RespondOptions = {
-    /**
-     * Specifies the response status code.
-     * @default 200
-     */
-    status?: number,
-
-    /**
-     * Specifies the response headers.
-     */
-    headers?: Headers,
-
-    /**
-     * Specifies the Content-Type response header.
-     */
-    contentType?: string,
-
-    /**
-     * Specifies the response body.
-     */
-    body?: Buffer | string,
+   /**
+    * Specifies the response status code.
+    * @default 200
+    */
+   status?: number,
+   /**
+    * Specifies the response headers.
+    */
+   headers?: Headers,
+   /**
+    * Specifies the Content-Type response header.
+    */
+   contentType?: string,
+   /**
+    * Specifies the response body.
+    */
+   body?: Buffer | string,
+   ...
   };
   declare export interface RemoteInfo {
     /**
@@ -1433,20 +1406,20 @@ declare module 'puppeteer' {
     url(): string;
   }
   declare export type WaitForSelectorOptions = {
-    ...$Exact<Timeoutable>,
-    /**
-     * Wait for element to be present in DOM and to be visible,
-     * i.e. to not have display: none or visibility: hidden CSS properties.
-     * @default false
-     */
-    visible?: boolean,
-
-    /**
-     * Wait for element to not be found in the DOM or to be hidden,
-     * i.e. have display: none or visibility: hidden CSS properties.
-     * @default false
-     */
-    hidden?: boolean,
+   ...$Exact<Timeoutable>,
+   /**
+    * Wait for element to be present in DOM and to be visible,
+    * i.e. to not have display: none or visibility: hidden CSS properties.
+    * @default false
+    */
+   visible?: boolean,
+   /**
+    * Wait for element to not be found in the DOM or to be hidden,
+    * i.e. have display: none or visibility: hidden CSS properties.
+    * @default false
+    */
+   hidden?: boolean,
+   ...
   };
 
   declare export interface FrameBase extends Evalable {
@@ -1572,9 +1545,7 @@ satisfying the selector, the first will be tapped.
     type(
       selector: string,
       text: string,
-      options?: {
-        delay: number,
-      }
+      options?: { delay: number, ... }
     ): Promise<void>;
 
     /**
@@ -1707,8 +1678,9 @@ satisfying the selector, the first will be tapped.
      * For the list of metrics see `page.metrics`.
      */
     metrics: {
-      title: string,
-      metrics: Metrics,
+     title: string,
+     metrics: Metrics,
+     ...
     },
 
     /**
@@ -1747,28 +1719,25 @@ satisfying the selector, the first will be tapped.
      */
     workerdestroyed: Worker,
   |};
-  declare export type PageCloseOptions = {
-    /**
-     * Whether to run the before unload page handlers.
-     * @default false
-     */
-    runBeforeUnload?: boolean,
-  };
+  declare export type PageCloseOptions = { /**
+   * Whether to run the before unload page handlers.
+   * @default false
+   */
+  runBeforeUnload?: boolean, ... };
   declare export type GeoOptions = {
-    /**
-     * Latitude between -90 and 90.
-     */
-    latitude: number,
-
-    /**
-     * Longitude between -180 and 180.
-     */
-    longitude: number,
-
-    /**
-     * Non-negative accuracy value.
-     */
-    accuracy?: number,
+   /**
+    * Latitude between -90 and 90.
+    */
+   latitude: number,
+   /**
+    * Longitude between -180 and 180.
+    */
+   longitude: number,
+   /**
+    * Non-negative accuracy value.
+    */
+   accuracy?: number,
+   ...
   };
   declare export type MediaType = 'screen' | 'print';
   declare export interface AXNode {
@@ -1902,13 +1871,11 @@ satisfying the selector, the first will be tapped.
      */
     children: AXNode[];
   }
-  declare export type SnapshopOptions = {
-    /**
-     * Prune uninteresting nodes from the tree.
-     * @default true
-     */
-    interestingOnly?: boolean,
-  };
+  declare export type SnapshopOptions = { /**
+   * Prune uninteresting nodes from the tree.
+   * @default true
+   */
+  interestingOnly?: boolean, ... };
 
   /**
    * The Accessibility class provides methods for inspecting Chromium's accessibility tree.
@@ -2500,149 +2467,134 @@ satisfying the selector, the first will be tapped.
     url(): string;
   }
   declare export type LaunchOptions = {
-    ...$Exact<ChromeArgOptions>,
-    ...$Exact<BrowserOptions>,
-    ...$Exact<Timeoutable>,
-    /**
-     * Path to a Chromium executable to run instead of bundled Chromium. If
-     * executablePath is a relative path, then it is resolved relative to current
-     * working directory.
-     */
-    executablePath?: string,
-
-    /**
-     * Do not use `puppeteer.defaultArgs()` for launching Chromium.
-     * @default false
-     */
-    ignoreDefaultArgs?: boolean | string[],
-
-    /**
-     * Close chrome process on Ctrl-C.
-     * @default true
-     */
-    handleSIGINT?: boolean,
-
-    /**
-     * Close chrome process on SIGTERM.
-     * @default true
-     */
-    handleSIGTERM?: boolean,
-
-    /**
-     * Close chrome process on SIGHUP.
-     * @default true
-     */
-    handleSIGHUP?: boolean,
-
-    /**
-     * Whether to pipe browser process stdout and stderr into process.stdout and
-     * process.stderr.
-     * @default false
-     */
-    dumpio?: boolean,
-
-    /**
-     * Specify environment variables that will be visible to Chromium.
-     * @default `process.env`.
-     */
-    env?: {
-      [key: string]: string | boolean | number,
-    },
-
-    /**
-     * Connects to the browser over a pipe instead of a WebSocket.
-     * @default false
-     */
-    pipe?: boolean,
+   ...$Exact<ChromeArgOptions>,
+   ...$Exact<BrowserOptions>,
+   ...$Exact<Timeoutable>,
+   /**
+    * Path to a Chromium executable to run instead of bundled Chromium. If
+    * executablePath is a relative path, then it is resolved relative to current
+    * working directory.
+    */
+   executablePath?: string,
+   /**
+    * Do not use `puppeteer.defaultArgs()` for launching Chromium.
+    * @default false
+    */
+   ignoreDefaultArgs?: boolean | string[],
+   /**
+    * Close chrome process on Ctrl-C.
+    * @default true
+    */
+   handleSIGINT?: boolean,
+   /**
+    * Close chrome process on SIGTERM.
+    * @default true
+    */
+   handleSIGTERM?: boolean,
+   /**
+    * Close chrome process on SIGHUP.
+    * @default true
+    */
+   handleSIGHUP?: boolean,
+   /**
+    * Whether to pipe browser process stdout and stderr into process.stdout and
+    * process.stderr.
+    * @default false
+    */
+   dumpio?: boolean,
+   /**
+    * Specify environment variables that will be visible to Chromium.
+    * @default `process.env`.
+    */
+   env?: { [key: string]: string | boolean | number, ... },
+   /**
+    * Connects to the browser over a pipe instead of a WebSocket.
+    * @default false
+    */
+   pipe?: boolean,
+   ...
   };
 
   declare export type ChromeArgOptions = {
-    /**
-     * Whether to run browser in headless mode.
-     * @default true unless the devtools option is true.
-     */
-    headless?: boolean,
-
-    /**
-     * Additional arguments to pass to the browser instance.
-     * The list of Chromium flags can be found here.
-     */
-    args?: string[],
-
-    /**
-     * Path to a User Data Directory.
-     */
-    userDataDir?: string,
-
-    /**
-     * Whether to auto-open a DevTools panel for each tab.
-     * If this option is true, the headless option will be set false.
-     */
-    devtools?: boolean,
+   /**
+    * Whether to run browser in headless mode.
+    * @default true unless the devtools option is true.
+    */
+   headless?: boolean,
+   /**
+    * Additional arguments to pass to the browser instance.
+    * The list of Chromium flags can be found here.
+    */
+   args?: string[],
+   /**
+    * Path to a User Data Directory.
+    */
+   userDataDir?: string,
+   /**
+    * Whether to auto-open a DevTools panel for each tab.
+    * If this option is true, the headless option will be set false.
+    */
+   devtools?: boolean,
+   ...
   };
   declare export type BrowserOptions = {
+   /**
+    * Whether to ignore HTTPS errors during navigation.
+    * @default false
+    */
+   ignoreHTTPSErrors?: boolean,
+   /**
+    * Sets a consistent viewport for each page. Defaults to an 800x600 viewport. null disables the default viewport.
+    */
+   defaultViewport?: {
     /**
-     * Whether to ignore HTTPS errors during navigation.
+     * page width in pixels.
+     */
+    width?: number,
+    /**
+     * page height in pixels.
+     */
+    height?: number,
+    /**
+     * Specify device scale factor (can be thought of as dpr).
+     * @default 1
+     */
+    deviceScaleFactor?: number,
+    /**
+     * Whether the meta viewport tag is taken into account.
      * @default false
      */
-    ignoreHTTPSErrors?: boolean,
-
+    isMobile?: boolean,
     /**
-     * Sets a consistent viewport for each page. Defaults to an 800x600 viewport. null disables the default viewport.
+     * Specifies if viewport supports touch events.
+     * @default false
      */
-    defaultViewport?: {
-      /**
-       * page width in pixels.
-       */
-      width?: number,
-
-      /**
-       * page height in pixels.
-       */
-      height?: number,
-
-      /**
-       * Specify device scale factor (can be thought of as dpr).
-       * @default 1
-       */
-      deviceScaleFactor?: number,
-
-      /**
-       * Whether the meta viewport tag is taken into account.
-       * @default false
-       */
-      isMobile?: boolean,
-
-      /**
-       * Specifies if viewport supports touch events.
-       * @default false
-       */
-      hasTouch?: boolean,
-
-      /**
-       * Specifies if viewport is in landscape mode.
-       * @default false
-       */
-      isLandscape?: boolean,
-    } | null,
-
+    hasTouch?: boolean,
     /**
-     * Slows down Puppeteer operations by the specified amount of milliseconds.
-     * Useful so that you can see what is going on.
+     * Specifies if viewport is in landscape mode.
+     * @default false
      */
-    slowMo?: number,
+    isLandscape?: boolean,
+    ...
+   } | null,
+   /**
+    * Slows down Puppeteer operations by the specified amount of milliseconds.
+    * Useful so that you can see what is going on.
+    */
+   slowMo?: number,
+   ...
   };
   declare export type ConnectOptions = {
-    ...$Exact<BrowserOptions>,
-    /**
-     * A browser websocket endpoint to connect to.
-     */
-    browserWSEndpoint?: string,
-
-    /**
-     * **Experimental** Specify a custom transport object for Puppeteer to use.
-     */
-    transport?: ConnectionTransport,
+   ...$Exact<BrowserOptions>,
+   /**
+    * A browser websocket endpoint to connect to.
+    */
+   browserWSEndpoint?: string,
+   /**
+    * **Experimental** Specify a custom transport object for Puppeteer to use.
+    */
+   transport?: ConnectionTransport,
+   ...
   };
 
   declare export interface ConnectionTransport {
@@ -2663,8 +2615,8 @@ satisfying the selector, the first will be tapped.
      */
     send(
       method: string,
-      params?: { [key: string]: any }
-    ): Promise<{ [key: string]: any }>;
+      params?: { [key: string]: any, ... }
+    ): Promise<{ [key: string]: any, ... }>;
   }
 
   declare export interface Coverage {
@@ -2674,25 +2626,27 @@ satisfying the selector, the first will be tapped.
     stopJSCoverage(): Promise<CoverageEntry[]>;
   }
   declare export type StartCoverageOptions = {
-    /**
-     * Whether to reset coverage on every navigation.
-     * @default true
-     */
-    resetOnNavigation?: boolean,
-
-    /**
-     * Whether anonymous scripts generated by the page should be reported.
-     * @default false
-     */
-    reportAnonymousScripts?: boolean,
+   /**
+    * Whether to reset coverage on every navigation.
+    * @default true
+    */
+   resetOnNavigation?: boolean,
+   /**
+    * Whether anonymous scripts generated by the page should be reported.
+    * @default false
+    */
+   reportAnonymousScripts?: boolean,
+   ...
   };
   declare export type CoverageEntry = {
-    url: string,
-    text: string,
-    ranges: Array<{
-      start: number,
-      end: number,
-    }>,
+   url: string,
+   text: string,
+   ranges: Array<{
+    start: number,
+    end: number,
+    ...
+   }>,
+   ...
   };
 
   /**
@@ -2726,23 +2680,23 @@ declare module 'puppeteer/Errors' {
 
 declare module 'puppeteer/DeviceDescriptors' {
   declare export type Viewport = {
-    width: number,
-    height: number,
-    deviceScaleFactor: number,
-    isMobile: boolean,
-    hasTouch: boolean,
-    isLandscape: boolean,
+   width: number,
+   height: number,
+   deviceScaleFactor: number,
+   isMobile: boolean,
+   hasTouch: boolean,
+   isLandscape: boolean,
+   ...
   };
 
   declare export type Device = {
-    name: string,
-    userAgent: string,
-    viewport: Viewport,
+   name: string,
+   userAgent: string,
+   viewport: Viewport,
+   ...
   };
 
-  declare var devices: {
-    [key: string]: Device,
-  };
+  declare var devices: { [key: string]: Device, ... };
 
   declare module.exports: typeof devices;
 }

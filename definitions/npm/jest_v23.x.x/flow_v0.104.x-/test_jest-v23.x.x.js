@@ -15,7 +15,8 @@ mockFn.mock.calls.map(String).map(a => a + a);
 
 type Foo = {
   doStuff: string => number,
-  doAsyncStuff: string => Promise<number>
+  doAsyncStuff: string => Promise<number>,
+  ...
 };
 const foo: Foo = {
   doStuff(str: string): number {

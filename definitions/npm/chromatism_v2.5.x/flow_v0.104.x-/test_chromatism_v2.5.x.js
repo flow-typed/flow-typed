@@ -42,7 +42,11 @@ declare var contrastCoeff: number;
 declare var luminanceWeight: number;
 declare var chromaWeight: number;
 
-declare var fakeColour: { foo: number, bar: number };
+declare var fakeColour: {
+  foo: number,
+  bar: number,
+  ...
+};
 
 var convert1: ColourObject = convert(colour);
 // $ExpectError

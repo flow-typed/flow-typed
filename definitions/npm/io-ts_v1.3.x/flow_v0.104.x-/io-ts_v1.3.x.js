@@ -155,7 +155,7 @@ declare module 'io-ts' {
 
   declare export var arrayType: AnyArrayType 
 
-  declare export class AnyDictionaryType extends Type<{ [key: string]: mixed }> {
+  declare export class AnyDictionaryType extends Type<{ [key: string]: mixed, ... }> {
     +_tag: 'AnyDictionaryType' 
   }
 
@@ -225,7 +225,7 @@ declare module 'io-ts' {
   // keyof
   //
 
-  declare export class KeyofType<+D: { [key: string]: mixed }> extends Type<$Keys<D>> {
+  declare export class KeyofType<+D: { [key: string]: mixed, ... }> extends Type<$Keys<D>> {
     +_tag: 'KeyofType' ,
     +keys: D,
     constructor(
@@ -237,7 +237,7 @@ declare module 'io-ts' {
     ): KeyofType<D>
   }
 
-  declare export var keyof: <D:{ [key: string]: mixed }>(
+  declare export var keyof: <D:{ [key: string]: mixed, ... }>(
     keys: D,
     name?: string 
   ) => KeyofType<D>
@@ -302,26 +302,22 @@ declare module 'io-ts' {
     ): InterfaceType<P,A,O,I>
   }
 
-  declare export type AnyProps = {
-    [key: string]: Any
-  }
+  declare export type AnyProps = { [key: string]: Any, ... }
 
   declare export type TypeOfProps<P: AnyProps> = $ObjMap<P, <V: Any>(v: V) => TypeOf<V>>;
 
   declare export type OutputOfProps<P: AnyProps> = $ObjMap<P, <V: Any>(v: V) => OutputOf<V>>;
 
-  declare export type Props = {
-    +[key: string]: Mixed
-  }
+  declare export type Props = { +[key: string]: Mixed, ... }
 
   /** @alias `interface` */
   declare export var type: <P: Props>(
     props: P,
     name?: string
   ) => InterfaceType<
-    {...P},
-    $ObjMap<{...P}, <V: Any>(v: V) => $PropertyType<V, '_A'>>,
-    $ObjMap<{...P}, <V: Any>(v: V) => $PropertyType<V, '_O'>>, 
+    { ...P, ... },
+    $ObjMap<{ ...P, ... }, <V: Any>(v: V) => $PropertyType<V, '_A'>>,
+    $ObjMap<{ ...P, ... }, <V: Any>(v: V) => $PropertyType<V, '_O'>>, 
     mixed
   >;
 
@@ -346,9 +342,9 @@ declare module 'io-ts' {
     props: P,
     name?: string
   ) => PartialType<
-    {...$Rest<P, {}>},
-    $ObjMap<{...$Rest<P, {}>}, <V: Any>(v: V) => $PropertyType<V, '_A'>>, 
-    $ObjMap<{...$Rest<P, {}>}, <V: Any>(v: V) => $PropertyType<V, '_O'>>, 
+    { ...$Rest<P, {...}>, ... },
+    $ObjMap<{ ...$Rest<P, {...}>, ... }, <V: Any>(v: V) => $PropertyType<V, '_A'>>, 
+    $ObjMap<{ ...$Rest<P, {...}>, ... }, <V: Any>(v: V) => $PropertyType<V, '_O'>>, 
     mixed
   >;
 
@@ -369,9 +365,9 @@ declare module 'io-ts' {
     ): DictionaryType<D,C,A,O,I>
   }
 
-  declare export type TypeOfDictionary<D: Any, C: Any> = { [K: TypeOf<D>]: TypeOf<C> }
+  declare export type TypeOfDictionary<D: Any, C: Any> = { [K: TypeOf<D>]: TypeOf<C>, ... }
 
-  declare export type OutputOfDictionary<D: Any, C: Any> = { [K: OutputOf<D>]: OutputOf<C> }
+  declare export type OutputOfDictionary<D: Any, C: Any> = { [K: OutputOf<D>]: OutputOf<C>, ... }
 
   declare export var dictionary: <D: Mixed, C: Mixed>(
     domain: D,
@@ -636,7 +632,7 @@ declare module 'io-ts' {
   // tagged unions
   //
 
-  declare export type TaggedProps<Tag: string> = { [K: Tag]: LiteralType<any> }
+  declare export type TaggedProps<Tag: string> = { [K: Tag]: LiteralType<any>, ... }
   declare export type TaggedRefinement<Tag: string, A, O = A> = RefinementType<Tagged<Tag>, A, O>;
   declare export type TaggedUnion<Tag: string, A, O = A> = UnionType<Array<Tagged<Tag>>, A, O>;
   declare export type TaggedIntersectionArgument<Tag: string> =
@@ -729,7 +725,7 @@ declare module 'io-ts' {
   /** Drops the runtime type "kind" */
   declare export function clean<A, O, I>(type: Type<A, O, I>): Type<A, O, I>;
 
-  declare export type PropsOf<T: { props: any }> = $PropertyType<T,'props'>;
+  declare export type PropsOf<T: { props: any, ... }> = $PropertyType<T,'props'>;
 
   declare export { nullType as null, undefinedType as undefined, arrayType as Array, type as interface, voidType as void }
 }

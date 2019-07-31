@@ -5,7 +5,7 @@ declare module '@reach/router' {
 
   declare export type NavigateFn = (
     to: string,
-    options?: NavigateOptions<{}>
+    options?: NavigateOptions<{...}>
   ) => void;
 
   declare export var navigate: NavigateFn;
@@ -30,6 +30,7 @@ declare module '@reach/router' {
       state: any,
       pushState(state: any, title: string, uri: string): void,
       replaceState(state: any, title: string, uri: string): void,
+      ...
     };
   }
 
@@ -48,11 +49,13 @@ declare module '@reach/router' {
   declare export type DefaultRouteProps = {
     ...CommonRouteProps,
     default: boolean,
+    ...
   };
 
   declare export type RouteProps = {
     ...CommonRouteProps,
     path: string,
+    ...
   };
 
   declare export type LocationProviderRenderFn = (context: {|
@@ -76,16 +79,17 @@ declare module '@reach/router' {
       isPartiallyCurrent: boolean,
       href: string,
       location: DomLocation,
-    }) => {},
+      ...
+    }) => {...},
     state?: State,
     to?: string,
     replace?: boolean,
-    href?: empty, // remove href, as it's ignored by the router
+    // remove href, as it's ignored by the router
+    href?: empty,
+    ...
   };
 
-  declare export var Link: {
-    <State>(props: LinkProps<State>): React$Node,
-  };
+  declare export var Link: { <State>(props: LinkProps<State>): React$Node, ... };
 
   declare export var Redirect: React$StatelessFunctionalComponent<{|
     from?: string,
@@ -102,9 +106,7 @@ declare module '@reach/router' {
     |}) => React$Node,
   |};
 
-  declare export var Match: {
-    <Params>(props: MatchProps<Params>): React$Node,
-  };
+  declare export var Match: { <Params>(props: MatchProps<Params>): React$Node, ... };
 
   declare export var Location: React$StatelessFunctionalComponent<{|
     children: LocationProviderRenderFn,
@@ -126,7 +128,7 @@ declare module '@reach/router' {
     initialPath: string
   ): HistorySource;
 
-  declare export function isRedirect(error: any): $Exact<{ uri: string }>;
+  declare export function isRedirect(error: any): $Exact<{ uri: string, ... }>;
 
   declare export function redirectTo(uri: string): void;
 }

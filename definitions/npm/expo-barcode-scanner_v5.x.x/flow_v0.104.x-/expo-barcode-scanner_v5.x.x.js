@@ -1,5 +1,5 @@
 declare module 'expo-barcode-scanner/@@react-native' {
-  declare export type ViewProps = {};
+  declare export type ViewProps = {...};
 }
 
 declare module 'expo-barcode-scanner/build/ExpoBarCodeScannerModule' {
@@ -100,6 +100,7 @@ declare module 'expo-barcode-scanner' {
     type?: $Values<Type>,
     barCodeTypes?: Array<BarCodeTypeValues>,
     onBarCodeScanned: BarCodeScannedCallback,
+    ...
   };
 
   declare export class BarCodeScanner extends React$Component<BarCodeScannerProps> {

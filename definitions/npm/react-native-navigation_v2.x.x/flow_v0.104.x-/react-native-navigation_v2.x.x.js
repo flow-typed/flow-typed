@@ -86,7 +86,8 @@ declare module 'react-native-navigation' {
       id?: string,
       name: string,
       alignment?: 'center' | 'fill',
-      passProps?: {},
+      passProps?: {...},
+      ...
     },
     height?: number,
     alignment?: 'center' | 'fill',
@@ -110,7 +111,8 @@ declare module 'react-native-navigation' {
     clipToBounds?: boolean,
     component?: {
       name?: string,
-      passProps?: {},
+      passProps?: {...},
+      ...
     },
     translucent?: boolean,
     blur?: boolean,
@@ -121,7 +123,8 @@ declare module 'react-native-navigation' {
     iconInsets?: IconInsets,
     component?: {
       name: string,
-      passProps?: {},
+      passProps?: {...},
+      ...
     },
     systemItem?: SystemItemIcon,
     text?: string,
@@ -323,7 +326,7 @@ declare module 'react-native-navigation' {
     id?: string,
     name: string | number,
     options?: Options,
-    passProps?: {},
+    passProps?: {...},
   |};
   declare export type LayoutStackChildren = {|
     component?: LayoutComponent,
@@ -367,7 +370,7 @@ declare module 'react-native-navigation' {
     id?: string,
     name: string | number,
     options?: Options,
-    passProps?: {},
+    passProps?: {...},
   |};
   declare export type Layout = {|
     component?: LayoutComponent,
@@ -381,7 +384,7 @@ declare module 'react-native-navigation' {
   /* --- Layout end  --- */
 
   /* --- Events --- */
-  declare export type Unsubscribe = { remove(): void };
+  declare export type Unsubscribe = { remove(): void, ... };
 
   declare export type ComponentDidDisappearEvent = {|
     componentId: string,
@@ -391,20 +394,20 @@ declare module 'react-native-navigation' {
   declare export type ComponentDidAppearEvent = {|
     componentId: string,
     componentName: string,
-    passProps?: {},
+    passProps?: {...},
   |};
 
   declare export type CommandEvent = {|
     commandId?: string,
     componentId?: string,
-    layout?: {},
-    options?: {},
+    layout?: {...},
+    options?: {...},
   |};
 
   declare export type CommandCompletedEvent = {|
     commandId: string,
     completionTime: number,
-    params?: {},
+    params?: {...},
   |};
 
   declare export type BottomTabSelectedEvent = {|
@@ -438,6 +441,7 @@ declare module 'react-native-navigation' {
       +navigationButtonPressed?: ButtonPressedEvent => void,
       +searchBarUpdated?: SearchBarUpdateEvent => void,
       +previewCompleted?: PreviewCompletedEvent => void,
+      ...
     }): Unsubscribe,
 
     registerComponentDidDisappearListener(
@@ -471,16 +475,13 @@ declare module 'react-native-navigation' {
 
   /* --- Events end  --- */
 
-  declare export type GetComponentClassFunc = () => React$ComponentType<{
-    componentId: string,
-  }>;
+  declare export type GetComponentClassFunc = () => React$ComponentType<{ componentId: string, ... }>;
 
   declare export var Navigation: {
     registerComponent(
       screenID: string | number,
       getComponentClassFunc: GetComponentClassFunc
     ): void,
-
     // Deprecated
     registerComponentWithRedux(
       screenID: string | number,
@@ -488,12 +489,10 @@ declare module 'react-native-navigation' {
       Provider: any,
       store: any
     ): void,
-
     setStackRoot(
       componentId: string,
       layout: Layout | Array<Layout>
     ): Promise<string>,
-
     setRoot(LayoutRoot): string,
     setDefaultOptions(options: Options): void,
     mergeOptions(componentId: string, options: Options): void,
@@ -513,5 +512,6 @@ declare module 'react-native-navigation' {
       statusBarHeight: number,
       topBarHeight: number,
     |}>,
+    ...
   };
 }

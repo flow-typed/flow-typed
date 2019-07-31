@@ -9,18 +9,17 @@ declare module "loglevel" {
     setDefaultLevel(level: Level): void,
     enableAll(): void,
     disableAll(): void,
-
     trace(...args: Array<any>): void,
     debug(...args: Array<any>): void,
     info(...args: Array<any>): void,
     warn(...args: Array<any>): void,
     error(...args: Array<any>): void,
-
     methodFactory: (
       methodName: LevelName,
       logLevel: LevelValue,
       loggerName: string
-    ) => () => void
+    ) => () => void,
+    ...
   };
 
   declare type LogLevelModule = Logger & {
@@ -32,8 +31,10 @@ declare module "loglevel" {
       INFO: 2,
       WARN: 3,
       ERROR: 4,
-      SILENT: 5
-    }
+      SILENT: 5,
+      ...
+    },
+    ...
   };
 
   declare module.exports: LogLevelModule;

@@ -12,18 +12,14 @@ import UniversalRouterSync, {
 import generateUrls from 'universal-router/generateUrls';
 
 describe('#universalRouter', () => {
-  type Context = {
-    user?: string,
-  };
+  type Context = { user?: string, ... };
   type Result =
     | {|
         redirect: string,
         from: string,
       |}
     | string;
-  type ResolveContextCustom = ResolveContext & {
-    search?: string,
-  };
+  type ResolveContextCustom = ResolveContext & { search?: string, ... };
   type RouteCustom<C, RR, RC> = {|
     ...$Exact<$Route<RouteCustom<C, RR, RC>, C, RR, RC>>,
     protected?: boolean,
@@ -124,9 +120,7 @@ describe('#universalRouter', () => {
   });
 
   it('UniversalRouterSync', () => {
-    type ResolveContextSyncCustom = ResolveContextSync & {
-      search?: string,
-    };
+    type ResolveContextSyncCustom = ResolveContextSync & { search?: string, ... };
     type RouteSyncCustom<C, RR, RC> = {|
       ...$Exact<$RouteSync<RouteSyncCustom<C, RR, RC>, C, RR, RC>>,
       protected?: boolean,

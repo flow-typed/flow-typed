@@ -72,12 +72,14 @@ declare module "paths-js/all" {
         R: number |}): Pie<A>;
   }
 
-  declare type RadarOptions<A> = { data: Array<A>,
-    accessor?: { [key: string]: Function },
+  declare type RadarOptions<A> = {
+    data: Array<A>,
+    accessor?: { [key: string]: Function, ... },
     max: number,
     center: Point,
     r: number,
-    rings: number
+    rings: number,
+    ...
   };
 
   declare class Radar<A> { constructor(options: RadarOptions<A>): Radar<A> }
@@ -162,7 +164,8 @@ declare module "paths-js/all" {
     Tree: typeof Tree,
     Waterfall: typeof Waterfall,
     Sankey: typeof Sankey,
-    Voronoi: typeof Voronoi
+    Voronoi: typeof Voronoi,
+    ...
   };
 
 }

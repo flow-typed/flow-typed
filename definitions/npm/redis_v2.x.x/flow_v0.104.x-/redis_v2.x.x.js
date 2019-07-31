@@ -108,7 +108,7 @@ declare module "redis" {
     connected: boolean,
     hmset: (
       key: string,
-      map: {[key: string]: string},
+      map: { [key: string]: string, ... },
       callback?: (error: ?Error) => void
     ) => void;
     rpush: (
@@ -151,7 +151,7 @@ declare module "redis" {
     ) => void;
     hgetall: (
       topic: string,
-      callback: (error: ?Error, result: {[key: string]: string}) => void
+      callback: (error: ?Error, result: { [key: string]: string, ... }) => void
     ) => void;
     hdel: (
       topic: string,
@@ -252,7 +252,7 @@ declare module "redis" {
   declare class RedisClientPromisified extends RedisClient {
     hmsetAsync: (
       key: string,
-      map: {[key: string]: string},
+      map: { [key: string]: string, ... },
       callback: (?Error) => void
     ) => Promise<void>;
     rpushAsync: (
@@ -281,7 +281,7 @@ declare module "redis" {
     hgetAsync: (topic: string, key: string) => Promise<string> | Promise<void>;
     hgetallAsync: (
       topic: string,
-    ) => Promise<{[key: string]: string}> | Promise<void>;
+    ) => Promise<{ [key: string]: string, ... }> | Promise<void>;
     hdelAsync: (topic: string, key: string) => Promise<number>;
     getAsync: (key: string) => Promise<any>;
     setAsync: (key: string, value: any) => Promise<void>;
@@ -324,15 +324,17 @@ declare module "redis" {
     db?: number,
     family?: "IPv4" | "IPv6",
     disable_resubscribing?: boolean,
-    rename_commands?: { [name: string]: string },
+    rename_commands?: { [name: string]: string, ... },
     tls?: Object,
     prefix?: string,
     retry_strategy?: (options: {
       attempt: number,
       total_retry_time: number,
       error: Error,
-      times_connected: number
-    }) => any
+      times_connected: number,
+      ...
+    }) => any,
+    ...
   };
 
   declare type CreateClient = ((
@@ -347,6 +349,7 @@ declare module "redis" {
   declare module.exports: {
     RedisClient: typeof RedisClient,
     RedisClientPromisified: typeof RedisClientPromisified,
-    createClient: CreateClient
+    createClient: CreateClient,
+    ...
   };
 }

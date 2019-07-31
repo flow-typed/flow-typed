@@ -3,17 +3,19 @@ import React from "react";
 import { connectAdvanced } from "react-redux";
 
 function testConnectAdvanced() {
-  type Props = {fromStateToProps: string, fromInputProps: string};
+  type Props = {
+    fromStateToProps: string,
+    fromInputProps: string,
+    ...
+  };
   class Com extends React.Component<Props> {
     render() {
       return <div>{this.props.fromInputProps} {this.props.fromStateToProps}</div>;
     }
   }
 
-  type State = {a: number};
-  type InputProps = {
-    fromInputProps: string
-  };
+  type State = { a: number, ... };
+  type InputProps = { fromInputProps: string, ... };
   const mapStateToProps = (state: State, props: InputProps) => {
     return {
       fromInputProps: 'str' + props.fromInputProps,
@@ -40,6 +42,7 @@ function testConnectAdvanced() {
       withRef: boolean,
       displayName: string,
       wrappedComponentName: string,
+      ...
     } = selectorFactoryOptions;
     return mapStateToProps;
   }
@@ -53,13 +56,15 @@ function testConnectAdvanced() {
 }
 
 function testConnectAdvancedWithStatelessFunctionalComponent() {
-  type Props = {fromStateToProps: string, fromInputProps: string};
+  type Props = {
+    fromStateToProps: string,
+    fromInputProps: string,
+    ...
+  };
   const Com = (props: Props) => <div>{props.fromInputProps} {props.fromStateToProps}</div>;
 
-  type State = {a: number};
-  type InputProps = {
-    fromInputProps: string
-  };
+  type State = { a: number, ... };
+  type InputProps = { fromInputProps: string, ... };
   const mapStateToProps = (state: State, props: InputProps) => {
     return {
       fromInputProps: 'str' + props.fromInputProps,
@@ -114,7 +119,7 @@ function testConnectAdvancedConnectOptions() {
 
 function testConnectAdvancedExtraOptions() {
   const selectorFactory = (dispatch: *, selectorFactoryOptions: *) => {
-    const { otherOption }: {otherOption: string} = selectorFactoryOptions;
+    const { otherOption }: { otherOption: string, ... } = selectorFactoryOptions;
     return () => ({});
   }
 

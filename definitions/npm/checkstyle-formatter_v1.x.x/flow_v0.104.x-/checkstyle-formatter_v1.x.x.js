@@ -3,12 +3,14 @@ declare module "checkstyle-formatter" {
     line: number,
     column: number,
     severity: "error" | "warning",
-    message: string
+    message: string,
+    ...
   };
 
   declare type CheckstyleFileResult = {
     filename: string,
-    messages: Array<CheckstyleMessage>
+    messages: Array<CheckstyleMessage>,
+    ...
   };
 
   declare type CheckstyleResult = Array<CheckstyleFileResult>;

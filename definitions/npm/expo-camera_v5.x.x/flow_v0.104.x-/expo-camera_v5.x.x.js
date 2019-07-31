@@ -76,31 +76,26 @@ declare module 'expo-camera' {
     VideoQuality: VideoQuality,
     // iOS Only
     VideoStabilization: VideoStabilization,
+    ...
   };
 
-  declare export type MountError = {
-    +message: string,
-  };
+  declare export type MountError = { +message: string, ... };
 
   declare export type BarCodeScanningResult = {|
     +type: string,
     +data: string,
   |};
 
-  declare export type FaceDetectionResult = {
-    // https://docs.expo.io/versions/latest/sdk/facedetector/#event-shape
-    faces: Array<mixed>,
-  };
+  declare export type FaceDetectionResult = { // https://docs.expo.io/versions/latest/sdk/facedetector/#event-shape
+  faces: Array<mixed>, ... };
 
   // https://docs.expo.io/versions/latest/sdk/camera/#api
   declare export type CameraProps = $ReadOnly<{
     // Android only
     useCamera2Api?: boolean,
     ratio?: string,
-
     // iOS only
     videoStabilizationMode?: $Values<VideoStabilization>,
-
     // Common
     children?: React$Node,
     type?: $Values<TypeToFacingMode>,
@@ -110,22 +105,19 @@ declare module 'expo-camera' {
     zoom?: number,
     focusDepth?: number,
     pictureSize?: string,
-
-    barCodeScannerSettings?: {
-      barCodeTypes: mixed,
-    },
-
+    barCodeScannerSettings?: { barCodeTypes: mixed, ... },
     // https://docs.expo.io/versions/latest/sdk/facedetector/#settings
     faceDetectorSettings?: {
       mode: mixed,
       detectLandmarks: mixed,
       runClassifications: mixed,
+      ...
     },
-
     onCameraReady?: () => mixed,
     onMountError?: (event: MountError) => mixed,
     onBarCodeScanned?: (scanningResult: BarCodeScanningResult) => mixed,
     onFacesDetected?: (faces: FaceDetectionResult) => mixed,
+    ...
   }>;
 
   declare export type PictureOptions = {|

@@ -1,5 +1,5 @@
 declare module "redux-loop" {
-  declare type Effect = $Subtype<{}>;
+  declare type Effect = $Subtype<{...}>;
 
   declare type Reducer<S, A> = (state: S, action: A) => S | [S, Effect];
 
@@ -18,7 +18,6 @@ declare module "redux-loop" {
 
   declare var Effects: {
     batch: (effects: Effect[]) => Effect,
-
     // Several of the effect constructors here accept a callback with arguments
     // to apply to the callback. Listing each possible callback argument with
     // a distinct type variable allows Flow to check that the types of arguments
@@ -30,7 +29,7 @@ declare module "redux-loop" {
     // - Flow will not report an error if the caller does not supply all of the
     // arguments that the callback requires
 
-    call: <Action: { type: $Subtype<string> }, A, B, C, D, E>(
+    call: <Action: { type: $Subtype<string>, ... }, A, B, C, D, E>(
       actionFactory: (a: A, b: B, c: C, d: D, e: E) => Action,
       a?: A,
       b?: B,
@@ -38,9 +37,7 @@ declare module "redux-loop" {
       d?: D,
       e?: E
     ) => Effect,
-
-    constant: <A: { type: $Subtype<string> }>(action: A) => Effect,
-
+    constant: <A: { type: $Subtype<string>, ... }>(action: A) => Effect,
     // The `lift` constructor takes a callback that is called with given
     // arguments *and* with an `action` produced by the input `effect`. Keeping
     // track of whether the `action` is supposed to be the first or last
@@ -49,7 +46,7 @@ declare module "redux-loop" {
     // problem during type-checking if the caller guesses wrong.
     // Unfortunately I do not know how to accomplish that consistently.
 
-    lift: <Action1, Action2: { type: $Subtype<string> }, A, B, C, D, E>(
+    lift: <Action1, Action2: { type: $Subtype<string>, ... }, A, B, C, D, E>(
       effect: Effect,
       f: (a: A, b: B, c: C, d: D, e: E, action: Action1) => Action2,
       a?: A,
@@ -58,8 +55,7 @@ declare module "redux-loop" {
       d?: D,
       e?: E
     ) => Effect,
-
-    promise: <Action: { type: $Subtype<string> }, A, B, C, D, E>(
+    promise: <Action: { type: $Subtype<string>, ... }, A, B, C, D, E>(
       actionFactory: (a: A, b: B, c: C, d: D, e: E) => Promise<Action>,
       a?: A,
       b?: B,
@@ -67,8 +63,8 @@ declare module "redux-loop" {
       d?: D,
       e?: E
     ) => Effect,
-
-    none: () => Effect
+    none: () => Effect,
+    ...
   };
 
   declare function getEffect<S>(loop: [S, Effect]): Effect;

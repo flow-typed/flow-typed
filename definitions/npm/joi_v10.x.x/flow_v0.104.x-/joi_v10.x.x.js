@@ -209,7 +209,7 @@ declare interface npm$joi$ObjectSchema extends AnySchema<npm$joi$ObjectSchema> {
     schema: npm$joi$Schema,
     message?: string
   ): npm$joi$ObjectSchema,
-  keys(schema?: { [key: string]: npm$joi$Schema }): npm$joi$ObjectSchema,
+  keys(schema?: { [key: string]: npm$joi$Schema, ... }): npm$joi$ObjectSchema,
   length(limit: number): npm$joi$ObjectSchema,
   max(limit: number): npm$joi$ObjectSchema,
   min(limit: number): npm$joi$ObjectSchema,
@@ -285,7 +285,7 @@ declare module "joi" {
     date(): npm$joi$DateSchema,
     func(): npm$joi$FunctionSchema,
     number(): npm$joi$NumberSchema,
-    object(schema?: { [key: string]: npm$joi$Schema }): npm$joi$ObjectSchema,
+    object(schema?: { [key: string]: npm$joi$Schema, ... }): npm$joi$ObjectSchema,
     ref(key: string, options?: ReferenceOptions): Reference,
     string(): npm$joi$StringSchema,
     validate<T>(
@@ -303,6 +303,7 @@ declare module "joi" {
       schema: Object,
       options?: ValidationOptions,
       callback?: (err: ValidationError, value: T) => void
-    ): ValidationResult<T>
+    ): ValidationResult<T>,
+    ...
   };
 }

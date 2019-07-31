@@ -1,12 +1,10 @@
 // @flow
 declare module "react-hot-loader" {
-  declare type Module = {
-    id: string
-  };
+  declare type Module = { id: string, ... };
 
   declare type errorReporterProps = {|
     error: Error,
-    errorInfo: { componentStack: string }
+    errorInfo: { componentStack: string, ... }
   |};
 
   declare type AppContainerProps = {|
@@ -39,6 +37,6 @@ declare module "react-hot-loader" {
     someModule: Module
   ): <T, W: React$ComponentType<T>>(
     wrappedComponent: W,
-    props?: $Diff<AppContainerProps, { children: React$Element<any> }>
+    props?: $Diff<AppContainerProps, { children: React$Element<any>, ... }>
   ) => React$ComponentType<T>;
 }

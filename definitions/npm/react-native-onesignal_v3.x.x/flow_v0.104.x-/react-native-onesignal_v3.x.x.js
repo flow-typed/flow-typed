@@ -46,7 +46,7 @@ declare module "react-native-onesignal" {
     userSubscriptionEnabled: boolean
   |}>;
 
-  declare export type Tags = { [key: string]: string };
+  declare export type Tags = { [key: string]: string, ... };
 
   declare export default class OneSignal {
     static addEventListener(type: EventTypes, handler: Function): void;

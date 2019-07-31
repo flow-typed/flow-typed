@@ -14,7 +14,7 @@ declare module 'execa' {
     cwd?: string,
     detached?: boolean,
     encoding?: string,
-    env?: {[string]: string},
+    env?: { [string]: string, ... },
     extendEnv?: boolean,
     gid?: number,
     killSignal?: string | number,

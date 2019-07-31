@@ -22,7 +22,7 @@ import type {
 } from 'styled-components'
 import { createReadStream } from 'fs'
 
-const TitleTaggedTemplateLiteral: ReactComponentStyledTaggedTemplateLiteral<{}> = styled.h1;
+const TitleTaggedTemplateLiteral: ReactComponentStyledTaggedTemplateLiteral<{...}> = styled.h1;
 
 const TitleStyled: ReactComponentStyled<*> = styled.h1`
   font-size: 1.5em;
@@ -128,7 +128,7 @@ const withComponentError1: ReactComponentStyled<*> = styled.div.withComponent(0)
 // $ExpectError
 const withComponentError2: ReactComponentStyled<*> = styled.div.withComponent('NotHere');
 
-class CustomComponentError3 extends React.Component<{ foo: string }> {
+class CustomComponentError3 extends React.Component<{ foo: string, ... }> {
   render() { return <div />; }
 }
 
@@ -144,7 +144,7 @@ const withComponentError6 = styled(CustomComponentError3).withComponent(0);
 const withComponentError7 = styled(CustomComponentError3).withComponent('NotHere');
 
 // ---- WithTheme ----
-const Component: ReactComponentFunctionalUndefinedDefaultProps<{ theme: Theme }> = ({ theme }) => (
+const Component: ReactComponentFunctionalUndefinedDefaultProps<{ theme: Theme, ... }> = ({ theme }) => (
   <ThemeProvider theme={theme}>
     <Wrapper>
       <TitleStyled>Hello World, this is my first styled component!</TitleStyled>
@@ -152,9 +152,9 @@ const Component: ReactComponentFunctionalUndefinedDefaultProps<{ theme: Theme }>
   </ThemeProvider>
 );
 
-const ComponentWithTheme: ReactComponentFunctionalUndefinedDefaultProps<{}> = withTheme(Component);
+const ComponentWithTheme: ReactComponentFunctionalUndefinedDefaultProps<{...}> = withTheme(Component);
 
-const Component2: ReactComponentFunctionalUndefinedDefaultProps<{}> = () => (
+const Component2: ReactComponentFunctionalUndefinedDefaultProps<{...}> = () => (
   <ThemeProvider theme={outerTheme => outerTheme}>
     <Wrapper>
       <TitleStyled>Hello World, this is my first styled component!</TitleStyled>
@@ -208,15 +208,23 @@ sheet.interleaveWithNodeStream('file.txt')
 sheet.interleaveWithNodeStream(stream)
 
 // ---- COMPONENT CLASS TESTS ----
-class NeedsThemeReactClass extends React.Component<{ foo: string, theme: Theme }> {
+class NeedsThemeReactClass extends React.Component<{
+  foo: string,
+  theme: Theme,
+  ...
+}> {
   render() { return <div />; }
 }
 
-class ReactClass extends React.Component<{ foo: string }> {
+class ReactClass extends React.Component<{ foo: string, ... }> {
   render() { return <div />; }
 }
 
-const StyledClass: ReactComponentClass<{ foo: string, theme: Theme }> = styled(NeedsThemeReactClass)`
+const StyledClass: ReactComponentClass<{
+  foo: string,
+  theme: Theme,
+  ...
+}> = styled(NeedsThemeReactClass)`
   color: red;
 `;
 
@@ -240,31 +248,43 @@ const interpolationError2: Array<Interpolation | boolean> = css`
 `;
 
 // ---- DEFAULT COMPONENT TESTS ----
-const defaultComponent: ReactComponentIntersection<{}> = styled.div`
+const defaultComponent: ReactComponentIntersection<{...}> = styled.div`
   background-color: red;
 `;
 
 // $ExpectError
-const defaultComponentError: {} => string = styled.div`
+const defaultComponentError: {...} => string = styled.div`
   background-color: red;
 `;
 
 // ---- FUNCTIONAL COMPONENT TESTS ----
-const FunctionalComponent: ReactComponentFunctionalUndefinedDefaultProps<{ foo: string, theme: Theme }> = props => <div />;
+const FunctionalComponent: ReactComponentFunctionalUndefinedDefaultProps<{
+  foo: string,
+  theme: Theme,
+  ...
+}> = props => <div />;
 
-const NeedsFoo1: ReactComponentFunctionalUndefinedDefaultProps<{ foo: string, theme: Theme }> = styled(FunctionalComponent)`
+const NeedsFoo1: ReactComponentFunctionalUndefinedDefaultProps<{
+  foo: string,
+  theme: Theme,
+  ...
+}> = styled(FunctionalComponent)`
   background-color: red;
 `;
 // $ExpectError
-const NeedsFoo1Error: ReactComponentFunctionalUndefinedDefaultProps<{ foo: number }> = styled(FunctionalComponent)`
+const NeedsFoo1Error: ReactComponentFunctionalUndefinedDefaultProps<{ foo: number, ... }> = styled(FunctionalComponent)`
   background-color: red;
 `;
 
-const NeedsFoo2: ReactComponentFunctionalUndefinedDefaultProps<{ foo: string, theme: Theme }> = styled(NeedsFoo1)`
+const NeedsFoo2: ReactComponentFunctionalUndefinedDefaultProps<{
+  foo: string,
+  theme: Theme,
+  ...
+}> = styled(NeedsFoo1)`
   background-color: red;
 `;
 // $ExpectError
-const NeedsFoo2Error: ReactComponentFunctionalUndefinedDefaultProps<{ foo: number }> = styled(NeedsFoo1)`
+const NeedsFoo2Error: ReactComponentFunctionalUndefinedDefaultProps<{ foo: number, ... }> = styled(NeedsFoo1)`
   background-color: red;
 `;
 

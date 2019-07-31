@@ -60,7 +60,11 @@ declare module "commander" {
     command(
       name: string,
       desc?: string,
-      opts?: { isDefault: boolean, noHelp: boolean }
+      opts?: {
+       isDefault: boolean,
+       noHelp: boolean,
+       ...
+      }
     ): Command;
 
     /**
@@ -160,9 +164,10 @@ declare module "commander" {
      * @api public
      */
     parse(argv: Array<string>): this & {
-      args: Array<string>,
-      rawArgs: Array<string>,
-      [string]: any,
+     [string]: any,
+     args: Array<string>,
+     rawArgs: Array<string>,
+     ...
     };
 
     /**
@@ -173,7 +178,11 @@ declare module "commander" {
      * @return {Array}
      * @api public
      */
-    parseOptions(argv: Array<string>): { args: Array<string>, unknown: Array<string> };
+    parseOptions(argv: Array<string>): {
+     args: Array<string>,
+     unknown: Array<string>,
+     ...
+    };
 
     /**
      * Define argument syntax for the top-level command.
@@ -188,7 +197,7 @@ declare module "commander" {
      * @return {Object}
      * @api public
      */
-    opts(): { [key: string]: any };
+    opts(): { [key: string]: any, ... };
 
     /**
      * Set the program version to `str`.
@@ -276,7 +285,8 @@ declare module "commander" {
   }
 
   declare module.exports: Command & {
-    Command: (name?: string) => Command;
-    Options: (flags: string, description?: string) => Option;
+   Command: (name?: string) => Command,
+   Options: (flags: string, description?: string) => Option,
+   ...
   };
 }

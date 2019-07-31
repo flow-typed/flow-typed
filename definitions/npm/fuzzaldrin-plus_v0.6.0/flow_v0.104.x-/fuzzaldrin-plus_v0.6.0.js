@@ -15,7 +15,6 @@ declare module 'fuzzaldrin-plus' {
 
   declare module.exports: {
     Query: Class<Query>,
-
     filter<T>(
       candidates: T[] | $ReadOnlyArray<T>,
       query: string,
@@ -28,13 +27,10 @@ declare module 'fuzzaldrin-plus' {
         |},
       |},
     ): T[],
-
     score(string: string, query: string, options?: ?Options): number,
-
     match(string: string, query: string, options?: ?Options): number[],
-
     wrap(string: string, query: string, options?: ?Options): string,
-
     prepareQuery(query: string, options?: ?Options): Query,
+    ...
   };
 }

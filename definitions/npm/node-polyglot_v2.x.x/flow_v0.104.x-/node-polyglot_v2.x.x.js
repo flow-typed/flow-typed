@@ -10,7 +10,8 @@ declare module "node-polyglot" {
       phrases?: Object,
       locale?: string,
       allowMissing?: boolean,
-      onMissingKey?: onMissingKeyType
+      onMissingKey?: onMissingKeyType,
+      ...
     }): Polyglot,
     extend(phrases: Object): void,
     t(id: string, props?: Object): string,

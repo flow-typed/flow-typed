@@ -20,9 +20,9 @@ import _, {
 
 const ns: Array<number> = [1, 2, 3, 4, 5];
 const ss: Array<string> = ["one", "two", "three", "four"];
-const obj: { [k: string]: number } = { a: 1, c: 2 };
-const objMixed: { [k: string]: mixed } = { a: 1, c: "d" };
-const os: Array<{ [k: string]: * }> = [{ a: 1, c: "d" }, { b: 2 }];
+const obj: { [k: string]: number, ... } = { a: 1, c: 2 };
+const objMixed: { [k: string]: mixed, ... } = { a: 1, c: "d" };
+const os: Array<{ [k: string]: *, ... }> = [{ a: 1, c: "d" }, { b: 2 }];
 const str: string = "hello world";
 
 describe("Object", () => {
@@ -31,19 +31,22 @@ describe("Object", () => {
       (_.assoc("c", "s", { a: 1, b: 2 }): {
         a: number,
         b: number,
-        c: string
+        c: string,
+        ...
       });
 
       (_.assoc("x", { x1: 11 }, { y: ["y1"] }): {
-        x: { [string]: number },
-        y: Array<string>
+        x: { [string]: number, ... },
+        y: Array<string>,
+        ...
       });
     });
 
     it("should return sum types when passed key already has in passed object", () => {
       (_.assoc("a", "s", { a: 1, b: 2 }): {
         a: number | string,
-        b: number | string
+        b: number | string,
+        ...
       });
     });
   });
@@ -88,9 +91,7 @@ describe("Object", () => {
     })
 
     it('produces an output type that results from the mapping function and input (object)', () => {
-      type TransformedData = {
-        a: number,
-      }
+      type TransformedData = { a: number, ... }
       const data = {
         a: 'foo',
       }
@@ -99,7 +100,7 @@ describe("Object", () => {
     })
 
     it('requires the lens works with the functor provided (object)', () => {
-      type Data = { a: string }
+      type Data = { a: string, ... }
       const data: Data = {
         a: 'foo',
       }
@@ -172,7 +173,7 @@ describe("Object", () => {
     })
 
     it('requires the lens works with the functor provided (object)', () => {
-      type Data = { a: string }
+      type Data = { a: string, ... }
       const data: Data = {
         a: 'foo',
       }
@@ -192,7 +193,12 @@ describe("Object", () => {
    */
   describe('view', () => {
     it('works with lens', () => {
-      type Data = { a: string, b: number, c: boolean }
+      type Data = {
+        a: string,
+        b: number,
+        c: boolean,
+        ...
+      }
       const data = {
         a: 'foo',
         b: 4,
@@ -208,26 +214,26 @@ describe("Object", () => {
     })
 
     it('works with lensIndex', () => {
-      type Data = { a: string }
+      type Data = { a: string, ... }
       const xs: Array<number> = [1, 2, 3]
       const result: number = view(lensIndex(0), xs)
     })
 
     it('works with lensProp', () => {
-      type Data = { a: string }
+      type Data = { a: string, ... }
       const data = { a: 'foo' }
       const result: string = view(lensProp('a'), data)
     })
 
     it('fails when the lensProp refers to a non-existent field', () => {
-      type Data = { a: string }
+      type Data = { a: string, ... }
       const data = { a: 'foo' }
       // $ExpectError
       const result: string = view(lensProp('b'), data)
     })
 
     it('produces the correct result type', () => {
-      type Data = { a: string }
+      type Data = { a: string, ... }
       const data = { a: 'foo' }
       // $ExpectError
       const result: number = view(lensProp('a'), data)
@@ -235,7 +241,7 @@ describe("Object", () => {
   })
 });
 
-const apath: { [k: string]: number | string | Object } = _.assocPath(
+const apath: { [k: string]: number | string | Object, ... } = _.assocPath(
   ["a", 0, "c"],
   "s",
   { a: [ { c: 0 } ] }
@@ -274,28 +280,28 @@ const id = objectsClone2.id;
 //$ExpectError
 const idE = objectsClone4.id;
 
-const dissocd: { a: number } = _.dissoc("b", { a: 1, b: 2 });
-const dissocd2: { a: number } = _.dissoc("b")({ a: 1, b: 2 });
+const dissocd: { a: number, ... } = _.dissoc("b", { a: 1, b: 2 });
+const dissocd2: { a: number, ... } = _.dissoc("b")({ a: 1, b: 2 });
 //$ExpectError
-const dissocd3: { a: string } = _.dissoc("b", { a: 1, b: 2 });
+const dissocd3: { a: string, ... } = _.dissoc("b", { a: 1, b: 2 });
 //$ExpectError
-const dissocd4: { a: string } = _.dissoc("b")({ a: 1, b: 2 });
+const dissocd4: { a: string, ... } = _.dissoc("b")({ a: 1, b: 2 });
 
-const dissocPathd: { a: { b: number } } = _.dissocPath(["a", "c"], {
+const dissocPathd: { a: { b: number, ... }, ... } = _.dissocPath(["a", "c"], {
   a: { b: 1, c: 2 }
 });
-const dissocPathd2: { a: { b: number } } = _.dissocPath(["a", "c"])({
+const dissocPathd2: { a: { b: number, ... }, ... } = _.dissocPath(["a", "c"])({
   a: { b: 1, c: 2 }
 });
-const dissocPathd3: { a: { b: number } } = _.dissocPath(["a", "c", 0])({
+const dissocPathd3: { a: { b: number, ... }, ... } = _.dissocPath(["a", "c", 0])({
   a: { b: 1, c: [2] }
 });
 //$ExpectError
-const dissocPathd4: { a: { b: string } } = _.dissocPath(["a", "c"], {
+const dissocPathd4: { a: { b: string, ... }, ... } = _.dissocPath(["a", "c"], {
   a: { b: 1, c: 2 }
 });
 //$ExpectError
-const dissocPathd5: { a: { b: string } } = _.dissocPath(["a", "c"])({
+const dissocPathd5: { a: { b: string, ... }, ... } = _.dissocPath(["a", "c"])({
   a: { b: 1, c: 2 }
 });
 
@@ -367,10 +373,10 @@ const raceResultsByFirstName = {
   second: "jake",
   third: "alice"
 };
-const inverted: { [k: string]: Array<string> } = _.invert(
+const inverted: { [k: string]: Array<string>, ... } = _.invert(
   raceResultsByFirstName
 );
-const inverted1: { [k: string]: string } = _.invertObj(raceResultsByFirstName);
+const inverted1: { [k: string]: string, ... } = _.invertObj(raceResultsByFirstName);
 
 const ks: Array<string> = _.keys(raceResultsByFirstName);
 const ksMaybe: Array<string> = _.keys(null)
@@ -379,12 +385,12 @@ const ksi: Array<string> = _.keysIn(square);
 const xs = { x: 1, y: 2, z: 3 };
 const prependKeyAndDouble = (num, key, obj) => key + num * 2;
 
-const obI: { [k: string]: string } = _.mapObjIndexed(
+const obI: { [k: string]: string, ... } = _.mapObjIndexed(
   prependKeyAndDouble,
   xs
 );
 //$ExpectError
-const obI2: { [k: string]: number } = _.mapObjIndexed(
+const obI2: { [k: string]: number, ... } = _.mapObjIndexed(
   prependKeyAndDouble,
   xs
 );
@@ -501,10 +507,14 @@ const ppp3: string = _.prop("x", { x: 100 });
 const ppp4: number = _.prop(_.__, { x: 100 })("x");
 //$ExpectError
 const ppp5: number = _.prop(_.__, { x: 100 })("y");
-const ppp6: number = _.prop("x", ({ x: 1, y: "a" }: { x: number, y: string }));
-const ppp7: number = _.prop("x", ({ x: 1 }: { [string]: number }));
+const ppp6: number = _.prop("x", ({ x: 1, y: "a" }: {
+  x: number,
+  y: string,
+  ...
+}));
+const ppp7: number = _.prop("x", ({ x: 1 }: { [string]: number, ... }));
 //$ExpectError
-const ppp8: string = _.prop("x", ({ x: 1 }: { [string]: number }));
+const ppp8: string = _.prop("x", ({ x: 1 }: { [string]: number, ... }));
 
 const alice = {
   name: "ALICE",
@@ -524,10 +534,14 @@ const pss1: Array<number | boolean> = _.props(["x", "y"], {
 });
 const pss2: Array<number | boolean> = _.props(
   ["x", "y"],
-  ({ x: true, y: 2, z: "foo" }: { x: boolean, y: number })
+  ({ x: true, y: 2, z: "foo" }: {
+  x: boolean,
+  y: number,
+  ...
+})
 );
 const pss3: Array<number> = _.props(["y"], { x: true, y: 2, z: "foo" });
-const pss4: Array<number> = _.props(["y"], ({ y: 2 }: { [string]: number }));
+const pss4: Array<number> = _.props(["y"], ({ y: 2 }: { [string]: number, ... }));
 //$ExpectError -- wrong key
 const pssE1: Array<number | boolean> = _.props(["d", "y"], {
   x: true,
@@ -541,7 +555,7 @@ const pssE2: Array<string | boolean> = _.props(["x", "y"], {
   z: "foo"
 });
 //$ExpectError -- wrong type on indexer value
-const pssE3: Array<string> = _.props(["y"], ({ y: 2 }: { [string]: number }));
+const pssE3: Array<string> = _.props(["y"], ({ y: 2 }: { [string]: number, ... }));
 
 const top: Array<["a" | "b" | "c", number]> = _.toPairs({ a: 1, b: 2, c: 3 });
 

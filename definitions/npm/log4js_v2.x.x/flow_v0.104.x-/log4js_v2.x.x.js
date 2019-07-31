@@ -1,19 +1,11 @@
 declare module "log4js" {
-  declare export type BaseLayout = {
-    type: "basic"
-  };
+  declare export type BaseLayout = { type: "basic", ... };
 
-  declare export type ColoredLayout = {
-    type: "colored" | "coloured"
-  };
+  declare export type ColoredLayout = { type: "colored" | "coloured", ... };
 
-  declare export type MessagePassThroughLayout = {
-    type: "messagePassThrough"
-  };
+  declare export type MessagePassThroughLayout = { type: "messagePassThrough", ... };
 
-  declare export type DummyLayout = {
-    type: "dummy"
-  };
+  declare export type DummyLayout = { type: "dummy", ... };
 
   declare export interface Level {
     isEqualTo(other: string): boolean,
@@ -33,7 +25,8 @@ declare module "log4js" {
     context: any,
     cluster?: {
       workerId: number,
-      worker: number
+      worker: number,
+      ...
     }
   }
 
@@ -44,12 +37,14 @@ declare module "log4js" {
     // specifier for the output format, using placeholders as described below
     pattern: string,
     // user-defined tokens to be used in the pattern
-    tokens?: { [name: string]: Token }
+    tokens?: { [name: string]: Token, ... },
+    ...
   };
 
   declare export type CustomLayout = {
     [key: string]: any,
-    type: string
+    type: string,
+    ...
   };
 
   declare export type Layout =
@@ -70,7 +65,8 @@ declare module "log4js" {
     // the category (or categories if you provide an array of values) that will be excluded from the appender.
     exclude?: string | string[],
     // the name of the appender to filter. see https://nomiddlename.github.io/log4js-node/layouts.html
-    appender?: string
+    appender?: string,
+    ...
   };
 
   /**
@@ -81,7 +77,8 @@ declare module "log4js" {
   declare export type ConsoleAppender = {
     type: "console",
     // defaults to colouredLayout
-    layout?: Layout
+    layout?: Layout,
+    ...
   };
 
   declare export type FileAppender = {
@@ -95,12 +92,14 @@ declare module "log4js" {
     // defaults to basic layout
     layout?: Layout,
     numBackups?: number,
-    compress?: boolean, // compress the backups
+    // compress the backups
+    compress?: boolean,
     // keep the file extension when rotating logs
     keepFileExt?: boolean,
     encoding?: string,
     mode?: number,
-    flags?: string
+    flags?: string,
+    ...
   };
 
   declare export type SyncfileAppender = {
@@ -112,7 +111,8 @@ declare module "log4js" {
     // (default value = 5) - the number of old log files to keep during log rolling.
     backups?: number,
     // defaults to basic layout
-    layout?: Layout
+    layout?: Layout,
+    ...
   };
 
   declare export type DateFileAppender = {
@@ -147,7 +147,8 @@ declare module "log4js" {
     // keep the file extension when rotating logs
     keepFileExt?: boolean,
     // if this value is greater than zero, then files older than that many days will be deleted during log rolling.(default 0)
-    daysToKeep?: number
+    daysToKeep?: number,
+    ...
   };
 
   declare export type GELFAppender = {
@@ -160,7 +161,8 @@ declare module "log4js" {
     hostname?: string,
     facility?: string,
     // fields to be added to each log message; custom fields must start with an underscore.
-    customFields?: { [field: string]: any }
+    customFields?: { [field: string]: any, ... },
+    ...
   };
 
   declare export type HipchatAppender = {
@@ -178,7 +180,8 @@ declare module "log4js" {
     // (defaults to only throwing errors) - implement this function if you want intercept the responses from hipchat
     hipchat_response_callback?: (err: Error, response: any) => any,
     // (defaults to messagePassThroughLayout)
-    layout?: Layout
+    layout?: Layout,
+    ...
   };
 
   declare export type LogFacesHTTPAppender = {
@@ -188,7 +191,8 @@ declare module "log4js" {
     // (defaults to empty string) - used to identify your application’s logs
     application?: string,
     // (defaults to 5000ms) - the timeout for the HTTP request.
-    timeout?: number
+    timeout?: number,
+    ...
   };
 
   declare export type LogFacesUDPAppender = {
@@ -198,7 +202,8 @@ declare module "log4js" {
     // (defaults to 55201) - port the logFaces receiver is listening on
     port?: number,
     // (defaults to empty string) - used to identify your application’s logs
-    application?: string
+    application?: string,
+    ...
   };
 
   declare export type LogglyAppender = {
@@ -208,7 +213,8 @@ declare module "log4js" {
     // your subdomain
     subdomain: string,
     // tags to include in every log message
-    tags?: string[]
+    tags?: string[],
+    ...
   };
 
   declare export type LogLevelFilterAppender = {
@@ -218,7 +224,8 @@ declare module "log4js" {
     // the minimum level of event to allow through the filter
     level: string,
     // (defaults to FATAL) - the maximum level of event to allow through the filter
-    maxLevel?: string
+    maxLevel?: string,
+    ...
   };
 
   declare export type LogstashUDPAppender = {
@@ -232,9 +239,10 @@ declare module "log4js" {
     // used for the type field of the logstash data if logType is not defined
     category?: string,
     // extra fields to log with each event
-    fields?: { [fieldname: string]: any },
+    fields?: { [fieldname: string]: any, ... },
     // (defaults to dummyLayout) used for the message field of the logstash data
-    layout?: Layout
+    layout?: Layout,
+    ...
   };
 
   declare export type MailgunAppender = {
@@ -247,7 +255,8 @@ declare module "log4js" {
     to: string,
     subject: string,
     // (defaults to basicLayout)
-    layout?: Layout
+    layout?: Layout,
+    ...
   };
 
   declare export type MultiFileAppender = {
@@ -257,7 +266,8 @@ declare module "log4js" {
     // the value to use to split files (see below).
     property: string,
     // the suffix for the generated log filename.
-    extension: string
+    extension: string,
+    ...
   };
 
   declare export type MultiprocessAppender = {
@@ -269,7 +279,8 @@ declare module "log4js" {
     // (defaults to 5000) - the port to listen on, or send to
     loggerPort?: number,
     // (defaults to localhost) - the host/IP address to listen on, or send to
-    loggerHost?: string
+    loggerHost?: string,
+    ...
   };
 
   declare export type RedisAppender = {
@@ -283,7 +294,8 @@ declare module "log4js" {
     // the redis channel that log events will be published to
     channel: string,
     // (defaults to messagePassThroughLayout) - the layout to use for log events.
-    layout?: Layout
+    layout?: Layout,
+    ...
   };
 
   declare export type SlackAppender = {
@@ -297,12 +309,11 @@ declare module "log4js" {
     // the username to display with the message
     username: string,
     // (defaults to basicLayout) - the layout to use for the message.
-    layout?: Layout
+    layout?: Layout,
+    ...
   };
 
-  declare export type RecordingAppender = {
-    type: "recording"
-  };
+  declare export type RecordingAppender = { type: "recording", ... };
 
   declare export type SmtpAppender = {
     type: "smtp",
@@ -315,17 +326,20 @@ declare module "log4js" {
       // authentication details
       auth?: {
         user: string,
-        pass: string
-      }
+        pass: string,
+        ...
+      },
+      ...
     },
     // (if not present will use SMTP) - see nodemailer docs for transport options
     transport?:
       | {
-          // (defaults to smtp) - the nodemailer transport plugin to use
-          plugin?: string,
-          // configuration for the transport plugin
-          options?: any
-        }
+      // (defaults to smtp) - the nodemailer transport plugin to use
+      plugin?: string,
+      // configuration for the transport plugin
+      options?: any,
+      ...
+    }
       | string,
     // send logs as email attachment
     attachment?: {
@@ -334,7 +348,8 @@ declare module "log4js" {
       // (defaults to See logs as attachment) - message to put in body of email
       message: string,
       // (defaults to default.log) - attachment filename
-      filename: string
+      filename: string,
+      ...
     },
     // integer(defaults to 0) - batch emails and send in one email every sendInterval seconds, if 0 then every log message will send an email.
     sendInterval?: number,
@@ -349,24 +364,28 @@ declare module "log4js" {
     // (defaults to false) - send the email as HTML instead of plain text
     html?: boolean,
     // (defaults to basicLayout)
-    layout?: Layout
+    layout?: Layout,
+    ...
   };
 
   declare export type StandardErrorAppender = {
     type: "stderr",
     // (defaults to colouredLayout)
-    layout?: Layout
+    layout?: Layout,
+    ...
   };
 
   declare export type StandardOutputAppender = {
     type: "stdout",
     // (defaults to colouredLayout)
-    layout?: Layout
+    layout?: Layout,
+    ...
   };
 
   declare export type CustomAppender = {
+    [key: string]: any,
     type: string,
-    [key: string]: any
+    ...
   };
 
   declare export type Appender =
@@ -393,20 +412,24 @@ declare module "log4js" {
     | StandardOutputAppender
     | CustomAppender;
 
-  declare export type Levels = {
-    [index: string]: {
-      value: number,
-      colour: string
-    }
-  };
+  declare export type Levels = { [index: string]: {
+    value: number,
+    colour: string,
+    ...
+  }, ... };
 
   declare export type Configuration = {
-    appenders: { [name: string]: Appender },
-    categories: { [name: string]: { appenders: string[], level: string } },
+    appenders: { [name: string]: Appender, ... },
+    categories: { [name: string]: {
+      appenders: string[],
+      level: string,
+      ...
+    }, ... },
     pm2?: boolean,
     pm2InstanceVar?: string,
     levels?: Levels,
-    disableClustering?: boolean
+    disableClustering?: boolean,
+    ...
   };
 
   declare export interface Logger {
@@ -446,22 +469,24 @@ declare module "log4js" {
 
   declare module.exports: {
     getLogger(category?: string): Logger,
-
     configure(filename: string): void,
     configure(config: Configuration): void,
-
     addLayout(
       name: string,
       config: (a: any) => (logEvent: LoggingEvent) => string
     ): void,
-
+    // express.Handler;
     connectLogger(
       logger: Logger,
-      options: { format?: string, level?: string, nolog?: any }
-    ): any, // express.Handler;
-
+      options: {
+        format?: string,
+        level?: string,
+        nolog?: any,
+        ...
+      }
+    ): any,
     levels(): Levels,
-
-    shutdown(cb?: (error: Error) => void): void | null
+    shutdown(cb?: (error: Error) => void): void | null,
+    ...
   };
 }

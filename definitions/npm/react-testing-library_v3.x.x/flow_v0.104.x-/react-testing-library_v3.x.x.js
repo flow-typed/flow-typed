@@ -4,7 +4,8 @@ declare module 'react-testing-library' {
   declare type TextMatchOptions = {
     exact?: boolean,
     trim?: boolean,
-    collapseWhitespace?: boolean
+    collapseWhitespace?: boolean,
+    ...
   };
 
   declare type RenderResult = {
@@ -17,26 +18,26 @@ declare module 'react-testing-library' {
     queryByPlaceholderText: (text: TextMatch, options?: TextMatchOptions) => ?HTMLElement,
     getByPlaceholderText: (text: TextMatch, options?: TextMatchOptions) => HTMLElement,
     queryByLabelText: (text: TextMatch, options?: TextMatchOptions) => ?HTMLElement,
-    getByLabelText: (text: TextMatch, options?: { selector?: string } & TextMatchOptions) => HTMLElement,
+    getByLabelText: (text: TextMatch, options?: { selector?: string, ... } & TextMatchOptions) => HTMLElement,
     queryByAltText: (text: TextMatch, options?: TextMatchOptions) => ?HTMLElement,
-    getByAltText: (text: TextMatch, options?: TextMatchOptions) => HTMLElement
+    getByAltText: (text: TextMatch, options?: TextMatchOptions) => HTMLElement,
+    ...
   };
 
   declare export function render(
     ui: React$Element<*>,
-    options?: { container: HTMLElement }
+    options?: { container: HTMLElement, ... }
   ): RenderResult;
 
   // copy from react-dom/test-utils
-  declare export var Simulate: {
-    [eventName: string]: (element: Element, eventData?: Object) => void,
-  };
+  declare export var Simulate: { [eventName: string]: (element: Element, eventData?: Object) => void, ... };
 
   declare export function wait(
     callback?: () => void,
     options?: {
       timeout?: number,
-      interval?: number
+      interval?: number,
+      ...
     },
   ): Promise<void>;
 
@@ -45,7 +46,8 @@ declare module 'react-testing-library' {
     options?: {
       container?: HTMLElement,
       timeout?: number,
-      mutationObserverOptions?: MutationObserverInit
+      mutationObserverOptions?: MutationObserverInit,
+      ...
     },
   ): Promise<T | void>
 
@@ -53,7 +55,6 @@ declare module 'react-testing-library' {
 
   declare export var fireEvent: {
     (element: HTMLElement, event: Event): boolean,
-
     copy: FireEvent<Event$Init>,
     cut: FireEvent<Event$Init>,
     paste: FireEvent<Event$Init>,
@@ -122,7 +123,8 @@ declare module 'react-testing-library' {
     animationStart: FireEvent<Event$Init>,
     animationEnd: FireEvent<Event$Init>,
     animationIteration: FireEvent<Event$Init>,
-    transitionEnd: FireEvent<Event$Init>
+    transitionEnd: FireEvent<Event$Init>,
+    ...
   };
 
   declare export function renderIntoDocument(ui: React$Element<*>): RenderResult;

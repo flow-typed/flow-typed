@@ -387,7 +387,7 @@ customer.countBranches({ scope: 'baz' }).then((result: number) => { });
 // query on associations
 
 WarehouseProducts.get(warehouse).then((products: Array<ProductInstance>) => {})
-WarehouseProducts.get([warehouse], {scope: 'baz'}).then((products: {[id: number]: ProductInstance}) => {})
+WarehouseProducts.get([warehouse], {scope: 'baz'}).then((products: { [id: number]: ProductInstance, ... }) => {})
 WarehouseProducts.count(warehouse).then((count: number) => {})
 WarehouseProducts.count(warehouse, {scope: 'baz'}).then((count: number) => {})
 WarehouseProducts.has(warehouse, [product, 2]).then((result: boolean) => {})
@@ -423,7 +423,7 @@ WarehouseBranches.create(warehouse, {
 
 ProductBarcode.get(product).then((barcode: BarcodeInstance) => {})
 ProductBarcode.get(product).then((barcode: BarcodeInstance) => {})
-ProductBarcode.get([product]).then((barcodes: {[id: number]: BarcodeInstance}) => {})
+ProductBarcode.get([product]).then((barcodes: { [id: number]: BarcodeInstance, ... }) => {})
 ProductBarcode.get([product], {scope: 'boo'})
 ProductBarcode.set(product, barcode)
 ProductBarcode.set(product, 1, {scope: 'bar'})
@@ -439,7 +439,7 @@ ProductBarcode.create(product, {
 })
 
 ProductWarehouse.get(product).then((warehouse: WarehouseInstance) => {})
-ProductWarehouse.get([product]).then((warehouses: {[id: number]: WarehouseInstance}) => {})
+ProductWarehouse.get([product]).then((warehouses: { [id: number]: WarehouseInstance, ... }) => {})
 ProductWarehouse.get([product], {scope: 'boo'})
 ProductWarehouse.set(product, warehouse)
 ProductWarehouse.set(product, 1, {scope: 'bar'})
@@ -462,9 +462,10 @@ Branch.findAll({include: [{association: BranchWarehouses}]}).then((branch: Array
 Product.findOne({include: [{association: ProductWarehouse}]}).then((product: ?Product) => {})
 
 type ProductAttributes = {
-  id?: number;
-  name?: string;
-  price?: number;
+  id?: number,
+  name?: string,
+  price?: number,
+  ...
 };
 
 declare class ProductInstance extends Model<ProductAttributes> {
@@ -484,9 +485,10 @@ declare class ProductInstance extends Model<ProductAttributes> {
 };
 
 type BarcodeAttributes = {
-  id?: number;
-  code?: string;
-  dateIssued?: Date;
+  id?: number,
+  code?: string,
+  dateIssued?: Date,
+  ...
 };
 
 declare class BarcodeInstance extends Model<BarcodeAttributes> {
@@ -500,9 +502,10 @@ declare class BarcodeInstance extends Model<BarcodeAttributes> {
 };
 
 type WarehouseAttributes = {
-  id?: number;
-  address?: string;
-  capacity?: number;
+  id?: number,
+  address?: string,
+  capacity?: number,
+  ...
 };
 
 declare class WarehouseInstance extends Model<WarehouseAttributes> {
@@ -535,9 +538,10 @@ declare class WarehouseInstance extends Model<WarehouseAttributes> {
 };
 
 type BranchAttributes = {
-  id?: number;
-  address?: string;
-  rank?: number;
+  id?: number,
+  address?: string,
+  rank?: number,
+  ...
 };
 
 declare class BranchInstance extends Model<BranchAttributes> {
@@ -570,18 +574,17 @@ declare class BranchInstance extends Model<BranchAttributes> {
   countCustomers: BelongsToManyCount;
 };
 
-type WarehouseBranchAttributes = {
-  distance?: number;
-};
+type WarehouseBranchAttributes = { distance?: number, ... };
 
 declare class WarehouseBranchInstance extends Model<WarehouseBranchAttributes> {
   distance?: number;
 };
 
 type CustomerAttributes = {
-  id?: number;
-  fullname?: string;
-  credit?: number;
+  id?: number,
+  fullname?: string,
+  credit?: number,
+  ...
 };
 
 declare class CustomerInstance extends Model<CustomerAttributes> {

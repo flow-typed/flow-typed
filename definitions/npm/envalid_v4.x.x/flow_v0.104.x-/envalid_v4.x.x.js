@@ -34,16 +34,15 @@ declare module "envalid" {
   }
 
   declare type CleanEnv = {
-    /** true if NODE_ENV === 'development' */
-    isDevelopment: boolean;
-    isDev: boolean;
-
-    /** true if NODE_ENV === 'test' */
-    isTest: boolean;
-
-    /** true if NODE_ENV === 'production' */
-    isProduction: boolean;
-    isProd: boolean;
+   /** true if NODE_ENV === 'development' */
+   isDevelopment: boolean,
+   isDev: boolean,
+   /** true if NODE_ENV === 'test' */
+   isTest: boolean,
+   /** true if NODE_ENV === 'production' */
+   isProduction: boolean,
+   isProd: boolean,
+   ...
   }
 
   declare interface CleanOptions {
@@ -57,7 +56,7 @@ declare module "envalid" {
      * Pass in a function to override the default error handling and console output.
      * See lib/reporter.js for the default implementation.
      */
-    reporter?: (errors: { [key: string]: Error }, env: any) => void;
+    reporter?: (errors: { [key: string]: Error, ... }, env: any) => void;
 
     /**
      * A function used to transform the cleaned environment object before it is returned from cleanEnv.
@@ -72,9 +71,7 @@ declare module "envalid" {
     dotEnvPath?: string;
   }
 
-  declare type StrictCleanOptions = CleanOptions & {
-    strict: true;
-  }
+  declare type StrictCleanOptions = CleanOptions & { strict: true, ... }
 
   declare type ExtractValidatorSpec = <V>(V) => ValidatorSpec<V>
 

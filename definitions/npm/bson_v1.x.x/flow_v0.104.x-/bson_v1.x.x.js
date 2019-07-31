@@ -81,19 +81,28 @@ declare class bson$Binary {
 
 declare class bson$Code {
   constructor(code: string | Function, scope?: Object): this;
-  toJSON(): { scope: ?Object, code: string | Function };
+  toJSON(): {
+    scope: ?Object,
+    code: string | Function,
+    ...
+  };
 }
 
 declare class bson$DBRef {
   constructor(namespace: string, oid: bson$ObjectId, db?: string): this;
-  toJSON(): { $ref: string, $id: bson$ObjectId, $db: string };
+  toJSON(): {
+    $ref: string,
+    $id: bson$ObjectId,
+    $db: string,
+    ...
+  };
 }
 
 declare class bson$Decimal128 {
   constructor(bytes: Buffer): this;
   static fromString(string: string): bson$Decimal128;
   toString(): string;
-  toJSON(): { $numberDecimal: string };
+  toJSON(): { $numberDecimal: string, ... };
 }
 
 declare class bson$Double {

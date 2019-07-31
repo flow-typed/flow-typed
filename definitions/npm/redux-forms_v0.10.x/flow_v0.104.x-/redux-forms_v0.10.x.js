@@ -14,14 +14,12 @@ declare type $npm$ReduxForms$Field = {|
 |};
 
 declare type $npm$ReduxForms$Form = {|
-  +fields: { +[key: string]: $npm$ReduxForms$Field },
-  +arrays: { +[key: string]: number },
+  +fields: { +[key: string]: $npm$ReduxForms$Field, ... },
+  +arrays: { +[key: string]: number, ... },
   +submitting: boolean,
 |};
 
-declare type $npm$ReduxForms$State = {
-  +[form: string]: $npm$ReduxForms$Form,
-};
+declare type $npm$ReduxForms$State = { +[form: string]: $npm$ReduxForms$Form, ... };
 
 /* =========== */
 /* = ACTIONS = */
@@ -249,11 +247,9 @@ declare module 'redux-forms/actions' {
 declare module 'redux-forms/selectors' {
   declare type Error = string | null;
 
-  declare export type Values = { +[key: string]: $npm$ReduxForms$Value | $npm$ReduxForms$Value[] | Values[] };
-  declare export type Errors = { +[key: string]: Error | Error[] | Errors[] };
-  declare export type ReduxFormsState = {
-    +reduxForms: $npm$ReduxForms$State,
-  };
+  declare export type Values = { +[key: string]: $npm$ReduxForms$Value | $npm$ReduxForms$Value[] | Values[], ... };
+  declare export type Errors = { +[key: string]: Error | Error[] | Errors[], ... };
+  declare export type ReduxFormsState = { +reduxForms: $npm$ReduxForms$State, ... };
 
   declare export function valueSelector(name: string, state: ReduxFormsState): Values;
   declare export function errorSelector(name: string, state: ReduxFormsState): Errors;

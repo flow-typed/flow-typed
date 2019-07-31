@@ -1,5 +1,5 @@
 declare class vcf$vCardProperty {
-  constructor(field: string, value: string, params: ?{}): vcf$vCardProperty;
+  constructor(field: string, value: string, params: ?{...}): vcf$vCardProperty;
   static fromJSON(data: Array<string | string[]>): vcf$vCardProperty;
   is(type: string): boolean;
   isEmpty(): boolean;
@@ -27,8 +27,8 @@ declare module "vcf" {
     static format(card: vCard, version: string): string;
     static Property: typeof vcf$vCardProperty;
     get(key: string): vcf$vCardProperty | Array<vcf$vCardProperty>;
-    set(key: string, value: string, params?: {}): this;
-    add(key: string, value: string, params?: {}): this;
+    set(key: string, value: string, params?: {...}): this;
+    add(key: string, value: string, params?: {...}): this;
     addProperty(prop: vcf$vCardProperty): this;
     parse(value: string): vCard;
     toString(version?: string, charset?: string): string;

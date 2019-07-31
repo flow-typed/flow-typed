@@ -2,12 +2,14 @@ declare module "flatbuffers" {
   declare type Offset = number;
   declare type Table = {
     bb: ByteBuffer,
-    bb_pos: number
+    bb_pos: number,
+    ...
   };
   declare type EncodingValue = 1 | 2;
   declare var Encoding: {
     UTF8_BYTES: 1,
-    UTF16_STRING: 2
+    UTF16_STRING: 2,
+    ...
   };
   declare class Long {
     constructor(low: number, high: number): void;
@@ -86,6 +88,7 @@ declare module "flatbuffers" {
   declare var flatbuffers: {
     Long: Class<Long>,
     Builder: Class<Builder>,
-    ByteBuffer: Class<ByteBuffer>
+    ByteBuffer: Class<ByteBuffer>,
+    ...
   };
 }

@@ -17,35 +17,35 @@ import styled, {
 
 describe('styled builtins', () => {
   it('should map to correct element', () => {
-    const Span1: StyledComponent<{}, {}, HTMLSpanElement> = styled.span``
-    const Div1: StyledComponent<{}, {}, HTMLDivElement> = styled.div``
+    const Span1: StyledComponent<{...}, {...}, HTMLSpanElement> = styled.span``
+    const Div1: StyledComponent<{...}, {...}, HTMLDivElement> = styled.div``
 
-    const Span2: StyledComponent<{}, {}, HTMLSpanElement> = styled('span')``
-    const Div2: StyledComponent<{}, {}, HTMLDivElement> = styled('div')``
+    const Span2: StyledComponent<{...}, {...}, HTMLSpanElement> = styled('span')``
+    const Div2: StyledComponent<{...}, {...}, HTMLDivElement> = styled('div')``
   })
 
   it('should not map to incorrect element', () => {
     // $ExpectError - should be HTMLSpanElement
-    const Span1: StyledComponent<{}, {}, HTMLDivElement> = styled.span``
+    const Span1: StyledComponent<{...}, {...}, HTMLDivElement> = styled.span``
 
     // $ExpectError - should be HTMLDivElement
-    const Div1: StyledComponent<{}, {}, HTMLSpanElement> = styled.div``
+    const Div1: StyledComponent<{...}, {...}, HTMLSpanElement> = styled.div``
 
     // $ExpectError - Should be HTMLSpanElement
-    const Span2: StyledComponent<{}, {}, HTMLDivElement> = styled('span')``
+    const Span2: StyledComponent<{...}, {...}, HTMLDivElement> = styled('span')``
 
     // $ExpectError - should be HTMLDivElement
-    const Div2: StyledComponent<{}, {}, HTMLSpanElement> = styled('div')``
+    const Div2: StyledComponent<{...}, {...}, HTMLSpanElement> = styled('div')``
   })
 
   it('should render as the correct element', () => {
-    const Span: StyledComponent<{}, {}, HTMLSpanElement> = styled.span``
-    const Div: StyledComponent<{}, {}, HTMLDivElement> = styled.div``
+    const Span: StyledComponent<{...}, {...}, HTMLSpanElement> = styled.span``
+    const Div: StyledComponent<{...}, {...}, HTMLDivElement> = styled.div``
 
-    const span1: React.Element<React.AbstractComponent<{}, HTMLSpanElement>> = <Span />
+    const span1: React.Element<React.AbstractComponent<{...}, HTMLSpanElement>> = <Span />
 
     // $ExpectError - should be HTMLDivElement
-    const div1: React.Element<React.AbstractComponent<{}, HTMLSpanElement>> = <Div />
+    const div1: React.Element<React.AbstractComponent<{...}, HTMLSpanElement>> = <Div />
   })
 
 
@@ -67,13 +67,17 @@ describe('styled builtins', () => {
   })
 
   it('should accept style props', () => {
-    const Span: StyledComponent<{color: string}, *, *> = styled.span`
+    const Span: StyledComponent<{ color: string, ... }, *, *> = styled.span`
       color: ${props => props.color};
     `
 
     const span1 = <Span color="maroon" />
 
-    const Div: StyledComponent<{color: string, background?: string}, *, *> = styled.div`
+    const Div: StyledComponent<{
+      color: string,
+      background?: string,
+      ...
+    }, *, *> = styled.div`
       color: ${props => props.color};
     `
 
@@ -97,7 +101,7 @@ describe('styled builtins', () => {
   })
 
   it('should validate template props', () => {
-    const Span: StyledComponent<{color: string}, *, *> = styled.span`
+    const Span: StyledComponent<{ color: string, ... }, *, *> = styled.span`
       color: ${
       // $ExpectError - background is not in props
       props => props.background
@@ -107,20 +111,20 @@ describe('styled builtins', () => {
 
   it('should reject wrong interpolation output', () => {
     // $ExpectError - shouldn't return undefined from interpolation function
-    const Span: StyledComponent<{color?: string}, *, *> = styled.span`
+    const Span: StyledComponent<{ color?: string, ... }, *, *> = styled.span`
       color: ${props => props.color};
     `
   })
 
   it('should inject theme', () => {
-    const Span: StyledComponent<{color?: string}, {accent: string}, *> = styled.span`
+    const Span: StyledComponent<{ color?: string, ... }, { accent: string, ... }, *> = styled.span`
       color: ${props => props.color || props.theme.accent};
     `
   })
 
   it('should validate theme', () => {
     // $ExpectError - oops, someone meant accent, not primary
-    const Span: StyledComponent<{color?: string}, {accent: string}, *> = styled.span`
+    const Span: StyledComponent<{ color?: string, ... }, { accent: string, ... }, *> = styled.span`
       color: ${props => props.color || props.theme.primary};
     `
   })
@@ -195,7 +199,7 @@ describe('css generator', () => {
   })
 
   it('doen\'t accept any component in interpolations', () => {
-    class ClassComp extends React.Component<{}> {
+    class ClassComp extends React.Component<{...}> {
       render() {
         return null
       }
@@ -251,13 +255,13 @@ describe('keyframes generator', () => {
 
 describe('refs', () => {
   it('correctly detects the component type', () => {
-    const ref1: {current: HTMLInputElement | null} = React.createRef()
+    const ref1: { current: HTMLInputElement | null, ... } = React.createRef()
     const Input = styled.input``
     const input = <Input ref={ref1} />
   })
 
   it('errors on wrong component type', () => {
-    const ref1: {current: HTMLInputElement | null} = React.createRef()
+    const ref1: { current: HTMLInputElement | null, ... } = React.createRef()
     const Section = styled.section``
     // $ExpectError - Complain about HTMLElement not being compatible wiht HTMLInputElement
     const section = <Section ref={ref1} />
@@ -277,13 +281,12 @@ describe('refs', () => {
 })
 
 describe('withTheme', () => {
-  type Theme = {
-    accent: string
-  }
+  type Theme = { accent: string, ... }
 
   type Props = {
     ownProp : string,
-    theme : Theme
+    theme : Theme,
+    ...
   }
 
   // Explicit annotation until we see what happens to https://github.com/facebook/flow/issues/7774
@@ -332,9 +335,7 @@ describe('wrapping components', () => {
     color?: string
   |}
 
-  type Theme = {
-    accent: string
-  }
+  type Theme = { accent: string, ... }
 
   const Hello: React.ComponentType<Props> = (p: Props) =>
     <div>Hello {p.name}</div>

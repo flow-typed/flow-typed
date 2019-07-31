@@ -6,7 +6,8 @@ declare module 'react-truncate' {
     ellipsis?: React$Node,
     trimWhitespace?: boolean,
     children: React$Node,
-    onTruncate?: (isTruncated: boolean) => void
+    onTruncate?: (isTruncated: boolean) => void,
+    ...
   };
 
   declare export default class Truncate extends React$Component<TruncateProps> {}

@@ -71,9 +71,7 @@ declare module 'pell' {
     classes?: ClassNames,
   |};
 
-  declare type Element = HTMLElement & {
-    content: HTMLElement,
-  };
+  declare type Element = HTMLElement & { content: HTMLElement, ... };
 
   /**
    * Execute a document command, see reference:

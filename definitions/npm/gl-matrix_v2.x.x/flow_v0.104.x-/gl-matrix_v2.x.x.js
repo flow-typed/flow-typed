@@ -83,7 +83,8 @@ declare module "gl-matrix" {
     transformMat4(out: Vec2, a: Vec2, m: Mat4): Vec2,
     str(a: Vec2): string,
     exactEquals(a: Vec2, b: Vec2): boolean,
-    equals(a: Vec2, b: Vec2): boolean
+    equals(a: Vec2, b: Vec2): boolean,
+    ...
   };
 
   declare var vec3: {
@@ -140,7 +141,8 @@ declare module "gl-matrix" {
     angle(a: Vec3, b: Vec3): number,
     str(a: Vec3): string,
     exactEquals(a: Vec3, b: Vec3): boolean,
-    equals(a: Vec3, b: Vec3): boolean
+    equals(a: Vec3, b: Vec3): boolean,
+    ...
   };
 
   declare var vec4: {
@@ -181,7 +183,8 @@ declare module "gl-matrix" {
     transformQuat(out: Vec4, a: Vec4, q: Quat): Vec4,
     str(a: Vec4): string,
     exactEquals(a: Vec4, b: Vec4): boolean,
-    equals(a: Vec4, b: Vec4): boolean
+    equals(a: Vec4, b: Vec4): boolean,
+    ...
   };
 
   declare var quat: {
@@ -217,7 +220,8 @@ declare module "gl-matrix" {
     fromMat3(out: Quat, m: Mat3): Quat,
     str(a: Quat): string,
     exactEquals(a: Quat, b: Quat): boolean,
-    equals(a: Quat, b: Quat): boolean
+    equals(a: Quat, b: Quat): boolean,
+    ...
   };
 
   declare var mat2: {
@@ -246,7 +250,8 @@ declare module "gl-matrix" {
     exactEquals(a: Mat2, b: Mat2): boolean,
     equals(a: Mat2, b: Mat2): boolean,
     multiplyScalar(out: Mat2, a: Mat2, b: number): Mat2,
-    multiplyScalarAndAdd(out: Mat2, a: Mat2, b: Mat2, scale: number): Mat2
+    multiplyScalarAndAdd(out: Mat2, a: Mat2, b: Mat2, scale: number): Mat2,
+    ...
   };
 
   declare var mat2d: {
@@ -289,7 +294,8 @@ declare module "gl-matrix" {
     multiplyScalar(out: Mat2d, a: Mat2d, b: number): Mat2d,
     multiplyScalarAndAdd(out: Mat2d, a: Mat2d, b: Mat2d, scale: number): Mat2d,
     exactEquals(a: Mat2d, b: Mat2d): boolean,
-    equals(a: Mat2d, b: Mat2d): boolean
+    equals(a: Mat2d, b: Mat2d): boolean,
+    ...
   };
 
   declare var mat3: {
@@ -344,7 +350,8 @@ declare module "gl-matrix" {
     multiplyScalar(out: Mat3, a: Mat3, b: number): Mat3,
     multiplyScalarAndAdd(out: Mat3, a: Mat3, b: Mat3, scale: number): Mat3,
     exactEquals(a: Mat3, b: Mat3): boolean,
-    equals(a: Mat3, b: Mat3): boolean
+    equals(a: Mat3, b: Mat3): boolean,
+    ...
   };
 
   declare var mat4: {
@@ -432,7 +439,8 @@ declare module "gl-matrix" {
         upDegrees: number,
         downDegrees: number,
         leftDegrees: number,
-        rightDegrees: number
+        rightDegrees: number,
+        ...
       },
       near: number,
       far: number
@@ -457,7 +465,6 @@ declare module "gl-matrix" {
     multiplyScalarAndAdd(out: Mat4, a: Mat4, b: Mat4, scale: number): Mat4,
     exactEquals(a: Mat4, b: Mat4): boolean,
     equals(a: Mat4, b: Mat4): boolean,
-
     transpose(out: Mat4, a: Mat4): Mat4,
     invert(out: Mat4, a: Mat4): Mat4,
     adjoint(out: Mat4, a: Mat4): Mat4,
@@ -467,7 +474,6 @@ declare module "gl-matrix" {
     rotateX(out: Mat4, a: Mat4, rad: number): Mat4,
     rotateY(out: Mat4, a: Mat4, rad: number): Mat4,
     rotateZ(out: Mat4, a: Mat4, rad: number): Mat4,
-
     SIMD: {
       transpose(out: Mat4, a: Mat4): Mat4,
       invert(out: Mat4, a: Mat4): Mat4,
@@ -477,9 +483,9 @@ declare module "gl-matrix" {
       scale(out: Mat4, a: Mat4, v: Vec3): Mat4,
       rotateX(out: Mat4, a: Mat4, rad: number): Mat4,
       rotateY(out: Mat4, a: Mat4, rad: number): Mat4,
-      rotateZ(out: Mat4, a: Mat4, rad: number): Mat4
+      rotateZ(out: Mat4, a: Mat4, rad: number): Mat4,
+      ...
     },
-
     scalar: {
       transpose(out: Mat4, a: Mat4): Mat4,
       invert(out: Mat4, a: Mat4): Mat4,
@@ -489,7 +495,9 @@ declare module "gl-matrix" {
       scale(out: Mat4, a: Mat4, v: Vec3): Mat4,
       rotateX(out: Mat4, a: Mat4, rad: number): Mat4,
       rotateY(out: Mat4, a: Mat4, rad: number): Mat4,
-      rotateZ(out: Mat4, a: Mat4, rad: number): Mat4
-    }
+      rotateZ(out: Mat4, a: Mat4, rad: number): Mat4,
+      ...
+    },
+    ...
   };
 }

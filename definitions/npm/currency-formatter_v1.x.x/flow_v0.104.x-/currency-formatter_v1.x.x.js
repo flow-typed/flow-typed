@@ -10,6 +10,7 @@ declare type $npm$currencyFormatter$Currency = {
   symbol: string,
   symbolOnLeft: boolean,
   thousandsSeparator: string,
+  ...
 };
 
 declare module 'currency-formatter' {
@@ -20,10 +21,12 @@ declare module 'currency-formatter' {
       neg: string,
       pos: string,
       zero: string,
+      ...
     },
     precision?: number,
     symbol?: string,
     thousand?: string,
+    ...
   };
 
   declare var currencies: Array<$npm$currencyFormatter$Currency>;

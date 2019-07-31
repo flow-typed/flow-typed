@@ -13,7 +13,8 @@ type sockjs$SessionIdGenerator = () => string;
 type sockjs$SockJSOptions = {
   server?: string,
   transports?: sockjs$Transport | sockjs$Transport[],
-  sessionId?: number | sockjs$SessionIdGenerator
+  sessionId?: number | sockjs$SessionIdGenerator,
+  ...
 };
 
 declare class sockjs$SockJS extends WebSocket {

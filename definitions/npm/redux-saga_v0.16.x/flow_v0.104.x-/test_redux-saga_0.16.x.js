@@ -62,7 +62,8 @@ const sagaMonitor: SagaMonitor = {
 
 declare type NodeCallback<R> = {
   (err: Error): void,
-  (err: null | void | false, result: R): void
+  (err: null | void | false, result: R): void,
+  ...
 };
 
 function* s0(): Saga<number> {
@@ -471,7 +472,7 @@ function callTest() {
   (c8.CALL.context: null);
 
   // $ExpectError
-  (c1.CALL.context: {});
+  (c1.CALL.context: {...});
 }
 
 function callNormalFunctionTest() {
@@ -540,7 +541,7 @@ function callNormalFunctionTest() {
   (c8.CALL.context: null);
 
   // $ExpectError
-  (c1.CALL.context: {});
+  (c1.CALL.context: {...});
 }
 
 function callSagaFunctionTest() {
@@ -609,7 +610,7 @@ function callSagaFunctionTest() {
   (c8.CALL.context: null);
 
   // $ExpectError
-  (c1.CALL.context: {});
+  (c1.CALL.context: {...});
 }
 
 function contextCallTest() {

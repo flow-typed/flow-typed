@@ -22,18 +22,17 @@ declare class BeeQueue$Job extends events$EventEmitter {
 type BeeQueue$Page = {
   end?: number,
   size?: number,
-  start?: number
+  start?: number,
+  ...
 };
 type BeeQueue$Handler = (
   job: BeeQueue$Job,
   done: (err?: ?Error, result?: mixed) => void
 ) => ?Promise<*>;
-type BeeQueue$Health = {
-  [key: string]: number
-};
+type BeeQueue$Health = { [key: string]: number, ... };
 
 declare class BeeQueue$Queue extends events$EventEmitter {
-  constructor(name: string, settings?: {}): this,
+  constructor(name: string, settings?: {...}): this,
   close(timeout: number): Promise<*>,
   close(timeout: number, callback: (err: ?Error) => void): void,
   createJob(payload: *): BeeQueue$Job,
@@ -66,7 +65,7 @@ declare class BeeQueue$Queue extends events$EventEmitter {
 	ready(cb: Function): void,
   removeJob(jobId: number): Promise<*>,
   removeJob(jobId: number, callback: (err: ?Error) => void): void,
-  settings: {}
+  settings: {...}
 }
 
 declare module "bee-queue" {

@@ -16,7 +16,11 @@ declare module 'discord.js' {
   }
 
   declare class BaseOpus {
-    constructor(options?: { fec: boolean, plp: number }): this
+    constructor(options?: {
+      fec: boolean,
+      plp: number,
+      ...
+    }): this
   }
 
   declare export class Channel {
@@ -154,7 +158,13 @@ declare module 'discord.js' {
     addFriend(user?: UserResolvable): Promise<User>;
     createGroupDM(recipients: GroupDMRecipientOptions[]): Promise<GroupDMChannel>;
     createGuild(name: string, region: string, icon?: BufferResolvable | Base64Resolvable): Promise<Guild>;
-    fetchMentions(options?: { limit?: number, roles?: boolean, everyone?: boolean, guild?: Guild | Snowflake }): Promise<Message[]>;
+    fetchMentions(options?: {
+      limit?: number,
+      roles?: boolean,
+      everyone?: boolean,
+      guild?: Guild | Snowflake,
+      ...
+    }): Promise<Message[]>;
     removeFriend(user?: UserResolvable): Promise<User>;
     setAFK(afk: boolean): Promise<ClientUser>;
     setAvatar(avatar: BufferResolvable | Base64Resolvable): Promise<ClientUser>;
@@ -175,7 +185,12 @@ declare module 'discord.js' {
     developerMode: boolean;
     enableTTSCommand: boolean;
     explicitContentFilter: 'DISABLED' | 'NON_FRIENDS' | 'FRIENDS_AND_NON_FRIENDS' | string;
-    friendsSources: { all: boolean, mutualGuilds: boolean, mutualFriends: boolean };
+    friendsSources: {
+      all: boolean,
+      mutualGuilds: boolean,
+      mutualFriends: boolean,
+      ...
+    };
     guildsPositions: Snowflake[];
     inlineAttachmentMedia: boolean;
     inlineEmbedMedia: boolean;
@@ -743,38 +758,43 @@ declare module 'discord.js' {
     queue: Object[];
     restManager: Object;
     handle(): void;
-    push(request: {}): void
+    push(request: {...}): void
   }
 
   declare export class RichEmbed {
     constructor(data?: RichEmbedOptions): this;
     author: {
       name: string,
-        url?: string,
-        icon_url?: string
+      url?: string,
+      icon_url?: string,
+      ...
     };
     color: number | string;
     description: string;
     fields: {
       name: string,
-        value: string,
-        inline?: boolean
+      value: string,
+      inline?: boolean,
+      ...
     }[];
     file: string | FileOptions;
     footer: {
       text?: string,
-        icon_url?: string
+      icon_url?: string,
+      ...
     };
     image: {
       url: string,
-        proxy_url?: string,
-        height?: number,
-        width?: number
+      proxy_url?: string,
+      height?: number,
+      width?: number,
+      ...
     };
     thumbnail: {
       url: string,
-        height?: number,
-        width?: number
+      height?: number,
+      width?: number,
+      ...
     };
     timestamp: Date;
     title: string;
@@ -846,7 +866,7 @@ declare module 'discord.js' {
     timeDifference: number;
     execute(item: any[]): Promise<Object | Error>;
     handle(): void;
-    push(request: {}): void
+    push(request: {...}): void
   }
 
   declare export class Shard {
@@ -875,7 +895,8 @@ declare module 'discord.js' {
       totalShards?: number | 'auto',
       respawn?: boolean,
       shardArgs?: string[],
-      token?: string
+      token?: string,
+      ...
     }): this;
     file: string;
     respawn: boolean;
@@ -982,7 +1003,12 @@ declare module 'discord.js' {
     convertToBuffer(ab: ArrayBuffer | string): Buffer;
     escapeMarkdown(text: string, onlyCodeBlock?: boolean, onlyInlineCode?: boolean): string;
     fetchRecommendedShards(token: string, guildsPerShard?: number): Promise<number>;
-    makeError(obj: { name: string, message: string, stack: string }): Error;
+    makeError(obj: {
+      name: string,
+      message: string,
+      stack: string,
+      ...
+    }): Error;
     makePlainError(err: Error): Object;
     mergeDefault(def: Object, given: Object): Object;
     moveElementInArray(array: any[], element: any, newIndex: number, offset?: boolean): number;
@@ -1130,7 +1156,7 @@ declare module 'discord.js' {
   }
 
   declare export class VolumeInterface extends events$EventEmitter {
-    constructor(Object?: { volume: number }): this;
+    constructor(Object?: { volume: number, ... }): this;
     volume: number;
     volumeDecibels: number;
     volumeLogarithmic: number;
@@ -1211,16 +1237,13 @@ declare module 'discord.js' {
     roles?: Collection<string,
     Role>| Role[] | string[],
     mute?: boolean,
-    deaf?: boolean
+    deaf?: boolean,
+    ...
   };
 
-  declare type AwaitMessagesOptions = MessageCollectorOptions & {
-    errors?: string[]
-  };
+  declare type AwaitMessagesOptions = MessageCollectorOptions & { errors?: string[], ... };
 
-  declare type AwaitReactionsOptions = ReactionCollectorOptions & {
-    errors?: string[]
-  };
+  declare type AwaitReactionsOptions = ReactionCollectorOptions & { errors?: string[], ... };
 
   declare type Base64Resolvable = Buffer | Base64String;
 
@@ -1233,19 +1256,22 @@ declare module 'discord.js' {
     position?: number,
     topic?: string,
     bitrate?: number,
-    userLimit?: number
+    userLimit?: number,
+    ...
   };
 
   declare type ChannelLogsQueryOptions = {
     limit?: number,
     before?: Snowflake,
     after?: Snowflake,
-    around?: Snowflake
+    around?: Snowflake,
+    ...
   };
 
   declare type ChannelPosition = {
     channel: ChannelResolvable,
-    position: number
+    position: number,
+    ...
   };
 
   declare type ChannelResolvable = Channel | Guild | Message | Snowflake;
@@ -1263,19 +1289,19 @@ declare module 'discord.js' {
     restWsBridgeTimeout?: number,
     restTimeOffset?: number,
     disabledEvents?: WSEventType[],
-    ws?: WebSocketOptions
+    ws?: WebSocketOptions,
+    ...
   };
 
   declare type CollectorHandler<K, V>= {
     key: K,
-    value: V
+    value: V,
+    ...
   };
 
   declare type CollectorFilter = (...args: any[]) => boolean;
 
-  declare type CollectorOptions = {
-    time?: number
-  };
+  declare type CollectorOptions = { time?: number, ... };
 
   declare type ColorResolvable =
     | 'DEFAULT'
@@ -1310,26 +1336,30 @@ declare module 'discord.js' {
     workerID: number,
     processID: number,
     increment: number,
-    binary: string
+    binary: string,
+    ...
   };
 
   declare type EmojiEditData = {
     name?: string,
     roles?: Collection<Snowflake,
-    Role>| Role[] | Snowflake[]
+    Role>| Role[] | Snowflake[],
+    ...
   };
 
   declare type EmojiIdentifierResolvable = string | Emoji | ReactionEmoji;
 
   declare type FileOptions = {
     attachment: BufferResolvable,
-    name?: string
+    name?: string,
+    ...
   };
 
   declare type GroupDMRecipientOptions = {
     user?: UserResolvable | Snowflake,
     accessToken?: string,
-    nick?: string
+    nick?: string,
+    ...
   };
 
   declare type GuildEditData = {
@@ -1340,7 +1370,8 @@ declare module 'discord.js' {
     afkTimeout?: number,
     icon?: Base64Resolvable,
     owner?: GuildMemberResolvable,
-    splash?: Base64Resolvable
+    splash?: Base64Resolvable,
+    ...
   };
 
   declare type GuildMemberEditData = {
@@ -1349,7 +1380,8 @@ declare module 'discord.js' {
     Role>| Role[] | Snowflake[],
     mute?: boolean,
     deaf?: boolean,
-    channel?: ChannelResolvable
+    channel?: ChannelResolvable,
+    ...
   };
 
   declare type GuildMemberResolvable = GuildMember | User;
@@ -1359,19 +1391,22 @@ declare module 'discord.js' {
   declare type InviteOptions = {
     temporary?: boolean,
     maxAge?: number,
-    maxUses?: number
+    maxUses?: number,
+    ...
   };
 
   declare type InviteResolvable = string;
 
   declare type MessageCollectorOptions = {
     max?: number,
-    maxMatches?: number
+    maxMatches?: number,
+    ...
   } & CollectorOptions;
 
   declare type MessageEditOptions = {
     embed?: RichEmbedOptions,
-    code?: string | boolean
+    code?: string | boolean,
+    ...
   };
 
   declare type MessageOptions = {
@@ -1383,7 +1418,8 @@ declare module 'discord.js' {
     files?: FileOptions[] | string[],
     code?: string,
     split?: boolean | SplitOptions,
-    reply?: UserResolvable
+    reply?: UserResolvable,
+    ...
   };
 
   declare type MessageSearchOptions = {
@@ -1426,7 +1462,8 @@ declare module 'discord.js' {
     attachmentExtension?: string,
     before?: Date,
     after?: Date,
-    during?: Date
+    during?: Date,
+    ...
   };
 
   declare type PermissionFlags = {
@@ -1458,7 +1495,8 @@ declare module 'discord.js' {
     MANAGE_ROLES?: number,
     MANAGE_ROLES_OR_PERMISSIONS?: number,
     MANAGE_WEBHOOKS?: number,
-    MANAGE_EMOJIS?: number
+    MANAGE_EMOJIS?: number,
+    ...
   };
 
   declare type PermissionObject = {
@@ -1490,7 +1528,8 @@ declare module 'discord.js' {
     MANAGE_ROLES?: boolean,
     MANAGE_ROLES_OR_PERMISSIONS?: boolean,
     MANAGE_WEBHOOKS?: boolean,
-    MANAGE_EMOJIS?: boolean
+    MANAGE_EMOJIS?: boolean,
+    ...
   };
 
   declare type PermissionString =
@@ -1533,8 +1572,10 @@ declare module 'discord.js' {
     afk?: boolean,
     game?: {
       name?: string,
-      url?: string
-    }
+      url?: string,
+      ...
+    },
+    ...
   };
 
   declare type PresenceStatus = 'online' | 'idle' | 'invisible' | 'dnd';
@@ -1542,7 +1583,8 @@ declare module 'discord.js' {
   declare type ReactionCollectorOptions = CollectorOptions & {
     max?: number,
     maxEmojis?: number,
-    maxUsers?: number
+    maxUsers?: number,
+    ...
   };
 
   declare type RichEmbedOptions = {
@@ -1554,34 +1596,41 @@ declare module 'discord.js' {
     fields?: {
       name: string,
       value: string,
-      inline?: boolean
+      inline?: boolean,
+      ...
     }[],
     file?: string | FileOptions,
     author?: {
       name: string,
       url?: string,
-      icon_url?: string
+      icon_url?: string,
+      ...
     },
     thumbnail?: {
       url: string,
       height?: number,
-      width?: number
+      width?: number,
+      ...
     },
     image?: {
       url: string,
       proxy_url?: string,
       height?: number,
-      width?: number
+      width?: number,
+      ...
     },
     video?: {
       url: string,
       height: number,
-      width: number
+      width: number,
+      ...
     },
     footer?: {
       text?: string,
-      icon_url?: string
-    }
+      icon_url?: string,
+      ...
+    },
+    ...
   };
 
   declare type RoleData = {
@@ -1590,7 +1639,8 @@ declare module 'discord.js' {
     hoist?: boolean,
     position?: number,
     permissions?: PermissionString[],
-    mentionable?: boolean
+    mentionable?: boolean,
+    ...
   };
 
   declare type RoleResolvable = Role | string;
@@ -1601,7 +1651,8 @@ declare module 'discord.js' {
     maxLength?: number,
     char?: string,
     prepend?: string,
-    append?: string
+    append?: string,
+    ...
   };
 
   declare type Status = number;
@@ -1609,7 +1660,8 @@ declare module 'discord.js' {
   declare type StreamOptions = {
     seek?: number,
     volume?: number,
-    passes?: number
+    passes?: number,
+    ...
   };
 
   declare type StringResolvable = string | string[] | any;
@@ -1632,12 +1684,14 @@ declare module 'discord.js' {
     disableEveryone?: boolean,
     file?: FileOptions | string,
     code?: string | boolean,
-    split?: boolean | SplitOptions
+    split?: boolean | SplitOptions,
+    ...
   };
 
   declare type WebSocketOptions = {
     large_threshold?: number,
-    compress?: boolean
+    compress?: boolean,
+    ...
   };
 
   declare type WSEventType =

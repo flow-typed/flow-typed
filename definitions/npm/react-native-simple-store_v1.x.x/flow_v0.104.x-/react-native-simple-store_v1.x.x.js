@@ -9,6 +9,7 @@ declare module 'react-native-simple-store' {
     keys: ()=> Promise<any>,
     push: (key: string, value: Value)=> Promise<any>,
     delete: (key: string | string[])=> Promise<any>,
+    ...
   }
 
   declare module.exports: SimpleStore;

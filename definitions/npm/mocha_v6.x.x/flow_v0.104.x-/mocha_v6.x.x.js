@@ -50,11 +50,12 @@ declare interface $npm$mocha$Runner {}
 
 declare class $npm$mocha$BaseReporter {
   stats: {
-    suites: number;
-    tests: number;
-    passes: number;
-    pending: number;
-    failures: number;
+    suites: number,
+    tests: number,
+    passes: number,
+    pending: number,
+    failures: number,
+    ...
   };
 
   constructor(runner: $npm$mocha$Runner): $npm$mocha$BaseReporter;
@@ -74,10 +75,11 @@ declare class $npm$mocha$MinReporter extends $npm$mocha$BaseReporter {}
 declare class $npm$mocha$NyanReporter extends $npm$mocha$BaseReporter {}
 declare class $npm$mocha$ProgressReporter extends $npm$mocha$BaseReporter {
   constructor(runner: $npm$mocha$Runner, options?: {
-    open?: string;
-    complete?: string;
-    incomplete?: string;
-    close?: string;
+    open?: string,
+    complete?: string,
+    incomplete?: string,
+    close?: string,
+    ...
   }): $npm$mocha$ProgressReporter;
 }
 declare class $npm$mocha$SpecReporter extends $npm$mocha$BaseReporter {}
@@ -89,13 +91,14 @@ declare class $npm$mocha$XUnitReporter extends $npm$mocha$BaseReporter {
 declare class $npm$mocha$Mocha {
   currentTest: $npm$mocha$TestDefinition;
   constructor(options?: {
-    grep?: RegExp;
-    ui?: string;
-    reporter?: string;
-    timeout?: number;
-    reporterOptions?: any;
-    slow?: number;
-    bail?: boolean;
+    grep?: RegExp,
+    ui?: string,
+    reporter?: string,
+    timeout?: number,
+    reporterOptions?: any,
+    slow?: number,
+    bail?: boolean,
+    ...
   }): $npm$mocha$Mocha;
   setup(options: $npm$mocha$SetupOptions): this;
   bail(value?: boolean): this;
@@ -135,6 +138,7 @@ declare class $npm$mocha$Mocha {
     Min: $npm$mocha$MinReporter,
     Nyan: $npm$mocha$NyanReporter,
     Progress: $npm$mocha$ProgressReporter,
+    ...
   };
 }
 

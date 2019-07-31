@@ -1,49 +1,55 @@
 declare module "react-player" {
   declare export type SourceProps = {
     src: string,
-    type: string
+    type: string,
+    ...
   };
 
   declare export type TrackProps = {
     kind: string,
     src: string,
     srcLang: string,
-    default?: boolean
+    default?: boolean,
+    ...
   };
 
-  declare export type SoundCloudConfig = {
-    options?: Object // TODO Improve
-  };
+  declare export type SoundCloudConfig = { // TODO Improve
+  options?: Object, ... };
 
   declare export type YouTubeConfig = {
-    playerVars?: Object, // TODO Improve
-    preload?: boolean
+    // TODO Improve
+    playerVars?: Object,
+    preload?: boolean,
+    ...
   };
 
-  declare export type FacebookConfig = {
-    appId?: string
-  };
+  declare export type FacebookConfig = { appId?: string, ... };
 
   declare export type DailyMotionConfig = {
-    params?: Object, // TODO Improve
-    preload?: boolean
+    // TODO Improve
+    params?: Object,
+    preload?: boolean,
+    ...
   };
 
   declare export type VimeoConfig = {
-    iframeParams?: Object, // TODO Improve
-    preload?: boolean
+    // TODO Improve
+    iframeParams?: Object,
+    preload?: boolean,
+    ...
   };
 
-  declare export type WistiaConfig = {
-    options?: Object // TODO Improve
-  };
+  declare export type WistiaConfig = { // TODO Improve
+  options?: Object, ... };
 
   declare export type FileConfig = {
-    attributes?: Object, // TODO Improve
+    // TODO Improve
+    attributes?: Object,
     tracks?: Array<TrackProps>,
     forceAudio?: boolean,
     forceHLS?: boolean,
-    forceDASH?: boolean
+    forceDASH?: boolean,
+    ...
   };
 
   declare export type Config = {
@@ -53,7 +59,8 @@ declare module "react-player" {
     dailymotion?: DailyMotionConfig,
     vimeo?: VimeoConfig,
     file?: FileConfig,
-    wistia?: WistiaConfig
+    wistia?: WistiaConfig,
+    ...
   };
 
   declare export type Props = {
@@ -66,7 +73,8 @@ declare module "react-player" {
     playbackRate?: number,
     width?: string | number,
     height?: string | number,
-    style?: Object, // TODO Improve
+    // TODO Improve
+    style?: Object,
     progressFrequency?: number,
     playsinline?: boolean,
     config?: Config,
@@ -90,8 +98,10 @@ declare module "react-player" {
       played: number,
       playedSeconds: number,
       loaded: number,
-      loadedSeconds: number
-    }) => void
+      loadedSeconds: number,
+      ...
+    }) => void,
+    ...
   };
 
   declare export default class ReactPlayer extends React$Component<Props> {

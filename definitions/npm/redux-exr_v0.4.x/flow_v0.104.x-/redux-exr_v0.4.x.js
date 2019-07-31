@@ -22,9 +22,7 @@ declare module 'redux-exr'
     reducer: ExReducer<S, A>,
   ): ExReducer<S, A>;
 
-  declare type ExReducerTree = {
-    [key: string]: Reducer<*, *> | ExReducer<*, *> | ExReducerTree,
-  };
+  declare type ExReducerTree = { [key: string]: Reducer<*, *> | ExReducer<*, *> | ExReducerTree, ... };
 
   declare export function exCombineReducers(tree: ExReducerTree): <S, A>(rootState: S, action: A) => S;
 };

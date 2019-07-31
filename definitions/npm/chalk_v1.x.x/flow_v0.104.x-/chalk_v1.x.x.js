@@ -1,6 +1,7 @@
 type $npm$chalk$StyleElement = {
   open: string,
-  close: string
+  close: string,
+  ...
 };
 
 type $npm$chalk$Chain = $npm$chalk$Style & ((...text: any[]) => string);
@@ -14,7 +15,6 @@ type $npm$chalk$Style = {
   underline: $npm$chalk$Chain,
   inverse: $npm$chalk$Chain,
   strikethrough: $npm$chalk$Chain,
-
   // Text colors
   black: $npm$chalk$Chain,
   red: $npm$chalk$Chain,
@@ -26,7 +26,6 @@ type $npm$chalk$Style = {
   white: $npm$chalk$Chain,
   gray: $npm$chalk$Chain,
   grey: $npm$chalk$Chain,
-
   // Background colors
   bgBlack: $npm$chalk$Chain,
   bgRed: $npm$chalk$Chain,
@@ -35,7 +34,8 @@ type $npm$chalk$Style = {
   bgBlue: $npm$chalk$Chain,
   bgMagenta: $npm$chalk$Chain,
   bgCyan: $npm$chalk$Chain,
-  bgWhite: $npm$chalk$Chain
+  bgWhite: $npm$chalk$Chain,
+  ...
 };
 
 type $npm$chalk$StyleMap = {
@@ -47,7 +47,6 @@ type $npm$chalk$StyleMap = {
   underline: $npm$chalk$StyleElement,
   inverse: $npm$chalk$StyleElement,
   strikethrough: $npm$chalk$StyleElement,
-
   // Text colors
   black: $npm$chalk$StyleElement,
   red: $npm$chalk$StyleElement,
@@ -58,7 +57,6 @@ type $npm$chalk$StyleMap = {
   cyan: $npm$chalk$StyleElement,
   white: $npm$chalk$StyleElement,
   gray: $npm$chalk$StyleElement,
-
   // Background colors
   bgBlack: $npm$chalk$StyleElement,
   bgRed: $npm$chalk$StyleElement,
@@ -67,7 +65,8 @@ type $npm$chalk$StyleMap = {
   bgBlue: $npm$chalk$StyleElement,
   bgMagenta: $npm$chalk$StyleElement,
   bgCyan: $npm$chalk$StyleElement,
-  bgWhite: $npm$chalk$StyleElement
+  bgWhite: $npm$chalk$StyleElement,
+  ...
 };
 
 declare module "chalk" {

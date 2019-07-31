@@ -1,25 +1,26 @@
 
 declare interface NumeralJSLocale {
     delimiters: {
-        thousands: string,
-        decimal: string
+      thousands: string,
+      decimal: string,
+      ...
     },
     abbreviations: {
-        thousand: string,
-        million: string,
-        billion: string,
-        trillion: string
+      thousand: string,
+      million: string,
+      billion: string,
+      trillion: string,
+      ...
     },
     ordinal(num: number): string,
-    currency: {
-        symbol: string
-    }
+    currency: { symbol: string, ... }
 }
 declare type RoundingFunction = (value: number) => number;
 declare interface NumeralJsFormat {
     regexps: {
-        format: RegExp,
-        unformat: RegExp
+      format: RegExp,
+      unformat: RegExp,
+      ...
     },
     format(value: any, format: string, roundingFunction: RoundingFunction): string,
     unformat(value: string): number

@@ -39,7 +39,8 @@ describe('Test createReactor', () => {
   if('should pass when used properly', () => {
     type State = {
       counter: number,
-      initialCount: number
+      initialCount: number,
+      ...
     };
     
     const incrementReactor = createReactor<State, 'INCREMENT'>('INCREMENT', (state, action) => {

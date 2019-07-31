@@ -3,11 +3,13 @@
 declare module "latlon-geohash" {
   declare type GeoPoint = {
     lat: number,
-    lon: number
+    lon: number,
+    ...
   };
   declare type GeoBounds = {
     ne: GeoPoint,
-    sw: GeoPoint
+    sw: GeoPoint,
+    ...
   };
   declare type GeoDirection = "N" | "S" | "E" | "W" | "n" | "s" | "e" | "w";
   declare type GeoHashNeighbours = {
@@ -18,7 +20,8 @@ declare module "latlon-geohash" {
     s: string,
     sw: string,
     w: string,
-    nw: string
+    nw: string,
+    ...
   };
 
   declare module.exports: {
@@ -26,6 +29,7 @@ declare module "latlon-geohash" {
     bounds: (geohash: string) => GeoBounds,
     decode: (geohash: string) => GeoPoint,
     encode: (lat: number, lon: number, precision?: number) => string,
-    neighbours: (geohash: string) => GeoHashNeighbours
+    neighbours: (geohash: string) => GeoHashNeighbours,
+    ...
   };
 }

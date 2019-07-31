@@ -56,23 +56,35 @@ declare module 'supercluster' {
     map: (props: A) => B,
   |}): Supercluster<A, ClusterProps>;
 
-  declare function supercluster<A, B: {}>({|
+  declare function supercluster<A, B: {...}>({|
     ...SuperclusterOptions,
     reduce: (accum: B, props: A) => void,
-  |}): Supercluster<A, $Exact<{ ...B, ...ClusterProps }>>;
+  |}): Supercluster<A, $Exact<{
+    ...B,
+    ...ClusterProps,
+    ...
+  }>>;
 
   declare function supercluster<A, B>({|
     ...SuperclusterOptions,
     initial: () => B,
     reduce: (accum: B, props: A) => void,
-  |}): Supercluster<A, $Exact<{ ...B, ...ClusterProps }>>;
+  |}): Supercluster<A, $Exact<{
+    ...B,
+    ...ClusterProps,
+    ...
+  }>>;
 
   declare function supercluster<A, B, C>({|
     ...SuperclusterOptions,
     map: (props: A) => B,
     initial: () => C,
     reduce: (accum: C, props: B) => void,
-  |}): Supercluster<A, $Exact<{ ...C, ...ClusterProps }>>;
+  |}): Supercluster<A, $Exact<{
+    ...C,
+    ...ClusterProps,
+    ...
+  }>>;
 
   declare module.exports: typeof supercluster;
 }

@@ -7,13 +7,11 @@
  * Equivalent to:
  *    import type { StoreCreator, Action } from 'redux';
  */
-type Action<T> = {
-  type: T
-};
+type Action<T> = { type: T, ... };
 
 type DispatchAPI<A> = (action: A) => A;
 
-type Dispatch<A: { type: * }> = DispatchAPI<A>;
+type Dispatch<A: { type: *, ... }> = DispatchAPI<A>;
 
 type Reducer<S, A> = (state: S | void, action: A) => S;
 
@@ -27,6 +25,7 @@ type Store<S, A, D = Dispatch<A>> = {
   getState(): S,
   subscribe(listener: () => void): () => void,
   replaceReducer(nextReducer: Reducer<S, A>): void,
+  ...
 };
 
 type StoreCreator<S, A, D = Dispatch<A>> = {
@@ -36,6 +35,7 @@ type StoreCreator<S, A, D = Dispatch<A>> = {
     preloadedState: S,
     enhancer?: StoreEnhancer<S, A, D>
   ): Store<S, A, D>,
+  ...
 };
 /* END OF COPIED 'redux' TYPES */
 

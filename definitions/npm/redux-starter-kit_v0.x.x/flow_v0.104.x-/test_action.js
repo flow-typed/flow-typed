@@ -2,7 +2,11 @@
 import type { PayloadAction } from "redux-starter-kit";
 import { describe, it } from "flow-typed-test";
 
-opaque type Person = { name: string, id: number }
+opaque type Person = {
+  name: string,
+  id: number,
+  ...
+}
 
 describe("PayloadAction<P, T>", () => {
 

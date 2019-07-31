@@ -44,9 +44,7 @@ declare type rxjs$ObservableInput<T> =
   | Array<T>
   | Iterable<T>;
 
-declare type rxjs$InteropObservable<T> = {
-  [string | mixed]: () => rxjs$Subscribable<T>
-};
+declare type rxjs$InteropObservable<T> = { [string | mixed]: () => rxjs$Subscribable<T>, ... };
 /** OBSERVER INTERFACES */
 declare interface rxjs$NextObserver<T> {
   closed?: boolean;
@@ -202,7 +200,7 @@ declare class rxjs$Observable<T> implements rxjs$Subscribable<T> {
     op8: rxjs$OperatorFunction<G, H>,
     op9: rxjs$OperatorFunction<H, I>,
     ...operations: rxjs$OperatorFunction<any, any>[]
-  ): rxjs$Observable<{}>;
+  ): rxjs$Observable<{...}>;
   toPromise<T>(): Promise<T>;
   toPromise<T>(PromiseCtor: typeof Promise): Promise<T>;
   toPromise<T>(PromiseCtor: Promise.constructor): Promise<T>;
@@ -444,7 +442,7 @@ declare module "rxjs" {
         fn8: rxjs$UnaryFunction<G, H>,
         fn9: rxjs$UnaryFunction<H, I>,
         ...fns: rxjs$UnaryFunction<any, any>[]
-      ) => rxjs$UnaryFunction<T, {}>),
+      ) => rxjs$UnaryFunction<T, {...}>),
     noop(): void,
     identity<T>(x: T): T,
     isObservable<T>(obj: any): boolean,
@@ -832,7 +830,8 @@ declare module "rxjs" {
     ): rxjs$Observable<T>,
     config: {
       Promise: Promise.constructor,
-      useDeprecatedSynchronousErrorHandling: boolean
+      useDeprecatedSynchronousErrorHandling: boolean,
+      ...
     },
     // @deprecated  resultSelector is no longer supported, pipe to map instead
     zip: (<T, R>(
@@ -1716,7 +1715,8 @@ declare module "rxjs" {
           | ((...values: Array<any>) => R)
           | rxjs$SchedulerLike
         >
-      ) => rxjs$Observable<R>)
+      ) => rxjs$Observable<R>),
+    ...
   };
 
   declare class BehaviorSubject<T> extends rxjs$Subject<T> {
@@ -3294,9 +3294,7 @@ declare module "rxjs/webSocket" {
     openObserver?: rxjs$NextObserver<Event>;
     closeObserver?: rxjs$NextObserver<CloseEvent>;
     closingObserver?: rxjs$NextObserver<void>;
-    WebSocketCtor?: {
-      new(url: string, protocols?: string | string[]): WebSocket
-    };
+    WebSocketCtor?: { new(url: string, protocols?: string | string[]): WebSocket, ... };
     binaryType?: "blob" | "arraybuffer";
   }
 

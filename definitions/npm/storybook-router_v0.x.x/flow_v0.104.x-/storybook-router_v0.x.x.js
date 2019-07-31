@@ -2,7 +2,8 @@ type LocationShape = {
   pathname?: string,
   search?: string,
   hash?: string,
-  state?: any
+  state?: any,
+  ...
 };
 
 type GetUserConfirmation = (
@@ -11,7 +12,11 @@ type GetUserConfirmation = (
 ) => void;
 
 declare module "storybook-router" {
-  declare type Context = { kind: string, story: string };
+  declare type Context = {
+    kind: string,
+    story: string,
+    ...
+  };
   declare type Renderable = React$Element<*>;
   declare type RenderFunction = () => Renderable | Array<Renderable>;
 
@@ -20,9 +25,7 @@ declare module "storybook-router" {
     context: Context
   ) => Renderable | null;
 
-  declare type Links = {
-    [key: string]: (kind: string, story: string) => Function
-  };
+  declare type Links = { [key: string]: (kind: string, story: string) => Function, ... };
 
   declare type RouterProps = {
     initialEntry?: Array<string>,
@@ -31,10 +34,9 @@ declare module "storybook-router" {
     initialIndex?: number,
     getUserConfirmation?: GetUserConfirmation,
     keyLength?: number,
-    children?: React$Element<*>
+    children?: React$Element<*>,
+    ...
   };
 
-  declare module.exports: {
-    (links?: Links, routerProps?: RouterProps): StoryDecorator
-  };
+  declare module.exports: { (links?: Links, routerProps?: RouterProps): StoryDecorator, ... };
 }

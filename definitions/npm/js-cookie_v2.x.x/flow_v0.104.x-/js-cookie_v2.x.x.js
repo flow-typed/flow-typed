@@ -3,17 +3,19 @@ declare module 'js-cookie' {
         expires?: number | Date,
         path?: string,
         domain?: string,
-        secure?: boolean
+        secure?: boolean,
+        ...
     }
     declare type ConverterFunc = (value: string, name: string) => string;
     declare type ConverterObj = {
         read: ConverterFunc,
-        write: ConverterFunc
+        write: ConverterFunc,
+        ...
     };
     declare class Cookie {
         defaults: CookieOptions;
         set(name: string, value: mixed, options?: CookieOptions): void;
-        get(...args: Array<void>): { [key: string]: string };
+        get(...args: Array<void>): { [key: string]: string, ... };
         get(name: string, ...args: Array<void>): string | void;
         remove(name: string, options?: CookieOptions): void;
         getJSON(name: string): Object;

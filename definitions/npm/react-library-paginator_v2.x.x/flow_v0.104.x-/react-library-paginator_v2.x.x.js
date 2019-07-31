@@ -1,7 +1,8 @@
 declare module 'react-library-paginator' {
   declare type Props = {
     totalItems: number,
-    onPageChange: (page: number) => void
+    onPageChange: (page: number) => void,
+    ...
   } & DefaultProps;
 
   declare type DefaultProps = {
@@ -11,31 +12,36 @@ declare module 'react-library-paginator' {
     useBootstrapClasses: boolean,
     styles: PaginatorStyles,
     classes: PaginatorClasses,
-    navigation: Navigation
+    navigation: Navigation,
+    ...
   };
 
   declare type PaginatorStyles = {
     container?: Object,
-    list?: Object
+    list?: Object,
+    ...
   } & PageStyles;
 
   declare type PageStyles = {
     pageItem?: Object,
     pageLink?: Object,
     pageLinkActive?: Object,
-    pageLinkDisabled?: Object
+    pageLinkDisabled?: Object,
+    ...
   };
 
   declare type PaginatorClasses = {
     container?: string,
-    list?: string
+    list?: string,
+    ...
   } & PageClasses;
 
   declare type PageClasses = {
     pageItem?: string,
     pageLink?: string,
     pageLinkActive?: string,
-    pageLinkDisabled?: string
+    pageLinkDisabled?: string,
+    ...
   };
 
   declare type Navigation = {
@@ -46,7 +52,8 @@ declare module 'react-library-paginator' {
     hideFirstPageNav?: boolean,
     hidePrevPageNav?: boolean,
     hideNextPageNav?: boolean,
-    hideLastPageNav?: boolean
+    hideLastPageNav?: boolean,
+    ...
   };
 
   declare class PaginatorContainer extends React$Component<Props> {

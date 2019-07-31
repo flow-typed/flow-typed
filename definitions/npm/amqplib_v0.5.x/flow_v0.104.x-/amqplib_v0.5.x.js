@@ -11,6 +11,7 @@ declare module 'amqplib' {
       exchange: string,
       routingKey: string,
       redelivered: boolean,
+      ...
     },
     properties: {
       expiration: string,
@@ -27,7 +28,9 @@ declare module 'amqplib' {
       timestamp: number,
       type: string,
       appId: string,
+      ...
     },
+    ...
   }
 
   declare export type ConnectOptions = {
@@ -40,6 +43,7 @@ declare module 'amqplib' {
     +frameMax?: number,
     +heartbeat?: number,
     +vhost?: string,
+    ...
   }
 
   declare export type AssertQueueOptions = {
@@ -52,11 +56,13 @@ declare module 'amqplib' {
     +deadLetterExchange?: string,
     +maxLength?: number,
     +maxPriority?: number,
+    ...
   }
 
   declare export type DeleteQueueOptions = {
     +ifUnused?: boolean,
     +ifEmpty?: boolean,
+    ...
   }
 
   declare export type AssertExchangeOptions = {
@@ -65,11 +71,10 @@ declare module 'amqplib' {
     +autoDelete?: boolean,
     +alternateExchange?: string,
     +arguments?: Object,
+    ...
   }
 
-  declare export type DeleteExchangeOptions = {
-    +ifUnused?: boolean,
-  }
+  declare export type DeleteExchangeOptions = { +ifUnused?: boolean, ... }
 
   declare export type PublishOptions = {
     +expiration?: string,
@@ -90,6 +95,7 @@ declare module 'amqplib' {
     +timestamp?: number,
     +type?: string,
     +appId?: string,
+    ...
   }
 
   declare export type ConsumeOptions = {
@@ -99,29 +105,23 @@ declare module 'amqplib' {
     +exclusive?: boolean,
     +priority?: number,
     +arguments?: Object,
+    ...
   }
 
-  declare export type GetOptions = {
-    +noAck?: boolean,
-  }
+  declare export type GetOptions = { +noAck?: boolean, ... }
 
   declare export type QueueOKReply = {
     queue: string,
     messageCount: number,
     consumerCount: number,
+    ...
   }
 
-  declare export type OKReply = {
-    messageCount: number,
-  }
+  declare export type OKReply = { messageCount: number, ... }
 
-  declare export type ExchangeOKReply = {
-    exchange: string,
-  }
+  declare export type ExchangeOKReply = { exchange: string, ... }
 
-  declare export type ConsumeOKReply = {
-    consumerTag: string,
-  }
+  declare export type ConsumeOKReply = { consumerTag: string, ... }
 
 
   declare export class Channel {

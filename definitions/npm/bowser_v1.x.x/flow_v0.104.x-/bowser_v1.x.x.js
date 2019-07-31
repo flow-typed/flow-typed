@@ -19,6 +19,7 @@ declare module 'bowser' {
     tablet: boolean,
     /** All detected mobile OSes are additionally flagged mobile, unless it's a tablet */
     mobile: boolean,
+    ...
   }
 
   declare export type BowserOS = {
@@ -39,6 +40,7 @@ declare module 'bowser' {
     bada: boolean,
     tizen: boolean,
     sailfish: boolean,
+    ...
   }
 
   declare export type BowserVersions = {
@@ -65,6 +67,7 @@ declare module 'bowser' {
     vivaldi: boolean,
     sleipnir: boolean,
     kMeleon: boolean,
+    ...
   }
 
   declare export type BowserEngines = {
@@ -78,6 +81,7 @@ declare module 'bowser' {
     gecko: boolean,
     /** IE > 11 */
     msedge: boolean,
+    ...
   }
 
   declare export type BowserGrade = {
@@ -95,6 +99,7 @@ declare module 'bowser' {
     osname: string,
     /** Version number for this operating system. E.g. '10.12.6' */
     osversion: string | number,
+    ...
   }
 
   declare export type BowserDetection = BowserGrade &
@@ -103,14 +108,10 @@ declare module 'bowser' {
     BowserOS &
     BowserPlatform
 
-  declare export type BowserMinVersions = {
-    // { msie: "11", "firefox": "4" }
-    [index: string]: string,
-  }
+  declare export type BowserMinVersions = { // { msie: "11", "firefox": "4" }
+  [index: string]: string, ... }
 
-  declare type Bowser = BowserDetection & {
-    test(browserList: Array<string>): boolean,
-  }
+  declare type Bowser = BowserDetection & { test(browserList: Array<string>): boolean, ... }
 
   declare type BowserType = Bowser & {
     _detect: (ua: string) => BowserType,
@@ -126,6 +127,7 @@ declare module 'bowser' {
       strictMode?: boolean | string,
       ua?: string,
     ) => boolean,
+    ...
   }
 
   declare export default BowserType

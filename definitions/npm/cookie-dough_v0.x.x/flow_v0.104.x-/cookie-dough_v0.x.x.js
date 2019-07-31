@@ -3,12 +3,10 @@ declare module "cookie-dough" {
     req: ?Object
   ) => {
     set: (name: string, value: string, options: ?Object) => string,
-
     get: (name: string) => ?string,
-
     remove: (name: string, options: ?Object) => boolean,
-
-    all: () => Object
+    all: () => Object,
+    ...
   };
 }
 

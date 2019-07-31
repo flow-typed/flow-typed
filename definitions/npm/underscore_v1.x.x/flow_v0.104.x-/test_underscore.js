@@ -105,9 +105,9 @@ _.findKey({a: {t: 'a'}, b: {t: 'b'}}, (v, k, o) => k === 'a' && v.t === 'a' && o
 // $ExpectError
 _.findKey({a: {t: 'a'}, b: {t: 'b'}}, (v) => v.s === 'a');
 // $ExpectError
-_.findKey({a: {t: 'a'}, b: {t: 'b'}}, (v: {t: string}, k: number) => (k === 1) && (v.t === 'a'));
+_.findKey({a: {t: 'a'}, b: {t: 'b'}}, (v: { t: string, ... }, k: number) => (k === 1) && (v.t === 'a'));
 // $ExpectError
-_.findKey({a: {t: 'a'}, b: {t: 'b'}}, (v, k, o: {t: string}) => k === 'a' && v.t === 'a' && o.t === v);
+_.findKey({a: {t: 'a'}, b: {t: 'b'}}, (v, k, o: { t: string, ... }) => k === 'a' && v.t === 'a' && o.t === v);
 
 
 // $ExpectError
@@ -129,19 +129,19 @@ var toArrayNumber: Array<number> = _.toArray({foo: 4, bar: 2});
 // $ExpectError
 var toArrayNumberError: Array<string> = _.toArray({foo: 4, baz: 2});
 
-var composed: (prop: {num: number}) => number = _.compose(
-  (prop: {num: number}) => prop.num
+var composed: (prop: { num: number, ... }) => number = _.compose(
+  (prop: { num: number, ... }) => prop.num
 );
 
-var composed2: (prop: {num: number}) => string = _.compose(
+var composed2: (prop: { num: number, ... }) => string = _.compose(
   (num: number) => num + '',
-  (prop: {num: number}) => prop.num,
+  (prop: { num: number, ... }) => prop.num,
 );
 
 // $ExpectError
-var composedFail: (prop: {num: number}) => number = _.compose(
+var composedFail: (prop: { num: number, ... }) => number = _.compose(
   (num: number) => num + '',
-  (prop: {num: number}) => prop.num,
+  (prop: { num: number, ... }) => prop.num,
 );
 
 // Wrapped
@@ -153,6 +153,6 @@ _({a: {t: 'a'}, b: {t: 'b'}}).findKey((v, k, o) => k === 'a' && v.t === 'a' && o
 // $ExpectError
 _({a: {t: 'a'}, b: {t: 'b'}}).findKey((v) => v.s === 'a');
 // $ExpectError
-_({a: {t: 'a'}, b: {t: 'b'}}).findKey((v: {t: string}, k: number) => (k === 1) && (v.t === 'a'));
+_({a: {t: 'a'}, b: {t: 'b'}}).findKey((v: { t: string, ... }, k: number) => (k === 1) && (v.t === 'a'));
 // $ExpectError
-_({a: {t: 'a'}, b: {t: 'b'}}).findKey((v, k, o: {t: string}) => k === 'a' && v.t === 'a' && o.t === v);
+_({a: {t: 'a'}, b: {t: 'b'}}).findKey((v, k, o: { t: string, ... }) => k === 'a' && v.t === 'a' && o.t === v);

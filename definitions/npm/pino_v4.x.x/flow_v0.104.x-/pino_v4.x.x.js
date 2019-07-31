@@ -11,16 +11,16 @@ declare module "pino" {
     prevVal: number
   ) => void;
   declare interface LevelMapping {
-    values: { [level: string]: number };
-    labels: { [level: number]: string };
+    values: { [level: string]: number, ... };
+    labels: { [level: number]: string, ... };
   }
 
   declare type SerializerFn = (value: any) => any;
-  declare type WriteFn = (o: {}) => void;
+  declare type WriteFn = (o: {...}) => void;
   declare type TimeFn = () => string;
   declare interface LogFn {
     (msg: string, ...args: any[]): void;
-    (obj: {}, msg?: string, ...args: any[]): void;
+    (obj: {...}, msg?: string, ...args: any[]): void;
   }
 
   declare interface stdSerializers {
@@ -31,26 +31,30 @@ declare module "pino" {
       url: string,
       headers: {
         host: string,
-        connection: string
+        connection: string,
+        ...
       },
       remoteAddress: string,
-      remotePort: number
+      remotePort: number,
+      ...
     };
 
     res(
       res: http$ServerResponse
     ): {
       statusCode: number,
-      header: string
+      header: string,
+      ...
     };
 
     err(
       err: Error
     ): {
+      [key: string]: any,
       type: string,
       message: string,
       stack: string,
-      [key: string]: any
+      ...
     };
   }
 
@@ -61,7 +65,7 @@ declare module "pino" {
     nullTime: TimeFn;
   }
 
-  declare type Logger = BaseLogger & { [key: string]: LogFn };
+  declare type Logger = BaseLogger & { [key: string]: LogFn, ... };
 
   declare interface BaseLogger {
     +pino: string;
@@ -94,9 +98,10 @@ declare module "pino" {
     ): void;
 
     child(bindings: {
+      [key: string]: any,
       level?: Level | string,
-      serializers?: { [key: string]: SerializerFn },
-      [key: string]: any
+      serializers?: { [key: string]: SerializerFn, ... },
+      ...
     }): Logger;
 
     fatal: LogFn;
@@ -112,7 +117,7 @@ declare module "pino" {
   declare interface LoggerOptions {
     safe?: boolean;
     name?: string;
-    serializers?: { [key: string]: SerializerFn };
+    serializers?: { [key: string]: SerializerFn, ... };
     timestamp?: TimeFn | false;
     // @deprecated: This option is scheduled to be removed in Pino 5.0.0
     slowtime?: boolean;
@@ -128,7 +133,8 @@ declare module "pino" {
 
     browser?: {
       asObject?: boolean,
-      write?: WriteFn
+      write?: WriteFn,
+      ...
     };
   }
 

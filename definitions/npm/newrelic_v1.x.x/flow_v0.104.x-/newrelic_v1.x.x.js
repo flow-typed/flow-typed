@@ -26,7 +26,7 @@ type $npm$newrelic$Config = {|
   ssl?: boolean,
   certficates?: Array<string>,
   high_security?: boolean,
-  labels?: string | { [string]: string },
+  labels?: string | { [string]: string, ... },
 
   browser_monitoring?: {|
     enabled: boolean,
@@ -124,13 +124,13 @@ declare module 'newrelic' {
   declare function recordMetric(name: string, value: number): void;
   declare function incrementMetric(name: string, amount?: number): void;
 
-  declare function recordCustomEvent(eventType: string, attributes: {}): void;
+  declare function recordCustomEvent(eventType: string, attributes: {...}): void;
 
   declare function addCustomParameter(name: string, value: mixed): void;
-  declare function addCustomParameters(params: { [string]: mixed }): void;
+  declare function addCustomParameters(params: { [string]: mixed, ... }): void;
   declare function getBrowserTimingHeader(): string;
   declare function setIgnoreTransaction(ignored: boolean): void;
-  declare function noticeError(error: mixed, customParameters?: { [string]: mixed }): void;
+  declare function noticeError(error: mixed, customParameters?: { [string]: mixed, ... }): void;
   declare function shutdown(
     options?: {|
       collectPendingData?: boolean

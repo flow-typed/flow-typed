@@ -11,24 +11,24 @@ declare module 'react-testing-library' {
     queryByLabelText: (id: string) => ?HTMLElement,
     getByLabelText: (id: string) => HTMLElement,
     queryByAltText: (text: string) => ?HTMLElement,
-    getByAltText: (text: string) => HTMLElement
+    getByAltText: (text: string) => HTMLElement,
+    ...
   }
 
   declare export function render(
     ui: React$Element<*>,
-    options?: { container: HTMLElement }
+    options?: { container: HTMLElement, ... }
   ): RenderResult
 
   declare export function wait(
     callback?: () => void,
     options?: {
       timeout?: number,
-      interval?: number
+      interval?: number,
+      ...
     },
   ): Promise<void>;
 
   // copy from react-dom/test-utils
-  declare export var Simulate: {
-    [eventName: string]: (element: Element, eventData?: Object) => void,
-  };
+  declare export var Simulate: { [eventName: string]: (element: Element, eventData?: Object) => void, ... };
 }

@@ -57,7 +57,8 @@ declare module "webdriverio" {
     action: string;
     options?: {
       x?: number,
-      y?: number
+      y?: number,
+      ...
     };
   }
 

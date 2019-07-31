@@ -79,20 +79,23 @@ declare module 'react-native-maps' {
     onMarkerDragStart?: (event: InteractWithMapEvent) => void,
     onMarkerDrag?: (event: InteractWithMapEvent) => void,
     onMarkerDragEnd?: (event: InteractWithMapEvent) => void,
+    ...
   };
 
   declare type ImageSourcePropType =
     | number
     | {
-        uri: string,
-        width?: number,
-        height?: number,
-        scale?: number,
-      };
+    uri: string,
+    width?: number,
+    height?: number,
+    scale?: number,
+    ...
+  };
 
   declare type CalloutProps = {
     tooltip?: boolean,
     onPress?: (event: SyntheticEvent<*>) => void,
+    ...
   };
 
   declare class Callout extends React$Component<CalloutProps> {}
@@ -118,6 +121,7 @@ declare module 'react-native-maps' {
     onDragStart?: (event: InteractWithMapEvent) => void,
     onDrag?: (event: InteractWithMapEvent) => void,
     onDragEnd?: (event: InteractWithMapEvent) => void,
+    ...
   };
 
   declare class Marker extends React$Component<MarkerProps> {
@@ -137,6 +141,7 @@ declare module 'react-native-maps' {
     lineDashPhase?: number,
     lineDashPattern?: number[],
     onPress?: (event: SyntheticEvent<*>) => void,
+    ...
   };
 
   declare class Polygon extends React$Component<PolygonProps> {}
@@ -152,6 +157,7 @@ declare module 'react-native-maps' {
     lineDashPhase?: number,
     lineDashPattern?: number[],
     onPress?: (event: SyntheticEvent<*>) => void,
+    ...
   };
 
   declare class Polyline extends React$Component<PolylineProps> {}
@@ -169,6 +175,7 @@ declare module 'react-native-maps' {
     geodesic?: boolean,
     lineDashPhase?: number,
     lineDashPattern?: number[],
+    ...
   };
 
   declare class Circle extends React$Component<CircleProps> {}
@@ -189,6 +196,7 @@ declare module 'react-native-maps' {
       options?: {
         edgePadding?: EdgePadding,
         animated?: boolean,
+        ...
       },
     ) => void;
   }

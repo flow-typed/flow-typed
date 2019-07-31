@@ -14,6 +14,7 @@ declare module "which" {
 
   declare module.exports: {
     [[call]]: typeof whichAsync,
-    sync: typeof whichSync
+    sync: typeof whichSync,
+    ...
   }
 }

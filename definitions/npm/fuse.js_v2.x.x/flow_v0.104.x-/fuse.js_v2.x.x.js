@@ -8,6 +8,7 @@ declare module 'fuse.js' {
     searchFn?: Function,
     getFn?: (obj: any, path: string) => any,
     sortFn?: Function,
+    ...
   }
   declare class Fuse<T> {
     static (items: Array<T>, options?: FuseOptions): Fuse<T>;

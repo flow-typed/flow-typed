@@ -14,9 +14,9 @@ import _, {
 
 const ns: Array<number> = [1, 2, 3, 4, 5];
 const ss: Array<string> = ['one', 'two', 'three', 'four'];
-const obj: { [k: string]: number } = { a: 1, c: 2 };
-const objMixed: { [k: string]: mixed } = { a: 1, c: 'd' };
-const os: Array<{ [k: string]: * }> = [{ a: 1, c: 'd' }, { b: 2 }];
+const obj: { [k: string]: number, ... } = { a: 1, c: 2 };
+const objMixed: { [k: string]: mixed, ... } = { a: 1, c: 'd' };
+const os: Array<{ [k: string]: *, ... }> = [{ a: 1, c: 'd' }, { b: 2 }];
 const str: string = 'hello world';
 
 //Logic
@@ -132,7 +132,7 @@ const n1: boolean = _.not(1);
 const oor: boolean = _.or(true, true);
 
 const nonBooleanOr: ?string = _.or('watskeburt', undefined);
-const nonBooleanOr_: (arg: { key: string }) => string | { key: string } = _.or(
+const nonBooleanOr_: (arg: { key: string, ... }) => string | { key: string, ... } = _.or(
   'watskeburt'
 );
 
@@ -168,7 +168,7 @@ describe('propSatisfies', () => {
     });
   });
   describe('with object as maps', () => {
-    const o: { [string]: number } = { x: 1, y: 2 };
+    const o: { [string]: number, ... } = { x: 1, y: 2 };
     it('should works with object map', () => {
       const propSat: boolean = _.propSatisfies((x: number) => x > 0, 'x', o);
     });

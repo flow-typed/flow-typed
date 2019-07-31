@@ -864,7 +864,12 @@ describe('object', () => {
         c: string(),
       }),
       d: ref<string>('b.c'),
-    }): Schema<{ a: number, b: { c: string }, d: string }, any>);
+    }): Schema<{
+      a: number,
+      b: { c: string, ... },
+      d: string,
+      ...
+    }, any>);
   });
 
   it('should extend schema type by .shape()', () => {
@@ -873,13 +878,18 @@ describe('object', () => {
       b: bool(),
     });
 
-    (schema: Schema<{ a: number, b: boolean }, any>);
+    (schema: Schema<{
+      a: number,
+      b: boolean,
+      ...
+    }, any>);
 
     (schema: Schema<
       {
         // $ExpectError: check any
         a: string,
         b: boolean,
+        ...
       },
       any
     >);
@@ -889,6 +899,7 @@ describe('object', () => {
         a: number,
         // $ExpectError: check any
         b: string,
+        ...
       },
       any
     >);
@@ -902,6 +913,7 @@ describe('object', () => {
         {
           a: string,
           a2: string,
+          ...
         },
         any
       >);
@@ -911,6 +923,7 @@ describe('object', () => {
           a: string,
           // $ExpectError: check any
           a2: number,
+          ...
         },
         any
       >);
@@ -923,13 +936,13 @@ describe('object', () => {
         false
       );
 
-      (schema: Schema<{ a2: string }, any>);
+      (schema: Schema<{ a2: string, ... }, any>);
 
       // $ExpectError: check any
-      (schema: Schema<{ a2: number }, any>);
+      (schema: Schema<{ a2: number, ... }, any>);
 
       // $ExpectError: a missing in new shema
-      (schema: Schema<{ a: number }, any>);
+      (schema: Schema<{ a: number, ... }, any>);
     });
   });
 
@@ -939,7 +952,7 @@ describe('object', () => {
         .nullable(false)
         .validateSync(null);
 
-      (val1: { a: number });
+      (val1: { a: number, ... });
       // $ExpectError: check any
       (val1: number);
 
@@ -947,7 +960,7 @@ describe('object', () => {
         .nullable()
         .validateSync(null);
 
-      (val2: ?{ a: number });
+      (val2: ?{ a: number, ... });
       // $ExpectError: check any
       (val2: number);
 
@@ -955,7 +968,7 @@ describe('object', () => {
         .required()
         .validateSync(null);
 
-      (val3: { a: number });
+      (val3: { a: number, ... });
       // $ExpectError: check any
       (val3: number);
 
@@ -963,7 +976,7 @@ describe('object', () => {
         .notRequired()
         .validateSync(null);
 
-      (val4: ?{ a: number });
+      (val4: ?{ a: number, ... });
       // $ExpectError: check any
       (val4: number);
     });
@@ -1002,7 +1015,7 @@ describe('object', () => {
         .clone();
 
       schema.validate(null).then(val => {
-        (val: { a: string });
+        (val: { a: string, ... });
 
         // $ExpectError: check any
         (val: number);

@@ -1,5 +1,9 @@
 declare module '@storybook/addon-a11y' {
-  declare type Context = { kind: string, story: string };
+  declare type Context = {
+    kind: string,
+    story: string,
+    ...
+  };
   declare type Renderable = React$Element<*>;
   declare type RenderFunction = () => Renderable | Array<Renderable>;
 
@@ -14,12 +18,14 @@ declare module '@storybook/addon-a11y' {
     after?: () => void,
     options?: mixed,
     enabled?: boolean,
+    ...
   };
 
   declare type AxeOptions = {
     branding?: {
       brand?: string,
       application?: string,
+      ...
     },
     reporter?: 'v1' | 'v2',
     checks?: Array<AxeCheck>,
@@ -34,12 +40,15 @@ declare module '@storybook/addon-a11y' {
       none?: Array<AxeCheck>,
       tags?: Array<string>,
       matches?: string,
+      ...
     }>,
     disableOtherRules?: boolean,
+    ...
   };
 
   declare module.exports: {
     checkA11y: StoryDecorator,
     configureA11y: (options?: AxeOptions) => void,
+    ...
   };
 }

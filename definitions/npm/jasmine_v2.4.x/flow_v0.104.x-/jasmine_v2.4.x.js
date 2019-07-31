@@ -18,7 +18,8 @@ type JasmineExpectType = {
   toHaveBeenCalledWith(...args: Array<any>): void,
   toMatch(regexp: RegExp): void,
   toThrow(message?: string): void,
-  toThrowError(val: mixed): void
+  toThrowError(val: mixed): void,
+  ...
 };
 
 declare function describe(name: string, fn: Function): void;
@@ -49,7 +50,8 @@ type JasmineCallsType = {
   first(): mixed,
   any(): boolean,
   count(): number,
-  reset(): void
+  reset(): void,
+  ...
 };
 
 type JasmineSpyStrategyType = {
@@ -59,12 +61,14 @@ type JasmineSpyStrategyType = {
   returnValue(value: any): JasmineSpyType,
   returnValues(...values: any): JasmineSpyType,
   stub(): JasmineSpyType,
-  throwError(errorMessage?: string): JasmineSpyType
+  throwError(errorMessage?: string): JasmineSpyType,
+  ...
 };
 
 type JasmineSpyTypeProto = {
   and: JasmineSpyStrategyType,
-  calls: JasmineCallsType
+  calls: JasmineCallsType,
+  ...
 };
 
 type JasmineSpyType = JasmineSpyTypeProto & Function;
@@ -73,26 +77,24 @@ type JasmineClockType = {
   install(): void,
   uninstall(): void,
   tick(milliseconds?: number): void,
-  mockDate(date: Date): void
+  mockDate(date: Date): void,
+  ...
 };
 
 declare type JasmineMatcherResult = {
   pass: boolean,
-  message?: string | (() => string)
+  message?: string | (() => string),
+  ...
 };
 
-declare type JasmineMatcherStruct = {
-  compare<T: any>(actual: T, expected: T): JasmineMatcherResult
-};
+declare type JasmineMatcherStruct = { compare<T: any>(actual: T, expected: T): JasmineMatcherResult, ... };
 
 declare type JasmineMatcher = (
   utils?: mixed,
   customEqualityTesters?: mixed
 ) => JasmineMatcherStruct;
 
-declare type JasmineMatchers = {
-  [key: string]: JasmineMatcher
-};
+declare type JasmineMatchers = { [key: string]: JasmineMatcher, ... };
 
 declare var jasmine: {
   DEFAULT_TIMEOUT_INTERVAL: number,
@@ -103,5 +105,6 @@ declare var jasmine: {
   arrayContaining(val: mixed[]): void,
   stringMatching(val: string): void,
   clock(): JasmineClockType,
-  addMatchers(val: JasmineMatchers): void
+  addMatchers(val: JasmineMatchers): void,
+  ...
 };

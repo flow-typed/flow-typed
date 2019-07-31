@@ -33,7 +33,8 @@ declare module "xterm" {
     brightBlue: string,
     brightMagenta: string,
     brightCyan: string,
-    brightWhite: string
+    brightWhite: string,
+    ...
   }>;
 
   declare export type TerminalOptions = $Shape<{
@@ -57,7 +58,8 @@ declare module "xterm" {
     screenReaderMode: boolean,
     scrollback: number,
     tabStopWidth: number,
-    theme: Theme
+    theme: Theme,
+    ...
   }>;
 
   declare export type LinkMatcherOptions = $Shape<{
@@ -69,7 +71,8 @@ declare module "xterm" {
     tooltipCallback: (event: MouseEvent, uri: string) => boolean | void,
     leaveCallback: (event: MouseEvent, uri: string) => boolean | void,
     priority: number,
-    willLinkActivate: (event: MouseEvent, uri: string) => boolean
+    willLinkActivate: (event: MouseEvent, uri: string) => boolean,
+    ...
   }>;
 
   declare export type Disposable = {|
@@ -114,11 +117,19 @@ declare module "xterm" {
     ): void;
     on(
       type: "refresh",
-      listener: (data?: { start: number, end: number }) => void
+      listener: (data?: {
+        start: number,
+        end: number,
+        ...
+      }) => void
     ): void;
     on(
       type: "resize",
-      listener: (data?: { cols: number, rows: number }) => void
+      listener: (data?: {
+        cols: number,
+        rows: number,
+        ...
+      }) => void
     ): void;
     on(type: "scroll", listener: (ydisp?: number) => void): void;
     on(type: "title", listener: (title?: string) => void): void;

@@ -1,19 +1,22 @@
 type rxjs$PartialObserver<-T> =
   | {
-      +next: (value: T) => mixed,
-      +error?: (error: any) => mixed,
-      +complete?: () => mixed
-    }
+  +next: (value: T) => mixed,
+  +error?: (error: any) => mixed,
+  +complete?: () => mixed,
+  ...
+}
   | {
-      +next?: (value: T) => mixed,
-      +error: (error: any) => mixed,
-      +complete?: () => mixed
-    }
+  +next?: (value: T) => mixed,
+  +error: (error: any) => mixed,
+  +complete?: () => mixed,
+  ...
+}
   | {
-      +next?: (value: T) => mixed,
-      +error?: (error: any) => mixed,
-      +complete: () => mixed
-    };
+  +next?: (value: T) => mixed,
+  +error?: (error: any) => mixed,
+  +complete: () => mixed,
+  ...
+};
 
 declare interface rxjs$ISubscription {
   unsubscribe(): void;
@@ -23,10 +26,11 @@ type rxjs$TeardownLogic = rxjs$ISubscription | (() => void);
 
 type rxjs$EventListenerOptions =
   | {
-      capture?: boolean,
-      passive?: boolean,
-      once?: boolean
-    }
+  capture?: boolean,
+  passive?: boolean,
+  once?: boolean,
+  ...
+}
   | boolean;
 
 type rxjs$ObservableInput<T> = rxjs$Observable<T> | Promise<T> | Iterable<T>;
@@ -704,7 +708,8 @@ declare class rxjs$Observable<+T> {
   do(observer: {
     next?: (value: T) => mixed,
     error?: (error: any) => mixed,
-    complete?: () => mixed
+    complete?: () => mixed,
+    ...
   }): rxjs$Observable<T>;
 
   throttleTime(duration: number): rxjs$Observable<T>;
@@ -1574,7 +1579,8 @@ declare module "rxjs" {
       asap: rxjs$SchedulerClass,
       queue: rxjs$SchedulerClass,
       animationFrame: rxjs$SchedulerClass,
-      async: rxjs$SchedulerClass
+      async: rxjs$SchedulerClass,
+      ...
     },
     Subscription: typeof rxjs$Subscription,
     ArgumentOutOfRangeError: typeof rxjs$ArgumentOutOfRangeError,
@@ -1582,84 +1588,62 @@ declare module "rxjs" {
     ObjectUnsubscribedError: typeof rxjs$ObjectUnsubscribedError,
     TimeoutError: typeof rxjs$TimeoutError,
     UnsubscriptionError: typeof rxjs$UnsubscriptionError,
+    ...
   };
 }
 
 declare module "rxjs/Observable" {
-  declare module.exports: {
-    Observable: typeof rxjs$Observable
-  };
+  declare module.exports: { Observable: typeof rxjs$Observable, ... };
 }
 
 declare module "rxjs/Observer" {
-  declare module.exports: {
-    Observer: typeof rxjs$Observer
-  };
+  declare module.exports: { Observer: typeof rxjs$Observer, ... };
 }
 
 declare module "rxjs/BehaviorSubject" {
-  declare module.exports: {
-    BehaviorSubject: typeof rxjs$BehaviorSubject
-  };
+  declare module.exports: { BehaviorSubject: typeof rxjs$BehaviorSubject, ... };
 }
 
 declare module "rxjs/ReplaySubject" {
-  declare module.exports: {
-    ReplaySubject: typeof rxjs$ReplaySubject
-  };
+  declare module.exports: { ReplaySubject: typeof rxjs$ReplaySubject, ... };
 }
 
 declare module "rxjs/Subject" {
   declare module.exports: {
     Subject: typeof rxjs$Subject,
-    AnonymousSubject: typeof rxjs$AnonymousSubject
+    AnonymousSubject: typeof rxjs$AnonymousSubject,
+    ...
   };
 }
 
 declare module "rxjs/Subscriber" {
-  declare module.exports: {
-    Subscriber: typeof rxjs$Subscriber
-  };
+  declare module.exports: { Subscriber: typeof rxjs$Subscriber, ... };
 }
 
 declare module "rxjs/Subscription" {
-  declare module.exports: {
-    Subscription: typeof rxjs$Subscription
-  };
+  declare module.exports: { Subscription: typeof rxjs$Subscription, ... };
 }
 
 declare module "rxjs/testing/TestScheduler" {
-  declare module.exports: {
-    TestScheduler: typeof rxjs$SchedulerClass
-  };
+  declare module.exports: { TestScheduler: typeof rxjs$SchedulerClass, ... };
 }
 
 declare module "rxjs/util/ArgumentOutOfRangeError" {
-  declare module.exports: {
-    ArgumentOutOfRangeError: typeof rxjs$ArgumentOutOfRangeError,
-  };
+  declare module.exports: { ArgumentOutOfRangeError: typeof rxjs$ArgumentOutOfRangeError, ... };
 }
 
 declare module "rxjs/util/EmptyError" {
-  declare module.exports: {
-    EmptyError: typeof rxjs$EmptyError,
-  };
+  declare module.exports: { EmptyError: typeof rxjs$EmptyError, ... };
 }
 
 declare module "rxjs/util/ObjectUnsubscribedError" {
-  declare module.exports: {
-    ObjectUnsubscribedError: typeof rxjs$ObjectUnsubscribedError,
-  };
+  declare module.exports: { ObjectUnsubscribedError: typeof rxjs$ObjectUnsubscribedError, ... };
 }
 
 declare module "rxjs/util/TimeoutError" {
-  declare module.exports: {
-    TimeoutError: typeof rxjs$TimeoutError,
-  };
+  declare module.exports: { TimeoutError: typeof rxjs$TimeoutError, ... };
 }
 
 declare module "rxjs/util/UnsubscriptionError" {
-  declare module.exports: {
-    UnsubscriptionError: typeof rxjs$UnsubscriptionError,
-  };
+  declare module.exports: { UnsubscriptionError: typeof rxjs$UnsubscriptionError, ... };
 }

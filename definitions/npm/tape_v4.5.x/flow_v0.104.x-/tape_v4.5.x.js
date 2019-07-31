@@ -3,9 +3,11 @@
 declare type tape$TestOpts = {
   skip: boolean,
   timeout?: number,
+  ...
 } | {
   skip?: boolean,
   timeout: number,
+  ...
 };
 
 
@@ -90,9 +92,7 @@ declare interface tape$Context {
 
 declare module 'tape' {
   declare type TestHarness = Tape;
-  declare type StreamOpts = {
-    objectMode?: boolean,
-  };
+  declare type StreamOpts = { objectMode?: boolean, ... };
 
   declare type Tape = {
     (a: string | tape$TestOpts | tape$TestCb, b?: tape$TestCb | tape$TestOpts, c?: tape$TestCb, ...rest: Array<void>): void,
@@ -101,6 +101,7 @@ declare module 'tape' {
     createHarness: () => TestHarness,
     createStream: (opts?: StreamOpts) => stream$Readable,
     only: (a: string | tape$TestOpts | tape$TestCb, b?: tape$TestCb | tape$TestOpts, c?: tape$TestCb, ...rest: Array<void>) => void,
+    ...
   };
 
   declare module.exports: Tape;

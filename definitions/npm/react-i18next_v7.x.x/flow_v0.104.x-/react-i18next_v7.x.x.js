@@ -10,10 +10,11 @@ declare module "react-i18next" {
   declare type TranslatorPropsVoid = {
     t: TFunction | void,
     i18nLoadedAt: Date | void,
-    i18n: Object | void
+    i18n: Object | void,
+    ...
   };
 
-  declare type Translator<P: {}, Component: React$ComponentType<P>> = (
+  declare type Translator<P: {...}, Component: React$ComponentType<P>> = (
     WrappedComponent: Component
   ) => React$ComponentType<
     $Diff<React$ElementConfig<Component>, TranslatorPropsVoid>
@@ -27,10 +28,11 @@ declare module "react-i18next" {
     withRef: boolean,
     translateFuncName: string,
     i18n: Object,
-    usePureComponent: boolean
+    usePureComponent: boolean,
+    ...
   }>;
 
-  declare function translate<P: {}, Component: React$ComponentType<P>>(
+  declare function translate<P: {...}, Component: React$ComponentType<P>>(
     namespaces?: | string
     | Array<string>
     | (($Diff<P, TranslatorPropsVoid>) => string | Array<string>),
@@ -40,9 +42,14 @@ declare module "react-i18next" {
   declare type I18nProps = {
     i18n?: Object,
     ns?: string | Array<string>,
-    children: (t: TFunction, { i18n: Object, t: TFunction }) => React$Node,
+    children: (t: TFunction, {
+      i18n: Object,
+      t: TFunction,
+      ...
+    }) => React$Node,
     initialI18nStore?: Object,
-    initialLanguage?: string
+    initialLanguage?: string,
+    ...
   };
   declare var I18n: React$ComponentType<I18nProps>;
 
@@ -55,7 +62,8 @@ declare module "react-i18next" {
     parent?: string,
     style?: Object,
     t?: TFunction,
-    useDangerouslySetInnerHTML?: boolean
+    useDangerouslySetInnerHTML?: boolean,
+    ...
   };
   declare var Interpolate: React$ComponentType<InterpolateProps>;
 
@@ -64,22 +72,29 @@ declare module "react-i18next" {
     parent?: string,
     i18n?: Object,
     i18nKey?: string,
-    t?: TFunction
+    t?: TFunction,
+    ...
   };
   declare var Trans: React$ComponentType<TransProps>;
 
-  declare type ProviderProps = { i18n: Object, children: React$Element<*> };
+  declare type ProviderProps = {
+    i18n: Object,
+    children: React$Element<*>,
+    ...
+  };
   declare var I18nextProvider: React$ComponentType<ProviderProps>;
 
   declare type NamespacesProps = {
     components: Array<React$ComponentType<*>>,
-    i18n: { loadNamespaces: Function }
+    i18n: { loadNamespaces: Function, ... },
+    ...
   };
   declare function loadNamespaces(props: NamespacesProps): Promise<void>;
 
   declare var reactI18nextModule: {
     type: "3rdParty",
-    init: (instance: Object) => void
+    init: (instance: Object) => void,
+    ...
   };
 
   declare function setDefaults(options: TranslateOptions): void;

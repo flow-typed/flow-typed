@@ -91,7 +91,11 @@ describe("react-i18next", () => {
 
     describe("Stateless Functional Components", () => {
       it("passes if the component is passed required props", () => {
-        const Comp = ({ s, t }: { s: string, t: TFunction }) => (
+        const Comp = ({ s, t }: {
+          s: string,
+          t: TFunction,
+          ...
+        }) => (
           <div prop1={t("")} prop2={" " + s} />
         );
         const WrappedComp = translate()(Comp);
@@ -99,7 +103,11 @@ describe("react-i18next", () => {
       });
 
       it("errors if the component is missing required props", () => {
-        const Comp = ({ s, t }: { s: string, t: TFunction }) => (
+        const Comp = ({ s, t }: {
+          s: string,
+          t: TFunction,
+          ...
+        }) => (
           <div prop1={t("")} prop2={" " + s} />
         );
         const WrappedComp = translate()(Comp);
@@ -109,7 +117,11 @@ describe("react-i18next", () => {
 
       it("errors if the component is passed props of the wrong type", () => {
         // $ExpectError - wrong type
-        const Comp = ({ s, t }: { s: string, t: TFunction }) => (
+        const Comp = ({ s, t }: {
+          s: string,
+          t: TFunction,
+          ...
+        }) => (
           <div prop1={t("")} prop2={" " + s} />
         );
         const WrappedComp = translate()(Comp);
@@ -120,7 +132,11 @@ describe("react-i18next", () => {
 
     describe("Class Components", () => {
       it("passes if the component is passed required props", () => {
-        class Comp extends React.Component<{ s: string, t: TFunction }> {
+        class Comp extends React.Component<{
+          s: string,
+          t: TFunction,
+          ...
+        }> {
           render() {
             const { s, t } = this.props;
             return <span>{t(s)}</span>;
@@ -131,7 +147,11 @@ describe("react-i18next", () => {
       });
 
       it("errors if the component is missing required props", () => {
-        class Comp extends React.Component<{ s: string, t: TFunction }> {
+        class Comp extends React.Component<{
+          s: string,
+          t: TFunction,
+          ...
+        }> {
           render() {
             const { s, t } = this.props;
             return <span>{t(s)}</span>;
@@ -143,7 +163,11 @@ describe("react-i18next", () => {
       });
 
       it("errors if the component is passed props of the wrong type", () => {
-        class Comp extends React.Component<{ s: string, t: TFunction }> {
+        class Comp extends React.Component<{
+          s: string,
+          t: TFunction,
+          ...
+        }> {
           render() {
             const { s, t } = this.props;
             return <span>{t(s)}</span>;
@@ -155,7 +179,11 @@ describe("react-i18next", () => {
       });
 
       it("passes if a required prop is handled by defaultProps", () => {
-        class Comp extends React.Component<{ s: string, t: TFunction }> {
+        class Comp extends React.Component<{
+          s: string,
+          t: TFunction,
+          ...
+        }> {
           static defaultProps = {
             s: "defaultS"
           };
@@ -169,7 +197,11 @@ describe("react-i18next", () => {
       });
 
       it("errors if a required prop that has a defaultProp is passed the wrong type", () => {
-        class Comp extends React.Component<{ s: string, t: TFunction }> {
+        class Comp extends React.Component<{
+          s: string,
+          t: TFunction,
+          ...
+        }> {
           static defaultProps = {
             s: "defaultS"
           };
@@ -189,7 +221,7 @@ describe("react-i18next", () => {
     it("passes when passed correct props", () => {
       <I18n>{(t: TFunction) => <span>{t("title")}</span>}</I18n>;
       <I18n ns="translations">
-        {(t: TFunction, { i18n }: { i18n: Object }) => (
+        {(t: TFunction, { i18n }: { i18n: Object, ... }) => (
           <div>
             <span>{t("title")}</span>
             <button onClick={() => i18n.changeLanguage("de")}>de</button>

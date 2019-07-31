@@ -12,12 +12,12 @@ describe('Downshift', () => {
   describe('children', () => {
     <Downshift>
       {({ getMenuProps }) => {
-        (getMenuProps(): {});
+        (getMenuProps(): {...});
 
-        (getMenuProps({ refKey: 'rootRef' }): {});
+        (getMenuProps({ refKey: 'rootRef' }): {...});
 
         // $ExpectError: `refKey` must be a string
-        (getMenuProps({ refKey: 1 }): {});
+        (getMenuProps({ refKey: 1 }): {...});
 
         return <i />;
       }}

@@ -57,13 +57,12 @@ declare module 'react-native-unimodules/@@expo-constants' {
     model: string,
     userInterfaceIdiom: UserInterfaceIdiom,
     systemVersion: string,
+    ...
   };
 
-  declare export type AndroidManifest = {
-    versionCode: number,
-  };
+  declare export type AndroidManifest = { versionCode: number, ... };
 
-  declare export type WebManifest = {};
+  declare export type WebManifest = {...};
 
   declare export type AppManifest = {
     name?: string,
@@ -77,10 +76,9 @@ declare module 'react-native-unimodules/@@expo-constants' {
     notification?: {
       icon?: string,
       color?: string,
+      ...
     },
-    loading?: {
-      icon?: string,
-    },
+    loading?: { icon?: string, ... },
     entryPoint?: string,
     packagerOpts?: {
       hostType?: string,
@@ -90,28 +88,27 @@ declare module 'react-native-unimodules/@@expo-constants' {
       urlType?: string,
       urlRandomness?: string,
       lanType?: string,
+      ...
     },
     xde?: boolean,
-    developer?: {
-      tool?: string,
-    },
+    developer?: { tool?: string, ... },
     bundleUrl: string,
     debuggerHost?: string,
     mainModuleName?: string,
     logUrl?: string,
+    ...
   };
 
   declare export type PlatformManifest = {
     ios?: IOSManifest,
     android?: AndroidManifest,
     web?: WebManifest,
-    detach?: {
-      scheme?: string,
-    },
+    detach?: { scheme?: string, ... },
     logUrl?: string,
     scheme?: string,
     hostUri?: string,
     developer?: string,
+    ...
   };
 
   declare export type NativeConstants = {
@@ -135,11 +132,13 @@ declare module 'react-native-unimodules/@@expo-constants' {
     manifest: AppManifest,
     platform?: PlatformManifest,
     getWebViewUserAgentAsync: () => Promise<string | null>,
+    ...
   };
 
   declare export default {
     deviceId?: string,
     linkingUrl?: string,
+    ...
   } & NativeConstants;
 }
 
@@ -148,17 +147,13 @@ declare module 'react-native-unimodules/@@expo-file-system' {
   declare export type DownloadOptions = {|
     md5?: boolean,
     cache?: boolean,
-    headers?: {
-      [name: string]: string,
-    },
+    headers?: { [name: string]: string, ... },
   |};
 
   declare export type DownloadResult = {|
     uri: string,
     status: number,
-    headers: {
-      [name: string]: string,
-    },
+    headers: { [name: string]: string, ... },
     md5?: string,
   |};
 

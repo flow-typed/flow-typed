@@ -1,6 +1,4 @@
-declare type joiToJsonSchema$json = {
-  [string]: boolean | string | number | joiToJsonSchema$json
-};
+declare type joiToJsonSchema$json = { [string]: boolean | string | number | joiToJsonSchema$json, ... };
 
 declare type joiToJsonSchema$joiToJsonSchema = (
   schema: Object,

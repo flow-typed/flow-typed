@@ -11,31 +11,47 @@ declare module 'temp' {
 
   declare module.exports: {
     // Settings
-    dir: string;
-    track(value?: boolean): $Exports<'temp'>;
-
+    dir: string,
+    track(value?: boolean): $Exports<'temp'>,
     // Functions
     mkdir(
       affixes?: Affixes,
       callback?: (err: ?ErrnoError, dirPath: string) => mixed,
-    ): void;
-    mkdirSync(affixes?: Affixes): string;
+    ): void,
+    mkdirSync(affixes?: Affixes): string,
     open(
       affixes?: Affixes,
       callback?: (
         err: ?ErrnoError,
-        info: {path: string, fd: ?number},
+        info: {
+          path: string,
+          fd: ?number,
+          ...
+        },
       ) => mixed,
-    ): void;
-    openSync(affixes?: Affixes): {path: string, fd: ?number};
-    path(rawAffixes?: Affixes, defaultPrefix?: string): string;
+    ): void,
+    openSync(affixes?: Affixes): {
+      path: string,
+      fd: ?number,
+      ...
+    },
+    path(rawAffixes?: Affixes, defaultPrefix?: string): string,
     cleanup(
       callback?: (
         err: ?ErrnoError,
-        info: {files: number, dirs?: number},
+        info: {
+          files: number,
+          dirs?: number,
+          ...
+        },
       ) => mixed,
-    ): void;
-    cleanupSync(): {files: number, dirs: number};
-    createWriteStream(affixes?: Affixes): stream$Writable;
+    ): void,
+    cleanupSync(): {
+      files: number,
+      dirs: number,
+      ...
+    },
+    createWriteStream(affixes?: Affixes): stream$Writable,
+    ...
   };
 }

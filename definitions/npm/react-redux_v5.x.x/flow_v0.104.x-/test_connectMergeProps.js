@@ -11,9 +11,7 @@ function onlyOwnProps_ok() {
   type OwnProps = {|
     passthrough: string
   |}
-  type Props = {
-    ...OwnProps
-  };
+  type Props = { ...OwnProps, ... };
   class Com extends React.Component<Props> {}
 
   const mergeProps = (stateProps: {||}, dispatchProps: {|dispatch: Dispatch|}, ownProps: OwnProps) => {
@@ -34,9 +32,7 @@ function onlyOwnProps_wrongDispatch() {
   type OwnProps = {|
     passthrough: string
   |}
-  type Props = {
-    ...OwnProps
-  };
+  type Props = { ...OwnProps, ... };
   class Com extends React.Component<Props> {}
 
   const mergeProps = (stateProps: {||}, dispatchProps: {|dispatch: string|}, ownProps: OwnProps) => {
@@ -62,9 +58,7 @@ function onlyOwnProps_noPassthrough() {
   type OwnProps = {|
     passthrough: string
   |}
-  type Props = {
-    ...OwnProps
-  };
+  type Props = { ...OwnProps, ... };
   class Com extends React.Component<Props> {}
 
   const mergeProps = (stateProps: {||}, dispatchProps: {|dispatch: Dispatch|}, ownProps: OwnProps) => {
@@ -99,6 +93,7 @@ function onlyStateProps_ok() {
   type Props = {
     ...OwnProps,
     ...StateProps,
+    ...
   };
   class Com extends React.Component<Props> {}
 
@@ -131,7 +126,8 @@ function onlyStateProps_wrongDispatch() {
   |}
   type Props = {
     ...OwnProps,
-    ...StateProps
+    ...StateProps,
+    ...
   };
   class Com extends React.Component<Props> {}
 
@@ -173,6 +169,7 @@ function onlyDispatchPropsObject_ok() {
   type Props = {
     ...OwnProps,
     ...DispatchProps,
+    ...
   };
   class Com extends React.Component<Props> {}
 
@@ -209,6 +206,7 @@ function onlyDispatchPropsObject_wrongExpectedState() {
   type Props = {
     ...OwnProps,
     ...DispatchProps,
+    ...
   };
   class Com extends React.Component<Props> {}
 
@@ -216,7 +214,7 @@ function onlyDispatchPropsObject_wrongExpectedState() {
     action1
   }
 
-  const mergeProps = (stateProps: {wrong: boolean}, dispatchProps: DispatchProps, ownProps: OwnProps) => {
+  const mergeProps = (stateProps: { wrong: boolean, ... }, dispatchProps: DispatchProps, ownProps: OwnProps) => {
     return {
       ...ownProps,
       ...dispatchProps,
@@ -250,6 +248,7 @@ function onlyDispatchPropsFunction_ok() {
   type Props = {
     ...OwnProps,
     ...DispatchProps,
+    ...
   };
   class Com extends React.Component<Props> {}
 
@@ -286,6 +285,7 @@ function onlyDispatchPropsFunction_WrongExpectedState() {
   type Props = {
     ...OwnProps,
     ...DispatchProps,
+    ...
   };
   class Com extends React.Component<Props> {}
 
@@ -324,6 +324,7 @@ function onlyDispatchPropsFunction_wrongDispatchProp() {
   type Props = {
     ...OwnProps,
     ...DispatchProps,
+    ...
   };
   class Com extends React.Component<Props> {}
 
@@ -369,6 +370,7 @@ function stateAndDispatchPropsFunction_ok() {
     ...OwnProps,
     ...StateProps,
     ...DispatchProps,
+    ...
   };
   class Com extends React.Component<Props> {}
 
@@ -418,6 +420,7 @@ function stateAndDispatchPropsFunction_wrongState() {
     ...OwnProps,
     ...StateProps,
     ...DispatchProps,
+    ...
   };
   class Com extends React.Component<Props> {}
 
@@ -473,6 +476,7 @@ function stateAndDispatchPropsFunction_wrongDispatch() {
     ...OwnProps,
     ...StateProps,
     ...DispatchProps,
+    ...
   };
   class Com extends React.Component<Props> {}
 
@@ -522,7 +526,8 @@ function returnsTotallyDifferentProps() {
   type Props = {
     a: 1,
     b: 2,
-    c: 3
+    c: 3,
+    ...
   };
   class Com extends React.Component<Props> {}
 
@@ -572,7 +577,8 @@ function returnsTotallyDifferentPropsWithError() {
   type Props = {
     a: 1,
     b: 2,
-    c: 3
+    c: 3,
+    ...
   };
   class Com extends React.Component<Props> {}
 

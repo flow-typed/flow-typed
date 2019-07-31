@@ -9,7 +9,7 @@ declare module 'metalsmith' {
   declare type Yieldable = Promise<any>
                          | Function
                          | Array<Yieldable>
-                         | {[string]: Yieldable}
+                         | { [string]: Yieldable, ... }
                          | Generator<any, any, any>;
 
   declare type Callback<Result> = (err: ?Error, result: ?Result) => void;
@@ -19,10 +19,11 @@ declare module 'metalsmith' {
   declare type Contents = string | Buffer | Uint8Array;
 
   declare type File = {
+    [string]: any,
     contents: Contents,
     mode?: string,
     stats?: Stats,
-    [string]: any,
+    ...
   };
 
   // This is a more strict variant of the File type. It's used in Metalsmith's
@@ -32,11 +33,12 @@ declare module 'metalsmith' {
     contents: Contents,
     mode: string,
     stats: Stats,
+    ...
   };
 
-  declare type FilesMap = {[path: string]: File};
+  declare type FilesMap = { [path: string]: File, ... };
 
-  declare type RFilesMap = {[path: string]: RFile};
+  declare type RFilesMap = { [path: string]: RFile, ... };
 
   declare type Plugin = (files: FilesMap, metalsmith: Metalsmith, done: DoneCallback) => void | Promise<void>;
 

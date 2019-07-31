@@ -1,7 +1,8 @@
 type $npm$pad$options = {
   char?: string,
   colors?: boolean,
-  strip?: boolean
+  strip?: boolean,
+  ...
 };
 
 declare module "pad" {

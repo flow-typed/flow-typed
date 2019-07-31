@@ -13,24 +13,19 @@ declare module "chai" {
     to: ExpectChain<T>,
     which: ExpectChain<T>,
     with: ExpectChain<T>,
-
     not: ExpectChain<T>,
     deep: ExpectChain<T>,
     any: ExpectChain<T>,
     all: ExpectChain<T>,
-
     a: ExpectChain<T> & ((type: string) => ExpectChain<T>),
     an: ExpectChain<T> & ((type: string) => ExpectChain<T>),
-
     include: ExpectChain<T> & ((value: mixed) => ExpectChain<T>),
     includes: ExpectChain<T> & ((value: mixed) => ExpectChain<T>),
     contain: ExpectChain<T> & ((value: mixed) => ExpectChain<T>),
     contains: ExpectChain<T> & ((value: mixed) => ExpectChain<T>),
-
     eql: (value: T) => ExpectChain<T>,
     equal: (value: T) => ExpectChain<T>,
     equals: (value: T) => ExpectChain<T>,
-
     above: (value: T & number) => ExpectChain<T>,
     greaterThan: (value: T & number) => ExpectChain<T>,
     gt: (value: T & number) => ExpectChain<T>,
@@ -40,46 +35,35 @@ declare module "chai" {
     lt: (value: T & number) => ExpectChain<T>,
     most: (value: T & number) => ExpectChain<T>,
     within: (start: T & number, finish: T & number) => ExpectChain<T>,
-
     instanceof: (constructor: mixed) => ExpectChain<T>,
     property: <P>(
       name: string,
       value?: P
     ) => ExpectChain<P> & ((name: string) => ExpectChain<mixed>),
-
     length: ExpectChain<number> & ((value: number, message?: string) => ExpectChain<T>),
     lengthOf: (value: number) => ExpectChain<T>,
-
     match: (regex: RegExp) => ExpectChain<T>,
     matches: (regex: RegExp) => ExpectChain<T>,
     string: (string: string) => ExpectChain<T>,
-
     key: (key: string) => ExpectChain<T>,
     keys: (
       key: string | Array<string>,
       ...keys: Array<string>
     ) => ExpectChain<T>,
-
     throw: <E>(
       err?: Class<E> | Error | RegExp | string,
       errMsgMatcher?: RegExp | string,
       msg?: string
     ) => ExpectChain<T>,
-
     respondTo: (method: string) => ExpectChain<T>,
     itself: ExpectChain<T>,
-
     satisfy: (method: (value: T) => boolean) => ExpectChain<T>,
-
     closeTo: (expected: T & number, delta: number) => ExpectChain<T>,
-
     members: (set: mixed) => ExpectChain<T>,
     oneOf: (list: Array<T>) => ExpectChain<T>,
-
     change: (obj: mixed, key: string) => ExpectChain<T>,
     increase: (obj: mixed, key: string) => ExpectChain<T>,
     decrease: (obj: mixed, key: string) => ExpectChain<T>,
-
     // dirty-chai
     ok: () => ExpectChain<T>,
     true: () => ExpectChain<T>,
@@ -88,14 +72,11 @@ declare module "chai" {
     undefined: () => ExpectChain<T>,
     exist: () => ExpectChain<T>,
     empty: () => ExpectChain<T>,
-
     extensible: () => ExpectChain<T>,
     sealed: () => ExpectChain<T>,
     frozen: () => ExpectChain<T>,
-
     // chai-immutable
     size: (n: number) => ExpectChain<T>,
-
     // sinon-chai
     called: () => ExpectChain<T>,
     callCount: (n: number) => ExpectChain<T>,
@@ -107,7 +88,6 @@ declare module "chai" {
     calledWith: (...args: Array<mixed>) => ExpectChain<T>,
     calledWithMatch: (...args: Array<mixed>) => ExpectChain<T>,
     calledWithExactly: (...args: Array<mixed>) => ExpectChain<T>,
-
     // chai-as-promised
     eventually: ExpectChain<T>,
     resolvedWith: (value: mixed) => Promise<mixed> & ExpectChain<T>,
@@ -115,15 +95,14 @@ declare module "chai" {
     rejectedWith: (value: mixed) => Promise<mixed> & ExpectChain<T>,
     rejected: () => Promise<mixed> & ExpectChain<T>,
     notify: (callback: () => mixed) => ExpectChain<T>,
-
     // chai-subset
-    containSubset: (obj: {} | Array< {} >) => ExpectChain<T>,
-
+    containSubset: (obj: {...} | Array< {...} >) => ExpectChain<T>,
     // chai-redux-mock-store
     dispatchedActions: (
-      actions: Array<{} | ((action: {}) => any)>
+      actions: Array<{...} | ((action: {...}) => any)>
     ) => ExpectChain<T>,
-    dispatchedTypes: (actions: Array<string>) => ExpectChain<T>
+    dispatchedTypes: (actions: Array<string>) => ExpectChain<T>,
+    ...
   };
 
   declare function expect<T>(actual: T): ExpectChain<T>;
@@ -255,6 +234,7 @@ declare module "chai" {
   declare var config: {
     includeStack: boolean,
     showDiff: boolean,
-    truncateThreshold: number
+    truncateThreshold: number,
+    ...
   };
 }

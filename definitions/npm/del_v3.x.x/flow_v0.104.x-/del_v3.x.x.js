@@ -4,7 +4,6 @@ type $npm$del$Options = {
   force?: boolean,
   dryRun?: boolean,
   concurrency?: number,
-
   // remaining options are passed through to node-glob:
   cwd?: string,
   root?: string,
@@ -31,7 +30,8 @@ type $npm$del$Options = {
   ignore?: string | string[],
   follow?: boolean,
   realpath?: boolean,
-  absolute?: boolean
+  absolute?: boolean,
+  ...
 };
 
 declare module "del" {

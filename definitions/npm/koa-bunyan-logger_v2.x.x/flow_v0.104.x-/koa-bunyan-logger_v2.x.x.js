@@ -21,34 +21,35 @@ declare module 'koa-bunyan-logger' {
     20 | // debug
     10;  // trace
   declare type BunyanRecord = {
-      v: number,
-      level: BunyanLogLevels,
+    [key: string]: any,
+    v: number,
+    level: BunyanLogLevels,
+    name: string,
+    hostname: string,
+    pid: string,
+    time: Date,
+    msg: string,
+    src: string,
+    err?: {
+      message: string,
       name: string,
-      hostname: string,
-      pid: string,
-      time: Date,
-      msg: string,
-      src: string,
-      err?: {
-          message: string,
-          name: string,
-          code: any,
-          signal: any,
-          stack: string,
-      },
-      [key: string]: any
+      code: any,
+      signal: any,
+      stack: string,
+      ...
+    },
+    ...
   };
-  declare type Writable = {
-    write(rec: BunyanRecord): void
-  }
+  declare type Writable = { write(rec: BunyanRecord): void, ... }
   declare type Stream = {
-      type?: string;
-      level?: number | string;
-      path?: string;
-      stream?: stream$Writable | tty$WriteStream | Stream | Writable;
-      closeOnExit?: boolean;
-      period?: string;
-      count?: number;
+    type?: string,
+    level?: number | string,
+    path?: string,
+    stream?: stream$Writable | tty$WriteStream | Stream | Writable,
+    closeOnExit?: boolean,
+    period?: string,
+    count?: number,
+    ...
   }
   declare interface LoggerOptions {
     streams?: Array<Stream>;
@@ -95,25 +96,30 @@ declare module 'koa-bunyan-logger' {
       fatal(obj: Object, format?: any, ...params: Array<any>): void;
       fatal(format: string, ...params: Array<any>): void;
   }
-  declare type Serializers = {
-      [key: string]: (input: any) => mixed;
-  }
+  declare type Serializers = { [key: string]: (input: any) => mixed, ... }
   declare type StdSerializers = {
     req: (req: http$ClientRequest) => {
-        method: string,
-        url: string,
-        headers: mixed,
-        remoteAddress: string,
-        remotePort: number
+      method: string,
+      url: string,
+      headers: mixed,
+      remoteAddress: string,
+      remotePort: number,
+      ...
     },
-    res: (res: http$IncomingMessage) => {  statusCode: number, header: string },
+    res: (res: http$IncomingMessage) => {
+      statusCode: number,
+      header: string,
+      ...
+    },
     err: (err: Error) => {
-        message: string,
-        name: string,
-        stack: string,
-        code: string,
-        signal: string
-    }
+      message: string,
+      name: string,
+      stack: string,
+      code: string,
+      signal: string,
+      ...
+    },
+    ...
   };
 
   /**
@@ -125,7 +131,7 @@ declare module 'koa-bunyan-logger' {
 
   declare type MiddlewareType = Middleware;
 
-  declare type LoggerFactoryOptions = LoggerOptions & { name: string };
+  declare type LoggerFactoryOptions = LoggerOptions & { name: string, ... };
 
   declare type FieldsModifier = (fields: Object) => Object;
   declare type FieldsStringifier = (fields: Object) => string;
@@ -137,29 +143,34 @@ declare module 'koa-bunyan-logger' {
     updateRequestLogFields?: FieldsModifier,
     updateResponseLogFields?: FieldsModifier,
     formatRequestMessage?: FieldsStringifier,
-    formatResponseMessage?: FieldsStringifier
+    formatResponseMessage?: FieldsStringifier,
+    ...
   }
 
   declare type TimeContext$Options = {
     logLevel?: BunyanLogLevels,
-    updateLogFields?: FieldsModifier
+    updateLogFields?: FieldsModifier,
+    ...
   }
 
   declare type RequestIdOptions = {
     header?: string,
     prop?: string,
     requestProp?: string,
-    field?: string
+    field?: string,
+    ...
   }
 
   declare module.exports: {
-    requestIdContext(options?: RequestIdOptions): MiddlewareType;
-    requestLogger(options?: RequestLogger$Options): MiddlewareType;
-    timeContext(options: TimeContext$Options): MiddlewareType;
-    (options?: LoggerFactoryOptions | Logger): MiddlewareType;
+    (options?: LoggerFactoryOptions | Logger): MiddlewareType,
+    requestIdContext(options?: RequestIdOptions): MiddlewareType,
+    requestLogger(options?: RequestLogger$Options): MiddlewareType,
+    timeContext(options: TimeContext$Options): MiddlewareType,
     bunyan: {
-      stdSerializers: StdSerializers;
-      createLogger(options: LoggerFactoryOptions): Logger;
-    };
+      stdSerializers: StdSerializers,
+      createLogger(options: LoggerFactoryOptions): Logger,
+      ...
+    },
+    ...
   };
 }

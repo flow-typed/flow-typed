@@ -4,13 +4,15 @@ declare module "use-react-router" {
     search: string,
     hash: string,
     state?: any,
-    key?: string
+    key?: string,
+    ...
   }
   declare export type LocationShape = {
     pathname?: string,
     search?: string,
     hash?: string,
-    state?: any
+    state?: any,
+    ...
   };
   declare type HistoryAction = "PUSH" | "REPLACE" | "POP";
   declare type RouterHistory = {
@@ -31,14 +33,21 @@ declare module "use-react-router" {
     ): void,
     // createMemoryHistory
     index?: number,
-    entries?: Array<Location>
+    entries?: Array<Location>,
+    ...
   }
   declare type Match = {
-    params: { [key: string]: ?string },
+    params: { [key: string]: ?string, ... },
     isExact: boolean,
     path: string,
-    url: string
+    url: string,
+    ...
   };
-  declare function useReactRouter(): {history: RouterHistory, match: Match, location: Location};
+  declare function useReactRouter(): {
+    history: RouterHistory,
+    match: Match,
+    location: Location,
+    ...
+  };
   declare module.exports: typeof useReactRouter;
 }

@@ -19,7 +19,8 @@ declare module "koa-router" {
       prefix?: string,
       sensitive?: boolean,
       strict?: boolean,
-      methods?: Array<string>
+      methods?: Array<string>,
+      ...
     }): Router;
 
     get(
@@ -105,7 +106,8 @@ declare module "koa-router" {
     allowedMethods(options?: {
       throw?: boolean,
       notImplemented?: () => any,
-      methodNotAllowed?: () => any
+      methodNotAllowed?: () => any,
+      ...
     }): KoaRouter$Middleware;
 
     param(param: string, middleware: KoaRouter$ParamMiddleware): this;

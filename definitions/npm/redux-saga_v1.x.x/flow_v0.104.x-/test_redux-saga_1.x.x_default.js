@@ -120,7 +120,7 @@ describe("sagaMiddlewareFactory", () => {
     });
 
     it("must raises an error when Context type incompatible", () => {
-      type C = { test: number };
+      type C = { test: number, ... };
 
       sagaMiddlewareFactory<C>({ context: { test: 99 } });
 

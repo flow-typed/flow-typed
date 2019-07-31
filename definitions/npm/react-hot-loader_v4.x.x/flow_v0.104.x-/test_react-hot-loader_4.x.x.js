@@ -87,16 +87,14 @@ describe("react-hot-loader", () => {
         <div />
       </AppContainer>;
 
-      ErrorReporter = ({ error }: { error: Error }) => <div />;
+      ErrorReporter = ({ error }: { error: Error, ... }) => <div />;
       <AppContainer errorReporter={ErrorReporter}>
         <div />
       </AppContainer>;
 
       ErrorReporter = ({
         errorInfo
-      }: {
-        errorInfo: { componentStack: string }
-      }) => <div />;
+      }: { errorInfo: { componentStack: string, ... }, ... }) => <div />;
       <AppContainer errorReporter={ErrorReporter}>
         <div />
       </AppContainer>;
@@ -107,7 +105,7 @@ describe("react-hot-loader", () => {
       </AppContainer>;
 
       // $ExpectError
-      ErrorReporter = ({ error }: { error: number }) => <div />;
+      ErrorReporter = ({ error }: { error: number, ... }) => <div />;
       <AppContainer errorReporter={ErrorReporter}>
         <div />
       </AppContainer>;
@@ -116,7 +114,7 @@ describe("react-hot-loader", () => {
     it('can use setConfig', () => {
       setConfig({
         logLevel: 'error',
-        errorReporter: ({ error }: { error: Error }) => <div />,
+        errorReporter: ({ error }: { error: Error, ... }) => <div />,
         ErrorOverlay: () => null,
       });
     });

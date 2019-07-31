@@ -4,7 +4,8 @@ declare module "fixed-data-table-2" {
   declare type BasicCellProps = {
     columnKey: ColumnKey,
     height: number,
-    width: number
+    width: number,
+    ...
   };
 
   declare export class Cell extends React$Component<{
@@ -19,7 +20,7 @@ declare module "fixed-data-table-2" {
     cell?:
       | ?string
       | React$Element<*>
-      | ((props: BasicCellProps & { rowIndex?: ?number }) => React$Element<*>),
+      | ((props: BasicCellProps & { rowIndex?: ?number, ... }) => React$Element<*>),
     columnKey?: ?ColumnKey,
     rowIndex?: ?number,
     onColumnResize?: ?(
@@ -37,7 +38,8 @@ declare module "fixed-data-table-2" {
       event: SyntheticEvent<*>
     ) => void,
     left?: ?number,
-    pureRendering?: ?boolean
+    pureRendering?: ?boolean,
+    ...
   }> {}
 
   declare export class Column extends React$Component<{
@@ -50,7 +52,7 @@ declare module "fixed-data-table-2" {
     cell?:
       | ?string
       | React$Element<*>
-      | ((props: BasicCellProps & { rowIndex: number }) => React$Element<*>),
+      | ((props: BasicCellProps & { rowIndex: number, ... }) => React$Element<*>),
     footer?:
       | ?string
       | React$Element<*>
@@ -63,13 +65,15 @@ declare module "fixed-data-table-2" {
     isResizable?: ?boolean,
     isReorderable?: ?boolean,
     allowCellsRecycling?: ?boolean,
-    pureRendering?: boolean
+    pureRendering?: boolean,
+    ...
   }> {}
 
   declare export class ColumnGroup extends React$Component<{
     align?: ?Align,
     fixed?: ?boolean,
-    header?: ?string | React$Element<*>
+    header?: ?string | React$Element<*>,
+    ...
   }> {}
 
   declare export class Table extends React$Component<{
@@ -121,10 +125,12 @@ declare module "fixed-data-table-2" {
     onColumnReorderEndCallback?: ?(event: {
       columnBefore: ?string,
       columnAfter: ?string,
-      reorderColumn: string
+      reorderColumn: string,
+      ...
     }) => void,
     isColumnResizing?: ?boolean,
     isColumnReordering?: ?boolean,
-    bufferRowCount?: ?number
+    bufferRowCount?: ?number,
+    ...
   }> {}
 }

@@ -2,12 +2,13 @@ declare module 'xmldoc' {
   declare type ToStringOptions = {
     compressed?: boolean,
     trimmed?: boolean,
-    preserveWhitespace?: boolean
+    preserveWhitespace?: boolean,
+    ...
   };
 
   declare class XmlElement {
     name: string;
-    attr: { [key: string]: mixed };
+    attr: { [key: string]: mixed, ... };
     val: string;
     isValCdata: boolean;
     isValComment: boolean;
@@ -34,7 +35,5 @@ declare module 'xmldoc' {
 
   declare type $XmlElement = XmlElement;
 
-  declare module.exports: {
-    XmlDocument: typeof XmlDocument,
-  };
+  declare module.exports: { XmlDocument: typeof XmlDocument, ... };
 }

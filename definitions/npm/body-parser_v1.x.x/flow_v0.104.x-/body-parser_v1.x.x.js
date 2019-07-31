@@ -9,22 +9,26 @@ declare type bodyParser$Options = {
     res: $Response,
     buf: Buffer,
     encoding: string
-  ) => void
+  ) => void,
+  ...
 };
 
 declare type bodyParser$OptionsText = bodyParser$Options & {
   reviver?: (key: string, value: any) => any,
-  strict?: boolean
+  strict?: boolean,
+  ...
 };
 
 declare type bodyParser$OptionsJson = bodyParser$Options & {
   reviver?: (key: string, value: any) => any,
-  strict?: boolean
+  strict?: boolean,
+  ...
 };
 
 declare type bodyParser$OptionsUrlencoded = bodyParser$Options & {
   extended?: boolean,
-  parameterLimit?: number
+  parameterLimit?: number,
+  ...
 };
 
 declare module "body-parser" {

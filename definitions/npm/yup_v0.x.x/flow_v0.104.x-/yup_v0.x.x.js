@@ -17,26 +17,30 @@ declare module 'yup' {
     abortEarly?: boolean,
     stripUnknown?: boolean,
     recursive?: boolean,
-    context?: {},
+    context?: {...},
   |};
 
   declare export interface BaseSchema<T, GetHighType> {
-    cast(value: any, options?: { context: {} }): T;
+    cast(value: any, options?: { context: {...}, ... }): T;
     resolve(options?: any): $Call<GetHighType, T>;
     validate(value: any, options?: ValidateOptions): Promise<T>;
     validateSync(
       value: any,
-      options?: $Diff<ValidateOptions, { sync: any }>
+      options?: $Diff<ValidateOptions, { sync: any, ... }>
     ): T;
     validateAt(
       path: string,
       value: T,
-      options?: $Diff<ValidateOptions, { path: any }>
+      options?: $Diff<ValidateOptions, { path: any, ... }>
     ): Promise<T>;
     validateSyncAt(
       path: string,
       value: T,
-      options?: $Diff<ValidateOptions, { sync: any, path: any }>
+      options?: $Diff<ValidateOptions, {
+        sync: any,
+        path: any,
+        ...
+      }>
     ): T;
   }
 
@@ -51,7 +55,7 @@ declare module 'yup' {
     isValid(value: any, options?: ValidateOptions): Promise<boolean>;
     isValidSync(
       value: any,
-      options?: $Diff<ValidateOptions, { sync: any }>
+      options?: $Diff<ValidateOptions, { sync: any, ... }>
     ): boolean;
 
     isType(value: any): boolean;
@@ -103,7 +107,7 @@ declare module 'yup' {
     | string
     | null
     | void
-    | {};
+    | {...};
 
   declare export type WhenOptionsBuilderObject = {|
     is: WhenOptionsBuilderObjectIs,
@@ -128,15 +132,20 @@ declare module 'yup' {
       value: any
     ) => boolean | ValidationError | Promise<boolean | ValidationError>,
     message?: TestOptionsMessage,
-    params?: {},
+    params?: {...},
     exclusive?: boolean,
   |};
 
   declare export type SchemaDescription = {
     type: string,
     label: string,
-    meta: {},
-    tests: Array<{ name: string, params: {} }>,
+    meta: {...},
+    tests: Array<{
+      name: string,
+      params: {...},
+      ...
+    }>,
+    ...
   };
 
   declare export function ref<T>(
@@ -167,19 +176,18 @@ declare module 'yup' {
 }
 
 declare module 'yup/lib/setLocale' {
-  declare export type LocaleDescriptor<Keys> = {
-    [Keys]: string,
-  };
+  declare export type LocaleDescriptor<Keys> = { [Keys]: string, ... };
 
   declare export type LocaleObject = {|
     mixed?: {
+      ['default' | 'required' | 'oneOf' | 'notOneOf']: string,
       notType: ({|
         path: string,
         type: any,
         value: any,
         originalValue: any,
       |}) => string,
-      ['default' | 'required' | 'oneOf' | 'notOneOf']: string,
+      ...
     },
     string?: LocaleDescriptor<
       | 'length'
@@ -202,8 +210,8 @@ declare module 'yup/lib/setLocale' {
       | 'negative'
       | 'integer'
     >,
-    boolean?: {},
-    bool?: {},
+    boolean?: {...},
+    bool?: {...},
     date?: LocaleDescriptor<'min' | 'max'>,
     array?: LocaleDescriptor<'min' | 'max'>,
     object?: LocaleDescriptor<'noUnknown'>,
@@ -221,7 +229,7 @@ declare module 'yup/lib/ValidationError' {
     type: any;
     errors: Array<string>;
     inner: Array<ValidationError>;
-    params?: {};
+    params?: {...};
 
     static isError(err: any): boolean;
     static formatError(
@@ -250,8 +258,8 @@ declare module 'yup/lib/Reference' {
     +__isYupRef: true;
 
     constructor(key: string, options: RefOptions): Reference<T>;
-    getValue(options: {}): any;
-    cast(value: any, options: {}): any;
+    getValue(options: {...}): any;
+    cast(value: any, options: {...}): any;
     resolve(): Reference<T>;
     describe(): {| type: 'ref', key: string |};
 
@@ -280,14 +288,12 @@ declare module 'yup/lib/Reference' {
 declare module 'yup/lib/util/reach' {
   import type { Schema } from 'yup';
 
-  declare export default {
-    <T, GetterFn, R, ReturnGetterFn>(
-      schema: Schema<T, GetterFn>,
-      path: string,
-      value?: any,
-      context?: any
-    ): Schema<R, ReturnGetterFn>,
-  };
+  declare export default { <T, GetterFn, R, ReturnGetterFn>(
+    schema: Schema<T, GetterFn>,
+    path: string,
+    value?: any,
+    context?: any
+  ): Schema<R, ReturnGetterFn>, ... };
 }
 declare module 'yup/lib/util/isSchema' {
   declare export default (obj: any) => boolean;
@@ -345,7 +351,11 @@ declare module 'yup/lib/string' {
       regex: RegExp,
       messageOrOptions?:
         | TestOptionsMessage
-        | { message?: TestOptionsMessage, excludeEmptyString?: boolean }
+        | {
+        message?: TestOptionsMessage,
+        excludeEmptyString?: boolean,
+        ...
+      }
     ): StringSchema<T>;
 
     nullable(isNullable?: true): StringSchema<?T>;
@@ -477,8 +487,8 @@ declare module 'yup/lib/object' {
 
   declare export type ExtractSchemaType = <V>(v: BaseSchema<V, any>) => V;
 
-  declare export type ObjectSchemaConstructor = Class<ObjectSchema<{}>> &
-    (() => ObjectSchema<{}>) &
+  declare export type ObjectSchemaConstructor = Class<ObjectSchema<{...}>> &
+    (() => ObjectSchema<{...}>) &
     (<U>(obj: U) => ObjectSchema<$ObjMap<U, ExtractSchemaType>>);
 
   declare export type GetterObjectSchema = <T>(T) => ObjectSchema<T>;
@@ -494,7 +504,7 @@ declare module 'yup/lib/object' {
       fromKey: From,
       toKey: To,
       alias: true
-    ): ObjectSchema<T & { [To]: $ElementType<T, From> }>;
+    ): ObjectSchema<T & { [To]: $ElementType<T, From>, ... }>;
 
     /*
      * No ability to describe returned Schema type in this case

@@ -9,9 +9,13 @@ import type { Effect, Reducer } from "redux-loop";
 // loop, Reducer
 //
 
-type State = { first: boolean, second: boolean };
+type State = {
+  first: boolean,
+  second: boolean,
+  ...
+};
 
-type Action = { type: "FIRST" } | { type: "SECOND" };
+type Action = { type: "FIRST", ... } | { type: "SECOND", ... };
 
 // ok
 const reducer: Reducer<State, Action> = (state: State, action) => {

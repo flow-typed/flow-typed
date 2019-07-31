@@ -12,7 +12,7 @@ declare module 'xmldom' {
     lastChild: Node;
     previousSibling: Node;
     nextSibling: Node;
-    attributes: { [string]: Attr };
+    attributes: { [string]: Attr, ... };
     ownerDocument: Document;
     namespaceURI: string;
     localName: string;
@@ -81,13 +81,15 @@ declare module 'xmldom' {
 
   declare export class DOMParser {
     constructor(options?: {
-      locator?: {},
-        errorHandler?: {
-          warning?: (warn: Error) => any,
-          error?: (error: Error) => any,
-          fatalError?: (error: Error) => any
-        }
-      }): DOMParser;
+      locator?: {...},
+      errorHandler?: {
+        warning?: (warn: Error) => any,
+        error?: (error: Error) => any,
+        fatalError?: (error: Error) => any,
+        ...
+      },
+      ...
+    }): DOMParser;
 
       parseFromString(xmlsource: string, mimeType?: string): Document;
   }
@@ -104,6 +106,7 @@ declare module 'xmldom' {
   declare export default {
     DOMParser: typeof DOMParser,
     DOMImplementation: typeof DOMImplementation,
-    XMLSerializer: typeof XMLSerializer
-  }
+    XMLSerializer: typeof XMLSerializer,
+    ...
+  };
 }

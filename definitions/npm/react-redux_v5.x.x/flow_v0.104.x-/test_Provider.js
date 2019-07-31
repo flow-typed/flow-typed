@@ -21,19 +21,20 @@ describe('Custom Store (eg for ThunkActions)', () => {
 
   // This represents a common typing for Thunk Actions.
 
-  type Action = { type: 'SOME_ACTION' };
-  type State = { state: string };
+  type Action = { type: 'SOME_ACTION', ... };
+  type State = { state: string, ... };
 
   // ReduxStore should be imported from 'redux' but we can't do this with this
   // test environment, so let's copy them once again...
   declare type Redux$DispatchAPI<A> = (action: A) => A;
-  declare type Redux$Dispatch<A: { type: string }> = Redux$DispatchAPI<A>;
+  declare type Redux$Dispatch<A: { type: string, ... }> = Redux$DispatchAPI<A>;
   declare type Redux$Reducer<S, A> = (state: S | void, action: A) => S;
   declare type Redux$Store<S, A, D = Redux$Dispatch<A>> = {
-    dispatch: D;
-    getState(): S;
-    subscribe(listener: () => void): () => void;
-    replaceReducer(nextReducer: Redux$Reducer<S, A>): void
+    dispatch: D,
+    getState(): S,
+    subscribe(listener: () => void): () => void,
+    replaceReducer(nextReducer: Redux$Reducer<S, A>): void,
+    ...
   };
 
   // R = Result of a thunk action

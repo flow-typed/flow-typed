@@ -14,9 +14,9 @@ import { describe, it } from 'flow-typed-test';
 
 const ns: Array<number> = [1, 2, 3, 4, 5];
 const ss: Array<string> = ['one', 'two', 'three', 'four'];
-const obj: { [k: string]: number } = { a: 1, c: 2 };
-const objMixed: { [k: string]: mixed } = { a: 1, c: 'd' };
-const os: Array<{ [k: string]: * }> = [{ a: 1, c: 'd' }, { b: 2 }];
+const obj: { [k: string]: number, ... } = { a: 1, c: 2 };
+const objMixed: { [k: string]: mixed, ... } = { a: 1, c: 'd' };
+const os: Array<{ [k: string]: *, ... }> = [{ a: 1, c: 'd' }, { b: 2 }];
 const str: string = 'hello world';
 
 //Logic
@@ -130,7 +130,7 @@ const n1: boolean = _.not(1);
 const oor: boolean = _.or(true, true);
 
 const nonBooleanOr: ?string = _.or('watskeburt', undefined);
-const nonBooleanOr_: (arg: { key: string }) => string | { key: string } = _.or(
+const nonBooleanOr_: (arg: { key: string, ... }) => string | { key: string, ... } = _.or(
   'watskeburt'
 );
 

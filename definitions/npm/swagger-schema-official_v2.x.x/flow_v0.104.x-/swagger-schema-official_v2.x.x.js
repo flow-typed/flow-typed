@@ -9,12 +9,14 @@ declare module 'swagger-schema-official' {
   declare export type Contact = {
     name?: string,
     email?: string,
-    url?: string
+    url?: string,
+    ...
   }
 
   declare export type License = {
     name: string,
-    url?: string
+    url?: string,
+    ...
   }
 
   declare export type Info = {
@@ -23,18 +25,21 @@ declare module 'swagger-schema-official' {
     description?: string,
     termsOfService?: string,
     contact?: Contact,
-    license?: License
+    license?: License,
+    ...
   }
 
   declare export type ExternalDocs = {
     url: string,
-    description?: string
+    description?: string,
+    ...
   }
 
   declare export type Tag = {
     name: string,
     description?: string,
-    externalDocs?: ExternalDocs
+    externalDocs?: ExternalDocs,
+    ...
   }
   // --- /Base
 
@@ -43,7 +48,7 @@ declare module 'swagger-schema-official' {
     format?: string,
     title?: string,
     description?: string,
-    default?: string | boolean | number | {},
+    default?: string | boolean | number | {...},
     multipleOf?: number,
     maximum?: number,
     exclusiveMaximum?: number,
@@ -57,9 +62,10 @@ declare module 'swagger-schema-official' {
     uniqueItems?: boolean,
     maxProperties?: number,
     minProperties?: number,
-    enum?: Array<string | boolean | number | {}>,
+    enum?: Array<string | boolean | number | {...}>,
     type?: string,
-    items?: Schema | Schema[]
+    items?: Schema | Schema[],
+    ...
   }
 
   declare export type XML = {
@@ -67,24 +73,22 @@ declare module 'swagger-schema-official' {
     namespace?: string,
     prefix?: string,
     attribute?: string,
-    wrapped?: boolean
+    wrapped?: boolean,
+    ...
   }
 
   declare export type Schema = {
     $ref?: string,
     allOf?: Schema[],
     additionalProperties?: Schema,
-    properties?: {
-      [string]: Schema
-    },
+    properties?: { [string]: Schema, ... },
     discriminator?: string,
     readOnly?: boolean,
     xml?: XML,
     externalDocs?: ExternalDocs,
-    example?: {
-      [string]: {}
-    },
-    required?: string[]
+    example?: { [string]: {...}, ... },
+    required?: string[],
+    ...
   } & BaseSchema
   // --- /Schema
 
@@ -93,31 +97,31 @@ declare module 'swagger-schema-official' {
     name: string,
     in: string,
     required?: boolean,
-    description?: string
+    description?: string,
+    ...
   }
 
-  declare export type BodyParameter = {
-    schema?: Schema
-  } & BaseParameter
+  declare export type BodyParameter = { schema?: Schema, ... } & BaseParameter
 
   declare export type FormDataParameter = {
     type: string,
-    collectionFormat?: string
+    collectionFormat?: string,
+    ...
   } & BaseParameter & BaseSchema
 
   declare export type QueryParameter = {
     type: string,
-    allowEmptyValue?: boolean
+    allowEmptyValue?: boolean,
+    ...
   } & BaseParameter & BaseSchema
 
   declare export type PathParameter = {
     type: string,
-    required: boolean
+    required: boolean,
+    ...
   } & BaseParameter
 
-  declare export type HeaderParameter = {
-    type: string
-  } & BaseParameter
+  declare export type HeaderParameter = { type: string, ... } & BaseParameter
 
   declare export type Parameter = BodyParameter |
     FormDataParameter |
@@ -127,27 +131,20 @@ declare module 'swagger-schema-official' {
   // --- /Parameters
 
   // --- Responses
-  declare export type Header = {
-    type: string
-  } & BaseSchema
+  declare export type Header = { type: string, ... } & BaseSchema
 
   declare export type Response = {
     description: string,
     schema?: Schema,
-    headers?: {
-      [string]: Header
-    },
-    examples?: {
-      [string]: {}
-    }
+    headers?: { [string]: Header, ... },
+    examples?: { [string]: {...}, ... },
+    ...
   }
   // --- /Responses
 
   // --- Paths
   declare export type Operation = {
-    responses: {
-      [responseName: string]: Response
-    },
+    responses: { [responseName: string]: Response, ... },
     summary?: string,
     description?: string,
     externalDocs?: ExternalDocs,
@@ -158,7 +155,8 @@ declare module 'swagger-schema-official' {
     schemes?: string[],
     deprecated?: boolean,
     security?: Security[],
-    tags?: string[]
+    tags?: string[],
+    ...
   }
 
   declare export type Path = {
@@ -170,49 +168,49 @@ declare module 'swagger-schema-official' {
     options?: Operation,
     head?: Operation,
     patch?: Operation,
-    parameters?: [Parameter]
+    parameters?: [Parameter],
+    ...
   }
   // --- Paths
 
   // --- Security
   declare export type BaseSecurity = {
     type: string,
-    description?: string
+    description?: string,
+    ...
   }
 
-  declare export type BasicAuthenticationSecurity = {} & BaseSecurity
+  declare export type BasicAuthenticationSecurity = {...} & BaseSecurity
 
-  declare export type BaseOAuthSecurity = {
-    flow: string
-  } & BaseSecurity
+  declare export type BaseOAuthSecurity = { flow: string, ... } & BaseSecurity
 
-  declare export type OAuthScope = {
-    [string]: string
-  }
+  declare export type OAuthScope = { [string]: string, ... }
 
   declare export type OAuth2AccessCodeSecurity = {
     tokenUrl: string,
     authorizationUrl: string,
-    scopes?: OAuthScope[]
+    scopes?: OAuthScope[],
+    ...
   } & BaseOAuthSecurity
 
   declare export type OAuth2ApplicationSecurity = {
     tokenUrl: string,
-    scopes?: OAuthScope[]
+    scopes?: OAuthScope[],
+    ...
   } & BaseOAuthSecurity
 
-  declare export type OAuth2ImplicitSecurity = {
-    authorizationUrl: string
-  } & BaseOAuthSecurity
+  declare export type OAuth2ImplicitSecurity = { authorizationUrl: string, ... } & BaseOAuthSecurity
 
   declare export type OAuth2PasswordSecurity = {
     tokenUrl: string,
-    scopes?: OAuthScope[]
+    scopes?: OAuthScope[],
+    ...
   } & BaseOAuthSecurity
 
   declare export type ApiKeySecurity = {
     name: string,
-    in: string
+    in: string,
+    ...
   } & BaseSecurity
 
   declare export type Security = BasicAuthenticationSecurity |
@@ -232,24 +230,13 @@ declare module 'swagger-schema-official' {
     schemes?: string[],
     consumes?: string[],
     produces?: string[],
-    paths: {
-      [string]: Path
-    },
-    definitions?: {
-      [string]: Schema
-    },
-    parameters?: {
-      [string]: BodyParameter | QueryParameter
-    },
-    responses?: {
-      [string]: Response
-    },
-    security?: Array<{
-      [string]: string[]
-    }>,
-    securityDefinitions?: {
-      [string]: Security
-    },
-    tags?: Tag[]
+    paths: { [string]: Path, ... },
+    definitions?: { [string]: Schema, ... },
+    parameters?: { [string]: BodyParameter | QueryParameter, ... },
+    responses?: { [string]: Response, ... },
+    security?: Array<{ [string]: string[], ... }>,
+    securityDefinitions?: { [string]: Security, ... },
+    tags?: Tag[],
+    ...
   }
 }

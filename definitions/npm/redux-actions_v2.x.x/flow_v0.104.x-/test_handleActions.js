@@ -12,7 +12,7 @@ const increment2 = createAction(INCREMENT2, (x: number, y: string) => x);
 const increment3 = createAction(INCREMENT3, (x: number, y: string) => Promise.resolve(x));
 const decrement = createAction("DECREMENT", (x: number) => x);
 
-type StateType = { count: number };
+type StateType = { count: number, ... };
 const initState: StateType = { count: 0 };
 
 function test_handleActions() {

@@ -5,7 +5,8 @@ declare module "react-native-video" {
   declare export type TextTrackTypes = {
     SRT: "application/x-subrip",
     TTML: "application/ttml+xml",
-    VTT: "text/vtt"
+    VTT: "text/vtt",
+    ...
   };
 
   declare export var TextTrackType: TextTrackTypes;
@@ -49,7 +50,7 @@ declare module "react-native-video" {
     bufferForPlaybackAfterRebufferMs?: ?number
   |};
 
-  declare export type Event<T: {}> = $ReadOnly<{|
+  declare export type Event<T: {...}> = $ReadOnly<{|
     target: number,
     ...$Exact<T>
   |}>;
@@ -70,7 +71,8 @@ declare module "react-native-video" {
         orientation: string,
         width: number
       |}>,
-      textTracks: $ReadOnlyArray<TrackDescriptor>
+      textTracks: $ReadOnlyArray<TrackDescriptor>,
+      ...
     }>
   >;
 
@@ -80,22 +82,19 @@ declare module "react-native-video" {
     +seekableDuration: number
   |}>;
 
-  declare export type AudioFocusChangedEvent = Event<{
-    +hasAudioFocus: boolean
-  }>;
+  declare export type AudioFocusChangedEvent = Event<{ +hasAudioFocus: boolean, ... }>;
 
-  declare export type BufferEvent = Event<{ +isBuffering: boolean }>;
+  declare export type BufferEvent = Event<{ +isBuffering: boolean, ... }>;
 
   declare export type LoadStartEvent = Event<{
     +isNetwork: boolean,
     +type: string,
-    +uri: string
+    +uri: string,
+    ...
   }>;
 
   declare export type TimedMetadata = {| +value: string, +identifier: string |};
-  declare export type TimedMetadataEvent = Event<{
-    +metadata: $ReadOnlyArray<TimedMetadata>
-  }>;
+  declare export type TimedMetadataEvent = Event<{ +metadata: $ReadOnlyArray<TimedMetadata>, ... }>;
 
   declare export type VideoProps = {
     source: number | {| uri: string |},
@@ -142,13 +141,13 @@ declare module "react-native-video" {
     onAudioFocusChanged?: ?(AudioFocusChangedEvent) => void,
     onAudioBecomingNoisy?: ?Function,
     onTimedMetadata?: ?(TimedMetadataEvent) => void,
-
     /* Required by react-native */
     scaleX?: ?number,
     scaleY?: ?number,
     translateX?: ?number,
     translateY?: ?number,
-    rotation?: ?number
+    rotation?: ?number,
+    ...
   };
 
   declare export default class Video extends React$Component<VideoProps> {

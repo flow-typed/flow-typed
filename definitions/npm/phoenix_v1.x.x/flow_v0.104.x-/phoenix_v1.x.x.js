@@ -41,6 +41,7 @@ declare module 'phoenix' {
     reconnectAfterMs?: Function,
     timeout?: number,
     transport?: string,
+    ...
   };
 
   declare class Socket {
@@ -63,15 +64,17 @@ declare module 'phoenix' {
     remove(channel: Channel): void;
   }
 
-  declare type PresenceOpts = {
-    events?: Object,
-  };
+  declare type PresenceOpts = { events?: Object, ... };
 
   declare class Presence {
     static list(presences: Array<Presence>, chooser: Function): Array<Presence>;
     static syncDiff(
       currentState: Object,
-      joinsLeaves: { joins: Array<Presence>, leaves: Array<Presence> },
+      joinsLeaves: {
+        joins: Array<Presence>,
+        leaves: Array<Presence>,
+        ...
+      },
       onJoin?: Function,
       onLeave?: Function
     ): Object;
@@ -101,6 +104,7 @@ declare module 'phoenix' {
     LongPoll: typeof LongPoll,
     Presence: typeof Presence,
     Socket: typeof Socket,
+    ...
   };
 
   declare module.exports: Phoenix;

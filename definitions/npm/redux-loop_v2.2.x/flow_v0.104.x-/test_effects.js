@@ -86,12 +86,12 @@ Effects.batch([
 // Effects.lift
 //
 
-function nestedAction(time: Date, action: { type: $Subtype<string> }) {
+function nestedAction(time: Date, action: { type: $Subtype<string>, ... }) {
   return { type: "NESTED_ACTION", payload: action, time };
 }
 
 function nestedActionWrongArgOrder(
-  action: { type: $Subtype<string> },
+  action: { type: $Subtype<string>, ... },
   time: Date
 ) {
   return { type: "NESTED_ACTION", payload: action, time };

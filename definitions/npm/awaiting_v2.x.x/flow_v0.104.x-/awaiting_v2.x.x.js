@@ -81,7 +81,8 @@ declare module 'awaiting' {
     result:    typeof result,
     throw:     typeof throwRejections,
     swallow:   typeof swallowRejections,
-    ErrorList: typeof ErrorList
+    ErrorList: typeof ErrorList,
+    ...
   };
 
 }

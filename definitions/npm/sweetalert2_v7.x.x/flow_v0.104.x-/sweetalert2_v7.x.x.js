@@ -1,9 +1,7 @@
 declare module "sweetalert2" {
-  declare export type AlertOptions = {};
+  declare export type AlertOptions = {...};
 
-  declare export type AlertInputAttributes = {
-    [attribute: string]: string
-  };
+  declare export type AlertInputAttributes = { [attribute: string]: string, ... };
 
   declare export type AlertInputType =
     | "text"
@@ -45,7 +43,7 @@ declare module "sweetalert2" {
 
   declare export type AlertInputOptions =
     | Map<string, string>
-    | { [inputValue: string]: string };
+    | { [inputValue: string]: string, ... };
 
   declare export type Options = {|
     title?: string,
@@ -111,7 +109,7 @@ declare module "sweetalert2" {
     expectRejections?: boolean
   |};
 
-  declare export type Result = {};
+  declare export type Result = {...};
 
   declare export default {
     (title: string, message?: string, type?: AlertType): Promise<any>,
@@ -157,7 +155,9 @@ declare module "sweetalert2" {
       backdrop: "overlay",
       close: "close",
       esc: "esc",
-      timer: "timer"
-    }
-  }
+      timer: "timer",
+      ...
+    },
+    ...
+  };
 }

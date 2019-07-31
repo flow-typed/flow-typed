@@ -1,7 +1,7 @@
 // @flow
 import type { $Scope } from "angular";
 
-function testScope$new($scope: $Scope<{ myVar: boolean }>) {
+function testScope$new($scope: $Scope<{ myVar: boolean, ... }>) {
   //$ExpectError first argument needs to be boolean
   $scope.$new(123, $scope);
   //$ExpectError second argument needs to be scope
@@ -11,7 +11,7 @@ function testScope$new($scope: $Scope<{ myVar: boolean }>) {
   (newScope.myVar: boolean);
 }
 
-function testScope$watch($scope: $Scope<{ myVar: boolean }>) {
+function testScope$watch($scope: $Scope<{ myVar: boolean, ... }>) {
   // takes string as first argument
   $scope.$watch("my.prop", () => {});
   //$ExpectError does not accept other than watch funcion or string as first argument
@@ -47,7 +47,7 @@ function testScope$watch($scope: $Scope<{ myVar: boolean }>) {
   $scope.$watch(() => {}, "");
 }
 
-function testScope$watchGroup($scope: $Scope<{ myVar: boolean }>) {
+function testScope$watchGroup($scope: $Scope<{ myVar: boolean, ... }>) {
   // takes array strings as first argument
   $scope.$watchGroup(["first", "second"], () => {});
   // takes array of watch functions as first argument
@@ -78,7 +78,7 @@ function testScope$watchGroup($scope: $Scope<{ myVar: boolean }>) {
   ret2(123);
 }
 
-function testScope$watchCollection($scope: $Scope<{ myVar: boolean }>) {
+function testScope$watchCollection($scope: $Scope<{ myVar: boolean, ... }>) {
   // takes string as first argument
   $scope.$watchCollection("prop", () => {});
   // takes watch function as first argument
@@ -107,21 +107,21 @@ function testScope$watchCollection($scope: $Scope<{ myVar: boolean }>) {
   ret2(123);
 }
 
-function testScope$Digest($scope: $Scope<{ myVar: boolean }>) {
+function testScope$Digest($scope: $Scope<{ myVar: boolean, ... }>) {
   // is callable
   $scope.$digest();
   //$ExpectError does not take arguments
   $scope.$digest(123);
 }
 
-function testScope$Destroy($scope: $Scope<{ myVar: boolean }>) {
+function testScope$Destroy($scope: $Scope<{ myVar: boolean, ... }>) {
   // is callable
   $scope.$digest();
   //$ExpectError does not take arguments
   $scope.$digest(123);
 }
 
-function testScope$Eval($scope: $Scope<{ myVar: boolean }>) {
+function testScope$Eval($scope: $Scope<{ myVar: boolean, ... }>) {
   // takes string as first argument
   $scope.$eval("str");
   // takes function as first argument
@@ -134,7 +134,7 @@ function testScope$Eval($scope: $Scope<{ myVar: boolean }>) {
   $scope.$eval(() => {}, 123);
 }
 
-function testScope$EvalAsync($scope: $Scope<{ myVar: boolean }>) {
+function testScope$EvalAsync($scope: $Scope<{ myVar: boolean, ... }>) {
   // takes string as first argument
   $scope.$evalAsync("str");
   // takes function as first argument
@@ -147,7 +147,7 @@ function testScope$EvalAsync($scope: $Scope<{ myVar: boolean }>) {
   $scope.$evalAsync(() => {}, 123);
 }
 
-function testScope$apply($scope: $Scope<{ myVar: boolean }>) {
+function testScope$apply($scope: $Scope<{ myVar: boolean, ... }>) {
   // takes string as first argument
   $scope.$apply("str");
   // takes function as first argument
@@ -156,7 +156,7 @@ function testScope$apply($scope: $Scope<{ myVar: boolean }>) {
   $scope.$apply((arg: number) => {});
 }
 
-function testScope$applyAsync($scope: $Scope<{ myVar: boolean }>) {
+function testScope$applyAsync($scope: $Scope<{ myVar: boolean, ... }>) {
   // takes string as first argument
   $scope.$applyAsync("str");
   // takes function as first argument
@@ -165,7 +165,7 @@ function testScope$applyAsync($scope: $Scope<{ myVar: boolean }>) {
   $scope.$applyAsync((arg: number) => {});
 }
 
-function testScope$on($scope: $Scope<{ myVar: boolean }>) {
+function testScope$on($scope: $Scope<{ myVar: boolean, ... }>) {
   // takes string as first argument
   $scope.$on("str", () => {});
   //$ExpectError does not take other types as first argument
@@ -182,7 +182,7 @@ function testScope$on($scope: $Scope<{ myVar: boolean }>) {
   cb2(123);
 }
 
-function testScope$emit($scope: $Scope<{ myVar: boolean }>) {
+function testScope$emit($scope: $Scope<{ myVar: boolean, ... }>) {
   // takes string as first argument
   $scope.$emit("str", () => {});
   //$ExpectError does not take other types as first argument
@@ -195,7 +195,7 @@ function testScope$emit($scope: $Scope<{ myVar: boolean }>) {
   $scope.$emit("str", "abc", "abc", "abc", "abc");
 }
 
-function testScope$broadcast($scope: $Scope<{ myVar: boolean }>) {
+function testScope$broadcast($scope: $Scope<{ myVar: boolean, ... }>) {
   // takes string as first argument
   $scope.$broadcast("str", () => {});
   //$ExpectError does not take other types as first argument
@@ -208,7 +208,7 @@ function testScope$broadcast($scope: $Scope<{ myVar: boolean }>) {
   $scope.$broadcast("str", "abc", "abc", "abc", "abc");
 }
 
-function testScope$$postDigest($scope: $Scope<{ myVar: boolean }>) {
+function testScope$$postDigest($scope: $Scope<{ myVar: boolean, ... }>) {
   // takes callback
   $scope.$$postDigest(() => {});
   //$ExpectError does not take other types
@@ -217,21 +217,21 @@ function testScope$$postDigest($scope: $Scope<{ myVar: boolean }>) {
   $scope.$$postDigest(() => {}, 123);
 }
 
-function testScope$id($scope: $Scope<{ myVar: boolean }>) {
+function testScope$id($scope: $Scope<{ myVar: boolean, ... }>) {
   // is string
   ($scope.$id: string);
 }
 
-function testScope$parent($scope: $Scope<{ myVar: boolean }>) {
+function testScope$parent($scope: $Scope<{ myVar: boolean, ... }>) {
   // is scope
   ($scope.$parent: $Scope<*>);
 }
 
-function testScope$root($scope: $Scope<{ myVar: boolean }>) {
+function testScope$root($scope: $Scope<{ myVar: boolean, ... }>) {
   // is scope
   ($scope.$root: $Scope<*>);
 }
 
-function testScopeExtraProps($scope: $Scope<{ myVar: boolean }>) {
+function testScopeExtraProps($scope: $Scope<{ myVar: boolean, ... }>) {
   $scope.myVar;
 }

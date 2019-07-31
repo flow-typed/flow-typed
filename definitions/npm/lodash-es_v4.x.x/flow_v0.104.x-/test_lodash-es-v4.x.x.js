@@ -136,12 +136,12 @@ var stringsGroupedByLength = groupBy(["one", "two", "three"], "length");
 if (stringsGroupedByLength[3]) {
   stringsGroupedByLength[3][0].toLowerCase();
 }
-var numbersObj: { [key: string]: number } = { a: 6.1, b: 4.2, c: 6.3 };
+var numbersObj: { [key: string]: number, ... } = { a: 6.1, b: 4.2, c: 6.3 };
 var numbersGroupedByMathFloor2 = groupBy(numbersObj, Math.floor);
 if (numbersGroupedByMathFloor2[6]) {
   numbersGroupedByMathFloor2[6][0] / numbersGroupedByMathFloor2[6][1];
 }
-var stringObj: { [key: string]: string } = { a: "one", b: "two", c: "three" };
+var stringObj: { [key: string]: string, ... } = { a: "one", b: "two", c: "three" };
 var stringsGroupedByLength2 = groupBy(stringObj, "length");
 if (stringsGroupedByLength2[3]) {
   stringsGroupedByLength2[3][0].toLowerCase();
@@ -186,9 +186,9 @@ keyBy([{ dir: "left", code: 97 }, { dir: "right", code: 100 }], function(o) {
 keyBy([{ dir: "left", code: 97 }, { dir: "right", code: 100 }], "dir");
 
 // Example of keying a map of objects by a number type
-type KeyByTest$ByNumber<T: Object> = { [number]: T };
-type KeyByTest$ByNumberMaybe<T: ?Object> = { [number]: T };
-type KeyByTest$Record = { id: number };
+type KeyByTest$ByNumber<T: Object> = { [number]: T, ... };
+type KeyByTest$ByNumberMaybe<T: ?Object> = { [number]: T, ... };
+type KeyByTest$Record = { id: number, ... };
 var keyByTest_array: Array<KeyByTest$Record> = [
   { id: 4 },
   { id: 4 },
@@ -485,13 +485,13 @@ pairs = toPairsIn({ a: 12, b: 100 });
 /**
  * _.pickBy
  */
-(pickBy({a: 2, b: 3, c: 4}, num => num % 2): {[prop: string]: number});
-(pickBy(null, num => num % 2): {});
-(pickBy(undefined, num => num % 2): {});
+(pickBy({a: 2, b: 3, c: 4}, num => num % 2): { [prop: string]: number, ... });
+(pickBy(null, num => num % 2): {...});
+(pickBy(undefined, num => num % 2): {...});
 
 /**
  * _.omitBy
  */
-(omitBy({a: 2, b: 3, c: 4}, num => num % 2): {[prop: string]: number});
-(omitBy(null, num => num % 2): {});
-(omitBy(undefined, num => num % 2): {});
+(omitBy({a: 2, b: 3, c: 4}, num => num % 2): { [prop: string]: number, ... });
+(omitBy(null, num => num % 2): {...});
+(omitBy(undefined, num => num % 2): {...});

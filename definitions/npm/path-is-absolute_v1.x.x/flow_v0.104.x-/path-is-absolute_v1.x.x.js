@@ -3,5 +3,6 @@ declare module 'path-is-absolute' {
     (filePath: string): boolean,
     posix(filePath: string): boolean,
     win32(filePath: string): boolean,
+    ...
   };
 }

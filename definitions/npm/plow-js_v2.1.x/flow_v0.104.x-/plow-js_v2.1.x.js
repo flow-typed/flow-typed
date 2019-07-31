@@ -3,9 +3,7 @@ declare module "plow-js" {
   declare type Path = PathPartial | Array<PathPartial>;
   declare type Subject = Object;
   declare type Mapper = PathPartial | ((value: any) => any);
-  declare type TransformShape = {
-    [string]: Function
-  };
+  declare type TransformShape = { [string]: Function, ... };
   declare type BooleanStatementFn = (...args: any) => boolean;
 
   /**

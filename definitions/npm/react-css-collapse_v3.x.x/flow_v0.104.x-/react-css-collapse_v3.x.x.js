@@ -3,6 +3,7 @@ declare module 'react-css-collapse' {
     isOpen?: boolean,
     children?: React$Node,
     onRest?: () => void,
-    className?: string
+    className?: string,
+    ...
   }>;
 }

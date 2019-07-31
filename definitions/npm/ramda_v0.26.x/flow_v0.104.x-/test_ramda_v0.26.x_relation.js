@@ -21,10 +21,10 @@ import _, {
 
 const ns: Array<number> = [1, 2, 3, 4, 5];
 const ss: Array<string> = ["one", "two", "three", "four"];
-const obj: { [k: string]: number } = { a: 1, c: 2 };
-const objMixed: { [k: string]: mixed } = { a: 1, c: "d" };
-const objArr: { [k: string]: mixed } = { a: 1, b: [1,2,3], c: "d"};
-const os: Array<{ [k: string]: * }> = [{ a: 1, c: "d" }, { b: 2 }];
+const obj: { [k: string]: number, ... } = { a: 1, c: 2 };
+const objMixed: { [k: string]: mixed, ... } = { a: 1, c: "d" };
+const objArr: { [k: string]: mixed, ... } = { a: 1, b: [1,2,3], c: "d"};
+const os: Array<{ [k: string]: *, ... }> = [{ a: 1, c: "d" }, { b: 2 }];
 const str: string = "hello world";
 
 const cl: number = _.clamp(1, 10, -1);
@@ -33,7 +33,7 @@ const letters = _.split("", "abcABCaaaBBc");
 // In ramda docs example it's just `Math.floor`
 // but we don't want the implicit number -> string
 const countB = _.countBy(_.compose(_.toString, Math.floor))(numbers);
-const countB1: { [k: string]: number } = _.countBy(_.toLower)(letters);
+const countB1: { [k: string]: number, ... } = _.countBy(_.toLower)(letters);
 const diff: Array<number> = _.difference([1, 2, 3, 4], [7, 6, 5, 4, 3]);
 //$ExpectError
 const diff1: Array<string> = _.difference(
@@ -222,7 +222,7 @@ const _minBy: number = _.minBy(Math.abs, 2, 1);
 
 const _identical: boolean = _.identical(2, 1);
 
-const _innerJoin: Array<{ [k: string]: mixed }> = _.innerJoin(
+const _innerJoin: Array<{ [k: string]: mixed, ... }> = _.innerJoin(
   (record, id) => record.id === id,
   [{id: 824, name: 'Richie Furay'},
    {id: 956, name: 'Dewey Martin'},
@@ -238,7 +238,11 @@ const pathEqObj: boolean = _.pathEq(["b", 1], 1, objArr);
 const pathEqObj2: boolean = _.pathEq(["b", 1])(1)(objArr);
 
 // It's good to test this with multiple params since $Keys<T> is a union.
-type PropEqObj = { bar: number, baz: string };
+type PropEqObj = {
+  bar: number,
+  baz: string,
+  ...
+};
 const propEqObj: PropEqObj = { bar: 2, baz: "qux" };
 
 const isQueen = _.propEq("rank", "Q");
@@ -261,7 +265,7 @@ const propEqResult2d: boolean = _.propEq("bar", "always false")(propEqObj);
 const propEqResultError: boolean = _.propEq("missing", 1, propEqObj);
 
 // propEq must work with key value pairs.
-const propEqKvp: { [string]: mixed } = { foo: 1, bar: "2", baz: 3 };
+const propEqKvp: { [string]: mixed, ... } = { foo: 1, bar: "2", baz: 3 };
 const propEqResult3a: boolean = _.propEq("qux", "value", propEqKvp);
 const propEqResult3b: boolean = _.propEq("qux")("value")(propEqKvp);
 const propEqResult3c: boolean = _.propEq("qux")("value", propEqKvp);
@@ -289,19 +293,19 @@ _.sortWith([descAge, ascName], sortWithData);
 _.sortWith([descAge, ascName])(sortWithData);
 
 const eqA = _.eqBy(prop("a"));
-const ls1: Array<{ [k: string]: number }> = [
+const ls1: Array<{ [k: string]: number, ... }> = [
   { a: 1 },
   { a: 2 },
   { a: 3 },
   { a: 4 }
 ];
-const ls2: Array<{ [k: string]: number }> = [
+const ls2: Array<{ [k: string]: number, ... }> = [
   { a: 3 },
   { b: 4 },
   { a: 5 },
   { a: 6 }
 ];
-const symW: Array<{ [k: string]: number }> = _.symmetricDifferenceWith(
+const symW: Array<{ [k: string]: number, ... }> = _.symmetricDifferenceWith(
   eqA,
   ls1,
   ls2
@@ -309,4 +313,4 @@ const symW: Array<{ [k: string]: number }> = _.symmetricDifferenceWith(
 const sym: Array<number> = _.symmetricDifference([1, 2, 3, 4], [7, 6, 5, 4, 3]);
 
 const un: Array<number> = _.union([1, 2, 3])([2, 3, 4]);
-const un1: Array<{ [k: string]: number }> = _.unionWith(eqA, ls1, ls2);
+const un1: Array<{ [k: string]: number, ... }> = _.unionWith(eqA, ls1, ls2);

@@ -3,12 +3,14 @@ declare module "node-uuid" {
     node: Array<number>,
     clockseq: number,
     msecs: number,
-    nsecs: number
+    nsecs: number,
+    ...
   };
 
   declare type V4Options = {
     random: Array<number>,
-    rng: () => Array<number>
+    rng: () => Array<number>,
+    ...
   };
 
   declare type Uuid = {
@@ -24,7 +26,8 @@ declare module "node-uuid" {
     ) => string,
     parse: (u: string, b?: Array<number>, o?: number) => Array<number>,
     unparse: (b: Array<number>, o?: number) => string,
-    noConflict: () => Uuid
+    noConflict: () => Uuid,
+    ...
   };
 
   declare export default Uuid

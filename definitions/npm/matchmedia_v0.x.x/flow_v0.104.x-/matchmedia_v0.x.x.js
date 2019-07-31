@@ -27,7 +27,8 @@ declare module "matchmedia" {
     monochrome?: number | boolean,
     resolution?: string,
     scan?: ScanValue,
-    grid?: number | boolean
+    grid?: number | boolean,
+    ...
   };
 
   declare type MediaQueryListListener = (list: MediaQueryList) => void;
@@ -35,7 +36,8 @@ declare module "matchmedia" {
     addListener(listener: MediaQueryListListener): void,
     removeListener(listener: MediaQueryListListener): void,
     matches: boolean,
-    media: string
+    media: string,
+    ...
   };
 
   declare module.exports: (query: string, values?: Values) => MediaQueryList;

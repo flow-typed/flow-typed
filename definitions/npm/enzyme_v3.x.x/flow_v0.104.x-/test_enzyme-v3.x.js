@@ -126,7 +126,7 @@ shallow(<TestInstance />).instance().method();
 // $ExpectError
 (shallow(<div />).simulateError('error'): ShallowWrapper<'div'>);
 
-class DeepInstance extends React.Component<{onChange: () => void}> {}
+class DeepInstance extends React.Component<{ onChange: () => void, ... }> {}
 mount(<div><DeepInstance onChange={() => {}}/></div>).find(DeepInstance).instance().props.onChange();
 mount(<div><DeepInstance onChange={() => {}}/></div>).filter(DeepInstance).instance().props.onChange();
 mount(<div><DeepInstance onChange={() => {}}/></div>).closest(DeepInstance).instance().props.onChange();

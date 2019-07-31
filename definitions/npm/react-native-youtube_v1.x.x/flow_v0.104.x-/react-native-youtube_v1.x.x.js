@@ -1,7 +1,5 @@
 declare module "react-native-youtube" {
-  declare type NativeEvent = {
-    target: number
-  };
+  declare type NativeEvent = { target: number, ... };
 
   declare type StandaloneAndroidOptions = {|
     apiKey: string,
@@ -24,12 +22,11 @@ declare module "react-native-youtube" {
       ...StandaloneAndroidOptions,
       playlistId: string,
       startIndex?: number
-    |}) => Promise<void>
+    |}) => Promise<void>,
+    ...
   } | null;
 
-  declare export var YouTubeStandaloneIOS: {
-    playVideo: (videoId: string) => Promise<void>
-  } | null;
+  declare export var YouTubeStandaloneIOS: { playVideo: (videoId: string) => Promise<void>, ... } | null;
 
   declare export default class YouTube extends React$Component<{|
     apiKey?: string,
@@ -45,13 +42,17 @@ declare module "react-native-youtube" {
     showFullscreenButton?: boolean,
     rel?: boolean,
     origin?: string,
-    onError?: (e: NativeEvent & { error: string }) => mixed,
+    onError?: (e: NativeEvent & { error: string, ... }) => mixed,
     onReady?: (e: NativeEvent) => mixed,
-    onChangeState?: (e: NativeEvent & { state: string }) => mixed,
-    onChangeQuality?: (e: NativeEvent & { quality: string }) => mixed,
-    onChangeFullscreen?: (e: NativeEvent & { isFullscreen: boolean }) => mixed,
+    onChangeState?: (e: NativeEvent & { state: string, ... }) => mixed,
+    onChangeQuality?: (e: NativeEvent & { quality: string, ... }) => mixed,
+    onChangeFullscreen?: (e: NativeEvent & { isFullscreen: boolean, ... }) => mixed,
     onProgress?: (
-      e: NativeEvent & { duration: number, currentTime: number }
+      e: NativeEvent & {
+        duration: number,
+        currentTime: number,
+        ...
+      }
     ) => mixed,
     style?: any
   |}> {

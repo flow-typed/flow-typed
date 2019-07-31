@@ -3,6 +3,7 @@ declare module "react-with-separator" {
     children?: React$Node,
     leading?: boolean,
     separator: string | React$Element<*>,
-    trailing?: boolean
+    trailing?: boolean,
+    ...
   }>;
 }

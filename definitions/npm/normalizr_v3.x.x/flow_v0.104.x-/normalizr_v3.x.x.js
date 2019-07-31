@@ -19,7 +19,8 @@ declare module 'normalizr' {
   declare type EntityOptions = {
     idAttribute?: string | SchemaFunction,
     mergeStrategy?: MergeFunction,
-    processStrategy?: StrategyFunction
+    processStrategy?: StrategyFunction,
+    ...
   }
 
   declare class Entity {
@@ -29,7 +30,7 @@ declare module 'normalizr' {
   }
 
   declare class Object {
-    constructor(definition: {[key: string]: Schema}): void,
+    constructor(definition: { [key: string]: Schema, ... }): void,
     define(definition: Schema): void
   }
 
@@ -49,6 +50,7 @@ declare module 'normalizr' {
     Object: typeof Object,
     Union: typeof Union,
     Values: typeof Values,
+    ...
   }
     
   declare export type Schema =
@@ -57,7 +59,7 @@ declare module 'normalizr' {
     schema.Object |
     schema.Union |
     schema.Values |
-    {[key: string]: Schema} |
+    { [key: string]: Schema, ... } |
     [Schema];
 
 

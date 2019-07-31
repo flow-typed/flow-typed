@@ -1,6 +1,4 @@
-type Selector<TState, TProps, TResult> = {
-  (state: TState, props: TProps, ...rest: any[]): TResult
-};
+type Selector<TState, TProps, TResult> = { (state: TState, props: TProps, ...rest: any[]): TResult, ... };
 
 type SelectorCreator = {
   <
@@ -117,7 +115,6 @@ type SelectorCreator = {
       arg16: T16
     ) => TResult
   ): Selector<TState, TProps, TResult>,
-
   <
     TState,
     TProps,
@@ -226,7 +223,6 @@ type SelectorCreator = {
       arg15: T15
     ) => TResult
   ): Selector<TState, TProps, TResult>,
-
   <
     TState,
     TProps,
@@ -329,7 +325,6 @@ type SelectorCreator = {
       arg14: T14
     ) => TResult
   ): Selector<TState, TProps, TResult>,
-
   <
     TState,
     TProps,
@@ -426,7 +421,6 @@ type SelectorCreator = {
       arg13: T13
     ) => TResult
   ): Selector<TState, TProps, TResult>,
-
   <TState, TProps, TResult, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(
     selector1: Selector<TState, TProps, T1>,
     selector2: Selector<TState, TProps, T2>,
@@ -485,7 +479,6 @@ type SelectorCreator = {
       arg12: T12
     ) => TResult
   ): Selector<TState, TProps, TResult>,
-
   <TState, TProps, TResult, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(
     selector1: Selector<TState, TProps, T1>,
     selector2: Selector<TState, TProps, T2>,
@@ -540,7 +533,6 @@ type SelectorCreator = {
       arg11: T11
     ) => TResult
   ): Selector<TState, TProps, TResult>,
-
   <TState, TProps, TResult, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(
     selector1: Selector<TState, TProps, T1>,
     selector2: Selector<TState, TProps, T2>,
@@ -591,7 +583,6 @@ type SelectorCreator = {
       arg10: T10
     ) => TResult
   ): Selector<TState, TProps, TResult>,
-
   <TState, TProps, TResult, T1, T2, T3, T4, T5, T6, T7, T8, T9>(
     selector1: Selector<TState, TProps, T1>,
     selector2: Selector<TState, TProps, T2>,
@@ -638,7 +629,6 @@ type SelectorCreator = {
       arg9: T9
     ) => TResult
   ): Selector<TState, TProps, TResult>,
-
   <TState, TProps, TResult, T1, T2, T3, T4, T5, T6, T7, T8>(
     selector1: Selector<TState, TProps, T1>,
     selector2: Selector<TState, TProps, T2>,
@@ -681,7 +671,6 @@ type SelectorCreator = {
       arg8: T8
     ) => TResult
   ): Selector<TState, TProps, TResult>,
-
   <TState, TProps, TResult, T1, T2, T3, T4, T5, T6, T7>(
     selector1: Selector<TState, TProps, T1>,
     selector2: Selector<TState, TProps, T2>,
@@ -720,7 +709,6 @@ type SelectorCreator = {
       arg7: T7
     ) => TResult
   ): Selector<TState, TProps, TResult>,
-
   <TState, TProps, TResult, T1, T2, T3, T4, T5, T6>(
     selector1: Selector<TState, TProps, T1>,
     selector2: Selector<TState, TProps, T2>,
@@ -755,7 +743,6 @@ type SelectorCreator = {
       arg6: T6
     ) => TResult
   ): Selector<TState, TProps, TResult>,
-
   <TState, TProps, TResult, T1, T2, T3, T4, T5>(
     selector1: Selector<TState, TProps, T1>,
     selector2: Selector<TState, TProps, T2>,
@@ -774,7 +761,6 @@ type SelectorCreator = {
     ],
     resultFunc: (arg1: T1, arg2: T2, arg3: T3, arg4: T4, arg5: T5) => TResult
   ): Selector<TState, TProps, TResult>,
-
   <TState, TProps, TResult, T1, T2, T3, T4>(
     selector1: Selector<TState, TProps, T1>,
     selector2: Selector<TState, TProps, T2>,
@@ -791,7 +777,6 @@ type SelectorCreator = {
     ],
     resultFunc: (arg1: T1, arg2: T2, arg3: T3, arg4: T4) => TResult
   ): Selector<TState, TProps, TResult>,
-
   <TState, TProps, TResult, T1, T2, T3>(
     selector1: Selector<TState, TProps, T1>,
     selector2: Selector<TState, TProps, T2>,
@@ -806,7 +791,6 @@ type SelectorCreator = {
     ],
     resultFunc: (arg1: T1, arg2: T2, arg3: T3) => TResult
   ): Selector<TState, TProps, TResult>,
-
   <TState, TProps, TResult, T1, T2>(
     selector1: Selector<TState, TProps, T1>,
     selector2: Selector<TState, TProps, T2>,
@@ -816,7 +800,6 @@ type SelectorCreator = {
     selectors: [Selector<TState, TProps, T1>, Selector<TState, TProps, T2>],
     resultFunc: (arg1: T1, arg2: T2) => TResult
   ): Selector<TState, TProps, TResult>,
-
   <TState, TProps, TResult, T1>(
     selector1: Selector<TState, TProps, T1>,
     resultFunc: (arg1: T1) => TResult
@@ -824,28 +807,27 @@ type SelectorCreator = {
   <TState, TProps, TResult, T1>(
     selectors: [Selector<TState, TProps, T1>],
     resultFunc: (arg1: T1) => TResult
-  ): Selector<TState, TProps, TResult>
+  ): Selector<TState, TProps, TResult>,
+  ...
 };
 
 type ExtractReturnType = <Return>((...rest: any[]) => Return) => Return;
 
 type Reselect = {
   createSelector: SelectorCreator,
-
   defaultMemoize: <TFunc: Function>(
     func: TFunc,
     equalityCheck?: (a: any, b: any) => boolean
   ) => TFunc,
-
   createSelectorCreator: (
     memoize: Function,
     ...memoizeOptions: any[]
   ) => SelectorCreator,
-
-  createStructuredSelector: <TState, TProps, InputSelectors: {[k: string | number]: Selector<TState, TProps, any>}>(
+  createStructuredSelector: <TState, TProps, InputSelectors: { [k: string | number]: Selector<TState, TProps, any>, ... }>(
     inputSelectors: InputSelectors,
     selectorCreator?: SelectorCreator
-  ) => Selector<TState, TProps, $ObjMap<InputSelectors, ExtractReturnType>>
+  ) => Selector<TState, TProps, $ObjMap<InputSelectors, ExtractReturnType>>,
+  ...
 };
 
 declare module "reselect" {

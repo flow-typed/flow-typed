@@ -4,8 +4,9 @@ declare module "debug" {
     (formatter: string, ...args: Array<mixed>): void,
     (err: Error, ...args: Array<mixed>): void,
     enabled: boolean,
-    log: () => {},
-    namespace: string
+    log: () => {...},
+    namespace: string,
+    ...
   };
 
   declare module.exports: (namespace: string) => Debugger;
@@ -21,7 +22,5 @@ declare module "debug" {
   declare function useColors(): boolean;
   declare function log(): void;
 
-  declare var formatters: {
-    [formatter: string]: () => {}
-  };
+  declare var formatters: { [formatter: string]: () => {...}, ... };
 }

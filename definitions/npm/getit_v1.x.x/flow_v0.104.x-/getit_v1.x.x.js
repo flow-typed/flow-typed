@@ -8,9 +8,10 @@ declare module 'getit' {
   |};
 
   declare module.exports: {
-    (target: string, callback: getit$Callback): void;
-    (target: string, opts: getit$Options, callback: getit$Callback): void;
-    getUrl(target: string): string;
-    isRemote(target: string): boolean;
+    (target: string, callback: getit$Callback): void,
+    (target: string, opts: getit$Options, callback: getit$Callback): void,
+    getUrl(target: string): string,
+    isRemote(target: string): boolean,
+    ...
   }
 }

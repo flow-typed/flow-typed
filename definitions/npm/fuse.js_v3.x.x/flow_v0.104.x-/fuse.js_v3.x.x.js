@@ -17,7 +17,8 @@ declare module "fuse.js" {
     getFn?: (obj: any, path: string) => any,
     sortFn?: (a: any, b: any) => boolean,
     verbose?: boolean,
-    tokenSeparator?: RegExp
+    tokenSeparator?: RegExp,
+    ...
   };
   declare class Fuse<T> {
     constructor(items: $ReadOnlyArray<T>, options?: FuseOptions): Fuse<T>;

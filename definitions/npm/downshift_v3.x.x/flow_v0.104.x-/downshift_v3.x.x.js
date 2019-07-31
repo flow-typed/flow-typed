@@ -40,12 +40,14 @@ declare module 'downshift' {
     inputValue: ?string,
     isOpen: boolean,
     selectedItem: ?Item,
+    ...
   };
 
   declare export type Environment = {
     addEventListener(...a: any): void,
     removeEventListener(...a: any): void,
     document: Document,
+    ...
   };
 
   declare export type A11yStatusMessageOptions<Item> = {
@@ -57,65 +59,63 @@ declare module 'downshift' {
     resultCount: number,
     highlightedItem: Item,
     selectedItem: Item,
+    ...
   };
 
   declare export type StateChangeOptions<Item> = {
     ...DownshiftState<Item>,
     type: $Values<StateChangeTypes>,
+    ...
   };
 
-  declare export type PartialStateChangeOptions<Item> = {
-    ...StateChangeOptions<Item>,
-  };
+  declare export type PartialStateChangeOptions<Item> = { ...StateChangeOptions<Item>, ... };
 
   declare export type StateChangeFunction<Item> = (
     state: DownshiftState<Item>
   ) => PartialStateChangeOptions<Item>;
 
-  declare export type GetRootPropsOptions = {
-    refKey?: string,
-  };
+  declare export type GetRootPropsOptions = { refKey?: string, ... };
 
-  declare export type GetInputPropsOptions = {
-    disabled?: boolean,
-  };
+  declare export type GetInputPropsOptions = { disabled?: boolean, ... };
 
-  declare export type GetLabelPropsOptions = {};
+  declare export type GetLabelPropsOptions = {...};
 
   declare export type GetToggleButtonPropsOptions = {
     disabled?: boolean,
     'aria-label'?: string,
+    ...
   };
 
   declare export type GetMenuPropsOptions = {
     refKey?: string,
     'aria-label'?: string,
+    ...
   };
 
-  declare export type GetPropsCommonOptions = {
-    suppressRefError?: boolean,
-  };
+  declare export type GetPropsCommonOptions = { suppressRefError?: boolean, ... };
 
   declare export type GetItemPropsOptions<Item> = {
     index?: number,
     item: Item,
     isSelected?: boolean,
     disabled?: boolean,
+    ...
   };
 
   declare export type PropGetters<Item> = {
     getRootProps: (
       options?: GetRootPropsOptions,
       otherOptions?: GetPropsCommonOptions
-    ) => {},
-    getToggleButtonProps: (options?: GetToggleButtonPropsOptions) => {},
-    getLabelProps: (options?: GetLabelPropsOptions) => {},
+    ) => {...},
+    getToggleButtonProps: (options?: GetToggleButtonPropsOptions) => {...},
+    getLabelProps: (options?: GetLabelPropsOptions) => {...},
     getMenuProps: (
       options?: GetMenuPropsOptions,
       otherOptions?: GetPropsCommonOptions
-    ) => {},
+    ) => {...},
     getInputProps: <T>(options?: T) => T & GetInputPropsOptions,
-    getItemProps: (options: GetItemPropsOptions<Item>) => {},
+    getItemProps: (options: GetItemPropsOptions<Item>) => {...},
+    ...
   };
 
   declare export type Actions<Item> = {
@@ -157,6 +157,7 @@ declare module 'downshift' {
       cb?: Callback
     ) => mixed,
     itemToString: (item: Item) => string,
+    ...
   };
 
   declare export type ControllerStateAndHelpers<Item> = DownshiftState<Item> &

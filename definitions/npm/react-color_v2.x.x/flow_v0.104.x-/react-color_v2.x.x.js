@@ -146,7 +146,8 @@ declare module "react-color" {
     rgb: RGBColor,
     oldHue: number,
     onChange?: ColorWrapChangeHandler,
-    source: string
+    source: string,
+    ...
   };
 
   declare export var AlphaPicker: Class<Component<AlphaPickerProps>>;
@@ -163,7 +164,7 @@ declare module "react-color" {
   declare export var SwatchesPicker: Class<Component<SwatchesPickerProps>>;
   declare export var TwitterPicker: Class<Component<TwitterPickerProps>>;
 
-  declare export function CustomPicker<Props: {}>(
+  declare export function CustomPicker<Props: {...}>(
     Component: ComponentType<InjectedColorProps & $Supertype<Props>>
   ): ComponentType<Props>;
 }

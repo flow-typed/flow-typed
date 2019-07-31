@@ -1,5 +1,3 @@
 declare module "rmdir-sync" {
-  declare module.exports: {
-    (dirPath: string): void
-  };
+  declare module.exports: { (dirPath: string): void, ... };
 }

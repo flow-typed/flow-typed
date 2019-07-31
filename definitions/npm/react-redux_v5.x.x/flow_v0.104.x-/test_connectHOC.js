@@ -9,7 +9,11 @@ function checkSimplePropertyInjection() {
     foo: number,
     bar: string,
   |};
-  type Props = { ...OwnProps, foo: number };
+  type Props = {
+    ...OwnProps,
+    foo: number,
+    ...
+  };
   const mapStateToProps = () => ({ foo: 5 });
 
   class Com extends React.Component<Props> {}
@@ -21,11 +25,11 @@ function checkSimplePropertyInjection() {
   <Connected bar="str" />;
   e.push(Connected);
 
-  function injectProp<Config: {}>(
+  function injectProp<Config: {...}>(
     Component: React.AbstractComponent<Config>,
-  ): React.AbstractComponent<$Diff<Config, { foo: number | void }>> {
+  ): React.AbstractComponent<$Diff<Config, { foo: number | void, ... }>> {
     return function WrapperComponent(
-      props: $Diff<Config, { foo: number | void }>,
+      props: $Diff<Config, { foo: number | void, ... }>,
     ) {
       return <Component {...props} foo={42} />;
     };
@@ -45,20 +49,22 @@ function composeWithOtherHOC_OK() {
   type OwnProps = {
     own1: number,
     injected1: string,
+    ...
   };
   type Props = {
     ...$Exact<OwnProps>,
     state1: number,
+    ...
   };
   const mapStateToProps = () => ({ state1: 5 });
 
   class Com extends React.Component<Props> {}
 
-  function injectProp<Config: {}>(
+  function injectProp<Config: {...}>(
     Component: React.AbstractComponent<Config>,
-  ): React.AbstractComponent<$Diff<Config, { injected1: string | void }>> {
+  ): React.AbstractComponent<$Diff<Config, { injected1: string | void, ... }>> {
     return function WrapperComponent(
-      props: $Diff<Config, { injected1: string | void }>,
+      props: $Diff<Config, { injected1: string | void, ... }>,
     ) {
       return <Component {...props} injected1="str" />;
     };
@@ -89,16 +95,17 @@ function composeWithOtherHOC_exactOK() {
   type Props = {
     ...$Exact<OwnProps>,
     state1: number,
+    ...
   };
   const mapStateToProps = () => ({ state1: 5 });
 
   class Com extends React.Component<Props> {}
 
-  function injectProp<Config: {}>(
+  function injectProp<Config: {...}>(
     Component: React.AbstractComponent<Config>,
-  ): React.AbstractComponent<$Diff<Config, { injected1: string | void }>> {
+  ): React.AbstractComponent<$Diff<Config, { injected1: string | void, ... }>> {
     return function WrapperComponent(
-      props: $Diff<Config, { injected1: string | void }>,
+      props: $Diff<Config, { injected1: string | void, ... }>,
     ) {
       return <Component {...props} injected1="str" />;
     };
@@ -125,20 +132,22 @@ function composeWithOtherHOC_wrongOrder() {
   type OwnProps = {
     own1: number,
     injected1: string,
+    ...
   };
   type Props = {
     ...$Exact<OwnProps>,
     state1: number,
+    ...
   };
   const mapStateToProps = () => ({ state1: 5 });
 
   class Com extends React.Component<Props> {}
 
-  function injectProp<Config: {}>(
+  function injectProp<Config: {...}>(
     Component: React.AbstractComponent<Config>,
-  ): React.AbstractComponent<$Diff<Config, { injected1: string | void }>> {
+  ): React.AbstractComponent<$Diff<Config, { injected1: string | void, ... }>> {
     return function WrapperComponent(
-      props: $Diff<Config, { injected1: string | void }>,
+      props: $Diff<Config, { injected1: string | void, ... }>,
     ) {
       return <Component {...props} injected1="str" />;
     };

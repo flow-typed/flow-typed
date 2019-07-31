@@ -2,7 +2,7 @@
 declare module "prosemirror-model" {
   declare export class Node {
     type: NodeType,
-    attrs: { [key: string]: any },
+    attrs: { [key: string]: any, ... },
     content: Fragment,
     marks: Array<Mark>,
     text?: string,
@@ -56,9 +56,19 @@ declare module "prosemirror-model" {
 
     nodeAt(pos: number): ?Node,
 
-    childAfter(pos: number): { node: ?Node, index: number, offset: number },
+    childAfter(pos: number): {
+      node: ?Node,
+      index: number,
+      offset: number,
+      ...
+    },
 
-    childBefore(pos: number): { node: ?Node, index: number, offset: number },
+    childBefore(pos: number): {
+      node: ?Node,
+      index: number,
+      offset: number,
+      ...
+    },
 
     resolve(pos: number): ResolvedPos,
 
@@ -122,7 +132,11 @@ declare module "prosemirror-model" {
 
     findDiffStart(other: Node): ?number,
 
-    findDiffEnd(other: Node): ?{ a: number, b: number },
+    findDiffEnd(other: Node): ?{
+      a: number,
+      b: number,
+      ...
+    },
 
     toString(): string,
 
@@ -235,8 +249,8 @@ declare module "prosemirror-model" {
 
   declare export class Schema {
     spec: SchemaSpec,
-    nodes: { [name: string]: NodeType },
-    marks: ?{ [name: string]: MarkType },
+    nodes: { [name: string]: NodeType, ... },
+    marks: ?{ [name: string]: MarkType, ... },
     topNodeType: NodeType,
     cached: Object,
 
@@ -244,14 +258,14 @@ declare module "prosemirror-model" {
 
     node(
       type: string | NodeType,
-      attrs?: ?{ [key: string]: any },
+      attrs?: ?{ [key: string]: any, ... },
       content?: Fragment | Node | Array<Node> | void,
       marks?: ?Array<Mark>
     ): Node,
 
     text(text: string, marks?: Array<Mark>): Node,
 
-    mark(type: string | MarkType, attrs?: { [key: string]: any }): Mark,
+    mark(type: string | MarkType, attrs?: { [key: string]: any, ... }): Mark,
 
     nodeFromJSON(json: Object): Node,
 
@@ -259,11 +273,10 @@ declare module "prosemirror-model" {
   }
 
   declare export type SchemaSpec = {
-    nodes: { [name: string]: NodeSpec } /* | OrderedMap<NodeSpec> */,
-
-    marks?: { [name: string]: MarkSpec } /* | OrderedMap<MarkSpec> */,
-
-    topNode?: string
+    nodes: { [name: string]: NodeSpec, ... } /* | OrderedMap<NodeSpec> */,
+    marks?: { [name: string]: MarkSpec, ... } /* | OrderedMap<MarkSpec> */,
+    topNode?: string,
+    ...
   };
 
   declare export type NodeSpec = {
@@ -279,21 +292,21 @@ declare module "prosemirror-model" {
     defining?: boolean,
     isolating?: boolean,
     toDOM?: (node: Node) => DOMOutputSpec,
-    parseDOM?: Array<any>
+    parseDOM?: Array<any>,
+    ...
   };
 
   declare export type MarkSpec = {
-    attrs?: { [name: string]: AttributeSpec },
+    attrs?: { [name: string]: AttributeSpec, ... },
     inclusive?: boolean,
     excludes?: string,
     group?: string,
     toDOM: (mark: Mark, inline: boolean) => DOMOutputSpec,
-    parseDOM?: Array<any>
+    parseDOM?: Array<any>,
+    ...
   };
 
-  declare export type AttributeSpec = {
-    default?: any
-  };
+  declare export type AttributeSpec = { default?: any, ... };
 
   declare export class NodeType {
     name: string,
@@ -384,12 +397,17 @@ declare module "prosemirror-model" {
 
   declare type ParseOptions = {
     preserveWhitespace?: boolean | "full",
-    findPositions?: Array<{ node: Node, offset: number }>,
+    findPositions?: Array<{
+      node: Node,
+      offset: number,
+      ...
+    }>,
     from?: number,
     to?: number,
     topNode?: Node,
     topMatch?: ContentMatch,
-    context?: ResolvedPos
+    context?: ResolvedPos,
+    ...
   };
 
   declare type ParseRule = {
@@ -406,20 +424,17 @@ declare module "prosemirror-model" {
     getAttrs?: (Node | string) => Object | false | null,
     contentElement?: string | (Node => Node),
     getContent?: Node => Fragment,
-    preserveWhitespace?: boolean | "full"
+    preserveWhitespace?: boolean | "full",
+    ...
   };
 
   declare export class DOMSerializer {
-    nodes: { [key: string]: (node: Node) => DOMOutputSpec },
-    marks: { [key: string]: (node: Node) => DOMOutputSpec },
+    nodes: { [key: string]: (node: Node) => DOMOutputSpec, ... },
+    marks: { [key: string]: (node: Node) => DOMOutputSpec, ... },
 
     constructor(
-      nodes: {
-        [key: string]: (node: Node) => DOMOutputSpec
-      },
-      marks: {
-        [key: string]: (node: Node) => DOMOutputSpec
-      }
+      nodes: { [key: string]: (node: Node) => DOMOutputSpec, ... },
+      marks: { [key: string]: (node: Node) => DOMOutputSpec, ... }
     ): DOMSerializer,
 
     serializeFragment(fragment: Fragment, options?: Object): DocumentFragment,
@@ -427,12 +442,16 @@ declare module "prosemirror-model" {
     static renderSpec(
       doc: Document,
       structure: DOMOutputSpec
-    ): { dom: Node, contentDOM?: Node },
+    ): {
+      dom: Node,
+      contentDOM?: Node,
+      ...
+    },
 
     static fromSchema(schema: Schema): DOMSerializer
   }
 
-  declare type Attributes = { [string]: ?string }
+  declare type Attributes = { [string]: ?string, ... }
 
   declare export type DOMOutputSpec =
     | string // node.text

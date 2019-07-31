@@ -10,7 +10,7 @@ import type { FluxStandardAction as FSA } from 'flux-standard-action';
 // $ExpectError boolean is incompatible with type number
 (isError(): number);
 
-type AddActionFSA = FSA<'add', { id: number }[], { time: Date }>;
+type AddActionFSA = FSA<'add', { id: number, ... }[], { time: Date, ... }>;
 
 const action: AddActionFSA = {
   type: 'add',

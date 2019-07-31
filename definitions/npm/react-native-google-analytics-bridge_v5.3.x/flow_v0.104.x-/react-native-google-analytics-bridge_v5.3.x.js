@@ -1,50 +1,46 @@
 // @flow
 declare module "react-native-google-analytics-bridge" {
   declare export type Product = {
-    id: string,
-    name: string,
-    category?: string,
-    brand?: string,
-    variant?: string,
-    price?: number,
-    quantity?: number,
-    couponCode?: string
+   id: string,
+   name: string,
+   category?: string,
+   brand?: string,
+   variant?: string,
+   price?: number,
+   quantity?: number,
+   couponCode?: string,
+   ...
   };
 
   declare export type Transaction = {
-    id: string,
-    affiliation?: string,
-    revenue?: number,
-    tax?: number,
-    shipping?: number,
-    couponCode?: string
+   id: string,
+   affiliation?: string,
+   revenue?: number,
+   tax?: number,
+   shipping?: number,
+   couponCode?: string,
+   ...
   };
 
   declare export type OptionalValue = {
-    label: string,
-    value: number
+   label: string,
+   value: number,
+   ...
   };
 
   declare export type OptionalTimingValue = {
-    name: string,
-    label?: string
+   name: string,
+   label?: string,
+   ...
   };
 
-  declare export type CustomDimensionsFieldIndexMap = {
-    [key: string]: number
-  };
+  declare export type CustomDimensionsFieldIndexMap = { [key: string]: number, ... };
 
-  declare export type CustomDimensionsByIndex = {
-    [key: number]: any
-  };
+  declare export type CustomDimensionsByIndex = { [key: number]: any, ... };
 
-  declare export type CustomDimensionsByField = {
-    [key: string]: any
-  };
+  declare export type CustomDimensionsByField = { [key: string]: any, ... };
 
-  declare export type CustomMetrics = {
-    [key: number]: number
-  };
+  declare export type CustomMetrics = { [key: number]: number, ... };
 
   /**
    * Used to bridge tracker data to native Google analytics.
@@ -304,8 +300,9 @@ declare module "react-native-google-analytics-bridge" {
   }
 
   declare export type DataLayerEvent = {
-    event: string,
-    [key: string]: any
+   [key: string]: any,
+   event: string,
+   ...
   };
 
   declare export class GoogleTagManager {

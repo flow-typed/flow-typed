@@ -4,7 +4,8 @@ type npm$clampJs$ClampOptions = {
   truncationChar?: string,
   truncationHTML?: string,
   splitOnChars?: Array<string>,
-  animate?: boolean
+  animate?: boolean,
+  ...
 };
 
 declare module "clamp-js" {

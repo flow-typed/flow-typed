@@ -12,7 +12,8 @@ type Primus$Options = Primus$SocketOptions & {
   methods?: string,
   origins?: string,
   pathname?: string,
-  timeout?: number | false
+  timeout?: number | false,
+  ...
 };
 
 type Primus$CreateOptions = Primus$Options & {
@@ -22,13 +23,15 @@ type Primus$CreateOptions = Primus$Options & {
   key?: string,
   ca?: string,
   pfx?: string,
-  passphrase?: string
+  passphrase?: string,
+  ...
 };
 
 type Primus$SocketOptions = {
   parser?: Object,
   plugin?: Object,
-  transformer?: Object
+  transformer?: Object,
+  ...
 };
 
 declare class Primus$Spark {
@@ -66,7 +69,7 @@ declare class Primus$Primus {
   clients(): string[];
   spark(id: string): ?Primus$Spark;
   connected: number;
-  connections: { [id: string]: Primus$Spark };
+  connections: { [id: string]: Primus$Spark, ... };
   pathname: string;
   server: http.Server;
   timeout: number;

@@ -4,6 +4,7 @@ declare module '@storybook/addon-actions' {
 
   declare module.exports: {
     action: Action,
-    decorateAction(args: Array<DecorateFn>): Action;
+    decorateAction(args: Array<DecorateFn>): Action,
+    ...
   };
 }

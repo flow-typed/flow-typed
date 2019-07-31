@@ -35,33 +35,64 @@ type marked$HighlightFunction =
   | ((c: string, l?: string) => string)
 
 type marked$MarkedOptions = {
-  highlight?: marked$HighlightFunction;
-  renderer?: marked$Renderer;
-  gfm?: boolean;
-  tables?: boolean;
-  breaks?: boolean;
-  pedantic?: boolean;
-  sanitize?: boolean;
-  smartLists?: boolean;
-  smartypants?: boolean;
+  highlight?: marked$HighlightFunction,
+  renderer?: marked$Renderer,
+  gfm?: boolean,
+  tables?: boolean,
+  breaks?: boolean,
+  pedantic?: boolean,
+  sanitize?: boolean,
+  smartLists?: boolean,
+  smartypants?: boolean,
+  ...
 }
 
 /*
  * marked$Tokens
  */
 
-type marked$Space = { type: 'space'; }
-type marked$Code = { type: 'code'; text: string; lang?: string; }
-type marked$Heading = { type: 'heading'; depth: number; text: string; }
-type marked$Table = { type: 'table'; header: string; align: Array<marked$AlignFlag> ; cells: Array<Array<string>> }
-type marked$Hr = { type: 'hr'; }
-type marked$BlockquoteStart = { type: 'blockquote_start' }
-type marked$BlockquoteEnd = { type: 'blockquote_end' }
-type marked$ListStart = { type: 'list_start' }
-type marked$ListEnd = { type: 'list_end' }
-type marked$Paragraph = { type: 'paragraph'; pre: boolean; text: string; }
-type marked$Html = { type: 'paragraph'; pre: boolean; text: string; }
-type marked$Text = { type: 'text'; text: string; }
+type marked$Space = { type: 'space', ... }
+type marked$Code = {
+  type: 'code',
+  text: string,
+  lang?: string,
+  ...
+}
+type marked$Heading = {
+  type: 'heading',
+  depth: number,
+  text: string,
+  ...
+}
+type marked$Table = {
+  type: 'table',
+  header: string,
+  align: Array<marked$AlignFlag>,
+  cells: Array<Array<string>>,
+  ...
+}
+type marked$Hr = { type: 'hr', ... }
+type marked$BlockquoteStart = { type: 'blockquote_start', ... }
+type marked$BlockquoteEnd = { type: 'blockquote_end', ... }
+type marked$ListStart = { type: 'list_start', ... }
+type marked$ListEnd = { type: 'list_end', ... }
+type marked$Paragraph = {
+  type: 'paragraph',
+  pre: boolean,
+  text: string,
+  ...
+}
+type marked$Html = {
+  type: 'paragraph',
+  pre: boolean,
+  text: string,
+  ...
+}
+type marked$Text = {
+  type: 'text',
+  text: string,
+  ...
+}
 
 type marked$Token =
   marked$Space
@@ -78,15 +109,17 @@ type marked$Token =
   | marked$Text
 
 type marked$Link = {
-  title: ?string;
-  href: string;
+  title: ?string,
+  href: string,
+  ...
 }
 
-type marked$Tokens = { links: Array<marked$Link> } & Array<marked$Token>;
+type marked$Tokens = { links: Array<marked$Link>, ... } & Array<marked$Token>;
 
 type marked$NoopRule = {
-  (i: mixed): void;
-  exec: (i: mixed) => void;
+  (i: mixed): void,
+  exec: (i: mixed) => void,
+  ...
 }
 
 type marked$Rule = RegExp | marked$NoopRule
@@ -95,8 +128,8 @@ type marked$lex = (t: string) => marked$Tokens;
 
 class marked$Lexer {
   static lexer: (t: string, o?: marked$MarkedOptions) => marked$Tokens;
-  static rules: { [key: string]: marked$Rule };
-  rules: { [key: string]: marked$Rule };
+  static rules: { [key: string]: marked$Rule, ... };
+  rules: { [key: string]: marked$Rule, ... };
   lex: marked$lex;
   tokens: marked$Tokens;
   options: marked$MarkedOptions;
@@ -138,19 +171,20 @@ class marked$InlineLexer {
 }
 
 type marked$Marked = {
-  (md: string, o: marked$MarkedOptions, cb: marked$NodeCallback<string>): void;
-  (md: string, cb: marked$NodeCallback<string>): void;
-  (md: string, o?: marked$MarkedOptions): string;
-  setOptions: (o: marked$MarkedOptions) => void;
-  defaults: marked$MarkedOptions;
-  Parser: typeof marked$Parser;
-  parser: typeof marked$Parser.parse;
-  Lexer: typeof marked$Lexer;
-  lexer: typeof marked$Lexer.lexer;
-  InlineLexer: typeof marked$InlineLexer;
-  inlinelexer: typeof marked$InlineLexer.output;
-  Renderer: typeof marked$Renderer;
-  parse: marked$Marked;
+  (md: string, o: marked$MarkedOptions, cb: marked$NodeCallback<string>): void,
+  (md: string, cb: marked$NodeCallback<string>): void,
+  (md: string, o?: marked$MarkedOptions): string,
+  setOptions: (o: marked$MarkedOptions) => void,
+  defaults: marked$MarkedOptions,
+  Parser: typeof marked$Parser,
+  parser: typeof marked$Parser.parse,
+  Lexer: typeof marked$Lexer,
+  lexer: typeof marked$Lexer.lexer,
+  InlineLexer: typeof marked$InlineLexer,
+  inlinelexer: typeof marked$InlineLexer.output,
+  Renderer: typeof marked$Renderer,
+  parse: marked$Marked,
+  ...
 }
 
 

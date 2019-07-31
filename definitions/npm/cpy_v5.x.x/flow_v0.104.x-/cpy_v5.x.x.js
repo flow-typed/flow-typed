@@ -33,6 +33,7 @@ declare module 'cpy' {
       follow?: boolean,
       realpath?: boolean,
       absolute?: boolean,
+      ...
     },
   ) => Promise<void>;
 }

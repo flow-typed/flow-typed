@@ -185,7 +185,8 @@ describe("react-router-dom", () => {
       location: Location,
       match: Match,
       staticContext: StaticRouterContext,
-      s: string
+      s: string,
+      ...
     };
     describe("Stateless Functional Components", () => {
       it("passes if the component is passed required props", () => {
@@ -225,14 +226,18 @@ describe("react-router-dom", () => {
       });
 
       it("errors if trying to access a prop that withRouter does not supply", () => {
-        const Comp = ({ histry, s }: { histry: RouterHistory, s: string }) => (
+        const Comp = ({ histry, s }: {
+          histry: RouterHistory,
+          s: string,
+          ...
+        }) => (
           <div />
         );
         const WrappedComp = withRouter(Comp);
       });
 
       it("errors if using block() incorrectly", () => {
-        const Comp = ({history}: {history: RouterHistory}) => {
+        const Comp = ({history}: { history: RouterHistory, ... }) => {
           // $ExpectError - wrong param
           history.block(false);
 

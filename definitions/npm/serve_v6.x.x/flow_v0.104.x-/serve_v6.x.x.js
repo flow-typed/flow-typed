@@ -16,9 +16,7 @@ declare module "serve" {
     version?: boolean
   |};
 
-  declare type Result = {
-    stop: () => void
-  };
+  declare type Result = { stop: () => void, ... };
 
   declare export default function serve(
     directory: string,

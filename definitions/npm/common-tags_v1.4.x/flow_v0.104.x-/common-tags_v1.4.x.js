@@ -10,7 +10,8 @@ declare module "common-tags" {
 
   declare type TemplateTransformer = {
     onSubstitution?: (substitution: string, resultSoFar: string) => string,
-    onEndResult?: (endResult: string) => string
+    onEndResult?: (endResult: string) => string,
+    ...
   };
 
   // Built-in tagged template literals
@@ -59,7 +60,8 @@ declare module "common-tags" {
 
   declare export var inlineArrayTransformer: (opts?: {
     separator?: string,
-    conjunction?: string
+    conjunction?: string,
+    ...
   }) => TemplateTransformer;
 
   declare export var splitStringTransformer: (

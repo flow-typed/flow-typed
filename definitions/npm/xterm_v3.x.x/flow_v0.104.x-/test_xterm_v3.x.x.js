@@ -74,11 +74,19 @@ terminal.on("keydown", (event: KeyboardEvent) => console.log(event));
 terminal.on("keypress", () => {});
 terminal.on("keypress", (event: KeyboardEvent) => console.log(event));
 terminal.on("refresh", () => {});
-terminal.on("refresh", (data: { start: number, end: number }) =>
+terminal.on("refresh", (data: {
+  start: number,
+  end: number,
+  ...
+}) =>
   console.log(data)
 );
 terminal.on("resize", () => {});
-terminal.on("resize", (data: { cols: number, rows: number }) =>
+terminal.on("resize", (data: {
+  cols: number,
+  rows: number,
+  ...
+}) =>
   console.log(data)
 );
 terminal.on("scroll", () => {});
@@ -103,13 +111,23 @@ terminal.off("keypress", (event: KeyboardEvent) => console.log(event));
 terminal.off("refresh", () => {});
 terminal.off(
   "refresh",
-  (data: { element: HTMLElement, start: number, end: number }) =>
+  (data: {
+    element: HTMLElement,
+    start: number,
+    end: number,
+    ...
+  }) =>
     console.log(data)
 );
 terminal.off("resize", () => {});
 terminal.off(
   "resize",
-  (data: { terminal: Terminal, cols: number, rows: number }) =>
+  (data: {
+    terminal: Terminal,
+    cols: number,
+    rows: number,
+    ...
+  }) =>
     console.log(data)
 );
 terminal.off("scroll", () => {});

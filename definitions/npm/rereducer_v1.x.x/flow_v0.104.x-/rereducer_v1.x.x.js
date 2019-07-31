@@ -1,6 +1,6 @@
 declare module "rereducer" {
   declare type Matcher<State> = (
-    action: { type: string },
+    action: { type: string, ... },
     state: State
   ) => boolean;
 
@@ -11,7 +11,7 @@ declare module "rereducer" {
 
   declare export type Reducer<State> = (
     state: ?State,
-    action: { type: string }
+    action: { type: string, ... }
   ) => State;
 
   declare type InnerReducer<State, Action> = (
@@ -26,7 +26,7 @@ declare module "rereducer" {
 
   declare export function getPayload<Payload>(
     state: any,
-    action: { payload: Payload }
+    action: { payload: Payload, ... }
   ): Payload;
 
   declare export default function rereducer<State>(

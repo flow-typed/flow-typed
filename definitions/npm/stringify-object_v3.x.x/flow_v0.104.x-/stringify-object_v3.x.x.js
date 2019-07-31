@@ -1,7 +1,7 @@
 declare module 'stringify-object' {
   // Matches the `prop` parameter `mixed` type.
   // Prevent errors when using computed properties.
-  declare type AnyObject = { [key: mixed]: mixed };
+  declare type AnyObject = { [key: mixed]: mixed, ... };
 
   declare type Options = {|
     indent?: string,

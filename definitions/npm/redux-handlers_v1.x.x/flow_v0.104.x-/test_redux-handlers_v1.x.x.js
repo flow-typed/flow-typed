@@ -11,7 +11,7 @@ describe('redux-handlers', () => {
     it('registerHandler should expect a certain format', () => {
       const { registerHandler, createReducer } = createHandlers()
       registerHandler('FOO', () => ({}))
-      registerHandler('FOO', (a: string, b: number, state: {}) => ({}))
+      registerHandler('FOO', (a: string, b: number, state: {...}) => ({}))
       // $ExpectError
       registerHandler(123, () => ({}))
       // $ExpectError

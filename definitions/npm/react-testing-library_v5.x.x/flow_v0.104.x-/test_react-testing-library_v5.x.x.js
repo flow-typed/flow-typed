@@ -67,7 +67,7 @@ describe('waitForElement', () => {
 });
 
 describe('render', () => {
-  class Component extends React.Component<{}> {}
+  class Component extends React.Component<{...}> {}
   const {
     container,
     unmount,
@@ -383,7 +383,7 @@ describe('cleanup', () => {
 });
 
 describe('within', () => {
-  class Component extends React.Component<{}> {}
+  class Component extends React.Component<{...}> {}
   const { container } = render(<Component />);
 
   it('should has html element as argument', () => {
@@ -647,7 +647,7 @@ describe('fireEvent', () => {
 });
 
 describe('text matching API', () => {
-  class Component extends React.Component<{}> {}
+  class Component extends React.Component<{...}> {}
   const {
     getByAltText,
     getAllByAltText,

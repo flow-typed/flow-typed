@@ -29,18 +29,15 @@ declare module "react-native-fingerprint-scanner" {
 
   declare var authenticateFn: {
     (AuthenticateParamsIOS): Promise<true>,
-    (AuthenticateParamsAndroid): Promise<true>
+    (AuthenticateParamsAndroid): Promise<true>,
+    ...
   };
 
-  declare var releaseFn: {
-    (): void
-  };
+  declare var releaseFn: { (): void, ... };
 
   declare export type BiometricsTypes = "Touch ID" | "Face ID" | "Fingerprint";
 
-  declare var isSensorAvailableFn: {
-    (): Promise<BiometricsTypes>
-  };
+  declare var isSensorAvailableFn: { (): Promise<BiometricsTypes>, ... };
 
   declare export default {|
     authenticate: typeof authenticateFn,

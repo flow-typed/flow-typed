@@ -10,7 +10,7 @@ declare module 'bser' {
     | null
     /* |Int64 */
     | Array<BserValidTypes>
-    | { [key: string]: BserValidTypes };
+    | { [key: string]: BserValidTypes, ... };
 
 
   declare export class Accumulator {
@@ -47,7 +47,7 @@ declare module 'bser' {
     expectCode(expected: number): void,
     decodeAny(): BserValidTypes,
     decodeArray(): Array<BserValidTypes>,
-    decodeObject(): { [key: string]: BserValidTypes },
+    decodeObject(): { [key: string]: BserValidTypes, ... },
     decodeTemplate(): Array<BserValidTypes>,
     decodeString(): string,
     decodeInt(relaxSizeAsserts: true): number/* |Int64 */|false,

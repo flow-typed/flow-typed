@@ -1,7 +1,8 @@
 declare module "inline-style-prefixer" {
   declare type Config = {
     userAgent?: string,
-    keepUnprefixed?: boolean
+    keepUnprefixed?: boolean,
+    ...
   };
   declare class Prefixer {
     constructor(config?: Config): Prefixer;

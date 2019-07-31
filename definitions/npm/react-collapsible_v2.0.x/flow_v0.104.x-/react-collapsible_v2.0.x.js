@@ -28,7 +28,8 @@ declare module "react-collapsible" {
     triggerClassName?: string,
     triggerOpenedClassName?: string,
     contentOuterClassName?: string,
-    contentInnerClassName?: string
+    contentInnerClassName?: string,
+    ...
   };
 
   declare class Collapsible extends React$Component<Props> {}

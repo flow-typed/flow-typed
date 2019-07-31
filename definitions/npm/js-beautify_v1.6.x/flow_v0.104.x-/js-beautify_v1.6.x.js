@@ -28,7 +28,8 @@ declare module 'js-beautify' {
     comma_first?: boolean,
     operator_position?: "before-newline"|"after-newline"|"preserve-newline",
     eval_code?: boolean,
-    space_before_conditional?: boolean
+    space_before_conditional?: boolean,
+    ...
   };
 
   declare type JSBeautifyCSSOptions = {
@@ -38,7 +39,8 @@ declare module 'js-beautify' {
     eol?: string,
     end_with_newline?: boolean,
     selector_separator_newline?: boolean,
-    newline_between_rules?: boolean
+    newline_between_rules?: boolean,
+    ...
   };
 
   declare type JSBeautifyHTMLOptions = {
@@ -58,6 +60,7 @@ declare module 'js-beautify' {
     unformatted?: string|Array<string>,
     content_unformatted?: string|Array<string>,
     extra_liners?: string|Array<string>,
+    ...
   };
 
   declare module.exports: {
@@ -67,6 +70,7 @@ declare module 'js-beautify' {
     html: (code: string, options?: JSBeautifyHTMLOptions) => string,
     js_beautify: (code: string, options?: JSBeautifyJSOptions) => string,
     css_beautify: (code: string, options?: JSBeautifyCSSOptions) => string,
-    html_beautify: (code: string, options?: JSBeautifyHTMLOptions) => string
+    html_beautify: (code: string, options?: JSBeautifyHTMLOptions) => string,
+    ...
   };
 }

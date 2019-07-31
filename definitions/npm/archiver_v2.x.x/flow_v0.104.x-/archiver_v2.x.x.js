@@ -8,7 +8,8 @@ declare module "archiver" {
     prefix?: string,
     stats?: Stats,
     date?: Date | string,
-    mode?: number
+    mode?: number,
+    ...
   };
 
   declare export type EntryDataFunction = (entry: EntryData) => false | EntryData;
@@ -51,8 +52,8 @@ declare module "archiver" {
     silent?: boolean,
     strict?: boolean,
     cache?: boolean,
-    statCache?: { [string]: Stats },
-    symlinks?: { [string]: boolean },
+    statCache?: { [string]: Stats, ... },
+    symlinks?: { [string]: boolean, ... },
     sync?: boolean,
     nounique?: boolean,
     nonull?: boolean,
@@ -99,7 +100,8 @@ declare module "archiver" {
   declare export type Vending = {
     (format: Format, options?: ArchiverOptions): Archiver,
     create(format: string, options?: ArchiverOptions): Archiver,
-    registerFormat(format: string, module: (...a: any) => mixed): void
+    registerFormat(format: string, module: (...a: any) => mixed): void,
+    ...
   };
 
   declare module.exports: Vending;

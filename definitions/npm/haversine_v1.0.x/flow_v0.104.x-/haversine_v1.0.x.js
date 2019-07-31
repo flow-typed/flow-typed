@@ -1,7 +1,11 @@
 // @flow
 
 type $npm$haversine$Unit = 'km' | 'mile' | 'meter' | 'nmi'
-type $npm$haversine$Coordinates = { latitude: number, longitude: number }
+type $npm$haversine$Coordinates = {
+  latitude: number,
+  longitude: number,
+  ...
+}
 
 type $npm$haversine$haversineWithoutThreshold = (
   startCoordinates: $npm$haversine$Coordinates,

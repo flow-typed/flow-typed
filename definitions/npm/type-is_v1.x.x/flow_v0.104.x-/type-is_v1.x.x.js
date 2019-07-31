@@ -8,5 +8,6 @@ declare module 'type-is' {
     hasBody: (request: mixed) => boolean,
     normalize: (type: string) => false|string,
     match: (expected: string, actual: string) => boolean,
+    ...
   }
 }

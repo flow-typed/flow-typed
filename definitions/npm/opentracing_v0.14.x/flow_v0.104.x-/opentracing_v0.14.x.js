@@ -17,9 +17,7 @@ declare module 'opentracing' {
   declare interface SpanOptions {
     childOf?: Span | SpanContext;
     references?: Reference[];
-    tags?: {
-      [key: string]: any;
-    };
+    tags?: { [key: string]: any, ... };
     startTime?: number;
   }
   declare class Tracer {
@@ -40,12 +38,8 @@ declare module 'opentracing' {
     setBaggageItem(key: string, value: string): this;
     getBaggageItem(key: string): ?string;
     setTag(key: string, value: any): this;
-    addTags(keyValueMap: {
-      [key: string]: any;
-    }): this;
-    log(keyValuePairs: {
-      [key: string]: any;
-    }, timestamp?: number): this;
+    addTags(keyValueMap: { [key: string]: any, ... }): this;
+    log(keyValuePairs: { [key: string]: any, ... }, timestamp?: number): this;
     finish(finishTime?: number): void;
 
     // @deprecated
@@ -64,9 +58,7 @@ declare module 'opentracing' {
     uuid: string;
     operation: string;
     millis: [number, number, number];
-    tags?: {
-      [key: string]: any;
-    };
+    tags?: { [key: string]: any, ... };
   }
   declare class MockSpan extends Span {
     _finishMs: number;
@@ -75,9 +67,7 @@ declare module 'opentracing' {
     uuid(): string;
     operationName(): string;
     durationMs(): number;
-    tags(): {
-      [key: string]: any;
-    };
+    tags(): { [key: string]: any, ... };
     tracer(): Tracer;
     addReference(ref: Reference): void;
     debug(): DebugInfo;
@@ -120,6 +110,7 @@ declare module 'opentracing' {
     DB_STATEMENT: string,
     DB_TYPE: string,
     DB_USER: string,
+    ...
   };
 
   // global_tracer.d.ts

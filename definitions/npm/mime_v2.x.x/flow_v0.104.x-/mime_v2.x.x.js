@@ -1,4 +1,4 @@
-declare type $npm$mime$TypeMap = {[mime: string]: Array<string>};
+declare type $npm$mime$TypeMap = { [mime: string]: Array<string>, ... };
 
 declare class $npm$mime$Mime {
   constructor(...typeMap: Array<$npm$mime$TypeMap>): void;

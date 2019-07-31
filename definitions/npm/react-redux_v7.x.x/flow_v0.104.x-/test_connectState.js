@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 export let e = []
 
 function sameStateIsOK() {
-  type Props = {};
+  type Props = {...};
   class Com extends React.Component<Props> {}
 
   type State = {|
@@ -21,7 +21,7 @@ function sameStateIsOK() {
 }
 
 function differentStatesAreNotOK() {
-  type Props = {};
+  type Props = {...};
   class Com extends React.Component<Props> {}
 
   type State = {|

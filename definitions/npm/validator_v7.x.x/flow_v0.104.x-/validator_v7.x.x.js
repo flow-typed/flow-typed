@@ -59,18 +59,21 @@ declare module 'validator' {
     toInt: $Exports<'validator/lib/toInt'>,
     trim: $Exports<'validator/lib/trim'>,
     unescape: $Exports<'validator/lib/unescape'>,
-    whitelist: $Exports<'validator/lib/whitelist'>
+    whitelist: $Exports<'validator/lib/whitelist'>,
+    ...
   };
 }
 
 type validator$MinMaxOptionalOptions = {
   min?: number,
-  max?: number
+  max?: number,
+  ...
 }
 
 type validator$MinMaxOptions = {
   min: number,
-  max?: number
+  max?: number,
+  ...
 }
 
 type validator$IsAlphaLocale = 'ar' | 'ar-AE' | 'ar-BH' | 'ar-DZ' | 'ar-EG' | 'ar-IQ' | 'ar-JO'
@@ -105,20 +108,23 @@ type validator$IsCurrencyOptions = {
   allow_negative_sign_placeholder?: boolean,
   thousands_separator?: string,
   decimal_separator?: string,
-  allow_space_after_digits?: boolean
+  allow_space_after_digits?: boolean,
+  ...
 }
 
 type validator$IsEmailOptions = {
   allow_display_name?: boolean,
   require_display_name?: boolean,
   allow_utf8_local_part?: boolean,
-  require_tld?: boolean
+  require_tld?: boolean,
+  ...
 }
 
 type validator$IsFQDNOptions = {
   require_tld?: boolean,
   allow_underscores?: boolean,
-  allow_trailing_dot?: boolean
+  allow_trailing_dot?: boolean,
+  ...
 }
 
 type validator$IsURLOptions = {
@@ -131,7 +137,8 @@ type validator$IsURLOptions = {
   host_whitelist?: boolean,
   host_blacklist?: boolean,
   allow_trailing_dot?: boolean,
-  allow_protocol_relative_urls?: boolean
+  allow_protocol_relative_urls?: boolean,
+  ...
 }
 
 type validator$NormalizeEmailOptions = {
@@ -146,369 +153,251 @@ type validator$NormalizeEmailOptions = {
   yahoo_remove_subaddress?: boolean,
   icloud_lowercase?: boolean,
   icloud_remove_subaddress?: boolean,
+  ...
 }
 
 type validator$IsISSNOptions = {
   case_sensitive?: boolean,
-  require_hyphen?: boolean
+  require_hyphen?: boolean,
+  ...
 };
 
 declare module 'validator/lib/blacklist' {
-  declare module.exports: {
-    (input: string, chars: string): string
-  };
+  declare module.exports: { (input: string, chars: string): string, ... };
 }
 
 declare module 'validator/lib/contains' {
-  declare module.exports: {
-    (str: string, seed?: mixed): boolean
-  };
+  declare module.exports: { (str: string, seed?: mixed): boolean, ... };
 }
 
 declare module 'validator/lib/equals' {
-  declare module.exports: {
-    (str: string, comparison: string): boolean
-  };
+  declare module.exports: { (str: string, comparison: string): boolean, ... };
 }
 
 declare module 'validator/lib/escape' {
-  declare module.exports: {
-    (input: string): string
-  }
+  declare module.exports: { (input: string): string, ... }
 }
 
 declare module 'validator/lib/isAfter' {
-  declare module.exports: {
-    (str: string, date?: string): boolean
-  };
+  declare module.exports: { (str: string, date?: string): boolean, ... };
 }
 
 declare module 'validator/lib/isAlpha' {
-  declare module.exports: {
-    (str: string, locale?: validator$IsAlphaLocale): boolean
-  };
+  declare module.exports: { (str: string, locale?: validator$IsAlphaLocale): boolean, ... };
 }
 
 declare module 'validator/lib/isAlphanumeric' {
-  declare module.exports: {
-    (str: string, locale?: validator$IsAlphanumericLocale): boolean
-  };
+  declare module.exports: { (str: string, locale?: validator$IsAlphanumericLocale): boolean, ... };
 }
 
 declare module 'validator/lib/isAscii' {
-  declare module.exports: {
-    (str: string): boolean
-  };
+  declare module.exports: { (str: string): boolean, ... };
 }
 
 declare module 'validator/lib/isBase64' {
-  declare module.exports: {
-    (str: string): boolean
-  };
+  declare module.exports: { (str: string): boolean, ... };
 }
 
 declare module 'validator/lib/isBefore' {
-  declare module.exports: {
-    (str: string, date?: string): boolean
-  };
+  declare module.exports: { (str: string, date?: string): boolean, ... };
 }
 
 declare module 'validator/lib/isBoolean' {
-  declare module.exports: {
-    (str: string): boolean
-  };
+  declare module.exports: { (str: string): boolean, ... };
 }
 
 declare module 'validator/lib/isByteLength' {
-  declare module.exports: {
-    (str: string, options: validator$MinMaxOptions): boolean
-  };
+  declare module.exports: { (str: string, options: validator$MinMaxOptions): boolean, ... };
 }
 
 declare module 'validator/lib/isCreditCard' {
-  declare module.exports: {
-    (str: string): boolean
-  };
+  declare module.exports: { (str: string): boolean, ... };
 }
 
 declare module 'validator/lib/isCurrency' {
-  declare module.exports: {
-    (str: string, options?: validator$IsCurrencyOptions): boolean
-  };
+  declare module.exports: { (str: string, options?: validator$IsCurrencyOptions): boolean, ... };
 }
 
 declare module 'validator/lib/isDataURI' {
-  declare module.exports: {
-    (str: string): boolean
-  };
+  declare module.exports: { (str: string): boolean, ... };
 }
 
 declare module 'validator/lib/isDate' {
-  declare module.exports: {
-    (str: string): boolean
-  };
+  declare module.exports: { (str: string): boolean, ... };
 }
 
 declare module 'validator/lib/isDecimal' {
-  declare module.exports: {
-    (str: string): boolean
-  };
+  declare module.exports: { (str: string): boolean, ... };
 }
 
 declare module 'validator/lib/isDivisibleBy' {
-  declare module.exports: {
-    (str: string, number: string | number): boolean
-  };
+  declare module.exports: { (str: string, number: string | number): boolean, ... };
 }
 
 declare module 'validator/lib/isEmail' {
-  declare module.exports: {
-    (str: string, options?: validator$IsEmailOptions): boolean;
-  };
+  declare module.exports: { (str: string, options?: validator$IsEmailOptions): boolean, ... };
 }
 
 declare module 'validator/lib/isEmpty' {
-  declare module.exports: {
-    (str: string): boolean;
-  };
+  declare module.exports: { (str: string): boolean, ... };
 }
 
 declare module 'validator/lib/isFloat' {
-  declare module.exports: {
-    (str: string, options?: validator$MinMaxOptionalOptions): boolean
-  };
+  declare module.exports: { (str: string, options?: validator$MinMaxOptionalOptions): boolean, ... };
 }
 
 declare module 'validator/lib/isFQDN' {
-  declare module.exports: {
-    (str: string, options?: validator$IsFQDNOptions): boolean
-  };
+  declare module.exports: { (str: string, options?: validator$IsFQDNOptions): boolean, ... };
 }
 
 declare module 'validator/lib/isFullWidth' {
-  declare module.exports: {
-    (str: string): boolean
-  };
+  declare module.exports: { (str: string): boolean, ... };
 }
 
 declare module 'validator/lib/isHalfWidth' {
-  declare module.exports: {
-    (str: string): boolean
-  };
+  declare module.exports: { (str: string): boolean, ... };
 }
 
 declare module 'validator/lib/isHexadecimal' {
-  declare module.exports: {
-    (str: string): boolean
-  };
+  declare module.exports: { (str: string): boolean, ... };
 }
 
 declare module 'validator/lib/isHexColor' {
-  declare module.exports: {
-    (str: string): boolean
-  };
+  declare module.exports: { (str: string): boolean, ... };
 }
 
 declare module 'validator/lib/isIn' {
-  declare module.exports: {
-    (str: string, values: Array<string> | string): boolean
-  };
+  declare module.exports: { (str: string, values: Array<string> | string): boolean, ... };
 }
 
 declare module 'validator/lib/isInt' {
-  declare module.exports: {
-    (str: string, options?: validator$MinMaxOptionalOptions): boolean
-  };
+  declare module.exports: { (str: string, options?: validator$MinMaxOptionalOptions): boolean, ... };
 }
 
 declare module 'validator/lib/isIP' {
-  declare module.exports: {
-    (str: string, version?: validator$IsIPVersions): boolean
-  };
+  declare module.exports: { (str: string, version?: validator$IsIPVersions): boolean, ... };
 }
 
 declare module 'validator/lib/isISBN' {
-  declare module.exports: {
-    (str: string, version?: validator$IsISBNVersions): boolean
-  };
+  declare module.exports: { (str: string, version?: validator$IsISBNVersions): boolean, ... };
 }
 
 declare module 'validator/lib/isISIN' {
-  declare module.exports: {
-    (str: string): boolean
-  };
+  declare module.exports: { (str: string): boolean, ... };
 }
 
 declare module 'validator/lib/isISO8601' {
-  declare module.exports: {
-    (str: string): boolean
-  };
+  declare module.exports: { (str: string): boolean, ... };
 }
 
 declare module 'validator/lib/isISSN' {
-  declare module.exports: {
-    (str: string, options?: validator$IsISSNOptions): boolean
-  };
+  declare module.exports: { (str: string, options?: validator$IsISSNOptions): boolean, ... };
 }
 
 declare module 'validator/lib/isJSON' {
-  declare module.exports: {
-    (str: string): boolean
-  };
+  declare module.exports: { (str: string): boolean, ... };
 }
 
 declare module 'validator/lib/isLength' {
-  declare module.exports: {
-    (password: string, options: validator$MinMaxOptions): boolean;
-  }
+  declare module.exports: { (password: string, options: validator$MinMaxOptions): boolean, ... }
 }
 
 declare module 'validator/lib/isLowercase' {
-  declare module.exports: {
-    (str: string): boolean
-  };
+  declare module.exports: { (str: string): boolean, ... };
 }
 
 declare module 'validator/lib/isMACAddress' {
-  declare module.exports: {
-    (str: string): boolean
-  };
+  declare module.exports: { (str: string): boolean, ... };
 }
 
 declare module 'validator/lib/isMD5' {
-  declare module.exports: {
-    (str: string): boolean
-  };
+  declare module.exports: { (str: string): boolean, ... };
 }
 
 declare module 'validator/lib/isMobilePhone' {
-  declare module.exports: {
-    (str: string, locale: validator$IsMobilePhoneLocale): boolean
-  };
+  declare module.exports: { (str: string, locale: validator$IsMobilePhoneLocale): boolean, ... };
 }
 
 declare module 'validator/lib/isMongoId' {
-  declare module.exports: {
-    (str: string): boolean
-  };
+  declare module.exports: { (str: string): boolean, ... };
 }
 
 declare module 'validator/lib/isMultibyte' {
-  declare module.exports: {
-    (str: string): boolean
-  };
+  declare module.exports: { (str: string): boolean, ... };
 }
 
 declare module 'validator/lib/isNumeric' {
-  declare module.exports: {
-    (str: string): boolean
-  };
+  declare module.exports: { (str: string): boolean, ... };
 }
 
 declare module 'validator/lib/isSurrogatePair' {
-  declare module.exports: {
-    (str: string): boolean
-  };
+  declare module.exports: { (str: string): boolean, ... };
 }
 
 declare module 'validator/lib/isUppercase' {
-  declare module.exports: {
-    (str: string): boolean
-  };
+  declare module.exports: { (str: string): boolean, ... };
 }
 
 declare module 'validator/lib/isURL' {
-  declare module.exports: {
-    (str: string, options?: validator$IsURLOptions): boolean
-  };
+  declare module.exports: { (str: string, options?: validator$IsURLOptions): boolean, ... };
 }
 
 declare module 'validator/lib/isUUID' {
-  declare module.exports: {
-    (str: string, version?: validator$IsUUIDVersions): boolean
-  };
+  declare module.exports: { (str: string, version?: validator$IsUUIDVersions): boolean, ... };
 }
 
 declare module 'validator/lib/isVariableWidth' {
-  declare module.exports: {
-    (str: string): boolean
-  };
+  declare module.exports: { (str: string): boolean, ... };
 }
 
 declare module 'validator/lib/isWhitelisted' {
-  declare module.exports: {
-    (str: string, chars: string | Array<string>): boolean
-  };
+  declare module.exports: { (str: string, chars: string | Array<string>): boolean, ... };
 }
 
 declare module 'validator/lib/ltrim' {
-  declare module.exports: {
-    (input: string, chars?: string): string
-  };
+  declare module.exports: { (input: string, chars?: string): string, ... };
 }
 
 declare module 'validator/lib/matches' {
-  declare module.exports: {
-    (str: string, pattern: RegExp | string, modifiers?: string): boolean
-  };
+  declare module.exports: { (str: string, pattern: RegExp | string, modifiers?: string): boolean, ... };
 }
 
 declare module 'validator/lib/normalizeEmail' {
-  declare module.exports: {
-    (email: string, options?: validator$NormalizeEmailOptions): string
-  };
+  declare module.exports: { (email: string, options?: validator$NormalizeEmailOptions): string, ... };
 }
 
 declare module 'validator/lib/rtrim' {
-  declare module.exports: {
-    (input: string, chars?: string): string
-  };
+  declare module.exports: { (input: string, chars?: string): string, ... };
 }
 
 declare module 'validator/lib/stripLow' {
-  declare module.exports: {
-    (input: string, keep_new_lines?: boolean): string
-  };
+  declare module.exports: { (input: string, keep_new_lines?: boolean): string, ... };
 }
 
 declare module 'validator/lib/toBoolean' {
-  declare module.exports: {
-    (input: string, strict?: boolean): boolean
-  };
+  declare module.exports: { (input: string, strict?: boolean): boolean, ... };
 }
 
 declare module 'validator/lib/toDate' {
-  declare module.exports: {
-    (input: string): Date
-  };
+  declare module.exports: { (input: string): Date, ... };
 }
 
 declare module 'validator/lib/toFloat' {
-  declare module.exports: {
-    (input: string): number
-  };
+  declare module.exports: { (input: string): number, ... };
 }
 
 declare module 'validator/lib/toInt' {
-  declare module.exports: {
-    (input: string, radix?: number | string): number
-  };
+  declare module.exports: { (input: string, radix?: number | string): number, ... };
 }
 
 declare module 'validator/lib/trim' {
-  declare module.exports: {
-    (input: string, chars?: string): string
-  };
+  declare module.exports: { (input: string, chars?: string): string, ... };
 }
 
 declare module 'validator/lib/unescape' {
-  declare module.exports: {
-    (input: string): string
-  };
+  declare module.exports: { (input: string): string, ... };
 }
 
 declare module 'validator/lib/whitelist' {
-  declare module.exports: {
-    (input: string, chars: string): string
-  };
+  declare module.exports: { (input: string, chars: string): string, ... };
 }

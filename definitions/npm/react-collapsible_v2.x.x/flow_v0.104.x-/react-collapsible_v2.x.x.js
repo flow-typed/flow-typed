@@ -31,7 +31,8 @@ declare module "react-collapsible" {
       | "initial"
       | "unset",
     triggerSibling?: string | React$Element<*> | (() => React$Node),
-    tabIndex?: number
+    tabIndex?: number,
+    ...
   };
 
   declare class Collapsible extends React$Component<Props> {}

@@ -4,18 +4,17 @@ declare module "redux-mock-store" {
     A = Action
   */
 
-  declare type mockStore = {
-    <S, A>(state: S): mockStoreWithoutMiddleware<S, A>
-  };
+  declare type mockStore = { <S, A>(state: S): mockStoreWithoutMiddleware<S, A>, ... };
   declare type DispatchAPI<A> = (action: A) => A;
-  declare type Dispatch<A: { type: string }> = DispatchAPI<A>;
+  declare type Dispatch<A: { type: string, ... }> = DispatchAPI<A>;
   declare type mockStoreWithoutMiddleware<S, A> = {
     getState(): S,
     getActions(): Array<A>,
     dispatch: Dispatch<A>,
     clearActions(): void,
     subscribe(callback: () => void): () => void,
-    replaceReducer(nextReducer: Function): void
+    replaceReducer(nextReducer: Function): void,
+    ...
   };
 
   declare type Middleware = any => any => any;

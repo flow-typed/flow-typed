@@ -2,19 +2,19 @@ type JestMockFn = {
   (...args: Array<any>): any,
   mock: {
     calls: Array<Array<any>>,
-    instances: mixed
+    instances: mixed,
+    ...
   },
   mockClear(): Function,
   mockImplementation(fn: Function): JestMockFn,
   mockImplementationOnce(fn: Function): JestMockFn,
   mockReturnThis(): void,
   mockReturnValue(value: any): JestMockFn,
-  mockReturnValueOnce(value: any): JestMockFn
+  mockReturnValueOnce(value: any): JestMockFn,
+  ...
 };
 
-type JestAsymmetricEqualityType = {
-  asymmetricMatch(value: mixed): boolean
-};
+type JestAsymmetricEqualityType = { asymmetricMatch(value: mixed): boolean, ... };
 
 type JestCallsType = {
   allArgs(): mixed,
@@ -23,14 +23,16 @@ type JestCallsType = {
   count(): number,
   first(): mixed,
   mostRecent(): mixed,
-  reset(): void
+  reset(): void,
+  ...
 };
 
 type JestClockType = {
   install(): void,
   mockDate(date: Date): void,
   tick(milliseconds?: number): void,
-  uninstall(): void
+  uninstall(): void,
+  ...
 };
 
 type JestExpectType = {
@@ -60,12 +62,11 @@ type JestExpectType = {
   toMatchSnapshot(): void,
   toThrow(message?: string | Error): void,
   toThrowError(message?: string | Error | RegExp): void,
-  toThrowErrorMatchingSnapshot(): void
+  toThrowErrorMatchingSnapshot(): void,
+  ...
 };
 
-type JestSpyType = {
-  calls: JestCallsType
-};
+type JestSpyType = { calls: JestCallsType, ... };
 
 declare function afterEach(fn: Function): void;
 declare function beforeEach(fn: Function): void;
@@ -76,7 +77,8 @@ declare var it: {
   (name: string, fn: Function): ?Promise<void>,
   only(name: string, fn: Function): ?Promise<void>,
   skip(name: string, fn: Function): ?Promise<void>,
-  concurrent(name: string, fn: Function): ?Promise<void>
+  concurrent(name: string, fn: Function): ?Promise<void>,
+  ...
 };
 declare function fit(name: string, fn: Function): ?Promise<void>;
 declare var test: typeof it;
@@ -113,7 +115,8 @@ declare var jest: {
   setMock(moduleName: string, moduleExports: any): void,
   unmock(moduleName: string): void,
   useFakeTimers(): void,
-  useRealTimers(): void
+  useRealTimers(): void,
+  ...
 };
 
 declare var jasmine: {
@@ -124,5 +127,6 @@ declare var jasmine: {
   clock(): JestClockType,
   createSpy(name: string): JestSpyType,
   objectContaining(value: Object): void,
-  stringMatching(value: string): void
+  stringMatching(value: string): void,
+  ...
 };

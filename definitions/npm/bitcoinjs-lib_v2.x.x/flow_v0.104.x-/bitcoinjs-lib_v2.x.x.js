@@ -116,44 +116,53 @@ declare module "bitcoinjs-lib" {
     messagePrefix: string,
     bip32: {
       public: number,
-      private: number
+      private: number,
+      ...
     },
     pubKeyHash: number,
     scriptHash: number,
     wif: number,
-    dustThreshold: number
+    dustThreshold: number,
+    ...
   };
 
   declare type Output = {
     script: Buffer,
-    value: number
+    value: number,
+    ...
   };
 
   declare type Input = {
     script: Buffer,
     hash: Buffer,
     index: number,
-    sequence: number
+    sequence: number,
+    ...
   };
 
   declare var address: {
-    fromBase58Check(address: string): { hash: Buffer, version: number },
+    fromBase58Check(address: string): {
+      hash: Buffer,
+      version: number,
+      ...
+    },
     fromOutputScript(script: Buffer, network?: Network): string,
     toBase58Check(hash: Buffer, version: number): string,
-    toOutputScipt(network?: Network): Buffer
+    toOutputScipt(network?: Network): Buffer,
+    ...
   };
 
   declare var script: {
     fromAddress(address: string, network?: Network): Buffer,
     scriptHashOutput(sho: Buffer): Buffer,
-
     compile(chunks: Buffer | Array<Buffer | number>): Buffer,
     decompile(buffer: Buffer | Array<Buffer | number>): Array<Buffer | number>,
     fromASM(asm: string): Buffer,
     toASM(string: Buffer): string,
     number: {
       decode: (buf: Buffer, maxLength: number, minimal: boolean) => number,
-      encode: (n: number) => Buffer
+      encode: (n: number) => Buffer,
+      ...
     },
     isCanonicalPubKey(buffer: Buffer): boolean,
     isCanonicalSignature(buffer: Buffer): boolean,
@@ -175,7 +184,6 @@ declare module "bitcoinjs-lib" {
     ): boolean,
     isMultisigOutput(script: Array<Buffer | number> | Buffer): boolean,
     isNullDataOutput(script: Array<Buffer | number> | Buffer): boolean,
-
     classifyOutput(script: Array<Buffer | number> | Buffer): string,
     classifyInput(script: Array<Buffer | number> | Buffer): string,
     pubKeyOutput(pubKey: Buffer): Buffer,
@@ -187,7 +195,6 @@ declare module "bitcoinjs-lib" {
       scriptPubKey: Array<Buffer | number> | Buffer
     ): Buffer,
     witnessScriptHashOutput(scriptHash: Buffer): Buffer,
-
     multisigOutput(m: number, pubKeys: Array<Buffer>): Buffer,
     pubKeyInput(signature: Buffer): Buffer,
     pubKeyHashInput(signature: Buffer, pubKey: Buffer): Buffer,
@@ -199,7 +206,8 @@ declare module "bitcoinjs-lib" {
       signatures: Array<Buffer>,
       scriptPubKey?: Array<Buffer | number> | Buffer
     ): Buffer,
-    nullDataOutput(data: Buffer): Buffer
+    nullDataOutput(data: Buffer): Buffer,
+    ...
   };
 
   declare var crypto: {
@@ -207,7 +215,8 @@ declare module "bitcoinjs-lib" {
     sha256(buffer: Buffer): Buffer,
     hash256(buffer: Buffer): Buffer,
     hash160(buffer: Buffer): Buffer,
-    ripemd160(buffer: Buffer): Buffer
+    ripemd160(buffer: Buffer): Buffer,
+    ...
   };
 
   declare class ECPair {
@@ -327,8 +336,8 @@ declare module "bitcoinjs-lib" {
     ): TransactionBuilder;
   }
 
-  declare var networks: { [key: string]: Network };
-  declare var opcodes: { [key: string]: number };
+  declare var networks: { [key: string]: Network, ... };
+  declare var opcodes: { [key: string]: number, ... };
 
   declare class ECSignature {
     r: $npm$bigi$BigInteger;
@@ -340,7 +349,8 @@ declare module "bitcoinjs-lib" {
     ): {
       compressed: boolean,
       i: number,
-      signature: Buffer
+      signature: Buffer,
+      ...
     };
 
     static fromDER(buffer: Buffer): ECSignature;
@@ -348,7 +358,8 @@ declare module "bitcoinjs-lib" {
       buffer: Buffer
     ): {
       signature: ECSignature,
-      hashType: number
+      hashType: number,
+      ...
     };
 
     toCompact(i: number, compressed: boolean): Buffer;
@@ -385,7 +396,8 @@ declare module "bitcoinjs-lib" {
     ): {
       opcode: number,
       number: number,
-      size: number
+      size: number,
+      ...
     },
     readUInt64LE(buffer: Buffer, offset: number): number,
     readVarInt(
@@ -393,13 +405,15 @@ declare module "bitcoinjs-lib" {
       offset: number
     ): {
       number: number,
-      size: number
+      size: number,
+      ...
     },
     varIntBuffer(i: number): Buffer,
     varIntSize(i: number): number,
     writePushDataInt(buffer: Buffer, number: number, offset: number): number,
     writeUInt64LE(buffer: Buffer, value: number, offset: number): void,
-    writeVarInt(buffer: Buffer, number: number, offset: number): number
+    writeVarInt(buffer: Buffer, number: number, offset: number): number,
+    ...
   };
 
   declare var message: {
@@ -410,6 +424,7 @@ declare module "bitcoinjs-lib" {
       signature: Buffer,
       message: Buffer | string,
       network: Network
-    ): boolean
+    ): boolean,
+    ...
   };
 }

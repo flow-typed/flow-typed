@@ -6,20 +6,20 @@ import Select from 'react-select';
 
 let ArrowRenderer = () => <span />;
 let ClearRenderer = () => <span />;
-let filterOption = (option: {}, filterString: string) => true;
-let InputRenderer = (props: {}) => <span />;
-let MenuRenderer = (props: {}) => [<span />];
-let OptionComponent = (props: {}) => <span />;
+let filterOption = (option: {...}, filterString: string) => true;
+let InputRenderer = (props: {...}) => <span />;
+let MenuRenderer = (props: {...}) => [<span />];
+let OptionComponent = (props: {...}) => <span />;
 let OptionRenderer = () => <span />;
 let options = [
   { value: 123, label: 'first item' },
   { value: 345, label: 'second item' },
   { value: 'foo', label: 'third item', clearableValue: true }
 ];
-let ValueComponent = (props: {}) => <span />;
-let ValueRenderer = (option: { label: string }) => option.label;
+let ValueComponent = (props: {...}) => <span />;
+let ValueRenderer = (option: { label: string, ... }) => option.label;
 
-type OptionType = { [string]: any };
+type OptionType = { [string]: any, ... };
 
 let customOptions: OptionType[] = [
   {

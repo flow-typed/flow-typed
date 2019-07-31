@@ -311,16 +311,20 @@ describe("Form", () => {
   });
   it("have create method that wrap a component with a form", () => {
 
-    type PropsGoodTest = {a:string, form: WrappedFormUtils};
-    type PropsBadTest = {a:string};
+    type PropsGoodTest = {
+      a:string,
+      form: WrappedFormUtils,
+      ...
+    };
+    type PropsBadTest = { a:string, ... };
     class GoodTestComponent extends React.Component<PropsGoodTest> {}
     class BadTestComponent extends React.Component<PropsBadTest> {}
 
     // create is a function
-    const GoodWrappedTestForm: React$ComponentType<$Diff<PropsGoodTest, { form: * }>> =
+    const GoodWrappedTestForm: React$ComponentType<$Diff<PropsGoodTest, { form: *, ... }>> =
       Form.create<PropsGoodTest>({name: 'good_test_form'})(GoodTestComponent);
 
-    const BadWrappedTestForm: React$ComponentType<$Diff<PropsBadTest, { form: * }>> =
+    const BadWrappedTestForm: React$ComponentType<$Diff<PropsBadTest, { form: *, ... }>> =
       // $ExpectError PropsBadTest. it must contain form attribute
       Form.create<PropsBadTest>({name: 'bad_test_form'})(BadTestComponent);
 

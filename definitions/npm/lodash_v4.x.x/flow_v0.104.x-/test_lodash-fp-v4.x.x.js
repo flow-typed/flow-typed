@@ -45,9 +45,9 @@ filter("x", [{ x: 1 }, { x: 2 }]);
 filter("x")([{ x: 1 }, { x: 2 }]);
 filter("x", { a: { x: 1 }, b: { x: 2 } });
 filter("x")({ a: { x: 1 }, b: { x: 2 } });
-filter((v: { y?: number }) => v.y)({ a: { x: 1 }, b: { x: 2 } })[0].x;
+filter((v: { y?: number, ... }) => v.y)({ a: { x: 1 }, b: { x: 2 } })[0].x;
 // $ExpectError
-filter((v: { y: number }) => v.y)({ a: { x: 1 }, b: { x: 2 } });
+filter((v: { y: number, ... }) => v.y)({ a: { x: 1 }, b: { x: 2 } });
 
 /**
  * attempt
@@ -123,12 +123,12 @@ var stringsGroupedByLength = groupBy("length", ["one", "two", "three"]);
 if (stringsGroupedByLength[3]) {
   stringsGroupedByLength[3][0].toLowerCase();
 }
-var numbersObj: { [key: string]: number } = { a: 6.1, b: 4.2, c: 6.3 };
+var numbersObj: { [key: string]: number, ... } = { a: 6.1, b: 4.2, c: 6.3 };
 var numbersGroupedByMathFloor2 = groupBy(Math.floor, numbersObj);
 if (numbersGroupedByMathFloor2[6]) {
   numbersGroupedByMathFloor2[6][0] / numbersGroupedByMathFloor2[6][1];
 }
-var stringObj: { [key: string]: string } = { a: "one", b: "two", c: "three" };
+var stringObj: { [key: string]: string, ... } = { a: "one", b: "two", c: "three" };
 var stringsGroupedByLength2 = groupBy("length", stringObj);
 if (stringsGroupedByLength2[3]) {
   stringsGroupedByLength2[3][0].toLowerCase();
@@ -180,9 +180,9 @@ keyBy("dir")(
 );
 
 // Example of keying a map of objects by a number type
-type KeyByTest$ByNumber<T: Object> = { [number]: T };
-type KeyByTest$ByNumberMaybe<T: ?Object> = { [number]: T };
-type KeyByTest$Record = { id: number };
+type KeyByTest$ByNumber<T: Object> = { [number]: T, ... };
+type KeyByTest$ByNumberMaybe<T: ?Object> = { [number]: T, ... };
+type KeyByTest$Record = { id: number, ... };
 var keyByTest_array: Array<KeyByTest$Record> = [
   { id: 4 },
   { id: 4 },
@@ -464,7 +464,7 @@ noop("a", 2, [], null);
 
 const ab = (a: number) => `${a}`;
 const bc = (b: string) => ({ b });
-const cd = (c: { b: string }) => [c.b];
+const cd = (c: { b: string, ... }) => [c.b];
 const pipedResult: string[] = pipe(
   ab,
   bc,

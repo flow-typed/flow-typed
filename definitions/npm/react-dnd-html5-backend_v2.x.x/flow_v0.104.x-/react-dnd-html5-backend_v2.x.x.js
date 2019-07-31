@@ -12,7 +12,9 @@ declare module "react-dnd-html5-backend" {
     NativeTypes: {
       FILE: $npm$reactDnd$NativeTypes$FILE,
       URL: $npm$reactDnd$NativeTypes$URL,
-      TEXT: $npm$reactDnd$NativeTypes$TEXT
-    }
+      TEXT: $npm$reactDnd$NativeTypes$TEXT,
+      ...
+    },
+    ...
   };
 }

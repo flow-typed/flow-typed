@@ -1,8 +1,9 @@
 declare module "yargs" {
   declare type Argv = {
+    [key: string]: mixed,
     _: Array<string>,
     $0: string,
-    [key: string]: mixed
+    ...
   };
 
   declare type Options = $Shape<{
@@ -12,8 +13,8 @@ declare module "yargs" {
     choices: Array<mixed>,
     coerce: (arg: mixed) => mixed,
     config: boolean,
-    configParser: (configPath: string) => { [key: string]: mixed },
-    conflicts: string | { [key: string]: string },
+    configParser: (configPath: string) => { [key: string]: mixed, ... },
+    conflicts: string | { [key: string]: string, ... },
     count: boolean,
     default: mixed,
     defaultDescription: string,
@@ -23,20 +24,21 @@ declare module "yargs" {
     description: string,
     global: boolean,
     group: string,
-    implies: string | { [key: string]: string },
+    implies: string | { [key: string]: string, ... },
     nargs: number,
     normalize: boolean,
     number: boolean,
     requiresArg: boolean,
     skipValidation: boolean,
     string: boolean,
-    type: "array" | "boolean" | "count" | "number" | "string"
+    type: "array" | "boolean" | "count" | "number" | "string",
+    ...
   }>;
 
   declare type CommonModuleObject = {|
     command?: string | Array<string>,
     aliases?: Array<string> | string,
-    builder?: { [key: string]: Options } | ((yargsInstance: Yargs) => mixed),
+    builder?: { [key: string]: Options, ... } | ((yargsInstance: Yargs) => mixed),
     handler?: (argv: Argv) => void
   |};
 
@@ -64,21 +66,21 @@ declare module "yargs" {
     (args: Array<string>): Yargs;
 
     alias(key: string, alias: string): this;
-    alias(alias: { [key: string]: string | Array<string> }): this;
+    alias(alias: { [key: string]: string | Array<string>, ... }): this;
     argv: Argv;
     array(key: string | Array<string>): this;
     boolean(paramter: string | Array<string>): this;
     check(fn: (argv: Argv, options: Array<string>) => ?boolean): this;
     choices(key: string, allowed: Array<string>): this;
-    choices(allowed: { [key: string]: Array<string> }): this;
+    choices(allowed: { [key: string]: Array<string>, ... }): this;
     coerce(key: string, fn: (value: any) => mixed): this;
-    coerce(object: { [key: string]: (value: any) => mixed }): this;
+    coerce(object: { [key: string]: (value: any) => mixed, ... }): this;
     coerce(keys: Array<string>, fn: (value: any) => mixed): this;
 
     command(
       cmd: string | Array<string>,
       desc: string | false,
-      builder?: { [key: string]: Options } | ((yargsInstance: Yargs) => mixed),
+      builder?: { [key: string]: Options, ... } | ((yargsInstance: Yargs) => mixed),
       handler?: Function
     ): this;
 
@@ -103,21 +105,21 @@ declare module "yargs" {
     config(
       key?: string,
       description?: string,
-      parseFn?: (configPath: string) => { [key: string]: mixed }
+      parseFn?: (configPath: string) => { [key: string]: mixed, ... }
     ): this;
     config(
       key: string,
-      parseFn?: (configPath: string) => { [key: string]: mixed }
+      parseFn?: (configPath: string) => { [key: string]: mixed, ... }
     ): this;
-    config(config: { [key: string]: mixed }): this;
+    config(config: { [key: string]: mixed, ... }): this;
 
     conflicts(key: string, value: string | Array<string>): this;
-    conflicts(keys: { [key: string]: string | Array<string> }): this;
+    conflicts(keys: { [key: string]: string | Array<string>, ... }): this;
 
     count(name: string): this;
 
     default(key: string, value: mixed, description?: string): this;
-    default(defaults: { [key: string]: mixed }): this;
+    default(defaults: { [key: string]: mixed, ... }): this;
 
     // Deprecated: use demandOption() and demandCommand() instead.
     demand(key: string, msg?: string | boolean): this;
@@ -134,7 +136,7 @@ declare module "yargs" {
     ): this;
 
     describe(key: string, description: string): this;
-    describe(describeObject: { [key: string]: string }): this;
+    describe(describeObject: { [key: string]: string, ... }): this;
 
     detectLocale(shouldDetect: boolean): this;
 
@@ -158,7 +160,7 @@ declare module "yargs" {
     help(option?: string, desc?: string): this;
 
     implies(key: string, value: string | Array<string>): this;
-    implies(keys: { [key: string]: string | Array<string> }): this;
+    implies(keys: { [key: string]: string | Array<string>, ... }): this;
 
     locale(
       locale: | "de"
@@ -190,14 +192,14 @@ declare module "yargs" {
     number(key: string | Array<string>): this;
 
     option(key: string, options?: Options): this;
-    option(optionMap: { [key: string]: Options }): this;
+    option(optionMap: { [key: string]: Options, ... }): this;
 
     options(key: string, options?: Options): this;
-    options(optionMap: { [key: string]: Options }): this;
+    options(optionMap: { [key: string]: Options, ... }): this;
 
     parse(
       args?: string | Array<string>,
-      context?: { [key: string]: mixed },
+      context?: { [key: string]: mixed, ... },
       parseCallback?: (err: Error, argv: Argv, output?: string) => void
     ): Argv;
     parse(
@@ -231,10 +233,10 @@ declare module "yargs" {
 
     string(key: string | Array<string>): this;
 
-    updateLocale(obj: { [key: string]: string }): this;
-    updateStrings(obj: { [key: string]: string }): this;
+    updateLocale(obj: { [key: string]: string, ... }): this;
+    updateStrings(obj: { [key: string]: string, ... }): this;
 
-    usage(message: string, opts?: { [key: string]: Options }): this;
+    usage(message: string, opts?: { [key: string]: Options, ... }): this;
 
     version(): this;
     version(version: string): this;

@@ -27,9 +27,10 @@ declare class xstream$MemoryStream<T> extends xstream$Stream<T> {
 }
 
 declare type xstream$Listener<T> = {
-  next<T>(value: T): void;
-  error(error: Error): void;
-  complete(): void;
+  next<T>(value: T): void,
+  error(error: Error): void,
+  complete(): void,
+  ...
 }
 
 declare class xstream$Subscription {
@@ -37,34 +38,35 @@ declare class xstream$Subscription {
 }
 
 declare type xstream$Producer<T> = {
-  start: (listener: xstream$Listener<T>) => void;
-  stop: () => void;
+  start: (listener: xstream$Listener<T>) => void,
+  stop: () => void,
+  ...
 }
 
 declare function xstream$combineResult<T>(s: xstream$Stream<T>): T;
 
 declare type xstream$exports = {
-  default: xstream$exports;
-  create<T>(producer?: xstream$Producer<T>): xstream$Stream<T>;
-  createWithMemory<T>(producer: xstream$Producer<T>): xstream$MemoryStream<T>;
-  never<T>(): xstream$Stream<T>;
-  empty<T>(): xstream$Stream<T>;
-  throw<T>(error: any): xstream$Stream<T>;
-  from<T>(arrayOrPromise: T[] | Promise<T>): xstream$Stream<T>;
-  of<T>(...values: T[]): xstream$Stream<T>;
-  fromArray<T>(array: T[]): xstream$Stream<T>;
-  fromPromise<T>(promise: Promise<T>): xstream$Stream<T>;
-  periodic(period: number): xstream$Stream<number>;
-  merge<T>(stream1: xstream$Stream<T>, stream2: xstream$Stream<T>): xstream$Stream<T>;
-  merge<T>(...streams: Array<xstream$Stream<T>>): xstream$Stream<T>;
-  combine<T, R>(stream1: xstream$Stream<T>, stream2: xstream$Stream<R>): xstream$Stream<[T, R]>;
-  combine<T>(...streams: Array<xstream$Stream<T>>): xstream$Stream<T[]>;
-
-  Stream: typeof xstream$Stream;
-  MemoryStream: typeof xstream$MemoryStream;
-  Listener: xstream$Listener<*>;
-  Producer: xstream$Producer<*>;
-  Subscription: typeof xstream$Subscription;
+  default: xstream$exports,
+  create<T>(producer?: xstream$Producer<T>): xstream$Stream<T>,
+  createWithMemory<T>(producer: xstream$Producer<T>): xstream$MemoryStream<T>,
+  never<T>(): xstream$Stream<T>,
+  empty<T>(): xstream$Stream<T>,
+  throw<T>(error: any): xstream$Stream<T>,
+  from<T>(arrayOrPromise: T[] | Promise<T>): xstream$Stream<T>,
+  of<T>(...values: T[]): xstream$Stream<T>,
+  fromArray<T>(array: T[]): xstream$Stream<T>,
+  fromPromise<T>(promise: Promise<T>): xstream$Stream<T>,
+  periodic(period: number): xstream$Stream<number>,
+  merge<T>(stream1: xstream$Stream<T>, stream2: xstream$Stream<T>): xstream$Stream<T>,
+  merge<T>(...streams: Array<xstream$Stream<T>>): xstream$Stream<T>,
+  combine<T, R>(stream1: xstream$Stream<T>, stream2: xstream$Stream<R>): xstream$Stream<[T, R]>,
+  combine<T>(...streams: Array<xstream$Stream<T>>): xstream$Stream<T[]>,
+  Stream: typeof xstream$Stream,
+  MemoryStream: typeof xstream$MemoryStream,
+  Listener: xstream$Listener<*>,
+  Producer: xstream$Producer<*>,
+  Subscription: typeof xstream$Subscription,
+  ...
 }
 
 declare module "xstream" {

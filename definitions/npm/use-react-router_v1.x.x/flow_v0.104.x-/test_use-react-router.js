@@ -64,14 +64,15 @@ describe("react-router-dom", () => {
       search: string,
       hash: string,
       state?: any,
-      key?: string
+      key?: string,
+      ...
     }>);
   });
 
   it('useReactRouter should return typed destructured vars for match', () => {
     const {match: {params, isExact, path, url}} = useReactRouter();
 
-    (params: {});
+    (params: {...});
     (isExact: boolean);
     (path: string);
     (url: string);

@@ -26,28 +26,66 @@ declare module "redux-actions" {
   declare function createAction<T, P>(
     type: T,
     $?: empty // hack to force Flow to not use this signature when more than one argument is given
-  ): {(payload: P, ...rest: any[]): { type: T, payload: P, error?: boolean }, +toString: () => T};
+  ): {
+    (payload: P, ...rest: any[]): {
+      type: T,
+      payload: P,
+      error?: boolean,
+      ...
+    },
+    +toString: () => T,
+    ...
+  };
 
   declare function createAction<T, A, P>(
     type: T,
     payloadCreator: (...rest: A) => Promise<P> | P,
     $?: empty
-  ): {(...rest: A): { type: T, payload: P, error?: boolean }, +toString: () => T};
+  ): {
+    (...rest: A): {
+      type: T,
+      payload: P,
+      error?: boolean,
+      ...
+    },
+    +toString: () => T,
+    ...
+  };
 
   declare function createAction<T, A, P, M>(
     type: T,
     payloadCreator: (...rest: A) => Promise<P> | P,
     metaCreator: (...rest: A) => M
-  ): {(...rest: A): { type: T, payload: P, error?: boolean, meta: M }, +toString: () => T};
+  ): {
+    (...rest: A): {
+      type: T,
+      payload: P,
+      error?: boolean,
+      meta: M,
+      ...
+    },
+    +toString: () => T,
+    ...
+  };
 
   declare function createAction<T, P, M>(
     type: T,
     payloadCreator: null | void,
     metaCreator: (payload: P, ...rest: any[]) => M
-  ): {(
+  ): {
+    (
+        payload: P,
+        ...rest: any[]
+      ): {
+      type: T,
       payload: P,
-      ...rest: any[]
-    ): { type: T, payload: P, error?: boolean, meta: M }, +toString: () => T};
+      error?: boolean,
+      meta: M,
+      ...
+    },
+    +toString: () => T,
+    ...
+  };
 
   // `createActions` is quite difficult to write a type for. Maybe try not to
   // use this one?
@@ -75,9 +113,13 @@ declare module "redux-actions" {
   declare type ReduxReducer<S, A> = (state: S | void, action: A) => S;
 
   declare type ReducerMap<S, A> =
-    | { next: Reducer<S, A> }
-    | { throw: Reducer<S, A> }
-    | { next: Reducer<S, A>, throw: Reducer<S, A> };
+    | { next: Reducer<S, A>, ... }
+    | { throw: Reducer<S, A>, ... }
+    | {
+    next: Reducer<S, A>,
+    throw: Reducer<S, A>,
+    ...
+  };
 
   /*
    * To get full advantage from Flow, use a type annotation on the action
@@ -94,22 +136,18 @@ declare module "redux-actions" {
    *     }, defaultState)
    */
 
-  declare type ReducerDefinition<State, Action> = {
-    [key: string]:
-      | (Reducer<State, Action> | ReducerDefinition<State, Action>)
-      | ReducerMap<State, Action>
-  };
+  declare type ReducerDefinition<State, Action> = { [key: string]:
+    | (Reducer<State, Action> | ReducerDefinition<State, Action>)
+    | ReducerMap<State, Action>, ... };
 
-  declare function handleAction<State, Action: { type: * }>(
+  declare function handleAction<State, Action: { type: *, ... }>(
     type: $ElementType<Action, 'type'>,
     reducer: ReducerDefinition<State, Action>,
     defaultState: State,
   ): ReduxReducer<State, Action>;
 
   declare function handleActions<State, Action>(
-    reducers: {
-      [key: string]: Reducer<State, Action> | ReducerMap<State, Action>
-    },
+    reducers: { [key: string]: Reducer<State, Action> | ReducerMap<State, Action>, ... },
     defaultState?: State
   ): ReduxReducer<State, Action>;
 

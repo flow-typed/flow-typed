@@ -6,10 +6,11 @@ type fiveArgumentEmail = (to: Array<string>, cc: Array<string>, bcc: Array<strin
 
 declare module 'react-native-communications' {
   declare module.exports: {
-      phonecall: (phoneNumber: string, prompt: boolean) => void,
-      email: & zeroArgumentEmail & oneArgumentEmail & fiveArgumentEmail,
-      text: (phoneNumber?: string, body?: string) => void,
-      textWithoutEncoding: (phoneNumber?: string, body?: string) => void,
-      web: (address: string) => void,
+    phonecall: (phoneNumber: string, prompt: boolean) => void,
+    email: & zeroArgumentEmail & oneArgumentEmail & fiveArgumentEmail,
+    text: (phoneNumber?: string, body?: string) => void,
+    textWithoutEncoding: (phoneNumber?: string, body?: string) => void,
+    web: (address: string) => void,
+    ...
   }
 }

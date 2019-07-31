@@ -2,7 +2,8 @@ declare module "react-native-auth0" {
   declare export type AuthorizationUrlParams = {
     responseType: string,
     redirectUri: string,
-    state: string
+    state: string,
+    ...
   };
 
   declare export type CreateUserParams<T> = {
@@ -10,25 +11,29 @@ declare module "react-native-auth0" {
     username?: string,
     password: string,
     connection: string,
-    metadata?: T
+    metadata?: T,
+    ...
   };
 
   declare export type CreateUserResponse = {
     Id: string,
     emailVerified: boolean,
-    email: string
+    email: string,
+    ...
   };
 
   declare export type ExchangeParams = {
     code: string,
     redirectUri: string,
-    verifier: string
+    verifier: string,
+    ...
   };
 
   declare export type LogoutParams = {
     federated: boolean,
     clientId?: string,
-    returnTo?: string
+    returnTo?: string,
+    ...
   };
 
   declare export type PasswordRealmParams = {
@@ -36,7 +41,8 @@ declare module "react-native-auth0" {
     password: string,
     realm: string,
     audience?: string,
-    scope?: string
+    scope?: string,
+    ...
   };
 
   declare export type PasswordRealmResponse = {
@@ -45,25 +51,24 @@ declare module "react-native-auth0" {
     idToken: string,
     scope: string,
     tokenType: "Bearer",
-    refreshToken?: string
+    refreshToken?: string,
+    ...
   };
 
   declare export type RefreshTokenParams = {
     refreshToken: string,
-    scope?: string
+    scope?: string,
+    ...
   };
 
-  declare export type RevokeParams = {
-    refreshToken: string
-  };
+  declare export type RevokeParams = { refreshToken: string, ... };
 
-  declare export type UserInfoParams = {
-    token: string
-  };
+  declare export type UserInfoParams = { token: string, ... };
 
   declare export type ResetPasswordParams = {
     email: string,
-    connection: string
+    connection: string,
+    ...
   };
 
   declare export type UserInfo = {
@@ -73,7 +78,8 @@ declare module "react-native-auth0" {
     nickname: string,
     picture: string,
     sub: string,
-    updatedAt: string
+    updatedAt: string,
+    ...
   };
   declare export class Auth {
     authorizationUrl(params: AuthorizationUrlParams): string;
@@ -100,7 +106,8 @@ declare module "react-native-auth0" {
     picture?: string,
     updated_at: string,
     userId: string,
-    userMetadata?: T
+    userMetadata?: T,
+    ...
   };
 
   declare export type GetUserParams = {|
@@ -125,7 +132,8 @@ declare module "react-native-auth0" {
     scope?: string,
     connection?: string,
     language?: string,
-    prompt?: string
+    prompt?: string,
+    ...
   };
 
   declare export type ClearSessionParams = {|
@@ -139,12 +147,14 @@ declare module "react-native-auth0" {
 
   declare export type Auth0Options = {
     domain: string,
-    clientId: string
+    clientId: string,
+    ...
   };
 
   declare export type UsersOptions = {
     baseUrl: $PropertyType<Auth0Options, "domain">,
-    token: string
+    token: string,
+    ...
   };
 
   declare class Auth0 {

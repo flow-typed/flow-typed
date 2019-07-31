@@ -16,6 +16,7 @@ declare module 'url-parse' {
     set: (part: string, value: mixed, fn?: (boolean | (value: mixed) => Object)) => Url,
     toString: () => string,
     lolcation: (loc?: (Object | string)) => Object,
+    ...
   };
 
   // In the library, if location is not (Object | string), it is assigned to parser. Therefore,

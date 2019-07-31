@@ -18,21 +18,21 @@ declare module "humps" {
   declare export function depascalize(string, options?: Options): string;
 
   declare export function camelizeKeys(
-    { +[string]: mixed },
+    { +[string]: mixed, ... },
     options?: Options
-  ): { [string]: mixed };
+  ): { [string]: mixed, ... };
   declare export function pascalizeKeys(
-    { +[string]: mixed },
+    { +[string]: mixed, ... },
     options?: Options
-  ): { [string]: mixed };
+  ): { [string]: mixed, ... };
   declare export function decamelizeKeys(
-    { +[string]: mixed },
+    { +[string]: mixed, ... },
     options?: Options
-  ): { [string]: mixed };
+  ): { [string]: mixed, ... };
   declare export function depascalizeKeys(
-    { +[string]: mixed },
+    { +[string]: mixed, ... },
     options?: Options
-  ): { [string]: mixed };
+  ): { [string]: mixed, ... };
 
   declare export default {|
     camelize: typeof camelize,

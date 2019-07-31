@@ -18,7 +18,8 @@ declare module "react-toastify" {
     TOP_RIGHT?: Object,
     BOTTOM_LEFT?: Object,
     BOTTOM_CENTER?: Object,
-    BOTTOM_RIGHT?: Object
+    BOTTOM_RIGHT?: Object,
+    ...
   };
 
   declare type CommonOptions = {
@@ -31,23 +32,25 @@ declare module "react-toastify" {
     className?: string | Object,
     bodyClassName?: string | Object,
     hideProgressBar?: boolean,
-    transition?: any // TODO: Improve
+    // TODO: Improve
+    transition?: any,
+    ...
   };
 
   declare type ToastOptions = CommonOptions & {
     onOpen?: () => void,
     onClose?: () => void,
-    type?: ToastType
+    type?: ToastType,
+    ...
   };
 
-  declare type UpdateOptions = ToastOptions & {
-    render?: ToastContent
-  };
+  declare type UpdateOptions = ToastOptions & { render?: ToastContent, ... };
 
   declare type ToastContainerProps = CommonOptions & {
     newestOnTop?: boolean,
     style?: Object,
-    toastClassName?: string | Object
+    toastClassName?: string | Object,
+    ...
   };
 
   declare type Toast = {
@@ -59,23 +62,24 @@ declare module "react-toastify" {
     isActive(toastId: number): boolean,
     dismiss(toastId?: number): void,
     update(toastId: number, options?: UpdateOptions): number,
-
     TYPE: {
       INFO: ToastType,
       SUCCESS: ToastType,
       WARNING: ToastType,
       ERROR: ToastType,
-      DEFAULT: ToastType
+      DEFAULT: ToastType,
+      ...
     },
-
     POSITION: {
       TOP_LEFT: string,
       TOP_RIGHT: string,
       TOP_CENTER: string,
       BOTTOM_LEFT: string,
       BOTTOM_RIGHT: string,
-      BOTTOM_CENTER: string
-    }
+      BOTTOM_CENTER: string,
+      ...
+    },
+    ...
   };
 
   declare export class ToastContainer extends React$Component<ToastContainerProps> {}

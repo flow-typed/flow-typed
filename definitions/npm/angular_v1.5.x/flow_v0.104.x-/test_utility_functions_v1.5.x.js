@@ -20,12 +20,17 @@ function testCopy() {
 
 function testExtend() {
   // extends object type
-  (angular.extend({ a: 1 }, { b: 2 }): { a: number, b: number });
+  (angular.extend({ a: 1 }, { b: 2 }): {
+    a: number,
+    b: number,
+    ...
+  });
   (angular.extend({ a: 1 }, { b: 2 }, { c: "str", d: 123 }): {
     a: number,
     b: number,
     c: string,
-    d: number
+    d: number,
+    ...
   });
 }
 

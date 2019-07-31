@@ -12,37 +12,47 @@ declare module 'parse' {
 
 declare type $npm$parse$Parse = {
   initialize(applicationId: string, javaScriptKey: ?string): void,
-  Analytics: any, // TODO
+  // TODO
+  Analytics: any,
   ACL: Class<$npm$parse$ParseACL>,
   Cloud: $npm$parse$ParseCloud,
-  CoreManager: any, // TODO
+  // TODO
+  CoreManager: any,
   Config: Class<$npm$parse$ParseConfig>,
   Error: Class<$npm$parse$ParseError>,
-  FacebookUtils: any, // TODO
+  // TODO
+  FacebookUtils: any,
   File: Class<$npm$parse$ParseFile>,
   GeoPoint: Class<$npm$parse$ParseGeoPoint>,
-  Installation: any, // TODO
+  // TODO
+  Installation: any,
   LiveQuery: any,
   LiveQueryClient: any,
   Object: Class<$npm$parse$ParseObject>,
-  Promise: any, // TODO
-  Push: any, // TODO
+  // TODO
+  Promise: any,
+  // TODO
+  Push: any,
   Relation: Class<$npm$parse$ParseRelation>,
   Role: Class<$npm$parse$ParseRole>,
-  Session: any, // TODO
-  Storage: any, // TODO
+  // TODO
+  Session: any,
+  // TODO
+  Storage: any,
   Query: Class<$npm$parse$ParseQuery<*>>,
   User: Class<$npm$parse$ParseUser>,
   masterKey: ?string,
   serverURL: ?string,
+  ...
 }
 
-declare type $npm$parse$AttributeMap = { [attr: string]: any }
+declare type $npm$parse$AttributeMap = { [attr: string]: any, ... }
 
 declare type $npm$parse$RequestOptions = {
   useMasterKey?: boolean,
   sessionToken?: string,
-  installationId?: string
+  installationId?: string,
+  ...
 }
 
 declare type $npm$parse$FullOptions = {
@@ -50,13 +60,15 @@ declare type $npm$parse$FullOptions = {
   error?: any,
   useMasterKey?: boolean,
   sessionToken?: string,
-  installationId?: string
+  installationId?: string,
+  ...
 }
 
 declare type $npm$parse$Pointer = {
   __type: string,
   className: string,
-  objectId: string
+  objectId: string,
+  ...
 }
 
 // =========================
@@ -65,7 +77,7 @@ declare type $npm$parse$Pointer = {
 declare class $npm$parse$ParseConfig {
   static(): $npm$parse$ParseConfig,
   constructor(): $npm$parse$ParseConfig,
-  attributes: { [key: string]: any },
+  attributes: { [key: string]: any, ... },
   get(attr: string): any,
   escape(attr: string): string,
   static current(): $npm$parse$ParseConfig,
@@ -76,7 +88,7 @@ declare class $npm$parse$ParseConfig {
 // ParseCloud
 // =========================
 declare type $npm$parse$ParseCloud = {
-  run(name: string, data?: mixed, options?: { [key: string]: mixed }): Promise<any>,
+  run(name: string, data?: mixed, options?: { [key: string]: mixed, ... }): Promise<any>,
   define(name: string, cloudFunction: (request: $npm$parse$ParseCloud$FunctionRequest, response: $npm$parse$ParseCloud$FunctionResponse) => any): any,
   beforeSave(className: string, trigger: any): any,
   afterSave(className: string, trigger: any): any,
@@ -85,7 +97,8 @@ declare type $npm$parse$ParseCloud = {
   beforeFind(className: string, trigger: any): any,
   afterFind(className: string, trigger: any): any,
   FunctionRequest: Class<$npm$parse$ParseCloud$FunctionRequest>,
-  FunctionResponse: Class<$npm$parse$ParseCloud$FunctionResponse>
+  FunctionResponse: Class<$npm$parse$ParseCloud$FunctionResponse>,
+  ...
 }
 
 declare class $npm$parse$ParseCloud$FunctionRequest {
@@ -104,9 +117,22 @@ declare class $npm$parse$ParseCloud$FunctionResponse {
 // ParseGeoPoint
 // =========================
 declare class $npm$parse$ParseGeoPoint {
-  static(arg1: Array<number> | { latitude: number; longitude: number } | number, arg2?: number): $npm$parse$ParseGeoPoint,
-  constructor(arg1: Array<number> | { latitude: number; longitude: number } | number, arg2?: number): $npm$parse$ParseGeoPoint,
-  toJSON(): { __type: string; latitude: number; longitude: number },
+  static(arg1: Array<number> | {
+    latitude: number,
+    longitude: number,
+    ...
+  } | number, arg2?: number): $npm$parse$ParseGeoPoint,
+  constructor(arg1: Array<number> | {
+    latitude: number,
+    longitude: number,
+    ...
+  } | number, arg2?: number): $npm$parse$ParseGeoPoint,
+  toJSON(): {
+    __type: string,
+    latitude: number,
+    longitude: number,
+    ...
+  },
   equals(other: mixed): boolean,
   radiansTo(point: $npm$parse$ParseGeoPoint): number,
   kilometersTo(point: $npm$parse$ParseGeoPoint): number,
@@ -118,16 +144,15 @@ declare class $npm$parse$ParseGeoPoint {
 // ParseQuery
 // =========================
 declare type $npm$parse$QueryJSON = {
-  where: {
-    [attr: string]: mixed;
-  },
-  include?: string;
-  keys?: string;
-  limit?: number;
-  skip?: number;
-  order?: string;
-  className?: string;
-  count?: number;
+  where: { [attr: string]: mixed, ... },
+  include?: string,
+  keys?: string,
+  limit?: number,
+  skip?: number,
+  order?: string,
+  className?: string,
+  count?: number,
+  ...
 }
 
 declare class $npm$parse$ParseQuery<T> {
@@ -139,7 +164,7 @@ declare class $npm$parse$ParseQuery<T> {
   find(options?: $npm$parse$FullOptions): Promise<Array<T>>,
   count(options?: $npm$parse$FullOptions): number,
   first(options?: $npm$parse$FullOptions): Promise<?T>,
-  each(callback: (obj: T) => any, options?: $npm$parse$FullOptions & { batchSize?: number }): Promise<$npm$parse$ParseObject>,
+  each(callback: (obj: T) => any, options?: $npm$parse$FullOptions & { batchSize?: number, ... }): Promise<$npm$parse$ParseObject>,
   equalTo(key: string, value: mixed): $npm$parse$ParseQuery<T>,
   notEqualTo(key: string, value: mixed): $npm$parse$ParseQuery<T>,
   lessThan(key: string, value: mixed): $npm$parse$ParseQuery<T>,
@@ -179,25 +204,43 @@ declare class $npm$parse$ParseQuery<T> {
 // =========================
 // ParseFile
 // =========================
-declare type $npm$parse$Base64 = { $npm$parse$Base64: string }
+declare type $npm$parse$Base64 = { $npm$parse$Base64: string, ... }
 declare type $npm$parse$FileData = Array<number> | $npm$parse$Base64 | File
-declare type $npm$parse$FileSource = { format: 'file', file: File, type: string } | { format: '$npm$parse$Base64', $npm$parse$Base64: string, type: string }
+declare type $npm$parse$FileSource = {
+  format: 'file',
+  file: File,
+  type: string,
+  ...
+} | {
+  format: '$npm$parse$Base64',
+  $npm$parse$Base64: string,
+  type: string,
+  ...
+}
 
 declare class $npm$parse$ParseFile {
   static(name: string, data?: $npm$parse$FileData, type?: string): $npm$parse$ParseFile,
   constructor(name: string, data?: $npm$parse$FileData, type?: string): $npm$parse$ParseFile,
   name(): string,
-  url(options?: { forceSecure?: boolean }): ?string,
-  save(options?: { success?: any, error?: any }): Promise<$npm$parse$ParseFile>,
-  toJSON(): { name: ?string, url: ?string },
+  url(options?: { forceSecure?: boolean, ... }): ?string,
+  save(options?: {
+    success?: any,
+    error?: any,
+    ...
+  }): Promise<$npm$parse$ParseFile>,
+  toJSON(): {
+    name: ?string,
+    url: ?string,
+    ...
+  },
   equals(other: mixed): boolean
 }
 
 // =========================
 // ParseACL
 // =========================
-declare type $npm$parse$PermissionsMap = { [permission: string]: boolean }
-declare type $npm$parse$ByIdMap = { [userId: string]: $npm$parse$PermissionsMap }
+declare type $npm$parse$PermissionsMap = { [permission: string]: boolean, ... }
+declare type $npm$parse$ByIdMap = { [userId: string]: $npm$parse$PermissionsMap, ... }
 
 declare class $npm$parse$ParseACL {
   permissionsById: $npm$parse$ByIdMap,
@@ -223,8 +266,16 @@ declare class $npm$parse$ParseACL {
 // ParseObject
 // =========================
 declare class $npm$parse$ParseObject {
-  static(className: ?string | { className: string, [attr: string]: mixed }, attributes?: { [attr: string]: mixed }, options?: { ignoreValidation: boolean }): $npm$parse$ParseObject,
-  constructor(className: ?string | { className: string, [attr: string]: mixed }, attributes?: { [attr: string]: mixed }, options?: { ignoreValidation: boolean }): $npm$parse$ParseObject,
+  static(className: ?string | {
+    [attr: string]: mixed,
+    className: string,
+    ...
+  }, attributes?: { [attr: string]: mixed, ... }, options?: { ignoreValidation: boolean, ... }): $npm$parse$ParseObject,
+  constructor(className: ?string | {
+    [attr: string]: mixed,
+    className: string,
+    ...
+  }, attributes?: { [attr: string]: mixed, ... }, options?: { ignoreValidation: boolean, ... }): $npm$parse$ParseObject,
   id: string,
   createdAt: Date,
   updatedAt: Date,
@@ -240,7 +291,7 @@ declare class $npm$parse$ParseObject {
   escape(attr: string): string,
   has(attr: string): boolean,
   set(key: mixed, value: mixed, options?: mixed): $npm$parse$ParseObject | boolean,
-  unset(attr: string, options?: { [opt: string]: mixed }): $npm$parse$ParseObject | boolean,
+  unset(attr: string, options?: { [opt: string]: mixed, ... }): $npm$parse$ParseObject | boolean,
   increment(attr: string, amount?: number): $npm$parse$ParseObject | boolean,
   add(attr: string, item: mixed): $npm$parse$ParseObject | boolean,
   addUnique(attr: string, item: mixed): $npm$parse$ParseObject | boolean,
@@ -256,7 +307,7 @@ declare class $npm$parse$ParseObject {
   revert(): void,
   clear(): $npm$parse$ParseObject | boolean,
   fetch(options: $npm$parse$RequestOptions): Promise<any>,
-  save(arg1: ?string | { [attr: string]: mixed }, arg2?: $npm$parse$FullOptions, arg3?: $npm$parse$FullOptions): Promise<$npm$parse$ParseObject>,
+  save(arg1: ?string | { [attr: string]: mixed, ... }, arg2?: $npm$parse$FullOptions, arg3?: $npm$parse$FullOptions): Promise<$npm$parse$ParseObject>,
   destroy(options: ?$npm$parse$RequestOptions): Promise<any>,
   static fetchAll(list: Array<$npm$parse$ParseObject>, options?: $npm$parse$RequestOptions): Promise<$npm$parse$ParseObject>,
   static fetchAllIfNeeded(list: Array<$npm$parse$ParseObject>, options?: $npm$parse$RequestOptions): Promise<$npm$parse$ParseObject>,
@@ -290,7 +341,7 @@ declare class $npm$parse$ParseUser extends $npm$parse$ParseObject {
   destroy(...args: Array<any>): Promise<$npm$parse$ParseUser>,
   fetch(...args: Array<any>): Promise<$npm$parse$ParseUser>,
   static readOnlyAttributes(): void,
-  static extend(protoProps: {[prop: string]: any}, classProps: {[prop: string]: any}): void,
+  static extend(protoProps: { [prop: string]: any, ... }, classProps: { [prop: string]: any, ... }): void,
   static current(): ?$npm$parse$ParseUser,
   static currentAsync(): Promise<?$npm$parse$ParseUser>,
   static signUp(username: string, password: string, attrs?: $npm$parse$AttributeMap, options?: $npm$parse$RequestOptions): Promise<$npm$parse$ParseUser>,
@@ -313,7 +364,11 @@ declare class $npm$parse$ParseRelation {
   parent: ?$npm$parse$ParseObject,
   add(objects: $npm$parse$ParseObject | Array<$npm$parse$ParseObject | string>): $npm$parse$ParseObject,
   remove(objects: $npm$parse$ParseObject | Array<$npm$parse$ParseObject | string>): void,
-  toJSON(): { __type: 'Relation', className: ?string },
+  toJSON(): {
+    __type: 'Relation',
+    className: ?string,
+    ...
+  },
   query(): $npm$parse$ParseQuery<*>
 }
 

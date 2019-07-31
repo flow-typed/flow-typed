@@ -7,9 +7,7 @@
  */
 
 declare module 'verror' {
-  declare export type Info = {
-    +[string]: mixed,
-  };
+  declare export type Info = { +[string]: mixed, ... };
 
   declare export type Options = {|
     +name?: string,
@@ -56,5 +54,6 @@ declare module 'verror' {
     MultiError: typeof MultiError,
     SError: typeof SError,
     WError: typeof WError,
+    ...
   };
 }

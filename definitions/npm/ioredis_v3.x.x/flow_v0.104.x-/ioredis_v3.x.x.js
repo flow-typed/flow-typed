@@ -15,12 +15,13 @@
 declare module "ioredis" {
   declare class Commander extends events$EventEmitter {
     getBuiltinCommands(): string[];
-    createBuiltinCommand(commandName: string): {};
+    createBuiltinCommand(commandName: string): {...};
     defineCommand(
       name: string,
       definition: {
         numberOfKeys?: number,
-        lua?: string
+        lua?: string,
+        ...
       }
     ): any;
     sendCommand(): void;
@@ -281,7 +282,7 @@ declare module "ioredis" {
     type(key: string, callback: ResCallbackT<any>): void;
     type(key: string): Promise<any>;
     multi(commands?: string[][], options?: MultiOptions): Pipeline;
-    multi(options: { pipeline: false }): Promise<string>;
+    multi(options: { pipeline: false, ... }): Promise<string>;
     exec(callback: ResCallbackT<any>): void;
     exec(): Promise<any>;
     discard(callback: ResCallbackT<any>): void;
@@ -360,7 +361,6 @@ declare module "ioredis" {
 
   declare type Pipeline = {
     exec(callback?: ResCallbackT<any[]>): any,
-
     get(args: any[], callback?: ResCallbackT<string>): Pipeline,
     get(...args: any[]): Pipeline,
     set(args: any[], callback?: ResCallbackT<string>): Pipeline,
@@ -635,12 +635,17 @@ declare module "ioredis" {
     hscan(...args: any[]): Pipeline,
     hscan(args: any[], callback?: ResCallbackT<any>): Pipeline,
     zscan(...args: any[]): Pipeline,
-    zscan(args: any[], callback?: ResCallbackT<any>): Pipeline
+    zscan(args: any[], callback?: ResCallbackT<any>): Pipeline,
+    ...
   };
 
   declare class Cluster extends Redis {
     constructor(
-      nodes: { host: string, port: number }[],
+      nodes: {
+        host: string,
+        port: number,
+        ...
+      }[],
       options?: ClusterOptions
     ): void;
     nodes(role: string): Redis[];
@@ -711,7 +716,11 @@ declare module "ioredis" {
     autoResendUnfulfilledCommands?: boolean,
     lazyConnect?: boolean,
     tls?: tls$connectOptions,
-    sentinels?: { host: string, port: number }[],
+    sentinels?: {
+      host: string,
+      port: number,
+      ...
+    }[],
     name?: string,
     /**
      * Enable READONLY mode for the connection. Only available for cluster mode.
@@ -722,12 +731,14 @@ declare module "ioredis" {
      * If you are using the hiredis parser, it's highly recommended to enable this option.
      * Create another instance with dropBufferSupport disabled for other commands that you want to return binary instead of string:
      */
-    dropBufferSupport?: boolean
+    dropBufferSupport?: boolean,
+    ...
   };
 
   declare type ScanStreamOption = {
     match?: string,
-    count?: number
+    count?: number,
+    ...
   };
 
   declare type ClusterNodeType = "all" | "slave" | "master";
@@ -741,12 +752,11 @@ declare module "ioredis" {
     retryDelayOnFailover?: number,
     retryDelayOnClusterDown?: number,
     retryDelayOnTryAgain?: number,
-    redisOptions?: RedisOptions
+    redisOptions?: RedisOptions,
+    ...
   };
 
-  declare type MultiOptions = {
-    pipeline: boolean;
-  }
+  declare type MultiOptions = { pipeline: boolean, ... }
 
   declare class RedisStatic extends Redis {
     static Cluster: Class<Cluster>;

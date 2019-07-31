@@ -5,13 +5,15 @@ declare module '@nx-js/observer-util' {
 
   declare type Scheduler = {
     add: Function,
-    delete: Function
+    delete: Function,
+    ...
   };
 
   declare type ObserveOptions = {
     scheduler?: Scheduler | Function,
     debugger?: Function,
-    lazy?: boolean
+    lazy?: boolean,
+    ...
   }
 
   declare function observe<Reaction: Function>(func: Reaction, options?: ObserveOptions): Reaction;

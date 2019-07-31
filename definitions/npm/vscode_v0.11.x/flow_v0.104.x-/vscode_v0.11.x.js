@@ -544,19 +544,20 @@ declare module 'vscode' {
    */
   declare export type TextEditorRevealTypeType = 0 | 1 | 2;
   declare export var TextEditorRevealType: {
-    /**
-     * The range will be revealed with as little scrolling as possible.
-     */
-    Default: 0,
-    /**
-     * The range will always be revealed in the center of the viewport.
-     */
-    InCenter: 1,
-    /**
-     * If the range is outside the viewport, it will be revealed in the center of the viewport.
-     * Otherwise, it will be revealed with as little scrolling as possible.
-     */
-    InCenterIfOutsideViewport: 2,
+   /**
+    * The range will be revealed with as little scrolling as possible.
+    */
+   Default: 0,
+   /**
+    * The range will always be revealed in the center of the viewport.
+    */
+   InCenter: 1,
+   /**
+    * If the range is outside the viewport, it will be revealed in the center of the viewport.
+    * Otherwise, it will be revealed with as little scrolling as possible.
+    */
+   InCenterIfOutsideViewport: 2,
+   ...
   }
 
   /**
@@ -565,10 +566,11 @@ declare module 'vscode' {
    */
   declare export type OverviewRulerLaneType = 1 | 2 | 4 | 6;
   declare export var OverviewRulerLane: {
-    Left: 1,
-    Center: 2,
-    Right: 4,
-    Full: 7
+   Left: 1,
+   Center: 2,
+   Right: 4,
+   Full: 7,
+   ...
   }
 
   /**
@@ -927,7 +929,7 @@ declare module 'vscode' {
      * @return Returns a new disposable which, upon dispose, will
      * dispose all provided disposables.
      */
-    static from(...disposableLikes: { dispose: () => any }[]): Disposable;
+    static from(...disposableLikes: { dispose: () => any, ... }[]): Disposable;
 
     /**
      * Creates a new Disposable calling the provided function
@@ -1247,7 +1249,11 @@ declare module 'vscode' {
    * is either a string that supports **bold** and __italic__ or a code-block that
    * provides a language and a code Snippet.
    */
-  declare export type MarkedString = string | { language: string; value: string };
+  declare export type MarkedString = string | {
+   language: string,
+   value: string,
+   ...
+  };
 
   /**
    * A hover represents additional information for a symbol or word. Hovers are
@@ -1301,21 +1307,19 @@ declare module 'vscode' {
    */
   declare export type DocumentHighlightKindType = 0 | 1 | 2;
   declare export var DocumentHighlightKind: {
-
-    /**
-     * A textual occurrence.
-     */
-    Text: 0,
-
-    /**
-     * Read-access of a symbol, like reading a variable.
-     */
-    Read: 1,
-
-    /**
-     * Write-access of a symbol, like writing to a variable.
-     */
-    Write: 2,
+   /**
+    * A textual occurrence.
+    */
+   Text: 0,
+   /**
+    * Read-access of a symbol, like reading a variable.
+    */
+   Read: 1,
+   /**
+    * Write-access of a symbol, like writing to a variable.
+    */
+   Write: 2,
+   ...
   }
 
   /**
@@ -1368,24 +1372,25 @@ declare module 'vscode' {
    */
   declare export type SymbolKindType = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17;
   declare export var SymbolKind: {
-    File: 0,
-    Module: 1,
-    Namespace: 2,
-    Package: 3,
-    Class: 4,
-    Method: 5,
-    Property: 6,
-    Field: 7,
-    Constructor: 8,
-    Enum: 9,
-    Interface: 10,
-    Function: 11,
-    Variable: 12,
-    Constant: 13,
-    String: 14,
-    Number: 15,
-    Boolean: 16,
-    Array: 17,
+   File: 0,
+   Module: 1,
+   Namespace: 2,
+   Package: 3,
+   Class: 4,
+   Method: 5,
+   Property: 6,
+   Field: 7,
+   Constructor: 8,
+   Enum: 9,
+   Interface: 10,
+   Function: 11,
+   Variable: 12,
+   Constant: 13,
+   String: 14,
+   Number: 15,
+   Boolean: 16,
+   Array: 17,
+   ...
   }
 
   /**
@@ -1825,24 +1830,25 @@ declare module 'vscode' {
   declare export type CompletionItemKindType = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9
     | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17;
   declare export var CompletionItemKind: {
-    Text: 0,
-    Method: 1,
-    Function: 2,
-    Constructor: 3,
-    Field: 4,
-    Variable: 5,
-    Class: 6,
-    Interface: 7,
-    Module: 8,
-    Property: 9,
-    Unit: 10,
-    Value: 11,
-    Enum: 12,
-    Keyword: 13,
-    Snippet: 14,
-    Color: 15,
-    File: 16,
-    Reference: 17,
+   Text: 0,
+   Method: 1,
+   Function: 2,
+   Constructor: 3,
+   Field: 4,
+   Variable: 5,
+   Class: 6,
+   Interface: 7,
+   Module: 8,
+   Property: 9,
+   Unit: 10,
+   Value: 11,
+   Enum: 12,
+   Keyword: 13,
+   Snippet: 14,
+   Color: 15,
+   File: 16,
+   Reference: 17,
+   ...
   }
 
   /**
@@ -2007,24 +2013,25 @@ declare module 'vscode' {
    */
   declare export type IndentActionType = 0 | 1 | 2 | 3;
   declare export var IndentAction: {
-    /**
-     * Insert new line and copy the previous line's indentation.
-     */
-    None: 0,
-    /**
-     * Insert new line and indent once (relative to the previous line's indentation).
-     */
-    Indent: 1,
-    /**
-     * Insert two new lines:
-     *  - the first one indented which will hold the cursor
-     *  - the second one at the same indentation level
-     */
-    IndentOutdent: 2,
-    /**
-     * Insert new line and outdent once (relative to the previous line's indentation).
-     */
-    Outdent: 3,
+   /**
+    * Insert new line and copy the previous line's indentation.
+    */
+   None: 0,
+   /**
+    * Insert new line and indent once (relative to the previous line's indentation).
+    */
+   Indent: 1,
+   /**
+    * Insert two new lines:
+    *  - the first one indented which will hold the cursor
+    *  - the second one at the same indentation level
+    */
+   IndentOutdent: 2,
+   /**
+    * Insert new line and outdent once (relative to the previous line's indentation).
+    */
+   Outdent: 3,
+   ...
   }
 
   /**
@@ -2100,18 +2107,21 @@ declare module 'vscode' {
      * @deprecated Will be replaced by a better API soon.
      */
     __electricCharacterSupport?: {
-      brackets: {
-        tokenType: string;
-        open: string;
-        close: string;
-        isElectric: boolean;
-      }[];
-      docComment?: {
-        scope: string;
-        open: string;
-        lineStart: string;
-        close?: string;
-      };
+     brackets: {
+      tokenType: string,
+      open: string,
+      close: string,
+      isElectric: boolean,
+      ...
+     }[],
+     docComment?: {
+      scope: string,
+      open: string,
+      lineStart: string,
+      close?: string,
+      ...
+     },
+     ...
     };
 
     /**
@@ -2119,13 +2129,12 @@ declare module 'vscode' {
      *
      * @deprecated Will be replaced by a better API soon.
      */
-    __characterPairSupport?: {
-      autoClosingPairs: {
-        open: string;
-        close: string;
-        notIn?: string[];
-      }[];
-    };
+    __characterPairSupport?: { autoClosingPairs: {
+     open: string,
+     close: string,
+     notIn?: string[],
+     ...
+    }[], ... };
   }
 
   /**
@@ -2189,27 +2198,24 @@ declare module 'vscode' {
    */
   declare export type DiagnosticSeverityType = 0 | 1 | 2 | 3;
   declare export var DiagnosticSeverity: {
-
-    /**
-     * Something not allowed by the rules of a language or other means.
-     */
-    Error: 0,
-
-    /**
-     * Something suspicious but allowed.
-     */
-    Warning: 1,
-
-    /**
-     * Something to inform about but not a problem.
-     */
-    Information: 2,
-
-    /**
-     * Something to hint to a better way of doing it, like proposing
-     * a refactoring.
-     */
-    Hint: 3,
+   /**
+    * Something not allowed by the rules of a language or other means.
+    */
+   Error: 0,
+   /**
+    * Something suspicious but allowed.
+    */
+   Warning: 1,
+   /**
+    * Something to inform about but not a problem.
+    */
+   Information: 2,
+   /**
+    * Something to hint to a better way of doing it, like proposing
+    * a refactoring.
+    */
+   Hint: 3,
+   ...
   }
 
   /**
@@ -2316,9 +2322,10 @@ declare module 'vscode' {
    */
   declare export type ViewColumnType = 1 | 2 | 3;
   declare export var ViewColumn: {
-    One: 1,
-    Two: 2,
-    Three: 3
+   One: 1,
+   Two: 2,
+   Three: 3,
+   ...
   }
 
   /**
@@ -2378,16 +2385,15 @@ declare module 'vscode' {
    */
   declare export type StatusBarAlignmentType = 0 | 1;
   declare export var StatusBarAlignment: {
-
-    /**
-     * Aligned to the left side.
-     */
-    Left: 0,
-
-    /**
-     * Aligned to the right side.
-     */
-    Right: 1,
+   /**
+    * Aligned to the left side.
+    */
+   Left: 0,
+   /**
+    * Aligned to the right side.
+    */
+   Right: 1,
+   ...
   }
 
   /**
@@ -2518,7 +2524,7 @@ declare module 'vscode' {
      * An array to which disposables can be added. When this
      * extension is deactivated the disposables will be disposed.
      */
-    subscriptions: { dispose(): any }[];
+    subscriptions: { dispose(): any, ... }[];
 
     /**
      * A memento object that stores state in the context
@@ -2607,61 +2613,58 @@ declare module 'vscode' {
    * ```
    */
   declare export var commands: {
-
-    /**
-     * Registers a command that can be invoked via a keyboard shortcut,
-     * a menu item, an action, or directly.
-     *
-     * Registering a command with an existing command identifier twice
-     * will cause an error.
-     *
-     * @param command A unique identifier for the command.
-     * @param callback A command handler function.
-     * @param thisArg The `this` context used when invoking the handler function.
-     * @return Disposable which unregisters this command on disposal.
-     */
-    registerCommand(command: string, callback: (...args: any[]) => any, thisArg?: any): Disposable;
-
-    /**
-     * Registers a text editor command that can be invoked via a keyboard shortcut,
-     * a menu item, an action, or directly.
-     *
-     * Text editor commands are different from ordinary [commands](#commands.registerCommand) as
-     * they only execute when there is an active editor when the command is called. Also, the
-     * command handler of an editor command has access to the active editor and to an
-     * [edit](#TextEditorEdit)-builder.
-     *
-     * @param command A unique identifier for the command.
-     * @param callback A command handler function with access to an [editor](#TextEditor) and an [edit](#TextEditorEdit).
-     * @param thisArg The `this` context used when invoking the handler function.
-     * @return Disposable which unregisters this command on disposal.
-     */
-    registerTextEditorCommand(command: string, callback: (textEditor: TextEditor, edit: TextEditorEdit) => void, thisArg?: any): Disposable;
-
-    /**
-     * Executes the command denoted by the given command identifier.
-     *
-     * When executing an editor command not all types are allowed to
-     * be passed as arguments. Allowed are the primitive types `string`, `boolean`,
-     * `number`, `undefined`, and `null`, as well as classes defined in this API.
-     * There are no restrictions when executing commands that have been contributed
-     * by extensions.
-     *
-     * @param command Identifier of the command to execute.
-     * @param rest Parameters passed to the command function.
-     * @return A thenable that resolves to the returned value of the given command. `undefined` when
-     * the command handler function doesn't return anything.
-     */
-    executeCommand<T>(command: string, ...rest: any[]): Thenable<T>;
-
-    /**
-     * Retrieve the list of all available commands. Commands starting an underscore are
-     * treated as internal commands.
-     *
-     * @param filterInternal Set `true` to not see internal commands (starting with an underscore)
-     * @return Thenable that resolves to a list of command ids.
-     */
-    getCommands(filterInternal?: boolean): Thenable<string[]>;
+   /**
+    * Registers a command that can be invoked via a keyboard shortcut,
+    * a menu item, an action, or directly.
+    *
+    * Registering a command with an existing command identifier twice
+    * will cause an error.
+    *
+    * @param command A unique identifier for the command.
+    * @param callback A command handler function.
+    * @param thisArg The `this` context used when invoking the handler function.
+    * @return Disposable which unregisters this command on disposal.
+    */
+   registerCommand(command: string, callback: (...args: any[]) => any, thisArg?: any): Disposable,
+   /**
+    * Registers a text editor command that can be invoked via a keyboard shortcut,
+    * a menu item, an action, or directly.
+    *
+    * Text editor commands are different from ordinary [commands](#commands.registerCommand) as
+    * they only execute when there is an active editor when the command is called. Also, the
+    * command handler of an editor command has access to the active editor and to an
+    * [edit](#TextEditorEdit)-builder.
+    *
+    * @param command A unique identifier for the command.
+    * @param callback A command handler function with access to an [editor](#TextEditor) and an [edit](#TextEditorEdit).
+    * @param thisArg The `this` context used when invoking the handler function.
+    * @return Disposable which unregisters this command on disposal.
+    */
+   registerTextEditorCommand(command: string, callback: (textEditor: TextEditor, edit: TextEditorEdit) => void, thisArg?: any): Disposable,
+   /**
+    * Executes the command denoted by the given command identifier.
+    *
+    * When executing an editor command not all types are allowed to
+    * be passed as arguments. Allowed are the primitive types `string`, `boolean`,
+    * `number`, `undefined`, and `null`, as well as classes defined in this API.
+    * There are no restrictions when executing commands that have been contributed
+    * by extensions.
+    *
+    * @param command Identifier of the command to execute.
+    * @param rest Parameters passed to the command function.
+    * @return A thenable that resolves to the returned value of the given command. `undefined` when
+    * the command handler function doesn't return anything.
+    */
+   executeCommand<T>(command: string, ...rest: any[]): Thenable<T>,
+   /**
+    * Retrieve the list of all available commands. Commands starting an underscore are
+    * treated as internal commands.
+    *
+    * @param filterInternal Set `true` to not see internal commands (starting with an underscore)
+    * @return Thenable that resolves to a list of command ids.
+    */
+   getCommands(filterInternal?: boolean): Thenable<string[]>,
+   ...
   }
 
   /**
@@ -2670,199 +2673,179 @@ declare module 'vscode' {
    * asking for user input.
    */
   declare export var window: {
-
-    /**
-     * The currently active editor or undefined. The active editor is the one
-     * that currently has focus or, when none has focus, the one that has changed
-     * input most recently.
-     */
-    activeTextEditor: TextEditor;
-
-    /**
-     * The currently visible editors or an empty array.
-     */
-    visibleTextEditors: TextEditor[];
-
-    /**
-     * An [event](#Event) which fires when the [active editor](#window.activeTextEditor)
-     * has changed.
-     */
-    onDidChangeActiveTextEditor: Event<TextEditor>;
-
-    /**
-     * An [event](#Event) which fires when the selection in an editor has changed.
-     */
-    onDidChangeTextEditorSelection: Event<TextEditorSelectionChangeEvent>;
-
-    /**
-     * An [event](#Event) which fires when the options of an editor have changed.
-     */
-    onDidChangeTextEditorOptions: Event<TextEditorOptionsChangeEvent>;
-
-    /**
-     * Show the given document in a text editor. A [column](#ViewColumn) can be provided
-     * to control where the editor is being shown. Might change the [active editor](#window.activeTextEditor).
-     *
-     * @param document A text document to be shown.
-     * @param column A view column in which the editor should be shown. The default is the [one](#ViewColumn.One), other values
-     * are adjusted to be __Min(column, columnCount + 1)__.
-     * @return A promise that resolves to an [editor](#TextEditor).
-     */
-    showTextDocument(document: TextDocument, column?: ViewColumnType): Thenable<TextEditor>;
-
-    /**
-     * Create a TextEditorDecorationType that can be used to add decorations to text editors.
-     *
-     * @param options Rendering options for the decoration type.
-     * @return A new decoration type instance.
-     */
-    createTextEditorDecorationType(options: DecorationRenderOptions): TextEditorDecorationType;
-
-    /**
-     * Show an information message to users. Optionally provide an array of items which will be presented as
-     * clickable buttons.
-     *
-     * @param message The message to show.
-     * @param items A set of items that will be rendered as actions in the message.
-     * @return A thenable that resolves to the selected item or `undefined`. The thenable will be rejected
-     * when the message was dismissed.
-     */
-    showInformationMessage(message: string, ...items: string[]): Thenable<string>;
-
-    /**
-     * Show an information message.
-     *
-     * @see [showInformationMessage](#window.showInformationMessage)
-     *
-     * @param message The message to show.
-     * @param items A set of items that will be rendered as actions in the message.
-     * @return A thenable that resolves to the selected item or `undefined`. The thenable will be rejected
-     * when the message was dismissed.
-     */
-    showInformationMessage<T: MessageItem>(message: string, ...items: T[]): Thenable<T>;
-
-    /**
-     * Show a warning message.
-     *
-     * @see [showInformationMessage](#window.showInformationMessage)
-     *
-     * @param message The message to show.
-     * @param items A set of items that will be rendered as actions in the message.
-     * @return A thenable that resolves to the selected item or `undefined`. The thenable will be rejected
-     * when the message was dismissed.
-     */
-    showWarningMessage(message: string, ...items: string[]): Thenable<string>;
-
-    /**
-     * Show a warning message.
-     *
-     * @see [showInformationMessage](#window.showInformationMessage)
-     *
-     * @param message The message to show.
-     * @param items A set of items that will be rendered as actions in the message.
-     * @return A thenable that resolves to the selected item or `undefined`. The thenable will be rejected
-     * when the message was dismissed.
-     */
-    showWarningMessage<T: MessageItem>(message: string, ...items: T[]): Thenable<T>;
-
-    /**
-     * Show an error message.
-     *
-     * @see [showInformationMessage](#window.showInformationMessage)
-     *
-     * @param message The message to show.
-     * @param items A set of items that will be rendered as actions in the message.
-     * @return A thenable that resolves to the selected item or `undefined`. The thenable will be rejected
-     * when the message was dismissed.
-     */
-    showErrorMessage(message: string, ...items: string[]): Thenable<string>;
-
-    /**
-     * Show an error message.
-     *
-     * @see [showInformationMessage](#window.showInformationMessage)
-     *
-     * @param message The message to show.
-     * @param items A set of items that will be rendered as actions in the message.
-     * @return A thenable that resolves to the selected item or `undefined`. The thenable will be rejected
-     * when the message was dismissed.
-     */
-    showErrorMessage<T: MessageItem>(message: string, ...items: T[]): Thenable<T>;
-
-    /**
-     * Shows a selection list.
-     *
-     * @param items An array of strings, or a promise that resolves to an array of strings.
-     * @param options Configures the behavior of the selection list.
-     * @return A promise that resolves to the selection or undefined.
-     */
-    showQuickPick(items: string[] | Thenable<string[]>, options?: QuickPickOptions): Thenable<string>;
-
-    /**
-     * Shows a selection list.
-     *
-     * @param items An array of items, or a promise that resolves to an array of items.
-     * @param options Configures the behavior of the selection list.
-     * @return A promise that resolves to the selected item or undefined.
-     */
-    showQuickPick<T: QuickPickItem>(items: T[] | Thenable<T[]>, options?: QuickPickOptions): Thenable<T>;
-
-    /**
-     * Opens an input box to ask the user for input.
-     *
-     * The returned value will be undefined if the input box was canceled (e.g. pressing ESC). Otherwise the
-     * returned value will be the string typed by the user or an empty string if the user did not type
-     * anything but dismissed the input box with OK.
-     *
-     * @param options Configures the behavior of the input box.
-     * @return A promise that resolves to a string the user provided or to `undefined` in case of dismissal.
-     */
-    showInputBox(options?: InputBoxOptions): Thenable<string>;
-
-    /**
-     * Create a new [output channel](#OutputChannel) with the given name.
-     *
-     * @param name Human-readable string which will be used to represent the channel in the UI.
-     */
-    createOutputChannel(name: string): OutputChannel;
-
-    /**
-     * Set a message to the status bar. This is a short hand for the more powerful
-     * status bar [items](#window.createStatusBarItem).
-     *
-     * @param text The message to show, support icon subtitution as in status bar [items](#StatusBarItem.text).
-     * @return A disposable which hides the status bar message.
-     */
-    setStatusBarMessage(text: string): Disposable;
-
-    /**
-     * Set a message to the status bar. This is a short hand for the more powerful
-     * status bar [items](#window.createStatusBarItem).
-     *
-     * @param text The message to show, support icon subtitution as in status bar [items](#StatusBarItem.text).
-     * @param hideAfterTimeout Timeout in milliseconds after which the message will be disposed.
-     * @return A disposable which hides the status bar message.
-     */
-    setStatusBarMessage(text: string, hideAfterTimeout: number): Disposable;
-
-    /**
-     * Set a message to the status bar. This is a short hand for the more powerful
-     * status bar [items](#window.createStatusBarItem).
-     *
-     * @param text The message to show, support icon subtitution as in status bar [items](#StatusBarItem.text).
-     * @param hideWhenDone Thenable on which completion (resolve or reject) the message will be disposed.
-     * @return A disposable which hides the status bar message.
-     */
-    setStatusBarMessage(text: string, hideWhenDone: Thenable<any>): Disposable;
-
-    /**
-     * Creates a status bar [item](#StatusBarItem).
-     *
-     * @param alignment The alignment of the item.
-     * @param priority The priority of the item. Higher values mean the item should be shown more to the left.
-     * @return A new status bar item.
-     */
-    createStatusBarItem(alignment?: StatusBarAlignmentType, priority?: number): StatusBarItem;
+   /**
+    * The currently active editor or undefined. The active editor is the one
+    * that currently has focus or, when none has focus, the one that has changed
+    * input most recently.
+    */
+   activeTextEditor: TextEditor,
+   /**
+    * The currently visible editors or an empty array.
+    */
+   visibleTextEditors: TextEditor[],
+   /**
+    * An [event](#Event) which fires when the [active editor](#window.activeTextEditor)
+    * has changed.
+    */
+   onDidChangeActiveTextEditor: Event<TextEditor>,
+   /**
+    * An [event](#Event) which fires when the selection in an editor has changed.
+    */
+   onDidChangeTextEditorSelection: Event<TextEditorSelectionChangeEvent>,
+   /**
+    * An [event](#Event) which fires when the options of an editor have changed.
+    */
+   onDidChangeTextEditorOptions: Event<TextEditorOptionsChangeEvent>,
+   /**
+    * Show the given document in a text editor. A [column](#ViewColumn) can be provided
+    * to control where the editor is being shown. Might change the [active editor](#window.activeTextEditor).
+    *
+    * @param document A text document to be shown.
+    * @param column A view column in which the editor should be shown. The default is the [one](#ViewColumn.One), other values
+    * are adjusted to be __Min(column, columnCount + 1)__.
+    * @return A promise that resolves to an [editor](#TextEditor).
+    */
+   showTextDocument(document: TextDocument, column?: ViewColumnType): Thenable<TextEditor>,
+   /**
+    * Create a TextEditorDecorationType that can be used to add decorations to text editors.
+    *
+    * @param options Rendering options for the decoration type.
+    * @return A new decoration type instance.
+    */
+   createTextEditorDecorationType(options: DecorationRenderOptions): TextEditorDecorationType,
+   /**
+    * Show an information message to users. Optionally provide an array of items which will be presented as
+    * clickable buttons.
+    *
+    * @param message The message to show.
+    * @param items A set of items that will be rendered as actions in the message.
+    * @return A thenable that resolves to the selected item or `undefined`. The thenable will be rejected
+    * when the message was dismissed.
+    */
+   showInformationMessage(message: string, ...items: string[]): Thenable<string>,
+   /**
+    * Show an information message.
+    *
+    * @see [showInformationMessage](#window.showInformationMessage)
+    *
+    * @param message The message to show.
+    * @param items A set of items that will be rendered as actions in the message.
+    * @return A thenable that resolves to the selected item or `undefined`. The thenable will be rejected
+    * when the message was dismissed.
+    */
+   showInformationMessage<T: MessageItem>(message: string, ...items: T[]): Thenable<T>,
+   /**
+    * Show a warning message.
+    *
+    * @see [showInformationMessage](#window.showInformationMessage)
+    *
+    * @param message The message to show.
+    * @param items A set of items that will be rendered as actions in the message.
+    * @return A thenable that resolves to the selected item or `undefined`. The thenable will be rejected
+    * when the message was dismissed.
+    */
+   showWarningMessage(message: string, ...items: string[]): Thenable<string>,
+   /**
+    * Show a warning message.
+    *
+    * @see [showInformationMessage](#window.showInformationMessage)
+    *
+    * @param message The message to show.
+    * @param items A set of items that will be rendered as actions in the message.
+    * @return A thenable that resolves to the selected item or `undefined`. The thenable will be rejected
+    * when the message was dismissed.
+    */
+   showWarningMessage<T: MessageItem>(message: string, ...items: T[]): Thenable<T>,
+   /**
+    * Show an error message.
+    *
+    * @see [showInformationMessage](#window.showInformationMessage)
+    *
+    * @param message The message to show.
+    * @param items A set of items that will be rendered as actions in the message.
+    * @return A thenable that resolves to the selected item or `undefined`. The thenable will be rejected
+    * when the message was dismissed.
+    */
+   showErrorMessage(message: string, ...items: string[]): Thenable<string>,
+   /**
+    * Show an error message.
+    *
+    * @see [showInformationMessage](#window.showInformationMessage)
+    *
+    * @param message The message to show.
+    * @param items A set of items that will be rendered as actions in the message.
+    * @return A thenable that resolves to the selected item or `undefined`. The thenable will be rejected
+    * when the message was dismissed.
+    */
+   showErrorMessage<T: MessageItem>(message: string, ...items: T[]): Thenable<T>,
+   /**
+    * Shows a selection list.
+    *
+    * @param items An array of strings, or a promise that resolves to an array of strings.
+    * @param options Configures the behavior of the selection list.
+    * @return A promise that resolves to the selection or undefined.
+    */
+   showQuickPick(items: string[] | Thenable<string[]>, options?: QuickPickOptions): Thenable<string>,
+   /**
+    * Shows a selection list.
+    *
+    * @param items An array of items, or a promise that resolves to an array of items.
+    * @param options Configures the behavior of the selection list.
+    * @return A promise that resolves to the selected item or undefined.
+    */
+   showQuickPick<T: QuickPickItem>(items: T[] | Thenable<T[]>, options?: QuickPickOptions): Thenable<T>,
+   /**
+    * Opens an input box to ask the user for input.
+    *
+    * The returned value will be undefined if the input box was canceled (e.g. pressing ESC). Otherwise the
+    * returned value will be the string typed by the user or an empty string if the user did not type
+    * anything but dismissed the input box with OK.
+    *
+    * @param options Configures the behavior of the input box.
+    * @return A promise that resolves to a string the user provided or to `undefined` in case of dismissal.
+    */
+   showInputBox(options?: InputBoxOptions): Thenable<string>,
+   /**
+    * Create a new [output channel](#OutputChannel) with the given name.
+    *
+    * @param name Human-readable string which will be used to represent the channel in the UI.
+    */
+   createOutputChannel(name: string): OutputChannel,
+   /**
+    * Set a message to the status bar. This is a short hand for the more powerful
+    * status bar [items](#window.createStatusBarItem).
+    *
+    * @param text The message to show, support icon subtitution as in status bar [items](#StatusBarItem.text).
+    * @return A disposable which hides the status bar message.
+    */
+   setStatusBarMessage(text: string): Disposable,
+   /**
+    * Set a message to the status bar. This is a short hand for the more powerful
+    * status bar [items](#window.createStatusBarItem).
+    *
+    * @param text The message to show, support icon subtitution as in status bar [items](#StatusBarItem.text).
+    * @param hideAfterTimeout Timeout in milliseconds after which the message will be disposed.
+    * @return A disposable which hides the status bar message.
+    */
+   setStatusBarMessage(text: string, hideAfterTimeout: number): Disposable,
+   /**
+    * Set a message to the status bar. This is a short hand for the more powerful
+    * status bar [items](#window.createStatusBarItem).
+    *
+    * @param text The message to show, support icon subtitution as in status bar [items](#StatusBarItem.text).
+    * @param hideWhenDone Thenable on which completion (resolve or reject) the message will be disposed.
+    * @return A disposable which hides the status bar message.
+    */
+   setStatusBarMessage(text: string, hideWhenDone: Thenable<any>): Disposable,
+   /**
+    * Creates a status bar [item](#StatusBarItem).
+    *
+    * @param alignment The alignment of the item.
+    * @param priority The priority of the item. Higher values mean the item should be shown more to the left.
+    * @return A new status bar item.
+    */
+   createStatusBarItem(alignment?: StatusBarAlignmentType, priority?: number): StatusBarItem,
+   ...
   }
 
   /**
@@ -2909,139 +2892,125 @@ declare module 'vscode' {
    * the editor-process so that they should be always used instead of nodejs-equivalents.
    */
   declare export var workspace: {
-
-    /**
-     * Creates a file system watcher.
-     *
-     * A glob pattern that filters the file events must be provided. Optionally, flags to ignore certain
-     * kinds of events can be provided. To stop listening to events the watcher must be disposed.
-     *
-     * @param globPattern A glob pattern that is applied to the names of created, changed, and deleted files.
-     * @param ignoreCreateEvents Ignore when files have been created.
-     * @param ignoreChangeEvents Ignore when files have been changed.
-     * @param ignoreDeleteEvents Ignore when files have been deleted.
-     * @return A new file system watcher instance.
-     */
-    createFileSystemWatcher(globPattern: string, ignoreCreateEvents?: boolean, ignoreChangeEvents?: boolean, ignoreDeleteEvents?: boolean): FileSystemWatcher;
-
-    /**
-     * The folder that is open in VS Code. `undefined` when no folder
-     * has been opened.
-     */
-    rootPath: string;
-
-    /**
-     * Returns a path that is relative to the workspace root.
-     *
-     * When there is no [workspace root](#workspace.rootPath) or when the path
-     * is not a child of that folder, the input is returned.
-     *
-     * @param pathOrUri A path or uri. When a uri is given its [fsPath](#Uri.fsPath) is used.
-     * @return A path relative to the root or the input.
-     */
-    asRelativePath(pathOrUri: string | Uri): string;
-
-    /**
-     * Find files in the workspace.
-     *
-     * @sample `findFiles('**∕*.js', '**∕node_modules∕**', 10)`
-     * @param include A glob pattern that defines the files to search for.
-     * @param exclude A glob pattern that defines files and folders to exclude.
-     * @param maxResults An upper-bound for the result.
-     * @return A thenable that resolves to an array of resource identifiers.
-     */
-    findFiles(include: string, exclude: string, maxResults?: number): Thenable<Uri[]>;
-
-    /**
-     * Save all dirty files.
-     *
-     * @param includeUntitled Also save files that have been created during this session.
-     * @return A thenable that resolves when the files have been saved.
-     */
-    saveAll(includeUntitled?: boolean): Thenable<boolean>;
-
-    /**
-     * Make changes to one or many resources as defined by the given
-     * [workspace edit](#WorkspaceEdit).
-     *
-     * When applying a workspace edit, the editor implements an 'all-or-nothing'-strategy,
-     * that means failure to load one document or make changes to one document will cause
-     * the edit to be rejected.
-     *
-     * @param edit A workspace edit.
-     * @return A thenable that resolves when the edit could be applied.
-     */
-    applyEdit(edit: WorkspaceEdit): Thenable<boolean>;
-
-    /**
-     * All text documents currently known to the system.
-     *
-     * @readonly
-     */
-    textDocuments: TextDocument[];
-
-    /**
-     * Opens the denoted document from disk. Will return early if the
-     * document is already open, otherwise the document is loaded and the
-     * [open document](#workspace.onDidOpenTextDocument)-event fires.
-     * The document to open is denoted by the [uri](#Uri). Two schemes are supported:
-     *
-     * file: A file on disk, will be rejected if the file does not exist or cannot be loaded, e.g. 'file:///Users/frodo/r.ini'.
-     * untitled: A new file that should be saved on disk, e.g. 'untitled:/Users/frodo/new.js'. The language will be derived from the file name.
-     *
-     * Uris with other schemes will make this method return a rejected promise.
-     *
-     * @param uri Identifies the resource to open.
-     * @return A promise that resolves to a [document](#TextDocument).
-     */
-    openTextDocument(uri: Uri): Thenable<TextDocument>;
-
-    /**
-     * A short-hand for `openTextDocument(Uri.file(fileName))`.
-     *
-     * @see [openTextDocument](#openTextDocument)
-     * @param fileName A name of a file on disk.
-     * @return A promise that resolves to a [document](#TextDocument).
-     */
-    openTextDocument(fileName: string): Thenable<TextDocument>;
-
-    /**
-     * An event that is emitted when a [text document](#TextDocument) is opened.
-     */
-    onDidOpenTextDocument: Event<TextDocument>;
-
-    /**
-     * An event that is emitted when a [text document](#TextDocument) is disposed.
-     */
-    onDidCloseTextDocument: Event<TextDocument>;
-
-    /**
-     * An event that is emitted when a [text document](#TextDocument) is changed.
-     */
-    onDidChangeTextDocument: Event<TextDocumentChangeEvent>;
-
-    /**
-     * An event that is emitted when a [text document](#TextDocument) is saved to disk.
-     */
-    onDidSaveTextDocument: Event<TextDocument>;
-
-    /**
-     * Get a configuration object.
-     *
-     * When a section-identifier is provided only that part of the configuration
-     * is returned. Dots in the section-identifier are interpreted as child-access,
-     * like `{ myExt: { setting: { doIt: true }}}` and `getConfiguration('myExt.setting.doIt') === true`.
-     *
-     *
-     * @param section A dot-separated identifier.
-     * @return The full workspace configuration or a subset.
-     */
-    getConfiguration(section?: string): WorkspaceConfiguration;
-
-    /**
-     * An event that is emitted when the [configuration](#WorkspaceConfiguration) changed.
-     */
-    onDidChangeConfiguration: Event<void>;
+   /**
+    * Creates a file system watcher.
+    *
+    * A glob pattern that filters the file events must be provided. Optionally, flags to ignore certain
+    * kinds of events can be provided. To stop listening to events the watcher must be disposed.
+    *
+    * @param globPattern A glob pattern that is applied to the names of created, changed, and deleted files.
+    * @param ignoreCreateEvents Ignore when files have been created.
+    * @param ignoreChangeEvents Ignore when files have been changed.
+    * @param ignoreDeleteEvents Ignore when files have been deleted.
+    * @return A new file system watcher instance.
+    */
+   createFileSystemWatcher(globPattern: string, ignoreCreateEvents?: boolean, ignoreChangeEvents?: boolean, ignoreDeleteEvents?: boolean): FileSystemWatcher,
+   /**
+    * The folder that is open in VS Code. `undefined` when no folder
+    * has been opened.
+    */
+   rootPath: string,
+   /**
+    * Returns a path that is relative to the workspace root.
+    *
+    * When there is no [workspace root](#workspace.rootPath) or when the path
+    * is not a child of that folder, the input is returned.
+    *
+    * @param pathOrUri A path or uri. When a uri is given its [fsPath](#Uri.fsPath) is used.
+    * @return A path relative to the root or the input.
+    */
+   asRelativePath(pathOrUri: string | Uri): string,
+   /**
+    * Find files in the workspace.
+    *
+    * @sample `findFiles('**∕*.js', '**∕node_modules∕**', 10)`
+    * @param include A glob pattern that defines the files to search for.
+    * @param exclude A glob pattern that defines files and folders to exclude.
+    * @param maxResults An upper-bound for the result.
+    * @return A thenable that resolves to an array of resource identifiers.
+    */
+   findFiles(include: string, exclude: string, maxResults?: number): Thenable<Uri[]>,
+   /**
+    * Save all dirty files.
+    *
+    * @param includeUntitled Also save files that have been created during this session.
+    * @return A thenable that resolves when the files have been saved.
+    */
+   saveAll(includeUntitled?: boolean): Thenable<boolean>,
+   /**
+    * Make changes to one or many resources as defined by the given
+    * [workspace edit](#WorkspaceEdit).
+    *
+    * When applying a workspace edit, the editor implements an 'all-or-nothing'-strategy,
+    * that means failure to load one document or make changes to one document will cause
+    * the edit to be rejected.
+    *
+    * @param edit A workspace edit.
+    * @return A thenable that resolves when the edit could be applied.
+    */
+   applyEdit(edit: WorkspaceEdit): Thenable<boolean>,
+   /**
+    * All text documents currently known to the system.
+    *
+    * @readonly
+    */
+   textDocuments: TextDocument[],
+   /**
+    * Opens the denoted document from disk. Will return early if the
+    * document is already open, otherwise the document is loaded and the
+    * [open document](#workspace.onDidOpenTextDocument)-event fires.
+    * The document to open is denoted by the [uri](#Uri). Two schemes are supported:
+    *
+    * file: A file on disk, will be rejected if the file does not exist or cannot be loaded, e.g. 'file:///Users/frodo/r.ini'.
+    * untitled: A new file that should be saved on disk, e.g. 'untitled:/Users/frodo/new.js'. The language will be derived from the file name.
+    *
+    * Uris with other schemes will make this method return a rejected promise.
+    *
+    * @param uri Identifies the resource to open.
+    * @return A promise that resolves to a [document](#TextDocument).
+    */
+   openTextDocument(uri: Uri): Thenable<TextDocument>,
+   /**
+    * A short-hand for `openTextDocument(Uri.file(fileName))`.
+    *
+    * @see [openTextDocument](#openTextDocument)
+    * @param fileName A name of a file on disk.
+    * @return A promise that resolves to a [document](#TextDocument).
+    */
+   openTextDocument(fileName: string): Thenable<TextDocument>,
+   /**
+    * An event that is emitted when a [text document](#TextDocument) is opened.
+    */
+   onDidOpenTextDocument: Event<TextDocument>,
+   /**
+    * An event that is emitted when a [text document](#TextDocument) is disposed.
+    */
+   onDidCloseTextDocument: Event<TextDocument>,
+   /**
+    * An event that is emitted when a [text document](#TextDocument) is changed.
+    */
+   onDidChangeTextDocument: Event<TextDocumentChangeEvent>,
+   /**
+    * An event that is emitted when a [text document](#TextDocument) is saved to disk.
+    */
+   onDidSaveTextDocument: Event<TextDocument>,
+   /**
+    * Get a configuration object.
+    *
+    * When a section-identifier is provided only that part of the configuration
+    * is returned. Dots in the section-identifier are interpreted as child-access,
+    * like `{ myExt: { setting: { doIt: true }}}` and `getConfiguration('myExt.setting.doIt') === true`.
+    *
+    *
+    * @param section A dot-separated identifier.
+    * @return The full workspace configuration or a subset.
+    */
+   getConfiguration(section?: string): WorkspaceConfiguration,
+   /**
+    * An event that is emitted when the [configuration](#WorkspaceConfiguration) changed.
+    */
+   onDidChangeConfiguration: Event<void>,
+   ...
   }
 
   /**
@@ -3073,242 +3042,225 @@ declare module 'vscode' {
    * score is used for determining the order in which providers are asked to participate.
    */
   declare export var languages: {
-
-    /**
-     * Return the identifiers of all known languages.
-     * @return Promise resolving to an array of identifier strings.
-     */
-    getLanguages(): Thenable<string[]>;
-
-    /**
-     * Compute the match between a document [selector](#DocumentSelector) and a document. Values
-     * greater than zero mean the selector matches the document. The more individual matches a selector
-     * and a document have, the higher the score is. These are the abstract rules given a `selector`:
-     *
-     * ```
-     * (1) When selector is an array, return the maximum individual result.
-     * (2) When selector is a string match that against the [languageId](#TextDocument.languageId).
-     *   (2.1) When both are equal score is `10`,
-     *   (2.2) When the selector is `*` score is `5`,
-     *   (2.3) Else score is `0`.
-     * (3) When selector is a [filter](#DocumentFilter) every property must score higher `0`. Iff the score is the sum of the following:
-     *  (3.1) When [language](#DocumentFilter.language) is set apply rules from #2, when `0` the total score is `0`.
-     *  (3.2) When [scheme](#Document.scheme) is set and equals the [uri](#TextDocument.uri)-scheme add `10` to the score, else the total score is `0`.
-     *  (3.3) When [pattern](#Document.pattern) is set
-     *     (3.3.1) pattern eqauls the [uri](#TextDocument.uri)-fsPath add `10` to the score,
-     *    (3.3.1) if the pattern matches as glob-pattern add `5` to the score,
-     *    (3.3.1) the total score is `0`
-     * ```
-     *
-     * @param selector A document selector.
-     * @param document A text document.
-     * @return A number `>0` when the selector matches and `0` when the selector does not match.
-     */
-    match(selector: DocumentSelector, document: TextDocument): number;
-
-    /**
-     * Create a diagnostics collection.
-     *
-     * @param name The [name](#DiagnosticCollection.name) of the collection.
-     * @return A new diagnostic collection.
-     */
-    createDiagnosticCollection(name?: string): DiagnosticCollection;
-
-    /**
-     * Register a completion provider.
-     *
-     * Multiple providers can be registered for a language. In that case providers are sorted
-     * by their [score](#languages.match) and groups of equal score are sequentially asked for
-     * completion items. The process stops when one or many providers of a group return a
-     * result. A failing provider (rejected promise or exception) will not fail the whole
-     * operation.
-     *
-     * @param selector A selector that defines the documents this provider is applicable to.
-     * @param provider A completion provider.
-     * @param triggerCharacters Trigger completion when the user types one of the characters, like `.` or `:`.
-     * @return A [disposable](#Disposable) that unregisters this provider when being disposed.
-     */
-    registerCompletionItemProvider(selector: DocumentSelector, provider: CompletionItemProvider, ...triggerCharacters: string[]): Disposable;
-
-    /**
-     * Register a code action provider.
-     *
-     * Multiple providers can be registered for a language. In that case providers are asked in
-     * parallel and the results are merged. A failing provider (rejected promise or exception) will
-     * not cause a failure of the whole operation.
-     *
-     * @param selector A selector that defines the documents this provider is applicable to.
-     * @param provider A code action provider.
-     * @return A [disposable](#Disposable) that unregisters this provider when being disposed.
-     */
-    registerCodeActionsProvider(selector: DocumentSelector, provider: CodeActionProvider): Disposable;
-
-    /**
-     * Register a code lens provider.
-     *
-     * Multiple providers can be registered for a language. In that case providers are asked in
-     * parallel and the results are merged. A failing provider (rejected promise or exception) will
-     * not cause a failure of the whole operation.
-     *
-     * @param selector A selector that defines the documents this provider is applicable to.
-     * @param provider A code lens provider.
-     * @return A [disposable](#Disposable) that unregisters this provider when being disposed.
-     */
-    registerCodeLensProvider(selector: DocumentSelector, provider: CodeLensProvider): Disposable;
-
-    /**
-     * Register a definition provider.
-     *
-     * Multiple providers can be registered for a language. In that case providers are asked in
-     * parallel and the results are merged. A failing provider (rejected promise or exception) will
-     * not cause a failure of the whole operation.
-     *
-     * @param selector A selector that defines the documents this provider is applicable to.
-     * @param provider A definition provider.
-     * @return A [disposable](#Disposable) that unregisters this provider when being disposed.
-     */
-    registerDefinitionProvider(selector: DocumentSelector, provider: DefinitionProvider): Disposable;
-
-    /**
-     * Register a hover provider.
-     *
-     * Multiple providers can be registered for a language. In that case providers are asked in
-     * parallel and the results are merged. A failing provider (rejected promise or exception) will
-     * not cause a failure of the whole operation.
-     *
-     * @param selector A selector that defines the documents this provider is applicable to.
-     * @param provider A hover provider.
-     * @return A [disposable](#Disposable) that unregisters this provider when being disposed.
-     */
-    registerHoverProvider(selector: DocumentSelector, provider: HoverProvider): Disposable;
-
-    /**
-     * Register a document highlight provider.
-     *
-     * Multiple providers can be registered for a language. In that case providers are sorted
-     * by their [score](#languages.match) and groups sequentially asked for document highlights.
-     * The process stops when a provider returns a `non-falsy` or `non-failure` result.
-     *
-     * @param selector A selector that defines the documents this provider is applicable to.
-     * @param provider A document highlight provider.
-     * @return A [disposable](#Disposable) that unregisters this provider when being disposed.
-     */
-    registerDocumentHighlightProvider(selector: DocumentSelector, provider: DocumentHighlightProvider): Disposable;
-
-    /**
-     * Register a document symbol provider.
-     *
-     * Multiple providers can be registered for a language. In that case providers are asked in
-     * parallel and the results are merged. A failing provider (rejected promise or exception) will
-     * not cause a failure of the whole operation.
-     *
-     * @param selector A selector that defines the documents this provider is applicable to.
-     * @param provider A document symbol provider.
-     * @return A [disposable](#Disposable) that unregisters this provider when being disposed.
-     */
-    registerDocumentSymbolProvider(selector: DocumentSelector, provider: DocumentSymbolProvider): Disposable;
-
-    /**
-     * Register a workspace symbol provider.
-     *
-     * Multiple providers can be registered for a language. In that case providers are asked in
-     * parallel and the results are merged. A failing provider (rejected promise or exception) will
-     * not cause a failure of the whole operation.
-     *
-     * @param provider A workspace symbol provider.
-     * @return A [disposable](#Disposable) that unregisters this provider when being disposed.
-     */
-    registerWorkspaceSymbolProvider(provider: WorkspaceSymbolProvider): Disposable;
-
-    /**
-     * Register a reference provider.
-     *
-     * Multiple providers can be registered for a language. In that case providers are asked in
-     * parallel and the results are merged. A failing provider (rejected promise or exception) will
-     * not cause a failure of the whole operation.
-     *
-     * @param selector A selector that defines the documents this provider is applicable to.
-     * @param provider A reference provider.
-     * @return A [disposable](#Disposable) that unregisters this provider when being disposed.
-     */
-    registerReferenceProvider(selector: DocumentSelector, provider: ReferenceProvider): Disposable;
-
-    /**
-     * Register a reference provider.
-     *
-     * Multiple providers can be registered for a language. In that case providers are sorted
-     * by their [score](#languages.match) and the result of best-matching provider is used. Failure
-     * of the selected provider will cause a failure of the whole operation.
-     *
-     * @param selector A selector that defines the documents this provider is applicable to.
-     * @param provider A rename provider.
-     * @return A [disposable](#Disposable) that unregisters this provider when being disposed.
-     */
-    registerRenameProvider(selector: DocumentSelector, provider: RenameProvider): Disposable;
-
-    /**
-     * Register a formatting provider for a document.
-     *
-     * Multiple providers can be registered for a language. In that case providers are sorted
-     * by their [score](#languages.match) and the result of best-matching provider is used. Failure
-     * of the selected provider will cause a failure of the whole operation.
-     *
-     * @param selector A selector that defines the documents this provider is applicable to.
-     * @param provider A document formatting edit provider.
-     * @return A [disposable](#Disposable) that unregisters this provider when being disposed.
-     */
-    registerDocumentFormattingEditProvider(selector: DocumentSelector, provider: DocumentFormattingEditProvider): Disposable;
-
-    /**
-     * Register a formatting provider for a document range.
-     *
-     * Multiple providers can be registered for a language. In that case providers are sorted
-     * by their [score](#languages.match) and the result of best-matching provider is used. Failure
-     * of the selected provider will cause a failure of the whole operation.
-     *
-     * @param selector A selector that defines the documents this provider is applicable to.
-     * @param provider A document range formatting edit provider.
-     * @return A [disposable](#Disposable) that unregisters this provider when being disposed.
-     */
-    registerDocumentRangeFormattingEditProvider(selector: DocumentSelector, provider: DocumentRangeFormattingEditProvider): Disposable;
-
-    /**
-     * Register a formatting provider that works on type.
-     *
-     * Multiple providers can be registered for a language. In that case providers are sorted
-     * by their [score](#languages.match) and the result of best-matching provider is used. Failure
-     * of the selected provider will cause a failure of the whole operation.
-     *
-     * @param selector A selector that defines the documents this provider is applicable to.
-     * @param provider An on type formatting edit provider.
-     * @param firstTriggerCharacter A character on which formatting should be triggered, like `}`.
-     * @param moreTriggerCharacter More trigger characters.
-     * @return A [disposable](#Disposable) that unregisters this provider when being disposed.
-     */
-    registerOnTypeFormattingEditProvider(selector: DocumentSelector, provider: OnTypeFormattingEditProvider, firstTriggerCharacter: string, ...moreTriggerCharacter: string[]): Disposable;
-
-    /**
-     * Register a signature help provider.
-     *
-     * Multiple providers can be registered for a language. In that case providers are sorted
-     * by their [score](#languages.match) and the result of best-matching provider is used. Failure
-     * of the selected provider will cause a failure of the whole operation.
-     *
-     * @param selector A selector that defines the documents this provider is applicable to.
-     * @param provider A signature help provider.
-     * @param triggerCharacters Trigger signature help when the user types one of the characters, like `,` or `(`.
-     * @return A [disposable](#Disposable) that unregisters this provider when being disposed.
-     */
-    registerSignatureHelpProvider(selector: DocumentSelector, provider: SignatureHelpProvider, ...triggerCharacters: string[]): Disposable;
-
-    /**
-     * Set a [language configuration](#LanguageConfiguration) for a language.
-     *
-     * @param language A language identifier like `typescript`.
-     * @param configuration Language configuration.
-     * @return A [disposable](#Disposable) that unsets this configuration.
-     */
-    setLanguageConfiguration(language: string, configuration: LanguageConfiguration): Disposable;
+   /**
+    * Return the identifiers of all known languages.
+    * @return Promise resolving to an array of identifier strings.
+    */
+   getLanguages(): Thenable<string[]>,
+   /**
+    * Compute the match between a document [selector](#DocumentSelector) and a document. Values
+    * greater than zero mean the selector matches the document. The more individual matches a selector
+    * and a document have, the higher the score is. These are the abstract rules given a `selector`:
+    *
+    * ```
+    * (1) When selector is an array, return the maximum individual result.
+    * (2) When selector is a string match that against the [languageId](#TextDocument.languageId).
+    *   (2.1) When both are equal score is `10`,
+    *   (2.2) When the selector is `*` score is `5`,
+    *   (2.3) Else score is `0`.
+    * (3) When selector is a [filter](#DocumentFilter) every property must score higher `0`. Iff the score is the sum of the following:
+    *  (3.1) When [language](#DocumentFilter.language) is set apply rules from #2, when `0` the total score is `0`.
+    *  (3.2) When [scheme](#Document.scheme) is set and equals the [uri](#TextDocument.uri)-scheme add `10` to the score, else the total score is `0`.
+    *  (3.3) When [pattern](#Document.pattern) is set
+    *     (3.3.1) pattern eqauls the [uri](#TextDocument.uri)-fsPath add `10` to the score,
+    *    (3.3.1) if the pattern matches as glob-pattern add `5` to the score,
+    *    (3.3.1) the total score is `0`
+    * ```
+    *
+    * @param selector A document selector.
+    * @param document A text document.
+    * @return A number `>0` when the selector matches and `0` when the selector does not match.
+    */
+   match(selector: DocumentSelector, document: TextDocument): number,
+   /**
+    * Create a diagnostics collection.
+    *
+    * @param name The [name](#DiagnosticCollection.name) of the collection.
+    * @return A new diagnostic collection.
+    */
+   createDiagnosticCollection(name?: string): DiagnosticCollection,
+   /**
+    * Register a completion provider.
+    *
+    * Multiple providers can be registered for a language. In that case providers are sorted
+    * by their [score](#languages.match) and groups of equal score are sequentially asked for
+    * completion items. The process stops when one or many providers of a group return a
+    * result. A failing provider (rejected promise or exception) will not fail the whole
+    * operation.
+    *
+    * @param selector A selector that defines the documents this provider is applicable to.
+    * @param provider A completion provider.
+    * @param triggerCharacters Trigger completion when the user types one of the characters, like `.` or `:`.
+    * @return A [disposable](#Disposable) that unregisters this provider when being disposed.
+    */
+   registerCompletionItemProvider(selector: DocumentSelector, provider: CompletionItemProvider, ...triggerCharacters: string[]): Disposable,
+   /**
+    * Register a code action provider.
+    *
+    * Multiple providers can be registered for a language. In that case providers are asked in
+    * parallel and the results are merged. A failing provider (rejected promise or exception) will
+    * not cause a failure of the whole operation.
+    *
+    * @param selector A selector that defines the documents this provider is applicable to.
+    * @param provider A code action provider.
+    * @return A [disposable](#Disposable) that unregisters this provider when being disposed.
+    */
+   registerCodeActionsProvider(selector: DocumentSelector, provider: CodeActionProvider): Disposable,
+   /**
+    * Register a code lens provider.
+    *
+    * Multiple providers can be registered for a language. In that case providers are asked in
+    * parallel and the results are merged. A failing provider (rejected promise or exception) will
+    * not cause a failure of the whole operation.
+    *
+    * @param selector A selector that defines the documents this provider is applicable to.
+    * @param provider A code lens provider.
+    * @return A [disposable](#Disposable) that unregisters this provider when being disposed.
+    */
+   registerCodeLensProvider(selector: DocumentSelector, provider: CodeLensProvider): Disposable,
+   /**
+    * Register a definition provider.
+    *
+    * Multiple providers can be registered for a language. In that case providers are asked in
+    * parallel and the results are merged. A failing provider (rejected promise or exception) will
+    * not cause a failure of the whole operation.
+    *
+    * @param selector A selector that defines the documents this provider is applicable to.
+    * @param provider A definition provider.
+    * @return A [disposable](#Disposable) that unregisters this provider when being disposed.
+    */
+   registerDefinitionProvider(selector: DocumentSelector, provider: DefinitionProvider): Disposable,
+   /**
+    * Register a hover provider.
+    *
+    * Multiple providers can be registered for a language. In that case providers are asked in
+    * parallel and the results are merged. A failing provider (rejected promise or exception) will
+    * not cause a failure of the whole operation.
+    *
+    * @param selector A selector that defines the documents this provider is applicable to.
+    * @param provider A hover provider.
+    * @return A [disposable](#Disposable) that unregisters this provider when being disposed.
+    */
+   registerHoverProvider(selector: DocumentSelector, provider: HoverProvider): Disposable,
+   /**
+    * Register a document highlight provider.
+    *
+    * Multiple providers can be registered for a language. In that case providers are sorted
+    * by their [score](#languages.match) and groups sequentially asked for document highlights.
+    * The process stops when a provider returns a `non-falsy` or `non-failure` result.
+    *
+    * @param selector A selector that defines the documents this provider is applicable to.
+    * @param provider A document highlight provider.
+    * @return A [disposable](#Disposable) that unregisters this provider when being disposed.
+    */
+   registerDocumentHighlightProvider(selector: DocumentSelector, provider: DocumentHighlightProvider): Disposable,
+   /**
+    * Register a document symbol provider.
+    *
+    * Multiple providers can be registered for a language. In that case providers are asked in
+    * parallel and the results are merged. A failing provider (rejected promise or exception) will
+    * not cause a failure of the whole operation.
+    *
+    * @param selector A selector that defines the documents this provider is applicable to.
+    * @param provider A document symbol provider.
+    * @return A [disposable](#Disposable) that unregisters this provider when being disposed.
+    */
+   registerDocumentSymbolProvider(selector: DocumentSelector, provider: DocumentSymbolProvider): Disposable,
+   /**
+    * Register a workspace symbol provider.
+    *
+    * Multiple providers can be registered for a language. In that case providers are asked in
+    * parallel and the results are merged. A failing provider (rejected promise or exception) will
+    * not cause a failure of the whole operation.
+    *
+    * @param provider A workspace symbol provider.
+    * @return A [disposable](#Disposable) that unregisters this provider when being disposed.
+    */
+   registerWorkspaceSymbolProvider(provider: WorkspaceSymbolProvider): Disposable,
+   /**
+    * Register a reference provider.
+    *
+    * Multiple providers can be registered for a language. In that case providers are asked in
+    * parallel and the results are merged. A failing provider (rejected promise or exception) will
+    * not cause a failure of the whole operation.
+    *
+    * @param selector A selector that defines the documents this provider is applicable to.
+    * @param provider A reference provider.
+    * @return A [disposable](#Disposable) that unregisters this provider when being disposed.
+    */
+   registerReferenceProvider(selector: DocumentSelector, provider: ReferenceProvider): Disposable,
+   /**
+    * Register a reference provider.
+    *
+    * Multiple providers can be registered for a language. In that case providers are sorted
+    * by their [score](#languages.match) and the result of best-matching provider is used. Failure
+    * of the selected provider will cause a failure of the whole operation.
+    *
+    * @param selector A selector that defines the documents this provider is applicable to.
+    * @param provider A rename provider.
+    * @return A [disposable](#Disposable) that unregisters this provider when being disposed.
+    */
+   registerRenameProvider(selector: DocumentSelector, provider: RenameProvider): Disposable,
+   /**
+    * Register a formatting provider for a document.
+    *
+    * Multiple providers can be registered for a language. In that case providers are sorted
+    * by their [score](#languages.match) and the result of best-matching provider is used. Failure
+    * of the selected provider will cause a failure of the whole operation.
+    *
+    * @param selector A selector that defines the documents this provider is applicable to.
+    * @param provider A document formatting edit provider.
+    * @return A [disposable](#Disposable) that unregisters this provider when being disposed.
+    */
+   registerDocumentFormattingEditProvider(selector: DocumentSelector, provider: DocumentFormattingEditProvider): Disposable,
+   /**
+    * Register a formatting provider for a document range.
+    *
+    * Multiple providers can be registered for a language. In that case providers are sorted
+    * by their [score](#languages.match) and the result of best-matching provider is used. Failure
+    * of the selected provider will cause a failure of the whole operation.
+    *
+    * @param selector A selector that defines the documents this provider is applicable to.
+    * @param provider A document range formatting edit provider.
+    * @return A [disposable](#Disposable) that unregisters this provider when being disposed.
+    */
+   registerDocumentRangeFormattingEditProvider(selector: DocumentSelector, provider: DocumentRangeFormattingEditProvider): Disposable,
+   /**
+    * Register a formatting provider that works on type.
+    *
+    * Multiple providers can be registered for a language. In that case providers are sorted
+    * by their [score](#languages.match) and the result of best-matching provider is used. Failure
+    * of the selected provider will cause a failure of the whole operation.
+    *
+    * @param selector A selector that defines the documents this provider is applicable to.
+    * @param provider An on type formatting edit provider.
+    * @param firstTriggerCharacter A character on which formatting should be triggered, like `}`.
+    * @param moreTriggerCharacter More trigger characters.
+    * @return A [disposable](#Disposable) that unregisters this provider when being disposed.
+    */
+   registerOnTypeFormattingEditProvider(selector: DocumentSelector, provider: OnTypeFormattingEditProvider, firstTriggerCharacter: string, ...moreTriggerCharacter: string[]): Disposable,
+   /**
+    * Register a signature help provider.
+    *
+    * Multiple providers can be registered for a language. In that case providers are sorted
+    * by their [score](#languages.match) and the result of best-matching provider is used. Failure
+    * of the selected provider will cause a failure of the whole operation.
+    *
+    * @param selector A selector that defines the documents this provider is applicable to.
+    * @param provider A signature help provider.
+    * @param triggerCharacters Trigger signature help when the user types one of the characters, like `,` or `(`.
+    * @return A [disposable](#Disposable) that unregisters this provider when being disposed.
+    */
+   registerSignatureHelpProvider(selector: DocumentSelector, provider: SignatureHelpProvider, ...triggerCharacters: string[]): Disposable,
+   /**
+    * Set a [language configuration](#LanguageConfiguration) for a language.
+    *
+    * @param language A language identifier like `typescript`.
+    * @param configuration Language configuration.
+    * @return A [disposable](#Disposable) that unsets this configuration.
+    */
+   setLanguageConfiguration(language: string, configuration: LanguageConfiguration): Disposable,
+   ...
   }
 
   /**
@@ -3346,27 +3298,25 @@ declare module 'vscode' {
    * ```
    */
   declare export var extensions: {
-
-    /**
-     * Get an extension by its full identifier in the form of: `publisher.name`.
-     *
-     * @param extensionId An extension identifier.
-     * @return An extension or `undefined`.
-     */
-    getExtension(extensionId: string): Extension<any>;
-
-    /**
-     * Get an extension its full identifier in the form of: `publisher.name`.
-     *
-     * @param extensionId An extension identifier.
-     * @return An extension or `undefined`.
-     */
-    getExtension<T>(extensionId: string): Extension<T>;
-
-    /**
-     * All extensions currently known to the system.
-     */
-    all: Extension<any>[];
+   /**
+    * Get an extension by its full identifier in the form of: `publisher.name`.
+    *
+    * @param extensionId An extension identifier.
+    * @return An extension or `undefined`.
+    */
+   getExtension(extensionId: string): Extension<any>,
+   /**
+    * Get an extension its full identifier in the form of: `publisher.name`.
+    *
+    * @param extensionId An extension identifier.
+    * @return An extension or `undefined`.
+    */
+   getExtension<T>(extensionId: string): Extension<T>,
+   /**
+    * All extensions currently known to the system.
+    */
+   all: Extension<any>[],
+   ...
   }
 }
 

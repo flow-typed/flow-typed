@@ -5,7 +5,8 @@ declare module "react-i18next" {
   declare type TranslatorProps = {
     t: TFunction,
     i18nLoadedAt: Date,
-    i18n: Object
+    i18n: Object,
+    ...
   };
 
   declare type Translator<OP, P> = (
@@ -19,7 +20,8 @@ declare module "react-i18next" {
     bindStore: false | string,
     withRef: boolean,
     translateFuncName: string,
-    i18n: Object
+    i18n: Object,
+    ...
   }>;
 
   declare function translate<OP, P>(
@@ -30,9 +32,14 @@ declare module "react-i18next" {
   declare type I18nProps = {
     i18n?: Object,
     ns?: string | Array<string>,
-    children: (t: TFunction, { i18n: Object, t: TFunction }) => React$Node,
+    children: (t: TFunction, {
+      i18n: Object,
+      t: TFunction,
+      ...
+    }) => React$Node,
     initialI18nStore?: Object,
-    initialLanguage?: string
+    initialLanguage?: string,
+    ...
   };
   declare var I18n: React$ComponentType<I18nProps>;
 
@@ -45,7 +52,8 @@ declare module "react-i18next" {
     parent?: string,
     style?: Object,
     t?: TFunction,
-    useDangerouslySetInnerHTML?: boolean
+    useDangerouslySetInnerHTML?: boolean,
+    ...
   };
   declare var Interpolate: React$ComponentType<InterpolateProps>;
 
@@ -54,22 +62,29 @@ declare module "react-i18next" {
     parent?: string,
     i18n?: Object,
     i18nKey?: string,
-    t?: TFunction
+    t?: TFunction,
+    ...
   };
   declare var Trans: React$ComponentType<TransProps>;
 
-  declare type ProviderProps = { i18n: Object, children: React$Element<*> };
+  declare type ProviderProps = {
+    i18n: Object,
+    children: React$Element<*>,
+    ...
+  };
   declare var I18nextProvider: React$ComponentType<ProviderProps>;
 
   declare type NamespacesProps = {
     components: Array<React$ComponentType<*>>,
-    i18n: { loadNamespaces: Function }
+    i18n: { loadNamespaces: Function, ... },
+    ...
   };
   declare function loadNamespaces(props: NamespacesProps): Promise<void>;
 
   declare var reactI18nextModule: {
     type: "3rdParty",
-    init: (instance: Object) => void
+    init: (instance: Object) => void,
+    ...
   };
 
   declare var defaultOptions: {
@@ -78,7 +93,8 @@ declare module "react-i18next" {
     bindI18n: "languageChanged loaded",
     bindStore: "added removed",
     translateFuncName: "t",
-    nsMode: "default"
+    nsMode: "default",
+    ...
   };
 
   declare function setDefaults(options: TranslateOptions): void;

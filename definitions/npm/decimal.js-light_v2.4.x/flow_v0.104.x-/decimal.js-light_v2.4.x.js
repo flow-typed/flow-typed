@@ -2,11 +2,12 @@ declare module 'decimal.js-light' {
   declare type Numeric = string | number | Decimal;
 
   declare type DecimalConfig = $Shape<{
-    precision: number;
-    rounding: number;
-    toExpNeg: number;
-    toExpPos: number;
-    LN10: Numeric;
+   precision: number,
+   rounding: number,
+   toExpNeg: number,
+   toExpPos: number,
+   LN10: Numeric,
+   ...
   }>;
 
   declare class Decimal {

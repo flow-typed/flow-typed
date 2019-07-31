@@ -7,7 +7,8 @@ declare module "chalk" {
     None: 0,
     Basic: 1,
     Ansi256: 2,
-    TrueColor: 3
+    TrueColor: 3,
+    ...
   }>;
 
   declare type ChalkOptions = {|

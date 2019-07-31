@@ -10,7 +10,8 @@ declare module "notifyjs" {
     notifyShow?: Function,
     requireInteraction?: boolean,
     tag?: string,
-    timeout?: number
+    timeout?: number,
+    ...
   };
 
   declare class NotifyJS {

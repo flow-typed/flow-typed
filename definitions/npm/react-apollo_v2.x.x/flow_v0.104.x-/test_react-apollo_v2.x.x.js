@@ -40,12 +40,14 @@ type Hero = {
   name: string,
   id: string,
   appearsIn: string[],
-  friends: Hero[]
+  friends: Hero[],
+  ...
 };
 
 type IQuery = {
   foo: string,
-  bar: string
+  bar: string,
+  ...
 };
 
 const withData: OperationComponent<IQuery> = graphql(query);
@@ -67,7 +69,7 @@ it("works with functional component", () => {
 });
 
 it("works with class component, this requires a stricter definition", () => {
-  type BasicComponentProps = ChildProps<{}, IQuery>;
+  type BasicComponentProps = ChildProps<{...}, IQuery>;
   class BasicComponent extends React.Component<BasicComponentProps> {
     render() {
       const { foo, bar } = this.props.data;
@@ -86,7 +88,9 @@ it("works with class component with it's own variable", () => {
   type CmplxOwnProps = {| faz: string |};
   type CmplxComponentProps = {
     data: GraphqlQueryControls<> & IQuery,
-    mutate: any // The mutation is actually required or we get a error at the withData
+    // The mutation is actually required or we get a error at the withData
+    mutate: any,
+    ...
   } & CmplxOwnProps;
   class CmplxComponent extends React.Component<CmplxComponentProps> {
     render() {
@@ -117,10 +121,8 @@ it("works with class component with it's own variable", () => {
 it("works with class component with it's own variable Props specified at the end", () => {
   // Same as above but with the Props specified at the end
   // since we don't rely on the ChildProps<P, R> we don't need the mutate: any
-  type Cmplx2OwnProps = { faz: string }; // We can have exact own props as we don't rely on the TMergedProps
-  type Cmplx2ComponentProps = {
-    data: IQuery & GraphqlQueryControls<>
-  } & Cmplx2OwnProps;
+  type Cmplx2OwnProps = { faz: string, ... }; // We can have exact own props as we don't rely on the TMergedProps
+  type Cmplx2ComponentProps = { data: IQuery & GraphqlQueryControls<>, ... } & Cmplx2OwnProps;
   class Cmplx2Component extends React.Component<Cmplx2ComponentProps> {
     render() {
       const {
@@ -195,21 +197,13 @@ const HERO_SUBSCRIPTION = gql`
 `;
 
 it("works with Variables specified", () => {
-  type Response = {
-    hero: Hero
-  };
+  type Response = { hero: Hero, ... };
 
-  type InputProps = {
-    episode: string
-  };
+  type InputProps = { episode: string, ... };
 
-  type Variables = {
-    episode: string
-  };
+  type Variables = { episode: string, ... };
 
-  type Props = GraphqlData<Response, Variables> & {
-    someProp: string
-  };
+  type Props = GraphqlData<Response, Variables> & { someProp: string, ... };
 
   const withCharacter: OperationComponent<
     Response,
@@ -261,16 +255,21 @@ it("works with withApollo HOC", () => {
   });
 
   // withApollo passes `client` property so that it is no longer required
-  (Manual: React.ComponentType<{}>);
+  (Manual: React.ComponentType<{...}>);
 });
 
 type HeroQueryVariables = {
   episode: string,
-  offset?: ?number
+  offset?: ?number,
+  ...
 };
 class HeroQueryComp extends Query<
-  { hero: ?Hero },
-  { episode: string, offset?: ?number }
+  { hero: ?Hero, ... },
+  {
+    episode: string,
+    offset?: ?number,
+    ...
+  }
 > {}
 
 describe("<Query />", () => {
@@ -451,11 +450,9 @@ describe("<Query />", () => {
   });
 });
 
-type HeroSubcriptionVariables = {
-  heroId: string
-};
+type HeroSubcriptionVariables = { heroId: string, ... };
 class HeroSubscriptionComp extends Subscription<
-  { hero: ?Hero },
+  { hero: ?Hero, ... },
   HeroSubcriptionVariables
 > {}
 
@@ -522,7 +519,8 @@ describe("<Subscription />", () => {
           subscriptionData
         }: {
           client: ApolloClient<any>,
-          subscriptionData: SubscriptionResult<{ hero: ?Hero }>
+          subscriptionData: SubscriptionResult<{ hero: ?Hero, ... }>,
+          ...
         }) => {
           const hero: ?Hero =
             subscriptionData.data && subscriptionData.data.hero
@@ -534,11 +532,13 @@ describe("<Subscription />", () => {
   });
 });
 
-type UpdateHeroMutationVariables = {
-  input: { id: string, name: string }
-};
+type UpdateHeroMutationVariables = { input: {
+  id: string,
+  name: string,
+  ...
+}, ... };
 class UpdateHeroMutationComp extends Mutation<
-  { updateHero?: ?{ hero: ?Hero } },
+  { updateHero?: ?{ hero: ?Hero, ... }, ... },
   UpdateHeroMutationVariables
 > {}
 

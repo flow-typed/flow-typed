@@ -5,7 +5,7 @@ declare module "history" {
     | string
     | boolean
     | number
-    | { [key: string]: JSONLike }
+    | { [key: string]: JSONLike, ... }
     | Array<JSONLike>;
   declare type Action = "PUSH" | "REPLACE" | "POP";
   declare type CreateHistory<History> = (options: ?HistoryOptions) => History;
@@ -32,7 +32,8 @@ declare module "history" {
       location: LocationDescriptor,
       action: ?Action,
       key: ?LocationKey
-    ): Location
+    ): Location,
+    ...
   };
   declare type HistoryListenerRef = () => void;
   declare type HistoryOptions = Object;
@@ -43,13 +44,15 @@ declare module "history" {
     query: Query,
     state: LocationState,
     action: Action,
-    key: LocationKey
+    key: LocationKey,
+    ...
   };
   declare type LocationDescriptorObject = {
     pathname: Pathname,
     search: Search,
     query: Query,
-    state: LocationState
+    state: LocationState,
+    ...
   };
   declare type LocationDescriptor = LocationDescriptorObject | Path;
   declare type LocationKey = string;
@@ -71,7 +74,8 @@ declare module "history" {
     History & {
       index: number,
       entries: any[],
-      canGo(n: number): boolean
+      canGo(n: number): boolean,
+      ...
     }
   >;
 
@@ -80,9 +84,7 @@ declare module "history" {
 
   // before unload enhancer
   declare type BeforeUnloadHook = () => ?string;
-  declare type BeforeUnloadExt = {
-    listenBeforeUnload(hook: BeforeUnloadHook): HistoryListenerRef
-  };
+  declare type BeforeUnloadExt = { listenBeforeUnload(hook: BeforeUnloadHook): HistoryListenerRef, ... };
   declare var useBeforeUnload: CreateHistoryEnhancer<History & BeforeUnloadExt>;
 
   // queries enhancer

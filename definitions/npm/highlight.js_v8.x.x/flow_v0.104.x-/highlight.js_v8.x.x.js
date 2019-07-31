@@ -5,7 +5,8 @@ type HighlightJs$HighlightResult = {
   relevance: number,
   value: string,
   top?: HighlightJs$Continuation,
-  second_best?: HighlightJs$HighlightResult
+  second_best?: HighlightJs$HighlightResult,
+  ...
 };
 
 type HighlightJs$LanguageContains = {
@@ -15,7 +16,8 @@ type HighlightJs$LanguageContains = {
   contains?: Array<HighlightJs$LanguageContains>,
   end?: string | RegExp,
   keywords?: string,
-  relevance?: number
+  relevance?: number,
+  ...
 };
 
 type HighlightJs$Language = {
@@ -23,9 +25,11 @@ type HighlightJs$Language = {
   keywords: {
     keyword: string,
     literal: string,
-    built_in: string
+    built_in: string,
+    ...
   },
-  contains: Array<HighlightJs$LanguageContains>
+  contains: Array<HighlightJs$LanguageContains>,
+  ...
 };
 
 declare module "highlight.js" {
@@ -46,7 +50,8 @@ declare module "highlight.js" {
       tabReplace?: string,
       useBR?: boolean,
       classPrefix?: string,
-      languages?: Array<string>
+      languages?: Array<string>,
+      ...
     }): void;
     initHighlighting(): void;
     initHighlightingOnLoad(): void;

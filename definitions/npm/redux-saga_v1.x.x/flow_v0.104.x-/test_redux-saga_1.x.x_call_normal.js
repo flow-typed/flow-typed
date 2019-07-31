@@ -136,7 +136,7 @@ describe("call() effect with normal function and without context", () => {
 
     it("must raises an error when lead context to Object", () => {
       // $ExpectError
-      (c1.payload.context: {});
+      (c1.payload.context: {...});
     });
   });
 });

@@ -66,11 +66,7 @@ declare module 'fbt' {
     locale: string,
   |};
 
-  declare export type Translations = {
-    [locale: string]: {
-      [key: string]: string,
-    },
-  };
+  declare export type Translations = { [locale: string]: { [key: string]: string, ... }, ... };
 
   declare export var init: ({|
     translations: Translations,
@@ -96,6 +92,7 @@ declare module 'fbt' {
     |},
     isComponentScript(): boolean,
     registerTranslations(Translations): void,
+    ...
   };
 
   declare export type PluralOptions = {|
@@ -138,7 +135,7 @@ declare module 'fbt' {
       count: number,
       options?: PluralOptions
     ): FbtResult;
-    enum<Range: { [enumKey: string]: EnumValue }, RangeKeys: $Keys<Range>>(
+    enum<Range: { [enumKey: string]: EnumValue, ... }, RangeKeys: $Keys<Range>>(
       enumKey: RangeKeys,
       enumRange: Range
     ): FbtResult;

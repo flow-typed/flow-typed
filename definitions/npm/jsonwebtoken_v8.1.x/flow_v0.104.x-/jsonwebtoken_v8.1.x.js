@@ -5,12 +5,17 @@ declare module "jsonwebtoken" {
     verify: jwt$Verify,
     JsonWebTokenError: Class<jwt$WebTokenError>,
     NotBeforeError: Class<jwt$NotBeforeError>,
-    TokenExpiredError: Class<jwt$TokenExpiredError>
+    TokenExpiredError: Class<jwt$TokenExpiredError>,
+    ...
   }
 }
 
 declare type jwt$Encodable = String | Buffer | Object;
-declare type jwt$Key = { key: string | Buffer, passphrase: string | Buffer };
+declare type jwt$Key = {
+  key: string | Buffer,
+  passphrase: string | Buffer,
+  ...
+};
 declare type jwt$Algorithm =
   'RS256'
   | 'RS384'
@@ -34,11 +39,12 @@ declare type jwt$SigningOptions<Headers> = $Shape<{
   subject: string,
   noTimestamp: boolean,
   header: Headers,
-  keyid: string
+  keyid: string,
+  ...
 }>;
 
-declare type jwt$SigningOptionsWithAlgorithm<H> = jwt$SigningOptions<H> & { algorithm: jwt$Algorithm };
-declare type jwt$VerifyOptionsWithAlgorithm = jwt$VerifyOptions & { algorithms: Array<jwt$Algorithm> };
+declare type jwt$SigningOptionsWithAlgorithm<H> = jwt$SigningOptions<H> & { algorithm: jwt$Algorithm, ... };
+declare type jwt$VerifyOptionsWithAlgorithm = jwt$VerifyOptions & { algorithms: Array<jwt$Algorithm>, ... };
 
 declare type jwt$VerifyOptions = $Shape<{
   algorithms: Array<jwt$Algorithm>,
@@ -49,13 +55,15 @@ declare type jwt$VerifyOptions = $Shape<{
   subject: string | string[],
   clockTolerance: number,
   maxAge: string | number,
-  clockTimestamp: number
+  clockTimestamp: number,
+  ...
 }>;
 
 declare type jwt$DecodingOptions = $Shape<{
   complete: boolean,
   json: boolean,
   encoding: string,
+  ...
 }>;
 
 declare interface jwt$Sign {
@@ -83,7 +91,12 @@ declare interface jwt$Decode {
 
   (jwt: string, options: jwt$DecodingOptions): mixed;
 
-  (jwt: string, options: jwt$DecodingOptions & { complete: true }): { header: Object, payload: mixed, signature: string };
+  (jwt: string, options: jwt$DecodingOptions & { complete: true, ... }): {
+    header: Object,
+    payload: mixed,
+    signature: string,
+    ...
+  };
 }
 
 declare interface jwt$Verify {

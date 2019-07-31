@@ -3,17 +3,21 @@ declare module '@storybook/addon-options' {
     name?: string,
     url?: string,
     goFullScreen?: boolean,
-    showLeftPanel?: boolean, // deprecated, use showStoriesPanel
+    // deprecated, use showStoriesPanel
+    showLeftPanel?: boolean,
     showStoriesPanel?: boolean,
-    showDownPanel?: boolean, // deprecated; use showAddonPanel
+    // deprecated; use showAddonPanel
+    showDownPanel?: boolean,
     showAddonPanel?: boolean,
     showSearchBox?: boolean,
-    downPanelInRight?: boolean, // deprecated; use addonPanelInRight
+    // deprecated; use addonPanelInRight
+    downPanelInRight?: boolean,
     addonPanelInRight?: boolean,
     sortStoriesByKind?: boolean,
     hierarchySeparator?: RegExp | string,
     hierarchyRootSeparator?: RegExp | string,
     selectedAddonPanel?: string,
+    ...
   };
 
   declare function setOptions(options: Options): void;

@@ -4,9 +4,9 @@ import _, { compose, pipe, uncurryN, curry, pipeP, pipeK, tryCatch, applyTo } fr
 // Function
 const ns: Array<number> = [1, 2, 3, 4, 5];
 const ss: Array<string> = ["one", "two", "three", "four"];
-const obj: { [k: string]: number } = { a: 1, c: 2 };
-const objMixed: { [k: string]: mixed } = { a: 1, c: "d" };
-const os: Array<{ [k: string]: * }> = [{ a: 1, c: "d" }, { b: 2 }];
+const obj: { [k: string]: number, ... } = { a: 1, c: 2 };
+const objMixed: { [k: string]: mixed, ... } = { a: 1, c: "d" };
+const os: Array<{ [k: string]: *, ... }> = [{ a: 1, c: "d" }, { b: 2 }];
 const str: string = "hello world";
 
 // TODO: "Gap" Functions: Started failing in v31...
@@ -23,7 +23,8 @@ const str: string = "hello world";
 
 type R = {
   sum: number,
-  nested: { mul: number }
+  nested: { mul: number, ... },
+  ...
 };
 // TODO: "Gap" Functions: Started failing in v31...
 // const greet: string = _.replace('{name}', _.__, 'Hello, {name}!')('John')
@@ -127,7 +128,7 @@ const str5: string = _.pipe(_.replace("3", "4"), _.toLower, _.trim)(" 1,2,3 ");
 // --- Curry ---
 declare var bar1: string => "bar1";
 declare var bar2: (string, number) => "bar2";
-declare var bar6: (string, number, boolean, null, {}, []) => "bar6";
+declare var bar6: (string, number, boolean, null, {...}, []) => "bar6";
 
 const foo1 = curry(bar1);
 const foo2 = curry(bar2);

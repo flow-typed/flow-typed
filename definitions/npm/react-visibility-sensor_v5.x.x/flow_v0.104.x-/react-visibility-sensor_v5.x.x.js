@@ -3,7 +3,8 @@ declare module "react-visibility-sensor" {
     top?: number,
     left?: number,
     bottom?: number,
-    right?: number
+    right?: number,
+    ...
   };
 
   declare export type VisibilitySensorProps = {
@@ -21,7 +22,8 @@ declare module "react-visibility-sensor" {
     resizeThrottle?: number,
     containment?: any,
     delayedCall?: boolean,
-    onChange: (isVisible: boolean, visibilityRect?: Rect) => void
+    onChange: (isVisible: boolean, visibilityRect?: Rect) => void,
+    ...
   };
 
   declare export default class VisibilitySensor extends React$Component<VisibilitySensorProps> {}

@@ -3,6 +3,7 @@ declare module 'fetch-ponyfill' {
   declare type InitOptions = {
     Promise?: $Subtype<Class<Promise<*>>>,
     XMLHttpRequest?: $Subtype<Class<XMLHttpRequest>>,
+    ...
   };
 
   // The below types are globals defined by Flow itself in bom.js, so we just have to tell it that the fetch export
@@ -11,7 +12,8 @@ declare module 'fetch-ponyfill' {
     fetch: (input: string | Request, init?: RequestOptions) => Promise<Response>,
     Request: Request,
     Response: Response,
-    Headers: Headers
+    Headers: Headers,
+    ...
   };
 
   declare export default function PonyfillConstructor(options?: InitOptions): PonyfillExports;

@@ -8,9 +8,10 @@ declare module 'react-testing-library' {
     exact?: boolean,
     trim?: boolean,
     collapseWhitespace?: boolean,
+    ...
   };
 
-  declare type SelectorMatchOptions = { selector?: string } & TextMatchOptions;
+  declare type SelectorMatchOptions = { selector?: string, ... } & TextMatchOptions;
 
   declare type GetByText = (
     text: TextMatch,
@@ -111,39 +112,40 @@ declare module 'react-testing-library' {
   declare module.exports: {
     render: (
       ui: React$Element<*>,
-      options?: { container: HTMLElement, baseElement?: HTMLElement }
+      options?: {
+        container: HTMLElement,
+        baseElement?: HTMLElement,
+        ...
+      }
     ) => RenderResult,
-
     cleanup: () => void,
-
     wait: (
       callback?: () => void,
       options?: {
         timeout?: number,
         interval?: number,
+        ...
       }
     ) => Promise<void>,
-
     waitForDomChange: <T>(options?: {
       container?: HTMLElement,
       timeout?: number,
       mutationObserverOptions?: MutationObserverInit,
+      ...
     }) => Promise<T>,
-
     waitForElement: <T>(
       callback?: () => T,
       options?: {
         container?: HTMLElement,
         timeout?: number,
         mutationObserverOptions?: MutationObserverInit,
+        ...
       }
     ) => Promise<T>,
-
     within: (
       element: HTMLElement,
       queriesToBind?: GetsAndQueries | Array<GetsAndQueries>
     ) => GetsAndQueries,
-
     fireEvent: {|
       (element: HTMLElement, event: Event): void,
 
@@ -217,7 +219,6 @@ declare module 'react-testing-library' {
       animationIteration: FireEvent<Event$Init>,
       transitionEnd: FireEvent<Event$Init>,
     |},
-
     // dom-testing-library re-exports
     queryByTestId: (
       container: HTMLElement,
@@ -237,7 +238,7 @@ declare module 'react-testing-library' {
     getByText: (
       container: HTMLElement,
       text: TextMatch,
-      options?: { selector?: string } & TextMatchOptions
+      options?: { selector?: string, ... } & TextMatchOptions
     ) => HTMLElement,
     queryByPlaceholderText: (
       container: HTMLElement,
@@ -257,7 +258,7 @@ declare module 'react-testing-library' {
     getByLabelText: (
       container: HTMLElement,
       text: TextMatch,
-      options?: { selector?: string } & TextMatchOptions
+      options?: { selector?: string, ... } & TextMatchOptions
     ) => HTMLElement,
     queryByAltText: (
       container: HTMLElement,
@@ -269,5 +270,6 @@ declare module 'react-testing-library' {
       text: TextMatch,
       options?: TextMatchOptions
     ) => HTMLElement,
+    ...
   };
 }

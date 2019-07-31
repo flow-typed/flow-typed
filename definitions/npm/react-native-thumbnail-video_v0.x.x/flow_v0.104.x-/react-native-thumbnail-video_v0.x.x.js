@@ -20,7 +20,8 @@ declare module "react-native-thumbnail-video" {
     onPressError?: ?(?Error) => void,
     style?: ?Object,
     type?: ?$Keys<PreviewTypes>,
-    showPlayIcon?: boolean
+    showPlayIcon?: boolean,
+    ...
   }>;
 
   declare export type ThumbnailState = {|

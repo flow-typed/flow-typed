@@ -7,12 +7,14 @@
 type webdriver$ButtonEnum = {
   LEFT: number,
   MIDDLE: number,
-  RIGHT: number
+  RIGHT: number,
+  ...
 };
 
 type webdriver$KeyEnum = {
   NULL: string,
-  CANCEL: string, // ^break
+  // ^break
+  CANCEL: string,
   HELP: string,
   BACK_SPACE: string,
   TAB: string,
@@ -41,7 +43,8 @@ type webdriver$KeyEnum = {
   DELETE: string,
   SEMICOLON: string,
   EQUALS: string,
-  NUMPAD0: string, // number pad keys
+  // number pad keys
+  NUMPAD0: string,
   NUMPAD1: string,
   NUMPAD2: string,
   NUMPAD3: string,
@@ -57,7 +60,8 @@ type webdriver$KeyEnum = {
   SUBTRACT: string,
   DECIMAL: string,
   DIVIDE: string,
-  F1: string, // function keys
+  // function keys
+  F1: string,
   F2: string,
   F3: string,
   F4: string,
@@ -69,9 +73,12 @@ type webdriver$KeyEnum = {
   F10: string,
   F11: string,
   F12: string,
-  COMMAND: string, // Apple command key
-  META: string, // alias for Windows key
-  chord: (...var_args: Array<string>) => string
+  // Apple command key
+  COMMAND: string,
+  // alias for Windows key
+  META: string,
+  chord: (...var_args: Array<string>) => string,
+  ...
 };
 
 type webdriver$BrowserEnum = {
@@ -84,7 +91,8 @@ type webdriver$BrowserEnum = {
   OPERA: string,
   PHANTOM_JS: string,
   SAFARI: string,
-  HTMLUNIT: string
+  HTMLUNIT: string,
+  ...
 };
 
 type webdriver$CapabilityEnum = {
@@ -104,7 +112,8 @@ type webdriver$CapabilityEnum = {
   SUPPORTS_LOCATION_CONTEXT: string,
   TAKES_SCREENSHOT: string,
   UNEXPECTED_ALERT_BEHAVIOR: string,
-  VERSION: string
+  VERSION: string,
+  ...
 };
 
 type webdriver$CommandNameEnum = {
@@ -203,7 +212,8 @@ type webdriver$CommandNameEnum = {
   TOUCH_FLICK: string,
   GET_AVAILABLE_LOG_TYPES: string,
   GET_LOG: string,
-  GET_SESSION_LOGS: string
+  GET_SESSION_LOGS: string,
+  ...
 };
 
 declare type webdriver$LoggingTypeEnum = {
@@ -211,7 +221,8 @@ declare type webdriver$LoggingTypeEnum = {
   CLIENT: string,
   DRIVER: string,
   PERFORMANCE: string,
-  SERVER: string
+  SERVER: string,
+  ...
 };
 
 declare type webdriver$ErrorCodeEnum = {
@@ -219,7 +230,8 @@ declare type webdriver$ErrorCodeEnum = {
   NO_SUCH_ELEMENT: number,
   NO_SUCH_FRAME: number,
   UNKNOWN_COMMAND: number,
-  UNSUPPORTED_OPERATION: number, // Alias for UNKNOWN_COMMAND.
+  // Alias for UNKNOWN_COMMAND.
+  UNSUPPORTED_OPERATION: number,
   STALE_ELEMENT_REFERENCE: number,
   ELEMENT_NOT_VISIBLE: number,
   INVALID_ELEMENT_STATE: number,
@@ -245,7 +257,8 @@ declare type webdriver$ErrorCodeEnum = {
   SQL_DATABASE_ERROR: number,
   INVALID_XPATH_SELECTOR: number,
   INVALID_XPATH_SELECTOR_RETURN_TYPE: number,
-  METHOD_NOT_ALLOWED: number
+  METHOD_NOT_ALLOWED: number,
+  ...
 };
 
 //
@@ -254,22 +267,26 @@ declare type webdriver$ErrorCodeEnum = {
 
 declare type webdriver$location = {
   x: number,
-  y: number
+  y: number,
+  ...
 };
 
 declare type webdriver$offset = {
   x: number,
-  y: number
+  y: number,
+  ...
 };
 
 declare type webdriver$speed = {
   xspeed: number,
-  yspeed: number
+  yspeed: number,
+  ...
 };
 
 declare type webdriver$size = {
   width: number,
-  height: number
+  height: number,
+  ...
 };
 
 declare type webdriver$proxyConfig = {
@@ -278,7 +295,8 @@ declare type webdriver$proxyConfig = {
   ftpProxy?: string,
   httpProxy?: string,
   sslProxy?: string,
-  noProxy?: string
+  noProxy?: string,
+  ...
 };
 
 declare type webdriver$optionsCookie = {
@@ -287,7 +305,8 @@ declare type webdriver$optionsCookie = {
   path?: string,
   domain?: string,
   secure?: boolean,
-  expiry?: number
+  expiry?: number,
+  ...
 };
 
 //
@@ -319,7 +338,8 @@ declare type webdriver$StacktraceLib = {
   Snapshot: webdriver$Snapshot,
   format(error: any): any,
   get(): webdriver$Frame[],
-  BROWSER_SUPPORTED: boolean
+  BROWSER_SUPPORTED: boolean,
+  ...
 };
 
 declare class webdriver$Error extends Error {
@@ -428,7 +448,6 @@ declare class webdriver$UnsupportedOperationError extends webdriver$Error {
 
 declare type webdriver$ErrorLib = {
   ErrorCode: webdriver$ErrorCodeEnum,
-
   WebDriverError: webdriver$Error,
   ElementNotSelectableError: webdriver$ElementNotSelectableError,
   ElementNotInteractableError: webdriver$ElementNotInteractableError,
@@ -455,12 +474,20 @@ declare type webdriver$ErrorLib = {
   UnknownCommandError: webdriver$UnknownCommandError,
   UnknownMethodError: webdriver$UnknownMethodError,
   UnsupportedOperationError: webdriver$UnsupportedOperationError,
-
   checkResponse(data: any): any,
   checkLegacyResponse(data: any): any,
-  encodeError(err: any): { error: string, message: string },
+  encodeError(err: any): {
+    error: string,
+    message: string,
+    ...
+  },
   isErrorResponse(data: any): boolean,
-  throwDecodedError(data: { error: string, message: string }): void
+  throwDecodedError(data: {
+    error: string,
+    message: string,
+    ...
+  }): void,
+  ...
 };
 
 declare class webdriver$Level {
@@ -482,7 +509,7 @@ declare class webdriver$Level {
 declare class webdriver$LoggingPreferences {
   constructor(): this;
   setLevel(type: string, level: webdriver$Level): void;
-  toJSON(): { [key: string]: string };
+  toJSON(): { [key: string]: string, ... };
 }
 
 declare class webdriver$Entry {
@@ -500,7 +527,13 @@ declare class webdriver$Entry {
     logRecord: any,
     opt_type?: string
   ): webdriver$Entry;
-  toJSON(): { level: string, message: string, timestamp: number, type: string };
+  toJSON(): {
+    level: string,
+    message: string,
+    timestamp: number,
+    type: string,
+    ...
+  };
 }
 
 declare class webdriver$Logger {
@@ -544,7 +577,8 @@ declare type webdriver$LoggingLib = {
   getLevel(nameOrValue: string | number): webdriver$Level,
   getLogger(name?: string): webdriver$Logger,
   installConsoleHandler(): void,
-  removeConsoleHandler(opt_logger?: webdriver$Logger): void
+  removeConsoleHandler(opt_logger?: webdriver$Logger): void,
+  ...
 };
 
 declare class webdriver$Command {
@@ -568,7 +602,12 @@ declare class webdriver$EventEmitter {
   emit(type: string, ...var_args: any[]): void;
   listeners(
     type: string
-  ): Array<{ fn: Function, oneshot: boolean, scope: any }>;
+  ): Array<{
+    fn: Function,
+    oneshot: boolean,
+    scope: any,
+    ...
+  }>;
   addListener(
     type: string,
     listenerFn: Function,
@@ -590,7 +629,8 @@ declare class webdriver$ControlFlow extends webdriver$EventEmitter {
     IDLE: string,
     RESET: string,
     SCHEDULE_TASK: string,
-    UNCAUGHT_EXCEPTION: string
+    UNCAUGHT_EXCEPTION: string,
+    ...
   };
   toString(): string;
   reset(): void;
@@ -630,7 +670,7 @@ declare class webdriver$Capabilities {
   merge(other: any): webdriver$Capabilities;
   set(key: string, value: any): webdriver$Capabilities;
   setLoggingPrefs(prefs: webdriver$LoggingPreferences): webdriver$Capabilities;
-  setLoggingPrefs(prefs: { [key: string]: string }): webdriver$Capabilities;
+  setLoggingPrefs(prefs: { [key: string]: string, ... }): webdriver$Capabilities;
   setProxy(proxy: webdriver$proxyConfig): webdriver$Capabilities;
   setEnableNativeEvents(enabled: boolean): webdriver$Capabilities;
   setScrollBehavior(behavior: number): webdriver$Capabilities;
@@ -719,7 +759,7 @@ declare class webdriver$Builder {
   setEnableNativeEvents(enabled: boolean): webdriver$Builder;
   // setFirefoxOptions(options: firefox.Options): webdriver$Builder;
   setLoggingPrefs(prefs: webdriver$LoggingPreferences): webdriver$Builder;
-  setLoggingPrefs(prefs: { [key: string]: string }): webdriver$Builder;
+  setLoggingPrefs(prefs: { [key: string]: string, ... }): webdriver$Builder;
   setProxy(config: webdriver$proxyConfig): webdriver$Builder;
   setScrollBehavior(behavior: number): webdriver$Builder;
   usingServer(url: string): webdriver$Builder;
@@ -891,8 +931,8 @@ declare class webdriver$WebElement {
     driver: webdriver$WebDriver,
     id: webdriver$Promise<string> | string
   ): webdriver$WebElement;
-  serialize(): { ELEMENT: string } | webdriver$Promise<{ ELEMENT: string }>;
-  static Id: { ELEMENT: string };
+  serialize(): { ELEMENT: string, ... } | webdriver$Promise<{ ELEMENT: string, ... }>;
+  static Id: { ELEMENT: string, ... };
   static ELEMENT_KEY: string;
   getDriver(): webdriver$WebDriver;
   findElement(locator: webdriver$By | Function): webdriver$WebElementPromise;
@@ -1031,7 +1071,8 @@ declare module "selenium-webdriver/testing" {
     (name: string, spec: () => void): void,
     only(description: string, spec: () => void): void,
     skip(description: string, spec: () => void): void,
-    timeout(ms: number): void
+    timeout(ms: number): void,
+    ...
   };
 
   declare var context: typeof describe;
@@ -1040,7 +1081,8 @@ declare module "selenium-webdriver/testing" {
     (name: string, spec?: webdriver_testing$TestFunction): void,
     only(description: string, spec: webdriver_testing$TestFunction): void,
     skip(description: string, spec: webdriver_testing$TestFunction): void,
-    timeout(ms: number): void
+    timeout(ms: number): void,
+    ...
   };
 
   declare function before(method: webdriver_testing$TestFunction): void;
@@ -1050,12 +1092,13 @@ declare module "selenium-webdriver/testing" {
 }
 
 declare type webdriver_remote$ServiceOptions = {
-  loopback?: boolean;
-  port?: number | Promise<number>;
-  args?: Array<string> | Promise<Array<string>>;
-  jvmArgs?: Array<string> | Promise<Array<string>>;
-  env?: {[string]: string};
-  stdio?: string | Array<string|number|stream$Writable>;
+  loopback?: boolean,
+  port?: number | Promise<number>,
+  args?: Array<string> | Promise<Array<string>>,
+  jvmArgs?: Array<string> | Promise<Array<string>>,
+  env?: { [string]: string, ... },
+  stdio?: string | Array<string|number|stream$Writable>,
+  ...
 };
 
 declare class webdriver_remote$DriverService {

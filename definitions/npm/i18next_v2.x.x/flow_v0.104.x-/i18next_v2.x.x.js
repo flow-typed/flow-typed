@@ -11,11 +11,10 @@ declare module "i18next" {
     nestingSuffix?: string,
     nestingPrefixEscaped?: string,
     nestingSuffixEscaped?: string,
-    defaultVariables?: string
+    defaultVariables?: string,
+    ...
   };
-  declare type ResourceData = {
-    [key: string]: string | ResourceData
-  };
+  declare type ResourceData = { [key: string]: string | ResourceData, ... };
   declare type InitOptions = {
     debug?: boolean,
     initImmediate?: boolean,
@@ -48,7 +47,8 @@ declare module "i18next" {
     interpolation?: InterpolationOptions,
     detection?: Object,
     backend?: Object,
-    cache?: Object
+    cache?: Object,
+    ...
   };
   declare type TFunction = (key?: ?string, data?: ?Object) => string;
   declare type CallbackFn = (err: any, t: TFunction) => any;
@@ -79,7 +79,8 @@ declare module "i18next" {
       ns: string,
       resources: Array<{
         key: string,
-        value: any
+        value: any,
+        ...
       }>
     ): void;
     addResourceBundle(

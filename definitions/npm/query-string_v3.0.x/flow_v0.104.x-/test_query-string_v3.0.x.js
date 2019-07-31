@@ -13,7 +13,7 @@ describe('#parse', () => {
     });
 
     it('should return a object', () => {
-        (parse(' '): {})
+        (parse(' '): {...})
     });
 });
 

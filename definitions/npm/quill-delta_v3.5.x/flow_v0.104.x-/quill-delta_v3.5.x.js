@@ -3,7 +3,8 @@ declare module "quill-delta" {
     insert?: string | Object,
     retain?: number,
     delete?: number,
-    attributes?: Object
+    attributes?: Object,
+    ...
   };
 
   declare class Delta {
@@ -11,7 +12,7 @@ declare module "quill-delta" {
 
     constructor(): Delta,
     constructor(ops: Operation[]): Delta,
-    constructor(delta: { ops: Operation[] }): Delta,
+    constructor(delta: { ops: Operation[], ... }): Delta,
 
     insert(text: string, attributes?: Object): Delta,
     insert(embed: Object, attributes?: Object): Delta,

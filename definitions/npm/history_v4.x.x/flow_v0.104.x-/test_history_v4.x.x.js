@@ -27,7 +27,7 @@ describe('browser history', () => {
     })
 
     const key: string = history.location.key
-    const state: {} = history.location.state
+    const state: {...} = history.location.state
   });
 
   it('should not allow to get field which is absent in the history', () => {
@@ -111,7 +111,7 @@ describe('memory history', () => {
     })
 
     const key: string = history.location.key
-    const state: {} = history.location.state
+    const state: {...} = history.location.state
   });
 
   it('should not allow to get field which is absent in the history', () => {
@@ -195,7 +195,7 @@ describe('hash history', () => {
     // $ExpectError
     const key: string = history.location.key
     // $ExpectError
-    const state: {} = history.location.state
+    const state: {...} = history.location.state
   });
 
   it('should not allow to get field which is absent in the history', () => {

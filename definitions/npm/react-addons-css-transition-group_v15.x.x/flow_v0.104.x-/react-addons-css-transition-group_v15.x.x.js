@@ -5,7 +5,8 @@ declare module 'react-addons-css-transition-group' {
     leave?: string,
     leaveActive?: string,
     appear?: string,
-    appearActive?: string
+    appearActive?: string,
+    ...
   };
   declare type Props = {
     transitionName: string | ReactCSSTransitionGroupNames,
@@ -15,11 +16,13 @@ declare module 'react-addons-css-transition-group' {
     transitionAppearTimeout?: number,
     transitionEnterTimeout?: number,
     transitionLeaveTimeout?: number,
+    ...
   };
   declare type DefaultProps = {
     transitionAppear: boolean,
     transitionEnter: boolean,
     transitionLeave: boolean,
+    ...
   }
   declare class ReactCSSTransitionGroup extends React$Component<Props> {
     static defaultProps: DefaultProps;

@@ -8,7 +8,7 @@ import type {
 import { applyMiddleware, bindActionCreators, createStore } from 'redux';
 
 type State = Array<number>;
-type Action = { type: 'A' };
+type Action = { type: 'A', ... };
 type Thunk = (dispatch: Dispatch, getState: () => State) => void;
 type Dispatch = DispatchAPI<Action | Thunk>;
 type Store = ReduxStore<State, Action, Dispatch>;

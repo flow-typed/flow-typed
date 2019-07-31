@@ -1,7 +1,8 @@
 declare module "http-link-header" {
   declare type LinkItem = {
+    [string]: string,
     uri: string,
-    [string]: string
+    ...
   };
   declare export default class Link {
     constructor(value: string): void;

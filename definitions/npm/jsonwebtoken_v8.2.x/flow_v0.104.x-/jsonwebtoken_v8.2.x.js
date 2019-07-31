@@ -19,7 +19,11 @@ declare module "jsonwebtoken" {
   }
 
   declare type Encodable = String | Buffer | Object;
-  declare type Key = { key: string | Buffer, passphrase: string | Buffer };
+  declare type Key = {
+    key: string | Buffer,
+    passphrase: string | Buffer,
+    ...
+  };
   declare type Algorithm =
     'RS256'
     | 'RS384'
@@ -43,13 +47,14 @@ declare module "jsonwebtoken" {
     subject: string,
     noTimestamp: boolean,
     header: Headers,
-    keyid: string
+    keyid: string,
+    ...
   }>;
 
-  declare type SigningOptionsWithAlgorithm<H> = SigningOptions<H> & { algorithm: Algorithm };
+  declare type SigningOptionsWithAlgorithm<H> = SigningOptions<H> & { algorithm: Algorithm, ... };
 
   declare type VerifyCallback = (err: JsonWebTokenError | NotBeforeError | TokenExpiredError | null, decoded: Payload) => void;
-  declare type VerifyOptionsWithAlgorithm = VerifyOptions & { algorithms: Array<Algorithm> };
+  declare type VerifyOptionsWithAlgorithm = VerifyOptions & { algorithms: Array<Algorithm>, ... };
   declare type VerifyOptions = $Shape<{
     algorithms: Array<Algorithm>,
     audience: string | string[],
@@ -59,12 +64,14 @@ declare module "jsonwebtoken" {
     subject: string | string[],
     clockTolerance: number,
     maxAge: string | number,
-    clockTimestamp: number
+    clockTimestamp: number,
+    ...
   }>;
 
   declare type DecodingOptions = $Shape<{
     complete: boolean,
-    json: boolean
+    json: boolean,
+    ...
   }>;
 
   declare interface Sign {
@@ -94,13 +101,19 @@ declare module "jsonwebtoken" {
     aud?: string | string[],
     exp?: number,
     iat?: number,
-    nbf?: number
+    nbf?: number,
+    ...
   }
 
   declare type Token = {
-    header: { typ: 'JWT', alg: Algorithm },
+    header: {
+      typ: 'JWT',
+      alg: Algorithm,
+      ...
+    },
     payload: Payload,
     signature?: string,
+    ...
   }
 
   declare interface Decode {
@@ -108,7 +121,7 @@ declare module "jsonwebtoken" {
 
     (jwt: string, options: DecodingOptions): Payload;
 
-    (jwt: string, options: DecodingOptions & { complete: true }): Token;
+    (jwt: string, options: DecodingOptions & { complete: true, ... }): Token;
   }
 
   declare interface Verify {
@@ -138,6 +151,7 @@ declare module "jsonwebtoken" {
     verify: Verify,
     JsonWebTokenError: Class<WebTokenError>,
     NotBeforeError: Class<NotBeforeError>,
-    TokenExpiredError: Class<TokenExpiredError>
+    TokenExpiredError: Class<TokenExpiredError>,
+    ...
   }
 }

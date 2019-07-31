@@ -1,7 +1,11 @@
 type NodeModule = typeof module;
 
 declare module '@storybook/react' {
-  declare type Context = { kind: string, story: string };
+  declare type Context = {
+    kind: string,
+    story: string,
+    ...
+  };
   declare type Renderable =
     | string
     | number
@@ -17,9 +21,7 @@ declare module '@storybook/react' {
     context: Context
   ) => Renderable;
 
-  declare type DecoratorParameters = {
-    [key: string]: any,
-  };
+  declare type DecoratorParameters = { [key: string]: any, ... };
 
   declare interface Story {
     +kind: string;

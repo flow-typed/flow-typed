@@ -1,12 +1,12 @@
 declare module 'firebase' {
   declare type FbSimple = string|number|boolean;
-  declare type FbObject = {[string|number]: FbValue };
+  declare type FbObject = { [string|number]: FbValue, ... };
   declare type FbValue = FbSimple | Array<FbValue> | FbObject;
   declare type Priority = string|number|null;
 
   declare class App {
     name: string,
-    options: {},
+    options: {...},
 
     auth(): Auth,
     database(): Database,
@@ -20,7 +20,7 @@ declare module 'firebase' {
     applyActionCode(code: string): Promise<void>,
     checkActionCode(code: string): Promise<ActionCodeInfo>,
     confirmPasswordReset(code: string, newPassword: string): Promise<void>,
-    createCustomToken(uid: string, developerClaims: {}): string,
+    createCustomToken(uid: string, developerClaims: {...}): string,
     createUserWithEmail(email: string, password: string): Promise<User>,
     fetchProvidersForEmail(email: string): Promise<Array<string>>,
     getRedirectResult(): Promise<UserCredential>,
@@ -33,24 +33,22 @@ declare module 'firebase' {
     signInWithPopup(provider: AuthProvider): Promise<UserCredential>,
     signInWithRedirect(provider: AuthProvider): Promise<void>,
     signOut(): Promise<void>,
-    verifyIdToken(idToken: string): Promise<{}>,
+    verifyIdToken(idToken: string): Promise<{...}>,
     verifyPasswordReset(code: string): Promise<string>,
   }
 
-  declare type ActionCodeInfo = {
-    data: {
-      email: string,
-    },
-  }
+  declare type ActionCodeInfo = { data: { email: string, ... }, ... }
 
   declare type AuthCredential = {
     provider: string,
     providerId: string,
+    ...
   }
 
   declare type AuthError = {
     code: string,
     message: string,
+    ...
   }
 
   declare class AuthProvider {
@@ -65,7 +63,7 @@ declare module 'firebase' {
 
   declare class OAuthProvider extends AuthProvider {
     static credential(token: string): AuthCredential,
-    setCustomParameters(customOAuthParameters: {}): void,
+    setCustomParameters(customOAuthParameters: {...}): void,
   }
 
   declare class FacebookAuthProvider extends OAuthProvider {
@@ -108,17 +106,22 @@ declare module 'firebase' {
     reauthenticateWithCredential(credential: AuthCredential): Promise<void>,
     reload(): Promise<void>,
     sendEmailVerification(): Promise<void>,
-    toJSON(): {},
+    toJSON(): {...},
     unlink(providerId: string): Promise<User>,
     updateEmail(newEmail: string): Promise<void>,
     updatePassword(newPassword: string): Promise<void>,
-    updateProfile(profile: {displayName: ?string, photoURL: ?string,}): Promise<void>,
+    updateProfile(profile: {
+      displayName: ?string,
+      photoURL: ?string,
+      ...
+    }): Promise<void>,
   }
 
   declare type UserCredential = {
     user: ?User,
     credential: ?AuthCredential,
     operationType: ?string,
+    ...
   };
 
   declare class Database {
@@ -140,7 +143,7 @@ declare module 'firebase' {
     hasChild(path: string): boolean,
     hasChildren(): boolean,
     numChildren(): number,
-    toJSON(): {},
+    toJSON(): {...},
     val(): FbValue,
   }
 
@@ -159,15 +162,15 @@ declare module 'firebase' {
     isEqual(other: Query): boolean,
     limitToFirst(limit: number): Query,
     limitToLast(limit: number): Query,
-    off(eventType: string, callback: ?(DataSnapshot, ?string) => void, context: ?{}): void,
-    on(eventType: string, callback: ?(DataSnapshot, ?string) => void, cancelCallbackOrConetxt?: {}|(Error) => void, context: ?{}): (DataSnapshot, ?string) => void,
-    once(eventType: string, callback: ?(DataSnapshot, ?string) => void, cancelCallbackOrContext?: {}|(Error) => void, context: ?{}): Promise<DataSnapshot>,
+    off(eventType: string, callback: ?(DataSnapshot, ?string) => void, context: ?{...}): void,
+    on(eventType: string, callback: ?(DataSnapshot, ?string) => void, cancelCallbackOrConetxt?: {...}|(Error) => void, context: ?{...}): (DataSnapshot, ?string) => void,
+    once(eventType: string, callback: ?(DataSnapshot, ?string) => void, cancelCallbackOrContext?: {...}|(Error) => void, context: ?{...}): Promise<DataSnapshot>,
     orderByChild(path: string): Query,
     orderByKey(): Query,
     orderByPriority(): Query,
     orderByValue(): Query,
     startAt(value: ?FbSimple, key: ?string): Query,
-    toJSON(): {},
+    toJSON(): {...},
     toString(): string,
   }
 
@@ -185,12 +188,16 @@ declare module 'firebase' {
     set(value: FbValue|null, onComplete: ?OnCompleteCallback): Promise<void>,
     setPriority(priority: Priority, onComplete: ?OnCompleteCallback): Promise<void>,
     setWithPriority(newVal: FbValue, newPriority: Priority, onComplete: ?OnCompleteCallback): Promise<void>,
-    transaction(transactionUpdate: (FbValue) => void, onComplete: ?(?Error, boolean, ?DataSnapshot) => void, applyLocally: ?boolean): Promise<{committed: boolean, snapshot: ?DataSnapshot,}>,
+    transaction(transactionUpdate: (FbValue) => void, onComplete: ?(?Error, boolean, ?DataSnapshot) => void, applyLocally: ?boolean): Promise<{
+      committed: boolean,
+      snapshot: ?DataSnapshot,
+      ...
+    }>,
     update(values: FbObject, onComplete: ?OnCompleteCallback): Promise<void>,
   }
 
   declare class ServerValue {
-    TIMESTAMP: {},
+    TIMESTAMP: {...},
   }
 
   declare class ThenableReference<T> extends Reference {
@@ -206,9 +213,9 @@ declare module 'firebase' {
     app: {
       (name?: string): App,
       App: typeof App,
+      ...
     },
     apps: Array<App>,
-
     auth: {
       (app: ?App): Auth,
       ActionCodeInfo: ActionCodeInfo,
@@ -222,8 +229,8 @@ declare module 'firebase' {
       GoogleAuthProvider: typeof GoogleAuthProvider,
       TwitterAuthProvider: typeof TwitterAuthProvider,
       UserCredential: UserCredential,
+      ...
     },
-
     database: {
       (app: ?App): Database,
       Database: typeof Database,
@@ -233,14 +240,14 @@ declare module 'firebase' {
       Reference: typeof Reference,
       ServerValue: typeof ServerValue,
       ThenableReference: typeof ThenableReference,
+      ...
     },
-
     FirebaseError: typeof FirebaseError,
-    initializeApp(options: {}, name: ?string): App,
-
+    initializeApp(options: {...}, name: ?string): App,
     SDK_VERSION: string,
     User: typeof User,
     UserInfo: typeof UserInfo,
+    ...
   }
 }
 

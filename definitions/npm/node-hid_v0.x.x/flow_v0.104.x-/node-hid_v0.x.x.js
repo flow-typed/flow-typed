@@ -7,7 +7,8 @@ declare module "node-hid" {
     manufacturer: string,
     product: string,
     release: number,
-    interface: number
+    interface: number,
+    ...
   };
 
   declare function devices(): Array<HIDDeviceDescription>;

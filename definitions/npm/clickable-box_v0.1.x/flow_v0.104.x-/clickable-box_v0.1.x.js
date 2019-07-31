@@ -7,6 +7,7 @@ declare module 'clickable-box' {
     children?: React$Node,
     onClick?: (evt: SyntheticMouseEvent<>) => void,
     onKeyPress?: (evt: SyntheticKeyboardEvent<>) => void,
+    ...
   };
 
   declare export default class ClickableBox extends React$Component<Props> {}

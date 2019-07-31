@@ -37,13 +37,11 @@ declare module '@automattic/tree-select' {
 	 * of getCacheKey that allows the implementor to calculate the cache
 	 * key for this use of treeSelect.
 	 */
-	declare type Options<O> = {
-		/**
-		 * getCachKey is given the dependent arguments and expects a string to
-		 * use to identify the memoized return value
-		 */
-		getCacheKey: (...O) => string,
-	};
+	declare type Options<O> = { /**
+     * getCachKey is given the dependent arguments and expects a string to
+     * use to identify the memoized return value
+     */
+    getCacheKey: (...O) => string, ... };
 
 	/**
 	 * Accepts two functions:

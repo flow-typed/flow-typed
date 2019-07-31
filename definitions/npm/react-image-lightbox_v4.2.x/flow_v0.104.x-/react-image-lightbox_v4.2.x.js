@@ -26,8 +26,10 @@ declare module "react-image-lightbox" {
     imageCaption?: React$Node,
     imageCrossOrigin?: string,
     toolbarButtons?: Array<React$Node>,
-    reactModalStyle?: Object, // TODO: Improve
-    reactModalProps?: Object, // TODO: Improve
+    // TODO: Improve
+    reactModalStyle?: Object,
+    // TODO: Improve
+    reactModalProps?: Object,
     imagePadding?: number,
     clickOutsideToClose?: boolean,
     enableZoom?: boolean,
@@ -36,14 +38,16 @@ declare module "react-image-lightbox" {
     prevLabel?: string,
     zoomInLabel?: string,
     zoomOutLabel?: string,
-    closeLabel?: string
+    closeLabel?: string,
+    ...
   };
 
   declare type DefaultProps = {
     imageTitle: string,
     imageCaption: React$Node,
     toolbarButtons: Array<React$Node>,
-    reactModalProps: Object, // TODO: Improve
+    // TODO: Improve
+    reactModalProps: Object,
     animationDisabled: boolean,
     animationDuration: number,
     animationOnKeyInput: boolean,
@@ -66,11 +70,13 @@ declare module "react-image-lightbox" {
     prevLabel: string,
     prevSrc: string,
     prevSrcThumbnail: string,
-    reactModalStyle: Object, // TODO: Improve
+    // TODO: Improve
+    reactModalStyle: Object,
     wrapperClassName: string,
     zoomInLabel: string,
     zoomOutLabel: string,
-    imageLoadErrorMessage: string
+    imageLoadErrorMessage: string,
+    ...
   };
 
   declare export default class Lightbox extends React$Component<Props> {

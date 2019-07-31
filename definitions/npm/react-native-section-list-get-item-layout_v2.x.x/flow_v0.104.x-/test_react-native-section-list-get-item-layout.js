@@ -19,7 +19,8 @@ describe("default export", () => {
       (getItemLayout([{ title: "section1", data: [1, 2, 3] }], 123): {
         length: number,
         offset: number,
-        index: number
+        index: number,
+        ...
       });
     });
 

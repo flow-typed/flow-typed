@@ -10,16 +10,14 @@ declare type $npm$expect$Spy = Function & {
   reset(): any,
   calls: Array<{
     context: any,
-    arguments: Array<any>
-  }>
+    arguments: Array<any>,
+    ...
+  }>,
+  ...
 };
 
-declare type $npm$expect$ComparatorFunction = {
-  (left: any, right: any): boolean
-};
-declare type $npm$expect$HasKeyFunction = {
-  (object: any, propertyName: string): boolean
-};
+declare type $npm$expect$ComparatorFunction = { (left: any, right: any): boolean, ... };
+declare type $npm$expect$HasKeyFunction = { (object: any, propertyName: string): boolean, ... };
 declare class $npm$expect$Expectation<T> {
   toExist(message?: string): this;
   toNotExist(message?: string): this;
@@ -129,7 +127,8 @@ declare type $npm$expect$ExpectStatic<Expectation> = {
   createSpy(): $npm$expect$Spy,
   isSpy(o: any): boolean,
   spyOn(o: any, propertyName: string): $npm$expect$Spy,
-  restoreSpies(): void
+  restoreSpies(): void,
+  ...
 };
 
 declare module "expect" {

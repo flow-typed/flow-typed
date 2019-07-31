@@ -6,17 +6,14 @@ type $npm$UniversalRouter$PathToRegexpKey = {
   optional: boolean,
   repeat: boolean,
   pattern: string,
+  ...
 };
 
-type $npm$UniversalRouter$QueryParams = {
-  [paramName: string]: string | string[],
-};
+type $npm$UniversalRouter$QueryParams = { [paramName: string]: string | string[], ... };
 
-type $npm$UniversalRouter$Context = {};
+type $npm$UniversalRouter$Context = {...};
 
-type $npm$UniversalRouter$ResolveContext = {
-  pathname: string,
-};
+type $npm$UniversalRouter$ResolveContext = { pathname: string, ... };
 
 declare module 'universal-router' {
   declare export type QueryParams = $npm$UniversalRouter$QueryParams;
@@ -38,6 +35,7 @@ declare module 'universal-router' {
     params: QueryParams,
     keys: Array<$npm$UniversalRouter$PathToRegexpKey>,
     next: (resume?: boolean) => Promise<RR>,
+    ...
   };
 
   declare export type Result<T> = T | Promise<T | void> | void;
@@ -56,6 +54,7 @@ declare module 'universal-router' {
       context: RouteContext<R, C, RR, RC> & RC & C,
       params: QueryParams
     ) => Result<RR>,
+    ...
   };
 
   declare export type RouteDefault = {|
@@ -78,9 +77,7 @@ declare module 'universal-router' {
     RR = any,
     RC: ResolveContext = ResolveContext
   > = (
-    error: Error & {
-      status?: number,
-    },
+    error: Error & { status?: number, ... },
     context: RouteContext<R, C, RR, RC> & RC & C
   ) => Result<RR>;
 
@@ -109,9 +106,7 @@ declare module 'universal-router' {
     baseUrl: string;
     errorHandler?: ErrorHandler<R, C, RR, RC>;
     resolveRoute: ResolveRoute<R, C, RR, RC>;
-    context: {
-      router: UniversalRouter<R, C, RR, RC>,
-    } & C;
+    context: { router: UniversalRouter<R, C, RR, RC>, ... } & C;
     root: R;
     routesByName?: Map<string, R>;
     resolve(pathnameOrContext: string | RC): Promise<RR>;
@@ -138,6 +133,7 @@ declare module 'universal-router/sync' {
     params: QueryParams,
     keys: Array<$npm$UniversalRouter$PathToRegexpKey>,
     next: (resume?: boolean) => RR,
+    ...
   };
 
   declare export type Result<T> = T | void;
@@ -156,6 +152,7 @@ declare module 'universal-router/sync' {
       context: RouteContext<R, C, RR, RC> & RC & C,
       params: QueryParams
     ) => Result<RR>,
+    ...
   };
 
   declare export type RouteDefault = {|
@@ -178,9 +175,7 @@ declare module 'universal-router/sync' {
     RR = any,
     RC: ResolveContext = ResolveContext
   > = (
-    error: Error & {
-      status?: number,
-    },
+    error: Error & { status?: number, ... },
     context: RouteContext<R, C, RR, RC> & RC & C
   ) => Result<RR>;
 
@@ -209,9 +204,7 @@ declare module 'universal-router/sync' {
     baseUrl: string;
     errorHandler?: ErrorHandler<R, C, RR, RC>;
     resolveRoute: ResolveRoute<R, C, RR, RC>;
-    context: {
-      router: UniversalRouterSync<R, C, RR, RC>,
-    } & C;
+    context: { router: UniversalRouterSync<R, C, RR, RC>, ... } & C;
     root: R;
     routesByName?: Map<string, R>;
     resolve(pathnameOrContext: string | RC): RR;
@@ -221,9 +214,7 @@ declare module 'universal-router/sync' {
 declare module 'universal-router/generateUrls' {
   import type UniversalRouter from 'universal-router';
 
-  declare type Params = {
-    [paramName: string]: any,
-  };
+  declare type Params = { [paramName: string]: any, ... };
 
   declare type Options = {|
     encode?: (

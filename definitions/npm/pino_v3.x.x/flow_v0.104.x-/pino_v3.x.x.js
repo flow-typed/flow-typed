@@ -36,25 +36,26 @@ declare module "pino" {
   }
 
   declare interface Logger {
-    child(bindings: {}): Logger;
+    child(bindings: {...}): Logger;
     level: Level;
     levelVal: number;
     on(event: LevelChangeEvent, listener: LevelChangeEventListener): void;
     fatal(msg: string, ...args: any[]): void;
-    fatal(obj: {}, msg?: string, ...args: any[]): void;
+    fatal(obj: {...}, msg?: string, ...args: any[]): void;
     error(msg: string, ...args: any[]): void;
-    error(obj: {}, msg?: string, ...args: any[]): void;
+    error(obj: {...}, msg?: string, ...args: any[]): void;
     warn(msg: string, ...args: any[]): void;
-    warn(obj: {}, msg?: string, ...args: any[]): void;
+    warn(obj: {...}, msg?: string, ...args: any[]): void;
     info(msg: string, ...args: any[]): void;
-    info(obj: {}, msg?: string, ...args: any[]): void;
+    info(obj: {...}, msg?: string, ...args: any[]): void;
     debug(msg: string, ...args: any[]): void;
-    debug(obj: {}, msg?: string, ...args: any[]): void;
+    debug(obj: {...}, msg?: string, ...args: any[]): void;
     trace(msg: string, ...args: any[]): void;
-    trace(obj: {}, msg?: string, ...args: any[]): void;
+    trace(obj: {...}, msg?: string, ...args: any[]): void;
     levels: {
       values: LevelLabelsToValues,
-      labels: LevelValuesToLabels
+      labels: LevelValuesToLabels,
+      ...
     };
     LOG_VERSION: number;
     stdSerializers: Serializers;
@@ -80,7 +81,8 @@ declare module "pino" {
   declare function pretty(opts?: {
     timeTransOnly?: boolean,
     levelFirst?: boolean,
-    formatter?: (log: IPinoLog) => string
+    formatter?: (log: IPinoLog) => string,
+    ...
   }): stream$Transform;
 
   declare function P(

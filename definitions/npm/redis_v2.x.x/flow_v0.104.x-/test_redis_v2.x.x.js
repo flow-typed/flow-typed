@@ -215,11 +215,11 @@ describe('client', () => {
     client.flushall((error: ?Error, res: 'OK') => {});
   })
   describe('hgetall', () => {
-    client.hgetall("key", (error: ?Error, result: {[key: string]: string}) => {})
+    client.hgetall("key", (error: ?Error, result: { [key: string]: string, ... }) => {})
     // $ExpectError
-    client.hgetall("key", "bad extra argument in past type defs", (error: ?Error, result: {[key: string]: string}) => {})
+    client.hgetall("key", "bad extra argument in past type defs", (error: ?Error, result: { [key: string]: string, ... }) => {})
     // $ExpectError
-    client.hgetall("key", "bad extra argument in past type defs", (error: ?Error, result: ?{[key: string]: string}) => {})
+    client.hgetall("key", "bad extra argument in past type defs", (error: ?Error, result: ?{ [key: string]: string, ... }) => {})
   })
   describe('hdel', () => {
     client.hdel('topic', 'key', (error: ?Error, numRemoved: number) => {});

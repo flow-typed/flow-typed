@@ -8,7 +8,12 @@ type StateA = number;
 type StateB = string;
 type StateC = boolean;
 
-type State = { a: StateA, b: StateB, c: StateC };
+type State = {
+  a: StateA,
+  b: StateB,
+  c: StateC,
+  ...
+};
 
 const action = { type: "ACTION" };
 

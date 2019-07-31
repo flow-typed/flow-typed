@@ -13,6 +13,7 @@ declare module "query-string" {
   declare module.exports: {
     extract(str: string): string,
     parse(str: string, opts?: ParseOptions): Object,
-    stringify(obj: Object, opts?: StringifyOptions): string
+    stringify(obj: Object, opts?: StringifyOptions): string,
+    ...
   };
 }

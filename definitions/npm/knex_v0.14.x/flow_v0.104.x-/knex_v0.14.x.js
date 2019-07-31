@@ -15,7 +15,7 @@ declare class Knex$QueryBuilder<R> mixins Promise<R> {
   clearWhere(): this;
   select(key?: string[]): this;
   select(...key: string[]): this;
-  timeout(ms: number, options?: { cancel: boolean }): this;
+  timeout(ms: number, options?: { cancel: boolean, ... }): this;
   column(key: string[]): this;
   column(...key: string[]): this;
   with(alias: string, w: string | Knex$QueryBuilderFn<R>): this;
@@ -29,7 +29,7 @@ declare class Knex$QueryBuilder<R> mixins Promise<R> {
   where(builder: Knex$QueryBuilderFn<R>): this;
   where(column: string, value: any): this;
   where(column: string, operator: string, value: any): this;
-  where(object: { [string]: any }): this;
+  where(object: { [string]: any, ... }): this;
   whereNot(builder: Knex$QueryBuilderFn<R>): this;
   whereNot(column: string, value: any): this;
   whereNot(column: string, operator: string, value: any): this;
@@ -156,7 +156,8 @@ declare class Knex$Knex<R>
     make: (name: string, config?: MigrateConfig) => Promise<string>,
     latest: (config?: MigrateConfig) => Promise<void>,
     rollback: (config?: MigrateConfig) => Promise<void>,
-    currentVersion: (config?: MigrateConfig) => Promise<string>
+    currentVersion: (config?: MigrateConfig) => Promise<string>,
+    ...
   };
   client: any;
   destroy(): Promise<void>;
@@ -167,28 +168,32 @@ declare type Knex$PostgresConfig = {
   connection?:
     | string
     | {
-        host?: string,
-        user?: string,
-        password?: string,
-        database?: string,
-        charset?: string
-      },
-  searchPath?: string
+    host?: string,
+    user?: string,
+    password?: string,
+    database?: string,
+    charset?: string,
+    ...
+  },
+  searchPath?: string,
+  ...
 };
 
-declare type Knex$RawBindings = Array<mixed> | { [key: string]: mixed };
+declare type Knex$RawBindings = Array<mixed> | { [key: string]: mixed, ... };
 
 declare type Knex$Mysql2Config = {
   client?: "mysql2",
   connection?:
     | string
     | {
-        host?: string,
-        user?: string,
-        password?: string,
-        database?: string,
-        charset?: string
-      }
+    host?: string,
+    user?: string,
+    password?: string,
+    database?: string,
+    charset?: string,
+    ...
+  },
+  ...
 };
 
 declare type Knex$MysqlConfig = {
@@ -197,15 +202,16 @@ declare type Knex$MysqlConfig = {
     host?: string,
     user?: string,
     password?: string,
-    database?: string
-  }
+    database?: string,
+    ...
+  },
+  ...
 };
 
 declare type Knex$SqliteConfig = {
   client?: "sqlite3",
-  connection?: {
-    filename?: string
-  }
+  connection?: { filename?: string, ... },
+  ...
 };
 declare type Knex$Config =
   | Knex$PostgresConfig
@@ -232,7 +238,8 @@ declare module "knex" {
     constraint?: string,
     file: string,
     line: string,
-    routine: string
+    routine: string,
+    ...
   };
   declare type Knex = Knex$Knex<any>;
   declare type $QueryBuilder<R> = Knex$QueryBuilder<R>;

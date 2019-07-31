@@ -14,7 +14,8 @@ declare module "platform" {
       toString(): string,
       architecture: ?number,
       version: ?string,
-      family: ?string
+      family: ?string,
+      ...
     };
   }
   declare module.exports: Platform;

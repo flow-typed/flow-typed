@@ -5,7 +5,15 @@
 
 import {makePlainReducer} from "redux-exr";
 
-type MyAction = {type: 'MY_ACTION1'} | {type: 'MY_ACTION2', payload: string} | {type: 'MY_ACTION3', payload: number};
+type MyAction = { type: 'MY_ACTION1', ... } | {
+  type: 'MY_ACTION2',
+  payload: string,
+  ...
+} | {
+  type: 'MY_ACTION3',
+  payload: number,
+  ...
+};
 
 const reducer = makePlainReducer('', (s, a) => (a.type === 'MY_ACTION' ? a.type : s));
 reducer('foo', {type: 'MY_ACTION'});

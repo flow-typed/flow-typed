@@ -11,9 +11,9 @@ declare type TestCafe$CustomPropsSelectorTypeTransform = <V>((node: HTMLElement)
 declare type TestCafe$CustomMethodsSelectorTypeTransform = <V>((node: HTMLElement, ...args: any) => V | Promise<V>) => ((...args: any) => Promise<V>)
 
 declare type TestCafe$ClientFunctionOptions = {
-    dependencies?: { [string]: any },
-
-    boundTestRun?: TestCafe$TestController
+    dependencies?: { [string]: any, ... },
+    boundTestRun?: TestCafe$TestController,
+    ...
 }
 
 declare interface TestCafe$TextRectangle {
@@ -32,7 +32,7 @@ declare interface TestCafe$NodeSnapshot {
     hasChildNodes: boolean,
     nodeType: number,
     textContent: string,
-    attributes?: { [name: string]: string },
+    attributes?: { [name: string]: string, ... },
     boundingClientRect?: TestCafe$TextRectangle,
     checked?: boolean | void,
     classNames?: string[],
@@ -54,7 +54,7 @@ declare interface TestCafe$NodeSnapshot {
     scrollLeft?: number,
     scrollTop?: number,
     scrollWidth?: number,
-    style?: { [prop: string]: string },
+    style?: { [prop: string]: string, ... },
     tagName?: string,
     value?: string | void,
     visible?: boolean,
@@ -78,7 +78,7 @@ declare interface TestCafe$SelectorAPI {
     hasChildNodes: Promise<boolean>,
     nodeType: Promise<number>,
     textContent: Promise<string>,
-    attributes: Promise<{ [name: string]: string }>,
+    attributes: Promise<{ [name: string]: string, ... }>,
     boundingClientRect: Promise<TestCafe$TextRectangle>,
     checked: Promise<boolean | void>,
     classNames: Promise<string[]>,
@@ -100,7 +100,7 @@ declare interface TestCafe$SelectorAPI {
     scrollLeft: Promise<number>,
     scrollTop: Promise<number>,
     scrollWidth: Promise<number>,
-    style: Promise<{ [prop: string]: string }>,
+    style: Promise<{ [prop: string]: string, ... }>,
     tagName: Promise<string>,
     value: Promise<string | void>,
     visible: Promise<boolean>,
@@ -120,26 +120,26 @@ declare interface TestCafe$SelectorAPI {
     filter(cssSelector: string): TestCafe$SelectorFn,
     filter(
         filterFn: (node: Element, idx: number) => boolean,
-        dependencies?: { [string]: any }): TestCafe$SelectorFn,
+        dependencies?: { [string]: any, ... }): TestCafe$SelectorFn,
 
     find(cssSelector: string): TestCafe$SelectorFn,
     find(
         filterFn: (node: Element, idx: number, originNode: Element) => boolean,
-        dependencies?: { [string]: any }): TestCafe$SelectorFn,
+        dependencies?: { [string]: any, ... }): TestCafe$SelectorFn,
 
     parent(): TestCafe$SelectorFn,
     parent(index: number): TestCafe$SelectorFn,
     parent(cssSelector: string): TestCafe$SelectorFn,
     parent(
         filterFn: (node: Element, idx: number, originNode: Element) => boolean,
-        dependencies?: { [string]: any }): TestCafe$SelectorFn,
+        dependencies?: { [string]: any, ... }): TestCafe$SelectorFn,
 
     child(): TestCafe$SelectorFn,
     child(index: number): TestCafe$SelectorFn,
     child(cssSelector: string): TestCafe$SelectorFn,
     child(
         filterFn: (node: Element, idx: number, originNode: Element) => boolean,
-        dependencies?: { [string]: any }): TestCafe$SelectorFn,
+        dependencies?: { [string]: any, ... }): TestCafe$SelectorFn,
 
     sibling(): TestCafe$SelectorFn,
 
@@ -152,7 +152,7 @@ declare interface TestCafe$SelectorAPI {
 
     sibling(
         filterFn: (node: Element, idx: number, originNode: Element) => boolean,
-        dependencies?: { [string]: any }): TestCafe$SelectorFn,
+        dependencies?: { [string]: any, ... }): TestCafe$SelectorFn,
 
 
     nextSibling(): TestCafe$SelectorFn,
@@ -166,7 +166,7 @@ declare interface TestCafe$SelectorAPI {
 
     nextSibling(
         filterFn: (node: Element, idx: number, originNode: Element) => boolean,
-        dependencies?: { [string]: any }): TestCafe$SelectorFn,
+        dependencies?: { [string]: any, ... }): TestCafe$SelectorFn,
 
 
     prevSibling(): TestCafe$SelectorFn,
@@ -180,7 +180,7 @@ declare interface TestCafe$SelectorAPI {
 
     prevSibling(
         filterFn: (node: Element, idx: number, originNode: Element) => boolean,
-        dependencies?: { [string]: any }): TestCafe$SelectorFn,
+        dependencies?: { [string]: any, ... }): TestCafe$SelectorFn,
 
 
     exists: Promise<boolean>,
@@ -325,8 +325,8 @@ declare type TestCafe$SelectorParameter =
   (...args: any[]) => null | Node | Node[] | NodeList<*> | HTMLCollection<*>;
 
 declare interface TestCafe$TestController {
-    ctx: { [key: string]: any },
-    fixtureCtx: { [key: string]: any },
+    ctx: { [key: string]: any, ... },
+    fixtureCtx: { [key: string]: any, ... },
 
     click(
         selector: TestCafe$SelectorParameter,
@@ -569,8 +569,8 @@ declare interface TestCafe$FixtureFn {
     (name: string|string[]): TestCafe$FixtureFn,
     page(url: string|string[]): TestCafe$FixtureFn,
     httpAuth(credentials: TestCafe$HTTPAuthCredentials): TestCafe$FixtureFn,
-    before(fn: (ctx: { [key: string]: any }) => Promise<any>): TestCafe$FixtureFn,
-    after(fn: (ctx: {[key: string]: any }) => Promise<any>): TestCafe$FixtureFn,
+    before(fn: (ctx: { [key: string]: any, ... }) => Promise<any>): TestCafe$FixtureFn,
+    after(fn: (ctx: { [key: string]: any, ... }) => Promise<any>): TestCafe$FixtureFn,
     beforeEach(fn: (t: TestCafe$TestController) => Promise<any>): TestCafe$FixtureFn,
     afterEach(fn: (t: TestCafe$TestController) => Promise<any>): TestCafe$FixtureFn,
     skip: TestCafe$FixtureFn,
@@ -638,7 +638,11 @@ declare module 'testcafe' {
         on(event: 'ready', handler: Function): BrowserConnection
     }
 
-    declare type BrowserType = string | { path: string, cmd: string } | BrowserConnection;
+    declare type BrowserType = string | {
+        path: string,
+        cmd: string,
+        ...
+    } | BrowserConnection;
 
     declare interface Stream {
         write(chunk: string): any
@@ -665,7 +669,8 @@ declare module 'testcafe' {
             pageLoadTimeout: number,
             speed: number,
             debugMode: boolean,
-            debugOnFail: boolean
+            debugOnFail: boolean,
+            ...
         }): CancelablePromise<number>,
 
         stop(): Promise<void>
@@ -679,16 +684,13 @@ declare module 'testcafe' {
 
     declare module.exports: {
         (hostname: string, port1: number, port2: number): Promise<TestCafe>,
-
         Selector(init: TestCafe$SelectorParameter, options?: TestCafe$SelectorOptions): TestCafe$SelectorFn,
         ClientFunction(fn: (...args: any) => any, options?: TestCafe$ClientFunctionOptions): TestCafe$ClientFunctionFn,
-
         Role: TestCafe$RoleFn,
-        
         RequestMock: typeof TestCafe$RequestMockFn,
         RequestLogger: typeof TestCafe$RequestLoggerFn,
         RequestHook: Class<TestCafe$RequestHookClass>,
-        
-        t: TestCafe$TestController
+        t: TestCafe$TestController,
+        ...
     };
 }

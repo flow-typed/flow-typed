@@ -18,7 +18,8 @@ declare module "react-router-dom" {
     className?: string,
     to: string | LocationShape,
     replace?: boolean,
-    children?: React$Node
+    children?: React$Node,
+    ...
   }>
 
   declare export var NavLink: React$ComponentType<{
@@ -30,7 +31,8 @@ declare module "react-router-dom" {
     isActive?: (match: Match, location: Location) => boolean,
     children?: React$Node,
     exact?: boolean,
-    strict?: boolean
+    strict?: boolean,
+    ...
   }>
 
   // NOTE: Below are duplicated from react-router. If updating these, please
@@ -40,14 +42,16 @@ declare module "react-router-dom" {
     search: string,
     hash: string,
     state?: any,
-    key?: string
+    key?: string,
+    ...
   };
 
   declare export type LocationShape = {
     pathname?: string,
     search?: string,
     hash?: string,
-    state?: any
+    state?: any,
+    ...
   };
 
   declare export type HistoryAction = "PUSH" | "REPLACE" | "POP";
@@ -70,14 +74,16 @@ declare module "react-router-dom" {
     ): () => void,
     // createMemoryHistory
     index?: number,
-    entries?: Array<Location>
+    entries?: Array<Location>,
+    ...
   };
 
   declare export type Match = {
-    params: { [key: string]: ?string },
+    params: { [key: string]: ?string, ... },
     isExact: boolean,
     path: string,
-    url: string
+    url: string,
+    ...
   };
 
   declare export type ContextRouter = {|
@@ -91,7 +97,8 @@ declare module "react-router-dom" {
     history: RouterHistory | void,
     location: Location | void,
     match: Match | void,
-    staticContext?: StaticRouterContext | void
+    staticContext?: StaticRouterContext | void,
+    ...
   };
 
   declare export type GetUserConfirmation = (
@@ -99,9 +106,7 @@ declare module "react-router-dom" {
     callback: (confirmed: boolean) => void
   ) => void;
 
-  declare export type StaticRouterContext = {
-    url?: string
-  };
+  declare export type StaticRouterContext = { url?: string, ... };
 
   declare export var StaticRouter: React$ComponentType<{|
     basename?: string,
@@ -152,7 +157,7 @@ declare module "react-router-dom" {
     location?: Location
   |}>
 
-  declare export function withRouter<Props: {}, Component: React$ComponentType<Props>>(
+  declare export function withRouter<Props: {...}, Component: React$ComponentType<Props>>(
     WrappedComponent: Component
   ): React$ComponentType<$Diff<React$ElementConfig<Component>, ContextRouterVoid>>;
 
@@ -160,7 +165,8 @@ declare module "react-router-dom" {
     path?: string,
     exact?: boolean,
     sensitive?: boolean,
-    strict?: boolean
+    strict?: boolean,
+    ...
   };
 
   declare export function matchPath(

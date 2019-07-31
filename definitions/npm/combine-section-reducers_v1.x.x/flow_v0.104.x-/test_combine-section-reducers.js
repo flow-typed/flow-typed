@@ -2,8 +2,8 @@
 import type { SectionReducer, CombinedSectionReducer } from 'combine-section-reducers'
 import combineSectionReducers from 'combine-section-reducers'
 
-type Action = { type: 'A' } | { type: 'B' };
-type AState = { foo: number };
+type Action = { type: 'A', ... } | { type: 'B', ... };
+type AState = { foo: number, ... };
 const initialAState: AState = { foo: 1 }
 const reducerA = (state = initialAState, action) => {
   return state
@@ -11,7 +11,8 @@ const reducerA = (state = initialAState, action) => {
 type State = {
   a: AState,
   name: string,
-  age: number
+  age: number,
+  ...
 };
 
 //
@@ -32,7 +33,7 @@ const reducer0: CombinedSectionReducer<State, Action, State> = combineSectionRed
   age: reducerAge
 })
 
-const superReducer: SectionReducer<{data: State}, Action, {data: State}> = combineSectionReducers({
+const superReducer: SectionReducer<{ data: State, ... }, Action, { data: State, ... }> = combineSectionReducers({
   data: reducer0
 });
 

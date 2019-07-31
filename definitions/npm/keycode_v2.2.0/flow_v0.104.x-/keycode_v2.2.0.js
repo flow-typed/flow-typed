@@ -122,6 +122,7 @@ declare module 'keycode' {
       '⌃': 17,
       '⌘': 91,
       '⌥': 18,
+      ...
     }>
   >;
 
@@ -147,6 +148,7 @@ declare module 'keycode' {
       ins: 45,
       del: 46,
       cmd: 91,
+      ...
     }>
   >;
 
@@ -273,6 +275,7 @@ declare module 'keycode' {
       '17': '⌃',
       '91': '⌘',
       '18': '⌥',
+      ...
     }>
   >;
 

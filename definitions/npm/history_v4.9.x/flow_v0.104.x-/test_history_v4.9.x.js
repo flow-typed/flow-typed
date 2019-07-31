@@ -29,7 +29,7 @@ describe('browser history', () => {
     })
 
     const key: string = history.location.key
-    const state: {} = history.location.state
+    const state: {...} = history.location.state
   });
 
   it('should not allow to get field which is absent in the history', () => {
@@ -113,7 +113,7 @@ describe('memory history', () => {
     })
 
     const key: string = history.location.key
-    const state: {} = history.location.state
+    const state: {...} = history.location.state
   });
 
   it('should not allow to get field which is absent in the history', () => {
@@ -197,7 +197,7 @@ describe('hash history', () => {
     // $ExpectError
     const key: string = history.location.key
     // $ExpectError
-    const state: {} = history.location.state
+    const state: {...} = history.location.state
   });
 
   it('should not allow to get field which is absent in the history', () => {
@@ -266,7 +266,7 @@ describe('create path', () => {
 
     const key: string = path
     // $ExpectError
-    const state: {} = path
+    const state: {...} = path
   });
 
   it('should not allow to accept void', () => {
@@ -281,7 +281,7 @@ describe('parse path', () => {
   it('should allow to use string argument', () => {
     const location = parsePath('/test?query#hash')
 
-    const state: {} = location
+    const state: {...} = location
     // $ExpectError
     const key: string = location
   });
@@ -290,6 +290,6 @@ describe('parse path', () => {
     // $ExpectError
     const location = parsePath()
 
-    const state: {} = location
+    const state: {...} = location
   });
 });

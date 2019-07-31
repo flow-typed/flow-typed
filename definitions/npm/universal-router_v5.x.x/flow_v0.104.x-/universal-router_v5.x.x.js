@@ -5,7 +5,8 @@ type UniversalRouterKey = {
   optional: boolean,
   repeat: boolean,
   partial: boolean,
-  pattern?: string
+  pattern?: string,
+  ...
 };
 
 type UniversalRouterContext = {
@@ -16,7 +17,8 @@ type UniversalRouterContext = {
   baseUrl: string,
   path: string,
   params: Object,
-  keys: Array<UniversalRouterKey>
+  keys: Array<UniversalRouterKey>,
+  ...
 };
 
 type UniversalRouterRoute = {
@@ -24,7 +26,8 @@ type UniversalRouterRoute = {
   name?: string,
   parent?: ?UniversalRouterRoute,
   children?: ?Array<UniversalRouterRoute>,
-  action?: (context: UniversalRouterContext, params: Object) => any
+  action?: (context: UniversalRouterContext, params: Object) => any,
+  ...
 };
 
 type UniversalRouterResolveRoute<R, C, O> = (context: C, params: Object) => O;
@@ -32,12 +35,11 @@ type UniversalRouterResolveRoute<R, C, O> = (context: C, params: Object) => O;
 type UniversalRouterOptions<R, C, O> = {
   context?: C,
   baseUrl?: string,
-  resolveRoute?: UniversalRouterResolveRoute<R, C, O>
+  resolveRoute?: UniversalRouterResolveRoute<R, C, O>,
+  ...
 };
 
-type UniversalRouterResolveParams = {
-  pathname: string
-};
+type UniversalRouterResolveParams = { pathname: string, ... };
 
 declare class UniversalRouterType<
   R, // Route type
@@ -63,7 +65,8 @@ type UniversalRouterGenerateUrl = (
 ) => string;
 type UniversalRouterGenerateUrlsFnOpts = {
   encode?: string => string,
-  stringifyQueryParams?: (params: Object) => string
+  stringifyQueryParams?: (params: Object) => string,
+  ...
 };
 type UniversalRouterGenerateUrlsFn = (
   router: UniversalRouterType<*, *, *, *>,

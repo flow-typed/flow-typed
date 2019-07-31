@@ -10,5 +10,5 @@ declare module "react-css-modules" {
       allowMultiple?: boolean,
       errorWhenNotFound?: boolean,
     |},
-  ) => Class<React$Component<$Diff<P, { styles: X }>, S>>;
+  ) => Class<React$Component<$Diff<P, { styles: X, ... }>, S>>;
 }

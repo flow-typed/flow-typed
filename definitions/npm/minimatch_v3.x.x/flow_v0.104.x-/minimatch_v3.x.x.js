@@ -9,7 +9,8 @@ type $npm$minimatch$Options = {
   matchBase?: boolean,
   nocomment?: boolean,
   nonegate?: boolean,
-  flipNegate?: boolean
+  flipNegate?: boolean,
+  ...
 };
 
 declare module "minimatch" {

@@ -5,22 +5,25 @@ declare module 'meow' {
     version?: string | boolean,
     pkg?: string | Object,
     argv?: Array<string>,
-    inferType?: boolean
+    inferType?: boolean,
+    ...
   };
 
   declare type minimistOptions = {
     string?: string | Array<string>,
     boolean?: boolean | string | Array<string>,
-    alias?: { [arg: string]: string | Array<string> },
-    default?: { [arg: string]: any },
+    alias?: { [arg: string]: string | Array<string>, ... },
+    default?: { [arg: string]: any, ... },
     stopEarly?: boolean,
     '--'?: boolean,
-    unknown?: (param: string) => boolean
+    unknown?: (param: string) => boolean,
+    ...
   };
 
   declare type Flags = {
+    [flag: string]: string | boolean,
     '--'?: Array<string>,
-    [flag: string]: string | boolean
+    ...
   };
 
   declare module.exports: (
@@ -31,6 +34,7 @@ declare module 'meow' {
     flags: Flags,
     pkg: Object,
     help: string,
-    showHelp: Function
+    showHelp: Function,
+    ...
   }
 }

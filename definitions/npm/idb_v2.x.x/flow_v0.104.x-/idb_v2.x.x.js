@@ -96,8 +96,9 @@ declare module 'idb' {
     createObjectStore(
       name: string,
       optionalParameters?: {
-        keyPath?: string,
-        autoIncrement?: boolean,
+       keyPath?: string,
+       autoIncrement?: boolean,
+       ...
       }
     ): ObjectStore;
 
@@ -287,9 +288,10 @@ declare module 'idb' {
       name: string,
       keyPath: string | Array<string>,
       optionalParameters?: {
-        unique?: boolean,
-        multiEntry?: boolean,
-        locale?: string | 'auto' | null,
+       unique?: boolean,
+       multiEntry?: boolean,
+       locale?: string | 'auto' | null,
+       ...
       }
     ): Index;
 

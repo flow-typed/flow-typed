@@ -14,7 +14,8 @@ declare module "react-helmet" {
       newState: Object,
       addedTags: Object,
       removeTags: Object
-    ) => void | mixed
+    ) => void | mixed,
+    ...
   };
   declare interface HeadAttribute {
     toString(): string;

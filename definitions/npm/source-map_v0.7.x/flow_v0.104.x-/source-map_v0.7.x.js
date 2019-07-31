@@ -158,9 +158,7 @@ declare module 'source-map' {
      *    - name: The original identifier, or null.
      */
     originalPositionFor(
-      generatedPosition: Position & {
-        bias?: number,
-      }
+      generatedPosition: Position & { bias?: number, ... }
     ): NullableMappedPosition;
 
     /**
@@ -183,9 +181,7 @@ declare module 'source-map' {
      *    - column: The column number in the generated source, or null.
      */
     generatedPositionFor(
-      originalPosition: MappedPosition & {
-        bias?: number,
-      }
+      originalPosition: MappedPosition & { bias?: number, ... }
     ): NullablePosition;
 
     /**

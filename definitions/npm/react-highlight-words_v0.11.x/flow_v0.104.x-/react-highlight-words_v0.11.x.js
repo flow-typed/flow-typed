@@ -6,7 +6,8 @@ declare module "react-highlight-words" {
     caseSensitive: boolean,
     sanitize: Sanitize,
     searchWords: Array<string>,
-    textToHighlight: string
+    textToHighlight: string,
+    ...
   }) => Array<string>;
 
   declare type Props = {
@@ -17,13 +18,14 @@ declare module "react-highlight-words" {
     caseSensitive?: boolean,
     findChunks?: FindChunks,
     highlightClassName?: string,
-    highlightStyle?: {[name: string]: string},
+    highlightStyle?: { [name: string]: string, ... },
     highlightTag?: Node,
     sanitize?: Sanitize,
     searchWords: Array<string>,
     textToHighlight: string,
     unhighlightClassName?: string,
-    unhighlightStyle?: {[name: string]: string}
+    unhighlightStyle?: { [name: string]: string, ... },
+    ...
   };
 
   declare export default class ReactHighlightedWords extends React$Component<Props> {}

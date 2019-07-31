@@ -2,7 +2,7 @@ declare module "component-emitter" {
   declare type Callback = (...args: mixed[]) => void;
 
   declare class Emitter {
-    static (base?: {}): this;
+    static (base?: {...}): this;
     on(event: string, cb: Callback): this;
     addEventListener(event: string, cb: Callback): this;
 

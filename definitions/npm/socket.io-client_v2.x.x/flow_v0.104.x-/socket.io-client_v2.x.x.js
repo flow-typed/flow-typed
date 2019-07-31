@@ -10,19 +10,14 @@ declare module "socket.io-client" {
     randomizationFactor: number,
     timeout: number,
     transports: ("polling" | "websocket")[],
-    transportOptions: {
-      polling: {
-        extraHeaders: {[string]:string}
-      }
-    },
+    transportOptions: { polling: { extraHeaders: { [string]:string, ... }, ... }, ... },
     autoConnect: boolean,
-    query: { [string]: string },
-    parser: any
+    query: { [string]: string, ... },
+    parser: any,
+    ...
   }>;
 
-  declare type SocketOptions = $Shape<{
-    query: string
-  }>;
+  declare type SocketOptions = $Shape<{ query: string, ... }>;
 
   declare class Emitter<T> {
     on(event: string, cb: Callback): T;
@@ -69,7 +64,8 @@ declare module "socket.io-client" {
     {
       forceNew: boolean,
       "force new connection": true,
-      multiplex: boolean
+      multiplex: boolean,
+      ...
     } & ManagerOptions
   >;
 

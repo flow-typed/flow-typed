@@ -6,72 +6,87 @@ declare module "react-pdf" {
   declare type DocumentDefaultProps = {
     error: "Failed to load PDF file.",
     loading: "Loading PDF…",
-    noData: "No PDF file specified."
+    noData: "No PDF file specified.",
+    ...
   };
 
   declare type DocumentProps = {
-    file: File | string | { url: string, data: any, httpHeaders: Object }, // TODO: Improve
+    // TODO: Improve
+    file: File | string | {
+      url: string,
+      data: any,
+      httpHeaders: Object,
+      ...
+    },
     children: React$Node,
     className?: string,
     error?: React$Node,
     inputRef?: (ref: ?HTMLElement) => mixed,
     loading?: React$Node,
     noData?: React$Node,
-    onItemClick?: (page: ?Object) => void, // TODO: Improve
+    // TODO: Improve
+    onItemClick?: (page: ?Object) => void,
     onLoadError?: (error: Error) => void,
-    onLoadSuccess?: (pdf: Object) => void, // TODO: Improve
+    // TODO: Improve
+    onLoadSuccess?: (pdf: Object) => void,
     onSourceError?: (error: Error) => void,
     onSourceSuccess?: () => void,
-    rotate?: number
+    rotate?: number,
+    ...
   };
 
-  declare type DocumentState = {
-    pdf: ?Object // TODO: Improve
-  };
+  declare type DocumentState = { // TODO: Improve
+  pdf: ?Object, ... };
 
   declare type PageDefaultProps = {
     renderAnnotations: true,
     renderMode: "canvas",
     renderTextLayer: true,
-    scale: 1.0
+    scale: 1.0,
+    ...
   };
 
   declare type PageProps = {
     className?: string,
     inputRef?: (ref: ?HTMLElement) => mixed,
     onLoadError?: (error: Error) => void,
-    onLoadSuccess?: (pdf: Object) => void, // TODO: Improve
+    // TODO: Improve
+    onLoadSuccess?: (pdf: Object) => void,
     onRenderError?: (error: Error) => void,
     onRenderSuccess?: () => void,
     onGetAnnotationsError?: (error: Error) => void,
-    onGetAnnotationsSuccess?: (annotations: any) => void, // TODO: Improve
+    // TODO: Improve
+    onGetAnnotationsSuccess?: (annotations: any) => void,
     onGetTextError?: (error: Error) => void,
-    onGetTextSuccess?: (items: any) => void, // TODO: Improve
+    // TODO: Improve
+    onGetTextSuccess?: (items: any) => void,
     pageIndex?: number,
     pageNumber?: number,
     renderAnnotations?: boolean,
     renderTextLayer?: boolean,
     rotate?: number,
     scale?: number,
-    width?: number
+    width?: number,
+    ...
   };
 
-  declare type PageState = {
-    page: ?Object // TODO: Improve
-  };
+  declare type PageState = { // TODO: Improve
+  page: ?Object, ... };
 
   declare type OutlineProps = {
     className?: string,
-    onItemClick: (page: Object) => void, // TODO: Improve
+    // TODO: Improve
+    onItemClick: (page: Object) => void,
     onLoadError?: (error: Error) => void,
     onLoadSuccess?: () => void,
     onParseError?: (error: Error) => void,
-    onParseSuccess?: (outline: Object) => void // TODO: Improve
+    // TODO: Improve
+    onParseSuccess?: (outline: Object) => void,
+    ...
   };
 
-  declare type OutlineState = {
-    outline: ?Array<any> // TODO: Improve
-  };
+  declare type OutlineState = { // TODO: Improve
+  outline: ?Array<any>, ... };
 
   declare type SetOptions = (options: {|
     cMapUrl?: string,

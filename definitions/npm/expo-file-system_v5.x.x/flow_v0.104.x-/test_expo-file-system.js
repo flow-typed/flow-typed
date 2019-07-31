@@ -281,7 +281,7 @@ describe('downloadAsync', () => {
     downloadAsync('url', 'fileUri').then(result => {
       (result.uri: string);
       (result.status: number);
-      (result.headers: { [string]: string });
+      (result.headers: { [string]: string, ... });
       (result.md5: ?string);
 
       // $ExpectError: check any
@@ -361,7 +361,7 @@ describe('createDownloadResumable', () => {
         if (result) {
           (result.uri: string);
           (result.status: number);
-          (result.headers: { [string]: string });
+          (result.headers: { [string]: string, ... });
           (result.md5: ?string);
         } else {
           (result: void);
@@ -386,7 +386,7 @@ describe('createDownloadResumable', () => {
         if (result) {
           (result.uri: string);
           (result.status: number);
-          (result.headers: { [string]: string });
+          (result.headers: { [string]: string, ... });
           (result.md5: ?string);
         } else {
           (result: void);

@@ -26,7 +26,8 @@ describe("cps effect", () => {
   describe("all variants", () => {
     declare type NodeCallback<R> = {
       (err: Error): void,
-      (err: null | void | false, result: R): void
+      (err: null | void | false, result: R): void,
+      ...
     };
 
     function cpsfn0(cb: NodeCallback<number>): void {}

@@ -14,6 +14,7 @@ declare module 'bunyan' {
     | 20 // debug
     | 10; // info
   declare type BunyanRecord = {
+    [key: string]: any,
     v: number,
     level: BunyanLogLevels,
     name: string,
@@ -28,12 +29,11 @@ declare module 'bunyan' {
       code: any,
       signal: any,
       stack: string,
+      ...
     },
-    [key: string]: any,
+    ...
   };
-  declare type Writable = {
-    write(rec: BunyanRecord): void,
-  };
+  declare type Writable = { write(rec: BunyanRecord): void, ... };
   declare class Logger extends events$EventEmitter {
     constructor(options: LoggerOptions): any;
     addStream(stream: Stream): void;
@@ -82,10 +82,15 @@ declare module 'bunyan' {
         headers: mixed,
         remoteAddress: string,
         remotePort: number,
+        ...
       },
       res: (
         res: http$IncomingMessage<>
-      ) => { statusCode: number, header: string },
+      ) => {
+        statusCode: number,
+        header: string,
+        ...
+      },
       err: (
         err: Error
       ) => {
@@ -94,7 +99,9 @@ declare module 'bunyan' {
         stack: string,
         code: string,
         signal: string,
+        ...
       },
+      ...
     };
   }
   declare interface LoggerOptions {
@@ -104,9 +111,7 @@ declare module 'bunyan' {
     serializers?: Serializers;
     src?: boolean;
   }
-  declare type Serializers = {
-    [key: string]: (input: any) => mixed,
-  };
+  declare type Serializers = { [key: string]: (input: any) => mixed, ... };
   declare type Stream = {
     type?: string,
     level?: number | string,
@@ -115,11 +120,12 @@ declare module 'bunyan' {
     closeOnExit?: boolean,
     period?: string,
     count?: number,
+    ...
   };
   declare var stdSerializers: Serializers;
   declare function resolveLevel(value: number | string): number;
   declare function createLogger(
-    options: LoggerOptions & { name: string }
+    options: LoggerOptions & { name: string, ... }
   ): Logger;
   declare class RingBuffer extends events$EventEmitter {
     constructor(options: RingBufferOptions): any;
@@ -144,10 +150,9 @@ declare module 'bunyan' {
     warn: typeof WARN,
     error: typeof ERROR,
     fatal: typeof FATAL,
+    ...
   };
-  declare var nameFromLevel: {
-    [key: BunyanLogLevels]: string,
-  };
+  declare var nameFromLevel: { [key: BunyanLogLevels]: string, ... };
   declare var VERSION: string;
   declare var LOG_VERSION: string;
 }

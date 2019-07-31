@@ -78,7 +78,7 @@ interface AlaSQL {
     sql?: string | Array<any> | (() => void),
     params?: any,
     cb?: _alasql_Callback
-  ): string | number | {} | Array<any> | Thenable<any>;
+  ): string | number | {...} | Array<any> | Thenable<any>;
   options: _alasql_Options;
   error: Error;
   parse(sql: string): _alasql_AST;

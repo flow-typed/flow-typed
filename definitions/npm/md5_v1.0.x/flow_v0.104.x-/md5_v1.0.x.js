@@ -6,7 +6,8 @@ declare module "md5" {
     options?: {
       asString?: boolean,
       asBytes?: boolean,
-      encoding?: string
+      encoding?: string,
+      ...
     }
   ) => string;
 }

@@ -85,7 +85,7 @@ async function testObject() {
   // $ExpectError
   const o4: number = obj.a
 
-  const map: { [key: string]: number } = await a.object({}, 4)
+  const map: { [key: string]: number, ... } = await a.object({}, 4)
 
   const m1: number = map.foo
 

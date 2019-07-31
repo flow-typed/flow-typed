@@ -12,7 +12,7 @@ describe("filter", () => {
   });
 
   it("filters objects by passing the value to the predicate", () => {
-    const s: { [key: string]: string } = R.filter(x => x === "2", {
+    const s: { [key: string]: string, ... } = R.filter(x => x === "2", {
       a: "2",
       b: "3"
     });
@@ -49,9 +49,9 @@ describe("filter", () => {
       (result1: $ReadOnlyArray<number>);
 
       // $ExpectError
-      (result1: { +[key: string]: number });
+      (result1: { +[key: string]: number, ... });
       // $ExpectError
-      (result1: { [key: string]: number });
+      (result1: { [key: string]: number, ... });
       // $ExpectError
       (result1: Array<number>);
 
@@ -60,16 +60,16 @@ describe("filter", () => {
       (result2: $ReadOnlyArray<number>);
 
       // $ExpectError
-      (result2: { +[key: string]: number });
+      (result2: { +[key: string]: number, ... });
       // $ExpectError
-      (result2: { [key: string]: number });
+      (result2: { [key: string]: number, ... });
       // $ExpectError
       (result2: Array<number>);
     });
 
     it("should return readonly Object", () => {
       type O = {| key: number |};
-      const readOnlyObj: { +[k: string]: O } = Object.freeze({
+      const readOnlyObj: { +[k: string]: O, ... } = Object.freeze({
         a: { key: 1 },
         c: { key: 2 },
         d: { key: 3 }
@@ -81,14 +81,14 @@ describe("filter", () => {
           (v: number) => v === 0
         ),
         readOnlyObj
-      ): $ReadOnly<{ [k: string]: O }>);
+      ): $ReadOnly<{ [k: string]: O, ... }>);
 
       (filter(
         R.pipe(
           R.prop("key"),
           (v: number) => v === 0
         )
-      )(readOnlyObj): { +[k: string]: O });
+      )(readOnlyObj): { +[k: string]: O, ... });
     });
   });
 });
