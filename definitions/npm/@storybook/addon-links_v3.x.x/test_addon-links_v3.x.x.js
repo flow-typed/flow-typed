@@ -8,6 +8,7 @@ import LinkTo from '@storybook/addon-links/react';
 
 const Button = (props: {
   onClick: (SyntheticMouseEvent<HTMLButtonElement>) => void,
+  ...
 }) => (
   <button type="button" {...props}>
     Click me
@@ -16,6 +17,7 @@ const Button = (props: {
 
 const Select = (props: {
   onChange: (SyntheticInputEvent<HTMLSelectElement>) => void,
+  ...
 }) => (
   <select {...props}>
     <option>First</option>

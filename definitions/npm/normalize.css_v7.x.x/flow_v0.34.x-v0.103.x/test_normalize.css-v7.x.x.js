@@ -1,0 +1,2 @@
+// @flow
+import "normalize.css";
