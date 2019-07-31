@@ -55,7 +55,7 @@ declare module 'expo-file-system' {
 
   declare export type GetInfoOptions = {|
     md5?: boolean,
-    cache?: boolean,
+    size?: boolean,
   |};
 
   declare export type ReadingOptions = {|
@@ -91,6 +91,8 @@ declare module 'expo-file-system' {
     fileUri: string,
     options?: ReadingOptions
   ): Promise<string>;
+
+  declare export function getContentUriAsync(fileUri: string): Promise<string>;
 
   declare export function writeAsStringAsync(
     fileUri: string,
