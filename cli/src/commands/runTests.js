@@ -319,9 +319,10 @@ async function writeFlowConfig(repoDirPath, testDirPath, libDefPath, version) {
 
 function testTypeDefinition(flowVer, testDirPath) {
   return new Promise(res => {
+    const IS_WINDOWS = os.type() === 'Windows_NT';
     const child = child_process.exec(
       [
-        path.join(BIN_DIR, 'flow-' + flowVer),
+        path.join(BIN_DIR, 'flow-' + flowVer + (IS_WINDOWS ? '.exe' : '')),
         'check',
         '--strip-root',
         '--all',
