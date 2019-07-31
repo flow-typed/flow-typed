@@ -54,8 +54,8 @@ describe('getInfoAsync', () => {
     });
 
     getInfoAsync('fileUri', { md5: true });
-    getInfoAsync('fileUri', { cache: true });
-    getInfoAsync('fileUri', { md5: true, cache: true });
+    getInfoAsync('fileUri', { size: true });
+    getInfoAsync('fileUri', { md5: true, size: true });
   });
 
   it('should raises an error when pass invalid arguments', () => {
