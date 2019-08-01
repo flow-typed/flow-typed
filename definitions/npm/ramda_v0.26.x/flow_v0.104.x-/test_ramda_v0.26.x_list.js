@@ -228,8 +228,8 @@ const str: string = "hello world";
   describe('groupBy', () => {
     it('should work with basic array', () => {
       const fn = x => `${x}`;
-      const groupedBy: { [k: string]: Array<number> } = groupBy(fn, [1, 2, 3]);
-      const groupedBy1: { [k: string]: Array<string> } = groupBy(fn)(['one', 'two', 'three']);
+      const groupedBy: { [k: string]: Array<number>, ... } = groupBy(fn, [1, 2, 3]);
+      const groupedBy1: { [k: string]: Array<string>, ... } = groupBy(fn)(['one', 'two', 'three']);
     });
     it('group function should return string', () => {
       const fn: number => number = x => x;
@@ -250,9 +250,9 @@ const str: string = "hello world";
     it('should support readonly array', () => {
       const fn: (number | string) => string = x => `${x}`;
       const arr: $ReadOnlyArray<number> = [1, 2, 3];
-      const groupedBy: { [k: string]: Array<number> } = groupBy(fn, arr);
+      const groupedBy: { [k: string]: Array<number>, ... } = groupBy(fn, arr);
       const arr1: $ReadOnlyArray<number|string> = [1, 'two', 3];
-      const groupedBy1: { [k: string]: Array<number|string> } = groupBy(fn)(arr1);
+      const groupedBy1: { [k: string]: Array<number|string>, ... } = groupBy(fn)(arr1);
 
       const fn1: number => string = x => `${x}`;
       // $ExpectError

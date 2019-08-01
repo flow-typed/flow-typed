@@ -105,7 +105,7 @@ describe("Object", () => {
     })
 
     it('works with lensPath down to level 5', () => {
-      type NestedData = { a: { b: { c: { d: { e: string } } } } };
+      type NestedData = { a: { b: { c: { d: { e: string, ... }, ... }, ... }, ... }, ... };
       const nestedData: NestedData = {
         a: {
           b: {
