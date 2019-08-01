@@ -1,8 +1,6 @@
 /* @flow */
 /*eslint-disable no-undef, no-unused-vars, no-console*/
-import _, { __, compose, pipe, uncurryN, curry, pipeP, pipeK, tryCatch, applyTo } from "ramda";
-import { describe, it } from 'flow-typed-test';
-
+import _, { compose, pipe, uncurryN, curry, pipeP, pipeK, tryCatch, applyTo } from "ramda";
 // Function
 const ns: Array<number> = [1, 2, 3, 4, 5];
 const ss: Array<string> = ["one", "two", "three", "four"];
@@ -126,255 +124,169 @@ const str3: Array<string | void> = _.pipe(_.toLower, _.trim, _.match(/2/))(
 const str4: Array<string> = _.pipe(_.toLower, _.trim, _.split(","))(" 1,2,3 ");
 const str5: string = _.pipe(_.replace("3", "4"), _.toLower, _.trim)(" 1,2,3 ");
 
-describe('curry', () => {
-  declare var bar1: string => "bar1";
-  declare var bar2: (string, number) => "bar2";
-  declare var bar6: (string, number, boolean, null, {}, []) => "bar6";
+// --- Curry ---
+declare var bar1: string => "bar1";
+declare var bar2: (string, number) => "bar2";
+declare var bar6: (string, number, boolean, null, {}, []) => "bar6";
 
-  const foo1 = curry(bar1);
-  const foo2 = curry(bar2);
-  const foo6 = curry(bar6);
+const foo1 = curry(bar1);
+const foo2 = curry(bar2);
+const foo6 = curry(bar6);
 
-  const foo1_1: "bar1" = foo1("");
-  const foo2_1: "bar2" = foo2("", 0);
-  const foo2_2: "bar2" = foo2("")(0);
+const foo1_1: "bar1" = foo1("");
+const foo2_1: "bar2" = foo2("", 0);
+const foo2_2: "bar2" = foo2("")(0);
 
-  const foo6_1: "bar6" = foo6("dnu", 0, true, null, {}, []);
-  const foo6_2: "bar6" = foo6("")(0, true, null, {}, []);
-  const foo6_3: "bar6" = foo6("", 0)(true, null, {}, []);
-  const foo6_4: "bar6" = foo6("", 0, true)(null, {}, []);
-  const foo6_5: "bar6" = foo6("", 0, true, null)({}, []);
-  const foo6_6: "bar6" = foo6("", 0, true, null, {})([]);
-  const foo6_7: "bar6" = foo6("")(0)(true, null, {}, []);
-  const foo6_8: "bar6" = foo6("", 0)(true)(null, {}, []);
-  const foo6_9: "bar6" = foo6("", 0, true)(null)({}, []);
-  const foo6_10: "bar6" = foo6("", 0, true, null)({})([]);
-  const foo6_11: "bar6" = foo6("")(0, true)(null, {}, []);
-  const foo6_12: "bar6" = foo6("", 0)(true, null)({}, []);
-  const foo6_13: "bar6" = foo6("", 0, true)(null, {})([]);
-  const foo6_14: "bar6" = foo6("")(0, true, null)({}, []);
-  const foo6_15: "bar6" = foo6("", 0)(true, null, {})([]);
-  const foo6_16: "bar6" = foo6("")(0, true, null, {})([]);
+const foo6_1: "bar6" = foo6("", 0, true, null, {}, []);
+const foo6_2: "bar6" = foo6("")(0, true, null, {}, []);
+const foo6_3: "bar6" = foo6("", 0)(true, null, {}, []);
+const foo6_4: "bar6" = foo6("", 0, true)(null, {}, []);
+const foo6_5: "bar6" = foo6("", 0, true, null)({}, []);
+const foo6_6: "bar6" = foo6("", 0, true, null, {})([]);
+const foo6_7: "bar6" = foo6("")(0)(true, null, {}, []);
+const foo6_8: "bar6" = foo6("", 0)(true)(null, {}, []);
+const foo6_9: "bar6" = foo6("", 0, true)(null)({}, []);
+const foo6_10: "bar6" = foo6("", 0, true, null)({})([]);
+const foo6_11: "bar6" = foo6("")(0, true)(null, {}, []);
+const foo6_12: "bar6" = foo6("", 0)(true, null)({}, []);
+const foo6_13: "bar6" = foo6("", 0, true)(null, {})([]);
+const foo6_14: "bar6" = foo6("")(0, true, null)({}, []);
+const foo6_15: "bar6" = foo6("", 0)(true, null, {})([]);
+const foo6_16: "bar6" = foo6("")(0, true, null, {})([]);
 
-  // $ExpectError
-  const foo6_1_Error1: "bar6" = foo6(false, 0, true, null, {}, []);
-  // $ExpectError
-  const foo6_2_Error1: "bar6" = foo6(false)(0, true, null, {}, []);
-  // $ExpectError
-  const foo6_3_Error1: "bar6" = foo6(false, 0)(true, null, {}, []);
-  // $ExpectError
-  const foo6_4_Error1: "bar6" = foo6(false, 0, true)(null, {}, []);
-  // $ExpectError
-  const foo6_5_Error1: "bar6" = foo6(false, 0, true, null)({}, []);
-  // $ExpectError
-  const foo6_6_Error1: "bar6" = foo6(false, 0, true, null, {})([]);
-  // $ExpectError
-  const foo6_7_Error1: "bar6" = foo6(false)(0)(true, null, {}, []);
-  // $ExpectError
-  const foo6_8_Error1: "bar6" = foo6(false, 0)(true)(null, {}, []);
-  // $ExpectError
-  const foo6_9_Error1: "bar6" = foo6(false, 0, true)(null)({}, []);
-  // $ExpectError
-  const foo6_10_Error1: "bar6" = foo6(false, 0, true, null)({})([]);
-  // $ExpectError
-  const foo6_11_Error1: "bar6" = foo6(false)(0, true)(null, {}, []);
-  // $ExpectError
-  const foo6_12_Error1: "bar6" = foo6(false, 0)(true, null)({}, []);
-  // $ExpectError
-  const foo6_13_Error1: "bar6" = foo6(false, 0, true)(null, {})([]);
-  // $ExpectError
-  const foo6_14_Error1: "bar6" = foo6(false)(0, true, null)({}, []);
-  // $ExpectError
-  const foo6_15_Error1: "bar6" = foo6(false, 0)(true, null, {})([]);
-  // $ExpectError
-  const foo6_16_Error1: "bar6" = foo6(false)(0, true, null, {})([]);
+// $ExpectError
+const foo6_1_Error1: "bar6" = foo6(false, 0, true, null, {}, []);
+// $ExpectError
+const foo6_2_Error1: "bar6" = foo6(false)(0, true, null, {}, []);
+// $ExpectError
+const foo6_3_Error1: "bar6" = foo6(false, 0)(true, null, {}, []);
+// $ExpectError
+const foo6_4_Error1: "bar6" = foo6(false, 0, true)(null, {}, []);
+// $ExpectError
+const foo6_5_Error1: "bar6" = foo6(false, 0, true, null)({}, []);
+// $ExpectError
+const foo6_6_Error1: "bar6" = foo6(false, 0, true, null, {})([]);
+// $ExpectError
+const foo6_7_Error1: "bar6" = foo6(false)(0)(true, null, {}, []);
+// $ExpectError
+const foo6_8_Error1: "bar6" = foo6(false, 0)(true)(null, {}, []);
+// $ExpectError
+const foo6_9_Error1: "bar6" = foo6(false, 0, true)(null)({}, []);
+// $ExpectError
+const foo6_10_Error1: "bar6" = foo6(false, 0, true, null)({})([]);
+// $ExpectError
+const foo6_11_Error1: "bar6" = foo6(false)(0, true)(null, {}, []);
+// $ExpectError
+const foo6_12_Error1: "bar6" = foo6(false, 0)(true, null)({}, []);
+// $ExpectError
+const foo6_13_Error1: "bar6" = foo6(false, 0, true)(null, {})([]);
+// $ExpectError
+const foo6_14_Error1: "bar6" = foo6(false)(0, true, null)({}, []);
+// $ExpectError
+const foo6_15_Error1: "bar6" = foo6(false, 0)(true, null, {})([]);
+// $ExpectError
+const foo6_16_Error1: "bar6" = foo6(false)(0, true, null, {})([]);
 
-  // $ExpectError
-  const foo6_1_Error2: "bar6" = foo6("", 0, true, "", {}, []);
-  // $ExpectError
-  const foo6_2_Error2: "bar6" = foo6("")(0, true, "", {}, []);
-  // $ExpectError
-  const foo6_3_Error2: "bar6" = foo6("", 0)(true, "", {}, []);
-  // $ExpectError
-  const foo6_4_Error2: "bar6" = foo6("", 0, true)("", {}, []);
-  // $ExpectError
-  const foo6_5_Error2: "bar6" = foo6("", 0, true, "")({}, []);
-  // $ExpectError
-  const foo6_6_Error2: "bar6" = foo6("", 0, true, "", {})([]);
-  // $ExpectError
-  const foo6_7_Error2: "bar6" = foo6("")(0)(true, "", {}, []);
-  // $ExpectError
-  const foo6_8_Error2: "bar6" = foo6("", 0)(true)("", {}, []);
-  // $ExpectError
-  const foo6_9_Error2: "bar6" = foo6("", 0, true)("")({}, []);
-  // $ExpectError
-  const foo6_10_Error2: "bar6" = foo6("", 0, true, "")({})([]);
-  // $ExpectError
-  const foo6_11_Error2: "bar6" = foo6("")(0, true)("", {}, []);
-  // $ExpectError
-  const foo6_12_Error2: "bar6" = foo6("", 0)(true, "")({}, []);
-  // $ExpectError
-  const foo6_13_Error2: "bar6" = foo6("", 0, true)("", {})([]);
-  // $ExpectError
-  const foo6_14_Error2: "bar6" = foo6("")(0, true, "")({}, []);
-  // $ExpectError
-  const foo6_15_Error2: "bar6" = foo6("", 0)(true, "", {})([]);
-  // $ExpectError
-  const foo6_16_Error2: "bar6" = foo6("")(0, true, "", {})([]);
+// $ExpectError
+const foo6_1_Error2: "bar6" = foo6("", 0, true, "", {}, []);
+// $ExpectError
+const foo6_2_Error2: "bar6" = foo6("")(0, true, "", {}, []);
+// $ExpectError
+const foo6_3_Error2: "bar6" = foo6("", 0)(true, "", {}, []);
+// $ExpectError
+const foo6_4_Error2: "bar6" = foo6("", 0, true)("", {}, []);
+// $ExpectError
+const foo6_5_Error2: "bar6" = foo6("", 0, true, "")({}, []);
+// $ExpectError
+const foo6_6_Error2: "bar6" = foo6("", 0, true, "", {})([]);
+// $ExpectError
+const foo6_7_Error2: "bar6" = foo6("")(0)(true, "", {}, []);
+// $ExpectError
+const foo6_8_Error2: "bar6" = foo6("", 0)(true)("", {}, []);
+// $ExpectError
+const foo6_9_Error2: "bar6" = foo6("", 0, true)("")({}, []);
+// $ExpectError
+const foo6_10_Error2: "bar6" = foo6("", 0, true, "")({})([]);
+// $ExpectError
+const foo6_11_Error2: "bar6" = foo6("")(0, true)("", {}, []);
+// $ExpectError
+const foo6_12_Error2: "bar6" = foo6("", 0)(true, "")({}, []);
+// $ExpectError
+const foo6_13_Error2: "bar6" = foo6("", 0, true)("", {})([]);
+// $ExpectError
+const foo6_14_Error2: "bar6" = foo6("")(0, true, "")({}, []);
+// $ExpectError
+const foo6_15_Error2: "bar6" = foo6("", 0)(true, "", {})([]);
+// $ExpectError
+const foo6_16_Error2: "bar6" = foo6("")(0, true, "", {})([]);
 
-  // $ExpectError
-  const foo6_1_Error3: "bar6" = foo6("", 0, true, null, {}, "");
-  // $ExpectError
-  const foo6_2_Error3: "bar6" = foo6("")(0, true, null, {}, "");
-  // $ExpectError
-  const foo6_3_Error3: "bar6" = foo6("", 0)(true, null, {}, "");
-  // $ExpectError
-  const foo6_4_Error3: "bar6" = foo6("", 0, true)(null, {}, "");
-  // $ExpectError
-  const foo6_5_Error3: "bar6" = foo6("", 0, true, null)({}, "");
-  // $ExpectError
-  const foo6_6_Error3: "bar6" = foo6("", 0, true, null, {})("");
-  // $ExpectError
-  const foo6_7_Error3: "bar6" = foo6("")(0)(true, null, {}, "");
-  // $ExpectError
-  const foo6_8_Error3: "bar6" = foo6("", 0)(true)(null, {}, "");
-  // $ExpectError
-  const foo6_9_Error3: "bar6" = foo6("", 0, true)(null)({}, "");
-  // $ExpectError
-  const foo6_10_Error3: "bar6" = foo6("", 0, true, null)({})("");
-  // $ExpectError
-  const foo6_11_Error3: "bar6" = foo6("")(0, true)(null, {}, "");
-  // $ExpectError
-  const foo6_12_Error3: "bar6" = foo6("", 0)(true, null)({}, "");
-  // $ExpectError
-  const foo6_13_Error3: "bar6" = foo6("", 0, true)(null, {})("");
-  // $ExpectError
-  const foo6_14_Error3: "bar6" = foo6("")(0, true, null)({}, "");
-  // $ExpectError
-  const foo6_15_Error3: "bar6" = foo6("", 0)(true, null, {})("");
-  // $ExpectError
-  const foo6_16_Error3: "bar6" = foo6("")(0, true, null, {})("");
+// $ExpectError
+const foo6_1_Error3: "bar6" = foo6("", 0, true, null, {}, "");
+// $ExpectError
+const foo6_2_Error3: "bar6" = foo6("")(0, true, null, {}, "");
+// $ExpectError
+const foo6_3_Error3: "bar6" = foo6("", 0)(true, null, {}, "");
+// $ExpectError
+const foo6_4_Error3: "bar6" = foo6("", 0, true)(null, {}, "");
+// $ExpectError
+const foo6_5_Error3: "bar6" = foo6("", 0, true, null)({}, "");
+// $ExpectError
+const foo6_6_Error3: "bar6" = foo6("", 0, true, null, {})("");
+// $ExpectError
+const foo6_7_Error3: "bar6" = foo6("")(0)(true, null, {}, "");
+// $ExpectError
+const foo6_8_Error3: "bar6" = foo6("", 0)(true)(null, {}, "");
+// $ExpectError
+const foo6_9_Error3: "bar6" = foo6("", 0, true)(null)({}, "");
+// $ExpectError
+const foo6_10_Error3: "bar6" = foo6("", 0, true, null)({})("");
+// $ExpectError
+const foo6_11_Error3: "bar6" = foo6("")(0, true)(null, {}, "");
+// $ExpectError
+const foo6_12_Error3: "bar6" = foo6("", 0)(true, null)({}, "");
+// $ExpectError
+const foo6_13_Error3: "bar6" = foo6("", 0, true)(null, {})("");
+// $ExpectError
+const foo6_14_Error3: "bar6" = foo6("")(0, true, null)({}, "");
+// $ExpectError
+const foo6_15_Error3: "bar6" = foo6("", 0)(true, null, {})("");
+// $ExpectError
+const foo6_16_Error3: "bar6" = foo6("")(0, true, null, {})("");
 
-  // $ExpectError
-  const foo6_1_Error4: "error" = foo6("", 0, true, null, {}, []);
-  // $ExpectError
-  const foo6_2_Error4: "error" = foo6("")(0, true, null, {}, []);
-  // $ExpectError
-  const foo6_3_Error4: "error" = foo6("", 0)(true, null, {}, []);
-  // $ExpectError
-  const foo6_4_Error4: "error" = foo6("", 0, true)(null, {}, []);
-  // $ExpectError
-  const foo6_5_Error4: "error" = foo6("", 0, true, null)({}, []);
-  // $ExpectError
-  const foo6_6_Error4: "error" = foo6("", 0, true, null, {})([]);
-  // $ExpectError
-  const foo6_7_Error4: "error" = foo6("")(0)(true, null, {}, []);
-  // $ExpectError
-  const foo6_8_Error4: "error" = foo6("", 0)(true)(null, {}, []);
-  // $ExpectError
-  const foo6_9_Error4: "error" = foo6("", 0, true)(null)({}, []);
-  // $ExpectError
-  const foo6_10_Error4: "error" = foo6("", 0, true, null)({})([]);
-  // $ExpectError
-  const foo6_11_Error4: "error" = foo6("")(0, true)(null, {}, []);
-  // $ExpectError
-  const foo6_12_Error4: "error" = foo6("", 0)(true, null)({}, []);
-  // $ExpectError
-  const foo6_13_Error4: "error" = foo6("", 0, true)(null, {})([]);
-  // $ExpectError
-  const foo6_14_Error4: "error" = foo6("")(0, true, null)({}, []);
-  // $ExpectError
-  const foo6_15_Error4: "error" = foo6("", 0)(true, null, {})([]);
-  // $ExpectError
-  const foo6_16_Error4: "error" = foo6("")(0, true, null, {})([]);
+// $ExpectError
+const foo6_1_Error4: "error" = foo6("", 0, true, null, {}, []);
+// $ExpectError
+const foo6_2_Error4: "error" = foo6("")(0, true, null, {}, []);
+// $ExpectError
+const foo6_3_Error4: "error" = foo6("", 0)(true, null, {}, []);
+// $ExpectError
+const foo6_4_Error4: "error" = foo6("", 0, true)(null, {}, []);
+// $ExpectError
+const foo6_5_Error4: "error" = foo6("", 0, true, null)({}, []);
+// $ExpectError
+const foo6_6_Error4: "error" = foo6("", 0, true, null, {})([]);
+// $ExpectError
+const foo6_7_Error4: "error" = foo6("")(0)(true, null, {}, []);
+// $ExpectError
+const foo6_8_Error4: "error" = foo6("", 0)(true)(null, {}, []);
+// $ExpectError
+const foo6_9_Error4: "error" = foo6("", 0, true)(null)({}, []);
+// $ExpectError
+const foo6_10_Error4: "error" = foo6("", 0, true, null)({})([]);
+// $ExpectError
+const foo6_11_Error4: "error" = foo6("")(0, true)(null, {}, []);
+// $ExpectError
+const foo6_12_Error4: "error" = foo6("", 0)(true, null)({}, []);
+// $ExpectError
+const foo6_13_Error4: "error" = foo6("", 0, true)(null, {})([]);
+// $ExpectError
+const foo6_14_Error4: "error" = foo6("")(0, true, null)({}, []);
+// $ExpectError
+const foo6_15_Error4: "error" = foo6("", 0)(true, null, {})([]);
+// $ExpectError
+const foo6_16_Error4: "error" = foo6("")(0, true, null, {})([]);
 
-  describe('2 arity functions', () => {
-    it('should support __ placeholder', () => {
-      function fn2(a: string, b: number): Array<string|number> { return [a, b]; };
-
-      const cFn2 = curry(fn2);
-
-      const pFn1: string => Array<string|number> = cFn2(__, 3);
-      const pFn2: Array<string|number> = cFn2('a', 3);
-    });
-  });
-  describe('3 arity functions', () => {
-    it('should support __ placeholder', () => {
-      function fn3(a: string, b: number, c: number[]): Array<string|number> { return [a, b, ...c]; };
-
-      const cFn3 = curry(fn3);
-
-      const pFn1: string => number[] => Array<string|number> = cFn3(__, 3);
-      const pFn2: number => Array<string|number> = cFn3('a', __, [2, 3]);
-      const pFn3: string => Array<string|number> = cFn3(__, 1, [2, 3]);
-      const pFn4: Array<string|number> = cFn3('a', 1, [2, 3]);
-    });
-  });
-  describe('4 arity functions', () => {
-    it('should support __ placeholder', (fn4: ('A', 'B', 'C', 'D') => 'R') => {
-      const cFn4 = curry(fn4);
-
-      const pFn0: 'B' => 'C' => 'D' => 'R' = cFn4('A');
-      const pFn1: 'A' => 'C' => 'D' => 'R' = cFn4(__, 'B');
-      const pFn2: 'C' => 'D' => 'R' = cFn4('A', 'B');
-      const pFn3: 'A' => 'D' => 'R' = cFn4(__, 'B', 'C');
-      const pFn4: 'B' => 'D' => 'R' = cFn4('A', __, 'C');
-      const pFn5: 'D' => 'R' = cFn4('A', 'B', 'C');
-      const pFn6: 'A' => 'R' = cFn4(__, 'B', 'C', 'D');
-      const pFn7: 'B' => 'R' = cFn4('A', __, 'C', 'D');
-      const pFn8: 'C' => 'R' = cFn4('A', 'B', __, 'D');
-      const pFn9: 'R' = cFn4('A', 'B', 'C', 'D');
-    });
-  });
-  describe('5 arity functions', () => {
-    it('should support __ placeholder', (fn5: ('A', 'B', 'C', 'D', 'E') => 'R') => {
-      const cFn5 = curry(fn5);
-
-      const pFn0: 'B' => 'C' => 'D' => 'E' => 'R' = cFn5('A');
-      const pFn1: 'A' => 'C' => 'D' => 'E' => 'R' = cFn5(__, 'B');
-      const pFn2: 'C' => 'D' => 'E' => 'R' = cFn5('A', 'B');
-      const pFn3: 'A' => 'D' => 'E' => 'R' = cFn5(__, 'B', 'C');
-      const pFn4: 'B' => 'D' => 'E' => 'R' = cFn5('A', __, 'C');
-      const pFn5: 'D' => 'E' => 'R' = cFn5('A', 'B', 'C');
-      const pFn6: 'A' => 'E' => 'R' = cFn5(__, 'B', 'C', 'D');
-      const pFn7: 'B' => 'E' => 'R' = cFn5('A', __, 'C', 'D');
-      const pFn8: 'C' => 'E' => 'R' = cFn5('A', 'B', __, 'D');
-      const pFn9: 'E' => 'R' = cFn5('A', 'B', 'C', 'D');
-      const pFn10: 'A' => 'R' = cFn5(__, 'B', 'C', 'D', 'E');
-      const pFn11: 'B' => 'R' = cFn5('A', __, 'C', 'D', 'E');
-      const pFn12: 'C' => 'R' = cFn5('A', 'B', __, 'D', 'E');
-      const pFn13: 'D' => 'R' = cFn5('A', 'B', 'C', __, 'E');
-      const pFn14: 'R' = cFn5('A', 'B', 'C', 'D', 'E');
-    });
-  });
-  describe('6 arity functions', () => {
-    it('should support __ placeholder', (fn5: ('A', 'B', 'C', 'D', 'E', 'F') => 'R') => {
-      const cFn5 = curry(fn5);
-
-      const pFn0: 'B' => 'C' => 'D' => 'E' => 'F' => 'R' = cFn5('A');
-      const pFn1: 'A' => 'C' => 'D' => 'E' => 'F' => 'R' = cFn5(__, 'B');
-      const pFn2: 'C' => 'D' => 'E' => 'F' => 'R' = cFn5('A', 'B');
-      const pFn3: 'A' => 'D' => 'E' => 'F' => 'R' = cFn5(__, 'B', 'C');
-      const pFn4: 'B' => 'D' => 'E' => 'F' => 'R' = cFn5('A', __, 'C');
-      const pFn5: 'D' => 'E' => 'F' => 'R' = cFn5('A', 'B', 'C');
-      const pFn6: 'A' => 'E' => 'F' => 'R' = cFn5(__, 'B', 'C', 'D');
-      const pFn7: 'B' => 'E' => 'F' => 'R' = cFn5('A', __, 'C', 'D');
-      const pFn8: 'C' => 'E' => 'F' => 'R' = cFn5('A', 'B', __, 'D');
-      const pFn9: 'E' => 'F' => 'R' = cFn5('A', 'B', 'C', 'D');
-      const pFn10: 'A' => 'F' => 'R' = cFn5(__, 'B', 'C', 'D', 'E');
-      const pFn11: 'B' => 'F' => 'R' = cFn5('A', __, 'C', 'D', 'E');
-      const pFn12: 'C' => 'F' => 'R' = cFn5('A', 'B', __, 'D', 'E');
-      const pFn13: 'D' => 'F' => 'R' = cFn5('A', 'B', 'C', __, 'E');
-      const pFn14: 'F' => 'R' = cFn5('A', 'B', 'C', 'D', 'E');
-      const pFn15: 'A' => 'R' = cFn5(__, 'B', 'C', 'D', 'E', 'F');
-      const pFn16: 'B' => 'R' = cFn5('A', __, 'C', 'D', 'E', 'F');
-      const pFn17: 'C' => 'R' = cFn5('A', 'B', __, 'D', 'E', 'F');
-      const pFn18: 'D' => 'R' = cFn5('A', 'B', 'C', __, 'E', 'F');
-      const pFn19: 'E' => 'R' = cFn5('A', 'B', 'C', 'D', __, 'F');
-      const pFn20: 'R' = cFn5('A', 'B', 'C', 'D', 'E', 'F');
-    });
-  });
-});
+// -------------
 
 const currfn1: (y: number) => number = _.curryN(
   2,

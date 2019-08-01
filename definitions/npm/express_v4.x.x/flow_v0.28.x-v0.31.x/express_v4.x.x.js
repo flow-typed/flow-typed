@@ -37,7 +37,7 @@ declare class express$Request extends http$IncomingMessage mixins express$Reques
   acceptsEncodings(...encoding: Array<string>): string | false;
   acceptsLanguages(...lang: Array<string>): string | false;
   header(field: string): string | void;
-  is(type: string): boolean;
+  is(type: string): string | false;
   param(name: string, defaultValue?: string): string | void;
 }
 

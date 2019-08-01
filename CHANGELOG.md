@@ -5,7 +5,19 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## [2.6.1] - 2019-07-30
+
+### Fixed
+- Fix runTests on Windows (#3446)
+
+## [2.6.0] - 2019-07-15
+
+### Added
+- Generate stub declarations for subdirectory modules such as `core-js/stable` and `core-js/es/symbol` in core-js (#3426)
+- Passing `--typescript` to `create-stub` will use [flowgen](https://github.com/joarwilk/flowgen) to create a stub form an existing, published typescript definition (#3387)
+
+### Removed
+- The `version` command has been dropped in favor of the native `--version` flag
 
 ## [2.5.2] - 2019-05-15
 
