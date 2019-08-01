@@ -43,7 +43,7 @@ const brk3: Break = bm.getBreakById(123);
 const evt: MediaStatusEvent = new MediaStatusEvent();
 const ms: MediaStatus = evt.mediaStatus;
 // $ExpectError
-const ms: string = evt.mediaStatus;
+const ms2: string = evt.mediaStatus;
 
 // messages tests
 const qd = new QueueData("id", "name", "description", "mode");

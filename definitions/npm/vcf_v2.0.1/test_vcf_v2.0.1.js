@@ -68,7 +68,7 @@ describe("vcf", () => {
     const property2 = new vCard.Property("adr", "101 loop", 3);
 
     // $ExpectError
-    const property2 = new vCard.Property("adr", 12);
+    const property3 = new vCard.Property("adr", 12);
 
     const cardProperty = card.get("fn");
 
