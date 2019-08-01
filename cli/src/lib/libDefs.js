@@ -436,12 +436,16 @@ function writeVerbose(stream, msg, writeNewline = true) {
  * If the repo checkout does not exist or is out of date, it will be
  * created/updated automatically first.
  */
-const CACHE_REPO_DEFS_DIR = path.join(CACHE_REPO_DIR, 'definitions', 'npm');
+const CACHE_REPO_DEFS_DIR = path.join(
+  CACHE_REPO_DIR,
+  'experimental',
+  'definitions',
+);
 export async function getCacheLibDefs(
   verbose?: VerboseOutput = process.stdout,
 ) {
   await ensureCacheRepo(verbose);
-  await verifyCLIVersion(path.join(CACHE_REPO_DIR, 'definitions'));
+  await verifyCLIVersion(path.join(CACHE_REPO_DIR, 'experimental'));
   return getLibDefs(CACHE_REPO_DEFS_DIR);
 }
 

@@ -66,7 +66,7 @@ async function extractLibDefsFromNpmPkgDir(
   const {pkgName, pkgVersion} = parsedPkgNameVer;
 
   const pkgVersionStr = versionToString(pkgVersion);
-  const libDefFileName = `${pkgName}_${pkgVersionStr}.js`;
+  const libDefFileName = `index.js`;
   const pkgDirItems = await fs.readdir(pkgDirPath);
 
   if (validating) {
@@ -125,39 +125,58 @@ async function extractLibDefsFromNpmPkgDir(
     parsedFlowDirs.map(async ([flowDirPath, flowVersion]) => {
       const testFilePaths = [].concat(commonTestFiles);
       let libDefFilePath: null | string = null;
-      (await fs.readdir(flowDirPath)).forEach(flowDirItem => {
-        const flowDirItemPath = path.join(flowDirPath, flowDirItem);
-        const flowDirItemStat = fs.statSync(flowDirItemPath);
-        if (flowDirItemStat.isFile()) {
-          if (path.extname(flowDirItem) === '.swp') {
-            return;
+      await P.all(
+        (await fs.readdir(flowDirPath)).map(async flowDirItem => {
+          const flowDirItemPath = path.join(flowDirPath, flowDirItem);
+          const flowDirItemStat = fs.statSync(flowDirItemPath);
+          if (flowDirItemStat.isFile()) {
+            if (path.extname(flowDirItem) === '.swp') {
+              return;
+            }
+
+            // Is this the libdef file?
+            if (flowDirItem === libDefFileName) {
+              libDefFilePath = path.join(flowDirPath, flowDirItem);
+              return;
+            }
+
+            // Is this a test file?
+            const isValidTestFile = TEST_FILE_NAME_RE.test(flowDirItem);
+
+            if (isValidTestFile) {
+              testFilePaths.push(flowDirItemPath);
+              return;
+            }
+
+            // Is this package file?
+            if (flowDirItem === 'package.json') {
+              return;
+            }
+
+            throw new ValidationError(
+              `Unexpected file: ${flowDirItem}. This directory can only contain test files ` +
+                `or a libdef file named ${'`' + libDefFileName + '`'}.`,
+            );
+          } else {
+            const isValidTestDir = path.basename(flowDirItemPath) === 'tests';
+            if (isValidTestDir) {
+              (await fs.readdir(flowDirItemPath)).map(testFileItem => {
+                const flowDirItemPath = path.join(
+                  flowDirPath,
+                  'tests',
+                  testFileItem,
+                );
+                testFilePaths.push(flowDirItemPath);
+              });
+              return;
+            }
+            throw new ValidationError(
+              `Unexpected sub-directory. This directory can only contain test ` +
+                `files or a libdef file named ${'`' + libDefFileName + '`'}.`,
+            );
           }
-
-          // Is this the libdef file?
-          if (flowDirItem === libDefFileName) {
-            libDefFilePath = path.join(flowDirPath, flowDirItem);
-            return;
-          }
-
-          // Is this a test file?
-          const isValidTestFile = TEST_FILE_NAME_RE.test(flowDirItem);
-
-          if (isValidTestFile) {
-            testFilePaths.push(flowDirItemPath);
-            return;
-          }
-
-          throw new ValidationError(
-            `Unexpected file: ${libDefFileName}. This directory can only contain test files ` +
-              `or a libdef file named ${'`' + libDefFileName + '`'}.`,
-          );
-        } else {
-          throw new ValidationError(
-            `Unexpected sub-directory. This directory can only contain test ` +
-              `files or a libdef file named ${'`' + libDefFileName + '`'}.`,
-          );
-        }
-      });
+        }),
+      );
 
       if (libDefFilePath === null) {
         libDefFilePath = path.join(flowDirPath, libDefFileName);
@@ -183,7 +202,7 @@ async function extractLibDefsFromNpmPkgDir(
 async function getCacheNpmLibDefs(cacheExpiry) {
   await ensureCacheRepo(cacheExpiry);
   await verifyCLIVersion();
-  return getNpmLibDefs(path.join(getCacheRepoDir(), 'definitions'));
+  return getNpmLibDefs(path.join(getCacheRepoDir(), 'experimental'));
 }
 
 const PKG_NAMEVER_RE = /^(.*)_v\^?([0-9]+)\.([0-9]+|x)\.([0-9]+|x)(-.*)?$/;
@@ -408,8 +427,8 @@ export async function getInstalledNpmLibDefs(
               flowVerMatches == null
                 ? matches[3]
                 : flowVerMatches[3] == null
-                  ? flowVerMatches[2]
-                  : `${flowVerMatches[2]}-${flowVerMatches[4]}`;
+                ? flowVerMatches[2]
+                : `${flowVerMatches[2]}-${flowVerMatches[4]}`;
             const flowDirStr = `flow_${flowVerStr}`;
             const flowVer =
               flowVerMatches == null
@@ -455,12 +474,26 @@ async function getSingleLibdef(
           const itemPath = path.join(npmDefsDirPath, scope, itemName);
           const itemStat = await fs.stat(itemPath);
           if (itemStat.isDirectory()) {
-            return await extractLibDefsFromNpmPkgDir(
-              itemPath,
-              scope,
-              itemName,
-              validating,
+            const dirItems = await fs.readdir(itemPath);
+            const settled = await P.all(
+              dirItems.map(async nestedItemName => {
+                const nestedItemPath = path.join(itemPath, nestedItemName);
+                const nestedItemStat = await fs.stat(nestedItemPath);
+                if (nestedItemStat.isDirectory()) {
+                  return await extractLibDefsFromNpmPkgDir(
+                    nestedItemPath,
+                    scope,
+                    nestedItemName,
+                    validating,
+                  );
+                } else {
+                  throw new ValidationError(
+                    `Expected only directories to be present in this directory.`,
+                  );
+                }
+              }),
             );
+            return [].concat(...settled);
           } else {
             throw new ValidationError(
               `Expected only sub-directories in this dir!`,
@@ -470,13 +503,27 @@ async function getSingleLibdef(
       );
       return [].concat(...settled);
     } else {
+      const dirItems = await fs.readdir(itemPath);
       // itemPath must be a package dir
-      return await extractLibDefsFromNpmPkgDir(
-        itemPath,
-        null, // No scope
-        itemName,
-        validating,
+      const settled = await P.all(
+        dirItems.map(async nestedItemName => {
+          const nestedItemPath = path.join(itemPath, nestedItemName);
+          const nestedItemStat = await fs.stat(nestedItemPath);
+          if (nestedItemStat.isDirectory()) {
+            return await extractLibDefsFromNpmPkgDir(
+              nestedItemPath,
+              null, // No scope
+              nestedItemName,
+              validating,
+            );
+          } else {
+            throw new ValidationError(
+              `Expected only directories to be present in this directory.`,
+            );
+          }
+        }),
       );
+      return [].concat(...settled);
     }
   } else {
     throw new ValidationError(
@@ -492,7 +539,7 @@ export async function getNpmLibDefs(
   defsDirPath: string,
   validating?: boolean,
 ): Promise<Array<NpmLibDef>> {
-  const npmDefsDirPath = path.join(defsDirPath, 'npm');
+  const npmDefsDirPath = path.join(defsDirPath, 'definitions');
   const dirItems = await fs.readdir(npmDefsDirPath);
   const errors = [];
   const proms = dirItems.map(async itemName => {

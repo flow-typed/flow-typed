@@ -59,11 +59,16 @@ describe('npmLibDefs', () => {
             path: path.join(
               UNDERSCORE_PATH,
               'flow_v0.13.x-v0.37.x',
-              'underscore_v1.x.x.js',
+              'index.js',
             ),
             scope: null,
             testFilePaths: [
-              path.join(UNDERSCORE_PATH, 'test_underscore-v1.js'),
+              path.join(
+                UNDERSCORE_PATH,
+                'flow_v0.13.x-v0.37.x',
+                'tests',
+                'test_underscore-v1.js',
+              ),
             ],
             version: 'v1.x.x',
           },
@@ -79,15 +84,21 @@ describe('npmLibDefs', () => {
               upper: null,
             },
             name: 'underscore',
-            path: path.join(
-              UNDERSCORE_PATH,
-              'flow_v0.38.x-',
-              'underscore_v1.x.x.js',
-            ),
+            path: path.join(UNDERSCORE_PATH, 'flow_v0.38.x-', 'index.js'),
             scope: null,
             testFilePaths: [
-              path.join(UNDERSCORE_PATH, 'test_underscore-v1.js'),
-              path.join(UNDERSCORE_PATH, 'flow_v0.38.x-', 'test_underscore.js'),
+              path.join(
+                UNDERSCORE_PATH,
+                'flow_v0.13.x-v0.37.x',
+                'tests',
+                'test_underscore-v1.js',
+              ),
+              path.join(
+                UNDERSCORE_PATH,
+                'flow_v0.38.x-',
+                'tests',
+                'test_underscore.js',
+              ),
             ],
             version: 'v1.x.x',
           },
