@@ -1,6 +1,6 @@
 {
   "name": "@flowtyped/fuse.js",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "flowVersion": "flow_v0.25.x-v0.37.x",
   "dependencies": {},
   "files": [

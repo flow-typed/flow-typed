@@ -1,6 +1,6 @@
 {
   "name": "@flowtyped/react-select",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "flowVersion": "flow_v0.31.x-v0.52.x",
   "dependencies": {},
   "files": [

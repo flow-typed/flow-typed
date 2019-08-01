@@ -1,0 +1,13 @@
+{
+  "name": "@flowtyped/firebase",
+  "version": "2.4.3",
+  "flowVersion": "flow_v0.34.x-v0.103.x",
+  "dependencies": {},
+  "files": [
+    "index.js"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "tag": "flow_v0.34.x-v0.103.x"
+  }
+}

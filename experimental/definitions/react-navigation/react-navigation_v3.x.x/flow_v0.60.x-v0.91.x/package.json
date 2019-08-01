@@ -1,6 +1,6 @@
 {
   "name": "@flowtyped/react-navigation",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "flowVersion": "flow_v0.60.x-v0.91.x",
   "dependencies": {},
   "files": [

@@ -1,6 +1,6 @@
 {
   "name": "@flowtyped/react-css-modules",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "flowVersion": "flow_v0.32.x-v0.52.x",
   "dependencies": {},
   "files": [

@@ -1,6 +1,6 @@
 {
   "name": "@flowtyped/koa",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "flowVersion": "flow_v0.32.x-v0.37.x",
   "dependencies": {},
   "files": [

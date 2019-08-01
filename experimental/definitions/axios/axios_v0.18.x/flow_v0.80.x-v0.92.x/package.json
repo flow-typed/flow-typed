@@ -1,6 +1,6 @@
 {
   "name": "@flowtyped/axios",
-  "version": "0.18.2",
+  "version": "0.18.3",
   "flowVersion": "flow_v0.80.x-v0.92.x",
   "dependencies": {},
   "files": [

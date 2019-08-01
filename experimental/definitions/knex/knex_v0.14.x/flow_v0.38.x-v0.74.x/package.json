@@ -1,6 +1,6 @@
 {
   "name": "@flowtyped/knex",
-  "version": "0.14.0",
+  "version": "0.14.1",
   "flowVersion": "flow_v0.38.x-v0.74.x",
   "dependencies": {},
   "files": [

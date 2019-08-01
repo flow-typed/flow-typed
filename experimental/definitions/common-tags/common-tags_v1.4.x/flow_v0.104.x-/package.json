@@ -1,0 +1,13 @@
+{
+  "name": "@flowtyped/common-tags",
+  "version": "1.4.0",
+  "flowVersion": "flow_v0.104.x-",
+  "dependencies": {},
+  "files": [
+    "index.js"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "tag": "latest"
+  }
+}

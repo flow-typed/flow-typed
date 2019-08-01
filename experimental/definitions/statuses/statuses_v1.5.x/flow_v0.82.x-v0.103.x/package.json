@@ -1,0 +1,13 @@
+{
+  "name": "@flowtyped/statuses",
+  "version": "1.5.1",
+  "flowVersion": "flow_v0.82.x-v0.103.x",
+  "dependencies": {},
+  "files": [
+    "index.js"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "tag": "flow_v0.82.x-v0.103.x"
+  }
+}

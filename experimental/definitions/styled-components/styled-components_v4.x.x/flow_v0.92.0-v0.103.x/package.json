@@ -1,0 +1,13 @@
+{
+  "name": "@flowtyped/styled-components",
+  "version": "4.0.2",
+  "flowVersion": "flow_v0.92.0-v0.103.x",
+  "dependencies": {},
+  "files": [
+    "index.js"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "tag": "flow_v0.92.0-v0.103.x"
+  }
+}

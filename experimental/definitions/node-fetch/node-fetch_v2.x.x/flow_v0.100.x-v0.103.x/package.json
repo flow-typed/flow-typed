@@ -1,0 +1,13 @@
+{
+  "name": "@flowtyped/node-fetch",
+  "version": "2.0.0",
+  "flowVersion": "flow_v0.100.x-v0.103.x",
+  "dependencies": {},
+  "files": [
+    "index.js"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "tag": "flow_v0.100.x-v0.103.x"
+  }
+}

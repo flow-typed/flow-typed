@@ -1,0 +1,13 @@
+{
+  "name": "@flowtyped/amqplib",
+  "version": "0.5.1",
+  "flowVersion": "flow_v0.60.1-v0.103.x",
+  "dependencies": {},
+  "files": [
+    "index.js"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "tag": "flow_v0.60.1-v0.103.x"
+  }
+}

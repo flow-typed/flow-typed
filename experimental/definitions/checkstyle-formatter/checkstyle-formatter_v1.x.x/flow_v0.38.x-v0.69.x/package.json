@@ -1,6 +1,6 @@
 {
   "name": "@flowtyped/checkstyle-formatter",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "flowVersion": "flow_v0.38.x-v0.69.x",
   "dependencies": {},
   "files": [

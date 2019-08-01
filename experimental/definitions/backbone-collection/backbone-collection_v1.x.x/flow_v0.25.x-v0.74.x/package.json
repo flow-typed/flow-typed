@@ -1,6 +1,6 @@
 {
   "name": "@flowtyped/backbone-collection",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "flowVersion": "flow_v0.25.x-v0.74.x",
   "dependencies": {},
   "files": [

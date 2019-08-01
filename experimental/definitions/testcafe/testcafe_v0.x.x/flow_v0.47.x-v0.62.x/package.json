@@ -1,6 +1,6 @@
 {
   "name": "@flowtyped/testcafe",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "flowVersion": "flow_v0.47.x-v0.62.x",
   "dependencies": {},
   "files": [

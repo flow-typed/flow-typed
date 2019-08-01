@@ -1,6 +1,6 @@
 {
   "name": "@flowtyped/react-router-dom",
-  "version": "5.0.0",
+  "version": "5.0.1",
   "flowVersion": "flow_v0.63.x-v0.97.x",
   "dependencies": {},
   "files": [

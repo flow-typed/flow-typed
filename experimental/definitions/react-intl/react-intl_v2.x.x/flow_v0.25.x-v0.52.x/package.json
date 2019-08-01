@@ -1,6 +1,6 @@
 {
   "name": "@flowtyped/react-intl",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "flowVersion": "flow_v0.25.x-v0.52.x",
   "dependencies": {},
   "files": [

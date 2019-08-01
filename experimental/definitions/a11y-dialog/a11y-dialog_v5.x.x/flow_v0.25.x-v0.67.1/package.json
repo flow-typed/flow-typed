@@ -1,6 +1,6 @@
 {
   "name": "@flowtyped/a11y-dialog",
-  "version": "5.0.0",
+  "version": "5.0.1",
   "flowVersion": "flow_v0.25.x-v0.67.1",
   "dependencies": {},
   "files": [

@@ -1,6 +1,6 @@
 {
   "name": "@flowtyped/nock",
-  "version": "9.0.0",
+  "version": "9.0.1",
   "flowVersion": "flow_v0.31.x-v0.74.x",
   "dependencies": {},
   "files": [

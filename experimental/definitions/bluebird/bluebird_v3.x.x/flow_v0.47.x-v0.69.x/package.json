@@ -1,6 +1,6 @@
 {
   "name": "@flowtyped/bluebird",
-  "version": "3.0.2",
+  "version": "3.0.3",
   "flowVersion": "flow_v0.47.x-v0.69.x",
   "dependencies": {},
   "files": [

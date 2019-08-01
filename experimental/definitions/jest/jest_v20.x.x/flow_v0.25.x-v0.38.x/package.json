@@ -1,6 +1,6 @@
 {
   "name": "@flowtyped/jest",
-  "version": "20.0.0",
+  "version": "20.0.1",
   "flowVersion": "flow_v0.25.x-v0.38.x",
   "dependencies": {},
   "files": [

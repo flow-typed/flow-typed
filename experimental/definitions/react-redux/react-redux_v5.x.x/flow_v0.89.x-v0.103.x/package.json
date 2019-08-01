@@ -1,0 +1,13 @@
+{
+  "name": "@flowtyped/react-redux",
+  "version": "5.0.6",
+  "flowVersion": "flow_v0.89.x-v0.103.x",
+  "dependencies": {},
+  "files": [
+    "index.js"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "tag": "flow_v0.89.x-v0.103.x"
+  }
+}

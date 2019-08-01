@@ -132,6 +132,7 @@ app.use((err: Error, req: express$Request, res: express$Response, next: express$
     // test req
     req.accepts('accepted/type');
     req.accepts(['json', 'text']);
+    req.is('json');
     if (typeof req.query.foo === 'string')
       console.log((req.query.foo: string));
     else

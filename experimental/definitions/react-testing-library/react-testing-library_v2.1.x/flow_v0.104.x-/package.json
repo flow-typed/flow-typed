@@ -1,0 +1,13 @@
+{
+  "name": "@flowtyped/react-testing-library",
+  "version": "2.1.0",
+  "flowVersion": "flow_v0.104.x-",
+  "dependencies": {},
+  "files": [
+    "index.js"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "tag": "latest"
+  }
+}

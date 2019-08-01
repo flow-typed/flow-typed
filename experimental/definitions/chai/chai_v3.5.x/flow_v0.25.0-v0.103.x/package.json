@@ -1,0 +1,13 @@
+{
+  "name": "@flowtyped/chai",
+  "version": "3.5.1",
+  "flowVersion": "flow_v0.25.0-v0.103.x",
+  "dependencies": {},
+  "files": [
+    "index.js"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "tag": "flow_v0.25.0-v0.103.x"
+  }
+}

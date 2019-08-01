@@ -1,6 +1,6 @@
 {
   "name": "@flowtyped/detox",
-  "version": "7.0.0",
+  "version": "7.0.1",
   "flowVersion": "flow_v0.25.x-v0.70.x",
   "dependencies": {},
   "files": [

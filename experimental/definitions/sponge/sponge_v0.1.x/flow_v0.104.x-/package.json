@@ -1,0 +1,13 @@
+{
+  "name": "@flowtyped/sponge",
+  "version": "0.1.1",
+  "flowVersion": "flow_v0.104.x-",
+  "dependencies": {},
+  "files": [
+    "index.js"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "tag": "latest"
+  }
+}

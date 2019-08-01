@@ -1,6 +1,6 @@
 {
   "name": "@flowtyped/reselect",
-  "version": "4.0.0",
+  "version": "4.0.1",
   "flowVersion": "flow_v0.34.x-v0.46.x",
   "dependencies": {},
   "files": [

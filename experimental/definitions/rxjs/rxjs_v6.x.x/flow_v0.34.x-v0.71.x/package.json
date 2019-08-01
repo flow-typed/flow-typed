@@ -1,6 +1,6 @@
 {
   "name": "@flowtyped/rxjs",
-  "version": "6.0.0",
+  "version": "6.0.1",
   "flowVersion": "flow_v0.34.x-v0.71.x",
   "dependencies": {},
   "files": [

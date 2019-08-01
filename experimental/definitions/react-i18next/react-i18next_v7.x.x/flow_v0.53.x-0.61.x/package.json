@@ -1,6 +1,6 @@
 {
   "name": "@flowtyped/react-i18next",
-  "version": "7.0.0",
+  "version": "7.0.1",
   "flowVersion": "flow_v0.53.x-0.61.x",
   "dependencies": {},
   "files": [

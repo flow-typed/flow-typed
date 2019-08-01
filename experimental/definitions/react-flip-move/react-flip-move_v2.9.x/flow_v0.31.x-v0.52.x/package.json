@@ -1,6 +1,6 @@
 {
   "name": "@flowtyped/react-flip-move",
-  "version": "2.9.0",
+  "version": "2.9.1",
   "flowVersion": "flow_v0.31.x-v0.52.x",
   "dependencies": {},
   "files": [

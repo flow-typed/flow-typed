@@ -1,0 +1,13 @@
+{
+  "name": "@flowtyped/storybook__addon-links",
+  "version": "3.0.2",
+  "flowVersion": "flow_v0.53.x-v0.103.x",
+  "dependencies": {},
+  "files": [
+    "index.js"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "tag": "flow_v0.53.x-v0.103.x"
+  }
+}

@@ -1,6 +1,6 @@
 {
   "name": "@flowtyped/deep-freeze-strict",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "flowVersion": "flow_v0.25.x-v0.58.x",
   "dependencies": {},
   "files": [

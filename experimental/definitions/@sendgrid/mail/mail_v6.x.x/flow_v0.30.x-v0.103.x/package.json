@@ -1,0 +1,13 @@
+{
+  "name": "@flowtyped/sendgrid__mail",
+  "version": "6.0.1",
+  "flowVersion": "flow_v0.30.x-v0.103.x",
+  "dependencies": {},
+  "files": [
+    "index.js"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "tag": "flow_v0.30.x-v0.103.x"
+  }
+}

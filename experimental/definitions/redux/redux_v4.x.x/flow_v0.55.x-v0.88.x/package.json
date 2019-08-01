@@ -1,6 +1,6 @@
 {
   "name": "@flowtyped/redux",
-  "version": "4.0.0",
+  "version": "4.0.1",
   "flowVersion": "flow_v0.55.x-v0.88.x",
   "dependencies": {},
   "files": [

@@ -1,0 +1,13 @@
+{
+  "name": "@flowtyped/rivets",
+  "version": "0.9.0",
+  "flowVersion": "flow_v0.104.x-",
+  "dependencies": {},
+  "files": [
+    "index.js"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "tag": "latest"
+  }
+}

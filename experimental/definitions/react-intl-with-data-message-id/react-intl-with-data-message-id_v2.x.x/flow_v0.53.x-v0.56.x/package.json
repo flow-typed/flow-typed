@@ -1,6 +1,6 @@
 {
   "name": "@flowtyped/react-intl-with-data-message-id",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "flowVersion": "flow_v0.53.x-v0.56.x",
   "dependencies": {},
   "files": [

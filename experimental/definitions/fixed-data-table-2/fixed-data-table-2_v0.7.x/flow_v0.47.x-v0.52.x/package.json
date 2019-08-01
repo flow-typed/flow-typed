@@ -1,6 +1,6 @@
 {
   "name": "@flowtyped/fixed-data-table-2",
-  "version": "0.7.0",
+  "version": "0.7.1",
   "flowVersion": "flow_v0.47.x-v0.52.x",
   "dependencies": {},
   "files": [

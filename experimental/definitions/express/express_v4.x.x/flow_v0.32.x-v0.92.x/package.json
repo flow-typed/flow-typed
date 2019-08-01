@@ -1,6 +1,6 @@
 {
   "name": "@flowtyped/express",
-  "version": "4.0.2",
+  "version": "4.0.3",
   "flowVersion": "flow_v0.32.x-v0.92.x",
   "dependencies": {},
   "files": [

@@ -1,0 +1,13 @@
+{
+  "name": "@flowtyped/introscope",
+  "version": "1.0.10",
+  "flowVersion": "flow_v0.104.x-",
+  "dependencies": {},
+  "files": [
+    "index.js"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "tag": "latest"
+  }
+}

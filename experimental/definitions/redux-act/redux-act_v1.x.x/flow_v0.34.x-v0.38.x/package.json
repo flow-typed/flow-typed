@@ -1,6 +1,6 @@
 {
   "name": "@flowtyped/redux-act",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "flowVersion": "flow_v0.34.x-v0.38.x",
   "dependencies": {},
   "files": [

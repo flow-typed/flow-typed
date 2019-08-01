@@ -1,6 +1,6 @@
 {
   "name": "@flowtyped/ramda",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "flowVersion": "flow_v0.31.x-v0.33.x",
   "dependencies": {},
   "files": [

@@ -1,6 +1,6 @@
 {
   "name": "@flowtyped/react-a11y-dialog",
-  "version": "4.1.0",
+  "version": "4.1.1",
   "flowVersion": "flow_v0.53.x-v0.67.1",
   "dependencies": {},
   "files": [

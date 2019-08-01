@@ -1,0 +1,13 @@
+{
+  "name": "@flowtyped/vscode",
+  "version": "0.11.0",
+  "flowVersion": "flow_v0.104.x-",
+  "dependencies": {},
+  "files": [
+    "index.js"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "tag": "latest"
+  }
+}

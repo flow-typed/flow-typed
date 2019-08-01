@@ -1,0 +1,13 @@
+{
+  "name": "@flowtyped/intl-messageformat",
+  "version": "1.0.1",
+  "flowVersion": "flow_v0.32.x-v0.103.x",
+  "dependencies": {},
+  "files": [
+    "index.js"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "tag": "flow_v0.32.x-v0.103.x"
+  }
+}

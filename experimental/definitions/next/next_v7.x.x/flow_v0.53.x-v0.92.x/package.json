@@ -1,6 +1,6 @@
 {
   "name": "@flowtyped/next",
-  "version": "7.0.0",
+  "version": "7.0.1",
   "flowVersion": "flow_v0.53.x-v0.92.x",
   "dependencies": {},
   "files": [

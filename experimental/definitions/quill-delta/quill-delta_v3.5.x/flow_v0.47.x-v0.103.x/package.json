@@ -1,0 +1,13 @@
+{
+  "name": "@flowtyped/quill-delta",
+  "version": "3.5.1",
+  "flowVersion": "flow_v0.47.x-v0.103.x",
+  "dependencies": {},
+  "files": [
+    "index.js"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "tag": "flow_v0.47.x-v0.103.x"
+  }
+}

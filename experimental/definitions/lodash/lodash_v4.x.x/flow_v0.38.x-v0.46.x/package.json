@@ -1,6 +1,6 @@
 {
   "name": "@flowtyped/lodash",
-  "version": "4.0.1",
+  "version": "4.0.2",
   "flowVersion": "flow_v0.38.x-v0.46.x",
   "dependencies": {},
   "files": [

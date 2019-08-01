@@ -1,6 +1,6 @@
 {
   "name": "@flowtyped/underscore",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "flowVersion": "flow_v0.50.x-v0.74.x",
   "dependencies": {},
   "files": [

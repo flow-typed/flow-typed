@@ -1,6 +1,6 @@
 {
   "name": "@flowtyped/react-body-classname",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "flowVersion": "flow_v0.26.x-v0.52.x",
   "dependencies": {},
   "files": [
