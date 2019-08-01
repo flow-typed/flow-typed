@@ -17,6 +17,6 @@ haversine({ lat: 2, lon: 3 }, { lat: 3, lon: 2 })
 // $ExpectError
 haversine({ latitude: 2, longitude: 3 }, { latitude: 3, longitude: 2 }, { format: '[lat,lon]'})
 // $ExpectError
-const a: number = haversine({ type: 'Feature', coordinates: [2, 3] }, { type: 'Feature', coordinates: [2, 3] }, { format: 'geojson', threshold: 1 })
+const c: number = haversine({ type: 'Feature', coordinates: [2, 3] }, { type: 'Feature', coordinates: [2, 3] }, { format: 'geojson', threshold: 1 })
 // $ExpectError
-const b: boolean = haversine({ type: 'Feature', coordinates: [2, 3] }, { type: 'Feature', coordinates: [2, 3] }, { format: 'geojson'})
+const d: boolean = haversine({ type: 'Feature', coordinates: [2, 3] }, { type: 'Feature', coordinates: [2, 3] }, { format: 'geojson'})

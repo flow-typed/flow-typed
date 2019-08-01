@@ -224,7 +224,7 @@ function resolve() {
 
   let foo: "bar" = container.cradle.foo;
   // $ExpectError
-  let foo: "bar2" = container.cradle.foo;
+  let foo2: "bar2" = container.cradle.foo;
   let inst: FooClass = container.cradle.inst;
   // $ExpectError
   let inst2: Class<FooClass> = container.cradle.inst;
@@ -251,5 +251,5 @@ function build() {
 
   class Foo {}
 
-  let f: Foo = container.build(Foo);
+  let f2: Foo = container.build(Foo);
 }
