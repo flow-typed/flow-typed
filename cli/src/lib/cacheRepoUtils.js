@@ -127,7 +127,7 @@ export function getCacheRepoDir() {
 export async function verifyCLIVersion(): Promise<void> {
   const metadataPath = path.join(
     getCacheRepoDir(),
-    'definitions',
+    'experimental',
     '.cli-metadata.json',
   );
   const metadata = JSON.parse(String(await fs.readFile(metadataPath)));
