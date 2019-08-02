@@ -33,11 +33,7 @@ describe('browser history', () => {
   })
 
   it('should only allow proper arguments to history.listen and history.block', () => {
-    const history = createBrowserHistory({
-      basename: "",
-      forceRefresh: false,
-      keyLength: 6,
-    })
+    const history = createBrowserHistory({})
 
     const callback = history.listen((loc, action) => {})
     const returnValue: void = callback()
@@ -133,11 +129,7 @@ describe('memory history', () => {
   });
 
   it('should only allow proper arguments to history.listen and history.block', () => {
-    const history = createBrowserHistory({
-      basename: "",
-      forceRefresh: false,
-      keyLength: 6,
-    })
+    const history = createMemoryHistory({})
 
     const callback = history.listen((loc, action) => {})
     const returnValue: void = callback()
@@ -233,11 +225,7 @@ describe('hash history', () => {
   });
 
   it('should only allow proper arguments to history.listen and history.block', () => {
-    const history = createBrowserHistory({
-      basename: "",
-      forceRefresh: false,
-      keyLength: 6,
-    })
+    const history = createHashHistory({ hashType: 'slash' })
 
     const callback = history.listen((loc, action) => {})
     const returnValue: void = callback()
