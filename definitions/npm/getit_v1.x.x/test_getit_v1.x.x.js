@@ -19,10 +19,10 @@ getit('github://DamonOehlman/getit/README.md', (err, data) => {
 });
 
 // $ExpectError
-const result: number = getit.getUrl('github://DamonOehlman/getit/README.md');
+const result2: number = getit.getUrl('github://DamonOehlman/getit/README.md');
 
 // $ExpectError
-const result: string = getit.getUrl(5);
+const result3: string = getit.getUrl(5);
 
 // $ExpectError
 getit('github://DamonOehlman/getit/README.md');

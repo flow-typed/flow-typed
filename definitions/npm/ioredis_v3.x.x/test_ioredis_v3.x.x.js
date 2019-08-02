@@ -22,7 +22,7 @@ new Redis({
 const promise: Promise<string> = redisClient.get('foo');
 
 // $ExpectError number. This type is incompatible with string
-const promise: Promise<string> = redisClient.get(1234);
+const promise2: Promise<string> = redisClient.get(1234);
 
 const cluster = new Redis.Cluster([
   {

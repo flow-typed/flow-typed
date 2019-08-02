@@ -45,4 +45,4 @@ presence.onSync(() => {
 });
 
 // $ExpectError: `Channel` instances must take a `Socket` as the final param
-const channel = new Channel('foo', {});
+const channel2 = new Channel('foo', {});
