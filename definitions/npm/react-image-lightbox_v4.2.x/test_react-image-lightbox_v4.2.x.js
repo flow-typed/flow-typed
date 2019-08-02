@@ -11,7 +11,7 @@ function BadLightbox2() {
   return <Lightbox mainSrc={1} />
 }
 
-function BadLightbox2() {
+function BadLightbox3() {
   // $ExpectError
   return <Lightbox mainSrc={1} onCloseRequest="close" />
 }

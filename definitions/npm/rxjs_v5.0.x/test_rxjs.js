@@ -59,7 +59,7 @@ let dualNumbers = Observable.of(numbers, numbers);
 (dualNumbers.combineAll((a, b) => `${a}-${b}`): Observable<number>);
 (dualNumbers.combineAll((a, b) => `${a}-${b}`): Observable<string>);
 
-const combined: Observable<{ n: number, s: string }> = Observable.combineLatest(
+const combined: Observable<{ n: number, s: string, ... }> = Observable.combineLatest(
   numbers,
   strings,
   (n, s) => ({ n, s })
@@ -78,7 +78,8 @@ const combined3: Observable<[number]> = Observable.combineLatest(numbers);
 
 const combinedBad: Observable<{
   n: number,
-  s: string
+  s: string,
+  ...
   // $ExpectError
 }> = Observable.combineLatest(numbers, numbers, (n, s) => ({ n, s }));
 
@@ -89,7 +90,7 @@ const combinedBad: Observable<{
 (numbers.combineLatest(strings, (a: number, b: string) => ({
   a,
   b
-})): Observable<{ a: number, b: string }>);
+})): Observable<{ a: number, b: string, ... }>);
 
 (numbers.combineLatest(strings, strings): Observable<[number, string, string]>);
 
@@ -97,9 +98,9 @@ const combinedBad: Observable<{
   a,
   b,
   c
-})): Observable<{ a: number, b: string, c: string }>);
+})): Observable<{ a: number, b: string, c: string, ... }>);
 
-const forked: Observable<{ n: number, s: string }> = Observable.forkJoin(
+const forked: Observable<{ n: number, s: string, ... }> = Observable.forkJoin(
   numbers,
   strings,
   (n, s) => ({ n, s })
@@ -141,7 +142,7 @@ const forkedBad: Observable<{ n: number, s: string }> = Observable.forkJoin(
 
 (Observable.defer(() => numbers): Observable<number>);
 
-const zipped: Observable<{ n: number, s: string }> = Observable.zip(
+const zipped: Observable<{ n: number, s: string, ... }> = Observable.zip(
   numbers,
   strings,
   (n, s) => ({ n, s })
@@ -166,7 +167,7 @@ const zippedBad: Observable<{ n: number, s: string }> = Observable.zip(
 (Observable.zip(numbers, strings, (a: number, b: string) => ({
   a,
   b
-})): Observable<{ a: number, b: string }>);
+})): Observable<{ a: number, b: string, ... }>);
 
 (numbers.zip(strings): Observable<[number, string]>);
 // $ExpectError
@@ -175,7 +176,7 @@ const zippedBad: Observable<{ n: number, s: string }> = Observable.zip(
 (numbers.zip(strings, (a: number, b: string) => ({
   a,
   b
-})): Observable<{ a: number, b: string }>);
+})): Observable<{ a: number, b: string, ... }>);
 
 (numbers.zip(strings, strings): Observable<[number, string, string]>);
 
@@ -183,7 +184,7 @@ const zippedBad: Observable<{ n: number, s: string }> = Observable.zip(
   a,
   b,
   c
-})): Observable<{ a: number, b: string, c: string }>);
+})): Observable<{ a: number, b: string, c: string, ... }>);
 
 // $ExpectError
 const bogusEmpty: Observable<string> = Observable.empty().concat(
@@ -230,7 +231,7 @@ const numberOrString: Observable<number | string> = numbers.concat(strings);
 (numbers.withLatestFrom(strings, (a: number, b: string) => ({
   a,
   b
-})): Observable<{ a: number, b: string }>);
+})): Observable<{ a: number, b: string, ... }>);
 
 (numbers.withLatestFrom(strings, strings): Observable<
   [number, string, string]
@@ -244,7 +245,7 @@ const numberOrString: Observable<number | string> = numbers.concat(strings);
   strings,
   strings,
   (a: number, b: string, c: string) => ({ a, b, c })
-): Observable<{ a: number, b: string, c: string }>);
+): Observable<{ a: number, b: string, c: string, ... }>);
 
 numbers.observeOn(Scheduler.async);
 // $ExpectError
@@ -283,8 +284,8 @@ Observable.of({ test: 1 }).distinctUntilKeyChanged("test", (a, b) => a === b);
 
 // Testing covariance/contravariance/invariance of type parameters
 
-type SuperFoo = { x: string };
-type SubFoo = { x: string, y: number };
+type SuperFoo = { x: string, ... };
+type SubFoo = { x: string, y: number, ... };
 
 const subObservable: Observable<SubFoo> = new Observable();
 const superObservable: Observable<SuperFoo> = new Observable();

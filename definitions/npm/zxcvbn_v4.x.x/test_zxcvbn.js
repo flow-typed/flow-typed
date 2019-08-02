@@ -23,11 +23,11 @@ describe('password', () => {
 });
 
 describe('user input', () => {
-  const test2: Result = zxcvbn('123456', ['abc']);
+  const test1: Result = zxcvbn('123456', ['abc']);
 
   // $ExpectError
   const test2: Result = zxcvbn(20, [30]);
 
   // $ExpectError
-  const test2: Result = zxcvbn({}, [{}]);
+  const test3: Result = zxcvbn({}, [{}]);
 });

@@ -51,6 +51,6 @@ uuid.unparse(buffer1);
 
 const myUuid = uuid.noConflict();
 // $ExpectError
-const myUuid: () => string = uuid.noConflict();
+const myUuid2: () => string = uuid.noConflict();
 myUuid.v1();
 

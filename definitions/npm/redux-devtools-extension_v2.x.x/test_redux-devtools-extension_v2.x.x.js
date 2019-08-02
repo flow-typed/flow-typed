@@ -46,15 +46,15 @@ const options2: Options = {
   name: 54
 };
 // $ExpectError
-const options2: OptionsDev = {
+const options3: OptionsDev = {
   name: 54
 };
 // $ExpectError
-const options2: OptionsLog = {
+const options4: OptionsLog = {
   name: 54
 };
 // $ExpectError
-const options2: OptionsLogProd = {
+const options5: OptionsLogProd = {
   name: 54
 };
 

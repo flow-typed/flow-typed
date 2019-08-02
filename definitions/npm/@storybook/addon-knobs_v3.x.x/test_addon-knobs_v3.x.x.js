@@ -71,7 +71,7 @@ numberVal = number("Number with non-numeric max", 1, { max: "5" });
 let badNumberVal: string = number("Number assigned to non-numeric variable", 1);
 
 // object
-let objectVal: { [key: string]: number };
+let objectVal: { [key: string]: number, ... };
 objectVal = object("Object", { value: 1 });
 
 // select
