@@ -28,8 +28,24 @@ describe('browser history', () => {
       keyLength: 6,
     })
 
-    const key: string = history.location.key
-    const state: {} = history.location.state
+    const key: ?string = history.location.key
+    const state: ?{} = history.location.state
+  })
+
+  it('should only allow proper arguments to history.listen and history.block', () => {
+    const history = createBrowserHistory({
+      basename: "",
+      forceRefresh: false,
+      keyLength: 6,
+    })
+
+    const callback = history.listen((loc, action) => {})
+    const returnValue: void = callback()
+
+    history.block((loc, action) => {})
+    history.block((loc, action) => 'string')
+    // $ExpectError
+    history.block((loc, action) => ({}))
   });
 
   it('should not allow to get field which is absent in the history', () => {
@@ -112,8 +128,24 @@ describe('memory history', () => {
       keyLength: 6,
     })
 
-    const key: string = history.location.key
-    const state: {} = history.location.state
+    const key: ?string = history.location.key
+    const state: ?{} = history.location.state
+  });
+
+  it('should only allow proper arguments to history.listen and history.block', () => {
+    const history = createBrowserHistory({
+      basename: "",
+      forceRefresh: false,
+      keyLength: 6,
+    })
+
+    const callback = history.listen((loc, action) => {})
+    const returnValue: void = callback()
+
+    history.block((loc, action) => {})
+    history.block((loc, action) => 'string')
+    // $ExpectError
+    history.block((loc, action) => ({}))
   });
 
   it('should not allow to get field which is absent in the history', () => {
@@ -198,6 +230,22 @@ describe('hash history', () => {
     const key: string = history.location.key
     // $ExpectError
     const state: {} = history.location.state
+  });
+
+  it('should only allow proper arguments to history.listen and history.block', () => {
+    const history = createBrowserHistory({
+      basename: "",
+      forceRefresh: false,
+      keyLength: 6,
+    })
+
+    const callback = history.listen((loc, action) => {})
+    const returnValue: void = callback()
+
+    history.block((loc, action) => {})
+    history.block((loc, action) => 'string')
+    // $ExpectError
+    history.block((loc, action) => ({}))
   });
 
   it('should not allow to get field which is absent in the history', () => {
