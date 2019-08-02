@@ -8,8 +8,8 @@ declare module 'history' {
     search: string,
     hash: string,
     // Browser and Memory specific
-    state: {},
-    key: string,
+    state?: {},
+    key?: string,
   };
 
   declare interface IBrowserHistory {
@@ -23,10 +23,10 @@ declare module 'history' {
     go(n: number): void;
     goBack(): void;
     goForward(): void;
-    listen((location: BrowserLocation, action: Action) => void): void;
+    listen((location: BrowserLocation, action: Action) => void): () => void;
     block(message: string): typeof Unblock;
     block(
-      (location: BrowserLocation, action: Action) => string
+      (location: BrowserLocation, action: Action) => ?string
     ): typeof Unblock;
   }
 
@@ -50,8 +50,8 @@ declare module 'history' {
     search: string,
     hash: string,
     // Browser and Memory specific
-    state: {},
-    key: string,
+    state?: {},
+    key?: string,
   };
 
   declare interface IMemoryHistory {
@@ -69,9 +69,9 @@ declare module 'history' {
     goForward(): void;
     // Memory only
     canGo(n: number): boolean;
-    listen((location: MemoryLocation, action: Action) => void): void;
+    listen((location: MemoryLocation, action: Action) => void): () => void;
     block(message: string): typeof Unblock;
-    block((location: MemoryLocation, action: Action) => string): typeof Unblock;
+    block((location: MemoryLocation, action: Action) => ?string): typeof Unblock;
   }
 
   declare export type MemoryHistory = IMemoryHistory;
@@ -105,9 +105,9 @@ declare module 'history' {
     go(n: number): void;
     goBack(): void;
     goForward(): void;
-    listen((location: HashLocation, action: Action) => void): void;
+    listen((location: HashLocation, action: Action) => void): () => void;
     block(message: string): typeof Unblock;
-    block((location: HashLocation, action: Action) => string): typeof Unblock;
+    block((location: HashLocation, action: Action) => ?string): typeof Unblock;
     push(path: string): void;
   }
 
