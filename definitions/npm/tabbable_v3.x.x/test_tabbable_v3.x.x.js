@@ -30,7 +30,7 @@ const isFocusableWithUntouchabilityChecker: boolean = tabbable.isFocusable(
 );
 
 // $ExpectError
-const isFocusable: boolean = tabbable.isFocusable(document.createElement('button'), 3);
+const isFocusable2: boolean = tabbable.isFocusable(document.createElement('button'), 3);
 
 // $ExpectError
-const isTabbable: boolean = tabbable.isFocusable(document.createElement('button'), 3);
+const isTabbable2: boolean = tabbable.isFocusable(document.createElement('button'), 3);

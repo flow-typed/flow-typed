@@ -11,7 +11,7 @@ import {
 import React from 'react';
 
 const FunctionalScreenComponent = (
-  { navigation }: { navigation: NavigationScreenProp<*> },
+  { navigation }: { navigation: NavigationScreenProp<*>, ... },
 ) => {
   return "Test";
 };

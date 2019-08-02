@@ -75,9 +75,7 @@ async function getTestGroups(
     libDefs = libDefs.filter(def => changedDefs.includes(def.pkgName));
   }
   return libDefs.map(libDef => {
-    const groupID = `${libDef.pkgName}_${libDef.pkgVersionStr}/${
-      libDef.flowVersionStr
-    }`;
+    const groupID = `${libDef.pkgName}_${libDef.pkgVersionStr}/${libDef.flowVersionStr}`;
     return {
       id: groupID,
       testFilePaths: libDef.testFilePaths,
@@ -292,7 +290,7 @@ async function getCachedFlowBinVersions(
   return versions.map(version => `v${version}`);
 }
 
-async function writeFlowConfig(repoDirPath, testDirPath, libDefPath) {
+async function writeFlowConfig(repoDirPath, testDirPath, libDefPath, version) {
   const destFlowConfigPath = path.join(testDirPath, '.flowconfig');
 
   const flowConfigData = [
@@ -310,6 +308,9 @@ async function writeFlowConfig(repoDirPath, testDirPath, libDefPath) {
     // CLI repository!
     '[ignore]',
     path.join(testDirPath, '..', '..', 'node_modules'),
+    '',
+    '[lints]',
+    semver.gte(version, '0.104.0') ? 'implicit-inexact-object=error' : '',
   ].join('\n');
   await fs.writeFile(destFlowConfigPath, flowConfigData);
 }
@@ -425,7 +426,12 @@ async function findLowestCapableFlowVersion(
     return semver.lt(flowVer, lowestFlowVersionRan);
   });
   lowerFlowVersionsToRun.reverse();
-  await writeFlowConfig(repoDirPath, testDirPath, libDefPath);
+  await writeFlowConfig(
+    repoDirPath,
+    testDirPath,
+    libDefPath,
+    lowestFlowVersionRan,
+  );
   return await testLowestCapableFlowVersion(
     lowerFlowVersionsToRun,
     testDirPath,
@@ -511,7 +517,12 @@ async function runTestGroup(
       return [];
     }
     let lowestFlowVersionRan = flowVersionsToRun[0];
-    await writeFlowConfig(repoDirPath, testDirPath, testGroup.libDefPath);
+    await writeFlowConfig(
+      repoDirPath,
+      testDirPath,
+      testGroup.libDefPath,
+      lowestFlowVersionRan,
+    );
     const flowErrors = await runFlowTypeDefTests(
       flowVersionsToRun,
       testGroup.id,
@@ -527,9 +538,7 @@ async function runTestGroup(
     );
 
     if (lowestCapableFlowVersion !== lowestFlowVersionRan) {
-      console.log(`Tests for ${
-        testGroup.id
-      } ran successfully on flow ${lowestCapableFlowVersion}.
+      console.log(`Tests for ${testGroup.id} ran successfully on flow ${lowestCapableFlowVersion}.
         Consider setting ${lowestCapableFlowVersion} as the lower bound!`);
     }
 
