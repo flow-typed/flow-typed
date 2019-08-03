@@ -140,7 +140,6 @@ declare module 'react-native-webview' {
 
   declare export type IOSWebViewProps = {
     useWebKit?: boolean,
-    incognito?: boolean,
     bounces?: boolean,
     decelerationRate?: DecelerationRateConstant | number,
     scrollEnabled?: boolean,
@@ -204,6 +203,8 @@ declare module 'react-native-webview' {
     nativeConfig?: WebViewNativeConfig,
     cacheEnabled?: boolean,
     userAgent?: string,
+    incognito?: boolean,
+    applicationNameForUserAgent?: string,
     ...
   };
 
