@@ -15,7 +15,7 @@ const supportsDim = chalk.dim("oh to be dimmed");
 const enabledString: string = chalk.enabled;
 
 // $ExpectError
-const enabledString: string = chalk.hasColor(123);
+const enabledString2: string = chalk.hasColor(123);
 
 // $ExpectError
-const enabledString: string = chalk.stripColor(123);
+const enabledString3: string = chalk.stripColor(123);
