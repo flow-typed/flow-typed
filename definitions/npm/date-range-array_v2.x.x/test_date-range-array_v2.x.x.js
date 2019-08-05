@@ -5,4 +5,4 @@ const a: Array<string> = dateRangeArray("2017-06-01", "2017-06-03");
 
 // $ExpectError
 const c: Array<string> = dateRangeArray("2017-06-01");
-const c: Array<number> = dateRangeArray("2017-06-01", "2017-06-03");
+const d: Array<string> = dateRangeArray("2017-06-01", "2017-06-03");

@@ -8,7 +8,8 @@ declare module "ip" {
     subnetMaskLength: number,
     numHosts: number,
     length: number,
-    contains(string): boolean
+    contains(string): boolean,
+    ...
   };
   declare type IP = {
     address(): string,
@@ -26,7 +27,8 @@ declare module "ip" {
     toLong(string): number,
     fromLong(number): string,
     subnet(string, string): SubnetInformation,
-    cidrSubnet(string): SubnetInformation
+    cidrSubnet(string): SubnetInformation,
+    ...
   };
   declare module.exports: IP;
 }
