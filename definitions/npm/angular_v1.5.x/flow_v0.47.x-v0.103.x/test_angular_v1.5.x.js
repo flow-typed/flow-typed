@@ -1,14 +1,14 @@
 // @flow
 import { describe, it } from "flow-typed-test";
-import type {
-  AngularPromise,
-  AngularQ,
-  JqliteElement,
-  AngularHttpService,
-  AngularResourceFactory,
-  AngularResourceResult,
-  AngularResource,
-  AngularCompileService
+import {
+  type AngularPromise,
+  type AngularQ,
+  type JqliteElement,
+  type AngularHttpService,
+  typeof AngularResourceFactory,
+  type AngularResourceResult,
+  type AngularResource,
+  typeof AngularCompileService
 } from "angular";
 
 ("use strict");
