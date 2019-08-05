@@ -118,8 +118,8 @@ describe('WebView props', () => {
         androidHardwareAccelerationDisabled={false}
         thirdPartyCookiesEnabled={false}
         domStorageEnabled={false}
-        textZoom={1}
         mixedContentMode={'compatibility'}
+        textZoom={1}
       />;
     });
 
