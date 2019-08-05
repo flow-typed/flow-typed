@@ -544,7 +544,6 @@ expect(wrapper).toHaveDisplayName(true);
   expect(element).toHaveAttribute();
   // $ExpectError: attribute name should be a string
   expect(element).toHaveAttribute(1);
-  // $ExpectError: expected attribute value should be a string
   expect(element).toHaveAttribute('foo', 1);
   // $ExpectError
   expect(element).toHaveClass(1);
