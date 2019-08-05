@@ -16,6 +16,8 @@ import {
   readDirectoryAsync,
   downloadAsync,
   createDownloadResumable,
+  getFreeDiskStorageAsync,
+  getTotalDiskCapacityAsync,
   DownloadResumable,
 } from 'expo-file-system';
 
@@ -404,6 +406,22 @@ describe('createDownloadResumable', () => {
 
       // $ExpectError: check any
       (result: number);
+    });
+  });
+});
+
+describe('getFreeDiskStorageAsync and getTotalDiskCapacityAsync', () => {
+  it('should work properly', () => {
+    getFreeDiskStorageAsync().then(n => {
+      (n: number);
+      // $ExpectError: check any
+      (n: boolean);
+    });
+
+    getTotalDiskCapacityAsync().then(n => {
+      (n: number);
+      // $ExpectError: check any
+      (n: boolean);
     });
   });
 });

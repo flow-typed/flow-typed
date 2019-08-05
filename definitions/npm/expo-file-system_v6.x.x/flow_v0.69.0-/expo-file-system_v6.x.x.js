@@ -122,6 +122,10 @@ declare module 'expo-file-system' {
     fileUri: string
   ): Promise<Array<string>>;
 
+  declare export function getFreeDiskStorageAsync(): Promise<number>;
+
+  declare export function getTotalDiskCapacityAsync(): Promise<number>;
+
   declare export function downloadAsync(
     uri: string,
     fileUri: string,
