@@ -309,9 +309,9 @@ declare module "backbone" {
     emulateJSON: typeof emulateJSON;
 
     // Utilty
-    $: typeof $; // @TODO this is no correct, but it is difficult to require another definition from here.
-    _: typeof _; // @TODO this is no correct, but it is difficult to require another definition from here.
-    version: typeof version;
+    $: any; // @TODO this is no correct, but it is difficult to require another definition from here.
+    _: any; // @TODO this is no correct, but it is difficult to require another definition from here.
+    version: string;
     noConflict(): this;
   }
 
