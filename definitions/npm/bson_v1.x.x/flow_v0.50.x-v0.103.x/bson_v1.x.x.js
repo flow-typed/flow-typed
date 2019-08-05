@@ -80,8 +80,8 @@ declare class bson$Binary {
 }
 
 declare class bson$Code {
-  constructor(code: string | Function, scope?: Object): this;
-  toJSON(): { scope: ?Object, code: string | Function };
+  constructor(code: string | ((...a: any) => mixed), scope?: {}): this;
+  toJSON(): { scope: ?Object, code: string | ((...a: any) => mixed) };
 }
 
 declare class bson$DBRef {
@@ -218,7 +218,7 @@ declare class bson$Timestamp {
   static MIN_VALUE: bson$Timestamp;
 }
 
-declare module "bson" {
+declare module 'bson' {
   declare export type BsonBinary = bson$Binary;
   declare export type BsonCode = bson$Code;
   declare export type BsonDBRef = bson$DBRef;
@@ -235,25 +235,25 @@ declare module "bson" {
   declare export type BsonTimestamp = bson$Timestamp;
 
   declare class bson$BSON {
-    serialize(object: Object, options?: Object): Buffer;
+    serialize(object: {}, options?: {}): Buffer;
     serializeWithBufferAndIndex(
-      object: Object,
+      object: {},
       finalBuffer: Buffer,
-      options?: Object
+      options?: {}
     ): number;
-    deserialize(buffer: Buffer, options?: Object): Object;
-    calculateObjectSize(object: Object, options?: Object): number;
+    deserialize(buffer: Buffer, options?: {}): {};
+    calculateObjectSize(object: {}, options?: {}): number;
     deserializeStream(
       data: Buffer,
       startIndex: number,
       numberOfDocuments: number,
       documents: Array<Object>,
       docStartIndex: number,
-      options?: Object
+      options?: {}
     ): number;
   }
 
-  declare export default typeof bson$BSON
+  declare export default typeof bson$BSON;
 
   declare export var Binary: Class<bson$Binary>;
   declare export var Code: Class<bson$Code>;
