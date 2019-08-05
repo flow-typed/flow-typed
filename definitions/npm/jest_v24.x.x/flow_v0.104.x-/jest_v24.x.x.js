@@ -899,7 +899,7 @@ type JestSpyType = { calls: JestCallsType, ... };
 
 type JestDoneFn = {|
  (): void,
- fail: (error?: Error) => void,
+ fail: (error: Error) => void,
 |};
 
 /** Runs this function after every test inside this context */

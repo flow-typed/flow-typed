@@ -194,7 +194,7 @@ test.skip('name', done => {
   done();
 });
 test('name', done => {
-  done.fail();
+  done.fail(new Error('fail'));
 });
 
 test.todo('');
