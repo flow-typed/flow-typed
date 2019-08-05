@@ -85,7 +85,7 @@ it("works with class component, this requires a stricter definition", () => {
 });
 
 it("works with class component with it's own variable", () => {
-  type CmplxOwnProps = {| faz: string |};
+  type CmplxOwnProps = { faz: string, ... };
   type CmplxComponentProps = {
     data: GraphqlQueryControls<> & IQuery,
     // The mutation is actually required or we get a error at the withData

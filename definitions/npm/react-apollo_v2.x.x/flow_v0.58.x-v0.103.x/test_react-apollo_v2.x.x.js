@@ -59,6 +59,8 @@ compose(
 
 it("works with functional component", () => {
   const FunctionalWithData = withData(({ data }) => {
+    // $ExpectError: check any
+    (data: boolean);
     // $ExpectError string type being treated as numerical
     if (data.foo > 1) return <span />;
 
@@ -83,7 +85,7 @@ it("works with class component, this requires a stricter definition", () => {
 });
 
 it("works with class component with it's own variable", () => {
-  type CmplxOwnProps = {| faz: string |};
+  type CmplxOwnProps = { faz: string };
   type CmplxComponentProps = {
     data: GraphqlQueryControls<> & IQuery,
     mutate: any // The mutation is actually required or we get a error at the withData

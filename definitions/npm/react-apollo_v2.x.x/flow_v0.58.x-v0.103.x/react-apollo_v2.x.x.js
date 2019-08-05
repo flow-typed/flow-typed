@@ -116,7 +116,7 @@ declare module "react-apollo" {
       queryId: string,
       document: DocumentNode,
       storePreviousVariables: boolean,
-      variables: Object,
+      variables: {},
       isPoll: boolean,
       isRefetch: boolean,
       metadata: any,
@@ -190,8 +190,8 @@ declare module "react-apollo" {
       document: DocumentNode,
       variables: any,
       updateQueries: { [queryId: string]: QueryWithUpdater },
-      update: ((proxy: DataProxy, mutationResult: Object) => mixed) | void,
-      optimisticResponse: Object | Function | void
+      update: ((proxy: DataProxy, mutationResult: {}) => mixed) | void,
+      optimisticResponse: {} | (...a:any)=> mixed | void
     }): void;
     markMutationResult(mutation: {
       mutationId: string,
@@ -199,7 +199,7 @@ declare module "react-apollo" {
       document: DocumentNode,
       variables: any,
       updateQueries: { [queryId: string]: QueryWithUpdater },
-      update: ((proxy: DataProxy, mutationResult: Object) => mixed) | void
+      update: ((proxy: DataProxy, mutationResult: {}) => mixed) | void
     }): void;
     markMutationComplete({
       mutationId: string,
@@ -220,7 +220,7 @@ declare module "react-apollo" {
 
   declare interface MutationStoreValue {
     mutationString: string;
-    variables: Object;
+    variables: {};
     loading: boolean;
     error: Error | null;
   }
@@ -231,7 +231,7 @@ declare module "react-apollo" {
     initMutation(
       mutationId: string,
       mutationString: string,
-      variables: Object | void
+      variables: {} | void
     ): void;
   }
 
@@ -246,7 +246,7 @@ declare module "react-apollo" {
   }
 
   declare export interface UpdateQueryOptions {
-    variables?: Object;
+    variables?: {};
   }
 
   declare export type ApolloCurrentResult<T> = {
@@ -279,9 +279,9 @@ declare module "react-apollo" {
   >;
 
   declare interface MutationBaseOptions<T = { [key: string]: any }> {
-    optimisticResponse?: Object | Function;
+    optimisticResponse?: {} | (...a: any) => mixed;
     updateQueries?: MutationQueryReducersMap<T>;
-    optimisticResponse?: Object;
+    optimisticResponse?: {};
     refetchQueries?:
       | ((result: ExecutionResult<>) => RefetchQueryDescription)
       | RefetchQueryDescription;
@@ -347,8 +347,8 @@ declare module "react-apollo" {
 
   declare export type QueryStoreValue = {
     document: DocumentNode,
-    variables: Object,
-    previousVariables: Object | null,
+    variables: {},
+    previousVariables: {} | null,
     networkStatus: NetworkStatus,
     networkError: Error | null,
     graphQLErrors: GraphQLError[],
@@ -423,7 +423,7 @@ declare module "react-apollo" {
     version: string;
     queryDeduplication: boolean;
     defaultOptions: DefaultOptions;
-    devToolsHookCb: Function;
+    devToolsHookCb: (...a: any)=> mixed;
     proxy: ApolloCache<TCacheShape> | void;
     ssrMode: boolean;
     resetStoreCallbacks: Array<() => Promise<any>>;
@@ -758,7 +758,7 @@ declare module "react-apollo" {
   declare export type ChildProps<
     TOwnProps,
     TResult,
-    TVariables: Object = {}
+    TVariables = {}
   > = {
     data: GraphqlData<TResult, TVariables>,
     mutate: MutationFunc<TResult, TVariables>
@@ -773,7 +773,7 @@ declare module "react-apollo" {
 
   declare export type MutationOpts<TVariables> = {|
     variables?: TVariables,
-    optimisticResponse?: Object,
+    optimisticResponse?: {},
     refetchQueries?: RefetchQueryDescription | RefetchQueriesProviderFn,
     update?: MutationUpdaterFn<*>,
     errorPolicy?: ErrorPolicy
@@ -842,10 +842,10 @@ declare module "react-apollo" {
   }
 
   declare export interface OperationComponent<
-    TResult: Object = {},
-    TOwnProps: Object = {},
-    TVariables: Object = {},
-    TMergedProps: Object = ChildProps<TOwnProps, TResult, TVariables>
+    TResult= {},
+    TOwnProps= {},
+    TVariables= {},
+    TMergedProps = ChildProps<TOwnProps, TResult, TVariables>
   > {
     (component: ComponentType<TMergedProps>): ComponentType<TOwnProps>;
   }
@@ -993,7 +993,7 @@ declare module "react-apollo" {
     TVariables = OperationVariables
   > = (options?: {
     variables?: TVariables,
-    optimisticResponse?: Object,
+    optimisticResponse?: {},
     refetchQueries?: RefetchQueryDescription | RefetchQueriesProviderFn,
     update?: MutationUpdaterFn<TData>
   }) => Promise<void | FetchResult<TData>>;
@@ -1020,7 +1020,7 @@ declare module "react-apollo" {
     variables?: TVariables,
     update?: MutationUpdaterFn<TData>,
     ignoreResults?: boolean,
-    optimisticResponse?: Object,
+    optimisticResponse?: {},
     refetchQueries?: RefetchQueryDescription | RefetchQueriesProviderFn,
     onCompleted?: (data: TData) => mixed,
     onError?: (error: ApolloError) => mixed,
