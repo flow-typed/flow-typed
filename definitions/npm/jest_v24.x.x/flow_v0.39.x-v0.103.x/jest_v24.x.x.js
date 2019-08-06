@@ -935,10 +935,10 @@ type JestSpyType = {
   calls: JestCallsType,
 };
 
-type JestDoneFn = {
+type JestDoneFn = {|
   (): void,
   fail: (error: Error) => void,
-};
+|};
 
 /** Runs this function after every test inside this context */
 declare function afterEach(
@@ -1014,19 +1014,20 @@ declare var it: {
    * @param {Function} Test
    * @param {number} Timeout for the test, in milliseconds.
    */
-  only(
-    name: JestTestName,
-    fn?: (done: JestDoneFn) => ?Promise<mixed>,
-    timeout?: number
-  ): {
+  only: {|
+    (
+      name: JestTestName,
+      fn?: (done: JestDoneFn) => ?Promise<mixed>,
+      timeout?: number
+    ): void,
     each(
       ...table: Array<Array<mixed> | mixed> | [Array<string>, string]
     ): (
       name: JestTestName,
       fn?: (...args: Array<any>) => ?Promise<mixed>,
       timeout?: number
-    ) => void,
-  },
+    ) => void
+  |},
 
   /**
    * Skip running this test
