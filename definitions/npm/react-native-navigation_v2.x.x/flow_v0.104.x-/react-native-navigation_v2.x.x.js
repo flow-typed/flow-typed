@@ -195,6 +195,12 @@ declare module 'react-native-navigation' {
     titleDisplayMode?: 'alwaysShow' | 'showWhenActive' | 'alwaysHide',
     elevation?: AndroidDensityNumber,
   |};
+
+  declare export type DotIndicatorDescriptor = {|
+    color?: Color,
+    size?: number,
+    visible?: boolean,
+  |};
   declare export type OptionsBottomTab = {|
     text?: string,
     badge?: string,
@@ -207,10 +213,13 @@ declare module 'react-native-navigation' {
     selectedTextColor?: Color,
     fontFamily?: FontFamily,
     fontSize?: number,
+    dotIndicator?: DotIndicatorDescriptor,
+    // iOS only
     iconInsets?: Insets,
     selectedIcon?: ImageRequireSource,
     disableIconTint?: boolean,
     disableSelectedIconTint?: boolean,
+    // Android only
     selectedFontSize?: number,
   |};
   declare export type SideMenuSide = {|
@@ -477,7 +486,14 @@ declare module 'react-native-navigation' {
 
   declare export type GetComponentClassFunc = () => React$ComponentType<{ componentId: string, ... }>;
 
-  declare export var Navigation: {
+  declare export type NavigationConstants = {|
+    backButtonId: string,
+    bottomTabsHeight: number,
+    statusBarHeight: number,
+    topBarHeight: number,
+  |};
+
+  declare export var Navigation: {|
     registerComponent(
       screenID: string | number,
       getComponentClassFunc: GetComponentClassFunc
@@ -506,12 +522,6 @@ declare module 'react-native-navigation' {
     showOverlay(layout: Layout): Promise<string>,
     dismissOverlay(componentId: string): Promise<string>,
     events(): EventsRegistry,
-    constants(): Promise<{|
-      backButtonId: string,
-      bottomTabsHeight: number,
-      statusBarHeight: number,
-      topBarHeight: number,
-    |}>,
-    ...
-  };
+    constants(): Promise<NavigationConstants>,
+  |};
 }
