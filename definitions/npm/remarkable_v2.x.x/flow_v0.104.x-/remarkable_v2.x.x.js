@@ -19,13 +19,13 @@ declare module 'remarkable' {
     breaks: boolean,
     // CSS language prefix for fenced blocks
     langPrefix: string,
-    // Autoconvert URL-like text to links
-    linkify: boolean,
     // Enable some language-neutral replacement + quotes beautification
     typographer: boolean,
     // Double + single quotes replacement pairs, when typographer enabled,
     // and smartquotes on. Set doubles to '«»' for Russian, '„“' for German.
     quotes: string,
+    // Set target to open link in
+    linkTarget: string,
     // Highlighter function. Should return escaped HTML,
     // or '' if the source string is not changed
     highlight: (str: string, lang: string) => string,
@@ -80,7 +80,7 @@ declare module 'remarkable' {
     ): string;
   }
 
-  declare class Remarkable {
+  declare export class Remarkable {
     constructor(settings?: RemarkableSettings): void;
     use<Option>(plugin: RemarkablePlugin<Option>, options?: Option): this;
     parse(source: string, env?: Env): Array<Token>;
@@ -88,12 +88,29 @@ declare module 'remarkable' {
     set(settings: RemarkableSettings): void;
     render(source: string, env?: Env): string;
     renderInline(source: string, env?: Env): string;
-    //parsers
+    // parsers
     inline: Parser;
     block: Parser;
     core: Parser;
     renderer: Renderer;
   }
 
-  declare export default typeof Remarkable;
+  declare type Utils = {|
+    isString(obj?: any): boolean,
+    has(object: any, key: string): boolean,
+    assign(target: any, ...sources: any[]): any,
+    unescapeMd(str: string): string,
+    isValidEntityCode(c: number): boolean,
+    fromCodePoint(c: number): string,
+    replaceEntities(str: string): string,
+    escapeHtml(str: string): string,
+  |};
+
+  declare export var utils: Utils;
+}
+
+declare module 'remarkable/linkify' {
+  import type { RemarkablePlugin } from 'remarkable';
+
+  declare export var linkify: RemarkablePlugin;
 }
