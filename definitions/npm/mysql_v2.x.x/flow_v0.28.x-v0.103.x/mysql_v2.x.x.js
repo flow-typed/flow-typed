@@ -17,7 +17,7 @@ declare module "mysql" {
     connectTimeout?: number,
     stringifyObjects?: boolean,
     insecureAuth?: boolean,
-    typeCast?: boolean | ((field: Object, next: Function) => any),
+    typeCast?: boolean | ((field: {}, next: Function) => any),
     queryFormat?: (query: string, values: ?mixed, timezone: string) => string,
     supportBigNumbers?: boolean,
     bigNumberStrings?: boolean,
@@ -26,12 +26,12 @@ declare module "mysql" {
     trace?: boolean,
     multipleStatements?: boolean,
     flags?: string,
-    ssl?: string | Object
+    ssl?: string | {}
   };
 
   declare type QueryOptions = {
     sql: string,
-    typeCast?: boolean | ((field: Object, next: Function) => any),
+    typeCast?: boolean | ((field: {}, next: Function) => any),
     nestTables?: boolean | string, // string form is a separator used to produce column names
     values?: Array<mixed>,
     timeout?: number
@@ -67,7 +67,7 @@ declare module "mysql" {
 
     query(
       sql: QueryOptions,
-      values?: Array<mixed> | Object,
+      values?: Array<mixed> | {},
       callback?: QueryCallback
     ): Query;
     query(sql: QueryOptions, callback?: QueryCallback): Query;
