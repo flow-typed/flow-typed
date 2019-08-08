@@ -220,7 +220,7 @@ declare module "lodash" {
 
   declare class Lodash {
     // Array
-    chunk<T>(array?: ?Array<T>, size?: ?number): Array<Array<T>>;
+    chunk<T>(array?: ?$ReadOnlyArray<T>, size?: ?number): Array<Array<T>>;
     compact<T, N: ?T>(array?: ?Array<N>): Array<T>;
     concat<T>(
       base?: ?$ReadOnlyArray<T>,

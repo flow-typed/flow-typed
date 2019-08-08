@@ -1,6 +1,7 @@
 // @flow
 import assignIn from "lodash/assignIn";
 import attempt from "lodash/attempt";
+import chunk from "lodash/chunk";
 import clone from "lodash/clone";
 import concat from "lodash/concat";
 import conformsTo from "lodash/conformsTo";
@@ -54,6 +55,11 @@ attempt(() => void 0);
 attempt(x => x);
 attempt(x => x, "first arg");
 attempt((x, y, z) => {}, null, {}, []);
+
+/**
+ * _.chunk
+ */
+chunk(([1, 2, 3, 4]: $ReadOnlyArray<number>), 2);
 
 /**
  * _.countBy
