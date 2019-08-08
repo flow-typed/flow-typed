@@ -109,7 +109,7 @@ declare module 'phoenix' {
       currentState: { [key: string]: any, ... },
       newState: { [key: string]: any, ... },
       onJoin?: PresenceOnJoinCallback,
-      onLeave?: PresenceOnLeaveCallback): any;
+      onLeave?: PresenceOnLeaveCallback): { [key: string]: any, ... };
     static syncDiff(
       currentState: { [key: string]: any, ... },
       diff: {
@@ -118,7 +118,7 @@ declare module 'phoenix' {
         ...
       },
       onJoin?: PresenceOnJoinCallback,
-      onLeave?: PresenceOnLeaveCallback): any;
+      onLeave?: PresenceOnLeaveCallback): { [key: string]: any, ... };
     static list<T>(
       presences: { [key: string]: any, ... },
       chooser?: (key: string, presence: any) => T): T[]
