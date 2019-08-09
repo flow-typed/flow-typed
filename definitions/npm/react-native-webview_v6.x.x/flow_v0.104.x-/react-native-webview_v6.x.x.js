@@ -125,8 +125,8 @@ declare module 'react-native-webview' {
 
   declare export type WebViewNativeConfig = {|
     component?: React$ComponentType<WebViewSharedProps>,
-    props?: {...},
-    viewManager?: {...},
+    props?: { ... },
+    viewManager?: { ... },
   |};
 
   declare export type WebViewEvent = NativeSyntheticEvent<WebViewNativeEvent>;
@@ -146,6 +146,11 @@ declare module 'react-native-webview' {
     pagingEnabled?: boolean,
     automaticallyAdjustContentInsets?: boolean,
     contentInset?: ContentInsetProp,
+    contentInsetAdjustmentBehavior?:
+      | 'automatic'
+      | 'scrollableAxes'
+      | 'never'
+      | 'always',
     dataDetectorTypes?: DataDetectorTypes | Array<DataDetectorTypes>,
     allowsInlineMediaPlayback?: boolean,
     hideKeyboardAccessoryView?: boolean,
@@ -218,6 +223,7 @@ declare module 'react-native-webview' {
     reload(): void;
     stopLoading(): void;
     injectJavaScript(script: string): void;
+    requestFocus(): void;
   }
 
   declare export default typeof WebView;
