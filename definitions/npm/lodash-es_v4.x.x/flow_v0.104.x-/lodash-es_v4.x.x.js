@@ -1029,7 +1029,7 @@ declare module "lodash-es" {
   ): Object;
   declare export function at(object?: ?Object, ...paths: Array<string>): Array<any>;
   declare export function at(object?: ?Object, paths: Array<string>): Array<any>;
-  declare export function create<T>(prototype: T, properties: Object): $Supertype<T>;
+  declare export function create<T>(prototype: T, properties: Object): T;
   declare export function create(prototype: any, properties: void | null): {...};
   declare export function defaults(object?: ?Object, ...sources?: Array<?Object>): Object;
   declare export function defaultsDeep(object?: ?Object, ...sources?: Array<?Object>): Object;
