@@ -1,5 +1,5 @@
 declare module 'zustand' {
-  declare type State = {};
+  declare type State = { ... };
 
   declare type StateListener<T> = (state: T) => void;
   declare type StateSelector<T: State, U> = (state: T) => U;
