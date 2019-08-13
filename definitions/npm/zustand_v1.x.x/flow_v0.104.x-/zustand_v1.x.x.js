@@ -1,6 +1,7 @@
 declare module 'zustand' {
-  declare type State = { ... };
+  // https://github.com/react-spring/zustand/blob/410631045f32b23268fcef7ce865aacc503fe955/src/index.ts
 
+  declare type State = { ... };
   declare type StateListener<T> = (state: T) => void;
   declare type StateSelector<T: State, U> = (state: T) => U;
   declare type PartialState<T: State> = $Shape<T> | ((state: T) => $Shape<T>);
