@@ -39,5 +39,10 @@ declare module 'zustand' {
     createState: StateCreator<TState>
   ): [UseStore<TState>, StoreApi<TState>];
 
-  declare module.exports: typeof create;
+  declare export default typeof create;
+}
+
+declare module 'zustand/shallow' {
+  declare export function shallow(mixed, mixed): boolean;
+  declare export default typeof shallow;
 }
