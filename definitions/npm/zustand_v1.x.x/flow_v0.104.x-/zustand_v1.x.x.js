@@ -42,7 +42,18 @@ declare module 'zustand' {
   declare export default typeof create;
 }
 
+declare module 'zustand/middleware' {
+  declare export function redux(
+    reducer: any,
+    initial: any
+  ): (set: any, get: any, api: any) => any;
+  declare export function devtools(
+    fn: any,
+    prefix?: any
+  ): (set: any, get: any, api: any) => any;
+}
+
 declare module 'zustand/shallow' {
-  declare export function shallow(mixed, mixed): boolean;
+  declare export function shallow(a: mixed, b: mixed): boolean;
   declare export default typeof shallow;
 }
