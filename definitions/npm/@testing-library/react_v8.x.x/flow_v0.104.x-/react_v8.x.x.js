@@ -95,29 +95,41 @@ declare module '@testing-library/react' {
     queryAllByValue: AllByBoundAttribute,
   |};
 
-  declare type RenderResult = {|
+  declare type FireEvent<TInit> = (
+    element: HTMLElement,
+    eventProperties?: TInit
+  ) => boolean;
+
+  declare type Queries = {...};
+
+  declare type RenderResult<Q: Queries = GetsAndQueries> = {|
     container: HTMLDivElement,
     unmount: () => void,
     baseElement: HTMLElement,
     asFragment: () => DocumentFragment,
     debug: (baseElement?: HTMLElement) => void,
     rerender: (ui: React$Element<*>) => void,
-  |} & GetsAndQueries;
+  |} & Q;
 
-  declare type FireEvent<TInit> = (
-    element: HTMLElement,
-    eventProperties?: TInit
-  ) => boolean;
+  declare export type RenderOptions<Q: Queries = {...}> = {|
+    container?: HTMLElement,
+    baseElement?: HTMLElement,
+    hydrate?: boolean,
+    queries?: Q,
+    wrapper?: React.ComponentType,
+  |};
 
   declare module.exports: {
-    render: (
-      ui: React$Element<*>,
-      options?: {
-        container: HTMLElement,
-        baseElement?: HTMLElement,
-        ...
-      }
-    ) => RenderResult,
+    render(
+      ui: React.ReactElement<any>,
+      options?: $Diff<RenderOptions<>, {| queries: any |}>,
+    ): RenderResult<>,
+
+    render<Q: Queries>(
+      ui: React.ReactElement<any>,
+      options?: RenderOptions<Q>,
+    ): RenderResult<Q>,
+
     cleanup: () => void,
     wait: (
       callback?: () => void,
