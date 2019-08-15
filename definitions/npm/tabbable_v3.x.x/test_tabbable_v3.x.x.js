@@ -3,7 +3,7 @@
 import tabbable from 'tabbable';
 
 const div = document.createElement('div');
-const tabbables: Array<Node> = tabbable(div, {
+const tabbables: Array<HTMLElement> = tabbable(div, {
   includeContainer: true,
 });
 
@@ -12,25 +12,37 @@ tabbable(div);
 tabbables.map(node => node.nodeName);
 
 const isTabbable: boolean = tabbable.isTabbable(document.createElement('a'));
-const isFocusable: boolean = tabbable.isFocusable(document.createElement('button'));
+const isFocusable: boolean = tabbable.isFocusable(
+  document.createElement('button')
+);
 
 const untouchabilityChecker = new (class {
-  hasDisplayNone() { return true; }
-  isUntouchable() { return false; }
-});
+  hasDisplayNone() {
+    return true;
+  }
+  isUntouchable() {
+    return false;
+  }
+})();
 
 const isTabbableWithUntouchabilityChecker: boolean = tabbable.isTabbable(
   document.createElement('a'),
-  untouchabilityChecker,
+  untouchabilityChecker
 );
 
 const isFocusableWithUntouchabilityChecker: boolean = tabbable.isFocusable(
   document.createElement('button'),
-  untouchabilityChecker,
+  untouchabilityChecker
 );
 
-// $ExpectError
-const isFocusable2: boolean = tabbable.isFocusable(document.createElement('button'), 3);
+const isFocusable2: boolean = tabbable.isFocusable(
+  document.createElement('button'),
+  // $ExpectError
+  3
+);
 
-// $ExpectError
-const isTabbable2: boolean = tabbable.isFocusable(document.createElement('button'), 3);
+const isTabbable2: boolean = tabbable.isFocusable(
+  document.createElement('button'),
+  // $ExpectError
+  3
+);
