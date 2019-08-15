@@ -11,6 +11,6 @@ declare module 'tabbable' {
   declare module.exports: {
     (el: HTMLElement, options?: ?TabbableOptions): Array<HTMLElement>,
     isTabbable(node: HTMLElement, untouchabilityChecker?: ?UntouchabilityChecker): boolean,
-    isFocusable(node: HTMLElement, untouchabilityChecker?: ?UntouchabilityChecker): boolean,
+    isFocusable(node: HTMLElement | Document, untouchabilityChecker?: ?UntouchabilityChecker): boolean,
   };
 }
