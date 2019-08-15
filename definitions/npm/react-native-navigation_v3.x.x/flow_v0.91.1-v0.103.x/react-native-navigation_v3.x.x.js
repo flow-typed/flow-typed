@@ -49,6 +49,7 @@ declare module 'react-native-navigation' {
     drawBehind?: boolean,
   |};
   declare export type OptionsLayout = {|
+    fitSystemWindows?: boolean,
     backgroundColor?: Color,
     componentBackgroundColor?: Color,
     orientation?: LayoutOrientation[],
