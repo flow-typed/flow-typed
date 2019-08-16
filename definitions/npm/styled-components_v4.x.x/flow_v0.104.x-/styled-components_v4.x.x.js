@@ -439,7 +439,7 @@ declare module 'styled-components/native' {
     <V>(V) =>
       // TODO: Figure out how to add support for `attrs` API here
       // TODO: Would be nice if we could find a way to use `StyledFactory` here, but I am too dumb to figure it out.
-      <StyleProps, Theme>(string[], ...Interpolation<PropsWithTheme<StyleProps, Theme>>[]) => StyledComponent<StyleProps, Theme, V>
+      $Shape<{ attrs: Object }> & <StyleProps, Theme>(string[], ...Interpolation<PropsWithTheme<StyleProps, Theme>>[]) => StyledComponent<StyleProps, Theme, V>
    >
 
   declare interface Styled {
