@@ -1523,9 +1523,13 @@ declare class rxjs$ReplaySubject<T> extends rxjs$Subject<T> {
   ): void;
 }
 
-declare class rxjs$Subscription {
+declare class rxjs$Subscription {       
+  static EMPTY: rxjs$Subscription;
+  closed: Object;
+  constructor(unsubscribe?: () => void): void;
   unsubscribe(): void;
   add(teardown: rxjs$TeardownLogic): rxjs$Subscription;
+  remove(subscription: rxjs$Subscription): void;
 }
 
 declare class rxjs$Subscriber<T> extends rxjs$Subscription {
