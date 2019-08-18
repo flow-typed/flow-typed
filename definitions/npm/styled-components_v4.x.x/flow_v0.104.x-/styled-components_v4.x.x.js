@@ -147,12 +147,12 @@ declare module 'styled-components' {
 
   declare export type Interpolation<P> =
     | ((executionContext: P) =>
-      | ((executionContext: P) => InterpolationBase<any>) // eslint-disable-line flowtype/no-weak-types
-      | InterpolationBase<any>
+      | ((executionContext: P) => InterpolationBase)
+      | InterpolationBase
     )
     | Interpolation<P>
 
-  declare export type InterpolationBase<P> =
+  declare export type InterpolationBase =
     | InterpolatableComponent<any> // eslint-disable-line flowtype/no-weak-types
     | CSSRules
     | KeyFrames
