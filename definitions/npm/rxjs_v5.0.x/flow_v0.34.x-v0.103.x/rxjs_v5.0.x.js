@@ -1525,7 +1525,7 @@ declare class rxjs$ReplaySubject<T> extends rxjs$Subject<T> {
 
 declare class rxjs$Subscription {       
   static EMPTY: rxjs$Subscription;
-  closed: Object;
+  closed: boolean;
   constructor(unsubscribe?: () => void): void;
   unsubscribe(): void;
   add(teardown: rxjs$TeardownLogic): rxjs$Subscription;
