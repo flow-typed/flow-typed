@@ -55,7 +55,7 @@ declare module 'react-native-onesignal' {
     kOSSettingsKeyAutoPrompt?: boolean,
     kOSSettingsKeyInAppLaunchURL?: boolean,
     kOSSSettingsKeyPromptBeforeOpeningPushURL?: boolean,
-    kOSSettingsKeyInFocusDisplayOption?: 0 | 1 | 2,
+    kOSSettingsKeyInFocusDisplayOption?: FocusBehaviors,
   |};
 
   declare export type OnIdsEvent = $ReadOnly<{|
@@ -70,6 +70,32 @@ declare module 'react-native-onesignal' {
     closesMessage: boolean,
   |}>;
 
+  declare export type PushData = {
+    notificationID: string,
+    contentAvailable: boolean,
+    badge?: number,
+    sound: string,
+    title: string,
+    body: string,
+    launchURL?: string,
+    additionalData?: {},
+    p2p_notification?: Array<any>,
+  };
+
+  declare export type OpenedEvent = $ReadOnly<{|
+    notification: {
+      payload: PushData,
+      isAppInFocus: boolean,
+    },
+  |}>;
+
+  declare export type ReceivedEvent = $ReadOnly<{|
+    shown: boolean,
+    payload: PushData,
+    displayType: FocusBehaviors,
+    silentNotification: boolean,
+  |}>;
+
   declare export type TriggerValue = string | number;
 
   declare export default class OneSignal {
@@ -79,7 +105,15 @@ declare module 'react-native-onesignal' {
       handler: (InAppMessageClickEvent) => mixed
     ): void;
     static addEventListener(
-      type: 'emailSubscription' | 'opened' | 'received',
+      type: 'opened',
+      handler: (OpenedEvent) => mixed
+    ): void;
+    static addEventListener(
+      type: 'received',
+      handler: (ReceivedEvent) => mixed
+    ): void;
+    static addEventListener(
+      type: 'emailSubscription',
       handler: (...args: any) => mixed
     ): void;
 
