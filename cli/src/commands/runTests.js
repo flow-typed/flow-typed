@@ -291,10 +291,15 @@ async function getCachedFlowBinVersions(
 }
 
 async function writeFlowConfig(repoDirPath, testDirPath, libDefPath, version) {
+  const basePath = path.dirname(libDefPath);
   const destFlowConfigPath = path.join(testDirPath, '.flowconfig');
+  const pkg = path.join(basePath, 'package.json');
+  const deps = Object.keys(require(pkg).dependencies)
+    .map(key => path.join(basePath, 'node_modules', key, 'index.js'));
 
   const flowConfigData = [
     '[libs]',
+    ...deps,
     path.basename(libDefPath),
     path.join(repoDirPath, '..', '__util__', 'tdd_framework.js'),
     '',

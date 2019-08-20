@@ -285,7 +285,9 @@ async function parseLibDefsFromPkgDir({
             testFilePaths.push(flowDirItemPath);
           }
         } else {
-          const isValidTestDir = path.basename(flowDirItemPath) === 'tests';
+          const isValidTestDir =
+            path.basename(flowDirItemPath) === 'tests' ||
+            path.basename(flowDirItemPath) === 'node_modules';
           if (isValidTestDir) return;
           const error = 'Unexpected directory item: ' + flowDirItemPath;
           throw new ValidationError(error);
