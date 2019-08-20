@@ -1,4 +1,5 @@
 // @flow
+
 import { describe, it } from 'flow-typed-test'
 
 import * as React from 'react'
@@ -165,18 +166,26 @@ describe('styled builtins', () => {
 
   it('should support .attrs', () => {
     const AttrsInput = styled.input.attrs<_, {| size: string |}>(
-      (props: any) => ({
+      {
         // we can define static props
         type: 'password',
         // or we can define dynamic ones
-        margin: props => props.size,
-        padding: props => props.size,
-      })
+        margin: props => {
+          (props.size: string);
+          return props.size
+        },
+        padding: props => {
+          (props.size: string);
+          return props.size
+        },
+      }
     )`
       color: palevioletred;
       font-size: 1em;
       border: 2px solid palevioletred;
       border-radius: 3px;
+      margin: ${props => props.margin};
+      padding: ${props => props.margin};
     `
 
     const dd = styled(AttrsInput)

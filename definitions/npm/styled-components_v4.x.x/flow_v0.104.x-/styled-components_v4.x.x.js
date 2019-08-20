@@ -150,7 +150,7 @@ declare module 'styled-components' {
       | ((executionContext: P) => InterpolationBase)
       | InterpolationBase
     )
-    | Interpolation<P>
+    | InterpolationBase
 
   declare export type InterpolationBase =
     | InterpolatableComponent<any> // eslint-disable-line flowtype/no-weak-types
