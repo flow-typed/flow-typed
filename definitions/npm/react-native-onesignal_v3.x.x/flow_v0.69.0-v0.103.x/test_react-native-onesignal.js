@@ -258,7 +258,6 @@ describe("Android only", () => {
 });
 
 it("must have static method", () => {
-  OneSignal.configure();
   OneSignal.promptLocation();
 });
 
