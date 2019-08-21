@@ -2,6 +2,7 @@
 
 import React from 'react';
 import {
+  act,
   render,
   wait,
   fireEvent,
@@ -12,6 +13,41 @@ import {
 } from '@testing-library/react';
 import { describe, it } from 'flow-typed-test';
 import { domainToASCII } from 'url';
+
+describe('act', () => {
+  it('should fail on invalid inputs', () => {
+    // $ExpectError
+    act(1);
+    // $ExpectError
+    act(() => {}, 1);
+    // $ExpectError
+    act(() => 1);
+  });
+
+  it('should pass on correct inputs', () => {
+    act(() => {});
+    act(() => Promise.resolve());
+    act(() => ({
+      then: resolve => {},
+    }));
+  });
+
+  it('should fail on incorrect usage of result', () => {
+    // $ExpectError
+    act(() => {}) + 1;
+    // $ExpectError
+    act(() => {}).doesNotExist();
+    // $ExpectError
+    act(() => {}).then(1);
+    // $ExpectError
+    act(() => {}).then(() => {}, 1);
+  });
+
+  it('should pass on correct usage of result', () => {
+    act(() => {}).then(() => {});
+    act(() => {}).then(() => {}, () => {});
+  });
+});
 
 describe('wait', () => {
   it('should fail on invalid inputs', () => {
@@ -67,7 +103,7 @@ describe('waitForElement', () => {
 });
 
 describe('render', () => {
-  class Component extends React.Component<{...}> {}
+  class Component extends React.Component<{ ... }> {}
   const {
     container,
     unmount,
@@ -383,7 +419,7 @@ describe('cleanup', () => {
 });
 
 describe('within', () => {
-  class Component extends React.Component<{...}> {}
+  class Component extends React.Component<{ ... }> {}
   const { container } = render(<Component />);
 
   it('should has html element as argument', () => {
@@ -647,7 +683,7 @@ describe('fireEvent', () => {
 });
 
 describe('text matching API', () => {
-  class Component extends React.Component<{...}> {}
+  class Component extends React.Component<{ ... }> {}
   const {
     getByAltText,
     getAllByAltText,
