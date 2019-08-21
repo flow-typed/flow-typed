@@ -1,3 +1,4 @@
+// @flow
 declare module '@apollo/react-hooks' {
   import type { ComponentType, Element, Node } from 'react';
 
@@ -6,24 +7,23 @@ declare module '@apollo/react-hooks' {
   declare type GraphQLError = any;
   /* end graphql types */
 
-  
   /* start @apollo/react-common types */
   declare export type ApolloProviderProps<TCache> = {
     client: ApolloClient<TCache>,
     children: Node | Node[] | null,
-  }
+  };
 
   declare export class ApolloProvider<TCache> extends React$Component<
     ApolloProviderProps<TCache>
   > {
     childContextTypes: {
       client: ApolloClient<TCache>,
-      operations: Map<string, { query: DocumentNode, variables: any }>
+      operations: Map<string, { query: DocumentNode, variables: any }>,
     };
 
     getChildContext(): {
       client: ApolloClient<TCache>,
-      operations: Map<string, { query: DocumentNode, variables: any }>
+      operations: Map<string, { query: DocumentNode, variables: any }>,
     };
   }
 
@@ -31,10 +31,8 @@ declare module '@apollo/react-hooks' {
     children: (client: ApolloClient<any>) => Node;
   }
 
-  declare export class ApolloConsumer extends React$Component<
-    ApolloConsumerProps
-  > {}
-  
+  declare export class ApolloConsumer extends React$Component<ApolloConsumerProps> {}
+
   declare export function getApolloContext<T>(): T;
   declare export function resetApolloContext(): void;
   /* end @apollo/react-common types */
@@ -61,29 +59,29 @@ declare module '@apollo/react-hooks' {
     query: DocumentNode,
     options?: MutationHookOptions<TData, TVariables>
   ): MutationTuple<TData, TVariables>;
-  
+
   declare export function useApolloClient<T>(): ApolloClient<T>;
-  
+
   declare export class RenderPromises {
     registerSSRObservable<TData, TVariables>(
       observable: ObservableQuery<any, TVariables>,
       props: QueryOptions<TData, TVariables>
-    ): void,
+    ): void;
     addQueryPromise<TData, TVariables>(
       queryInstance: QueryData<TData, TVariables>,
-      finish: () => Node 
-    ): Node,
-    hasPromises(): boolean,
-    consumeAndAwaitPromises(): Promise<void>,
+      finish: () => Node
+    ): Node;
+    hasPromises(): boolean;
+    consumeAndAwaitPromises(): Promise<void>;
   }
-  
+
   declare export class QueryData<TData, TVariables> {
-    execute(): QueryResult<TData, TVariables>,
-    executeLazy(): QueryTuple<TData, TVariables>,
-    fetchData(): Promise<ApolloQueryResult<any>> | boolean,
-    afterExecute({lazy?: boolean}): any,
-    cleanup(): void,
-    getOptions(): any,
+    execute(): QueryResult<TData, TVariables>;
+    executeLazy(): QueryTuple<TData, TVariables>;
+    fetchData(): Promise<ApolloQueryResult<any>> | boolean;
+    afterExecute({ lazy?: boolean }): any;
+    cleanup(): void;
+    getOptions(): any;
   }
 
   /* Common types */
@@ -757,11 +755,17 @@ declare module '@apollo/react-hooks' {
     query<T>(options: WatchQueryOptions): Promise<ApolloQueryResult<T>>;
     mutate<T>(options: MutationOptions<T>): Promise<FetchResult<T>>;
     subscribe<T, D>(options: SubscriptionOptions<T, D>): Observable<any>;
-    readQuery<T>(options: DataProxyReadQueryOptions): T | null;
-    readFragment<T>(options: DataProxyReadFragmentOptions): T | null;
-    writeQuery(options: DataProxyWriteQueryOptions): void;
-    writeFragment(options: DataProxyWriteFragmentOptions): void;
-    writeData(options: DataProxyWriteDataOptions): void;
+    readQuery<T, D>(options: DataProxyReadQueryOptions<D>): T | null;
+    readFragment<TData, TVariables>(
+      options: DataProxyReadFragmentOptions<TVariables>
+    ): TData | null;
+    writeQuery<TData, TVariables>(
+      options: DataProxyWriteQueryOptions<TData, TVariables>
+    ): void;
+    writeFragment<TData, TVariables>(
+      options: DataProxyWriteFragmentOptions<TData, TVariables>
+    ): void;
+    writeData<TData>(options: DataProxyWriteDataOptions<TData>): void;
     __actionHookForDevTools(cb: () => any): void;
     __requestRaw(payload: GraphQLRequest): Observable<ExecutionResult<>>;
     initQueryManager(): void;
@@ -924,17 +928,21 @@ declare module '@apollo/react-hooks' {
     transformDocument(document: DocumentNode): DocumentNode;
     transformForLink(document: DocumentNode): DocumentNode;
 
-    readQuery<QueryType>(
-      options: DataProxyReadQueryOptions,
+    readQuery<QueryType, TVariables>(
+      options: DataProxyReadQueryOptions<TVariables>,
       optimistic?: boolean
     ): QueryType | null;
-    readFragment<FragmentType>(
-      options: DataProxyReadFragmentOptions,
+    readFragment<FragmentType, TVariables>(
+      options: DataProxyReadFragmentOptions<TVariables>,
       optimistic?: boolean
     ): FragmentType | null;
-    writeQuery(options: CacheWriteQueryOptions): void;
-    writeFragment(options: CacheWriteFragmentOptions): void;
-    writeData(options: CacheWriteDataOptions): void;
+    writeQuery<TData, TVariables>(
+      options: CacheWriteQueryOptions<TData, TVariables>
+    ): void;
+    writeFragment<TData, TVariables>(
+      options: CacheWriteFragmentOptions<TData, TVariables>
+    ): void;
+    writeData<TData>(options: CacheWriteDataOptions<TData>): void;
   }
 
   declare type Transaction<T> = (c: ApolloCache<T>) => void;
@@ -969,39 +977,47 @@ declare module '@apollo/react-hooks' {
   }
 
   declare type CacheDiffResult<T> = DataProxyDiffResult<T>;
-  declare type CacheWriteQueryOptions = DataProxyWriteQueryOptions;
-  declare type CacheWriteFragmentOptions = DataProxyWriteFragmentOptions;
-  declare type CacheWriteDataOptions = DataProxyWriteDataOptions;
-  declare type CacheReadFragmentOptions = DataProxyReadFragmentOptions;
+  declare type CacheWriteQueryOptions<
+    TData,
+    TVariables
+  > = DataProxyWriteQueryOptions<TData, TVariables>;
+  declare type CacheWriteFragmentOptions<
+    TData,
+    TVariables
+  > = DataProxyWriteFragmentOptions<TData, TVariables>;
+  declare type CacheWriteDataOptions<TData> = DataProxyWriteDataOptions<TData>;
+  declare type CacheReadFragmentOptions<
+    TVariables
+  > = DataProxyReadFragmentOptions<TVariables>;
 
   declare interface DataProxyReadQueryOptions {
     query: DocumentNode;
     variables?: any;
   }
 
-  declare interface DataProxyReadFragmentOptions {
+  declare interface DataProxyReadFragmentOptions<TVariables> {
     id: string;
     fragment: DocumentNode;
     fragmentName?: string;
-    variables?: any;
+    variables?: TVariables;
   }
 
-  declare interface DataProxyWriteQueryOptions {
-    data: any;
+  declare interface DataProxyWriteQueryOptions<TData, TVariables> {
+    data: TData;
     query: DocumentNode;
-    variables?: any;
+    variables?: TVariables;
   }
 
-  declare interface DataProxyWriteFragmentOptions {
-    data: any;
+  declare interface DataProxyWriteFragmentOptions<TData, TVariables> {
+    data: TData;
     id: string;
     fragment: DocumentNode;
     fragmentName?: string;
-    variables?: any;
+    variables?: TVariables;
   }
 
-  declare interface DataProxyWriteDataOptions {
-    data: any;
+  declare interface DataProxyWriteDataOptions<TData> {
+    data: TData;
     id?: string;
   }
 
@@ -1011,17 +1027,21 @@ declare module '@apollo/react-hooks' {
   };
 
   declare interface DataProxy {
-    readQuery<QueryType>(
-      options: DataProxyReadQueryOptions,
+    readQuery<QueryType, TVariables>(
+      options: DataProxyReadQueryOptions<TVariables>,
       optimistic?: boolean
     ): QueryType | null;
-    readFragment<FragmentType>(
-      options: DataProxyReadFragmentOptions,
+    readFragment<FragmentType, TVariables>(
+      options: DataProxyReadFragmentOptions<TVariables>,
       optimistic?: boolean
     ): FragmentType | null;
-    writeQuery(options: DataProxyWriteQueryOptions): void;
-    writeFragment(options: DataProxyWriteFragmentOptions): void;
-    writeData(options: DataProxyWriteDataOptions): void;
+    writeQuery<TData, TVariables>(
+      options: DataProxyWriteQueryOptions<TData, TVariables>
+    ): void;
+    writeFragment<TData, TVariables>(
+      options: DataProxyWriteFragmentOptions<TData, TVariables>
+    ): void;
+    writeData<TData>(options: DataProxyWriteDataOptions<TData>): void;
   }
   /* End apollo-cache types */
   /* end apollo-client types */
