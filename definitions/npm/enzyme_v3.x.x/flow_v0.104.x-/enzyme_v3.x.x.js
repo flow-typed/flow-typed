@@ -118,8 +118,8 @@ declare module "enzyme" {
       ...
     }
   ): ReactWrapper<T>;
-  declare function render<T>(
-    node: React$Element<T>,
+  declare function render(
+    node: React$Node,
     options?: { context?: Object, ... }
   ): CheerioWrapper;
 

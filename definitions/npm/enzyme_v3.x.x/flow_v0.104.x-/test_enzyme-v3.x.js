@@ -23,6 +23,11 @@ const B: boolean = render(<div />, { context: { foo: true } })
   .filter("bla")
   .equals(<div />);
 
+function opaqueNode(): React$Node {
+  return <span>who knows what I am</span>;
+}
+render(opaqueNode());
+
 // Test against chaining returning `any`
 // $ExpectError
 (shallow(<div />).children(): boolean);
