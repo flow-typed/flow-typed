@@ -97,6 +97,7 @@ declare module 'tape-cup' {
   declare type StreamOpts = {
     objectMode?: boolean,
   };
+  declare type TestCb = tape$TestCb;
 
   declare type Tape = {
     (
