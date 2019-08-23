@@ -8,7 +8,7 @@ declare module 'formik/@flow-typed' {
 
   declare export type FieldValidator = (
     value: any
-  ) => string | Promise<string | void>;
+  ) => ?string | Promise<?string>;
   declare export type FormikErrors<Values> = $ObjMap<Values, () => ?string>;
   declare export type FormikTouched<Values> = $ObjMap<Values, () => ?boolean>;
 
