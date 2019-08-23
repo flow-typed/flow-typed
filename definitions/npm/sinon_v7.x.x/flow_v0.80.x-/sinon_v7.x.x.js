@@ -74,7 +74,7 @@ declare module 'sinon' {
   declare interface SinonSpyStatic {
     (): SinonSpy;
     (func: any): SinonSpy;
-    (obj: Object, method: string): SinonSpy;
+    (obj: any, method: string): SinonSpy;
   }
 
   declare interface SinonStub extends SinonSpy {
