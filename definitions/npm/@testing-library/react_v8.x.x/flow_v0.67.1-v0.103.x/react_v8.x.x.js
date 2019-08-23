@@ -3,7 +3,6 @@ declare module '@testing-library/react' {
   // https://github.com/facebook/flow/blob/v0.103.0/lib/react-dom.js#L64
   declare type ReactDOMTestUtilsThenable = {
     then(resolve: () => mixed, reject?: () => mixed): mixed,
-    ...
   };
   // This type comes from
   // https://github.com/facebook/flow/blob/v0.103.0/lib/react-dom.js#L116
