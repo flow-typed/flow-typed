@@ -78,6 +78,7 @@ declare module 'sinon' {
   }
 
   declare interface SinonStub extends SinonSpy {
+    (...args?: Array<any>): any;
     resetBehavior(): void;
     resetHistory(): void;
     usingPromise(promiseLibrary: any): SinonStub;
@@ -199,9 +200,9 @@ declare module 'sinon' {
   }
 
   declare interface SinonFakeTimersConfig {
-    now: number | Date
-    toFake: string[]
-    shouldAdvanceTime: boolean
+    now: number | Date;
+    toFake: string[];
+    shouldAdvanceTime: boolean;
 
   }
 

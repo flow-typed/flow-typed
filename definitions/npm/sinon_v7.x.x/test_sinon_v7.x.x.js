@@ -5,7 +5,7 @@ function once(fn: Function) {
   let called = false;
   let returnValue: any;
 
-  return function() {
+  return function (...args: Array<any>) {
     if (!called) {
       called = true;
       returnValue = fn.apply(this, arguments);
