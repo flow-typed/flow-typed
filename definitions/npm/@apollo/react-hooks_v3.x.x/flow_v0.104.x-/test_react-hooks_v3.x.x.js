@@ -27,20 +27,24 @@ type Hero = {
   id: string,
   appearsIn: string[],
   friends: Hero[],
+  ...
 };
 
 type IQuery = {
   foo: string,
   bar: string,
+  ...
 };
 
 describe('useQuery hook', () => {
   type Data = {
     a: string,
     b: string,
+    ...
   };
   type Variables = {
     c: string,
+    ...
   };
   const result = useQuery<Data, Variables>('test');
 
@@ -73,9 +77,11 @@ describe('useMutation hook', () => {
   type Data = {
     a: string,
     b: string,
+    ...
   };
   type Variables = {
     c: string,
+    ...
   };
   const mutation = useMutation<Data, Variables>('test');
 
