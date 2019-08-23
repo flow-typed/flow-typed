@@ -74,10 +74,11 @@ declare module 'sinon' {
   declare interface SinonSpyStatic {
     (): SinonSpy;
     (func: any): SinonSpy;
-    (obj: any, method: string): SinonSpy;
+    (obj: Object, method: string): SinonSpy;
   }
 
   declare interface SinonStub extends SinonSpy {
+    (...args?: Array<any>): any;
     resetBehavior(): void;
     resetHistory(): void;
     usingPromise(promiseLibrary: any): SinonStub;
