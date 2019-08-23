@@ -86,7 +86,7 @@ declare module '@apollo/react-hooks' {
 
   /* Common types */
   declare export type CommonOptions<TOptions> = TOptions & {
-    client?: ApolloClient<Object>,
+    client?: ApolloClient<any>,
   };
 
   /* Query types */
@@ -107,13 +107,13 @@ declare module '@apollo/react-hooks' {
 
   declare export type LazyQueryHookOptions<TData, TVariables> = $Diff<
     QueryFunctionOptions<TData, TVariables>,
-    { skip: * }
+    { skip: any }
   > & {
     query?: DocumentNode,
   };
 
   declare export type QueryPreviousData<TData, TVariables> = {
-    client?: ApolloClient<Object>,
+    client?: ApolloClient<any>,
     query?: DocumentNode,
     observableQueryOptions?: {},
     result?: ApolloQueryResult<TData> | null,
@@ -173,7 +173,7 @@ declare module '@apollo/react-hooks' {
     subscription: DocumentNode,
     children?:
       | null
-      | ((result: SubscriptionResult<TData>) => Element<*> | null),
+      | ((result: SubscriptionResult<TData>) => Element<any> | null),
   };
 
   declare export type SubscriptionCurrentObservable = {
@@ -271,7 +271,7 @@ declare module '@apollo/react-hooks' {
     awaitRefetchQueries?: boolean,
     errorPolicy?: ErrorPolicy,
     update?: MutationUpdaterFn<TData>,
-    client?: ApolloClient<Object>,
+    client?: ApolloClient<any>,
     notifyOnNetworkStatusChange?: boolean,
     context?: Context,
     onCompleted?: (data: TData) => void,
@@ -295,7 +295,7 @@ declare module '@apollo/react-hooks' {
     error?: ApolloError,
     loading: boolean,
     called: boolean,
-    client?: ApolloClient<Object>,
+    client?: ApolloClient<any>,
   };
 
   declare export type MutationFetchResult<
@@ -313,7 +313,7 @@ declare module '@apollo/react-hooks' {
 
   /* Subscription types */
   declare export type OnSubscriptionDataOptions<TData> = {
-    client: ApolloClient<Object>,
+    client: ApolloClient<any>,
     subscriptionData: SubscriptionResult<TData>,
   };
 
@@ -323,7 +323,7 @@ declare module '@apollo/react-hooks' {
     shouldResubscribe?:
       | boolean
       | ((options: BaseSubscriptionOptions<TData, TVariables>) => boolean),
-    client?: ApolloClient<Object>,
+    client?: ApolloClient<any>,
     onSubscriptionData?: (options: OnSubscriptionDataOptions<TData>) => any,
     onSubscriptionComplete?: () => void,
   };
@@ -448,7 +448,7 @@ declare module '@apollo/react-hooks' {
       queryId: string,
       document: DocumentNode,
       storePreviousVariables: boolean,
-      variables: Object,
+      variables: any,
       isPoll: boolean,
       isRefetch: boolean,
       metadata: any,
@@ -522,8 +522,8 @@ declare module '@apollo/react-hooks' {
       document: DocumentNode,
       variables: any,
       updateQueries: { [queryId: string]: QueryWithUpdater },
-      update: ((proxy: DataProxy, mutationResult: Object) => void) | void,
-      optimisticResponse: Object | Function | void,
+      update: ((proxy: DataProxy, mutationResult: any) => void) | void,
+      optimisticResponse: any,
     }): void;
     markMutationResult(mutation: {
       mutationId: string,
@@ -531,7 +531,7 @@ declare module '@apollo/react-hooks' {
       document: DocumentNode,
       variables: any,
       updateQueries: { [queryId: string]: QueryWithUpdater },
-      update: ((proxy: DataProxy, mutationResult: Object) => void) | void,
+      update: ((proxy: DataProxy, mutationResult: any) => void) | void,
     }): void;
     markMutationComplete({
       mutationId: string,
@@ -546,13 +546,13 @@ declare module '@apollo/react-hooks' {
   }
 
   declare type QueryWithUpdater = {
-    updater: MutationQueryReducer<Object>,
+    updater: MutationQueryReducer<any>,
     query: QueryStoreValue,
   };
 
   declare interface MutationStoreValue {
     mutationString: string;
-    variables: Object;
+    variables: any;
     loading: boolean;
     error: Error | null;
   }
@@ -563,7 +563,7 @@ declare module '@apollo/react-hooks' {
     initMutation(
       mutationId: string,
       mutationString: string,
-      variables: Object | void
+      variables: any
     ): void;
   }
 
@@ -578,7 +578,7 @@ declare module '@apollo/react-hooks' {
   }
 
   declare interface UpdateQueryOptions {
-    variables?: Object;
+    variables?: any;
   }
 
   declare type ApolloCurrentResult<T> = {
@@ -609,9 +609,9 @@ declare module '@apollo/react-hooks' {
   declare type RefetchQueryDescription = Array<string | PureQueryOptions>;
 
   declare interface MutationBaseOptions<T = { [key: string]: any }> {
-    optimisticResponse?: Object | Function;
+    optimisticResponse?: any;
     updateQueries?: MutationQueryReducersMap<T>;
-    optimisticResponse?: Object;
+    optimisticResponse?: any;
     refetchQueries?:
       | ((result: ExecutionResult<>) => RefetchQueryDescription)
       | RefetchQueryDescription;
@@ -620,7 +620,7 @@ declare module '@apollo/react-hooks' {
     variables?: any;
   }
 
-  declare type MutationOperation<T = Object> = (
+  declare type MutationOperation<T> = (
     options: MutationBaseOptions<T>
   ) => Promise<FetchResult<T>>;
 
@@ -669,8 +669,8 @@ declare module '@apollo/react-hooks' {
 
   declare type QueryStoreValue = {
     document: DocumentNode,
-    variables: Object,
-    previousVariables: Object | null,
+    variables: any,
+    previousVariables: any,
     networkStatus: NetworkStatus,
     networkError: Error | null,
     graphQLErrors: GraphQLError[],
@@ -745,7 +745,7 @@ declare module '@apollo/react-hooks' {
     version: string;
     queryDeduplication: boolean;
     defaultOptions: DefaultOptions;
-    devToolsHookCb: Function;
+    devToolsHookCb: any;
     proxy: ApolloCache<TCacheShape> | void;
     ssrMode: boolean;
     resetStoreCallbacks: Array<() => Promise<any>>;
