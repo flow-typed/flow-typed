@@ -331,6 +331,35 @@ declare module 'react-native-gesture-handler/GestureHandler' {
     onEnded?: ($Event<ExtraProps>) => mixed,
   |};
 
+  declare type HitSlop =
+    | number
+    | {|
+        left?: number,
+        top?: number,
+        right?: number,
+        bottom?: number,
+        vertical?: number,
+        horizontal?: number,
+        width?: number,
+        height?: number,
+      |}
+    | {|
+        width: number,
+        left: number,
+      |}
+    | {|
+        width: number,
+        right: number,
+      |}
+    | {|
+        height: number,
+        top: number,
+      |}
+    | {|
+        height: number,
+        bottom: number,
+      |};
+
   declare type $GestureHandlerProps<
     AdditionalProps: {},
     ExtraEventsProps: {}
@@ -343,18 +372,7 @@ declare module 'react-native-gesture-handler/GestureHandler' {
     simultaneousHandlers?: React$Ref<any> | Array<React$Ref<any>>,
     shouldCancelWhenOutside?: boolean,
     minPointers?: number,
-    hitSlop?:
-      | number
-      | {|
-          left?: number,
-          top?: number,
-          right?: number,
-          bottom?: number,
-          vertical?: number,
-          horizontal?: number,
-          width?: number,
-          height?: number,
-        |},
+    hitSlop?: HitSlop,
   |}>;
 
   /////////////////////////////////////////////////////////////////////////////
