@@ -199,9 +199,9 @@ declare module 'sinon' {
   }
 
   declare interface SinonFakeTimersConfig {
-    now: number | Date
-    toFake: string[]
-    shouldAdvanceTime: boolean
+    now: number | Date;
+    toFake: string[];
+    shouldAdvanceTime: boolean;
 
   }
 
