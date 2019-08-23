@@ -175,7 +175,7 @@ declare module 'react-native-gesture-handler/Swipeable' {
   |};
 
   declare export type SwipeableProps = $ReadOnly<{
-    animationOptions?: {...},
+    animationOptions?: { ... },
     childrenContainerStyle?: ViewStyle,
     containerStyle?: ViewStyle,
     friction?: number,
@@ -217,16 +217,22 @@ declare module 'react-native-gesture-handler/Swipeable' {
 declare module 'react-native-gesture-handler/gestureHandlerRootHOC' {
   import type { ViewStyle } from 'react-native-gesture-handler/@react-native';
 
-  declare export default { <Config: {...}>(
-    Component: React$ComponentType<Config>,
-    containerStyles: ?ViewStyle
-  ): React$ComponentType<Config>, ... };
+  declare export default {
+    <Config: { ... }>(
+      Component: React$ComponentType<Config>,
+      containerStyles: ?ViewStyle
+    ): React$ComponentType<Config>,
+    ...,
+  };
 }
 
 declare module 'react-native-gesture-handler/touchables/TouchableNativeFeedback' {
   import type { TouchableProps } from 'react-native-gesture-handler/@react-native';
 
-  declare type TouchableNativeFeedbackProps = $ReadOnly<{ ...TouchableProps, ... }>;
+  declare type TouchableNativeFeedbackProps = $ReadOnly<{
+    ...TouchableProps,
+    ...
+  }>;
 
   declare export default class TouchableNativeFeedback extends React$Component<TouchableNativeFeedbackProps> {
     static SelectableBackground(): {| type: 'SelectableBackground' |};
@@ -247,7 +253,10 @@ declare module 'react-native-gesture-handler/touchables/TouchableNativeFeedback'
 declare module 'react-native-gesture-handler/touchables/TouchableWithoutFeedback' {
   import type { TouchableProps } from 'react-native-gesture-handler/@react-native';
 
-  declare type TouchableWithoutFeedbackProps = $ReadOnly<{ ...TouchableProps, ... }>;
+  declare type TouchableWithoutFeedbackProps = $ReadOnly<{
+    ...TouchableProps,
+    ...
+  }>;
 
   declare export default class TouchableWithoutFeedback extends React$Component<TouchableWithoutFeedbackProps> {}
 }
@@ -306,9 +315,12 @@ declare module 'react-native-gesture-handler/GestureHandler' {
   /////////////////////////////////////////////////////////////////////////////
   // Utils for *GestureHandler
 
-  declare type $SyntheticEvent<T: {...}> = { +nativeEvent: $ReadOnly<$Exact<T>>, ... };
+  declare type $SyntheticEvent<T: { ... }> = {
+    +nativeEvent: $ReadOnly<$Exact<T>>,
+    ...
+  };
 
-  declare type $Event<T: {...}> = $SyntheticEvent<{
+  declare type $Event<T: { ... }> = $SyntheticEvent<{
     handlerTag: number,
     numberOfPointers: number,
     state: State,
@@ -317,7 +329,7 @@ declare module 'react-native-gesture-handler/GestureHandler' {
     ...
   }>;
 
-  declare type $EventHandlers<ExtraProps: {...}> = {|
+  declare type $EventHandlers<ExtraProps: { ... }> = {|
     onGestureEvent?: ($Event<ExtraProps>) => mixed,
     onHandlerStateChange?: ($Event<ExtraProps>) => mixed,
     onBegan?: ($Event<ExtraProps>) => mixed,
@@ -327,9 +339,38 @@ declare module 'react-native-gesture-handler/GestureHandler' {
     onEnded?: ($Event<ExtraProps>) => mixed,
   |};
 
+  declare type HitSlop =
+    | number
+    | {|
+        left?: number,
+        top?: number,
+        right?: number,
+        bottom?: number,
+        vertical?: number,
+        horizontal?: number,
+        width?: number,
+        height?: number,
+      |}
+    | {|
+        width: number,
+        left: number,
+      |}
+    | {|
+        width: number,
+        right: number,
+      |}
+    | {|
+        height: number,
+        top: number,
+      |}
+    | {|
+        height: number,
+        bottom: number,
+      |};
+
   declare type $GestureHandlerProps<
-    AdditionalProps: {...},
-    ExtraEventsProps: {...}
+    AdditionalProps: { ... },
+    ExtraEventsProps: { ... }
   > = $ReadOnly<{|
     ...$Exact<AdditionalProps>,
     ...$EventHandlers<ExtraEventsProps>,
@@ -339,18 +380,7 @@ declare module 'react-native-gesture-handler/GestureHandler' {
     simultaneousHandlers?: React$Ref<any> | Array<React$Ref<any>>,
     shouldCancelWhenOutside?: boolean,
     minPointers?: number,
-    hitSlop?:
-      | number
-      | {|
-          left?: number,
-          top?: number,
-          right?: number,
-          bottom?: number,
-          vertical?: number,
-          horizontal?: number,
-          width?: number,
-          height?: number,
-        |},
+    hitSlop?: HitSlop,
   |}>;
 
   /////////////////////////////////////////////////////////////////////////////
@@ -485,7 +515,7 @@ declare module 'react-native-gesture-handler/GestureHandler' {
   // Pinch
 
   declare export type PinchGestureHandlerProps = $GestureHandlerProps<
-    {...},
+    { ... },
     {
       scale: number,
       focalX: number,
@@ -501,7 +531,7 @@ declare module 'react-native-gesture-handler/GestureHandler' {
   // Rotation
 
   declare export type RotationGestureHandlerProps = $GestureHandlerProps<
-    {...},
+    { ... },
     {
       rotation: number,
       anchorX: number,
@@ -580,9 +610,9 @@ declare module 'react-native-gesture-handler/GestureHandler' {
   declare export var DrawerLayoutAndroid: React$ComponentType<any>;
   declare export var PureNativeButton: React$ComponentType<any>;
 
-  declare export function createNativeWrapper<Config: {...}>(
+  declare export function createNativeWrapper<Config: { ... }>(
     Com: React$ComponentType<Config>,
-    config?: {...}
+    config?: { ... }
   ): React$ComponentType<{
     ...NativeViewGestureHandlerProps,
     ...$Exact<Config>,
