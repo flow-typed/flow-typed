@@ -1,4 +1,3 @@
-// @flow
 declare module '@apollo/react-hooks' {
   import type { ComponentType, Element, Node } from 'react';
 
