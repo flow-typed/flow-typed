@@ -49,7 +49,7 @@ version 4.1.0. **[You've followed all of the
 best practices for writing high quality definitions,](https://github.com/flow-typed/flow-typed/issues/13#issuecomment-214892914)**
 and now you'd like to contribute it:
 
-#### 1) Create a new directory called `definitions/left-pad_v4.1.0/`.
+#### 1) Create a new directory called `definitions/npm/left-pad_v4.1.0/`.
 
 ***We call this the "package version directory".***
 
@@ -57,16 +57,16 @@ The naming scheme of this directory must be formatted as
 `${packageName}_v${packageVersion}`. This convention is enforced by the
 library-definition test runner.
 
-#### 2) In this new directory, create another new directory called `flow_v0.25.x-/`.
+#### 2) In this new directory, create another new directory called `flow_v0.80.x-/`.
 
 ***We call this the "flow version directory".***
 
 This specifies that the definition you are contributing is compatible with the
 version range of the directiry. You MUST specify a version range with names like
-`flow_v0.25.x-` ("any version at or after v0.25.x") or
-`flow_-v0.25.x` ("any version at or before v0.25.x") or
-`flow_v0.25.x-v0.28.x` ("any version inclusively between v0.25.x and
-v0.28.x").
+`flow_v0.80.x-` ("any version at or after v0.80.x") or
+`flow_-v0.80.x` ("any version at or before v0.80.x") or
+`flow_v0.80.x-v0.106.x` ("any version inclusively between v0.80.x and
+v0.106.x").
 
 If you aren't sure which versions of Flow your definition is compatible with,
 start with a very low version like `flow_v0.25.x-`, and the test runner
@@ -118,6 +118,7 @@ flow-typed validate-defs definitions && flow-typed run-tests left-pad
 node dist/cli.js validate-defs ../definitions && \
 node dist/cli.js run-tests left-pad
 ```
+- The helper `./quick_run_def_tests.sh` mentioned above
 
 You may also leave off the argument `left-pad` to run *all* tests (this takes a while).
 
