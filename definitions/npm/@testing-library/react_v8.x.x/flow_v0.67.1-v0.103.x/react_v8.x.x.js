@@ -1,4 +1,15 @@
 declare module '@testing-library/react' {
+  // This type comes from
+  // https://github.com/facebook/flow/blob/v0.103.0/lib/react-dom.js#L64
+  declare type ReactDOMTestUtilsThenable = {
+    then(resolve: () => mixed, reject?: () => mixed): mixed,
+  };
+  // This type comes from
+  // https://github.com/facebook/flow/blob/v0.103.0/lib/react-dom.js#L116
+  declare type ReactDOMTestUtilsAct = (
+    callback: () => void | ReactDOMTestUtilsThenable
+  ) => ReactDOMTestUtilsThenable;
+
   declare type TextMatch =
     | string
     | RegExp
@@ -113,6 +124,8 @@ declare module '@testing-library/react' {
       ui: React$Element<*>,
       options?: { container: HTMLElement, baseElement?: HTMLElement }
     ) => RenderResult,
+
+    act: ReactDOMTestUtilsAct,
 
     cleanup: () => void,
 
