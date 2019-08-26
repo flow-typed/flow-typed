@@ -649,7 +649,6 @@ declare module '@apollo/react-hoc' {
   declare type CacheWriteQueryOptions = DataProxyWriteQueryOptions;
   declare type CacheWriteFragmentOptions = DataProxyWriteFragmentOptions;
   declare type CacheWriteDataOptions = DataProxyWriteDataOptions;
-  declare type CacheReadFragmentOptions = DataProxyReadFragmentOptions;
 
   declare interface DataProxyReadQueryOptions {
     query: DocumentNode;
