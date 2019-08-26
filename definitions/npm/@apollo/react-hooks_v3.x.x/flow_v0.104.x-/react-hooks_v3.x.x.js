@@ -26,6 +26,7 @@ declare module '@apollo/react-hooks' {
           ...
         }
       >,
+      ...
     };
     getChildContext(): {
       client: ApolloClient<TCache>,
@@ -37,6 +38,7 @@ declare module '@apollo/react-hooks' {
           ...
         }
       >,
+      ...
     };
   }
 
@@ -185,7 +187,7 @@ declare module '@apollo/react-hooks' {
   declare export type MutationTuple<TData, TVariables> = [
     (
       options?: MutationFunctionOptions<TData, TVariables>
-    ) => Promise<void | ExecutionResult<TData>>,
+    ) => Promise<ExecutionResult<TData>>,
     MutationResult<TData>,
   ];
 
@@ -220,7 +222,7 @@ declare module '@apollo/react-hooks' {
 
   declare export type Context = Record<string, any>;
 
-  declare export type ExecutionResult<T = Record<string, any>> = {
+  declare export type ExecutionResult<T> = {
     data?: T,
     extensions?: Record<string, any>,
     errors?: GraphQLError[],
@@ -353,7 +355,7 @@ declare module '@apollo/react-hooks' {
 
   declare export type MutationFunction<TData, TVariables> = (
     options?: MutationFunctionOptions<TData, TVariables>
-  ) => Promise<void | MutationFetchResult<TData>>;
+  ) => Promise<MutationFetchResult<TData>>;
 
   /* Subscription types */
   declare export type OnSubscriptionDataOptions<TData> = {
@@ -390,7 +392,7 @@ declare module '@apollo/react-hooks' {
     options: WatchQueryOptions;
     queryId: string;
     variables: {
-      [key: string]: any,
+      [key: string]: any, ...
     };
     isCurrentlyPolling: boolean;
     shouldSubscribe: boolean;
@@ -402,7 +404,7 @@ declare module '@apollo/react-hooks' {
     lastResult: ApolloQueryResult<T>;
     lastError: ApolloError;
     lastVariables: {
-      [key: string]: any,
+      [key: string]: any, ...
     };
     constructor(data: {
       scheduler: QueryScheduler<any>,
@@ -670,7 +672,7 @@ declare module '@apollo/react-hooks' {
 
   declare type ModifiableWatchQueryOptions = {
     variables?: {
-      [key: string]: any,
+      [key: string]: any, ...
     },
     pollInterval?: number,
     fetchPolicy?: FetchPolicy,
@@ -692,7 +694,7 @@ declare module '@apollo/react-hooks' {
 
   declare interface MutationBaseOptions<
     T = {
-      [key: string]: any,
+      [key: string]: any, ...
     }
   > {
     optimisticResponse?: any;
@@ -772,7 +774,7 @@ declare module '@apollo/react-hooks' {
   declare type PureQueryOptions = {
     query: DocumentNode,
     variables?: {
-      [key: string]: any,
+      [key: string]: any, ...
     },
     ...
   };
@@ -790,23 +792,23 @@ declare module '@apollo/react-hooks' {
 
   declare type MutationQueryReducer<T> = (
     previousResult: {
-      [key: string]: any,
+      [key: string]: any, ...
     },
     options: {
       mutationResult: FetchResult<T>,
       queryName: string | void,
       queryVariables: {
-        [key: string]: any,
+        [key: string]: any, ...
       },
       ...
     }
   ) => {
-    [key: string]: any,
+    [key: string]: any, ...
   };
 
   declare type MutationQueryReducersMap<
     T = {
-      [key: string]: any,
+      [key: string]: any, ...
     }
   > = {
     [queryName: string]: MutationQueryReducer<T>,
@@ -915,43 +917,43 @@ declare module '@apollo/react-hooks' {
   declare interface GraphQLRequest {
     query: DocumentNode;
     variables?: {
-      [key: string]: any,
+      [key: string]: any, ...
     };
     operationName?: string;
     context?: {
-      [key: string]: any,
+      [key: string]: any, ...
     };
     extensions?: {
-      [key: string]: any,
+      [key: string]: any, ...
     };
   }
 
   declare interface Operation {
     query: DocumentNode;
     variables: {
-      [key: string]: any,
+      [key: string]: any, ...
     };
     operationName: string;
     extensions: {
-      [key: string]: any,
+      [key: string]: any, ...
     };
     setContext: (context: {
-      [key: string]: any,
+      [key: string]: any, ...
     }) => {
-      [key: string]: any,
+      [key: string]: any, ...
     };
     getContext: () => {
-      [key: string]: any,
+      [key: string]: any, ...
     };
     toKey: () => string;
   }
 
   declare type FetchResult<
     C = {
-      [key: string]: any,
+      [key: string]: any, ...
     },
     E = {
-      [key: string]: any,
+      [key: string]: any, ...
     }
   > = ExecutionResult<C> & {
     extension?: E,

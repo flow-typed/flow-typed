@@ -153,7 +153,7 @@ declare module '@apollo/react-hooks' {
   declare export type MutationTuple<TData, TVariables> = [
     (
       options?: MutationFunctionOptions<TData, TVariables>
-    ) => Promise<void | ExecutionResult<TData>>,
+    ) => Promise<ExecutionResult<TData>>,
     MutationResult<TData>,
   ];
 
@@ -308,7 +308,7 @@ declare module '@apollo/react-hooks' {
 
   declare export type MutationFunction<TData, TVariables> = (
     options?: MutationFunctionOptions<TData, TVariables>
-  ) => Promise<void | MutationFetchResult<TData>>;
+  ) => Promise<MutationFetchResult<TData>>;
 
   /* Subscription types */
   declare export type OnSubscriptionDataOptions<TData> = {

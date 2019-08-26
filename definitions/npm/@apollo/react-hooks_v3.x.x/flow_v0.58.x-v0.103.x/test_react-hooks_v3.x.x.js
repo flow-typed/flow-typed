@@ -27,20 +27,24 @@ type Hero = {
   id: string,
   appearsIn: string[],
   friends: Hero[],
+  ...
 };
 
 type IQuery = {
   foo: string,
   bar: string,
+  ...
 };
 
 describe('useQuery hook', () => {
   type Data = {
     a: string,
     b: string,
+    ...
   };
   type Variables = {
     c: string,
+    ...
   };
   const result = useQuery<Data, Variables>('test');
 
@@ -48,7 +52,7 @@ describe('useQuery hook', () => {
   it('handles data correctly', () => {
     if (data) {
       const a: string = data.a;
-      // $ExpectError cannot assign `data.b` to `b` because string [2] is incompatible with number
+      // $ExpectError
       const b: number = data.b;
     }
   });
@@ -70,22 +74,43 @@ describe('useQuery hook', () => {
 });
 
 describe('useMutation hook', () => {
-  type Data = {
+  type TData = {|
     a: string,
     b: string,
-  };
-  type Variables = {
+  |};
+  type TVariables = {|
     c: string,
-  };
-  const mutation = useMutation<Data, Variables>('test');
+  |};
+  const [mutation, result] = useMutation<TData, TVariables>('test');
 
   const { data, loading, error } = result;
   it('handles data correctly', () => {
     if (data) {
       const a: string = data.a;
-      // $ExpectError cannot assign `data.b` to `b` because string [2] is incompatible with number
+      // $ExpectError
       const b: number = data.b;
     }
+  });
+  it('handles variables correctly', async () => {
+    const mutationResult = await mutation({
+      variables: {
+        c: 'test'
+      }
+    });
+    if (mutationResult.data) {
+      (mutationResult.data.a: string);
+      (mutationResult.data.b: string);
+      // $ExpectError
+      (mutationResult.data.b: number);
+    }
+    // $ExpectError
+    mutation('', {});
+    // $ExpectError
+    mutation('', {
+      variables: {
+        c: 5
+      }
+    });
   });
   it('handles loading state correctly', () => {
     if (error) {
