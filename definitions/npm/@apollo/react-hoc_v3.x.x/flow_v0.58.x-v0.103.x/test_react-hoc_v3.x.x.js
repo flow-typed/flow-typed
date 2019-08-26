@@ -1,6 +1,6 @@
 // @flow
-import * as React from "react";
-import { it, describe } from "flow-typed-test";
+import * as React from 'react';
+import { it, describe } from 'flow-typed-test';
 import {
   ApolloProvider,
   ApolloConsumer,
@@ -10,7 +10,7 @@ import {
   type GraphqlQueryControls,
   type ChildProps,
   type GraphqlData,
-} from "@apollo/react-hoc";
+} from '@apollo/react-hoc';
 
 const gql = (strings, ...args) => {}; // graphql-tag stub
 
@@ -25,30 +25,21 @@ const mutation = gql`
   }
 `;
 
-type Hero = {|
+type Hero = {
   name: string,
   id: string,
   appearsIn: string[],
-  friends: Hero[]
-|};
+  friends: Hero[],
+};
 
-type IQuery = {|
+type IQuery = {
   foo: string,
-  bar: string
-|};
+  bar: string,
+};
 
 const withData: OperationComponent<IQuery> = graphql(query);
 
-it("works with functional component", () => {
-  const FunctionalWithData = withData(({ data }) => {
-    // $ExpectError string type being treated as numerical
-    if (data.foo > 1) return <span />;
-
-    return null;
-  });
-});
-
-it("works with class component, this requires a stricter definition", () => {
+it('works with class component, this requires a stricter definition', () => {
   type BasicComponentProps = ChildProps<{}, IQuery>;
   class BasicComponent extends React.Component<BasicComponentProps> {
     render() {
@@ -65,16 +56,17 @@ it("works with class component, this requires a stricter definition", () => {
 });
 
 it("works with class component with it's own variable", () => {
-  type CmplxOwnProps = {| faz: string |};
-  type CmplxComponentProps = {|
+  type CmplxOwnProps = { faz: string };
+  type CmplxComponentProps = {
     data: GraphqlQueryControls<> & IQuery,
-    mutate: any // The mutation is actually required or we get a error at the withData
-  |} & CmplxOwnProps;
+    // The mutation is actually required or we get a error at the withData
+    mutate: any,
+  } & CmplxOwnProps;
   class CmplxComponent extends React.Component<CmplxComponentProps> {
     render() {
       const {
         data: { loading, error, bar, foo },
-        faz
+        faz,
       } = this.props;
       if (loading) return <div>Loading</div>;
       if (error) return <h1>ERROR</h1>;
@@ -99,15 +91,15 @@ it("works with class component with it's own variable", () => {
 it("works with class component with it's own variable Props specified at the end", () => {
   // Same as above but with the Props specified at the end
   // since we don't rely on the ChildProps<P, R> we don't need the mutate: any
-  type Cmplx2OwnProps = {| faz: string |}; // We can have exact own props as we don't rely on the TMergedProps
-  type Cmplx2ComponentProps = {|
-    data: IQuery & GraphqlQueryControls<>
-  |} & Cmplx2OwnProps;
+  type Cmplx2OwnProps = { faz: string }; // We can have exact own props as we don't rely on the TMergedProps
+  type Cmplx2ComponentProps = {
+    data: IQuery & GraphqlQueryControls<>,
+  } & Cmplx2OwnProps;
   class Cmplx2Component extends React.Component<Cmplx2ComponentProps> {
     render() {
       const {
         data: { loading, error, bar, foo },
-        faz
+        faz,
       } = this.props;
       if (loading) return <div>Loading</div>;
       if (error) return <h1>ERROR</h1>;
@@ -176,22 +168,14 @@ const HERO_SUBSCRIPTION = gql`
   }
 `;
 
-it("works with Variables specified", () => {
-  type Response = {|
-    hero: Hero
-  |};
+it('works with Variables specified', () => {
+  type Response = { hero: Hero };
 
-  type InputProps = {|
-    episode: string
-  |};
+  type InputProps = { episode: string };
 
-  type Variables = {|
-    episode: string
-  |};
+  type Variables = { episode: string };
 
-  type Props = GraphqlData<Response, Variables> & {|
-    someProp: string
-  |};
+  type Props = GraphqlData<Response, Variables> & { someProp: string };
 
   const withCharacter: OperationComponent<
     Response,
@@ -204,7 +188,7 @@ it("works with Variables specified", () => {
       episode * 10;
       return {
         // $ExpectError [number] This type is incompatible with string
-        variables: { episode: 10 }
+        variables: { episode: 10 },
       };
     },
     props: ({ data, ownProps }) => ({
@@ -214,11 +198,11 @@ it("works with Variables specified", () => {
       // $ExpectError property `isHero`. Property not found on object type
       isHero: data && data.hero && data.hero.isHero,
       // $ExpectError Property `someProp`. This type is incompatible with string
-      someProp: 1
-    })
+      someProp: 1,
+    }),
   });
 
-  withCharacter(({ loading, hero, error }) => {
+  withCharacter(({ loading, error }) => {
     if (loading) return <div>Loading</div>;
     if (error) return <h1>ERROR</h1>;
     return null;
@@ -235,7 +219,7 @@ it("works with Variables specified", () => {
   const CharacterWithData = withCharacter(Character);
 });
 
-it("works with withApollo HOC", () => {
+it('works with withApollo HOC', () => {
   const Manual = withApollo(({ client }) => {
     // XXX please don't ever actually do this
     client.query({ query: HERO_QUERY });
@@ -244,4 +228,49 @@ it("works with withApollo HOC", () => {
 
   // withApollo passes `client` property so that it is no longer required
   (Manual: React.ComponentType<{}>);
+});
+
+describe('<ApolloProvider />', () => {
+  it('works when passed client', () => {
+    // Should be an instance of ApolloClient
+    const client = {};
+    <ApolloProvider client={client}>
+      <div />
+    </ApolloProvider>;
+  });
+
+  it('raises an error when not passed a client', () => {
+    // $ExpectError ApolloPrivder requires client prop
+    <ApolloProvider>
+      <div />
+    </ApolloProvider>;
+  });
+
+  it('raises an error when not passed children', () => {
+    // Should be an instance of ApolloClient
+    const client = {};
+
+    // $ExpectError ApolloPrivder requires client prop
+    <ApolloProvider client={client} />;
+  });
+});
+
+describe('<ApolloConsumer />', () => {
+  it('passes ApolloClient to the consumer children', () => {
+    <ApolloConsumer>
+      {client => {
+        const onClick = () => {
+          client.resetStore();
+          client.query({ query: HERO_QUERY });
+          client.readQuery({
+            query: HERO_QUERY,
+            variables: { episode: 'episode' },
+          });
+          // $ExpectError doSomethingElse is not a method of ApolloClient
+          client.doSomethingElse();
+        };
+        return <button onClick={onClick}>Click</button>;
+      }}
+    </ApolloConsumer>;
+  });
 });

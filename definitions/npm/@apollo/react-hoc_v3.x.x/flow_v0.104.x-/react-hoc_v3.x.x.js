@@ -3,12 +3,6 @@ declare module '@apollo/react-hoc' {
 
   declare type MakeOptional = <V>(V) => ?V;
   declare type MakeDataOptional<TData> = $ObjMap<TData, MakeOptional> | void;
-
-  declare type Record<T, U> = {
-    [key: T]: U,
-  };
-
-  declare type Dict = Record<string, any>;
   /**
    * Copied types from Apollo Client libdef
    * Please update apollo-client libdef as well if updating these types
@@ -16,7 +10,7 @@ declare module '@apollo/react-hoc' {
   declare class ObservableQuery<T> extends Observable<ApolloQueryResult<T>> {
     options: WatchQueryOptions;
     queryId: string;
-    variables: Dict;
+    variables: { [key: string]: any, ... };
     isCurrentlyPolling: boolean;
     shouldSubscribe: boolean;
     isTornDown: boolean;
@@ -26,19 +20,21 @@ declare module '@apollo/react-hoc' {
     subscriptionHandles: SubscriptionLINK[];
     lastResult: ApolloQueryResult<T>;
     lastError: ApolloError;
-    lastVariables: Dict;
+    lastVariables: { [key: string]: any, ... };
+
     constructor(data: {
       scheduler: QueryScheduler<any>,
       options: WatchQueryOptions,
       shouldSubscribe?: boolean,
       ...
     }): this;
+
     result(): Promise<ApolloQueryResult<T>>;
     currentResult(): ApolloCurrentResult<T>;
     getLastResult(): ApolloQueryResult<T>;
     getLastError(): ApolloError;
     resetLastResults(): void;
-    refetch(variables?: Dict): Promise<ApolloQueryResult<T>>;
+    refetch(variables?: any): Promise<ApolloQueryResult<T>>;
     fetchMore(
       fetchMoreOptions: FetchMoreQueryOptions<any> & FetchMoreOptions<any, any>
     ): Promise<ApolloQueryResult<T>>;
@@ -47,7 +43,7 @@ declare module '@apollo/react-hoc' {
       opts: ModifiableWatchQueryOptions
     ): Promise<ApolloQueryResult<T>>;
     setVariables(
-      variables: Dict,
+      variables: any,
       tryFetch?: boolean,
       fetchResults?: boolean
     ): Promise<ApolloQueryResult<T>>;
@@ -122,7 +118,7 @@ declare module '@apollo/react-hoc' {
       queryId: string,
       document: DocumentNode,
       storePreviousVariables: boolean,
-      variables: any,
+      variables: Object,
       isPoll: boolean,
       isRefetch: boolean,
       metadata: any,
@@ -198,8 +194,8 @@ declare module '@apollo/react-hoc' {
       document: DocumentNode,
       variables: any,
       updateQueries: { [queryId: string]: QueryWithUpdater, ... },
-      update: ((proxy: DataProxy, mutationResult: any) => mixed) | void,
-      optimisticResponse: Dict,
+      update: ((proxy: DataProxy, mutationResult: Object) => mixed) | void,
+      optimisticResponse: Object | Function | void,
       ...
     }): void;
     markMutationResult(mutation: {
@@ -208,12 +204,12 @@ declare module '@apollo/react-hoc' {
       document: DocumentNode,
       variables: any,
       updateQueries: { [queryId: string]: QueryWithUpdater, ... },
-      update: ((proxy: DataProxy, mutationResult: any) => mixed) | void,
+      update: ((proxy: DataProxy, mutationResult: Object) => mixed) | void,
       ...
     }): void;
     markMutationComplete({
       mutationId: string,
-      optimisticResponse?: Dict,
+      optimisticResponse?: any,
       ...
     }): void;
     markUpdateQueryResult(
@@ -225,14 +221,14 @@ declare module '@apollo/react-hoc' {
   }
 
   declare type QueryWithUpdater = {
-    updater: MutationQueryReducer<any>,
+    updater: MutationQueryReducer<Object>,
     query: QueryStoreValue,
     ...
   };
 
   declare interface MutationStoreValue {
     mutationString: string;
-    variables: any;
+    variables: Object;
     loading: boolean;
     error: Error | null;
   }
@@ -243,7 +239,7 @@ declare module '@apollo/react-hoc' {
     initMutation(
       mutationId: string,
       mutationString: string,
-      variables: any
+      variables: Object | void
     ): void;
   }
 
@@ -259,7 +255,7 @@ declare module '@apollo/react-hoc' {
   }
 
   declare interface UpdateQueryOptions {
-    variables?: any;
+    variables?: Object;
   }
 
   declare type ApolloCurrentResult<T> = {
@@ -273,7 +269,7 @@ declare module '@apollo/react-hoc' {
   };
 
   declare interface ModifiableWatchQueryOptions {
-    variables?: Dict;
+    variables?: { [key: string]: any, ... };
     pollInterval?: number;
     fetchPolicy?: FetchPolicy;
     errorPolicy?: ErrorPolicy;
@@ -281,7 +277,8 @@ declare module '@apollo/react-hoc' {
     notifyOnNetworkStatusChange?: boolean;
   }
 
-  declare interface WatchQueryOptions extends ModifiableWatchQueryOptions {
+  declare interface WatchQueryOptions
+    extends ModifiableWatchQueryOptions {
     query: DocumentNode;
     metadata?: any;
     context?: any;
@@ -291,9 +288,10 @@ declare module '@apollo/react-hoc' {
     string | PureQueryOptions
   >;
 
-  declare interface MutationBaseOptions<T = Dict> {
-    optimisticResponse?: Dict;
+  declare interface MutationBaseOptions<T = { [key: string]: any, ... }> {
+    optimisticResponse?: Object | Function;
     updateQueries?: MutationQueryReducersMap<T>;
+    optimisticResponse?: Object;
     refetchQueries?:
       | ((result: ExecutionResult<>) => RefetchQueryDescription)
       | RefetchQueryDescription;
@@ -302,7 +300,8 @@ declare module '@apollo/react-hoc' {
     variables?: any;
   }
 
-  declare interface MutationOptions<T = Dict> extends MutationBaseOptions<T> {
+  declare interface MutationOptions<T = { [key: string]: any, ... }>
+    extends MutationBaseOptions<T> {
     mutation: DocumentNode;
     context?: any;
     fetchPolicy?: FetchPolicy;
@@ -310,7 +309,7 @@ declare module '@apollo/react-hoc' {
 
   declare interface SubscriptionOptions {
     query: DocumentNode;
-    variables?: Dict;
+    variables?: { [key: string]: any, ... };
   }
 
   declare type FetchPolicy =
@@ -360,8 +359,8 @@ declare module '@apollo/react-hoc' {
 
   declare type QueryStoreValue = {
     document: DocumentNode,
-    variables: any,
-    previousVariables: any,
+    variables: Object,
+    previousVariables: Object | null,
     networkStatus: NetworkStatus,
     networkError: Error | null,
     graphQLErrors: GraphQLError[],
@@ -371,7 +370,7 @@ declare module '@apollo/react-hoc' {
 
   declare type PureQueryOptions = {
     query: DocumentNode,
-    variables?: Dict,
+    variables?: { [key: string]: any, ... },
     ...
   };
 
@@ -387,19 +386,18 @@ declare module '@apollo/react-hoc' {
   declare type FetchType = 1 | 2 | 3;
 
   declare type MutationQueryReducer<T> = (
-    previousResult: Dict,
+    previousResult: { [key: string]: any, ... },
     options: {
       mutationResult: FetchResult<T>,
       queryName: string | void,
-      queryVariables: Dict,
+      queryVariables: { [key: string]: any, ... },
       ...
     }
-  ) => Dict;
+  ) => { [key: string]: any, ... };
 
-  declare type MutationQueryReducersMap<T = Dict> = {
-    [queryName: string]: MutationQueryReducer<T>,
-    ...,
-  };
+  declare type MutationQueryReducersMap<
+    T = { [key: string]: any, ... }
+  > = { [queryName: string]: MutationQueryReducer<T>, ... };
 
   declare class ApolloError extends Error {
     message: string;
@@ -442,7 +440,7 @@ declare module '@apollo/react-hoc' {
     version: string;
     queryDeduplication: boolean;
     defaultOptions: DefaultOptions;
-    devToolsHookCb: any;
+    devToolsHookCb: Function;
     proxy: ApolloCache<TCacheShape> | void;
     ssrMode: boolean;
     resetStoreCallbacks: Array<() => Promise<any>>;
@@ -502,23 +500,29 @@ declare module '@apollo/react-hoc' {
 
   declare interface GraphQLRequest {
     query: DocumentNode;
-    variables?: Dict;
+    variables?: { [key: string]: any, ... };
     operationName?: string;
-    context?: Dict;
-    extensions?: Dict;
+    context?: { [key: string]: any, ... };
+    extensions?: { [key: string]: any, ... };
   }
 
   declare interface Operation {
     query: DocumentNode;
-    variables: Dict;
+    variables: { [key: string]: any, ... };
     operationName: string;
-    extensions: Dict;
-    setContext: (context: Dict) => Dict;
-    getContext: () => Dict;
+    extensions: { [key: string]: any, ... };
+    setContext: (context: { [key: string]: any, ... }) => {
+      [key: string]: any,
+      ...,
+    };
+    getContext: () => { [key: string]: any, ... };
     toKey: () => string;
   }
 
-  declare type FetchResult<C = Dict, E = Dict> = ExecutionResult<C> & {
+  declare type FetchResult<
+    C = { [key: string]: any, ... },
+    E = { [key: string]: any, ... }
+  > = ExecutionResult<C> & {
     extension?: E,
     context?: C,
     ...
@@ -792,7 +796,11 @@ declare module '@apollo/react-hoc' {
       ...
     };
 
-  declare export type ChildProps<TOwnProps, TResult, TVariables> = {
+  declare export type ChildProps<
+    TOwnProps,
+    TResult,
+    TVariables: Object = { ... }
+  > = {
     data: GraphqlData<TResult, TVariables>,
     mutate: MutationFunc<TResult, TVariables>,
     ...
@@ -804,7 +812,7 @@ declare module '@apollo/react-hoc' {
 
   declare type MutationOpts<TVariables> = {|
     variables?: TVariables,
-    optimisticResponse?: Dict,
+    optimisticResponse?: Object,
     refetchQueries?: RefetchQueryDescription | RefetchQueriesProviderFn,
     update?: MutationUpdaterFn<*>,
     errorPolicy?: ErrorPolicy,
@@ -817,7 +825,7 @@ declare module '@apollo/react-hoc' {
     pollInterval?: number,
     skip?: boolean,
     errorPolicy?: ErrorPolicy,
-    context?: Dict,
+    context?: { [key: string]: any, ... },
   |};
 
   declare export interface GraphqlQueryControls<
@@ -879,7 +887,17 @@ declare module '@apollo/react-hoc' {
     (component: ComponentType<TMergedProps>): ComponentType<TOwnProps>;
   }
 
+  declare export function graphql<TResult, TProps, TVariables, TChildProps>(
+    document: DocumentNode,
+    operationOptions?: OperationOption<TResult, TProps, TChildProps, TVariables>
+  ): OperationComponent<TResult, TProps, TVariables, TChildProps>;
+
   declare type WithApolloOptions = { withRef?: boolean, ... };
+
+  declare export function withApollo<TProps>(
+    component: ComponentType<{ client: ApolloClient<any>, ... } & TProps>,
+    operationOptions?: WithApolloOptions
+  ): ComponentType<TProps>;
 
   declare interface IDocumentDefinition {
     type: DocumentType;
@@ -938,7 +956,10 @@ declare module '@apollo/react-hoc' {
     QueryRenderProps<TData, TVariables>
   ) => Node;
 
-  declare type SubscriptionResult<TData, TVariables = OperationVariables> = {
+  declare type SubscriptionResult<
+    TData,
+    TVariables = OperationVariables
+  > = {
     loading: boolean,
     data?: MakeDataOptional<TData>,
     error?: ApolloError,
@@ -969,14 +990,14 @@ declare module '@apollo/react-hoc' {
     ...
   };
 
-  declare type OperationVariables = Dict;
+  declare type OperationVariables = { [key: string]: any, ... };
 
   declare type MutationFunction<
     TData = any,
     TVariables = OperationVariables
   > = (options?: {
     variables?: TVariables,
-    optimisticResponse?: Dict,
+    optimisticResponse?: Object,
     refetchQueries?: RefetchQueryDescription | RefetchQueriesProviderFn,
     update?: MutationUpdaterFn<TData>,
     ...
@@ -995,43 +1016,4 @@ declare module '@apollo/react-hoc' {
     mutate: MutationFunction<TData, TVariables>,
     result: MutationResult<TData>
   ) => Node;
-
-  declare type WithApolloOptions = {
-    withRef?: boolean,
-  };
-
-  declare export function withApollo<TProps>(
-    component: ComponentType<{ client: ApolloClient<any> } & TProps>,
-    operationOptions?: WithApolloOptions
-  ): ComponentType<TProps>;
-
-  declare export function graphql<TResult, TProps, TVariables, TChildProps>(
-    document: DocumentNode,
-    operationOptions?: OperationOption<TResult, TProps, TChildProps, TVariables>
-  ): OperationComponent<TResult, TProps, TVariables, TChildProps>;
-
-  declare export function withQuery<TResult, TProps, TVariables, TChildProps>(
-    document: DocumentNode,
-    operationOptions?: OperationOption<TResult, TProps, TChildProps, TVariables>
-  ): OperationComponent<TResult, TProps, TVariables, TChildProps>;
-
-  declare export function withMutation<
-    TResult,
-    TProps,
-    TVariables,
-    TChildProps
-  >(
-    document: DocumentNode,
-    operationOptions?: OperationOption<TResult, TProps, TChildProps, TVariables>
-  ): OperationComponent<TResult, TProps, TVariables, TChildProps>;
-
-  declare export function withSubscription<
-    TResult,
-    TProps,
-    TVariables,
-    TChildProps
-  >(
-    document: DocumentNode,
-    operationOptions?: OperationOption<TResult, TProps, TChildProps, TVariables>
-  ): OperationComponent<TResult, TProps, TVariables, TChildProps>;
 }
