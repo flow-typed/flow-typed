@@ -16,7 +16,8 @@ import {
   type RefetchQueryDescription,
 } from '@apollo/react-components';
 
-const gql = (strings, ...args) => {}; // graphql-tag stub
+// graphql-tag stub
+const gql = (strings, ...args) => {}; 
 
 const query = gql`
   {
