@@ -93,8 +93,8 @@ type HeroQueryVariables = {
   ...
 };
 class HeroQueryComp extends Query<
-  { hero: ?Hero, ...},
-  { episode: string, offset?: ?number, ...}
+  { hero: ?Hero, ... },
+  { episode: string, offset?: ?number, ... }
 > {}
 
 describe('<Query />', () => {
@@ -113,7 +113,7 @@ describe('<Query />', () => {
           // $ExpectError Cannot get `data.res` because property `res` is missing in object type
           const s: string = data.res;
           if (data.res) {
-            const s: string = data.res;
+            const _s: string = data.res;
           }
           return <div />;
         }}
@@ -280,7 +280,7 @@ type HeroSubcriptionVariables = {
   ...
 };
 class HeroSubscriptionComp extends Subscription<
-  { hero: ?Hero, ...},
+  { hero: ?Hero, ... },
   HeroSubcriptionVariables
 > {}
 
@@ -299,7 +299,7 @@ describe('<Subscription />', () => {
           }
           // $ExpectError Cannot get `data.res` because property `res` is missing in object type
           const s: string = data.res;
-          const s: ?string = data.res;
+          const _s: ?string = data.res;
           return <div />;
         }}
       </Subscription>
@@ -348,7 +348,7 @@ describe('<Subscription />', () => {
           subscriptionData,
         }: {
           client: ApolloClient<any>,
-          subscriptionData: SubscriptionResult<{ hero: ?Hero, ...}>,
+          subscriptionData: SubscriptionResult<{ hero: ?Hero, ... }>,
           ...
         }) => {
           const hero: ?Hero =
@@ -366,7 +366,7 @@ type UpdateHeroMutationVariables = {
   ...
 };
 class UpdateHeroMutationComp extends Mutation<
-  { updateHero?: ?{ hero: ?Hero, ...}, ...},
+  { updateHero?: ?{ hero: ?Hero, ... }, ... },
   UpdateHeroMutationVariables
 > {}
 

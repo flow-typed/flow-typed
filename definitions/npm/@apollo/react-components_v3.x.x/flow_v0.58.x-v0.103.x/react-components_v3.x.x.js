@@ -654,7 +654,6 @@ declare module '@apollo/react-components' {
   declare type CacheWriteQueryOptions = DataProxyWriteQueryOptions;
   declare type CacheWriteFragmentOptions = DataProxyWriteFragmentOptions;
   declare type CacheWriteDataOptions = DataProxyWriteDataOptions;
-  declare type CacheReadFragmentOptions = DataProxyReadFragmentOptions;
 
   declare interface DataProxyReadQueryOptions {
     query: DocumentNode;
@@ -855,8 +854,6 @@ declare module '@apollo/react-components' {
   > {
     (component: ComponentType<TMergedProps>): ComponentType<TOwnProps>;
   }
-
-  declare type WithApolloOptions = { withRef?: boolean };
 
   declare export interface IDocumentDefinition {
     type: DocumentType;

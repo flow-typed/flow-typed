@@ -17,7 +17,7 @@ import {
 } from '@apollo/react-components';
 
 // graphql-tag stub
-const gql = (strings, ...args) => {}; 
+const gql = (strings, ...args) => {};
 
 const query = gql`
   {
@@ -111,7 +111,7 @@ describe('<Query />', () => {
           // $ExpectError Cannot get `data.res` because property `res` is missing in object type
           const s: string = data.res;
           if (data.res) {
-            const s: string = data.res;
+            const _s: string = data.res;
           }
           return <div />;
         }}
@@ -296,7 +296,7 @@ describe('<Subscription />', () => {
           }
           // $ExpectError Cannot get `data.res` because property `res` is missing in object type
           const s: string = data.res;
-          const s: ?string = data.res;
+          const _s: ?string = data.res;
           return <div />;
         }}
       </Subscription>
