@@ -386,7 +386,6 @@ declare module '@apollo/react-hooks' {
   /* end @apollo/react-hooks types */
 
   /* start apollo-client types */
-  declare function print(ast: any): string;
 
   declare class ObservableQuery<T> extends Observable<ApolloQueryResult<T>> {
     options: WatchQueryOptions;
@@ -707,10 +706,6 @@ declare module '@apollo/react-hooks' {
     errorPolicy?: ErrorPolicy;
     variables?: any;
   }
-
-  declare type MutationOperation<T> = (
-    options: MutationBaseOptions<T>
-  ) => Promise<FetchResult<T>>;
 
   declare type FetchPolicy =
     | 'cache-first'
@@ -1104,9 +1099,6 @@ declare module '@apollo/react-hooks' {
     TVariables
   > = DataProxyWriteFragmentOptions<TData, TVariables>;
   declare type CacheWriteDataOptions<TData> = DataProxyWriteDataOptions<TData>;
-  declare type CacheReadFragmentOptions<
-    TVariables
-  > = DataProxyReadFragmentOptions<TVariables>;
 
   declare interface DataProxyReadQueryOptions {
     query: DocumentNode;
