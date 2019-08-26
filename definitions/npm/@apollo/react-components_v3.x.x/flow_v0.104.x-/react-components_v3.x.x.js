@@ -4,9 +4,10 @@ declare module '@apollo/react-components' {
   declare type MakeOptional = <V>(V) => ?V;
   declare type MakeDataOptional<TData> = $ObjMap<TData, MakeOptional> | void;
 
-  declare type Record<T, U> = {|
+  declare type Record<T, U> = {
     [key: T]: U,
-  |};
+    ...
+  };
 
   declare type Dict = Record<string, any>;
   /**
