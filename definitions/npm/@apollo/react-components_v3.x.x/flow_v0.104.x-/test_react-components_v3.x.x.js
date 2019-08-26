@@ -93,8 +93,8 @@ type HeroQueryVariables = {
   ...
 };
 class HeroQueryComp extends Query<
-  { hero: ?Hero },
-  { episode: string, offset?: ?number }
+  {| hero: ?Hero |},
+  {| episode: string, offset?: ?number |}
 > {}
 
 describe('<Query />', () => {
@@ -280,7 +280,7 @@ type HeroSubcriptionVariables = {
   ...
 };
 class HeroSubscriptionComp extends Subscription<
-  { hero: ?Hero },
+  {| hero: ?Hero |},
   HeroSubcriptionVariables
 > {}
 
@@ -346,10 +346,10 @@ describe('<Subscription />', () => {
         onSubscriptionData={({
           client,
           subscriptionData,
-        }: {
+        }: {|
           client: ApolloClient<any>,
-          subscriptionData: SubscriptionResult<{ hero: ?Hero }>,
-        }) => {
+          subscriptionData: SubscriptionResult<{| hero: ?Hero |}>,
+        |}) => {
           const hero: ?Hero =
             subscriptionData.data && subscriptionData.data.hero
               ? subscriptionData.data.hero
@@ -361,11 +361,11 @@ describe('<Subscription />', () => {
 });
 
 type UpdateHeroMutationVariables = {
-  input: { id: string, name: string },
+  input: { id: string, name: string, ... },
   ...
 };
 class UpdateHeroMutationComp extends Mutation<
-  { updateHero?: ?{ hero: ?Hero } },
+  {| updateHero?: ?{ hero: ?Hero }|}},
   UpdateHeroMutationVariables
 > {}
 
