@@ -1,5 +1,8 @@
 declare module '@apollo/react-hoc' {
   import type { ComponentType, Element, Node } from 'react';
+  
+  declare type Dict = { [key: string]: any, ...};
+  
 
   declare type MakeOptional = <V>(V) => ?V;
   declare type MakeDataOptional<TData> = $ObjMap<TData, MakeOptional> | void;
@@ -118,7 +121,7 @@ declare module '@apollo/react-hoc' {
       queryId: string,
       document: DocumentNode,
       storePreviousVariables: boolean,
-      variables: Object,
+      variables: Dict,
       isPoll: boolean,
       isRefetch: boolean,
       metadata: any,
@@ -194,8 +197,8 @@ declare module '@apollo/react-hoc' {
       document: DocumentNode,
       variables: any,
       updateQueries: { [queryId: string]: QueryWithUpdater, ... },
-      update: ((proxy: DataProxy, mutationResult: Object) => mixed) | void,
-      optimisticResponse: Object | Function | void,
+      update: ((proxy: DataProxy, mutationResult: Dict) => mixed) | void,
+      optimisticResponse: Dict,
       ...
     }): void;
     markMutationResult(mutation: {
@@ -204,7 +207,7 @@ declare module '@apollo/react-hoc' {
       document: DocumentNode,
       variables: any,
       updateQueries: { [queryId: string]: QueryWithUpdater, ... },
-      update: ((proxy: DataProxy, mutationResult: Object) => mixed) | void,
+      update: ((proxy: DataProxy, mutationResult: Dict) => mixed) | void,
       ...
     }): void;
     markMutationComplete({
@@ -221,14 +224,14 @@ declare module '@apollo/react-hoc' {
   }
 
   declare type QueryWithUpdater = {
-    updater: MutationQueryReducer<Object>,
+    updater: MutationQueryReducer<Dict>,
     query: QueryStoreValue,
     ...
   };
 
   declare interface MutationStoreValue {
     mutationString: string;
-    variables: Object;
+    variables: Dict;
     loading: boolean;
     error: Error | null;
   }
@@ -239,7 +242,7 @@ declare module '@apollo/react-hoc' {
     initMutation(
       mutationId: string,
       mutationString: string,
-      variables: Object | void
+      variables: Dict
     ): void;
   }
 
@@ -255,7 +258,7 @@ declare module '@apollo/react-hoc' {
   }
 
   declare interface UpdateQueryOptions {
-    variables?: Object;
+    variables?: Dict;
   }
 
   declare type ApolloCurrentResult<T> = {
@@ -289,9 +292,8 @@ declare module '@apollo/react-hoc' {
   >;
 
   declare interface MutationBaseOptions<T = { [key: string]: any, ... }> {
-    optimisticResponse?: Object | Function;
     updateQueries?: MutationQueryReducersMap<T>;
-    optimisticResponse?: Object;
+    optimisticResponse?: Dict;
     refetchQueries?:
       | ((result: ExecutionResult<>) => RefetchQueryDescription)
       | RefetchQueryDescription;
@@ -359,8 +361,8 @@ declare module '@apollo/react-hoc' {
 
   declare type QueryStoreValue = {
     document: DocumentNode,
-    variables: Object,
-    previousVariables: Object | null,
+    variables: Dict,
+    previousVariables?: Dict,
     networkStatus: NetworkStatus,
     networkError: Error | null,
     graphQLErrors: GraphQLError[],
@@ -440,7 +442,7 @@ declare module '@apollo/react-hoc' {
     version: string;
     queryDeduplication: boolean;
     defaultOptions: DefaultOptions;
-    devToolsHookCb: Function;
+    devToolsHookCb: any;
     proxy: ApolloCache<TCacheShape> | void;
     ssrMode: boolean;
     resetStoreCallbacks: Array<() => Promise<any>>;
@@ -797,7 +799,7 @@ declare module '@apollo/react-hoc' {
   declare export type ChildProps<
     TOwnProps,
     TResult,
-    TVariables: Object = { ... }
+    TVariables: Dict = { ... }
   > = {
     data: GraphqlData<TResult, TVariables>,
     mutate: MutationFunc<TResult, TVariables>,
@@ -810,7 +812,7 @@ declare module '@apollo/react-hoc' {
 
   declare type MutationOpts<TVariables> = {|
     variables?: TVariables,
-    optimisticResponse?: Object,
+    optimisticResponse?: Dict,
     refetchQueries?: RefetchQueryDescription | RefetchQueriesProviderFn,
     update?: MutationUpdaterFn<*>,
     errorPolicy?: ErrorPolicy,
@@ -875,10 +877,10 @@ declare module '@apollo/react-hoc' {
   }
 
   declare export interface OperationComponent<
-    TResult: Object = { ... },
-    TOwnProps: Object = { ... },
-    TVariables: Object = { ... },
-    TMergedProps: Object = ChildProps<TOwnProps, TResult, TVariables>
+    TResult: Dict = { ... },
+    TOwnProps: Dict = { ... },
+    TVariables: Dict = { ... },
+    TMergedProps: Dict = ChildProps<TOwnProps, TResult, TVariables>
   > {
     (component: ComponentType<TMergedProps>): ComponentType<TOwnProps>;
   }
