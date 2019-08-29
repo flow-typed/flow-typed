@@ -1,3 +1,4 @@
+// changes
 declare module "lodash" {
   declare type Path = $ReadOnlyArray<string | number> | string | number;
   declare type __CurriedFunction1<A, R, AA: A> = (...r: [AA]) => R;
