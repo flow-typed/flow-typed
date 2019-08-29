@@ -170,11 +170,11 @@ describe('styled builtins', () => {
         // we can define static props
         type: 'password',
         // or we can define dynamic ones
-        margin: props => {
+        margin: (props) => {
           (props.size: string);
           return props.size
         },
-        padding: props => {
+        padding: (props) => {
           (props.size: string);
           return props.size
         },
@@ -185,11 +185,10 @@ describe('styled builtins', () => {
       border: 2px solid palevioletred;
       border-radius: 3px;
       margin: ${props => props.margin};
-      padding: ${props => props.margin};
+      padding: ${props => props.padding};
     `
 
-    const dd = styled(AttrsInput)
-    const AttrsInputExtra = styled<React$ElementConfig<typeof AttrsInput>, _, _, _>(AttrsInput).attrs<{|
+    const AttrsInputExtra = styled<_, _>(AttrsInput).attrs<{|
       autoComplete: string,
     |}>(props => ({ autoComplete: 'off' }))``
 
@@ -230,7 +229,7 @@ describe('css generator', () => {
   })
 
   it('accepts functions', () => {
-    const fun = () => 'pink'
+    const fun = (): string => 'pink'
 
     const styles = css`
       color: ${fun};
@@ -409,7 +408,7 @@ describe('wrapping components', () => {
     <div>Hello {p.name}</div>
   )
 
-  const StyledHello = styled<StyleProps, Theme, Props, *>(Hello)`
+  const StyledHello = styled<_, Theme, StyleProps>(Hello)`
     color: ${props => props.color || props.theme.accent};
   `
 
