@@ -54,7 +54,8 @@
     "eslint-plugin-flowtype": "^2.50.3",
     "eslint-plugin-prettier": "^2.7.0",
     "flow-bin": "^0.81.0",
-    "jest": "^23.6.0"
+    "jest": "^23.6.0",
+    "yarn": "^1.17.3"
   },
   "keywords": [
     "flow",
