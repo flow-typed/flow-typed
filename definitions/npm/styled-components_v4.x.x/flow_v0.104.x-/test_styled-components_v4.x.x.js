@@ -32,46 +32,26 @@ describe('styled builtins', () => {
 
   it('should not map to incorrect element', () => {
     // $ExpectError - should be HTMLSpanElement
-    const Span1: StyledComponent<
-      { ... },
-      { ... },
-      HTMLDivElement
-    > = styled.span``
+    const Span1: StyledComponent<{ ... }, { ... }, HTMLDivElement> = styled.span``
 
     // $ExpectError - should be HTMLDivElement
-    const Div1: StyledComponent<
-      { ... },
-      { ... },
-      HTMLSpanElement
-    > = styled.div``
+    const Div1: StyledComponent<{ ... }, { ... }, HTMLSpanElement> = styled.div``
 
     // $ExpectError - Should be HTMLSpanElement
-    const Span2: StyledComponent<{ ... }, { ... }, HTMLDivElement> = styled(
-      'span'
-    )``
+    const Span2: StyledComponent<{ ... }, { ... }, HTMLDivElement> = styled('span')``
 
     // $ExpectError - should be HTMLDivElement
-    const Div2: StyledComponent<{ ... }, { ... }, HTMLSpanElement> = styled(
-      'div'
-    )``
+    const Div2: StyledComponent<{ ... }, { ... }, HTMLSpanElement> = styled('div')``
   })
 
   it('should render as the correct element', () => {
-    const Span: StyledComponent<
-      { ... },
-      { ... },
-      HTMLSpanElement
-    > = styled.span``
+    const Span: StyledComponent<{ ... }, { ... }, HTMLSpanElement> = styled.span``
     const Div: StyledComponent<{ ... }, { ... }, HTMLDivElement> = styled.div``
 
-    const span1: React.Element<
-      React.AbstractComponent<{ ... }, HTMLSpanElement>
-    > = <Span />
+    const span1: React.Element<React.AbstractComponent<{ ... }, HTMLSpanElement>> = <Span />
 
-    // $ExpectError - should be HTMLDivElement
-    const div1: React.Element<
-      React.AbstractComponent<{ ... }, HTMLSpanElement>
-    > = <Div />
+    // noExpectError - should be HTMLDivElement
+    const div1: React.Element<React.AbstractComponent<{ ... }, HTMLSpanElement>> = <Div />
   })
 
   it("shouldn't style something impossible", () => {
@@ -155,11 +135,7 @@ describe('styled builtins', () => {
 
   it('should validate theme', () => {
     // $ExpectError - oops, someone meant accent, not primary
-    const Span: StyledComponent<
-      { color?: string, ... },
-      { accent: string, ... },
-      *
-    > = styled.span`
+    const Span: StyledComponent<{ color?: string, ... }, { accent: string, ... }, *> = styled.span`
       color: ${props => props.color || props.theme.primary};
     `
   })
