@@ -1,4 +1,4 @@
-// changes
+
 declare module "lodash" {
   declare type Path = $ReadOnlyArray<string | number> | string | number;
   declare type __CurriedFunction1<A, R, AA: A> = (...r: [AA]) => R;
@@ -448,7 +448,7 @@ declare module "lodash" {
     unzip<T>(array?: ?$ReadOnlyArray<T>): Array<T>;
     unzipWith<T>(array: ?Array<T>, iteratee?: ?Iteratee<T>): Array<T>;
     without<T>(array?: ?$ReadOnlyArray<T>, ...values?: Array<?T>): Array<T>;
-    xor<T>(...array: Array<Array<T>>): Array<T>;
+    xor<T>(...array: $ReadOnlyArray<$ReadOnlyArray<T>>): Array<T>;
     //Workaround until (...parameter: T, parameter2: U) works
     xorBy<T>(a1?: ?$ReadOnlyArray<T>, iteratee?: ?ValueOnlyIteratee<T>): Array<T>;
     xorBy<T>(
