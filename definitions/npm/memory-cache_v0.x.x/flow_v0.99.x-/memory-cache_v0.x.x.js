@@ -11,7 +11,7 @@ declare module 'memory-cache' {
     misses(): number;
     keys(): string[];
     exportJson(): string;
-    importJson(json: string, options?: { skipDuplicates: boolean }): number;
+    importJson(json: string, options?: { skipDuplicates: boolean, ... }): number;
     Cache(): MemoryCache;
   }
 
