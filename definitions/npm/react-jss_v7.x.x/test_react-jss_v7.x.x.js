@@ -38,7 +38,7 @@ const FunctionComponentUsesWrongClassname = (props: Props) => {
   return <div className={props.classes.nonExistentClassName}>{props.content}</div>;
 };
 
-class ClassComponent extends React.Component {
+class ClassComponent extends React.Component<Props> {
   props: Props;
 
   render() {
@@ -165,7 +165,7 @@ const ButtonFunctionalComponent = ({ theme }: ButtonProps) => (
   <button>{theme.primaryColor}</button>
 );
 
-class ButtonClassComponent extends React.Component {
+class ButtonClassComponent extends React.Component<ButtonProps> {
   props: ButtonProps;
 
   render() {
