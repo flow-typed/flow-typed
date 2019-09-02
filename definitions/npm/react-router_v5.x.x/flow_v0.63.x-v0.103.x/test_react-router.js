@@ -173,8 +173,17 @@ describe('matchPath', () => {
     exact: true,
     strict: false,
   });
-  const match2: null | Match = matchPath('/the/pathname', '/the/:dynamicId');
-  const match3: null | Match = matchPath('/the/pathname');
+  const match2: null | Match = matchPath('/the/pathname', {
+    path: ['/the/:dynamicId', '/the/otherRoute'],
+    exact: true,
+    strict: false,
+  });
+  const match3: null | Match = matchPath('/the/pathname', '/the/:dynamicId');
+  const match4: null | Match = matchPath('/the/pathname', [
+    '/the/:dynamicId',
+    '/the/otherRoute',
+  ]);
+  const match5: null | Match = matchPath('/the/pathname');
 
   // $ExpectError
   matchPath();
