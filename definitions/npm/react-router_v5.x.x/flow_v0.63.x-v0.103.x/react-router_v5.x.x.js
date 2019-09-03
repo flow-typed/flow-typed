@@ -118,7 +118,7 @@ declare module "react-router" {
   ): React$ComponentType<P>;
 
   declare type MatchPathOptions = {
-    path?: string,
+    path?: string | string[],
     exact?: boolean,
     strict?: boolean,
     sensitive?: boolean
@@ -126,7 +126,7 @@ declare module "react-router" {
 
   declare export function matchPath(
     pathname: string,
-    options?: MatchPathOptions | string
+    options?: MatchPathOptions | string | string[]
   ): null | Match;
   
   declare export function generatePath(pattern?: string, params?: {}): string;
