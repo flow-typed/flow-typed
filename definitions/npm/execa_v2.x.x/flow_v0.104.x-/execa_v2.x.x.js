@@ -64,6 +64,7 @@ declare module 'execa' {
     catch<E>(
       onrejected?: ?((reason: ExecaError) => E | Promise<E>)
     ): Promise<Result | E>;
+    cancel: () => void;
   }
 
   declare interface ExecaError extends ErrnoError {

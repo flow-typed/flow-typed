@@ -65,6 +65,10 @@ describe('execa', () => {
     // $ExpectError
     execa('ls').then(printErrno);
   });
+
+  it('can cancel the subprocess', () => {
+    execa('ls').cancel();
+  });
 });
 
 describe('execa.command', () => {
