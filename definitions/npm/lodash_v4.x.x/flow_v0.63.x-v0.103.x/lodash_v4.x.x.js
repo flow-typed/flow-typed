@@ -352,7 +352,7 @@ declare module "lodash" {
     ): T;
     pullAt<T>(array?: ?Array<T>, ...indexed?: Array<?number>): Array<T>;
     pullAt<T>(array?: ?Array<T>, indexed?: ?Array<number>): Array<T>;
-    remove<T>(array?: ?Array<T>, predicate?: ?Predicate<T>): Array<T>;
+    remove<T>(array?: ?$ReadOnlyArray<T>, predicate?: ?Predicate<T>): Array<T>;
     reverse<T>(array: Array<T>): Array<T>;
     reverse<T: void | null>(array: T): T;
     slice<T>(
@@ -423,7 +423,7 @@ declare module "lodash" {
       iteratee?: ValueOnlyIteratee<T>
     ): Array<T>;
     //Workaround until (...parameter: T, parameter2: U) works
-    unionWith<T>(a1?: ?Array<T>, comparator?: ?Comparator<T>): Array<T>;
+    unionWith<T>(a1?: ?$ReadOnlyArray<T>, comparator?: ?Comparator<T>): Array<T>;
     unionWith<T>(
       a1: $ReadOnlyArray<T>,
       a2: $ReadOnlyArray<T>,
@@ -446,7 +446,7 @@ declare module "lodash" {
     uniqBy<T>(array?: ?$ReadOnlyArray<T>, iteratee?: ?ValueOnlyIteratee<T>): Array<T>;
     uniqWith<T>(array?: ?$ReadOnlyArray<T>, comparator?: ?Comparator<T>): Array<T>;
     unzip<T>(array?: ?$ReadOnlyArray<T>): Array<T>;
-    unzipWith<T>(array: ?Array<T>, iteratee?: ?Iteratee<T>): Array<T>;
+    unzipWith<T>(array: ?$ReadOnlyArray<T>, iteratee?: ?Iteratee<T>): Array<T>;
     without<T>(array?: ?$ReadOnlyArray<T>, ...values?: Array<?T>): Array<T>;
     xor<T>(...array: $ReadOnlyArray<$ReadOnlyArray<T>>): Array<T>;
     //Workaround until (...parameter: T, parameter2: U) works
@@ -655,7 +655,7 @@ declare module "lodash" {
       object: T,
       iteratee?: ?ValueOnlyIteratee<A>
     ): { [key: V]: A };
-    map<T, U>(array?: ?Array<T>, iteratee?: ?MapIterator<T, U>): Array<U>;
+    map<T, U>(array?: ?$ReadOnlyArray<T>, iteratee?: ?MapIterator<T, U>): Array<U>;
     map<T, U>(
       array: ?$ReadOnlyArray<T>,
       iteratee?: ReadOnlyMapIterator<T, U>
@@ -949,7 +949,7 @@ declare module "lodash" {
     max<T>(array: ?$ReadOnlyArray<T>): T;
     maxBy<T>(array: ?$ReadOnlyArray<T>, iteratee?: Iteratee<T>): T;
     mean(array: $ReadOnlyArray<*>): number;
-    meanBy<T>(array: Array<T>, iteratee?: Iteratee<T>): number;
+    meanBy<T>(array: $ReadOnlyArray<T>, iteratee?: Iteratee<T>): number;
     min<T>(array: ?$ReadOnlyArray<T>): T;
     minBy<T>(array: ?$ReadOnlyArray<T>, iteratee?: Iteratee<T>): T;
     multiply(multiplier: number, multiplicand: number): number;
@@ -1660,10 +1660,10 @@ declare module "lodash/fp" {
     chunk<T>(size: number): (array: Array<T>) => Array<Array<T>>;
     chunk<T>(size: number, array: Array<T>): Array<Array<T>>;
     compact<T, N: ?T>(array?: ?$ReadOnlyArray<N>): Array<T>;
-    concat<T, U, A: Array<T> | T, B: Array<U> | U>(
+    concat<T, U, A: $ReadOnlyArray<T> | T, B: $ReadOnlyArray<U> | U>(
       base: A
     ): (elements: B) => Array<T | U>;
-    concat<T, U, A: Array<T> | T, B: Array<U> | U>(
+    concat<T, U, A: $ReadOnlyArray<T> | T, B: $ReadOnlyArray<U> | U>(
       base: A,
       elements: B
     ): Array<T | U>;
@@ -1851,8 +1851,8 @@ declare module "lodash/fp" {
     pullAllWith<T>(comparator: Function, values: T[], array: T[]): T[];
     pullAt<T>(indexed: Array<number>): (array: Array<T>) => Array<T>;
     pullAt<T>(indexed: Array<number>, array: Array<T>): Array<T>;
-    remove<T>(predicate: Predicate<T>): (array: Array<T>) => Array<T>;
-    remove<T>(predicate: Predicate<T>, array: Array<T>): Array<T>;
+    remove<T>(predicate: Predicate<T>): (array: $ReadOnlyArray<T>) => Array<T>;
+    remove<T>(predicate: Predicate<T>, array: $ReadOnlyArray<T>): Array<T>;
     reverse<T>(array: Array<T>): Array<T>;
     slice<T>(
       start: number
@@ -1943,8 +1943,8 @@ declare module "lodash/fp" {
     uniqWith<T>(comparator: Comparator<T>): (array: $ReadOnlyArray<T>) => Array<T>;
     uniqWith<T>(comparator: Comparator<T>, array: $ReadOnlyArray<T>): Array<T>;
     unzip<T>(array: $ReadOnlyArray<T>): Array<T>;
-    unzipWith<T>(iteratee: Iteratee<T>): (array: Array<T>) => Array<T>;
-    unzipWith<T>(iteratee: Iteratee<T>, array: Array<T>): Array<T>;
+    unzipWith<T>(iteratee: Iteratee<T>): (array: $ReadOnlyArray<T>) => Array<T>;
+    unzipWith<T>(iteratee: Iteratee<T>, array: $ReadOnlyArray<T>): Array<T>;
     without<T>(values: $ReadOnlyArray<T>): (array: $ReadOnlyArray<T>) => Array<T>;
     without<T>(values: $ReadOnlyArray<T>, array: $ReadOnlyArray<T>): Array<T>;
     xor<T>(a1: $ReadOnlyArray<T>): (a2: $ReadOnlyArray<T>) => Array<T>;
