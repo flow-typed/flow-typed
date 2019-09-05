@@ -690,6 +690,10 @@ declare module "@material-ui/core/ExpansionPanelSummary" {
   >;
 }
 
+declare module "@material-ui/core/FilledInput" {
+  declare export default $Exports<"@material-ui/core/Input/Input">;
+}
+
 declare module "@material-ui/core/FormControl/FormControl" {
   import type {ComponentType, ElementType, Node} from "react";
 
@@ -3395,6 +3399,12 @@ declare module "@material-ui/core/ExpansionPanel/ExpansionPanelSummary.js" {
 declare module "@material-ui/core/ExpansionPanelSummary/index.js" {
   declare module.exports: $Exports<"@material-ui/core/ExpansionPanelSummary">;
 }
+declare module "@material-ui/core/FilledInput/FilledInput.js" {
+  declare module.exports: $Exports<"@material-ui/core/Input/Input">;
+}
+declare module "@material-ui/core/FilledInput/index.js" {
+  declare module.exports: $Exports<"@material-ui/core/Input">;
+}
 declare module "@material-ui/core/FormControl/FormControl.js" {
   declare module.exports: $Exports<"@material-ui/core/FormControl/FormControl">;
 }
@@ -4066,7 +4076,9 @@ declare module "@material-ui/core" {
   declare export var ExpansionPanelSummary: $Exports<
     "@material-ui/core/ExpansionPanelSummary/ExpansionPanelSummary"
   >;
-
+  declare export var FilledInput: $Exports<
+    "@material-ui/core/Input/Input"
+  >;
   declare export var FormControl: $Exports<
     "@material-ui/core/FormControl/FormControl"
   >;
