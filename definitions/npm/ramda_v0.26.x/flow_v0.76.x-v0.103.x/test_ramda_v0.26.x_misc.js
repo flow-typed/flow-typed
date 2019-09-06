@@ -8,8 +8,10 @@ import _, {
   find,
   isNil,
   repeat,
+  replace,
   zipWith
 } from "ramda";
+import { describe, it } from 'flow-typed-test';
 
 const ns: Array<number> = [1, 2, 3, 4, 5];
 const ss: Array<string> = ["one", "two", "three", "four"];
@@ -29,7 +31,27 @@ const str: string = "hello world";
 // String
 {
   const ss: Array<string | void> = _.match(/h/, "b");
-  const ss3: string = _.replace(",", "|", "b,d,d");
+  describe('replace', () => {
+    it('should supports replace by string', () => {
+      const r1: string = replace(",", "|", "b,d,d");
+      const r2: string = replace(",")("|", "b,d,d");
+      const r3: string = replace(",")("|")("b,d,d");
+      const r4: string = replace(",", "|")("b,d,d");
+    });
+    it('should supports replace by RegExp', () => {
+      const r1: string = replace(/[,]/, "|", "b,d,d");
+      const r2: string = replace(/[,]/)("|", "b,d,d");
+      const r3: string = replace(/[,]/)("|")("b,d,d");
+      const r4: string = replace(/[,]/, "|")("b,d,d");
+    });
+    it('should supports replace by RegExp with replacement fn', () => {
+      const fn = (match: string, g1: string): string => g1;
+      const r1: string = replace(/([,])d/, fn, "b,d,d");
+      const r2: string = replace(/([,])d/)(fn, "b,d,d");
+      const r3: string = replace(/([,])d/)(fn)("b,d,d");
+      const r4: string = replace(/([,])d/, fn)("b,d,d");
+    });
+  });
   const ss2: Array<string> = _.split(",", "b,d,d");
   const ss1: boolean = _.test(/h/, "b");
   const s: string = _.trim("s");

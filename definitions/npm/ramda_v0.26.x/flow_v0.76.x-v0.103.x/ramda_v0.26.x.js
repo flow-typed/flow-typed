@@ -36,17 +36,21 @@ declare module ramda {
   declare type __CurriedFunction1<A, R, AA: A> = (...r: [AA]) => R;
   declare type CurriedFunction1<A, R> = __CurriedFunction1<A, R, *>;
 
-  declare type __CurriedFunction2<A, B, R, AA: A, BB: B> = ((
-    ...r: [AA]
-  ) => CurriedFunction1<BB, R>) &
-    ((...r: [AA, BB]) => R);
+  declare type __CurriedFunction2<A, B, R, AA: A, BB: B> = (
+    ((...r: [AA]) => CurriedFunction1<BB, R>) &
+    ((...r: [$npm$ramda$Placeholder, BB]) => CurriedFunction1<AA, R>) &
+    ((...r: [AA, BB]) => R)
+  );
   declare type CurriedFunction2<A, B, R> = __CurriedFunction2<A, B, R, *, *>;
 
-  declare type __CurriedFunction3<A, B, C, R, AA: A, BB: B, CC: C> = ((
-    ...r: [AA]
-  ) => CurriedFunction2<BB, CC, R>) &
+  declare type __CurriedFunction3<A, B, C, R, AA: A, BB: B, CC: C> = (
+    ((...r: [AA]) => CurriedFunction2<BB, CC, R>) &
+    ((...r: [$npm$ramda$Placeholder, BB]) => CurriedFunction2<AA, CC, R>) &
     ((...r: [AA, BB]) => CurriedFunction1<CC, R>) &
-    ((...r: [AA, BB, CC]) => R);
+    ((...r: [$npm$ramda$Placeholder, BB, CC]) => CurriedFunction1<AA, R>) &
+    ((...r: [AA, $npm$ramda$Placeholder, CC]) => CurriedFunction1<BB, R>) &
+    ((...r: [AA, BB, CC]) => R)
+  );
   declare type CurriedFunction3<A, B, C, R> = __CurriedFunction3<
     A,
     B,
@@ -68,8 +72,14 @@ declare module ramda {
     CC: C,
     DD: D
   > = ((...r: [AA]) => CurriedFunction3<BB, CC, DD, R>) &
+    ((...r: [$npm$ramda$Placeholder, BB]) => CurriedFunction3<AA, CC, DD, R>) &
     ((...r: [AA, BB]) => CurriedFunction2<CC, DD, R>) &
+    ((...r: [$npm$ramda$Placeholder, BB, CC]) => CurriedFunction2<AA, DD, R>) &
+    ((...r: [BB, $npm$ramda$Placeholder, CC]) => CurriedFunction2<BB, DD, R>) &
     ((...r: [AA, BB, CC]) => CurriedFunction1<DD, R>) &
+    ((...r: [$npm$ramda$Placeholder, BB, CC, DD]) => CurriedFunction1<AA, R>) &
+    ((...r: [AA, $npm$ramda$Placeholder, CC, DD]) => CurriedFunction1<BB, R>) &
+    ((...r: [AA, BB, $npm$ramda$Placeholder, DD]) => CurriedFunction1<CC, R>) &
     ((...r: [AA, BB, CC, DD]) => R);
   declare type CurriedFunction4<A, B, C, D, R> = __CurriedFunction4<
     A,
@@ -96,9 +106,19 @@ declare module ramda {
     DD: D,
     EE: E
   > = ((...r: [AA]) => CurriedFunction4<BB, CC, DD, EE, R>) &
+    ((...r: [$npm$ramda$Placeholder, BB]) => CurriedFunction4<AA, CC, DD, EE, R>) &
     ((...r: [AA, BB]) => CurriedFunction3<CC, DD, EE, R>) &
+    ((...r: [$npm$ramda$Placeholder, BB, CC]) => CurriedFunction3<AA, DD, EE, R>) &
+    ((...r: [AA, $npm$ramda$Placeholder, CC]) => CurriedFunction3<BB, DD, EE, R>) &
     ((...r: [AA, BB, CC]) => CurriedFunction2<DD, EE, R>) &
+    ((...r: [$npm$ramda$Placeholder, BB, CC, DD]) => CurriedFunction2<AA, EE, R>) &
+    ((...r: [AA, $npm$ramda$Placeholder, CC, DD]) => CurriedFunction2<BB, EE, R>) &
+    ((...r: [AA, BB, $npm$ramda$Placeholder, DD]) => CurriedFunction2<CC, EE, R>) &
     ((...r: [AA, BB, CC, DD]) => CurriedFunction1<EE, R>) &
+    ((...r: [$npm$ramda$Placeholder, BB, CC, DD, EE]) => CurriedFunction1<AA, R>) &
+    ((...r: [AA, $npm$ramda$Placeholder, CC, DD, EE]) => CurriedFunction1<BB, R>) &
+    ((...r: [AA, BB, $npm$ramda$Placeholder, DD, EE]) => CurriedFunction1<CC, R>) &
+    ((...r: [AA, BB, CC, $npm$ramda$Placeholder, EE]) => CurriedFunction1<DD, R>) &
     ((...r: [AA, BB, CC, DD, EE]) => R);
   declare type CurriedFunction5<A, B, C, D, E, R> = __CurriedFunction5<
     A,
@@ -129,10 +149,25 @@ declare module ramda {
     EE: E,
     FF: F
   > = ((...r: [AA]) => CurriedFunction5<BB, CC, DD, EE, FF, R>) &
+    ((...r: [$npm$ramda$Placeholder, BB]) => CurriedFunction5<AA, CC, DD, EE, FF, R>) &
     ((...r: [AA, BB]) => CurriedFunction4<CC, DD, EE, FF, R>) &
+    ((...r: [$npm$ramda$Placeholder, BB, CC]) => CurriedFunction4<AA, DD, EE, FF, R>) &
+    ((...r: [AA, $npm$ramda$Placeholder, CC]) => CurriedFunction4<BB, DD, EE, FF, R>) &
     ((...r: [AA, BB, CC]) => CurriedFunction3<DD, EE, FF, R>) &
+    ((...r: [$npm$ramda$Placeholder, BB, CC, DD]) => CurriedFunction3<AA, EE, FF, R>) &
+    ((...r: [AA, $npm$ramda$Placeholder, CC, DD]) => CurriedFunction3<BB, EE, FF, R>) &
+    ((...r: [AA, BB, $npm$ramda$Placeholder, DD]) => CurriedFunction3<CC, EE, FF, R>) &
     ((...r: [AA, BB, CC, DD]) => CurriedFunction2<EE, FF, R>) &
+    ((...r: [$npm$ramda$Placeholder, BB, CC, DD, EE]) => CurriedFunction2<AA, FF, R>) &
+    ((...r: [AA, $npm$ramda$Placeholder, CC, DD, EE]) => CurriedFunction2<BB, FF, R>) &
+    ((...r: [AA, BB, $npm$ramda$Placeholder, DD, EE]) => CurriedFunction2<CC, FF, R>) &
+    ((...r: [AA, BB, CC, $npm$ramda$Placeholder, EE]) => CurriedFunction2<DD, FF, R>) &
     ((...r: [AA, BB, CC, DD, EE]) => CurriedFunction1<FF, R>) &
+    ((...r: [$npm$ramda$Placeholder, BB, CC, DD, EE, FF]) => CurriedFunction1<AA, R>) &
+    ((...r: [AA, $npm$ramda$Placeholder, CC, DD, EE, FF]) => CurriedFunction1<BB, R>) &
+    ((...r: [AA, BB, $npm$ramda$Placeholder, DD, EE, FF]) => CurriedFunction1<CC, R>) &
+    ((...r: [AA, BB, CC, $npm$ramda$Placeholder, EE, FF]) => CurriedFunction1<DD, R>) &
+    ((...r: [AA, BB, CC, DD, $npm$ramda$Placeholder, FF]) => CurriedFunction1<EE, R>) &
     ((...r: [AA, BB, CC, DD, EE, FF]) => R);
   declare type CurriedFunction6<A, B, C, D, E, F, R> = __CurriedFunction6<
     A,
@@ -471,6 +506,8 @@ declare module ramda {
   declare var compose: Compose;
   declare var pipeK: PipeK;
   declare var pipeP: PipeP;
+  declare function then<A, R>(onSuccess: UnaryFn<A, R> | UnaryPromiseFn<A, R>): CurriedFunction1<Promise<A>, Promise<R>>
+  declare function then<A, R>(onSuccess: UnaryFn<A, R> | UnaryPromiseFn<A, R>, p: Promise<A>): Promise<R>;
   declare var curry: Curry;
   declare function curryN(
     length: number,
@@ -510,12 +547,10 @@ declare module ramda {
 
   // *String
   declare var match: CurriedFunction2<RegExp, string, Array<string | void>>;
-  declare var replace: CurriedFunction3<
-    RegExp | string,
-    string | ((substring: string, ...args: Array<string>) => string),
-    string,
-    string
-  >;
+  declare type ReplacementFn = (substring: string, ...args: Array<string>) => string;
+  declare function replace<A: RegExp | string, B: string | ReplacementFn>(A): CurriedFunction2<B, string, string>;
+  declare function replace<A: RegExp | string, B: string | ReplacementFn>(A, B): CurriedFunction1<string, string>;
+  declare function replace<A: RegExp | string, B: string | ReplacementFn>(A, B, string): string;
   declare var split: CurriedFunction2<RegExp | string, string, Array<string>>;
   declare var test: CurriedFunction2<RegExp, string, boolean>;
   // startsWith and endsWith use the same signature:
@@ -585,11 +620,11 @@ declare module ramda {
   declare function chain<A, B>(f: (x: A) => B[], xs: A[]): B[]
   declare function chain<A, B>(f: (x: A) => B[]): (xs: A[]) => B[]
 
-  declare function concat<V, T: Array<V>>(x: T, y: T): T;
-  declare function concat<V, T: Array<V>>(x: T): (y: T) => T;
+  declare function concat<A, B>(x: $ReadOnlyArray<A>, y: $ReadOnlyArray<B>): Array<A | B>;
+  declare function concat<A, B>(x: $ReadOnlyArray<A>): CurriedFunction1<$ReadOnlyArray<B>, Array<A | B>>;
 
   declare function concat(x: string, y: string): string;
-  declare function concat(x: string): (y: string) => string;
+  declare function concat(x: string): CurriedFunction1<string, string>;
 
   declare type Includes =
   (<A, T: Array<A> | string>(a: A) => (b: T) => boolean) &
@@ -631,13 +666,8 @@ declare module ramda {
     xs: T
   ): T;
 
-  declare function groupBy<T>(
-    fn: (x: T) => string,
-    xs: Array<T>
-  ): { [key: string]: Array<T> };
-  declare function groupBy<T>(
-    fn: (x: T) => string,
-  ): (xs: Array<T>) => { [key: string]: Array<T> };
+  declare function groupBy<T>(fn: (x: T) => string, xs: $ReadOnlyArray<T>): { [key: string]: Array<T> };
+  declare function groupBy<T>(fn: (x: T) => string): CurriedFunction1<$ReadOnlyArray<T>, { [string]: Array<T> }>;
 
   declare function groupWith<T, V: Array<T> | string>(
     fn: BinaryPredicateFn<T>,
@@ -945,10 +975,8 @@ declare module ramda {
   declare function update<T>(index: number, elem: T, src: Array<T>): Array<T>;
 
   // TODO `without` as a transducer
-  declare function without<T>(xs: Array<T>, src: Array<T>): Array<T>;
-  declare function without<T>(
-    xs: Array<T>,
-  ): (src: Array<T>) => Array<T>;
+  declare function without<T, E>($ReadOnlyArray<E>, $ReadOnlyArray<E|T>): Array<E|T>;
+  declare function without<T, E>($ReadOnlyArray<E>): CurriedFunction1<$ReadOnlyArray<E|T>, Array<E|T>>;
 
   declare function xprod<T, S>(xs: Array<T>, ys: Array<S>): Array<[T, S]>;
   declare function xprod<T, S>(
@@ -1418,7 +1446,33 @@ declare module ramda {
    * allows us to make rested $ElementType uses in order to walk down the object
    * hierarchy. This remains something TODO.
    */
-  declare function lensPath(a: Array<string | number>): Lens<mixed, mixed, mixed, mixed>;
+  declare function lensPath<O, F, K: $Keys<F>>(p: [K]): LensObj<F, $ElementType<F, K>, O>;
+  declare function lensPath<
+    O, F,
+    K0: $Keys<F>, E0: $ElementType<F, K0>,
+    K1: $Keys<E0>
+  >(p: [K0, K1]): LensObj<F, $ElementType<E0, K1>, O>;
+  declare function lensPath<
+    O, F,
+    K0: $Keys<F>, E0: $ElementType<F, K0>,
+    K1: $Keys<E0>, E1: $ElementType<E0, K1>,
+    K2: $Keys<E1>
+  >(p: [K0, K1, K2]): LensObj<F, $ElementType<E1, K2>, O>;
+  declare function lensPath<
+    O, F,
+    K0: $Keys<F>, E0: $ElementType<F, K0>,
+    K1: $Keys<E0>, E1: $ElementType<E0, K1>,
+    K2: $Keys<E1>, E2: $ElementType<E1, K2>,
+    K3: $Keys<E2>
+  >(p: [K0, K1, K2, K3]): LensObj<F, $ElementType<E2, K3>, O>;
+  declare function lensPath<
+    O, F,
+    K0: $Keys<F>, E0: $ElementType<F, K0>,
+    K1: $Keys<E0>, E1: $ElementType<E0, K1>,
+    K2: $Keys<E1>, E2: $ElementType<E1, K2>,
+    K3: $Keys<E2>, E3: $ElementType<E2, K3>,
+    K4: $Keys<E3>
+  >(p: [K0, K1, K2, K3, K4]): LensObj<F, $ElementType<E3, K4>, O>;
 
   // declare function lensProp(str: string): Lens;
   declare function lensProp<O, F, K: $Keys<F>>(K): LensObj<F, $ElementType<F, K>, O>;
@@ -1511,15 +1565,11 @@ declare module ramda {
     | $ReadOnlyArray<A>
 
   declare var over:
-    & (<A, B, Oa, Ob>(lens: LensObj<Oa, A, B>) => (
-      & ((A => B, Oa) => Ob)
-      & ((A => B) => Oa => Ob)
-    ))
+    & (<A, B, Oa, Ob>(lens: LensObj<Oa, A, B>) => CurriedFunction2<A => B, Oa, Ob>)
+    & (<A, B, Oa, Ob>(lens: LensObj<Oa, A, B>, A => B) => CurriedFunction1<Oa, Ob>)
     & (<A, B, Oa, Ob>(lens: LensObj<Oa, A, B>, A => B, Oa) => Ob)
-    & (<A, B, Fa: Functor<A>, Fb: Functor<B>>(lens: Lens<A, B, Fa, Fb>) => (
-      & ((A => B, Fa) => Fb)
-      & ((A => B) => Fa => Fb)
-    ))
+    & (<A, B, Fa: Functor<A>, Fb: Functor<B>>(lens: Lens<A, B, Fa, Fb>) => CurriedFunction2<A => B, Fa, Fb>)
+    & (<A, B, Fa: Functor<A>, Fb: Functor<B>>(lens: Lens<A, B, Fa, Fb>, A => B) => CurriedFunction1<Fa, Fb>)
     & (<A, B, Fa: Functor<A>, Fb: Functor<B>>(lens: Lens<A, B, Fa, Fb>, A => B, Fa) => Fb)
 
   declare function path<T: string | number, V>(
