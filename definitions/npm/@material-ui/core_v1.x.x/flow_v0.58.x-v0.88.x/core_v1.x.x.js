@@ -1125,6 +1125,10 @@ declare module "@material-ui/core/internal/dom" {
   declare module.exports: any;
 }
 
+declare module "@material-ui/core/OutlinedInput" {
+  declare export default $Exports<"@material-ui/core/Input/Input">;
+}
+
 declare module "@material-ui/core/Portal/Portal" {
   import type {ComponentType, Node} from "react";
 
@@ -3514,6 +3518,12 @@ declare module "@material-ui/core/Input/Textarea.js" {
 declare module "@material-ui/core/internal/dom.js" {
   declare module.exports: $Exports<"@material-ui/core/internal/dom">;
 }
+declare module "@material-ui/core/OutlinedInput/OutlinedInput.js" {
+  declare module.exports: $Exports<"@material-ui/core/Input/Input">;
+}
+declare module "@material-ui/core/OutlinedInput/index.js" {
+  declare module.exports: $Exports<"@material-ui/core/Input">;
+}
 declare module "@material-ui/core/Portal/Portal.js" {
   declare module.exports: $Exports<"@material-ui/core/Portal">;
 }
@@ -4147,6 +4157,9 @@ declare module "@material-ui/core" {
   >;
   declare export var Paper: $Exports<"@material-ui/core/Paper/Paper">;
   declare export var Popover: $Exports<"@material-ui/core/Popover/Popover">;
+  declare export var OutlinedInput: $Exports<
+    "@material-ui/core/Input/Input"
+  >;
   declare export var Portal: $Exports<"@material-ui/core/Portal/Portal">;
   declare export var CircularProgress: $Exports<
     "@material-ui/core/CircularProgress/CircularProgress"
