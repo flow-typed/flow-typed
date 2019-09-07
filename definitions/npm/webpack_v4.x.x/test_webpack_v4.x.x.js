@@ -1,6 +1,6 @@
 import webpack from 'webpack';
 
-import type { webpackError, Stats, WebpackOptions } from 'webpack';
+import type { WebpackError, Stats, WebpackOptions } from 'webpack';
 
 const options: WebpackOptions = {
   devServer: {
@@ -46,7 +46,7 @@ const options: WebpackOptions = {
   ],
 };
 
-webpack(options, function(err: webpackError, stats: Stats) {
+webpack(options, function(err: WebpackError, stats: Stats) {
   if (err) {
     console.error(err.stack || err);
     if (err.details) {
@@ -67,14 +67,14 @@ webpack(options, function(err: webpackError, stats: Stats) {
 });
 
 const compiler1 = webpack(options);
-compiler1.run(function(err: webpackError, stats: Stats) {});
+compiler1.run(function(err: WebpackError, stats: Stats) {});
 
 const compiler2 = webpack(options);
-const watching2 = compiler2.watch({}, function(err: webpackError, stats: Stats) {});
+const watching2 = compiler2.watch({}, function(err: WebpackError, stats: Stats) {});
 watching2.invalidate();
 watching2.close();
 
 const compiler3 = webpack([options, options]);
-const watching3 = compiler3.watch({}, function(err: webpackError, stats: Stats) {});
+const watching3 = compiler3.watch({}, function(err: WebpackError, stats: Stats) {});
 watching3.invalidate();
 watching3.close();
