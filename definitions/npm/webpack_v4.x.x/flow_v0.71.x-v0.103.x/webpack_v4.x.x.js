@@ -2,10 +2,13 @@ import * as http from 'http';
 import fs from 'fs';
 
 declare module 'webpack' {
-  declare class WebpackError extends Error {
+  declare class $WebpackError extends Error {
     constructor(message: string): WebpackError;
     inspect(): string;
+    details: string;
   }
+
+  declare type WebpackError = $WebpackError;
 
   declare interface Stats {
     hasErrors(): boolean;
