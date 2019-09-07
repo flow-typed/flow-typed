@@ -9,7 +9,7 @@ describe('react-use', () => {
       // $ExpectError
       hooks.useAsync(() => console.log('foo'));
 
-      type ResponseT = { data: string };
+      type ResponseT = { data: string, ... };
       let loading, error, value;
       [loading, error, value] = hooks.useAsync<ResponseT>(async () =>
         Promise.resolve({ data: 'foo' })
@@ -30,7 +30,7 @@ describe('react-use', () => {
       // $ExpectError
       hooks.useAsync(() => console.log('foo'));
 
-      type ResponseT = { data: string };
+      type ResponseT = { data: string, ... };
       let loading, error, value, fn;
       [[loading, error, value], fn] = hooks.useAsyncFn<ResponseT>(async () =>
         Promise.resolve({ data: 'foo' })
