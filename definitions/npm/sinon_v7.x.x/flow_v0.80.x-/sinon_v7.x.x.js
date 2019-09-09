@@ -1,5 +1,75 @@
 declare module 'sinon' {
-  declare interface SinonSpyCallApi {
+  declare interface SinonFakeCallApi {
+    thisValue: any;
+    args: Array<any>;
+    exception: any;
+    returnValue: any;
+    calledOn(obj: any): boolean;
+    calledWith(...args: Array<any>): boolean;
+    calledWithExactly(...args: Array<any>): boolean;
+    calledWithMatch(...args: Array<any>): boolean;
+    notCalledWith(...args: Array<any>): boolean;
+    notCalledWithMatch(...args: Array<any>): boolean;
+    returned(value: any): boolean;
+    threw(): boolean;
+    threw(type: string): boolean;
+    threw(obj: any): boolean;
+  }
+
+  declare interface SinonFake extends SinonFakeCallApi {
+    (...args: Array<any>): any;
+    callCount: number;
+    called: boolean;
+    notCalled: boolean;
+    calledOnce: boolean;
+    calledTwice: boolean;
+    calledThrice: boolean;
+    firstCall: SinonSpyCall;
+    secondCall: SinonSpyCall;
+    thirdCall: SinonSpyCall;
+    lastCall: SinonSpyCall;
+    thisValues: Array<any>;
+    args: Array<any>[];
+    exceptions: Array<any>;
+    returnValues: Array<any>;
+    calledBefore(anotherSpy: SinonSpy): boolean;
+    calledAfter(anotherSpy: SinonSpy): boolean;
+    calledImmediatelyBefore(anotherSpy: SinonSpy): boolean;
+    calledImmediatelyAfter(anotherSpy: SinonSpy): boolean;
+    calledWithNew(): boolean;
+    alwaysCalledOn(obj: any): boolean;
+    alwaysCalledWith(...args: Array<any>): boolean;
+    alwaysCalledWithExactly(...args: Array<any>): boolean;
+    alwaysCalledWithMatch(...args: Array<any>): boolean;
+    neverCalledWith(...args: Array<any>): boolean;
+    neverCalledWithMatch(...args: Array<any>): boolean;
+    alwaysThrew(): boolean;
+    alwaysThrew(type: string): boolean;
+    alwaysThrew(obj: any): boolean;
+    alwaysReturned(): boolean;
+    getCall(n: number): SinonSpyCall;
+    getCalls(): Array<SinonSpyCall>;
+    resetHistory(): void;
+    printf(format: string, ...args: Array<any>): string;
+    restore(): void;
+  }
+
+  declare interface SinonFakeStatic {
+    (): SinonSpy;
+    (func: any): SinonSpy;
+    (obj: any, method: string): SinonSpy;
+    returns(obj: any): SinonFake;
+    throws(type?: string): SinonFake;
+    throws(obj: any): SinonFake;
+    resolves(value?: any): SinonFake;
+    rejects(): SinonFake;
+    rejects(errorType: string): SinonFake;
+    rejects(value: any): SinonFake;
+    yields(...args: Array<any>): SinonFake;
+    yieldsAsync(...args: Array<any>): SinonFake;
+  }
+
+  declare interface SinonSpyCallApi extends SinonFakeCallApi {
     thisValue: any;
     args: Array<any>;
     exception: any;
@@ -30,45 +100,11 @@ declare module 'sinon' {
     calledWithNew(call: SinonSpyCall): boolean;
   }
 
-  declare interface SinonSpy extends SinonSpyCallApi {
+  declare interface SinonSpy extends SinonSpyCallApi, SinonFake {
     // This blows everything up... idk why
     (...args: Array<any>): any;
-    callCount: number;
-    called: boolean;
-    notCalled: boolean;
-    calledOnce: boolean;
-    calledTwice: boolean;
-    calledThrice: boolean;
-    firstCall: SinonSpyCall;
-    secondCall: SinonSpyCall;
-    thirdCall: SinonSpyCall;
-    lastCall: SinonSpyCall;
-    thisValues: Array<any>;
-    args: Array<any>[];
-    exceptions: Array<any>;
-    returnValues: Array<any>;
-    calledBefore(anotherSpy: SinonSpy): boolean;
-    calledAfter(anotherSpy: SinonSpy): boolean;
-    calledImmediatelyBefore(anotherSpy: SinonSpy): boolean;
-    calledImmediatelyAfter(anotherSpy: SinonSpy): boolean;
-    calledWithNew(): boolean;
     withArgs(...args: Array<any>): SinonSpy;
-    alwaysCalledOn(obj: any): boolean;
-    alwaysCalledWith(...args: Array<any>): boolean;
-    alwaysCalledWithExactly(...args: Array<any>): boolean;
-    alwaysCalledWithMatch(...args: Array<any>): boolean;
-    neverCalledWith(...args: Array<any>): boolean;
-    neverCalledWithMatch(...args: Array<any>): boolean;
-    alwaysThrew(): boolean;
-    alwaysThrew(type: string): boolean;
-    alwaysThrew(obj: any): boolean;
-    alwaysReturned(): boolean;
     invokeCallback(...args: Array<any>): void;
-    getCall(n: number): SinonSpyCall;
-    getCalls(): Array<SinonSpyCall>;
-    resetHistory(): void;
-    printf(format: string, ...args: Array<any>): string;
-    restore(): void;
   }
 
   declare interface SinonSpyStatic {
@@ -248,9 +284,17 @@ declare module 'sinon' {
 
   declare type SinonFakeXMLHttpRequestStatic = () => SinonFakeXMLHttpRequest;
 
+  declare interface SinonFakeServerConfig {
+    autoRespond?: boolean;
+    autoRespondAfter?: number;
+    respondImmediately?: boolean;
+    fakeHTTPMethods?: boolean;
+  }
+
   declare interface SinonFakeServer {
     autoRespond: boolean;
     autoRespondAfter: number;
+    configure(config: SinonFakeServerConfig): void;
     fakeHTTPMethods: boolean;
     getHTTPMethod: (request: SinonFakeXMLHttpRequest) => string;
     requests: SinonFakeXMLHttpRequest[];
@@ -428,7 +472,15 @@ declare module 'sinon' {
     create(config: SinonSandboxConfig): SinonSandbox;
   }
 
+  declare interface SinonXMLHttpRequestStatic {
+    XMLHttpRequest: XMLHttpRequest;
+  }
+
   declare module.exports: {
+    createFakeServer(config?: SinonFakeServerConfig): SinonFakeServer;
+    createFakeServerWithClock(): SinonFakeServer;
+    createSandbox(config?: SinonSandboxConfig): SinonSandbox;
+    defaultConfig: SinonSandboxConfig;
     spy: SinonSpyStatic;
     stub: SinonStubStatic;
     expectation: SinonExpectationStatic;
@@ -444,6 +496,16 @@ declare module 'sinon' {
     sandbox: SinonSandboxStatic;
     createStubInstance<T>(constructor: any): any;
     format(obj: any): string;
+    setFormatter(aCustomFormatter: (obj: any) => string): void;
     restore(object: any): void;
+    fake: SinonFakeStatic;
+    xhr: SinonXMLHttpRequestStatic;
+    spyCall(spy: any,
+      thisValue: any,
+      args: Array<any>,
+      returnValue: any,
+      exception: any,
+      id: number,
+      errorWithCallStack: any): SinonSpyCall;
   };
 }

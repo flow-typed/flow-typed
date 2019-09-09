@@ -245,3 +245,46 @@ function testGetCalls() {
     secondCall.returnValue === 8;
   }
 }
+
+function testFake(): boolean {
+  const callback = sinon.fake();
+  callback();
+  return callback.calledOnce;
+}
+
+function testFakeWithArg(): boolean {
+  const callback = sinon.fake();
+  callback('1:00');
+  return callback.calledWith('1:00');
+}
+
+function testCreatingFakeServer(): void {
+  const server = sinon.createFakeServer({
+    respondImmediately: true
+  });
+  const headers = {
+    'Content-Type': 'application/json'
+  };
+  server.respondWith([200, headers, '{}']);
+  server.restore();
+}
+
+function testCreatingSandboxWithDefaultConfig(): void {
+  const sandbox = sinon.createSandbox(sinon.defaultConfig);
+  const myAPI = {
+    hello: function () {}
+  };
+
+  sandbox.stub(myAPI, 'hello');
+
+  myAPI.hello();
+  myAPI.hello();
+  sandbox.assert.calledTwice(myAPI.hello);
+
+  sandbox.restore();
+}
+
+function testSettingFormatter(): void {
+  const formatter = x => 'x';
+  sinon.setFormatter(formatter);
+}
