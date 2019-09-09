@@ -162,7 +162,7 @@ declare module "react-router-dom" {
   ): React$ComponentType<$Diff<React$ElementConfig<Component>, ContextRouterVoid>>;
 
   declare type MatchPathOptions = {
-    path?: string,
+    path?: string | string[],
     exact?: boolean,
     sensitive?: boolean,
     strict?: boolean,
@@ -171,7 +171,7 @@ declare module "react-router-dom" {
 
   declare export function matchPath(
     pathname: string,
-    options?: MatchPathOptions | string,
+    options?: MatchPathOptions | string | string[],
     parent?: Match
   ): null | Match;
 
