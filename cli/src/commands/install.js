@@ -96,6 +96,12 @@ export function setup(yargs: Yargs) {
       describe: 'The relative path of package.json where flow-bin is installed',
       type: 'string',
     },
+    overwrite: {
+      alias: 'o',
+      describe: 'Overwrite an existing libdef',
+      type: 'string',
+      demand: false
+    },
     ignoreDeps: {
       alias: 'i',
       describe: 'Dependency categories to ignore when installing definitions',
