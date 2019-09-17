@@ -1,4 +1,5 @@
 // @flow
+
 import { describe, it } from 'flow-typed-test'
 
 import * as React from 'react'
@@ -7,49 +8,53 @@ import styled, {
   css,
   keyframes,
   withTheme,
-
   type CSSRules,
   type KeyFrames,
-
   type StyledComponent,
 } from 'styled-components'
 
-
 describe('styled builtins', () => {
   it('should map to correct element', () => {
-    const Span1: StyledComponent<{...}, {...}, HTMLSpanElement> = styled.span``
-    const Div1: StyledComponent<{...}, {...}, HTMLDivElement> = styled.div``
+    const Span1: StyledComponent<
+      { ... },
+      { ... },
+      HTMLSpanElement
+    > = styled.span``
+    const Div1: StyledComponent<{ ... }, { ... }, HTMLDivElement> = styled.div``
 
-    const Span2: StyledComponent<{...}, {...}, HTMLSpanElement> = styled('span')``
-    const Div2: StyledComponent<{...}, {...}, HTMLDivElement> = styled('div')``
+    const Span2: StyledComponent<{ ... }, { ... }, HTMLSpanElement> = styled(
+      'span'
+    )``
+    const Div2: StyledComponent<{ ... }, { ... }, HTMLDivElement> = styled(
+      'div'
+    )``
   })
 
   it('should not map to incorrect element', () => {
     // $ExpectError - should be HTMLSpanElement
-    const Span1: StyledComponent<{...}, {...}, HTMLDivElement> = styled.span``
+    const Span1: StyledComponent<{ ... }, { ... }, HTMLDivElement> = styled.span``
 
     // $ExpectError - should be HTMLDivElement
-    const Div1: StyledComponent<{...}, {...}, HTMLSpanElement> = styled.div``
+    const Div1: StyledComponent<{ ... }, { ... }, HTMLSpanElement> = styled.div``
 
     // $ExpectError - Should be HTMLSpanElement
-    const Span2: StyledComponent<{...}, {...}, HTMLDivElement> = styled('span')``
+    const Span2: StyledComponent<{ ... }, { ... }, HTMLDivElement> = styled('span')``
 
     // $ExpectError - should be HTMLDivElement
-    const Div2: StyledComponent<{...}, {...}, HTMLSpanElement> = styled('div')``
+    const Div2: StyledComponent<{ ... }, { ... }, HTMLSpanElement> = styled('div')``
   })
 
   it('should render as the correct element', () => {
-    const Span: StyledComponent<{...}, {...}, HTMLSpanElement> = styled.span``
-    const Div: StyledComponent<{...}, {...}, HTMLDivElement> = styled.div``
+    const Span: StyledComponent<{ ... }, { ... }, HTMLSpanElement> = styled.span``
+    const Div: StyledComponent<{ ... }, { ... }, HTMLDivElement> = styled.div``
 
-    const span1: React.Element<React.AbstractComponent<{...}, HTMLSpanElement>> = <Span />
+    const span1: React.Element<React.AbstractComponent<{ ... }, HTMLSpanElement>> = <Span />
 
-    // $ExpectError - should be HTMLDivElement
-    const div1: React.Element<React.AbstractComponent<{...}, HTMLSpanElement>> = <Div />
+    // noExpectError - should be HTMLDivElement
+    const div1: React.Element<React.AbstractComponent<{ ... }, HTMLSpanElement>> = <Div />
   })
 
-
-  it('shouldn\'t style something impossible', () => {
+  it("shouldn't style something impossible", () => {
     // $ExpectError
     const derp1 = styled(null)``
 
@@ -73,11 +78,15 @@ describe('styled builtins', () => {
 
     const span1 = <Span color="maroon" />
 
-    const Div: StyledComponent<{
-      color: string,
-      background?: string,
-      ...
-    }, *, *> = styled.div`
+    const Div: StyledComponent<
+      {
+        color: string,
+        background?: string,
+        ...
+      },
+      *,
+      *
+    > = styled.div`
       color: ${props => props.color};
     `
 
@@ -89,7 +98,7 @@ describe('styled builtins', () => {
     // {| ... |} breaks syntax highlighting in vs code
     // if all on one line, so put here instead of inlined
     type Props = {|
-      color?: string
+      color?: string,
     |}
 
     const Span: StyledComponent<Props, *, *> = styled.span`
@@ -102,10 +111,8 @@ describe('styled builtins', () => {
 
   it('should validate template props', () => {
     const Span: StyledComponent<{ color: string, ... }, *, *> = styled.span`
-      color: ${
-      // $ExpectError - background is not in props
-      props => props.background
-      };
+      color: ${// $ExpectError - background is not in props
+      props => props.background};
     `
   })
 
@@ -117,7 +124,11 @@ describe('styled builtins', () => {
   })
 
   it('should inject theme', () => {
-    const Span: StyledComponent<{ color?: string, ... }, { accent: string, ... }, *> = styled.span`
+    const Span: StyledComponent<
+      { color?: string, ... },
+      { accent: string, ... },
+      *
+    > = styled.span`
       color: ${props => props.color || props.theme.accent};
     `
   })
@@ -129,6 +140,40 @@ describe('styled builtins', () => {
     `
   })
 
+  it('should support .attrs', () => {
+    const AttrsInput = styled.input.attrs<_, {| size: string |}>(
+      {
+        // we can define static props
+        type: 'password',
+        // or we can define dynamic ones
+        margin: (props) => {
+          (props.size: string);
+          return props.size
+        },
+        padding: (props) => {
+          (props.size: string);
+          return props.size
+        },
+      }
+    )`
+      color: palevioletred;
+      font-size: 1em;
+      border: 2px solid palevioletred;
+      border-radius: 3px;
+      margin: ${props => props.margin};
+      padding: ${props => props.padding};
+    `
+
+    const AttrsInputExtra = styled<_, _>(AttrsInput).attrs<{|
+      autoComplete: string,
+    |}>(props => ({ autoComplete: 'off' }))``
+
+    // $ExpectError
+    const test1 = <AttrsInputExtra size="2em" autoComplete={1} type={1} /> // error
+    const test2 = <AttrsInputExtra size="2em" autoComplete="on" type="text" /> // ok
+    // $ExpectError
+    const test3 = <AttrsInputExtra size="2em" type={1} /> // error
+  })
 })
 
 // @NOTE: Not sure how to better test this
@@ -136,10 +181,11 @@ describe('createGlobalStyle & GlobalStyles', () => {
   it('can be created and rendered', () => {
     const GlobalStyles: React.ComponentType<*> = createGlobalStyle``
 
-    const App = () =>
+    const App = () => (
       <div>
         <GlobalStyles />
       </div>
+    )
   })
 })
 
@@ -159,7 +205,7 @@ describe('css generator', () => {
   })
 
   it('accepts functions', () => {
-    const fun = () => 'pink'
+    const fun = (): string => 'pink'
 
     const styles = css`
       color: ${fun};
@@ -198,8 +244,8 @@ describe('css generator', () => {
     `
   })
 
-  it('doen\'t accept any component in interpolations', () => {
-    class ClassComp extends React.Component<{...}> {
+  it("doen't accept any component in interpolations", () => {
+    class ClassComp extends React.Component<{ ... }> {
       render() {
         return null
       }
@@ -222,7 +268,7 @@ describe('css generator', () => {
     `
   })
 
-  it('doesn\'t accept objects', () => {
+  it("doesn't accept objects", () => {
     const obj = {}
 
     // $ExpectError - object is not a valid inerpolation
@@ -231,14 +277,14 @@ describe('css generator', () => {
     `
   })
 
-  it('doesn\'t accept void/undefined', () => {
+  it("doesn't accept void/undefined", () => {
     // $ExpectError - object is not a valid inerpolation
     const styles = css`
       color: ${undefined};
     `
   })
 
-  it('doesn\'t accept null', () => {
+  it("doesn't accept null", () => {
     // $ExpectError - object is not a valid inerpolation
     const styles = css`
       color: ${null};
@@ -284,31 +330,29 @@ describe('withTheme', () => {
   type Theme = { accent: string, ... }
 
   type Props = {
-    ownProp : string,
-    theme : Theme,
+    ownProp: string,
+    theme: Theme,
     ...
   }
 
   // Explicit annotation until we see what happens to https://github.com/facebook/flow/issues/7774
   // This appears to be a regression in flow
-  const MyComp: React.ComponentType<Props> = (props: Props) =>
-    <div>
-      {props.ownProp}
-    </div>
+  const MyComp: React.ComponentType<Props> = (props: Props) => (
+    <div>{props.ownProp}</div>
+  )
 
   const MyCompWT = withTheme(MyComp)
   const MyCompWT2 = withTheme(MyCompWT)
 
-  it('doesn\'t interfere with component\'s own props', () => {
+  it("doesn't interfere with component's own props", () => {
     // $ExpectError - wrong prop
     const mcwt2 = <MyCompWT ownProp={0} />
   })
 
-  it('errors when theme should be there but isn\'t', () => {
+  it("errors when theme should be there but isn't", () => {
     // $ExpectError - missing theme prop
     const mc = <MyComp ownProp="own prop" />
   })
-
 
   it('detects theme is passed in', () => {
     const mcwt = <MyCompWT ownProp="own prop" />
@@ -324,23 +368,23 @@ describe('withTheme', () => {
   })
 })
 
-
 describe('wrapping components', () => {
   type Props = {|
-    name : string
+    name: string,
   |}
 
   type StyleProps = {|
     ...Props,
-    color?: string
+    color?: string,
   |}
 
   type Theme = { accent: string, ... }
 
-  const Hello: React.ComponentType<Props> = (p: Props) =>
+  const Hello: React.ComponentType<Props> = (p: Props) => (
     <div>Hello {p.name}</div>
+  )
 
-  const StyledHello = styled<StyleProps, Theme, Props, *>(Hello)`
+  const StyledHello = styled<_, Theme, StyleProps>(Hello)`
     color: ${props => props.color || props.theme.accent};
   `
 

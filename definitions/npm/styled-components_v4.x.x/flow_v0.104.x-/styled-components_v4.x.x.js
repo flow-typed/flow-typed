@@ -146,12 +146,18 @@ declare module 'styled-components' {
   }
 
   declare export type Interpolation<P> =
-                                       | ((executionContext: P) => Interpolation<any>) // eslint-disable-line flowtype/no-weak-types
-                                       | InterpolatableComponent<any> // eslint-disable-line flowtype/no-weak-types
-                                       | CSSRules
-                                       | KeyFrames
-                                       | string
-                                       | number
+    | ((executionContext: P) =>
+      | ((executionContext: P) => InterpolationBase)
+      | InterpolationBase
+    )
+    | Class<InterpolatableComponent<mixed>>
+    | InterpolationBase
+
+  declare export type InterpolationBase =
+    | CSSRules
+    | KeyFrames
+    | string
+    | number
 
 
   // Should this be `mixed` perhaps?
@@ -245,29 +251,37 @@ declare module 'styled-components' {
 
   declare export function withTheme<Theme, Config: {...}, Instance>(Component: React$AbstractComponent<Config, Instance>): React$AbstractComponent<$Diff<Config, ThemeProps<Theme | void>>, Instance>
 
-  declare export type StyledComponent<Props, Theme, Instance> = React$AbstractComponent<Props, Instance> & InterpolatableComponent<Props>
-  declare interface StyledFactory<StyleProps, Props, Theme, Instance> {
+  declare export type StyledComponent<Props, Theme, Instance> = React$AbstractComponent<Props, Instance> & Class<InterpolatableComponent<Props>>
+
+  declare type StyledFactory<StyleProps, Theme, Instance> = {|
     [[call]]: TaggedTemplateLiteral<PropsWithTheme<StyleProps, Theme>, StyledComponent<StyleProps, Theme, Instance>>;
-    +attrs: <A: {...}>(A | (StyleProps) => A) => React$AbstractComponent<$Diff<StyleProps, A>, Instance>;
-  }
+    +attrs: <A: {...}>(((StyleProps) => A) | A) => TaggedTemplateLiteral<
+      PropsWithTheme<{|...$Exact<StyleProps>, ...$Exact<A>|}, Theme>,
+      StyledComponent<React$Config<{|...$Exact<StyleProps>, ...$Exact<A>|}, $Exact<A>>, Theme, Instance>
+    >;
+  |}
+
+  declare type StyledShorthandFactory<V> = {|
+    [[call]]: <StyleProps, Theme>(string[], ...Interpolation<PropsWithTheme<StyleProps, Theme>>[]) => StyledComponent<StyleProps, Theme, V>;
+    +attrs: <A: {...}, StyleProps = {||}, Theme = {||}>(((StyleProps) => A) | A) => TaggedTemplateLiteral<
+      PropsWithTheme<{|...$Exact<StyleProps>, ...$Exact<A>|}, Theme>,
+      StyledComponent<React$Config<{|...$Exact<StyleProps>, ...$Exact<A>|}, $Exact<A>>, Theme, V>
+    >;
+  |}
 
 
   declare type ConvenientShorthands = $ObjMap<
     BuiltinElementInstances,
-    <V>(V) =>
-      // TODO: Figure out how to add support for `attrs` API here
-      // TODO: Would be nice if we could find a way to use `StyledFactory` here, but I am too dumb to figure it out.
-      <StyleProps, Theme>(string[], ...Interpolation<PropsWithTheme<StyleProps, Theme>>[]) => StyledComponent<StyleProps, Theme, V>
-   >
+    <V>(V) => StyledShorthandFactory<V>
+  >
 
   declare interface Styled {
-    <StyleProps, Theme, ElementName: $Keys<BuiltinElementInstances>>(ElementName): StyledFactory<StyleProps, {...}, Theme, BuiltinElementType<ElementName>>;
-    <StyleProps, Theme, OwnProps: {...}, Comp: React$ComponentType<OwnProps>>(Comp): StyledFactory<StyleProps, OwnProps, Theme, React$ComponentType<Comp>>;
+    <StyleProps, Theme, ElementName: $Keys<BuiltinElementInstances>>(ElementName): StyledFactory<StyleProps, Theme, BuiltinElementType<ElementName>>;
+    <Comp: React$ComponentType<any>, Theme, OwnProps = React$ElementConfig<Comp>>(Comp): StyledFactory<{|...$Exact<OwnProps>|}, Theme, Comp>;
   }
 
   declare export default Styled & ConvenientShorthands
 }
-
 
 
 declare module 'styled-components/native' {
@@ -277,12 +291,19 @@ declare module 'styled-components/native' {
   }
 
   declare export type Interpolation<P> =
-                                       | ((executionContext: P) => Interpolation<any>) // eslint-disable-line flowtype/no-weak-types
-                                       | InterpolatableComponent<any> // eslint-disable-line flowtype/no-weak-types
-                                       | CSSRules
-                                       | KeyFrames
-                                       | string
-                                       | number
+    | ((executionContext: P) =>
+      | ((executionContext: P) => InterpolationBase) // eslint-disable-line flowtype/no-weak-types
+      | InterpolationBase
+    )
+    | Class<InterpolatableComponent<mixed>>
+    | InterpolationBase
+
+  declare export type InterpolationBase =
+    | CSSRules
+    | KeyFrames
+    | string
+    | number
+
   // Should this be `mixed` perhaps?
   declare export type CSSRules = Interpolation<any>[] // eslint-disable-line flowtype/no-weak-types
 
@@ -374,11 +395,23 @@ declare module 'styled-components/native' {
 
   declare export function withTheme<Theme, Config: {...}, Instance>(Component: React$AbstractComponent<Config, Instance>): React$AbstractComponent<$Diff<Config, ThemeProps<Theme | void>>, Instance>
 
-  declare export type StyledComponent<Props, Theme, Instance> = React$AbstractComponent<Props, Instance> & InterpolatableComponent<Props>
-  declare interface StyledFactory<StyleProps, Props, Theme, Instance> {
+  declare export type StyledComponent<Props, Theme, Instance> = React$AbstractComponent<Props, Instance> & Class<InterpolatableComponent<Props>>
+
+  declare type StyledFactory<StyleProps, Theme, Instance> = {|
     [[call]]: TaggedTemplateLiteral<PropsWithTheme<StyleProps, Theme>, StyledComponent<StyleProps, Theme, Instance>>;
-    +attrs: <A: {...}>(A | (StyleProps) => A) => React$AbstractComponent<$Diff<StyleProps, A>, Instance>;
-  }
+    +attrs: <A: {...}>(((StyleProps) => A) | A) => TaggedTemplateLiteral<
+      PropsWithTheme<{|...$Exact<StyleProps>, ...$Exact<A>|}, Theme>,
+      StyledComponent<React$Config<{|...$Exact<StyleProps>, ...$Exact<A>|}, $Exact<A>>, Theme, Instance>
+    >;
+  |}
+
+  declare type StyledShorthandFactory<V> = {|
+    [[call]]: <StyleProps, Theme>(string[], ...Interpolation<PropsWithTheme<StyleProps, Theme>>[]) => StyledComponent<StyleProps, Theme, V>;
+    +attrs: <A: {...}, StyleProps = {||}, Theme = {||}>(((StyleProps) => A) | A) => TaggedTemplateLiteral<
+      PropsWithTheme<{|...$Exact<StyleProps>, ...$Exact<A>|}, Theme>,
+      StyledComponent<React$Config<{|...$Exact<StyleProps>, ...$Exact<A>|}, $Exact<A>>, Theme, V>
+    >;
+  |}
 
   declare type BuiltinElementInstances = {
     ActivityIndicator:             React$ComponentType<{...}>,
@@ -436,15 +469,12 @@ declare module 'styled-components/native' {
 
   declare type ConvenientShorthands = $ObjMap<
     BuiltinElementInstances,
-    <V>(V) =>
-      // TODO: Figure out how to add support for `attrs` API here
-      // TODO: Would be nice if we could find a way to use `StyledFactory` here, but I am too dumb to figure it out.
-      <StyleProps, Theme>(string[], ...Interpolation<PropsWithTheme<StyleProps, Theme>>[]) => StyledComponent<StyleProps, Theme, V>
-   >
+    <V>(V) => StyledShorthandFactory<V>
+  >
 
   declare interface Styled {
-    <StyleProps, Theme, ElementName: $Keys<BuiltinElementInstances>>(ElementName): StyledFactory<StyleProps, {...}, Theme, BuiltinElementType<ElementName>>;
-    <StyleProps, Theme, OwnProps: {...}, Comp: React$ComponentType<OwnProps>>(Comp): StyledFactory<StyleProps, OwnProps, Theme, React$ComponentType<Comp>>;
+    <StyleProps, Theme, ElementName: $Keys<BuiltinElementInstances>>(ElementName): StyledFactory<StyleProps, Theme, BuiltinElementType<ElementName>>;
+    <Comp: React$ComponentType<any>, Theme, OwnProps = React$ElementConfig<Comp>>(Comp): StyledFactory<{|...$Exact<OwnProps>|}, Theme, Comp>;
   }
 
   declare export default Styled & ConvenientShorthands
