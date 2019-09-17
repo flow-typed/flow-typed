@@ -253,21 +253,21 @@ declare module 'styled-components' {
 
   declare export type StyledComponent<Props, Theme, Instance> = React$AbstractComponent<Props, Instance> & Class<InterpolatableComponent<Props>>
 
-  declare type StyledFactory<StyleProps, Theme, Instance> = {
+  declare type StyledFactory<StyleProps, Theme, Instance> = {|
     [[call]]: TaggedTemplateLiteral<PropsWithTheme<StyleProps, Theme>, StyledComponent<StyleProps, Theme, Instance>>;
     +attrs: <A: {...}>(((StyleProps) => A) | A) => TaggedTemplateLiteral<
       PropsWithTheme<{|...$Exact<StyleProps>, ...$Exact<A>|}, Theme>,
       StyledComponent<React$Config<{|...$Exact<StyleProps>, ...$Exact<A>|}, $Exact<A>>, Theme, Instance>
     >;
-  }
+  |}
 
-  declare type StyledShorthandFactory<V> = {
+  declare type StyledShorthandFactory<V> = {|
     [[call]]: <StyleProps, Theme>(string[], ...Interpolation<PropsWithTheme<StyleProps, Theme>>[]) => StyledComponent<StyleProps, Theme, V>;
     +attrs: <A: {...}, StyleProps = {||}, Theme = {||}>(((StyleProps) => A) | A) => TaggedTemplateLiteral<
       PropsWithTheme<{|...$Exact<StyleProps>, ...$Exact<A>|}, Theme>,
       StyledComponent<React$Config<{|...$Exact<StyleProps>, ...$Exact<A>|}, $Exact<A>>, Theme, V>
     >;
-  }
+  |}
 
 
   declare type ConvenientShorthands = $ObjMap<
@@ -397,21 +397,21 @@ declare module 'styled-components/native' {
 
   declare export type StyledComponent<Props, Theme, Instance> = React$AbstractComponent<Props, Instance> & Class<InterpolatableComponent<Props>>
 
-  declare type StyledFactory<StyleProps, Theme, Instance> = {
+  declare type StyledFactory<StyleProps, Theme, Instance> = {|
     [[call]]: TaggedTemplateLiteral<PropsWithTheme<StyleProps, Theme>, StyledComponent<StyleProps, Theme, Instance>>;
     +attrs: <A: {...}>(((StyleProps) => A) | A) => TaggedTemplateLiteral<
       PropsWithTheme<{|...$Exact<StyleProps>, ...$Exact<A>|}, Theme>,
       StyledComponent<React$Config<{|...$Exact<StyleProps>, ...$Exact<A>|}, $Exact<A>>, Theme, Instance>
     >;
-  }
+  |}
 
-  declare type StyledShorthandFactory<V> = {
+  declare type StyledShorthandFactory<V> = {|
     [[call]]: <StyleProps, Theme>(string[], ...Interpolation<PropsWithTheme<StyleProps, Theme>>[]) => StyledComponent<StyleProps, Theme, V>;
     +attrs: <A: {...}, StyleProps = {||}, Theme = {||}>(((StyleProps) => A) | A) => TaggedTemplateLiteral<
       PropsWithTheme<{|...$Exact<StyleProps>, ...$Exact<A>|}, Theme>,
       StyledComponent<React$Config<{|...$Exact<StyleProps>, ...$Exact<A>|}, $Exact<A>>, Theme, V>
     >;
-  }
+  |}
 
   declare type BuiltinElementInstances = {
     ActivityIndicator:             React$ComponentType<{...}>,
