@@ -1248,14 +1248,14 @@ declare module "lodash" {
         source: A | B | C | D
       ) => any | void
     ): Object;
-    omit(object?: ?Object, ...props: Array<string>): Object;
-    omit(object?: ?Object, props: Array<string>): Object;
+    omit(object?: ?Object, ...props: $ReadOnlyArray<string>): Object;
+    omit(object?: ?Object, props: $ReadOnlyArray<string>): Object;
     omitBy<A, T: { [id: any]: A, ... } | { [id: number]: A, ... }>(
       object: T,
       predicate?: ?OPredicate<A, T>
     ): Object;
     omitBy<A, T>(object: void | null, predicate?: ?OPredicate<A, T>): {...};
-    pick(object?: ?Object, ...props: Array<string>): Object;
+    pick(object?: ?Object, ...props: $ReadOnlyArray<string>): Object;
     pick(object?: ?Object, props: $ReadOnlyArray<string>): Object;
     pickBy<A, T: { [id: any]: A, ... } | { [id: number]: A, ... }>(
       object: T,
