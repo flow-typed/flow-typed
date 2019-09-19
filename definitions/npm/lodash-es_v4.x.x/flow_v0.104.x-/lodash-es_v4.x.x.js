@@ -1197,8 +1197,8 @@ declare module "lodash-es" {
       source: A | B | C | D
     ) => any | void
   ): Object;
-  declare export function omit(object?: ?Object, ...props: Array<string>): Object;
-  declare export function omit(object?: ?Object, props: Array<string>): Object;
+  declare export function omit(object?: ?Object, ...props: $ReadOnlyArray<string>): Object;
+  declare export function omit(object?: ?Object, props: $ReadOnlyArray<string>): Object;
   declare export function omitBy<A, T: { [id: string]: A, ... }>(
     object: T,
     predicate?: ?OPredicate<A, T>
@@ -1207,8 +1207,8 @@ declare module "lodash-es" {
     object: void | null,
     predicate?: ?OPredicate<A, T>
   ): {...};
-  declare export function pick(object?: ?Object, ...props: Array<string>): Object;
-  declare export function pick(object?: ?Object, props: Array<string>): Object;
+  declare export function pick(object?: ?Object, ...props: $ReadOnlyArray<string>): Object;
+  declare export function pick(object?: ?Object, props: $ReadOnlyArray<string>): Object;
   declare export function pickBy<A, T: { [id: string]: A, ... }>(
     object: T,
     predicate?: ?OPredicate<A, T>
