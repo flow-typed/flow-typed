@@ -64,21 +64,19 @@ declare module 'hoist-non-react-statics' {
   };
 
   declare type $HoistedStatics<S, C> = $Call<
-    & ((S, empty) => $Diff<S, REACT_STATICS>)
-    & ((S, any) => $Diff<S, $ObjMap<C, any> & REACT_STATICS>),
-    S,
+    & (empty => $Diff<S, REACT_STATICS>)
+    & (any => $Diff<S, $ObjMap<C, any> & REACT_STATICS>),
     C
   >;
 
   /*
     TP - target component props
-    SP - source component props
     T - target component statics
     S - source component statics
   */
-  declare function hoistNonReactStatics<TP, SP, T, S, C: { [key: string]: true, ... }>(
+  declare function hoistNonReactStatics<TP, T, S, C: { [key: string]: true, ... }>(
     TargetComponent: React$ComponentType<TP> & T,
-    SourceComponent: React$ComponentType<SP> & S,
+    SourceComponent: React$ComponentType<any> & S,
     customStatics?: C
   ): React$ComponentType<TP> & $HoistedStatics<S, C> & T;
 
