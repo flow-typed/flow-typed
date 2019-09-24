@@ -14,10 +14,10 @@ declare module '@apollo/react-components' {
    * Copied types from Apollo Client libdef
    * Please update apollo-client libdef as well if updating these types
    */
-  declare class ObservableQuery<T> extends Observable<ApolloQueryResult<T>> {
+  declare class ObservableQuery<T, V = { [key: string]: any, ... }> extends Observable<ApolloQueryResult<T>> {
     options: WatchQueryOptions;
     queryId: string;
-    variables: Dict;
+    variables: V;
     isCurrentlyPolling: boolean;
     shouldSubscribe: boolean;
     isTornDown: boolean;
@@ -27,7 +27,8 @@ declare module '@apollo/react-components' {
     subscriptionHandles: SubscriptionLINK[];
     lastResult: ApolloQueryResult<T>;
     lastError: ApolloError;
-    lastVariables: Dict;
+    lastVariables: V;
+
     constructor(data: {
       scheduler: QueryScheduler<any>,
       options: WatchQueryOptions,
@@ -39,7 +40,7 @@ declare module '@apollo/react-components' {
     getLastResult(): ApolloQueryResult<T>;
     getLastError(): ApolloError;
     resetLastResults(): void;
-    refetch(variables?: Dict): Promise<ApolloQueryResult<T>>;
+    refetch(variables?: V): Promise<ApolloQueryResult<T>>;
     fetchMore(
       fetchMoreOptions: FetchMoreQueryOptions<any> & FetchMoreOptions<any, any>
     ): Promise<ApolloQueryResult<T>>;
@@ -48,7 +49,7 @@ declare module '@apollo/react-components' {
       opts: ModifiableWatchQueryOptions
     ): Promise<ApolloQueryResult<T>>;
     setVariables(
-      variables: Dict,
+      variables: V,
       tryFetch?: boolean,
       fetchResults?: boolean
     ): Promise<ApolloQueryResult<T>>;
