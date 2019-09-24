@@ -7,10 +7,10 @@ declare module "react-apollo" {
    * Copied types from Apollo Client libdef
    * Please update apollo-client libdef as well if updating these types
    */
-  declare class ObservableQuery<T> extends Observable<ApolloQueryResult<T>> {
+  declare class ObservableQuery<T, V = { [key: string]: any, ... }> extends Observable<ApolloQueryResult<T>> {
     options: WatchQueryOptions;
     queryId: string;
-    variables: { [key: string]: any, ... };
+    variables: V;
     isCurrentlyPolling: boolean;
     shouldSubscribe: boolean;
     isTornDown: boolean;
@@ -20,7 +20,7 @@ declare module "react-apollo" {
     subscriptionHandles: SubscriptionLINK[];
     lastResult: ApolloQueryResult<T>;
     lastError: ApolloError;
-    lastVariables: { [key: string]: any, ... };
+    lastVariables: V;
 
     constructor(data: {
       scheduler: QueryScheduler<any>,
@@ -28,13 +28,12 @@ declare module "react-apollo" {
       shouldSubscribe?: boolean,
       ...
     }): this;
-
     result(): Promise<ApolloQueryResult<T>>;
     currentResult(): ApolloCurrentResult<T>;
     getLastResult(): ApolloQueryResult<T>;
     getLastError(): ApolloError;
     resetLastResults(): void;
-    refetch(variables?: any): Promise<ApolloQueryResult<T>>;
+    refetch(variables?: V): Promise<ApolloQueryResult<T>>;
     fetchMore(
       fetchMoreOptions: FetchMoreQueryOptions<any> & FetchMoreOptions<any, any>
     ): Promise<ApolloQueryResult<T>>;
@@ -43,7 +42,7 @@ declare module "react-apollo" {
       opts: ModifiableWatchQueryOptions
     ): Promise<ApolloQueryResult<T>>;
     setVariables(
-      variables: any,
+      variables: V,
       tryFetch?: boolean,
       fetchResults?: boolean
     ): Promise<ApolloQueryResult<T>>;
