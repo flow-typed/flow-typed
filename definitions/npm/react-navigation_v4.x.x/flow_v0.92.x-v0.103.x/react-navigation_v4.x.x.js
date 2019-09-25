@@ -769,7 +769,9 @@ declare module 'react-navigation' {
     navigatorConfig?: NavigatorConfig
   ): NavigationNavigator<S, O, *>;
 
-  declare export var NavigationContext: React$Context<?NavigationScreenProp<NavigationRoute>>;
+  declare export var NavigationContext: React$Context<
+    ?NavigationScreenProp<NavigationState | NavigationRoute>,
+  >;
   declare export var NavigationProvider: $PropertyType<typeof NavigationContext, 'Provider'>;
   declare export var NavigationConsumer: $PropertyType<typeof NavigationContext, 'Consumer'>;
 
