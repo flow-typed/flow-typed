@@ -1,6 +1,6 @@
 // @flow
 
-declare module '@react-navigation/core' {
+declare module 'react-navigation-tabs' {
 
   //---------------------------------------------------------------------------
   // SECTION 1: IDENTICAL TYPE DEFINITIONS
@@ -454,68 +454,53 @@ declare module '@react-navigation/core' {
    * types, other Flow libdefs, or from TypeScript types somewhere.
    */
 
-  // This is copied from
-  // react-native/Libraries/Animated/src/nodes/AnimatedInterpolation.js
-  declare type ExtrapolateType = 'extend' | 'identity' | 'clamp';
-  declare type InterpolationConfigType = {
-    inputRange: Array<number>,
-    outputRange: Array<number> | Array<string>,
-    easing?: (input: number) => number,
-    extrapolate?: ExtrapolateType,
-    extrapolateLeft?: ExtrapolateType,
-    extrapolateRight?: ExtrapolateType,
-  };
-  declare class AnimatedInterpolation {
-    interpolate(config: InterpolationConfigType): AnimatedInterpolation;
-  }
-
-  // This is copied from
-  // react-native/Libraries/Animated/src/animations/Animation.js
-  declare type EndResult = { finished: boolean };
-  declare type EndCallback = (result: EndResult) => void;
-  declare class Animation {
-    start(
-      fromValue: number,
-      onUpdate: (value: number) => void,
-      onEnd: ?EndCallback,
-      previousAnimation: ?Animation,
-      animatedValue: AnimatedValue,
-    ): void;
-    stop(): void;
-  }
-
-  // This is vaguely copied from
-  // react-native/Libraries/Animated/src/nodes/AnimatedTracking.js
-  declare class AnimatedTracking {
+  // This is copied from react-native-renimated's Typescript libdef
+  // https://github.com/kmagiera/react-native-reanimated/blob/master/react-native-reanimated.d.ts
+  declare class AnimatedNode<T> {
     constructor(
-      value: AnimatedValue,
-      parent: any,
-      animationClass: any,
-      animationConfig: Object,
-      callback?: ?EndCallback,
+      nodeConfig: {},
+      inputNodes?: $ReadOnlyArray<AnimatedNode<any>>,
     ): void;
-    update(): void;
+    isNativelyInitialized(): boolean;
   }
 
-  // This is vaguely copied from
-  // react-native/Libraries/Animated/src/nodes/AnimatedValue.js
-  declare type ValueListenerCallback = (state: { value: number }) => void;
-  declare class AnimatedValue {
-    constructor(value: number): void;
-    setValue(value: number): void;
-    setOffset(offset: number): void;
-    flattenOffset(): void;
-    extractOffset(): void;
-    addListener(callback: ValueListenerCallback): string;
-    removeListener(id: string): void;
-    removeAllListeners(): void;
-    stopAnimation(callback?: ?(value: number) => void): void;
-    resetAnimation(callback?: ?(value: number) => void): void;
-    interpolate(config: InterpolationConfigType): AnimatedInterpolation;
-    animate(animation: Animation, callback: ?EndCallback): void;
-    stopTracking(): void;
-    track(tracking: AnimatedTracking): void;
-  }
+  // This is copied from
+  // react-native/Libraries/Components/View/ViewAccessibility.js
+  declare type AccessibilityRole =
+    | 'none'
+    | 'button'
+    | 'link'
+    | 'search'
+    | 'image'
+    | 'keyboardkey'
+    | 'text'
+    | 'adjustable'
+    | 'imagebutton'
+    | 'header'
+    | 'summary'
+    | 'alert'
+    | 'checkbox'
+    | 'combobox'
+    | 'menu'
+    | 'menubar'
+    | 'menuitem'
+    | 'progressbar'
+    | 'radio'
+    | 'radiogroup'
+    | 'scrollbar'
+    | 'spinbutton'
+    | 'switch'
+    | 'tab'
+    | 'tablist'
+    | 'timer'
+    | 'toolbar';
+  declare type AccessibilityState = {
+    disabled?: boolean,
+    selected?: boolean,
+    checked?: ?boolean | 'mixed',
+    busy?: boolean,
+    expanded?: boolean,
+  };
 
   /**
    * SECTION 2B
@@ -540,141 +525,6 @@ declare module '@react-navigation/core' {
     vertical: _SafeAreaViewForceInsetValue,
     horizontal: _SafeAreaViewForceInsetValue,
   }>;
-
-  /**
-   * Interpolation
-   */
-
-  declare export type NavigationStackInterpolatorProps = $Shape<{
-    layout: NavigationStackLayout,
-    scene: NavigationStackScene,
-    scenes: NavigationStackScene[],
-    position: AnimatedInterpolation,
-    navigation: NavigationStackProp<NavigationState>,
-    mode?: HeaderMode,
-    shadowEnabled?: boolean,
-    cardOverlayEnabled?: boolean,
-  }>;
-
-  declare type _InterpolationResult = { [key: string]: mixed };
-  declare export type NavigationStackInterpolator =
-    (props: NavigationStackInterpolatorProps) => _InterpolationResult;
-
-  /**
-   * Header
-   */
-
-  declare export type HeaderMode = 'float' | 'screen' | 'none';
-
-  declare export type HeaderProps = {
-    layout: NavigationStackLayout,
-    scene: NavigationStackScene,
-    scenes: NavigationStackScene[],
-    position: AnimatedInterpolation,
-    navigation: NavigationStackProp<NavigationState>,
-    mode: HeaderMode,
-    leftInterpolator?: NavigationStackInterpolator,
-    titleInterpolator?: NavigationStackInterpolator,
-    rightInterpolator?: NavigationStackInterpolator,
-    backgroundInterpolator?: NavigationStackInterpolator,
-    layoutPreset: 'left' | 'center',
-    transitionPreset?: 'fade-in-place' | 'uikit',
-    backTitleVisible?: boolean,
-    isLandscape: boolean,
-  };
-
-  /**
-   * StackRouter
-   */
-
-  declare export type NavigationStackProp<+S> =
-    & NavigationScreenProp<S>
-    & {
-        pop: (n?: number, params?: { immediate?: boolean }) => boolean,
-        popToTop: (params?: { immediate?: boolean }) => boolean,
-        push: (
-          routeName: string,
-          params?: NavigationParams,
-          action?: NavigationNavigateAction
-        ) => boolean,
-        replace: (
-          routeName: string,
-          params?: NavigationParams,
-          action?: NavigationNavigateAction
-        ) => boolean,
-        reset: (actions: NavigationAction[], index: number) => boolean,
-      };
-
-  declare type _HeaderBackButtonProps = {
-    disabled?: boolean,
-    onPress: () => void,
-    pressColorAndroid?: string,
-    tintColor?: ?string,
-    backImage?: React$ComponentType<{ tintColor: string, title?: ?string }>,
-    title?: ?string,
-    truncatedTitle?: ?string,
-    backTitleVisible?: boolean,
-    allowFontScaling?: boolean,
-    titleStyle?: ?TextStyleProp,
-    headerLayoutPreset: 'left' | 'center',
-    width?: ?number,
-    scene: NavigationStackScene,
-  };
-
-  declare export type NavigationStackScreenOptions = NavigationScreenOptions & {
-    header?: ?(React$Node | (HeaderProps => React$Node)),
-    headerTransparent?: boolean,
-    headerTitle?: (props: { children: ?string }) => React$Node | React$Node,
-    headerTitleStyle?: AnimatedTextStyleProp,
-    headerTitleAllowFontScaling?: boolean,
-    headerTintColor?: string,
-    headerLeft?: ((props: _HeaderBackButtonProps) => React$Node) | React$Node,
-    headerBackTitle?: string,
-    headerBackImage?: (props: {|
-      tintColor?: string,
-      title?: ?string,
-    |}) => React$Node,
-    headerTruncatedBackTitle?: string,
-    headerBackTitleStyle?: TextStyleProp,
-    headerPressColorAndroid?: string,
-    headerRight?: React$Node,
-    headerStyle?: ViewStyleProp,
-    headerForceInset?: _SafeAreaViewInsets,
-    headerBackground?: React$Node | React$ElementType,
-    gesturesEnabled?: boolean,
-    gestureResponseDistance?: { vertical?: number, horizontal?: number },
-    gestureDirection?: 'default' | 'inverted',
-  };
-
-  declare export type NavigationStackRouterConfig = {|
-    initialRouteName?: string,
-    initialRouteParams?: NavigationParams,
-    paths?: NavigationPathsConfig,
-    navigationOptions?: NavigationScreenConfig<*>,
-    defaultNavigationOptions?: NavigationScreenConfig<*>,
-    initialRouteKey?: string,
-  |};
-
-  /**
-   * Stack Gestures, Animations, and Interpolators
-   */
-
-  declare export type NavigationStackLayout = {
-    height: AnimatedValue,
-    initHeight: number,
-    initWidth: number,
-    isMeasured: boolean,
-    width: AnimatedValue,
-  };
-
-  declare export type NavigationStackScene = {
-    index: number,
-    isActive: boolean,
-    isStale: boolean,
-    key: string,
-    route: NavigationRoute,
-    descriptor: ?NavigationDescriptor,
-  };
 
   /**
    * SwitchRouter
@@ -728,10 +578,93 @@ declare module '@react-navigation/core' {
 
   //---------------------------------------------------------------------------
   // SECTION 3: UNIQUE TYPE DEFINITIONS
-  // This section normally contains exported types that are not present in any
-  // other React Navigation libdef. But the main react-navigation libdef doesn't
-  // have any, so it's empty here.
+  // This section contains exported types that are not present in any other
+  // React Navigation libdef.
   //---------------------------------------------------------------------------
+
+  /**
+   * TabNavigator
+   */
+
+  declare type _TabViewLayout = $Shape<{| height: number, width: number |}>;
+
+  declare export type TabNavigatorConfig<CustomProps: {}> = {|
+    ...NavigationTabRouterConfig,
+    ...$Exact<CustomProps>,
+    tabBarComponent?: React$ElementType,
+    lazy?: boolean,
+  |};
+
+  declare type _MaterialTopTabBarOptions = {
+    activeTintColor?: string,
+    allowFontScaling?: boolean,
+    bounces?: boolean,
+    inactiveTintColor?: string,
+    pressColor?: string,
+    pressOpacity?: number,
+    scrollEnabled?: boolean,
+    showIcon?: boolean,
+    showLabel?: boolean,
+    upperCaseLabel?: boolean,
+    tabStyle?: ViewStyleProp,
+    indicatorStyle?: ViewStyleProp,
+    iconStyle?: ViewStyleProp,
+    labelStyle?: TextStyleProp,
+    contentContainerStyle?: ViewStyleProp,
+    style?: ViewStyleProp,
+  };
+  declare export type MaterialTopTabNavigatorConfig = TabNavigatorConfig<{
+    tabBarOptions?: _MaterialTopTabBarOptions,
+    keyboardDismissMode?: 'none' | 'on-drag',
+    swipeEnabled?: boolean,
+    swipeDistanceThreshold?: number,
+    swipeVelocityThreshold?: number,
+    initialLayout?: _TabViewLayout,
+    lazyPlaceholderComponent?: React$ComponentType<{
+      route: { key: string, routeName: string },
+    }>,
+    tabBarPosition?: 'top' | 'bottom',
+    sceneContainerStyle?: ViewStyleProp,
+    style?: ViewStyleProp,
+  }>;
+
+  declare type _ThemedColor =
+    | string
+    | { light: string, dark: string };
+  declare type _LabelPosition = 'beside-icon' | 'below-icon';
+  declare type _Orientation = 'horizontal' | 'vertical';
+  declare type _BottomTabBarOptions = {
+    keyboardHidesTabBar?: boolean,
+    activeTintColor?: _ThemedColor,
+    inactiveTintColor?: _ThemedColor,
+    activeBackgroundColor?: _ThemedColor,
+    inactiveBackgroundColor?: _ThemedColor,
+    allowFontScaling?: boolean,
+    showLabel?: boolean,
+    showIcon?: boolean,
+    labelStyle?: TextStyleProp,
+    tabStyle?: ViewStyleProp,
+    labelPosition?:
+      | _LabelPosition
+      | ((options: { deviceOrientation: _Orientation }) => _LabelPosition),
+    adaptive?: boolean,
+    safeAreaInset?: _SafeAreaViewInsets,
+    style?: ViewStyleProp,
+  };
+  declare export type BottomTabNavigatorConfig = TabNavigatorConfig<{
+    tabBarOptions?: _BottomTabBarOptions,
+  }>;
+
+  /**
+   * Tab views
+   */
+
+  declare export type TabScene = {
+    route: NavigationRoute,
+    focused: boolean,
+    index: number,
+    tintColor?: ?string,
+  };
 
   //---------------------------------------------------------------------------
   // SECTION 4: EXPORTED MODULE
@@ -739,195 +672,107 @@ declare module '@react-navigation/core' {
   // but this section types the module's exports.
   //---------------------------------------------------------------------------
 
-  declare export var StateUtils: {
-    get: (state: NavigationState, key: string) => ?NavigationRoute,
-    indexOf: (state: NavigationState, key: string) => number,
-    has: (state: NavigationState, key: string) => boolean,
-    push: (state: NavigationState, route: NavigationRoute) => NavigationState,
-    pop: (state: NavigationState) => NavigationState,
-    jumpToIndex: (state: NavigationState, index: number) => NavigationState,
-    jumpTo: (state: NavigationState, key: string) => NavigationState,
-    back: (state: NavigationState) => NavigationState,
-    forward: (state: NavigationState) => NavigationState,
-    replaceAt: (
-      state: NavigationState,
-      key: string,
-      route: NavigationRoute
-    ) => NavigationState,
-    replaceAtIndex: (
-      state: NavigationState,
-      index: number,
-      route: NavigationRoute
-    ) => NavigationState,
-    reset: (
-      state: NavigationState,
-      routes: Array<NavigationRoute>,
-      index?: number
-    ) => NavigationState,
-  };
-
-  declare export function getNavigation<State: NavigationState, Options: {}>(
-    router: NavigationRouter<State, Options>,
-    state: State,
-    dispatch: NavigationDispatch,
-    actionSubscribers: Set<NavigationEventCallback>,
-    getScreenProps: () => {},
-    getCurrentNavigation: () => ?NavigationScreenProp<State>
-  ): NavigationScreenProp<State>;
-
-  declare type _NavigationView<O, S, N: NavigationScreenProp<S>> = React$ComponentType<{
-    descriptors: { [key: string]: NavigationDescriptor },
-    navigation: N,
-    navigationConfig: *,
-  }>;
-  declare export function createNavigator<O: *, S: *, NavigatorConfig: *, N: NavigationScreenProp<S>>(
-    view: _NavigationView<O, S, N>,
-    router: NavigationRouter<S, O>,
-    navigatorConfig?: NavigatorConfig
-  ): NavigationNavigator<S, O, *>;
-
-  declare export var NavigationContext: React$Context<
-    ?NavigationScreenProp<NavigationState | NavigationRoute>,
-  >;
-  declare export var NavigationProvider: $PropertyType<typeof NavigationContext, 'Provider'>;
-  declare export var NavigationConsumer: $PropertyType<typeof NavigationContext, 'Consumer'>;
-
-  declare type _SwitchNavigatorConfig = NavigationSwitchRouterConfig;
-  declare export function createSwitchNavigator(
+  declare export function createBottomTabNavigator(
     routeConfigs: NavigationRouteConfigMap,
-    config?: _SwitchNavigatorConfig
+    config?: BottomTabNavigatorConfig
+  ): NavigationNavigator<*, *, *>;
+  declare export function createMaterialTopTabNavigator(
+    routeConfigs: NavigationRouteConfigMap,
+    config?: MaterialTopTabNavigatorConfig
   ): NavigationNavigator<*, *, *>;
 
-  declare export var ThemeContext: React$Context<SupportedThemes>;
-  declare export var ThemeProvider: $PropertyType<typeof ThemeContext, 'Provider'>;
-  declare export var ThemeConsumer: $PropertyType<typeof ThemeContext, 'Consumer'>;
-  declare export var ThemeColors: {| [theme: SupportedThemes]: {| [key: string]: string |} |};
-  declare export function useTheme(): SupportedThemes;
-
-  declare export var NavigationActions: {
-    BACK: 'Navigation/BACK',
-    INIT: 'Navigation/INIT',
-    NAVIGATE: 'Navigation/NAVIGATE',
-    SET_PARAMS: 'Navigation/SET_PARAMS',
-
-    back: (payload?: { key?: ?string }) => NavigationBackAction,
-    init: (payload?: { params?: NavigationParams }) => NavigationInitAction,
-    navigate: (payload: {
-      routeName: string,
-      params?: ?NavigationParams,
-      action?: ?NavigationNavigateAction,
-      key?: string,
-    }) => NavigationNavigateAction,
-    setParams: (payload: {
-      key: string,
-      params: NavigationParams,
-    }) => NavigationSetParamsAction,
+  declare type _SharedTabBarProps = {
+    getAccessibilityLabel: (props: { route: NavigationRoute }) => ?string,
+    getTestID: (props: { route: NavigationRoute }) => ?string,
+    renderIcon: (props: {
+      route: NavigationRoute,
+      focused: boolean,
+      tintColor?: string,
+      horizontal?: boolean,
+    }) => React$Node,
   };
 
-  declare export var StackActions: {
-    POP: 'Navigation/POP',
-    POP_TO_TOP: 'Navigation/POP_TO_TOP',
-    PUSH: 'Navigation/PUSH',
-    RESET: 'Navigation/RESET',
-    REPLACE: 'Navigation/REPLACE',
-    COMPLETE_TRANSITION: 'Navigation/COMPLETE_TRANSITION',
-
-    pop: (payload: {
-      n?: number,
-      immediate?: boolean,
-    }) => NavigationPopAction,
-    popToTop: (payload: {
-      immediate?: boolean,
-    }) => NavigationPopToTopAction,
-    push: (payload: {
-      routeName: string,
-      params?: NavigationParams,
-      action?: NavigationNavigateAction,
-      key?: string,
-    }) => NavigationPushAction,
-    reset: (payload: {
-      index: number,
-      key?: ?string,
-      actions: Array<NavigationNavigateAction>,
-    }) => NavigationResetAction,
-    replace: (payload: {
-      key?: string,
-      routeName: string,
-      params?: NavigationParams,
-      action?: NavigationNavigateAction,
-    }) => NavigationReplaceAction,
-    completeTransition: (payload: {
-      key?: string,
-    }) => NavigationCompleteTransitionAction,
+  declare type _BottomTabBarButtonComponentProps = {
+    route: NavigationRoute,
+    focused: boolean,
+    onPress: () => void,
+    onLongPress: () => void,
+    testID?: string,
+    accessibilityLabel?: string,
+    accessibilityRole?: AccessibilityRole,
+    accessibilityStates?: AccessibilityState[],
+    style?: ViewStyleProp,
   };
+  declare type _BottomTabBarProps = {|
+    ...$Exact<_BottomTabBarOptions>,
+    ...$Exact<_SharedTabBarProps>,
+    navigation: NavigationTabProp<NavigationState>,
+    onTabPress: (props: { route: NavigationRoute }) => void,
+    onTabLongPress: (props: { route: NavigationRoute }) => void,
+    getAccessibilityRole: (props: {
+      route: NavigationRoute,
+    }) => ?AccessibilityRole,
+    getAccessibilityStates: (props: {
+      route: NavigationRoute,
+      focused: boolean,
+    }) => AccessibilityState[],
+    getButtonComponent: (props: {
+      route: NavigationRoute,
+    }) => ?React$ComponentType<_BottomTabBarButtonComponentProps>,
+    getLabelText: (props: {
+      route: NavigationRoute,
+    }) =>
+      | ((scene: {
+          focused: boolean,
+          tintColor?: string,
+          orientation?: 'horizontal' | 'vertical',
+        }) => ?string)
+      | ?string,
+    isLandscape: boolean,
+    jumpTo: (key: string) => void,
+    screenProps: NavigationScreenProps,
+  |};
+  declare export var BottomTabBar: React$ComponentType<_BottomTabBarProps>;
 
-  declare export var SwitchActions: {
-    JUMP_TO: 'Navigation/JUMP_TO',
+  declare type _MaterialTopTabBarProps = {|
+    ...$Exact<_MaterialTopTabBarOptions>,
+    ...$Exact<_SharedTabBarProps>,
+    layout: _TabViewLayout,
+    position: AnimatedNode<number>,
+    jumpTo: (key: string) => void,
+    getLabelText: (scene: { route: NavigationRoute }) =>
+      | ((scene: { focused: boolean, tintColor: string }) => ?string)
+      | ?string,
+    getAccessible?: (scene: { route: NavigationRoute }) => ?boolean,
+    renderBadge?: (scene: { route: NavigationRoute }) => React$Node,
+    onTabPress?: (scene: { route: NavigationRoute }) => void,
+    onTabLongPress?: (scene: { route: NavigationRoute }) => void,
+    tabBarPosition?: 'top' | 'bottom',
+    screenProps: NavigationScreenProps,
+    navigation: NavigationTabProp<NavigationState>,
+  |};
+  declare export var MaterialTopTabBar: React$ComponentType<
+    _MaterialTopTabBarProps
+  >;
 
-    jumpTo: (payload: {
-      routeName: string,
-      key?: string,
-      params?: NavigationParams,
-    }) => NavigationJumpToAction,
-  };
-
-  declare export function StackRouter(
-    routeConfigs: NavigationRouteConfigMap,
-    stackConfig?: NavigationStackRouterConfig
-  ): NavigationRouter<*, NavigationStackScreenOptions>;
-
-  declare export function TabRouter(
-    routeConfigs: NavigationRouteConfigMap,
-    config?: NavigationTabRouterConfig
-  ): NavigationRouter<*, NavigationTabScreenOptions>;
-
-  declare export function SwitchRouter(
-    routeConfigs: NavigationRouteConfigMap,
-    stackConfig?: NavigationSwitchRouterConfig
-  ): NavigationRouter<*, {}>;
-
-  declare export function getActiveChildNavigationOptions<
-    State: NavigationState,
-    Options: {}
-  >(
-    navigation: NavigationScreenProp<State>,
+  declare type _TabViewProps = {
+    ..._SharedTabBarProps,
+    getLabelText: (props: { route: NavigationRoute }) => ?string,
+    renderScene: (props: { route: NavigationRoute }) => React$Node,
+    onIndexChange: (index: number) => void,
+    onTabPress: (props: { route: NavigationRoute }) => void,
+    onTabLongPress: (props: { route: NavigationRoute }) => void,
+    navigation: NavigationTabProp<NavigationState>,
+    descriptors: { [key: string]: NavigationDescriptor },
     screenProps?: NavigationScreenProps,
-    theme?: SupportedThemes,
-  ): Options;
-
-  declare type _SceneViewProps = {
-    component: React$ComponentType<{
-      screenProps: ?NavigationScreenProps,
-      navigation: NavigationScreenProp<NavigationRoute>,
-    }>,
-    screenProps: ?NavigationScreenProps,
-    navigation: NavigationScreenProp<NavigationRoute>,
   };
-  declare export var SceneView: React$ComponentType<_SceneViewProps>;
-
-  declare type _NavigationEventsProps = {
-    navigation?: NavigationScreenProp<NavigationState>,
-    onWillFocus?: NavigationEventCallback,
-    onDidFocus?: NavigationEventCallback,
-    onWillBlur?: NavigationEventCallback,
-    onDidBlur?: NavigationEventCallback,
-  };
-  declare export var NavigationEvents: React$ComponentType<
-    _NavigationEventsProps
-  >;
-
-  declare export function withNavigation<Props: {}, ComponentType: React$ComponentType<Props>>(
-    Component: ComponentType
-  ): React$ComponentType<
-    $Diff<
-      React$ElementConfig<ComponentType>,
-      {
-        navigation: NavigationScreenProp<NavigationStateRoute> | void,
-      }
-    >
-  >;
-  declare export function withNavigationFocus<Props: {}, ComponentType: React$ComponentType<Props>>(
-    Component: ComponentType
-  ): React$ComponentType<$Diff<React$ElementConfig<ComponentType>, { isFocused: boolean | void }>>;
+  declare export function createTabNavigator<
+    CustomProps: {},
+  >(
+    TabView: React$ComponentType<_TabViewProps & CustomProps>
+  ): (
+    routeConfigMap: NavigationRouteConfigMap,
+    tabConfig?: TabNavigatorConfig<CustomProps>
+  ) => NavigationNavigator<*, *, *>;
 
 }

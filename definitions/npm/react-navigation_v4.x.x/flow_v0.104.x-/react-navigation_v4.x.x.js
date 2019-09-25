@@ -1,6 +1,6 @@
 // @flow
 
-declare module '@react-navigation/core' {
+declare module 'react-navigation' {
 
   //---------------------------------------------------------------------------
   // SECTION 1: IDENTICAL TYPE DEFINITIONS
@@ -216,7 +216,7 @@ declare module '@react-navigation/core' {
 
   declare export type NavigationScreenOptionsGetter<Options: {...}> = (
     navigation: NavigationScreenProp<NavigationRoute>,
-    screenProps: ?NavigationScreenProps,
+    ncreenProps: ?NavigationScreenProps,
     theme: SupportedThemes,
   ) => Options;
 
@@ -940,5 +940,38 @@ declare module '@react-navigation/core' {
   declare export function withNavigationFocus<Props: {...}, ComponentType: React$ComponentType<Props>>(
     Component: ComponentType
   ): React$ComponentType<$Diff<React$ElementConfig<ComponentType>, {| isFocused: ?boolean |}>>;
+
+  declare export function createAppContainer<S: NavigationState, O: {...}>(
+    Component: NavigationNavigator<S, O, *>
+  ): NavigationContainer<S, O, *>;
+
+  declare export function createKeyboardAwareNavigator<Props: {...}>(
+    Comp: React$ComponentType<Props>,
+    stackConfig: {...}
+  ): React$ComponentType<Props>;
+
+  declare export function withOrientation<Props: {...}, ComponentType: React$ComponentType<Props>>(
+    Component: ComponentType
+  ): React$ComponentType<$Diff<React$ElementConfig<ComponentType>, {| isLandscape: boolean |}>>;
+
+  declare type _SafeAreaViewProps = {
+    forceInset?: _SafeAreaViewInsets,
+    children?: React$Node,
+    style?: AnimatedViewStyleProp,
+    ...
+  };
+  declare export var SafeAreaView: React$ComponentType<_SafeAreaViewProps>;
+
+  // These components take the same props that their React Native primitives do
+  // Typing them correctly would be extremely brittle
+  // We await the day we can import types from libraries in flow-typed libdefs
+  declare export var ScrollView: React$ComponentType<{...}>;
+  declare export var FlatList: React$ComponentType<{...}>;
+  declare export var SectionList: React$ComponentType<{...}>;
+  declare export var Themed: {|
+    StatusBar: React$ComponentType<{...}>,
+    Text: React$ComponentType<{...}>,
+    TextInput: React$ComponentType<{...}>,
+  |};
 
 }

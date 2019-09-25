@@ -1,10 +1,32 @@
 # Contributing to the React Navigation Flow libdef
 
-Please do not make changes directly to the libdef file in `flow-typed` without first submitting a PR to the [libdef within the `react-navigation` repo](https://github.com/react-navigation/react-navigation/blob/master/flow/react-navigation.js). After your PR has been accepted in `react-navigation`, you can go ahead and submit a PR on `flow-typed`.
+## Overview
 
-We admittedly have a slightly unusual system for maintaing our Flow types. We used to host Flow types directly in-package, but that prevented us from simultaneously supporting multiple React Native versions. To enable that support, we've moved our libdef to `flow-typed`, but we still want to (1) have our CI typecheck the libdef against our example projects, and (2) review any changes to the libdef.
+There are five React Navigation libdefs in `flow-typed`:
 
-Note that since React Navigation is structured as a monorepo with multiple packages, changes to library definitions must be mirrored across multiple `flow-typed` libdefs. Right now we only maintain `react-navigation` and `@react-navigation/core`.
+1. `react-navigation`
+2. `react-navigation-stack`
+3. `react-navigation-tabs`
+4. `react-navigation-drawer`
+5. `@react-navigation/core`
+
+It's not currently possible to import types between libdefs. Consequently, many of the same types are copy-pasted across the different libdefs.
+
+Each of these libdefs is organized into several sections:
+
+1. Section 1: exported types, identical across all React Navigation Flow libdefs
+    - Section 1A: types copy-pasted from React Native source
+    - Section 1B: exported types
+2. Section 2: exported types, shared with some but not all React Navigation Flow libdefs
+    - Section 2A: types copy-pasted from other places
+    - Section 2B: exported types
+3. Section 3: exported types, NOT shared with other React Navigation libdefs
+4. Section 4: types the exported module
+
+## Contributing Guidelines
+
+1. If you find yourself making a change to a libdef in sections 1, 2, or 4, then you might need to update other libdefs as well.
+2. Note that these packages have independent versioning schemes. If you're introducing a change to one libdef that applies to others, you'll need to consider what corresponding versions introduced the change.
 
 ## Contributors
 
