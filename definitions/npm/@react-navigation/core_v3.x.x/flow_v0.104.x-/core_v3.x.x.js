@@ -300,17 +300,15 @@ declare module '@react-navigation/core' {
     withRouter<State, Options> &
     withOptionalNavigationOptions<Options>;
 
+  declare type _NavigationRouteConfigCore = {|
+    navigationOptions?: NavigationScreenConfig<*>,
+    params?: NavigationParams,
+    path?: string,
+  |};
   declare export type NavigationRouteConfig =
     | NavigationComponent
-    | ({
-        navigationOptions?: NavigationScreenConfig<*>,
-        path?: string,
-        ...
-      } & NavigationScreenRouteConfig);
-
-  declare export type NavigationScreenRouteConfig =
-    | { screen: NavigationComponent, ... }
-    | { getScreen: () => NavigationComponent, ... };
+    | {| ..._NavigationRouteConfigCore, screen: NavigationComponent |}
+    | {| ..._NavigationRouteConfigCore, getScreen: () => NavigationComponent |};
 
   declare export type NavigationRouteConfigMap = { [routeName: string]: NavigationRouteConfig, ... };
 
