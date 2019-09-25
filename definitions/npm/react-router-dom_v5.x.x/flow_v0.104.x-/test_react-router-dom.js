@@ -14,7 +14,11 @@ import type {
   ContextRouter,
   Match,
   StaticRouterContext,
-  RouterHistory
+  RouterHistory,
+  useHistory,
+  useLocation,
+  useParams,
+  useRouteMatch,
 } from "react-router-dom";
 import { it, describe } from "flow-typed-test";
 
@@ -393,5 +397,22 @@ describe("react-router-dom", () => {
       // $ExpectError - unexpected prop xxx
       <Route xxx="1" />;
     });
-  })
+  });
+
+  test("useHistory", () => {
+    const history: RouterHistory = useHistory();
+  });
+
+  test("useLocation", () => {
+    const location: Location = useLocation();
+  });
+
+  test("useParams", () => {
+    const params: { [key: string]: ?string, ... } = useParams();
+  });
+
+  test("useRouteMatch", () => {
+    const match: Match = useRouteMatch();
+    const matchPath: Match = useRouteMatch('/path');
+  });
 });

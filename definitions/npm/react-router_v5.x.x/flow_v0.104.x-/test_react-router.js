@@ -17,6 +17,10 @@ import type {
   Match,
   ContextRouter,
   RouterHistory,
+  useHistory,
+  useLocation,
+  useParams,
+  useRouteMatch,
 } from 'react-router';
 
 describe('Location', () => {
@@ -210,4 +214,21 @@ describe('Unrouted', () => {
   const Routed2: React$ComponentType<{| someProp2: string |}> = withRouter(
     Unrouted2,
   );
+});
+
+test("useHistory", () => {
+  const history: RouterHistory = useHistory();
+});
+
+test("useLocation", () => {
+  const location: Location = useLocation();
+});
+
+test("useParams", () => {
+  const params: { [key: string]: ?string, ... } = useParams();
+});
+
+test("useRouteMatch", () => {
+  const match: Match = useRouteMatch();
+  const matchPath: Match = useRouteMatch('/path');
 });
