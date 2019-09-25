@@ -381,6 +381,7 @@ declare module 'react-native-gesture-handler/GestureHandler' {
     shouldCancelWhenOutside?: boolean,
     minPointers?: number,
     hitSlop?: HitSlop,
+    children?: React$Node,
   |}>;
 
   /////////////////////////////////////////////////////////////////////////////

@@ -144,6 +144,14 @@ describe('common part', () => {
         />;
       });
     });
+
+    it('should be able to have children', () => {
+      AllGestureHandlers.forEach(GestureHandler => {
+        <GestureHandler>
+          Hello
+        </GestureHandler>;
+      });
+    });
   });
 });
 
