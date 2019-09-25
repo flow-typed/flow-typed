@@ -16,11 +16,11 @@ declare type $npm$ReduxDevtoolsExtension$DevToolsOptions = {
     set?: boolean;
     function?: boolean | Function;
   },
-  actionSanitizer?: <A: { type: $Subtype<string> }>(action: A, id: number) => A,
+  actionSanitizer?: <A: { type: string }>(action: A, id: number) => A,
   stateSanitizer?: <S>(state: S, index: number) => S,
   actionsBlacklist?: string | string[],
   actionsWhitelist?: string | string[],
-  predicate?: <S, A: { type: $Subtype<string> }>(state: S, action: A) => boolean,
+  predicate?: <S, A: { type: string }>(state: S, action: A) => boolean,
   shouldRecordChanges?: boolean,
   pauseActionType?: string,
   autoPause?: boolean,
