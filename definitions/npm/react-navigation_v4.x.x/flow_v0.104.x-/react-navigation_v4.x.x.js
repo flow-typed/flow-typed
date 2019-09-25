@@ -556,8 +556,9 @@ declare module 'react-navigation' {
     cardOverlayEnabled?: boolean,
   |}>;
 
+  declare type _InterpolationResult = { [key: string]: mixed, ... };
   declare export type NavigationStackInterpolator =
-    (props: NavigationStackInterpolatorProps) => {...};
+    (props: NavigationStackInterpolatorProps) => _InterpolationResult;
 
   /**
    * Header
