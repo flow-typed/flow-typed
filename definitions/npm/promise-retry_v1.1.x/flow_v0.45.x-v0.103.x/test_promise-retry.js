@@ -1,7 +1,7 @@
 // @flow
 import promiseRetry from 'promise-retry';
 
-function promiseFn (retry: (err: Error) => void, attemptNumber: Number): Promise<string> {
+function promiseFn (retry: (err: Error) => void, attemptNumber: number): Promise<string> {
    return Promise.resolve('foo');
 }
 
