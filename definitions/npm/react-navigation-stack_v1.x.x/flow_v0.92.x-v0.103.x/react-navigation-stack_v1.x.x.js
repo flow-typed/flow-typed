@@ -605,16 +605,35 @@ declare module 'react-navigation-stack' {
         reset: (actions: NavigationAction[], index: number) => boolean,
       };
 
+  declare type _HeaderBackButtonProps = {
+    disabled?: boolean,
+    onPress: () => void,
+    pressColorAndroid?: string,
+    tintColor?: ?string,
+    backImage?: React$ComponentType<{ tintColor: string, title?: ?string }>,
+    title?: ?string,
+    truncatedTitle?: ?string,
+    backTitleVisible?: boolean,
+    allowFontScaling?: boolean,
+    titleStyle?: ?TextStyleProp,
+    headerLayoutPreset: 'left' | 'center',
+    width?: ?number,
+    scene: NavigationStackScene,
+  };
+
   declare export type NavigationStackScreenOptions = NavigationScreenOptions & {
     header?: ?(React$Node | (HeaderProps => React$Node)),
     headerTransparent?: boolean,
-    headerTitle?: string | React$Node | React$ElementType,
+    headerTitle?: (props: { children: ?string }) => React$Node | React$Node,
     headerTitleStyle?: AnimatedTextStyleProp,
     headerTitleAllowFontScaling?: boolean,
     headerTintColor?: string,
-    headerLeft?: React$Node | React$ElementType,
+    headerLeft?: ((props: _HeaderBackButtonProps) => React$Node) | React$Node,
     headerBackTitle?: string,
-    headerBackImage?: React$Node | React$ElementType,
+    headerBackImage?: (props: {|
+      tintColor?: string,
+      title?: ?string,
+    |}) => React$Node,
     headerTruncatedBackTitle?: string,
     headerBackTitleStyle?: TextStyleProp,
     headerPressColorAndroid?: string,
@@ -779,21 +798,6 @@ declare module 'react-navigation-stack' {
     HEIGHT: number,
   };
 
-  declare type _HeaderBackButtonProps = {
-    disabled?: boolean,
-    onPress: () => void,
-    pressColorAndroid?: string,
-    tintColor: ?string,
-    backImage?: React$ComponentType<{ tintColor: string, title?: ?string }>,
-    title?: ?string,
-    truncatedTitle?: ?string,
-    backTitleVisible?: boolean,
-    allowFontScaling?: boolean,
-    titleStyle?: ?TextStyleProp,
-    headerLayoutPreset: 'left' | 'center',
-    width?: ?number,
-    scene: NavigationStackScene,
-  };
   declare export var HeaderBackButton: React$ComponentType<
     _HeaderBackButtonProps
   >;
