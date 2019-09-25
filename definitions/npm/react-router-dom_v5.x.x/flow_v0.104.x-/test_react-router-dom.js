@@ -8,17 +8,18 @@ import {
   matchPath,
   withRouter,
   Redirect,
-  Route
-} from "react-router-dom";
-import type {
-  ContextRouter,
-  Match,
-  StaticRouterContext,
-  RouterHistory,
+  Route,
   useHistory,
   useLocation,
   useParams,
   useRouteMatch,
+} from "react-router-dom";
+import type {
+  Location,
+  ContextRouter,
+  Match,
+  StaticRouterContext,
+  RouterHistory,
 } from "react-router-dom";
 import { it, describe } from "flow-typed-test";
 
@@ -399,20 +400,22 @@ describe("react-router-dom", () => {
     });
   });
 
-  test("useHistory", () => {
-    const history: RouterHistory = useHistory();
-  });
+  describe('react hook', () => {
+    it('useHistory', () => {
+      const history: RouterHistory = useHistory();
+    });
 
-  test("useLocation", () => {
-    const location: Location = useLocation();
-  });
+    it('useLocation', () => {
+      const location: Location = useLocation();
+    });
 
-  test("useParams", () => {
-    const params: { [key: string]: ?string, ... } = useParams();
-  });
+    it('useParams', () => {
+      const params: { [key: string]: ?string, ... } = useParams();
+    });
 
-  test("useRouteMatch", () => {
-    const match: Match = useRouteMatch();
-    const matchPath: Match = useRouteMatch('/path');
+    it('useRouteMatch', () => {
+      const match: Match = useRouteMatch();
+      const matchPath: Match = useRouteMatch('/path');
+    });
   });
 });

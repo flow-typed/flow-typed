@@ -11,16 +11,16 @@ import {
   Switch,
   withRouter,
   matchPath,
+  useHistory,
+  useLocation,
+  useParams,
+  useRouteMatch,
 } from 'react-router';
 import type {
   Location,
   Match,
   ContextRouter,
   RouterHistory,
-  useHistory,
-  useLocation,
-  useParams,
-  useRouteMatch,
 } from 'react-router';
 
 describe('Location', () => {
@@ -216,19 +216,21 @@ describe('Unrouted', () => {
   );
 });
 
-test("useHistory", () => {
-  const history: RouterHistory = useHistory();
-});
+describe('react hook', () => {
+  it('useHistory', () => {
+    const history: RouterHistory = useHistory();
+  });
 
-test("useLocation", () => {
-  const location: Location = useLocation();
-});
+  it('useLocation', () => {
+    const location: Location = useLocation();
+  });
 
-test("useParams", () => {
-  const params: { [key: string]: ?string, ... } = useParams();
-});
+  it('useParams', () => {
+    const params: { [key: string]: ?string, ... } = useParams();
+  });
 
-test("useRouteMatch", () => {
-  const match: Match = useRouteMatch();
-  const matchPath: Match = useRouteMatch('/path');
+  it('useRouteMatch', () => {
+    const match: Match = useRouteMatch();
+    const matchPath: Match = useRouteMatch('/path');
+  });
 });
