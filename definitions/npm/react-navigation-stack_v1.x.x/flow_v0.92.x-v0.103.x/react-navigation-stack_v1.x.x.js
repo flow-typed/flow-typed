@@ -212,9 +212,11 @@ declare module 'react-navigation-stack' {
    * Router
    */
 
+  declare export type NavigationScreenProps = { [key: string]: mixed };
+
   declare export type NavigationScreenOptionsGetter<Options: {}> = (
     navigation: NavigationScreenProp<NavigationRoute>,
-    screenProps: ?{},
+    screenProps: ?NavigationScreenProps,
     theme: SupportedThemes,
   ) => Options;
 
@@ -265,7 +267,7 @@ declare module 'react-navigation-stack' {
 
   declare export type NavigationScreenConfigProps = $Shape<{
     navigation: NavigationScreenProp<NavigationRoute>,
-    screenProps: {},
+    screenProps: NavigationScreenProps,
     theme: SupportedThemes,
   }>;
 
@@ -402,7 +404,7 @@ declare module 'react-navigation-stack' {
 
   declare export type NavigationNavigatorProps<O: {}, S: {}> = $Shape<{
     navigation: NavigationScreenProp<S>,
-    screenProps?: {},
+    screenProps?: NavigationScreenProps,
     navigationOptions?: O,
     theme?: SupportedThemes | 'no-preference',
     detached?: boolean,
@@ -430,7 +432,7 @@ declare module 'react-navigation-stack' {
     navigation?: NavigationScreenProp<S>,
     persistenceKey?: ?string,
     renderLoadingExperimental?: React$ComponentType<{}>,
-    screenProps?: *,
+    screenProps?: NavigationScreenProps,
     navigationOptions?: O,
   }>;
 
@@ -831,7 +833,7 @@ declare module 'react-navigation-stack' {
     onGestureBegin?: () => void,
     onGestureCanceled?: () => void,
     onGestureEnd?: () => void,
-    screenProps?: {},
+    screenProps?: NavigationScreenProps,
   };
   declare export var StackView: React$ComponentType<_StackViewProps>;
 
@@ -861,7 +863,7 @@ declare module 'react-navigation-stack' {
     onGestureBegin?: () => void,
     onGestureEnd?: () => void,
     onGestureCanceled?: () => void,
-    screenProps?: {},
+    screenProps?: NavigationScreenProps,
   };
   declare export var StackViewLayout: React$ComponentType<_StackViewLayoutProps>;
 
@@ -923,7 +925,7 @@ declare module 'react-navigation-stack' {
     ) => void,
     navigation: NavigationStackProp<NavigationState>,
     descriptors: { [key: string]: NavigationDescriptor },
-    screenProps?: {},
+    screenProps?: NavigationScreenProps,
   };
   declare export var Transitioner: React$ComponentType<_TransitionerProps>;
 

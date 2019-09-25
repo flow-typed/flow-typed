@@ -212,9 +212,11 @@ declare module 'react-navigation-tabs' {
    * Router
    */
 
+  declare export type NavigationScreenProps = { [key: string]: mixed };
+
   declare export type NavigationScreenOptionsGetter<Options: {}> = (
     navigation: NavigationScreenProp<NavigationRoute>,
-    screenProps: ?{},
+    screenProps: ?NavigationScreenProps,
     theme: SupportedThemes,
   ) => Options;
 
@@ -265,7 +267,7 @@ declare module 'react-navigation-tabs' {
 
   declare export type NavigationScreenConfigProps = $Shape<{
     navigation: NavigationScreenProp<NavigationRoute>,
-    screenProps: {},
+    screenProps: NavigationScreenProps,
     theme: SupportedThemes,
   }>;
 
@@ -402,7 +404,7 @@ declare module 'react-navigation-tabs' {
 
   declare export type NavigationNavigatorProps<O: {}, S: {}> = $Shape<{
     navigation: NavigationScreenProp<S>,
-    screenProps?: {},
+    screenProps?: NavigationScreenProps,
     navigationOptions?: O,
     theme?: SupportedThemes | 'no-preference',
     detached?: boolean,
@@ -430,7 +432,7 @@ declare module 'react-navigation-tabs' {
     navigation?: NavigationScreenProp<S>,
     persistenceKey?: ?string,
     renderLoadingExperimental?: React$ComponentType<{}>,
-    screenProps?: *,
+    screenProps?: NavigationScreenProps,
     navigationOptions?: O,
   }>;
 
@@ -733,7 +735,7 @@ declare module 'react-navigation-tabs' {
       | ?string,
     isLandscape: boolean,
     jumpTo: (key: string) => void,
-    screenProps: {},
+    screenProps: NavigationScreenProps,
   |};
   declare export var BottomTabBar: React$ComponentType<_BottomTabBarProps>;
 
@@ -751,7 +753,7 @@ declare module 'react-navigation-tabs' {
     onTabPress?: (scene: { route: NavigationRoute }) => void,
     onTabLongPress?: (scene: { route: NavigationRoute }) => void,
     tabBarPosition?: 'top' | 'bottom',
-    screenProps: {},
+    screenProps: NavigationScreenProps,
     navigation: NavigationTabProp<NavigationState>,
   |};
   declare export var MaterialTopTabBar: React$ComponentType<
@@ -767,7 +769,7 @@ declare module 'react-navigation-tabs' {
     onTabLongPress: (props: { route: NavigationRoute }) => void,
     navigation: NavigationTabProp<NavigationState>,
     descriptors: { [key: string]: NavigationDescriptor },
-    screenProps?: {},
+    screenProps?: NavigationScreenProps,
   };
   declare export function createTabNavigator<
     CustomProps: {},

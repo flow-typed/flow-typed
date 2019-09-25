@@ -212,9 +212,11 @@ declare module 'react-navigation-drawer' {
    * Router
    */
 
+  declare export type NavigationScreenProps = { [key: string]: mixed };
+
   declare export type NavigationScreenOptionsGetter<Options: {}> = (
     navigation: NavigationScreenProp<NavigationRoute>,
-    screenProps: ?{},
+    screenProps: ?NavigationScreenProps,
     theme: SupportedThemes,
   ) => Options;
 
@@ -265,7 +267,7 @@ declare module 'react-navigation-drawer' {
 
   declare export type NavigationScreenConfigProps = $Shape<{
     navigation: NavigationScreenProp<NavigationRoute>,
-    screenProps: {},
+    screenProps: NavigationScreenProps,
     theme: SupportedThemes,
   }>;
 
@@ -402,7 +404,7 @@ declare module 'react-navigation-drawer' {
 
   declare export type NavigationNavigatorProps<O: {}, S: {}> = $Shape<{
     navigation: NavigationScreenProp<S>,
-    screenProps?: {},
+    screenProps?: NavigationScreenProps,
     navigationOptions?: O,
     theme?: SupportedThemes | 'no-preference',
     detached?: boolean,
@@ -430,7 +432,7 @@ declare module 'react-navigation-drawer' {
     navigation?: NavigationScreenProp<S>,
     persistenceKey?: ?string,
     renderLoadingExperimental?: React$ComponentType<{}>,
-    screenProps?: *,
+    screenProps?: NavigationScreenProps,
     navigationOptions?: O,
   }>;
 
@@ -529,7 +531,7 @@ declare module 'react-navigation-drawer' {
     +navigation: NavigationDrawerProp<_NavigationDrawerState>,
     descriptors: { [key: string]: NavigationDescriptor },
     drawerOpenProgress: AnimatedNode<number>,
-    screenProps: {},
+    screenProps: NavigationScreenProps,
   |};
 
   declare export type NavigationDrawerRouterConfig = {|
@@ -589,7 +591,7 @@ declare module 'react-navigation-drawer' {
     navigation: NavigationDrawerProp<_NavigationDrawerState>,
     descriptors: { [key: string]: NavigationDescriptor },
     navigationConfig: _DrawerViewConfig,
-    screenProps?: {...},
+    screenProps?: NavigationScreenProps,
   |};
 
   /**
@@ -647,7 +649,7 @@ declare module 'react-navigation-drawer' {
     navigation: NavigationDrawerProp<_NavigationDrawerState>,
     descriptors: { [key: string]: NavigationDescriptor },
     drawerOpenProgress: AnimatedNode<number>,
-    screenProps?: {},
+    screenProps?: NavigationScreenProps,
     items: NavigationRoute[],
     activeItemKey?: ?string,
     activeTintColor?: _ThemedColor,
@@ -670,7 +672,7 @@ declare module 'react-navigation-drawer' {
   declare type _DrawerSidebarProps = {
     contentComponent?: React$ComponentType<_DrawerContentComponentProps>,
     contentOptions?: {},
-    screenProps?: {},
+    screenProps?: NavigationScreenProps,
     navigation: NavigationDrawerProp<_NavigationDrawerState>,
     descriptors: { [key: string]: NavigationDescriptor },
     drawerOpenProgress: AnimatedNode<number>,

@@ -212,9 +212,11 @@ declare module 'react-navigation' {
    * Router
    */
 
+  declare export type NavigationScreenProps = { [key: string]: mixed };
+
   declare export type NavigationScreenOptionsGetter<Options: {}> = (
     navigation: NavigationScreenProp<NavigationRoute>,
-    screenProps: ?{},
+    screenProps: ?NavigationScreenProps,
     theme: SupportedThemes,
   ) => Options;
 
@@ -265,7 +267,7 @@ declare module 'react-navigation' {
 
   declare export type NavigationScreenConfigProps = $Shape<{
     navigation: NavigationScreenProp<NavigationRoute>,
-    screenProps: {},
+    screenProps: NavigationScreenProps,
     theme: SupportedThemes,
   }>;
 
@@ -402,7 +404,7 @@ declare module 'react-navigation' {
 
   declare export type NavigationNavigatorProps<O: {}, S: {}> = $Shape<{
     navigation: NavigationScreenProp<S>,
-    screenProps?: {},
+    screenProps?: NavigationScreenProps,
     navigationOptions?: O,
     theme?: SupportedThemes | 'no-preference',
     detached?: boolean,
@@ -430,7 +432,7 @@ declare module 'react-navigation' {
     navigation?: NavigationScreenProp<S>,
     persistenceKey?: ?string,
     renderLoadingExperimental?: React$ComponentType<{}>,
-    screenProps?: *,
+    screenProps?: NavigationScreenProps,
     navigationOptions?: O,
   }>;
 
@@ -874,16 +876,16 @@ declare module 'react-navigation' {
     Options: {}
   >(
     navigation: NavigationScreenProp<State>,
-    screenProps?: {},
+    screenProps?: NavigationScreenProps,
     theme?: SupportedThemes,
   ): Options;
 
   declare type _SceneViewProps = {
     component: React$ComponentType<{
-      screenProps: ?{},
+      screenProps: ?NavigationScreenProps,
       navigation: NavigationScreenProp<NavigationRoute>,
     }>,
-    screenProps: ?{},
+    screenProps: ?NavigationScreenProps,
     navigation: NavigationScreenProp<NavigationRoute>,
   };
   declare export var SceneView: React$ComponentType<_SceneViewProps>;
