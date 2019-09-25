@@ -756,13 +756,13 @@ declare module 'react-navigation' {
     getCurrentNavigation: () => ?NavigationScreenProp<State>
   ): NavigationScreenProp<State>;
 
-  declare type _NavigationView<O, S> = React$ComponentType<{
+  declare type _NavigationView<O, S, N: NavigationScreenProp<S>> = React$ComponentType<{
     descriptors: { [key: string]: NavigationDescriptor },
-    navigation: NavigationScreenProp<S>,
+    navigation: N,
     navigationConfig: *,
   }>;
-  declare export function createNavigator<O: *, S: *, NavigatorConfig: *>(
-    view: _NavigationView<O, S>,
+  declare export function createNavigator<O: *, S: *, NavigatorConfig: *, N: NavigationScreenProp<S>>(
+    view: _NavigationView<O, S, N>,
     router: NavigationRouter<S, O>,
     navigatorConfig?: NavigatorConfig
   ): NavigationNavigator<S, O, *>;
