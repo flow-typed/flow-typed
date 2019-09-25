@@ -21,7 +21,7 @@ Each of these libdefs is organized into several sections:
     - Section 2A: types copy-pasted from other places
     - Section 2B: exported types
 3. Section 3: exported types, NOT shared with other React Navigation libdefs
-3. Section 4: types the exported module
+4. Section 4: types the exported module
 
 ## Contributing Guidelines
 
