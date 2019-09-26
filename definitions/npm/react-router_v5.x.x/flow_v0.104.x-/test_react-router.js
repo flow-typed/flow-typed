@@ -11,10 +11,6 @@ import {
   Switch,
   withRouter,
   matchPath,
-  useHistory,
-  useLocation,
-  useParams,
-  useRouteMatch,
 } from 'react-router';
 import type {
   Location,
@@ -214,23 +210,4 @@ describe('Unrouted', () => {
   const Routed2: React$ComponentType<{| someProp2: string |}> = withRouter(
     Unrouted2,
   );
-});
-
-describe('react hook', () => {
-  it('useHistory', () => {
-    const history: RouterHistory = useHistory();
-  });
-
-  it('useLocation', () => {
-    const location: Location = useLocation();
-  });
-
-  it('useParams', () => {
-    const params: { [key: string]: ?string, ... } = useParams();
-  });
-
-  it('useRouteMatch', () => {
-    const match: Match = useRouteMatch();
-    const matchPath: Match = useRouteMatch('/path');
-  });
 });
