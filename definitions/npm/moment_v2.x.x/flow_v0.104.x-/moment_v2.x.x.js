@@ -282,6 +282,8 @@ declare class moment$Moment {
   startOf(unit: string): this;
   endOf(unit: string): this;
   local(): this;
+  tz(timezone: string, keepLocalTime?: boolean): moment$Moment,
+  tz(): string,
   utc(): this;
   utcOffset(
     offset: number | string,

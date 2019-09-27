@@ -344,6 +344,8 @@ declare class moment$Moment {
   static locale(locales: Array<string>): string;
   locale(locale: string, customization?: {} | null): moment$Moment;
   locale(): string;
+  tz(timezone: string, keepLocalTime?: boolean): moment$Moment,
+  tz(): string,
   static months(): Array<string>;
   static monthsShort(): Array<string>;
   static now(): number;
