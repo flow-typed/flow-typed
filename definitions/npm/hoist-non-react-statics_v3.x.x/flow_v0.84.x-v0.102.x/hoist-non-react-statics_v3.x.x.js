@@ -80,5 +80,5 @@ declare module 'hoist-non-react-statics' {
     customStatics?: C
   ): React$ComponentType<TP> & $HoistedStatics<S, C> & T;
 
-  declare module.exports: typeof hoistNonReactStatics;
+  declare export default typeof hoistNonReactStatics;
 }
