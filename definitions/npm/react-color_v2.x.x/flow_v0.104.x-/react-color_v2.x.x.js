@@ -164,9 +164,12 @@ declare module "react-color" {
   declare export var SwatchesPicker: Class<Component<SwatchesPickerProps>>;
   declare export var TwitterPicker: Class<Component<TwitterPickerProps>>;
 
-  declare export function CustomPicker<Props: {...}>(
-    Component: ComponentType<InjectedColorProps & $Supertype<Props>>
-  ): ComponentType<Props>;
+  declare export function CustomPicker<
+    Props: InjectedColorProps,
+    Comp: ComponentType<Props>,
+  >(
+    Component: Comp
+  ): ComponentType<$Diff<React$ElementConfig<Comp>, InjectedColorProps>>;
 }
 
 declare module "react-color/lib/components/common" {
