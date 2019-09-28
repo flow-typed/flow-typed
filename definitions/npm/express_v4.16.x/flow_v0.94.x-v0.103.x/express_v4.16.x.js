@@ -114,13 +114,13 @@ declare class express$Response extends http$ServerResponse mixins express$Reques
 declare type express$NextFunction = (err?: ?Error | "route") => mixed;
 declare type express$Middleware =
   | ((
-      req: $Subtype<express$Request>,
+      req: express$Request,
       res: express$Response,
       next: express$NextFunction
     ) => mixed)
   | ((
       error: Error,
-      req: $Subtype<express$Request>,
+      req: express$Request,
       res: express$Response,
       next: express$NextFunction
     ) => mixed);
@@ -183,7 +183,7 @@ declare class express$Router extends express$Route {
   param(
     param: string,
     callback: (
-      req: $Subtype<express$Request>,
+      req: express$Request,
       res: express$Response,
       next: express$NextFunction,
       id: string

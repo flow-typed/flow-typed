@@ -160,7 +160,7 @@ declare module 'cookie-parser' {
     param(
       param: string,
       callback: (
-        req: $Subtype<express$Request>,
+        req: express$Request,
         res: express$Response,
         next: express$NextFunction,
         id: string
@@ -255,13 +255,13 @@ declare module 'cookie-parser' {
   declare type express$NextFunction = (err?: ?Error | 'route') => mixed;
   declare type express$Middleware =
     | ((
-        req: $Subtype<express$Request>,
+        req: express$Request,
         res: express$Response,
         next: express$NextFunction
       ) => mixed)
     | ((
         error: Error,
-        req: $Subtype<express$Request>,
+        req: express$Request,
         res: express$Response,
         next: express$NextFunction
       ) => mixed);
