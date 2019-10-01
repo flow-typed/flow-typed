@@ -543,7 +543,7 @@ declare module "luxon" {
     |}): string;
     toString(): string;
     toUTC(offset?: number, options?: SetZoneOptions): DateTime;
-    until(other: DateTime): Duration;
+    until(other: DateTime): Interval;
     valueOf(): number;
   }
 }

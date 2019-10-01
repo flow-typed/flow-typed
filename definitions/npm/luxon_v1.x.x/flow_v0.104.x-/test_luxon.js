@@ -617,7 +617,7 @@ date.toObject({ includeConfig: false }).numberingSystem;
 (date.toUTC(32, { keepCalendarTime: true }): DateTime); // Support deprecated name for keepLocalTime
 (date.toUTC(32, { keepLocalTime: true }): DateTime);
 
-(date.until(DateTime.utc()): Duration);
+(date.until(DateTime.utc()): Interval);
 
 (date.valueOf(): number);
 
