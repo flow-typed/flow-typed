@@ -183,11 +183,11 @@ declare class express$Router<
     res: http$ServerResponse,
     next: express$NextFunction
   ): void;
-  param<Req: express$Request>(
+  param(
     param: string,
     callback: (
       req: Req,
-      res: express$Response,
+      res: Res,
       next: express$NextFunction,
       value: string,
       paramName: string,
