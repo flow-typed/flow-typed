@@ -2,7 +2,7 @@
  * @flow
  */
 
-import { Channel, Socket, Presence } from 'phoenix';
+import { Channel, Socket, Presence, LongPoll } from 'phoenix';
 import { describe, it } from 'flow-typed-test';
 
 
@@ -54,5 +54,27 @@ describe('#phoenix', () => {
     // $ExpectError `Channel` instances must take a `Socket` as the final param
     const channel = new Channel('foo', {});
   })
+
+  it('sets up transport option correctly', () => {
+    const socket1 = new Socket('/socket', {
+      params: { userToken: '123' },
+      transport: LongPoll
+    });
+    socket1.connect();
+    const socket2 = new Socket('/socket', {
+      params: { userToken: '123' },
+      transport: WebSocket
+    });
+    socket2.connect();
+  })
+
+  it('errors on malformed transport option', () => {
+    // $ExpectError
+    const socket = new Socket('/socket', {
+      params: { userToken: '123' },
+      transport: {}
+    });
+  })
+
 });
 
