@@ -24,7 +24,7 @@ declare module 'phoenix' {
   declare export interface SocketConnectOption {
     binaryType: BinaryType,
     params: { [key: string]: any, ... } | (() => { [key: string]: any, ... }),
-    transport: string,
+    transport: typeof LongPoll | typeof WebSocket,
     timeout: number,
     heartbeatIntervalMs: number,
     longpollerTimeout: number,
