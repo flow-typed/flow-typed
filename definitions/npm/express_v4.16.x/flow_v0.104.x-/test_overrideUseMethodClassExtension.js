@@ -10,40 +10,26 @@ declare class test_express$CustomResponse extends express$Response {
   bar: string;
 }
 
-declare type test_express$CustomPath = string | RegExp;
+declare type expressConstructor =
+  <Req: express$Request, Res: express$Response>() => express$Application<Req, Res>;
 
-declare type test_express$CustomNextFunction = express$NextFunction;
-
-declare type test_express$CustomMiddleware =
-  | ((
-      req: test_express$CustomRequest,
-      res: test_express$CustomResponse,
-      next: test_express$CustomNextFunction
-    ) => mixed)
-  | ((
-      error: Error,
-      req: test_express$CustomRequest,
-      res: test_express$CustomResponse,
-      next: test_express$CustomNextFunction
-    ) => mixed);
-
-declare class test_express$CustomApplication extends express$Application {
-  constructor(expressConstructor: () => express$Application): this;
-  use(middleware: test_express$CustomMiddleware): this;
-  use(...middleware: Array<test_express$CustomMiddleware>): this;
-  use(
-    path: test_express$CustomPath | test_express$CustomPath[],
-    ...middleware: Array<test_express$CustomMiddleware>
-  ): this;
-  use(path: string, router: express$Router): this;
+declare class test_express$CustomApplication extends express$Application<
+  test_express$CustomRequest,
+  test_express$CustomResponse,
+> {
+  constructor(expressConstructor: expressConstructor): this;
 }
 
 // Class Extensions: Test Functions
 function test_express$CustomApplication(
-  expressConstructor: () => express$Application
+  expressConstructor: expressConstructor,
 ) {
   const express = expressConstructor();
-  express.use((req: any, res: any, next: express$NextFunction) => {
+  express.use((
+    req: test_express$CustomRequest,
+    res: test_express$CustomResponse,
+    next: express$NextFunction,
+  ) => {
     // Private Constructor Mutation: Add new properties
     req.foo = "hello";
     res.bar = "goodbye";
@@ -73,7 +59,7 @@ customApp.use(
   (
     req: test_express$CustomRequest,
     res: test_express$CustomResponse,
-    next: test_express$CustomNextFunction
+    next: express$NextFunction
   ) => {
     req.foo;
     res.bar;
