@@ -1,7 +1,7 @@
 // @flow
 
 declare module '@reach/visually-hidden' {
-  declare module.exports: React$StatelessFunctionalComponent<{
+  declare export default React$StatelessFunctionalComponent<{
     children: React$Node
   }>;
 }

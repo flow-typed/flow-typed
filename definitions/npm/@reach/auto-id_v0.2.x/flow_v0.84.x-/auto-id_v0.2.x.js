@@ -1,7 +1,5 @@
 // @flow
 
 declare module '@reach/auto-id' {
-  declare module.exports: {
-    useId(): number
-  }
+  declare export function useId(): number;
 }
