@@ -65,7 +65,7 @@ myRouter.use(
   }
 );
 
-app.on('mount', (parent: express$Application<express$Request, express$Response>) => {
+app.on('mount', (parent: express$Application<>) => {
   console.log("Parent Loaded", parent);
   // $ExpectError
   parent.fail();
@@ -77,7 +77,7 @@ app.use("/foo", (req: express$Request, res: express$Response, next) => {
   res.send("should work").status(300);
 });
 
-const bar: express$Router<express$Request, express$Response> = new Router();
+const bar: express$Router<> = new Router();
 
 bar.get("/", (req: express$Request, res: express$Response): void => {
   // $ExpectError should be of type object
@@ -117,7 +117,7 @@ app.enable(100);
 // $ExpectError
 const f: number = app.enabled("100");
 
-const g: express$Application<express$Request, express$Response> = app.enable('foo');
+const g: express$Application<> = app.enable('foo');
 
 app.render(
   "view",
