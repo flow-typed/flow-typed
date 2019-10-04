@@ -13,6 +13,33 @@ declare type express$RequestParams = {
   [param: string]: string
 }
 
+/*
+  NOTE: Use caution when extending `express$Request` or `express$Response`. When
+  a request first hits the server, its `req` and `res` will not have any
+  additional properties, even if you explicitly type them with your custom
+  subclass. Subsequent middleware may assign these properties, but you must be
+  cognizant of this ordering. One way to handle this is marking all properties
+  as optional to force refinement every time a property is accessed. Therefore,
+  we advise that you always mark properties as _optional_ in `express$Request`
+  and `express$Response` subclasses.
+
+  You may decide not to do this, in which case the typings will be unsound and
+  the behavior will be similar to how arrays work in Flow. See here for more
+  information: https://flow.org/en/docs/types/arrays/#toc-array-access-is-unsafe
+
+  See #3578 and #3337 for additional discussion. If you have ideas on how to
+  improve these typings, please share them in #3578 or open a new issue.
+
+  **BAD**
+  declare class test_express$CustomRequest extends express$Request {
+    foo: string;
+  }
+
+  **GOOD**
+  declare class test_express$CustomRequest extends express$Request {
+    foo: string | void;
+  }
+*/
 declare class express$Request extends http$IncomingMessage mixins express$RequestResponseBase {
   baseUrl: string;
   body: mixed;
