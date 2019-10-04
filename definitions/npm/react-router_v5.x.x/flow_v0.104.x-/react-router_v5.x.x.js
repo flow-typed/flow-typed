@@ -149,5 +149,6 @@ declare module "react-router" {
     withRouter: typeof withRouter,
     matchPath: typeof matchPath,
     generatePath: typeof generatePath,
+    ...
   };
 }
