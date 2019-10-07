@@ -79,7 +79,7 @@ declare module '@apollo/react-common' {
   declare export type IDocumentDefinition = {
     type: DocumentType,
     name: string,
-    variables: ReadonlyArray<VariableDefinitionNode>,
+    variables: $ReadonlyArray<VariableDefinitionNode>,
     ...
   }
 
@@ -87,10 +87,6 @@ declare module '@apollo/react-common' {
 
   declare export function parser(document: DocumentNode): IDocumentDefinition;
   /* end parser */
-
-  /* start apollo-client */
-
-  /* end apollo-client */
 
   /* start operation types */
   declare export type OperationVariables = Record<string, any>;
