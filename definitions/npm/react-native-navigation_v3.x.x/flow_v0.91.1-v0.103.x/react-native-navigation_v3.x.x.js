@@ -496,7 +496,8 @@ declare module 'react-native-navigation' {
   declare export var Navigation: {
     registerComponent(
       screenID: string | number,
-      getComponentClassFunc: GetComponentClassFunc
+      getComponentClassFunc: GetComponentClassFunc,
+      concreteGetComponentClassFunc?: GetComponentClassFunc,
     ): void,
 
     // Deprecated
