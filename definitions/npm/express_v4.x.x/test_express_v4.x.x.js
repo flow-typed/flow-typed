@@ -49,7 +49,7 @@ myRouter.use(handleRequest, (err: Error, req: express$Request, res: express$Resp
     next(err);
 });
 
-app.on('mount', (parent: express$Application) => {
+app.on('mount', (parent: express$Application<>) => {
     console.log('Parent Loaded', parent);
     // $ExpectError
     parent.fail();
@@ -62,7 +62,7 @@ app.use('/foo', (req: express$Request, res: express$Response, next) => {
         .status(300);
 });
 
-const bar: express$Router = new Router();
+const bar: express$Router<> = new Router();
 
 bar.get('/', (req: express$Request, res: express$Response): void => {
   // $ExpectError should be of type object
@@ -103,7 +103,7 @@ app.enable(100);
 // $ExpectError
 const f: number = app.enabled('100');
 
-const g: express$Application = app.enable('foo');
+const g: express$Application<> = app.enable('foo');
 
 app.render('view', { title: 'News Feed' }, (err: ?Error, html: ?string): void => {
     if (err) return console.log(err);

@@ -27,18 +27,6 @@ app.use(
 );
 app.post("/post-router-callable", router);
 
-// Can set a custom param on request
-app.param('test', (
-  req: express$Request & { testValue: string, ... },
-  res: express$Response,
-  next: express$NextFunction,
-  id: string,
-  paramName: string,
-) => {
-  req.testValue = id;
-  next();
-});
-
 // Can use an express app directly as a server listener
 const httpServer = http.createServer(app);
 httpServer.listen(9000);
