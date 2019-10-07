@@ -162,9 +162,20 @@ describe('propSatisfies', () => {
     it('should works with object', () => {
       const propSat: boolean = _.propSatisfies(x => x > 0, 'x', { x: 1, y: 2 });
     });
+    it('should works with object with properties of different types', () => {
+      const propSat: boolean = _.propSatisfies(x => x > 0, 'x', { x: 1, y: 2, str: 'different type' });
+      // same again but this time using a curried function
+      const propSatCurry: boolean = _.propSatisfies((x: number) => x > 0, 'x')({ x: 1, y: 2, str: 'different type' });
+    });
     it('should error when property does not exist', () => {
       //$ExpectError
       const propSat3: boolean = _.propSatisfies((x: number) => x > 0, 'z', { x: 1, y: 2 });
+    });
+    it('should error when condition param does not match property type', () => {
+      //$ExpectError
+      const propSat: boolean = _.propSatisfies(x => x > 0, 'str', { x: 1, y: 2, str: 'different type' });
+      //$ExpectError
+      const propSatCurry: boolean = _.propSatisfies((x: number) => x > 0, 'str')({ x: 1, y: 2, str: 'different type' });
     });
   });
   describe('with object as maps', () => {
