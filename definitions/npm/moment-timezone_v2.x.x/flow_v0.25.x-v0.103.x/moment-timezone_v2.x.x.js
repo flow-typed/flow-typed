@@ -4,10 +4,10 @@
  * Flowgen v1.10.0
  */
 
-import * as moment from "moment";
+import * as moment from "moment-timezone";
 declare module.exports: typeof moment;
 
-declare module "moment" {
+declare module "moment-timezone" {
   declare interface MomentZone {
     name: string;
     abbrs: string[];
