@@ -5,8 +5,6 @@
  */
 
 import * as moment from "moment-timezone";
-declare module.exports: typeof moment;
-
 declare module "moment-timezone" {
   declare interface MomentZone {
     name: string;
@@ -74,4 +72,5 @@ declare module "moment-timezone" {
     zoneName(): string;
   }
   declare var tz: MomentTimezone;
+  declare module.exports: typeof moment;
 }
