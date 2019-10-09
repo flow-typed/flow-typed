@@ -482,7 +482,7 @@ declare module 'react-native-navigation' {
 
   /* --- Events end  --- */
 
-  declare export type GetComponentClassFunc = () => React$ComponentType<{
+  declare export type ComponentProvider = () => React$ComponentType<{
     componentId: string,
   }>;
 
@@ -496,13 +496,14 @@ declare module 'react-native-navigation' {
   declare export var Navigation: {
     registerComponent(
       screenID: string | number,
-      getComponentClassFunc: GetComponentClassFunc
+      componentProvider: ComponentProvider,
+      concreteComponentProvider?: ComponentProvider,
     ): void,
 
     // Deprecated
     registerComponentWithRedux(
       screenID: string | number,
-      getComponentClassFunc: GetComponentClassFunc,
+      getComponentClassFunc: ComponentProvider,
       Provider: any,
       store: any
     ): void,

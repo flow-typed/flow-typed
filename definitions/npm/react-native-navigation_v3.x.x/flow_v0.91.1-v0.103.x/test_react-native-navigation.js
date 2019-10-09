@@ -143,24 +143,33 @@ describe('Navigation.registerComponent', () => {
   class CompWithProps extends React$Component<{ componentId: string }> {}
   class CompWithWrongProps extends React$Component<{ componentId: boolean }> {}
 
-  it('should passed when call with id as string', () => {
+  it('should pass when call with id as string', () => {
     Navigation.registerComponent('home', () => Comp);
   });
-  it('should passed when call with id as number', () => {
+  it('should pass when call with id as number', () => {
     Navigation.registerComponent(1, () => Comp);
   });
-  it('should passed when prop componentId is string', () => {
+  it('should pass when prop componentId is string', () => {
     Navigation.registerComponent(1, () => CompWithProps);
   });
+  it('should pass when componentProvider is given', () => {
+    Navigation.registerComponent(1, () => CompWithProps, () => Comp);
+  });
 
-  it("should raises an error when prop `componentId` ins't string", () => {
+  it("should raise an error when prop `componentId` isn't string", () => {
     // $ExpectError - `componentId: boolean` but need `string`
     Navigation.registerComponent('1', () => CompWithWrongProps);
   });
-  it('should raises an error when invalid screenID type', () => {
+  it('should raise an error when invalid screenID type', () => {
     const screenId = null;
     // $ExpectError - `screenId: void` but need string or number
     Navigation.registerComponent(screenId, () => Comp);
+  });
+  it('should raise an error when invalid componentProvider is given', () => {
+    // $ExpectError - `componentProvider: () => string` but need () => React$Component
+    Navigation.registerComponent(1, () => CompWithProps, () => 'string');
+    // $ExpectError - `componentProvider: string` but need () => React$Component
+    Navigation.registerComponent(1, () => CompWithProps, 'string');
   });
 });
 
