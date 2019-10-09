@@ -397,6 +397,7 @@ declare module "antd" {
       top?: number,
       ...
     }): void;
+    static destroy: () => void;
     static success: messageFn<mixed>;
     static error: messageFn<mixed>;
     static info: messageFn<mixed>;

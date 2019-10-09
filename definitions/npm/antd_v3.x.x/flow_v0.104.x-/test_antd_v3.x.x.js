@@ -429,6 +429,9 @@ describe("message", () => {
       top: 42
     });
   });
+  it("have a destroy function", () => {
+    message.destroy();
+  });
   it("have a success function", () => {
     message.success("hello", 2000, () => "closed");
   });
