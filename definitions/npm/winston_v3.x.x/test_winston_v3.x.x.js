@@ -41,22 +41,26 @@ let logger: Logger<Levels> = winston.createLogger({
     })
   ]
 });
-logger.info("info message");
-logger.error("error message");
-logger.log({
-  level: "debug",
-  message: "debug message"
-});
+logger
+  .info("info message")
+  .error("error message");
+  .log({
+    level: "debug",
+    message: "debug message"
+  });
 
-logger.clear();
+logger
+  .clear()
+  .close();
 
 const consoleTransport: ConsoleTransport<Levels> = new winston.transports.Console();
 
 consoleTransport.level = 'debug';
 consoleTransport.silent = true;
 
-logger.add(consoleTransport);
-logger.remove(consoleTransport);
+logger
+  .add(consoleTransport)
+  .remove(consoleTransport);
 
 logger.configure({
   level: "error"
@@ -74,9 +78,10 @@ logger = winston.createLogger({
   },
   transports: [new winston.transports.Console()]
 });
-logger.foo("foo message");
-logger.bar("bar message");
-logger.info("info message");
+logger
+  .foo("foo message")
+  .bar("bar message")
+  .info("info message");
 
 logger = winston.loggers.add("categoryOneId", {
   format: winston.format.json(),
@@ -86,6 +91,9 @@ logger = winston.loggers.add("categoryOneId", {
 const hasCategoryOneId: boolean = winston.loggers.has("categoryOneId");
 
 logger.debug("categoryOneId debug message");
+
+winston.loggers.close("categoryOneId");
+winston.loggers.close();
 
 const container: Container<Levels> = new winston.Container({
   format: winston.format.json(),
@@ -102,5 +110,8 @@ const hasCategoryThreeId: boolean = container.has("categoryThreeId");
 logger = container.get("categoryTwoId");
 
 logger.error("categoryTwoId error message");
+
+container.close("categoryThreeId");
+container.close();
 
 (format: FormatSubModule);

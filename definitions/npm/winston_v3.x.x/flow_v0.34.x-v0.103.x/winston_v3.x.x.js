@@ -52,12 +52,13 @@ declare type $winstonLoggerConfig<T: $winstonLevels> = {
 };
 
 declare type $winstonLogger<T: $winstonLevels> = {
-  [$Keys<T>]: (message: string, meta?: Object) => void,
-  add: $winstonTransport => void,
-  clear: () => void,
+  [$Keys<T>]: (message: string, meta?: Object) => $winstonLogger<T>,
+  add: $winstonTransport => $winstonLogger<T>,
+  remove: $winstonTransport => $winstonLogger<T>,
+  clear: () => $winstonLogger<T>,
+  close: () => $winstonLogger<T>,
   configure: ($winstonLoggerConfig<T>) => void,
-  log: (message: $winstonInfo<T>) => void,
-  remove: $winstonTransport => void
+  log: (message: $winstonInfo<T>) => $winstonLogger<T>
 };
 
 declare type $winstonConfigSubModule = {
@@ -92,6 +93,7 @@ declare class $winstonContainer<T> {
   add(loggerId: string, config?: $winstonLoggerConfig<T>): $winstonLogger<T>;
   get(loggerId: string): $winstonLogger<T>;
   has(loggerId: string): boolean;
+  close(loggerId?: string): void;
 }
 
 declare module "winston" {
