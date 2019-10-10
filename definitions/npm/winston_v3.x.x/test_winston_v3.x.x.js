@@ -43,7 +43,7 @@ let logger: Logger<Levels> = winston.createLogger({
 });
 logger
   .info("info message")
-  .error("error message");
+  .error("error message")
   .log({
     level: "debug",
     message: "debug message"
