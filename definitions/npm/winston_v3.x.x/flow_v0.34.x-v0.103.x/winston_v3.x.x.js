@@ -79,7 +79,7 @@ declare type $winstonFormatSubModule = {
   prettyPrint: () => $winstonFormat,
   simple: () => $winstonFormat,
   splat: () => $winstonFormat,
-  timestamp: (?{ alias?: string, format?: string }) => $winstonFormat,
+  timestamp: (?{ alias?: string, format?: string | () => string }) => $winstonFormat,
   colorize: () => $winstonFormat,
   logstash: () => $winstonFormat,
   printf: ((args: $winstonInfo<Object>) => string) => $winstonFormat

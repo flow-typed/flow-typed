@@ -22,6 +22,7 @@ const customPrintf: Format = winston.format.printf(info => {
 
 let logger: Logger<Levels> = winston.createLogger({
   format: winston.format.combine(
+    winston.format.timestamp(),
     customFormat(),
     winston.format.json(),
     winston.format.label({label: 'label'}),
@@ -35,7 +36,7 @@ let logger: Logger<Levels> = winston.createLogger({
     new winston.transports.File({ filename: "error.log", level: "error" }),
     new winston.transports.Console({
       format: winston.format.combine(
-        winston.format.timestamp(),
+        winston.format.timestamp({ format: 'This is timestamp string' }),
         winston.format.simple()
       )
     })
@@ -50,7 +51,12 @@ logger.log({
 
 logger.clear();
 
-const consoleTransport: ConsoleTransport<Levels> = new winston.transports.Console();
+const consoleTransport: ConsoleTransport<Levels> = new winston.transports.Console({
+  format: winston.format.combine(
+    winston.format.timestamp({ format: () => 'This is timestamp function' }),
+    winston.format.simple()
+  )
+});
 
 consoleTransport.level = 'debug';
 consoleTransport.silent = true;
