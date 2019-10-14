@@ -52,12 +52,13 @@ declare type $winstonLoggerConfig<T: $winstonLevels> = {
 };
 
 declare type $winstonLogger<T: $winstonLevels> = {
-  [$Keys<T>]: (message: string, meta?: Object) => void,
-  add: $winstonTransport => void,
-  clear: () => void,
+  [$Keys<T>]: (message: string, meta?: Object) => $winstonLogger<T>,
+  add: $winstonTransport => $winstonLogger<T>,
+  remove: $winstonTransport => $winstonLogger<T>,
+  clear: () => $winstonLogger<T>,
+  close: () => $winstonLogger<T>,
   configure: ($winstonLoggerConfig<T>) => void,
-  log: (message: $winstonInfo<T>) => void,
-  remove: $winstonTransport => void,
+  log: (message: $winstonInfo<T>) => $winstonLogger<T>,
   ...
 };
 
@@ -97,6 +98,7 @@ declare class $winstonContainer<T> {
   add(loggerId: string, config?: $winstonLoggerConfig<T>): $winstonLogger<T>;
   get(loggerId: string): $winstonLogger<T>;
   has(loggerId: string): boolean;
+  close(loggerId?: string): void;
 }
 
 declare module "winston" {
@@ -105,7 +107,7 @@ declare module "winston" {
   declare export type Info<T: Levels > = $winstonInfo<T>;
   declare export type Format = $winstonFormat;
   declare export type FileTransportConfig<T: Levels> = $winstonFileTransportConfig<T>;
-  declare export type Transport = typeof $winstonTransport;
+  declare export type Transport = $winstonTransport;
   declare export type FileTransport<T: Levels> = $winstonFileTransport<T>;
   declare export type ConsoleTransportConfig<T: Levels> = $winstonConsoleTransportConfig<T>;
   declare export type ConsoleTransport<T: Levels> = $winstonConsoleTransport<T>;
