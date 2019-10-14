@@ -82,7 +82,7 @@ declare type $winstonFormatSubModule = {
   splat: () => $winstonFormat,
   timestamp: (?{
     alias?: string,
-    format?: string,
+    format?: string | () => string,
     ...
   }) => $winstonFormat,
   colorize: () => $winstonFormat,
