@@ -2061,19 +2061,19 @@ declare module ramda {
     boolean
   >;
 
-  declare function propSatisfies<T>(
-    cond: (x: $Values<T>) => boolean,
-    prop: $Keys<T>,
+  declare function propSatisfies<T, K>(
+    cond: (x: $ElementType<T, K>) => boolean,
+    prop: K,
     o: T
   ): boolean;
-  declare function propSatisfies<T>(
-    cond: (x: $Values<T>) => boolean,
-    prop: $Keys<T>,
+  declare function propSatisfies<T, K>(
+    cond: (x: $ElementType<T, K>) => boolean,
+    prop: K,
   ): (o: T) => boolean;
-  declare function propSatisfies<T>(
-    cond: (x: $Values<T>) => boolean,
-  ): ((prop:  $Keys<T>) => (o: T) => boolean) &
-    ((prop:  $Keys<T>, o: T) => boolean);
+  declare function propSatisfies<T, K>(
+    cond: (x: $ElementType<T, K>) => boolean,
+  ): ((prop:  K) => (o: T) => boolean) &
+    ((prop:  K, o: T) => boolean);
 
   declare function unless<T, V, S>(
     pred: UnaryPredicateFn<T>,
