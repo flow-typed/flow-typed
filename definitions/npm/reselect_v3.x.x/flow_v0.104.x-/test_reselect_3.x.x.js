@@ -241,8 +241,7 @@ createSelector(
     return x + y;
   }
 ).resultFunc(
-  { x: 100, y: 200 },
-  {x: 10},
-  10,
+  100,
+  200,
 ) + 15;
 // END TEST

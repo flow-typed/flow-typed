@@ -9,7 +9,7 @@ declare module "reselect" {
     & {
       recomputations(): number,
       resetRecomputations(): number,
-      resultFunc(state: TState, props: TProps, ...rest: Array<any>): TResult,
+      resultFunc(...args: any[]): TResult,
     };
 
   declare type SelectorCreator = {
