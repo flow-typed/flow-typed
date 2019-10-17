@@ -634,7 +634,7 @@ declare module 'react-navigation-stack' {
     headerTitleAllowFontScaling?: boolean,
     headerTintColor?: string,
     headerLeft?: ((props: _HeaderBackButtonProps) => React$Node) | React$Node,
-    headerBackTitle?: string,
+    headerBackTitle?: ?string,
     headerBackImage?: (props: {|
       tintColor?: string,
       title?: ?string,
