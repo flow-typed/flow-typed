@@ -8,6 +8,8 @@ import styled, {
   css,
   keyframes,
   withTheme,
+  ThemeContext,
+
   type CSSRules,
   type KeyFrames,
   type StyledComponent,
@@ -186,6 +188,36 @@ describe('createGlobalStyle & GlobalStyles', () => {
         <GlobalStyles />
       </div>
     )
+  })
+})
+
+describe('ThemeContext', () => {
+
+  type MyTheme = {|
+    primaryColor: string
+  |}
+
+  it('allows refining the theme', () => {
+    const theme = React.useContext<MyTheme>(ThemeContext);
+
+    theme.primaryColor
+  })
+
+  it('typechecks the theme', () => {
+    const theme = React.useContext<MyTheme>(ThemeContext);
+
+    // $ExpectError
+    theme.primaryColot
+  })
+
+  it('allows aliasing the context with the Theme refined', () => {
+    const MyThemeContext: React.Context<MyTheme> = ThemeContext
+    const theme = React.useContext(MyThemeContext);
+
+    theme.primaryColor
+
+    // $ExpectError
+    theme.primaryColot
   })
 })
 

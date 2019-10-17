@@ -98,6 +98,25 @@ declare module 'styled-components' {
     ...
   }>
 
+  /**
+    Any because the intended use-case is for users to do:
+
+        import {ThemeContext} from 'styled-components';
+        ...
+        const theme = React.useContext<MyTheme>(ThemeContext);
+
+    If they want DRY-er code, they could declare their own version of this via something like
+
+        import { ThemeContext as SCThemeContext } from 'styled-components';
+        export const ThemeContext: React$Context<MyTheme> = SCThemeContext;
+
+    and then
+
+        import {ThemeContext} from './theme';
+  */
+  // eslint-disable-next-line flowtype/no-weak-types
+  declare export var ThemeContext: React$Context<any>;
+
   declare export type ThemeProps<T> = {|
     theme: T
   |}
