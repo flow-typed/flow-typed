@@ -10,7 +10,7 @@ declare module 'styled-components' {
       | ((executionContext: P) => InterpolationBase)
       | InterpolationBase
     )
-    | Class<InterpolatableComponent<mixed>>
+    | Class<InterpolatableComponent<any>>
     | InterpolationBase
 
   declare export type InterpolationBase =
