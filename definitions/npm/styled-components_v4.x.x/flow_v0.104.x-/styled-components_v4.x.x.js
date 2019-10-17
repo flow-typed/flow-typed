@@ -285,104 +285,17 @@ declare module 'styled-components' {
 
 
 declare module 'styled-components/native' {
-
-  declare class InterpolatableComponent<P> extends React$Component<P> {
-    static +styledComponentId: string;
-  }
-
-  declare export type Interpolation<P> =
-    | ((executionContext: P) =>
-      | ((executionContext: P) => InterpolationBase) // eslint-disable-line flowtype/no-weak-types
-      | InterpolationBase
-    )
-    | Class<InterpolatableComponent<mixed>>
-    | InterpolationBase
-
-  declare export type InterpolationBase =
-    | CSSRules
-    | KeyFrames
-    | string
-    | number
-
-  // Should this be `mixed` perhaps?
-  declare export type CSSRules = Interpolation<any>[] // eslint-disable-line flowtype/no-weak-types
+  import type {
+    CSSRules,
+    CSSConstructor,
+    KeyFramesConstructor,
+    CreateGlobalStyleConstructor,
+    StyledComponent,
+    Interpolation,
+  } from 'styled-components';
 
   // This is not exported on purpose, since it's an implementation detail
   declare type TaggedTemplateLiteral<I, R> = (strings: string[], ...interpolations: Interpolation<I>[]) => R
-
-  declare export type CSSConstructor = TaggedTemplateLiteral<any, CSSRules> // eslint-disable-line flowtype/no-weak-types
-  declare export type KeyFramesConstructor = TaggedTemplateLiteral<any, KeyFrames> // eslint-disable-line flowtype/no-weak-types
-  declare export type CreateGlobalStyleConstructor = TaggedTemplateLiteral<any, React$ComponentType<*>> // eslint-disable-line flowtype/no-weak-types
-
-  declare interface Tag<T> {
-    styleTag: HTMLStyleElement | null;
-    getIds(): string[];
-    hasNameForId(id: string, name: string): boolean;
-    insertMarker(id: string): T;
-    insertRules(id: string, cssRules: string[], name: ?string): void;
-    removeRules(id: string): void;
-    css(): string;
-    toHTML(additionalAttrs: ?string): string;
-    toElement(): React$Element<*>;
-    clone(): Tag<T>;
-    sealed: boolean;
-  }
-
-  // The `any`/weak types in here all come from `styled-components` directly, since those definitions were just copied over
-  declare export class StyleSheet {
-    static get master() : StyleSheet;
-    static get instance() : StyleSheet;
-    static reset(forceServer? : boolean) : void;
-
-    id : number;
-    forceServer : boolean;
-    target : ?HTMLElement;
-    tagMap : { [string]: Tag<any>, ... }; // eslint-disable-line flowtype/no-weak-types
-    deferred: { [string]: string[] | void, ... };
-    rehydratedNames: { [string]: boolean, ... };
-    ignoreRehydratedNames: { [string]: boolean, ... };
-    tags: Tag<any>[]; // eslint-disable-line flowtype/no-weak-types
-    importRuleTag: Tag<any>; // eslint-disable-line flowtype/no-weak-types
-    capacity: number;
-    clones: StyleSheet[];
-
-    constructor(?HTMLElement) : this;
-    rehydrate() : this;
-    clone() : StyleSheet;
-    sealAllTags() : void;
-    makeTag(tag : ?Tag<any>) : Tag<any>; // eslint-disable-line flowtype/no-weak-types
-    getImportRuleTag() : Tag<any>; // eslint-disable-line flowtype/no-weak-types
-    getTagForId(id : string): Tag<any>; // eslint-disable-line flowtype/no-weak-types
-    hasId(id: string) : boolean;
-    hasNameForId(id: string, name: string) : boolean;
-    deferredInject(id : string, cssRules : string[]) : void;
-    inject(id: string, cssRules : string[], name? : string) : void;
-    remove(id : string) : void;
-    toHtml() : string;
-    toReactElements() : React$ElementType[];
-  }
-
-  declare export class KeyFrames {
-    id : string;
-    name : string;
-    rules : string[];
-
-    constructor(name : string, rules : string[]) : this;
-    inject(StyleSheet) : void;
-    toString() : string;
-    getName() : string;
-  }
-
-  // I think any is appropriate here?
-  // eslint-disable-next-line flowtype/no-weak-types
-  declare export var css : CSSConstructor;
-  declare export var keyframes : KeyFramesConstructor;
-  declare export var createGlobalStyle : CreateGlobalStyleConstructor
-  declare export var ThemeProvider: React$ComponentType<{
-    children?: ?React$Node,
-    theme: mixed | (mixed) => mixed,
-    ...
-  }>
 
   declare type ThemeProps<T> = {|
     theme: T
@@ -392,10 +305,6 @@ declare module 'styled-components/native' {
     ...ThemeProps<T>,
     ...$Exact<Props>
   |}
-
-  declare export function withTheme<Theme, Config: {...}, Instance>(Component: React$AbstractComponent<Config, Instance>): React$AbstractComponent<$Diff<Config, ThemeProps<Theme | void>>, Instance>
-
-  declare export type StyledComponent<Props, Theme, Instance> = React$AbstractComponent<Props, Instance> & Class<InterpolatableComponent<Props>>
 
   declare type StyledFactory<StyleProps, Theme, Instance> = {|
     [[call]]: TaggedTemplateLiteral<PropsWithTheme<StyleProps, Theme>, StyledComponent<StyleProps, Theme, Instance>>;
