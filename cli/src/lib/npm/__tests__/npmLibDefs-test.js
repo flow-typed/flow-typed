@@ -386,6 +386,18 @@ describe('npmLibDefs', () => {
       });
     });
 
+    it('parses libs installed from git', () => {
+      expect(parsePkgNameVer('git@github.com:flow-typed/flow-typed.git')).toEqual({
+        pkgName: 'flow-typed',
+        pkgVersion: {
+          major: 0,
+          minor: 0,
+          patch: 0,
+          prerel: '',
+        },
+      });
+    });
+
     it('parses wildcard minor libs', () => {
       expect(parsePkgNameVer('lib_v1.x.x')).toEqual({
         pkgName: 'lib',

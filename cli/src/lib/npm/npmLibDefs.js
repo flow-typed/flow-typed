@@ -187,8 +187,18 @@ async function getCacheNpmLibDefs(cacheExpiry) {
 }
 
 const PKG_NAMEVER_RE = /^(.*)_v\^?([0-9]+)\.([0-9]+|x)\.([0-9]+|x)(-.*)?$/;
+const PKG_GIT_RE = /^([\w\-]+)@([\w\.]+):([\w\-]+)\/([\w\-]+)(?:\.git)$/;
 function parsePkgNameVer(pkgNameVer: string) {
   const pkgNameVerMatches = pkgNameVer.match(PKG_NAMEVER_RE);
+  const pkgNameGitMatches = pkgNameVer.match(PKG_GIT_RE);
+
+  if (pkgNameGitMatches != null) {
+    return {
+      pkgName: pkgNameGitMatches[4],
+      pkgVersion: {major: 0, minor: 0, patch: 0, prerel: ''},
+    };
+  }
+
   if (pkgNameVerMatches == null) {
     throw new ValidationError(
       `Malformed npm package name! ` +
