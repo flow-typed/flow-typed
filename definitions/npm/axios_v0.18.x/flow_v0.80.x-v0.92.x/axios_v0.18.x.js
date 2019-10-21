@@ -110,6 +110,10 @@ declare module 'axios' {
       url: string,
       config?: AxiosXHRConfigBase<T, R>
     ): AxiosPromise<T, R>;
+    options<T, R>(
+      url: string,
+      config?: AxiosXHRConfigBase<T, R>
+    ): AxiosPromise<T, R>;
     head<T, R>(
       url: string,
       config?: AxiosXHRConfigBase<T, R>
