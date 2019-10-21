@@ -1,5 +1,5 @@
 {
-  "name": "flow-typed",
+  "name": "@flockcover/flow-typed",
   "description": "A repository of high quality flow type definitions",
   "license": "MIT",
   "homepage": "https://github.com/flow-typed/flow-typed#readme",
