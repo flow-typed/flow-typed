@@ -340,7 +340,7 @@ declare module 'react-navigation' {
     headerTitleAllowFontScaling?: boolean,
     headerTintColor?: string,
     headerLeft?: Node | ElementType,
-    headerBackTitle?: string,
+    headerBackTitle?: ?string,
     headerBackImage?: ImageSource,
     headerTruncatedBackTitle?: string,
     headerBackTitleStyle?: TextStyleProp,

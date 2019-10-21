@@ -407,7 +407,7 @@ declare module '@react-navigation/core' {
     headerTitleAllowFontScaling?: boolean,
     headerTintColor?: string,
     headerLeft?: React$Node | React$ElementType,
-    headerBackTitle?: string,
+    headerBackTitle?: ?string,
     headerBackImage?: React$Node | React$ElementType,
     headerTruncatedBackTitle?: string,
     headerBackTitleStyle?: TextStyleProp,
