@@ -76,6 +76,42 @@ declare module 'styled-components' {
     toReactElements() : React$ElementType[];
   }
 
+
+  declare type SCMProps = {
+    children?: Reactt$Element<any>,
+    sheet?: StyleSheet,
+    target?: HTMLElement,
+    ...
+  }
+
+  declare export var StyleSheetContext: React$Context<StyleSheet>;
+  declare export var StyleSheetConsumer : React$ComponentType<{|
+    children: (value: StyleSheet) => ?React$Node
+  |}>
+  declare var StyleSheetProvider: React$ComponentType<{|
+    children?: React$Node,
+    value: StyleSheet,
+  |}>
+
+  declare export class StylSheetManager extends React$Component<SCMProps> {
+    getContext(sheet: ?StyleSheet, target: ?HTMLElement): StyleSheet;
+    render(): React$Element<StyleSheetProvider>
+  }
+
+  declare export class ServerStyleSheet {
+    instance: StyleSheet;
+    masterSheet: StyleSheet;
+    sealed: boolean;
+
+    seal(): void;
+    collectStyles(children: any): React$Element<StyleSheetManager>;
+    getStyleTags(): string;
+    toReactElements(): React$ElementType[];
+    // This seems to be use a port of node streams in the Browsers. Not gonna type this for now
+    // eslint-disable-next-line flowtype/no-weak-types
+    interleaveWithNodeStream(stream: any): any;
+  }
+
   declare export class KeyFrames {
     id : string;
     name : string;
