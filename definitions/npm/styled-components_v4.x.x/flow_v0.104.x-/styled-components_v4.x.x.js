@@ -1,6 +1,195 @@
 // @flow
 
 declare module 'styled-components' {
+  declare class InterpolatableComponent<P> extends React$Component<P> {
+    static +styledComponentId: string;
+  }
+
+  declare export type Interpolation<P> =
+    | ((executionContext: P) =>
+      | ((executionContext: P) => InterpolationBase)
+      | InterpolationBase
+    )
+    | Class<InterpolatableComponent<any>>
+    | InterpolationBase
+
+  declare export type InterpolationBase =
+    | CSSRules
+    | KeyFrames
+    | string
+    | number
+    | false // falsy values are OK, true is the only one not allowed, because it renders as "true"
+    | null
+    | void
+    | {[ruleOrSelector: string]: string | number, ...} // CSS-in-JS object returned by polished are also supported
+
+  declare export type TaggedTemplateLiteral<I, R> = (strings: string[], ...interpolations: Interpolation<I>[]) => R
+
+  // Should this be `mixed` perhaps?
+  declare export type CSSRules = Interpolation<any>[] // eslint-disable-line flowtype/no-weak-types
+
+  declare export type CSSConstructor = TaggedTemplateLiteral<any, CSSRules> // eslint-disable-line flowtype/no-weak-types
+  declare export type KeyFramesConstructor = TaggedTemplateLiteral<any, KeyFrames> // eslint-disable-line flowtype/no-weak-types
+  declare export type CreateGlobalStyleConstructor = TaggedTemplateLiteral<any, React$ComponentType<*>> // eslint-disable-line flowtype/no-weak-types
+
+  declare interface Tag<T> {
+    styleTag: HTMLStyleElement | null;
+    getIds(): string[];
+    hasNameForId(id: string, name: string): boolean;
+    insertMarker(id: string): T;
+    insertRules(id: string, cssRules: string[], name: ?string): void;
+    removeRules(id: string): void;
+    css(): string;
+    toHTML(additionalAttrs: ?string): string;
+    toElement(): React$Element<*>;
+    clone(): Tag<T>;
+    sealed: boolean;
+  }
+
+  // The `any`/weak types in here all come from `styled-components` directly, since those definitions were just copied over
+  declare export class StyleSheet {
+    static get master() : StyleSheet;
+    static get instance() : StyleSheet;
+    static reset(forceServer? : boolean) : void;
+
+    id : number;
+    forceServer : boolean;
+    target : ?HTMLElement;
+    tagMap : { [string]: Tag<any>, ... }; // eslint-disable-line flowtype/no-weak-types
+    deferred: { [string]: string[] | void, ... };
+    rehydratedNames: { [string]: boolean, ... };
+    ignoreRehydratedNames: { [string]: boolean, ... };
+    tags: Tag<any>[]; // eslint-disable-line flowtype/no-weak-types
+    importRuleTag: Tag<any>; // eslint-disable-line flowtype/no-weak-types
+    capacity: number;
+    clones: StyleSheet[];
+
+    constructor(?HTMLElement) : this;
+    rehydrate() : this;
+    clone() : StyleSheet;
+    sealAllTags() : void;
+    makeTag(tag : ?Tag<any>) : Tag<any>; // eslint-disable-line flowtype/no-weak-types
+    getImportRuleTag() : Tag<any>; // eslint-disable-line flowtype/no-weak-types
+    getTagForId(id : string): Tag<any>; // eslint-disable-line flowtype/no-weak-types
+    hasId(id: string) : boolean;
+    hasNameForId(id: string, name: string) : boolean;
+    deferredInject(id : string, cssRules : string[]) : void;
+    inject(id: string, cssRules : string[], name? : string) : void;
+    remove(id : string) : void;
+    toHtml() : string;
+    toReactElements() : React$ElementType[];
+  }
+
+  declare export function isStyledComponent(target: any): boolean;
+
+  declare type SCMProps = {
+    children?: Reactt$Element<any>,
+    sheet?: StyleSheet,
+    target?: HTMLElement,
+    ...
+  }
+
+  declare export var StyleSheetContext: React$Context<StyleSheet>;
+  declare export var StyleSheetConsumer : React$ComponentType<{|
+    children: (value: StyleSheet) => ?React$Node
+  |}>
+  declare var StyleSheetProvider: React$ComponentType<{|
+    children?: React$Node,
+    value: StyleSheet,
+  |}>
+
+  declare export class StylSheetManager extends React$Component<SCMProps> {
+    getContext(sheet: ?StyleSheet, target: ?HTMLElement): StyleSheet;
+    render(): React$Element<StyleSheetProvider>
+  }
+
+  declare export class ServerStyleSheet {
+    instance: StyleSheet;
+    masterSheet: StyleSheet;
+    sealed: boolean;
+
+    seal(): void;
+    collectStyles(children: any): React$Element<StyleSheetManager>;
+    getStyleTags(): string;
+    toReactElements(): React$ElementType[];
+    // This seems to be use a port of node streams in the Browsers. Not gonna type this for now
+    // eslint-disable-next-line flowtype/no-weak-types
+    interleaveWithNodeStream(stream: any): any;
+  }
+
+  declare export class KeyFrames {
+    id : string;
+    name : string;
+    rules : string[];
+
+    constructor(name : string, rules : string[]) : this;
+    inject(StyleSheet) : void;
+    toString() : string;
+    getName() : string;
+  }
+
+  // I think any is appropriate here?
+  // eslint-disable-next-line flowtype/no-weak-types
+  declare export var css : CSSConstructor;
+  declare export var keyframes : KeyFramesConstructor;
+  declare export var createGlobalStyle : CreateGlobalStyleConstructor
+  declare export var ThemeConsumer : React$ComponentType<{|
+    children: (value: mixed) => ?React$Node
+  |}>
+  declare export var ThemeProvider: React$ComponentType<{|
+    children?: ?React$Node,
+    theme: mixed | (mixed) => mixed,
+  |}>
+
+  /**
+    Any because the intended use-case is for users to do:
+
+        import {ThemeContext} from 'styled-components';
+        ...
+        const theme = React.useContext<MyTheme>(ThemeContext);
+
+    If they want DRY-er code, they could declare their own version of this via something like
+
+        import { ThemeContext as SCThemeContext } from 'styled-components';
+        export const ThemeContext: React$Context<MyTheme> = SCThemeContext;
+
+    and then
+
+        import {ThemeContext} from './theme';
+  */
+  // eslint-disable-next-line flowtype/no-weak-types
+  declare export var ThemeContext: React$Context<any>;
+
+  declare export type ThemeProps<T> = {|
+    theme: T
+  |}
+
+  declare export type PropsWithTheme<Props, T> = {|
+    ...ThemeProps<T>,
+    ...$Exact<Props>
+  |}
+
+  declare export function withTheme<Theme, Config: {...}, Instance>(Component: React$AbstractComponent<Config, Instance>): React$AbstractComponent<$Diff<Config, ThemeProps<Theme | void>>, Instance>
+
+  declare export type StyledComponent<Props, Theme, Instance> = React$AbstractComponent<Props, Instance> & Class<InterpolatableComponent<Props>>
+
+  declare export type StyledFactory<StyleProps, Theme, Instance> = {|
+    [[call]]: TaggedTemplateLiteral<PropsWithTheme<StyleProps, Theme>, StyledComponent<StyleProps, Theme, Instance>>;
+    +attrs: <A: {...}>(((StyleProps) => A) | A) => TaggedTemplateLiteral<
+      PropsWithTheme<{|...$Exact<StyleProps>, ...$Exact<A>|}, Theme>,
+      StyledComponent<React$Config<{|...$Exact<StyleProps>, ...$Exact<A>|}, $Exact<A>>, Theme, Instance>
+    >;
+  |}
+
+  declare export type StyledShorthandFactory<V> = {|
+    [[call]]: <StyleProps, Theme>(string[], ...Interpolation<PropsWithTheme<StyleProps, Theme>>[]) => StyledComponent<StyleProps, Theme, V>;
+    +attrs: <A: {...}, StyleProps = {||}, Theme = {||}>(((StyleProps) => A) | A) => TaggedTemplateLiteral<
+      PropsWithTheme<{|...$Exact<StyleProps>, ...$Exact<A>|}, Theme>,
+      StyledComponent<React$Config<{|...$Exact<StyleProps>, ...$Exact<A>|}, $Exact<A>>, Theme, V>
+    >;
+  |}
+
+
   declare type BuiltinElementInstances = {
     a: React$ElementRef<'a'>,
     abbr: React$ElementRef<'abbr'>,
@@ -141,135 +330,6 @@ declare module 'styled-components' {
 
   declare type BuiltinElementType<ElementName: string> = $ElementType<BuiltinElementInstances, ElementName>
 
-  declare class InterpolatableComponent<P> extends React$Component<P> {
-    static +styledComponentId: string;
-  }
-
-  declare export type Interpolation<P> =
-    | ((executionContext: P) =>
-      | ((executionContext: P) => InterpolationBase)
-      | InterpolationBase
-    )
-    | Class<InterpolatableComponent<mixed>>
-    | InterpolationBase
-
-  declare export type InterpolationBase =
-    | CSSRules
-    | KeyFrames
-    | string
-    | number
-
-
-  // Should this be `mixed` perhaps?
-  declare export type CSSRules = Interpolation<any>[] // eslint-disable-line flowtype/no-weak-types
-
-  // This is not exported on purpose, since it's an implementation detail
-  declare type TaggedTemplateLiteral<I, R> = (strings: string[], ...interpolations: Interpolation<I>[]) => R
-
-  declare export type CSSConstructor = TaggedTemplateLiteral<any, CSSRules> // eslint-disable-line flowtype/no-weak-types
-  declare export type KeyFramesConstructor = TaggedTemplateLiteral<any, KeyFrames> // eslint-disable-line flowtype/no-weak-types
-  declare export type CreateGlobalStyleConstructor = TaggedTemplateLiteral<any, React$ComponentType<*>> // eslint-disable-line flowtype/no-weak-types
-
-  declare interface Tag<T> {
-    styleTag: HTMLStyleElement | null;
-    getIds(): string[];
-    hasNameForId(id: string, name: string): boolean;
-    insertMarker(id: string): T;
-    insertRules(id: string, cssRules: string[], name: ?string): void;
-    removeRules(id: string): void;
-    css(): string;
-    toHTML(additionalAttrs: ?string): string;
-    toElement(): React$Element<*>;
-    clone(): Tag<T>;
-    sealed: boolean;
-  }
-
-  // The `any`/weak types in here all come from `styled-components` directly, since those definitions were just copied over
-  declare export class StyleSheet {
-    static get master() : StyleSheet;
-    static get instance() : StyleSheet;
-    static reset(forceServer? : boolean) : void;
-
-    id : number;
-    forceServer : boolean;
-    target : ?HTMLElement;
-    tagMap : { [string]: Tag<any>, ... }; // eslint-disable-line flowtype/no-weak-types
-    deferred: { [string]: string[] | void, ... };
-    rehydratedNames: { [string]: boolean, ... };
-    ignoreRehydratedNames: { [string]: boolean, ... };
-    tags: Tag<any>[]; // eslint-disable-line flowtype/no-weak-types
-    importRuleTag: Tag<any>; // eslint-disable-line flowtype/no-weak-types
-    capacity: number;
-    clones: StyleSheet[];
-
-    constructor(?HTMLElement) : this;
-    rehydrate() : this;
-    clone() : StyleSheet;
-    sealAllTags() : void;
-    makeTag(tag : ?Tag<any>) : Tag<any>; // eslint-disable-line flowtype/no-weak-types
-    getImportRuleTag() : Tag<any>; // eslint-disable-line flowtype/no-weak-types
-    getTagForId(id : string): Tag<any>; // eslint-disable-line flowtype/no-weak-types
-    hasId(id: string) : boolean;
-    hasNameForId(id: string, name: string) : boolean;
-    deferredInject(id : string, cssRules : string[]) : void;
-    inject(id: string, cssRules : string[], name? : string) : void;
-    remove(id : string) : void;
-    toHtml() : string;
-    toReactElements() : React$ElementType[];
-  }
-
-  declare export class KeyFrames {
-    id : string;
-    name : string;
-    rules : string[];
-
-    constructor(name : string, rules : string[]) : this;
-    inject(StyleSheet) : void;
-    toString() : string;
-    getName() : string;
-  }
-
-  // I think any is appropriate here?
-  // eslint-disable-next-line flowtype/no-weak-types
-  declare export var css : CSSConstructor;
-  declare export var keyframes : KeyFramesConstructor;
-  declare export var createGlobalStyle : CreateGlobalStyleConstructor
-  declare export var ThemeProvider: React$ComponentType<{
-    children?: ?React$Node,
-    theme: mixed | (mixed) => mixed,
-    ...
-  }>
-
-  declare type ThemeProps<T> = {|
-    theme: T
-  |}
-
-  declare type PropsWithTheme<Props, T> = {|
-    ...ThemeProps<T>,
-    ...$Exact<Props>
-  |}
-
-  declare export function withTheme<Theme, Config: {...}, Instance>(Component: React$AbstractComponent<Config, Instance>): React$AbstractComponent<$Diff<Config, ThemeProps<Theme | void>>, Instance>
-
-  declare export type StyledComponent<Props, Theme, Instance> = React$AbstractComponent<Props, Instance> & Class<InterpolatableComponent<Props>>
-
-  declare type StyledFactory<StyleProps, Theme, Instance> = {|
-    [[call]]: TaggedTemplateLiteral<PropsWithTheme<StyleProps, Theme>, StyledComponent<StyleProps, Theme, Instance>>;
-    +attrs: <A: {...}>(((StyleProps) => A) | A) => TaggedTemplateLiteral<
-      PropsWithTheme<{|...$Exact<StyleProps>, ...$Exact<A>|}, Theme>,
-      StyledComponent<React$Config<{|...$Exact<StyleProps>, ...$Exact<A>|}, $Exact<A>>, Theme, Instance>
-    >;
-  |}
-
-  declare type StyledShorthandFactory<V> = {|
-    [[call]]: <StyleProps, Theme>(string[], ...Interpolation<PropsWithTheme<StyleProps, Theme>>[]) => StyledComponent<StyleProps, Theme, V>;
-    +attrs: <A: {...}, StyleProps = {||}, Theme = {||}>(((StyleProps) => A) | A) => TaggedTemplateLiteral<
-      PropsWithTheme<{|...$Exact<StyleProps>, ...$Exact<A>|}, Theme>,
-      StyledComponent<React$Config<{|...$Exact<StyleProps>, ...$Exact<A>|}, $Exact<A>>, Theme, V>
-    >;
-  |}
-
-
   declare type ConvenientShorthands = $ObjMap<
     BuiltinElementInstances,
     <V>(V) => StyledShorthandFactory<V>
@@ -285,133 +345,21 @@ declare module 'styled-components' {
 
 
 declare module 'styled-components/native' {
+  import type {
+    CSSRules,
+    CSSConstructor,
+    KeyFramesConstructor,
+    CreateGlobalStyleConstructor,
+    StyledComponent,
+    Interpolation,
 
-  declare class InterpolatableComponent<P> extends React$Component<P> {
-    static +styledComponentId: string;
-  }
-
-  declare export type Interpolation<P> =
-    | ((executionContext: P) =>
-      | ((executionContext: P) => InterpolationBase) // eslint-disable-line flowtype/no-weak-types
-      | InterpolationBase
-    )
-    | Class<InterpolatableComponent<mixed>>
-    | InterpolationBase
-
-  declare export type InterpolationBase =
-    | CSSRules
-    | KeyFrames
-    | string
-    | number
-
-  // Should this be `mixed` perhaps?
-  declare export type CSSRules = Interpolation<any>[] // eslint-disable-line flowtype/no-weak-types
-
-  // This is not exported on purpose, since it's an implementation detail
-  declare type TaggedTemplateLiteral<I, R> = (strings: string[], ...interpolations: Interpolation<I>[]) => R
-
-  declare export type CSSConstructor = TaggedTemplateLiteral<any, CSSRules> // eslint-disable-line flowtype/no-weak-types
-  declare export type KeyFramesConstructor = TaggedTemplateLiteral<any, KeyFrames> // eslint-disable-line flowtype/no-weak-types
-  declare export type CreateGlobalStyleConstructor = TaggedTemplateLiteral<any, React$ComponentType<*>> // eslint-disable-line flowtype/no-weak-types
-
-  declare interface Tag<T> {
-    styleTag: HTMLStyleElement | null;
-    getIds(): string[];
-    hasNameForId(id: string, name: string): boolean;
-    insertMarker(id: string): T;
-    insertRules(id: string, cssRules: string[], name: ?string): void;
-    removeRules(id: string): void;
-    css(): string;
-    toHTML(additionalAttrs: ?string): string;
-    toElement(): React$Element<*>;
-    clone(): Tag<T>;
-    sealed: boolean;
-  }
-
-  // The `any`/weak types in here all come from `styled-components` directly, since those definitions were just copied over
-  declare export class StyleSheet {
-    static get master() : StyleSheet;
-    static get instance() : StyleSheet;
-    static reset(forceServer? : boolean) : void;
-
-    id : number;
-    forceServer : boolean;
-    target : ?HTMLElement;
-    tagMap : { [string]: Tag<any>, ... }; // eslint-disable-line flowtype/no-weak-types
-    deferred: { [string]: string[] | void, ... };
-    rehydratedNames: { [string]: boolean, ... };
-    ignoreRehydratedNames: { [string]: boolean, ... };
-    tags: Tag<any>[]; // eslint-disable-line flowtype/no-weak-types
-    importRuleTag: Tag<any>; // eslint-disable-line flowtype/no-weak-types
-    capacity: number;
-    clones: StyleSheet[];
-
-    constructor(?HTMLElement) : this;
-    rehydrate() : this;
-    clone() : StyleSheet;
-    sealAllTags() : void;
-    makeTag(tag : ?Tag<any>) : Tag<any>; // eslint-disable-line flowtype/no-weak-types
-    getImportRuleTag() : Tag<any>; // eslint-disable-line flowtype/no-weak-types
-    getTagForId(id : string): Tag<any>; // eslint-disable-line flowtype/no-weak-types
-    hasId(id: string) : boolean;
-    hasNameForId(id: string, name: string) : boolean;
-    deferredInject(id : string, cssRules : string[]) : void;
-    inject(id: string, cssRules : string[], name? : string) : void;
-    remove(id : string) : void;
-    toHtml() : string;
-    toReactElements() : React$ElementType[];
-  }
-
-  declare export class KeyFrames {
-    id : string;
-    name : string;
-    rules : string[];
-
-    constructor(name : string, rules : string[]) : this;
-    inject(StyleSheet) : void;
-    toString() : string;
-    getName() : string;
-  }
-
-  // I think any is appropriate here?
-  // eslint-disable-next-line flowtype/no-weak-types
-  declare export var css : CSSConstructor;
-  declare export var keyframes : KeyFramesConstructor;
-  declare export var createGlobalStyle : CreateGlobalStyleConstructor
-  declare export var ThemeProvider: React$ComponentType<{
-    children?: ?React$Node,
-    theme: mixed | (mixed) => mixed,
-    ...
-  }>
-
-  declare type ThemeProps<T> = {|
-    theme: T
-  |}
-
-  declare type PropsWithTheme<Props, T> = {|
-    ...ThemeProps<T>,
-    ...$Exact<Props>
-  |}
-
-  declare export function withTheme<Theme, Config: {...}, Instance>(Component: React$AbstractComponent<Config, Instance>): React$AbstractComponent<$Diff<Config, ThemeProps<Theme | void>>, Instance>
-
-  declare export type StyledComponent<Props, Theme, Instance> = React$AbstractComponent<Props, Instance> & Class<InterpolatableComponent<Props>>
-
-  declare type StyledFactory<StyleProps, Theme, Instance> = {|
-    [[call]]: TaggedTemplateLiteral<PropsWithTheme<StyleProps, Theme>, StyledComponent<StyleProps, Theme, Instance>>;
-    +attrs: <A: {...}>(((StyleProps) => A) | A) => TaggedTemplateLiteral<
-      PropsWithTheme<{|...$Exact<StyleProps>, ...$Exact<A>|}, Theme>,
-      StyledComponent<React$Config<{|...$Exact<StyleProps>, ...$Exact<A>|}, $Exact<A>>, Theme, Instance>
-    >;
-  |}
-
-  declare type StyledShorthandFactory<V> = {|
-    [[call]]: <StyleProps, Theme>(string[], ...Interpolation<PropsWithTheme<StyleProps, Theme>>[]) => StyledComponent<StyleProps, Theme, V>;
-    +attrs: <A: {...}, StyleProps = {||}, Theme = {||}>(((StyleProps) => A) | A) => TaggedTemplateLiteral<
-      PropsWithTheme<{|...$Exact<StyleProps>, ...$Exact<A>|}, Theme>,
-      StyledComponent<React$Config<{|...$Exact<StyleProps>, ...$Exact<A>|}, $Exact<A>>, Theme, V>
-    >;
-  |}
+    // "private" types
+    TaggedTemplateLiteral,
+    StyledFactory,
+    StyledShorthandFactory,
+    ThemeProps,
+    PropsWithTheme,
+  } from 'styled-components';
 
   declare type BuiltinElementInstances = {
     ActivityIndicator:             React$ComponentType<{...}>,

@@ -8,6 +8,8 @@ import styled, {
   css,
   keyframes,
   withTheme,
+  ThemeContext,
+
   type CSSRules,
   type KeyFrames,
   type StyledComponent,
@@ -116,13 +118,6 @@ describe('styled builtins', () => {
     `
   })
 
-  it('should reject wrong interpolation output', () => {
-    // $ExpectError - shouldn't return undefined from interpolation function
-    const Span: StyledComponent<{ color?: string, ... }, *, *> = styled.span`
-      color: ${props => props.color};
-    `
-  })
-
   it('should inject theme', () => {
     const Span: StyledComponent<
       { color?: string, ... },
@@ -189,6 +184,36 @@ describe('createGlobalStyle & GlobalStyles', () => {
   })
 })
 
+describe('ThemeContext', () => {
+
+  type MyTheme = {|
+    primaryColor: string
+  |}
+
+  it('allows refining the theme', () => {
+    const theme = React.useContext<MyTheme>(ThemeContext);
+
+    theme.primaryColor
+  })
+
+  it('typechecks the theme', () => {
+    const theme = React.useContext<MyTheme>(ThemeContext);
+
+    // $ExpectError
+    theme.primaryColot
+  })
+
+  it('allows aliasing the context with the Theme refined', () => {
+    const MyThemeContext: React.Context<MyTheme> = ThemeContext
+    const theme = React.useContext(MyThemeContext);
+
+    theme.primaryColor
+
+    // $ExpectError
+    theme.primaryColot
+  })
+})
+
 describe('css generator', () => {
   it('can be used', () => {
     const styles: CSSRules = css`
@@ -209,6 +234,47 @@ describe('css generator', () => {
 
     const styles = css`
       color: ${fun};
+    `
+  })
+
+  it("accepts void/undefined", () => {
+    const styles = css`
+      ${undefined};
+    `
+  })
+
+  it("accepts false", () => {
+    const styles = css`
+      ${false};
+    `
+  })
+
+  // Technically styled-components _does_ accept true, _but_ it usually generates wrong/nonsensical and unexpected output.
+  it("doesn't accept true", () => {
+    // $ExpectError - lies!
+    const styles = css`
+      ${true};
+    `
+  })
+
+  it("accepts null", () => {
+    const styles = css`
+      ${null};
+    `
+  })
+
+  it("accepts style objects", () => {
+    const styles = css`
+      ${{
+        color: 'red'
+      }};
+    `
+  })
+
+  it("doesn't accept exotic/non-style objects", () => {
+    // $ExpectError - don't accept non-style objects
+    const styles = css`
+      ${{ fun: () => null }};
     `
   })
 
@@ -265,29 +331,6 @@ describe('css generator', () => {
       ${FuncComp} {
         color: pink;
       }
-    `
-  })
-
-  it("doesn't accept objects", () => {
-    const obj = {}
-
-    // $ExpectError - object is not a valid inerpolation
-    const styles = css`
-      color: ${obj};
-    `
-  })
-
-  it("doesn't accept void/undefined", () => {
-    // $ExpectError - object is not a valid inerpolation
-    const styles = css`
-      color: ${undefined};
-    `
-  })
-
-  it("doesn't accept null", () => {
-    // $ExpectError - object is not a valid inerpolation
-    const styles = css`
-      color: ${null};
     `
   })
 })
