@@ -22,6 +22,7 @@ import type {
 const client = axios.create();
 
 client.post('/something', {});
+client.options('/something', {});
 
 (client.defaults.headers.common.Authorization = 'test')
 
