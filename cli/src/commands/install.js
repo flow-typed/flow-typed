@@ -100,7 +100,7 @@ export function setup(yargs: Yargs) {
       alias: 'o',
       describe: 'Overwrite an existing libdef',
       type: 'string',
-      demand: false
+      demand: false,
     },
     ignoreDeps: {
       alias: 'i',
