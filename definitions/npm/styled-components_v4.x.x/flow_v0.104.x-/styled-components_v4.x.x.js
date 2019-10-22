@@ -129,11 +129,13 @@ declare module 'styled-components' {
   declare export var css : CSSConstructor;
   declare export var keyframes : KeyFramesConstructor;
   declare export var createGlobalStyle : CreateGlobalStyleConstructor
-  declare export var ThemeProvider: React$ComponentType<{
+  declare export var ThemeConsumer : React$ComponentType<{|
+    children: (value: mixed) => ?React$Node
+  |}>
+  declare export var ThemeProvider: React$ComponentType<{|
     children?: ?React$Node,
     theme: mixed | (mixed) => mixed,
-    ...
-  }>
+  |}>
 
   /**
     Any because the intended use-case is for users to do:
