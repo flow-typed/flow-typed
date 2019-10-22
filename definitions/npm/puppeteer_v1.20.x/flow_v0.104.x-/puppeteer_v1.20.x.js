@@ -1358,12 +1358,15 @@ declare module 'puppeteer' {
    ...
   };
 
-  /** Attaches Puppeteer to an existing Chromium instance */
-  declare function connect(options?: ConnectOptions): Promise<Browser>;
-  /** The default flags that Chromium will be launched with */
-  declare function defaultArgs(): Array<string>;
-  /** Path where Puppeteer expects to find bundled Chromium */
-  declare function executablePath(): string;
-  /** The method launches a browser instance with given arguments. The browser will be closed when the parent node.js process is closed. */
-  declare function launch(options?: LaunchOptions): Promise<Browser>;
+  declare export default {
+    /** Attaches Puppeteer to an existing Chromium instance */
+    connect: (options?: ConnectOptions) => Promise<Browser>;
+    /** The default flags that Chromium will be launched with */
+    defaultArgs: () => Array<string>;
+    /** Path where Puppeteer expects to find bundled Chromium */
+    executablePath: () => string;
+    /** The method launches a browser instance with given arguments. The browser will be closed when the parent node.js process is closed. */
+    launch: (options?: LaunchOptions) => Promise<Browser>;
+    ...
+  }
 }

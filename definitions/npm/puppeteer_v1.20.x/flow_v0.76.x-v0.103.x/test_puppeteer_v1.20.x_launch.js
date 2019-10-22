@@ -1,19 +1,19 @@
 // @flow
 
-import { launch } from 'puppeteer';
+import puppeteer from 'puppeteer';
 import { describe, it } from 'flow-typed-test';
 
-describe('launch', () => {
+describe('puppeteer.launch', () => {
   it('should complain if you pass in a string arg', () => {
     // $ExpectError string is incompatible with `LaunchOptions`
-    launch('testing...');
+    puppeteer.launch('testing...');
   });
   it('should complain if an option arg key is of the wrong type', () => {
     // $ExpectError string is incompatible with boolean inproperty `headless`
-    launch({ headless: 'testing...' });
+    puppeteer.launch({ headless: 'testing...' });
   });
   it('should preserve the Browser type', () => {
-    launch().then(browser => {
+    puppeteer.launch().then(browser => {
       // $ExpectError string is incompatible with enum
       browser.on('response');
       browser.newPage().then(page => {
@@ -26,7 +26,7 @@ describe('launch', () => {
     });
   });
   it('should preserver Page type through launch, etc.', () => {
-    launch().then(browser =>
+    puppeteer.launch().then(browser =>
       browser.newPage().then(page => {
         // $ExpectError string is incompatible with enum in type argument `K`
         page.on('testing...');
@@ -36,7 +36,7 @@ describe('launch', () => {
           request.testing();
         });
         page.on('response', response => {
-          response.request.url();
+          response.request().url();
           // $ExpectError property `testing` is missing in `Response`
           response.testing();
         });
