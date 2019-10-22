@@ -76,6 +76,7 @@ declare module 'styled-components' {
     toReactElements() : React$ElementType[];
   }
 
+  declare export function isStyledComponent(target: any): boolean;
 
   declare type SCMProps = {
     children?: Reactt$Element<any>,
