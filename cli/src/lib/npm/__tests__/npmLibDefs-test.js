@@ -387,7 +387,9 @@ describe('npmLibDefs', () => {
     });
 
     it('parses libs installed from git', () => {
-      expect(parsePkgNameVer('git@github.com:flow-typed/flow-typed.git')).toEqual({
+      expect(
+        parsePkgNameVer('git@github.com:flow-typed/flow-typed.git'),
+      ).toEqual({
         pkgName: 'flow-typed',
         pkgVersion: {
           major: 0,

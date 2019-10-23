@@ -5,6 +5,20 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [2.6.1] - 2019-10-23
+
+### Added
+- Added `--overwrite` option to the `install` command (#3535)
+
+### Changed
+- Travis specs now run on node 8 & 10, as opposed to 6 & 8 (#3485)
+
+### Fixed
+- Updated octokit/rest to avoid vulnerability (#3602)
+- Fixes git package support (#3537)
+- Explicit inexact object syntax (#3467)
+- Fixes eslint errors in /cli (#3485)
+
 ## [2.6.1] - 2019-07-30
 
 ### Fixed
