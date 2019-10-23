@@ -16,7 +16,7 @@ declare module 'puppeteer' {
   }
 
   /** Keyboard provides an api for managing a virtual keyboard. */
-  declare type Keyboard = {
+  declare export type Keyboard = {
    /**
     * Dispatches a keydown event.
     * @param key Name of key to press, such as ArrowLeft.
@@ -45,7 +45,7 @@ declare module 'puppeteer' {
    ...
   };
 
-  declare type MousePressOptions = {
+  declare export type MousePressOptions = {
    /**
     * left, right, or middle.
     * @default left
@@ -59,7 +59,7 @@ declare module 'puppeteer' {
    ...
   };
 
-  declare type Mouse = {
+  declare export type Mouse = {
    /**
     * Shortcut for `mouse.move`, `mouse.down` and `mouse.up`.
     * @param x The x position.
@@ -87,7 +87,7 @@ declare module 'puppeteer' {
    ...
   };
 
-  declare type Touchscreen = { /**
+  declare export type Touchscreen = { /**
    * Dispatches a touchstart and touchend event.
    * @param x The x position.
    * @param y The y position.
@@ -97,13 +97,13 @@ declare module 'puppeteer' {
   /**
    * You can use `tracing.start` and `tracing.stop` to create a trace file which can be opened in Chrome DevTools or timeline viewer.
    */
-  declare type Tracing = {
+  declare export type Tracing = {
    start(options: TracingStartOptions): Promise<void>,
    stop(): Promise<void>,
    ...
   };
 
-  declare type TracingStartOptions = {
+  declare export type TracingStartOptions = {
    categories?: Array<string>,
    path: string,
    screenshots?: boolean,
@@ -111,7 +111,7 @@ declare module 'puppeteer' {
   };
 
   /** Dialog objects are dispatched by page via the 'dialog' event. */
-  declare type Dialog = {
+  declare export type Dialog = {
    /**
     * Accepts the dialog.
     * @param promptText A text to enter in prompt. Does not cause any effects if the dialog's type is not prompt.
@@ -129,7 +129,7 @@ declare module 'puppeteer' {
   };
 
   /** ConsoleMessage objects are dispatched by page via the 'console' event. */
-  declare type ConsoleMessage = {
+  declare export type ConsoleMessage = {
    /** The message arguments. */
    args(): Array<JSHandle>,
    /** The message text. */
@@ -156,7 +156,7 @@ declare module 'puppeteer' {
    ...
   };
 
-  declare type PageEvents =
+  declare export type PageEvents =
     | 'console'
     | 'dialog'
     | 'error'
@@ -170,21 +170,21 @@ declare module 'puppeteer' {
     | 'requestfinished'
     | 'response';
 
-  declare type BrowserEvents =
+  declare export type BrowserEvents =
     | 'disconnected'
     | 'targetchanged'
     | 'targetcreated'
     | 'targetdestroyed';
 
-  declare type AuthOptions = {
+  declare export type AuthOptions = {
    password: string,
    username: string,
    ...
   };
 
-  declare type MouseButtons = 'left' | 'right' | 'middle';
+  declare export type MouseButtons = 'left' | 'right' | 'middle';
 
-  declare type ClickOptions = {
+  declare export type ClickOptions = {
    /** defaults to left */
    button?: MouseButtons,
    /** defaults to 1 */
@@ -198,7 +198,7 @@ declare module 'puppeteer' {
   };
 
   /** Represents a browser cookie. */
-  declare type Cookie = {
+  declare export type Cookie = {
    /** The cookie domain. */
    domain: string,
    /** The cookie Unix expiration time in seconds. */
@@ -218,7 +218,7 @@ declare module 'puppeteer' {
    ...
   };
 
-  declare type DeleteCookie = {
+  declare export type DeleteCookie = {
    domain?: string,
    /** The cookie name. */
    name: string,
@@ -228,7 +228,7 @@ declare module 'puppeteer' {
    ...
   };
 
-  declare type SetCookie = {
+  declare export type SetCookie = {
    /** The cookie domain. */
    domain?: string,
    /** The cookie Unix expiration time in seconds. */
@@ -250,7 +250,7 @@ declare module 'puppeteer' {
    ...
   };
 
-  declare type Viewport = {
+  declare export type Viewport = {
    /**
     * Specify device scale factor (can be thought of as dpr).
     * @default 1
@@ -279,7 +279,7 @@ declare module 'puppeteer' {
   };
 
   /** Page emulation options. */
-  declare type EmulateOptions = {
+  declare export type EmulateOptions = {
    /** The emulated user-agent. */
    userAgent?: string,
    /** The viewport emulation options. */
@@ -287,12 +287,12 @@ declare module 'puppeteer' {
    ...
   };
 
-  declare type EvaluateFn = string | ((...args: Array<mixed>) => mixed);
+  declare export type EvaluateFn = string | ((...args: Array<mixed>) => mixed);
 
-  declare type LoadEvent = 'load' | 'domcontentloaded' | 'networkidle0' | 'networkidle2';
+  declare export type LoadEvent = 'load' | 'domcontentloaded' | 'networkidle0' | 'networkidle2';
 
   /** The navigation options. */
-  declare type NavigationOptions = {
+  declare export type NavigationOptions = {
    /**
     * Maximum navigation time in milliseconds, pass 0 to disable timeout.
     * @default 30000
@@ -306,7 +306,7 @@ declare module 'puppeteer' {
    ...
   };
 
-  declare type PDFFormat =
+  declare export type PDFFormat =
     | 'Letter'
     | 'Legal'
     | 'Tabload'
@@ -318,7 +318,7 @@ declare module 'puppeteer' {
     | 'A4'
     | 'A5';
 
-  declare type PDFOptions = {
+  declare export type PDFOptions = {
    /**
     * Display header and footer.
     * @default false
@@ -390,7 +390,7 @@ declare module 'puppeteer' {
   };
 
   /** Defines the screenshot options. */
-  declare type ScreenshotOptions = {
+  declare export type ScreenshotOptions = {
    /**
     * An object which specifies clipping region of the page.
     */
@@ -422,7 +422,7 @@ declare module 'puppeteer' {
   };
 
   /** Options for `addStyleTag` */
-  declare type StyleTagOptions = {
+  declare export type StyleTagOptions = {
    /** Raw CSS content to be injected into frame. */
    content?: string,
    /** Path to the CSS file to be injected into frame. If `path` is a relative path, then it is resolved relative to current working directory. */
@@ -432,7 +432,7 @@ declare module 'puppeteer' {
    ...
   };
   /** Options for `addScriptTag` */
-  declare type ScriptTagOptions = {
+  declare export type ScriptTagOptions = {
    /** Raw JavaScript content to be injected into frame. */
    content?: string,
    /** Path to the JavaScript file to be injected into frame. If `path` is a relative path, then it is resolved relative to current working directory. */
@@ -444,13 +444,13 @@ declare module 'puppeteer' {
    ...
   };
 
-  declare type PageFnOptions = {
+  declare export type PageFnOptions = {
    polling?: 'raf' | 'mutation' | number,
    timeout?: number,
    ...
   };
 
-  declare type BoundingBox = {
+  declare export type BoundingBox = {
    /** The height. */
    height: number,
    /** The width. */
@@ -465,7 +465,7 @@ declare module 'puppeteer' {
   /**
    * Represents an in-page DOM element. ElementHandles can be created with the page.$ method.
    */
-  declare type ElementHandle = JSHandle & {
+  declare export type ElementHandle = JSHandle & {
    /**
     * The method runs element.querySelector within the page. If no element matches the selector, the return value resolve to null.
     * @param selector A selector to query element for
@@ -544,7 +544,7 @@ declare module 'puppeteer' {
   };
 
   /** The class represents a context for JavaScript execution. */
-  declare type ExecutionContext = {
+  declare export type ExecutionContext = {
    evaluate(fn: EvaluateFn, ...args: Array<mixed>): Promise<mixed>,
    evaluateHandle(fn: EvaluateFn, ...args: Array<mixed>): Promise<JSHandle>,
    queryObjects(prototypeHandle: JSHandle): JSHandle,
@@ -552,7 +552,7 @@ declare module 'puppeteer' {
   };
 
   /** JSHandle represents an in-page JavaScript object. */
-  declare type JSHandle = {
+  declare export type JSHandle = {
    /**
     * Returns a ElementHandle
     */
@@ -583,7 +583,7 @@ declare module 'puppeteer' {
    ...
   };
 
-  declare type Metrics = {
+  declare export type Metrics = {
    /** Number of documents in the page. */
    Documents: number,
    /** Number of frames in the page. */
@@ -613,10 +613,10 @@ declare module 'puppeteer' {
    ...
   };
 
-  declare type Headers = { [key: string]: string, ... };
-  declare type HttpMethod = 'GET' | 'POST' | 'PATCH' | 'PUT' | 'DELETE' | 'OPTIONS';
+  declare export type Headers = { [key: string]: string, ... };
+  declare export type HttpMethod = 'GET' | 'POST' | 'PATCH' | 'PUT' | 'DELETE' | 'OPTIONS';
 
-  declare type ResourceType =
+  declare export type ResourceType =
     | 'document'
     | 'stylesheet'
     | 'image'
@@ -631,7 +631,7 @@ declare module 'puppeteer' {
     | 'manifest'
     | 'other';
 
-  declare type Overrides = {
+  declare export type Overrides = {
    headers?: Headers,
    method?: HttpMethod,
    postData?: string,
@@ -640,7 +640,7 @@ declare module 'puppeteer' {
   };
 
   /** Represents a page request. */
-  declare type Request = {
+  declare export type Request = {
    /**
     * Aborts request.
     * To use this, request interception should be enabled with `page.setRequestInterception`.
@@ -695,7 +695,7 @@ declare module 'puppeteer' {
   };
 
   /** Options for `Request.respond` method */
-  declare type RespondOptions = {
+  declare export type RespondOptions = {
    /** Specifies the response body. */
    body?: Buffer | string,
    /** Specifies the Content-Type response header. */
@@ -711,7 +711,7 @@ declare module 'puppeteer' {
   };
 
   /** Response class represents responses which are received by page. */
-  declare type Response = {
+  declare export type Response = {
    /** Promise which resolves to a buffer with response body. */
    buffer(): Promise<Buffer>,
    /** True if the response was served from either the browser's disk cache or memory cache. */
@@ -840,7 +840,7 @@ declare module 'puppeteer' {
     ) => Promise<ElementHandle>;
   }
 
-  declare type Frame = FrameBase & {
+  declare export type Frame = FrameBase & {
    childFrames(): Array<Frame>,
    /** Execution context associated with this frame. */
    executionContext(): ExecutionContext,
@@ -853,7 +853,7 @@ declare module 'puppeteer' {
    ...
   };
 
-  declare type PageEventObj = {
+  declare export type PageEventObj = {
    /**
     * Emitted when JavaScript within the page calls one of console API methods, e.g. console.log or console.dir.
     * Also emitted if the page throws an error or a warning.
@@ -900,7 +900,7 @@ declare module 'puppeteer' {
   };
 
   /** Page provides methods to interact with a single tab in Chromium. One Browser instance might have multiple Page instances. */
-  declare interface Page extends OverridableEventEmitter, FrameBase {
+  declare export interface Page extends OverridableEventEmitter, FrameBase {
     /**
      * Provide credentials for http authentication.
      * To disable authentication, pass `null`.
@@ -1176,7 +1176,7 @@ declare module 'puppeteer' {
   }
 
   /** A Browser is created when Puppeteer connects to a Chromium instance, either through puppeteer.launch or puppeteer.connect. */
-  declare interface Browser extends OverridableEventEmitter {
+  declare export interface Browser extends OverridableEventEmitter {
     /**
      * Closes browser with all the pages (if any were opened).
      * The browser object itself is considered to be disposed and can not be used anymore.
@@ -1237,7 +1237,7 @@ declare module 'puppeteer' {
     wsEndpoint(): string;
   }
 
-  declare type BrowserEventObj = {
+  declare export type BrowserEventObj = {
    /** Emitted when puppeteer gets disconnected from the browser instance. */
    disconnected: void,
    /** Emitted when the url of a target changes. */
@@ -1249,7 +1249,7 @@ declare module 'puppeteer' {
    ...
   };
 
-  declare type Target = {
+  declare export type Target = {
    /** Creates a Chrome Devtools Protocol session attached to the target. */
    createCDPSession(): Promise<CDPSession>,
    /** Returns the target `Page` or a `null` if the type of the page is not "page". */
@@ -1261,7 +1261,7 @@ declare module 'puppeteer' {
    ...
   };
 
-  declare type LaunchOptions = {
+  declare export type LaunchOptions = {
    /** Whether to open chrome in appMode. Defaults to false. */
    appMode?: boolean,
    /**
@@ -1311,7 +1311,7 @@ declare module 'puppeteer' {
    ...
   };
 
-  declare type ConnectOptions = {
+  declare export type ConnectOptions = {
    /** A browser websocket endpoint to connect to. */
    browserWSEndpoint?: string,
    /**
@@ -1322,7 +1322,7 @@ declare module 'puppeteer' {
    ...
   };
 
-  declare interface CDPSession extends events$EventEmitter {
+  declare export interface CDPSession extends events$EventEmitter {
     /**
      * Detaches session from target. Once detached, session won't emit any events and can't be used
      * to send messages.
@@ -1336,7 +1336,7 @@ declare module 'puppeteer' {
     send(method: string, params?: Object): Promise<mixed>;
   }
 
-  declare type Coverage = {
+  declare export type Coverage = {
    startCSSCoverage(options?: StartCoverageOptions): Promise<void>,
    startJSCoverage(options?: StartCoverageOptions): Promise<void>,
    stopCSSCoverage(): Promise<Array<CoverageEntry>>,
@@ -1344,10 +1344,10 @@ declare module 'puppeteer' {
    ...
   };
 
-  declare type StartCoverageOptions = { /** Whether to reset coverage on every navigation. Defaults to `true`. */
+  declare export type StartCoverageOptions = { /** Whether to reset coverage on every navigation. Defaults to `true`. */
   resetOnNavigation?: boolean, ... };
 
-  declare type CoverageEntry = {
+  declare export type CoverageEntry = {
    ranges: Array<{
     end: number,
     start: number,
