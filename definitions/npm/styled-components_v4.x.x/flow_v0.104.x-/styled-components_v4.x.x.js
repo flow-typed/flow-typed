@@ -83,7 +83,7 @@ declare module 'styled-components' {
   declare export function isStyledComponent(target: any): boolean;
 
   declare type SCMProps = {
-    children?: Reactt$Element<any>,
+    children?: React$Element<any>,
     sheet?: StyleSheet,
     target?: HTMLElement,
     ...
