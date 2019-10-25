@@ -50,6 +50,24 @@ declare module '@react-native-community/netinfo' {
     listener: (NetInfoState) => mixed
   ): NetInfoSubscription;
 
+  declare export var NetInfoStateType: $ReadOnly<{|
+    unknown: "unknown",
+    none: "none",
+    cellular: "cellular",
+    wifi: "wifi",
+    bluetooth: "bluetooth",
+    ethernet: "ethernet",
+    wimax: "wimax",
+    vpn: "vpn",
+    other: "other"
+  |}>
+
+  declare export var NetInfoCellularGeneration: $ReadOnly<{|
+    '2g': "2g",
+    '3g': "3g",
+    '4g': "4g"
+  |}>
+
   declare export default $ReadOnly<{|
     fetch: typeof fetch,
     addEventListener: typeof addEventListener,
