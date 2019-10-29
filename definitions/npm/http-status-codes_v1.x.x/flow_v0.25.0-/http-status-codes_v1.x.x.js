@@ -332,4 +332,11 @@ declare module 'http-status-codes' {
    * @returns {String} The associated title of the passed status code
    */
   declare function getStatusText(statusCode: number): string;
+  /**
+   * Convert the status reason phrase to its appropriate numeric value
+   * @param reasonPhrase One of the available reason phrases in this package
+   * @returns {Number} The associated status code of the passed reason phrase
+   * @throws {Error} The reason phrase does not exist
+   */
+  declare function getStatusCode(reasonPhrase: string): number;
 }
