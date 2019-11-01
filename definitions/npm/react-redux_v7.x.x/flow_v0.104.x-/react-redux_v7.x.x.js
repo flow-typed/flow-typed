@@ -281,6 +281,8 @@ declare module "react-redux" {
     connectAdvancedOptions: ?(ConnectAdvancedOptions & EFO),
   ): (component: Com) => React$ComponentType<OP> & $Shape<ST>;
 
+  declare export function shallowEqual: <T>(a: T, b: T) => boolean;
+
   declare export default {
     Provider: typeof Provider,
     createProvider: typeof createProvider,
@@ -289,6 +291,7 @@ declare module "react-redux" {
     useDispatch: typeof useDispatch,
     useSelector: typeof useSelector,
     useStore: typeof useStore,
+    shallowEqual: typeof shallowEqual,
     ...
   };
 }
