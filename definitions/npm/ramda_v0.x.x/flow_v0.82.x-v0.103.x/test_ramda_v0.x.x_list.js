@@ -3,6 +3,7 @@
 import _, {
   type RefineFilter,
   compose,
+  contains,
   pipe,
   curry,
   filter,
@@ -45,8 +46,6 @@ const str: string = "hello world";
   const concatxs1: Array<number> = _.concat([4, 5, 6], [1, 2, 3]);
   const concatxs2: string = _.concat("ABC", "DEF");
 
-  const cont1: boolean = _.contains("s", ss);
-
   const dropxs: Array<string> = _.drop(4, ss);
   const dropxs1: string = _.drop(3)(str);
   const dropxs2: Array<string> = _.dropLast(4, ss);
@@ -55,6 +54,82 @@ const str: string = "hello world";
   const dropxs5: Array<string> = _.dropRepeats(ss);
   const dropxs6: Array<number> = _.dropRepeatsWith(_.eqBy(Math.abs), ns);
   const dropxs7: Array<number> = _.dropWhile(x => x === 1, ns);
+
+  describe('contains', () => {
+    describe('uncurried form', () => {
+      it('returns a boolean for an Array and its element type', () => {
+        const xs: Array<number> = [1]
+        const result: boolean = contains(2, xs)
+      })
+
+      it('returns a boolean for a $ReadOnlyArray and its element type', () => {
+        const xs: $ReadOnlyArray<number> = [1]
+        const result: boolean = contains(2, xs)
+      })
+
+      it('does not allow a mismatched element type to the Array', () => {
+        const xs: Array<number> = [1]
+        // It is not understood why this fails to be flagged as an error when
+        // the 0.26.x libdef passes with the same declaration. The curried form
+        // works reliably though.
+        //
+        // $ShouldExpectErrorButInsteadWorksPleaseFix
+        const result: boolean = contains('foo', xs)
+      })
+
+      it('does not allow a mismatched element type to the $ReadOnlyArray', () => {
+        const xs: $ReadOnlyArray<string> = ['bar']
+        // It is not understood why this fails to be flagged as an error when
+        // the 0.26.x libdef passes with the same declaration. The curried form
+        // works reliably though.
+        //
+        // $ShouldExpectErrorButInsteadWorksPleaseFix
+        const result: boolean = contains(1, xs)
+      })
+
+      it('returns a boolean for two strings', () => {
+        const result: boolean = contains('foo', 'bar')
+      })
+
+      it('disallows a mismatched string and anything else', () => {
+        // $ExpectError
+        const result: boolean = contains(1, 'bar')
+      })
+    })
+
+    describe('1 arg curried form', () => {
+      it('returns a boolean for an Array and its element type', () => {
+        const xs: Array<number> = [1]
+        const result: boolean = contains(2)(xs)
+      })
+
+      it('returns a boolean for a $ReadOnlyArray and its element type', () => {
+        const xs: $ReadOnlyArray<number> = [1]
+        const result: boolean = contains(2)(xs)
+      })
+
+      it('does not allow a mismatched element type to the Array', () => {
+        const xs: Array<number> = [1]
+        // $ExpectError
+        const result: boolean = contains('foo')(xs)
+      })
+
+      it('does not allow a mismatched element type to the $ReadOnlyArray', () => {
+        const xs: $ReadOnlyArray<number> = [1]
+        // $ExpectError
+        const result: boolean = contains('foo')(xs)
+      })
+
+      it('returns a boolean for two strings', () => {
+        const result: boolean = contains('foo')('bar')
+      })
+
+      it('disallows a mismatched string and anything else', () => {
+        // $ExpectError
+        const result: boolean = contains(1)('bar')
+      })
+    })
+  })
 
   describe('startsWith', () => {
     it('checks to see if one string is inside of another', () => {

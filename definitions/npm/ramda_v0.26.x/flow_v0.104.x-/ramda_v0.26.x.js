@@ -662,9 +662,12 @@ declare module ramda {
   declare function concat(x: string): CurriedFunction1<string, string>;
 
   declare type Includes =
-  (<A, T: Array<A> | string>(a: A) => (b: T) => boolean) &
-  (<A, T: Array<A> | string>(a: A, b: T) => boolean);
+    & ((string, string) => boolean)
+    & ((string) => ((string => boolean)))
+    & (<A, T: $ReadOnlyArray<A> | Array<A>>(a: A) => (b: T) => boolean)
+    & (<A, T: $ReadOnlyArray<A> | Array<A>>(a: A, b: T) => boolean)
 
+  // Contains is deprecated, and is a synonym for includes.
   declare var contains: Includes;
   declare var includes: Includes;
 

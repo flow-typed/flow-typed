@@ -4,13 +4,15 @@ import _, {
   type RefineFilter,
   append,
   compose,
-  groupBy,
-  pipe,
+  concat,
+  contains,
   curry,
   filter,
-  concat,
   find,
+  includes,
+  groupBy,
   length,
+  pipe,
   reduce,
   repeat,
   subtract,
@@ -71,12 +73,6 @@ const str: string = "hello world";
     });
   });
 
-  const cont1: boolean = _.contains("s", ss);
-  const cont2: boolean = _.contains("s")(ss);
-
-  const inc1: boolean = _.includes("s", ss);
-  const inc2: boolean = _.includes("s")(ss);
-
   const dropxs: Array<string> = _.drop(4, ss);
   const dropxs1: string = _.drop(3)(str);
   const dropxs2: Array<string> = _.dropLast(4, ss);
@@ -85,6 +81,160 @@ const str: string = "hello world";
   const dropxs5: Array<string> = _.dropRepeats(ss);
   const dropxs6: Array<number> = _.dropRepeatsWith(_.eqBy(Math.abs), ns);
   const dropxs7: Array<number> = _.dropWhile(x => x === 1, ns);
+
+  // The contains libdef is the same as includes, and tests should be duplicated
+  // across the two. As of 0.26.0 contains is deprecated, but still present.
+  describe('contains', () => {
+    describe('uncurried form', () => {
+      it('returns a boolean for an Array and its element type', () => {
+        const xs: Array<number> = [1]
+        const result: boolean = contains(2, xs)
+      })
+
+      it('returns a boolean for a $ReadOnlyArray and its element type', () => {
+        const xs: $ReadOnlyArray<number> = [1]
+        const result: boolean = contains(2, xs)
+      })
+
+      it('does not allow a mismatched element type to the Array', () => {
+        const xs: Array<number> = [1]
+        // It is not understood why this fails to be flagged as an error when
+        // the 0.26.x libdef passes with the same declaration. The curried form
+        // works reliably though.
+        //
+        // $ShouldExpectErrorButInsteadWorksPleaseFix
+        const result: boolean = contains('foo', xs)
+      })
+
+      it('does not allow a mismatched element type to the $ReadOnlyArray', () => {
+        const xs: $ReadOnlyArray<string> = ['bar']
+        // It is not understood why this fails to be flagged as an error when
+        // the 0.26.x libdef passes with the same declaration. The curried form
+        // works reliably though.
+        //
+        // $ShouldExpectErrorButInsteadWorksPleaseFix
+        const result: boolean = contains(1, xs)
+      })
+
+      it('returns a boolean for two strings', () => {
+        const result: boolean = contains('foo', 'bar')
+      })
+
+      it('disallows a mismatched string and anything else', () => {
+        // $ExpectError
+        const result: boolean = contains(1, 'bar')
+      })
+    })
+
+    describe('1 arg curried form', () => {
+      it('returns a boolean for an Array and its element type', () => {
+        const xs: Array<number> = [1]
+        const result: boolean = contains(2)(xs)
+      })
+
+      it('returns a boolean for a $ReadOnlyArray and its element type', () => {
+        const xs: $ReadOnlyArray<number> = [1]
+        const result: boolean = contains(2)(xs)
+      })
+
+      it('does not allow a mismatched element type to the Array', () => {
+        const xs: Array<number> = [1]
+        // $ExpectError
+        const result: boolean = contains('foo')(xs)
+      })
+
+      it('does not allow a mismatched element type to the $ReadOnlyArray', () => {
+        const xs: $ReadOnlyArray<number> = [1]
+        // $ExpectError
+        const result: boolean = contains('foo')(xs)
+      })
+
+      it('returns a boolean for two strings', () => {
+        const result: boolean = contains('foo')('bar')
+      })
+
+      it('disallows a mismatched string and anything else', () => {
+        // $ExpectError
+        const result: boolean = contains(1)('bar')
+      })
+    })
+  })
+
+  describe('includes', () => {
+    describe('uncurried form', () => {
+      it('returns a boolean for an Array and its element type', () => {
+        const xs: Array<number> = [1]
+        const result: boolean = includes(2, xs)
+      })
+
+      it('returns a boolean for a $ReadOnlyArray and its element type', () => {
+        const xs: $ReadOnlyArray<number> = [1]
+        const result: boolean = includes(2, xs)
+      })
+
+      it('does not allow a mismatched element type to the Array', () => {
+        const xs: Array<number> = [1]
+        // It is not understood why this fails to be flagged as an error when
+        // the 0.26.x libdef passes with the same declaration. The curried form
+        // works reliably though.
+        //
+        // $ShouldExpectErrorButInsteadWorksPleaseFix
+        const result: boolean = includes('foo', xs)
+      })
+
+      it('does not allow a mismatched element type to the $ReadOnlyArray', () => {
+        const xs: $ReadOnlyArray<string> = ['bar']
+        // It is not understood why this fails to be flagged as an error when
+        // the 0.26.x libdef passes with the same declaration. The curried form
+        // works reliably though.
+        //
+        // $ShouldExpectErrorButInsteadWorksPleaseFix
+        const result: boolean = includes(1, xs)
+      })
+
+      it('returns a boolean for two strings', () => {
+        const result: boolean = includes('foo', 'bar')
+      })
+
+      it('disallows a mismatched string and anything else', () => {
+        // $ExpectError
+        const result: boolean = includes(1, 'bar')
+      })
+    })
+
+    describe('1 arg curried form', () => {
+      it('returns a boolean for an Array and its element type', () => {
+        const xs: Array<number> = [1]
+        const result: boolean = includes(2)(xs)
+      })
+
+      it('returns a boolean for a $ReadOnlyArray and its element type', () => {
+        const xs: $ReadOnlyArray<number> = [1]
+        const result: boolean = includes(2)(xs)
+      })
+
+      it('does not allow a mismatched element type to the Array', () => {
+        const xs: Array<number> = [1]
+        // $ExpectError
+        const result: boolean = includes('foo')(xs)
+      })
+
+      it('does not allow a mismatched element type to the $ReadOnlyArray', () => {
+        const xs: $ReadOnlyArray<number> = [1]
+        // $ExpectError
+        const result: boolean = includes('foo')(xs)
+      })
+
+      it('returns a boolean for two strings', () => {
+        const result: boolean = includes('foo')('bar')
+      })
+
+      it('disallows a mismatched string and anything else', () => {
+        // $ExpectError
+        const result: boolean = includes(1)('bar')
+      })
+    })
+  })
 
   describe('startsWith', () => {
     it('checks to see if one string is inside of another', () => {
@@ -401,14 +551,14 @@ const str: string = "hello world";
       const readOnly: $ReadOnlyArray<number> = [1, 2, 3];
       const appendResult1: $ReadOnlyArray<number|string> = append('s', readOnly);
       const appendResult2: $ReadOnlyArray<number|string> = append('s')(readOnly);
-      
+
       //$ExpectError
       const appendResult3: $ReadOnlyArray<number|null> = append('s', readOnly);
       //$ExpectError
       const appendResult4: $ReadOnlyArray<number> = append('s')(readOnly);
     });
   });
-  
+
   const xxxs: Array<number> = _.intersperse(1, [1, 2, 3]);
 
   const pairxs: [number, string] = _.pair(2, "str");
