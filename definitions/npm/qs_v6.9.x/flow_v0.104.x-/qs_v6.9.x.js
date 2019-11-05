@@ -60,9 +60,9 @@ declare module "qs" {
     ...
   };
 
-  declare module.exports: {
-    parse(str: string, opts?: ParseOptions): {[string]: mixed},
-    stringify(obj: {[string]: mixed} | Array<mixed>, opts?: StringifyOptions): string,
+  declare module.exports: {|
+    parse(str: string, opts?: ParseOptions): {[string]: mixed, ...},
+    stringify(obj: {[string]: mixed, ...} | Array<mixed>, opts?: StringifyOptions): string,
     formats: Formats,
-  };
+  |};
 }
