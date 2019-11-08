@@ -216,7 +216,7 @@ declare module 'react-navigation' {
 
   declare export type NavigationScreenOptionsGetter<Options: {...}> = (
     navigation: NavigationScreenProp<NavigationRoute>,
-    ncreenProps: ?NavigationScreenProps,
+    screenProps: ?NavigationScreenProps,
     theme: SupportedThemes,
   ) => Options;
 
