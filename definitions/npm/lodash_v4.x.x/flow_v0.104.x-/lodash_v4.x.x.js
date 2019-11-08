@@ -334,26 +334,26 @@ declare module "lodash" {
     lastIndexOf<T>(array: void | null, value?: ?T, fromIndex?: ?number): -1;
     nth<T>(array: T[], n?: ?number): T;
     nth(array: void | null, n?: ?number): void;
-    pull<T>(array: Array<T>, ...values?: Array<?T>): Array<T>;
-    pull<T: void | null>(array: T, ...values?: Array<?any>): T;
-    pullAll<T>(array: Array<T>, values?: ?Array<T>): Array<T>;
-    pullAll<T: void | null>(array: T, values?: ?Array<any>): T;
+    pull<T>(array: Array<T>, ...values?: $ReadOnlyArray<?T>): Array<T>;
+    pull<T: void | null>(array: T, ...values?: $ReadOnlyArray<?any>): T;
+    pullAll<T>(array: Array<T>, values?: ?$ReadOnlyArray<T>): Array<T>;
+    pullAll<T: void | null>(array: T, values?: ?$ReadOnlyArray<any>): T;
     pullAllBy<T>(
       array: Array<T>,
-      values?: ?Array<T>,
+      values?: ?$ReadOnlyArray<T>,
       iteratee?: ?ValueOnlyIteratee<T>
     ): Array<T>;
     pullAllBy<T: void | null>(
       array: T,
-      values?: ?Array<any>,
+      values?: ?$ReadOnlyArray<any>,
       iteratee?: ?ValueOnlyIteratee<any>
     ): T;
-    pullAllWith<T>(array: T[], values?: ?(T[]), comparator?: ?Function): T[];
-    pullAllWith<T: void | null>(
+   pullAllWith<T: void | null>(
       array: T,
-      values?: ?Array<any>,
+      values?: ?$ReadOnlyArray<any>,
       comparator?: ?Function
     ): T;
+    pullAllWith<T>(array: T[], values?: ?(T[]), comparator?: ?Function): T[];   
     pullAt<T>(array?: ?Array<T>, ...indexed?: Array<?number>): Array<T>;
     pullAt<T>(array?: ?Array<T>, indexed?: ?Array<number>): Array<T>;
     remove<T>(array?: ?Array<T>, predicate?: ?Predicate<T>): Array<T>;
@@ -1836,19 +1836,19 @@ declare module "lodash/fp" {
     nth<T>(n: number, array: T[]): T;
     pull<T>(value: T): (array: Array<T>) => Array<T>;
     pull<T>(value: T, array: Array<T>): Array<T>;
-    pullAll<T>(values: Array<T>): (array: Array<T>) => Array<T>;
-    pullAll<T>(values: Array<T>, array: Array<T>): Array<T>;
+    pullAll<T>(values: $ReadOnlyArray<T>): (array: Array<T>) => Array<T>;
+    pullAll<T>(values: $ReadOnlyArray<T>, array: Array<T>): Array<T>;
     pullAllBy<T>(
       iteratee: ValueOnlyIteratee<T>
-    ): ((values: Array<T>) => (array: Array<T>) => Array<T>) &
-      ((values: Array<T>, array: Array<T>) => Array<T>);
+    ): ((values: $ReadOnlyArray<T>) => (array: Array<T>) => Array<T>) &
+      ((values: $ReadOnlyArray<T>, array: Array<T>) => Array<T>);
     pullAllBy<T>(
       iteratee: ValueOnlyIteratee<T>,
-      values: Array<T>
+      values: $ReadOnlyArray<T>
     ): (array: Array<T>) => Array<T>;
     pullAllBy<T>(
       iteratee: ValueOnlyIteratee<T>,
-      values: Array<T>,
+      values: $ReadOnlyArray<T>,
       array: Array<T>
     ): Array<T>;
     pullAllWith<T>(
