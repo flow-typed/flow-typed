@@ -416,6 +416,19 @@ describe("react-router-dom", () => {
     it('useRouteMatch', () => {
       const match: Match = useRouteMatch();
       const matchPath: Match = useRouteMatch('/path');
+      const matchArray: Match = useRouteMatch(['/path', '/the/otherRoute']);
+
+      const matchObject: Match = useRouteMatch({
+        path: '/path',
+        strict: true,
+        sensitive: true,
+        exact: true,
+      });
+
+      // $ExpectError
+      const matchObject2: Match = useRouteMatch({
+        sensitive: 'foo',
+      });
     });
   });
 });
