@@ -116,7 +116,7 @@ async function getOrderedFlowBinVersions(
     const OS_ARCH_FILTER_RE = new RegExp(`flow-${BIN_PLATFORM}`);
 
     let page = 0;
-    const apiPayload = await GH_CLIENT.repos.getReleases({
+    const apiPayload = await GH_CLIENT.repos.listReleases({
       owner: 'facebook',
       repo: 'flow',
       page: page++,
