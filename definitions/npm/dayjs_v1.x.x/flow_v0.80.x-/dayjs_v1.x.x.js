@@ -48,7 +48,7 @@ declare module 'dayjs' {
 
   }
 
-  declare export type ConfigType = string | number | Date | DayJs;
+  declare export type ConfigType = string | number | Date | Dayjs;
   declare export type OptionType = { locale?: string, format?: string, utc?: boolean } | string;
   declare export type UnitTypeShort = 'd' | 'M' | 'y' | 'h' | 'm' | 's' | 'ms';
   declare export type UnitType = 'millisecond' | 'second' | 'minute' | 'hour' | 'day' | 'month' | 'year' | 'date' | UnitTypeShort;
