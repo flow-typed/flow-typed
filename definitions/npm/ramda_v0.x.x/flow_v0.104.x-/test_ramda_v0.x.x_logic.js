@@ -1,6 +1,7 @@
 /* @flow */
 /*eslint-disable no-undef, no-unused-vars, no-console*/
 import _, {
+  complement,
   compose,
   curry,
   filter,
@@ -47,12 +48,124 @@ const f = _.both(gt10, even);
 const b: boolean = f('');
 const b_: boolean = f(100);
 
-//$ExpectError
-const isEven = n => n % 2 === 0;
-const isOdd = _.complement(isEven);
+describe('complement', () => {
+  it('accepts a function that returns a boolean', () => {
+    complement(() => true)
+    complement(() => false)
+    // $ExpectError
+    complement(() => 'foo')
+    // $ExpectError
+    complement(() => 5)
+    // $ExpectError
+    complement(() => [])
+    // $ExpectError
+    complement(() => ({}))
+    // $ExpectError
+    complement(() => null)
+    // $ExpectError
+    complement(() => undefined)
+  })
 
-const c: boolean = isOdd('');
-const c_: boolean = isOdd(2);
+  it('returns a function that returns a boolean', () => {
+    const fn = complement(() => true)
+    const b: boolean = fn()
+    // $ExpectError
+    const s: string = fn()
+    // $ExpectError
+    const n: number = fn()
+    // $ExpectError
+    const xs: Array<mixed> = fn()
+    // $ExpectError
+    const obj: {[string]: mixed} = fn()
+    // $ExpectError
+    const v: void = fn()
+    // $ExpectError
+    const nil: null = fn()
+  })
+
+  // The following code is generated from
+  // https://github.com/LoganBarnett/typedef-gen due to Flow not being able to
+  // preserve the input function's form as a return type.
+  //
+  // Begin generated complement test cases.
+  it('returns a function whose parameters match the input function (0)', () => {
+    const fn = complement(() => true)
+    fn()
+    // Extra arguments are discarded, so there is no negative case here.
+  })
+
+  it('returns a function whose parameters match the input function (1)', () => {
+    const fn = complement((a: 'a',) => true)
+    fn('a',)
+    // $ExpectError
+    fn(0)
+  })
+
+  it('returns a function whose parameters match the input function (2)', () => {
+    const fn = complement((a: 'a', b: 'b',) => true)
+    fn('a', 'b',)
+    // $ExpectError
+    fn(0, 1)
+  })
+
+  it('returns a function whose parameters match the input function (3)', () => {
+    const fn = complement((a: 'a', b: 'b', c: 'c',) => true)
+    fn('a', 'b', 'c',)
+    // $ExpectError
+    fn(0, 1, 2)
+  })
+
+  it('returns a function whose parameters match the input function (4)', () => {
+    const fn = complement((a: 'a', b: 'b', c: 'c', d: 'd',) => true)
+    fn('a', 'b', 'c', 'd',)
+    // $ExpectError
+    fn(0, 1, 2, 3)
+  })
+
+  it('returns a function whose parameters match the input function (5)', () => {
+    const fn = complement((a: 'a', b: 'b', c: 'c', d: 'd', e: 'e',) => true)
+    fn('a', 'b', 'c', 'd', 'e',)
+    // $ExpectError
+    fn(0, 1, 2, 3, 4)
+  })
+
+  it('returns a function whose parameters match the input function (6)', () => {
+    const fn = complement((a: 'a', b: 'b', c: 'c', d: 'd', e: 'e', f: 'f',) => true)
+    fn('a', 'b', 'c', 'd', 'e', 'f',)
+    // $ExpectError
+    fn(0, 1, 2, 3, 4, 5)
+  })
+
+  it('returns a function whose parameters match the input function (7)', () => {
+    const fn = complement((a: 'a', b: 'b', c: 'c', d: 'd', e: 'e', f: 'f', g: 'g',) => true)
+    fn('a', 'b', 'c', 'd', 'e', 'f', 'g',)
+    // $ExpectError
+    fn(0, 1, 2, 3, 4, 5, 6)
+  })
+
+  it('returns a function whose parameters match the input function (8)', () => {
+    const fn = complement((a: 'a', b: 'b', c: 'c', d: 'd', e: 'e', f: 'f', g: 'g', h: 'h',) => true)
+    fn('a', 'b', 'c', 'd', 'e', 'f', 'g', 'h',)
+    // $ExpectError
+    fn(0, 1, 2, 3, 4, 5, 6, 7)
+  })
+
+  it('returns a function whose parameters match the input function (9)', () => {
+    const fn = complement((a: 'a', b: 'b', c: 'c', d: 'd', e: 'e', f: 'f', g: 'g', h: 'h', i: 'i',) => true)
+    fn('a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i',)
+    // $ExpectError
+    fn(0, 1, 2, 3, 4, 5, 6, 7, 8)
+  })
+
+  it('returns a function whose parameters match the input function (10)', () => {
+    const fn = complement((a: 'a', b: 'b', c: 'c', d: 'd', e: 'e', f: 'f', g: 'g', h: 'h', i: 'i', j: 'j',) => true)
+    fn('a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j',)
+    // $ExpectError
+    fn(0, 1, 2, 3, 4, 5, 6, 7, 8, 9)
+  })
+
+  // End generated complement test cases.
+})
 
 const fn = _.cond([
   [_.equals(0), _.always('water freezes at 0°C')],
