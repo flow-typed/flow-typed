@@ -669,13 +669,14 @@ declare module '@apollo/react-common' {
     ...,
   };
 
-  declare class ApolloError extends Error {
+  declare class $ApolloError extends Error {
     message: string;
     graphQLErrors: Array<GraphQLError>;
     networkError: Error | null;
     extraInfo: any;
     constructor(info: ErrorConstructor): this;
   }
+  declare export type ApolloError = $ApolloError;
 
   declare interface ErrorConstructor {
     graphQLErrors?: Array<GraphQLError>;
