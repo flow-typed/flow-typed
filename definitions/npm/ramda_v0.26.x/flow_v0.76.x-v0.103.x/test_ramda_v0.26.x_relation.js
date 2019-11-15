@@ -232,7 +232,7 @@ const _innerJoin: Array<{ [k: string]: mixed }> = _.innerJoin(
   [177, 456, 999]
 );
 
-const inters: Array<number> = _.intersection(ns, ns);
+const inters: $ReadOnlyArray<number> = _.intersection(ns, ns);
 
 const pathEqObj: boolean = _.pathEq(["b", 1], 1, objArr);
 const pathEqObj2: boolean = _.pathEq(["b", 1])(1)(objArr);
