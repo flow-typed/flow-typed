@@ -1,6 +1,23 @@
-import type { Reducer, Store } from "redux";
-
 declare module "redux-oidc" {
+  /**
+   * S = State
+   * A = Action
+   * D = Dispatch
+   */
+  declare type DispatchAPI<A> = (action: A) => A;
+
+  declare type Dispatch<A: { type: *, ... }> = DispatchAPI<A>;
+
+  declare type Reducer<S, A> = (state: S | void, action: A) => S;
+
+  declare type Store<S, A, D = Dispatch<A>> = {
+    // rewrite MiddlewareAPI members in order to get nicer error messages (intersections produce long messages)
+    dispatch: D,
+    getState(): S,
+    subscribe(listener: () => void): () => void,
+    replaceReducer(nextReducer: Reducer<S, A>): void,
+    ...
+  };
   declare type UserManager = {
     getUser: () => Promise<User<*>>,
     removeUser: () => Promise<*>,
