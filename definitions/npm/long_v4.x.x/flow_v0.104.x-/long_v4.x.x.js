@@ -94,7 +94,7 @@ declare module 'long' {
         static fromNumber(value: number, unsigned?: boolean): Long;
         static fromString(str: string, unsigned?: boolean, radix?: number): Long;
         static fromString(str: string, radix: number): Long;
-        static fromValue(val: *, unsigned?: boolean): Long;
+        static fromValue(val: mixed, unsigned?: boolean): Long;
     }
 
     declare module.exports: typeof Long;
