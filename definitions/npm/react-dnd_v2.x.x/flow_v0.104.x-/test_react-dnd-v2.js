@@ -437,7 +437,7 @@ class CustomDragLayer extends React.Component<CustomDragLayerProps> {
       return null;
     }
 
-    return <div>this.props.title</div>;
+    return <div>{title}</div>;
   }
 }
 
