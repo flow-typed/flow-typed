@@ -652,8 +652,11 @@ declare module ramda {
     x: E,
   ): (xs: Array<E>) => Array<E>;
 
-  declare function chain<A, B>(f: (x: A) => B[], xs: A[]): B[]
-  declare function chain<A, B>(f: (x: A) => B[]): (xs: A[]) => B[]
+  declare function chain<A, B>(f: (x: A) => B[], xs: $ReadOnlyArray<A>): B[];
+  declare function chain<A, B>(f: (x: A) => B[]): (xs: $ReadOnlyArray<A>) => B[];
+
+  //if second argument is a function, chain(f, g)(x) is equivalent to f(g(x), x)
+  declare function chain<A, B, R>(f: (x: A, y: B) => R, g: (y: B) => A):(y: B) => R;
 
   declare function concat<A, B>(x: $ReadOnlyArray<A>, y: $ReadOnlyArray<B>): Array<A | B>;
   declare function concat<A, B>(x: $ReadOnlyArray<A>): CurriedFunction1<$ReadOnlyArray<B>, Array<A | B>>;

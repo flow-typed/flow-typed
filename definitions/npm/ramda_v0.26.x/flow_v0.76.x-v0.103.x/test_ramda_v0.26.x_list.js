@@ -3,6 +3,7 @@
 import _, {
   type RefineFilter,
   append,
+  chain,
   compose,
   concat,
   contains,
@@ -11,6 +12,7 @@ import _, {
   find,
   groupBy,
   includes,
+  last,
   length,
   pipe,
   reduce,
@@ -703,4 +705,30 @@ const str: string = "hello world";
     s: a,
     y: b
   }))([1, 2, 3])(["1", "2", "3"]);
+
+  describe('chain', () => {
+    const readOnlyArray = ['1', '2', '3'];
+
+    it('should only accept read only list as input', () => {
+      const duplicate = n => [n, n];
+      const result1: Array<string> = chain(duplicate, readOnlyArray);
+      const result2: Array<string> = chain(duplicate)(readOnlyArray);
+    });
+
+    it('should error out when type casting', () => {
+      const castType = n => (parseInt(n): number);
+      //$ExpectError
+      const result: Array<string> = chain(castType, readOnlyArray);
+    });
+
+    it('should take second argument as function', () => {
+      const result: Array<?string> = chain(append, last)(readOnlyArray)
+    });
+
+    it('should error out when second arugment is function but type mismatches', () => {
+      const castType = n => (parseInt(n): number);
+      //$ExpectError
+      const result: Array<string> = chain(append, castType)(readOnlyArray)
+    });
+  })
 }
