@@ -978,6 +978,7 @@ declare module 'react-navigation' {
     style?: ViewStyleProp,
     useNativeAnimations?: boolean,
     drawerBackgroundColor?: string,
+    overlayColor?: string,
     screenProps?: {...},
   |};
   declare type _DrawerNavigatorConfig = $Exact<{
