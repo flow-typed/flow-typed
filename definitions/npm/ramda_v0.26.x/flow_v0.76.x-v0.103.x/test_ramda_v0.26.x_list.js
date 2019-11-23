@@ -703,4 +703,15 @@ const str: string = "hello world";
     s: a,
     y: b
   }))([1, 2, 3])(["1", "2", "3"]);
+
+  describe('adjust', () => {
+    it('should allow both Array and $ReadOnlyArray output', () => {
+      const arr: Array<number> = [1, 2, 3]
+      const ro: $ReadOnlyArray<number> = [1, 2, 3]
+      const result: $ReadOnlyArray<number> = adjust(1, x => x + 1, arr)
+      const result1: Array<number> = adjust(1, x => x + 1, arr)
+      const result2: $ReadOnlyArray<number> = adjust(1, x => x + 1, ro)
+      const result3: Array<number> = adjust(1, x => x + 1, ro)
+    });
+  })
 }
