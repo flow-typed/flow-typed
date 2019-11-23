@@ -2,6 +2,7 @@
 /*eslint-disable no-undef, no-unused-vars, no-console*/
 import _, {
   type RefineFilter,
+  adjust,
   append,
   compose,
   concat,
