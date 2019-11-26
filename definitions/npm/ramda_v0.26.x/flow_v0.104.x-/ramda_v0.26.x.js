@@ -777,14 +777,13 @@ declare module ramda {
     fn: UnaryPredicateFn<T>,
   ): (xs: Array<T>) => boolean;
 
-  declare var nth: {
+  declare var nth: {|
     <A, As: $ReadOnlyArray<A>>(n: number, xs: As): ?A,
     <A, As: $ReadOnlyArray<A> | string>(
       n: number,
     ): ((xs: string) => string) & ((xs: As) => ?A),
     (n: number, xs: string): string,
-    ...
-  }
+  |}
 
 
   declare type Find = (<V, T: Array<V>>(

@@ -701,24 +701,58 @@ const str: string = "hello world";
   }))([1, 2, 3])(["1", "2", "3"]);
 
   describe('nth', () => {
-    it('should pass', () => {
+    it('should get a maybe number back on input is an array of numbers', () => {
       const nthxs1: ?number = nth(2, [1,2,3]);
       const nthxs2: ?number = nth(2)([1,2]);
+    });
+
+    it('should get a maybe string back on input is an arary of strings', () => {
       const nthxs3: ?string = nth(2, ["curry"]);
-      const nthxs4: ?string = nth(2)(["curry"]);
+      const nthxs4: ?string = nth(2)(["curry", "bean"]);
+    });
+
+    it('should get a string back when input is string', () => {
       const nthxs5: string = nth(2)("curry");
       const nthxs6: string = nth(2, "curry");
     });
 
-    it('should fail', () => {
+    it('should take read only array as second argument', () => {
+      const readOnlyArray: $ReadOnlyArray<number>  = [1, 2, 3];
+      const nthxs = nth(2)(readOnlyArray)
+      const nthxs1 = nth(2, readOnlyArray)
+    });
+
+    it('should take a mutable array as second arugment', () => {
+      const array: Array<string> = ['foo', 'bar'];
+      const nthxs = nth(1)(array)
+      const nthxs1 = nth(1, array)
+    });
+
+    it('should fail on expecting return type to be a maybe string', () => {
       //$ExpectError
       const nthxs: ?string = nth(2)([1, 2, 3]);
+    });
+
+    it('should fail on expecting return type to be string when input array consists of numbers', () => {
       //$ExpectError
-      const nthxs1: string = nth(2, [1, 2, 3]);
+      const nthxs: string = nth(2, [1, 2, 3]);
       //$ExpectError
-      const nthxs2: ?number = nth(2)(['foo']);
+      const nthxs1: string = nth(2)([1, 2, 3]);
+    });
+
+    it('should fail on expecting return type to be a maybe number when given an array of string input', () => {
       //$ExpectError
-      const nthxs3: string = nth(2)([1, 2, 3]);
+      const nthxs: ?number = nth(2)(['foo']);
+    });
+
+    it('should fail on passing a non-number to first argument', () => {
+      //$ExpectError
+      const nthxs = nth('foo')(['foo', 'bar'])
+    });
+
+    it('should fail on passing an object to second argument', () => {
+      //$ExpectError
+      const nthxs = nth(2)({})
     });
   })
 }
