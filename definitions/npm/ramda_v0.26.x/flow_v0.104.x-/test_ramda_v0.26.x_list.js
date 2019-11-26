@@ -12,6 +12,7 @@ import _, {
   includes,
   groupBy,
   length,
+  nth,
   pipe,
   reduce,
   repeat,
@@ -533,11 +534,6 @@ const str: string = "hello world";
 
   const nxs: boolean = _.none(x => x > 1, ns);
 
-  const nthxs: ?string = _.nth(2, ["curry"]);
-  const nthxs1: ?string = _.nth(2)(["curry"]);
-  //$ExpectError
-  const nthxs2: string = _.nth(2, [1, 2, 3]);
-
   describe('append', () => {
     it('should supports arrays', () => {
       const appendResult1: Array<number> = append(1, [1, 2, 3]);
@@ -822,4 +818,26 @@ const str: string = "hello world";
     s: a,
     y: b
   }))([1, 2, 3])(["1", "2", "3"]);
+
+  describe('nth', () => {
+    it('should pass', () => {
+      const nthxs1: ?number = nth(2, [1,2,3]);
+      const nthxs2: ?number = nth(2)([1,2]);
+      const nthxs3: ?string = nth(2, ["curry"]);
+      const nthxs4: ?string = nth(2)(["curry"]);
+      const nthxs5: string = nth(2)("curry");
+      const nthxs6: string = nth(2, "curry");
+    });
+
+    it('should fail', () => {
+      //$ExpectError
+      const nthxs: ?string = nth(2)([1, 2, 3]);
+      //$ExpectError
+      const nthxs1: string = nth(2, [1, 2, 3]);
+      //$ExpectError
+      const nthxs2: ?number = nth(2)(['foo']);
+      //$ExpectError
+      const nthxs3: string = nth(2)([1, 2, 3]);
+    });
+  })
 }
