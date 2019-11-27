@@ -844,6 +844,9 @@ const str: string = "hello world";
       const array: Array<string> = ['foo', 'bar'];
       const nthxs = nth(1)(array)
       const nthxs1 = nth(1, array)
+
+      const tutple:[number, boolean] = [1, true]
+      const nthxs2 = nth(1)(array)
     });
 
     it('should fail on expecting return type to be a maybe type of the element of the input list', () => {
@@ -868,9 +871,6 @@ const str: string = "hello world";
       const nthxs4: number = nth(1)(arr);
       //$ExpectError
       const nthxs5: number = nth(1, [1])
-    });
-
-    it('should fail on expecting return type to be a maybe number when given an array of string input', () => {
       //$ExpectError
       const nthxs: ?number = nth(2)(['foo']);
     });
