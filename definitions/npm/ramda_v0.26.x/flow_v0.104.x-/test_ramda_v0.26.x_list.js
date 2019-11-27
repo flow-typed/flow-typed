@@ -820,19 +820,18 @@ const str: string = "hello world";
   }))([1, 2, 3])(["1", "2", "3"]);
 
   describe('nth', () => {
-    it('should get a maybe number back on input is an array of numbers', () => {
+    it('should get a maybe type back on input is an array of given types', () => {
       const nthxs1: ?number = nth(2, [1,2,3]);
       const nthxs2: ?number = nth(2)([1,2]);
-    });
-
-    it('should get a maybe string back on input is an arary of strings', () => {
-      const nthxs3: ?string = nth(2, ["curry"]);
-      const nthxs4: ?string = nth(2)(["curry", "bean"]);
+      const nthxs3: ?number = nth(3)([1,2]);
+      const nthxs4: ?string = nth(2, ["curry"]);
+      const nthxs5: ?string = nth(2)(["curry", "bean"]);
+      const nthxs6: ?string = nth(3)(['foo', 'bar']);
     });
 
     it('should get a string back when input is string', () => {
-      const nthxs5: string = nth(2)("curry");
-      const nthxs6: string = nth(2, "curry");
+      const nthxs: string = nth(2)("curry");
+      const nthxs1: string = nth(2, "curry");
     });
 
     it('should take read only array as second argument', () => {
@@ -847,16 +846,28 @@ const str: string = "hello world";
       const nthxs1 = nth(1, array)
     });
 
-    it('should fail on expecting return type to be a maybe string', () => {
+    it('should fail on expecting return type to be a maybe type of the element of the input list', () => {
+      const arr: Array<number> = [1, 2, 3]
       //$ExpectError
-      const nthxs: ?string = nth(2)([1, 2, 3]);
+      const nthxs: ?string = nth(2)(arr);
+      //$ExpectError
+      const nthxs1: ?boolean = nth(1)(arr);
     });
 
-    it('should fail on expecting return type to be string when input array consists of numbers', () => {
+    it('should fail on expecting return type to mismatch the input array type', () => {
+      const arr: Array<number> = [1, 2, 3]
       //$ExpectError
-      const nthxs: string = nth(2, [1, 2, 3]);
+      const nthxs: string = nth(2, arr);
       //$ExpectError
-      const nthxs1: string = nth(2)([1, 2, 3]);
+      const nthxs1: string = nth(2)(arr);
+      //$ExpectError
+      const nthxs2: string = nth(1, ['foo'])
+      //$ExpectError
+      const nthxs3: number = nth(1, arr);
+      //$ExpectError
+      const nthxs4: number = nth(1)(arr);
+      //$ExpectError
+      const nthxs5: number = nth(1, [1])
     });
 
     it('should fail on expecting return type to be a maybe number when given an array of string input', () => {
