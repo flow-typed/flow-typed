@@ -1,6 +1,6 @@
 // This is manually converted from the Typescript types maintained by the
-// js-joda library https://github.com/js-joda/js-joda/blob/master/dist/js-joda.d.ts
-// The API is relatively stable so hopefully it won't be difficult to maintain
+// js-joda library https://github.com/js-joda/js-joda/blob/master/packages/core/dist/js-joda.d.ts
+// Note that it is different from the generated Flow types provided by js-joda
 declare module 'js-joda' {
 	declare class TemporalAccessor {
 		get(field: ChronoField): number;
