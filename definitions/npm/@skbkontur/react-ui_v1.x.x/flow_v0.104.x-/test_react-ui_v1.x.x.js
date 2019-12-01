@@ -1,4 +1,5 @@
 /* @flow */
+import * as React from 'react';
 import { it, describe } from 'flow-typed-test';
 import Button from '@skbkontur/react-ui/Button';
 
@@ -7,6 +8,6 @@ describe('react-ui', () => {
     <Button>Button</Button>;
 
     // $ExpectError
-    <Button unknown>Button</Button>;
+    <Button onClick={1}>Button</Button>;
   });
 });
