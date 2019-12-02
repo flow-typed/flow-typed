@@ -190,6 +190,7 @@ describe("Button", () => {
     const good1 = <Button type="ghost" />;
     const good2 = <Button type="dashed" />;
     const good3 = <Button type="danger" />;
+    const good5 = <Button type="link" />;
     const good4 = <Button type="default" />;
     // $ExpectError
     const bad = <Button type="bad" />;
