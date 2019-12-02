@@ -185,6 +185,15 @@ describe("Button", () => {
     // $ExpectError
     const bad = <Button onClick="bad" />;
   });
+  it("should accept only certain strings for type prop", () => {
+    const good0 = <Button type="primary" />;
+    const good1 = <Button type="ghost" />;
+    const good2 = <Button type="dashed" />;
+    const good3 = <Button type="danger" />;
+    const good4 = <Button type="default" />;
+    // $ExpectError
+    const bad = <Button type="bad" />;
+  });
 });
 
 describe("Button.Group", () => {
