@@ -176,10 +176,14 @@ describe("Button", () => {
     const button = <Button />;
   });
   it("should accept nullary or unary onClick handler", () => {
-    const good0 = <Button onClick={() => undefined} />
-    const good1 = <Button onClick={(event: SyntheticEvent<HTMLButtonElement>) => undefined} />
+    const good0 = <Button onClick={() => undefined} />;
+    const good1 = (
+      <Button
+        onClick={(event: SyntheticEvent<HTMLButtonElement>) => undefined}
+      />
+    );
     // $ExpectError
-    const bad = <Button onClick='bad' />
+    const bad = <Button onClick="bad" />;
   });
 });
 
