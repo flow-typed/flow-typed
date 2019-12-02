@@ -725,9 +725,13 @@ const str: string = "hello world";
       const array: Array<string> = ['foo', 'bar'];
       const nthxs = nth(1)(array)
       const nthxs1 = nth(1, array)
-
-      const tuple:[number, boolean] = [1, true]
       const nthxs2 = nth(1)(array)
+    });
+
+    it('should take tutple as second argument', () => {
+      const tuple:[number, boolean] = [1, true]
+      const n  = nth(0, tuple)
+      cosnt ns = nth(1)(tuple)
     });
 
     it('should fail on expecting return type to be a maybe type of the element of the input list', () => {
@@ -761,7 +765,7 @@ const str: string = "hello world";
       const nthxs = nth('foo')(['foo', 'bar'])
     });
 
-    it('should fail on passing an object to second argument', () => {
+    it('should fail on passing a non-array to second argument', () => {
       //$ExpectError
       const nthxs = nth(2)({})
     });
