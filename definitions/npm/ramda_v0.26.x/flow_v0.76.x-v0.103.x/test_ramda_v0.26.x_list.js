@@ -726,7 +726,7 @@ const str: string = "hello world";
       const nthxs = nth(1)(array)
       const nthxs1 = nth(1, array)
 
-      const tutple:[number, boolean] = [1, true]
+      const tuple:[number, boolean] = [1, true]
       const nthxs2 = nth(1)(array)
     });
 
