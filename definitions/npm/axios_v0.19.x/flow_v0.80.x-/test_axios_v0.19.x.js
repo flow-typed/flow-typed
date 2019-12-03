@@ -29,7 +29,7 @@ const handleResponse = (response: $AxiosXHR<mixed>) => {
   (response.statusText: string);
   // $ExpectError
   (response.statusText: number);
-  (response.headers: ?{});
+  (response.headers: ?{...});
   (response.config: $AxiosXHRConfig<mixed>);
   // $ExpectError
   (response.config: string);
@@ -55,7 +55,7 @@ const handleError = (error: $AxiosError<mixed>) => {
   if (error.response) {
     (error.response.data: mixed);
     (error.response.status: number);
-    (error.response.headers: ?{});
+    (error.response.headers: ?{...});
   } else {
     (error.message: string);
   }
@@ -145,6 +145,11 @@ describe('Request methods', () => {
 
     axios
       .head('/user')
+      .then(handleResponse)
+      .catch(handleError);
+
+    axios
+      .options('anyUrl')
       .then(handleResponse)
       .catch(handleError);
 
