@@ -268,14 +268,10 @@ describe('Defaults', () => {
         'Authorization': 'token'
       }
     }
-    axios.defaults.headers = {
-      'common': {
-        'Authorization': 'token'
-      }
-    }
-    axios.defaults.headers =  {'post': {
-      'X-FOO': 'bar'
-    }} ;
+    axios.defaults.headers =  {
+      'post': {
+        'X-FOO': 'bar'
+      }};
     axios.defaults.timeout = 2500;
 
     const instance: Axios = axios.create();
