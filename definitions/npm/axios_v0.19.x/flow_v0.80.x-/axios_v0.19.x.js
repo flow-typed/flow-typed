@@ -4,8 +4,8 @@ declare module 'axios' {
 
   declare type AxiosTransformer<T> = (
     data: T,
-    headers?: {| [key: string]: any |},
-  ) => any;
+    headers?: {| [key: string]: mixed |},
+  ) => mixed;
 
   declare type ProxyConfig = {|
     host: string,
@@ -62,8 +62,8 @@ declare module 'axios' {
     | 'stream';
 
   declare type AxiosAdapter = (
-    config: AxiosXHRConfig<any>
-  ) => Promise<AxiosXHR<any>>;
+    config: AxiosXHRConfig<mixed>
+  ) => Promise<AxiosXHR<mixed>>;
 
   declare type AxiosXHRConfigBase<T, R = T> = {|
     adapter?: AxiosAdapter,
@@ -79,8 +79,8 @@ declare module 'axios' {
     maxContentLength?: number,
     maxRedirects?: number,
     socketPath?: string | null,
-    params?: { [key: string]: any, ...},
-    paramsSerializer?: (params: { [key: string]: any, ...}) => string,
+    params?: { [key: string]: mixed, ...},
+    paramsSerializer?: (params: { [key: string]: mixed, ...}) => string,
     onUploadProgress?: (progressEvent: ProgressEvent) => void,
     onDownloadProgress?: (progressEvent: ProgressEvent) => void,
     proxy?: ProxyConfig | false,
@@ -182,7 +182,7 @@ declare module 'axios' {
     |};
     defaults: {|
       ...$Exact<AxiosXHRConfigBase<mixed>>,
-      headers: {| [key: string]: any |},
+      headers: { [key: string]: mixed, ...},
     |};
     getUri<T, R>(config?: AxiosXHRConfig<T, R>): string;
   }
@@ -203,8 +203,8 @@ declare module 'axios' {
     Axios: typeof Axios;
     Cancel: typeof Cancel;
     CancelToken: typeof CancelToken;
-    isCancel(value: any): boolean;
-    create(config?: AxiosXHRConfigBase<any>): Axios;
+    isCancel(value: mixed): boolean;
+    create(config?: AxiosXHRConfigBase<T, R>): Axios;
     all: typeof Promise.all;
     spread<T, R>(callback: (...args: T) => R): (array: T) => R;
   }

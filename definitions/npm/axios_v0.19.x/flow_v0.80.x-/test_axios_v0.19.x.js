@@ -263,14 +263,34 @@ describe('Create instance', () => {
 describe('Defaults', () => {
   it('setters default config', () => {
     axios.defaults.baseURL = 'https://api.example.com/';
-    axios.defaults.headers.common['Authorization'] = 'token';
-    axios.defaults.headers.post['X-FOO'] = 'bar';
+    axios.defaults.headers = {
+      'common': {
+        'Authorization': 'token'
+      }
+    }
+    axios.defaults.headers = {
+      'common': {
+        'Authorization': 'token'
+      }
+    }
+    axios.defaults.headers =  {'post': {
+      'X-FOO': 'bar'
+    }} ;
     axios.defaults.timeout = 2500;
 
     const instance: Axios = axios.create();
     instance.defaults.baseURL = 'https://api.example.com/';
-    instance.defaults.headers.common['Authorization'] = 'token';
-    instance.defaults.headers.post['X-FOO'] = 'bar';
+    instance.defaults.headers = {
+      'common': {
+        'Authorization': 'token'
+      }
+    };
+    axios.defaults.headers =  {
+      'post': {
+        'X-FOO': 'bar'
+      }
+    };
+
     instance.defaults.timeout = 2500;
   });
 });
