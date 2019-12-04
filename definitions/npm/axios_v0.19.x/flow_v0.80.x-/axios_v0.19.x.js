@@ -65,7 +65,7 @@ declare module 'axios' {
     config: AxiosXHRConfig<mixed>
   ) => Promise<AxiosXHR<mixed>>;
 
-  declare type AxiosXHRConfigBase<T, R = T> = {|
+  declare type AxiosXHRConfigBase<T, R = T> = {
     adapter?: AxiosAdapter,
     auth?: {|
       username: string,
@@ -92,15 +92,16 @@ declare module 'axios' {
     withCredentials?: boolean,
     xsrfCookieName?: string,
     xsrfHeaderName?: string,
+    ...
+  };
 
-  |};
-
-  declare type AxiosXHRConfig<T, R = T> = {|
+  declare type AxiosXHRConfig<T, R = T> = {
     ...$Exact<AxiosXHRConfigBase<T, R>>,
     data?: T,
     method?: Method,
     url: string,
-  |};
+    ...
+  };
 
   declare type AxiosXHRConfigShape<T, R = T> = $Shape<AxiosXHRConfig<T, R>>;
 

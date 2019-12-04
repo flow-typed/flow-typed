@@ -149,11 +149,6 @@ describe('Request methods', () => {
       .catch(handleError);
 
     axios
-      .options('anyUrl')
-      .then(handleResponse)
-      .catch(handleError);
-
-    axios
       .post('/user', { foo: 'bar' })
       .then(handleResponse)
       .catch(handleError);
@@ -418,5 +413,31 @@ describe('getUri', () => {
 
     // $ExpectError
     const uri2: number = axios.getUri();
+  });
+});
+
+describe('options', () => {
+  it('accepts string url only', () => {
+    //$ExpectError
+    axios.options(123)
+    axios.options('a url')
+  });
+
+  it('takes a url and returns a promise', () => {
+    axios
+      .options('anyUrl')
+      .then(handleResponse)
+      .catch(handleError);
+  });
+
+  it('takes url and config, returns a promise', () => {
+    const axiosConfig = {
+      url: '/foo',
+      method: 'OPTIONS',
+    };
+    axios
+      .options('a url', axiosConfig)
+      .then(handleResponse)
+      .catch(handleError)
   });
 });
