@@ -11,6 +11,7 @@ import _, {
   find,
   includes,
   groupBy,
+  groupWith,
   length,
   pipe,
   reduce,
@@ -822,4 +823,40 @@ const str: string = "hello world";
     s: a,
     y: b
   }))([1, 2, 3])(["1", "2", "3"]);
+
+  describe('groupWith', () => {
+    it('takes read only array and returns mutable array', () => {
+      const arr:$ReadOnlyArray<number> = [1, 2, 2, 3, 4, 5, 5]
+      const result1:Array<Array<number>> = groupWith((a, b) => a + 1 === b, arr)
+      const result2:Array<Array<number>> = groupWith((a, b) => a + 1 === b)(arr)
+    });
+
+    it('should accept mutable array', () => {
+      const arr: Array<number> = [1, 2, 2, 3, 4, 5, 5]
+      const result1: Array<Array<number>> = groupWith((a, b) => a + 1 === b, arr)
+      const result2: Array<Array<number>> = groupWith((a, b) => a + 1 === b)(arr)
+    });
+
+    it('should fail when input and output type mismatch', () => {
+      const arr:Array<number> = [1, 2, 2, 3, 4, 5, 5]
+      //$ExpectError
+      const result1:$ReadOnlyArray<$ReadOnlyArray<string>> = groupWith((a, b) => a + 1 === b, arr)
+      //$ExpectError
+      const result2:$ReadOnlyArray<$ReadOnlyArray<string>> = groupWith((a, b) => a + 1 === b)(arr)
+      //$ExpectError
+      const result3:Array<number> = groupWith(isE, 'aestiou')
+      //$ExpectError
+      const result4:Array<number> = groupWith(isE)('aestiou')
+    });
+
+    it('should accept string', () => {
+      const isE = (c: string): boolean => {
+        return c === 'e'
+      }
+      const result1:Array<string> = groupWith(isE, 'aestiou')
+      const result2:Array<string> = groupWith(isE)('aestiou')
+      const result3:$ReadOnlyArray<string> = groupWith(isE, 'aestiou')
+      const result4:$ReadOnlyArray<string> = groupWith(isE)('aestiou')
+    });
+  })
 }
