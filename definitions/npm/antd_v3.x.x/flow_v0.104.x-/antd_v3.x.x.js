@@ -71,7 +71,7 @@ declare module "antd" {
     shape?: 'circle' | 'round',
     size?: 'small' | 'large',
     target?: string,
-    type?: 'primary' | 'ghost' | 'dashed' | 'danger' | 'default',
+    type?: 'primary' | 'ghost' | 'dashed' | 'danger' | 'link' | 'default',
     onClick?: (event: SyntheticEvent<HTMLButtonElement>) => void,
     block?: boolean,
     ...
@@ -342,7 +342,7 @@ declare module "antd" {
   declare class InputTextArea extends React$Component<{...}> {}
 
   declare type InputPasswordProps = { visibilityToggle?: boolean, ... };
-  
+
   // Added in 3.12.0
   declare class InputPassword extends React$Component<InputPasswordProps> {}
 
@@ -502,7 +502,7 @@ declare module "antd" {
   declare class RadioButton extends React$Component<{...}> {}
 
   declare export class Row extends React$Component<{...}> {}
-  
+
   declare export type SelectValue = string | string[] | number | number[];
 
   declare export type SelectProps<T = SelectValue> = {
