@@ -847,7 +847,7 @@ const str: string = "hello world";
       const nthxs2 = nth(1)(array)
     });
 
-    it('should take tutple as second argument', () => {
+    it('should take tuple as second argument', () => {
       const tuple:[number, boolean] = [1, true]
       const n = nth(0, tuple)
       const ns = nth(1)(tuple)
