@@ -12,6 +12,7 @@ import _, {
   groupBy,
   includes,
   length,
+  nth,
   pipe,
   reduce,
   repeat,
@@ -441,11 +442,6 @@ const str: string = "hello world";
 
   const nxs: boolean = _.none(x => x > 1, ns);
 
-  const nthxs: ?string = _.nth(2, ["curry"]);
-  const nthxs1: ?string = _.nth(2)(["curry"]);
-  //$ExpectError
-  const nthxs2: string = _.nth(2, [1, 2, 3]);
-
   describe('append', () => {
     it('should supports arrays', () => {
       const appendResult1: Array<number> = append(1, [1, 2, 3]);
@@ -703,4 +699,75 @@ const str: string = "hello world";
     s: a,
     y: b
   }))([1, 2, 3])(["1", "2", "3"]);
+
+  describe('nth', () => {
+    it('should get a maybe type back on input is an array of given types', () => {
+      const nthxs1: ?number = nth(2, [1,2,3]);
+      const nthxs2: ?number = nth(2)([1,2]);
+      const nthxs3: ?number = nth(3)([1,2]);
+      const nthxs4: ?string = nth(2, ["curry"]);
+      const nthxs5: ?string = nth(2)(["curry", "bean"]);
+      const nthxs6: ?string = nth(3)(['foo', 'bar']);
+    });
+
+    it('should get a string back when input is string', () => {
+      const nthxs: string = nth(2)("curry");
+      const nthxs1: string = nth(2, "curry");
+    });
+
+    it('should take read only array as second argument', () => {
+      const readOnlyArray: $ReadOnlyArray<number>  = [1, 2, 3];
+      const nthxs = nth(2)(readOnlyArray)
+      const nthxs1 = nth(2, readOnlyArray)
+    });
+
+    it('should take a mutable array as second arugment', () => {
+      const array: Array<string> = ['foo', 'bar'];
+      const nthxs = nth(1)(array)
+      const nthxs1 = nth(1, array)
+      const nthxs2 = nth(1)(array)
+    });
+
+    it('should take tuple as second argument', () => {
+      const tuple:[number, boolean] = [1, true]
+      const n  = nth(0, tuple)
+      cosnt ns = nth(1)(tuple)
+    });
+
+    it('should fail on expecting return type to be a maybe type of the element of the input list', () => {
+      const arr: Array<number> = [1, 2, 3]
+      //$ExpectError
+      const nthxs: ?string = nth(2)(arr);
+      //$ExpectError
+      const nthxs1: ?boolean = nth(1)(arr);
+    });
+
+    it('should fail on expecting return type to mismatch the input array type', () => {
+      const arr: Array<number> = [1, 2, 3]
+      //$ExpectError
+      const nthxs: string = nth(2, arr);
+      //$ExpectError
+      const nthxs1: string = nth(2)(arr);
+      //$ExpectError
+      const nthxs2: string = nth(1, ['foo'])
+      //$ExpectError
+      const nthxs3: number = nth(1, arr);
+      //$ExpectError
+      const nthxs4: number = nth(1)(arr);
+      //$ExpectError
+      const nthxs5: number = nth(1, [1])
+      //$ExpectError
+      const nthxs: ?number = nth(2)(['foo']);
+    });
+
+    it('should fail on passing a non-number to first argument', () => {
+      //$ExpectError
+      const nthxs = nth('foo')(['foo', 'bar'])
+    });
+
+    it('should fail on passing a non-array to second argument', () => {
+      //$ExpectError
+      const nthxs = nth(2)({})
+    });
+  })
 }
