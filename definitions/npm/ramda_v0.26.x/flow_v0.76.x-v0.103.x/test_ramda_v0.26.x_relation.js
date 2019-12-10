@@ -310,3 +310,26 @@ const sym: Array<number> = _.symmetricDifference([1, 2, 3, 4], [7, 6, 5, 4, 3]);
 
 const un: Array<number> = _.union([1, 2, 3])([2, 3, 4]);
 const un1: Array<{ [k: string]: number }> = _.unionWith(eqA, ls1, ls2);
+
+describe('sortBy', () => {
+  it('should take read only in, mutable out', () => {
+    const arr:$ReadOnlyArray<number> = [5, 2, 3, 8];
+    const result1:Array<number> = sortBy(_.identity, arr)
+    // reason that expecting read only array works is because $ReadOnlyArray is super type of Array
+    const result2:$ReadOnlyArray<number> = sortBy(_.identity)(arr)
+  });
+
+  it('should take mutable array', () => {
+    const arr: Array<string> = ['d', 'c', 'f'];
+    const result1:Array<string> = sortBy(_.identity, arr)
+    const result2:Array<string> = sortBy(_.identity)(arr)
+  });
+
+  it('should fail when input output type mismatch', () => {
+    const arr:Array<string> = ['d', 'c', 'f']
+    //$ExpectError
+    const result1:$ReadOnlyArray<number> = sortBy(_.identity, arr)
+    //$ExpectError
+    const result2:$ReadOnlyArray<number> = sortBy(_.idnetity)(arr)
+  });
+})

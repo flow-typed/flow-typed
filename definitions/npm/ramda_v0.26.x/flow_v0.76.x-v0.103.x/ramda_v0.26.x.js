@@ -1293,10 +1293,10 @@ declare module ramda {
   declare function minBy<T, V>(fn: (x: T) => V, x: T): (y: T) => T;
   declare function minBy<T, V>(fn: (x: T) => V, x: T, y: T): T;
 
-  declare function sortBy<T, V>(
-    fn: (x: T) => V,
-  ): (x: Array<T>) => Array<T>;
-  declare function sortBy<T, V>(fn: (x: T) => V, x: Array<T>): Array<T>;
+  declare var sortBy : {|
+    <A, B>(fn: (x: A) => B, xs: $ReadOnlyArray<A>): Array<A>,
+    <A, B>(fn: (x: A) => B):(xs: $ReadOnlyArray<A>) => Array<A>
+  |}
 
   declare function symmetricDifference<T>(
     x: Array<T>,
