@@ -312,24 +312,27 @@ const un: Array<number> = _.union([1, 2, 3])([2, 3, 4]);
 const un1: Array<{ [k: string]: number }> = _.unionWith(eqA, ls1, ls2);
 
 describe('sortBy', () => {
-  it('should take read only in, mutable out', () => {
+  it('should take read only in', () => {
     const arr:$ReadOnlyArray<number> = [5, 2, 3, 8];
-    const result1:Array<number> = sortBy(_.identity, arr)
-    // reason that expecting read only array works is because $ReadOnlyArray is super type of Array
-    const result2:$ReadOnlyArray<number> = sortBy(_.identity)(arr)
+    const result1:Array<number> = sortBy(x => x, arr)
+    const result2:Array<number> = sortBy(x => x)(arr)
+    const result3:$ReadOnlyArray<number> = sortBy(x => x, arr)
+    const result4:$ReadOnlyArray<number> = sortBy(x => x)(arr)
   });
 
   it('should take mutable array', () => {
     const arr: Array<string> = ['d', 'c', 'f'];
-    const result1:Array<string> = sortBy(_.identity, arr)
-    const result2:Array<string> = sortBy(_.identity)(arr)
+    const result1:Array<string> = sortBy(x => x, arr)
+    const result2:Array<string> = sortBy(x => x)(arr)
+    const result3:$ReadOnlyArray<string> = sortBy(x => x, arr)
+    const result4:$ReadOnlyArray<string> = sortBy(x => x)(arr)
   });
 
   it('should fail when input output type mismatch', () => {
     const arr:Array<string> = ['d', 'c', 'f']
     //$ExpectError
-    const result1:$ReadOnlyArray<number> = sortBy(_.identity, arr)
+    const result1:$ReadOnlyArray<number> = sortBy(x => x, arr)
     //$ExpectError
-    const result2:$ReadOnlyArray<number> = sortBy(_.idnetity)(arr)
+    const result2:$ReadOnlyArray<number> = sortBy(x => x)(arr)
   });
 })
