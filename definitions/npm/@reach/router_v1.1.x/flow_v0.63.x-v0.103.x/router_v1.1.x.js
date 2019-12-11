@@ -1,7 +1,7 @@
 // @flow
 
 declare module '@reach/router' {
-  declare type DomLocation = typeof location;
+  declare type DomLocation = typeof location & {| state?: any |};
 
   declare export type NavigateFn = (
     to: string,
@@ -91,6 +91,7 @@ declare module '@reach/router' {
     from?: string,
     to: string,
     noThrow?: boolean,
+    state?: any
   |}>;
 
   declare export type MatchProps<Params> = {|
