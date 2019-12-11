@@ -431,7 +431,7 @@ describe('options', () => {
   });
 
   it('takes url and config, returns a promise', () => {
-    const axiosConfig = {
+    const axiosConfig:$AxiosXHRConfig<mixed> = {
       url: '/foo',
       method: 'OPTIONS',
     };
