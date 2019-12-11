@@ -14,11 +14,12 @@ const dirty = `
 describe('#createDOMPurify', () => {
   it('should add/remove hook', () => {
     DOMPurify.addHook('beforeSanitizeElements', (currentNode, data, config) => {
-      return currentNode;
+      // nothing; despite DOMPurify's README, returning currentNode does nothing
     });
 
     // $ExpectError
     DOMPurify.addHook('invalidHookName', (currentNode, data, config) => {
+      // $ExpectError
       return currentNode;
     });
 

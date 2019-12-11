@@ -1172,7 +1172,7 @@ declare module ramda {
 
   declare function transpose<T>(xs: Array<Array<T>>): Array<Array<T>>;
 
-  declare function uniq<T>(xs: Array<T>): Array<T>;
+  declare function uniq<T>(xs: $ReadOnlyArray<T>): Array<T>;
 
   declare function unnest<T>(xs: NestedArray<T>): NestedArray<T>;
 
@@ -2055,9 +2055,56 @@ declare module ramda {
     y: (...args: Array<T>) => boolean
   ): (...args: Array<T>) => boolean;
 
-  declare function complement<T>(
-    x: (...args: Array<T>) => boolean
-  ): (...args: Array<T>) => boolean;
+  // The following code is generated from
+  // https://github.com/LoganBarnett/typedef-gen due to Flow not being able to
+  // preserve the input function's form as a return type.
+  //
+  // Begin generated complement declaration.
+
+  declare function complement< Fn: () => boolean>(
+    f: Fn
+  ): Fn;
+
+  declare function complement<A, Fn: (A) => boolean>(
+    f: Fn
+  ): Fn;
+
+  declare function complement<A, B, Fn: (A, B) => boolean>(
+    f: Fn
+  ): Fn;
+
+  declare function complement<A, B, C, Fn: (A, B, C) => boolean>(
+    f: Fn
+  ): Fn;
+
+  declare function complement<A, B, C, D, Fn: (A, B, C, D) => boolean>(
+    f: Fn
+  ): Fn;
+
+  declare function complement<A, B, C, D, E, Fn: (A, B, C, D, E) => boolean>(
+    f: Fn
+  ): Fn;
+
+  declare function complement<A, B, C, D, E, F, Fn: (A, B, C, D, E, F) => boolean>(
+    f: Fn
+  ): Fn;
+
+  declare function complement<A, B, C, D, E, F, G, Fn: (A, B, C, D, E, F, G) => boolean>(
+    f: Fn
+  ): Fn;
+
+  declare function complement<A, B, C, D, E, F, G, H, Fn: (A, B, C, D, E, F, G, H) => boolean>(
+    f: Fn
+  ): Fn;
+
+  declare function complement<A, B, C, D, E, F, G, H, I, Fn: (A, B, C, D, E, F, G, H, I) => boolean>(
+    f: Fn
+  ): Fn;
+
+  declare function complement<A, B, C, D, E, F, G, H, I, J, Fn: (A, B, C, D, E, F, G, H, I, J) => boolean>(
+    f: Fn
+  ): Fn;
+  // End generated complement declaration.
 
   declare function cond<A, B>(
     fns: Array<[(...args: Array<A>) => boolean, (...args: Array<A>) => B]>

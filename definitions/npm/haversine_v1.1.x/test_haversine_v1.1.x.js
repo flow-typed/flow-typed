@@ -20,3 +20,7 @@ haversine({ latitude: 2, longitude: 3 }, { latitude: 3, longitude: 2 }, { format
 const c: number = haversine({ type: 'Feature', coordinates: [2, 3] }, { type: 'Feature', coordinates: [2, 3] }, { format: 'geojson', threshold: 1 })
 // $ExpectError
 const d: boolean = haversine({ type: 'Feature', coordinates: [2, 3] }, { type: 'Feature', coordinates: [2, 3] }, { format: 'geojson'})
+// $ExpectError
+haversine([2])
+// $ExpectError
+haversine([2, 3, 4])
