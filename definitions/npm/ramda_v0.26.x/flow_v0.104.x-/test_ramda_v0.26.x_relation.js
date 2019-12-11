@@ -316,16 +316,19 @@ const un1: Array<{ [k: string]: number, ... }> = _.unionWith(eqA, ls1, ls2);
 
 // Given $ReadOnlyArray is super type of Array, no need to test Array -> $ReadOnlyArray case
 describe('intersection', () => {
-  const readOnlyArray: $ReadOnlyArray<number> = [1, 2, 3]
-  it('should only accept read only input', () => {
-    const inters1: $ReadOnlyArray<number> = intersection(readOnlyArray, readOnlyArray)
-    const inters2: $ReadOnlyArray<number> = intersection(readOnlyArray)(readOnlyArray)
+  it('should accept read only input', () => {
+    const readOnlyArray: $ReadOnlyArray<number> = [1, 2, 3]
+    const inters1: Array<number> = intersection(readOnlyArray, readOnlyArray)
+    const inters2: Array<number> = intersection(readOnlyArray)(readOnlyArray)
+    const inters3: $ReadOnlyArray<number> = intersection(readOnlyArray, readOnlyArray)
+    const inters4: $ReadOnlyArray<number> = intersection(readOnlyArray)(readOnlyArray)
   });
 
-  it('should error out when output is not read only', () => {
-    //$ExpectError
-    const inters3: Array<number> = intersection(readOnlyArray, readOnlyArray)
-    //$ExpectError
-    const inters4: Array<number> = intersection(readOnlyArray)(readOnlyArray)
+  it('should allow mutable array in and out', () => {
+    const readOnlyArray: Array<number> = [1, 2, 3]
+    const inters1: Array<number> = intersection(readOnlyArray, readOnlyArray)
+    const inters2: Array<number> = intersection(readOnlyArray)(readOnlyArray)
+    const inters3: $ReadOnlyArray<number> = intersection(readOnlyArray, readOnlyArray)
+    const inters4: $ReadOnlyArray<number> = intersection(readOnlyArray)(readOnlyArray)
   });
 })
