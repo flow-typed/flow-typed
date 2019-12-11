@@ -982,9 +982,9 @@ declare module '@apollo/react-hooks' {
   > = DataProxyWriteFragmentOptions<TData, TVariables>;
   declare type CacheWriteDataOptions<TData> = DataProxyWriteDataOptions<TData>;
 
-  declare interface DataProxyReadQueryOptions {
+  declare interface DataProxyReadQueryOptions<TVariables> {
     query: DocumentNode;
-    variables?: any;
+    variables?: TVariables;
   }
 
   declare interface DataProxyReadFragmentOptions<TVariables> {
