@@ -826,28 +826,30 @@ const str: string = "hello world";
   }))([1, 2, 3])(["1", "2", "3"]);
 
   describe('chain', () => {
-    const readOnlyArray = ['1', '2', '3'];
-
-    it('should only accept read only list as input', () => {
+    it('should accept read only list as input', () => {
+      const arr:$ReadOnlyArray<string> = ['1', '2', '3'];
       const duplicate = n => [n, n];
-      const result1: Array<string> = chain(duplicate, readOnlyArray);
-      const result2: Array<string> = chain(duplicate)(readOnlyArray);
+      const result1: Array<string> = chain(duplicate, arr);
+      const result2: Array<string> = chain(duplicate)(arr);
     });
 
-    it('should error out when type casting', () => {
+    it('should fail when input out type mismatch', () => {
+      const arr:$ReadOnlyArray<string> = ['1', '2', '3'];
       const castType = n => (parseInt(n): number);
       //$ExpectError
-      const result: Array<string> = chain(castType, readOnlyArray);
+      const result: Array<string> = chain(castType, arr);
     });
 
     it('should take second argument as function', () => {
-      const result: Array<?string> = chain(append, last)(readOnlyArray)
+      const arr:$ReadOnlyArray<string> = ['1', '2', '3'];
+      const result: Array<?string> = chain(append, x => x[x.length - 1])(arr)
     });
 
     it('should error out when second arugment is function but type mismatches', () => {
+      const arr:$ReadOnlyArray<string> = ['1', '2', '3'];
       const castType = n => (parseInt(n): number);
       //$ExpectError
-      const result: Array<string> = chain(append, castType)(readOnlyArray)
+      const result: Array<string> = chain(append, castType)(arr)
     });
   })
 }
