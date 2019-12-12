@@ -710,7 +710,7 @@ declare module ramda {
   declare var groupWith: {|
     (fn: BinaryPredicateFn<string>, string): Array<string>,
     <A, As: $ReadOnlyArray<A>>(fn: BinaryPredicateFn<A>, As): Array<Array<A>>,
-    <A, As: $ReadOnlyArray<A>>(fn: BinaryPredicateFn<A>): (As | string) => Array<Array<A>> & Array<string>,
+    <A, As: $ReadOnlyArray<A>>(fn: BinaryPredicateFn<A>): ((As) => Array<Array<A>>) & ((string) => Array<string>)
   |}
 
   declare function head<T, V: Array<T>>(xs: V): $ElementType<V, 0>;

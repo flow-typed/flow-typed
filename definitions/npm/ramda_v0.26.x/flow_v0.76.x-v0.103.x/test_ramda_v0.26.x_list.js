@@ -705,12 +705,16 @@ const str: string = "hello world";
       const arr:$ReadOnlyArray<number> = [1, 2, 2, 3, 4, 5, 5]
       const result1:Array<Array<number>> = groupWith((a, b) => a + 1 === b, arr)
       const result2:Array<Array<number>> = groupWith((a, b) => a + 1 === b)(arr)
+      const result3: $ReadOnlyArray<$ReadOnlyArray<number>> = groupWith((a, b) => a + 1 === b, arr)
+      const result4: $ReadOnlyArray<$ReadOnlyArray<number>> = groupWith((a, b) => a + 1 === b)(arr)
     });
 
     it('should accept mutable array', () => {
       const arr: Array<number> = [1, 2, 2, 3, 4, 5, 5]
       const result1: Array<Array<number>> = groupWith((a, b) => a + 1 === b, arr)
       const result2: Array<Array<number>> = groupWith((a, b) => a + 1 === b)(arr)
+      const result3: $ReadOnlyArray<$ReadOnlyArray<number>> = groupWith((a, b) => a + 1 === b, arr)
+      const result4: $ReadOnlyArray<$ReadOnlyArray<number>> = groupWith((a, b) => a + 1 === b)(arr)
     });
 
     it('should fail when input and output type mismatch', () => {
