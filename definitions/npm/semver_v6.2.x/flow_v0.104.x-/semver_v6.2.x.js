@@ -203,7 +203,7 @@ declare module "semver" {
   // Coercion
   declare function coerce(
     version: string | SemVer,
-    options?: {...Options, rtl?: boolean}
+    options?: {|...Options, rtl?: boolean|}
   ): ?SemVer
 
   // Not explicitly documented, or deprecated
