@@ -174,4 +174,16 @@ describe('expectations', () => {
     // $ExpectError
     (response.tpye: string);
   })
+
+  it('there is a called boolean in the request', () => {
+    let req = request(serverFunction).get('/user');
+    (req.called: boolean);
+    // $ExpectError
+    req.foo;
+
+    req = req.expect(200);
+    (req.called: boolean);
+    // $ExpectError
+    req.foo;
+  })
 });
