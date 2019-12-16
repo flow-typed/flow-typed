@@ -98,7 +98,7 @@ declare module 'styled-components' {
     value: StyleSheet,
   |}>
 
-  declare export class StylSheetManager extends React$Component<SCMProps> {
+  declare export class StyleSheetManager extends React$Component<SCMProps> {
     getContext(sheet: ?StyleSheet, target: ?HTMLElement): StyleSheet;
     render(): React$Element<StyleSheetProvider>
   }
