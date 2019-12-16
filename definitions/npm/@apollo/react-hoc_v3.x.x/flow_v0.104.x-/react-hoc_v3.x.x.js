@@ -1,8 +1,8 @@
 declare module '@apollo/react-hoc' {
   import type { ComponentType, Element, Node } from 'react';
-  
+
   declare type Dict = { [key: string]: any, ...};
-  
+
 
   declare type MakeOptional = <V>(V) => ?V;
   declare type MakeDataOptional<TData> = $ObjMap<TData, MakeOptional> | void;
@@ -400,13 +400,14 @@ declare module '@apollo/react-hoc' {
     T = { [key: string]: any, ... }
   > = { [queryName: string]: MutationQueryReducer<T>, ... };
 
-  declare class ApolloError extends Error {
+  declare class $ApolloError extends Error {
     message: string;
     graphQLErrors: Array<GraphQLError>;
     networkError: Error | null;
     extraInfo: any;
     constructor(info: ErrorConstructor): this;
   }
+  declare export type ApolloError = $ApolloError;
 
   declare interface ErrorConstructor {
     graphQLErrors?: Array<GraphQLError>;

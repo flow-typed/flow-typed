@@ -6,7 +6,7 @@ declare module "qs" {
     delimiter?: string,
     depth?: number,
     parameterLimit?: number,
-    plainObjects?: boolean,
+    plainmixeds?: boolean,
     strictNullHandling?: boolean,
     ignoreQueryPrefix?: boolean,
     parseArrays?: boolean,
@@ -16,7 +16,7 @@ declare module "qs" {
 
   declare type ArrayFormat = "brackets" | "indices" | "repeat";
 
-  declare type FilterFunction = (prefix: string, value: any) => any;
+  declare type FilterFunction = (prefix: string, value: mixed) => mixed;
   declare type FilterArray = Array<string | number>;
   declare type Filter = FilterArray | FilterFunction;
 
@@ -37,7 +37,7 @@ declare module "qs" {
     ...
   };
 
-  declare type Formatter = (any) => string;
+  declare type Formatter = (mixed) => string;
 
   declare type Formats = {
     RFC1738: string,
@@ -52,8 +52,8 @@ declare module "qs" {
   };
 
   declare module.exports: {
-    parse(str: string, opts?: ParseOptions): Object,
-    stringify(obj: Object | Array<any>, opts?: StringifyOptions): string,
+    parse(str: string, opts?: ParseOptions): mixed,
+    stringify(obj: {[string]: mixed, ...} | Array<mixed>, opts?: StringifyOptions): string,
     formats: Formats,
     ...
   };

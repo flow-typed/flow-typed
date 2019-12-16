@@ -616,9 +616,7 @@ declare module 'react-navigation-stack' {
     backTitleVisible?: boolean,
     allowFontScaling?: boolean,
     titleStyle?: ?TextStyleProp,
-    headerLayoutPreset: 'left' | 'center',
     width?: ?number,
-    scene: NavigationStackScene,
   };
 
   declare export type NavigationStackScreenOptions = NavigationScreenOptions & {

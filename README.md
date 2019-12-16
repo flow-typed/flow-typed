@@ -123,6 +123,6 @@ After you have edited these files, consider [contributing](CONTRIBUTING.md) them
 
 ## Active Maintenance Team
 
-[![Andrew Smith](https://github.com/andrewsouthpaw.png?size=100)](https://github.com/andrewsouthpaw) | [![Georges-Antoine Assi](https://github.com/gantoine.png?size=100)](https://github.com/gantoine) | [![Ville Saukkonen](https://github.com/villesau.png?size=100)](https://github.com/villesau)
-:---:|:---:|:---:
-[@AndrewSouthpaw](https://github.com/andrewsouthpaw) | [@GAntoine](https://github.com/gantoine) | [@villesau](https://github.com/villesau)
+[![Andrew Smith](https://github.com/andrewsouthpaw.png?size=100)](https://github.com/andrewsouthpaw) | [![Georges-Antoine Assi](https://github.com/gantoine.png?size=100)](https://github.com/gantoine) | [![Pascal Duez](https://github.com/pascalduez.png?size=100)](https://github.com/pascalduez) | [![Ville Saukkonen](https://github.com/villesau.png?size=100)](https://github.com/villesau)
+:---:|:---:|:---:|:---:
+[@AndrewSouthpaw](https://github.com/andrewsouthpaw) | [@GAntoine](https://github.com/gantoine) | [@pascalduez](https://github.com/pascalduez) | [@villesau](https://github.com/villesau)

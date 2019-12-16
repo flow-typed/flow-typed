@@ -584,11 +584,11 @@ type dompurify$configBase = {|
   /**
    * extend the existing array of allowed tags
    */
-  ADD_TAGS: Array<$Subtype<string>>,
+  ADD_TAGS: Array<string>,
   /**
    * extend the existing array of attributes
    */
-  ADD_ATTR: Array<$Subtype<string>>,
+  ADD_ATTR: Array<string>,
   /**
    * prohibit HTML5 data attributes (default is true)
    */
@@ -607,11 +607,11 @@ type dompurify$configBase = {|
   /**
    * return a DOM HTMLBodyElement instead of an HTML string (default is false)
    */
-  RETURN_DOM: $Subtype<boolean>,
+  RETURN_DOM: boolean,
   /**
    * return a DOM DocumentFragment instead of an HTML string (default is false)
    */
-  RETURN_DOM_FRAGMENT: $Subtype<boolean>,
+  RETURN_DOM_FRAGMENT: boolean,
   /**
    * Import DocumentFragment into the current document (default is false).
    * RETURN_DOM_IMPORT must be set if you would like to append the returned node to the current document
@@ -652,18 +652,19 @@ type dompurify$hookType =
   | 'afterSanitizeShadowDOM';
 
 type dompurify$hookEvent = {
-  +tagName: ?$Subtype<dompurify$tags>,
-  +allowedTags: ?{ [$Subtype<dompurify$tags>]: boolean, ... },
-  +allowedAttributes: ?{ [$Subtype<dompurify$attr>]: boolean, ... },
-  +attrName: ?$Subtype<dompurify$attr>,
+  +tagName: ?dompurify$tags,
+  +allowedTags: ?{ [dompurify$tags]: boolean, ... },
+  +allowedAttributes: ?{ [dompurify$attr]: boolean, ... },
+  +attrName: ?dompurify$attr,
   +attrValue: ?string,
-  +keepAttr: ?boolean,
+  // This is intended to be writable
+  keepAttr: ?boolean,
   ...
 };
 
 declare type dompurify$config = $Shape<dompurify$configBase>;
 
-type dompurify$hook = (node: $Subtype<Node>, data: ?dompurify$hookEvent, config?: dompurify$config) => $Subtype<Node>;
+type dompurify$hook = (node: Node, data: ?dompurify$hookEvent, config?: dompurify$config) => void;
 
 interface dompurify$sanitizer {
   (dirty: string, config: $Shape<$Diff<dompurify$configBase, {
@@ -691,9 +692,9 @@ interface dompurify$sanitizer {
 
 type dompurify$instance = {|
   +version: string,
-  +removed: Array<{ element: $Subtype<Node>, ... } | {
+  +removed: Array<{ element: Node, ... } | {
     attribute: ?Attr,
-    from: $Subtype<Node>,
+    from: Node,
     ...
   }>,
   +isSupported: boolean,

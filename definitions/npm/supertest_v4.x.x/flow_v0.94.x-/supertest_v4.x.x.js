@@ -87,6 +87,8 @@ declare module 'supertest' {
   // Stream, but I don't know how to do it with Flow... I decided to use the
   // Promise because it's likely more useful.
   declare class superagent$Request extends Promise<superagent$Response> {
+    called: boolean;
+
     abort(): void;
     accept(type: string): this;
     attach(
