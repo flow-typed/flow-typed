@@ -10,6 +10,7 @@ import _, {
   find,
   gt,
   gte,
+  intersection,
   lt,
   lte,
   pipe,
@@ -232,8 +233,6 @@ const _innerJoin: Array<{ [k: string]: mixed, ... }> = _.innerJoin(
   [177, 456, 999]
 );
 
-const inters: Array<number> = _.intersection(ns, ns);
-
 const pathEqObj: boolean = _.pathEq(["b", 1], 1, objArr);
 const pathEqObj2: boolean = _.pathEq(["b", 1])(1)(objArr);
 
@@ -314,3 +313,22 @@ const sym: Array<number> = _.symmetricDifference([1, 2, 3, 4], [7, 6, 5, 4, 3]);
 
 const un: Array<number> = _.union([1, 2, 3])([2, 3, 4]);
 const un1: Array<{ [k: string]: number, ... }> = _.unionWith(eqA, ls1, ls2);
+
+// Given $ReadOnlyArray is super type of Array, no need to test Array -> $ReadOnlyArray case
+describe('intersection', () => {
+  it('should accept read only input', () => {
+    const readOnlyArray: $ReadOnlyArray<number> = [1, 2, 3]
+    const inters1: Array<number> = intersection(readOnlyArray, readOnlyArray)
+    const inters2: Array<number> = intersection(readOnlyArray)(readOnlyArray)
+    const inters3: $ReadOnlyArray<number> = intersection(readOnlyArray, readOnlyArray)
+    const inters4: $ReadOnlyArray<number> = intersection(readOnlyArray)(readOnlyArray)
+  });
+
+  it('should allow mutable array in and out', () => {
+    const readOnlyArray: Array<number> = [1, 2, 3]
+    const inters1: Array<number> = intersection(readOnlyArray, readOnlyArray)
+    const inters2: Array<number> = intersection(readOnlyArray)(readOnlyArray)
+    const inters3: $ReadOnlyArray<number> = intersection(readOnlyArray, readOnlyArray)
+    const inters4: $ReadOnlyArray<number> = intersection(readOnlyArray)(readOnlyArray)
+  });
+})

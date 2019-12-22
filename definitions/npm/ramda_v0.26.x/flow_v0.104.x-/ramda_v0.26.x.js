@@ -1301,8 +1301,8 @@ declare module ramda {
     b: Array<B>
   ): Array<A>;
 
-  declare function intersection<T>(x: Array<T>, y: Array<T>): Array<T>;
-  declare function intersection<T>(x: Array<T>): (y: Array<T>) => Array<T>;
+  declare function intersection<T>(xs: $ReadOnlyArray<T>, ys: $ReadOnlyArray<T>): Array<T>;
+  declare function intersection<T>(xs: $ReadOnlyArray<T>): (ys: $ReadOnlyArray<T>) => Array<T>;
 
   declare function max<T>(x: T): (y: T) => T;
   declare function max<T>(x: T, y: T): T;
