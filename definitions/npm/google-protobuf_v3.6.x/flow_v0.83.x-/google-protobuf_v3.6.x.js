@@ -679,3 +679,18 @@ declare module 'google-protobuf' {
 
   // jspb.utils package excluded as it likely shouldn't be called by user code
 }
+
+declare module 'google-protobuf/google/protobuf/timestamp_pb' {
+  declare class Timestamp {
+    constructor(): Timestamp;
+
+    getSeconds(): number;
+    setSeconds(value: number): void;
+
+    getNanos(): number;
+    setNanos(value: number): void;
+
+    static toDate(): Date;
+    static fromDate(date: Date): void;
+  }
+}
