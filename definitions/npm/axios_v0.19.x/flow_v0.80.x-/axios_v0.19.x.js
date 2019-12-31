@@ -4,7 +4,7 @@ declare module 'axios' {
 
   declare type AxiosTransformer<T> = (
     data: T,
-    headers?: {| [key: string]: mixed |},
+    headers?: { [key: string]: mixed, ...},
   ) => mixed;
 
   declare type ProxyConfig = {|
