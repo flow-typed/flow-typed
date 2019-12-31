@@ -21,6 +21,8 @@ type RequestDataUser = {|
   +name: string,
 |};
 
+type Header = {[key: string]: mixed,...};
+
 const handleResponse = (response: $AxiosXHR<mixed>) => {
   (response.data: mixed);
   (response.status: number);
@@ -63,8 +65,8 @@ const handleError = (error: $AxiosError<mixed>) => {
 
 const config: $AxiosXHRConfigBase<RequestDataUser, User> = {
   baseURL: 'https://api.example.com/',
-  transformRequest: (data: RequestDataUser) => '{"foo":"bar"}',
-  transformResponse: [(data: User) => ({ baz: 'qux' })],
+  transformRequest: (data: RequestDataUser, headers?: Header) => '{"foo":"bar"}',
+  transformResponse: [(data: User, headers?: Header) => ({ baz: 'qux' })],
   headers: { 'X-FOO': 'bar' },
   params: { id: 12345 },
   paramsSerializer: (params: Object) => 'id=12345',
@@ -104,6 +106,16 @@ describe('Config', () => {
     axiosConfig.responseType = 'foobar';
   });
 });
+
+describe('Headers', () => {
+  it('should take inexact kv pairs with string type as key and mixed type as values', () => {
+    const test: Header = { 'foo': 1 };
+    const test1: Header = { 'bar': 'baz'};
+
+    // $ExpectError
+    const test2: Header = { 1 : 'false'}
+  });
+})
 
 describe('Request methods', () => {
   it('returns a promise', () => {
