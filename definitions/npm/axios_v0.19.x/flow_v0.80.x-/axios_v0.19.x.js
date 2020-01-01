@@ -4,16 +4,16 @@ declare module 'axios' {
 
   declare type AxiosTransformer<T> = (
     data: T,
-    headers?: { [key: string]: any }
-  ) => any;
+    headers?: { [key: string]: mixed, ...},
+  ) => mixed;
 
   declare type ProxyConfig = {|
     host: string,
     port: number,
-    auth?: {
+    auth?: {|
       username: string,
       password: string,
-    },
+    |},
     protocol?: string,
   |};
 
@@ -62,25 +62,25 @@ declare module 'axios' {
     | 'stream';
 
   declare type AxiosAdapter = (
-    config: AxiosXHRConfig<any>
-  ) => Promise<AxiosXHR<any>>;
+    config: AxiosXHRConfig<mixed>
+  ) => Promise<AxiosXHR<mixed>>;
 
   declare type AxiosXHRConfigBase<T, R = T> = {
     adapter?: AxiosAdapter,
-    auth?: {
+    auth?: {|
       username: string,
       password: string,
-    },
+    |},
     baseURL?: string,
     cancelToken?: CancelToken,
-    headers?: { [key: string]: any },
+    headers?: { [key: string]: mixed, ...},
     httpAgent?: HttpAgent,
     httpsAgent?: HttpsAgent,
     maxContentLength?: number,
     maxRedirects?: number,
     socketPath?: string | null,
-    params?: { [key: string]: any },
-    paramsSerializer?: (params: { [key: string]: any }) => string,
+    params?: { [key: string]: mixed, ...},
+    paramsSerializer?: (params: { [key: string]: mixed, ...}) => string,
     onUploadProgress?: (progressEvent: ProgressEvent) => void,
     onDownloadProgress?: (progressEvent: ProgressEvent) => void,
     proxy?: ProxyConfig | false,
@@ -92,25 +92,27 @@ declare module 'axios' {
     withCredentials?: boolean,
     xsrfCookieName?: string,
     xsrfHeaderName?: string,
+    ...
   };
 
-  declare type AxiosXHRConfig<T, R = T> = {|
+  declare type AxiosXHRConfig<T, R = T> = {
     ...$Exact<AxiosXHRConfigBase<T, R>>,
     data?: T,
     method?: Method,
     url: string,
-  |};
+    ...
+  };
 
   declare type AxiosXHRConfigShape<T, R = T> = $Shape<AxiosXHRConfig<T, R>>;
 
-  declare type AxiosXHR<T, R = T> = {
+  declare type AxiosXHR<T, R = T> = {|
     config: AxiosXHRConfig<T, R>,
     data: R,
-    headers: ?{ [key: string]: any },
+    headers: ?{[key: string]: mixed, ...},
     status: number,
     statusText: string,
     request: http$ClientRequest<> | XMLHttpRequest | mixed,
-  };
+  |};
 
   declare type AxiosInterceptorIdent = number;
 
@@ -156,6 +158,10 @@ declare module 'axios' {
       url: string,
       config?: AxiosXHRConfigBase<mixed, R>
     ): AxiosPromise<mixed, R>;
+    options<R>(
+      url: string,
+      config?: AxiosXHRConfigBase<mixed, R>
+    ): AxiosPromise<mixed, R>;
     post<T, R>(
       url: string,
       data?: T,
@@ -171,13 +177,13 @@ declare module 'axios' {
       data?: T,
       config?: AxiosXHRConfigBase<T, R>
     ): AxiosPromise<T, R>;
-    interceptors: {
+    interceptors: {|
       request: AxiosRequestInterceptor<mixed>,
       response: AxiosResponseInterceptor<mixed>,
-    };
+    |};
     defaults: {|
       ...$Exact<AxiosXHRConfigBase<mixed>>,
-      headers: { [key: string]: any },
+      headers: { [key: string]: mixed, ...},
     |};
     getUri<T, R>(config?: AxiosXHRConfig<T, R>): string;
   }
@@ -198,8 +204,8 @@ declare module 'axios' {
     Axios: typeof Axios;
     Cancel: typeof Cancel;
     CancelToken: typeof CancelToken;
-    isCancel(value: any): boolean;
-    create(config?: AxiosXHRConfigBase<any>): Axios;
+    isCancel(value: mixed): boolean;
+    create(config?: AxiosXHRConfigBase<T, R>): Axios;
     all: typeof Promise.all;
     spread<T, R>(callback: (...args: T) => R): (array: T) => R;
   }
