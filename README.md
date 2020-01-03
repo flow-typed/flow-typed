@@ -78,7 +78,7 @@ working with this repository. The full list of commands is available at
 Installs libdefs from looking at your package.json.
 
 If `package-specification` was specified, only that one libdef will be installed.
-If the `--ignoreDeps` flag was specified, the libdefs for the specified deps will be ignored. i.e: `--ignoreDeps dev bundle peer`.
+If the `--ignoreDeps` flag was specified, the libdefs for the specified deps will be ignored. i.e: `--ignoreDeps dev bundled peer`.
 
 ```bash
 flow-typed install foo@1.2.3
