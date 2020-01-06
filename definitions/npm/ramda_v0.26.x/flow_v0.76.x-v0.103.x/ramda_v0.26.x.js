@@ -581,18 +581,18 @@ declare module ramda {
     x === null);
 
   // *List
-  declare function adjust<T>(
+  declare function adjust<A>(
     index: number,
-  ): (fn: (a: T) => T) => (src: Array<T>) => Array<T>;
-  declare function adjust<T>(
+  ): (fn: (a: A) => A) => (src: $ReadOnlyArray<A>) => Array<A>;
+  declare function adjust<A>(
     index: number,
-    fn: (a: T) => T,
-  ): (src: Array<T>) => Array<T>;
-  declare function adjust<T>(
+    fn: (a: A) => A,
+  ): (src: $ReadOnlyArray<A>) => Array<A>;
+  declare function adjust<A>(
     index: number,
-    fn: (a: T) => T,
-    src: Array<T>
-  ): Array<T>;
+    fn: (a: A) => A,
+    src: $ReadOnlyArray<A>
+  ): Array<A>;
 
   declare function all<T>(fn: UnaryPredicateFn<T>, xs: Array<T>): boolean;
   declare function all<T>(
