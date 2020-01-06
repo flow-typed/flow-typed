@@ -652,8 +652,17 @@ declare module ramda {
     x: E,
   ): (xs: Array<E>) => Array<E>;
 
-  declare function chain<A, B>(f: (x: A) => B[], xs: A[]): B[]
-  declare function chain<A, B>(f: (x: A) => B[]): (xs: A[]) => B[]
+  declare function chain<A, B>(f: (x: A) => Array<B>, xs: $ReadOnlyArray<A>): Array<B>;
+  declare function chain<A, B>(f: (x: A) => Array<B>): (xs: $ReadOnlyArray<A>) => Array<B>;
+
+  // Additional chain functionality documented at https://ramdajs.com/docs/#chain:
+  //
+  // Dispatches to the chain method of the second argument, if present, according to the FantasyLand Chain spec (https://github.com/fantasyland/fantasy-land#chain).
+  //
+  // If second argument is a function, chain(f, g)(x) is equivalent to f(g(x), x).
+  //
+  // Acts as a transducer if a transformer is given in list position.
+  declare function chain<A, B, R>(f: (x: A, y: B) => R, g: (y: B) => A):(y: B) => R;
 
   declare function concat<A, B>(x: $ReadOnlyArray<A>, y: $ReadOnlyArray<B>): Array<A | B>;
   declare function concat<A, B>(x: $ReadOnlyArray<A>): CurriedFunction1<$ReadOnlyArray<B>, Array<A | B>>;

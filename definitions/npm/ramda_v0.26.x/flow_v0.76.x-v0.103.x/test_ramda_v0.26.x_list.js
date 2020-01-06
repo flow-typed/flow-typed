@@ -4,6 +4,7 @@ import _, {
   type RefineFilter,
   adjust,
   append,
+  chain,
   compose,
   concat,
   contains,
@@ -12,6 +13,7 @@ import _, {
   find,
   groupBy,
   includes,
+  last,
   length,
   nth,
   pipe,
@@ -701,6 +703,34 @@ const str: string = "hello world";
     y: b
   }))([1, 2, 3])(["1", "2", "3"]);
 
+  describe('chain', () => {
+    it('should accept read only list as input', () => {
+      const arr:$ReadOnlyArray<string> = ['1', '2', '3'];
+      const duplicate = n => [n, n];
+      const result1: Array<string> = chain(duplicate, arr);
+      const result2: Array<string> = chain(duplicate)(arr);
+    });
+
+    it('should fail when input out type mismatch', () => {
+      const arr:$ReadOnlyArray<string> = ['1', '2', '3'];
+      const castType = n => (parseInt(n): number);
+      //$ExpectError
+      const result: Array<string> = chain(castType, arr);
+    });
+
+    it('should take second argument as function', () => {
+      const arr:$ReadOnlyArray<string> = ['1', '2', '3'];
+      const result: Array<?string> = chain(append, x => x[x.length -1])(arr)
+    });
+
+    it('should error out when second arugment is function but type mismatches', () => {
+      const arr:$ReadOnlyArray<string> = ['1', '2', '3'];
+      const castType = n => (parseInt(n): number);
+      //$ExpectError
+      const result: Array<string> = chain(append, castType)(arr)
+    });
+  });
+                 
   describe('nth', () => {
     it('should get a maybe type back on input is an array of given types', () => {
       const nthxs1: ?number = nth(2, [1,2,3]);
