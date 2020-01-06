@@ -1,5 +1,5 @@
 declare module 'query-string' {
-  declare type ArrayFormat = 'none' | 'bracket' | 'index'
+  declare type ArrayFormat = 'none' | 'bracket' | 'index' | 'comma'
   declare type ParseOptions = {|
     arrayFormat?: ArrayFormat,
   |}

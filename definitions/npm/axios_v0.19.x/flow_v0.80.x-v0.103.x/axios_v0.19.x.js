@@ -1,11 +1,11 @@
 declare module 'axios' {
-  import type { Agent as HttpAgent } from 'http';
-  import type { Agent as HttpsAgent } from 'https';
+import type { Agent as HttpAgent } from 'http';
+import type { Agent as HttpsAgent } from 'https';
 
   declare type AxiosTransformer<T> = (
     data: T,
     headers?: { [key: string]: any }
-  ) => any;
+) => any;
 
   declare type ProxyConfig = {|
     host: string,
@@ -15,7 +15,7 @@ declare module 'axios' {
       password: string,
     },
     protocol?: string,
-  |};
+|};
 
   declare class Cancel {
     constructor(message?: string): Cancel;
@@ -27,7 +27,7 @@ declare module 'axios' {
   declare type CancelTokenSource = {|
     token: CancelToken,
     cancel: Canceler,
-  |};
+|};
 
   declare class CancelToken {
     constructor(executor: (cancel: Canceler) => void): void;
@@ -38,28 +38,28 @@ declare module 'axios' {
   }
 
   declare type Method =
-    | 'get'
-    | 'GET'
-    | 'delete'
-    | 'DELETE'
-    | 'head'
-    | 'HEAD'
-    | 'options'
-    | 'OPTIONS'
-    | 'post'
-    | 'POST'
-    | 'put'
-    | 'PUT'
-    | 'patch'
-    | 'PATCH';
+| 'get'
+  | 'GET'
+  | 'delete'
+  | 'DELETE'
+  | 'head'
+  | 'HEAD'
+  | 'options'
+  | 'OPTIONS'
+  | 'post'
+  | 'POST'
+  | 'put'
+  | 'PUT'
+  | 'patch'
+  | 'PATCH';
 
   declare type ResponseType =
-    | 'arraybuffer'
-    | 'blob'
-    | 'document'
-    | 'json'
-    | 'text'
-    | 'stream';
+| 'arraybuffer'
+  | 'blob'
+  | 'document'
+  | 'json'
+  | 'text'
+  | 'stream';
 
   declare type AxiosAdapter = (
     config: AxiosXHRConfig<any>
@@ -74,13 +74,13 @@ declare module 'axios' {
     baseURL?: string,
     cancelToken?: CancelToken,
     headers?: { [key: string]: any },
-    httpAgent?: HttpAgent,
+  httpAgent?: HttpAgent,
     httpsAgent?: HttpsAgent,
     maxContentLength?: number,
     maxRedirects?: number,
     socketPath?: string | null,
     params?: { [key: string]: any },
-    paramsSerializer?: (params: { [key: string]: any }) => string,
+  paramsSerializer?: (params: { [key: string]: any }) => string,
     onUploadProgress?: (progressEvent: ProgressEvent) => void,
     onDownloadProgress?: (progressEvent: ProgressEvent) => void,
     proxy?: ProxyConfig | false,
@@ -92,14 +92,14 @@ declare module 'axios' {
     withCredentials?: boolean,
     xsrfCookieName?: string,
     xsrfHeaderName?: string,
-  };
+};
 
   declare type AxiosXHRConfig<T, R = T> = {|
-    ...$Exact<AxiosXHRConfigBase<T, R>>,
+...$Exact<AxiosXHRConfigBase<T, R>>,
     data?: T,
     method?: Method,
     url: string,
-  |};
+|};
 
   declare type AxiosXHRConfigShape<T, R = T> = $Shape<AxiosXHRConfig<T, R>>;
 
@@ -107,70 +107,70 @@ declare module 'axios' {
     config: AxiosXHRConfig<T, R>,
     data: R,
     headers: ?{ [key: string]: any },
-    status: number,
+  status: number,
     statusText: string,
     request: http$ClientRequest<> | XMLHttpRequest | mixed,
-  };
+};
 
   declare type AxiosInterceptorIdent = number;
 
   declare type AxiosRequestInterceptor<T, R = T> = {|
     use(
       onFulfilled: ?(
-        response: AxiosXHRConfig<T, R>
-      ) => Promise<AxiosXHRConfig<mixed>> | AxiosXHRConfig<mixed>,
-      onRejected: ?(error: mixed) => mixed
-    ): AxiosInterceptorIdent,
+    response: AxiosXHRConfig<T, R>
+  ) => Promise<AxiosXHRConfig<mixed>> | AxiosXHRConfig<mixed>,
+    onRejected: ?(error: mixed) => mixed
+): AxiosInterceptorIdent,
     eject(ident: AxiosInterceptorIdent): void,
-  |};
+|};
 
   declare type AxiosResponseInterceptor<T, R = T> = {|
     use(
       onFulfilled: ?(response: AxiosXHR<T, R>) => mixed,
-      onRejected: ?(error: mixed) => mixed
-    ): AxiosInterceptorIdent,
+    onRejected: ?(error: mixed) => mixed
+): AxiosInterceptorIdent,
     eject(ident: AxiosInterceptorIdent): void,
-  |};
+|};
 
   declare type AxiosPromise<T, R = T> = Promise<AxiosXHR<T, R>>;
 
   declare class Axios {
-    <T, R>(
-      config: AxiosXHRConfig<T, R> | string,
-      config?: AxiosXHRConfigShape<T, R>
-    ): AxiosPromise<T, R>;
+  <T, R>(
+    config: AxiosXHRConfig<T, R> | string,
+    config?: AxiosXHRConfigShape<T, R>
+  ): AxiosPromise<T, R>;
     constructor<T, R>(config?: AxiosXHRConfigBase<T, R>): void;
     request<T, R>(
       config: AxiosXHRConfig<T, R> | string,
       config?: AxiosXHRConfigShape<T, R>
-    ): AxiosPromise<T, R>;
+  ): AxiosPromise<T, R>;
     delete<R>(
       url: string,
       config?: AxiosXHRConfigBase<mixed, R>
-    ): AxiosPromise<mixed, R>;
+  ): AxiosPromise<mixed, R>;
     get<R>(
       url: string,
       config?: AxiosXHRConfigBase<mixed, R>
-    ): AxiosPromise<mixed, R>;
+  ): AxiosPromise<mixed, R>;
     head<R>(
       url: string,
       config?: AxiosXHRConfigBase<mixed, R>
-    ): AxiosPromise<mixed, R>;
+  ): AxiosPromise<mixed, R>;
     post<T, R>(
       url: string,
       data?: T,
-      config?: AxiosXHRConfigBase<T, R>
-    ): AxiosPromise<T, R>;
+    config?: AxiosXHRConfigBase<T, R>
+  ): AxiosPromise<T, R>;
     put<T, R>(
       url: string,
       data?: T,
-      config?: AxiosXHRConfigBase<T, R>
-    ): AxiosPromise<T, R>;
+    config?: AxiosXHRConfigBase<T, R>
+  ): AxiosPromise<T, R>;
     patch<T, R>(
       url: string,
       data?: T,
-      config?: AxiosXHRConfigBase<T, R>
-    ): AxiosPromise<T, R>;
+    config?: AxiosXHRConfigBase<T, R>
+  ): AxiosPromise<T, R>;
     interceptors: {
       request: AxiosRequestInterceptor<mixed>,
       response: AxiosResponseInterceptor<mixed>,
@@ -178,7 +178,7 @@ declare module 'axios' {
     defaults: {|
       ...$Exact<AxiosXHRConfigBase<mixed>>,
       headers: { [key: string]: any },
-    |};
+      |};
     getUri<T, R>(config?: AxiosXHRConfig<T, R>): string;
   }
 
@@ -191,10 +191,10 @@ declare module 'axios' {
   }
 
   declare interface AxiosExport extends Axios {
-    <T, R>(
+  <T, R>(
       config: AxiosXHRConfig<T, R> | string,
       config?: AxiosXHRConfigShape<T, R>
-    ): AxiosPromise<T, R>;
+  ): AxiosPromise<T, R>;
     Axios: typeof Axios;
     Cancel: typeof Cancel;
     CancelToken: typeof CancelToken;

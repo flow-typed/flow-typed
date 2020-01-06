@@ -21,6 +21,8 @@ type RequestDataUser = {|
   +name: string,
 |};
 
+type Header = {[key: string]: mixed,...};
+
 const handleResponse = (response: $AxiosXHR<mixed>) => {
   (response.data: mixed);
   (response.status: number);
@@ -29,7 +31,7 @@ const handleResponse = (response: $AxiosXHR<mixed>) => {
   (response.statusText: string);
   // $ExpectError
   (response.statusText: number);
-  (response.headers: ?{});
+  (response.headers: ?{...});
   (response.config: $AxiosXHRConfig<mixed>);
   // $ExpectError
   (response.config: string);
@@ -55,7 +57,7 @@ const handleError = (error: $AxiosError<mixed>) => {
   if (error.response) {
     (error.response.data: mixed);
     (error.response.status: number);
-    (error.response.headers: ?{});
+    (error.response.headers: ?{...});
   } else {
     (error.message: string);
   }
@@ -63,8 +65,8 @@ const handleError = (error: $AxiosError<mixed>) => {
 
 const config: $AxiosXHRConfigBase<RequestDataUser, User> = {
   baseURL: 'https://api.example.com/',
-  transformRequest: (data: RequestDataUser) => '{"foo":"bar"}',
-  transformResponse: [(data: User) => ({ baz: 'qux' })],
+  transformRequest: (data: RequestDataUser, headers?: Header) => '{"foo":"bar"}',
+  transformResponse: [(data: User, headers?: Header) => ({ baz: 'qux' })],
   headers: { 'X-FOO': 'bar' },
   params: { id: 12345 },
   paramsSerializer: (params: Object) => 'id=12345',
@@ -104,6 +106,16 @@ describe('Config', () => {
     axiosConfig.responseType = 'foobar';
   });
 });
+
+describe('Headers', () => {
+  it('should take inexact kv pairs with string type as key and mixed type as values', () => {
+    const test: Header = { 'foo': 1 };
+    const test1: Header = { 'bar': 'baz'};
+
+    // $ExpectError
+    const test2: Header = { 1 : 'false'}
+  });
+})
 
 describe('Request methods', () => {
   it('returns a promise', () => {
@@ -258,14 +270,30 @@ describe('Create instance', () => {
 describe('Defaults', () => {
   it('setters default config', () => {
     axios.defaults.baseURL = 'https://api.example.com/';
-    axios.defaults.headers.common['Authorization'] = 'token';
-    axios.defaults.headers.post['X-FOO'] = 'bar';
+    axios.defaults.headers = {
+      'common': {
+        'Authorization': 'token'
+      }
+    }
+    axios.defaults.headers =  {
+      'post': {
+        'X-FOO': 'bar'
+      }};
     axios.defaults.timeout = 2500;
 
     const instance: Axios = axios.create();
     instance.defaults.baseURL = 'https://api.example.com/';
-    instance.defaults.headers.common['Authorization'] = 'token';
-    instance.defaults.headers.post['X-FOO'] = 'bar';
+    instance.defaults.headers = {
+      'common': {
+        'Authorization': 'token'
+      }
+    };
+    axios.defaults.headers =  {
+      'post': {
+        'X-FOO': 'bar'
+      }
+    };
+
     instance.defaults.timeout = 2500;
   });
 });
@@ -397,5 +425,31 @@ describe('getUri', () => {
 
     // $ExpectError
     const uri2: number = axios.getUri();
+  });
+});
+
+describe('options', () => {
+  it('accepts string url only', () => {
+    //$ExpectError
+    axios.options(123)
+    axios.options('a url')
+  });
+
+  it('takes a url and returns a promise', () => {
+    axios
+      .options('anyUrl')
+      .then(handleResponse)
+      .catch(handleError);
+  });
+
+  it('takes url and config, returns a promise', () => {
+    const axiosConfig:$AxiosXHRConfig<mixed> = {
+      url: '/foo',
+      method: 'OPTIONS',
+    };
+    axios
+      .options('a url', axiosConfig)
+      .then(handleResponse)
+      .catch(handleError)
   });
 });

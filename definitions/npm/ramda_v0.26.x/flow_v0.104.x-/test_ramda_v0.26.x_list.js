@@ -2,6 +2,7 @@
 /*eslint-disable no-undef, no-unused-vars, no-console*/
 import _, {
   type RefineFilter,
+  adjust,
   append,
   compose,
   concat,
@@ -887,7 +888,18 @@ const str: string = "hello world";
 
     it('should fail on passing a non-array to second argument', () => {
       //$ExpectError
-      const nthxs = nth(2)({})
+      const nthxs = nth(2)({}) 
+    });
+  });
+              
+  describe('adjust', () => {
+    it('should allow both Array and $ReadOnlyArray output', () => {
+      const arr: Array<number> = [1, 2, 3]
+      const ro: $ReadOnlyArray<number> = [1, 2, 3]
+      const result: $ReadOnlyArray<number> = adjust(1, x => x + 1, arr)
+      const result1: Array<number> = adjust(1, x => x + 1, arr)
+      const result2: $ReadOnlyArray<number> = adjust(1, x => x + 1, ro)
+      const result3: Array<number> = adjust(1, x => x + 1, ro)
     });
   });
 
