@@ -116,7 +116,7 @@ declare module "react-dnd" {
     spec: DragSourceSpec<OP>,
     collect: DragSourceCollector<CP>,
     options?: DndOptions<OP>
-  ): Connector<$Supertype<OP & CP>, CP>;
+  ): Connector<$Shape<OP & CP>, CP>;
 
   // Drop Target
   // ----------------------------------------------------------------------
@@ -170,7 +170,7 @@ declare module "react-dnd" {
     spec: DropTargetSpec<OP>,
     collect: DropTargetCollector<CP>,
     options?: DndOptions<OP>
-  ): Connector<$Supertype<OP & CP>, CP>;
+  ): Connector<$Shape<OP & CP>, CP>;
 
   // Drag Layer
   // ----------------------------------------------------------------------
@@ -190,7 +190,7 @@ declare module "react-dnd" {
   declare function DragLayer<OP: {...}, CP: {...}>(
     collect: (monitor: DragLayerMonitor) => CP,
     options?: DndOptions<OP>
-  ): Connector<$Supertype<OP & CP>, CP>;
+  ): Connector<$Shape<OP & CP>, CP>;
 
   // Drag Drop Context
   // ----------------------------------------------------------------------
@@ -210,5 +210,5 @@ declare module "react-dnd" {
 
   declare function DragDropContext<OP: {...}, CP: {...}>(
     backend: mixed
-  ): Connector<$Supertype<OP & CP>, CP>;
+  ): Connector<$Shape<OP & CP>, CP>;
 }

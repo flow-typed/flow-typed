@@ -1199,7 +1199,7 @@ declare module "lodash-es" {
   ): Object;
   declare export function omit(object?: ?Object, ...props: $ReadOnlyArray<string>): Object;
   declare export function omit(object?: ?Object, props: $ReadOnlyArray<string>): Object;
-  declare export function omitBy<A, T: { [id: string]: A, ... }>(
+  declare export function omitBy<A, T: $ReadOnly<{ [id: string]: A, ... }>>(
     object: T,
     predicate?: ?OPredicate<A, T>
   ): Object;
@@ -1209,7 +1209,7 @@ declare module "lodash-es" {
   ): {...};
   declare export function pick(object?: ?Object, ...props: $ReadOnlyArray<string>): Object;
   declare export function pick(object?: ?Object, props: $ReadOnlyArray<string>): Object;
-  declare export function pickBy<A, T: { [id: string]: A, ... }>(
+  declare export function pickBy<A, T: $ReadOnly<{ [id: string]: A, ... }>>(
     object: T,
     predicate?: ?OPredicate<A, T>
   ): Object;
