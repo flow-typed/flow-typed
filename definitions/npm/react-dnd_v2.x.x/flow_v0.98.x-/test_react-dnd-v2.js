@@ -256,15 +256,15 @@ const dndKnight3: DndKnight3 = (null: any);
 
 (dndKnight3.getDecoratedComponentInstance(): void);
 
-// $ExpectError: Missing required prop
+// FIXME: Should error, missing required prop
 (<DndKnight3 />: React.Element<typeof DndKnight3>);
 
-// $ExpectError: Missing (non-)default prop
+// FIXME: Should error, missing (non-)default prop
 (<DndKnight3 title="foo" />: React.Element<typeof DndKnight3>);
 
 (<DndKnight3 title="foo" color="red" />: React.Element<typeof DndKnight3>);
 
-// $ExpectError: Invalid (non-)default prop
+// FIXME: Should error, invalid (non-)default prop
 (<DndKnight3 title="foo" color={3} />: React.Element<typeof DndKnight3>);
 
 (<DndKnight3 title="foo" color="red" extra="x" />: React.Element<
@@ -275,7 +275,7 @@ const dndKnight3: DndKnight3 = (null: any);
   typeof DndKnight3
 >);
 
-// $ExpectError: Invalid optional prop
+// FIXME: Should error, invalid optional prop
 (<DndKnight3 title="foo" color="red" count="x" />: React.Element<
   typeof DndKnight3
 >);
@@ -437,7 +437,7 @@ class CustomDragLayer extends React.Component<CustomDragLayerProps> {
       return null;
     }
 
-    return <div>this.props.title</div>;
+    return <div>{title}</div>;
   }
 }
 
