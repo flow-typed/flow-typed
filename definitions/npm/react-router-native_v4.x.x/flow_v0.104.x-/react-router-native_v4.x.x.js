@@ -25,8 +25,6 @@ declare module "react-router-native" {
     pathname: string,
     search: string,
     hash: string,
-    state?: any,
-    key?: string,
     ...
   };
 
@@ -34,7 +32,6 @@ declare module "react-router-native" {
     pathname?: string,
     search?: string,
     hash?: string,
-    state?: any,
     ...
   };
 
@@ -56,9 +53,6 @@ declare module "react-router-native" {
     block(
       callback: (location: Location, action: HistoryAction) => boolean
     ): void,
-    // createMemoryHistory
-    index?: number,
-    entries?: Array<Location>,
     ...
   };
 
