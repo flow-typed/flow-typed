@@ -3,7 +3,7 @@ import next, {type Context} from "next";
 import Link from "next/link";
 import Head from "next/head";
 import Router, {type RouteError} from "next/router";
-import Document, {Head as DocumentHead, Main, NextScript} from "next/document";
+import Document, {Head as DocumentHead, Main, NextScript, type DocumentContext} from "next/document";
 import App, {type AppInitialProps, Container} from "next/app";
 import dynamic from "next/dynamic";
 import getConfig from "next/config";
@@ -108,7 +108,7 @@ const p: string = Router.pathname;
 const q: { ... } = Router.query;
 
 export default class TestDocument extends Document {
-  static async getInitialProps(ctx: Context) {
+  static async getInitialProps(ctx: DocumentContext) {
     const props = await Document.getInitialProps(ctx);
     return { ...props, customValue: "hi there!" };
   }

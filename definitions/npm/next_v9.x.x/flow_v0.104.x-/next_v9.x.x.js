@@ -176,11 +176,24 @@ declare module "next/router" {
 declare module "next/document" {
   import type { Context } from "next";
 
+  declare type ComponentsEnhancer = any;
+
+  declare type RenderPageResult = {
+    html: string,
+    head?: Array<React$Node | null>,
+    ...
+  };
+
+  declare export type DocumentContext = Context & {
+    renderPage: (options?: ComponentsEnhancer) => RenderPageResult | Promise<RenderPageResult>,
+    ...
+  }
+
   declare export var Head: Class<React$Component<any, any>>;
   declare export var Main: Class<React$Component<any, any>>;
   declare export var NextScript: Class<React$Component<any, any>>;
   declare export default Class<React$Component<any, any>> & {
-    getInitialProps: (ctx: Context) => Promise<*>,
+    getInitialProps: (ctx: DocumentContext) => Promise<*>,
     renderPage(cb: Function): void,
     ...
   };
