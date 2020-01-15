@@ -323,7 +323,7 @@ declare module "antd" {
   declare type InputPasswordProps = {
     visibilityToggle?: boolean
   };
-  
+
   // Added in 3.12.0
   declare class InputPassword extends React$Component<InputPasswordProps> {}
 
@@ -478,7 +478,7 @@ declare module "antd" {
   declare class RadioButton extends React$Component<{}> {}
 
   declare export class Row extends React$Component<{}> {}
-  
+
   declare export type SelectValue = string | string[] | number | number[];
 
   declare export type SelectProps<T = SelectValue> = {
@@ -600,6 +600,19 @@ declare module "antd" {
   } & TooltipSharedProps
 
   declare export class Tooltip extends React$Component<TooltipProps> {}
+
+  declare export class Tree extends React$Component<TreeProps, any> {
+    static TreeNode: typeof React$ComponentClass<AntTreeNodeProps>;
+    static defaultProps: {
+      checkable: boolean;
+      showIcon: boolean;
+      openAnimation: {
+        appear: null;
+        enter(node: HTMLElement, done: () => void): any;
+        leave(node: HTMLElement, done: () => void): any;
+      };
+    };
+  }
 
   declare export class TreeSelect extends React$Component<{}> {
     static TreeNode: typeof TreeSelectTreeNode;
