@@ -13,9 +13,9 @@ declare module "history/createBrowserHistory" {
     ...
   };
 
-  declare interface IBrowserHistory {
+  declare export interface BrowserHistory {
     length: number,
-    location: BrowserLocation,
+    location: $Shape<BrowserLocation>,
     action: Action,
     push(path: string, state?: {...}): void,
     push(location: $Shape<BrowserLocation>): void,
@@ -29,9 +29,7 @@ declare module "history/createBrowserHistory" {
     block((location: BrowserLocation, action: Action) => string): typeof Unblock,
   }
 
-  declare export type BrowserHistory = IBrowserHistory;
-
-  declare type HistoryOpts = {
+  declare type BrowserHistoryOpts = {
     basename?: string,
     forceRefresh?: boolean,
     getUserConfirmation?: (
@@ -41,7 +39,7 @@ declare module "history/createBrowserHistory" {
     ...
   };
 
-  declare export default (opts?: HistoryOpts) => BrowserHistory;
+  declare export default (opts?: BrowserHistoryOpts) => BrowserHistory;
 }
 
 declare module "history/createMemoryHistory" {
@@ -59,12 +57,12 @@ declare module "history/createMemoryHistory" {
     ...
   };
 
-  declare interface IMemoryHistory {
+  declare export interface MemoryHistory {
     length: number,
-    location: MemoryLocation,
+    location: $Shape<MemoryLocation>,
     action: Action,
     index: number,
-    entries: Array<string>,
+    entries: Array<MemoryLocation | string>,
     push(path: string, state?: {...}): void,
     push(location: $Shape<MemoryLocation>): void,
     replace(path: string, state?: {...}): void,
@@ -73,16 +71,14 @@ declare module "history/createMemoryHistory" {
     goBack(): void,
     goForward(): void,
     // Memory only
-    canGo(n: number): boolean,
+    canGo?: (n: number) => boolean,
     listen: Function,
     block(message: string): typeof Unblock,
-    block((location: MemoryLocation, action: Action) => string): typeof Unblock,
+    block((location: MemoryLocation, action: Action) => ?string): typeof Unblock,
   }
 
-  declare export type MemoryHistory = IMemoryHistory;
-
-  declare type HistoryOpts = {
-    initialEntries?: Array<string>,
+  declare type MemoryHistoryOpts = {
+    initialEntries?: Array<MemoryLocation | string>,
     initialIndex?: number,
     keyLength?: number,
     getUserConfirmation?: (
@@ -92,7 +88,7 @@ declare module "history/createMemoryHistory" {
     ...
   };
 
-  declare export default (opts?: HistoryOpts) => MemoryHistory;
+  declare export default (opts?: MemoryHistoryOpts) => MemoryHistory;
 }
 
 declare module "history/createHashHistory" {
@@ -107,9 +103,9 @@ declare module "history/createHashHistory" {
     ...
   };
 
-  declare interface IHashHistory {
+  declare export interface HashHistory {
     length: number,
-    location: HashLocation,
+    location: $Shape<HashLocation>,
     action: Action,
     push(path: string, state?: {...}): void,
     push(location: $Shape<HashLocation>): void,
@@ -124,9 +120,7 @@ declare module "history/createHashHistory" {
     push(path: string): void,
   }
 
-  declare export type HashHistory = IHashHistory;
-
-  declare type HistoryOpts = {
+  declare type HashHistoryOpts = {
     basename?: string,
     hashType: "slash" | "noslash" | "hashbang",
     getUserConfirmation?: (
@@ -136,5 +130,43 @@ declare module "history/createHashHistory" {
     ...
   };
 
-  declare export default (opts?: HistoryOpts) => HashHistory;
+  declare export default (opts?: HashHistoryOpts) => HashHistory;
+}
+
+declare module 'history' {
+  import typeof CreateMemoryHistory from 'history/createMemoryHistory';
+  import typeof CreateHashHistory from 'history/createHashHistory';
+  import typeof CreateBrowserHistory from 'history/createBrowserHistory';
+
+  import type {
+    MemoryHistory,
+    MemoryLocation,
+    MemoryHistoryOpts
+  } from 'history/createMemoryHistory';
+  import type {
+    HashHistory,
+    HashLocation,
+    HashHistoryOpts
+  } from 'history/createHashHistory';
+  import type {
+    BrowserHistory,
+    BrowserLocation,
+    BrowserHistoryOpts
+  } from 'history/createBrowserHistory';
+
+  declare module.exports: {|
+    createMemoryHistory: CreateMemoryHistory,
+    createHashHistory: CreateHashHistory,
+    createBrowserHistory: CreateBrowserHistory,
+    HashHistory: HashHistory,
+    HashLocation: HashHistory,
+    HashHistoryOpts: HashHistory,
+    MemoryHistory: MemoryHistory,
+    MemoryLocation: MemoryHistory,
+    MemoryHistoryOpts: MemoryHistory,
+    BrowserHistory: BrowserHistory,
+    BrowserLocation: BrowserHistory,
+    BrowserHistoryOpts: BrowserHistory,
+    Action: 'PUSH' | 'REPLACE' | 'POP'
+  |}
 }
