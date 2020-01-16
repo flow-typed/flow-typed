@@ -68,8 +68,10 @@ const pathname: string = url.pathname;
 const pathname2: number = url.pathname;
 
 const query: Object = url.query;
+const query2: { [key: string]: string } = url.query;
+
 // $ExpectError number. This type is incompatible with Object
-const query2: number = url.query;
+const query3: number = url.query;
 
 const hash: string = url.hash;
 // $ExpectError number. This type is incompatible with boolean

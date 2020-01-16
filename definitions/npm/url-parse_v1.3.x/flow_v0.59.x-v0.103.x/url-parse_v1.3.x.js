@@ -9,7 +9,7 @@ declare module 'url-parse' {
     hostname: string,
     port: string,
     pathname: string,
-    query: Object,
+    query: { [key: string]: string },
     hash: string,
     href: string,
     origin: string,
