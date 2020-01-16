@@ -38,6 +38,8 @@ import {
   TreeSelect
 } from "antd";
 
+const { RangePicker } = DatePicker;
+
 import type { WrappedFormUtils } from "antd";
 
 describe("Alert", () => {
@@ -310,6 +312,12 @@ describe("Collapse.Panel", () => {
 describe("DatePicker", () => {
   it("is a react component", () => {
     const datePicker = <DatePicker />;
+  });
+});
+
+describe("RangePicker", () => {
+  it("is a react component", () => {
+    const rangePicker = <RangePicker />;
   });
 });
 

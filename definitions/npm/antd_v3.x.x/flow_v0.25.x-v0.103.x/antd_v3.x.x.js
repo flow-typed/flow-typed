@@ -170,8 +170,6 @@ declare module "antd" {
     static Panel: typeof CollapsePanel;
   }
 
-  declare export class DatePicker extends React$Component<{}> {}
-
   declare export class Dropdown extends React$Component<{}> {}
 
   declare export class Drawer extends React$Component<{}> {}
