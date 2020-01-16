@@ -14,7 +14,7 @@ declare module 'webpack' {
     hasErrors(): boolean;
     hasWarnings(): boolean;
     toJson(options?: StatsOptions): any;
-    toString(options?: StatsOptions & { colors?: boolean, ... }): string;
+    toString(options?: { ...StatsOptions, colors?: boolean, ... }): string;
   }
 
   declare type Callback = (error: WebpackError, stats: Stats) => void;
