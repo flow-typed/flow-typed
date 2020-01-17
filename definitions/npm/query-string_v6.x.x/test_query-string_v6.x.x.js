@@ -1,6 +1,6 @@
 // @flow
 
-import { extract, parse, stringify, parseUrl } from 'query-string';
+import { extract, parse, parseUrl, stringify, stringifyUrl } from 'query-string';
 
 extract('?test');
 
@@ -10,6 +10,8 @@ extract({});
 parse('test');
 
 parse('test', { arrayFormat: 'bracket' });
+
+parse('test', { decode: true, sort: false, parseNumbers: true, parseBooleans: true });
 
 // $ExpectError: strict is not a parse option
 parse('test', { strict: true });
@@ -32,6 +34,12 @@ stringify('test');
 // $ExpectError: true is not a stringify option
 stringify({ test: null }, { test: true });
 
+stringify({ test: [1, 2, 3] }, { arrayFormat: 'bracket' });
+stringify(
+    { test: 1, empty: null },
+    { encode: true, strict: true, sort: false, skipNull: true }
+);
+
 stringify({ test: 1 });
 
 stringify({ test: [1, 2, 3] });
@@ -41,6 +49,8 @@ stringify({ test: false });
 stringify({ test: null });
 
 stringify({ test: undefined });
+
+stringify({ test: 'test', empty: null }, { skipNull: true });
 
 // Check we can strongly type the query object.
 type Query = {|
@@ -78,3 +88,8 @@ parseUrl('test', { strict: true });
 
 // $ExpectError: should be a string
 parseUrl({ test: null });
+
+stringifyUrl(
+    { url: 'https://example.com', query: { test: [1, 2, 3] } },
+    { encode: true, strict: true, sort: false, skipNull: true }
+);
