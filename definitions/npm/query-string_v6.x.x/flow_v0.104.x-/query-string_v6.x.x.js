@@ -20,7 +20,7 @@ declare module 'query-string' {
 
   declare type ObjectParameters = $ReadOnly<{ [string]: ObjectParameter | $ReadOnlyArray<ObjectParameter>, ... }>
 
-  declare type QueryParameters = { [string]: string | Array<string> | null, ... }
+  declare type QueryParameters = { [string]: string | Array<string | number> | null, ... }
 
   declare type StringifyObjectParameter = {| url: string, query?: QueryParameters |}
 
