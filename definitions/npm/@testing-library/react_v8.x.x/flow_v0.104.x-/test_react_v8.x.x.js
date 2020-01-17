@@ -1,5 +1,7 @@
 // @flow
 
+// REMOVE ME: Comment added to force testing of types
+
 import React from 'react';
 import {
   act,
