@@ -19,7 +19,7 @@ parse('test', { strict: true });
 // $ExpectError: should be a string
 parse({ test: null });
 
-(parse('foo').foo: null | string | Array<string>);
+(parse('foo').foo: null | string | Array<string | number>);
 
 // $ExpectError: result props cannot be undefined
 (parse('foo').foo: void);
