@@ -115,27 +115,52 @@ declare module '@testing-library/react' {
     eventProperties?: TInit
   ) => boolean;
 
-  declare type RenderResult = {|
+  declare type RenderResult<Queries = GetsAndQueries> = {|
     container: HTMLDivElement,
     unmount: () => void,
     baseElement: HTMLElement,
     asFragment: () => DocumentFragment,
     debug: (baseElement?: HTMLElement) => void,
     rerender: (ui: React$Element<*>) => void,
-  |} & GetsAndQueries;
+  |} & Queries;
+  declare type RenderResultWithCustomQueries<CustomQueries> = {
+    ...CustomQueries,
+    container: HTMLDivElement,
+    unmount: () => void,
+    baseElement: HTMLElement,
+    asFragment: () => DocumentFragment,
+    debug: (baseElement?: HTMLElement) => void,
+    rerender: (ui: React$Element<*>) => void,
+    ...
+  };
 
-  declare export type RenderOptions = {|
+  declare export type RenderOptionsWithoutCustomQueries = {|
     container?: HTMLElement,
     baseElement?: HTMLElement,
     hydrate?: boolean,
-    queries?: any,
+    wrapper?: React.ComponentType,
+  |};
+
+  declare export type RenderOptionsWithCustomQueries<
+    CustomQueries: { ... }
+  > = {|
+    queries: CustomQueries,
+    container?: HTMLElement,
+    baseElement?: HTMLElement,
+    hydrate?: boolean,
     wrapper?: React.ComponentType,
   |};
 
   declare export function render(
     ui: React.ReactElement<any>,
-    options?: RenderOptions
-  ): RenderResult;
+    options?: RenderOptionsWithoutCustomQueries
+  ): RenderResult<>;
+  declare export function render<
+    CustomQueries: { [string]: (...args: Array<any>) => any, ... }
+  >(
+    ui: React.ReactElement<any>,
+    options: RenderOptionsWithCustomQueries<CustomQueries>
+  ): RenderResultWithCustomQueries<CustomQueries>;
 
   declare export var act: ReactDOMTestUtilsAct;
   declare export function cleanup(): void;
