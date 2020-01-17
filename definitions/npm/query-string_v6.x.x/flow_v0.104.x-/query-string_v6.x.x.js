@@ -22,7 +22,7 @@ declare module 'query-string' {
 
   declare type QueryParameters = { [string]: string | Array<string> | null, ... }
 
-  declare type StringifyObjectParameter = { url: string, query: QueryParameters }
+  declare type StringifyObjectParameter = {| url: string, query?: QueryParameters |}
 
   declare module.exports: {
     extract(str: string): string,

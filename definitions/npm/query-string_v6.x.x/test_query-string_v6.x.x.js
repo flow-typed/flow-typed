@@ -89,7 +89,12 @@ parseUrl('test', { strict: true });
 // $ExpectError: should be a string
 parseUrl({ test: null });
 
+stringifyUrl({ url: 'https://example.com' });
+
 stringifyUrl(
     { url: 'https://example.com', query: { test: [1, 2, 3] } },
     { encode: true, strict: true, sort: false, skipNull: true }
 );
+
+// $ExpectError: missing url in first param. object
+stringifyUrl({ query: { value: 'test' } });
