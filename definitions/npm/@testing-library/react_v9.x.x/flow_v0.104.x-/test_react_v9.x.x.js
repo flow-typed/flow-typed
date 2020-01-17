@@ -1120,3 +1120,18 @@ describe('text matching API', () => {
     const result: Array<HTMLElement> = queryAllByValue('1');
   });
 });
+
+describe('render() parameters', () => {
+  class Component extends React.Component<{ ... }> {}
+
+  it('allows supplying parameters to render()', () => {
+    class CustomWrapper extends React.Component<{ ... }> {}
+    const element = document.createElement('div');
+    render(<Component />, {
+      baseElement: element,
+      container: element,
+      hydrate: true,
+      wrapper: CustomWrapper,
+    });
+  });
+});
