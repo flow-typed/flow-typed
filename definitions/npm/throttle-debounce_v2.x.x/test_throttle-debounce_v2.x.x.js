@@ -40,7 +40,7 @@ describe('debounce', () => {
 
   it('can be called', () => {
     it('with 3 args: delay, atBegin, callback', () => {
-      debounce(1, true, () => 1)
+      debounce(1, true, () => 1);
     });
 
     it('with 2 args: delay, callback', () => {
@@ -50,9 +50,9 @@ describe('debounce', () => {
 
   it('can not be called with incorrect options', () => {
     // $ExpectError
-    debounce(() => 1)
+    debounce(() => 1);
 
     // $ExpectError
-    debounce('1', () => 1)
+    debounce('1', () => 1);
   });
 });
