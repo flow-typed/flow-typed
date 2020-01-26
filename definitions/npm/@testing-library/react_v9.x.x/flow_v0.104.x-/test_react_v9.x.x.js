@@ -1134,4 +1134,20 @@ describe('render() parameters', () => {
       wrapper: CustomWrapper,
     });
   });
+
+  it('allows overriding render() with custom queries', () => {
+    type CustomReturnType = 123456;
+    declare var customValue: CustomReturnType;
+    const customQueries = {
+      getByOverride: (param1: string) => customValue,
+    };
+    const result = render(<Component />, { queries: customQueries });
+    const a: CustomReturnType = result.getByOverride('something');
+    // $ExpectError bad type for getByOverride parameter
+    result.getByOverride(1234);
+    // $ExpectError missing getByOverride parameter
+    result.getByOverride();
+    // $ExpectError default queries are not available when using custom queries
+    result.getByTestId('indifferent');
+  });
 });
