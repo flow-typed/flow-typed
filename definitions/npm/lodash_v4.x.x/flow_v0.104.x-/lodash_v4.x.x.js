@@ -230,15 +230,15 @@ declare module "lodash" {
       array?: ?$ReadOnlyArray<T>,
       ...values: Array<?$ReadOnlyArray<T>>
     ): Array<T>;
-    differenceBy<T>(
+    differenceBy<T, U>(
       array?: ?$ReadOnlyArray<T>,
-      values?: ?$ReadOnlyArray<T>,
-      iteratee?: ?ValueOnlyIteratee<T>
+      values?: ?$ReadOnlyArray<U>,
+      iteratee?: ?ValueOnlyIteratee<T | U>
     ): T[];
-    differenceWith<T>(
+    differenceWith<T, U>(
       array?: ?$ReadOnlyArray<T>,
-      values?: ?$ReadOnlyArray<T>,
-      comparator?: ?Comparator<T>
+      values?: ?$ReadOnlyArray<U>,
+      comparator?: ?(item: T, item2: U) => boolean
     ): T[];
     drop<T>(array?: ?Array<T>, n?: ?number): Array<T>;
     dropRight<T>(array?: ?Array<T>, n?: ?number): Array<T>;
