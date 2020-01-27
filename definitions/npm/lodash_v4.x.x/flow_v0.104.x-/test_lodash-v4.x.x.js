@@ -86,6 +86,17 @@ difference(
 differenceBy(([2.1, 1.2]: $ReadOnlyArray<*>), [2.3, 3.4], Math.floor);
 differenceBy([{ x: 2 }, { x: 1 }], [{ x: 1 }], "x");
 
+type A = {| a: 1 |};
+type B = {| b: 1 |};
+function diffTest(a: $ReadOnlyArray<A>, b: $ReadOnlyArray<B>) {
+  differenceBy(a, b, (x: A | B) => {
+    return x.a || x.b;
+  });
+  differenceWith(a, b, (x: A, y: B) => {
+    return x.a === y.b;
+  });
+}
+
 /**
  * _.differenceBy
  */

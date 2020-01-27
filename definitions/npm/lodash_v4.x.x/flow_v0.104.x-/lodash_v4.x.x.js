@@ -238,7 +238,7 @@ declare module "lodash" {
     differenceWith<T, U>(
       array?: ?$ReadOnlyArray<T>,
       values?: ?$ReadOnlyArray<U>,
-      comparator?: ?Comparator<T | U>
+      comparator?: ?(item: T, item2: U) => boolean
     ): T[];
     drop<T>(array?: ?Array<T>, n?: ?number): Array<T>;
     dropRight<T>(array?: ?Array<T>, n?: ?number): Array<T>;
