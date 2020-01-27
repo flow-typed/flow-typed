@@ -3,7 +3,6 @@
 import React from 'react';
 import { render, Simulate, wait, fireEvent, renderIntoDocument, cleanup, waitForElement } from 'react-testing-library';
 import { describe, it } from 'flow-typed-test';
-import { domainToASCII } from 'url';
 
 describe('wait', () => {
   it('should fail on invalid inputs', () => {

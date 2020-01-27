@@ -11,7 +11,6 @@ import {
   within,
 } from 'react-testing-library';
 import { describe, it } from 'flow-typed-test';
-import { domainToASCII } from 'url';
 
 describe('wait', () => {
   it('should fail on invalid inputs', () => {
