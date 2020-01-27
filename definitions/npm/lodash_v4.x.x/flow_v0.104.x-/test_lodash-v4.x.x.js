@@ -366,7 +366,7 @@ zip([{ x: 1 }], [{ x: 2, y: 1 }])[0][2];
 /**
  * _.zipWith
  */
-zipWith(["a", "b", "c"], [1, 2, 3], (str, num) => ({ [str]: num }));
+zipWith(["a", "b", "c"], [1, 2, 3], (str, num) => ({ [string]: num }));
 // $ExpectError `x` should be a `string`, `y` a `number`
 zipWith(["a", "b", "c"], [1, 2, 3]).map(([x, y]) => x * y);
 
