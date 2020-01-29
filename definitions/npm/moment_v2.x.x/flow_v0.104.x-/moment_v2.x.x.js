@@ -372,6 +372,13 @@ declare class moment$Moment {
   static isDuration(obj: any): boolean;
   static normalizeUnits(unit: string): string;
   static invalid(object: any): moment$Moment;
+  static relativeTimeRounding(): (value: number) => number;
+  static relativeTimeRounding(fn: (value: number) => number): void;
+  static relativeTimeThreshold(unit: "ss" | "s" | "m" | "h" | "d" | "M"): number;
+  static relativeTimeThreshold(
+    unit: "ss" | "s" | "m" | "h" | "d" | "M",
+    limit: number,
+  ): void;
 }
 
 declare module "moment" {
