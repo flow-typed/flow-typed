@@ -127,4 +127,17 @@ describe('useMutation hook', () => {
     // $ExpectError
     (loading: string);
   });
+  it('can manually update the cache after a mutation using update on the mutation function', async () => {
+    const mutationResult = await mutation({
+      variables: {
+        c: 'test'
+      },
+      update: cache => {
+        cache.readQuery({ query: 'test' })
+        cache.readQuery<string, number>({ query: 'test' })
+        // $ExpectError
+        cache.readQuery<string>({ query: 'test' })
+      }
+    });
+  })
 });
