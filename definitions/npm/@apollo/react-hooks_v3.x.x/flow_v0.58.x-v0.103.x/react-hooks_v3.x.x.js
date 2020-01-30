@@ -948,13 +948,13 @@ declare module '@apollo/react-hooks' {
     success: boolean;
   }
 
-  declare interface CacheReadOptions extends DataProxyReadQueryOptions {
+  declare interface CacheReadOptions extends DataProxyReadQueryOptions<any> {
     rootId?: string;
     previousResult?: any;
     optimistic: boolean;
   }
 
-  declare interface CacheWriteOptions extends DataProxyReadQueryOptions {
+  declare interface CacheWriteOptions extends DataProxyReadQueryOptions<any> {
     dataId: string;
     result: any;
   }
@@ -967,7 +967,7 @@ declare module '@apollo/react-hooks' {
     callback: CacheWatchCallback;
   }
 
-  declare interface CacheEvictOptions extends DataProxyReadQueryOptions {
+  declare interface CacheEvictOptions extends DataProxyReadQueryOptions<any> {
     rootId?: string;
   }
 
@@ -982,9 +982,9 @@ declare module '@apollo/react-hooks' {
   > = DataProxyWriteFragmentOptions<TData, TVariables>;
   declare type CacheWriteDataOptions<TData> = DataProxyWriteDataOptions<TData>;
 
-  declare interface DataProxyReadQueryOptions {
+  declare interface DataProxyReadQueryOptions<D> {
     query: DocumentNode;
-    variables?: any;
+    variables?: D;
   }
 
   declare interface DataProxyReadFragmentOptions<TVariables> {
