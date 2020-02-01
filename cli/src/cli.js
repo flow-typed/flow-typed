@@ -69,6 +69,7 @@ export function runCLI() {
     )
     .demand(1)
     .strict()
+    .recommendCommands()
     .help('h')
     .alias('h', 'help').argv;
 }
