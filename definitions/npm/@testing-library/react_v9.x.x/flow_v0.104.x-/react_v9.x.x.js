@@ -115,16 +115,8 @@ declare module '@testing-library/react' {
     eventProperties?: TInit
   ) => boolean;
 
-  declare type RenderResult<Queries = GetsAndQueries> = {|
-    container: HTMLDivElement,
-    unmount: () => void,
-    baseElement: HTMLElement,
-    asFragment: () => DocumentFragment,
-    debug: (baseElement?: HTMLElement) => void,
-    rerender: (ui: React$Element<*>) => void,
-  |} & Queries;
-  declare type RenderResultWithCustomQueries<CustomQueries> = {
-    ...CustomQueries,
+  declare type RenderResult<Queries = GetsAndQueries> = {
+    ...Queries,
     container: HTMLDivElement,
     unmount: () => void,
     baseElement: HTMLElement,
@@ -160,7 +152,7 @@ declare module '@testing-library/react' {
   >(
     ui: React.ReactElement<any>,
     options: RenderOptionsWithCustomQueries<CustomQueries>
-  ): RenderResultWithCustomQueries<CustomQueries>;
+  ): RenderResult<CustomQueries>;
 
   declare export var act: ReactDOMTestUtilsAct;
   declare export function cleanup(): void;
