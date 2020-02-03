@@ -1,0 +1,138 @@
+import * as Sentry from '@sentry/browser';
+import { it, describe } from 'flow-typed-test';
+
+describe('@sentry/browser', () => {
+  describe('Top-level API', () => {
+    it('Sentry.init', () => {
+      Sentry.init({});
+      Sentry.init({ dsn: 'dsn_value' });
+
+      // $ExpectError
+      Sentry.init({ dsn: 123 });
+      // $ExpectError
+      Sentry.init({ dsn: null });
+    });
+
+    it('Sentry.captureException', () => {
+      Sentry.captureException(new Error('Something broke'));
+      Sentry.captureException('Something broke');
+      Sentry.captureException(new Map());
+      Sentry.captureException(undefined);
+
+      // $ExpectError: Too many args
+      Sentry.captureException('Something broke', {}, null);
+    });
+
+    it('Sentry.setExtra', () => {
+      Sentry.setExtra('character_name', 'Mighty Fighter');
+      Sentry.setExtra('character_name', {
+        foo: { bar: new Map() },
+        baz: undefined,
+        err: new Error(),
+      });
+
+      // $ExpectError
+      Sentry.setExtra();
+      // $ExpectError
+      Sentry.setExtra(null, 'foo');
+    });
+
+    it('Sentry.setUser', () => {
+      Sentry.setUser({ email: 'john.doe@example.com' });
+      Sentry.setUser({ email: 'john.doe@example.com', arbitrary: 'value' });
+
+      // $ExpectError
+      Sentry.setUser();
+    });
+
+    it('Sentry.withScope', () => {
+      Sentry.withScope(scope => {
+        scope.setUser({ email: 'john.doe@example.com' });
+      });
+
+      // $ExpectError
+      Sentry.withScope(null);
+    });
+
+    it('Sentry.configureScope', () => {
+      Sentry.configureScope(scope => {
+        scope.clear();
+      });
+      Sentry.configureScope(scope => {
+        scope.setLevel(Sentry.Severity.Warning);
+      });
+      Sentry.configureScope(scope => {
+        scope.setFingerprint(['my-view-function']);
+      });
+
+      // $ExpectError
+      Sentry.configureScope(null);
+    });
+
+    it('Sentry.setTag', () => {
+      Sentry.setTag('page_locale', 'de-at');
+
+      // $ExpectError
+      Sentry.setTag();
+      // $ExpectError
+      Sentry.setTag('page_locale', null);
+    });
+
+    it('Sentry.captureMessage', () => {
+      Sentry.captureMessage('This is a debug message', 'debug');
+
+      // $ExpectError
+      Sentry.captureMessage('This is a debug message', 'invalid_severity');
+    });
+
+    it('Sentry.addBreadcrumb', () => {
+      Sentry.addBreadcrumb({
+        category: 'ui',
+        message: 'Breadcrumb message',
+        level: 'info',
+      });
+      Sentry.addBreadcrumb({
+        data: { foo: new Map() },
+      });
+
+      // $ExpectError
+      Sentry.addBreadcrumb(null);
+      // $ExpectError
+      Sentry.addBreadcrumb({ other: 'value' });
+    });
+  });
+
+  describe('Lazy Loading', () => {
+    it('Sentry.forceLoad', () => {
+      Sentry.forceLoad();
+
+      // $ExpectError
+      Sentry.forceLoad(null);
+    });
+
+    it('Sentry.onLoad', () => {
+      Sentry.onLoad(() => {});
+
+      // $ExpectError
+      Sentry.onLoad(null);
+    });
+  });
+
+  describe('Advanced Usage', () => {
+    it('BrowserClient', () => {
+      new Sentry.BrowserClient({ dsn: 'dsn_value ' });
+
+      // $ExpectError
+      new Sentry.BrowserClient({ unexpected: 'config' });
+    });
+
+    it('Hub', () => {
+      const client = new Sentry.BrowserClient({ dsn: 'dsn_value ' });
+      new Sentry.Hub(client);
+
+      // $ExpectError
+      new Sentry.Hub();
+    });
+  });
+});
+
