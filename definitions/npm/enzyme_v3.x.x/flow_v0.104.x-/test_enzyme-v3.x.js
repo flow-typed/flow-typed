@@ -8,6 +8,7 @@ import {
   type ShallowWrapper,
   type ReactWrapper
 } from "enzyme";
+import { describe, it } from 'flow-typed-test';
 
 configure({
   disableLifecycleMethods: true
@@ -157,3 +158,34 @@ mount(<div><DeepInstance onChange={() => {}}/></div>).children(DeepInstance).ins
 (mount(<div />).containsAllMatchingElements([<div />, <div />]): boolean);
 (mount(<div />).containsAnyMatchingElements(<div />): boolean);
 (mount(<div />).containsAnyMatchingElements([<div />, <div />]): boolean);
+
+describe('invoke', () => {
+    describe('invoke event handler prop on shallowWrapper', () => {
+        it('test', () => {
+            // This is common use case for triggering event handler for user action
+            const shallowWrapper = shallow(<div onClick={() => {}} />);
+            shallowWrapper.invoke('onClick')();
+        });
+    });
+
+    describe('invoke regular function prop on shallowWrapper', () => {
+        // Less common use case, allowable by enzyime for prop to simply be a function
+
+        it('user uses type refinement', () => {
+            const shallowWrapper = shallow(<div getName={() => {return 'test';}} />);
+            const name = shallowWrapper.invoke('getName')();
+
+            if (typeof name === 'string') {
+                name.substring(0);
+            };
+        });
+
+        it('user does not refine type', () => {
+            const shallowWrapper = shallow(<div getNumber={() => {return 'not a number';}} />);
+            const string = shallowWrapper.invoke('getNumber')();
+
+            // $ExpectError
+            name.toFixed();
+        });
+    });
+});
