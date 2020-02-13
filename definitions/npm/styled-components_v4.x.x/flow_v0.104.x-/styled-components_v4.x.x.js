@@ -164,14 +164,21 @@ declare module 'styled-components' {
     theme: T
   |}
 
+  declare type CommonSCProps = {|
+    children?: React$Node,
+    className?: ?string,
+    style?: {[string]: string | number, ...},
+  |}
+
   declare export type PropsWithTheme<Props, T> = {|
     ...ThemeProps<T>,
+    ...CommonSCProps, // Not sure how useful this is here, but it's technically correct to have it
     ...$Exact<Props>
   |}
 
   declare export function withTheme<Theme, Config: {...}, Instance>(Component: React$AbstractComponent<Config, Instance>): React$AbstractComponent<$Diff<Config, ThemeProps<Theme | void>>, Instance>
 
-  declare export type StyledComponent<Props, Theme, Instance> = React$AbstractComponent<Props, Instance> & Class<InterpolatableComponent<Props>>
+  declare export type StyledComponent<Props, Theme, Instance, MergedProps = {...$Exact<Props>, ...CommonSCProps, ...}> = React$AbstractComponent<MergedProps, Instance> & Class<InterpolatableComponent<MergedProps>>
 
   declare export type StyledFactory<StyleProps, Theme, Instance> = {|
     [[call]]: TaggedTemplateLiteral<PropsWithTheme<StyleProps, Theme>, StyledComponent<StyleProps, Theme, Instance>>;
