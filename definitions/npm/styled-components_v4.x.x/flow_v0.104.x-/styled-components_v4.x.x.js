@@ -21,7 +21,7 @@ declare module 'styled-components' {
     | false // falsy values are OK, true is the only one not allowed, because it renders as "true"
     | null
     | void
-    | {[ruleOrSelector: string]: string | number, ...} // CSS-in-JS object returned by polished are also supported
+    | {[ruleOrSelector: string]: string | number, ...} // CSS-in-JS object returned by polished are also supported, partially
 
   declare export type TaggedTemplateLiteral<I, R> = (strings: string[], ...interpolations: Interpolation<I>[]) => R
 
@@ -100,7 +100,7 @@ declare module 'styled-components' {
 
   declare export class StyleSheetManager extends React$Component<SCMProps> {
     getContext(sheet: ?StyleSheet, target: ?HTMLElement): StyleSheet;
-    render(): React$Element<StyleSheetProvider>
+    render(): React$Element<typeof StyleSheetProvider>
   }
 
   declare export class ServerStyleSheet {
