@@ -370,7 +370,6 @@ const str: string = "hello world";
   //$ExpectError
   const s5: ?{ [key: string]: string, ... } = _.find(x => x === "2", { a: 1, b: 2 });
   const s6: number = _.findIndex(x => x === "2", ["1", "2"]);
-  const s7: number = _.findIndex(x => x === "2", { a: "1", b: "2" });
   const forEachxs = _.forEach(x => console.log(x), ns);
 
   const forEachObj = _.forEachObjIndexed((value, key) => {}, { x: 1, y: 2 });
