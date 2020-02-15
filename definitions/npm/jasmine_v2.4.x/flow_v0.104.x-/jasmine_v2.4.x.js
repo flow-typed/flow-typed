@@ -11,7 +11,7 @@ type JasmineExpectType = {
   toBeNull(): void,
   toBeTruthy(): void,
   toBeUndefined(): void,
-  toContain(str: string): void,
+  toContain(substringOrElement: mixed): void,
   toEqual(value: mixed): void,
   toHaveBeenCalled(): void,
   toHaveBeenCalledTimes(number: number): void,

@@ -96,21 +96,6 @@ describe('styled builtins', () => {
     const div2 = <Div color="maroon" background="salmon" />
   })
 
-  it('should respect strict props', () => {
-    // {| ... |} breaks syntax highlighting in vs code
-    // if all on one line, so put here instead of inlined
-    type Props = {|
-      color?: string,
-    |}
-
-    const Span: StyledComponent<Props, *, *> = styled.span`
-      color: ${props => props.color || 'pink'};
-    `
-
-    // $ExpectError - typo; someone used the British spelling by accident
-    const span1 = <Span colour="maroon" />
-  })
-
   it('should validate template props', () => {
     const Span: StyledComponent<{ color: string, ... }, *, *> = styled.span`
       color: ${// $ExpectError - background is not in props
@@ -125,6 +110,26 @@ describe('styled builtins', () => {
       *
     > = styled.span`
       color: ${props => props.color || props.theme.accent};
+    `
+  })
+
+  it('supports common props that styled components accept', () => {
+    const Span: StyledComponent<{ color: string, ... }, *, *> = styled.span`
+      color: ${props => props.color};
+    `
+
+    const span1 = <Span color="maroon" className="marooned" />
+    const span2 = <Span color="maroon" style={{padding: 5}} />
+
+    // $ExpectError - Make sure we don't break soundness when props are missing!
+    const span3 = <Span style={{padding: 5}} />
+  })
+
+  it('exposes common props inside interpolations', () => {
+    const Span: StyledComponent<{ color: string, ... }, *, *> = styled.span`
+      color: ${props => props.color};
+      /* People reading this test: this is a horrible way to dynamically scale your component! */
+      height: calc(${props => React.Children.count(props.children)} * 20px);
     `
   })
 

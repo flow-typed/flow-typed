@@ -2,9 +2,11 @@
 
 import { describe, it } from 'flow-typed-test';
 
-import createBrowserHistory from 'history/createBrowserHistory';
-import createMemoryHistory from 'history/createMemoryHistory';
-import createHashHistory from 'history/createHashHistory';
+import {
+  createBrowserHistory,
+  createMemoryHistory ,
+  createHashHistory
+} from 'history';
 
 // browser history
 

@@ -581,18 +581,18 @@ declare module ramda {
     x === null);
 
   // *List
-  declare function adjust<T>(
+  declare function adjust<A>(
     index: number,
-  ): (fn: (a: T) => T) => (src: Array<T>) => Array<T>;
-  declare function adjust<T>(
+  ): (fn: (a: A) => A) => (src: $ReadOnlyArray<A>) => Array<A>;
+  declare function adjust<A>(
     index: number,
-    fn: (a: T) => T,
-  ): (src: Array<T>) => Array<T>;
-  declare function adjust<T>(
+    fn: (a: A) => A,
+  ): (src: $ReadOnlyArray<A>) => Array<A>;
+  declare function adjust<A>(
     index: number,
-    fn: (a: T) => T,
-    src: Array<T>
-  ): Array<T>;
+    fn: (a: A) => A,
+    src: $ReadOnlyArray<A>
+  ): Array<A>;
 
   declare function all<T>(fn: UnaryPredicateFn<T>, xs: Array<T>): boolean;
   declare function all<T>(
@@ -617,8 +617,17 @@ declare module ramda {
     x: E,
   ): (xs: Array<E>) => Array<E>;
 
-  declare function chain<A, B>(f: (x: A) => B[], xs: A[]): B[]
-  declare function chain<A, B>(f: (x: A) => B[]): (xs: A[]) => B[]
+  declare function chain<A, B>(f: (x: A) => Array<B>, xs: $ReadOnlyArray<A>): Array<B>
+  declare function chain<A, B>(f: (x: A) => Array<B>): (xs: $ReadOnlyArray<A>) => Array<B>
+
+  // Additional chain functionality documented at https://ramdajs.com/docs/#chain:
+  //
+  // Dispatches to the chain method of the second argument, if present, according to the FantasyLand Chain spec (https://github.com/fantasyland/fantasy-land#chain).
+  //
+  // If second argument is a function, chain(f, g)(x) is equivalent to f(g(x), x).
+  //
+  // Acts as a transducer if a transformer is given in list position.
+  declare function chain<A, B, R>(f: (x: A, y: B) => R, g: (y: B) => A):(y: B) => R;
 
   declare function concat<A, B>(x: $ReadOnlyArray<A>, y: $ReadOnlyArray<B>): Array<A | B>;
   declare function concat<A, B>(x: $ReadOnlyArray<A>): CurriedFunction1<$ReadOnlyArray<B>, Array<A | B>>;
@@ -742,11 +751,13 @@ declare module ramda {
     fn: UnaryPredicateFn<T>,
   ): (xs: Array<T>) => boolean;
 
-  declare function nth<V, T: Array<V>>(i: number, xs: T): ?V;
-  declare function nth<V, T: Array<V> | string>(
-    i: number,
-  ): ((xs: string) => string) & ((xs: T) => ?V);
-  declare function nth<T: string>(i: number, xs: T): T;
+  declare var nth: {
+    <A, As: $ReadOnlyArray<A>>(n: number, xs: As): ?A,
+    <A, As: $ReadOnlyArray<A> | string>(
+      n: number,
+    ): ((xs: string) => string) & ((xs: As) => ?A),
+    (n: number, xs: string): string
+  }
 
   declare type Find = (<V, T: Array<V>>(
     fn: UnaryPredicateFn<V>
@@ -1138,7 +1149,7 @@ declare module ramda {
 
   declare function transpose<T>(xs: Array<Array<T>>): Array<Array<T>>;
 
-  declare function uniq<T>(xs: Array<T>): Array<T>;
+  declare function uniq<T>(xs: $ReadOnlyArray<T>): Array<T>;
 
   declare function unnest<T>(xs: NestedArray<T>): NestedArray<T>;
 
@@ -1267,8 +1278,8 @@ declare module ramda {
     b: Array<B>
   ): Array<A>;
 
-  declare function intersection<T>(x: Array<T>, y: Array<T>): Array<T>;
-  declare function intersection<T>(x: Array<T>): (y: Array<T>) => Array<T>;
+  declare function intersection<T>(xs: $ReadOnlyArray<T>, ys: $ReadOnlyArray<T>): Array<T>;
+  declare function intersection<T>(xs: $ReadOnlyArray<T>): (ys: $ReadOnlyArray<T>) => Array<T>;
 
   declare function max<T>(x: T): (y: T) => T;
   declare function max<T>(x: T, y: T): T;

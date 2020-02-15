@@ -2,20 +2,25 @@
 /*eslint-disable no-undef, no-unused-vars, no-console*/
 import _, {
   type RefineFilter,
+  adjust,
   append,
+  chain,
   compose,
   concat,
   contains,
   curry,
   filter,
   find,
-  includes,
   groupBy,
+  includes,
+  last,
   length,
+  nth,
   pipe,
   reduce,
   repeat,
   subtract,
+  uniq,
   without,
   zipWith
 } from "ramda";
@@ -532,11 +537,6 @@ const str: string = "hello world";
 
   const nxs: boolean = _.none(x => x > 1, ns);
 
-  const nthxs: ?string = _.nth(2, ["curry"]);
-  const nthxs1: ?string = _.nth(2)(["curry"]);
-  //$ExpectError
-  const nthxs2: string = _.nth(2, [1, 2, 3]);
-
   describe('append', () => {
     it('should supports arrays', () => {
       const appendResult1: Array<number> = append(1, [1, 2, 3]);
@@ -821,4 +821,154 @@ const str: string = "hello world";
     s: a,
     y: b
   }))([1, 2, 3])(["1", "2", "3"]);
+
+  describe('chain', () => {
+    it('should accept read only list as input', () => {
+      const arr:$ReadOnlyArray<string> = ['1', '2', '3'];
+      const duplicate = n => [n, n];
+      const result1: Array<string> = chain(duplicate, arr);
+      const result2: Array<string> = chain(duplicate)(arr);
+    });
+
+    it('should fail when input out type mismatch', () => {
+      const arr:$ReadOnlyArray<string> = ['1', '2', '3'];
+      const castType = n => (parseInt(n): number);
+      //$ExpectError
+      const result: Array<string> = chain(castType, arr);
+    });
+
+    it('should take second argument as function', () => {
+      const arr:$ReadOnlyArray<string> = ['1', '2', '3'];
+      const result: Array<?string> = chain(append, x => x[x.length - 1])(arr)
+    });
+
+    it('should error out when second arugment is function but type mismatches', () => {
+      const arr:$ReadOnlyArray<string> = ['1', '2', '3'];
+      const castType = n => (parseInt(n): number);
+      //$ExpectError
+      const result: Array<string> = chain(append, castType)(arr)
+    });
+  });
+              
+  describe('nth', () => {
+    it('should get a maybe type back on input is an array of given types', () => {
+      const nthxs1: ?number = nth(2, [1,2,3]);
+      const nthxs2: ?number = nth(2)([1,2]);
+      const nthxs3: ?number = nth(3)([1,2]);
+      const nthxs4: ?string = nth(2, ["curry"]);
+      const nthxs5: ?string = nth(2)(["curry", "bean"]);
+      const nthxs6: ?string = nth(3)(['foo', 'bar']);
+    });
+
+    it('should get a string back when input is string', () => {
+      const nthxs: string = nth(2)("curry");
+      const nthxs1: string = nth(2, "curry");
+    });
+
+    it('should take read only array as second argument', () => {
+      const readOnlyArray: $ReadOnlyArray<number>  = [1, 2, 3];
+      const nthxs = nth(2)(readOnlyArray)
+      const nthxs1 = nth(2, readOnlyArray)
+    });
+
+    it('should take a mutable array as second arugment', () => {
+      const array: Array<string> = ['foo', 'bar'];
+      const nthxs = nth(1)(array)
+      const nthxs1 = nth(1, array)
+      const nthxs2 = nth(1)(array)
+    });
+
+    it('should take tuple as second argument', () => {
+      const tuple:[number, boolean] = [1, true]
+      const n = nth(0, tuple)
+      const ns = nth(1)(tuple)
+    });
+
+    it('should fail on expecting return type to be a maybe type of the element of the input list', () => {
+      const arr: Array<number> = [1, 2, 3]
+      //$ExpectError
+      const nthxs: ?string = nth(2)(arr);
+      //$ExpectError
+      const nthxs1: ?boolean = nth(1)(arr);
+    });
+
+    it('should fail on expecting return type to mismatch the input array type', () => {
+      const arr: Array<number> = [1, 2, 3]
+      //$ExpectError
+      const nthxs: string = nth(2, arr);
+      //$ExpectError
+      const nthxs1: string = nth(2)(arr);
+      //$ExpectError
+      const nthxs2: string = nth(1, ['foo'])
+      //$ExpectError
+      const nthxs3: number = nth(1, arr);
+      //$ExpectError
+      const nthxs4: number = nth(1)(arr);
+      //$ExpectError
+      const nthxs5: number = nth(1, [1])
+      //$ExpectError
+      const nthxs: ?number = nth(2)(['foo']);
+    });
+
+    it('should fail on passing a non-number to first argument', () => {
+      //$ExpectError
+      const nthxs = nth('foo')(['foo', 'bar'])
+    });
+
+    it('should fail on passing a non-array to second argument', () => {
+      //$ExpectError
+      const nthxs = nth(2)({}) 
+    });
+  });
+              
+  describe('adjust', () => {
+    it('should allow both Array and $ReadOnlyArray output', () => {
+      const arr: Array<number> = [1, 2, 3]
+      const ro: $ReadOnlyArray<number> = [1, 2, 3]
+      const result: $ReadOnlyArray<number> = adjust(1, x => x + 1, arr)
+      const result1: Array<number> = adjust(1, x => x + 1, arr)
+      const result2: $ReadOnlyArray<number> = adjust(1, x => x + 1, ro)
+      const result3: Array<number> = adjust(1, x => x + 1, ro)
+    });
+  });
+
+  describe('uniq', () => {
+    it('should accept read only array', () => {
+      const readOnlyNumbers: $ReadOnlyArray<number> = [1,1,2,3,4,3];
+      const result:$ReadOnlyArray<number> = uniq(readOnlyNumbers);
+    });
+
+    it('should fail when element type mismatches', () => {
+      const readOnlyNumbers: $ReadOnlyArray<number> = [1,1,2,3,4,3];
+      //$ExpectError
+      const result:$ReadOnlyArray<string> = uniq(readOnlyNumbers);
+
+      const mix = ['1', 2, true];
+      //$ExpectError
+      const result: $ReadOnlyArray<string> = uniq(mix);
+    });
+
+    it('should accept read only array when expecting mutable array as output', () => {
+      const readOnlyNumbers: $ReadOnlyArray<number> = [1,1,2,3,4,3];
+      const result: Array<number> = uniq(readOnlyNumbers);
+    });
+
+    it('should accept mutable array as input and read only array as output', () => {
+      const readOnlyStrings: Array<string> = ['foo', 'bar'];
+      const result1: $ReadOnlyArray<string> = uniq(readOnlyStrings)
+    });
+
+    it('should accept mutable array', () => {
+      const arr: Array<string> = ['1', '2', '3'];
+      const result: Array<string> = uniq(arr);
+    });
+
+    it('should accept a mixed element type array', () => {
+      const arr: Array<string|number|boolean> = ['foo', 1, false]
+      const result: Array<string|number|boolean> = uniq(arr)
+    });
+
+    //Reason not to test the other way around, namely, Array<A> to $ReadOnlyArray<A> is because
+    //$ReadOnlyArray is a supertype of Array https://flow.org/en/docs/types/arrays/#toc-readonlyarray
+  })
 }

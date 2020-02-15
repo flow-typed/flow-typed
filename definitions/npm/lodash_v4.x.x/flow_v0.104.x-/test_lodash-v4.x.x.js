@@ -10,6 +10,7 @@ import debounce from "lodash/debounce";
 import defaultTo from "lodash/defaultTo";
 import difference from "lodash/difference";
 import differenceBy from "lodash/differenceBy";
+import differenceWith from "lodash/differenceWith";
 import each from "lodash/each";
 import extend from "lodash/extend";
 import find from "lodash/find";
@@ -85,6 +86,17 @@ difference(
  */
 differenceBy(([2.1, 1.2]: $ReadOnlyArray<*>), [2.3, 3.4], Math.floor);
 differenceBy([{ x: 2 }, { x: 1 }], [{ x: 1 }], "x");
+
+type A = {| a: 1 |};
+type B = {| b: 1 |};
+function diffTest(a: $ReadOnlyArray<A>, b: $ReadOnlyArray<B>) {
+  differenceBy(a, b, (x: A | B) => {
+    return x.a || x.b;
+  });
+  differenceWith(a, b, (x: A, y: B) => {
+    return x.a === y.b;
+  });
+}
 
 /**
  * _.differenceBy
@@ -355,7 +367,7 @@ zip([{ x: 1 }], [{ x: 2, y: 1 }])[0][2];
 /**
  * _.zipWith
  */
-zipWith(["a", "b", "c"], [1, 2, 3], (str, num) => ({ [str]: num }));
+zipWith(["a", "b", "c"], [1, 2, 3], (str: string, num) => ({ [str]: num }));
 // $ExpectError `x` should be a `string`, `y` a `number`
 zipWith(["a", "b", "c"], [1, 2, 3]).map(([x, y]) => x * y);
 

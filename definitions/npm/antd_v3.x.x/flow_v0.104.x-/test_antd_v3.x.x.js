@@ -38,6 +38,8 @@ import {
   TreeSelect
 } from "antd";
 
+const { RangePicker } = DatePicker;
+
 import type { WrappedFormUtils } from "antd";
 
 describe("Alert", () => {
@@ -176,10 +178,24 @@ describe("Button", () => {
     const button = <Button />;
   });
   it("should accept nullary or unary onClick handler", () => {
-    const good0 = <Button onClick={() => undefined} />
-    const good1 = <Button onClick={(event: SyntheticEvent<HTMLButtonElement>) => undefined} />
+    const good0 = <Button onClick={() => undefined} />;
+    const good1 = (
+      <Button
+        onClick={(event: SyntheticEvent<HTMLButtonElement>) => undefined}
+      />
+    );
     // $ExpectError
-    const bad = <Button onClick='bad' />
+    const bad = <Button onClick="bad" />;
+  });
+  it("should accept only certain strings for type prop", () => {
+    const good0 = <Button type="primary" />;
+    const good1 = <Button type="ghost" />;
+    const good2 = <Button type="dashed" />;
+    const good3 = <Button type="danger" />;
+    const good5 = <Button type="link" />;
+    const good4 = <Button type="default" />;
+    // $ExpectError
+    const bad = <Button type="bad" />;
   });
 });
 
@@ -296,6 +312,12 @@ describe("Collapse.Panel", () => {
 describe("DatePicker", () => {
   it("is a react component", () => {
     const datePicker = <DatePicker />;
+  });
+});
+
+describe("RangePicker", () => {
+  it("is a react component", () => {
+    const rangePicker = <RangePicker />;
   });
 });
 

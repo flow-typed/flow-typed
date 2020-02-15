@@ -41,8 +41,6 @@ declare module "react-router-dom" {
     pathname: string,
     search: string,
     hash: string,
-    state?: any,
-    key?: string,
     ...
   };
 
@@ -50,7 +48,6 @@ declare module "react-router-dom" {
     pathname?: string,
     search?: string,
     hash?: string,
-    state?: any,
     ...
   };
 
@@ -72,9 +69,6 @@ declare module "react-router-dom" {
     block(
       callback: string | (location: Location, action: HistoryAction) => ?string
     ): () => void,
-    // createMemoryHistory
-    index?: number,
-    entries?: Array<Location>,
     ...
   };
 

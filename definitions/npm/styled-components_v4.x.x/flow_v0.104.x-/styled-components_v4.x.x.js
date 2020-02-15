@@ -21,7 +21,7 @@ declare module 'styled-components' {
     | false // falsy values are OK, true is the only one not allowed, because it renders as "true"
     | null
     | void
-    | {[ruleOrSelector: string]: string | number, ...} // CSS-in-JS object returned by polished are also supported
+    | {[ruleOrSelector: string]: string | number, ...} // CSS-in-JS object returned by polished are also supported, partially
 
   declare export type TaggedTemplateLiteral<I, R> = (strings: string[], ...interpolations: Interpolation<I>[]) => R
 
@@ -100,7 +100,7 @@ declare module 'styled-components' {
 
   declare export class StyleSheetManager extends React$Component<SCMProps> {
     getContext(sheet: ?StyleSheet, target: ?HTMLElement): StyleSheet;
-    render(): React$Element<StyleSheetProvider>
+    render(): React$Element<typeof StyleSheetProvider>
   }
 
   declare export class ServerStyleSheet {
@@ -164,14 +164,21 @@ declare module 'styled-components' {
     theme: T
   |}
 
+  declare type CommonSCProps = {|
+    children?: React$Node,
+    className?: ?string,
+    style?: {[string]: string | number, ...},
+  |}
+
   declare export type PropsWithTheme<Props, T> = {|
     ...ThemeProps<T>,
+    ...CommonSCProps, // Not sure how useful this is here, but it's technically correct to have it
     ...$Exact<Props>
   |}
 
   declare export function withTheme<Theme, Config: {...}, Instance>(Component: React$AbstractComponent<Config, Instance>): React$AbstractComponent<$Diff<Config, ThemeProps<Theme | void>>, Instance>
 
-  declare export type StyledComponent<Props, Theme, Instance> = React$AbstractComponent<Props, Instance> & Class<InterpolatableComponent<Props>>
+  declare export type StyledComponent<Props, Theme, Instance, MergedProps = {...$Exact<Props>, ...CommonSCProps, ...}> = React$AbstractComponent<MergedProps, Instance> & Class<InterpolatableComponent<MergedProps>>
 
   declare export type StyledFactory<StyleProps, Theme, Instance> = {|
     [[call]]: TaggedTemplateLiteral<PropsWithTheme<StyleProps, Theme>, StyledComponent<StyleProps, Theme, Instance>>;
@@ -183,6 +190,7 @@ declare module 'styled-components' {
 
   declare export type StyledShorthandFactory<V> = {|
     [[call]]: <StyleProps, Theme>(string[], ...Interpolation<PropsWithTheme<StyleProps, Theme>>[]) => StyledComponent<StyleProps, Theme, V>;
+    [[call]]: <StyleProps, Theme>((props: PropsWithTheme<StyleProps, Theme>) => Interpolation<any>) => StyledComponent<StyleProps, Theme, V>;
     +attrs: <A: {...}, StyleProps = {||}, Theme = {||}>(((StyleProps) => A) | A) => TaggedTemplateLiteral<
       PropsWithTheme<{|...$Exact<StyleProps>, ...$Exact<A>|}, Theme>,
       StyledComponent<React$Config<{|...$Exact<StyleProps>, ...$Exact<A>|}, $Exact<A>>, Theme, V>

@@ -12,7 +12,6 @@ import {
   within,
 } from '@testing-library/react';
 import { describe, it } from 'flow-typed-test';
-import { domainToASCII } from 'url';
 
 describe('act', () => {
   it('should fail on invalid inputs', () => {
@@ -1118,5 +1117,36 @@ describe('text matching API', () => {
 
   it('queryAllByValue should accept text match arguments', () => {
     const result: Array<HTMLElement> = queryAllByValue('1');
+  });
+});
+
+describe('render() parameters', () => {
+  class Component extends React.Component<{ ... }> {}
+
+  it('allows supplying parameters to render()', () => {
+    class CustomWrapper extends React.Component<{ ... }> {}
+    const element = document.createElement('div');
+    render(<Component />, {
+      baseElement: element,
+      container: element,
+      hydrate: true,
+      wrapper: CustomWrapper,
+    });
+  });
+
+  it('allows overriding render() with custom queries', () => {
+    type CustomReturnType = 123456;
+    declare var customValue: CustomReturnType;
+    const customQueries = {
+      getByOverride: (param1: string) => customValue,
+    };
+    const result = render(<Component />, { queries: customQueries });
+    const a: CustomReturnType = result.getByOverride('something');
+    // $ExpectError bad type for getByOverride parameter
+    result.getByOverride(1234);
+    // $ExpectError missing getByOverride parameter
+    result.getByOverride();
+    // $ExpectError default queries are not available when using custom queries
+    result.getByTestId('indifferent');
   });
 });

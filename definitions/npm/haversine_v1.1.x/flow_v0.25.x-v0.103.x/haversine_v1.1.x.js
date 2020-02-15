@@ -2,7 +2,7 @@
 
 type $npm$haversine$Unit = 'km' | 'mile' | 'meter' | 'nmi'
 
-type $npm$haversine$ArrayCoordinates = Array<number>
+type $npm$haversine$ArrayCoordinates = [number, number]
 type $npm$haversine$LatitudeLongitudeCoordinates = { latitude: number, longitude: number }
 type $npm$haversine$LatLonCoordinates = { lat: number, lon: number }
 type $npm$haversine$GeojsonCoordinates = { coordinates: Array<number> }

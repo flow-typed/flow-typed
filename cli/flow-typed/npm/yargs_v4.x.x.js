@@ -142,6 +142,8 @@ declare module "yargs" {
 
     pkgConf(key: string, cwd?: string): this;
 
+    recommendCommands(): this;
+
     // Alias of demand()!
     require(key: string, msg: string | boolean): this;
     require(count: number, max?: number, msg?: string | boolean): this;

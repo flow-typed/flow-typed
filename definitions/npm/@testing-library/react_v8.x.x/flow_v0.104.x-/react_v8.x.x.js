@@ -115,35 +115,28 @@ declare module '@testing-library/react' {
     eventProperties?: TInit
   ) => boolean;
 
-  declare type Queries = { ... };
-
-  declare type RenderResult<Q: Queries = GetsAndQueries> = {|
+  declare type RenderResult = {|
     container: HTMLDivElement,
     unmount: () => void,
     baseElement: HTMLElement,
     asFragment: () => DocumentFragment,
     debug: (baseElement?: HTMLElement) => void,
     rerender: (ui: React$Element<*>) => void,
-  |} & Q;
+  |} & GetsAndQueries;
 
-  declare export type RenderOptions<Q: Queries = { ... }> = {|
+  declare export type RenderOptions = {|
     container?: HTMLElement,
     baseElement?: HTMLElement,
     hydrate?: boolean,
-    queries?: Q,
+    queries?: any,
     wrapper?: React.ComponentType,
   |};
 
   declare module.exports: {
     render(
       ui: React.ReactElement<any>,
-      options?: $Diff<RenderOptions<>, {| queries: any |}>
-    ): RenderResult<>,
-
-    render<Q: Queries>(
-      ui: React.ReactElement<any>,
-      options?: RenderOptions<Q>
-    ): RenderResult<Q>,
+      options?: RenderOptions
+    ): RenderResult,
 
     act: ReactDOMTestUtilsAct,
     cleanup: () => void,

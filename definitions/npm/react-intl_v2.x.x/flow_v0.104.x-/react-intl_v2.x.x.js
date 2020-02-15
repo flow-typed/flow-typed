@@ -55,8 +55,11 @@ declare module "react-intl" {
     ...
   };
 
-  declare type $npm$ReactIntl$IntlShape = $npm$ReactIntl$IntlConfig &
-    $npm$ReactIntl$IntlFormat & { now: () => number, ... };
+  declare type $npm$ReactIntl$IntlShape = {|
+    ...$Exact<$npm$ReactIntl$IntlConfig>,
+    ...$Exact<$npm$ReactIntl$IntlFormat>,
+    ...{| now: () => number |},
+  |};
 
   declare type $npm$ReactIntl$DateTimeFormatOptions = {
     localeMatcher?: "best fit" | "lookup",

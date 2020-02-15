@@ -34,6 +34,7 @@ addLocaleData(localeData);
 // $ExpectError number. This type is incompatible with void
 const resultLocaleData: number = addLocaleData(localeData);
 
+
 const messages = {
   messagekey1: {
     id: "messageid1",
@@ -437,6 +438,49 @@ describe("react-intl", () => {
 
         <PluralComponent />;
       });
+    });
+  });
+
+  describe('IntlShape', () => {
+    it('is exact type', () => {
+      // $ExpectError notValidProperty should not be allowed
+     const mockIntlInvalid: IntlShape = {
+        locale: 'en_US',
+        formats: {},
+        messages: {},
+        notValidProperty: '',
+        defaultLocale: undefined,
+        defaultFormats: undefined,
+        formatDate: (value: number) => String(value),
+        formatTime: (value: number | Date) => String(value),
+        formatRelative: (value: number) => String(value),
+        formatNumber: (value: number) => String(value),
+        formatPlural: (value: number) => String(value),
+        formatMessage: (messageDescriptor: MessageDescriptor) => messageDescriptor.defaultMessage || '',
+        formatHTMLMessage: (messageDescriptor: MessageDescriptor) =>
+            messageDescriptor.defaultMessage || '',
+        now: () => Date.now(),
+      };
+    });
+
+    it('spreading does not throw an error', () => {
+      const mockIntl: IntlShape = {
+        locale: 'en_US',
+        formats: {},
+        messages: {},
+        defaultLocale: undefined,
+        defaultFormats: undefined,
+        formatDate: (value: number) => String(value),
+        formatTime: (value: number | Date) => String(value),
+        formatRelative: (value: number) => String(value),
+        formatNumber: (value: number) => String(value),
+        formatPlural: (value: number) => String(value),
+        formatMessage: (messageDescriptor: MessageDescriptor) => messageDescriptor.defaultMessage || '',
+        formatHTMLMessage: (messageDescriptor: MessageDescriptor) =>
+            messageDescriptor.defaultMessage || '',
+        now: () => Date.now(),
+      };
+      const mockIntlSpreaded: IntlShape = {...mockIntl };
     });
   });
 });

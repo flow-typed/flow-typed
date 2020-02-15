@@ -101,6 +101,7 @@ describe('@reach/router', () => {
       <Redirect from="aboutus" to="about-us" />;
       <Redirect from="users/:userId" to="profile/:userId" />;
       <Redirect to="/" noThrow />;
+      <Redirect to="/state" state={{srcUrl: '/'}} />;
     });
 
     it('raises error', () => {
