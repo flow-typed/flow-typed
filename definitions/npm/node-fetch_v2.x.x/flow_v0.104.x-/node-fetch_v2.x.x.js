@@ -1,6 +1,18 @@
 declare module 'node-fetch' {
   import type http from 'http';
   import type https from 'https';
+  import type { URL } from 'url';
+  import type { Readable } from 'stream';
+
+  declare export type AbortSignal = {
+    +aborted: boolean;
+    +onabort: (event?: { ... }) => void;
+
+    +addEventListener: (name: string, cb: () => mixed) => void;
+    +removeEventListener: (name: string, cb: () => mixed) => void;
+    +dispatchEvent: (event: { ... }) => void;
+    ...,
+  }
 
   declare export class Request mixins Body {
     constructor(input: string | { href: string, ... } | Request, init?: RequestInit): this;
@@ -25,18 +37,31 @@ declare module 'node-fetch' {
 
   declare type HeaderObject = { [index: string]: string, ... }
 
-  declare interface RequestInit {
+  declare type RequestInit = {|
     body?: BodyInit,
     headers?: HeaderObject,
     method?: string,
     redirect?: RequestRedirect,
-    
+    signal?: AbortSignal | null,
+
     // node-fetch extensions
-    agent?: http.Agent | https.Agent,
+    agent?: (URL => (http.Agent | https.Agent)) | http.Agent | https.Agent | null;
     compress?: boolean,
     follow?: number,
     size?: number,
     timeout?: number,
+  |};
+
+  declare export interface FetchError extends Error {
+    name: 'FetchError';
+    type: string;
+    code: ?number;
+    errno: ?number;
+  }
+
+  declare export interface AbortError extends Error {
+    name: 'AbortError';
+    type: 'aborted';
   }
 
   declare type RequestContext =
@@ -99,7 +124,7 @@ declare module 'node-fetch' {
   }
 
   declare type HeaderInit = Headers | Array<string>;
-  declare type BodyInit = string;
+  declare type BodyInit = string | null | Buffer | Blob | Readable;
 
   declare export default function fetch(url: string | Request, init?: RequestInit): Promise<Response>
 }
