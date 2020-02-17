@@ -134,5 +134,36 @@ describe('@sentry/browser', () => {
       new Sentry.Hub();
     });
   });
-});
 
+  describe('Integrations', () => {
+    it('Includes Core integrations', () => {
+      new Sentry.Integrations.FunctionToString();
+
+      // $ExpectError
+      new Sentry.Integrations.OnUnhandledRejection(); // Node-specific integration, not in Browser
+    });
+
+    it('Includes Browser-specific integrations', () => {
+      new Sentry.Integrations.UserAgent();
+      new Sentry.Integrations.Breadcrumbs({ console: false });
+
+      // $ExpectError
+      new Sentry.Integrations.OnUnhandledRejection(); // Node-specific integration, not in Browser
+    });
+  });
+
+  describe('Transports', () => {
+    it('Includes transports', () => {
+      new Sentry.Transports.FetchTransport({ dsn: 'dsn_value' });
+      new Sentry.Transports.XHRTransport({
+        dsn: 'dsn_value',
+        headers: { foo: 'bar' },
+      });
+
+      // $ExpectError
+      new Sentry.Transports.InvalidTransport({ dsn: 'dsn_value' });
+      // $ExpectError
+      new Sentry.Transports.FetchTransport({}); // Missing `dsn` option
+    });
+  });
+});
