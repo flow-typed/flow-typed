@@ -1,6 +1,6 @@
 // @flow
 
-import mkdirpCb from 'mkdirp';
+import mkdirpLib from 'mkdirp';
 
 import {fs, path} from './node.js';
 
@@ -65,15 +65,7 @@ export async function getFilesInDir(
 }
 
 export function mkdirp(path: string): Promise<*> {
-  return new Promise((res, rej) => {
-    mkdirpCb(path, err => {
-      if (err) {
-        rej(err);
-      } else {
-        res();
-      }
-    });
-  });
+  return mkdirpLib(path);
 }
 
 export async function recursiveRmdir(dirPath: string): Promise<void> {
