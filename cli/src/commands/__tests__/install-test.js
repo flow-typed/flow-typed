@@ -344,9 +344,10 @@ describe('install (command)', () => {
         ).toEqual([true, true]);
 
         // Signs installed libdefs
-        const fooLibDefContents = (await fs.readFile(
+        const fooLibDefRawContents = await fs.readFile(
           path.join(FLOWPROJ_DIR, 'flow-typed', 'npm', 'foo_v1.x.x.js'),
-        )).toString();
+        );
+        const fooLibDefContents = fooLibDefRawContents.toString();
         expect(fooLibDefContents).toContain('// flow-typed signature: ');
         expect(fooLibDefContents).toContain('// flow-typed version: ');
       });
@@ -616,9 +617,8 @@ describe('install (command)', () => {
         );
 
         // Tweak the libdef for foo
-        const libdefFileContent = (await fs.readFile(
-          libdefFilePath,
-        )).toString();
+        const libdefFileRawContent = await fs.readFile(libdefFilePath);
+        const libdefFileContent = libdefFileRawContent.toString();
         await fs.writeFile(libdefFilePath, libdefFileContent + '\n// TWEAKED!');
 
         // Run install command again
