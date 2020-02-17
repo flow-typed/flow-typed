@@ -132,4 +132,8 @@ declare module '@reach/router' {
   declare export function isRedirect(error: any): $Exact<{ uri: string, ... }>;
 
   declare export function redirectTo(uri: string): void;
+  declare export function useHistory(): History;
+  declare export function useLocation(): Location;
+  declare export function useParams(): Params;
+  declare export function useRouteMatch(path?: string): Match;
 }
