@@ -82,6 +82,7 @@ export const child_process = {
 export const fs = {
   appendFile: fsExtra.appendFile,
   close: fsExtra.close,
+  copy: fsExtra.copy,
   createReadStream: fsExtra.createReadStream,
   createWriteStream: fsExtra.createWriteStream,
   exists: fsExtra.exists,

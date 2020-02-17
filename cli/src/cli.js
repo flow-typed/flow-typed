@@ -1,11 +1,6 @@
 #!/usr/bin/env node
 // @flow
 
-if (!global.__flowTypedBabelPolyfill) {
-  require('@babel/polyfill');
-  global.__flowTypedBabelPolyfill = true;
-}
-
 import yargs from 'yargs';
 import {fs, path} from './lib/node.js';
 
