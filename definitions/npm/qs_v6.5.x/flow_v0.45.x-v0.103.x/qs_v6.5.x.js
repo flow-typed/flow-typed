@@ -49,7 +49,10 @@ declare module "qs" {
 
   declare module.exports: {
     parse(str: string, opts?: ParseOptions): mixed,
-    stringify(obj: {[string]: mixed, ...} | Array<mixed>, opts?: StringifyOptions): string,
-    formats: Formats
+    stringify(
+      obj: $ReadOnly<{ [string]: mixed, ... }> | $ReadOnlyArray<mixed>,
+      opts?: StringifyOptions
+    ): string,
+    formats: Formats,
   };
 }
