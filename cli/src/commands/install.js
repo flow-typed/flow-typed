@@ -70,7 +70,7 @@ export function setup(yargs: Yargs) {
       flowVersion: {
         alias: 'f',
         describe:
-          'The Flow version that fetched libdefs must be compatible ' + 'with',
+          'The Flow version that fetched libdefs must be compatible with',
         type: 'string',
       },
       verbose: {
