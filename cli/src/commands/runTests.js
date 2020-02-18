@@ -626,17 +626,17 @@ export function setup(yargs: Yargs) {
       describe:
         'Override default path for libdef root (Mainly for testing purposes)',
       type: 'string',
-      demand: false,
+      demandOption: false,
     },
     onlyChanged: {
       type: 'boolean',
       description: 'Run only changed definition tests',
-      demand: false,
+      demandOption: false,
     },
     numberOfFlowVersions: {
       type: 'number',
       description: 'Only run against the latest X versions of flow',
-      demand: false,
+      demandOption: false,
     },
   });
 }

@@ -70,26 +70,26 @@ export function setup(yargs: Yargs) {
     verbose: {
       describe: 'Print additional, verbose info while installing libdefs',
       type: 'boolean',
-      demand: false,
+      demandOption: false,
     },
     skip: {
       alias: 's',
       describe: 'Do not generate stubs for missing libdefs',
       type: 'boolean',
-      demand: false,
+      demandOption: false,
     },
     libdefDir: {
       alias: 'l',
       describe: 'Use a custom directory to install libdefs',
       type: 'string',
-      demand: false,
+      demandOption: false,
     },
     cacheDir: {
       alias: 'c',
       describe:
         'Directory (absolute or relative path, ~ is not supported) to store cache of libdefs',
       type: 'string',
-      demand: false,
+      demandOption: false,
     },
     packageDir: {
       alias: 'p',
@@ -100,7 +100,7 @@ export function setup(yargs: Yargs) {
       alias: 'o',
       describe: 'Overwrite an existing libdef',
       type: 'string',
-      demand: false,
+      demandOption: false,
     },
     ignoreDeps: {
       alias: 'i',
