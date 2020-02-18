@@ -54,7 +54,7 @@
     "eslint": "^6.8.0",
     "eslint-plugin-flowtype": "^4.6.0",
     "eslint-plugin-prettier": "^3.1.2",
-    "flow-bin": "^0.81.0",
+    "flow-bin": "^0.118.0",
     "jest": "^25.1.0"
   },
   "keywords": [
