@@ -22,7 +22,7 @@
     "flow": "flow",
     "lint": "eslint .",
     "prepublish": "mkdirp dist && yarn test",
-    "test": "yarn clean && yarn build && yarn test-quick",
+    "test": "yarn clean && yarn build && yarn test-quick && yarn flow",
     "test-quick": "jest && yarn lint",
     "watch": "mkdirp dist && babel --source-maps --watch=./src --out-dir=./dist"
   },
