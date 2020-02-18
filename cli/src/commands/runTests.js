@@ -16,10 +16,10 @@ import type {FlowVersion} from '../lib/flowVersion.js';
 import {ValidationError} from '../lib/ValidationError';
 
 export type Args = {
-  _: Array<string>,
   path?: mixed, // string
   onlyChanged?: mixed, //boolean
   numberOfFlowVersions?: mixed, // number
+  testPatterns: mixed, // Array<string>
 };
 
 // Used to decide which binary to fetch for each version of Flow
@@ -616,29 +616,35 @@ async function runTests(
   }
 }
 
-export const name = 'run-tests';
+export const name = 'run-tests [testPatterns...]';
 export const description =
   'Run definition tests for library definitions in the flow-typed project';
 
 export function setup(yargs: Yargs) {
-  return yargs.usage(`$0 ${name} - ${description}`).options({
-    path: {
-      describe:
-        'Override default path for libdef root (Mainly for testing purposes)',
-      type: 'string',
-      demandOption: false,
-    },
-    onlyChanged: {
-      type: 'boolean',
-      description: 'Run only changed definition tests',
-      demandOption: false,
-    },
-    numberOfFlowVersions: {
-      type: 'number',
-      description: 'Only run against the latest X versions of flow',
-      demandOption: false,
-    },
-  });
+  return yargs
+    .usage(`$0 ${name} - ${description}`)
+    .positional('testPatterns', {
+      describe: 'Test patterns',
+      default: [],
+    })
+    .options({
+      path: {
+        describe:
+          'Override default path for libdef root (Mainly for testing purposes)',
+        type: 'string',
+        demandOption: false,
+      },
+      onlyChanged: {
+        type: 'boolean',
+        description: 'Run only changed definition tests',
+        demandOption: false,
+      },
+      numberOfFlowVersions: {
+        type: 'number',
+        description: 'Only run against the latest X versions of flow',
+        demandOption: false,
+      },
+    });
 }
 
 export async function run(argv: Args): Promise<number> {
@@ -653,7 +659,9 @@ export async function run(argv: Args): Promise<number> {
     );
     return 1;
   }
-  const testPatterns = argv._.slice(1);
+  const testPatterns = Array.isArray(argv.testPatterns)
+    ? argv.testPatterns.map(String)
+    : [];
   const onlyChanged = Boolean(argv.onlyChanged);
   const numberOfFlowVersions = Number(argv.numberOfFlowVersions) || 15;
 

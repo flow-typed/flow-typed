@@ -222,6 +222,8 @@ declare module "yargs" {
       parseCallback?: (err: Error, argv: Argv, output?: string) => void
     ): Argv;
 
+    positional(key: string, opts: Options): this;
+
     pkgConf(key: string, cwd?: string): this;
 
     recommendCommands(): this;

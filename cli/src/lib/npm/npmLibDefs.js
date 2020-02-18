@@ -70,11 +70,11 @@ async function extractLibDefsFromNpmPkgDir(
   const pkgDirItems = await fs.readdir(pkgDirPath);
 
   if (validating) {
-    const fullPkgName = `${scope === null ? '' : scope + '/'}${pkgName}`;
+    const fullPkgName = `${scope === null ? '' : scope + '/'}${pkgName}popopko`;
     await _npmExists(fullPkgName)
       .then()
       .catch(error => {
-        if (error.response.statusCode === 404) {
+        if (error.HTTPError && error.HTTPError.response.statusCode === 404) {
           // Some times NPM returns 404 even though the package exists.
           // Try to avoid false negatives by retrying
           return new Promise((resolve, reject) =>
@@ -88,8 +88,9 @@ async function extractLibDefsFromNpmPkgDir(
       })
       .then()
       .catch(error => {
+        console.log(error);
         // Only fail on 404, not on timeout
-        if (error.response.statusCode === 404) {
+        if (error.HTTPError && error.HTTPError.statusCode === 404) {
           throw new ValidationError(`Package does not exist on npm!`);
         }
       });
