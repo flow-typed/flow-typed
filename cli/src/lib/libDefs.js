@@ -11,6 +11,8 @@ import {
   parseDirString as parseFlowDirString,
   toSemverString as flowVerToSemver,
   toDirString as flowVerToDirString,
+  parseDirString,
+  compareFlowVersionAsc,
 } from './flowVersion.js';
 import type {FlowVersion} from './flowVersion.js';
 import {ValidationError} from './ValidationError';
@@ -562,6 +564,18 @@ export function filterLibDefs(
     .sort((a, b) => {
       const aZeroed = a.pkgVersionStr.replace(/x/g, '0');
       const bZeroed = b.pkgVersionStr.replace(/x/g, '0');
-      return semver.gt(aZeroed, bZeroed) ? -1 : 1;
+      const pkgCompare = semver.compare(aZeroed, bZeroed);
+      if (pkgCompare !== 0) return -pkgCompare;
+
+      const aFlowVersionStr: ?string = a.flowVersionStr;
+      const bFlowVersionStr: ?string = b.flowVersionStr;
+
+      if (aFlowVersionStr == null) return 1;
+      if (bFlowVersionStr == null) return -1;
+
+      const aFlowVersion = parseDirString(aFlowVersionStr);
+      const bFlowVersion = parseDirString(bFlowVersionStr);
+
+      return -1 * compareFlowVersionAsc(aFlowVersion, bFlowVersion);
     });
 }
