@@ -5,14 +5,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## [3.0.0] 2020-02-18
+
+### Added
+- Recommend matching commands (#3700)
 
 ### Changed
-- Travis specs now run on node 10 & 12, as opposed to 8 & 10 (#3743)
 - **[BREAKING-CHANGE]** Drop support for node < 10 (#3743)
+- Travis specs now run on node 10 & 12, as opposed to 8 & 10 (#3743)
 
 ### Fixed
 - Updated octokit/rest to deprecation message (#3602)
+- Fix GH_CLIENT usage in runTests test (#3638)
 
 ## [2.6.2] - 2019-10-23
 
