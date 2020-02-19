@@ -1,6 +1,6 @@
 // @flow
 
-export const name = 'create-stub';
+export const name = 'create-stub <packages...>';
 export const description = 'Create a libdef stub for an untyped npm package';
 
 import {createStub} from '../lib/stubUtils.js';
@@ -46,6 +46,10 @@ export function setup(yargs: Object) {
         type: 'string',
       },
     })
+    .positional('packages', {
+      describe: 'Please provide the names of one or more npm packages',
+    })
+    .array('packages')
     .example('$0 create-stub foo@^1.2.0')
     .example('$0 create-stub foo bar baz')
     .help('h')
@@ -57,8 +61,8 @@ type Args = {
   typescript: mixed, // boolean
   maxDepth?: mixed, // number
   libdefDir?: mixed, // string
-  _: Array<string>,
   rootDir?: mixed, // string
+  packages: mixed, // Array<string>
 };
 
 function failWithMessage(message: string) {
@@ -67,12 +71,15 @@ function failWithMessage(message: string) {
 }
 
 export async function run(args: Args): Promise<number> {
-  if (!Array.isArray(args._) || args._.length < 2) {
-    return failWithMessage(
-      'Please provide the names of one or more npm packages',
-    );
+  if (args.packages !== undefined && !Array.isArray(args.packages)) {
+    throw new Error('packages is not array');
   }
-  const packages = args._.slice(1);
+  const packages = (args.packages || []).map(dep => {
+    if (typeof dep !== 'string') {
+      throw new Error('packages should be array of strings');
+    }
+    return dep;
+  });
   const cwd =
     typeof args.rootDir === 'string'
       ? path.resolve(args.rootDir)

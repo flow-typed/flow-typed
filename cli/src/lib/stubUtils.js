@@ -87,7 +87,7 @@ const spaceByI = (i: number): string => '  '.repeat(i);
 const keyTypeTemplate = `  %s: %s,\n`;
 
 function objectToTypedTemplate(
-  obj: mixed,
+  obj: {...},
   currentDepth: number,
   maxDepth: number,
   functionHeader?: string,
@@ -164,6 +164,8 @@ function objectToType(
   currentDepth: number = 0,
   deep: boolean = true,
 ): string {
+  if (obj === null) return 'null';
+
   // Every function that depends on objectToTypedTemplate need to check deep first
   if (deep) {
     if (typeof obj === 'object')
@@ -182,7 +184,7 @@ function guessedStubFor(
   packagePath: string,
   maxDepth: number = 1,
 ): string {
-  const module: mixed = (require: any)(packagePath);
+  const module: {...} = (require: any)(packagePath);
   const formattedTemplate: string = format(
     guessedModuleStubTemplate,
     moduleName,

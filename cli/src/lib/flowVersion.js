@@ -380,5 +380,35 @@ export function toSemverString(ver: FlowVersion): string {
   }
 }
 
+export function compareFlowVersionAsc(a: FlowVersion, b: FlowVersion): number {
+  if (a.kind === 'all') {
+    return b.kind === 'all' ? 0 : -1;
+  }
+  if (b.kind === 'all') {
+    return 1;
+  }
+  const aLowerVer = a.kind === 'specific' ? a.ver : a.lower;
+  const bLowerVer = b.kind === 'specific' ? b.ver : b.lower;
+  if (aLowerVer === null) {
+    return bLowerVer === null ? 0 : 1;
+  }
+  if (bLowerVer === null) {
+    return -1;
+  }
+  const compareMajor = lt(aLowerVer.major, bLowerVer.major);
+  if (compareMajor !== 'maybe') {
+    return compareMajor ? 1 : -1;
+  }
+  const compareMinor = lt(aLowerVer.minor, bLowerVer.minor);
+  if (compareMinor !== 'maybe') {
+    return compareMinor ? 1 : -1;
+  }
+  const comparePatch = lt(aLowerVer.patch, bLowerVer.patch);
+  if (comparePatch !== 'maybe') {
+    return comparePatch ? 1 : -1;
+  }
+  return 0;
+}
+
 // Exported for tests
 export {_parseVersion as __parseVersion};

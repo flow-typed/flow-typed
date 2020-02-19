@@ -1,6 +1,6 @@
 // @flow
 
-import Octokit from '@octokit/rest';
+import {Octokit} from '@octokit/rest';
 
 const CLIENT = new Octokit();
 
