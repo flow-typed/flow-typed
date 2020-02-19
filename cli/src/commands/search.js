@@ -6,6 +6,7 @@ import typeof Yargs from 'yargs';
 import {toSemverString as flowVersionToSemver} from '../lib/flowVersion';
 
 import {table} from 'table';
+import {validateString} from '../lib/validationUtils.js';
 
 export function _formatDefTable(defs: Array<LibDef>): string {
   const formatted = [['Name', 'Package Version', 'Flow Version']].concat(
@@ -55,10 +56,7 @@ export async function run(args: Args): Promise<number> {
     flowVersionStr = args.flowVersion;
   }
 
-  const term = args.term;
-  if (typeof term !== 'string') {
-    throw new Error('term should be a string');
-  }
+  const term = validateString('term', args.term);
 
   const defs = await getCacheLibDefs(process.stdout);
   const filtered = filterLibDefs(defs, {

@@ -42,6 +42,8 @@ import semver from 'semver';
 
 import {createStub, pkgHasFlowFiles} from '../lib/stubUtils';
 
+import {validateStringArray} from '../lib/validationUtils';
+
 import typeof Yargs from 'yargs';
 
 export const name = 'install [explicitLibDefs...]';
@@ -137,27 +139,11 @@ export async function run(args: Args) {
   const flowVersion = await determineFlowVersion(packageDir, args.flowVersion);
   const libdefDir =
     typeof args.libdefDir === 'string' ? args.libdefDir : 'flow-typed';
-  if (args.ignoreDeps !== undefined && !Array.isArray(args.ignoreDeps)) {
-    throw new Error('ignoreDeps is not array');
-  }
-  const ignoreDeps = (args.ignoreDeps || []).map(dep => {
-    if (typeof dep !== 'string') {
-      throw new Error('ignoreDeps should be array of strings');
-    }
-    return dep;
-  });
-  if (
-    args.explicitLibDefs !== undefined &&
-    !Array.isArray(args.explicitLibDefs)
-  ) {
-    throw new Error('explicitLibDefs is not array');
-  }
-  const explicitLibDefs = (args.explicitLibDefs || []).map(dep => {
-    if (typeof dep !== 'string') {
-      throw new Error('explicitLibDefs should be array of strings');
-    }
-    return dep;
-  });
+  const ignoreDeps = validateStringArray('ignoreDeps', args.ignoreDeps || []);
+  const explicitLibDefs = validateStringArray(
+    'explicitLibDefs',
+    args.explicitLibDefs || [],
+  );
 
   const coreLibDefResult = await installCoreLibDefs();
   if (coreLibDefResult !== 0) {
