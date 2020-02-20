@@ -193,10 +193,13 @@ type EnzymeMatchersType = {
  toExist(): void,
  toHaveClassName(className: string): void,
  toHaveHTML(html: string): void,
- toHaveProp: ((propKey: string, propValue?: any) => void) & ((props: Object) => void),
+ toHaveProp: ((propKey: string, propValue?: any) => void) &
+   ((props: {...}) => void),
  toHaveRef(refName: string): void,
- toHaveState: ((stateKey: string, stateValue?: any) => void) & ((state: Object) => void),
- toHaveStyle: ((styleKey: string, styleValue?: any) => void) & ((style: Object) => void),
+ toHaveState: ((stateKey: string, stateValue?: any) => void) &
+   ((state: {...}) => void),
+ toHaveStyle: ((styleKey: string, styleValue?: any) => void) &
+   ((style: {...}) => void),
  toHaveTagName(tagName: string): void,
  toHaveText(text: string): void,
  toHaveValue(value: any): void,
@@ -938,17 +941,21 @@ declare var it: {
   * @param {Function} Test
   * @param {number} Timeout for the test, in milliseconds.
   */
- only(
-   name: JestTestName,
-   fn?: (done: () => void) => ?Promise<mixed>,
-   timeout?: number
- ): { each(
-   ...table: Array<Array<mixed> | mixed> | [Array<string>, string]
- ): (
-   name: JestTestName,
-   fn?: (...args: Array<any>) => ?Promise<mixed>,
-   timeout?: number
- ) => void, ... },
+ only: {|
+   (
+     name: JestTestName,
+     fn?: (done: JestDoneFn) => ?Promise<mixed>,
+     timeout?: number
+   ): void,
+   each(
+     ...table: Array<Array<mixed> | mixed> | [Array<string>, string]
+   ): (
+     name: JestTestName,
+     fn?: (...args: Array<any>) => ?Promise<mixed>,
+     timeout?: number
+   ) => void
+ |},
+
  /**
   * Skip running this test
   *
