@@ -214,7 +214,7 @@ async function installCoreLibDefs(): Promise<number> {
   return 0;
 }
 
-const FLOW_BUILT_IN_NPM_LIBS = ['react', 'react-dom'];
+const FLOW_BUILT_IN_NPM_LIBS = ['react'];
 type installNpmLibDefsArgs = {|
   cwd: string,
   flowVersion: FlowVersion,
