@@ -36,7 +36,7 @@ describe('parse', () => {
   it('returns an inert object', () => {
     // This assertion isn't great because the any (Object) can be cast without
     // issue.
-    const obj: { [string]: mixed, ... } = parse("test")
+    const obj: $ReadOnly<{ [string]: mixed, ... }> = parse("test")
 
     // This combined with the positive assertion above should make for a robust
     // enforcement of the return type, immune to Object/any's type coverage
