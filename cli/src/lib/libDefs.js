@@ -1,10 +1,7 @@
 // @flow
 
 import semver from 'semver';
-
-import {cloneInto, rebaseRepoMaster} from './git.js';
-import {mkdirp} from './fileUtils.js';
-import {fs, path, os} from './node.js';
+import {fs, path} from './node.js';
 import {versionToString} from './semver.js';
 import {
   disjointVersionsAll,
@@ -16,6 +13,11 @@ import {
 } from './flowVersion.js';
 import type {FlowVersion} from './flowVersion.js';
 import {ValidationError} from './ValidationError';
+import {
+  ensureCacheRepo,
+  verifyCLIVersion,
+  getCacheRepoNpmDefsDir,
+} from './cacheRepoUtils';
 
 const P = Promise;
 
@@ -29,129 +31,6 @@ export type LibDef = {|
 |};
 
 export const TEST_FILE_NAME_RE = /^test_.*\.js$/;
-
-const CACHE_DIR = path.join(os.homedir(), '.flow-typed');
-const CACHE_REPO_DIR = path.join(CACHE_DIR, 'repo');
-
-const REMOTE_REPO_URL = 'https://github.com/flowtype/flow-typed.git';
-const LAST_UPDATED_FILE = path.join(CACHE_DIR, 'lastUpdated');
-
-async function cloneCacheRepo(verbose?: VerboseOutput) {
-  await mkdirp(CACHE_REPO_DIR);
-  try {
-    await cloneInto(REMOTE_REPO_URL, CACHE_REPO_DIR);
-  } catch (e) {
-    writeVerbose(verbose, 'ERROR: Unable to clone the local cache repo.');
-    throw e;
-  }
-  await fs.writeFile(LAST_UPDATED_FILE, String(Date.now()));
-}
-
-const CACHE_REPO_GIT_DIR = path.join(CACHE_REPO_DIR, '.git');
-async function rebaseCacheRepo(verbose?: VerboseOutput) {
-  if (
-    (await fs.exists(CACHE_REPO_DIR)) &&
-    (await fs.exists(CACHE_REPO_GIT_DIR))
-  ) {
-    try {
-      await rebaseRepoMaster(CACHE_REPO_DIR);
-    } catch (e) {
-      writeVerbose(
-        verbose,
-        'ERROR: Unable to rebase the local cache repo. ' + e.message,
-      );
-      return false;
-    }
-    await fs.writeFile(LAST_UPDATED_FILE, String(Date.now()));
-    return true;
-  } else {
-    await cloneCacheRepo(verbose);
-    return true;
-  }
-}
-
-/**
- * Utility wrapper for ensureCacheRepo with an update expiry of 0 hours.
- */
-async function updateCacheRepo(verbose?: VerboseOutput) {
-  return await ensureCacheRepo(verbose, 0);
-}
-
-/**
- * Ensure that the CACHE_REPO_DIR exists and is recently rebased.
- * (else: create/rebase it)
- */
-const CACHE_REPO_EXPIRY = 1000 * 60; // 1 minute
-export const _cacheRepoAssure: {
-  lastAssured: number,
-  pendingAssure: Promise<*>,
-} = {
-  lastAssured: 0,
-  pendingAssure: Promise.resolve(),
-};
-async function ensureCacheRepo(
-  verbose?: VerboseOutput,
-  cacheRepoExpiry: number = CACHE_REPO_EXPIRY,
-) {
-  // Only re-run rebase checks if a check hasn't been run in the last 5 minutes
-  if (_cacheRepoAssure.lastAssured + 5 * 1000 * 60 >= Date.now()) {
-    return _cacheRepoAssure.pendingAssure;
-  }
-
-  _cacheRepoAssure.lastAssured = Date.now();
-  const prevAssure = _cacheRepoAssure.pendingAssure;
-  return (_cacheRepoAssure.pendingAssure = prevAssure.then(() =>
-    (async function() {
-      const repoDirExists = fs.exists(CACHE_REPO_DIR);
-      const repoGitDirExists = fs.exists(CACHE_REPO_GIT_DIR);
-      if (!(await repoDirExists) || !(await repoGitDirExists)) {
-        writeVerbose(
-          verbose,
-          '• flow-typed cache not found, fetching from GitHub...',
-          false,
-        );
-        await cloneCacheRepo(verbose);
-        writeVerbose(verbose, 'done.');
-      } else {
-        let lastUpdated = 0;
-        if (await fs.exists(LAST_UPDATED_FILE)) {
-          // If the LAST_UPDATED_FILE has anything other than just a number in
-          // it, just assume we need to update.
-          const lastUpdatedRaw = await fs.readFile(LAST_UPDATED_FILE);
-          const lastUpdatedNum = parseInt(lastUpdatedRaw, 10);
-          if (String(lastUpdatedNum) === String(lastUpdatedRaw)) {
-            lastUpdated = lastUpdatedNum;
-          }
-        }
-
-        if (lastUpdated + cacheRepoExpiry < Date.now()) {
-          writeVerbose(verbose, '• rebasing flow-typed cache...', false);
-          const rebaseSuccessful = await rebaseCacheRepo(verbose);
-          if (rebaseSuccessful) {
-            writeVerbose(verbose, 'done.');
-          } else {
-            writeVerbose(
-              verbose,
-              "\nNOTE: Unable to rebase local cache! If you don't currently " +
-                "have internet connectivity, no worries -- we'll update the " +
-                'local cache the next time you do.\n',
-            );
-          }
-        }
-      }
-    })(),
-  ));
-}
-// Exported for tests -- since we really want this part well-tested.
-export {
-  CACHE_REPO_DIR as _CACHE_REPO_DIR,
-  CACHE_REPO_EXPIRY as _CACHE_REPO_EXPIRY,
-  CACHE_REPO_GIT_DIR as _CACHE_REPO_GIT_DIR,
-  ensureCacheRepo as _ensureCacheRepo,
-  updateCacheRepo,
-  LAST_UPDATED_FILE as _LAST_UPDATED_FILE,
-  REMOTE_REPO_URL as _REMOTE_REPO_URL,
-};
 
 async function addLibDefs(pkgDirPath, libDefs: Array<LibDef>) {
   const parsedDirItem = parseRepoDirItem(pkgDirPath);
@@ -376,54 +255,15 @@ function validateVersionPart(part, partName, context) {
 }
 
 /**
- * Given a path to a 'definitions' dir, assert that the currently-running
- * version of the CLI is compatible with the repo.
- */
-async function verifyCLIVersion(defsDirPath) {
-  const metadataFilePath = path.join(defsDirPath, '.cli-metadata.json');
-  const metadata = JSON.parse(String(await fs.readFile(metadataFilePath)));
-  if (!metadata.compatibleCLIRange) {
-    throw new Error(
-      `Unable to find the 'compatibleCLIRange' property in ` +
-        `${metadataFilePath}. You might need to update to a newer version of ` +
-        `the Flow CLI.`,
-    );
-  }
-  const minCLIVersion = metadata.compatibleCLIRange;
-  const thisCLIVersion = require('../../package.json').version;
-  if (!semver.satisfies(thisCLIVersion, minCLIVersion)) {
-    throw new Error(
-      `Please upgrade your CLI version! This CLI is version ` +
-        `${thisCLIVersion}, but the latest flow-typed definitions are only ` +
-        `compatible with flow-typed@${minCLIVersion}`,
-    );
-  }
-}
-
-/**
- * Helper function to write verbose output only when an output stream was
- * provided.
- */
-type VerboseOutput = stream$Writable | tty$WriteStream;
-function writeVerbose(stream, msg, writeNewline = true) {
-  if (stream != null) {
-    stream.write(msg + (writeNewline ? '\n' : ''));
-  }
-}
-
-/**
  * Get a list of LibDefs from the flow-typed cache repo checkout.
  *
  * If the repo checkout does not exist or is out of date, it will be
  * created/updated automatically first.
  */
-const CACHE_REPO_DEFS_DIR = path.join(CACHE_REPO_DIR, 'definitions', 'npm');
-export async function getCacheLibDefs(
-  verbose?: VerboseOutput = process.stdout,
-) {
-  await ensureCacheRepo(verbose);
-  await verifyCLIVersion(path.join(CACHE_REPO_DIR, 'definitions'));
-  return getLibDefs(CACHE_REPO_DEFS_DIR);
+export async function getCacheLibDefs(repoName: string) {
+  await ensureCacheRepo(repoName);
+  await verifyCLIVersion(repoName);
+  return getLibDefs(getCacheRepoNpmDefsDir(repoName));
 }
 
 function packageNameMatch(a: string, b: string): boolean {

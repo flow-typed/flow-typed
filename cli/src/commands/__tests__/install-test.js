@@ -30,6 +30,7 @@ import {
   _installNpmLibDef as installNpmLibDef,
   run,
 } from '../install';
+import {DEFAULT_REPO_NAME} from '../../lib/repoUtils';
 
 const BASE_FIXTURE_ROOT = path.join(__dirname, '__install-fixtures__');
 
@@ -124,6 +125,7 @@ describe('install (command)', () => {
           skip: false,
           ignoreDeps: [],
           useCacheUntil: 1000 * 60,
+          repoName: DEFAULT_REPO_NAME,
         });
         expect(result).toBe(1);
         expect(_mock(console.error).mock.calls).toEqual([
@@ -158,6 +160,7 @@ describe('install (command)', () => {
             skip: false,
             ignoreDeps: [],
             useCacheUntil: 1000 * 60,
+            repoName: DEFAULT_REPO_NAME,
           });
           expect(result).toBe(1);
           expect(_mock(console.error).mock.calls).toEqual([
@@ -188,6 +191,7 @@ describe('install (command)', () => {
           skip: false,
           ignoreDeps: [],
           useCacheUntil: 1000 * 60,
+          repoName: DEFAULT_REPO_NAME,
         });
         expect(result).toBe(0);
         expect(_mock(console.error).mock.calls).toEqual([
@@ -243,7 +247,12 @@ describe('install (command)', () => {
           path.join(FAKE_CACHE_REPO_DIR, 'definitions'),
         );
 
-        await installNpmLibDef(availableLibDefs[0], FLOWTYPED_DIR, false);
+        await installNpmLibDef(
+          DEFAULT_REPO_NAME,
+          availableLibDefs[0],
+          FLOWTYPED_DIR,
+          false,
+        );
       });
     });
   });
@@ -319,6 +328,7 @@ describe('install (command)', () => {
 
         // Run the install command
         await run({
+          from: DEFAULT_REPO_NAME,
           overwrite: false,
           verbose: false,
           skip: false,
@@ -383,6 +393,7 @@ describe('install (command)', () => {
 
         // Run the install command
         await run({
+          from: DEFAULT_REPO_NAME,
           overwrite: false,
           verbose: false,
           skip: false,
@@ -432,6 +443,7 @@ describe('install (command)', () => {
 
         // Run the install command
         await run({
+          from: DEFAULT_REPO_NAME,
           overwrite: false,
           verbose: false,
           skip: false,
@@ -472,6 +484,7 @@ describe('install (command)', () => {
 
         // Run the install command
         await run({
+          from: DEFAULT_REPO_NAME,
           overwrite: false,
           verbose: false,
           skip: true,
@@ -510,6 +523,7 @@ describe('install (command)', () => {
 
         // Run the install command
         await run({
+          from: DEFAULT_REPO_NAME,
           overwrite: true,
           verbose: false,
           skip: false,
@@ -550,6 +564,7 @@ describe('install (command)', () => {
 
         // Run the install command
         await run({
+          from: DEFAULT_REPO_NAME,
           overwrite: false,
           verbose: false,
           skip: false,
@@ -570,6 +585,7 @@ describe('install (command)', () => {
 
         // Run install command again
         await run({
+          from: DEFAULT_REPO_NAME,
           overwrite: false,
           verbose: false,
           skip: false,
@@ -603,6 +619,7 @@ describe('install (command)', () => {
 
         // Run the install command
         await run({
+          from: DEFAULT_REPO_NAME,
           overwrite: false,
           verbose: false,
           skip: false,
@@ -623,6 +640,7 @@ describe('install (command)', () => {
 
         // Run install command again
         await run({
+          from: DEFAULT_REPO_NAME,
           overwrite: true,
           skip: false,
           verbose: false,
@@ -659,6 +677,7 @@ describe('install (command)', () => {
 
         // Run the install command
         await run({
+          from: DEFAULT_REPO_NAME,
           overwrite: false,
           verbose: false,
           skip: false,
@@ -697,6 +716,7 @@ describe('install (command)', () => {
 
         // Run the install command
         await run({
+          from: DEFAULT_REPO_NAME,
           overwrite: false,
           verbose: false,
           skip: false,

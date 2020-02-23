@@ -6,12 +6,15 @@ import {
   ensureCacheRepo,
 } from '../lib/cacheRepoUtils';
 import {path} from '../lib/node';
+import {DEFAULT_REPO_NAME} from '../lib/repoUtils';
+import {validateString} from '../lib/validationUtils';
 
 export const name = 'update-cache';
 export const description = 'Update the flow-typed definitions cache';
 
 export type Args = {
   cacheDir?: mixed,
+  from: mixed,
 };
 export function setup(yargs: Yargs) {
   return yargs.usage(`$0 ${name} - ${description}`).options({
@@ -21,6 +24,11 @@ export function setup(yargs: Yargs) {
         'Directory (absolute or relative path, ~ is not supported) to store cache of libdefs',
       type: 'string',
       demandOption: false,
+    },
+    from: {
+      describe: 'Use given github flow-typed repository',
+      type: 'string',
+      default: DEFAULT_REPO_NAME,
     },
   });
 }
@@ -33,8 +41,10 @@ export async function run(args: Args): Promise<number> {
       setCustomCacheDir(cacheDir);
     }
 
+    const from = validateString('from', args.from);
+
     console.log('Updating flow-typed definitions...');
-    await ensureCacheRepo();
+    await ensureCacheRepo(from);
 
     console.log('Definitions update successful!');
     return 0;

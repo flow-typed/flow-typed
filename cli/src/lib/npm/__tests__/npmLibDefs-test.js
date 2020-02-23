@@ -10,9 +10,9 @@ import {
   findNpmLibDef,
   getScopedPackageName,
 } from '../npmLibDefs';
-
 import path from 'path';
 import {ValidationError} from '../../ValidationError';
+import {DEFAULT_REPO_NAME} from '../../repoUtils';
 
 const BASE_FIXTURE_ROOT = path.join(__dirname, '__npmLibDefs-fixtures__');
 
@@ -186,7 +186,7 @@ describe('npmLibDefs', () => {
         const flowVersion = {kind: 'all'};
 
         await expect(
-          findNpmLibDef(pkgName, pkgVersion, flowVersion),
+          findNpmLibDef(pkgName, pkgVersion, flowVersion, DEFAULT_REPO_NAME),
         ).resolves.toEqual(null);
       });
     });
@@ -200,7 +200,12 @@ describe('npmLibDefs', () => {
         let filtered;
         let error;
         try {
-          filtered = await findNpmLibDef(pkgName, pkgVersion, flowVersion);
+          filtered = await findNpmLibDef(
+            pkgName,
+            pkgVersion,
+            flowVersion,
+            DEFAULT_REPO_NAME,
+          );
         } catch (e) {
           error = e;
         }

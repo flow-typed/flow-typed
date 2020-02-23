@@ -8,15 +8,13 @@ import {
   _cacheRepoEnsureToken as cacheRepoEnsureToken,
   _getCacheRepoGitDir as getCacheRepoGitDir,
   _getLastUpdatedFile as getLastUpdatedFile,
-  _REMOTE_REPO_URL as REMOTE_REPO_URL,
   ensureCacheRepo,
   getCacheRepoDir,
   verifyCLIVersion,
 } from '../cacheRepoUtils';
-
 import {cloneInto, rebaseRepoMaster} from '../git';
-
 import {fs} from '../node';
+import {DEFAULT_REPO_NAME, getGithubRepoUrl} from '../repoUtils';
 
 function _mock(mockFn) {
   return ((mockFn: any): JestMockFn<*, *>);
@@ -37,58 +35,65 @@ describe('cacheRepoUtils', () => {
     });
 
     it('clones the repo if not present on disk', async () => {
-      await ensureCacheRepo();
+      await ensureCacheRepo(DEFAULT_REPO_NAME);
       expect(_mock(cloneInto).mock.calls).toEqual([
-        [REMOTE_REPO_URL, getCacheRepoDir()],
+        [
+          getGithubRepoUrl(DEFAULT_REPO_NAME),
+          getCacheRepoDir(DEFAULT_REPO_NAME),
+        ],
       ]);
       expect(_mock(fs.writeFile).mock.calls.length).toBe(1);
-      expect(_mock(fs.writeFile).mock.calls[0][0]).toBe(getLastUpdatedFile());
+      expect(_mock(fs.writeFile).mock.calls[0][0]).toBe(
+        getLastUpdatedFile(DEFAULT_REPO_NAME),
+      );
     });
 
     it('does NOT clone the repo if already present on disk', async () => {
       _mock(fs.exists).mockImplementation(dirPath => {
         return (
-          dirPath === getCacheRepoDir() || dirPath === getCacheRepoGitDir()
+          dirPath === getCacheRepoDir(DEFAULT_REPO_NAME) ||
+          dirPath === getCacheRepoGitDir(DEFAULT_REPO_NAME)
         );
       });
 
-      await ensureCacheRepo();
+      await ensureCacheRepo(DEFAULT_REPO_NAME);
       expect(_mock(cloneInto).mock.calls).toEqual([]);
     });
 
     it('rebases if present on disk + lastUpdated is old', async () => {
       _mock(fs.exists).mockImplementation(dirPath => {
         return (
-          dirPath === getCacheRepoDir() || dirPath === getCacheRepoGitDir()
+          dirPath === getCacheRepoDir(DEFAULT_REPO_NAME) ||
+          dirPath === getCacheRepoGitDir(DEFAULT_REPO_NAME)
         );
       });
       _mock(fs.readFile).mockImplementation(filePath => {
-        if (filePath === getLastUpdatedFile()) {
+        if (filePath === getLastUpdatedFile(DEFAULT_REPO_NAME)) {
           return String(Date.now() - CACHE_REPO_EXPIRY - 1);
         }
       });
 
-      await ensureCacheRepo();
+      await ensureCacheRepo(DEFAULT_REPO_NAME);
       expect(_mock(rebaseRepoMaster).mock.calls[0]).toEqual([
-        getCacheRepoDir(),
+        getCacheRepoDir(DEFAULT_REPO_NAME),
       ]);
     });
 
     it('does NOT rebase if on disk, but lastUpdated is recent', async () => {
       _mock(fs.exists).mockImplementation(dirPath => {
         return (
-          dirPath === getCacheRepoDir() ||
-          dirPath === getCacheRepoGitDir() ||
-          dirPath === getLastUpdatedFile()
+          dirPath === getCacheRepoDir(DEFAULT_REPO_NAME) ||
+          dirPath === getCacheRepoGitDir(DEFAULT_REPO_NAME) ||
+          dirPath === getLastUpdatedFile(DEFAULT_REPO_NAME)
         );
       });
       _mock(fs.readFile).mockImplementation(filePath => {
-        if (filePath === getLastUpdatedFile()) {
+        if (filePath === getLastUpdatedFile(DEFAULT_REPO_NAME)) {
           return String(Date.now());
         }
       });
 
-      await ensureCacheRepo();
+      await ensureCacheRepo(DEFAULT_REPO_NAME);
       expect(_mock(rebaseRepoMaster).mock.calls).toEqual([]);
     });
   });
@@ -121,7 +126,7 @@ describe('cacheRepoUtils', () => {
       });
       let err = null;
       try {
-        await verifyCLIVersion();
+        await verifyCLIVersion(DEFAULT_REPO_NAME);
       } catch (e) {
         err = e;
       }
@@ -147,7 +152,7 @@ describe('cacheRepoUtils', () => {
       });
       let err = null;
       try {
-        await verifyCLIVersion();
+        await verifyCLIVersion(DEFAULT_REPO_NAME);
       } catch (e) {
         err = e;
       }

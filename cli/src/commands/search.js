@@ -7,6 +7,7 @@ import {toSemverString as flowVersionToSemver} from '../lib/flowVersion';
 
 import {table} from 'table';
 import {validateString} from '../lib/validationUtils.js';
+import {DEFAULT_REPO_NAME} from '../lib/repoUtils.js';
 
 export function _formatDefTable(defs: Array<LibDef>): string {
   const formatted = [['Name', 'Package Version', 'Flow Version']].concat(
@@ -28,6 +29,7 @@ export function _formatDefTable(defs: Array<LibDef>): string {
 export type Args = {
   flowVersion: mixed, // ?string
   term: mixed, // string
+  from: mixed, // string
 };
 
 export const name = 'search <term>';
@@ -47,6 +49,11 @@ export function setup(yargs: Yargs) {
           'The Flow version that fetched libdefs must be compatible with',
         type: 'string',
       },
+      from: {
+        describe: 'Use given github flow-typed repository',
+        type: 'string',
+        default: DEFAULT_REPO_NAME,
+      },
     });
 }
 
@@ -57,8 +64,9 @@ export async function run(args: Args): Promise<number> {
   }
 
   const term = validateString('term', args.term);
+  const from = validateString('from', args.from);
 
-  const defs = await getCacheLibDefs(process.stdout);
+  const defs = await getCacheLibDefs(from);
   const filtered = filterLibDefs(defs, {
     type: 'fuzzy',
     term,

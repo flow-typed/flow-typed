@@ -42,7 +42,9 @@ import semver from 'semver';
 
 import {createStub, pkgHasFlowFiles} from '../lib/stubUtils';
 
-import {validateStringArray} from '../lib/validationUtils';
+import {DEFAULT_REPO_NAME} from '../lib/repoUtils';
+
+import {validateStringArray, validateString} from '../lib/validationUtils';
 
 import typeof Yargs from 'yargs';
 
@@ -60,6 +62,7 @@ export type Args = {
   rootDir?: mixed, // string,
   useCacheUntil?: mixed, // seconds
   explicitLibDefs: mixed, // Array<string>
+  from: mixed, // string
 };
 export function setup(yargs: Yargs) {
   return yargs
@@ -127,6 +130,11 @@ export function setup(yargs: Yargs) {
         describe: 'Use cache until specified time in milliseconds',
         type: 'number',
       },
+      from: {
+        describe: 'Use given github flow-typed repository',
+        type: 'string',
+        default: DEFAULT_REPO_NAME,
+      },
     });
 }
 export async function run(args: Args) {
@@ -144,6 +152,8 @@ export async function run(args: Args) {
     'explicitLibDefs',
     args.explicitLibDefs || [],
   );
+
+  const from = validateString('from', args.from);
 
   const coreLibDefResult = await installCoreLibDefs();
   if (coreLibDefResult !== 0) {
@@ -166,6 +176,7 @@ export async function run(args: Args) {
     skip: Boolean(args.skip),
     ignoreDeps: ignoreDeps,
     useCacheUntil: Number(args.useCacheUntil) || CACHE_REPO_EXPIRY,
+    repoName: from,
   });
   if (npmLibDefResult !== 0) {
     return npmLibDefResult;
@@ -211,6 +222,7 @@ type installNpmLibDefsArgs = {|
   skip: boolean,
   ignoreDeps: Array<string>,
   useCacheUntil: number,
+  repoName: string,
 |};
 async function installNpmLibDefs({
   cwd,
@@ -222,6 +234,7 @@ async function installNpmLibDefs({
   skip,
   ignoreDeps,
   useCacheUntil,
+  repoName,
 }: installNpmLibDefsArgs): Promise<number> {
   const flowProjectRoot = await findFlowRoot(cwd);
   if (flowProjectRoot === null) {
@@ -301,7 +314,13 @@ async function installNpmLibDefs({
         return;
       }
 
-      const libDef = await findNpmLibDef(name, ver, flowVersion, useCacheUntil);
+      const libDef = await findNpmLibDef(
+        name,
+        ver,
+        flowVersion,
+        repoName,
+        useCacheUntil,
+      );
       if (libDef === null) {
         unavailableLibDefs.push({name, ver});
       } else {
@@ -357,7 +376,7 @@ async function installNpmLibDefs({
         if (toUninstall != null) {
           await fs.unlink(toUninstall);
         }
-        return installNpmLibDef(libDef, flowTypedDirPath, overwrite);
+        return installNpmLibDef(repoName, libDef, flowTypedDirPath, overwrite);
       }),
     );
 
@@ -472,6 +491,7 @@ async function installNpmLibDefs({
 }
 
 async function installNpmLibDef(
+  sourceRepo: string,
   npmLibDef: NpmLibDef,
   npmDir: string,
   overwrite: boolean,
@@ -509,10 +529,10 @@ async function installNpmLibDef(
     }
 
     const repoVersion = await getNpmLibDefVersionHash(
-      getCacheRepoDir(),
+      getCacheRepoDir(sourceRepo),
       npmLibDef,
     );
-    const codeSignPreprocessor = signCodeStream(repoVersion);
+    const codeSignPreprocessor = signCodeStream(repoVersion, sourceRepo);
     await copyFile(npmLibDef.path, filePath, codeSignPreprocessor);
 
     console.log(
