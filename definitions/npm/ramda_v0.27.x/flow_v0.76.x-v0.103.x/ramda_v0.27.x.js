@@ -437,7 +437,82 @@ declare module ramda {
    * Type
    */
 
+  declare type Compose = (<A, B, C, D, E, F, G, H, I, J, K>(
+    jk: UnaryFn<J, K>,
+    ij: UnaryFn<I, J>,
+    hi: UnaryFn<H, I>,
+    gh: UnaryFn<G, H>,
+    fg: UnaryFn<F, G>,
+    ef: UnaryFn<E, F>,
+    de: UnaryFn<D, E>,
+    cd: UnaryFn<C, D>,
+    bc: UnaryFn<B, C>,
+    ab: UnaryFn<A, B>
+  ) => UnaryFn<A, K>) &
+    (<A, B, C, D, E, F, G, H, I, J>(
+      ij: UnaryFn<I, J>,
+      hi: UnaryFn<H, I>,
+      gh: UnaryFn<G, H>,
+      fg: UnaryFn<F, G>,
+      ef: UnaryFn<E, F>,
+      de: UnaryFn<D, E>,
+      cd: UnaryFn<C, D>,
+      bc: UnaryFn<B, C>,
+      ab: UnaryFn<A, B>
+    ) => UnaryFn<A, J>) &
+    (<A, B, C, D, E, F, G, H, I>(
+      hi: UnaryFn<H, I>,
+      gh: UnaryFn<G, H>,
+      fg: UnaryFn<F, G>,
+      ef: UnaryFn<E, F>,
+      de: UnaryFn<D, E>,
+      cd: UnaryFn<C, D>,
+      bc: UnaryFn<B, C>,
+      ab: UnaryFn<A, B>
+    ) => UnaryFn<A, I>) &
+    (<A, B, C, D, E, F, G, H>(
+      gh: UnaryFn<G, H>,
+      fg: UnaryFn<F, G>,
+      ef: UnaryFn<E, F>,
+      de: UnaryFn<D, E>,
+      cd: UnaryFn<C, D>,
+      bc: UnaryFn<B, C>,
+      ab: UnaryFn<A, B>
+    ) => UnaryFn<A, H>) &
+    (<A, B, C, D, E, F, G>(
+      fg: UnaryFn<F, G>,
+      ef: UnaryFn<E, F>,
+      de: UnaryFn<D, E>,
+      cd: UnaryFn<C, D>,
+      bc: UnaryFn<B, C>,
+      ab: UnaryFn<A, B>
+    ) => UnaryFn<A, G>) &
+    (<A, B, C, D, E, F>(
+      ef: UnaryFn<E, F>,
+      de: UnaryFn<D, E>,
+      cd: UnaryFn<C, D>,
+      bc: UnaryFn<B, C>,
+      ab: UnaryFn<A, B>,
+    ) => UnaryFn<A, F>) &
+    (<A, B, C, D, E>(
+      de: UnaryFn<D, E>,
+      cd: UnaryFn<C, D>,
+      bc: UnaryFn<B, C>,
+      ab: UnaryFn<A, B>,
+    ) => UnaryFn<A, E>) &
+    (<A, B, C, D>(
+      cd: UnaryFn<C, D>,
+      bc: UnaryFn<B, C>,
+      ab: UnaryFn<A, B>,
+    ) => UnaryFn<A, D>) &
+    (<A, B, C>(
+      bc: UnaryFn<B, C>,
+      ab: UnaryFn<A, B>,
+    ) => UnaryFn<A, C>) &
+    (<A, B>(ab: UnaryFn<A, B>) => UnaryFn<A, B>);
+
   declare var compose: Compose;
+
   declare function then<A, R>(onSuccess: UnaryFn<A, R> | UnaryPromiseFn<A, R>): CurriedFunction1<Promise<A>, Promise<R>>
   declare function then<A, R>(onSuccess: UnaryFn<A, R> | UnaryPromiseFn<A, R>, p: Promise<A>): Promise<R>;
   declare var curry: Curry;

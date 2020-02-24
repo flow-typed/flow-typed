@@ -462,11 +462,11 @@ const mLeft2: Point = _.mergeLeft({x: 0})({x: 5, y: 2});
 const mLeftX: number = mLeft2.x;
 const mLeftY: number = mLeft2.y;
 
-const mRight: { name: string, age: number } = _.mergeRight({ 'name': 'fred', 'age': 10 }, { 'age': 40 });
+const mRight: User = _.mergeRight({ 'name': 'fred', 'age': 10 }, { 'age': 40 });
 const mRightName: string = mRight.name;
 // $ExpectError
 const mRightAge: number = mRight.name;
-const mRight2: { x: number, y: number } = _.mergeRight({x: 0, y: 0})({y: 2});
+const mRight2: Point = _.mergeRight({x: 0, y: 0})({y: 2});
 const mRightX: number = mRight2.x;
 const mRightY: number = mRight2.y;
 
