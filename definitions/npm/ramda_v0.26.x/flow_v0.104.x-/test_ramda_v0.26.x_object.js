@@ -445,10 +445,20 @@ const ob3 = _.merge(ob1, ob2);
 const propX = ob3.x;
 const propA = ob3.a;
 
-const mLeft: { name: string, age: number } = _.mergeLeft({ 'age': 40 }, { 'name': 'fred', 'age': 10 });
+type User = {
+  name: string,
+  age: number,
+  ...
+}
+const mLeft: User = _.mergeLeft({ 'age': 40 }, { 'name': 'fred', 'age': 10 });
 const mLeftName: string = mLeft.name;
 const mLeftAge: number = mLeft.age;
-const mLeft2: { x: number, y: number } = _.mergeLeft({x: 0})({x: 5, y: 2});
+type Point = {
+  x: number,
+  y: number,
+  ...
+}
+const mLeft2: Point = _.mergeLeft({x: 0})({x: 5, y: 2});
 const mLeftX: number = mLeft2.x;
 const mLeftY: number = mLeft2.y;
 
