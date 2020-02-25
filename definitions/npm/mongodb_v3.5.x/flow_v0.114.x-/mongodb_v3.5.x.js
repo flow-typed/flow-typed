@@ -1,7 +1,5 @@
 // @flow
 
-import { checkServerIdentity } from 'tls';
-
 declare module 'mongodb' {
 
   // http://mongodb.github.io/node-mongodb-native/3.5/api/Admin.html
@@ -96,8 +94,8 @@ declare module 'mongodb' {
 
   // http://mongodb.github.io/node-mongodb-native/3.5/api/MongoClient.html
   declare export class MongoClient {
-    static connect(url: string, options?: MongoClientOptions, callback?: ConnectCallback): MongoClient;
-    static connect(url: string, callback?: ConnectCallback): MongoClient;
+    static connect(url: string, options: MongoClientOptions, callback: ConnectCallback): MongoClient;
+    static connect(url: string, callback: ConnectCallback): MongoClient;
     static connect(url: string, options?: MongoClientOptions): Promise<MongoClient>;
 
     constructor(url: string, options?: MongoClientOptions, callback?: ConnectCallback): MongoClient;
@@ -173,26 +171,75 @@ declare module 'mongodb' {
   // http://mongodb.github.io/node-mongodb-native/3.5/api/WriteError.html
   declare type WriteError = any; // TODO (use type shouldn't be instantiated)
 
-  declare type ReadPreference = mixed; // TODO
+  declare export type ReadPreference = {|
+    PRIMARY: 'primary',
+    PRIMARY_PREFERRED: 'primaryPreferred',
+    SECONDARY: 'secondary',
+    SECONDARY_PREFERRED: 'secondaryPreferred',
+    NEAREST: 'nearest',
+  |};
+  declare export type ReadPreferenceValue = 'primary' | 'primaryPreferred' | 'secondary'
+    | 'secondaryPreferred' | 'nearest'
 
-  declare type ReadConcernLevel = string; // TODO
+  declare export type ReadConcernLevel = 'local' | 'available' | 'majority' | 'linearizable' | 'snapshot';
 
-  declare type ReadConcern = {|
+  declare export type ReadConcern = {|
     type: ReadConcernLevel,
   |}
 
-  declare type DriverInfoOptionsObject = {|
+  declare export type DriverInfoOptionsObject = {|
     name?: string,
     version?: string,
     platform?: string,
   |};
 
-  declare type AutoEncryptionOptionsObject = { ... }; // TODO
+  declare export type KMSProviders = {|
+    aws: {|
+      accessKeyId?: string,
+      secretAccessKey?: string,
+    |},
+    local: {|
+      key?: Buffer,
+    |},
+  |};
 
-  declare type ConnectCallback = (error: MongoError, client: MongoClient) => mixed;
+  declare export type AutoEncryptionOptionsObject = {|
+    keyVaultClient?: MongoClient,
+    keyVaultNamespace?: string,
+    kmsProviders?: KMSProviders,
+    schemaMap?: { [string]: mixed, ... },
+    bypassAutoEncryption?: boolean,
+    options?: {|
+      logger: LoggerInterface,
+    |},
+    extraOptions: {|
+      mongocryptdURI?: string,
+      mongocryptdBypassSpawn?: boolean,
+      mongocryptdSpawnPath?: string,
+      mongocryptdSpawnArgs?: string[]
+    |},
+  |};
+
+  declare export type ConnectCallback = (error: MongoError, client: MongoClient) => mixed;
   declare type NoResultCallback = (error: MongoError, null) => mixed;
 
-  declare type MongoClientOptions = {|
+  declare export type PkFactory = {
+    createPk(): ObjectID,
+    ...,
+  };
+
+  declare export type LoggerInterface = {|
+    debug(string): mixed,
+    info(string): mixed,
+    warn(string): mixed,
+    error(string): mixed,
+  |};
+
+  declare export type Auth = {|
+    user: string, password: string,
+  |}
+
+  declare export type MongoClientOptions = {|
     poolSize?: number,
     ssl?: boolean,
     sslValidate?: boolean,
@@ -202,7 +249,7 @@ declare module 'mongodb' {
     sslPass?: string, // deprecated
     sslCert?: Buffer, // deprecated
     sslCRL?: Buffer, // deprecated
-    checkServerIdentity?: string | typeof checkServerIdentity; // deprecated
+    checkServerIdentity?: boolean | ((servername: string, cert: string) => boolean); // deprecated
     tls?: boolean,
     tlsInsecure?: boolean,
     tlsCAFile?: string,
@@ -234,27 +281,24 @@ declare module 'mongodb' {
     ignoreUndefined?: boolean,
     raw?: boolean,
     bufferMaxEntries?: number,
-    readPreference?: string | ReadPreference,
-    pkFactory?: { ... }, // TODO
+    readPreference?: ReadPreferenceValue,
+    pkFactory?: PkFactory,
     promiseLibrary?: { ... }, // TODO
     readConcern?: ReadConcern,
     maxStalenessSeconds?: number,
     loggerLevel?: 'error' | 'warn' | 'info' | 'debug',
-    logger?: { ... }, // TODO
+    logger?: LoggerInterface,
     promoteValues?: boolean,
     promoteBuffers?: boolean,
     promoteLongs?: boolean,
     domainsEnabled?: boolean,
     validateOptions?: boolean,
     appname?: string,
-    promoteBuffers?: boolean,
-    auth?: {|
-      user: string, password: string,
-    |},
+    auth?: Auth,
     authMechanism?: 'MDEFAULT' | 'GSSAPI' | 'PLAIN' | 'MONGODB-X509' | 'SCRAM-SHA-1',
-    compression?: 'snappy' | 'zlib', // To confirm
+    compression?: 'snappy' | 'zlib',
     fsync?: boolean,
-    readPreferenceTags?: { ... }, // TODO
+    readPreferenceTags?: Array<{ [string]: string, ... }>,
     numberOfRetries?: number,
     auto_reconnect?: boolean,
     monitorCommands?: boolean,
