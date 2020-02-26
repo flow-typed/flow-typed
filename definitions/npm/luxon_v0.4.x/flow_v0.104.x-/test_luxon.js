@@ -405,7 +405,6 @@ var date = DateTime.min(DateTime.local(), null, DateTime.utc());
 }): Duration);
 // $ExpectError
 (date.diff(new Date()): Duration);
-// $ExpectError
 (date.diff(DateTime.utc()): Duration);
 // $ExpectError
 (date.diff(DateTime.utc(), "glom"): Duration);
@@ -414,20 +413,11 @@ var date = DateTime.min(DateTime.local(), null, DateTime.utc());
 // $ExpectError
 (date.diff(DateTime.utc(), ["year", "month"], { foo: "bar" }): Duration);
 
+(date.diffNow(): Duration);
 (date.diffNow("year"): Duration);
 (date.diffNow(["year", "month"]): Duration);
 (date.diffNow(["year", "month"], {}): Duration);
 (date.diffNow(["year", "month"], { conversionAccuracy: "longterm" }): Duration);
-// $ExpectError
-(date.diff(new Date()): Duration);
-// $ExpectError
-(date.diff(DateTime.utc()): Duration);
-// $ExpectError
-(date.diffNow("glom"): Duration);
-// $ExpectError
-(date.diffNow(["year", "glom"]): Duration);
-// $ExpectError
-(date.diffNow(["year", "month"], { foo: "bar" }): Duration);
 
 (date.startOf("year"): DateTime);
 (date.startOf("month"): DateTime);
