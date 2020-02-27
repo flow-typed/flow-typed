@@ -1,5 +1,5 @@
 import { describe, it } from 'flow-typed-test';
-import Router from "koa-router";
+import Router from "@koa/router";
 
 describe('expectations', () => {
   it('defines a Middleware type', () => {
