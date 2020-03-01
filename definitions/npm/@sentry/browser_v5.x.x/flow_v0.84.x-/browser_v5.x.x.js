@@ -356,9 +356,14 @@ declare module '@sentry/browser' {
 
         +blacklistUrls?: $ReadOnlyArray<string | RegExp>,
         +whitelistUrls?: $ReadOnlyArray<string | RegExp>,
-        +integrations?:
-            | $ReadOnlyArray<Integration<any>>
-            | (($ReadOnlyArray<Integration<any>>) => $ReadOnlyArray<Integration<any>>),
+        // This really should be typed as:
+        //    | $ReadOnlyArray<Integration<any>>
+        //    | (($ReadOnlyArray<Integration<any>>) => $ReadOnlyArray<Integration<any>>)
+        // but we must support integrations from @sentry/integrations as well
+        // as custom integrations. Since cross-package imports aren't allowed
+        // and classes are nominally typed, using `any` seems like our only
+        // option here.
+        +integrations?: any,
         +beforeBreadcrumb?: (breadcrumb: Breadcrumb, hint?: BreadcrumbHint) => Breadcrumb | void,
         +_experiments?: { [key: string]: mixed, ... },
     |};

@@ -150,6 +150,17 @@ describe('@sentry/browser', () => {
       // $ExpectError
       new Sentry.Integrations.OnUnhandledRejection(); // Node-specific integration, not in Browser
     });
+
+    it('Accepts custom integrations', () => {
+      class CustomIntegration {
+        constructor() {}
+        name = 'CustomIntegration';
+        setupOnce(addGlobalEventProcessor, getCurrentHub) {}
+      }
+
+      new Sentry.init({ integrations: [new CustomIntegration()] });
+    });
+
   });
 
   describe('Transports', () => {
