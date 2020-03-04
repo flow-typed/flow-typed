@@ -1,4 +1,9 @@
 // @flow
+
+/**
+ * Please add tests for new functions in the same order as they are in the main file and lodash documentation.
+ */
+
 import assignIn from "lodash/assignIn";
 import attempt from "lodash/attempt";
 import chunk from "lodash/chunk";
@@ -49,24 +54,29 @@ import xorBy from "lodash/xorBy";
 import zip from "lodash/zip";
 import zipWith from "lodash/zipWith";
 
-/**
- * _.attempt
- */
-attempt(() => void 0);
-attempt(x => x);
-attempt(x => x, "first arg");
-attempt((x, y, z) => {}, null, {}, []);
+type ReadOnlyArray = $ReadOnlyArray<number>
+const readOnlyArray : ReadOnlyArray = [1, 2, 3, 4];
+
+type ReadOnlyObject = $ReadOnly<{ [string]: number, ... }>
+const readOnlyObject : ReadOnlyObject = { [1]: 1, [2]: 2 };
+
+// =====   Array   =====
 
 /**
  * _.chunk
  */
-chunk(([1, 2, 3, 4]: $ReadOnlyArray<number>), 2);
+chunk(readOnlyArray, 2);
 
 /**
- * _.countBy
+ * _.concat
  */
-countBy([6.1, 4.2, 6.3], Math.floor);
-countBy(["one", "two", "three"], "length");
+concat(readOnlyArray, readOnlyArray, readOnlyArray);
+// Copy pasted tests from iflow-lodash
+const nums: number[] = [1, 2, 3, 4, 5, 6];
+(concat(nums, "123", "456"): Array<number | string>);
+(concat(nums, ["123", "456"]): Array<number | string>);
+(concat(nums, [[1, 2, 3], "456"]): Array<number | string>);
+(concat(nums, [[1, 2, 3], "456"]): Array<mixed>);
 
 /**
  * _.difference
@@ -84,98 +94,21 @@ difference(
 /**
  * _.differenceBy
  */
-differenceBy(([2.1, 1.2]: $ReadOnlyArray<*>), [2.3, 3.4], Math.floor);
+differenceBy(([2.1, 1.2]: $ReadOnlyArray<number>), [2.3, 3.4], Math.floor);
 differenceBy([{ x: 2 }, { x: 1 }], [{ x: 1 }], "x");
-
+differenceBy(([2.1, 1.2]: $ReadOnlyArray<number>), [2.3, 3.4], Math.floor);
 type A = {| a: 1 |};
 type B = {| b: 1 |};
-function diffTest(a: $ReadOnlyArray<A>, b: $ReadOnlyArray<B>) {
-  differenceBy(a, b, (x: A | B) => {
-    return x.a || x.b;
-  });
-  differenceWith(a, b, (x: A, y: B) => {
-    return x.a === y.b;
-  });
-}
-
-/**
- * _.differenceBy
- */
-differenceBy(([2.1, 1.2]: $ReadOnlyArray<*>), [2.3, 3.4], Math.floor);
-
-/**
- * _.each
- */
-each(([1, 2]: $ReadOnlyArray<number>), (item: number) => false);
-
-/**
- * _.find
- */
-find([1, 2, 3], x => x * 1 == 3);
-find([1, 2, 3], x => x == 2, 1);
-// $ExpectError number cannot be compared to string
-find([1, 2, 3], x => x == "a");
-// $ExpectError number. This type is incompatible with function type.
-find([1, 2, 3], 1);
-// $ExpectError property `y`. Property not found in object literal
-find([{ x: 1 }, { x: 2 }, { x: 3 }], v => v.y == 3);
-find([{ x: 1 }, { x: 2 }, { x: 3 }], v => v.x == 3);
-find({ x: 1, y: 2 }, (a: number, b: string) => a);
-find({ x: 1, y: 2 }, { x: 3 });
-find((["a", "b"]: $ReadOnlyArray<string>), "c");
-// opaque types are allowed as keys of objects
-opaque type O = string;
-const v: { [O]: number, ... } = { x: 1, y: 2 };
-find(v, { x: 3 });
-
-/**
- * _.find examples from the official doc
- */
-var users = [
-  { user: "barney", age: 36, active: true },
-  { user: "fred", age: 40, active: false },
-  { user: "pebbles", age: 1, active: true }
-];
-
-find(users, function(o) {
-  return o.age < 40;
+differenceBy(([{ a: 1 }, { a: 1 }]: $ReadOnlyArray<A>), ([{ b: 1 }, { b: 1 }]: $ReadOnlyArray<B>), (x: A | B) => {
+  return x.a || x.b;
 });
 
-// The `_.matches` iteratee shorthand.
-find(users, { age: 1, active: true });
-
-// The `_.matchesProperty` iteratee shorthand.
-find(users, ["active", false]);
-
-// The `_.property` iteratee shorthand.
-find(users, "active");
-
 /**
- * _.forEach
+ * _.differenceWith
  */
-forEach(([1, 2]: $ReadOnlyArray<number>), (item: number) => false);
-
-/**
- * _.groupBy
- */
-var numbersGroupedByMathFloor = groupBy([6.1, 4.2, 6.3], Math.floor);
-if (numbersGroupedByMathFloor[6]) {
-  numbersGroupedByMathFloor[6][0] / numbersGroupedByMathFloor[6][1];
-}
-var stringsGroupedByLength = groupBy(["one", "two", "three"], "length");
-if (stringsGroupedByLength[3]) {
-  stringsGroupedByLength[3][0].toLowerCase();
-}
-var numbersObj: { [key: string]: number, ... } = { a: 6.1, b: 4.2, c: 6.3 };
-var numbersGroupedByMathFloor2 = groupBy(numbersObj, Math.floor);
-if (numbersGroupedByMathFloor2[6]) {
-  numbersGroupedByMathFloor2[6][0] / numbersGroupedByMathFloor2[6][1];
-}
-var stringObj: { [key: string]: string, ... } = { a: "one", b: "two", c: "three" };
-var stringsGroupedByLength2 = groupBy(stringObj, "length");
-if (stringsGroupedByLength2[3]) {
-  stringsGroupedByLength2[3][0].toLowerCase();
-}
+differenceWith(([{ a: 1 }, { a: 1 }]: $ReadOnlyArray<A>), ([{ b: 1 }, { b: 1 }]: $ReadOnlyArray<B>), (x: A, y: B) => {
+  return x.a === y.b;
+});
 
 /**
  * _.intersectionBy
@@ -184,126 +117,9 @@ intersectionBy([2.1, 1.2], [2.3, 3.4], Math.floor);
 intersectionBy([{ x: 1 }], [{ x: 2 }, { x: 1 }], "x");
 
 /**
- * _.get
- */
-
-// Object — examples from lodash docs
-var exampleObjectForGetTest = { a: [{ b: { c: 3 } }] };
-get(exampleObjectForGetTest, "a[0].b.c");
-get(exampleObjectForGetTest, ["a", "0", "b", "c"]);
-get(exampleObjectForGetTest, "a.b.c", "default");
-
-// Array — not documented, but _.get does support arrays
-get([1, 2, 3], "0");
-get([1, 2, 3], 0);
-get([1, 2, 3], [0]);
-get(["foo", "bar", "baz"], "[1]");
-get([{ a: "foo" }, { b: "bar" }, { c: "baz" }], "2");
-get([[1, 2], [3, 4], [5, 6], [7, 8]], "3");
-
-// Nil - it is safe to perform on nil root values, just like nil values along the "get" path
-get(null, "thing");
-get(undefined, "data");
-
-/**
- * _.keyBy
- */
-keyBy([{ dir: "left", code: 97 }, { dir: "right", code: 100 }], function(o) {
-  return String.fromCharCode(o.code);
-});
-keyBy([{ dir: "left", code: 97 }, { dir: "right", code: 100 }], "dir");
-
-// Example of keying a map of objects by a number type
-type KeyByTest$ByNumber<T: Object> = { [number]: T, ... };
-type KeyByTest$ByNumberMaybe<T: ?Object> = { [number]: T, ... };
-type KeyByTest$Record = { id: number, ... };
-var keyByTest_array: Array<KeyByTest$Record> = [
-  { id: 4 },
-  { id: 4 },
-  { id: 7 }
-];
-var keyByTest_map: KeyByTest$ByNumber<KeyByTest$Record> = {
-  [keyByTest_array[0].id]: keyByTest_array[0],
-  [keyByTest_array[1].id]: keyByTest_array[1],
-  [keyByTest_array[2].id]: keyByTest_array[2]
-};
-
-var keyByTest_map2: KeyByTest$ByNumberMaybe<KeyByTest$Record> = keyBy(
-  keyByTest_map,
-  "id"
-);
-
-/**
- * _.map examples from the official doc
- */
-function square(n) {
-  return n * n;
-}
-
-map([4, 8], square);
-map({ a: 4, b: 8 }, square);
-
-//accepts tuple types
-
-const tuple: [number, number] = [1, 2];
-map(tuple, val => val + 2);
-//$ExpectError cannot push to tuple
-map(tuple, (val, nothing, tupleArray) => tupleArray.push(123));
-
-var users = [{ user: "barney" }, { user: "fred" }];
-
-// The `_.property` iteratee shorthand.
-map(users, "user");
-
-/**
  * _.pullAllBy
  */
 pullAllBy([{ x: 1 }, { x: 2 }, { x: 3 }, { x: 1 }], [{ x: 1 }, { x: 3 }], "x");
-
-/**
- * _.unionBy
- */
-unionBy([2.1], [1.2, 2.3], Math.floor);
-unionBy([{ x: 1 }], [{ x: 2 }, { x: 1 }], "x");
-
-/**
- * _.uniqBy
- */
-uniqBy([2.1, 1.2, 2.3], Math.floor);
-uniqBy([{ x: 1 }, { x: 2 }, { x: 1 }], "x");
-
-/**
- * _.clone
- */
-clone({ a: 1 }).a == 1;
-// $ExpectError property `b`. Property not found in object literal
-clone({ a: 1 }).b == 1;
-// $ExpectError number. This type is incompatible with function type.
-clone({ a: 1 }).a == "c";
-
-/**
- * _.isEqual
- */
-isEqual("a", "b");
-isEqual({ x: 1 }, { y: 2 });
-
-// Flow considers this compatible with isEqual(a: any, b: any).
-// Reasonable people disagree about whether this should be considered a legal call.
-// See https://github.com/splodingsocks/FlowTyped/pull/1#issuecomment-149345275
-// and https://github.com/facebook/flow/issues/956
-isEqual(1);
-
-// $ExpectError function type expects no more than 2 arguments
-isEqual(1, 2, 3);
-
-/**
- * _.range
- */
-range(0, 10)[4] == 4;
-// $ExpectError string. This type is incompatible with number
-range(0, "a");
-// $ExpectError string cannot be compared to number
-range(0, 10)[4] == "a";
 
 /**
  * _.sortedIndexBy
@@ -334,14 +150,23 @@ sortedUniqBy([1.2, 2.1, 2.3], Math.floor);
 sortedUniqBy([{ x: 1 }, { x: 1 }, { x: 2 }], "x");
 
 /**
- * _.extend
+ * _.take / _.takeRight
  */
-extend({ a: 1 }, { b: 2 }).a;
-extend({ a: 1 }, { b: 2 }).b;
-// $ExpectError property `c`. Property not found in object literal
-extend({ a: 1 }, { b: 2 }).c;
-// $ExpectError property `c`. Poperty not found in object literal
-assignIn({ a: 1 }, { b: 2 }).c;
+var taken: string[];
+taken = take((["abc", "123"]: $ReadOnlyArray<string>), 3);
+taken = takeRight((["abc", "123"]: $ReadOnlyArray<string>));
+
+/**
+ * _.unionBy
+ */
+unionBy([2.1], [1.2, 2.3], Math.floor);
+unionBy([{ x: 1 }], [{ x: 2 }, { x: 1 }], "x");
+
+/**
+ * _.uniqBy
+ */
+uniqBy([2.1, 1.2, 2.3], Math.floor);
+uniqBy([{ x: 1 }, { x: 2 }, { x: 1 }], "x");
 
 /**
  * _.xorBy
@@ -371,13 +196,230 @@ zipWith(["a", "b", "c"], [1, 2, 3], (str: string, num) => ({ [str]: num }));
 // $ExpectError `x` should be a `string`, `y` a `number`
 zipWith(["a", "b", "c"], [1, 2, 3]).map(([x, y]) => x * y);
 
+
+
+// =====   Collection   =====
+
+/**
+ * _.countBy
+ */
+countBy([6.1, 4.2, 6.3], Math.floor);
+countBy(["one", "two", "three"], "length");
+
+/**
+ * _.each
+ */
+each(([1, 2]: $ReadOnlyArray<number>), (item: number) => false);
+each(readOnlyObject, (item: number) => false);
+
+/**
+ * _.find
+ */
+find([1, 2, 3], x => x * 1 == 3);
+find([1, 2, 3], x => x == 2, 1);
+// $ExpectError number cannot be compared to string
+find([1, 2, 3], x => x == "a");
+// $ExpectError number. This type is incompatible with function type.
+find([1, 2, 3], 1);
+// $ExpectError property `y`. Property not found in object literal
+find([{ x: 1 }, { x: 2 }, { x: 3 }], v => v.y == 3);
+find([{ x: 1 }, { x: 2 }, { x: 3 }], v => v.x == 3);
+find({ x: 1, y: 2 }, (a: number, b: string) => a);
+find({ x: 1, y: 2 }, { x: 3 });
+find((["a", "b"]: $ReadOnlyArray<string>), "c");
+// opaque types are allowed as keys of objects
+opaque type O = string;
+const v: { [O]: number, ... } = { x: 1, y: 2 };
+find(v, { x: 3 });
+
+(find([1, 2, 3], x => x == 1): void | number);
+// $ExpectError number. This type is incompatible with function type.
+(find([1, 2, 3], 1): void | number);
+
+// _.find examples from the official doc
+const users = [
+  { user: "barney", age: 36, active: true },
+  { user: "fred", age: 40, active: false },
+  { user: "pebbles", age: 1, active: true }
+];
+
+find(users, function(o) {
+  return o.age < 40;
+});
+
+// The `_.matches` iteratee shorthand.
+find(users, { age: 1, active: true });
+
+// The `_.matchesProperty` iteratee shorthand.
+find(users, ["active", false]);
+
+// The `_.property` iteratee shorthand.
+find(users, "active");
+
+/**
+ * _.flatMap
+ */
+// this arrow function needs a type annotation due to a bug in flow: https://github.com/facebook/flow/issues/1948
+flatMap([1, 2, 3], (n): number[] => [n, n]);
+flatMap({ a: 1, b: 2 }, n => [n, n]);
+
+/**
+ * _.forEach
+ */
+forEach(([1, 2]: $ReadOnlyArray<number>), (item: number) => false);
+
+/**
+ * _.groupBy
+ */
+const numbersGroupedByMathFloor = groupBy([6.1, 4.2, 6.3], Math.floor);
+if (numbersGroupedByMathFloor[6]) {
+  numbersGroupedByMathFloor[6][0] / numbersGroupedByMathFloor[6][1];
+}
+const stringsGroupedByLength = groupBy(["one", "two", "three"], "length");
+if (stringsGroupedByLength[3]) {
+  stringsGroupedByLength[3][0].toLowerCase();
+}
+const numbersObj: { [key: string]: number, ... } = { a: 6.1, b: 4.2, c: 6.3 };
+const numbersGroupedByMathFloor2 = groupBy(numbersObj, Math.floor);
+if (numbersGroupedByMathFloor2[6]) {
+  numbersGroupedByMathFloor2[6][0] / numbersGroupedByMathFloor2[6][1];
+}
+const stringObj: { [key: string]: string, ... } = { a: "one", b: "two", c: "three" };
+const stringsGroupedByLength2 = groupBy(stringObj, "length");
+if (stringsGroupedByLength2[3]) {
+  stringsGroupedByLength2[3][0].toLowerCase();
+}
+
+/**
+ * _.keyBy
+ */
+keyBy([{ dir: "left", code: 97 }, { dir: "right", code: 100 }], function(o) {
+  return String.fromCharCode(o.code);
+});
+keyBy([{ dir: "left", code: 97 }, { dir: "right", code: 100 }], "dir");
+
+// Example of keying a map of objects by a number type
+type KeyByTest$ByNumber<T: Object> = { [number]: T, ... };
+type KeyByTest$ByNumberMaybe<T: ?Object> = { [number]: T, ... };
+type KeyByTest$Record = { id: number, ... };
+const keyByTest_array: Array<KeyByTest$Record> = [
+  { id: 4 },
+  { id: 4 },
+  { id: 7 }
+];
+const keyByTest_map: KeyByTest$ByNumber<KeyByTest$Record> = {
+  [keyByTest_array[0].id]: keyByTest_array[0],
+  [keyByTest_array[1].id]: keyByTest_array[1],
+  [keyByTest_array[2].id]: keyByTest_array[2]
+};
+(keyBy(keyByTest_map, "id"): KeyByTest$ByNumberMaybe<KeyByTest$Record>);
+
+/**
+ * _.map examples from the official doc
+ */
+function square(n) {
+  return n * n;
+}
+
+map([4, 8], square);
+map({ a: 4, b: 8 }, square);
+
+//accepts tuple types
+
+const tuple: [number, number] = [1, 2];
+map(tuple, val => val + 2);
+//$ExpectError cannot push to tuple
+map(tuple, (val, nothing, tupleArray) => tupleArray.push(123));
+
+// The `_.property` iteratee shorthand.
+map([{ user: "barney" }, { user: "fred" }], "user");
+
+// Array#map, lodash.map, lodash#map
+(nums.map(num => num * num): number[]);
+(map(nums, num => num * num): number[]);
+
+// return type of iterator is reflected in result and chain
+(nums.map(num => JSON.stringify(num)): string[]);
+(map(nums, num => JSON.stringify(num)): string[]);
+
+/**
+ * _.orderBy
+ */
+(orderBy([{a: 1, b: 2}, {a: 2, b: 1}, {a: 3, b: 0}], ['a']): Array<{
+  a: number,
+  b: number,
+  ...
+}>);
+(orderBy([{a: 1, b: 2}, {a: 2, b: 1}, {a: 3, b: 0}], [x => x.a]): Array<{
+  a: number,
+  b: number,
+  ...
+}>);
+(orderBy({[0]: {a: 1, b: 2}, [2]: {a: 2, b: 1}, [1]: {a: 3, b: 0}}, ['a']): Array<{
+  a: number,
+  b: number,
+  ...
+}>);
+(orderBy({[0]: {a: 1, b: 2}, [2]: {a: 2, b: 1}, [1]: {a: 3, b: 0}}, [x => x.a]): Array<{
+  a: number,
+  b: number,
+  ...
+}>);
+
+// =====   Date   =====
+
+
+
+// =====   Function   =====
+
+/**
+ * _.debounce
+ */
+var debounced = debounce((a: number) => "foo");
+debounced(1);
+debounced.cancel();
+debounced.flush();
+// $ExpectError string is incompatible with number
+debounced("a");
+
+/**
+ * _.memoize
+ */
+var memoized: (a: number) => string = memoize((a: number) => "foo");
+// $ExpectError memoize retains type information
+memoized = memoize(() => {});
+
+// =====   Lang   =====
+
+/**
+ * _.clone
+ */
+clone({ a: 1 }).a == 1;
+// $ExpectError property `b`. Property not found in object literal
+clone({ a: 1 }).b == 1;
+// $ExpectError number. This type is incompatible with function type.
+clone({ a: 1 }).a == "c";
+
+/**
+ * _.isEqual
+ */
+isEqual("a", "b");
+isEqual({ x: 1 }, { y: 2 });
+
+// Flow considers this compatible with isEqual(a: any, b: any).
+// Reasonable people disagree about whether this should be considered a legal call.
+// See https://github.com/splodingsocks/FlowTyped/pull/1#issuecomment-149345275
+// and https://github.com/facebook/flow/issues/956
+isEqual(1);
+
+// $ExpectError function type expects no more than 2 arguments
+isEqual(1, 2, 3);
+
 /**
  * _.isString
  */
-
 var boolTrue: true;
 var boolFalse: false;
-
 boolTrue = isString("foo");
 boolFalse = isString([""]);
 boolFalse = isString({});
@@ -394,130 +436,65 @@ boolFalse = isString("");
 boolTrue = isString(undefined);
 
 /**
- * _.find
+ * _.conformsTo
  */
-(find([1, 2, 3], x => x == 1): void | number);
-// $ExpectError number. This type is incompatible with function type.
-(find([1, 2, 3], 1): void | number);
-
-// Copy pasted tests from iflow-lodash
-var nums: number[] = [1, 2, 3, 4, 5, 6];
-var num: number;
-var string: string;
-var bool: boolean;
-
-var nativeSquares: number[];
-var directSquares: number[];
-
-var nativeStrings: string[];
-var directStrings: string[];
-
-var allNums: number[];
-var numsAndStrList: Array<number | string>;
-var mixedList: Array<mixed>;
-allNums = concat(nums, nums, nums);
-numsAndStrList = concat(nums, "123", "456");
-numsAndStrList = concat(nums, ["123", "456"]);
-numsAndStrList = concat(nums, [[1, 2, 3], "456"]);
-mixedList = concat(nums, [[1, 2, 3], "456"]);
-
-// Array#map, lodash.map, lodash#map
-nativeSquares = nums.map(function(num) {
-  return num * num;
-});
-directSquares = map(nums, function(num) {
-  return num * num;
-});
-
-num = first(nums);
-
-// return type of iterator is reflected in result and chain
-nativeStrings = nums.map(function(num) {
-  return JSON.stringify(num);
-});
-directStrings = map(nums, function(num) {
-  return JSON.stringify(num);
-});
-
-var obj = { a: 1, b: 2 };
-bool = conformsTo(obj, {
+(conformsTo({ a: 1, b: 2 }, {
   a: function(x: number) {
     return true;
   }
-});
+}): boolean);
 
-num = defaultTo(undefined, 2);
-string = defaultTo(undefined, "str");
-bool = defaultTo(true, "str");
-string = defaultTo("str", true);
 
-num = tap(1, function(n) {
-  return false;
-});
-bool = thru(1, function(n) {
-  return false;
-});
 
-var timesNums: number[];
 
-timesNums = times(5);
-// $ExpectError string. This type is incompatible with number
-var strings: string[] = times(5);
-timesNums = times(5, function(i: number) {
-  return i + 1;
-});
-// $ExpectError string. This type is incompatible with number
-timesNums = times(5, function(i: number) {
-  return JSON.stringify(i);
-});
+// =====   Math   =====
 
-// lodash.flatMap for collections and objects
-// this arrow function needs a type annotation due to a bug in flow
-// https://github.com/facebook/flow/issues/1948
-flatMap([1, 2, 3], (n): number[] => [n, n]);
-flatMap({ a: 1, b: 2 }, n => [n, n]);
+
+
+// =====   Number   =====
+
+
+
+// =====   Object   =====
 
 /**
- * _.noop
+ * _.extend
  */
-noop();
-noop(1);
-noop("a", 2, [], null);
-(noop: string => void);
-(noop: (number, string) => void);
-// $ExpectError functions are contravariant in return types
-(noop: string => string);
+extend({ a: 1 }, { b: 2 }).a;
+extend({ a: 1 }, { b: 2 }).b;
+// $ExpectError property `c`. Property not found in object literal
+extend({ a: 1 }, { b: 2 }).c;
+// $ExpectError property `c`. Poperty not found in object literal
+assignIn({ a: 1 }, { b: 2 }).c;
 
 /**
- * _.memoize
+ * _.get
  */
-var memoized: (a: number) => string = memoize((a: number) => "foo");
-// $ExpectError memoize retains type information
-memoized = memoize(() => {});
+// Object — examples from lodash docs
+var exampleObjectForGetTest = { a: [{ b: { c: 3 } }] };
+get(exampleObjectForGetTest, "a[0].b.c");
+get(exampleObjectForGetTest, ["a", "0", "b", "c"]);
+get(exampleObjectForGetTest, "a.b.c", "default");
+
+// Array — not documented, but _.get does support arrays
+get([1, 2, 3], "0");
+get([1, 2, 3], 0);
+get([1, 2, 3], [0]);
+get(["foo", "bar", "baz"], "[1]");
+get([{ a: "foo" }, { b: "bar" }, { c: "baz" }], "2");
+get([[1, 2], [3, 4], [5, 6], [7, 8]], "3");
+
+// Nil - it is safe to perform on nil root values, just like nil values along the "get" path
+get(null, "thing");
+get(undefined, "data");
 
 /**
- * _.debounce
+ * _.omitBy
  */
-var debounced = debounce((a: number) => "foo");
-debounced(1);
-debounced.cancel();
-debounced.flush();
-// $ExpectError string is incompatible with number
-debounced("a");
-
-/**
- * _.toPairs / _.toPairsIn
- */
-var pairs: [string, number][];
-pairs = toPairs({ a: 12, b: 100 });
-pairs = toPairsIn({ a: 12, b: 100 });
-
-/**
- * _.take / _.takeRight
- */
-var taken: string[];
-taken = take((["abc", "123"]: $ReadOnlyArray<string>), 3);
-taken = takeRight((["abc", "123"]: $ReadOnlyArray<string>));
+(omitBy({ a: 2, b: 3, c: 4 }, num => num % 2): { [prop: string]: number, ... });
+(omitBy(null, num => num % 2): {...});
+(omitBy(undefined, num => num % 2): {...});
+(omitBy({ [1]: 1, [2]: 2 }, num => num === 2): { [prop: number]: number, ... });
 
 /**
  * _.pick
@@ -537,36 +514,82 @@ pick({ a: 2 }, 1);
 (pickBy(null, num => num % 2): {...});
 (pickBy(undefined, num => num % 2): {...});
 (pickBy({ [1]: 1, [2]: 2 }, num => num === 2): { [prop: number]: number, ... });
+(pickBy(readOnlyObject, num => num === 2): { [prop: number]: number, ... });
 
 /**
- * _.omitBy
+ * _.toPairs / _.toPairsIn
  */
-(omitBy({ a: 2, b: 3, c: 4 }, num => num % 2): { [prop: string]: number, ... });
-(omitBy(null, num => num % 2): {...});
-(omitBy(undefined, num => num % 2): {...});
-(omitBy({ [1]: 1, [2]: 2 }, num => num === 2): { [prop: number]: number, ... });
+var pairs: [string, number][];
+pairs = toPairs({ a: 12, b: 100 });
+pairs = toPairsIn({ a: 12, b: 100 });
+
+
+// =====   Seq   =====
 
 /**
- * _.orderBy
+ * _.tap
  */
-(orderBy([{a: 1, b: 2}, {a: 2, b: 1}, {a: 3, b: 0}], ['a']): Array<{
- a: number,
- b: number,
- ...
-}>);
-(orderBy([{a: 1, b: 2}, {a: 2, b: 1}, {a: 3, b: 0}], [x => x.a]): Array<{
- a: number,
- b: number,
- ...
-}>);
-(orderBy({[0]: {a: 1, b: 2}, [2]: {a: 2, b: 1}, [1]: {a: 3, b: 0}}, ['a']): Array<{
- a: number,
- b: number,
- ...
-}>);
-(orderBy({[0]: {a: 1, b: 2}, [2]: {a: 2, b: 1}, [1]: {a: 3, b: 0}}, [x => x.a]): Array<{
- a: number,
- b: number,
- ...
-}>);
+(tap(1, n => false): number);
+
+/**
+ * _.thru
+ */
+(thru(1, n => false): boolean);
+
+// =====   String   =====
+
+
+
+// =====   Util   =====
+
+/**
+   * _.attempt
+ */
+attempt(() => void 0);
+attempt(x => x);
+attempt(x => x, "first arg");
+attempt((x, y, z) => {}, null, {}, []);
+
+/**
+ * _.defaultTo
+ */
+(defaultTo(undefined, 2): number);
+(defaultTo(undefined, "str"): string);
+(defaultTo(true, "str"): boolean);
+(defaultTo("str", true): string);
+
+/**
+ * _.noop
+ */
+noop();
+noop(1);
+noop("a", 2, [], null);
+(noop: string => void);
+(noop: (number, string) => void);
+// $ExpectError functions are contravariant in return types
+(noop: string => string);
+
+/**
+ * _.range
+ */
+range(0, 10)[4] == 4;
+// $ExpectError string. This type is incompatible with number
+range(0, "a");
+// $ExpectError string cannot be compared to number
+range(0, 10)[4] == "a";
+
+/**
+ * _.times
+ */
+var timesNums: number[];
+timesNums = times(5);
+// $ExpectError string. This type is incompatible with number
+(times(5): string[]);
+timesNums = times(5, function(i: number) {
+  return i + 1;
+});
+// $ExpectError string. This type is incompatible with number
+timesNums = times(5, function(i: number) {
+  return JSON.stringify(i);
+});
 
