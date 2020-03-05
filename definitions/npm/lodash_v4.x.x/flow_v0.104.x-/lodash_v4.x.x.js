@@ -206,10 +206,6 @@ declare module "lodash" {
     | string;
   declare type Comparator<T> = (item: T, item2: T) => boolean;
 
-  declare type MapIterator<T, U> =
-    | ((item: T, index: number, array: Array<T>) => U)
-    | propertyIterateeShorthand;
-
   declare type ReadOnlyMapIterator<T, U> =
     | ((item: T, index: number, array: $ReadOnlyArray<T>) => U)
     | propertyIterateeShorthand;
@@ -659,10 +655,9 @@ declare module "lodash" {
       object: T,
       iteratee?: ?ValueOnlyIteratee<A>
     ): { [key: V]: A, ... };
-    map<T, U>(array?: ?Array<T>, iteratee?: ?MapIterator<T, U>): Array<U>;
     map<T, U>(
-      array: ?$ReadOnlyArray<T>,
-      iteratee?: ReadOnlyMapIterator<T, U>
+      array?: ?$ReadOnlyArray<T>,
+      iteratee?: ?ReadOnlyMapIterator<T, U>
     ): Array<U>;
     map<V, T: Object, U>(
       object: ?T,
