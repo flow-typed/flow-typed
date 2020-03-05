@@ -21,10 +21,10 @@ describe('@reach/tooltip', () => {
     });
   
     it('accepts string ariaLabel property', function () {
-        <Tooltip ariaLabel="portal-node">foo</Tooltip>;
+        <Tooltip label="foo" ariaLabel="portal-node">foo</Tooltip>;
         // $ExpectError
-        <Tooltip ariaLabel={1}>foo</Tooltip>;
+        <Tooltip label="foo" ariaLabel={1}>foo</Tooltip>;
         // $ExpectError
-        <Tooltip ariaLabel={{}}>foo</Tooltip>;
+        <Tooltip label="foo" ariaLabel={{}}>foo</Tooltip>;
     });
 });
