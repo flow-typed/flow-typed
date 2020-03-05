@@ -234,12 +234,12 @@ declare module "lodash" {
       array?: ?$ReadOnlyArray<T>,
       values?: ?$ReadOnlyArray<U>,
       iteratee?: ?ValueOnlyIteratee<T | U>
-    ): T[];
+    ): Array<T>;
     differenceWith<T, U>(
       array?: ?$ReadOnlyArray<T>,
       values?: ?$ReadOnlyArray<U>,
       comparator?: ?(item: T, item2: U) => boolean
-    ): T[];
+    ): Array<T>;
     drop<T>(array?: ?Array<T>, n?: ?number): Array<T>;
     dropRight<T>(array?: ?Array<T>, n?: ?number): Array<T>;
     dropRightWhile<T>(array?: ?Array<T>, predicate?: ?Predicate<T>): Array<T>;
@@ -273,8 +273,8 @@ declare module "lodash" {
     // alias of _.head
     first<T>(array: ?$ReadOnlyArray<T>): T;
     flatten<T, X>(array?: ?$ReadOnlyArray<$ReadOnlyArray<T> | X>): Array<T | X>;
-    flattenDeep<T>(array?: ?(any[])): Array<T>;
-    flattenDepth(array?: ?(any[]), depth?: ?number): any[];
+    flattenDeep<T>(array?: ?(Array<any>)): Array<T>;
+    flattenDepth(array?: ?(Array<any>), depth?: ?number): Array<any>;
     fromPairs<A, B>(pairs?: ?$ReadOnlyArray<[A, B]>): {| [key: A]: B |};
     head<T>(array: ?$ReadOnlyArray<T>): T;
     indexOf<T>(array: Array<T>, value: T, fromIndex?: number): number;
@@ -332,7 +332,7 @@ declare module "lodash" {
     last<T>(array: ?$ReadOnlyArray<T>): T;
     lastIndexOf<T>(array: Array<T>, value?: ?T, fromIndex?: ?number): number;
     lastIndexOf<T>(array: void | null, value?: ?T, fromIndex?: ?number): -1;
-    nth<T>(array: T[], n?: ?number): T;
+    nth<T>(array: Array<T>, n?: ?number): T;
     nth(array: void | null, n?: ?number): void;
     pull<T>(array: Array<T>, ...values?: $ReadOnlyArray<?T>): Array<T>;
     pull<T: void | null>(array: T, ...values?: $ReadOnlyArray<?any>): T;
@@ -353,7 +353,7 @@ declare module "lodash" {
       values?: ?$ReadOnlyArray<any>,
       comparator?: ?Function
     ): T;
-    pullAllWith<T>(array: T[], values?: ?(T[]), comparator?: ?Function): T[];
+    pullAllWith<T>(array: Array<T>, values?: ?(Array<T>), comparator?: ?Function): Array<T>;
     pullAt<T>(array?: ?Array<T>, ...indexed?: Array<?number>): Array<T>;
     pullAt<T>(array?: ?Array<T>, indexed?: ?Array<number>): Array<T>;
     remove<T>(array?: ?Array<T>, predicate?: ?Predicate<T>): Array<T>;
@@ -506,7 +506,7 @@ declare module "lodash" {
 
     zipObject<K, V>(props: Array<K>, values?: ?Array<V>): { [key: K]: V, ... };
     zipObject<K, V>(props: void | null, values?: ?Array<V>): {...};
-    zipObjectDeep(props: any[], values?: ?any): Object;
+    zipObjectDeep(props: Array<any>, values?: ?any): Object;
     zipObjectDeep(props: void | null, values?: ?any): {...};
 
     zipWith<A>(a1?: ?Array<A>): Array<[A]>;
@@ -787,41 +787,41 @@ declare module "lodash" {
     after(n: number, fn: Function): Function;
     ary(func: Function, n?: number): Function;
     before(n: number, fn: Function): Function;
-    bind<F:(...any[]) => any>(func: F, thisArg: any, ...partials: Array<any>): F;
+    bind<F:(...Array<any>) => any>(func: F, thisArg: any, ...partials: Array<any>): F;
     bindKey(obj?: ?Object, key?: ?string, ...partials?: Array<?any>): Function;
     curry: Curry;
     curry(func: Function, arity?: number): Function;
     curryRight(func: Function, arity?: number): Function;
-    debounce<F: (...any[]) => any>(
+    debounce<F: (...Array<any>) => any>(
       func: F,
       wait?: number,
       options?: DebounceOptions
     ): F & Cancelable;
-    defer(func: (...any[]) => any, ...args?: Array<any>): TimeoutID;
+    defer(func: (...Array<any>) => any, ...args?: Array<any>): TimeoutID;
     delay(func: Function, wait: number, ...args?: Array<any>): TimeoutID;
-    flip<R>(func: (...any[]) => R): (...any[]) => R;
+    flip<R>(func: (...Array<any>) => R): (...Array<any>) => R;
     memoize<A, R>(func: (...A) => R, resolver?: (...A) => any): (...A) => R;
     negate<A, R>(predicate: (...A) => R): (...A) => boolean;
-    once<F: (...any[]) => any>(func: F): F;
+    once<F: (...Array<any>) => any>(func: F): F;
     overArgs(func?: ?Function, ...transforms?: Array<Function>): Function;
     overArgs(func?: ?Function, transforms?: ?Array<Function>): Function;
-    partial<R>(func: (...any[]) => R, ...partials: any[]): (...any[]) => R;
-    partialRight<R>(func: (...any[]) => R, ...partials: Array<any>): (...any[]) => R;
-    partialRight<R>(func: (...any[]) => R, partials: Array<any>): (...any[]) => R;
+    partial<R>(func: (...Array<any>) => R, ...partials: Array<any>): (...Array<any>) => R;
+    partialRight<R>(func: (...Array<any>) => R, ...partials: Array<any>): (...Array<any>) => R;
+    partialRight<R>(func: (...Array<any>) => R, partials: Array<any>): (...Array<any>) => R;
     rearg(func: Function, ...indexes: Array<number>): Function;
     rearg(func: Function, indexes: Array<number>): Function;
     rest(func: Function, start?: number): Function;
     spread(func: Function): Function;
-    throttle<F: (...any[]) => any>(
+    throttle<F: (...Array<any>) => any>(
       func: F,
       wait?: number,
       options?: ThrottleOptions
     ): F & Cancelable;
-    unary<F: (...any[]) => any>(func: F): F;
+    unary<F: (...Array<any>) => any>(func: F): F;
     wrap(value?: any, wrapper?: ?Function): Function;
 
     // Lang
-    castArray(value: *): any[];
+    castArray(value: *): Array<any>;
     clone<T>(value: T): T;
     cloneDeep<T>(value: T): T;
     cloneDeepWith<T, U>(
@@ -1675,34 +1675,34 @@ declare module "lodash/fp" {
       base: A,
       elements: B
     ): Array<T | U>;
-    difference<T>(values: $ReadOnlyArray<T>): (array: $ReadOnlyArray<T>) => T[];
-    difference<T>(values: $ReadOnlyArray<T>, array: $ReadOnlyArray<T>): T[];
+    difference<T>(values: $ReadOnlyArray<T>): (array: $ReadOnlyArray<T>) => Array<T>;
+    difference<T>(values: $ReadOnlyArray<T>, array: $ReadOnlyArray<T>): Array<T>;
     differenceBy<T>(
       iteratee: ValueOnlyIteratee<T>
-    ): ((values: $ReadOnlyArray<T>) => (array: $ReadOnlyArray<T>) => T[]) &
-      ((values: $ReadOnlyArray<T>, array: $ReadOnlyArray<T>) => T[]);
+    ): ((values: $ReadOnlyArray<T>) => (array: $ReadOnlyArray<T>) => Array<T>) &
+      ((values: $ReadOnlyArray<T>, array: $ReadOnlyArray<T>) => Array<T>);
     differenceBy<T>(
       iteratee: ValueOnlyIteratee<T>,
       values: $ReadOnlyArray<T>
-    ): (array: $ReadOnlyArray<T>) => T[];
+    ): (array: $ReadOnlyArray<T>) => Array<T>;
     differenceBy<T>(
       iteratee: ValueOnlyIteratee<T>,
       values: $ReadOnlyArray<T>,
       array: $ReadOnlyArray<T>
-    ): T[];
+    ): Array<T>;
     differenceWith<T>(
       comparator: Comparator<T>
-    ): ((first: $ReadOnly<T>) => (second: $ReadOnly<T>) => T[]) &
-      ((first: $ReadOnly<T>, second: $ReadOnly<T>) => T[]);
+    ): ((first: $ReadOnly<T>) => (second: $ReadOnly<T>) => Array<T>) &
+      ((first: $ReadOnly<T>, second: $ReadOnly<T>) => Array<T>);
     differenceWith<T>(
       comparator: Comparator<T>,
       first: $ReadOnly<T>
-    ): (second: $ReadOnly<T>) => T[];
+    ): (second: $ReadOnly<T>) => Array<T>;
     differenceWith<T>(
       comparator: Comparator<T>,
       first: $ReadOnly<T>,
       second: $ReadOnly<T>
-    ): T[];
+    ): Array<T>;
     drop<T>(n: number): (array: Array<T>) => Array<T>;
     drop<T>(n: number, array: Array<T>): Array<T>;
     dropLast<T>(n: number): (array: Array<T>) => Array<T>;
@@ -1775,9 +1775,9 @@ declare module "lodash/fp" {
     first<T>(array: $ReadOnlyArray<T>): T;
     flatten<T, X>(array: Array<Array<T> | X>): Array<T | X>;
     unnest<T, X>(array: Array<Array<T> | X>): Array<T | X>;
-    flattenDeep<T>(array: any[]): Array<T>;
-    flattenDepth(depth: number): (array: any[]) => any[];
-    flattenDepth(depth: number, array: any[]): any[];
+    flattenDeep<T>(array: Array<any>): Array<T>;
+    flattenDepth(depth: number): (array: Array<any>) => Array<any>;
+    flattenDepth(depth: number, array: Array<any>): Array<any>;
     fromPairs<A, B>(pairs: $ReadOnlyArray<[A, B]>): {| [key: A]: B |};
     head<T>(array: $ReadOnlyArray<T>): T;
     indexOf<T>(value: T): (array: Array<T>) => number;
@@ -1832,8 +1832,8 @@ declare module "lodash/fp" {
       fromIndex: number
     ): (array: Array<T>) => number;
     lastIndexOfFrom<T>(value: T, fromIndex: number, array: Array<T>): number;
-    nth<T>(n: number): (array: T[]) => T;
-    nth<T>(n: number, array: T[]): T;
+    nth<T>(n: number): (array: Array<T>) => T;
+    nth<T>(n: number, array: Array<T>): T;
     pull<T>(value: T): (array: Array<T>) => Array<T>;
     pull<T>(value: T, array: Array<T>): Array<T>;
     pullAll<T>(values: $ReadOnlyArray<T>): (array: Array<T>) => Array<T>;
@@ -1853,10 +1853,10 @@ declare module "lodash/fp" {
     ): Array<T>;
     pullAllWith<T>(
       comparator: Function
-    ): ((values: T[]) => (array: T[]) => T[]) &
-      ((values: T[], array: T[]) => T[]);
-    pullAllWith<T>(comparator: Function, values: T[]): (array: T[]) => T[];
-    pullAllWith<T>(comparator: Function, values: T[], array: T[]): T[];
+    ): ((values: Array<T>) => (array: Array<T>) => Array<T>) &
+      ((values: Array<T>, array: Array<T>) => Array<T>);
+    pullAllWith<T>(comparator: Function, values: Array<T>): (array: Array<T>) => Array<T>;
+    pullAllWith<T>(comparator: Function, values: Array<T>, array: Array<T>): Array<T>;
     pullAt<T>(indexed: Array<number>): (array: Array<T>) => Array<T>;
     pullAt<T>(indexed: Array<number>, array: Array<T>): Array<T>;
     remove<T>(predicate: Predicate<T>): (array: Array<T>) => Array<T>;
@@ -2007,15 +2007,15 @@ declare module "lodash/fp" {
       a1: Array<T>,
       a2: Array<T>
     ): Array<T>;
-    zip<A, B>(a1: A[]): (a2: B[]) => Array<[A, B]>;
-    zip<A, B>(a1: A[], a2: B[]): Array<[A, B]>;
+    zip<A, B>(a1: Array<A>): (a2: Array<B>) => Array<[A, B]>;
+    zip<A, B>(a1: Array<A>, a2: Array<B>): Array<[A, B]>;
     zipAll(arrays: Array<Array<any>>): Array<any>;
     zipObject<K, V>(props?: Array<K>): (values?: Array<V>) => { [key: K]: V, ... };
     zipObject<K, V>(props?: Array<K>, values?: Array<V>): { [key: K]: V, ... };
     zipObj(props: Array<any>): (values: Array<any>) => Object;
     zipObj(props: Array<any>, values: Array<any>): Object;
-    zipObjectDeep(props: any[]): (values: any) => Object;
-    zipObjectDeep(props: any[], values: any): Object;
+    zipObjectDeep(props: Array<any>): (values: any) => Object;
+    zipObjectDeep(props: Array<any>, values: any): Object;
     zipWith<T>(
       iteratee: Iteratee<T>
     ): ((a1: NestedArray<T>) => (a2: NestedArray<T>) => Array<T>) &
@@ -2372,7 +2372,7 @@ declare module "lodash/fp" {
     curryRightN(arity: number, func: Function): Function;
     debounce(wait: number): <A, R>(func: (...A) => R) => (...A) => R;
     debounce<A, R>(wait: number, func: (...A) => R): (...A) => R;
-    defer(func: (...any[]) => any): TimeoutID;
+    defer(func: (...Array<any>) => any): TimeoutID;
     delay(wait: number): (func: Function) => TimeoutID;
     delay(wait: number, func: Function): TimeoutID;
     flip(func: Function): Function;
@@ -2384,8 +2384,8 @@ declare module "lodash/fp" {
     overArgs(func: Function, transforms: Array<Function>): Function;
     useWith(func: Function): (transforms: Array<Function>) => Function;
     useWith(func: Function, transforms: Array<Function>): Function;
-    partial(func: Function): (partials: any[]) => Function;
-    partial(func: Function, partials: any[]): Function;
+    partial(func: Function): (partials: Array<any>) => Function;
+    partial(func: Function, partials: Array<any>): Function;
     partialRight(func: Function): (partials: Array<any>) => Function;
     partialRight(func: Function, partials: Array<any>): Function;
     rearg(indexes: Array<number>): (func: Function) => Function;
@@ -2400,12 +2400,12 @@ declare module "lodash/fp" {
     spreadFrom(start: number, func: Function): Function;
     throttle<A, R>(wait: number): (func: (...A) => R) => (...A) => R;
     throttle<A, R>(wait: number, func: (...A) => R): (...A) => R;
-    unary<T, R>(func: (T, ...any[]) => R): (T) => R;
+    unary<T, R>(func: (T, ...Array<any>) => R): (T) => R;
     wrap(wrapper: Function): (value: any) => Function;
     wrap(wrapper: Function, value: any): Function;
 
     // Lang
-    castArray(value: *): any[];
+    castArray(value: *): Array<any>;
     clone<T>(value: T): T;
     cloneDeep<T>(value: T): T;
     cloneDeepWith<T, U>(
