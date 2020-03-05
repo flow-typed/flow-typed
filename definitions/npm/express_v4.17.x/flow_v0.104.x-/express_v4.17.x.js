@@ -198,7 +198,7 @@ declare class express$Route<
 declare type express$RouterUseable<Req: express$Request, Res: express$Response> =
   | express$Middleware<Req, Res>
   | express$Router<Req, Res>
-  | $ReadOnlyArray<express$Path | express$Middleware<Req, Res> | express$Router<Req, Res>>;
+  | $ReadOnlyArray<express$Middleware<Req, Res> | express$Router<Req, Res>>;
 
 declare class express$Router<
   Req: express$Request = express$Request,
