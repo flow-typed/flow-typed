@@ -8,6 +8,7 @@ import assignIn from "lodash/assignIn";
 import attempt from "lodash/attempt";
 import chunk from "lodash/chunk";
 import clone from "lodash/clone";
+import compact from "lodash/compact";
 import concat from "lodash/concat";
 import conformsTo from "lodash/conformsTo";
 import countBy from "lodash/countBy";
