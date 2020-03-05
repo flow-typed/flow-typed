@@ -37,6 +37,14 @@ describe('@sentry/browser', () => {
       Sentry.setExtra(null, 'foo');
     });
 
+    it('Sentry.setExtras', () => {
+      const narrowerType: { [string]: string, ... } = { narrower: 'type' };
+      Sentry.setExtras(narrowerType);
+
+      // $ExpectError
+      Sentry.setExtras(null);
+    });
+
     it('Sentry.setUser', () => {
       Sentry.setUser({ email: 'john.doe@example.com' });
       Sentry.setUser({ email: 'john.doe@example.com', arbitrary: 'value' });

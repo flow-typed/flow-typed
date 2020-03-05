@@ -31,8 +31,8 @@ declare module '@sentry/browser' {
         setUser(user: User | null): void;
         setTags(tags: { [key: string]: string, ... }): void;
         setTag(key: string, value: string): void;
-        setExtra(key: string, extra: mixed): void;
-        setExtras(extras: { [key: string]: mixed, ... }): void;
+        setExtra(key: string, extra: any): void;
+        setExtras(extras: { [key: string]: any, ... }): void;
         setContext(name: string, context: { [key: string]: mixed, ... } | null): void;
         configureScope(callback: (scope: Scope) => void): void;
         run(callback: (hub: Hub) => void): void;
@@ -46,8 +46,8 @@ declare module '@sentry/browser' {
         setUser(user: User | null): void;
         setTags(tags: {| [key: string]: string |}): void;
         setTag(key: string, value: string): void;
-        setExtras(extras: {| [key: string]: string |}): void;
-        setExtra(key: string, extra: mixed): void;
+        setExtras(extras: { [key: string]: any, ... }): void;
+        setExtra(key: string, extra: any): void;
         setFingerprint(fingerprint: $ReadOnlyArray<string>): void;
         setLevel(level: $Values<typeof Severity>): void;
         setTransaction(transaction?: string): void;
@@ -62,8 +62,8 @@ declare module '@sentry/browser' {
         name: string,
         context: {| [key: string]: mixed |} | null,
     ): void;
-    declare export function setExtra(key: string, extra: mixed): void;
-    declare export function setExtras(extras: {| [key: string]: mixed |}): void;
+    declare export function setExtra(key: string, extra: any): void;
+    declare export function setExtras(extras: { [key: string]: any, ... }): void;
     declare export function setTag(key: string, value: string): void;
     declare export function setTags(tags: {| [key: string]: string |}): void;
     declare export function setUser(user: User): void;
@@ -300,7 +300,7 @@ declare module '@sentry/browser' {
         +breadcrumbs?: $ReadOnlyArray<Breadcrumb>,
         +contexts?: {| [key: string]: { ... } |},
         +tags?: {| [key: string]: string |},
-        +extra?: {| [key: string]: mixed |},
+        +extra?: {| [key: string]: any |},
         +user?: User,
         +type?: EventType,
         +spans?: $ReadOnlyArray<Span>,
