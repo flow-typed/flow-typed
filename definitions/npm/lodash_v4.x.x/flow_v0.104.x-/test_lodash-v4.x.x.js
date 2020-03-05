@@ -63,7 +63,6 @@ type ReadOnlyObject = $ReadOnly<{ [string]: number, ... }>
 const readOnlyObject : ReadOnlyObject = { [1]: 1, [2]: 2 };
 
 describe('Array', () => {
-
   it('chunk', () => {
     chunk(readOnlyArray, 2);
   });
@@ -113,6 +112,10 @@ describe('Array', () => {
     });
   });
 
+  it('first', () => {
+    (first([1, 2, 3, 4]): number);
+  });
+
   it('intersectionBy', () => {
     intersectionBy([2.1, 1.2], [2.3, 3.4], Math.floor);
     intersectionBy([{ x: 1 }], [{ x: 2 }, { x: 1 }], "x");
@@ -147,9 +150,8 @@ describe('Array', () => {
   });
 
   it('take / _.takeRight', () => {
-    var taken: string[];
-    taken = take((["abc", "123"]: $ReadOnlyArray<string>), 3);
-    taken = takeRight((["abc", "123"]: $ReadOnlyArray<string>));
+    (take((["abc", "123"]: $ReadOnlyArray<string>), 3): string[]);
+    (takeRight((["abc", "123"]: $ReadOnlyArray<string>)): string[]);
   });
 
   it('unionBy', () => {
@@ -172,12 +174,12 @@ describe('Array', () => {
     zip(["a", "b", "c"], [1, 2, 3])[0].length;
     zip(["a", "b", "c"], [1, 2, 3])[0][0] + "a";
     zip(["a", "b", "c"], [1, 2, 3])[0][1] * 10;
-  // $ExpectError `x` property not found in Array
+    // $ExpectError `x` property not found in Array
     zip([{ x: 1 }], [{ x: 2, y: 1 }])[0].x;
-  // $ExpectError `y` property not found in object literal
+    // $ExpectError `y` property not found in object literal
     zip([{ x: 1 }], [{ x: 2, y: 1 }])[0][0].y;
     zip([{ x: 1 }], [{ x: 2, y: 1 }])[0][1].y;
-  // $ExpectError Flow could potentially catch this -- the tuple only has two elements.
+    // $ExpectError Flow could potentially catch this -- the tuple only has two elements.
     zip([{ x: 1 }], [{ x: 2, y: 1 }])[0][2];
   });
 
@@ -194,11 +196,10 @@ describe('Array', () => {
 });
 
 describe('Collection', () => {
-
   it('countBy', () => {
     (countBy([6.1, 4.2, 6.3], Math.floor): { [string]: number, ... });
     (countBy(["one", "two", "three"], "length"): { [string]: number, ... });
-  // $ExpectError
+    // $ExpectError
     (countBy(["one", "two", "three"], "length"): { [string]: string, ... });
   });
 
@@ -354,13 +355,12 @@ describe('Collection', () => {
       ...
     }>);
   });
+});
 
-  describe('Date', () => {
-  });
+describe('Date', () => {
+});
 
-  describe('Function', () => {
-  });
-
+describe('Function', () => {
   it('debounce', () => {
     var debounced = debounce((a: number) => "foo");
     debounced(1);
@@ -497,7 +497,6 @@ describe('Object', () => {
 });
 
 describe('Seq', () => {
-
   it('tap', () => {
     (tap(1, n => false): number);
   });
@@ -511,7 +510,6 @@ describe('String', () => {
 })
 
 describe('Util', () => {
-
   it('attempt', () => {
     attempt(() => void 0);
     attempt(x => x);
@@ -558,4 +556,3 @@ describe('Util', () => {
     });
   });
 });
-
