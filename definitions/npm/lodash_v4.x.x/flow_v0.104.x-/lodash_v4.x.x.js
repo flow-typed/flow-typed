@@ -542,9 +542,9 @@ declare module "lodash" {
     ): Array<T>;
 
     // Collection
-    countBy<T>(array: Array<T>, iteratee?: ?ValueOnlyIteratee<T>): Object;
+    countBy<T>(array: Array<T>, iteratee?: ?ValueOnlyIteratee<T>): { [string]: number, ... };
     countBy<T>(array: void | null, iteratee?: ?ValueOnlyIteratee<T>): {...};
-    countBy<T: Object>(object: T, iteratee?: ?ValueOnlyIteratee<T>): Object;
+    countBy<T: Object>(object: T, iteratee?: ?ValueOnlyIteratee<T>): { [string]: number, ... };
     // alias of _.forEach
     each<T>(array: $ReadOnlyArray<T>, iteratee?: ?Iteratee<T>): Array<T>;
     each<T: void | null>(array: T, iteratee?: ?Iteratee<any>): T;

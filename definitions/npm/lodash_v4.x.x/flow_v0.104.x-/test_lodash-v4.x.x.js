@@ -203,8 +203,10 @@ zipWith(["a", "b", "c"], [1, 2, 3]).map(([x, y]) => x * y);
 /**
  * _.countBy
  */
-countBy([6.1, 4.2, 6.3], Math.floor);
-countBy(["one", "two", "three"], "length");
+(countBy([6.1, 4.2, 6.3], Math.floor): { [string]: number, ... });
+(countBy(["one", "two", "three"], "length"): { [string]: number, ... });
+// $ExpectError
+(countBy(["one", "two", "three"], "length"): { [string]: string, ... });
 
 /**
  * _.each
