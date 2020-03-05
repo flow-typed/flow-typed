@@ -68,6 +68,11 @@ const readOnlyObject : ReadOnlyObject = { [1]: 1, [2]: 2 };
 chunk(readOnlyArray, 2);
 
 /**
+ * _.compact
+ */
+compact(readOnlyArray);
+
+/**
  * _.concat
  */
 concat(readOnlyArray, readOnlyArray, readOnlyArray);
@@ -193,8 +198,14 @@ zip([{ x: 1 }], [{ x: 2, y: 1 }])[0][2];
  * _.zipWith
  */
 zipWith(["a", "b", "c"], [1, 2, 3], (str: string, num) => ({ [str]: num }));
+zipWith((["a", "b", "c"]: $ReadOnlyArray<string>), ([1, 2, 3]: $ReadOnlyArray<number>), (str: string, num) => ({ [str]: num }));
+zipWith(readOnlyArray, readOnlyArray, readOnlyArray);
+zipWith(readOnlyArray, readOnlyArray, readOnlyArray, (a: number, b: number, c: number) => [a, b, c]);
+zipWith(readOnlyArray, readOnlyArray, readOnlyArray, readOnlyArray);
+zipWith(readOnlyArray, readOnlyArray, readOnlyArray, readOnlyArray, (a: number, b: number, c: number, d: number) => [a, b, c, d]);
 // $ExpectError `x` should be a `string`, `y` a `number`
 zipWith(["a", "b", "c"], [1, 2, 3]).map(([x, y]) => x * y);
+
 
 
 

@@ -217,7 +217,7 @@ declare module "lodash" {
   declare class Lodash {
     // Array
     chunk<T>(array?: ?$ReadOnlyArray<T>, size?: ?number): Array<Array<T>>;
-    compact<T, N: ?T>(array?: ?Array<N>): Array<T>;
+    compact<T, N: ?T>(array?: ?$ReadOnlyArray<N>): Array<T>;
     concat<T>(
       base?: ?$ReadOnlyArray<T>,
       ...elements: Array<any>
@@ -236,10 +236,10 @@ declare module "lodash" {
       values?: ?$ReadOnlyArray<U>,
       comparator?: ?(item: T, item2: U) => boolean
     ): Array<T>;
-    drop<T>(array?: ?Array<T>, n?: ?number): Array<T>;
-    dropRight<T>(array?: ?Array<T>, n?: ?number): Array<T>;
-    dropRightWhile<T>(array?: ?Array<T>, predicate?: ?Predicate<T>): Array<T>;
-    dropWhile<T>(array?: ?Array<T>, predicate?: ?Predicate<T>): Array<T>;
+    drop<T>(array?: ?$ReadOnlyArray<T>, n?: ?number): Array<T>;
+    dropRight<T>(array?: ?$ReadOnlyArray<T>, n?: ?number): Array<T>;
+    dropRightWhile<T>(array?: ?$ReadOnlyArray<T>, predicate?: ?Predicate<T>): Array<T>;
+    dropWhile<T>(array?: ?$ReadOnlyArray<T>, predicate?: ?Predicate<T>): Array<T>;
     fill<T, U>(
       array?: ?Array<T>,
       value?: ?U,
@@ -269,13 +269,13 @@ declare module "lodash" {
     // alias of _.head
     first<T>(array: ?$ReadOnlyArray<T>): T;
     flatten<T, X>(array?: ?$ReadOnlyArray<$ReadOnlyArray<T> | X>): Array<T | X>;
-    flattenDeep<T>(array?: ?(Array<any>)): Array<T>;
-    flattenDepth(array?: ?(Array<any>), depth?: ?number): Array<any>;
+    flattenDeep<T>(array?: ?$ReadOnlyArray<any>): Array<T>;
+    flattenDepth(array?: ?$ReadOnlyArray<any>, depth?: ?number): Array<any>;
     fromPairs<A, B>(pairs?: ?$ReadOnlyArray<[A, B]>): {| [key: A]: B |};
     head<T>(array: ?$ReadOnlyArray<T>): T;
-    indexOf<T>(array: Array<T>, value: T, fromIndex?: number): number;
+    indexOf<T>(array: $ReadOnlyArray<T>, value: T, fromIndex?: number): number;
     indexOf<T>(array: void | null, value?: ?T, fromIndex?: ?number): -1;
-    initial<T>(array: ?Array<T>): Array<T>;
+    initial<T>(array: ?$ReadOnlyArray<T>): Array<T>;
     intersection<T>(...arrays?: Array<$ReadOnlyArray<T>>): Array<T>;
     //Workaround until (...parameter: T, parameter2: U) works
     intersectionBy<T>(
@@ -323,12 +323,12 @@ declare module "lodash" {
       a4?: ?$ReadOnlyArray<T>,
       comparator?: ?Comparator<T>
     ): Array<T>;
-    join<T>(array: Array<T>, separator?: ?string): string;
+    join<T>(array: $ReadOnlyArray<T>, separator?: ?string): string;
     join<T>(array: void | null, separator?: ?string): "";
     last<T>(array: ?$ReadOnlyArray<T>): T;
-    lastIndexOf<T>(array: Array<T>, value?: ?T, fromIndex?: ?number): number;
+    lastIndexOf<T>(array: $ReadOnlyArray<T>, value?: ?T, fromIndex?: ?number): number;
     lastIndexOf<T>(array: void | null, value?: ?T, fromIndex?: ?number): -1;
-    nth<T>(array: Array<T>, n?: ?number): T;
+    nth<T>(array: $ReadOnlyArray<T>, n?: ?number): T;
     nth(array: void | null, n?: ?number): void;
     pull<T>(array: Array<T>, ...values?: $ReadOnlyArray<?T>): Array<T>;
     pull<T: void | null>(array: T, ...values?: $ReadOnlyArray<?any>): T;
@@ -360,10 +360,10 @@ declare module "lodash" {
       start?: ?number,
       end?: ?number
     ): Array<T>;
-    sortedIndex<T>(array: Array<T>, value: T): number;
+    sortedIndex<T>(array: $ReadOnlyArray<T>, value: T): number;
     sortedIndex<T>(array: void | null, value: ?T): 0;
     sortedIndexBy<T>(
-      array: Array<T>,
+      array: $ReadOnlyArray<T>,
       value?: ?T,
       iteratee?: ?ValueOnlyIteratee<T>
     ): number;
@@ -372,12 +372,12 @@ declare module "lodash" {
       value?: ?T,
       iteratee?: ?ValueOnlyIteratee<T>
     ): 0;
-    sortedIndexOf<T>(array: Array<T>, value: T): number;
+    sortedIndexOf<T>(array: $ReadOnlyArray<T>, value: T): number;
     sortedIndexOf<T>(array: void | null, value?: ?T): -1;
-    sortedLastIndex<T>(array: Array<T>, value: T): number;
+    sortedLastIndex<T>(array: $ReadOnlyArray<T>, value: T): number;
     sortedLastIndex<T>(array: void | null, value?: ?T): 0;
     sortedLastIndexBy<T>(
-      array: Array<T>,
+      array: $ReadOnlyArray<T>,
       value: T,
       iteratee?: ValueOnlyIteratee<T>
     ): number;
@@ -386,18 +386,18 @@ declare module "lodash" {
       value?: ?T,
       iteratee?: ?ValueOnlyIteratee<T>
     ): 0;
-    sortedLastIndexOf<T>(array: Array<T>, value: T): number;
+    sortedLastIndexOf<T>(array: $ReadOnlyArray<T>, value: T): number;
     sortedLastIndexOf<T>(array: void | null, value?: ?T): -1;
-    sortedUniq<T>(array?: ?Array<T>): Array<T>;
+    sortedUniq<T>(array?: ?$ReadOnlyArray<T>): Array<T>;
     sortedUniqBy<T>(
-      array?: ?Array<T>,
+      array?: ?$ReadOnlyArray<T>,
       iteratee?: ?ValueOnlyIteratee<T>
     ): Array<T>;
-    tail<T>(array?: ?Array<T>): Array<T>;
+    tail<T>(array?: ?$ReadOnlyArray<T>): Array<T>;
     take<T>(array?: ?$ReadOnlyArray<T>, n?: ?number): Array<T>;
     takeRight<T>(array?: ?$ReadOnlyArray<T>, n?: ?number): Array<T>;
-    takeRightWhile<T>(array?: ?Array<T>, predicate?: ?Predicate<T>): Array<T>;
-    takeWhile<T>(array?: ?Array<T>, predicate?: ?Predicate<T>): Array<T>;
+    takeRightWhile<T>(array?: ?$ReadOnlyArray<T>, predicate?: ?Predicate<T>): Array<T>;
+    takeWhile<T>(array?: ?$ReadOnlyArray<T>, predicate?: ?Predicate<T>): Array<T>;
     union<T>(...arrays?: Array<$ReadOnlyArray<T>>): Array<T>;
     //Workaround until (...parameter: T, parameter2: U) works
     unionBy<T>(
@@ -423,7 +423,7 @@ declare module "lodash" {
       iteratee?: ValueOnlyIteratee<T>
     ): Array<T>;
     //Workaround until (...parameter: T, parameter2: U) works
-    unionWith<T>(a1?: ?Array<T>, comparator?: ?Comparator<T>): Array<T>;
+    unionWith<T>(a1?: ?$ReadOnlyArray<T>, comparator?: ?Comparator<T>): Array<T>;
     unionWith<T>(
       a1: $ReadOnlyArray<T>,
       a2: $ReadOnlyArray<T>,
@@ -445,10 +445,10 @@ declare module "lodash" {
     uniq<T>(array?: ?$ReadOnlyArray<T>): Array<T>;
     uniqBy<T>(array?: ?$ReadOnlyArray<T>, iteratee?: ?ValueOnlyIteratee<T>): Array<T>;
     uniqWith<T>(array?: ?$ReadOnlyArray<T>, comparator?: ?Comparator<T>): Array<T>;
-    unzip<T>(array?: ?Array<T>): Array<T>;
-    unzipWith<T>(array: ?Array<T>, iteratee?: ?Iteratee<T>): Array<T>;
+    unzip<T>(array?: ?$ReadOnlyArray<T>): Array<T>;
+    unzipWith<T>(array: ?$ReadOnlyArray<T>, iteratee?: ?Iteratee<T>): Array<T>;
     without<T>(array?: ?$ReadOnlyArray<T>, ...values?: Array<?T>): Array<T>;
-    xor<T>(...array: Array<Array<T>>): Array<T>;
+    xor<T>(...array: $ReadOnlyArray<$ReadOnlyArray<T>>): Array<T>;
     //Workaround until (...parameter: T, parameter2: U) works
     xorBy<T>(a1?: ?$ReadOnlyArray<T>, iteratee?: ?ValueOnlyIteratee<T>): Array<T>;
     xorBy<T>(
@@ -470,23 +470,23 @@ declare module "lodash" {
       iteratee?: ValueOnlyIteratee<T>
     ): Array<T>;
     //Workaround until (...parameter: T, parameter2: U) works
-    xorWith<T>(a1?: ?Array<T>, comparator?: ?Comparator<T>): Array<T>;
+    xorWith<T>(a1?: ?$ReadOnlyArray<T>, comparator?: ?Comparator<T>): Array<T>;
     xorWith<T>(
-      a1: Array<T>,
-      a2: Array<T>,
+      a1: $ReadOnlyArray<T>,
+      a2: $ReadOnlyArray<T>,
       comparator?: Comparator<T>
     ): Array<T>;
     xorWith<T>(
-      a1: Array<T>,
-      a2: Array<T>,
-      a3: Array<T>,
+      a1: $ReadOnlyArray<T>,
+      a2: $ReadOnlyArray<T>,
+      a3: $ReadOnlyArray<T>,
       comparator?: Comparator<T>
     ): Array<T>;
     xorWith<T>(
-      a1: Array<T>,
-      a2: Array<T>,
-      a3: Array<T>,
-      a4: Array<T>,
+      a1: $ReadOnlyArray<T>,
+      a2: $ReadOnlyArray<T>,
+      a3: $ReadOnlyArray<T>,
+      a4: $ReadOnlyArray<T>,
       comparator?: Comparator<T>
     ): Array<T>;
     zip<A, B>(a1?: ?($ReadOnlyArray<A>), a2?: ?($ReadOnlyArray<B>)): Array<[A, B]>;
@@ -500,49 +500,49 @@ declare module "lodash" {
       a5: $ReadOnlyArray<E>
     ): Array<[A, B, C, D, E]>;
 
-    zipObject<K, V>(props: Array<K>, values?: ?Array<V>): { [key: K]: V, ... };
-    zipObject<K, V>(props: void | null, values?: ?Array<V>): {...};
-    zipObjectDeep(props: Array<any>, values?: ?any): Object;
+    zipObject<K, V>(props: $ReadOnlyArray<K>, values?: ?$ReadOnlyArray<V>): { [key: K]: V, ... };
+    zipObject<K, V>(props: void | null, values?: ?$ReadOnlyArray<V>): {...};
+    zipObjectDeep(props: $ReadOnlyArray<any>, values?: ?any): Object;
     zipObjectDeep(props: void | null, values?: ?any): {...};
 
-    zipWith<A>(a1?: ?Array<A>): Array<[A]>;
-    zipWith<T, A>(a1: Array<A>, iteratee: (A) => T): Array<T>;
+    zipWith<A>(a1?: ?$ReadOnlyArray<A>): Array<[A]>;
+    zipWith<T, A>(a1: $ReadOnlyArray<A>, iteratee: (A) => T): Array<T>;
 
-    zipWith<A, B>(a1: Array<A>, a2: Array<B>): Array<[A, B]>;
+    zipWith<A, B>(a1: $ReadOnlyArray<A>, a2: $ReadOnlyArray<B>): Array<[A, B]>;
     zipWith<T, A, B>(
-      a1: Array<A>,
-      a2: Array<B>,
+      a1: $ReadOnlyArray<A>,
+      a2: $ReadOnlyArray<B>,
       iteratee: (A, B) => T
     ): Array<T>;
 
     zipWith<A, B, C>(
-      a1: Array<A>,
-      a2: Array<B>,
-      a3: Array<C>
+      a1: $ReadOnlyArray<A>,
+      a2: $ReadOnlyArray<B>,
+      a3: $ReadOnlyArray<C>
     ): Array<[A, B, C]>;
     zipWith<T, A, B, C>(
-      a1: Array<A>,
-      a2: Array<B>,
-      a3: Array<C>,
+      a1: $ReadOnlyArray<A>,
+      a2: $ReadOnlyArray<B>,
+      a3: $ReadOnlyArray<C>,
       iteratee: (A, B, C) => T
     ): Array<T>;
 
     zipWith<A, B, C, D>(
-      a1: Array<A>,
-      a2: Array<B>,
-      a3: Array<C>,
-      a4: Array<D>
+      a1: $ReadOnlyArray<A>,
+      a2: $ReadOnlyArray<B>,
+      a3: $ReadOnlyArray<C>,
+      a4: $ReadOnlyArray<D>
     ): Array<[A, B, C, D]>;
     zipWith<T, A, B, C, D>(
-      a1: Array<A>,
-      a2: Array<B>,
-      a3: Array<C>,
-      a4: Array<D>,
+      a1: $ReadOnlyArray<A>,
+      a2: $ReadOnlyArray<B>,
+      a3: $ReadOnlyArray<C>,
+      a4: $ReadOnlyArray<D>,
       iteratee: (A, B, C, D) => T
     ): Array<T>;
 
     // Collection
-    countBy<T>(array: Array<T>, iteratee?: ?ValueOnlyIteratee<T>): { [string]: number, ... };
+    countBy<T>(array: $ReadOnlyArray<T>, iteratee?: ?ValueOnlyIteratee<T>): { [string]: number, ... };
     countBy<T>(array: void | null, iteratee?: ?ValueOnlyIteratee<T>): {...};
     countBy<T: Object>(object: T, iteratee?: ?ValueOnlyIteratee<T>): { [string]: number, ... };
     // alias of _.forEach
@@ -601,7 +601,7 @@ declare module "lodash" {
       iteratee?: ?OFlatMapIteratee<T, U>
     ): Array<U>;
     flatMapDepth<T, U>(
-      array?: ?Array<T>,
+      array?: ?$ReadOnlyArray<T>,
       iteratee?: ?FlatMapIteratee<T, U>,
       depth?: ?number
     ): Array<U>;
