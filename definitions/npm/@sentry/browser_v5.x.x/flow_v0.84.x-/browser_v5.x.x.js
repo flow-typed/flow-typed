@@ -31,12 +31,12 @@ declare module '@sentry/browser' {
         setUser(user: User | null): void;
         setTags(tags: { [key: string]: string, ... }): void;
         setTag(key: string, value: string): void;
-        setExtra(key: string, extra: mixed): void;
-        setExtras(extras: { [key: string]: mixed, ... }): void;
+        setExtra(key: string, extra: any): void;
+        setExtras(extras: { [key: string]: any, ... }): void;
         setContext(name: string, context: { [key: string]: mixed, ... } | null): void;
         configureScope(callback: (scope: Scope) => void): void;
         run(callback: (hub: Hub) => void): void;
-        getIntegration<T: Integration<>>(integration: IntegrationClass<T>): T | null;
+        getIntegration<T>(integration: Class<Integration<T>>): Integration<T> | null;
         traceHeaders(): { [key: string]: string, ... };
         startSpan(span?: Span | SpanContext, forceNoChild?: boolean): Span;
     }
@@ -46,8 +46,8 @@ declare module '@sentry/browser' {
         setUser(user: User | null): void;
         setTags(tags: {| [key: string]: string |}): void;
         setTag(key: string, value: string): void;
-        setExtras(extras: {| [key: string]: string |}): void;
-        setExtra(key: string, extra: mixed): void;
+        setExtras(extras: { [key: string]: any, ... }): void;
+        setExtra(key: string, extra: any): void;
         setFingerprint(fingerprint: $ReadOnlyArray<string>): void;
         setLevel(level: $Values<typeof Severity>): void;
         setTransaction(transaction?: string): void;
@@ -62,8 +62,8 @@ declare module '@sentry/browser' {
         name: string,
         context: {| [key: string]: mixed |} | null,
     ): void;
-    declare export function setExtra(key: string, extra: mixed): void;
-    declare export function setExtras(extras: {| [key: string]: mixed |}): void;
+    declare export function setExtra(key: string, extra: any): void;
+    declare export function setExtras(extras: { [key: string]: any, ... }): void;
     declare export function setTag(key: string, value: string): void;
     declare export function setTags(tags: {| [key: string]: string |}): void;
     declare export function setUser(user: User): void;
@@ -83,10 +83,10 @@ declare module '@sentry/browser' {
         getOptions(): O;
         close(timeout?: number): Promise<boolean>;
         flush(timeout?: number): Promise<boolean>;
-        getIntegration<T: Integration<>>(integration: IntegrationClass<T>): T | null;
+        getIntegration<T>(integration: Class<Integration<T>>): Integration<T> | null;
     }
 
-    declare export var defaultIntegrations: $ReadOnlyArray<Integration<>>;
+    declare export var defaultIntegrations: $ReadOnlyArray<Integration<any>>;
     declare export function forceLoad(): void;
     declare export function init(Options): void;
     declare export function lastEventId(): string | void;
@@ -108,12 +108,39 @@ declare module '@sentry/browser' {
         +Debug: 'debug',
         +Critical: 'critical',
     |};
+    declare export var Integrations: {|
+        // Core
+        +InboundFilters: Class<Integration<>>,
+        +FunctionToString: Class<Integration<>>,
 
-    declare class IntegrationClass<T> {
-        constructor(...args: $ReadOnlyArray<mixed>): T;
-        id: string;
-    }
-    declare class Integration<O = { ... }> {
+        // Browser
+        +GlobalHandlers: Class<Integration<{|
+            onerror?: boolean,
+            onunhandledrejection?: boolean,
+        |}>>,
+        +TryCatch: Class<Integration<>>,
+        +Breadcrumbs: Class<Integration<{|
+            beacon?: boolean,
+            console?: boolean,
+            dom?: boolean,
+            fetch?: boolean,
+            history?: boolean,
+            sentry?: boolean,
+            xhr?: boolean,
+        |}>>,
+        +LinkedErrors: Class<Integration<{|
+            key?: string,
+            limit?: number,
+        |}>>,
+        +UserAgent: Class<Integration<>>,
+    |};
+    declare export var Transports: {|
+        +BaseTransport: Class<Transport>,
+        +FetchTransport: Class<Transport>,
+        +XHRTransport: Class<Transport>,
+    |};
+
+    declare class Integration<O = {||}> {
         constructor(options?: O): Integration<O>;
         name: string;
         setupOnce(
@@ -223,11 +250,11 @@ declare module '@sentry/browser' {
     |};
     declare type DsnLike = string | DsnComponents;
     declare type Dsn = { toString(withPassword: boolean): string, ...DsnComponents, ... };
-    declare type Transport = {|
-        sendEvent(event: Event): Promise<SentryResponse>,
-        close(timeout?: number): Promise<boolean>,
-    |};
-    declare type TransportClass<T: Transport> = (options: TransportOptions) => T;
+    declare class Transport {
+        constructor(options: TransportOptions): Transport;
+        sendEvent(event: Event): Promise<SentryResponse>;
+        close(timeout?: number): Promise<boolean>;
+    }
     declare type TransportOptions = {|
         +dsn: DsnLike,
         +headers?: { [key: string]: string, ... },
@@ -273,7 +300,7 @@ declare module '@sentry/browser' {
         +breadcrumbs?: $ReadOnlyArray<Breadcrumb>,
         +contexts?: {| [key: string]: { ... } |},
         +tags?: {| [key: string]: string |},
-        +extra?: {| [key: string]: mixed |},
+        +extra?: {| [key: string]: any |},
         +user?: User,
         +type?: EventType,
         +spans?: $ReadOnlyArray<Span>,
@@ -311,7 +338,7 @@ declare module '@sentry/browser' {
         +dsn?: string,
         +defaultIntegrations?: false,
         +ignoreErrors?: $ReadOnlyArray<string | RegExp>,
-        +transport?: TransportClass<Transport>,
+        +transport?: Class<Transport>,
         +transportOptions?: TransportOptions,
         +release?: string,
         +environment?: string,
@@ -329,9 +356,14 @@ declare module '@sentry/browser' {
 
         +blacklistUrls?: $ReadOnlyArray<string | RegExp>,
         +whitelistUrls?: $ReadOnlyArray<string | RegExp>,
-        +integrations?:
-            | $ReadOnlyArray<Integration<>>
-            | (($ReadOnlyArray<Integration<>>) => $ReadOnlyArray<Integration<>>),
+        // This really should be typed as:
+        //    | $ReadOnlyArray<Integration<any>>
+        //    | (($ReadOnlyArray<Integration<any>>) => $ReadOnlyArray<Integration<any>>)
+        // but we must support integrations from @sentry/integrations as well
+        // as custom integrations. Since cross-package imports aren't allowed
+        // and classes are nominally typed, using `any` seems like our only
+        // option here.
+        +integrations?: any,
         +beforeBreadcrumb?: (breadcrumb: Breadcrumb, hint?: BreadcrumbHint) => Breadcrumb | void,
         +_experiments?: { [key: string]: mixed, ... },
     |};
@@ -359,4 +391,3 @@ declare module '@sentry/browser' {
         +onLoad?: () => void,
     |};
 }
-
