@@ -206,10 +206,6 @@ declare module "lodash" {
     | string;
   declare type Comparator<T> = (item: T, item2: T) => boolean;
 
-  declare type MapIterator<T, U> =
-    | ((item: T, index: number, array: Array<T>) => U)
-    | propertyIterateeShorthand;
-
   declare type ReadOnlyMapIterator<T, U> =
     | ((item: T, index: number, array: $ReadOnlyArray<T>) => U)
     | propertyIterateeShorthand;
@@ -221,7 +217,7 @@ declare module "lodash" {
   declare class Lodash {
     // Array
     chunk<T>(array?: ?$ReadOnlyArray<T>, size?: ?number): Array<Array<T>>;
-    compact<T, N: ?T>(array?: ?Array<N>): Array<T>;
+    compact<T, N: ?T>(array?: ?$ReadOnlyArray<N>): Array<T>;
     concat<T>(
       base?: ?$ReadOnlyArray<T>,
       ...elements: Array<any>
@@ -234,16 +230,16 @@ declare module "lodash" {
       array?: ?$ReadOnlyArray<T>,
       values?: ?$ReadOnlyArray<U>,
       iteratee?: ?ValueOnlyIteratee<T | U>
-    ): T[];
+    ): Array<T>;
     differenceWith<T, U>(
       array?: ?$ReadOnlyArray<T>,
       values?: ?$ReadOnlyArray<U>,
       comparator?: ?(item: T, item2: U) => boolean
-    ): T[];
-    drop<T>(array?: ?Array<T>, n?: ?number): Array<T>;
-    dropRight<T>(array?: ?Array<T>, n?: ?number): Array<T>;
-    dropRightWhile<T>(array?: ?Array<T>, predicate?: ?Predicate<T>): Array<T>;
-    dropWhile<T>(array?: ?Array<T>, predicate?: ?Predicate<T>): Array<T>;
+    ): Array<T>;
+    drop<T>(array?: ?$ReadOnlyArray<T>, n?: ?number): Array<T>;
+    dropRight<T>(array?: ?$ReadOnlyArray<T>, n?: ?number): Array<T>;
+    dropRightWhile<T>(array?: ?$ReadOnlyArray<T>, predicate?: ?Predicate<T>): Array<T>;
+    dropWhile<T>(array?: ?$ReadOnlyArray<T>, predicate?: ?Predicate<T>): Array<T>;
     fill<T, U>(
       array?: ?Array<T>,
       value?: ?U,
@@ -273,13 +269,13 @@ declare module "lodash" {
     // alias of _.head
     first<T>(array: ?$ReadOnlyArray<T>): T;
     flatten<T, X>(array?: ?$ReadOnlyArray<$ReadOnlyArray<T> | X>): Array<T | X>;
-    flattenDeep<T>(array?: ?(any[])): Array<T>;
-    flattenDepth(array?: ?(any[]), depth?: ?number): any[];
+    flattenDeep<T>(array?: ?$ReadOnlyArray<any>): Array<T>;
+    flattenDepth(array?: ?$ReadOnlyArray<any>, depth?: ?number): Array<any>;
     fromPairs<A, B>(pairs?: ?$ReadOnlyArray<[A, B]>): {| [key: A]: B |};
     head<T>(array: ?$ReadOnlyArray<T>): T;
-    indexOf<T>(array: Array<T>, value: T, fromIndex?: number): number;
+    indexOf<T>(array: $ReadOnlyArray<T>, value: T, fromIndex?: number): number;
     indexOf<T>(array: void | null, value?: ?T, fromIndex?: ?number): -1;
-    initial<T>(array: ?Array<T>): Array<T>;
+    initial<T>(array: ?$ReadOnlyArray<T>): Array<T>;
     intersection<T>(...arrays?: Array<$ReadOnlyArray<T>>): Array<T>;
     //Workaround until (...parameter: T, parameter2: U) works
     intersectionBy<T>(
@@ -327,12 +323,12 @@ declare module "lodash" {
       a4?: ?$ReadOnlyArray<T>,
       comparator?: ?Comparator<T>
     ): Array<T>;
-    join<T>(array: Array<T>, separator?: ?string): string;
+    join<T>(array: $ReadOnlyArray<T>, separator?: ?string): string;
     join<T>(array: void | null, separator?: ?string): "";
     last<T>(array: ?$ReadOnlyArray<T>): T;
-    lastIndexOf<T>(array: Array<T>, value?: ?T, fromIndex?: ?number): number;
+    lastIndexOf<T>(array: $ReadOnlyArray<T>, value?: ?T, fromIndex?: ?number): number;
     lastIndexOf<T>(array: void | null, value?: ?T, fromIndex?: ?number): -1;
-    nth<T>(array: T[], n?: ?number): T;
+    nth<T>(array: $ReadOnlyArray<T>, n?: ?number): T;
     nth(array: void | null, n?: ?number): void;
     pull<T>(array: Array<T>, ...values?: $ReadOnlyArray<?T>): Array<T>;
     pull<T: void | null>(array: T, ...values?: $ReadOnlyArray<?any>): T;
@@ -353,7 +349,7 @@ declare module "lodash" {
       values?: ?$ReadOnlyArray<any>,
       comparator?: ?Function
     ): T;
-    pullAllWith<T>(array: T[], values?: ?(T[]), comparator?: ?Function): T[];
+    pullAllWith<T>(array: Array<T>, values?: ?(Array<T>), comparator?: ?Function): Array<T>;
     pullAt<T>(array?: ?Array<T>, ...indexed?: Array<?number>): Array<T>;
     pullAt<T>(array?: ?Array<T>, indexed?: ?Array<number>): Array<T>;
     remove<T>(array?: ?Array<T>, predicate?: ?Predicate<T>): Array<T>;
@@ -364,10 +360,10 @@ declare module "lodash" {
       start?: ?number,
       end?: ?number
     ): Array<T>;
-    sortedIndex<T>(array: Array<T>, value: T): number;
+    sortedIndex<T>(array: $ReadOnlyArray<T>, value: T): number;
     sortedIndex<T>(array: void | null, value: ?T): 0;
     sortedIndexBy<T>(
-      array: Array<T>,
+      array: $ReadOnlyArray<T>,
       value?: ?T,
       iteratee?: ?ValueOnlyIteratee<T>
     ): number;
@@ -376,12 +372,12 @@ declare module "lodash" {
       value?: ?T,
       iteratee?: ?ValueOnlyIteratee<T>
     ): 0;
-    sortedIndexOf<T>(array: Array<T>, value: T): number;
+    sortedIndexOf<T>(array: $ReadOnlyArray<T>, value: T): number;
     sortedIndexOf<T>(array: void | null, value?: ?T): -1;
-    sortedLastIndex<T>(array: Array<T>, value: T): number;
+    sortedLastIndex<T>(array: $ReadOnlyArray<T>, value: T): number;
     sortedLastIndex<T>(array: void | null, value?: ?T): 0;
     sortedLastIndexBy<T>(
-      array: Array<T>,
+      array: $ReadOnlyArray<T>,
       value: T,
       iteratee?: ValueOnlyIteratee<T>
     ): number;
@@ -390,18 +386,18 @@ declare module "lodash" {
       value?: ?T,
       iteratee?: ?ValueOnlyIteratee<T>
     ): 0;
-    sortedLastIndexOf<T>(array: Array<T>, value: T): number;
+    sortedLastIndexOf<T>(array: $ReadOnlyArray<T>, value: T): number;
     sortedLastIndexOf<T>(array: void | null, value?: ?T): -1;
-    sortedUniq<T>(array?: ?Array<T>): Array<T>;
+    sortedUniq<T>(array?: ?$ReadOnlyArray<T>): Array<T>;
     sortedUniqBy<T>(
-      array?: ?Array<T>,
+      array?: ?$ReadOnlyArray<T>,
       iteratee?: ?ValueOnlyIteratee<T>
     ): Array<T>;
-    tail<T>(array?: ?Array<T>): Array<T>;
+    tail<T>(array?: ?$ReadOnlyArray<T>): Array<T>;
     take<T>(array?: ?$ReadOnlyArray<T>, n?: ?number): Array<T>;
     takeRight<T>(array?: ?$ReadOnlyArray<T>, n?: ?number): Array<T>;
-    takeRightWhile<T>(array?: ?Array<T>, predicate?: ?Predicate<T>): Array<T>;
-    takeWhile<T>(array?: ?Array<T>, predicate?: ?Predicate<T>): Array<T>;
+    takeRightWhile<T>(array?: ?$ReadOnlyArray<T>, predicate?: ?Predicate<T>): Array<T>;
+    takeWhile<T>(array?: ?$ReadOnlyArray<T>, predicate?: ?Predicate<T>): Array<T>;
     union<T>(...arrays?: Array<$ReadOnlyArray<T>>): Array<T>;
     //Workaround until (...parameter: T, parameter2: U) works
     unionBy<T>(
@@ -427,7 +423,7 @@ declare module "lodash" {
       iteratee?: ValueOnlyIteratee<T>
     ): Array<T>;
     //Workaround until (...parameter: T, parameter2: U) works
-    unionWith<T>(a1?: ?Array<T>, comparator?: ?Comparator<T>): Array<T>;
+    unionWith<T>(a1?: ?$ReadOnlyArray<T>, comparator?: ?Comparator<T>): Array<T>;
     unionWith<T>(
       a1: $ReadOnlyArray<T>,
       a2: $ReadOnlyArray<T>,
@@ -449,10 +445,10 @@ declare module "lodash" {
     uniq<T>(array?: ?$ReadOnlyArray<T>): Array<T>;
     uniqBy<T>(array?: ?$ReadOnlyArray<T>, iteratee?: ?ValueOnlyIteratee<T>): Array<T>;
     uniqWith<T>(array?: ?$ReadOnlyArray<T>, comparator?: ?Comparator<T>): Array<T>;
-    unzip<T>(array?: ?Array<T>): Array<T>;
-    unzipWith<T>(array: ?Array<T>, iteratee?: ?Iteratee<T>): Array<T>;
+    unzip<T>(array?: ?$ReadOnlyArray<T>): Array<T>;
+    unzipWith<T>(array: ?$ReadOnlyArray<T>, iteratee?: ?Iteratee<T>): Array<T>;
     without<T>(array?: ?$ReadOnlyArray<T>, ...values?: Array<?T>): Array<T>;
-    xor<T>(...array: Array<Array<T>>): Array<T>;
+    xor<T>(...array: $ReadOnlyArray<$ReadOnlyArray<T>>): Array<T>;
     //Workaround until (...parameter: T, parameter2: U) works
     xorBy<T>(a1?: ?$ReadOnlyArray<T>, iteratee?: ?ValueOnlyIteratee<T>): Array<T>;
     xorBy<T>(
@@ -474,23 +470,23 @@ declare module "lodash" {
       iteratee?: ValueOnlyIteratee<T>
     ): Array<T>;
     //Workaround until (...parameter: T, parameter2: U) works
-    xorWith<T>(a1?: ?Array<T>, comparator?: ?Comparator<T>): Array<T>;
+    xorWith<T>(a1?: ?$ReadOnlyArray<T>, comparator?: ?Comparator<T>): Array<T>;
     xorWith<T>(
-      a1: Array<T>,
-      a2: Array<T>,
+      a1: $ReadOnlyArray<T>,
+      a2: $ReadOnlyArray<T>,
       comparator?: Comparator<T>
     ): Array<T>;
     xorWith<T>(
-      a1: Array<T>,
-      a2: Array<T>,
-      a3: Array<T>,
+      a1: $ReadOnlyArray<T>,
+      a2: $ReadOnlyArray<T>,
+      a3: $ReadOnlyArray<T>,
       comparator?: Comparator<T>
     ): Array<T>;
     xorWith<T>(
-      a1: Array<T>,
-      a2: Array<T>,
-      a3: Array<T>,
-      a4: Array<T>,
+      a1: $ReadOnlyArray<T>,
+      a2: $ReadOnlyArray<T>,
+      a3: $ReadOnlyArray<T>,
+      a4: $ReadOnlyArray<T>,
       comparator?: Comparator<T>
     ): Array<T>;
     zip<A, B>(a1?: ?($ReadOnlyArray<A>), a2?: ?($ReadOnlyArray<B>)): Array<[A, B]>;
@@ -504,51 +500,51 @@ declare module "lodash" {
       a5: $ReadOnlyArray<E>
     ): Array<[A, B, C, D, E]>;
 
-    zipObject<K, V>(props: Array<K>, values?: ?Array<V>): { [key: K]: V, ... };
-    zipObject<K, V>(props: void | null, values?: ?Array<V>): {...};
-    zipObjectDeep(props: any[], values?: ?any): Object;
+    zipObject<K, V>(props: $ReadOnlyArray<K>, values?: ?$ReadOnlyArray<V>): { [key: K]: V, ... };
+    zipObject<K, V>(props: void | null, values?: ?$ReadOnlyArray<V>): {...};
+    zipObjectDeep(props: $ReadOnlyArray<any>, values?: ?any): Object;
     zipObjectDeep(props: void | null, values?: ?any): {...};
 
-    zipWith<A>(a1?: ?Array<A>): Array<[A]>;
-    zipWith<T, A>(a1: Array<A>, iteratee: (A) => T): Array<T>;
+    zipWith<A>(a1?: ?$ReadOnlyArray<A>): Array<[A]>;
+    zipWith<T, A>(a1: $ReadOnlyArray<A>, iteratee: (A) => T): Array<T>;
 
-    zipWith<A, B>(a1: Array<A>, a2: Array<B>): Array<[A, B]>;
+    zipWith<A, B>(a1: $ReadOnlyArray<A>, a2: $ReadOnlyArray<B>): Array<[A, B]>;
     zipWith<T, A, B>(
-      a1: Array<A>,
-      a2: Array<B>,
+      a1: $ReadOnlyArray<A>,
+      a2: $ReadOnlyArray<B>,
       iteratee: (A, B) => T
     ): Array<T>;
 
     zipWith<A, B, C>(
-      a1: Array<A>,
-      a2: Array<B>,
-      a3: Array<C>
+      a1: $ReadOnlyArray<A>,
+      a2: $ReadOnlyArray<B>,
+      a3: $ReadOnlyArray<C>
     ): Array<[A, B, C]>;
     zipWith<T, A, B, C>(
-      a1: Array<A>,
-      a2: Array<B>,
-      a3: Array<C>,
+      a1: $ReadOnlyArray<A>,
+      a2: $ReadOnlyArray<B>,
+      a3: $ReadOnlyArray<C>,
       iteratee: (A, B, C) => T
     ): Array<T>;
 
     zipWith<A, B, C, D>(
-      a1: Array<A>,
-      a2: Array<B>,
-      a3: Array<C>,
-      a4: Array<D>
+      a1: $ReadOnlyArray<A>,
+      a2: $ReadOnlyArray<B>,
+      a3: $ReadOnlyArray<C>,
+      a4: $ReadOnlyArray<D>
     ): Array<[A, B, C, D]>;
     zipWith<T, A, B, C, D>(
-      a1: Array<A>,
-      a2: Array<B>,
-      a3: Array<C>,
-      a4: Array<D>,
+      a1: $ReadOnlyArray<A>,
+      a2: $ReadOnlyArray<B>,
+      a3: $ReadOnlyArray<C>,
+      a4: $ReadOnlyArray<D>,
       iteratee: (A, B, C, D) => T
     ): Array<T>;
 
     // Collection
-    countBy<T>(array: Array<T>, iteratee?: ?ValueOnlyIteratee<T>): Object;
+    countBy<T>(array: $ReadOnlyArray<T>, iteratee?: ?ValueOnlyIteratee<T>): { [string]: number, ... };
     countBy<T>(array: void | null, iteratee?: ?ValueOnlyIteratee<T>): {...};
-    countBy<T: Object>(object: T, iteratee?: ?ValueOnlyIteratee<T>): Object;
+    countBy<T: Object>(object: T, iteratee?: ?ValueOnlyIteratee<T>): { [string]: number, ... };
     // alias of _.forEach
     each<T>(array: $ReadOnlyArray<T>, iteratee?: ?Iteratee<T>): Array<T>;
     each<T: void | null>(array: T, iteratee?: ?Iteratee<any>): T;
@@ -605,7 +601,7 @@ declare module "lodash" {
       iteratee?: ?OFlatMapIteratee<T, U>
     ): Array<U>;
     flatMapDepth<T, U>(
-      array?: ?Array<T>,
+      array?: ?$ReadOnlyArray<T>,
       iteratee?: ?FlatMapIteratee<T, U>,
       depth?: ?number
     ): Array<U>;
@@ -659,10 +655,9 @@ declare module "lodash" {
       object: T,
       iteratee?: ?ValueOnlyIteratee<A>
     ): { [key: V]: A, ... };
-    map<T, U>(array?: ?Array<T>, iteratee?: ?MapIterator<T, U>): Array<U>;
     map<T, U>(
-      array: ?$ReadOnlyArray<T>,
-      iteratee?: ReadOnlyMapIterator<T, U>
+      array?: ?$ReadOnlyArray<T>,
+      iteratee?: ?ReadOnlyMapIterator<T, U>
     ): Array<U>;
     map<V, T: Object, U>(
       object: ?T,
@@ -787,41 +782,41 @@ declare module "lodash" {
     after(n: number, fn: Function): Function;
     ary(func: Function, n?: number): Function;
     before(n: number, fn: Function): Function;
-    bind<F:(...any[]) => any>(func: F, thisArg: any, ...partials: Array<any>): F;
+    bind<F:(...Array<any>) => any>(func: F, thisArg: any, ...partials: Array<any>): F;
     bindKey(obj?: ?Object, key?: ?string, ...partials?: Array<?any>): Function;
     curry: Curry;
     curry(func: Function, arity?: number): Function;
     curryRight(func: Function, arity?: number): Function;
-    debounce<F: (...any[]) => any>(
+    debounce<F: (...Array<any>) => any>(
       func: F,
       wait?: number,
       options?: DebounceOptions
     ): F & Cancelable;
-    defer(func: (...any[]) => any, ...args?: Array<any>): TimeoutID;
+    defer(func: (...Array<any>) => any, ...args?: Array<any>): TimeoutID;
     delay(func: Function, wait: number, ...args?: Array<any>): TimeoutID;
-    flip<R>(func: (...any[]) => R): (...any[]) => R;
+    flip<R>(func: (...Array<any>) => R): (...Array<any>) => R;
     memoize<A, R>(func: (...A) => R, resolver?: (...A) => any): (...A) => R;
     negate<A, R>(predicate: (...A) => R): (...A) => boolean;
-    once<F: (...any[]) => any>(func: F): F;
+    once<F: (...Array<any>) => any>(func: F): F;
     overArgs(func?: ?Function, ...transforms?: Array<Function>): Function;
     overArgs(func?: ?Function, transforms?: ?Array<Function>): Function;
-    partial<R>(func: (...any[]) => R, ...partials: any[]): (...any[]) => R;
-    partialRight<R>(func: (...any[]) => R, ...partials: Array<any>): (...any[]) => R;
-    partialRight<R>(func: (...any[]) => R, partials: Array<any>): (...any[]) => R;
+    partial<R>(func: (...Array<any>) => R, ...partials: Array<any>): (...Array<any>) => R;
+    partialRight<R>(func: (...Array<any>) => R, ...partials: Array<any>): (...Array<any>) => R;
+    partialRight<R>(func: (...Array<any>) => R, partials: Array<any>): (...Array<any>) => R;
     rearg(func: Function, ...indexes: Array<number>): Function;
     rearg(func: Function, indexes: Array<number>): Function;
     rest(func: Function, start?: number): Function;
     spread(func: Function): Function;
-    throttle<F: (...any[]) => any>(
+    throttle<F: (...Array<any>) => any>(
       func: F,
       wait?: number,
       options?: ThrottleOptions
     ): F & Cancelable;
-    unary<F: (...any[]) => any>(func: F): F;
+    unary<F: (...Array<any>) => any>(func: F): F;
     wrap(value?: any, wrapper?: ?Function): Function;
 
     // Lang
-    castArray(value: *): any[];
+    castArray(value: *): Array<any>;
     clone<T>(value: T): T;
     cloneDeep<T>(value: T): T;
     cloneDeepWith<T, U>(
@@ -1675,34 +1670,34 @@ declare module "lodash/fp" {
       base: A,
       elements: B
     ): Array<T | U>;
-    difference<T>(values: $ReadOnlyArray<T>): (array: $ReadOnlyArray<T>) => T[];
-    difference<T>(values: $ReadOnlyArray<T>, array: $ReadOnlyArray<T>): T[];
+    difference<T>(values: $ReadOnlyArray<T>): (array: $ReadOnlyArray<T>) => Array<T>;
+    difference<T>(values: $ReadOnlyArray<T>, array: $ReadOnlyArray<T>): Array<T>;
     differenceBy<T>(
       iteratee: ValueOnlyIteratee<T>
-    ): ((values: $ReadOnlyArray<T>) => (array: $ReadOnlyArray<T>) => T[]) &
-      ((values: $ReadOnlyArray<T>, array: $ReadOnlyArray<T>) => T[]);
+    ): ((values: $ReadOnlyArray<T>) => (array: $ReadOnlyArray<T>) => Array<T>) &
+      ((values: $ReadOnlyArray<T>, array: $ReadOnlyArray<T>) => Array<T>);
     differenceBy<T>(
       iteratee: ValueOnlyIteratee<T>,
       values: $ReadOnlyArray<T>
-    ): (array: $ReadOnlyArray<T>) => T[];
+    ): (array: $ReadOnlyArray<T>) => Array<T>;
     differenceBy<T>(
       iteratee: ValueOnlyIteratee<T>,
       values: $ReadOnlyArray<T>,
       array: $ReadOnlyArray<T>
-    ): T[];
+    ): Array<T>;
     differenceWith<T>(
       comparator: Comparator<T>
-    ): ((first: $ReadOnly<T>) => (second: $ReadOnly<T>) => T[]) &
-      ((first: $ReadOnly<T>, second: $ReadOnly<T>) => T[]);
+    ): ((first: $ReadOnly<T>) => (second: $ReadOnly<T>) => Array<T>) &
+      ((first: $ReadOnly<T>, second: $ReadOnly<T>) => Array<T>);
     differenceWith<T>(
       comparator: Comparator<T>,
       first: $ReadOnly<T>
-    ): (second: $ReadOnly<T>) => T[];
+    ): (second: $ReadOnly<T>) => Array<T>;
     differenceWith<T>(
       comparator: Comparator<T>,
       first: $ReadOnly<T>,
       second: $ReadOnly<T>
-    ): T[];
+    ): Array<T>;
     drop<T>(n: number): (array: Array<T>) => Array<T>;
     drop<T>(n: number, array: Array<T>): Array<T>;
     dropLast<T>(n: number): (array: Array<T>) => Array<T>;
@@ -1775,9 +1770,9 @@ declare module "lodash/fp" {
     first<T>(array: $ReadOnlyArray<T>): T;
     flatten<T, X>(array: Array<Array<T> | X>): Array<T | X>;
     unnest<T, X>(array: Array<Array<T> | X>): Array<T | X>;
-    flattenDeep<T>(array: any[]): Array<T>;
-    flattenDepth(depth: number): (array: any[]) => any[];
-    flattenDepth(depth: number, array: any[]): any[];
+    flattenDeep<T>(array: Array<any>): Array<T>;
+    flattenDepth(depth: number): (array: Array<any>) => Array<any>;
+    flattenDepth(depth: number, array: Array<any>): Array<any>;
     fromPairs<A, B>(pairs: $ReadOnlyArray<[A, B]>): {| [key: A]: B |};
     head<T>(array: $ReadOnlyArray<T>): T;
     indexOf<T>(value: T): (array: Array<T>) => number;
@@ -1832,8 +1827,8 @@ declare module "lodash/fp" {
       fromIndex: number
     ): (array: Array<T>) => number;
     lastIndexOfFrom<T>(value: T, fromIndex: number, array: Array<T>): number;
-    nth<T>(n: number): (array: T[]) => T;
-    nth<T>(n: number, array: T[]): T;
+    nth<T>(n: number): (array: Array<T>) => T;
+    nth<T>(n: number, array: Array<T>): T;
     pull<T>(value: T): (array: Array<T>) => Array<T>;
     pull<T>(value: T, array: Array<T>): Array<T>;
     pullAll<T>(values: $ReadOnlyArray<T>): (array: Array<T>) => Array<T>;
@@ -1853,10 +1848,10 @@ declare module "lodash/fp" {
     ): Array<T>;
     pullAllWith<T>(
       comparator: Function
-    ): ((values: T[]) => (array: T[]) => T[]) &
-      ((values: T[], array: T[]) => T[]);
-    pullAllWith<T>(comparator: Function, values: T[]): (array: T[]) => T[];
-    pullAllWith<T>(comparator: Function, values: T[], array: T[]): T[];
+    ): ((values: Array<T>) => (array: Array<T>) => Array<T>) &
+      ((values: Array<T>, array: Array<T>) => Array<T>);
+    pullAllWith<T>(comparator: Function, values: Array<T>): (array: Array<T>) => Array<T>;
+    pullAllWith<T>(comparator: Function, values: Array<T>, array: Array<T>): Array<T>;
     pullAt<T>(indexed: Array<number>): (array: Array<T>) => Array<T>;
     pullAt<T>(indexed: Array<number>, array: Array<T>): Array<T>;
     remove<T>(predicate: Predicate<T>): (array: Array<T>) => Array<T>;
@@ -2007,15 +2002,15 @@ declare module "lodash/fp" {
       a1: Array<T>,
       a2: Array<T>
     ): Array<T>;
-    zip<A, B>(a1: A[]): (a2: B[]) => Array<[A, B]>;
-    zip<A, B>(a1: A[], a2: B[]): Array<[A, B]>;
+    zip<A, B>(a1: Array<A>): (a2: Array<B>) => Array<[A, B]>;
+    zip<A, B>(a1: Array<A>, a2: Array<B>): Array<[A, B]>;
     zipAll(arrays: Array<Array<any>>): Array<any>;
     zipObject<K, V>(props?: Array<K>): (values?: Array<V>) => { [key: K]: V, ... };
     zipObject<K, V>(props?: Array<K>, values?: Array<V>): { [key: K]: V, ... };
     zipObj(props: Array<any>): (values: Array<any>) => Object;
     zipObj(props: Array<any>, values: Array<any>): Object;
-    zipObjectDeep(props: any[]): (values: any) => Object;
-    zipObjectDeep(props: any[], values: any): Object;
+    zipObjectDeep(props: Array<any>): (values: any) => Object;
+    zipObjectDeep(props: Array<any>, values: any): Object;
     zipWith<T>(
       iteratee: Iteratee<T>
     ): ((a1: NestedArray<T>) => (a2: NestedArray<T>) => Array<T>) &
@@ -2372,7 +2367,7 @@ declare module "lodash/fp" {
     curryRightN(arity: number, func: Function): Function;
     debounce(wait: number): <A, R>(func: (...A) => R) => (...A) => R;
     debounce<A, R>(wait: number, func: (...A) => R): (...A) => R;
-    defer(func: (...any[]) => any): TimeoutID;
+    defer(func: (...Array<any>) => any): TimeoutID;
     delay(wait: number): (func: Function) => TimeoutID;
     delay(wait: number, func: Function): TimeoutID;
     flip(func: Function): Function;
@@ -2384,8 +2379,8 @@ declare module "lodash/fp" {
     overArgs(func: Function, transforms: Array<Function>): Function;
     useWith(func: Function): (transforms: Array<Function>) => Function;
     useWith(func: Function, transforms: Array<Function>): Function;
-    partial(func: Function): (partials: any[]) => Function;
-    partial(func: Function, partials: any[]): Function;
+    partial(func: Function): (partials: Array<any>) => Function;
+    partial(func: Function, partials: Array<any>): Function;
     partialRight(func: Function): (partials: Array<any>) => Function;
     partialRight(func: Function, partials: Array<any>): Function;
     rearg(indexes: Array<number>): (func: Function) => Function;
@@ -2400,12 +2395,12 @@ declare module "lodash/fp" {
     spreadFrom(start: number, func: Function): Function;
     throttle<A, R>(wait: number): (func: (...A) => R) => (...A) => R;
     throttle<A, R>(wait: number, func: (...A) => R): (...A) => R;
-    unary<T, R>(func: (T, ...any[]) => R): (T) => R;
+    unary<T, R>(func: (T, ...Array<any>) => R): (T) => R;
     wrap(wrapper: Function): (value: any) => Function;
     wrap(wrapper: Function, value: any): Function;
 
     // Lang
-    castArray(value: *): any[];
+    castArray(value: *): Array<any>;
     clone<T>(value: T): T;
     cloneDeep<T>(value: T): T;
     cloneDeepWith<T, U>(
