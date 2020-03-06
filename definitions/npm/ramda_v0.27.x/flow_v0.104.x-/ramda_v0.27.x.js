@@ -420,6 +420,50 @@ declare module ramda {
       ab: UnaryPromiseFn<A, B>,
     ) => UnaryPromiseFn<A, B>);
 
+  // This kind of filter allows us to do type refinement on the result, but we
+  // still need Filter so that non-refining predicates still pass a type check.
+  declare type RefineFilter =
+    & (<K, V, P: $Pred<1>, T: Array<V> | $ReadOnlyArray<V>> (fn: P, xs: T) => Array<$Refine<V, P, 1>>)
+    & (<K, V, P: $Pred<1>, T: Array<V> | $ReadOnlyArray<V>> (fn: P) => (xs: T) => Array<$Refine<V, P, 1>>);
+
+  declare type Filter =
+    & (<K, V, T: $ReadOnlyArray<V> | { +[key: K]: V, ... }>  (fn: UnaryPredicateFn<V>, xs: T) => T)
+    & (<K, V, T: { [key: K]: V, ... } | Array<V>>   (fn: UnaryPredicateFn<V>, xs: T) => T)
+
+    & (<K, V, T: $ReadOnlyArray<V> | { +[key: K]: V, ... }>  (fn: UnaryPredicateFn<V>) =>(xs: T) => T)
+    & (<K, V, T: Array<V> | { [key: K]: V, ... }>   (fn: UnaryPredicateFn<V>) =>(xs: T) => T)
+
+  declare interface Monad<A> {
+    chain<B>(f: A => Monad<B>): Monad<B>;
+  }
+
+  declare class Semigroup<T> {}
+
+  declare class Chain {
+    chain<T, V: Monad<T> | $ReadOnlyArray<T>>(fn: (a: T) => V, x: V): V;
+    chain<T, V: Monad<T> | $ReadOnlyArray<T>>(fn: (a: T) => V): (x: V) => V;
+  }
+
+  declare class GenericContructor<T> {
+    constructor(x: T): GenericContructor<T>;
+  }
+
+  declare class GenericContructorMulti<T> {
+    constructor(...args: Array<T>): GenericContructor<T>;
+  }
+
+  /**
+   * DONE:
+   * Function*
+   * List*
+   * Logic
+   * Math
+   * Object*
+   * Relation
+   * String
+   * Type
+   */
+
   declare type Compose = (<A, B, C, D, E, F, G, H, I, J, K>(
     jk: UnaryFn<J, K>,
     ij: UnaryFn<I, J>,
@@ -493,54 +537,8 @@ declare module ramda {
       ab: UnaryFn<A, B>,
     ) => UnaryFn<A, C>) &
     (<A, B>(ab: UnaryFn<A, B>) => UnaryFn<A, B>);
-
-  // This kind of filter allows us to do type refinement on the result, but we
-  // still need Filter so that non-refining predicates still pass a type check.
-  declare type RefineFilter =
-    & (<K, V, P: $Pred<1>, T: Array<V> | $ReadOnlyArray<V>> (fn: P, xs: T) => Array<$Refine<V, P, 1>>)
-    & (<K, V, P: $Pred<1>, T: Array<V> | $ReadOnlyArray<V>> (fn: P) => (xs: T) => Array<$Refine<V, P, 1>>);
-
-  declare type Filter =
-    & (<K, V, T: $ReadOnlyArray<V> | { +[key: K]: V, ... }>  (fn: UnaryPredicateFn<V>, xs: T) => T)
-    & (<K, V, T: { [key: K]: V, ... } | Array<V>>   (fn: UnaryPredicateFn<V>, xs: T) => T)
-
-    & (<K, V, T: $ReadOnlyArray<V> | { +[key: K]: V, ... }>  (fn: UnaryPredicateFn<V>) =>(xs: T) => T)
-    & (<K, V, T: Array<V> | { [key: K]: V, ... }>   (fn: UnaryPredicateFn<V>) =>(xs: T) => T)
-
-  declare interface Monad<A> {
-    chain<B>(f: A => Monad<B>): Monad<B>;
-  }
-
-  declare class Semigroup<T> {}
-
-  declare class Chain {
-    chain<T, V: Monad<T> | $ReadOnlyArray<T>>(fn: (a: T) => V, x: V): V;
-    chain<T, V: Monad<T> | $ReadOnlyArray<T>>(fn: (a: T) => V): (x: V) => V;
-  }
-
-  declare class GenericContructor<T> {
-    constructor(x: T): GenericContructor<T>;
-  }
-
-  declare class GenericContructorMulti<T> {
-    constructor(...args: Array<T>): GenericContructor<T>;
-  }
-
-  /**
-   * DONE:
-   * Function*
-   * List*
-   * Logic
-   * Math
-   * Object*
-   * Relation
-   * String
-   * Type
-   */
-
   declare var compose: Compose;
-  declare var pipeK: PipeK;
-  declare var pipeP: PipeP;
+
   declare function then<A, R>(onSuccess: UnaryFn<A, R> | UnaryPromiseFn<A, R>): CurriedFunction1<Promise<A>, Promise<R>>
   declare function then<A, R>(onSuccess: UnaryFn<A, R> | UnaryPromiseFn<A, R>, p: Promise<A>): Promise<R>;
   declare var curry: Curry;
@@ -659,8 +657,6 @@ declare module ramda {
     & (<A, T: $ReadOnlyArray<A> | Array<A>>(a: A) => (b: T) => boolean)
     & (<A, T: $ReadOnlyArray<A> | Array<A>>(a: A, b: T) => boolean)
 
-  // Contains is deprecated, and is a synonym for includes.
-  declare var contains: Includes;
   declare var includes: Includes;
 
   declare function drop(n: number): (xs: string) => string;
@@ -756,7 +752,7 @@ declare module ramda {
   declare function findLast<V>(fn: UnaryPredicateFn<V>): (xs: $ReadOnlyArray<V>) => ?V | O;
   declare function findLast<V>(fn: UnaryPredicateFn<V>, xs: $ReadOnlyArray<V>): ?V;
 
-  declare function findIndex<K, V, T: Array<V> | { [key: K]: V, ...}>(
+  declare function findIndex<K, V, T: Array<V> | { [key: K]: V, ... }>(
     fn: UnaryPredicateFn<V>,
   ): (xs: T) => number;
   declare function findIndex<K, V, T: Array<V> | { [key: K]: V, ... }>(
@@ -1505,7 +1501,6 @@ declare module ramda {
     (<A, B>(a: A) => (b: B) => A & B) &
     (<A, B>(a: A, b: B) => A & B);
 
-  declare var merge: Merge;
   declare var mergeLeft: Merge;
   declare var mergeDeepLeft: Merge;
   declare var mergeRight: Merge;
@@ -1886,81 +1881,6 @@ declare module ramda {
   // TODO partialRight
 
   declare type UnaryMonadFn<A, R> = UnaryFn<A, Monad<R>>;
-  declare type PipeK = (<A, B, C, D, E, F, G, H, I, J, K, L: Monad<K>>(
-        ab: UnaryMonadFn<A, B>,
-        bc: UnaryMonadFn<B, C>,
-        cd: UnaryMonadFn<C, D>,
-        de: UnaryMonadFn<D, E>,
-        ef: UnaryMonadFn<E, F>,
-        fg: UnaryMonadFn<F, G>,
-        gh: UnaryMonadFn<G, H>,
-        hi: UnaryMonadFn<H, I>,
-        ij: UnaryMonadFn<I, J>,
-        jk: J => L,
-    ) => A => L) &
-    (<A, B, C, D, E, F, G, H, I, J, K: Monad<J>>(
-        ab: UnaryMonadFn<A, B>,
-        bc: UnaryMonadFn<B, C>,
-        cd: UnaryMonadFn<C, D>,
-        de: UnaryMonadFn<D, E>,
-        ef: UnaryMonadFn<E, F>,
-        fg: UnaryMonadFn<F, G>,
-        gh: UnaryMonadFn<G, H>,
-        hi: UnaryMonadFn<H, I>,
-        ij: I => K,
-    ) => A => K) &
-    (<A, B, C, D, E, F, G, H, I, J: Monad<I>>(
-        ab: UnaryMonadFn<A, B>,
-        bc: UnaryMonadFn<B, C>,
-        cd: UnaryMonadFn<C, D>,
-        de: UnaryMonadFn<D, E>,
-        ef: UnaryMonadFn<E, F>,
-        fg: UnaryMonadFn<F, G>,
-        gh: UnaryMonadFn<G, H>,
-        hi: H => J,
-    ) => A => J) &
-    (<A, B, C, D, E, F, G, H, I: Monad<H>>(
-        ab: UnaryMonadFn<A, B>,
-        bc: UnaryMonadFn<B, C>,
-        cd: UnaryMonadFn<C, D>,
-        de: UnaryMonadFn<D, E>,
-        ef: UnaryMonadFn<E, F>,
-        fg: UnaryMonadFn<F, G>,
-        gh: G => I,
-    ) => A => I) &
-    (<A, B, C, D, E, F, G, H: Monad<G>>(
-        ab: UnaryMonadFn<A, B>,
-        bc: UnaryMonadFn<B, C>,
-        cd: UnaryMonadFn<C, D>,
-        de: UnaryMonadFn<D, E>,
-        ef: UnaryMonadFn<E, F>,
-        fg: F => H,
-    ) => A => H) &
-    (<A, B, C, D, E, F, G: Monad<F>>(
-        ab: UnaryMonadFn<A, B>,
-        bc: UnaryMonadFn<B, C>,
-        cd: UnaryMonadFn<C, D>,
-        de: UnaryMonadFn<D, E>,
-        ef: E => G,
-    ) => A => G) &
-    (<A, B, C, D, E, F: Monad<E>>(
-        ab: UnaryMonadFn<A, B>,
-        bc: UnaryMonadFn<B, C>,
-        cd: UnaryMonadFn<C, D>,
-        de: D => F,
-    ) => A => F) &
-    (<A, B, C, D, E: Monad<D>>(
-        ab: UnaryMonadFn<A, B>,
-        bc: UnaryMonadFn<B, C>,
-        cd: C => E,
-    ) => A => E) &
-    (<A, B, C, D: Monad<C>>(
-        ab: UnaryMonadFn<A, B>,
-        bc: B => D,
-    ) => A => D) &
-    (<A, B, C: Monad<B>>(
-        ab: A => C
-    ) => A => C);
 
   declare function tap<T>(fn: (x: T) => mixed): (x: T) => T;
   declare function tap<T>(fn: (x: T) => mixed, x: T): T;
