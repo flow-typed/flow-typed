@@ -745,12 +745,9 @@ declare module "lodash" {
       object?: ?T,
       predicate?: ?OPredicate<A, T>
     ): Array<V>;
-    sample<T>(array: ?Array<T>): T;
-    sample<V, T: Object>(object: T): V;
-    sampleSize<T>(array?: ?Array<T>, n?: ?number): Array<T>;
-    sampleSize<V, T: Object>(object: T, n?: number): Array<V>;
-    shuffle<T>(array: ?Array<T>): Array<T>;
-    shuffle<V, T: Object>(object: T): Array<V>;
+    sample<T>(collection: ?$ReadOnlyArray<T> | $ReadOnly<{ [id: any]: T, ... }>): T;
+    sampleSize<T>(collection?: ?$ReadOnlyArray<T> | $ReadOnly<{ [id: any]: T, ... }>, n?: ?number): Array<T>;
+    shuffle<T>(array: ?$ReadOnlyArray<T> | $ReadOnly<{ [id: any]: T, ... }>): Array<T>;
     size(collection: $ReadOnlyArray<any> | Object | string): number;
     some<T>(array: void | null, predicate?: ?Predicate<T>): false;
     some<T>(array: ?$ReadOnlyArray<T>, predicate?: Predicate<T>): boolean;
