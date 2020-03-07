@@ -41,6 +41,9 @@ import compose from "lodash/fp/compose";
 import includes from "lodash/fp/includes";
 import pick from "lodash/fp/pick";
 
+/**
+ * filter
+ */
 filter("x", [{ x: 1 }, { x: 2 }]);
 filter("x")([{ x: 1 }, { x: 2 }]);
 filter("x", { a: { x: 1 }, b: { x: 2 } });
