@@ -220,11 +220,11 @@ declare module "lodash" {
     compact<T, N: ?T>(array?: ?$ReadOnlyArray<N>): Array<T>;
     concat<T>(
       base?: ?$ReadOnlyArray<T>,
-      ...elements: Array<any>
+      ...elements: $ReadOnlyArray<any>
     ): Array<T | any>;
     difference<T>(
       array?: ?$ReadOnlyArray<T>,
-      ...values: Array<?$ReadOnlyArray<T>>
+      ...values: $ReadOnlyArray<?$ReadOnlyArray<T>>
     ): Array<T>;
     differenceBy<T, U>(
       array?: ?$ReadOnlyArray<T>,
@@ -349,9 +349,9 @@ declare module "lodash" {
       values?: ?$ReadOnlyArray<any>,
       comparator?: ?Function
     ): T;
-    pullAllWith<T>(array: Array<T>, values?: ?(Array<T>), comparator?: ?Function): Array<T>;
-    pullAt<T>(array?: ?Array<T>, ...indexed?: Array<?number>): Array<T>;
-    pullAt<T>(array?: ?Array<T>, indexed?: ?Array<number>): Array<T>;
+    pullAllWith<T>(array: Array<T>, values?: ?($ReadOnlyArray<T>), comparator?: ?Function): Array<T>;
+    pullAt<T>(array?: ?Array<T>, ...indexed?: $ReadOnlyArray<?number>): Array<T>;
+    pullAt<T>(array?: ?Array<T>, indexed?: ?$ReadOnlyArray<number>): Array<T>;
     remove<T>(array?: ?Array<T>, predicate?: ?Predicate<T>): Array<T>;
     reverse<T>(array: Array<T>): Array<T>;
     reverse<T: void | null>(array: T): T;
@@ -639,12 +639,12 @@ declare module "lodash" {
     invokeMap<T>(
       array?: ?$ReadOnlyArray<T>,
       path?: ?((value: T) => Path) | Path,
-      ...args?: Array<any>
+      ...args?: $ReadOnlyArray<any>
     ): Array<any>;
     invokeMap<T: Object>(
       object: T,
       path: ((value: any) => Path) | Path,
-      ...args?: Array<any>
+      ...args?: $ReadOnlyArray<any>
     ): Array<any>;
     keyBy<T, V>(
       array: $ReadOnlyArray<T>,
@@ -765,7 +765,7 @@ declare module "lodash" {
     ): Array<T>;
     sortBy<V, T: Object>(
       object: T,
-      ...iteratees?: Array<OIteratee<T>>
+      ...iteratees?: $ReadOnlyArray<OIteratee<T>>
     ): Array<V>;
     sortBy<V, T: Object>(
       object: T,
@@ -779,37 +779,37 @@ declare module "lodash" {
     after(n: number, fn: Function): Function;
     ary(func: Function, n?: number): Function;
     before(n: number, fn: Function): Function;
-    bind<F:(...Array<any>) => any>(func: F, thisArg: any, ...partials: Array<any>): F;
-    bindKey(obj?: ?Object, key?: ?string, ...partials?: Array<?any>): Function;
+    bind<F:(...$ReadOnlyArray<any>) => any>(func: F, thisArg: any, ...partials: $ReadOnlyArray<any>): F;
+    bindKey(obj?: ?Object, key?: ?string, ...partials?: $ReadOnlyArray<?any>): Function;
     curry: Curry;
     curry(func: Function, arity?: number): Function;
     curryRight(func: Function, arity?: number): Function;
-    debounce<F: (...Array<any>) => any>(
+    debounce<F: (...$ReadOnlyArray<any>) => any>(
       func: F,
       wait?: number,
       options?: DebounceOptions
     ): F & Cancelable;
-    defer(func: (...Array<any>) => any, ...args?: Array<any>): TimeoutID;
-    delay(func: Function, wait: number, ...args?: Array<any>): TimeoutID;
-    flip<R>(func: (...Array<any>) => R): (...Array<any>) => R;
+    defer(func: (...$ReadOnlyArray<any>) => any, ...args?: $ReadOnlyArray<any>): TimeoutID;
+    delay(func: Function, wait: number, ...args?: $ReadOnlyArray<any>): TimeoutID;
+    flip<R>(func: (...$ReadOnlyArray<any>) => R): (...Array<any>) => R;
     memoize<A, R>(func: (...A) => R, resolver?: (...A) => any): (...A) => R;
     negate<A, R>(predicate: (...A) => R): (...A) => boolean;
-    once<F: (...Array<any>) => any>(func: F): F;
-    overArgs(func?: ?Function, ...transforms?: Array<Function>): Function;
+    once<F: (...$ReadOnlyArray<any>) => any>(func: F): F;
+    overArgs(func?: ?Function, ...transforms?: $ReadOnlyArray<Function>): Function;
     overArgs(func?: ?Function, transforms?: ?$ReadOnlyArray<Function>): Function;
-    partial<R>(func: (...Array<any>) => R, ...partials: Array<any>): (...Array<any>) => R;
-    partialRight<R>(func: (...Array<any>) => R, ...partials: Array<any>): (...Array<any>) => R;
-    partialRight<R>(func: (...Array<any>) => R, partials: $ReadOnlyArray<any>): (...Array<any>) => R;
-    rearg(func: Function, ...indexes: Array<number>): Function;
+    partial<R>(func: (...$ReadOnlyArray<any>) => R, ...partials: $ReadOnlyArray<any>): (...Array<any>) => R;
+    partialRight<R>(func: (...$ReadOnlyArray<any>) => R, ...partials: $ReadOnlyArray<any>): (...Array<any>) => R;
+    partialRight<R>(func: (...$ReadOnlyArray<any>) => R, partials: $ReadOnlyArray<any>): (...Array<any>) => R;
+    rearg(func: Function, ...indexes: $ReadOnlyArray<number>): Function;
     rearg(func: Function, indexes: $ReadOnlyArray<number>): Function;
     rest(func: Function, start?: number): Function;
     spread(func: Function): Function;
-    throttle<F: (...Array<any>) => any>(
+    throttle<F: (...$ReadOnlyArray<any>) => any>(
       func: F,
       wait?: number,
       options?: ThrottleOptions
     ): F & Cancelable;
-    unary<F: (...Array<any>) => any>(func: F): F;
+    unary<F: (...$ReadOnlyArray<any>) => any>(func: F): F;
     wrap(value?: any, wrapper?: ?Function): Function;
 
     // Lang
@@ -961,7 +961,7 @@ declare module "lodash" {
     random(lower?: number, upper?: number, floating?: boolean): number;
 
     // Object
-    assign(object?: ?Object, ...sources?: Array<?Object>): Object;
+    assign(object?: ?Object, ...sources?: $ReadOnlyArray<?Object>): Object;
     assignIn(): {...};
     assignIn<A, B>(a: A, b: B): A & B;
     assignIn<A, B, C>(a: A, b: B, c: C): A & B & C;
@@ -1069,13 +1069,13 @@ declare module "lodash" {
         source: A | B | C | D
       ) => any | void
     ): Object;
-    at(object?: ?Object, ...paths: Array<string>): Array<any>;
+    at(object?: ?Object, ...paths: $ReadOnlyArray<string>): Array<any>;
     at(object?: ?Object, paths: $ReadOnlyArray<string>): Array<any>;
     create(prototype: void | null, properties: void | null): {...};
     create<T>(prototype: T, properties: Object): T;
     create(prototype: any, properties: void | null): {...};
-    defaults(object?: ?Object, ...sources?: Array<?Object>): Object;
-    defaultsDeep(object?: ?Object, ...sources?: Array<?Object>): Object;
+    defaults(object?: ?Object, ...sources?: $ReadOnlyArray<?Object>): Object;
+    defaultsDeep(object?: ?Object, ...sources?: $ReadOnlyArray<?Object>): Object;
     // alias for _.toPairs
     entries(object?: ?Object): Array<[string, any]>;
     // alias for _.toPairsIn
@@ -1180,7 +1180,7 @@ declare module "lodash" {
     invoke(
       object?: ?Object,
       path?: ?Path,
-      ...args?: Array<any>
+      ...args?: $ReadOnlyArray<any>
     ): any;
     keys<K>(object?: ?{ [key: K]: any, ... }): Array<K>;
     keys(object?: ?Object): Array<string>;
@@ -1189,7 +1189,7 @@ declare module "lodash" {
     mapKeys(object: void | null, iteratee?: ?OIteratee<*>): {...};
     mapValues(object: Object, iteratee?: ?OIteratee<*>): Object;
     mapValues(object: void | null, iteratee?: ?OIteratee<*>): {...};
-    merge(object?: ?Object, ...sources?: Array<?Object>): Object;
+    merge(object?: ?Object, ...sources?: $ReadOnlyArray<?Object>): Object;
     mergeWith(): {...};
     mergeWith<T: Object, A: Object>(
       object: T,
@@ -1392,10 +1392,10 @@ declare module "lodash" {
     words(string?: ?string, pattern?: ?RegExp | ?string): Array<string>;
 
     // Util
-    attempt(func: Function, ...args: Array<any>): any;
+    attempt(func: Function, ...args: $ReadOnlyArray<any>): any;
     bindAll(object: Object, methodNames?: ?$ReadOnlyArray<string>): Object;
     bindAll<T: void | null>(object: T, methodNames?: ?$ReadOnlyArray<string>): T;
-    bindAll(object: Object, ...methodNames: Array<string>): Object;
+    bindAll(object: Object, ...methodNames: $ReadOnlyArray<string>): Object;
     cond(pairs?: ?NestedArray<Function>): Function;
     conforms(source?: ?Object): Function;
     constant<T>(value: T): () => T;
@@ -1412,21 +1412,21 @@ declare module "lodash" {
     iteratee(func?: any): Function;
     matches(source?: ?Object): Function;
     matchesProperty(path?: ?Path, srcValue: any): Function;
-    method(path?: ?Path, ...args?: Array<any>): Function;
-    methodOf(object?: ?Object, ...args?: Array<any>): Function;
+    method(path?: ?Path, ...args?: $ReadOnlyArray<any>): Function;
+    methodOf(object?: ?Object, ...args?: $ReadOnlyArray<any>): Function;
     mixin<T: Function | Object>(
       object?: T,
       source: Object,
       options?: { chain: boolean, ... }
     ): T;
     noConflict(): Lodash;
-    noop(...args: Array<mixed>): void;
+    noop(...args: $ReadOnlyArray<mixed>): void;
     nthArg(n?: ?number): Function;
-    over(...iteratees: Array<Function>): Function;
+    over(...iteratees: $ReadOnlyArray<Function>): Function;
     over(iteratees: $ReadOnlyArray<Function>): Function;
-    overEvery(...predicates: Array<Function>): Function;
+    overEvery(...predicates: $ReadOnlyArray<Function>): Function;
     overEvery(predicates: $ReadOnlyArray<Function>): Function;
-    overSome(...predicates: Array<Function>): Function;
+    overSome(...predicates: $ReadOnlyArray<Function>): Function;
     overSome(predicates: $ReadOnlyArray<Function>): Function;
     property(path?: ?Path): Function;
     propertyOf(object?: ?Object): Function;
@@ -1441,7 +1441,7 @@ declare module "lodash" {
     stubObject(): {...};
     stubString(): "";
     stubTrue(): true;
-    times(n?: ?number, ...rest?: Array<void | null>): Array<number>;
+    times(n?: ?number, ...rest?: $ReadOnlyArray<void | null>): Array<number>;
     times<T>(n: number, iteratee: (i: number) => T): Array<T>;
     toPath(value: any): Array<string>;
     uniqueId(prefix?: ?string): string;
@@ -2364,7 +2364,7 @@ declare module "lodash/fp" {
     curryRightN(arity: number, func: Function): Function;
     debounce(wait: number): <A, R>(func: (...A) => R) => (...A) => R;
     debounce<A, R>(wait: number, func: (...A) => R): (...A) => R;
-    defer(func: (...Array<any>) => any): TimeoutID;
+    defer(func: (...$ReadOnlyArray<any>) => any): TimeoutID;
     delay(wait: number): (func: Function) => TimeoutID;
     delay(wait: number, func: Function): TimeoutID;
     flip(func: Function): Function;
@@ -2392,7 +2392,7 @@ declare module "lodash/fp" {
     spreadFrom(start: number, func: Function): Function;
     throttle<A, R>(wait: number): (func: (...A) => R) => (...A) => R;
     throttle<A, R>(wait: number, func: (...A) => R): (...A) => R;
-    unary<T, R>(func: (T, ...Array<any>) => R): (T) => R;
+    unary<T, R>(func: (T, ...$ReadOnlyArray<any>) => R): (T) => R;
     wrap(wrapper: Function): (value: any) => Function;
     wrap(wrapper: Function, value: any): Function;
 
@@ -2953,9 +2953,9 @@ declare module "lodash/fp" {
       predicate: OPredicate<A>
     ): (object: T) => Object;
     omitBy<A, T: $ReadOnly<{ [id: any]: A, ... }>>(predicate: OPredicate<A>, object: T): Object;
-    pick(...props: Array<string | {...}>): Object;
+    pick(...props: $ReadOnlyArray<string | {...}>): Object;
     pick(props: $ReadOnlyArray<string>, object: Object): Object;
-    pick(...props: Array<string>): (object: Object) => Object;
+    pick(...props: $ReadOnlyArray<string>): (object: Object) => Object;
     pick(props: $ReadOnlyArray<string>): (object: Object) => Object;
     pickAll(props: $ReadOnlyArray<string>): (object: Object) => Object;
     pickAll(props: $ReadOnlyArray<string>, object: Object): Object;
@@ -3209,7 +3209,7 @@ declare module "lodash/fp" {
       options: { chain: boolean, ... }
     ): T;
     noConflict(): Lodash;
-    noop(...args: Array<mixed>): void;
+    noop(...args: $ReadOnlyArray<mixed>): void;
     nthArg(n: number): Function;
     over(iteratees: $ReadOnlyArray<Function>): Function;
     juxt(iteratees: $ReadOnlyArray<Function>): Function;
