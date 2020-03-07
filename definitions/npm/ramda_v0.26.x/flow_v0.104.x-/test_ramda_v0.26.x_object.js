@@ -445,17 +445,28 @@ const ob3 = _.merge(ob1, ob2);
 const propX = ob3.x;
 const propA = ob3.a;
 
-const mLeft: Object = _.mergeLeft({ 'age': 40 }, { 'name': 'fred', 'age': 10 });
+type User = {
+  name: string,
+  age: number,
+  ...
+}
+const mLeft: User = _.mergeLeft({ 'age': 40 }, { 'name': 'fred', 'age': 10 });
 const mLeftName: string = mLeft.name;
 const mLeftAge: number = mLeft.age;
-const mLeft2: Object = _.mergeLeft({x: 0})({x: 5, y: 2});
+type Point = {
+  x: number,
+  y: number,
+  ...
+}
+const mLeft2: Point = _.mergeLeft({x: 0})({x: 5, y: 2});
 const mLeftX: number = mLeft2.x;
 const mLeftY: number = mLeft2.y;
 
-const mRight: Object = _.mergeRight({ 'name': 'fred', 'age': 10 }, { 'age': 40 });
+const mRight: User = _.mergeRight({ 'name': 'fred', 'age': 10 }, { 'age': 40 });
 const mRightName: string = mRight.name;
+// $ExpectError
 const mRightAge: number = mRight.name;
-const mRight2: Object = _.mergeRight({x: 0, y: 0})({y: 2});
+const mRight2: Point = _.mergeRight({x: 0, y: 0})({y: 2});
 const mRightX: number = mRight2.x;
 const mRightY: number = mRight2.y;
 

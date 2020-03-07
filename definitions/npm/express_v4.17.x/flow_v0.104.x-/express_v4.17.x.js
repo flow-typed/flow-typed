@@ -195,6 +195,11 @@ declare class express$Route<
   connect: express$RouteMethodType<this, Req, Res>;
 }
 
+declare type express$RouterUseable<Req: express$Request, Res: express$Response> =
+  | express$Middleware<Req, Res>
+  | express$Router<Req, Res>
+  | $ReadOnlyArray<express$Middleware<Req, Res> | express$Router<Req, Res>>;
+
 declare class express$Router<
   Req: express$Request = express$Request,
   Res: express$Response = express$Response,
@@ -204,13 +209,8 @@ declare class express$Router<
   static <Req2: express$Request, Res2: express$Response>(
     options?: express$RouterOptions,
   ): express$Router<Req2, Res2>;
-  use(middleware: express$Middleware<Req, Res>): this;
-  use(...middleware: Array<express$Middleware<Req, Res>>): this;
-  use(
-    path: express$Path | $ReadOnlyArray<express$Path>,
-    ...middleware: Array<express$Middleware<Req, Res>>
-  ): this;
-  use(path: string, router: express$Router<Req, Res>): this;
+  use(express$RouterUseable<Req, Res>, ...express$RouterUseable<Req, Res>[]): this;
+  use(express$Path, express$RouterUseable<Req, Res>, ...express$RouterUseable<Req, Res>[]): this;
   handle(
     req: http$IncomingMessage<>,
     res: http$ServerResponse,

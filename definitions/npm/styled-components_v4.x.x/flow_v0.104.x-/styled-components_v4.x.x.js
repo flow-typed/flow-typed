@@ -435,3 +435,7 @@ declare module 'styled-components/native' {
 
   declare export default Styled & ConvenientShorthands
 }
+
+declare module 'styled-components/macro' {
+  declare export * from 'styled-components';
+}
