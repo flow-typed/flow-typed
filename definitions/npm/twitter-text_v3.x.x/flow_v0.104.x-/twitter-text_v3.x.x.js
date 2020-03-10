@@ -79,10 +79,10 @@ declare module 'twitter-text' {
 		defaultWeight: 200,
 		transformedURLLength: 23,
 		ranges: [
-			{ start: 0, end: 4351, weight: 100 },
-			{ start: 8192, end: 8205, weight: 100 },
-			{ start: 8208, end: 8223, weight: 100 },
-			{ start: 8242, end: 8247, weight: 100 }
+			{| start: 0, end: 4351, weight: 100 |},
+			{| start: 8192, end: 8205, weight: 100 |},
+			{| start: 8208, end: 8223, weight: 100 |},
+			{| start: 8242, end: 8247, weight: 100 |}
 		]
 	|};
 	declare type ConfigVersion3 = {|
@@ -93,10 +93,10 @@ declare module 'twitter-text' {
 		emojiParsingEnabled: true,
 		transformedURLLength: 23,
 		ranges: [
-			{ start: 0, end: 4351, weight: 100 },
-			{ start: 8192, end: 8205, weight: 100 },
-			{ start: 8208, end: 8223, weight: 100 },
-			{ start: 8242, end: 8247, weight: 100 }
+			{| start: 0, end: 4351, weight: 100 |},
+			{| start: 8192, end: 8205, weight: 100 |},
+			{| start: 8208, end: 8223, weight: 100 |},
+			{| start: 8242, end: 8247, weight: 100 |}
 		]
 	|};
 	declare type Config =
