@@ -1318,6 +1318,9 @@ declare module ramda {
 
   declare function identical<T>(x: T): (y: T) => boolean;
   declare function identical<T>(x: T, y: T): boolean;
+      
+  declare function includes<V, T: Array<V> | string>(x?: V, y: T): boolean;
+  declare function includes<V, T: Array<V> | string>(x?: V) : (y: T) => boolean;
 
   declare function innerJoin<A, B>(
     pred: (a: A, b: B) => boolean
