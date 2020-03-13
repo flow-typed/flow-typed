@@ -156,6 +156,38 @@ declare module '@testing-library/react' {
 
   declare export var act: ReactDOMTestUtilsAct;
   declare export function cleanup(): void;
+
+  declare export function waitFor<T>(
+    callback?: () => T,
+    options?: {|
+      container?: HTMLElement,
+      timeout?: number,
+      interval?: number,
+      mutationObserverOptions?: MutationObserverInit,
+    |}
+  ): Promise<void>;
+
+  declare export function waitForElementToBeRemoved(
+    callback?: HTMLElement,
+    options?: {|
+      container?: HTMLElement,
+      timeout?: number,
+      interval?: number,
+      mutationObserverOptions?: MutationObserverInit,
+    |}
+  ): Promise<void>;
+
+  declare export function waitForElementToBeRemoved<T>(
+    callback?: () => T,
+    options?: {|
+      container?: HTMLElement,
+      timeout?: number,
+      interval?: number,
+      mutationObserverOptions?: MutationObserverInit,
+    |}
+  ): Promise<T>;
+
+  /* Deprecated */
   declare export function wait(
     callback?: () => void,
     options?: {
@@ -164,12 +196,16 @@ declare module '@testing-library/react' {
       ...
     }
   ): Promise<void>;
+
+  /* Deprecated */
   declare export function waitForDomChange<T>(options?: {
     container?: HTMLElement,
     timeout?: number,
     mutationObserverOptions?: MutationObserverInit,
     ...
   }): Promise<T>;
+
+  /* Deprecated */
   declare export function waitForElement<T>(
     callback?: () => T,
     options?: {
@@ -179,10 +215,12 @@ declare module '@testing-library/react' {
       ...
     }
   ): Promise<T>;
+
   declare export function within(
     element: HTMLElement,
     queriesToBind?: GetsAndQueries | Array<GetsAndQueries>
   ): GetsAndQueries;
+
   declare export var fireEvent: {|
     (element: HTMLElement, event: Event): void,
 

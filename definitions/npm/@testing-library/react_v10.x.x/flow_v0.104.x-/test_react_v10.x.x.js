@@ -4,11 +4,12 @@ import React from 'react';
 import {
   act,
   render,
-  wait,
   fireEvent,
   cleanup,
+  waitFor,
   waitForDomChange,
   waitForElement,
+  waitForElementToBeRemoved,
   within,
 } from '@testing-library/react';
 import { describe, it } from 'flow-typed-test';
@@ -44,21 +45,24 @@ describe('act', () => {
 
   it('should pass on correct usage of result', () => {
     act(() => {}).then(() => {});
-    act(() => {}).then(() => {}, () => {});
+    act(() => {}).then(
+      () => {},
+      () => {}
+    );
   });
 });
 
-describe('wait', () => {
+describe('waitFor', () => {
   it('should fail on invalid inputs', () => {
     // $ExpectError
-    wait(1);
+    waitFor(1);
     // $ExpectError
-    wait(() => {}, 1);
+    waitFor(() => {}, 1);
   });
 
   it('should pass on correct inputs', () => {
-    wait(() => {});
-    wait(() => {}, { timeout: 1 });
+    waitFor(() => {});
+    waitFor(() => {}, { timeout: 1 });
   });
 });
 
@@ -94,6 +98,39 @@ describe('waitForElement', () => {
 
   it('should return a usable value.', async n => {
     const usernameElement = await waitForElement(() =>
+      document.createElement('input')
+    );
+
+    usernameElement.value = 'chucknorris';
+  });
+});
+
+describe('waitForElementToBeRemoved', () => {
+  it('should fail on invalid inputs', () => {
+    // $ExpectError
+    waitForElementToBeRemoved(1);
+    // $ExpectError
+    waitForElementToBeRemoved(() => {}, 1);
+  });
+
+  it('should pass on correct inputs (callback)', () => {
+    waitForElementToBeRemoved(() => document.createElement('div'));
+    waitForElementToBeRemoved(() => document.createElement('div'), {
+      container: document.createElement('div'),
+      timeout: 100,
+    });
+  });
+
+  it('should pass on correct inputs (node)', () => {
+    waitForElementToBeRemoved(document.createElement('div'));
+    waitForElementToBeRemoved(document.createElement('div'), {
+      container: document.createElement('div'),
+      timeout: 100,
+    });
+  });
+
+  it('should return a usable value.', async n => {
+    const usernameElement = await waitForElementToBeRemoved(() =>
       document.createElement('input')
     );
 
