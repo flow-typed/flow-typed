@@ -165,7 +165,7 @@ declare module '@testing-library/react' {
       interval?: number,
       mutationObserverOptions?: MutationObserverInit,
     |}
-  ): Promise<void>;
+  ): Promise<T>;
 
   declare export function waitForElementToBeRemoved(
     callback?: HTMLElement,
@@ -175,7 +175,7 @@ declare module '@testing-library/react' {
       interval?: number,
       mutationObserverOptions?: MutationObserverInit,
     |}
-  ): Promise<void>;
+  ): Promise<HTMLElement>;
 
   declare export function waitForElementToBeRemoved<T>(
     callback?: () => T,
