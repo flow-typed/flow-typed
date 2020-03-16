@@ -39,6 +39,9 @@ import pick from 'lodash/pick';
 import pickBy from "lodash/pickBy";
 import pullAllBy from "lodash/pullAllBy";
 import range from "lodash/range";
+import sample from "lodash/sample";
+import sampleSize from "lodash/sampleSize";
+import shuffle from "lodash/shuffle";
 import sortedIndexBy from "lodash/sortedIndexBy";
 import sortedLastIndexBy from "lodash/sortedLastIndexBy";
 import sortedUniq from "lodash/sortedUniq";
@@ -60,7 +63,7 @@ type ReadOnlyArray = $ReadOnlyArray<number>
 const readOnlyArray : ReadOnlyArray = [1, 2, 3, 4];
 
 type ReadOnlyObject = $ReadOnly<{ [string]: number, ... }>
-const readOnlyObject : ReadOnlyObject = { [1]: 1, [2]: 2 };
+const readOnlyObject : ReadOnlyObject = { a: 1, b: 2, c: 3 };
 
 describe('Array', () => {
   it('chunk', () => {
@@ -305,7 +308,8 @@ describe('Collection', () => {
     (keyBy(keyByTest_map, "id"): KeyByTest$ByNumberMaybe<KeyByTest$Record>);
   });
 
-  it('map examples from the official doc', () => {
+  it('map', () => {
+    // examples from the official doc
     function square(n) {
       return n * n;
     }
@@ -331,6 +335,30 @@ describe('Collection', () => {
     // return type of iterator is reflected in result and chain
     (nums.map(num => JSON.stringify(num)): string[]);
     (map(nums, num => JSON.stringify(num)): string[]);
+  });
+
+  it('sample', () => {
+    (sample(readOnlyArray): number);
+    (sample(readOnlyObject): number);
+    (sample({ a: 1, b: 'abc' }): number| string);
+    // $ExpectError
+    (sample({ a: 1, b: 'abc' }): number);
+  });
+
+  it('sampleSize', () => {
+    (sampleSize(readOnlyArray, 2): number[]);
+    (sampleSize(readOnlyObject, 2): number[]);
+    (sampleSize({ a: 1, b: 'abc' }, 2): (number| string)[]);
+    // $ExpectError
+    (shuffle({ a: 1, b: 'abc' }, 2): number[]);
+  });
+
+  it('shuffle', () => {
+    (shuffle(readOnlyArray): number[]);
+    (shuffle(readOnlyObject): number[]);
+    (shuffle(readOnlyObject): (number | string)[]);
+    // $ExpectError
+    (shuffle({ a: 1, b: 'abc' }): number[]);
   });
 
   it('orderBy', () => {
