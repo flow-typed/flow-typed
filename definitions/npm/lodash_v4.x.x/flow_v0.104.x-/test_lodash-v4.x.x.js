@@ -19,29 +19,46 @@ import difference from "lodash/difference";
 import differenceBy from "lodash/differenceBy";
 import differenceWith from "lodash/differenceWith";
 import each from "lodash/each";
+import eachRight from "lodash/eachRight";
+import every from "lodash/every";
 import extend from "lodash/extend";
+import filter from "lodash/filter";
 import find from "lodash/find";
+import findLast from "lodash/findLast";
 import first from "lodash/first";
 import flatMap from "lodash/flatMap";
+import flatMapDeep from "lodash/flatMapDeep";
+import flatMapDepth from "lodash/flatMapDepth";
 import forEach from "lodash/forEach";
+import forEachRight from "lodash/forEachRight";
 import get from "lodash/get";
 import groupBy from "lodash/groupBy";
+import includes from "lodash/includes";
 import intersectionBy from "lodash/intersectionBy";
+import invokeMap from "lodash/invokeMap";
 import isEqual from "lodash/isEqual";
 import isString from "lodash/isString";
 import keyBy from "lodash/keyBy";
+import keys from "lodash/keys";
 import map from "lodash/map";
 import memoize from "lodash/memoize";
 import noop from "lodash/noop";
 import omitBy from "lodash/omitBy";
 import orderBy from 'lodash/orderBy';
+import partition from 'lodash/partition';
 import pick from 'lodash/pick';
 import pickBy from "lodash/pickBy";
 import pullAllBy from "lodash/pullAllBy";
 import range from "lodash/range";
+import reduce from "lodash/reduce";
+import reduceRight from "lodash/reduceRight";
+import reject from "lodash/reject";
 import sample from "lodash/sample";
 import sampleSize from "lodash/sampleSize";
 import shuffle from "lodash/shuffle";
+import size from "lodash/size";
+import some from "lodash/some";
+import sortBy from "lodash/sortBy";
 import sortedIndexBy from "lodash/sortedIndexBy";
 import sortedLastIndexBy from "lodash/sortedLastIndexBy";
 import sortedUniq from "lodash/sortedUniq";
@@ -62,8 +79,20 @@ import zipWith from "lodash/zipWith";
 type ReadOnlyArray = $ReadOnlyArray<number>
 const readOnlyArray : ReadOnlyArray = [1, 2, 3, 4];
 
-type ReadOnlyObject = $ReadOnly<{ [string]: number, ... }>
-const readOnlyObject : ReadOnlyObject = { a: 1, b: 2, c: 3 };
+type IndexerObject = { [string]: number, ... };
+const indexerObject: IndexerObject = { a: 1, b: 2, c: 3 };
+
+type ExactObject = {| a: number, b: number, c: number; |};
+const exactObject: ExactObject = { a: 1, b: 2, c: 3 };
+
+type ExactHeterogeneousObject = {| a: number, b: string, c: boolean; |};
+const exactHeterogeneousObject: ExactHeterogeneousObject = { a: 1, b: 'abc', c: true };
+
+type ReadOnlyIndexerObject = $ReadOnly<IndexerObject>
+const readOnlyIndexerObject: ReadOnlyIndexerObject = { ...indexerObject };
+
+type ReadOnlyExactObject = $ReadOnly<ExactObject>
+const readOnlyExactObject: ReadOnlyExactObject = { ...exactObject };
 
 describe('Array', () => {
   it('chunk', () => {
@@ -202,56 +231,128 @@ describe('Collection', () => {
   it('countBy', () => {
     (countBy([6.1, 4.2, 6.3], Math.floor): { [string]: number, ... });
     (countBy(["one", "two", "three"], "length"): { [string]: number, ... });
+    (countBy(indexerObject, (v: number) => v): { [string]: number, ... });
+    (countBy(exactObject, (v: number) => v): { [string]: number, ... });
+    (countBy(exactHeterogeneousObject, (v: number | string | boolean) => v): { [string]: number, ... });
+    (countBy(readOnlyExactObject, (v: number) => v): { [string]: number, ... });
+
     // $ExpectError
     (countBy(["one", "two", "three"], "length"): { [string]: string, ... });
+    // $ExpectError
+    countBy(123, "length");
+    // $ExpectError
+    countBy(["one", "two", "three"], (v: boolean) => v);
+    // $ExpectError
+    countBy(["one", "two", "three"], (v, arg2: number) => arg2);
   });
+
+  /**
+   * Using such functions allows to:
+   * 1) Ensure all tests are run and up to date for each function
+   * 2) Enforce that type definitions for all related functions (e.g. each, eachRight, forEach, forEachRight) are the same, as they should be by the docs.
+   */
+  const testForEachFunction = (f: typeof forEach) => {
+    (f(([1, 2]: $ReadOnlyArray<number>), (v: number) => false): number[]);
+    (f(indexerObject, (v: number) => {}): IndexerObject);
+    (f(exactObject, (v: number) => !!v): ExactObject);
+    (f(exactHeterogeneousObject, (v: number | string | boolean) => !!v): ExactHeterogeneousObject);
+
+    // $ExpectError
+    f(exactObject, (v: number) => ({ a: 1, b: 2}));
+    // $ExpectError
+    f(exactHeterogeneousObject, (v: number) => false);
+    // $ExpectError
+    f(exactObject, (v: number) => v + 2);
+    // $ExpectError
+    (f(exactObject, (v: number) => false): void); // each() returns collection passed in the first argument
+    // $ExpectError
+    f(exactObject, {a: 1});
+  }
 
   it('each', () => {
-    each(([1, 2]: $ReadOnlyArray<number>), (item: number) => false);
-    each(readOnlyObject, (item: number) => false);
+    testForEachFunction(each);
   });
 
-  it('find', () => {
-    find([1, 2, 3], x => x * 1 == 3);
-    find([1, 2, 3], x => x == 2, 1);
-    // $ExpectError number cannot be compared to string
-    find([1, 2, 3], x => x == "a");
-    // $ExpectError number. This type is incompatible with function type.
-    find([1, 2, 3], 1);
-    // $ExpectError property `y`. Property not found in object literal
-    find([{ x: 1 }, { x: 2 }, { x: 3 }], v => v.y == 3);
-    find([{ x: 1 }, { x: 2 }, { x: 3 }], v => v.x == 3);
-    find({ x: 1, y: 2 }, (a: number, b: string) => a);
-    find({ x: 1, y: 2 }, { x: 3 });
-    find((["a", "b"]: $ReadOnlyArray<string>), "c");
-    // opaque types are allowed as keys of objects
-    opaque type O = string;
-    const v: { [O]: number, ... } = { x: 1, y: 2 };
-    find(v, { x: 3 });
+  it('eachRight', () => {
+    testForEachFunction(eachRight);
+  });
 
-    (find([1, 2, 3], x => x == 1): void | number);
-    // $ExpectError number. This type is incompatible with function type.
-    (find([1, 2, 3], 1): void | number);
-
-    // _.find examples from the official doc
+  it('every', () => {
     const users = [
+      { 'user': 'barney', 'age': 36, 'active': false },
+      { 'user': 'fred',   'age': 40, 'active': false }
+    ];
+
+    (every([true, 1, null, 'yes'], Boolean): boolean);
+    (every(users, { 'user': 'barney', 'active': false }): boolean);
+    (every(users, ['active', false]): boolean);
+    (every(users, 'active'): boolean);
+  });
+
+  const testFilterFunction = (f: typeof filter) => {
+    const users = [
+      { 'user': 'barney', 'age': 36, 'active': true },
+      { 'user': 'fred',   'age': 40, 'active': false }
+    ];
+
+    (filter(users, function(o) { return !o.active; }): typeof users);
+    (filter(users, { 'age': 36, 'active': true }): typeof users);
+    (filter(users, ['active', false]): typeof users);
+    (filter(users, 'active'): typeof users);
+
+    // $ExpectError first arg should be array or object type is wrong
+    filter(123, function(o) { return !o.active; });
+    // $ExpectError return type is wrong
+    (filter(users, function(o) { return !o.active; }): boolean);
+  };
+
+  it('filter', () => {
+    testFilterFunction(filter);
+  });
+
+  const testFindFunction = (f: typeof find) => {
+    // examples from the official doc
+    type User = {| user: string, age: number, active: boolean |};
+    const users: User[] = [
       { user: "barney", age: 36, active: true },
       { user: "fred", age: 40, active: false },
       { user: "pebbles", age: 1, active: true }
     ];
+    (f(users, function(o) { return o.age < 40; }): User | void);
+    (f(users, { age: 1, active: true }): User | void);
+    (f(users, ["active", false]): User | void);
+    (f(users, "active"): User | void);
 
-    find(users, function(o) {
-      return o.age < 40;
-    });
+    (f([1, 2, 3], x => x * 1 == 3): number | void);
+    (f([1, 2, 3], x => x == 2, 1): number | void);
 
-    // The `_.matches` iteratee shorthand.
-    find(users, { age: 1, active: true });
+    (f([{ x: 1 }, { x: 2 }, { x: 3 }], v => v.x == 3): {| x: number |} | void);
+    (f({ x: 1, y: 2 }, (v: number, key: string) => v): number | void);
 
-    // The `_.matchesProperty` iteratee shorthand.
-    find(users, ["active", false]);
+    (f((["a", "b"]: $ReadOnlyArray<string>), "c"): string | void);
+    // opaque types are allowed as keys of objects
+    opaque type O = string;
+    type V = { [O]: number, ... };
+    const v: V = { x: 1, y: 2 };
 
-    // The `_.property` iteratee shorthand.
-    find(users, "active");
+    (f([1, 2, 3], x => x == 1): void | number);
+
+    // $ExpectError number cannot be compared to string
+    f([1, 2, 3], x => x == "a");
+    // $ExpectError number is incompatible with function type.
+    f([1, 2, 3], 1);
+    // $ExpectError property `y` not found in object literal
+    f([{ x: 1 }, { x: 2 }, { x: 3 }], v => v.y == 3);
+    // $ExpectError function may not find the item, therefore `void` is always a valid result
+    (f(users, function(o) { return o.age < 40; }): User);
+  }
+
+  it('find', () => {
+    testFindFunction(find);
+  });
+
+  it('findLast', () => {
+    testFindFunction(findLast);
   });
 
   it('flatMap', () => {
@@ -260,8 +361,22 @@ describe('Collection', () => {
     flatMap({ a: 1, b: 2 }, n => [n, n]);
   });
 
+  it('flatMapDeep', () => {
+    flatMapDeep([1, 2, 3], (n) => [[[n, n]]]);
+    flatMapDeep({ a: 1, b: 2 }, n => [[[n, n]]]);
+  });
+
+  it('flatMapDepth', () => {
+    flatMapDepth([1, 2, 3], (n) => [[[n, n]]], 2);
+    flatMapDepth({ a: 1, b: 2 }, n => [[[n, n]]], 2);
+  });
+
   it('forEach', () => {
-    forEach(([1, 2]: $ReadOnlyArray<number>), (item: number) => false);
+    testForEachFunction(forEach);
+  });
+
+  it('forEachRight', () => {
+    testForEachFunction(forEachRight);
   });
 
   it('groupBy', () => {
@@ -269,21 +384,39 @@ describe('Collection', () => {
     if (numbersGroupedByMathFloor[6]) {
       numbersGroupedByMathFloor[6][0] / numbersGroupedByMathFloor[6][1];
     }
+
     const stringsGroupedByLength = groupBy(["one", "two", "three"], "length");
     if (stringsGroupedByLength[3]) {
       stringsGroupedByLength[3][0].toLowerCase();
     }
+
     const numbersObj: { [key: string]: number, ... } = { a: 6.1, b: 4.2, c: 6.3 };
     const numbersGroupedByMathFloor2 = groupBy(numbersObj, Math.floor);
     if (numbersGroupedByMathFloor2[6]) {
       numbersGroupedByMathFloor2[6][0] / numbersGroupedByMathFloor2[6][1];
     }
+
     const stringObj: { [key: string]: string, ... } = { a: "one", b: "two", c: "three" };
     const stringsGroupedByLength2 = groupBy(stringObj, "length");
     if (stringsGroupedByLength2[3]) {
       stringsGroupedByLength2[3][0].toLowerCase();
     }
   });
+
+  it('includes', function () {
+    (includes([1, 2, 3], 1): boolean);
+    (includes([1, 2, 3], 1, 2): boolean);
+    (includes({ 'a': 1, 'b': 2 }, 1): boolean);
+    (includes('abcd', 'bc'): boolean);
+  })
+
+  it('invokeMap', function () {
+    (invokeMap([[5, 1, 7], [3, 2, 1]], 'sort'): number[][]);
+    (invokeMap(['123', '456'], String.prototype.split, ''): string[][]);
+
+    // $ExpectError
+    invokeMap([123, 456], String.prototype.split, '');
+  })
 
   it('keyBy', () => {
     keyBy([{ dir: "left", code: 97 }, { dir: "right", code: 100 }], function(o) {
@@ -310,22 +443,21 @@ describe('Collection', () => {
 
   it('map', () => {
     // examples from the official doc
-    function square(n) {
+    function square(n: number): number {
       return n * n;
     }
-
-    map([4, 8], square);
-    map({ a: 4, b: 8 }, square);
+    (map([4, 8], square): number[]);
+    (map({ a: 4, b: 8 }, square): number[]);
+    (map([{ user: "barney" }, { user: "fred" }], "user"): string[]);
+    (map([{ user: "barney", anotherProp: 1 }, { user: "fred", anotherProp: 2 }], "user"): string[]);
 
     //accepts tuple types
-
     const tuple: [number, number] = [1, 2];
-    map(tuple, val => val + 2);
+    (map(tuple, val => val + 2): number[]);
     //$ExpectError cannot push to tuple
     map(tuple, (val, nothing, tupleArray) => tupleArray.push(123));
-
-    // The `_.property` iteratee shorthand.
-    map([{ user: "barney" }, { user: "fred" }], "user");
+    //$ExpectError wrong return type
+    (map(tuple, val => val + 2): [number, number]);
 
     // Array#map, lodash.map, lodash#map
     const nums: number[] = [1, 2, 3, 4, 5, 6];
@@ -337,51 +469,129 @@ describe('Collection', () => {
     (map(nums, num => JSON.stringify(num)): string[]);
   });
 
+  it('orderBy', () => {
+    type User = {| user: string, age: number |};
+    const users: User[] = [
+      { 'user': 'fred',   'age': 48 },
+      { 'user': 'barney', 'age': 34 },
+      { 'user': 'fred',   'age': 40 },
+      { 'user': 'barney', 'age': 36 }
+    ];
+    (orderBy(users, ['user', 'age'], ['asc', 'desc']): User[]);
+
+    type Item = {| a: number, b: number |};
+    (orderBy([{a: 1, b: 2}, {a: 2, b: 1}, {a: 3, b: 0}], ['a']): Item[]);
+    (orderBy([{a: 1, b: 2}, {a: 2, b: 1}, {a: 3, b: 0}], [x => x.a]): Item[]);
+    (orderBy({[0]: {a: 1, b: 2}, [2]: {a: 2, b: 1}, [1]: {a: 3, b: 0}}, ['a']): Item[]);
+    (orderBy({[0]: {a: 1, b: 2}, [2]: {a: 2, b: 1}, [1]: {a: 3, b: 0}}, [x => x.a]): Item[]);
+  });
+
+  it('partition', () => {
+    type User = {| user: string, age: number, active: boolean |}
+    const users: User[] = [
+      { 'user': 'barney',  'age': 36, 'active': false },
+      { 'user': 'fred',    'age': 40, 'active': true },
+      { 'user': 'pebbles', 'age': 1,  'active': false }
+    ];
+    (partition(users, function(o) { return o.active; }): [User[], User[]] );
+    (partition(users, { 'age': 1, 'active': false }): [User[], User[]]);
+    (partition(users, ['active', false]): [User[], User[]]);
+    (partition(users, 'active'): [User[], User[]]);
+  });
+
+  const testReduceFunction = (f: typeof reduce) => {
+    (f([1, 2], function(sum: number, n: number) { return sum + n;}, 0): number);
+
+    type Result = {[number]: string[], ...};
+    (f({ 'a': 1, 'b': 2, 'c': 1 }, function(result: Result, value: number, key: string) {
+      (result[value] || (result[value] = [])).push(key);
+      return result;
+    }, {}): Result);
+
+    (f([[0, 1], [2, 3], [4, 5]], function(flattened: number[], other: number[]) {
+      return flattened.concat(other);
+    }, []): number[]);
+
+    // $ExpectError return type
+    (f([1, 2], function(sum, n) { return sum + n;}, 0): string);
+  };
+
+  it('reduce', () => {
+    testReduceFunction(reduce);
+  });
+
+  it('reduceRight', () => {
+    testReduceFunction(reduceRight);
+  });
+
+  it('reject', () => {
+    testFilterFunction(reject);
+  });
+
   it('sample', () => {
+    (sample([1, 2, 3, 4]): number);
     (sample(readOnlyArray): number);
-    (sample(readOnlyObject): number);
+    (sample(readOnlyIndexerObject): number);
     (sample({ a: 1, b: 'abc' }): number| string);
+
     // $ExpectError
     (sample({ a: 1, b: 'abc' }): number);
   });
 
   it('sampleSize', () => {
+    (sampleSize([1, 2, 3], 4): number[]);
     (sampleSize(readOnlyArray, 2): number[]);
-    (sampleSize(readOnlyObject, 2): number[]);
+    (sampleSize(readOnlyIndexerObject, 2): number[]);
     (sampleSize({ a: 1, b: 'abc' }, 2): (number| string)[]);
+
     // $ExpectError
     (shuffle({ a: 1, b: 'abc' }, 2): number[]);
   });
 
   it('shuffle', () => {
+    (shuffle([1, 2, 3, 4]): number[]);
     (shuffle(readOnlyArray): number[]);
-    (shuffle(readOnlyObject): number[]);
-    (shuffle(readOnlyObject): (number | string)[]);
+    (shuffle(readOnlyIndexerObject): number[]);
+    (shuffle(readOnlyIndexerObject): (number | string)[]);
+
     // $ExpectError
     (shuffle({ a: 1, b: 'abc' }): number[]);
   });
 
-  it('orderBy', () => {
-    (orderBy([{a: 1, b: 2}, {a: 2, b: 1}, {a: 3, b: 0}], ['a']): Array<{
-      a: number,
-      b: number,
-      ...
-    }>);
-    (orderBy([{a: 1, b: 2}, {a: 2, b: 1}, {a: 3, b: 0}], [x => x.a]): Array<{
-      a: number,
-      b: number,
-      ...
-    }>);
-    (orderBy({[0]: {a: 1, b: 2}, [2]: {a: 2, b: 1}, [1]: {a: 3, b: 0}}, ['a']): Array<{
-      a: number,
-      b: number,
-      ...
-    }>);
-    (orderBy({[0]: {a: 1, b: 2}, [2]: {a: 2, b: 1}, [1]: {a: 3, b: 0}}, [x => x.a]): Array<{
-      a: number,
-      b: number,
-      ...
-    }>);
+  it('size', () => {
+    (size([1, 2, 3]): number);
+    (size({ 'a': 1, 'b': 2 }): number);
+    (size('pebbles'): number);
+
+    (size(readOnlyArray): number);
+    (size(readOnlyIndexerObject): number);
+  });
+
+  it('some', () => {
+    const users = [
+      { 'user': 'barney', 'active': true },
+      { 'user': 'fred',   'active': false }
+    ];
+    (some([null, 0, 'yes', false], Boolean): boolean);
+    (some(users, { 'user': 'barney', 'active': false }): boolean);
+    (some(users, ['active', false]): boolean);
+    (some(users, 'active'): boolean);
+
+    (some(readOnlyArray, Boolean): boolean);
+    (some(readOnlyIndexerObject, Boolean): boolean);
+  });
+
+  it('sortBy', () => {
+    const users = [
+      { 'user': 'fred',   'age': 48 },
+      { 'user': 'barney', 'age': 36 },
+      { 'user': 'fred',   'age': 40 },
+      { 'user': 'barney', 'age': 34 }
+    ];
+    (sortBy(users, [function(o) { return o.user; }]): typeof users);
+    (sortBy(users, ['user', 'age']): typeof users);
+
+    (sortBy(readOnlyArray, (v) => v): typeof readOnlyArray);
   });
 });
 
@@ -448,11 +658,7 @@ describe('Lang', () => {
   });
 
   it('conformsTo', () => {
-    (conformsTo({ a: 1, b: 2 }, {
-      a: function(x: number) {
-        return true;
-      }
-    }): boolean);
+    (conformsTo({ a: 1, b: 2 }, { b: function(n: number) { return true; }}): boolean);
   });
 });
 
@@ -492,6 +698,17 @@ describe('Object', () => {
     get(undefined, "data");
   });
 
+  it('keys', () => {
+    function Foo() {
+      this.a = 1;
+      this.b = 2;
+    }
+    Foo.prototype.c = 3;
+
+    (keys(new Foo): string[]);
+    (keys('hi'): string[]);
+  });
+
   it('omitBy', () => {
     (omitBy({ a: 2, b: 3, c: 4 }, num => num % 2): { [prop: string]: number, ... });
     (omitBy(null, num => num % 2): {...});
@@ -514,7 +731,7 @@ describe('Object', () => {
     (pickBy(null, num => num % 2): {...});
     (pickBy(undefined, num => num % 2): {...});
     (pickBy({ [1]: 1, [2]: 2 }, num => num === 2): { [prop: number]: number, ... });
-    (pickBy(readOnlyObject, num => num === 2): { [prop: number]: number, ... });
+    (pickBy(readOnlyIndexerObject, num => num === 2): { [prop: number]: number, ... });
   });
 
   it('toPairs / _.toPairsIn', () => {
