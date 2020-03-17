@@ -758,8 +758,8 @@ declare module "lodash" {
     ): Array<A>;
     sample<T>(collection: ?Collection<T>): T;
     sampleSize<T>(collection?: ?Collection<T>, n?: ?number): Array<T>;
-    shuffle<T>(array: ?Collection<T>): Array<T>;
-    size(collection: Collection<any> | string): number;
+    shuffle<T>(array?: ?Collection<T>): Array<T>;
+    size(collection?: ?Collection<any> | string): number;
     some<T>(array: void | null, predicate?: ?Predicate<T>): false;
     some<T>(array: ?$ReadOnlyArray<T>, predicate?: Predicate<T>): boolean;
     some<A, T: ReadOnlyIndexerObject<A>>(
