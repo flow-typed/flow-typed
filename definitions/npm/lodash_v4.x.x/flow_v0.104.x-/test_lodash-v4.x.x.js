@@ -77,7 +77,13 @@ import zip from "lodash/zip";
 import zipWith from "lodash/zipWith";
 
 type ReadOnlyArray = $ReadOnlyArray<number>
-const readOnlyArray : ReadOnlyArray = [1, 2, 3, 4];
+const readOnlyArray : ReadOnlyArray = Object.freeze([1, 2, 3, 4]);
+
+type NullableArray = number[] | null;
+const nullableArray: NullableArray = readOnlyArray[0] > 100 ? [1, 2, 3] : null;
+
+type ArrayOrVoid = number[] | void;
+const arrayOrVoid: ArrayOrVoid = readOnlyArray[0] > 100 ? [1, 2, 3] : undefined;
 
 type IndexerObject = { [string]: number, ... };
 const indexerObject: IndexerObject = { a: 1, b: 2, c: 3 };
@@ -96,6 +102,10 @@ const readOnlyExactObject: ReadOnlyExactObject = { ...exactObject };
 
 type NullableObject = IndexerObject | null;
 const nullableObject: NullableObject = readOnlyArray[0] > 100 ? indexerObject : null;
+
+type ObjectOrVoid = IndexerObject | void;
+const objectOrVoid: ObjectOrVoid = readOnlyArray[0] > 100 ? indexerObject : undefined;
+
 
 describe('Array', () => {
   it('chunk', () => {
@@ -340,7 +350,10 @@ describe('Collection', () => {
     const v: V = { x: 1, y: 2 };
 
     (f([1, 2, 3], x => x == 1): number | void);
+    (find(nullableArray, v => !!v, null): number | void);
+    (find(arrayOrVoid, v => !!v, null): number | void);
     (find(nullableObject, v => !!v, null): number | void);
+    (find(objectOrVoid, v => !!v, null): number | void);
 
     // $ExpectError number cannot be compared to string
     f([1, 2, 3], x => x == "a");
@@ -362,18 +375,43 @@ describe('Collection', () => {
 
   it('flatMap', () => {
     // this arrow function needs a type annotation due to a bug in flow: https://github.com/facebook/flow/issues/1948
-    flatMap([1, 2, 3], (n): number[] => [n, n]);
-    flatMap({ a: 1, b: 2 }, n => [n, n]);
+    (flatMap([1, 2, 3], (n: number) => [n, n]): number[]);
+
+    (flatMap(['a', 'b', 'c'], (v: string, i: number, collection: string[]) => [v, collection[0], i]): (number | string)[]);
+    (flatMap(['a', 'b', 'c'], (v: string, i: number, collection: string[]) => [{ v, i }]): ({| v: string, i: number |})[]);
+    (flatMap(nullableArray, (n: number, i: number, collection: NullableArray) => [n, n]): number[]);
+    (flatMap(arrayOrVoid, (n: number, i: number, collection: ArrayOrVoid) => [n, n]): number[]);
+    (flatMap(readOnlyArray, (n: number, i: number, collection: ReadOnlyArray) => [n, n]): number[]);
+
+    (flatMap({ a: 1, b: 2 }, (n: number, k: string, collection: {| a: number, b: number |}) => [n, k]): (number| string)[]);
+    (flatMap(nullableObject, (n: number, k: string, collection: NullableObject) => [n, n]): number[]);
+    (flatMap(objectOrVoid, (n: number, k: string, collection: ObjectOrVoid) => [n, n]): number[]);
+    (flatMap(readOnlyExactObject, (n: number, k: string, collection: ReadOnlyExactObject) => [n, n]): number[]);
+    (flatMap(readOnlyIndexerObject, (n: number, k: string, collection: ReadOnlyIndexerObject) => [n, n]): number[]);
   });
 
   it('flatMapDeep', () => {
-    flatMapDeep([1, 2, 3], (n) => [[[n, n]]]);
-    flatMapDeep({ a: 1, b: 2 }, n => [[[n, n]]]);
+    (flatMapDeep([1, 2, 3], (n: number) => [[[n, n]]]): number[]);
+
+    (flatMapDeep(['a', 'b', 'c'], (v: string, i: number, collection: string[]) => [[[v, collection[0], i]]]): (number | string)[]);
+    (flatMapDeep(nullableArray, (n: number, i: number, collection: NullableArray) => [[[n, n]]]): number[]);
+    (flatMapDeep(arrayOrVoid, (n: number, i: number, collection: ArrayOrVoid) => [[[n, n]]]): number[]);
+
+    (flatMapDeep({ a: 1, b: 2 }, (n: number, k: string, collection: {| a: number, b: number |}) => [[[n, k]]]): (number| string)[]);
+    (flatMapDeep(nullableObject, (n: number, k: string, collection: NullableObject) => [[[n, n]]]): number[]);
+    (flatMapDeep(objectOrVoid, (n: number, k: string, collection: ObjectOrVoid) => [[[n, n]]]): number[]);
   });
 
   it('flatMapDepth', () => {
-    flatMapDepth([1, 2, 3], (n) => [[[n, n]]], 2);
-    flatMapDepth({ a: 1, b: 2 }, n => [[[n, n]]], 2);
+    (flatMapDepth([1, 2, 3], (n) => [[[n, n]]], 2): number[]);
+
+    (flatMapDepth(['a', 'b', 'c'], (v: string, i: number, collection: string[]) => [[[v, collection[0], i]]], 2): (number | string)[]);
+    (flatMapDepth(nullableArray, (n: number, i: number, collection: NullableArray) => [[[n, n]]], 2): number[]);
+    (flatMapDepth(arrayOrVoid, (n: number, i: number, collection: ArrayOrVoid) => [[[n, n]]], 2): number[]);
+
+    (flatMapDepth({ a: 1, b: 2 }, (n: number, k: string, collection: {| a: number, b: number |}) => [[[n, k]]], 2): (number| string)[]);
+    (flatMapDepth(nullableObject, (n: number, k: string, collection: NullableObject) => [[[n, n]]], 2): number[]);
+    (flatMapDepth(objectOrVoid, (n: number, k: string, collection: ObjectOrVoid) => [[[n, n]]], 2): number[]);
   });
 
   it('forEach', () => {
@@ -793,16 +831,11 @@ describe('Util', () => {
   });
 
   it('times', () => {
-    var timesNums: number[];
-    timesNums = times(5);
+    (times(5): number[]);
     // $ExpectError string. This type is incompatible with number
     (times(5): string[]);
-    timesNums = times(5, function(i: number) {
-      return i + 1;
-    });
+    (times(5, (i: number) => i + 1): number[]);
     // $ExpectError string. This type is incompatible with number
-    timesNums = times(5, function(i: number) {
-      return JSON.stringify(i);
-    });
+    (times(5, (i: number) => JSON.stringify(i)): number[]);
   });
 });

@@ -444,9 +444,7 @@ timesNums = times(function(i: number) {
   return i + 1;
 }, 5);
 // $ExpectError string. This type is incompatible with number
-timesNums = times(function(i: number) {
-  return JSON.stringify(i);
-}, 5);
+timesNums = times((i: number) => JSON.stringify(i), 5);
 
 // lodash.flatMap for collections and objects
 // this arrow function needs a type annotation due to a bug in flow
