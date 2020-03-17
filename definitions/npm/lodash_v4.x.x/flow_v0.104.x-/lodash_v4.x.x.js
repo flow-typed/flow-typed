@@ -1617,6 +1617,8 @@ declare module "lodash/fp" {
     ...
   };
 
+  declare type Key = string | number;
+  declare type ReadOnlyIndexerObject<T, I = Key> = $ReadOnly<{ [id: I]: T, ... }>
   declare type NestedArray<T> = Array<Array<T>>;
 
   declare type matchesIterateeShorthand = { [string | number]: any, ... };
@@ -2414,25 +2416,25 @@ declare module "lodash/fp" {
       customizer: (value: T, key: number | string, object: T, stack: any) => U,
       value: T
     ): U;
-    conformsTo<T: { [key: string]: mixed, ... }>(
-      predicates: T & { [key: string]: (x: any) => boolean, ... }
+    conformsTo<T: ReadOnlyIndexerObject<mixed>>(
+      predicates: T & $ReadOnly<{ [key: string]: (x: any) => boolean, ... }>
     ): (source: T) => boolean;
-    conformsTo<T: { [key: string]: mixed, ... }>(
-      predicates: T & { [key: string]: (x: any) => boolean, ... },
+    conformsTo<T: ReadOnlyIndexerObject<mixed>>(
+      predicates: T & $ReadOnly<{ [key: string]: (x: any) => boolean, ... }>,
       source: T
     ): boolean;
-    where<T: { [key: string]: mixed, ... }>(
-      predicates: T & { [key: string]: (x: any) => boolean, ... }
+    where<T: ReadOnlyIndexerObject<mixed>>(
+      predicates: T & $ReadOnly<{ [key: string]: (x: any) => boolean, ... }>
     ): (source: T) => boolean;
-    where<T: { [key: string]: mixed, ... }>(
-      predicates: T & { [key: string]: (x: any) => boolean, ... },
+    where<T: ReadOnlyIndexerObject<mixed>>(
+      predicates: T & $ReadOnly<{ [key: string]: (x: any) => boolean, ... }>,
       source: T
     ): boolean;
-    conforms<T: { [key: string]: mixed, ... }>(
-      predicates: T & { [key: string]: (x: any) => boolean, ... }
+    conforms<T: ReadOnlyIndexerObject<mixed>>(
+      predicates: T & $ReadOnly<{ [key: string]: (x: any) => boolean, ... }>
     ): (source: T) => boolean;
-    conforms<T: { [key: string]: mixed, ... }>(
-      predicates: T & { [key: string]: (x: any) => boolean, ... },
+    conforms<T: ReadOnlyIndexerObject<mixed>>(
+      predicates: T & $ReadOnly<{ [key: string]: (x: any) => boolean, ... }>,
       source: T
     ): boolean;
     eq(value: any): (other: any) => boolean;
@@ -2780,17 +2782,17 @@ declare module "lodash/fp" {
       object: T,
       s1: A
     ): Object;
-    findKey<A, T: { [id: any]: A, ... }>(
+    findKey<A, T: ReadOnlyIndexerObject<A>>(
       predicate: OPredicate<A>
     ): (object: T) => string | void;
-    findKey<A, T: { [id: any]: A, ... }>(
+    findKey<A, T: ReadOnlyIndexerObject<A>>(
       predicate: OPredicate<A>,
       object: T
     ): string | void;
-    findLastKey<A, T: { [id: any]: A, ... }>(
+    findLastKey<A, T: ReadOnlyIndexerObject<A>>(
       predicate: OPredicate<A>
     ): (object: T) => string | void;
-    findLastKey<A, T: { [id: any]: A, ... }>(
+    findLastKey<A, T: ReadOnlyIndexerObject<A>>(
       predicate: OPredicate<A>,
       object: T
     ): string | void;
@@ -2886,7 +2888,7 @@ declare module "lodash/fp" {
       object: Object,
       args: Array<any>
     ): any;
-    keys<K>(object: { [key: K]: any, ... }): Array<K>;
+    keys<K>(object: ReadOnlyIndexerObject<any, K>): Array<K>;
     keys(object: Object): Array<string>;
     keysIn(object: Object): Array<string>;
     mapKeys(iteratee: OIteratee<*>): (object: Object) => Object;
@@ -2949,20 +2951,20 @@ declare module "lodash/fp" {
     omit(props: $ReadOnlyArray<string>, object: Object): Object;
     omitAll(props: $ReadOnlyArray<string>): (object: Object) => Object;
     omitAll(props: $ReadOnlyArray<string>, object: Object): Object;
-    omitBy<A, T: $ReadOnly<{ [id: any]: A, ... }>>(
+    omitBy<A, T: ReadOnlyIndexerObject<A>>(
       predicate: OPredicate<A>
     ): (object: T) => Object;
-    omitBy<A, T: $ReadOnly<{ [id: any]: A, ... }>>(predicate: OPredicate<A>, object: T): Object;
+    omitBy<A, T: ReadOnlyIndexerObject<A>>(predicate: OPredicate<A>, object: T): Object;
     pick(...props: $ReadOnlyArray<string | {...}>): Object;
     pick(props: $ReadOnlyArray<string>, object: Object): Object;
     pick(...props: $ReadOnlyArray<string>): (object: Object) => Object;
     pick(props: $ReadOnlyArray<string>): (object: Object) => Object;
     pickAll(props: $ReadOnlyArray<string>): (object: Object) => Object;
     pickAll(props: $ReadOnlyArray<string>, object: Object): Object;
-    pickBy<A, T: $ReadOnly<{ [id: any]: A, ... }>>(
+    pickBy<A, T: ReadOnlyIndexerObject<A>>(
       predicate: OPredicate<A>
     ): (object: T) => Object;
-    pickBy<A, T: $ReadOnly<{ [id: any]: A, ... }>>(predicate: OPredicate<A>, object: T): Object;
+    pickBy<A, T: ReadOnlyIndexerObject<A>>(predicate: OPredicate<A>, object: T): Object;
     result(path: Path): (object: Object) => any;
     result(path: Path, object: Object): any;
     set(
