@@ -94,6 +94,9 @@ const readOnlyIndexerObject: ReadOnlyIndexerObject = { ...indexerObject };
 type ReadOnlyExactObject = $ReadOnly<ExactObject>
 const readOnlyExactObject: ReadOnlyExactObject = { ...exactObject };
 
+type NullableObject = IndexerObject | null;
+const nullableObject: NullableObject = readOnlyArray[0] > 100 ? indexerObject : null;
+
 describe('Array', () => {
   it('chunk', () => {
     chunk(readOnlyArray, 2);
@@ -322,6 +325,7 @@ describe('Collection', () => {
     (f(users, { age: 1, active: true }): User | void);
     (f(users, ["active", false]): User | void);
     (f(users, "active"): User | void);
+    (f(users, "active"): User | void);
 
     (f([1, 2, 3], x => x * 1 == 3): number | void);
     (f([1, 2, 3], x => x == 2, 1): number | void);
@@ -335,7 +339,8 @@ describe('Collection', () => {
     type V = { [O]: number, ... };
     const v: V = { x: 1, y: 2 };
 
-    (f([1, 2, 3], x => x == 1): void | number);
+    (f([1, 2, 3], x => x == 1): number | void);
+    (find(nullableObject, v => !!v, null): number | void);
 
     // $ExpectError number cannot be compared to string
     f([1, 2, 3], x => x == "a");
