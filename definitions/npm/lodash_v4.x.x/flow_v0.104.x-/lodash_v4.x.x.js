@@ -549,17 +549,17 @@ declare module "lodash" {
     // Collection
     countBy<T>(array: $ReadOnlyArray<T>, iteratee?: ?ValueOnlyIteratee<T>): { [string]: number, ... };
     countBy<T>(array: void | null, iteratee?: ?ValueOnlyIteratee<T>): {...};
-    countBy<T: Object>(object: T, iteratee?: ?ValueOnlyIteratee<T>): { [string]: number, ... };
+    countBy<T>(object: ReadOnlyIndexerObject<T>, iteratee?: ?ValueOnlyIteratee<T>): { [string]: number, ... };
     // alias of _.forEach
     each<T>(array: $ReadOnlyArray<T>, iteratee?: ?Iteratee<T>): Array<T>;
     each<T: void | null>(array: T, iteratee?: ?Iteratee<any>): T;
-    each<T: Object>(object: T, iteratee?: ?OIteratee<T>): T;
+    each<A, T: ReadOnlyIndexerObject<A>>(object: T, iteratee?: ?IterateeWithResult<A, T, boolean | void>): T;
     // alias of _.forEachRight
     eachRight<T>(array: $ReadOnlyArray<T>, iteratee?: ?Iteratee<T>): Array<T>;
     eachRight<T: void | null>(array: T, iteratee?: ?Iteratee<any>): T;
-    eachRight<T: Object>(object: T, iteratee?: OIteratee<T>): T;
+    eachRight<A, T: ReadOnlyIndexerObject<A>>(object: T, iteratee?: ?IterateeWithResult<A, T, boolean | void>): T;
     every<T>(array?: ?$ReadOnlyArray<T>, iteratee?: ?Iteratee<T>): boolean;
-    every<T: Object>(object: T, iteratee?: OIteratee<T>): boolean;
+    every<A, T: ReadOnlyIndexerObject<A>>(object: T, iteratee?: OIterateeWithResult<A, T, any>): boolean;
     filter<T>(array?: ?$ReadOnlyArray<T>, predicate?: ?Predicate<T>): Array<T>;
     filter<A, T: ReadOnlyIndexerObject<A>>(
       object: T,
@@ -577,17 +577,23 @@ declare module "lodash" {
     ): void;
     find<V, A, T: ReadOnlyIndexerObject<A>>(
       object: T,
-      predicate?: OPredicate<A, T>,
-      fromIndex?: number
+      predicate?: ?OPredicate<A, T>,
+      fromIndex?: ?number
     ): V;
     findLast<T>(
-      array: ?$ReadOnlyArray<T>,
+      array: $ReadOnlyArray<T>,
       predicate?: ?Predicate<T>,
       fromIndex?: ?number
     ): T | void;
+    findLast<T>(
+      array: void | null,
+      predicate?: ?Predicate<T>,
+      fromIndex?: ?number
+    ): void;
     findLast<V, A, T: ReadOnlyIndexerObject<A>>(
       object: T,
-      predicate?: ?OPredicate<A, T>
+      predicate?: ?OPredicate<A, T>,
+      fromIndex?: ?number
     ): V;
     flatMap<T, U>(
       array?: ?$ReadOnlyArray<T>,
@@ -617,13 +623,13 @@ declare module "lodash" {
     ): Array<U>;
     forEach<T>(array: $ReadOnlyArray<T>, iteratee?: ?Iteratee<T>): Array<T>;
     forEach<T: void | null>(array: T, iteratee?: ?Iteratee<any>): T;
-    forEach<T: Object>(object: T, iteratee?: ?OIteratee<T>): T;
+    forEach<A, T: ReadOnlyIndexerObject<A>>(object: T, iteratee?: ?IterateeWithResult<A, T, boolean | void>): T;
     forEachRight<T>(
       array: $ReadOnlyArray<T>,
       iteratee?: ?Iteratee<T>
     ): Array<T>;
     forEachRight<T: void | null>(array: T, iteratee?: ?Iteratee<any>): T;
-    forEachRight<T: Object>(object: T, iteratee?: ?OIteratee<T>): T;
+    forEachRight<A, T: ReadOnlyIndexerObject<A>>(object: T, iteratee?: ?IterateeWithResult<A, T, boolean | void>): T;
     groupBy<V, T>(
       array: $ReadOnlyArray<T>,
       iteratee?: ?ValueOnlyIteratee<T>
@@ -639,15 +645,15 @@ declare module "lodash" {
       fromIndex?: ?number
     ): boolean;
     includes<T>(array: void | null, value?: ?T, fromIndex?: ?number): false;
-    includes<T: Object>(object: T, value: any, fromIndex?: number): boolean;
+    includes<A>(object: ReadOnlyIndexerObject<A>, value: A, fromIndex?: number): boolean;
     includes(str: string, value: string, fromIndex?: number): boolean;
     invokeMap<T>(
       array?: ?$ReadOnlyArray<T>,
       path?: ?((value: T) => Path) | Path,
       ...args?: $ReadOnlyArray<any>
     ): Array<any>;
-    invokeMap<T: Object>(
-      object: T,
+    invokeMap<A>(
+      object: ReadOnlyIndexerObject<A>,
       path: ((value: any) => Path) | Path,
       ...args?: $ReadOnlyArray<any>
     ): Array<any>;
@@ -664,7 +670,7 @@ declare module "lodash" {
       array?: ?$ReadOnlyArray<T>,
       iteratee?: ?ReadOnlyMapIterator<T, U>
     ): Array<U>;
-    map<V, T: Object, U>(
+    map<V, T: ReadOnlyIndexerObject<V>, U>(
       object: ?T,
       iteratee?: OMapIterator<V, T, U>
     ): Array<U>;
@@ -682,7 +688,7 @@ declare module "lodash" {
       iteratees?: ?$ReadOnlyArray<Iteratee<T>> | ?string,
       orders?: ?$ReadOnlyArray<"asc" | "desc"> | ?string
     ): Array<T>;
-    orderBy<V, T: {...}>(
+    orderBy<V, T: ReadOnlyIndexerObject<V>>(
       object: T,
       iteratees?: $ReadOnlyArray<OIteratee<*>> | string,
       orders?: $ReadOnlyArray<"asc" | "desc"> | string
@@ -745,11 +751,11 @@ declare module "lodash" {
       iteratee?: ?(accumulator: U, value: any, key: string, object: T) => U,
       accumulator?: ?U
     ): U;
-    reject<T>(array: ?$ReadOnlyArray<T>, predicate?: Predicate<T>): Array<T>;
-    reject<V: Object, A, T: ReadOnlyIndexerObject<A>>(
+    reject<T>(array?: ?$ReadOnlyArray<T>, predicate?: ?Predicate<T>): Array<T>;
+    reject<A, T: ReadOnlyIndexerObject<A>>(
       object?: ?T,
       predicate?: ?OPredicate<A, T>
-    ): Array<V>;
+    ): Array<A>;
     sample<T>(collection: ?Collection<T>): T;
     sampleSize<T>(collection?: ?Collection<T>, n?: ?number): Array<T>;
     shuffle<T>(array: ?Collection<T>): Array<T>;
@@ -768,11 +774,11 @@ declare module "lodash" {
       array: ?$ReadOnlyArray<T>,
       iteratees?: $ReadOnlyArray<Iteratee<T>>
     ): Array<T>;
-    sortBy<V, T: Object>(
+    sortBy<V, T: ReadOnlyIndexerObject<V>>(
       object: T,
       ...iteratees?: $ReadOnlyArray<OIteratee<T>>
     ): Array<V>;
-    sortBy<V, T: Object>(
+    sortBy<V, T: ReadOnlyIndexerObject<V>>(
       object: T,
       iteratees?: $ReadOnlyArray<OIteratee<T>>
     ): Array<V>;
@@ -2034,6 +2040,7 @@ declare module "lodash/fp" {
       a1: NestedArray<T>,
       a2: NestedArray<T>
     ): Array<T>;
+
     // Collection
     countBy<T>(
       iteratee: ValueOnlyIteratee<T>
