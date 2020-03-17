@@ -172,7 +172,7 @@ declare module "lodash" {
   declare type NestedArray<T> = Array<Array<T>>;
   declare type Collection<T> = $ReadOnlyArray<T> | ReadOnlyIndexerObject<T>;
 
-  declare type matchesIterateeShorthand = { [key: any]: any, ... };
+  declare type matchesIterateeShorthand = { [key: Key]: any, ... };
   declare type matchesPropertyIterateeShorthand = [string, any];
   declare type propertyIterateeShorthand = string;
 
@@ -182,12 +182,18 @@ declare module "lodash" {
     | matchesPropertyIterateeShorthand
     | propertyIterateeShorthand;
 
+  declare type IterateeWithResult<V, O, R> =
+    | ((value: V, key: string, object: O) => R)
+    | string;
+
   declare type OIterateeWithResult<V, O, R> =
-    | Object
-    | string
-    | ((value: V, key: string, object: O) => R);
+    | ReadOnlyIndexerObject<V>
+    | IterateeWithResult<V, O, R>;
   declare type OIteratee<O> = OIterateeWithResult<any, O, any>;
-  declare type OFlatMapIteratee<T, U> = OIterateeWithResult<any, T, Array<U>>;
+
+  declare type AFlatMapIteratee<T, U> =
+    | ((item: T, index: number, array: ?$ReadOnlyArray<T>) => Array<U>)
+  declare type OFlatMapIteratee<V, T, U> = IterateeWithResult<V, T, Array<U>>;
 
   declare type Predicate<T> =
     | ((value: T, index: number, array: Array<T>) => any)
@@ -203,10 +209,6 @@ declare module "lodash" {
     array: ?Array<T>
   ) => mixed;
   declare type Iteratee<T> = _Iteratee<T> | Object | string;
-  declare type FlatMapIteratee<T, U> =
-    | ((item: T, index: number, array: ?$ReadOnlyArray<T>) => Array<U>)
-    | Object
-    | string;
   declare type Comparator<T> = (item: T, item2: T) => boolean;
 
   declare type ReadOnlyMapIterator<T, U> =
@@ -589,28 +591,28 @@ declare module "lodash" {
     ): V;
     flatMap<T, U>(
       array?: ?$ReadOnlyArray<T>,
-      iteratee?: ?FlatMapIteratee<T, U>
+      iteratee?: ?AFlatMapIteratee<T, U>
     ): Array<U>;
-    flatMap<T: Object, U>(
+    flatMap<A, T: ReadOnlyIndexerObject<A>, U>(
       object: T,
-      iteratee?: OFlatMapIteratee<T, U>
+      iteratee?: OFlatMapIteratee<A, T, U>
     ): Array<U>;
     flatMapDeep<T, U>(
       array?: ?$ReadOnlyArray<T>,
-      iteratee?: ?FlatMapIteratee<T, U>
+      iteratee?: ?AFlatMapIteratee<T, U>
     ): Array<U>;
-    flatMapDeep<T: Object, U>(
+    flatMapDeep<A, T: ReadOnlyIndexerObject<A>, U>(
       object: T,
-      iteratee?: ?OFlatMapIteratee<T, U>
+      iteratee?: ?OFlatMapIteratee<A, T, U>
     ): Array<U>;
     flatMapDepth<T, U>(
       array?: ?$ReadOnlyArray<T>,
-      iteratee?: ?FlatMapIteratee<T, U>,
+      iteratee?: ?AFlatMapIteratee<T, U>,
       depth?: ?number
     ): Array<U>;
-    flatMapDepth<T: Object, U>(
+    flatMapDepth<A, T: ReadOnlyIndexerObject<A>, U>(
       object: T,
-      iteratee?: OFlatMapIteratee<T, U>,
+      iteratee?: OFlatMapIteratee<A, T, U>,
       depth?: number
     ): Array<U>;
     forEach<T>(array: $ReadOnlyArray<T>, iteratee?: ?Iteratee<T>): Array<T>;
@@ -1625,7 +1627,7 @@ declare module "lodash/fp" {
   declare type NestedArray<T> = Array<Array<T>>;
   declare type Collection<T> = $ReadOnlyArray<T> | ReadOnlyIndexerObject<T>;
 
-  declare type matchesIterateeShorthand = { [string | number]: any, ... };
+  declare type matchesIterateeShorthand = { [key: Key]: any, ... };
   declare type matchesPropertyIterateeShorthand = [string, any];
   declare type propertyIterateeShorthand = string;
 
@@ -1635,9 +1637,14 @@ declare module "lodash/fp" {
     | matchesPropertyIterateeShorthand
     | propertyIterateeShorthand;
 
-  declare type OIterateeWithResult<V, R> = Object | string | ((value: V) => R);
+  declare type IterateeWithResult<V, R> =
+    | ((value: V) => R)
+    | string;
+
+  declare type OIterateeWithResult<V, R> =
+     | ReadOnlyIndexerObject<V>
+     | IterateeWithResult<V, R>;
   declare type OIteratee<O> = OIterateeWithResult<any, any>;
-  declare type OFlatMapIteratee<T, U> = OIterateeWithResult<any, Array<U>>;
 
   declare type Predicate<T> =
     | ((value: T) => any)
@@ -1649,10 +1656,10 @@ declare module "lodash/fp" {
   declare type ValueOnlyIteratee<T> = _ValueOnlyIteratee<T> | string;
   declare type _Iteratee<T> = (item: T) => mixed;
   declare type Iteratee<T> = _Iteratee<T> | Object | string;
-  declare type FlatMapIteratee<T, U> =
+  declare type AFlatMapIteratee<T, U> =
     | ((item: T) => Array<U>)
-    | Object
     | string;
+  declare type OFlatMapIteratee<T, U> = IterateeWithResult<T, Array<U>>;
   declare type Comparator<T> = (item: T, item2: T) => boolean;
 
   declare type MapIterator<T, U> = ((item: T) => U) | propertyIterateeShorthand;
@@ -2123,33 +2130,33 @@ declare module "lodash/fp" {
       collection: Collection<T>
     ): T | void;
     flatMap<T, U>(
-      iteratee: FlatMapIteratee<T, U> | OFlatMapIteratee<T, U>
-    ): (collection: $ReadOnlyArray<T> | { [id: any]: T, ... }) => Array<U>;
+      iteratee: AFlatMapIteratee<T, U> | OFlatMapIteratee<T, U>
+    ): (collection: Collection<T>) => Array<U>;
     flatMap<T, U>(
-      iteratee: FlatMapIteratee<T, U> | OFlatMapIteratee<T, U>,
-      collection: $ReadOnlyArray<T> | { [id: any]: T, ... }
+      iteratee: AFlatMapIteratee<T, U> | OFlatMapIteratee<T, U>,
+      collection: Collection<T>
     ): Array<U>;
     flatMapDeep<T, U>(
-      iteratee: FlatMapIteratee<T, U> | OFlatMapIteratee<T, U>
-    ): (collection: $ReadOnlyArray<T> | { [id: any]: T, ... }) => Array<U>;
+      iteratee: AFlatMapIteratee<T, U> | OFlatMapIteratee<T, U>
+    ): (collection: Collection<T>) => Array<U>;
     flatMapDeep<T, U>(
-      iteratee: FlatMapIteratee<T, U> | OFlatMapIteratee<T, U>,
-      collection: $ReadOnlyArray<T> | { [id: any]: T, ... }
+      iteratee: AFlatMapIteratee<T, U> | OFlatMapIteratee<T, U>,
+      collection: Collection<T>
     ): Array<U>;
     flatMapDepth<T, U>(
-      iteratee: FlatMapIteratee<T, U> | OFlatMapIteratee<T, U>
+      iteratee: AFlatMapIteratee<T, U> | OFlatMapIteratee<T, U>
     ): ((
       depth: number
-    ) => (collection: $ReadOnlyArray<T> | { [id: any]: T, ... }) => Array<U>) &
-      ((depth: number, collection: $ReadOnlyArray<T> | { [id: any]: T, ... }) => Array<U>);
+    ) => (collection: Collection<T>) => Array<U>) &
+      ((depth: number, collection: Collection<T>) => Array<U>);
     flatMapDepth<T, U>(
-      iteratee: FlatMapIteratee<T, U> | OFlatMapIteratee<T, U>,
+      iteratee: AFlatMapIteratee<T, U> | OFlatMapIteratee<T, U>,
       depth: number
-    ): (collection: $ReadOnlyArray<T> | { [id: any]: T, ... }) => Array<U>;
+    ): (collection: Collection<T>) => Array<U>;
     flatMapDepth<T, U>(
-      iteratee: FlatMapIteratee<T, U> | OFlatMapIteratee<T, U>,
+      iteratee: AFlatMapIteratee<T, U> | OFlatMapIteratee<T, U>,
       depth: number,
-      collection: $ReadOnlyArray<T> | { [id: any]: T, ... }
+      collection: Collection<T>
     ): Array<U>;
     forEach<T>(
       iteratee: Iteratee<T> | OIteratee<T>
