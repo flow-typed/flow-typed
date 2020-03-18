@@ -498,7 +498,6 @@ declare interface $npm$firebase$firestore$Blob {
 
 declare interface $npm$firebase$firestore$QueryListenOptions {
   includeMetadataChanges: boolean;
-  includeQueryMetadataChanges: boolean;
 }
 
 declare type $npm$firebase$firestore$documentObserver = (snapshot: $npm$firebase$firestore$DocumentSnapshot) => void | Promise<void>;
