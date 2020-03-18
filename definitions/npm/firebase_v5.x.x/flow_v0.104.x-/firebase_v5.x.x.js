@@ -513,10 +513,12 @@ declare class $npm$firebase$firestore$Query {
   isEqual(other: $npm$firebase$firestore$Query): boolean;
   limit(limit: number): $npm$firebase$firestore$Query;
   onSnapshot(
-    optionsOrObserverOrOnNext: $npm$firebase$firestore$QueryListenOptions | $npm$firebase$firestore$queryObserver,
-    observerOrOnNextOrOnError?: | $npm$firebase$firestore$QueryListenOptions
-    | $npm$firebase$firestore$queryObserver
-    | $npm$firebase$firestore$observerError,
+    optionsOrObserverOrOnNext: 
+      | $npm$firebase$firestore$QueryListenOptions
+      | $npm$firebase$firestore$queryObserver,
+    observerOrOnNextOrOnError?:
+      | $npm$firebase$firestore$queryObserver
+      | $npm$firebase$firestore$observerError,
     onError?: $npm$firebase$firestore$observerError
   ): () => void;
   orderBy(
@@ -553,11 +555,12 @@ declare class $npm$firebase$firestore$DocumentReference {
   get(): Promise<$npm$firebase$firestore$DocumentSnapshot>;
   isEqual(other: $npm$firebase$firestore$DocumentReference): boolean;
   onSnapshot(
-    optionsOrObserverOrOnNext: $npm$firebase$firestore$QueryListenOptions
-    | $npm$firebase$firestore$documentObserver,
-    observerOrOnNextOrOnError?: | $npm$firebase$firestore$QueryListenOptions
-    | $npm$firebase$firestore$documentObserver
-    | $npm$firebase$firestore$observerError,
+    optionsOrObserverOrOnNext:
+      | $npm$firebase$firestore$QueryListenOptions
+      | $npm$firebase$firestore$documentObserver,
+    observerOrOnNextOrOnError?:
+      | $npm$firebase$firestore$documentObserver
+      | $npm$firebase$firestore$observerError,
     onError?: $npm$firebase$firestore$observerError
   ): () => void;
   set(data: { +[string]: mixed, ... }, options?: {| merge?: boolean, mergeFields?: string[] |} | null): Promise<void>;
