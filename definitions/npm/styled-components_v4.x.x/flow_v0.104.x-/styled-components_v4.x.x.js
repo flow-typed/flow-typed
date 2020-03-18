@@ -26,6 +26,7 @@ declare module 'styled-components' {
   declare export type TaggedTemplateLiteral<I, R> = {
     [[call]]: (strings: string[], ...interpolations: Interpolation<I>[]) => R,
     [[call]]: ((props: I) => Interpolation<any>) => R,
+    ...
   };
 
   // Should this be `mixed` perhaps?
