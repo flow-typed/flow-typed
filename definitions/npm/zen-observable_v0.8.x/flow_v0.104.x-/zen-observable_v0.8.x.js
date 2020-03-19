@@ -1,15 +1,15 @@
 declare module 'zen-observable' {
   declare export interface SubscriptionObserver<T> {
-    next(value: T): void;
-    error(err: Error): void;
-    complete(): void;
+    +next: (value: T) => void;
+    +error: (err: Error) => void;
+    +complete: () => void;
     get closed(): boolean;
   }
 
   declare export interface Observer<T> {
-    next?: (value: T) => any;
-    error?: (err: Error) => any;
-    complete?: () => any;
+    +next?: (value: T) => any;
+    +error?: (err: Error) => any;
+    +complete?: () => any;
   }
 
   declare export interface Subscription {
@@ -17,8 +17,12 @@ declare module 'zen-observable' {
     unsubscribe(): void;
   }
 
+  declare export type Subscriber<T> = (
+    observer: SubscriptionObserver<T>
+  ) => void | (() => mixed) | Subscription;
+
   declare export default class Observable<T> {
-    constructor(subscriber: (observer: SubscriptionObserver<T>) => mixed): void;
+    constructor(subscriber: Subscriber<T>): void;
     subscribe(
       next: (value: T) => mixed,
       error?: (err: Error) => mixed,
