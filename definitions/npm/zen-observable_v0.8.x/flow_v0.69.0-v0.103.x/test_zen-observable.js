@@ -24,6 +24,30 @@ describe('new Observable().subscribe', () => {
     );
     subscription2.unsubscribe();
   });
+  it('subscriber can return function', () => {
+    const observable = new Observable(observer => {
+      observer.next(1);
+      observer.next(2);
+      observer.next(3);
+      if (observer.closed) observer.error(new Error('test'));
+      observer.complete();
+      return () => {};
+    });
+  });
+  it('subscriber can return subscription', () => {
+    const o1 = new Observable(observer => {
+      observer.next(1);
+    });
+    const o2 = new Observable(observer => {
+      return o1.subscribe(observer);
+    });
+  });
+  it(`subscriber can't return other types`, () => {
+    const o1 = new Observable(observer => {
+      // $ExpectError
+      return 2;
+    });
+  });
   it(`doesn't require all subscribe callbacks to be given`, () => {
     const observable = new Observable(observer => {
       observer.next(1);
