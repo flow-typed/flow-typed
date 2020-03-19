@@ -23,7 +23,11 @@ declare module 'styled-components' {
     | void
     | {[ruleOrSelector: string]: string | number, ...} // CSS-in-JS object returned by polished are also supported, partially
 
-  declare export type TaggedTemplateLiteral<I, R> = (strings: string[], ...interpolations: Interpolation<I>[]) => R
+  declare export type TaggedTemplateLiteral<I, R> = {
+    [[call]]: (strings: string[], ...interpolations: Interpolation<I>[]) => R,
+    [[call]]: ((props: I) => Interpolation<any>) => R,
+    ...
+  };
 
   // Should this be `mixed` perhaps?
   declare export type CSSRules = Interpolation<any>[] // eslint-disable-line flowtype/no-weak-types
