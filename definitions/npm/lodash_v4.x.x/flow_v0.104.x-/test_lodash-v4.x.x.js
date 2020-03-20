@@ -114,6 +114,8 @@ const toOpaqueKey = (v: number): OpaqueKey => v;
 type ObjectWithOpaqueKey = { [OpaqueKey]: string, ... };
 const objectWithOpaqueKey: ObjectWithOpaqueKey  = { [toOpaqueKey(1)]: 'a', [toOpaqueKey(2)]: 'b' };
 
+type ArrayOrObjectOrString = number[] | ExactObject | string;
+const arrayOrObjectOrString: ArrayOrObjectOrString = readOnlyArray[0] > 100 ? [1, 2, 3] : (readOnlyArray[1] > 100 ? exactObject : 'abc');
 
 describe('Array', () => {
   it('chunk', () => {
@@ -273,7 +275,7 @@ describe('Collection', () => {
    * 2) Enforce that type definitions for all related functions (e.g. each, eachRight, forEach, forEachRight) are the same, as they should be by the docs.
    */
   const testForEachFunction = (f: typeof forEach) => {
-    (f(([1, 2]: $ReadOnlyArray<number>), (v: number) => false): number[]);
+    (f(([1, 2]: $ReadOnlyArray<number>), (v: number) => false): $ReadOnlyArray<number>);
 
     (f('123', (char: string) => {}): string);
 
@@ -284,6 +286,7 @@ describe('Collection', () => {
     (f(exactObject, (v: number) => !!v): ExactObject);
     (f(exactHeterogeneousObject, (v: number | string | boolean) => !!v): ExactHeterogeneousObject);
     (f(objectOrVoid, (v: number) => {}): ObjectOrVoid);
+    (f(arrayOrObjectOrString, (v: number | string, key: string) => !!v): ArrayOrObjectOrString);
 
     // $ExpectError wrong iteratee return value
     f(exactObject, (v: number) => ({ a: 1, b: 2}));
@@ -295,6 +298,12 @@ describe('Collection', () => {
     (f(exactObject, (v: number) => false): void);
     // $ExpectError wrong iteratee type, should be function
     f(exactObject, {a: 1});
+    // $ExpectError wrong iteratee argument type,
+    (f(arrayOrObjectOrString, (v: string) => !!v): ArrayOrObjectOrString);
+    // $ExpectError forEach returns its first argument, therefore, if it was readonly, it should remain readonly
+    (f(([1, 2]: $ReadOnlyArray<number>), (v) => {}): number[]);
+    // $ExpectError forEach returns its first argument, therefore, if it was readonly, it should remain readonly
+    (f((readOnlyExactObject), (v) => {}): ExactObject);
   }
 
   it('each', () => {

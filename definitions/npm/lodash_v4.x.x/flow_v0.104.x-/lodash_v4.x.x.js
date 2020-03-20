@@ -552,15 +552,9 @@ declare module "lodash" {
     countBy<T>(array: void | null, iteratee?: ?ValueOnlyIteratee<T>): {...};
     countBy<T>(object: ReadOnlyIndexerObject<T>, iteratee?: ?ValueOnlyIteratee<T>): { [string]: number, ... };
     // alias of _.forEach
-    each<T>(array: $ReadOnlyArray<T>, iteratee?: ?Iteratee<T>): Array<T>;
-    each<T: void | null>(array: T, iteratee?: ?Iteratee<any>): T;
-    each<T: string>(str: string, iteratee?: ?Iteratee<string>): T;
-    each<A, K, T: ReadOnlyIndexerObject<A>>(object: T, iteratee?: ?IterateeWithResult<A, K, T, boolean | void>): T;
+    each<A, K, T: ReadOnlyIndexerObject<A> | $ReadOnlyArray<T> | string | void | null>(object: T, iteratee?: ?IterateeWithResult<A, K, T, boolean | void>): T;
     // alias of _.forEachRight
-    eachRight<T>(array: $ReadOnlyArray<T>, iteratee?: ?Iteratee<T>): Array<T>;
-    eachRight<T: void | null>(array: T, iteratee?: ?Iteratee<any>): T;
-    eachRight<T: string>(str: string, iteratee?: ?Iteratee<string>): T;
-    eachRight<A, K, T: ReadOnlyIndexerObject<A>>(object: T, iteratee?: ?IterateeWithResult<A, K, T, boolean | void>): T;
+    eachRight<A, K, T: ReadOnlyIndexerObject<A> | $ReadOnlyArray<T> | string | void | null>(object: T, iteratee?: ?IterateeWithResult<A, K, T, boolean | void>): T;
     every<T>(array?: ?$ReadOnlyArray<T>, iteratee?: ?Iteratee<T>): boolean;
     every<A, T: ReadOnlyIndexerObject<A>>(object: T, iteratee?: OIterateeWithResult<A, string, T, any>): boolean;
     filter<T>(array?: ?$ReadOnlyArray<T>, predicate?: ?Predicate<T>): Array<T>;
@@ -624,17 +618,8 @@ declare module "lodash" {
       iteratee?: ?OFlatMapIteratee<A, T, any>,
       depth?: ?number
     ): Array<U>;
-    forEach<T>(array: $ReadOnlyArray<T>, iteratee?: ?Iteratee<T>): Array<T>;
-    forEach<T: void | null>(array: T, iteratee?: ?Iteratee<any>): T;
-    forEach<T: string>(str: string, iteratee?: ?Iteratee<string>): T;
-    forEach<A, K, T: ReadOnlyIndexerObject<A>>(object: T, iteratee?: ?IterateeWithResult<A, K, T, boolean | void>): T;
-    forEachRight<T>(
-      array: $ReadOnlyArray<T>,
-      iteratee?: ?Iteratee<T>
-    ): Array<T>;
-    forEachRight<T: void | null>(array: T, iteratee?: ?Iteratee<any>): T;
-    forEachRight<T: string>(str: string, iteratee?: ?Iteratee<string>): T;
-    forEachRight<A, K, T: ReadOnlyIndexerObject<A>>(object: T, iteratee?: ?IterateeWithResult<A, K, T, boolean | void>): T;
+    forEach<A, K, T: ReadOnlyIndexerObject<A> | $ReadOnlyArray<T> | string | void | null>(object: T, iteratee?: ?IterateeWithResult<A, K, T, boolean | void>): T;
+    forEachRight<A, K, T: ReadOnlyIndexerObject<A> | $ReadOnlyArray<T> | string | void | null>(object: T, iteratee?: ?IterateeWithResult<A, K, T, boolean | void>): T;
     groupBy<V, T>(
       array: $ReadOnlyArray<T>,
       iteratee?: ?ValueOnlyIteratee<T>
