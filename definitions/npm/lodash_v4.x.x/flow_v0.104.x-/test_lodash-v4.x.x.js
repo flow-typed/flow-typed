@@ -275,35 +275,44 @@ describe('Collection', () => {
    * 2) Enforce that type definitions for all related functions (e.g. each, eachRight, forEach, forEachRight) are the same, as they should be by the docs.
    */
   const testForEachFunction = (f: typeof forEach) => {
-    (f(([1, 2]: $ReadOnlyArray<number>), (v: number) => false): $ReadOnlyArray<number>);
+    (f((readOnlyArray), (v: number) => false): $ReadOnlyArray<number>);
+    // $ExpectError forEach returns its first argument, therefore, if it was readonly, it should remain readonly
+    (f((readOnlyArray), (v) => {}): number[]);
 
     (f('123', (char: string) => {}): string);
 
     (f(arrayOrVoid, (v: number) => !!v): ArrayOrVoid);
 
-    (f(objectWithOpaqueKey, (v: string, k: OpaqueKey) => {}): ObjectWithOpaqueKey);
     (f(indexerObject, (v: number) => {}): IndexerObject);
     (f(exactObject, (v: number) => !!v): ExactObject);
+
+    (f((readOnlyExactObject), (v) => {}): ReadOnlyExactObject);
+    // $ExpectError forEach returns its first argument, therefore, if it was readonly, it should remain readonly
+    (f((readOnlyExactObject), (v) => {}): ExactObject);
+
     (f(exactHeterogeneousObject, (v: number | string | boolean) => !!v): ExactHeterogeneousObject);
+    // $ExpectError wrong iteratee argument type
+    f(exactHeterogeneousObject, (v: number) => false);
+
     (f(objectOrVoid, (v: number) => {}): ObjectOrVoid);
     (f(arrayOrObjectOrString, (v: number | string, key: string) => !!v): ArrayOrObjectOrString);
+    // $ExpectError wrong iteratee argument type,
+    (f(arrayOrObjectOrString, (v: string) => !!v): ArrayOrObjectOrString);
+
+    (f(objectWithOpaqueKey, (v: string, k: OpaqueKey) => {}): ObjectWithOpaqueKey);
+    // $ExpectError wrong return type - must be opaque type
+    (f(objectWithOpaqueKey, (v, k) => {}): { [string]: string, ...});
+    // $ExpectError wrong key type - must be opaque type
+    f(objectWithOpaqueKey, (v, k: sting) => {});
 
     // $ExpectError wrong iteratee return value
     f(exactObject, (v: number) => ({ a: 1, b: 2}));
-    // $ExpectError wrong iteratee argument type
-    f(exactHeterogeneousObject, (v: number) => false);
-    // $ExpectError wrong iteratee return type
-    f(exactObject, (v: number) => v + 2);
     // $ExpectError wrong return type: forEach() returns collection passed in the first argument
     (f(exactObject, (v: number) => false): void);
+    // $ExpectError wrong iteratee return type
+    f(exactObject, (v: number) => v + 2);
     // $ExpectError wrong iteratee type, should be function
     f(exactObject, {a: 1});
-    // $ExpectError wrong iteratee argument type,
-    (f(arrayOrObjectOrString, (v: string) => !!v): ArrayOrObjectOrString);
-    // $ExpectError forEach returns its first argument, therefore, if it was readonly, it should remain readonly
-    (f(([1, 2]: $ReadOnlyArray<number>), (v) => {}): number[]);
-    // $ExpectError forEach returns its first argument, therefore, if it was readonly, it should remain readonly
-    (f((readOnlyExactObject), (v) => {}): ExactObject);
   }
 
   it('each', () => {
