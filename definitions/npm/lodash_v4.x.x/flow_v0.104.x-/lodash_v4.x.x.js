@@ -172,7 +172,7 @@ declare module "lodash" {
   declare type NestedArray<T> = Array<Array<T>>;
   declare type Collection<T> = $ReadOnlyArray<T> | ReadOnlyIndexerObject<T>;
 
-  declare type matchesIterateeShorthand = { [key: Key]: any, ... };
+  declare type matchesIterateeShorthand = { [key: any]: any, ... };
   declare type matchesPropertyIterateeShorthand = [string, any];
   declare type propertyIterateeShorthand = string;
 
@@ -554,10 +554,12 @@ declare module "lodash" {
     // alias of _.forEach
     each<T>(array: $ReadOnlyArray<T>, iteratee?: ?Iteratee<T>): Array<T>;
     each<T: void | null>(array: T, iteratee?: ?Iteratee<any>): T;
+    each<T: string>(str: string, iteratee?: ?Iteratee<string>): T;
     each<A, K, T: ReadOnlyIndexerObject<A>>(object: T, iteratee?: ?IterateeWithResult<A, K, T, boolean | void>): T;
     // alias of _.forEachRight
     eachRight<T>(array: $ReadOnlyArray<T>, iteratee?: ?Iteratee<T>): Array<T>;
     eachRight<T: void | null>(array: T, iteratee?: ?Iteratee<any>): T;
+    eachRight<T: string>(str: string, iteratee?: ?Iteratee<string>): T;
     eachRight<A, K, T: ReadOnlyIndexerObject<A>>(object: T, iteratee?: ?IterateeWithResult<A, K, T, boolean | void>): T;
     every<T>(array?: ?$ReadOnlyArray<T>, iteratee?: ?Iteratee<T>): boolean;
     every<A, T: ReadOnlyIndexerObject<A>>(object: T, iteratee?: OIterateeWithResult<A, string, T, any>): boolean;
@@ -624,12 +626,14 @@ declare module "lodash" {
     ): Array<U>;
     forEach<T>(array: $ReadOnlyArray<T>, iteratee?: ?Iteratee<T>): Array<T>;
     forEach<T: void | null>(array: T, iteratee?: ?Iteratee<any>): T;
+    forEach<T: string>(str: string, iteratee?: ?Iteratee<string>): T;
     forEach<A, K, T: ReadOnlyIndexerObject<A>>(object: T, iteratee?: ?IterateeWithResult<A, K, T, boolean | void>): T;
     forEachRight<T>(
       array: $ReadOnlyArray<T>,
       iteratee?: ?Iteratee<T>
     ): Array<T>;
     forEachRight<T: void | null>(array: T, iteratee?: ?Iteratee<any>): T;
+    forEachRight<T: string>(str: string, iteratee?: ?Iteratee<string>): T;
     forEachRight<A, K, T: ReadOnlyIndexerObject<A>>(object: T, iteratee?: ?IterateeWithResult<A, K, T, boolean | void>): T;
     groupBy<V, T>(
       array: $ReadOnlyArray<T>,
@@ -1634,7 +1638,7 @@ declare module "lodash/fp" {
   declare type NestedArray<T> = Array<Array<T>>;
   declare type Collection<T> = $ReadOnlyArray<T> | ReadOnlyIndexerObject<T>;
 
-  declare type matchesIterateeShorthand = { [key: Key]: any, ... };
+  declare type matchesIterateeShorthand = { [key: any]: any, ... };
   declare type matchesPropertyIterateeShorthand = [string, any];
   declare type propertyIterateeShorthand = string;
 

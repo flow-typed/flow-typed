@@ -275,23 +275,25 @@ describe('Collection', () => {
   const testForEachFunction = (f: typeof forEach) => {
     (f(([1, 2]: $ReadOnlyArray<number>), (v: number) => false): number[]);
 
-    (f(arrayOrVoid, (v: number) => !!v): ArrayOrVoid);
+    (f('123', (char: string) => {}): string);
 
+    (f(arrayOrVoid, (v: number) => !!v): ArrayOrVoid);
 
     (f(objectWithOpaqueKey, (v: string, k: OpaqueKey) => {}): ObjectWithOpaqueKey);
     (f(indexerObject, (v: number) => {}): IndexerObject);
     (f(exactObject, (v: number) => !!v): ExactObject);
     (f(exactHeterogeneousObject, (v: number | string | boolean) => !!v): ExactHeterogeneousObject);
+    (f(objectOrVoid, (v: number) => {}): ObjectOrVoid);
 
-    // $ExpectError
+    // $ExpectError wrong iteratee return value
     f(exactObject, (v: number) => ({ a: 1, b: 2}));
-    // $ExpectError
+    // $ExpectError wrong iteratee argument type
     f(exactHeterogeneousObject, (v: number) => false);
-    // $ExpectError
+    // $ExpectError wrong iteratee return type
     f(exactObject, (v: number) => v + 2);
-    // $ExpectError
-    (f(exactObject, (v: number) => false): void); // each() returns collection passed in the first argument
-    // $ExpectError
+    // $ExpectError wrong return type: forEach() returns collection passed in the first argument
+    (f(exactObject, (v: number) => false): void);
+    // $ExpectError wrong iteratee type, should be function
     f(exactObject, {a: 1});
   }
 
