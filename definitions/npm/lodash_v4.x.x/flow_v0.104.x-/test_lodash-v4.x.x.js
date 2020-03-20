@@ -76,15 +76,18 @@ import xorBy from "lodash/xorBy";
 import zip from "lodash/zip";
 import zipWith from "lodash/zipWith";
 
+// Ideally, there should be a test for each of the variables below. To verify that these use cases do not break on code changes.
+// test arrays
 type ReadOnlyArray = $ReadOnlyArray<number>
 const readOnlyArray : ReadOnlyArray = Object.freeze([1, 2, 3, 4]);
 
-type NullableArray = number[] | null;
-const nullableArray: NullableArray = readOnlyArray[0] > 100 ? [1, 2, 3] : null;
+type ArrayOrNull = number[] | null;
+const arrayOrNull: ArrayOrNull = readOnlyArray[0] > 100 ? [1, 2, 3] : null;
 
 type ArrayOrVoid = number[] | void;
 const arrayOrVoid: ArrayOrVoid = readOnlyArray[0] > 100 ? [1, 2, 3] : undefined;
 
+// test objects
 type IndexerObject = { [string]: number, ... };
 const indexerObject: IndexerObject = { a: 1, b: 2, c: 3 };
 
@@ -95,16 +98,21 @@ type ExactHeterogeneousObject = {| a: number, b: string, c: boolean; |};
 const exactHeterogeneousObject: ExactHeterogeneousObject = { a: 1, b: 'abc', c: true };
 
 type ReadOnlyIndexerObject = $ReadOnly<IndexerObject>
-const readOnlyIndexerObject: ReadOnlyIndexerObject = { ...indexerObject };
+const readOnlyIndexerObject: ReadOnlyIndexerObject = { ...indexerObject }; // example of inexact object
 
 type ReadOnlyExactObject = $ReadOnly<ExactObject>
 const readOnlyExactObject: ReadOnlyExactObject = { ...exactObject };
 
-type NullableObject = IndexerObject | null;
-const nullableObject: NullableObject = readOnlyArray[0] > 100 ? indexerObject : null;
+type ObjectOrNull = IndexerObject | null;
+const objectOrNull: ObjectOrNull = readOnlyArray[0] > 100 ? indexerObject : null;
 
 type ObjectOrVoid = IndexerObject | void;
 const objectOrVoid: ObjectOrVoid = readOnlyArray[0] > 100 ? indexerObject : undefined;
+
+opaque type OpaqueKey = number;
+const toOpaqueKey = (v: number): OpaqueKey => v;
+type ObjectWithOpaqueKey = { [OpaqueKey]: string, ... };
+const objectWithOpaqueKey: ObjectWithOpaqueKey  = { [toOpaqueKey(1)]: 'a', [toOpaqueKey(2)]: 'b' };
 
 
 describe('Array', () => {
@@ -260,12 +268,17 @@ describe('Collection', () => {
   });
 
   /**
-   * Using such functions allows to:
+   * Reusing such functions allows to:
    * 1) Ensure all tests are run and up to date for each function
    * 2) Enforce that type definitions for all related functions (e.g. each, eachRight, forEach, forEachRight) are the same, as they should be by the docs.
    */
   const testForEachFunction = (f: typeof forEach) => {
     (f(([1, 2]: $ReadOnlyArray<number>), (v: number) => false): number[]);
+
+    (f(arrayOrVoid, (v: number) => !!v): ArrayOrVoid);
+
+
+    (f(objectWithOpaqueKey, (v: string, k: OpaqueKey) => {}): ObjectWithOpaqueKey);
     (f(indexerObject, (v: number) => {}): IndexerObject);
     (f(exactObject, (v: number) => !!v): ExactObject);
     (f(exactHeterogeneousObject, (v: number | string | boolean) => !!v): ExactHeterogeneousObject);
@@ -350,9 +363,9 @@ describe('Collection', () => {
     const v: V = { x: 1, y: 2 };
 
     (f([1, 2, 3], x => x == 1): number | void);
-    (find(nullableArray, v => !!v, null): number | void);
+    (find(arrayOrNull, v => !!v, null): number | void);
     (find(arrayOrVoid, v => !!v, null): number | void);
-    (find(nullableObject, v => !!v, null): number | void);
+    (find(objectOrNull, v => !!v, null): number | void);
     (find(objectOrVoid, v => !!v, null): number | void);
 
     // $ExpectError number cannot be compared to string
@@ -379,12 +392,12 @@ describe('Collection', () => {
 
     (flatMap(['a', 'b', 'c'], (v: string, i: number, collection: string[]) => [v, collection[0], i]): (number | string)[]);
     (flatMap(['a', 'b', 'c'], (v: string, i: number, collection: string[]) => [{ v, i }]): ({| v: string, i: number |})[]);
-    (flatMap(nullableArray, (n: number, i: number, collection: NullableArray) => [n, n]): number[]);
+    (flatMap(arrayOrNull, (n: number, i: number, collection: ArrayOrNull) => [n, n]): number[]);
     (flatMap(arrayOrVoid, (n: number, i: number, collection: ArrayOrVoid) => [n, n]): number[]);
     (flatMap(readOnlyArray, (n: number, i: number, collection: ReadOnlyArray) => [n, n]): number[]);
 
     (flatMap({ a: 1, b: 2 }, (n: number, k: string, collection: {| a: number, b: number |}) => [n, k]): (number| string)[]);
-    (flatMap(nullableObject, (n: number, k: string, collection: NullableObject) => [n, n]): number[]);
+    (flatMap(objectOrNull, (n: number, k: string, collection: ObjectOrNull) => [n, n]): number[]);
     (flatMap(objectOrVoid, (n: number, k: string, collection: ObjectOrVoid) => [n, n]): number[]);
     (flatMap(readOnlyExactObject, (n: number, k: string, collection: ReadOnlyExactObject) => [n, n]): number[]);
     (flatMap(readOnlyIndexerObject, (n: number, k: string, collection: ReadOnlyIndexerObject) => [n, n]): number[]);
@@ -394,11 +407,11 @@ describe('Collection', () => {
     (flatMapDeep([1, 2, 3], (n: number) => [[[n, n]]]): number[]);
 
     (flatMapDeep(['a', 'b', 'c'], (v: string, i: number, collection: string[]) => [[[v, collection[0], i]]]): (number | string)[]);
-    (flatMapDeep(nullableArray, (n: number, i: number, collection: NullableArray) => [[[n, n]]]): number[]);
+    (flatMapDeep(arrayOrNull, (n: number, i: number, collection: ArrayOrNull) => [[[n, n]]]): number[]);
     (flatMapDeep(arrayOrVoid, (n: number, i: number, collection: ArrayOrVoid) => [[[n, n]]]): number[]);
 
     (flatMapDeep({ a: 1, b: 2 }, (n: number, k: string, collection: {| a: number, b: number |}) => [[[n, k]]]): (number| string)[]);
-    (flatMapDeep(nullableObject, (n: number, k: string, collection: NullableObject) => [[[n, n]]]): number[]);
+    (flatMapDeep(objectOrNull, (n: number, k: string, collection: ObjectOrNull) => [[[n, n]]]): number[]);
     (flatMapDeep(objectOrVoid, (n: number, k: string, collection: ObjectOrVoid) => [[[n, n]]]): number[]);
   });
 
@@ -406,11 +419,11 @@ describe('Collection', () => {
     (flatMapDepth([1, 2, 3], (n) => [[[n, n]]], 2): number[]);
 
     (flatMapDepth(['a', 'b', 'c'], (v: string, i: number, collection: string[]) => [[[v, collection[0], i]]], 2): (number | string)[]);
-    (flatMapDepth(nullableArray, (n: number, i: number, collection: NullableArray) => [[[n, n]]], 2): number[]);
+    (flatMapDepth(arrayOrNull, (n: number, i: number, collection: ArrayOrNull) => [[[n, n]]], 2): number[]);
     (flatMapDepth(arrayOrVoid, (n: number, i: number, collection: ArrayOrVoid) => [[[n, n]]], 2): number[]);
 
     (flatMapDepth({ a: 1, b: 2 }, (n: number, k: string, collection: {| a: number, b: number |}) => [[[n, k]]], 2): (number| string)[]);
-    (flatMapDepth(nullableObject, (n: number, k: string, collection: NullableObject) => [[[n, n]]], 2): number[]);
+    (flatMapDepth(objectOrNull, (n: number, k: string, collection: ObjectOrNull) => [[[n, n]]], 2): number[]);
     (flatMapDepth(objectOrVoid, (n: number, k: string, collection: ObjectOrVoid) => [[[n, n]]], 2): number[]);
   });
 
