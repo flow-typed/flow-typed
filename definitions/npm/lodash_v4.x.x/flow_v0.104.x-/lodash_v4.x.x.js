@@ -167,11 +167,12 @@ declare module "lodash" {
     ...
   };
 
+  // using opaque type for object key is not supported by Flow atm: https://github.com/facebook/flow/issues/5407
   declare type Key = string | number;
   declare type IndexerObject<V, K = Key> = { [key: K]: V, ... };
   declare type ReadOnlyIndexerObject<V, K = Key> = $ReadOnly<IndexerObject<V, K>>;
   declare type NestedArray<V> = Array<Array<V>>;
-  declare type Collection<V> = $ReadOnlyArray<V> | ReadOnlyIndexerObject<V>;
+  declare type Collection<V, K = Key> = $ReadOnlyArray<V> | ReadOnlyIndexerObject<V, K>;
 
   declare type matchesIterateeShorthand = { [key: any]: any, ... };
   declare type matchesPropertyIterateeShorthand = [string, any];
@@ -553,9 +554,9 @@ declare module "lodash" {
     countBy<T>(array: void | null, iteratee?: ?ValueOnlyIteratee<T>): {...};
     countBy<T>(object: ReadOnlyIndexerObject<T>, iteratee?: ?ValueOnlyIteratee<T>): { [string]: number, ... };
     // alias of _.forEach
-    each<A, K, T: ReadOnlyIndexerObject<A> | $ReadOnlyArray<A> | string | void | null>(collection: T, iteratee?: ?IterateeWithResult<A, K, T, boolean | void>): T;
+    each<A, K, T: ReadOnlyIndexerObject<A, K> | $ReadOnlyArray<A> | string | void | null>(collection: T, iteratee?: ?IterateeWithResult<A, K, T, boolean | void>): T;
     // alias of _.forEachRight
-    eachRight<A, K, T: ReadOnlyIndexerObject<A> | $ReadOnlyArray<A> | string | void | null>(collection: T, iteratee?: ?IterateeWithResult<A, K, T, boolean | void>): T;
+    eachRight<A, K, T: ReadOnlyIndexerObject<A, K> | $ReadOnlyArray<A> | string | void | null>(collection: T, iteratee?: ?IterateeWithResult<A, K, T, boolean | void>): T;
     every<T>(array?: ?$ReadOnlyArray<T>, iteratee?: ?Iteratee<T>): boolean;
     every<A, T: ReadOnlyIndexerObject<A>>(object: T, iteratee?: OIterateeWithResult<A, string, T, any>): boolean;
     filter<T>(array?: ?$ReadOnlyArray<T>, predicate?: ?Predicate<T>): Array<T>;
@@ -573,11 +574,11 @@ declare module "lodash" {
       predicate?: ?Predicate<T>,
       fromIndex?: ?number
     ): void;
-    find<V, A, T: ReadOnlyIndexerObject<A>>(
+    find<R, A, T: ReadOnlyIndexerObject<A>>(
       object: T,
       predicate?: ?OPredicate<A, T>,
       fromIndex?: ?number
-    ): V;
+    ): R;
     findLast<T>(
       array: $ReadOnlyArray<T>,
       predicate?: ?Predicate<T>,
@@ -588,16 +589,16 @@ declare module "lodash" {
       predicate?: ?Predicate<T>,
       fromIndex?: ?number
     ): void;
-    findLast<V, A, T: ReadOnlyIndexerObject<A>>(
+    findLast<R, A, T: ReadOnlyIndexerObject<A>>(
       object: T,
       predicate?: ?OPredicate<A, T>,
       fromIndex?: ?number
-    ): V;
+    ): R;
     flatMap<A, K, U, T: $ReadOnlyArray<A> = Array<A>>(
       array: T,
       iteratee?: ?AFlatMapIteratee<A, T, U>
     ): Array<U>;
-    flatMap<A, K, U, T: ?ReadOnlyIndexerObject<A> | string = IndexerObject<A>>(
+    flatMap<A, K, U, T: ?ReadOnlyIndexerObject<A, K> | string = IndexerObject<A, K>>(
       object: T,
       iteratee?: ?OFlatMapIteratee<A, K, T, U>
     ): Array<U>;
@@ -605,7 +606,7 @@ declare module "lodash" {
       array: T,
       iteratee?: ?AFlatMapIteratee<A, T, any>
     ): Array<U>;
-    flatMapDeep<A, K, U, T: ?ReadOnlyIndexerObject<A> | string = IndexerObject<A>>(
+    flatMapDeep<A, K, U, T: ?ReadOnlyIndexerObject<A, K> | string = IndexerObject<A, K>>(
       object: T,
       iteratee?: ?OFlatMapIteratee<A, K, T, any>
     ): Array<U>;
@@ -614,13 +615,13 @@ declare module "lodash" {
       iteratee?: ?AFlatMapIteratee<A, T, any>,
       depth?: ?number
     ): Array<U>;
-    flatMapDepth<A, K, U, T: ?ReadOnlyIndexerObject<A> | string = IndexerObject<A>>(
+    flatMapDepth<A, K, U, T: ?ReadOnlyIndexerObject<A, K> | string = IndexerObject<A, K>>(
       object: T,
       iteratee?: ?OFlatMapIteratee<A, K, T, any>,
       depth?: ?number
     ): Array<U>;
-    forEach<A, K, T: ReadOnlyIndexerObject<A> | $ReadOnlyArray<A> | string | void | null>(collection: T, iteratee?: ?IterateeWithResult<A, K, T, boolean | void>): T;
-    forEachRight<A, K, T: ReadOnlyIndexerObject<A> | $ReadOnlyArray<A> | string | void | null>(collection: T, iteratee?: ?IterateeWithResult<A, K, T, boolean | void>): T;
+    forEach<A, K, T: ReadOnlyIndexerObject<A, K> | $ReadOnlyArray<A> | string | void | null>(collection: T, iteratee?: ?IterateeWithResult<A, K, T, boolean | void>): T;
+    forEachRight<A, K, T: ReadOnlyIndexerObject<A, K> | $ReadOnlyArray<A> | string | void | null>(collection: T, iteratee?: ?IterateeWithResult<A, K, T, boolean | void>): T;
     groupBy<V, T>(
       array: $ReadOnlyArray<T>,
       iteratee?: ?ValueOnlyIteratee<T>
@@ -653,7 +654,7 @@ declare module "lodash" {
       iteratee?: ?ValueOnlyIteratee<T>
     ): { [key: V]: T, ... };
     keyBy(array: void | null, iteratee?: ?ValueOnlyIteratee<*>): {...};
-    keyBy<V, A, I, T: ReadOnlyIndexerObject<A, I>>(
+    keyBy<V, A, K, T: ReadOnlyIndexerObject<A, K>>(
       object: T,
       iteratee?: ?ValueOnlyIteratee<A>
     ): { [key: V]: A, ... };

@@ -109,13 +109,9 @@ const objectOrNull: ObjectOrNull = readOnlyArray[0] > 100 ? indexerObject : null
 type ObjectOrVoid = IndexerObject | void;
 const objectOrVoid: ObjectOrVoid = readOnlyArray[0] > 100 ? indexerObject : undefined;
 
-opaque type OpaqueKey = number;
-const toOpaqueKey = (v: number): OpaqueKey => v;
-type ObjectWithOpaqueKey = { [OpaqueKey]: string, ... };
-const objectWithOpaqueKey: ObjectWithOpaqueKey  = { [toOpaqueKey(1)]: 'a', [toOpaqueKey(2)]: 'b' };
-
 type ArrayOrObjectOrString = number[] | ExactObject | string;
 const arrayOrObjectOrString: ArrayOrObjectOrString = readOnlyArray[0] > 100 ? [1, 2, 3] : (readOnlyArray[1] > 100 ? exactObject : 'abc');
+
 
 describe('Array', () => {
   it('chunk', () => {
@@ -299,12 +295,6 @@ describe('Collection', () => {
     // $ExpectError wrong iteratee argument type,
     (f(arrayOrObjectOrString, (v: string) => !!v): ArrayOrObjectOrString);
 
-    (f(objectWithOpaqueKey, (v: string, k: OpaqueKey) => {}): ObjectWithOpaqueKey);
-    // $ExpectError wrong return type - must be opaque type
-    (f(objectWithOpaqueKey, (v, k) => {}): { [string]: string, ...});
-    // $ExpectError wrong key type - must be opaque type
-    f(objectWithOpaqueKey, (v, k: sting) => {});
-
     // $ExpectError wrong iteratee return value
     f(exactObject, (v: number) => ({ a: 1, b: 2}));
     // $ExpectError wrong return type: forEach() returns collection passed in the first argument
@@ -336,15 +326,16 @@ describe('Collection', () => {
   });
 
   const testFilterFunction = (f: typeof filter) => {
-    const users = [
+    type User = {| user: string, age: number, active: boolean; |}
+    const users : User[] = [
       { 'user': 'barney', 'age': 36, 'active': true },
       { 'user': 'fred',   'age': 40, 'active': false }
     ];
 
-    (filter(users, function(o) { return !o.active; }): typeof users);
-    (filter(users, { 'age': 36, 'active': true }): typeof users);
-    (filter(users, ['active', false]): typeof users);
-    (filter(users, 'active'): typeof users);
+    (filter(users, (u: User, i: number, collection: User[]) => !u.active ): User[]);
+    (filter(users, { 'age': 36, 'active': true }): User[]);
+    (filter(users, ['active', false]): User[]);
+    (filter(users, 'active'): User[]);
 
     // $ExpectError first arg should be array or object type is wrong
     filter(123, function(o) { return !o.active; });
@@ -427,7 +418,6 @@ describe('Collection', () => {
     (flatMap(readOnlyExactObject, (n: number, k: string, collection: ReadOnlyExactObject) => [n, n]): number[]);
     (flatMap(readOnlyIndexerObject, (n: number, k: string, collection: ReadOnlyIndexerObject) => [n, n]): number[]);
     (flatMap(arrayOrObjectOrString, (n: number| string, k: number | string, collection: ArrayOrObjectOrString) => [n, n]): (number| string)[]);
-    (flatMap(objectWithOpaqueKey, (n: string, k: OpaqueKey, collection: ObjectWithOpaqueKey) => [n, k]): (string| OpaqueKey)[]);
     // $ExpectError key cannot be only string since index is `number` for array
     flatMap(arrayOrObjectOrString, (n, k: string) => [n, n]);
   });
