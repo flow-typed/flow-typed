@@ -1,28 +1,23 @@
-// @flow
+// @flow strict
 
 import { describe, it } from "flow-typed-test";
-import * as fs from "fs-extra";
-import * as Path from "path";
+import fs from "fs-extra";
 
-let len = 2;
-let src = "";
-let dest = "";
-let file = "";
-let dir = "";
-let path = "";
-let data = "";
-let uid = 0;
-let gid = 0;
-let fd = 0;
-let modeNum = 0;
-let modeStr = "";
+import type { ReadOptions, WriteOptions } from "fs-extra";
+
+let src = '';
+let dest = '';
+let file = '';
+let dir = '';
+let path = '';
+let data = '';
 let object = {};
 let errorCallback = (err: Error) => {};
-let readOptions: fs.ReadOptions = {
-  reviver: {}
+let readOptions: ReadOptions = {
+    reviver: {}
 };
-let writeOptions: fs.WriteOptions = {
-  replacer: {}
+let writeOptions: WriteOptions = {
+    replacer: {}
 };
 
 describe("The `copy` function", () => {
@@ -54,11 +49,11 @@ describe("The `copy` function", () => {
     fs.copy(src).then(() => {});
     // $ExpectError
     fs.copy(src);
+    // $ExpectError
     fs.copy(
       src,
       dest,
       {
-        // $ExpectError
         filter: () => []
       },
       errorCallback
@@ -445,20 +440,20 @@ describe("The `outputJson` function", () => {
     fs.outputJson().then(() => {});
     // $ExpectError
     fs.outputJSON().then(() => {});
+    // $ExpectError
     fs.outputJson(
       file,
       data,
       {
-        // $ExpectError
         spaces: true
       },
       errorCallback
     );
+    // $ExpectError
     fs.outputJSON(
       file,
       data,
       {
-        // $ExpectError
         spaces: true
       },
       errorCallback

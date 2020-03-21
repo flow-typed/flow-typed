@@ -66,6 +66,20 @@ declare module "fs-extra" {
     ...
   };
 
+  declare type ReadStreamOptions = {|
+    bufferSize?: number,
+    encoding?: string,
+    fd?: number,
+    flags?: string,
+    mode?: number
+  |}
+
+  declare type WriteStreamOptions = {|
+    encoding?: string,
+    flags?: string,
+    string?: string
+  |}
+
   declare function copy(
     src: string,
     dest: string,
@@ -116,8 +130,8 @@ declare module "fs-extra" {
     callback: (err: Error) => void
   ): void;
   declare function createFileSync(file: string): void;
-  declare function createReadStream(path: string, options?: Object): ReadStream;
-  declare function createWriteStream(path: string, options?: Object): WriteStream;
+  declare function createReadStream(path: string, options?: ReadStreamOptions): ReadStream;
+  declare function createWriteStream(path: string, options?: WriteStreamOptions): WriteStream;
 
   declare function ensureDir(path: string): Promise<void>;
   declare function ensureDir(
@@ -849,5 +863,4 @@ declare module "fs-extra" {
     writeJsonSync: typeof writeJsonSync;
     writeJSONSync: typeof writeJSONSync;
   |};
-
 }
