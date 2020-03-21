@@ -168,7 +168,8 @@ declare module "lodash" {
   };
 
   declare type Key = string | number;
-  declare type ReadOnlyIndexerObject<T, I = Key> = $ReadOnly<{ [id: I]: T, ... }>
+  declare type IndexerObject<T, I = Key> = { [id: I]: T, ... };
+  declare type ReadOnlyIndexerObject<T, I = Key> = $ReadOnly<IndexerObject<T, I>>;
   declare type NestedArray<T> = Array<Array<T>>;
   declare type Collection<T> = $ReadOnlyArray<T> | ReadOnlyIndexerObject<T>;
 
@@ -192,9 +193,9 @@ declare module "lodash" {
   declare type OIteratee<O> = OIterateeWithResult<any, string, O, any>;
 
   declare type AFlatMapIteratee<T, O, U> =
-    | ((item: T, index: number, array: O) => Array<U>)
-    | string;
-  declare type OFlatMapIteratee<V, T, U, K = string> = IterateeWithResult<V, K, T, Array<U>>;
+    | ((item: T, index: number, array: O) => Array<U> | U)
+    | string
+  declare type OFlatMapIteratee<V, K, T, U> = IterateeWithResult<V, K, T, Array<U> | U>;
 
   declare type Predicate<T> =
     | ((value: T, index: number, array: Array<T>) => any)
@@ -592,30 +593,30 @@ declare module "lodash" {
       predicate?: ?OPredicate<A, T>,
       fromIndex?: ?number
     ): V;
-    flatMap<A, U, T: ?$ReadOnlyArray<T> = Array<T>>(
+    flatMap<A, K, U, T: $ReadOnlyArray<T>>(
       array: T,
       iteratee?: ?AFlatMapIteratee<A, T, U>
     ): Array<U>;
-    flatMap<A, U, T: ?ReadOnlyIndexerObject<A> = ReadOnlyIndexerObject<T>>(
+    flatMap<A, K, U, T: ?ReadOnlyIndexerObject<A> | string = IndexerObject<T>>(
       object: T,
-      iteratee?: ?OFlatMapIteratee<A, T, U>
+      iteratee?: ?OFlatMapIteratee<A, K, T, U>
     ): Array<U>;
-    flatMapDeep<A, U, T: ?$ReadOnlyArray<T> = Array<T>>(
+    flatMapDeep<A, U, T: $ReadOnlyArray<T> = Array<T>>(
       array: T,
       iteratee?: ?AFlatMapIteratee<A, T, any>
     ): Array<U>;
-    flatMapDeep<A, U, T: ?ReadOnlyIndexerObject<A> = ReadOnlyIndexerObject<T>>(
+    flatMapDeep<A, K, U, T: ?ReadOnlyIndexerObject<A> | string = IndexerObject<T>>(
       object: T,
-      iteratee?: ?OFlatMapIteratee<A, T, any>
+      iteratee?: ?OFlatMapIteratee<A, K, T, any>
     ): Array<U>;
-    flatMapDepth<A, U, T: ?$ReadOnlyArray<T> = Array<T>>(
+    flatMapDepth<A, U, T: $ReadOnlyArray<T> = Array<T>>(
       array: T,
       iteratee?: ?AFlatMapIteratee<A, T, any>,
       depth?: ?number
     ): Array<U>;
-    flatMapDepth<A, U, T: ?ReadOnlyIndexerObject<A> = ReadOnlyIndexerObject<T>>(
+    flatMapDepth<A, K, U, T: ?ReadOnlyIndexerObject<A> | string = IndexerObject<T>>(
       object: T,
-      iteratee?: ?OFlatMapIteratee<A, T, any>,
+      iteratee?: ?OFlatMapIteratee<A, K, T, any>,
       depth?: ?number
     ): Array<U>;
     forEach<A, K, T: ReadOnlyIndexerObject<A> | $ReadOnlyArray<T> | string | void | null>(object: T, iteratee?: ?IterateeWithResult<A, K, T, boolean | void>): T;

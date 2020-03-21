@@ -410,10 +410,15 @@ describe('Collection', () => {
     // this arrow function needs a type annotation due to a bug in flow: https://github.com/facebook/flow/issues/1948
     (flatMap([1, 2, 3], (n: number) => [n, n]): number[]);
 
+    (flatMap([1, 2, 3], (n: number, i: number, collection: number[]) => n): number[]);
     (flatMap(['a', 'b', 'c'], (v: string, i: number, collection: string[]) => [v, collection[0], i]): (number | string)[]);
+    // $ExpectError array index is a number
+    (flatMap(['a', 'b', 'c'], (v, i: string) => [v, v]));
+
     (flatMap(['a', 'b', 'c'], (v: string, i: number, collection: string[]) => [{ v, i }]): ({| v: string, i: number |})[]);
+    flatMap([{ a: [1, 2] }, { a: [3,4] }], 'a');
     (flatMap(arrayOrNull, (n: number, i: number, collection: ArrayOrNull) => [n, n]): number[]);
-    (flatMap(arrayOrVoid, (n: number, i: number, collection: ArrayOrVoid) => [n, n]): number[]);
+    (flatMap(arrayOrVoid, (n: number, i: number, collection: ArrayOrVoid): number[] => [n, n]): number[]);
     (flatMap(readOnlyArray, (n: number, i: number, collection: ReadOnlyArray) => [n, n]): number[]);
 
     (flatMap({ a: 1, b: 2 }, (n: number, k: string, collection: {| a: number, b: number |}) => [n, k]): (number| string)[]);
@@ -421,6 +426,10 @@ describe('Collection', () => {
     (flatMap(objectOrVoid, (n: number, k: string, collection: ObjectOrVoid) => [n, n]): number[]);
     (flatMap(readOnlyExactObject, (n: number, k: string, collection: ReadOnlyExactObject) => [n, n]): number[]);
     (flatMap(readOnlyIndexerObject, (n: number, k: string, collection: ReadOnlyIndexerObject) => [n, n]): number[]);
+    (flatMap(arrayOrObjectOrString, (n: number| string, k: number | string, collection: ArrayOrObjectOrString) => [n, n]): (number| string)[]);
+    (flatMap(objectWithOpaqueKey, (n: string, k: OpaqueKey, collection: ObjectWithOpaqueKey) => [n, k]): (string| OpaqueKey)[]);
+    // $ExpectError key cannot be only string since index is `number` for array
+    flatMap(arrayOrObjectOrString, (n, k: string) => [n, n]);
   });
 
   it('flatMapDeep', () => {
