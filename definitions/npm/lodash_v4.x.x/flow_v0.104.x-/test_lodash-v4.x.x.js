@@ -77,7 +77,7 @@ import zip from "lodash/zip";
 import zipWith from "lodash/zipWith";
 
 // Ideally, there should be a test for each of the variables below. To verify that these use cases do not break on code changes.
-// test arrays
+// Test arrays
 type ReadOnlyArray = $ReadOnlyArray<number>
 const readOnlyArray : ReadOnlyArray = Object.freeze([1, 2, 3, 4]);
 
@@ -87,7 +87,7 @@ const arrayOrNull: ArrayOrNull = readOnlyArray[0] > 100 ? [1, 2, 3] : null;
 type ArrayOrVoid = number[] | void;
 const arrayOrVoid: ArrayOrVoid = readOnlyArray[0] > 100 ? [1, 2, 3] : undefined;
 
-// test objects
+// Test objects
 type IndexerObject = { [string]: number, ... };
 const indexerObject: IndexerObject = { a: 1, b: 2, c: 3 };
 

@@ -174,7 +174,7 @@ declare module "lodash" {
   declare type NestedArray<V> = Array<Array<V>>;
   declare type Collection<V, K = Key> = $ReadOnlyArray<V> | ReadOnlyIndexerObject<V, K>;
 
-  declare type matchesIterateeShorthand = { [key: any]: any, ... };
+  declare type matchesIterateeShorthand = { [Key]: any, ... };
   declare type matchesPropertyIterateeShorthand = [string, any];
   declare type propertyIterateeShorthand = string;
 
@@ -1621,11 +1621,11 @@ declare module "lodash/fp" {
   };
 
   declare type Key = string | number;
-  declare type ReadOnlyIndexerObject<T, I = Key> = $ReadOnly<{ [id: I]: T, ... }>
-  declare type NestedArray<T> = Array<Array<T>>;
-  declare type Collection<T> = $ReadOnlyArray<T> | ReadOnlyIndexerObject<T>;
+  declare type ReadOnlyIndexerObject<V, K = Key> = $ReadOnly<{ [id: K]: V, ... }>
+  declare type NestedArray<V> = Array<Array<V>>;
+  declare type Collection<V, K = Key> = $ReadOnlyArray<V> | ReadOnlyIndexerObject<V, K>;
 
-  declare type matchesIterateeShorthand = { [key: any]: any, ... };
+  declare type matchesIterateeShorthand = { [Key]: any, ... };
   declare type matchesPropertyIterateeShorthand = [string, any];
   declare type propertyIterateeShorthand = string;
 
