@@ -168,8 +168,8 @@ declare module "lodash" {
   };
 
   declare type Key = string | number;
-  declare type IndexerObject<T, I = Key> = { [id: I]: T, ... };
-  declare type ReadOnlyIndexerObject<T, I = Key> = $ReadOnly<IndexerObject<T, I>>;
+  declare type IndexerObject<T, K = Key> = { [key: K]: T, ... };
+  declare type ReadOnlyIndexerObject<T, K = Key> = $ReadOnly<IndexerObject<T, K>>;
   declare type NestedArray<T> = Array<Array<T>>;
   declare type Collection<T> = $ReadOnlyArray<T> | ReadOnlyIndexerObject<T>;
 
@@ -188,14 +188,14 @@ declare module "lodash" {
     | string;
 
   declare type OIterateeWithResult<V, K, O, R> =
-    | ReadOnlyIndexerObject<V>
+    | ReadOnlyIndexerObject<V, K>
     | IterateeWithResult<V, K, O, R>;
-  declare type OIteratee<O> = OIterateeWithResult<any, string, O, any>;
+  declare type OIteratee<O> = OIterateeWithResult<any, any, O, any>;
 
-  declare type AFlatMapIteratee<T, O, U> =
-    | ((item: T, index: number, array: O) => Array<U> | U)
+  declare type AFlatMapIteratee<V, O, R> =
+    | ((item: V, index: number, array: O) => Array<R> | R)
     | string
-  declare type OFlatMapIteratee<V, K, T, U> = IterateeWithResult<V, K, T, Array<U> | U>;
+  declare type OFlatMapIteratee<V, K, O, R> = IterateeWithResult<V, K, O, Array<R> | R>;
 
   declare type Predicate<T> =
     | ((value: T, index: number, array: Array<T>) => any)
@@ -553,9 +553,9 @@ declare module "lodash" {
     countBy<T>(array: void | null, iteratee?: ?ValueOnlyIteratee<T>): {...};
     countBy<T>(object: ReadOnlyIndexerObject<T>, iteratee?: ?ValueOnlyIteratee<T>): { [string]: number, ... };
     // alias of _.forEach
-    each<A, K, T: ReadOnlyIndexerObject<A> | $ReadOnlyArray<T> | string | void | null>(object: T, iteratee?: ?IterateeWithResult<A, K, T, boolean | void>): T;
+    each<A, K, T: ReadOnlyIndexerObject<A> | $ReadOnlyArray<T> | string | void | null>(collection: T, iteratee?: ?IterateeWithResult<A, K, T, boolean | void>): T;
     // alias of _.forEachRight
-    eachRight<A, K, T: ReadOnlyIndexerObject<A> | $ReadOnlyArray<T> | string | void | null>(object: T, iteratee?: ?IterateeWithResult<A, K, T, boolean | void>): T;
+    eachRight<A, K, T: ReadOnlyIndexerObject<A> | $ReadOnlyArray<T> | string | void | null>(collection: T, iteratee?: ?IterateeWithResult<A, K, T, boolean | void>): T;
     every<T>(array?: ?$ReadOnlyArray<T>, iteratee?: ?Iteratee<T>): boolean;
     every<A, T: ReadOnlyIndexerObject<A>>(object: T, iteratee?: OIterateeWithResult<A, string, T, any>): boolean;
     filter<T>(array?: ?$ReadOnlyArray<T>, predicate?: ?Predicate<T>): Array<T>;
@@ -619,8 +619,8 @@ declare module "lodash" {
       iteratee?: ?OFlatMapIteratee<A, K, T, any>,
       depth?: ?number
     ): Array<U>;
-    forEach<A, K, T: ReadOnlyIndexerObject<A> | $ReadOnlyArray<T> | string | void | null>(object: T, iteratee?: ?IterateeWithResult<A, K, T, boolean | void>): T;
-    forEachRight<A, K, T: ReadOnlyIndexerObject<A> | $ReadOnlyArray<T> | string | void | null>(object: T, iteratee?: ?IterateeWithResult<A, K, T, boolean | void>): T;
+    forEach<A, K, T: ReadOnlyIndexerObject<A> | $ReadOnlyArray<T> | string | void | null>(collection: T, iteratee?: ?IterateeWithResult<A, K, T, boolean | void>): T;
+    forEachRight<A, K, T: ReadOnlyIndexerObject<A> | $ReadOnlyArray<T> | string | void | null>(collection: T, iteratee?: ?IterateeWithResult<A, K, T, boolean | void>): T;
     groupBy<V, T>(
       array: $ReadOnlyArray<T>,
       iteratee?: ?ValueOnlyIteratee<T>
