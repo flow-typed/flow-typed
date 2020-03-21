@@ -168,10 +168,10 @@ declare module "lodash" {
   };
 
   declare type Key = string | number;
-  declare type IndexerObject<T, K = Key> = { [key: K]: T, ... };
-  declare type ReadOnlyIndexerObject<T, K = Key> = $ReadOnly<IndexerObject<T, K>>;
-  declare type NestedArray<T> = Array<Array<T>>;
-  declare type Collection<T> = $ReadOnlyArray<T> | ReadOnlyIndexerObject<T>;
+  declare type IndexerObject<V, K = Key> = { [key: K]: V, ... };
+  declare type ReadOnlyIndexerObject<V, K = Key> = $ReadOnly<IndexerObject<V, K>>;
+  declare type NestedArray<V> = Array<Array<V>>;
+  declare type Collection<V> = $ReadOnlyArray<V> | ReadOnlyIndexerObject<V>;
 
   declare type matchesIterateeShorthand = { [key: any]: any, ... };
   declare type matchesPropertyIterateeShorthand = [string, any];
@@ -553,9 +553,9 @@ declare module "lodash" {
     countBy<T>(array: void | null, iteratee?: ?ValueOnlyIteratee<T>): {...};
     countBy<T>(object: ReadOnlyIndexerObject<T>, iteratee?: ?ValueOnlyIteratee<T>): { [string]: number, ... };
     // alias of _.forEach
-    each<A, K, T: ReadOnlyIndexerObject<A> | $ReadOnlyArray<T> | string | void | null>(collection: T, iteratee?: ?IterateeWithResult<A, K, T, boolean | void>): T;
+    each<A, K, T: ReadOnlyIndexerObject<A> | $ReadOnlyArray<A> | string | void | null>(collection: T, iteratee?: ?IterateeWithResult<A, K, T, boolean | void>): T;
     // alias of _.forEachRight
-    eachRight<A, K, T: ReadOnlyIndexerObject<A> | $ReadOnlyArray<T> | string | void | null>(collection: T, iteratee?: ?IterateeWithResult<A, K, T, boolean | void>): T;
+    eachRight<A, K, T: ReadOnlyIndexerObject<A> | $ReadOnlyArray<A> | string | void | null>(collection: T, iteratee?: ?IterateeWithResult<A, K, T, boolean | void>): T;
     every<T>(array?: ?$ReadOnlyArray<T>, iteratee?: ?Iteratee<T>): boolean;
     every<A, T: ReadOnlyIndexerObject<A>>(object: T, iteratee?: OIterateeWithResult<A, string, T, any>): boolean;
     filter<T>(array?: ?$ReadOnlyArray<T>, predicate?: ?Predicate<T>): Array<T>;
@@ -593,34 +593,34 @@ declare module "lodash" {
       predicate?: ?OPredicate<A, T>,
       fromIndex?: ?number
     ): V;
-    flatMap<A, K, U, T: $ReadOnlyArray<T>>(
+    flatMap<A, K, U, T: $ReadOnlyArray<A> = Array<A>>(
       array: T,
       iteratee?: ?AFlatMapIteratee<A, T, U>
     ): Array<U>;
-    flatMap<A, K, U, T: ?ReadOnlyIndexerObject<A> | string = IndexerObject<T>>(
+    flatMap<A, K, U, T: ?ReadOnlyIndexerObject<A> | string = IndexerObject<A>>(
       object: T,
       iteratee?: ?OFlatMapIteratee<A, K, T, U>
     ): Array<U>;
-    flatMapDeep<A, U, T: $ReadOnlyArray<T> = Array<T>>(
+    flatMapDeep<A, U, T: $ReadOnlyArray<A> = Array<A>>(
       array: T,
       iteratee?: ?AFlatMapIteratee<A, T, any>
     ): Array<U>;
-    flatMapDeep<A, K, U, T: ?ReadOnlyIndexerObject<A> | string = IndexerObject<T>>(
+    flatMapDeep<A, K, U, T: ?ReadOnlyIndexerObject<A> | string = IndexerObject<A>>(
       object: T,
       iteratee?: ?OFlatMapIteratee<A, K, T, any>
     ): Array<U>;
-    flatMapDepth<A, U, T: $ReadOnlyArray<T> = Array<T>>(
+    flatMapDepth<A, U, T: $ReadOnlyArray<A> = Array<A>>(
       array: T,
       iteratee?: ?AFlatMapIteratee<A, T, any>,
       depth?: ?number
     ): Array<U>;
-    flatMapDepth<A, K, U, T: ?ReadOnlyIndexerObject<A> | string = IndexerObject<T>>(
+    flatMapDepth<A, K, U, T: ?ReadOnlyIndexerObject<A> | string = IndexerObject<A>>(
       object: T,
       iteratee?: ?OFlatMapIteratee<A, K, T, any>,
       depth?: ?number
     ): Array<U>;
-    forEach<A, K, T: ReadOnlyIndexerObject<A> | $ReadOnlyArray<T> | string | void | null>(collection: T, iteratee?: ?IterateeWithResult<A, K, T, boolean | void>): T;
-    forEachRight<A, K, T: ReadOnlyIndexerObject<A> | $ReadOnlyArray<T> | string | void | null>(collection: T, iteratee?: ?IterateeWithResult<A, K, T, boolean | void>): T;
+    forEach<A, K, T: ReadOnlyIndexerObject<A> | $ReadOnlyArray<A> | string | void | null>(collection: T, iteratee?: ?IterateeWithResult<A, K, T, boolean | void>): T;
+    forEachRight<A, K, T: ReadOnlyIndexerObject<A> | $ReadOnlyArray<A> | string | void | null>(collection: T, iteratee?: ?IterateeWithResult<A, K, T, boolean | void>): T;
     groupBy<V, T>(
       array: $ReadOnlyArray<T>,
       iteratee?: ?ValueOnlyIteratee<T>
