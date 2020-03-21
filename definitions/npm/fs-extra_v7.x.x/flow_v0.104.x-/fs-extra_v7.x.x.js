@@ -772,7 +772,7 @@ declare module "fs-extra" {
     callback: (err: ErrnoError, folder: string) => void
   ): void;
 
-  declare module.exports: {
+  declare module.exports: {|
     ...fsTypes;
     access: typeof access;
     appendFile: typeof appendFile;
@@ -847,7 +847,7 @@ declare module "fs-extra" {
     writeJSON: typeof writeJSON;
     writeJson: typeof writeJson;
     writeJsonSync: typeof writeJsonSync;
-    writeJSONSync: typeof writeJSONSync ;
-  };
+    writeJSONSync: typeof writeJSONSync;
+  |};
 
 }
