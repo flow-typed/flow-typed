@@ -14,10 +14,10 @@ let data = '';
 let object = {};
 let errorCallback = (err: Error) => {};
 let readOptions: ReadOptions = {
-    reviver: {}
+  reviver: {}
 };
 let writeOptions: WriteOptions = {
-    replacer: {}
+  replacer: {}
 };
 
 describe("The `copy` function", () => {

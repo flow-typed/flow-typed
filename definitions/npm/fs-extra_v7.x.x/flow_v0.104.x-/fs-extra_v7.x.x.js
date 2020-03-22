@@ -380,10 +380,10 @@ declare module "fs-extra" {
     file: string | Buffer | number,
     data: any,
     options: {
-        encoding?: string,
-        mode?: number | string,
-        flag?: string,
-        ...
+      encoding?: string,
+      mode?: number | string,
+      flag?: string,
+      ...
     },
     callback: (err: ErrnoError) => void
   ): void;
@@ -396,10 +396,10 @@ declare module "fs-extra" {
     file: string | Buffer | number,
     data: any,
     options?: {
-        encoding?: string,
-        mode?: number | string,
-        flag?: string,
-        ...
+      encoding?: string,
+      mode?: number | string,
+      flag?: string,
+      ...
     }
   ): Promise<void>;
 
@@ -586,18 +586,18 @@ declare module "fs-extra" {
   declare function readFile(
     file: string | Buffer | number,
     options: { flag?: string, ... } | {
-        encoding: string,
-        flag?: string,
-        ...
+      encoding: string,
+      flag?: string,
+      ...
     },
     callback: (err: ErrnoError, data: Buffer) => void
   ): void;
   declare function readFile(
     file: string | Buffer | number,
     options: { flag?: string, ... } | {
-        encoding: string,
-        flag?: string,
-        ...
+      encoding: string,
+      flag?: string,
+      ...
     },
   ): Promise<string>;
   declare function readFile(
