@@ -66,19 +66,21 @@ declare module "fs-extra" {
     ...
   };
 
-  declare type ReadStreamOptions = {|
+  declare type ReadStreamOptions = {
     bufferSize?: number,
     encoding?: string,
     fd?: number,
     flags?: string,
-    mode?: number
-  |}
+    mode?: number,
+    ...
+  }
 
-  declare type WriteStreamOptions = {|
+  declare type WriteStreamOptions = {
     encoding?: string,
     flags?: string,
-    string?: string
-  |}
+    string?: string,
+    ...
+  }
 
   declare function copy(
     src: string,
