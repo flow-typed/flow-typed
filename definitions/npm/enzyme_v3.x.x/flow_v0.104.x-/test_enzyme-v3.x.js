@@ -14,178 +14,240 @@ configure({
   disableLifecycleMethods: true
 });
 
-const shallowWrapper = shallow(<div />);
-(render(<div />, { context: { foo: true } }).text(): string);
-const A: boolean = render(<div />, { context: { foo: true } })
-  .find("foo")
-  .is("bla");
-const B: boolean = render(<div />, { context: { foo: true } })
-  .update()
-  .filter("bla")
-  .equals(<div />);
+describe('render', () => {
+  (render(<div/>, {context: {foo: true}}).text(): string);
+  const A: boolean = render(<div/>, {context: {foo: true}})
+    .find("foo")
+    .is("bla");
+  const B: boolean = render(<div/>, {context: {foo: true}})
+    .update()
+    .filter("bla")
+    .equals(<div/>);
 
-function opaqueNode(): React$Node {
-  return <span>who knows what I am</span>;
-}
-render(opaqueNode());
+  function opaqueNode(): React$Node {
+    return <span>who knows what I am</span>;
+  }
+  render(opaqueNode());
 
-// Test against chaining returning `any`
-// $ExpectError
-(shallow(<div />).children(): boolean);
+  // Cheerio
+  render(<div />).contents();
+});
 
-(shallow(<div />).children(): ShallowWrapper<'div'>);
+// Tests for functions present in both shallow() and mount()
+describe('Wrapper', () => {
+  class DeepInstance extends React.Component<{ onChange: () => void, ... }> {}
 
-// Test PredicateFunction
-shallow(<div />).findWhere((x: ShallowWrapper<'div'>) => true);
+  it('find', () => {
+    // Test selector functionality
+    declare class ClassComponent extends React.Component<*, *> {}
+    const StatelessComponent = () => <div />;
 
-// Test selector functionality
+    shallow(<div />).find(ClassComponent);
+    shallow(<div />).find(StatelessComponent);
+    shallow(<div />).find({ a: 1 });
+    // $ExpectError
+    shallow(<div />).find(true);
+    shallow(<div/>).find("someSelector");
+    shallow(<div/>).renderProp("render")(1, "hi").find("SomeSelector");
 
-declare class ClassComponent extends React.Component<*, *> {}
+    // Need to invoke the returned renderProp fn
+    // Can't properly be tested
+    // shallowWrapper
+    //   .renderProp("render")
+    //   .find(123)
 
-const StatelessComponent = () => <div />;
+    mount(<div><DeepInstance onChange={() => {}}/></div>).find(DeepInstance).instance().props.onChange();
+    // $ExpectError
+    mount(<div><DeepInstance onChange={() => {}}/></div>).find(DeepInstance).instance().props.onChangeX();
+  });
 
-shallow(<div />).find(ClassComponent);
-shallow(<div />).find(StatelessComponent);
-shallow(<div />).find({ a: 1 });
-// $ExpectError
-shallow(<div />).find(true);
+  it('findWhere', () => {
+    // Test PredicateFunction
+    shallow(<div/>).findWhere((x: ShallowWrapper<'div'>) => true);
+  });
 
-shallowWrapper.instance();
-shallowWrapper.find("someSelector");
-shallowWrapper.prop("foo");
-shallowWrapper.props().foo;
-shallowWrapper.slice();
-shallowWrapper.slice(0);
-shallowWrapper.slice(0, 1);
+  it('filter', () => {
+    mount(<div><DeepInstance onChange={() => {}}/></div>).filter(DeepInstance).instance().props.onChange();
+    // $ExpectError
+    mount(<div><DeepInstance onChange={() => {}}/></div>).filter(DeepInstance).instance().props.onChangeX();
+  });
 
-shallowWrapper
-  .renderProp("render")(1, "hi")
-  .find("SomeSelector");
+  it('closest', () => {
+    mount(<div><DeepInstance onChange={() => {}}/></div>).closest(DeepInstance).instance().props.onChange();
+    // $ExpectError
+    mount(<div><DeepInstance onChange={() => {}}/></div>).closest(DeepInstance).instance().props.onChangeX();
+  });
 
-// Need to invoke the returned renderProp fn
-// Can't properly be tested
-// shallowWrapper
-//   .renderProp("render")
-//   .find(123)
+  it('parents', () => {
+    mount(<div><DeepInstance onChange={() => {}}/></div>).parents(DeepInstance).instance().props.onChange();
+    // $ExpectError
+    mount(<div><DeepInstance onChange={() => {}}/></div>).parents(DeepInstance).instance().props.onChangeX();
+  });
 
-// shallow's getNode(s) was replaced by getElement(s) in enzyme v3
-// $ExpectError
-shallowWrapper.getNode();
-// $ExpectError
-shallowWrapper.getNodes();
+  it('children', () => {
+    // Test against chaining returning `any`
+    // $ExpectError wrong return type
+    (shallow(<div/>).children(): boolean);
+    (shallow(<div/>).children(): ShallowWrapper<'div'>);
 
-shallowWrapper.getElement();
-shallowWrapper.getElements();
+    mount(<div><DeepInstance onChange={() => {}}/></div>).children(DeepInstance).instance().props.onChange();
+    // $ExpectError
+    mount(<div><DeepInstance onChange={() => {}}/></div>).children(DeepInstance).instance().props.onChangeX();
+  });
 
-(mount(<div />).map(node => true): Array<boolean>);
+  it('contains', () => {
+    (mount(<div/>).contains(<div/>): boolean);
+    (mount(<div/>).contains([<div/>, <div/>]): boolean);
+  });
 
-(mount(<div />).reduce((acc: number, node, i) => i + 1): Array<number>);
-// $ExpectError
-(mount(<div />).reduce((acc: number, node, i) => i + 1): Array<boolean>);
-(mount(<div />).reduce((acc, node, i) => i + 1, 0): Array<number>);
-// $ExpectError
-(mount(<div />).reduce((acc, node, i) => i + 1, 0): Array<boolean>);
+  it('containsMatchingElement', () => {
+    (mount(<div />).containsMatchingElement(<div />): boolean);
+  });
 
-(mount(<div />).setProps({}, () => {}): ReactWrapper<'div'>);
-// $ExpectError
-(mount(<div />).setProps({}, null): ReactWrapper<'div'>);
-(mount(<div />).setProps({}): ReactWrapper<'div'>);
-// $ExpectError
-(mount(<div />).setProps(): ReactWrapper<'div'>);
-// $ExpectError
-(mount(<div />).setProps(null): ReactWrapper<'div'>);
+  it('containsAllMatchingElements', () => {
+    (mount(<div />).containsAllMatchingElements(<div />): boolean);
+    (mount(<div />).containsAllMatchingElements([<div />, <div />]): boolean);
+  });
 
-(mount(<div />).renderProp("render")(1, "hi"): ReactWrapper<'div'>);
+  it('containsAnyMatchingElements', () => {
+    (mount(<div />).containsAnyMatchingElements(<div />): boolean);
+    (mount(<div />).containsAnyMatchingElements([<div />, <div />]): boolean);
+  });
 
-// mount's getNode(s) were removed in enzyme v3
-// $ExpectError
-mount(<div />).getNode();
-// $ExpectError
-mount(<div />).getNodes();
+  it('instance', () => {
+    class TestInstance extends React.Component<*> {
+      method = () => 'test';
+    }
 
-// Cheerio
-render(<div />).contents();
+    shallow(<div/>).instance();
 
-// not in API docs but in example docs
-// http://airbnb.io/enzyme/docs/api/
-// https://github.com/airbnb/enzyme/blob/master/docs/api/shallow.md#shallow-rendering-api
-(shallow(<div />).length: number);
+    // $ExpectError
+    (shallow(<TestInstance />).instance().method: string);
+    shallow(<TestInstance />).instance().method();
+    (shallow(<TestInstance />).instance().method: () => 'test');
 
-class TestInstance extends React.Component<*> {
-  method = () => 'test';
-}
+    // $ExpectError
+    (mount(<TestInstance />).instance().method: string);
+    mount(<TestInstance />).instance().method();
+    (mount(<TestInstance />).instance().method: () => 'test');
+  });
 
-// $ExpectError
-(mount(<TestInstance />).instance().method: string);
-mount(<TestInstance />).instance().method();
-(mount(<TestInstance />).instance().method: () => 'test');
+  it('map', () => {
+    (mount(<div />).map(node => true): Array<boolean>);
+  });
 
-// $ExpectError
-(shallow(<TestInstance />).instance().method: string);
-shallow(<TestInstance />).instance().method();
-(shallow(<TestInstance />).instance().method: () => 'test');
+  it('prop', () => {
+    shallow(<div/>).prop("foo");
+  });
 
-(mount(<div />).simulateError(new Error('error')): ReactWrapper<'div'>);
-// $ExpectError
-(mount(<div />).simulateError('error'): ReactWrapper<'div'>);
-(shallow(<div />).simulateError(new Error('error')): ShallowWrapper<'div'>);
-// $ExpectError
-(shallow(<div />).simulateError('error'): ShallowWrapper<'div'>);
+  it('props', () => {
+    shallow(<div/>).props().foo;
+  });
 
-class DeepInstance extends React.Component<{ onChange: () => void, ... }> {}
-mount(<div><DeepInstance onChange={() => {}}/></div>).find(DeepInstance).instance().props.onChange();
-mount(<div><DeepInstance onChange={() => {}}/></div>).filter(DeepInstance).instance().props.onChange();
-mount(<div><DeepInstance onChange={() => {}}/></div>).closest(DeepInstance).instance().props.onChange();
-mount(<div><DeepInstance onChange={() => {}}/></div>).parents(DeepInstance).instance().props.onChange();
-mount(<div><DeepInstance onChange={() => {}}/></div>).children(DeepInstance).instance().props.onChange();
+  it('slice', () => {
+    shallow(<div/>).slice();
+    shallow(<div/>).slice(0);
+    shallow(<div/>).slice(0, 1);
+  });
 
-// $ExpectError
-mount(<div><DeepInstance onChange={() => {}}/></div>).find(DeepInstance).instance().props.onChangeX();
-// $ExpectError
-mount(<div><DeepInstance onChange={() => {}}/></div>).filter(DeepInstance).instance().props.onChangeX();
-// $ExpectError
-mount(<div><DeepInstance onChange={() => {}}/></div>).closest(DeepInstance).instance().props.onChangeX();
-// $ExpectError
-mount(<div><DeepInstance onChange={() => {}}/></div>).parents(DeepInstance).instance().props.onChangeX();
-// $ExpectError
-mount(<div><DeepInstance onChange={() => {}}/></div>).children(DeepInstance).instance().props.onChangeX();
+  it('simulateError', () => {
+    (mount(<div />).simulateError(new Error('error')): ReactWrapper<'div'>);
+    // $ExpectError
+    (mount(<div />).simulateError('error'): ReactWrapper<'div'>);
+    (shallow(<div />).simulateError(new Error('error')): ShallowWrapper<'div'>);
+    // $ExpectError
+    (shallow(<div />).simulateError('error'): ShallowWrapper<'div'>);
+  });
+
+  it('setProps', () => {
+    (mount(<div />).setProps({}, () => {}): ReactWrapper<'div'>);
+    // $ExpectError
+    (mount(<div />).setProps({}, null): ReactWrapper<'div'>);
+    (mount(<div />).setProps({}): ReactWrapper<'div'>);
+    // $ExpectError
+    (mount(<div />).setProps(): ReactWrapper<'div'>);
+    // $ExpectError
+    (mount(<div />).setProps(null): ReactWrapper<'div'>);
+  });
 
 
-(mount(<div />).contains(<div />): boolean);
-(mount(<div />).contains([<div />, <div />]): boolean);
-(mount(<div />).containsMatchingElement(<div />): boolean);
-(mount(<div />).containsAllMatchingElements(<div />): boolean);
-(mount(<div />).containsAllMatchingElements([<div />, <div />]): boolean);
-(mount(<div />).containsAnyMatchingElements(<div />): boolean);
-(mount(<div />).containsAnyMatchingElements([<div />, <div />]): boolean);
+  it('reduce', () => {
+    (mount(<div />).reduce((acc: number, node, i) => i + 1): Array<number>);
+    // $ExpectError
+    (mount(<div />).reduce((acc: number, node, i) => i + 1): Array<boolean>);
+    (mount(<div />).reduce((acc, node, i) => i + 1, 0): Array<number>);
+    // $ExpectError
+    (mount(<div />).reduce((acc, node, i) => i + 1, 0): Array<boolean>);
+  });
 
-describe('invoke', () => {
+  it('renderProp', () => {
+    (mount(<div />).renderProp("render")(1, "hi"): ReactWrapper<'div'>);
+  });
+
+  describe('invoke', () => {
     describe('invoke event handler prop on shallowWrapper', () => {
-        it('test', () => {
-            // This is common use case for triggering event handler for user action
-            const shallowWrapper = shallow(<div onClick={() => {}} />);
-            shallowWrapper.invoke('onClick')();
-        });
+      it('test', () => {
+        // This is common use case for triggering event handler for user action
+        const shallowWrapper = shallow(<div onClick={() => {}} />);
+        shallowWrapper.invoke('onClick')();
+      });
     });
 
     describe('invoke regular function prop on shallowWrapper', () => {
-        // Less common use case, allowable by enzyime for prop to simply be a function
+      // Less common use case, allowable by enzyime for prop to simply be a function
 
-        it('user uses type refinement', () => {
-            const shallowWrapper = shallow(<div getName={() => {return 'test';}} />);
-            const name = shallowWrapper.invoke('getName')();
+      it('user uses type refinement', () => {
+        const shallowWrapper = shallow(<div getName={() => {return 'test';}} />);
+        const name = shallowWrapper.invoke('getName')();
 
-            if (typeof name === 'string') {
-                name.substring(0);
-            };
-        });
+        if (typeof name === 'string') {
+          name.substring(0);
+        }
+      });
 
-        it('user does not refine type', () => {
-            const shallowWrapper = shallow(<div getNumber={() => {return 'not a number';}} />);
-            const string = shallowWrapper.invoke('getNumber')();
+      it('user does not refine type', () => {
+        const shallowWrapper = shallow(<div getNumber={() => {return 'not a number';}} />);
+        const string = shallowWrapper.invoke('getNumber')();
 
-            // $ExpectError
-            name.toFixed();
-        });
+        // $ExpectError
+        name.toFixed();
+      });
     });
+  });
+});
+
+describe('shallow', () => {
+  it('getElement', () => {
+    shallow(<div/>).getElement();
+  });
+
+  it('getElements', () => {
+    shallow(<div/>).getElements();
+  });
+
+  it('.length', () => {
+    // not in API docs but in example docs
+    // http://airbnb.io/enzyme/docs/api/
+    // https://github.com/airbnb/enzyme/blob/master/docs/api/shallow.md#shallow-rendering-api
+    (shallow(<div />).length: number);
+  });
+
+  it('deprecated methods should not be present', () => {
+    // shallow's getNode(s) was replaced by getElement(s) in enzyme v3
+    // $ExpectError
+    shallow(<div/>).getNode();
+    // $ExpectError
+    shallow(<div/>).getNodes();
+  });
+});
+
+
+describe('mount', () => {
+  it('deprecated methods should not be present', () => {
+    // mount's getNode(s) were removed in enzyme v3
+    // $ExpectError
+    mount(<div />).getNode();
+    // $ExpectError
+    mount(<div />).getNodes();
+  });
 });
