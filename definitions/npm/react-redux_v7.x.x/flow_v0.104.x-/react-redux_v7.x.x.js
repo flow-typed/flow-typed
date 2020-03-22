@@ -64,7 +64,7 @@ declare module "react-redux" {
     // and provide the DispatchProps type to the DP type parameter.
     | ((dispatch: D, ownProps: OP) => (dispatch: D, ownProps: OP) => DP);
 
-  declare class ConnectedComponent<OP, +WC> extends React$Component<{ ...$Exact<OP>, ... }> {
+  declare class ConnectedComponent<OP, +WC> extends React$Component<OP> {
     static +WrappedComponent: WC;
     getWrappedInstance(): React$ElementRef<WC>;
   }
