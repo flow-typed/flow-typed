@@ -45,7 +45,7 @@ declare module "enzyme" {
     text(): string,
     html(): string,
     invoke(propName: string): (...args: $ReadOnlyArray<any>) => mixed,
-    get(index: number): React$Node,
+    get(index: number): React$Element,
     getDOMNode(): HTMLElement | HTMLInputElement,
     at(index: number): this,
     first(): this,

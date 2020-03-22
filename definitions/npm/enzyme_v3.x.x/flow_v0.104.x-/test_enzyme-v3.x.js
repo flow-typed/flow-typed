@@ -114,6 +114,15 @@ describe('Wrapper', () => {
     (mount(<div />).containsAnyMatchingElements([<div />, <div />]): boolean);
   });
 
+  it('get', () => {
+    const Foo = () => <div>some text</div>
+    const MyComponent = () => <Foo foo="bar"/>
+
+    // example from docs
+    const wrapper = shallow(<MyComponent />);
+    (wrapper.find(Foo).get(0).props.foo: string);
+  });
+
   it('instance', () => {
     class TestInstance extends React.Component<*> {
       method = () => 'test';
