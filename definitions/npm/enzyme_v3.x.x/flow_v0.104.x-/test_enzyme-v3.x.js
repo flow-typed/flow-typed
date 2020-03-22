@@ -37,6 +37,48 @@ describe('render', () => {
 describe('Wrapper', () => {
   class DeepInstance extends React.Component<{ onChange: () => void, ... }> {}
 
+  it('children', () => {
+    // Test against chaining returning `any`
+    // $ExpectError wrong return type
+    (shallow(<div/>).children(): boolean);
+    (shallow(<div/>).children(): ShallowWrapper<'div'>);
+
+    mount(<div><DeepInstance onChange={() => {}}/></div>).children(DeepInstance).instance().props.onChange();
+    // $ExpectError
+    mount(<div><DeepInstance onChange={() => {}}/></div>).children(DeepInstance).instance().props.onChangeX();
+  });
+
+  it('closest', () => {
+    mount(<div><DeepInstance onChange={() => {}}/></div>).closest(DeepInstance).instance().props.onChange();
+    // $ExpectError
+    mount(<div><DeepInstance onChange={() => {}}/></div>).closest(DeepInstance).instance().props.onChangeX();
+  });
+
+  it('contains', () => {
+    (mount(<div/>).contains(<div/>): boolean);
+    (mount(<div/>).contains([<div/>, <div/>]): boolean);
+  });
+
+  it('containsAllMatchingElements', () => {
+    (mount(<div />).containsAllMatchingElements(<div />): boolean);
+    (mount(<div />).containsAllMatchingElements([<div />, <div />]): boolean);
+  });
+
+  it('containsAnyMatchingElements', () => {
+    (mount(<div />).containsAnyMatchingElements(<div />): boolean);
+    (mount(<div />).containsAnyMatchingElements([<div />, <div />]): boolean);
+  });
+
+  it('containsMatchingElement', () => {
+    (mount(<div />).containsMatchingElement(<div />): boolean);
+  });
+
+  it('filter', () => {
+    mount(<div><DeepInstance onChange={() => {}}/></div>).filter(DeepInstance).instance().props.onChange();
+    // $ExpectError
+    mount(<div><DeepInstance onChange={() => {}}/></div>).filter(DeepInstance).instance().props.onChangeX();
+  });
+
   it('find', () => {
     // Test selector functionality
     declare class ClassComponent extends React.Component<*, *> {}
@@ -66,54 +108,6 @@ describe('Wrapper', () => {
     shallow(<div/>).findWhere((x: ShallowWrapper<'div'>) => true);
   });
 
-  it('filter', () => {
-    mount(<div><DeepInstance onChange={() => {}}/></div>).filter(DeepInstance).instance().props.onChange();
-    // $ExpectError
-    mount(<div><DeepInstance onChange={() => {}}/></div>).filter(DeepInstance).instance().props.onChangeX();
-  });
-
-  it('closest', () => {
-    mount(<div><DeepInstance onChange={() => {}}/></div>).closest(DeepInstance).instance().props.onChange();
-    // $ExpectError
-    mount(<div><DeepInstance onChange={() => {}}/></div>).closest(DeepInstance).instance().props.onChangeX();
-  });
-
-  it('parents', () => {
-    mount(<div><DeepInstance onChange={() => {}}/></div>).parents(DeepInstance).instance().props.onChange();
-    // $ExpectError
-    mount(<div><DeepInstance onChange={() => {}}/></div>).parents(DeepInstance).instance().props.onChangeX();
-  });
-
-  it('children', () => {
-    // Test against chaining returning `any`
-    // $ExpectError wrong return type
-    (shallow(<div/>).children(): boolean);
-    (shallow(<div/>).children(): ShallowWrapper<'div'>);
-
-    mount(<div><DeepInstance onChange={() => {}}/></div>).children(DeepInstance).instance().props.onChange();
-    // $ExpectError
-    mount(<div><DeepInstance onChange={() => {}}/></div>).children(DeepInstance).instance().props.onChangeX();
-  });
-
-  it('contains', () => {
-    (mount(<div/>).contains(<div/>): boolean);
-    (mount(<div/>).contains([<div/>, <div/>]): boolean);
-  });
-
-  it('containsMatchingElement', () => {
-    (mount(<div />).containsMatchingElement(<div />): boolean);
-  });
-
-  it('containsAllMatchingElements', () => {
-    (mount(<div />).containsAllMatchingElements(<div />): boolean);
-    (mount(<div />).containsAllMatchingElements([<div />, <div />]): boolean);
-  });
-
-  it('containsAnyMatchingElements', () => {
-    (mount(<div />).containsAnyMatchingElements(<div />): boolean);
-    (mount(<div />).containsAnyMatchingElements([<div />, <div />]): boolean);
-  });
-
   it('get', () => {
     const Foo = () => <div>some text</div>
     const MyComponent = () => <Foo foo="bar"/>
@@ -139,58 +133,6 @@ describe('Wrapper', () => {
     (mount(<TestInstance />).instance().method: string);
     mount(<TestInstance />).instance().method();
     (mount(<TestInstance />).instance().method: () => 'test');
-  });
-
-  it('map', () => {
-    (mount(<div />).map(node => true): Array<boolean>);
-  });
-
-  it('prop', () => {
-    shallow(<div/>).prop("foo");
-  });
-
-  it('props', () => {
-    shallow(<div/>).props().foo;
-  });
-
-  it('slice', () => {
-    shallow(<div/>).slice();
-    shallow(<div/>).slice(0);
-    shallow(<div/>).slice(0, 1);
-  });
-
-  it('simulateError', () => {
-    (mount(<div />).simulateError(new Error('error')): ReactWrapper<'div'>);
-    // $ExpectError
-    (mount(<div />).simulateError('error'): ReactWrapper<'div'>);
-    (shallow(<div />).simulateError(new Error('error')): ShallowWrapper<'div'>);
-    // $ExpectError
-    (shallow(<div />).simulateError('error'): ShallowWrapper<'div'>);
-  });
-
-  it('setProps', () => {
-    (mount(<div />).setProps({}, () => {}): ReactWrapper<'div'>);
-    // $ExpectError
-    (mount(<div />).setProps({}, null): ReactWrapper<'div'>);
-    (mount(<div />).setProps({}): ReactWrapper<'div'>);
-    // $ExpectError
-    (mount(<div />).setProps(): ReactWrapper<'div'>);
-    // $ExpectError
-    (mount(<div />).setProps(null): ReactWrapper<'div'>);
-  });
-
-
-  it('reduce', () => {
-    (mount(<div />).reduce((acc: number, node, i) => i + 1): Array<number>);
-    // $ExpectError
-    (mount(<div />).reduce((acc: number, node, i) => i + 1): Array<boolean>);
-    (mount(<div />).reduce((acc, node, i) => i + 1, 0): Array<number>);
-    // $ExpectError
-    (mount(<div />).reduce((acc, node, i) => i + 1, 0): Array<boolean>);
-  });
-
-  it('renderProp', () => {
-    (mount(<div />).renderProp("render")(1, "hi"): ReactWrapper<'div'>);
   });
 
   describe('invoke', () => {
@@ -223,6 +165,63 @@ describe('Wrapper', () => {
       });
     });
   });
+
+  it('map', () => {
+    (mount(<div />).map(node => true): Array<boolean>);
+  });
+
+  it('parents', () => {
+    mount(<div><DeepInstance onChange={() => {}}/></div>).parents(DeepInstance).instance().props.onChange();
+    // $ExpectError
+    mount(<div><DeepInstance onChange={() => {}}/></div>).parents(DeepInstance).instance().props.onChangeX();
+  });
+
+  it('prop', () => {
+    shallow(<div/>).prop("foo");
+  });
+
+  it('props', () => {
+    shallow(<div/>).props().foo;
+  });
+
+  it('reduce', () => {
+    (mount(<div />).reduce((acc: number, node, i) => i + 1): Array<number>);
+    // $ExpectError
+    (mount(<div />).reduce((acc: number, node, i) => i + 1): Array<boolean>);
+    (mount(<div />).reduce((acc, node, i) => i + 1, 0): Array<number>);
+    // $ExpectError
+    (mount(<div />).reduce((acc, node, i) => i + 1, 0): Array<boolean>);
+  });
+
+  it('renderProp', () => {
+    (mount(<div />).renderProp("render")(1, "hi"): ReactWrapper<'div'>);
+  });
+
+  it('slice', () => {
+    shallow(<div/>).slice();
+    shallow(<div/>).slice(0);
+    shallow(<div/>).slice(0, 1);
+  });
+
+  it('simulateError', () => {
+    (mount(<div />).simulateError(new Error('error')): ReactWrapper<'div'>);
+    // $ExpectError
+    (mount(<div />).simulateError('error'): ReactWrapper<'div'>);
+    (shallow(<div />).simulateError(new Error('error')): ShallowWrapper<'div'>);
+    // $ExpectError
+    (shallow(<div />).simulateError('error'): ShallowWrapper<'div'>);
+  });
+
+  it('setProps', () => {
+    (mount(<div />).setProps({}, () => {}): ReactWrapper<'div'>);
+    // $ExpectError
+    (mount(<div />).setProps({}, null): ReactWrapper<'div'>);
+    (mount(<div />).setProps({}): ReactWrapper<'div'>);
+    // $ExpectError
+    (mount(<div />).setProps(): ReactWrapper<'div'>);
+    // $ExpectError
+    (mount(<div />).setProps(null): ReactWrapper<'div'>);
+  });
 });
 
 describe('shallow', () => {
@@ -234,7 +233,7 @@ describe('shallow', () => {
     shallow(<div/>).getElements();
   });
 
-  it('.length', () => {
+  it('length', () => {
     // not in API docs but in example docs
     // http://airbnb.io/enzyme/docs/api/
     // https://github.com/airbnb/enzyme/blob/master/docs/api/shallow.md#shallow-rendering-api
