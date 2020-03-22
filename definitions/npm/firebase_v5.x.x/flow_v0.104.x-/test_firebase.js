@@ -252,10 +252,7 @@ firebase
 
 // #26
 // $ExpectError
-firebase
-  .firestore()
-  .doc('/foo/bar')
-  .limit(4)
+firebase.firestore().doc('/foo/bar').limit(4)
 
 // #27
 firebase
@@ -415,3 +412,59 @@ firebase
       (c.newIndex: number);
     });
   });
+
+// #46
+
+firebase
+  .firestore()
+  .collection('listened-collection')
+  .onSnapshot(
+    // Test with options object present
+    { includeMetadataChanges: true },
+    (snapshot: firebase.firestore.QuerySnapshot) => {
+      snapshot.docChanges().forEach(c => {
+        (c.type: string);
+        (c.doc.id: string);
+        (c.oldIndex: number);
+        (c.newIndex: number);
+      });
+    });
+
+// #47
+
+firebase
+  .firestore()
+  .collection('listened-collection')
+  .onSnapshot(
+    // Test typedef with deprecated options object field
+    // $ExpectError
+    { includeQueryMetadataChanges: true },
+    (snapshot: firebase.firestore.QuerySnapshot) => {
+      snapshot.docChanges().forEach(c => {
+        (c.type: string);
+        (c.doc.id: string);
+        (c.oldIndex: number);
+        (c.newIndex: number);
+      });
+    });
+
+// #48
+
+firebase
+  .firestore()
+  .collection('listened-collection')
+  .onSnapshot(
+    { includeMetadataChanges: true },
+    (snapshot: firebase.firestore.QuerySnapshot) => {
+      snapshot.docChanges().forEach(c => {
+        (c.type: string);
+        (c.doc.id: string);
+        (c.oldIndex: number);
+        (c.newIndex: number);
+      });
+    },
+    // Test with error handler present
+    (error) => {
+      (error: typeof firebase.FirebaseError);
+    }
+  );
