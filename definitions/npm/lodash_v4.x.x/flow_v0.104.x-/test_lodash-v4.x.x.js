@@ -92,6 +92,7 @@ type ExactObject = {| a: number, b: number, c: number; |};
 const exactObject: ExactObject = { a: 1, b: 2, c: 3 };
 
 type ExactHeterogeneousObject = {| a: number, b: string, c: boolean; |};
+type ExactHeterogeneousObjectValue = number | string | boolean;
 const exactHeterogeneousObject: ExactHeterogeneousObject = { a: 1, b: 'abc', c: true };
 
 type ReadOnlyIndexerObject = $ReadOnly<IndexerObject>
@@ -244,18 +245,28 @@ describe('Collection', () => {
   it('countBy', () => {
     (countBy([6.1, 4.2, 6.3], Math.floor): { [string]: number, ... });
     (countBy(["one", "two", "three"], "length"): { [string]: number, ... });
+
+    (countBy(readOnlyArray, (v: number) => v): { [string]: number, ... });
+    (countBy(readOnlyArray, (v: number | string| boolean) => v): { [string]: number, ... });
+    (countBy(arrayOrNullOrVoid, (v: number) => v): { [string]: number, ... });
+
     (countBy(indexerObject, (v: number) => v): { [string]: number, ... });
     (countBy(exactObject, (v: number) => v): { [string]: number, ... });
-    (countBy(exactHeterogeneousObject, (v: number | string | boolean) => v): { [string]: number, ... });
+    (countBy(exactHeterogeneousObject, (v: ExactHeterogeneousObjectValue) => v): { [string]: number, ... });
+    // $ExpectError wrong value type
+    (countBy(exactHeterogeneousObject, (v: number) => v): { [string]: number, ... });
+    (countBy(readOnlyIndexerObject, (v: number) => v): { [string]: number, ... });
     (countBy(readOnlyExactObject, (v: number) => v): { [string]: number, ... });
+    (countBy(objectOrNullOrVoid, (v: number) => v): { [string]: number, ... });
+    (countBy(arrayOrObjectOrString, (v: number | string) => v): { [string]: number, ... });
 
-    // $ExpectError
+    // $ExpectError wrong return type
     (countBy(["one", "two", "three"], "length"): { [string]: string, ... });
-    // $ExpectError
+    // $ExpectError wrong first argument
     countBy(123, "length");
-    // $ExpectError
+    // $ExpectError wrong value type
     countBy(["one", "two", "three"], (v: boolean) => v);
-    // $ExpectError
+    // $ExpectError wrong indexer type
     countBy(["one", "two", "three"], (v, arg2: number) => arg2);
   });
 
@@ -265,36 +276,33 @@ describe('Collection', () => {
    * 2) Enforce that type definitions for all related functions (e.g. each, eachRight, forEach, forEachRight) are the same, as they should be by the docs.
    */
   const testForEachFunction = (f: typeof forEach) => {
-    (f((readOnlyArray), (v: number) => false): $ReadOnlyArray<number>);
-    // $ExpectError forEach returns its first argument, therefore, if it was readonly, it should remain readonly
-    (f((readOnlyArray), (v) => {}): number[]);
-
     (f('123', (char: string) => {}): string);
 
+    (f(readOnlyArray, (v: number) => false): $ReadOnlyArray<number>);
+    // $ExpectError forEach returns its first argument, therefore, if it was readonly, it should remain readonly
+    (f(readOnlyArray, (v) => {}): number[]);
     (f(arrayOrNullOrVoid, (v: number) => !!v): ArrayOrNullOrVoid);
 
-    (f(indexerObject, (v: number) => {}): IndexerObject);
-    (f(exactObject, (v: number) => !!v): ExactObject);
-
-    (f((readOnlyExactObject), (v) => {}): ReadOnlyExactObject);
-    // $ExpectError forEach returns its first argument, therefore, if it was readonly, it should remain readonly
-    (f((readOnlyExactObject), (v) => {}): ExactObject);
-
-    (f(exactHeterogeneousObject, (v: number | string | boolean) => !!v): ExactHeterogeneousObject);
+    (f(indexerObject, (v: number, k: string, c: IndexerObject) => {}): IndexerObject);
+    (f(exactObject, (v: number, k: string, c: ExactObject) => !!v): ExactObject);
+    (f(exactHeterogeneousObject, (v: ExactHeterogeneousObjectValue, k: string, c: ExactHeterogeneousObject) => !!v): ExactHeterogeneousObject);
     // $ExpectError wrong iteratee argument type
     f(exactHeterogeneousObject, (v: number) => false);
-
-    (f(objectOrNullOrVoid, (v: number) => {}): ObjectOrNullOrVoid);
-    (f(arrayOrObjectOrString, (v: number | string, key: string) => !!v): ArrayOrObjectOrString);
+    (f(readOnlyIndexerObject, (v: number, k: string, c: ReadOnlyIndexerObject) => {}): ReadOnlyIndexerObject);
+    (f(readOnlyExactObject, (v: number, k: string, c: ReadOnlyExactObject) => {}): ReadOnlyExactObject);
+    // $ExpectError forEach returns its first argument, therefore, if it was readonly, it should remain readonly
+    (f(readOnlyExactObject, (v) => {}): ExactObject);
+    (f(objectOrNullOrVoid, (v: number, k: string, c: ObjectOrNullOrVoid) => {}): ObjectOrNullOrVoid);
+    (f(arrayOrObjectOrString, (v: number | string, key: string, c: ArrayOrObjectOrString) => !!v): ArrayOrObjectOrString);
     // $ExpectError wrong iteratee argument type,
     (f(arrayOrObjectOrString, (v: string) => !!v): ArrayOrObjectOrString);
 
     // $ExpectError wrong iteratee return value
-    f(exactObject, (v: number) => ({ a: 1, b: 2}));
+    f(exactObject, (v) => ({ a: 1, b: 2}));
     // $ExpectError wrong return type: forEach() returns collection passed in the first argument
-    (f(exactObject, (v: number) => false): void);
+    (f(exactObject, (v) => false): void);
     // $ExpectError wrong iteratee return type
-    f(exactObject, (v: number) => v + 2);
+    f(exactObject, (v) => v + 2);
     // $ExpectError wrong iteratee type, should be function
     f(exactObject, {a: 1});
   }
@@ -317,6 +325,17 @@ describe('Collection', () => {
     (every(users, { 'user': 'barney', 'active': false }): boolean);
     (every(users, ['active', false]): boolean);
     (every(users, 'active'): boolean);
+
+    (every(readOnlyArray, (v: number) => false): boolean);
+    (every(arrayOrNullOrVoid, (v: number) => !!v): boolean);
+
+    (every(indexerObject, (v: number, k: string, c: IndexerObject) => {}): boolean);
+    (every(exactObject, (v: number, k: string, c: ExactObject) => !!v): boolean);
+    (every(exactHeterogeneousObject, (v: ExactHeterogeneousObjectValue, k: string, c: ExactHeterogeneousObject) => !!v): boolean);
+    (every(readOnlyIndexerObject, (v: number, k: string, c: ReadOnlyIndexerObject) => {}): boolean);
+    (every(readOnlyExactObject, (v: number, k: string, c: ReadOnlyExactObject) => {}): boolean);
+    (every(objectOrNullOrVoid, (v: number, k: string, c: ObjectOrNullOrVoid) => {}): boolean);
+    (every(arrayOrObjectOrString, (v: number | string, key: string, c: ArrayOrObjectOrString) => !!v): boolean);
   });
 
   const testFilterFunction = (f: typeof filter) => {
@@ -326,15 +345,25 @@ describe('Collection', () => {
       { 'user': 'fred',   'age': 40, 'active': false }
     ];
 
-    (filter(users, (u: User, i: number, collection: User[]) => !u.active ): User[]);
-    (filter(users, { 'age': 36, 'active': true }): User[]);
-    (filter(users, ['active', false]): User[]);
-    (filter(users, 'active'): User[]);
+    (f(users, (u: User, i: number, collection: User[]) => !u.active ): User[]);
+    (f(users, { 'age': 36, 'active': true }): User[]);
+    (f(users, ['active', false]): User[]);
+    (f(users, 'active'): User[]);
+
+    (f(readOnlyArray, (v: number) => false): number[]);
+    (f(arrayOrNullOrVoid, (v: number) => !!v): number[]);
+
+    (f(indexerObject, (v: number, k: string, c: IndexerObject) => {}): number[]);
+    (f(exactObject, (v: number, k: string, c: ExactObject) => !!v): number[]);
+    (f(exactHeterogeneousObject, (v: ExactHeterogeneousObjectValue, k: string, c: ExactHeterogeneousObject) => !!v): ExactHeterogeneousObjectValue[]);
+    (f(readOnlyIndexerObject, (v: number, k: string, c: ReadOnlyIndexerObject) => {}): number[]);
+    (f(readOnlyExactObject, (v: number, k: string, c: ReadOnlyExactObject) => {}): number[]);
+    (f(objectOrNullOrVoid, (v: number, k: string, c: ObjectOrNullOrVoid) => {}): number[]);
 
     // $ExpectError first arg should be array or object type is wrong
-    filter(123, function(o) { return !o.active; });
+    f(123, function(o) { return !o.active; });
     // $ExpectError return type is wrong
-    (filter(users, function(o) { return !o.active; }): boolean);
+    (f(users, function(o) { return !o.active; }): boolean);
   };
 
   it('filter', () => {
@@ -362,14 +391,17 @@ describe('Collection', () => {
     (f({ x: 1, y: 2 }, (v: number, key: string) => v): number | void);
 
     (f((["a", "b"]: $ReadOnlyArray<string>), "c"): string | void);
-    // opaque types are allowed as keys of objects
-    opaque type O = string;
-    type V = { [O]: number, ... };
-    const v: V = { x: 1, y: 2 };
-
     (f([1, 2, 3], x => x == 1): number | void);
-    (find(arrayOrNullOrVoid, v => !!v, null): number | void);
-    (find(objectOrNullOrVoid, v => !!v, null): number | void);
+
+    (f(readOnlyArray, (v: number) => false): number | void);
+    (f(arrayOrNullOrVoid, v => !!v, null): number | void);
+
+    (f(indexerObject, (v: number, k: string, c: IndexerObject) => {}): number | void);
+    (f(exactObject, (v: number, k: string, c: ExactObject) => !!v): number | void);
+    (f(exactHeterogeneousObject, (v: ExactHeterogeneousObjectValue, k: string, c: ExactHeterogeneousObject) => !!v): ExactHeterogeneousObjectValue[]);
+    (f(readOnlyIndexerObject, (v: number, k: string, c: ReadOnlyIndexerObject) => {}): number | void);
+    (f(readOnlyExactObject, (v: number, k: string, c: ReadOnlyExactObject) => {}): number | void);
+    (f(objectOrNullOrVoid, (v: number, k: string, c: ObjectOrNullOrVoid) => !!v): number | void);
 
     // $ExpectError number cannot be compared to string
     f([1, 2, 3], x => x == "a");
@@ -393,21 +425,25 @@ describe('Collection', () => {
     // this arrow function needs a type annotation due to a bug in flow: https://github.com/facebook/flow/issues/1948
     (flatMap([1, 2, 3], (n: number) => [n, n]): number[]);
 
-    (flatMap([1, 2, 3], (n: number, i: number, collection: number[]) => n): number[]);
-    (flatMap(['a', 'b', 'c'], (v: string, i: number, collection: string[]) => [v, collection[0], i]): (number | string)[]);
+    (flatMap([1, 2, 3], (n: number, i: number, c: number[]) => n): number[]);
+    (flatMap(['a', 'b', 'c'], (v: string, i: number, c: string[]) => [v, c[0], i]): (number | string)[]);
     // $ExpectError array index is a number
     (flatMap(['a', 'b', 'c'], (v, i: string) => [v, v]));
 
-    (flatMap(['a', 'b', 'c'], (v: string, i: number, collection: string[]) => [{ v, i }]): ({| v: string, i: number |})[]);
+    (flatMap(['a', 'b', 'c'], (v: string, i: number, c: string[]) => [{ v, i }]): ({| v: string, i: number |})[]);
     flatMap([{ a: [1, 2] }, { a: [3,4] }], 'a');
-    (flatMap(arrayOrNullOrVoid, (n: number, i: number, collection: ArrayOrNullOrVoid): number[] => [n, n]): number[]);
-    (flatMap(readOnlyArray, (n: number, i: number, collection: ReadOnlyArray) => [n, n]): number[]);
+    (flatMap({ a: 1, b: 2 }, (n: number, k: string, c: {| a: number, b: number |}) => [n, k]): (number| string)[]);
 
-    (flatMap({ a: 1, b: 2 }, (n: number, k: string, collection: {| a: number, b: number |}) => [n, k]): (number| string)[]);
-    (flatMap(objectOrNullOrVoid, (n: number, k: string, collection: ObjectOrNullOrVoid) => [n, n]): number[]);
-    (flatMap(readOnlyExactObject, (n: number, k: string, collection: ReadOnlyExactObject) => [n, n]): number[]);
-    (flatMap(readOnlyIndexerObject, (n: number, k: string, collection: ReadOnlyIndexerObject) => [n, n]): number[]);
-    (flatMap(arrayOrObjectOrString, (n: number| string, k: number | string, collection: ArrayOrObjectOrString) => [n, n]): (number| string)[]);
+    (flatMap(readOnlyArray, (n: number, i: number, c: ReadOnlyArray) => [n, n]): number[]);
+    (flatMap(arrayOrNullOrVoid, (n: number, i: number, c: ArrayOrNullOrVoid): number[] => [n, n]): number[]);
+
+    (flatMap(indexerObject, (v: number, k: string, c: IndexerObject) => [v, v]): number[]);
+    (flatMap(exactObject, (v: number, k: string, c: ExactObject) => [v, v]): number[]);
+    (flatMap(exactHeterogeneousObject, (v: ExactHeterogeneousObjectValue, k: string, c: ExactHeterogeneousObject) => [v, v]): ExactHeterogeneousObjectValue[]);
+    (flatMap(readOnlyIndexerObject, (n: number, k: string, c: ReadOnlyIndexerObject) => [n, n]): number[]);
+    (flatMap(readOnlyExactObject, (n: number, k: string, c: ReadOnlyExactObject) => [n, n]): number[]);
+    (flatMap(objectOrNullOrVoid, (n: number, k: string, c: ObjectOrNullOrVoid) => [n, n]): number[]);
+    (flatMap(arrayOrObjectOrString, (n: number| string, k: number | string, c: ArrayOrObjectOrString) => [n, n]): (number| string)[]);
     // $ExpectError key cannot be only string since index is `number` for array
     flatMap(arrayOrObjectOrString, (n, k: string) => [n, n]);
   });
@@ -415,21 +451,39 @@ describe('Collection', () => {
   it('flatMapDeep', () => {
     (flatMapDeep([1, 2, 3], (n: number) => [[[n, n]]]): number[]);
 
-    (flatMapDeep(['a', 'b', 'c'], (v: string, i: number, collection: string[]) => [[[v, collection[0], i]]]): (number | string)[]);
-    (flatMapDeep(arrayOrNullOrVoid, (n: number, i: number, collection: ArrayOrNullOrVoid) => [[[n, n]]]): number[]);
+    (flatMapDeep(['a', 'b', 'c'], (v: string, i: number, c: string[]) => [[[v, c[0], i]]]): (number | string)[]);
+    (flatMapDeep(readOnlyArray, (n: number, i: number, c: ReadOnlyArray) => [[[n, n]]]): number[]);
+    (flatMapDeep(arrayOrNullOrVoid, (n: number, i: number, c: ArrayOrNullOrVoid) => [[[n, n]]]): number[]);
 
-    (flatMapDeep({ a: 1, b: 2 }, (n: number, k: string, collection: {| a: number, b: number |}) => [[[n, k]]]): (number| string)[]);
-    (flatMapDeep(objectOrNullOrVoid, (n: number, k: string, collection: ObjectOrNullOrVoid) => [[[n, n]]]): number[]);
+    (flatMapDeep({ a: 1, b: 2 }, (n: number, k: string, c: {| a: number, b: number |}) => [[[n, k]]]): (number| string)[]);
+    (flatMapDeep(indexerObject, (v: number, k: string, c: IndexerObject) => [[[v, v]]]): number[]);
+    (flatMapDeep(exactObject, (v: number, k: string, c: ExactObject) => [[[v, v]]]): number[]);
+    (flatMapDeep(exactHeterogeneousObject, (v: ExactHeterogeneousObjectValue, k: string, c: ExactHeterogeneousObject) => [[[v, v]]]): ExactHeterogeneousObjectValue[]);
+    (flatMapDeep(readOnlyIndexerObject, (n: number, k: string, c: ReadOnlyIndexerObject) => [[[n, n]]]): number[]);
+    (flatMapDeep(readOnlyExactObject, (n: number, k: string, c: ReadOnlyExactObject) => [[[n, n]]]): number[]);
+    (flatMapDeep(objectOrNullOrVoid, (n: number, k: string, c: ObjectOrNullOrVoid) => [[[n, n]]]): number[]);
+    (flatMapDeep(arrayOrObjectOrString, (n: number| string, k: number | string, c: ArrayOrObjectOrString) => [[[n, n]]]): (number| string)[]);
+    // $ExpectError key cannot be only string since index is `number` for array
+    flatMapDeep(arrayOrObjectOrString, (n, k: string) => [[[n, n]]]);
   });
 
   it('flatMapDepth', () => {
     (flatMapDepth([1, 2, 3], (n) => [[[n, n]]], 2): number[]);
 
-    (flatMapDepth(['a', 'b', 'c'], (v: string, i: number, collection: string[]) => [[[v, collection[0], i]]], 2): (number | string)[]);
-    (flatMapDepth(arrayOrNullOrVoid, (n: number, i: number, collection: ArrayOrNullOrVoid) => [[[n, n]]], 2): number[]);
+    (flatMapDepth(['a', 'b', 'c'], (v: string, i: number, c: string[]) => [[[v, c[0], i]]], 2): (number | string)[]);
+    (flatMapDepth(readOnlyArray, (n: number, i: number, c: ReadOnlyArray) => [[[n, n]]], 2): number[]);
+    (flatMapDepth(arrayOrNullOrVoid, (n: number, i: number, c: ArrayOrNullOrVoid) => [[[n, n]]], 2): number[]);
 
-    (flatMapDepth({ a: 1, b: 2 }, (n: number, k: string, collection: {| a: number, b: number |}) => [[[n, k]]], 2): (number| string)[]);
-    (flatMapDepth(objectOrNullOrVoid, (n: number, k: string, collection: ObjectOrNullOrVoid) => [[[n, n]]], 2): number[]);
+    (flatMapDepth({ a: 1, b: 2 }, (n: number, k: string, c: {| a: number, b: number |}) => [[[n, k]]], 2): (number| string)[]);
+    (flatMapDepth(indexerObject, (v: number, k: string, c: IndexerObject) => [[[v, v]]], 2): number[]);
+    (flatMapDepth(exactObject, (v: number, k: string, c: ExactObject) => [[[v, v]]], 2): number[]);
+    (flatMapDepth(exactHeterogeneousObject, (v: ExactHeterogeneousObjectValue, k: string, c: ExactHeterogeneousObject) => [[[v, v]]], 2): ExactHeterogeneousObjectValue[]);
+    (flatMapDepth(readOnlyIndexerObject, (n: number, k: string, c: ReadOnlyIndexerObject) => [[[n, n]]], 2): number[]);
+    (flatMapDepth(readOnlyExactObject, (n: number, k: string, c: ReadOnlyExactObject) => [[[n, n]]], 2): number[]);
+    (flatMapDepth(objectOrNullOrVoid, (n: number, k: string, c: ObjectOrNullOrVoid) => [[[n, n]]], 2): number[]);
+    (flatMapDepth(arrayOrObjectOrString, (n: number| string, k: number | string, c: ArrayOrObjectOrString) => [[[n, n]]], 2): (number| string)[]);
+    // $ExpectError key cannot be only string since index is `number` for array
+    flatMapDepth(arrayOrObjectOrString, (n, k: string) => [[[n, n]]], 2);
   });
 
   it('forEach', () => {
@@ -575,6 +629,16 @@ describe('Collection', () => {
 
     // $ExpectError return type
     (f([1, 2], function(sum, n) { return sum + n;}, 0): string);
+
+    (f(readOnlyArray, (r: number, v: number, i: number) => r + v, 0): number);
+    (f(arrayOrNullOrVoid, (r: number, v: number, i: number) => r + (v != null ? v : 0), 0): number);
+
+    (f(indexerObject, (r: number, v: number, k: string) => r + v, 0): number);
+    (f(exactObject, (r: number, v: number, k: string) => r + v, 0): number);
+    (f(exactHeterogeneousObject, (r: ExactHeterogeneousObjectValue[], v: ExactHeterogeneousObjectValue, k: string) => [...r, v], []): ExactHeterogeneousObjectValue[]);
+    (f(readOnlyIndexerObject, (r: number, v: number, k: string) => r + v, 0): number);
+    (f(readOnlyExactObject, (r: number, v: number, k: string) => r + v, 0): number);
+    (f(objectOrNullOrVoid, (r: number, v: number, k: string) => r + v, 0): number);
   };
 
   it('reduce', () => {

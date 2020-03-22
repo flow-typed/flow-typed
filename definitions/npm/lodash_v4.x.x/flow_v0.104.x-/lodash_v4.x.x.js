@@ -552,12 +552,14 @@ declare module "lodash" {
     // Collection
     countBy<T>(array: $ReadOnlyArray<T>, iteratee?: ?ValueOnlyIteratee<T>): { [string]: number, ... };
     countBy<T>(array: void | null, iteratee?: ?ValueOnlyIteratee<T>): {...};
+    countBy(string: string, iteratee?: ?ValueOnlyIteratee<string>): { [string]: number, ... };
     countBy<T>(object: ReadOnlyIndexerObject<T>, iteratee?: ?ValueOnlyIteratee<T>): { [string]: number, ... };
     // alias of _.forEach
     each<A, K, T: ReadOnlyIndexerObject<A, K> | $ReadOnlyArray<A> | string | void | null>(collection: T, iteratee?: ?IterateeWithResult<A, K, T, boolean | void>): T;
     // alias of _.forEachRight
     eachRight<A, K, T: ReadOnlyIndexerObject<A, K> | $ReadOnlyArray<A> | string | void | null>(collection: T, iteratee?: ?IterateeWithResult<A, K, T, boolean | void>): T;
     every<T>(array?: ?$ReadOnlyArray<T>, iteratee?: ?Iteratee<T>): boolean;
+    every(str: string, iteratee?: ?Iteratee<string>): boolean;
     every<A, T: ReadOnlyIndexerObject<A>>(object: T, iteratee?: OIterateeWithResult<A, string, T, any>): boolean;
     filter<T>(array?: ?$ReadOnlyArray<T>, predicate?: ?Predicate<T>): Array<T>;
     filter<A, T: ReadOnlyIndexerObject<A>>(
@@ -708,12 +710,12 @@ declare module "lodash" {
       iteratee?: ?(
         accumulator: U,
         value: T,
-        index: number,
+        index: any,
         array: ?Array<T>
       ) => U,
-      accumulator?: ?U
-    ): void | null;
-    reduce<T: Object, U>(
+      accumulator?: U
+    ): U;
+    reduce<A, T: ReadOnlyIndexerObject<A>, U>(
       object: T,
       iteratee?: (accumulator: U, value: any, key: string, object: T) => U,
       accumulator?: U
@@ -723,11 +725,11 @@ declare module "lodash" {
       iteratee?: ?(
         accumulator: U,
         value: T,
-        index: number,
+        index: any,
         array: ?Array<T>
       ) => U,
-      accumulator?: ?U
-    ): void | null;
+      accumulator?: U
+    ): U;
     reduceRight<T, U>(
       array: $ReadOnlyArray<T>,
       iteratee?: ?(
@@ -738,7 +740,7 @@ declare module "lodash" {
       ) => U,
       accumulator?: ?U
     ): U;
-    reduceRight<T: Object, U>(
+    reduceRight<A, T: ReadOnlyIndexerObject<A>, U>(
       object: T,
       iteratee?: ?(accumulator: U, value: any, key: string, object: T) => U,
       accumulator?: ?U
