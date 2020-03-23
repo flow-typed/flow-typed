@@ -140,6 +140,7 @@ createSelector(
   (x, y) => {
     return x + y;
   }
+// $ExpectError: property .d is required in TestState2 but is missing in passed state
 )({ x: 100, y: 200 });
 
 createSelector(
@@ -151,7 +152,6 @@ createSelector(
   }
 )({ x: 100, y: 200 }, { x: 20 });
 
-// $ExpectError: Should not result do not include property
 createSelector(
   state => state.x,
   state => state.y,
@@ -161,6 +161,7 @@ createSelector(
       y
     };
   }
+// $ExpectError: Should not result do not include property
 )({ x: 100, y: 200 }, { x: 20 }).d;
 
 // $ExpectError
@@ -189,6 +190,7 @@ createStructuredSelector({
   y: 20
 });
 
+// $ExpectError: Cannot call `createSelector` because property `third` is missing in createStructuredSelector() result
 createSelector(
   createStructuredSelector({
     first: (state) => state.x,

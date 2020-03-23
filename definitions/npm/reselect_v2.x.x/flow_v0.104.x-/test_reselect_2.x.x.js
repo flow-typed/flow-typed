@@ -107,6 +107,7 @@ createSelector(
   (x, y) => {
     return x + y
   }
+// $ExpectError: property `d` is missing state but exists in TestState2
 )({x: 100, y: 200});
 
 createSelector(
@@ -118,7 +119,6 @@ createSelector(
   }
 )({x: 100, y: 200}, { x: 20 });
 
-// $ExpectError: Should not result do not include property
 createSelector(
   (state) => state.x,
   (state) => state.y,
@@ -128,6 +128,7 @@ createSelector(
       y
     }
   }
+// $ExpectError: property `d` is missing createSelector() return object
 )({x: 100, y: 200}, { x: 20 }).d;
 
 // $ExpectError
@@ -173,8 +174,9 @@ createSelector(
     first: (state) => state.x,
     second: (state) => state.y
   }),
-  // $ExpectError: Return types of input selectors propogate
+  // $ExpectError: Return types of input selectors propagate
   ({first, second}: {first: number, second: number}) => first + second
+// $ExpectError: property `second` is missing in object
 )({
   x: 10,
   y: false
