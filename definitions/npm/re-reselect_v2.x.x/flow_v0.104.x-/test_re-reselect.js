@@ -3,7 +3,7 @@
 // The API stayed the same, apart from exposing `cache` in ReOutputSelector
 import createCachedSelector from "re-reselect";
 
-// TEST: Should pass for 2 selectors given as arguments
+it('Should pass for 2 selectors given as arguments', () => {
 type State = {
   x: number,
   y: number,
@@ -21,9 +21,9 @@ const test1Selector = createCachedSelector(
 test1Selector({ x: 100, y: 200 });
 // $ExpectError invalid state
 test1Selector({ x: 100 });
-// END TEST
+});
 
-// TEST: Should pass for 2 selectors given as array
+it('Should pass for 2 selectors given as array', () => {
 const test2Selector = createCachedSelector(
   [(state: State) => state.x, (state: State) => state.y],
   (x, y) => {
@@ -34,9 +34,9 @@ const test2Selector = createCachedSelector(
 test2Selector({ x: 100, y: 200 });
 // $ExpectError invalid state
 test2Selector({ x: 100 });
-// END TEST
+});
 
-// TEST: Should pass when selectors have additional Props argument
+it('Should pass when selectors have additional Props argument', () => {
 type TestProps = {
   x: number,
   ...
@@ -58,9 +58,9 @@ test3Selector(
 test3Selector({ x: 100 }, { x: 10 });
 // $ExpectError invalid props
 test3Selector({ x: 100, y: 200 }, { y: 10 });
-// END TEST
+});
 
-// TEST: Should work when using another selector as functions
+it('Should work when using another selector as functions', () => {
 {
   const simpleSelector = (state: State): string => "foo";
   const resultSelector = (arg: string): string => "foo";
@@ -75,9 +75,9 @@ test3Selector({ x: 100, y: 200 }, { y: 10 });
   // $ExpectError invalid state
   combinedSelector1({ x: 100 })
 }
-// END TEST
+});
 
-// TEST: Should work when using more complex selectors as functions
+it('Should work when using more complex selectors as functions', () => {
 {
   const resultFunc = (param1: string, param2: number): number => 42;
   const simpleSelector = (state: State): string => "foo";
@@ -92,9 +92,9 @@ test3Selector({ x: 100, y: 200 }, { y: 10 });
   // $ExpectError invalid state
   selector({ x: 42 });
 }
-// END TEST
+});
 
-// TEST: Should validate parameters based on the return values of nested
+it('Should validate parameters based on the return values of nested', () => {
 // selectors.
 createCachedSelector(
   (state: State) => state.x,
@@ -102,4 +102,4 @@ createCachedSelector(
   // $ExpectError first argument will be a number, not a string.
   (x: string, y: number) => "foo"
 )
-// END TEST
+});
