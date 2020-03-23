@@ -130,7 +130,6 @@ type TestState2 = {
   ...
 };
 
-// $ExpectError: property `d` is missing state but exists in TestState2
 createSelector(
   (state: TestState1) => state.x,
   // $ExpectError: Should not pass when selectors handle different states
@@ -138,10 +137,11 @@ createSelector(
   (x, y) => {
     return x + y;
   }
+// $ExpectError: property `d` is missing state but exists in TestState2
 )({ x: 100, y: 200 });
 
-// $ExpectError: Should not pass when selectors handle different states
 createSelector(
+  // $ExpectError: Should not pass when selectors handle different states
   (state, props) => state.x + props.d,
   state => state.y,
   (x, y) => {
@@ -166,9 +166,9 @@ defaultMemoize((a: number) => a + 1)("");
 // $ExpectError
 defaultMemoize((a: number) => a + 1, (a, b) => "")(2);
 
-// $ExpectError: Should fail when state don't have good properties
 createSelectorCreator(defaultMemoize)(
   state => state.x,
+  // $ExpectError: Should fail when state don't have good properties
   state => state.y,
   (x, y) => {
     return x + y;
@@ -178,8 +178,8 @@ createSelectorCreator(defaultMemoize)(
   d: 20
 });
 
-// $ExpectError: Should fail when state don't have good properties
 createStructuredSelector({
+  // $ExpectError: Should fail when state don't have good properties
   first: state => state.d,
   second: state => state.y
 })({
@@ -200,7 +200,6 @@ createSelector(
   y: 20
 });
 
-// $ExpectError: Cannot call `createSelector` because `y: boolean` is incompatible with `second: number` in createStructuredSelector() result
 createSelector(
   createStructuredSelector({
     first: (state) => state.x,
