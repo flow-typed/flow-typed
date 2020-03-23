@@ -19,82 +19,85 @@ declare module 'ava' {
     subscribe(observer: (value: mixed) => void): void;
   }
 
-  declare type Constructor = Class<{ constructor(...args: Array<mixed>): mixed }>;
+  declare type Constructor = Class<{
+    constructor(...args: Array<mixed>): mixed,
+    ...
+  }>;
 
-  declare type ThrowsExpectation = {
+  declare type ThrowsExpectation = {|
     code?: string | number,
     instanceOf?: Constructor,
     is?: Error,
     message?: string | RegExp,
     name?: string
-  };
+  |};
 
   declare type SnapshotOptions = {
     id?: string
   };
 
-  declare type Assertions = {
-    assert: {
+  declare type Assertions = {|
+    assert: {|
       (actual: mixed, message?: string): void,
       skip(actual: mixed, message?: string): void,
-    },
-    deepEqual: {
+    |},
+    deepEqual: {|
       (actual: mixed, expected: mixed, message?: string): void,
       skip(actual: mixed, expected: mixed, message?: string): void,
-    },
-    fail: {
+    |},
+    fail: {|
       (message?: string): void,
       skip(message?: string): void,
-    },
-    false: {
+    |},
+    false: {|
       (actual: mixed, message?: string): void,
       skip(actual: mixed, message?: string): void,
-    },
-    falsy: {
+    |},
+    falsy: {|
       (actual: mixed, message?: string): void,
       skip(actual: mixed, message?: string): void,
-    },
-    is: {
+    |},
+    is: {|
       (actual: mixed, expected: mixed, message?: string): void,
       skip(actual: mixed, expected: mixed, message?: string): void,
-    },
-    not: {
+    |},
+    not: {|
       (actual: mixed, expected: mixed, message?: string): void,
       skip(actual: mixed, expected: mixed, message?: string): void,
-    },
-    notDeepEqual: {
+    |},
+    notDeepEqual: {|
       (actual: mixed, expected: mixed, message?: string): void,
       skip(actual: mixed, expected: mixed, message?: string): void,
-    },
-    notRegex: {
+    |},
+    notRegex: {|
       (string: string, regex: RegExp, message?: string): void,
       skip(string: string, regex: RegExp, message?: string): void,
-    },
-    notThrows: {
+    |},
+    notThrows: {|
       (fn: () => mixed, message?: string): void,
       skip(fn: () => mixed, message?: string): void,
-    },
-    notThrowsAsync: {
+    |},
+    notThrowsAsync: {|
       (fn: () => PromiseLike<mixed>, message?: string): Promise<void>,
       (promise: PromiseLike<mixed>, message?: string): Promise<void>,
       skip(fn: PromiseLike<mixed>, message?: string): Promise<void>,
       skip(promise: () => PromiseLike<mixed>, message?: string): Promise<void>,
-    },
-    pass: {
+    |},
+    pass: {|
       (message?: string): void,
       skip(message?: string): void,
-    },
-    regex: {
+    |},
+    regex: {|
       (string: string, regex: RegExp, message?: string): void,
       skip(string: string, regex: RegExp, message?: string): void,
-    },
-    snapshot: {
+    |},
+    snapshot: {|
       (expected: mixed, message?: string): void,
       (expected: mixed, options: SnapshotOptions, message?: string): void,
       skip(expected: mixed, message?: string): void,
       skip(expected: mixed, options: SnapshotOptions, message?: string): void,
-    },
-    throws: {
+    |},
+    throws: {|
       <ThrownError: Error>(
         fn: () => mixed,
         expectations?: null,
@@ -121,8 +124,8 @@ declare module 'ava' {
         message?: string
       ): ThrownError,
       skip(fn: () => mixed, expectations?: mixed, message?: string): void,
-    },
-    throwsAsync: {
+    |},
+    throwsAsync: {|
       <ThrownError: Error>(
         fn: () => PromiseLike<mixed>,
         expectations?: null,
@@ -174,35 +177,35 @@ declare module 'ava' {
         message?: string
       ): Promise<ThrownError>,
       skip(thrower: mixed, expectations?: mixed, message?: string): void,
-    },
-    true: {
+    |},
+    true: {|
       (actual: mixed, message?: string): void,
       skip(actual: mixed, message?: string): void,
-    },
-    truthy: {
+    |},
+    truthy: {|
       (actual: mixed, message?: string): void,
       skip(actual: mixed, message?: string): void,
-    },
-  };
+    |},
+  |};
 
-  declare type ExecutionContext<Context> = Assertions & {
+  declare type ExecutionContext<Context> = Assertions & {|
     context: Context,
     +title: string,
 
-    log: {
+    log: {|
       (...values: Array<mixed>): void,
       skip(...values: Array<mixed>): void,
-    },
-    plan: {
+    |},
+    plan: {|
       (count: number): void,
       skip(count: number): void,
-    },
+    |},
     timeout(ms: number): void,
-  };
+  |};
 
-  declare type CbExecutionContext<Context> = ExecutionContext<Context> & {
+  declare type CbExecutionContext<Context> = ExecutionContext<Context> & {|
     end(error?: mixed): void,
-  };
+  |};
 
   declare type ImplementationResult = PromiseLike<void> | ObservableLike | void;
   declare type Implementation<Context> = (
@@ -212,17 +215,17 @@ declare module 'ava' {
     t: CbExecutionContext<Context>
   ) => ImplementationResult;
 
-  declare type Macro<Context> = {
+  declare type Macro<Context> = {|
     (t: ExecutionContext<Context>, ...args: Array<mixed>): ImplementationResult,
     title?: (providedTitle: string | void, ...args: Array<mixed>) => string,
-  };
+  |};
 
-  declare type CbMacro<Context> = {
+  declare type CbMacro<Context> = {|
     (t: CbExecutionContext<Context>, ...args: Array<mixed>): ImplementationResult,
     title?: (providedTitle: string | void, ...args: Array<mixed>) => string,
-  };
+  |};
 
-  declare export type TestInterface<Context = void> = {
+  declare export type TestInterface<Context = void> = {|
     (
       title: string,
       implementation: Implementation<Context> | Macro<Context>
@@ -244,9 +247,9 @@ declare module 'ava' {
     only: OnlyInterface<Context>,
     skip: Skip<Context>,
     todo: TodoDeclaration,
-  };
+  |};
 
-  declare type After<Context> = {
+  declare type After<Context> = {|
     (implementation: Implementation<Context> | Macro<Context>): void,
     (macro: Macro<Context> | Macro<Context>[], ...args: Array<mixed>): void,
     (
@@ -258,7 +261,7 @@ declare module 'ava' {
       macro: Macro<Context> | Macro<Context>[],
       ...args: Array<mixed>
     ): void,
-    always: {
+    always: {|
       (implementation: Implementation<Context> | Macro<Context>): void,
       (macro: Macro<Context> | Macro<Context>[], ...args: Array<mixed>): void,
       (
@@ -272,12 +275,12 @@ declare module 'ava' {
       ): void,
       cb: HookCb<Context>,
       skip: HookSkip<Context>,
-    },
+    |},
     cb: HookCb<Context>,
     skip: HookSkip<Context>,
-  };
+  |};
 
-  declare type Before<Context> = {
+  declare type Before<Context> = {|
     (implementation: Implementation<Context> | Macro<Context>): void,
     (macro: Macro<Context> | Macro<Context>[], ...args: Array<mixed>): void,
     (
@@ -291,9 +294,9 @@ declare module 'ava' {
     ): void,
     cb: HookCb<Context>,
     skip: HookSkip<Context>,
-  };
+  |};
 
-  declare type Cb<Context> = {
+  declare type Cb<Context> = {|
     (
       title: string,
       implementation: CbImplementation<Context> | CbMacro<Context>
@@ -304,7 +307,7 @@ declare module 'ava' {
       ...args: Array<mixed>
     ): void,
     (macro: CbMacro<Context> | CbMacro<Context>[], ...args: Array<mixed>): void,
-    failing: {
+    failing: {|
       (
         title: string,
         implementation: CbImplementation<Context> | CbMacro<Context>
@@ -317,12 +320,12 @@ declare module 'ava' {
       (macro: CbMacro<Context> | CbMacro<Context>[], ...args: Array<mixed>): void,
       only: CbOnlyInterface<Context>,
       skip: CbSkip<Context>,
-    },
+    |},
     only: CbOnlyInterface<Context>,
     skip: CbSkip<Context>,
-  };
+  |};
 
-  declare type CbOnlyInterface<Context> = {
+  declare type CbOnlyInterface<Context> = {|
     (
       title: string,
       implementation: CbImplementation<Context> | CbMacro<Context>
@@ -333,9 +336,9 @@ declare module 'ava' {
       ...args: Array<mixed>
     ): void,
     (macro: CbMacro<Context> | CbMacro<Context>[], ...args: Array<mixed>): void,
-  };
+  |};
 
-  declare type CbSkip<Context> = {
+  declare type CbSkip<Context> = {|
     (
       title: string,
       implementation: CbImplementation<Context> | CbMacro<Context>
@@ -346,9 +349,9 @@ declare module 'ava' {
       ...args: Array<mixed>
     ): void,
     (macro: CbMacro<Context> | CbMacro<Context>[], ...args: Array<mixed>): void,
-  };
+  |};
 
-  declare type FailingInterface<Context> = {
+  declare type FailingInterface<Context> = {|
     (
       title: string,
       implementation: Implementation<Context> | Macro<Context>
@@ -361,9 +364,9 @@ declare module 'ava' {
     (macro: Macro<Context> | Macro<Context>[], ...args: Array<mixed>): void,
     only: OnlyInterface<Context>,
     skip: Skip<Context>,
-  };
+  |};
 
-  declare type HookCb<Context> = {
+  declare type HookCb<Context> = {|
     (implementation: CbImplementation<Context> | CbMacro<Context>): void,
     (macro: CbMacro<Context> | CbMacro<Context>[], ...args: Array<mixed>): void,
     (
@@ -376,9 +379,9 @@ declare module 'ava' {
       ...args: Array<mixed>
     ): void,
     skip: HookCbSkip<Context>,
-  };
+  |};
 
-  declare type HookCbSkip<Context> = {
+  declare type HookCbSkip<Context> = {|
     (implementation: CbImplementation<Context> | CbMacro<Context>): void,
     (macro: CbMacro<Context> | CbMacro<Context>[], ...args: Array<mixed>): void,
     (
@@ -390,9 +393,9 @@ declare module 'ava' {
       macro: CbMacro<Context> | CbMacro<Context>[],
       ...args: Array<mixed>
     ): void,
-  };
+  |};
 
-  declare type HookSkip<Context> = {
+  declare type HookSkip<Context> = {|
     (implementation: Implementation<Context> | Macro<Context>): void,
     (macro: Macro<Context> | Macro<Context>[], ...args: Array<mixed>): void,
     (
@@ -404,9 +407,9 @@ declare module 'ava' {
       macro: Macro<Context> | Macro<Context>[],
       ...args: Array<mixed>
     ): void,
-  };
+  |};
 
-  declare type OnlyInterface<Context> = {
+  declare type OnlyInterface<Context> = {|
     (
       title: string,
       implementation: Implementation<Context> | Macro<Context>
@@ -417,9 +420,9 @@ declare module 'ava' {
       ...args: Array<mixed>
     ): void,
     (macro: Macro<Context> | Macro<Context>[], ...args: Array<mixed>): void,
-  };
+  |};
 
-  declare type SerialInterface<Context> = {
+  declare type SerialInterface<Context> = {|
     (
       title: string,
       implementation: Implementation<Context> | Macro<Context>
@@ -439,12 +442,12 @@ declare module 'ava' {
     only: OnlyInterface<Context>,
     skip: Skip<Context>,
     todo: TodoDeclaration,
-    meta: {
+    meta: {|
       file: string,
-    },
-  };
+    |},
+  |};
 
-  declare type Skip<Context> = {
+  declare type Skip<Context> = {|
     (
       title: string,
       implementation: Implementation<Context> | Macro<Context>
@@ -455,7 +458,7 @@ declare module 'ava' {
       ...args: Array<mixed>
     ): void,
     (macro: Macro<Context> | Macro<Context>[], ...args: Array<mixed>): void,
-  };
+  |};
 
   declare type TodoDeclaration = (title: string) => void;
 
