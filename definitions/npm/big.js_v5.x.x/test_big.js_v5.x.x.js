@@ -17,7 +17,7 @@ Big.RM = 3;
 Big.RM = 4;
 // $ExpectError
 Big.RM = -1;
-(Big.version: string)
+(Big.version: string);
 
 // Constructors
 (new Big(1): Big);
