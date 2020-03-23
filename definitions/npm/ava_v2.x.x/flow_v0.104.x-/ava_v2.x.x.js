@@ -32,9 +32,9 @@ declare module 'ava' {
     name?: string
   |};
 
-  declare type SnapshotOptions = {
+  declare type SnapshotOptions = {|
     id?: string
-  };
+  |};
 
   declare type Assertions = {|
     assert: {|

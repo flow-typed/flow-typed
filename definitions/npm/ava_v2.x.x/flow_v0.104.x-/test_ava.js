@@ -172,9 +172,9 @@ describe('ava', () => {
       t.regex.skip('a', /a/, 'message', 1);
 
       t.snapshot(null);
-      t.snapshot.skip(null);
+      // t.snapshot.skip(null);
       t.snapshot(null, 'message');
-      t.snapshot.skip(null, 'message');
+      // t.snapshot.skip(null, 'message');
       t.snapshot(null, {id: 'test' }, 'message');
       t.snapshot.skip(null, {id: 'test' }, 'message');
       // $ExpectError: invalid arguments.
