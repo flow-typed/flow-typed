@@ -17,14 +17,14 @@ declare module "enzyme" {
     children<T: React$ElementType>(selector: T): ReactWrapper<T>,
     closest(selector: UntypedSelector): this,
     closest<T: React$ElementType>(selector: T): ReactWrapper<T>,
-    contains(nodes: React$Node): boolean,
-    containsAllMatchingElements(nodes: React$Node): boolean,
-    containsAnyMatchingElements(nodes: React$Node): boolean,
-    containsMatchingElement(node: React$Node): boolean,
+    contains(nodes: React$Element | $ReadOnlyArray<React$Element>): boolean,
+    containsAllMatchingElements(nodes: $ReadOnlyArray<React$Element>): boolean,
+    containsAnyMatchingElements(nodes: $ReadOnlyArray<React$Element>): boolean,
+    containsMatchingElement(node: React$Element): boolean,
     context(key?: string): any,
     debug(options?: Object): string,
     dive(option?: { context?: Object, ... }): this,
-    equals(node: React$Element<any>): boolean,
+    equals(node: React$Element): boolean,
     every(selector: EnzymeSelector): boolean,
     everyWhere(predicate: PredicateFunction<this>): boolean,
     exists(selector?: EnzymeSelector): boolean,
@@ -50,7 +50,7 @@ declare module "enzyme" {
     last(): this,
     length: number,
     map<T>(fn: (node: this, index: number) => T): Array<T>,
-    matchesElement(node: React$Node): boolean,
+    matchesElement(node: React$Element): boolean,
     name(): string,
     not(selector: EnzymeSelector): this,
     parent(): this,
@@ -96,10 +96,9 @@ declare module "enzyme" {
       root: any,
       options?: ?Object
     ): ShallowWrapper<T>,
-    equals(node: React$Node): boolean,
     shallow(options?: { context?: Object, ... }): ShallowWrapper<T>,
-    getElement(): React$Node,
-    getElements(): Array<React$Node>
+    getElement(): React$Element,
+    getElements(): Array<React$Element>
   }
 
   declare function shallow<T>(
@@ -110,6 +109,7 @@ declare module "enzyme" {
       ...
     }
   ): ShallowWrapper<T>;
+
   declare function mount<T>(
     node: React$Element<T>,
     options?: {
@@ -119,6 +119,7 @@ declare module "enzyme" {
       ...
     }
   ): ReactWrapper<T>;
+
   declare function render(
     node: React$Node,
     options?: { context?: Object, ... }

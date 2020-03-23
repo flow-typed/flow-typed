@@ -60,17 +60,27 @@ describe('Wrapper', () => {
   });
 
   it('containsAllMatchingElements', () => {
-    (mount(<div />).containsAllMatchingElements(<div />): boolean);
     (mount(<div />).containsAllMatchingElements([<div />, <div />]): boolean);
+    // $ExpectError - "nodes should be an Array" (from docs and source code)
+    (mount(<div />).containsAllMatchingElements(<div />));
   });
 
   it('containsAnyMatchingElements', () => {
-    (mount(<div />).containsAnyMatchingElements(<div />): boolean);
     (mount(<div />).containsAnyMatchingElements([<div />, <div />]): boolean);
+    // $ExpectError - "nodes should be an Array" (from docs and source code)
+    (mount(<div />).containsAnyMatchingElements(<div />));
   });
 
   it('containsMatchingElement', () => {
     (mount(<div />).containsMatchingElement(<div />): boolean);
+  });
+
+  it('equals', () => {
+    (shallow(<div/>).equals(<div/>): boolean);
+
+    // example from docs
+    const MyComponent = () => <div className="foo bar" />;
+    (shallow(<MyComponent />).equals(<div className="foo bar" />): boolean);
   });
 
   it('filter', () => {
@@ -109,12 +119,10 @@ describe('Wrapper', () => {
   });
 
   it('get', () => {
-    const Foo = () => <div>some text</div>
-    const MyComponent = () => <Foo foo="bar"/>
-
     // example from docs
-    const wrapper = shallow(<MyComponent />);
-    (wrapper.find(Foo).get(0).props.foo: string);
+    const Foo = () => <div>some text</div>;
+    const MyComponent = () => <Foo foo="bar"/>;
+    (shallow(<MyComponent />).find(Foo).get(0).props.foo: string);
   });
 
   it('instance', () => {
@@ -166,8 +174,19 @@ describe('Wrapper', () => {
     });
   });
 
+  it('length', () => {
+    // not in API docs but in example docs
+    // http://airbnb.io/enzyme/docs/api/
+    // https://github.com/airbnb/enzyme/blob/master/docs/api/shallow.md#shallow-rendering-api
+    (shallow(<div />).length: number);
+  });
+
   it('map', () => {
     (mount(<div />).map(node => true): Array<boolean>);
+  });
+
+  it('matchesElement', () => {
+    (mount(<div />).matchesElement(<div />): boolean);
   });
 
   it('parents', () => {
@@ -224,20 +243,38 @@ describe('Wrapper', () => {
   });
 });
 
-describe('shallow', () => {
+describe('ShallowWrapper', () => {
   it('getElement', () => {
-    shallow(<div/>).getElement();
+    (shallow(<div/>).getElement(): React$Element<React.ComponentType<{||}>>);
+
+    // example from docs
+    const element = (
+      <div>
+        <span />
+        <span />
+      </div>
+    );
+    function MyComponent() {
+      return element;
+    }
+    (shallow(<MyComponent />).getElement(): typeof element);
   });
 
   it('getElements', () => {
-    shallow(<div/>).getElements();
-  });
+    (shallow(<div/>).getElements(): React$Element<React.ComponentType<{||}>>[]);
 
-  it('length', () => {
-    // not in API docs but in example docs
-    // http://airbnb.io/enzyme/docs/api/
-    // https://github.com/airbnb/enzyme/blob/master/docs/api/shallow.md#shallow-rendering-api
-    (shallow(<div />).length: number);
+    // example from docs
+    const one = <span />;
+    const two = <span />;
+    function Test() {
+      return (
+        <div>
+          {one}
+          {two}
+        </div>
+      );
+    }
+    (shallow(<Test />).find('span').getElements(): Array<typeof one>);
   });
 
   it('deprecated methods should not be present', () => {
