@@ -204,7 +204,7 @@ declare module "prettier" {
                                                              
   declare export type FileInfo = {|
     ignored: boolean,
-    inferredParser: string | null,
+    inferredParser: PrettierParserName | null,
   |};                                                          
 
   declare export type Prettier = {|
