@@ -5,10 +5,10 @@ declare module "reselect" {
     (state: TState, props: TProps, ...rest: any[]) => TResult
 
   declare type OutputSelector<-TState, TProps, TResult> = {|
-      (state: TState, props: TProps, ...rest: any[]): TResult,
-      recomputations(): number,
-      resetRecomputations(): number,
-      resultFunc(...args: any[]): TResult,
+    (state: TState, props: TProps, ...rest: any[]): TResult,
+    recomputations(): number,
+    resetRecomputations(): number,
+    resultFunc(...args: any[]): TResult,
   |};
 
   declare type SelectorCreator = {
