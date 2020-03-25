@@ -1,13 +1,14 @@
 /* @flow */
+import { it } from 'flow-typed-test';
 import createCachedSelector from "re-reselect";
 
-it('Should pass for 2 selectors given as arguments', () => {
-  type State = {
-    x: number,
-    y: number,
-    ...
-  };
+type State = {
+  x: number,
+  y: number,
+  ...
+};
 
+it('Should pass for 2 selectors given as arguments', () => {
   const test1Selector = createCachedSelector(
     (state: State) => state.x,
     (state: State) => state.y,
@@ -46,6 +47,7 @@ it('Should pass when selectors have additional Props argument', () => {
     (x, y) => {
       return x + y;
     }
+  // $ExpectError property `x` is missing in object in `test3Selector({ x: 100, y: 200 }, { y: 10 })`
   )((state, props) => props.x)
 
   test3Selector(
@@ -91,9 +93,9 @@ it('Should work when using more complex selectors as functions', () => {
 it('Should validate parameters based on the return values of nested', () => {
   // selectors.
   createCachedSelector(
+    // $ExpectError x is a number, not a string.
     (state: State) => state.x,
     (state: State) => state.y,
-    // $ExpectError first argument will be a number, not a string.
     (x: string, y: number) => "foo"
   )
 });
