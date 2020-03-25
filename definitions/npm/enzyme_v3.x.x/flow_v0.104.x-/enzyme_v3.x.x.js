@@ -17,14 +17,14 @@ declare module "enzyme" {
     children<T: React$ElementType>(selector: T): ReactWrapper<T>,
     closest(selector: UntypedSelector): this,
     closest<T: React$ElementType>(selector: T): ReactWrapper<T>,
-    contains(nodes: React$Element | $ReadOnlyArray<React$Element>): boolean,
-    containsAllMatchingElements(nodes: $ReadOnlyArray<React$Element>): boolean,
-    containsAnyMatchingElements(nodes: $ReadOnlyArray<React$Element>): boolean,
-    containsMatchingElement(node: React$Element): boolean,
+    contains(nodes: React$Element<any> | $ReadOnlyArray<React$Element<any>>): boolean,
+    containsAllMatchingElements(nodes: $ReadOnlyArray<React$Element<any>>): boolean,
+    containsAnyMatchingElements(nodes: $ReadOnlyArray<React$Element<any>>): boolean,
+    containsMatchingElement(node: React$Element<any>): boolean,
     context(key?: string): any,
     debug(options?: Object): string,
     dive(option?: { context?: Object, ... }): this,
-    equals(node: React$Element): boolean,
+    equals(node: React$Element<any>): boolean,
     every(selector: EnzymeSelector): boolean,
     everyWhere(predicate: PredicateFunction<this>): boolean,
     exists(selector?: EnzymeSelector): boolean,
@@ -36,7 +36,7 @@ declare module "enzyme" {
     findWhere(predicate: PredicateFunction<this>): this,
     first(): this,
     forEach(fn: (node: this, index: number) => mixed): this,
-    get(index: number): React$Element,
+    get<T = any>(index: number): React$Element<T>,
     getDOMNode(): HTMLElement | HTMLInputElement,
     hasClass(className: string): boolean,
     hostNodes(): this,
@@ -50,7 +50,7 @@ declare module "enzyme" {
     last(): this,
     length: number,
     map<T>(fn: (node: this, index: number) => T): Array<T>,
-    matchesElement(node: React$Element): boolean,
+    matchesElement(node: React$Element<any>): boolean,
     name(): string,
     not(selector: EnzymeSelector): this,
     parent(): this,
@@ -97,8 +97,8 @@ declare module "enzyme" {
       options?: ?Object
     ): ShallowWrapper<T>,
     shallow(options?: { context?: Object, ... }): ShallowWrapper<T>,
-    getElement(): React$Element,
-    getElements(): Array<React$Element>
+    getElement<T = any>(): React$Element<T>,
+    getElements<T = any>(): Array<React$Element<T>>
   }
 
   declare function shallow<T>(
