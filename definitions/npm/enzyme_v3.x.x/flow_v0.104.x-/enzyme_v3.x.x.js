@@ -11,63 +11,53 @@ declare module "enzyme" {
   declare type CheerioWrapper = any;
 
   declare class Wrapper<RootComponent> {
+    at(index: number): this,
+    childAt(index: number): this,
+    children(selector?: UntypedSelector): this,
+    children<T: React$ElementType>(selector: T): ReactWrapper<T>,
+    closest(selector: UntypedSelector): this,
+    closest<T: React$ElementType>(selector: T): ReactWrapper<T>,
+    contains(nodes: React$Element<any> | $ReadOnlyArray<React$Element<any>>): boolean,
+    containsAllMatchingElements(nodes: $ReadOnlyArray<React$Element<any>>): boolean,
+    containsAnyMatchingElements(nodes: $ReadOnlyArray<React$Element<any>>): boolean,
+    containsMatchingElement(node: React$Element<any>): boolean,
+    context(key?: string): any,
+    debug(options?: Object): string,
+    dive(option?: { context?: Object, ... }): this,
     equals(node: React$Element<any>): boolean,
-    find(selector: UntypedSelector): this,
-    find<T: React$ElementType>(selector: T): ReactWrapper<T>,
-    findWhere(predicate: PredicateFunction<this>): this,
+    every(selector: EnzymeSelector): boolean,
+    everyWhere(predicate: PredicateFunction<this>): boolean,
+    exists(selector?: EnzymeSelector): boolean,
     filter(selector: UntypedSelector): this,
     filter<T: React$ElementType>(selector: T): ReactWrapper<T>,
     filterWhere(predicate: PredicateFunction<this>): this,
-    hostNodes(): this,
-    contains(nodes: React$Node): boolean,
-    containsMatchingElement(node: React$Node): boolean,
-    containsAllMatchingElements(nodes: React$Node): boolean,
-    containsAnyMatchingElements(nodes: React$Node): boolean,
-    dive(option?: { context?: Object, ... }): this,
-    exists(selector?: EnzymeSelector): boolean,
-    isEmptyRender(): boolean,
-    matchesElement(node: React$Node): boolean,
+    find(selector: UntypedSelector): this,
+    find<T: React$ElementType>(selector: T): ReactWrapper<T>,
+    findWhere(predicate: PredicateFunction<this>): this,
+    first(): this,
+    forEach(fn: (node: this, index: number) => mixed): this,
+    get<T = any>(index: number): React$Element<T>,
+    getDOMNode(): HTMLElement | HTMLInputElement,
     hasClass(className: string): boolean,
+    hostNodes(): this,
+    html(): string,
+    instance(): React$ElementRef<RootComponent>,
+    invoke(propName: string): (...args: $ReadOnlyArray<any>) => mixed,
     is(selector: EnzymeSelector): boolean,
     isEmpty(): boolean,
+    isEmptyRender(): boolean,
+    key(): string,
+    last(): this,
+    length: number,
+    map<T>(fn: (node: this, index: number) => T): Array<T>,
+    matchesElement(node: React$Element<any>): boolean,
+    name(): string,
     not(selector: EnzymeSelector): this,
-    children(selector?: UntypedSelector): this,
-    children<T: React$ElementType>(selector: T): ReactWrapper<T>,
-    childAt(index: number): this,
+    parent(): this,
     parents(selector?: UntypedSelector): this,
     parents<T: React$ElementType>(selector: T): ReactWrapper<T>,
-    parent(): this,
-    closest(selector: UntypedSelector): this,
-    closest<T: React$ElementType>(selector: T): ReactWrapper<T>,
-    render(): CheerioWrapper,
-    renderProp(propName: string): (...args: Array<any>) => this,
-    unmount(): this,
-    text(): string,
-    html(): string,
-    invoke(propName: string): (...args: $ReadOnlyArray<any>) => mixed,
-    get(index: number): React$Node,
-    getDOMNode(): HTMLElement | HTMLInputElement,
-    at(index: number): this,
-    first(): this,
-    last(): this,
-    state(key?: string): any,
-    context(key?: string): any,
-    props(): Object,
     prop(key: string): any,
-    key(): string,
-    simulate(event: string, ...args: Array<any>): this,
-    simulateError(error: Error): this,
-    slice(begin?: number, end?: number): this,
-    setState(state: {...}, callback?: () => void): this,
-    setProps(props: {...}, callback?: () => void): this,
-    setContext(context: Object): this,
-    instance(): React$ElementRef<RootComponent>,
-    update(): this,
-    debug(options?: Object): string,
-    type(): string | Function | null,
-    name(): string,
-    forEach(fn: (node: this, index: number) => mixed): this,
-    map<T>(fn: (node: this, index: number) => T): Array<T>,
+    props(): Object,
     reduce<T>(
       fn: (value: T, node: this, index: number) => T,
       initialValue?: T
@@ -76,11 +66,21 @@ declare module "enzyme" {
       fn: (value: T, node: this, index: number) => T,
       initialValue?: T
     ): Array<T>,
+    render(): CheerioWrapper,
+    renderProp(propName: string): (...args: Array<any>) => this,
+    setContext(context: Object): this,
+    setProps(props: {...}, callback?: () => void): this,
+    setState(state: {...}, callback?: () => void): this,
+    simulate(event: string, ...args: Array<any>): this,
+    simulateError(error: Error): this,
+    slice(begin?: number, end?: number): this,
     some(selector: EnzymeSelector): boolean,
     someWhere(predicate: PredicateFunction<this>): boolean,
-    every(selector: EnzymeSelector): boolean,
-    everyWhere(predicate: PredicateFunction<this>): boolean,
-    length: number
+    state(key?: string): any,
+    text(): string,
+    type(): string | Function | null,
+    unmount(): this,
+    update(): this,
   }
 
   declare class ReactWrapper<T> extends Wrapper<T> {
@@ -96,10 +96,9 @@ declare module "enzyme" {
       root: any,
       options?: ?Object
     ): ShallowWrapper<T>,
-    equals(node: React$Node): boolean,
     shallow(options?: { context?: Object, ... }): ShallowWrapper<T>,
-    getElement(): React$Node,
-    getElements(): Array<React$Node>
+    getElement<T = any>(): React$Element<T>,
+    getElements<T = any>(): Array<React$Element<T>>
   }
 
   declare function shallow<T>(
@@ -110,6 +109,7 @@ declare module "enzyme" {
       ...
     }
   ): ShallowWrapper<T>;
+
   declare function mount<T>(
     node: React$Element<T>,
     options?: {
@@ -119,6 +119,7 @@ declare module "enzyme" {
       ...
     }
   ): ReactWrapper<T>;
+
   declare function render(
     node: React$Node,
     options?: { context?: Object, ... }
