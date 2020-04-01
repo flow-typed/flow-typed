@@ -160,7 +160,7 @@ declare module '@apollo/react-common' {
     data: ?TData,
     error?: ApolloError,
     loading: boolean,
-    networkStatus: NetworkStatus,
+    networkStatus: NetworkStatusRaw,
     called: boolean,
     ...
   };
@@ -522,7 +522,7 @@ declare module '@apollo/react-common' {
     data: T | { ... },
     errors?: Array<GraphQLError>,
     loading: boolean,
-    networkStatus: NetworkStatus,
+    networkStatus: NetworkStatusRaw,
     error?: ApolloError,
     partial?: boolean,
     ...
@@ -607,7 +607,12 @@ declare module '@apollo/react-common' {
     mutationResult: FetchResult<T>
   ) => void;
 
-  declare type NetworkStatus = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
+  declare type NetworkStatusRaw = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
+
+  declare export class NetworkStatus {
+    [NetworkStatusRaw]: string,
+    string: NetworkStatusRaw,
+  }
 
   declare type QueryListener = (
     queryStoreValue: QueryStoreValue,
@@ -618,7 +623,7 @@ declare module '@apollo/react-common' {
     document: DocumentNode,
     variables: any,
     previousVariables: any,
-    networkStatus: NetworkStatus,
+    networkStatus: NetworkStatusRaw,
     networkError: Error | null,
     graphQLErrors: GraphQLError[],
     metadata: any,
@@ -637,7 +642,7 @@ declare module '@apollo/react-common' {
     data: T,
     errors?: Array<GraphQLError>,
     loading: boolean,
-    networkStatus: NetworkStatus,
+    networkStatus: NetworkStatusRaw,
     stale: boolean,
     ...
   };
