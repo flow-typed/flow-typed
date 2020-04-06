@@ -596,7 +596,7 @@ declare module "lodash" {
       predicate?: ?OPredicate<A, T>,
       fromIndex?: ?number
     ): R;
-    flatMap<A, K, U, T: $ReadOnlyArray<A> = Array<A>>(
+    flatMap<A, U, T: $ReadOnlyArray<A> = Array<A>>(
       array: T,
       iteratee?: ?AFlatMapIteratee<A, T, U>
     ): Array<U>;
