@@ -3,7 +3,7 @@ declare module 'deepmerge' {
     clone?: boolean,
     arrayMerge?: (destination: any[], source: any[], options?: Options) => Array<any>,
     isMergeableObject?: (value: {}) => boolean,
-    customMerge?: (key: string, options?: Options) => ((x: any, y: any) => any) | void;
+    customMerge?: (key: string, options?: Options) => ((x: any, y: any) => any) | void
   }
 
   declare module.exports: {
