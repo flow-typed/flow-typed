@@ -38,7 +38,7 @@ describe('dispatch', () => {
     store.dispatch({ type: 'myActionType', anotherProp: 1 });
   });
 
-  it('should accept subset of string', () => {
+  it('should accept subtype of string', () => {
     const TOGGLE: 'TOGGLE' = 'TOGGLE';
     const f = (action: {| type: typeof TOGGLE |}) => {
       store.dispatch(action);
