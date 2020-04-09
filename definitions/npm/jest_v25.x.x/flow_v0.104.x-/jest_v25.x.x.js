@@ -530,13 +530,36 @@ type JestExtendedMatchersType = {
  ...
 };
 
+// Diffing snapshot utility for Jest (snapshot-diff)
+// https://github.com/jest-community/snapshot-diff
+type SnapshotDiffType = {
+  /**
+   * Compare the difference between the actual in the `expect()`
+   * vs the object inside `valueB` with some extra options.
+   */
+  toMatchDiffSnapshot(
+    valueB: any,
+    options?: {|
+      expand?: boolean;
+      colors?: boolean;
+      contextLines?: number;
+      stablePatchmarks?: boolean;
+      aAnnotation?: string;
+      bAnnotation?: string;
+    |},
+    testName?: string
+  ): void,
+  ...
+}
+
 interface JestExpectType {
   not: JestExpectType &
     EnzymeMatchersType &
     DomTestingLibraryType &
     JestJQueryMatchersType &
     JestStyledComponentsMatchersType &
-    JestExtendedMatchersType;
+    JestExtendedMatchersType &
+    SnapshotDiffType;
   /**
    * If you have a mock function, you can use .lastCalledWith to test what
    * arguments it was last called with.
@@ -1127,7 +1150,8 @@ declare var expect: {
    DomTestingLibraryType &
    JestJQueryMatchersType &
    JestStyledComponentsMatchersType &
-   JestExtendedMatchersType,
+   JestExtendedMatchersType &
+   SnapshotDiffType,
  /** Add additional Jasmine matchers to Jest's roster */
  extend(matchers: { [name: string]: JestMatcher, ... }): void,
  /** Add a module that formats application-specific data structures. */
