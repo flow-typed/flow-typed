@@ -105,14 +105,16 @@ declare module '@testing-library/react' {
     queryAllByValue: AllByBoundAttribute,
   |};
 
-  declare type RenderResult = {|
+  declare type RenderResult<Queries = GetsAndQueries> = {
+    ...Queries,
     container: HTMLDivElement,
     unmount: () => void,
     baseElement: HTMLElement,
     asFragment: () => DocumentFragment,
     debug: (baseElement?: HTMLElement) => void,
     rerender: (ui: React$Element<*>) => void,
-  |} & GetsAndQueries;
+    ...
+  };
 
   declare type FireEvent<TInit> = (
     element: HTMLElement,
@@ -123,7 +125,7 @@ declare module '@testing-library/react' {
     render: (
       ui: React$Element<*>,
       options?: { container: HTMLElement, baseElement?: HTMLElement }
-    ) => RenderResult,
+    ) => RenderResult<>,
 
     act: ReactDOMTestUtilsAct,
 

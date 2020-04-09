@@ -115,14 +115,16 @@ declare module '@testing-library/react' {
     eventProperties?: TInit
   ) => boolean;
 
-  declare type RenderResult = {|
+  declare type RenderResult<Queries = GetsAndQueries> = {
+    ...Queries,
     container: HTMLDivElement,
     unmount: () => void,
     baseElement: HTMLElement,
     asFragment: () => DocumentFragment,
     debug: (baseElement?: HTMLElement) => void,
     rerender: (ui: React$Element<*>) => void,
-  |} & GetsAndQueries;
+    ...
+  };
 
   declare export type RenderOptions = {|
     container?: HTMLElement,
@@ -136,7 +138,7 @@ declare module '@testing-library/react' {
     render(
       ui: React.ReactElement<any>,
       options?: RenderOptions
-    ): RenderResult,
+    ): RenderResult<>,
 
     act: ReactDOMTestUtilsAct,
     cleanup: () => void,
