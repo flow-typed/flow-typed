@@ -111,6 +111,11 @@ Object {
 }
 `
 );
+// $ExpectError - options must be object or undefined
+expect('foo').toMatchDiffSnapshot('any', null, 'test name')
+expect('foo').toMatchDiffSnapshot('any', {}, 'test name')
+expect('foo').toMatchDiffSnapshot('foobar');
+expect('foo').toMatchDiffSnapshot('foobar', undefined, 'snapshot difference between two strings');
 
 expect({ foo: 1 }).toMatchInlineSnapshot([]);
 expect({ foo: 'bar' }).toMatchObject({ baz: 'qux' });
@@ -137,10 +142,22 @@ describe(aFunction, () => {});
 describe.only('name', () => {});
 describe.only(AClass, () => {});
 describe.only(aFunction, () => {});
-describe.each([['arg1', 2, true], ['arg2', 3, false]])('test', () =>
-  expect('foo').toMatchSnapshot()
+describe.each([['arg1'], ['arg2']])('test', (a) =>
+  expect(a).toMatchSnapshot()
 );
-describe.each(['arg1', 2, true])('test', () => expect('foo').toMatchSnapshot());
+describe.each(['arg1', 2, true])('test', (a) => expect(a).toMatchSnapshot());
+describe.each([['arg1', 'arg2'], ['arg2', 'arg3']])('test', (a, b) =>
+  expect(a).toMatchDiffSnapshot(b)
+);
+describe.each([
+  [1, 1, 2],
+  [1, 2, 3],
+  [2, 1, 3],
+])('.add(%i, %i)', (a, b, expected) => {
+  test(`returns ${expected}`, () => {
+    expect(a + b).toBe(expected);
+  });
+});
 describe.each`
   a    | b    | expected
   ${1} | ${1} | ${2}
@@ -242,8 +259,8 @@ expect.extend({
 });
 
 expect.extend({
+  // $ExpectError property `pass` not found in object literal
   foo(actual, expected) {
-    // $ExpectError property `pass` not found in object literal
     return {};
   },
 });

@@ -52,8 +52,8 @@ expect.extend({
 });
 
 expect.extend({
+  // $ExpectError property `pass` not found in object literal
   foo(actual, expected) {
-    // $ExpectError property `pass` not found in object literal
     return {};
   }
 });
