@@ -202,13 +202,31 @@ declare module '@testing-library/react' {
     eventProperties?: TInit
   ) => boolean;
 
+  declare type Screen<Queries = GetsAndQueries> = {
+    ...Queries,
+    debug: (
+      baseElement?:
+        | HTMLElement
+        | DocumentFragment
+        | Array<HTMLElement | DocumentFragment>,
+      maxLength?: number
+    ) => void,
+    ...
+  };
+
   declare type RenderResult<Queries = GetsAndQueries> = {
     ...Queries,
-    container: HTMLDivElement,
-    unmount: () => void,
+    container: HTMLElement,
+    unmount: () => boolean,
     baseElement: HTMLElement,
     asFragment: () => DocumentFragment,
-    debug: (baseElement?: HTMLElement) => void,
+    debug: (
+      baseElement?:
+        | HTMLElement
+        | DocumentFragment
+        | Array<HTMLElement | DocumentFragment>,
+      maxLength?: number
+    ) => void,
     rerender: (ui: React$Element<*>) => void,
     ...
   };
@@ -242,10 +260,10 @@ declare module '@testing-library/react' {
   ): RenderResult<CustomQueries>;
 
   declare export var act: ReactDOMTestUtilsAct;
-  declare export function cleanup(): void;
+  declare export function cleanup(): Promise<void>;
 
   declare export function waitFor<T>(
-    callback?: () => T,
+    callback: () => T,
     options?: {|
       container?: HTMLElement,
       timeout?: number,
@@ -254,18 +272,8 @@ declare module '@testing-library/react' {
     |}
   ): Promise<T>;
 
-  declare export function waitForElementToBeRemoved(
-    callback?: HTMLElement,
-    options?: {|
-      container?: HTMLElement,
-      timeout?: number,
-      interval?: number,
-      mutationObserverOptions?: MutationObserverInit,
-    |}
-  ): Promise<HTMLElement>;
-
   declare export function waitForElementToBeRemoved<T>(
-    callback?: () => T,
+    callback: (() => T) | T,
     options?: {|
       container?: HTMLElement,
       timeout?: number,
@@ -432,4 +440,5 @@ declare module '@testing-library/react' {
     text: TextMatch,
     options?: TextMatchOptions
   ): HTMLElement;
+  declare export var screen: Screen<>;
 }

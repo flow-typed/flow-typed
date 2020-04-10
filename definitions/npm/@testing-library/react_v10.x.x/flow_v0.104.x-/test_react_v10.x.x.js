@@ -11,6 +11,7 @@ import {
   waitForElement,
   waitForElementToBeRemoved,
   within,
+  screen,
 } from '@testing-library/react';
 import { describe, it } from 'flow-typed-test';
 
@@ -104,8 +105,6 @@ describe('waitForElement', () => {
 
 describe('waitForElementToBeRemoved', () => {
   it('should fail on invalid inputs', () => {
-    // $ExpectError
-    waitForElementToBeRemoved(1);
     // $ExpectError
     waitForElementToBeRemoved(() => {}, 1);
   });
@@ -737,6 +736,64 @@ describe('within', () => {
 
   it('should have findAllByDisplayValue', async () => {
     await within(container).findAllByDisplayValue('1');
+  });
+});
+
+describe('screen', () => {
+  it('should have all the queries available', () => {
+    // $ExpectError
+    const { notAQuery } = screen;
+    const {
+      debug,
+      getByAltText,
+      getAllByAltText,
+      queryByAltText,
+      queryAllByAltText,
+      findByAltText,
+      findAllByAltText,
+      getByDisplayValue,
+      getAllByDisplayValue,
+      queryByDisplayValue,
+      queryAllByDisplayValue,
+      findByDisplayValue,
+      findAllByDisplayValue,
+      getByLabelText,
+      getAllByLabelText,
+      queryByLabelText,
+      queryAllByLabelText,
+      findByLabelText,
+      findAllByLabelText,
+      getByPlaceholderText,
+      getAllByPlaceholderText,
+      queryByPlaceholderText,
+      queryAllByPlaceholderText,
+      findByPlaceholderText,
+      findAllByPlaceholderText,
+      getByRole,
+      getAllByRole,
+      queryByRole,
+      queryAllByRole,
+      findByRole,
+      findAllByRole,
+      getByTestId,
+      getAllByTestId,
+      queryByTestId,
+      queryAllByTestId,
+      findByTestId,
+      findAllByTestId,
+      getByText,
+      getAllByText,
+      queryByText,
+      queryAllByText,
+      findByText,
+      findAllByText,
+      getByTitle,
+      getAllByTitle,
+      queryByTitle,
+      queryAllByTitle,
+      findByTitle,
+      findAllByTitle,
+    } = screen;
   });
 });
 
