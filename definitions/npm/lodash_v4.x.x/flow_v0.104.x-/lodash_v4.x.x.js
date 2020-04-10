@@ -1697,16 +1697,16 @@ declare module "lodash/fp" {
     ): Array<T>;
     differenceWith<T>(
       comparator: Comparator<T>
-    ): ((first: $ReadOnly<T>) => (second: $ReadOnly<T>) => Array<T>) &
-      ((first: $ReadOnly<T>, second: $ReadOnly<T>) => Array<T>);
+    ): ((first: $ReadOnlyArray<T>) => (second: $ReadOnlyArray<T>) => Array<T>) &
+      ((first: $ReadOnlyArray<T>, second: $ReadOnlyArray<T>) => Array<T>);
     differenceWith<T>(
       comparator: Comparator<T>,
-      first: $ReadOnly<T>
-    ): (second: $ReadOnly<T>) => Array<T>;
+      first: $ReadOnlyArray<T>
+    ): (second: $ReadOnlyArray<T>) => Array<T>;
     differenceWith<T>(
       comparator: Comparator<T>,
-      first: $ReadOnly<T>,
-      second: $ReadOnly<T>
+      first: $ReadOnlyArray<T>,
+      second: $ReadOnlyArray<T>
     ): Array<T>;
     drop<T>(n: number): (array: $ReadOnlyArray<T>) => Array<T>;
     drop<T>(n: number, array: $ReadOnlyArray<T>): Array<T>;
