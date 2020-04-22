@@ -61,7 +61,7 @@ declare module "react-test-renderer" {
     options?: TestRendererOptions
   ): ReactTestRenderer;
 
-  declare function act(callback: () => void): Thenable;
+  declare function act(callback: () => void | Promise<void>): Thenable;
 }
 
 declare module "react-test-renderer/shallow" {
