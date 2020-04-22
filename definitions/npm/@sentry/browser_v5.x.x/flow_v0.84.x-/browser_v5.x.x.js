@@ -66,7 +66,7 @@ declare module '@sentry/browser' {
     declare export function setExtras(extras: { [key: string]: any, ... }): void;
     declare export function setTag(key: string, value: string): void;
     declare export function setTags(tags: {| [key: string]: string |}): void;
-    declare export function setUser(user: User): void;
+    declare export function setUser(user: User | null): void;
     declare export function withScope(callback: (scope: Scope) => void): void;
 
     declare export class BrowserClient<O: Options = Options> {
