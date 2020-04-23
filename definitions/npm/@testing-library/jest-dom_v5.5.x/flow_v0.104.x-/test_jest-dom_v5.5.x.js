@@ -21,6 +21,8 @@ import {
   toHaveStyle,
   toHaveTextContent,
   toHaveValue,
+  toHaveDisplayValue,
+  toBeChecked,
 } from '@testing-library/jest-dom';
 
 import '@testing-library/jest-dom/extend-expect';
@@ -36,7 +38,10 @@ type JestMatcher = (
   ...actual: Array<any>
 ) => JestMatcherResult | Promise<JestMatcherResult>;
 
-declare var expect: { extend(matchers: { [name: string]: JestMatcher, ... }): void, ... };
+declare var expect: {
+  extend(matchers: { [name: string]: JestMatcher, ... }): void,
+  ...
+};
 
 describe('jest-dom', () => {
   it('should validate on default extend usage', () => {
@@ -58,6 +63,8 @@ describe('jest-dom', () => {
       toHaveStyle,
       toHaveTextContent,
       toHaveValue,
+      toHaveDisplayValue,
+      toBeChecked,
     });
   });
 });

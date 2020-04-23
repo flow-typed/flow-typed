@@ -27,12 +27,14 @@ declare module '@testing-library/jest-dom' {
     toHaveClass(...classNames: string[]): Result,
     toHaveFocus(): Result,
     toHaveFormValues(expectedValues: { [name: string]: any, ... }): Result,
-    toHaveStyle(css: string): Result,
+    toHaveStyle(css: string | { [name: string]: any, ... }): Result,
     toHaveTextContent(
       text: string | RegExp,
-      options?: { normalizeWhitespace: boolean, ... }
+      options?: {| normalizeWhitespace: boolean |}
     ): Result,
     toHaveValue(value?: string | string[] | number): Result,
+    toHaveDisplayValue(value: string | string[]): Result,
+    toBeChecked(): Result,
   |};
 }
 
