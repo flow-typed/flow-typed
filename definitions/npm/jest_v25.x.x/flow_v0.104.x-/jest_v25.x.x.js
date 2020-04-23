@@ -224,6 +224,8 @@ type DomTestingLibraryType = {
   * @deprecated
   */
  toBeInTheDOM(container?: HTMLElement): void,
+
+ // 4.x
  toBeInTheDocument(): void,
  toBeVisible(): void,
  toBeEmpty(): void,
@@ -238,12 +240,16 @@ type DomTestingLibraryType = {
  toHaveClass(...classNames: string[]): void,
  toHaveFocus(): void,
  toHaveFormValues(expectedValues: { [name: string]: any, ... }): void,
- toHaveStyle(css: string): void,
+ toHaveStyle(css: string | { [name: string]: any, ... }): void, 
  toHaveTextContent(
    text: string | RegExp,
-   options?: { normalizeWhitespace: boolean, ... }
+   options?: {| normalizeWhitespace: boolean |}
  ): void,
  toHaveValue(value?: string | string[] | number): void,
+
+ // 5.x
+ toHaveDisplayValue(value: string | string[]): void,
+ toBeChecked(): void,
  ...
 };
 
