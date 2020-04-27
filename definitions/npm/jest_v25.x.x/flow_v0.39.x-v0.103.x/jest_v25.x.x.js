@@ -589,8 +589,7 @@ type SnapshotDiffType = {
       bAnnotation?: string;
     |},
     testName?: string
-  ): void,
-  ...
+  ): void
 }
 
 interface JestExpectType {
