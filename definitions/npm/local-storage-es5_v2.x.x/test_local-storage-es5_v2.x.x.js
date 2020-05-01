@@ -1,7 +1,10 @@
 // @flow
 import ls from 'local-storage-es5';
 
-ls.set('test', 'test');
+const isSet: boolean = ls.set('test', 'test');
+
+// $ExpectError cannot parse to anything not boolean
+const isNotSet: number = ls.set('test', 'test');
 
 // $ExpectError string only key
 ls.set(123, 'test');
