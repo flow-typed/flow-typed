@@ -440,5 +440,8 @@ declare module '@testing-library/react' {
     text: TextMatch,
     options?: TextMatchOptions
   ): HTMLElement;
+  declare export function getNodeText(
+    node: HTMLElement,
+  ): string;
   declare export var screen: Screen<>;
 }
