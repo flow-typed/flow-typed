@@ -12,6 +12,7 @@ import {
   waitForElementToBeRemoved,
   within,
   screen,
+  getNodeText,
 } from '@testing-library/react';
 import { describe, it } from 'flow-typed-test';
 
@@ -887,6 +888,15 @@ describe('fireEvent', () => {
     fireEvent.animationEnd(htmlEl);
     fireEvent.animationIteration(htmlEl);
     fireEvent.transitionEnd(htmlEl);
+  });
+});
+
+describe('getNodeText', () => {
+  class Component extends React.Component<{ ... }> {};
+  const { container } = render(<Component />);
+
+  it('should return string', () => {
+    const a: string = getNodeText(container);
   });
 });
 
