@@ -540,10 +540,13 @@ expect(wrapper).toHaveDisplayName();
 expect(wrapper).toHaveDisplayName(true);
 
 /**
- * dom-testing-library
+ * @testing-library/jest-dom
  */
 {
   const element = document.createElement('div');
+
+  // Deprecated
+  expect(element).toBeInTheDOM();
 
   expect(element).toBeDisabled();
   expect(element).toBeEnabled();
@@ -570,6 +573,8 @@ expect(wrapper).toHaveDisplayName(true);
   // $ExpectError
   expect(element).toHaveFormValues();
   expect(element).toHaveFormValues({ foo: 'bar' });
+  expect(element).toHaveStyle('color: blue');
+  expect(element).toHaveStyle({ color: 'blue' });
   // $ExpectError
   expect(element).toHaveStyle();
   expect(element).toHaveStyle('foo');
@@ -578,8 +583,9 @@ expect(wrapper).toHaveDisplayName(true);
   expect(element).toHaveTextContent();
   // $ExpectError: expected text content should be a string
   expect(element).toHaveTextContent(1);
-
-  expect(element).toBeInTheDOM();
+  expect(element).toHaveDisplayValue('test');
+  expect(element).toHaveDisplayValue(['foo', 'bar']);
+  expect(element).toBeChecked();
 }
 
 {
