@@ -2,6 +2,18 @@
  * Adapted from a Flowgen Generation 
  * from a Typescript Definition @ https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/types/segment-analytics/index.d.ts
  * Flowgen v1.10.0
+ * 
+ * Segment provides their library via snippet load (https://segment.com/docs/connections/sources/catalog/libraries/website/javascript/quickstart/), instead of 
+ * via NPM modules. It is recommended to define the something similar to the following lines in your codebase: 
+ * 
+ * declare type Window = {
+ *   analytics: SegmentAnalytics$AnalyticsJS,
+ *    [key: any]: any, // Keep rest of elements untyped (default)
+ *    ...
+ * }
+ * 
+ * declare var window: Window;
+ * 
  */
 declare type SegmentAnalytics$SegmentOpts = {
   integrations?: any,
@@ -178,12 +190,3 @@ declare interface SegmentAnalytics$AnalyticsJS {
   ): void;
   timeout(milliseconds: number): void;
 }
-
-// Adding type to Window Global as that is how we access Segment functions (via snippet load, see: https://segment.com/docs/connections/sources/catalog/libraries/website/javascript/quickstart/)
-declare type Window = {
-  analytics: SegmentAnalytics$AnalyticsJS,
-  [key: any]: any, // Keep rest of elements untyped (default)
-  ...
-}
-
-declare var window: Window;
