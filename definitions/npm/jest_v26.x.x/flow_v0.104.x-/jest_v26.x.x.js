@@ -908,7 +908,7 @@ type JestObjectType = {
    * (setTimeout, setInterval, clearTimeout, clearInterval, nextTick,
    * setImmediate and clearImmediate).
    */
-  useFakeTimers(): JestObjectType,
+  useFakeTimers(mode?: 'modern' | 'legacy'): JestObjectType,
   /**
    * Instructs Jest to use the real versions of the standard timer functions.
    */
