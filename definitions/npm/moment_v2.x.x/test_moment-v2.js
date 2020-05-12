@@ -252,15 +252,14 @@ moment().calendar(null, {
 moment().calendar(null, {
   sameDay: () => "HH:mm"
 });
-// $ExpectError
 moment().calendar(null, {
+  // $ExpectError
   sameDay: (a: number) => "HH:mm"
 });
-// $ExpectError
 moment().calendar(null, {
+  // $ExpectError
   sameDay: 2
 });
-// $ExpectError
 moment().calendar(null, {
   // $ExpectError (>=0.56.0)
   sameElse: () => {}
