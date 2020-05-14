@@ -92,15 +92,15 @@ describe('useMutation hook', () => {
     }
   });
   it('handles variables correctly', async () => {
+    // $ExpectError
     const mutationResult = await mutation({
       variables: {
-        c: 'test'
-      }
+        c: 'test',
+      },
     });
     if (mutationResult.data) {
       (mutationResult.data.a: string);
       (mutationResult.data.b: string);
-      // $ExpectError
       (mutationResult.data.b: number);
     }
     // $ExpectError
@@ -108,8 +108,8 @@ describe('useMutation hook', () => {
     // $ExpectError
     mutation('', {
       variables: {
-        c: 5
-      }
+        c: 5,
+      },
     });
   });
   it('handles loading state correctly', () => {
