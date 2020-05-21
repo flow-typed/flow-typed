@@ -19,6 +19,10 @@ knex
   .whereIn('batz', [1, 2]);
 knex.select(knex.raw(''));
 
+// Joins with Knex$QueryBuilderFn
+knex.join('bar', function() {
+  return this;
+});
 knex.innerJoin('bar', function() {
   return this;
 });
@@ -37,6 +41,27 @@ knex.fullOuterJoin('bar', function() {
 knex.crossJoin('bar', function() {
   return this;
 });
+
+// Joins with column refs
+knex.join('baz', 'baz.id', 'bar.baz_id');
+knex.innerJoin('baz', 'baz.id', 'bar.baz_id');
+knex.leftJoin('baz', 'baz.id', 'bar.baz_id');
+knex.rightJoin('baz', 'baz.id', 'bar.baz_id');
+knex.rightOuterJoin('baz', 'baz.id', 'bar.baz_id');
+knex.fullOuterJoin('baz', 'baz.id', 'bar.baz_id');
+knex.crossJoin('baz');
+// Cross join with conditions only supported in MySQL and SQLite3
+knex.crossJoin('baz', 'baz.id', 'bar.baz_id');
+
+// Joins with object condition map
+knex.join('boz', { 'boz.id': 'bar.baz_id' });
+knex.innerJoin('boz', { 'boz.id': 'bar.baz_id' });
+knex.leftJoin('boz', { 'boz.id': 'bar.baz_id' });
+knex.rightJoin('boz', { 'boz.id': 'bar.baz_id' });
+knex.rightOuterJoin('boz', { 'boz.id': 'bar.baz_id' });
+knex.fullOuterJoin('boz', { 'boz.id': 'bar.baz_id' });
+// $ExpectError - crossJoin can not use the object condition map syntax
+knex.crossJoin('boz', { 'boz.id': 'bar.baz_id' });
 
 knex('foo').insert({
   a: 1,
