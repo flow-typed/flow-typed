@@ -6,9 +6,8 @@ declare class Knex$Transaction<R>
   savepoint(connection?: any): Promise<R>;
 }
 
-declare class Knex$Raw<R>
-  mixins events$EventEmitter, Promise<R> {
-    wrap(before: string, after: string): this
+declare class Knex$Raw<R> mixins events$EventEmitter, Promise<R> {
+  wrap(before: string, after: string): this;
 }
 
 declare type Knex$QueryBuilderFn<R> = (
@@ -61,7 +60,9 @@ declare class Knex$QueryBuilder<R> mixins Promise<R> {
   orWhereNull(column: string): this;
   orWhereNotNull(column: string): this;
   orWhereExists(builder: Knex$QueryBuilderFn<R> | Knex$QueryBuilder<R>): this;
-  orWhereNotExists(builder: Knex$QueryBuilderFn<R> | Knex$QueryBuilder<R>): this;
+  orWhereNotExists(
+    builder: Knex$QueryBuilderFn<R> | Knex$QueryBuilder<R>
+  ): this;
   orWhereBetween<T>(column: string, range: [T, T]): this;
   orWhereNotBetween<T>(column: string, range: [T, T]): this;
   join(table: string, c1: string, operator: string, c2: string): this;
@@ -107,11 +108,16 @@ declare class Knex$QueryBuilder<R> mixins Promise<R> {
   groupBy(column: string): this;
   groupByRaw(sql: string, bindings?: Knex$RawBindings): this;
   orderBy(
-    column: string | Array<string | {
-      column: string,
-      order?: string,
-      ...
-    }>,
+    column:
+      | string
+      | Array<
+          | string
+          | {
+              column: string,
+              order?: string,
+              ...
+            }
+        >,
     direction?: 'desc' | 'asc'
   ): this;
 
@@ -132,14 +138,22 @@ declare class Knex$QueryBuilder<R> mixins Promise<R> {
   havingRaw(raw: string, bindings?: Knex$RawBindings): this;
   union(): this;
   unionAll(): this;
-  count(column?: string | string[] |  { [string]: any, ... } | Knex$Raw<R>): this;
-  countDistinct(column?: string | string[] |  { [string]: any, ... } | Knex$Raw<R>): this;
-  max(column?: string | string[] |  { [string]: any, ... } | Knex$Raw<R>): this;
-  sum(column?: string | string[] |  { [string]: any, ... } | Knex$Raw<R>): this;
-  min(column?: string | string[] |  { [string]: any, ... } | Knex$Raw<R>): this;
-  sumDistinct(column?: string | string[] |  { [string]: any, ... } | Knex$Raw<R>): this;
-  avg(column?: string | string[] |  { [string]: any, ... } | Knex$Raw<R>): this;
-  avgDistinct(column?: string | string[] |  { [string]: any, ... } | Knex$Raw<R>): this;
+  count(
+    column?: string | string[] | { [string]: any, ... } | Knex$Raw<R>
+  ): this;
+  countDistinct(
+    column?: string | string[] | { [string]: any, ... } | Knex$Raw<R>
+  ): this;
+  max(column?: string | string[] | { [string]: any, ... } | Knex$Raw<R>): this;
+  sum(column?: string | string[] | { [string]: any, ... } | Knex$Raw<R>): this;
+  min(column?: string | string[] | { [string]: any, ... } | Knex$Raw<R>): this;
+  sumDistinct(
+    column?: string | string[] | { [string]: any, ... } | Knex$Raw<R>
+  ): this;
+  avg(column?: string | string[] | { [string]: any, ... } | Knex$Raw<R>): this;
+  avgDistinct(
+    column?: string | string[] | { [string]: any, ... } | Knex$Raw<R>
+  ): this;
   pluck(column: string): this;
   first(key?: string[]): this;
   first(...key: string[]): this;
@@ -202,13 +216,13 @@ declare type Knex$PostgresConfig = {
   connection?:
     | string
     | {
-    host?: string,
-    user?: string,
-    password?: string,
-    database?: string,
-    charset?: string,
-    ...
-  },
+        host?: string,
+        user?: string,
+        password?: string,
+        database?: string,
+        charset?: string,
+        ...
+      },
   searchPath?: string,
   ...
 };
@@ -220,13 +234,13 @@ declare type Knex$Mysql2Config = {
   connection?:
     | string
     | {
-    host?: string,
-    user?: string,
-    password?: string,
-    database?: string,
-    charset?: string,
-    ...
-  },
+        host?: string,
+        user?: string,
+        password?: string,
+        database?: string,
+        charset?: string,
+        ...
+      },
   ...
 };
 

@@ -1,6 +1,6 @@
 declare class Knex$Transaction<R>
   mixins Knex$QueryBuilder<R>, events$EventEmitter, Promise<R> {
-  [[call]]:(tableName: string) => Knex$QueryBuilder<R>;
+  [[call]]: (tableName: string) => Knex$QueryBuilder<R>;
   commit(connection?: any, value?: any): Promise<R>;
   rollback(?Error): Promise<R>;
   savepoint(connection?: any): Promise<R>;
@@ -91,7 +91,7 @@ declare class Knex$QueryBuilder<R> mixins Promise<R> {
   distinct(): this;
   groupBy(column: string): this;
   groupByRaw(sql: string, bindings?: Knex$RawBindings): this;
-  orderBy(column: string, direction?: "desc" | "asc"): this;
+  orderBy(column: string, direction?: 'desc' | 'asc'): this;
   orderByRaw(sql: string, bindings?: Knex$RawBindings): this;
   offset(offset: number): this;
   limit(limit: number): this;
@@ -142,16 +142,20 @@ type MigrateConfig = {|
   extension?: string,
   tableName?: string,
   disableTransactions?: boolean,
-  loadExtensions?: Array<string>
+  loadExtensions?: Array<string>,
 |};
 
 declare class Knex$Knex<R>
   mixins Knex$QueryBuilder<R>, Promise<R>, events$EventEmitter {
   static (config: Knex$Config): Knex$Knex<R>;
   static QueryBuilder: typeof Knex$QueryBuilder;
-  [[call]]:(tableName: string) => Knex$QueryBuilder<R>;
+  [[call]]: (tableName: string) => Knex$QueryBuilder<R>;
   raw(sqlString: string, bindings?: Knex$RawBindings): any;
-  batchInsert: (tableName: string, rows: Array<Object>, chunkSize?: number) => Knex$QueryBuilder<R>;
+  batchInsert: (
+    tableName: string,
+    rows: Array<Object>,
+    chunkSize?: number
+  ) => Knex$QueryBuilder<R>;
   migrate: {
     make: (name: string, config?: MigrateConfig) => Promise<string>,
     latest: (config?: MigrateConfig) => Promise<void>,
@@ -164,17 +168,17 @@ declare class Knex$Knex<R>
 }
 
 declare type Knex$PostgresConfig = {
-  client?: "pg",
+  client?: 'pg',
   connection?:
     | string
     | {
-    host?: string,
-    user?: string,
-    password?: string,
-    database?: string,
-    charset?: string,
-    ...
-  },
+        host?: string,
+        user?: string,
+        password?: string,
+        database?: string,
+        charset?: string,
+        ...
+      },
   searchPath?: string,
   ...
 };
@@ -182,22 +186,22 @@ declare type Knex$PostgresConfig = {
 declare type Knex$RawBindings = Array<mixed> | { [key: string]: mixed, ... };
 
 declare type Knex$Mysql2Config = {
-  client?: "mysql2",
+  client?: 'mysql2',
   connection?:
     | string
     | {
-    host?: string,
-    user?: string,
-    password?: string,
-    database?: string,
-    charset?: string,
-    ...
-  },
+        host?: string,
+        user?: string,
+        password?: string,
+        database?: string,
+        charset?: string,
+        ...
+      },
   ...
 };
 
 declare type Knex$MysqlConfig = {
-  client?: "mysql",
+  client?: 'mysql',
   connection?: {
     host?: string,
     user?: string,
@@ -209,7 +213,7 @@ declare type Knex$MysqlConfig = {
 };
 
 declare type Knex$SqliteConfig = {
-  client?: "sqlite3",
+  client?: 'sqlite3',
   connection?: { filename?: string, ... },
   ...
 };
@@ -219,7 +223,7 @@ declare type Knex$Config =
   | Knex$Mysql2Config
   | Knex$SqliteConfig;
 
-declare module "knex" {
+declare module 'knex' {
   declare type Error = {
     name: string,
     length: number,
