@@ -4,8 +4,10 @@ declare class Knex$Transaction<R>
   commit(connection?: any, value?: any): Promise<R>;
   rollback(?Error): Promise<R>;
   savepoint(connection?: any): Promise<R>;
-  raw(sql: string, replacements?: Object): Promise<R>;
+  raw(sql: string, replacements?: Knex$Object): Promise<R>;
 }
+
+declare type Knex$Object = { [key: string]: any, ... };
 
 declare class Knex$Stream extends stream$Readable {
   end(): void;
@@ -147,8 +149,8 @@ declare class Knex$QueryBuilder<R> mixins Promise<R> {
     c1?: string,
     c2?: string
   ): this;
-  insert(val: Object | Object[]): this;
-  into(table: Knex$Identifier, options?: Object): this;
+  insert(val: Knex$Object | Knex$Object[]): this;
+  into(table: Knex$Identifier, options?: Knex$Object): this;
   join(
     builder1: Knex$QueryBuilder<R> | Knex$QueryBuilderFn<R>,
     builder2: Knex$QueryBuilderFn<R>
@@ -268,7 +270,7 @@ declare class Knex$QueryBuilder<R> mixins Promise<R> {
   stream(callback: (stream: Knex$Stream) => any): this;
   sum(column?: string): this;
   sumDistinct(column?: string): this;
-  table(table: Knex$Identifier, options?: Object): this;
+  table(table: Knex$Identifier, options?: Knex$Object): this;
   timeout(ms: number, options?: { cancel: boolean, ... }): this;
   toSQL(): { toNative(): { bindings: any[], sql: string, ... }, ... };
   transacting(trx: ?Knex$Transaction<R>): this;
@@ -282,7 +284,7 @@ declare class Knex$QueryBuilder<R> mixins Promise<R> {
     builder: Knex$QueryBuilderFn<R> | Knex$Knex<R> | Knex$QueryBuilder<R>
   ): this;
   update(column: string, value: any): this;
-  update(val: Object): this;
+  update(val: Knex$Object): this;
   where(builder: Knex$QueryBuilderFn<R>): this;
   where(column: Knex$Identifier, operator: string, value: any): this;
   where(column: Knex$Identifier, value: any): this;
@@ -326,7 +328,7 @@ declare class Knex$Knex<R>
   queryBuilder(): Knex$QueryBuilder<R>;
   batchInsert: (
     tableName: string,
-    rows: Object[],
+    rows: Knex$Object[],
     chunkSize?: number
   ) => Knex$QueryBuilder<R>;
   migrate: {
