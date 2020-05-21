@@ -15,98 +15,90 @@ declare type Knex$QueryBuilderFn<R> = (
 ) => Knex$QueryBuilder<R> | void;
 
 declare class Knex$QueryBuilder<R> mixins Promise<R> {
+  as(name: string): this;
+  avg(column?: string | string[] | { [string]: any, ... } | Knex$Raw<R>): this;
+  avgDistinct(
+    column?: string | string[] | { [string]: any, ... } | Knex$Raw<R>
+  ): this;
+  clearCounters(): this;
+  clearOrder(): this;
   clearSelect(): this;
   clearWhere(): this;
-  clearOrder(): this;
-  clearCounters(): this;
-  select(key?: string[]): this;
-  select(...key: string[]): this;
-  timeout(ms: number, options?: { cancel: boolean, ... }): this;
-  column(key: string[]): this;
+  clone(): this;
   column(...key: string[]): this;
-  with(alias: string, w: string | Knex$QueryBuilderFn<R>): this;
-  withSchema(schema: string): this;
-  returning(column: string): this;
-  returning(...columns: string[]): this;
-  returning(columns: string[]): this;
-  as(name: string): this;
-  transacting(trx: ?Knex$Transaction<R>): this;
-  transaction((trx: Knex$Transaction<R>) => Promise<R> | void): this;
-  where(builder: Knex$QueryBuilderFn<R>): this;
-  where(column: string, value: any): this;
-  where(column: string, operator: string, value: any): this;
-  where(object: { [string]: any, ... }): this;
-  whereNot(builder: Knex$QueryBuilderFn<R>): this;
-  whereNot(column: string, value: any): this;
-  whereNot(column: string, operator: string, value: any): this;
-  whereIn(column: string, values: any[]): this;
-  whereNotIn(column: string, values: any[]): this;
-  whereNull(column: string): this;
-  whereNotNull(column: string): this;
-  whereExists(builder: Knex$QueryBuilderFn<R> | Knex$QueryBuilder<R>): this;
-  whereNotExists(builder: Knex$QueryBuilderFn<R> | Knex$QueryBuilder<R>): this;
-  whereBetween<T>(column: string, range: [T, T]): this;
-  whereNotBetween<T>(column: string, range: [T, T]): this;
-  whereRaw(sql: string, bindings?: Knex$RawBindings): this;
-  orWhere(builder: Knex$QueryBuilderFn<R>): this;
-  orWhere(column: string, value: any): this;
-  orWhere(column: string, operator: string, value: any): this;
-  orWhere(object: { [string]: any, ... }): this;
-  orWhereNot(builder: Knex$QueryBuilderFn<R>): this;
-  orWhereNot(column: string, value: any): this;
-  orWhereNot(column: string, operator: string, value: any): this;
-  orWhereIn(column: string, values: any[]): this;
-  orWhereNotIn(column: string, values: any[]): this;
-  orWhereNull(column: string): this;
-  orWhereNotNull(column: string): this;
-  orWhereExists(builder: Knex$QueryBuilderFn<R> | Knex$QueryBuilder<R>): this;
-  orWhereNotExists(
-    builder: Knex$QueryBuilderFn<R> | Knex$QueryBuilder<R>
+  column(key: string[]): this;
+  connection(dbConnection: any): this;
+  count(
+    column?: string | string[] | { [string]: any, ... } | Knex$Raw<R>
   ): this;
-  orWhereBetween<T>(column: string, range: [T, T]): this;
-  orWhereNotBetween<T>(column: string, range: [T, T]): this;
-  join(table: string, c1: string, operator: string, c2: string): this;
-  join(table: string, c1: string, c2: string): this;
-  join(
-    builder: Knex$QueryBuilder<R> | Knex$QueryBuilderFn<R>,
-    c1?: string,
-    c2?: string
+  countDistinct(
+    column?: string | string[] | { [string]: any, ... } | Knex$Raw<R>
   ): this;
-  join(table: string, builder: Knex$QueryBuilderFn<R>): this;
-  join(table: string, c1: string, operator: string, c2: string): this;
+  crossJoin(column: string, c1: string, c2: string): this;
+  crossJoin(column: string, c1: string, operator: string, c2: string): this;
+  crossJoin(table: string, builder: Knex$QueryBuilderFn<R>): this;
+  del(): this;
+  delete(): this;
+  distinct(): this;
+  first(...key: string[]): this;
+  first(key?: string[]): this;
+  forShare(): this;
+  forUpdate(): this;
+  from(table: string): this;
+  from(
+    builder: Knex$QueryBuilderFn<R> | Knex$Knex<R> | Knex$QueryBuilder<R>
+  ): this;
+  fullOuterJoin(table: string, builder: Knex$QueryBuilderFn<R>): this;
+  fullOuterJoin(table: string, c1: string, c2: string): this;
+  fullOuterJoin(table: string, c1: string, operator: string, c2: string): this;
+  groupBy(column: string): this;
+  groupByRaw(sql: string, bindings?: Knex$RawBindings): this;
+  having(column: string, operator: string, value: mixed): this;
+  havingBetween<T>(column: string, range: [T, T]): this;
+  havingExists(builder: Knex$QueryBuilderFn<R> | Knex$QueryBuilder<R>): this;
+  havingIn(column: string, values: Array<mixed>): this;
+  havingNotBetween<T>(column: string, range: [T, T]): this;
+  havingNotExists(builder: Knex$QueryBuilderFn<R> | Knex$QueryBuilder<R>): this;
+  havingNotIn(column: string, values: Array<mixed>): this;
+  havingNotNull(column: string): this;
+  havingNull(column: string): this;
+  havingRaw(column: string, operator: string, value: mixed): this;
+  havingRaw(column: string, value: mixed): this;
+  havingRaw(raw: string, bindings?: Knex$RawBindings): this;
+  innerJoin(table: string, builder: Knex$QueryBuilderFn<R>): this;
   innerJoin(table: string, c1: string, c2: string): this;
   innerJoin(
     builder: Knex$QueryBuilder<R> | Knex$QueryBuilderFn<R>,
     c1?: string,
     c2?: string
   ): this;
-  innerJoin(table: string, builder: Knex$QueryBuilderFn<R>): this;
-  leftJoin(table: string, c1: string, operator: string, c2: string): this;
-  leftJoin(table: string, c1: string, c2: string): this;
+  insert(val: Object | Object[]): this;
+  into(table: string, options?: Object): this;
+  join(table: string, builder: Knex$QueryBuilderFn<R>): this;
+  join(table: string, c1: string, c2: string): this;
+  join(table: string, c1: string, operator: string, c2: string): this;
+  join(table: string, c1: string, operator: string, c2: string): this;
+  join(
+    builder: Knex$QueryBuilder<R> | Knex$QueryBuilderFn<R>,
+    c1?: string,
+    c2?: string
+  ): this;
+  joinRaw(sql: string, bindings?: Knex$RawBindings): this;
   leftJoin(builder: Knex$QueryBuilder<R>): this;
   leftJoin(table: string, builder: Knex$QueryBuilderFn<R>): this;
-  leftOuterJoin(table: string, c1: string, operator: string, c2: string): this;
-  leftOuterJoin(table: string, c1: string, c2: string): this;
+  leftJoin(table: string, c1: string, c2: string): this;
+  leftJoin(table: string, c1: string, operator: string, c2: string): this;
   leftOuterJoin(table: string, builder: Knex$QueryBuilderFn<R>): this;
-  rightJoin(table: string, c1: string, operator: string, c2: string): this;
-  rightJoin(table: string, c1: string, c2: string): this;
-  rightJoin(table: string, builder: Knex$QueryBuilderFn<R>): this;
-  rightOuterJoin(table: string, c1: string, operator: string, c2: string): this;
-  rightOuterJoin(table: string, c1: string, c2: string): this;
-  rightOuterJoin(table: string, builder: Knex$QueryBuilderFn<R>): this;
-  outerJoin(table: string, c1: string, operator: string, c2: string): this;
-  outerJoin(table: string, c1: string, c2: string): this;
-  outerJoin(table: string, builder: Knex$QueryBuilderFn<R>): this;
-  fullOuterJoin(table: string, c1: string, operator: string, c2: string): this;
-  fullOuterJoin(table: string, c1: string, c2: string): this;
-  fullOuterJoin(table: string, builder: Knex$QueryBuilderFn<R>): this;
-  crossJoin(column: string, c1: string, c2: string): this;
-  crossJoin(column: string, c1: string, operator: string, c2: string): this;
-  crossJoin(table: string, builder: Knex$QueryBuilderFn<R>): this;
-  joinRaw(sql: string, bindings?: Knex$RawBindings): this;
-  distinct(): this;
-  groupBy(column: string): this;
-  groupByRaw(sql: string, bindings?: Knex$RawBindings): this;
+  leftOuterJoin(table: string, c1: string, c2: string): this;
+  leftOuterJoin(table: string, c1: string, operator: string, c2: string): this;
+  limit(limit: number): this;
+  max(column?: string | string[] | { [string]: any, ... } | Knex$Raw<R>): this;
+  min(column?: string | string[] | { [string]: any, ... } | Knex$Raw<R>): this;
+  modify(
+    fn: (queryBuilder: Knex$QueryBuilder<R>, ...args: [any]) => this,
+    ...args: [any]
+  ): this;
+  offset(offset: number): this;
   orderBy(
     column:
       | string
@@ -120,65 +112,71 @@ declare class Knex$QueryBuilder<R> mixins Promise<R> {
         >,
     direction?: 'desc' | 'asc'
   ): this;
-
   orderByRaw(sql: string, bindings?: Knex$RawBindings): this;
-  offset(offset: number): this;
-  limit(limit: number): this;
-  having(column: string, operator: string, value: mixed): this;
-  havingIn(column: string, values: Array<mixed>): this;
-  havingNotIn(column: string, values: Array<mixed>): this;
-  havingNull(column: string): this;
-  havingNotNull(column: string): this;
-  havingExists(builder: Knex$QueryBuilderFn<R> | Knex$QueryBuilder<R>): this;
-  havingNotExists(builder: Knex$QueryBuilderFn<R> | Knex$QueryBuilder<R>): this;
-  havingBetween<T>(column: string, range: [T, T]): this;
-  havingNotBetween<T>(column: string, range: [T, T]): this;
-  havingRaw(column: string, operator: string, value: mixed): this;
-  havingRaw(column: string, value: mixed): this;
-  havingRaw(raw: string, bindings?: Knex$RawBindings): this;
-  union(): this;
-  unionAll(): this;
-  count(
-    column?: string | string[] | { [string]: any, ... } | Knex$Raw<R>
+  orWhere(builder: Knex$QueryBuilderFn<R>): this;
+  orWhere(column: string, operator: string, value: any): this;
+  orWhere(column: string, value: any): this;
+  orWhere(object: { [string]: any, ... }): this;
+  orWhereBetween<T>(column: string, range: [T, T]): this;
+  orWhereExists(builder: Knex$QueryBuilderFn<R> | Knex$QueryBuilder<R>): this;
+  orWhereIn(column: string, values: any[]): this;
+  orWhereNot(builder: Knex$QueryBuilderFn<R>): this;
+  orWhereNot(column: string, operator: string, value: any): this;
+  orWhereNot(column: string, value: any): this;
+  orWhereNotBetween<T>(column: string, range: [T, T]): this;
+  orWhereNotExists(
+    builder: Knex$QueryBuilderFn<R> | Knex$QueryBuilder<R>
   ): this;
-  countDistinct(
-    column?: string | string[] | { [string]: any, ... } | Knex$Raw<R>
-  ): this;
-  max(column?: string | string[] | { [string]: any, ... } | Knex$Raw<R>): this;
+  orWhereNotIn(column: string, values: any[]): this;
+  orWhereNotNull(column: string): this;
+  orWhereNull(column: string): this;
+  outerJoin(table: string, builder: Knex$QueryBuilderFn<R>): this;
+  outerJoin(table: string, c1: string, c2: string): this;
+  outerJoin(table: string, c1: string, operator: string, c2: string): this;
+  pluck(column: string): this;
+  returning(...columns: string[]): this;
+  returning(column: string): this;
+  returning(columns: string[]): this;
+  returning(columns: string[]): this;
+  rightJoin(table: string, builder: Knex$QueryBuilderFn<R>): this;
+  rightJoin(table: string, c1: string, c2: string): this;
+  rightJoin(table: string, c1: string, operator: string, c2: string): this;
+  rightOuterJoin(table: string, builder: Knex$QueryBuilderFn<R>): this;
+  rightOuterJoin(table: string, c1: string, c2: string): this;
+  rightOuterJoin(table: string, c1: string, operator: string, c2: string): this;
+  select(...key: string[]): this;
+  select(key?: string[]): this;
   sum(column?: string | string[] | { [string]: any, ... } | Knex$Raw<R>): this;
-  min(column?: string | string[] | { [string]: any, ... } | Knex$Raw<R>): this;
   sumDistinct(
     column?: string | string[] | { [string]: any, ... } | Knex$Raw<R>
   ): this;
-  avg(column?: string | string[] | { [string]: any, ... } | Knex$Raw<R>): this;
-  avgDistinct(
-    column?: string | string[] | { [string]: any, ... } | Knex$Raw<R>
-  ): this;
-  pluck(column: string): this;
-  first(key?: string[]): this;
-  first(...key: string[]): this;
-  clone(): this;
-  modify(
-    fn: (queryBuilder: Knex$QueryBuilder<R>, ...args: [any]) => this,
-    ...args: [any]
-  ): this;
-  connection(dbConnection: any): this;
-
   table(table: string, options?: Object): this;
-  from(table: string): this;
-  from(
-    builder: Knex$QueryBuilderFn<R> | Knex$Knex<R> | Knex$QueryBuilder<R>
-  ): this;
-  into(table: string, options?: Object): this;
+  timeout(ms: number, options?: { cancel: boolean, ... }): this;
+  transacting(trx: ?Knex$Transaction<R>): this;
+  transaction((trx: Knex$Transaction<R>) => Promise<R> | void): this;
   truncate(): this;
-  insert(val: Object | Object[]): this;
-  del(): this;
-  delete(): this;
+  union(): this;
+  unionAll(): this;
   update(column: string, value: any, returning?: Array<string>): this;
   update(val: Object, returning?: Array<string>): this;
-  returning(columns: string[]): this;
-  forUpdate(): this;
-  forShare(): this;
+  where(builder: Knex$QueryBuilderFn<R>): this;
+  where(column: string, operator: string, value: any): this;
+  where(column: string, value: any): this;
+  where(object: { [string]: any, ... }): this;
+  whereBetween<T>(column: string, range: [T, T]): this;
+  whereExists(builder: Knex$QueryBuilderFn<R> | Knex$QueryBuilder<R>): this;
+  whereIn(column: string, values: any[]): this;
+  whereNot(builder: Knex$QueryBuilderFn<R>): this;
+  whereNot(column: string, operator: string, value: any): this;
+  whereNot(column: string, value: any): this;
+  whereNotBetween<T>(column: string, range: [T, T]): this;
+  whereNotExists(builder: Knex$QueryBuilderFn<R> | Knex$QueryBuilder<R>): this;
+  whereNotIn(column: string, values: any[]): this;
+  whereNotNull(column: string): this;
+  whereNull(column: string): this;
+  whereRaw(sql: string, bindings?: Knex$RawBindings): this;
+  with(alias: string, w: string | Knex$QueryBuilderFn<R>): this;
+  withSchema(schema: string): this;
 }
 
 type MigrateConfig = {|
