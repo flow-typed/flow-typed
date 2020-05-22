@@ -51,10 +51,10 @@ declare module '@testing-library/react' {
     waitForElementOptions?: WaitForElementOptions
   ) => Promise<HTMLElement[]>;
 
-  declare type GetByBoundAttribute = (
+  declare type GetByBoundAttribute = <T: HTMLElement = HTMLElement>(
     text: TextMatch,
     options?: TextMatchOptions
-  ) => HTMLElement;
+  ) => T;
 
   declare type FindByBoundAttribute = (
     text: TextMatch,
