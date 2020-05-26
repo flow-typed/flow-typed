@@ -84,7 +84,7 @@ declare class Knex$QueryBuilder<R> mixins Promise<R> {
   ): this;
   andWhere(column: Knex$Identifier, value: any): this;
   andWhereBetween(column: Knex$Identifier, range: number[]): this;
-  andWhereExists(column: Knex$Identifier): this;
+  andWhereExists(builder: Knex$QueryBuilderFn<R> | Knex$QueryBuilder<R>): this;
   andWhereNot(builder: Knex$QueryBuilderFn<R>): this;
   andWhereNot(
     column: Knex$Identifier,
@@ -93,12 +93,14 @@ declare class Knex$QueryBuilder<R> mixins Promise<R> {
   ): this;
   andWhereNot(column: Knex$Identifier, value: any): this;
   andWhereNotBetween(column: Knex$Identifier, range: number[]): this;
-  andWhereNotExists(column: Knex$Identifier): this;
+  andWhereNotExists(
+    builder: Knex$QueryBuilderFn<R> | Knex$QueryBuilder<R>
+  ): this;
   andWhereNotIn(column: Knex$Identifier, values: any[]): this;
   andWhereRaw(sql: string, bindings?: Knex$RawBindings): this;
   as(name: string): this;
   avg(column: Knex$Identifier): this;
-  avg(object: { [string]: any, ... }): this;
+  avg(object: Knex$Object): this;
   avgDistinct(column: Knex$Identifier): this;
   clearSelect(): this;
   clearWhere(): this;
@@ -225,9 +227,9 @@ declare class Knex$QueryBuilder<R> mixins Promise<R> {
   ): this;
   limit(limit: ?number): this;
   max(column: Knex$Identifier): this;
-  max(object: { [string]: any, ... }): this;
+  max(object: Knex$Object): this;
   min(column: Knex$Identifier): this;
-  min(object: { [string]: any, ... }): this;
+  min(object: Knex$Object): this;
   offset(offset: ?number): this;
   on(builder: Knex$QueryBuilderFn<R>): this;
   on(
@@ -259,9 +261,7 @@ declare class Knex$QueryBuilder<R> mixins Promise<R> {
   ): this;
   orWhere(column: Knex$Identifier, value: any): this;
   orWhereBetween(column: Knex$Identifier, range: number[]): this;
-  orWhereExists(
-    column: Knex$Identifier | Knex$QueryBuilder<R> | Knex$QueryBuilderFn<R>
-  ): this;
+  orWhereExists(builder: Knex$QueryBuilderFn<R> | Knex$QueryBuilder<R>): this;
   orWhereIn(column: Knex$Identifier, values: any[]): this;
   orWhereNot(builder: Knex$QueryBuilderFn<R>): this;
   orWhereNot(
@@ -272,7 +272,7 @@ declare class Knex$QueryBuilder<R> mixins Promise<R> {
   orWhereNot(column: Knex$Identifier, value: any): this;
   orWhereNotBetween(column: Knex$Identifier, range: number[]): this;
   orWhereNotExists(
-    column: Knex$Identifier | Knex$QueryBuilder<R> | Knex$QueryBuilderFn<R>
+    builder: Knex$QueryBuilderFn<R> | Knex$QueryBuilder<R>
   ): this;
   orWhereNotIn(column: Knex$Identifier, values: any[]): this;
   orWhereNotNull(column: Knex$Identifier): this;
@@ -328,7 +328,6 @@ declare class Knex$QueryBuilder<R> mixins Promise<R> {
   union(
     builder: Knex$QueryBuilderFn<R> | Knex$Knex<R> | Knex$QueryBuilder<R>
   ): this;
-  unionAll(): this;
   unionAll(
     builder: Knex$QueryBuilderFn<R> | Knex$Knex<R> | Knex$QueryBuilder<R>
   ): this;
@@ -341,11 +340,9 @@ declare class Knex$QueryBuilder<R> mixins Promise<R> {
     value: any
   ): this;
   where(column: Knex$Identifier, value: any): this;
-  where(object: { [string]: any, ... }): this;
+  where(object: Knex$Object): this;
   whereBetween(column: Knex$Identifier, range: number[]): this;
-  whereExists(
-    column: Knex$Identifier | Knex$QueryBuilder<R> | Knex$QueryBuilderFn<R>
-  ): this;
+  whereExists(builder: Knex$QueryBuilderFn<R> | Knex$QueryBuilder<R>): this;
   whereIn(column: Knex$Identifier, values: any[] | Knex$QueryBuilder<R>): this;
   whereNot(builder: Knex$QueryBuilderFn<R>): this;
   whereNot(
@@ -355,9 +352,7 @@ declare class Knex$QueryBuilder<R> mixins Promise<R> {
   ): this;
   whereNot(column: Knex$Identifier, value: any): this;
   whereNotBetween(column: Knex$Identifier, range: number[]): this;
-  whereNotExists(
-    column: Knex$Identifier | Knex$QueryBuilder<R> | Knex$QueryBuilderFn<R>
-  ): this;
+  whereNotExists(builder: Knex$QueryBuilderFn<R> | Knex$QueryBuilder<R>): this;
   whereNotIn(column: Knex$Identifier, values: any[]): this;
   whereNotNull(column: Knex$Identifier): this;
   whereNull(column: Knex$Identifier): this;
