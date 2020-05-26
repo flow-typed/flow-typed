@@ -10,16 +10,58 @@ knex
   .clearSelect()
   .clearWhere()
   .select('foo')
+  .avg('bar.n')
+  .avg('bar.c as c_avg')
+  .avgDistinct('bar.u')
+  .count('bar.n')
+  .count('bar.c as c_count')
+  .countDistinct('bar.u')
+  .max('bar.foo')
+  .max('bar.foo as bar2')
+  .max({ bar3: 'bar' })
+  .min('bar.foo')
+  .min('bar.foo as bar2')
+  .min({ bar3: 'bar' })
+  .sum('bar.n')
+  .sumDistinct('bar.n')
   .withSchema('a')
   .from('bar')
   .where('foo', 2)
   .where({ mixed: 'hi' })
   .orWhere('bar', 'foo')
+  .orWhereNull('bar')
+  .orWhereIn('bar', ['foo', 'buzz'])
+  .orWhereBetween('bar', [0, 5])
+  .orWhereNot('bar', 'foo')
+  .orWhereNotNull('bar')
+  .orWhereNotIn('bar', ['foo', 'buzz'])
+  .orWhereRaw('bar = :buzz', { buzz: 3 })
+  .andWhere('bar', 'foo')
+  .andWhereBetween('bar', [0, 5])
+  .andWhereNot('bar', 'foo')
+  .andWhereRaw('bar = :buzz', { buzz: 3 })
   .whereNot('asd', 1)
-  .whereIn('batz', [1, 2]);
-// $ExpectError - raw is not accepted as an input type
+  .whereIn('batz', [1, 2])
+  .whereNotIn('bar', ['foo', 'buzz'])
+  .whereNull('bar')
+  .whereNotNull('baz')
+  .groupBy('foo')
+  .groupBy('buzz', 'baz')
+  .groupByRaw('COUNT(DISTINCT baz), boo')
+  .orderBy('foo', 'desc')
+  .orderBy(['foo', 'bar', 'baz'])
+  .orderByRaw('buzz DESC NULLS LAST')
+  .orderBy(['foo', { column: 'baz' }, { column: 'buzz', order: 'desc' }])
+  .orderBy(['foo', { column: 'baz' }, { column: 'buzz', order: 'desc' }])
+  .limit(100)
+  .offset(200);
+
 knex.select(knex.raw(''));
 
+// Joins with Knex$QueryBuilderFn
+knex.join('bar', function() {
+  return this;
+});
 knex.innerJoin('bar', function() {
   return this;
 });
@@ -39,13 +81,32 @@ knex.crossJoin('bar', function() {
   return this;
 });
 
+// Joins with column refs
+knex.join('baz', 'baz.id', 'bar.baz_id');
+knex.innerJoin('baz', 'baz.id', 'bar.baz_id');
+knex.leftJoin('baz', 'baz.id', 'bar.baz_id');
+knex.rightJoin('baz', 'baz.id', 'bar.baz_id');
+knex.rightOuterJoin('baz', 'baz.id', 'bar.baz_id');
+knex.fullOuterJoin('baz', 'baz.id', 'bar.baz_id');
+knex.crossJoin('baz');
+// Note: Cross join with conditions only supported in MySQL and SQLite3
+knex.crossJoin('baz', 'baz.id', 'bar.baz_id');
+
+// Joins with object condition map
+knex.join('boz', { 'boz.id': 'bar.baz_id' });
+knex.innerJoin('boz', { 'boz.id': 'bar.baz_id' });
+knex.leftJoin('boz', { 'boz.id': 'bar.baz_id' });
+knex.rightJoin('boz', { 'boz.id': 'bar.baz_id' });
+knex.rightOuterJoin('boz', { 'boz.id': 'bar.baz_id' });
+knex.fullOuterJoin('boz', { 'boz.id': 'bar.baz_id' });
+// $ExpectError - crossJoin can not use the object condition map syntax
+knex.crossJoin('boz', { 'boz.id': 'bar.baz_id' });
+
 knex('foo').insert({
   a: 1,
 });
 knex('foo').truncate();
 knex('bar').del();
-// $ExpectError
-knex.from();
 
 knex.table('foo');
 
@@ -95,8 +156,6 @@ knex('foo').havingIn('count', [1, 2, 3]);
 knex('foo').havingIn('count', 'string');
 knex('foo').havingNotIn('count', [1, 2, 3]);
 knex('foo').havingNull('count');
-// $ExpectError
-knex('foo').havingNull(null);
 knex('foo').havingExists(function() {
   this.select('*');
 });
@@ -106,6 +165,8 @@ knex('foo').havingBetween('count', [1, 5]);
 // $ExpectError
 knex('foo').havingBetween('count', [1, 2, 3]);
 knex('foo').havingRaw('count > 10');
+// $ExpectError
+knex('foo').havingRaw('count', '>', 100);
 
 /* Where tests */
 knex('foo').where('count', '>', 100);
@@ -114,8 +175,6 @@ knex('foo').whereIn('count', [1, 2, 3]);
 knex('foo').whereIn('count', 'string');
 knex('foo').whereNotIn('count', [1, 2, 3]);
 knex('foo').whereNull('count');
-// $ExpectError
-knex('foo').whereNull(null);
 knex('foo').whereExists(function() {
   this.select('*');
 });
