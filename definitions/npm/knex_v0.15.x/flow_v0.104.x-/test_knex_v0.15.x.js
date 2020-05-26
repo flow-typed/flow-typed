@@ -10,13 +10,50 @@ knex
   .clearSelect()
   .clearWhere()
   .select('foo')
+  .avg('bar.n')
+  .avg('bar.c as c_avg')
+  .avgDistinct('bar.u')
+  .count('bar.n')
+  .count('bar.c as c_count')
+  .countDistinct('bar.u')
+  .max('bar.foo')
+  .max('bar.foo as bar2')
+  .max({ bar3: 'bar' })
+  .min('bar.foo')
+  .min('bar.foo as bar2')
+  .min({ bar3: 'bar' })
+  .sum('bar.n')
+  .sumDistinct('bar.n')
   .withSchema('a')
   .from('bar')
   .where('foo', 2)
   .where({ mixed: 'hi' })
   .orWhere('bar', 'foo')
+  .orWhereNull('bar')
+  .orWhereIn('bar', ['foo', 'buzz'])
+  .orWhereBetween('bar', [0, 5])
+  .orWhereNot('bar', 'foo')
+  .orWhereNotNull('bar')
+  .orWhereNotIn('bar', ['foo', 'buzz'])
+  .orWhereRaw('bar = :buzz', { buzz: 3 })
+  .andWhere('bar', 'foo')
+  .andWhereBetween('bar', [0, 5])
+  .andWhereNot('bar', 'foo')
+  .andWhereRaw('bar = :buzz', { buzz: 3 })
   .whereNot('asd', 1)
-  .whereIn('batz', [1, 2]);
+  .whereIn('batz', [1, 2])
+  .whereNotIn('bar', ['foo', 'buzz'])
+  .whereNull('bar')
+  .whereNotNull('baz')
+  .groupBy('foo')
+  .groupBy('buzz', 'baz')
+  .groupByRaw('COUNT(DISTINCT baz), boo')
+  .orderBy('foo', 'desc')
+  .orderBy(['foo', 'bar', 'baz'])
+  .orderByRaw('buzz DESC NULLS LAST')
+  .limit(100)
+  .offset(200);
+
 knex.select(knex.raw(''));
 
 // Joins with Knex$QueryBuilderFn
@@ -50,7 +87,7 @@ knex.rightJoin('baz', 'baz.id', 'bar.baz_id');
 knex.rightOuterJoin('baz', 'baz.id', 'bar.baz_id');
 knex.fullOuterJoin('baz', 'baz.id', 'bar.baz_id');
 knex.crossJoin('baz');
-// Cross join with conditions only supported in MySQL and SQLite3
+// Note: Cross join with conditions only supported in MySQL and SQLite3
 knex.crossJoin('baz', 'baz.id', 'bar.baz_id');
 
 // Joins with object condition map
@@ -130,6 +167,8 @@ knex('foo').havingBetween('count', [1, 5]);
 // $ExpectError
 knex('foo').havingBetween('count', [1, 2, 3]);
 knex('foo').havingRaw('count > 10');
+// $ExpectError
+knex('foo').havingRaw('count', '>', 100);
 
 /**
  * Bindings with *raw methods
