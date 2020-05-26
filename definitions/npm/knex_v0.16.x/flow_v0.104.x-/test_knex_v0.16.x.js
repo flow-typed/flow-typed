@@ -159,8 +159,7 @@ knex('foo').havingNull('count');
 knex('foo').havingExists(function() {
   this.select('*');
 });
-// $ExpectError - raw is not accepted as an input type
-knex('foo').havingExists(knex.raw(''));
+knex('foo').havingExists(knex.raw('select * from bar'));
 knex('foo').havingBetween('count', [1, 5]);
 // $ExpectError
 knex('foo').havingBetween('count', [1, 2, 3]);
@@ -178,8 +177,7 @@ knex('foo').whereNull('count');
 knex('foo').whereExists(function() {
   this.select('*');
 });
-// $ExpectError - raw is not accepted as an input type
-knex('foo').whereExists(knex.raw(''));
+knex('foo').whereExists(knex.raw('select * from bar'));
 knex('foo').whereBetween('count', [1, 5]);
 // $ExpectError
 knex('foo').whereBetween('count', [1, 2, 3]);

@@ -92,7 +92,9 @@ declare class Knex$QueryBuilder<R> mixins Promise<R> {
   ): this;
   andWhere(column: Knex$Identifier, value: any): this;
   andWhereBetween<T>(column: Knex$Identifier, range: [T, T]): this;
-  andWhereExists(builder: Knex$QueryBuilderFn<R> | Knex$QueryBuilder<R>): this;
+  andWhereExists(
+    builder: Knex$QueryBuilderFn<R> | Knex$QueryBuilder<R> | Knex$Raw<R>
+  ): this;
   andWhereNot(builder: Knex$QueryBuilderFn<R>): this;
   andWhereNot(
     column: Knex$Identifier,
@@ -102,7 +104,7 @@ declare class Knex$QueryBuilder<R> mixins Promise<R> {
   andWhereNot(column: Knex$Identifier, value: any): this;
   andWhereNotBetween<T>(column: Knex$Identifier, range: [T, T]): this;
   andWhereNotExists(
-    builder: Knex$QueryBuilderFn<R> | Knex$QueryBuilder<R>
+    builder: Knex$QueryBuilderFn<R> | Knex$QueryBuilder<R> | Knex$Raw<R>
   ): this;
   andWhereNotIn(column: Knex$Identifier, values: any[]): this;
   andWhereRaw(sql: string, bindings?: Knex$RawBindings): this;
@@ -164,10 +166,14 @@ declare class Knex$QueryBuilder<R> mixins Promise<R> {
   ): this;
   having(column: Knex$Identifier, value: mixed): this;
   havingBetween<T>(column: Knex$Identifier, range: [T, T]): this;
-  havingExists(builder: Knex$QueryBuilderFn<R> | Knex$QueryBuilder<R>): this;
+  havingExists(
+    builder: Knex$QueryBuilderFn<R> | Knex$QueryBuilder<R> | Knex$Raw<R>
+  ): this;
   havingIn(column: Knex$Identifier, values: mixed[]): this;
   havingNotBetween<T>(column: Knex$Identifier, range: [T, T]): this;
-  havingNotExists(builder: Knex$QueryBuilderFn<R> | Knex$QueryBuilder<R>): this;
+  havingNotExists(
+    builder: Knex$QueryBuilderFn<R> | Knex$QueryBuilder<R> | Knex$Raw<R>
+  ): this;
   havingNotIn(column: Knex$Identifier, values: mixed[]): this;
   havingNotNull(column: Knex$Identifier): this;
   havingNull(column: Knex$Identifier): this;
@@ -273,7 +279,7 @@ declare class Knex$QueryBuilder<R> mixins Promise<R> {
     value: any
   ): this;
   orOn(column: Knex$Identifier, value: any): this;
-  orOnExists(builder: Knex$QueryBuilderFn<R> | knex$Raw<R>): this;
+  orOnExists(builder: Knex$QueryBuilderFn<R> | Knex$Raw<R>): this;
   orWhere(builder: Knex$QueryBuilderFn<R>): this;
   orWhere(
     column: Knex$Identifier,
@@ -282,7 +288,9 @@ declare class Knex$QueryBuilder<R> mixins Promise<R> {
   ): this;
   orWhere(column: Knex$Identifier, value: any): this;
   orWhereBetween<T>(column: Knex$Identifier, range: [T, T]): this;
-  orWhereExists(builder: Knex$QueryBuilderFn<R> | Knex$QueryBuilder<R>): this;
+  orWhereExists(
+    builder: Knex$QueryBuilderFn<R> | Knex$QueryBuilder<R> | Knex$Raw<R>
+  ): this;
   orWhereIn(column: Knex$Identifier, values: any[]): this;
   orWhereNot(builder: Knex$QueryBuilderFn<R>): this;
   orWhereNot(
@@ -293,7 +301,7 @@ declare class Knex$QueryBuilder<R> mixins Promise<R> {
   orWhereNot(column: Knex$Identifier, value: any): this;
   orWhereNotBetween<T>(column: Knex$Identifier, range: [T, T]): this;
   orWhereNotExists(
-    builder: Knex$QueryBuilderFn<R> | Knex$QueryBuilder<R>
+    builder: Knex$QueryBuilderFn<R> | Knex$QueryBuilder<R> | Knex$Raw<R>
   ): this;
   orWhereNotIn(column: Knex$Identifier, values: any[]): this;
   orWhereNotNull(column: Knex$Identifier): this;
@@ -365,7 +373,9 @@ declare class Knex$QueryBuilder<R> mixins Promise<R> {
   where(column: Knex$Identifier, value: any): this;
   where(object: Knex$Object): this;
   whereBetween<T>(column: Knex$Identifier, range: [T, T]): this;
-  whereExists(builder: Knex$QueryBuilderFn<R> | Knex$QueryBuilder<R>): this;
+  whereExists(
+    builder: Knex$QueryBuilderFn<R> | Knex$QueryBuilder<R> | Knex$Raw<R>
+  ): this;
   whereIn(column: Knex$Identifier, values: any[] | Knex$QueryBuilder<R>): this;
   whereNot(builder: Knex$QueryBuilderFn<R>): this;
   whereNot(
@@ -375,7 +385,9 @@ declare class Knex$QueryBuilder<R> mixins Promise<R> {
   ): this;
   whereNot(column: Knex$Identifier, value: any): this;
   whereNotBetween<T>(column: Knex$Identifier, range: [T, T]): this;
-  whereNotExists(builder: Knex$QueryBuilderFn<R> | Knex$QueryBuilder<R>): this;
+  whereNotExists(
+    builder: Knex$QueryBuilderFn<R> | Knex$QueryBuilder<R> | Knex$Raw<R>
+  ): this;
   whereNotIn(column: Knex$Identifier, values: any[]): this;
   whereNotNull(column: Knex$Identifier): this;
   whereNull(column: Knex$Identifier): this;

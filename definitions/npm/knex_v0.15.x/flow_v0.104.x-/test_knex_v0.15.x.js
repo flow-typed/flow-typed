@@ -161,8 +161,7 @@ knex('foo').havingNull(null);
 knex('foo').havingExists(function() {
   this.select('*');
 });
-// $ExpectError
-knex('foo').havingExists(knex.raw(''));
+knex('foo').havingExists(knex.raw('select * from bar'));
 knex('foo').havingBetween('count', [1, 5]);
 // $ExpectError
 knex('foo').havingBetween('count', [1, 2, 3]);
