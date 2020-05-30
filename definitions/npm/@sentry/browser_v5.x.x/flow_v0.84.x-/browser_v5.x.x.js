@@ -149,13 +149,13 @@ declare module '@sentry/browser' {
         ): void;
     }
 
-    declare type LogLevel = {|
+    declare export type LogLevel = {|
         +None: 0,
         +Error: 1,
         +Debug: 2,
         +Verbose: 3,
     |};
-    declare type Breadcrumb = {|
+    declare export type Breadcrumb = {|
         +type?: 'default' | 'http' | 'error',
         +level?: $Values<typeof Severity>,
         +event_id?: string,
@@ -164,18 +164,18 @@ declare module '@sentry/browser' {
         +data?: { [string]: mixed, ... },
         +timestamp?: number,
     |};
-    declare type BreadcrumbHint = {| [key: string]: mixed |};
-    declare type User = {
+    declare export type BreadcrumbHint = {| [key: string]: mixed |};
+    declare export type User = {
         [key: string]: mixed,
         // At least one of these must be present, but there's no way to represent that in Flow without
         // enumerating every possible combination.
-        +id?: string,
+        +id?: string | number,
         +username?: string,
         +email?: string,
         +ip_address?: string,
         ...
     };
-    declare type SpanStatus = {|
+    declare export type SpanStatus = {|
         +Ok: 'ok',
         +DealineExceeded: 'deadline_exceeded',
         +Unauthenticated: 'unauthenticated',
@@ -194,13 +194,13 @@ declare module '@sentry/browser' {
         +OutOfRange: 'out_of_range',
         +DataLoss: 'data_loss',
     |};
-    declare type Mechanism = {|
+    declare export type Mechanism = {|
         +type: string,
         +handled: boolean,
         +data?: { [key: string]: string | boolean, ... },
         +synthetic?: boolean,
     |};
-    declare type StackFrame = {|
+    declare export type StackFrame = {|
         +filename?: string,
         +function?: string,
         +module?: string,
@@ -214,11 +214,11 @@ declare module '@sentry/browser' {
         +in_app?: boolean,
         +vars?: { [key: string]: mixed, ... },
     |};
-    declare type Stacktrace = {|
+    declare export type Stacktrace = {|
         +frames?: $ReadOnlyArray<StackFrame>,
         +frames_omitted?: [number, number],
     |};
-    declare type Exception = {|
+    declare export type Exception = {|
         +type?: string,
         +value?: string,
         +mechanism?: Mechanism,
@@ -226,7 +226,7 @@ declare module '@sentry/browser' {
         +thread_id?: number,
         +stacktrace?: Stacktrace,
     |};
-    declare type Span = {|
+    declare export type Span = {|
         finish(useLastSpanTimestamp?: boolean): string | void,
         toTraceparent(): string,
         getTraceContext(): {| [key: string]: mixed |},
@@ -238,8 +238,8 @@ declare module '@sentry/browser' {
         isSuccess(): boolean,
     |};
 
-    declare type DsnProtocol = 'http' | 'https';
-    declare type DsnComponents = {|
+    declare export type DsnProtocol = 'http' | 'https';
+    declare export type DsnComponents = {|
         +protocol: DsnProtocol,
         +user: string,
         +pass?: string,
@@ -248,14 +248,14 @@ declare module '@sentry/browser' {
         +path?: string,
         +projectId: string,
     |};
-    declare type DsnLike = string | DsnComponents;
-    declare type Dsn = { toString(withPassword: boolean): string, ...DsnComponents, ... };
+    declare export type DsnLike = string | DsnComponents;
+    declare export type Dsn = { toString(withPassword: boolean): string, ...DsnComponents, ... };
     declare class Transport {
         constructor(options: TransportOptions): Transport;
         sendEvent(event: Event): Promise<SentryResponse>;
         close(timeout?: number): Promise<boolean>;
     }
-    declare type TransportOptions = {|
+    declare export type TransportOptions = {|
         +dsn: DsnLike,
         +headers?: { [key: string]: string, ... },
         +httpProxy?: string,
@@ -263,7 +263,7 @@ declare module '@sentry/browser' {
         +caCerts?: string,
     |};
 
-    declare type SentryRequest = {|
+    declare export type SentryRequest = {|
         +url?: string,
         +method?: string,
         +data?: mixed,
@@ -272,13 +272,13 @@ declare module '@sentry/browser' {
         +env?: { [key: string]: string, ... },
         +headers?: { [key: string]: string, ... },
     |};
-    declare type SentryResponse = {|
+    declare export type SentryResponse = {|
         +status: Status,
         +event?: SentryEvent,
         +reason?: string,
     |};
-    declare type EventType = 'transaction';
-    declare type SentryEvent = {|
+    declare export type EventType = 'transaction';
+    declare export type SentryEvent = {|
         +event_id?: string,
         +message?: string,
         +timestamp?: number,
@@ -305,34 +305,34 @@ declare module '@sentry/browser' {
         +type?: EventType,
         +spans?: $ReadOnlyArray<Span>,
     |};
-    declare type EventHint = {|
+    declare export type EventHint = {|
         +event_id?: string,
         +syntheticException?: Error | null,
         +originalException?: Error | string | null,
         +data?: mixed,
     |};
-    declare type EventProcessor = (
+    declare export type EventProcessor = (
         event: SentryEvent,
         hint?: EventHint,
     ) => Promise<SentryEvent | null> | SentryEvent | null;
-    declare type Package = {|
+    declare export type Package = {|
         +name: string,
         +version: string,
     |};
-    declare type SdkInfo = {|
+    declare export type SdkInfo = {|
         +name: string,
         +version: string,
         +integrations?: $ReadOnlyArray<string>,
         +packages?: $ReadOnlyArray<Package>,
     |};
-    declare type Carrier = {|
+    declare export type Carrier = {|
         +__SENTRY__?: {|
             hub?: Hub,
             extensions?: { [key: string]: mixed, ... },
         |},
     |};
 
-    declare type Options = {|
+    declare export type Options = {|
         +debug?: boolean,
         +enabled?: boolean,
         +dsn?: string,
@@ -364,11 +364,11 @@ declare module '@sentry/browser' {
         // and classes are nominally typed, using `any` seems like our only
         // option here.
         +integrations?: any,
-        +beforeBreadcrumb?: (breadcrumb: Breadcrumb, hint?: BreadcrumbHint) => Breadcrumb | void,
+        +beforeBreadcrumb?: (breadcrumb: Breadcrumb, hint?: BreadcrumbHint) => Breadcrumb | null,
         +_experiments?: { [key: string]: mixed, ... },
     |};
 
-    declare type ReportDialogOptions = {|
+    declare export type ReportDialogOptions = {|
         [key: string]: mixed,
         +eventId?: string,
         +dsn?: DsnLike,
