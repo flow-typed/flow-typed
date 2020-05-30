@@ -321,9 +321,12 @@ async function installNpmLibDefs({
       } else {
         libDefsToInstall.set(name, libDef);
 
+        // Fix for Semver updates not able to handle versions 'v0.x.x'
+        const libDefVersion =
+          libDef.version === 'v0.x.x' ? 'v0.0.0' : libDef.version;
         // If the libdef is outdated (but still compatible), note this so we can
         // warn the user
-        const libDefLower = getRangeLowerBound(libDef.version);
+        const libDefLower = getRangeLowerBound(libDefVersion);
         const depLower = getRangeLowerBound(ver);
         if (semver.lt(libDefLower, depLower)) {
           outdatedLibDefsToInstall.push([libDef, {name, ver}]);
