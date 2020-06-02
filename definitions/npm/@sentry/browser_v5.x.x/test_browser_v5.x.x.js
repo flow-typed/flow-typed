@@ -1,4 +1,8 @@
 import * as Sentry from '@sentry/browser';
+import type {
+  Breadcrumb, BreadcrumbHint,
+  SentryEvent, EventHint,
+} from '@sentry/browser';
 import { it, describe } from 'flow-typed-test';
 
 describe('@sentry/browser', () => {
@@ -11,6 +15,57 @@ describe('@sentry/browser', () => {
       Sentry.init({ dsn: 123 });
       // $ExpectError
       Sentry.init({ dsn: null });
+    });
+
+    it('Sentry.init callbacks', () => {
+      // You can either return the object (can modify it on the way)
+      // or return null to suppress the event
+      Sentry.init({
+        beforeBreadcrumb(breadcrumb: Breadcrumb, hint?: BreadcrumbHint) {
+          return null;
+        },
+      });
+      Sentry.init({
+        beforeBreadcrumb(breadcrumb: Breadcrumb, hint?: BreadcrumbHint) {
+          return breadcrumb;
+        },
+      });
+
+      Sentry.init({
+        beforeSend(event: SentryEvent, hint?: EventHint) {
+          return null;
+        },
+      });
+      Sentry.init({
+        beforeSend(event: SentryEvent, hint?: EventHint) {
+          return event;
+        },
+      });
+      Sentry.init({
+        async beforeSend(event: SentryEvent, hint?: EventHint) {
+          return event;
+        },
+      });
+
+
+      Sentry.init({
+        // $ExpectError must return null not false
+        beforeBreadcrumb(breadcrumb: Breadcrumb, hint?: BreadcrumbHint) {
+          return false;
+        },
+      });
+      Sentry.init({
+        // $ExpectError cannot be Promise
+        async beforeBreadcrumb(breadcrumb: Breadcrumb, hint?: BreadcrumbHint) {
+          return breadcrumb;
+        },
+      });
+      Sentry.init({
+        // $ExpectError must return null not false
+        beforeSend(event: SentryEvent, hint?: EventHint) {
+          return false;
+        },
+      });
     });
 
     it('Sentry.captureException', () => {
@@ -48,9 +103,13 @@ describe('@sentry/browser', () => {
     it('Sentry.setUser', () => {
       Sentry.setUser({ email: 'john.doe@example.com' });
       Sentry.setUser({ email: 'john.doe@example.com', arbitrary: 'value' });
+      Sentry.setUser({ id: 'abcd-efgh' });
+      Sentry.setUser({ id: 3 });
 
       // $ExpectError
       Sentry.setUser();
+      // $ExpectError
+      Sentry.setUser({ id: new Date() });
     });
 
     it('Sentry.withScope', () => {
