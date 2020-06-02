@@ -71,7 +71,6 @@ describe('Parse, moment()', () => {
   moment([2015, 0]); // This would equal 2015-01-01
   // $ExpectError only numbers are valid for Array API
   moment(["2015"]);
-  // $ExpectError needs a format string before the strictness flag
   moment('2015-01-01', true);
 
   // $ExpectError only string values can have formatting parameters
@@ -130,7 +129,6 @@ describe('Parse, moment.utc()', () => {
   moment.utc("05-06-1995", ["MM-DD-YYYY", "DD-MM-YYYY"], 'fr', true);
   // $ExpectError
   moment.utc("05-06-1995", ["MM-DD-YYYY", "DD-MM-YYYY"], 'fr', 1);
-  // $ExpectError needs a format string before the strictness flag
   moment.utc('2015-01-01', true);
 
   moment.utc({ hour: 15, minute: 10 });
@@ -252,15 +250,14 @@ moment().calendar(null, {
 moment().calendar(null, {
   sameDay: () => "HH:mm"
 });
-// $ExpectError
 moment().calendar(null, {
+  // $ExpectError
   sameDay: (a: number) => "HH:mm"
 });
-// $ExpectError
 moment().calendar(null, {
+  // $ExpectError
   sameDay: 2
 });
-// $ExpectError
 moment().calendar(null, {
   // $ExpectError (>=0.56.0)
   sameElse: () => {}
