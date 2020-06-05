@@ -933,7 +933,7 @@ type JestObjectType = {
 type JestSpyType = { calls: JestCallsType, ... };
 
 type JestDoneFn = {|
-  (): void,
+  (error?: Error): void,
   fail: (error: Error) => void,
 |};
 

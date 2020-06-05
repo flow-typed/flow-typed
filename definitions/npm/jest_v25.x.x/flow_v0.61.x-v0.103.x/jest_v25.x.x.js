@@ -964,7 +964,7 @@ type JestSpyType = {
 };
 
 type JestDoneFn = {|
-  (): void,
+  (error?: Error): void,
   fail: (error: Error) => void,
 |};
 

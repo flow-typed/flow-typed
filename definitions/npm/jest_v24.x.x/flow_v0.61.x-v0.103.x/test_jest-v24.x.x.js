@@ -211,6 +211,11 @@ test.skip('name', done => {
 });
 test('name', done => {
   done.fail(new Error('fail'));
+  // $ExpectError
+  done.fail();
+  done(new Error('fail'));
+  // $ExpectError
+  done("foo");
 });
 
 test.todo('');

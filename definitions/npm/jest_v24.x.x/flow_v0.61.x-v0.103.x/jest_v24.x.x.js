@@ -590,7 +590,6 @@ type SnapshotDiffType = {
     |},
     testName?: string
   ): void,
-  ...
 }
 
 interface JestExpectType {
@@ -965,7 +964,7 @@ type JestSpyType = {
 };
 
 type JestDoneFn = {|
-  (): void,
+  (error?: Error): void,
   fail: (error: Error) => void,
 |};
 
