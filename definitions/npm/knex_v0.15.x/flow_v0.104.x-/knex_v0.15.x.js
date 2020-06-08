@@ -369,7 +369,10 @@ declare class Knex$QueryBuilder<R> mixins Promise<R> {
   whereNotNull(column: Knex$Identifier): this;
   whereNull(column: Knex$Identifier): this;
   whereRaw(sql: string, bindings?: Knex$RawBindings): this;
-  with(alias: string, w: string | Knex$QueryBuilderFn<R> | Knex$Raw): this;
+  with(
+    alias: string,
+    w: string | Knex$QueryBuilderFn<R> | Knex$QueryBuilder<R> | Knex$Raw
+  ): this;
   withSchema(schema: string): this;
 }
 
