@@ -54,6 +54,7 @@ declare type Knex$JoinConditionMap = {
 
 // qb.select({ avg: knex.raw('AVG(table1.size)') }) => SELECT AVG(table1.size) as "avg"
 declare type Knex$AliasMap = { [alias: string]: Knex$Identifier, ... };
+declare type Knex$SelectIdentifier = Knex$Identifier | Knex$AliasMap;
 
 // Most SQL operators will work here including Array operators and JSON
 // operators but these are very database dependent
@@ -325,10 +326,8 @@ declare class Knex$QueryBuilder<R> mixins Promise<R> {
     conditionMap: Knex$JoinConditionMap
   ): this;
   select(): this;
-  select(...statements: Knex$Identifier[]): this;
-  select(statements: Knex$Identifier[]): this;
-  select(...statements: Knex$AliasMap[]): this;
-  select(statements: Knex$AliasMap[]): this;
+  select(...statements: Knex$SelectIdentifier[]): this;
+  select(statements: Knex$SelectIdentifier[]): this;
   stream(): Knex$Stream;
   stream(callback: (stream: Knex$Stream) => any): this;
   sum(column: Knex$Identifier): this;
