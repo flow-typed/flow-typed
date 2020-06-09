@@ -50,6 +50,9 @@ declare type Knex$JoinConditionMap = {
   ...,
 };
 
+// qb.select({ avg: knex.raw('AVG(table1.size)') }) => SELECT AVG(table1.size) as "avg"
+declare type Knex$AliasMap = { [alias: string]: Knex$Identifier, ... };
+
 // Most SQL operators will work here including Array operators and JSON
 // operators but these are very database dependent
 declare type Knex$ComparisonOperator =
@@ -110,7 +113,7 @@ declare class Knex$QueryBuilder<R> mixins Promise<R> {
   andWhereRaw(sql: string, bindings?: Knex$RawBindings): this;
   as(name: string): this;
   avg(column: Knex$Identifier): this;
-  avg(object: Knex$Object): this;
+  avg(object: Knex$AliasMap): this;
   avg(...columns: Knex$Identifier[]): this;
   avgDistinct(column: Knex$Identifier): this;
   clearCounters(): this;
@@ -247,11 +250,11 @@ declare class Knex$QueryBuilder<R> mixins Promise<R> {
   limit(limit: ?number): this;
   max(column: Knex$Identifier): this;
   max(column: Knex$Identifier, as: Knex$As): this;
-  max(object: Knex$Object): this;
+  max(object: Knex$AliasMap): this;
   max(...columns: Knex$Identifier[]): this;
   min(column: Knex$Identifier): this;
   min(column: Knex$Identifier, as: Knex$As): this;
-  min(object: Knex$Object): this;
+  min(object: Knex$AliasMap): this;
   min(...columns: Knex$Identifier[]): this;
   modify(
     fn: (queryBuilder: Knex$QueryBuilder<R>, ...args: [any]) => this,
@@ -342,12 +345,15 @@ declare class Knex$QueryBuilder<R> mixins Promise<R> {
     table: Knex$Identifier,
     conditionMap: Knex$JoinConditionMap
   ): this;
-  select(...key: Knex$Identifier[]): this;
-  select(key?: Knex$Identifier[]): this;
+  select(): this;
+  select(...statements: Knex$Identifier[]): this;
+  select(statements: Knex$Identifier[]): this;
+  select(...statements: Knex$AliasMap[]): this;
+  select(statements: Knex$AliasMap[]): this;
   stream(): Knex$Stream;
   stream(callback: (stream: Knex$Stream) => any): this;
   sum(column: Knex$Identifier): this;
-  sum(object: Knex$Object): this;
+  sum(object: Knex$AliasMap): this;
   sum(...columns: Knex$Identifier[]): this;
   sumDistinct(column: Knex$Identifier): this;
   table(table: Knex$Identifier, options?: Knex$Object): this;

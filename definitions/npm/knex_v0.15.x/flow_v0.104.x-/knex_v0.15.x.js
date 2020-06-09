@@ -52,6 +52,9 @@ declare type Knex$JoinConditionMap = {
   ...,
 };
 
+// qb.select({ avg: knex.raw('AVG(table1.size)') }) => SELECT AVG(table1.size) as "avg"
+declare type Knex$AliasMap = { [alias: string]: Knex$Identifier, ... };
+
 // Most SQL operators will work here including Array operators and JSON
 // operators but these are very database dependent
 declare type Knex$ComparisonOperator =
@@ -102,7 +105,7 @@ declare class Knex$QueryBuilder<R> mixins Promise<R> {
   andWhereRaw(sql: string, bindings?: Knex$RawBindings): this;
   as(name: string): this;
   avg(column: Knex$Identifier): this;
-  avg(object: Knex$Object): this;
+  avg(object: Knex$AliasMap): this;
   avgDistinct(column: Knex$Identifier): this;
   clearSelect(): this;
   clearWhere(): this;
@@ -233,9 +236,9 @@ declare class Knex$QueryBuilder<R> mixins Promise<R> {
   ): this;
   limit(limit: ?number): this;
   max(column: Knex$Identifier): this;
-  max(object: Knex$Object): this;
+  max(object: Knex$AliasMap): this;
   min(column: Knex$Identifier): this;
-  min(object: Knex$Object): this;
+  min(object: Knex$AliasMap): this;
   offset(offset: ?number): this;
   on(builder: Knex$QueryBuilderFn<R>): this;
   on(
@@ -321,8 +324,11 @@ declare class Knex$QueryBuilder<R> mixins Promise<R> {
     table: Knex$Identifier,
     conditionMap: Knex$JoinConditionMap
   ): this;
-  select(...key: Knex$Identifier[]): this;
-  select(key?: Knex$Identifier[]): this;
+  select(): this;
+  select(...statements: Knex$Identifier[]): this;
+  select(statements: Knex$Identifier[]): this;
+  select(...statements: Knex$AliasMap[]): this;
+  select(statements: Knex$AliasMap[]): this;
   stream(): Knex$Stream;
   stream(callback: (stream: Knex$Stream) => any): this;
   sum(column: Knex$Identifier): this;
