@@ -448,11 +448,21 @@ export async function createStub(
     }
 
     if (typescriptTypingsPath == null) {
-      const response = await getDefinitelyTypedPackage(
-        packageName,
-        explicitVersion,
-      );
-      typescriptTypingsContent = response.body;
+      try {
+        const response = await getDefinitelyTypedPackage(
+          packageName,
+          explicitVersion,
+        );
+        typescriptTypingsContent = response.body;
+      } catch (e) {
+        console.log(
+          colors.red("❌\t%s%s': %s"),
+          packageName,
+          version ? '@' + version : '',
+          e.message,
+        );
+        return false;
+      }
     }
   }
 
