@@ -59,8 +59,14 @@ declare module "react-color" {
 
   declare export type ChromePickerProps = {|
     ...ColorPickerProps,
+    className?: string,
+    defaultView?: "hex" | "hsl" | "rgb",
     disableAlpha?: boolean,
-    renderers?: Object
+    renderers?: Object,
+    width?: number | string,
+    styles?: {
+      ...
+    },
   |};
 
   declare export type CirclePickerProps = {|
