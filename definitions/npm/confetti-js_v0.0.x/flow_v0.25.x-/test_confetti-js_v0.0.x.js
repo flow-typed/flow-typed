@@ -20,4 +20,4 @@ const badConfettiSettings = {
 };
 
 // $ExpectError
-new ConfettiGenerator(confettiSettings);
+new ConfettiGenerator(badConfettiSettings);

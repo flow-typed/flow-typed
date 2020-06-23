@@ -1,12 +1,12 @@
 declare module 'confetti-js' {
-  declare type SvgProp = {
+  declare type SvgProp = {|
     type: string,
     src: string,
     size?: string | number,
     weight?: string | number,
-  };
+  |};
 
-  declare type settings = {
+  declare type settings = {|
     target: string,
     max?: number,
     size?: number,
@@ -19,12 +19,12 @@ declare module 'confetti-js' {
     width?: number,
     height?: number,
     rotate?: boolean,
-  };
+  |};
 
-  declare type Confetti = {
+  declare type Confetti = {|
     render: () => ((callback: (timestamp: number) => void) => number);
     clear: () => void;
-  }
+  |}
 
   declare module.exports: (settings) => Confetti;
 }
