@@ -13,6 +13,8 @@ promise.reflect().then(inspection => {
 // $ExpectError
 new Bluebird();
 
+const emptyPromise: Promise<void> = Promise.resolve();
+
 Bluebird.all([
   new Bluebird(() => {}),
 ]);
@@ -47,6 +49,11 @@ Bluebird.resolve(response).then(function(responseBody: string) {
 
 Bluebird.all([1, Bluebird.resolve(1), Promise.resolve(1)]).then(function(r: Array<number>) { });
 Bluebird.all(['hello', Bluebird.resolve('world'), Promise.resolve('!')]).then(function(r: Array<string>) { });
+Bluebird.all(['hello', Bluebird.resolve('world'), Promise.resolve('!')]).then(function(r: [string, string, string]) { });
+
+// $ExpectError Wrong tuple type
+Bluebird.all(['hello', Bluebird.resolve('world'), Promise.resolve('!')]).then(function(r: [string, string, number]) { });
+Bluebird.all(['hello', Bluebird.resolve(3), Promise.resolve([1, 2, 3])]).then(function(r: [string, number, Array<number>]) { });
 
 Bluebird.join(1, Bluebird.resolve(2), function (a, b) { return a + b }).then(function (s) { return s + 1 })
 Bluebird.join(
