@@ -14,7 +14,7 @@ describe('newrelic', () => {
       sumOfSquares: 0
     })
 
-    // $ExpectError
+    // $FlowExpectedError
     newrelic.recordMetric('test', '')
   })
 
@@ -22,7 +22,7 @@ describe('newrelic', () => {
     newrelic.incrementMetric('test', 1)
     newrelic.incrementMetric('test')
 
-    // $ExpectError
+    // $FlowExpectedError
     newrelic.incrementMetric('test', '')
   })
 
@@ -30,7 +30,7 @@ describe('newrelic', () => {
     newrelic.addCustomAttribute('test', 10)
     newrelic.addCustomAttribute('test', true)
     newrelic.addCustomAttribute('test', 'value')
-    // $ExpectError
+    // $FlowExpectedError
     newrelic.addCustomAttribute('test', [])
 
     newrelic.addCustomAttributes({
@@ -39,7 +39,7 @@ describe('newrelic', () => {
       test3: 'value'
     })
 
-    // $ExpectError
+    // $FlowExpectedError
     newrelic.addCustomAttributes({
       test1: 10,
       test2: true,

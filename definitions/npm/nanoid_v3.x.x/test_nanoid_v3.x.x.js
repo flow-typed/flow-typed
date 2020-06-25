@@ -5,14 +5,14 @@ describe('nanoid', () => {
   it('returns a string', () => {
     const id1: string = nanoid();
 
-    // $ExpectError
+    // $FlowExpectedError
     const id2: number = nanoid();
   });
 
   it('size should be a number', () => {
     nanoid(10);
 
-    // $ExpectError
+    // $FlowExpectedError
     nanoid("10");
   });
 
@@ -21,7 +21,7 @@ describe('nanoid', () => {
 
     const id1: string = customId();
 
-    // $ExpectError
+    // $FlowExpectedError
     const id2: number = customId();
   });
 
@@ -30,7 +30,7 @@ describe('nanoid', () => {
 
     const id1: string = customRandomId();
 
-    // $ExpectError
+    // $FlowExpectedError
     const id2: number = customRandomId();
   });
 });

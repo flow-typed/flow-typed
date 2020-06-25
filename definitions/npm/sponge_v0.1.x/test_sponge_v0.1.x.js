@@ -9,11 +9,11 @@ let buff = Buffer.from("");
 describe("The `sponge` function", () => {
   it("should accept a string for its `file` parameter", () => {
     sponge(file);
-    // $ExpectError
+    // $FlowExpectedError
     sponge(buff);
-    // $ExpectError
+    // $FlowExpectedError
     sponge({});
-    // $ExpectError
+    // $FlowExpectedError
     sponge(file, () => {});
   });
 

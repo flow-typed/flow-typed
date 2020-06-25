@@ -11,7 +11,7 @@ test('some sanity test', t => {
 
   t.equal('hello', 'goodbye', 'some message');
 
-  // $ExpectError
+  // $FlowExpectedError
   t.plan();
   t.plan(5);
 });

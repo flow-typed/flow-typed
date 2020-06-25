@@ -211,8 +211,8 @@ localforage.dropInstance({
   console.log('Dropped otherName database');
 });
 
-// $ExpectError
+// $FlowExpectedError
 localforage.getItem();
 
-// $ExpectError
+// $FlowExpectedError
 localforage.setItem();

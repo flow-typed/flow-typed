@@ -1,6 +1,6 @@
 import md5 from "nano-md5";
 
-// $ExpectError: accept only strings
+// $FlowExpectedError: accept only strings
 md5(6);
 
 const encoded: string = md5('some-string');

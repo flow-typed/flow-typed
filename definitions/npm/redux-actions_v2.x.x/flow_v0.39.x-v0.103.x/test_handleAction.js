@@ -18,7 +18,7 @@ function test_handleAction() {
   const reducer = handleAction(INCREMENT, (state, action: ActionType<typeof increment>) => {
     assert(action.payload, (x: number) => {})
 
-    // $ExpectError
+    // $FlowExpectedError
     assert(action.payload, (x: string) => {})
   }, initState)
 }
@@ -27,7 +27,7 @@ function test_handleAction_thunk() {
   const reducer = handleAction(INCREMENT, (state, action: ActionType<typeof incrementThunk>) => {
     assert(action.payload, (x: number) => {})
 
-    // $ExpectError
+    // $FlowExpectedError
     assert(action.payload, (x: string) => {})
   }, initState)
 }
@@ -38,7 +38,7 @@ function test_handleAction_typeMismatch() {
   // scenario. Unfortunately Flow does not detect the mismatch when the action
   // type is given using the `ActionType` helper.
   const reducer: Reducer<*, { type: 'INCREMENT', payload: number }> =
-    // $ExpectError
+    // $FlowExpectedError
     handleAction(NOT_INCREMENT, () => ({}), {})
 }
 

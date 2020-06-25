@@ -4,7 +4,7 @@ import ignore from 'ignore';
 const ign = ignore();
 ignore({});
 ignore({ ignorecase: false });
-// $ExpectError
+// $FlowExpectedError
 ignore({ foo: true });
 
 ign.add('.abc/*');
@@ -15,22 +15,22 @@ ign.add(ignore());
 ign.add([ignore(), ignore()]);
 ign.add(ignore()).add(ignore());
 
-// $ExpectError
+// $FlowExpectedError
 ign.add(666);
-// $ExpectError
+// $FlowExpectedError
 ign.add([666]);
 
 (ign.filter(['.abc/a.js', '.abc/d/e.js']): Array<string>);
 (ign.filter('.abc/a.js'): Array<string>);
-// $ExpectError
+// $FlowExpectedError
 ign.filter(ign);
 
 (ign.createFilter()('.abc/d/e.js'): boolean);
-// $ExpectError
+// $FlowExpectedError
 ign.createFilter()(['foo']);
 
 (ign.ignores('.abc/a.js'): boolean);
-// $ExpectError
+// $FlowExpectedError
 ign.ignores(['foo']);
 
 const paths: string[] = ['.abc/*', '!.abc/d/']

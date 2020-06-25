@@ -6,7 +6,7 @@ import cssbeautify from 'cssbeautify';
 describe('The `cssbeautify` function', () => {
   it('should accept strings as first parameter', () => {
     cssbeautify('');
-    // $ExpectError
+    // $FlowExpectedError
     cssbeautify(123);
   });
 
@@ -15,15 +15,15 @@ describe('The `cssbeautify` function', () => {
     cssbeautify('', { indent: '' });
     cssbeautify('', { openbrace: 'end-of-line' });
     cssbeautify('', { autosemicolon: false });
-    // $ExpectError
+    // $FlowExpectedError
     cssbeautify('', []);
-    // $ExpectError
+    // $FlowExpectedError
     cssbeautify('', { test: '' });
   });
 
   it('should return a string', () => {
     (cssbeautify(''): string);
-    // $ExpectError
+    // $FlowExpectedError
     (cssbeautify(''): number);
   });
 });

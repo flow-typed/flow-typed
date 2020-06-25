@@ -34,7 +34,7 @@ function differentStatesAreNotOK() {
     b: number
   |};
 
-  //$ExpectError property `b` is missing in `State` but exists in `OtherState`
+  //$FlowExpectedError property `b` is missing in `State` but exists in `OtherState`
   const Connected = connect<Props, {||}, _,_,OtherState,empty>(mapStateToProps)(Com);
   e.push(Connected);
   <Connected />;

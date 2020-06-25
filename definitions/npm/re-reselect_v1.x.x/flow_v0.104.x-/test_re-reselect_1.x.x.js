@@ -18,7 +18,7 @@ it('Should pass for 2 selectors given as arguments', () => {
   )(() => 1)
 
   test1Selector({ x: 100, y: 200 });
-  // $ExpectError invalid state
+  // $FlowExpectedError invalid state
   test1Selector({ x: 100 });
 });
 
@@ -31,7 +31,7 @@ it('Should pass for 2 selectors given as array', () => {
   )(() => 2)
 
   test2Selector({ x: 100, y: 200 });
-  // $ExpectError invalid state
+  // $FlowExpectedError invalid state
   test2Selector({ x: 100 });
 });
 
@@ -47,16 +47,16 @@ it('Should pass when selectors have additional Props argument', () => {
     (x, y) => {
       return x + y;
     }
-  // $ExpectError property `x` is missing in object in `test3Selector({ x: 100, y: 200 }, { y: 10 })`
+  // $FlowExpectedError property `x` is missing in object in `test3Selector({ x: 100, y: 200 }, { y: 10 })`
   )((state, props) => props.x)
 
   test3Selector(
     { x: 100, y: 200 },
     { x: 10 }
   );
-  // $ExpectError invalid state
+  // $FlowExpectedError invalid state
   test3Selector({ x: 100 }, { x: 10 });
-  // $ExpectError invalid props
+  // $FlowExpectedError invalid props
   test3Selector({ x: 100, y: 200 }, { y: 10 });
 });
 
@@ -71,7 +71,7 @@ it('Should work when using another selector as functions', () => {
   )(() => 2);
 
   combinedSelector1({ x: 100, y: 200 })
-  // $ExpectError invalid state
+  // $FlowExpectedError invalid state
   combinedSelector1({ x: 100 })
 });
 
@@ -86,14 +86,14 @@ it('Should work when using more complex selectors as functions', () => {
   )(() => 2);
 
   const result: number = selector({ x: 42, y: 42 });
-  // $ExpectError invalid state
+  // $FlowExpectedError invalid state
   selector({ x: 42 });
 });
 
 it('Should validate parameters based on the return values of nested', () => {
   // selectors.
   createCachedSelector(
-    // $ExpectError x is a number, not a string.
+    // $FlowExpectedError x is a number, not a string.
     (state: State) => state.x,
     (state: State) => state.y,
     (x: string, y: number) => "foo"

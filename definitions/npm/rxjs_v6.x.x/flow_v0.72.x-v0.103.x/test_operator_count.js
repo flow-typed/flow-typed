@@ -14,13 +14,13 @@ it("should accept empty parameter", () => {
 });
 
 it("should infer source observable type in parameter", () => {
-  // $ExpectError
+  // $FlowExpectedError
   const o = of(1, 2, 3).pipe(
     count((x, i, source: Observable<string>) => x === 3)
   );
 });
 
 it("should expect function parameter", () => {
-  // $ExpectError
+  // $FlowExpectedError
   const o = of(1, 2, 3).pipe(count(9));
 });

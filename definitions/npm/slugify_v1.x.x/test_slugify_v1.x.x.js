@@ -4,7 +4,7 @@ import slugify from "slugify";
 const slugifiedText: string = slugify("Hello world");
 slugify("Hello world", "-");
 
-// $ExpectError
+// $FlowExpectedError
 slugify(0);
 
 slugify("Hello world", {});
@@ -12,15 +12,15 @@ slugify("Hello world", { replacement: "-" });
 slugify("Hello world", { remove: null });
 slugify("Hello world", { lower: true });
 
-// $ExpectError
+// $FlowExpectedError
 slugify("Hello world", { replacement: 0 });
-// $ExpectError
+// $FlowExpectedError
 slugify("Hello world", { remove: "hello" });
-// $ExpectError
+// $FlowExpectedError
 slugify("Hello world", { lower: "hello" });
-// $ExpectError
+// $FlowExpectedError
 slugify("Hello world", 0);
 
 slugify.extend({ key: "value" });
-// $ExpectError
+// $FlowExpectedError
 slugify.extend({ key: 0 });

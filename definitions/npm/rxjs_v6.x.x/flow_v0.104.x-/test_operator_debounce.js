@@ -13,8 +13,8 @@ it("should infer correctly with a Promise", () => {
 });
 
 it("should enforce types", () => {
-  // $ExpectError
+  // $FlowExpectedError
   const o = of(1, 2, 3).pipe(debounce());
-  // $ExpectError
+  // $FlowExpectedError
   const p = of(1, 2, 3).pipe(debounce(() => {}));
 });

@@ -12,9 +12,9 @@ describe('redux-handlers', () => {
       const { registerHandler, createReducer } = createHandlers()
       registerHandler('FOO', () => ({}))
       registerHandler('FOO', (a: string, b: number, state: {}) => ({}))
-      // $ExpectError
+      // $FlowExpectedError
       registerHandler(123, () => ({}))
-      // $ExpectError
+      // $FlowExpectedError
       registerHandler(123, 'argh')
     })
 
@@ -22,7 +22,7 @@ describe('redux-handlers', () => {
       const { createReducer } = createHandlers()
       createReducer('foo')
       createReducer({})
-      // $ExpectError
+      // $FlowExpectedError
       createReducer('foo', 'bar')
     })
   })

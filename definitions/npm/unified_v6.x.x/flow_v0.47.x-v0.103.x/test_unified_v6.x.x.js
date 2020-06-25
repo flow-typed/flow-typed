@@ -17,8 +17,8 @@ var string_node = unified().stringify(node);
 unified().process('Document').then((output) => {})
 unified().process('Document', (output) => {})
 
-// $ExpectError
+// $FlowExpectedError
 unified().process('Document', 'done')
 
-// $ExpectError
+// $FlowExpectedError
 unified().data([],[])

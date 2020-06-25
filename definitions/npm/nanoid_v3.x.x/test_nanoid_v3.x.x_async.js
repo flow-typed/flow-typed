@@ -5,14 +5,14 @@ describe('nanoid/async', () => {
   it('returns a string', async () => {
     const id1: string = await nanoid();
 
-    // $ExpectError
+    // $FlowExpectedError
     const id2: number = await nanoid();
   });
 
   it('size should be a number', async () => {
     await nanoid(10);
 
-    // $ExpectError
+    // $FlowExpectedError
     await nanoid("10");
   });
 
@@ -21,7 +21,7 @@ describe('nanoid/async', () => {
 
     const id1: string = await customId();
 
-    // $ExpectError
+    // $FlowExpectedError
     const id2: number = await customId();
   });
 });

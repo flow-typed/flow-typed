@@ -14,14 +14,14 @@ const redisClient = new Redis({
 });
 
 new Redis({
-  // $ExpectError
+  // $FlowExpectedError
   port: '6379',        // Redis port (should be number)
   host: '127.0.0.1',   // Redis host
 });
 
 const promise: Promise<string> = redisClient.get('foo');
 
-// $ExpectError number. This type is incompatible with string
+// $FlowExpectedError number. This type is incompatible with string
 const promise2: Promise<string> = redisClient.get(1234);
 
 const cluster = new Redis.Cluster([
@@ -38,5 +38,5 @@ const cluster = new Redis.Cluster([
 })
 
 new Redis.Cluster([], {scaleReads: 'slave'});
-// $ExpectError
+// $FlowExpectedError
 new Redis.Cluster([], {scaleReads: 'slaves'});

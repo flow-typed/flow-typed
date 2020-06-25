@@ -16,10 +16,10 @@ describe('element-resize-detector', () => {
     });
 
     it("should fail without required arguments", () => {
-      // $ExpectError
+      // $FlowExpectedError
       erd.listenTo(element);
 
-      // $ExpectError
+      // $FlowExpectedError
       erd.listenTo();
     });
   });
@@ -30,10 +30,10 @@ describe('element-resize-detector', () => {
     });
 
     it("should fail without required arguments", () => {
-      // $ExpectError
+      // $FlowExpectedError
       erd.removeListener(element);
 
-      // $ExpectError
+      // $FlowExpectedError
       erd.removeListener();
     });
   });
@@ -44,7 +44,7 @@ describe('element-resize-detector', () => {
     });
 
     it("should fail without required arguments", () => {
-      // $ExpectError
+      // $FlowExpectedError
       erd.removeAllListeners();
     });
   });
@@ -55,7 +55,7 @@ describe('element-resize-detector', () => {
     });
 
     it("should fail without required arguments", () => {
-      // $ExpectError
+      // $FlowExpectedError
       erd.uninstall();
     });
   });

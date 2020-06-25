@@ -4,14 +4,14 @@ const filesizeParser = require("filesize-parser");
 
 (filesizeParser("100Kb", { base: 2 }): number);
 
-// $ExpectError
+// $FlowExpectedError
 filesizeParser("100Kb", 123);
 
-// $ExpectError
+// $FlowExpectedError
 filesizeParser(123);
 
-// $ExpectError
+// $FlowExpectedError
 filesizeParser(true);
 
-// $ExpectError
+// $FlowExpectedError
 filesizeParser("100Kb", { base: true });

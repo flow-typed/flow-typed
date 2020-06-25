@@ -9,7 +9,7 @@ he.encode('foo', {
   strict: true,
   allowUnsafeSymbols: true,
 });
-// $ExpectError
+// $FlowExpectedError
 he.encode();
 
 he.decode('foo');
@@ -18,11 +18,11 @@ he.decode('foo', {
   strict: true,
   isAttributeValue: true,
 });
-// $ExpectError
+// $FlowExpectedError
 he.decode(null);
 
 he.escape('foo');
-// $ExpectError
+// $FlowExpectedError
 he.escape();
 
 he.unescape('foo');
@@ -34,5 +34,5 @@ he.unescape('foo', {
   strict: true,
   allowUnsafeSymbols: true,
 });
-// $ExpectError
+// $FlowExpectedError
 he.unescape()

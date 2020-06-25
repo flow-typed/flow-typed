@@ -16,23 +16,23 @@ describe("getContext(prop)", () => {
     });
 
     it("returned object must be read only", () => {
-      // $ExpectError: read-only  property
+      // $FlowExpectedError: read-only  property
       c.type = "anyType";
-      // $ExpectError: read-only  property
+      // $FlowExpectedError: read-only  property
       c.payload = {};
     });
 
     it("returned object must be exact", () => {
-      // $ExpectError: exact type
+      // $FlowExpectedError: exact type
       c.abc = 69;
     });
   });
 
   it("must ruses an error when first argument isn't string", () => {
-    // $ExpectError argument required
+    // $FlowExpectedError argument required
     getContext();
 
-    // $ExpectError object literal is incompatible with string
+    // $FlowExpectedError object literal is incompatible with string
     getContext({});
   });
 });

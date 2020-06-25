@@ -18,10 +18,10 @@ import type {
 
   const d1: Vec2 = vec2.add(a, b, c);
 
-  // $ExpectError
+  // $FlowExpectedError
   const d2: Vec2 = vec2.add(a, b);
 
-  // $ExpectError
+  // $FlowExpectedError
   const d3: number = vec2.add(a, b, c);
 }
 
@@ -32,10 +32,10 @@ import type {
 
   const d1: Vec3 = vec3.add(a, b, c);
 
-  // $ExpectError
+  // $FlowExpectedError
   const d2: Vec3 = vec3.add(a, b);
 
-  // $ExpectError
+  // $FlowExpectedError
   const d3: number = vec3.add(a, b, c);
 
   vec3.forEach([a, b, c], 1, 0, 1, vec3.length);
@@ -48,7 +48,7 @@ import type {
 
   vec3.forEach([a, b, c], 1, 0, 1, a => undefined);
 
-  // $ExpectError
+  // $FlowExpectedError
   vec3.forEach([a, b, c], 1, 0, 1, (a: number) => 0, c);
 
   const f1: Array<Vec2> = vec3.forEach(
@@ -60,7 +60,7 @@ import type {
     12
   );
 
-  // $ExpectError
+  // $FlowExpectedError
   const f2: Array<number> = vec3.forEach(
     [a, b, c],
     1,
@@ -81,9 +81,9 @@ import type {
 
   const c1: Mat4 = mat4.mul(a, b, c);
 
-  // $ExpectError
+  // $FlowExpectedError
   const c1: Mat4 = mat4.mul(a, b);
 
-  // $ExpectError
+  // $FlowExpectedError
   const c1: number = mat4.mul(a, b, c);
 }

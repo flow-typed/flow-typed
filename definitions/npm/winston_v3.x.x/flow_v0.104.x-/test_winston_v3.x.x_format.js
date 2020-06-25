@@ -12,17 +12,17 @@ describe('format', () => {
     it('should colorize be a boolean', (options) => {
       const f1: Format = format.prettyPrint({ colorize: true });
       const f2: Format = format.prettyPrint({ colorize: false });
-      // $ExpectError
+      // $FlowExpectedError
       const f3: Format = format.prettyPrint({ colorize: 1 });
     });
     it('should depth be a number', (options) => {
       const f1: Format = format.prettyPrint({ depth: 0 });
       const f2: Format = format.prettyPrint({ depth: 5 });
-      // $ExpectError
+      // $FlowExpectedError
       const f3: Format = format.prettyPrint({ depth: true });
     });
     it('should not accept extra options', (options) => {
-      // $ExpectError
+      // $FlowExpectedError
       const f1: Format = format.prettyPrint({ nope: true });
       const f2: Format = format.prettyPrint({ depth: 5, colorize: true });
     });
@@ -35,11 +35,11 @@ describe('format', () => {
     it('should stack be a boolean', (options) => {
       const f1: Format = format.errors({ stack: true });
       const f2: Format = format.errors({ stack: false });
-      // $ExpectError
+      // $FlowExpectedError
       const f3: Format = format.errors({ stack: 1 });
     });
     it('should not accept extra options', (options) => {
-      // $ExpectError
+      // $FlowExpectedError
       const f1: Format = format.prettyPrint({ nope: true });
     });
   });

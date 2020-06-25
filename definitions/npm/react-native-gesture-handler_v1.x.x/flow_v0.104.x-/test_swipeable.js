@@ -29,39 +29,39 @@ it('should pass when use properly', () => {
 
 it('should raises an error when use incompatible values', () => {
   <Swipeable
-    // $ExpectError: need number
+    // $FlowExpectedError: need number
     friction={''}
-    // $ExpectError: need number
+    // $FlowExpectedError: need number
     leftThreshold={''}
-    // $ExpectError: need function
+    // $FlowExpectedError: need function
     onSwipeableClose={true}
-    // $ExpectError: need function
+    // $FlowExpectedError: need function
     onSwipeableLeftOpen={true}
-    // $ExpectError: need function
+    // $FlowExpectedError: need function
     onSwipeableLeftWillOpen={true}
-    // $ExpectError: need function
+    // $FlowExpectedError: need function
     onSwipeableOpen={true}
-    // $ExpectError: need function
+    // $FlowExpectedError: need function
     onSwipeableRightOpen={true}
-    // $ExpectError: need function
+    // $FlowExpectedError: need function
     onSwipeableRightWillOpen={true}
-    // $ExpectError: need function
+    // $FlowExpectedError: need function
     onSwipeableWillClose={true}
-    // $ExpectError: need function
+    // $FlowExpectedError: need function
     onSwipeableWillOpen={true}
-    // $ExpectError: need number
+    // $FlowExpectedError: need number
     overshootFriction={''}
-    // $ExpectError: need boolean
+    // $FlowExpectedError: need boolean
     overshootLeft={[false]}
-    // $ExpectError: need boolean
+    // $FlowExpectedError: need boolean
     overshootRight={[false]}
-    // $ExpectError: need function which return React.Node
+    // $FlowExpectedError: need function which return React.Node
     renderLeftActions={() => {}}
-    // $ExpectError: need function which return React.Node
+    // $FlowExpectedError: need function which return React.Node
     renderRightActions={() => {}}
-    // $ExpectError: need number
+    // $FlowExpectedError: need number
     rightThreshold={''}
-    // $ExpectError: need boolean
+    // $FlowExpectedError: need boolean
     useNativeAnimations={[false]}
   />;
 });

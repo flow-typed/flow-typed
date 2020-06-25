@@ -7,7 +7,7 @@ const f1 = (a: number): number => 1;
 describe("compose()", () => {
   describe('call "compose" with different number of arguments', () => {
     it('rises an error when more then 10 arguments', () => {
-      // $ExpectError - compose can't take more than 10 arguments
+      // $FlowExpectedError - compose can't take more than 10 arguments
       compose(f1, f1, f1, f1, f1, f1, f1, f1, f1, f1, f1)(1);
     });
 
@@ -24,7 +24,7 @@ describe("compose()", () => {
     });
 
     it('raises and error when no argument is provided', () => {
-      // $ExpectError - compose needs at least one argument
+      // $FlowExpectedError - compose needs at least one argument
       compose()(1);
     });
   });

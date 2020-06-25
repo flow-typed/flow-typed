@@ -6,8 +6,8 @@ const hash = md5("message");
 
 md5(new Buffer("message áßäöü", "utf8"));
 
-// $ExpectError
+// $FlowExpectedError
 md5(5);
 
-// $ExpectError
+// $FlowExpectedError
 md5(undefined);

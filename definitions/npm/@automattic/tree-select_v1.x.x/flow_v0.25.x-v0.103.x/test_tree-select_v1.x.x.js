@@ -30,7 +30,7 @@ describe('#treeSelect', () => {
   );
 
   it('infers correct arugment type', () => {
-    // $ExpectError requires State as parameter
+    // $FlowExpectedError requires State as parameter
     shipsInUniverses('hi');
   });
 
@@ -40,20 +40,20 @@ describe('#treeSelect', () => {
       selectedUniverses: [],
     };
 
-    // $ExpectError returns Ship[]
+    // $FlowExpectedError returns Ship[]
     const badResult: String[] = shipsInUniverses(state);
     const result: Ship[] = shipsInUniverses(state);
   })
 
   it('infers correct additinonal arguments', () => {
-    // $ExpectError invalid sorting input types
+    // $FlowExpectedError invalid sorting input types
     shipsInUniverses(state, (a: string, b: string) => -1);
 
-    // $ExpectError invalid return type in second fn argument
+    // $FlowExpectedError invalid return type in second fn argument
     shipsInUniverses(state, (a: Ship, b: Ship) => 'a');
 
     shipsInUniverses(state, (a, b) => {
-      // $ExpectError a is a Ship has no speed prop
+      // $FlowExpectedError a is a Ship has no speed prop
       a.speed;
       return 1;
     })
@@ -66,18 +66,18 @@ describe('#treeSelect', () => {
     const selector = treeSelect(
       (state: State) => [ state.ships, 'a', 1, false ],
       ([ships, str, num, bool]) => {
-        // $ExpectError ships should be Ship[]
+        // $FlowExpectedError ships should be Ship[]
         (ships: boolean);
-        // $ExpectError bool is boolean
+        // $FlowExpectedError bool is boolean
         (bool: string);
-        // $ExpectError str is string
+        // $FlowExpectedError str is string
         (str: boolean);
-        // $ExpectError num is number
+        // $FlowExpectedError num is number
         (num: boolean);
         return ships.find(() => true);
       }
     );
-    // $ExpectError should be ?Ship
+    // $FlowExpectedError should be ?Ship
     const bad: ?string = selector({ships: [], selectedUniverses: []});
     const good: ?Ship = selector({ships: [], selectedUniverses: []});
   })

@@ -17,8 +17,8 @@ const asAFunction: string = dedent(`
   Hi there
 `);
 
-// $ExpectError
+// $FlowExpectedError
 (dedent(5): number);
 
-// $ExpectError
+// $FlowExpectedError
 (dedent(5): string);

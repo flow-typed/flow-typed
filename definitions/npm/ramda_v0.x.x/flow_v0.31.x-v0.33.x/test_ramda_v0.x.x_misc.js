@@ -64,7 +64,7 @@ describe('is', () => {
   })
 
   it('does not allow non-types for the first argument', () => {
-    // $ExpectError
+    // $FlowExpectedError
     is({}, 1)
   })
 })

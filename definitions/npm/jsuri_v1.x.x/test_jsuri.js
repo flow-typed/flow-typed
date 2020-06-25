@@ -7,8 +7,8 @@ new Uri('testytest')
   .replaceQueryParam('test', 'ppp')
   .addTrailingSlash();
 
-// $ExpectError
+// $FlowExpectedError
 new Uri([]);
 
-// $ExpectError
+// $FlowExpectedError
 new Uri().host().port();

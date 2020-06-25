@@ -19,10 +19,10 @@ describe("PayloadAction<P, T>", () => {
 
   it("should raise an error, if payload had an invalid type", () => {
 
-    // $ExpectError
+    // $FlowExpectedError
     const action1: PayloadAction<number> = { type: "increment", payload: "3" };
 
-    // $ExpectError
+    // $FlowExpectedError
     const action2: PayloadAction<Person> = { type: "addPerson", payload: { name: "Omid" } };
 
   });

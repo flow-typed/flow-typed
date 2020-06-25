@@ -5,7 +5,7 @@ import onFinished from 'on-finished';
 
 
 describe('onFinished', () => {
-  // $ExpectError: wrong arguments
+  // $FlowExpectedError: wrong arguments
   onFinished()
 
   it('should listen req', () => {

@@ -5,7 +5,7 @@ describe('@sentry/integrations', () => {
   it('Angular', () => {
     new Integrations.Angular();
 
-    // $ExpectError
+    // $FlowExpectedError
     new Integrations.Angular(null);
   });
 
@@ -13,9 +13,9 @@ describe('@sentry/integrations', () => {
     new Integrations.CaptureConsole();
     new Integrations.CaptureConsole({ levels: ['info', 'error'] });
 
-    // $ExpectError
+    // $FlowExpectedError
     new Integrations.CaptureConsole({ invalidProperty: null });
-    // $ExpectError
+    // $FlowExpectedError
     new Integrations.CaptureConsole({ levels: ['invalid_level'] });
   });
 
@@ -23,23 +23,23 @@ describe('@sentry/integrations', () => {
     new Integrations.Debug();
     new Integrations.Debug({ debugger: false, stringify: true });
 
-    // $ExpectError
+    // $FlowExpectedError
     new Integrations.Debug({ stringify: null });
-    // $ExpectError
+    // $FlowExpectedError
     new Integrations.Debug({ invalidPropety: false });
   });
 
   it('Dedupe', () => {
     new Integrations.Dedupe();
 
-    // $ExpectError
+    // $FlowExpectedError
     new Integrations.Dedupe(null);
   });
 
   it('Ember', () => {
     new Integrations.Ember();
 
-    // $ExpectError
+    // $FlowExpectedError
     new Integrations.Ember(null);
   });
 
@@ -47,9 +47,9 @@ describe('@sentry/integrations', () => {
     new Integrations.ExtraErrorData();
     new Integrations.ExtraErrorData({ depth: 3 });
 
-    // $ExpectError
+    // $FlowExpectedError
     new Integrations.ExtraErrorData({ depth: false });
-    // $ExpectError
+    // $FlowExpectedError
     new Integrations.ExtraErrorData({ invalidProperty: false });
   });
 
@@ -59,9 +59,9 @@ describe('@sentry/integrations', () => {
       types: ['crash', 'deprecation', 'intervention'],
     });
 
-    // $ExpectError
+    // $FlowExpectedError
     new Integrations.ReportingObserver({ types: ['invalid_type'] });
-    // $ExpectError
+    // $FlowExpectedError
     new Integrations.ReportingObserver({ invalidProperty: false });
   });
 
@@ -69,23 +69,23 @@ describe('@sentry/integrations', () => {
     new Integrations.RewriteFrames();
     new Integrations.RewriteFrames({ root: 'foo', iteratee: frame => 'bar' });
 
-    // $ExpectError
+    // $FlowExpectedError
     new Integrations.RewriteFrames({ root: null });
-    // $ExpectError
+    // $FlowExpectedError
     new Integrations.RewriteFrames({ invalidProperty: false });
   });
 
   it('SessionTiming', () => {
     new Integrations.SessionTiming();
 
-    // $ExpectError
+    // $FlowExpectedError
     new Integrations.SessionTiming(null);
   });
 
   it('Transaction', () => {
     new Integrations.Transaction();
 
-    // $ExpectError
+    // $FlowExpectedError
     new Integrations.Transaction(null);
   });
 
@@ -96,9 +96,9 @@ describe('@sentry/integrations', () => {
       logErrors: false,
     });
 
-    // $ExpectError
+    // $FlowExpectedError
     new Integrations.Vue({ attachProps: 123 });
-    // $ExpectError
+    // $FlowExpectedError
     new Integrations.Vue({ invalidProperty: null });
   });
 });

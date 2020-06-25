@@ -75,10 +75,10 @@ describe('semver', () => {
     (semver.coerce('4.6.3.9.2-alpha2'): ?SemVer);
     (semver.coerce('4.6.3.9.2-alpha2', {rtl: true}): ?SemVer);
 
-    // $ExpectError
+    // $FlowExpectedError
     semver.cmp('1.2.3', '> ', '1.2.4');
 
-    // $ExpectError
+    // $FlowExpectedError
     semver.outside('1.2.3', '1.2', '> ');
   });
 

@@ -39,18 +39,18 @@ describe('Wrapper', () => {
 
   it('children', () => {
     // Test against chaining returning `any`
-    // $ExpectError wrong return type
+    // $FlowExpectedError wrong return type
     (shallow(<div/>).children(): boolean);
     (shallow(<div/>).children(): ShallowWrapper<'div'>);
 
     mount(<div><DeepInstance onChange={() => {}}/></div>).children(DeepInstance).instance().props.onChange();
-    // $ExpectError
+    // $FlowExpectedError
     mount(<div><DeepInstance onChange={() => {}}/></div>).children(DeepInstance).instance().props.onChangeX();
   });
 
   it('closest', () => {
     mount(<div><DeepInstance onChange={() => {}}/></div>).closest(DeepInstance).instance().props.onChange();
-    // $ExpectError
+    // $FlowExpectedError
     mount(<div><DeepInstance onChange={() => {}}/></div>).closest(DeepInstance).instance().props.onChangeX();
   });
 
@@ -61,13 +61,13 @@ describe('Wrapper', () => {
 
   it('containsAllMatchingElements', () => {
     (mount(<div />).containsAllMatchingElements([<div />, <div />]): boolean);
-    // $ExpectError - "nodes should be an Array" (from docs and source code)
+    // $FlowExpectedError - "nodes should be an Array" (from docs and source code)
     (mount(<div />).containsAllMatchingElements(<div />));
   });
 
   it('containsAnyMatchingElements', () => {
     (mount(<div />).containsAnyMatchingElements([<div />, <div />]): boolean);
-    // $ExpectError - "nodes should be an Array" (from docs and source code)
+    // $FlowExpectedError - "nodes should be an Array" (from docs and source code)
     (mount(<div />).containsAnyMatchingElements(<div />));
   });
 
@@ -85,7 +85,7 @@ describe('Wrapper', () => {
 
   it('filter', () => {
     mount(<div><DeepInstance onChange={() => {}}/></div>).filter(DeepInstance).instance().props.onChange();
-    // $ExpectError
+    // $FlowExpectedError
     mount(<div><DeepInstance onChange={() => {}}/></div>).filter(DeepInstance).instance().props.onChangeX();
   });
 
@@ -97,7 +97,7 @@ describe('Wrapper', () => {
     shallow(<div />).find(ClassComponent);
     shallow(<div />).find(StatelessComponent);
     shallow(<div />).find({ a: 1 });
-    // $ExpectError
+    // $FlowExpectedError
     shallow(<div />).find(true);
     shallow(<div/>).find("someSelector");
     shallow(<div/>).renderProp("render")(1, "hi").find("SomeSelector");
@@ -109,7 +109,7 @@ describe('Wrapper', () => {
     //   .find(123)
 
     mount(<div><DeepInstance onChange={() => {}}/></div>).find(DeepInstance).instance().props.onChange();
-    // $ExpectError
+    // $FlowExpectedError
     mount(<div><DeepInstance onChange={() => {}}/></div>).find(DeepInstance).instance().props.onChangeX();
   });
 
@@ -132,12 +132,12 @@ describe('Wrapper', () => {
 
     shallow(<div/>).instance();
 
-    // $ExpectError
+    // $FlowExpectedError
     (shallow(<TestInstance />).instance().method: string);
     shallow(<TestInstance />).instance().method();
     (shallow(<TestInstance />).instance().method: () => 'test');
 
-    // $ExpectError
+    // $FlowExpectedError
     (mount(<TestInstance />).instance().method: string);
     mount(<TestInstance />).instance().method();
     (mount(<TestInstance />).instance().method: () => 'test');
@@ -168,7 +168,7 @@ describe('Wrapper', () => {
         const shallowWrapper = shallow(<div getNumber={() => {return 'not a number';}} />);
         const string = shallowWrapper.invoke('getNumber')();
 
-        // $ExpectError
+        // $FlowExpectedError
         name.toFixed();
       });
     });
@@ -191,7 +191,7 @@ describe('Wrapper', () => {
 
   it('parents', () => {
     mount(<div><DeepInstance onChange={() => {}}/></div>).parents(DeepInstance).instance().props.onChange();
-    // $ExpectError
+    // $FlowExpectedError
     mount(<div><DeepInstance onChange={() => {}}/></div>).parents(DeepInstance).instance().props.onChangeX();
   });
 
@@ -205,10 +205,10 @@ describe('Wrapper', () => {
 
   it('reduce', () => {
     (mount(<div />).reduce((acc: number, node, i) => i + 1): Array<number>);
-    // $ExpectError
+    // $FlowExpectedError
     (mount(<div />).reduce((acc: number, node, i) => i + 1): Array<boolean>);
     (mount(<div />).reduce((acc, node, i) => i + 1, 0): Array<number>);
-    // $ExpectError
+    // $FlowExpectedError
     (mount(<div />).reduce((acc, node, i) => i + 1, 0): Array<boolean>);
   });
 
@@ -224,21 +224,21 @@ describe('Wrapper', () => {
 
   it('simulateError', () => {
     (mount(<div />).simulateError(new Error('error')): ReactWrapper<'div'>);
-    // $ExpectError
+    // $FlowExpectedError
     (mount(<div />).simulateError('error'): ReactWrapper<'div'>);
     (shallow(<div />).simulateError(new Error('error')): ShallowWrapper<'div'>);
-    // $ExpectError
+    // $FlowExpectedError
     (shallow(<div />).simulateError('error'): ShallowWrapper<'div'>);
   });
 
   it('setProps', () => {
     (mount(<div />).setProps({}, () => {}): ReactWrapper<'div'>);
-    // $ExpectError
+    // $FlowExpectedError
     (mount(<div />).setProps({}, null): ReactWrapper<'div'>);
     (mount(<div />).setProps({}): ReactWrapper<'div'>);
-    // $ExpectError
+    // $FlowExpectedError
     (mount(<div />).setProps(): ReactWrapper<'div'>);
-    // $ExpectError
+    // $FlowExpectedError
     (mount(<div />).setProps(null): ReactWrapper<'div'>);
   });
 });
@@ -279,9 +279,9 @@ describe('ShallowWrapper', () => {
 
   it('deprecated methods should not be present', () => {
     // shallow's getNode(s) was replaced by getElement(s) in enzyme v3
-    // $ExpectError
+    // $FlowExpectedError
     shallow(<div/>).getNode();
-    // $ExpectError
+    // $FlowExpectedError
     shallow(<div/>).getNodes();
   });
 });
@@ -290,9 +290,9 @@ describe('ShallowWrapper', () => {
 describe('mount', () => {
   it('deprecated methods should not be present', () => {
     // mount's getNode(s) were removed in enzyme v3
-    // $ExpectError
+    // $FlowExpectedError
     mount(<div />).getNode();
-    // $ExpectError
+    // $FlowExpectedError
     mount(<div />).getNodes();
   });
 });

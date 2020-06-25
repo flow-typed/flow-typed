@@ -11,61 +11,61 @@ describe("http-link-header", () => {
   it("constructor", () => {
     new LinkHeader(headerValue);
 
-    // $ExpectError
+    // $FlowExpectedError
     new LinkHeader(5);
   });
 
   it("parse - static", () => {
     LinkHeader.parse(headerValue);
 
-    // $ExpectError
+    // $FlowExpectedError
     LinkHeader.parse(5);
   });
 
   it("parse", () => {
     link.parse(headerValue);
 
-    // $ExpectError
+    // $FlowExpectedError
     link.parse(5);
   });
 
   it("rel", () => {
     link.rel("next");
 
-    // $ExpectError
+    // $FlowExpectedError
     link.rel(5);
   });
 
   it("get", () => {
     link.get("rel", "next");
 
-    // $ExpectError
+    // $FlowExpectedError
     link.get("rel");
 
-    // $ExpectError
+    // $FlowExpectedError
     link.get("rel", 5);
 
-    // $ExpectError
+    // $FlowExpectedError
     link.get(5, "next");
   });
 
   it("set", () => {
     link.set({uri: "https://www.github.com"});
 
-    // $ExpectError
+    // $FlowExpectedError
     link.set(5);
   });
 
   it("has", () => {
     link.has("rel", "next");
 
-    // $ExpectError
+    // $FlowExpectedError
     link.has("rel");
 
-    // $ExpectError
+    // $FlowExpectedError
     link.has("rel", 5);
 
-    // $ExpectError
+    // $FlowExpectedError
     link.has(5, "next");
   });
 

@@ -27,7 +27,7 @@ register(
   (res.clientData: ?string);
 });
 
-// $ExpectError
+// $FlowExpectedError
 register();
-// $ExpectError
+// $FlowExpectedError
 sign();

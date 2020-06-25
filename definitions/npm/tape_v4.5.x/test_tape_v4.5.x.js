@@ -15,12 +15,12 @@ test('flow', { timeout: 100 }, (t) => {
   t.end();
 });
 
-// $ExpectError
+// $FlowExpectedError
 test('flow', { skip: 1 }, (t) => {
   t.end();
 });
 
-// $ExpectError
+// $FlowExpectedError
 test('flow', { timeout: '' }, (t) => {
   t.end();
 });
@@ -130,7 +130,7 @@ test('flow', (t: tape$Context) => {
 
   t.comment('test');
 
-  // $ExpectError: needs message
+  // $FlowExpectedError: needs message
   t.comment();
 
   t.end();
@@ -140,7 +140,7 @@ const htest = test.createHarness();
 htest.createStream().pipe(process.stdout);
 htest.createStream({ objectMode: true }).pipe(process.stdout);
 
-// $ExpectError: objectMode should be a boolean
+// $FlowExpectedError: objectMode should be a boolean
 htest.createStream({ objectMode: '' }).pipe(process.stdout);
 
 test.createStream({ objectMode: true }).on('data', (row) => {

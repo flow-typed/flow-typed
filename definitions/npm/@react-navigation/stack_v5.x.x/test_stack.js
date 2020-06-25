@@ -51,9 +51,9 @@ function ValidScreen(props: {|
   route: NavRoute<'One'>,
 |}) {
   props.navigation.navigate('Another');
-  // $ExpectError invalid params
+  // $FlowExpectedError invalid params
   props.navigation.navigate('Another', {});
-  // $ExpectError invalid route
+  // $FlowExpectedError invalid route
   props.navigation.navigate('test', { sup: true, yo: null });
   props.navigation.push('One', { hey: 'sup' });
   props.navigation.pop(5);
@@ -77,14 +77,14 @@ function InvalidScreen(props: {|
     headerTitle: 'ayyyy',
     headerStatusBarHeight: 5,
   });
-  // $ExpectError invalid navigator props
+  // $FlowExpectedError invalid navigator props
   props.navigation.setOptions({ fake: 12 });
   React.useEffect(() => {
     return props.navigation.addListener(
       'transitionStart',
       e => {
         (e.type: 'transitionStart');
-        // $ExpectError swipeStart doesn't support preventDefault
+        // $FlowExpectedError swipeStart doesn't support preventDefault
         e.preventDefault();
       },
     );
@@ -93,15 +93,15 @@ function InvalidScreen(props: {|
 }
 
 <Stack.Screen name="One" component={ValidScreen} />;
-// $ExpectError non-matching component
+// $FlowExpectedError non-matching component
 <Stack.Screen name="Two" component={ValidScreen} />;
-// $ExpectError invalid route name
+// $FlowExpectedError invalid route name
 <Stack.Screen name="Four" component={ValidScreen} />;
-// $ExpectError invalid params
+// $FlowExpectedError invalid params
 <Stack.Screen name="One" component={ValidScreen} initialParams={{ hey: 5 }} />;
-// $ExpectError non-local route
+// $FlowExpectedError non-local route
 <Stack.Screen name="Another" component={ValidScreen} />;
-// $ExpectError invalid screen props
+// $FlowExpectedError invalid screen props
 <Stack.Screen name="One" component={InvalidScreen} />;
 
 /**
@@ -113,9 +113,9 @@ function InvalidScreen(props: {|
   headerMode="float"
   keyboardHandlingEnabled={true}
 />;
-// $ExpectError invalid navigator props
+// $FlowExpectedError invalid navigator props
 <Stack.Navigator
-  // $ExpectError invalid navigator props
+  // $FlowExpectedError invalid navigator props
   mode="FAKE"
   headerMode="float"
   keyboardHandlingEnabled={true}

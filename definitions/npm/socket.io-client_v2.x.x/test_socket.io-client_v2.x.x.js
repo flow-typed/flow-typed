@@ -9,13 +9,13 @@ io.connect("foo");
 io.connect("foo", {});
 io.connect("foo", { forceNew: false, path: "/barbaz", transports: ["polling"] });
 
-// $ExpectError
+// $FlowExpectedError
 io("foo", { invalid_key: 5 });
 
-// $ExpectError
+// $FlowExpectedError
 io("foo", { transports: ["invalid transport"] });
 
-// $ExpectError
+// $FlowExpectedError
 io(5);
 
 

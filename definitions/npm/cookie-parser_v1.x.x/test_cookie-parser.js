@@ -6,7 +6,7 @@ import type { Middleware } from 'cookie-parser';
 
 describe('cookie-parser', () => {
   it('errors', () => {
-    // $ExpectError
+    // $FlowExpectedError
     cookieParser(42);
   });
 

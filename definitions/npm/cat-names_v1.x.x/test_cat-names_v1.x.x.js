@@ -1,11 +1,11 @@
 // @flow
 import * as catNames from 'cat-names';
 
-// $ExpectError
+// $FlowExpectedError
 (catNames.all: string);
 (catNames.all: Array<string>);
 
-// $ExpectError
+// $FlowExpectedError
 (catNames.random(): number);
 (catNames.random(): string);
 

@@ -6,11 +6,11 @@ json(({ strict: true }: OptionsJson));
 text(({ strict: true }: OptionsText));
 urlencoded(({ extended: true }: OptionsUrlencoded));
 
-// $ExpectError
+// $FlowExpectedError
 json(({ extended: true }: OptionsUrlencoded));
 
-// $ExpectError
+// $FlowExpectedError
 text(({ extended: true }: OptionsUrlencoded));
 
-// $ExpectError
+// $FlowExpectedError
 urlencoded(({ strict: true }: OptionsJson));

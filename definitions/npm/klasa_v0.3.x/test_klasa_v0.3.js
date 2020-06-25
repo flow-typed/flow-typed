@@ -20,7 +20,7 @@ const client = new Client({
 
 client.login("your-bot-token");
 
-// $ExpectError
+// $FlowExpectedError
 client.login();
 
 class TestCommand extends Command {

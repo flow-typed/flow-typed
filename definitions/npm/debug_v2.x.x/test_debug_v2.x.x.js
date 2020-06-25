@@ -8,5 +8,5 @@ test('Hello %s', 'World');
 test({a: 1, b: 2});
 test(new Error('error'));
 
-// $ExpectError
+// $FlowExpectedError
 debug();

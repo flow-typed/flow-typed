@@ -162,19 +162,19 @@ const objects = [{}, {}, {}];
 const objectsClone: Array<Object> = _.clone(objects);
 const objectsClone1: number = _.clone(1);
 const objectsClone2: typeof tomato = _.clone(tomato);
-//$ExpectError
+//$FlowExpectedError
 const objectsClone3: $Shape<typeof tomato1> = _.clone(tomato);
 const objectsClone4: $Shape<typeof tomato1> = _.clone(tomato1);
 
 const id = objectsClone2.id;
-//$ExpectError
+//$FlowExpectedError
 const idE = objectsClone4.id;
 
 const dissocd: { a: number, ... } = _.dissoc("b", { a: 1, b: 2 });
 const dissocd2: { a: number, ... } = _.dissoc("b")({ a: 1, b: 2 });
-//$ExpectError
+//$FlowExpectedError
 const dissocd3: { a: string, ... } = _.dissoc("b", { a: 1, b: 2 });
-//$ExpectError
+//$FlowExpectedError
 const dissocd4: { a: string, ... } = _.dissoc("b")({ a: 1, b: 2 });
 
 const dissocPathd: { a: { b: number, ... }, ... } = _.dissocPath(["a", "c"], {
@@ -183,11 +183,11 @@ const dissocPathd: { a: { b: number, ... }, ... } = _.dissocPath(["a", "c"], {
 const dissocPathd2: { a: { b: number, ... }, ... } = _.dissocPath(["a", "c"])({
   a: { b: 1, c: 2 }
 });
-//$ExpectError
+//$FlowExpectedError
 const dissocPathd3: { a: { b: string, ... }, ... } = _.dissocPath(["a", "c"], {
   a: { b: 1, c: 2 }
 });
-//$ExpectError
+//$FlowExpectedError
 const dissocPathd4: { a: { b: string, ... }, ... } = _.dissocPath(["a", "c"])({
   a: { b: 1, c: 2 }
 });
@@ -232,9 +232,9 @@ const evolved4 = _.evolve({
 })({
   bar: 1
 });
-//$ExpectError
+//$FlowExpectedError
 const evolved5: number = evolved4.foo;
-//$ExpectError
+//$FlowExpectedError
 const evolved6 = _.evolve(["foo"]);
 
 const hasid = _.has("id");
@@ -273,7 +273,7 @@ const obI: { [k: string]: string, ... } = _.mapObjIndexed(
   prependKeyAndDouble,
   xs
 );
-//$ExpectError
+//$FlowExpectedError
 const obI2: { [k: string]: number, ... } = _.mapObjIndexed(
   prependKeyAndDouble,
   xs
@@ -282,7 +282,7 @@ const obI2: { [k: string]: number, ... } = _.mapObjIndexed(
 const ob1 = { a: 1 };
 const ob2 = { b: 3 };
 const ob3 = _.merge(ob1, ob2);
-//$ExpectError
+//$FlowExpectedError
 const propX = ob3.x;
 const propA = ob3.a;
 
@@ -332,7 +332,7 @@ const propB6: boolean = mDRight.b;
 const propB7: 15 = mDRight.values[0];
 
 const objA = _.objOf("a", false);
-//$ExpectError
+//$FlowExpectedError
 const propAA: number = objA.a;
 
 const om: Object = _.omit(["a", "d", "h"], { a: 1, b: 2, c: 3, d: 4 });
@@ -355,13 +355,13 @@ const isUpperCase = (val, key) => key.toUpperCase() === key;
 const pb: Object = _.pickBy(isUpperCase, ooo);
 
 const ppp: number = _.prop("x", { x: 100 });
-//$ExpectError
+//$FlowExpectedError
 const ppp1: number = _.prop("y", { x: 100 });
 const ppp2: number = _.prop("x")({ x: 100 });
-//$ExpectError
+//$FlowExpectedError
 const ppp3: string = _.prop("x", { x: 100 });
 const ppp4: number = _.prop(_.__, { x: 100 })("x");
-//$ExpectError
+//$FlowExpectedError
 const ppp5: number = _.prop(_.__, { x: 100 })("y");
 const ppp6: number = _.prop("x", ({ x: 1, y: "a" }: {
   x: number,
@@ -369,7 +369,7 @@ const ppp6: number = _.prop("x", ({ x: 1, y: "a" }: {
   ...
 }));
 const ppp7: number = _.prop("x", ({ x: 1 }: { [string]: number, ... }));
-//$ExpectError
+//$FlowExpectedError
 const ppp8: string = _.prop("x", ({ x: 1 }: { [string]: number, ... }));
 
 const alice = {
@@ -398,24 +398,24 @@ const pss2: Array<number | boolean> = _.props(
 );
 const pss3: Array<number> = _.props(["y"], { x: true, y: 2, z: "foo" });
 const pss4: Array<number> = _.props(["y"], ({ y: 2 }: { [string]: number, ... }));
-//$ExpectError -- wrong key
+//$FlowExpectedError -- wrong key
 const pssE1: Array<number | boolean> = _.props(["d", "y"], {
   x: true,
   y: 2,
   z: "foo"
 });
-//$ExpectError -- wrong type
+//$FlowExpectedError -- wrong type
 const pssE2: Array<string | boolean> = _.props(["x", "y"], {
   x: true,
   y: 2,
   z: "foo"
 });
-//$ExpectError -- wrong type on indexer value
+//$FlowExpectedError -- wrong type on indexer value
 const pssE3: Array<string> = _.props(["y"], ({ y: 2 }: { [string]: number, ... }));
 
 const top: Array<["a" | "b" | "c", number]> = _.toPairs({ a: 1, b: 2, c: 3 });
 
-//$ExpectError
+//$FlowExpectedError
 const topE: Array<["a" | "b" | "c" | "z", number]> = _.toPairs({
   a: 1,
   b: 2,

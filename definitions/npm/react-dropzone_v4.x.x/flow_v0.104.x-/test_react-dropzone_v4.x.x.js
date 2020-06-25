@@ -75,14 +75,14 @@ import Dropzone, { type ChildrenProps, type DropzoneFile } from "react-dropzone"
   }
 </Dropzone>;
 
-// $ExpectError - Wrong type for function handler
+// $FlowExpectedError - Wrong type for function handler
 <Dropzone onDrop={(event: SyntheticDragEvent<>) => {}} />;
 
 <Dropzone>
   {
     ({
       acceptedFiles,
-    // $ExpectError - Wrong type for children function
+    // $FlowExpectedError - Wrong type for children function
     }: { acceptedFiles: Array<string> }) => (
       <div />
     )
@@ -91,7 +91,7 @@ import Dropzone, { type ChildrenProps, type DropzoneFile } from "react-dropzone"
 
 <Dropzone>
   {
-    // $ExpectError - Wrong return type for children function
+    // $FlowExpectedError - Wrong return type for children function
     () => ({})
   }
 </Dropzone>;

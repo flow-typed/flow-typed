@@ -9,6 +9,6 @@ it("should infer correctly", () => {
 });
 
 it("should enforce types", () => {
-  // $ExpectError
+  // $FlowExpectedError
   const o = of(1, 2, 3).pipe(take("7"));
 });

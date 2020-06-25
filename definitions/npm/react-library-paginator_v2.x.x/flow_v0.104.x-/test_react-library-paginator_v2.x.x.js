@@ -21,7 +21,7 @@ describe('PaginatorContainer ', () => {
   });
 
   it('should fail with incompatible types', () => {
-    // $ExpectError
+    // $FlowExpectedError
     <PaginatorContainer
       totalItems={'777'}
       onPageChange={(str: string) => {}}
@@ -35,10 +35,10 @@ describe('PaginatorContainer ', () => {
   });
 
   it('should fail when some required props are missing', () => {
-    // $ExpectError
+    // $FlowExpectedError
     <PaginatorContainer onPageChange={handlePageChange} />;
 
-    // $ExpectError
+    // $FlowExpectedError
     <PaginatorContainer totalItems={10} />;
   });
 
@@ -60,7 +60,7 @@ describe('PaginatorContainer ', () => {
   });
 
   it("should fail when passing non-object value as 'classes' prop", () => {
-    // $ExpectError
+    // $FlowExpectedError
     <PaginatorContainer
       totalItems={10}
       onPageChange={handlePageChange}
@@ -81,7 +81,7 @@ describe('PaginatorContainer ', () => {
   });
 
   it("should fail when passing non-string values in 'classes' prop", () => {
-    // $ExpectError
+    // $FlowExpectedError
     <PaginatorContainer
       totalItems={10}
       onPageChange={handlePageChange}
@@ -111,7 +111,7 @@ describe('PaginatorContainer ', () => {
   });
 
   it("should fail when passing non-object value as 'styles' prop", () => {
-    // $ExpectError
+    // $FlowExpectedError
     <PaginatorContainer
       totalItems={10}
       onPageChange={handlePageChange}
@@ -133,7 +133,7 @@ describe('PaginatorContainer ', () => {
   });
 
   it("should fail when passing non-object values in 'styles' prop", () => {
-    // $ExpectError
+    // $FlowExpectedError
     <PaginatorContainer
       totalItems={10}
       onPageChange={handlePageChange}
@@ -165,7 +165,7 @@ describe('PaginatorContainer ', () => {
   });
 
   it("should fail when passing non-object value as 'navigation' prop", () => {
-    // $ExpectError
+    // $FlowExpectedError
     <PaginatorContainer
       totalItems={10}
       onPageChange={handlePageChange}
@@ -187,7 +187,7 @@ describe('PaginatorContainer ', () => {
   });
 
   it("should fail when passing values of incorrect types in 'navigation' prop", () => {
-    // $ExpectError
+    // $FlowExpectedError
     <PaginatorContainer
       totalItems={10}
       onPageChange={handlePageChange}

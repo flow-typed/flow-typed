@@ -33,21 +33,21 @@ const changedOrder: void = changeOrder('VISA', 3);
 const resetValues: void = resetModifications();
 const addedCard: void = addCard(customCardType);
 
-// $ExpectError
+// $FlowExpectedError
 creditCardType(4111111111111111);
-// $ExpectError
+// $FlowExpectedError
 creditCardType(null);
-// $ExpectError
+// $FlowExpectedError
 getTypeInfo(123);
-// $ExpectError
+// $FlowExpectedError
 getTypeInfo(null);
-// $ExpectError
+// $FlowExpectedError
 removeCard();
-// $ExpectError
+// $FlowExpectedError
 changeOrder(undefined, null);
-// $ExpectError
+// $FlowExpectedError
 changeOrder('VISA');
-// $ExpectError
+// $FlowExpectedError
 addCard({
   niceType: 'NewCard',
   type: 'new-card'

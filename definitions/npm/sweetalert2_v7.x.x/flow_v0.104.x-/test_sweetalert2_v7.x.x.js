@@ -1,15 +1,15 @@
 import swal from "sweetalert2";
 
-// $ExpectError (Can't have 0 arguments)
+// $FlowExpectedError (Can't have 0 arguments)
 swal();
 swal("Hello!");
 swal("Oops...", "Something went wrong!", "error");
 
-// $ExpectError (Must be a valid alert type)
+// $FlowExpectedError (Must be a valid alert type)
 swal("The Internet?", "That thing is still around?", "questin");
 swal("The Internet?", "That thing is still around?", "question");
 
-// $ExpectError (imageHeight should be a number)
+// $FlowExpectedError (imageHeight should be a number)
 swal({
   imageUrl: "./images/robot.jpg",
   imageHeight: "1512",
@@ -21,7 +21,7 @@ swal({
   imageAlt: "A tall image"
 });
 
-// $ExpectError (DismissReason enum should have correct values)
+// $FlowExpectedError (DismissReason enum should have correct values)
 const badCancel: "close" = swal.DismissReason.cancel;
 const goodCancel: "cancel" = swal.DismissReason.cancel;
 

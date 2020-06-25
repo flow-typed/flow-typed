@@ -2,33 +2,33 @@ import slug from 'slug'
 
 const result1: string = slug('Hello world')
 
-// $ExpectError
+// $FlowExpectedError
 slug(2)
 
 const result2: string = slug('i ♥ unicode', '_')
 
-// $ExpectError
+// $FlowExpectedError
 slug('i ♥ unicode', 2)
 
-// $ExpectError
+// $FlowExpectedError
 slug('Hello world', { mode: 'invalid_mode' })
 
-// $ExpectError
+// $FlowExpectedError
 slug('Hello world', { remove: 'hello' })
 
 slug('Hello world', { remove: null })
 
-// $ExpectError
+// $FlowExpectedError
 slug('Hello world', { symbols: 'hello' })
 
-// $ExpectError
+// $FlowExpectedError
 slug('Hello world', { charmap: 'hello' })
 
-// $ExpectError
+// $FlowExpectedError
 slug('Hello world', { multicharmap: 'hello' })
 
-// $ExpectError
+// $FlowExpectedError
 slug('Hello world', { lower: 'hello' })
 
-// $ExpectError
+// $FlowExpectedError
 slug.defaults.modes['hello']

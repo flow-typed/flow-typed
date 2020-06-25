@@ -12,8 +12,8 @@ del(["../../foo/**"], {
 
 (del.sync(["foo", "bar"]): string[]);
 
-// $ExpectError
+// $FlowExpectedError
 del(123);
 
-// $ExpectError
+// $FlowExpectedError
 del.sync(123);

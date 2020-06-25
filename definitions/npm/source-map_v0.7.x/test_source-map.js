@@ -206,9 +206,9 @@ describe('source-map', () => {
         new SourceNode(null, null, null, 'return 10;'),
         '}',
       ]);
-      // $ExpectError
+      // $FlowExpectedError
       node.add({});
-      // $ExpectError
+      // $FlowExpectedError
       node.add(function() {});
     });
 
@@ -221,9 +221,9 @@ describe('source-map', () => {
         new SourceNode(null, null, null, 'return 10;'),
         '}',
       ]);
-      //$ExpectError
+      //$FlowExpectedError
       node.prepend({});
-      //$ExpectError
+      //$FlowExpectedError
       node.prepend(function() {});
     });
 
@@ -272,7 +272,7 @@ describe('source-map', () => {
       const node = new SourceNode(null, null, null, 'hello world');
       node.replaceRight(/world/, 'universe');
       node.replaceRight('test', 'universe');
-      //$ExpectError
+      //$FlowExpectedError
       node.replaceRight('test', function() {});
     });
 

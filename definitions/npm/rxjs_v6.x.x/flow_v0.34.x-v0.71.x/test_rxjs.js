@@ -47,7 +47,7 @@ Observable.create(observer => {
   numbers.subscribe(observer);
 });
 
-// $ExpectError
+// $FlowExpectedError
 const distinct1: Observable<number> = of(1).pipe(distinct(1));
 const distinct2: Observable<number> = of(1).pipe(distinct());
 const distinct3: Observable<{ a: string }> = of({ a: "a" }).pipe(distinct(
@@ -110,7 +110,7 @@ const project: Array<Observable<string>> = [
     (x, y, index1, index2) => String(x + y + index1 + index2),
     /* concurrency */ 5
   )),
-  // $ExpectError: the ordering is wrong
+  // $FlowExpectedError: the ordering is wrong
   numbers.pipe(mergeMap(x => [x], 5, (x, y, index1, index2) =>
     String(x + y + index1 + index2)
   )),
@@ -141,7 +141,7 @@ var buffered = interval.pipe(buffer(clicks));
 buffered.subscribe(x => console.log(x));
 
 // http://reactivex.io/rxjs/class/es6/Observable.js~Observable.html#instance-method-bufferCount
-// $ExpectError
+// $FlowExpectedError
 clicks.pipe(bufferCount());
 var buffered = clicks.pipe(bufferCount(2));
 buffered.subscribe(x => console.log(x));
@@ -150,7 +150,7 @@ var buffered = clicks.pipe(bufferCount(2, 1));
 buffered.subscribe(x => console.log(x));
 
 // http://reactivex.io/rxjs/class/es6/Observable.js~Observable.html#instance-method-bufferTime
-// $ExpectError
+// $FlowExpectedError
 clicks.pipe(bufferTime());
 var buffered = clicks.pipe(bufferTime(1000));
 buffered.subscribe(x => console.log(x));
@@ -164,7 +164,7 @@ var buffered = clicks.pipe(bufferToggle(
   openings,
   i => (i % 2 ? interval(500) : empty())
 ));
-// $ExpectError
+// $FlowExpectedError
 clicks.pipe(bufferToggle(openings, i => (i.length % 2 ? interval(500) : empty())));
 buffered.subscribe(x => console.log(x));
 
@@ -172,7 +172,7 @@ buffered.subscribe(x => console.log(x));
 var buffered = clicks.pipe(bufferWhen(() =>
   interval(1000 + Math.random() * 4000)
 ));
-// $ExpectError
+// $FlowExpectedError
 click.pipe(bufferWhen(() => true));
 buffered.subscribe(x => console.log(x));
 

@@ -22,13 +22,13 @@ const parseResult: {
     })
   .parse(process.argv);
 
-// $ExpectError
+// $FlowExpectedError
 program.command(2);
 
-// $ExpectError
+// $FlowExpectedError
 const commandName: string = program.command('bar');
 
-// $ExpectError
+// $FlowExpectedError
 program.command('foo').alias().description('bar');
 
 const parseOptionsResult: {

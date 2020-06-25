@@ -4,7 +4,7 @@ import Toggle from "react-toggle";
 class BadToggle1 extends React.Component<*> {
   render() {
     return (
-      // $ExpectError
+      // $FlowExpectedError
       <Toggle checked="true" />
     );
   }
@@ -13,7 +13,7 @@ class BadToggle1 extends React.Component<*> {
 class BadToggle2 extends React.Component<*> {
   render() {
     return (
-      // $ExpectError
+      // $FlowExpectedError
       <Toggle checked icons={[]} />
     );
   }
@@ -22,7 +22,7 @@ class BadToggle2 extends React.Component<*> {
 class BadToggle3 extends React.Component<*> {
   render() {
     return (
-      // $ExpectError
+      // $FlowExpectedError
       <Toggle onBlur={(e: number) => {}} />
     );
   }

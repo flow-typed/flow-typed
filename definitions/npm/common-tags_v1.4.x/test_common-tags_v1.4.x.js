@@ -22,211 +22,211 @@ import {
   stripIndentTransformer
 } from "common-tags";
 
-// $ExpectError
+// $FlowExpectedError
 stripIndent();
-// $ExpectError
+// $FlowExpectedError
 stripIndent(null);
-// $ExpectError
+// $FlowExpectedError
 stripIndent("bad");
 stripIndent`
   Good
 `;
 
-// $ExpectError
+// $FlowExpectedError
 html();
-// $ExpectError
+// $FlowExpectedError
 html(null);
-// $ExpectError
+// $FlowExpectedError
 html(0);
-// $ExpectError
+// $FlowExpectedError
 html("bad");
 html`
   good
 `;
 
-// $ExpectError
+// $FlowExpectedError
 source();
-// $ExpectError
+// $FlowExpectedError
 source(null);
-// $ExpectError
+// $FlowExpectedError
 source(0);
-// $ExpectError
+// $FlowExpectedError
 source("bad");
 source`
   good
 `;
 
-// $ExpectError
+// $FlowExpectedError
 codeBlock();
-// $ExpectError
+// $FlowExpectedError
 codeBlock(null);
-// $ExpectError
+// $FlowExpectedError
 codeBlock(0);
-// $ExpectError
+// $FlowExpectedError
 codeBlock("bad");
 codeBlock`
   good
 `;
 
-// $ExpectError
+// $FlowExpectedError
 safeHtml();
-// $ExpectError
+// $FlowExpectedError
 safeHtml(null);
-// $ExpectError
+// $FlowExpectedError
 safeHtml(0);
-// $ExpectError
+// $FlowExpectedError
 safeHtml("bad");
 safeHtml`
   good
 `;
 
-// $ExpectError
+// $FlowExpectedError
 oneLine();
-// $ExpectError
+// $FlowExpectedError
 oneLine(null);
-// $ExpectError
+// $FlowExpectedError
 oneLine(0);
-// $ExpectError
+// $FlowExpectedError
 oneLine("bad");
 oneLine`
   good
 `;
 
-// $ExpectError
+// $FlowExpectedError
 oneLineTrim();
-// $ExpectError
+// $FlowExpectedError
 oneLineTrim(null);
-// $ExpectError
+// $FlowExpectedError
 oneLineTrim(0);
-// $ExpectError
+// $FlowExpectedError
 oneLineTrim("bad");
 oneLineTrim`
   good
 `;
 
-// $ExpectError
+// $FlowExpectedError
 oneLineCommaLists();
-// $ExpectError
+// $FlowExpectedError
 oneLineCommaLists(null);
-// $ExpectError
+// $FlowExpectedError
 oneLineCommaLists(0);
-// $ExpectError
+// $FlowExpectedError
 oneLineCommaLists("bad");
 oneLineCommaLists`
   good
 `;
 
-// $ExpectError
+// $FlowExpectedError
 oneLineCommaListsOr();
-// $ExpectError
+// $FlowExpectedError
 oneLineCommaListsOr(null);
-// $ExpectError
+// $FlowExpectedError
 oneLineCommaListsOr(0);
-// $ExpectError
+// $FlowExpectedError
 oneLineCommaListsOr("bad");
 oneLineCommaListsOr`
   good
 `;
 
-// $ExpectError
+// $FlowExpectedError
 oneLineCommaListsAnd();
-// $ExpectError
+// $FlowExpectedError
 oneLineCommaListsAnd(null);
-// $ExpectError
+// $FlowExpectedError
 oneLineCommaListsAnd(0);
-// $ExpectError
+// $FlowExpectedError
 oneLineCommaListsAnd("bad");
 oneLineCommaListsAnd`
   good
 `;
 
-// $ExpectError
+// $FlowExpectedError
 stripIndent();
-// $ExpectError
+// $FlowExpectedError
 stripIndent(null);
-// $ExpectError
+// $FlowExpectedError
 stripIndent(0);
-// $ExpectError
+// $FlowExpectedError
 stripIndent("bad");
 stripIndent`
   good
 `;
 
-// $ExpectError
+// $FlowExpectedError
 stripIndents();
-// $ExpectError
+// $FlowExpectedError
 stripIndents(null);
-// $ExpectError
+// $FlowExpectedError
 stripIndents(0);
-// $ExpectError
+// $FlowExpectedError
 stripIndents("bad");
 stripIndents`
   good
 `;
 
-// $ExpectError
+// $FlowExpectedError
 inlineLists();
-// $ExpectError
+// $FlowExpectedError
 inlineLists(null);
-// $ExpectError
+// $FlowExpectedError
 inlineLists(0);
-// $ExpectError
+// $FlowExpectedError
 inlineLists("bad");
 inlineLists`
   good
 `;
 
-// $ExpectError
+// $FlowExpectedError
 oneLineInlineLists();
-// $ExpectError
+// $FlowExpectedError
 oneLineInlineLists(null);
-// $ExpectError
+// $FlowExpectedError
 oneLineInlineLists(0);
-// $ExpectError
+// $FlowExpectedError
 oneLineInlineLists("bad");
 oneLineInlineLists`
   good
 `;
 
-// $ExpectError
+// $FlowExpectedError
 commaLists();
-// $ExpectError
+// $FlowExpectedError
 commaLists(null);
-// $ExpectError
+// $FlowExpectedError
 commaLists(0);
-// $ExpectError
+// $FlowExpectedError
 commaLists("bad");
 commaLists`
   good
 `;
 
-// $ExpectError
+// $FlowExpectedError
 commaListsOr();
-// $ExpectError
+// $FlowExpectedError
 commaListsOr(null);
-// $ExpectError
+// $FlowExpectedError
 commaListsOr(0);
-// $ExpectError
+// $FlowExpectedError
 commaListsOr("bad");
 commaListsOr`
   good
 `;
 
-// $ExpectError
+// $FlowExpectedError
 commaListsAnd();
-// $ExpectError
+// $FlowExpectedError
 commaListsAnd(null);
-// $ExpectError
+// $FlowExpectedError
 commaListsAnd(0);
-// $ExpectError
+// $FlowExpectedError
 commaListsAnd("bad");
 commaListsAnd`
   good
 `;
 
-// $ExpectError
+// $FlowExpectedError
 const templateTag2 = new TemplateTag(null);
-// $ExpectError
+// $FlowExpectedError
 const templateTag3 = new TemplateTag('bad');
 const templateTag4 = new TemplateTag(trimResultTransformer);
 const templateTag5 = new TemplateTag(

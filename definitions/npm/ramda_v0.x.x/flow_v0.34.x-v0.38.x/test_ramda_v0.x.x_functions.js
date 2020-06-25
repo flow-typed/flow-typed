@@ -83,7 +83,7 @@ const obb = {
   },
 }
 const doStuff: (x: string, y: number, z: boolean, obj: typeof obb) => number = _.invoker(3, 'doStuff')
-//$ExpectError
+//$FlowExpectedError
 const doLessStuff: (x: string, y: number, z: boolean, obj: typeof obb) => number = _.invoker(3, 'doLStuff')
 const stuffDone: number = doStuff('dd', 1, true, obb)
 
@@ -111,13 +111,13 @@ const shoutedGreet2: string = _.wrap(greetName, (gr, name) => name && 'Hello Ann
 // Uncurry
 const needs3: string => string => string => string = a => b => c => a + b + c
 
-//$ExpectError
+//$FlowExpectedError
 const needs3_error1: number = uncurryN(3, needs3)('', '', '')
 
-//$ExpectError
+//$FlowExpectedError
 const needs3_error2: string => string = uncurryN(3, needs3)('', '', '')
 
-//$ExpectError
+//$FlowExpectedError
 const needs3_error3: string => string => string = uncurryN(3, needs3)('', '', '')
 
 const needs3_no_error: string = uncurryN(3, needs3)('', '', '')

@@ -51,9 +51,9 @@ function ValidScreen(props: {|
   route: NavRoute<'One'>,
 |}) {
   props.navigation.navigate('Another');
-  // $ExpectError invalid params
+  // $FlowExpectedError invalid params
   props.navigation.navigate('Another', {});
-  // $ExpectError invalid route
+  // $FlowExpectedError invalid route
   props.navigation.navigate('test', { sup: true, yo: null });
   props.navigation.jumpTo('Three');
   (props.navigation: NavigationProp<
@@ -75,7 +75,7 @@ function InvalidScreen(props: {|
     tabBarLabel: 'SUP',
     unmountOnBlur: true,
   });
-  // $ExpectError invalid navigator props
+  // $FlowExpectedError invalid navigator props
   props.navigation.setOptions({ fake: 12 });
   React.useEffect(() => {
     return props.navigation.addListener(
@@ -90,15 +90,15 @@ function InvalidScreen(props: {|
 }
 
 <Tab.Screen name="One" component={ValidScreen} />;
-// $ExpectError non-matching component
+// $FlowExpectedError non-matching component
 <Tab.Screen name="Two" component={ValidScreen} />;
-// $ExpectError invalid route name
+// $FlowExpectedError invalid route name
 <Tab.Screen name="Four" component={ValidScreen} />;
-// $ExpectError invalid params
+// $FlowExpectedError invalid params
 <Tab.Screen name="One" component={ValidScreen} initialParams={{ hey: 5 }} />;
-// $ExpectError non-local route
+// $FlowExpectedError non-local route
 <Tab.Screen name="Another" component={ValidScreen} />;
-// $ExpectError invalid screen props
+// $FlowExpectedError invalid screen props
 <Tab.Screen name="One" component={InvalidScreen} />;
 
 /**
@@ -106,9 +106,9 @@ function InvalidScreen(props: {|
  */
 
 <Tab.Navigator lazy={true} />;
-// $ExpectError invalid navigator props
+// $FlowExpectedError invalid navigator props
 <Tab.Navigator
-  // $ExpectError invalid navigator props
+  // $FlowExpectedError invalid navigator props
   lazy={5}
   someOtherProp="fake"
 />;

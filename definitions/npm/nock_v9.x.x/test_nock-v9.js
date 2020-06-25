@@ -6,16 +6,16 @@ n.get('foo')
 n.reply(200, {});
 n.reply((uri: string, body) => {});
 n.post('foo');
-// $ExpectError
+// $FlowExpectedError
 n.get();
-// $ExpectError
+// $FlowExpectedError
 n.post();
-// $ExpectError
+// $FlowExpectedError
 n.put();
-// $ExpectError
+// $FlowExpectedError
 n.delete();
 
-// $ExpectError
+// $FlowExpectedError
 n.basicAuth();
 n.basicAuth({ user: 'foo', pass: 'bar' });
 n.replyDate();
@@ -23,13 +23,13 @@ n.replyContentLength();
 n.once();
 n.twice();
 n.thrice();
-// $ExpectError
+// $FlowExpectedError
 n.times('1');
-// $ExpectError
+// $FlowExpectedError
 n.delay();
 n.delay(200);
 n.delay({ head: 100, body: 100 });
-// $ExpectError
+// $FlowExpectedError
 n.delay('200');
 n.socketDelay(200);
 n.delayBody(200);
@@ -39,7 +39,7 @@ n.persist();
 (n.isDone(): bool)
 
 
-// $ExpectError
+// $FlowExpectedError
 nock();
 
 nock.restore();
@@ -47,5 +47,5 @@ nock.cleanAll();
 nock.disableNetConnect();
 nock.enableNetConnect();
 nock.enableNetConnect('foo');
-// $ExpectError
+// $FlowExpectedError
 nock.enableNetConnect(2);

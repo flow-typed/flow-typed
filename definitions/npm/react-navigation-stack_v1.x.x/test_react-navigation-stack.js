@@ -28,7 +28,7 @@ createStackNavigator({
   Test1: { screen: ClassScreenComponent },
 });
 
-// $ExpectError numbers can never be components
+// $FlowExpectedError numbers can never be components
 createStackNavigator({
   Test1: { screen: 5 },
 });
@@ -53,7 +53,7 @@ createStackNavigator(
   {
     Test1: { screen: FunctionalScreenComponent },
   },
-  // $ExpectError stack not drawer!
+  // $FlowExpectedError stack not drawer!
   {
     initialRouteName: "Test1",
     drawerBackgroundColor: "green",

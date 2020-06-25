@@ -15,7 +15,7 @@ typeis(req, ['text/*']);
 
 const req2 = createRequest('text/html');
 
-// $ExpectError
+// $FlowExpectedError
 typeis(req2, [undefined, null, true, function () {}]);
 
 const req3 = {headers: {}};

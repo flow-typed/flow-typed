@@ -6,7 +6,7 @@ function noop() {}
 
 parse("test");
 
-// $ExpectError: should be a string
+// $FlowExpectedError: should be a string
 parse({});
 
 parse("test");
@@ -49,10 +49,10 @@ stringify(obj, { arrayFormat: "brackets" });
 stringify(obj, { arrayFormat: "indices" });
 stringify(obj, { arrayFormat: "repeat" });
 
-// $ExpectError: arrayFormat is not an enum value
+// $FlowExpectedError: arrayFormat is not an enum value
 stringify(obj, { arrayFormat: false });
-// $ExpectError: arrayFormat is not an enum value
+// $FlowExpectedError: arrayFormat is not an enum value
 stringify(obj, { arrayFormat: "test" });
 
-// $ExpectError: should be an object
+// $FlowExpectedError: should be an object
 stringify("test");

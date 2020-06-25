@@ -46,23 +46,23 @@ let options = {
 describe("The `glob` function", () => {
   it("should validate the pattern, callback signature", () => {
     glob(pattern, callback);
-    // $ExpectError
+    // $FlowExpectedError
     glob(pattern);
-    // $ExpectError
+    // $FlowExpectedError
     glob({}, {});
   });
 
   it("should validate the pattern, options, callback signature", () => {
     glob(pattern, options, callback);
-    // $ExpectError
+    // $FlowExpectedError
     glob(pattern, options);
-    // $ExpectError
+    // $FlowExpectedError
     glob(pattern, callback, options);
   });
 
   it("should return undefined", () => {
     (glob(pattern, callback): void);
-    // $ExpectError
+    // $FlowExpectedError
     (glob(pattern, callback): boolean);
   });
 });
@@ -70,20 +70,20 @@ describe("The `glob` function", () => {
 describe("The `glob.hasMagic` function", () => {
   it("should accept a string for its `pattern` parameter", () => {
     glob.hasMagic(pattern);
-    // $ExpectError
+    // $FlowExpectedError
     glob.hasMagic({});
   });
 
   it("should accept an object for its `options` parameter", () => {
     glob.hasMagic(pattern, {});
     glob.hasMagic(pattern, options);
-    // $ExpectError
+    // $FlowExpectedError
     glob.hasMagic(pattern, callback);
   });
 
   it("should return a boolean", () => {
     (glob.hasMagic(pattern): boolean);
-    // $ExpectError
+    // $FlowExpectedError
     (glob.hasMagic(pattern): string);
   });
 });
@@ -91,20 +91,20 @@ describe("The `glob.hasMagic` function", () => {
 describe("The `glob.sync` function", () => {
   it("should accept a string for its `pattern` parameter", () => {
     glob.sync(pattern);
-    // $ExpectError
+    // $FlowExpectedError
     glob.sync({});
   });
 
   it("should accept an object for its `options` parameter", () => {
     glob.sync(pattern, {});
     glob.sync(pattern, options);
-    // $ExpectError
+    // $FlowExpectedError
     glob.sync(pattern, callback);
   });
 
   it("should return a matches Array", () => {
     (glob.sync(pattern): Array<string>);
-    // $ExpectError
+    // $FlowExpectedError
     (glob.sync(pattern): string);
   });
 });
@@ -112,19 +112,19 @@ describe("The `glob.sync` function", () => {
 describe("The `Glob` constructor", () => {
   it("should validate the pattern signature", () => {
     new Glob(pattern);
-    // $ExpectError
+    // $FlowExpectedError
     new Glob({});
   });
 
   it("should validate the pattern, callback signature", () => {
     new Glob(pattern, callback);
-    // $ExpectError
+    // $FlowExpectedError
     new Glob(pattern, options);
   });
 
   it("should validate the pattern, options, callback signature", () => {
     new Glob(pattern, options, callback);
-    // $ExpectError
+    // $FlowExpectedError
     new Glob(pattern, callback, options);
   });
 });
@@ -154,11 +154,11 @@ describe("The `Glob` methods", () => {
     mg.pause();
     mg.resume();
     mg.abort();
-    // $ExpectError
+    // $FlowExpectedError
     mg.pause(() => {});
-    // $ExpectError
+    // $FlowExpectedError
     mg.resume(() => {});
-    // $ExpectError
+    // $FlowExpectedError
     mg.abort(() => {});
   });
 });

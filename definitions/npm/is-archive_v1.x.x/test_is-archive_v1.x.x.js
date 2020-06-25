@@ -3,17 +3,17 @@ import isArchive from 'is-archive';
 isArchive('any-string');
 (isArchive('any-string'): boolean);
 
-// $ExpectError
+// $FlowExpectedError
 isArchive(4);
 
-// $ExpectError
+// $FlowExpectedError
 isArchive({});
 
-// $ExpectError
+// $FlowExpectedError
 isArchive();
 
-// $ExpectError
+// $FlowExpectedError
 isArchive(null);
 
-// $ExpectError
+// $FlowExpectedError
 (isArchive('any-string'): number);

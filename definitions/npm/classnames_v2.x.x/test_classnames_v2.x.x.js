@@ -17,7 +17,7 @@ classnames(null);
 classnames("a", false);
 classnames("a", ["b", null, { c: "truthy", d: null }]);
 
-// $ExpectError
+// $FlowExpectedError
 classnames(42);
-// $ExpectError
+// $FlowExpectedError
 classnames("a", ["b", 42]);

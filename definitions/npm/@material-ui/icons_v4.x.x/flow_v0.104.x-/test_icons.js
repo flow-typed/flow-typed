@@ -22,7 +22,7 @@ describe('classes', () => {
 
   it('should raises an error when pass not implemented prop to the classes property', () => {
     <SvgIcon
-      // $ExpectError: the `classes` enum does not contain `murAmur` prop
+      // $FlowExpectedError: the `classes` enum does not contain `murAmur` prop
       classes={{
         murAmur: 'custom-class-name',
       }}
@@ -32,7 +32,7 @@ describe('classes', () => {
   it('should raises an error when pass incompatible with string value', () => {
     <SvgIcon
       classes={{
-        // $ExpectError: need string value
+        // $FlowExpectedError: need string value
         root: true,
       }}
     />;
@@ -68,21 +68,21 @@ describe('own props', () => {
 
   it('should raises an error when pass incompatible types', () => {
     <SvgIcon
-      // $ExpectError: need an exact value from enum
+      // $FlowExpectedError: need an exact value from enum
       color={111}
-      // $ExpectError: need an exact value from enum
+      // $FlowExpectedError: need an exact value from enum
       fontSize={'default__'}
-      // $ExpectError: need string value
+      // $FlowExpectedError: need string value
       htmlColor={69}
-      // $ExpectError: need string value
+      // $FlowExpectedError: need string value
       shapeRendering={69}
-      // $ExpectError: need string valueimizeSpeed"
+      // $FlowExpectedError: need string valueimizeSpeed"
       titleAccess={69}
-      // $ExpectError: need string value
+      // $FlowExpectedError: need string value
       viewBox={69}
-      // $ExpectError: need string value
+      // $FlowExpectedError: need string value
       className={69}
-      // $ExpectError: need object
+      // $FlowExpectedError: need object
       style={[{ width: '100%' }]}
     />;
   });

@@ -34,11 +34,11 @@ describe('common part', () => {
     it('should raises an error when pass incompatible types', () => {
       Buttons.forEach(Button => {
         <Button
-          // $ExpectError: need boolean
+          // $FlowExpectedError: need boolean
           shouldActivateOnStart={'true'}
-          // $ExpectError: need boolean
+          // $FlowExpectedError: need boolean
           exclusive={'true'}
-          // $ExpectError: need string
+          // $FlowExpectedError: need string
           rippleColor={true}
         />;
       });
@@ -53,9 +53,9 @@ describe('BorderlessButton', () => {
 
   it('should raises an error when use incompatible values for additional props', () => {
     <BorderlessButton
-      // $ExpectError: need number
+      // $FlowExpectedError: need number
       activeOpacity={'void'}
-      // $ExpectError: need boolean
+      // $FlowExpectedError: need boolean
       borderless={69}
     />;
   });
@@ -68,9 +68,9 @@ describe('RectButton', () => {
 
   it('should raises an error when use incompatible values for additional props', () => {
     <RectButton
-      // $ExpectError: need number
+      // $FlowExpectedError: need number
       activeOpacity={'void'}
-      // $ExpectError: need string
+      // $FlowExpectedError: need string
       underlayColor={true}
     />;
   });

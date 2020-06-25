@@ -42,19 +42,19 @@ describe('selectedAudioTrack & selectedTextTrack', () => {
   });
 
   it('raises an error when passed an unrecognized value key', () => {
-    // $ExpectError
+    // $FlowExpectedError
     <Video
       source={0}
       selectedAudioTrack={{ type: 'index', value: 'notNumber' }}
     />;
 
-    // $ExpectError
+    // $FlowExpectedError
     <Video source={0} selectedTextTrack={{ type: 'language', value: 69 }} />;
 
-    // $ExpectError
+    // $FlowExpectedError
     <Video source={0} selectedTextTrack={{ type: 'unsutortedType' }} />;
 
-    // $ExpectError
+    // $FlowExpectedError
     <Video source={0} selectedAudioTrack={{ type: 'title', value: 13 }} />;
   });
 });
@@ -67,10 +67,10 @@ describe('TextTrackType', () => {
   });
 
   it('raises an error when overwrite some value', () => {
-    // $ExpectError - read-only
+    // $FlowExpectedError - read-only
     TextTrackType.TTML = '123';
 
-    // $ExpectError - exact type
+    // $FlowExpectedError - exact type
     TextTrackType.TTMLXXX = '123';
   });
 });
@@ -96,10 +96,10 @@ describe('FilterType', () => {
   });
 
   it('raises an error when overwrite some value', () => {
-    // $ExpectError - read-only
+    // $FlowExpectedError - read-only
     FilterType.SEPIA = '123';
 
-    // $ExpectError - exact type
+    // $FlowExpectedError - exact type
     FilterType.SEPIAXXX = '123';
   });
 });
@@ -115,7 +115,7 @@ describe('public class methods', () => {
     it('seek should call with number ', () => {
       video.seek(1);
 
-      // $ExpectError
+      // $FlowExpectedError
       video.seek();
     });
 
@@ -137,7 +137,7 @@ describe('public class methods', () => {
   describe('should call restoreUserInterfaceForPictureInPictureStopCompleted', () => {
     video.restoreUserInterfaceForPictureInPictureStopCompleted(true);
 
-    // $ExpectError: first argument must be boolean
+    // $FlowExpectedError: first argument must be boolean
     video.restoreUserInterfaceForPictureInPictureStopCompleted('true');
   });
 });
@@ -153,10 +153,10 @@ describe('source prop', () => {
   });
 
   it('should throw error when source is void', () => {
-    // $ExpectError
+    // $FlowExpectedError
     <Video source={null} />;
 
-    // $ExpectError
+    // $FlowExpectedError
     <Video source={undefined} />;
   });
 });
@@ -240,7 +240,7 @@ it('should passes when used properly resizeMode', () => {
     <Video source={0} resizeMode={undefined} />
   </>;
 
-  // $ExpectError
+  // $FlowExpectedError
   var b = <Video source={0} resizeMode="unSupportedType" />;
 });
 
@@ -254,7 +254,7 @@ it('should passes when used properly posterResizeMode', () => {
     <Video source={0} posterResizeMode={undefined} />
   </>;
 
-  // $ExpectError
+  // $FlowExpectedError
   <Video source={0} posterResizeMode="unSupportedType" />;
 });
 
@@ -279,7 +279,7 @@ it('should passes when used properly filter', () => {
     <Video source={0} filter={undefined} />
   </>;
 
-  // $ExpectError
+  // $FlowExpectedError
   <Video source={0} filter="unSupportedType" />;
 });
 
@@ -289,7 +289,7 @@ describe('events', () => {
       <Video
         source={0}
         onTimedMetadata={event => {
-          // $ExpectError - read-only event and exact
+          // $FlowExpectedError - read-only event and exact
           event.abc = 123;
 
           (event.metadata: $ReadOnlyArray<TimedMetadata>);
@@ -305,7 +305,7 @@ describe('events', () => {
       <Video
         source={0}
         onAudioFocusChanged={event => {
-          // $ExpectError - read-only event and exact
+          // $FlowExpectedError - read-only event and exact
           event.abc = 123;
 
           (event.hasAudioFocus: boolean);
@@ -321,7 +321,7 @@ describe('events', () => {
       <Video
         source={0}
         onProgress={event => {
-          // $ExpectError - read-only event and exact
+          // $FlowExpectedError - read-only event and exact
           event.abc = 123;
 
           (event.currentTime: number);
@@ -339,7 +339,7 @@ describe('events', () => {
       <Video
         source={0}
         onBuffer={event => {
-          // $ExpectError - read-only event and exact
+          // $FlowExpectedError - read-only event and exact
           event.abc = 123;
 
           (event.isBuffering: boolean);
@@ -355,7 +355,7 @@ describe('events', () => {
       <Video
         source={0}
         onLoad={event => {
-          // $ExpectError - read-only event and exact
+          // $FlowExpectedError - read-only event and exact
           event.abc = 123;
 
           (event.audioTracks: $ReadOnlyArray<TrackDescriptor>);
@@ -369,7 +369,7 @@ describe('events', () => {
           (event.duration: number);
           (event.textTracks: $ReadOnlyArray<TrackDescriptor>);
 
-          // $ExpectError - read-only object
+          // $FlowExpectedError - read-only object
           event.naturalSize.abc = 123;
 
           (event.naturalSize.height: number);
@@ -387,7 +387,7 @@ describe('events', () => {
       <Video
         source={0}
         onLoadStart={event => {
-          // $ExpectError - read-only event and exact
+          // $FlowExpectedError - read-only event and exact
           event.abc = 123;
 
           (event.isNetwork: boolean);
@@ -418,11 +418,11 @@ describe('events', () => {
         onPlaybackStalled={undefined}
       />;
 
-      // $ExpectError
+      // $FlowExpectedError
       <Video source={0} onAudioBecomingNoisy="testAnyFunction" />;
-      // $ExpectError
+      // $FlowExpectedError
       <Video source={0} onPlaybackResume="testAnyFunction" />;
-      // $ExpectError
+      // $FlowExpectedError
       <Video source={0} onPlaybackStalled="testAnyFunction" />;
     });
   });
@@ -432,7 +432,7 @@ describe('events', () => {
       <Video
         source={0}
         onSeek={event => {
-          // $ExpectError - read-only event and exact
+          // $FlowExpectedError - read-only event and exact
           event.abc = 123;
 
           (event.target: number);
@@ -450,7 +450,7 @@ describe('events', () => {
       <Video
         source={0}
         onPlaybackRateChange={event => {
-          // $ExpectError - read-only event and exact
+          // $FlowExpectedError - read-only event and exact
           event.abc = 123;
 
           (event.target: number);
@@ -467,7 +467,7 @@ describe('events', () => {
       <Video
         source={0}
         onExternalPlaybackChange={event => {
-          // $ExpectError - read-only event and exact
+          // $FlowExpectedError - read-only event and exact
           event.abc = 123;
 
           (event.target: number);
@@ -484,7 +484,7 @@ describe('events', () => {
       <Video
         source={0}
         onError={event => {
-          // $ExpectError - read-only event and exact
+          // $FlowExpectedError - read-only event and exact
           event.abc = 123;
 
           (event.target: number);
@@ -502,7 +502,7 @@ describe('events', () => {
       <Video
         source={0}
         onBandwidthUpdate={event => {
-          // $ExpectError - read-only event and exact
+          // $FlowExpectedError - read-only event and exact
           event.abc = 123;
 
           (event.target: number);
@@ -519,7 +519,7 @@ describe('events', () => {
       <Video
         source={0}
         onPictureInPictureStatusChanged={event => {
-          // $ExpectError - read-only event and exact
+          // $FlowExpectedError - read-only event and exact
           event.abc = 123;
 
           (event.target: number);
@@ -570,17 +570,17 @@ describe('events', () => {
         }}
       />;
 
-      // $ExpectError
+      // $FlowExpectedError
       <Video source={0} onReadyForDisplay="testForAnyFunction" />;
-      // $ExpectError
+      // $FlowExpectedError
       <Video source={0} onEnd="testForAnyFunction" />;
-      // $ExpectError
+      // $FlowExpectedError
       <Video source={0} onFullscreenPlayerWillPresent="testForAnyFunction" />;
-      // $ExpectError
+      // $FlowExpectedError
       <Video source={0} onFullscreenPlayerDidPresent="testForAnyFunction" />;
-      // $ExpectError
+      // $FlowExpectedError
       <Video source={0} onFullscreenPlayerWillDismiss="testForAnyFunction" />;
-      // $ExpectError
+      // $FlowExpectedError
       <Video source={0} onFullscreenPlayerDidDismiss="testForAnyFunction" />;
     });
   });

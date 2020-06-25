@@ -5,7 +5,7 @@
  */
 
 beforeAll(() => {});
-// $ExpectError
+// $FlowExpectedError
 beforeAll();
 
 /**
@@ -13,7 +13,7 @@ beforeAll();
  */
 
 beforeEach(() => {});
-// $ExpectError
+// $FlowExpectedError
 beforeEach();
 
 
@@ -22,7 +22,7 @@ beforeEach();
  */
 
 afterAll(() => {});
-// $ExpectError
+// $FlowExpectedError
 afterAll();
 
 /**
@@ -30,5 +30,5 @@ afterAll();
  */
 
 afterEach(() => {});
-// $ExpectError
+// $FlowExpectedError
 afterEach();

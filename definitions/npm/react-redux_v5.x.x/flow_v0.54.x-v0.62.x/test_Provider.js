@@ -2,10 +2,10 @@
 import React from "react";
 import { Provider, createProvider } from "react-redux";
 
-// $ExpectError
+// $FlowExpectedError
 <Provider />; // missing store
 
 const CustomProvider: Provider<*, *> = createProvider("ikea");
 
-// $ExpectError
+// $FlowExpectedError
 <CustomProvider />; // missing store

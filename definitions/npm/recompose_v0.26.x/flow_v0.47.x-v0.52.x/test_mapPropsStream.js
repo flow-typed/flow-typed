@@ -17,7 +17,7 @@ const Comp = ({ a }) =>
   <div>
     {(a: string)}
     {
-      // $ExpectError
+      // $FlowExpectedError
       (a: number)
     }
   </div>;

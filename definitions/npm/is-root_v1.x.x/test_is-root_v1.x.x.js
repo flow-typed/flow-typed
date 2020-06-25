@@ -2,5 +2,5 @@ import isRoot from 'is-root';
 
 (isRoot(): boolean);
 
-// $ExpectError
+// $FlowExpectedError
 (isRoot(): number);

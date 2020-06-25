@@ -11,12 +11,12 @@ describe('static methods', () => {
     });
 
     it('should raise an error when call with invalid argument', () => {
-      // $ExpectError: first argument must be number or array if numbers
+      // $FlowExpectedError: first argument must be number or array if numbers
       Asset.loadAsync('');
 
       Asset.loadAsync([
         1,
-        // $ExpectError: must be number
+        // $FlowExpectedError: must be number
         '',
       ]);
     });
@@ -28,7 +28,7 @@ describe('static methods', () => {
     });
 
     it('should raise an error when call with invalid argument', () => {
-      // $ExpectError: first argument must be a string
+      // $FlowExpectedError: first argument must be a string
       Asset.fromURI(1);
     });
   });
@@ -40,7 +40,7 @@ describe('static methods', () => {
     });
 
     it('should raise an error when call with invalid argument', () => {
-      // $ExpectError: first argument must be a string or a number
+      // $FlowExpectedError: first argument must be a string or a number
       Asset.fromModule(true);
     });
   });
@@ -76,9 +76,9 @@ describe('static methods', () => {
     });
 
     it('should raise an error when call with invalid argument', () => {
-      // $ExpectError: first argument must be an object
+      // $FlowExpectedError: first argument must be an object
       Asset.fromMetadata(true);
-      // $ExpectError: missing required props
+      // $FlowExpectedError: missing required props
       Asset.fromMetadata({});
     });
   });

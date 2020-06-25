@@ -17,7 +17,7 @@ const letters = _.split("", "abcABCaaaBBc");
 const countB = _.countBy(_.compose(_.toString, Math.floor))(numbers);
 const countB1: { [k: string]: number } = _.countBy(_.toLower)(letters);
 const diff: Array<number> = _.difference([1, 2, 3, 4], [7, 6, 5, 4, 3]);
-//$ExpectError
+//$FlowExpectedError
 const diff1: Array<string> = _.difference(
   ["1", "2", "3", "4"],
   [7, 6, 5, 4, 3]
@@ -73,7 +73,7 @@ const propEqResult2c: boolean = _.propEq("bar")("always false", propEqObj);
 const propEqResult2d: boolean = _.propEq("bar", "always false")(propEqObj);
 
 // The property name must be a property on the object supplied.
-// $ExpectError
+// $FlowExpectedError
 const propEqResultError: boolean = _.propEq("missing", 1, propEqObj);
 
 // propEq must work with key value pairs.

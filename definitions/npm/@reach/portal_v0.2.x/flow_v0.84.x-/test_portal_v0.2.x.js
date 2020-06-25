@@ -6,7 +6,7 @@ import { it, describe } from 'flow-typed-test';
 
 describe('@reach/portal', () => {
   it('children have to be a react node', function () {
-    // $ExpectError
+    // $FlowExpectedError
     <Portal />;
 
     <Portal>Foo</Portal>;
@@ -14,10 +14,10 @@ describe('@reach/portal', () => {
   });
 
   it('accepts string type property', function () {
-    // $ExpectError
+    // $FlowExpectedError
     <Portal type={1}>1</Portal>;
 
-    // $ExpectError
+    // $FlowExpectedError
     <Portal type={{}}>1</Portal>;
 
     <Portal type="portal-node">1</Portal>;

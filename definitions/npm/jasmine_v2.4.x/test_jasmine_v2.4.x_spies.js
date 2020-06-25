@@ -3,7 +3,7 @@
 const namelessSpy = jasmine.createSpy();
 const spy = jasmine.createSpy('mySpy');
 
-// $ExpectError
+// $FlowExpectedError
 const badName = jasmine.createSpy(12);
 
 spy.calls.allArgs();
@@ -16,7 +16,7 @@ spy.calls.reset();
 
 spy.and.callFake(() => {});
 
-// $ExpectError
+// $FlowExpectedError
 spy.and.callFake();
 
 spy.and.callThrough();

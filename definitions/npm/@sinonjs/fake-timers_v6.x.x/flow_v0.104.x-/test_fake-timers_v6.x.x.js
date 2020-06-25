@@ -10,7 +10,7 @@ describe('@sinonjs/fake-timers', () => {
       loopLimit: 250,
     });
 
-    // $ExpectError
+    // $FlowExpectedError
     FakeTimers.install(true);
   });
 
@@ -24,7 +24,7 @@ describe('@sinonjs/fake-timers', () => {
     const intervalId = clock.setInterval(() => {});
     clock.clearTimeout(timeoutId);
 
-    // $ExpectError
+    // $FlowExpectedError
     clock.clearTimeout(intervalId);
     clock.clearInterval(intervalId);
     clock.runToFrame();

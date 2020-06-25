@@ -4,30 +4,30 @@ import type { FetchOptions, ApolloLink, RequestHandler } from "apollo-link-http"
 
 const options: FetchOptions = {};
 
-// $ExpectError
+// $FlowExpectedError
 options.uri = 123;
 options.uri = "/uri";
 
 //TODO: options.fetch
 
-// $ExpectError
+// $FlowExpectedError
 options.includeExtensions = "false";
 options.includeExtensions = false;
 
-// $ExpectError
+// $FlowExpectedError
 options.credentials = 123;
 options.credentials = "credentials";
 
-// $ExpectError
+// $FlowExpectedError
 options.foobar = "foobar";
 
 let apolloLink: ApolloLink;
-// $ExpectError
+// $FlowExpectedError
 apolloLink = createHttpLink({ uri: 123 });
 apolloLink = createHttpLink(options);
 
 let httpLink: HttpLink;
-// $ExpectError
+// $FlowExpectedError
 httpLink = new HttpLink({ uri: 123 });
 httpLink = new HttpLink(options);
 

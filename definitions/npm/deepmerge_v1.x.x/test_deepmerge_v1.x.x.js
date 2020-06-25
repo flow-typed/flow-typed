@@ -23,9 +23,9 @@ const mergedArr4 = deepmerge.all([arrA, arrB], { clone: true, });
 const mergedArr40 = deepmerge.all([arrA, arrB], { clone: true, arrayMerge });
 const mergedArr41 = deepmerge.all([arrA, arrB], { arrayMerge });
 
-// $ExpectError
+// $FlowExpectedError
 deepmerge(1, 2);
-// $ExpectError
+// $FlowExpectedError
 deepmerge({});
-// $ExpectError
+// $FlowExpectedError
 deepmerge({}, {}, { arrayMerge: (a: Object, b: Object) => ({ ...a, ...b }) });

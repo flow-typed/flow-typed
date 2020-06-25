@@ -16,7 +16,7 @@ describe("Auth0 constructor", () => {
   });
 
   it("raises an error when create new class without any arguments", () => {
-    // $ExpectError - first argument is required
+    // $FlowExpectedError - first argument is required
     new Auth0();
   });
 
@@ -44,7 +44,7 @@ describe("Auth0 constructor", () => {
           });
 
           it("raises an error when call with invalid params", () => {
-            // $ExpectError
+            // $FlowExpectedError
             auth0.auth.authorizationUrl({
               responseType: {},
               redirectUri: true,
@@ -53,7 +53,7 @@ describe("Auth0 constructor", () => {
           });
 
           it("raises an error when call without args", () => {
-            // $ExpectError
+            // $FlowExpectedError
             auth0.auth.authorizationUrl();
           });
         });
@@ -75,14 +75,14 @@ describe("Auth0 constructor", () => {
           });
 
           it("raises an error when call with invalid params", () => {
-            // $ExpectError
+            // $FlowExpectedError
             auth0.auth.createUser({
               email: 69
             });
           });
 
           it("raises an error when call without args", () => {
-            // $ExpectError
+            // $FlowExpectedError
             auth0.auth.createUser();
           });
         });
@@ -99,7 +99,7 @@ describe("Auth0 constructor", () => {
           });
 
           it("raises an error when call with invalid params", () => {
-            // $ExpectError
+            // $FlowExpectedError
             auth0.auth.logoutUrl({
               federated: "true",
               clientId: 123,
@@ -108,7 +108,7 @@ describe("Auth0 constructor", () => {
           });
 
           it("raises an error when call without args", () => {
-            // $ExpectError
+            // $FlowExpectedError
             auth0.auth.logoutUrl();
           });
         });
@@ -133,7 +133,7 @@ describe("Auth0 constructor", () => {
           });
 
           it("raises an error when call with invalid params", () => {
-            // $ExpectError
+            // $FlowExpectedError
             auth0.auth.passwordRealm({
               username: true,
               password: 123
@@ -141,7 +141,7 @@ describe("Auth0 constructor", () => {
           });
 
           it("raises an error when call without args", () => {
-            // $ExpectError
+            // $FlowExpectedError
             auth0.auth.passwordRealm();
           });
         });
@@ -155,7 +155,7 @@ describe("Auth0 constructor", () => {
           });
 
           it("raises an error when call with invalid params", () => {
-            // $ExpectError
+            // $FlowExpectedError
             auth0.auth.refreshToken({
               refreshToken: 1337,
               scope: {}
@@ -163,7 +163,7 @@ describe("Auth0 constructor", () => {
           });
 
           it("raises an error when call without args", () => {
-            // $ExpectError
+            // $FlowExpectedError
             auth0.auth.refreshToken();
           });
         });
@@ -177,7 +177,7 @@ describe("Auth0 constructor", () => {
           });
 
           it("raises an error when call with invalid params", () => {
-            // $ExpectError
+            // $FlowExpectedError
             auth0.auth.resetPassword({
               email: null,
               connection: 80
@@ -185,7 +185,7 @@ describe("Auth0 constructor", () => {
           });
 
           it("raises an error when call without args", () => {
-            // $ExpectError
+            // $FlowExpectedError
             auth0.auth.resetPassword();
           });
         });
@@ -198,14 +198,14 @@ describe("Auth0 constructor", () => {
           });
 
           it("raises an error when call with invalid params", () => {
-            // $ExpectError
+            // $FlowExpectedError
             auth0.auth.revoke({
               refreshToken: 1995
             });
           });
 
           it("raises an error when call without args", () => {
-            // $ExpectError
+            // $FlowExpectedError
             auth0.auth.revoke();
           });
         });
@@ -228,14 +228,14 @@ describe("Auth0 constructor", () => {
           });
 
           it("raises an error when call with invalid params", () => {
-            // $ExpectError
+            // $FlowExpectedError
             auth0.auth.userInfo({
               token: 1234
             });
           });
 
           it("raises an error when call without args", () => {
-            // $ExpectError
+            // $FlowExpectedError
             auth0.auth.userInfo();
           });
         });
@@ -262,7 +262,7 @@ describe("Auth0 constructor", () => {
         });
 
         it("raises an error when Param has undeclared props", () => {
-          // $ExpectError - property `anyOtherProp` is missing in `ClearSessionParams` <- Exact type
+          // $FlowExpectedError - property `anyOtherProp` is missing in `ClearSessionParams` <- Exact type
           auth0.webAuth.clearSession({
             federated: false,
             anyOtherProp: ["oops"]
@@ -273,12 +273,12 @@ describe("Auth0 constructor", () => {
 
     describe("Auth0::users", () => {
       it('raises an error when call "users()" method without arguments', () => {
-        // $ExpectError
+        // $FlowExpectedError
         auth0.users();
       });
 
       it("raises an error when fist argument int's string", () => {
-        // $ExpectError
+        // $FlowExpectedError
         auth0.users(123);
       });
 
@@ -299,17 +299,17 @@ describe("Auth0 constructor", () => {
         });
 
         it('raise an error when call "getUser({id})" with undeclared props', () => {
-          // $ExpectError - first argument is Exact Type, need only `id` prop
+          // $FlowExpectedError - first argument is Exact Type, need only `id` prop
           user.getUser({ id: "userId", anyOtherProp: ["anyData"] });
         });
 
         it('raise an error when call "getUser({id})" without arguments', () => {
-          // $ExpectError - first argument is required
+          // $FlowExpectedError - first argument is required
           user.getUser();
         });
 
         it('raise an error when call "patchUser({id,metadata})" with undeclared props', () => {
-          // $ExpectError - first argument is Exact Type, need only `id` and `metadata` properties
+          // $FlowExpectedError - first argument is Exact Type, need only `id` and `metadata` properties
           user.patchUser<Object>({
             id: "userId",
             metadata: {},
@@ -318,7 +318,7 @@ describe("Auth0 constructor", () => {
         });
 
         it('raise an error when call "patchUser({id,metadata})" without arguments', () => {
-          // $ExpectError - first argument is required
+          // $FlowExpectedError - first argument is required
           user.patchUser();
         });
       });

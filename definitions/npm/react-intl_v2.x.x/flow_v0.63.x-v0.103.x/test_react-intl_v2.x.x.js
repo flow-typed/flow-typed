@@ -18,7 +18,7 @@ import type { IntlShape, MessageDescriptor } from "react-intl";
 import { it, describe } from "flow-typed-test";
 
 intlShape({ foo: "bar" }, "propName", "TestComponentName");
-// $ExpectError number. This type is incompatible with void
+// $FlowExpectedError number. This type is incompatible with void
 const result1: number = intlShape(
   { foo: "bar" },
   "propName",
@@ -31,7 +31,7 @@ const localeData = {
   testKey2: { baz: "buu" }
 };
 addLocaleData(localeData);
-// $ExpectError number. This type is incompatible with void
+// $FlowExpectedError number. This type is incompatible with void
 const resultLocaleData: number = addLocaleData(localeData);
 
 const messages = {
@@ -50,19 +50,19 @@ const messages = {
   }
 };
 const messageDescriptorMap = defineMessages(messages);
-// $ExpectError foo is undefined
+// $FlowExpectedError foo is undefined
 const messageDescriptorMap1 = defineMessages(messages).foo;
-// $ExpectError id and defaultMessage are required
+// $FlowExpectedError id and defaultMessage are required
 const messageDescriptorMap2 = defineMessages({ message: {} });
-// $ExpectError array. This type is incompatible with MessageDescriptorMap
+// $FlowExpectedError array. This type is incompatible with MessageDescriptorMap
 const messageDescriptorMap3: Array<string> = defineMessages(messages);
-// $ExpectError string. This type is incompatible with MessageDescriptorMap
+// $FlowExpectedError string. This type is incompatible with MessageDescriptorMap
 const messageDescriptorMap4: string = defineMessages(messages);
 const msg1:MessageDescriptor = messageDescriptorMap.messagekey1;
 const msg2:MessageDescriptor = messageDescriptorMap.messagekey2_foo;
 const msg3:MessageDescriptor = messageDescriptorMap.messagekey3;
 
-// $ExpectError defineMessages accepts exact $npm$ReactIntl$MessageDescriptor
+// $FlowExpectedError defineMessages accepts exact $npm$ReactIntl$MessageDescriptor
 const messageDescriptorMap5 = defineMessages({
   message: {
     id: "message5",
@@ -178,17 +178,17 @@ describe("react-intl", () => {
       });
 
       it('failed as prop "name" is missing', () => {
-        // $ExpectError prop "name" is missing
+        // $FlowExpectedError prop "name" is missing
         <Component />;
       });
 
       it('failed as prop "name" type is incompatible', () => {
-        // $ExpectError prop "name" type is incompatible
+        // $FlowExpectedError prop "name" type is incompatible
         <Component name={1} />;
       });
 
       it('failed as not supported prop is passed and "name" is missing', () => {
-        // $ExpectError prop "name" type is incompatible
+        // $FlowExpectedError prop "name" type is incompatible
         <Component foo={1} />;
       });
     });
@@ -201,17 +201,17 @@ describe("react-intl", () => {
       });
 
       it('failed as prop "name" is missing', () => {
-        // $ExpectError prop "name" is missing
+        // $FlowExpectedError prop "name" is missing
         <Component />;
       });
 
       it('failed as prop "name" type is incompatible', () => {
-        // $ExpectError prop "name" type is incompatible
+        // $FlowExpectedError prop "name" type is incompatible
         <Component name={1} />;
       });
 
       it('failed as not supported prop is passed and "name" is missing', () => {
-        // $ExpectError prop "name" type is incompatible
+        // $FlowExpectedError prop "name" type is incompatible
         <Component foo={1} />;
       });
     });
@@ -224,17 +224,17 @@ describe("react-intl", () => {
       });
 
       it('failed as prop "name" is missing', () => {
-        // $ExpectError prop "name" is missing
+        // $FlowExpectedError prop "name" is missing
         <Component />;
       });
 
       it('failed as prop "name" type is incompatible', () => {
-        // $ExpectError prop "name" type is incompatible
+        // $FlowExpectedError prop "name" type is incompatible
         <Component name={1} />;
       });
 
       it('failed as not supported prop is passed and "name" is missing', () => {
-        // $ExpectError prop "name" type is incompatible
+        // $FlowExpectedError prop "name" type is incompatible
         <Component foo={1} />;
       });
     });
@@ -251,7 +251,7 @@ describe("react-intl", () => {
       });
 
       it('failed as prop "name" type is incompatible', () => {
-        // $ExpectError prop "name" type is incompatible
+        // $FlowExpectedError prop "name" type is incompatible
         <Component name={1} />;
       });
 
@@ -272,7 +272,7 @@ describe("react-intl", () => {
       });
 
       it('failed as prop "name" type is incompatible', () => {
-        // $ExpectError prop "name" type is incompatible
+        // $FlowExpectedError prop "name" type is incompatible
         <Component name={1} />;
       });
 
@@ -300,17 +300,17 @@ describe("react-intl", () => {
       });
 
       it('failed as prop "name" is missing', () => {
-        // $ExpectError prop "name" is missing
+        // $FlowExpectedError prop "name" is missing
         <Component />;
       });
 
       it('failed as prop "name" type is incompatible', () => {
-        // $ExpectError prop "name" type is incompatible
+        // $FlowExpectedError prop "name" type is incompatible
         <Component name={1} />;
       });
 
       it('failed as not supported prop is passed and "name" is missing', () => {
-        // $ExpectError prop "name" type is incompatible
+        // $FlowExpectedError prop "name" type is incompatible
         <Component foo={1} />;
       });
     });
@@ -342,7 +342,7 @@ describe("react-intl", () => {
       });
 
       it('failed as prop "name" type is incompatible', () => {
-        // $ExpectError prop "name" type is incompatible
+        // $FlowExpectedError prop "name" type is incompatible
         <Component name={1} />;
       });
 

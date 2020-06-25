@@ -4,12 +4,12 @@ import turfPoint from 'turf-point';
 
 turfPoint([10, 20]);
 
-// $ExpectError
+// $FlowExpectedError
 turfPoint([10, 20, 30]);
 
 turfPoint([20, 30], {foo: 'bar'});
 
 (turfPoint([20, 30], {foo: 'bar'}).properties.foo: string);
 
-// $ExpectError
+// $FlowExpectedError
 (turfPoint([20, 30], ({foo: 'bar'}: {|foo: string|}) ).properties.doesNotExist: string);

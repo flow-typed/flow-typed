@@ -32,7 +32,7 @@ describe('react-visibility-sensor', () => {
   });
 
   it("should fail without required parameters", () => {
-    // $ExpectError
+    // $FlowExpectedError
     <VisibilitySensor />;
   });
 });

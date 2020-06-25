@@ -48,5 +48,5 @@ const fakeNavigateAction = {
   fake: "Navigation/NAVIGATE",
   blah: "Test1",
 };
-// $ExpectError not a valid action!
+// $FlowExpectedError not a valid action!
 tabRouter.getStateForAction(fakeNavigateAction, null);

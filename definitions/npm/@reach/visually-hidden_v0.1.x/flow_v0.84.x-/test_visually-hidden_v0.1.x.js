@@ -24,7 +24,7 @@ describe('@reach/visually-hidden', () => {
   });
 
   it('raises error', () => {
-    // $ExpectError - children must be a react node
+    // $FlowExpectedError - children must be a react node
     <VisuallyHidden />;
   });
 });

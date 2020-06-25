@@ -5,20 +5,20 @@ const fileToRead: string = "/path/foo.txt";
 
 rm(fileToRead);
 
-// $ExpectError
+// $FlowExpectedError
 rm();
 
-// $ExpectError
+// $FlowExpectedError
 rm(1234);
 
-// $ExpectError
+// $FlowExpectedError
 rm(() => {});
 
-// $ExpectError
+// $FlowExpectedError
 rm(true);
 
-// $ExpectError
+// $FlowExpectedError
 rm(fileToRead, () => {});
 
-// $ExpectError
+// $FlowExpectedError
 const response: string = rm(fileToRead);

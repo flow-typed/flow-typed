@@ -1,13 +1,13 @@
 import {Player, Recorder} from 'react-native-audio-toolkit';
 
-// $ExpectError
+// $FlowExpectedError
 new Player();
 
 new Player('sound.mp3');
 new Player('sound.mp3', {autoDestroy: false});
 new Player('sound.mp3', {continuesToPlayInBackground: true});
 
-// $ExpectError
+// $FlowExpectedError
 new Recorder();
 
 new Recorder('sound.mp3');

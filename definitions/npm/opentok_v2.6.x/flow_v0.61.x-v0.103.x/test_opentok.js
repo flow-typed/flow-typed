@@ -5,27 +5,27 @@ import OpenTok from 'opentok';
 
 describe('OpenTok', () => {
   const opentok = new OpenTok('OPENTOK_APIKEY', 'OPENTOK_APISECRET');
-  // $ExpectError: wrong arguments
+  // $FlowExpectedError: wrong arguments
   new OpenTok();
 
   it('should test createSession', () => {
     opentok.createSession({ mediaMode: 'routed' }, function (err, session) {
       if (err) {
         err.message;
-        // $ExpectError
+        // $FlowExpectedError
         err.foo;
       }
 
       if (session) {
         session.sessionId;
-        // $ExpectError
+        // $FlowExpectedError
         session.foo;
       }
     });
 
-    // $ExpectError
+    // $FlowExpectedError
     opentok.createSession({ mediaMode: 'errrm?' }, function (_err, _session) {});
-    // $ExpectError
+    // $FlowExpectedError
     opentok.createSession({ yolo: true }, function (_err, _session) {});
   });
 
@@ -33,9 +33,9 @@ describe('OpenTok', () => {
     opentok.generateToken('my-session-id');
     opentok.generateToken('my-session-id', { role: 'publisher' });
 
-    // $ExpectError
+    // $FlowExpectedError
     opentok.generateToken('my-session-id', { role: 'janitor' });
-    // $ExpectError
+    // $FlowExpectedError
     opentok.generateToken('my-session-id', { yolo: true });
   });
 
@@ -43,20 +43,20 @@ describe('OpenTok', () => {
     opentok.startArchive('my-session-id', { outputMode: 'composed' }, function (err, archive) {
       if (err) {
         err.message;
-        // $ExpectError
+        // $FlowExpectedError
         err.foo;
       }
 
       if (archive) {
         archive.id;
-        // $ExpectError
+        // $FlowExpectedError
         archive.foo;
       }
     });
 
-    // $ExpectError
+    // $FlowExpectedError
     opentok.startArchive('my-session-id', { outputMode: 'errrm?' }, function (_err, _archive) {});
-    // $ExpectError
+    // $FlowExpectedError
     opentok.startArchive('my-session-id', { yolo: true }, function (_err, _archive) {});
   });
 
@@ -64,13 +64,13 @@ describe('OpenTok', () => {
     opentok.stopArchive('my-archive-id', function (err, archive) {
       if (err) {
         err.message;
-        // $ExpectError
+        // $FlowExpectedError
         err.foo;
       }
 
       if (archive) {
         archive.id;
-        // $ExpectError
+        // $FlowExpectedError
         archive.foo;
       }
     });
@@ -80,13 +80,13 @@ describe('OpenTok', () => {
     opentok.getArchive('my-archive-id', function (err, archive) {
       if (err) {
         err.message;
-        // $ExpectError
+        // $FlowExpectedError
         err.foo;
       }
 
       if (archive) {
         archive.id;
-        // $ExpectError
+        // $FlowExpectedError
         archive.foo;
       }
     });
@@ -96,7 +96,7 @@ describe('OpenTok', () => {
     opentok.deleteArchive('my-archive-id', function (err) {
       if (err) {
         err.message;
-        // $ExpectError
+        // $FlowExpectedError
         err.foo;
       }
     });
@@ -106,14 +106,14 @@ describe('OpenTok', () => {
     opentok.listArchives({ count: 10 }, function (err, archives) {
       if (err) {
         err.message;
-        // $ExpectError
+        // $FlowExpectedError
         err.foo;
       }
 
       if (archives) {
         for(let archive of archives) {
           archive.id;
-          // $ExpectError
+          // $FlowExpectedError
           archive.foo;
         }
       }
@@ -124,7 +124,7 @@ describe('OpenTok', () => {
     opentok.getArchive('my-archive-id', function (err, archive) {
       if (err) {
         err.message;
-        // $ExpectError
+        // $FlowExpectedError
         err.foo;
       }
 
@@ -132,13 +132,13 @@ describe('OpenTok', () => {
         archive.stop(function (err, archive) {
           if (err) {
             err.message;
-            // $ExpectError
+            // $FlowExpectedError
             err.foo;
           }
 
           if (archive) {
             archive.id;
-            // $ExpectError
+            // $FlowExpectedError
             archive.foo;
           }
         });
@@ -150,11 +150,11 @@ describe('OpenTok', () => {
   it('should test dial', () => {
     let connection = opentok.dial('my-session-id', 'my-token', 'my-sip-uri');
     connection.id;
-    // $ExpectError
+    // $FlowExpectedError
     connection.foo;
 
     opentok.dial('my-session-id', 'my-token', 'my-sip-uri', { secure: true });
-    // $ExpectError
+    // $FlowExpectedError
     opentok.dial('my-session-id', 'my-token', 'my-sip-uri', { yolo: true });
   });
 
@@ -162,7 +162,7 @@ describe('OpenTok', () => {
     opentok.forceDisconnect('my-session-id', 'my-connection-id', function (err) {
       if (err) {
         err.message;
-        // $ExpectError
+        // $FlowExpectedError
         err.foo;
       }
     });

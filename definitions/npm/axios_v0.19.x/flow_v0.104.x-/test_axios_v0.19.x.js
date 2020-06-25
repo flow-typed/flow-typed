@@ -26,14 +26,14 @@ type Header = {[key: string]: mixed,...};
 const handleResponse = (response: $AxiosXHR<mixed>) => {
   (response.data: mixed);
   (response.status: number);
-  // $ExpectError
+  // $FlowExpectedError
   (response.status: string);
   (response.statusText: string);
-  // $ExpectError
+  // $FlowExpectedError
   (response.statusText: number);
   (response.headers: ?{...});
   (response.config: $AxiosXHRConfig<mixed>);
-  // $ExpectError
+  // $FlowExpectedError
   (response.config: string);
 };
 
@@ -47,11 +47,11 @@ const handleUserResponse = (
 const handleError = (error: $AxiosError<mixed>) => {
   (error: Error);
   (error.isAxiosError: boolean);
-  // $ExpectError
+  // $FlowExpectedError
   (error.isAxiosError: number);
 
   (error.config: $AxiosXHRConfig<mixed>);
-  // $ExpectError
+  // $FlowExpectedError
   (error.config: string);
 
   if (error.response) {
@@ -100,9 +100,9 @@ describe('Config', () => {
       method: 'PUT',
     };
 
-    // $ExpectError
+    // $FlowExpectedError
     axiosConfig.method = 'FOOBAR';
-    // $ExpectError
+    // $FlowExpectedError
     axiosConfig.responseType = 'foobar';
   });
 });
@@ -112,7 +112,7 @@ describe('Headers', () => {
     const test: Header = { 'foo': 1 };
     const test1: Header = { 'bar': 'baz'};
 
-    // $ExpectError
+    // $FlowExpectedError
     const test2: Header = { 1 : 'false'}
   });
 })
@@ -361,14 +361,14 @@ describe('Concurrency', () => {
     const promises = [Promise.resolve(1), Promise.resolve(2)];
 
     const promise: Promise<Array<number>> = axios.all(promises);
-    // $ExpectError
+    // $FlowExpectedError
     const promise2: Promise<Array<string>> = axios.all(promises);
   });
 
   it('axios.spread', () => {
     const fn1 = (a: number, b: number, c: number) => `${a}-${b}-${c}`;
     const fn2: (arr: Array<number>) => string = axios.spread(fn1);
-    // $ExpectError
+    // $FlowExpectedError
     const fn3: (arr: Array<string>) => string = axios.spread(fn1);
   });
 });
@@ -381,12 +381,12 @@ describe('Cancellation', () => {
       cancelToken: source.token,
     });
 
-    // $ExpectError
+    // $FlowExpectedError
     axios.get('/something', { cancelToken: source });
 
     (source.cancel: Canceler);
     source.cancel('Operation has been canceled.');
-    // $ExpectError
+    // $FlowExpectedError
     source.cancel(42);
   });
 });
@@ -423,14 +423,14 @@ describe('getUri', () => {
       },
     });
 
-    // $ExpectError
+    // $FlowExpectedError
     const uri2: number = axios.getUri();
   });
 });
 
 describe('options', () => {
   it('accepts string url only', () => {
-    //$ExpectError
+    //$FlowExpectedError
     axios.options(123)
     axios.options('a url')
   });

@@ -10,8 +10,8 @@ matchMedia('q', { type: 'screen' })
 matchMedia('q', { width: '1px' })
 matchMedia('q', { height: '1px' })
 
-// $ExpectError
+// $FlowExpectedError
 matchMedia('q', true)
 
-// $ExpectError
+// $FlowExpectedError
 matchMedia('q', { type: 'foo' })

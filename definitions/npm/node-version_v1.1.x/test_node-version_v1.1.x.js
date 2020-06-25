@@ -10,23 +10,23 @@ version.major.length;
 version.minor.length;
 version.build.length;
 
-// $ExpectError
+// $FlowExpectedError
 version.foo;
 
-// $ExpectError
+// $FlowExpectedError
 version.original * 2;
 
-// $ExpectError
+// $FlowExpectedError
 version.short * 2;
 
-// $ExpectError
+// $FlowExpectedError
 version.long * 2;
 
-// $ExpectError
+// $FlowExpectedError
 version.major * 2;
 
-// $ExpectError
+// $FlowExpectedError
 version.minor * 2;
 
-// $ExpectError
+// $FlowExpectedError
 version.build * 2;

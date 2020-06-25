@@ -94,5 +94,5 @@ const ValueRenderer = (props: Object) => <span />;
   wrapperStyle={{ backgroundColor: 'white' }}
 />;
 
-// $ExpectError addLabelText cannot be number
+// $FlowExpectedError addLabelText cannot be number
 <SelectComponent addLabelText={123} />;

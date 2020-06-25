@@ -6,11 +6,11 @@ const newObject: Object = mapObj({ foo: 'bar' }, function(key: string, value: an
   return [value, key];
 });
 
-// $ExpectError
+// $FlowExpectedError
 mapObj({a: 1}, (key, value, obj) => { obj.b; });
 
-// $ExpectError
+// $FlowExpectedError
 mapObj({a: 1}, (key, value, obj) => { obj.a = 'asdf'; });
 
-// $ExpectError
+// $FlowExpectedError
 (mapObj({a: 1}, (key, value, obj) => { return {b: 'asdf'}; }): {[key: string]: number});

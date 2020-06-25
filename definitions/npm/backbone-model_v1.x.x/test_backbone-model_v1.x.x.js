@@ -2,18 +2,18 @@
 import Backbone, { Model } from "backbone-model";
 import type { Backbone$Attrs } from "backbone-model";
 
-// $ExpectError
+// $FlowExpectedError
 (Backbone.$: any);
 
-// $ExpectError
+// $FlowExpectedError
 (Backbone._: any);
 
-// $ExpectError
+// $FlowExpectedError
 (Backbone.Events.on: Function);
 
 interface Fooable extends Model {
   foo(): string;
-  // $ExpectError
+  // $FlowExpectedError
   view: Backbone.View;
 }
 

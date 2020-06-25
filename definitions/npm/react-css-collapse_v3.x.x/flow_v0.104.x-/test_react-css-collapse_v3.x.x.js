@@ -4,17 +4,17 @@ import React from 'react';
 import Collapse from 'react-css-collapse';
 
 {
-  // $ExpectError
+  // $FlowExpectedError
   <Collapse isOpen="a" />
 }
 
 {
-  // $ExpectError
+  // $FlowExpectedError
   <Collapse onRest={1} />
 }
 
 {
-  // $ExpectError
+  // $FlowExpectedError
   <Collapse onRest={() => true} />
 }
 

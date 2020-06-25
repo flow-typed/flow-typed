@@ -1,7 +1,7 @@
 import Knex from "knex";
 
 const knex = Knex({});
-// $ExpectError - invalid Client
+// $FlowExpectedError - invalid Client
 Knex({
   client: "foo"
 });
@@ -42,7 +42,7 @@ knex("foo").insert({
   a: 1
 });
 knex("bar").del();
-// $ExpectError
+// $FlowExpectedError
 knex.from();
 
 knex.destroy();
@@ -78,18 +78,18 @@ knex.on("start", () => {});
 /* Having tests */
 knex("foo").having("count", ">", 100);
 knex("foo").havingIn("count", [1, 2, 3]);
-// $ExpectError
+// $FlowExpectedError
 knex("foo").havingIn("count", "string");
 knex("foo").havingNotIn("count", [1, 2, 3]);
 knex("foo").havingNull("count");
-// $ExpectError
+// $FlowExpectedError
 knex("foo").havingNull(null);
 knex("foo").havingExists(function() {
   this.select("*");
 });
 knex("foo").havingExists(knex.raw(""));
 knex("foo").havingBetween("count", [1, 5]);
-// $ExpectError
+// $FlowExpectedError
 knex("foo").havingBetween("count", [1, 2, 3]);
 knex("foo").havingRaw("count > 10");
 
@@ -106,15 +106,15 @@ knex("foo").whereRaw("", ["a"]);
 knex("foo").joinRaw("");
 knex("foo").joinRaw("", ["a"]);
 
-// $ExpectError
+// $FlowExpectedError
 knex("foo").raw();
-// $ExpectError
+// $FlowExpectedError
 knex("foo").raw("", "");
-// $ExpectError
+// $FlowExpectedError
 knex("foo").havingRaw();
-// $ExpectError
+// $FlowExpectedError
 knex("foo").whereRaw();
-// $ExpectError
+// $FlowExpectedError
 knex("foo").joinRaw();
 
 
@@ -132,13 +132,13 @@ knex("foo").orWhere({
   col2: "val2"
 });
 
-// $ExpectError
+// $FlowExpectedError
 knex("foo").orWhere();
-// $ExpectError
+// $FlowExpectedError
 knex("foo").orWhere(1, 1);
-// $ExpectError
+// $FlowExpectedError
 knex("foo").orWhere(1, 1, 1);
-// $ExpectError
+// $FlowExpectedError
 knex("foo").orWhere(true);
 
 
@@ -156,13 +156,13 @@ knex('foo').where({
   col2: 'val2'
 });
 
-// $ExpectError
+// $FlowExpectedError
 knex('foo').where();
-// $ExpectError
+// $FlowExpectedError
 knex('foo').where(1, 1);
-// $ExpectError
+// $FlowExpectedError
 knex('foo').where(1, 1, 1);
-// $ExpectError
+// $FlowExpectedError
 knex('foo').where(true);
 
 
@@ -180,13 +180,13 @@ knex("foo").whereNot({
   col2: "val2"
 });
 
-// $ExpectError
+// $FlowExpectedError
 knex("foo").whereNot();
-// $ExpectError
+// $FlowExpectedError
 knex("foo").whereNot(1, 1);
-// $ExpectError
+// $FlowExpectedError
 knex("foo").whereNot(1, 1, 1);
-// $ExpectError
+// $FlowExpectedError
 knex("foo").whereNot(true);
 
 
@@ -204,11 +204,11 @@ knex("foo").orWhereNot({
   col2: "val2"
 });
 
-// $ExpectError
+// $FlowExpectedError
 knex("foo").orWhereNot();
-// $ExpectError
+// $FlowExpectedError
 knex("foo").orWhereNot(1, 1);
-// $ExpectError
+// $FlowExpectedError
 knex("foo").orWhereNot(1, 1, 1);
-// $ExpectError
+// $FlowExpectedError
 knex("foo").orWhereNot(true);

@@ -10,7 +10,7 @@ test('Dispatch', async() => {
     throw await getUserAgent();
 });
 
-// $ExpectError - ClientFunction wants fn
+// $FlowExpectedError - ClientFunction wants fn
 ClientFunction(123)
 
 test('Call with arguments', async() => {

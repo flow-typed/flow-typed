@@ -8,7 +8,7 @@ alasql('select 5 as a');
 
 alasql('select ? as a',[5], function(x){});
 
-// $ExpectError
+// $FlowExpectedError
 alasql.parse(['select 3']); 
 
 alasql.parse('select 3');

@@ -9,17 +9,17 @@ prettyMs(1502217145948, { msDecimalDigits: 2 });
 prettyMs(1502217145948, { secDecimalDigits: 2 });
 prettyMs(1502217145948, { verbose: true, compact: true, msDecimalDigits: 2, secDecimalDigits: 2 });
 
-// $ExpectError
+// $FlowExpectedError
 prettyMs('text');
 
-// $ExpectError
+// $FlowExpectedError
 prettyMs({});
 
-// $ExpectError
+// $FlowExpectedError
 prettyMs(null);
 
-// $ExpectError
+// $FlowExpectedError
 prettyMs();
 
-// $ExpectError
+// $FlowExpectedError
 prettyMs(1502217145948, null);

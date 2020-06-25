@@ -194,12 +194,12 @@ test('Drag to element', async t => {
 });
 
 test('Drag to element with incorrect selector', async t => {
-    // $ExpectError
+    // $FlowExpectedError
     await t.dragToElement(void 0, '#destination-div');
 });
 
 test('Drag to element with incorrect destinationSelector', async t => {
-    // $ExpectError
+    // $FlowExpectedError
     await t.dragToElement('#draggable-div-2', null);
 });
 

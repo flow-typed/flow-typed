@@ -8,29 +8,29 @@ import shortid from 'shortid';
 
 shortid.seed(10);
 shortid.seed(10).seed(20);
-// $ExpectError
+// $FlowExpectedError
 shortid.seed();
-// $ExpectError
+// $FlowExpectedError
 shortid.seed('hello');
 
 shortid.worker(10);
 shortid.worker(10).worker(20);
-// $ExpectError
+// $FlowExpectedError
 shortid.worker();
-// $ExpectError
+// $FlowExpectedError
 shortid.worker('hello');
 
 const chars: string = shortid.characters('abcd');
-// $ExpectError
+// $FlowExpectedError
 shortid.characters();
-// $ExpectError
+// $FlowExpectedError
 shortid.characters(2);
 
 (shortid.decode('qwerty').version: number);
 (shortid.decode('qwerty').worker: number);
-// $ExpectError
+// $FlowExpectedError
 (shortid.decode('qwerty').other: number);
-// $ExpectError
+// $FlowExpectedError
 shortid.decode(1);
 
 (shortid.isValid('qwerty'): boolean);

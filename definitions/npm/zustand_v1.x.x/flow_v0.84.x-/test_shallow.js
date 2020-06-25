@@ -7,9 +7,9 @@ describe('zustand shallow', () => {
     (shallow({ a: 1 }, { b: 2 }): boolean);
     (namedShallow({ a: 1 }, { b: 2 }): boolean);
 
-    // $ExpectError
+    // $FlowExpectedError
     (shallow({ a: 1 }, { b: 2 }): string);
-    // $ExpectError
+    // $FlowExpectedError
     (namedShallow({ a: 1 }, { b: 2 }): number);
   });
 });

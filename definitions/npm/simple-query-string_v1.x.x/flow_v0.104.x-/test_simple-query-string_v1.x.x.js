@@ -21,13 +21,13 @@ describe('simple-query-string@1.x.x', () => {
   });
 
   it('should throw errors when impropertly used', () => {
-    // $ExpectError
+    // $FlowExpectedError
     parse({ search: { number: 1531869237159, string: 'someString' } });
-    // $ExpectError
+    // $FlowExpectedError
     stringify("{ search: '?number=1531869237159&string=someString' }");
-    // $ExpectError
+    // $FlowExpectedError
     parse("{ search: '?number+1531869237159@string+someString' }", 1, 2);
-    // $ExpectError
+    // $FlowExpectedError
     stringify({ search: { number: 1531869237159, string: 'someString' } }, 1, 2);
   });
 });

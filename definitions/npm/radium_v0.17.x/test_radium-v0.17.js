@@ -4,8 +4,8 @@ import Radium from 'radium';
 const A = Radium(<div/>);
 const B = Radium(<Radium.StyleRoot/>);
 const C: string = Radium.keyframes({});
-// $ExpectError
+// $FlowExpectedError
 const D: string = Radium.keyframes();
 const E: bool = Radium.getState({}, 'ref', ':hover');
-// $ExpectError
+// $FlowExpectedError
 const F: bool = Radium.getState({}, 'ref', ':visible')

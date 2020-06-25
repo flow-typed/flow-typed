@@ -4,7 +4,7 @@ if (googletag && googletag.apiReady) {
   // GPT API can be called safely.
 }
 
-// $ExpectError
+// $FlowExpectedError
 googletag.apiReady = true;
 
 googletag.cmd.push(() => {
@@ -13,7 +13,7 @@ googletag.cmd.push(() => {
     .addService(googletag.pubads());
 });
 
-// $ExpectError
+// $FlowExpectedError
 googletag.cmd.push(true);
 
 googletag.defineOutOfPageSlot("/1234567/sports", "div-1");

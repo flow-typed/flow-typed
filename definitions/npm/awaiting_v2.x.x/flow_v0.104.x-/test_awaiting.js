@@ -9,7 +9,7 @@ function testErrorList() {
   const el = new a.ErrorList('errors contained within')
   el.add(err)
 
-  // $ExpectError
+  // $FlowExpectedError
   el.add(3)
 
   const name: string = el.name
@@ -19,7 +19,7 @@ function testErrorList() {
   for (const e of el) {
     const e1: Error = e
 
-    // $ExpectError
+    // $FlowExpectedError
     const e2: Date = e
   }
 }
@@ -31,7 +31,7 @@ async function testLimit() {
   const l1: string = await a.limit(goal, limiter)
   const l2: string = await a.limit(goal, 300)
 
-  // $ExpectError
+  // $FlowExpectedError
   const l3: number = await a.limit(goal, limiter)
 }
 
@@ -40,7 +40,7 @@ async function testEvent() {
 
   const e1: string[] = await a.event(emitter, 'data')
 
-  // $ExpectError
+  // $FlowExpectedError
   const e2: string = await a.event(emitter, 'data')
 }
 
@@ -55,12 +55,12 @@ function testCallback() {
 
   const z1: Promise<number> = a.callback(onZeroArgs)
 
-  // $ExpectError
+  // $FlowExpectedError
   const z2: Promise<string> = a.callback(onZeroArgs)
 
   const o1: Promise<number> = a.callback(onOneArg, 3)
 
-  // $ExpectError
+  // $FlowExpectedError
   const o2: Promise<string> = a.callback(onOneArg, 3)
 }
 
@@ -82,14 +82,14 @@ async function testObject() {
   const o2: number = obj.b
   const o3: Date   = obj.c
 
-  // $ExpectError
+  // $FlowExpectedError
   const o4: number = obj.a
 
   const map: { [key: string]: number, ... } = await a.object({}, 4)
 
   const m1: number = map.foo
 
-  // $ExpectError
+  // $FlowExpectedError
   const m2: string = map.bar
 }
 
@@ -99,6 +99,6 @@ async function testMap() {
   const m1: number[] = await a.map(list, 1, s => Promise.resolve(s.length))
   const m2: number[] = await a.map(list, s => Promise.resolve(s.length))
 
-  // $ExpectError
+  // $FlowExpectedError
   const m3: string[] = await a.map(list, s => Promise.resolve(s.length))
 }

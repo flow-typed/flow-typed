@@ -10,10 +10,10 @@ primus.forEach((spark: Primus$Spark, id: string, connections: any) => {
   (spark.id: string);
   (spark.query: string);
   (spark.write('foo'): void);
-  // $ExpectError
+  // $FlowExpectedError
   spark.on(123, () => ({}));
 });
-// $ExpectError
+// $FlowExpectedError
 primus.remove(123);
 
 primus.use('testPlugin', {});

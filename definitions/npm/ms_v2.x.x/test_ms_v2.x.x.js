@@ -18,8 +18,8 @@ ms(60000, {long: true});
 ms(2 * 60000, {long: true});
 ms(ms('10 hours'), {long: true});
 
-// $ExpectError
+// $FlowExpectedError
 ms();
 
-// $ExpectError
+// $FlowExpectedError
 ms({});

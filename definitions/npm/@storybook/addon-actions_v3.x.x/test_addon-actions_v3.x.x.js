@@ -8,10 +8,10 @@ const firstArgAction = decorateAction([
   args => args.slice(0, 1)
 ]);
 
-// $ExpectError
+// $FlowExpectedError
 const erroneous = action(123);
 
-// $ExpectError
+// $FlowExpectedError
 const erroneousDecorate = decorateAction([
   'a string'
 ]);

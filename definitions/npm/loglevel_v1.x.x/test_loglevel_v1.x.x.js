@@ -3,7 +3,7 @@ import loglevel from 'loglevel';
 
 /* Trivial case */
 
-// $ExpectError
+// $FlowExpectedError
 loglevel.foo();
 
 loglevel.noConflict();
@@ -26,15 +26,15 @@ loglevel.levels.ERROR;
 
 loglevel.setLevel('trace');
 loglevel.setLevel(1);
-// $ExpectError
+// $FlowExpectedError
 loglevel.setLevel('foo');
-// $ExpectError
+// $FlowExpectedError
 loglevel.setLevel(6);
 
 
 /* loglevel.getLogger() */
 loglevel.getLogger('toto');
-// $ExpectError
+// $FlowExpectedError
 loglevel.getLogger({});
 
 /* loglevel.debug() */

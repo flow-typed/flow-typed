@@ -6,7 +6,7 @@ import { it, describe } from "flow-typed-test";
 describe("react-router-dom", () => {
   it('useReactRouter should not accept parameters', () => {
     useReactRouter();
-    // $ExpectError
+    // $FlowExpectedError
     useReactRouter(null);
   });
 
@@ -92,7 +92,7 @@ describe("react-router-dom", () => {
 
     const callback = (location, action: "WRONG-ACTION") => {};
 
-    // $ExpectError
+    // $FlowExpectedError
     listen(callback)
   });
 
@@ -101,7 +101,7 @@ describe("react-router-dom", () => {
 
     const callback = (location: string, action) => {};
 
-    // $ExpectError
+    // $FlowExpectedError
     listen(callback)
   });
 
@@ -112,7 +112,7 @@ describe("react-router-dom", () => {
       return true;
     };
 
-    // $ExpectError
+    // $FlowExpectedError
     block(callback)
   });
 
@@ -123,7 +123,7 @@ describe("react-router-dom", () => {
       return true;
     };
 
-    // $ExpectError
+    // $FlowExpectedError
     block(callback)
   });
 });

@@ -8,22 +8,22 @@ ical({
   name: '',
 });
 
-// $ExpectError - domain should be string
+// $FlowExpectedError - domain should be string
 ical({ domain: 1 });
 
 calendar.clear();
 const event = calendar.createEvent();
-// $ExpectError
+// $FlowExpectedError
 calendar.createEvent('event');
 (calendar.domain(): string)
 
-// $ExpectError
+// $FlowExpectedError
 event.createAlarm();
 const alarm = event.createAlarm({});
 
 (alarm.repeat(): number)
 
-// $ExpectError
+// $FlowExpectedError
 event.createAttendee();
 const attendee = event.createAttendee('test');
 
