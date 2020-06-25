@@ -299,9 +299,11 @@ async function writeFlowConfig(repoDirPath, testDirPath, libDefPath, version) {
     path.join(repoDirPath, '..', '__util__', 'tdd_framework.js'),
     '',
     '[options]',
-    'suppress_comment=\\\\(.\\\\|\\n\\\\)*\\\\$ExpectError',
     'include_warnings=true',
     'server.max_workers=0',
+    semver.lt(version, '0.125.0')
+      ? 'suppress_comment=\\\\(.\\\\|\\n\\\\)*\\\\$FlowExpectedError'
+      : '',
     '',
 
     // Be sure to ignore stuff in the node_modules directory of the flow-typed
