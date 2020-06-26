@@ -748,7 +748,7 @@ declare module '@react-navigation/core' {
   |};
   declare type EventListenerCallback<
     EventName: string,
-    State: NavigationState = NavigationState,
+    State: PossiblyStaleNavigationState = NavigationState,
     EventMap: EventMapBase = EventMapCore<State>,
   > = (e: EventArg<
     EventName,
@@ -1412,6 +1412,7 @@ declare module '@react-navigation/core' {
     +showLabel: boolean,
     +showIcon: boolean,
     +labelStyle: TextStyleProp,
+    +iconStyle: TextStyleProp,
     +tabStyle: ViewStyleProp,
     +labelPosition: 'beside-icon' | 'below-icon',
     +adaptive: boolean,
@@ -1903,11 +1904,26 @@ declare module '@react-navigation/core' {
     +independent?: boolean,
   |};
 
+  declare export type ContainerEventMap = {|
+    ...GlobalEventMap<PossiblyStaleNavigationState>,
+    +options: {|
+      +data: {| +options: { +[key: string]: mixed, ... } |},
+      +canPreventDefault: false,
+    |},
+    +__unsafe_action__: {|
+      +data: {|
+        +action: GenericNavigationAction,
+        +noop: boolean,
+      |},
+      +canPreventDefault: false,
+    |},
+  |};
+
   declare export type BaseNavigationContainerInterface = {|
     ...$Exact<NavigationHelpers<
       ParamListBase,
       PossiblyStaleNavigationState,
-      GlobalEventMap<PossiblyStaleNavigationState>,
+      ContainerEventMap,
     >>,
     +setParams: (params: ScreenParams) => void,
     +resetRoot: (state?: ?PossiblyStaleNavigationState) => void,
@@ -1915,29 +1931,77 @@ declare module '@react-navigation/core' {
   |};
 
   /**
-   * State / path conversion
+   * State utils
    */
 
-  declare export type LinkingConfig = {|
-    +[routeName: string]:
-      | string
-      | {|
-          +path?: string,
-          +parse?: {| +[param: string]: string => mixed |},
-          +screens?: LinkingConfig,
-          +initialRouteName?: string,
-        |},
+  declare export type GetStateFromPath = (
+    path: string,
+    options?: LinkingConfig,
+  ) => PossiblyStaleNavigationState;
+
+  declare export type GetPathFromState = (
+    state?: ?PossiblyStaleNavigationState,
+    options?: LinkingConfig,
+  ) => string;
+
+  declare export type GetFocusedRouteNameFromRoute =
+    PossiblyStaleRoute<string> => ?string;
+
+  /**
+   * Linking
+   */
+
+  declare export type ScreenLinkingConfig = {|
+    +path?: string,
+    +exact?: boolean,
+    +parse?: {| +[param: string]: string => mixed |},
+    +stringify?: {| +[param: string]: mixed => string |},
+    +screens?: ScreenLinkingConfigMap,
+    +initialRouteName?: string,
   |};
 
-  declare export type GetPathFromStateOptions = {|
-    +[routeName: string]:
-      | string
-      | {|
-          +path?: string,
-          +stringify?: {| +[param: string]: mixed => string |},
-          +screens?: GetPathFromStateOptions,
-        |},
+  declare export type ScreenLinkingConfigMap = {|
+    +[routeName: string]: string | ScreenLinkingConfig,
   |};
+
+  declare export type LinkingConfig = {|
+    +initialRouteName?: string,
+    +screens: ScreenLinkingConfigMap,
+  |};
+
+  declare export type LinkingOptions = {|
+    +enabled?: boolean,
+    +prefixes: $ReadOnlyArray<string>,
+    +config?: LinkingConfig,
+    +getStateFromPath?: GetStateFromPath,
+    +getPathFromState?: GetPathFromState,
+  |};
+
+  /**
+   * NavigationContainer
+   */
+
+  declare export type Theme = {|
+    +dark: boolean,
+    +colors: {|
+      +primary: string,
+      +background: string,
+      +card: string,
+      +text: string,
+      +border: string,
+    |},
+  |};
+
+  declare export type NavigationContainerType = React$AbstractComponent<
+    {|
+      ...BaseNavigationContainerProps,
+      +theme?: Theme,
+      +linking?: LinkingOptions,
+      +fallback?: React$Node,
+      +onReady?: () => mixed,
+    |},
+    BaseNavigationContainerInterface,
+  >;
 
   //---------------------------------------------------------------------------
   // SECTION 2: EXPORTED MODULE
@@ -2021,34 +2085,14 @@ declare module '@react-navigation/core' {
    * State utils
    */
 
-  declare export function getStateFromPath(
-    path: string,
-    options?: LinkingConfig,
-  ): PossiblyStaleNavigationState;
+  declare export var getStateFromPath: GetStateFromPath;
 
-  declare export function getPathFromState(
-    state?: ?PossiblyStaleNavigationState,
-    options?: GetPathFromStateOptions,
-  ): string;
+  declare export var getPathFromState: GetPathFromState;
 
   declare export function getActionFromState(
     state: PossiblyStaleNavigationState,
   ): ?NavigateAction;
 
-}
-
-declare module '@react-navigation/core/src/NavigationBuilderContext' {
-
-  declare type GenericNavigationAction = {|
-    +type: string,
-    +payload?: { +[key: string]: mixed, ... },
-    +source?: string,
-    +target?: string,
-  |};
-
-  declare export default React$Context<{
-    trackAction: (action: GenericNavigationAction) => void,
-    ...
-  }>;
+  declare export var getFocusedRouteNameFromRoute: GetFocusedRouteNameFromRoute;
 
 }

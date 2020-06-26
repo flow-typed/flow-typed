@@ -2,7 +2,7 @@
 
 ## Overview
 
-There are seven React Navigation libdefs in `flow-typed`:
+There are eight React Navigation libdefs in `flow-typed`:
 
 1. `@react-navigation/core`
 2. `@react-navigation/native`
@@ -11,6 +11,7 @@ There are seven React Navigation libdefs in `flow-typed`:
 5. `@react-navigation/material-bottom-tabs`
 6. `@react-navigation/material-top-tabs`
 7. `@react-navigation/drawer`
+8. `@react-navigation/devtools`
 
 It's not currently possible to import types between libdefs. Consequently, many of the same types are copy-pasted across the different libdefs.
 
