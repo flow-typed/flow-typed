@@ -1,6 +1,6 @@
 import { describe, it } from 'flow-typed-test';
-import type { DB, ObjectStore, Transaction, Cursor } from 'idb';
-import { openDB, deleteDB } from 'idb';
+import type { DB, ObjectStore, Transaction, Cursor } from 'idb/with-async-ittr.js';
+import { openDB, deleteDB } from 'idb/with-async-ittr.js';
 
 // Make sure to report all changes you make here to the duplicated tests in the
 // other file as well.
@@ -235,40 +235,47 @@ describe('idb_v5', () => {
   });
 });
 
-describe('no async iterators', () => {
-  it('cannot iterate on stores', async () => {
+describe('idb_v5 with async iterators', () => {
+  it('can iterate on stores', async () => {
     const db: DB = await openDB('tmp-db', 1);
     const tx = db.transaction('storeName');
-
-    // $FlowExpectedError
     for await (const cursor of tx.store) {
+      (cursor: Cursor);
+      // $FlowExpectedError
+      (cursor: string);
     }
 
     // Flow types for IDBKeyRange are severely lacking, IDBKeyRange.only returns
     // any... See https://github.com/facebook/flow/issues/8366
     const range: IDBKeyRange = window.IDBKeyRange.only('foo');
-    // $FlowExpectedError
     for await (const cursor of tx.store.iterate(range, 'next')) {
+      (cursor: Cursor);
+      // $FlowExpectedError
+      (cursor: string);
     }
   });
 
-  it('cannot iterate on indexes', async () => {
+  it('can iterate on indexes', async () => {
     const db: DB = await openDB('tmp-db', 1);
     const tx = db.transaction('storeName');
     const index = tx.store.index('author');
-    // $FlowExpectedError
     for await (const cursor of index) {
+      (cursor: Cursor);
+      // $FlowExpectedError
+      (cursor: string);
     }
 
     // Flow types for IDBKeyRange are severely lacking, IDBKeyRange.only returns
     // any... See https://github.com/facebook/flow/issues/8366
     const range: IDBKeyRange = window.IDBKeyRange.only('foo');
-    // $FlowExpectedError
     for await (const cursor of index.iterate(range, 'next')) {
+      (cursor: Cursor);
+      // $FlowExpectedError
+      (cursor: string);
     }
   });
 
-  it('cannot iterate on cursors', async () => {
+  it('can iterate on cursors', async () => {
     const db: DB = await openDB('tmp-db', 1);
     const tx = db.transaction('storeName');
 
@@ -279,8 +286,10 @@ describe('no async iterators', () => {
     // Note: we have to type Cursor here so that the errors are found in the
     // right lines. See https://github.com/facebook/flow/issues/8367
     const firstCursor: Cursor = await tx.store.openCursor(range, 'next');
-    // $FlowExpectedError
     for await (const cursor of firstCursor) {
+      (cursor: Cursor);
+      // $FlowExpectedError
+      (cursor: string);
     }
   });
 });
