@@ -56,9 +56,12 @@ declare class Bluebird$Promise<+R> extends Promise<R> {
   static Defer: Class<Bluebird$Defer>;
   static PromiseInspection: Class<Bluebird$PromiseInspection<*>>;
 
-  static all<T>(
-    Promises: $Promisable<Iterable<$Promisable<T>>>
-  ): Bluebird$Promise<Array<T>>;
+  static all<T: Iterable<mixed>>(promises: Promise<T>): Bluebird$Promise<
+    $TupleMap<T, <V>(p: Promise<V> | V) => V>
+  >;
+  static all<T: Iterable<mixed>>(promises: T): Bluebird$Promise<
+    $TupleMap<T, <V>(p: Promise<V> | V) => V>
+  >;
   static props(
     input: Object | Map<*, *> | $Promisable<Object | Map<*, *>>
   ): Bluebird$Promise<*>;
@@ -69,7 +72,9 @@ declare class Bluebird$Promise<+R> extends Promise<R> {
     Promises: Iterable<Elem> | $Promisable<Iterable<Elem>>
   ): Bluebird$Promise<T>;
   static reject<T>(error?: any): Bluebird$Promise<T>;
-  static resolve<T>(object?: $Promisable<T>): Bluebird$Promise<T>;
+  static resolve(): Bluebird$Promise<void>;
+  static resolve<T>(object: Promise<T>): Bluebird$Promise<T>;
+  static resolve<T>(object: T): Bluebird$Promise<T>;
   static some<T, Elem: $Promisable<T>>(
     Promises: Iterable<Elem> | $Promisable<Iterable<Elem>>,
     count: number
