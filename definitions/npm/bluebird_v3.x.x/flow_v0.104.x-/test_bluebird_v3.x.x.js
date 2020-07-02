@@ -13,7 +13,7 @@ promise.reflect().then(inspection => {
 // $ExpectError
 new Bluebird();
 
-const emptyPromise: Promise<void> = Promise.resolve();
+const emptyPromise: Bluebird<void> = Bluebird.resolve();
 
 Bluebird.all([
   new Bluebird(() => {}),
