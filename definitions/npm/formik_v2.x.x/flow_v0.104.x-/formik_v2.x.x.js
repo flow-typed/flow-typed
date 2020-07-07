@@ -54,8 +54,8 @@ declare module 'formik/@flow-typed' {
   declare export type FormikHandlers = {|
     handleSubmit(e?: {...}): void,
     handleReset(e?: {...}): void,
-    handleBlur(e: {...}): void,
-    handleChange(e: {...}): void,
+    handleBlur(eventOrString: string | {...}): void,
+    handleChange(eventOrPath: string | {...}): void,
   |};
 
   declare export type FormikSharedConfig = {|
