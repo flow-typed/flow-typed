@@ -687,3 +687,12 @@ expect(wrapper).toHaveDisplayName(true);
   expect('hello hello world').toIncludeRepeated('hello', 2);
   expect('hello world').toIncludeMultiple(['world', 'hello']);
 }
+
+{
+  // Type hint becomes the returned type
+  const FooModule1: string = jest.requireActual<string>('FooModule');
+  // $ExpectError Type hint becomes the returned type
+  const FooModule2: number = jest.requireActual<string>('FooModule');
+  // No type hint means we return any
+  const FooModule3: boolean = jest.requireActual('FooModule');
+}

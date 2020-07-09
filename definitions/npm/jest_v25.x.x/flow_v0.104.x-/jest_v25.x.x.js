@@ -240,7 +240,7 @@ type DomTestingLibraryType = {
  toHaveClass(...classNames: string[]): void,
  toHaveFocus(): void,
  toHaveFormValues(expectedValues: { [name: string]: any, ... }): void,
- toHaveStyle(css: string | { [name: string]: any, ... }): void, 
+ toHaveStyle(css: string | { [name: string]: any, ... }): void,
  toHaveTextContent(
    text: string | RegExp,
    options?: {| normalizeWhitespace: boolean |}
@@ -836,7 +836,7 @@ type JestObjectType = {
   * Returns the actual module instead of a mock, bypassing all checks on
   * whether the module should receive a mock implementation or not.
   */
- requireActual(moduleName: string): any,
+ requireActual<T>(m: $Flow$ModuleRef<T> | string): T,
  /**
   * Returns a mock module instead of the actual module, bypassing all checks
   * on whether the module should be required normally or not.
