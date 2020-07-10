@@ -1018,7 +1018,7 @@ declare module '@apollo/react-hooks' {
     complete?: boolean,
   };
 
-  declare interface DataProxy {
+  declare export interface DataProxy {
     readQuery<QueryType, TVariables>(
       options: DataProxyReadQueryOptions<TVariables>,
       optimistic?: boolean
