@@ -8,7 +8,7 @@ describe('#parse', () => {
     });
 
     it('should not accept a number as an argument', () => {
-        // $ExpectError: should be a string
+        // $FlowExpectedError: should be a string
         parse(10);
     });
 
@@ -24,7 +24,7 @@ describe('#stringify', () => {
     });
 
     it('should not accept a number as an argument', () => {
-        // $ExpectError: should be an object
+        // $FlowExpectedError: should be an object
         stringify(10);
     });
 
@@ -39,7 +39,7 @@ describe('#extract', () => {
     });
 
     it('should not accept a number as an argument', () => {
-        // $ExpectError: should be a string
+        // $FlowExpectedError: should be a string
         extract(10);
     });
 

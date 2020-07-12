@@ -9,23 +9,23 @@ import {
 describe('http-status-codes', () => {
   it('status code 200 is OK', () => {
     (OK: 200);
-    // $ExpectError
+    // $FlowExpectedError
     (OK: 201);
   });
 
   it('status text by code', () => {
     (getStatusText(200): string);
-    // $ExpectError
+    // $FlowExpectedError
     (getStatusText(200): boolean);
-    // $ExpectError
+    // $FlowExpectedError
     getStatusText("200");
   });
 
   it('code by status text', () => {
     (getStatusCode("OK"): number);
-    // $ExpectError
+    // $FlowExpectedError
     (getStatusCode("OK"): boolean);
-    // $ExpectError
+    // $FlowExpectedError
     getStatusCode(200);
   });
 });

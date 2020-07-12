@@ -13,7 +13,7 @@ const B: boolean = render(<div />, { context: { foo: true } })
   .equals(<div />);
 
 // Test against chaining returning `any`
-// $ExpectError
+// $FlowExpectedError
 (shallow(<div />).children(): boolean);
 
 (shallow(<div />).children(): ShallowWrapper);
@@ -30,7 +30,7 @@ const StatelessComponent = () => <div />;
 shallow(<div />).find(ClassComponent);
 shallow(<div />).find(StatelessComponent);
 shallow(<div />).find({ a: 1 });
-// $ExpectError
+// $FlowExpectedError
 shallow(<div />).find(true);
 
 shallowWrapper.instance();
@@ -41,10 +41,10 @@ shallowWrapper.props().foo;
 (mount(<div />).map(node => true): Array<boolean>);
 
 (mount(<div />).reduce((acc: number, node, i) => i + 1): Array<number>);
-// $ExpectError
+// $FlowExpectedError
 (mount(<div />).reduce((acc: number, node, i) => i + 1): Array<boolean>);
 (mount(<div />).reduce((acc, node, i) => i + 1, 0): Array<number>);
-// $ExpectError
+// $FlowExpectedError
 (mount(<div />).reduce((acc, node, i) => i + 1, 0): Array<boolean>);
 
 // Cheerio

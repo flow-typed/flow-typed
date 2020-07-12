@@ -3,5 +3,5 @@ import Cors from "cors";
 
 Cors({ origin: true });
 
-// $ExpectError
+// $FlowExpectedError
 Cors({ origin: 1 });

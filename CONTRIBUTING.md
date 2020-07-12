@@ -93,7 +93,7 @@ reasonable degree. At minimum your tests should:
    produce a type error.
 1. Use the library definition in a couple of ways that are *expected* to produce
    a type error. To indicate that a line in a test file expected to cause an
-   error just put a `// $ExpectError` comment above the error-causing line.
+   error just put a `// $FlowExpectedError` comment above the error-causing line.
 
 [Here](https://github.com/flow-typed/flow-typed/blob/master/definitions/npm/highlight.js_v8.x.x/test_highlight.js-v8.js)
 is an example of a nice and thorough test file. You don't necessarily have to be
@@ -273,7 +273,7 @@ describe('#someFunction', () => {
   });
 
   // you can also do type checks outside an it statement
-  //$ExpectError
+  //$FlowExpectedError
   const a: number = 'foo';
 })
 ```
@@ -289,7 +289,7 @@ foo('#someFunction', () => {
   });
 
   // you can also do type checks outside an it statement
-  //$ExpectError
+  //$FlowExpectedError
   const a: number = 'foo';
 })
 ```

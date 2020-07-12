@@ -7,7 +7,7 @@ import axios from 'axios';
   },
   xsrfCookieName: 'cookie',
 }): Promise<*>);
-// $ExpectError
+// $FlowExpectedError
 (axios.post(123): Promise<*>)
 
 axios({method: 'post', url: 'https://foo.bar'})

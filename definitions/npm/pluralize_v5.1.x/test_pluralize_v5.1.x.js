@@ -7,9 +7,9 @@ pluralize('word', 0);
 pluralize('word', 0, true);
 pluralize.addIrregularRule('word', 'wordz');
 
-// $ExpectError
+// $FlowExpectedError
 pluralize();
-// $ExpectError
+// $FlowExpectedError
 pluralize.nope;
 
 

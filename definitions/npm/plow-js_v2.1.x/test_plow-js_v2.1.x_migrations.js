@@ -10,24 +10,24 @@ plow.$add("foo", "bar", { foo: ["baz"] }).foo;
 plow.$add("foo", "bar", { foo: ["baz"] }).foo[0];
 plow.$add("foo", "bar", { foo: ["baz"] }).foo[1];
 
-// $ExpectError
+// $FlowExpectedError
 plow.$add("foo", "bar", { foo: ["baz"] }).bar;
 
 plow.$add("foo", "bar")({ foo: ["baz"] });
 plow.$add(["foo"], "bar")({ foo: ["baz"] });
 plow.$add("foo", "bar")({ foo: ["baz"] }).foo;
 
-// $ExpectError
+// $FlowExpectedError
 plow.$add("foo", "bar")({ foo: ["baz"] }).bar;
 
 plow.$add("foo")("bar")({ foo: ["baz"] });
 plow.$add(["foo"])("bar")({ foo: ["baz"] });
 plow.$add("foo")("bar")({ foo: ["baz"] }).foo;
 
-// $ExpectError
+// $FlowExpectedError
 plow.$add("foo")("bar")({ foo: ["baz"] }).bar;
 
-// $ExpectError
+// $FlowExpectedError
 plow.$add(null, "bar", { foo: ["baz"] });
 
 /**
@@ -37,24 +37,24 @@ plow.$drop("foo.0", { foo: ["baz"] });
 plow.$drop(["foo", 0], { foo: ["baz"] });
 plow.$drop("foo.0", { foo: ["baz"] }).foo;
 
-// $ExpectError
+// $FlowExpectedError
 plow.$drop("foo.0", { foo: ["baz"] }).bar;
 
 plow.$drop("foo.0")({ foo: ["baz"] });
 plow.$drop(["foo", 0])({ foo: ["baz"] });
 plow.$drop("foo.0")({ foo: ["baz"] }).foo;
 
-// $ExpectError
+// $FlowExpectedError
 plow.$drop("foo.0")({ foo: ["baz"] }).bar;
 
 plow.$drop("foo.0")({ foo: ["baz"] });
 plow.$drop(["foo", 0])({ foo: ["baz"] });
 plow.$drop("foo.0")({ foo: ["baz"] }).foo;
 
-// $ExpectError
+// $FlowExpectedError
 plow.$drop("foo.0")({ foo: ["baz"] }).bar;
 
-// $ExpectError
+// $FlowExpectedError
 plow.$drop(null, { foo: ["baz"] });
 
 /**
@@ -65,24 +65,24 @@ plow.$override(["foo"], { baz: "bar" }, { foo: {} });
 plow.$override("foo", { baz: "bar" }, { foo: {} }).foo;
 plow.$override("foo", { baz: "bar" }, { foo: {} }).foo.baz;
 
-// $ExpectError
+// $FlowExpectedError
 plow.$override("foo", { baz: "bar" }, { foo: {} }) * 2;
 
 plow.$override("foo", { baz: "bar" })({ foo: {} });
 plow.$override(["foo"], { baz: "bar" })({ foo: {} });
 plow.$override("foo", { baz: "bar" })({ foo: {} }).foo;
 
-// $ExpectError
+// $FlowExpectedError
 plow.$override("foo", { baz: "bar" })({ foo: {} }) * 2;
 
 plow.$override("foo")({ baz: "bar" })({ foo: {} });
 plow.$override(["foo"])({ baz: "bar" })({ foo: {} });
 plow.$override("foo")({ baz: "bar" })({ foo: {} }).foo;
 
-// $ExpectError
+// $FlowExpectedError
 plow.$override("foo")({ baz: "bar" })({ foo: {} }) * 2;
 
-// $ExpectError
+// $FlowExpectedError
 plow.$override(null, { baz: "bar" }, { foo: {} });
 
 /**
@@ -92,24 +92,24 @@ plow.$pop("foo.0", { foo: ["baz"] });
 plow.$pop(["foo", 0], { foo: ["baz"] });
 plow.$pop("foo.0", { foo: ["baz"] }).foo;
 
-// $ExpectError
+// $FlowExpectedError
 plow.$pop("foo.0", { foo: ["baz"] }).bar;
 
 plow.$pop("foo.0")({ foo: ["baz"] });
 plow.$pop(["foo", 0])({ foo: ["baz"] });
 plow.$pop("foo.0")({ foo: ["baz"] }).foo;
 
-// $ExpectError
+// $FlowExpectedError
 plow.$pop("foo.0")({ foo: ["baz"] }).bar;
 
 plow.$pop("foo.0")({ foo: ["baz"] });
 plow.$pop(["foo", 0])({ foo: ["baz"] });
 plow.$pop("foo.0")({ foo: ["baz"] }).foo;
 
-// $ExpectError
+// $FlowExpectedError
 plow.$pop("foo.0")({ foo: ["baz"] }).bar;
 
-// $ExpectError
+// $FlowExpectedError
 plow.$pop(null, { foo: ["baz"] });
 
 /**
@@ -119,24 +119,24 @@ plow.$remove("foo", "bar", { foo: ["bar"] });
 plow.$remove(["foo"], "bar", { foo: ["bar"] });
 plow.$remove("foo", "bar", { foo: ["bar"] }).foo;
 
-// $ExpectError
+// $FlowExpectedError
 plow.$remove("foo", "bar", { foo: ["bar"] }).bar;
 
 plow.$remove("foo", "bar")({ foo: ["bar"] });
 plow.$remove(["foo"], "bar")({ foo: ["bar"] });
 plow.$remove("foo", "bar")({ foo: ["bar"] }).foo;
 
-// $ExpectError
+// $FlowExpectedError
 plow.$remove("foo", "bar")({ foo: ["bar"] }).bar;
 
 plow.$remove("foo")("bar")({ foo: ["bar"] });
 plow.$remove(["foo"])("bar")({ foo: ["bar"] });
 plow.$remove("foo")("bar")({ foo: ["bar"] }).foo;
 
-// $ExpectError
+// $FlowExpectedError
 plow.$remove("foo")("bar")({ foo: ["bar"] }).bar;
 
-// $ExpectError
+// $FlowExpectedError
 plow.$remove(null, "bar", { foo: ["bar"] });
 
 /**
@@ -146,24 +146,24 @@ plow.$set("foo", "bar", { foo: ["bar"] });
 plow.$set(["foo"], "bar", { foo: ["bar"] });
 plow.$set("foo", "bar", { foo: ["bar"] }).foo;
 
-// $ExpectError
+// $FlowExpectedError
 plow.$set("foo", "bar", { foo: ["bar"] }) * 2;
 
 plow.$set("foo", "bar")({ foo: ["bar"] });
 plow.$set(["foo"], "bar")({ foo: ["bar"] });
 plow.$set("foo", "bar")({ foo: ["bar"] }).foo;
 
-// $ExpectError
+// $FlowExpectedError
 plow.$set("foo", "bar")({ foo: ["bar"] }) * 2;
 
 plow.$set("foo")("bar")({ foo: ["bar"] });
 plow.$set(["foo"])("bar")({ foo: ["bar"] });
 plow.$set("foo")("bar")({ foo: ["bar"] }).foo;
 
-// $ExpectError
+// $FlowExpectedError
 plow.$set("foo")("bar")({ foo: ["bar"] }) * 2;
 
-// $ExpectError
+// $FlowExpectedError
 plow.$set(null, "bar", { foo: ["bar"] });
 
 /**
@@ -173,24 +173,24 @@ plow.$pop("foo.0", { foo: ["baz"] });
 plow.$pop(["foo", 0], { foo: ["baz"] });
 plow.$pop("foo.0", { foo: ["baz"] }).foo;
 
-// $ExpectError
+// $FlowExpectedError
 plow.$pop("foo.0", { foo: ["baz"] }).bar;
 
 plow.$pop("foo.0")({ foo: ["baz"] });
 plow.$pop(["foo", 0])({ foo: ["baz"] });
 plow.$pop("foo.0")({ foo: ["baz"] }).foo;
 
-// $ExpectError
+// $FlowExpectedError
 plow.$pop("foo.0")({ foo: ["baz"] }).bar;
 
 plow.$pop("foo.0")({ foo: ["baz"] });
 plow.$pop(["foo", 0])({ foo: ["baz"] });
 plow.$pop("foo.0")({ foo: ["baz"] }).foo;
 
-// $ExpectError
+// $FlowExpectedError
 plow.$pop("foo.0")({ foo: ["baz"] }).bar;
 
-// $ExpectError
+// $FlowExpectedError
 plow.$pop(null, { foo: ["baz"] });
 
 /**
@@ -200,24 +200,24 @@ plow.$shift("foo", { foo: ["baz"] });
 plow.$shift(["foo"], { foo: ["baz"] });
 plow.$shift("foo", { foo: ["baz"] }).foo;
 
-// $ExpectError
+// $FlowExpectedError
 plow.$shift("foo", { foo: ["baz"] }).bar;
 
 plow.$shift("foo")({ foo: ["baz"] });
 plow.$shift(["foo"])({ foo: ["baz"] });
 plow.$shift("foo")({ foo: ["baz"] }).foo;
 
-// $ExpectError
+// $FlowExpectedError
 plow.$shift("foo")({ foo: ["baz"] }).bar;
 
 plow.$shift("foo")({ foo: ["baz"] });
 plow.$shift(["foo"])({ foo: ["baz"] });
 plow.$shift("foo")({ foo: ["baz"] }).foo;
 
-// $ExpectError
+// $FlowExpectedError
 plow.$shift("foo")({ foo: ["baz"] }).bar;
 
-// $ExpectError
+// $FlowExpectedError
 plow.$shift(null, { foo: ["baz"] });
 
 /**
@@ -227,24 +227,24 @@ plow.$unshift("foo", "bar", { foo: ["bar"] });
 plow.$unshift(["foo"], "bar", { foo: ["bar"] });
 plow.$unshift("foo", "bar", { foo: ["bar"] }).foo;
 
-// $ExpectError
+// $FlowExpectedError
 plow.$unshift("foo", "bar", { foo: ["bar"] }).bar;
 
 plow.$unshift("foo", "bar")({ foo: ["bar"] });
 plow.$unshift(["foo"], "bar")({ foo: ["bar"] });
 plow.$unshift("foo", "bar")({ foo: ["bar"] }).foo;
 
-// $ExpectError
+// $FlowExpectedError
 plow.$unshift("foo", "bar")({ foo: ["bar"] }).bar;
 
 plow.$unshift("foo")("bar")({ foo: ["bar"] });
 plow.$unshift(["foo"])("bar")({ foo: ["bar"] });
 plow.$unshift("foo")("bar")({ foo: ["bar"] }).foo;
 
-// $ExpectError
+// $FlowExpectedError
 plow.$unshift("foo")("bar")({ foo: ["bar"] }).bar;
 
-// $ExpectError
+// $FlowExpectedError
 plow.$unshift(null, "bar", { foo: ["bar"] });
 
 /**
@@ -256,24 +256,24 @@ plow.$merge("foo", "bar", { foo: ["bar"] }).foo;
 plow.$merge("foo", { baz: 1 }, { foo: { bar: 2 } }).foo.bar;
 plow.$merge("foo", { baz: 1 }, { foo: { bar: 2 } }).foo.baz;
 
-// $ExpectError
+// $FlowExpectedError
 plow.$merge("foo", "bar", { foo: ["bar"] }) * 2;
 
 plow.$merge("foo", "bar")({ foo: ["bar"] });
 plow.$merge(["foo"], "bar")({ foo: ["bar"] });
 plow.$merge("foo", "bar")({ foo: ["bar"] }).foo;
 
-// $ExpectError
+// $FlowExpectedError
 plow.$merge("foo", "bar")({ foo: ["bar"] }) * 2;
 
 plow.$merge("foo")("bar")({ foo: ["bar"] });
 plow.$merge(["foo"])("bar")({ foo: ["bar"] });
 plow.$merge("foo")("bar")({ foo: ["bar"] }).foo;
 
-// $ExpectError
+// $FlowExpectedError
 plow.$merge("foo")("bar")({ foo: ["bar"] }) * 2;
 
-// $ExpectError
+// $FlowExpectedError
 plow.$merge(null, "bar", { foo: ["bar"] });
 
 /**
@@ -283,22 +283,22 @@ plow.$toggle("foo", "bar", { foo: ["bar"] });
 plow.$toggle(["foo"], "bar", { foo: ["bar"] });
 plow.$toggle("foo", "bar", { foo: ["bar"] }).foo;
 
-// $ExpectError
+// $FlowExpectedError
 plow.$toggle("foo", "bar", { foo: ["bar"] }).bar;
 
 plow.$toggle("foo", "bar")({ foo: ["bar"] });
 plow.$toggle(["foo"], "bar")({ foo: ["bar"] });
 plow.$toggle("foo", "bar")({ foo: ["bar"] }).foo;
 
-// $ExpectError
+// $FlowExpectedError
 plow.$toggle("foo", "bar")({ foo: ["bar"] }).bar;
 
 plow.$toggle("foo")("bar")({ foo: ["bar"] });
 plow.$toggle(["foo"])("bar")({ foo: ["bar"] });
 plow.$toggle("foo")("bar")({ foo: ["bar"] }).foo;
 
-// $ExpectError
+// $FlowExpectedError
 plow.$toggle("foo")("bar")({ foo: ["bar"] }).bar;
 
-// $ExpectError
+// $FlowExpectedError
 plow.$toggle(null, "bar", { foo: ["bar"] });

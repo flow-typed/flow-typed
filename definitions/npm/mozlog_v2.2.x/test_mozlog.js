@@ -20,40 +20,40 @@ describe('mozlog function returns a proper logger', () => {
       stream: process.stdout,
     });
 
-    // $ExpectError
+    // $FlowExpectedError
     mozlog();
-    // $ExpectError
+    // $FlowExpectedError
     mozlog('app-name', 'stream');
-    // $ExpectError
+    // $FlowExpectedError
     mozlog(5);
-    // $ExpectError
+    // $FlowExpectedError
     mozlog({})
-    // $ExpectError
+    // $FlowExpectedError
     mozlog({
       app: 'app-name',
       foo: 'bar'
     });
-    // $ExpectError
+    // $FlowExpectedError
     mozlog({
       app: 'app-name',
       fmt: 'foo',
     });
-    // $ExpectError
+    // $FlowExpectedError
     mozlog({
       app: 'app-name',
       level: 'foo',
     });
-    // $ExpectError
+    // $FlowExpectedError
     mozlog({
       app: 'app-name',
       uncaught: 'foo',
     });
-    // $ExpectError
+    // $FlowExpectedError
     mozlog({
       app: 'app-name',
       stream: 'foo',
     });
-    // $ExpectError
+    // $FlowExpectedError
     mozlog({
       app: 'app-name',
       stream: process.stdin,
@@ -98,20 +98,20 @@ describe('mozlog function returns a proper logger', () => {
     logger.warn('message', 42);
     logger.warn('message', 'foo');
 
-    // $ExpectError
+    // $FlowExpectedError
     logger.warn();
 
-    // $ExpectError
+    // $FlowExpectedError
     logger.warn(42);
 
-    // $ExpectError: This is accepted by intel, but mozlog forbids this explicitely.
+    // $FlowExpectedError: This is accepted by intel, but mozlog forbids this explicitely.
     logger.warn('message', 'foo', 'bar');
   });
 
   it('does not expose global types', () => {
     const logCreator = mozlog('app-name');
 
-    // $ExpectError
+    // $FlowExpectedError
     (logCreator: LoggerCreator);
   });
 });

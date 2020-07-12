@@ -12,14 +12,14 @@ cookie().remove("foo", { expires: new Date() });
 
 cookie().all();
 
-// $ExpectError
+// $FlowExpectedError
 cookie(1);
 
-// $ExpectError
+// $FlowExpectedError
 cookie().set("foo", { foo: "bar" });
 
-// $ExpectError
+// $FlowExpectedError
 cookie().get(1);
 
-// $ExpectError
+// $FlowExpectedError
 cookie().remove(1);

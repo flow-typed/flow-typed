@@ -103,16 +103,16 @@ type TestState2 = {
 
 createSelector(
   (state: TestState1) => state.x,
-  // $ExpectError: Should not pass when selectors handle different states
+  // $FlowExpectedError: Should not pass when selectors handle different states
   (state: TestState2) => state.y,
   (x, y) => {
     return x + y
   }
-// $ExpectError: property `d` is missing state but exists in TestState2
+// $FlowExpectedError: property `d` is missing state but exists in TestState2
 )({x: 100, y: 200});
 
 createSelector(
-  // $ExpectError: Should not pass when selectors handle different states
+  // $FlowExpectedError: Should not pass when selectors handle different states
   (state, props) => state.x + props.d,
   (state) => state.y,
   (x, y) => {
@@ -129,17 +129,17 @@ createSelector(
       y
     }
   }
-// $ExpectError: property `d` is missing createSelector() return object
+// $FlowExpectedError: property `d` is missing createSelector() return object
 )({x: 100, y: 200}, { x: 20 }).d;
 
-// $ExpectError
+// $FlowExpectedError
 defaultMemoize((a: number) => a + 1)('');
-// $ExpectError
+// $FlowExpectedError
 defaultMemoize((a: number) => a + 1, (a, b) => '')(2);
 
 createSelectorCreator(defaultMemoize)(
   (state) => state.x,
-  // $ExpectError: Should fail when state don't have good properties
+  // $FlowExpectedError: Should fail when state don't have good properties
   (state) => state.y,
   (x, y) => {
     return x + y;
@@ -150,7 +150,7 @@ createSelectorCreator(defaultMemoize)(
 })
 
 createStructuredSelector({
-  // $ExpectError: Should fail when state don't have good properties
+  // $FlowExpectedError: Should fail when state don't have good properties
   first: (state) => state.d,
   second: (state) => state.y
 })({
@@ -163,7 +163,7 @@ createSelector(
     first: (state) => state.x,
     second: (state) => state.y
   }),
-  // $ExpectError: Should fail when property names not in the input selectors object
+  // $FlowExpectedError: Should fail when property names not in the input selectors object
   ({first, third}) => first + third
 )({
   x: 10,
@@ -175,9 +175,9 @@ createSelector(
     first: (state) => state.x,
     second: (state) => state.y
   }),
-  // $ExpectError: Return types of input selectors propagate
+  // $FlowExpectedError: Return types of input selectors propagate
   ({first, second}: {first: number, second: number}) => first + second
-// $ExpectError: property `second` is missing in object
+// $FlowExpectedError: property `second` is missing in object
 )({
   x: 10,
   y: false

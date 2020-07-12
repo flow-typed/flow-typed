@@ -15,8 +15,8 @@ filesize(265318, { standard: "iec" });
 filesize(265318, { standard: "iec", fullform: true });
 filesize(12, { fullform: true, fullforms: ["байтов"] });
 
-// $ExpectError
+// $FlowExpectedError
 filesize(true);
 
-// $ExpectError
+// $FlowExpectedError
 filesize({ suffixes: {} });

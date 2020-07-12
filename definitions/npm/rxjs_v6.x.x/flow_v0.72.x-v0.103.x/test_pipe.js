@@ -118,7 +118,7 @@ it("should infer {} for more than 9 arguments", () => {
 });
 
 it("should require a type assertion for more than 9 arguments", () => {
-  // $ExpectError
+  // $FlowExpectedError
   const o: rxjs$UnaryFunction<"0", "10"> = pipe(
     a("0", "1"),
     a("1", "2"),

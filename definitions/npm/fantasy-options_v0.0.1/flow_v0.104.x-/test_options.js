@@ -10,37 +10,37 @@ const testFoo = (name: string): OptionType<*> =>
 
 let f: OptionType<*> = testFoo('bar');
 
-// $ExpectError
+// $FlowExpectedError
 const testFooError = (name: string): OptionType<string> =>
   name === 'foo' ? Some(1) : None;
 
 Some(x => x * 3).ap(Some(4));
 
-// $ExpectError
+// $FlowExpectedError
 Some(x => x * 4).ap(Some('foo'));
 
 Some('foo').ap(Some.of(x => x * 4));
 
 Some(1).map(x => x + 2);
 
-// $ExpectError
+// $FlowExpectedError
 Some(1).map(3);
 
-// $ExpectError
+// $FlowExpectedError
 Some('foo').map(x => x * 3);
 
 Some('world').fold(x => `Hello, ${x}!`, () => 'I dunno');
 None.fold(x => 'a', () => 'b');
 
-// $ExpectError
+// $FlowExpectedError
 Some('Hello').fold(x => `${x}, world!`, 24)
 
-// $ExpectError
+// $FlowExpectedError
 Some('Hello').fold(42, () => 43)
 
 Some('Hello').chain(x => Some('world!'));
 
-// $ExpectError
+// $FlowExpectedError
 Some('Hello').chain(x => x * x);
 
 Some([1, 2]).concat(Some[(3, 4)]);

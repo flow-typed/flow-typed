@@ -3,7 +3,7 @@
 const _ = require("ramda");
 const { compose, match, toLower, trim, zipWith } = _;
 
-// $ExpectError
+// $FlowExpectedError
 inc();
 
 const str: Array<string | void> = compose(match(/2/), toLower, trim)(" 1,2,3 ");

@@ -30,7 +30,7 @@ const reducer: Reducer<State, Action> = (state: State, action) => {
       return { ...state, second: true };
 
     default:
-      // $ExpectError
+      // $FlowExpectedError
       return {};
   }
 };
@@ -65,7 +65,7 @@ const effect1: Effect = L.getEffect(loopState);
 // ok
 const effect2: null = L.getEffect(state);
 
-// $ExpectError
+// $FlowExpectedError
 const effect3: Effect = L.getEffect(state);
 
 // ok

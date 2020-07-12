@@ -17,10 +17,10 @@ it("should support a scheduler", () => {
 });
 
 it("should enforce types", () => {
-  // $ExpectError
+  // $FlowExpectedError
   const o = of(1, 2, 3).pipe(delay());
-  // $ExpectError
+  // $FlowExpectedError
   const p = of(1, 2, 3).pipe(delay("foo"));
-  // $ExpectError
+  // $FlowExpectedError
   const q = of(1, 2, 3).pipe(delay(47, "foo"));
 });

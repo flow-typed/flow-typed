@@ -3,7 +3,7 @@
 import { describe, it } from 'flow-typed-test';
 import React from 'react';
 
-// $ExpectError
+// $FlowExpectedError
 import { storiesOf } from '@storybook/react';
 import { checkA11y, configureA11y } from '@storybook/addon-a11y';
 
@@ -27,16 +27,16 @@ describe('The `configureA11y` function', () => {
   });
 
   it('should error on invalid options', () => {
-    // $ExpectError
+    // $FlowExpectedError
     configureA11y(123);
 
-    // $ExpectError
+    // $FlowExpectedError
     configureA11y([]);
 
-    // $ExpectError
+    // $FlowExpectedError
     configureA11y('string');
 
-    // $ExpectError
+    // $FlowExpectedError
     configureA11y({ disableOtherRules: 'string' });
   });
 });

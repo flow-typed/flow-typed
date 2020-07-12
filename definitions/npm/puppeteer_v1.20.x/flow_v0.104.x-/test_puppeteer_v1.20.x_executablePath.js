@@ -8,7 +8,7 @@ describe('puppeteer.executablePath', () => {
     (puppeteer.executablePath(): string);
   });
   it('should complain if passed args', () => {
-    // $ExpectError no arguments are expected by function type
+    // $FlowExpectedError no arguments are expected by function type
     (puppeteer.executablePath('testing...'): string);
   });
 });

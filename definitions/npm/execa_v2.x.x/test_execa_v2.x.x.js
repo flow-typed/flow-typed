@@ -15,7 +15,7 @@ describe('execa', () => {
       (res.exitCode: number);
       (res.killed: boolean);
     }).finally(res => {});
-    // $ExpectError
+    // $FlowExpectedError
     execa('ls').then(res => res.foo);
 
     execa('foo').catch(err => {
@@ -23,7 +23,7 @@ describe('execa', () => {
       (err.exitCode: number);
       (err.errno: $PropertyType<ErrnoError, 'errno'>);
     });
-    // $ExpectError
+    // $FlowExpectedError
     execa('foo').catch(err => err.foo);
 
     async () => {
@@ -41,7 +41,7 @@ describe('execa', () => {
   it('should provide child process info', () => {
     (execa('ls').pid: number);
     execa('ls').stdout.pipe(process.stdout);
-    // $ExpectError
+    // $FlowExpectedError
     execa('ls').foo;
   });
 
@@ -51,18 +51,18 @@ describe('execa', () => {
     execa('ls', { input: 'foobar' });
     execa('ls', { input: new Buffer('foobar') });
     execa('ls', { input: process.stdin });
-    // $ExpectError
+    // $FlowExpectedError
     execa('ls', { foo: 666 });
-    // $ExpectError
+    // $FlowExpectedError
     execa('ls', { input: 42 });
   });
 
   it('should accept args', () => {
     execa('ls', ['-l']).then(printStdout, printErrno);
     execa('ls', ['-l'], { localDir: '~/' }).then(printStdout);
-    // $ExpectError
+    // $FlowExpectedError
     execa(['ls', '-l']).then(printStdout);
-    // $ExpectError
+    // $FlowExpectedError
     execa('ls').then(printErrno);
   });
 
@@ -84,15 +84,15 @@ describe('execa.command', () => {
     execa.command('ls pipe', { input: 'foobar' });
     execa.command('ls pipe', { input: new Buffer('foobar') });
     execa.command('ls pipe', { input: process.stdin });
-    // $ExpectError
+    // $FlowExpectedError
     execa.command('ls pipe', { foo: 666 });
-    // $ExpectError
+    // $FlowExpectedError
     execa.command('ls pipe', { input: 42 });
   });
   it('should not accept args', () => {
-    // $ExpectError
+    // $FlowExpectedError
     execa.command('ls', ['-l']).then(printStdout, printErrno);
-    // $ExpectError
+    // $FlowExpectedError
     execa.command('ls', ['-l'], { localDir: '~/' }).then(printStdout);
   });
 });
@@ -110,15 +110,15 @@ describe('execa.commandSync', () => {
     execa.commandSync('ls pipe', { input: 'foobar' });
     execa.commandSync('ls pipe', { input: new Buffer('foobar') });
     execa.commandSync('ls pipe', { input: process.stdin });
-    // $ExpectError
+    // $FlowExpectedError
     execa.commandSync('ls pipe', { foo: 666 });
-    // $ExpectError
+    // $FlowExpectedError
     execa.commandSync('ls pipe', { input: 42 });
   });
   it('should not accept args', () => {
-    // $ExpectError
+    // $FlowExpectedError
     execa.commandSync('ls', ['-l']).then(printStdout, printErrno);
-    // $ExpectError
+    // $FlowExpectedError
     execa.commandSync('ls', ['-l'], { localDir: '~/' }).then(printStdout);
   });
 });
@@ -138,13 +138,13 @@ describe('execa.sync', () => {
     (execa.sync('ls', ['-l'], { localDir: '~/' }).failed: boolean);
   });
   it('should not accept options or args', () => {
-    // $ExpectError
+    // $FlowExpectedError
     execa.sync(['ls']);
-    // $ExpectError
+    // $FlowExpectedError
     execa.sync('ls', { foo: 666 });
-    // $ExpectError
+    // $FlowExpectedError
     execa.sync('ls').killed;
-    // $ExpectError
+    // $FlowExpectedError
     execa.sync('ls', { input: process.stdin });
   });
 });

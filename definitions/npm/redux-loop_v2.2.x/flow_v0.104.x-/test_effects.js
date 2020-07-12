@@ -17,7 +17,7 @@ const none: Effect = Effects.none();
 // ok
 const constant: Effect = Effects.constant({ type: "foo" });
 
-// $ExpectError
+// $FlowExpectedError
 Effects.constant({ noTypeProp: "foo" });
 
 //
@@ -45,10 +45,10 @@ Effects.call(string, "one");
 // ok
 Effects.call(numberString, 1, "two");
 
-// $ExpectError
+// $FlowExpectedError
 Effects.call(string, 1);
 
-// $ExpectError
+// $FlowExpectedError
 Effects.call(string, 1);
 
 // ok
@@ -69,7 +69,7 @@ function asyncActionCreator(x: string, y: number) {
 // ok
 Effects.promise(asyncActionCreator, "one", 2);
 
-// $ExpectError
+// $FlowExpectedError
 Effects.promise(asyncActionCreator, 1, "two");
 
 //
@@ -102,5 +102,5 @@ const nestedEffect = Effects.call(zeroArg);
 // ok
 Effects.lift(nestedEffect, nestedAction, new Date());
 
-// $ExpectError
+// $FlowExpectedError
 Effects.lift(nestedEffect, nestedActionWrongArgOrder, new Date());

@@ -4,10 +4,10 @@ out('hello');
 out('hello', 1);
 out('hello', 2);
 
-// $ExpectError
+// $FlowExpectedError
 out({});
 
-// $ExpectError
+// $FlowExpectedError
 out(5);
 
 /* check out.to function */
@@ -15,6 +15,6 @@ out(5);
 out.to([process.stdout]);
 out.to([]);
 
-// $ExpectError
+// $FlowExpectedError
 out.to();
 

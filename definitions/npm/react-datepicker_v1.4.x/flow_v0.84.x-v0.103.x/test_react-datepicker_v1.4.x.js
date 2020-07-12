@@ -20,7 +20,7 @@ const datepicker = (
 
 const invalidDatepicker = (
   <DatePicker
-    // $ExpectError
+    // $FlowExpectedError
     onChange={{ foo: 'bar' }}
   />
 );

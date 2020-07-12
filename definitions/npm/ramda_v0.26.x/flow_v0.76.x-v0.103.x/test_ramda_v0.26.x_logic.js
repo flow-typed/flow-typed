@@ -25,7 +25,7 @@ const str: string = 'hello world';
 // const isSpade = _.propEq("suit", "♠︎");
 // const isQueenOfSpades = _.allPass([isQueen, isSpade]);
 
-//$ExpectError
+//$FlowExpectedError
 const allp: boolean = isQueenOfSpades(1);
 const allp1: boolean = isQueenOfSpades({ rank: 'Q', suit: '♣︎' });
 
@@ -38,16 +38,16 @@ const nonBooleanAnd_: (nonBooleanAnd: number) => * = _.and(69);
 const gte = _.anyPass([_.gt, _.equals]);
 const ge: boolean = gte(3, 2);
 
-//$ExpectError
+//$FlowExpectedError
 const gt10 = x => x > 10;
-//$ExpectError
+//$FlowExpectedError
 const even = x => x % 2 === 0;
 const f = _.both(gt10, even);
 
 const b: boolean = f('');
 const b_: boolean = f(100);
 
-//$ExpectError
+//$FlowExpectedError
 const isEven = n => n % 2 === 0;
 const isOdd = _.complement(isEven);
 
@@ -80,7 +80,7 @@ describe('ifElse', () => {
   it('checks the condition input matches the branch inputs', () => {
     const incCount = ifElse(x => x % 2 == 0, x => x + 1, x => x.toString());
     // Because the object literal ({}) isn't a number it
-    // $ExpectError
+    // $FlowExpectedError
     const ie: number | string = incCount({});
   })
 
@@ -104,7 +104,7 @@ describe('ifElse', () => {
       (s: string) => s.toUpperCase(),
       (s: string) => s.toLowerCase(),
     );
-    // $ExpectError
+    // $FlowExpectedError
     const result: void | string = ifElseFn(5)
   })
 
@@ -126,7 +126,7 @@ describe('ifElse', () => {
 const em: boolean = _.isEmpty([1, 2, 3]);
 
 const n: boolean = _.not(true);
-//$ExpectError
+//$FlowExpectedError
 const n1: boolean = _.not(1);
 
 const oor: boolean = _.or(true, true);
@@ -168,13 +168,13 @@ describe('propSatisfies', () => {
       const propSatCurry: boolean = _.propSatisfies((x: number) => x > 0, 'x')({ x: 1, y: 2, str: 'different type' });
     });
     it('should error when property does not exist', () => {
-      //$ExpectError
+      //$FlowExpectedError
       const propSat3: boolean = _.propSatisfies((x: number) => x > 0, 'z', { x: 1, y: 2 });
     });
     it('should error when condition param does not match property type', () => {
-      //$ExpectError
+      //$FlowExpectedError
       const propSat: boolean = _.propSatisfies(x => x > 0, 'str', { x: 1, y: 2, str: 'different type' });
-      //$ExpectError
+      //$FlowExpectedError
       const propSatCurry: boolean = _.propSatisfies((x: number) => x > 0, 'str')({ x: 1, y: 2, str: 'different type' });
     });
   });
@@ -184,7 +184,7 @@ describe('propSatisfies', () => {
       const propSat: boolean = _.propSatisfies((x: number) => x > 0, 'x', o);
     });
     it('should error when condition param does not match property type', () => {
-      //$ExpectError
+      //$FlowExpectedError
       const propSat2: boolean = _.propSatisfies((x: string) => x > 0, 'x', o);
     });
   });

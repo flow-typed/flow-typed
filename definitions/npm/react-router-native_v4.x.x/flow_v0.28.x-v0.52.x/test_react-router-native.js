@@ -14,7 +14,7 @@ import {
   <div />
 </NativeRouter>;
 
-// $ExpectError
+// $FlowExpectedError
 <NativeRouter keyLength="five" />;
 
 // Link
@@ -33,7 +33,7 @@ import {
   About
 </Link>;
 
-// $ExpectError
+// $FlowExpectedError
 <Link to={3} />;
 
 // DeepLinking

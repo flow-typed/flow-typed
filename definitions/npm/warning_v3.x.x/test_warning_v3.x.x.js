@@ -2,7 +2,7 @@ import warning from 'warning'
 
 warning(true, 'foo')
 warning(false, 'foo')
-// $ExpectError - bool needed
+// $FlowExpectedError - bool needed
 warning('foo', 'bar')
-// $ExpectError - string as warning
+// $FlowExpectedError - string as warning
 warning('foo', 123)

@@ -24,10 +24,10 @@ describe('Sanity tests', () => {
   });
 
   it('raise an error with malformed inputs', () => {
-    // $ExpectError
+    // $FlowExpectedError
     set('hello');
 
-    // $ExpectError
+    // $FlowExpectedError
     set({}, 5);
   });
 });

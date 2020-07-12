@@ -16,10 +16,10 @@ import type {
 
 pg.types.setTypeParser(1184, v => v);
 pg.types.setTypeParser(1184, 'text', (v: string) => v);
-// $ExpectError
+// $FlowExpectedError
 pg.types.setTypeParser(1184, 'binary', (v: string) => v)
 pg.types.setTypeParser(1184, 'binary', (v: Buffer) => v)
-// $ExpectError
+// $FlowExpectedError
 pg.types.setTypeParser(1184, (v: Buffer) => v)
 
 // There are two common ways to use node-postgres.
@@ -28,55 +28,55 @@ function test_pg() {
   function test_pool(pool: Pool) {
     // 1.1 you can run queries directly against the pool
     const rq: Promise<ResultSet> = pool.query('select * from table;');
-    // $ExpectError
+    // $FlowExpectedError
     const rqw: Promise<number> = pool.query('select * from table;');
     const rq2: Promise<ResultSet> = pool.query('Parameterized Queries',[1],
      (err, result) => {
        const _err: PG_ERROR|null = err;
-       // $ExpectError
+       // $FlowExpectedError
        const _err_w: number = err;
        const _result: ResultSet|void = result;
-       // $ExpectError
+       // $FlowExpectedError
        const _result_w: number = result;
      });
-     // $ExpectError
+     // $FlowExpectedError
     const rq2_w: Promise<ResultSet> = pool.query('Parameterized Queries',1);
 
     // 1.2 the pool also supports checking out a client for
     // multiple operations, such as a transaction
     const rc: Promise<PoolClient> = pool.connect( (err, client, done) => {
       const _err: PG_ERROR|null = err;
-      // $ExpectError
+      // $FlowExpectedError
       const _err_w: number = err;
       const _client: PoolClient|null = client;
-      // $ExpectError
+      // $FlowExpectedError
       const _client_w: number = client;
       const _done: DoneCallback = done;
-      // $ExpectError
+      // $FlowExpectedError
       const _done_w: number = done;
     });
-    // $ExpectError
+    // $FlowExpectedError
     const rc_w: number = pool.connect();
 
     const rt: Promise<PoolClient> = pool.take( (err, client, done) => {
       const _err: PG_ERROR|null = err;
-      // $ExpectError
+      // $FlowExpectedError
       const _err_w: number = err;
       const _client: PoolClient|null = client;
-      // $ExpectError
+      // $FlowExpectedError
       const _client_w: number = client;
       const _done: DoneCallback = done;
-      // $ExpectError
+      // $FlowExpectedError
       const _done_w: number = done;
     });
-    // $ExpectError
+    // $FlowExpectedError
     const rt_w: number = pool.take();
 
     const re: Promise<void> = pool.end( err => {
-      // $ExpectError
+      // $FlowExpectedError
       const _err_w: string = err; // ?:mixed
     });
-    // $ExpectError
+    // $FlowExpectedError
     const re_w: Promise<null> = pool.end();
 
     // Note: There is a slight different between pool.query and client.query.
@@ -85,17 +85,17 @@ function test_pg() {
     function test_PoolClient(client: PoolClient) {
       const rr: void = client.release('any msg');
       const rr1: void = client.release();
-      // $ExpectError
+      // $FlowExpectedError
       const rr_w: null = client.release();
       const rq: QueryType = client.query('select * from table;');
-      // $ExpectError
+      // $FlowExpectedError
       const rqw: Promise<number> = pool.query('select * from table;');
       rq.on('row', (row, result) => {
         const _row: Row = row;
         const _result: ResultBuilder = result;
-        // $ExpectError
+        // $FlowExpectedError
         const _row_w: number = row;
-        // $ExpectError
+        // $FlowExpectedError
         const _result_w: number = result;
       });
       rq.on('end', (result) => {
@@ -103,23 +103,23 @@ function test_pg() {
       });
       rq.on('error', (err) => {
         const _err: PG_ERROR = err;
-        // $ExpectError
+        // $FlowExpectedError
         const _err_w: number = err;
       });
-      // $ExpectError
+      // $FlowExpectedError
       rq.on('wrong', ()=>{});
 
 
       const rq2: Promise<ResultSet> = client.query('Parameterized Queries',[1],
        (err, result) => {
          const _err: PG_ERROR|null = err;
-         // $ExpectError
+         // $FlowExpectedError
          const _err_w: number = err;
          const _result: ResultSet|void = result;
-         // $ExpectError
+         // $FlowExpectedError
          const _result_w: number = result;
        });
-       // $ExpectError
+       // $FlowExpectedError
       const rq2_w: Promise<ResultSet> = client.query('Parameterized Queries',1);
 
       const rq3: QuerySubmittableConfig = client.query({
@@ -142,10 +142,10 @@ function test_pg() {
         const rq2: Promise<ResultSet> = _client.query('Parameterized Queries',[1],
          (err, result) => {
            const _err: PG_ERROR|null = err;
-           // $ExpectError
+           // $FlowExpectedError
            const _err_w: number = err;
            const _result: ResultSet|void = result;
-           // $ExpectError
+           // $FlowExpectedError
            const _result_w: number = result;
          });
         const rq3: QuerySubmittableConfig = _client.query({
@@ -154,31 +154,31 @@ function test_pg() {
               const _connection: mixed = connection;
             },
         });
-         // $ExpectError
+         // $FlowExpectedError
         const rq2_w: Promise<ResultSet> = _client.query('Parameterized Queries',1);
 
         _client.on('drain', _ => {
           const a: void = _;
         });
-        // $ExpectError
+        // $FlowExpectedError
         _client.on('drain',1);
         _client.on('error', err => {
           const _err: PG_ERROR = err;
         });
-        // $ExpectError
+        // $FlowExpectedError
         _client.on('error',1);
         _client.on('notification', msg => {
         });
-        // $ExpectError
+        // $FlowExpectedError
         _client.on('notification',1);
         _client.on('notice', msg => {
         });
-        // $ExpectError
+        // $FlowExpectedError
         _client.on('notice',1);
         _client.on('end', _ => {
           const a: void = _;
         });
-        // $ExpectError
+        // $FlowExpectedError
         _client.on('end',1);
       }
     });
@@ -199,16 +199,16 @@ const pool = new pg.Pool({
 
 // use pool
 const promise_r = pool.query('select * from table;', ['11']);
-// $ExpectError
+// $FlowExpectedError
 const p:boolean = promise_r; // Promise
 promise_r.then( result => {
-  // $ExpectError
+  // $FlowExpectedError
   const v:boolean = result.command; // string
-  // $ExpectError
+  // $FlowExpectedError
   const v2:boolean = result.oid; // string
-  // $ExpectError
+  // $FlowExpectedError
   const v3:boolean = result.rowCount; // string
-  // $ExpectError
+  // $FlowExpectedError
   const v4:boolean = result.rows; // Array
   const rt:ResultSet = result; // the type of result
 })
@@ -218,7 +218,7 @@ const promise_client = pool.connect();
 promise_client.then( client => {
   client.query('select * from table;')
     .then( result => {
-      // $ExpectError
+      // $FlowExpectedError
       const v:boolean = result; // result should be typed
     });
   client.release('error msg'); // accept error msg

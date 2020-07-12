@@ -10,7 +10,7 @@ describe('NativeConstants', () => {
         if (Constants.platform && Constants.platform.android) {
           (Constants.platform.android.versionCode: number);
 
-          // $ExpectError: check any
+          // $FlowExpectedError: check any
           (Constants.platform.android.versionCode: boolean);
         }
       });
@@ -31,15 +31,15 @@ describe('NativeConstants', () => {
       });
       it('should raise an error when lead to an incompatible type', () => {
         if (Constants.platform && Constants.platform.ios) {
-          // $ExpectError
+          // $FlowExpectedError
           (Constants.platform.ios.buildNumber: number);
-          // $ExpectError
+          // $FlowExpectedError
           (Constants.platform.ios.platform: number);
-          // $ExpectError
+          // $FlowExpectedError
           (Constants.platform.ios.model: number);
-          // $ExpectError
+          // $FlowExpectedError
           (Constants.platform.ios.userInterfaceIdiom: number);
-          // $ExpectError
+          // $FlowExpectedError
           (Constants.platform.ios.systemVersion: number);
         }
       });
@@ -52,7 +52,7 @@ describe('NativeConstants', () => {
         if (ua !== null) {
           (ua: string);
 
-          // $ExpectError: check any
+          // $FlowExpectedError: check any
           (ua: number);
         } else {
           (ua: null);
@@ -82,37 +82,37 @@ describe('NativeConstants', () => {
     });
 
     it('should raise an error when lead to an incompatible type', () => {
-      // $ExpectError
+      // $FlowExpectedError
       (Constants.debugMode: 'ups...');
-      // $ExpectError
+      // $FlowExpectedError
       (Constants.deviceName: 'ups...');
-      // $ExpectError
+      // $FlowExpectedError
       (Constants.deviceYearClass: 'ups...');
-      // $ExpectError
+      // $FlowExpectedError
       (Constants.experienceUrl: 'ups...');
-      // $ExpectError
+      // $FlowExpectedError
       (Constants.expoRuntimeVersion: 'ups...');
-      // $ExpectError
+      // $FlowExpectedError
       (Constants.expoVersion: 'ups...');
-      // $ExpectError
+      // $FlowExpectedError
       (Constants.isDetached: 'ups...');
-      // $ExpectError
+      // $FlowExpectedError
       (Constants.intentUri: 'ups...');
-      // $ExpectError
+      // $FlowExpectedError
       (Constants.installationId: 'ups...');
-      // $ExpectError
+      // $FlowExpectedError
       (Constants.isDevice: 'ups...');
-      // $ExpectError
+      // $FlowExpectedError
       (Constants.isHeadless: 'ups...');
-      // $ExpectError
+      // $FlowExpectedError
       (Constants.linkingUri: 'ups...');
-      // $ExpectError
+      // $FlowExpectedError
       (Constants.sessionId: 'ups...');
-      // $ExpectError
+      // $FlowExpectedError
       (Constants.statusBarHeight: 'ups...');
-      // $ExpectError
+      // $FlowExpectedError
       (Constants.systemVersion: 'ups...');
-      // $ExpectError
+      // $FlowExpectedError
       (Constants.systemFonts: 'ups...');
     });
   });
@@ -125,9 +125,9 @@ describe('Constants', () => {
   });
 
   it('should raise an error when lead to an incompatible type', () => {
-    // $ExpectError
+    // $FlowExpectedError
     (Constants.deviceId: boolean);
-    // $ExpectError
+    // $FlowExpectedError
     (Constants.linkingUrl: boolean);
   });
 });

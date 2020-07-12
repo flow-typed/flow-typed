@@ -3,12 +3,12 @@ import { render } from "react-dom";
 import Scrollbars from "react-custom-scrollbars";
 
 function BadScrollBars1() {
-  // $ExpectError
+  // $FlowExpectedError
   return <Scrollbars onScroll={10} />;
 }
 
 function BadScrollBars2() {
-  // $ExpectError
+  // $FlowExpectedError
   return <Scrollbars onUpdate={(values: Array<string>) => console.log(values)} />;
 }
 

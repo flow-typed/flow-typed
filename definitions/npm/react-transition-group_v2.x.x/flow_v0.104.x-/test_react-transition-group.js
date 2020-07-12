@@ -47,9 +47,9 @@ describe('CSS/Transition', () => {
     })
 
     it('should fail without required params', () => {
-      // $ExpectError
+      // $FlowExpectedError
       <Transition><div /></Transition>;
-      // $ExpectError
+      // $FlowExpectedError
       <Transition timeout={ 1 } />
     })
 
@@ -210,7 +210,7 @@ describe('CSS/Transition', () => {
     })
 
     it('should fail without required parameters', () => {
-      // $ExpectError
+      // $FlowExpectedError
       <CSSTransition timeout={ 1 }><div /></CSSTransition>;
     })
   })
@@ -249,7 +249,7 @@ describe('Groups', () => {
     })
 
     it('should fail without required parameters', () => {
-      // $ExpectError
+      // $FlowExpectedError
       <ReplaceTransition timeout={ 1 }>
         { t1 }
         { t2 }

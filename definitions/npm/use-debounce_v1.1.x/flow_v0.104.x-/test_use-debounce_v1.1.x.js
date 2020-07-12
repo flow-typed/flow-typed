@@ -31,11 +31,11 @@ describe('The `useDebounce` hook', () => {
     useDebounce('', 100, {});
     useDebounce('', 100, { maxWait: 100 });
 
-    // $ExpectError
+    // $FlowExpectedError
     useDebounce(null);
-    // $ExpectError
+    // $FlowExpectedError
     useDebounce('', {});
-    // $ExpectError
+    // $FlowExpectedError
     useDebounce('', 100, { test: 100 });
   });
 
@@ -122,11 +122,11 @@ describe('The `useDebouncedCallback` hook', () => {
     useDebouncedCallback(value => {}, 100, []);
     useDebouncedCallback(value => {}, 100, [], { maxWait: 100 });
 
-    // $ExpectError
+    // $FlowExpectedError
     useDebouncedCallback(null);
-    // $ExpectError
+    // $FlowExpectedError
     useDebouncedCallback(() => {}, {});
-    // $ExpectError
+    // $FlowExpectedError
     useDebouncedCallback(() => {}, 100, { test: 100 });
   });
 

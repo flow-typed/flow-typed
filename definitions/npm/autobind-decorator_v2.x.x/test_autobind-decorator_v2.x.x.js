@@ -19,10 +19,10 @@ describe('boundClass', () => {
   });
 
   it('errors when types incompatible', () => {
-    // $ExpectError BarCtor is incompatible with Foo
+    // $FlowExpectedError BarCtor is incompatible with Foo
     (boundClass(BarCtor): typeof (Foo));
 
-    // $ExpectError Foo is incompatible with string
+    // $FlowExpectedError Foo is incompatible with string
     (boundClass(Foo): string);
   });
 });
@@ -51,7 +51,7 @@ describe('boundMethod', () => {
   });
 
   it('errors when types incompatible', () => {
-    // $ExpectError number is incompatible with string
+    // $FlowExpectedError number is incompatible with string
     boundMethod(Foo, 123, propertyDescriptor);
 
     const propertyDescriptorString = {
@@ -62,7 +62,7 @@ describe('boundMethod', () => {
       set: (value: string) => { },
       value: '1',
     };
-    // $ExpectError string is incompatible with number
+    // $FlowExpectedError string is incompatible with number
     (boundMethod(Foo, 'property', propertyDescriptorString): TypedPropertyDescriptor<number>);
   });
 });
@@ -77,10 +77,10 @@ describe('autobind', () => {
   });
 
   it('errors when types incompatible', () => {
-    // $ExpectError Foo is incompatible with string
+    // $FlowExpectedError Foo is incompatible with string
     (autobind(Foo): string);
 
-    // $ExpectError number is incompatible with string
+    // $FlowExpectedError number is incompatible with string
     autobind(Foo, 123, propertyDescriptor);
   });
 });

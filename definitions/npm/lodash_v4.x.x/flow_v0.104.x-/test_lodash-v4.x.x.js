@@ -220,12 +220,12 @@ describe('Array', () => {
     zip(["a", "b", "c"], [1, 2, 3])[0].length;
     zip(["a", "b", "c"], [1, 2, 3])[0][0] + "a";
     zip(["a", "b", "c"], [1, 2, 3])[0][1] * 10;
-    // $ExpectError `x` property not found in Array
+    // $FlowExpectedError `x` property not found in Array
     zip([{ x: 1 }], [{ x: 2, y: 1 }])[0].x;
-    // $ExpectError `y` property not found in object literal
+    // $FlowExpectedError `y` property not found in object literal
     zip([{ x: 1 }], [{ x: 2, y: 1 }])[0][0].y;
     zip([{ x: 1 }], [{ x: 2, y: 1 }])[0][1].y;
-    // $ExpectError Flow could potentially catch this -- the tuple only has two elements.
+    // $FlowExpectedError Flow could potentially catch this -- the tuple only has two elements.
     zip([{ x: 1 }], [{ x: 2, y: 1 }])[0][2];
   });
 
@@ -236,7 +236,7 @@ describe('Array', () => {
     zipWith(readOnlyArray, readOnlyArray, readOnlyArray, (a: number, b: number, c: number) => [a, b, c]);
     zipWith(readOnlyArray, readOnlyArray, readOnlyArray, readOnlyArray);
     zipWith(readOnlyArray, readOnlyArray, readOnlyArray, readOnlyArray, (a: number, b: number, c: number, d: number) => [a, b, c, d]);
-    // $ExpectError `x` should be a `string`, `y` a `number`
+    // $FlowExpectedError `x` should be a `string`, `y` a `number`
     zipWith(["a", "b", "c"], [1, 2, 3]).map(([x, y]) => x * y);
   });
 });
@@ -253,20 +253,20 @@ describe('Collection', () => {
     (countBy(indexerObject, (v: number) => v): { [string]: number, ... });
     (countBy(exactObject, (v: number) => v): { [string]: number, ... });
     (countBy(exactHeterogeneousObject, (v: ExactHeterogeneousObjectValue) => v): { [string]: number, ... });
-    // $ExpectError wrong value type
+    // $FlowExpectedError wrong value type
     (countBy(exactHeterogeneousObject, (v: number) => v): { [string]: number, ... });
     (countBy(readOnlyIndexerObject, (v: number) => v): { [string]: number, ... });
     (countBy(readOnlyExactObject, (v: number) => v): { [string]: number, ... });
     (countBy(objectOrNullOrVoid, (v: number) => v): { [string]: number, ... });
     (countBy(arrayOrObjectOrString, (v: number | string) => v): { [string]: number, ... });
 
-    // $ExpectError wrong return type
+    // $FlowExpectedError wrong return type
     (countBy(["one", "two", "three"], "length"): { [string]: string, ... });
-    // $ExpectError wrong first argument
+    // $FlowExpectedError wrong first argument
     countBy(123, "length");
-    // $ExpectError wrong value type
+    // $FlowExpectedError wrong value type
     countBy(["one", "two", "three"], (v: boolean) => v);
-    // $ExpectError wrong indexer type
+    // $FlowExpectedError wrong indexer type
     countBy(["one", "two", "three"], (v, arg2: number) => arg2);
   });
 
@@ -279,31 +279,31 @@ describe('Collection', () => {
     (f('123', (char: string) => {}): string);
 
     (f(readOnlyArray, (v: number) => false): $ReadOnlyArray<number>);
-    // $ExpectError forEach returns its first argument, therefore, if it was readonly, it should remain readonly
+    // $FlowExpectedError forEach returns its first argument, therefore, if it was readonly, it should remain readonly
     (f(readOnlyArray, (v) => {}): number[]);
     (f(arrayOrNullOrVoid, (v: number) => !!v): ArrayOrNullOrVoid);
 
     (f(indexerObject, (v: number, k: string, c: IndexerObject) => {}): IndexerObject);
     (f(exactObject, (v: number, k: string, c: ExactObject) => !!v): ExactObject);
     (f(exactHeterogeneousObject, (v: ExactHeterogeneousObjectValue, k: string, c: ExactHeterogeneousObject) => !!v): ExactHeterogeneousObject);
-    // $ExpectError wrong iteratee argument type
+    // $FlowExpectedError wrong iteratee argument type
     f(exactHeterogeneousObject, (v: number) => false);
     (f(readOnlyIndexerObject, (v: number, k: string, c: ReadOnlyIndexerObject) => {}): ReadOnlyIndexerObject);
     (f(readOnlyExactObject, (v: number, k: string, c: ReadOnlyExactObject) => {}): ReadOnlyExactObject);
-    // $ExpectError forEach returns its first argument, therefore, if it was readonly, it should remain readonly
+    // $FlowExpectedError forEach returns its first argument, therefore, if it was readonly, it should remain readonly
     (f(readOnlyExactObject, (v) => {}): ExactObject);
     (f(objectOrNullOrVoid, (v: number, k: string, c: ObjectOrNullOrVoid) => {}): ObjectOrNullOrVoid);
     (f(arrayOrObjectOrString, (v: number | string, key: string, c: ArrayOrObjectOrString) => !!v): ArrayOrObjectOrString);
-    // $ExpectError wrong iteratee argument type,
+    // $FlowExpectedError wrong iteratee argument type,
     (f(arrayOrObjectOrString, (v: string) => !!v): ArrayOrObjectOrString);
 
-    // $ExpectError wrong iteratee return value
+    // $FlowExpectedError wrong iteratee return value
     f(exactObject, (v) => ({ a: 1, b: 2}));
-    // $ExpectError wrong return type: forEach() returns collection passed in the first argument
+    // $FlowExpectedError wrong return type: forEach() returns collection passed in the first argument
     (f(exactObject, (v) => false): void);
-    // $ExpectError wrong iteratee return type
+    // $FlowExpectedError wrong iteratee return type
     f(exactObject, (v) => v + 2);
-    // $ExpectError wrong iteratee type, should be function
+    // $FlowExpectedError wrong iteratee type, should be function
     f(exactObject, {a: 1});
   }
 
@@ -360,9 +360,9 @@ describe('Collection', () => {
     (f(readOnlyExactObject, (v: number, k: string, c: ReadOnlyExactObject) => {}): number[]);
     (f(objectOrNullOrVoid, (v: number, k: string, c: ObjectOrNullOrVoid) => {}): number[]);
 
-    // $ExpectError first arg should be array or object type is wrong
+    // $FlowExpectedError first arg should be array or object type is wrong
     f(123, function(o) { return !o.active; });
-    // $ExpectError return type is wrong
+    // $FlowExpectedError return type is wrong
     (f(users, function(o) { return !o.active; }): boolean);
   };
 
@@ -403,13 +403,13 @@ describe('Collection', () => {
     (f(readOnlyExactObject, (v: number, k: string, c: ReadOnlyExactObject) => {}): number | void);
     (f(objectOrNullOrVoid, (v: number, k: string, c: ObjectOrNullOrVoid) => !!v): number | void);
 
-    // $ExpectError number cannot be compared to string
+    // $FlowExpectedError number cannot be compared to string
     f([1, 2, 3], x => x == "a");
-    // $ExpectError number is incompatible with function type.
+    // $FlowExpectedError number is incompatible with function type.
     f([1, 2, 3], 1);
-    // $ExpectError property `y` not found in object literal
+    // $FlowExpectedError property `y` not found in object literal
     f([{ x: 1 }, { x: 2 }, { x: 3 }], v => v.y == 3);
-    // $ExpectError function may not find the item, therefore `void` is always a valid result
+    // $FlowExpectedError function may not find the item, therefore `void` is always a valid result
     (f(users, function(o) { return o.age < 40; }): User);
   }
 
@@ -427,7 +427,7 @@ describe('Collection', () => {
 
     (flatMap([1, 2, 3], (n: number, i: number, c: number[]) => n): number[]);
     (flatMap(['a', 'b', 'c'], (v: string, i: number, c: string[]) => [v, c[0], i]): (number | string)[]);
-    // $ExpectError array index is a number
+    // $FlowExpectedError array index is a number
     (flatMap(['a', 'b', 'c'], (v, i: string) => [v, v]));
 
     (flatMap(['a', 'b', 'c'], (v: string, i: number, c: string[]) => [{ v, i }]): ({| v: string, i: number |})[]);
@@ -444,7 +444,7 @@ describe('Collection', () => {
     (flatMap(readOnlyExactObject, (n: number, k: string, c: ReadOnlyExactObject) => [n, n]): number[]);
     (flatMap(objectOrNullOrVoid, (n: number, k: string, c: ObjectOrNullOrVoid) => [n, n]): number[]);
     (flatMap(arrayOrObjectOrString, (n: number| string, k: number | string, c: ArrayOrObjectOrString) => [n, n]): (number| string)[]);
-    // $ExpectError key cannot be only string since index is `number` for array
+    // $FlowExpectedError key cannot be only string since index is `number` for array
     flatMap(arrayOrObjectOrString, (n, k: string) => [n, n]);
   });
 
@@ -463,7 +463,7 @@ describe('Collection', () => {
     (flatMapDeep(readOnlyExactObject, (n: number, k: string, c: ReadOnlyExactObject) => [[[n, n]]]): number[]);
     (flatMapDeep(objectOrNullOrVoid, (n: number, k: string, c: ObjectOrNullOrVoid) => [[[n, n]]]): number[]);
     (flatMapDeep(arrayOrObjectOrString, (n: number| string, k: number | string, c: ArrayOrObjectOrString) => [[[n, n]]]): (number| string)[]);
-    // $ExpectError key cannot be only string since index is `number` for array
+    // $FlowExpectedError key cannot be only string since index is `number` for array
     flatMapDeep(arrayOrObjectOrString, (n, k: string) => [[[n, n]]]);
   });
 
@@ -482,7 +482,7 @@ describe('Collection', () => {
     (flatMapDepth(readOnlyExactObject, (n: number, k: string, c: ReadOnlyExactObject) => [[[n, n]]], 2): number[]);
     (flatMapDepth(objectOrNullOrVoid, (n: number, k: string, c: ObjectOrNullOrVoid) => [[[n, n]]], 2): number[]);
     (flatMapDepth(arrayOrObjectOrString, (n: number| string, k: number | string, c: ArrayOrObjectOrString) => [[[n, n]]], 2): (number| string)[]);
-    // $ExpectError key cannot be only string since index is `number` for array
+    // $FlowExpectedError key cannot be only string since index is `number` for array
     flatMapDepth(arrayOrObjectOrString, (n, k: string) => [[[n, n]]], 2);
   });
 
@@ -529,7 +529,7 @@ describe('Collection', () => {
     (invokeMap([[5, 1, 7], [3, 2, 1]], 'sort'): number[][]);
     (invokeMap(['123', '456'], String.prototype.split, ''): string[][]);
 
-    // $ExpectError
+    // $FlowExpectedError
     invokeMap([123, 456], String.prototype.split, '');
   })
 
@@ -569,9 +569,9 @@ describe('Collection', () => {
     //accepts tuple types
     const tuple: [number, number] = [1, 2];
     (map(tuple, val => val + 2): number[]);
-    //$ExpectError cannot push to tuple
+    //$FlowExpectedError cannot push to tuple
     map(tuple, (val, nothing, tupleArray) => tupleArray.push(123));
-    //$ExpectError wrong return type
+    //$FlowExpectedError wrong return type
     (map(tuple, val => val + 2): [number, number]);
 
     // Array#map, lodash.map, lodash#map
@@ -627,7 +627,7 @@ describe('Collection', () => {
       return flattened.concat(other);
     }, []): number[]);
 
-    // $ExpectError return type
+    // $FlowExpectedError return type
     (f([1, 2], function(sum, n) { return sum + n;}, 0): string);
 
     (f(readOnlyArray, (r: number, v: number, i: number) => r + v, 0): number);
@@ -659,7 +659,7 @@ describe('Collection', () => {
     (sample(readOnlyIndexerObject): number);
     (sample({ a: 1, b: 'abc' }): number| string);
 
-    // $ExpectError
+    // $FlowExpectedError
     (sample({ a: 1, b: 'abc' }): number);
   });
 
@@ -669,7 +669,7 @@ describe('Collection', () => {
     (sampleSize(readOnlyIndexerObject, 2): number[]);
     (sampleSize({ a: 1, b: 'abc' }, 2): (number| string)[]);
 
-    // $ExpectError
+    // $FlowExpectedError
     (shuffle({ a: 1, b: 'abc' }, 2): number[]);
   });
 
@@ -679,7 +679,7 @@ describe('Collection', () => {
     (shuffle(readOnlyIndexerObject): number[]);
     (shuffle(readOnlyIndexerObject): (number | string)[]);
 
-    // $ExpectError
+    // $FlowExpectedError
     (shuffle({ a: 1, b: 'abc' }): number[]);
   });
 
@@ -729,13 +729,13 @@ describe('Function', () => {
     debounced(1);
     debounced.cancel();
     debounced.flush();
-    // $ExpectError string is incompatible with number
+    // $FlowExpectedError string is incompatible with number
     debounced("a");
   });
 
   it('memoize', () => {
     var memoized: (a: number) => string = memoize((a: number) => "foo");
-    // $ExpectError memoize retains type information
+    // $FlowExpectedError memoize retains type information
     memoized = memoize(() => {});
   });
 });
@@ -743,9 +743,9 @@ describe('Function', () => {
 describe('Lang', () => {
   it('clone', () => {
     clone({ a: 1 }).a == 1;
-    // $ExpectError property `b`. Property not found in object literal
+    // $FlowExpectedError property `b`. Property not found in object literal
     clone({ a: 1 }).b == 1;
-    // $ExpectError number. This type is incompatible with function type.
+    // $FlowExpectedError number. This type is incompatible with function type.
     clone({ a: 1 }).a == "c";
   });
 
@@ -759,7 +759,7 @@ describe('Lang', () => {
     // and https://github.com/facebook/flow/issues/956
     isEqual(1);
 
-    // $ExpectError function type expects no more than 2 arguments
+    // $FlowExpectedError function type expects no more than 2 arguments
     isEqual(1, 2, 3);
   });
 
@@ -776,9 +776,9 @@ describe('Lang', () => {
     boolFalse = isString();
     boolFalse = isString(true);
 
-    // $ExpectError
+    // $FlowExpectedError
     boolFalse = isString("");
-    // $ExpectError
+    // $FlowExpectedError
     boolTrue = isString(undefined);
   });
 
@@ -797,9 +797,9 @@ describe('Object', () => {
   it('extend', () => {
     extend({ a: 1 }, { b: 2 }).a;
     extend({ a: 1 }, { b: 2 }).b;
-    // $ExpectError property `c`. Property not found in object literal
+    // $FlowExpectedError property `c`. Property not found in object literal
     extend({ a: 1 }, { b: 2 }).c;
-    // $ExpectError property `c`. Poperty not found in object literal
+    // $FlowExpectedError property `c`. Poperty not found in object literal
     assignIn({ a: 1 }, { b: 2 }).c;
   });
 
@@ -847,7 +847,7 @@ describe('Object', () => {
     (pick(undefined, 'a'): {...});
     (pick({ [1]: 1, [2]: 2 }, 'a'): { [prop: number]: number, ... });
 
-    // $ExpectError
+    // $FlowExpectedError
     pick({ a: 2 }, 1);
   });
 
@@ -900,24 +900,24 @@ describe('Util', () => {
     noop("a", 2, [], null);
     (noop: string => void);
     (noop: (number, string) => void);
-    // $ExpectError functions are contravariant in return types
+    // $FlowExpectedError functions are contravariant in return types
     (noop: string => string);
   });
 
   it('range', () => {
     range(0, 10)[4] == 4;
-    // $ExpectError string. This type is incompatible with number
+    // $FlowExpectedError string. This type is incompatible with number
     range(0, "a");
-    // $ExpectError string cannot be compared to number
+    // $FlowExpectedError string cannot be compared to number
     range(0, 10)[4] == "a";
   });
 
   it('times', () => {
     (times(5): number[]);
-    // $ExpectError string. This type is incompatible with number
+    // $FlowExpectedError string. This type is incompatible with number
     (times(5): string[]);
     (times(5, (i: number) => i + 1): number[]);
-    // $ExpectError string. This type is incompatible with number
+    // $FlowExpectedError string. This type is incompatible with number
     (times(5, (i: number) => JSON.stringify(i)): number[]);
   });
 });

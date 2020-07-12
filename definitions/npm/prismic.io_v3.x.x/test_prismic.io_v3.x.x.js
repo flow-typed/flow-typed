@@ -5,7 +5,7 @@ import { api, Predicates } from 'prismic.io';
 function geoPointElTest(el) {
   return {
     test_latitude: (el.latitude : number),
-    // $ExpectError
+    // $FlowExpectedError
     test_invalid_latitude: (el.latitude : string),
     test_longitude: (el.longitude : number),
   };
@@ -20,7 +20,7 @@ function linkElTest(el) {
 function imageViewTest(el) {
   return {
     test_url: (el.url : string),
-    // $ExpectError
+    // $FlowExpectedError
     test_invalid_url: (el.url : boolean),
     test_width: (el.width : number),
     test_height: (el.height : number),
@@ -33,7 +33,7 @@ function imageElTest(el) {
   return {
     test_main: imageViewTest(el.main),
     test_url: (el.url : string),
-    // $ExpectError
+    // $FlowExpectedError
     test_invalid_url: (el.url : boolean),
     test_views: imageViewTest(el.views.foo),
   };
@@ -42,7 +42,7 @@ function imageElTest(el) {
 function structuredTextElTest(el) {
   return {
     test_blocks: (el.blocks : Array<Object>),
-    // $ExpectError
+    // $FlowExpectedError
     test_invalid_blocks: (el.blocks : Array<string>),
     test_getTitle: (() => {
       const x = el.getTitle();
@@ -61,7 +61,7 @@ function structuredTextElTest(el) {
     test_asHtml: (() => {
       return el.asHtml((doc) => doc.id, (el, content) => content || 'foo')
     }),
-    // $ExpectError
+    // $FlowExpectedError
     test_invalid_asHtml: (() => el.asHtml((doc) => doc.id, (el, content) => true))
   };
 }
@@ -69,7 +69,7 @@ function structuredTextElTest(el) {
 function groupDocTest(el) {
   return {
     test_data: (el.data : Object),
-    // $ExpectError
+    // $FlowExpectedError
     test_invalid_data: (el.data : Array<number>),
     test_fragments: (el.fragments : Array<Object>),
   };
@@ -97,7 +97,7 @@ function groupElTest(el) {
 function sliceTest(el) {
   return {
     test_sliceType: (el.sliceType : string),
-    // $ExpectError
+    // $FlowExpectedError
     test_invalid_sliceType: (el.sliceType : Array<boolean>),
     test_label: (el.label : string),
     test_value: (el.value : Object),
@@ -138,7 +138,7 @@ function sliceZoneElTest(el) {
 function linkedDocumentTest(el) {
   return {
     test_document: (el.document : Object),
-    // $ExpectError
+    // $FlowExpectedError
     test_invalid_document: (el.document : Array<string>),
     test_id: (el.id : string),
     test_uid: (el.uid : ?string),
@@ -153,7 +153,7 @@ function linkedDocumentTest(el) {
 function documentTest(doc) {
   return {
     test_id: (doc.id : string),
-    // $ExpectError
+    // $FlowExpectedError
     test_invalid_id: (el.id : Array<Object>),
     test_uid: (doc.uid : ?string),
     test_type: (doc.type : string),
@@ -285,7 +285,7 @@ api('http://foo.prismic.com', options).then(_api => {
       Predicates.near('foo', 1, 1, 1)
     )
     .query(
-      // $ExpectError
+      // $FlowExpectedError
       Predicates.at('foo', null)
     )
     .pageSize(1)
@@ -298,7 +298,7 @@ api('http://foo.prismic.com', options).then(_api => {
     .then(result => ({
       results: result.results.map(documentTest),
       page: (result.page : number),
-      // $ExpectError
+      // $FlowExpectedError
       $page: (result.page : Object),
       resultsPerPage: (result.results_per_page: number),
       resultsSize: (result.results_size: number),

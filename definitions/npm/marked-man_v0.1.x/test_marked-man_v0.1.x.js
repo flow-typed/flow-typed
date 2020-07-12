@@ -15,24 +15,24 @@ markedMan.setOptions({
   ronn: true
 });
 
-// $ExpectError
+// $FlowExpectedError
 markedMan.setOptions(["yoloism", true]);
 
 markedMan("", (err, content) => {
   if (err) throw err;
 });
 
-// $ExpectError
+// $FlowExpectedError
 markedMan(24, function(err, content) {
   if (err) throw err;
   console.log(content);
 });
 
 const x: string = markedMan("");
-// $ExpectError
+// $FlowExpectedError
 markedMan("", { tables: false });
 
-// $ExpectError
+// $FlowExpectedError
 markedMan("up", "top");
-// $ExpectError
+// $FlowExpectedError
 const y: string = markedMan(23);

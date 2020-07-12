@@ -5,11 +5,11 @@ import objectHash from "object-hash";
 
 describe("object-hash", () => {
   it("errors", () => {
-    // $ExpectError
+    // $FlowExpectedError
     objectHash();
-    // $ExpectError
+    // $FlowExpectedError
     objectHash(32);
-    // $ExpectError
+    // $FlowExpectedError
     objectHash("string");
   });
 

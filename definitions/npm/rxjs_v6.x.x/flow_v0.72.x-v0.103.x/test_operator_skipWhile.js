@@ -15,18 +15,18 @@ it("should support a predicate with an index", () => {
 });
 
 it("should enforce types", () => {
-  // $ExpectError
+  // $FlowExpectedError
   const o = of("foo", "bar", "baz").pipe(skipWhile());
 });
 
 it("should enforce predicate types", () => {
-  // $ExpectError
+  // $FlowExpectedError
   const o = of("foo", "bar", "baz").pipe(skipWhile(value => value < 3));
-  // $ExpectError
+  // $FlowExpectedError
   const p = of("foo", "bar", "baz").pipe(skipWhile((value, index) => index < "3"));
 });
 
 it("should enforce predicate return type", () => {
-  // $ExpectError
+  // $FlowExpectedError
   const o = of("foo", "bar", "baz").pipe(skipWhile(value => value));
 });

@@ -16,56 +16,56 @@ import type {
 function test_Application() {
   const app = new Koa();
   const context: Context = app.context;
-  // $ExpectError
+  // $FlowExpectedError
   const _context: number = app.context;
   const callback: () => (req: http$IncomingMessage<>, res: http$ServerResponse) => void = app.callback;
   const handler: (req: http$IncomingMessage<>, res: http$ServerResponse) => void = app.callback();
-  // $ExpectError
+  // $FlowExpectedError
   const _callback: (req: http$IncomingMessage<>, res: http$ServerResponse) => void = app.callback;
   const env: string = app.env;
-  // $ExpectError
+  // $FlowExpectedError
   const _env: number = app.env;
   const keys: void|Array<string>|Object = app.keys;
-  // $ExpectError
+  // $FlowExpectedError
   const _keys: null = app.keys;
   const middleware: Array<Middleware> = app.middleware;
-  // $ExpectError
+  // $FlowExpectedError
   const _middleware: Middleware = app.middleware;
   const proxy: boolean = app.proxy;
-  // $ExpectError
+  // $FlowExpectedError
   const _proxy: number = app.proxy;
   const request: Request = app.request;
-  // $ExpectError
+  // $FlowExpectedError
   const _request: number = app.request;
   const response: Response = app.response;
-  // $ExpectError
+  // $FlowExpectedError
   const _response: number = app.response;
   const server: http$Server = app.server;
-  // $ExpectError
+  // $FlowExpectedError
   const _server: number = app.server;
   const subdomainOffset: number = app.subdomainOffset;
-  // $ExpectError
+  // $FlowExpectedError
   const _subdomainOffset: string = app.subdomainOffset;
   const listen: $PropertyType<http$Server, 'listen'> = app.listen;
-  // $ExpectError
+  // $FlowExpectedError
   const _listen: () => string = app.listen;
   const toJSON: () => ApplicationJSON = app.toJSON;
-  // $ExpectError
+  // $FlowExpectedError
   const _toJSON: () => string = app.toJSON;
   const inspect: () => ApplicationJSON = app.inspect;
-  // $ExpectError
+  // $FlowExpectedError
   const _inspect: () => string = app.inspect;
   app.use( (ctx, next) => {
     const ctx1: Context = ctx;
-    // $ExpectError
+    // $FlowExpectedError
     const _ctx1: number = ctx;
     const next1: () => Promise<void> = next;
-    // $ExpectError
+    // $FlowExpectedError
     const _next1: () => Promise<string> = next;
     return;
   });
   app.use(async (ctx, next) => {
-    // $ExpectError
+    // $FlowExpectedError
     return 'hello';
   });
 }
@@ -73,251 +73,251 @@ function test_Application() {
 function test_response() {
   declare var response:Response;
   const req: http$IncomingMessage<> = response.req;
-  // $ExpectError
+  // $FlowExpectedError
   const _req: number = response.req;
   const res: http$ServerResponse = response.res;
-  // $ExpectError
+  // $FlowExpectedError
   const _res: number = response.res;
   const ctx: Context = response.ctx;
-  // $ExpectError
+  // $FlowExpectedError
   const _ctx: number = response.ctx;
   const request: Request = response.request;
-  // $ExpectError
+  // $FlowExpectedError
   const _request: number = response.request;
 
   const body: $PropertyType<Response, 'body'> = response.body;
-  // $ExpectError
+  // $FlowExpectedError
   const _body: number = response.body;
   const etag: string = response.etag;
-  // $ExpectError
+  // $FlowExpectedError
   const _etag: number = response.etag;
   const header: SimpleHeader = response.header;
-  // $ExpectError
+  // $FlowExpectedError
   const _header: {[key: string]: string} = response.header;
   const headers: SimpleHeader = response.headers;
-  // $ExpectError
+  // $FlowExpectedError
   const _headers: {[key: string]: string} = response.headers;
   const headerSent: boolean = response.headerSent;
-  // $ExpectError
+  // $FlowExpectedError
   const _headerSent: number = response.headerSent;
 
   const lastModified: Date = response.lastModified;
-  // $ExpectError
+  // $FlowExpectedError
   const _lastModified: boolean = response.lastModified;
   const message: string = response.message;
-  // $ExpectError
+  // $FlowExpectedError
   const _message: number = response.message;
   const socket: net$Socket = response.socket;
-  // $ExpectError
+  // $FlowExpectedError
   const _socket: number = response.socket;
   const status: number = response.status;
-  // $ExpectError
+  // $FlowExpectedError
   const _status: string = response.status;
   const type: string = response.type;
-  // $ExpectError
+  // $FlowExpectedError
   const _type: number = response.type;
   const writable: boolean = response.writable;
-  // $ExpectError
+  // $FlowExpectedError
   const _writable: string = response.writable;
 
   const length: number|void = response.length;
-  // $ExpectError
+  // $FlowExpectedError
   const _length: number = response.length;
   const append: (field: string, val: string | string[]) => void = response.append;
-  // $ExpectError
+  // $FlowExpectedError
   response.append(1, true);
   const attachment: (filename?: string) => void = response.attachment;
-  // $ExpectError
+  // $FlowExpectedError
   response.attachment(1);
   const get: (field: string) => string = response.get;
-  // $ExpectError
+  // $FlowExpectedError
   const value: number = response.get(1);
   const mimeType: string = response.is();
-  // $ExpectError
+  // $FlowExpectedError
   const _mimeType: string[] = response.is();
   const mimeOrFalse1: string|false = response.is('html');
-  // $ExpectError
+  // $FlowExpectedError
   const _mimeOrFalse1: string = response.is('html');
   const mimeOrFalse2: string|false = response.is(['html']);
-  // $ExpectError
+  // $FlowExpectedError
   const _mimeOrFalse2: string = response.is(['html']);
   const redirect: (url: string, alt?: string) => void = response.redirect;
-  // $ExpectError
+  // $FlowExpectedError
   response.redirect(1, true);
   const remove: (field: string) => void = response.remove;
-  // $ExpectError
+  // $FlowExpectedError
   response.remove(1);
   response.set({
     'Etag': '1234',
     'Last-Modified': 'date',
   });
-  // $ExpectError
+  // $FlowExpectedError
   response.set({
     'Etag': 1234,
     'Last-Modified': 123,
   });
   response.set('Etag', '1234');
-  // $ExpectError
+  // $FlowExpectedError
   response.set('Etag', 1234);
   const vary: (field: string) => void = response.vary;
-  // $ExpectError
+  // $FlowExpectedError
   response.vary(1);
   const toJSON: () => ResponseJSON = response.toJSON;
-  // $ExpectError
+  // $FlowExpectedError
   const _json: number = response.toJSON();
   const inspect: () => ResponseInspect = response.inspect;
-  // $ExpectError
+  // $FlowExpectedError
   const _inspectJson: number = response.inspect();
 }
 
 function test_request() {
   declare var request:Request;
   const req: http$IncomingMessage<> = request.req;
-  // $ExpectError
+  // $FlowExpectedError
   const _req: number = request.req;
   const res: http$ServerResponse = request.res;
-  // $ExpectError
+  // $FlowExpectedError
   const _res: number = request.res;
   const ctx: Context = request.ctx;
-  // $ExpectError
+  // $FlowExpectedError
   const _ctx: number = request.ctx;
   const response: Response = request.response;
-  // $ExpectError
+  // $FlowExpectedError
   const _response: number = request.response;
   const fresh: boolean = request.fresh;
-  // $ExpectError
+  // $FlowExpectedError
   const _fresh: number = request.fresh;
   const header: SimpleHeader = request.header;
-  // $ExpectError
+  // $FlowExpectedError
   const _header: {[key: string]: string}  = request.header;
   const headers: SimpleHeader = request.headers;
-  // $ExpectError
+  // $FlowExpectedError
   const _headers: {[key: string]: string} = request.headers;
   const host: string = request.host;
-  // $ExpectError
+  // $FlowExpectedError
   const _host: number = request.host;
   const hostname: string = request.hostname;
-  // $ExpectError
+  // $FlowExpectedError
   const _hostname: number = request.hostname;
   const href: string = request.href;
-  // $ExpectError
+  // $FlowExpectedError
   const _href: number = request.href;
   const idempotent: boolean = request.idempotent;
-  // $ExpectError
+  // $FlowExpectedError
   const _idempotent: number = request.idempotent;
   const ip: string = request.ip;
-  // $ExpectError
+  // $FlowExpectedError
   const _ip: number = request.ip;
   const ips: string[] = request.ips;
-  // $ExpectError
+  // $FlowExpectedError
   const _ips: string = request.ips;
   const method: string = request.method;
-  // $ExpectError
+  // $FlowExpectedError
   const _method: number = request.method;
   const origin: string = request.origin;
-  // $ExpectError
+  // $FlowExpectedError
   const _origin: number = request.origin;
   const originalUrl: string = request.originalUrl;
-  // $ExpectError
+  // $FlowExpectedError
   const _originalUrl: string[] = request.originalUrl;
   const path: string = request.path;
-  // $ExpectError
+  // $FlowExpectedError
   const _path: number = request.path;
   const protocol: string = request.protocol;
-  // $ExpectError
+  // $FlowExpectedError
   const _protocol: number = request.protocol;
   const query: {[key: string]: string} = request.query;
-  // $ExpectError
+  // $FlowExpectedError
   const _query: {[key: string]: string|number} = request.query;
   const querystring: string = request.querystring;
-  // $ExpectError
+  // $FlowExpectedError
   const _querystring: number = request.querystring;
   const search: string = request.search;
-  // $ExpectError
+  // $FlowExpectedError
   const _search: number = request.search;
   const secure: boolean = request.secure;
-  // $ExpectError
+  // $FlowExpectedError
   const _secure: number = request.secure;
   const socket: net$Socket = request.socket;
-  // $ExpectError
+  // $FlowExpectedError
   const _socket: number = request.socket;
   const stale: boolean = request.stale;
-  // $ExpectError
+  // $FlowExpectedError
   const _stale: number = request.stale;
   const subdomains: string[] = request.subdomains;
-  // $ExpectError
+  // $FlowExpectedError
   const _subdomains: string = request.subdomains;
   const type: string = request.type;
-  // $ExpectError
+  // $FlowExpectedError
   const _type: string[] = request.type;
   const url: string = request.url;
-  // $ExpectError
+  // $FlowExpectedError
   const _url: number = request.url;
 
   const charset: string|void = request.charset;
-  // $ExpectError
+  // $FlowExpectedError
   const _charset: string = request.charset;
   const length: number|void = request.length;
-  // $ExpectError
+  // $FlowExpectedError
   const _length: number = request.length;
 
   const type_: string[] = request.accepts();
-  // $ExpectError
+  // $FlowExpectedError
   const _type_: string = request.accepts();
   const typeOrFalse1: string|false = request.accepts('text/html');
-  // $ExpectError
+  // $FlowExpectedError
   const _typeOrFalse1: string = request.accepts('text/html');
   const typeOrFalse2: string|false = request.accepts('json', 'text');
-  // $ExpectError
+  // $FlowExpectedError
   const _typeOrFalse2: string[] = request.accepts('json', 'text');
   // ToDo: https://github.com/facebook/flow/issues/3009
   const typeOrFalse3: string|false = request.accepts((['json', 'text']:Array<string>));
-  // $ExpectError
+  // $FlowExpectedError
   const _typeOrFalse3: string[] = request.accepts((['json', 'text']:Array<string>));
 
   const charsets: string[] = request.acceptsCharsets();
-  // $ExpectError
+  // $FlowExpectedError
   const _charsets: string = request.acceptsCharsets();
   const charset1: buffer$Encoding|false =
     request.acceptsCharsets('gzip', 'deflate', 'identity');
-  // $ExpectError
+  // $FlowExpectedError
   const _charset1: number =
     request.acceptsCharsets('gzip', 'deflate', 'identity');
   // ToDo: https://github.com/facebook/flow/issues/3009
   const charset2: buffer$Encoding|false =
     request.acceptsCharsets((['gzip', 'deflate', 'identity']:Array<string>));
-  // $ExpectError
+  // $FlowExpectedError
   const _charset2: number =
     request.acceptsCharsets((['gzip', 'deflate', 'identity']:Array<string>));
 
   const languages: string[] = request.acceptsLanguages();
-  // $ExpectError
+  // $FlowExpectedError
   const _languages: string = request.acceptsLanguages();
   const language1: string|false = request.acceptsLanguages('es', 'en');
-  // $ExpectError
+  // $FlowExpectedError
   const _language1: string = request.acceptsLanguages('es', 'en');
   const language2: string|false = request.acceptsLanguages((['es', 'en']:string[]));
-  // $ExpectError
+  // $FlowExpectedError
   const _language2: string = request.acceptsLanguages((['es', 'en']:string[]));
 
   const get: (field: string) => string = request.get;
-  // $ExpectError
+  // $FlowExpectedError
   const _get: (field: number) => number = request.get;
 
   const mimeType: string = request.is();
-  // $ExpectError
+  // $FlowExpectedError
   const _mimeType: number = request.is();
   const mimeOrFalse1: string|false|null = request.is('html');
-  // $ExpectError
+  // $FlowExpectedError
   const _mimeOrFalse1: string = request.is('html');
   const mimeOrFalse2: string|false|null = request.is(['html']);
-  // $ExpectError
+  // $FlowExpectedError
   const _mimeOrFalse2: string = request.is(['html']);
   const toJSON: () => RequestJSON = request.toJSON;
-  // $ExpectError
+  // $FlowExpectedError
   const _toJSON: () => number = request.toJSON;
   const inspect: () => RequestInspect = request.inspect;
-  // $ExpectError
+  // $FlowExpectedError
   const _inspect: () => RequestJSON = request.inspect;
 }
 
@@ -328,13 +328,13 @@ function test_request() {
 */
 function test_index_md() {
   const app:Koa = new Koa();
-  // $ExpectError
+  // $FlowExpectedError
   const _app:number = new Koa();
   app.use((ctx) => {
     ctx.body = 'Hello World';
     ctx.body = { key: 'value' };
     ctx.body = ['Hello word'];
-    // $ExpectError
+    // $FlowExpectedError
     ctx.body = 1;
   });
   app.listen(3000);
@@ -347,9 +347,9 @@ function test_index_md() {
       await next();
       const ms = new Date() - start;
       ctx.set('X-Response-Time', `${ms}ms`);
-      // $ExpectError
+      // $FlowExpectedError
       ctx.set(ms, `${ms}ms`);
-      // $ExpectError
+      // $FlowExpectedError
       ctx.set(`${ms}ms`);
     });
 
@@ -364,7 +364,7 @@ function test_index_md() {
     // response
     app.use(ctx => {
       ctx.body = 'Hello World';
-      // $ExpectError
+      // $FlowExpectedError
       ctx.body = 1;
     });
 

@@ -11,9 +11,9 @@ describe('@sentry/browser', () => {
       Sentry.init({});
       Sentry.init({ dsn: 'dsn_value' });
 
-      // $ExpectError
+      // $FlowExpectedError
       Sentry.init({ dsn: 123 });
-      // $ExpectError
+      // $FlowExpectedError
       Sentry.init({ dsn: null });
     });
 
@@ -49,19 +49,19 @@ describe('@sentry/browser', () => {
 
 
       Sentry.init({
-        // $ExpectError must return null not false
+        // $FlowExpectedError must return null not false
         beforeBreadcrumb(breadcrumb: Breadcrumb, hint?: BreadcrumbHint) {
           return false;
         },
       });
       Sentry.init({
-        // $ExpectError cannot be Promise
+        // $FlowExpectedError cannot be Promise
         async beforeBreadcrumb(breadcrumb: Breadcrumb, hint?: BreadcrumbHint) {
           return breadcrumb;
         },
       });
       Sentry.init({
-        // $ExpectError must return null not false
+        // $FlowExpectedError must return null not false
         beforeSend(event: SentryEvent, hint?: EventHint) {
           return false;
         },
@@ -74,7 +74,7 @@ describe('@sentry/browser', () => {
       Sentry.captureException(new Map());
       Sentry.captureException(undefined);
 
-      // $ExpectError: Too many args
+      // $FlowExpectedError: Too many args
       Sentry.captureException('Something broke', {}, null);
     });
 
@@ -86,9 +86,9 @@ describe('@sentry/browser', () => {
         err: new Error(),
       });
 
-      // $ExpectError
+      // $FlowExpectedError
       Sentry.setExtra();
-      // $ExpectError
+      // $FlowExpectedError
       Sentry.setExtra(null, 'foo');
     });
 
@@ -96,7 +96,7 @@ describe('@sentry/browser', () => {
       const narrowerType: { [string]: string, ... } = { narrower: 'type' };
       Sentry.setExtras(narrowerType);
 
-      // $ExpectError
+      // $FlowExpectedError
       Sentry.setExtras(null);
     });
 
@@ -106,9 +106,9 @@ describe('@sentry/browser', () => {
       Sentry.setUser({ id: 'abcd-efgh' });
       Sentry.setUser({ id: 3 });
 
-      // $ExpectError
+      // $FlowExpectedError
       Sentry.setUser();
-      // $ExpectError
+      // $FlowExpectedError
       Sentry.setUser({ id: new Date() });
     });
 
@@ -117,7 +117,7 @@ describe('@sentry/browser', () => {
         scope.setUser({ email: 'john.doe@example.com' });
       });
 
-      // $ExpectError
+      // $FlowExpectedError
       Sentry.withScope(null);
     });
 
@@ -132,23 +132,23 @@ describe('@sentry/browser', () => {
         scope.setFingerprint(['my-view-function']);
       });
 
-      // $ExpectError
+      // $FlowExpectedError
       Sentry.configureScope(null);
     });
 
     it('Sentry.setTag', () => {
       Sentry.setTag('page_locale', 'de-at');
 
-      // $ExpectError
+      // $FlowExpectedError
       Sentry.setTag();
-      // $ExpectError
+      // $FlowExpectedError
       Sentry.setTag('page_locale', null);
     });
 
     it('Sentry.captureMessage', () => {
       Sentry.captureMessage('This is a debug message', 'debug');
 
-      // $ExpectError
+      // $FlowExpectedError
       Sentry.captureMessage('This is a debug message', 'invalid_severity');
     });
 
@@ -162,9 +162,9 @@ describe('@sentry/browser', () => {
         data: { foo: new Map() },
       });
 
-      // $ExpectError
+      // $FlowExpectedError
       Sentry.addBreadcrumb(null);
-      // $ExpectError
+      // $FlowExpectedError
       Sentry.addBreadcrumb({ other: 'value' });
     });
   });
@@ -173,14 +173,14 @@ describe('@sentry/browser', () => {
     it('Sentry.forceLoad', () => {
       Sentry.forceLoad();
 
-      // $ExpectError
+      // $FlowExpectedError
       Sentry.forceLoad(null);
     });
 
     it('Sentry.onLoad', () => {
       Sentry.onLoad(() => {});
 
-      // $ExpectError
+      // $FlowExpectedError
       Sentry.onLoad(null);
     });
   });
@@ -189,7 +189,7 @@ describe('@sentry/browser', () => {
     it('BrowserClient', () => {
       new Sentry.BrowserClient({ dsn: 'dsn_value ' });
 
-      // $ExpectError
+      // $FlowExpectedError
       new Sentry.BrowserClient({ unexpected: 'config' });
     });
 
@@ -197,7 +197,7 @@ describe('@sentry/browser', () => {
       const client = new Sentry.BrowserClient({ dsn: 'dsn_value ' });
       new Sentry.Hub(client);
 
-      // $ExpectError
+      // $FlowExpectedError
       new Sentry.Hub();
     });
   });
@@ -206,7 +206,7 @@ describe('@sentry/browser', () => {
     it('Includes Core integrations', () => {
       new Sentry.Integrations.FunctionToString();
 
-      // $ExpectError
+      // $FlowExpectedError
       new Sentry.Integrations.OnUnhandledRejection(); // Node-specific integration, not in Browser
     });
 
@@ -214,7 +214,7 @@ describe('@sentry/browser', () => {
       new Sentry.Integrations.UserAgent();
       new Sentry.Integrations.Breadcrumbs({ console: false });
 
-      // $ExpectError
+      // $FlowExpectedError
       new Sentry.Integrations.OnUnhandledRejection(); // Node-specific integration, not in Browser
     });
 
@@ -238,9 +238,9 @@ describe('@sentry/browser', () => {
         headers: { foo: 'bar' },
       });
 
-      // $ExpectError
+      // $FlowExpectedError
       new Sentry.Transports.InvalidTransport({ dsn: 'dsn_value' });
-      // $ExpectError
+      // $FlowExpectedError
       new Sentry.Transports.FetchTransport({}); // Missing `dsn` option
     });
   });

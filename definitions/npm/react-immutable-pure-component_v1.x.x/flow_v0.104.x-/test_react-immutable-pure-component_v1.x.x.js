@@ -19,10 +19,10 @@ class Foo extends ImmutablePureComponent<MyProps> {
 
 const a = <Foo id={"1"} />;
 
-// $ExpectError
+// $FlowExpectedError
 <Foo />;
 
-// $ExpectError
+// $FlowExpectedError
 <Foo id={1} />;
 
 type MyState = {
@@ -32,7 +32,7 @@ type MyState = {
 
 class Bar extends ImmutablePureComponent<MyProps, MyState> {
   componentWillReceiveProps(nextProps: MyProps) {
-    // $ExpectError
+    // $FlowExpectedError
     this.setState({ visible: "true" });
   }
 

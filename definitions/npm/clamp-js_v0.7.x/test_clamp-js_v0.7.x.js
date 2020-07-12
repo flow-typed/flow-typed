@@ -6,5 +6,5 @@ clamp(new HTMLInputElement());
 clamp(new HTMLInputElement(), {});
 clamp(new HTMLInputElement(), {useNativeClamp: true});
 
-// $ExpectError
+// $FlowExpectedError
 clamp(new HTMLInputElement(), {useNativeClamp: "nope!"});

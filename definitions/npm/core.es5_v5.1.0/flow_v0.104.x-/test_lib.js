@@ -1,12 +1,12 @@
 // @flow strict
 
-// $ExpectError
+// $FlowExpectedError
 var x:string = NaN
-// $ExpectError
+// $FlowExpectedError
 var y:string = Number.MAX_VALUE;
-// $ExpectError
+// $FlowExpectedError
 var z:number = new TypeError().name;
-// $ExpectError
+// $FlowExpectedError
 var w:string = parseInt("...");
-// $ExpectError
+// $FlowExpectedError
 const ra: $ReadOnlyArray<number> = Object.freeze({q:2});

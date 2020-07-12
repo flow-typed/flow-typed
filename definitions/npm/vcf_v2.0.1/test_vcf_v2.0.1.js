@@ -13,29 +13,29 @@ describe("vcf", () => {
   });
 
   it("vcard constructor and functions should fail on bad types", () => {
-    // $ExpectError
+    // $FlowExpectedError
     const badCard = new vCard("hi");
     const card = new vCard();
 
-    // $ExpectError
+    // $FlowExpectedError
     card.set(1, "mark");
 
-    // $ExpectError
+    // $FlowExpectedError
     card.set("adr", "menlo park", "oops");
 
-    // $ExpectError
+    // $FlowExpectedError
     card.add(1, "menlo park");
 
-    // $ExpectError
+    // $FlowExpectedError
     card.add("adr", "menlo park", "ooops");
 
-    // $ExpectError
+    // $FlowExpectedError
     card.parse();
 
-    // $ExpectError
+    // $FlowExpectedError
     card.toJSON("hi");
 
-    // $ExpectError
+    // $FlowExpectedError
     card.toJCard(1);
   });
 
@@ -61,31 +61,31 @@ describe("vcf", () => {
     const card = new vCard();
     card.set("fn", "mark");
 
-    // $ExpectError
+    // $FlowExpectedError
     const property = new vCard.Property(1, "value");
 
-    // $ExpectError
+    // $FlowExpectedError
     const property2 = new vCard.Property("adr", "101 loop", 3);
 
-    // $ExpectError
+    // $FlowExpectedError
     const property3 = new vCard.Property("adr", 12);
 
     const cardProperty = card.get("fn");
 
     if (!Array.isArray(cardProperty)) {
-      // $ExpectError
+      // $FlowExpectedError
       cardProperty.is(1);
 
-      // $ExpectError
+      // $FlowExpectedError
       cardProperty.isEmpty("hi");
 
-      // $ExpectError
+      // $FlowExpectedError
       cardProperty.toString(4);
 
-      // $ExpectError
+      // $FlowExpectedError
       cardProperty.valueOf("hi");
 
-      // $ExpectError
+      // $FlowExpectedError
       cardProperty.toJSON("hi");
     }
   });

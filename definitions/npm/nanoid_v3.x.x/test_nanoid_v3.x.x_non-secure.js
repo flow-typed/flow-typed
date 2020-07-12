@@ -5,14 +5,14 @@ describe('nanoid/non-secure', () => {
   it('returns a string', () => {
     const id1: string = nanoid();
 
-    // $ExpectError
+    // $FlowExpectedError
     const id2: number = nanoid();
   });
 
   it('size should be a number', () => {
     nanoid(10);
 
-    // $ExpectError
+    // $FlowExpectedError
     nanoid("10");
   });
 
@@ -21,7 +21,7 @@ describe('nanoid/non-secure', () => {
 
     const id1: string = customId();
 
-    // $ExpectError
+    // $FlowExpectedError
     const id2: number = customId();
   });
 });

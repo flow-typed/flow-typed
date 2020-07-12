@@ -26,7 +26,7 @@ describe('subtract', () => {
   })
 
   it('does not accept strings as inputs', () => {
-    // $ExpectError
+    // $FlowExpectedError
     const result: number = subtract('foo', 'o')
   })
 })

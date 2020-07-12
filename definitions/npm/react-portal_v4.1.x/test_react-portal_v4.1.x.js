@@ -14,13 +14,13 @@ describe('The `Portal` component', () => {
 
   it('should accept children', () => {
     <Portal {...defaultProps} />;
-    // $ExpectError
+    // $FlowExpectedError
     <Portal />;
   });
 
   it('should accept a DOM Element for its `node` property', () => {
     <Portal {...defaultProps} node={node} />;
-    // $ExpectError
+    // $FlowExpectedError
     <Portal {...defaultProps} node={comp} />;
   });
 });
@@ -47,9 +47,9 @@ describe('The `PortalWithState` component', () => {
 
   it('should accept a render function as children', () => {
     <PortalWithState {...defaultProps} />;
-    // $ExpectError
+    // $FlowExpectedError
     <PortalWithState />;
-    // $ExpectError
+    // $FlowExpectedError
     <PortalWithState>
       <div />
     </PortalWithState>;
@@ -57,40 +57,40 @@ describe('The `PortalWithState` component', () => {
 
   it('should accept a DOM Element for its `node` property', () => {
     <PortalWithState {...defaultProps} node={node} />;
-    // $ExpectError
+    // $FlowExpectedError
     <PortalWithState {...defaultProps} node={comp} />;
   });
 
   it('should accept a boolean for its `defaultOpen` property', () => {
     <PortalWithState {...defaultProps} defaultOpen />;
     <PortalWithState {...defaultProps} defaultOpen={false} />;
-    // $ExpectError
+    // $FlowExpectedError
     <PortalWithState {...defaultProps} defaultOpen={() => {}} />;
   });
 
   it('should accept a boolean for its `closeOnEsc` property', () => {
     <PortalWithState {...defaultProps} closeOnEsc />;
     <PortalWithState {...defaultProps} closeOnEsc={false} />;
-    // $ExpectError
+    // $FlowExpectedError
     <PortalWithState {...defaultProps} closeOnEsc={() => {}} />;
   });
 
   it('should accept a boolean for its `closeOnOutsideClick` property', () => {
     <PortalWithState {...defaultProps} closeOnOutsideClick />;
     <PortalWithState {...defaultProps} closeOnOutsideClick={false} />;
-    // $ExpectError
+    // $FlowExpectedError
     <PortalWithState {...defaultProps} closeOnOutsideClick={() => {}} />;
   });
 
   it('should accept a function for its `onOpen` property', () => {
     <PortalWithState {...defaultProps} onOpen={() => {}} />;
-    // $ExpectError
+    // $FlowExpectedError
     <PortalWithState {...defaultProps} onOpen={false} />;
   });
 
   it('should accept a function for its `onClose` property', () => {
     <PortalWithState {...defaultProps} onClose={() => {}} />;
-    // $ExpectError
+    // $FlowExpectedError
     <PortalWithState {...defaultProps} onClose={false} />;
   });
 });

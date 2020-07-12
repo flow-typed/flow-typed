@@ -24,9 +24,9 @@ cancelOnFrameStart(noop);
 cancelOnFrameUpdate(noop);
 cancelOnFrameRender(noop);
 cancelOnFrameEnd(noop);
-// $ExpectError
+// $FlowExpectedError
 onFrameStart(1);
-// $ExpectError
+// $FlowExpectedError
 cancelOnFrameStart(1);
 
 let t: number = 0;
@@ -35,9 +35,9 @@ let s: string = "";
 t = timeSinceLastFrame();
 t = currentFrameTime();
 t = currentTime();
-// $ExpectError
+// $FlowExpectedError
 s = timeSinceLastFrame();
-// $ExpectError
+// $FlowExpectedError
 s = currentFrameTime();
-// $ExpectError
+// $FlowExpectedError
 s = currentTime();

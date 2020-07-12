@@ -24,46 +24,46 @@ class C2 extends React.Component<void, Props2, void> {
 Radium(<div/>);
 Radium(<Radium.StyleRoot/>);
 Radium.keyframes({});
-// $ExpectError
+// $FlowExpectedError
 Radium.keyframes(); // missing object
 Radium.getState({}, 'ref', ':hover');
-// $ExpectError
+// $FlowExpectedError
 Radium.getState({}, 'ref', ':visible') // invalid property
 
 const RC1 = Radium(C1);
 <RC1 a={1} b="s" />;
-// $ExpectError
+// $FlowExpectedError
 <RC1 />; // missing a, b
-// $ExpectError
+// $FlowExpectedError
 <RC1 a={1} />; // missing b
-// $ExpectError
+// $FlowExpectedError
 <RC1 a="s" b="s" />; // wrong a type
 
 const RC2 = Radium(C2);
 <RC2 a={1} b="s" />;
-// $ExpectError
+// $FlowExpectedError
 <RC2 />; // missing a, b
-// $ExpectError
+// $FlowExpectedError
 <RC2 a={1} />; // missing b
-// $ExpectError
+// $FlowExpectedError
 <RC2 a="s" b="s" />; // wrong a type
 
 const ConfiguredRadium = Radium({ userAgent: 'foo' })
 const CRC1 = ConfiguredRadium(C1);
 <CRC1 a={1} b="s" />;
-// $ExpectError
+// $FlowExpectedError
 <CRC1 />; // missing a, b
-// $ExpectError
+// $FlowExpectedError
 <CRC1 a={1} />; // missing b
-// $ExpectError
+// $FlowExpectedError
 <CRC1 a="s" b="s" />; // wrong a type
 
 
 const CRC2 = ConfiguredRadium(C2);
 <CRC2 a={1} b="s" />;
-// $ExpectError
+// $FlowExpectedError
 <CRC2 />; // missing a, b
-// $ExpectError
+// $FlowExpectedError
 <CRC2 a={1} />; // missing b
-// $ExpectError
+// $FlowExpectedError
 <CRC2 a="s" b="s" />; // wrong a type

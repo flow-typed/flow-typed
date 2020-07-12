@@ -44,7 +44,7 @@ describe("R.map()", () => {
       it("raises an error when passed fn incompatible with Index map function", () => {
         const fn = (s: string): string => "";
 
-        // $ExpectError
+        // $FlowExpectedError
         (R.map(fn, new Index()): Array<string>);
       });
     });
@@ -89,7 +89,7 @@ describe("R.map()", () => {
       it("raises an error when passed fn incompatible with Index map function", () => {
         const fn = (s: string): string => "";
 
-        // $ExpectError
+        // $FlowExpectedError
         (R.map(fn, new Index()): $ReadOnlyArray<string>);
       });
     });

@@ -6,7 +6,7 @@ describe('responseType', () => {
     request({ responseType: "json" });
   })
   it("doesn't support ms-stream yet", () => {
-    // $ExpectError
+    // $FlowExpectedError
     request({ responseType: "ms-stream" });
   })
 });
@@ -16,19 +16,19 @@ describe('HTTP verbs', () => {
     request().post();
   })
   it("doesn't support trace", () => {
-    // $ExpectError
+    // $FlowExpectedError
     request().trace();
   })
   describe('get method', () => {
     it("doesn't return a send method", () => {
-      // $ExpectError
+      // $FlowExpectedError
       request().get().send();
     })
     it('returns a query method', () => {
       request().get().query();
     })
     it('cannot be followed by more than one query method', () => {
-      // $ExpectError
+      // $FlowExpectedError
       request().get().query().query();
     })
   });
@@ -39,7 +39,7 @@ describe('hook method', () => {
     request().hook('download', () => {});
   })
   it("doesn't support upload yet", () => {
-    // $ExpectError
+    // $FlowExpectedError
     request().hook('upload', () => {});
   })
   it("returns this", () => {
@@ -61,7 +61,7 @@ describe('response', () => {
     it("requires refinement before using headers", () => {
         request().done({
             error(response) {
-                // $ExpectError
+                // $FlowExpectedError
                 response.headers.hasOwnProperty();
             }
         });

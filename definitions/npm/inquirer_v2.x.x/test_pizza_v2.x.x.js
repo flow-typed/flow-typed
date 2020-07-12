@@ -1,6 +1,6 @@
 // @flow
 
-// $ExpectError: No negative tests here
+// $FlowExpectedError: No negative tests here
 const skipNegativeTest: string = true;
 
 import inquirer from 'inquirer';

@@ -16,13 +16,13 @@ const { createServer } = require('http')
 const { parse } = require('url')
 
 // server
-// $ExpectError
+// $FlowExpectedError
 next({ dev: 1 });
-// $ExpectError
+// $FlowExpectedError
 next({ dir: false });
-// $ExpectError
+// $FlowExpectedError
 next({ quiet: 'derp' });
-// $ExpectError
+// $FlowExpectedError
 next({ staticMarkup: 42 });
 
 const app = next({ dev: true, dir: ".", quiet: false});
@@ -57,13 +57,13 @@ app.prepare()
 <Prefetch href='/'>Prefetch</Prefetch>;
 <Prefetch href='/' prefetch={false}>Prefetch</Prefetch>;
 
-// $ExpectError
+// $FlowExpectedError
 <Link href={1}>InvalidNumLink</Link>;
 
-// $ExpectError
+// $FlowExpectedError
 <Prefetch href='/' prefetch={() => {}}>Prefetch</Prefetch>;
 
-// $ExpectError
+// $FlowExpectedError
 Router.onRouteChangeStart = {};
 
 Router.onRouteChangeStart = (url: string) => {};

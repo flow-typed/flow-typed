@@ -1,4 +1,4 @@
 import MixpanelProvider from 'react-mixpanel';
 
-// $ExpectError
+// $FlowExpectedError
 <MixpanelProvider/>

@@ -9,7 +9,7 @@ describe('block', () => {
     });
 
     it('should fail on invalid inputs', () => {
-      // $ExpectError
+      // $FlowExpectedError
       block();
     });
   });
@@ -26,9 +26,9 @@ describe('block', () => {
     });
 
     it('should fail on invalid inputs', () => {
-      // $ExpectError
+      // $FlowExpectedError
       b(1);
-      // $ExpectError
+      // $FlowExpectedError
       b('el', 'mod');
     });
   });
@@ -43,11 +43,11 @@ describe('block', () => {
     });
 
     it('should fail on invalid inputs', () => {
-      // $ExpectError
+      // $FlowExpectedError
       b()();
-      // $ExpectError
+      // $FlowExpectedError
       b('el')()();
-      // $ExpectError
+      // $FlowExpectedError
       b('el')({ mod: true })()();
     });
   });
@@ -60,7 +60,7 @@ describe('block', () => {
     });
 
     it('should fail on invalid inputs', () => {
-      // $ExpectError
+      // $FlowExpectedError
       b.has({ mod: 'mod' });
     });
   });
@@ -73,7 +73,7 @@ describe('block', () => {
     });
 
     it('should fail on invalid inputs', () => {
-      // $ExpectError
+      // $FlowExpectedError
       b.is({ mod: 'mod' });
     });
   });
@@ -87,7 +87,7 @@ describe('block', () => {
     });
 
     it('should fail on invalid inputs', () => {
-      // $ExpectError
+      // $FlowExpectedError
       b.mix(1);
     });
   });
@@ -100,7 +100,7 @@ describe('block', () => {
     });
 
     it('should fail on invalid inputs', () => {
-      // $ExpectError
+      // $FlowExpectedError
       b.state({ mod: 'mod' });
     });
   });
@@ -115,9 +115,9 @@ describe('block', () => {
     });
 
     it('should fail on invalid inputs', () => {
-      // $ExpectError
+      // $FlowExpectedError
       b.split(1);
-      // $ExpectError
+      // $FlowExpectedError
       b.split('', '1');
     });
   });
@@ -133,11 +133,11 @@ describe('setup', () => {
   });
 
   it('should fail on invalid inputs', () => {
-    // $ExpectError
+    // $FlowExpectedError
     setup();
-    // $ExpectError
+    // $FlowExpectedError
     setup(1);
-    // $ExpectError
+    // $FlowExpectedError
     setup({});
   });
 });

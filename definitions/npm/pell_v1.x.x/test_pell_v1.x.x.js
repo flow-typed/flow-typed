@@ -51,7 +51,7 @@ describe('#pell', () => {
   });
 
   it('should fail with invalid DOM element', () => {
-    //$ExpectError
+    //$FlowExpectedError
     pell.init({
       onChange: () => {},
       element: document.getElementById('invalid_element'),
@@ -80,14 +80,14 @@ describe('#pell', () => {
       return;
     }
 
-    //$ExpectError
+    //$FlowExpectedError
     pell.init({
       onChange: () => {},
       element: $element,
       actions: ['invalid_action'],
     });
 
-    //$ExpectError
+    //$FlowExpectedError
     pell.init({
       onChange: () => {},
       element: $element,

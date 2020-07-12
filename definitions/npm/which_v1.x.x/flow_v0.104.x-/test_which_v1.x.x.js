@@ -5,7 +5,7 @@ describe('which', () => {
   describe('sync', () => {
     it('takes string and returns string', () => {
       (which.sync('flow-typed'): string);
-      // $ExpectError first param can't be anything but string
+      // $FlowExpectedError first param can't be anything but string
       (which.sync(123): string);
     })
 
@@ -15,7 +15,7 @@ describe('which', () => {
 
     it('returns null or string when noThrow=true in options', () => {
       (which.sync('flow-typed', {noThrow: true}): ?string);
-      // $ExpectError return type can be null
+      // $FlowExpectedError return type can be null
       (which.sync('flow-typed', {noThrow: true}): string);
       (which.sync('flow-typed', {noThrow: false}): string);
     });
@@ -26,7 +26,7 @@ describe('which', () => {
       which('flow-typed', (err, val) => {
         (val: string);
       })
-      // $ExpectError first param can't be anything but string
+      // $FlowExpectedError first param can't be anything but string
       which(123, (err, val) => {
         (val: string);
       })
@@ -37,7 +37,7 @@ describe('which', () => {
         (val: string);
       })
 
-      // $ExpectError first param can't be anything but string
+      // $FlowExpectedError first param can't be anything but string
       which(123, {path: '/'}, (err, val) => {
         (val: string);
       })

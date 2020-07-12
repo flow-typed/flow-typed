@@ -34,7 +34,7 @@ const FunctionComponent = (props: Props) => {
 };
 
 const FunctionComponentUsesWrongClassname = (props: Props) => {
-  // $ExpectError - property `nonExistentClassName` is not found in "styles"
+  // $FlowExpectedError - property `nonExistentClassName` is not found in "styles"
   return <div className={props.classes.nonExistentClassName}>{props.content}</div>;
 };
 
@@ -56,10 +56,10 @@ class ClassComponent extends React.Component<Props> {
 // "injectSheet" signature
 // ===================================
 
-// $ExpectError - missing "styles" argument
+// $FlowExpectedError - missing "styles" argument
 injectSheet()(FunctionComponent);
 
-// $ExpectError - wrong type of "styles" argument
+// $FlowExpectedError - wrong type of "styles" argument
 injectSheet(123)(FunctionComponent);
 
 // no errors
@@ -72,10 +72,10 @@ injectSheet(styles)(FunctionComponent);
 
 const WrappedFunctionComponent = injectSheet(styles)(FunctionComponent);
 
-// $ExpectError - missing prop "content"
+// $FlowExpectedError - missing prop "content"
 <WrappedFunctionComponent />;
 
-// $ExpectError - wrong type of prop "content"
+// $FlowExpectedError - wrong type of prop "content"
 <WrappedFunctionComponent content={1} />;
 
 // No errors
@@ -87,10 +87,10 @@ const WrappedFunctionComponent = injectSheet(styles)(FunctionComponent);
 
 const WrappedFunctionComponentWithStylesCreator = injectSheet(stylesCreator)(FunctionComponent);
 
-// $ExpectError - missing prop "content"
+// $FlowExpectedError - missing prop "content"
 <WrappedFunctionComponentWithStylesCreator />;
 
-// $ExpectError - wrong type of prop "content"
+// $FlowExpectedError - wrong type of prop "content"
 <WrappedFunctionComponentWithStylesCreator content={1} />;
 
 // No errors
@@ -102,10 +102,10 @@ const WrappedFunctionComponentWithStylesCreator = injectSheet(stylesCreator)(Fun
 
 const WrappedClassComponentWithStylesCreator = injectSheet(stylesCreator)(ClassComponent);
 
-// $ExpectError - missing prop "content"
+// $FlowExpectedError - missing prop "content"
 <WrappedClassComponentWithStylesCreator />;
 
-// $ExpectError - wrong type of prop "content"
+// $FlowExpectedError - wrong type of prop "content"
 <WrappedClassComponentWithStylesCreator content={true} />;
 
 // No errors
@@ -117,10 +117,10 @@ const WrappedClassComponentWithStylesCreator = injectSheet(stylesCreator)(ClassC
 
 const WrappedClassComponent = injectSheet({ root: { backgroundColor: 'red' } })(ClassComponent);
 
-// $ExpectError - missing prop "content"
+// $FlowExpectedError - missing prop "content"
 <WrappedClassComponent />;
 
-// $ExpectError - wrong type of prop "content"
+// $FlowExpectedError - wrong type of prop "content"
 <WrappedClassComponent content={true} />;
 
 // No errors
@@ -179,7 +179,7 @@ class ButtonClassComponent extends React.Component<ButtonProps> {
 
 const ThemedButtonFunctionalComponent = withTheme(ButtonFunctionalComponent);
 
-// $ExpectError - missing prop "onClick"
+// $FlowExpectedError - missing prop "onClick"
 <ThemedButtonFunctionalComponent />;
 
 // No error
@@ -187,7 +187,7 @@ const ThemedButtonFunctionalComponent = withTheme(ButtonFunctionalComponent);
 
 const ThemedButtonClassComponent = withTheme(ButtonClassComponent);
 
-// $ExpectError - missing prop "onClick"
+// $FlowExpectedError - missing prop "onClick"
 <ThemedButtonClassComponent />;
 
 // No errors

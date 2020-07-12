@@ -25,17 +25,17 @@ function testPassingPropsToConnectedComponent() {
   <Connected passthrough={123} forMapStateToProps={'data'} passthroughWithDefaultProp={123}/>;
   // OK without passthroughWithDefaultProp
   <Connected passthrough={123} forMapStateToProps={'data'}/>;
-  //$ExpectError wrong type for passthrough
+  //$FlowExpectedError wrong type for passthrough
   <Connected passthrough={''} forMapStateToProps={'data'} passthroughWithDefaultProp={123}/>;
-  //$ExpectError wrong type for forMapStateToProps
+  //$FlowExpectedError wrong type for forMapStateToProps
   <Connected passthrough={123} forMapStateToProps={321} passthroughWithDefaultProp={123}/>;
-  //$ExpectError wrong type for  passthroughWithDefaultProp
+  //$FlowExpectedError wrong type for  passthroughWithDefaultProp
   <Connected passthrough={123} forMapStateToProps={'data'} passthroughWithDefaultProp={''}/>;
-  //$ExpectError passthrough missing
+  //$FlowExpectedError passthrough missing
   <Connected forMapStateToProps={'data'} />;
-  //$ExpectError forMapStateToProps missing
+  //$FlowExpectedError forMapStateToProps missing
   <Connected passthrough={123}/>;
-  //$ExpectError takes in only React components
+  //$FlowExpectedError takes in only React components
   connect(mapStateToProps)('');
 }
 
@@ -49,7 +49,7 @@ function doesNotRequireDefinedComponentToTypeCheck1case() {
   };
 
   const mapStateToProps = (state: {}) => ({
-    // $ExpectError wrong type for stringProp
+    // $FlowExpectedError wrong type for stringProp
     stringProp: false,
   });
 
@@ -66,7 +66,7 @@ function doesNotRequireDefinedComponentToTypeCheck2case() {
   };
 
   const mapDispatchToProps = () => ({
-    // $ExpectError wrong type for numProp
+    // $FlowExpectedError wrong type for numProp
     numProp: false,
   });
 
@@ -84,12 +84,12 @@ function doesNotRequireDefinedComponentToTypeCheck3case() {
   };
 
   const mapStateToProps = (state: {}) => ({
-    // $ExpectError wrong type for stringProp
+    // $FlowExpectedError wrong type for stringProp
     stringProp: false,
   });
 
   const mapDispatchToProps = () => ({
-    // $ExpectError wrong type for numProp
+    // $FlowExpectedError wrong type for numProp
     numProp: false,
   });
 
@@ -106,7 +106,7 @@ function doesNotRequireDefinedComponentToTypeCheck4case() {
   };
 
   const mapStateToProps = (state: {}) => ({
-    // $ExpectError wrong type for stringProp
+    // $FlowExpectedError wrong type for stringProp
     stringProp: false,
   });
 
@@ -126,7 +126,7 @@ function doesNotRequireDefinedComponentToTypeCheck5case() {
   const mapDispatchToProps = () => ({});
 
   const mergeProps = () => ({
-    // $ExpectError wrong type for stringProp
+    // $FlowExpectedError wrong type for stringProp
     stringProp: true
   });
 
@@ -160,15 +160,15 @@ function testExactProps() {
 
   const Connected = connect(mapStateToProps)(Com);
   <Connected passthrough={123} forMapStateToProps={'data'} />;
-  //$ExpectError extra prop what exact props does not allow
+  //$FlowExpectedError extra prop what exact props does not allow
   <Connected passthrough={123} forMapStateToProps={321} extraProp={123}/>;
-  //$ExpectError wrong type for forMapStateToProps
+  //$FlowExpectedError wrong type for forMapStateToProps
   <Connected passthrough={123} forMapStateToProps={321}/>;
-  //$ExpectError passthrough missing
+  //$FlowExpectedError passthrough missing
   <Connected forMapStateToProps={'data'} />;
-  //$ExpectError forMapStateToProps missing
+  //$FlowExpectedError forMapStateToProps missing
   <Connected passthrough={123}/>;
-  //$ExpectError takes in only React components
+  //$FlowExpectedError takes in only React components
   connect(mapStateToProps)('');
 }
 
@@ -188,15 +188,15 @@ function testWithStatelessFunctionalComponent() {
 
   const Connected = connect(mapStateToProps)(Com);
   <Connected passthrough={123} forMapStateToProps={'data'}/>;
-  //$ExpectError wrong type for passthrough
+  //$FlowExpectedError wrong type for passthrough
   <Connected passthrough={''} forMapStateToProps={'data'}/>;
-  //$ExpectError wrong type for forMapStateToProps
+  //$FlowExpectedError wrong type for forMapStateToProps
   <Connected passthrough={123} forMapStateToProps={321} />;
-  //$ExpectError passthrough missing
+  //$FlowExpectedError passthrough missing
   <Connected forMapStateToProps={'data'} />;
-  //$ExpectError forMapStateToProps missing
+  //$FlowExpectedError forMapStateToProps missing
   <Connected passthrough={123}/>;
-  //$ExpectError takes in only React components
+  //$FlowExpectedError takes in only React components
   connect(mapStateToProps)('');
 }
 
@@ -217,7 +217,7 @@ function testMapStateToPropsDoesNotNeedProps() {
 
   const Connected = connect(mapStateToProps)(Com);
   <Connected passthrough={123}/>;
-  //$ExpectError component property passthrough not found
+  //$FlowExpectedError component property passthrough not found
   <Connected />;
 }
 
@@ -250,11 +250,11 @@ function testMapDispatchToProps() {
   }
   const Connected = connect(mapStateToProps, mapDispatchToProps)(Com);
   <Connected passthrough={123} forMapStateToProps={'data'} forMapDispatchToProps={'more data'} />;
-  //$ExpectError passthrough missing
+  //$FlowExpectedError passthrough missing
   <Connected forMapStateToProps={'data'} forMapDispatchToProps={'more data'} />;
-  //$ExpectError forMapStateToProps missing
+  //$FlowExpectedError forMapStateToProps missing
   <Connected passthrough={123} forMapDispatchToProps={'more data'} />;
-  //$ExpectError forMapDispatchToProps missing
+  //$FlowExpectedError forMapDispatchToProps missing
   <Connected passthrough={123} forMapStateToProps={'data'} />;
 }
 
@@ -278,9 +278,9 @@ function testMapDispatchToPropsWithoutMapStateToProps() {
   }
   const Connected = connect(null, mapDispatchToProps)(Com);
   <Connected passthrough={123} forMapStateToProps={'data'} forMapDispatchToProps={'more data'} />;
-  //$ExpectError passthrough missing
+  //$FlowExpectedError passthrough missing
   <Connected forMapStateToProps={'data'} forMapDispatchToProps={'more data'} />;
-  //$ExpectError forMapDispatchToProps missing
+  //$FlowExpectedError forMapDispatchToProps missing
   <Connected passthrough={123} forMapStateToProps={'data'} />;
 }
 
@@ -302,18 +302,18 @@ function testMapDispatchToPropsPassesActionCreators() {
   };
   const Connected = connect(null, mapDispatchToProps)(Com);
   <Connected passthrough={123}/>;
-  //$ExpectError no passthrough
+  //$FlowExpectedError no passthrough
   <Connected/>;
 
   const mapDispatchToPropsWithoutDispatch2 = {
     dispatch1: (num: number) => {}
   };
   const Connected2 = connect(null, mapDispatchToPropsWithoutDispatch2)(Com);
-  //$ExpectError no dispatch2
+  //$FlowExpectedError no dispatch2
   <Connected2 passthrough={123}/>;
 
   const mapDispatchToPropsWithWrongDispatch1 = {
-    //$ExpectError dispatch1 should be number
+    //$FlowExpectedError dispatch1 should be number
     dispatch1: (num: string) => {},
     dispatch2: () => {}
   };
@@ -346,14 +346,14 @@ function testMapDispatchToPropsPassesActionCreatorsWithMapStateToProps() {
   };
   const Connected = connect(mapStateToProps, mapDispatchToProps)(Com);
   <Connected passthrough={123} forMapStateToProps="str"/>;
-  //$ExpectError no passthrough
+  //$FlowExpectedError no passthrough
   <Connected/>;
 
   const mapDispatchToProps2 = {
     dispatch1: () => {}
   };
   const Connected2 = connect(mapStateToProps, mapDispatchToProps2)(Com);
-  //$ExpectError no dispatch2
+  //$FlowExpectedError no dispatch2
   <Connected2 passthrough={123} forMapStateToProps="str"/>;
 }
 
@@ -386,20 +386,20 @@ function testMapDispatchToPropsPassesActionCreatorsWithMapStateToPropsAndMergePr
   }
   const Connected = connect(mapStateToProps, mapDispatchToProps, mergeProps)(Com);
   <Connected passthrough={123} forMapStateToProps="str" forMergeProps={1234}/>;
-  //$ExpectError no passthrough
+  //$FlowExpectedError no passthrough
   <Connected/>;
-  //$ExpectError forMapStateToProps missing
+  //$FlowExpectedError forMapStateToProps missing
   <Connected forMapDispatchToProps={'more data'} forMergeProps={1234} />;
-  //$ExpectError forMergeProps is missing
+  //$FlowExpectedError forMergeProps is missing
   <Connected forMapStateToProps={'data'} />;
-  //$ExpectError forMergeProps is wrong type
+  //$FlowExpectedError forMergeProps is wrong type
   <Connected forMapStateToProps={'data'} forMapDispatchToProps={'more data'} forMergeProps={'not number'} />;
 
   const mapDispatchToProps2 = {
     dispatch1: () => {}
   };
   const Connected2 = connect(mapStateToProps, mapDispatchToProps2)(Com);
-  //$ExpectError no dispatch2
+  //$FlowExpectedError no dispatch2
   <Connected2 passthrough={123} forMapStateToProps="str"/>;
 }
 
@@ -431,13 +431,13 @@ function testMergeProps() {
   }
   const Connected = connect(mapStateToProps, mapDispatchToProps, mergeProps)(Com);
   <Connected forMapStateToProps={'data'} forMapDispatchToProps={'more data'} forMergeProps={1234} />;
-  //$ExpectError forMapStateToProps missing
+  //$FlowExpectedError forMapStateToProps missing
   <Connected forMapDispatchToProps={'more data'} forMergeProps={1234} />;
-  //$ExpectError forMergeProps is missing
+  //$FlowExpectedError forMergeProps is missing
   <Connected forMapStateToProps={'data'} forMapDispatchToProps={'more data'} />;
-  //$ExpectError forMapDispatchToProps is missing
+  //$FlowExpectedError forMapDispatchToProps is missing
   <Connected forMapStateToProps={'data'} forMergeProps={1234} />;
-  //$ExpectError forMapDispatchToProps is wrong type
+  //$FlowExpectedError forMapDispatchToProps is wrong type
   <Connected forMapStateToProps={'data'} forMapDispatchToProps={'more data'} forMergeProps={'not number'} />;
 }
 
@@ -450,11 +450,11 @@ function testOptions() {
   connect(null, null, null, {pure: true})(Com);
   connect(null, null, null, {withRef: true})(Com);
   connect(null, null, null, {pure: false, withRef: false})(Com);
-  // $ExpectError wrong type
+  // $FlowExpectedError wrong type
   connect(null, null, null, {pure: 123})(Com);
-  // $ExpectError wrong type
+  // $FlowExpectedError wrong type
   connect(null, null, null, {ref: 123})(Com);
-  // $ExpectError wrong key
+  // $FlowExpectedError wrong key
   connect(null, null, null, {wrongKey: true})(Com);
 }
 

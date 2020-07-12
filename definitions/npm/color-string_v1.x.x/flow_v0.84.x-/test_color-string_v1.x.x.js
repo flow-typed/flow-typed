@@ -12,7 +12,7 @@ describe('get', function () {
       const [a,b,c,d] = value;
     }
 
-    // $ExpectError
+    // $FlowExpectedError
     colors.get(123)
   });
 
@@ -23,7 +23,7 @@ describe('get', function () {
       const [a,b,c,d] = parsed;
     }
 
-    // $ExpectError
+    // $FlowExpectedError
     colors.get.rgb(123);
   });
 
@@ -34,7 +34,7 @@ describe('get', function () {
       const [a,b,c,d] = parsed;
     }
 
-    // $ExpectError
+    // $FlowExpectedError
     colors.get.hsl(123);
   });
 
@@ -45,7 +45,7 @@ describe('get', function () {
       const [a,b,c,d] = parsed;
     }
 
-    // $ExpectError
+    // $FlowExpectedError
     colors.get.hwb(123);
   });
 });
@@ -64,7 +64,7 @@ describe('to', function () {
       keyword.trimLeft();
     }
 
-    // $ExpectError
+    // $FlowExpectedError
     colors.to.keyword('abc');
   });
 
@@ -75,7 +75,7 @@ describe('to', function () {
     color = colors.to.hex([0, 0, 255, 0.4]);
     color = colors.to.hex(0, 0, 255, 0.4);
 
-    // $ExpectError
+    // $FlowExpectedError
     colors.to.hex('foo');
   });
 
@@ -86,7 +86,7 @@ describe('to', function () {
     color = colors.to.hsl([0, 0, 255, 0.4]);
     color = colors.to.hsl(0, 0, 255, 0.4);
 
-    // $ExpectError
+    // $FlowExpectedError
     colors.to.hsl('foo');
   });
 
@@ -97,7 +97,7 @@ describe('to', function () {
     color = colors.to.hwb([0, 0, 255, 0.4]);
     color = colors.to.hwb(0, 0, 255, 0.4);
 
-    // $ExpectError
+    // $FlowExpectedError
     colors.to.hwb('foo');
   });
 
@@ -108,7 +108,7 @@ describe('to', function () {
     color = colors.to.rgb([0, 0, 255, 0.4]);
     color = colors.to.rgb(0, 0, 255, 0.4);
 
-    // $ExpectError
+    // $FlowExpectedError
     colors.to.rgb('foo');
   });
 
@@ -119,7 +119,7 @@ describe('to', function () {
     color = colors.to.rgb.percent([0, 0, 255, 0.4]);
     color = colors.to.rgb.percent(0, 0, 255, 0.4);
 
-    // $ExpectError
+    // $FlowExpectedError
     colors.to.rgb.percent('foo');
   });
 });

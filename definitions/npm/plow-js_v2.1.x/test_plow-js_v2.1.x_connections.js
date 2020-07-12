@@ -6,7 +6,7 @@ import * as plow from "plow-js";
  */
 plow.$all(plow.$add("foo", "bar"), plow.$add("foo", "foo"))({ foo: ["baz"] });
 
-// $ExpectError
+// $FlowExpectedError
 plow.$all(plow.$add("foo", "bar"), plow.$add("foo", "foo"))({ foo: ["baz"] }) *
   2;
 
@@ -23,7 +23,7 @@ const summarizeFinisher = (containsBar, containsBaz) => ({
 });
 plow.$summarize(summarizeOps, summarizeFinisher, { foo: ["baz"] }).containsBaz;
 
-// $ExpectError
+// $FlowExpectedError
 plow.$summarize(summarizeOps, summarizeFinisher, { foo: ["baz"] }).foo;
 
 plow.$summarize(summarizeOps, summarizeFinisher)({ foo: ["baz"] });
@@ -35,7 +35,7 @@ plow.$summarize(summarizeOps)(summarizeFinisher)({ foo: ["baz"] });
  */
 plow.$traverse(x => x * 2, { foo: 1, bar: 3 });
 
-// $ExpectError
+// $FlowExpectedError
 plow.$traverse(x => x * 2, { foo: 1, bar: 3 }) * 2;
 
 plow.$traverse(x => x * 2)({ foo: 1, bar: 3 });

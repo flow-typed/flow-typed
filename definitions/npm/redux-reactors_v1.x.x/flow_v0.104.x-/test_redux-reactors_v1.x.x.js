@@ -71,7 +71,7 @@ describe('Test reactorEnhancer', () => {
   it('raise an error with malformed inputs', () => {
     type StoreType = StoreCreator<{||}, Action<'INCREMENT'>, any>;
     const enhancedCreateStore = reactorEnhancer((({}: any): StoreType));
-    // $ExpectError - should be 'StoreType'
+    // $FlowExpectedError - should be 'StoreType'
     (enhancedCreateStore: string);
   });
 });
@@ -107,13 +107,13 @@ describe('Test createReactor', () => {
     |};
 
     const incrementReactor = createReactor<State, 'INCREMENT'>(
-      // $ExpectError - mismatch to generic for 'INCREMENT'
+      // $FlowExpectedError - mismatch to generic for 'INCREMENT'
       'DECREMENT',
       (state, action) => {
         if (!state) throw new Error('Missing state!');
         if (typeof action.payload !== 'number') return state;
 
-        // $ExpectError - missing 'initialCount'
+        // $FlowExpectedError - missing 'initialCount'
         return {
           counter: state.counter + action.payload,
         };

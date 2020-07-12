@@ -5,48 +5,48 @@ import ReactModal from 'react-modal';
 
 ReactModal.setAppElement('#foo');
 ReactModal.setAppElement(document.body);
-// $ExpectError
+// $FlowExpectedError
 ReactModal.setAppElement(1);
 
 <ReactModal />;
 
 <ReactModal isOpen />;
-// $ExpectError
+// $FlowExpectedError
 <ReactModal isOpen={1} />;
 
 <ReactModal portalClassName="foo" />;
-// $ExpectError
+// $FlowExpectedError
 <ReactModal portalClassName={1} />;
 
 <ReactModal bodyOpenClassName="foo" />;
-// $ExpectError
+// $FlowExpectedError
 <ReactModal bodyOpenClassName={1} />;
 
 <ReactModal ariaHideApp />;
-// $ExpectError
+// $FlowExpectedError
 <ReactModal ariaHideApp={1} />;
 
 <ReactModal closeTimeoutMS={10} />;
-// $ExpectError
+// $FlowExpectedError
 <ReactModal closeTimeoutMS />;
 
 <ReactModal shouldFocusAfterRender />;
-// $ExpectError
+// $FlowExpectedError
 <ReactModal shouldFocusAfterRender={1} />;
 
 <ReactModal shouldCloseOnEsc />;
-// $ExpectError
+// $FlowExpectedError
 <ReactModal shouldCloseOnEsc={1} />;
 
 <ReactModal shouldCloseOnOverlayClick />;
-// $ExpectError
+// $FlowExpectedError
 <ReactModal shouldCloseOnOverlayClick={1} />;
 
 <ReactModal shouldReturnFocusAfterClose />;
-// $ExpectError
+// $FlowExpectedError
 <ReactModal shouldReturnFocusAfterClose={1} />;
 
-// $ExpectError
+// $FlowExpectedError
 <ReactModal parentSelector={1} />;
 
 <ReactModal style={{}} />;
@@ -56,42 +56,42 @@ ReactModal.setAppElement(1);
 <ReactModal style={{
   overlay: {}
 }} />;
-// $ExpectError
+// $FlowExpectedError
 <ReactModal style={{
   content: 1
 }} />;
-// $ExpectError
+// $FlowExpectedError
 <ReactModal style={{
   overlay: 1
 }} />;
 
 <ReactModal appElement={document.body} />;
 <ReactModal appElement="#foo" />;
-// $ExpectError
+// $FlowExpectedError
 <ReactModal appElement={1} />;
 
 <ReactModal onAfterOpen={() => { }} />;
 <ReactModal onAfterOpen={async () => { }} />;
-// $ExpectError
+// $FlowExpectedError
 <ReactModal onAfterOpen={1} />;
 
 <ReactModal onRequestClose={() => { }} />;
 <ReactModal onRequestClose={e => { }} />;
-// $ExpectError
+// $FlowExpectedError
 <ReactModal onRequestClose={1} />;
 
 <ReactModal role="foo" />;
-// $ExpectError
+// $FlowExpectedError
 <ReactModal role={1} />;
 
 <ReactModal contentLabel="foo" />;
-// $ExpectError
+// $FlowExpectedError
 <ReactModal contentLabel={1} />;
 
 <ReactModal aria={{
   labelledby: 'foo'
 }} />;
-// $ExpectError
+// $FlowExpectedError
 <ReactModal aria={1} />;
 
 <ReactModal className="foo" />;
@@ -100,7 +100,7 @@ ReactModal.setAppElement(1);
   afterOpen: "foo",
   beforeClose: "foo"
 }} />;
-// $ExpectError
+// $FlowExpectedError
 <ReactModal className={1} />;
 
 <ReactModal overlayClassName="foo" />;
@@ -109,5 +109,5 @@ ReactModal.setAppElement(1);
   afterOpen: "foo",
   beforeClose: "foo"
 }} />;
-// $ExpectError
+// $FlowExpectedError
 <ReactModal overlayClassName={1} />;

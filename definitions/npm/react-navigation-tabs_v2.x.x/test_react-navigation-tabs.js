@@ -30,7 +30,7 @@ class ClassScreenComponent extends React.Component<*> {
   }
 }
 
-// $ExpectError you need a screen!
+// $FlowExpectedError you need a screen!
 createBottomTabNavigator({
   Test1: { blah: "test" },
 });
@@ -43,7 +43,7 @@ createBottomTabNavigator(
   {
     Test1: { screen: FunctionalScreenComponent },
   },
-  // $ExpectError tab not drawer!
+  // $FlowExpectedError tab not drawer!
   {
     drawerBackgroundColor: "green",
   },

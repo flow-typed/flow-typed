@@ -8,11 +8,11 @@ if (type1) {
   type1.ext;
 }
 const type2 = fileType(array);
-// $ExpectError
+// $FlowExpectedError
 type2.ext;
 if (type2) {
   type2.mime;
 }
 
-// $ExpectError
+// $FlowExpectedError
 fileType('');

@@ -3,25 +3,25 @@ import Router from "@koa/router";
 
 describe('expectations', () => {
   it('defines a Middleware type', () => {
-    // $ExpectError
+    // $FlowExpectedError
     const badMiddleware: KoaRouter$Middleware = 10;
     const goodMiddleware: KoaRouter$Middleware = async (ctx, next) => {};
   });
 
   it('types the constructor properly', () => {
-    // $ExpectError
+    // $FlowExpectedError
     const badRouter = new Router({ prefix: 10 });
     const goodRouter = new Router({ prefix: "/api" });
   });
 
   it('static url()', () => {
-    // $ExpectError
+    // $FlowExpectedError
     Router.url('/users/:id', 1);
     (Router.url('/users/:id', { id: 1 }): string);
   });
 
   it('Router is typechecked', () => {
-    // $ExpectError
+    // $FlowExpectedError
     Router.foobar();
   })
 
@@ -29,12 +29,12 @@ describe('expectations', () => {
     const router = new Router();
 
     it('is typechecked', () => {
-      // $ExpectError
+      // $FlowExpectedError
       router.foobar();
     });
 
     it('get()', () => {
-      // $ExpectError
+      // $FlowExpectedError
       router.get(10);
       router.get("/", async ctx => {
         ctx.body = "Hello World";
@@ -45,7 +45,7 @@ describe('expectations', () => {
     });
 
     it('post()', () => {
-      // $ExpectError
+      // $FlowExpectedError
       router.post(10);
       router.post("/", async ctx => {
         ctx.body = "Hello World";
@@ -56,7 +56,7 @@ describe('expectations', () => {
     });
 
     it('patch()', () => {
-      // $ExpectError
+      // $FlowExpectedError
       router.patch(10);
       router.patch("/", async ctx => {
         ctx.body = "Hello World";
@@ -67,7 +67,7 @@ describe('expectations', () => {
     });
 
     it('put()', () => {
-      // $ExpectError
+      // $FlowExpectedError
       router.put(10);
       router.put("/", async ctx => {
         ctx.body = "Hello World";
@@ -78,7 +78,7 @@ describe('expectations', () => {
     });
 
     it('delete()', () => {
-      // $ExpectError
+      // $FlowExpectedError
       router.delete(10);
       router.delete("/", async ctx => {
         ctx.body = "Hello World";
@@ -89,7 +89,7 @@ describe('expectations', () => {
     });
 
     it('del()', () => {
-      // $ExpectError
+      // $FlowExpectedError
       router.del(10);
       router.del("/", async ctx => {
         ctx.body = "Hello World";
@@ -100,7 +100,7 @@ describe('expectations', () => {
     });
 
     it('all()', () => {
-      // $ExpectError
+      // $FlowExpectedError
       router.all(10);
       router.all("/", async ctx => {
         ctx.body = "Hello World";
@@ -111,7 +111,7 @@ describe('expectations', () => {
     });
 
     it('use()', () => {
-      // $ExpectError
+      // $FlowExpectedError
       router.use(10);
       router.use(async ctx => {});
       router.use("/foo", async ctx => {});
@@ -120,7 +120,7 @@ describe('expectations', () => {
 
     it('param()', () => {
       router.param("foo", async ctx => {
-        // $ExpectError
+        // $FlowExpectedError
         console.log(ctx.params.foo);
       });
       router.param("foo", async (foo, ctx) => {});
@@ -128,9 +128,9 @@ describe('expectations', () => {
     });
 
     it('url()', () => {
-      // $ExpectError
+      // $FlowExpectedError
       router.url(10);
-      // $ExpectError
+      // $FlowExpectedError
       router.url('user');
       (router.url('user', { id: 3 }): string | Error);
       (router.url('user', { id: 3 }, { query: "limit=1" }): string | Error);
@@ -140,7 +140,7 @@ describe('expectations', () => {
     it('redirect()', () => {
       router.redirect('/source', 'destination');
       router.redirect('/source', 'destination', 302);
-      // $ExpectError
+      // $FlowExpectedError
       router.redirect('/source', 302);
     });
 

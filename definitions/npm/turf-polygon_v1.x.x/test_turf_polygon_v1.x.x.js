@@ -10,14 +10,14 @@ turfPolygon(ring, {foo: 'bar'});
 
 (turfPolygon(ring, {foo: 'bar'}).properties.foo: string);
 
-// $ExpectError
+// $FlowExpectedError
 (turfPolygon(ring, {foo: 'bar'}).properties.foo: number);
 
-// $ExpectError
+// $FlowExpectedError
 turfPoint([10, 20, 30]);
 
-// $ExpectError
+// $FlowExpectedError
 turfPoint([20, 30], {foo: 'bar'});
 
-// $ExpectError
+// $FlowExpectedError
 (turfPoint(ring, ({foo: 'bar'}: {|foo: string|}) ).properties.doesNotExist: string);

@@ -15,7 +15,7 @@ const shouldWork = () => (
 )
 
 const fail = () => (
-  // $ExpectError should require a name
+  // $FlowExpectedError should require a name
   <ReactCSSTransitionGroup transitionName={null} />
 )
 
@@ -65,7 +65,7 @@ const customClassesActive = () => (
 const customClassesActiveFail = () => (
 
   <ReactCSSTransitionGroup
-    // $ExpectError
+    // $FlowExpectedError
     transitionName={{
       enterActive: null,
       leaveActive: null,

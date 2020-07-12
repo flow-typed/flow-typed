@@ -39,9 +39,9 @@ reducer(undefined, actions.fieldChange('test', 'id', 'kek', 'error', true));
 reducer(undefined, actions.fieldFocus('test', 'id'));
 reducer(undefined, actions.fieldBlur('test', 'id', 'kek', 'error', true));
 
-// $ExpectError - invalid state
+// $FlowExpectedError - invalid state
 reducer({ something: 'bad' }, actions.addForm('test'));
-// $ExpectError - invalid action
+// $FlowExpectedError - invalid action
 reducer(undefined, { type: 'lol' });
 
 // ACTIONS
@@ -70,7 +70,7 @@ action = actions.fieldChange('test', 'id', 'kek', 'error', true);
 action = actions.fieldFocus('test', 'id');
 action = actions.fieldBlur('test', 'id', 'kek', 'error', true);
 
-// $ExpectError - invalid action
+// $FlowExpectedError - invalid action
 action = { type: 'lol' };
 
 // SELECTORS
@@ -87,30 +87,30 @@ selectors.isTouched('test', state);
 selectors.isDirty('test', state);
 selectors.isSubmitting('test', state);
 
-// $ExpectError - invalid state
+// $FlowExpectedError - invalid state
 selectors.valueSelector('test', {});
-// $ExpectError - invalid state
+// $FlowExpectedError - invalid state
 selectors.errorSelector('test', {});
-// $ExpectError - invalid state
+// $FlowExpectedError - invalid state
 selectors.isValid('test', {});
-// $ExpectError - invalid state
+// $FlowExpectedError - invalid state
 selectors.isTouched('test', {});
-// $ExpectError - invalid state
+// $FlowExpectedError - invalid state
 selectors.isDirty('test', {});
-// $ExpectError - invalid state
+// $FlowExpectedError - invalid state
 selectors.isSubmitting('test', {});
 
 let num: number;
 
-// $ExpectError - invalid return value
+// $FlowExpectedError - invalid return value
 num = selectors.valueSelector('test', state);
-// $ExpectError - invalid return value
+// $FlowExpectedError - invalid return value
 num = selectors.errorSelector('test', state);
-// $ExpectError - invalid return value
+// $FlowExpectedError - invalid return value
 num = selectors.isValid('test', state);
-// $ExpectError - invalid return value
+// $FlowExpectedError - invalid return value
 num = selectors.isTouched('test', state);
-// $ExpectError - invalid return value
+// $FlowExpectedError - invalid return value
 num = selectors.isDirty('test', state);
-// $ExpectError - invalid return value
+// $FlowExpectedError - invalid return value
 num = selectors.isSubmitting('test', state);

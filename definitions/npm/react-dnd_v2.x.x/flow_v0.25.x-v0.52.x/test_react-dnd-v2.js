@@ -71,15 +71,15 @@ Knight.defaultProps = {
 
 const DndKnight = DragSource("knight", knightSource, knightCollect)(Knight);
 (DndKnight: Class<DndComponent<Knight, *, *, void>>);
-// $ExpectError
+// $FlowExpectedError
 (DndKnight: number);
 
 const x: DndKnight = ({}: any);
-// $ExpectError
+// $FlowExpectedError
 x.foo();
 
 (x.getDecoratedComponentInstance().foo(): string);
-// $ExpectError
+// $FlowExpectedError
 (x.getDecoratedComponentInstance().foo(): number);
 
 ReactDOM.render(<DndKnight title="foo" />, document.body);
@@ -191,7 +191,7 @@ const DndBoardSquare = DropTarget(
   boardSquareCollect
 )(BoardSquare);
 (DndBoardSquare: Class<DndComponent<BoardSquare, *, *, void>>);
-// $ExpectError
+// $FlowExpectedError
 (DndBoardSquare: string);
 
 ReactDOM.render(<DndBoardSquare y={5} />, document.body);
@@ -231,7 +231,7 @@ CustomDragLayer.defaultProps = {
 
 const DndCustomDragLayer = DragLayer(dragLayerCollect)(CustomDragLayer);
 (DndCustomDragLayer: Class<DndComponent<CustomDragLayer, *, *, void>>);
-// $ExpectError
+// $FlowExpectedError
 (DndCustomDragLayer: number);
 
 // Test Drag Drop Context
@@ -261,7 +261,7 @@ Board.defaultProps = {
 
 const DndBoard = DragDropContext({})(Board);
 (DndBoard: Class<ContextComponent<Board, BoardProps, BoardProps, void>>);
-// $ExpectError
+// $FlowExpectedError
 (DndBoard: string);
 
 // Test Functional React Components

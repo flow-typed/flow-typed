@@ -9,7 +9,7 @@ let tracker1 = new GoogleAnalyticsTracker("UA-12345-1");
 let tracker2 = new GoogleAnalyticsTracker("UA-12345-2");
 
 tracker1.trackScreenView("Home");
-// $ExpectError trackScreenView requires a string argument
+// $FlowExpectedError trackScreenView requires a string argument
 tracker1.trackScreenView({ foo: bar });
 tracker1.trackEvent("Customer", "New");
 
@@ -34,7 +34,7 @@ tracker.trackEvent("testcategory", "testaction", {
   label: "v1.0.3",
   value: 22
 });
-// $ExpectError name option is required
+// $FlowExpectedError name option is required
 tracker.trackTiming("testcategory", 13000, {});
 tracker.trackTiming("testcategory", 13000, { name: "LoadList" });
 tracker.trackTiming("testcategory", 13000, {

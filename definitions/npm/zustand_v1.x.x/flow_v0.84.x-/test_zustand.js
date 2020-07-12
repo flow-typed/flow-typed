@@ -39,7 +39,7 @@ describe('zustand', () => {
     const [, api] = create(() => ({ a: 1, b: 2, c: 3 }));
 
     const num: number = api.getState().a;
-    // $ExpectError
+    // $FlowExpectedError
     const num: string = api.getState().b;
     const unsub1 = api.subscribe(state => console.log('state changed', state));
     const unsub2 = api.subscribe(a => console.log('a changed', a), {
@@ -48,7 +48,7 @@ describe('zustand', () => {
     api.setState({ a: 1 });
     unsub1();
     unsub2();
-    // $ExpectError
+    // $FlowExpectedError
     api.setState({ b: [] });
     api.destroy();
   });

@@ -4,7 +4,7 @@ import { EventEmitter } from 'fbemitter';
 const emitter = new EventEmitter();
 
 it('should not allow constructor args', () => {
-  // $ExpectError: no args required
+  // $FlowExpectedError: no args required
   new EventEmitter('foo');
 });
 
@@ -15,7 +15,7 @@ describe('#emit()', () => {
   });
 
   it('should require arguments', () => {
-    // $ExpectError: args required
+    // $FlowExpectedError: args required
     emitter.emit();
   });
 });
@@ -26,11 +26,11 @@ describe('#addListener()', () => {
   });
 
   it('should require two args', () => {
-    // $ExpectError: args required
+    // $FlowExpectedError: args required
     emitter.addListener();
-    // $ExpectError: args required
+    // $FlowExpectedError: args required
     emitter.addListener('foo');
-    // $ExpectError: string, fn required
+    // $FlowExpectedError: string, fn required
     emitter.addListener(() => {}, 'foo');
   });
 
@@ -38,7 +38,7 @@ describe('#addListener()', () => {
     const subscription = emitter.addListener('foo', () => {});
 
     subscription.remove();
-    // $ExpectError: no args required
+    // $FlowExpectedError: no args required
     subscription.remove('foo');
   });
 });
@@ -49,11 +49,11 @@ describe('#once()', () => {
   });
 
   it('should require two args', () => {
-    // $ExpectError: args required
+    // $FlowExpectedError: args required
     emitter.once();
-    // $ExpectError: args required
+    // $FlowExpectedError: args required
     emitter.once('foo');
-    // $ExpectError: string, fn required
+    // $FlowExpectedError: string, fn required
     emitter.once(() => {}, 'foo');
   });
 
@@ -61,7 +61,7 @@ describe('#once()', () => {
     const subscription = emitter.addListener('foo', () => {});
 
     subscription.remove();
-    // $ExpectError: no args required
+    // $FlowExpectedError: no args required
     subscription.remove('foo');
   });
 });
@@ -72,7 +72,7 @@ describe('#listeners()', () => {
     if (listeners.length) {
       listeners.forEach(cb => cb() || cb('foo', 'bar'));
     }
-    // $ExpectError: args required
+    // $FlowExpectedError: args required
     emitter.listeners();
   });
 });
@@ -87,9 +87,9 @@ describe('#removeAllListeners()', () => {
   });
 
   it('should accept only strings', () => {
-    // $ExpectError: string required
+    // $FlowExpectedError: string required
     emitter.removeAllListeners({ foo: 1 });
-    // $ExpectError: only one arg is possible
+    // $FlowExpectedError: only one arg is possible
     emitter.removeAllListeners('foo', { foo: 1 });
   });
 });

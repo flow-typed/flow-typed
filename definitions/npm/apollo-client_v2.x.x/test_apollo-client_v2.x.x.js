@@ -68,28 +68,28 @@ describe("apollo-client", () => {
     });
 
     it("raises error when missing link", () => {
-      // $ExpectError - link required to initialize ApolloClient
+      // $FlowExpectedError - link required to initialize ApolloClient
       new ApolloClient({
         cache
       });
     });
 
     it("raises error when missing link on default", () => {
-      // $ExpectError - link required to initialize ApolloClient
+      // $FlowExpectedError - link required to initialize ApolloClient
       new ApolloClientDefault({
         cache
       });
     });
 
     it("raises error when missing cache", () => {
-      // $ExpectError - cache required to initialize ApolloClient
+      // $FlowExpectedError - cache required to initialize ApolloClient
       new ApolloClient({
         link
       });
     });
 
     it("raises error when passing invalid connectToDevTools", () => {
-      // $ExpectError - connectToDevTools must be boolean
+      // $FlowExpectedError - connectToDevTools must be boolean
       new ApolloClient({
         link,
         cache,
@@ -98,7 +98,7 @@ describe("apollo-client", () => {
     });
 
     it("raises error when passing invalid ssrMode", () => {
-      // $ExpectError - ssrMode must be boolean
+      // $FlowExpectedError - ssrMode must be boolean
       new ApolloClient({
         link,
         cache,
@@ -107,7 +107,7 @@ describe("apollo-client", () => {
     });
 
     it("raises error when passing invalid ssrForceFetchDelay", () => {
-      // $ExpectError - ssrForceFetchDelay must be number
+      // $FlowExpectedError - ssrForceFetchDelay must be number
       new ApolloClient({
         link,
         cache,
@@ -116,7 +116,7 @@ describe("apollo-client", () => {
     });
 
     it("raises error when passing invalid queryDeduplication", () => {
-      // $ExpectError - queryDeduplication must be boolean
+      // $FlowExpectedError - queryDeduplication must be boolean
       new ApolloClient({
         link,
         cache,
@@ -125,7 +125,7 @@ describe("apollo-client", () => {
     });
 
     it("raises error when passing invalid defaultOptions", () => {
-      // $ExpectError - defaultOptions fetchPolicy is invalid
+      // $FlowExpectedError - defaultOptions fetchPolicy is invalid
       new ApolloClient({
         link,
         cache,

@@ -24,6 +24,6 @@ e.value.getText().then(t => {
 client
   .init()
   .getTitle()
-  // $ExpectError
+  // $FlowExpectedError
   .then((t: number) => {})
   .end();

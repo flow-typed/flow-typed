@@ -5,7 +5,7 @@ const otherBackbone: typeof Backbone = Backbone.noConflict();
 
 (otherBackbone.Model: typeof Backbone.Model);
 
-// $ExpectError should be a view type
+// $FlowExpectedError should be a view type
 (otherBackbone.View: void);
 
 (Backbone.version: string);
@@ -36,29 +36,29 @@ class TasksCollection extends Collection<TaskModel> {
 
 const tasks = new TasksCollection();
 
-// $ExpectError
+// $FlowExpectedError
 tasks.toJSON([]);
 
 (tasks.length: number);
 
-// $ExpectError should not allow to be non number
+// $FlowExpectedError should not allow to be non number
 tasks.length = false;
 
 (tasks.pluck("name"): Array<any>);
 
-// $ExpectError
+// $FlowExpectedError
 (task.pluck(2): Array<any>);
 
 (tasks.forEach: Function);
 (tasks.sync: Function);
-// $ExpectError
+// $FlowExpectedError
 instance.fetch(null);
-// $ExpectError
+// $FlowExpectedError
 instance.set(10);
 
 instance.toJSON();
 
-// $ExpectError
+// $FlowExpectedError
 (instance.foo(): number);
 
 instance.get("field");
@@ -71,7 +71,7 @@ class TasksRouter extends Backbone.Router {
   constructor() {
     super();
     this.routes = {
-      // $ExpectError
+      // $FlowExpectedError
       "10": false,
     };
   }
@@ -81,10 +81,10 @@ const router = new TasksRouter();
 
 router.route("/create", "createRoute");
 
-// $ExpectError
+// $FlowExpectedError
 router.route("/create", "delete", null);
 
-// $ExpectError
+// $FlowExpectedError
 Backbone.history.start({root: false});
 
 Backbone.history.start({pushState: true});

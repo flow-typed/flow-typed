@@ -87,22 +87,22 @@ const dndKnight: DndKnight = (null: any);
 
 (dndKnight.getHandlerId(): string);
 
-// $ExpectError: Type mismatch
+// $FlowExpectedError: Type mismatch
 (dndKnight.getHandlerId(): number);
 
 (dndKnight.getDecoratedComponentInstance(): Knight);
 
 (dndKnight.getDecoratedComponentInstance().foo(): string);
 
-// $ExpectError: Type mismatch
+// $FlowExpectedError: Type mismatch
 (dndKnight.getDecoratedComponentInstance().foo(): number);
 
 (dndKnight.getDecoratedComponentInstance().state.num: number);
 
-// $ExpectError: Type mismatch
+// $FlowExpectedError: Type mismatch
 (dndKnight.getDecoratedComponentInstance().state.num: string);
 
-// $ExpectError: Missing required prop
+// $FlowExpectedError: Missing required prop
 (<DndKnight />: React.Element<typeof DndKnight>);
 
 (<DndKnight title="foo" />: React.Element<typeof DndKnight>);
@@ -119,7 +119,7 @@ const dndKnight: DndKnight = (null: any);
   typeof DndKnight
 >);
 
-// $ExpectError: Invalid optional prop
+// $FlowExpectedError: Invalid optional prop
 (<DndKnight title="foo" color="red" count="x" />: React.Element<
   typeof DndKnight
 >);
@@ -178,30 +178,30 @@ const dndKnight2: DndKnight2 = (null: any);
 
 (dndKnight2.getHandlerId(): string);
 
-// $ExpectError: Type mismatch
+// $FlowExpectedError: Type mismatch
 (dndKnight2.getHandlerId(): number);
 
 (dndKnight2.getDecoratedComponentInstance(): Knight2);
 
 (dndKnight2.getDecoratedComponentInstance().foo(): string);
 
-// $ExpectError: Type mismatch
+// $FlowExpectedError: Type mismatch
 (dndKnight2.getDecoratedComponentInstance().foo(): number);
 
 (dndKnight2.getDecoratedComponentInstance().state.num: number);
 
-// $ExpectError: Type mismatch
+// $FlowExpectedError: Type mismatch
 (dndKnight2.getDecoratedComponentInstance().state.num: string);
 
-// $ExpectError: Missing required prop
+// $FlowExpectedError: Missing required prop
 (<DndKnight2 />: React.Element<typeof DndKnight2>);
 
-// $ExpectError: Missing (non-)default prop
+// $FlowExpectedError: Missing (non-)default prop
 (<DndKnight2 title="foo" />: React.Element<typeof DndKnight2>);
 
 (<DndKnight2 title="foo" color="red" />: React.Element<typeof DndKnight2>);
 
-// $ExpectError: Invalid (non-)default prop
+// $FlowExpectedError: Invalid (non-)default prop
 (<DndKnight2 title="foo" color={3} />: React.Element<typeof DndKnight2>);
 
 (<DndKnight2 title="foo" color="red" extra="x" />: React.Element<
@@ -212,7 +212,7 @@ const dndKnight2: DndKnight2 = (null: any);
   typeof DndKnight2
 >);
 
-// $ExpectError: Invalid optional prop
+// $FlowExpectedError: Invalid optional prop
 (<DndKnight2 title="foo" color="red" count="x" />: React.Element<
   typeof DndKnight2
 >);
@@ -251,7 +251,7 @@ const dndKnight3: DndKnight3 = (null: any);
 
 (dndKnight3.getHandlerId(): string);
 
-// $ExpectError: Type mismatch
+// $FlowExpectedError: Type mismatch
 (dndKnight3.getHandlerId(): number);
 
 (dndKnight3.getDecoratedComponentInstance(): void);
@@ -392,12 +392,12 @@ const DndBoardSquare = DropTarget(
 
 (DndBoardSquare.DecoratedComponent: typeof BoardSquare);
 
-// $ExpectError: Missing required prop
+// $FlowExpectedError: Missing required prop
 (<DndBoardSquare />: React.Element<typeof DndBoardSquare>);
 
 (<DndBoardSquare y={5} />: React.Element<typeof DndBoardSquare>);
 
-// $ExpectError: Invalid required prop
+// $FlowExpectedError: Invalid required prop
 (<DndBoardSquare y="5" />: React.Element<typeof DndBoardSquare>);
 
 (<DndBoardSquare y={5} x={5} />: React.Element<typeof DndBoardSquare>);
@@ -406,7 +406,7 @@ const DndBoardSquare = DropTarget(
 
 (<DndBoardSquare y={5} count={5} />: React.Element<typeof DndBoardSquare>);
 
-// $ExpectError: Invalid optional prop
+// $FlowExpectedError: Invalid optional prop
 (<DndBoardSquare y={5} count="5" />: React.Element<typeof DndBoardSquare>);
 
 // Test Custom Drag Layer

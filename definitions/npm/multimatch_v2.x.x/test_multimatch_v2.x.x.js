@@ -6,17 +6,17 @@ describe("multimatch()", () => {
     const result = (multimatch("path", "pa*"): string[]);
     (result[0]: string);
 
-    // $ExpectError
+    // $FlowExpectedError
     (multimatch("path", "pa*"): void);
 
     multimatch(["path", "multi"], "pa*");
 
-    // $ExpectError
+    // $FlowExpectedError
     multimatch(null, "pa*");
 
     multimatch("path", ["pa*", "multi"]);
 
-    // $ExpectError
+    // $FlowExpectedError
     multimatch("path", null);
   });
 
@@ -40,9 +40,9 @@ describe("multimatch()", () => {
       debug: true
     });
 
-    // $ExpectError
+    // $FlowExpectedError
     multimatch("path", "pa*", null);
-    // $ExpectError
+    // $FlowExpectedError
     multimatch("path", "pa*", {
       foo: "bar"
     });

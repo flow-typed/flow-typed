@@ -9,17 +9,17 @@ mitt().on("event", () => {});
 mitt().off("event", () => {});
 mitt().emit("event");
 
-// $ExpectError
+// $FlowExpectedError
 mitt().on();
 
-// $ExpectError
+// $FlowExpectedError
 mitt().on("event");
 
-// $ExpectError
+// $FlowExpectedError
 mitt().off();
 
-// $ExpectError
+// $FlowExpectedError
 mitt().off("event");
 
-// $ExpectError
+// $FlowExpectedError
 mitt().emit();

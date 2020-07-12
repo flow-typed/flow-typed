@@ -15,9 +15,9 @@ camelCase(["__foo__", "--bar"], {});
 camelCase(["__foo__", "--bar"], { pascalCase: true });
 camelCase(["__foo__", "--bar"], { pascalCase: false });
 
-// $ExpectError
+// $FlowExpectedError
 camelCase(3);
-// $ExpectError
+// $FlowExpectedError
 camelCase("Foo-Bar", { pascalCase: "of course" });
-// $ExpectError
+// $FlowExpectedError
 camelCase();

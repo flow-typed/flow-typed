@@ -13,7 +13,7 @@ describe("supports-webp", () => {
   });
 
   it("raises error", () => {
-    // $ExpectError - imported value is a Promise<boolean>
+    // $FlowExpectedError - imported value is a Promise<boolean>
     const x: boolean = supportsWebP;
   });
 });

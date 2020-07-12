@@ -95,7 +95,7 @@ This command is run during CI.
 ##### `flow-typed run-tests [optional-pattern]`
 
 For each libdef, find each test and run it with all compatible versions of Flow.
-If any errors arise that are not *`// $ExpectError`*, the test has failed.
+If any errors arise that are not *`// $FlowExpectedError`*, the test has failed.
 
 Note that this command assumes that the `/definitions/` directory is correctly
 structured. It should be run *after* running `flow-typed validate-defs`.

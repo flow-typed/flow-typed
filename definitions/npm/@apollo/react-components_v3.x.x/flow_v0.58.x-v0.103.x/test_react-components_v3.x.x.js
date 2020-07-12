@@ -103,12 +103,12 @@ describe('<Query />', () => {
     const q = (
       <Query variables={vars} query={HERO_QUERY}>
         {({ data }: QueryRenderProps<Res, Vars>) => {
-          // $ExpectError Cannot get `data.res`
+          // $FlowExpectedError Cannot get `data.res`
           data.res;
           if (!data) {
             return <div />;
           }
-          // $ExpectError Cannot get `data.res` because property `res` is missing in object type
+          // $FlowExpectedError Cannot get `data.res` because property `res` is missing in object type
           const s: string = data.res;
           if (data.res) {
             const _s: string = data.res;
@@ -124,7 +124,7 @@ describe('<Query />', () => {
       {({ data, loading, error }) => {
         if (loading) return 'Loading....';
         if (error) return 'Error!';
-        // $ExpectError Cannot get `data.hero`. data may be undefined
+        // $FlowExpectedError Cannot get `data.hero`. data may be undefined
         data.hero;
         if (!data || !data.hero) {
           return <div />;
@@ -132,7 +132,7 @@ describe('<Query />', () => {
         const hero = data.hero;
 
         const nameAgain: string = hero.name;
-        // $ExpectError unknown is not a property on Hero
+        // $FlowExpectedError unknown is not a property on Hero
         const unknown = hero.unknown;
 
         return <div>{nameAgain}</div>;
@@ -142,7 +142,7 @@ describe('<Query />', () => {
 
   it('raises an error if accessing a prop in children function that doesnt exist', () => {
     <HeroQueryComp query={HERO_QUERY} variables={{ episode: 'episode' }}>
-      {// $ExpectError cannot render HeroQueryComp becuase errors is missing in children function (should be error instead of errors)
+      {// $FlowExpectedError cannot render HeroQueryComp becuase errors is missing in children function (should be error instead of errors)
       ({ data, loading, errors }) => {
         if (loading) return 'Loading....';
         if (errors) return 'Error!';
@@ -158,7 +158,7 @@ describe('<Query />', () => {
           const onClick = () => {
             refetch();
             refetch({ episode: 'otherEpisode' });
-            // $ExpectError refetch variables do not match variables for query
+            // $FlowExpectedError refetch variables do not match variables for query
             refetch({ notEpisode: 'otherEpisode' });
           };
           return <button onClick={onClick}>Click!</button>;
@@ -214,7 +214,7 @@ describe('<Query />', () => {
       <HeroQueryComp query={HERO_QUERY} variables={{ episode: 'episode' }}>
         {({ data, fetchMore }) => {
           const onClick = () => {
-            // $ExpectError variables must match $Shape of query variables
+            // $FlowExpectedError variables must match $Shape of query variables
             fetchMore({
               variables: { other: 'hello' },
               updateQuery: (prev, options) => {
@@ -225,7 +225,7 @@ describe('<Query />', () => {
               },
             });
 
-            // $ExpectError must pass query option if passing different variables than query
+            // $FlowExpectedError must pass query option if passing different variables than query
             fetchMore({
               variables: { other: '1234' },
               updateQuery: (prev, options) => {
@@ -240,7 +240,7 @@ describe('<Query />', () => {
               variables: { episode: 'episode2' },
               updateQuery: (prev, options) => {
                 if (!options.fetchMoreResult) return prev;
-                // $ExpectError updateQuery return type must match query response type
+                // $FlowExpectedError updateQuery return type must match query response type
                 return {
                   other: options.fetchMoreResult.hero,
                 };
@@ -257,11 +257,11 @@ describe('<Query />', () => {
     it('works', () => {
       <HeroQueryComp query={HERO_QUERY} variables={{ episode: 'episode' }}>
         {({ updateQuery }) => {
-          // $ExpectError updateQuery return type must match previous result type
+          // $FlowExpectedError updateQuery return type must match previous result type
           updateQuery((previousResult, options) => ({ hello: 'flow' }));
           const renameHero = (newName: string) =>
             updateQuery((previousResult, options) => {
-              // $ExpectError Cannot get `options.unknownProperty` because property `unknownProperty` is missing in options
+              // $FlowExpectedError Cannot get `options.unknownProperty` because property `unknownProperty` is missing in options
               const a = options.unknownProperty;
               const { variables } = options;
               return { ...previousResult, name: newName };
@@ -289,12 +289,12 @@ describe('<Subscription />', () => {
     const q = (
       <Subscription variables={vars} subscription={HERO_SUBSCRIPTION}>
         {({ data }: SubscriptionResult<Res, Vars>) => {
-          // $ExpectError Cannot get `data.res`
+          // $FlowExpectedError Cannot get `data.res`
           data.res;
           if (!data) {
             return <div />;
           }
-          // $ExpectError Cannot get `data.res` because property `res` is missing in object type
+          // $FlowExpectedError Cannot get `data.res` because property `res` is missing in object type
           const s: string = data.res;
           const _s: ?string = data.res;
           return <div />;
@@ -310,7 +310,7 @@ describe('<Subscription />', () => {
       {({ data, loading, error }) => {
         if (loading) return 'Loading....';
         if (error) return 'Error!';
-        // $ExpectError Cannot get `data.hero`. data may be undefined
+        // $FlowExpectedError Cannot get `data.hero`. data may be undefined
         data.hero;
         if (!data || !data.hero) {
           return <div />;
@@ -318,7 +318,7 @@ describe('<Subscription />', () => {
         const hero = data.hero;
 
         const nameAgain: string = hero.name;
-        // $ExpectError unknown is not a property on Hero
+        // $FlowExpectedError unknown is not a property on Hero
         const unknown = hero.unknown;
 
         return <div>{nameAgain}</div>;
@@ -329,9 +329,9 @@ describe('<Subscription />', () => {
     type Vars = {| foo: string |};
     type Res = {| res: string |};
     const q = (
-      // $ExpectError variables must match shape of query variables
+      // $FlowExpectedError variables must match shape of query variables
       <Subscription variables={{ foo: 1 }} subscription={HERO_SUBSCRIPTION}>
-        {// $ExpectError variables must match shape of query variables
+        {// $FlowExpectedError variables must match shape of query variables
         ({ data }: SubscriptionResult<Res, Vars>) => {}}
       </Subscription>
     );
@@ -390,7 +390,7 @@ describe('<Mutation />', () => {
           update: MutationFunction<Res, Vars>,
           { data, client }: MutationResult<Res>
         ) => {
-          // $ExpectError Cannot get `data.res`
+          // $FlowExpectedError Cannot get `data.res`
           data.res;
           if (!data) {
             return <div />;
@@ -411,7 +411,7 @@ describe('<Mutation />', () => {
           updateHero({
             variables: { input: { id: '1', name: 'hero1' } },
           });
-          // $ExpectError variables must match Mutation variables
+          // $FlowExpectedError variables must match Mutation variables
           updateHero({
             variables: { id: '1', name: 'hero1' },
           });
@@ -448,7 +448,7 @@ describe('<Mutation />', () => {
               variables: { input: { id: '1', name: 'hero1' } },
             });
 
-            // $ExpectError optimisticResponse must be an object
+            // $FlowExpectedError optimisticResponse must be an object
             updateHero({
               optimisticResponse: 'optimisticResponse',
               variables: { input: { id: '1', name: 'hero1' } },
@@ -482,7 +482,7 @@ describe('<Mutation />', () => {
         }}
       </UpdateHeroMutationComp>;
 
-      // $ExpectError refetchQueries must be an array of queries or a function that returns an array of queries
+      // $FlowExpectedError refetchQueries must be an array of queries or a function that returns an array of queries
       <UpdateHeroMutationComp
         mutation={HERO_MUTATION}
         refetchQueries={queryOption}
@@ -518,10 +518,10 @@ describe('<Mutation />', () => {
 
             updateHero({
               variables: { input: { id: '1', name: 'hero1' } },
-              // $ExpectError refetchQueries must be an array of queries or a function that returns an array of queries
+              // $FlowExpectedError refetchQueries must be an array of queries or a function that returns an array of queries
               refetchQueries: () => queryOption,
             });
-            // $ExpectError refetchQueries must be an array of queries or a function that returns an array of queries
+            // $FlowExpectedError refetchQueries must be an array of queries or a function that returns an array of queries
             updateHero({
               variables: { input: { id: '1', name: 'hero1' } },
               refetchQueries: queryOption,
@@ -538,7 +538,7 @@ describe('<Mutation />', () => {
       <UpdateHeroMutationComp
         mutation={HERO_MUTATION}
         update={(cache, { data }) => {
-          // $ExpectError data may be undefined
+          // $FlowExpectedError data may be undefined
           data.updateHero;
           if (data && data.updateHero) {
             const hero = cache.readQuery({
@@ -571,7 +571,7 @@ describe('<Mutation />', () => {
             updateHero({
               variables: { input: { id: '1', name: 'hero1' } },
               update: (cache, { data }) => {
-                // $ExpectError data may be undefined
+                // $FlowExpectedError data may be undefined
                 data.updateHero;
 
                 if (data && data.updateHero) {
@@ -598,16 +598,16 @@ describe('<Mutation />', () => {
                     });
                   }
 
-                  // $ExpectError readQuery requires query
+                  // $FlowExpectedError readQuery requires query
                   cache.readQuery({
                     variables: { episode: 'episode' },
                   });
-                  // $ExpectError writeQuery requires data
+                  // $FlowExpectedError writeQuery requires data
                   cache.writeQuery({
                     query: HERO_QUERY,
                     variables: { episode: 'episode' },
                   });
-                  // $ExpectError writeFragment requires id
+                  // $FlowExpectedError writeFragment requires id
                   cache.writeFragment({
                     fragment: gql`
                       fragment myHero on Hero {
@@ -618,7 +618,7 @@ describe('<Mutation />', () => {
                       name: 'name',
                     },
                   });
-                  // $ExpectError cannot call unknownFunction on cache
+                  // $FlowExpectedError cannot call unknownFunction on cache
                   cache.unknwonFunction();
                 }
               },
@@ -641,7 +641,7 @@ describe('<ApolloProvider />', () => {
   });
 
   it('raises an error when not passed a client', () => {
-    // $ExpectError ApolloPrivder requires client prop
+    // $FlowExpectedError ApolloPrivder requires client prop
     <ApolloProvider>
       <div />
     </ApolloProvider>;
@@ -651,7 +651,7 @@ describe('<ApolloProvider />', () => {
     // Should be an instance of ApolloClient
     const client = {};
 
-    // $ExpectError ApolloPrivder requires client prop
+    // $FlowExpectedError ApolloPrivder requires client prop
     <ApolloProvider client={client} />;
   });
 });
@@ -667,7 +667,7 @@ describe('<ApolloConsumer />', () => {
             query: HERO_QUERY,
             variables: { episode: 'episode' },
           });
-          // $ExpectError doSomethingElse is not a method of ApolloClient
+          // $FlowExpectedError doSomethingElse is not a method of ApolloClient
           client.doSomethingElse();
         };
         return <button onClick={onClick}>Click</button>;

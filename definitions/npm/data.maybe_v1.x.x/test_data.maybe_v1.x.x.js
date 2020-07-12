@@ -22,11 +22,11 @@ const xy: Maybe<string> = Maybe.fromNullable(null).orElse(() =>
 );
 
 // --- Errors
-// $ExpectError
+// $FlowExpectedError
 b.chain(x => x + x);
 
-// $ExpectError
+// $FlowExpectedError
 const _z = e.ap("a");
 
-// $ExpectError
+// $FlowExpectedError
 const _xy: Maybe<string> = Maybe.fromNullable(null).orElse("foo");

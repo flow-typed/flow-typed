@@ -27,7 +27,7 @@ var locationOK: Location = {
   key: "key"
 };
 
-// $ExpectError
+// $FlowExpectedError
 var locationError: Location = {};
 
 // StaticRouter
@@ -38,7 +38,7 @@ var locationError: Location = {};
   <div />
 </StaticRouter>;
 
-// $ExpectError
+// $FlowExpectedError
 <StaticRouter />;
 
 // MemoryRouter
@@ -57,7 +57,7 @@ var locationError: Location = {};
   <div />
 </MemoryRouter>;
 
-// $ExpectError
+// $FlowExpectedError
 <MemoryRouter initialEntries={""} />;
 
 // Router
@@ -66,7 +66,7 @@ var history: History;
   <div />
 </Router>;
 
-// $ExpectError
+// $FlowExpectedError
 <Router>
   <div />
 </Router>;
@@ -76,7 +76,7 @@ var history: History;
 <Prompt message={location => "ok?"} />;
 <Prompt message={location => true} />;
 
-// $ExpectError
+// $FlowExpectedError
 <Prompt />;
 
 // Redirect
@@ -89,7 +89,7 @@ var history: History;
   }}
 />;
 
-// $ExpectError
+// $FlowExpectedError
 <Redirect />;
 
 // Route
@@ -107,7 +107,7 @@ var User = () => <div />;
   children={({ match }) => <div className={match ? "active" : ""} />}
 />;
 
-// $ExpectError
+// $FlowExpectedError
 <Route path="/user/:username" component={<User />} />;
 
 // Switch
@@ -134,13 +134,13 @@ class Bar extends React.Component {
 const BarWithRouter = withRouter(Bar);
 <BarWithRouter name="name" />;
 
-// $ExpectError
+// $FlowExpectedError
 withRouter("nope");
 
 // const FooWithRouterError = withRouter(Foo);
 // <FooWithRouterError name={3} />;
 
-// $ExpectError
+// $FlowExpectedError
 const BarWithRouterError = withRouter(Bar);
 <BarWithRouterError name={3} />;
 
@@ -149,7 +149,7 @@ type WithRouterProps = ContextRouter & {
   name: string
 };
 
-// $ExpectError
+// $FlowExpectedError
 const IncorrectHistoryUsage = ({ history, name }: Foo2Props) => {
   // Wrong arguments here, error will bubble up to the component declaration
   history.push(["bla"]);
@@ -162,7 +162,7 @@ const IncorrectHistoryUsage = ({ history, name }: Foo2Props) => {
 
 const IncorrectHistoryBlockUsage = (history: RouterHistory) => {
   // Wrong arguments here
-  // $ExpectError
+  // $FlowExpectedError
   history.block(false);
 
   // These are valid
@@ -179,9 +179,9 @@ const match: null | Match = matchPath("/the/pathname", "/the/:dynamicId", {
 });
 const match2: null | Match = matchPath("/the/pathname", "/the/:dynamicId");
 
-// $ExpectError
+// $FlowExpectedError
 matchPath("/the/pathname");
-// $ExpectError
+// $FlowExpectedError
 matchPath();
-// $ExpectError
+// $FlowExpectedError
 const matchError: string = matchPath("/the/pathname", "the/:dynamicId");

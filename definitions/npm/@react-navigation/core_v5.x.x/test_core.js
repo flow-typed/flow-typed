@@ -59,27 +59,27 @@ removeListener();
 navProp.addListener('another', e => {
   (e.type: 'another');
   (e.data: string);
-  // $ExpectError canPreventDefault set to false
+  // $FlowExpectedError canPreventDefault set to false
   e.preventDefault();
 });
 navProp.addListener('third', e => {
   (e.type: 'third');
   (e.target: ?string);
-  // $ExpectError there's no data field on this event
+  // $FlowExpectedError there's no data field on this event
   e.data;
   e.preventDefault();
 });
 navProp.setParams({ sup: false });
 
 navProp.navigate('CoolScreen', { sup: true, yo: null });
-// $ExpectError CoolScreen route needs params
+// $FlowExpectedError CoolScreen route needs params
 navProp.navigate('CoolScreen');
 navProp.navigate({ name: 'CoolScreen', params: { sup: true, yo: null } });
 navProp.navigate('another');
 navProp.navigate('another', { eh: 'hello' });
-// $ExpectError wrong params
+// $FlowExpectedError wrong params
 navProp.navigate('another', { eh: 'yo', fake: 'hello' });
-// $ExpectError not a valid route name
+// $FlowExpectedError not a valid route name
 navProp.navigate('another2');
 
 navProp.dispatch(CommonActions.goBack());
@@ -104,7 +104,7 @@ declare var inexactNavProp: NavigationProp<
   {||},
 >;
 inexactNavProp.navigate('another2');
-// $ExpectError CoolScreen route needs params
+// $FlowExpectedError CoolScreen route needs params
 inexactNavProp.navigate('CoolScreen');
 inexactNavProp.navigate('another', { eh: 'yo', fake: 'hello' });
 
@@ -199,9 +199,9 @@ function BadlyTypedCoolScreen(props: {|
 }
 
 <Example.Screen name="CoolScreen" component={CoolScreen} />;
-// $ExpectError invalid route name
+// $FlowExpectedError invalid route name
 <Example.Screen name="Fake" component={CoolScreen} />;
-// $ExpectError invalid screen props
+// $FlowExpectedError invalid screen props
 <Example.Screen name="CoolScreen" component={BadlyTypedCoolScreen} />;
 
 /**
@@ -248,7 +248,7 @@ tabRouter.getStateForAction(
 );
 tabRouter.getStateForAction(
   tabState,
-  // $ExpectError not a valid action!
+  // $FlowExpectedError not a valid action!
   { fake: 'NAVIGATE', blah: 'Test1' },
   routerConfigOptions,
 );

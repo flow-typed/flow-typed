@@ -6,11 +6,11 @@ const t = new Twit({
   access_token: 'token',
   access_token_secret: 'tokenSecret',
 });
-// $ExpectError
+// $FlowExpectedError
 t.post();
-// $ExpectError
+// $FlowExpectedError
 t.get();
-// $ExpectError
+// $FlowExpectedError
 t.postMediaChunked();
 
 (t.post('/foo', {}): Promise<any>);
@@ -20,5 +20,5 @@ const stream = t.stream('/user');
 stream.stop();
 stream.start();
 stream.on('test', data => {});
-// $ExpectError
+// $FlowExpectedError
 stream.on();

@@ -4,11 +4,11 @@ import blacklist from 'blacklist';
 (blacklist({ a: 1 }, 'a', 'b'): Object);
 (blacklist({ a: 1 }, { a: false }): Object);
 
-// $ExpectError wrong source argument
+// $FlowExpectedError wrong source argument
 blacklist(1, 'a');
-// $ExpectError wrong type of filter
+// $FlowExpectedError wrong type of filter
 blacklist({ a: 1, b: 2 }, { a: 1, b: 2 }, { a: 1, b: 2 });
-// $ExpectError wrong rest type
+// $FlowExpectedError wrong rest type
 blacklist({ a: 1 }, { a: false }, 'a');
 
 

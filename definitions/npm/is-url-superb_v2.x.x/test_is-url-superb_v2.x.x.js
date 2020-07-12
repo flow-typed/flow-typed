@@ -4,11 +4,11 @@ import isUrl from 'is-url-superb';
 
 (isUrl('http://flowtype.org'): boolean);
 
-// $ExpectError
+// $FlowExpectedError
 isUrl({});
 
-// $ExpectError
+// $FlowExpectedError
 isUrl(null);
 
-// $ExpectError
+// $FlowExpectedError
 const t: string = isUrl('http://flowtype.org');

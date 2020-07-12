@@ -23,7 +23,7 @@ describe("checkstyle-formatter", () => {
 
     const output: string = checkstyleFormatter(results);
 
-    // $ExpectError
+    // $FlowExpectedError
     const n: number = checkstyleFormatter(results);
 
     const wrongResultFormat1 = [
@@ -33,18 +33,18 @@ describe("checkstyle-formatter", () => {
       }
     ];
 
-    // $ExpectError
+    // $FlowExpectedError
     checkstyleFormatter(wrongResultFormat1);
 
     const wrongResultFormat2 = [
       {
         filename: "foo.js",
-        // $ExpectError
+        // $FlowExpectedError
         messages: [{ line: 1, column: 2, severity: "unknown" }]
       }
     ];
 
-    // $ExpectError
+    // $FlowExpectedError
     checkstyleFormatter(wrongResultFormat2);
   });
 });

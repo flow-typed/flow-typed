@@ -35,12 +35,12 @@ createStackNavigator({
   Test1: { screen: ClassScreenComponent },
 });
 
-// $ExpectError numbers can never be components
+// $FlowExpectedError numbers can never be components
 createStackNavigator({
   Test1: { screen: 5 },
 });
 
-// $ExpectError you need a screen!
+// $FlowExpectedError you need a screen!
 createBottomTabNavigator({
   Test1: { blah: "test" },
 });
@@ -69,7 +69,7 @@ createStackNavigator(
   {
     Test1: { screen: FunctionalScreenComponent },
   },
-  // $ExpectError stack not drawer!
+  // $FlowExpectedError stack not drawer!
   {
     initialRouteName: "Test1",
     drawerBackgroundColor: "green",
@@ -80,7 +80,7 @@ createBottomTabNavigator(
   {
     Test1: { screen: FunctionalScreenComponent },
   },
-  // $ExpectError tab not drawer!
+  // $FlowExpectedError tab not drawer!
   {
     drawerBackgroundColor: "green",
   },
@@ -108,7 +108,7 @@ createDrawerNavigator(
   {
     Test1: { screen: FunctionalScreenComponent },
   },
-  // $ExpectError drawer not tab!
+  // $FlowExpectedError drawer not tab!
   {
     tabBarPosition: "top",
   },
@@ -190,5 +190,5 @@ const fakeNavigateAction = {
   fake: "Navigation/NAVIGATE",
   blah: "Test1",
 };
-// $ExpectError not a valid action!
+// $FlowExpectedError not a valid action!
 tabRouter.getStateForAction(fakeNavigateAction, null);

@@ -36,12 +36,12 @@ const superReducer: SectionReducer<{data: State}, Action, {data: State}> = combi
   data: reducer0
 });
 
-// $ExpectError
+// $FlowExpectedError
 combineSectionReducers() // wrong reducers argument
-// $ExpectError
+// $FlowExpectedError
 combineSectionReducers([]) // wrong reducers argument
 
-// $ExpectError
+// $FlowExpectedError
 const reducer1: SectionReducer<State, Action, State> = combineSectionReducers({
   a: reducerA,
   name: reducerName

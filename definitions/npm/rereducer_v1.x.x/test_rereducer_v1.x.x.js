@@ -17,35 +17,35 @@ type Actions1 = TestAction1 | TestAction4;
 type Actions2 = TestAction1 | TestAction2;
 
 const when1: Case<number, TestAction1> = ["TEST", getPayload];
-// $ExpectError
+// $FlowExpectedError
 const when2: Case<number, TestAction2> = ["TEST2", getPayload];
 const when3: Case<number, Actions1> = [["TEST", "TEST4"], getPayload];
-// $ExpectError
+// $FlowExpectedError
 const when32: Case<number, Actions1> = [["TEST2", "TEST4"], getPayload];
-// $ExpectError
+// $FlowExpectedError
 const when4: Case<number, Actions2> = [["TEST", "TEST2"], getPayload];
 const when5: Case<number, TestAction2> = [
   "TEST2",
   (s, { payload: { x } }) => x
 ];
 const when6: Case<number, TestAction3> = ["TEST3", (s, { x }) => x];
-// $ExpectError
+// $FlowExpectedError
 const when7: Case<number, TestAction5> = ["TEST5", getPayload];
 
 const reducer1: Reducer<number> = rereducer(10, when1, when3, when6);
 
 const x1: number = reducer1(5, { type: "whatever" });
 const x2: number = reducer1(undefined, { type: "whatever" });
-// $ExpectError
+// $FlowExpectedError
 reducer1();
-// $ExpectError
+// $FlowExpectedError
 reducer1("asdf", { type: "whatever" });
-// $ExpectError
+// $FlowExpectedError
 const x3: string = reducer1("asdf", { type: "whatever" });
-// $ExpectError
+// $FlowExpectedError
 const reducer2: Reducer<string> = rereducer(10, when1);
 
 const fnReducer: number => Reducer<number> = rereducer(when1, when3);
 const reducer3: Reducer<number> = fnReducer(10);
-// $ExpectError
+// $FlowExpectedError
 const reducer4: Reducer<string> = fnReducer("asdf");

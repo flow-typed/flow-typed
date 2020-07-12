@@ -7,18 +7,18 @@ import styled from 'styled-components/native'
 const Text1 = styled.Text``
 const Text2 = styled('Text')``
 
-// $ExpectError - test for non-existent element
+// $FlowExpectedError - test for non-existent element
 const derp1 = styled.derp``
 
-// $ExpectError - test for non-existent element
+// $FlowExpectedError - test for non-existent element
 const derp2 = styled('derp')``
 
 // Test we don't "accidentally style" something else:
-// $ExpectError
+// $FlowExpectedError
 const derp3 = styled(null)``
 
-// $ExpectError
+// $FlowExpectedError
 const derp3 = styled({})``
 
-// $ExpectError
+// $FlowExpectedError
 const derp3 = styled(1)``

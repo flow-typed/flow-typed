@@ -35,7 +35,7 @@ const enhancer: HOC<*, EnhancedCompProps> = compose(
     if (data !== undefined) {
       return {
         h: (data.hello: string),
-        // $ExpectError
+        // $FlowExpectedError
         hE: (data.hello: number)
       };
     }

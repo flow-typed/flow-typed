@@ -19,5 +19,5 @@ const badConfettiSettings = {
   respawn: true,
 };
 
-// $ExpectError
+// $FlowExpectedError
 new ConfettiGenerator(badConfettiSettings);

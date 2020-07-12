@@ -29,7 +29,7 @@ const str: string = "hello world";
 {
   const xs: Array<number> = _.adjust(x => x + 1, 2, ns);
   const xs1: Array<number> = _.adjust(x => x + 1, 2)(ns);
-  //$ExpectError
+  //$FlowExpectedError
   const xs3: Array<string> = _.adjust(x => x + 1)(2)(ns);
 
   const as: boolean = _.all(x => x > 1, ns);
@@ -78,7 +78,7 @@ const str: string = "hello world";
     })
 
     it('catches mismatches between the first set and the second', () => {
-      // $ExpectError
+      // $FlowExpectedError
       _.startsWith("1", [1, 2, 3])
     })
 
@@ -111,7 +111,7 @@ const str: string = "hello world";
     })
 
     it('catches mismatches between the first set and the second', () => {
-      // $ExpectError
+      // $FlowExpectedError
       _.endsWith("1", [1, 2, 3])
     })
 
@@ -134,7 +134,7 @@ const str: string = "hello world";
   );
   // Ramda doesn't strictly break if you pass it an object, but it always
   // returns undefined.
-  // $ExpectError
+  // $FlowExpectedError
   const findObj = find(o => o == "bar", { foo: "bar" });
 
   const findxs2: ?{ [k: string]: number | string } = _.findLast(
@@ -172,19 +172,19 @@ const str: string = "hello world";
 
     it('fails when type refinement is incorrect', () => {
       const isString = (x): bool %checks => typeof x === 'string'
-      // $ExpectError
+      // $FlowExpectedError
       const ns: Array<number> = (filter: RefineFilter)(isString, ['1', 2])
     })
 
     it('fails when attempting to refine from a non $Pred predicate', () => {
       const isNumber = (x) => typeof x === 'number'
-      // $ExpectError
+      // $FlowExpectedError
       const ns: Array<number> = filter(isNumber, ['1', 2])
     })
 
     it('does not accept predicates missing %checks when using RefineFilter', () => {
       const isNumber = (x) => typeof x === 'number'
-      // $ExpectError
+      // $FlowExpectedError
       const ns: Array<number> = (filter: RefineFilter)(isNumber, ['1', 2])
     })
   })
@@ -209,24 +209,24 @@ const str: string = "hello world";
     })
     describe('fails on', () => {
       it('null and undefined', () => {
-        // $ExpectError
+        // $FlowExpectedError
         length(null)
-        // $ExpectError
+        // $FlowExpectedError
         length()
       })
       it('types that has no length', () => {
-        // $ExpectError
+        // $FlowExpectedError
         length(123)
       })
       it('non-numeric .length property', () => {
-        // $ExpectError
+        // $FlowExpectedError
         length({length: 'size'})
       })
     })
   })
 
   const s4 = _.find(x => x === "2", ["1", "2"]);
-  //$ExpectError
+  //$FlowExpectedError
   const s5: ?{ [key: string]: string } = _.find(x => x === "2", { a: 1, b: 2 });
   const s6: number = _.findIndex(x => x === "2", ["1", "2"]);
   const s7: number = _.findIndex(x => x === "2", { a: "1", b: "2" });
@@ -238,7 +238,7 @@ const str: string = "hello world";
     x => (x > 1 ? "more" : "less"),
     ns
   );
-  //$ExpectError
+  //$FlowExpectedError
   const groupedBy1: { [k: string]: Array<string> } = _.groupBy(
     x => (x > 1 ? "more" : "less")
   )(ns);
@@ -253,9 +253,9 @@ const str: string = "hello world";
   const transducer = _.compose(_.map(_.add(1)), _.take(2));
 
   const txs: Array<number> = _.into([], transducer, ns);
-  //$ExpectError
+  //$FlowExpectedError
   const txs1: string = _.into([], transducer, ns);
-  //$ExpectError
+  //$FlowExpectedError
   const txs2: string = _.into([], transducer, ss);
 
   const ind: number = _.indexOf(1, ns);
@@ -317,7 +317,7 @@ const str: string = "hello world";
 
   const nthxs: ?string = _.nth(2, ["curry"]);
   const nthxs1: ?string = _.nth(2)(["curry"]);
-  //$ExpectError
+  //$FlowExpectedError
   const nthxs2: string = _.nth(2, [1, 2, 3]);
 
   const xxs: Array<number> = _.append(1, [1, 2, 3]);
@@ -369,9 +369,9 @@ const str: string = "hello world";
     0,
     ["1", "2", "3"]
   );
-  // $ExpectError
+  // $FlowExpectedError
   const redxs8: number = reduce(
-    // $ExpectError
+    // $FlowExpectedError
     (acc, s) => acc < 4 ? acc + parseInt(s) : _.reduced(s),
     0,
     ["1", "2", "3"]
@@ -385,7 +385,7 @@ const str: string = "hello world";
   const redxsReadOnly1_2: number = reduce(subtract)(0, readOnlyArray);
   const redxsReadOnly1_1_1: number = reduce(subtract)(0)(readOnlyArray);
 
-  // $ExpectError reduce will not work with an object.
+  // $FlowExpectedError reduce will not work with an object.
   reduce(subtract, 0, { foo: 1, bar: 2 });
 
   // reduceRight
@@ -395,7 +395,7 @@ const str: string = "hello world";
     _.map(x => [x], ss)
   );
   const redrxs3a: string = _.reduceRight(
-    //$ExpectError
+    //$FlowExpectedError
     (acc: string, value: number): string => acc,
     "",
     ns
@@ -406,9 +406,9 @@ const str: string = "hello world";
     ns
   );
 
-  // $ExpectError reduceRight does not support reduced.
+  // $FlowExpectedError reduceRight does not support reduced.
   const redrxs4: number = _.reduceRight(
-    // $ExpectError reduceRight does not support reduced.
+    // $FlowExpectedError reduceRight does not support reduced.
     (acc, n) => acc < 4 ? acc + n : _.reduced(acc),
     0,
     ns
@@ -479,7 +479,7 @@ const str: string = "hello world";
   const f = n => (n > 50 ? false : [-n, n + 10]);
   const unf11: Array<number> = _.unfold(f, 10);
 
-  //$ExpectError
+  //$FlowExpectedError
   const unf2 = _.unfold(x => x.length > 10 || [x, x + "0"], 2);
 
   const unby: Array<number> = _.uniqBy(Math.abs)([-1, -5, 2, 10, 1, 2]);
@@ -491,7 +491,7 @@ const str: string = "hello world";
   const unw2 = _.uniqWith(strEq)([1, "1", 1]);
   const unw3 = _.uniqWith(strEq)(["1", 1, 1]);
 
-  //$ExpectError
+  //$FlowExpectedError
   const ys6: { [key: string]: string } = _.fromPairs([["h", 2]]);
 
   const withoutxs: Array<number> = _.without([1, 2], ns);
@@ -502,7 +502,7 @@ const str: string = "hello world";
 
   const zipxs: Array<[number, string]> = _.zip([1, 2, 3], ["a", "b", "c"]);
 
-  //$ExpectError
+  //$FlowExpectedError
   const zipxs1: Array<[number, string]> = _.zip([true, false])(["a", "b"]);
 
   const zipos: { [k: string]: number } = _.zipObj(["a", "b", "c"], [1, 2, 3]);

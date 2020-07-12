@@ -10,7 +10,7 @@ promise.reflect().then(inspection => {
   (inspection.pending(): bool);
 });
 
-// $ExpectError
+// $FlowExpectedError
 new Bluebird();
 
 Bluebird.all([
@@ -34,14 +34,14 @@ let mapSeriesResult: Promise<number[]> = Bluebird.mapSeries([1], mapper);
 
 Bluebird.resolve([1,2,3]).then(function(arr) {
   let l = arr.length;
-  // $ExpectError Property not found in Array
+  // $FlowExpectedError Property not found in Array
   arr.then(r => r);
 });
 
 let response = fetch('/').then(r => r.text())
 Bluebird.resolve(response).then(function(responseBody) {
   let length: number = responseBody.length;
-  // $ExpectError Property not found in string
+  // $FlowExpectedError Property not found in string
   responseBody.then(r => r);
 });
 
@@ -58,7 +58,7 @@ Bluebird.join(
 Bluebird.join(1, Bluebird.resolve(2),
   function (a, b) { return Bluebird.resolve(a + b) }).then(function (s) { return s + 1 })
 
-// $ExpectError
+// $FlowExpectedError
 Bluebird.all([1, Bluebird.resolve(1), Promise.resolve(1)]).then(function(r: Array<string>) { });
 
 function foo(a: number, b: string) {
@@ -93,9 +93,9 @@ fooBluebirdPromise(1, 'a').then(function (n: number) {
   let n2 = n;
 });
 
-// $ExpectError
+// $FlowExpectedError
 fooPromise('a', 1)
-// $ExpectError
+// $FlowExpectedError
 fooPromise()
 
 Bluebird.resolve(['arr', { some: 'value' }, 42])
@@ -112,24 +112,24 @@ Bluebird.reduce(Bluebird.resolve([5, Bluebird.resolve(6), Promise.resolve(7)]), 
 
 Bluebird.reduce([1, Bluebird.resolve(2), Promise.resolve(3)], (prev, num) => Promise.resolve(prev * num));
 Bluebird.reduce([1, Bluebird.resolve(2), Promise.resolve(3)], (prev, num) => Bluebird.resolve(prev * num));
-//$ExpectError
+//$FlowExpectedError
 Bluebird.reduce([1, Bluebird.resolve(2), Promise.resolve(3)], (prev, num) => Bluebird.resolve(prev * num), 'hello');
 
 type PromiseOutput<T> = () => Promise<T>;
 let givePromise1: PromiseOutput<number> = () => Promise.resolve(1);
 let givePromise2: PromiseOutput<number> = () => Bluebird.resolve(2);
-// $ExpectError
+// $FlowExpectedError
 let givePromise3: PromiseOutput<number> = () => Bluebird.resolve('hello');
 
 type PromiseInput<T> = (input: Promise<T>) => Function
 let takePromise: PromiseInput<number> = (promise) => promise.then
 takePromise(Promise.resolve(1));
 takePromise(Bluebird.resolve(1));
-// $ExpectError
+// $FlowExpectedError
 takePromise(Bluebird.resolve('hello'));
 
 Bluebird.delay(500);
-// $ExpectError
+// $FlowExpectedError
 Bluebird.delay('500');
 Bluebird.delay(500, 1);
 Bluebird.delay(500, Promise.resolve(5));
@@ -137,14 +137,14 @@ Bluebird.delay(500, Bluebird.resolve(5));
 
 Bluebird.resolve().return(5).then((result: number) => {});
 Bluebird.resolve().thenReturn(5).then((result: number) => {});
-// $ExpectError
+// $FlowExpectedError
 Bluebird.resolve().return(5).then((result: string) => {});
-// $ExpectError
+// $FlowExpectedError
 Bluebird.resolve().thenReturn(5).then((result: string) => {});
 
 let disposable: Disposable<boolean> = Bluebird.resolve(true).disposer((value: boolean) => {});
 Bluebird.using(disposable, (value: boolean) => 9).then((result: number) => {});
-// $ExpectError
+// $FlowExpectedError
 Bluebird.using(disposable, (value: number) => 9);
-// $ExpectError
+// $FlowExpectedError
 Bluebird.using(disposable, (value: boolean) => 9).then((result: boolean) => {});

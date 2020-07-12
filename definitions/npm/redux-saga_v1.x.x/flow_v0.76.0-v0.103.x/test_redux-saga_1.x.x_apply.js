@@ -58,13 +58,13 @@ describe("apply(context, fn, [args])", () => {
     });
 
     it("must raises an error", () => {
-      // $ExpectError: Too few arguments
+      // $FlowExpectedError: Too few arguments
       apply(context, fn6, "1", 2, "3", 4);
 
-      // $ExpectError: Wrong argument types
+      // $FlowExpectedError: Wrong argument types
       apply(context, fn1, 1);
 
-      // $ExpectError: First parameter is a string, not a number
+      // $FlowExpectedError: First parameter is a string, not a number
       (c1.payload.args: [number]);
     });
   });
@@ -85,13 +85,13 @@ describe("apply(context, fn, [args])", () => {
       // NOTE: This should actually fail, but apparently more parameter are fine..
       (c1.payload.fn: typeof fn6);
 
-      // $ExpectError: fn returns a Promise<string> not Promise<number>
+      // $FlowExpectedError: fn returns a Promise<string> not Promise<number>
       (c1.payload.fn: (a: boolean) => Promise<number>);
 
-      // $ExpectError: 'a' is actually of type string
+      // $FlowExpectedError: 'a' is actually of type string
       (c4.payload.fn: (a: number, b: number) => Promise<string>);
 
-      // $ExpectError: Less parameter are noticed
+      // $FlowExpectedError: Less parameter are noticed
       (c6.payload.fn: typeof fn1);
     });
   });
@@ -109,7 +109,7 @@ describe("apply(context, fn, [args])", () => {
     });
 
     it("must raises an error when lead context to null", () => {
-      // $ExpectError
+      // $FlowExpectedError
       (c1.payload.context: null);
     });
   });

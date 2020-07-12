@@ -17,13 +17,13 @@ io.checkRequest(message, (err, success) => {
 let isClient: boolean = io.serveClient();
 io.serveClient(false);
 
-// $ExpectError
+// $FlowExpectedError
 io.serveClient('false');
 
 let path: string = io.path();
 io.path('/some/path');
 
-// $ExpectError
+// $FlowExpectedError
 let path: boolean = io.path();
 
 let adapter = io.adapter();
@@ -32,7 +32,7 @@ io.adapter('adapter')
 let origins: string = io.origins();
 io.origins('*:*');
 
-// $ExpectError
+// $FlowExpectedError
 io.origins({origin: '*;*'});
 
 io = socketIO();
@@ -47,7 +47,7 @@ io.bind(app);
 let oi = io.onconnection(app);
 let namespace = io.of('/space');
 
-// $ExpectError
+// $FlowExpectedError
 namespace = io.of(app);
 
 io.close(() => {});
@@ -55,7 +55,7 @@ io.close(() => {});
 namespace = io.on('connection', (socket) => {});
 namespace = io.on('disconnect', () => {});
 
-// $ExpectError
+// $FlowExpectedError
 namespace = io.on(42);
 
 namespace = io.to('alpha');

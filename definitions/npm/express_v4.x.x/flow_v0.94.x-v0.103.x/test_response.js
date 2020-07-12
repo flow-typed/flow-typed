@@ -44,7 +44,7 @@ const httpServer = http.createServer(app);
 httpServer.listen(9000);
 
 const badHttpServer = null;
-// $ExpectError
+// $FlowExpectedError
 badHttpServer.listen();
 
 // Can manually invoke app.handle() to handle a request

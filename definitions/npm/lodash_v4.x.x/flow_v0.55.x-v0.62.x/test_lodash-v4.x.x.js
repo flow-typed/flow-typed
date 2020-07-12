@@ -69,18 +69,18 @@ differenceBy([{ x: 2 }, { x: 1 }], [{ x: 1 }], "x");
  */
 find([1, 2, 3], x => x * 1 == 3);
 find([1, 2, 3], x => x == 2, 1);
-// $ExpectError number cannot be compared to string
+// $FlowExpectedError number cannot be compared to string
 find([1, 2, 3], x => x == "a");
-// $ExpectError number. This type is incompatible with function type.
+// $FlowExpectedError number. This type is incompatible with function type.
 find([1, 2, 3], 1);
-// $ExpectError property `y`. Property not found in object literal
+// $FlowExpectedError property `y`. Property not found in object literal
 find([{ x: 1 }, { x: 2 }, { x: 3 }], v => v.y == 3);
 find([{ x: 1 }, { x: 2 }, { x: 3 }], v => v.x == 3);
 find({ x: 1, y: 2 }, (a: number, b: string) => a);
 find({ x: 1, y: 2 }, { x: 3 });
 find((["a", "b"]: $ReadOnlyArray<string>), "c");
 
-// $ExpectError undefined. This type is incompatible with object type.
+// $FlowExpectedError undefined. This type is incompatible with object type.
 var result: Object = find(users, "active");
 
 /**
@@ -150,7 +150,7 @@ get([{ a: "foo" }, { b: "bar" }, { c: "baz" }], "2");
 get([[1, 2], [3, 4], [5, 6], [7, 8]], "3");
 
 // Second argument must be string when looking for array items by index
-// $ExpectError number This type is incompatible with union: ?array type | string
+// $FlowExpectedError number This type is incompatible with union: ?array type | string
 get([1, 2, 3], 0);
 
 /**
@@ -195,7 +195,7 @@ map({ a: 4, b: 8 }, square);
 
 const tuple: [number, number] = [1, 2];
 map(tuple, val => val + 2);
-//$ExpectError cannot push to tuple
+//$FlowExpectedError cannot push to tuple
 map(tuple, (val, nothing, tupleArray) => tupleArray.push(123));
 
 var users = [{ user: "barney" }, { user: "fred" }];
@@ -230,9 +230,9 @@ uniqBy([{ x: 1 }, { x: 2 }, { x: 1 }], "x");
  * _.clone
  */
 clone({ a: 1 }).a == 1;
-// $ExpectError property `b`. Property not found in object literal
+// $FlowExpectedError property `b`. Property not found in object literal
 clone({ a: 1 }).b == 1;
-// $ExpectError number. This type is incompatible with function type.
+// $FlowExpectedError number. This type is incompatible with function type.
 clone({ a: 1 }).a == "c";
 
 /**
@@ -247,16 +247,16 @@ isEqual({ x: 1 }, { y: 2 });
 // and https://github.com/facebook/flow/issues/956
 isEqual(1);
 
-// $ExpectError function type expects no more than 2 arguments
+// $FlowExpectedError function type expects no more than 2 arguments
 isEqual(1, 2, 3);
 
 /**
  * _.range
  */
 range(0, 10)[4] == 4;
-// $ExpectError string. This type is incompatible with number
+// $FlowExpectedError string. This type is incompatible with number
 range(0, "a");
-// $ExpectError string cannot be compared to number
+// $FlowExpectedError string cannot be compared to number
 range(0, 10)[4] == "a";
 
 /**
@@ -280,9 +280,9 @@ sortedLastIndexBy([{ x: 4 }, { x: 5 }], { x: 4 }, "x");
  */
 extend({ a: 1 }, { b: 2 }).a;
 extend({ a: 1 }, { b: 2 }).b;
-// $ExpectError property `c`. Property not found in object literal
+// $FlowExpectedError property `c`. Property not found in object literal
 extend({ a: 1 }, { b: 2 }).c;
-// $ExpectError property `c`. Poperty not found in object literal
+// $FlowExpectedError property `c`. Poperty not found in object literal
 assignIn({ a: 1 }, { b: 2 }).c;
 
 /**
@@ -298,19 +298,19 @@ zip(["a", "b", "c"], ["d", "e", "f"])[0].length;
 zip(["a", "b", "c"], [1, 2, 3])[0].length;
 zip(["a", "b", "c"], [1, 2, 3])[0][0] + "a";
 zip(["a", "b", "c"], [1, 2, 3])[0][1] * 10;
-// $ExpectError `x` property not found in Array
+// $FlowExpectedError `x` property not found in Array
 zip([{ x: 1 }], [{ x: 2, y: 1 }])[0].x;
-// $ExpectError `y` property not found in object literal
+// $FlowExpectedError `y` property not found in object literal
 zip([{ x: 1 }], [{ x: 2, y: 1 }])[0][0].y;
 zip([{ x: 1 }], [{ x: 2, y: 1 }])[0][1].y;
-// $ExpectError Flow could potentially catch this -- the tuple only has two elements.
+// $FlowExpectedError Flow could potentially catch this -- the tuple only has two elements.
 zip([{ x: 1 }], [{ x: 2, y: 1 }])[0][2];
 
 /**
  * _.zipWith
  */
 zipWith(["a", "b", "c"], [1, 2, 3], (str, num) => ({ [str]: num }));
-// $ExpectError `x` should be a `string`, `y` a `number`
+// $FlowExpectedError `x` should be a `string`, `y` a `number`
 zipWith(["a", "b", "c"], [1, 2, 3]).map(([x, y]) => x * y);
 
 /**
@@ -318,9 +318,9 @@ zipWith(["a", "b", "c"], [1, 2, 3]).map(([x, y]) => x * y);
  */
 unzip(([[1, "a"], [2, "b"]]: Array<[number, string]>))[0].map(x => x * 10);
 unzip(([[1, "a"], [2, "b"]]: Array<[number, string]>))[1].map(x => x.toUpperCase());
-// $ExpectError
+// $FlowExpectedError
 unzip(([[1, "a"], [2, "b"]]: Array<[number, string]>))[0].map(x => x.toUpperCase());
-// $ExpectError
+// $FlowExpectedError
 unzip(([[1, "a"], [2, "b"]]: Array<[number, string]>))[1].map(x => x * 10);
 unzip(([[1, "a", 1], [2, "b", 2]]: Array<[number, string, number]>))[2].map(x => x * 10);
 
@@ -341,16 +341,16 @@ boolFalse = isString(function(f) {
 boolFalse = isString();
 boolFalse = isString(true);
 
-// $ExpectError
+// $FlowExpectedError
 boolFalse = isString("");
-// $ExpectError
+// $FlowExpectedError
 boolTrue = isString(undefined);
 
 /**
  * _.find
  */
 find([1, 2, 3], x => x == 1);
-// $ExpectError number. This type is incompatible with function type.
+// $FlowExpectedError number. This type is incompatible with function type.
 find([1, 2, 3], 1);
 
 // Copy pasted tests from iflow-lodash
@@ -414,12 +414,12 @@ bool = thru(1, function(n) {
 var timesNums: number[];
 
 timesNums = times(5);
-// $ExpectError string. This type is incompatible with number
+// $FlowExpectedError string. This type is incompatible with number
 var strings: string[] = times(5);
 timesNums = times(5, function(i: number) {
   return i + 1;
 });
-// $ExpectError string. This type is incompatible with number
+// $FlowExpectedError string. This type is incompatible with number
 timesNums = times(5, function(i: number) {
   return JSON.stringify(i);
 });
@@ -438,21 +438,21 @@ noop(1);
 noop("a", 2, [], null);
 (noop: string => void);
 (noop: (number, string) => void);
-// $ExpectError functions are contravariant in return types
+// $FlowExpectedError functions are contravariant in return types
 (noop: string => string);
 
 /**
  * _.memoize
  */
 var memoized: (a: number) => string = memoize((a: number) => "foo");
-// $ExpectError memoize retains type information
+// $FlowExpectedError memoize retains type information
 memoized = memoize(() => {});
 
 /**
  * _.debounce
  */
 var debounced: (a: number) => string = debounce((a: number) => "foo");
-// $ExpectError debounce retains type information
+// $FlowExpectedError debounce retains type information
 debounced = debounce(() => {});
 
 /**

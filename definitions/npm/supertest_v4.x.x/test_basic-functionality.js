@@ -136,9 +136,9 @@ describe('expectations', () => {
     await app.unsubscribe('/').expect(200);
 
     // check we're actually type checking using typos
-    // $ExpectError
+    // $FlowExpectedError
     await app.psot('/').expect(200);
-    // $ExpectError
+    // $FlowExpectedError
     await app.post('/').expct(200);
   });
 
@@ -171,19 +171,19 @@ describe('expectations', () => {
     (response.unprocessableEntity: boolean);
 
     // check we're actually type checking using typos
-    // $ExpectError
+    // $FlowExpectedError
     (response.tpye: string);
   })
 
   it('there is a called boolean in the request', () => {
     let req = request(serverFunction).get('/user');
     (req.called: boolean);
-    // $ExpectError
+    // $FlowExpectedError
     req.foo;
 
     req = req.expect(200);
     (req.called: boolean);
-    // $ExpectError
+    // $FlowExpectedError
     req.foo;
   })
 });

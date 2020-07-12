@@ -41,47 +41,47 @@ locker.checkSync(lockFileName);
 
 locker.checkSync(lockFileName, lockOpts);
 
-// $ExpectError
+// $FlowExpectedError
 locker.lock(1234, lockOpts, () => {
   return;
 });
 
-// $ExpectError
+// $FlowExpectedError
 locker.lock(lockFileName, 'foo', () => {
   return;
 });
 
-// $ExpectError
+// $FlowExpectedError
 locker.lock(1234, () => {
   return;
 });
 
-// $ExpectError
+// $FlowExpectedError
 locker.lockSync(lockFileName, 'foo');
 
-// $ExpectError
+// $FlowExpectedError
 locker.lockSync(lockFileName, lockOpts, () => {});
 
-// $ExpectError
+// $FlowExpectedError
 locker.unlock(1234, function() {
   return;
 });
 
-// $ExpectError
+// $FlowExpectedError
 locker.unlockSync(lockFileName, lockOpts);
 
-// $ExpectError
+// $FlowExpectedError
 locker.check(lockFileName, 'foo', function() {
   return;
 });
 
-// $ExpectError
+// $FlowExpectedError
 locker.check(1234, function() {
   return;
 });
 
-// $ExpectError
+// $FlowExpectedError
 locker.checkSync(lockFileName, 'foo');
 
-// $ExpectError
+// $FlowExpectedError
 locker.checkSync(1234, lockOpts);

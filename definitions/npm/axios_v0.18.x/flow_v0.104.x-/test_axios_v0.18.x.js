@@ -14,7 +14,7 @@ import type {
   },
   xsrfCookieName: 'cookie',
 }): Promise<*>);
-// $ExpectError
+// $FlowExpectedError
 (axios.post(123): Promise<*>);
 
 (axios('url'): Promise<*>);
@@ -33,17 +33,17 @@ source.token.promise.then((cancel: Cancel) => {
 client.get('/something', {
   cancelToken: source.token,
 });
-// $ExpectError
+// $FlowExpectedError
 client.get('/something', {
   cancelToken: source,
 });
 
 source.cancel();
 source.cancel('canceled');
-// $ExpectError
+// $FlowExpectedError
 source.cancel(42);
 
-// $ExpectError
+// $FlowExpectedError
 client.post(232);
 
 type Data = {
@@ -68,7 +68,7 @@ axios({
     lastName: 'Flintstone'
   }
 }).then(r => {
-  // $ExpectError
+  // $FlowExpectedError
   (r.status: string);
 });
 
@@ -82,19 +82,19 @@ const extended = new AxiosExtended();
 axios.all([
   extended.specialPut('foo')
     .then((r) => {
-        // $ExpectError
+        // $FlowExpectedError
         (r.statusText: number)
     }),
     Promise.reject(12)
 ]).then(([a, b]) => {
-    // $ExpectError
+    // $FlowExpectedError
     (a: string);
 })
 
 const promise1: AxiosPromise<{ foo: string, ... }, { bar: string, ... }> = axios({ url: '/', method: 'post', data: { foo: 'bar' }})
 promise1.then(({ data }) => {
   (data.bar: string);
-  // $ExpectError
+  // $FlowExpectedError
   data.foo;
 });
 

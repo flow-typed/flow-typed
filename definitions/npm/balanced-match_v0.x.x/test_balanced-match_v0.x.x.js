@@ -6,16 +6,16 @@ balanced('{', '}', 'pre{in{nested}}post');
 balanced('{', '}', 'pre{first}between{second}post');
 balanced(/\s+\{\s+/, /\s+\}\s+/, 'pre  {   in{nest}   }  post');
 
-// $ExpectError
+// $FlowExpectedError
 balanced(42, 42, 'string');
-// $ExpectError
+// $FlowExpectedError
 balanced('{', '}', 42);
 
 
 balanced.range('{', '}', 'pre{in{nested}}post');
 balanced.range('{', '}', 'pre{first}between{second}post');
 
-// $ExpectError
+// $FlowExpectedError
 balanced.range(42, 42, 'string');
-// $ExpectError
+// $FlowExpectedError
 balanced.range('{', '}', 42);

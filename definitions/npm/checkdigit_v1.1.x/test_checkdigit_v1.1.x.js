@@ -8,30 +8,30 @@ import checkdigit from 'checkdigit';
 (checkdigit.mod11.create('234567'): string);
 (checkdigit.mod11.apply('234567'): string);
 
-// $ExpectError
+// $FlowExpectedError
 checkdigit.mod10.isValid();
-// $ExpectError
+// $FlowExpectedError
 checkdigit.mod10.create();
-// $ExpectError
+// $FlowExpectedError
 checkdigit.mod10.apply();
 
-// $ExpectError
+// $FlowExpectedError
 checkdigit.mod11.isValid();
-// $ExpectError
+// $FlowExpectedError
 checkdigit.mod11.create();
-// $ExpectError
+// $FlowExpectedError
 checkdigit.mod11.apply();
 
-// $ExpectError
+// $FlowExpectedError
 checkdigit.mod10.isValid(123);
-// $ExpectError
+// $FlowExpectedError
 checkdigit.mod10.create(123);
-// $ExpectError
+// $FlowExpectedError
 checkdigit.mod10.apply(123);
 
-// $ExpectError
+// $FlowExpectedError
 checkdigit.mod11.isValid(123);
-// $ExpectError
+// $FlowExpectedError
 checkdigit.mod11.create(123);
-// $ExpectError
+// $FlowExpectedError
 checkdigit.mod11.apply(123);

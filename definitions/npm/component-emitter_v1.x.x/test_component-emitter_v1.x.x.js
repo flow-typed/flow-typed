@@ -19,5 +19,5 @@ e ===
 e.listeners("foo").length;
 e.hasListeners("foo");
 
-// $ExpectError
+// $FlowExpectedError
 Emitter(5);

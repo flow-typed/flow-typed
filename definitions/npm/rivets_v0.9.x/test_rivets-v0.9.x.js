@@ -11,10 +11,10 @@ const el = document.createElement('div')
 const view = rivets.bind(el, {test: 'abc'})
 'function' === typeof view.unbind
 
-// $ExpectError
+// $FlowExpectedError
 rivets.bind({}, {test: 'abc'})
 
-// $ExpectError
+// $FlowExpectedError
 rivets.bind(el, ['abc'])
 
 /**
@@ -23,13 +23,13 @@ rivets.bind(el, ['abc'])
  */
 rivets.configure({prefix: 'rv'})
 
-// $ExpectError
+// $FlowExpectedError
 rivets.configure({suffix: 'rv'})
 
-// $ExpectError
+// $FlowExpectedError
 rivets.configure({preloadData: 7})
 
-// $ExpectError
+// $FlowExpectedError
 rivets.configure([7])
 
 /**
@@ -40,16 +40,16 @@ const componentView = rivets.init('test', el, {test: {prop: 7}})
 
 'function' === typeof componentView.unbind
 
-// $ExpectError
+// $FlowExpectedError
 rivets.init('abc', {}, {})
 
-// $ExpectError
+// $FlowExpectedError
 rivets.init('abc', el, [])
 
-// $ExpectError
+// $FlowExpectedError
 rivets.init(5, el, {})
 
-// $ExpectError
+// $FlowExpectedError
 rivets.init(5, el)
 
 /**
@@ -64,10 +64,10 @@ rivets.binders.testBinder = {
   routine: () => {}
 }
 
-// $ExpectError
+// $FlowExpectedError
 rivets.binders.testBinder = []
 
-// $ExpectError
+// $FlowExpectedError
 rivets.binders.testBinder = {
   binds: () => {},
   unbind: () => {},
@@ -80,14 +80,14 @@ rivets.binders.testBinder = {
  */
 rivets.formatters.testFormatter = (x) => 'abc'
 
-// $ExpectError
+// $FlowExpectedError
 rivets.formatters.formatterAssignedElsewhere()
 
 if ('function' === typeof rivets.formatters.otherFormatterAssignedElsewhere) {
   rivets.formatters.otherFormatterAssignedElsewhere()
 }
 
-// $ExpectError
+// $FlowExpectedError
 rivets.formatters.twoWay = {
   reads: () => {},
   publish: () => {}
@@ -111,7 +111,7 @@ rivets.components.testComponent = {
   }
 }
 
-// $ExpectError
+// $FlowExpectedError
 rivets.components.testComponent = { static: 'a',
   template() {
     return 'template'
@@ -132,5 +132,5 @@ rivets.components.testComponent = { static: 'a',
   set(obj, keypath, value) {},
  }
 
-// $ExpectError
+// $FlowExpectedError
 rivets.adapters['§'] = {}

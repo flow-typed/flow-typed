@@ -7,11 +7,11 @@ one$(1);
 one = one$(); // 1
 
 one$.end(true);
-// $ExpectError
+// $FlowExpectedError
 one$.end(1);
 
 const two$ = flyd.stream(2);
-// $ExpectError
+// $FlowExpectedError
 const err$ = two$.map(2);
 
 const three$ = two$.map(val => val + 1);
@@ -29,7 +29,7 @@ const max = flyd.combine(
   },
   [n1, n2]
 );
-// $ExpectError
+// $FlowExpectedError
 const min = flyd.combine(() => 0, [0, 0]);
 
 // immediate
@@ -68,7 +68,7 @@ const numbers$ = flyd.stream(0);
 const squaredNumbers$ = flyd.map(n => {
   return n * n;
 }, numbers$);
-// $ExpectError
+// $FlowExpectedError
 const noNumbers$ = flyd.map(1, numbers$);
 
 // on
@@ -87,5 +87,5 @@ const acc$ = flyd.scan(
 numbers$(2)(3)(5);
 acc$();
 
-// $ExpectError
+// $FlowExpectedError
 const scanErr = flyd.scan(null, numbers$, 3);

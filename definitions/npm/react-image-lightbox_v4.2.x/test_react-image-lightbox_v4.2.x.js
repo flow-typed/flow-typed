@@ -2,17 +2,17 @@ import React from "react";
 import Lightbox from "react-image-lightbox";
 
 function BadLightbox1() {
-  // $ExpectError
+  // $FlowExpectedError
   return <Lightbox />
 }
 
 function BadLightbox2() {
-  // $ExpectError
+  // $FlowExpectedError
   return <Lightbox mainSrc={1} />
 }
 
 function BadLightbox3() {
-  // $ExpectError
+  // $FlowExpectedError
   return <Lightbox mainSrc={1} onCloseRequest="close" />
 }
 

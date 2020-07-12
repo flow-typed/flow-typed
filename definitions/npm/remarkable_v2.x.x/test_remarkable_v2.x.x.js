@@ -24,11 +24,11 @@ describe('the Remarkable constructor', () => {
       },
     });
 
-    // $ExpectError
+    // $FlowExpectedError
     new Remarkable('');
 
     md.render('# Remarkable rulezz!');
-    // $ExpectError
+    // $FlowExpectedError
     md.render(true);
   });
 });
@@ -36,9 +36,9 @@ describe('the Remarkable constructor', () => {
 describe('the parse method', () => {
   it('should accept strings as first param', () => {
     md.parse('');
-    // $ExpectError
+    // $FlowExpectedError
     md.parse(true);
-    // $ExpectError
+    // $FlowExpectedError
     md.parse(1);
   });
 });
@@ -46,9 +46,9 @@ describe('the parse method', () => {
 describe('the parseInline method', () => {
   it('should accept strings as first param', () => {
     md.parseInline('');
-    // $ExpectError
+    // $FlowExpectedError
     md.parseInline(true);
-    // $ExpectError
+    // $FlowExpectedError
     md.parseInline(1);
   });
 });
@@ -69,7 +69,7 @@ describe('the set method', () => {
 describe('the renderInline method', () => {
   it('should accept strings as first param', () => {
     md.renderInline('');
-    // $ExpectError
+    // $FlowExpectedError
     md.renderInline(true);
   });
 });

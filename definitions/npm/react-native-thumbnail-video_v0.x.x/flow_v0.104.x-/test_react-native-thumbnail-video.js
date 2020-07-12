@@ -20,12 +20,12 @@ describe("Props", () => {
   });
 
   it("must throw error when type isn't supported", () => {
-    // $ExpectError
+    // $FlowExpectedError
     <Thumbnail url="" type="maximuMmmmm" />;
   });
 
   it("must throw error when required property 'url' is void ", () => {
-    // $ExpectError
+    // $FlowExpectedError
     <Thumbnail url={undefined} />;
   });
 
@@ -63,7 +63,7 @@ describe("helpers", () => {
     });
 
     it("must throw error when url argument isn't string", () => {
-      // $ExpectError
+      // $FlowExpectedError
       getVideoId();
     });
   });

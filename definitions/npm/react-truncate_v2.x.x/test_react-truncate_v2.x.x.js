@@ -25,7 +25,7 @@ describe('react-truncate', () => {
   });
 
   it("should fail without required parameters", () => {
-    // $ExpectError
+    // $FlowExpectedError
     <Truncate />;
   });
 });

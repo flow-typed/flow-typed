@@ -14,7 +14,7 @@ const a1: firebase.app.App = firebase.initializeApp({
 });
 
 // #2
-// $ExpectError
+// $FlowExpectedError
 const a2: firebase.app.App = firebase.initializeApp({
   storageBucker: "storageBucket",
   projectId: "42"
@@ -40,7 +40,7 @@ firebase.auth().onAuthStateChanged(user => {
     user.isAnonymous;
     user.uid;
     user.providerData;
-    // $ExpectError
+    // $FlowExpectedError
     user.foobar;
   }
 });
@@ -53,7 +53,7 @@ firebase
   })
   .then(userCredential => {
     userCredential.user;
-    // $ExpectError
+    // $FlowExpectedError
     userCredential.foobar;
   });
 
@@ -67,7 +67,7 @@ firebase
     result.additionalUserInfo;
     result.operationType;
     result.user;
-    // $ExpectError
+    // $FlowExpectedError
     result.foobar;
   });
 
@@ -75,14 +75,14 @@ firebase
 const provider2 = new firebase.auth.EmailAuthProvider();
 firebase
   .auth()
-  .currentUser // $ExpectError
+  .currentUser // $FlowExpectedError
   .linkWithPopup(provider2)
   .then(result => {
     result.credential;
     result.additionalUserInfo;
     result.operationType;
     result.user;
-    // $ExpectError
+    // $FlowExpectedError
     result.foobar;
   });
 
@@ -114,7 +114,7 @@ firebase
 // #12
 firebase
   .database()
-  .ref("users/42") // $ExpectError
+  .ref("users/42") // $FlowExpectedError
   .on("foo", snp => {
     snp.val();
   });
@@ -132,7 +132,7 @@ firebase
 firebase
   .database()
   .ref("users/42")
-  .orderByKey() // $ExpectError
+  .orderByKey() // $FlowExpectedError
   .limitToLast("foo");
 
 // #15
@@ -149,7 +149,7 @@ firebase
   .getMetadata()
   .then(metadata => {
     (metadata.bucket: string);
-    // $ExpectError
+    // $FlowExpectedError
     metadata.foo;
   })
   .catch();
@@ -161,7 +161,7 @@ firebase
   .put(new File(["foo"], "foo.txt"))
   .then(snp => {
     (snp.bytesTransferred: number);
-    // $ExpectError
+    // $FlowExpectedError
     snp.foo;
   })
   .catch();
@@ -169,7 +169,7 @@ firebase
 // #19
 firebase
   .storage()
-  .ref("/foo") // $ExpectError
+  .ref("/foo") // $FlowExpectedError
   .put("foobar");
 
 // #20
@@ -180,7 +180,7 @@ const task = firebase
 const subscribe = task.on("state_changed");
 const unsubscribe = subscribe(snp => {
   (snp.bytesTransferred: number);
-  // $ExpectError
+  // $FlowExpectedError
   snp.foo;
 });
 (unsubscribe(): void);
@@ -192,7 +192,7 @@ firebase
   .put(new File(["foo"], "foo.txt"))
   .on("state_changed", snp => {
     (snp.bytesTransferred: number);
-    // $ExpectError
+    // $FlowExpectedError
     snp.foo;
   })();
 
@@ -204,7 +204,7 @@ firebase
   .on("state_changed", {
     next: snp => {
       (snp.bytesTransferred: number);
-      // $ExpectError
+      // $FlowExpectedError
       snp.foo;
     }
   })();
@@ -213,9 +213,9 @@ firebase
 firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION);
 firebase.auth().setPersistence('local');
 
-// $ExpectError
+// $FlowExpectedError
 firebase.auth().setPersistence(firebase.auth.Auth.Persistence.FOO);
-// $ExpectError
+// $FlowExpectedError
 firebase.auth().setPersistence('foo');
 
 firebase
@@ -224,7 +224,7 @@ firebase
   .get()
   .then(snapshot => {
     (snapshot.id: string);
-    // $ExpectError
+    // $FlowExpectedError
     snapshot.foo;
   })
   .catch();
@@ -236,9 +236,9 @@ firebase
   .get()
   .then(snapshot => {
     (snapshot.id: string);
-    // $ExpectError
+    // $FlowExpectedError
     snapshot.foo;
-    // $ExpectError
+    // $FlowExpectedError
     snapshot.forEach((snapshot) => {});
   })
   .catch();
@@ -247,7 +247,7 @@ firebase
 (firebase.firestore().doc("/foo/bar").id: string);
 
 // #26
-// $ExpectError
+// $FlowExpectedError
 firebase.firestore().doc("/foo/bar").limit(4);
 
 // #27
@@ -257,7 +257,7 @@ firebase
   .get()
   .then(snapshots => {
     snapshots.forEach(snapshot => { (snapshot.id: string) });
-    // $ExpectError
+    // $FlowExpectedError
     snapshots.foo;
   })
   .catch();
@@ -275,7 +275,7 @@ firebase
   .get()
   .then(snapshots => {
     snapshots.forEach(snapshot => { (snapshot.id: string) });
-    // $ExpectError
+    // $FlowExpectedError
     snapshots.foo;
   })
   .catch();

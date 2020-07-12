@@ -17,14 +17,14 @@ describe("flush effect", () => {
     });
 
     it("returned object must be read only", () => {
-      // $ExpectError: read-only  property
+      // $FlowExpectedError: read-only  property
       c.type = "anyType";
-      // $ExpectError: read-only  property
+      // $FlowExpectedError: read-only  property
       c.payload = {};
     });
 
     it("returned object must be exact", () => {
-      // $ExpectError: exact type
+      // $FlowExpectedError: exact type
       c.abc = 69;
     });
   });
@@ -47,18 +47,18 @@ describe("flush effect", () => {
     });
 
     it("must raises an error when pass MulticastChannel", () => {
-      // $ExpectError: MulticastChannel haven"t a flush property
+      // $FlowExpectedError: MulticastChannel haven"t a flush property
       flush(multicastChannel());
 
-      // $ExpectError: MulticastChannel haven"t a flush property
+      // $FlowExpectedError: MulticastChannel haven"t a flush property
       flush(stdChannel());
     });
 
     it("must raises an error when passed invalid arguments", () => {
-      // $ExpectError: Too few arguments
+      // $FlowExpectedError: Too few arguments
       flush();
 
-      // $ExpectError: Only accept Channels
+      // $FlowExpectedError: Only accept Channels
       flush(42);
     });
   });

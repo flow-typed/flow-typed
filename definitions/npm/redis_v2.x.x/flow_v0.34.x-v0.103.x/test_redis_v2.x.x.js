@@ -35,9 +35,9 @@ describe('client', () => {
 
     client.set('some-key', 'Some value');
     client.set('some-key', 'Some value', (error: ?Error, res: 'OK') => {});
-    // $ExpectError
+    // $FlowExpectedError
     client.set('some-key');
-    // $ExpectError
+    // $FlowExpectedError
     client.set('some-key', { foo: 'bar' });
 
     // With condition
@@ -107,34 +107,34 @@ describe('client', () => {
 
 
 
-    // $ExpectError
+    // $FlowExpectedError
     client.set('some-key', 'some value', 'NX', 'EX', 1, 'NX')
 
-    // $ExpectError
+    // $FlowExpectedError
     client.set('some-key', 'some value', 'NX', 'PX', 1000, 'NX')
 
-    // $ExpectError
+    // $FlowExpectedError
     client.set('some-key', 'some value', 'EX')
 
-    // $ExpectError
+    // $FlowExpectedError
     client.set('some-key', 'some value', 'PX')
 
   })
   describe('setex', () => {
     client.setex('some-key', 12345, 'value');
     client.setex('some-key', 12345, 'value', (error: ?Error, res: 'OK') => {});
-    // $ExpectError
+    // $FlowExpectedError
     client.setx('somekey', 'value');
   })
   describe('ttl', () => {
     client.ttl('key', (error: ?Error, ttl: number) => {});
-    // $ExpectError
+    // $FlowExpectedError
     client.ttl('key', (error: ?Error, ttl: string) => {});
   })
   describe('del', () => {
     client.del(['key1', 'key2', 'key3']);
     client.del(['key1', 'key2', 'key3'], (error: ?Error, numRemoved: number) => {});
-    // $ExpectError
+    // $FlowExpectedError
     client.del(['key1', 'key2', 'key3'], (error: ?Error, numRemoved: string) => {});
 
     client.del('key1')
@@ -163,9 +163,9 @@ describe('client', () => {
       if (newLength) console.log(`New length: ${newLength}`);
     });
     client.lpush("key", "value");
-    // $ExpectError
+    // $FlowExpectedError
     client.lpush("key");
-    // $ExpectError
+    // $FlowExpectedError
     client.lpush("key", { foo: 'bar' });
   })
   describe('lrange', () => {
@@ -187,7 +187,7 @@ describe('client', () => {
     });
   })
   describe('mget', () => {
-    // $ExpectError
+    // $FlowExpectedError
     client.mget(["key1", "key2"], (error, entries: ?Array<string>) => {})
     client.mget(["key1", "key2"], (error, entries: Array<?string>) => {
       if (error === null) {
@@ -200,7 +200,7 @@ describe('client', () => {
   describe('mset', () => {
     client.mset(["key1", "value1", "key2", "value"], (error: ?Error, res: 'OK') => {});
     client.mset(["key1", "value1", "key2", "value"]);
-    // $ExpectError
+    // $FlowExpectedError
     client.mset([
       {
         key: 'key1',
@@ -216,33 +216,33 @@ describe('client', () => {
   })
   describe('hgetall', () => {
     client.hgetall("key", (error: ?Error, result: {[key: string]: string}) => {})
-    // $ExpectError
+    // $FlowExpectedError
     client.hgetall("key", "bad extra argument in past type defs", (error: ?Error, result: {[key: string]: string}) => {})
-    // $ExpectError
+    // $FlowExpectedError
     client.hgetall("key", "bad extra argument in past type defs", (error: ?Error, result: ?{[key: string]: string}) => {})
   })
   describe('hdel', () => {
     client.hdel('topic', 'key', (error: ?Error, numRemoved: number) => {});
-    // $ExpectError
+    // $FlowExpectedError
     client.hdel('topic', 'key', (error: ?Error, numRemoved: string) => {});
-    // $ExpectError
+    // $FlowExpectedError
     client.hdel('topic', 'key', (error: ?Error, res: string) => {});
   })
   describe('rpoplpush', () => {
     client.rpoplpush('source-key', 'destination-key', (error: ?Error, result: string) => {});
-    // $ExpectError
+    // $FlowExpectedError
     client.rpoplpush('source-key', 'destination-key', (error: ?Error, result: number) => {});
   })
   describe('lrem', () => {
     client.lrem('my-key', 5, 'value', (error: ?Error, count: number) => {});
-    // $ExpectError
+    // $FlowExpectedError
     client.lrem('my-key', 5, (error: ?Error, count: number) => {});
-    // $ExpectError
+    // $FlowExpectedError
     client.lrem('my-key', 5, 'value', (error: ?Error, result: string) => {});
   })
   describe('publish', () => {
     client.publish('topic', 'value', (error: ?Error, numReceivers: number) => {});
-    // $ExpectError
+    // $FlowExpectedError
     client.publish('topic', 'value', (error: ?Error, numReceivers: string) => {});
   })
 })

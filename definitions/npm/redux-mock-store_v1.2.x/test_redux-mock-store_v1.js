@@ -16,7 +16,7 @@ describe('configureStore', () => {
 
     configureStore([mockMiddleware]);
 
-    // $ExpectError
+    // $FlowExpectedError
     configureStore(['not a middleware']);
   });
 });
@@ -26,9 +26,9 @@ describe('getState', () => {
   it('returned state should be typed', () => {
     store.getState().todos[0].title;
 
-    // $ExpectError
+    // $FlowExpectedError
     store.getState().todos.title;
-    // $ExpectError
+    // $FlowExpectedError
     store.getState().somethingNotHere;
   });
 });

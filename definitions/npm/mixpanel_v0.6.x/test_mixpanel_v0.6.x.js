@@ -1,4 +1,4 @@
 import mixpanel from 'mixpanel';
 
-// $ExpectError
+// $FlowExpectedError
 mixpanel.init(2);

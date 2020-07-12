@@ -5,7 +5,7 @@ import { describe, it } from "flow-typed-test";
 
 describe("node-cache", () => {
   it("errors", () => {
-    // $ExpectError
+    // $FlowExpectedError
     new NodeCache({ nonexisting: 1 });
   });
 

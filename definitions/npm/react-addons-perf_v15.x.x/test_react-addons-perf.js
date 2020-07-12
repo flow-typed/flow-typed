@@ -9,7 +9,7 @@ const ok = () => {
 };
 
 const fail = () => {
-  // $ExpectError
+  // $FlowExpectedError
   Perf.doesntExist();
 };
 

@@ -1,14 +1,14 @@
 import { Terminal } from "xterm";
 
-// $ExpectError (Options should be an object)
+// $FlowExpectedError (Options should be an object)
 new Terminal("{}");
 new Terminal({});
 
-// $ExpectError (Can't pass invalid option)
+// $FlowExpectedError (Can't pass invalid option)
 new Terminal({ col: 1 });
 new Terminal({ cols: 1 });
 
-// $ExpectError (Options must use proper type)
+// $FlowExpectedError (Options must use proper type)
 new Terminal({ col: 1 });
 new Terminal({ cols: 1 });
 
@@ -26,25 +26,25 @@ new Terminal({
   tabStopWidth: 2
 });
 
-// $ExpectError (Can't use undefined static methods)
+// $FlowExpectedError (Can't use undefined static methods)
 Terminal.applyAddOn({});
 Terminal.applyAddon({});
 
 let terminal = new Terminal();
 
-// $ExpectError (terminal.element should be an HTMLElement)
+// $FlowExpectedError (terminal.element should be an HTMLElement)
 (terminal.element: string);
 (terminal.element: HTMLElement);
 
-// $ExpectError (terminal.textarea should be an HTMLTextAreaElement)
+// $FlowExpectedError (terminal.textarea should be an HTMLTextAreaElement)
 (terminal.textarea: number);
 (terminal.textarea: HTMLTextAreaElement);
 
-// $ExpectError (Can't use undefined instance method)
+// $FlowExpectedError (Can't use undefined instance method)
 terminal.fokus();
 terminal.focus();
 
-// $ExpectError (Instance methods should typecheck parameters)
+// $FlowExpectedError (Instance methods should typecheck parameters)
 terminal.write({ foo: "bar" });
 terminal.write("foobar");
 

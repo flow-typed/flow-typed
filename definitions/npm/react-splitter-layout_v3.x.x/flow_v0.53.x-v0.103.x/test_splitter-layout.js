@@ -48,7 +48,7 @@ it('checks it takes at least 1 pane', () => {
     </SplitterLayout>
   );
 
-  // $ExpectError
+  // $FlowExpectedError
   element = <SplitterLayout/>;
 });
 
@@ -81,7 +81,7 @@ it('checks various props', () => {
   );
 
   element = (
-    // $ExpectError
+    // $FlowExpectedError
     <SplitterLayout
       onSecondaryPaneSizeChange={(size: string) => {}}
     >
@@ -91,7 +91,7 @@ it('checks various props', () => {
   );
 
   element = (
-    // $ExpectError
+    // $FlowExpectedError
     <SplitterLayout
       primaryIndex={2}
     >

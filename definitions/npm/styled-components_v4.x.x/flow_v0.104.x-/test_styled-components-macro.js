@@ -33,16 +33,16 @@ describe('styled builtins', () => {
   })
 
   it('should not map to incorrect element', () => {
-    // $ExpectError - should be HTMLSpanElement
+    // $FlowExpectedError - should be HTMLSpanElement
     const Span1: StyledComponent<{ ... }, { ... }, HTMLDivElement> = styled.span``
 
-    // $ExpectError - should be HTMLDivElement
+    // $FlowExpectedError - should be HTMLDivElement
     const Div1: StyledComponent<{ ... }, { ... }, HTMLSpanElement> = styled.div``
 
-    // $ExpectError - Should be HTMLSpanElement
+    // $FlowExpectedError - Should be HTMLSpanElement
     const Span2: StyledComponent<{ ... }, { ... }, HTMLDivElement> = styled('span')``
 
-    // $ExpectError - should be HTMLDivElement
+    // $FlowExpectedError - should be HTMLDivElement
     const Div2: StyledComponent<{ ... }, { ... }, HTMLSpanElement> = styled('div')``
   })
 
@@ -57,19 +57,19 @@ describe('styled builtins', () => {
   })
 
   it("shouldn't style something impossible", () => {
-    // $ExpectError
+    // $FlowExpectedError
     const derp1 = styled(null)``
 
-    // $ExpectError
+    // $FlowExpectedError
     const derp2 = styled({})``
 
-    // $ExpectError
+    // $FlowExpectedError
     const derp3 = styled(1)``
 
-    // $ExpectError
+    // $FlowExpectedError
     const derp4 = styled.derp``
 
-    // $ExpectError
+    // $FlowExpectedError
     const derp5 = styled('derp')``
   })
 
@@ -98,7 +98,7 @@ describe('styled builtins', () => {
 
   it('should validate template props', () => {
     const Span: StyledComponent<{ color: string, ... }, *, *> = styled.span`
-      color: ${// $ExpectError - background is not in props
+      color: ${// $FlowExpectedError - background is not in props
       props => props.background};
     `
   })
@@ -121,7 +121,7 @@ describe('styled builtins', () => {
     const span1 = <Span color="maroon" className="marooned" />
     const span2 = <Span color="maroon" style={{padding: 5}} />
 
-    // $ExpectError - Make sure we don't break soundness when props are missing!
+    // $FlowExpectedError - Make sure we don't break soundness when props are missing!
     const span3 = <Span style={{padding: 5}} />
   })
 
@@ -134,7 +134,7 @@ describe('styled builtins', () => {
   })
 
   it('should validate theme', () => {
-    // $ExpectError - oops, someone meant accent, not primary
+    // $FlowExpectedError - oops, someone meant accent, not primary
     const Span: StyledComponent<{ color?: string, ... }, { accent: string, ... }, *> = styled.span`
       color: ${props => props.color || props.theme.primary};
     `
@@ -168,10 +168,10 @@ describe('styled builtins', () => {
       autoComplete: string,
     |}>(props => ({ autoComplete: 'off' }))``
 
-    // $ExpectError
+    // $FlowExpectedError
     const test1 = <AttrsInputExtra size="2em" autoComplete={1} type={1} /> // error
     const test2 = <AttrsInputExtra size="2em" autoComplete="on" type="text" /> // ok
-    // $ExpectError
+    // $FlowExpectedError
     const test3 = <AttrsInputExtra size="2em" type={1} /> // error
   })
 })
@@ -204,7 +204,7 @@ describe('ThemeContext', () => {
   it('typechecks the theme', () => {
     const theme = React.useContext<MyTheme>(ThemeContext);
 
-    // $ExpectError
+    // $FlowExpectedError
     theme.primaryColot
   })
 
@@ -214,7 +214,7 @@ describe('ThemeContext', () => {
 
     theme.primaryColor
 
-    // $ExpectError
+    // $FlowExpectedError
     theme.primaryColot
   })
 })
@@ -256,7 +256,7 @@ describe('css generator', () => {
 
   // Technically styled-components _does_ accept true, _but_ it usually generates wrong/nonsensical and unexpected output.
   it("doesn't accept true", () => {
-    // $ExpectError - lies!
+    // $FlowExpectedError - lies!
     const styles = css`
       ${true};
     `
@@ -277,7 +277,7 @@ describe('css generator', () => {
   })
 
   it("doesn't accept exotic/non-style objects", () => {
-    // $ExpectError - don't accept non-style objects
+    // $FlowExpectedError - don't accept non-style objects
     const styles = css`
       ${{ fun: () => null }};
     `
@@ -324,14 +324,14 @@ describe('css generator', () => {
 
     const FuncComp: React.ComponentType<*> = () => null
 
-    // $ExpectError - we don't know how to interpolate non-styled-components components
+    // $FlowExpectedError - we don't know how to interpolate non-styled-components components
     const SComp1 = styled.div`
       ${ClassComp} {
         color: pink;
       }
     `
 
-    // $ExpectError - we don't know how to interpolate non-styled-components components
+    // $FlowExpectedError - we don't know how to interpolate non-styled-components components
     const SComp2 = styled.div`
       ${FuncComp} {
         color: pink;
@@ -357,7 +357,7 @@ describe('refs', () => {
   it('errors on wrong component type', () => {
     const ref1: { current: HTMLInputElement | null, ... } = React.createRef()
     const Section = styled.section``
-    // $ExpectError - Complain about HTMLElement not being compatible wiht HTMLInputElement
+    // $FlowExpectedError - Complain about HTMLElement not being compatible wiht HTMLInputElement
     const section = <Section ref={ref1} />
   })
 
@@ -393,12 +393,12 @@ describe('withTheme', () => {
   const MyCompWT2 = withTheme(MyCompWT)
 
   it("doesn't interfere with component's own props", () => {
-    // $ExpectError - wrong prop
+    // $FlowExpectedError - wrong prop
     const mcwt2 = <MyCompWT ownProp={0} />
   })
 
   it("errors when theme should be there but isn't", () => {
-    // $ExpectError - missing theme prop
+    // $FlowExpectedError - missing theme prop
     const mc = <MyComp ownProp="own prop" />
   })
 
@@ -411,7 +411,7 @@ describe('withTheme', () => {
   it('preserves props when wrapped in two HOCs', () => {
     const mcwt1 = <MyCompWT2 ownProp="own prop" />
 
-    // $ExpectError - wrong prop
+    // $FlowExpectedError - wrong prop
     const mcwt2 = <MyCompWT2 ownProp={0} />
   })
 })
@@ -440,7 +440,7 @@ describe('wrapping components', () => {
     const hello1 = <StyledHello name="World" />
     const hello2 = <StyledHello name="World" color="maroon" />
 
-    // $ExpectError - Invalid prop type
+    // $FlowExpectedError - Invalid prop type
     const hello3 = <StyledHello name={3} />
   })
 

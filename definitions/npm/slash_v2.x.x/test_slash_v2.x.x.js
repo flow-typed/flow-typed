@@ -5,10 +5,10 @@ describe("slash()", () => {
   it("should validate", () => {
     (slash("\\path"): string);
 
-    // $ExpectError
+    // $FlowExpectedError
     (slash(): string);
 
-    // $ExpectError
+    // $FlowExpectedError
     (slash("\\path"): void);
   });
 });

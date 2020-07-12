@@ -94,7 +94,7 @@ numeral.locale();
 // 'fr'
 
 
-// $ExpectError
+// $FlowExpectedError
 const value1: string = numeral(1000).value();
-// $ExpectError
+// $FlowExpectedError
 const valueOf1: string = numeral(1000).valueOf();

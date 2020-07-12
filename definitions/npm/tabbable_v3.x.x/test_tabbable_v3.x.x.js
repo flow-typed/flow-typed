@@ -37,12 +37,12 @@ const isFocusableWithUntouchabilityChecker: boolean = tabbable.isFocusable(
 
 const isFocusable2: boolean = tabbable.isFocusable(
   document.createElement('button'),
-  // $ExpectError
+  // $FlowExpectedError
   3
 );
 
 const isTabbable2: boolean = tabbable.isFocusable(
   document.createElement('button'),
-  // $ExpectError
+  // $FlowExpectedError
   3
 );

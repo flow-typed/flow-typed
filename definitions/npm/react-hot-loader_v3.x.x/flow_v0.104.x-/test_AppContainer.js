@@ -4,7 +4,7 @@ import { AppContainer } from "react-hot-loader";
 
 let defaultErrorReporter = () => <div>error message</div>;
 
-// $ExpectError - missing children prop
+// $FlowExpectedError - missing children prop
 <div><AppContainer /></div>;
 
 // passing
@@ -14,7 +14,7 @@ let defaultErrorReporter = () => <div>error message</div>;
 
 
 
-// $ExpectError - not one child
+// $FlowExpectedError - not one child
 <AppContainer><div>some child</div><i>other</i></AppContainer>;
 
 
@@ -29,8 +29,8 @@ let defaultErrorReporter = () => <div>error message</div>;
   </AppContainer>
 </div>;
 
-// $ExpectError - errorReporter cannot return an array of children
+// $FlowExpectedError - errorReporter cannot return an array of children
 <AppContainer errorReporter={() => [1, 2, 3].map(i => <i>{i}</i>)}><div>some child</div></AppContainer>;
 
-// $ExpectError - errorReporter cannot be an array of children
+// $FlowExpectedError - errorReporter cannot be an array of children
 <AppContainer errorReporter={[1, 2, 3].map(i => <i>{i}</i>)}><div>some child</div></AppContainer>;

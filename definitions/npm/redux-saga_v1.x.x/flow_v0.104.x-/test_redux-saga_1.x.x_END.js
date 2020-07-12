@@ -8,12 +8,12 @@ describe("END", () => {
   });
 
   it("property 'type' must be read-only", () => {
-    // $ExpectError - type is read-only
+    // $FlowExpectedError - type is read-only
     END.type = "Mur Amur";
   });
 
   it("object END must be exact", () => {
-    // $ExpectError - exact type
+    // $FlowExpectedError - exact type
     END.abc = "Mur Amur";
   });
 });

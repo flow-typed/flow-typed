@@ -21,7 +21,7 @@ describe('Sanity - non-generic, primitive access', () => {
   });
 
   it('raise an error if non-string prop name provided', () => {
-    // $ExpectError
+    // $FlowExpectedError
     get(obj, 5);
   });
 });

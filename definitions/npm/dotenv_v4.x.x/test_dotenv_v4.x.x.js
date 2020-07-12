@@ -21,8 +21,8 @@ dotenv.config({
 const parsed = dotenv.parse('KEY=VALUE');
 (parsed['KEY']: string);
 
-// $ExpectError
+// $FlowExpectedError
 (parsed['KEY']: number);
 
-// $ExpectError
+// $FlowExpectedError
 (parsed[1]: string);

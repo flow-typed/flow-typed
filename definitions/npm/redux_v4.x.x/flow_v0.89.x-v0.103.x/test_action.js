@@ -9,12 +9,12 @@ describe('Action<T>', () => {
   });
 
   it('raises an error when passed an invalid type parameter', () => {
-    // $ExpectError
+    // $FlowExpectedError
     const action: Action<"increment"> = { type: "decrement" };
   });
 
   it('raises an error when missed the type property', () => {
-    // $ExpectError
+    // $FlowExpectedError
     const action: Action<string> = { payload: 1 };
   });
 

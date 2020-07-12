@@ -19,15 +19,15 @@ const geocoderMinimal = NodeGeocoder(geocoderOptionsMinimal);
 const geocoderOptionsErr1 = {
   provider: 3
 };
-// $ExpectError
+// $FlowExpectedError
 const geocoderErr1 = NodeGeocoder(geocoderOptionsErr1);
 const addressErr1 = 2;
-// $ExpectError
+// $FlowExpectedError
 geocoder.geocode(addressErr1);
 
 const geocoderOptionsErr2 = 2;
-// $ExpectError
+// $FlowExpectedError
 const geocoderErr2 = NodeGeocoder(geocoderOptionsErr2);
 const addressErr2 = null;
-// $ExpectError
+// $FlowExpectedError
 geocoder.geocode(addressErr2);

@@ -13,9 +13,9 @@ const i18n = { loadNamespaces: () => {} };
 
 <I18nextProvider i18n={ i18n } children={ <div /> } />;
 
-// $ExpectError - missing children prop
+// $FlowExpectedError - missing children prop
 <I18nextProvider i18n={ i18n } />;
-// $ExpectError - missing i18n prop
+// $FlowExpectedError - missing i18n prop
 <I18nextProvider children={ <div /> } />;
 
 
@@ -23,11 +23,11 @@ const i18n = { loadNamespaces: () => {} };
 loadNamespaces({ components: [], i18n });
 loadNamespaces({ components: [() => <div />], i18n });
 
-// $ExpectError - too few arguments
+// $FlowExpectedError - too few arguments
 loadNamespaces();
-// $ExpectError - wrong type
+// $FlowExpectedError - wrong type
 loadNamespaces('');
-// $ExpectError - wrong component type
+// $FlowExpectedError - wrong component type
 loadNamespaces({ components: [{}], i18n });
 
 type OwnProps = { s: string };
@@ -48,7 +48,7 @@ class ClassComp extends React.Component {
   }
 }
 
-// $ExpectError - wrong argument type
+// $FlowExpectedError - wrong argument type
 const FlowErrorComp = ({ s, t }: Props) => (
   <div
     prop1={ t('', '') } // misuse of t()
@@ -59,15 +59,15 @@ const FlowErrorComp = ({ s, t }: Props) => (
 class FlowErrorClassComp extends React.Component {
   props: Props;
   render() {
-    // $ExpectError - wrong argument type
+    // $FlowExpectedError - wrong argument type
     const { s, t } = this.props;
     return <div prop={ t({}) } />; // misuse of t()
   }
 }
 
-// $ExpectError - too few arguments
+// $FlowExpectedError - too few arguments
 translate();
-// $ExpectError - wrong argument type
+// $FlowExpectedError - wrong argument type
 translate({});
 
 const translator: Translator<OwnProps, Props> = translate('');
@@ -76,9 +76,9 @@ const WrappedStatelessComp = translator(Comp);
 // passing
 <WrappedStatelessComp s="" />;
 
-// $ExpectError - missing prop "s"
+// $FlowExpectedError - missing prop "s"
 <WrappedStatelessComp />;
-// $ExpectError - wrong type
+// $FlowExpectedError - wrong type
 <WrappedStatelessComp s={ 1 } />;
 
 const WrappedClassComp = translator(ClassComp);
@@ -86,16 +86,16 @@ const WrappedClassComp = translator(ClassComp);
 // passing
 <WrappedClassComp s="" />;
 
-// $ExpectError - missing prop "s"
+// $FlowExpectedError - missing prop "s"
 <WrappedClassComp />;
-// $ExpectError - wrong type
+// $FlowExpectedError - wrong type
 <WrappedClassComp s={ 1 } />;
 
 // passing
 <Interpolate />;
 <Interpolate children={ <div /> } className="string" />;
 
-// $ExpectError - className prop wrong type
+// $FlowExpectedError - className prop wrong type
 <Interpolate className={ null } />;
-// $ExpectError - children prop wrong type
+// $FlowExpectedError - children prop wrong type
 <Interpolate children={ {} } />;

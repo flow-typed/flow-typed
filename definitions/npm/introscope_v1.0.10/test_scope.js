@@ -1,9 +1,9 @@
 import { scope } from 'introscope';
 
-// $ExpectError only objects allowed
+// $FlowExpectedError only objects allowed
 scope([])
 const objectScope = scope({})
-// $ExpectError only objects allowed
+// $FlowExpectedError only objects allowed
 objectScope([])
 
 
@@ -16,8 +16,8 @@ const strictScope = scope({
 
 (strictScope.numberProperty: number);
 (strictScope.stringProperty: string);
-// $ExpectError
+// $FlowExpectedError
 (strictScope.nonExisting: boolean);
 
-// $ExpectError
+// $FlowExpectedError
 strictScope.newProperty = true

@@ -25,19 +25,19 @@ describe("filter", () => {
 
   it("fails when type refinement is incorrect", () => {
     const isString = (x): boolean %checks => typeof x === "string";
-    // $ExpectError
+    // $FlowExpectedError
     const ns: Array<number> = (filter: RefineFilter)(isString, ["1", 2]);
   });
 
   it("fails when attempting to refine from a non $Pred predicate", () => {
     const isNumber = x => typeof x === "number";
-    // $ExpectError
+    // $FlowExpectedError
     const ns: Array<number> = filter(isNumber, ["1", 2]);
   });
 
   it("does not accept predicates missing %checks when using RefineFilter", () => {
     const isNumber = x => typeof x === "number";
-    // $ExpectError
+    // $FlowExpectedError
     const ns: Array<number> = (filter: RefineFilter)(isNumber, ["1", 2]);
   });
 
@@ -48,22 +48,22 @@ describe("filter", () => {
       const result1 = filter(x => x > 1, readOnlyArrNumbers);
       (result1: $ReadOnlyArray<number>);
 
-      // $ExpectError
+      // $FlowExpectedError
       (result1: { +[key: string]: number });
-      // $ExpectError
+      // $FlowExpectedError
       (result1: { [key: string]: number });
-      // $ExpectError
+      // $FlowExpectedError
       (result1: Array<number>);
 
       const result2 = filter(x => x > 1)(readOnlyArrNumbers);
 
       (result2: $ReadOnlyArray<number>);
 
-      // $ExpectError
+      // $FlowExpectedError
       (result2: { +[key: string]: number });
-      // $ExpectError
+      // $FlowExpectedError
       (result2: { [key: string]: number });
-      // $ExpectError
+      // $FlowExpectedError
       (result2: Array<number>);
     });
 

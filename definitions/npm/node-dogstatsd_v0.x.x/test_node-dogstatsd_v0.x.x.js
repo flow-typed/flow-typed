@@ -5,14 +5,14 @@ const statsdConn = new StatsD('localhost', 8125);
 statsdConn.increment('stat.statName', 1, ['tag:value']);
 statsdConn.increment('stat.statName', 1);
 
-// $ExpectError
+// $FlowExpectedError
 statsdConn.increment(3, 1, ['tag:value']);
 
-// $ExpectError
+// $FlowExpectedError
 statsdConn.increment(3, 1, ['tag:value']);
 
-// $ExpectError
+// $FlowExpectedError
 statsdConn.decrement(3, 1, ['tag:value']);
 
-// $ExpectError
+// $FlowExpectedError
 statsdConn.decrementBy('stat.statName', 'invalidValue', ['tag:value']);

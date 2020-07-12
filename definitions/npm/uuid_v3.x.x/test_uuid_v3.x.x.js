@@ -28,17 +28,17 @@ v1({
   nsecs: 5678
 });
 
-// $ExpectError
+// $FlowExpectedError
 uuid.v1({ yolo: true });
-// $ExpectError
+// $FlowExpectedError
 v1({ yolo: true });
-// $ExpectError
+// $FlowExpectedError
 uuid.v4({ yolo: true });
-// $ExpectError
+// $FlowExpectedError
 v4({ yolo: true });
-// $ExpectError
+// $FlowExpectedError
 v3({ yolo: true });
-// $ExpectError
+// $FlowExpectedError
 v5({ yolo: true });
 
 const arr = new Array(32);
@@ -139,12 +139,12 @@ v4({
   rng: () => Buffer.alloc(16)
 });
 
-// $ExpectError
+// $FlowExpectedError
 uuid.v4({
   rng: () => "bla"
 });
 
-// $ExpectError
+// $FlowExpectedError
 v4({
   rng: () => "bla"
 });
@@ -160,7 +160,7 @@ v3(
   [0x71, 0xb4, 0xef, 0xe1, 0x67, 0x1c, 0x58, 0x36]
 );
 
-// $ExpectError
+// $FlowExpectedError
 v3("bla", { yolo: true });
 
 v5.name;
@@ -174,5 +174,5 @@ v5(
   [0x71, 0xb4, 0xef, 0xe1, 0x67, 0x1c, 0x58, 0x36]
 );
 
-// $ExpectError
+// $FlowExpectedError
 v5("bla", { yolo: true });

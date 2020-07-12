@@ -16,7 +16,7 @@ p.info({ obj: { aa: "bbb" } }, "another");
 setImmediate(p.info, "after setImmediate");
 p.error(new Error("an error"));
 
-// $ExpectError
+// $FlowExpectedError
 p("no log level");
 
 const pretty = pino.pretty();

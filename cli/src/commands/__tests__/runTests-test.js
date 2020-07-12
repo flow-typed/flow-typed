@@ -20,7 +20,7 @@ describe('run-tests (command)', () => {
       (console: any).log = origConsoleLog;
     });
 
-    it("returns error code if $ExpectError test doesn't fail", async () => {
+    it("returns error code if $FlowExpectedError test doesn't fail", async () => {
       expect(status).toEqual(1);
     });
 
