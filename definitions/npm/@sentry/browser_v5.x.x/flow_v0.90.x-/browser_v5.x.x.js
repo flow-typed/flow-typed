@@ -394,8 +394,8 @@ declare module '@sentry/browser' {
             hint?: EventHint,
         ) => Promise<SentryEvent | null> | SentryEvent | null,
 
-        +blacklistUrls?: $ReadOnlyArray<string | RegExp>,
-        +whitelistUrls?: $ReadOnlyArray<string | RegExp>,
+        +denyUrls?: $ReadOnlyArray<string | RegExp>,
+        +allowUrls?: $ReadOnlyArray<string | RegExp>,
         // This really should be typed as:
         //    | $ReadOnlyArray<Integration<any>>
         //    | (($ReadOnlyArray<Integration<any>>) => $ReadOnlyArray<Integration<any>>)
