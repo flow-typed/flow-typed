@@ -396,6 +396,9 @@ declare module '@sentry/browser' {
 
         +denyUrls?: $ReadOnlyArray<string | RegExp>,
         +allowUrls?: $ReadOnlyArray<string | RegExp>,
+        // Deprecated as of 5.18.0, prefer the allowUrls/denyUrls instead
+        +blacklistUrls?: $ReadOnlyArray<string | RegExp>,
+        +whitelistUrls?: $ReadOnlyArray<string | RegExp>,
         // This really should be typed as:
         //    | $ReadOnlyArray<Integration<any>>
         //    | (($ReadOnlyArray<Integration<any>>) => $ReadOnlyArray<Integration<any>>)
