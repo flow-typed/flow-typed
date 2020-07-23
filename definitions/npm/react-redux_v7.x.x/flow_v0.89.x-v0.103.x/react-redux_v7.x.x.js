@@ -278,6 +278,8 @@ declare module "react-redux" {
     connectAdvancedOptions: ?(ConnectAdvancedOptions & EFO),
   ): (component: Com) => React$ComponentType<OP> & $Shape<ST>;
 
+  declare export function batch(() => void): void
+
   declare export default {
     Provider: typeof Provider,
     createProvider: typeof createProvider,
@@ -286,5 +288,6 @@ declare module "react-redux" {
     useDispatch: typeof useDispatch,
     useSelector: typeof useSelector,
     useStore: typeof useStore,
+    batch: typeof batch,
   };
 }
