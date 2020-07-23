@@ -272,6 +272,7 @@ declare module "luxon" {
       DurationConfig;
     toObject(options?: {| includeConfig?: boolean |}): DurationObject;
     toString(): string;
+    valueOf(): number;
   }
 
   declare type DateTimeFromOptions = {|
