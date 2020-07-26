@@ -1,14 +1,14 @@
 type $npm$classnames$Classes =
   | string
+  | number
   | { [className: string]: *, ... }
-  | false
+  | boolean
   | void
-  | null;
+  | null
+  | $ReadOnlyArray<$npm$classnames$Classes>;
 
 declare module "classnames" {
-  declare module.exports: (
-    ...classes: Array<$npm$classnames$Classes | $npm$classnames$Classes[]>
-  ) => string;
+  declare module.exports: (...classes: Array<$npm$classnames$Classes>) => string;
 }
 
 declare module "classnames/bind" {
