@@ -780,6 +780,7 @@ dur.toObject({ includeConfig: false }).numberingSystem;
 dur.toObject({ includeConfig: false }).conversionAccuracy;
 
 (dur.toString(): string);
+(dur.valueOf(): number);
 
 (Interval.after(DateTime.utc(), Duration.fromObject({ year: 1 })): Interval);
 (Interval.after(DateTime.utc(), { year: 1 }): Interval);
