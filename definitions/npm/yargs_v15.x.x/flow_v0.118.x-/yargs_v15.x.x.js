@@ -260,6 +260,7 @@ declare module "yargs" {
     showCompletionScript(): this;
 
     showHelp(consoleLevel?: "error" | "warn" | "log"): this;
+    showHelp(printCallback: (usageData: string) => void): this;
 
     showHelpOnFail(enable: boolean, message?: string): this;
 
