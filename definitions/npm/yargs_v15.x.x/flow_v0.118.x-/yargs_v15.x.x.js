@@ -150,6 +150,7 @@ declare module "yargs" {
 
     demandOption(key: string | Array<string>, msg?: string | boolean): this;
 
+    demandCommand(): this;
     demandCommand(min: number, minMsg?: string): this;
     demandCommand(
       min: number,
