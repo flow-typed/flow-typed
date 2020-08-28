@@ -72,20 +72,12 @@ it('shouldReturnFocusAfterClose property should be a boolean', () => {
 
 it('style should be an object with optional content and overlay settings', () => {
   <ReactModal style={{}} />;
-  <ReactModal style={{
-    content: {}
-  }} />;
-  <ReactModal style={{
-    overlay: {}
-  }} />;
+  <ReactModal style={{ content: {} }} />;
+  <ReactModal style={{ overlay: {} }} />;
   // $FlowExpectedError
-  <ReactModal style={{
-    content: 1
-  }} />;
+  <ReactModal style={{ content: 1 }} />;
   // $FlowExpectedError
-  <ReactModal style={{
-    overlay: 1
-  }} />;
+  <ReactModal style={{ overlay: 1 }} />;
 });
 
 it('parentSelector property should be a callback', () => {

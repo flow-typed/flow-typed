@@ -50,20 +50,12 @@ ReactModal.setAppElement(1);
 <ReactModal parentSelector={1} />;
 
 <ReactModal style={{}} />;
-<ReactModal style={{
-  content: {}
-}} />;
-<ReactModal style={{
-  overlay: {}
-}} />;
+<ReactModal style={{ content: {} }} />;
+<ReactModal style={{ overlay: {} }} />;
 // $FlowExpectedError
-<ReactModal style={{
-  content: 1
-}} />;
+<ReactModal style={{ content: 1 }} />;
 // $FlowExpectedError
-<ReactModal style={{
-  overlay: 1
-}} />;
+<ReactModal style={{ overlay: 1 }} />;
 
 <ReactModal appElement={document.body} />;
 <ReactModal appElement="#foo" />;
