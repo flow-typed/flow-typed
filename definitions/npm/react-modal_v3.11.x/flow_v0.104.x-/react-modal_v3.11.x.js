@@ -15,6 +15,7 @@ declare module 'react-modal' {
       overlay?: { [key: string]: string | number, ... },
       ...
     },
+    id?: string,
     className?: string | {
       base: string,
       afterOpen: string,

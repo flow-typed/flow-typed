@@ -18,6 +18,7 @@ declare module 'react-modal' {
         [key: string]: string | number
       }
     },
+    id?: string,
     className?: string | {
       base: string,
       afterOpen: string,
