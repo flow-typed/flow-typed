@@ -28,7 +28,7 @@ declare module 'react-modal' {
       beforeClose: string,
       ...
     },
-    onAfterOpen?: () => void | Promise<void>,
+    onAfterOpen?: ({ overlayEl: HTMLElement, contentEl: HTMLElement, ... }) => void | Promise<void>,
     onAfterClose?: () => void | Promise<void>,
     onRequestClose?: (SyntheticEvent<>) => void,
     aria?: { [key: string]: string, ... },
