@@ -3,17 +3,17 @@ import isCompressed from 'is-compressed';
 isCompressed('any-string');
 (isCompressed('any-string'): boolean);
 
-// $ExpectError
+// $FlowExpectedError
 isCompressed(4);
 
-// $ExpectError
+// $FlowExpectedError
 isCompressed({});
 
-// $ExpectError
+// $FlowExpectedError
 isCompressed();
 
-// $ExpectError
+// $FlowExpectedError
 isCompressed(null);
 
-// $ExpectError
+// $FlowExpectedError
 (isCompressed('any-string'): number);

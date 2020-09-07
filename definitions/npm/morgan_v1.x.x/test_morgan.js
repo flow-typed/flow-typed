@@ -7,7 +7,7 @@ morgan('combined')
 morgan('common')
 morgan('short')
 morgan('tiny')
-// $ExpectError
+// $FlowExpectedError
 morgan({});
 
 // a format string
@@ -30,5 +30,5 @@ const formatLine: FormatFn = (tokens: TokenIndexer, req: any, res: any): string 
 
 morgan.format('dev-extended', formatLine);
 
-// $ExpectError
+// $FlowExpectedError
 morgan.format(formatLine);

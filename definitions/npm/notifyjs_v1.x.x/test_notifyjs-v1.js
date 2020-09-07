@@ -2,9 +2,9 @@
 import Notify from 'notifyjs';
 
 (Notify.isSupported(): bool);
-// $ExpectError
+// $FlowExpectedError
 (Notify.show(): void);
-// $ExpectError
+// $FlowExpectedError
 (Notify('notification'): Notify);
 (Notify('notification', {}).show(): void);
 (Notify('notification', { body: 'foo' }).show(): void);

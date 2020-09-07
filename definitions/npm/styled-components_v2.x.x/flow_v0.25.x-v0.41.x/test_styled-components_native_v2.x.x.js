@@ -42,7 +42,7 @@ const NativeOpacityKeyFrame = nativeKeyframes`
   100% { opacity: 1; }
 `;
 
-// $ExpectError
+// $FlowExpectedError
 const NativeNoExistingElementWrapper = nativeStyled.nonexisting`
   padding: 4em;
   background: papayawhip;
@@ -50,13 +50,13 @@ const NativeNoExistingElementWrapper = nativeStyled.nonexisting`
 
 const nativeNum = 9
 
-// $ExpectError
+// $FlowExpectedError
 const NativeNoExistingComponentWrapper = nativeStyled()`
   padding: 4em;
   background: papayawhip;
 `;
 
-// $ExpectError
+// $FlowExpectedError
 const NativeNumberWrapper = nativeStyled(num)`
   padding: 4em;
   background: papayawhip;

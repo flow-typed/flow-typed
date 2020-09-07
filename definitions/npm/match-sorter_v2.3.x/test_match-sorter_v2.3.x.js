@@ -5,12 +5,12 @@ import { describe, it } from 'flow-typed-test';
 
 describe('rankings', () => {
   it('should be a number', () => {
-    // $ExpectError
+    // $FlowExpectedError
     const startsWith: string = rankings.STARTS_WITH;
   });
 
   it('should fail on unknown ranking', () => {
-    // $ExpectError
+    // $FlowExpectedError
     rankings.foo;
   });
 });
@@ -19,12 +19,12 @@ describe('matchSorter', () => {
   const sampleCollection = [{ baz: '1' }, { baz: '2' }, { baz: 'foooooo' }];
 
   it('should fail with invalid collection', () => {
-    // $ExpectError
+    // $FlowExpectedError
     matchSorter(1, 'foo');
   });
 
   it('query should be a string', () => {
-    // $ExpectError
+    // $FlowExpectedError
     matchSorter([], 2);
   });
 
@@ -33,13 +33,13 @@ describe('matchSorter', () => {
   });
 
   it('should fail on invalid search options', () => {
-    // $ExpectError
+    // $FlowExpectedError
     matchSorter(sampleCollection, 'foo', { foo: bar });
 
-    // $ExpectError
+    // $FlowExpectedError
     matchSorter(sampleCollection, 'foo', { invalidProp: 'bar' });
 
-    // $ExpectError
+    // $FlowExpectedError
     matchSorter(sampleCollection, 'foo', { keys: 1 });
   });
 
@@ -60,7 +60,7 @@ describe('matchSorter', () => {
   });
 
   it('should fail on unknown property in object key accessor', () => {
-    // $ExpectError
+    // $FlowExpectedError
     matchSorter(sampleCollection, 'foo', { keys: [{ foo: 'baz' }] });
   });
 });

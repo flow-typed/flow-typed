@@ -8,14 +8,14 @@ const cache: LRUCache<string, number> = LRU({});
 
 cache.set('5', 5);
 
-// $ExpectError
+// $FlowExpectedError
 cache.set(5, 5);
-// $ExpectError
+// $FlowExpectedError
 cache.set('5', '5');
 
 (cache.get('3'): number);
-// $ExpectError
+// $FlowExpectedError
 (cache.get('3'): string);
 
-// $ExpectError
+// $FlowExpectedError
 LRU({max: {}});

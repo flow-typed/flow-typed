@@ -3,17 +3,17 @@ import isAbsoluteUrl from 'is-absolute-url';
 isAbsoluteUrl('any-string');
 (isAbsoluteUrl('any-string'): boolean);
 
-// $ExpectError
+// $FlowExpectedError
 isAbsoluteUrl(4);
 
-// $ExpectError
+// $FlowExpectedError
 isAbsoluteUrl({});
 
-// $ExpectError
+// $FlowExpectedError
 isAbsoluteUrl();
 
-// $ExpectError
+// $FlowExpectedError
 isAbsoluteUrl(null);
 
-// $ExpectError
+// $FlowExpectedError
 (isAbsoluteUrl('any-string'): number);

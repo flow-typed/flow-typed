@@ -18,5 +18,5 @@ let asBase64: string;
 asBase64 = base64url.toBase64(asBase64url);
 asBase64url = base64url.fromBase64(asBase64);
 
-// $ExpectError
+// $FlowExpectedError
 asBuffer = base64url.decode(asBase64url);

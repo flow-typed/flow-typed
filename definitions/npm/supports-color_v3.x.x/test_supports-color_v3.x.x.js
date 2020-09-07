@@ -16,9 +16,9 @@ if (supportsColor) {
     console.log('Terminal supports 16 million colors (truecolor)');
   }
 
-  // $ExpectError
+  // $FlowExpectedError
   supportsColor.nope;
 
-  // $ExpectError
+  // $FlowExpectedError
   (supportsColor.level: string);
 }

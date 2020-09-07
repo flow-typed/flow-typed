@@ -17,7 +17,7 @@ async function test() {
 
   const baz = await idbKeyval.get('baz');
 
-  // $ExpectError
+  // $FlowExpectedError
   await idbKeyval.get();
 
   idbKeyval.keys().then(keys => keys.map(k => k.toUpperCase()));

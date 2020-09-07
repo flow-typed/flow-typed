@@ -8,7 +8,7 @@ const auth: firebase.auth.Auth = firebase.auth(app);
 const db: firebase.database.Database = firebase.database();
 const ref: firebase.database.Reference = db.ref('test');
 
-// $ExpectError number. This type is incompatible
+// $FlowExpectedError number. This type is incompatible
 const ref2 = db.ref(100);
 
 const provider = new firebase.auth.GoogleAuthProvider();
@@ -17,7 +17,7 @@ firebase.auth()
     .signInWithPopup(provider)
     .then((result) => {
       let user = result.user;
-      // $ExpectError
+      // $FlowExpectedError
       firebase.auth().logOut();
       firebase.auth().signOut();
     })
@@ -37,7 +37,7 @@ firebase.database().ref('users/' + userId).set({
 });
 firebase.database().ref('test').set(null);
 
-// $ExpectError update should receive an object
+// $FlowExpectedError update should receive an object
 firebase.database().ref('test').update("test");
 
 const userRef = firebase.database().ref('users/' + userId);

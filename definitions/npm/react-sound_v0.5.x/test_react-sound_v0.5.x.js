@@ -1,12 +1,12 @@
 import Sound from 'react-sound';
 
-// $ExpectError
+// $FlowExpectedError
 let error = <Sound/>;
 
-// $ExpectError
-let error = <Sound url="http://example.com/example.mp3"/>;
+// $FlowExpectedError
+let error2 = <Sound url="http://example.com/example.mp3"/>;
 
-// $ExpectError
-let error = <Sound playStatus={Sound.status.PLAYING}/>;
+// $FlowExpectedError
+let error3 = <Sound playStatus={Sound.status.PLAYING}/>;
 
 let success = <Sound url="http://example.com/example.mp3" playStatus={Sound.status.PLAYING}/>;

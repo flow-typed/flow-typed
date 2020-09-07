@@ -11,10 +11,13 @@ const wrapper = renderer.create(<Example />);
 const { root } = wrapper;
 const instance = wrapper.getInstance();
 
-// $ExpectError
+// $FlowExpectedError
 renderer.create(NaN);
 
 // ShallowRenderer
 const shallowRenderer = new ShallowRenderer()
 const shallowWrapper = shallowRenderer.render(<Example />)
 const shallowInstance = shallowRenderer.getRenderOutput()
+
+// Act
+renderer.act(() => {});

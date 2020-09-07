@@ -3,5 +3,5 @@
 import {ReactShallowRender, createRenderer} from 'react-addons-test-utils';
 
 (createRenderer(): ReactShallowRender);
-// $ExpectError
+// $FlowExpectedError
 (createRenderer(): number);

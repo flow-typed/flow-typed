@@ -44,25 +44,25 @@ reduceFunctionCall(
 );
 // "sha bla !h blaa ABRACADABRA a! aabla() blaaa()"123
 
-// $ExpectError
+// $FlowExpectedError
 reduceFunctionCall(123, 'foo', body => parseInt(body, 10) + 1);
-// $ExpectError
+// $FlowExpectedError
 reduceFunctionCall('foo(1)', 123, body => parseInt(body, 10) + 1);
-// $ExpectError
+// $FlowExpectedError
 reduceFunctionCall('foo(1)', 'foo', 'string');
-// $ExpectError
+// $FlowExpectedError
 reduceFunctionCall('foo(1)', 'foo', body => body * 5);
 
 reduceFunctionCall(
   'foo(1)',
   'foo',
-  // $ExpectError
+  // $FlowExpectedError
   (body, functionIdentifier) => functionIdentifier * 5
 );
 
 reduceFunctionCall(
   'foo(1)',
   'foo',
-  // $ExpectError
+  // $FlowExpectedError
   (body, functionIdentifier, call) => call * 5
 );

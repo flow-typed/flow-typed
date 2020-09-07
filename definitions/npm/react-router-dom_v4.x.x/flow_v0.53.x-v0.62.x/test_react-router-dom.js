@@ -8,7 +8,11 @@ import {
   matchPath,
   withRouter
 } from "react-router-dom";
-import type { ContextRouter, Match } from "react-router-dom";
+import type {
+  ContextRouter,
+  Match,
+  RouterHistory
+} from "react-router-dom";
 
 // BrowserRouter
 <BrowserRouter>
@@ -23,7 +27,7 @@ import type { ContextRouter, Match } from "react-router-dom";
   <div />
 </BrowserRouter>;
 
-// $ExpectError
+// $FlowExpectedError
 <BrowserRouter basename={{}} />;
 
 // HashRouter
@@ -38,7 +42,7 @@ import type { ContextRouter, Match } from "react-router-dom";
   <div />
 </HashRouter>;
 
-// $ExpectError
+// $FlowExpectedError
 <HashRouter hashType="magic" />;
 
 // Link
@@ -57,7 +61,7 @@ import type { ContextRouter, Match } from "react-router-dom";
   About
 </Link>;
 
-// $ExpectError
+// $FlowExpectedError
 <Link to={[]} />;
 
 // NavLink
@@ -85,8 +89,20 @@ import type { ContextRouter, Match } from "react-router-dom";
   About
 </NavLink>;
 
-// $ExpectError
+// $FlowExpectedError
 <NavLink />;
+
+const IncorrectHistoryBlockUsage = (history: RouterHistory) => {
+  // Wrong arguments here
+  // $FlowExpectedError
+  history.block(false);
+
+  // These are valid
+  history.block('Are you sure you want to leave this page?');
+  history.block((location, action) => {
+    return 'Are you sure you want to leave this page?';
+  });
+};
 
 // matchPath
 const match: null | Match = matchPath("/the/pathname", {
@@ -99,9 +115,9 @@ const match2: null | Match = matchPath("/the/pathname", {
 });
 const match3: null | Match = matchPath("/the/pathname");
 
-// $ExpectError
+// $FlowExpectedError
 matchPath();
-// $ExpectError
+// $FlowExpectedError
 const matchError: string = matchPath("/the/pathname", {
   path: "the/:dynamicId"
 });
@@ -115,7 +131,7 @@ const Routed1: React$ComponentType<{| someProp: string |}> = withRouter(
   Unrouted
 );
 
-// $ExpectError: This error bubbles up from the assignment in Routed2.
+// $FlowExpectedError: This error bubbles up from the assignment in Routed2.
 const Unrouted2: React$ComponentType<{|
   ...ContextRouter,
   someProp: string

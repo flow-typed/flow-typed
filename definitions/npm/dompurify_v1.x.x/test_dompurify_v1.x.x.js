@@ -14,11 +14,12 @@ const dirty = `
 describe('#createDOMPurify', () => {
   it('should add/remove hook', () => {
     DOMPurify.addHook('beforeSanitizeElements', (currentNode, data, config) => {
-      return currentNode;
+      // nothing; despite DOMPurify's README, returning currentNode does nothing
     });
 
-    // $ExpectError
+    // $FlowExpectedError
     DOMPurify.addHook('invalidHookName', (currentNode, data, config) => {
+      // $FlowExpectedError
       return currentNode;
     });
 
@@ -32,12 +33,12 @@ describe('#createDOMPurify', () => {
   });
 
   it('should sanitize to string', () => {
-    // $ExpectError
+    // $FlowExpectedError
     DOMPurify.sanitize(dirty, {
       ALLOWED_TAGS: ['invalid'],
     });
 
-    // $ExpectError
+    // $FlowExpectedError
     DOMPurify.sanitize(dirty, {
       INVALID_ARG: 42,
     });

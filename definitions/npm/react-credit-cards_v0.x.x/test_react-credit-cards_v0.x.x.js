@@ -50,7 +50,7 @@ describe('react-credit-cards', () => {
   });
 
   it("should fail without required parameters", () => {
-    // $ExpectError
+    // $FlowExpectedError
     <ReactCreditCard />;
   });
 });

@@ -4,8 +4,8 @@ const a: boolean = multiTypeof(3, 'number');
 
 const b: boolean = multiTypeof(3, ['number', 'string']);
 
-// $ExpectError
+// $FlowExpectedError
 multiTypeof(3, 3);
 
-// $ExpectError
+// $FlowExpectedError
 (multiTypeof('hello', 'number'): number);

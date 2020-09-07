@@ -5,7 +5,8 @@ import {
   Link,
   NavLink,
   matchPath,
-  type Match
+  type Match,
+  type RouterHistory
 } from "react-router-dom";
 
 // BrowserRouter
@@ -21,7 +22,7 @@ import {
   <div />
 </BrowserRouter>;
 
-// $ExpectError
+// $FlowExpectedError
 <BrowserRouter basename={{}} />;
 
 // HashRouter
@@ -36,7 +37,7 @@ import {
   <div />
 </HashRouter>;
 
-// $ExpectError
+// $FlowExpectedError
 <HashRouter hashType="magic" />;
 
 // Link
@@ -55,7 +56,7 @@ import {
   About
 </Link>;
 
-// $ExpectError
+// $FlowExpectedError
 <Link to={[]} />;
 
 // NavLink
@@ -83,8 +84,20 @@ import {
   About
 </NavLink>;
 
-// $ExpectError
+// $FlowExpectedError
 <NavLink />;
+
+const IncorrectHistoryBlockUsage = (history: RouterHistory) => {
+  // Wrong arguments here
+  // $FlowExpectedError
+  history.block(false);
+
+  // These are valid
+  history.block('Are you sure you want to leave this page?');
+  history.block((location, action) => {
+    return 'Are you sure you want to leave this page?';
+  });
+};
 
 // matchPath
 const match: null | Match = matchPath("/the/pathname", {
@@ -97,9 +110,9 @@ const match2: null | Match = matchPath("/the/pathname", {
 });
 const match3: null | Match = matchPath("/the/pathname");
 
-// $ExpectError
+// $FlowExpectedError
 matchPath();
-// $ExpectError
+// $FlowExpectedError
 const matchError: string = matchPath("/the/pathname", {
   path: "the/:dynamicId"
 });

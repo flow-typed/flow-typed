@@ -5,8 +5,8 @@ import eightball from 'eightball';
 (eightball(): string);
 (eightball.predictions: Array<string>);
 
-// $ExpectError
+// $FlowExpectedError
 (eightball(): number);
 
-// $ExpectError
+// $FlowExpectedError
 (eightball.predictions: string);

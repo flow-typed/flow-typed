@@ -1078,8 +1078,8 @@ declare module "ramda" {
   }
 
   declare class RType {
-    is(ctor: Class<any>, instance: any): boolean;
-    is(ctor: Class<any>): (instance: any) => boolean;
+    is(ctor: Class<mixed>, instance: mixed): boolean;
+    is(ctor: Class<mixed>): (instance: mixed) => boolean;
     isArrayLike(x: any): boolean;
     isNil(x: ?any): boolean;
     propIs(ctor: any, prop: string, o: Object): boolean;

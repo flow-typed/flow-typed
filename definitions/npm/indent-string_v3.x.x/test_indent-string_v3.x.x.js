@@ -8,8 +8,8 @@ const b: string = indentString('Unicorns\nRainbows', 4, '♥');
 //=> '♥♥♥♥Unicorns'
 //=> '♥♥♥♥Rainbows'
 
-// $ExpectError
+// $FlowExpectedError
 indentString(42);
 
-// $ExpectError
+// $FlowExpectedError
 (indentString('Unicorns\nRainbows', 4): number);

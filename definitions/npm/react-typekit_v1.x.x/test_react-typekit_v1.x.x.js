@@ -1,4 +1,4 @@
 import Typekit from 'react-typekit'
 
-// $ExpectError
+// $FlowExpectedError
 const test = <Typekit/>

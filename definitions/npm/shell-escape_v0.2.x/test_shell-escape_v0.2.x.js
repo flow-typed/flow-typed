@@ -4,5 +4,5 @@ import shellescape from 'shell-escape';
 
 (shellescape(['echo', 'hello!']): string);
 
-// $ExpectError
+// $FlowExpectedError
 shellescape();

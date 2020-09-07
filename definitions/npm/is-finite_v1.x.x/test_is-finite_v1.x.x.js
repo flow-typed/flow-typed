@@ -6,5 +6,5 @@ const a: boolean = numIsFinite(4);
 const b: boolean = numIsFinite(Infinity);
 //=> false
 
-// $ExpectError
+// $FlowExpectedError
 (numIsFinite(4): string);

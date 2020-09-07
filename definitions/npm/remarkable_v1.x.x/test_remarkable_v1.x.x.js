@@ -4,27 +4,27 @@ import Remarkable from 'remarkable';
 
 /* Trivial case */
 
-// $ExpectError
+// $FlowExpectedError
 remarkable.foo();
 
 const rmk = new Remarkable();
 
-// $ExpectError
+// $FlowExpectedError
 rmk.foo();
 
 
 /* Remarkable#parse() */
 rmk.parse('');
-// $ExpectError
+// $FlowExpectedError
 rmk.parse(true);
-// $ExpectError
+// $FlowExpectedError
 rmk.parse(1);
 
 /* Remarkable#parseInline() */
 rmk.parseInline('');
-// $ExpectError
+// $FlowExpectedError
 rmk.parseInline(true);
-// $ExpectError
+// $FlowExpectedError
 rmk.parseInline(1);
 
 /* Remarkable#set() */
@@ -39,10 +39,10 @@ rmk.set({ highlight: (str: string, lang: string) => '' });
 
 /* Remarkable#render() */
 rmk.render('');
-// $ExpectError
+// $FlowExpectedError
 rmk.render(true);
 
 /* Remarkable#renderInline() */
 rmk.renderInline('');
-// $ExpectError
+// $FlowExpectedError
 rmk.renderInline(true);

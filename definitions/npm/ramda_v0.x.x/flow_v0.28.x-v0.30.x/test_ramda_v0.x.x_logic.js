@@ -15,7 +15,7 @@ const isQueen = _.propEq('rank', 'Q')
 const isSpade = _.propEq('suit', '♠︎')
 const isQueenOfSpades = _.allPass([ isQueen, isSpade ])
 
-//$ExpectError
+//$FlowExpectedError
 const allp: boolean = isQueenOfSpades(1)
 const allp1: boolean = isQueenOfSpades({ rank: 'Q', suit: '♣︎' })
 
@@ -25,18 +25,18 @@ const a_: (a: boolean) => boolean = _.and(true)
 const gte = _.anyPass([ _.gt, _.equals ])
 const ge: boolean = gte(3, 2)
 
-//$ExpectError
+//$FlowExpectedError
 const gt10 = x => x > 10
 const even = x => x % 2 === 0
 const f = _.both(gt10, even)
 
-//$ExpectError
+//$FlowExpectedError
 const b: boolean = f('')
 const b_: boolean = f(100)
 
 const isEven = n => n % 2 === 0
 const isOdd = _.complement(isEven)
-//$ExpectError
+//$FlowExpectedError
 const c: boolean = isOdd('')
 const c_: boolean = isOdd(2)
 
@@ -68,7 +68,7 @@ const ie2: number|string = incCount(1)
 const em: boolean = _.isEmpty([ 1, 2, 3 ])
 
 const n: boolean = _.not(true)
-//$ExpectError
+//$FlowExpectedError
 const n1: boolean = _.not(1)
 
 const oor: boolean = _.or(true, true)
@@ -76,7 +76,7 @@ const oor: boolean = _.or(true, true)
 // type refinement is important here
 // which might be awkward for some
 // but can actually catch some bugs statically
-//$ExpectError
+//$FlowExpectedError
 const psatE: boolean = _.pathSatisfies(y => y > 0, [ 'x', 'y' ], { x: { y: 2 } })
 const psat: boolean = _.pathSatisfies(y => typeof y === 'number' && y > 0, [ 'x', 'y' ], { x: { y: 2 } })
 

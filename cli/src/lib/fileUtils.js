@@ -1,8 +1,6 @@
 // @flow
 
-import fsExtra from 'fs-extra';
-
-import mkdirpCb from 'mkdirp';
+import mkdirpLib from 'mkdirp';
 
 import {fs, path} from './node.js';
 
@@ -10,7 +8,7 @@ const P = Promise;
 
 export function copyDir(srcPath: string, destPath: string): Promise<void> {
   return new Promise((res, rej) => {
-    fsExtra.copy(srcPath, destPath, err => {
+    fs.copy(srcPath, destPath, err => {
       if (err) {
         rej(err);
       } else {
@@ -67,15 +65,7 @@ export async function getFilesInDir(
 }
 
 export function mkdirp(path: string): Promise<*> {
-  return new Promise((res, rej) => {
-    mkdirpCb(path, err => {
-      if (err) {
-        rej(err);
-      } else {
-        res();
-      }
-    });
-  });
+  return mkdirpLib(path);
 }
 
 export async function recursiveRmdir(dirPath: string): Promise<void> {

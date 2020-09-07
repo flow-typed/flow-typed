@@ -1197,7 +1197,8 @@ declare module "rxjs/operators" {
     takeUntil<+T>(other: rxjs$Observable<any>): rxjs$Observable<T> => rxjs$Observable<T>;
 
     takeWhile<+T>(
-      predicate: (value: T, index: number) => boolean
+      predicate: (value: T, index: number) => boolean,
+      inclusive?: boolean
     ): rxjs$Observable<T> => rxjs$Observable<T>;
 
     tap: (<+T>(

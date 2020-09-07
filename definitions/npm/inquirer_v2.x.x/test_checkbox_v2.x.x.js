@@ -2,7 +2,7 @@
 
 var inquirer = require('inquirer');
 
-// $ExpectError: Only accepts questions as Object / Array
+// $FlowExpectedError: Only accepts questions as Object / Array
 inquirer.prompt('foo');
 
 inquirer.prompt([

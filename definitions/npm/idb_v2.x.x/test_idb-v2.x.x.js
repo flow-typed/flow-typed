@@ -16,15 +16,15 @@ async function test() {
 
   store.put(await store.get('hello'), 'foo');
 
-  // $ExpectError
+  // $FlowExpectedError
   store.getKey();
 
-  // $ExpectError
+  // $FlowExpectedError
   store.iterateCursor();
 
-  // $ExpectError
+  // $FlowExpectedError
   store.createIndex();
-  // $ExpectError
+  // $FlowExpectedError
   store.createIndex('foo');
 
   const range: IDBKeyRange = (null: any);

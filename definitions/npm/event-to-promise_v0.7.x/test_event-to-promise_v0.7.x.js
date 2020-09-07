@@ -6,7 +6,7 @@ import EventEmitter from 'events';
 const emitter = new EventEmitter();
 const xhr = new XMLHttpRequest();
 
-// $ExpectError
+// $FlowExpectedError
 eventToPromise(emitter);
 
 const waitForData: Promise<Buffer> = eventToPromise(emitter, 'data');

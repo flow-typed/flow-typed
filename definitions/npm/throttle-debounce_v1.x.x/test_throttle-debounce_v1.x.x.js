@@ -13,7 +13,7 @@ const d2: string = debounce(1, () => '')()
 
 debounce(1, true, () => '')
 
-// $ExpectError
+// $FlowExpectedError
 debounce(() => '')
-// $ExpectError
+// $FlowExpectedError
 throttle(() => '')

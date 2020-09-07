@@ -83,7 +83,7 @@ const obb = {
   },
 }
 const doStuff: (x: string, y: number, z: boolean, obj: typeof obb) => number = _.invoker(3, 'doStuff')
-//$ExpectError
+//$FlowExpectedError
 const doLessStuff: (x: string, y: number, z: boolean, obj: typeof obb) => number = _.invoker(3, 'doLStuff')
 const stuffDone: number = doStuff('dd', 1, true, obb)
 

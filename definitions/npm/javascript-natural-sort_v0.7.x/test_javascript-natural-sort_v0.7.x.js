@@ -7,8 +7,8 @@ import naturalSort from 'javascript-natural-sort';
 
 naturalSort('10.04f','10.039F');
 
-// $ExpectError
+// $FlowExpectedError
 naturalSort();
 
-// $ExpectError
+// $FlowExpectedError
 naturalSort(['192.168.0.100','192.168.0.1']);

@@ -8,7 +8,7 @@ import Router from "koa-router";
  * Test Global KoaRouter$Middleware type
  */
 
-// $ExpectError
+// $FlowExpectedError
 const badMiddleware: KoaRouter$Middleware = 10;
 const goodMiddleware: KoaRouter$Middleware = async (ctx, next) => {};
 
@@ -16,7 +16,7 @@ const goodMiddleware: KoaRouter$Middleware = async (ctx, next) => {};
  * Test Router instantiation
  */
 
-// $ExpectError
+// $FlowExpectedError
 const badRouter = new Router({ prefix: 10 });
 const goodRouter = new Router({ prefix: "/api" });
 
@@ -24,7 +24,7 @@ const goodRouter = new Router({ prefix: "/api" });
  * Test Router methods
  */
 
-// $ExpectError
+// $FlowExpectedError
 goodRouter.get(10);
 goodRouter.get("/", async ctx => {
   ctx.body = "Hello World";
@@ -32,13 +32,13 @@ goodRouter.get("/", async ctx => {
 goodRouter.get(["/", "/foo"], ctx => {});
 goodRouter.get(["/", "/foo"], ctx => {}, ctx => {});
 
-// $ExpectError
+// $FlowExpectedError
 goodRouter.use(10);
 goodRouter.use(async ctx => {});
 goodRouter.use("/foo", async ctx => {});
 
 goodRouter.param("foo", async ctx => {
-  // $ExpectError
+  // $FlowExpectedError
   console.log(ctx.params.foo);
 });
 goodRouter.param("foo", async (foo, ctx) => {});

@@ -20,18 +20,18 @@ describe('rethinkdb', () => {
     it('should allow insertion of right types', () => {
       table.insert({foo: true})
       table.insert({foo: true, id: 'bar'})
-      // $ExpectError
+      // $FlowExpectedError
       table.insert({foo: true, id: 'bar', baz: true})
     })
     it('should return changes with appropriate options', async () => {
       const res = await table.insert({foo: true, id: 'bar'}).run(await connectionP)
       const i: number = res.inserted
-      // $ExpectError
+      // $FlowExpectedError
       const a0: Array<*> = res.changes
 
       const res2 = await table.insert({foo: true, id: 'bar'}, {returnChanges: false}).run(await connectionP)
       const i2: number = res2.inserted
-      // $ExpectError
+      // $FlowExpectedError
       res2.changes
 
       const res3 = await table.insert({foo: true, id: 'bar'}, {returnChanges: true}).run(await connectionP)
@@ -47,17 +47,17 @@ describe('rethinkdb', () => {
     it('should allow update of right types', () => {
       table.get('lal').update({foo: true})
       table.get('lal').update({foo: true, id: 'bar'})
-      // $ExpectError
+      // $FlowExpectedError
       table.get('lal').update({foo: true, id: 'bar', baz: true})
     })
     it('should return changes with appropriate options', async () => {
       const res = await table.get('lal').update({foo: true, id: 'bar'}).run(await connectionP)
       const i: number = res.replaced
-      // $ExpectError
+      // $FlowExpectedError
       res.changes
       const res2 = await table.get('lal').update({foo: true, id: 'bar'}, {returnChanges: false}).run(await connectionP)
       const i2: number = res2.replaced
-      // $ExpectError
+      // $FlowExpectedError
       res2.changes
 
       const res3 = await table.get('lal').update({foo: true, id: 'bar'}, {returnChanges: true}).run(await connectionP)
@@ -76,11 +76,11 @@ describe('rethinkdb', () => {
     it('should return changes with appropriate options', async () => {
       const res = await table.get('lal').delete().run(await connectionP)
       const i: number = res.deleted
-      // $ExpectError
+      // $FlowExpectedError
       res.changes
       const res2 = await table.get('lal').delete({returnChanges: false}).run(await connectionP)
       const i2: number = res2.deleted
-      // $ExpectError
+      // $FlowExpectedError
       res2.changes
 
       const res3 = await table.get('lal').delete({returnChanges: true}).run(await connectionP)
@@ -96,7 +96,7 @@ describe('rethinkdb', () => {
     it('should only allow getting key of object', () => {
       table.getField('id')
       table.getField('bar')
-      // $ExpectError
+      // $FlowExpectedError
       table.getField('baz')
     })
   })
@@ -106,10 +106,10 @@ describe('rethinkdb', () => {
     })
     it('should take predicate', async () => {
       table.count({bar: 1}).run(await connectionP)
-      // $ExpectError
+      // $FlowExpectedError
       table.count({baz: 1}).run(await connectionP)
       table.count((a) => a.foo).run(await connectionP)
-      // $ExpectError
+      // $FlowExpectedError
       table.count((a) => a.baz).run(await connectionP)
     })
   })

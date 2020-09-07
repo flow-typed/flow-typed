@@ -6,10 +6,13 @@ import _, {
   curry,
   filter,
   find,
+  is,
   isNil,
   repeat,
   zipWith
 } from "ramda";
+
+import { describe, it } from 'flow-typed-test';
 
 const ns: Array<number> = [1, 2, 3, 4, 5];
 const ss: Array<string> = ["one", "two", "three", "four"];
@@ -22,7 +25,7 @@ const str: string = "hello world";
 {
   const partDiv: (a: number) => number = _.divide(6);
   const div: number = _.divide(6, 2);
-  //$ExpectError
+  //$FlowExpectedError
   const div2: number = _.divide(6, true);
 }
 
@@ -44,12 +47,11 @@ const str: string = "hello world";
 }
 //Type
 {
-  const x: boolean = _.is(Number, 1);
   const x1: boolean = isNil(1);
 
   // should refine type
   const x1a: ?{ a: number } = { a: 1 };
-  //$ExpectError
+  //$FlowExpectedError
   x1a.a;
   if (!isNil(x1a)) {
     x1a.a;
@@ -57,3 +59,23 @@ const str: string = "hello world";
 
   const x2: boolean = _.propIs(1, "num", { num: 1 });
 }
+
+describe('is', () => {
+  it('allows testing a value against a type', () => {
+    // Lifted right out of the examples.
+    // See https://ramdajs.com/docs/#is
+    is(Object, {}); //=> true
+    is(Number, 1); //=> true
+    is(Object, 1); //=> false
+    is(String, 's'); //=> true
+    is(String, new String('')); //=> true
+    is(Object, new String('')); //=> true
+    is(Object, 's'); //=> false
+    is(Number, {}); //=> false
+  })
+
+  it('does not allow non-types for the first argument', () => {
+    // $FlowExpectedError
+    is({}, 1)
+  })
+})

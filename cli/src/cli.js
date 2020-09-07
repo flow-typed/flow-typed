@@ -1,11 +1,6 @@
 #!/usr/bin/env node
 // @flow
 
-if (!global.__flowTypedBabelPolyfill) {
-  require('@babel/polyfill');
-  global.__flowTypedBabelPolyfill = true;
-}
-
 import yargs from 'yargs';
 import {fs, path} from './lib/node.js';
 
@@ -16,7 +11,6 @@ import * as Search from './commands/search.js';
 import * as Update from './commands/update.js';
 import * as UpdateCache from './commands/update-cache';
 import * as ValidateDefs from './commands/validateDefs.js';
-import * as Version from './commands/version.js';
 
 import type {Argv} from 'yargs';
 import typeof Yargs from 'yargs';
@@ -39,7 +33,6 @@ export function runCLI() {
     Update,
     UpdateCache,
     ValidateDefs,
-    Version,
   ];
 
   commands
@@ -71,6 +64,7 @@ export function runCLI() {
     )
     .demand(1)
     .strict()
+    .recommendCommands()
     .help('h')
     .alias('h', 'help').argv;
 }

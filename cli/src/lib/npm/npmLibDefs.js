@@ -4,6 +4,7 @@ import {
   ensureCacheRepo,
   getCacheRepoDir,
   verifyCLIVersion,
+  CACHE_REPO_EXPIRY,
 } from '../cacheRepoUtils';
 
 import {getSignedCodeVersion, verifySignedCode} from '../codeSign';
@@ -73,8 +74,22 @@ async function extractLibDefsFromNpmPkgDir(
     await _npmExists(fullPkgName)
       .then()
       .catch(error => {
-        // Only fail spen on 404, not on timeout
-        if (error.statusCode === 404) {
+        if (error.HTTPError && error.HTTPError.response.statusCode === 404) {
+          // Some times NPM returns 404 even though the package exists.
+          // Try to avoid false negatives by retrying
+          return new Promise((resolve, reject) =>
+            setTimeout(() => {
+              _npmExists(fullPkgName)
+                .then(resolve)
+                .catch(reject);
+            }, 1000),
+          );
+        }
+      })
+      .then()
+      .catch(error => {
+        // Only fail on 404, not on timeout
+        if (error.HTTPError && error.HTTPError.statusCode === 404) {
           throw new ValidationError(`Package does not exist on npm!`);
         }
       });
@@ -165,15 +180,25 @@ async function extractLibDefsFromNpmPkgDir(
   return libDefs;
 }
 
-async function getCacheNpmLibDefs() {
-  await ensureCacheRepo();
+async function getCacheNpmLibDefs(cacheExpiry) {
+  await ensureCacheRepo(cacheExpiry);
   await verifyCLIVersion();
   return getNpmLibDefs(path.join(getCacheRepoDir(), 'definitions'));
 }
 
 const PKG_NAMEVER_RE = /^(.*)_v\^?([0-9]+)\.([0-9]+|x)\.([0-9]+|x)(-.*)?$/;
+const PKG_GIT_RE = /^([\w\-]+)@([\w\.]+):([\w\-]+)\/([\w\-]+)(?:\.git)$/;
 function parsePkgNameVer(pkgNameVer: string) {
   const pkgNameVerMatches = pkgNameVer.match(PKG_NAMEVER_RE);
+  const pkgNameGitMatches = pkgNameVer.match(PKG_GIT_RE);
+
+  if (pkgNameGitMatches != null) {
+    return {
+      pkgName: pkgNameGitMatches[4],
+      pkgVersion: {major: 0, minor: 0, patch: 0, prerel: ''},
+    };
+  }
+
   if (pkgNameVerMatches == null) {
     throw new ValidationError(
       `Malformed npm package name! ` +
@@ -319,8 +344,9 @@ export async function findNpmLibDef(
   pkgName: string,
   pkgVersion: string,
   flowVersion: FlowVersion,
+  useCacheUntil: number = CACHE_REPO_EXPIRY,
 ): Promise<null | NpmLibDef> {
-  const libDefs = await getCacheNpmLibDefs();
+  const libDefs = await getCacheNpmLibDefs(useCacheUntil);
   const filteredLibDefs = filterLibDefs(libDefs, {
     type: 'exact',
     pkgName,
@@ -333,90 +359,128 @@ export async function findNpmLibDef(
 type InstalledNpmLibDef =
   | {|kind: 'LibDef', libDef: NpmLibDef|}
   | {|kind: 'Stub', name: string|};
+
+type ParsedSignedCodeVersion =
+  | {|
+      kind: 'LibDef',
+      libDef: $Diff<NpmLibDef, {|path: string|}>,
+    |}
+  | {|kind: 'Stub', name: string|};
+
+export function parseSignedCodeVersion(
+  signedCodeVer: string,
+): ?ParsedSignedCodeVersion {
+  if (signedCodeVer === null) {
+    return null;
+  }
+  if (signedCodeVer.startsWith('<<STUB>>/')) {
+    return {
+      kind: 'Stub',
+      name: signedCodeVer.substring('<<STUB>>/'.length),
+    };
+  }
+  const matches = signedCodeVer.match(
+    /([^\/]+)\/(@[^\/]+\/)?([^\/]+)\/([^\/]+)/,
+  );
+  if (matches == null) {
+    return null;
+  }
+
+  const scope =
+    matches[2] == null ? null : matches[2].substr(0, matches[2].length - 1);
+
+  const nameVer = matches[3];
+  if (nameVer === null) {
+    return null;
+  }
+
+  const pkgNameVer = parsePkgNameVer(nameVer);
+  if (pkgNameVer === null) {
+    return null;
+  }
+  const {pkgName, pkgVersion} = pkgNameVer;
+
+  const flowVerMatches = matches[4].match(
+    /^flow_(>=|<=)?(v[^ ]+) ?(<=(v.+))?$/,
+  );
+  const flowVerStr =
+    flowVerMatches == null
+      ? matches[3]
+      : flowVerMatches[3] == null
+      ? flowVerMatches[2]
+      : `${flowVerMatches[2]}-${flowVerMatches[4]}`;
+  const flowDirStr = `flow_${flowVerStr}`;
+  const flowVer =
+    flowVerMatches == null
+      ? parseFlowDirString(flowDirStr)
+      : parseFlowDirString(flowDirStr);
+
+  return {
+    kind: 'LibDef',
+    libDef: {
+      scope,
+      name: pkgName,
+      version: versionToString(pkgVersion),
+      flowVersion: flowVer,
+      testFilePaths: [],
+    },
+  };
+}
+
+export async function getInstalledNpmLibDef(
+  flowProjectRootDir: string,
+  fullFilePath: string,
+): Promise<?[string, InstalledNpmLibDef]> {
+  const terseFilePath = path.relative(flowProjectRootDir, fullFilePath);
+  const fileStat = await fs.stat(fullFilePath);
+  if (fileStat.isFile()) {
+    const fileContent = (await fs.readFile(fullFilePath)).toString();
+    if (verifySignedCode(fileContent)) {
+      const signedCodeVer = getSignedCodeVersion(fileContent);
+      if (signedCodeVer === null) {
+        return null;
+      }
+      const parsed = parseSignedCodeVersion(signedCodeVer);
+      if (!parsed) {
+        return null;
+      }
+
+      return [
+        terseFilePath,
+        parsed.kind === 'LibDef'
+          ? {
+              kind: 'LibDef',
+              libDef: {
+                ...parsed.libDef,
+                path: terseFilePath,
+              },
+            }
+          : parsed,
+      ];
+    }
+  }
+}
+
 export async function getInstalledNpmLibDefs(
   flowProjectRootDir: string,
   libdefDir?: string,
 ): Promise<Map<string, InstalledNpmLibDef>> {
   const typedefDir = libdefDir || 'flow-typed';
   const libDefDirPath = path.join(flowProjectRootDir, typedefDir, 'npm');
-  const installedLibDefs = new Map();
-  if (await fs.exists(libDefDirPath)) {
-    const filesInNpmDir = await getFilesInDir(libDefDirPath, true);
-    await P.all(
-      [...filesInNpmDir].map(async fileName => {
-        const fullFilePath = path.join(libDefDirPath, fileName);
-        const terseFilePath = path.relative(flowProjectRootDir, fullFilePath);
-        const fileStat = await fs.stat(fullFilePath);
-        if (fileStat.isFile()) {
-          const fileContent = (await fs.readFile(fullFilePath)).toString();
-          if (verifySignedCode(fileContent)) {
-            const signedCodeVer = getSignedCodeVersion(fileContent);
-            if (signedCodeVer === null) {
-              return;
-            }
-            const matches = signedCodeVer.match(
-              /([^\/]+)\/(@[^\/]+\/)?([^\/]+)\/([^\/]+)/,
-            );
-            if (matches == null) {
-              return;
-            }
-
-            if (matches[1] === '<<STUB>>') {
-              installedLibDefs.set(terseFilePath, {
-                kind: 'Stub',
-                name: matches[2],
-              });
-              return;
-            }
-
-            const scope =
-              matches[2] == null
-                ? null
-                : matches[2].substr(0, matches[2].length - 1);
-
-            const nameVer = matches[3];
-            if (nameVer === null) {
-              return;
-            }
-
-            const pkgNameVer = parsePkgNameVer(nameVer);
-            if (pkgNameVer === null) {
-              return;
-            }
-            const {pkgName, pkgVersion} = pkgNameVer;
-
-            const flowVerMatches = matches[4].match(
-              /^flow_(>=|<=)?(v[^ ]+) ?(<=(v.+))?$/,
-            );
-            const flowVerStr =
-              flowVerMatches == null
-                ? matches[3]
-                : flowVerMatches[3] == null
-                  ? flowVerMatches[2]
-                  : `${flowVerMatches[2]}-${flowVerMatches[4]}`;
-            const flowDirStr = `flow_${flowVerStr}`;
-            const flowVer =
-              flowVerMatches == null
-                ? parseFlowDirString(flowDirStr)
-                : parseFlowDirString(flowDirStr);
-
-            installedLibDefs.set(terseFilePath, {
-              kind: 'LibDef',
-              libDef: {
-                scope,
-                name: pkgName,
-                version: versionToString(pkgVersion),
-                flowVersion: flowVer,
-                path: terseFilePath,
-                testFilePaths: [],
-              },
-            });
-          }
-        }
-      }),
-    );
-  }
-  return installedLibDefs;
+  if (!(await fs.exists(libDefDirPath))) return new Map();
+  const filesInNpmDir = await getFilesInDir(libDefDirPath, true);
+  return new Map(
+    (
+      await P.all(
+        [...filesInNpmDir].map(fileName =>
+          getInstalledNpmLibDef(
+            flowProjectRootDir,
+            path.join(libDefDirPath, fileName),
+          ),
+        ),
+      )
+    ).filter(Boolean),
+  );
 }
 
 /**

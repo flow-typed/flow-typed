@@ -1,8 +1,9 @@
-sudo: false
 language: node_js
+os: linux
+dist: xenial
 node_js:
-  - '6'
-  - '8'
+  - '10'
+  - '12'
 env:
   - CXX=g++-4.8
 addons:

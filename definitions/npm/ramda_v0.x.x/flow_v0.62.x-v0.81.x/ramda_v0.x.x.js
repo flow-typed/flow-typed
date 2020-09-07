@@ -597,13 +597,13 @@ declare module ramda {
   declare var startsWith: EdgeWith<*>;
   declare var endsWith: EdgeWith<*>;
   declare function toLower(a: string): string;
-  declare function toString(x: any): string;
+  declare function toString(x: mixed): string;
   declare function toUpper(a: string): string;
   declare function trim(a: string): string;
 
   // *Type
-  declare function is<T>(t: T): (v: any) => boolean;
-  declare function is<T>(t: T, v: any): boolean;
+  declare function is<T: Class<mixed>>(t: T): (v: mixed) => boolean;
+  declare function is<T: Class<mixed>>(t: T, v: mixed): boolean;
   declare var propIs: CurriedFunction3<any, string, Object, boolean>;
   declare function type(x: ?any): string;
   declare function isArrayLike(x: any): boolean;
@@ -653,8 +653,11 @@ declare module ramda {
   declare function chain<A, B>(f: (x: A) => B[], xs: A[]): B[]
   declare function chain<A, B>(f: (x: A) => B[]): (xs: A[]) => B[]
 
-  declare function concat<V, T: Array<V> | string>(x: T, y: T): T;
-  declare function concat<V, T: Array<V> | string>(x: T): (y: T) => T;
+  declare function concat<V, T: Array<V>>(x: T, y: T): T;
+  declare function concat<V, T: Array<V>>(x: T): (y: T) => T;
+
+  declare function concat(x: string, y: string): string;
+  declare function concat(x: string): (y: string) => string;
 
   declare function contains<E, T: Array<E> | string>(x: E, xs: T): boolean;
   declare function contains<E, T: Array<E> | string>(
@@ -1483,7 +1486,7 @@ declare module ramda {
   declare var mergeDeepRight: (<A, B>(a: A, b: B) => B & A) &
     (<A, B>(a: A) => (b: B) => B & A);
 
-  declare type MergeWith = (<A: { [k: string]: T }, B: { [k: string]: T }, T>(
+  declare type MergeWith = (<A, B, T: $Values<A> & $Values<B>>(
     fn: (a: T, b: T) => T,
     a: A,
     b: B
@@ -1500,22 +1503,22 @@ declare module ramda {
     ) => (b: B) => A & B);
 
   declare type MergeWithKey = (<
-    S: string,
-    A: { [k: string]: T },
-    B: { [k: string]: T },
-    T
+    A,
+    B,
+    S: $Keys<A> & $Keys<B>,
+    T: $ElementType<A, $Keys<A>> & $ElementType<B, $Keys<B>>,
   >(
     fn: (s: S, a: T, b: T) => T,
     a: A,
     b: B
   ) => A & B) &
-    (<S: string, A: { [k: string]: T }, B: { [k: string]: T }, T>(
+    (<S, T, A, B>(
       fn: (s: S, a: T, b: T) => T,
     ) => (a: A, b: B) => A & B) &
-    (<S: string, A: { [k: string]: T }, B: { [k: string]: T }, T>(
+    (<S, T, A, B>(
       fn: (s: S, a: T, b: T) => T,
     ) => (a: A) => (b: B) => A & B) &
-    (<S: string, A: { [k: string]: T }, B: { [k: string]: T }, T>(
+    (<S, T, A, B>(
       fn: (s: S, a: T, b: T) => T,
       a: A,
     ) => (b: B) => A & B);
@@ -1900,9 +1903,56 @@ declare module ramda {
     y: (...args: Array<T>) => boolean
   ): (...args: Array<T>) => boolean;
 
-  declare function complement<T>(
-    x: (...args: Array<T>) => boolean
-  ): (...args: Array<T>) => boolean;
+  // The following code is generated from
+  // https://github.com/LoganBarnett/typedef-gen due to Flow not being able to
+  // preserve the input function's form as a return type.
+  //
+  // Begin generated complement declaration.
+
+  declare function complement< Fn: () => boolean>(
+    f: Fn
+  ): Fn;
+
+  declare function complement<A, Fn: (A) => boolean>(
+    f: Fn
+  ): Fn;
+
+  declare function complement<A, B, Fn: (A, B) => boolean>(
+    f: Fn
+  ): Fn;
+
+  declare function complement<A, B, C, Fn: (A, B, C) => boolean>(
+    f: Fn
+  ): Fn;
+
+  declare function complement<A, B, C, D, Fn: (A, B, C, D) => boolean>(
+    f: Fn
+  ): Fn;
+
+  declare function complement<A, B, C, D, E, Fn: (A, B, C, D, E) => boolean>(
+    f: Fn
+  ): Fn;
+
+  declare function complement<A, B, C, D, E, F, Fn: (A, B, C, D, E, F) => boolean>(
+    f: Fn
+  ): Fn;
+
+  declare function complement<A, B, C, D, E, F, G, Fn: (A, B, C, D, E, F, G) => boolean>(
+    f: Fn
+  ): Fn;
+
+  declare function complement<A, B, C, D, E, F, G, H, Fn: (A, B, C, D, E, F, G, H) => boolean>(
+    f: Fn
+  ): Fn;
+
+  declare function complement<A, B, C, D, E, F, G, H, I, Fn: (A, B, C, D, E, F, G, H, I) => boolean>(
+    f: Fn
+  ): Fn;
+
+  declare function complement<A, B, C, D, E, F, G, H, I, J, Fn: (A, B, C, D, E, F, G, H, I, J) => boolean>(
+    f: Fn
+  ): Fn;
+  // End generated complement declaration.
 
   declare function cond<A, B>(
     fns: Array<[(...args: Array<A>) => boolean, (...args: Array<A>) => B]>

@@ -1,4 +1,4 @@
-import type { Server } from 'http';
+import * as http from "http";
 
 declare type express$RouterOptions = {
   caseSensitive?: boolean,
@@ -37,7 +37,7 @@ declare class express$Request extends http$IncomingMessage mixins express$Reques
   acceptsEncodings(...encoding: Array<string>): string | false;
   acceptsLanguages(...lang: Array<string>): string | false;
   header(field: string): string | void;
-  is(type: string): boolean;
+  is(type: string): string | false;
   param(name: string, defaultValue?: string): string | void;
 }
 
@@ -147,11 +147,11 @@ declare class express$Application extends express$Router mixins events$EventEmit
   constructor(): void;
   locals: {[name: string]: mixed};
   mountpath: string;
-  listen(port: number, hostname?: string, backlog?: number, callback?: (err?: ?Error) => mixed): Server;
-  listen(port: number, hostname?: string, callback?: (err?: ?Error) => mixed): Server;
-  listen(port: number, callback?: (err?: ?Error) => mixed): Server;
-  listen(path: string, callback?: (err?: ?Error) => mixed): Server;
-  listen(handle: Object, callback?: (err?: ?Error) => mixed): Server;
+  listen(port: number, hostname?: string, backlog?: number, callback?: (err?: ?Error) => mixed): http.Server;
+  listen(port: number, hostname?: string, callback?: (err?: ?Error) => mixed): http.Server;
+  listen(port: number, callback?: (err?: ?Error) => mixed): http.Server;
+  listen(path: string, callback?: (err?: ?Error) => mixed): http.Server;
+  listen(handle: Object, callback?: (err?: ?Error) => mixed): http.Server;
   disable(name: string): void;
   disabled(name: string): boolean;
   enable(name: string): express$Application;

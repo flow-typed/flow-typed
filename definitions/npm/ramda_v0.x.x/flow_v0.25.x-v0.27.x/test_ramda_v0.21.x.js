@@ -2,13 +2,8 @@
 /*eslint-disable no-undef, no-unused-vars, no-console*/
 "use strict";
 const _ = require("ramda");
-function describe(tag, fn) {
-  fn();
-}
 
-function it(tag, fn) {
-  fn();
-}
+import { describe, it } from 'flow-typed-test';
 
 describe("Functions", () => {
   it("T and F", () => {
@@ -186,7 +181,7 @@ describe("List", () => {
       b: 2,
       c: 3
     });
-    //$ExpectError
+    //$FlowExpectedError
     const ys1: Array<number> = _.map(x => x.toString(), [1, 2, 3]);
     const ys2: Array<string> = _.map(x => x.toString())([1, 2, 3]);
 
@@ -231,7 +226,7 @@ describe("List", () => {
   it("should typecheck nth", () => {
     const ys: ?number = _.nth(2, [1, 2, 3]);
     const ys1: ?number = _.nth(2)([1, 2, 3]);
-    //$ExpectError
+    //$FlowExpectedError
     const ys2: ?string = _.nth(2, [1, 2, 3]);
   });
   it("should typecheck reduce", () => {
@@ -248,13 +243,13 @@ describe("List", () => {
       {},
       [1, 2, 3]
     );
-    //$ExpectError
+    //$FlowExpectedError
     const reducedErr: Array<string> = _.reduce(
       (acc, x) => [...acc, x],
       [],
       [1, 2, 3]
     );
-    //$ExpectError
+    //$FlowExpectedError
     const reducedStrErr: Array<number> = _.reduce((acc, x) => acc + x, "", [
       1,
       2,
@@ -265,7 +260,7 @@ describe("List", () => {
     const reduced: Array<number> = _.scan(_.add, 1, [1, 2, 3]);
     const reduced1: Array<number> = _.scan(_.add, 1)([1, 2, 3]);
     const reduced2: Array<number> = _.scan(_.add)(1, [1, 2, 3]);
-    //$ExpectError
+    //$FlowExpectedError
     const reduced4: Array<number> = _.scan(_.add, "1", [1, 2, 3]);
   });
   it("should typecheck reduceBy", () => {
@@ -324,7 +319,7 @@ describe("String", () => {
   it("should typecheck nth", () => {
     const ys: string = _.nth(2, "curry");
     const ys1: string = _.nth(2)("curry");
-    //$ExpectError
+    //$FlowExpectedError
     const ys2: string = _.nth(2, [1, 2, 3]);
   });
 });
@@ -353,11 +348,11 @@ describe("Object", () => {
     const x1: string | number = _.propOr(2, "a")({ b: 2 });
     const x2: string | number = _.propOr(2)("a", { b: 2 });
     const x3: string | number = _.propOr(2)("a")({ b: 2, c: "dd" });
-    //$ExpectError
+    //$FlowExpectedError
     const x4: number = _.propOr("a")("a")({ b: 2 });
   });
   it("should typecheck map", () => {
-    //$ExpectError
+    //$FlowExpectedError
     const ys: { [key: string]: number } = _.map(x => x.toString(), {
       a: 1,
       b: 2,
@@ -403,6 +398,10 @@ describe("Function", function() {
   it("should typecheck is", function() {
     const x = _.is(Number, 1);
   });
+  it('does not allow non-types for the first argument', () => {
+    // $FlowExpectedError
+    const x = _.is({}, 1)
+  })
 });
 
 describe("transducers", () => {

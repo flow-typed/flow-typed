@@ -47,11 +47,11 @@ cpy('foo.js', 'dest', {
 
 cpy('foo.js', 'dest', {});
 
-// $ExpectError
+// $FlowExpectedError
 cpy();
-// $ExpectError
+// $FlowExpectedError
 cpy('foo.js');
-// $ExpectError
+// $FlowExpectedError
 cpy(2, 1);
-// $ExpectError
+// $FlowExpectedError
 (cpy(2, 1): void);

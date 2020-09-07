@@ -26,7 +26,7 @@ const logger = koaBunyanLogger({
     }
 });
 
-// $ExpectError - name needed
+// $FlowExpectedError - name needed
 koaBunyanLogger({});
 
 const child = logger.child({});
@@ -50,37 +50,24 @@ let middleware: MiddlewareType = koaBunyanLogger.requestIdContext({
 
 middleware = koaBunyanLogger.requestIdContext();
 
-// $ExpectError
-middleware = koaBunyanLogger.requestLogger({
-    updateLogFields: (req) => "object expected"
-});
+middleware = koaBunyanLogger.requestLogger();
 
-// $ExpectError
-middleware = koaBunyanLogger.requestLogger({
-    updateRequestLogFields: (req) => "object expected"
-});
-
-// $ExpectError
-middleware = koaBunyanLogger.requestLogger({
-    updateResponseLogFields: (res) => "object expected"
-});
-
-// $ExpectError
+// $FlowExpectedError
 middleware = koaBunyanLogger.requestLogger({
     formatRequestMessage: (req) => {string: 'expected'}
 });
 
-// $ExpectError
+// $FlowExpectedError
 middleware = koaBunyanLogger.requestLogger({
     formatResponseMessage: (req) => {string: 'expected'}
 });
 
-// $ExpectError
+// $FlowExpectedError
 middleware = koaBunyanLogger.requestLogger({
     durationField: 1
 });
 
-// $ExpectError
+// $FlowExpectedError
 middleware = koaBunyanLogger.requestLogger({
     levelFn: (status: number, err: Error) => 'INFO',
 });

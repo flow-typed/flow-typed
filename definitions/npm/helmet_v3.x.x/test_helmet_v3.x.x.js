@@ -20,13 +20,13 @@ helmet.hpkp({
   }
 })
 
-// $ExpectError
+// $FlowExpectedError
 helmet.foo()
 
-// $ExpectError
+// $FlowExpectedError
 helmet.hpkp()
 
-// $ExpectError
+// $FlowExpectedError
 helmet.hpkp({
   notEnoughDefaultProps: '',
   reportOnly: false,
@@ -35,7 +35,7 @@ helmet.hpkp({
   }
 })
 
-// $ExpectError
+// $FlowExpectedError
 helmet.frameguard({
   action: 'NOTHING'
 })

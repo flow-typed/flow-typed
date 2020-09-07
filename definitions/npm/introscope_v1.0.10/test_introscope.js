@@ -1,6 +1,6 @@
 import { introscope } from 'introscope';
 
-// $ExpectError only objects allowed
+// $FlowExpectedError only objects allowed
 introscope([])
 
 const anyScope = introscope({

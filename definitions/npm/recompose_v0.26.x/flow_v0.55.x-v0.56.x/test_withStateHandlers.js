@@ -32,13 +32,13 @@ const enhancer: HOC<*, EnhancedCompProps> = compose(
     hi: (props.value: string),
     ic: (props.initialCounter: number),
     cc: (props.obj.a: string),
-    // $ExpectError value not a number or any
+    // $FlowExpectedError value not a number or any
     ehi: (props.value: number),
-    // $ExpectError not a number
+    // $FlowExpectedError not a number
     cn: (props.obj.a: number),
-    // $ExpectError property not found (to detect that props is not any)
+    // $FlowExpectedError property not found (to detect that props is not any)
     err: props.iMNotExists,
-    // $ExpectError initialCounter not any nor string
+    // $FlowExpectedError initialCounter not any nor string
     icErr: (props.initialCounter: string)
   }))
 );
@@ -59,9 +59,9 @@ const enhancerFuncInit: HOC<*, EnhancedCompProps> = compose(
   withProps(props => ({
     // check that result is void
     iVal: (props.incCounter({ value: 1 }): void),
-    // $ExpectError check that incCounter is not any
+    // $FlowExpectedError check that incCounter is not any
     iVal2: (props.incCounter({ value: 1 }): number),
-    // $ExpectError property not found
+    // $FlowExpectedError property not found
     err: props.iMNotExists
   }))
 );
@@ -75,13 +75,13 @@ const BaseComponent = ({ hi, changeValue }) => (
       // Check that result is void
       (x: void);
 
-      // $ExpectError check that x is not any
+      // $FlowExpectedError check that x is not any
       (x: {});
 
       // Check hi
       (hi: string);
 
-      // $ExpectError check that hi is not any
+      // $FlowExpectedError check that hi is not any
       (hi: number);
     }}
   >

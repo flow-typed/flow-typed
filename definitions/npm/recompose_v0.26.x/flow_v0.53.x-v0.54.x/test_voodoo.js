@@ -23,11 +23,11 @@ const Comp = ({ eA, objPropA }) =>
     {(eA: number)}
     {(objPropA: string)}
     {
-      // $ExpectError eA nor any nor string
+      // $FlowExpectedError eA nor any nor string
       (eA: string)
     }
     {
-      // $ExpectError eA nor any nor string
+      // $FlowExpectedError eA nor any nor string
       (objPropA: number)
     }
   </div>;
@@ -66,11 +66,11 @@ const RenameComp = ({ eA, objNew, obj }) =>
       (objNew.objPropA: string)
     }
     {
-      // $ExpectError eA nor any nor string
+      // $FlowExpectedError eA nor any nor string
       (eA: string)
     }
     {
-      // $ExpectError eA nor any nor string
+      // $FlowExpectedError eA nor any nor string
       (objNew.objPropA: number)
     }
     {
@@ -78,7 +78,7 @@ const RenameComp = ({ eA, objNew, obj }) =>
       (obj: null)
     }
     {
-      // $ExpectError eA nor any nor string
+      // $FlowExpectedError eA nor any nor string
       (obj: string)
     }
   </div>;

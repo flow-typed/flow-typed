@@ -7,8 +7,8 @@ let check: boolean = isObservable(time);
 const logger = observe(() => console.log(time.seconds));
 unobserve(logger);
 
-// $ExpectError
+// $FlowExpectedError
 const errorLogger = observe(time);
 
-// $ExpectError
+// $FlowExpectedError
 const errorTime = observable(2);

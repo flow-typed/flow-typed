@@ -59,7 +59,7 @@ fs.open('myfile', 'r', (err, fd) => {
       throw err;
     }
   }
-// $ExpectError
+// $FlowExpectedError
   (fd: string)
 });
 
@@ -96,7 +96,7 @@ fs.readFile('/etc/passwd', 'utf8', (err, data) => {
   console.log(data);
 });
 
-// $ExpectError
+// $FlowExpectedError
 var fail = fs.readFile('/etc/passwd', 'utf8');
 
 fs.symlink('./foo', './new-port');

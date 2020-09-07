@@ -1,29 +1,33 @@
 // @flow
 
-import mousetrap, { bind, unbind, trigger, reset} from 'mousetrap';
+import mousetrap, { bind, unbind, trigger, reset } from "mousetrap";
 
-mousetrap.stopCallback = (e: KeyboardEvent, element: Element, combo: string) => {
+mousetrap.stopCallback = (
+  e: KeyboardEvent,
+  element: Element,
+  combo: string
+) => {
   return false;
-}
+};
 
-bind('c', (e: Event) => true);
-bind(['ctrl', 'c'], (e: Event) => true);
-unbind('c');
-unbind(['ctrl', 'c']);
+bind("c", (e: Event) => true);
+bind(["ctrl", "c"], (e: Event) => true);
+unbind("c");
+unbind(["ctrl", "c"]);
 reset();
-trigger('c');
+trigger("c");
 
 mousetrap.stopCallback = (e, element, combo) => false;
 
-// $ExpectError - Bind to what?
-bind('c');
-// $ExpectError - Bind what?
+// $FlowExpectedError - Bind to what?
+bind("c");
+// $FlowExpectedError - Bind what?
 bind(e => true);
-// $ExpectError - key has to be string or Array<string>
+// $FlowExpectedError - key has to be string or Array<string>
 bind(1, e => true);
-// $ExpectError
+// $FlowExpectedError
 unbind(1);
-// $ExpectError
+// $FlowExpectedError
 trigger(1);
-// $ExpectError
+// $FlowExpectedError
 mousetrap.stopCallback = (e, element, combo) => 123;

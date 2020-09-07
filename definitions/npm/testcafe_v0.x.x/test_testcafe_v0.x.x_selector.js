@@ -786,7 +786,7 @@ test('Selector `addCustomMethods` method', async t => {
     await t
         .expect(await el.prop1('value: ')).eql('value: 42')
         .expect(await el().prop1('value: ')).eql('value: 42')
-        // $ExpectError
+        // $FlowExpectedError
         .expect(await el.prop3('tagName', ': ')).eql('tagName: rect')
 
         .expect(await el.parent().filter(() => true).tagName).eql('svg')

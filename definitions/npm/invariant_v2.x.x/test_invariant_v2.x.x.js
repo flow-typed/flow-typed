@@ -2,7 +2,7 @@ import invariant from 'invariant'
 
 invariant(true, 'foo')
 invariant(false, 'foo')
-// $ExpectError - bool needed
+// $FlowExpectedError - bool needed
 invariant('foo', 'bar')
-// $ExpectError - string as message
+// $FlowExpectedError - string as message
 invariant('foo', 123)
