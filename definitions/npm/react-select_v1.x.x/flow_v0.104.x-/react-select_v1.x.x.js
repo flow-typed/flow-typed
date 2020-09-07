@@ -170,7 +170,7 @@ declare module 'react-select' {
     wrapperStyle?: {...},
     isSearchable?: boolean,
     // whether to cache the search results
-    cache?: {...} | false
+    cache?: {} | false
   |};
 
   declare type AsyncProps = {|
