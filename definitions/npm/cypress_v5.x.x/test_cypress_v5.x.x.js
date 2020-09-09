@@ -1,0 +1,3 @@
+// @flow
+
+cy.visit('test');
