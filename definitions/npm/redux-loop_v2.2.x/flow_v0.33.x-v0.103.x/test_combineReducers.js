@@ -33,16 +33,16 @@ function testCombineReducers<Action>(
   // Checks type of state input to reducer
   //
 
-  // $ExpectError
+  // $FlowExpectedError
   reducer({}, action);
 
-  // $ExpectError
+  // $FlowExpectedError
   reducer({ a: "badvalue", b: "two", c: false }, action);
 
-  // $ExpectError
+  // $FlowExpectedError
   reducer({ a: 1, b: 2, c: false }, action);
 
-  // $ExpectError
+  // $FlowExpectedError
   reducer({ a: 1, b: "two", c: new Date() }, action);
 
   //

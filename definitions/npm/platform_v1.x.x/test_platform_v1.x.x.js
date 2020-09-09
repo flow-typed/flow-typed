@@ -1,48 +1,48 @@
 // @flow
 import platform from 'platform';
 
-// $ExpectError
+// $FlowExpectedError
 (platform.version: string);
-// $ExpectError
+// $FlowExpectedError
 (platform.description: string);
-// $ExpectError
+// $FlowExpectedError
 (platform.description: string);
-// $ExpectError
+// $FlowExpectedError
 (platform.layot: string);
-// $ExpectError
+// $FlowExpectedError
 (platform.manufacturer: string);
-// $ExpectError
+// $FlowExpectedError
 (platform.name: string);
-// $ExpectError
+// $FlowExpectedError
 (platform.prerelease: string);
-// $ExpectError
+// $FlowExpectedError
 (platform.product: string);
-// $ExpectError
+// $FlowExpectedError
 (platform.ua: string);
-// $ExpectError
+// $FlowExpectedError
 (platform.version: string);
 (platform.toString(): string);
 
 const os = platform.os;
 
 (os.toString(): string);
-// $ExpectError
+// $FlowExpectedError
 (os.architecture:  number);
-// $ExpectError
+// $FlowExpectedError
 (os.version:  string);
-// $ExpectError
+// $FlowExpectedError
 (os.family:  string);
 
 const other: typeof platform = platform.parse('something');
 
-// $ExpectError
+// $FlowExpectedError
 platform.layoyt
 
 const obj: typeof platform = other.parse('foo');
 
 platform.hasOwnProperty('version');
 
-// $ExpectError
+// $FlowExpectedError
 const fail: string = platform.os.version;
 
 const s: string = other.os.version || '';

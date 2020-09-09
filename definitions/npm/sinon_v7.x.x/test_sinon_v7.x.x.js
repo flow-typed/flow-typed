@@ -18,7 +18,7 @@ function testOne() {
   let callback = sinon.spy();
   let proxy = once(callback);
   proxy();
-  // $ExpectError - calledOnce is bool
+  // $FlowExpectedError - calledOnce is bool
   (callback.calledOnce: string)
   if (callback.calledOnce) { console.log("test1 calledOnce success"); } else { console.log("test1 calledOnce failure"); }
 }

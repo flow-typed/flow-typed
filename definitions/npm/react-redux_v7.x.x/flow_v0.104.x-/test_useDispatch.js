@@ -31,7 +31,7 @@ describe('useDispatch', () => {
       return (
         <div
           onClick={() => {
-            // $ExpectError: return value of `useDispatch` should make `Dispatch` and expect an `Action`.
+            // $FlowExpectedError: return value of `useDispatch` should make `Dispatch` and expect an `Action`.
             dispatch();
           }}
         >

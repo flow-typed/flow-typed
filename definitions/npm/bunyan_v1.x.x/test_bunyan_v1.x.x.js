@@ -24,7 +24,7 @@ const logger = Bunyan.createLogger({
     }
 });
 
-// $ExpectError - name needed
+// $FlowExpectedError - name needed
 Bunyan.createLogger({});
 
 const child = logger.child({});
@@ -41,20 +41,20 @@ const s = logger.trace({}, false);
 const b: boolean = logger.trace();
 logger.trace('foo', new Error('foo'));
 
-// $ExpectError
+// $FlowExpectedError
 const v: number = Bunyan.VERSION;
 
 Bunyan.safeCycles()('true', false);
 
 const consoleRawStream = new Bunyan.ConsoleRawStream()
 
-// $ExpectError
+// $FlowExpectedError
 consoleRawStream.write({ level: false })
 
-// $ExpectError
+// $FlowExpectedError
 logger.log()
 
-// $ExpectError
+// $FlowExpectedError
 logger.addSTream();
 
 logger.trace({ err: new Error('foobar') }, 'error');

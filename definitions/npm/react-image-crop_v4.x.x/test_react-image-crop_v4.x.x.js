@@ -18,12 +18,12 @@ describe('react-image-crop', () => {
     });
 
     it('should show error when required src param is not set', () => {
-      // $ExpectError src param is not set
+      // $FlowExpectedError src param is not set
       <ImageCrop onChange={noop} />
     });
 
     it('should show error when required onChange param is not set', () => {
-      // $ExpectError onChange param is not set
+      // $FlowExpectedError onChange param is not set
       <ImageCrop src="" />
     });
 
@@ -52,49 +52,49 @@ describe('react-image-crop', () => {
     });
 
     it('should show error when crop param is not of correct type', () => {
-      // $ExpectError
+      // $FlowExpectedError
       <ImageCrop src="" onChange={noop}
         crop={{x: '3%'}}
       />
     });
 
     it('should show error when minWidth param is not of correct type', () => {
-      // $ExpectError
+      // $FlowExpectedError
       <ImageCrop src="" onChange={noop}
         minWidth={'100px'}
       />
     });
 
     it('should show error when minHeight param is not of correct type', () => {
-      // $ExpectError
+      // $FlowExpectedError
       <ImageCrop src="" onChange={noop}
         minHeight={'100px'}
       />
     });
 
     it('should show error when maxWidth param is not of correct type', () => {
-      // $ExpectError
+      // $FlowExpectedError
       <ImageCrop src="" onChange={noop}
         maxWidth={'100px'}
       />
     });
 
     it('should show error when maxHeight param is not of correct type', () => {
-      // $ExpectError
+      // $FlowExpectedError
       <ImageCrop src="" onChange={noop}
         maxHeight={'100px'}
       />
     });
 
     it('should show error when keepSelection param is not of correct type', () => {
-      // $ExpectError
+      // $FlowExpectedError
       <ImageCrop src="" onChange={noop}
         minWidth={'100px'}
       />
     });
 
     it('should show error when crossorigin param is not of correct type', () => {
-      // $ExpectError type should match crossOrigin in HTMLImageElement
+      // $FlowExpectedError type should match crossOrigin in HTMLImageElement
       <ImageCrop src="" onChange={noop}
         crossorigin={true}
       />
@@ -108,7 +108,7 @@ describe('react-image-crop', () => {
     });
 
     it('should show error when imageAspect is missing', () => {
-      // $ExpectError
+      // $FlowExpectedError
       makeAspectCrop(percentCrop);
     });
   });
@@ -119,7 +119,7 @@ describe('react-image-crop', () => {
     });
 
     it('should show error when imageAspect is missing', () => {
-      // $ExpectError
+      // $FlowExpectedError
       containCrop(percentCrop);
     });
   });
@@ -131,7 +131,7 @@ describe('react-image-crop', () => {
     });
 
     it('should show error when parameters are missing', () => {
-      // $ExpectError
+      // $FlowExpectedError
       getPixelCrop();
     });
   });

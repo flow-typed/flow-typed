@@ -9,7 +9,7 @@ yargs.parse(["-x"]);
 yargs.parse(["-x"], {});
 yargs.parse(["-x"], {}, (err, argv, output) => {});
 yargs.parse(["-x"], (err, argv, output) => {});
-// $ExpectError
+// $FlowExpectedError
 yargs.parse(["-x"], {}, {});
 
 const argv = yargs
@@ -95,7 +95,7 @@ const argv2 = yargs(["-x"])
   .demandCommand(1, 2)
   .demandCommand(2)
   .demandCommand(2, "")
-  // $ExpectError
+  // $FlowExpectedError
   .demandCommand("a")
   .version("1.0.1", "version", "display version information")
   .alias("version", "v")
@@ -104,17 +104,17 @@ const argv2 = yargs(["-x"])
   .showHelpOnFail(false, "whoops, something went wrong! run with --help").argv;
 
 yargs(["-x"])
-  // $ExpectError
+  // $FlowExpectedError
   .alias(true, []);
 
 yargs(["-x"])
-  // $ExpectError
+  // $FlowExpectedError
   .help(() => {});
 
-// $ExpectError
+// $FlowExpectedError
 yargs.nope;
 
-// $ExpectError
+// $FlowExpectedError
 yargs.coerce({
   date: "foo"
 });

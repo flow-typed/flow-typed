@@ -16,7 +16,7 @@ describe('keycode', () => {
   });
 
   it('errors parsing invalid arg', () => {
-    // $ExpectError
+    // $FlowExpectedError
     keycode({});
   });
 });

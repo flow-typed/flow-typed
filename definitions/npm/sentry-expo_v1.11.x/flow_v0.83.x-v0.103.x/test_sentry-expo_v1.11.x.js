@@ -8,7 +8,7 @@ describe('sentry-expo', () => {
   describe('default export', () => {
     it('should allow for basic usage', () => {
       Sentry.config('foo').install();
-      // $ExpectError -- should pass in a string
+      // $FlowExpectedError -- should pass in a string
       Sentry.config().install();
     });
   });
@@ -23,7 +23,7 @@ describe('sentry-expo', () => {
         type: 'http',
       };
 
-      // $ExpectError -- bad message
+      // $FlowExpectedError -- bad message
       const breadcrumb2: SentryBreadcrumb = { message: 1 };
     });
   });

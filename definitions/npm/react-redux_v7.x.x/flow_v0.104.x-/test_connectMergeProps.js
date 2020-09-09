@@ -44,7 +44,7 @@ function onlyOwnProps_wrongDispatch() {
   const Connected = connect<Props, OwnProps, _,_,_,Dispatch>(
     null,
     null,
-    //$ExpectError string [1] is incompatible with  `Dispatch` [2] in property `dispatch`
+    //$FlowExpectedError string [1] is incompatible with  `Dispatch` [2] in property `dispatch`
     mergeProps
   )(Com);
   e.push(Connected);
@@ -70,7 +70,7 @@ function onlyOwnProps_noPassthrough() {
   const Connected = connect<Props, OwnProps, _,_,_,Dispatch>(
     null,
     null,
-    //$ExpectError property `passthrough` is missing in object literal [1] but exists in `OwnProps` [2]
+    //$FlowExpectedError property `passthrough` is missing in object literal [1] but exists in `OwnProps` [2]
     mergeProps
   )(Com);
   e.push(Connected);
@@ -145,7 +145,7 @@ function onlyStateProps_wrongDispatch() {
   const Connected = connect<Props, OwnProps, _,_,_,Dispatch>(
     mapStateToProps,
     null,
-    //$ExpectError string [1] is incompatible with  `Dispatch` [2] in property `dispatch`
+    //$FlowExpectedError string [1] is incompatible with  `Dispatch` [2] in property `dispatch`
     mergeProps
   )(Com);
   e.push(Connected);
@@ -224,7 +224,7 @@ function onlyDispatchPropsObject_wrongExpectedState() {
   const Connected = connect<Props, OwnProps, _,_,_,Dispatch>(
     undefined,
     mapDispatchToProps,
-    //$ExpectError property `wrong` is missing in object type [1] but exists in object type [2]
+    //$FlowExpectedError property `wrong` is missing in object type [1] but exists in object type [2]
     mergeProps
   )(Com);
   e.push(Connected);
@@ -301,7 +301,7 @@ function onlyDispatchPropsFunction_WrongExpectedState() {
     }
   }
 
-  //$ExpectError property `wrong` is missing in  object type [1] but exists in  object type [2]
+  //$FlowExpectedError property `wrong` is missing in  object type [1] but exists in  object type [2]
   const Connected = connect<Props, OwnProps, _,_,_,Dispatch>(null, mapDispatchToPropsFn, mergeProps)(Com);
   e.push(Connected);
   <Connected passthrough="foo" />;
@@ -341,7 +341,7 @@ function onlyDispatchPropsFunction_wrongDispatchProp() {
 
   const Connected = connect<Props, OwnProps, _,_,_,Dispatch>(
     null,
-    //$ExpectError number [1] is incompatible with  string literal `action1` [2]
+    //$FlowExpectedError number [1] is incompatible with  string literal `action1` [2]
     mapDispatchToPropsFn,
     mergeProps
   )(Com);
@@ -434,7 +434,7 @@ function stateAndDispatchPropsFunction_wrongState() {
 
   const mergeProps = (
     // yes, a bit cryptic
-    //$ExpectError property `state1` is missing in  object type [1] but exists in  object literal [2]
+    //$FlowExpectedError property `state1` is missing in  object type [1] but exists in  object literal [2]
     stateProps: {|wrong:boolean|},
     dispatchProps: DispatchProps,
     ownProps: OwnProps
@@ -485,7 +485,7 @@ function stateAndDispatchPropsFunction_wrongDispatch() {
   })
 
   const mapDispatchToPropsFn = dispatch => ({
-    //$ExpectError number [1] is incompatible with string literal `action1` [2]
+    //$FlowExpectedError number [1] is incompatible with string literal `action1` [2]
     action1: () => 123
   })
 
@@ -591,7 +591,7 @@ function returnsTotallyDifferentPropsWithError() {
   })
 
   const mergeProps = (stateProps: StateProps, dispatchProps: DispatchProps, ownProps: OwnProps) => {
-    //$ExpectError property `c` is missing in object literal [1] but exists in  `Props` [2]
+    //$FlowExpectedError property `c` is missing in object literal [1] but exists in  `Props` [2]
     return {
       a: 1,
       b: 2,

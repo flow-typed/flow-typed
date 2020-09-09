@@ -7,23 +7,23 @@ copyToClipboard('a string to copy', { debug: true });
 copyToClipboard('a string to copy', { message: 'copied' });
 copyToClipboard('a string to copy', { debug: true, message: 'copied' });
 
-// $ExpectError
+// $FlowExpectedError
 copyToClipboard();
 
-// $ExpectError
+// $FlowExpectedError
 copyToClipboard(undefined);
 
-// $ExpectError
+// $FlowExpectedError
 copyToClipboard(null);
 
-// $ExpectError
+// $FlowExpectedError
 copyToClipboard(123);
 
-// $ExpectError
+// $FlowExpectedError
 copyToClipboard({});
 
-// $ExpectError
+// $FlowExpectedError
 copyToClipboard('a string to copy', null);
 
-// $ExpectError
+// $FlowExpectedError
 copyToClipboard('a string to copy', { test: '' });

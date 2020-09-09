@@ -27,7 +27,7 @@ import {
   TouchableNativeFeedback,
   TouchableOpacity,
   TouchableWithoutFeedback,
-  // $ExpectError
+  // $FlowExpectedError
   unSuportedImportMurAmur,
 } from 'react-native-gesture-handler';
 

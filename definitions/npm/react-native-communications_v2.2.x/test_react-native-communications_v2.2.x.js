@@ -4,33 +4,33 @@ import { phonecall, email, text, textWithoutEncoding, web } from 'react-native-c
 
 phonecall('12345678', false)
 phonecall('12345678', true)
-// $ExpectError
+// $FlowExpectedError
 phonecall('12345678')
-// $ExpectError
+// $FlowExpectedError
 phonecall('12345678', 'true')
 
 email()
 email(['example@example.com'])
 email(['example@example.com'], ['cc@example.com'], ['bcc@example.com'], 'subject', 'body')
-// $ExpectError
+// $FlowExpectedError
 email('example@example.com')
-// $ExpectError
+// $FlowExpectedError
 email(['example@example.com'], ['cc@example.com'])
 
 text()
 text('12345678')
 text('12345678', 'body')
-// $ExpectError
+// $FlowExpectedError
 text(['12345678'])
 
 textWithoutEncoding()
 textWithoutEncoding('12345678')
 textWithoutEncoding('12345678', 'body')
-// $ExpectError
+// $FlowExpectedError
 textWithoutEncoding(['12345678'])
 
 web('example.com')
-// $ExpectError
+// $FlowExpectedError
 web()
-// $ExpectError
+// $FlowExpectedError
 web(['example.com'])

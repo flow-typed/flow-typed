@@ -6,14 +6,14 @@ const proto = {};
 setprototypeof({}, proto);
 setprototypeof({}, null);
 
-// $ExpectError
+// $FlowExpectedError
 setprototypeof({});
 
-// $ExpectError
+// $FlowExpectedError
 setprototypeof(123, NaN);
 
-// $ExpectError
+// $FlowExpectedError
 setprototypeof({}, undefined);
 
-// $ExpectError
+// $FlowExpectedError
 setprototypeof({}, 'invalid_arg_type');

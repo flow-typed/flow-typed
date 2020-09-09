@@ -13,11 +13,11 @@ it("should infer correctly when the error observable has a different type", () =
 });
 
 it("should enforce types", () => {
-  // $ExpectError
+  // $FlowExpectedError
   const o = of(1, 2, 3).pipe(retryWhen());
 });
 
 it("should enforce types of the notifier", () => {
-  // $ExpectError
+  // $FlowExpectedError
   const o = of(1, 2, 3).pipe(retryWhen(() => 8));
 });

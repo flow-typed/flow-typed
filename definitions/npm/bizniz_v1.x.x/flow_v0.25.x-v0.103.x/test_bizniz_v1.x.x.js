@@ -28,7 +28,7 @@ describe('bizniz', () => {
     const num: number = bizniz.daysBetween(new Date(0), new Date(0))
   });
   it('throw errors', () => {
-    // $ExpectError
+    // $FlowExpectedError
     const str: string = bizniz.weekDaysBetween('', 1);
     const nr: number = bizniz.addWeekDays(new Date(0), 1);
   });

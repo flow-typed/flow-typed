@@ -11,7 +11,7 @@ createAction('foo')();
 createAction('bar', () => {})();
 
 handleAction('foo', () => {}, [])();
-// $ExpectError
+// $FlowExpectedError
 handleAction('foo', () => {})();
 
 handleActions({
@@ -19,18 +19,18 @@ handleActions({
   bar() {},
 }, {})();
 
-// $ExpectError
+// $FlowExpectedError
 handleActions({ foo: {}, bar() {} });
 
 
 const { a } = createActions('a', () => null, Symbol('foo'));
 a();
 
-// $ExpectError
+// $FlowExpectedError
 createActions(2);
 
 
 (combineActions('a', Symbol(), () => null): string);
 
-// $ExpectError
+// $FlowExpectedError
 combineActions(2)

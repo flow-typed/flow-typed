@@ -3,17 +3,17 @@ import isPathInCwd from 'is-path-in-cwd';
 isPathInCwd('any-string');
 (isPathInCwd('any-string'): boolean);
 
-// $ExpectError
+// $FlowExpectedError
 isPathInCwd(4);
 
-// $ExpectError
+// $FlowExpectedError
 isPathInCwd({});
 
-// $ExpectError
+// $FlowExpectedError
 isPathInCwd();
 
-// $ExpectError
+// $FlowExpectedError
 isPathInCwd(null);
 
-// $ExpectError
+// $FlowExpectedError
 (isPathInCwd('any-string'): number);

@@ -15,12 +15,12 @@ describe('documented examples', () => {
   })
 
   it('requires a string input', () => {
-    // $ExpectError
+    // $FlowExpectedError
     indentString(42);
   })
 
   it('returns a string', () => {
-    // $ExpectError
+    // $FlowExpectedError
     (indentString('Unicorns\nRainbows', 4): number);
   })
 })
@@ -31,7 +31,7 @@ describe('options', () => {
   })
 
   it('requires a boolean value for includeEmptyLines', () => {
-    // $ExpectError
+    // $FlowExpectedError
     indentString('foo\nbar', 4, { includeEmptyLines: 'foobar' });
   })
 })

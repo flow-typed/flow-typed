@@ -13,13 +13,13 @@ it('handles correct inputs and return types', () => {
 });
 
 it('errors on invalid return type', () => {
-  // $ExpectError
+  // $FlowExpectedError
   (pAll([() => 1, () => 2, () => 3]): Promise<Array<string>>);
-  // $ExpectError
+  // $FlowExpectedError
   (pAll([() => '1', () => 2, () => 3]): Promise<Array<string>>);
 });
 
 it('errors on invalid options', () => {
-  // $ExpectError
+  // $FlowExpectedError
   pAll([() => 1, () => 2, () => 3], { concurrency: '2' });
 });

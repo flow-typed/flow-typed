@@ -3,7 +3,7 @@ import isoFetch from "isomorphic-fetch";
 (isoFetch("foo"): Promise<Response>);
 (isoFetch("foo", {}): Promise<Response>);
 
-// $ExpectError url has to be string
+// $FlowExpectedError url has to be string
 (isoFetch(123): Promise<any>);
 
 isoFetch("foo", {
@@ -14,7 +14,7 @@ isoFetch("foo", {
   body: "bar"
 });
 
-// $ExpectError number is not a valid body type
+// $FlowExpectedError number is not a valid body type
 isoFetch("foo", {
   body: 5
 });
@@ -26,20 +26,20 @@ isoFetch("foo").then(res => {
   // Response Headers
   (res.headers: Headers);
   (res.headers.append("foo", "bar"): void);
-  // $ExpectError
+  // $FlowExpectedError
   (res.headers.append(5, "bar"): void);
   (res.headers.delete("foo"): void);
-  // $ExpectError
+  // $FlowExpectedError
   (res.headers.delete(5): void);
   (res.headers.entries(): Iterator<*>);
   (res.headers.get("test"): ?string);
-  // $ExpectError
+  // $FlowExpectedError
   (res.headers.get(5): string);
   (res.headers.has("foo"): boolean);
-  // $ExpectError
+  // $FlowExpectedError
   (res.headers.has(5): boolean);
   (res.headers.keys(): Iterator<string>);
-  // $ExpectError value should be a string
+  // $FlowExpectedError value should be a string
   (res.headers.set("foo", 5): void);
   (res.headers.values(): Iterator<*>);
 
@@ -50,7 +50,7 @@ isoFetch("foo").then(res => {
   // Response type
   (res.type: ResponseType);
   res.type = "basic";
-  // $ExpectError foo is not a valid option
+  // $FlowExpectedError foo is not a valid option
   res.type = "foo";
 
   (res.url: string);

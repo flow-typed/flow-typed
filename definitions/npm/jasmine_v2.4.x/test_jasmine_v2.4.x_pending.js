@@ -3,5 +3,5 @@
 pending('this is not written yet');
 pending();
 
-// $ExpectError
+// $FlowExpectedError
 pending(true);

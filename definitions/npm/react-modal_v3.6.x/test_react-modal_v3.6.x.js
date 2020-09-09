@@ -9,7 +9,7 @@ describe('Modal.setAppElement', () => {
     ReactModal.setAppElement('#foo');
     ReactModal.setAppElement(document.body);
 
-    // $ExpectError
+    // $FlowExpectedError
     ReactModal.setAppElement(1);
   });
 });
@@ -18,55 +18,55 @@ it('isOpen property should be a boolean', () => {
   <ReactModal />;
 
   <ReactModal isOpen />;
-  // $ExpectError
+  // $FlowExpectedError
   <ReactModal isOpen={1} />;
 });
 
 it('portalClassName property should be a string', () => {
   < ReactModal portalClassName="foo" />;
-  // $ExpectError
+  // $FlowExpectedError
   <ReactModal portalClassName={1} />;
 });
 
 it('bodyOpenClassName property should be a string', () => {
   < ReactModal bodyOpenClassName="foo" />;
-  // $ExpectError
+  // $FlowExpectedError
   <ReactModal bodyOpenClassName={1} />;
 });
 
 it('ariaHideApp property should be a boolean', () => {
   <ReactModal ariaHideApp />;
-  // $ExpectError
+  // $FlowExpectedError
   <ReactModal ariaHideApp={1} />;
 });
 
 it('closeTimeoutMS property should be a number', () => {
   <ReactModal closeTimeoutMS={10} />;
-  // $ExpectError
+  // $FlowExpectedError
   <ReactModal closeTimeoutMS />;
 });
 
 it('shouldFocusAfterRender property should be a boolean', () => {
   <ReactModal shouldFocusAfterRender />;
-  // $ExpectError
+  // $FlowExpectedError
   <ReactModal shouldFocusAfterRender={1} />;
 });
 
 it('shouldCloseOnEsc property should be a boolean', () => {
   <ReactModal shouldCloseOnEsc />;
-  // $ExpectError
+  // $FlowExpectedError
   <ReactModal shouldCloseOnEsc={1} />;
 });
 
 it('shouldCloseOnOverlayClick property should be a boolean', () => {
   <ReactModal shouldCloseOnOverlayClick />;
-  // $ExpectError
+  // $FlowExpectedError
   <ReactModal shouldCloseOnOverlayClick={1} />;
 });
 
 it('shouldReturnFocusAfterClose property should be a boolean', () => {
   <ReactModal shouldReturnFocusAfterClose />;
-  // $ExpectError
+  // $FlowExpectedError
   <ReactModal shouldReturnFocusAfterClose={1} />;
 });
 
@@ -78,20 +78,20 @@ it('style should be an object with optional content and overlay settings', () =>
   <ReactModal style={{
     overlay: {}
   }} />;
-  // $ExpectError
+  // $FlowExpectedError
   <ReactModal style={{
     content: 1
   }} />;
-  // $ExpectError
+  // $FlowExpectedError
   <ReactModal style={{
     overlay: 1
   }} />;
 });
 
 it('parentSelector property should be a callback', () => {
-  // $ExpectError
+  // $FlowExpectedError
   <ReactModal parentSelector={1} />;
-  // $ExpectError
+  // $FlowExpectedError
   <ReactModal parentSelector="#foo" />;
   <ReactModal parentSelector={() => document.body} />;
 });
@@ -99,26 +99,26 @@ it('parentSelector property should be a callback', () => {
 it('onAfterOpen property should be a callback', () => {
   <ReactModal onAfterOpen={() => { }} />;
   <ReactModal onAfterOpen={async () => { }} />;
-  // $ExpectError
+  // $FlowExpectedError
   <ReactModal onAfterOpen={1} />;
 });
 
 it('onRequestClose property should be a callback', () => {
   <ReactModal onRequestClose={() => { }} />;
   <ReactModal onRequestClose={e => { }} />;
-  // $ExpectError
+  // $FlowExpectedError
   <ReactModal onRequestClose={1} />;
 });
 
 it('role property should be a string', () => {
   < ReactModal role="foo" />;
-  // $ExpectError
+  // $FlowExpectedError
   <ReactModal role={1} />;
 });
 
 it('contentLabel property should be a string', () => {
   < ReactModal contentLabel="foo" />;
-  // $ExpectError
+  // $FlowExpectedError
   <ReactModal contentLabel={1} />;
 });
 
@@ -126,7 +126,7 @@ it('aria property should be an object', () => {
   <ReactModal aria={{
     labelledby: 'foo'
   }} />;
-  // $ExpectError
+  // $FlowExpectedError
   <ReactModal aria={1} />;
 });
 
@@ -137,7 +137,7 @@ it('className can be a string or an object', () => {
     afterOpen: "foo",
     beforeClose: "foo"
   }} />;
-  // $ExpectError
+  // $FlowExpectedError
   <ReactModal className={1} />;
 });
 
@@ -148,24 +148,24 @@ it('overlayClassName can be a string or an object', () => {
     afterOpen: "foo",
     beforeClose: "foo"
   }} />;
-  // $ExpectError
+  // $FlowExpectedError
   <ReactModal overlayClassName={1} />;
 });
 
 it('overlayRef property should be a ref callback ', () => {
   let n;
   <ReactModal overlayRef={node => { n = node; }} />;
-  // $ExpectError
+  // $FlowExpectedError
   <ReactModal overlayRef={1} />;
-  // $ExpectError
+  // $FlowExpectedError
   <ReactModal overlayRef="foo" />;
 });
 
 it('containerRef property should be a ref callback ', () => {
   let n;
   <ReactModal containerRef={node => { n = node; }} />;
-  // $ExpectError
+  // $FlowExpectedError
   <ReactModal containerRef={1} />;
-  // $ExpectError
+  // $FlowExpectedError
   <ReactModal containerRef="foo" />;
 });

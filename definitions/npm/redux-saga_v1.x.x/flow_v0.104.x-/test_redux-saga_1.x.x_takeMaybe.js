@@ -21,14 +21,14 @@ describe("takeMaybe effect", () => {
     });
 
     it("returned object must be read only", () => {
-      // $ExpectError: read-only  property
+      // $FlowExpectedError: read-only  property
       c.type = "anyType";
-      // $ExpectError: read-only  property
+      // $FlowExpectedError: read-only  property
       c.payload = {};
     });
 
     it("returned object must be exact", () => {
-      // $ExpectError: exact type
+      // $FlowExpectedError: exact type
       c.abc = 69;
     });
   });
@@ -54,10 +54,10 @@ describe("takeMaybe effect", () => {
     });
 
     it("must raises an error when passed invalid pattern", () => {
-      // $ExpectError: PatternFn returns a boolean
+      // $FlowExpectedError: PatternFn returns a boolean
       takeMaybe(action => null);
 
-      // $ExpectError: Only string patterns for arrays
+      // $FlowExpectedError: Only string patterns for arrays
       takeMaybe(["FOO", "BAR", 1]);
     });
   });
@@ -85,7 +85,7 @@ describe("takeMaybe effect", () => {
     });
 
     it("must raises an error when passed invalid channel", () => {
-      // $ExpectError: Channels must have take prop
+      // $FlowExpectedError: Channels must have take prop
       takeMaybe({ close: () => {}, put: msg => {} });
     });
   });

@@ -25,11 +25,11 @@ describe('parse', () => {
   it('only accepts a string for the data parameter', () => {
     parse('foo')
 
-    // $ExpectError
+    // $FlowExpectedError
     parse({})
-    // $ExpectError
+    // $FlowExpectedError
     parse(0)
-    // $ExpectError
+    // $FlowExpectedError
     parse([])
   })
 
@@ -42,7 +42,7 @@ describe('parse', () => {
     // enforcement of the return type, immune to Object/any's type coverage
     // loss.
     //
-    // $ExpectError
+    // $FlowExpectedError
     const s: string = parse("test")
   })
 
@@ -58,7 +58,7 @@ describe('parse', () => {
     parse('foo', { charsetSentinel: true })
     parse('foo', { charsetSentinel: false })
 
-    // $ExpectError
+    // $FlowExpectedError
     parse('foo', { charsetSentinel: 'baz' })
   })
 
@@ -66,19 +66,19 @@ describe('parse', () => {
     parse('foo', { comma: true })
     parse('foo', { comma: false })
 
-    // $ExpectError
+    // $FlowExpectedError
     parse('foo', { comma: 'baz' })
   })
 
   it('accepts an decoder option as a function', () => {
     parse('foo', { decoder: () => '' })
-    // $ExpectError
+    // $FlowExpectedError
     parse('foo', { decoder: {} })
-    // $ExpectError
+    // $FlowExpectedError
     parse('foo', { decoder: [] })
-    // $ExpectError
+    // $FlowExpectedError
     parse('foo', { decoder: 5 })
-    // $ExpectError
+    // $FlowExpectedError
     parse('foo', { decoder: 'foo' })
   })
 
@@ -86,11 +86,11 @@ describe('parse', () => {
     // The error conditions here insure type coverage is enforced.
     it('accepts a string', () => {
       parse('foo', { decoder: (x: string) => '' })
-      // $ExpectError
+      // $FlowExpectedError
       parse('foo', { decoder: (x: number) => '' })
-      // $ExpectError
+      // $FlowExpectedError
       parse('foo', { decoder: (x: Array<mixed>) => '' })
-      // $ExpectError
+      // $FlowExpectedError
       parse('foo', { decoder: (x: void) => '' })
     })
 
@@ -115,11 +115,11 @@ describe('parse', () => {
   })
 
   it('does not allow other types to be used for the filter option', () => {
-    // $ExpectError
+    // $FlowExpectedError
     stringify([], { filter: {} })
-    // $ExpectError
+    // $FlowExpectedError
     stringify([], { filter: 5 })
-    // $ExpectError
+    // $FlowExpectedError
     stringify([], { filter: 'foo' })
   })
 
@@ -127,17 +127,17 @@ describe('parse', () => {
     parse('foo', { interpretNumericEntities: true })
     parse('foo', { interpretNumericEntities: false })
 
-    // $ExpectError
+    // $FlowExpectedError
     parse('foo', { interpretNumericEntities: 'baz' })
   })
 
   it("does not accept an arbitrary charset", () => {
-    // $ExpectError
+    // $FlowExpectedError
     parse('foo', { charset: 'foobar', charsetSentinel: true })
   })
 
   it('does not accept unknown options', () => {
-    // $ExpectError
+    // $FlowExpectedError
     parse('foo', { bar: 'baz' })
   })
 })
@@ -152,14 +152,14 @@ describe('stringify', () => {
   })
 
   it('does not accept non-array and non-object types', () => {
-    // $ExpectError
+    // $FlowExpectedError
     stringify(3)
-    // $ExpectError
+    // $FlowExpectedError
     stringify('baz')
   })
 
   it('does not accept unknown options', () => {
-    // $ExpectError
+    // $FlowExpectedError
     stringify([], { foobar: 'baz' })
   })
 
@@ -168,7 +168,7 @@ describe('stringify', () => {
     stringify([], { arrayFormat: 'comma' })
     stringify([], { arrayFormat: 'indices' })
     stringify([], { arrayFormat: 'repeat' })
-    // $ExpectError
+    // $FlowExpectedError
     stringify([], { arrayFormat: 'foo' })
   })
 
@@ -184,41 +184,41 @@ describe('stringify', () => {
     stringify({}, { charsetSentinel: true })
     stringify({}, { charsetSentinel: false })
 
-    // $ExpectError
+    // $FlowExpectedError
     stringify({}, { charsetSentinel: 'baz' })
   })
 
   it('accepts an encode option as a boolean', () => {
     stringify([], { encode: true })
     stringify([], { encode: false })
-    // $ExpectError
+    // $FlowExpectedError
     stringify([], { encode: 'foo' })
-    // $ExpectError
+    // $FlowExpectedError
     stringify([], { encode: [] })
-    // $ExpectError
+    // $FlowExpectedError
     stringify([], { encode: {} })
   })
 
   it('accepts an encodeValuesOnly option as a boolean', () => {
     stringify([], { encodeValuesOnly: true })
     stringify([], { encodeValuesOnly: false })
-    // $ExpectError
+    // $FlowExpectedError
     stringify([], { encodeValuesOnly: 'foo' })
-    // $ExpectError
+    // $FlowExpectedError
     stringify([], { encodeValuesOnly: [] })
-    // $ExpectError
+    // $FlowExpectedError
     stringify([], { encodeValuesOnly: {} })
   })
 
   it('accepts an encoder option as a function', () => {
     stringify([], { encoder: () => '' })
-    // $ExpectError
+    // $FlowExpectedError
     stringify([], { encoder: {} })
-    // $ExpectError
+    // $FlowExpectedError
     stringify([], { encoder: [] })
-    // $ExpectError
+    // $FlowExpectedError
     stringify([], { encoder: 5 })
-    // $ExpectError
+    // $FlowExpectedError
     stringify([], { encoder: 'foo' })
   })
 
@@ -226,25 +226,25 @@ describe('stringify', () => {
     // The error conditions here insure type coverage is enforced.
     it('accepts any value', () => {
       stringify({}, { encoder: (x: mixed) => '' })
-      // $ExpectError
+      // $FlowExpectedError
       stringify({}, { encoder: (x: number) => '' })
-      // $ExpectError
+      // $FlowExpectedError
       stringify({}, { encoder: (x: string) => '' })
-      // $ExpectError
+      // $FlowExpectedError
       stringify({}, { encoder: (x: Array<mixed>) => '' })
-      // $ExpectError
+      // $FlowExpectedError
       stringify({}, { encoder: (x: void) => '' })
     })
 
     it('returns a string', () => {
       stringify({}, { encoder: (x: mixed) => '' })
-      // $ExpectError
+      // $FlowExpectedError
       stringify({}, { encoder: (x: mixed) => ({}) })
-      // $ExpectError
+      // $FlowExpectedError
       stringify({}, { encoder: (x: mixed) => [] })
-      // $ExpectError
+      // $FlowExpectedError
       stringify({}, { encoder: (x: mixed) => null })
-      // $ExpectError
+      // $FlowExpectedError
       stringify({}, { encoder: (x: mixed) => 5 })
     })
   })
@@ -260,11 +260,11 @@ describe('stringify', () => {
   })
 
   it('does not allow other types to be used for the filter option', () => {
-    // $ExpectError
+    // $FlowExpectedError
     stringify([], { filter: {} })
-    // $ExpectError
+    // $FlowExpectedError
     stringify([], { filter: 5 })
-    // $ExpectError
+    // $FlowExpectedError
     stringify([], { filter: 'foo' })
   })
 
@@ -272,23 +272,23 @@ describe('stringify', () => {
     // The error conditions here insure type coverage is enforced.
     it('accepts a string for the first parameter', () => {
       stringify({}, { filter: (x: string) => '' })
-      // $ExpectError
+      // $FlowExpectedError
       stringify({}, { filter: (x: number) => '' })
-      // $ExpectError
+      // $FlowExpectedError
       stringify({}, { filter: (x: Array<mixed>) => '' })
-      // $ExpectError
+      // $FlowExpectedError
       stringify({}, { filter: (x: void) => '' })
     })
 
     it('accepts any value for the second parameter', () => {
       stringify({}, { filter: (x, y: mixed) => '' })
-      // $ExpectError
+      // $FlowExpectedError
       stringify({}, { filter: (x, y: string) => '' })
-      // $ExpectError
+      // $FlowExpectedError
       stringify({}, { filter: (x, y: number) => '' })
-      // $ExpectError
+      // $FlowExpectedError
       stringify({}, { filter: (x, y: Array<mixed>) => '' })
-      // $ExpectError
+      // $FlowExpectedError
       stringify({}, { filter: (x, y: void) => '' })
     })
 
@@ -305,23 +305,23 @@ describe('stringify', () => {
   it('accepts an indices option as a boolean', () => {
     stringify([], { indices: true })
     stringify([], { indices: false })
-    // $ExpectError
+    // $FlowExpectedError
     stringify([], { indices: 'foo' })
-    // $ExpectError
+    // $FlowExpectedError
     stringify([], { indices: [] })
-    // $ExpectError
+    // $FlowExpectedError
     stringify([], { indices: {} })
   })
 
   it('accepts a sort option as a function', () => {
     stringify([], { sort: () => 0 })
-    // $ExpectError
+    // $FlowExpectedError
     stringify([], { sort: {} })
-    // $ExpectError
+    // $FlowExpectedError
     stringify([], { sort: [] })
-    // $ExpectError
+    // $FlowExpectedError
     stringify([], { sort: 5 })
-    // $ExpectError
+    // $FlowExpectedError
     stringify([], { sort: 'foo' })
   })
 
@@ -329,21 +329,21 @@ describe('stringify', () => {
     // The error conditions here insure type coverage is enforced.
     it('accepts two strings', () => {
       stringify({}, { sort: (a: string, b: string) => 0 })
-      // $ExpectError
+      // $FlowExpectedError
       stringify({}, { sort: (a: number) => 0 })
-      // $ExpectError
+      // $FlowExpectedError
       stringify({}, { sort: (a: Array<mixed>) => 0 })
-      // $ExpectError
+      // $FlowExpectedError
       stringify({}, { sort: (a: {[string]: mixed}) => 0 })
-      // $ExpectError
+      // $FlowExpectedError
       stringify({}, { sort: (a: void) => 0 })
-      // $ExpectError
+      // $FlowExpectedError
       stringify({}, { sort: (a, b: number) => 0 })
-      // $ExpectError
+      // $FlowExpectedError
       stringify({}, { sort: (a, b: Array<mixed>) => 0 })
-      // $ExpectError
+      // $FlowExpectedError
       stringify({}, { sort: (a, b: {[string]: mixed}) => 0 })
-      // $ExpectError
+      // $FlowExpectedError
       stringify({}, { sort: (a, b: void) => 0 })
     })
 
@@ -351,17 +351,17 @@ describe('stringify', () => {
       stringify({}, { sort: () => -1 })
       stringify({}, { sort: () => 0 })
       stringify({}, { sort: () => 1 })
-      // $ExpectError
+      // $FlowExpectedError
       stringify({}, { sort: () => 2 })
-      // $ExpectError
+      // $FlowExpectedError
       stringify({}, { sort: () => -2 })
-      // $ExpectError
+      // $FlowExpectedError
       stringify({}, { sort: () => ({}) })
-      // $ExpectError
+      // $FlowExpectedError
       stringify({}, { sort: () => [] })
-      // $ExpectError
+      // $FlowExpectedError
       stringify({}, { sort: () => null })
-      // $ExpectError
+      // $FlowExpectedError
       stringify({}, { sort: () => 5 })
     })
   })
@@ -369,7 +369,7 @@ describe('stringify', () => {
 
 describe('module', () => {
   it('does not support unknown properties', () => {
-    // $ExpectError
+    // $FlowExpectedError
     qs.foobar
   })
 })
@@ -395,10 +395,10 @@ stringify(obj, { arrayFormat: "brackets" });
 stringify(obj, { arrayFormat: "indices" });
 stringify(obj, { arrayFormat: "repeat" });
 
-// $ExpectError: arrayFormat is not an enum value
+// $FlowExpectedError: arrayFormat is not an enum value
 stringify(obj, { arrayFormat: false });
-// $ExpectError: arrayFormat is not an enum value
+// $FlowExpectedError: arrayFormat is not an enum value
 stringify(obj, { arrayFormat: "test" });
 
-// $ExpectError: should be an object
+// $FlowExpectedError: should be an object
 stringify("test");

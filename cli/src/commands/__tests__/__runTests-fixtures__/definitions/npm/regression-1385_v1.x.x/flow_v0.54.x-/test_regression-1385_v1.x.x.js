@@ -1,4 +1,4 @@
 // @flow
 
-// $ExpectError
+// $FlowExpectedError
 const num: number = 123;

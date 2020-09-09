@@ -11,9 +11,9 @@ describe('@reach/rect', () => {
       useRect(createRef<?HTMLElement>());
       useRect(useRef<?HTMLElement>());
 
-      // $ExpectError
+      // $FlowExpectedError
       useRect(useRef<string>());
-      // $ExpectError
+      // $FlowExpectedError
       useRect({});
     });
 
@@ -21,11 +21,11 @@ describe('@reach/rect', () => {
       useRect(useRef<?HTMLElement>(), true);
       useRect(useRef<?HTMLElement>(), false);
 
-      // $ExpectError
+      // $FlowExpectedError
       useRect(useRef<?HTMLElement>(), 1);
-      // $ExpectError
+      // $FlowExpectedError
       useRect(useRef<?HTMLElement>(), 'foo');
-      // $ExpectError
+      // $FlowExpectedError
       useRect(useRef<?HTMLElement>(), []);
     });
   });
@@ -34,16 +34,16 @@ describe('@reach/rect', () => {
     it('accepts required children function', function () {
       <Rect>{() => null}</Rect>;
 
-      // $ExpectError
+      // $FlowExpectedError
       <Rect>foo</Rect>;
-      // $ExpectError
+      // $FlowExpectedError
       <Rect/>;
     });
 
     it('accepts optional onChange handler', function () {
       (<Rect onChange={rect => console.log(rect)}>{() => null}</Rect>);
 
-      // $ExpectError
+      // $FlowExpectedError
       (<Rect onChange={1}>{() => null}</Rect>);
     });
 
@@ -51,7 +51,7 @@ describe('@reach/rect', () => {
       <Rect observe>{() => null}</Rect>;
       <Rect observe={false}>{() => null}</Rect>;
 
-      // $ExpectError
+      // $FlowExpectedError
       <Rect observe={1}>{() => null}</Rect>;
     });
   });

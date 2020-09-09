@@ -12,43 +12,43 @@ const track = new Track(123, {});
 const ttm = new TextTracksManager({});
 ttm.addTracks(track);
 
-// $ExpectError
+// $FlowExpectedError
 ttm.addTracks("should fail");
 
 // system tests
 const sce = new StandbyChangedEvent(true);
-// $ExpectError
+// $FlowExpectedError
 const wrongSce = new StandbyChangedEvent("error");
 
 const result: boolean = sce.isStandby;
-// $ExpectError
+// $FlowExpectedError
 const failure: string = sce.isStandby;
 
 // ui tests
 const pd = new PlayerData();
 
 const cn: number = pd.currentBreakClipNumber;
-// $ExpectError
+// $FlowExpectedError
 const wrongCn: boolean = pd.currentBreakClipNumber;
 
 // breaks tests
 const bm: BreakManager = new BreakManager();
 const brk1: Break = bm.getBreakById("123");
-// $ExpectError
+// $FlowExpectedError
 const brk2: string = bm.getBreakById("123");
-// $ExpectError
+// $FlowExpectedError
 const brk3: Break = bm.getBreakById(123);
 // events tests
 
 const evt: MediaStatusEvent = new MediaStatusEvent();
 const ms: MediaStatus = evt.mediaStatus;
-// $ExpectError
+// $FlowExpectedError
 const ms2: string = evt.mediaStatus;
 
 // messages tests
 const qd = new QueueData("id", "name", "description", "mode");
-// $ExpectError
+// $FlowExpectedError
 const wrongQd = new QueueData({});
 const name: string = qd.name;
-// $ExpectError
+// $FlowExpectedError
 const wrongName: number = qd.name;

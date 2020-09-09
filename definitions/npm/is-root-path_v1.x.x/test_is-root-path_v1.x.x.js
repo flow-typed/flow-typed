@@ -3,17 +3,17 @@ import isRootPath from 'is-root-path';
 isRootPath('any-string');
 (isRootPath('any-string'): boolean);
 
-// $ExpectError
+// $FlowExpectedError
 isRootPath(4);
 
-// $ExpectError
+// $FlowExpectedError
 isRootPath({});
 
-// $ExpectError
+// $FlowExpectedError
 isRootPath();
 
-// $ExpectError
+// $FlowExpectedError
 isRootPath(null);
 
-// $ExpectError
+// $FlowExpectedError
 (isRootPath('any-string'): number);

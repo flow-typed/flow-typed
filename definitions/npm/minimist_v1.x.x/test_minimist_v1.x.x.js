@@ -2,7 +2,7 @@ import minimist from 'minimist';
 
 // Correct:
 minimist(process.argv);
-// $ExpectError
+// $FlowExpectedError
 minimist([1, 2, 3]);
 
 // Correct:
@@ -20,5 +20,5 @@ minimist(process.argv, {
 const result = minimist(process.argv, {});
 const _: Array<string> = result._;
 const foo: string | boolean = result.foo;
-// $ExpectError
+// $FlowExpectedError
 const bar: true = result.bar;

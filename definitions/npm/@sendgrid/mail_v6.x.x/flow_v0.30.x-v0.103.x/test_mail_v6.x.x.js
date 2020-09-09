@@ -99,21 +99,21 @@ mail.send({
 });
 
 // Missing options
-// $ExpectError
+// $FlowExpectedError
 mail.send();
 
 // Empty options hash
-// $ExpectError
+// $FlowExpectedError
 mail.send({});
 
 // Incorrect options
 mail.send({
-  // $ExpectError
+  // $FlowExpectedError
   from: 0,
 });
 
 // Missing from address
-// $ExpectError
+// $FlowExpectedError
 mail.send({
   to: 'dimitri.dobairro@example.org',
   subject: 'Hello attachment',

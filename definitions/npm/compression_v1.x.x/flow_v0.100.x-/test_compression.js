@@ -21,7 +21,7 @@ describe('compression', () => {
   });
 
   it('errors with extraneous options', () => {
-    // $ExpectError
+    // $FlowExpectedError
     compression({ babababa: '1' });
   });
 });

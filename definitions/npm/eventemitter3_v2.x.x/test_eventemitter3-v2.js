@@ -8,19 +8,19 @@ const a: EventEmitter = new A();
 
 a.on('test', async () => {});
 a.on('test', () => {});
-// $ExpectError
+// $FlowExpectedError
 a.on('test');
 
 a.off('test');
-// $ExpectError
+// $FlowExpectedError
 a.off();
 
 a.removeListener('test');
-// $ExpectError
+// $FlowExpectedError
 a.removeListener();
 
 a.once('test', () => {});
-// $ExpectError
+// $FlowExpectedError
 a.once('test');
 
 a.emit('test', 'something');
@@ -30,10 +30,10 @@ a.emit('test');
 
 // Although the library has a stub for this for compatibility, I ignored
 // it from the definition
-// $ExpectError
+// $FlowExpectedError
 a.setMaxListeners();
 
-// $ExpectError
+// $FlowExpectedError
 a.getMaxListeners();
 
 (a.listeners('emit', true): boolean);

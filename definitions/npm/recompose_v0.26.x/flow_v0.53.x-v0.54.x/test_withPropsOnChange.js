@@ -12,11 +12,11 @@ const Comp = ({ hello, eA }) =>
     {(hello: string)}
     {(eA: number)}
     {
-      // $ExpectError eA nor any nor string
+      // $FlowExpectedError eA nor any nor string
       (eA: string)
     }
     {
-      // $ExpectError hello nor any nor number
+      // $FlowExpectedError hello nor any nor number
       (hello: number)
     }
   </div>;
@@ -28,13 +28,13 @@ const enhacer: HOC<*, EnhancedCompProps> = compose(
   withProps(props => ({
     hello: (props.hello: string),
     eA: (props.eA: number),
-    // $ExpectError hello nor any nor number
+    // $FlowExpectedError hello nor any nor number
     helloErr: (props.hello: number),
-    // $ExpectError eA nor any nor string
+    // $FlowExpectedError eA nor any nor string
     eAErr: (props.eA: string)
   })),
   withProps(props => ({
-    // $ExpectError property not found
+    // $FlowExpectedError property not found
     err: props.iMNotExists
   }))
 );
@@ -44,9 +44,9 @@ const enhacerFn: HOC<*, EnhancedCompProps> = compose(
     (props, nextProps) => {
       (props.eA: number);
       (nextProps.eA: number);
-      // $ExpectError eA nor any nor string
+      // $FlowExpectedError eA nor any nor string
       (props.eA: string);
-      // $ExpectError eA nor any nor string
+      // $FlowExpectedError eA nor any nor string
       (nextProps.eA: string);
       return props.eA === props.eA;
     },
@@ -57,15 +57,15 @@ const enhacerFn: HOC<*, EnhancedCompProps> = compose(
   withProps(props => ({
     hello: (props.hello: string),
     eA: (props.eA: number),
-    // $ExpectError hello nor any nor number
+    // $FlowExpectedError hello nor any nor number
     helloErr: (props.hello: number),
-    // $ExpectError eA nor any nor string
+    // $FlowExpectedError eA nor any nor string
     eAErr: (props.eA: string)
   }))
 );
 
 const enhacerErr: HOC<*, EnhancedCompProps> = compose(
-  // $ExpectError property property `eB` not found
+  // $FlowExpectedError property property `eB` not found
   withPropsOnChange(["eA", "eB"], ({ eA }) => ({
     hello: `${eA}`
   }))
@@ -74,7 +74,7 @@ const enhacerErr: HOC<*, EnhancedCompProps> = compose(
 const enhacerFnErr: HOC<*, EnhancedCompProps> = compose(
   withPropsOnChange(
     (props, nextProps) => {
-      // $ExpectError boolean
+      // $FlowExpectedError boolean
       return 1;
     },
     ({ eA }) => ({

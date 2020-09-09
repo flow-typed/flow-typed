@@ -15,7 +15,7 @@ describe('Listeners', () => {
       (event.pushToken: string);
       (event.userId: string);
 
-      // $ExpectError: check any
+      // $FlowExpectedError: check any
       (event.userId: boolean);
     });
     OneSignal.addEventListener('inAppMessageClicked', event => {
@@ -24,7 +24,7 @@ describe('Listeners', () => {
       (event.firstClick: boolean);
       (event.closesMessage: boolean);
 
-      // $ExpectError: check any
+      // $FlowExpectedError: check any
       (event.closesMessage: number);
     });
 
@@ -36,9 +36,9 @@ describe('Listeners', () => {
   });
 
   it('must throw error when type not supported', () => {
-    // $ExpectError
+    // $FlowExpectedError
     OneSignal.addEventListener('someEventName', simpleHandler);
-    // $ExpectError
+    // $FlowExpectedError
     OneSignal.removeEventListener('someEventName', simpleHandler);
   });
 });
@@ -50,9 +50,9 @@ describe('Tags methods', () => {
     });
 
     it("must throw error when args aren't enough", () => {
-      // $ExpectError
+      // $FlowExpectedError
       OneSignal.sendTag();
-      // $ExpectError
+      // $FlowExpectedError
       OneSignal.sendTag('maybe tag');
     });
 
@@ -67,19 +67,19 @@ describe('Tags methods', () => {
   describe('getTags', () => {
     it('must return read only tags object', () => {
       OneSignal.getTags(receivedTags => {
-        // $ExpectError
+        // $FlowExpectedError
         receivedTags.abc = '123';
       });
     });
     it('must throw error when it called without callback fn', () => {
-      // $ExpectError
+      // $FlowExpectedError
       OneSignal.getTags();
     });
   });
 
   it('must call deleteTag only with one string argument', () => {
     OneSignal.deleteTag('key');
-    // $ExpectError
+    // $FlowExpectedError
     OneSignal.deleteTag();
   });
 });
@@ -97,7 +97,7 @@ describe('Email methods', () => {
     });
 
     it('must throw error when call setEmail without args', () => {
-      // $ExpectError
+      // $FlowExpectedError
       OneSignal.setEmail();
     });
   });
@@ -105,13 +105,13 @@ describe('Email methods', () => {
   it('must call callback fn with error or void', () => {
     OneSignal.logoutEmail((error: ?Error) => {});
 
-    // $ExpectError
+    // $FlowExpectedError
     OneSignal.logoutEmail();
   });
 
   it('must call syncHashedEmail with string', () => {
     OneSignal.syncHashedEmail('email');
-    // $ExpectError
+    // $FlowExpectedError
     OneSignal.syncHashedEmail();
   });
 });
@@ -120,23 +120,23 @@ describe('Others', () => {
   it('must call setLocationShared with boolean', () => {
     OneSignal.setLocationShared(true);
     OneSignal.setLocationShared(false);
-    // $ExpectError
+    // $FlowExpectedError
     OneSignal.setLocationShared();
   });
 
   it('must call setSubscription with boolean', () => {
     OneSignal.setSubscription(true);
     OneSignal.setSubscription(false);
-    // $ExpectError
+    // $FlowExpectedError
     OneSignal.setSubscription();
   });
   it('must call inFocusDisplaying with FocusBehaviors type', () => {
     OneSignal.inFocusDisplaying(0);
     OneSignal.inFocusDisplaying(1);
     OneSignal.inFocusDisplaying(2);
-    // $ExpectError
+    // $FlowExpectedError
     OneSignal.inFocusDisplaying(3);
-    // $ExpectError
+    // $FlowExpectedError
     OneSignal.inFocusDisplaying();
   });
 });
@@ -163,11 +163,11 @@ describe('setLogLevel', () => {
   });
 
   it('must throw error when LogLevel more than 6', () => {
-    // $ExpectError
+    // $FlowExpectedError
     OneSignal.setLogLevel(7, 0);
-    // $ExpectError
+    // $FlowExpectedError
     OneSignal.setLogLevel(0, 7);
-    // $ExpectError
+    // $FlowExpectedError
     OneSignal.setLogLevel();
   });
 });
@@ -175,14 +175,14 @@ describe('setLogLevel', () => {
 it('must call setRequiresUserPrivacyConsent with boolean', () => {
   OneSignal.setRequiresUserPrivacyConsent(true);
   OneSignal.setRequiresUserPrivacyConsent(false);
-  // $ExpectError
+  // $FlowExpectedError
   OneSignal.setRequiresUserPrivacyConsent();
 });
 
 it('must call provideUserConsent with boolean', () => {
   OneSignal.provideUserConsent(true);
   OneSignal.provideUserConsent(false);
-  // $ExpectError
+  // $FlowExpectedError
   OneSignal.provideUserConsent();
 });
 
@@ -224,7 +224,7 @@ describe('IOS only', () => {
 
   it('must call checkPermissions with callback adn return read only permissions', () => {
     OneSignal.checkPermissions(permissions => {
-      // $ExpectError
+      // $FlowExpectedError
       permissions.abc = 123;
 
       (permissions.alert: number);
@@ -232,7 +232,7 @@ describe('IOS only', () => {
       (permissions.sound: number);
     });
 
-    // $ExpectError
+    // $FlowExpectedError
     OneSignal.checkPermissions();
   });
 
@@ -248,22 +248,22 @@ describe('Android only', () => {
   it('must call enableVibrate with boolean', () => {
     OneSignal.enableVibrate(true);
     OneSignal.enableVibrate(false);
-    // $ExpectError
+    // $FlowExpectedError
     OneSignal.enableVibrate();
   });
 
   it('must call enableSound with boolean', () => {
     OneSignal.enableSound(true);
     OneSignal.enableSound(false);
-    // $ExpectError
+    // $FlowExpectedError
     OneSignal.enableSound();
   });
 
   it('must call cancelNotification with number', () => {
     OneSignal.cancelNotification(0);
-    // $ExpectError
+    // $FlowExpectedError
     OneSignal.cancelNotification('');
-    // $ExpectError
+    // $FlowExpectedError
     OneSignal.cancelNotification();
   });
 
@@ -281,13 +281,13 @@ it('must call init with id and oprtions for IOS', () => {
 
   OneSignal.init('id');
   OneSignal.init('id', IOSSettings);
-  // $ExpectError
+  // $FlowExpectedError
   OneSignal.init();
 });
 
 it('must return PermissionSubscriptionState', () => {
   OneSignal.getPermissionSubscriptionState(state => {
-    // $ExpectError - read only state
+    // $FlowExpectedError - read only state
     state.abc = '123';
 
     (state: PermissionSubscriptionState);

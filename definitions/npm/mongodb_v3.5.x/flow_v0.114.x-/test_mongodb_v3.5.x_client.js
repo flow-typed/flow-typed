@@ -20,9 +20,9 @@ describe('static connect', () => {
       const client: Promise<MongoClient> = MongoClient.connect(
         'mongodb://localhost:27017'
       );
-      // $ExpectError
+      // $FlowExpectedError
       MongoClient.connect(2);
-      // $ExpectError
+      // $FlowExpectedError
       MongoClient.connect();
     });
 
@@ -33,7 +33,7 @@ describe('static connect', () => {
       );
       MongoClient.connect(
         'mongodb://localhost:27017',
-        // $ExpectError
+        // $FlowExpectedError
         { invalidOptionsKey: string }
       );
     });
@@ -44,13 +44,13 @@ describe('static connect', () => {
         'mongodb://localhost:27017',
         cb
       );
-      // $ExpectError
+      // $FlowExpectedError
       MongoClient.connect(2, cb);
-      // $ExpectError
+      // $FlowExpectedError
       MongoClient.connect(cb);
       MongoClient.connect(
         'mongodb://localhost:27017',
-        // $ExpectError
+        // $FlowExpectedError
         (error: Error, c: string) => true
       );
     });
@@ -63,7 +63,7 @@ describe('static connect', () => {
       );
       MongoClient.connect(
         'mongodb://localhost:27017',
-        // $ExpectError
+        // $FlowExpectedError
         { invalidOptionsKey: string },
         cb
       );
@@ -75,14 +75,14 @@ describe('connect', () => {
   describe('Promises', () => {
     it('should return a promise', (client: MongoClient) => {
       const c: Promise<MongoClient> = client.connect();
-      // $ExpectError
+      // $FlowExpectedError
       client.connect('mongodb://localhost:27017');
     });
   });
   describe('Callback', () => {
     it('should accepts callback', (client: MongoClient, cb: ConnectCallback) => {
       client.connect(cb);
-      // $ExpectError
+      // $FlowExpectedError
       client.connect('mongodb://localhost:27017', cb);
     });
   });
@@ -91,42 +91,42 @@ describe('connect', () => {
 describe('MongoClientOptions', (options: MongoClientOptions) => {
   it('should supports poolSize options', () => {
     const a: void | number = options.poolSize;
-    // $ExpectError
+    // $FlowExpectedError
     const b: number = options.poolSize;
   });
   it('should supports ssl options', () => {
     const a: void | boolean = options.ssl;
-    // $ExpectError
+    // $FlowExpectedError
     const b: boolean = options.ssl;
   });
   it('should supports sslValidate options', () => {
     const a: void | boolean = options.sslValidate;
-    // $ExpectError
+    // $FlowExpectedError
     const b: boolean = options.sslValidate;
   });
   it('should supports sslCA options', () => {
     const a: void | Buffer = options.sslCA;
-    // $ExpectError
+    // $FlowExpectedError
     const b: Buffer = options.sslCA;
   });
   it('should supports sslCert options', () => {
     const a: void | Buffer = options.sslCert;
-    // $ExpectError
+    // $FlowExpectedError
     const b: Buffer = options.sslCert;
   });
   it('should supports sslKey options', () => {
     const a: void | Buffer = options.sslKey;
-    // $ExpectError
+    // $FlowExpectedError
     const b: Buffer = options.sslKey;
   });
   it('should supports sslPass options', () => {
     const a: void | string = options.sslPass;
-    // $ExpectError
+    // $FlowExpectedError
     const b: string = options.sslPass;
   });
   it('should supports sslCRL options', () => {
     const a: void | Buffer = options.sslCRL;
-    // $ExpectError
+    // $FlowExpectedError
     const b: Buffer = options.sslCRL;
   });
   it('should supports checkServerIdentity options', () => {
@@ -134,302 +134,302 @@ describe('MongoClientOptions', (options: MongoClientOptions) => {
     const b: MongoClientOptions = {
       checkServerIdentity: (servername: string, cert: string) => false,
     };
-    // $ExpectError
+    // $FlowExpectedError
     const c: MongoClientOptions = { checkServerIdentity: (a: boolean) => {} };
   });
   it('should supports tls options', () => {
     const a: void | boolean = options.tls;
-    // $ExpectError
+    // $FlowExpectedError
     const b: boolean = options.tls;
   });
   it('should supports tlsInsecure options', () => {
     const a: void | boolean = options.tlsInsecure;
-    // $ExpectError
+    // $FlowExpectedError
     const b: boolean = options.tlsInsecure;
   });
   it('should supports tlsCAFile options', () => {
     const a: void | string = options.tlsCAFile;
-    // $ExpectError
+    // $FlowExpectedError
     const b: string = options.tlsCAFile;
   });
   it('should supports tlsCertificateKeyFile options', () => {
     const a: void | string = options.tlsCertificateKeyFile;
-    // $ExpectError
+    // $FlowExpectedError
     const b: string = options.tlsCertificateKeyFile;
   });
   it('should supports tlsCertificateKeyFilePassword options', () => {
     const a: void | string = options.tlsCertificateKeyFilePassword;
-    // $ExpectError
+    // $FlowExpectedError
     const b: string = options.tlsCertificateKeyFilePassword;
   });
   it('should supports tlsAllowInvalidCertificates options', () => {
     const a: void | boolean = options.tlsAllowInvalidCertificates;
-    // $ExpectError
+    // $FlowExpectedError
     const b: boolean = options.tlsAllowInvalidCertificates;
   });
   it('should supports tlsAllowInvalidHostnames options', () => {
     const a: void | boolean = options.tlsAllowInvalidHostnames;
-    // $ExpectError
+    // $FlowExpectedError
     const b: boolean = options.tlsAllowInvalidHostnames;
   });
   it('should supports autoReconnect options', () => {
     const a: void | boolean = options.autoReconnect;
-    // $ExpectError
+    // $FlowExpectedError
     const b: boolean = options.autoReconnect;
   });
   it('should supports noDelay options', () => {
     const a: void | boolean = options.noDelay;
-    // $ExpectError
+    // $FlowExpectedError
     const b: boolean = options.noDelay;
   });
   it('should supports keepAlive options', () => {
     const a: void | boolean = options.keepAlive;
-    // $ExpectError
+    // $FlowExpectedError
     const b: boolean = options.keepAlive;
   });
   it('should supports keepAliveInitialDelay options', () => {
     const a: void | number = options.keepAliveInitialDelay;
-    // $ExpectError
+    // $FlowExpectedError
     const b: number = options.keepAliveInitialDelay;
   });
   it('should supports connectTimeoutMS options', () => {
     const a: void | number = options.connectTimeoutMS;
-    // $ExpectError
+    // $FlowExpectedError
     const b: number = options.connectTimeoutMS;
   });
   it('should supports socketTimeoutMS options', () => {
     const a: void | number = options.socketTimeoutMS;
-    // $ExpectError
+    // $FlowExpectedError
     const b: number = options.socketTimeoutMS;
   });
   it('should supports keepAliveInitialDelay options', () => {
     const a: 4 | 6 | void | null = options.family;
-    // $ExpectError
+    // $FlowExpectedError
     const b: number = options.family;
   });
   it('should supports reconnectTries options', () => {
     const a: number | void = options.reconnectTries;
-    // $ExpectError
+    // $FlowExpectedError
     const b: number = options.reconnectTries;
   });
   it('should supports reconnectInterval options', () => {
     const a: number | void = options.reconnectInterval;
-    // $ExpectError
+    // $FlowExpectedError
     const b: number = options.family;
   });
   it('should supports ha options', () => {
     const a: boolean | void = options.ha;
-    // $ExpectError
+    // $FlowExpectedError
     const b: boolean = options.ha;
   });
   it('should supports haInterval options', () => {
     const a: number | void = options.haInterval;
-    // $ExpectError
+    // $FlowExpectedError
     const b: number = options.haInterval;
   });
   it('should supports replicaSet options', () => {
     const a: void | string = options.replicaSet;
-    // $ExpectError
+    // $FlowExpectedError
     const b: string = options.replicaSet;
   });
   it('should supports secondaryAcceptableLatencyMS options', () => {
     const a: number | void = options.secondaryAcceptableLatencyMS;
-    // $ExpectError
+    // $FlowExpectedError
     const b: number = options.secondaryAcceptableLatencyMS;
   });
   it('should supports acceptableLatencyMS options', () => {
     const a: number | void = options.acceptableLatencyMS;
-    // $ExpectError
+    // $FlowExpectedError
     const b: number = options.acceptableLatencyMS;
   });
   it('should supports connectWithNoPrimary options', () => {
     const a: boolean | void = options.connectWithNoPrimary;
-    // $ExpectError
+    // $FlowExpectedError
     const b: boolean = options.connectWithNoPrimary;
   });
   it('should supports authSource options', () => {
     const a: string | void = options.authSource;
-    // $ExpectError
+    // $FlowExpectedError
     const b: string = options.authSource;
   });
   it('should supports w options', () => {
     const a: number | string | void = options.w;
-    // $ExpectError
+    // $FlowExpectedError
     const b: number | string = options.w;
   });
   it('should supports wtimeout options', () => {
     const a: number | void = options.wtimeout;
-    // $ExpectError
+    // $FlowExpectedError
     const b: number = options.wtimeout;
   });
   it('should supports j options', () => {
     const a: boolean | void = options.j;
-    // $ExpectError
+    // $FlowExpectedError
     const b: boolean = options.j;
   });
   it('should supports forceServerObjectId options', () => {
     const a: boolean | void = options.forceServerObjectId;
-    // $ExpectError
+    // $FlowExpectedError
     const b: boolean = options.forceServerObjectId;
   });
   it('should supports serializeFunctions options', () => {
     const a: boolean | void = options.serializeFunctions;
-    // $ExpectError
+    // $FlowExpectedError
     const b: boolean = options.serializeFunctions;
   });
   it('should supports ignoreUndefined options', () => {
     const a: boolean | void = options.ignoreUndefined;
-    // $ExpectError
+    // $FlowExpectedError
     const b: boolean = options.ignoreUndefined;
   });
   it('should supports raw options', () => {
     const a: boolean | void = options.raw;
-    // $ExpectError
+    // $FlowExpectedError
     const b: boolean = options.raw;
   });
   it('should supports bufferMaxEntries options', () => {
     const a: number | void = options.bufferMaxEntries;
-    // $ExpectError
+    // $FlowExpectedError
     const b: number = options.bufferMaxEntries;
   });
   it('should supports raw options', () => {
     const a: boolean | void = options.raw;
-    // $ExpectError
+    // $FlowExpectedError
     const b: boolean = options.raw;
   });
   it('should supports readPreference options', () => {
     const a: ReadPreferenceValue | void = options.readPreference;
-    // $ExpectError
+    // $FlowExpectedError
     const b: ReadPreferenceValue = options.readPreference;
   });
   it('should supports pkFactory options', (pkFactory: PkFactory) => {
     const a: PkFactory | void = options.pkFactory;
-    // $ExpectError
+    // $FlowExpectedError
     const b: PkFactory = options.pkFactory;
   });
   it('should supports pkFactory options', (pkFactory: PkFactory) => {
     const a: PkFactory | void = options.pkFactory;
-    // $ExpectError
+    // $FlowExpectedError
     const b: PkFactory = options.pkFactory;
   });
   it('should supports promiseLibrary options', () => {
     const a: { ... } | void = options.promiseLibrary;
-    // $ExpectError
+    // $FlowExpectedError
     const b: { ... } = options.promiseLibrary;
   });
   it('should supports readConcern options', () => {
     const a: ReadConcern | void = options.readConcern;
-    // $ExpectError
+    // $FlowExpectedError
     const b: ReadConcern = options.readConcern;
   });
   it('should supports maxStalenessSeconds options', () => {
     const a: number | void = options.maxStalenessSeconds;
-    // $ExpectError
+    // $FlowExpectedError
     const b: number = options.maxStalenessSeconds;
   });
   it('should supports loggerLevel options', () => {
     const a: 'error' | 'warn' | 'info' | 'debug' | void = options.loggerLevel;
-    // $ExpectError
+    // $FlowExpectedError
     const b: 'error' | 'warn' | 'info' | 'debug' = options.loggerLevel;
   });
   it('should supports logger options', () => {
     const a: LoggerInterface | void = options.logger;
-    // $ExpectError
+    // $FlowExpectedError
     const b: LoggerInterface = options.logger;
   });
   it('should supports promoteValues options', () => {
     const a: boolean | void = options.promoteValues;
-    // $ExpectError
+    // $FlowExpectedError
     const b: boolean = options.promoteValues;
   });
   it('should supports promoteBuffers options', () => {
     const a: boolean | void = options.promoteBuffers;
-    // $ExpectError
+    // $FlowExpectedError
     const b: boolean = options.promoteBuffers;
   });
   it('should supports promoteLongs options', () => {
     const a: boolean | void = options.promoteLongs;
-    // $ExpectError
+    // $FlowExpectedError
     const b: boolean = options.promoteLongs;
   });
   it('should supports domainsEnabled options', () => {
     const a: boolean | void = options.domainsEnabled;
-    // $ExpectError
+    // $FlowExpectedError
     const b: boolean = options.domainsEnabled;
   });
   it('should supports validateOptions options', () => {
     const a: boolean | void = options.validateOptions;
-    // $ExpectError
+    // $FlowExpectedError
     const b: boolean = options.validateOptions;
   });
   it('should supports appname options', () => {
     const a: string | void = options.appname;
-    // $ExpectError
+    // $FlowExpectedError
     const b: string = options.appname;
   });
   it('should supports auth options', () => {
     const a: Auth | void = options.auth;
-    // $ExpectError
+    // $FlowExpectedError
     const b: Auth = options.auth;
   });
   it('should supports authMechanism options', () => {
     const a: 'MDEFAULT' | 'GSSAPI' | 'PLAIN' | 'MONGODB-X509' | 'SCRAM-SHA-1' | void = options.authMechanism;
-    // $ExpectError
+    // $FlowExpectedError
     const b: 'MDEFAULT' | 'GSSAPI' | 'PLAIN' | 'MONGODB-X509' | 'SCRAM-SHA-1' = options.authMechanism;
   });
   it('should supports compression options', () => {
     const a: 'snappy' | 'zlib' | void = options.compression;
-    // $ExpectError
+    // $FlowExpectedError
     const b: 'snappy' | 'zlib' = options.compression;
   });
   it('should supports fsync options', () => {
     const a: boolean | void = options.fsync;
-    // $ExpectError
+    // $FlowExpectedError
     const b: boolean = options.fsync;
   });
   it('should supports readPreferenceTags options', () => {
     const a: Array<{ [string]: string, ... }> | void = options.readPreferenceTags;
-    // $ExpectError
+    // $FlowExpectedError
     const b: Array<{ [string]: string, ... }> = options.readPreferenceTags;
   });
   it('should supports numberOfRetries options', () => {
     const a: number | void = options.numberOfRetries;
-    // $ExpectError
+    // $FlowExpectedError
     const b: number = options.numberOfRetries;
   });
   it('should supports auto_reconnect options', () => {
     const a: boolean | void = options.auto_reconnect;
-    // $ExpectError
+    // $FlowExpectedError
     const b: boolean = options.auto_reconnect;
   });
   it('should supports monitorCommands options', () => {
     const a: boolean | void = options.monitorCommands;
-    // $ExpectError
+    // $FlowExpectedError
     const b: boolean = options.monitorCommands;
   });
   it('should supports minSize options', () => {
     const a: number | void = options.minSize;
-    // $ExpectError
+    // $FlowExpectedError
     const b: number = options.minSize;
   });
   it('should supports useNewUrlParser options', () => {
     const a: boolean | void = options.useNewUrlParser;
-    // $ExpectError
+    // $FlowExpectedError
     const b: boolean = options.useNewUrlParser;
   });
   it('should supports useUnifiedTopology options', () => {
     const a: boolean | void = options.useUnifiedTopology;
-    // $ExpectError
+    // $FlowExpectedError
     const b: boolean = options.useUnifiedTopology;
   });
   it('should supports autoEncryption options', () => {
     const a: AutoEncryptionOptionsObject | void = options.autoEncryption;
-    // $ExpectError
+    // $FlowExpectedError
     const b: AutoEncryptionOptionsObject = options.autoEncryption;
   });
   it('should supports driverInfo options', () => {
     const a: DriverInfoOptionsObject | void = options.driverInfo;
-    // $ExpectError
+    // $FlowExpectedError
     const b: DriverInfoOptionsObject = options.driverInfo;
   });
 });

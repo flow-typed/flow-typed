@@ -6,12 +6,12 @@ const payload = {
   foo: 'bar'
 };
 
-// $ExpectError
+// $FlowExpectedError
 jwt.sign(payload);
 
 jwt.sign(payload, 'secret');
 
-// $ExpectError
+// $FlowExpectedError
 jwt.sign(payload, 'secret', (err: number) => undefined);
 
 jwt.sign(payload, 'secret', (err: Error, token: string) => undefined);
@@ -26,24 +26,24 @@ jwt.sign(payload, Buffer.from('secret'), {
   algorithm: 'RS256'
 });
 
-// $ExpectError
+// $FlowExpectedError
 jwt.sign(payload, Buffer.from('secret'), {
   algorithm: 'RS256',
   mutatePayload: 1,
 });
 
-// $ExpectError
+// $FlowExpectedError
 jwt.sign(payload, Buffer.from('secret'), {
   algorithm: 'PEMDAS'
 });
 
-// $ExpectError
+// $FlowExpectedError
 jwt.sign(payload, { key: 'foo', passphrase: 'bar' });
 
-// $ExpectError
+// $FlowExpectedError
 jwt.sign(payload, { key: 'foo', passphrase: 'bar' }, { subject: 'missing algo' });
 
-// $ExpectError
+// $FlowExpectedError
 jwt.sign(payload, { key: 'foo', passphrase: 'bar' }, (foo) => undefined);
 
 jwt.sign(payload, { key: 'foo', passphrase: 'bar' }, { algorithm: 'ES512' }, (err: Error) => undefined);
@@ -52,10 +52,10 @@ jwt.verify('token', 'secret');
 
 jwt.verify('token', 'secret', err => undefined);
 
-// $ExpectError
+// $FlowExpectedError
 jwt.verify('token', { key: 'secret', passphrase: 'foo' });
 
-// $ExpectError
+// $FlowExpectedError
 jwt.verify('token', { key: 'secret', passphrase: 'foo' }, { algorithms: ['not-real'] });
 
 jwt.verify('token', { key: 'secret', passphrase: 'foo' }, { algorithms: ['ES512'] });
@@ -64,12 +64,12 @@ function getKey(header, callback){
   callback(null, "foobar")
 }
 
-// $ExpectError
+// $FlowExpectedError
 jwt.verify('token', getKey, { algorithms: ['RS256'] })
 
 jwt.verify('token', getKey, { algorithms: ['RS256'] }, (err) => undefined)
 
-// $ExpectError
+// $FlowExpectedError
 jwt.verify('token', getKey)
 
 jwt.verify('token', getKey, (err) => undefined)
@@ -80,5 +80,5 @@ jwt.decode('foo', {
   json: true
 });
 
-// $ExpectError
+// $FlowExpectedError
 jwt.decode(1234);

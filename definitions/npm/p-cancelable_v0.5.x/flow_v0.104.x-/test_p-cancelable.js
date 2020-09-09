@@ -12,15 +12,15 @@ it('constructor', () => {
     reject(new Error('error message'))
     onCancel(() => {})
 
-    // $ExpectError
+    // $FlowExpectedError
     resolve()
-    // $ExpectError
+    // $FlowExpectedError
     resolve(1)
-    // $ExpectError
+    // $FlowExpectedError
     resolve(true)
-    // $ExpectError
+    // $FlowExpectedError
     onCancel()
-    // $ExpectError
+    // $FlowExpectedError
     onCancel(1)
   })
 })
@@ -29,7 +29,7 @@ it('behaves like a promise', async () => {
   await cancelablePromise
 
   cancelablePromise.then((value: string) => {})
-  // $ExpectError Promise's value should be of type `string` only
+  // $FlowExpectedError Promise's value should be of type `string` only
   cancelablePromise.then((value: number) => {})
 
   cancelablePromise.catch(error => {})
@@ -39,28 +39,28 @@ it('behaves like a promise', async () => {
 
 it('.isCancelable property', () => {
   ;(cancelablePromise.isCanceled: boolean)
-  // $ExpectError
+  // $FlowExpectedError
   ;(cancelablePromise.isCanceled: number)
-  // $ExpectError
+  // $FlowExpectedError
   ;(cancelablePromise.isCanceled: string)
-  // $ExpectError Is a getter only
+  // $FlowExpectedError Is a getter only
   cancelablePromise.isCanceled = true
-  // $ExpectError Is a getter only
+  // $FlowExpectedError Is a getter only
   cancelablePromise.isCanceled = false
 })
 
 it('PCancelable.CancelError', () => {
   const err: PCancelable.CancelError = new PCancelable.CancelError()
   ;(err.isCanceled: boolean)
-  // $ExpectError `isCanceled` is always true in a `CancelError`
+  // $FlowExpectedError `isCanceled` is always true in a `CancelError`
   ;(err.isCanceled: false)
-  // $ExpectError
+  // $FlowExpectedError
   ;(err.isCanceled: number)
-  // $ExpectError
+  // $FlowExpectedError
   ;(err.isCanceled: string)
-  // $ExpectError Is a getter only
+  // $FlowExpectedError Is a getter only
   err.isCanceled = true
-  // $ExpectError Is a getter only
+  // $FlowExpectedError Is a getter only
   err.isCanceled = false
 })
 
@@ -70,22 +70,22 @@ it('PCancelable.fn', () => {
   const fn = PCancelable.fn(
     (input: string, onCancel: OnCancel): Promise<number> => {
       onCancel(() => {})
-      // $ExpectError
+      // $FlowExpectedError
       onCancel()
-      // $ExpectError
+      // $FlowExpectedError
       onCancel(1)
 
       return Promise.resolve<number>(1)
     }
   )
   ;(fn('input'): PCancelable<number>)
-  // $ExpectError The promise resolves to a number
+  // $FlowExpectedError The promise resolves to a number
   ;(fn('input'): PCancelable<string>)
-  // $ExpectError The input should be of type string
+  // $FlowExpectedError The input should be of type string
   ;(fn(1): PCancelable<number>)
 
   fn('input').cancel()
-  // $ExpectError
+  // $FlowExpectedError
   fn('input').unknownFunction()
 })
 

@@ -24,7 +24,7 @@ const B: boolean = render(<div />, { context: { foo: true } })
   .equals(<div />);
 
 // Test against chaining returning `any`
-// $ExpectError
+// $FlowExpectedError
 (shallow(<div />).children(): boolean);
 
 (shallow(<div />).children(): ShallowWrapper<'div'>);
@@ -41,7 +41,7 @@ const StatelessComponent = () => <div />;
 shallow(<div />).find(ClassComponent);
 shallow(<div />).find(StatelessComponent);
 shallow(<div />).find({ a: 1 });
-// $ExpectError
+// $FlowExpectedError
 shallow(<div />).find(true);
 
 shallowWrapper.instance();
@@ -63,9 +63,9 @@ shallowWrapper
 //   .find(123)
 
 // shallow's getNode(s) was replaced by getElement(s) in enzyme v3
-// $ExpectError
+// $FlowExpectedError
 shallowWrapper.getNode();
-// $ExpectError
+// $FlowExpectedError
 shallowWrapper.getNodes();
 
 shallowWrapper.getElement();
@@ -74,27 +74,27 @@ shallowWrapper.getElements();
 (mount(<div />).map(node => true): Array<boolean>);
 
 (mount(<div />).reduce((acc: number, node, i) => i + 1): Array<number>);
-// $ExpectError
+// $FlowExpectedError
 (mount(<div />).reduce((acc: number, node, i) => i + 1): Array<boolean>);
 (mount(<div />).reduce((acc, node, i) => i + 1, 0): Array<number>);
-// $ExpectError
+// $FlowExpectedError
 (mount(<div />).reduce((acc, node, i) => i + 1, 0): Array<boolean>);
 
 (mount(<div />).setProps({}, () => {}): ReactWrapper<'div'>);
-// $ExpectError
+// $FlowExpectedError
 (mount(<div />).setProps({}, null): ReactWrapper<'div'>);
 (mount(<div />).setProps({}): ReactWrapper<'div'>);
-// $ExpectError
+// $FlowExpectedError
 (mount(<div />).setProps(): ReactWrapper<'div'>);
-// $ExpectError
+// $FlowExpectedError
 (mount(<div />).setProps(null): ReactWrapper<'div'>);
 
 (mount(<div />).renderProp("render")(1, "hi"): ReactWrapper<'div'>);
 
 // mount's getNode(s) were removed in enzyme v3
-// $ExpectError
+// $FlowExpectedError
 mount(<div />).getNode();
-// $ExpectError
+// $FlowExpectedError
 mount(<div />).getNodes();
 
 // Cheerio
@@ -109,21 +109,21 @@ class TestInstance extends React.Component<*> {
   method = () => 'test';
 }
 
-// $ExpectError
+// $FlowExpectedError
 (mount(<TestInstance />).instance().method: string);
 mount(<TestInstance />).instance().method();
 (mount(<TestInstance />).instance().method: () => 'test');
 
-// $ExpectError
+// $FlowExpectedError
 (shallow(<TestInstance />).instance().method: string);
 shallow(<TestInstance />).instance().method();
 (shallow(<TestInstance />).instance().method: () => 'test');
 
 (mount(<div />).simulateError(new Error('error')): ReactWrapper<'div'>);
-// $ExpectError
+// $FlowExpectedError
 (mount(<div />).simulateError('error'): ReactWrapper<'div'>);
 (shallow(<div />).simulateError(new Error('error')): ShallowWrapper<'div'>);
-// $ExpectError
+// $FlowExpectedError
 (shallow(<div />).simulateError('error'): ShallowWrapper<'div'>);
 
 class DeepInstance extends React.Component<{onChange: () => void}> {}
@@ -133,15 +133,15 @@ mount(<div><DeepInstance onChange={() => {}}/></div>).closest(DeepInstance).inst
 mount(<div><DeepInstance onChange={() => {}}/></div>).parents(DeepInstance).instance().props.onChange();
 mount(<div><DeepInstance onChange={() => {}}/></div>).children(DeepInstance).instance().props.onChange();
 
-// $ExpectError
+// $FlowExpectedError
 mount(<div><DeepInstance onChange={() => {}}/></div>).find(DeepInstance).instance().props.onChangeX();
-// $ExpectError
+// $FlowExpectedError
 mount(<div><DeepInstance onChange={() => {}}/></div>).filter(DeepInstance).instance().props.onChangeX();
-// $ExpectError
+// $FlowExpectedError
 mount(<div><DeepInstance onChange={() => {}}/></div>).closest(DeepInstance).instance().props.onChangeX();
-// $ExpectError
+// $FlowExpectedError
 mount(<div><DeepInstance onChange={() => {}}/></div>).parents(DeepInstance).instance().props.onChangeX();
-// $ExpectError
+// $FlowExpectedError
 mount(<div><DeepInstance onChange={() => {}}/></div>).children(DeepInstance).instance().props.onChangeX();
 
 
@@ -178,7 +178,7 @@ describe('invoke', () => {
             const shallowWrapper = shallow(<div getNumber={() => {return 'not a number';}} />);
             const string = shallowWrapper.invoke('getNumber')();
 
-            // $ExpectError
+            // $FlowExpectedError
             name.toFixed();
         });
     });

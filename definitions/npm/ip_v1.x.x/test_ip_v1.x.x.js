@@ -1,9 +1,9 @@
 import ip from "ip";
 
 ip.address(); // my ip address
-// $ExpectError
+// $FlowExpectedError
 ip.isEqual(2130706433);
-// $ExpectError
+// $FlowExpectedError
 ip.isEqual("::1");
 ip.isEqual("::1", "::0:1"); // true
 ip.toBuffer("127.0.0.1"); // Buffer([127, 0, 0, 1])

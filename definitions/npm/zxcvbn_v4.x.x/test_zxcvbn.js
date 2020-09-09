@@ -7,7 +7,7 @@ import { describe, it } from 'flow-typed-test';
 describe('password', () => {
   const testA: Result = zxcvbn('123456');
 
-  //$ExpectError
+  //$FlowExpectedError
   const testB: Result = zxcvbn(230232);
 
   const guesses: number = testA.guesses;
@@ -25,9 +25,9 @@ describe('password', () => {
 describe('user input', () => {
   const test1: Result = zxcvbn('123456', ['abc']);
 
-  // $ExpectError
+  // $FlowExpectedError
   const test2: Result = zxcvbn(20, [30]);
 
-  // $ExpectError
+  // $FlowExpectedError
   const test3: Result = zxcvbn({}, [{}]);
 });

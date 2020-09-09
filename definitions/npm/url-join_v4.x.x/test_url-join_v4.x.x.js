@@ -9,9 +9,9 @@ describe('url-join_v4.x.x', () => {
   });
 
   it('should fail with invalid values', () => {
-    // $ExpectError
+    // $FlowExpectedError
     urlJoin({});
-    // $ExpectError
+    // $FlowExpectedError
     urlJoin("a", {});
   });
 });

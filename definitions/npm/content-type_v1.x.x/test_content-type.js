@@ -36,12 +36,12 @@ describe('content-type', () => {
   });
 
   it('finds errors when we miss the type property', () => {
-    // $ExpectError
+    // $FlowExpectedError
     contentType.format({
       foo: 'bar',
     });
 
-    // $ExpectError
+    // $FlowExpectedError
     contentType.format({
       parameters: { version: '1.0' }
     });

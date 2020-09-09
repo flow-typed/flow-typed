@@ -15,8 +15,8 @@ it("should infer correctly with a Promise", () => {
 });
 
 it("should enforce types", () => {
-  // $ExpectError
+  // $FlowExpectedError
   const o = of(1, 2, 3).pipe(audit());
-  // $ExpectError
+  // $FlowExpectedError
   const p = of(1, 2, 3).pipe(audit((p: string) => of("foo")));
 });

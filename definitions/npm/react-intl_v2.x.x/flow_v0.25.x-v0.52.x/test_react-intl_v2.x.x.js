@@ -17,7 +17,7 @@ import {
 import type { IntlShape } from "react-intl";
 
 intlShape({ foo: "bar" }, "propName", "TestComponentName");
-// $ExpectError number. This type is incompatible with void
+// $FlowExpectedError number. This type is incompatible with void
 const result1: number = intlShape(
   { foo: "bar" },
   "propName",
@@ -30,7 +30,7 @@ const localeData = {
   testKey2: { baz: "buu" }
 };
 addLocaleData(localeData);
-// $ExpectError number. This type is incompatible with void
+// $FlowExpectedError number. This type is incompatible with void
 const resultLocaleData: number = addLocaleData(localeData);
 
 const messages = {
@@ -46,16 +46,16 @@ const messages = {
   }
 };
 const messageDescriptorMap = defineMessages(messages);
-// $ExpectError foo is undefined
+// $FlowExpectedError foo is undefined
 const messageDescriptorMap1 = defineMessages(messages).foo;
-// $ExpectError id and defaultMessage are required
+// $FlowExpectedError id and defaultMessage are required
 const messageDescriptorMap2 = defineMessages({ message: {} });
-// $ExpectError array. This type is incompatible with MessageDescriptorMap
+// $FlowExpectedError array. This type is incompatible with MessageDescriptorMap
 const messageDescriptorMap3: Array<string> = defineMessages(messages);
-// $ExpectError string. This type is incompatible with MessageDescriptorMap
+// $FlowExpectedError string. This type is incompatible with MessageDescriptorMap
 const messageDescriptorMap4: string = defineMessages(messages);
 
-// $ExpectError defineMessages accepts exact $npm$ReactIntl$MessageDescriptor
+// $FlowExpectedError defineMessages accepts exact $npm$ReactIntl$MessageDescriptor
 const messageDescriptorMap5 = defineMessages({
   message: {
     id: "message5",
@@ -75,7 +75,7 @@ const InjectedTestComponent: ReactClass<*> = injectIntl(TestComponent);
 const InjectedTestComponentWithRef: ReactClass<*> = injectIntl(TestComponent, {
   withRef: true
 });
-// $ExpectError void. This type is incompatible with ReactClass<*>
+// $FlowExpectedError void. This type is incompatible with ReactClass<*>
 const FailingInjectedTestComponent: void = injectIntl(TestComponent);
 
 const MessageComponent: ReactClass<*> = injectIntl(

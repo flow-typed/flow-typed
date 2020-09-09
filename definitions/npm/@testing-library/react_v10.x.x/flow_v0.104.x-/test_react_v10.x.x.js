@@ -18,11 +18,11 @@ import { describe, it } from 'flow-typed-test';
 
 describe('act', () => {
   it('should fail on invalid inputs', () => {
-    // $ExpectError
+    // $FlowExpectedError
     act(1);
-    // $ExpectError
+    // $FlowExpectedError
     act(() => {}, 1);
-    // $ExpectError
+    // $FlowExpectedError
     act(() => 1);
   });
 
@@ -35,13 +35,13 @@ describe('act', () => {
   });
 
   it('should fail on incorrect usage of result', () => {
-    // $ExpectError
+    // $FlowExpectedError
     act(() => {}) + 1;
-    // $ExpectError
+    // $FlowExpectedError
     act(() => {}).doesNotExist();
-    // $ExpectError
+    // $FlowExpectedError
     act(() => {}).then(1);
-    // $ExpectError
+    // $FlowExpectedError
     act(() => {}).then(() => {}, 1);
   });
 
@@ -53,9 +53,9 @@ describe('act', () => {
 
 describe('waitFor', () => {
   it('should fail on invalid inputs', () => {
-    // $ExpectError
+    // $FlowExpectedError
     waitFor(1);
-    // $ExpectError
+    // $FlowExpectedError
     waitFor(() => {}, 1);
   });
 
@@ -67,9 +67,9 @@ describe('waitFor', () => {
 
 describe('waitForDomChange', () => {
   it('should fail on invalid inputs', () => {
-    // $ExpectError
+    // $FlowExpectedError
     waitForDomChange(1);
-    // $ExpectError
+    // $FlowExpectedError
     waitForDomChange('1');
   });
 
@@ -81,9 +81,9 @@ describe('waitForDomChange', () => {
 
 describe('waitForElement', () => {
   it('should fail on invalid inputs', () => {
-    // $ExpectError
+    // $FlowExpectedError
     waitForElement(1);
-    // $ExpectError
+    // $FlowExpectedError
     waitForElement(() => {}, 1);
   });
 
@@ -106,7 +106,7 @@ describe('waitForElement', () => {
 
 describe('waitForElementToBeRemoved', () => {
   it('should fail on invalid inputs', () => {
-    // $ExpectError
+    // $FlowExpectedError
     waitForElementToBeRemoved(() => {}, 1);
   });
 
@@ -196,36 +196,36 @@ describe('render', () => {
 
   it('unmount should has 0 arguments', () => {
     unmount();
-    // $ExpectError
+    // $FlowExpectedError
     unmount(1);
   });
 
   it('container should be an html element', () => {
-    // $ExpectError
+    // $FlowExpectedError
     const a: number = container;
     const b: HTMLElement = container;
   });
 
   it('baseElement should be an html element', () => {
-    // $ExpectError
+    // $FlowExpectedError
     const a: number = baseElement;
     const b: HTMLElement = baseElement;
   });
 
   it('asFragment should return a document fragment', () => {
-    // $ExpectError
+    // $FlowExpectedError
     const a: HTMLElement = asFragment();
     const b: DocumentFragment = asFragment();
   });
 
   it('debug maybe has 1 argument an html element', () => {
-    // $ExpectError
+    // $FlowExpectedError
     debug(1);
     debug(container);
   });
 
   it('rerender should has 1 argument an react element', () => {
-    // $ExpectError
+    // $FlowExpectedError
     rerender();
     rerender(<Component />);
   });
@@ -235,31 +235,31 @@ describe('render', () => {
   });
 
   it('getAllByAltText should return array of HTML element', () => {
-    // $ExpectError
+    // $FlowExpectedError
     const a: HTMLElement = getAllByAltText('1');
     const b: Array<HTMLElement> = getAllByAltText('2');
   });
 
   it('queryByAltText should return maybe HTML element', () => {
-    // $ExpectError
+    // $FlowExpectedError
     const a: HTMLElement = queryByAltText('1');
     const b: ?HTMLElement = queryByAltText('2');
   });
 
   it('queryAllByAltText should return array of HTML element', () => {
-    // $ExpectError
+    // $FlowExpectedError
     const a: HTMLElement = queryAllByAltText('1');
     const b: Array<HTMLElement> = queryAllByAltText('2');
   });
 
   it('findByAltText should return HTML element', () => {
-    // $ExpectError
+    // $FlowExpectedError
     const a: HTMLElement = findByAltText('1');
     const b: Promise<HTMLElement> = findByAltText('1');
   });
 
   it('findAllByAltText should return array of HTML element', () => {
-    // $ExpectError
+    // $FlowExpectedError
     const a: Promise<HTMLElement> = findAllByAltText('1');
     const b: Promise<Array<HTMLElement>> = findAllByAltText('2');
   });
@@ -269,31 +269,31 @@ describe('render', () => {
   });
 
   it('getAllByDisplayValue should return array of HTML element', () => {
-    // $ExpectError
+    // $FlowExpectedError
     const a: HTMLElement = getAllByDisplayValue('1');
     const b: Array<HTMLElement> = getAllByDisplayValue('2');
   });
 
   it('queryByDisplayValue should return maybe HTML element', () => {
-    // $ExpectError
+    // $FlowExpectedError
     const a: HTMLElement = queryByDisplayValue('1');
     const b: ?HTMLElement = queryByDisplayValue('2');
   });
 
   it('queryAllByDisplayValue should return array of HTML element', () => {
-    // $ExpectError
+    // $FlowExpectedError
     const a: HTMLElement = queryAllByDisplayValue('1');
     const b: Array<HTMLElement> = queryAllByDisplayValue('2');
   });
 
   it('findByDisplayValue should return HTML element', () => {
-    // $ExpectError
+    // $FlowExpectedError
     const a: HTMLElement = findByDisplayValue('1');
     const b: Promise<HTMLElement> = findByDisplayValue('1');
   });
 
   it('findAllByDisplayValue should return array of HTML element', () => {
-    // $ExpectError
+    // $FlowExpectedError
     const a: Promise<HTMLElement> = findAllByDisplayValue('1');
     const b: Promise<Array<HTMLElement>> = findAllByDisplayValue('2');
   });
@@ -303,31 +303,31 @@ describe('render', () => {
   });
 
   it('getAllByLabelText should return array of HTML element', () => {
-    // $ExpectError
+    // $FlowExpectedError
     const a: HTMLElement = getAllByLabelText('1');
     const b: Array<HTMLElement> = getAllByLabelText('2');
   });
 
   it('queryByLabelText should return maybe HTML element', () => {
-    // $ExpectError
+    // $FlowExpectedError
     const a: HTMLElement = queryByLabelText('1');
     const b: ?HTMLElement = queryByLabelText('2');
   });
 
   it('queryAllByLabelText should return array of HTML element', () => {
-    // $ExpectError
+    // $FlowExpectedError
     const a: HTMLElement = queryAllByLabelText('1');
     const b: Array<HTMLElement> = queryAllByLabelText('2');
   });
 
   it('findByLabelText should return HTML element', () => {
-    // $ExpectError
+    // $FlowExpectedError
     const a: HTMLElement = findByLabelText('1');
     const b: Promise<HTMLElement> = findByLabelText('1');
   });
 
   it('findAllByLabelText should return array of HTML element', () => {
-    // $ExpectError
+    // $FlowExpectedError
     const a: Promise<HTMLElement> = findAllByLabelText('1');
     const b: Promise<Array<HTMLElement>> = findAllByLabelText('2');
   });
@@ -337,67 +337,67 @@ describe('render', () => {
   });
 
   it('getAllByPlaceholderText should return array of HTML element', () => {
-    // $ExpectError
+    // $FlowExpectedError
     const a: HTMLElement = getAllByPlaceholderText('1');
     const b: Array<HTMLElement> = getAllByPlaceholderText('2');
   });
 
   it('queryByPlaceholderText should return maybe HTML element', () => {
-    // $ExpectError
+    // $FlowExpectedError
     const a: HTMLElement = queryByPlaceholderText('1');
     const b: ?HTMLElement = queryByPlaceholderText('2');
   });
 
   it('queryAllByPlaceholderText should return array of HTML element', () => {
-    // $ExpectError
+    // $FlowExpectedError
     const a: HTMLElement = queryAllByPlaceholderText('1');
     const b: Array<HTMLElement> = queryAllByPlaceholderText('2');
   });
 
   it('findByPlaceholderText should return HTML element', () => {
-    // $ExpectError
+    // $FlowExpectedError
     const a: HTMLElement = findByPlaceholderText('1');
     const b: Promise<HTMLElement> = findByPlaceholderText('1');
   });
 
   it('findAllByPlaceholderText should return array of HTML element', () => {
-    // $ExpectError
+    // $FlowExpectedError
     const a: Promise<HTMLElement> = findAllByPlaceholderText('1');
     const b: Promise<Array<HTMLElement>> = findAllByPlaceholderText('2');
   });
 
   it('getByRole should return HTML element', () => {
-    // $ExpectError
+    // $FlowExpectedError
     const a: string = getByRole('1');
     const b: HTMLElement = getByRole('1');
   });
 
   it('getAllByRole should return array of HTML element', () => {
-    // $ExpectError
+    // $FlowExpectedError
     const a: HTMLElement = getAllByRole('1');
     const b: Array<HTMLElement> = getAllByRole('2');
   });
 
   it('queryByRole should return maybe HTML element', () => {
-    // $ExpectError
+    // $FlowExpectedError
     const a: HTMLElement = queryByRole('1');
     const b: ?HTMLElement = queryByRole('2');
   });
 
   it('queryAllByRole should return array of HTML element', () => {
-    // $ExpectError
+    // $FlowExpectedError
     const a: HTMLElement = queryAllByRole('1');
     const b: Array<HTMLElement> = queryAllByRole('2');
   });
 
   it('findByRole should return HTML element', () => {
-    // $ExpectError
+    // $FlowExpectedError
     const a: HTMLElement = findByRole('1');
     const b: Promise<HTMLElement> = findByRole('1');
   });
 
   it('findAllByRole should return array of HTML element', () => {
-    // $ExpectError
+    // $FlowExpectedError
     const a: Promise<HTMLElement> = findAllByRole('1');
     const b: Promise<Array<HTMLElement>> = findAllByRole('2');
   });
@@ -407,31 +407,31 @@ describe('render', () => {
   });
 
   it('getAllByTestId should return array of HTML element', () => {
-    // $ExpectError
+    // $FlowExpectedError
     const a: HTMLElement = getAllByTestId('1');
     const b: Array<HTMLElement> = getAllByTestId('2');
   });
 
   it('queryByTestId should return maybe HTML element', () => {
-    // $ExpectError
+    // $FlowExpectedError
     const a: HTMLElement = queryByTestId('1');
     const b: ?HTMLElement = queryByTestId('2');
   });
 
   it('queryAllByTestId should return array of HTML element', () => {
-    // $ExpectError
+    // $FlowExpectedError
     const a: HTMLElement = queryAllByTestId('1');
     const b: Array<HTMLElement> = queryAllByTestId('2');
   });
 
   it('findByTestId should return HTML element', () => {
-    // $ExpectError
+    // $FlowExpectedError
     const a: HTMLElement = findByTestId('1');
     const b: Promise<HTMLElement> = findByTestId('1');
   });
 
   it('findAllByTestId should return array of HTML element', () => {
-    // $ExpectError
+    // $FlowExpectedError
     const a: HTMLElement = findAllByTestId('1');
     const b: Promise<Array<HTMLElement>> = findAllByTestId('2');
   });
@@ -441,31 +441,31 @@ describe('render', () => {
   });
 
   it('getAllByText should return array of HTML element', () => {
-    // $ExpectError
+    // $FlowExpectedError
     const a: HTMLElement = getAllByText('1');
     const b: Array<HTMLElement> = getAllByText('2');
   });
 
   it('queryByText should return maybe HTML element', () => {
-    // $ExpectError
+    // $FlowExpectedError
     const a: HTMLElement = queryByText('1');
     const b: ?HTMLElement = queryByText('2');
   });
 
   it('queryAllByText should return array of HTML element', () => {
-    // $ExpectError
+    // $FlowExpectedError
     const a: HTMLElement = queryAllByText('1');
     const b: Array<HTMLElement> = queryAllByText('2');
   });
 
   it('findByText should return HTML element', () => {
-    // $ExpectError
+    // $FlowExpectedError
     const a: HTMLElement = findByText('1');
     const b: Promise<HTMLElement> = findByText('1');
   });
 
   it('findAllByText should return array of HTML element', () => {
-    // $ExpectError
+    // $FlowExpectedError
     const a: Promise<HTMLElement> = findAllByText('1');
     const b: Promise<Array<HTMLElement>> = findAllByText('2');
   });
@@ -475,31 +475,31 @@ describe('render', () => {
   });
 
   it('getAllByTitle should return array of HTML element', () => {
-    // $ExpectError
+    // $FlowExpectedError
     const a: HTMLElement = getAllByTitle('1');
     const b: Array<HTMLElement> = getAllByTitle('2');
   });
 
   it('queryByTitle should return maybe HTML element', () => {
-    // $ExpectError
+    // $FlowExpectedError
     const a: HTMLElement = queryByTitle('1');
     const b: ?HTMLElement = queryByTitle('2');
   });
 
   it('queryAllByTitle should return array of HTML element', () => {
-    // $ExpectError
+    // $FlowExpectedError
     const a: HTMLElement = queryAllByTitle('1');
     const b: Array<HTMLElement> = queryAllByTitle('2');
   });
 
   it('findByTitle should return HTML element', () => {
-    // $ExpectError
+    // $FlowExpectedError
     const a: HTMLElement = findByTitle('1');
     const b: Promise<HTMLElement> = findByTitle('1');
   });
 
   it('findAllByTitle should return array of HTML element', () => {
-    // $ExpectError
+    // $FlowExpectedError
     const a: HTMLElement = findAllByTitle('1');
     const b: Promise<Array<HTMLElement>> = findAllByTitle('2');
   });
@@ -508,7 +508,7 @@ describe('render', () => {
 describe('cleanup', () => {
   it('should be a function w/o arguments', () => {
     cleanup();
-    // $ExpectError
+    // $FlowExpectedError
     cleanup(1);
   });
 });
@@ -518,7 +518,7 @@ describe('within', () => {
   const { container } = render(<Component />);
 
   it('should has html element as argument', () => {
-    // $ExpectError
+    // $FlowExpectedError
     within();
     within(container);
   });
@@ -742,7 +742,7 @@ describe('within', () => {
 
 describe('screen', () => {
   it('should have all the queries available', () => {
-    // $ExpectError
+    // $FlowExpectedError
     const { notAQuery } = screen;
     const {
       debug,
@@ -812,9 +812,9 @@ describe('fireEvent', () => {
   });
 
   it('should throw on invalid arguments', () => {
-    // $ExpectError
+    // $FlowExpectedError
     fireEvent(1);
-    // $ExpectError
+    // $FlowExpectedError
     fireEvent(htmlEl, 1);
   });
 
@@ -1293,11 +1293,11 @@ describe('render() parameters', () => {
     };
     const result = render(<Component />, { queries: customQueries });
     const a: CustomReturnType = result.getByOverride('something');
-    // $ExpectError bad type for getByOverride parameter
+    // $FlowExpectedError bad type for getByOverride parameter
     result.getByOverride(1234);
-    // $ExpectError missing getByOverride parameter
+    // $FlowExpectedError missing getByOverride parameter
     result.getByOverride();
-    // $ExpectError default queries are not available when using custom queries
+    // $FlowExpectedError default queries are not available when using custom queries
     result.getByTestId('indifferent');
   });
 });

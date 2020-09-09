@@ -38,7 +38,7 @@ describe('opaque props', () => {
   it('should raises an error when pass the platform dependent BarCodeType', () => {
     <BarCodeScanner
       {...requiredProps}
-      // $ExpectError: code138 is iOS only code type, on Android is would be undefined
+      // $FlowExpectedError: code138 is iOS only code type, on Android is would be undefined
       barCodeTypes={[Constants.BarCodeType.code138]}
     />;
   });
@@ -46,9 +46,9 @@ describe('opaque props', () => {
   it('should raises an error when pass not supported type', () => {
     <BarCodeScanner
       {...requiredProps}
-      // $ExpectError
+      // $FlowExpectedError
       type={0}
-      // $ExpectError
+      // $FlowExpectedError
       barCodeTypes={[0]}
     />;
   });
@@ -61,9 +61,9 @@ describe('other props', () => {
         (data: string);
         (type: BarCodeTypeValues);
 
-        // $ExpectError: check any
+        // $FlowExpectedError: check any
         (type: boolean);
-        // $ExpectError: check any
+        // $FlowExpectedError: check any
         (data: boolean);
       }}
     />;
@@ -73,7 +73,7 @@ describe('other props', () => {
 
   it('should raises an error when pass not supported type', () => {
     <BarCodeScanner
-      // $ExpectError
+      // $FlowExpectedError
       onBarCodeScanned={'need function'}
     />;
   });
@@ -93,17 +93,17 @@ describe('static methods', () => {
     });
 
     it('should raises an error when call with invalid args', () => {
-      // $ExpectError: first argument is required
+      // $FlowExpectedError: first argument is required
       BarCodeScanner.scanFromURLAsync();
 
-      // $ExpectError: first argument must be a string
+      // $FlowExpectedError: first argument must be a string
       BarCodeScanner.scanFromURLAsync(123);
 
-      // $ExpectError: second argument must be an array
+      // $FlowExpectedError: second argument must be an array
       BarCodeScanner.scanFromURLAsync('url', 123);
 
       BarCodeScanner.scanFromURLAsync('url', [
-        // $ExpectError: invalid barcode type
+        // $FlowExpectedError: invalid barcode type
         123,
       ]);
     });

@@ -23,7 +23,7 @@ describe('react-copy-to-clipboard', () => {
     });
   
     it("should fail without required parameters", () => {
-      // $ExpectError
+      // $FlowExpectedError
       <CopyToClipboard />;
     });
   });
@@ -46,7 +46,7 @@ describe('react-copy-to-clipboard', () => {
     });
   
     it("should fail without required parameters", () => {
-      // $ExpectError
+      // $FlowExpectedError
       <NamedCopyToClipboard />;
     });
   });

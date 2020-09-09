@@ -6,9 +6,9 @@ import { describe, it } from 'flow-typed-test';
 
 describe('wait', () => {
   it('should fail on invalid inputs', () => {
-    // $ExpectError
+    // $FlowExpectedError
     wait(1);
-    // $ExpectError
+    // $FlowExpectedError
     wait(() => {}, 1);
   });
 
@@ -20,9 +20,9 @@ describe('wait', () => {
 
 describe('waitForElement', () => {
   it('should fail on invalid inputs', () => {
-    // $ExpectError
+    // $FlowExpectedError
     waitForElement(1);
-    // $ExpectError
+    // $FlowExpectedError
     waitForElement(() => {}, 1);
   });
 
@@ -54,18 +54,18 @@ describe('render', () => {
 
   it('unmount should has 0 arguments', () => {
     unmount();
-    // $ExpectError
+    // $FlowExpectedError
     unmount(1);
   });
 
   it('container should be an html element', () => {
-    // $ExpectError
+    // $FlowExpectedError
     const a: number = container;
     const b: HTMLElement = container;
   });
 
   it('queryByTestId should return maybe html element', () => {
-    // $ExpectError
+    // $FlowExpectedError
     const a: HTMLElement = queryByTestId('1');
     const b: ?HTMLElement = queryByTestId('2');
   });
@@ -75,7 +75,7 @@ describe('render', () => {
   });
 
   it('queryByText should return maybe html element', () => {
-    // $ExpectError
+    // $FlowExpectedError
     const a: HTMLElement = queryByText('1');
     const b: ?HTMLElement = queryByText('2');
   });
@@ -85,7 +85,7 @@ describe('render', () => {
   });
 
   it('queryByPlaceholderText should return maybe html element', () => {
-    // $ExpectError
+    // $FlowExpectedError
     const a: HTMLElement = queryByPlaceholderText('1');
     const b: ?HTMLElement = queryByPlaceholderText('2');
   });
@@ -95,7 +95,7 @@ describe('render', () => {
   });
 
   it('queryByLabelText should return maybe html element', () => {
-    // $ExpectError
+    // $FlowExpectedError
     const a: HTMLElement = queryByLabelText('1');
     const b: ?HTMLElement = queryByLabelText('2');
   });
@@ -105,7 +105,7 @@ describe('render', () => {
   });
 
   it('queryByAltText should return maybe html element', () => {
-    // $ExpectError
+    // $FlowExpectedError
     const a: HTMLElement = queryByAltText('1');
     const b: ?HTMLElement = queryByAltText('2');
   });
@@ -127,7 +127,7 @@ describe('renderIntoDocument', () => {
 describe('cleanup', () => {
   it('should be a function w/o arguments', () => {
     cleanup();
-    // $ExpectError
+    // $FlowExpectedError
     cleanup(1);
   });
 });
@@ -143,9 +143,9 @@ describe('fireEvent', () => {
   });
 
   it('should throw on invalid arguments', () => {
-    // $ExpectError
+    // $FlowExpectedError
     fireEvent(1);
-    // $ExpectError
+    // $FlowExpectedError
     fireEvent(htmlEl, 1);
   });
 

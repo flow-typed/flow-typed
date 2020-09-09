@@ -48,7 +48,7 @@ function unf5(a1: string): boolean {
 describe("pipe(...fn)", () => {
   describe('call "pipe" with unary function', () => {
     it("rises an error when function chain broken", () => {
-      // $ExpectError - unf1 return string but unf3 first argument boolean
+      // $FlowExpectedError - unf1 return string but unf3 first argument boolean
       pipe(f1, unf1, unf3, unf4, unf5)(1);
     });
 
@@ -62,29 +62,29 @@ describe("pipe(...fn)", () => {
     });
 
     it("raises an error when passed more arguments than it need", () => {
-      // $ExpectError - too many arguments
+      // $FlowExpectedError - too many arguments
       pipe(f1)(1, "1", true);
     });
 
     it("raises an error when passed too few arguments", () => {
-      // $ExpectError - too few arguments
+      // $FlowExpectedError - too few arguments
       pipe(f1)();
     });
 
     it("raises an error when passed an invalid argument", () => {
-      //$ExpectError - boolean  is incompatible with number
+      //$FlowExpectedError - boolean  is incompatible with number
       pipe(f1, unf1)(true);
     });
 
     it("raises an error when trying to recognize an unexpected type", () => {
-      //$ExpectError - boolean  is incompatible with string
+      //$FlowExpectedError - boolean  is incompatible with string
       (pipe(f1, unf1)(1): boolean);
     });
   });
 
   describe('call "pipe" with double function', () => {
     it("rises an error when function chain broken", () => {
-      // $ExpectError - unf1 return string but unf3 first argument boolean
+      // $FlowExpectedError - unf1 return string but unf3 first argument boolean
       pipe(f2, unf1, unf3, unf4, unf5)(1, "2");
     });
 
@@ -97,29 +97,29 @@ describe("pipe(...fn)", () => {
     });
 
     it("raises an error when passed more arguments than it need", () => {
-      // $ExpectError - too many arguments
+      // $FlowExpectedError - too many arguments
       pipe(f2)(1, "2", true, 4, "5");
     });
 
     it("raises an error when passed too few arguments", () => {
-      // $ExpectError - too few arguments
+      // $FlowExpectedError - too few arguments
       pipe(f2)(1);
     });
 
     it("raises an error when passed an invalid argument", () => {
-      //$ExpectError - boolean  is incompatible with string
+      //$FlowExpectedError - boolean  is incompatible with string
       pipe(f2, unf1)(1, true);
     });
 
     it("raises an error when trying to recognize an unexpected type", () => {
-      //$ExpectError - boolean  is incompatible with string
+      //$FlowExpectedError - boolean  is incompatible with string
       (pipe(f2, unf1)(1, "2"): boolean);
     });
   });
 
   describe('call "pipe" with triple function', () => {
     it("rises an error when function chain broken", () => {
-      // $ExpectError - unf1 return string but unf3 first argument boolean
+      // $FlowExpectedError - unf1 return string but unf3 first argument boolean
       pipe(f3, unf1, unf3, unf4, unf5)(1, "2", true);
     });
 
@@ -132,29 +132,29 @@ describe("pipe(...fn)", () => {
     });
 
     it("raises an error when passed more arguments than it need", () => {
-      // $ExpectError - too many arguments
+      // $FlowExpectedError - too many arguments
       pipe(f3)(1, "2", true, 4, "5");
     });
 
     it("raises an error when passed too few arguments", () => {
-      // $ExpectError - too few arguments
+      // $FlowExpectedError - too few arguments
       pipe(f3)(1, "2");
     });
 
     it("raises an error when passed an invalid argument", () => {
-      //$ExpectError - number is incompatible with boolean
+      //$FlowExpectedError - number is incompatible with boolean
       pipe(f3, unf1)(1, "2", 999);
     });
 
     it("raises an error when trying to recognize an unexpected type", () => {
-      //$ExpectError - boolean  is incompatible with string
+      //$FlowExpectedError - boolean  is incompatible with string
       (pipe(f3, unf1)(1, "2", true): boolean);
     });
   });
 
   describe('call "pipe" with function that takes 4 arguments', () => {
     it("rises an error when function chain broken", () => {
-      // $ExpectError - unf1 return string but unf3 first argument boolean
+      // $FlowExpectedError - unf1 return string but unf3 first argument boolean
       pipe(f4, unf1, unf3, unf4, unf5)(1, "2", true, 4);
     });
 
@@ -167,29 +167,29 @@ describe("pipe(...fn)", () => {
     });
 
     it("raises an error when passed more arguments than it need", () => {
-      // $ExpectError - too many arguments
+      // $FlowExpectedError - too many arguments
       pipe(f4)(1, "2", true, 4, "5", 6, false);
     });
 
     it("raises an error when passed too few arguments", () => {
-      // $ExpectError - too few arguments
+      // $FlowExpectedError - too few arguments
       pipe(f4)(1, "2", true);
     });
 
     it("raises an error when passed an invalid argument", () => {
-      //$ExpectError - string is incompatible with number
+      //$FlowExpectedError - string is incompatible with number
       pipe(f4, unf1)(1, "2", true, "new number");
     });
 
     it("raises an error when trying to recognize an unexpected type", () => {
-      //$ExpectError - boolean  is incompatible with string
+      //$FlowExpectedError - boolean  is incompatible with string
       (pipe(f4, unf1)(1, "2", true, 4): boolean);
     });
   });
 
   describe('call "pipe" with function that takes 5 arguments', () => {
     it("rises an error when function chain broken", () => {
-      // $ExpectError - unf1 return string but unf3 first argument boolean
+      // $FlowExpectedError - unf1 return string but unf3 first argument boolean
       pipe(f5, unf1, unf3, unf4, unf5)(1, "2", true, 4, "5");
     });
 
@@ -202,22 +202,22 @@ describe("pipe(...fn)", () => {
     });
 
     it("raises an error when passed more arguments than it need", () => {
-      // $ExpectError - too many arguments
+      // $FlowExpectedError - too many arguments
       pipe(f5)(1, "2", true, 4, "5", 6, 7, 8);
     });
 
     it("raises an error when passed too few arguments", () => {
-      // $ExpectError - too few arguments
+      // $FlowExpectedError - too few arguments
       pipe(f5)(1, "2", true, 4);
     });
 
     it("raises an error when passed an invalid argument", () => {
-      //$ExpectError - boolean is incompatible with string
+      //$FlowExpectedError - boolean is incompatible with string
       pipe(f5, unf1)(1, "2", true, 4, false);
     });
 
     it("raises an error when trying to recognize an unexpected type", () => {
-      //$ExpectError - boolean  is incompatible with string
+      //$FlowExpectedError - boolean  is incompatible with string
       (pipe(f5, unf1)(1, "2", true, 4, "5"): boolean);
     });
   });

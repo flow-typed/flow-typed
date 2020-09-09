@@ -6,5 +6,5 @@ import Dropzone from "dropzone";
 (new Dropzone().disable(): void);
 (new Dropzone().files: Array<File>);
 
-// $ExpectError
+// $FlowExpectedError
 (new Dropzone().files: number);

@@ -41,19 +41,19 @@ const options1: Options = {
 (options1: OptionsLog);
 (options1: OptionsLogProd);
 
-// $ExpectError
+// $FlowExpectedError
 const options2: Options = {
   name: 54
 };
-// $ExpectError
+// $FlowExpectedError
 const options3: OptionsDev = {
   name: 54
 };
-// $ExpectError
+// $FlowExpectedError
 const options4: OptionsLog = {
   name: 54
 };
-// $ExpectError
+// $FlowExpectedError
 const options5: OptionsLogProd = {
   name: 54
 };
@@ -70,9 +70,9 @@ const options5: OptionsLogProd = {
 (compose(options1): * => Function);
 (compose((x: number): boolean => x === 0): number => boolean);
 (compose((b: boolean): Array<number> => b?[0]:[], (x: number): boolean => x === 0): number => Array<number>);
-// $ExpectError
+// $FlowExpectedError
 (compose((b: boolean): Array<number> => b?[0]:[], (x: number): boolean => x === 0): Array<number> => number);
-// $ExpectError
+// $FlowExpectedError
 (compose((s: string): number => parseInt(s), (n: number): string => String(n)): string => string);
 (compose((s: string): number => parseInt(s), (n: number): string => String(n)): number => number);
 

@@ -17,12 +17,12 @@ describe('WebView methods', () => {
   });
 
   it('should raises an error when call injectJavaScript without arguments', () => {
-    // $ExpectError: first argument is required
+    // $FlowExpectedError: first argument is required
     instanceWebView.injectJavaScript();
   });
 
   it('should raises an error when call injectJavaScript with not string', () => {
-    // $ExpectError: first argument must be string
+    // $FlowExpectedError: first argument must be string
     instanceWebView.injectJavaScript(11);
   });
 });
@@ -36,11 +36,11 @@ describe('WebView props', () => {
     });
 
     it('should raises an error when use an invalid type for options props', () => {
-      // $ExpectError: `uri` must be string
+      // $FlowExpectedError: `uri` must be string
       <WebView source={{ uri: 1, headers: [] }} />;
-      // $ExpectError: `html` must be string
+      // $FlowExpectedError: `html` must be string
       <WebView source={{ html: 1 }} />;
-      // $ExpectError: `headers` must be object
+      // $FlowExpectedError: `headers` must be object
       <WebView source={{ uri: '', headers: [] }} />;
     });
   });
@@ -51,7 +51,7 @@ describe('WebView props', () => {
         onScroll={event => {
           (event.zoomScale: number);
 
-          // $ExpectError: check any type
+          // $FlowExpectedError: check any type
           (event.zoomScale: boolean);
         }}
         onLoad={event => {
@@ -95,9 +95,9 @@ describe('WebView props', () => {
     it('should raises an error when you try write to event', () => {
       <WebView
         onLoad={event => {
-          // $ExpectError: readonly
+          // $FlowExpectedError: readonly
           event.nativeEvent.title = '';
-          // $ExpectError: readonly
+          // $FlowExpectedError: readonly
           event.nativeEvent = {};
         }}
       />;
@@ -125,31 +125,31 @@ describe('WebView props', () => {
 
     it('should raise an error when passing incompatible types', () => {
       <WebView
-        // $ExpectError
+        // $FlowExpectedError
         allowsFullscreenVideo={'need boolean'}
-        // $ExpectError: `__content` missing in enum
+        // $FlowExpectedError: `__content` missing in enum
         overScrollMode={'__content'}
-        // $ExpectError
+        // $FlowExpectedError
         geolocationEnabled={'need boolean'}
-        // $ExpectError
+        // $FlowExpectedError
         allowUniversalAccessFromFileURLs={'need boolean'}
-        // $ExpectError
+        // $FlowExpectedError
         allowFileAccess={'need boolean'}
-        // $ExpectError
+        // $FlowExpectedError
         saveFormDataDisabled={'need boolean'}
-        // $ExpectError: need array of strings
+        // $FlowExpectedError: need array of strings
         urlPrefixesForDefaultIntent={[1]}
-        // $ExpectError
+        // $FlowExpectedError
         javaScriptEnabled={'need boolean'}
-        // $ExpectError
+        // $FlowExpectedError
         androidHardwareAccelerationDisabled={'need boolean'}
-        // $ExpectError
+        // $FlowExpectedError
         thirdPartyCookiesEnabled={'need boolean'}
-        // $ExpectError
+        // $FlowExpectedError
         domStorageEnabled={'need boolean'}
-        // $ExpectError
+        // $FlowExpectedError
         textZoom={'need number'}
-        // $ExpectError: `__compatibility` missing in enum
+        // $FlowExpectedError: `__compatibility` missing in enum
         mixedContentMode={'__compatibility'}
       />;
     });
@@ -185,39 +185,39 @@ describe('WebView props', () => {
 
     it('should raise an error when passing incompatible types', () => {
       <WebView
-        // $ExpectError
+        // $FlowExpectedError
         useWebKit={'need boolean'}
-        // $ExpectError
+        // $FlowExpectedError
         incognito={'need boolean'}
-        // $ExpectError
+        // $FlowExpectedError
         bounces={'need boolean'}
-        // $ExpectError: need number or value from enum
+        // $FlowExpectedError: need number or value from enum
         decelerationRate={false}
-        // $ExpectError
+        // $FlowExpectedError
         scrollEnabled={'need boolean'}
-        // $ExpectError
+        // $FlowExpectedError
         pagingEnabled={'need boolean'}
-        // $ExpectError
+        // $FlowExpectedError
         automaticallyAdjustContentInsets={'need boolean'}
-        // $ExpectError: need object
+        // $FlowExpectedError: need object
         contentInset={false}
-        // $ExpectError: `__phoneNumber` missing in enum
+        // $FlowExpectedError: `__phoneNumber` missing in enum
         dataDetectorTypes={'__phoneNumber'}
-        // $ExpectError
+        // $FlowExpectedError
         allowsInlineMediaPlayback={'need boolean'}
-        // $ExpectError
+        // $FlowExpectedError
         hideKeyboardAccessoryView={'need boolean'}
-        // $ExpectError
+        // $FlowExpectedError
         allowsBackForwardNavigationGestures={'need boolean'}
-        // $ExpectError
+        // $FlowExpectedError
         useSharedProcessPool={'need boolean'}
-        // $ExpectError
+        // $FlowExpectedError
         allowsLinkPreview={'need boolean'}
-        // $ExpectError
+        // $FlowExpectedError
         sharedCookiesEnabled={'need boolean'}
-        // $ExpectError
+        // $FlowExpectedError
         directionalLockEnabled={'need boolean'}
-        // $ExpectError
+        // $FlowExpectedError
         keyboardDisplayRequiresUserAction={'need boolean'}
       />;
     });

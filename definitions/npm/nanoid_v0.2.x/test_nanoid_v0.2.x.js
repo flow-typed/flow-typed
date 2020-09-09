@@ -5,42 +5,42 @@ import url from 'nanoid/url';
 
 const id1: string = nanoid();
 
-// $ExpectError
+// $FlowExpectedError
 const id2: number = nanoid();
 
 nanoid(10)
 
-// $ExpectError
+// $FlowExpectedError
 nanoid('10')
 
 const random = () => [''];
 
 const f1: string = format(random, '', 10);
 
-// $ExpectError
+// $FlowExpectedError
 const f2: number = format(random, '', 10);
 
-// $ExpectError
+// $FlowExpectedError
 format(10, '', 10);
 
-// $ExpectError
+// $FlowExpectedError
 format(random, 10, 10);
 
-// $ExpectError
+// $FlowExpectedError
 format(random, '', '');
 
 const g1: string = generate('', 10);
 
-// $ExpectError
+// $FlowExpectedError
 const g2: number = generate('', 10);
 
-// $ExpectError
+// $FlowExpectedError
 generate(10, 10);
 
-// $ExpectError
+// $FlowExpectedError
 generate('', '');
 
 const url1: string = url;
 
-// $ExpectError
+// $FlowExpectedError
 const url2: number = url;

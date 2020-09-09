@@ -25,11 +25,11 @@ const d3: string = dateFormat('yyyy', true, true);
 dateFormat.masks['hammerTime'] = 'HH:MM! "Can\'t touch this!"';
 const f1: string = dateFormat(now, "hammerTime");
 
-// $ExpectError
+// $FlowExpectedError
 const e1: string = dateFormat(now, true);
 
-// $ExpectError
+// $FlowExpectedError
 const e2: string = dateFormat(0, true);
 
-// $ExpectError
+// $FlowExpectedError
 dateFormat.masks['hammerTime'] = 0;

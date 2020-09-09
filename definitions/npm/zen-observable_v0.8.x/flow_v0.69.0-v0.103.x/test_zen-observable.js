@@ -44,7 +44,7 @@ describe('new Observable().subscribe', () => {
   });
   it(`subscriber can't return other types`, () => {
     const o1 = new Observable(observer => {
-      // $ExpectError
+      // $FlowExpectedError
       return 2;
     });
   });
@@ -74,11 +74,11 @@ describe('new Observable().subscribe', () => {
       if (observer.closed) observer.error(new Error('test'));
       observer.complete();
     });
-    // $ExpectError
+    // $FlowExpectedError
     const subscription = observable.subscribe({
       next(value: string) {},
     });
-    // $ExpectError
+    // $FlowExpectedError
     const subscription = observable.subscribe((value: string) => {});
     subscription.unsubscribe();
   });
@@ -87,7 +87,7 @@ describe('new Observable().subscribe', () => {
 describe('Observable.of', () => {
   it('returns Observable', () => {
     (Observable.of(1, '2'): Observable<number | string>);
-    // $ExpectError
+    // $FlowExpectedError
     (Observable.of(1): Observable<string>);
   });
 });
@@ -95,12 +95,12 @@ describe('Observable.of', () => {
 describe('Observable.from', () => {
   it('accepts Observable', () => {
     (Observable.from(Observable.of(1)): Observable<number>);
-    // $ExpectError
+    // $FlowExpectedError
     (Observable.from(Observable.of(1)): Observable<string>);
   });
   it('accepts Iterable', () => {
     (Observable.from([1, 2, 3]): Observable<number>);
-    // $ExpectError
+    // $FlowExpectedError
     (Observable.from([1, 2, 3]): Observable<string>);
 
     function* generator(): Iterable<number> {
@@ -108,11 +108,11 @@ describe('Observable.from', () => {
     }
 
     (Observable.from(generator()): Observable<number>);
-    // $ExpectError
+    // $FlowExpectedError
     (Observable.from(generator()): Observable<string>);
   });
   it('rejects anything else', () => {
-    // $ExpectError
+    // $FlowExpectedError
     Observable.from({});
   });
 });
@@ -144,7 +144,7 @@ describe('observable.reduce', () => {
     ): Observable<number>);
   });
   it('errors when reducer has wrong value type', () => {
-    // $ExpectError
+    // $FlowExpectedError
     (Observable.of('1', '2').reduce(
       (acc: number, value: number) => acc + parseInt(value)
     ): Observable<number>);
@@ -158,7 +158,7 @@ describe('observable.reduce', () => {
   it('errors when initValue is wrong type', () => {
     (Observable.of('1', '2').reduce(
       (acc: number, value: string) => acc + parseInt(value),
-      // $ExpectError
+      // $FlowExpectedError
       '1'
     ): Observable<number>);
   });
@@ -170,11 +170,11 @@ describe('observable.concat', () => {
       Observable.of(2),
       Observable.of(3)
     ): Observable<number>);
-    // $ExpectError
+    // $FlowExpectedError
     (Observable.of(1).concat(
-      // $ExpectError
+      // $FlowExpectedError
       Observable.of(2),
-      // $ExpectError
+      // $FlowExpectedError
       Observable.of(3)
     ): Observable<string>);
   });

@@ -5,12 +5,12 @@ const random = Random();
 
 (random.integer(0, 10): number);
 (random.integer(5, 10, true): number);
-// $ExpectError
+// $FlowExpectedError
 random.integer();
 
 (random.real(0, 10): number);
 (random.real(5, 10, true): number);
-// $ExpectError
+// $FlowExpectedError
 random.real();
 
 (random.bool(): boolean);
@@ -20,7 +20,7 @@ random.real();
 (random.pick([1, 2]): number);
 (random.pick(["", "1"], 4): string);
 (random.pick([true, false, "", 2], 0, 5): boolean | string | number);
-// $ExpectError
+// $FlowExpectedError
 random.pick();
 
 (random.shuffle([1, ""]): Array<number | string>);
@@ -28,7 +28,7 @@ random.pick();
 (random.die(5): number);
 (random.dice(5, 2): number[]);
 (random.uuid(): string);
-// $ExpectError
+// $FlowExpectedError
 random.string("5");
 
 const nativeEngine = Random.engines.nativeMath;

@@ -6,5 +6,5 @@ yargs
   .options({'foo': {alias: 'foo-alias', default: true}})
   .describe('foo', 'This is a description of foo!');
 
-// $ExpectError
+// $FlowExpectedError
 yargs.nope;

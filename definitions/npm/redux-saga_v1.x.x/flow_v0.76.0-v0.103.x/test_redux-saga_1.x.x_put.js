@@ -12,14 +12,14 @@ describe("put effect", () => {
     });
 
     it("returned object must be read only", () => {
-      // $ExpectError: read-only  property
+      // $FlowExpectedError: read-only  property
       c.type = "anyType";
-      // $ExpectError: read-only  property
+      // $FlowExpectedError: read-only  property
       c.payload = {};
     });
 
     it("returned object must be exact", () => {
-      // $ExpectError: exact type
+      // $FlowExpectedError: exact type
       c.abc = 69;
     });
   });
@@ -34,7 +34,7 @@ describe("put effect", () => {
     });
 
     it(`must raises an error when action isn't object`, () => {
-      // $ExpectError: Can only be called with objects
+      // $FlowExpectedError: Can only be called with objects
       put("FOO");
     });
   });
@@ -53,7 +53,7 @@ describe("put effect", () => {
       const myEventChannel = eventChannel(emitter => () => {});
       const myAction = { type: "test" };
 
-      // $ExpectError: event channel hasn"t a put() property
+      // $FlowExpectedError: event channel hasn"t a put() property
       put(myEventChannel, myAction);
     });
 
@@ -67,7 +67,7 @@ describe("put effect", () => {
     });
 
     it("must rises an error when channel is null", () => {
-      // $ExpectError: No null as channel accepted
+      // $FlowExpectedError: No null as channel accepted
       put(null, { type: "TEST" });
     });
   });

@@ -27,9 +27,9 @@ Queue(
   done();
 });
 
-// $ExpectError
+// $FlowExpectedError
 Queue();
-// $ExpectError
+// $FlowExpectedError
 Queue(1);
 Queue('my_queue', 9999, 'localhost')
   .process((job, done) => {

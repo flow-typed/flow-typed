@@ -1,11 +1,11 @@
 // @flow
 
-// $ExpectError: No negative tests here
+// $FlowExpectedError: No negative tests here
 const skipNegativeTest: string = true;
 
 var inquirer = require('inquirer');
 
-// $ExpectError
+// $FlowExpectedError
 var Rx = require('rxjs');
 
 var questions = [

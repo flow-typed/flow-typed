@@ -10,7 +10,7 @@ const chanceConstructedWithSeed: Chance = new Chance(12345);
 (chance.gender(): string);
 (chance.birthday({ type: 'teen' }): Date);
 (chance.birthday({ string: true, american: true }): string);
-// $ExpectError
+// $FlowExpectedError
 (chance.birthday({ type: 'invalid' }): Date);
 
 (chance.hammertime(): number);

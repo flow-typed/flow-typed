@@ -26,7 +26,7 @@ describe('The `useDarkMode` hook', () => {
     useDarkMode();
     useDarkMode(false);
     useDarkMode(true);
-    // $ExpectError
+    // $FlowExpectedError
     useDarkMode('');
   });
 
@@ -40,11 +40,11 @@ describe('The `useDarkMode` hook', () => {
       },
     });
 
-    // $ExpectError
+    // $FlowExpectedError
     useDarkMode(false, false);
-    // $ExpectError
+    // $FlowExpectedError
     useDarkMode({}, false);
-    // $ExpectError
+    // $FlowExpectedError
     useDarkMode(false, {
       classNameDark: true,
       element: () => <div />,
@@ -59,9 +59,9 @@ describe('The `useDarkMode` hook', () => {
     darkMode.disable();
     darkMode.toggle();
 
-    // $ExpectError
+    // $FlowExpectedError
     darkMode.value = true;
-    // $ExpectError
+    // $FlowExpectedError
     darkMode.enable = false;
   });
 });

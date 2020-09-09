@@ -6,7 +6,7 @@ const parser = new UAParser();
 (parser: UAParser);
 
 parser.setUA('MOCK UA');
-// $ExpectError
+// $FlowExpectedError
 parser.setUA(123);
 
 (parser.getBrowser(): {
@@ -32,17 +32,17 @@ const device = parser.getDevice();
 });
 
 const parserResult = parser.getResult();
-// $ExpectError
+// $FlowExpectedError
 (parserResult.browser: null);
-// $ExpectError
+// $FlowExpectedError
 (parserResult.cpu: null);
-// $ExpectError
+// $FlowExpectedError
 (parserResult.device: null);
-// $ExpectError
+// $FlowExpectedError
 (parserResult.engine: null);
-// $ExpectError
+// $FlowExpectedError
 (parserResult.os: null);
-// $ExpectError
+// $FlowExpectedError
 (parserResult.ua: null);
 
 (parser.getOS(): {

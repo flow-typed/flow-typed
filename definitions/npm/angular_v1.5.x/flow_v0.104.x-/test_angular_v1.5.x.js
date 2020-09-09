@@ -25,7 +25,7 @@ describe("Angular modules", () => {
   });
 
   it("requires a name", () => {
-    // $ExpectError undefined. This type is incompatible with string
+    // $FlowExpectedError undefined. This type is incompatible with string
     const module1 = angular.module();
   });
 });
@@ -49,14 +49,14 @@ describe("directives", () => {
       "bar",
       "bazz",
       (bar, bazz) => {
-        // $ExpectError string. This type is incompatible with Directive
+        // $FlowExpectedError string. This type is incompatible with Directive
         return "this is clearly not a directive";
       }
     ]);
   });
 
   it("requires proper restrict when defined", () => {
-    // $ExpectError
+    // $FlowExpectedError
     angular.module("foo", []).directive("foo", [
       "bar",
       "bazz",
@@ -74,7 +74,7 @@ describe("directives", () => {
       "bar",
       "bazz",
       (bar, bazz) => {
-        // $ExpectError
+        // $FlowExpectedError
         return {
           random: "prop which is not allowed",
           templateUrl: "foo.html"
@@ -138,7 +138,7 @@ describe("service", () => {
       "bar",
       "bazz",
       (bar, bazz) => {
-        //$ExpectError
+        //$FlowExpectedError
         return 123;
       }
     ]);
@@ -159,7 +159,7 @@ describe("factory", () => {
   it("requires a return value of some kind", () => {
     angular
       .module("foo", [])
-      // $ExpectError undefined. This type is incompatible with
+      // $FlowExpectedError undefined. This type is incompatible with
       .factory("foo", ["bar", "bazz", (bar, bazz) => undefined]);
   });
 });
@@ -190,7 +190,7 @@ describe("filter", () => {
   });
 
   it("requires a return value of some kind", () => {
-    // $ExpectError cant return object
+    // $FlowExpectedError cant return object
     angular.module("foo", []).filter("foo", ["bar", "bazz", () => ({})]);
   });
 });
@@ -227,7 +227,7 @@ describe("element", () => {
   });
 
   it("does not accept other types as a parameter", () => {
-    // $ExpectError number. This type is incompatible with string
+    // $FlowExpectedError number. This type is incompatible with string
     angular.element(5);
   });
 });
@@ -238,7 +238,7 @@ describe("copy", () => {
   });
 
   it("does not change the type", () => {
-    // $ExpectError string. This type is incompatible with number
+    // $FlowExpectedError string. This type is incompatible with number
     const foo: number = angular.copy("5");
   });
 });
@@ -249,7 +249,7 @@ describe("jqlite", () => {
   });
 
   it("yields nothing on removal", () => {
-    // $ExpectError string. This type is incompatible with void
+    // $FlowExpectedError string. This type is incompatible with void
     const removal: string = angular.element("foo").remove();
   });
 
@@ -258,7 +258,7 @@ describe("jqlite", () => {
   });
 
   it("does not yield a string", () => {
-    // $ExpectError string. This type is incompatible with JqliteElement
+    // $FlowExpectedError string. This type is incompatible with JqliteElement
     const contents: string = angular.element("foo").contents("bar");
   });
 });
@@ -303,7 +303,7 @@ describe("$q", () => {
 
   it("creates a promise with the type provided the value resolved", () => {
     angular.mock.inject(($q: AngularQ) => {
-      // $ExpectError number. This type is incompatible with string
+      // $FlowExpectedError number. This type is incompatible with string
       const promise: AngularPromise<number> = $q.when("foo");
     });
   });
@@ -349,7 +349,7 @@ describe("mock", () => {
     });
 
     it("does not accept numbers", () => {
-      //$ExpectError
+      //$FlowExpectedError
       angular.mock.module(123);
     });
 

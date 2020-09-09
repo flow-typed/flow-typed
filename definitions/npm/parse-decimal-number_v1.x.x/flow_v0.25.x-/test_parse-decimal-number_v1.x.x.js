@@ -9,7 +9,7 @@ describe('parse-decimal-number', () => {
 	});
 
 	it('should fail without arguments', () => {
-		// $ExpectError
+		// $FlowExpectedError
 		(parseDecimalNumber(): number);
 	});
 });

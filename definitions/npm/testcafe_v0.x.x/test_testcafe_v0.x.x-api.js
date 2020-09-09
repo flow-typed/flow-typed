@@ -4,20 +4,20 @@ import createTestCafe from 'testcafe';
 
 var testcafe = createTestCafe('123', 1234, 1234);
 
-// $ExpectError
+// $FlowExpectedError
 testcafe.createRunner();
 
 (async () => {
     var testcafe = await createTestCafe('123', 1234, 1234);
 
-    // $ExpectError
+    // $FlowExpectedError
     testcafe.createRunner('1234');
 }) ();
 
 (async () => {
     var testcafe = await createTestCafe('123', 1234, 1234);
 
-    // $ExpectError
+    // $FlowExpectedError
     testcafe.createBrowserConnection('chrome');
 }) ();
 
@@ -45,7 +45,7 @@ testcafe.createRunner();
 
     runner.filter((test, fixture) => test === fixture);
 
-    // $ExpectError
+    // $FlowExpectedError
     runner.filter('1234');
 
     runner.run();
@@ -68,7 +68,7 @@ testcafe.createRunner();
     runner.run();
     runner.stop();
 
-    // $ExpectError
+    // $FlowExpectedError
     runner.run({ 'blabla': 1 });
 }) ();
 
@@ -81,7 +81,7 @@ testcafe.createRunner();
     runner.run().catch(() => console.log('fail'));
     runner.run().cancel().then(() => console.log('ok'));
 
-    // $ExpectError
+    // $FlowExpectedError
     runner.cancel().then(() => console.log('ok'));
 }) ();
 

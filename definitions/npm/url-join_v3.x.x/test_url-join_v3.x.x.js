@@ -4,7 +4,7 @@ import urlJoin from "url-join";
 urlJoin("a");
 urlJoin("a", "b");
 
-// $ExpectError
+// $FlowExpectedError
 urlJoin({});
-// $ExpectError
+// $FlowExpectedError
 urlJoin("a", {});

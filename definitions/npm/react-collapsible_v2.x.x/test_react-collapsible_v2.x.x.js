@@ -9,14 +9,14 @@ const success = (
 );
 
 const missingTriggerProp = (
-  // $ExpectError
+  // $FlowExpectedError
   <Collapsible>
     <p>I don't have a trigger prop</p>
   </Collapsible>
 );
 
 const wrongOverflowWhenOpen = (
-  // $ExpectError
+  // $FlowExpectedError
   <Collapsible trigger="Click me" overflowWhenOpen="cool">
     <p>I don't have a trigger prop</p>
   </Collapsible>

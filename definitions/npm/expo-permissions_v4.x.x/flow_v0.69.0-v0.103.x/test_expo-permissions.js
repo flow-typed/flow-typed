@@ -33,7 +33,7 @@ describe('askAsync', () => {
     );
 
     askAsync().then(result => {
-      // $ExpectError: check any
+      // $FlowExpectedError: check any
       (result: number);
 
       (result.status: 'undetermined' | 'granted' | 'denied');
@@ -43,7 +43,7 @@ describe('askAsync', () => {
   });
 
   it('should raises an error when pass invalid arguments', () => {
-    // $ExpectError: invalid argument
+    // $FlowExpectedError: invalid argument
     askAsync(69);
   });
 });
@@ -65,7 +65,7 @@ describe('getAsync', () => {
     );
 
     getAsync().then(result => {
-      // $ExpectError: check any
+      // $FlowExpectedError: check any
       (result: number);
 
       (result.status: 'undetermined' | 'granted' | 'denied');
@@ -75,7 +75,7 @@ describe('getAsync', () => {
   });
 
   it('should raises an error when pass invalid arguments', () => {
-    // $ExpectError: invalid argument
+    // $FlowExpectedError: invalid argument
     getAsync(69);
   });
 });

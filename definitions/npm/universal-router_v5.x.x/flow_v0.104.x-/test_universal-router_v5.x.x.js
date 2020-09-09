@@ -35,15 +35,15 @@ const router: RouterType = new UniversalRouter(routes);
 let postsResult: Promise<string> = router.resolve("/posts");
 postsResult = router.resolve({ pathname: "/posts" });
 
-// $ExpectError
+// $FlowExpectedError
 const wrongPostsResult: Promise<number> = router.resolve("/posts");
 
 const url = generateUrls(router);
 
-// $ExpectError
+// $FlowExpectedError
 const wrongUrl = generateUrls({});
 
 const usersUrl: string = url("users");
 
-// $ExpectError
+// $FlowExpectedError
 const wrongUsersUrl: number = url("users");

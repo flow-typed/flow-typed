@@ -13,13 +13,13 @@ const { createServer } = require("http");
 const { parse } = require("url");
 
 // server
-// $ExpectError
+// $FlowExpectedError
 next({ dev: 1 });
-// $ExpectError
+// $FlowExpectedError
 next({ dir: false });
-// $ExpectError
+// $FlowExpectedError
 next({ quiet: "derp" });
-// $ExpectError
+// $FlowExpectedError
 next({ staticMarkup: 42 });
 
 const app = next({ dev: true, dir: ".", quiet: false });
@@ -56,10 +56,10 @@ app.prepare().then(() => {
 
 <Link href="/">Index</Link>;
 
-// $ExpectError
+// $FlowExpectedError
 <Link href={1}>InvalidNumLink</Link>;
 
-// $ExpectError
+// $FlowExpectedError
 Router.onRouteChangeStart = {};
 
 Router.onRouteChangeStart = (url: string) => {};
@@ -74,7 +74,7 @@ Router.onRouteChangeError = (err, url) => {
   }
 };
 
-// $ExpectError
+// $FlowExpectedError
 Router.push({});
 
 Router.push("/about");

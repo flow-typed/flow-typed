@@ -11,9 +11,9 @@ describe('md5', () => {
   })
 
   it('does not take number or undefined etc', () => {
-    // $ExpectError
+    // $FlowExpectedError
     md5(5);
-    // $ExpectError
+    // $FlowExpectedError
     md5(undefined);
   });
 });

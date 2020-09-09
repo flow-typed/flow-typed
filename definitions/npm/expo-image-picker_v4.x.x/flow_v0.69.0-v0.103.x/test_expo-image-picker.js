@@ -19,7 +19,7 @@ describe('launchImageLibraryAsync', () => {
     launchImageLibraryAsync().then(result => {
       (result.cancelled: boolean);
 
-      // $ExpectError: check any
+      // $FlowExpectedError: check any
       (result.cancelled: number);
 
       if (result.cancelled) {
@@ -33,24 +33,24 @@ describe('launchImageLibraryAsync', () => {
   });
 
   it('should raises an error when pass invalid arguments', () => {
-    // $ExpectError: first argument must be an object
+    // $FlowExpectedError: first argument must be an object
     launchImageLibraryAsync(69);
 
     launchImageLibraryAsync({
-      // $ExpectError: `Videos__` is missing in emun
+      // $FlowExpectedError: `Videos__` is missing in emun
       mediaTypes: 'Videos__',
-      // $ExpectError
+      // $FlowExpectedError
       allowsEditing: 'need boolean',
       aspect: [
         3,
-        // $ExpectError
+        // $FlowExpectedError
         'need number',
       ],
-      // $ExpectError
+      // $FlowExpectedError
       quality: 'need number',
-      // $ExpectError
+      // $FlowExpectedError
       base64: 'need boolean',
-      // $ExpectError
+      // $FlowExpectedError
       exif: 'need boolean',
     });
   });
@@ -72,7 +72,7 @@ describe('launchCameraAsync', () => {
     launchCameraAsync().then(result => {
       (result.cancelled: boolean);
 
-      // $ExpectError: check any
+      // $FlowExpectedError: check any
       (result.cancelled: number);
 
       if (result.cancelled) {
@@ -86,24 +86,24 @@ describe('launchCameraAsync', () => {
   });
 
   it('should raises an error when pass invalid arguments', () => {
-    // $ExpectError: first argument must be an object
+    // $FlowExpectedError: first argument must be an object
     launchCameraAsync(69);
 
     launchCameraAsync({
-      // $ExpectError: `Videos__` is missing in emun
+      // $FlowExpectedError: `Videos__` is missing in emun
       mediaTypes: 'Videos__',
-      // $ExpectError
+      // $FlowExpectedError
       allowsEditing: 'need boolean',
       aspect: [
         3,
-        // $ExpectError
+        // $FlowExpectedError
         'need number',
       ],
-      // $ExpectError
+      // $FlowExpectedError
       quality: 'need number',
-      // $ExpectError
+      // $FlowExpectedError
       base64: 'need boolean',
-      // $ExpectError
+      // $FlowExpectedError
       exif: 'need boolean',
     });
   });

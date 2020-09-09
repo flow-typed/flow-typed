@@ -5,17 +5,17 @@ import Big from "big.js";
 // Properties
 (Big.DP: number);
 (Big.RM: number);
-// $ExpectError
+// $FlowExpectedError
 (Big.DP: string);
-// $ExpectError
+// $FlowExpectedError
 (Big.RM: string);
 Big.RM = 0;
 Big.RM = 1;
 Big.RM = 2;
 Big.RM = 3;
-// $ExpectError
+// $FlowExpectedError
 Big.RM = 4;
-// $ExpectError
+// $FlowExpectedError
 Big.RM = -1;
 
 // Constructors
@@ -27,17 +27,17 @@ Big.RM = -1;
 (Big('1'): Big);
 (Big(Big(5)): Big);
 
-// $ExpectError
+// $FlowExpectedError
 (new Big({}): Big);
-// $ExpectError
+// $FlowExpectedError
 (new Big([]): Big);
-// $ExpectError
+// $FlowExpectedError
 (Big({}): Big);
-// $ExpectError
+// $FlowExpectedError
 (Big([]): Big);
-// $ExpectError
+// $FlowExpectedError
 Big()
-// $ExpectError
+// $FlowExpectedError
 Big().nope;
 
 // Methods
@@ -58,7 +58,7 @@ let b: Big = Big('2');
 (b.round(): Big);
 (b.round(1): Big);
 (b.round(1, 2): Big);
-// $ExpectError
+// $FlowExpectedError
 (b.round(1, 4): Big);
 (b.sqrt(): Big);
 (b.times(b): Big);
@@ -75,9 +75,9 @@ let b: Big = Big('2');
 
 // Properties
 (b.c.length + 2);
-// $ExpectError
+// $FlowExpectedError
 b.c + 2;
 (b.e: number);
 (b.s: number);
-// $ExpectError
+// $FlowExpectedError
 (b.s: string);

@@ -10,9 +10,9 @@ pad(30, "a string", {
   strip: false
 });
 
-// $ExpectError
+// $FlowExpectedError
 pad(true, 20);
-// $ExpectError
+// $FlowExpectedError
 pad(20, true);
-// $ExpectError
+// $FlowExpectedError
 pad(' a string', 20, false);

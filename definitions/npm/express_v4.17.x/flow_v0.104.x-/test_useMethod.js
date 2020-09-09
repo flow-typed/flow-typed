@@ -10,9 +10,9 @@ describe('express#use', () => {
     customApp.use("/something", express.Router());
     customApp.use(express.Router(), express.Router());
 
-    // $ExpectError
+    // $FlowExpectedError
     customApp.use("/something", "/something");
-    // $ExpectError
+    // $FlowExpectedError
     customApp.use("/something", "/something", express.Router());
   });
 });

@@ -31,7 +31,7 @@ describe('NetInfoState', () => {
     if (netInfo.type === 'wifi') {
       (netInfo.details.isConnectionExpensive: boolean);
 
-      // $ExpectError `cellularGeneration` is missing in `details`
+      // $FlowExpectedError `cellularGeneration` is missing in `details`
       netInfo.details.cellularGeneration;
     }
   });
@@ -47,7 +47,7 @@ describe('addEventListener', () => {
   });
 
   it('should raises an error when pass not function', () => {
-    // $ExpectError: first argument must be a function
+    // $FlowExpectedError: first argument must be a function
     addEventListener('() => {}');
   });
 });

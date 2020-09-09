@@ -48,13 +48,13 @@ describe('# directory-tree', () => {
   });
 
   it('type error', () => {
-    // $ExpectError
+    // $FlowExpectedError
     const expectNumber: number = dirTree(__dirname);
   });
 
   it('should not use children directly', () => {
     const result: dirTreeType = dirTree(__dirname);
-    // $ExpectError
+    // $FlowExpectedError
     result.children.push('test');
   });
 });

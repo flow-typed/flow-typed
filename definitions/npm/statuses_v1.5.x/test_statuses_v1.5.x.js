@@ -8,11 +8,11 @@ describe("statuses ", () => {
     status(123);
     status("Processing");
     status("123");
-    // $ExpectError
+    // $FlowExpectedError
     status(null);
-    // $ExpectError
+    // $FlowExpectedError
     status({});
-    // $ExpectError
+    // $FlowExpectedError
     status(() => {});
   });
 
@@ -20,18 +20,18 @@ describe("statuses ", () => {
     status.empty[404];
     status.retry[404];
     status.redirect[404];
-    // $ExpectError
+    // $FlowExpectedError
     status.empty["zxc"];
-    // $ExpectError
+    // $FlowExpectedError
     status.retry["qwe"];
-    // $ExpectError
+    // $FlowExpectedError
     status.redirect["asd"];
   });
 
   it("provides maps with codes and messages", () => {
     status[123];
     status["Not Found"];
-    // $ExpectError
+    // $FlowExpectedError
     status[{}];
   });
 });

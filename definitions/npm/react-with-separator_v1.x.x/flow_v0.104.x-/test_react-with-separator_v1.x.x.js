@@ -22,36 +22,36 @@ describe("react-with-separator", () => {
 
     describe("Invalid usage", () => {
       it("Rejects usage without `separator` prop", () => {
-        // $ExpectError
+        // $FlowExpectedError
         <WithSeparator />;
       });
 
       it("Rejects usage with invalid `Object` `separator` prop", () => {
-        // $ExpectError
+        // $FlowExpectedError
         <WithSeparator separator={{}} />;
       });
       it("Rejects usage with invalid `null` `separator` prop", () => {
-        // $ExpectError
+        // $FlowExpectedError
         <WithSeparator separator={null} />;
       });
       it("Rejects usage with invalid `void` `separator` prop", () => {
-        // $ExpectError
+        // $FlowExpectedError
         <WithSeparator separator={void 0} />;
       });
       it(" Rejects usage with invalid `boolean` `separator` prop", () => {
-        // $ExpectError
+        // $FlowExpectedError
         <WithSeparator separator={true} />;
       });
       it("Rejects usage with invalid `children` prop", () => {
-        // $ExpectError
+        // $FlowExpectedError
         <WithSeparator separator="|" children={{}} />;
       });
       it("Rejects usage with invalid `leading` prop", () => {
-        // $ExpectError
+        // $FlowExpectedError
         <WithSeparator separator="|" leading={1} />;
       });
       it("Rejects usage with invalid `trailing` prop", () => {
-        // $ExpectError
+        // $FlowExpectedError
         <WithSeparator separator="|" trailing={1} />;
       });
     });

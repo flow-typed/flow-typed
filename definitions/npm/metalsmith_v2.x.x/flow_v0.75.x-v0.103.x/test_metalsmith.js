@@ -12,7 +12,7 @@ const file: File = {
   bar: 'allons-y!',
 };
 
-// $ExpectError
+// $FlowExpectedError
 const file: File = {
   mode: '0644',
 };
@@ -20,12 +20,12 @@ const file: File = {
 const dummyPlugin = (files: FilesMap, ms: Metalsmith, done: DoneCallback) => {
   const dest: string = ms.destination();
   const meta: {} = ms.metadata();
-  // $ExpectError
+  // $FlowExpectedError
   const src: number = ms.source();
 
   const mode: ?string = files['index'].mode;
   const extra = files['index'].extra;
-  // $ExpectError
+  // $FlowExpectedError
   const data: ?string = files['index'].contents;
 
   done();
@@ -45,11 +45,11 @@ Metalsmith(__dirname)
   .ignore(['.trash', '.tmp'])
   .ignore((filename, stats) => false)
   .ignore([(filename, stats) => false, filename => true])
-  // $ExpectError
+  // $FlowExpectedError
   .ignore([123])
   .use(dummyPlugin)
   .use(dummyAsyncPlugin)
-  // $ExpectError
+  // $FlowExpectedError
   .use(null)
   .build(err => {
     if (err) {
@@ -61,5 +61,5 @@ Metalsmith(__dirname)
 
 Metalsmith(__dirname)
   .source()
-  // $ExpectError
+  // $FlowExpectedError
   .destination('public');

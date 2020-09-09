@@ -7,7 +7,7 @@ const pr: PrettyError = new PrettyError();
 (pr.start(): PrettyError);
 (pr.render(new Error('')): string);
 
-// $ExpectError
+// $FlowExpectedError
 (pr.skip(100): PrettyError);
 
 (pr.alias('foo', 'bar'): PrettyError);

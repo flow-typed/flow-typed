@@ -9,14 +9,14 @@ describe("detach(ForkEffect): ForkEffect*", () => {
   it("must return detached ForkEffect", () => {
     const detachedForkEffect = detach(simpleForkEffect);
 
-    // $ExpectError
+    // $FlowExpectedError
     (simpleForkEffect.payload.detached: true);
 
     (detachedForkEffect.payload.detached: true);
   });
 
   it("must raises an error when first argument isn't ForkEffect", () => {
-    // $ExpectError
+    // $FlowExpectedError
     detach({ type: "FORK" });
   });
 });

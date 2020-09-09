@@ -14,11 +14,11 @@ barAction(12, "xxx").type;
 barAction(12, "xxx").meta;
 // not handler by flow < 0.39
 barAction("12", "xxx");
-// $ExpectError
+// $FlowExpectedError
 barAction(12, "xxx").payloadd;
-// $ExpectError
+// $FlowExpectedError
 createAction({});
-// $ExpectError
+// $FlowExpectedError
 createAction();
 
 createReducer(
@@ -35,7 +35,7 @@ createReducer(
   }
 );
 
-// $ExpectError
+// $FlowExpectedError
 createReducer({ foo: {}, bar() {} }, 123);
 
 const increment = createAction("increment");

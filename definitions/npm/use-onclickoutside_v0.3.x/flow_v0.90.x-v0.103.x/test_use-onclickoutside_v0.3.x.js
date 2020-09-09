@@ -12,9 +12,9 @@ describe('The `useOnClickOutside` hook', () => {
     useOnClickOutside(ref, (evt: MouseEvent) => {});
     useOnClickOutside(ref, (evt: TouchEvent) => {});
 
-    // $ExpectError
+    // $FlowExpectedError
     useOnClickOutside(ref, (evt: AnimationEvent) => {});
-    // $ExpectError
+    // $FlowExpectedError
     useOnClickOutside(null);
   });
 
@@ -30,7 +30,7 @@ describe('The `useOnClickOutside` hook', () => {
   it('should not return destructured vars', () => {
     const ref = useRef(null);
     (useOnClickOutside(ref, () => {}): void);
-    // $ExpectError
+    // $FlowExpectedError
     (useOnClickOutside(ref, () => {}): []);
   });
 
@@ -41,11 +41,11 @@ describe('The `useOnClickOutside` hook', () => {
 
       if (ref.current) {
         (ref.current: HTMLDivElement);
-        // $ExpectError
+        // $FlowExpectedError
         (ref.current: HTMLAnchorElement);
 
         ref.current.getBoundingClientRect();
-        // $ExpectError
+        // $FlowExpectedError
         ref.current.shouldFail();
       }
 
@@ -58,11 +58,11 @@ describe('The `useOnClickOutside` hook', () => {
 
       if (ref.current) {
         (ref.current: HTMLInputElement);
-        // $ExpectError
+        // $FlowExpectedError
         (ref.current: HTMLAnchorElement);
 
         ref.current.focus();
-        // $ExpectError
+        // $FlowExpectedError
         ref.current.shouldFail();
       }
 
@@ -81,11 +81,11 @@ describe('The `useOnClickOutside` hook', () => {
 
       if (ref.current) {
         (ref.current: HTMLDivElement);
-        // $ExpectError
+        // $FlowExpectedError
         (ref.current: HTMLAnchorElement);
 
         ref.current.getBoundingClientRect();
-        // $ExpectError
+        // $FlowExpectedError
         ref.current.shouldFail();
       }
 

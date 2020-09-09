@@ -16,14 +16,14 @@ const notAPoint = {
   properties: {}
 }
 
-// $ExpectError
+// $FlowExpectedError
 destination(notAPoint, 100, 32, 'meters');
 
-// $ExpectError
+// $FlowExpectedError
 destination(pointA, 100, 32);
 
-// $ExpectError
+// $FlowExpectedError
 destination(pointA, 100, 32, 'foobar');
 
-// $ExpectError
+// $FlowExpectedError
 destination(pointA, 100, 'wow', 'meters');

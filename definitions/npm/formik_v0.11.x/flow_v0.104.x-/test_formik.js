@@ -88,10 +88,10 @@ describe("formik", () => {
                 name="text"
                 onChange={handleChange}
                 onBlur={handleBlur}
-                // $ExpectError - email missing in values
+                // $FlowExpectedError - email missing in values
                 value={values.email}
               />
-              {/* $ExpectError - touched missing in values */}
+              {/* $FlowExpectedError - touched missing in values */}
               {touched.email && errors.email && <div>{errors.email}</div>}
               <button type="submit" disabled={isSubmitting}>
                 Submit
@@ -114,7 +114,7 @@ describe("formik", () => {
             <form>
               <button onClick={() => {
                 setFieldValue("text", "new value")
-                // $ExpectError setFieldValue must be type string
+                // $FlowExpectedError setFieldValue must be type string
                 setFieldValue("text", 3)
               }}>
                 Submit
@@ -142,7 +142,7 @@ describe("formik", () => {
             <form>
               <button onClick={() => {
                 setFieldValue("requestState", "ready")
-                // $ExpectError setFieldValue value must be "loading" or "ready"
+                // $FlowExpectedError setFieldValue value must be "loading" or "ready"
                 setFieldValue("requestState", "asfuohasfuoh")
               }}>
                 Submit
@@ -163,7 +163,7 @@ describe("formik", () => {
 
       it("raises error when passed more than one argument", () => {
         const testFunc = (actions: FormikActions<Values>) => {
-          // $ExpectError setStatus action expects only one argument
+          // $FlowExpectedError setStatus action expects only one argument
           actions.setStatus("text", "done");
         };
       });
@@ -178,7 +178,7 @@ describe("formik", () => {
 
       it("raises error when passed an unrecognized value key", () => {
         const testFunc = (actions: FormikActions<Values>) => {
-          // $ExpectError setErrors keys must match value fields
+          // $FlowExpectedError setErrors keys must match value fields
           actions.setErrors({ other: "Text is required" });
         };
       });
@@ -193,7 +193,7 @@ describe("formik", () => {
 
       it("raises error when passed a non-boolean", () => {
         const testFunc = (actions: FormikActions<Values>) => {
-          // $ExpectError setSubmitting only takes a boolean
+          // $FlowExpectedError setSubmitting only takes a boolean
           actions.setSubmitting("false");
         };
       });
@@ -210,9 +210,9 @@ describe("formik", () => {
 
       it("raises error when passed an unrecognized field or a non-boolean", () => {
         const testFunc = (actions: FormikActions<Values>) => {
-          // $ExpectError setTouched keys must match value fields
+          // $FlowExpectedError setTouched keys must match value fields
           actions.setTouched({ other: true });
-          // $ExpectError setTouched value must be a boolean
+          // $FlowExpectedError setTouched value must be a boolean
           actions.setTouched({ text: "true" });
         };
       });
@@ -229,7 +229,7 @@ describe("formik", () => {
 
       it("raises error when passed something other than Values", () => {
         const testFunc = (actions: FormikActions<Values>) => {
-          // $ExpectError setValues keys must match value fields
+          // $FlowExpectedError setValues keys must match value fields
           actions.setValues({ other: "Text" });
         };
       });
@@ -240,14 +240,14 @@ describe("formik", () => {
         const testFunc = (actions: FormikActions<Values>) => {
           actions.setFieldValue("text", "Value");
           actions.setFieldValue("text", "Value", true);
-          // $ExpectError 'other' is not a key in values
+          // $FlowExpectedError 'other' is not a key in values
           actions.setFieldValue("other", "Value");
         };
       });
 
       it("raises error when not passed a field", () => {
         const testFunc = (actions: FormikActions<Values>) => {
-          // $ExpectError Field and value arguments expected
+          // $FlowExpectedError Field and value arguments expected
           actions.setFieldValue({ text: "Text" });
         };
       });
@@ -257,14 +257,14 @@ describe("formik", () => {
       it("passes when used properly", () => {
         const testFunc = (actions: FormikActions<Values>) => {
           actions.setFieldError("text", "Error");
-          // $ExpectError 'other' is not a key in values
+          // $FlowExpectedError 'other' is not a key in values
           actions.setFieldError("other", "Error");
         };
       });
 
       it("raises error when not passed a field", () => {
         const testFunc = (actions: FormikActions<Values>) => {
-          // $ExpectError Field and value arguments expected
+          // $FlowExpectedError Field and value arguments expected
           actions.setFieldError("Error");
         };
       });
@@ -274,14 +274,14 @@ describe("formik", () => {
       it("passes when used properly", () => {
         const testFunc = (actions: FormikActions<Values>) => {
           actions.setFieldTouched("text", true);
-          // $ExpectError 'other' is not a key in values
+          // $FlowExpectedError 'other' is not a key in values
           actions.setFieldTouched("other", true);
         };
       });
 
       it("raises error when not passed a field", () => {
         const testFunc = (actions: FormikActions<Values>) => {
-          // $ExpectError Field and value arguments expected
+          // $FlowExpectedError Field and value arguments expected
           actions.setFieldTouched(true);
         };
       });
@@ -306,7 +306,7 @@ describe("formik", () => {
 
       it("raises error if pass multiple arguments", () => {
         const testFunc = (actions: FormikActions<Values>) => {
-          // $ExpectError resetForm expects 0 or 1 arguments
+          // $FlowExpectedError resetForm expects 0 or 1 arguments
           actions.resetForm("text", "Text");
         };
       });
@@ -321,7 +321,7 @@ describe("formik", () => {
 
       it("raises error if passed an argument", () => {
         const testFunc = (actions: FormikActions<Values>) => {
-          // $ExpectError submitForm expects no arguments
+          // $FlowExpectedError submitForm expects no arguments
           actions.submitForm({ text: "Text" });
         };
       });
@@ -344,7 +344,7 @@ describe("formik", () => {
 
       it("raises error if return state shape other than FormikState<Values>", () => {
         const testFunc = (actions: FormikActions<Values>) => {
-          // $ExpectError - must return correct state shape
+          // $FlowExpectedError - must return correct state shape
           actions.setFormikState(({ values }) => ({
             text: `#${values.text}`
           }));

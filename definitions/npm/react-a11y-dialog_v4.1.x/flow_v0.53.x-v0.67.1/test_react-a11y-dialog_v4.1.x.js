@@ -22,7 +22,7 @@ describe("The `dialogRef` property", () => {
         }
       }}
     />;
-    // $ExpectError
+    // $FlowExpectedError
     <Dialog {...defaultProps} dialogRef="" />;
   });
 });

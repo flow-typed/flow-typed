@@ -4,20 +4,20 @@ import { buffers, type Buffer } from "redux-saga";
 
 describe("buffers", () => {
   it("must be read only object", () => {
-    // $ExpectError
+    // $FlowExpectedError
     buffers.none = "hi belarus";
-    // $ExpectError
+    // $FlowExpectedError
     buffers.fixed = "hi belarus";
-    // $ExpectError
+    // $FlowExpectedError
     buffers.dropping = "hi belarus";
-    // $ExpectError
+    // $FlowExpectedError
     buffers.sliding = "hi belarus";
-    // $ExpectError
+    // $FlowExpectedError
     buffers.expanding = "hi belarus";
   });
 
   it("must be exact type", () => {
-    // $ExpectError
+    // $FlowExpectedError
     buffers.anyOtherProp = "anyValue";
   });
 
@@ -37,7 +37,7 @@ describe("buffers", () => {
     });
 
     it("must raises an error when first argument isn't number", () => {
-      // $ExpectError: limit parameter must be given as a number
+      // $FlowExpectedError: limit parameter must be given as a number
       (buffers.fixed("five"): Buffer<*>);
     });
   });
@@ -52,7 +52,7 @@ describe("buffers", () => {
     });
 
     it("must raises an error when first argument isn't number", () => {
-      // $ExpectError: limit parameter must be given as a number
+      // $FlowExpectedError: limit parameter must be given as a number
       (buffers.dropping("six"): Buffer<*>);
     });
   });
@@ -67,7 +67,7 @@ describe("buffers", () => {
     });
 
     it("must raises an error when first argument isn't number", () => {
-      // $ExpectError: limit parameter must be given as a number
+      // $FlowExpectedError: limit parameter must be given as a number
       (buffers.sliding("seven"): Buffer<*>);
     });
   });
@@ -82,7 +82,7 @@ describe("buffers", () => {
     });
 
     it("must raises an error when first argument isn't number", () => {
-      // $ExpectError: limit parameter must be given as a number
+      // $FlowExpectedError: limit parameter must be given as a number
       (buffers.expanding("eight"): Buffer<*>);
     });
   });

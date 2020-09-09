@@ -7,7 +7,7 @@ import micro, {
   type RequestHandler
 } from "micro";
 
-// $ExpectError (RequestHandler should be a function)
+// $FlowExpectedError (RequestHandler should be a function)
 const badHandler: RequestHandler = null;
 const goodHandler: RequestHandler = async (req, res) => {
   return "some data";
@@ -15,7 +15,7 @@ const goodHandler: RequestHandler = async (req, res) => {
 
 const badServer = micro(async (req, res) => {
   const html = "<div>some html stuff</div>";
-  // $ExpectError (res has no endHTML method)
+  // $FlowExpectedError (res has no endHTML method)
   res.endHTML()
 });
 

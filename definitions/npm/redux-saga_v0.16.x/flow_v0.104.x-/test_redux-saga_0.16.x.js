@@ -295,10 +295,10 @@ function eventChannelTest() {
   eventChannel(emitter => () => {}, buffers.dropping(1));
   eventChannel(emitter => () => {}, buffers.dropping(1), () => true);
 
-  // $ExpectError: MatcherFn needs boolean as return type
+  // $FlowExpectedError: MatcherFn needs boolean as return type
   eventChannel(emitter => () => {}, buffers.dropping(1), () => "");
 
-  // $ExpectError: second parameter needs to be a Buffer
+  // $FlowExpectedError: second parameter needs to be a Buffer
   eventChannel(emitter => () => {}, "");
 }
 
@@ -308,25 +308,25 @@ function buffersTest() {
   (buffers.fixed(): Buffer);
   (buffers.fixed(5): Buffer);
 
-  // $ExpectError: limit parameter must be given as a number
+  // $FlowExpectedError: limit parameter must be given as a number
   (buffers.fixed("five"): Buffer);
 
   (buffers.dropping(): Buffer);
   (buffers.dropping(6): Buffer);
 
-  // $ExpectError: limit parameter must be given as a number
+  // $FlowExpectedError: limit parameter must be given as a number
   (buffers.dropping("six"): Buffer);
 
   (buffers.sliding(): Buffer);
   (buffers.sliding(7): Buffer);
 
-  // $ExpectError: limit parameter must be given as a number
+  // $FlowExpectedError: limit parameter must be given as a number
   (buffers.sliding("seven"): Buffer);
 
   (buffers.expanding(): Buffer);
   (buffers.expanding(8): Buffer);
 
-  // $ExpectError: limit parameter must be given as a number
+  // $FlowExpectedError: limit parameter must be given as a number
   (buffers.expanding("eight"): Buffer);
 }
 
@@ -340,28 +340,28 @@ function takeTest() {
   take(myChannel);
   take.maybe(myChannel);
 
-  // $ExpectError: PatternFn returns a boolean
+  // $FlowExpectedError: PatternFn returns a boolean
   take(action => null);
 
-  // $ExpectError: PatternFn returns a boolean
+  // $FlowExpectedError: PatternFn returns a boolean
   take.maybe(action => null);
 
-  // $ExpectError: Only string patterns for arrays
+  // $FlowExpectedError: Only string patterns for arrays
   take(["FOO", "BAR", 1]);
 
-  // $ExpectError: Only string patterns for arrays
+  // $FlowExpectedError: Only string patterns for arrays
   take.maybe(["FOO", "BAR", 1]);
 
-  // $ExpectError: Channels must have take prop
+  // $FlowExpectedError: Channels must have take prop
   take({ close: () => undefined, put: msg => undefined });
 
-  // $ExpectError: Channels must have take prop
+  // $FlowExpectedError: Channels must have take prop
   take.maybe({ close: () => undefined, put: msg => undefined });
 
-  // $ExpectError: Channels must have close prop
+  // $FlowExpectedError: Channels must have close prop
   take({ take: cb => undefined, put: msg => undefined });
 
-  // $ExpectError: Channels must have close prop
+  // $FlowExpectedError: Channels must have close prop
   take.maybe({ take: cb => undefined, put: msg => undefined });
 }
 
@@ -374,13 +374,13 @@ function putTest() {
   const put2 = put(myChannel, { type: "test" });
   (put2.PUT.channel: Channel);
 
-  // $ExpectError: Can only be called with objects
+  // $FlowExpectedError: Can only be called with objects
   put("FOO");
 
-  // $ExpectError: No null as channel accepted
+  // $FlowExpectedError: No null as channel accepted
   put(null, { type: "test" });
 
-  // $ExpectError: This property cannot be inferred
+  // $FlowExpectedError: This property cannot be inferred
   (put1.PUT.action.unknown: string);
 
   put.resolve({ type: "test" });
@@ -391,13 +391,13 @@ function putTest() {
   const put4 = put.resolve(myChannel, { type: "test" });
   (put4.PUT.channel: Channel);
 
-  // $ExpectError: Can only be called with objects
+  // $FlowExpectedError: Can only be called with objects
   put.resolve("FOO");
 
-  // $ExpectError: No null as channel accepted
+  // $FlowExpectedError: No null as channel accepted
   put.resolve(null, { type: "test" });
 
-  // $ExpectError: This property cannot be inferred
+  // $FlowExpectedError: This property cannot be inferred
   (put3.PUT.action.unknown: string);
 }
 
@@ -417,10 +417,10 @@ function callTest() {
   const c7 = call(fn7, "1", 2, "3", 4, "5", 6, "7");
   const c8 = call(fn8, "1", 2, "3", 4, "5", 6, "7", 8);
 
-  // $ExpectError: Too few arguments
+  // $FlowExpectedError: Too few arguments
   call(fn6, "1", 2, "3", 4);
 
-  // $ExpectError: Wrong argument types
+  // $FlowExpectedError: Wrong argument types
   call(fn1, 1);
 
   const cSpread = call(fnSpread, 1, 2, 3, 1);
@@ -436,7 +436,7 @@ function callTest() {
   (c7.CALL.args: [string, number, string, number, string, number, string]);
   (c8.CALL.args: [string, number, string, number, string, number, string, number]);
 
-  // $ExpectError: First parameter is a string, not a number
+  // $FlowExpectedError: First parameter is a string, not a number
   (c1.CALL.args: [number]);
 
   // Fn tests
@@ -452,13 +452,13 @@ function callTest() {
   // NOTE: This should actually fail, but apparently more parameter are fine..
   (c1.CALL.fn: typeof fn6);
 
-  // $ExpectError: fn returns a Promise<string> not Promise<number>
+  // $FlowExpectedError: fn returns a Promise<string> not Promise<number>
   (c1.CALL.fn: (a: boolean) => Promise<number>);
 
-  // $ExpectError: 'a' is actually of type string
+  // $FlowExpectedError: 'a' is actually of type string
   (c4.CALL.fn: (a: number, b: number) => Promise<string>);
 
-  // $ExpectError: Less parameter are noticed
+  // $FlowExpectedError: Less parameter are noticed
   (c6.CALL.fn: typeof fn1);
 
   // Context tests
@@ -471,7 +471,7 @@ function callTest() {
   (c7.CALL.context: null);
   (c8.CALL.context: null);
 
-  // $ExpectError
+  // $FlowExpectedError
   (c1.CALL.context: {...});
 }
 
@@ -486,10 +486,10 @@ function callNormalFunctionTest() {
   const c7 = call(nfn7, "1", 2, true, "4", 5, false, "7");
   const c8 = call(nfn8, "1", 2, true, "4", 5, false, "7", 8);
 
-  // $ExpectError: Too few arguments
+  // $FlowExpectedError: Too few arguments
   call(nfn6, "1", 2, true, "4");
 
-  // $ExpectError: Wrong argument types
+  // $FlowExpectedError: Wrong argument types
   call(nfn1, 1);
 
   const cSpread = call(nfnSpread, 1, 2, 3, 4);
@@ -505,7 +505,7 @@ function callNormalFunctionTest() {
   (c7.CALL.args: [string, number, boolean, string, number, boolean, string]);
   (c8.CALL.args: [string, number, boolean, string, number, boolean, string, number]);
 
-  // $ExpectError: First parameter is a string, not a number
+  // $FlowExpectedError: First parameter is a string, not a number
   (c1.CALL.args: [number]);
 
   // Fn tests
@@ -518,16 +518,16 @@ function callNormalFunctionTest() {
   (c7.CALL.fn: typeof nfn7);
   (c8.CALL.fn: typeof nfn8);
 
-  // $ExpectError: fn returns a number not string
+  // $FlowExpectedError: fn returns a number not string
   (c1.CALL.fn: (a: boolean) => string);
 
-  // $ExpectError: 'a' is actually of type string
+  // $FlowExpectedError: 'a' is actually of type string
   (c1.CALL.fn: (a: boolean) => number);
 
-  // $ExpectError: 'a' is actually of type string
+  // $FlowExpectedError: 'a' is actually of type string
   (c4.CALL.fn: (a: number, b: number) => number);
 
-  // $ExpectError: Less parameter are noticed
+  // $FlowExpectedError: Less parameter are noticed
   (c6.CALL.fn: typeof nfn1);
 
   // Context tests
@@ -540,7 +540,7 @@ function callNormalFunctionTest() {
   (c7.CALL.context: null);
   (c8.CALL.context: null);
 
-  // $ExpectError
+  // $FlowExpectedError
   (c1.CALL.context: {...});
 }
 
@@ -555,10 +555,10 @@ function callSagaFunctionTest() {
   const c7 = call(s7, "1", 2, "3", 4, "5", 6, "7");
   const c8 = call(s8, "1", 2, "3", 4, "5", 6, "7", 8);
 
-  // $ExpectError: Too few arguments
+  // $FlowExpectedError: Too few arguments
   call(s6, "1", 2, "3", 4);
 
-  // $ExpectError: Wrong argument types
+  // $FlowExpectedError: Wrong argument types
   call(s1, 1);
 
   const cSpread = call(sSpread, 1, 2, 3, 4);
@@ -574,7 +574,7 @@ function callSagaFunctionTest() {
   (c7.CALL.args: [string, number, string, number, string, number, string]);
   (c8.CALL.args: [string, number, string, number, string, number, string, number]);
 
-  // $ExpectError: First parameter is a string, not a number
+  // $FlowExpectedError: First parameter is a string, not a number
   (c1.CALL.args: [number]);
 
   // Fn tests
@@ -587,16 +587,16 @@ function callSagaFunctionTest() {
   (c7.CALL.fn: typeof s7);
   (c8.CALL.fn: typeof s8);
 
-  // $ExpectError: fn returns a Saga<number> not Saga<string>
+  // $FlowExpectedError: fn returns a Saga<number> not Saga<string>
   (c1.CALL.fn: (a: string) => Saga<string>);
 
-  // $ExpectError: 'a' is actually of type string
+  // $FlowExpectedError: 'a' is actually of type string
   (c1.CALL.fn: (a: boolean) => Saga<number>);
 
-  // $ExpectError: 'a' is actually of type string
+  // $FlowExpectedError: 'a' is actually of type string
   (c4.CALL.fn: (a: number, b: number) => Saga<number>);
 
-  // $ExpectError: Less parameter are noticed
+  // $FlowExpectedError: Less parameter are noticed
   (c6.CALL.fn: typeof s1);
 
   // Context tests
@@ -609,7 +609,7 @@ function callSagaFunctionTest() {
   (c7.CALL.context: null);
   (c8.CALL.context: null);
 
-  // $ExpectError
+  // $FlowExpectedError
   (c1.CALL.context: {...});
 }
 
@@ -625,10 +625,10 @@ function contextCallTest() {
   const c8 = call([context, fn8], "1", 2, "3", 4, "5", 6, "7", 8);
   const cClass = call([classContext, fn1], "1");
 
-  // $ExpectError: Too few arguments
+  // $FlowExpectedError: Too few arguments
   call([context, fn6], "1", 2, "3", 4);
 
-  // $ExpectError: Wrong argument types
+  // $FlowExpectedError: Wrong argument types
   call([context, fn1], 1);
 
   const cSpread = call([context, fnSpread], 1, 2, 3, 1);
@@ -644,7 +644,7 @@ function contextCallTest() {
   (c7.CALL.args: [string, number, string, number, string, number, string]);
   (c8.CALL.args: [string, number, string, number, string, number, string, number]);
 
-  // $ExpectError: First parameter is a string, not a number
+  // $FlowExpectedError: First parameter is a string, not a number
   (c1.CALL.args: [number]);
 
   // Fn tests
@@ -660,13 +660,13 @@ function contextCallTest() {
   // NOTE: This should actually fail, but apparently more parameter are fine..
   (c1.CALL.fn: typeof fn6);
 
-  // $ExpectError: fn returns a Promise<string> not Promise<number>
+  // $FlowExpectedError: fn returns a Promise<string> not Promise<number>
   (c1.CALL.fn: (a: boolean) => Promise<number>);
 
-  // $ExpectError: 'a' is actually of type string
+  // $FlowExpectedError: 'a' is actually of type string
   (c4.CALL.fn: (a: number, b: number) => Promise<string>);
 
-  // $ExpectError: Less parameter are noticed
+  // $FlowExpectedError: Less parameter are noticed
   (c6.CALL.fn: typeof fn1);
 
   // Context tests
@@ -679,7 +679,7 @@ function contextCallTest() {
   (c7.CALL.context: typeof context);
   (c8.CALL.context: typeof context);
 
-  // $ExpectError
+  // $FlowExpectedError
   (c1.CALL.context: null);
 }
 
@@ -698,7 +698,7 @@ function contextCallNormalFunctionTest() {
   // TODO: For weird reasons I do not understand, these tests fail in the wrong place - ExpectError: Too few arguments
   // call([context, nfn6], '1', 2, true, '4');
 
-  // $ExpectError: Wrong argument types
+  // $FlowExpectedError: Wrong argument types
   call([context, nfn1], 1);
 
   const cSpread = call([context, nfnSpread], 1, 2, 3, 4);
@@ -714,7 +714,7 @@ function contextCallNormalFunctionTest() {
   (c7.CALL.args: [string, number, boolean, string, number, boolean, string]);
   (c8.CALL.args: [string, number, boolean, string, number, boolean, string, number]);
 
-  // $ExpectError: First parameter is a string, not a number
+  // $FlowExpectedError: First parameter is a string, not a number
   (c1.CALL.args: [number]);
 
   // Fn tests
@@ -727,16 +727,16 @@ function contextCallNormalFunctionTest() {
   (c7.CALL.fn: typeof nfn7);
   (c8.CALL.fn: typeof nfn8);
 
-  // $ExpectError: fn returns a number not string
+  // $FlowExpectedError: fn returns a number not string
   (c1.CALL.fn: (a: boolean) => string);
 
-  // $ExpectError: 'a' is actually of type string
+  // $FlowExpectedError: 'a' is actually of type string
   (c1.CALL.fn: (a: boolean) => number);
 
-  // $ExpectError: 'a' is actually of type string
+  // $FlowExpectedError: 'a' is actually of type string
   (c4.CALL.fn: (a: number, b: number) => number);
 
-  // $ExpectError: Less parameter are noticed
+  // $FlowExpectedError: Less parameter are noticed
   (c6.CALL.fn: typeof nfn1);
 
   // Context tests
@@ -749,7 +749,7 @@ function contextCallNormalFunctionTest() {
   (c7.CALL.context: typeof context);
   (c7.CALL.context: typeof context);
 
-  // $ExpectError
+  // $FlowExpectedError
   (c1.CALL.context: null);
 }
 
@@ -768,7 +768,7 @@ function contextCallSagaFunctionTest() {
   // TODO: For weird reasons I do not understand, these tests fail in the wrong place - ExpectError: Too few arguments
   // call([context, s6], '1', 2, '3', 4);
 
-  // $ExpectError: Wrong argument types
+  // $FlowExpectedError: Wrong argument types
   call([context, s1], 1);
 
   const cSpread = call([context, sSpread], 1, 2, 3, 4);
@@ -784,7 +784,7 @@ function contextCallSagaFunctionTest() {
   (c7.CALL.args: [string, number, string, number, string, number, string]);
   (c8.CALL.args: [string, number, string, number, string, number, string, number]);
 
-  // $ExpectError: First parameter is a string, not a number
+  // $FlowExpectedError: First parameter is a string, not a number
   (c1.CALL.args: [number]);
 
   // Fn tests
@@ -797,16 +797,16 @@ function contextCallSagaFunctionTest() {
   (c7.CALL.fn: typeof s7);
   (c8.CALL.fn: typeof s8);
 
-  // $ExpectError: fn returns a Saga<number> not Saga<string>
+  // $FlowExpectedError: fn returns a Saga<number> not Saga<string>
   (c1.CALL.fn: (a: string) => Saga<string>);
 
-  // $ExpectError: 'a' is actually of type string
+  // $FlowExpectedError: 'a' is actually of type string
   (c1.CALL.fn: (a: boolean) => Saga<number>);
 
-  // $ExpectError: 'a' is actually of type string
+  // $FlowExpectedError: 'a' is actually of type string
   (c4.CALL.fn: (a: number, b: number) => Saga<number>);
 
-  // $ExpectError: Less parameter are noticed
+  // $FlowExpectedError: Less parameter are noticed
   (c6.CALL.fn: typeof s1);
 
   // Context tests
@@ -819,7 +819,7 @@ function contextCallSagaFunctionTest() {
   (c7.CALL.context: typeof context);
   (c8.CALL.context: typeof context);
 
-  // $ExpectError
+  // $FlowExpectedError
   (c1.CALL.context: null);
 }
 
@@ -835,10 +835,10 @@ function applyTest() {
   const c8 = apply(context, fn6, "1", 2, "3", 4, "5", 6, "7", 8);
   const cClass = apply(classContext, fn1, "1");
 
-  // $ExpectError: Too few arguments
+  // $FlowExpectedError: Too few arguments
   apply(context, fn6, "1", 2, "3", 4);
 
-  // $ExpectError: Wrong argument types
+  // $FlowExpectedError: Wrong argument types
   apply(context, fn1, 1);
 
   const cSpread = apply(context, fnSpread, 1, 2, 3, 1);
@@ -854,7 +854,7 @@ function applyTest() {
   (c7.CALL.args: [string, number, string, number, string, number, string]);
   (c8.CALL.args: [string, number, string, number, string, number, string, number]);
 
-  // $ExpectError: First parameter is a string, not a number
+  // $FlowExpectedError: First parameter is a string, not a number
   (c1.CALL.args: [number]);
 
   // Fn tests
@@ -870,13 +870,13 @@ function applyTest() {
   // NOTE: This should actually fail, but apparently more parameter are fine..
   (c1.CALL.fn: typeof fn6);
 
-  // $ExpectError: fn returns a Promise<string> not Promise<number>
+  // $FlowExpectedError: fn returns a Promise<string> not Promise<number>
   (c1.CALL.fn: (a: boolean) => Promise<number>);
 
-  // $ExpectError: 'a' is actually of type string
+  // $FlowExpectedError: 'a' is actually of type string
   (c4.CALL.fn: (a: number, b: number) => Promise<string>);
 
-  // $ExpectError: Less parameter are noticed
+  // $FlowExpectedError: Less parameter are noticed
   (c6.CALL.fn: typeof fn1);
 
   // Context tests
@@ -889,7 +889,7 @@ function applyTest() {
   (c7.CALL.context: typeof context);
   (c8.CALL.context: typeof context);
 
-  // $ExpectError
+  // $FlowExpectedError
   (c1.CALL.context: null);
 }
 
@@ -905,10 +905,10 @@ function applyNormalFunctionTest() {
   const c8 = apply(context, nfn8, "1", 2, true, "4", 5, false, "7", 8);
   const cClass = apply(classContext, nfn1, "1");
 
-  // $ExpectError: Too few arguments
+  // $FlowExpectedError: Too few arguments
   apply(context, nfn6, "1", 2, true, "4");
 
-  // $ExpectError: Wrong argument types
+  // $FlowExpectedError: Wrong argument types
   apply(context, nfn1, 1);
 
   const cSpread = apply(context, nfnSpread, 1, 2, 3, 4);
@@ -924,7 +924,7 @@ function applyNormalFunctionTest() {
   (c7.CALL.args: [string, number, boolean, string, number, boolean, string]);
   (c8.CALL.args: [string, number, boolean, string, number, boolean, string, number]);
 
-  // $ExpectError: First parameter is a string, not a number
+  // $FlowExpectedError: First parameter is a string, not a number
   (c1.CALL.args: [number]);
 
   // Fn tests
@@ -937,16 +937,16 @@ function applyNormalFunctionTest() {
   (c7.CALL.fn: typeof nfn7);
   (c8.CALL.fn: typeof nfn8);
 
-  // $ExpectError: fn returns a number not string
+  // $FlowExpectedError: fn returns a number not string
   (c1.CALL.fn: (a: boolean) => string);
 
-  // $ExpectError: 'a' is actually of type string
+  // $FlowExpectedError: 'a' is actually of type string
   (c1.CALL.fn: (a: boolean) => number);
 
-  // $ExpectError: 'a' is actually of type string
+  // $FlowExpectedError: 'a' is actually of type string
   (c4.CALL.fn: (a: number, b: number) => number);
 
-  // $ExpectError: Less parameter are noticed
+  // $FlowExpectedError: Less parameter are noticed
   (c6.CALL.fn: typeof nfn1);
 
   // Context tests
@@ -959,7 +959,7 @@ function applyNormalFunctionTest() {
   (c7.CALL.context: typeof context);
   (c8.CALL.context: typeof context);
 
-  // $ExpectError
+  // $FlowExpectedError
   (c1.CALL.context: null);
 }
 
@@ -975,10 +975,10 @@ function applySagaFunctionTest() {
   const c8 = apply(context, s8, "1", 2, "3", 4, "5", 6, "7", 8);
   const cClass = apply(classContext, s1, "1");
 
-  // $ExpectError: Too few arguments
+  // $FlowExpectedError: Too few arguments
   apply(context, s6, "1", 2, "3", 4);
 
-  // $ExpectError: Wrong argument types
+  // $FlowExpectedError: Wrong argument types
   apply(context, s1, 1);
 
   const cSpread = apply(context, sSpread, 1, 2, 3, 4);
@@ -994,7 +994,7 @@ function applySagaFunctionTest() {
   (c7.CALL.args: [string, number, string, number, string, number, string]);
   (c8.CALL.args: [string, number, string, number, string, number, string, number]);
 
-  // $ExpectError: First parameter is a string, not a number
+  // $FlowExpectedError: First parameter is a string, not a number
   (c1.CALL.args: [number]);
 
   // Fn tests
@@ -1007,16 +1007,16 @@ function applySagaFunctionTest() {
   (c7.CALL.fn: typeof s7);
   (c8.CALL.fn: typeof s8);
 
-  // $ExpectError: fn returns a Saga<number> not Saga<string>
+  // $FlowExpectedError: fn returns a Saga<number> not Saga<string>
   (c1.CALL.fn: (a: string) => Saga<string>);
 
-  // $ExpectError: 'a' is actually of type string
+  // $FlowExpectedError: 'a' is actually of type string
   (c1.CALL.fn: (a: boolean) => Saga<number>);
 
-  // $ExpectError: 'a' is actually of type string
+  // $FlowExpectedError: 'a' is actually of type string
   (c4.CALL.fn: (a: number, b: number) => Saga<number>);
 
-  // $ExpectError: Less parameter are noticed
+  // $FlowExpectedError: Less parameter are noticed
   (c6.CALL.fn: typeof s1);
 
   // Context tests
@@ -1029,7 +1029,7 @@ function applySagaFunctionTest() {
   (c7.CALL.context: typeof context);
   (c8.CALL.context: typeof context);
 
-  // $ExpectError
+  // $FlowExpectedError
   (c1.CALL.context: null);
 }
 
@@ -1079,7 +1079,7 @@ function forkTest() {
   (e8.FORK.fn: typeof fn8);
   (eSaga.FORK.fn: typeof s1);
 
-  // $ExpectError: wrong fn
+  // $FlowExpectedError: wrong fn
   (e6.FORK.fn: typeof fn1);
 }
 
@@ -1129,7 +1129,7 @@ function contextForkTest() {
   (e8.FORK.fn: typeof fn8);
   (eSaga.FORK.fn: typeof s1);
 
-  // $ExpectError: wrong fn
+  // $FlowExpectedError: wrong fn
   (e6.FORK.fn: typeof fn1);
 }
 
@@ -1175,7 +1175,7 @@ function cpsTest() {
   (e7.CPS.fn: typeof cpsfn7);
   (e8.CPS.fn: typeof cpsfn8);
 
-  // $ExpectError: wrong fn
+  // $FlowExpectedError: wrong fn
   (e6.CPS.fn: typeof cpsfn1);
 }
 
@@ -1223,7 +1223,7 @@ function contextCpsTest() {
   (e7.CPS.fn: typeof cpsfn7);
   (e8.CPS.fn: typeof cpsfn8);
 
-  // $ExpectError: wrong fn
+  // $FlowExpectedError: wrong fn
   (e6.CPS.fn: typeof cpsfn1);
 }
 
@@ -1273,7 +1273,7 @@ function spawnTest() {
   (e8.SPAWN.fn: typeof fn8);
   (eSaga.SPAWN.fn: typeof s1);
 
-  // $ExpectError: wrong fn
+  // $FlowExpectedError: wrong fn
   (e6.SPAWN.fn: typeof fn1);
 }
 
@@ -1323,7 +1323,7 @@ function contextSpawnTest() {
   (e8.SPAWN.fn: typeof fn8);
   (eSaga.SPAWN.fn: typeof s1);
 
-  // $ExpectError: wrong fn
+  // $FlowExpectedError: wrong fn
   (e6.SPAWN.fn: typeof fn1);
 }
 
@@ -1336,7 +1336,7 @@ function joinTest() {
 
   (j1.JOIN: typeof task1);
 
-  // $ExpectError: This is not a join effect but an all effect
+  // $FlowExpectedError: This is not a join effect but an all effect
   (j2.JOIN: Task<*>);
 }
 
@@ -1351,7 +1351,7 @@ function cancelTest() {
   (selfCancel.CANCEL: "@@redux-saga/SELF_CANCELLATION");
   (c1.CANCEL: typeof task1);
 
-  // $ExpectError: This is not a cancel effect but an all effect
+  // $FlowExpectedError: This is not a cancel effect but an all effect
   (c2.CANCEL: Task<*>);
 }
 
@@ -1390,10 +1390,10 @@ function flushTest() {
   const f = flush(myChannel);
   (f.FLUSH: typeof myChannel);
 
-  // $ExpectError: Too few arguments
+  // $FlowExpectedError: Too few arguments
   flush();
 
-  // $ExpectError: Only accept Channels
+  // $FlowExpectedError: Only accept Channels
   flush(42);
 }
 
@@ -1472,7 +1472,7 @@ function selectTest() {
   (e7.SELECT.args: [string, number, string, number, string, number, string]);
   (e8.SELECT.args: [string, number, string, number, string, number, string, number]);
 
-  // $ExpectError: second args is not a boolean
+  // $FlowExpectedError: second args is not a boolean
   (e3.SELECT.args: [string, boolean, string]);
 
   // Fn check
@@ -1487,7 +1487,7 @@ function selectTest() {
   (e7.SELECT.selector: typeof s7);
   (e8.SELECT.selector: typeof s8);
 
-  // $ExpectError: args.a should actually be a string
+  // $FlowExpectedError: args.a should actually be a string
   (e1.SELECT.selector: (state: Object, a: number) => Object);
 }
 
@@ -1612,13 +1612,13 @@ function runSagaTest() {
   (runSaga({}, s7, "1", 2, "3", 4, "5", 6, "7"): Task<number>);
   (runSaga({}, s8, "1", 2, "3", 4, "5", 6, "7", 8): Task<number>);
 
-  // $ExpectError: too few args
+  // $FlowExpectedError: too few args
   (runSaga({}, s6, "1", 2): Task<number>);
 
-  // $ExpectError: wrong argument type
+  // $FlowExpectedError: wrong argument type
   (runSaga({}, s1, 1): Task<number>);
 
-  // $ExpectError: wrong return type
+  // $FlowExpectedError: wrong return type
   (runSaga({}, s1, 1): Task<string>);
 
   const cb = input => {};
@@ -1628,13 +1628,13 @@ function runSagaTest() {
   };
 
   const invalidSubscribe = cb => {
-    // $ExpectError: cb is a function
+    // $FlowExpectedError: cb is a function
     cb + 2;
 
     return "";
   };
 
-  // $ExpectError: error level is a string enum
+  // $FlowExpectedError: error level is a string enum
   const invalidLogger = (level: number) => {};
 
   const dispatch = output => {};
@@ -1650,7 +1650,7 @@ function runSagaTest() {
 
   // Invalid instantiations
   runSaga({ logger: invalidLogger }, s0);
-  // $ExpectError: return needs to be a subscribe fn
+  // $FlowExpectedError: return needs to be a subscribe fn
   runSaga({ subscribe: invalidSubscribe }, s0);
 }
 
@@ -1667,25 +1667,25 @@ function createSagaMiddlewareTest() {
   middleware.run(s7, "1", 2, "3", 4, "5", 6, "7");
   middleware.run(s8, "1", 2, "3", 4, "5", 6, "7", 8);
 
-  // $ExpectError: Boolean argument should be string
+  // $FlowExpectedError: Boolean argument should be string
   middleware.run(s3, true, 2, "3");
 
   (middleware.run(s0): Task<number>);
 
   createSagaMiddleware({ sagaMonitor });
 
-  // $ExpectError: sagaMonitor parameter should be SagaMonitor
+  // $FlowExpectedError: sagaMonitor parameter should be SagaMonitor
   createSagaMiddleware({ sagaMonitor: "monitor" });
 
   const logger = level => {};
   createSagaMiddleware({ logger });
 
-  // $ExpectError: logger parameter should be Logger
+  // $FlowExpectedError: logger parameter should be Logger
   createSagaMiddleware({ logger: "logger" });
 
   const error = () => {};
   createSagaMiddleware({ onError: error });
 
-  // $ExpectError: onError parameter should be Logger
+  // $FlowExpectedError: onError parameter should be Logger
   createSagaMiddleware({ onError: "error" });
 }

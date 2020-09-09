@@ -10,9 +10,9 @@ const B: string = sanitize('<foo/>', {
     return 'bar';
   },
 })
-// $ExpectError
+// $FlowExpectedError
 const C: string = sanitize('<foo/>', {
   parser: false,
 })
-// $ExpectError
+// $FlowExpectedError
 const D: string = sanitize('<foo/>', { allowedClasses: { foo: true } })

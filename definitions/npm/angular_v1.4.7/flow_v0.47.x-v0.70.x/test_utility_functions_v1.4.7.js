@@ -34,7 +34,7 @@ function testForEach() {
   angular.forEach({}, () => {});
   // accepts array
   angular.forEach([], () => {});
-  //$ExpectError does not accept anything else
+  //$FlowExpectedError does not accept anything else
   angular.forEach(123, () => {});
 
   // callback gets array stuff in
@@ -51,7 +51,7 @@ function testForEach() {
 function testFromJson() {
   // accepts string
   angular.fromJson("");
-  //$ExpectError does not take in other types
+  //$FlowExpectedError does not take in other types
   angular.fromJson(123);
 }
 
@@ -62,8 +62,8 @@ function testToJson() {
   angular.toJson({}, true);
   // takes number as second argument
   angular.toJson({}, 123);
-  //$ExpectError does not take anything else as second argument
+  //$FlowExpectedError does not take anything else as second argument
   angular.toJson({}, "");
-  //$ExpectError cannot be called without parameters
+  //$FlowExpectedError cannot be called without parameters
   angular.toJson();
 }

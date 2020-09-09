@@ -18,14 +18,14 @@ mkdirp.sync('/tmp/foo/bar/baz', { mode: 493 });
 mkdirp.sync('/tmp/foo/bar/baz', { fs: fs });
 mkdirp.sync('/tmp/foo/bar/baz', { mode: 493, fs: fs });
 
-// $ExpectError
+// $FlowExpectedError
 mkdirp();
 
-// $ExpectError
+// $FlowExpectedError
 mkdirp(1);
 
-// $ExpectError
+// $FlowExpectedError
 mkdirp.sync();
 
-// $ExpectError
+// $FlowExpectedError
 mkdirp.sync(1);

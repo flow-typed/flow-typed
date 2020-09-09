@@ -76,12 +76,12 @@ describe("sagaMiddlewareFactory", () => {
     });
 
     it("must raises an error when argument type incompatible", () => {
-      // $ExpectError: Boolean argument should be string
+      // $FlowExpectedError: Boolean argument should be string
       middleware.run(s3, true, 2, "3");
     });
 
     it("must raises an error when returned Task type incompatible", () => {
-      // $ExpectError: Number [1] is incompatible with string [2] in type argument
+      // $FlowExpectedError: Number [1] is incompatible with string [2] in type argument
       (middleware.run(s0): Task<string>);
     });
   });
@@ -115,7 +115,7 @@ describe("sagaMiddlewareFactory", () => {
     });
 
     it("must raises an error when EffectMiddleware doesn't return function", () => {
-      // $ExpectError
+      // $FlowExpectedError
       sagaMiddlewareFactory({ effectMiddlewares: [() => {}] });
     });
 
@@ -124,28 +124,28 @@ describe("sagaMiddlewareFactory", () => {
 
       sagaMiddlewareFactory<C>({ context: { test: 99 } });
 
-      // $ExpectError: string [1] is incompatible with number
+      // $FlowExpectedError: string [1] is incompatible with number
       sagaMiddlewareFactory<C>({}).setContext({ test: "string" });
 
-      // $ExpectError: string [1] is incompatible with number
+      // $FlowExpectedError: string [1] is incompatible with number
       sagaMiddlewareFactory<C>({ context: { test: "ops..." } });
     });
 
     it("must raises an error when passed an unrecognized field", () => {
-      // $ExpectError: `anyFields` is missing in  `SagaMiddlewareOptions`
+      // $FlowExpectedError: `anyFields` is missing in  `SagaMiddlewareOptions`
       sagaMiddlewareFactory({ anyFields: "ops" });
     });
 
     it("must raises an error when logger type invalid", () => {
-      // $ExpectError: logger parameter should be Logger function
+      // $FlowExpectedError: logger parameter should be Logger function
       sagaMiddlewareFactory({ logger: "logger" });
     });
 
     it("must raises an error when onError type invalid", () => {
-      // $ExpectError: onError parameter should be function
+      // $FlowExpectedError: onError parameter should be function
       sagaMiddlewareFactory({ onError: "error" });
 
-      // $ExpectError: Number incompatible Error
+      // $FlowExpectedError: Number incompatible Error
       sagaMiddlewareFactory({ onError: (error: number) => {} });
     });
   });

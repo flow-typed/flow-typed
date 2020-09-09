@@ -19,13 +19,13 @@ describe("The `colors` safe API", () => {
   describe("The `enable` method", () => {
     it("should not accept parameters", () => {
       colors.enable();
-      // $ExpectError
+      // $FlowExpectedError
       colors.enable("");
     });
 
     it("should return void", () => {
       (colors.enable(): void);
-      // $ExpectError
+      // $FlowExpectedError
       (colors.enable(): string);
     });
   });
@@ -33,13 +33,13 @@ describe("The `colors` safe API", () => {
   describe("The `disable` method", () => {
     it("should not accept parameters", () => {
       colors.disable();
-      // $ExpectError
+      // $FlowExpectedError
       colors.disable("");
     });
 
     it("should return void", () => {
       (colors.disable(): void);
-      // $ExpectError
+      // $FlowExpectedError
       (colors.disable(): string);
     });
   });
@@ -47,13 +47,13 @@ describe("The `colors` safe API", () => {
   describe("The `disable` method", () => {
     it("should not accept parameters", () => {
       colors.disable();
-      // $ExpectError
+      // $FlowExpectedError
       colors.disable("");
     });
 
     it("should return void", () => {
       (colors.disable(): void);
-      // $ExpectError
+      // $FlowExpectedError
       (colors.disable(): string);
     });
   });
@@ -61,13 +61,13 @@ describe("The `colors` safe API", () => {
   describe("The `setTheme` method", () => {
     it("should accept a `theme` Object as parameter", () => {
       colors.setTheme({});
-      // $ExpectError
+      // $FlowExpectedError
       colors.setTheme("");
     });
 
     it("should return void", () => {
       (colors.setTheme({}): void);
-      // $ExpectError
+      // $FlowExpectedError
       (colors.setTheme({}): string);
     });
   });
@@ -75,13 +75,13 @@ describe("The `colors` safe API", () => {
   describe("The `strip` method", () => {
     it("should accept a String as parameter", () => {
       colors.strip("");
-      // $ExpectError
+      // $FlowExpectedError
       colors.strip();
     });
 
     it("should return a String", () => {
       (colors.strip(""): string);
-      // $ExpectError
+      // $FlowExpectedError
       (colors.strip(""): void);
     });
   });
@@ -89,13 +89,13 @@ describe("The `colors` safe API", () => {
   describe("The `stripColors` method", () => {
     it("should accept a String as parameter", () => {
       colors.stripColors("");
-      // $ExpectError
+      // $FlowExpectedError
       colors.stripColors();
     });
 
     it("should return a String", () => {
       (colors.stripColors(""): string);
-      // $ExpectError
+      // $FlowExpectedError
       (colors.stripColors(""): void);
     });
   });
@@ -103,13 +103,13 @@ describe("The `colors` safe API", () => {
   describe("The `black` method", () => {
     it("should accept a String as parameter", () => {
       colors.black("");
-      // $ExpectError
+      // $FlowExpectedError
       colors.black();
     });
 
     it("should return a String", () => {
       (colors.black(""): string);
-      // $ExpectError
+      // $FlowExpectedError
       (colors.black(""): void);
     });
   });
@@ -117,13 +117,13 @@ describe("The `colors` safe API", () => {
   describe("The `red` method", () => {
     it("should accept a String as parameter", () => {
       colors.red("");
-      // $ExpectError
+      // $FlowExpectedError
       colors.red();
     });
 
     it("should return a String", () => {
       (colors.red(""): string);
-      // $ExpectError
+      // $FlowExpectedError
       (colors.red(""): void);
     });
   });
@@ -131,13 +131,13 @@ describe("The `colors` safe API", () => {
   describe("The `green` method", () => {
     it("should accept a String as parameter", () => {
       colors.green("");
-      // $ExpectError
+      // $FlowExpectedError
       colors.green();
     });
 
     it("should return a String", () => {
       (colors.green(""): string);
-      // $ExpectError
+      // $FlowExpectedError
       (colors.green(""): void);
     });
   });
@@ -145,13 +145,13 @@ describe("The `colors` safe API", () => {
   describe("The `yellow` method", () => {
     it("should accept a String as parameter", () => {
       colors.yellow("");
-      // $ExpectError
+      // $FlowExpectedError
       colors.yellow();
     });
 
     it("should return a String", () => {
       (colors.yellow(""): string);
-      // $ExpectError
+      // $FlowExpectedError
       (colors.yellow(""): void);
     });
   });
@@ -159,13 +159,13 @@ describe("The `colors` safe API", () => {
   describe("The `blue` method", () => {
     it("should accept a String as parameter", () => {
       colors.blue("");
-      // $ExpectError
+      // $FlowExpectedError
       colors.blue();
     });
 
     it("should return a String", () => {
       (colors.blue(""): string);
-      // $ExpectError
+      // $FlowExpectedError
       (colors.blue(""): void);
     });
   });
@@ -173,13 +173,13 @@ describe("The `colors` safe API", () => {
   describe("The `magenta` method", () => {
     it("should accept a String as parameter", () => {
       colors.magenta("");
-      // $ExpectError
+      // $FlowExpectedError
       colors.magenta();
     });
 
     it("should return a String", () => {
       (colors.magenta(""): string);
-      // $ExpectError
+      // $FlowExpectedError
       (colors.magenta(""): void);
     });
   });
@@ -187,13 +187,13 @@ describe("The `colors` safe API", () => {
   describe("The `cyan` method", () => {
     it("should accept a String as parameter", () => {
       colors.cyan("");
-      // $ExpectError
+      // $FlowExpectedError
       colors.cyan();
     });
 
     it("should return a String", () => {
       (colors.cyan(""): string);
-      // $ExpectError
+      // $FlowExpectedError
       (colors.cyan(""): void);
     });
   });
@@ -201,13 +201,13 @@ describe("The `colors` safe API", () => {
   describe("The `white` method", () => {
     it("should accept a String as parameter", () => {
       colors.white("");
-      // $ExpectError
+      // $FlowExpectedError
       colors.white();
     });
 
     it("should return a String", () => {
       (colors.white(""): string);
-      // $ExpectError
+      // $FlowExpectedError
       (colors.white(""): void);
     });
   });
@@ -215,13 +215,13 @@ describe("The `colors` safe API", () => {
   describe("The `gray` method", () => {
     it("should accept a String as parameter", () => {
       colors.gray("");
-      // $ExpectError
+      // $FlowExpectedError
       colors.gray();
     });
 
     it("should return a String", () => {
       (colors.gray(""): string);
-      // $ExpectError
+      // $FlowExpectedError
       (colors.gray(""): void);
     });
   });
@@ -229,13 +229,13 @@ describe("The `colors` safe API", () => {
   describe("The `grey` method", () => {
     it("should accept a String as parameter", () => {
       colors.grey("");
-      // $ExpectError
+      // $FlowExpectedError
       colors.grey();
     });
 
     it("should return a String", () => {
       (colors.grey(""): string);
-      // $ExpectError
+      // $FlowExpectedError
       (colors.grey(""): void);
     });
   });
@@ -243,13 +243,13 @@ describe("The `colors` safe API", () => {
   describe("The `bgBlack` method", () => {
     it("should accept a String as parameter", () => {
       colors.bgBlack("");
-      // $ExpectError
+      // $FlowExpectedError
       colors.bgBlack();
     });
 
     it("should return a String", () => {
       (colors.bgBlack(""): string);
-      // $ExpectError
+      // $FlowExpectedError
       (colors.bgBlack(""): void);
     });
   });
@@ -257,13 +257,13 @@ describe("The `colors` safe API", () => {
   describe("The `bgRed` method", () => {
     it("should accept a String as parameter", () => {
       colors.bgRed("");
-      // $ExpectError
+      // $FlowExpectedError
       colors.bgRed();
     });
 
     it("should return a String", () => {
       (colors.bgRed(""): string);
-      // $ExpectError
+      // $FlowExpectedError
       (colors.bgRed(""): void);
     });
   });
@@ -271,13 +271,13 @@ describe("The `colors` safe API", () => {
   describe("The `bgGreen` method", () => {
     it("should accept a String as parameter", () => {
       colors.bgGreen("");
-      // $ExpectError
+      // $FlowExpectedError
       colors.bgGreen();
     });
 
     it("should return a String", () => {
       (colors.bgGreen(""): string);
-      // $ExpectError
+      // $FlowExpectedError
       (colors.bgGreen(""): void);
     });
   });
@@ -285,13 +285,13 @@ describe("The `colors` safe API", () => {
   describe("The `bgYellow` method", () => {
     it("should accept a String as parameter", () => {
       colors.bgYellow("");
-      // $ExpectError
+      // $FlowExpectedError
       colors.bgYellow();
     });
 
     it("should return a String", () => {
       (colors.bgYellow(""): string);
-      // $ExpectError
+      // $FlowExpectedError
       (colors.bgYellow(""): void);
     });
   });
@@ -299,13 +299,13 @@ describe("The `colors` safe API", () => {
   describe("The `bgBlue` method", () => {
     it("should accept a String as parameter", () => {
       colors.bgBlue("");
-      // $ExpectError
+      // $FlowExpectedError
       colors.bgBlue();
     });
 
     it("should return a String", () => {
       (colors.bgBlue(""): string);
-      // $ExpectError
+      // $FlowExpectedError
       (colors.bgBlue(""): void);
     });
   });
@@ -313,13 +313,13 @@ describe("The `colors` safe API", () => {
   describe("The `bgMagenta` method", () => {
     it("should accept a String as parameter", () => {
       colors.bgMagenta("");
-      // $ExpectError
+      // $FlowExpectedError
       colors.bgMagenta();
     });
 
     it("should return a String", () => {
       (colors.bgMagenta(""): string);
-      // $ExpectError
+      // $FlowExpectedError
       (colors.bgMagenta(""): void);
     });
   });
@@ -327,13 +327,13 @@ describe("The `colors` safe API", () => {
   describe("The `bgCyan` method", () => {
     it("should accept a String as parameter", () => {
       colors.bgCyan("");
-      // $ExpectError
+      // $FlowExpectedError
       colors.bgCyan();
     });
 
     it("should return a String", () => {
       (colors.bgCyan(""): string);
-      // $ExpectError
+      // $FlowExpectedError
       (colors.bgCyan(""): void);
     });
   });
@@ -341,13 +341,13 @@ describe("The `colors` safe API", () => {
   describe("The `bgWhite` method", () => {
     it("should accept a String as parameter", () => {
       colors.bgWhite("");
-      // $ExpectError
+      // $FlowExpectedError
       colors.bgWhite();
     });
 
     it("should return a String", () => {
       (colors.bgWhite(""): string);
-      // $ExpectError
+      // $FlowExpectedError
       (colors.bgWhite(""): void);
     });
   });
@@ -355,13 +355,13 @@ describe("The `colors` safe API", () => {
   describe("The `reset` method", () => {
     it("should accept a String as parameter", () => {
       colors.reset("");
-      // $ExpectError
+      // $FlowExpectedError
       colors.reset();
     });
 
     it("should return a String", () => {
       (colors.reset(""): string);
-      // $ExpectError
+      // $FlowExpectedError
       (colors.reset(""): void);
     });
   });
@@ -369,13 +369,13 @@ describe("The `colors` safe API", () => {
   describe("The `bold` method", () => {
     it("should accept a String as parameter", () => {
       colors.bold("");
-      // $ExpectError
+      // $FlowExpectedError
       colors.bold();
     });
 
     it("should return a String", () => {
       (colors.bold(""): string);
-      // $ExpectError
+      // $FlowExpectedError
       (colors.bold(""): void);
     });
   });
@@ -383,13 +383,13 @@ describe("The `colors` safe API", () => {
   describe("The `dim` method", () => {
     it("should accept a String as parameter", () => {
       colors.dim("");
-      // $ExpectError
+      // $FlowExpectedError
       colors.dim();
     });
 
     it("should return a String", () => {
       (colors.dim(""): string);
-      // $ExpectError
+      // $FlowExpectedError
       (colors.dim(""): void);
     });
   });
@@ -397,13 +397,13 @@ describe("The `colors` safe API", () => {
   describe("The `italic` method", () => {
     it("should accept a String as parameter", () => {
       colors.italic("");
-      // $ExpectError
+      // $FlowExpectedError
       colors.italic();
     });
 
     it("should return a String", () => {
       (colors.italic(""): string);
-      // $ExpectError
+      // $FlowExpectedError
       (colors.italic(""): void);
     });
   });
@@ -411,13 +411,13 @@ describe("The `colors` safe API", () => {
   describe("The `underline` method", () => {
     it("should accept a String as parameter", () => {
       colors.underline("");
-      // $ExpectError
+      // $FlowExpectedError
       colors.underline();
     });
 
     it("should return a String", () => {
       (colors.underline(""): string);
-      // $ExpectError
+      // $FlowExpectedError
       (colors.underline(""): void);
     });
   });
@@ -425,13 +425,13 @@ describe("The `colors` safe API", () => {
   describe("The `inverse` method", () => {
     it("should accept a String as parameter", () => {
       colors.inverse("");
-      // $ExpectError
+      // $FlowExpectedError
       colors.inverse();
     });
 
     it("should return a String", () => {
       (colors.inverse(""): string);
-      // $ExpectError
+      // $FlowExpectedError
       (colors.inverse(""): void);
     });
   });
@@ -439,13 +439,13 @@ describe("The `colors` safe API", () => {
   describe("The `hidden` method", () => {
     it("should accept a String as parameter", () => {
       colors.hidden("");
-      // $ExpectError
+      // $FlowExpectedError
       colors.hidden();
     });
 
     it("should return a String", () => {
       (colors.hidden(""): string);
-      // $ExpectError
+      // $FlowExpectedError
       (colors.hidden(""): void);
     });
   });
@@ -453,13 +453,13 @@ describe("The `colors` safe API", () => {
   describe("The `strikethrough` method", () => {
     it("should accept a String as parameter", () => {
       colors.strikethrough("");
-      // $ExpectError
+      // $FlowExpectedError
       colors.strikethrough();
     });
 
     it("should return a String", () => {
       (colors.strikethrough(""): string);
-      // $ExpectError
+      // $FlowExpectedError
       (colors.strikethrough(""): void);
     });
   });
@@ -467,13 +467,13 @@ describe("The `colors` safe API", () => {
   describe("The `rainbow` method", () => {
     it("should accept a String as parameter", () => {
       colors.rainbow("");
-      // $ExpectError
+      // $FlowExpectedError
       colors.rainbow();
     });
 
     it("should return a String", () => {
       (colors.rainbow(""): string);
-      // $ExpectError
+      // $FlowExpectedError
       (colors.rainbow(""): void);
     });
   });
@@ -481,13 +481,13 @@ describe("The `colors` safe API", () => {
   describe("The `zebra` method", () => {
     it("should accept a String as parameter", () => {
       colors.zebra("");
-      // $ExpectError
+      // $FlowExpectedError
       colors.zebra();
     });
 
     it("should return a String", () => {
       (colors.zebra(""): string);
-      // $ExpectError
+      // $FlowExpectedError
       (colors.zebra(""): void);
     });
   });
@@ -495,13 +495,13 @@ describe("The `colors` safe API", () => {
   describe("The `america` method", () => {
     it("should accept a String as parameter", () => {
       colors.america("");
-      // $ExpectError
+      // $FlowExpectedError
       colors.america();
     });
 
     it("should return a String", () => {
       (colors.america(""): string);
-      // $ExpectError
+      // $FlowExpectedError
       (colors.america(""): void);
     });
   });
@@ -509,13 +509,13 @@ describe("The `colors` safe API", () => {
   describe("The `trap` method", () => {
     it("should accept a String as parameter", () => {
       colors.trap("");
-      // $ExpectError
+      // $FlowExpectedError
       colors.trap();
     });
 
     it("should return a String", () => {
       (colors.trap(""): string);
-      // $ExpectError
+      // $FlowExpectedError
       (colors.trap(""): void);
     });
   });
@@ -523,13 +523,13 @@ describe("The `colors` safe API", () => {
   describe("The `random` method", () => {
     it("should accept a String as parameter", () => {
       colors.random("");
-      // $ExpectError
+      // $FlowExpectedError
       colors.random();
     });
 
     it("should return a String", () => {
       (colors.random(""): string);
-      // $ExpectError
+      // $FlowExpectedError
       (colors.random(""): void);
     });
   });
@@ -537,13 +537,13 @@ describe("The `colors` safe API", () => {
   describe("The `zalgo` method", () => {
     it("should accept a String as parameter", () => {
       colors.zalgo("");
-      // $ExpectError
+      // $FlowExpectedError
       colors.zalgo();
     });
 
     it("should return a String", () => {
       (colors.zalgo(""): string);
-      // $ExpectError
+      // $FlowExpectedError
       (colors.zalgo(""): void);
     });
   });

@@ -11,7 +11,7 @@ function test_createAction() {
 
   assert(a.payload, (x: string) => {})
 
-  // $ExpectError
+  // $FlowExpectedError
   assert(a.payload, (x: number) => {})
 
   // Verify that Flow can refine types based on the `type` property of the
@@ -23,7 +23,7 @@ function test_createAction() {
   }
 
   if (a.type === INCREMENT) {
-    // $ExpectError
+    // $FlowExpectedError
     assert(a.payload, (x: number) => {})
   }
 }
@@ -32,12 +32,12 @@ function test_createAction_givenPayloadType() {
   const action = createAction(INCREMENT, (x: Date) => x)
   const a = action(new Date)
 
-  // $ExpectError
+  // $FlowExpectedError
   action("foo")
 
   assert(a.payload, (x: Date) => {})
 
-  // $ExpectError
+  // $FlowExpectedError
   assert(a.payload, (x: string) => {})
 
   const action2 = createAction(INCREMENT, (x: Date) => x, x => x)
@@ -45,7 +45,7 @@ function test_createAction_givenPayloadType() {
 
   assert(a2.meta, (x: Date) => {})
 
-  // $ExpectError
+  // $FlowExpectedError
   assert(a2.meta, (x: string) => {})
 }
 
@@ -55,7 +55,7 @@ function test_createAction_withPayloadCreator() {
 
   assert(a.payload, (x: [string, string]) => {})
 
-  // $ExpectError
+  // $FlowExpectedError
   assert(a.payload, (x: string) => {})
 
   // Accept multiple arguments to the action creator
@@ -64,7 +64,7 @@ function test_createAction_withPayloadCreator() {
 
   assert(a.payload, (x: [string, string]) => {})
 
-  // $ExpectError
+  // $FlowExpectedError
   assert(a.payload, (x: string) => {})
 }
 
@@ -74,7 +74,7 @@ function test_createAction_withPayloadCreatorAndMeta() {
 
   assert(a.meta, (x: number) => {})
 
-  // $ExpectError
+  // $FlowExpectedError
   assert(a.meta, (x: string) => {})
 }
 
@@ -84,7 +84,7 @@ function test_createAction_withMeta() {
 
   assert(a.meta, (x: number) => {})
 
-  // $ExpectError
+  // $FlowExpectedError
   assert(a.meta, (x: string) => {})
 }
 

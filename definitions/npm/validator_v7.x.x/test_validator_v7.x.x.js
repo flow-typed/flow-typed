@@ -12,99 +12,99 @@ let date: Date = new Date();
 /** Validators */
 it('output->boolean input<-(string)', () => {
   boolean = validator.isAscii(string);
-  // $ExpectError
+  // $FlowExpectedError
   boolean = validator.isAscii(boolean);
 
   boolean = validator.isBase64(string);
-  // $ExpectError
+  // $FlowExpectedError
   boolean = validator.isBase64(boolean);
 
   boolean = validator.isBoolean(string);
-  // $ExpectError
+  // $FlowExpectedError
   boolean = validator.isBoolean(boolean);
 
   boolean = validator.isCreditCard(string);
-  // $ExpectError
+  // $FlowExpectedError
   boolean = validator.isCreditCard(boolean);
 
   boolean = validator.isDate(string);
-  // $ExpectError
+  // $FlowExpectedError
   boolean = validator.isDate(boolean);
 
   boolean = validator.isDecimal(string);
-  // $ExpectError
+  // $FlowExpectedError
   boolean = validator.isDecimal(boolean);
 
   boolean = validator.isEmpty(string);
-  // $ExpectError
+  // $FlowExpectedError
   boolean = validator.isEmpty(boolean);
 
   boolean = validator.isFullWidth(string);
-  // $ExpectError
+  // $FlowExpectedError
   boolean = validator.isFullWidth(boolean);
 
   boolean = validator.isHalfWidth(string);
-  // $ExpectError
+  // $FlowExpectedError
   boolean = validator.isHalfWidth(boolean);
 
   boolean = validator.isHexadecimal(string);
-  // $ExpectError
+  // $FlowExpectedError
   boolean = validator.isHexadecimal(boolean);
 
   boolean = validator.isHexColor(string);
-  // $ExpectError
+  // $FlowExpectedError
   boolean = validator.isHexColor(boolean);
 
   boolean = validator.isISIN(string);
-  // $ExpectError
+  // $FlowExpectedError
   boolean = validator.isISIN(boolean);
 
   boolean = validator.isISO8601(string);
-  // $ExpectError
+  // $FlowExpectedError
   boolean = validator.isISO8601(boolean);
 
   boolean = validator.isJSON(string);
-  // $ExpectError
+  // $FlowExpectedError
   boolean = validator.isJSON(boolean);
 
   boolean = validator.isLowercase(string);
-  // $ExpectError
+  // $FlowExpectedError
   boolean = validator.isLowercase(boolean);
 
   boolean = validator.isMACAddress(string);
-  // $ExpectError
+  // $FlowExpectedError
   boolean = validator.isMACAddress(boolean);
 
   boolean = validator.isMD5(string);
-  // $ExpectError
+  // $FlowExpectedError
   boolean = validator.isMD5(boolean);
 
   boolean = validator.isMongoId(string);
-  // $ExpectError
+  // $FlowExpectedError
   boolean = validator.isMongoId(boolean);
 
   boolean = validator.isMultibyte(string);
-  // $ExpectError
+  // $FlowExpectedError
   boolean = validator.isMultibyte(boolean);
 
   boolean = validator.isNumeric(string);
-  // $ExpectError
+  // $FlowExpectedError
   boolean = validator.isNumeric(boolean);
 
   boolean = validator.isSurrogatePair(string);
-  // $ExpectError
+  // $FlowExpectedError
   boolean = validator.isSurrogatePair(boolean);
 
   boolean = validator.isUppercase(string);
-  // $ExpectError
+  // $FlowExpectedError
   boolean = validator.isUppercase(boolean);
 
   boolean = validator.isVariableWidth(string);
-  // $ExpectError
+  // $FlowExpectedError
   boolean = validator.isVariableWidth(boolean);
 
   boolean = validator.isDataURI(string);
-  // $ExpectError
+  // $FlowExpectedError
   boolean = validator.isDataURI(boolean);
 });
 
@@ -114,54 +114,54 @@ describe('output->boolean input<-(string, {min: number, max: number})', () => {
     boolean = validator.isFloat(string, { min: number });
     boolean = validator.isFloat(string, { max: number });
     boolean = validator.isFloat(string, { min: number, max: number });
-    // $ExpectError
+    // $FlowExpectedError
     boolean = validator.isFloat(number);
-    // $ExpectError
+    // $FlowExpectedError
     boolean = validator.isFloat(string, { min: string, max: number });
-    // $ExpectError
+    // $FlowExpectedError
     boolean = validator.isFloat(string, { min: boolean, max: number });
 
     boolean = validator.isInt(string);
     boolean = validator.isInt(string, { min: number });
     boolean = validator.isInt(string, { max: number });
     boolean = validator.isInt(string, { min: number, max: number });
-    // $ExpectError
+    // $FlowExpectedError
     boolean = validator.isInt(number);
-    // $ExpectError
+    // $FlowExpectedError
     boolean = validator.isInt(string, { min: string, max: number });
-    // $ExpectError
+    // $FlowExpectedError
     boolean = validator.isInt(string, { min: boolean, max: number });
   });
 
   it('input<-(string, {min: number, max?: number})', () => {
     boolean = validator.isLength(string, { min: number, max: number });
     boolean = validator.isLength(string, { min: number });
-    // $ExpectError
+    // $FlowExpectedError
     boolean = validator.isLength(number);
-    // $ExpectError
+    // $FlowExpectedError
     boolean = validator.isLength(string);
-    // $ExpectError
+    // $FlowExpectedError
     boolean = validator.isLength(string, {});
-    // $ExpectError
+    // $FlowExpectedError
     boolean = validator.isLength(string, { max: number });
-    // $ExpectError
+    // $FlowExpectedError
     boolean = validator.isLength(string, { min: string, max: number });
-    // $ExpectError
+    // $FlowExpectedError
     boolean = validator.isLength(string, { min: number, max: boolean });
 
     boolean = validator.isByteLength(string, { min: number, max: number });
     boolean = validator.isByteLength(string, { min: number });
-    // $ExpectError
+    // $FlowExpectedError
     boolean = validator.isByteLength(number);
-    // $ExpectError
+    // $FlowExpectedError
     boolean = validator.isByteLength(string);
-    // $ExpectError
+    // $FlowExpectedError
     boolean = validator.isByteLength(string, {});
-    // $ExpectError
+    // $FlowExpectedError
     boolean = validator.isByteLength(string, { max: number });
-    // $ExpectError
+    // $FlowExpectedError
     boolean = validator.isByteLength(string, { min: string, max: number });
-    // $ExpectError
+    // $FlowExpectedError
     boolean = validator.isByteLength(string, { min: number, max: boolean });
   });
 });
@@ -174,57 +174,57 @@ it('output->boolean input<-(string, mixed?)', () => {
 
 it('output->boolean input<-(string, string)', () => {
   boolean = validator.equals(string, string);
-  // $ExpectError
+  // $FlowExpectedError
   boolean = validator.equals(string, number);
-  // $ExpectError
+  // $FlowExpectedError
   boolean = validator.equals(number, string);
-  // $ExpectError
+  // $FlowExpectedError
   boolean = validator.equals(string);
 
   boolean = validator.isWhitelisted(string, string);
-  // $ExpectError
+  // $FlowExpectedError
   boolean = validator.isWhitelisted(string, number);
-  // $ExpectError
+  // $FlowExpectedError
   boolean = validator.isWhitelisted(number, string);
-  // $ExpectError
+  // $FlowExpectedError
   boolean = validator.isWhitelisted(string);
 
   boolean = validator.isAfter(string, string);
   boolean = validator.isAfter(string);
-  // $ExpectError
+  // $FlowExpectedError
   boolean = validator.isAfter(string, number);
-  // $ExpectError
+  // $FlowExpectedError
   boolean = validator.isAfter(number, string);
 
   boolean = validator.isBefore(string, string);
   boolean = validator.isBefore(string);
-  // $ExpectError
+  // $FlowExpectedError
   boolean = validator.isBefore(string, number);
-  // $ExpectError
+  // $FlowExpectedError
   boolean = validator.isBefore(number, string);
 });
 
 it('output->boolean input<-(string, string|number)', () => {
   boolean = validator.isDivisibleBy(string, number);
   boolean = validator.isDivisibleBy(string, string);
-  // $ExpectError
+  // $FlowExpectedError
   boolean = validator.isDivisibleBy(number, string);
-  // $ExpectError
+  // $FlowExpectedError
   boolean = validator.isDivisibleBy(string);
-  // $ExpectError
+  // $FlowExpectedError
   boolean = validator.isDivisibleBy(boolean, string);
-  // $ExpectError
+  // $FlowExpectedError
   boolean = validator.isDivisibleBy(string, boolean);
 });
 
 it('output->boolean input<-(string, Array<string>|string)', () => {
   boolean = validator.isIn(string, string);
   boolean = validator.isIn(string, [string]);
-  // $ExpectError
+  // $FlowExpectedError
   boolean = validator.isIn(string, boolean);
-  // $ExpectError
+  // $FlowExpectedError
   boolean = validator.isIn(string, [boolean]);
-  // $ExpectError
+  // $FlowExpectedError
   boolean = validator.isIn(boolean, string);
 });
 
@@ -232,58 +232,58 @@ it('output->boolean input<-(string, enum)', () => {
   boolean = validator.isIP(string);
   boolean = validator.isIP(string, 4);
   boolean = validator.isIP(string, 6);
-  // $ExpectError
+  // $FlowExpectedError
   boolean = validator.isIP(boolean);
-  // $ExpectError
+  // $FlowExpectedError
   boolean = validator.isIP(boolean, 6);
-  // $ExpectError
+  // $FlowExpectedError
   boolean = validator.isIP(string, 10);
 });
 
 boolean = validator.isISBN(string);
 boolean = validator.isISBN(string, 10);
 boolean = validator.isISBN(string, 13);
-// $ExpectError
+// $FlowExpectedError
 boolean = validator.isISBN(boolean);
-// $ExpectError
+// $FlowExpectedError
 boolean = validator.isISBN(boolean, 10);
-// $ExpectError
+// $FlowExpectedError
 boolean = validator.isISBN(string, 20);
 
 
 boolean = validator.isAlpha(string);
 boolean = validator.isAlpha(string, 'ar-JO');
-// $ExpectError
+// $FlowExpectedError
 boolean = validator.isAlpha(boolean);
-// $ExpectError
+// $FlowExpectedError
 boolean = validator.isAlpha(string, string);
-// $ExpectError
+// $FlowExpectedError
 boolean = validator.isAlpha(string, 'fr-BE');
 
 boolean = validator.isAlphanumeric(string);
 boolean = validator.isAlphanumeric(string, 'fr-BE');
-// $ExpectError
+// $FlowExpectedError
 boolean = validator.isAlphanumeric(boolean);
-// $ExpectError
+// $FlowExpectedError
 boolean = validator.isAlphanumeric(string, string);
 
 boolean = validator.isMobilePhone(string, 'en-US');
-// $ExpectError
+// $FlowExpectedError
 boolean = validator.isMobilePhone(string);
-// $ExpectError
+// $FlowExpectedError
 boolean = validator.isMobilePhone(boolean, 'en-US');
-// $ExpectError
+// $FlowExpectedError
 boolean = validator.isMobilePhone(string, 'ar-JO');
 
 boolean = validator.isUUID(string);
 boolean = validator.isUUID(string, 3);
 boolean = validator.isUUID(string, 4);
 boolean = validator.isUUID(string, 5);
-// $ExpectError
+// $FlowExpectedError
 boolean = validator.isUUID(boolean);
-// $ExpectError
+// $FlowExpectedError
 boolean = validator.isUUID(boolean, 3);
-// $ExpectError
+// $FlowExpectedError
 boolean = validator.isUUID(string, 10);
 
 it('output->boolean input<-(string, options?)', () => {
@@ -292,11 +292,11 @@ it('output->boolean input<-(string, options?)', () => {
   boolean = validator.isISSN(string, { case_sensitive: boolean });
   boolean = validator.isISSN(string, { require_hyphen: boolean });
   boolean = validator.isISSN(string, { case_sensitive: boolean, require_hyphen: boolean });
-  // $ExpectError
+  // $FlowExpectedError
   boolean = validator.isISSN(boolean);
-  // $ExpectError
+  // $FlowExpectedError
   boolean = validator.isISSN(string, { case_sensitive: string});
-  // $ExpectError
+  // $FlowExpectedError
   boolean = validator.isISSN(string, { require_hyphen: string});
 
   boolean = validator.isCurrency(string);
@@ -314,31 +314,31 @@ it('output->boolean input<-(string, options?)', () => {
     decimal_separator: string,
     allow_space_after_digits: boolean,
   });
-  // $ExpectError
+  // $FlowExpectedError
   boolean = validator.isCurrency(boolean);
-  // $ExpectError
+  // $FlowExpectedError
   boolean = validator.isCurrency(string, { symbol: number });
-  // $ExpectError
+  // $FlowExpectedError
   boolean = validator.isCurrency(string, { require_symbol: number });
-  // $ExpectError
+  // $FlowExpectedError
   boolean = validator.isCurrency(string, { allow_space_after_symbol: number });
-  // $ExpectError
+  // $FlowExpectedError
   boolean = validator.isCurrency(string, { symbol_after_digits: number });
-  // $ExpectError
+  // $FlowExpectedError
   boolean = validator.isCurrency(string, { allow_negatives: number });
-  // $ExpectError
+  // $FlowExpectedError
   boolean = validator.isCurrency(string, { parens_for_negatives: number });
-  // $ExpectError
+  // $FlowExpectedError
   boolean = validator.isCurrency(string, { negative_sign_before_digits: number });
-  // $ExpectError
+  // $FlowExpectedError
   boolean = validator.isCurrency(string, { negative_sign_after_digits: number });
-  // $ExpectError
+  // $FlowExpectedError
   boolean = validator.isCurrency(string, { allow_negative_sign_placeholder: number });
-  // $ExpectError
+  // $FlowExpectedError
   boolean = validator.isCurrency(string, { thousands_separator: number });
-  // $ExpectError
+  // $FlowExpectedError
   boolean = validator.isCurrency(string, { decimal_separator: number });
-  // $ExpectError
+  // $FlowExpectedError
   boolean = validator.isCurrency(string, { allow_space_after_digits: number });
 
   boolean = validator.isEmail(string);
@@ -348,15 +348,15 @@ it('output->boolean input<-(string, options?)', () => {
     allow_utf8_local_part: boolean,
     require_tld: boolean,
   })
-  // $ExpectError
+  // $FlowExpectedError
   boolean = validator.isEmail(boolean);
-  // $ExpectError
+  // $FlowExpectedError
   boolean = validator.isEmail(string, { allow_display_name: number });
-  // $ExpectError
+  // $FlowExpectedError
   boolean = validator.isEmail(string, { require_display_name: number });
-  // $ExpectError
+  // $FlowExpectedError
   boolean = validator.isEmail(string, { allow_utf8_local_part: number });
-  // $ExpectError
+  // $FlowExpectedError
   boolean = validator.isEmail(string, { require_tld: number });
 
   boolean = validator.isFQDN(string);
@@ -365,13 +365,13 @@ it('output->boolean input<-(string, options?)', () => {
     allow_underscores: boolean,
     allow_trailing_dot: boolean,
   })
-  // $ExpectError
+  // $FlowExpectedError
   boolean = validator.isFQDN(boolean);
-  // $ExpectError
+  // $FlowExpectedError
   boolean = validator.isFQDN(string, { require_tld: number });
-  // $ExpectError
+  // $FlowExpectedError
   boolean = validator.isFQDN(string, { allow_underscores: number });
-  // $ExpectError
+  // $FlowExpectedError
   boolean = validator.isFQDN(string, { allow_trailing_dot: number });
 
   boolean = validator.isURL(string);
@@ -387,29 +387,29 @@ it('output->boolean input<-(string, options?)', () => {
     allow_trailing_dot: boolean,
     allow_protocol_relative_urls: boolean
   });
-  // $ExpectError
+  // $FlowExpectedError
   boolean = validator.isURL(boolean);
-  // $ExpectError
+  // $FlowExpectedError
   boolean = validator.isURL(boolean, { protocols: string });
-  // $ExpectError
+  // $FlowExpectedError
   boolean = validator.isURL(boolean, { protocols: [number] });
-  // $ExpectError
+  // $FlowExpectedError
   boolean = validator.isURL(string, { require_tld: number });
-  // $ExpectError
+  // $FlowExpectedError
   boolean = validator.isURL(string, { require_protocol: number });
-  // $ExpectError
+  // $FlowExpectedError
   boolean = validator.isURL(string, { require_host: number });
-  // $ExpectError
+  // $FlowExpectedError
   boolean = validator.isURL(string, { require_valid_protocol: number });
-  // $ExpectError
+  // $FlowExpectedError
   boolean = validator.isURL(string, { allow_underscores: number });
-  // $ExpectError
+  // $FlowExpectedError
   boolean = validator.isURL(string, { host_whitelist: number });
-  // $ExpectError
+  // $FlowExpectedError
   boolean = validator.isURL(string, { host_blacklist: number });
-  // $ExpectError
+  // $FlowExpectedError
   boolean = validator.isURL(string, { allow_trailing_dot: number });
-  // $ExpectError
+  // $FlowExpectedError
   boolean = validator.isURL(string, { allow_protocol_relative_urls: number });
 
 //TODO isDataURI
@@ -419,34 +419,34 @@ it('output->boolean input<-(string, string|regexp, string?)', () => {
   boolean = validator.matches(string, string);
   boolean = validator.matches(string, string, string);
   boolean = validator.matches(string, new RegExp(string), string);
-  // $ExpectError
+  // $FlowExpectedError
   boolean = validator.matches(string);
-  // $ExpectError
+  // $FlowExpectedError
   boolean = validator.matches(string, number);
-  // $ExpectError
+  // $FlowExpectedError
   boolean = validator.matches(string, string, number);
 });
 
 /** Sanitizers */
 it('output->string input<-(string)', () => {
   string = escape(string);
-  // $ExpectError
+  // $FlowExpectedError
   string = escape(number);
 
   string = unescape(string);
-  // $ExpectError
+  // $FlowExpectedError
   string = unescape(number);
 });
 
 it('output->Date input<-(string)', () => {
   date = validator.toDate(string);
-  // $ExpectError
+  // $FlowExpectedError
   date = validator.toDate(number);
 });
 
 it('output->number input<-(string)', () => {
   number = validator.toFloat(string);
-  // $ExpectError
+  // $FlowExpectedError
   number = validator.toFloat(number);
 });
 
@@ -454,68 +454,68 @@ it('output->number input<-(string, (string | number)?)', () => {
   number = validator.toInt(string);
   number = validator.toInt(string, string);
   number = validator.toInt(string, number);
-  // $ExpectError
+  // $FlowExpectedError
   number = validator.toInt(boolean);
-  // $ExpectError
+  // $FlowExpectedError
   number = validator.toInt(string, boolean);
 });
 
 it('output->boolean input<-(string, boolean?)', () => {
   boolean = validator.toBoolean(string);
   boolean = validator.toBoolean(string, boolean);
-  // $ExpectError
+  // $FlowExpectedError
   boolean = validator.toBoolean(number);
-  // $ExpectError
+  // $FlowExpectedError
   boolean = validator.toBoolean(string, number);
 });
 
 it('output->string input<-(string, string?)', () => {
   string = validator.trim(string);
   string = validator.trim(string, string);
-  // $ExpectError
+  // $FlowExpectedError
   string = validator.trim(number);
-  // $ExpectError
+  // $FlowExpectedError
   string = validator.trim(string, number);
 
   string = validator.ltrim(string);
   string = validator.ltrim(string, string);
-  // $ExpectError
+  // $FlowExpectedError
   string = validator.ltrim(number);
-  // $ExpectError
+  // $FlowExpectedError
   string = validator.ltrim(string, number);
 
   string = validator.trim(string);
   string = validator.trim(string, string);
-  // $ExpectError
+  // $FlowExpectedError
   string = validator.trim(number);
-  // $ExpectError
+  // $FlowExpectedError
   string = validator.trim(string, number);
 });
 
 it('output->string input<-(string, string)', () => {
   string = validator.blacklist(string, string);
-  // $ExpectError
+  // $FlowExpectedError
   string = validator.blacklist(string);
-  // $ExpectError
+  // $FlowExpectedError
   string = validator.blacklist(number, string);
-  // $ExpectError
+  // $FlowExpectedError
   string = validator.blacklist(string, number);
 
   string = validator.whitelist(string, string);
-  // $ExpectError
+  // $FlowExpectedError
   string = validator.whitelist(string);
-  // $ExpectError
+  // $FlowExpectedError
   string = validator.whitelist(number, string);
-  // $ExpectError
+  // $FlowExpectedError
   string = validator.whitelist(string, number);
 });
 
 it('output->string input<-(string, boolean)', () => {
   string = validator.stripLow(string);
   string = validator.stripLow(string, boolean);
-  // $ExpectError
+  // $FlowExpectedError
   string = validator.stripLow(number);
-  // $ExpectError
+  // $FlowExpectedError
   string = validator.stripLow(string, number);
 });
 
@@ -534,30 +534,30 @@ it('output->string input<-(string, options)', () => {
     icloud_lowercase: boolean,
     icloud_remove_subaddress: boolean,
   })
-  // $ExpectError
+  // $FlowExpectedError
   string = validator.normalizeEmail(boolean);
-  // $ExpectError
+  // $FlowExpectedError
   string = validator.normalizeEmail(string, boolean);
-  // $ExpectError
+  // $FlowExpectedError
   string = validator.normalizeEmail(string, { all_lowercase: number });
-  // $ExpectError
+  // $FlowExpectedError
   string = validator.normalizeEmail(string, { gmail_lowercase: number });
-  // $ExpectError
+  // $FlowExpectedError
   string = validator.normalizeEmail(string, { gmail_remove_dots: number });
-  // $ExpectError
+  // $FlowExpectedError
   string = validator.normalizeEmail(string, { gmail_remove_subaddress: number });
-  // $ExpectError
+  // $FlowExpectedError
   string = validator.normalizeEmail(string, { gmail_convert_googlemaildotcom: number });
-  // $ExpectError
+  // $FlowExpectedError
   string = validator.normalizeEmail(string, { outlookdotcom_lowercase: number });
-  // $ExpectError
+  // $FlowExpectedError
   string = validator.normalizeEmail(string, { outlookdotcom_remove_subaddress: number });
-  // $ExpectError
+  // $FlowExpectedError
   string = validator.normalizeEmail(string, { yahoo_lowercase: number });
-  // $ExpectError
+  // $FlowExpectedError
   string = validator.normalizeEmail(string, { yahoo_remove_subaddress: number });
-  // $ExpectError
+  // $FlowExpectedError
   string = validator.normalizeEmail(string, { icloud_lowercase: number });
-  // $ExpectError
+  // $FlowExpectedError
   string = validator.normalizeEmail(string, { icloud_remove_subaddress: number });
 });

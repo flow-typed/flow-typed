@@ -38,7 +38,8 @@ declare module '@sentry/browser' {
         run(callback: (hub: Hub) => void): void;
         getIntegration<T>(integration: Class<Integration<T>>): Integration<T> | null;
         traceHeaders(): { [key: string]: string, ... };
-        startSpan(span?: Span | SpanContext, forceNoChild?: boolean): Span;
+        startSpan(span?: SpanContext, forceNoChild?: boolean): Span;
+        startTransaction(context: TransactionContext): Transaction;
     }
 
     declare export class Scope {
@@ -92,8 +93,8 @@ declare module '@sentry/browser' {
     declare export function lastEventId(): string | void;
     declare export function onLoad(callback: () => void): void;
     declare export function showReportDialog(options: ReportDialogOptions): void;
-    declare export function flush(timeout?: TimeoutId): Promise<boolean>;
-    declare export function close(timeout?: TimeoutId): Promise<boolean>;
+    declare export function flush(timeout?: number): Promise<boolean>;
+    declare export function close(timeout?: number): Promise<boolean>;
     declare export function wrap(fn: mixed): mixed;
 
     declare export var SDK_NAME: string;
@@ -226,7 +227,22 @@ declare module '@sentry/browser' {
         +thread_id?: number,
         +stacktrace?: Stacktrace,
     |};
+
+    declare export type SpanContext = {|
+        description?: string;
+        op?: string;
+        status?: string;
+        parentSpanId?: string;
+        sampled?: boolean;
+        spanId?: string;
+        traceId?: string;
+        tags?: { [key: string]: string, ... };
+        data?: { [key: string]: any, ... };
+        startTimestamp?: number;
+        endTimestamp?: number;
+    |};
     declare export type Span = {|
+        ...SpanContext,
         finish(useLastSpanTimestamp?: boolean): string | void,
         toTraceparent(): string,
         getTraceContext(): {| [key: string]: mixed |},
@@ -236,6 +252,22 @@ declare module '@sentry/browser' {
         setStatus(status: $Values<SpanStatus>): void,
         setHttpStatus(httpStatus: number): void,
         isSuccess(): boolean,
+    |};
+    declare export type TransactionContext = {|
+        ...SpanContext,
+        name: string;
+        trimEnd?: boolean;
+    |};
+
+    declare export type Transaction = {|
+        ...TransactionContext,
+        ...Span,
+        spanId: string;
+        traceId: string;
+        startTimestamp: number;
+        tags: { [key: string]: string, ... };
+        data: { [key: string]: any, ... };
+        setName(name: string): void;
     |};
 
     declare export type DsnProtocol = 'http' | 'https';
@@ -263,6 +295,14 @@ declare module '@sentry/browser' {
         +caCerts?: string,
     |};
 
+    declare export type Status = {|
+      +Unknown: 'unknown',
+      +Skipped: 'skipped',
+      +Success: 'success',
+      +RateLimit: 'rate_limit',
+      +Invalid: 'invalid',
+      +Failed: 'failed',
+    |};
     declare export type SentryRequest = {|
         +url?: string,
         +method?: string,
@@ -273,7 +313,7 @@ declare module '@sentry/browser' {
         +headers?: { [key: string]: string, ... },
     |};
     declare export type SentryResponse = {|
-        +status: Status,
+        +status: $Values<Status>,
         +event?: SentryEvent,
         +reason?: string,
     |};
@@ -354,6 +394,9 @@ declare module '@sentry/browser' {
             hint?: EventHint,
         ) => Promise<SentryEvent | null> | SentryEvent | null,
 
+        +denyUrls?: $ReadOnlyArray<string | RegExp>,
+        +allowUrls?: $ReadOnlyArray<string | RegExp>,
+        // Deprecated as of 5.18.0, prefer the allowUrls/denyUrls instead
         +blacklistUrls?: $ReadOnlyArray<string | RegExp>,
         +whitelistUrls?: $ReadOnlyArray<string | RegExp>,
         // This really should be typed as:

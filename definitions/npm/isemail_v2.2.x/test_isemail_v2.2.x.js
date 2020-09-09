@@ -17,14 +17,14 @@ r = isemail.validate('test@e.com', { checkDNS: true, errorLevel: true }, log);
 r = isemail.validate('test@e.com', { checkDNS: true, errorLevel: 7 }, log);
 r = isemail.validate('test@e.com', { checkDNS: true, errorLevel: 6 }, log);
 
-// $ExpectError
+// $FlowExpectedError
 isemail.validate();
 
-// $ExpectError
+// $FlowExpectedError
 isemail.validate(123);
 
-// $ExpectError
+// $FlowExpectedError
 isemail.validate('test@iana.org', 123);
 
-// $ExpectError
+// $FlowExpectedError
 isemail.validate('test@iana.org', { checkDMS: true });

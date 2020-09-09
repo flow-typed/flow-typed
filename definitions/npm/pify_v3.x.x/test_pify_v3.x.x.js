@@ -18,13 +18,13 @@ pify(cpsObject).foo("hi").then(x => {
   console.log(x);
 });
 
-// $ExpectError
+// $FlowExpectedError
 pify("asdf");
 
-// $ExpectError
+// $FlowExpectedError
 pify();
 
 pify({});
 
-// $ExpectError
+// $FlowExpectedError
 pify({}, 1);

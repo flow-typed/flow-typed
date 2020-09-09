@@ -36,7 +36,7 @@ bcrypt.compare(str, str, (err, same) => {
   bool = same;
 });
 (bcrypt.compare(str, str): Promise<bool>);
-// $ExpectError
+// $FlowExpectedError
 bcrypt.compare(str, num);
 
 num = bcrypt.getRounds(str);

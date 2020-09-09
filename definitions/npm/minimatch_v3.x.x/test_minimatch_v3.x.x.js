@@ -8,10 +8,10 @@ const Minimatch = minimatch.Minimatch;
 const mm = new Minimatch("*.foo", { noglobstar: true });
 (mm.match("x.foo"): boolean);
 
-// $ExpectError
+// $FlowExpectedError
 new Minimatch("*.foo", 1);
 
-// $ExpectError
+// $FlowExpectedError
 minimatch("bar.foo");
 
 minimatch.filter("*.foo", { dot: true });

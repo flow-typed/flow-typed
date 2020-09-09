@@ -1,11 +1,11 @@
 // @flow
 import ReactHighlightWords from 'react-highlight-words';
 
-// $ExpectError
+// $FlowExpectedError
 const A = <ReactHighlightWords />;
 
-// $ExpectError
+// $FlowExpectedError
 const B = <ReactHighlightWords searchWords={[1, 2, 3]} textToHighlight="The dog jumped over the fox" />
 
-// $ExpectError
+// $FlowExpectedError
 const C = <ReactHighlightWords searchWords={'dog', 'cat', 'worm'} textToHighlight={1} />

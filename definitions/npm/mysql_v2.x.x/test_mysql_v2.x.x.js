@@ -39,13 +39,13 @@ connection.query("INSERT INTO posts SET ?", post);
 let query = connection.query("select 1");
 query.stream().pipe(process.stdout);
 
-// $ExpectError
+// $FlowExpectedError
 connection.query(123);
 
-// $ExpectError
+// $FlowExpectedError
 connection.query("123123", 123);
 
-// $ExpectError
+// $FlowExpectedError
 connection = mysql.createConnection({
   xyz: 12
 });
@@ -68,7 +68,7 @@ pool = mysql.createPool({
   queueLimit: 10,
   waitForConnections: false
 });
-// $ExpectError
+// $FlowExpectedError
 pool = mysql.createPool({
   host: "localhost",
   port: 1234,
@@ -87,10 +87,10 @@ pool.query("SELECT * FROM `table` WHERE id = ?", [1]);
 pool.query({ sql: "SELECT * FROM `table` WHERE id = ?", nestTables: true });
 pool.query("", [1, "d", { a: 1 }, [{ b: 1 }]]);
 
-// $ExpectError
+// $FlowExpectedError
 pool.query(123);
 
-// $ExpectError
+// $FlowExpectedError
 pool.query("123123", 123);
 
 // PoolCluster

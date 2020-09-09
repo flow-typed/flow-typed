@@ -49,16 +49,16 @@ describe('getCurrentPositionAsync', () => {
       (coords.latitude: number);
       (coords.speed: number);
 
-      // $ExpectError: check any
+      // $FlowExpectedError: check any
       (coords.speed: string);
     });
   });
 
   it('should raise an error when call function with invalid arguments', () => {
-    // $ExpectError: need an object
+    // $FlowExpectedError: need an object
     getCurrentPositionAsync(11);
 
-    // $ExpectError: `__accuracy` is missing in enum
+    // $FlowExpectedError: `__accuracy` is missing in enum
     getCurrentPositionAsync({ __accuracy: 1 });
   });
 });
@@ -69,7 +69,7 @@ describe('getHeadingAsync', () => {
       (result.trueHeading: number);
       (result.magHeading: number);
 
-      // $ExpectError: check any
+      // $FlowExpectedError: check any
       (result.magHeading: string);
     });
   });
@@ -84,10 +84,10 @@ describe('getProviderStatusAsync', () => {
       (result.networkAvailable: ?boolean);
       (result.passiveAvailable: ?boolean);
 
-      // $ExpectError: check any
+      // $FlowExpectedError: check any
       (result.backgroundModeEnabled: string);
 
-      // $ExpectError: `abcd` is missing
+      // $FlowExpectedError: `abcd` is missing
       (result.abcd: any);
     });
   });
@@ -98,13 +98,13 @@ describe('hasStartedGeofencingAsync', () => {
     hasStartedGeofencingAsync('taskName').then(result => {
       (result: boolean);
 
-      // $ExpectError: check any
+      // $FlowExpectedError: check any
       (result: string);
     });
   });
 
   it('should raise an error when call function with invalid arguments', () => {
-    // $ExpectError: need a string
+    // $FlowExpectedError: need a string
     hasStartedGeofencingAsync(69);
   });
 });
@@ -114,13 +114,13 @@ describe('hasStartedLocationUpdatesAsync', () => {
     hasStartedLocationUpdatesAsync('taskName').then(result => {
       (result: boolean);
 
-      // $ExpectError: check any
+      // $FlowExpectedError: check any
       (result: string);
     });
   });
 
   it('should raise an error when call function with invalid arguments', () => {
-    // $ExpectError: need a string
+    // $FlowExpectedError: need a string
     hasStartedLocationUpdatesAsync(69);
   });
 });
@@ -131,7 +131,7 @@ describe('setApiKey', () => {
   });
 
   it('should raise an error when call function with invalid arguments', () => {
-    // $ExpectError: need a string
+    // $FlowExpectedError: need a string
     setApiKey(69);
   });
 });
@@ -160,20 +160,20 @@ describe('startGeofencingAsync', () => {
     startGeofencingAsync('taskName').then(result => {
       (result: void);
 
-      // $ExpectError: check any
+      // $FlowExpectedError: check any
       (result: string);
     });
   });
 
   it('should raise an error when call function with invalid arguments', () => {
-    // $ExpectError: first argument is required
+    // $FlowExpectedError: first argument is required
     startGeofencingAsync();
 
-    // $ExpectError: first argument mush be a string
+    // $FlowExpectedError: first argument mush be a string
     startGeofencingAsync(1337);
 
     startGeofencingAsync('taskName', [
-      // $ExpectError: must be a region object
+      // $FlowExpectedError: must be a region object
       69,
     ]);
 
@@ -181,13 +181,13 @@ describe('startGeofencingAsync', () => {
       {
         latitude: 14,
         longitude: 48,
-        // $ExpectError: must be a number
+        // $FlowExpectedError: must be a number
         radius: '69',
       },
     ]);
 
     startGeofencingAsync('taskName', [
-      // $ExpectError: `abc` prop is missing in Region
+      // $FlowExpectedError: `abc` prop is missing in Region
       {
         latitude: 14,
         longitude: 48,
@@ -212,22 +212,22 @@ describe('reverseGeocodeAsync', () => {
       (address.country: string);
       (address.postalCode: string);
 
-      // $ExpectError: check any
+      // $FlowExpectedError: check any
       (address.name: number);
     });
   });
 
   it('should raise an error when call function with invalid arguments', () => {
-    // $ExpectError: first argument is required
+    // $FlowExpectedError: first argument is required
     reverseGeocodeAsync();
 
-    // $ExpectError: first must be an object
+    // $FlowExpectedError: first must be an object
     reverseGeocodeAsync(123);
 
-    // $ExpectError: object do not include required props `latitude,longitude`
+    // $FlowExpectedError: object do not include required props `latitude,longitude`
     reverseGeocodeAsync({});
 
-    // $ExpectError: `abc` is extra props
+    // $FlowExpectedError: `abc` is extra props
     reverseGeocodeAsync({
       latitude: 1,
       longitude: 1,
@@ -235,7 +235,7 @@ describe('reverseGeocodeAsync', () => {
     });
 
     reverseGeocodeAsync({
-      // $ExpectError: `latitude` must be a number
+      // $FlowExpectedError: `latitude` must be a number
       latitude: 'nned number',
       longitude: 1,
     });
@@ -268,28 +268,28 @@ describe('startLocationUpdatesAsync', () => {
     startLocationUpdatesAsync('taskName').then(result => {
       (result: void);
 
-      // $ExpectError: check any
+      // $FlowExpectedError: check any
       (result: string);
     });
   });
 
   it('should raise an error when call function with invalid arguments', () => {
-    // $ExpectError: first argument is required
+    // $FlowExpectedError: first argument is required
     startLocationUpdatesAsync();
 
-    // $ExpectError: first argument mush be a string
+    // $FlowExpectedError: first argument mush be a string
     startLocationUpdatesAsync(1337);
 
-    // $ExpectError: second argument must be an object
+    // $FlowExpectedError: second argument must be an object
     startLocationUpdatesAsync('taskName', 69);
 
     startLocationUpdatesAsync('taskName', {
-      // $ExpectError: invalid accuracy
+      // $FlowExpectedError: invalid accuracy
       accuracy: 1,
-      // $ExpectError: invalid activityType
+      // $FlowExpectedError: invalid activityType
       activityType: 1,
 
-      // $ExpectError: `notificationTitle` is required props
+      // $FlowExpectedError: `notificationTitle` is required props
       foregroundService: { notificationBody: 'str' },
     });
   });
@@ -300,13 +300,13 @@ describe('stopGeofencingAsync', () => {
     stopGeofencingAsync('taskName').then(result => {
       (result: void);
 
-      // $ExpectError: check any
+      // $FlowExpectedError: check any
       (result: string);
     });
   });
 
   it('should raise an error when call function with invalid arguments', () => {
-    // $ExpectError: need a string
+    // $FlowExpectedError: need a string
     stopGeofencingAsync(69);
   });
 });
@@ -316,13 +316,13 @@ describe('stopLocationUpdatesAsync', () => {
     stopLocationUpdatesAsync('taskName').then(result => {
       (result: void);
 
-      // $ExpectError: check any
+      // $FlowExpectedError: check any
       (result: string);
     });
   });
 
   it('should raise an error when call function with invalid arguments', () => {
-    // $ExpectError: need a string
+    // $FlowExpectedError: need a string
     stopLocationUpdatesAsync(69);
   });
 });
@@ -334,7 +334,7 @@ describe('watchHeadingAsync', () => {
       (data.magHeading: number);
       (data.accuracy: number);
 
-      // $ExpectError: check any
+      // $FlowExpectedError: check any
       (data.accuracy: string);
     });
     watchHeadingAsync(async () => {}).then(result => {
@@ -343,7 +343,7 @@ describe('watchHeadingAsync', () => {
   });
 
   it('should raise an error when call function with invalid arguments', () => {
-    // $ExpectError: need a function
+    // $FlowExpectedError: need a function
     watchHeadingAsync(69);
   });
 });
@@ -358,7 +358,7 @@ describe('watchPositionAsync', () => {
       (coords.latitude: number);
       (coords.speed: number);
 
-      // $ExpectError: check any
+      // $FlowExpectedError: check any
       (coords.speed: string);
     });
     watchPositionAsync({}, async () => {}).then(result => {
@@ -367,18 +367,18 @@ describe('watchPositionAsync', () => {
   });
 
   it('should raise an error when call function with invalid arguments', () => {
-    // $ExpectError: first argument is required
+    // $FlowExpectedError: first argument is required
     watchPositionAsync();
 
-    // $ExpectError: first argument must be a n object
+    // $FlowExpectedError: first argument must be a n object
     watchPositionAsync(69);
 
-    // $ExpectError: second argument must be a function
+    // $FlowExpectedError: second argument must be a function
     watchPositionAsync({}, 69);
 
     watchPositionAsync(
       {
-        // $ExpectError: invalid accuracy value
+        // $FlowExpectedError: invalid accuracy value
         accuracy: 1,
       },
       () => {}
@@ -392,28 +392,28 @@ it('should passes when used properly', () => {
   enableNetworkProviderAsync().then(result => {
     (result: void);
 
-    // $ExpectError: check any
+    // $FlowExpectedError: check any
     (result: number);
   });
 
   requestPermissionsAsync().then(result => {
     (result: void);
 
-    // $ExpectError: check any
+    // $FlowExpectedError: check any
     (result: number);
   });
 
   hasServicesEnabledAsync().then(result => {
     (result: boolean);
 
-    // $ExpectError: check any
+    // $FlowExpectedError: check any
     (result: number);
   });
 
   isBackgroundLocationAvailableAsync().then(result => {
     (result: boolean);
 
-    // $ExpectError: check any
+    // $FlowExpectedError: check any
     (result: number);
   });
 
@@ -425,7 +425,7 @@ it('should passes when used properly', () => {
     (geocodedLocation.altitude: ?number);
     (geocodedLocation.accuracy: ?number);
 
-    // $ExpectError: check any
+    // $FlowExpectedError: check any
     (geocodedLocation.latitude: string);
   });
 });

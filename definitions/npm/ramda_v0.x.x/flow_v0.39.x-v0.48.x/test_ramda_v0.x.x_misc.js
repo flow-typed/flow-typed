@@ -24,7 +24,7 @@ const str: string = "hello world";
 {
   const partDiv: (a: number) => number = _.divide(6);
   const div: number = _.divide(6, 2);
-  //$ExpectError
+  //$FlowExpectedError
   const div2: number = _.divide(6, true);
 }
 
@@ -67,7 +67,7 @@ describe('is', () => {
   })
 
   it('does not allow non-types for the first argument', () => {
-    // $ExpectError
+    // $FlowExpectedError
     is({}, 1)
   })
 })

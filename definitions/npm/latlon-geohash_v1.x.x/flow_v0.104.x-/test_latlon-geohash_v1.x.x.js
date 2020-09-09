@@ -37,26 +37,26 @@ const {
 let dummyString: string = "dummy";
 let dummyPoint: { lat: number, lon: number, ... } = { lat: 0, lon: 0 };
 
-// $ExpectError
+// $FlowExpectedError
 Geohash.adjacent(validGeohash, "a");
-// $ExpectError
+// $FlowExpectedError
 Geohash.adjacent(2, "n");
-// $ExpectError
+// $FlowExpectedError
 Geohash.bounds(2);
-// $ExpectError
+// $FlowExpectedError
 Geohash.decode(2);
-// $ExpectError
+// $FlowExpectedError
 Geohash.encode("2");
-// $ExpectError
+// $FlowExpectedError
 Geohash.neighbours(2);
 
-// $ExpectError
+// $FlowExpectedError
 dummyPoint = Geohash.adjacent(validGeohash, "n");
-// $ExpectError
+// $FlowExpectedError
 dummyString = Geohash.bounds(validGeohash);
-// $ExpectError
+// $FlowExpectedError
 dummyString = Geohash.decode(validGeohash);
-// $ExpectError
+// $FlowExpectedError
 dummyPoint = Geohash.encode(0, 0, 12);
-// $ExpectError
+// $FlowExpectedError
 dummyString = Geohash.neighbours(validGeohash);

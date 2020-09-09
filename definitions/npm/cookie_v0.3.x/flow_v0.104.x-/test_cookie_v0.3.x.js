@@ -14,7 +14,7 @@ describe('cookie library', () => {
     });
 
     it('cannot parse object', () => {
-      // $ExpectError
+      // $FlowExpectedError
       cookie.parse({});
     });
   });
@@ -32,15 +32,15 @@ describe('cookie library', () => {
     });
 
     it('accept two strings only', () => {
-      // $ExpectError
+      // $FlowExpectedError
       cookie.serialize('name');
 
-      // $ExpectError
+      // $FlowExpectedError
       cookie.serialize('name', {});
     });
 
     it('accept expire as options only as Date', () => {
-      // $ExpectError
+      // $FlowExpectedError
       cookie.parse('name', 'value', {
         expires: 'date',
       });

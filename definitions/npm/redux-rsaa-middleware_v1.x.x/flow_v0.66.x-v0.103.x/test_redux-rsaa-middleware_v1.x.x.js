@@ -23,18 +23,18 @@ const newActionValid : RSAAAction = {
 };
 
 const newActionInvalid : RSAAAction = {
-  // $ExpectError - incompatible property type
+  // $FlowExpectedError - incompatible property type
   type: null,
   payload: {
-    // $ExpectError - incompatible property type
+    // $FlowExpectedError - incompatible property type
     method: null,
-    // $ExpectError - incompatible property type
+    // $FlowExpectedError - incompatible property type
     path: null,
-    // $ExpectError - incompatible property type
+    // $FlowExpectedError - incompatible property type
     query: null,
     startedSendingAction: {
       type: 'STARTED_FETCHING_RESOURCE',
-      // $ExpectError - incompatible property type
+      // $FlowExpectedError - incompatible property type
       payload: null,
     },
     finishedSendingAction: {
@@ -45,7 +45,7 @@ const newActionInvalid : RSAAAction = {
       type: 'UPDATE_USERS_WITH_RESOURCE',
       payload: {},
     },
-    // $ExpectError - incompatible property type
+    // $FlowExpectedError - incompatible property type
     failureAction: null,
   },
 };

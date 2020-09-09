@@ -4,5 +4,5 @@ import {
   type Config,
 } from 'newrelic';
 
-// $ExpectError
+// $FlowExpectedError
 const config: Config = {}

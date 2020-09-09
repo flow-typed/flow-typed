@@ -5,11 +5,11 @@ import onClickOutside, { IGNORE_CLASS_NAME } from 'react-onclickoutside';
 
 IGNORE_CLASS_NAME.slice();
 
-// $ExpectError Cannot perform arithmetic operation because string literal `ignore-react-onclickoutside` [1] is not a number.
+// $FlowExpectedError Cannot perform arithmetic operation because string literal `ignore-react-onclickoutside` [1] is not a number.
 IGNORE_CLASS_NAME - 1;
 
 // class and const are in same line to make all flow versions unhappy in the same line.
-// $ExpectError Cannot call `onClickOutside` because string [1] is incompatible with boolean [2].
+// $FlowExpectedError Cannot call `onClickOutside` because string [1] is incompatible with boolean [2].
 class FailComponent extends React.Component<{ preventDefault: string }> {render() {return <div/>;}} const FailComponentWithClickOutside = onClickOutside(FailComponent);
 <FailComponentWithClickOutside />;
 
@@ -22,12 +22,12 @@ class A extends React.Component<{a: string, preventDefault: boolean }> {
 const B = onClickOutside(A);
 
 {
-  // $ExpectError
+  // $FlowExpectedError
   <B />
 }
 
 {
-  // $ExpectError
+  // $FlowExpectedError
   <B a={12}/>
 }
 
@@ -36,7 +36,7 @@ const B = onClickOutside(A);
 }
 
 {
-  // $ExpectError
+  // $FlowExpectedError
   <B a="foo" preventDefault="no" />
 }
 

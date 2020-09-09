@@ -23,7 +23,7 @@ describe("<SvgUri />", () => {
       });
 
       it("raises an error when source invalid", () => {
-        // $ExpectError
+        // $FlowExpectedError
         <SvgUri source="https://" />;
       });
     });
@@ -35,10 +35,10 @@ describe("<SvgUri />", () => {
       });
 
       it("raises an error when width or height invalid", () => {
-        // $ExpectError
+        // $FlowExpectedError
         <SvgUri width={true} />;
 
-        // $ExpectError
+        // $FlowExpectedError
         <SvgUri height={{}} />;
       });
     });
@@ -57,7 +57,7 @@ describe("<SvgUri />", () => {
       });
 
       it("raises an error when svgXmlData invalid", () => {
-        // $ExpectError
+        // $FlowExpectedError
         <SvgUri svgXmlData={{}} />;
       });
     });
@@ -68,7 +68,7 @@ describe("<SvgUri />", () => {
       });
 
       it("raises an error when fill invalid", () => {
-        // $ExpectError
+        // $FlowExpectedError
         <SvgUri fill={{}} />;
       });
     });
@@ -79,7 +79,7 @@ describe("<SvgUri />", () => {
       });
 
       it("raises an error when onLoad invalid", () => {
-        // $ExpectError
+        // $FlowExpectedError
         <SvgUri onLoad="ops" />;
       });
     });

@@ -25,23 +25,23 @@ describe('autoLink', () => {
     });
 
     it('should not accept non-string required text', () => {
-        // $ExpectError
+        // $FlowExpectedError
         autoLink(undefined);
-        // $ExpectError
+        // $FlowExpectedError
         autoLink(null);
-        // $ExpectError
+        // $FlowExpectedError
         autoLink(0);
-        // $ExpectError
+        // $FlowExpectedError
         autoLink({});
     });
     it('should not accept non-object options', () => {
-        // $ExpectError
+        // $FlowExpectedError
         autoLink('text', null);
-        // $ExpectError
+        // $FlowExpectedError
         autoLink('text', 0);
     });
     it('should not accept unknown options', () => {
-        // $ExpectError
+        // $FlowExpectedError
         autoLink('text', {edit: 'tweets'});
     });
 });
@@ -54,18 +54,18 @@ describe('extractEntitiesWithIndices', () => {
         const entitiesWithIndices = extractEntitiesWithIndices('text');
         entitiesWithIndices && entitiesWithIndices[0].indices[0];
         entitiesWithIndices && entitiesWithIndices[0].indices[1];
-        // $ExpectError
+        // $FlowExpectedError
         entitiesWithIndices && entitiesWithIndices[0].indices[2];
     });
 
     it('should not accept non-string required text', () => {
-        // $ExpectError
+        // $FlowExpectedError
         extractEntitiesWithIndices(undefined);
-        // $ExpectError
+        // $FlowExpectedError
         extractEntitiesWithIndices(null);
-        // $ExpectError
+        // $FlowExpectedError
         extractEntitiesWithIndices(0);
-        // $ExpectError
+        // $FlowExpectedError
         extractEntitiesWithIndices({});
     });
 });
@@ -76,18 +76,18 @@ describe('parseTweet', () => {
     });
     it('should accept exact config options', () => {
         parseTweet('text', undefined);
-        // $ExpectError
+        // $FlowExpectedError
         parseTweet('text', {something: 'unknown'});
     });
 
     it('should not accept non-string required text', () => {
-        // $ExpectError
+        // $FlowExpectedError
         parseTweet(undefined);
-        // $ExpectError
+        // $FlowExpectedError
         parseTweet(null);
-        // $ExpectError
+        // $FlowExpectedError
         parseTweet(0);
-        // $ExpectError
+        // $FlowExpectedError
         parseTweet({});
     });
 });

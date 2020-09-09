@@ -46,7 +46,7 @@ filter("x")([{ x: 1 }, { x: 2 }]);
 filter("x", { a: { x: 1 }, b: { x: 2 } });
 filter("x")({ a: { x: 1 }, b: { x: 2 } });
 filter((v: { y?: number }) => v.y)({ a: { x: 1 }, b: { x: 2 } })[0].x;
-// $ExpectError
+// $FlowExpectedError
 filter((v: { y: number }) => v.y)({ a: { x: 1 }, b: { x: 2 } });
 
 /**
@@ -76,18 +76,18 @@ differenceBy("x")([{ x: 2 }, { x: 1 }], [{ x: 1 }]);
  */
 find(x => x * 1 == 3, [1, 2, 3]);
 findFrom(x => x == 2, 1, [1, 2, 3]);
-// $ExpectError number cannot be compared to string
+// $FlowExpectedError number cannot be compared to string
 find(x => x == "a", [1, 2, 3]);
-// $ExpectError number. This type is incompatible with function type.
+// $FlowExpectedError number. This type is incompatible with function type.
 find(1, [1, 2, 3]);
-// $ExpectError property `y`. Property not found in object literal
+// $FlowExpectedError property `y`. Property not found in object literal
 find(v => v.y == 3, [{ x: 1 }, { x: 2 }, { x: 3 }]);
 find(v => v.x == 3, [{ x: 1 }, { x: 2 }, { x: 3 }]);
 find((a: number, b: string) => a, { x: 1, y: 2 });
 find({ x: 3 }, { x: 1, y: 2 });
 find({ x: 3 })({ x: 1, y: 2 });
 
-// $ExpectError undefined. This type is incompatible with object type.
+// $FlowExpectedError undefined. This type is incompatible with object type.
 var result: Object = find("active", users);
 
 /**
@@ -239,9 +239,9 @@ uniqBy("x", [{ x: 1 }, { x: 2 }, { x: 1 }]);
  * clone
  */
 clone({ a: 1 }).a == 1;
-// $ExpectError property `b`. Property not found in object literal
+// $FlowExpectedError property `b`. Property not found in object literal
 clone({ a: 1 }).b == 1;
-// $ExpectError number. This type is incompatible with function type.
+// $FlowExpectedError number. This type is incompatible with function type.
 clone({ a: 1 }).a == "c";
 
 /**
@@ -251,7 +251,7 @@ isEqual("a", "b");
 isEqual({ x: 1 }, { y: 2 });
 isEqual({ x: 1 })({ y: 2 });
 
-// $ExpectError function type expects no more than 2 arguments
+// $FlowExpectedError function type expects no more than 2 arguments
 isEqual(1, 2, 3);
 
 /**
@@ -259,9 +259,9 @@ isEqual(1, 2, 3);
  */
 range(0, 10)[4] == 4;
 range(0)(10)[4] == 4;
-// $ExpectError string. This type is incompatible with number
+// $FlowExpectedError string. This type is incompatible with number
 range(0, "a");
-// $ExpectError string cannot be compared to number
+// $FlowExpectedError string cannot be compared to number
 range(0, 10)[4] == "a";
 
 /**
@@ -307,11 +307,11 @@ sortedUniqBy("x", [{ x: 1 }, { x: 1 }, { x: 2 }]);
 extend({ a: 1 }, { b: 2 }).a;
 extend({ a: 1 })({ b: 2 }).a;
 extend({ a: 1 }, { b: 2 }).b;
-// $ExpectError property `c`. Property not found in object literal
+// $FlowExpectedError property `c`. Property not found in object literal
 extend({ a: 1 }, { b: 2 }).c;
-// $ExpectError property `c`. Poperty not found in object literal
+// $FlowExpectedError property `c`. Poperty not found in object literal
 assignIn({ a: 1 }, { b: 2 }).c;
-// $ExpectError property `c`. Poperty not found in object literal
+// $FlowExpectedError property `c`. Poperty not found in object literal
 assignIn({ a: 1 })({ b: 2 }).c;
 
 /**
@@ -327,12 +327,12 @@ zip(["a", "b", "c"], ["d", "e", "f"])[0].length;
 zip(["a", "b", "c"], [1, 2, 3])[0].length;
 zip(["a", "b", "c"], [1, 2, 3])[0][0] + "a";
 zip(["a", "b", "c"], [1, 2, 3])[0][1] * 10;
-// $ExpectError `x` property not found in Array
+// $FlowExpectedError `x` property not found in Array
 zip([{ x: 1 }], [{ x: 2, y: 1 }])[0].x;
-// $ExpectError `y` property not found in object literal
+// $FlowExpectedError `y` property not found in object literal
 zip([{ x: 1 }], [{ x: 2, y: 1 }])[0][0].y;
 zip([{ x: 1 }], [{ x: 2, y: 1 }])[0][1].y;
-// $ExpectError Flow could potentially catch this -- the tuple only has two elements.
+// $FlowExpectedError Flow could potentially catch this -- the tuple only has two elements.
 zip([{ x: 1 }], [{ x: 2, y: 1 }])[0][2];
 
 /**
@@ -352,16 +352,16 @@ boolFalse = isString(function(f) {
 boolFalse = isString();
 boolFalse = isString(true);
 
-// $ExpectError
+// $FlowExpectedError
 boolFalse = isString("");
-// $ExpectError
+// $FlowExpectedError
 boolTrue = isString(undefined);
 
 /**
  * find
  */
 find(x => x == 1, [1, 2, 3]);
-// $ExpectError number. This type is incompatible with function type.
+// $FlowExpectedError number. This type is incompatible with function type.
 find(1, [1, 2, 3]);
 
 // Copy pasted tests from iflow-lodash
@@ -435,12 +435,12 @@ var timesNums: number[];
 
 timesNums = times((i: number) => i, 5);
 timesNums = times((i: number) => i)(5);
-// $ExpectError string. This type is incompatible with number
+// $FlowExpectedError string. This type is incompatible with number
 var strings: string[] = times(i => i, 5);
 timesNums = times(function(i: number) {
   return i + 1;
 }, 5);
-// $ExpectError string. This type is incompatible with number
+// $FlowExpectedError string. This type is incompatible with number
 timesNums = times(function(i: number) {
   return JSON.stringify(i);
 }, 5);
@@ -459,7 +459,7 @@ noop(1);
 noop("a", 2, [], null);
 (noop: string => void);
 (noop: (number, string) => void);
-// $ExpectError functions are contravariant in return types
+// $FlowExpectedError functions are contravariant in return types
 (noop: string => string);
 
 const ab = (a: number) => `${a}`;
@@ -494,5 +494,5 @@ pick('a', 'b')
 pick(['a'])
 pick(['a', 'b'])
 
-// $ExpectError
+// $FlowExpectedError
 pick(1)({ a: 1});

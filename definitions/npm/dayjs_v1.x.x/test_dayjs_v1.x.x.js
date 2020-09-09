@@ -14,5 +14,5 @@ describe('dayjs', function() {
   })
 })
 
-// $ExpectError
+// $FlowExpectedError
 dayjsInstance.unix2()

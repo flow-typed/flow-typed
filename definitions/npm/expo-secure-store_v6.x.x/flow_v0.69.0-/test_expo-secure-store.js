@@ -19,7 +19,7 @@ describe('deleteItemAsync', () => {
     deleteItemAsync('KEY').then(result => {
       (result: void);
 
-      // $ExpectError: check any
+      // $FlowExpectedError: check any
       (result: number);
     });
     deleteItemAsync('KEY', {});
@@ -27,11 +27,11 @@ describe('deleteItemAsync', () => {
   });
 
   it('should raises an error when pass invalid arguments', () => {
-    // $ExpectError: first argument is required
+    // $FlowExpectedError: first argument is required
     deleteItemAsync();
-    // $ExpectError: first argument must be a number
+    // $FlowExpectedError: first argument must be a number
     deleteItemAsync(69);
-    // $ExpectError: second argument must be an object
+    // $FlowExpectedError: second argument must be an object
     deleteItemAsync('', 69);
   });
 });
@@ -45,7 +45,7 @@ describe('getItemAsync', () => {
         (result: null);
       }
 
-      // $ExpectError: check any
+      // $FlowExpectedError: check any
       (result: number);
     });
     getItemAsync('KEY', {});
@@ -53,11 +53,11 @@ describe('getItemAsync', () => {
   });
 
   it('should raises an error when pass invalid arguments', () => {
-    // $ExpectError: first argument is required
+    // $FlowExpectedError: first argument is required
     getItemAsync();
-    // $ExpectError: first argument must be a number
+    // $FlowExpectedError: first argument must be a number
     getItemAsync(69);
-    // $ExpectError: second argument must be an object
+    // $FlowExpectedError: second argument must be an object
     getItemAsync('', 69);
   });
 });
@@ -67,7 +67,7 @@ describe('setItemAsync', () => {
     setItemAsync('KEY', 'VALUE').then(result => {
       (result: void);
 
-      // $ExpectError: check any
+      // $FlowExpectedError: check any
       (result: number);
     });
     setItemAsync('KEY', 'VALUE', {});
@@ -79,19 +79,19 @@ describe('setItemAsync', () => {
   });
 
   it('should raises an error when pass invalid arguments', () => {
-    // $ExpectError: first argument is required
+    // $FlowExpectedError: first argument is required
     setItemAsync();
-    // $ExpectError: first argument must be a number
+    // $FlowExpectedError: first argument must be a number
     setItemAsync(69);
-    // $ExpectError: second argument is required
+    // $FlowExpectedError: second argument is required
     setItemAsync('KEY');
-    // $ExpectError: second argument is must be a string
+    // $FlowExpectedError: second argument is must be a string
     setItemAsync('KEY', 69);
-    // $ExpectError: third argument is must be an object
+    // $FlowExpectedError: third argument is must be an object
     setItemAsync('KEY', 69);
 
     setItemAsync('KEY', 'VALUE', {
-      // $ExpectError: invalid value
+      // $FlowExpectedError: invalid value
       keychainAccessible: 1,
     });
   });

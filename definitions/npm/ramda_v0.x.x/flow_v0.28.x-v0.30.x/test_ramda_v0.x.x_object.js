@@ -11,7 +11,7 @@ const str: string = "hello world";
 
 // Object
 const a: { [k: string]: number | string } = _.assoc("c", "s", { a: 1, b: 2 });
-//$ExpectError
+//$FlowExpectedError
 const a1: { [k: string]: number | boolean } = _.assoc("c", "s", { a: 1, b: 2 });
 
 const apath: { [k: string]: number | string | Object } = _.assocPath(
@@ -48,12 +48,12 @@ const objects = [{}, {}, {}];
 const objectsClone: Array<Object> = _.clone(objects);
 const objectsClone1: number = _.clone(1);
 const objectsClone2: typeof tomato = _.clone(tomato);
-//$ExpectError
+//$FlowExpectedError
 const objectsClone3: $Shape<typeof tomato1> = _.clone(tomato);
 const objectsClone4: $Shape<typeof tomato1> = _.clone(tomato1);
 
 const id = objectsClone2.id;
-//$ExpectError
+//$FlowExpectedError
 const idE = objectsClone4.id;
 
 const o1 = { a: 1, b: 2, c: 3, d: 4 };
@@ -96,7 +96,7 @@ const obI: { [k: string]: string } = _.mapObjIndexed(
   prependKeyAndDouble,
   values
 );
-//$ExpectError
+//$FlowExpectedError
 const obI2: { [k: string]: number } = _.mapObjIndexed(
   prependKeyAndDouble,
   values
@@ -105,7 +105,7 @@ const obI2: { [k: string]: number } = _.mapObjIndexed(
 const ob1 = { a: 1 };
 const ob2 = { b: 3 };
 const ob3 = _.merge(ob1, ob2);
-//$ExpectError
+//$FlowExpectedError
 const propX = ob3.x;
 const propA = ob3.a;
 
@@ -124,13 +124,13 @@ const mwithK = _.mergeWithKey(
 const propB1: boolean = mwithK.b;
 
 const objA = _.objOf("a", false);
-//$ExpectError
+//$FlowExpectedError
 const propAA: number = objA.a;
 
-//$ExpectError
+//$FlowExpectedError
 const om: Object = _.omit(["a", "d", "h"], { a: 1, b: 2, c: 3, d: 4 });
 
-//$ExpectError
+//$FlowExpectedError
 const om2 = _.omit(["a", "d", "h"]);
 const omap = om2({ a: 1, b: 2, c: 3, d: 4 });
 
@@ -147,7 +147,7 @@ const isUpperCase = (val, key) => key.toUpperCase() === key;
 const pb: Object = _.pickBy(isUpperCase, ooo);
 
 const ppp: ?number = _.prop("x", { x: 100 });
-//$ExpectError
+//$FlowExpectedError
 const ppp1: ?number = _.prop("y", { x: 100 });
 
 const alice = {
@@ -155,7 +155,7 @@ const alice = {
   age: 101
 };
 
-//$ExpectError
+//$FlowExpectedError
 const favoriteWithDefault = _.propOr("Ramda", "favoriteLibrary");
 const fav = favoriteWithDefault(alice);
 
@@ -163,12 +163,12 @@ const nameWithDefault = _.propOr("Ramda", "name");
 const nm: number | string = nameWithDefault(alice);
 
 const pss: Array<?number | boolean> = _.props(["x", "y"], { x: true, y: 2 });
-//$ExpectError
+//$FlowExpectedError
 const pssE: Array<?number | boolean> = _.props(["d", "y"], { x: true, y: 2 });
 
 const top: Array<["a" | "b" | "c", number]> = _.toPairs({ a: 1, b: 2, c: 3 });
 
-//$ExpectError
+//$FlowExpectedError
 const topE: Array<["a" | "b" | "c" | "z", number]> = _.toPairs({
   a: 1,
   b: 2,

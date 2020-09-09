@@ -8,11 +8,11 @@ const b: Object[] = fuzzaldrin.filter([{}, {}], 'f');
 const c: number = score('abc', 'a');
 const d: number = fuzzaldrin.score('asd', 'q');
 
-// $ExpectError
+// $FlowExpectedError
 filter([1, 2, 3]);
-// $ExpectError
+// $FlowExpectedError
 filter(['a', 'b', 'c'], 2);
-// $ExpectError
+// $FlowExpectedError
 score(1, 'a');
-// $ExpectError
+// $FlowExpectedError
 score('a', 2);

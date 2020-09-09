@@ -9,7 +9,7 @@ winston.log({
   message: "default logger info message"
 });
 winston.error("default logger error message");
-// $ExpectError
+// $FlowExpectedError
 winston.nonExistantLevel("default logger nonExistantLevel message");
 
 // See example:
@@ -73,7 +73,7 @@ logger.configure({
 });
 logger.warn("warn message");
 
-// $ExpectError
+// $FlowExpectedError
 logger = winston.createLogger({
   format: winston.format.prettyPrint(),
   level: "foo",

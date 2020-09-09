@@ -6,7 +6,7 @@ Breed.list((error?: Error, list?: string[]) => {});
 
 Breed.getRandomImageUrl((error?: Error, url?: string) => {});
 
-// $ExpectError
+// $FlowExpectedError
 (new Breed());
 
 const breed: Breed = new Breed('shiba');

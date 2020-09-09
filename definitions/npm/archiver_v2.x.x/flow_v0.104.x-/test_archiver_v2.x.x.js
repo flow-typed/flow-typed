@@ -1,33 +1,33 @@
 const Archiver = require("archiver");
 
-// $ExpectError (must pass in a format)
+// $FlowExpectedError (must pass in a format)
 Archiver();
-// $ExpectError (format should be a string)
+// $FlowExpectedError (format should be a string)
 Archiver(10);
-// $ExpectError (format should be 'zip' or 'tar')
+// $FlowExpectedError (format should be 'zip' or 'tar')
 Archiver("tap");
 Archiver("tar");
 
-// $ExpectError (options should be an object)
+// $FlowExpectedError (options should be an object)
 Archiver("zip", "{}");
 Archiver("zip", {});
 
-// $ExpectError (must pass in valid options)
+// $FlowExpectedError (must pass in valid options)
 Archiver("zip", { gzp: true });
 Archiver("zip", { gzip: true });
 
-// $ExpectError (values of options should use correct type)
+// $FlowExpectedError (values of options should use correct type)
 Archiver("zip", { statConcurrency: "1" });
 Archiver("zip", { statConcurrency: 1 });
 
-// $ExpectError (must pass in a format)
+// $FlowExpectedError (must pass in a format)
 Archiver.create();
 Archiver.create("zip");
 Archiver.create("zip", {});
 
-// $ExpectError (must pass in a format and module)
+// $FlowExpectedError (must pass in a format and module)
 Archiver.registerFormat();
-// $ExpectError (must pass in a module)
+// $FlowExpectedError (must pass in a module)
 Archiver.registerFormat("zip");
 Archiver.registerFormat("zip", () => {});
 

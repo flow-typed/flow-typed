@@ -7,5 +7,5 @@ convert({}, obj => {
   return obj;
 });
 
-// $ExpectError
+// $FlowExpectedError
 convert();

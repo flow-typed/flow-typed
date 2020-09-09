@@ -19,7 +19,7 @@ angular.module("foo", []).component("foo", {
   }
 });
 
-//$ExpectError bindings cant have any other types
+//$FlowExpectedError bindings cant have any other types
 angular.module("foo", []).component("foo", {
   bindings: {
     prop: 123
@@ -31,7 +31,7 @@ angular.module("foo", []).component("foo", {
   template: "<div></div>"
 });
 
-//$ExpectError template does snot accept other types
+//$FlowExpectedError template does snot accept other types
 angular.module("foo", []).component("foo", {
   template: 123
 });
@@ -41,7 +41,7 @@ angular.module("foo", []).component("foo", {
   controllerAs: "ctrl"
 });
 
-//$ExpectError controllerAs does snot accept other types
+//$FlowExpectedError controllerAs does snot accept other types
 angular.module("foo", []).component("foo", {
   controllerAs: 123
 });
@@ -51,7 +51,7 @@ angular.module("foo", []).component("foo", {
   transclude: true
 });
 
-//$ExpectError transclude does snot accept other types
+//$FlowExpectedError transclude does snot accept other types
 angular.module("foo", []).component("foo", {
   transclude: 123
 });
@@ -61,7 +61,7 @@ angular.module("foo", []).component("foo", {
   templateUrl: "path/to/template.html"
 });
 
-//$ExpectError template doe snot accept other types
+//$FlowExpectedError template doe snot accept other types
 angular.module("foo", []).component("foo", {
   templateUrl: 123
 });
@@ -76,12 +76,12 @@ angular.module("foo", []).component("foo", {
   controller: ["foo", "bar", () => {}]
 });
 
-//$ExpectError does not accept object as controller
+//$FlowExpectedError does not accept object as controller
 angular.module("foo", []).component("foo", {
   controller: ["foo", "bar", {}]
 });
 
-//$ExpectError does not accept arbitrary properties
+//$FlowExpectedError does not accept arbitrary properties
 angular.module("foo", []).component("foo", {
   random: "prop"
 });

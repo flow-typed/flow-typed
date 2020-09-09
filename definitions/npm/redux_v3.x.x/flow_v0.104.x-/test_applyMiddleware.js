@@ -13,7 +13,7 @@ const reducer = (state: State = [], action: Action): State => state;
 
 applyMiddleware();
 applyMiddleware(api => next => next);
-// $ExpectError
+// $FlowExpectedError
 applyMiddleware('wrong');
 
 //
@@ -25,13 +25,13 @@ createStore(
   reducer,
   [1],
   applyMiddleware((api: MiddlewareAPI<State, Action>) => {
-    // $ExpectError
+    // $FlowExpectedError
     const s: number = api.getState(); // wrong return type
-    // $ExpectError
+    // $FlowExpectedError
     api.dispatch({ type: 'wrong' }); // wrong action
-    // $ExpectError
+    // $FlowExpectedError
     api.replaceReducer(() => ({})); // wrong reducer
-    // $ExpectError
+    // $FlowExpectedError
     api.subscribe(() => 'wrong'); // wrong subscriber
     return next => next;
   })

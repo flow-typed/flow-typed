@@ -7,21 +7,21 @@ import Mime from 'mime/Mime';
   'text/asciidoc': ['adoc', 'asciidoc'],
   'text/markdown': ['md'],
 }): void);
-// $ExpectError
+// $FlowExpectedError
 mime.define([['text/foo', 'txt']]);
 
 (mime.getExtension('text/asciidoc'): ?string);
-// $ExpectError
+// $FlowExpectedError
 mime.getExtension(['text/foo']);
 
 (mime.getType('README.adoc'): ?string);
-// $ExpectError
+// $FlowExpectedError
 mime.getType(66);
 
 (new Mime(): Mime);
 (new Mime({ 'text/asciidoc': ['adoc'], 'text/markdown': ['md'] }): Mime);
 (new Mime({ 'text/asciidoc': ['adoc'] }, { 'text/markdown': ['md'] }): Mime);
-// $ExpectError
+// $FlowExpectedError
 new Mime(['text/foo']);
 
 (new Mime().define({ 'text/asciidoc': ['adoc'] }): void);

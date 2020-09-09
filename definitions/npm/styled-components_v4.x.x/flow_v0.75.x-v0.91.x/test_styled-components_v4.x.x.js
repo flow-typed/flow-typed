@@ -22,9 +22,9 @@ describe('styled', () => {
   })
 
   it('should\'t map incorrectly', () => {
-    // $ExpectError - Wrong component type
+    // $FlowExpectedError - Wrong component type
     const Div1 : StyledElementType<'span'> = styled.div``
-    // $ExpectError - Wrong component type
+    // $FlowExpectedError - Wrong component type
     const Div2 : StyledElementType<'span'> = styled('div')``
   })
 
@@ -36,26 +36,26 @@ describe('styled', () => {
     const span1 : React.Element<'span'> = <Span1 />
     const span2 : React.Element<'span'> = <Span2 />
 
-    // $ExpectError - Wrong element type
+    // $FlowExpectedError - Wrong element type
     const div3 : React.Element<'span'> = <Div />
   })
 
   it('shouldn\'t create invalid elements', () => {
-    // $ExpectError - test for non-existent element
+    // $FlowExpectedError - test for non-existent element
     const derp1 = styled.derp``
 
-    // $ExpectError - test for non-existent element
+    // $FlowExpectedError - test for non-existent element
     const derp2 = styled('derp')``
   })
 
   it('shouldn\'t style something impossible', () => {
-    // $ExpectError
+    // $FlowExpectedError
     const derp3 = styled(null)``
 
-    // $ExpectError
+    // $FlowExpectedError
     const derp3 = styled({})``
 
-    // $ExpectError
+    // $FlowExpectedError
     const derp3 = styled(1)``
   })
 })
@@ -106,7 +106,7 @@ describe('css generator', () => {
   })
 
   it('doesn\'t accept objects', () => {
-    // $ExpectError - object is not a valid inerpolation
+    // $FlowExpectedError - object is not a valid inerpolation
     const styles = css(['color: ', ';'], {})
 
     // @NOTE This should error too, but I guess flow doesn't yet understand how template literals expand
@@ -134,7 +134,7 @@ describe('refs', () => {
   it('errors on wrong component type', () => {
     const ref1 : { current : HTMLInputElement | null } = React.createRef()
     const Span = styled.span``
-    // $ExpectError - Complain about HTMLSpanElement not being compatible wiht HTMLInputElement
+    // $FlowExpectedError - Complain about HTMLSpanElement not being compatible wiht HTMLInputElement
     const span = <Span ref={ref1} />
   })
 })
@@ -153,12 +153,12 @@ describe('withTheme', () => {
   const MyCompWT = withTheme(MyComp)
 
   it('doesn\'t interfere with component\'s own props', () => {
-    // $ExpectError - wrong prop
+    // $FlowExpectedError - wrong prop
     const mcwt2 = <MyCompWT ownProp={0} />
   })
 
   it('errors when theme should be there but isn\'t', () => {
-    // $ExpectError - missing theme prop
+    // $FlowExpectedError - missing theme prop
     const mc = <MyComp ownProp="own prop" />
   })
 
@@ -179,7 +179,7 @@ describe('wrapping functional component', () => {
   it('understands props that the wrapped component wants', () => {
     const hello1 : React.Element<typeof Hello> = <StyledHello name="World" />
 
-    // $ExpectError - Invalid prop type
+    // $FlowExpectedError - Invalid prop type
     const hello2 : React.Element<typeof Hello> = <StyledHello name={3} />
   })
 })
@@ -202,7 +202,7 @@ describe('wrapping class component', () => {
   it('understands props that the wrapped component wants', () => {
     const hello1 : React.Element<typeof Hello> = <StyledHello name="World" />
 
-    // $ExpectError - Invalid prop type
+    // $FlowExpectedError - Invalid prop type
     const hello2 : React.Element<typeof Hello> = <StyledHello name={3} />
   })
 })
@@ -223,11 +223,11 @@ describe('attrs API', () => {
 
 
   it('errors on invalid attributes', () => {
-    // $ExpectError - number is not a string
+    // $FlowExpectedError - number is not a string
     const StyledHello1 = styled(Hello).attrs({name: 10})``
     const hello1 = <StyledHello1 />
 
-    // $ExpectError - string is not a number
+    // $FlowExpectedError - string is not a number
     const StyledHello2 = styled(Hello).attrs({what: 'the heck', name: 'World'})``
     const hello2 = <StyledHello2 />
   })
@@ -235,7 +235,7 @@ describe('attrs API', () => {
   it('errors when props are missing', () => {
     const StyledHello = styled(Hello).attrs({})``
 
-    // $ExpectError - name is missing in props
+    // $FlowExpectedError - name is missing in props
     const hello = <StyledHello />
   })
 })

@@ -2,7 +2,7 @@
 /*eslint-disable no-undef, no-unused-vars, no-console*/
 import _, { compose, match, toLower, trim } from "ramda";
 
-//$ExpectError
+//$FlowExpectedError
 inc();
 
 const str: Array<string | void> = compose(match(/2/), toLower, trim)(" 1,2,3 ");

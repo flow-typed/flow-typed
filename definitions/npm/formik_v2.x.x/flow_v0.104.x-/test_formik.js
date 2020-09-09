@@ -58,20 +58,20 @@ describe('withFormik HOC', () => {
 
     it('should raise an error when pass invalid own props', () => {
       <WithFormikForm
-        // $ExpectError: `__active` is missing in enum
+        // $FlowExpectedError: `__active` is missing in enum
         variant={'__active'}
         onSubmit={(v: FormValues) => {}}
       />;
 
       <WithFormikForm
         variant={'passive'}
-        // $ExpectError: need function
+        // $FlowExpectedError: need function
         onSubmit={123}
       />;
     });
 
     it('should raise an error when pass injected formik props', () => {
-      // $ExpectError: isSubmitting was extracted
+      // $FlowExpectedError: isSubmitting was extracted
       <WithFormikForm
         isSubmitting={false}
         variant={'active'}
@@ -95,9 +95,9 @@ describe('withFormik HOC', () => {
             (values.age: number);
             (props.initialName: string);
 
-            // $ExpectError: check any
+            // $FlowExpectedError: check any
             (values.age: boolean);
-            // $ExpectError: check any
+            // $FlowExpectedError: check any
             (props.initialName: boolean);
           },
         });
@@ -115,7 +115,7 @@ describe('withFormik HOC', () => {
       it('should raise an error when `mapPropsToValues` return invalid values', () => {
         withFormik<Props, FormValues>({
           ...requiredOptions,
-          // $ExpectError: `initialAge` is a number but `name` need a string
+          // $FlowExpectedError: `initialAge` is a number but `name` need a string
           mapPropsToValues: ({ initialAge }) => ({
             name: initialAge,
           }),
@@ -125,7 +125,7 @@ describe('withFormik HOC', () => {
       it('should raise an error when `mapPropsToValues` return not missing  value', () => {
         withFormik<Props, FormValues>({
           ...requiredOptions,
-          // $ExpectError: `abc` is missing in values
+          // $FlowExpectedError: `abc` is missing in values
           mapPropsToValues: ({ initialAge }) => ({
             abc: initialAge,
           }),
@@ -154,7 +154,7 @@ describe('useField hook', () => {
   });
 
   it('should raise error when pass object without required prop `name`', () => {
-    // $ExpectError
+    // $FlowExpectedError
     useField({ __name: 'name' });
   });
 
@@ -162,15 +162,15 @@ describe('useField hook', () => {
     const [props, meta] = useField<number>('name');
 
     (props.value: number);
-    // $ExpectError: check any
+    // $FlowExpectedError: check any
     (props.value: boolean);
 
     (meta.touched: boolean);
-    // $ExpectError: check any
+    // $FlowExpectedError: check any
     (meta.touched: number);
 
     (meta.error: ?string);
-    // $ExpectError: check any
+    // $FlowExpectedError: check any
     (meta.error: number);
   });
 });
@@ -182,12 +182,12 @@ describe('Field and FastField', () => {
   });
 
   it('should raise an error when pass incompatible name prop', () => {
-    // $ExpectError: `name` must be a string
+    // $FlowExpectedError: `name` must be a string
     <Field name={111} />;
 
-    // $ExpectError: `name` is required prop
+    // $FlowExpectedError: `name` is required prop
     <Field />;
-    // $ExpectError: `name` is required prop
+    // $FlowExpectedError: `name` is required prop
     <FastField />;
   });
 
@@ -200,9 +200,9 @@ describe('Field and FastField', () => {
 
     Field<{ disabled: boolean, ... }, '1' | '2'>({
       name: 'count',
-      // $ExpectError: need a boolean
+      // $FlowExpectedError: need a boolean
       disabled: 123,
-      // $ExpectError: `12` is missing in enum
+      // $FlowExpectedError: `12` is missing in enum
       value: '12',
     });
   });
@@ -233,19 +233,19 @@ describe('FormikContext', () => {
       {value => {
         (value.validateOnBlur: ?boolean);
 
-        // $ExpectError: check any
+        // $FlowExpectedError: check any
         (value.validateOnBlur: ?string);
 
         (value.submitForm: () => Promise<void>);
 
-        // $ExpectError: check any
+        // $FlowExpectedError: check any
         (value.submitForm: number);
 
         return null;
       }}
     </FormikConsumer>;
 
-    // $ExpectError: need valid formik context value
+    // $FlowExpectedError: need valid formik context value
     <FormikProvider value={123} />;
   });
 
@@ -253,7 +253,7 @@ describe('FormikContext', () => {
     const context = useFormikContext<{ age: number, ... }>();
 
     (context.values.age: number);
-    // $ExpectError: check any
+    // $FlowExpectedError: check any
     (context.values.age: string);
   });
 });
@@ -290,7 +290,7 @@ describe('ErrorMessage', () => {
   });
 
   it('should raise an error when do not pass required prop `name`', () => {
-    // $ExpectError
+    // $FlowExpectedError
     <ErrorMessage />;
   });
 });
@@ -309,10 +309,10 @@ describe('FieldArray', () => {
     });
 
     it('should raise an error when pass incompatible name prop', () => {
-      // $ExpectError: `name` must be a string
+      // $FlowExpectedError: `name` must be a string
       <FieldArray name={111} />;
 
-      // $ExpectError: `name` is required prop
+      // $FlowExpectedError: `name` is required prop
       <FieldArray />;
     });
   });
@@ -323,10 +323,10 @@ it('should render Form', () => {
 
   <Form aria-hidden={'true'} />;
 
-  // $ExpectError: `onSubmit` already provided to `form` yuo can't overwrite it
+  // $FlowExpectedError: `onSubmit` already provided to `form` yuo can't overwrite it
   <Form onSubmit={() => {}} />;
 
-  // $ExpectError: `onReset` already provided to `form` yuo can't overwrite it
+  // $FlowExpectedError: `onReset` already provided to `form` yuo can't overwrite it
   <Form onReset={() => {}} />;
 });
 
@@ -348,18 +348,18 @@ describe('Formik', () => {
 
       formik.setFieldValue('name', '1', true);
 
-      // $ExpectError: `name` is missing in `Values`
+      // $FlowExpectedError: `name` is missing in `Values`
       formik.setFieldValue('__name', '1');
 
-      // $ExpectError: `name` expect string value, not `123`
+      // $FlowExpectedError: `name` expect string value, not `123`
       formik.setFieldValue('name', 123);
 
       (formik.values.name: string);
       (formik.values.age: number);
 
-      // $ExpectError: check any
+      // $FlowExpectedError: check any
       (formik.values.name: boolean);
-      // $ExpectError: check any
+      // $FlowExpectedError: check any
       (formik.values.age: boolean);
     });
   });

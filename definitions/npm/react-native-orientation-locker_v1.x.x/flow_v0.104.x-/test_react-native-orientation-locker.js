@@ -23,11 +23,11 @@ describe("async method", () => {
   });
 
   it("must raises an error when call function without callback", () => {
-    // $ExpectError
+    // $FlowExpectedError
     Orientation.addOrientationListener();
-    // $ExpectError
+    // $FlowExpectedError
     Orientation.getOrientation();
-    // $ExpectError
+    // $FlowExpectedError
     Orientation.removeOrientationListener();
   });
 });

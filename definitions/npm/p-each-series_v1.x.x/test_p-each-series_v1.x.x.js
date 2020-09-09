@@ -11,11 +11,11 @@ it('handles correct inputs and return type', () => {
 });
 
 it('errors on invalid iterator element type', () => {
-  // $ExpectError
+  // $FlowExpectedError
   pEachSeries([1, 2, Promise.resolve(3)], (el: string, index: number) => null);
 });
 
 it('errors on invalid return type', () => {
-  // $ExpectError
+  // $FlowExpectedError
   (pEachSeries(['a', 'b', 'c'], () => null): Promise<Iterable<number>>);
 });

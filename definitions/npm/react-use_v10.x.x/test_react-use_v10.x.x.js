@@ -6,7 +6,7 @@ import * as hooks from 'react-use';
 describe('react-use', () => {
   it('useAsync', () => {
     let MyComponent = () => {
-      // $ExpectError
+      // $FlowExpectedError
       hooks.useAsync(() => console.log('foo'));
 
       type ResponseT = { data: string, ... };
@@ -16,18 +16,18 @@ describe('react-use', () => {
       );
 
       [loading, error, value] = hooks.useAsync<ResponseT>(async () =>
-        // $ExpectError
+        // $FlowExpectedError
         Promise.resolve()
       );
 
-      // $ExpectError
+      // $FlowExpectedError
       hooks.useAsync(async () => Promise.resolve(), { foo: 'bar' });
     };
   });
 
   it('useAsyncFn', () => {
     let MyComponent = () => {
-      // $ExpectError
+      // $FlowExpectedError
       hooks.useAsync(() => console.log('foo'));
 
       type ResponseT = { data: string, ... };
@@ -37,11 +37,11 @@ describe('react-use', () => {
       );
 
       [[loading, error, value], fn] = hooks.useAsyncFn<ResponseT>(async () =>
-        // $ExpectError
+        // $FlowExpectedError
         Promise.resolve()
       );
 
-      // $ExpectError
+      // $FlowExpectedError
       hooks.useAsync(async () => Promise.resolve(), { foo: 'bar' });
     };
   });
@@ -49,7 +49,7 @@ describe('react-use', () => {
   it('usePrevious', () => {
     let MyComponent = () => {
       const foo: number = 0;
-      // $ExpectError
+      // $FlowExpectedError
       const bar: string = hooks.usePrevious(foo);
     };
   });
@@ -64,10 +64,10 @@ describe('react-use', () => {
         return () => console.log('should work');
       });
 
-      // $ExpectError
+      // $FlowExpectedError
       hooks.useEffectOnce('should not work');
 
-      // $ExpectError
+      // $FlowExpectedError
       hooks.useEffectOnce(() => 'should not work');
     };
   });

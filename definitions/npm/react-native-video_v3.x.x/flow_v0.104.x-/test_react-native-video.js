@@ -41,19 +41,19 @@ describe("selectedAudioTrack & selectedTextTrack", () => {
   });
 
   it("raises error when passed an unrecognized value key", () => {
-    // $ExpectError
+    // $FlowExpectedError
     <Video
       source={0}
       selectedAudioTrack={{ type: "index", value: "notNumber" }}
     />;
 
-    // $ExpectError
+    // $FlowExpectedError
     <Video source={0} selectedTextTrack={{ type: "language", value: 69 }} />;
 
-    // $ExpectError
+    // $FlowExpectedError
     <Video source={0} selectedTextTrack={{ type: "unsutortedType" }} />;
 
-    // $ExpectError
+    // $FlowExpectedError
     <Video source={0} selectedAudioTrack={{ type: "title", value: 13 }} />;
   });
 });
@@ -77,7 +77,7 @@ describe("public class methods", () => {
     it("seek must call with number ", () => {
       video.seek(1);
 
-      // $ExpectError
+      // $FlowExpectedError
       video.seek();
     });
 
@@ -100,7 +100,7 @@ describe("public class methods", () => {
     it("must call with valid props", () => {
       video.setNativeProps({ paused: true });
 
-      // $ExpectError
+      // $FlowExpectedError
       video.setNativeProps({ foo: 'bar' });
     });
   });
@@ -117,10 +117,10 @@ describe("props", () => {
   });
 
   it("must throw error when source is void", () => {
-    // $ExpectError
+    // $FlowExpectedError
     <Video source={null} />;
 
-    // $ExpectError
+    // $FlowExpectedError
     <Video source={undefined} />;
   });
 });
@@ -224,7 +224,7 @@ it("must passes when used properly resizeMode", () => {
     <Video source={0} resizeMode={undefined} />
   </>;
 
-  // $ExpectError
+  // $FlowExpectedError
   var b = <Video source={0} resizeMode="unSupportedType" />;
 });
 
@@ -238,7 +238,7 @@ it("must passes when used properly posterResizeMode", () => {
     <Video source={0} posterResizeMode={undefined} />
   </>;
 
-  // $ExpectError
+  // $FlowExpectedError
   <Video source={0} posterResizeMode="unSupportedType" />;
 });
 
@@ -248,7 +248,7 @@ describe("events", () => {
       <Video
         source={0}
         onTimedMetadata={event => {
-          // $ExpectError - read-only event
+          // $FlowExpectedError - read-only event
           event.abc = 123;
 
           (event.metadata: $ReadOnlyArray<TimedMetadata>);
@@ -264,7 +264,7 @@ describe("events", () => {
       <Video
         source={0}
         onAudioFocusChanged={event => {
-          // $ExpectError - read-only event
+          // $FlowExpectedError - read-only event
           event.abc = 123;
 
           (event.hasAudioFocus: boolean);
@@ -280,7 +280,7 @@ describe("events", () => {
       <Video
         source={0}
         onProgress={event => {
-          // $ExpectError - read-only event
+          // $FlowExpectedError - read-only event
           event.abc = 123;
 
           (event.currentTime: number);
@@ -298,7 +298,7 @@ describe("events", () => {
       <Video
         source={0}
         onBuffer={event => {
-          // $ExpectError - read-only event
+          // $FlowExpectedError - read-only event
           event.abc = 123;
 
           (event.isBuffering: boolean);
@@ -314,7 +314,7 @@ describe("events", () => {
       <Video
         source={0}
         onLoad={event => {
-          // $ExpectError - read-only event
+          // $FlowExpectedError - read-only event
           event.abc = 123;
 
           (event.audioTracks: $ReadOnlyArray<TrackDescriptor>);
@@ -328,7 +328,7 @@ describe("events", () => {
           (event.duration: number);
           (event.textTracks: $ReadOnlyArray<TrackDescriptor>);
 
-          // $ExpectError - read-only object
+          // $FlowExpectedError - read-only object
           event.naturalSize.abc = 123;
 
           (event.naturalSize.height: number);
@@ -346,7 +346,7 @@ describe("events", () => {
       <Video
         source={0}
         onLoadStart={event => {
-          // $ExpectError - read-only event
+          // $FlowExpectedError - read-only event
           event.abc = 123;
 
           (event.isNetwork: boolean);

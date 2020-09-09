@@ -23,20 +23,20 @@ describe('lozad', () => {
 	})
 
 	it('should not create an instance with invalid selector', () => {
-		// $ExpectError
+		// $FlowExpectedError
 		observer = lozad(null)
-		// $ExpectError
+		// $FlowExpectedError
 		observer = lozad(3)
-		// $ExpectError
+		// $FlowExpectedError
 		observer = lozad(false)
-		// $ExpectError
+		// $FlowExpectedError
 		observer = lozad({})
 
 		if (el) {
 			observer = lozad(el)
 		}
 		else {
-			// $ExpectError
+			// $FlowExpectedError
 			observer = lozad(el)
 		}
 	})
@@ -73,7 +73,7 @@ describe('lozad.triggerLoad', () => {
 		if (el) {
 			observer.triggerLoad(el)
 		} else {
-			// $ExpectError
+			// $FlowExpectedError
 			observer.triggerLoad(el)
 		}
 	})
@@ -92,7 +92,7 @@ describe('lozad.observer', () => {
 			observer.observer.unobserve(el)
 		}
 		else {
-			// $ExpectError
+			// $FlowExpectedError
 			observer.observer.unobserve(el)
 		}
 	})

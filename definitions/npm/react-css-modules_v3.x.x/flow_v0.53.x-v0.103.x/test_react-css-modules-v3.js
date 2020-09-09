@@ -28,13 +28,13 @@ describe('React Component', () => {
   
   it('React Component can be undeclared', () => {
     const ExampleCSSModules = CSSModules(ExampleModule, styles);
-    // $ExpectError invalid module option.
+    // $FlowExpectedError invalid module option.
     const BustedCSSModule = CSSModules(ExampleModule, styles, { wubbaLubba: 'dub-dub' });
     
     class Failure1 extends Component<{}> {
       render() {
     
-        // $ExpectError Missing prop `foo` will be caught.
+        // $FlowExpectedError Missing prop `foo` will be caught.
         return <ExampleCSSModules />;
       }
     }
@@ -42,7 +42,7 @@ describe('React Component', () => {
     class Failure2 extends Component<{}> {
       render() {
     
-        // $ExpectError Unwrapped component won't be passed `styles`.
+        // $FlowExpectedError Unwrapped component won't be passed `styles`.
         return <ExampleModule foo="bar" />;
       }
     }
@@ -82,7 +82,7 @@ describe('Stateless Functional Component', () => {
   it('Stateless Functional Component can be undeclared', () => {
     class Failure extends Component<{}> {
       render() {
-        // $ExpectError Unwrapped component won't be passed `styles`.
+        // $FlowExpectedError Unwrapped component won't be passed `styles`.
         return <StatelessComponent foo="bar" />;
       }
     }

@@ -17,7 +17,7 @@ const letters = _.split("", "abcABCaaaBBc");
 const countB = _.countBy(_.compose(_.toString, Math.floor))(numbers);
 const countB1: { [k: string]: number } = _.countBy(_.toLower)(letters);
 const diff: Array<number> = _.difference([1, 2, 3, 4], [7, 6, 5, 4, 3]);
-//$ExpectError
+//$FlowExpectedError
 const diff1: Array<string> = _.difference(
   ["1", "2", "3", "4"],
   [7, 6, 5, 4, 3]
