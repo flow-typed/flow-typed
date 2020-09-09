@@ -260,7 +260,7 @@ declare module '@testing-library/react' {
   ): RenderResult<CustomQueries>;
 
   declare export var act: ReactDOMTestUtilsAct;
-  declare export function cleanup(): Promise<void>;
+  declare export function cleanup(): void;
 
   declare export function waitFor<T>(
     callback: () => T,
@@ -440,8 +440,6 @@ declare module '@testing-library/react' {
     text: TextMatch,
     options?: TextMatchOptions
   ): HTMLElement;
-  declare export function getNodeText(
-    node: HTMLElement,
-  ): string;
+  declare export function getNodeText(node: HTMLElement): string;
   declare export var screen: Screen<>;
 }
