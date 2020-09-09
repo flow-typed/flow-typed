@@ -90,16 +90,16 @@ declare interface Cypress$Core {
   /**
    * @see https://docs.cypress.io/api/cypress-api/cookies.html
    */
-  Cookies: {
+  Cookies: {|
     debug(enabled: boolean, options?: Cypress$DebugOptions): void,
     preserveOnce(...names: string[]): void,
     defaults(options: Cypress$CookieDefaults): void
-  },
+  |},
 
   /**
    * @see https://docs.cypress.io/api/cypress-api/custom-commands.html
    */
-  Commands: {
+  Commands: {|
     add: (
       name: string,
       options: {|
@@ -109,15 +109,29 @@ declare interface Cypress$Core {
     ) => void,
     add: (name: string, callbackFn: Function) => void,
     overwrite: (name: string, callbackFn: Function) => void,
-  },
+  |},
 
   /**
    *
    * @see https://docs.cypress.io/api/cypress-api/dom.html
    */
-  Dom: {
-    isHidden(element: { ... }): boolean
-  },
+  dom: {|
+    isAttached: (element: any) => boolean,
+    isDescendent: (parent: any, element: any) => boolean,
+    isDetached: (element: any) => boolean,
+    isDocument: (node: any) => boolean,
+    isDom: (element: any) => boolean,
+    isElement: (element: any) => boolean,
+    isFocusable: (element: any) => boolean,
+    isFocused: (element: any) => boolean,
+    isHidden: (element: any) => boolean,
+    isJquery: (element: any) => boolean,
+    isScrollable: (element: any) => boolean,
+    isVisible: (element: any) => boolean,
+    isWindow: (element: any) => boolean,
+    unwrap: (element: any) => Array<any>,
+    wrap: (element: any) => any,
+  |},
 
   /**
    * @see https://docs.cypress.io/api/events/catalog-of-events.html#Uncaught-Exceptions
@@ -128,9 +142,9 @@ declare interface Cypress$Core {
    *
    * @see https://docs.cypress.io/api/cypress-api/cypress-server.html
    */
-  Server: {
+  Server: {|
     defaults(options: Cypress$ServerOptions): void
-  }
+  |},
 }
 
 declare interface Cypress$Chainable {
@@ -605,34 +619,34 @@ declare interface Cypress$Timeoutable {
   timeout?: number
 }
 
-declare type Cypress$LoggableTimeoutable = {} & Cypress$Loggable & Cypress$Timeoutable
+declare type Cypress$LoggableTimeoutable = { ... } & Cypress$Loggable & Cypress$Timeoutable
 
-declare type Cypress$BlurOptions = {
+declare type Cypress$BlurOptions = {|
   force?: boolean
-} & Cypress$Loggable
+|} & Cypress$Loggable & Cypress$Timeoutable
 
-declare type Cypress$CheckOptions = {
+declare type Cypress$CheckOptions = {|
   interval?: number,
   force?: boolean
-} & Cypress$Loggable & Cypress$Timeoutable
+|} & Cypress$Loggable & Cypress$Timeoutable
 
-declare type Cypress$ClearOptions = {
+declare type Cypress$ClearOptions = {|
   force?: boolean,
   interval?: number
-} & Cypress$Loggable & Cypress$Timeoutable
+|} & Cypress$Loggable & Cypress$Timeoutable
 
-declare type Cypress$ClickOptions = {
+declare type Cypress$ClickOptions = {|
   force?: boolean,
   multiple?: boolean,
   interval?: number
-} & Cypress$Loggable & Cypress$Timeoutable
+|} & Cypress$Loggable & Cypress$Timeoutable
 
-declare type Cypress$ExecOptions = {
+declare type Cypress$ExecOptions = {|
   failOnNonZeroExit?: boolean,
   env?: Object
-} & Cypress$Loggable & Cypress$Timeoutable
+|} & Cypress$Loggable & Cypress$Timeoutable
 
-declare type Cypress$RequestOptions = {
+declare type Cypress$RequestOptions = {|
   auth?: Object,
   body?: Cypress$RequestBody,
   failOnStatusCode?: boolean,
@@ -643,7 +657,7 @@ declare type Cypress$RequestOptions = {
   method?: Cypress$HttpMethod,
   qs?: string,
   url: string
-} & Cypress$Loggable & Cypress$Timeoutable
+|} & Cypress$Loggable & Cypress$Timeoutable
 
 declare interface Cypress$RouteOptions {
   method?: Cypress$HttpMethod,
@@ -658,16 +672,16 @@ declare interface Cypress$RouteOptions {
   onAbort?: Function
 }
 
-declare type Cypress$ScrollIntoViewOptions = {
+declare type Cypress$ScrollIntoViewOptions = {|
   duration?: number,
   easing?: string,
-  offset?: { top: number, left: number },
-} & Cypress$Loggable & Cypress$Timeoutable;
+  offset?: {| top: number, left: number |},
+|} & Cypress$Loggable & Cypress$Timeoutable;
 
-declare type Cypress$ScrollToOptions = {
+declare type Cypress$ScrollToOptions = {|
   duration?: number,
   easing?: string
-} & Cypress$Loggable & Cypress$Timeoutable
+|} & Cypress$Loggable & Cypress$Timeoutable
 
 declare type Cypress$SelectOptions = {|
   force?: boolean,
