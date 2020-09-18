@@ -61,12 +61,11 @@ declare interface Cypress$Core {
   /**
    * @see https://docs.cypress.io/api/utilities/_.html
    */
-  _: { ... },
+  _: { [key: string]: () => any, ... },
   /**
    * @see https://docs.cypress.io/api/utilities/$.html
    */
-  $: () => any,
-  $: { ... },
+  $: () => any | { [key: string]: () => any, ...},
   /**
    * @see https://docs.cypress.io/api/utilities/blob.html
    */
@@ -608,7 +607,7 @@ declare interface Cypress$DebugOptions {
 }
 
 declare type Cypress$CookieDefaults = {|
-  preserve: string | string[] | RegExp | Function
+  preserve: string | Array<string> | RegExp | Function
 |}
 
 declare interface Cypress$Loggable {
