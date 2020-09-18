@@ -97,7 +97,9 @@ declare interface Cypress$Core {
   Cookies: {|
     debug(enabled: boolean, options?: Cypress$DebugOptions): void,
     preserveOnce(...names: Array<string>): void,
-    defaults(options: Cypress$CookieDefaults): void
+    defaults(options: {|
+      preserve: string | Array<string> | RegExp | (cookie: any) => boolean,
+    |}): void
   |},
 
   /**
@@ -607,10 +609,6 @@ declare interface Cypress$Chainable {
 declare interface Cypress$DebugOptions {
   verbose?: boolean
 }
-
-declare type Cypress$CookieDefaults = {|
-  preserve: string | Array<string> | RegExp | (cookie: any) => boolean,
-|}
 
 declare interface Cypress$Loggable {
   log?: boolean

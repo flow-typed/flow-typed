@@ -127,14 +127,14 @@ Cypress.Promise((resolve, reject) => {}).then(() => {
 
 Cypress.sinon.test();
 
-Cypress.Cookies.debug(true);
-Cypress.Cookies.preserveOnce('one', 'two', 'three');
+(Cypress.Cookies.debug(true): void);
+(Cypress.Cookies.preserveOnce('one', 'two', 'three'): void);
 // $FlowExpectedError must be string
 Cypress.Cookies.preserveOnce(1, 2, 3);
-Cypress.Cookies.defaults({ preserve: '' });
-Cypress.Cookies.defaults({ preserve: ['session_id', 'remember_token'] });
-Cypress.Cookies.defaults({ preserve: /session|remember/ });
-Cypress.Cookies.defaults({ preserve: () => {} });
+(Cypress.Cookies.defaults({ preserve: '' }): void);
+(Cypress.Cookies.defaults({ preserve: ['session_id', 'remember_token'] }): void);
+(Cypress.Cookies.defaults({ preserve: /session|remember/ }): void);
+(Cypress.Cookies.defaults({ preserve: (cookie) => true }): void);
 
 Cypress.Commands.add('name', { prevSubject: true }, () => {});
 Cypress.Commands.add('name', () => {});
