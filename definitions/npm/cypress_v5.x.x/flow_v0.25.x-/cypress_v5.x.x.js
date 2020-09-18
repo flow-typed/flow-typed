@@ -61,11 +61,12 @@ declare interface Cypress$Core {
   /**
    * @see https://docs.cypress.io/api/utilities/_.html
    */
-  _: () => any,
+  _: { ... },
   /**
    * @see https://docs.cypress.io/api/utilities/$.html
    */
   $: () => any,
+  $: { ... },
   /**
    * @see https://docs.cypress.io/api/utilities/blob.html
    */
@@ -104,10 +105,9 @@ declare interface Cypress$Core {
       name: string,
       options: {|
         prevSubject: boolean | string | Array<any>,
-      |},
-      callbackFn: Function,
+      |} | Function,
+      callbackFn?: Function,
     ) => void,
-    add: (name: string, callbackFn: Function) => void,
     overwrite: (name: string, callbackFn: Function) => void,
   |},
 
@@ -607,9 +607,9 @@ declare interface Cypress$DebugOptions {
   verbose?: boolean
 }
 
-declare interface Cypress$CookieDefaults {
-  whitelist?: string | string[] | RegExp | Function
-}
+declare type Cypress$CookieDefaults = {|
+  preserve: string | string[] | RegExp | Function
+|}
 
 declare interface Cypress$Loggable {
   log?: boolean

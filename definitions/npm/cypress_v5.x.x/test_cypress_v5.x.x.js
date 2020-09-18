@@ -23,6 +23,7 @@ Cypress.env();
 
 Cypress._.debounce();
 
+Cypress.$();
 Cypress.$.test();
 
 Cypress.Blob();
@@ -39,29 +40,32 @@ Cypress.sinon.test();
 
 Cypress.Cookies.debug(true);
 Cypress.Cookies.preserveOnce('one', 'two', 'three');
-// $ExpectError must be string
+// $FlowExpectedError must be string
 Cypress.Cookies.preserveOnce(1, 2, 3);
-Cypress.Cookies.defaults();
+Cypress.Cookies.defaults({ preserve: '' });
+Cypress.Cookies.defaults({ preserve: ['session_id', 'remember_token'] });
+Cypress.Cookies.defaults({ preserve: /session|remember/ });
+Cypress.Cookies.defaults({ preserve: () => {} });
 
 Cypress.Commands.add('name', { prevSubject: true }, () => {});
 Cypress.Commands.add('name', () => {});
 Cypress.Commands.overwrite('name', () => {});
 
-(Cypress.isAttached(''): boolean);
-(Cypress.isDescendent(''): boolean);
-(Cypress.isDetached(''): boolean);
-(Cypress.isDocument(''): boolean);
-(Cypress.isDom(''): boolean);
-(Cypress.isElement(''): boolean);
-(Cypress.isFocusable(''): boolean);
-(Cypress.isFocused(''): boolean);
-(Cypress.isHidden(''): boolean);
-(Cypress.isJquery(''): boolean);
-(Cypress.isScrollable(''): boolean);
-(Cypress.isVisible(''): boolean);
-(Cypress.isWindow(''): boolean);
-(Cypress.unwrap(''): Array<any>);
-(Cypress.wrap(''): any);
+(Cypress.dom.isAttached(''): boolean);
+(Cypress.dom.isDescendent(''): boolean);
+(Cypress.dom.isDetached(''): boolean);
+(Cypress.dom.isDocument(''): boolean);
+(Cypress.dom.isDom(''): boolean);
+(Cypress.dom.isElement(''): boolean);
+(Cypress.dom.isFocusable(''): boolean);
+(Cypress.dom.isFocused(''): boolean);
+(Cypress.dom.isHidden(''): boolean);
+(Cypress.dom.isJquery(''): boolean);
+(Cypress.dom.isScrollable(''): boolean);
+(Cypress.dom.isVisible(''): boolean);
+(Cypress.dom.isWindow(''): boolean);
+(Cypress.dom.unwrap(''): Array<any>);
+(Cypress.dom.wrap(''): any);
 
 (Cypress.on(
   'name',
