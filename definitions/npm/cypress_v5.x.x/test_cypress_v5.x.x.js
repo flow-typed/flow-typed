@@ -2,7 +2,75 @@
 
 
 // cy obj
-cy.visit('test');
+cy.and('test').click();
+cy.and('test', 'value').click();
+cy.and('test', 'method', 'value').click();
+cy.and(() => {}).click();
+
+cy.as('test').click();
+
+cy.blur().click();
+
+cy.check().click();
+cy.check('test').click();
+cy.check(['one', 'two', 'three']).click();
+
+cy.children().click();
+cy.children('test').click();
+
+cy.clear().click();
+
+cy.clearCookie('test').click();
+
+cy.clearCookies().click();
+
+cy.clearLocalStorage().click();
+cy.clearLocalStorage('test').click();
+cy.clearLocalStorage(/test/).click();
+
+cy.click().click();
+cy.click('test').click();
+cy.click(0, 1).click();
+
+cy.clock().click();
+cy.clock(0).click();
+cy.clock(0, ['one', 'two', 'three']).click();
+
+cy.closest('test').click();
+
+cy.contains('test').click();
+cy.contains(0).click();
+cy.contains(/test/).click();
+cy.contains('test', 'test').click();
+
+cy.dblclick().click();
+
+cy.debug().click();
+
+cy.document().click();
+
+cy.each(() => {}).click();
+
+cy.end().click();
+
+cy.eq(0).click();
+
+cy.exec('test').click();
+
+cy.filter('test').click();
+
+cy.find('test').click();
+
+cy.first().click();
+
+cy.fixture('test').click();
+cy.fixture('path', 'encoding').click();
+
+cy.focus().click();
+
+cy.focused().click();
+
+cy.visit('test').click();
 
 // ---
 

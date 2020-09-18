@@ -1,4 +1,4 @@
-declare type Cypress$FileContents = string | any[] | { ... };
+declare type Cypress$FileContents = string | Array<any> | { ... };
 
 declare type Cypress$HistoryDirection = "back" | "forward";
 
@@ -65,7 +65,7 @@ declare interface Cypress$Core {
   /**
    * @see https://docs.cypress.io/api/utilities/$.html
    */
-  $: () => any | { [key: string]: () => any, ...},
+  $: ((() => any) | { [key: string]: () => any, ...}),
   /**
    * @see https://docs.cypress.io/api/utilities/blob.html
    */
@@ -92,7 +92,7 @@ declare interface Cypress$Core {
    */
   Cookies: {|
     debug(enabled: boolean, options?: Cypress$DebugOptions): void,
-    preserveOnce(...names: string[]): void,
+    preserveOnce(...names: Array<string>): void,
     defaults(options: Cypress$CookieDefaults): void
   |},
 
@@ -170,7 +170,7 @@ declare interface Cypress$Chainable {
    */
   check(options?: Cypress$CheckOptions): Cypress$Global,
   check(value: string): Cypress$Global,
-  check(values: string[]): Cypress$Global,
+  check(values: Array<string>): Cypress$Global,
 
   /**
    * @see https://docs.cypress.io/api/commands/children.html
@@ -210,8 +210,7 @@ declare interface Cypress$Chainable {
   /**
    * @see https://docs.cypress.io/api/commands/clock.html
    */
-  clock(): Cypress$Global,
-  clock(options: Cypress$Loggable): Cypress$Global,
+  clock(options?: Cypress$Loggable): Cypress$Global,
   clock(timestamp: number, options?: Cypress$Loggable): Cypress$Global,
   clock(timestamp: number, functionNames: $ReadOnlyArray<string>, options?: Cypress$Loggable): Cypress$Global,
 
@@ -336,7 +335,7 @@ declare interface Cypress$Chainable {
    * @see https://docs.cypress.io/api/commands/invoke.html
    */
   invoke(functionName: string): Cypress$Global,
-  invoke(functionName: string, ...args: any[]): Cypress$Global,
+  invoke(functionName: string, ...args: Array<any>): Cypress$Global,
 
   /**
    * @see https://docs.cypress.io/api/commands/its.html
@@ -466,8 +465,8 @@ declare interface Cypress$Chainable {
    */
   select(text: string, options?: Cypress$SelectOptions): Cypress$Global,
   select(value: string, options?: Cypress$SelectOptions): Cypress$Global,
-  select(texts: string[], options?: Cypress$SelectOptions): Cypress$Global,
-  select(values: string[], options?: Cypress$SelectOptions): Cypress$Global,
+  select(texts: Array<string>, options?: Cypress$SelectOptions): Cypress$Global,
+  select(values: Array<string>, options?: Cypress$SelectOptions): Cypress$Global,
 
   /**
    * @see https://docs.cypress.io/api/commands/server.html
@@ -536,7 +535,7 @@ declare interface Cypress$Chainable {
    * @see https://docs.cypress.io/api/commands/uncheck.html
    */
   uncheck(options?: Cypress$CheckOptions): Cypress$Global,
-  uncheck(values: string[]): Cypress$Global,
+  uncheck(values: Array<string>): Cypress$Global,
 
   /**
    * @see https://docs.cypress.io/api/commands/url.html
@@ -568,7 +567,7 @@ declare interface Cypress$Chainable {
    */
   wait(ms: number): Cypress$Global,
   wait(alias: string, options?: Cypress$LoggableTimeoutable): Cypress$Global,
-  wait(aliases: string[]): Cypress$Global,
+  wait(aliases: Array<string>): Cypress$Global,
 
   /**
    * @see https://docs.cypress.io/api/commands/window.html
@@ -607,7 +606,7 @@ declare interface Cypress$DebugOptions {
 }
 
 declare type Cypress$CookieDefaults = {|
-  preserve: string | Array<string> | RegExp | Function
+  preserve: string | Array<string> | RegExp | (cookie: any) => boolean,
 |}
 
 declare interface Cypress$Loggable {
