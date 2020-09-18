@@ -26,6 +26,14 @@ declare type Cypress$ViewportPreset =
 
 declare type Cypress$RequestBody = string | { ... };
 
+declare type Cypress$RequestResponse = {
+  status: any,
+  body: any,
+  headers: any,
+  duration: any,
+  ...
+};
+
 declare type Cypress$ViewportOrientation = "portrait" | "landscape";
 
 declare type Cypress$Env = { [key: string]: string, ... };
@@ -361,7 +369,8 @@ declare interface Cypress$Chainable {
   /**
    * @see https://docs.cypress.io/api/commands/log.html
    */
-  log(message: string, args: any): Cypress$Global,
+  log(message: string): Cypress$Global,
+  log(message: string, ...args: Array<any>): Cypress$Global,
 
   /**
    * @see https://docs.cypress.io/api/commands/next.html
@@ -400,46 +409,46 @@ declare interface Cypress$Chainable {
   /**
    * @see  https://on.cypress.io/api/readfile
    */
-  readFile(filePath: string, options?: Cypress$Timeoutable): Cypress$Global,
+  readFile(filePath: string, options?: Cypress$Timeoutable): any,
   readFile(
     filePath: string,
     encoding: string,
     options?: Cypress$Timeoutable,
-  ): Cypress$Global,
+  ): any,
 
   /**
    * @see https://docs.cypress.io/api/commands/reload.html
    */
-  reload(options?: Cypress$LoggableTimeoutable): Cypress$Global,
-  reload(forceReload: boolean): Cypress$Global,
+  reload(options?: Cypress$LoggableTimeoutable): Window,
+  reload(forceReload: boolean): Window,
 
   /**
    * @see https://docs.cypress.io/api/commands/request.html
    */
-  request(url: string): Cypress$Global,
-  request(url: string, body: Cypress$RequestBody): Cypress$Global,
-  request(method: Cypress$HttpMethod, url: string): Cypress$Global,
+  request(url: string): Cypress$RequestResponse,
+  request(url: string, body: Cypress$RequestBody): Cypress$RequestResponse,
+  request(method: Cypress$HttpMethod, url: string): Cypress$RequestResponse,
   request(
     method: Cypress$HttpMethod,
     url: string,
     body: Cypress$RequestBody,
-  ): Cypress$Global,
-  request(options: Cypress$RequestOptions): Cypress$Global,
+  ): Cypress$RequestResponse,
+  request(options: Cypress$RequestOptions): Cypress$RequestResponse,
 
   /**
    * @see https://docs.cypress.io/api/commands/root.html
    */
-  root(options?: Cypress$Loggable): Cypress$Global,
+  root(options?: Cypress$Loggable): HTMLElement,
 
   /**
    * @see https://docs.cypress.io/api/commands/route.html
    */
-  route(url: string): Cypress$Global,
-  route(url: string, response: any): Cypress$Global,
-  route(method: string, url: string): Cypress$Global,
-  route(method: string, url: string, response: any): Cypress$Global,
-  route(fn: Function): Cypress$Global,
-  route(options: Cypress$RouteOptions): Cypress$Global,
+  route(url: string): Cypress$RouteResponse,
+  route(url: string, response: any): Cypress$RouteResponse,
+  route(method: string, url: string): Cypress$RouteResponse,
+  route(method: string, url: string, response: any): Cypress$RouteResponse,
+  route(fn: Function): Cypress$RouteResponse,
+  route(options: Cypress$RouteOptions): Cypress$RouteResponse,
 
   /**
    * @see https://docs.cypress.io/api/commands/screenshot.html
@@ -670,6 +679,10 @@ declare interface Cypress$RouteOptions {
   onResponse?: Function,
   onAbort?: Function
 }
+
+declare type Cypress$RouteResponse = {|
+  as: (alias: string) => void,
+|};
 
 declare type Cypress$ScrollIntoViewOptions = {|
   duration?: number,

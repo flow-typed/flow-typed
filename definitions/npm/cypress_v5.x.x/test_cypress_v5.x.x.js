@@ -1,6 +1,5 @@
 // @flow
 
-
 // cy obj
 cy.and('test').click();
 cy.and('test', 'value').click();
@@ -79,7 +78,7 @@ cy.getCookies().click();
 cy.go('forward').click();
 cy.go('back').click();
 cy.go(1).click();
-// $FlowExpectedError must be enum or number
+// $FlowFixMe[incompatible-call]
 cy.go('test').click();
 
 cy.hash().click();
@@ -89,7 +88,54 @@ cy.invoke(0).click();
 cy.invoke('test', 1, 2, 3).click();
 cy.invoke(1, () => {}, true).click();
 
+cy.its('test').click();
 
+cy.last().click();
+
+cy.location().click();
+cy.location('test').click();
+
+cy.log('test').click();
+cy.log('test', 0, true, () => {}).click();
+
+cy.next().click();
+cy.next('test').click();
+
+cy.not('test').click();
+
+cy.parent().click();
+cy.parent('test').click();
+
+cy.parents().click();
+cy.parents('test').click();
+
+cy.pause().click();
+
+cy.prev().click();
+cy.prev('test').click();
+
+cy.readFile('test');
+cy.readFile('path', 'encoding');
+
+(cy.reload(): Window);
+(cy.reload(true): Window);
+
+cy.request('test').body;
+cy.request('test', 'body').headers;
+cy.request('test', {}).status;
+cy.request('GET', 'test').duration;
+cy.request('GET', 'test', 'body').duration;
+cy.request('GET', 'test', {}).duration;
+cy.request({ url: 'test' }).duration;
+
+cy.root().getBoundingClientRect();
+
+cy.route('url').as('test');
+cy.route('url', 'response').as('test');
+cy.route('method', 'url').as('test');
+cy.route('method', 'url', 'response').as('test');
+cy.route(() => {}).as('test');
+cy.route({}).as('test');
 
 cy.visit('test').click();
 
@@ -129,7 +175,7 @@ Cypress.sinon.test();
 
 (Cypress.Cookies.debug(true): void);
 (Cypress.Cookies.preserveOnce('one', 'two', 'three'): void);
-// $FlowExpectedError must be string
+// $FlowFixMe[incompatible-call]
 Cypress.Cookies.preserveOnce(1, 2, 3);
 (Cypress.Cookies.defaults({ preserve: '' }): void);
 (Cypress.Cookies.defaults({ preserve: ['session_id', 'remember_token'] }): void);
