@@ -65,7 +65,11 @@ declare interface Cypress$Core {
   /**
    * @see https://docs.cypress.io/api/utilities/$.html
    */
-  $: ((() => any) | { [key: string]: () => any, ...}),
+  $: {
+    (): any;
+    [key: string]: () => any,
+    ...
+  },
   /**
    * @see https://docs.cypress.io/api/utilities/blob.html
    */
@@ -305,7 +309,6 @@ declare interface Cypress$Chainable {
    * @see https://docs.cypress.io/api/commands/get.html
    */
   get(selector: string, options?: Cypress$LoggableTimeoutable): Cypress$Global,
-  get(alias: string, options?: Cypress$LoggableTimeoutable): Cypress$Global,
 
   /**
    * @see https://docs.cypress.io/api/commands/getcookie.html
@@ -334,8 +337,8 @@ declare interface Cypress$Chainable {
   /**
    * @see https://docs.cypress.io/api/commands/invoke.html
    */
-  invoke(functionName: string): Cypress$Global,
-  invoke(functionName: string, ...args: Array<any>): Cypress$Global,
+  invoke(functionName: string | number): Cypress$Global,
+  invoke(functionName: string | number, ...args: Array<any>): Cypress$Global,
 
   /**
    * @see https://docs.cypress.io/api/commands/its.html

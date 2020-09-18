@@ -70,6 +70,27 @@ cy.focus().click();
 
 cy.focused().click();
 
+cy.get('test').click();
+
+cy.getCookie('test').click();
+
+cy.getCookies().click();
+
+cy.go('forward').click();
+cy.go('back').click();
+cy.go(1).click();
+// $FlowExpectedError must be enum or number
+cy.go('test').click();
+
+cy.hash().click();
+
+cy.invoke('test').click();
+cy.invoke(0).click();
+cy.invoke('test', 1, 2, 3).click();
+cy.invoke(1, () => {}, true).click();
+
+
+
 cy.visit('test').click();
 
 // ---
