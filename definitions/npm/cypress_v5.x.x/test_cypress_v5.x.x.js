@@ -1,6 +1,7 @@
 // @flow
 
 // cy obj
+// Functions that return Cypress$Chainable are tested with the click function
 cy.and('test').click();
 cy.and('test', 'value').click();
 cy.and('test', 'method', 'value').click();
@@ -14,53 +15,74 @@ cy.check().click();
 cy.check('test').click();
 cy.check(['one', 'two', 'three']).click();
 
-cy.children().click();
-cy.children('test').click();
+cy.children();
+cy.children('test');
 
 cy.clear().click();
 
-cy.clearCookie('test').click();
+(cy.clearCookie('test'): void);
 
-cy.clearCookies().click();
+(cy.clearCookies(): void);
 
-cy.clearLocalStorage().click();
-cy.clearLocalStorage('test').click();
-cy.clearLocalStorage(/test/).click();
+(cy.clearLocalStorage(): void);
+(cy.clearLocalStorage('test'): void);
+(cy.clearLocalStorage(/test/): void);
 
 cy.click().click();
 cy.click('test').click();
 cy.click(0, 1).click();
 
-cy.clock().click();
-cy.clock(0).click();
-cy.clock(0, ['one', 'two', 'three']).click();
+cy.clock().then((clock) => {
+  clock.tick(5).then((c) => {
+    c.restore();
+  });
+  clock.restore();
+});
+cy.clock(0).then((clock) => {
+  clock.tick(5).then((c) => {
+    c.restore();
+  });
+  clock.restore();
+});
+cy.clock(0, ['one', 'two', 'three']).then((clock) => {
+  clock.tick(5).then((c) => {
+    c.restore();
+  });
+  clock.restore();
+});
 
-cy.closest('test').click();
+cy.closest('test');
 
-cy.contains('test').click();
-cy.contains(0).click();
-cy.contains(/test/).click();
-cy.contains('test', 'test').click();
+const contains = cy.contains('test');
+if (contains) {
+  contains.getBoundingClientRect();
+}
+cy.contains(0);
+cy.contains(/test/);
+cy.contains('test', 'test');
 
 cy.dblclick().click();
 
 cy.debug().click();
 
-cy.document().click();
+(cy.document(): Document);
 
 cy.each(() => {}).click();
 
-cy.end().click();
+(cy.end(): void);
 
 cy.eq(0).click();
 
-cy.exec('test').click();
+const exec = cy.exec('test');
+exec.code;
+exec.stdout;
+exec.stderr;
 
-cy.filter('test').click();
+cy.filter('test');
 
-cy.find('test').click();
+cy.find('test').getBoundingClientRect();
 
-cy.first().click();
+cy.first().getBoundingClientRect();
 
 cy.fixture('test').click();
 cy.fixture('path', 'encoding').click();
@@ -71,32 +93,32 @@ cy.focused().click();
 
 cy.get('test').click();
 
-cy.getCookie('test').click();
+cy.getCookie('test');
 
-cy.getCookies().click();
+cy.getCookies();
 
-cy.go('forward').click();
-cy.go('back').click();
-cy.go(1).click();
+cy.go('forward');
+cy.go('back');
+cy.go(1);
 // $FlowExpectedError[incompatible-call]
-cy.go('test').click();
+cy.go('test');
 
 cy.hash().click();
 
-cy.invoke('test').click();
-cy.invoke(0).click();
-cy.invoke('test', 1, 2, 3).click();
-cy.invoke(1, () => {}, true).click();
+(cy.invoke('test'): void);
+(cy.invoke(0): void);
+(cy.invoke('test', 1, 2, 3): void);
+(cy.invoke(1, () => {}, true): void);
 
 cy.its('test').click();
 
-cy.last().click();
+cy.last().getBoundingClientRect();
 
-cy.location().click();
-cy.location('test').click();
+(cy.location(): Location);
+(cy.location('test'): Location);
 
-cy.log('test').click();
-cy.log('test', 0, true, () => {}).click();
+(cy.log('test'): void);
+(cy.log('test', 0, true, () => {}): void);
 
 cy.next().click();
 cy.next('test').click();
