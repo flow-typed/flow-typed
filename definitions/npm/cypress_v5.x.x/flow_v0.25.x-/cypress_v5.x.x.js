@@ -567,8 +567,8 @@ declare interface Cypress$Chainable {
    * @see https://docs.cypress.io/api/commands/uncheck.html
    */
   uncheck(options?: Cypress$CheckOptions): Cypress$Global,
-  uncheck(value: string): Cypress$Global,
-  uncheck(values: Array<string>): Cypress$Global,
+  uncheck(value: string, options?: Cypress$CheckOptions): Cypress$Global,
+  uncheck(values: Array<string>, options?: Cypress$CheckOptions): Cypress$Global,
 
   /**
    * @see https://docs.cypress.io/api/commands/url.html

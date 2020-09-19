@@ -205,7 +205,7 @@ cy.wait('test');
 cy.wait(['one', 'two', 'three']);
 
 cy.within(() => {}).click();
-cy.within({ log: '' }, () => {}).click();
+cy.within({ log: true }, () => {}).click();
 
 cy.wrap({ name: 'test' }).name;
 
