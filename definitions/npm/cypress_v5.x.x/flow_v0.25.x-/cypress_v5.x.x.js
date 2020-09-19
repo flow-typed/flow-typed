@@ -25,11 +25,6 @@ declare type Cypress$HttpMethod =
   | "TRACE"
   | "CONNECT";
 
-declare type Cypress$HTMLElement = {
-  ...HTMLElement,
-  click(...args: Array<any>): Cypress$Global,
-}
-
 declare type Cypress$ViewportPreset =
   | 'ipad-2'
   | 'ipad-mini'
@@ -213,8 +208,8 @@ declare interface Cypress$Chainable {
   /**
    * @see https://docs.cypress.io/api/commands/children.html
    */
-  children(options?: Cypress$LoggableTimeoutable): Cypress$HTMLElement | Array<Cypress$HTMLElement>,
-  children(selector: string, options?: Cypress$LoggableTimeoutable): Cypress$HTMLElement | Array<Cypress$HTMLElement>,
+  children(options?: Cypress$LoggableTimeoutable): Cypress$Global,
+  children(selector: string, options?: Cypress$LoggableTimeoutable): Cypress$Global,
 
   /**
    * @see https://docs.cypress.io/api/commands/clear.html
@@ -255,19 +250,19 @@ declare interface Cypress$Chainable {
   /**
    * @see https://docs.cypress.io/api/commands/closest.html#Syntax
    */
-  closest(selector: string, options?: Cypress$LoggableTimeoutable): Cypress$HTMLElement | Array<Cypress$HTMLElement>,
+  closest(selector: string, options?: Cypress$LoggableTimeoutable): Cypress$Global,
 
   /**
    * @see https://docs.cypress.io/api/commands/contains.html
    */
-  contains(text: string, options?: Cypress$LoggableTimeoutable): Cypress$HTMLElement,
-  contains(num: number): Cypress$HTMLElement,
-  contains(re: RegExp): Cypress$HTMLElement,
+  contains(text: string, options?: Cypress$LoggableTimeoutable): Cypress$Global,
+  contains(num: number): Cypress$Global,
+  contains(re: RegExp): Cypress$Global,
   contains(
     selector: string,
     text: string,
     options?: Cypress$LoggableTimeoutable,
-  ): Cypress$HTMLElement,
+  ): Cypress$Global,
 
   /**
    * @see https://docs.cypress.io/api/commands/dblclick.html
@@ -311,17 +306,17 @@ declare interface Cypress$Chainable {
   /**
    * @see https://docs.cypress.io/api/commands/filter.html
    */
-  filter(selector: string, options?: Cypress$LoggableTimeoutable): Cypress$HTMLElement | Array<Cypress$HTMLElement>,
+  filter(selector: string, options?: Cypress$LoggableTimeoutable): Cypress$Global,
 
   /**
    * @see https://docs.cypress.io/api/commands/find.html
    */
-  find(selector: string, options?: Cypress$LoggableTimeoutable): Cypress$HTMLElement,
+  find(selector: string, options?: Cypress$LoggableTimeoutable): Cypress$Global,
 
   /**
    * @see https://docs.cypress.io/api/commands/first.html
    */
-  first(options?: Cypress$LoggableTimeoutable): Cypress$HTMLElement,
+  first(options?: Cypress$LoggableTimeoutable): Cypress$Global,
 
   /**
    * @see https://docs.cypress.io/api/commands/fixture.html
@@ -386,13 +381,13 @@ declare interface Cypress$Chainable {
   /**
    * @see https://docs.cypress.io/api/commands/last.html
    */
-  last(options?: Cypress$LoggableTimeoutable): Cypress$HTMLElement,
+  last(options?: Cypress$LoggableTimeoutable): Cypress$Global,
 
   /**
    * @see https://docs.cypress.io/api/commands/location.html
    */
-  location(options?: Cypress$Loggable): Location,
-  location(part: string, options?: Cypress$Loggable): Location,
+  location(options?: Cypress$Loggable): Promise<Location>,
+  location(part: string, options?: Cypress$Loggable): Promise<Location>,
 
   /**
    * @see https://docs.cypress.io/api/commands/log.html
@@ -466,7 +461,7 @@ declare interface Cypress$Chainable {
   /**
    * @see https://docs.cypress.io/api/commands/root.html
    */
-  root(options?: Cypress$Loggable): Cypress$HTMLElement,
+  root(options?: Cypress$Loggable): Cypress$Global,
 
   /**
    * @see https://docs.cypress.io/api/commands/route.html
@@ -533,8 +528,8 @@ declare interface Cypress$Chainable {
   /**
    * @see https://docs.cypress.io/api/commands/siblings.html
    */
-  siblings(options?: Cypress$LoggableTimeoutable): Cypress$HTMLElement | Array<Cypress$HTMLElement>,
-  siblings(selector: string, options?: Cypress$LoggableTimeoutable): Cypress$HTMLElement | Array<Cypress$HTMLElement>,
+  siblings(options?: Cypress$LoggableTimeoutable): Cypress$Global,
+  siblings(selector: string, options?: Cypress$LoggableTimeoutable): Cypress$Global,
 
   /**
    * @see https://docs.cypress.io/api/commands/spy.html
