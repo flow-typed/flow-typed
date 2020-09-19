@@ -120,13 +120,27 @@ cy.readFile('path', 'encoding');
 cy.reload();
 cy.reload(true);
 
-cy.request('test').body;
-cy.request('test', 'body').headers;
-cy.request('test', {}).status;
-cy.request('GET', 'test').duration;
-cy.request('GET', 'test', 'body').duration;
-cy.request('GET', 'test', {}).duration;
-cy.request({ url: 'test' }).duration;
+cy.request('test').then(({ body }) => {
+
+});
+cy.request('test', 'body').then(({ headers }) => {
+
+});
+cy.request('test', {}).then(({ status }) => {
+
+});
+cy.request('GET', 'test').then(({ duration }) => {
+
+});
+cy.request('GET', 'test', 'body').then(({ duration }) => {
+
+});
+cy.request('GET', 'test', {}).then(({ duration }) => {
+
+});
+cy.request({ url: 'test' }).then(({ duration }) => {
+
+});
 
 cy.root().getBoundingClientRect();
 
@@ -188,7 +202,7 @@ cy.uncheck(['one', 'two', 'three']).click();
 cy.uncheck('test', uncheckOptions).click();
 cy.uncheck(['one', 'two', 'three'], uncheckOptions).click();
 
-(cy.url(): string);
+cy.url().should('');
 
 (cy.viewport('ipad-2', 'landscape'): void);
 (cy.viewport(1, 2): void);

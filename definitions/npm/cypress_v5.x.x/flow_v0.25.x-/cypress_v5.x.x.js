@@ -444,15 +444,15 @@ declare interface Cypress$Chainable {
   /**
    * @see https://docs.cypress.io/api/commands/request.html
    */
-  request(url: string): Cypress$RequestResponse,
-  request(url: string, body: Cypress$RequestBody): Cypress$RequestResponse,
-  request(method: Cypress$HttpMethod, url: string): Cypress$RequestResponse,
+  request(url: string): Promise<Cypress$RequestResponse>,
+  request(url: string, body: Cypress$RequestBody): Promise<Cypress$RequestResponse>,
+  request(method: Cypress$HttpMethod, url: string): Promise<Cypress$RequestResponse>,
   request(
     method: Cypress$HttpMethod,
     url: string,
     body: Cypress$RequestBody,
-  ): Cypress$RequestResponse,
-  request(options: Cypress$RequestOptions): Cypress$RequestResponse,
+  ): Promise<Cypress$RequestResponse>,
+  request(options: Cypress$RequestOptions): Promise<Cypress$RequestResponse>,
 
   /**
    * @see https://docs.cypress.io/api/commands/root.html
@@ -573,7 +573,7 @@ declare interface Cypress$Chainable {
   /**
    * @see https://docs.cypress.io/api/commands/url.html
    */
-  url(options?: Cypress$LoggableTimeoutable): string,
+  url(options?: Cypress$LoggableTimeoutable): Cypress$Global,
 
   /**
    * @see https://docs.cypress.io/api/commands/viewport.html
