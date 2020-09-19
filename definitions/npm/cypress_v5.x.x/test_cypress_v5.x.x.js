@@ -180,9 +180,37 @@ cy.tick(1).then((clock) => {
 
 cy.type('test').click();
 
-cy.uncheck()
+const uncheckOptions = { interval: 0, force: true };
+cy.uncheck().click();
+cy.uncheck(uncheckOptions).click();
+cy.uncheck('test').click();
+cy.uncheck(['one', 'two', 'three']).click();
+cy.uncheck('test', uncheckOptions).click();
+cy.uncheck(['one', 'two', 'three'], uncheckOptions).click();
 
-cy.visit('test').click();
+(cy.url(): string);
+
+(cy.viewport('ipad-2', 'landscape'): void);
+(cy.viewport(1, 2): void);
+// $FlowExpectedError[incompatible-call]
+(cy.viewport('test', 'portrait'): void);
+// $FlowExpectedError[incompatible-call]
+(cy.viewport('macbook-13', 'test'): void);
+
+cy.visit('test');
+cy.visit({ url: '' });
+
+cy.wait(0).click();
+cy.wait('test');
+cy.wait(['one', 'two', 'three']);
+
+cy.within(() => {}).click();
+cy.within({ log: '' }, () => {}).click();
+
+cy.wrap({ name: 'test' }).name;
+
+cy.writeFile('file', 'test');
+cy.writeFile('file', 'test', 'encoding');
 
 // ---
 

@@ -1,3 +1,16 @@
+declare type Cypress$Encoding =
+  | 'ascii'
+  | 'base64'
+  | 'binary'
+  | 'hex'
+  | 'latin1'
+  | 'utf8'
+  | 'utf-8'
+  | 'ucs2'
+  | 'ucs-2'
+  | 'utf16le'
+  | 'utf-16le';
+
 declare type Cypress$FileContents = string | Array<any> | { ... };
 
 declare type Cypress$HistoryDirection = "back" | "forward";
@@ -13,16 +26,20 @@ declare type Cypress$HttpMethod =
   | "CONNECT";
 
 declare type Cypress$ViewportPreset =
-  | "macbook-15"
-  | "macbook-13"
-  | "macbook-11"
-  | "ipad-2"
-  | "ipad-mini"
-  | "iphone-6+"
-  | "iphone-6"
-  | "iphone-5"
-  | "iphone-4"
-  | "iphone-3";
+  | 'ipad-2'
+  | 'ipad-mini'
+  | 'iphone-3'
+  | 'iphone-4'
+  | 'iphone-5'
+  | 'iphone-6'
+  | 'iphone-6+'
+  | 'iphone-x'
+  | 'iphone-xr'
+  | 'macbook-11'
+  | 'macbook-13'
+  | 'macbook-15'
+  | 'samsung-note9'
+  | 'samsung-s10';
 
 declare type Cypress$RequestBody = string | { ... };
 
@@ -34,9 +51,11 @@ declare type Cypress$RequestResponse = {
   ...
 };
 
-declare type Cypress$ViewportOrientation = "portrait" | "landscape";
+declare type Cypress$ViewportOrientation = 'portrait' | 'landscape';
 
 declare type Cypress$Env = { [key: string]: string, ... };
+
+declare type Cypress$Window = any;
 
 declare interface Cypress$Core {
   /**
@@ -301,7 +320,7 @@ declare interface Cypress$Chainable {
   fixture(path: string, options?: Cypress$Timeoutable): Cypress$Global,
   fixture(
     path: string,
-    encoding: string,
+    encoding: Cypress$Encoding,
     options?: Cypress$Timeoutable,
   ): Cypress$Global,
 
@@ -412,17 +431,15 @@ declare interface Cypress$Chainable {
   readFile(filePath: string, options?: Cypress$Timeoutable): any,
   readFile(
     filePath: string,
-    encoding: string,
+    encoding: Cypress$Encoding,
     options?: Cypress$Timeoutable,
   ): any,
 
   /**
-   * Returns the window object
-   *
    * @see https://docs.cypress.io/api/commands/reload.html
    */
-  reload(options?: Cypress$LoggableTimeoutable): any,
-  reload(forceReload: boolean): any,
+  reload(options?: Cypress$LoggableTimeoutable): Cypress$Window,
+  reload(forceReload: boolean): Cypress$Window,
 
   /**
    * @see https://docs.cypress.io/api/commands/request.html
@@ -556,7 +573,7 @@ declare interface Cypress$Chainable {
   /**
    * @see https://docs.cypress.io/api/commands/url.html
    */
-  url(options?: Cypress$Loggable): Cypress$Global,
+  url(options?: Cypress$LoggableTimeoutable): string,
 
   /**
    * @see https://docs.cypress.io/api/commands/viewport.html
@@ -565,30 +582,29 @@ declare interface Cypress$Chainable {
     preset: Cypress$ViewportPreset,
     orientation?: Cypress$ViewportOrientation,
     options?: Cypress$Loggable,
-  ): Cypress$Global,
+  ): void,
   viewport(
     width: number,
     height: number,
     options?: Cypress$Loggable,
-  ): Cypress$Global,
+  ): void,
 
   /**
    * @see https://docs.cypress.io/api/commands/visit.html
    */
-  visit(url: string, options?: Cypress$VisitOptions): Cypress$Global,
-  visit(options?: Cypress$VisitOptions): Cypress$Global,
+  visit(url: string, options?: Cypress$VisitOptions): Cypress$Window,
+  visit(options: Cypress$VisitOptions): Cypress$Window,
 
   /**
    * @see https://docs.cypress.io/api/commands/wait.html
    */
-  wait(ms: number): Cypress$Global,
-  wait(alias: string, options?: Cypress$LoggableTimeoutable): Cypress$Global,
-  wait(aliases: Array<string>): Cypress$Global,
+  wait(ms: number, options?: Cypress$LoggableTimeoutable): Cypress$Global,
+  wait(alias: string, options?: Cypress$LoggableTimeoutable): any,
+  wait(aliases: Array<string>, options?: Cypress$LoggableTimeoutable): any,
 
-  /**
-   * @see https://docs.cypress.io/api/commands/window.html
+  /**@see https://docs.cypress.io/api/commands/window.html
    */
-  window(options?: Cypress$Loggable): Cypress$Global,
+  window(options?: Cypress$Loggable): Cypress$Window,
 
   /**
    * @see https://docs.cypress.io/api/commands/within.html
@@ -599,7 +615,7 @@ declare interface Cypress$Chainable {
   /**
    * @see https://docs.cypress.io/api/commands/wrap.html
    */
-  wrap(object: { ... }, options?: Cypress$Loggable): Cypress$Global,
+  wrap(object: { ... }, options?: Cypress$Loggable): { [key: string]: any, ... },
 
   /**
    * @see https://docs.cypress.io/api/commands/writefile.html
@@ -608,13 +624,13 @@ declare interface Cypress$Chainable {
     filePath: string,
     contents: Cypress$FileContents,
     options?: Cypress$Timeoutable,
-  ): Cypress$Global,
+  ): Cypress$FileContents,
   writeFile(
     filePath: string,
     contents: Cypress$FileContents,
-    encoding: string,
+    encoding: Cypress$Encoding,
     options?: Cypress$Timeoutable,
-  ): Cypress$Global,
+  ): Cypress$FileContents,
 }
 
 declare interface Cypress$DebugOptions {
