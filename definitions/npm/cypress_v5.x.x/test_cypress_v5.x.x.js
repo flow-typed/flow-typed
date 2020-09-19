@@ -53,10 +53,7 @@ cy.clock(0, ['one', 'two', 'three']).then((clock) => {
 
 cy.closest('test');
 
-const contains = cy.contains('test');
-if (contains) {
-  contains.getBoundingClientRect();
-}
+cy.contains('test').click();
 cy.contains(0);
 cy.contains(/test/);
 cy.contains('test', 'test');
@@ -80,9 +77,9 @@ exec.stderr;
 
 cy.filter('test');
 
-cy.find('test').getBoundingClientRect();
+cy.find('test').click();
 
-cy.first().getBoundingClientRect();
+cy.first().click();
 
 cy.fixture('test').click();
 cy.fixture('path', 'encoding').click();
@@ -112,7 +109,7 @@ cy.hash().click();
 
 cy.its('test').click();
 
-cy.last().getBoundingClientRect();
+cy.last().click();
 
 (cy.location(): Location);
 (cy.location('test'): Location);
@@ -164,7 +161,7 @@ cy.request({ url: 'test' }).then(({ duration }) => {
 
 });
 
-cy.root().getBoundingClientRect();
+cy.root().click();
 
 cy.route('url').as('test');
 cy.route('url', 'response').as('test');

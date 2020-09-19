@@ -243,9 +243,9 @@ declare interface Cypress$Chainable {
   /**
    * @see https://docs.cypress.io/api/commands/clock.html
    */
-  clock(options?: Cypress$Loggable): Cypress$ClockObject,
-  clock(timestamp: number, options?: Cypress$Loggable): Cypress$ClockObject,
-  clock(timestamp: number, functionNames: $ReadOnlyArray<string>, options?: Cypress$Loggable): Cypress$ClockObject,
+  clock(options?: Cypress$Loggable): Promise<Cypress$ClockObject>,
+  clock(timestamp: number, options?: Cypress$Loggable): Promise<Cypress$ClockObject>,
+  clock(timestamp: number, functionNames: $ReadOnlyArray<string>, options?: Cypress$Loggable): Promise<Cypress$ClockObject>,
 
   /**
    * @see https://docs.cypress.io/api/commands/closest.html#Syntax
