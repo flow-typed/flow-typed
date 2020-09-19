@@ -137,6 +137,49 @@ cy.route('method', 'url', 'response').as('test');
 cy.route(() => {}).as('test');
 cy.route({}).as('test');
 
+cy.screenshot().click();
+cy.screenshot('test').click();
+
+cy.scrollIntoView().click();
+
+cy.scrollTo('test').click();
+cy.scrollTo(0, 1).click();
+
+cy.select('test').click();
+cy.select(['one', 'two', 'three']).click();
+
+(cy.server(): void);
+
+cy.setCookie('name', 'value');
+
+cy.should('test').click();
+cy.should('test', 'value').click();
+cy.should('test', 'method', 'value').click();
+cy.should(() => {}).click();
+
+cy.siblings();
+cy.siblings('test');
+
+cy.spy({}, 'test');
+
+cy.spread(() => {});
+cy.spread({ timeout: 1 }, () => {});
+
+cy.submit().click();
+
+cy.then(() => {});
+
+cy.tick(1).then((clock) => {
+  clock.tick(5).then((c) => {
+    c.restore();
+  });
+  click.restore();
+});
+
+(cy.title(): string);
+
+cy.type('test').click();
+
 cy.visit('test').click();
 
 // ---

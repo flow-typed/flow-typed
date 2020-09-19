@@ -477,15 +477,13 @@ declare interface Cypress$Chainable {
   /**
    * @see https://docs.cypress.io/api/commands/select.html
    */
-  select(text: string, options?: Cypress$SelectOptions): Cypress$Global,
   select(value: string, options?: Cypress$SelectOptions): Cypress$Global,
-  select(texts: Array<string>, options?: Cypress$SelectOptions): Cypress$Global,
   select(values: Array<string>, options?: Cypress$SelectOptions): Cypress$Global,
 
   /**
    * @see https://docs.cypress.io/api/commands/server.html
    */
-  server(options?: Cypress$ServerOptions): Cypress$Global,
+  server(options?: Cypress$ServerOptions): void,
 
   /**
    * @see https://docs.cypress.io/api/commands/setcookie.html
@@ -494,7 +492,7 @@ declare interface Cypress$Chainable {
     name: string,
     value: string,
     options?: Cypress$SetCookieOptions,
-  ): Cypress$Global,
+  ): Cypress$SetCookieResponse,
 
   /**
    * @see https://docs.cypress.io/api/commands/should.html
@@ -507,18 +505,19 @@ declare interface Cypress$Chainable {
   /**
    * @see https://docs.cypress.io/api/commands/siblings.html
    */
-  siblings(options?: Cypress$LoggableTimeoutable): Cypress$Global,
-  siblings(selector: string, options?: Cypress$LoggableTimeoutable): Cypress$Global,
+  siblings(options?: Cypress$LoggableTimeoutable): HTMLElement | HTMLCollectionOf<HTMLElement>,
+  siblings(selector: string, options?: Cypress$LoggableTimeoutable): HTMLElement | HTMLCollectionOf<HTMLElement>,
 
   /**
    * @see https://docs.cypress.io/api/commands/spy.html
    */
-  spy(object: Object, method: string): SinonSpy,
+  spy(object: Object, method: string): any,
 
   /**
    * @see https://docs.cypress.io/api/commands/spread.html
    */
-  spread(fn: Function): Cypress$Global,
+  spread(fn: Function): any,
+  spread(options: Cypress$Timeoutable, fn: Function): any,
 
   /**
    * @see https://docs.cypress.io/api/commands/submit.html
@@ -528,17 +527,17 @@ declare interface Cypress$Chainable {
   /**
    * @see https://docs.cypress.io/api/commands/then.html
    */
-  then(fn: Function): Cypress$Global,
+  then(fn: Function): any,
 
   /**
    * @see https://docs.cypress.io/api/commands/tick.html
    */
-  tick(timestamp: number): Cypress$Global,
+  tick(timestamp: number): Promise<Cypress$ClockObject>,
 
   /**
    * @see https://docs.cypress.io/api/commands/title.html
    */
-  title(options?: Cypress$Loggable): Cypress$Global,
+  title(options?: Cypress$Loggable): string,
 
   /**
    * @see https://docs.cypress.io/api/commands/type.html
@@ -629,6 +628,11 @@ declare interface Cypress$Timeoutable {
 
 declare type Cypress$LoggableTimeoutable = { ... } & Cypress$Loggable & Cypress$Timeoutable
 
+declare type Cypress$ClockObject = {|
+  tick: (milliseconds: number) => Cypress$ClockObject,
+  restore: () => void,
+|};
+
 declare type Cypress$BlurOptions = {|
   force?: boolean
 |} & Cypress$Loggable & Cypress$Timeoutable
@@ -687,18 +691,21 @@ declare type Cypress$RouteResponse = {|
 declare type Cypress$ScrollIntoViewOptions = {|
   duration?: number,
   easing?: string,
-  offset?: {| top: number, left: number |},
+  offset?: {|
+    top: number,
+    left: number,
+  |},
 |} & Cypress$Loggable & Cypress$Timeoutable;
 
 declare type Cypress$ScrollToOptions = {|
   duration?: number,
   easing?: string
-|} & Cypress$Loggable & Cypress$Timeoutable
+|} & Cypress$Loggable & Cypress$Timeoutable;
 
 declare type Cypress$SelectOptions = {|
   force?: boolean,
   interval?: number
-|} & Cypress$Loggable & Cypress$Timeoutable
+|} & Cypress$Loggable & Cypress$Timeoutable;
 
 declare interface Cypress$ServerOptions {
   delay?: number,
@@ -715,20 +722,34 @@ declare interface Cypress$ServerOptions {
   whitelist?: Function
 }
 
+declare type Cypress$SetCookieSameSite = 'lax' | 'strict' | 'no_restriction'
+
 declare type Cypress$SetCookieOptions = {|
   path?: string,
   domain?: string,
   secure?: boolean,
   httpOnly?: boolean,
-  expiry?: number
-|} & Cypress$Loggable & Cypress$Timeoutable
+  expiry?: number,
+  sameSite?: Cypress$SetCookieSameSite,
+|} & Cypress$Loggable & Cypress$Timeoutable;
+
+declare type Cypress$SetCookieResponse = {|
+  domain: string,
+  expiry?: number,
+  httpOnly: boolean,
+  name: string,
+  path: string,
+  sameSite?: Cypress$SetCookieSameSite,
+  secure: boolean,
+  value: string,
+|};
 
 declare type Cypress$TypeOptions = {|
   delay?: number,
   force?: boolean,
   release?: boolean,
   interval?: number
-|} & Cypress$Loggable & Cypress$Timeoutable
+|} & Cypress$Loggable & Cypress$Timeoutable;
 
 declare type Cypress$VisitOptions = {|
   url?: string,
@@ -744,7 +765,7 @@ declare type Cypress$VisitOptions = {|
   retryOnStatusCodeFailure?: boolean,
   retryOnNetworkFailure?: boolean,
   timeout?: number,
-|} & Cypress$Loggable & Cypress$Timeoutable
+|} & Cypress$Loggable & Cypress$Timeoutable;
 
 declare type Cypress$Global = Cypress$Chainable;
 
