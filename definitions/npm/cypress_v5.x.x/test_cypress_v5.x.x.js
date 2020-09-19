@@ -78,7 +78,7 @@ cy.getCookies().click();
 cy.go('forward').click();
 cy.go('back').click();
 cy.go(1).click();
-// $FlowFixMe[incompatible-call]
+// $FlowExpectedError[incompatible-call]
 cy.go('test').click();
 
 cy.hash().click();
@@ -117,8 +117,8 @@ cy.prev('test').click();
 cy.readFile('test');
 cy.readFile('path', 'encoding');
 
-(cy.reload(): Window);
-(cy.reload(true): Window);
+cy.reload();
+cy.reload(true);
 
 cy.request('test').body;
 cy.request('test', 'body').headers;
@@ -173,12 +173,14 @@ cy.tick(1).then((clock) => {
   clock.tick(5).then((c) => {
     c.restore();
   });
-  click.restore();
+  clock.restore();
 });
 
 (cy.title(): string);
 
 cy.type('test').click();
+
+cy.uncheck()
 
 cy.visit('test').click();
 
@@ -218,7 +220,7 @@ Cypress.sinon.test();
 
 (Cypress.Cookies.debug(true): void);
 (Cypress.Cookies.preserveOnce('one', 'two', 'three'): void);
-// $FlowFixMe[incompatible-call]
+// $FlowExpectedError[incompatible-call]
 Cypress.Cookies.preserveOnce(1, 2, 3);
 (Cypress.Cookies.defaults({ preserve: '' }): void);
 (Cypress.Cookies.defaults({ preserve: ['session_id', 'remember_token'] }): void);

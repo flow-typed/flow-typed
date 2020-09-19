@@ -417,10 +417,12 @@ declare interface Cypress$Chainable {
   ): any,
 
   /**
+   * Returns the window object
+   *
    * @see https://docs.cypress.io/api/commands/reload.html
    */
-  reload(options?: Cypress$LoggableTimeoutable): Window,
-  reload(forceReload: boolean): Window,
+  reload(options?: Cypress$LoggableTimeoutable): any,
+  reload(forceReload: boolean): any,
 
   /**
    * @see https://docs.cypress.io/api/commands/request.html
@@ -548,6 +550,7 @@ declare interface Cypress$Chainable {
    * @see https://docs.cypress.io/api/commands/uncheck.html
    */
   uncheck(options?: Cypress$CheckOptions): Cypress$Global,
+  uncheck(value: string): Cypress$Global,
   uncheck(values: Array<string>): Cypress$Global,
 
   /**
@@ -629,7 +632,7 @@ declare interface Cypress$Timeoutable {
 declare type Cypress$LoggableTimeoutable = { ... } & Cypress$Loggable & Cypress$Timeoutable
 
 declare type Cypress$ClockObject = {|
-  tick: (milliseconds: number) => Cypress$ClockObject,
+  tick: (milliseconds: number) => Promise<Cypress$ClockObject>,
   restore: () => void,
 |};
 
