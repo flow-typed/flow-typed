@@ -264,7 +264,10 @@ Cypress.config('test');
 (Cypress.config('test', 'value'): void);
 (Cypress.config({}): void);
 
-Cypress.env();
+Cypress.env().prop;
+(Cypress.env('test'): string);
+(Cypress.env('test', 'value'): void);
+(Cypress.env({ prop: '' }): void);
 
 Cypress._.debounce();
 
