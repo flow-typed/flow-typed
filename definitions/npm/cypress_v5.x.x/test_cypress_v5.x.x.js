@@ -111,8 +111,12 @@ cy.its('test').click();
 
 cy.last().click();
 
-(cy.location(): Location);
-(cy.location('test'): Location);
+cy.location().then((loc: Location) => {
+  loc.reload();
+});
+cy.location('test').then((loc: Location) => {
+  loc.reload();
+});
 
 (cy.log('test'): void);
 (cy.log('test', 0, true, () => {}): void);
