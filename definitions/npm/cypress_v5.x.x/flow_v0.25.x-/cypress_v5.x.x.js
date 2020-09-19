@@ -13,17 +13,17 @@ declare type Cypress$Encoding =
 
 declare type Cypress$FileContents = string | Array<any> | { ... };
 
-declare type Cypress$HistoryDirection = "back" | "forward";
+declare type Cypress$HistoryDirection = 'back' | 'forward';
 
 declare type Cypress$HttpMethod =
-  | "GET"
-  | "POST"
-  | "PUT"
-  | "DELETE"
-  | "OPTIONS"
-  | "HEAD"
-  | "TRACE"
-  | "CONNECT";
+  | 'GET'
+  | 'POST'
+  | 'PUT'
+  | 'DELETE'
+  | 'OPTIONS'
+  | 'HEAD'
+  | 'TRACE'
+  | 'CONNECT';
 
 declare type Cypress$ViewportPreset =
   | 'ipad-2'
