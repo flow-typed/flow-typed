@@ -78,12 +78,10 @@ declare interface Cypress$Core {
   /**
    * @see https://docs.cypress.io/api/cypress-api/env.html
    */
-  env: Function,
-  // Can't get overloading to work
-  // env: () => Cypress$Env,
-  // env: (name: string) => string,
-  // env: (name: string, value: string) => void,
-  // env: (object: Cypress$Env, ...rest: Array<void>) => void,
+  env(): Cypress$Env,
+  env(name: string): string,
+  env(name: string, value: string): void,
+  env(object: Cypress$Env, ...rest: Array<void>): void,
 
   /**
    * @see https://docs.cypress.io/api/utilities/_.html
