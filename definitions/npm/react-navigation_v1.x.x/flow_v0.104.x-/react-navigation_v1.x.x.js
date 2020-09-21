@@ -127,6 +127,7 @@ declare module 'react-navigation' {
   declare export type NavigationPopToTopAction = {|
     +type: 'Navigation/POP_TO_TOP',
     +immediate?: boolean,
+    +key?: string,
   |};
   declare export type NavigationPushAction = {|
     +type: 'Navigation/PUSH',
