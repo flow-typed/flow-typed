@@ -57,7 +57,8 @@ declare module "enzyme" {
     parents(selector?: UntypedSelector): this,
     parents<T: React$ElementType>(selector: T): ReactWrapper<T>,
     prop(key: string): any,
-    props(): Object,
+    props(): React$ElementProps<RootComponent>,
+    props<T>(): React$ElementProps<T>,
     reduce<T>(
       fn: (value: T, node: this, index: number) => T,
       initialValue?: T

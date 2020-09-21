@@ -39,18 +39,18 @@ describe('Wrapper', () => {
 
   it('children', () => {
     // Test against chaining returning `any`
-    // $FlowExpectedError wrong return type
+    // $FlowExpectedError[incompatible-cast] wrong return type
     (shallow(<div/>).children(): boolean);
     (shallow(<div/>).children(): ShallowWrapper<'div'>);
 
     mount(<div><DeepInstance onChange={() => {}}/></div>).children(DeepInstance).instance().props.onChange();
-    // $FlowExpectedError
+    // $FlowExpectedError[prop-missing]
     mount(<div><DeepInstance onChange={() => {}}/></div>).children(DeepInstance).instance().props.onChangeX();
   });
 
   it('closest', () => {
     mount(<div><DeepInstance onChange={() => {}}/></div>).closest(DeepInstance).instance().props.onChange();
-    // $FlowExpectedError
+    // $FlowExpectedError[prop-missing]
     mount(<div><DeepInstance onChange={() => {}}/></div>).closest(DeepInstance).instance().props.onChangeX();
   });
 
@@ -61,13 +61,13 @@ describe('Wrapper', () => {
 
   it('containsAllMatchingElements', () => {
     (mount(<div />).containsAllMatchingElements([<div />, <div />]): boolean);
-    // $FlowExpectedError - "nodes should be an Array" (from docs and source code)
+    // $FlowExpectedError[incompatible-call] - "nodes should be an Array" (from docs and source code)
     (mount(<div />).containsAllMatchingElements(<div />));
   });
 
   it('containsAnyMatchingElements', () => {
     (mount(<div />).containsAnyMatchingElements([<div />, <div />]): boolean);
-    // $FlowExpectedError - "nodes should be an Array" (from docs and source code)
+    // $FlowExpectedError[incompatible-call] - "nodes should be an Array" (from docs and source code)
     (mount(<div />).containsAnyMatchingElements(<div />));
   });
 
@@ -85,7 +85,7 @@ describe('Wrapper', () => {
 
   it('filter', () => {
     mount(<div><DeepInstance onChange={() => {}}/></div>).filter(DeepInstance).instance().props.onChange();
-    // $FlowExpectedError
+    // $FlowExpectedError[prop-missing]
     mount(<div><DeepInstance onChange={() => {}}/></div>).filter(DeepInstance).instance().props.onChangeX();
   });
 
@@ -97,7 +97,7 @@ describe('Wrapper', () => {
     shallow(<div />).find(ClassComponent);
     shallow(<div />).find(StatelessComponent);
     shallow(<div />).find({ a: 1 });
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
     shallow(<div />).find(true);
     shallow(<div/>).find("someSelector");
     shallow(<div/>).renderProp("render")(1, "hi").find("SomeSelector");
@@ -109,7 +109,7 @@ describe('Wrapper', () => {
     //   .find(123)
 
     mount(<div><DeepInstance onChange={() => {}}/></div>).find(DeepInstance).instance().props.onChange();
-    // $FlowExpectedError
+    // $FlowExpectedError[prop-missing]
     mount(<div><DeepInstance onChange={() => {}}/></div>).find(DeepInstance).instance().props.onChangeX();
   });
 
@@ -132,12 +132,12 @@ describe('Wrapper', () => {
 
     shallow(<div/>).instance();
 
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-cast]
     (shallow(<TestInstance />).instance().method: string);
     shallow(<TestInstance />).instance().method();
     (shallow(<TestInstance />).instance().method: () => 'test');
 
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-cast]
     (mount(<TestInstance />).instance().method: string);
     mount(<TestInstance />).instance().method();
     (mount(<TestInstance />).instance().method: () => 'test');
@@ -168,7 +168,7 @@ describe('Wrapper', () => {
         const shallowWrapper = shallow(<div getNumber={() => {return 'not a number';}} />);
         const string = shallowWrapper.invoke('getNumber')();
 
-        // $FlowExpectedError
+        // $FlowExpectedError[cannot-resolve-name]
         name.toFixed();
       });
     });
@@ -191,7 +191,7 @@ describe('Wrapper', () => {
 
   it('parents', () => {
     mount(<div><DeepInstance onChange={() => {}}/></div>).parents(DeepInstance).instance().props.onChange();
-    // $FlowExpectedError
+    // $FlowExpectedError[prop-missing]
     mount(<div><DeepInstance onChange={() => {}}/></div>).parents(DeepInstance).instance().props.onChangeX();
   });
 
@@ -205,10 +205,10 @@ describe('Wrapper', () => {
 
   it('reduce', () => {
     (mount(<div />).reduce((acc: number, node, i) => i + 1): Array<number>);
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-cast]
     (mount(<div />).reduce((acc: number, node, i) => i + 1): Array<boolean>);
     (mount(<div />).reduce((acc, node, i) => i + 1, 0): Array<number>);
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-cast]
     (mount(<div />).reduce((acc, node, i) => i + 1, 0): Array<boolean>);
   });
 
@@ -224,21 +224,21 @@ describe('Wrapper', () => {
 
   it('simulateError', () => {
     (mount(<div />).simulateError(new Error('error')): ReactWrapper<'div'>);
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
     (mount(<div />).simulateError('error'): ReactWrapper<'div'>);
     (shallow(<div />).simulateError(new Error('error')): ShallowWrapper<'div'>);
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
     (shallow(<div />).simulateError('error'): ShallowWrapper<'div'>);
   });
 
   it('setProps', () => {
     (mount(<div />).setProps({}, () => {}): ReactWrapper<'div'>);
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
     (mount(<div />).setProps({}, null): ReactWrapper<'div'>);
     (mount(<div />).setProps({}): ReactWrapper<'div'>);
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
     (mount(<div />).setProps(): ReactWrapper<'div'>);
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
     (mount(<div />).setProps(null): ReactWrapper<'div'>);
   });
 });
@@ -279,9 +279,9 @@ describe('ShallowWrapper', () => {
 
   it('deprecated methods should not be present', () => {
     // shallow's getNode(s) was replaced by getElement(s) in enzyme v3
-    // $FlowExpectedError
+    // $FlowExpectedError[prop-missing]
     shallow(<div/>).getNode();
-    // $FlowExpectedError
+    // $FlowExpectedError[prop-missing]
     shallow(<div/>).getNodes();
   });
 });
@@ -290,9 +290,9 @@ describe('ShallowWrapper', () => {
 describe('mount', () => {
   it('deprecated methods should not be present', () => {
     // mount's getNode(s) were removed in enzyme v3
-    // $FlowExpectedError
+    // $FlowExpectedError[prop-missing]
     mount(<div />).getNode();
-    // $FlowExpectedError
+    // $FlowExpectedError[prop-missing]
     mount(<div />).getNodes();
   });
 });
