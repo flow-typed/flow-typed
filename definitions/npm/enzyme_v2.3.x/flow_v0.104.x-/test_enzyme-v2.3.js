@@ -30,7 +30,7 @@ const StatelessComponent = () => <div />;
 shallow(<div />).find(ClassComponent);
 shallow(<div />).find(StatelessComponent);
 shallow(<div />).find({ a: 1 });
-// $FlowExpectedError[incompatible-cast]
+// $FlowExpectedError[incompatible-call]
 shallow(<div />).find(true);
 
 shallowWrapper.instance();
