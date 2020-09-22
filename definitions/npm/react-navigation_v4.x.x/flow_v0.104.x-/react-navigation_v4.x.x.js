@@ -850,7 +850,7 @@ declare module 'react-navigation' {
       immediate?: boolean,
     |}) => NavigationPopAction,
     popToTop: (payload: {|
-      immediate?: boolean
+      immediate?: boolean,
       key?: string,
     |}) => NavigationPopToTopAction,
     push: (payload: {|
