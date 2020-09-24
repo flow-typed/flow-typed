@@ -81,7 +81,7 @@ declare interface Cypress$Core {
   env(): Cypress$Env,
   env(name: string): string,
   env(name: string, value: string): void,
-  env(object: Cypress$Env, ...rest: Array<void>): void,
+  env(object: Cypress$Env, ...rest: Array<any>): void,
 
   /**
    * @see https://docs.cypress.io/api/utilities/_.html
