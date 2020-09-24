@@ -1,5 +1,14 @@
 declare module '@reduxjs/toolkit' {
-  import type { AnyAction, Action, Reducer } from 'redux';
+  // These types are copied directly from the redux libdef.
+  // Importing them in this libdef causes a loss in type coverage.
+  // import type { Action, Reducer } from 'redux';
+
+  declare type Action<T> = {
+    type: T,
+    ...
+  };
+
+  declare type Reducer<S, A> = (state: S | void, action: A) => S;
 
   declare interface TypedActionCreator<Type = string> {
     (...args: any[]): Action<Type>;
@@ -95,7 +104,7 @@ declare module '@reduxjs/toolkit' {
    *             It might be removed in the future.
    * @public
    */
-  declare type Actions<T = string> = Record<T, Action>;
+  declare type Actions<T = string> = Record<T, Action<T>>;
 
 
   /**
@@ -105,7 +114,7 @@ declare module '@reduxjs/toolkit' {
    */
   declare interface BaseActionCreator<P, T = string> {
     type: T;
-    match: Action<unknown> => boolean;
+    match: Action<mixed> => boolean;
   }
 
   /**
