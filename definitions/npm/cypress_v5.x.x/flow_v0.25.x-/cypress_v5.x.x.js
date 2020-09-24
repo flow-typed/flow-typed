@@ -62,9 +62,9 @@ declare interface Cypress$Core {
    *
    * @see https://docs.cypress.io/api/cypress-api/custom-commands.html
    */
-  addChildCommand(name: string, fn: Function): void,
-  addDualCommand(name: string, fn: Function): void,
-  addParentCommand(name: string, fn: Function): void,
+  addChildCommand(name: string, fn: (...args: Array<any>) => any): void,
+  addDualCommand(name: string, fn: (...args: Array<any>) => any): void,
+  addParentCommand(name: string, fn: (...args: Array<any>) => any): void,
 
   /**
    *
@@ -110,7 +110,7 @@ declare interface Cypress$Core {
   /**
    * @see https://docs.cypress.io/api/utilities/promise.html
    */
-  Promise: ((resolve: Function, reject: Function) => void) => Promise<any>,
+  Promise: ((resolve: (...args: Array<any>) => any, reject: (...args: Array<any>) => any) => void) => Promise<any>,
   /**
    * @see https://docs.cypress.io/api/utilities/sinon.html
    */
@@ -135,10 +135,10 @@ declare interface Cypress$Core {
       name: string,
       options: {|
         prevSubject: boolean | string | Array<any>,
-      |} | Function,
-      callbackFn?: Function,
+      |} | (...args: Array<any>) => any,
+      callbackFn?: (...args: Array<any>) => any,
     ) => void,
-    overwrite: (name: string, callbackFn: Function) => void,
+    overwrite: (name: string, callbackFn: (...args: Array<any>) => any) => void,
   |},
 
   /**
@@ -184,7 +184,7 @@ declare interface Cypress$Chainable {
   and(chainers: string): Cypress$Global,
   and(chainers: string, value: any): Cypress$Global,
   and(chainers: string, method: string, value: any): Cypress$Global,
-  and(fn: Function): Cypress$Global,
+  and(fn: (...args: Array<any>) => any): Cypress$Global,
 
   /**
    * @see https://docs.cypress.io/api/commands/as.html
@@ -280,7 +280,7 @@ declare interface Cypress$Chainable {
   /**
    * @see https://docs.cypress.io/api/commands/each.html
    */
-  each(fn: Function): Cypress$Global,
+  each(fn: (...args: Array<any>) => any): Cypress$Global,
 
   /**
    * @see https://docs.cypress.io/api/commands/end.html#Syntax
@@ -468,7 +468,7 @@ declare interface Cypress$Chainable {
   route(url: string, response: any): Cypress$RouteResponse,
   route(method: string, url: string): Cypress$RouteResponse,
   route(method: string, url: string, response: any): Cypress$RouteResponse,
-  route(fn: Function): Cypress$RouteResponse,
+  route(fn: (...args: Array<any>) => any): Cypress$RouteResponse,
   route(options: Cypress$RouteOptions): Cypress$RouteResponse,
 
   /**
@@ -521,7 +521,7 @@ declare interface Cypress$Chainable {
   should(chainers: string): Cypress$Global,
   should(chainers: string, value: any): Cypress$Global,
   should(chainers: string, method: string, value: any): Cypress$Global,
-  should(fn: Function): Cypress$Global,
+  should(fn: (...args: Array<any>) => any): Cypress$Global,
 
   /**
    * @see https://docs.cypress.io/api/commands/siblings.html
@@ -537,8 +537,8 @@ declare interface Cypress$Chainable {
   /**
    * @see https://docs.cypress.io/api/commands/spread.html
    */
-  spread(fn: Function): any,
-  spread(options: Cypress$Timeoutable, fn: Function): any,
+  spread(fn: (...args: Array<any>) => any): any,
+  spread(options: Cypress$Timeoutable, fn: (...args: Array<any>) => any): any,
 
   /**
    * @see https://docs.cypress.io/api/commands/submit.html
@@ -548,7 +548,7 @@ declare interface Cypress$Chainable {
   /**
    * @see https://docs.cypress.io/api/commands/then.html
    */
-  then(fn: Function): any,
+  then(fn: (...args: Array<any>) => any): any,
 
   /**
    * @see https://docs.cypress.io/api/commands/tick.html
@@ -611,8 +611,8 @@ declare interface Cypress$Chainable {
   /**
    * @see https://docs.cypress.io/api/commands/within.html
    */
-  within(fn: Function): Cypress$Global,
-  within(options: Cypress$Loggable, fn: Function): Cypress$Global,
+  within(fn: (...args: Array<any>) => any): Cypress$Global,
+  within(options: Cypress$Loggable, fn: (...args: Array<any>) => any): Cypress$Global,
 
   /**
    * @see https://docs.cypress.io/api/commands/wrap.html
@@ -700,9 +700,9 @@ declare interface Cypress$RouteOptions {
   delay?: number,
   headers?: { ... },
   force404?: boolean,
-  onRequest?: Function,
-  onResponse?: Function,
-  onAbort?: Function
+  onRequest?: (...args: Array<any>) => any,
+  onResponse?: (...args: Array<any>) => any,
+  onAbort?: (...args: Array<any>) => any
 }
 
 declare type Cypress$RouteResponse = {|
@@ -734,13 +734,13 @@ declare interface Cypress$ServerOptions {
   status?: number,
   headers?: { ... },
   response?: any,
-  onRequest?: Function,
-  onResponse?: Function,
-  onAbort?: Function,
+  onRequest?: (...args: Array<any>) => any,
+  onResponse?: (...args: Array<any>) => any,
+  onAbort?: (...args: Array<any>) => any,
   enable?: boolean,
   force404?: boolean,
   urlMatchingOptions?: { ... },
-  whitelist?: Function
+  whitelist?: (...args: Array<any>) => any
 }
 
 declare type Cypress$SetCookieSameSite = 'lax' | 'strict' | 'no_restriction'
@@ -781,8 +781,8 @@ declare type Cypress$VisitOptions = {|
   log?: boolean,
   auth?: { ... },
   failOnStatusCode?: boolean,
-  onBeforeLoad?: Function,
-  onLoad?: Function,
+  onBeforeLoad?: (...args: Array<any>) => any,
+  onLoad?: (...args: Array<any>) => any,
   retryOnStatusCodeFailure?: boolean,
   retryOnNetworkFailure?: boolean,
   timeout?: number,
@@ -800,4 +800,4 @@ declare var cy: Cypress$Global;
  */
 declare var Cypress: Cypress$Core;
 
-declare var expect: Function;
+declare var expect: (...args: Array<any>) => any;
