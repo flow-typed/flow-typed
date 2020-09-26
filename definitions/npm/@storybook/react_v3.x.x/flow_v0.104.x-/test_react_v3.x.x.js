@@ -14,38 +14,39 @@ import {
 } from '@storybook/react';
 
 const Button = props => <button {...props} />;
+const nodeModule = module;
 
 const Decorator = story => <div>{story()}</div>;
 
 describe('The `storiesOf` function', () => {
   it('should validate on default usage', () => {
-    storiesOf('', module);
+    storiesOf('', nodeModule);
   });
 
   it('should error on invalid options', () => {
     // $FlowExpectedError[incompatible-call]
-    storiesOf([], module);
+    storiesOf([], nodeModule);
     // $FlowExpectedError[incompatible-call]
     storiesOf('', 123);
   });
 
   it('should error on invalid method call', () => {
     // $FlowExpectedError[prop-missing]
-    storiesOf('', module).foo('', () => <div />);
+    storiesOf('', nodeModule).foo('', () => <div />);
   });
 });
 
 describe('The `add` method', () => {
   it('should validate on default usage (element)', () => {
-    storiesOf('', module).add('', () => <div />);
+    storiesOf('', nodeModule).add('', () => <div />);
   });
 
   it('should validate on default usage (component)', () => {
-    storiesOf('', module).add('', () => <Button>test</Button>);
+    storiesOf('', nodeModule).add('', () => <Button>test</Button>);
   });
 
   it('should validate on default usage (array)', () => {
-    storiesOf('', module).add('', () => [
+    storiesOf('', nodeModule).add('', () => [
       <Button>test</Button>,
       <Button>test</Button>,
       <Button>test</Button>,
@@ -54,13 +55,13 @@ describe('The `add` method', () => {
 
   it('should error on invalid default usage', () => {
     // $FlowExpectedError[incompatible-call]
-    storiesOf('', module).add('', () => '');
+    storiesOf('', nodeModule).add('', () => '');
     // $FlowExpectedError[incompatible-call]
-    storiesOf('', module).add('', () => null);
+    storiesOf('', nodeModule).add('', () => null);
   });
 
   it('should validate when unwrapping arguments', () => {
-    storiesOf('', module).add('', ({ kind, story }) => (
+    storiesOf('', nodeModule).add('', ({ kind, story }) => (
       <div>
         {kind} {story}
       </div>
@@ -69,7 +70,7 @@ describe('The `add` method', () => {
 
   it('should error when unwrapping invalid arguments', () => {
     // $FlowExpectedError[prop-missing]
-    storiesOf('', module).add('', ({ kind, story, foo }) => (
+    storiesOf('', nodeModule).add('', ({ kind, story, foo }) => (
       <div>
         {kind} {story} {foo}
       </div>
@@ -79,7 +80,7 @@ describe('The `add` method', () => {
 
 describe('The `addDecorator` function', () => {
   it('should validate on default usage (local)', () => {
-    storiesOf('', module)
+    storiesOf('', nodeModule)
       .addDecorator(Decorator)
       .add('', () => <div />);
   });
@@ -105,7 +106,7 @@ describe('The `forceReRender` function', () => {
 
 describe('The `configure` function', () => {
   it('should validate on default usage', () => {
-    configure(() => undefined, module);
+    configure(() => undefined, nodeModule);
   });
 });
 
@@ -124,7 +125,7 @@ describe('The `setAddon` function', () => {
 
     setAddon(TestAddon);
 
-    storiesOf<Addon>('TestAddon', module)
+    storiesOf<Addon>('TestAddon', nodeModule)
       .test('', () => <div />)
       .test('', () => <div />)
       .add('', () => <div />)

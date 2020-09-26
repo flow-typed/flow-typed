@@ -27,14 +27,14 @@ describe('The `storiesOf` function', () => {
   });
 
   it('should error on invalid options', () => {
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
     storiesOf([], module);
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
     storiesOf('', 123);
   });
 
   it('should error on invalid method call', () => {
-    // $FlowExpectedError
+    // $FlowExpectedError[prop-missing]
     storiesOf('', module).foo('', () => <div />);
   });
 });
@@ -63,16 +63,16 @@ describe('The `add` method', () => {
   });
 
   it('should error on invalid default usage (parameters)', () => {
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
     storiesOf('', module).add('', () => <Button>test</Button>, '');
-    // $FlowExpectedError
+    // $FlowExpectedError[prop-missing]
     storiesOf('', module).add('', parameters, () => <Button>test</Button>);
   });
 
   it('should error on invalid default usage', () => {
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
     storiesOf('', module).add('', () => '');
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
     storiesOf('', module).add('', () => null);
   });
 
@@ -85,7 +85,7 @@ describe('The `add` method', () => {
   });
 
   it('should error when unwrapping invalid arguments', () => {
-    // $FlowExpectedError
+    // $FlowExpectedError[prop-missing]
     storiesOf('', module).add('', ({ kind, story, foo }) => (
       <div>
         {kind} {story} {foo}
@@ -118,9 +118,9 @@ describe('The `addDecorator` function', () => {
   });
 
   it('should error on invalid usage (global)', () => {
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
     addParameters();
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
     addParameters('');
   });
 });
@@ -131,9 +131,9 @@ describe('The `clearDecorators` function', () => {
   });
 
   it('should error on invalid usage (global)', () => {
-    // $FlowExpectedError
+    // $FlowExpectedError[extra-arg]
     clearDecorators(true);
-    // $FlowExpectedError
+    // $FlowExpectedError[extra-arg]
     clearDecorators(parameters);
   });
 });
