@@ -14,7 +14,7 @@ import {
   <div />
 </NativeRouter>;
 
-// $FlowExpectedError
+// $FlowExpectedError[incompatible-type]
 <NativeRouter keyLength="five" />;
 
 // Link
@@ -33,7 +33,7 @@ import {
   About
 </Link>;
 
-// $FlowExpectedError
+// $FlowExpectedError[incompatible-type]
 <Link to={3} />;
 
 // DeepLinking

@@ -41,7 +41,7 @@ describe("react-router-dom", () => {
     });
 
     it("raises error if passed incorrect props", () => {
-      // $FlowExpectedError - basename must be a string
+      // $FlowExpectedError[incompatible-type] - basename must be a string
       <BrowserRouter basename={{}} />;
     });
   });
@@ -62,7 +62,7 @@ describe("react-router-dom", () => {
     });
 
     it("raises error if passed incorrect props", () => {
-      // $FlowExpectedError - hashType must be a string
+      // $FlowExpectedError[incompatible-type] - hashType must be a string
       <HashRouter hashType="magic" />;
     });
   });
@@ -101,10 +101,10 @@ describe("react-router-dom", () => {
     });
 
     it("raises error if passed incorrect props", () => {
-      // $FlowExpectedError - to prop is required
+      // $FlowExpectedError[prop-missing] - to prop is required
       <Link />;
 
-      // $FlowExpectedError - to prop must be a string or LocationShape
+      // $FlowExpectedError[incompatible-type] - to prop must be a string or LocationShape
       <Link to={[]} />;
     });
   });
@@ -152,10 +152,10 @@ describe("react-router-dom", () => {
     });
 
     it("raises error if passed incorrect props", () => {
-      // $FlowExpectedError - to prop is required
+      // $FlowExpectedError[prop-missing] - to prop is required
       <NavLink />;
 
-      // $FlowExpectedError - to prop must be a string or LocationShape
+      // $FlowExpectedError[incompatible-type] - to prop must be a string or LocationShape
       <NavLink to={[]} />;
     });
   });
@@ -181,10 +181,10 @@ describe("react-router-dom", () => {
     });
 
     it("raises an error if passed invalid argument", () => {
-      // $FlowExpectedError - pathname argument is required
+      // $FlowExpectedError[incompatible-call] - pathname argument is required
       matchPath();
 
-      // $FlowExpectedError - matchPath returns Match or null
+      // $FlowExpectedError[incompatible-type] - matchPath returns Match or null
       const matchError: string = matchPath("/the/pathname", {
         path: "the/:dynamicId"
       });
@@ -225,15 +225,15 @@ describe("react-router-dom", () => {
           s
         }: Props) => <div />;
         const WrappedComp = withRouter(Comp);
-        // $FlowExpectedError - missing prop "s"
+        // $FlowExpectedError[prop-missing] - missing prop "s"
         <WrappedComp />;
-        // $FlowExpectedError - wrong type
+        // $FlowExpectedError[incompatible-type] - wrong type
         <WrappedComp s={1} />;
 
         const ChainedHOC = withRouter(WrappedComp);
-        // $FlowExpectedError - missing prop "s"
+        // $FlowExpectedError[prop-missing] - missing prop "s"
         <ChainedHOC />;
-        // $FlowExpectedError - wrong type
+        // $FlowExpectedError[incompatible-type] - wrong type
         <ChainedHOC s={1} />;
       });
 
@@ -250,7 +250,7 @@ describe("react-router-dom", () => {
 
       it("errors if using block() incorrectly", () => {
         const Comp = ({history}: { history: RouterHistory, ... }) => {
-          // $FlowExpectedError - wrong param
+          // $FlowExpectedError[incompatible-call] - wrong param
           history.block(false);
 
           // These are valid
@@ -286,15 +286,15 @@ describe("react-router-dom", () => {
           }
         }
         const WrappedComp = withRouter(Comp);
-        // $FlowExpectedError - missing prop "s"
+        // $FlowExpectedError[prop-missing] - missing prop "s"
         <WrappedComp />;
-        // $FlowExpectedError - wrong type
+        // $FlowExpectedError[incompatible-type] - wrong type
         <WrappedComp s={1} />;
 
         const ChainedHOC = withRouter(WrappedComp);
-        // $FlowExpectedError - missing prop "s"
+        // $FlowExpectedError[prop-missing] - missing prop "s"
         <ChainedHOC />;
-        // $FlowExpectedError - wrong type
+        // $FlowExpectedError[incompatible-type] - wrong type
         <ChainedHOC s={1} />;
       });
 
@@ -326,11 +326,11 @@ describe("react-router-dom", () => {
           }
         }
         const WrappedComp = withRouter(Comp);
-        // $FlowExpectedError - wrong type
+        // $FlowExpectedError[incompatible-type] - wrong type
         <WrappedComp s={123} />;
 
         const ChainedHOC = withRouter(WrappedComp);
-        // $FlowExpectedError - wrong type
+        // $FlowExpectedError[incompatible-type] - wrong type
         <ChainedHOC s={123} />;
       });
     });
@@ -355,13 +355,13 @@ describe("react-router-dom", () => {
     });
 
     it("raises error if passed incorrect props", () => {
-      // $FlowExpectedError - to prop is required
+      // $FlowExpectedError[prop-missing] - to prop is required
       <Redirect />;
 
-      // $FlowExpectedError - to prop must be a string or LocationShape
+      // $FlowExpectedError[incompatible-type] - to prop must be a string or LocationShape
       <Redirect to={[]} />;
 
-      // $FlowExpectedError - unexpected prop xxx
+      // $FlowExpectedError[prop-missing] - unexpected prop xxx
       <Redirect to='/x' xxx="1"/>;
     });
   });
@@ -392,10 +392,10 @@ describe("react-router-dom", () => {
     });
 
     it("raises error if passed incorrect props", () => {
-      // $FlowExpectedError - prop must be a string
+      // $FlowExpectedError[incompatible-type] - prop must be a string
       <Route path={123} />;
 
-      // $FlowExpectedError - unexpected prop xxx
+      // $FlowExpectedError[prop-missing] - unexpected prop xxx
       <Route xxx="1" />;
     });
   })
@@ -425,7 +425,7 @@ describe("react-router-dom", () => {
         exact: true,
       });
 
-      // $FlowExpectedError
+      // $FlowExpectedError[incompatible-call]
       const matchObject2: Match = useRouteMatch({
         sensitive: 'foo',
       });
