@@ -2,15 +2,15 @@ type NodeModule = typeof module;
 
 declare module '@storybook/react' {
   declare type Context = {|
-    argTypes: { [key: string]: any, ... },
-    args: { [key: string]: any, ... },
-    globals: { [key: string]: any, ... },
-    hooks: { [key: string]: any, ... },
-    id: string,
-    kind: string,
-    name: string,
-    parameters: { [key: string]: any, ... },
-    story: string,
+    +argTypes: { [key: string]: any, ... },
+    +args: { [key: string]: any, ... },
+    +globals: { [key: string]: any, ... },
+    +hooks: { [key: string]: any, ... },
+    +id: string,
+    +kind: string,
+    +name: string,
+    +parameters: { [key: string]: any, ... },
+    +story: string,
   |};
   declare type Renderable =
     | string
