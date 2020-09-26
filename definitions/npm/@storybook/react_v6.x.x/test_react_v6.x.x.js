@@ -21,35 +21,37 @@ const Decorator = story => <div>{story()}</div>;
 
 const parameters = { param: 'test' };
 
+const nodeModule = module;
+
 describe('The `storiesOf` function', () => {
   it('should validate on default usage', () => {
-    storiesOf('', module);
+    storiesOf('', nodeModule);
   });
 
   it('should error on invalid options', () => {
-    // $FlowExpectedError
-    storiesOf([], module);
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
+    storiesOf([], nodeModule);
+    // $FlowExpectedError[incompatible-call]
     storiesOf('', 123);
   });
 
   it('should error on invalid method call', () => {
-    // $FlowExpectedError
-    storiesOf('', module).foo('', () => <div />);
+    // $FlowExpectedError[prop-missing]
+    storiesOf('', nodeModule).foo('', () => <div />);
   });
 });
 
 describe('The `add` method', () => {
   it('should validate on default usage (element)', () => {
-    storiesOf('', module).add('', () => <div />);
+    storiesOf('', nodeModule).add('', () => <div />);
   });
 
   it('should validate on default usage (component)', () => {
-    storiesOf('', module).add('', () => <Button>test</Button>);
+    storiesOf('', nodeModule).add('', () => <Button>test</Button>);
   });
 
   it('should validate on default usage (array)', () => {
-    storiesOf('', module).add('', () => [
+    storiesOf('', nodeModule).add('', () => [
       <Button>test</Button>,
       <Button>test</Button>,
       <Button>test</Button>,
@@ -57,37 +59,37 @@ describe('The `add` method', () => {
   });
 
   it('should validate on default usage (string)', () => {
-    storiesOf('', module).add('', () => '');
+    storiesOf('', nodeModule).add('', () => '');
   });
 
   it('should validate on default usage (number)', () => {
-    storiesOf('', module).add('', () => 0);
+    storiesOf('', nodeModule).add('', () => 0);
   });
 
   it('should validate on default usage (parameters)', () => {
-    storiesOf('', module).add('', () => <Button>test</Button>, {
+    storiesOf('', nodeModule).add('', () => <Button>test</Button>, {
       param: 'test',
     });
   });
 
   it('should error on invalid default usage (parameters)', () => {
     // $FlowExpectedError
-    storiesOf('', module).add('', () => <Button>test</Button>, '');
+    storiesOf('', nodeModule).add('', () => <Button>test</Button>, '');
     // $FlowExpectedError
-    storiesOf('', module).add('', parameters, () => <Button>test</Button>);
+    storiesOf('', nodeModule).add('', parameters, () => <Button>test</Button>);
   });
 
   it('should error on invalid default usage', () => {
     // $FlowExpectedError
-    storiesOf('', module).add('', () => () => null);
+    storiesOf('', nodeModule).add('', () => () => null);
     // $FlowExpectedError
-    storiesOf('', module).add('', () => Button);
+    storiesOf('', nodeModule).add('', () => Button);
     // $FlowExpectedError
-    storiesOf('', module).add('', () => null);
+    storiesOf('', nodeModule).add('', () => null);
   });
 
   it('should validate when unwrapping arguments', () => {
-    storiesOf('', module).add('', ({ kind, story }) => (
+    storiesOf('', nodeModule).add('', ({ kind, story }) => (
       <div>
         {kind} {story}
       </div>
@@ -96,7 +98,7 @@ describe('The `add` method', () => {
 
   it('should error when unwrapping invalid arguments', () => {
     // $FlowExpectedError
-    storiesOf('', module).add('', ({ kind, story, foo }) => (
+    storiesOf('', nodeModule).add('', ({ kind, story, foo }) => (
       <div>
         {kind} {story} {foo}
       </div>
@@ -106,7 +108,7 @@ describe('The `add` method', () => {
 
 describe('The `addDecorator` function', () => {
   it('should validate on default usage (local)', () => {
-    storiesOf('', module)
+    storiesOf('', nodeModule)
       .addDecorator(Decorator)
       .add('', () => <div />);
   });
@@ -118,7 +120,7 @@ describe('The `addDecorator` function', () => {
 
 describe('The `addParameters` function', () => {
   it('should validate on default usage (local)', () => {
-    storiesOf('', module)
+    storiesOf('', nodeModule)
       .addParameters(parameters)
       .add('', () => <div />);
   });
@@ -164,7 +166,7 @@ describe('The `forceReRender` function', () => {
 
 describe('The `configure` function', () => {
   it('should validate on default usage', () => {
-    configure(() => undefined, module);
+    configure(() => undefined, nodeModule);
   });
 });
 
@@ -183,7 +185,7 @@ describe('The `setAddon` function', () => {
 
     setAddon(TestAddon);
 
-    storiesOf<Addon>('TestAddon', module)
+    storiesOf<Addon>('TestAddon', nodeModule)
       .test('', () => <div />)
       .test('', () => <div />)
       .add('', () => <div />)
