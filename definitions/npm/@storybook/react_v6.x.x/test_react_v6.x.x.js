@@ -106,9 +106,8 @@ getStorybook().forEach(({ kind, stories }) =>
 );
 
 // The `forceReRender` function
-  it('should validate on default usage', () => {
-    forceReRender();
-  });
+it('should validate on default usage', () => {
+  forceReRender();
 });
 
 // The `configure` function
