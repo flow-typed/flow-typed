@@ -1,3 +1,5 @@
+type NodeModule = typeof module;
+
 declare module '@storybook/react' {
   declare type Context = {|
     +argTypes: { [key: string]: any, ... },
@@ -52,10 +54,10 @@ declare module '@storybook/react' {
   declare function addDecorator(decorator: StoryDecorator): void;
   declare function addParameters(parameters: DecoratorParameters): void;
   declare function clearDecorators(): void;
-  declare function configure(fn: () => void, module: any): void;
+  declare function configure(fn: () => void, module: NodeModule): void;
   declare function setAddon(addon: Object): void;
-  declare function storiesOf(name: string, module: any): Story;
-  declare function storiesOf<T>(name: string, module: any): Story & T;
+  declare function storiesOf(name: string, module: NodeModule): Story;
+  declare function storiesOf<T>(name: string, module: NodeModule): Story & T;
   declare function forceReRender(): void;
 
   declare function getStorybook(): Array<StoryBucket>;
