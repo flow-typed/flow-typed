@@ -22,66 +22,66 @@ const Decorator = story => <div>{story()}</div>;
 const parameters = { param: 'test' };
 
 // The `storiesOf` function
-storiesOf('', nodeModule);
+storiesOf('', module);
 
 // $FlowExpectedError[incompatible-call]
-storiesOf([], nodeModule);
+storiesOf([], module);
 // $FlowExpectedError[incompatible-call]
 storiesOf('', 123);
 // $FlowExpectedError[prop-missing]
-storiesOf('', nodeModule).foo('', () => <div />);
+storiesOf('', module).foo('', () => <div />);
 
 // The `add` method
-storiesOf('', nodeModule).add('', () => <div />);
-storiesOf('', nodeModule).add('', () => <Button>test</Button>);
-storiesOf('', nodeModule).add('', () => [
+storiesOf('', module).add('', () => <div />);
+storiesOf('', module).add('', () => <Button>test</Button>);
+storiesOf('', module).add('', () => [
   <Button>test</Button>,
   <Button>test</Button>,
   <Button>test</Button>,
 ]);
 
-storiesOf('', nodeModule).add('', () => '');
+storiesOf('', module).add('', () => '');
 
-storiesOf('', nodeModule).add('', () => 0);
+storiesOf('', module).add('', () => 0);
 
-storiesOf('', nodeModule).add('', () => <Button>test</Button>, {
+storiesOf('', module).add('', () => <Button>test</Button>, {
   param: 'test',
 });
 
 // $FlowExpectedError[incompatible-call]
-storiesOf('', nodeModule).add('', () => <Button>test</Button>, '');
+storiesOf('', module).add('', () => <Button>test</Button>, '');
 // $FlowExpectedError[prop-missing]
-storiesOf('', nodeModule).add('', parameters, () => <Button>test</Button>);
+storiesOf('', module).add('', parameters, () => <Button>test</Button>);
 
 // $FlowExpectedError[incompatible-call]
-storiesOf('', nodeModule).add('', () => () => null);
+storiesOf('', module).add('', () => () => null);
 // $FlowExpectedError[incompatible-call]
-storiesOf('', nodeModule).add('', () => Button);
+storiesOf('', module).add('', () => Button);
 // $FlowExpectedError[incompatible-call]
-storiesOf('', nodeModule).add('', () => null);
+storiesOf('', module).add('', () => null);
 
-storiesOf('', nodeModule).add('', ({ kind, story }) => (
+storiesOf('', module).add('', ({ kind, story }) => (
   <div>
     {kind} {story}
   </div>
 ));
 
 // $FlowExpectedError[prop-missing]
-storiesOf('', nodeModule).add('', ({ kind, story, foo }) => (
+storiesOf('', module).add('', ({ kind, story, foo }) => (
   <div>
     {kind} {story} {foo}
   </div>
 ));
 
 // The `addDecorator` function
-storiesOf('', nodeModule)
+storiesOf('', module)
   .addDecorator(Decorator)
   .add('', () => <div />);
 
 addDecorator(Decorator);
 
 // The `addParameters` function
-storiesOf('', nodeModule)
+storiesOf('', module)
   .addParameters(parameters)
   .add('', () => <div />);
 
@@ -111,7 +111,7 @@ it('should validate on default usage', () => {
 });
 
 // The `configure` function
-configure(() => undefined, nodeModule);
+configure(() => undefined, module);
 
 // The `setAddon` function
 interface Addon {
@@ -127,7 +127,7 @@ const TestAddon: Addon = {
 
 setAddon(TestAddon);
 
-storiesOf<Addon>('TestAddon', nodeModule)
+storiesOf<Addon>('TestAddon', module)
   .test('', () => <div />)
   .test('', () => <div />)
   .add('', () => <div />)
