@@ -3,41 +3,41 @@ import * as history from 'history';
 
 /* Trivial case */
 
-// $FlowExpectedError
+// $FlowExpectedError[prop-missing]
 history.foo();
 
 
 /* history.createHistory() */
 const historyNative = history.createHashHistory();
 historyNative.go(1)
-// $FlowExpectedError
+// $FlowExpectedError[incompatible-call]
 historyNative.go('')
 historyNative.goBack()
 historyNative.goForward()
 
-// $FlowExpectedError
+// $FlowExpectedError[prop-missing]
 historyNative.foo
 
 /* history.createMemoryHistory() */
 const historyMemory = history.createMemoryHistory();
 historyMemory.go(1)
-// $FlowExpectedError
+// $FlowExpectedError[incompatible-call]
 historyMemory.go('')
 historyMemory.goBack()
 historyMemory.goForward()
 
-// $FlowExpectedError
+// $FlowExpectedError[incompatible-use]
 historyMemory.foo
 
 /* history.createMemoryHistory() */
 const historyHash = history.createHashHistory();
 historyHash.go(1)
-// $FlowExpectedError
+// $FlowExpectedError[incompatible-call]
 historyHash.go('')
 historyHash.goBack()
 historyHash.goForward()
 
-// $FlowExpectedError
+// $FlowExpectedError[prop-missing]
 historyHash.foo
 
 
@@ -50,5 +50,5 @@ location.state;
 location.action;
 location.key;
 
-// $FlowExpectedError
+// $FlowExpectedError[prop-missing]
 location.foo
