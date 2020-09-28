@@ -2,17 +2,20 @@ declare module "react-router" {
   // NOTE: many of these are re-exported by react-router-dom and
   // react-router-native, so when making changes, please be sure to update those
   // as well.
-  declare export type Location = {
+  declare export type Location = $ReadOnly<{
     pathname: string,
     search: string,
     hash: string,
+    state?: any,
+    key?: string,
     ...
-  };
+  }>;
 
   declare export type LocationShape = {
     pathname?: string,
     search?: string,
     hash?: string,
+    state?: any,
     ...
   };
 
