@@ -8,7 +8,7 @@ yargs.parse(["-x"]);
 yargs.parse(["-x"], {});
 yargs.parse(["-x"], {}, (err, argv, output) => {});
 yargs.parse(["-x"], (err, argv, output) => {});
-// $FlowExpectedError
+// $FlowExpectedError[incompatible-call]
 yargs.parse(["-x"], {}, {});
 
 const argv = yargs
@@ -94,7 +94,7 @@ const argv2 = yargs(["-x"])
   .demandCommand(1, 2)
   .demandCommand(2)
   .demandCommand(2, "")
-  // $FlowExpectedError
+  // $FlowExpectedError[incompatible-call]
   .demandCommand("a")
   .version("1.0.1", "version", "display version information")
   .alias("version", "v")
@@ -103,17 +103,17 @@ const argv2 = yargs(["-x"])
   .showHelpOnFail(false, "whoops, something went wrong! run with --help").argv;
 
 yargs(["-x"])
-  // $FlowExpectedError
+  // $FlowExpectedError[incompatible-call]
   .alias(true, []);
 
 yargs(["-x"])
-  // $FlowExpectedError
+  // $FlowExpectedError[incompatible-call]
   .help(() => {});
 
-// $FlowExpectedError
+// $FlowExpectedError[prop-missing]
 yargs.nope;
 
-// $FlowExpectedError
+// $FlowExpectedError[incompatible-call]
 yargs.coerce({
   date: "foo"
 });
