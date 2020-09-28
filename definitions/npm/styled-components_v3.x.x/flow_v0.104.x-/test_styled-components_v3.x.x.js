@@ -67,7 +67,7 @@ const Attrs1: ReactComponentStyledTaggedTemplateLiteral<*> = styled.section.attr
   testProp: 'foo'
 });
 
-// $ExpectError
+// $FlowExpectedError
 const Attrs1Error: ReactComponentStyledTaggedTemplateLiteral<*> = styled.section.attrs({
   testProp: 'foo'
 })``;
@@ -77,7 +77,7 @@ declare var needsString: string => void
 needsReactComponentFunctional(styled.section.attrs({})``)
 needsReactComponentClass(styled.section.attrs({})``)
 
-// $ExpectError
+// $FlowExpectedError
 needsString(styled.section.attrs({})``)
 
 const Attrs2: ReactComponentStyledTaggedTemplateLiteral<*> = styled.section
@@ -123,24 +123,24 @@ const withComponent3: ReactComponentStyled<*> = styled.div.withComponent(Attrs3C
 const withComponent4: ReactComponentStyled<*> = styled('div').withComponent('a');
 const withComponent5: ReactComponentStyled<*> = styled('div').withComponent(withComponent1);
 const withComponent6: ReactComponentStyled<*> = styled('div').withComponent(Attrs3Class);
-// $ExpectError
+// $FlowExpectedError
 const withComponentError1: ReactComponentStyled<*> = styled.div.withComponent(0);
-// $ExpectError
+// $FlowExpectedError
 const withComponentError2: ReactComponentStyled<*> = styled.div.withComponent('NotHere');
 
 class CustomComponentError3 extends React.Component<{ foo: string, ... }> {
   render() { return <div />; }
 }
 
-// $ExpectError
+// $FlowExpectedError
 const withComponentError3 = styled(CustomComponentError3).withComponent('a');
-// $ExpectError
+// $FlowExpectedError
 const withComponentError4 = styled(CustomComponentError3).withComponent(withComponent1);
-// $ExpectError
+// $FlowExpectedError
 const withComponentError5 = styled(CustomComponentError3).withComponent(Attrs3Class);
-// $ExpectError
+// $FlowExpectedError
 const withComponentError6 = styled(CustomComponentError3).withComponent(0);
-// $ExpectError
+// $FlowExpectedError
 const withComponentError7 = styled(CustomComponentError3).withComponent('NotHere');
 
 // ---- WithTheme ----
@@ -167,7 +167,7 @@ const OpacityKeyFrame: string = keyframes`
   100% { opacity: 1; }
 `;
 
-// $ExpectError
+// $FlowExpectedError
 const NoExistingElementWrapper = styled.nonexisting`
   padding: 4em;
   background: papayawhip;
@@ -175,13 +175,13 @@ const NoExistingElementWrapper = styled.nonexisting`
 
 const num: 9 = 9
 
-// $ExpectError
+// $FlowExpectedError
 const NoExistingComponentWrapper = styled()`
   padding: 4em;
   background: papayawhip;
 `;
 
-// $ExpectError
+// $FlowExpectedError
 const NumberWrapper = styled(num)`
   padding: 4em;
   background: papayawhip;
@@ -203,7 +203,7 @@ const css3 = sheet.getStyleElement()
 
 const stream = createReadStream('file.txt')
 
-// $ExpectError (Must pass in a readable stream)
+// $FlowExpectedError (Must pass in a readable stream)
 sheet.interleaveWithNodeStream('file.txt')
 sheet.interleaveWithNodeStream(stream)
 
@@ -237,12 +237,12 @@ const interpolation2: Array<Interpolation> = css`
   background-color: red;
 `;
 
-// $ExpectError
+// $FlowExpectedError
 const interpolationError: Array<Interpolation | boolean> = styled.css`
   background-color: red;
 `;
 
-// $ExpectError
+// $FlowExpectedError
 const interpolationError2: Array<Interpolation | boolean> = css`
   background-color: red;
 `;
@@ -252,7 +252,7 @@ const defaultComponent: ReactComponentIntersection<{...}> = styled.div`
   background-color: red;
 `;
 
-// $ExpectError
+// $FlowExpectedError
 const defaultComponentError: {...} => string = styled.div`
   background-color: red;
 `;
@@ -271,7 +271,7 @@ const NeedsFoo1: ReactComponentFunctionalUndefinedDefaultProps<{
 }> = styled(FunctionalComponent)`
   background-color: red;
 `;
-// $ExpectError
+// $FlowExpectedError
 const NeedsFoo1Error: ReactComponentFunctionalUndefinedDefaultProps<{ foo: number, ... }> = styled(FunctionalComponent)`
   background-color: red;
 `;
@@ -283,7 +283,7 @@ const NeedsFoo2: ReactComponentFunctionalUndefinedDefaultProps<{
 }> = styled(NeedsFoo1)`
   background-color: red;
 `;
-// $ExpectError
+// $FlowExpectedError
 const NeedsFoo2Error: ReactComponentFunctionalUndefinedDefaultProps<{ foo: number, ... }> = styled(NeedsFoo1)`
   background-color: red;
 `;

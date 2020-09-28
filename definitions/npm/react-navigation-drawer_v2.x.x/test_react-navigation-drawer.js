@@ -35,7 +35,7 @@ createDrawerNavigator(
   {
     Test1: { screen: FunctionalScreenComponent },
   },
-  // $ExpectError drawer not tab!
+  // $FlowExpectedError drawer not tab!
   {
     tabBarPosition: "top",
   },

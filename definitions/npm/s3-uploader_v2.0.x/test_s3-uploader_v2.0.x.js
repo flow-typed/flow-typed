@@ -35,7 +35,7 @@ const myImageSize: imageSize = {
   height: 1,
   width: 1
 }
-// $ExpectError
+// $FlowExpectedError
 const myErrorSize: imageSize = { height: '1',
   width: 1
 }
@@ -64,7 +64,7 @@ const myImage: image = {
 
 const myUpload: Upload = new Upload('myAWSBucket', myS3UploaderOptions);
 
-// $ExpectError
+// $FlowExpectedError
 myUpload.upload();
 
 myUpload.upload('url');

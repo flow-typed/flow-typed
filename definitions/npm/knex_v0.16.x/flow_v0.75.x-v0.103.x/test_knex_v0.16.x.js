@@ -1,7 +1,7 @@
 import Knex from 'knex';
 
 const knex = Knex({});
-// $ExpectError - invalid Client
+// $FlowExpectedError - invalid Client
 Knex({
   client: 'foo',
 });
@@ -17,7 +17,7 @@ knex
   .orWhere('bar', 'foo')
   .whereNot('asd', 1)
   .whereIn('batz', [1, 2]);
-// $ExpectError - raw is not accepted as an input type
+// $FlowExpectedError - raw is not accepted as an input type
 knex.select(knex.raw(''));
 
 knex.innerJoin('bar', function() {
@@ -44,7 +44,7 @@ knex('foo').insert({
 });
 knex('foo').truncate();
 knex('bar').del();
-// $ExpectError
+// $FlowExpectedError
 knex.from();
 
 knex.table('foo');
@@ -91,38 +91,38 @@ knex.on('start', () => {});
 /* Having tests */
 knex('foo').having('count', '>', 100);
 knex('foo').havingIn('count', [1, 2, 3]);
-// $ExpectError
+// $FlowExpectedError
 knex('foo').havingIn('count', 'string');
 knex('foo').havingNotIn('count', [1, 2, 3]);
 knex('foo').havingNull('count');
-// $ExpectError
+// $FlowExpectedError
 knex('foo').havingNull(null);
 knex('foo').havingExists(function() {
   this.select('*');
 });
-// $ExpectError - raw is not accepted as an input type
+// $FlowExpectedError - raw is not accepted as an input type
 knex('foo').havingExists(knex.raw(''));
 knex('foo').havingBetween('count', [1, 5]);
-// $ExpectError
+// $FlowExpectedError
 knex('foo').havingBetween('count', [1, 2, 3]);
 knex('foo').havingRaw('count > 10');
 
 /* Where tests */
 knex('foo').where('count', '>', 100);
 knex('foo').whereIn('count', [1, 2, 3]);
-// $ExpectError
+// $FlowExpectedError
 knex('foo').whereIn('count', 'string');
 knex('foo').whereNotIn('count', [1, 2, 3]);
 knex('foo').whereNull('count');
-// $ExpectError
+// $FlowExpectedError
 knex('foo').whereNull(null);
 knex('foo').whereExists(function() {
   this.select('*');
 });
-// $ExpectError - raw is not accepted as an input type
+// $FlowExpectedError - raw is not accepted as an input type
 knex('foo').whereExists(knex.raw(''));
 knex('foo').whereBetween('count', [1, 5]);
-// $ExpectError
+// $FlowExpectedError
 knex('foo').whereBetween('count', [1, 2, 3]);
 knex('foo').whereRaw('count > 10');
 
@@ -139,15 +139,15 @@ knex('foo').whereRaw('', ['a']);
 knex('foo').joinRaw('');
 knex('foo').joinRaw('', ['a']);
 
-// $ExpectError
+// $FlowExpectedError
 knex('foo').raw();
-// $ExpectError
+// $FlowExpectedError
 knex('foo').raw('', '');
-// $ExpectError
+// $FlowExpectedError
 knex('foo').havingRaw();
-// $ExpectError
+// $FlowExpectedError
 knex('foo').whereRaw();
-// $ExpectError
+// $FlowExpectedError
 knex('foo').joinRaw();
 
 knex.batchInsert('foo', [{ foo: 'bar' }]);
@@ -193,7 +193,7 @@ knex.migrate
     console.log(`Please write your migration in ${filePath}`);
   })
   .catch(console.error);
-// $ExpectError
+// $FlowExpectedError
 knex.migrate.make();
 
 knex.migrate

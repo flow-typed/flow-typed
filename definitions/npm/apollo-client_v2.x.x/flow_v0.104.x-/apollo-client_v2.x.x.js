@@ -274,7 +274,7 @@ declare module "apollo-client" {
     data: T | {...},
     errors?: Array<GraphQLError>,
     loading: boolean,
-    networkStatus: NetworkStatus,
+    networkStatus: NetworkStatusRaw,
     error?: ApolloError,
     partial?: boolean,
     ...
@@ -365,7 +365,12 @@ declare module "apollo-client" {
     mutationResult: FetchResult<T>
   ) => void;
 
-  declare export type NetworkStatus = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
+  declare export type NetworkStatusRaw = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
+
+  declare export class NetworkStatus {
+    [NetworkStatusRaw]: string,
+    string: NetworkStatusRaw,
+  }
 
   declare export type QueryListener = (
     queryStoreValue: QueryStoreValue,
@@ -376,7 +381,7 @@ declare module "apollo-client" {
     document: DocumentNode,
     variables: Object,
     previousVariables: Object | null,
-    networkStatus: NetworkStatus,
+    networkStatus: NetworkStatusRaw,
     networkError: Error | null,
     graphQLErrors: GraphQLError[],
     metadata: any,
@@ -393,7 +398,7 @@ declare module "apollo-client" {
     data: T,
     errors?: Array<GraphQLError>,
     loading: boolean,
-    networkStatus: NetworkStatus,
+    networkStatus: NetworkStatusRaw,
     stale: boolean,
     ...
   };

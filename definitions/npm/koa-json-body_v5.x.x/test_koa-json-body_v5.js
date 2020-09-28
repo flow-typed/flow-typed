@@ -20,7 +20,7 @@ describe('koa-json-body', () => {
       limit: 1000000,
     });
 
-    // $ExpectError
+    // $FlowExpectedError
     body({
       foo: 'bar',
     });

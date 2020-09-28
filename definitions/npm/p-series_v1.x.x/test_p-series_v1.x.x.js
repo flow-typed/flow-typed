@@ -8,13 +8,13 @@ it('handles correct inputs', () => {
 });
 
 it('errors on invalid input', () => {
-  // $ExpectError
+  // $FlowExpectedError
   pSeries([1, 2, 3]);
 });
 
 it('errors on invalid return type', () => {
-  // $ExpectError
+  // $FlowExpectedError
   (pSeries([() => 1, () => 2, () => 3]): Promise<Array<string>>);
-  // $ExpectError
+  // $FlowExpectedError
   (pSeries([() => 1, () => 2, () => 'a']): Promise<Array<string>>);
 });

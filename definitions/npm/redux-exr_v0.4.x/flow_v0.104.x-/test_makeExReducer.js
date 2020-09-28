@@ -11,5 +11,5 @@ const reducer = makeExReducer(
 // TODO: extend tests
 reducer('', {}, {}, {});
 
-// $ExpectError
+// $FlowExpectedError
 reducer();

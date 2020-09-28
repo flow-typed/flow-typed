@@ -4,16 +4,16 @@ import ReactHighlightWords from 'react-highlight-words';
 
 <ReactHighlightWords searchWords={['dog', 'jumped', 'over']} textToHighlight="The dog jumped over the fox" />;
 
-// $ExpectError searchWords wrong type
+// $FlowExpectedError searchWords wrong type
 <ReactHighlightWords searchWords={[1,2,3]} textToHighlight="The dog jumped over the fox" />;
 
-// $ExpectError textToHighlight wrong type
+// $FlowExpectedError textToHighlight wrong type
 <ReactHighlightWords searchWords={['dog', 'jumped', 'over']} textToHighlight={123} />;
 
-// $ExpectError missing required searchWords
+// $FlowExpectedError missing required searchWords
 <ReactHighlightWords textToHighlight="The dog jumped over the fox" />;
 
-// $ExpectError missing required textToHighlight
+// $FlowExpectedError missing required textToHighlight
 <ReactHighlightWords searchWords={['dog', 'jumped', 'over']} />;
 
 const findChunks = () => [''];

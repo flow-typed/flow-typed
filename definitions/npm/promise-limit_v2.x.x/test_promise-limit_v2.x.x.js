@@ -5,7 +5,7 @@ import limit from "promise-limit";
 
 describe("promise-limit", () => {
   it("errors", () => {
-    // $ExpectError
+    // $FlowExpectedError
     limit("");
   });
 

@@ -10,7 +10,7 @@ describe('Screen API', () => {
     });
 
     it('raises an error when call without options', () => {
-      // $ExpectError - first argument required
+      // $FlowExpectedError - first argument required
       Navigation.setDefaultOptions();
     });
   });
@@ -21,7 +21,7 @@ describe('Screen API', () => {
     });
 
     it('raises an error when call without options', () => {
-      // $ExpectError - second argument required
+      // $FlowExpectedError - second argument required
       Navigation.mergeOptions('id');
     });
   });
@@ -50,7 +50,7 @@ describe('Navigation.events', () => {
 
     it('raises an error when try get invalid event prop', () => {
       events.registerComponentDidAppearListener(event => {
-        // $ExpectError - property `QWERTYUIOP` is missing in Event
+        // $FlowExpectedError - property `QWERTYUIOP` is missing in Event
         (event.QWERTYUIOP: string);
       });
     });
@@ -68,7 +68,7 @@ describe('Navigation.events', () => {
 
     it('raises an error when try get invalid event prop', () => {
       events.registerComponentDidDisappearListener(event => {
-        // $ExpectError - property `QWERTYUIOP` is missing in Event
+        // $FlowExpectedError - property `QWERTYUIOP` is missing in Event
         (event.QWERTYUIOP: string);
       });
     });
@@ -95,7 +95,7 @@ describe('Navigation.events', () => {
     it('raises an error when types of methods wrong', () => {
       class MyComponent1 extends React$Component<{}> {
         componentDidMount() {
-          // $ExpectError - `buttonId` must be string
+          // $FlowExpectedError - `buttonId` must be string
           Navigation.events().bindComponent(this);
         }
 
@@ -104,7 +104,7 @@ describe('Navigation.events', () => {
 
       class MyComponent2 extends React$Component<{}> {
         componentDidMount() {
-          // $ExpectError - `text` must be string, isFocused must be boolean
+          // $FlowExpectedError - `text` must be string, isFocused must be boolean
           Navigation.events().bindComponent(this);
         }
 
@@ -119,7 +119,7 @@ describe('Navigation.events', () => {
 
       class MyComponent3 extends React$Component<{}> {
         componentDidMount() {
-          // $ExpectError - `QWERTYUIO` is missing in event
+          // $FlowExpectedError - `QWERTYUIO` is missing in event
           Navigation.events().bindComponent(this);
         }
 
@@ -157,18 +157,18 @@ describe('Navigation.registerComponent', () => {
   });
 
   it("should raise an error when prop `componentId` isn't string", () => {
-    // $ExpectError - `componentId: boolean` but need `string`
+    // $FlowExpectedError - `componentId: boolean` but need `string`
     Navigation.registerComponent('1', () => CompWithWrongProps);
   });
   it('should raise an error when invalid screenID type', () => {
     const screenId = null;
-    // $ExpectError - `screenId: void` but need string or number
+    // $FlowExpectedError - `screenId: void` but need string or number
     Navigation.registerComponent(screenId, () => Comp);
   });
   it('should raise an error when invalid componentProvider is given', () => {
-    // $ExpectError - `componentProvider: () => string` but need () => React$Component
+    // $FlowExpectedError - `componentProvider: () => string` but need () => React$Component
     Navigation.registerComponent(1, () => CompWithProps, () => 'string');
-    // $ExpectError - `componentProvider: string` but need () => React$Component
+    // $FlowExpectedError - `componentProvider: string` but need () => React$Component
     Navigation.registerComponent(1, () => CompWithProps, 'string');
   });
 });
@@ -185,13 +185,13 @@ describe('Navigation.constants', () => {
 
   it('should raises an error when cast to wrong type', () => {
     Navigation.constants().then(result => {
-      // $ExpectError - backButtonId is string
+      // $FlowExpectedError - backButtonId is string
       (result.backButtonId: boolean);
-      // $ExpectError - backButtonId is number
+      // $FlowExpectedError - backButtonId is number
       (result.bottomTabsHeight: string);
-      // $ExpectError - backButtonId is number
+      // $FlowExpectedError - backButtonId is number
       (result.statusBarHeight: string);
-      // $ExpectError - backButtonId is number
+      // $FlowExpectedError - backButtonId is number
       (result.topBarHeight: string);
     });
   });

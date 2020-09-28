@@ -5,9 +5,9 @@ import { describe, it } from 'flow-typed-test';
 
 describe('cloudinary', () => {
   it('errors', () => {
-    // $ExpectError
+    // $FlowExpectedError
     cloudinary.config();
-    // $ExpectError
+    // $FlowExpectedError
     cloudinary.url();
   });
 

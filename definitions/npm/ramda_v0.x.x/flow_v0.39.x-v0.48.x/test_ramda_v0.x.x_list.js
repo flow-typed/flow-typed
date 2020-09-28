@@ -16,7 +16,7 @@ const str: string = "hello world";
 {
   const xs: Array<number> = _.adjust(x => x + 1, 2, ns);
   const xs1: Array<number> = _.adjust(x => x + 1, 2)(ns);
-  //$ExpectError
+  //$FlowExpectedError
   const xs3: Array<string> = _.adjust(x => x + 1)(2)(ns);
 
   const as: boolean = _.all(x => x > 1, ns);
@@ -69,7 +69,7 @@ const str: string = "hello world";
     b: "3"
   });
   const s4 = _.find(x => x === "2", ["1", "2"]);
-  //$ExpectError
+  //$FlowExpectedError
   const s5: ?{ [key: string]: string } = _.find(x => x === "2", { a: 1, b: 2 });
   const s6: number = _.findIndex(x => x === "2", ["1", "2"]);
   const s7: number = _.findIndex(x => x === "2", { a: "1", b: "2" });
@@ -81,7 +81,7 @@ const str: string = "hello world";
     x => (x > 1 ? "more" : "less"),
     ns
   );
-  //$ExpectError
+  //$FlowExpectedError
   const groupedBy1: { [k: string]: Array<string> } = _.groupBy(
     x => (x > 1 ? "more" : "less")
   )(ns);
@@ -96,9 +96,9 @@ const str: string = "hello world";
   const transducer = _.compose(_.map(_.add(1)), _.take(2));
 
   const txs: Array<number> = _.into([], transducer, ns);
-  //$ExpectError
+  //$FlowExpectedError
   const txs1: string = _.into([], transducer, ns);
-  //$ExpectError
+  //$FlowExpectedError
   const txs2: string = _.into([], transducer, ss);
 
   const ind: number = _.indexOf(1, ns);
@@ -160,7 +160,7 @@ const str: string = "hello world";
 
   const nthxs: ?string = _.nth(2, ["curry"]);
   const nthxs1: ?string = _.nth(2)(["curry"]);
-  //$ExpectError
+  //$FlowExpectedError
   const nthxs2: string = _.nth(2, [1, 2, 3]);
 
   const xxs: Array<number> = _.append(1, [1, 2, 3]);
@@ -261,7 +261,7 @@ const str: string = "hello world";
   const f = n => (n > 50 ? false : [-n, n + 10]);
   const unf11: Array<number> = _.unfold(f, 10);
 
-  //$ExpectError
+  //$FlowExpectedError
   const unf2 = _.unfold(x => x.length > 10 || [x, x + "0"], 2);
 
   const unby: Array<number> = _.uniqBy(Math.abs)([-1, -5, 2, 10, 1, 2]);
@@ -273,7 +273,7 @@ const str: string = "hello world";
   const unw2 = _.uniqWith(strEq)([1, "1", 1]);
   const unw3 = _.uniqWith(strEq)(["1", 1, 1]);
 
-  //$ExpectError
+  //$FlowExpectedError
   const ys6: { [key: string]: string } = _.fromPairs([["h", 2]]);
 
   const withoutxs: Array<number> = _.without([1, 2], ns);
@@ -284,7 +284,7 @@ const str: string = "hello world";
 
   const zipxs: Array<[number, string]> = _.zip([1, 2, 3], ["a", "b", "c"]);
 
-  //$ExpectError
+  //$FlowExpectedError
   const zipxs1: Array<[number, string]> = _.zip([true, false])(["a", "b"]);
 
   const zipos: { [k: string]: number } = _.zipObj(["a", "b", "c"], [1, 2, 3]);

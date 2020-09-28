@@ -106,7 +106,7 @@ export function setup(yargs: Yargs) {
       overwrite: {
         alias: 'o',
         describe: 'Overwrite an existing libdef',
-        type: 'string',
+        type: 'boolean',
         demandOption: false,
       },
       ignoreDeps: {
@@ -321,8 +321,6 @@ async function installNpmLibDefs({
       } else {
         libDefsToInstall.set(name, libDef);
 
-        // If the libdef is outdated (but still compatible), note this so we can
-        // warn the user
         const libDefLower = getRangeLowerBound(libDef.version);
         const depLower = getRangeLowerBound(ver);
         if (semver.lt(libDefLower, depLower)) {

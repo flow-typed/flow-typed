@@ -18,11 +18,11 @@ promiseRetry(promiseFn, {
   console.log(str);
 });
 
-// $ExpectError
+// $FlowExpectedError
 promiseRetry(2);
 
-// $ExpectError
+// $FlowExpectedError
 promiseRetry(function () { /* noop */ }, {retries: 'banana'});
 
-// $ExpectError
+// $FlowExpectedError
 promiseRetry(promiseFn).then(function (num: number) { console.log(num); });

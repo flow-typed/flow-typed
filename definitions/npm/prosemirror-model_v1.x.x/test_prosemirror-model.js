@@ -12,7 +12,7 @@ const pNode: NodeSpec = {
   parseDOM: [{ tag: "p" }]
 };
 
-// $ExpectError toDOM should return something resembling an output spec
+// $FlowExpectedError toDOM should return something resembling an output spec
 const nodeSpec: NodeSpec = {
   toDOM() {
     return { foo: "p", bar: 0 };

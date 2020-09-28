@@ -7,8 +7,8 @@ it('handles correct inputs and return types', () => {
 });
 
 it('errors on invalid input', () => {
-  // $ExpectError
+  // $FlowExpectedError
   pDoWhilst(() => Promise.resolve('foo'));
-  // $ExpectError
+  // $FlowExpectedError
   pDoWhilst(() => Promise.resolve('foo'), () => 'hi');
 });

@@ -4,14 +4,12 @@ declare module "reselect" {
   declare type InputSelector<-TState, TProps, TResult> =
     (state: TState, props: TProps, ...rest: any[]) => TResult
 
-  declare type OutputSelector<-TState, TProps, TResult> =
-    & InputSelector<TState, TProps, TResult>
-    & {
+  declare type OutputSelector<-TState, TProps, TResult> = {|
+    (state: TState, props: TProps, ...rest: any[]): TResult,
     recomputations(): number,
     resetRecomputations(): number,
     resultFunc(...args: any[]): TResult,
-    ...
-  };
+  |};
 
   declare type SelectorCreator = {
     <TState, TProps, TResult, T1>(

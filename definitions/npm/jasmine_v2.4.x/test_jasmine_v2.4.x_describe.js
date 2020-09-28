@@ -6,9 +6,9 @@
 
 describe('desc', () => {});
 
-// $ExpectError number. This type is incompatible with function type.
+// $FlowExpectedError number. This type is incompatible with function type.
 describe('desc', 12);
-// $ExpectError number. This type is incompatible with string.
+// $FlowExpectedError number. This type is incompatible with string.
 describe(12, () => {});
 
 /**
@@ -17,9 +17,9 @@ describe(12, () => {});
 
 fdescribe('desc', () => {});
 
-// $ExpectError number. This type is incompatible with function type.
+// $FlowExpectedError number. This type is incompatible with function type.
 fdescribe('desc', 12);
-// $ExpectError number. This type is incompatible with string.
+// $FlowExpectedError number. This type is incompatible with string.
 fdescribe(12, () => {});
 
 /**
@@ -28,8 +28,8 @@ fdescribe(12, () => {});
 
 xdescribe('desc', () => {});
 
-// $ExpectError number. This type is incompatible with function type.
+// $FlowExpectedError number. This type is incompatible with function type.
 xdescribe('desc', 12);
-// $ExpectError number. This type is incompatible with string.
+// $FlowExpectedError number. This type is incompatible with string.
 xdescribe(12, () => {});
 

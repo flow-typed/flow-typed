@@ -1,11 +1,11 @@
 fixture `123`
 fixture('123')
-// $ExpectError
+// $FlowExpectedError
 fixture(123)
 
 fixture `123`.page `123`
 fixture `123`.page('123')
-// $ExpectError
+// $FlowExpectedError
 fixture `123`.page(123)
 
 fixture

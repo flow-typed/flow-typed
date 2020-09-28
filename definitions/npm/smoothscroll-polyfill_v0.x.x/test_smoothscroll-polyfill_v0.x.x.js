@@ -3,5 +3,5 @@ import smoothscroll from "smoothscroll-polyfill";
 
 smoothscroll.polyfill();
 
-// $ExpectError
+// $FlowExpectedError
 smoothscroll.polyfill(2);

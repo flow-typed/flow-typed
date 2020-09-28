@@ -9,5 +9,5 @@ isPromise({});
 isPromise({then: true});
 //=> false
 
-// $ExpectError
+// $FlowExpectedError
 (isPromise(null): string);

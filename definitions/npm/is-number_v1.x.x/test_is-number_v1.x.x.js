@@ -11,7 +11,7 @@ describe('is-number', () => {
   });
 
   it('should error', () => {
-    // $ExpectError
+    // $FlowExpectedError
     (isNumber(4): string);
   });
 });

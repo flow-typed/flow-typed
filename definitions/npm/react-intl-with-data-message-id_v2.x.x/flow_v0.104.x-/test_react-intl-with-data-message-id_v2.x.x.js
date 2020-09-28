@@ -17,7 +17,7 @@ import {
 import type { IntlShape, MessageDescriptor, IntlInjectedComponentClass } from "react-intl-with-data-message-id";
 
 intlShape({ foo: "bar" }, "propName", "TestComponentName");
-// $ExpectError number. This type is incompatible with void
+// $FlowExpectedError number. This type is incompatible with void
 const result1: number = intlShape(
   { foo: "bar" },
   "propName",
@@ -30,7 +30,7 @@ const localeData = {
   testKey2: { baz: "buu" }
 };
 addLocaleData(localeData);
-// $ExpectError number. This type is incompatible with void
+// $FlowExpectedError number. This type is incompatible with void
 const resultLocaleData: number = addLocaleData(localeData);
 
 const messages = {
@@ -49,13 +49,13 @@ const messages = {
   }
 };
 const messageDescriptorMap = defineMessages(messages);
-// $ExpectError foo is undefined
+// $FlowExpectedError foo is undefined
 const messageDescriptorMap1 = defineMessages(messages).foo;
-// $ExpectError id and defaultMessage are required
+// $FlowExpectedError id and defaultMessage are required
 const messageDescriptorMap2 = defineMessages({ message: {} });
-// $ExpectError array. This type is incompatible with MessageDescriptorMap
+// $FlowExpectedError array. This type is incompatible with MessageDescriptorMap
 const messageDescriptorMap3: Array<string> = defineMessages(messages);
-// $ExpectError string. This type is incompatible with MessageDescriptorMap
+// $FlowExpectedError string. This type is incompatible with MessageDescriptorMap
 const messageDescriptorMap4: string = defineMessages(messages);
 const msg1:MessageDescriptor = messageDescriptorMap.messagekey1;
 const msg2:MessageDescriptor = messageDescriptorMap.messagekey2_foo;
@@ -79,17 +79,17 @@ const InjectedTestComponentWithRef: React.ComponentType<{ name: string, ... }> =
   withRef: true
 });
 
-// $ExpectError This type is incompatible
+// $FlowExpectedError This type is incompatible
 const BadPropsComponent: React.ComponentType<{ name: number, ... }> = injectIntl(
   TestComponent
 );
 
-// $ExpectError This type is incompatible
+// $FlowExpectedError This type is incompatible
 const ExtraPropsComponent: React.ComponentType<{ foo: number, ... }> = injectIntl(
   TestComponent
 );
 
-// $ExpectError void. This type is incompatible
+// $FlowExpectedError void. This type is incompatible
 const FailingInjectedTestComponent: void = injectIntl(TestComponent);
 
 const MessageComponent: React.ComponentType<{...}> = injectIntl(

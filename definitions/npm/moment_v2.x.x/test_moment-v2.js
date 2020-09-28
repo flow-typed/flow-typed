@@ -23,7 +23,7 @@ describe('Parse, moment()', () => {
   moment("29-06-1995", ["MM-DD-YYYY", "DD-MM-YYYY"], 'fr');
   moment("29-06-1995", ["MM-DD-YYYY", "DD-MM-YYYY"], true);
   moment("05-06-1995", ["MM-DD-YYYY", "DD-MM-YYYY"], 'fr', true);
-  // $ExpectError
+  // $FlowExpectedError
   moment("05-06-1995", ["MM-DD-YYYY", "DD-MM-YYYY"], 'fr', 1);
   // https://momentjs.com/docs/#/parsing/object/
   moment({ hour: 15, minute: 10 });
@@ -69,18 +69,17 @@ describe('Parse, moment()', () => {
 
   // https://momentjs.com/docs/#/parsing/array/
   moment([2015, 0]); // This would equal 2015-01-01
-  // $ExpectError only numbers are valid for Array API
+  // $FlowExpectedError only numbers are valid for Array API
   moment(["2015"]);
-  // $ExpectError needs a format string before the strictness flag
   moment('2015-01-01', true);
 
-  // $ExpectError only string values can have formatting parameters
+  // $FlowExpectedError only string values can have formatting parameters
   moment([2015, 0], "MM-DD-YYYY");
-  // $ExpectError
+  // $FlowExpectedError
   moment([2015, 0], "MM-DD-YYYY", true);
-  // $ExpectError
+  // $FlowExpectedError
   moment([2015, 0], moment.ISO_8601);
-  // $ExpectError
+  // $FlowExpectedError
   moment({ hour: 15, minute: 10 }, "MM-DD-YYYY");
   // // https://momentjs.com/docs/#/parsing/special-formats/
   moment("2010-01-01T05:06:07", moment.ISO_8601);
@@ -103,11 +102,11 @@ describe('Parse, moment()', () => {
 // https://momentjs.com/docs/#/parsing/unix-timestamp/
 describe('Parse, moment.unix()', () => {
   moment.unix(123);
-  // $ExpectError
+  // $FlowExpectedError
   moment.unix("1234");
-  // $ExpectError
+  // $FlowExpectedError
   moment.unix(undefined);
-  // $ExpectError
+  // $FlowExpectedError
   moment.unix();
 });
 
@@ -118,7 +117,7 @@ describe('Parse, moment.utc()', () => {
   const m: moment = moment.utc();
   moment.utc(1318781876406);
   moment.utc([2015, 0]);
-  // $ExpectError only numbers allowed with Array API
+  // $FlowExpectedError only numbers allowed with Array API
   moment.utc(["2015", "0"]);
 
   moment.utc('2015-01-01');
@@ -128,20 +127,19 @@ describe('Parse, moment.utc()', () => {
   moment.utc("29-06-1995", ["MM-DD-YYYY", "DD-MM-YYYY"], 'fr');
   moment.utc("29-06-1995", ["MM-DD-YYYY", "DD-MM-YYYY"], true);
   moment.utc("05-06-1995", ["MM-DD-YYYY", "DD-MM-YYYY"], 'fr', true);
-  // $ExpectError
+  // $FlowExpectedError
   moment.utc("05-06-1995", ["MM-DD-YYYY", "DD-MM-YYYY"], 'fr', 1);
-  // $ExpectError needs a format string before the strictness flag
   moment.utc('2015-01-01', true);
 
   moment.utc({ hour: 15, minute: 10 });
 
-  // $ExpectError only string values can have formatting parameters
+  // $FlowExpectedError only string values can have formatting parameters
   moment.utc([2015, 0], "MM-DD-YYYY");
-  // $ExpectError
+  // $FlowExpectedError
   moment.utc([2015, 0], "MM-DD-YYYY", true);
-  // $ExpectError
+  // $FlowExpectedError
   moment.utc([2015, 0], moment.ISO_8601);
-  // $ExpectError
+  // $FlowExpectedError
   moment.utc({ hour: 15, minute: 10 }, "MM-DD-YYYY");
 
   // Special formatting
@@ -170,7 +168,7 @@ describe('Parse, moment.parseZone()', () => {
   moment.parseZone("2013 01 01 -13:00", ["DD MM YYYY ZZ", "YYYY MM DD ZZ"], true);
   moment.parseZone("2013 01 01 -13:00", ["DD MM YYYY ZZ", "YYYY MM DD ZZ"], "fr", true);
 
-  // $ExpectError needs a format string before the strictness flag
+  // $FlowExpectedError needs a format string before the strictness flag
   moment.parseZone("2013-01-01T00:00:00-13:00", true);
 
   // null and undefined allowed as per moment TypeScript definitions
@@ -184,15 +182,15 @@ describe('Parse, moment.parseZone()', () => {
     // seems to be an undocumented API. If the moment project decides to
     // document some of these APIs, then the types can be changed.
 
-    // $ExpectError
+    // $FlowExpectedError
     moment.parseZone(new Date());
-    // $ExpectError
+    // $FlowExpectedError
     moment.parseZone(moment());
-    // $ExpectError
+    // $FlowExpectedError
     moment.parseZone({ hour: 15, minute: 10 });
-    // $ExpectError
+    // $FlowExpectedError
     moment.parseZone(1318781876406);
-    // $ExpectError
+    // $FlowExpectedError
     moment.parseZone([2015, 0]);
   });
 });
@@ -208,17 +206,17 @@ describe('toISOString', () => {
     const y: string = moment().toISOString(true);
   });
 
-  // $ExpectError - should fail on non-boolean value
+  // $FlowExpectedError - should fail on non-boolean value
   const y: string = moment().toISOString('foo');
 });
 
 // Get + Set
-// $ExpectError
+// $FlowExpectedError
 moment().millisecond().seconds();
 moment().milliseconds(100).seconds();
 (moment().weekday(): number);
 moment().weekday(1);
-// $ExpectError weekday does not take string arguments
+// $FlowExpectedError weekday does not take string arguments
 moment().weekday("monday");
 (moment().isoWeekday(): number);
 moment().isoWeekday(1);
@@ -226,7 +224,7 @@ moment().isoWeekday(1);
 moment().isoWeekday("monday");
 moment().dayOfYear();
 moment().dayOfYear(1);
-// $ExpectError dayOfYear does not accept string arguments
+// $FlowExpectedError dayOfYear does not accept string arguments
 moment().dayOfYear("what");
 
 // Manipulate
@@ -252,17 +250,16 @@ moment().calendar(null, {
 moment().calendar(null, {
   sameDay: () => "HH:mm"
 });
-// $ExpectError
 moment().calendar(null, {
+  // $FlowExpectedError
   sameDay: (a: number) => "HH:mm"
 });
-// $ExpectError
 moment().calendar(null, {
+  // $FlowExpectedError
   sameDay: 2
 });
-// $ExpectError
 moment().calendar(null, {
-  // $ExpectError (>=0.56.0)
+  // $FlowExpectedError (>=0.56.0)
   sameElse: () => {}
 });
 
@@ -290,21 +287,21 @@ const localeData = moment().locale('fr').localeData();
 // Customize
 moment.defineLocale('fakeLocale');
 moment.defineLocale('fakeLocale', { parentLocale: 'xyz' });
-// $ExpectError
+// $FlowExpectedError
 moment.defineLocale('fakeLocale', 'not an object');
-// $ExpectError
+// $FlowExpectedError
 moment.defineLocale(); // no arguments
 
 describe('now', () => {
   it('takes no parameter', () => {
     moment.now()
-    // $ExpectError
+    // $FlowExpectedError
     moment.now('Lorem')
   });
 
   it('returns a number', () => {
     const a: number = moment.now()
-    // $ExpectError
+    // $FlowExpectedError
     const b: string = moment.now()
   })
 });

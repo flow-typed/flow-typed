@@ -3,15 +3,15 @@ import express, { Router } from "express";
 
 const app = express();
 
-// $ExpectError property `foo` Property not found in Application:
+// $FlowExpectedError property `foo` Property not found in Application:
 app.foo();
 
 app.locals.title = "My Express App";
 
-// $ExpectError Symbol: This type is incompatible with string
+// $FlowExpectedError Symbol: This type is incompatible with string
 app.locals[Symbol("bad")] = "Should not work";
 
-// $ExpectError
+// $FlowExpectedError
 const num: number = app.mountpath;
 
 const myRouter = new express.Router();
@@ -26,11 +26,11 @@ myRouter.use(
     res.status(200);
     res.render("someTemplate", {}, (err, html: ?string) => null);
     res.render("someTemplate", (err, html: ?string) => null);
-    // $ExpectError String: This type is incompatible with Function | {[name: string]: mixed}
+    // $FlowExpectedError String: This type is incompatible with Function | {[name: string]: mixed}
     res.render("someTemplate", "Error");
-    // $ExpectError
+    // $FlowExpectedError
     res.sendFile("/myfile.txt", { dotfiles: "none" });
-    // $ExpectError
+    // $FlowExpectedError
     next("Error");
   }
 );
@@ -67,12 +67,12 @@ myRouter.use(
 
 app.on('mount', (parent: express$Application<>) => {
   console.log("Parent Loaded", parent);
-  // $ExpectError
+  // $FlowExpectedError
   parent.fail();
 });
 
 app.use("/foo", (req: express$Request, res: express$Response, next) => {
-  // $ExpectError
+  // $FlowExpectedError
   res.status("400");
   res.send("should work").status(300);
 });
@@ -80,10 +80,10 @@ app.use("/foo", (req: express$Request, res: express$Response, next) => {
 const bar: express$Router<> = new Router();
 
 bar.get("/", (req: express$Request, res: express$Response): void => {
-  // $ExpectError should be of type object
+  // $FlowExpectedError should be of type object
   const locals: Array<any> = res.locals;
   res.locals.title = "Home Page";
-  // $ExpectError should not allow to set keys to non string value.
+  // $FlowExpectedError should not allow to set keys to non string value.
   res.locals[0] = "Fail";
   res.send("bar").status(200);
 });
@@ -104,7 +104,7 @@ app.listen(9004, () => {
   console.log("Example app listening on port 9004!");
 });
 
-// $ExpectError backlog should be number
+// $FlowExpectedError backlog should be number
 app.listen(9005, "127.0.0.1", "256", () => {
   console.log("Example app listening on port 9005!");
 });
@@ -112,9 +112,9 @@ app.listen(9005, "127.0.0.1", "256", () => {
 app.set("foo");
 
 app.get("foo");
-// $ExpectError
+// $FlowExpectedError
 app.enable(100);
-// $ExpectError
+// $FlowExpectedError
 const f: number = app.enabled("100");
 
 const g: express$Application<> = app.enable('foo');
@@ -137,7 +137,7 @@ app.use("/again", (req: express$Request, res: express$Response) => {
 });
 
 app.use("/something", (req: express$Request, res: express$Response) => {
-  // $ExpectError
+  // $FlowExpectedError
   res.redirect("/different", 200);
 });
 
@@ -167,7 +167,7 @@ app.use(
   }
 );
 
-// $ExpectError path could not be an Object
+// $FlowExpectedError path could not be an Object
 const invalidPath: express$Path = {};
 
 let validPath: express$Path = "string_path";
@@ -201,7 +201,7 @@ express.json({
 
 // type says it must be truthy, but intent is more clearly expressed as a bool.
 express.json({
-  // $ExpectError
+  // $FlowExpectedError
   type: req => 0
 });
 
@@ -222,13 +222,13 @@ express.urlencoded({
   limit: '100b',
 });
 express.urlencoded({
-  // $ExpectError
+  // $FlowExpectedError
   limit: false,
 });
 
 // type says it must be truthy, but intent is more clearly expressed as a bool.
 express.urlencoded({
-  // $ExpectError
+  // $FlowExpectedError
   type: req => 0
 });
 
@@ -240,6 +240,6 @@ express.urlencoded({
   type: ['foo', 'bar']
 });
 express.urlencoded({
-  // $ExpectError
+  // $FlowExpectedError
   type: [1 , 2]
 });

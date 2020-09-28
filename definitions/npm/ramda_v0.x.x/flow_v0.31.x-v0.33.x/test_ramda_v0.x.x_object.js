@@ -46,7 +46,7 @@ const objectsClone2: typeof tomato = _.clone(tomato);
 const objectsClone4: $Shape<typeof tomato1> = _.clone(tomato1);
 
 const id = objectsClone2.id;
-//$ExpectError
+//$FlowExpectedError
 const idE = objectsClone4.id;
 
 const o1 = { a: 1, b: 2, c: 3, d: 4 };

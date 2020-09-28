@@ -15,11 +15,11 @@ const reducer = (state: State = [], action: Action): State => state
 
 createStore(reducer, [1], applyMiddleware((api: MiddlewareAPI<State, Action, Dispatch>) => {
   api.dispatch({ type: 'A' });
-  // $ExpectError
+  // $FlowExpectedError
   api.dispatch({ type: 'wrong' }) // wrong action
 
   api.dispatch((dispatch, getState) => {});
-  // $ExpectError
+  // $FlowExpectedError
   api.dispatch(() => false);
 
   return next => next
@@ -33,12 +33,12 @@ declare var dispatch: Dispatch;
 
 const ac1 = bindActionCreators((n: number) => ({ type: 'A' }), dispatch);
 ac1(1);
-// $ExpectError
+// $FlowExpectedError
 bindActionCreators((n: number) => ({ type: 'wrong' }), dispatch); // wrong action
 
 const ac2 = bindActionCreators((n: number) => (dispatch, getState) => {}, dispatch);
 ac2(1);
-// $ExpectError
+// $FlowExpectedError
 bindActionCreators((n: number) => (dispatch, getState) => 'wrong', dispatch); // wrong thunk
 
 //
@@ -49,9 +49,9 @@ declare var myEnhancer: StoreEnhancer<State, Action, Dispatch>;
 const store: Store = createStore(reducer, [1], myEnhancer);
 
 store.dispatch({ type: 'A' });
-// $ExpectError
+// $FlowExpectedError
 store.dispatch({ type: 'wrong' }); // wrong action
 
 store.dispatch((dispatch, getState) => {});
-// $ExpectError
+// $FlowExpectedError
 store.dispatch((dispatch, getState) => false); // wrong action

@@ -2,8 +2,8 @@ import escapeHtml from "escape-html";
 
 const html: string = escapeHtml("foo & bar");
 
-// $ExpectError
+// $FlowExpectedError
 escapeHtml(42);
 
-// $ExpectError
+// $FlowExpectedError
 (escapeHtml("foo & bar"): number);

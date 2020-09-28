@@ -33,12 +33,12 @@ StackNavigator({
   Test1: { screen: ClassScreenComponent },
 });
 
-// $ExpectError numbers can never be components
+// $FlowExpectedError numbers can never be components
 StackNavigator({
   Test1: { screen: 5 },
 });
 
-// $ExpectError you need a screen!
+// $FlowExpectedError you need a screen!
 TabNavigator({
   Test1: { blah: "test" },
 });
@@ -65,7 +65,7 @@ StackNavigator(
   {
     Test1: { screen: FunctionalScreenComponent },
   },
-  // $ExpectError stack not drawer!
+  // $FlowExpectedError stack not drawer!
   {
     initialRouteName: "Test1",
     drawerBackgroundColor: "green",
@@ -76,7 +76,7 @@ TabNavigator(
   {
     Test1: { screen: FunctionalScreenComponent },
   },
-  // $ExpectError tab not drawer!
+  // $FlowExpectedError tab not drawer!
   {
     drawerBackgroundColor: "green",
   },
@@ -104,7 +104,7 @@ DrawerNavigator(
   {
     Test1: { screen: FunctionalScreenComponent },
   },
-  // $ExpectError drawer not tab!
+  // $FlowExpectedError drawer not tab!
   {
     tabBarPosition: "top",
   },

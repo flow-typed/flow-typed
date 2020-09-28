@@ -31,22 +31,22 @@ var b = new BigInteger('1');
 
 (b.isProbablePrime(): boolean);
 
-// $ExpectError
+// $FlowExpectedError
 (BigInteger(12345): BigInteger);
 
-// $ExpectError
+// $FlowExpectedError
 (new BigInteger(1, 2, 3): BigInteger);
 
-// $ExpectError
+// $FlowExpectedError
 (b.toString('foobar'): string);
-// $ExpectError
+// $FlowExpectedError
 (b.toString('foobar'): number);
-// $ExpectError
+// $FlowExpectedError
 (b.toByteArray(): Buffer);
 
-// $ExpectError
+// $FlowExpectedError
 (b.add(b): number);
 
-// $ExpectError
+// $FlowExpectedError
 (b.shiftLeft(b): BigInteger);
 

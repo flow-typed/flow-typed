@@ -13,7 +13,7 @@ class MyComponent extends React.Component<{...}> {
   render() {
     return ReactDOM.createPortal(
       <MyPortalComponent />,
-      // $ExpectError
+      // $FlowExpectedError
       test$getElementById('portal'),
     );
   }
@@ -21,7 +21,7 @@ class MyComponent extends React.Component<{...}> {
 
 class JDiv extends React.Component<{id: string, ...}> {}
 
-// $ExpectError
+// $FlowExpectedError
 <JDiv id={42} />;
 
 class Example extends React.Component<{ bar: string, ... }> {
@@ -31,9 +31,9 @@ class Example extends React.Component<{ bar: string, ... }> {
 }
 
 ReactDOM.render(
-  // $ExpectError
+  // $FlowExpectedError
   <Example foo="foo" />,
-  // $ExpectError
+  // $FlowExpectedError
   document.body
 );
 
@@ -79,7 +79,7 @@ TestUtils.mockComponent(MyTestingComponent, 'span');
 (TestUtils.isCompositeComponentWithType(tree, MyTestingComponent): boolean);
 (TestUtils.findAllInRenderedTree(
   tree,
-  // $ExpectError
+  // $FlowExpectedError
   child => child.tagName === 'BUTTON',
 ): Array<React.Component<any, any>>);
 (TestUtils.scryRenderedDOMComponentsWithClass(
@@ -104,7 +104,7 @@ if (buttonEl != null) {
 TestUtils.act(() => {
   Math.random();
 });
-// $ExpectError
+// $FlowExpectedError
 TestUtils.act(() => ({count: 123}));
 async function runTest() {
   await TestUtils.act(async () => {
@@ -132,21 +132,21 @@ const Example2 = React.createClass({
   }
 });
 
-// $ExpectError
+// $FlowExpectedError
 ReactDOM.render(<Example2/>, test$querySelector('#site'), () => {
 	console.log('Rendered - arrow callback');
 });
 
-// $ExpectError
+// $FlowExpectedError
 ReactDOM.render(<Example2/>, test$querySelector('#site'), function() {
 	console.log('Rendered - function callback');
 });
 
-// $ExpectError
+// $FlowExpectedError
 ReactDOM.render(<Example2/>, test$querySelector('#site'), 1);
-// $ExpectError
+// $FlowExpectedError
 ReactDOM.render(<Example2/>, test$querySelector('#site'), {});
-// $ExpectError
+// $FlowExpectedError
 ReactDOM.render(<Example2/>, test$querySelector('#site'), '');
-// $ExpectError
+// $FlowExpectedError
 ReactDOM.render(<Example2/>, test$querySelector('#site'), null);

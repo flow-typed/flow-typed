@@ -95,7 +95,7 @@ This command is run during CI.
 ##### `flow-typed run-tests [optional-pattern]`
 
 For each libdef, find each test and run it with all compatible versions of Flow.
-If any errors arise that are not *`// $ExpectError`*, the test has failed.
+If any errors arise that are not *`// $FlowExpectedError`*, the test has failed.
 
 Note that this command assumes that the `/definitions/` directory is correctly
 structured. It should be run *after* running `flow-typed validate-defs`.
@@ -113,7 +113,7 @@ recent definitions into the cache for yourself.
 
 Creates `any`-typed libdef that you can fill in.
 
-If the `--typescript` flag was specified, TypeScript definition would be converted to flow-typed libdef format if possible.
+If the `--typescript` flag was set to `true`, TypeScript definition would be converted to flow-typed libdef format if possible.
 Please report any issues that you have encountered to [flowgen](https://github.com/joarwilk/flowgen/issues) repository.
 
 [flowgen](https://github.com/joarwilk/flowgen) supports most of the TypeScript syntax, however, in some cases manual changes may be needed before use.

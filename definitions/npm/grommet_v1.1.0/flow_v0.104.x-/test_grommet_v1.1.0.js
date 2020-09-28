@@ -65,9 +65,9 @@ import WorldMap from "grommet/components/WorldMap";
 class FailingApp extends Component<{ ... }> {
   render() {
     return (
-      // $ExpectError This type is incompatible with boolean
+      // $FlowExpectedError This type is incompatible with boolean
       <App centered="false">
-        {/* $ExpectError This type is incompatible with string enum */}
+        {/* $FlowExpectedError This type is incompatible with string enum */}
         <Headline align="asdf">Grommet + Flow</Headline>
       </App>
     );

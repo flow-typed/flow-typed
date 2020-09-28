@@ -34,7 +34,7 @@ describe('VError constructor', () => {
   new VError(error);
   new VError(error, '');
   new VError(error, '', '');
-  // $ExpectError
+  // $FlowExpectedError
   new VError(() => {});
 });
 
@@ -48,7 +48,7 @@ describe('VError Function', () => {
   VError(error);
   VError(error, '');
   VError(error, '', '');
-  // $ExpectError
+  // $FlowExpectedError
   VError(() => {});
 });
 
@@ -62,7 +62,7 @@ describe('SError constructor', () => {
   new SError(error);
   new SError(error, '');
   new SError(error, '', '');
-  // $ExpectError
+  // $FlowExpectedError
   new SError(() => {});
 });
 
@@ -76,7 +76,7 @@ describe('SError Function', () => {
   SError(error);
   SError(error, '');
   SError(error, '', '');
-  // $ExpectError
+  // $FlowExpectedError
   SError(() => {});
 });
 
@@ -90,7 +90,7 @@ describe('WError constructor', () => {
   new WError(error);
   new WError(error, '');
   new WError(error, '', '');
-  // $ExpectError
+  // $FlowExpectedError
   new WError(() => {});
 });
 
@@ -104,16 +104,16 @@ describe('WError Function', () => {
   WError(error);
   WError(error, '');
   WError(error, '', '');
-  // $ExpectError
+  // $FlowExpectedError
   WError(() => {});
 });
 
 describe('MultiError constructor', () => {
   it('should require an Array of errors as parameter', () => {
     new MultiError([error]);
-    // $ExpectError
+    // $FlowExpectedError
     new MultiError();
-    // $ExpectError
+    // $FlowExpectedError
     new MultiError('');
   });
 });

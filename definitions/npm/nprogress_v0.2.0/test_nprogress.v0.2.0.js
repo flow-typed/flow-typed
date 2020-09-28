@@ -4,10 +4,10 @@ import nprogress from "nprogress";
 
 describe("config", () => {
   it("should fail on invalid config", () => {
-    // $ExpectError
+    // $FlowExpectedError
     nprogress.configure();
 
-    // $ExpectError
+    // $FlowExpectedError
     nprogress.configure({
       unknown: "blah"
     });
@@ -29,7 +29,7 @@ describe("config", () => {
 
 describe("methods", () => {
   it("should fail on unknown method", () => {
-    // $ExpectError
+    // $FlowExpectedError
     nprogress.unknown();
   });
 

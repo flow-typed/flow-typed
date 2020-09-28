@@ -23,9 +23,9 @@ selectEntity(state4, 'users', 'id123');
 selectEntities(state4, 'users');
 selectEntities(state4, 'users', [ 'id123', 'id456' ]);
 
-// $ExpectError
+// $FlowExpectedError
 createEntitiesReducer();
-// $ExpectError
+// $FlowExpectedError
 createEntitiesReducer(1);
-// $ExpectError (state should be the combined state with an `entities`-sub-state)
+// $FlowExpectedError (state should be the combined state with an `entities`-sub-state)
 selectEntities({}, 'users');

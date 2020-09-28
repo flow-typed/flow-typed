@@ -3,41 +3,41 @@ import * as history from 'history';
 
 /* Trivial case */
 
-// $ExpectError
+// $FlowExpectedError
 history.foo();
 
 
 /* history.createHistory() */
 const historyNative = history.createHashHistory();
 historyNative.go(1)
-// $ExpectError
+// $FlowExpectedError
 historyNative.go('')
 historyNative.goBack()
 historyNative.goForward()
 
-// $ExpectError
+// $FlowExpectedError
 historyNative.foo
 
 /* history.createMemoryHistory() */
 const historyMemory = history.createMemoryHistory();
 historyMemory.go(1)
-// $ExpectError
+// $FlowExpectedError
 historyMemory.go('')
 historyMemory.goBack()
 historyMemory.goForward()
 
-// $ExpectError
+// $FlowExpectedError
 historyMemory.foo
 
 /* history.createMemoryHistory() */
 const historyHash = history.createHashHistory();
 historyHash.go(1)
-// $ExpectError
+// $FlowExpectedError
 historyHash.go('')
 historyHash.goBack()
 historyHash.goForward()
 
-// $ExpectError
+// $FlowExpectedError
 historyHash.foo
 
 
@@ -50,5 +50,5 @@ location.state;
 location.action;
 location.key;
 
-// $ExpectError
+// $FlowExpectedError
 location.foo

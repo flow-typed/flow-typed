@@ -3,7 +3,7 @@ import MobileDetect from 'mobile-detect';
 
 /* Trivial case */
 
-// $ExpectError
+// $FlowExpectedError
 MobileDetect.foo();
 
 const detect = new MobileDetect('');
@@ -19,5 +19,5 @@ detect.version('Mobile');
 detect.versionStr('Mobile');
 detect.isPhoneSized(1024);
 
-// $ExpectError
+// $FlowExpectedError
 detect.foo();

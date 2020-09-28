@@ -23,11 +23,11 @@ const images = {
   city: "a-url"
 };
 
-// $ExpectError
+// $FlowExpectedError
 preloader(10);
 preloader(images);
 
-// $ExpectError
+// $FlowExpectedError
 const badTheme = createTheme("white");
 const theme = createTheme(
   {
@@ -44,7 +44,7 @@ const theme = createTheme(
 
 class BadSpectacle extends Component<*> {
   render() {
-    // $ExpectError
+    // $FlowExpectedError
     return <Spectacle theme="white" />;
   }
 }

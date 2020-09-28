@@ -40,7 +40,7 @@ describe("call() effect with async functions and context", () => {
       });
 
       it("must raises an error when lead context to null", () => {
-        // $ExpectError
+        // $FlowExpectedError
         (c1.payload.context: null);
       });
     });
@@ -57,17 +57,17 @@ describe("call() effect with async functions and context", () => {
       });
 
       it("must raises an error when passed number but need string", () => {
-        // $ExpectError: First parameter is a string, not a number
+        // $FlowExpectedError: First parameter is a string, not a number
         (c1.payload.args: [number]);
       });
 
       it("must raises an error when passed too few arguments", () => {
-        // $ExpectError: too few arguments
+        // $FlowExpectedError: too few arguments
         call([context, fn6], "1", 2, "3", 4);
       });
 
       it("must raises an error when passed wrong argument types", () => {
-        // $ExpectError: wrong argument types
+        // $FlowExpectedError: wrong argument types
         call([context, fn1], 1);
       });
     });
@@ -87,17 +87,17 @@ describe("call() effect with async functions and context", () => {
       });
 
       it("must raises an error when Function return no Promise< number>", () => {
-        // $ExpectError: fn returns a Promise<string> not Promise<number>
+        // $FlowExpectedError: fn returns a Promise<string> not Promise<number>
         (c1.payload.fn: (a: boolean) => Promise<number>);
       });
 
       it(`must raises an error when "a" argument isn't string`, () => {
-        // $ExpectError: 'a' is actually of type string
+        // $FlowExpectedError: 'a' is actually of type string
         (c4.payload.fn: (a: number, b: number) => Promise<string>);
       });
 
       it("must raises an error when less parameter are noticed", () => {
-        // $ExpectError: Less parameter are noticed
+        // $FlowExpectedError: Less parameter are noticed
         (c6.payload.fn: typeof fn1);
       });
     });
@@ -159,7 +159,7 @@ describe("call() effect with async functions and context", () => {
       });
 
       it("must raises an error when lead context to null", () => {
-        // $ExpectError
+        // $FlowExpectedError
         (c1.payload.context: null);
       });
     });
@@ -176,17 +176,17 @@ describe("call() effect with async functions and context", () => {
       });
 
       it("must raises an error when passed number but need string", () => {
-        // $ExpectError: First parameter is a string, not a number
+        // $FlowExpectedError: First parameter is a string, not a number
         (c1.payload.args: [number]);
       });
 
       it("must raises an error when passed too few arguments", () => {
-        // $ExpectError: too few arguments
+        // $FlowExpectedError: too few arguments
         call([context, fn6], "1", 2, "3", 4);
       });
 
       it("must raises an error when passed wrong argument types", () => {
-        // $ExpectError: wrong argument types
+        // $FlowExpectedError: wrong argument types
         call([context, fn1], 1);
       });
     });
@@ -206,17 +206,17 @@ describe("call() effect with async functions and context", () => {
       });
 
       it("must raises an error when Function return no Promise< number>", () => {
-        // $ExpectError: fn returns a Promise<string> not Promise<number>
+        // $FlowExpectedError: fn returns a Promise<string> not Promise<number>
         (c1.payload.fn: (a: boolean) => Promise<number>);
       });
 
       it(`must raises an error when "a" argument isn't string`, () => {
-        // $ExpectError: 'a' is actually of type string
+        // $FlowExpectedError: 'a' is actually of type string
         (c4.payload.fn: (a: number, b: number) => Promise<string>);
       });
 
       it("must raises an error when less parameter are noticed", () => {
-        // $ExpectError: Less parameter are noticed
+        // $FlowExpectedError: Less parameter are noticed
         (c6.payload.fn: $PropertyType<typeof context1, "someFn1">);
       });
     });
@@ -260,7 +260,7 @@ describe("call() effect with async functions and context", () => {
       });
 
       it("must raises an error when lead context to null", () => {
-        // $ExpectError
+        // $FlowExpectedError
         (c1.payload.context: null);
       });
     });
@@ -277,17 +277,17 @@ describe("call() effect with async functions and context", () => {
       });
 
       it("must raises an error when passed number but need string", () => {
-        // $ExpectError: First parameter is a string, not a number
+        // $FlowExpectedError: First parameter is a string, not a number
         (c1.payload.args: [number]);
       });
 
       it("must raises an error when passed too few arguments", () => {
-        // $ExpectError: too few arguments
+        // $FlowExpectedError: too few arguments
         call({ context, fn: fn6 }, "1", 2, "3", 4);
       });
 
       it("must raises an error when passed wrong argument types", () => {
-        // $ExpectError: wrong argument types
+        // $FlowExpectedError: wrong argument types
         call({ context, fn: fn1 }, 1);
       });
     });
@@ -307,17 +307,17 @@ describe("call() effect with async functions and context", () => {
       });
 
       it("must raises an error when Function return no Promise< number>", () => {
-        // $ExpectError: fn returns a Promise<string> not Promise<number>
+        // $FlowExpectedError: fn returns a Promise<string> not Promise<number>
         (c1.payload.fn: (a: boolean) => Promise<number>);
       });
 
       it(`must raises an error when "a" argument isn't string`, () => {
-        // $ExpectError: 'a' is actually of type string
+        // $FlowExpectedError: 'a' is actually of type string
         (c4.payload.fn: (a: number, b: number) => Promise<string>);
       });
 
       it("must raises an error when less parameter are noticed", () => {
-        // $ExpectError: Less parameter are noticed
+        // $FlowExpectedError: Less parameter are noticed
         (c6.payload.fn: typeof fn1);
       });
     });

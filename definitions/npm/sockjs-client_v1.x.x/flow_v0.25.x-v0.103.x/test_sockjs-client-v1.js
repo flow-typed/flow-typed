@@ -54,35 +54,35 @@ sock.send(new Blob(["blob"]));
 sock.send(new ArrayBuffer(1));
 sock.send(new DataView(new ArrayBuffer(1)));
 
-// $ExpectError
+// $FlowExpectedError
 new SockJS(null);
 
-// $ExpectError
+// $FlowExpectedError
 new SockJS("some url", null, { transports: "this-is-not-a-transport" });
 
-// $ExpectError
+// $FlowExpectedError
 new SockJS("some url", {
   server: "ABCD",
   transports: "iframe-eventsource",
   sessionId: 4
 });
 
-// $ExpectError
+// $FlowExpectedError
 new SockJS("some url", null, { sessionId: () => 4 });
 
-// $ExpectError
+// $FlowExpectedError
 sock.onopen = 4;
 
-// $ExpectError
+// $FlowExpectedError
 sock.onmessage = 4;
 
 sock.onmessage = function(e) {
-  // $ExpectError
+  // $FlowExpectedError
   e.notHere;
 };
 
-// $ExpectError
+// $FlowExpectedError
 sock.onclose = 4;
 
-// $ExpectError
+// $FlowExpectedError
 sock.close("wrong reason");

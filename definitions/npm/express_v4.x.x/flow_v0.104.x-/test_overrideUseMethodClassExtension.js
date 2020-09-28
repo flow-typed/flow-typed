@@ -41,15 +41,15 @@ function test_express$CustomApplication(
 // Class Extensions: Test
 const customApp = new test_express$CustomApplication(express);
 
-// $ExpectError
+// $FlowExpectedError
 const customApp_error = new test_express$CustomApplication();
 
 customApp.use(
   "/something",
   (req: express$Request, res: express$Response, next: express$NextFunction) => {
-    // $ExpectError
+    // $FlowExpectedError
     req.foo;
-    // $ExpectError
+    // $FlowExpectedError
     res.bar;
     next();
   }
@@ -63,14 +63,14 @@ customApp.use(
   ) => {
     req.foo;
     res.bar;
-    // $ExpectError
+    // $FlowExpectedError
     req.notHere;
-    // $ExpectError
+    // $FlowExpectedError
     res.notHere;
   }
 );
 
-// $ExpectError
+// $FlowExpectedError
 customApp.use("/something", (req: string, res: string, next: Function) => {
   next();
 });

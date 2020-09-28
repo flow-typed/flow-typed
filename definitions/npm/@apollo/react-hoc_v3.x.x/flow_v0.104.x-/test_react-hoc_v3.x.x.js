@@ -43,7 +43,7 @@ const withData: OperationComponent<IQuery> = graphql(query);
 
 it('works with functional component', () => {
   const FunctionalWithData = withData(({ data }) => {
-    // $ExpectError string type being treated as numerical
+    // $FlowExpectedError string type being treated as numerical
     if (data.foo > 1) return <span />;
 
     return null;
@@ -56,7 +56,7 @@ it('works with class component, this requires a stricter definition', () => {
     render() {
       const { foo, bar } = this.props.data;
 
-      // $ExpectError string type being treated as numerical
+      // $FlowExpectedError string type being treated as numerical
       if (bar > 1) return null;
 
       // The below works as expected
@@ -83,7 +83,7 @@ it("works with class component with it's own variable", () => {
       if (loading) return <div>Loading</div>;
       if (error) return <h1>ERROR</h1>;
 
-      // $ExpectError string type being treated as numerical
+      // $FlowExpectedError string type being treated as numerical
       if (bar > 1) return null;
 
       // The below works as expected
@@ -117,7 +117,7 @@ it("works with class component with it's own variable Props specified at the end
       if (loading) return <div>Loading</div>;
       if (error) return <h1>ERROR</h1>;
 
-      // $ExpectError string type being treated as numerical
+      // $FlowExpectedError string type being treated as numerical
       if (bar > 1) return null;
 
       // The below works as expected
@@ -197,20 +197,20 @@ it('works with Variables specified', () => {
     Props
   > = graphql(HERO_QUERY, {
     options: ({ episode }) => {
-      // $ExpectError [string] The operand of an arithmetic operation must be a number
+      // $FlowExpectedError [string] The operand of an arithmetic operation must be a number
       episode * 10;
       return {
-        // $ExpectError [number] This type is incompatible with string
+        // $FlowExpectedError [number] This type is incompatible with string
         variables: { episode: 10 },
       };
     },
     props: ({ data, ownProps }) => ({
       ...data,
-      // $ExpectError [string] This type cannot be compared to number
+      // $FlowExpectedError [string] This type cannot be compared to number
       episode: ownProps.episode > 1,
-      // $ExpectError property `isHero`. Property not found on object type
+      // $FlowExpectedError property `isHero`. Property not found on object type
       isHero: data && data.hero && data.hero.isHero,
-      // $ExpectError Property `someProp`. This type is incompatible with string
+      // $FlowExpectedError Property `someProp`. This type is incompatible with string
       someProp: 1,
     }),
   });
@@ -253,7 +253,7 @@ describe('<ApolloProvider />', () => {
   });
 
   it('raises an error when not passed a client', () => {
-    // $ExpectError ApolloPrivder requires client prop
+    // $FlowExpectedError ApolloPrivder requires client prop
     <ApolloProvider>
       <div />
     </ApolloProvider>;
@@ -263,7 +263,7 @@ describe('<ApolloProvider />', () => {
     // Should be an instance of ApolloClient
     const client = {};
 
-    // $ExpectError ApolloPrivder requires client prop
+    // $FlowExpectedError ApolloPrivder requires client prop
     <ApolloProvider client={client} />;
   });
 });
@@ -279,7 +279,7 @@ describe('<ApolloConsumer />', () => {
             query: HERO_QUERY,
             variables: { episode: 'episode' },
           });
-          // $ExpectError doSomethingElse is not a method of ApolloClient
+          // $FlowExpectedError doSomethingElse is not a method of ApolloClient
           client.doSomethingElse();
         };
         return <button onClick={onClick}>Click</button>;

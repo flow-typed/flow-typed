@@ -120,7 +120,7 @@ describe('The `Select` component', () => {
   });
 
   it('should error on invalid props usage', () => {
-    // $ExpectError addLabelText cannot be number
+    // $FlowExpectedError addLabelText cannot be number
     <Select addLabelText={123} />;
   });
 
@@ -143,7 +143,7 @@ describe('The `Select` component', () => {
 
   it('should error when optionRenderer option param type is not the same as options element type', () => {
     let invalidRenderer = (o: string) => <span />;
-    // $ExpectError
+    // $FlowExpectedError
     <Select
       name="name"
       autoFocus
@@ -158,7 +158,7 @@ describe('The `Select` component', () => {
 
   it('should error when filterOptions options param type is not an array of options element type', () => {
     let invalidFilterOptions = (o: string) => <span />;
-    // $ExpectError
+    // $FlowExpectedError
     <Select
       name="name"
       autoFocus
@@ -173,7 +173,7 @@ describe('The `Select` component', () => {
 
   it('should error when given non-existent prop', () => {
     // Deprecated autofocus
-    // $ExpectError
+    // $FlowExpectedError
     <Select
       name="name"
       autofocus

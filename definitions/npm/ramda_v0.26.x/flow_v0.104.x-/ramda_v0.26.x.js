@@ -756,8 +756,13 @@ declare module ramda {
   declare function findLast<V>(fn: UnaryPredicateFn<V>): (xs: $ReadOnlyArray<V>) => ?V | O;
   declare function findLast<V>(fn: UnaryPredicateFn<V>, xs: $ReadOnlyArray<V>): ?V;
 
-  declare function findIndex<K, V>(fn: UnaryPredicateFn<V>): (xs: $ReadOnlyArray<V>) => number;
-  declare function findIndex<K, V>(fn: UnaryPredicateFn<V>, xs: $ReadOnlyArray<V>): number;
+  declare function findIndex<K, V, T: Array<V> | { [key: K]: V, ...}>(
+    fn: UnaryPredicateFn<V>,
+  ): (xs: T) => number;
+  declare function findIndex<K, V, T: Array<V> | { [key: K]: V, ... }>(
+    fn: UnaryPredicateFn<V>,
+    xs: T
+  ): number;
 
   declare function findLastIndex<K, V>(fn: UnaryPredicateFn<V>): (xs: $ReadOnlyArray<V>) => number;
   declare function findLastIndex<K, V>(fn: UnaryPredicateFn<V>, xs: $ReadOnlyArray<V>): number;

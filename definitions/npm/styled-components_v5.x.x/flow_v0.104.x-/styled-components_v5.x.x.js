@@ -25,7 +25,7 @@ declare module 'styled-components' {
     | null
     | void
     | Styles
-    | Class<InterpolatableComponent<any>>; // CSS-in-JS object returned by polished are also supported, partially
+    | Class<InterpolatableComponent<any>>; // eslint-disable-line flowtype/no-weak-types
 
   declare export type TaggedTemplateLiteral<I, R> = (
     strings: string[],
@@ -37,13 +37,13 @@ declare module 'styled-components' {
 
   declare export type CSSConstructor = TaggedTemplateLiteral<any, CSSRules>; // eslint-disable-line flowtype/no-weak-types
   declare export type KeyFramesConstructor = TaggedTemplateLiteral<
-    any,
+    any, // eslint-disable-line flowtype/no-weak-types
     KeyFrames
-  >; // eslint-disable-line flowtype/no-weak-types
+  >;
   declare export type CreateGlobalStyleConstructor = TaggedTemplateLiteral<
-    any,
+    any, // eslint-disable-line flowtype/no-weak-types
     React$ComponentType<*>
-  >; // eslint-disable-line flowtype/no-weak-types
+  >;
 
   declare interface Tag<T> {
     styleTag: HTMLStyleElement | null;
@@ -93,10 +93,10 @@ declare module 'styled-components' {
     toReactElements(): React$ElementType[];
   }
 
-  declare export function isStyledComponent(target: any): boolean;
+  declare export function isStyledComponent(target: mixed): boolean;
 
   declare type SCMProps = {
-    children?: React$Element<any>,
+    children?: React.Node,
     sheet?: StyleSheet,
     target?: HTMLElement,
     ...
@@ -148,7 +148,7 @@ declare module 'styled-components' {
     sealed: boolean;
 
     seal(): void;
-    collectStyles(children: any): React$Element<StyleSheetManager>;
+    collectStyles(children: any): React$Element<StyleSheetManager>; // eslint-disable-line flowtype/no-weak-types
     getStyleTags(): string;
     toReactElements(): React$ElementType[];
     // This seems to be use a port of node streams in the Browsers. Not gonna type this for now
@@ -207,7 +207,7 @@ declare module 'styled-components' {
     children?: React$Node,
     className?: ?string,
     style?: { [string]: string | number, ... },
-    ref?: React$Ref<any>,
+    ref?: React$Ref<any>, // eslint-disable-line flowtype/no-weak-types
   |};
 
   declare export type PropsWithTheme<Props, T> = {|
@@ -253,7 +253,7 @@ declare module 'styled-components' {
       ...Interpolation<PropsWithTheme<StyleProps, Theme>>[]
     ) => StyledComponent<StyleProps, Theme, V>,
     [[call]]: <StyleProps, Theme>(
-      (props: PropsWithTheme<StyleProps, Theme>) => Interpolation<any>
+      (props: PropsWithTheme<StyleProps, Theme>) => Interpolation<any> // eslint-disable-line flowtype/no-weak-types
     ) => StyledComponent<StyleProps, Theme, V>,
     +attrs: <A: { ... }, StyleProps = {||}, Theme = {||}>(
       (StyleProps => A) | A
@@ -415,38 +415,13 @@ declare module 'styled-components' {
     <V>(V) => StyledShorthandFactory<V>
   >;
 
-  declare type ExtractProps<O> = $Call<
-    <T>(StyledComponent<T, any, any>) => T,
-    O
-  >;
-  declare type ExtractTheme<O> = $Call<
-    <T>(StyledComponent<any, T, any>) => T,
-    O
-  >;
-  declare type ExtractInstance<O> = $Call<
-    <T>(StyledComponent<any, any, T>) => T,
-    O
-  >;
-
   declare interface Styled {
-    <
-      Comp: StyledComponent<P, T, I>,
-      Theme: ExtractTheme<Comp>,
-      +Instance: ExtractInstance<Comp>,
-      OwnProps = ExtractProps<Comp>
-    >(
+    <Comp: React$ComponentType<P>, Theme, OwnProps = React$ElementConfig<Comp>>(
       Comp
-    ): StyledFactory<{| ...$Exact<OwnProps> |}, Theme, Instance>;
+    ): StyledFactory<{| ...$Exact<OwnProps> |}, Theme, Comp>;
     <StyleProps, Theme, ElementName: $Keys<BuiltinElementInstances>>(
       ElementName
     ): StyledFactory<StyleProps, Theme, BuiltinElementType<ElementName>>;
-    <
-      Comp: React$ComponentType<any>,
-      Theme,
-      OwnProps = React$ElementConfig<Comp>
-    >(
-      Comp
-    ): StyledFactory<{| ...$Exact<OwnProps> |}, Theme, Comp>;
   }
 
   declare export default Styled & ConvenientShorthands;
@@ -545,4 +520,8 @@ declare module 'styled-components/native' {
   }
 
   declare export default Styled & ConvenientShorthands;
+}
+
+declare module 'styled-components/macro' {
+  declare export * from 'styled-components';
 }

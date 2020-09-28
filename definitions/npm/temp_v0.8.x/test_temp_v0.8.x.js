@@ -11,7 +11,7 @@ temp
   .mkdirSync();
 temp
   .track()
-  // $ExpectError
+  // $FlowExpectedError
   .nonExistentMethod();
 
 // Note: Even on failure, the callbacks receive the path was attempted to
@@ -33,7 +33,7 @@ temp.open('filename', (err, info) => {
   (info.fd: ?number);
 });
 
-// $ExpectError callback should not be the first arg.
+// $FlowExpectedError callback should not be the first arg.
 temp.mkdir((err, dirPath) => {
   (err: ?ErrnoError);
   (dirPath: string);

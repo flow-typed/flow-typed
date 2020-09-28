@@ -12,7 +12,7 @@ const instance = new Polyglot({
 });
 new Polyglot();
 
-// $ExpectError
+// $FlowExpectedError
 new Polyglot("foo");
 
 Polyglot.transformPhrase("foo").length;
@@ -21,35 +21,35 @@ Polyglot.transformPhrase("foo", {}, "en-US").length;
 
 instance.extend({ foo: "bar" });
 
-// $ExpectError
+// $FlowExpectedError
 instance.extend("foo");
 
 instance.has("foo");
 
-// $ExpectError
+// $FlowExpectedError
 instance.has(1);
 
 instance.t("foo").length;
 instance.t("foo", {}).length;
 
-// $ExpectError
+// $FlowExpectedError
 instance.t(2);
 
 instance.locale("foo").length;
 instance.locale().length;
 
-// $ExpectError
+// $FlowExpectedError
 instance.locale(2);
 
 instance.unset("foo");
 instance.unset({});
 
-// $ExpectError
+// $FlowExpectedError
 instance.unset(2);
 
 instance.clear();
 
 instance.replace({});
 
-// $ExpectError
+// $FlowExpectedError
 instance.replace("foo");

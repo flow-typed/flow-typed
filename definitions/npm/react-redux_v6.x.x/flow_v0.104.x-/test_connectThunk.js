@@ -89,7 +89,7 @@ function onlyDispatchObject_sameDispatchPropsAreErroneous() {
 
   type DispatchProps = {|
     action: typeof action,
-    //$ExpectError here the property returns a thunk...
+    //$FlowExpectedError here the property returns a thunk...
     thunk: () => Thunk,
   |};
   const mapDispatchToProps = {
@@ -175,7 +175,7 @@ function stateAndDispatchObject_sameDispatchPropsAreErroneous() {
 
   type DispatchProps = {|
     action: typeof action,
-    //$ExpectError here the property returns a thunk...
+    //$FlowExpectedError here the property returns a thunk...
     thunk: () => Thunk,
   |};
   const mapDispatchToProps = {

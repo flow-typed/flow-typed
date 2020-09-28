@@ -10,7 +10,7 @@ describe('#Promise Style', () => {
       .then(channel => {
         channel.assertQueue('test_queue')
           .then(({ queue, messageCount, consumerCount }) => channel.consume(queue, msg => {
-            // $ExpectError
+            // $FlowExpectedError
             channel.ack(msg); // check if message is null
 
             if (msg) {
@@ -57,7 +57,7 @@ describe('#Callback Style', () => {
         connection.createChannel((err, channel) => {
           channel.assertQueue('test_queue');
           channel.consume('test_queue', msg => {
-            // $ExpectError
+            // $FlowExpectedError
             channel.ack(msg); // check if message is null
 
             if (msg) {

@@ -7,7 +7,7 @@ jest.clearAllMocks();
 jest.resetAllMocks();
 jest.restoreAllMocks();
 
-// $ExpectError property `atoMockOff` not found in object type
+// $FlowExpectedError property `atoMockOff` not found in object type
 jest.atoMockOff();
 
 const mockFn = jest.fn();
@@ -30,53 +30,53 @@ const foo: Foo = {
 foo.doStuff = jest.fn().mockImplementation(str => 10);
 foo.doStuff = jest.fn().mockImplementation(str => parseInt(str, 10));
 foo.doStuff = jest.fn().mockImplementation(str => str.indexOf('a'));
-// $ExpectError function `doesntExist` not found in string.
+// $FlowExpectedError function `doesntExist` not found in string.
 foo.doStuff = jest.fn().mockImplementation(str => str.doesntExist());
-// $ExpectError Mock function expected to return number, not string.
+// $FlowExpectedError Mock function expected to return number, not string.
 foo.doStuff = jest.fn().mockImplementation(str => '10');
 foo.doStuff = jest.fn().mockImplementationOnce(str => 10);
 foo.doStuff = jest.fn().mockImplementationOnce(str => parseInt(str, 10));
 foo.doStuff = jest.fn().mockImplementationOnce(str => str.indexOf('a'));
-// $ExpectError function `doesntExist` not found in string.
+// $FlowExpectedError function `doesntExist` not found in string.
 foo.doStuff = jest.fn().mockImplementationOnce(str => str.doesntExist());
-// $ExpectError Mock function expected to return number, not string.
+// $FlowExpectedError Mock function expected to return number, not string.
 foo.doStuff = jest.fn().mockImplementationOnce(str => '10');
 
 foo.doStuff = jest.fn().mockReturnValue(10);
-// $ExpectError Mock function expected to return number, not string.
+// $FlowExpectedError Mock function expected to return number, not string.
 foo.doStuff = jest.fn().mockReturnValue('10');
 
 foo.doStuff = jest.fn().mockReturnValueOnce(10);
-// $ExpectError Mock function expected to return number, not string.
+// $FlowExpectedError Mock function expected to return number, not string.
 foo.doStuff = jest.fn().mockReturnValueOnce('10');
 
 foo.doAsyncStuff = jest.fn().mockResolvedValue(10);
-// $ExpectError Mock function expected to return Promise<number>, not Promise<string>
+// $FlowExpectedError Mock function expected to return Promise<number>, not Promise<string>
 foo.doAsyncStuff = jest.fn().mockResolvedValue('10');
 
 foo.doAsyncStuff = jest.fn().mockResolvedValueOnce(10);
-// $ExpectError Mock function expected to return Promise<number>, not Promise<string>
+// $FlowExpectedError Mock function expected to return Promise<number>, not Promise<string>
 foo.doAsyncStuff = jest.fn().mockResolvedValueOnce('10');
 
 foo.doAsyncStuff = jest.fn().mockRejectedValue(10);
 foo.doAsyncStuff = jest.fn().mockRejectedValueOnce(10);
 
 foo.doStuff = jest.fn().mockName('10');
-// $ExpectError mockName expects a string, not a number
+// $FlowExpectedError mockName expects a string, not a number
 foo.doStuff = jest.fn().mockName(10);
 
 const mockedDoStuff = (foo.doStuff = jest.fn().mockImplementation(str => 10));
 mockedDoStuff.mock.calls[0][0].indexOf('a');
-// $ExpectError function `doesntExist` not found in string.
+// $FlowExpectedError function `doesntExist` not found in string.
 mockedDoStuff.mock.calls[0][0].doesntExist('a');
 
 mockedDoStuff.mock.instances[0] > 5;
-// $ExpectError function `doesntExist` not found in number.
+// $FlowExpectedError function `doesntExist` not found in number.
 mockedDoStuff.mock.instances[0].indexOf('a');
 
 expect(mockedDoStuff.mock.results[0].isThrow).toBe(false);
 expect(mockedDoStuff.mock.results[0].value).toBe(10);
-// $ExpectError
+// $FlowExpectedError
 mockedDoStuff.mock.results[0].foo;
 
 expect(1).toEqual(1);
@@ -112,6 +112,11 @@ Object {
 }
 `
 );
+// $FlowExpectedError - options must be object or undefined
+expect('foo').toMatchDiffSnapshot('any', null, 'test name')
+expect('foo').toMatchDiffSnapshot('any', {}, 'test name')
+expect('foo').toMatchDiffSnapshot('foobar');
+expect('foo').toMatchDiffSnapshot('foobar', undefined, 'snapshot difference between two strings');
 
 expect({ foo: 1 }).toMatchInlineSnapshot([]);
 expect({ foo: 'bar' }).toMatchObject({ baz: 'qux' });
@@ -122,10 +127,10 @@ mockFn('a');
 expect('someVal').toBeCalled();
 expect('someVal').toBeCalledWith('a');
 
-// $ExpectError property `toHaveBeeenCalledWith` not found in object type
+// $FlowExpectedError property `toHaveBeeenCalledWith` not found in object type
 expect('someVal').toHaveBeeenCalledWith('a');
 
-// $ExpectError property `fn` not found in Array
+// $FlowExpectedError property `fn` not found in Array
 mockFn.mock.calls.fn();
 
 class AClass {}
@@ -138,10 +143,22 @@ describe(aFunction, () => {});
 describe.only('name', () => {});
 describe.only(AClass, () => {});
 describe.only(aFunction, () => {});
-describe.each([['arg1', 2, true], ['arg2', 3, false]])('test', () =>
-  expect('foo').toMatchSnapshot()
+describe.each([['arg1'], ['arg2']])('test', (a) =>
+  expect(a).toMatchSnapshot()
 );
-describe.each(['arg1', 2, true])('test', () => expect('foo').toMatchSnapshot());
+describe.each(['arg1', 2, true])('test', (a) => expect(a).toMatchSnapshot());
+describe.each([['arg1', 'arg2'], ['arg2', 'arg3']])('test', (a, b) =>
+  expect(a).toMatchDiffSnapshot(b)
+);
+describe.each([
+  [1, 1, 2],
+  [1, 2, 3],
+  [2, 1, 3],
+])('.add(%i, %i)', (a, b, expected) => {
+  test(`returns ${expected}`, () => {
+    expect(a + b).toBe(expected);
+  });
+});
 describe.each`
   a    | b    | expected
   ${1} | ${1} | ${2}
@@ -181,7 +198,7 @@ test.each`
   expect(a + b).toBe(expected);
 });
 
-// $ExpectError property `fonly` not found in object type
+// $FlowExpectedError property `fonly` not found in object type
 test.fonly('test', () => expect('foo').toMatchSnapshot());
 
 test('name', done => {
@@ -195,42 +212,47 @@ test.skip('name', done => {
 });
 test('name', done => {
   done.fail(new Error('fail'));
+  // $FlowExpectedError
+  done.fail();
+  done(new Error('fail'));
+  // $FlowExpectedError
+  done("foo");
 });
 
 test.todo('');
-// $ExpectError
+// $FlowExpectedError
 test.todo('', () => {});
 
-// $ExpectError tests should return void or Promise.
+// $FlowExpectedError tests should return void or Promise.
 test('name', () => 5);
 test('name', async () => {});
 test('name', () => new Promise((resolve, reject) => {}));
-// $ExpectError describe does not support Promises.
+// $FlowExpectedError describe does not support Promises.
 describe('name', () => new Promise((resolve, reject) => {}));
 
 beforeEach(() => {});
 beforeEach(() => new Promise((resolve, reject) => {}));
-// $ExpectError Lifecycle methods should return void or Promise.
+// $FlowExpectedError Lifecycle methods should return void or Promise.
 beforeEach(() => 5);
 
 beforeAll(() => {});
 beforeAll(() => new Promise((resolve, reject) => {}));
-// $ExpectError Lifecycle methods should return void or Promise.
+// $FlowExpectedError Lifecycle methods should return void or Promise.
 beforeAll(() => 5);
 
 afterEach(() => {});
 afterEach(() => new Promise((resolve, reject) => {}));
-// $ExpectError Lifecycle methods should return void or Promise.
+// $FlowExpectedError Lifecycle methods should return void or Promise.
 afterEach(() => 5);
 
 afterAll(() => {});
 afterAll(() => new Promise((resolve, reject) => {}));
-// $ExpectError Lifecycle methods should return void or Promise.
+// $FlowExpectedError Lifecycle methods should return void or Promise.
 afterAll(() => 5);
 
 xtest('test', () => {});
 
-// $ExpectError property `bar` not found in object type
+// $FlowExpectedError property `bar` not found in object type
 expect.bar();
 
 expect.extend({
@@ -243,8 +265,8 @@ expect.extend({
 });
 
 expect.extend({
+  // $FlowExpectedError property `pass` not found in object literal
   foo(actual, expected) {
-    // $ExpectError property `pass` not found in object literal
     return {};
   },
 });
@@ -280,7 +302,7 @@ expect(() => {}).toThrow(/err/);
 expect(() => {}).toThrow(err);
 
 (jest.getTimerCount(): number);
-// $ExpectError
+// $FlowExpectedError
 jest.getTimerCount(3);
 
 // Test method chaining fixes
@@ -291,7 +313,7 @@ jest.dontMock('testModule1').dontMock('testModule2');
 jest.resetModules().resetModules();
 
 jest.isolateModules(() => {});
-// $ExpectError
+// $FlowExpectedError
 jest.isolateModules();
 
 jest.spyOn({}, 'foo', 'get');
@@ -306,7 +328,7 @@ expect.addSnapshotSerializer({
   test: val => val && val.hasOwnProperty('foo'),
 });
 
-// $ExpectError
+// $FlowExpectedError
 expect.addSnapshotSerializer(JSON.stringify);
 
 expect.assertions(1);
@@ -337,9 +359,9 @@ expect([1, 2, 3]).toHaveLength(3);
 /**
  *  Plugin: jest-styled-components
  */
-// $ExpectError
+// $FlowExpectedError
 import { mount } from 'enzyme';
-// $ExpectError
+// $FlowExpectedError
 import styled from 'styled-components';
 
 const ColoredSpan = styled.span`
@@ -365,17 +387,17 @@ expect(mount(<ButtonWithBreakpoint />)).toHaveStyleRule('color', 'red', {
   modifier: ':hover',
 });
 
-// $ExpectError
+// $FlowExpectedError
 expect(styledWrapper).toHaveStyleRule();
 
-// $ExpectError
+// $FlowExpectedError
 expect(styledWrapper).toHaveStyleRule({ backgroundColor: 'red' });
 
 /**
  *  Plugin: jest-enzyme
  */
 
-// $ExpectError
+// $FlowExpectedError
 import { shallow } from 'enzyme';
 const Dummy = () => <div />;
 const wrapper = shallow(<Dummy />);
@@ -383,143 +405,143 @@ const wrapper = shallow(<Dummy />);
 // 5.x
 
 expect(wrapper).toBeEmpty();
-// $ExpectError
+// $FlowExpectedError
 expect(wrapper).toBeEmpty(true);
 
 expect(wrapper).toBePresent();
-// $ExpectError
+// $FlowExpectedError
 expect(wrapper).toBePresent(true);
 
 // 6.x
 
 expect(wrapper).toBeChecked();
-// $ExpectError
+// $FlowExpectedError
 expect(wrapper).toBeChecked(true);
 
 expect(wrapper).toBeEmptyRender();
-// $ExpectError
+// $FlowExpectedError
 expect(wrapper).toBeEmptyRender(true);
 
 expect(wrapper).toBeEmptyRender();
-// $ExpectError
+// $FlowExpectedError
 expect(wrapper).toBeEmptyRender(true);
 
 expect(wrapper).toContainMatchingElement('span');
-// $ExpectError
+// $FlowExpectedError
 expect(wrapper).toContainMatchingElement(true);
 
 expect(wrapper).toContainMatchingElements(2, 'span');
-// $ExpectError
+// $FlowExpectedError
 expect(wrapper).toContainMatchingElements('span', true);
 
 expect(wrapper).toContainExactlyOneMatchingElement('span');
-// $ExpectError
+// $FlowExpectedError
 expect(wrapper).toContainExactlyOneMatchingElement(true);
 
 expect(wrapper).toContainReact(<Dummy />);
-// $ExpectError
+// $FlowExpectedError
 expect(wrapper).toContainReact();
-// $ExpectError
+// $FlowExpectedError
 expect(wrapper).toContainReact('string');
 
 expect(wrapper).toExist();
-// $ExpectError
+// $FlowExpectedError
 expect(wrapper).toExist(true);
 
 expect(wrapper).toHaveClassName('class');
-// $ExpectError
+// $FlowExpectedError
 expect(wrapper).toHaveClassName();
-// $ExpectError
+// $FlowExpectedError
 expect(wrapper).toHaveClassName(true);
 
 expect(wrapper).toHaveHTML('<span>test</span>');
-// $ExpectError
+// $FlowExpectedError
 expect(wrapper).toHaveHTML();
-// $ExpectError
+// $FlowExpectedError
 expect(wrapper).toHaveHTML(true);
 
 expect(wrapper).toHaveProp('test');
 expect(wrapper).toHaveProp('test', 'test');
-// $ExpectError
+// $FlowExpectedError
 expect(wrapper).toHaveProp();
-// $ExpectError
+// $FlowExpectedError
 expect(wrapper).toHaveProp(true);
 expect(wrapper).toHaveProp({ test: 'test' });
-// $ExpectError
+// $FlowExpectedError
 expect(wrapper).toHaveProp({ test: 'test' }, 'test');
 
 expect(wrapper).toHaveRef('test');
-// $ExpectError
+// $FlowExpectedError
 expect(wrapper).toHaveRef();
-// $ExpectError
+// $FlowExpectedError
 expect(wrapper).toHaveRef(true);
 
 expect(wrapper).toHaveState('test');
 expect(wrapper).toHaveState('test', 'test');
 expect(wrapper).toHaveState({ test: 'test' });
-// $ExpectError
+// $FlowExpectedError
 expect(wrapper).toHaveState({ test: 'test' }, 'test');
-// $ExpectError
+// $FlowExpectedError
 expect(wrapper).toHaveState();
-// $ExpectError
+// $FlowExpectedError
 expect(wrapper).toHaveState(true);
 
 expect(wrapper).toHaveStyle('color');
 expect(wrapper).toHaveStyle('color', '#ccc');
 expect(wrapper).toHaveStyle({ color: '#ccc' });
-// $ExpectError
+// $FlowExpectedError
 expect(wrapper).toHaveStyle({ color: '#ccc' }, 'test');
-// $ExpectError
+// $FlowExpectedError
 expect(wrapper).toHaveStyle();
-// $ExpectError
+// $FlowExpectedError
 expect(wrapper).toHaveStyle(true);
 
 expect(wrapper).toHaveTagName('marquee');
-// $ExpectError
+// $FlowExpectedError
 expect(wrapper).toHaveTagName();
-// $ExpectError
+// $FlowExpectedError
 expect(wrapper).toHaveTagName(true);
 
 expect(wrapper).toHaveText('test');
-// $ExpectError
+// $FlowExpectedError
 expect(wrapper).toHaveText();
-// $ExpectError
+// $FlowExpectedError
 expect(wrapper).toHaveText(true);
 
 expect(wrapper).toHaveValue('test');
 
 expect(wrapper).toIncludeText('test');
-// $ExpectError
+// $FlowExpectedError
 expect(wrapper).toIncludeText();
-// $ExpectError
+// $FlowExpectedError
 expect(wrapper).toIncludeText(true);
 
 expect(wrapper).toMatchElement(<Dummy />);
 expect(wrapper).toMatchElement(<Dummy />, { ignoreProps: true });
 expect(wrapper).toMatchElement(<Dummy />, { verbose: true });
-// $ExpectError
+// $FlowExpectedError
 expect(wrapper).toMatchElement();
-// $ExpectError
+// $FlowExpectedError
 expect(wrapper).toMatchElement(true);
-// $ExpectError
+// $FlowExpectedError
 expect(wrapper).toMatchElement(<Dummy />, { ignoreProps: 123 });
-// $ExpectError
+// $FlowExpectedError
 expect(wrapper).toMatchElement(<Dummy />, { verbose: 123 });
-// $ExpectError
+// $FlowExpectedError
 expect(wrapper).toMatchElement(<Dummy />, { foobar: true });
 
 expect(wrapper).toMatchSelector('span');
-// $ExpectError
+// $FlowExpectedError
 expect(wrapper).toMatchSelector();
-// $ExpectError
+// $FlowExpectedError
 expect(wrapper).toMatchSelector(true);
 
 // 7.x
 
 expect(wrapper).toHaveDisplayName('marquee');
-// $ExpectError
+// $FlowExpectedError
 expect(wrapper).toHaveDisplayName();
-// $ExpectError
+// $FlowExpectedError
 expect(wrapper).toHaveDisplayName(true);
 
 /**
@@ -533,33 +555,33 @@ expect(wrapper).toHaveDisplayName(true);
   expect(element).toBeEmpty();
   expect(element).toBeInTheDocument();
   expect(element).toBeVisible();
-  // $ExpectError
+  // $FlowExpectedError
   expect(element).toContainElement();
   expect(element).toContainElement(element);
-  // $ExpectError
+  // $FlowExpectedError
   expect(element).toContainHTML();
   expect(element).toContainHTML('<div></div>');
   expect(element).toHaveAttribute('foo');
   expect(element).toHaveAttribute('foo', 'bar');
-  // $ExpectError: attribute name should be present
+  // $FlowExpectedError: attribute name should be present
   expect(element).toHaveAttribute();
-  // $ExpectError: attribute name should be a string
+  // $FlowExpectedError: attribute name should be a string
   expect(element).toHaveAttribute(1);
   expect(element).toHaveAttribute('foo', 1);
-  // $ExpectError
+  // $FlowExpectedError
   expect(element).toHaveClass(1);
   expect(element).toHaveClass('foo');
   expect(element).toHaveFocus();
-  // $ExpectError
+  // $FlowExpectedError
   expect(element).toHaveFormValues();
   expect(element).toHaveFormValues({ foo: 'bar' });
-  // $ExpectError
+  // $FlowExpectedError
   expect(element).toHaveStyle();
   expect(element).toHaveStyle('foo');
   expect(element).toHaveTextContent('123');
-  // $ExpectError: expected text content should be present
+  // $FlowExpectedError: expected text content should be present
   expect(element).toHaveTextContent();
-  // $ExpectError: expected text content should be a string
+  // $FlowExpectedError: expected text content should be a string
   expect(element).toHaveTextContent(1);
 
   expect(element).toBeInTheDOM();
@@ -574,7 +596,7 @@ expect(wrapper).toHaveDisplayName(true);
     expect(jquery).not.toExist();
 
     expect(jquery).toHaveLength(1);
-    // $ExpectError: parameter required
+    // $FlowExpectedError: parameter required
     expect(jquery).toHaveLength();
 
     expect(jquery).toHaveId('username');
@@ -708,4 +730,13 @@ expect(wrapper).toHaveDisplayName(true);
   expect('hello world').toInclude('ell');
   expect('hello hello world').toIncludeRepeated('hello', 2);
   expect('hello world').toIncludeMultiple(['world', 'hello']);
+}
+
+{
+  // Type hint becomes the returned type
+  const FooModule1: string = jest.requireActual<string>('FooModule');
+  // $ExpectError Type hint becomes the returned type
+  const FooModule2: number = jest.requireActual<string>('FooModule');
+  // No type hint means we return any
+  const FooModule3: boolean = jest.requireActual('FooModule');
 }

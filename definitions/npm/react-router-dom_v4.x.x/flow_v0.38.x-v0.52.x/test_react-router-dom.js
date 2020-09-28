@@ -22,7 +22,7 @@ import {
   <div />
 </BrowserRouter>;
 
-// $ExpectError
+// $FlowExpectedError
 <BrowserRouter basename={{}} />;
 
 // HashRouter
@@ -37,7 +37,7 @@ import {
   <div />
 </HashRouter>;
 
-// $ExpectError
+// $FlowExpectedError
 <HashRouter hashType="magic" />;
 
 // Link
@@ -56,7 +56,7 @@ import {
   About
 </Link>;
 
-// $ExpectError
+// $FlowExpectedError
 <Link to={[]} />;
 
 // NavLink
@@ -84,12 +84,12 @@ import {
   About
 </NavLink>;
 
-// $ExpectError
+// $FlowExpectedError
 <NavLink />;
 
 const IncorrectHistoryBlockUsage = (history: RouterHistory) => {
   // Wrong arguments here
-  // $ExpectError
+  // $FlowExpectedError
   history.block(false);
 
   // These are valid
@@ -110,9 +110,9 @@ const match2: null | Match = matchPath("/the/pathname", {
 });
 const match3: null | Match = matchPath("/the/pathname");
 
-// $ExpectError
+// $FlowExpectedError
 matchPath();
-// $ExpectError
+// $FlowExpectedError
 const matchError: string = matchPath("/the/pathname", {
   path: "the/:dynamicId"
 });

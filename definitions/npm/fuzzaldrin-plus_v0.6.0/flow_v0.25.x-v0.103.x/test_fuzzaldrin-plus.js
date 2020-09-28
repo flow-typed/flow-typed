@@ -23,37 +23,37 @@ describe('fuzzaldrin-plus@0.6.0', () => {
   });
 
   it('generic wrong usage', () => {
-    // $ExpectError
+    // $FlowExpectedError
     fuzzaldrinPlus.score();
-    // $ExpectError
+    // $FlowExpectedError
     fuzzaldrinPlus.match();
-    // $ExpectError
+    // $FlowExpectedError
     fuzzaldrinPlus.wrap();
-    // $ExpectError
+    // $FlowExpectedError
     fuzzaldrinPlus.prepareQuery();
-    // $ExpectError
+    // $FlowExpectedError
     fuzzaldrinPlus.score('Maybe', 'me', true);
-    // $ExpectError
+    // $FlowExpectedError
     fuzzaldrinPlus.score('Maybe', 'me', 'string');
-    // $ExpectError
+    // $FlowExpectedError
     fuzzaldrinPlus.score('Maybe', 'me', 1);
 
     const items = ['Maybe', 'Me'];
-    // $ExpectError
+    // $FlowExpectedError
     fuzzaldrinPlus.score(items, 'me');
-    // $ExpectError
+    // $FlowExpectedError
     fuzzaldrinPlus.match(items, 'me');
-    // $ExpectError
+    // $FlowExpectedError
     fuzzaldrinPlus.match(items, 'me', {
       unknownProperty: true,
       allowErrors: true,
     });
-    // $ExpectError
+    // $FlowExpectedError
     fuzzaldrinPlus.wrap(items, 'me');
-    // $ExpectError
+    // $FlowExpectedError
     fuzzaldrinPlus.prepareQuery();
 
-    // $ExpectError
+    // $FlowExpectedError
     const options: Options = { allowErrors: 'not a boolean' };
   });
 
@@ -153,33 +153,33 @@ describe('fuzzaldrin-plus@0.6.0', () => {
   });
 
   it('filter wrong usage', () => {
-    // $ExpectError
+    // $FlowExpectedError
     fuzzaldrinPlus.filter();
-    // $ExpectError
+    // $FlowExpectedError
     fuzzaldrinPlus.filter('not an array', 'query');
-    // $ExpectError
+    // $FlowExpectedError
     fuzzaldrinPlus.filter(['Maybe', 'Me'], 'me', {
       allowErrors: 'not a boolean',
     });
-    // $ExpectError
+    // $FlowExpectedError
     fuzzaldrinPlus.filter(['Maybe', 'Me'], 'me', { key: true });
-    // $ExpectError
+    // $FlowExpectedError
     fuzzaldrinPlus.filter(['Maybe', 'Me'], 'me', { preparedQuery: {} });
-    // $ExpectError
+    // $FlowExpectedError
     fuzzaldrinPlus.filter(['Maybe', 'Me'], 'me', {
       allowErrors: true,
       unknownProperty: true,
     });
-    // $ExpectError
+    // $FlowExpectedError
     fuzzaldrinPlus.filter([{ title: 'Maybe' }, { title: 'Me' }], 'me', {
       key: 1,
     });
-    // $ExpectError
+    // $FlowExpectedError
     fuzzaldrinPlus.filter([{ title: 'Maybe' }, { title: 'Me' }], 'me', {
       allowErrors: 'not a boolean',
       key: 1,
     });
-    // $ExpectError
+    // $FlowExpectedError
     fuzzaldrinPlus.filter([{ title: 'Maybe' }, { title: 'Me' }], 'me', {
       allowErrors: 'not a boolean',
       key: 'title',
@@ -192,7 +192,7 @@ describe('fuzzaldrin-plus@0.6.0', () => {
     const options = { usePathScoring: true };
 
     fuzzaldrinPlus.filter(items, query, options);
-    // $ExpectError
+    // $FlowExpectedError
     fuzzaldrinPlus.match(items[0], query, options);
   });
 });

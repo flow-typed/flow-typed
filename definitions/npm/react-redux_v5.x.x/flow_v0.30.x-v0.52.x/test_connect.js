@@ -33,7 +33,7 @@ type Props2 = {
 class C2 extends React.Component<void, Props2, void> {
   render() {
     return (
-      // $ExpectError
+      // $FlowExpectedError
       <div onClick={this.props.dispatch()}>
         {this.props.a} {this.props.b}
       </div>
@@ -57,20 +57,20 @@ class C3 extends React.Component<void, Props2, void> {
 
 const CC1 = connect()(C1);
 <CC1 a={1} b="s" />;
-// $ExpectError
+// $FlowExpectedError
 <CC1 />; // missing a, b
-// $ExpectError
+// $FlowExpectedError
 <CC1 a={1} />; // missing b
-// $ExpectError
+// $FlowExpectedError
 <CC1 a="s" b="s" />; // wrong a type
 
 const CC3 = connect()(C3);
 <CC3 a={1} b="s" />;
-// $ExpectError
+// $FlowExpectedError
 <CC3 />; // missing a, b
-// $ExpectError
+// $FlowExpectedError
 <CC3 a={1} />; // missing b
-// $ExpectError
+// $FlowExpectedError
 <CC3 a="s" b="s" />; // wrong a type
 
 //
@@ -78,14 +78,14 @@ const CC3 = connect()(C3);
 //
 
 connect(null, null, null, { pure: true })(C1);
-// $ExpectError
+// $FlowExpectedError
 connect(null, null, null, { pure: 1 })(C1); // wrong type
 connect(null, null, null, { withRef: true })(C1);
-// $ExpectError
+// $FlowExpectedError
 connect(null, null, null, { withRef: 1 })(C1); // wrong type
 const CC4 = connect(null, null, null, {})(C1);
 <CC4 a={1} b="s" />;
-// $ExpectError
+// $FlowExpectedError
 <CC4 />; // missing a, b
 
 //
@@ -99,9 +99,9 @@ const connector5: Connector<OwnProps1, Props1> = connect((state: State) => ({
 }));
 const CC5 = connector5(C1);
 <CC5 b="s" />;
-// $ExpectError
+// $FlowExpectedError
 <CC5 />; // missing b
-// $ExpectError
+// $FlowExpectedError
 <CC5 b={1} />; // wrong b type
 
 // with ownProps
@@ -114,9 +114,9 @@ const connector6: Connector<
 }));
 const CC6 = connector6(C1);
 <CC6 b="s" />;
-// $ExpectError
+// $FlowExpectedError
 <CC6 />; // missing b
-// $ExpectError
+// $FlowExpectedError
 <CC6 b={1} />; // wrong b type
 
 //
@@ -134,9 +134,9 @@ const connector7: Connector<
 > = connect(null, (dispatch: Dispatch) => ({ dispatch }));
 const CC7 = connector7(C3);
 <CC7 a={1} b="s" />;
-// $ExpectError
+// $FlowExpectedError
 <CC7 a={1} />; // missing b
-// $ExpectError
+// $FlowExpectedError
 <CC7 a="s" b="s" />; // wrong b type
 
 type OwnProps3 = { a: number };
@@ -150,9 +150,9 @@ const connector8: Connector<
 }));
 const CC8 = connector8(C3);
 <CC8 a={1} />;
-// $ExpectError
+// $FlowExpectedError
 <CC8 />; // missing a
-// $ExpectError
+// $FlowExpectedError
 <CC8 a="s" />; // wrong b type
 
 //
@@ -165,9 +165,9 @@ const connector9: Connector<OwnProps1, Props2> = connect(
 );
 const CC9 = connector9(C3);
 <CC9 b="s" />;
-// $ExpectError
+// $FlowExpectedError
 <CC9 />; // missing b
-// $ExpectError
+// $FlowExpectedError
 <CC9 b={1} />; // wrong b type
 
 //
@@ -180,9 +180,9 @@ const connector10: Connector<
 > = connect(() => (state: State) => ({ a: state.c }));
 const CC10 = connector10(C3);
 <CC10 b="s" />;
-// $ExpectError
+// $FlowExpectedError
 <CC10 />; // missing b
-// $ExpectError
+// $FlowExpectedError
 <CC10 b={1} />; // wrong b type
 
 //

@@ -15,7 +15,7 @@ bcrypt.genSalt((err, salt) => {
 bcrypt.genSalt(num, (err, salt) => {
   str = salt;
 });
-// $ExpectError
+// $FlowExpectedError
 bcrypt.genSalt(str, (err, salt) => {
   str = salt;
 });
@@ -34,7 +34,7 @@ bool = bcrypt.compareSync(str, str);
 bcrypt.compare(str, str, (err, same) => {
   bool = same;
 });
-// $ExpectError
+// $FlowExpectedError
 bcrypt.compare(str, str);
 
 num = bcrypt.getRounds(str);

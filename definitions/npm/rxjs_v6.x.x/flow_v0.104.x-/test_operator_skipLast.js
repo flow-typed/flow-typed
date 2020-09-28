@@ -9,8 +9,8 @@ it("should infer correctly", () => {
 });
 
 it("should enforce types", () => {
-  // $ExpectError
+  // $FlowExpectedError
   const o = of("foo", "bar", "baz").pipe(skipLast());
-  // $ExpectError
+  // $FlowExpectedError
   const p = of("foo", "bar", "baz").pipe(skipLast("7"));
 });

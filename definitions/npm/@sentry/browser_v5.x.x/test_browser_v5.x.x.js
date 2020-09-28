@@ -1,4 +1,8 @@
 import * as Sentry from '@sentry/browser';
+import type {
+  Breadcrumb, BreadcrumbHint,
+  SentryEvent, EventHint,
+} from '@sentry/browser';
 import { it, describe } from 'flow-typed-test';
 
 describe('@sentry/browser', () => {
@@ -7,10 +11,61 @@ describe('@sentry/browser', () => {
       Sentry.init({});
       Sentry.init({ dsn: 'dsn_value' });
 
-      // $ExpectError
+      // $FlowExpectedError
       Sentry.init({ dsn: 123 });
-      // $ExpectError
+      // $FlowExpectedError
       Sentry.init({ dsn: null });
+    });
+
+    it('Sentry.init callbacks', () => {
+      // You can either return the object (can modify it on the way)
+      // or return null to suppress the event
+      Sentry.init({
+        beforeBreadcrumb(breadcrumb: Breadcrumb, hint?: BreadcrumbHint) {
+          return null;
+        },
+      });
+      Sentry.init({
+        beforeBreadcrumb(breadcrumb: Breadcrumb, hint?: BreadcrumbHint) {
+          return breadcrumb;
+        },
+      });
+
+      Sentry.init({
+        beforeSend(event: SentryEvent, hint?: EventHint) {
+          return null;
+        },
+      });
+      Sentry.init({
+        beforeSend(event: SentryEvent, hint?: EventHint) {
+          return event;
+        },
+      });
+      Sentry.init({
+        async beforeSend(event: SentryEvent, hint?: EventHint) {
+          return event;
+        },
+      });
+
+
+      Sentry.init({
+        // $FlowExpectedError must return null not false
+        beforeBreadcrumb(breadcrumb: Breadcrumb, hint?: BreadcrumbHint) {
+          return false;
+        },
+      });
+      Sentry.init({
+        // $FlowExpectedError cannot be Promise
+        async beforeBreadcrumb(breadcrumb: Breadcrumb, hint?: BreadcrumbHint) {
+          return breadcrumb;
+        },
+      });
+      Sentry.init({
+        // $FlowExpectedError must return null not false
+        beforeSend(event: SentryEvent, hint?: EventHint) {
+          return false;
+        },
+      });
     });
 
     it('Sentry.captureException', () => {
@@ -19,7 +74,7 @@ describe('@sentry/browser', () => {
       Sentry.captureException(new Map());
       Sentry.captureException(undefined);
 
-      // $ExpectError: Too many args
+      // $FlowExpectedError: Too many args
       Sentry.captureException('Something broke', {}, null);
     });
 
@@ -31,18 +86,30 @@ describe('@sentry/browser', () => {
         err: new Error(),
       });
 
-      // $ExpectError
+      // $FlowExpectedError
       Sentry.setExtra();
-      // $ExpectError
+      // $FlowExpectedError
       Sentry.setExtra(null, 'foo');
+    });
+
+    it('Sentry.setExtras', () => {
+      const narrowerType: { [string]: string, ... } = { narrower: 'type' };
+      Sentry.setExtras(narrowerType);
+
+      // $FlowExpectedError
+      Sentry.setExtras(null);
     });
 
     it('Sentry.setUser', () => {
       Sentry.setUser({ email: 'john.doe@example.com' });
       Sentry.setUser({ email: 'john.doe@example.com', arbitrary: 'value' });
+      Sentry.setUser({ id: 'abcd-efgh' });
+      Sentry.setUser({ id: 3 });
 
-      // $ExpectError
+      // $FlowExpectedError
       Sentry.setUser();
+      // $FlowExpectedError
+      Sentry.setUser({ id: new Date() });
     });
 
     it('Sentry.withScope', () => {
@@ -50,7 +117,7 @@ describe('@sentry/browser', () => {
         scope.setUser({ email: 'john.doe@example.com' });
       });
 
-      // $ExpectError
+      // $FlowExpectedError
       Sentry.withScope(null);
     });
 
@@ -65,23 +132,23 @@ describe('@sentry/browser', () => {
         scope.setFingerprint(['my-view-function']);
       });
 
-      // $ExpectError
+      // $FlowExpectedError
       Sentry.configureScope(null);
     });
 
     it('Sentry.setTag', () => {
       Sentry.setTag('page_locale', 'de-at');
 
-      // $ExpectError
+      // $FlowExpectedError
       Sentry.setTag();
-      // $ExpectError
+      // $FlowExpectedError
       Sentry.setTag('page_locale', null);
     });
 
     it('Sentry.captureMessage', () => {
       Sentry.captureMessage('This is a debug message', 'debug');
 
-      // $ExpectError
+      // $FlowExpectedError
       Sentry.captureMessage('This is a debug message', 'invalid_severity');
     });
 
@@ -95,9 +162,9 @@ describe('@sentry/browser', () => {
         data: { foo: new Map() },
       });
 
-      // $ExpectError
+      // $FlowExpectedError
       Sentry.addBreadcrumb(null);
-      // $ExpectError
+      // $FlowExpectedError
       Sentry.addBreadcrumb({ other: 'value' });
     });
   });
@@ -106,14 +173,14 @@ describe('@sentry/browser', () => {
     it('Sentry.forceLoad', () => {
       Sentry.forceLoad();
 
-      // $ExpectError
+      // $FlowExpectedError
       Sentry.forceLoad(null);
     });
 
     it('Sentry.onLoad', () => {
       Sentry.onLoad(() => {});
 
-      // $ExpectError
+      // $FlowExpectedError
       Sentry.onLoad(null);
     });
   });
@@ -122,7 +189,7 @@ describe('@sentry/browser', () => {
     it('BrowserClient', () => {
       new Sentry.BrowserClient({ dsn: 'dsn_value ' });
 
-      // $ExpectError
+      // $FlowExpectedError
       new Sentry.BrowserClient({ unexpected: 'config' });
     });
 
@@ -130,9 +197,51 @@ describe('@sentry/browser', () => {
       const client = new Sentry.BrowserClient({ dsn: 'dsn_value ' });
       new Sentry.Hub(client);
 
-      // $ExpectError
+      // $FlowExpectedError
       new Sentry.Hub();
     });
   });
-});
 
+  describe('Integrations', () => {
+    it('Includes Core integrations', () => {
+      new Sentry.Integrations.FunctionToString();
+
+      // $FlowExpectedError
+      new Sentry.Integrations.OnUnhandledRejection(); // Node-specific integration, not in Browser
+    });
+
+    it('Includes Browser-specific integrations', () => {
+      new Sentry.Integrations.UserAgent();
+      new Sentry.Integrations.Breadcrumbs({ console: false });
+
+      // $FlowExpectedError
+      new Sentry.Integrations.OnUnhandledRejection(); // Node-specific integration, not in Browser
+    });
+
+    it('Accepts custom integrations', () => {
+      class CustomIntegration {
+        constructor() {}
+        name = 'CustomIntegration';
+        setupOnce(addGlobalEventProcessor, getCurrentHub) {}
+      }
+
+      new Sentry.init({ integrations: [new CustomIntegration()] });
+    });
+
+  });
+
+  describe('Transports', () => {
+    it('Includes transports', () => {
+      new Sentry.Transports.FetchTransport({ dsn: 'dsn_value' });
+      new Sentry.Transports.XHRTransport({
+        dsn: 'dsn_value',
+        headers: { foo: 'bar' },
+      });
+
+      // $FlowExpectedError
+      new Sentry.Transports.InvalidTransport({ dsn: 'dsn_value' });
+      // $FlowExpectedError
+      new Sentry.Transports.FetchTransport({}); // Missing `dsn` option
+    });
+  });
+});

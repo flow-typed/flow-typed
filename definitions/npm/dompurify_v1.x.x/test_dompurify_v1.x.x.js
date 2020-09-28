@@ -17,9 +17,9 @@ describe('#createDOMPurify', () => {
       // nothing; despite DOMPurify's README, returning currentNode does nothing
     });
 
-    // $ExpectError
+    // $FlowExpectedError
     DOMPurify.addHook('invalidHookName', (currentNode, data, config) => {
-      // $ExpectError
+      // $FlowExpectedError
       return currentNode;
     });
 
@@ -33,12 +33,12 @@ describe('#createDOMPurify', () => {
   });
 
   it('should sanitize to string', () => {
-    // $ExpectError
+    // $FlowExpectedError
     DOMPurify.sanitize(dirty, {
       ALLOWED_TAGS: ['invalid'],
     });
 
-    // $ExpectError
+    // $FlowExpectedError
     DOMPurify.sanitize(dirty, {
       INVALID_ARG: 42,
     });

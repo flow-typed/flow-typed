@@ -10,9 +10,9 @@ describe('The `useClipboard` hook', () => {
     useClipboard();
     useClipboard({ copiedTimeout: 200 });
 
-    // $ExpectError
+    // $FlowExpectedError
     useClipboard(null);
-    // $ExpectError
+    // $FlowExpectedError
     useClipboard({ fail });
   });
 

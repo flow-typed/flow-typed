@@ -6,12 +6,12 @@ describe('react-onclickoutside', () => {
   it('IGNORE_CLASS_NAME', () => {
     IGNORE_CLASS_NAME.slice();
 
-    // $ExpectError Cannot perform arithmetic operation because string literal `ignore-react-onclickoutside` [1] is not a number.
+    // $FlowExpectedError Cannot perform arithmetic operation because string literal `ignore-react-onclickoutside` [1] is not a number.
     IGNORE_CLASS_NAME - 1;
   });
 
   it('should not to wrap a component with preventDefault props of incorrect type', () => {
-    // $ExpectError Cannot call `onClickOutside` because string [1] is incompatible with boolean [2].
+    // $FlowExpectedError Cannot call `onClickOutside` because string [1] is incompatible with boolean [2].
     class FailComponent extends React.Component<{ preventDefault: string }> {
       render() {
         return <div/>;
@@ -30,11 +30,11 @@ describe('react-onclickoutside', () => {
     const B = onClickOutside(A);
 
     it('not accept incorrect props', () => {
-      // $ExpectError
+      // $FlowExpectedError
       <B />;
-      // $ExpectError
+      // $FlowExpectedError
       <B a={12}/>;
-      // $ExpectError
+      // $FlowExpectedError
       <B a="foo" preventDefault="no" />;
     });
 
@@ -49,7 +49,7 @@ describe('react-onclickoutside', () => {
     });
 
     it('error when a non-existing method is accessed', () => {
-      // $ExpectError
+      // $FlowExpectedError
       const fn = ref => ref ? ref.getInstance().nonexisting() : null;
       <B a="foo" ref={fn} />;
     });

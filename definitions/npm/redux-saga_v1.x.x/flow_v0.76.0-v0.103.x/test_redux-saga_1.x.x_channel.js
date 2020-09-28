@@ -6,19 +6,19 @@ describe("channel", () => {
   it("returned Channel must be read only object", () => {
     const ch = channel();
 
-    // $ExpectError - read-only
+    // $FlowExpectedError - read-only
     ch.close = "hi david";
-    // $ExpectError - read-only
+    // $FlowExpectedError - read-only
     ch.take = "hi david";
-    // $ExpectError - read-only
+    // $FlowExpectedError - read-only
     ch.put = "hi david";
-    // $ExpectError - read-only
+    // $FlowExpectedError - read-only
     ch.flush = "hi david";
   });
 
   it("returned Channel must be exact type", () => {
     const ch = channel();
-    // $ExpectError- exact type
+    // $FlowExpectedError- exact type
     ch.anyOtherProp = "anyValue";
   });
 
@@ -33,10 +33,10 @@ describe("channel", () => {
   });
 
   it("must raises an error first argument isn't buffer or nothing", () => {
-    // $ExpectError number isn't Buffer
+    // $FlowExpectedError number isn't Buffer
     const ch = channel(1);
 
-    // $ExpectError object isn't Buffer
+    // $FlowExpectedError object isn't Buffer
     const ch2 = channel({});
   });
 
@@ -68,29 +68,29 @@ describe("channel", () => {
 
     (ch.close(): void);
 
-    // $ExpectError
+    // $FlowExpectedError
     const cbTake = (a: string | TEnd) => {};
     (ch.take(cbTake): void);
 
-    // $ExpectError
+    // $FlowExpectedError
     const cbFlush = (a: Array<boolean> | TEnd) => {};
     (ch.flush(cbFlush): void);
 
-    // $ExpectError
+    // $FlowExpectedError
     (ch.put("oppsss"): void);
   });
 
   it("must raises an error when call 'take' without args", () => {
     const ch = channel();
 
-    // $ExpectError
+    // $FlowExpectedError
     ch.take();
   });
 
   it("must raises an error when call 'flush' without args", () => {
     const ch = channel();
 
-    // $ExpectError
+    // $FlowExpectedError
     ch.flush();
   });
 
@@ -98,7 +98,7 @@ describe("channel", () => {
     declare var buffer: Buffer<number>;
     const ch = channel(buffer);
 
-    // $ExpectError
+    // $FlowExpectedError
     ch.put();
   });
 });

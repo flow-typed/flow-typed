@@ -24,17 +24,17 @@ const points = simpleIndex.getClusters([0, 0, 0, 0], 0);
 
 points.forEach(point => {
   // Can't make any assumptions on the shape of properties at this point
-  // $ExpectError
+  // $FlowExpectedError
   point.properties.slug;
 
   // Test branching for cluster and a leaf
   if (point.properties.cluster) {
     (point.properties.cluster_id: number);
-    // $ExpectError
+    // $FlowExpectedError
     (point.properties.slug: string);
   } else {
     (point.properties.slug: string);
-    // $ExpectError
+    // $FlowExpectedError
     (point.properties.cluster_id: number);
   }
 });
@@ -42,11 +42,11 @@ points.forEach(point => {
 simpleIndex.getChildren(123).forEach(point => {
   if (point.properties.cluster) {
     (point.properties.cluster_id: number);
-    // $ExpectError
+    // $FlowExpectedError
     (point.properties.slug: string);
   } else {
     (point.properties.slug: string);
-    // $ExpectError
+    // $FlowExpectedError
     (point.properties.cluster_id: number);
   }
 });
@@ -54,18 +54,18 @@ simpleIndex.getChildren(123).forEach(point => {
 simpleIndex.getLeaves(123).forEach(leaf => {
   // Can safely assume the leaf shape
   (leaf.properties.slug: string);
-  // $ExpectError
+  // $FlowExpectedError
   leaf.properties.cluster;
 });
 
 simpleIndex.getTile(0, 0, 0).features.forEach(feature => {
   if (feature.tags.cluster) {
     (feature.tags.cluster_id: number);
-    // $ExpectError
+    // $FlowExpectedError
     (point.properties.slug: string);
   } else {
     (feature.tags.slug: string);
-    // $ExpectError
+    // $FlowExpectedError
     (point.properties.cluster_id: number);
   }
 });
@@ -80,11 +80,11 @@ const reduceIndex = supercluster({
   initial: () => ({ slugs: [] }),
   reduce: (accum, props) => {
     (accum.slugs: []);
-    // $ExpectError
+    // $FlowExpectedError
     accum.foo;
 
     (props.slug: string);
-    // $ExpectError
+    // $FlowExpectedError
     props.foo;
 
     accum.slugs.push(props.slug);
@@ -108,7 +108,7 @@ reduceIndex.getClusters([0, 0, 0, 0], 0).forEach(point => {
   if (point.properties.cluster) {
     (point.properties.cluster_id: number);
     (point.properties.slugs: Array<string>);
-    // $ExpectError
+    // $FlowExpectedError
     (point.properties.slugs: Array<number>);
   }
 });
@@ -120,7 +120,7 @@ reduceIndex.getClusters([0, 0, 0, 0], 0).forEach(point => {
 const mapReduceIndex = supercluster({
   map: props => {
     (props.slug: string);
-    // $ExpectError
+    // $FlowExpectedError
     props.foo;
 
     return {
@@ -130,7 +130,7 @@ const mapReduceIndex = supercluster({
   initial: () => ({ thumbs: [] }),
   reduce: (accum, props) => {
     (props.thumb: string);
-    // $ExpectError
+    // $FlowExpectedError
     props.slug;
 
     accum.thumbs.push(props.thumb);
@@ -154,11 +154,11 @@ mapReduceIndex.getClusters([0, 0, 0, 0], 0).forEach(point => {
   if (point.properties.cluster) {
     (point.properties.cluster_id: number);
     (point.properties.thumbs: Array<string>);
-    // $ExpectError
+    // $FlowExpectedError
     (point.properties.thumbs: Array<number>);
   } else {
     (point.properties.slug: string);
-    // $ExpectError
+    // $FlowExpectedError
     point.properties.thumb;
   }
 });

@@ -29,7 +29,7 @@ it('handles handles mismactched input and initialValue types', () => {
 });
 
 it('errors when no initialValue passed, and expecting non-nullable previousValue', () => {
-  // $ExpectError
+  // $FlowExpectedError
   pReduce(
     [1, 2, Promise.resolve(3)],
     (previousValue: number, currentValue: number, index: number) => 1,
@@ -39,7 +39,7 @@ it('errors when no initialValue passed, and expecting non-nullable previousValue
 it('errors when wrong initialValue type ', () => {
   pReduce(
     [1, 2, Promise.resolve(3)],
-    // $ExpectError
+    // $FlowExpectedError
     (previousValue: number, currentValue: number, index: number) => 1,
     'not a number',
   );
@@ -48,7 +48,7 @@ it('errors when wrong initialValue type ', () => {
 it('errors when wrong reducer types ', () => {
   pReduce(
     [1, 2, Promise.resolve(3)],
-    // $ExpectError
+    // $FlowExpectedError
     (previousValue: ?string, currentValue: string, index: number) => 1,
   );
 });
@@ -57,6 +57,6 @@ it('errors when wrong return type ', () => {
   (pReduce(
     [1, 2, Promise.resolve(3)],
     (previousValue: ?number, currentValue: number, index: number) => 1,
-    // $ExpectError
+    // $FlowExpectedError
   ): Promise<string>);
 });

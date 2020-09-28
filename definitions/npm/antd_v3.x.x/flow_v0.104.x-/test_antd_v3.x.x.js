@@ -184,7 +184,7 @@ describe("Button", () => {
         onClick={(event: SyntheticEvent<HTMLButtonElement>) => undefined}
       />
     );
-    // $ExpectError
+    // $FlowExpectedError
     const bad = <Button onClick="bad" />;
   });
   it("should accept only certain strings for type prop", () => {
@@ -194,7 +194,7 @@ describe("Button", () => {
     const good3 = <Button type="danger" />;
     const good5 = <Button type="link" />;
     const good4 = <Button type="default" />;
-    // $ExpectError
+    // $FlowExpectedError
     const bad = <Button type="bad" />;
   });
 });
@@ -347,7 +347,7 @@ describe("Form", () => {
       Form.create<PropsGoodTest>({name: 'good_test_form'})(GoodTestComponent);
 
     const BadWrappedTestForm: React$ComponentType<$Diff<PropsBadTest, { form: *, ... }>> =
-      // $ExpectError PropsBadTest. it must contain form attribute
+      // $FlowExpectedError PropsBadTest. it must contain form attribute
       Form.create<PropsBadTest>({name: 'bad_test_form'})(BadTestComponent);
 
   });
@@ -389,7 +389,7 @@ describe("Input.Password", () => {
   });
   it("should accept boolean visibilityToggle", () => {
     const good = <Input.Password visibilityToggle={false} />;
-    // $ExpectError string. visibilityToggle must be of type boolean
+    // $FlowExpectedError string. visibilityToggle must be of type boolean
     const bad = <Input.Password visibilityToggle={"false"} />
   });
 });
@@ -535,7 +535,7 @@ describe("Popconfirm", () => {
     // Testing placement prop in particular just to verify sharing between
     // Popconfirm, Popover, and Tooltip is working.
     const good = <Popconfirm placement='top' />;
-    // $ExpectError
+    // $FlowExpectedError
     const bad = <Popconfirm placement='topCenter' />;
   });
 });
@@ -549,7 +549,7 @@ describe("Popover", () => {
     // Testing placement prop in particular just to verify sharing between
     // Popconfirm, Popover, and Tooltip is working.
     const good = <Popover placement='top' />;
-    // $ExpectError
+    // $FlowExpectedError
     const bad = <Popover placement='topCenter' />;
   });
 });
@@ -660,7 +660,7 @@ describe("Select", () => {
     const select1 = <Select mode="default" />;
     const select2 = <Select mode="multiple" />;
     const select3 = <Select mode="tags" />;
-    // $ExpectError
+    // $FlowExpectedError
     const select4 = <Select mode="notARealOption" />;
   });
 
@@ -885,7 +885,7 @@ describe("Tooltip", () => {
     // Testing placement prop in particular just to verify sharing between
     // Popconfirm, Popover, and Tooltip is working.
     const good = <Tooltip title='tooltip' placement='top' />;
-    // $ExpectError
+    // $FlowExpectedError
     const bad = <Tooltip title='tooltip' placement='topCenter' />;
   });
 });

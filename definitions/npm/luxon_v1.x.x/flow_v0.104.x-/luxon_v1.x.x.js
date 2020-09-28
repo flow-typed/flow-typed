@@ -272,6 +272,7 @@ declare module "luxon" {
       DurationConfig;
     toObject(options?: {| includeConfig?: boolean |}): DurationObject;
     toString(): string;
+    valueOf(): number;
   }
 
   declare type DateTimeFromOptions = {|
@@ -488,11 +489,11 @@ declare module "luxon" {
     zoneName: string;
     diff(
       otherDateTime: DateTime,
-      unit: DateTimeUnit | Array<DateTimeUnit>,
+      unit?: DateTimeUnit | Array<DateTimeUnit>,
       options?: DateTimeDiffOptions
     ): Duration;
     diffNow(
-      unit: DateTimeUnit | Array<DateTimeUnit>,
+      unit?: DateTimeUnit | Array<DateTimeUnit>,
       options?: DateTimeDiffOptions
     ): Duration;
     endOf(unit: DateTimeUnit): DateTime;

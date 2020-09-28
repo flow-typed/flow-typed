@@ -82,7 +82,7 @@ AdminSchema.loadClass(AdminDoc);
 
 AdminSchema.post("save", (doc, next) => {
   doc.name = "Abc";
-  // $ExpectError
+  // $FlowExpectedError
   doc.name = 123;
   next();
 });
@@ -91,13 +91,13 @@ export const Admin = mongoose.model("Admin", AdminSchema);
 
 Admin.findById(1).then(d => {
   if (d) {
-    // $ExpectError
+    // $FlowExpectedError
     d.checkPassword(123);
   }
 });
 
 Admin.test(123);
-// $ExpectError
+// $FlowExpectedError
 Admin.test("123");
 
 const a = Admin.findOne({})
@@ -105,13 +105,13 @@ const a = Admin.findOne({})
   .then(ddd => {
     if (ddd) {
       ddd.checkPassword("123");
-      // $ExpectError
+      // $FlowExpectedError
       ddd.checkPassword(123);
     }
   });
 
 const a1 = new Admin({ email: "123", token: "www" });
-// $ExpectError
+// $FlowExpectedError
 const a2 = new Admin({ email: 123, token: "www" });
 
 

@@ -5,9 +5,9 @@ import { describe, it } from "flow-typed-test";
 
 describe("mkdirp-promise", () => {
   it("errors", () => {
-    // $ExpectError
+    // $FlowExpectedError
     mkdirp();
-    // $ExpectError
+    // $FlowExpectedError
     mkdirp(42);
   });
 

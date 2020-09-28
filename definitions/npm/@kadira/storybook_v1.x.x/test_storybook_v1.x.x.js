@@ -6,7 +6,7 @@ storiesOf('div', module)
   .add('empty', () => (
     <div onClick={action('click')} />
   ))
-  // $ExpectError
+  // $FlowExpectedError
   .aad('empty', () => (
     <div />
   ));

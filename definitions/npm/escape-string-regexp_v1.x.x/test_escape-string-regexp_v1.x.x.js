@@ -5,8 +5,8 @@ const escapedString = escapeStringRegexp('how much $ for a unicorn?');
 
 new RegExp(escapedString);
 
-// $ExpectError
+// $FlowExpectedError
 escapeStringRegexp(42);
 
-// $ExpectError
+// $FlowExpectedError
 (escapeStringRegexp('how much $ for a unicorn?'): number);

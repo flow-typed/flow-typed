@@ -11,17 +11,17 @@ it('handles correct inputs and types return value', () => {
 });
 
 it('errors when wrong mapper element type', () => {
-  // $ExpectError
+  // $FlowExpectedError
   pMap([1, 2, Promise.resolve(3)], (el: string) => 1);
 });
 
 it('errors when passing invalid options', () => {
-  // $ExpectError
+  // $FlowExpectedError
   pMap([1, 2, Promise.resolve(3)], (el: number) => el, { concurrency: '1' });
 });
 
 it('errors when wrong return type', () => {
-  // $ExpectError
+  // $FlowExpectedError
   (pMap([1, 2, Promise.resolve(3)], (el: number) => el): Promise<
     Array<string>,
   >);

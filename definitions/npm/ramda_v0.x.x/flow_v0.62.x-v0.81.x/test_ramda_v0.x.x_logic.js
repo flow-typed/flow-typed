@@ -15,7 +15,7 @@ const str: string = "hello world";
 // const isSpade = _.propEq("suit", "♠︎");
 // const isQueenOfSpades = _.allPass([isQueen, isSpade]);
 
-//$ExpectError
+//$FlowExpectedError
 const allp: boolean = isQueenOfSpades(1);
 const allp1: boolean = isQueenOfSpades({ rank: "Q", suit: "♣︎" });
 
@@ -25,16 +25,16 @@ const a_: (a: boolean) => boolean = _.and(true);
 const gte = _.anyPass([_.gt, _.equals]);
 const ge: boolean = gte(3, 2);
 
-//$ExpectError
+//$FlowExpectedError
 const gt10 = x => x > 10;
-//$ExpectError
+//$FlowExpectedError
 const even = x => x % 2 === 0;
 const f = _.both(gt10, even);
 
 const b: boolean = f("");
 const b_: boolean = f(100);
 
-//$ExpectError
+//$FlowExpectedError
 const isEven = n => n % 2 === 0;
 const isOdd = _.complement(isEven);
 
@@ -65,7 +65,7 @@ const ie2: number | string = incCount(1);
 const em: boolean = _.isEmpty([1, 2, 3]);
 
 const n: boolean = _.not(true);
-//$ExpectError
+//$FlowExpectedError
 const n1: boolean = _.not(1);
 
 const oor: boolean = _.or(true, true);

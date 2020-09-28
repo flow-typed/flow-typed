@@ -39,7 +39,7 @@ describe('browser history', () => {
       keyLength: 6,
     })
 
-    // $ExpectError
+    // $FlowExpectedError
     history.foo
   });
 
@@ -123,7 +123,7 @@ describe('memory history', () => {
       keyLength: 6,
     })
 
-    // $ExpectError
+    // $FlowExpectedError
     history.foo
   });
 
@@ -194,9 +194,9 @@ describe('hash history', () => {
       hashType: "slash",
     })
 
-    // $ExpectError
+    // $FlowExpectedError
     const key: string = history.location.key
-    // $ExpectError
+    // $FlowExpectedError
     const state: {...} = history.location.state
   });
 
@@ -206,7 +206,7 @@ describe('hash history', () => {
       hashType: "slash",
     })
 
-    // $ExpectError
+    // $FlowExpectedError
     history.foo
   });
 
@@ -265,12 +265,12 @@ describe('create path', () => {
     })
 
     const key: string = path
-    // $ExpectError
+    // $FlowExpectedError
     const state: {...} = path
   });
 
   it('should not allow to accept void', () => {
-    // $ExpectError
+    // $FlowExpectedError
     const path = createPath()
 
     const key: string = path
@@ -282,12 +282,12 @@ describe('parse path', () => {
     const location = parsePath('/test?query#hash')
 
     const state: {...} = location
-    // $ExpectError
+    // $FlowExpectedError
     const key: string = location
   });
 
   it('should not allow to accept void', () => {
-    // $ExpectError
+    // $FlowExpectedError
     const location = parsePath()
 
     const state: {...} = location

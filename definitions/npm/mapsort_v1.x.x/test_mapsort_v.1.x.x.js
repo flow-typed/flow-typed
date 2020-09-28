@@ -19,22 +19,22 @@ describe('mapsort', () => {
 	});
 
 	it('should fail with unexpected input', () => {
-		// $ExpectError
+		// $FlowExpectedError
 		const result: Array<string> = mapSort('this is not array-like!', (string: string) => string);
 	})
 
 	it('should fail with an incompatible map callback', () => {
-		// $ExpectError
+		// $FlowExpectedError
 		const result: Array<number> = mapSort(['a', 'b', 'c', 'd'], (number: number) => number, (first: number, second: number) => first - second);
 	});
 
 	it('should fail with an incompatible compare function', () => {
-		// $ExpectError
+		// $FlowExpectedError
 		const result: Array<string> = mapSort(['a', 'b', 'c', 'd'], (string: string) => string.toLowerCase(), (first: number, second: number) => first - second);
 	});
 
 	it('should fail without a map callback', () => {
-		// $ExpectError
+		// $FlowExpectedError
 		const result: Array<string> = mapSort(['a', 'b', 'c', 'd']);
 	});
 });

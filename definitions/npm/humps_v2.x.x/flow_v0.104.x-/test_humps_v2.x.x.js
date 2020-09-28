@@ -15,7 +15,7 @@ import {
 
 describe("tests", () => {
   it("errors", () => {
-    // $ExpectError
+    // $FlowExpectedError
     (camelize(42): number);
   });
 

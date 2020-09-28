@@ -19,7 +19,7 @@ const configs = {
 // Detox Object API
 // ----------------
 detox.cleanup();
-// $ExpectError
+// $FlowExpectedError
 detox.init({ configurations: "" }, { initGlobals: 123, launchApp: false });
 detox.init(configs, { initGlobals: false });
 
@@ -31,10 +31,10 @@ device.launchApp({ permissions: { calendar: "YES" } });
 device.launchApp({ url: "url", newInstance: false });
 device.launchApp({ userNotification: { title: "push" }, newInstance: true });
 device.launchApp({ launchArgs: { arg1: 1, arg2: "2" } });
-// $ExpectError
+// $FlowExpectedError
 device.launchApp({ permissions: false, url: false });
 
-// $ExpectError
+// $FlowExpectedError
 device.terminateApp({ err: "err" });
 device.terminateApp();
 device.terminateApp("other.bundle.id");
@@ -42,11 +42,11 @@ device.reloadReactNative();
 device.sendToHome();
 device.installApp();
 device.uninstallApp();
-// $ExpectError
+// $FlowExpectedError
 device.openURL({ url: "https://flow.org", sourceApp: false });
 device.openURL({ url: "https://flow.org" });
 
-// $ExpectError
+// $FlowExpectedError
 device.sendUserNotification();
 const userNotificationCalendarTrigger = {
   trigger: {
@@ -150,11 +150,11 @@ device.sendUserNotification(userNotificationLocationTrigger);
 device.sendUserNotification(userNotificationTimeIntervalTrigger);
 device.sendUserNotification(userNotificationPushTrigger);
 
-// $ExpectError
+// $FlowExpectedError
 device.setOrientation("normal");
 device.setOrientation("portrait");
 
-// $ExpectError
+// $FlowExpectedError
 device.setLocation();
 device.setLocation(32.04, 34.78);
 
@@ -169,11 +169,11 @@ device.getPlatform();
 by.id("flowType");
 by.text("flowType is great!");
 by.label("welcome");
-// $ExpectError
+// $FlowExpectedError
 by.label(123);
 by.type("RCTImageView");
 by.traits(["button"]);
-// $ExpectError
+// $FlowExpectedError
 by.traits("button");
 
 // Actions on element
@@ -181,33 +181,33 @@ by.traits("button");
 element(by.id("testElement")).tap();
 element(by.id("testElement")).longPress();
 
-// $ExpectError
+// $FlowExpectedError
 element(by.id("testElement")).multiTap(true);
 element(by.id("testElement")).multiTap(3);
 
-// $ExpectError
+// $FlowExpectedError
 element(by.id("testElement")).tapAtPoint();
 element(by.id("testElement")).tapAtPoint({ x: 5, y: 10 });
 
-// $ExpectError
+// $FlowExpectedError
 element(by.id("testElement")).typeText(false);
 element(by.id("testElement")).typeText("type this");
 
-// $ExpectError
+// $FlowExpectedError
 element(by.id("testElement")).replaceText();
 element(by.id("testElement")).replaceText("text");
 
 element(by.id("testElement")).clearText();
 
-// $ExpectError
+// $FlowExpectedError
 element(by.id("testElement")).scroll();
 element(by.id("testElement")).scroll(123, "down");
 
-// $ExpectError
+// $FlowExpectedError
 element(by.id("testElement")).scrollTo("down");
 element(by.id("testElement")).scrollTo("left");
 
-// $ExpectError
+// $FlowExpectedError
 element(by.id("testElement")).swipe("sideways", "medium", 0.5);
 element(by.id("testElement")).swipe("down", "fast", 0.5);
 
@@ -217,18 +217,18 @@ expect(element(by.id("UniqueId204"))).toBeVisible();
 expect(element(by.id("UniqueId204"))).toBeNotVisible();
 expect(element(by.id("UniqueId204"))).toBeVisible();
 expect(element(by.id("UniqueId204"))).toExist();
-// $ExpectError
+// $FlowExpectedError
 expect(element(by.id("UniqueId204"))).toHaveId(123);
 expect(element(by.id("UniqueId204"))).toHaveId("someTestID");
 
-// $ExpectError
+// $FlowExpectedError
 expect(element(by.id("UniqueId204"))).toHaveLabel();
 expect(element(by.id("UniqueId204"))).toHaveLabel("testLabel");
 
-// $ExpectError
+// $FlowExpectedError
 expect(element(by.id("UniqueId204"))).toHaveText(123);
 expect(element(by.id("UniqueId204"))).toHaveText("some text");
-// $ExpectError
+// $FlowExpectedError
 expect(element(by.id("UniqueId204"))).toHaveValue(true);
 expect(element(by.id("UniqueId204"))).toHaveValue("1");
 expect(element(by.id("UniqueId204"))).toNotExist();
@@ -237,7 +237,7 @@ expect(element(by.id("UniqueId204"))).toNotExist();
 waitFor(element(by.id("UniqueId204"))).toBeNotVisible();
 waitFor(element(by.id("UniqueId204"))).toBeNotVisible();
 waitFor(element(by.id("UniqueId204"))).toBeVisible();
-// $ExpectError
+// $FlowExpectedError
 waitFor(element(by.id("UniqueId204")))
   .toExist()
   .something();
@@ -245,10 +245,10 @@ waitFor(element(by.id("UniqueId204"))).toExist();
 waitFor(element(by.id("UniqueId204"))).toHaveText("text");
 waitFor(element(by.id("UniqueId204"))).toHaveValue("0");
 waitFor(element(by.id("UniqueId204"))).toNotExist();
-// $ExpectError
+// $FlowExpectedError
 waitFor(element(by.id("UniqueId204"))).whileElement("someID");
 waitFor(element(by.id("UniqueId204"))).whileElement(by.id("ScrollView630"));
-// $ExpectError
+// $FlowExpectedError
 waitFor(element(by.id("UniqueId204"))).withTimeout(false);
 waitFor(element(by.id("UniqueId204"))).withTimeout(1000);
 

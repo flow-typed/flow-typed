@@ -9,6 +9,6 @@ it('should return number', () => {
 it('should work when call with boolean argument', () => {
   getStatusBarHeight(true);
 
-  // $ExpectError: first argument must be boolean
+  // $FlowExpectedError: first argument must be boolean
   getStatusBarHeight('true');
 });

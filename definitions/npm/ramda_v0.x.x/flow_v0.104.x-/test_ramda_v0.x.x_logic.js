@@ -26,7 +26,7 @@ const str: string = 'hello world';
 // const isSpade = _.propEq("suit", "♠︎");
 // const isQueenOfSpades = _.allPass([isQueen, isSpade]);
 
-//$ExpectError
+//$FlowExpectedError
 const allp: boolean = isQueenOfSpades(1);
 const allp1: boolean = isQueenOfSpades({ rank: 'Q', suit: '♣︎' });
 
@@ -39,9 +39,9 @@ const nonBooleanAnd_: (nonBooleanAnd: number) => * = _.and(69);
 const gte = _.anyPass([_.gt, _.equals]);
 const ge: boolean = gte(3, 2);
 
-//$ExpectError
+//$FlowExpectedError
 const gt10 = x => x > 10;
-//$ExpectError
+//$FlowExpectedError
 const even = x => x % 2 === 0;
 const f = _.both(gt10, even);
 
@@ -52,34 +52,34 @@ describe('complement', () => {
   it('accepts a function that returns a boolean', () => {
     complement(() => true)
     complement(() => false)
-    // $ExpectError
+    // $FlowExpectedError
     complement(() => 'foo')
-    // $ExpectError
+    // $FlowExpectedError
     complement(() => 5)
-    // $ExpectError
+    // $FlowExpectedError
     complement(() => [])
-    // $ExpectError
+    // $FlowExpectedError
     complement(() => ({}))
-    // $ExpectError
+    // $FlowExpectedError
     complement(() => null)
-    // $ExpectError
+    // $FlowExpectedError
     complement(() => undefined)
   })
 
   it('returns a function that returns a boolean', () => {
     const fn = complement(() => true)
     const b: boolean = fn()
-    // $ExpectError
+    // $FlowExpectedError
     const s: string = fn()
-    // $ExpectError
+    // $FlowExpectedError
     const n: number = fn()
-    // $ExpectError
+    // $FlowExpectedError
     const xs: Array<mixed> = fn()
-    // $ExpectError
+    // $FlowExpectedError
     const obj: {[string]: mixed} = fn()
-    // $ExpectError
+    // $FlowExpectedError
     const v: void = fn()
-    // $ExpectError
+    // $FlowExpectedError
     const nil: null = fn()
   })
 
@@ -97,70 +97,70 @@ describe('complement', () => {
   it('returns a function whose parameters match the input function (1)', () => {
     const fn = complement((a: 'a',) => true)
     fn('a',)
-    // $ExpectError
+    // $FlowExpectedError
     fn(0)
   })
 
   it('returns a function whose parameters match the input function (2)', () => {
     const fn = complement((a: 'a', b: 'b',) => true)
     fn('a', 'b',)
-    // $ExpectError
+    // $FlowExpectedError
     fn(0, 1)
   })
 
   it('returns a function whose parameters match the input function (3)', () => {
     const fn = complement((a: 'a', b: 'b', c: 'c',) => true)
     fn('a', 'b', 'c',)
-    // $ExpectError
+    // $FlowExpectedError
     fn(0, 1, 2)
   })
 
   it('returns a function whose parameters match the input function (4)', () => {
     const fn = complement((a: 'a', b: 'b', c: 'c', d: 'd',) => true)
     fn('a', 'b', 'c', 'd',)
-    // $ExpectError
+    // $FlowExpectedError
     fn(0, 1, 2, 3)
   })
 
   it('returns a function whose parameters match the input function (5)', () => {
     const fn = complement((a: 'a', b: 'b', c: 'c', d: 'd', e: 'e',) => true)
     fn('a', 'b', 'c', 'd', 'e',)
-    // $ExpectError
+    // $FlowExpectedError
     fn(0, 1, 2, 3, 4)
   })
 
   it('returns a function whose parameters match the input function (6)', () => {
     const fn = complement((a: 'a', b: 'b', c: 'c', d: 'd', e: 'e', f: 'f',) => true)
     fn('a', 'b', 'c', 'd', 'e', 'f',)
-    // $ExpectError
+    // $FlowExpectedError
     fn(0, 1, 2, 3, 4, 5)
   })
 
   it('returns a function whose parameters match the input function (7)', () => {
     const fn = complement((a: 'a', b: 'b', c: 'c', d: 'd', e: 'e', f: 'f', g: 'g',) => true)
     fn('a', 'b', 'c', 'd', 'e', 'f', 'g',)
-    // $ExpectError
+    // $FlowExpectedError
     fn(0, 1, 2, 3, 4, 5, 6)
   })
 
   it('returns a function whose parameters match the input function (8)', () => {
     const fn = complement((a: 'a', b: 'b', c: 'c', d: 'd', e: 'e', f: 'f', g: 'g', h: 'h',) => true)
     fn('a', 'b', 'c', 'd', 'e', 'f', 'g', 'h',)
-    // $ExpectError
+    // $FlowExpectedError
     fn(0, 1, 2, 3, 4, 5, 6, 7)
   })
 
   it('returns a function whose parameters match the input function (9)', () => {
     const fn = complement((a: 'a', b: 'b', c: 'c', d: 'd', e: 'e', f: 'f', g: 'g', h: 'h', i: 'i',) => true)
     fn('a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i',)
-    // $ExpectError
+    // $FlowExpectedError
     fn(0, 1, 2, 3, 4, 5, 6, 7, 8)
   })
 
   it('returns a function whose parameters match the input function (10)', () => {
     const fn = complement((a: 'a', b: 'b', c: 'c', d: 'd', e: 'e', f: 'f', g: 'g', h: 'h', i: 'i', j: 'j',) => true)
     fn('a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j',)
-    // $ExpectError
+    // $FlowExpectedError
     fn(0, 1, 2, 3, 4, 5, 6, 7, 8, 9)
   })
 
@@ -193,7 +193,7 @@ describe('ifElse', () => {
   it('checks the condition input matches the branch inputs', () => {
     const incCount = ifElse(x => x % 2 == 0, x => x + 1, x => x.toString());
     // Because the object literal ({}) isn't a number it
-    // $ExpectError
+    // $FlowExpectedError
     const ie: number | string = incCount({});
   })
 
@@ -217,7 +217,7 @@ describe('ifElse', () => {
       (s: string) => s.toUpperCase(),
       (s: string) => s.toLowerCase(),
     );
-    // $ExpectError
+    // $FlowExpectedError
     const result: void | string = ifElseFn(5)
   })
 
@@ -237,7 +237,7 @@ describe('ifElse', () => {
 })
 
 const n: boolean = _.not(true);
-//$ExpectError
+//$FlowExpectedError
 const n1: boolean = _.not(1);
 
 const oor: boolean = _.or(true, true);

@@ -11,17 +11,17 @@ describe("eventChannel", () => {
   it("returned Channel must be read only object", () => {
     const ch = eventChannel(simpleSubscribeFn);
 
-    // $ExpectError - read-only
+    // $FlowExpectedError - read-only
     ch.close = "hi belarus";
-    // $ExpectError - read-only
+    // $FlowExpectedError - read-only
     ch.take = "hi belarus";
-    // $ExpectError - read-only
+    // $FlowExpectedError - read-only
     ch.flush = "hi belarus";
   });
 
   it("returned Channel must be exact type", () => {
     const ch = eventChannel(simpleSubscribeFn);
-    // $ExpectError- exact type
+    // $FlowExpectedError- exact type
     ch.anyOtherProp = "anyValue";
   });
 
@@ -48,11 +48,11 @@ describe("eventChannel", () => {
 
     const ch = eventChannel(subscribeFn, buffers.none());
 
-    // $ExpectError
+    // $FlowExpectedError
     const cbTake = (a: number | TEnd) => {};
     (ch.take(cbTake): void);
 
-    // $ExpectError
+    // $FlowExpectedError
     const cbFlush = (a: Array<boolean> | TEnd) => {};
     (ch.flush(cbFlush): void);
   });
@@ -62,7 +62,7 @@ describe("eventChannel", () => {
 
     const ch = eventChannel(subscribeFn, buffers.none());
 
-    // $ExpectError
+    // $FlowExpectedError
     ch.take();
   });
 
@@ -71,7 +71,7 @@ describe("eventChannel", () => {
 
     const ch = eventChannel(subscribeFn, buffers.none());
 
-    // $ExpectError
+    // $FlowExpectedError
     ch.flush();
   });
 });

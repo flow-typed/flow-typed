@@ -113,136 +113,136 @@ const foo6_14: "bar6" = foo6("")(0, true, null)({}, []);
 const foo6_15: "bar6" = foo6("", 0)(true, null, {})([]);
 const foo6_16: "bar6" = foo6("")(0, true, null, {})([]);
 
-// $ExpectError
+// $FlowExpectedError
 const foo6_1_Error1: "bar6" = foo6(false, 0, true, null, {}, []);
-// $ExpectError
+// $FlowExpectedError
 const foo6_2_Error1: "bar6" = foo6(false)(0, true, null, {}, []);
-// $ExpectError
+// $FlowExpectedError
 const foo6_3_Error1: "bar6" = foo6(false, 0)(true, null, {}, []);
-// $ExpectError
+// $FlowExpectedError
 const foo6_4_Error1: "bar6" = foo6(false, 0, true)(null, {}, []);
-// $ExpectError
+// $FlowExpectedError
 const foo6_5_Error1: "bar6" = foo6(false, 0, true, null)({}, []);
-// $ExpectError
+// $FlowExpectedError
 const foo6_6_Error1: "bar6" = foo6(false, 0, true, null, {})([]);
-// $ExpectError
+// $FlowExpectedError
 const foo6_7_Error1: "bar6" = foo6(false)(0)(true, null, {}, []);
-// $ExpectError
+// $FlowExpectedError
 const foo6_8_Error1: "bar6" = foo6(false, 0)(true)(null, {}, []);
-// $ExpectError
+// $FlowExpectedError
 const foo6_9_Error1: "bar6" = foo6(false, 0, true)(null)({}, []);
-// $ExpectError
+// $FlowExpectedError
 const foo6_10_Error1: "bar6" = foo6(false, 0, true, null)({})([]);
-// $ExpectError
+// $FlowExpectedError
 const foo6_11_Error1: "bar6" = foo6(false)(0, true)(null, {}, []);
-// $ExpectError
+// $FlowExpectedError
 const foo6_12_Error1: "bar6" = foo6(false, 0)(true, null)({}, []);
-// $ExpectError
+// $FlowExpectedError
 const foo6_13_Error1: "bar6" = foo6(false, 0, true)(null, {})([]);
-// $ExpectError
+// $FlowExpectedError
 const foo6_14_Error1: "bar6" = foo6(false)(0, true, null)({}, []);
-// $ExpectError
+// $FlowExpectedError
 const foo6_15_Error1: "bar6" = foo6(false, 0)(true, null, {})([]);
-// $ExpectError
+// $FlowExpectedError
 const foo6_16_Error1: "bar6" = foo6(false)(0, true, null, {})([]);
 
-// $ExpectError
+// $FlowExpectedError
 const foo6_1_Error2: "bar6" = foo6("", 0, true, "", {}, []);
-// $ExpectError
+// $FlowExpectedError
 const foo6_2_Error2: "bar6" = foo6("")(0, true, "", {}, []);
-// $ExpectError
+// $FlowExpectedError
 const foo6_3_Error2: "bar6" = foo6("", 0)(true, "", {}, []);
-// $ExpectError
+// $FlowExpectedError
 const foo6_4_Error2: "bar6" = foo6("", 0, true)("", {}, []);
-// $ExpectError
+// $FlowExpectedError
 const foo6_5_Error2: "bar6" = foo6("", 0, true, "")({}, []);
-// $ExpectError
+// $FlowExpectedError
 const foo6_6_Error2: "bar6" = foo6("", 0, true, "", {})([]);
-// $ExpectError
+// $FlowExpectedError
 const foo6_7_Error2: "bar6" = foo6("")(0)(true, "", {}, []);
-// $ExpectError
+// $FlowExpectedError
 const foo6_8_Error2: "bar6" = foo6("", 0)(true)("", {}, []);
-// $ExpectError
+// $FlowExpectedError
 const foo6_9_Error2: "bar6" = foo6("", 0, true)("")({}, []);
-// $ExpectError
+// $FlowExpectedError
 const foo6_10_Error2: "bar6" = foo6("", 0, true, "")({})([]);
-// $ExpectError
+// $FlowExpectedError
 const foo6_11_Error2: "bar6" = foo6("")(0, true)("", {}, []);
-// $ExpectError
+// $FlowExpectedError
 const foo6_12_Error2: "bar6" = foo6("", 0)(true, "")({}, []);
-// $ExpectError
+// $FlowExpectedError
 const foo6_13_Error2: "bar6" = foo6("", 0, true)("", {})([]);
-// $ExpectError
+// $FlowExpectedError
 const foo6_14_Error2: "bar6" = foo6("")(0, true, "")({}, []);
-// $ExpectError
+// $FlowExpectedError
 const foo6_15_Error2: "bar6" = foo6("", 0)(true, "", {})([]);
-// $ExpectError
+// $FlowExpectedError
 const foo6_16_Error2: "bar6" = foo6("")(0, true, "", {})([]);
 
-// $ExpectError
+// $FlowExpectedError
 const foo6_1_Error3: "bar6" = foo6("", 0, true, null, {}, "");
-// $ExpectError
+// $FlowExpectedError
 const foo6_2_Error3: "bar6" = foo6("")(0, true, null, {}, "");
-// $ExpectError
+// $FlowExpectedError
 const foo6_3_Error3: "bar6" = foo6("", 0)(true, null, {}, "");
-// $ExpectError
+// $FlowExpectedError
 const foo6_4_Error3: "bar6" = foo6("", 0, true)(null, {}, "");
-// $ExpectError
+// $FlowExpectedError
 const foo6_5_Error3: "bar6" = foo6("", 0, true, null)({}, "");
-// $ExpectError
+// $FlowExpectedError
 const foo6_6_Error3: "bar6" = foo6("", 0, true, null, {})("");
-// $ExpectError
+// $FlowExpectedError
 const foo6_7_Error3: "bar6" = foo6("")(0)(true, null, {}, "");
-// $ExpectError
+// $FlowExpectedError
 const foo6_8_Error3: "bar6" = foo6("", 0)(true)(null, {}, "");
-// $ExpectError
+// $FlowExpectedError
 const foo6_9_Error3: "bar6" = foo6("", 0, true)(null)({}, "");
-// $ExpectError
+// $FlowExpectedError
 const foo6_10_Error3: "bar6" = foo6("", 0, true, null)({})("");
-// $ExpectError
+// $FlowExpectedError
 const foo6_11_Error3: "bar6" = foo6("")(0, true)(null, {}, "");
-// $ExpectError
+// $FlowExpectedError
 const foo6_12_Error3: "bar6" = foo6("", 0)(true, null)({}, "");
-// $ExpectError
+// $FlowExpectedError
 const foo6_13_Error3: "bar6" = foo6("", 0, true)(null, {})("");
-// $ExpectError
+// $FlowExpectedError
 const foo6_14_Error3: "bar6" = foo6("")(0, true, null)({}, "");
-// $ExpectError
+// $FlowExpectedError
 const foo6_15_Error3: "bar6" = foo6("", 0)(true, null, {})("");
-// $ExpectError
+// $FlowExpectedError
 const foo6_16_Error3: "bar6" = foo6("")(0, true, null, {})("");
 
-// $ExpectError
+// $FlowExpectedError
 const foo6_1_Error4: "error" = foo6("", 0, true, null, {}, []);
-// $ExpectError
+// $FlowExpectedError
 const foo6_2_Error4: "error" = foo6("")(0, true, null, {}, []);
-// $ExpectError
+// $FlowExpectedError
 const foo6_3_Error4: "error" = foo6("", 0)(true, null, {}, []);
-// $ExpectError
+// $FlowExpectedError
 const foo6_4_Error4: "error" = foo6("", 0, true)(null, {}, []);
-// $ExpectError
+// $FlowExpectedError
 const foo6_5_Error4: "error" = foo6("", 0, true, null)({}, []);
-// $ExpectError
+// $FlowExpectedError
 const foo6_6_Error4: "error" = foo6("", 0, true, null, {})([]);
-// $ExpectError
+// $FlowExpectedError
 const foo6_7_Error4: "error" = foo6("")(0)(true, null, {}, []);
-// $ExpectError
+// $FlowExpectedError
 const foo6_8_Error4: "error" = foo6("", 0)(true)(null, {}, []);
-// $ExpectError
+// $FlowExpectedError
 const foo6_9_Error4: "error" = foo6("", 0, true)(null)({}, []);
-// $ExpectError
+// $FlowExpectedError
 const foo6_10_Error4: "error" = foo6("", 0, true, null)({})([]);
-// $ExpectError
+// $FlowExpectedError
 const foo6_11_Error4: "error" = foo6("")(0, true)(null, {}, []);
-// $ExpectError
+// $FlowExpectedError
 const foo6_12_Error4: "error" = foo6("", 0)(true, null)({}, []);
-// $ExpectError
+// $FlowExpectedError
 const foo6_13_Error4: "error" = foo6("", 0, true)(null, {})([]);
-// $ExpectError
+// $FlowExpectedError
 const foo6_14_Error4: "error" = foo6("")(0, true, null)({}, []);
-// $ExpectError
+// $FlowExpectedError
 const foo6_15_Error4: "error" = foo6("", 0)(true, null, {})([]);
-// $ExpectError
+// $FlowExpectedError
 const foo6_16_Error4: "error" = foo6("")(0, true, null, {})([]);
 
 // -------------
@@ -275,7 +275,7 @@ const doStuff: (
   z: boolean,
   obj: typeof obb
 ) => number = _.invoker(3, "doStuff");
-//$ExpectError
+//$FlowExpectedError
 const doLessStuff: (
   x: string,
   y: number,
@@ -314,13 +314,13 @@ const shoutedGreet2: string = _.wrap(
 // Uncurry
 const needs3: string => string => string => string = a => b => c => a + b + c;
 
-//$ExpectError
+//$FlowExpectedError
 const needs3_error1: number = uncurryN(3, needs3)("", "", "");
 
-//$ExpectError
+//$FlowExpectedError
 const needs3_error2: string => string = uncurryN(3, needs3)("", "", "");
 
-//$ExpectError
+//$FlowExpectedError
 const needs3_error3: string => string => string = uncurryN(3, needs3)(
   "",
   "",

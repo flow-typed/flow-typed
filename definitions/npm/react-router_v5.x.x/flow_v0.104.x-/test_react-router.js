@@ -25,7 +25,7 @@ import type {
 
 describe('Location', () => {
   it('should error if wrong type is passed', () => {
-    // $ExpectError
+    // $FlowExpectedError
     const locationError: Location = 'location';
   });
 
@@ -48,7 +48,7 @@ describe('StaticRouter', () => {
     <div />
   </StaticRouter>;
 
-  // $ExpectError
+  // $FlowExpectedError
   <StaticRouter />;
 });
 
@@ -68,7 +68,7 @@ describe('MemoryRouter', () => {
     <div />
   </MemoryRouter>;
 
-  // $ExpectError
+  // $FlowExpectedError
   <MemoryRouter initialEntries={''} />;
 });
 
@@ -78,7 +78,7 @@ describe('RouterHistory', () => {
     <div />
   </Router>;
 
-  // $ExpectError
+  // $FlowExpectedError
   <Router>
     <div />
   </Router>;
@@ -89,7 +89,7 @@ describe('Prompt', () => {
   <Prompt message={location => 'ok?'} />;
   <Prompt message={location => true} />;
 
-  // $ExpectError
+  // $FlowExpectedError
   <Prompt />;
 });
 
@@ -104,7 +104,7 @@ describe('Redirect', () => {
   />;
   <Redirect to="/foo" push from="/x" />;
 
-  // $ExpectError
+  // $FlowExpectedError
   <Redirect />;
 });
 
@@ -124,7 +124,7 @@ describe('Route', () => {
     <div>children</div>
   </Route>;
 
-  // $ExpectError
+  // $FlowExpectedError
   <Route path="/user/:username" component={<User />} />;
 });
 
@@ -152,19 +152,19 @@ describe('withRouter', () => {
   const BarWithRouter = withRouter(Bar);
   <BarWithRouter name="name" />;
 
-  // $ExpectError
+  // $FlowExpectedError
   withRouter('nope');
 
   const FooWithRouterError = withRouter(Foo);
   <FooWithRouterError name="3" />;
 
   const BarWithRouterError = withRouter(Bar);
-  // $ExpectError
+  // $FlowExpectedError
   <BarWithRouterError name={3} />;
 
   const IncorrectHistoryUsage = ({ history, name }: FooProps) => {
     // Wrong arguments here
-    // $ExpectError
+    // $FlowExpectedError
     history.push(['bla']);
     return <div>{name}</div>;
   };
@@ -189,9 +189,9 @@ describe('matchPath', () => {
   ]);
   const match5: null | Match = matchPath('/the/pathname');
 
-  // $ExpectError
+  // $FlowExpectedError
   matchPath();
-  // $ExpectError
+  // $FlowExpectedError
   const matchError: string = matchPath('/the/pathname', 'the/:dynamicId');
 });
 
@@ -205,7 +205,7 @@ describe('Unrouted', () => {
     Unrouted,
   );
 
-  // $ExpectError: This error bubbles up from the assignment in Routed2.
+  // $FlowExpectedError: This error bubbles up from the assignment in Routed2.
   const Unrouted2: React$ComponentType<{|
     ...ContextRouter,
     someProp: string,
@@ -241,7 +241,7 @@ describe('react hook', () => {
       exact: true,
     });
 
-    // $ExpectError
+    // $FlowExpectedError
     const matchObject2: Match = useRouteMatch({
       sensitive: 'foo',
     });

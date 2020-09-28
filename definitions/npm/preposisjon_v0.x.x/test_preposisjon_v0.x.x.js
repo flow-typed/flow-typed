@@ -2,9 +2,9 @@ import preposisjon from 'preposisjon'
 
 preposisjon('Voss')
 
-// $ExpectError
+// $FlowExpectedError
 preposisjon()
-// $ExpectError
+// $FlowExpectedError
 preposisjon(2)
-// $ExpectError
+// $FlowExpectedError
 preposisjon('voss', 'bergen')

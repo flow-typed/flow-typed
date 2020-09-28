@@ -6,13 +6,13 @@ import trimRight from "trim-right";
 describe("trim-right", () => {
   it("expects a string as an argument", () => {
     trimRight(" zxc");
-    // $ExpectError
+    // $FlowExpectedError
     trimRight();
-    // $ExpectError
+    // $FlowExpectedError
     trimRight(null);
-    // $ExpectError
+    // $FlowExpectedError
     trimRight(5);
-    // $ExpectError
+    // $FlowExpectedError
     trimRight({});
   });
 

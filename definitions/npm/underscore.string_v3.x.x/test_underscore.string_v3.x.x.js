@@ -9,80 +9,80 @@ var string1 = 'hello',
 (s.numberFormat(100, 2): string);
 (s.numberFormat(100, 2, ','): string);
 (s.numberFormat(100, 2, ',', '.'): string);
-// $ExpectError
+// $FlowExpectedError
 s.numberFormat('100');
-// $ExpectError
+// $FlowExpectedError
 s.numberFormat(100, '2');
-// $ExpectError
+// $FlowExpectedError
 s.numberFormat(100, 2, 2);
-// $ExpectError
+// $FlowExpectedError
 s.numberFormat(100, 2, ',', 2);
-// $ExpectError
+// $FlowExpectedError
 (s.numberFormat(100, 2, ',', '.'): void);
 
 (s.levenshtein(string1, string2): number);
 (cs.levenshtein(string1): number);
-// $ExpectError
+// $FlowExpectedError
 s.levenshtein(1, string2);
-// $ExpectError
+// $FlowExpectedError
 (cs.levenshtein(1): number);
-// $ExpectError
+// $FlowExpectedError
 s.levenshtein(string1, 1);
-// $ExpectError
+// $FlowExpectedError
 (s.levenshtein(string1, string2): string);
 
 (s.capitalize(string1): string);
 (s.capitalize(string1, true): string);
 (cs.capitalize().value(): string);
 (cs.capitalize(true).value(): string);
-// $ExpectError
+// $FlowExpectedError
 s.capitalize(string1, 1);
-// $ExpectError
+// $FlowExpectedError
 (cs.capitalize(1).value(): string);
-// $ExpectError
+// $FlowExpectedError
 (s.capitalize(string1): number);
 
 (s.decapitalize(string1): string);
 (cs.decapitalize().value(): string);
-// $ExpectError
+// $FlowExpectedError
 s.decapitalize(1);
-// $ExpectError
+// $FlowExpectedError
 (s.decapitalize(string1): number);
 
 (s.chop(string1, 2): Array<string>);
 (cs.chop(2): Array<string>);
-// $ExpectError
+// $FlowExpectedError
 s.chop(string1);
-// $ExpectError
+// $FlowExpectedError
 (cs.chop(): Array<string>);
-// $ExpectError
+// $FlowExpectedError
 (s.chop(string1): Array<number>);
 
 (s.clean(string1): string);
 (cs.clean().value(): string);
-// $ExpectError
+// $FlowExpectedError
 s.clean(1);
-// $ExpectError
+// $FlowExpectedError
 (s.clean(string1): number);
 
 (s.swapCase(string1): string);
 (cs.swapCase().value(): string);
-// $ExpectError
+// $FlowExpectedError
 s.swapCase(1);
-// $ExpectError
+// $FlowExpectedError
 (s.swapCase(string1): number);
 
 (s.include(string1, string2): boolean);
 (cs.include(string1): boolean);
-// $ExpectError
+// $FlowExpectedError
 (cs.include(): boolean);
-// $ExpectError
+// $FlowExpectedError
 s.include(1);
-// $ExpectError
+// $FlowExpectedError
 (cs.include(1): boolean);
-// $ExpectError
+// $FlowExpectedError
 s.include(string1, 2);
-// $ExpectError
+// $FlowExpectedError
 (s.include(string1, string2): string);
 
 (s.count(string1, string2): number);
@@ -209,7 +209,7 @@ s.include(string1, 2);
 (cs.lrpad(1).value(): string);
 (s.lrpad(string1, 1, string2): string);
 (cs.lrpad(1, string1).value(): string);
-// $ExpectError
+// $FlowExpectedError
 (s.pad(string1, 1, string2, 'bidirectional'): string);
 
 (s.toNumber(string1, 1): number);
@@ -228,13 +228,13 @@ s.include(string1, 2);
 (s.toSentence([string1, string2]): string);
 (s.toSentence([string1, string2], string1): string);
 (s.toSentence([string1, string2], string1, string2): string);
-// $ExpectError
+// $FlowExpectedError
 (cs.toSentence());
 
 (s.toSentenceSerial([string1, string2]): string);
 (s.toSentenceSerial([string1, string2], string1): string);
 (s.toSentenceSerial([string1, string2], string1, string2): string);
-// $ExpectError
+// $FlowExpectedError
 (cs.toSentenceSerial());
 
 (s.repeat(string1, 1): string);
@@ -269,7 +269,7 @@ s.include(string1, 2);
 (s.map(string1, (x => x)): string);
 (cs.map((x => x)).value(): string);
 
-// $ExpectError
+// $FlowExpectedError
 (s.map(string1, (x => 1)): string);
 
 (cs.toUpperCase().split(): Array<string>);

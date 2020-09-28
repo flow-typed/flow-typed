@@ -476,11 +476,11 @@ declare module "luxon" {
     zoneName: string;
     diff(
       otherDateTime: DateTime,
-      unit: DateTimeUnit | Array<DateTimeUnit>,
+      unit?: DateTimeUnit | Array<DateTimeUnit>,
       options?: DateTimeDiffOptions
     ): Duration;
     diffNow(
-      unit: DateTimeUnit | Array<DateTimeUnit>,
+      unit?: DateTimeUnit | Array<DateTimeUnit>,
       options?: DateTimeDiffOptions
     ): Duration;
     endOf(unit: DateTimeUnit): DateTime;

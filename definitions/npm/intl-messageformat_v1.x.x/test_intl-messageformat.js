@@ -24,17 +24,17 @@ priceFormat.format({ price: 100 });
 
 const nullableFormats = new MessageFormat(message, locale, null);
 
-// $ExpectError
+// $FlowExpectedError
 const invalidFormats = new MessageFormat(message, locale, { number: { USD: { style: 1 } } });
 
-// $ExpectError
+// $FlowExpectedError
 formatter.format(null);
 
-// $ExpectError
+// $FlowExpectedError
 formatter.format();
 
-// $ExpectError
+// $FlowExpectedError
 const missingLocale = new MessageFormat(message);
 
-// $ExpectError
+// $FlowExpectedError
 const missingMessage = new MessageFormat(null, locale);

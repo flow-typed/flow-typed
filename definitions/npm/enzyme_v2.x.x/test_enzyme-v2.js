@@ -1,7 +1,7 @@
 // @flow
 import enzyme from 'enzyme';
 
-// $ExpectError
+// $FlowExpectedError
 enzyme.render();
 enzyme.shallow(<div/>);
 (enzyme.render(<div/>, { context: { foo: true } }).text(): string)

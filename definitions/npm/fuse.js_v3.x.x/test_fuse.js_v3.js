@@ -4,9 +4,9 @@ import Fuse from "fuse.js";
 const fuse: Fuse<number> = new Fuse([1, 2]);
 fuse.search("foo");
 
-// $ExpectError
+// $FlowExpectedError
 const A: number[] = fuse.search(1);
 
 fuse.setCollection([1, 2, 3, 4]);
-// $ExpectError
+// $FlowExpectedError
 fuse.setCollection(1);

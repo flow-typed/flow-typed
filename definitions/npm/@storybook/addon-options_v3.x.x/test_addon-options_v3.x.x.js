@@ -26,10 +26,10 @@ describe('The `setOptions` function', () => {
   });
 
   it('should error on invalid usage', () => {
-    // $ExpectError
+    // $FlowExpectedError
     setOptions(true);
 
-    // $ExpectError
+    // $FlowExpectedError
     setOptions({
       url: true,
       goFullScreen: '',

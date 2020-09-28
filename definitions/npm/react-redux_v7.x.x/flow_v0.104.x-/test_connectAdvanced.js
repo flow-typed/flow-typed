@@ -49,9 +49,9 @@ function testConnectAdvanced() {
 
   const Connected = connectAdvanced(selectorFactory)(Com);
   <Connected fromInputProps={'data'}/>;
-  //$ExpectError expects props to match second argument of mapStateToProps
+  //$FlowExpectedError expects props to match second argument of mapStateToProps
   <Connected fromInputProps={123}/>;
-  //$ExpectError takes in only React components
+  //$FlowExpectedError takes in only React components
   connectAdvanced(selectorFactory)('');
 }
 
@@ -78,7 +78,7 @@ function testConnectAdvancedWithStatelessFunctionalComponent() {
 
   const Connected = connectAdvanced(selectorFactory)(Com);
   <Connected fromInputProps={'data'}/>;
-  //$ExpectError expects props to match second argument of mapStateToProps
+  //$FlowExpectedError expects props to match second argument of mapStateToProps
   <Connected fromInputProps={123}/>;
 }
 
@@ -93,25 +93,25 @@ function testConnectAdvancedConnectOptions() {
     forwardRef: false,
   });
 
-  //$ExpectError getDisplayName must take a string
+  //$FlowExpectedError getDisplayName must take a string
   connectAdvanced(selectorFactory, {getDisplayName: (name: number) => name + name});
 
-  //$ExpectError getDisplayName must return a string
+  //$FlowExpectedError getDisplayName must return a string
   connectAdvanced(selectorFactory, {getDisplayName: (name: string) => name.length});
 
-  //$ExpectError methodName must be a string
+  //$FlowExpectedError methodName must be a string
   connectAdvanced(selectorFactory, {methodName: 5});
 
-  //$ExpectError renderCountProp must be a string
+  //$FlowExpectedError renderCountProp must be a string
   connectAdvanced(selectorFactory, {renderCountProp: 5});
 
-  //$ExpectError shouldHandleStateChanges must be defined if passed in
+  //$FlowExpectedError shouldHandleStateChanges must be defined if passed in
   connectAdvanced(selectorFactory, {shouldHandleStateChanges: null});
 
-  //$ExpectError storeKey must be a string
+  //$FlowExpectedError storeKey must be a string
   connectAdvanced(selectorFactory, {storeKey: 5});
 
-  //$ExpectError forwardRef must be defined if passed in
+  //$FlowExpectedError forwardRef must be defined if passed in
   connectAdvanced(selectorFactory, {forwardRef: null});
 
   connectAdvanced(selectorFactory, {otherOption: "other options are allowed"});
@@ -124,6 +124,6 @@ function testConnectAdvancedExtraOptions() {
   }
 
   connectAdvanced(selectorFactory, {otherOption: "other options typecheck too"});
-  //$ExpectError selectorFactory expects otherOption to be a specific type
+  //$FlowExpectedError selectorFactory expects otherOption to be a specific type
   connectAdvanced(selectorFactory, {otherOption: 5});
 }

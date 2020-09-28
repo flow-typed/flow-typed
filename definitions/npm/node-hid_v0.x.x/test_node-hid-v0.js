@@ -23,17 +23,17 @@ device.on('error', (error: Error) => {});
 (device.readSync(): Array<number>);
 (device.readTimeout(15): Array<number>);
 
-// $ExpectError
+// $FlowExpectedError
 (HID.devices(): Promise<Array<HIDDeviceDescription>>);
-// $ExpectError
+// $FlowExpectedError
 (device.write([0x00, 0x01, 0x01, 0x05, 0xff, 0xff]): Promise);
-// $ExpectError
+// $FlowExpectedError
 (device.read((data: Buffer) => {}));
-// $ExpectError
+// $FlowExpectedError
 (device.readSync(): Buffer);
 
-// $ExpectError
+// $FlowExpectedError
 device = new HID.HID();
-// $ExpectError
+// $FlowExpectedError
 device = HID.HID('123');
 

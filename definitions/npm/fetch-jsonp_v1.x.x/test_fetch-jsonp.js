@@ -14,13 +14,13 @@ fetchJsonP("http://example.org/script.js", {
   jsonpCallbackFunction: "function_name_of_jsonp_response"
 });
 
-// $ExpectError
+// $FlowExpectedError
 fetchJsonP(5);
 
-// $ExpectError
+// $FlowExpectedError
 fetchJsonP("http://example.org/script.js").json();
 
-// $ExpectError
+// $FlowExpectedError
 fetchJsonP("http://example.org/script.js", {
   jsonpCallbackFunction: () => {}
 });

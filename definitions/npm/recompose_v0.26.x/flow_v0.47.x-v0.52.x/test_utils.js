@@ -13,11 +13,11 @@ const A = ({ a, b }) =>
     {a}
     {(b: string)}
     {
-      // $ExpectError
+      // $FlowExpectedError
       (a: string)
     }
     {
-      // $ExpectError
+      // $FlowExpectedError
       (b: number)
     }
   </div>;

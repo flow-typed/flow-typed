@@ -8,5 +8,5 @@ handleActions({
   foo: {},
   bar() {},
 })();
-// $ExpectError
+// $FlowExpectedError
 handleActions({ foo: {}, bar() {} }, 123);

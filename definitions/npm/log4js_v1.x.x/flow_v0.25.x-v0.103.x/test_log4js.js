@@ -9,7 +9,7 @@ log4js.configure({
 
 log4js.configure('test.json', {});
 
-// $ExpectError
+// $FlowExpectedError
 log4js.configure({
   appenders: [{}],
 });
@@ -17,15 +17,15 @@ log4js.configure({
 log4js.getLogger().log('test');
 log4js.getLogger('test').error('test', 'test');
 
-// $ExpectError
+// $FlowExpectedError
 log4js.getLogger('test').test('test');
 
-// $ExpectError
+// $FlowExpectedError
 log4js.getLogger(1);
 
 log4js.shutdown(() => {});
 
-// $ExpectError
+// $FlowExpectedError
 log4js.shutdown();
 
 log4js.connectLogger(log4js.getLogger(), {});

@@ -24,34 +24,34 @@ it("should accept a keySelector", () => {
 });
 
 it("should enforce types", () => {
-  // $ExpectError
+  // $FlowExpectedError
   const o = of(sample).pipe(distinctUntilChanged("F00D"));
 });
 
 it("should enforce types of compare", () => {
-  // $ExpectError
+  // $FlowExpectedError
   const o = of(sample).pipe(
     distinctUntilChanged((p1, p2) => p1.foo === p2.name)
   );
-  // $ExpectError
+  // $FlowExpectedError
   const p = of(sample).pipe(
     distinctUntilChanged((p1, p2) => p1.name === p2.foo)
   );
 });
 
 it("should enforce types of keySelector", () => {
-  // $ExpectError
+  // $FlowExpectedError
   const o = of(sample).pipe(
     distinctUntilChanged((name1, name2) => name1 === name2, p => p.foo)
   );
 });
 
 it("should enforce types of compare in combination with keySelector", () => {
-  // $ExpectError
+  // $FlowExpectedError
   const o = of(sample).pipe(
     distinctUntilChanged((name1: number, name2) => name1 === name2, p => p.name)
   );
-  // $ExpectError
+  // $FlowExpectedError
   const p = of(sample).pipe(
     distinctUntilChanged((name1, name2: number) => name1 === name2, p => p.name)
   );

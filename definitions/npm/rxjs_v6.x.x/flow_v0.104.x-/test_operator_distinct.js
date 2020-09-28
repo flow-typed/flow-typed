@@ -18,11 +18,11 @@ it("should accept flushes", () => {
 });
 
 it("should enforce types", () => {
-  // $ExpectError
+  // $FlowExpectedError
   const o = of(1, 2, 3).pipe(distinct("F00D"));
 });
 
 it("should enforce types of keySelector", () => {
-  // $ExpectError
+  // $FlowExpectedError
   const o = of<{ id: string }>({ id: "F00D" }).pipe(distinct(item => item.foo));
 });

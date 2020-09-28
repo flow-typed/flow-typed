@@ -22,7 +22,7 @@ describe('The `ClickableBox` component', () => {
     it('should accept a React.ElementType', () => {
       <ClickableBox is="div" />;
       <ClickableBox is={Component} />;
-      // $ExpectError
+      // $FlowExpectedError
       <ClickableBox is={<div />} />;
     });
   });
@@ -30,7 +30,7 @@ describe('The `ClickableBox` component', () => {
   describe('The `tabIndex` property', () => {
     it('should accept numbers', () => {
       <ClickableBox tabIndex={100} />;
-      // $ExpectError
+      // $FlowExpectedError
       <ClickableBox tabIndex={false} />;
     });
   });
@@ -38,7 +38,7 @@ describe('The `ClickableBox` component', () => {
   describe('The `disabled` property', () => {
     it('should accept booleans', () => {
       <ClickableBox disabled />;
-      // $ExpectError
+      // $FlowExpectedError
       <ClickableBox disabled={0} />;
     });
   });
@@ -48,7 +48,7 @@ describe('The `ClickableBox` component', () => {
       <ClickableBox innerRef="test" />;
       <ClickableBox innerRef={ref} />;
       <ClickableBox innerRef={node => (node: ?HTMLElement)} />;
-      // $ExpectError
+      // $FlowExpectedError
       <ClickableBox innerRef={false} />;
     });
   });
@@ -69,7 +69,7 @@ describe('The `ClickableBox` component', () => {
     it('should accept a callback', () => {
       <ClickableBox onClick={() => {}} />;
       <ClickableBox onClick={(evt: SyntheticMouseEvent<>) => {}} />;
-      // $ExpectError
+      // $FlowExpectedError
       <ClickableBox onClick={(evt: SyntheticInputEvent<>) => {}} />;
     });
   });
@@ -78,7 +78,7 @@ describe('The `ClickableBox` component', () => {
     it('should accept a callback', () => {
       <ClickableBox onKeyPress={() => {}} />;
       <ClickableBox onKeyPress={(evt: SyntheticKeyboardEvent<>) => {}} />;
-      // $ExpectError
+      // $FlowExpectedError
       <ClickableBox onKeyPress={(evt: SyntheticInputEvent<>) => {}} />;
     });
   });

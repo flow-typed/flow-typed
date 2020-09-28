@@ -98,57 +98,57 @@ const {
 } = DOMHelper;
 
 <Button appearance="default">test</Button>;
-//$ExpectError
+//$FlowExpectedError
 <Button appearance="test">test</Button>;
 
 <Cascader data={[]} />;
-//$ExpectError
+//$FlowExpectedError
 <Cascader />;
 
 <CheckTreePicker data={[]} />;
-//$ExpectError
+//$FlowExpectedError
 <CheckTreePicker />;
 
 <TreePicker data={[]} />;
-//$ExpectError
+//$FlowExpectedError
 <TreePicker />;
 
 <Tree data={[]} />;
-//$ExpectError
+//$FlowExpectedError
 <Tree />;
 
 <CheckTree data={[]} />;
-//$ExpectError
+//$FlowExpectedError
 <CheckTree />;
 
 <DatePicker />;
 
-//$ExpectError
+//$FlowExpectedError
 <DatePicker value={"10/10/2018"} />;
 
 <DateRangePicker />;
 
-//$ExpectError
+//$FlowExpectedError
 <DateRangePicker value={["10/10/2018", "10/10/2018"]} />;
 
 <InputPicker data={[]} />;
-//$ExpectError
+//$FlowExpectedError
 <InputPicker />;
 
 <TagPicker data={[]} />;
-//$ExpectError
+//$FlowExpectedError
 <TagPicker />;
 
 <SelectPicker data={[]} />;
-//$ExpectError
+//$FlowExpectedError
 <SelectPicker />;
 
 <AutoComplete data={[]} />;
-//$ExpectError
+//$FlowExpectedError
 <AutoComplete />;
 
 <Breadcrumb.Item />;
-//$ExpectError
+//$FlowExpectedError
 <Breadcrumb.Item active="a" />;
 
 <Breadcrumb>
@@ -162,7 +162,7 @@ const {
 
 
 <Button />;
-//$ExpectError
+//$FlowExpectedError
 <Button active="a" />;
 
 <ButtonGroup />;
@@ -186,7 +186,7 @@ const {
 
 <Col />;
 
-//$ExpectError
+//$FlowExpectedError
 <Col xs="1" />;
 
 <Container />;
@@ -215,7 +215,7 @@ const {
 <ErrorMessage>error</ErrorMessage>;
 
 <FlexboxGrid />;
-//$ExpectError
+//$FlowExpectedError
 <FlexboxGrid align="abc" />;
 
 <FlexboxGrid>
@@ -225,7 +225,7 @@ const {
 <Footer />;
 
 <Form />;
-//$ExpectError
+//$FlowExpectedError
 <Form layout="abc" />;
 
 <Form>
@@ -234,17 +234,17 @@ const {
 
 <Icon icon="user" />;
 
-//$ExpectError
+//$FlowExpectedError
 <Icon />;
 
-//$ExpectError
+//$FlowExpectedError
 <Icon icon="user" size="100" />;
 
 <IntlProvider />;
 
 <FormControl name="username" />;
 
-//$ExpectError
+//$FlowExpectedError
 <FormControl />;
 
 <FormGroup />;
@@ -266,12 +266,12 @@ const {
 
 <InputNumber />;
 
-//$ExpectError
+//$FlowExpectedError
 <InputNumber value={[]} />;
 
 <Loader />;
 
-//$ExpectError
+//$FlowExpectedError
 <Loader speed="default" />;
 
 <Message>error</Message>;
@@ -309,12 +309,12 @@ const {
 
 <Progress.Circle />;
 
-//$ExpectError
+//$FlowExpectedError
 <Progress.Circle status />;
 
 <Progress.Line />;
 
-//$ExpectError
+//$FlowExpectedError
 <Progress.Line status />;
 
 <Radio />;
@@ -358,10 +358,10 @@ const {
 
 <Table.Pagination total={100} activePage={1} />;
 
-//$ExpectError
+//$FlowExpectedError
 <Table />;
 
-//$ExpectError
+//$FlowExpectedError
 <Table.Pagination />;
 
 <Tag />;
@@ -382,13 +382,13 @@ const {
 
 <Uploader action="http://" />;
 
-//$ExpectError
+//$FlowExpectedError
 <Uploader />;
 
-//$ExpectError
+//$FlowExpectedError
 <Whisper />;
 
-//$ExpectError
+//$FlowExpectedError
 <Whisper>
   <a>a</a>
 </Whisper>;
@@ -397,7 +397,7 @@ const {
   <a>a</a>
 </Whisper>;
 
-//$ExpectError
+//$FlowExpectedError
 Alert.info();
 
 Alert.info("message");
@@ -412,7 +412,7 @@ Alert.config({
   }
 });
 
-//$ExpectError
+//$FlowExpectedError
 Notification.info();
 
 Notification.open({ title: "title", description: "desc" });
@@ -455,7 +455,7 @@ StringType("error")
   .maxLength(4, "")
   .addRule(() => true, "");
 
-//$ExpectError
+//$FlowExpectedError
 StringType("error").maxLength();
 
 NumberType("error")

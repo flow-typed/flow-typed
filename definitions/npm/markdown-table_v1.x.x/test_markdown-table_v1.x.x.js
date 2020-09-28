@@ -11,17 +11,17 @@ describe("markdownTable()", () => {
     (markdownTable([[]]): string);
     (markdownTable([]): string);
 
-    // $ExpectError
+    // $FlowExpectedError
     markdownTable();
-    // $ExpectError
+    // $FlowExpectedError
     markdownTable(null);
-    // $ExpectError
+    // $FlowExpectedError
     markdownTable([[], null]);
-    // $ExpectError
+    // $FlowExpectedError
     markdownTable([[], undefined]);
-    // $ExpectError
+    // $FlowExpectedError
     markdownTable(null);
-    // $ExpectError
+    // $FlowExpectedError
     markdownTable(undefined);
   });
 
@@ -35,12 +35,12 @@ describe("markdownTable()", () => {
       stringLength: value => 0
     });
 
-    // $ExpectError
+    // $FlowExpectedError
     markdownTable([], {
       foo: "bar"
     });
 
-    // $ExpectError
+    // $FlowExpectedError
     markdownTable([], {
       delimiter: 1
     });

@@ -11,11 +11,11 @@ describe('diskusage tests', function() {
         const free: number = usage.free;
         const total: number = usage.total;
 
-        // $ExpectError
+        // $FlowExpectedError
         diskusage.checkSync(1);
-        // $ExpectError
+        // $FlowExpectedError
         diskusage.checkSync('./', () => {});
-        // $ExpectError
+        // $FlowExpectedError
         (usage.space: number);
     });
 
@@ -29,13 +29,13 @@ describe('diskusage tests', function() {
             free = result.free;
             total = result.total;
 
-            // $ExpectError
+            // $FlowExpectedError
             available = result.space;
         })
 
-        // $ExpectError
+        // $FlowExpectedError
         diskusage.check('./', '');
-        // $ExpectError
+        // $FlowExpectedError
         diskusage.check(1, () => {});
     });
 
@@ -46,9 +46,9 @@ describe('diskusage tests', function() {
         const free: number = usage.free;
         const total: number = usage.total;
 
-        // $ExpectError
+        // $FlowExpectedError
         await diskusage.check(1);
-        // $ExpectError
+        // $FlowExpectedError
         (usage.space: number);
     });
 });

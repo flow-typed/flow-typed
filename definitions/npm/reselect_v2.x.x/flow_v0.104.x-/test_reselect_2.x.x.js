@@ -1,4 +1,5 @@
 /* @flow */
+import { it } from "flow-typed-test";
 import {
   createSelector,
   defaultMemoize,
@@ -6,80 +7,80 @@ import {
   createStructuredSelector
 } from 'reselect';
 
-// TEST: Should pass for 2 selectors given as arguments
 type State = {
   x: number,
   y: number,
   ...
 };
 
-const test1Selector = createSelector(
-  (state: State) => state.x,
-  (state: State) => state.y,
-  (x, y) => {
-    return x + y
-  }
-)({x: 100, y: 200})
-// END TEST
-
-// TEST: Should pass for 2 selectors given as array
-createSelector(
-  [
-    (state: State) => state.x,
-    (state: State) => state.y
-  ] ,
-  (x, y) => {
-    return x + y
-  }
-)({x: 100, y: 200})
-// END TEST
-
-// TEST: Should pass when selectors have additional Props argument
 type TestProps = {
   x: number,
   ...
 };
 
-createSelector(
-  (state: State, props: TestProps) => state.x + props.x,
-  (state: State, props: TestProps) => state.y + props.x,
-  (x, y) => {
-    return x + y
-  }
-)({x: 100, y: 200}, {
-  x: 10
+it('Should pass for 2 selectors given as arguments', () => {
+  const test1Selector = createSelector(
+    (state: State) => state.x,
+    (state: State) => state.y,
+    (x, y) => {
+      return x + y
+    }
+  )({x: 100, y: 200})
 });
-// END TEST
 
-// TEST: Should pass for additional arguments
-createSelector(
-  (state: State, props: TestProps, test) => state.x + props.x + test,
-  (state: State, props: TestProps, test) => state.y + props.x + test,
-  (x, y) => {
-    return x + y
-  }
-)({x: 100, y: 200}, {
-  x: 10
-}, 10);
-// END TEST
+it('Should pass for 2 selectors given as array', () => {
+  createSelector(
+    [
+      (state: State) => state.x,
+      (state: State) => state.y
+    ] ,
+    (x, y) => {
+      return x + y
+    }
+  )({x: 100, y: 200})
+});
+
+it('Should pass when selectors have additional Props argument', () => {
+  createSelector(
+    (state: State, props: TestProps) => state.x + props.x,
+    (state: State, props: TestProps) => state.y + props.x,
+    (x, y) => {
+      return x + y
+    }
+  )({x: 100, y: 200}, {
+    x: 10
+  });
+});
+
+it('Should pass for additional arguments', () => {
+  createSelector(
+    (state: State, props: TestProps, test) => state.x + props.x + test,
+    (state: State, props: TestProps, test) => state.y + props.x + test,
+    (x, y) => {
+      return x + y
+    }
+  )({x: 100, y: 200}, {
+    x: 10
+  }, 10);
+});
 
 defaultMemoize((a: number) => a + 1)(2);
 defaultMemoize((a: number) => a + 1, (a, b) => a + b)(2);
 
-// TEST 8: Should threat newly created selector as normal one
-let x = createSelectorCreator(defaultMemoize)(
-  (state) => state.x,
-  (state) => state.y,
-  (x, y) => {
-    return x + y;
-  }
-)
+it('Should threat newly created selector as normal one', () => {
+  let x = createSelectorCreator(defaultMemoize)(
+    (state) => state.x,
+    (state) => state.y,
+    (x, y) => {
+      return x + y;
+    }
+  )
 
-x({
-  x: 10,
-  y: 20
-})
-// END TEST
+  x({
+    x: 10,
+    y: 20
+  })
+});
 
 createStructuredSelector({
   first: (state) => state.x,
@@ -102,15 +103,16 @@ type TestState2 = {
 
 createSelector(
   (state: TestState1) => state.x,
-  // $ExpectError: Should not pass when selectors handle different states
+  // $FlowExpectedError: Should not pass when selectors handle different states
   (state: TestState2) => state.y,
   (x, y) => {
     return x + y
   }
+// $FlowExpectedError: property `d` is missing state but exists in TestState2
 )({x: 100, y: 200});
 
 createSelector(
-  // $ExpectError: Should not pass when selectors handle different states
+  // $FlowExpectedError: Should not pass when selectors handle different states
   (state, props) => state.x + props.d,
   (state) => state.y,
   (x, y) => {
@@ -118,7 +120,6 @@ createSelector(
   }
 )({x: 100, y: 200}, { x: 20 });
 
-// $ExpectError: Should not result do not include property
 createSelector(
   (state) => state.x,
   (state) => state.y,
@@ -128,16 +129,17 @@ createSelector(
       y
     }
   }
+// $FlowExpectedError: property `d` is missing createSelector() return object
 )({x: 100, y: 200}, { x: 20 }).d;
 
-// $ExpectError
+// $FlowExpectedError
 defaultMemoize((a: number) => a + 1)('');
-// $ExpectError
+// $FlowExpectedError
 defaultMemoize((a: number) => a + 1, (a, b) => '')(2);
 
 createSelectorCreator(defaultMemoize)(
   (state) => state.x,
-  // $ExpectError: Should fail when state don't have good properties
+  // $FlowExpectedError: Should fail when state don't have good properties
   (state) => state.y,
   (x, y) => {
     return x + y;
@@ -148,7 +150,7 @@ createSelectorCreator(defaultMemoize)(
 })
 
 createStructuredSelector({
-  // $ExpectError: Should fail when state don't have good properties
+  // $FlowExpectedError: Should fail when state don't have good properties
   first: (state) => state.d,
   second: (state) => state.y
 })({
@@ -161,7 +163,7 @@ createSelector(
     first: (state) => state.x,
     second: (state) => state.y
   }),
-  // $ExpectError: Should fail when property names not in the input selectors object
+  // $FlowExpectedError: Should fail when property names not in the input selectors object
   ({first, third}) => first + third
 )({
   x: 10,
@@ -173,8 +175,9 @@ createSelector(
     first: (state) => state.x,
     second: (state) => state.y
   }),
-  // $ExpectError: Return types of input selectors propogate
+  // $FlowExpectedError: Return types of input selectors propagate
   ({first, second}: {first: number, second: number}) => first + second
+// $FlowExpectedError: property `second` is missing in object
 )({
   x: 10,
   y: false

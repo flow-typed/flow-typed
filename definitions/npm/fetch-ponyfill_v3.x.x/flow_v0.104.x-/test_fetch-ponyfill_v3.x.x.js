@@ -1,7 +1,7 @@
 import _fetch from 'fetch-ponyfill';
 
 const url = 'https://www.github.com';
-//$ExpectError
+//$FlowExpectedError
 _fetch(url)
 
 import FetchConstructor from 'fetch-ponyfill';
@@ -21,7 +21,7 @@ fetch(url, {
   cache: 'default',
 })
 .then(function(res: Response) {
-  //$ExpectError
+  //$FlowExpectedError
   res.xml();
   res.arrayBuffer();
   res.blob();
@@ -35,5 +35,5 @@ fetch(url, {
 
 
 const _fetch1 = FetchConstructor({Promise, XMLHttpRequest}).fetch;
-//$ExpectError
+//$FlowExpectedError
 const _fetch1 = FetchConstructor({Promise: () => null}).fetch;

@@ -3,7 +3,7 @@
 import { describe, it } from "flow-typed-test";
 import React from "react";
 
-// $ExpectError
+// $FlowExpectedError
 import { storiesOf } from "@storybook/react";
 import StoryRouter from "storybook-router";
 
@@ -53,25 +53,25 @@ describe("The `StoryRouter` decorator", () => {
   });
 
   it("should error on invalid options", () => {
-    // $ExpectError
+    // $FlowExpectedError
     StoryRouter(false);
 
-    // $ExpectError
+    // $FlowExpectedError
     StoryRouter("string");
 
-    // $ExpectError
+    // $FlowExpectedError
     StoryRouter({}, false);
 
-    // $ExpectError
+    // $FlowExpectedError
     StoryRouter({}, { autoRoute: "string" });
 
-    // $ExpectError
+    // $FlowExpectedError
     StoryRouter({}, { initialEntry: "string" });
 
-    // $ExpectError
+    // $FlowExpectedError
     StoryRouter({}, { initialEntries: "string" });
 
-    // $ExpectError
+    // $FlowExpectedError
     StoryRouter({}, { keyLength: "string" });
   });
 });

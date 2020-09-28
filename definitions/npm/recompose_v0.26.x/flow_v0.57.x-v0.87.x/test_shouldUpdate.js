@@ -11,7 +11,7 @@ const Comp = ({ eA }) => (
   <div>
     {(eA: number)}
     {
-      // $ExpectError eA nor any nor string
+      // $FlowExpectedError eA nor any nor string
       (eA: string)
     }
   </div>
@@ -19,27 +19,27 @@ const Comp = ({ eA }) => (
 
 const enhacer: HOC<*, EnhancedCompProps> = compose(
   shouldUpdate((props, nextProps) => {
-    // $ExpectError eA nor any nor string
+    // $FlowExpectedError eA nor any nor string
     (props.eA: string);
-    // $ExpectError eA nor any nor string
+    // $FlowExpectedError eA nor any nor string
     (nextProps.eA: string);
 
     return props.eA === nextProps.eA;
   }),
   withProps(props => ({
     eA: (props.eA: number),
-    // $ExpectError eA nor any nor string
+    // $FlowExpectedError eA nor any nor string
     eAErr: (props.eA: string)
   })),
   withProps(props => ({
-    // $ExpectError property not found
+    // $FlowExpectedError property not found
     err: props.iMNotExists
   }))
 );
 
 const enhacerErr: HOC<*, EnhancedCompProps> = compose(
   shouldUpdate(() => {
-    // $ExpectError must be boolean
+    // $FlowExpectedError must be boolean
     return 1;
   })
 );

@@ -30,12 +30,12 @@ describe("react-i18next", () => {
     });
 
     it("raises error when missing children prop", () => {
-      // $ExpectError - missing children prop
+      // $FlowExpectedError - missing children prop
       <I18nextProvider i18n={i18n} />;
     });
 
     it("raises error when missing i18n prop", () => {
-      // $ExpectError - missing i18n prop
+      // $FlowExpectedError - missing i18n prop
       <I18nextProvider children={<div />} />;
     });
   });
@@ -47,11 +47,11 @@ describe("react-i18next", () => {
     });
 
     it("raises error when called with incorrect arguments", () => {
-      // $ExpectError - too few arguments
+      // $FlowExpectedError - too few arguments
       loadNamespaces();
-      // $ExpectError - wrong type
+      // $FlowExpectedError - wrong type
       loadNamespaces("");
-      // $ExpectError - wrong components type
+      // $FlowExpectedError - wrong components type
       loadNamespaces({ components: [{}], i18n });
     });
   });
@@ -66,9 +66,9 @@ describe("react-i18next", () => {
 
     it("errors when passed invalid arguments", () => {
       const testFn = (t: TFunction) => {
-        // $ExpectError wrong second argument type
+        // $FlowExpectedError wrong second argument type
         t("key", "key2");
-        // $ExpectError First argument must be a string
+        // $FlowExpectedError First argument must be a string
         t({ val: "val" });
       };
     });
@@ -85,7 +85,7 @@ describe("react-i18next", () => {
     });
 
     it("errors when called with invalid arguments", () => {
-      // $ExpectError - wrong argument type
+      // $FlowExpectedError - wrong argument type
       translate({});
     });
 
@@ -111,12 +111,12 @@ describe("react-i18next", () => {
           <div prop1={t("")} prop2={" " + s} />
         );
         const WrappedComp = translate()(Comp);
-        // $ExpectError - missing prop "s"
+        // $FlowExpectedError - missing prop "s"
         <WrappedComp />;
       });
 
       it("errors if the component is passed props of the wrong type", () => {
-        // $ExpectError - wrong type
+        // $FlowExpectedError - wrong type
         const Comp = ({ s, t }: {
           s: string,
           t: TFunction,
@@ -125,7 +125,7 @@ describe("react-i18next", () => {
           <div prop1={t("")} prop2={" " + s} />
         );
         const WrappedComp = translate()(Comp);
-        // $ExpectError - wrong type
+        // $FlowExpectedError - wrong type
         <WrappedComp s={1} />;
       });
     });
@@ -158,7 +158,7 @@ describe("react-i18next", () => {
           }
         }
         const WrappedComp = translate()(Comp);
-        // $ExpectError - missing prop "s"
+        // $FlowExpectedError - missing prop "s"
         <WrappedComp />;
       });
 
@@ -174,7 +174,7 @@ describe("react-i18next", () => {
           }
         }
         const WrappedComp = translate()(Comp);
-        // $ExpectError - wrong type
+        // $FlowExpectedError - wrong type
         <WrappedComp s={1} />;
       });
 
@@ -211,7 +211,7 @@ describe("react-i18next", () => {
           }
         }
         const WrappedComp = translate()(Comp);
-        // $ExpectError - wrong type
+        // $FlowExpectedError - wrong type
         <WrappedComp s={123} />;
       });
     });
@@ -232,7 +232,7 @@ describe("react-i18next", () => {
     });
 
     it("errors when no children are passed", () => {
-      // $ExpectError - no children passed to I18n component
+      // $FlowExpectedError - no children passed to I18n component
       <I18n ns="translations" />;
     });
   });
@@ -255,7 +255,7 @@ describe("react-i18next", () => {
     });
 
     it("fails when passed props of wrong type", () => {
-      // $ExpectError - i18nKey prop wrong type
+      // $FlowExpectedError - i18nKey prop wrong type
       <Interpolate i18nKey={1} />;
     });
   });
@@ -268,7 +268,7 @@ describe("react-i18next", () => {
     });
 
     it("errors when passed props of wrong type", () => {
-      // $ExpectError - i18nKey prop wrong type
+      // $FlowExpectedError - i18nKey prop wrong type
       <Trans i18nKey={5} />;
     });
   });
@@ -280,7 +280,7 @@ describe("react-i18next", () => {
     });
 
     it("errors if trying to access an unknown property", () => {
-      // $ExpectError - no field property on reactI18nextModule
+      // $FlowExpectedError - no field property on reactI18nextModule
       reactI18nextModule.field;
     });
   });
@@ -291,9 +291,9 @@ describe("react-i18next", () => {
     });
 
     it("errors if passes a non-object or an invalid proeprty", () => {
-      // $ExpectError - setDefaults must be called with an object
+      // $FlowExpectedError - setDefaults must be called with an object
       setDefaults("option");
-      // $ExpectError - other is not a valid option
+      // $FlowExpectedError - other is not a valid option
       setDefaults({ other: true });
     });
   });
@@ -304,7 +304,7 @@ describe("react-i18next", () => {
     });
 
     it("errors if passed an argument", () => {
-      // $ExpectError - no arguments should be passed to getDefaults
+      // $FlowExpectedError - no arguments should be passed to getDefaults
       getDefaults("string");
     });
   });
@@ -315,7 +315,7 @@ describe("react-i18next", () => {
     });
 
     it("errors if passed an argument", () => {
-      // $ExpectError - no arguments should be passed to getI18n
+      // $FlowExpectedError - no arguments should be passed to getI18n
       getI18n("string");
     });
   });
@@ -326,7 +326,7 @@ describe("react-i18next", () => {
     });
 
     it("errors if passed a non-object", () => {
-      // $ExpectError - i18n object should be passed to setI18n
+      // $FlowExpectedError - i18n object should be passed to setI18n
       setI18n("string");
     });
   });

@@ -11,18 +11,18 @@ describe("raven-js", () => {
       });
       Raven.config("dsn").install();
 
-      // $ExpectError - dsn argument is required
+      // $FlowExpectedError - dsn argument is required
       Raven.config();
 
-      // $ExpectError - dsn argument must be a string
+      // $FlowExpectedError - dsn argument must be a string
       Raven.config(0);
 
-      // $ExpectError - high is not a valid level option
+      // $FlowExpectedError - high is not a valid level option
       Raven.config("dsn", {
         level: "high"
       });
 
-      // $ExpectError - unknown is not a method on Raven
+      // $FlowExpectedError - unknown is not a method on Raven
       Raven.config("dsn").unknown();
     });
   });
@@ -31,7 +31,7 @@ describe("raven-js", () => {
     it("works", () => {
       const isSetup: boolean = Raven.isSetup();
 
-      // $ExpectError - Raven.isSetup returns a boolean
+      // $FlowExpectedError - Raven.isSetup returns a boolean
       const isSetupString: string = Raven.isSetup();
     });
   });
@@ -52,13 +52,13 @@ describe("raven-js", () => {
         }
       });
 
-      // $ExpectError - eventId must be a string
+      // $FlowExpectedError - eventId must be a string
       Raven.showReportDialog({ eventId: 1 });
 
-      // $ExpectError - dsn must be a string
+      // $FlowExpectedError - dsn must be a string
       Raven.showReportDialog({ dsn: 1 });
 
-      // $ExpectError - user name must be a string
+      // $FlowExpectedError - user name must be a string
       Raven.showReportDialog({
         user: { name: { first: "first", last: "last" } }
       });

@@ -20,7 +20,7 @@ const results = [
 
 const output: string = checkstyleFormatter(results);
 
-// $ExpectError
+// $FlowExpectedError
 const n: number = checkstyleFormatter(results);
 
 const wrongResultFormat1 = [
@@ -30,7 +30,7 @@ const wrongResultFormat1 = [
   }
 ];
 
-// $ExpectError
+// $FlowExpectedError
 checkstyleFormatter(wrongResultFormat1);
 
 const wrongResultFormat2 = [
@@ -40,5 +40,5 @@ const wrongResultFormat2 = [
   }
 ];
 
-// $ExpectError
+// $FlowExpectedError
 checkstyleFormatter(wrongResultFormat2);

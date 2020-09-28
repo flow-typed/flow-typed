@@ -3,11 +3,11 @@
 import React from 'react';
 import hoistNonReactStatics from 'hoist-non-react-statics';
 
-// $ExpectError
+// $FlowExpectedError
 hoistNonReactStatics(1);
-// $ExpectError
+// $FlowExpectedError
 hoistNonReactStatics(1, 2);
-// $ExpectError
+// $FlowExpectedError
 hoistNonReactStatics(1, 2, 3);
 
 let C1 = (props: {
@@ -45,6 +45,6 @@ class B extends React.Component<{b: string, ...}> {
 const C = hoistNonReactStatics(B, A);
 
 A.foo();
-// $ExpectError
+// $FlowExpectedError
 B.foo();
 C.foo();

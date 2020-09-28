@@ -10,7 +10,7 @@ import type {
   },
   xsrfCookieName: 'cookie',
 }): Promise<*>);
-// $ExpectError
+// $FlowExpectedError
 (axios.post(123): Promise<*>);
 
 (axios('url'): Promise<*>);
@@ -19,7 +19,7 @@ const client = axios.create();
 
 client.post('/something', {});
 
-// $ExpectError
+// $FlowExpectedError
 client.post(232);
 
 type Data = {
@@ -43,7 +43,7 @@ axios({
     lastName: 'Flintstone'
   }
 }).then(r => {
-  // $ExpectError
+  // $FlowExpectedError
   (r.status: string);
 });
 
@@ -57,11 +57,11 @@ const extended = new AxiosExtended();
 axios.all([
   extended.specialPut('foo')
     .then((r) => {
-        // $ExpectError
+        // $FlowExpectedError
         (r.statusText: number)
     }),
     Promise.reject(12)
 ]).then(([a, b]) => {
-    // $ExpectError
+    // $FlowExpectedError
     (a: string);
 })

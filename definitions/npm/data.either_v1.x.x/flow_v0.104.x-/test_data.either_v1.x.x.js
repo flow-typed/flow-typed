@@ -40,32 +40,32 @@ const orElse: Either<number, *> = Either.Left('1').orElse(l => Either.Left(parse
 const concat: Either<*, string[]> = Either.Right(['a']).concat(Either.of(['b']));
 
 // --- Errors
-// $ExpectError
+// $FlowExpectedError
 const _eq = a.isEqual('fail');
-// $ExpectError
+// $FlowExpectedError
 const _value: string = b.get();
-// $ExpectError
+// $FlowExpectedError
 const _x: string = Either.Left('fail').getOrElse(10);
-// $ExpectError
+// $FlowExpectedError
 const _y: number = Either.Left('fail').merge();
-// $ExpectError
+// $FlowExpectedError
 const _applicative = Either.of(concat).ap('a').ap('b');
-// $ExpectError
+// $FlowExpectedError
 const _map = b.map(1);
-// $ExpectError
+// $FlowExpectedError
 const _chain = b.chain(x => x + x);
-// $ExpectError
+// $FlowExpectedError
 const _fold: string = Either.of('test').fold((l): number => Number(l), (r): string => r);
-// $ExpectError
+// $FlowExpectedError
 const _cata = Either.of('test').cata({
   ALeft: l => new Error(l),
   ARight: r => r.concat('test')
 });
-// $ExpectError
+// $FlowExpectedError
 const _bimap: Either<*, number> = Either.Right('1').bimap(x => x);
-// $ExpectError
+// $FlowExpectedError
 const _leftMap: Either<number, *> = Either.Left('1').leftMap(x => x);
-// $ExpectError
+// $FlowExpectedError
 const _orElse: Either<number, *> = Either.Left('1').orElse(l => l);
-// $ExpectError
+// $FlowExpectedError
 const _concat: Either<*, string[]> = Either.Right(1).concat(['b']);

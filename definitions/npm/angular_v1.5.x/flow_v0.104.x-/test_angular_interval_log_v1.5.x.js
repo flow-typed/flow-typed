@@ -32,34 +32,34 @@ describe('angular $Interval', () => {
   it('cannot be called', () => {
     it('with something other than a number in the third argument', () => {
       function testInterval($interval: $Interval) {
-        //$ExpectError
+        //$FlowExpectedError
         $interval(() => {}, 0, true);
       }
     });
 
     it('with something other than a boolean in the fourth argument', () => {
       function testInterval($interval: $Interval) {
-        //$ExpectError
+        //$FlowExpectedError
         $interval(() => {}, 0, 1, 2);
       }
     });
 
     it('with less than two arguments', () => {
       function testInterval($interval: $Interval) {
-        //$ExpectError
+        //$FlowExpectedError
         $interval(() => {});
-        //$ExpectError
+        //$FlowExpectedError
         $interval();
       }
     });
 
     it('with something other than [function, number] in first two arguments', () => {
       function testInterval($interval: $Interval) {
-        //$ExpectError
+        //$FlowExpectedError
         $interval(123, 1);
-        //$ExpectError
+        //$FlowExpectedError
         $interval(123, () => {});
-        //$ExpectError
+        //$FlowExpectedError
         $interval(() => {}, 'string');
       }
     });
@@ -89,7 +89,7 @@ describe('angular $Log', () => {
 
     it('cannot pass more than one argument', () => {
       function testLog($log: $Log) {
-        //$ExpectError
+        //$FlowExpectedError
         $log.log(1, 'x');
       }
     });
@@ -117,7 +117,7 @@ describe('angular $Log', () => {
 
     it('cannot pass more than one argument', () => {
       function testLog($log: $Log) {
-        //$ExpectError
+        //$FlowExpectedError
         $log.info(1, 'x');
       }
     });
@@ -145,7 +145,7 @@ describe('angular $Log', () => {
 
     it('cannot pass more than one argument', () => {
       function testLog($log: $Log) {
-        //$ExpectError
+        //$FlowExpectedError
         $log.warn(1, 'x');
       }
     });
@@ -173,7 +173,7 @@ describe('angular $Log', () => {
 
     it('cannot pass more than one argument', () => {
       function testLog($log: $Log) {
-        //$ExpectError
+        //$FlowExpectedError
         $log.error(1, 'x');
       }
     });
@@ -201,7 +201,7 @@ describe('angular $Log', () => {
 
     it('cannot pass more than one argument', () => {
       function testLog($log: $Log) {
-        //$ExpectError
+        //$FlowExpectedError
         $log.debug(1, 'x');
       }
     });

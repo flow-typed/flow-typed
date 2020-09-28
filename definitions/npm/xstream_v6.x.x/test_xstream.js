@@ -49,7 +49,7 @@ const subscription: Subscription = of.subscribe({
 subscription.unsubscribe();
 
 
-// $ExpectError
+// $FlowExpectedError
 const bogusStrings: Stream<string> = of.map(x => x);
 const map: Stream<string> = of.map(x => `${x}`);
 const mapTo: Stream<string> = of.mapTo('asdf');

@@ -22,7 +22,7 @@ describe('koa-logger', () => {
     logger(transporter);
     logger({ transporter });
 
-    // $ExpectError
+    // $FlowExpectedError
     logger('foo');
   });
 });

@@ -11,14 +11,14 @@ describe("cps effect", () => {
     });
 
     it("returned object must be read only", () => {
-      // $ExpectError: read-only  property
+      // $FlowExpectedError: read-only  property
       c.type = "anyType";
-      // $ExpectError: read-only  property
+      // $FlowExpectedError: read-only  property
       c.payload = {};
     });
 
     it("returned object must be exact", () => {
-      // $ExpectError: exact type
+      // $FlowExpectedError: exact type
       c.abc = 69;
     });
   });
@@ -117,7 +117,7 @@ describe("cps effect", () => {
         (e7.payload.fn: typeof cpsfn7);
         (e8.payload.fn: typeof cpsfn8);
 
-        // $ExpectError: wrong fn
+        // $FlowExpectedError: wrong fn
         (e6.payload.fn: typeof cpsfn1);
       });
     });
@@ -156,7 +156,7 @@ describe("cps effect", () => {
         (e7.payload.context: typeof context);
         (e8.payload.context: typeof context);
 
-        // $ExpectError: not null
+        // $FlowExpectedError: not null
         (e8.payload.context: null);
       });
 
@@ -170,7 +170,7 @@ describe("cps effect", () => {
         (e7.payload.fn: typeof cpsfn7);
         (e8.payload.fn: typeof cpsfn8);
 
-        // $ExpectError: wrong fn
+        // $FlowExpectedError: wrong fn
         (e6.payload.fn: typeof cpsfn1);
       });
     });
@@ -209,7 +209,7 @@ describe("cps effect", () => {
         (e7.payload.context: typeof context);
         (e8.payload.context: typeof context);
 
-        // $ExpectError: not null
+        // $FlowExpectedError: not null
         (e8.payload.context: null);
       });
 
@@ -223,7 +223,7 @@ describe("cps effect", () => {
         (e7.payload.fn: typeof cpsfn7);
         (e8.payload.fn: typeof cpsfn8);
 
-        // $ExpectError: wrong fn
+        // $FlowExpectedError: wrong fn
         (e6.payload.fn: typeof cpsfn1);
       });
     });

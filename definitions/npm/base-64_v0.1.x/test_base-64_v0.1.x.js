@@ -8,5 +8,5 @@ asBase64 = base64.encode('some string');
 let asString: string;
 asString = base64.decode('c29tZSBzdHJpbmc=');
 
-// $ExpectError
+// $FlowExpectedError
 asString = base64.decode(null);

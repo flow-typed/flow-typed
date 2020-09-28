@@ -17,15 +17,15 @@ describe('opaque props', () => {
 
   it('should raises an error when pass not supported type', () => {
     <Camera
-      // $ExpectError
+      // $FlowExpectedError
       type={0}
-      // $ExpectError
+      // $FlowExpectedError
       flashMode={0}
-      // $ExpectError
+      // $FlowExpectedError
       autoFocus={0}
-      // $ExpectError
+      // $FlowExpectedError
       whiteBalance={0}
-      // $ExpectError
+      // $FlowExpectedError
       videoStabilizationMode={0}
     />;
   });
@@ -44,15 +44,15 @@ describe('primitive props', () => {
 
   it('should raises an error when passed incompatible types', () => {
     <Camera
-      // $ExpectError
+      // $FlowExpectedError
       useCamera2Api={'need boolean'}
-      // $ExpectError: need string
+      // $FlowExpectedError: need string
       ratio={1}
-      // $ExpectError
+      // $FlowExpectedError
       zoom={'need number'}
-      // $ExpectError
+      // $FlowExpectedError
       focusDepth={'need number'}
-      // $ExpectError: need string
+      // $FlowExpectedError: need string
       pictureSize={1}
     />;
   });
@@ -66,21 +66,21 @@ describe('other props', () => {
       onMountError={async ({ message }) => {
         (message: string);
 
-        // $ExpectError: check any
+        // $FlowExpectedError: check any
         (message: boolean);
       }}
       onBarCodeScanned={async ({ data, type }) => {
         (data: string);
         (type: string);
 
-        // $ExpectError: check any
+        // $FlowExpectedError: check any
         (type: boolean);
-        // $ExpectError: check any
+        // $FlowExpectedError: check any
         (data: boolean);
       }}
       onFacesDetected={async ({ faces }) => {
         (faces: Array<mixed>);
-        // $ExpectError: check any
+        // $FlowExpectedError: check any
         (faces: boolean);
       }}
     />;
@@ -94,17 +94,17 @@ describe('other props', () => {
   });
 
   it('should raises an error when pass not supported type', () => {
-    // $ExpectError: children must be a valid react node
+    // $FlowExpectedError: children must be a valid react node
     <Camera>{() => {}}</Camera>;
 
     <Camera
-      // $ExpectError
+      // $FlowExpectedError
       onCameraReady={'need function'}
-      // $ExpectError
+      // $FlowExpectedError
       onMountError={'need function'}
-      // $ExpectError
+      // $FlowExpectedError
       onBarCodeScanned={'need function'}
-      // $ExpectError
+      // $FlowExpectedError
       onFacesDetected={'need function'}
     />;
   });
@@ -130,21 +130,21 @@ describe('class methods', () => {
 
     it('should raises an error when call with invalid options', () => {
       camera.takePictureAsync({
-        // $ExpectError
+        // $FlowExpectedError
         quality: 'need number',
-        // $ExpectError
+        // $FlowExpectedError
         base64: 'need boolean',
-        // $ExpectError
+        // $FlowExpectedError
         exif: 'need boolean',
-        // $ExpectError
+        // $FlowExpectedError
         onPictureSaved: 'need function',
-        // $ExpectError
+        // $FlowExpectedError
         skipProcessing: 'need boolean',
       });
     });
 
     it('should raises an error when pass missing options prop', () => {
-      // $ExpectError
+      // $FlowExpectedError
       camera.takePictureAsync({
         abscd: 'missing prop',
       });
@@ -157,13 +157,13 @@ describe('class methods', () => {
         (pic.uri: string);
         (pic.base64: ?string);
 
-        // $ExpectError: check any
+        // $FlowExpectedError: check any
         (pic.width: boolean);
-        // $ExpectError: check any
+        // $FlowExpectedError: check any
         (pic.height: boolean);
-        // $ExpectError: check any
+        // $FlowExpectedError: check any
         (pic.uri: boolean);
-        // $ExpectError: check any
+        // $FlowExpectedError: check any
         (pic.base64: ?boolean);
       });
     });
@@ -185,19 +185,19 @@ describe('class methods', () => {
 
     it('should raises an error when call with invalid options', () => {
       camera.recordAsync({
-        // $ExpectError: need opaque value type
+        // $FlowExpectedError: need opaque value type
         quality: `Constants.VideoQuality['720p']`,
-        // $ExpectError:
+        // $FlowExpectedError:
         maxDuration: 'need number',
-        // $ExpectError:
+        // $FlowExpectedError:
         maxFileSize: 'need number',
-        // $ExpectError:
+        // $FlowExpectedError:
         mute: 'need boolean',
       });
     });
 
     it('should raises an error when pass missing options prop', () => {
-      // $ExpectError
+      // $FlowExpectedError
       camera.recordAsync({
         abscd: 'missing prop',
       });
@@ -207,7 +207,7 @@ describe('class methods', () => {
       camera.recordAsync().then(vid => {
         (vid.uri: string);
 
-        // $ExpectError: check any
+        // $FlowExpectedError: check any
         (vid.uri: boolean);
       });
     });
@@ -223,7 +223,7 @@ describe('class methods', () => {
     });
 
     it('should raises an error when call with invalid ratio', () => {
-      // $ExpectError: radio argument must be string
+      // $FlowExpectedError: radio argument must be string
       camera.getAvailablePictureSizesAsync(123);
     });
 
@@ -231,7 +231,7 @@ describe('class methods', () => {
       camera.getAvailablePictureSizesAsync().then(result => {
         (result: Array<string>);
 
-        // $ExpectError: check any
+        // $FlowExpectedError: check any
         (result: boolean);
       });
     });
@@ -243,7 +243,7 @@ describe('class methods', () => {
     });
 
     it('should raises an error when pass argument', () => {
-      // $ExpectError: arguments did not need
+      // $FlowExpectedError: arguments did not need
       camera.getSupportedRatiosAsync('str');
     });
 
@@ -251,7 +251,7 @@ describe('class methods', () => {
       camera.getSupportedRatiosAsync().then(result => {
         (result: Array<string>);
 
-        // $ExpectError: check any
+        // $FlowExpectedError: check any
         (result: boolean);
       });
     });

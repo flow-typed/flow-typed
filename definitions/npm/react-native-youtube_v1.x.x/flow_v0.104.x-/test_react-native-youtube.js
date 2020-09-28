@@ -31,7 +31,7 @@ import YouTube, {
   }) => {}}
 />;
 
-// $ExpectError
+// $FlowExpectedError
 <YouTube>
   <div />
 </YouTube>;
@@ -56,13 +56,13 @@ if (youTube.reloadIframe) {
   youTube.reloadIframe();
 }
 
-// $ExpectError
+// $FlowExpectedError
 youTube.seekTo("1000");
-// $ExpectError
+// $FlowExpectedError
 youTube.nextVideo(1);
-// $ExpectError
+// $FlowExpectedError
 youTube.previousVideo(-1);
-// $ExpectError
+// $FlowExpectedError
 youTube.playVideoAt("2");
 
 // Standalone Players

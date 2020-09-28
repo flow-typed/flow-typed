@@ -12,12 +12,12 @@ describe('escape-string-regexp', () => {
   });
 
   it('should raise an error if input is wrong', () => {
-    // $ExpectError
+    // $FlowExpectedError
     escapeStringRegexp(42);
   });
 
   it('should raise an error if output type is wrong', () => {
-    // $ExpectError
+    // $FlowExpectedError
     (escapeStringRegexp('how much $ for a unicorn?'): number);
   });
 });

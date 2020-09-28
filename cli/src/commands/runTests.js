@@ -291,6 +291,10 @@ async function getCachedFlowBinVersions(
 }
 
 async function writeFlowConfig(repoDirPath, testDirPath, libDefPath, version) {
+  // /!\---------------------------------------------------------------------/!\
+  // Whenever you introduce a new difference depending on the version, don't
+  // forget to update the constant array CONFIGURATION_CHANGE_VERSIONS.
+  // /!\---------------------------------------------------------------------/!\
   const destFlowConfigPath = path.join(testDirPath, '.flowconfig');
 
   const flowConfigData = [
@@ -299,9 +303,11 @@ async function writeFlowConfig(repoDirPath, testDirPath, libDefPath, version) {
     path.join(repoDirPath, '..', '__util__', 'tdd_framework.js'),
     '',
     '[options]',
-    'suppress_comment=\\\\(.\\\\|\\n\\\\)*\\\\$ExpectError',
     'include_warnings=true',
     'server.max_workers=0',
+    semver.lt(version, '0.125.0')
+      ? 'suppress_comment=\\\\(.\\\\|\\n\\\\)*\\\\$FlowExpectedError'
+      : '',
     '',
 
     // Be sure to ignore stuff in the node_modules directory of the flow-typed
@@ -450,6 +456,40 @@ async function removeTrashFromBinDir() {
     });
 }
 
+// These versions introduce a change in the .flowconfig file. We need to make
+// sure that the flowconfig file is rewritten when reaching these versions.
+// MAKE SURE TO PREPEND THE VERSION WITH "v".
+const CONFIGURATION_CHANGE_VERSIONS = [
+  'v0.104.0', // Adding lint
+  'v0.125.0', // Remove suppress_comments
+];
+
+// This function splits a list of flow versions into a list of lists of versions
+// where the flowconfig configuration is compatible.
+// The list of versions need to be sorted for this function to work properly.
+function partitionListOfFlowVersionsPerConfigChange(
+  flowVersions: $ReadOnlyArray<string>,
+): Array<Array<string>> {
+  const result = [];
+  let lastIndex = 0;
+
+  for (const pivotVersion of CONFIGURATION_CHANGE_VERSIONS) {
+    const index = flowVersions.indexOf(pivotVersion, lastIndex + 1);
+    if (index < 0) {
+      continue;
+    }
+
+    // We extract a new group up to the pivot version excluded (because the
+    // pivot version introduced the configuration incompatibility).
+    result.push(flowVersions.slice(lastIndex, index));
+    lastIndex = index;
+  }
+
+  result.push(flowVersions.slice(lastIndex));
+
+  return result;
+}
+
 /**
  * Given a TestGroup structure determine all versions of Flow that match the
  * FlowVersion specification and, for each, run `flow check` on the test
@@ -516,19 +556,29 @@ async function runTestGroup(
     if (!flowVersionsToRun.length) {
       return [];
     }
-    let lowestFlowVersionRan = flowVersionsToRun[0];
-    await writeFlowConfig(
-      repoDirPath,
-      testDirPath,
-      testGroup.libDefPath,
-      lowestFlowVersionRan,
-    );
-    const flowErrors = await runFlowTypeDefTests(
+
+    const groups = partitionListOfFlowVersionsPerConfigChange(
       flowVersionsToRun,
-      testGroup.id,
-      testDirPath,
     );
 
+    const flowErrors = [];
+    for (const sublistOfFlowVersions of groups) {
+      const lowestFlowVersionRanInThisGroup = sublistOfFlowVersions[0];
+      await writeFlowConfig(
+        repoDirPath,
+        testDirPath,
+        testGroup.libDefPath,
+        lowestFlowVersionRanInThisGroup,
+      );
+      const flowErrorsForThisGroup = await runFlowTypeDefTests(
+        sublistOfFlowVersions,
+        testGroup.id,
+        testDirPath,
+      );
+      flowErrors.push(...flowErrorsForThisGroup);
+    }
+
+    const lowestFlowVersionRan = flowVersionsToRun[0];
     const lowestCapableFlowVersion = await findLowestCapableFlowVersion(
       repoDirPath,
       orderedFlowVersions,

@@ -1,4 +1,4 @@
-declare module "koa-router" {
+declare module "@koa/router" {
   declare type Middleware = (
     ctx: any,
     next: () => Promise<void>

@@ -6,5 +6,5 @@ const a: boolean = numberIsNan(NaN);
 const b: boolean = numberIsNan('unicorn');
 //=> false
 
-// $ExpectError
+// $FlowExpectedError
 (numberIsNan(42): number);

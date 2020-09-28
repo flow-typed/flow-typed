@@ -7,12 +7,12 @@ const emitter = new EventEmitter();
 emitted(emitter, 'foo').then((value: number) => {}).catch((error: Error) => {});
 emitted(emitter, 'foo').cancel();
 
-// $ExpectError
+// $FlowExpectedError
 emitted(emitter, 2);
-// $ExpectError
+// $FlowExpectedError
 emitted(emitter, null);
-// $ExpectError
+// $FlowExpectedError
 emitted(emitter);
-// $ExpectError
+// $FlowExpectedError
 emitted('foo', emitter);
 

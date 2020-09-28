@@ -32,7 +32,7 @@ describe("<QRCode/>", () => {
       });
 
       it("raises an error when ecl invalid", () => {
-        // $ExpectError
+        // $FlowExpectedError
         <QRCode ecl="" />;
       });
     });
@@ -45,7 +45,7 @@ describe("<QRCode/>", () => {
       });
 
       it("raises an error when logo invalid", () => {
-        // $ExpectError
+        // $FlowExpectedError
         <QRCode logo="https://" />;
       });
     });

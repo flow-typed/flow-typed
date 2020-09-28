@@ -35,7 +35,7 @@ describe('getInfoAsync', () => {
     getInfoAsync('fileUri').then(fileInfo => {
       (fileInfo.exists: boolean);
 
-      // $ExpectError: check any
+      // $FlowExpectedError: check any
       (fileInfo.exists: number);
 
       if (fileInfo.exists) {
@@ -61,18 +61,18 @@ describe('getInfoAsync', () => {
   });
 
   it('should raises an error when pass invalid arguments', () => {
-    // $ExpectError: first argument is required
+    // $FlowExpectedError: first argument is required
     getInfoAsync();
-    // $ExpectError: first argument must be a string
+    // $FlowExpectedError: first argument must be a string
     getInfoAsync(69);
-    // $ExpectError: second argument must be an object
+    // $FlowExpectedError: second argument must be an object
     getInfoAsync('', 69);
 
-    // $ExpectError: 'abc' is missing in options
+    // $FlowExpectedError: 'abc' is missing in options
     getInfoAsync('', { abc: 'test' });
 
     getInfoAsync('', {
-      // $ExpectError
+      // $FlowExpectedError
       md5: 'need number',
     });
   });
@@ -83,7 +83,7 @@ describe('readAsStringAsync', () => {
     readAsStringAsync('fileUri').then(fileInfo => {
       (fileInfo: string);
 
-      // $ExpectError: check any
+      // $FlowExpectedError: check any
       (fileInfo: number);
     });
 
@@ -98,18 +98,18 @@ describe('readAsStringAsync', () => {
   });
 
   it('should raises an error when pass invalid arguments', () => {
-    // $ExpectError: first argument is required
+    // $FlowExpectedError: first argument is required
     readAsStringAsync();
-    // $ExpectError: first argument must be a string
+    // $FlowExpectedError: first argument must be a string
     readAsStringAsync(69);
-    // $ExpectError: second argument must be an object
+    // $FlowExpectedError: second argument must be an object
     readAsStringAsync('', 69);
 
-    // $ExpectError: 'abc' is missing in options
+    // $FlowExpectedError: 'abc' is missing in options
     readAsStringAsync('', { abc: 'test' });
 
     readAsStringAsync('', {
-      // $ExpectError: invalid value
+      // $FlowExpectedError: invalid value
       encoding: 'кукусики',
     });
   });
@@ -120,7 +120,7 @@ describe('writeAsStringAsync', () => {
     writeAsStringAsync('fileUri', 'content').then(fileInfo => {
       (fileInfo: void);
 
-      // $ExpectError: check any
+      // $FlowExpectedError: check any
       (fileInfo: number);
     });
 
@@ -131,18 +131,18 @@ describe('writeAsStringAsync', () => {
   });
 
   it('should raises an error when pass invalid arguments', () => {
-    // $ExpectError: first argument is required
+    // $FlowExpectedError: first argument is required
     writeAsStringAsync();
-    // $ExpectError: first argument must be a string
+    // $FlowExpectedError: first argument must be a string
     writeAsStringAsync(69);
-    // $ExpectError: second argument must be a string
+    // $FlowExpectedError: second argument must be a string
     writeAsStringAsync('', 69);
-    // $ExpectError: third argument must be an object
+    // $FlowExpectedError: third argument must be an object
     writeAsStringAsync('', '', 69);
-    // $ExpectError: 'abc' is missing in options
+    // $FlowExpectedError: 'abc' is missing in options
     writeAsStringAsync('', '', { abc: 'test' });
     writeAsStringAsync('', '', {
-      // $ExpectError: invalid value
+      // $FlowExpectedError: invalid value
       encoding: 'кукусики',
     });
   });
@@ -153,7 +153,7 @@ describe('deleteAsync', () => {
     deleteAsync('fileUri').then(fileInfo => {
       (fileInfo: void);
 
-      // $ExpectError: check any
+      // $FlowExpectedError: check any
       (fileInfo: number);
     });
 
@@ -161,16 +161,16 @@ describe('deleteAsync', () => {
   });
 
   it('should raises an error when pass invalid arguments', () => {
-    // $ExpectError: first argument is required
+    // $FlowExpectedError: first argument is required
     deleteAsync();
-    // $ExpectError: first argument must be a string
+    // $FlowExpectedError: first argument must be a string
     deleteAsync(69);
-    // $ExpectError: second argument must be an object
+    // $FlowExpectedError: second argument must be an object
     deleteAsync('', 69);
-    // $ExpectError: 'abc' is missing in options
+    // $FlowExpectedError: 'abc' is missing in options
     deleteAsync('', { abc: 'test' });
     deleteAsync('', {
-      // $ExpectError
+      // $FlowExpectedError
       idempotent: 'need boolean',
     });
   });
@@ -181,24 +181,24 @@ describe('moveAsync', () => {
     moveAsync({ from: '', to: '' }).then(fileInfo => {
       (fileInfo: void);
 
-      // $ExpectError: check any
+      // $FlowExpectedError: check any
       (fileInfo: number);
     });
   });
 
   it('should raises an error when pass invalid arguments', () => {
-    // $ExpectError: first argument is required
+    // $FlowExpectedError: first argument is required
     moveAsync();
-    // $ExpectError: first argument must be an object
+    // $FlowExpectedError: first argument must be an object
     moveAsync(69);
-    // $ExpectError: need 'to' prop
+    // $FlowExpectedError: need 'to' prop
     moveAsync({ from: '' });
-    // $ExpectError: need 'from' prop
+    // $FlowExpectedError: need 'from' prop
     moveAsync({ to: '' });
     moveAsync({
-      // $ExpectError: need string
+      // $FlowExpectedError: need string
       from: 69,
-      // $ExpectError: need string
+      // $FlowExpectedError: need string
       to: 69,
     });
   });
@@ -209,24 +209,24 @@ describe('copyAsync', () => {
     copyAsync({ from: '', to: '' }).then(fileInfo => {
       (fileInfo: void);
 
-      // $ExpectError: check any
+      // $FlowExpectedError: check any
       (fileInfo: number);
     });
   });
 
   it('should raises an error when pass invalid arguments', () => {
-    // $ExpectError: first argument is required
+    // $FlowExpectedError: first argument is required
     copyAsync();
-    // $ExpectError: first argument must be an object
+    // $FlowExpectedError: first argument must be an object
     copyAsync(69);
-    // $ExpectError: need 'to' prop
+    // $FlowExpectedError: need 'to' prop
     copyAsync({ from: '' });
-    // $ExpectError: need 'from' prop
+    // $FlowExpectedError: need 'from' prop
     copyAsync({ to: '' });
     copyAsync({
-      // $ExpectError: need string
+      // $FlowExpectedError: need string
       from: 69,
-      // $ExpectError: need string
+      // $FlowExpectedError: need string
       to: 69,
     });
   });
@@ -237,7 +237,7 @@ describe('makeDirectoryAsync', () => {
     makeDirectoryAsync('fileUri').then(fileInfo => {
       (fileInfo: void);
 
-      // $ExpectError: check any
+      // $FlowExpectedError: check any
       (fileInfo: number);
     });
 
@@ -245,16 +245,16 @@ describe('makeDirectoryAsync', () => {
   });
 
   it('should raises an error when pass invalid arguments', () => {
-    // $ExpectError: first argument is required
+    // $FlowExpectedError: first argument is required
     makeDirectoryAsync();
-    // $ExpectError: first argument must be a string
+    // $FlowExpectedError: first argument must be a string
     makeDirectoryAsync(69);
-    // $ExpectError: second argument must be an object
+    // $FlowExpectedError: second argument must be an object
     makeDirectoryAsync('', 69);
-    // $ExpectError: 'abc' is missing in options
+    // $FlowExpectedError: 'abc' is missing in options
     makeDirectoryAsync('', { abc: 'test' });
     makeDirectoryAsync('', {
-      // $ExpectError
+      // $FlowExpectedError
       intermediates: 'need boolean',
     });
   });
@@ -265,15 +265,15 @@ describe('readDirectoryAsync', () => {
     readDirectoryAsync('fileUri').then(files => {
       (files: Array<string>);
 
-      // $ExpectError: check any
+      // $FlowExpectedError: check any
       (files: number);
     });
   });
 
   it('should raises an error when pass invalid arguments', () => {
-    // $ExpectError: first argument is required
+    // $FlowExpectedError: first argument is required
     readDirectoryAsync();
-    // $ExpectError: first argument must be a string
+    // $FlowExpectedError: first argument must be a string
     readDirectoryAsync(69);
   });
 });
@@ -286,7 +286,7 @@ describe('downloadAsync', () => {
       (result.headers: { [string]: string, ... });
       (result.md5: ?string);
 
-      // $ExpectError: check any
+      // $FlowExpectedError: check any
       (result.uri: number);
     });
 
@@ -301,18 +301,18 @@ describe('downloadAsync', () => {
   });
 
   it('should raises an error when pass invalid arguments', () => {
-    // $ExpectError: first argument is required
+    // $FlowExpectedError: first argument is required
     downloadAsync();
-    // $ExpectError: first argument must be a string
+    // $FlowExpectedError: first argument must be a string
     downloadAsync(69);
-    // $ExpectError: second argument must be a string
+    // $FlowExpectedError: second argument must be a string
     downloadAsync('', 69);
-    // $ExpectError: third argument must be an object
+    // $FlowExpectedError: third argument must be an object
     downloadAsync('', '', 69);
-    // $ExpectError: 'abc' is missing in options
+    // $FlowExpectedError: 'abc' is missing in options
     downloadAsync('', '', { abc: 'test' });
     downloadAsync('', '', {
-      // $ExpectError: invalid value
+      // $FlowExpectedError: invalid value
       md5: 'need boolean',
     });
   });
@@ -334,23 +334,23 @@ describe('createDownloadResumable', () => {
     const controller = createDownloadResumable('url', 'fileUri');
 
     (controller: DownloadResumable);
-    // $ExpectError: check any
+    // $FlowExpectedError: check any
     (controller: number);
   });
 
   it('should raises an error when pass invalid arguments', () => {
-    // $ExpectError: first argument is required
+    // $FlowExpectedError: first argument is required
     createDownloadResumable();
-    // $ExpectError: first argument must be a string
+    // $FlowExpectedError: first argument must be a string
     createDownloadResumable(69);
-    // $ExpectError: second argument must be a string
+    // $FlowExpectedError: second argument must be a string
     createDownloadResumable('', 69);
-    // $ExpectError: third argument must be an object
+    // $FlowExpectedError: third argument must be an object
     createDownloadResumable('', '', 69);
-    // $ExpectError: 'abc' is missing in options
+    // $FlowExpectedError: 'abc' is missing in options
     createDownloadResumable('', '', { abc: 'test' });
     createDownloadResumable('', '', {
-      // $ExpectError: invalid value
+      // $FlowExpectedError: invalid value
       md5: 'need boolean',
     });
   });
@@ -369,7 +369,7 @@ describe('createDownloadResumable', () => {
           (result: void);
         }
 
-        // $ExpectError: check any
+        // $FlowExpectedError: check any
         (result: number);
       });
     });
@@ -378,7 +378,7 @@ describe('createDownloadResumable', () => {
       controller.pauseAsync().then(result => {
         (result.url: string);
 
-        // $ExpectError: check any
+        // $FlowExpectedError: check any
         (result: number);
       });
     });
@@ -394,7 +394,7 @@ describe('createDownloadResumable', () => {
           (result: void);
         }
 
-        // $ExpectError: check any
+        // $FlowExpectedError: check any
         (result: number);
       });
     });
@@ -404,7 +404,7 @@ describe('createDownloadResumable', () => {
 
       (result.url: string);
 
-      // $ExpectError: check any
+      // $FlowExpectedError: check any
       (result: number);
     });
   });

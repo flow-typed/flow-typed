@@ -4,7 +4,7 @@ import validate from 'validate.js';
 
 /* Trivial case */
 
-// $ExpectError
+// $FlowExpectedError
 validate.foo();
 
 validate.isString(true)
@@ -23,5 +23,5 @@ validate({
 
 validate.validators.new_validator = () => {};
 
-// $ExpectError
+// $FlowExpectedError
 validate.validators.new_validator = true;

@@ -45,7 +45,7 @@ function test_handleActions() {
       INFERS_STATE_TYPE: (state, action) => {
         assert(state.count, (x: number) => {});
 
-        // $ExpectError
+        // $FlowExpectedError
         assert(state.count, (x: string) => {});
 
         return state;
@@ -56,7 +56,7 @@ function test_handleActions() {
       //   return { foo: 1 }
       // },
 
-      // $ExpectError
+      // $FlowExpectedError
       REQUIRERS_REDUCER_VALUE: {},
 
       ACCEPTS_REDUCER_MAP: {
@@ -73,9 +73,9 @@ function test_handleActions() {
 function assert<T>(actual: T, expected: (_: T) => void) {}
 
 increment2(1, "2");
-// $ExpectError
+// $FlowExpectedError
 increment2("1", 0);
-// $ExpectError
+// $FlowExpectedError
 increment2("1", "1");
-// $ExpectError
+// $FlowExpectedError
 increment2(1, 1);

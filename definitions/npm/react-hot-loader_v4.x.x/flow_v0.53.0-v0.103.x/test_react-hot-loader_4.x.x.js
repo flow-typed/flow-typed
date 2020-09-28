@@ -9,10 +9,10 @@ describe("react-hot-loader", () => {
     it("accepts some module", () => {
       hot(module);
 
-      // $ExpectError
+      // $FlowExpectedError
       hot();
 
-      // $ExpectError
+      // $FlowExpectedError
       hot({});
     });
 
@@ -23,10 +23,10 @@ describe("react-hot-loader", () => {
       hot(module)(Wrapped, {});
       hot(module)(Wrapped, { errorBoundary: true });
 
-      // $ExpectError
+      // $FlowExpectedError
       hot(module)();
 
-      // $ExpectError
+      // $FlowExpectedError
       hot(module)(Wrapped, { errorBoundary: 1 });
     });
 
@@ -36,9 +36,9 @@ describe("react-hot-loader", () => {
       const Component = hot(module)(Wrapped);
       <Component someProp={"some"} />;
 
-      // $ExpectError
+      // $FlowExpectedError
       <Component />;
-      // $ExpectError
+      // $FlowExpectedError
       <Component someProp={1} />;
     });
   });
@@ -54,10 +54,10 @@ describe("react-hot-loader", () => {
         <SomeComponent />
       </AppContainer>;
 
-      // $ExpectError
+      // $FlowExpectedError
       <AppContainer />;
 
-      // $ExpectError
+      // $FlowExpectedError
       <AppContainer>
         /<div />
         <div />
@@ -73,7 +73,7 @@ describe("react-hot-loader", () => {
         <div />
       </AppContainer>;
 
-      // $ExpectError
+      // $FlowExpectedError
       <AppContainer errorBoundary={1}>
         <div />
       </AppContainer>;
@@ -101,12 +101,12 @@ describe("react-hot-loader", () => {
         <div />
       </AppContainer>;
 
-      // $ExpectError
+      // $FlowExpectedError
       <AppContainer errorReporter={null}>
         <div />
       </AppContainer>;
 
-      // $ExpectError
+      // $FlowExpectedError
       ErrorReporter = ({ error }: { error: number }) => <div />;
       <AppContainer errorReporter={ErrorReporter}>
         <div />

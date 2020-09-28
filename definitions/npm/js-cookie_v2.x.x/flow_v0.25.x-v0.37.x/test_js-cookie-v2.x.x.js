@@ -5,19 +5,19 @@ Cookie.set('version', 20, {
     path: '/'
 });
 
-// $ExpectError
+// $FlowExpectedError
 const v: string = Cookie.get('version');
 
 const all: Object = Cookie.get();
 
-// $ExpectError
+// $FlowExpectedError
 Cookie.set(12, 'should fail');
 
 Cookie.remove('version', {
     path: '/'
 });
 
-// $ExpectError
+// $FlowExpectedError
 Cookie.removeCookie()
 
 Cookie.set('data', {
@@ -26,10 +26,10 @@ Cookie.set('data', {
 }, { secure: true });
 
 
-// $ExpectError
+// $FlowExpectedError
 Cookie.getJson();
 
-// $ExpectError
+// $FlowExpectedError
 const data: Object = Cookie.getJSON('data');
 
 
@@ -48,6 +48,6 @@ cookieWithConverter.defaults = {
 
 
 Cookie.defaults = {
-    // $ExpectError
+    // $FlowExpectedError
     secure: 1
 };

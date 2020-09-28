@@ -25,7 +25,7 @@ describe("default export", () => {
     });
 
     it("must raise an error when call without arguments", () => {
-      // $ExpectError - required argument
+      // $FlowExpectedError - required argument
       getItemLayout();
     });
   });
@@ -70,40 +70,40 @@ describe("default export", () => {
     });
 
     it("must raise an error when call without arguments", () => {
-      // $ExpectError - required argument
+      // $FlowExpectedError - required argument
       createGetItemLayoutFn();
     });
 
     it("must raise an error when call with unsupported properties", () => {
-      // $ExpectError -  `someProp` is missing in `Parameters`
+      // $FlowExpectedError -  `someProp` is missing in `Parameters`
       createGetItemLayoutFn({ getItemHeight, someProp: "any" });
     });
 
     it("must raise an error when 'getItemHeight' function return not number ", () => {
-      // $ExpectError -  `getItemHeight` must return number
+      // $FlowExpectedError -  `getItemHeight` must return number
       createGetItemLayoutFn({ getItemHeight: () => "" });
     });
 
     it("must raise an error when 'getSeparatorHeight' function return not number ", () => {
-      // $ExpectError -  `getSeparatorHeight` must return number
+      // $FlowExpectedError -  `getSeparatorHeight` must return number
       createGetItemLayoutFn({ getSeparatorHeight: () => "" });
     });
 
     it("must raise an error when 'getSectionHeaderHeight' function return not number ", () => {
-      // $ExpectError -  `getSectionHeaderHeight` must return number
+      // $FlowExpectedError -  `getSectionHeaderHeight` must return number
       createGetItemLayoutFn({ getSectionHeaderHeight: () => "" });
     });
 
     it("must raise an error when 'getSectionFooterHeight' function return not number ", () => {
-      // $ExpectError -  `getSectionFooterHeight` must return number
+      // $FlowExpectedError -  `getSectionFooterHeight` must return number
       createGetItemLayoutFn({ getSectionFooterHeight: () => "" });
     });
 
     it("must raise an error when 'listHeaderHeight' function return not number ", () => {
-      // $ExpectError -  `listHeaderHeight` must return number
+      // $FlowExpectedError -  `listHeaderHeight` must return number
       createGetItemLayoutFn({ listHeaderHeight: () => "" });
 
-      // $ExpectError -  `listHeaderHeight` must return number
+      // $FlowExpectedError -  `listHeaderHeight` must return number
       createGetItemLayoutFn({ listHeaderHeight: "" });
     });
   });

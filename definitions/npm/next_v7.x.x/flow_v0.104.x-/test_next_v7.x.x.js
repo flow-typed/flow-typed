@@ -12,13 +12,13 @@ const { createServer } = require("http");
 const { parse } = require("url");
 
 // server
-// $ExpectError
+// $FlowExpectedError
 next({ dev: 1 });
-// $ExpectError
+// $FlowExpectedError
 next({ dir: false });
-// $ExpectError
+// $FlowExpectedError
 next({ quiet: "derp" });
-// $ExpectError
+// $FlowExpectedError
 next({ staticMarkup: 42 });
 
 const app = next({ dev: true, dir: ".", quiet: false });
@@ -69,15 +69,15 @@ class ConfigAwareComponent extends React.Component<*> {
 
 <Link href="/">Index</Link>;
 
-// $ExpectError
+// $FlowExpectedError
 <Link href={1}>InvalidNumLink</Link>;
 
-// $ExpectError
+// $FlowExpectedError
 Router.onRouteChangeStart = {};
 
-// $ExpectError
+// $FlowExpectedError
 Router.events.on('unknown', (url: string) => {});
-// $ExpectError
+// $FlowExpectedError
 Router.events.off('unknown', (url: string) => {});
 
 Router.events.on('routeChangeStart', (url: string) => {});
