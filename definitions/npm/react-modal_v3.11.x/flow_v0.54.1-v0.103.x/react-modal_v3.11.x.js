@@ -1,6 +1,6 @@
 declare module 'react-modal' {
   declare type ModalProps = {
-    isOpen?: boolean,
+    isOpen: boolean,
     portalClassName?: string,
     bodyOpenClassName?: string,
     ariaHideApp?: boolean,
@@ -39,6 +39,9 @@ declare module 'react-modal' {
     contentLabel?: string,
     overlayRef?: (node: ?HTMLElement) => mixed,
     containerRef?: (node: ?HTMLElement) => mixed,
+    contentRef?: (node: ?HTMLElement) => mixed,
+    children?: React$Node,
+    ...
   };
 
   declare class Modal extends React$Component<ModalProps> {
