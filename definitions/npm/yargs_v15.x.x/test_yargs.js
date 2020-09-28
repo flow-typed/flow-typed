@@ -9,7 +9,7 @@ yargs.parse(["-x"]);
 yargs.parse(["-x"], {});
 yargs.parse(["-x"], {}, (err, argv, output) => {});
 yargs.parse(["-x"], (err, argv, output) => {});
-// $ExpectError
+// $FlowExpectedError[incompatible-call]
 yargs.parse(["-x"], {}, {});
 
 const argv = yargs
@@ -95,26 +95,33 @@ const argv2 = yargs(["-x"])
   .demandCommand(1, 2)
   .demandCommand(2)
   .demandCommand(2, "")
-  // $ExpectError
-  .demandCommand("a")
   .version("1.0.1", "version", "display version information")
   .alias("version", "v")
   .example("npm install npm@latest -g", "install the latest version of npm")
   .epilog("for more information visit https://github.com/chevex/yargs")
+  .onFinishCommand(() => { console.log('finished'); })
   .showHelpOnFail(false, "whoops, something went wrong! run with --help").argv;
 
 yargs(["-x"])
-  // $ExpectError
+  // $FlowExpectedError[incompatible-call]
+  .demandCommand("a")
+
+yargs(["-x"])
+  // $FlowExpectedError[incompatible-call]
+  .onFinishCommand()
+
+yargs(["-x"])
+  // $FlowExpectedError[incompatible-call]
   .alias(true, []);
 
 yargs(["-x"])
-  // $ExpectError
+  // $FlowExpectedError[incompatible-call]
   .help(() => {});
 
-// $ExpectError
+// $FlowExpectedError[prop-missing]
 yargs.nope;
 
-// $ExpectError
+// $FlowExpectedError[incompatible-call]
 yargs.coerce({
   date: "foo"
 });
