@@ -15,149 +15,162 @@ describe('Modal.setAppElement', () => {
 });
 
 it('isOpen property should be a boolean', () => {
-  <ReactModal />;
-
   <ReactModal isOpen />;
   // $FlowExpectedError[incompatible-type]
   <ReactModal isOpen={1} />;
 });
 
 it('portalClassName property should be a string', () => {
-  < ReactModal portalClassName="foo" />;
+  <ReactModal isOpen portalClassName="foo" />;
   // $FlowExpectedError[incompatible-type]
-  <ReactModal portalClassName={1} />;
+  <ReactModal isOpen portalClassName={1} />;
 });
 
 it('bodyOpenClassName property should be a string', () => {
-  < ReactModal bodyOpenClassName="foo" />;
+  <ReactModal isOpen bodyOpenClassName="foo" />;
   // $FlowExpectedError[incompatible-type]
-  <ReactModal bodyOpenClassName={1} />;
+  <ReactModal isOpen bodyOpenClassName={1} />;
 });
 
 it('ariaHideApp property should be a boolean', () => {
-  <ReactModal ariaHideApp />;
+  <ReactModal isOpen ariaHideApp />;
   // $FlowExpectedError[incompatible-type]
-  <ReactModal ariaHideApp={1} />;
+  <ReactModal isOpen ariaHideApp={1} />;
 });
 
 it('closeTimeoutMS property should be a number', () => {
-  <ReactModal closeTimeoutMS={10} />;
+  <ReactModal isOpen closeTimeoutMS={10} />;
   // $FlowExpectedError[incompatible-type]
-  <ReactModal closeTimeoutMS />;
+  <ReactModal isOpen closeTimeoutMS />;
 });
 
 it('shouldFocusAfterRender property should be a boolean', () => {
-  <ReactModal shouldFocusAfterRender />;
+  <ReactModal isOpen shouldFocusAfterRender />;
   // $FlowExpectedError[incompatible-type]
-  <ReactModal shouldFocusAfterRender={1} />;
+  <ReactModal isOpen shouldFocusAfterRender={1} />;
 });
 
 it('shouldCloseOnEsc property should be a boolean', () => {
-  <ReactModal shouldCloseOnEsc />;
+  <ReactModal isOpen shouldCloseOnEsc />;
   // $FlowExpectedError[incompatible-type]
-  <ReactModal shouldCloseOnEsc={1} />;
+  <ReactModal isOpen shouldCloseOnEsc={1} />;
 });
 
 it('shouldCloseOnOverlayClick property should be a boolean', () => {
-  <ReactModal shouldCloseOnOverlayClick />;
+  <ReactModal isOpen shouldCloseOnOverlayClick />;
   // $FlowExpectedError[incompatible-type]
-  <ReactModal shouldCloseOnOverlayClick={1} />;
+  <ReactModal isOpen shouldCloseOnOverlayClick={1} />;
 });
 
 it('shouldReturnFocusAfterClose property should be a boolean', () => {
-  <ReactModal shouldReturnFocusAfterClose />;
+  <ReactModal isOpen shouldReturnFocusAfterClose />;
   // $FlowExpectedError[incompatible-type]
-  <ReactModal shouldReturnFocusAfterClose={1} />;
+  <ReactModal isOpen shouldReturnFocusAfterClose={1} />;
 });
 
 it('style should be an object with optional content and overlay settings', () => {
-  <ReactModal style={{}} />;
-  <ReactModal style={{ content: {} }} />;
-  <ReactModal style={{ overlay: {} }} />;
+  <ReactModal isOpen style={{}} />;
+  <ReactModal isOpen style={{ content: {} }} />;
+  <ReactModal isOpen style={{ overlay: {} }} />;
   // $FlowExpectedError[incompatible-type]
-  <ReactModal style={{ content: 1 }} />;
+  <ReactModal isOpen style={{ content: 1 }} />;
   // $FlowExpectedError[incompatible-type]
-  <ReactModal style={{ overlay: 1 }} />;
+  <ReactModal isOpen style={{ overlay: 1 }} />;
 });
 
 it('parentSelector property should be a callback', () => {
   // $FlowExpectedError[incompatible-type]
-  <ReactModal parentSelector={1} />;
+  <ReactModal isOpen parentSelector={1} />;
   // $FlowExpectedError[incompatible-type]
-  <ReactModal parentSelector="#foo" />;
-  <ReactModal parentSelector={() => document.body} />;
+  <ReactModal isOpen parentSelector="#foo" />;
+  <ReactModal isOpen parentSelector={() => document.body} />;
 });
 
 it('onAfterOpen property should be a callback', () => {
-  <ReactModal onAfterOpen={() => { }} />;
-  <ReactModal onAfterOpen={async () => { }} />;
+  <ReactModal isOpen onAfterOpen={() => { }} />;
+  <ReactModal isOpen onAfterOpen={async () => { }} />;
   // $FlowExpectedError[incompatible-type]
-  <ReactModal onAfterOpen={1} />;
+  <ReactModal isOpen onAfterOpen={1} />;
 });
 
 it('onRequestClose property should be a callback', () => {
-  <ReactModal onRequestClose={() => { }} />;
-  <ReactModal onRequestClose={e => { }} />;
+  <ReactModal isOpen onRequestClose={() => { }} />;
+  <ReactModal isOpen onRequestClose={e => { }} />;
   // $FlowExpectedError[incompatible-type]
-  <ReactModal onRequestClose={1} />;
+  <ReactModal isOpen onRequestClose={1} />;
 });
 
 it('role property should be a string', () => {
-  < ReactModal role="foo" />;
+  <ReactModal isOpen role="foo" />;
   // $FlowExpectedError[incompatible-type]
-  <ReactModal role={1} />;
+  <ReactModal isOpen role={1} />;
 });
 
 it('contentLabel property should be a string', () => {
-  < ReactModal contentLabel="foo" />;
+  <ReactModal isOpen contentLabel="foo" />;
   // $FlowExpectedError[incompatible-type]
-  <ReactModal contentLabel={1} />;
+  <ReactModal isOpen contentLabel={1} />;
 });
 
 it('aria property should be an object', () => {
-  <ReactModal aria={{
-    labelledby: 'foo'
-  }} />;
+  <ReactModal
+    isOpen
+    aria={{
+      labelledby: 'foo'
+    }}
+  />;
   // $FlowExpectedError[incompatible-type]
-  <ReactModal aria={1} />;
+  <ReactModal isOpen aria={1} />;
 });
 
 it('className can be a string or an object', () => {
-  <ReactModal className="foo" />;
-  <ReactModal className={{
-    base: "foo",
-    afterOpen: "foo",
-    beforeClose: "foo"
-  }} />;
+  <ReactModal isOpen className="foo" />;
+  <ReactModal
+    isOpen
+    className={{
+      base: "foo",
+      afterOpen: "foo",
+      beforeClose: "foo"
+    }}
+  />;
   // $FlowExpectedError[incompatible-type]
-  <ReactModal className={1} />;
+  <ReactModal isOpen className={1} />;
 });
 
 it('overlayClassName can be a string or an object', () => {
-  <ReactModal overlayClassName="foo" />;
-  <ReactModal overlayClassName={{
+  <ReactModal isOpen overlayClassName="foo" />;
+  <ReactModal isOpen overlayClassName={{
     base: "foo",
     afterOpen: "foo",
     beforeClose: "foo"
   }} />;
   // $FlowExpectedError[incompatible-type]
-  <ReactModal overlayClassName={1} />;
+  <ReactModal isOpen overlayClassName={1} />;
 });
 
 it('overlayRef property should be a ref callback ', () => {
   let n;
-  <ReactModal overlayRef={node => { n = node; }} />;
+  <ReactModal isOpen overlayRef={node => { n = node; }} />;
   // $FlowExpectedError[incompatible-type]
-  <ReactModal overlayRef={1} />;
+  <ReactModal isOpen overlayRef={1} />;
   // $FlowExpectedError[incompatible-type]
-  <ReactModal overlayRef="foo" />;
+  <ReactModal isOpen overlayRef="foo" />;
 });
 
 it('containerRef property should be a ref callback ', () => {
   let n;
-  <ReactModal containerRef={node => { n = node; }} />;
+  <ReactModal isOpen containerRef={node => { n = node; }} />;
   // $FlowExpectedError[incompatible-type]
-  <ReactModal containerRef={1} />;
+  <ReactModal isOpen containerRef={1} />;
   // $FlowExpectedError[incompatible-type]
-  <ReactModal containerRef="foo" />;
+  <ReactModal isOpen containerRef="foo" />;
+});
+
+it('contentRef property should be a ref callback ', () => {
+  let n;
+  <ReactModal isOpen contentRef={node => { n = node; }} />;
+  // $FlowExpectedError[incompatible-type]
+  <ReactModal isOpen contentRef={1} />;
+  // $FlowExpectedError[incompatible-type]
+  <ReactModal isOpen contentRef="foo" />;
 });
