@@ -1,15 +1,18 @@
 // @flow
 
+import { type Readable } from 'stream';
+import { Z_FILTERED } from 'zlib';
+
 declare module 'mongodb' {
 
   // http://mongodb.github.io/node-mongodb-native/3.5/api/Admin.html
-  declare type Admin = any; // TODO (use type shouldn't be instantiated)
+  declare export type Admin = any; // TODO (use type shouldn't be instantiated)
 
   // http://mongodb.github.io/node-mongodb-native/3.5/api/AggregationCursor.html
-  declare type AggregationCursor = any; // TODO (use type shouldn't be instantiated)
+  declare export type AggregationCursor = any; // TODO (use type shouldn't be instantiated)
 
   // http://mongodb.github.io/node-mongodb-native/3.5/api/AutoEncrypter.html
-  declare type AutoEncrypter = any; // TODO (use type shouldn't be instantiated)
+  declare export type AutoEncrypter = any; // TODO (use type shouldn't be instantiated)
 
   // http://mongodb.github.io/node-mongodb-native/3.5/api/Binary.html
   declare export var Binary: any; // TODO
@@ -18,34 +21,125 @@ declare module 'mongodb' {
   declare export var BSONRegExp: any; // TODO
 
   // http://mongodb.github.io/node-mongodb-native/3.5/api/BulkOperationBase.html
-  declare type BulkOperationBase = any; // TODO (use type shouldn't be instantiated)
+  declare export type BulkOperationBase = any; // TODO (use type shouldn't be instantiated)
 
   // http://mongodb.github.io/node-mongodb-native/3.5/api/BulkWriteError.html
   declare export var BulkWriteError: any; // TODO
 
   // http://mongodb.github.io/node-mongodb-native/3.5/api/BulkWriteResult.html
-  declare type BulkWriteResult = any; // TODO (use type shouldn't be instantiated)
+  declare export type BulkWriteResult = any; // TODO (use type shouldn't be instantiated)
 
   // http://mongodb.github.io/node-mongodb-native/3.5/api/ChangeStream.html
-  declare type ChangeStream = any; // TODO
+  declare export type ChangeStream = any; // TODO
 
   // http://mongodb.github.io/node-mongodb-native/3.5/api/ClientEncryption.html
-  declare type ClientEncryption = any; // TODO
+  declare export type ClientEncryption = any; // TODO
 
   // http://mongodb.github.io/node-mongodb-native/3.5/api/ClientSession.html
-  declare type ClientSession = any; // TODO (use type shouldn't be instantiated)
+  declare export type ClientSession = any; // TODO (use type shouldn't be instantiated)
 
   // http://mongodb.github.io/node-mongodb-native/3.5/api/Code.html
   declare export var Code: any; // TODO
 
   // http://mongodb.github.io/node-mongodb-native/3.5/api/Collection.html
-  declare type Collection = any; // TODO (use type shouldn't be instantiated)
+  declare export type Collection = any; // TODO (use type shouldn't be instantiated)
 
   // http://mongodb.github.io/node-mongodb-native/3.5/api/CommandCursor.html
-  declare type CommandCursor = any; // TODO (use type shouldn't be instantiated)
+  declare export type CommandCursor = any; // TODO (use type shouldn't be instantiated)
+
+  declare export type CursorFlag = 'tailable' | 'oplogReplay' | 'noCursorTimeout' | 'awaitData' | 'partial';
+
+  declare export type CursorCloseOptions = {|
+    skipKillCursors?: boolean,
+  |};
+
+  declare export type CursorResultCallback<T> = (error: ?(typeof MongoError), result: T) => mixed;
+  declare export type CursorIteratorCallback<T> = (doc: T) => mixed;
+  declare export type CursorEndCallback = (error: ?(typeof MongoError)) => mixed;
+
+  // TODO
+  declare export type CollationOptions = any;
+
+  declare export type CursorCountOptions = {|
+    skip?: number,
+    limit?: number,
+    maxTimeMS?: number,
+    hint?: string,
+    readPreference?: ReadPreferenceValue,
+  |};
+
+  // TODO: type explain https://docs.mongodb.com/manual/reference/method/cursor.explain/#behavior
+  declare export type ExplainResult = { ... };
+
+  declare export type Projection<Doc: { ... }> = {
+    ...$ObjMap<Doc, () => (1 | -1 | boolean | string)>,
+    _id?: 1 | false,
+    ...,
+  };
+
+  // TODO
+  declare export type CursorOption = { ... };
+
+  declare export type StreamOptions<Input: { ... }, Doc: { ... }> = {|
+    transform: Input => Doc,
+  |};
 
   // http://mongodb.github.io/node-mongodb-native/3.5/api/Cursor.html
-  declare type Cursor = any; // TODO (use type shouldn't be instantiated)
+  declare export interface Cursor<Doc: { ... }> extends Readable {
+    addCursorFlag(flag: CursorFlag, value: boolean): Cursor<Doc>;
+    addQueryModifier(name: string, value: string | number | boolean): Cursor<Doc>;
+    batchSize(value: number): Cursor<Doc>;
+    clone(): Cursor<Doc>;
+    close(options: CursorCloseOptions, cb: CursorResultCallback<null>): void;
+    close(options: CursorCloseOptions): Promise<null>;
+    close(cb: CursorResultCallback<null>): void;
+    close(): Promise<null>;
+    collation(valie: CollationOptions): Cursor<Doc>;
+    comment(value: string): Cursor<Doc>;
+    count(applySkipLimit: boolean, options: CursorCountOptions, callback: CursorResultCallback<number>): void;
+    count(applySkipLimit: boolean, options: CursorCountOptions): Promise<number>;
+    count(applySkipLimit: boolean, callback: CursorResultCallback<number>): void;
+    count(applySkipLimit: boolean): Promise<number>;
+    count(callback: CursorResultCallback<number>): void;
+    count(): Promise<number>;
+    // deprecated
+    each(CursorResultCallback<Doc>): null;
+    explain(CursorResultCallback<ExplainResult>): void;
+    explain(): Promise<ExplainResult>;
+    filter(filter: $Shape<Doc>): Cursor<Doc>;
+    forEach(iterator: CursorIteratorCallback<Doc>, callback: CursorEndCallback): Cursor<Doc>;
+    forEach(iterator: CursorIteratorCallback<Doc>): Promise<null>;
+    hasNext(callback: CursorResultCallback<boolean>): void;
+    hasNext(): Promise<boolean>;
+    hint(hint: string): Cursor<Doc>;
+    isClosed(): boolean;
+    limit(value: number): Cursor<Doc>;
+    map<Input: { ... }>(transform: Input => Doc): Cursor<Doc>;
+    max(value: number): Cursor<Doc>;
+    maxAwaitTimeMS(value: number): Cursor<Doc>;
+    // Deprecated
+    maxScan(maxScan: { ... }): Cursor<Doc>;
+    maxTimeMS(value: number): Cursor<Doc>;
+    min(value: number): Cursor<Doc>;
+    next(callback: CursorResultCallback<Doc>): void;
+    next(): Promise<Doc>;
+    project(value: Projection<Doc>): Cursor<Doc>;
+    returnKey(returnKey: boolean): Cursor<Doc>;
+    setCursorOption(field: 'numberOfRetries' | 'tailableRetryInterval', value: CursorOption): Cursor<Doc>;
+    setReadPreference(readPreference: ReadPreferenceValue): Cursor<Doc>;
+    // TODO: type showRecordId
+    showRecordId(showRecordId: { ... }): Cursor<Doc>;
+    skip(value: number): Cursor<Doc>;
+    // Deprecated
+    snapshot(snapshot: { ... }): Cursor<Doc>;
+    sort(keyOrList: $Keys<Doc>, direction: 1 | -1): Cursor<Doc>;
+    sort(keyOrList: [$Keys<Doc>, 1 | -1][]): Cursor<Doc>;
+    sort(keyOrList: { [string]: 1 | -1, ... }): Cursor<Doc>;
+    stream<Input: { ... }>(options: StreamOptions<Input, Doc>): Cursor<Doc>;
+    toArray(callback: CursorResultCallback<Doc[]>): void;
+    toArray(): Promise<Doc[]>;
+    transformStream(options: StreamOptions<Input, Doc>): Transform;
+  }
 
   // http://mongodb.github.io/node-mongodb-native/3.5/api/Db.html
   declare export var Db: any; // TODO;
@@ -60,22 +154,22 @@ declare module 'mongodb' {
   declare export var Double: any; // TODO;
 
   // http://mongodb.github.io/node-mongodb-native/3.5/api/FindOperators.html
-  declare type FindOperators = any; // TODO (use type shouldn't be instantiated)
+  declare export type FindOperators = any; // TODO (use type shouldn't be instantiated)
 
   // http://mongodb.github.io/node-mongodb-native/3.5/api/GridFSBucket.html
   declare export var GridFSBucket: any; // TODO;
 
   // http://mongodb.github.io/node-mongodb-native/3.5/api/GridFSBucketReadStream.html
-  declare type GridFSBucketReadStream = any; // TODO (use type shouldn't be instantiated)
+  declare export type GridFSBucketReadStream = any; // TODO (use type shouldn't be instantiated)
 
   // http://mongodb.github.io/node-mongodb-native/3.5/api/GridFSBucketWriteStream.html
-  declare type GridFSBucketWriteStream = any; // TODO (use type shouldn't be instantiated)
+  declare export type GridFSBucketWriteStream = any; // TODO (use type shouldn't be instantiated)
 
   // http://mongodb.github.io/node-mongodb-native/3.5/api/GridStore.html
   declare export var GridStore: any; // TODO;
 
   // http://mongodb.github.io/node-mongodb-native/3.5/api/GridStoreStream.html
-  declare type GridStoreStream = any; // TODO (use type shouldn't be instantiated)
+  declare export type GridStoreStream = any; // TODO (use type shouldn't be instantiated)
 
   // http://mongodb.github.io/node-mongodb-native/3.5/api/Int32.html
   declare export var Int32: any; // TODO;
@@ -108,7 +202,7 @@ declare module 'mongodb' {
     connect(callback: ConnectCallback): void;
     connect(): Promise<MongoClient>;
 
-    db(dbName?: string, options?: DbOptions): Db;
+    db(dbName?: string, options?: DbOptions): typeof Db;
 
     isConnected(options?: DbOptions): boolean;
 
@@ -148,7 +242,7 @@ declare module 'mongodb' {
   declare export var ObjectID: any;
 
   // http://mongodb.github.io/node-mongodb-native/3.5/api/OrderedBulkOperation.html
-  declare type OrderedBulkOperation = any; // TODO (use type shouldn't be instantiated)
+  declare export type OrderedBulkOperation = any; // TODO (use type shouldn't be instantiated)
 
   // http://mongodb.github.io/node-mongodb-native/3.5/api/ReplSet.html
   declare export var ReplSet: any;
@@ -160,16 +254,16 @@ declare module 'mongodb' {
   declare export var Symbol: any;
 
   // http://mongodb.github.io/node-mongodb-native/3.5/api/Timestamp.html
-  declare type Timestamp = any; // TODO (use type shouldn't be instantiated)
+  declare export type Timestamp = any; // TODO (use type shouldn't be instantiated)
 
   // http://mongodb.github.io/node-mongodb-native/3.5/api/UnorderedBulkOperation.html
-  declare type UnorderedBulkOperation = any; // TODO (use type shouldn't be instantiated)
+  declare export type UnorderedBulkOperation = any; // TODO (use type shouldn't be instantiated)
 
   // http://mongodb.github.io/node-mongodb-native/3.5/api/WriteConcernError.html
   declare export var WriteConcernError: any;
 
   // http://mongodb.github.io/node-mongodb-native/3.5/api/WriteError.html
-  declare type WriteError = any; // TODO (use type shouldn't be instantiated)
+  declare export type WriteError = any; // TODO (use type shouldn't be instantiated)
 
   declare export type ReadPreference = {|
     PRIMARY: 'primary',
@@ -220,11 +314,11 @@ declare module 'mongodb' {
     |},
   |};
 
-  declare export type ConnectCallback = (error: MongoError, client: MongoClient) => mixed;
-  declare type NoResultCallback = (error: MongoError, null) => mixed;
+  declare export type ConnectCallback = (error: typeof MongoError, client: MongoClient) => mixed;
+  declare export type NoResultCallback = (error: typeof MongoError, null) => mixed;
 
   declare export type PkFactory = {
-    createPk(): ObjectID,
+    createPk(): typeof ObjectID,
     ...,
   };
 
@@ -309,20 +403,20 @@ declare module 'mongodb' {
     driverInfo?: DriverInfoOptionsObject,
   |};
 
-  declare type DbOptions = {|
+  declare export type DbOptions = {|
     noListener?: boolean,
     returnNonCachedInstance?: boolean,
   |};
 
-  declare type SessionOptions = { ... }; // TODO
-  declare type Session = AnalyserNode; // TODO
+  declare export type SessionOptions = { ... }; // TODO
+  declare export type Session = AnalyserNode; // TODO
 
-  declare type AggregationStage = { ... }; // TODO
-  declare type AggregationPipeline = $ReadOnlyArray<AggregationStage>;
+  declare export type AggregationStage = { ... }; // TODO
+  declare export type AggregationPipeline = $ReadOnlyArray<AggregationStage>;
 
-  declare type ClientWatchOptions = { ... }; // TODO
+  declare export type ClientWatchOptions = { ... }; // TODO
 
-  declare type WithSessionOptions = { ... }; // TODO
+  declare export type WithSessionOptions = { ... }; // TODO
 
-  declare type Operation = (session: Session) => mixed; // TODO
+  declare export type Operation = (session: Session) => mixed; // TODO
 }
