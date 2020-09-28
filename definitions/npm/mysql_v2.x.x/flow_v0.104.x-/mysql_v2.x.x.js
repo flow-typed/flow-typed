@@ -4,6 +4,17 @@
 // TODO: Packets internal structure
 
 declare module "mysql" {
+  declare type TypeCastField = {
+    db: string,
+    table: string,
+    name: string,
+    type: string,
+    length: number,
+    string: () => string,
+    buffer: () => Buffer,
+    ...
+  }
+
   declare type ConnectionOptions = {
     host?: string,
     port?: number,
@@ -17,7 +28,7 @@ declare module "mysql" {
     connectTimeout?: number,
     stringifyObjects?: boolean,
     insecureAuth?: boolean,
-    typeCast?: boolean | ((field: {...}, next: Function) => any),
+    typeCast?: boolean | ((field: TypeCastField, next: () => mixed) => any),
     queryFormat?: (query: string, values: ?mixed, timezone: string) => string,
     supportBigNumbers?: boolean,
     bigNumberStrings?: boolean,
@@ -33,7 +44,7 @@ declare module "mysql" {
 
   declare type QueryOptions = {
     sql: string,
-    typeCast?: boolean | ((field: {...}, next: Function) => any),
+    typeCast?: boolean | ((field: TypeCastField, next: () => mixed) => any),
     // string form is a separator used to produce column names
     nestTables?: boolean | string,
     values?: Array<mixed>,

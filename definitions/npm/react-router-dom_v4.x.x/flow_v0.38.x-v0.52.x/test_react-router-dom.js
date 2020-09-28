@@ -112,7 +112,7 @@ const match3: null | Match = matchPath("/the/pathname");
 
 // $FlowExpectedError
 matchPath();
-// $FlowExpectedError
+// $FlowExpectedError[incompatible-type]
 const matchError: string = matchPath("/the/pathname", {
   path: "the/:dynamicId"
 });

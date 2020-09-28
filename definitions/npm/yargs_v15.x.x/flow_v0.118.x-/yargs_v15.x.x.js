@@ -224,6 +224,8 @@ declare module "yargs" {
 
     number(key: string | Array<string>): this;
 
+    onFinishCommand(handler: () => mixed): this;
+
     option(key: string, options?: Options): this;
     option(optionMap: { [key: string]: Options, ... }): this;
 
