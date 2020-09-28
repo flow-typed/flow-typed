@@ -13,7 +13,7 @@ import {
   type Story,
 } from '@storybook/react';
 
-declare var fakeModule = {
+declare var fakeModule: {
   exports: any,
   require(id: string): any,
   id: string,
