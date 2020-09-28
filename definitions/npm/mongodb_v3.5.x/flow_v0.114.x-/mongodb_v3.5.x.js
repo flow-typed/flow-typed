@@ -1,9 +1,7 @@
 // @flow
 
-import { type Readable } from 'stream';
-import { Z_FILTERED } from 'zlib';
-
 declare module 'mongodb' {
+  import type { Readable } from 'stream';
 
   // http://mongodb.github.io/node-mongodb-native/3.5/api/Admin.html
   declare export type Admin = any; // TODO (use type shouldn't be instantiated)
