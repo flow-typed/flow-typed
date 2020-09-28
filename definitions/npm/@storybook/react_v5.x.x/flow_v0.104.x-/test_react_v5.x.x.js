@@ -15,6 +15,18 @@ import {
   type Story,
 } from '@storybook/react';
 
+declare var fakeModule: {
+  exports: any,
+  require(id: string): any,
+  id: string,
+  filename: string,
+  loaded: boolean,
+  parent: any,
+  children: Array<any>,
+  builtinModules: Array<string>,
+  ...
+};
+
 const Button = props => <button {...props} />;
 
 const Decorator = story => <div>{story()}</div>;
@@ -22,66 +34,66 @@ const Decorator = story => <div>{story()}</div>;
 const parameters = { param: 'test' };
 
 // The `storiesOf` function
-storiesOf('', module);
+storiesOf('', fakeModule);
 
 // $FlowExpectedError[incompatible-call]
-storiesOf([], module);
+storiesOf([], fakeModule);
 // $FlowExpectedError[incompatible-call]
 storiesOf('', 123);
 // $FlowExpectedError[prop-missing]
-storiesOf('', module).foo('', () => <div />);
+storiesOf('', fakeModule).foo('', () => <div />);
 
 // The `add` method
-storiesOf('', module).add('', () => <div />);
-storiesOf('', module).add('', () => <Button>test</Button>);
-storiesOf('', module).add('', () => [
+storiesOf('', fakeModule).add('', () => <div />);
+storiesOf('', fakeModule).add('', () => <Button>test</Button>);
+storiesOf('', fakeModule).add('', () => [
   <Button>test</Button>,
   <Button>test</Button>,
   <Button>test</Button>,
 ]);
 
-storiesOf('', module).add('', () => '');
+storiesOf('', fakeModule).add('', () => '');
 
-storiesOf('', module).add('', () => 0);
+storiesOf('', fakeModule).add('', () => 0);
 
-storiesOf('', module).add('', () => <Button>test</Button>, {
+storiesOf('', fakeModule).add('', () => <Button>test</Button>, {
   param: 'test',
 });
 
 // $FlowExpectedError[incompatible-call]
-storiesOf('', module).add('', () => <Button>test</Button>, '');
+storiesOf('', fakeModule).add('', () => <Button>test</Button>, '');
 // $FlowExpectedError[prop-missing]
-storiesOf('', module).add('', parameters, () => <Button>test</Button>);
+storiesOf('', fakeModule).add('', parameters, () => <Button>test</Button>);
 
 // $FlowExpectedError[incompatible-call]
-storiesOf('', module).add('', () => () => null);
+storiesOf('', fakeModule).add('', () => () => null);
 // $FlowExpectedError[incompatible-call]
-storiesOf('', module).add('', () => Button);
+storiesOf('', fakeModule).add('', () => Button);
 // $FlowExpectedError[incompatible-call]
-storiesOf('', module).add('', () => null);
+storiesOf('', fakeModule).add('', () => null);
 
-storiesOf('', module).add('', ({ kind, story }) => (
+storiesOf('', fakeModule).add('', ({ kind, story }) => (
   <div>
     {kind} {story}
   </div>
 ));
 
 // $FlowExpectedError[prop-missing]
-storiesOf('', module).add('', ({ kind, story, foo }) => (
+storiesOf('', fakeModule).add('', ({ kind, story, foo }) => (
   <div>
     {kind} {story} {foo}
   </div>
 ));
 
 // The `addDecorator` function
-storiesOf('', module)
+storiesOf('', fakeModule)
   .addDecorator(Decorator)
   .add('', () => <div />);
 
 addDecorator(Decorator);
 
 // The `addParameters` function
-storiesOf('', module)
+storiesOf('', fakeModule)
   .addParameters(parameters)
   .add('', () => <div />);
 
@@ -111,7 +123,7 @@ it('should validate on default usage', () => {
 });
 
 // The `configure` function
-configure(() => undefined, module);
+configure(() => undefined, fakeModule);
 
 // The `setAddon` function
 interface Addon {
@@ -127,7 +139,7 @@ const TestAddon: Addon = {
 
 setAddon(TestAddon);
 
-storiesOf<Addon>('TestAddon', module)
+storiesOf<Addon>('TestAddon', fakeModule)
   .test('', () => <div />)
   .test('', () => <div />)
   .add('', () => <div />)
