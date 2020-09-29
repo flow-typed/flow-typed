@@ -400,6 +400,11 @@ declare module '@testing-library/react' {
     id: TextMatch,
     options?: TextMatchOptions
   ): HTMLElement;
+  declare export function getAllByTestId(
+    container: HTMLElement,
+    text: TextMatch,
+    options?: TextMatchOptions
+  ): Array<HTMLElement>;
   declare export function queryByText(
     container: HTMLElement,
     text: TextMatch,
