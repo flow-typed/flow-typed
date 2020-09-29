@@ -12,7 +12,9 @@ import {
   type AutoEncryptionOptionsObject,
   type DriverInfoOptionsObject,
   type ReadPreferenceValue,
+  type Cursor,
 } from 'mongodb';
+import { Readable } from 'stream';
 
 describe('static connect', () => {
   describe('Promises', () => {
@@ -431,5 +433,48 @@ describe('MongoClientOptions', (options: MongoClientOptions) => {
     const a: DriverInfoOptionsObject | void = options.driverInfo;
     // $FlowExpectedError[incompatible-type]
     const b: DriverInfoOptionsObject = options.driverInfo;
+  });
+});
+
+describe('Cursor', () => {
+  it('should supports example from doc', (cursor: Cursor<{ a: number, ... }>) => {
+    cursor
+      .project({ a: 1 })
+      .skip(1)
+      .limit(10)
+      .batchSize(5)
+      .filter({ a: 1 })
+      .comment('add a comment')
+      .addCursorFlag('tailable', true)
+      .addCursorFlag('oplogReplay', true)
+      .addCursorFlag('noCursorTimeout', true)
+      .addCursorFlag('awaitData', true)
+      .addCursorFlag('partial', true)
+      .max(10)
+      .maxTimeMS(1000)
+      .min(100)
+      .returnKey(true)
+      .setReadPreference("primary")
+      .sort([['a', 1]])
+      .hint('a_1');
+  });
+  it('should extends readable', (cursor: Cursor<{ ... }>) => {
+    if (cursor instanceof Readable) {
+      // cursor is Readable
+
+      cursor.read(5);
+
+      // $FlowExpectedError[incompatible-call]
+      cursor.read("5");
+    } else {
+      // This should never happen
+      (cursor: empty)
+    }
+  });
+  it('should supports doc', (cursor: Cursor<{| a: number |}>) => {
+    cursor.filter({ a: 1 });
+
+    // $FlowExpectedError[prop-missing]
+    cursor.filter({ b: 3 });
   });
 });
