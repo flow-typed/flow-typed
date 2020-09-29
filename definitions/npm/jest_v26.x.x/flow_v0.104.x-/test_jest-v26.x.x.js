@@ -310,6 +310,12 @@ expect(() => {}).toThrow(err);
 // $FlowExpectedError
 jest.getTimerCount(3);
 
+setSystemTime();
+setSystemTime(123);
+setSystemTime(new Date());
+// $FlowExpectedError[incompatible-call]
+setSystemTime('');
+
 // Test method chaining fixes
 jest.doMock('testModule1', () => {}).doMock('testModule2', () => {});
 
