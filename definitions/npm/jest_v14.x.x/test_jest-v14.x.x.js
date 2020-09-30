@@ -18,10 +18,10 @@ mockFn('a')
 expect('someVal').toBeCalled()
 expect('someVal').toBeCalledWith('a')
 
-// $FlowExpectedError property[prop-missing] `toHaveBeeenCalledWith` not found in object type
+// $FlowExpectedError[prop-missing] property `toHaveBeeenCalledWith` not found in object type
 expect('someVal').toHaveBeeenCalledWith('a')
 
-// $FlowExpectedError property[prop-missing] `fn` not found in Array
+// $FlowExpectedError[prop-missing] property `fn` not found in Array
 mockFn.mock.calls.fn()
 
 test('test', () => expect('foo').toMatchSnapshot());
