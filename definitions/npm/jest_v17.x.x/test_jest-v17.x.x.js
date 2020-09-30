@@ -47,8 +47,8 @@ expect.extend({
   }
 });
 
+// $FlowExpectedError[prop-missing] property `pass` not found in object literal
 expect.extend({
-  // $FlowExpectedError[prop-missing] property `pass` not found in object literal
   foo(actual, expected) {
     return {};
   }

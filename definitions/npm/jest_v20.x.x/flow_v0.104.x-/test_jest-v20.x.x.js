@@ -6,7 +6,7 @@ jest.autoMockOff();
 jest.clearAllMocks();
 jest.resetAllMocks();
 
-// $FlowExpectedError property `atoMockOff` not found in object type
+// $FlowExpectedError[prop-missing] property `atoMockOff` not found in object type
 jest.atoMockOff();
 
 const mockFn = jest.fn();
@@ -21,33 +21,33 @@ const foo: Foo = {
 foo.doStuff = jest.fn().mockImplementation(str => 10);
 foo.doStuff = jest.fn().mockImplementation(str => parseInt(str, 10));
 foo.doStuff = jest.fn().mockImplementation(str => str.indexOf("a"));
-// $FlowExpectedError function `doesntExist` not found in string.
+// $FlowExpectedError[prop-missing] function `doesntExist` not found in string.
 foo.doStuff = jest.fn().mockImplementation(str => str.doesntExist());
-// $FlowExpectedError Mock function expected to return number, not string.
+// $FlowExpectedError[incompatible-return] Mock function expected to return number, not string.
 foo.doStuff = jest.fn().mockImplementation(str => "10");
 foo.doStuff = jest.fn().mockImplementationOnce(str => 10);
 foo.doStuff = jest.fn().mockImplementationOnce(str => parseInt(str, 10));
 foo.doStuff = jest.fn().mockImplementationOnce(str => str.indexOf("a"));
-// $FlowExpectedError function `doesntExist` not found in string.
+// $FlowExpectedError[prop-missing] function `doesntExist` not found in string.
 foo.doStuff = jest.fn().mockImplementationOnce(str => str.doesntExist());
-// $FlowExpectedError Mock function expected to return number, not string.
+// $FlowExpectedError[incompatible-return] Mock function expected to return number, not string.
 foo.doStuff = jest.fn().mockImplementationOnce(str => "10");
 
 foo.doStuff = jest.fn().mockReturnValue(10);
-// $FlowExpectedError Mock function expected to return number, not string.
+// $FlowExpectedError[incompatible-call] Mock function expected to return number, not string.
 foo.doStuff = jest.fn().mockReturnValue("10");
 
 foo.doStuff = jest.fn().mockReturnValueOnce(10);
-// $FlowExpectedError Mock function expected to return number, not string.
+// $FlowExpectedError[incompatible-call] Mock function expected to return number, not string.
 foo.doStuff = jest.fn().mockReturnValueOnce("10");
 
 const mockedDoStuff = (foo.doStuff = jest.fn().mockImplementation(str => 10));
 mockedDoStuff.mock.calls[0][0].indexOf("a");
-// $FlowExpectedError function `doesntExist` not found in string.
+// $FlowExpectedError[prop-missing] function `doesntExist` not found in string.
 mockedDoStuff.mock.calls[0][0].doesntExist("a");
 
 mockedDoStuff.mock.instances[0] > 5;
-// $FlowExpectedError function `doesntExist` not found in number.
+// $FlowExpectedError[prop-missing] function `doesntExist` not found in number.
 mockedDoStuff.mock.instances[0].indexOf("a");
 
 expect(1).toEqual(1);
@@ -66,10 +66,10 @@ mockFn("a");
 expect("someVal").toBeCalled();
 expect("someVal").toBeCalledWith("a");
 
-// $FlowExpectedError property `toHaveBeeenCalledWith` not found in object type
+// $FlowExpectedError property[incompatible-call] `toHaveBeeenCalledWith` not found in object type
 expect("someVal").toHaveBeeenCalledWith("a");
 
-// $FlowExpectedError property `fn` not found in Array
+// $FlowExpectedError[prop-missing] property `fn` not found in Array
 mockFn.mock.calls.fn();
 
 describe("name", () => {});
@@ -80,7 +80,7 @@ test("test", () => expect("foo").toMatchSnapshot());
 test.only("test", () => expect("foo").toMatchSnapshot());
 test.skip("test", () => expect("foo").toMatchSnapshot());
 
-// $FlowExpectedError property `fonly` not found in object type
+// $FlowExpectedError[prop-missing] property `fonly` not found in object type
 test.fonly("test", () => expect("foo").toMatchSnapshot());
 
 test("name", done => {
@@ -93,36 +93,36 @@ test.skip("name", done => {
   done();
 });
 
-// $FlowExpectedError tests should return void or Promise.
+// $FlowExpectedError[incompatible-call] tests should return void or Promise.
 test("name", () => 5);
 test("name", async () => {});
 test("name", () => new Promise((resolve, reject) => {}));
-// $FlowExpectedError describe does not support Promises.
+// $FlowExpectedError[incompatible-call] describe does not support Promises.
 describe("name", () => new Promise((resolve, reject) => {}));
 
 beforeEach(() => {});
 beforeEach(() => new Promise((resolve, reject) => {}));
-// $FlowExpectedError Lifecycle methods should return void or Promise.
+// $FlowExpectedError[incompatible-call] Lifecycle methods should return void or Promise.
 beforeEach(() => 5);
 
 beforeAll(() => {});
 beforeAll(() => new Promise((resolve, reject) => {}));
-// $FlowExpectedError Lifecycle methods should return void or Promise.
+// $FlowExpectedError[incompatible-call] Lifecycle methods should return void or Promise.
 beforeAll(() => 5);
 
 afterEach(() => {});
 afterEach(() => new Promise((resolve, reject) => {}));
-// $FlowExpectedError Lifecycle methods should return void or Promise.
+// $FlowExpectedError[incompatible-call] Lifecycle methods should return void or Promise.
 afterEach(() => 5);
 
 afterAll(() => {});
 afterAll(() => new Promise((resolve, reject) => {}));
-// $FlowExpectedError Lifecycle methods should return void or Promise.
+// $FlowExpectedError[incompatible-call] Lifecycle methods should return void or Promise.
 afterAll(() => 5);
 
 xtest("test", () => {});
 
-// $FlowExpectedError property `bar` not found in object type
+// $FlowExpectedError[prop-missing] property `bar` not found in object type
 expect.bar();
 
 expect.extend({
@@ -134,8 +134,8 @@ expect.extend({
   }
 });
 
+// $FlowExpectedError property `pass` not found in object literal
 expect.extend({
-  // $FlowExpectedError property `pass` not found in object literal
   foo(actual, expected) {
     return {};
   }
@@ -172,7 +172,7 @@ expect.addSnapshotSerializer({
   test: val => val && val.hasOwnProperty('foo')
 })
 
-// $FlowExpectedError
+// $FlowExpectedError[incompatible-call]
 expect.addSnapshotSerializer(JSON.stringify)
 
 expect.assertions(1);
@@ -199,7 +199,7 @@ expect([1, 2, 3]).toHaveLength(3);
  *  Plugin: jest-enzyme
  */
 
-// $FlowExpectedError
+// $FlowFixMe[cannot-resolve-module]
 import { shallow } from "enzyme";
 const Dummy = () => <div />;
 const wrapper = shallow(<Dummy />);
@@ -215,93 +215,93 @@ expect(wrapper).toBeEmptyRender();
 expect(wrapper).toBePresent();
 
 expect(wrapper).toContainReact(<Dummy />);
-// $FlowExpectedError
+// $FlowExpectedError[incompatible-call]
 expect(wrapper).toContainReact();
-// $FlowExpectedError
+// $FlowExpectedError[incompatible-call]
 expect(wrapper).toContainReact("string");
 
 expect(wrapper).toExist();
 
 expect(wrapper).toHaveClassName("class");
-// $FlowExpectedError
+// $FlowExpectedError[incompatible-call]
 expect(wrapper).toHaveClassName();
-// $FlowExpectedError
+// $FlowExpectedError[incompatible-call]
 expect(wrapper).toHaveClassName(true);
 
 expect(wrapper).toHaveHTML("<span>test</span>");
-// $FlowExpectedError
+// $FlowExpectedError[incompatible-call]
 expect(wrapper).toHaveHTML();
-// $FlowExpectedError
+// $FlowExpectedError[incompatible-call]
 expect(wrapper).toHaveHTML(true);
 
 expect(wrapper).toHaveProp("test");
 expect(wrapper).toHaveProp("test", "test");
-// $FlowExpectedError
+// $FlowExpectedError[incompatible-call]
 expect(wrapper).toHaveProp();
-// $FlowExpectedError
+// $FlowExpectedError[incompatible-call]
 expect(wrapper).toHaveProp(true);
 expect(wrapper).toHaveProp({ test: "test" });
-// $FlowExpectedError
+// $FlowExpectedError[incompatible-call]
 expect(wrapper).toHaveProp({ test: "test" }, "test");
 
 expect(wrapper).toHaveRef("test");
-// $FlowExpectedError
+// $FlowExpectedError[incompatible-call]
 expect(wrapper).toHaveRef();
-// $FlowExpectedError
+// $FlowExpectedError[incompatible-call]
 expect(wrapper).toHaveRef(true);
 
 expect(wrapper).toHaveState("test");
 expect(wrapper).toHaveState("test", "test");
 expect(wrapper).toHaveState({ test: "test" });
-// $FlowExpectedError
+// $FlowExpectedError[incompatible-call]
 expect(wrapper).toHaveState({ test: "test" }, "test");
 
-// $FlowExpectedError
+// $FlowExpectedError[incompatible-call]
 expect(wrapper).toHaveState();
-// $FlowExpectedError
+// $FlowExpectedError[incompatible-call]
 expect(wrapper).toHaveState(true);
 
 expect(wrapper).toHaveStyle("color");
 expect(wrapper).toHaveStyle("color", "#ccc");
 expect(wrapper).toHaveStyle({ color: "#ccc" });
-// $FlowExpectedError
+// $FlowExpectedError[incompatible-call]
 expect(wrapper).toHaveStyle({ color: "#ccc" }, "test");
 
-// $FlowExpectedError
+// $FlowExpectedError[incompatible-call]
 expect(wrapper).toHaveStyle();
-// $FlowExpectedError
+// $FlowExpectedError[incompatible-call]
 expect(wrapper).toHaveStyle(true);
 
 expect(wrapper).toHaveTagName("marquee");
-// $FlowExpectedError
+// $FlowExpectedError[incompatible-call]
 expect(wrapper).toHaveTagName();
-// $FlowExpectedError
+// $FlowExpectedError[incompatible-call]
 expect(wrapper).toHaveTagName(true);
 
 expect(wrapper).toHaveText("test");
-// $FlowExpectedError
+// $FlowExpectedError[incompatible-call]
 expect(wrapper).toHaveText();
-// $FlowExpectedError
+// $FlowExpectedError[incompatible-call]
 expect(wrapper).toHaveText(true);
 
 expect(wrapper).toIncludeText("test");
-// $FlowExpectedError
+// $FlowExpectedError[incompatible-call]
 expect(wrapper).toIncludeText();
-// $FlowExpectedError
+// $FlowExpectedError[incompatible-call]
 expect(wrapper).toIncludeText(true);
 
 expect(wrapper).toHaveValue("test");
 
 expect(wrapper).toMatchElement(<Dummy />);
-// $FlowExpectedError
+// $FlowExpectedError[incompatible-call]
 expect(wrapper).toMatchElement();
-// $FlowExpectedError
+// $FlowExpectedError[incompatible-call]
 expect(wrapper).toMatchElement(true);
 
 expect(wrapper).toMatchSelector("span");
-// $FlowExpectedError
+// $FlowExpectedError[incompatible-call]
 expect(wrapper).toMatchSelector();
-// $FlowExpectedError
+// $FlowExpectedError[incompatible-call]
 expect(wrapper).toMatchSelector(true);
 
 // dom-testing-library
@@ -309,19 +309,19 @@ expect(wrapper).toMatchSelector(true);
   const element = document.createElement('div');
 
   expect(element).toHaveTextContent('123');
-  // $FlowExpectedError: expected text content should be present
+  // $FlowExpectedError[incompatible-call]: expected text content should be present
   expect(element).toHaveTextContent();
-  // $FlowExpectedError: expected text content should be a string
+  // $FlowExpectedError[incompatible-call]: expected text content should be a string
   expect(element).toHaveTextContent(1);
 
   expect(element).toBeInTheDOM();
 
   expect(element).toHaveAttribute('foo');
   expect(element).toHaveAttribute('foo', 'bar');
-  // $FlowExpectedError: attribute name should be present
+  // $FlowExpectedError[incompatible-call]: attribute name should be present
   expect(element).toHaveAttribute();
-  // $FlowExpectedError: attribute name should be a string
+  // $FlowExpectedError[incompatible-call]: attribute name should be a string
   expect(element).toHaveAttribute(1);
-  // $FlowExpectedError: expected attribute value should be a string
+  // $FlowExpectedError[incompatible-call]: expected attribute value should be a string
   expect(element).toHaveAttribute('foo', 1);
 }
