@@ -2,7 +2,7 @@
 /* eslint-disable */
 jest.autoMockOff()
 
-// $FlowExpectedError property `atoMockOff` not found in object type
+// $FlowExpectedError[prop-missing] property `atoMockOff` not found in object type
 jest.atoMockOff()
 
 const mockFn = jest.fn()
@@ -18,8 +18,8 @@ mockFn('a')
 expect('someVal').toBeCalled()
 expect('someVal').toBeCalledWith('a')
 
-// $FlowExpectedError property `toHaveBeeenCalledWith` not found in object type
+// $FlowExpectedError property[prop-missing] `toHaveBeeenCalledWith` not found in object type
 expect('someVal').toHaveBeeenCalledWith('a')
 
-// $FlowExpectedError property `fn` not found in Array
+// $FlowExpectedError[prop-missing] property `fn` not found in Array
 mockFn.mock.calls.fn()
