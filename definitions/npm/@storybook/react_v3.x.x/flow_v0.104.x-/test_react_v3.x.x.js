@@ -117,7 +117,7 @@ describe('The `forceReRender` function', () => {
 
 describe('The `configure` function', () => {
   it('should validate on default usage', () => {
-    configure(() => undefined, module);
+    configure(() => undefined, fakeModule);
   });
 });
 
@@ -136,7 +136,7 @@ describe('The `setAddon` function', () => {
 
     setAddon(TestAddon);
 
-    storiesOf<Addon>('TestAddon', module)
+    storiesOf<Addon>('TestAddon', fakeModule)
       .test('', () => <div />)
       .test('', () => <div />)
       .add('', () => <div />)
