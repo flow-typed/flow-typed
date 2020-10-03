@@ -2,7 +2,7 @@
 import mongodb from "mongodb";
 
 mongodb.ObjectId.isValid("000000000000000000000000");
-// $FlowExpectedError
+// $FlowExpectedError[incompatible-call]
 mongodb.ObjectId.isValid(null);
 
 const mongo = new mongodb.ObjectId();
