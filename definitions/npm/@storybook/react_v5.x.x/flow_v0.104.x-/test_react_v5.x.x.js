@@ -85,7 +85,7 @@ describe('The `add` method', () => {
   it('should error on invalid default usage (parameters)', () => {
     // $FlowExpectedError[incompatible-call]
     storiesOf('', fakeModule).add('', () => <Button>test</Button>, '');
-    // $FlowExpectedError[incompatible-call]
+    // $FlowExpectedError[prop-missing]
     storiesOf('', fakeModule).add('', parameters, () => <Button>test</Button>);
   });
 
