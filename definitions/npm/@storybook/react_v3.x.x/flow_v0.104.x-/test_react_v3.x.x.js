@@ -29,80 +29,117 @@ const Button = props => <button {...props} />;
 
 const Decorator = story => <div>{story()}</div>;
 
-// The `storiesOf` function
-storiesOf('', fakeModule);
+describe('The `storiesOf` function', () => {
+  it('should validate on default usage', () => {
+    storiesOf('', fakeModule);
+  });
 
-// $FlowExpectedError[incompatible-call]
-storiesOf([], fakeModule);
-// $FlowExpectedError[incompatible-call]
-storiesOf('', 123);
+  it('should error on invalid options', () => {
+    // $FlowExpectedError[incompatible-call]
+    storiesOf([], fakeModule);
+    // $FlowExpectedError[incompatible-call]
+    storiesOf('', 123);
+  });
 
-// $FlowExpectedError[prop-missing]
-storiesOf('', fakeModule).foo('', () => <div />);
+  it('should error on invalid method call', () => {
+    // $FlowExpectedError[prop-missing]
+    storiesOf('', fakeModule).foo('', () => <div />);
+  });
+});
 
-// The `add` method
-storiesOf('', fakeModule).add('', () => <div />);
+describe('The `add` method', () => {
+  it('should validate on default usage (element)', () => {
+    storiesOf('', fakeModule).add('', () => <div />);
+  });
 
-storiesOf('', fakeModule).add('', () => <Button>test</Button>);
+  it('should validate on default usage (component)', () => {
+    storiesOf('', fakeModule).add('', () => <Button>test</Button>);
+  });
 
-storiesOf('', fakeModule).add('', () => [
-  <Button>test</Button>,
-  <Button>test</Button>,
-  <Button>test</Button>,
-]);
+  it('should validate on default usage (array)', () => {
+    storiesOf('', fakeModule).add('', () => [
+      <Button>test</Button>,
+      <Button>test</Button>,
+      <Button>test</Button>,
+    ]);
+  });
 
-// $FlowExpectedError[incompatible-call]
-storiesOf('', fakeModule).add('', () => '');
-// $FlowExpectedError[incompatible-call]
-storiesOf('', fakeModule).add('', () => null);
+  it('should error on invalid default usage', () => {
+    // $FlowExpectedError[incompatible-call]
+    storiesOf('', fakeModule).add('', () => '');
+    // $FlowExpectedError[incompatible-call]
+    storiesOf('', fakeModule).add('', () => null);
+  });
 
-storiesOf('', fakeModule).add('', ({ kind, story }) => (
-  <div>
-    {kind} {story}
-  </div>
-));
+  it('should validate when unwrapping arguments', () => {
+    storiesOf('', fakeModule).add('', ({ kind, story }) => (
+      <div>
+        {kind} {story}
+      </div>
+    ));
+  });
 
-// $FlowExpectedError[prop-missing]
-storiesOf('', fakeModule).add('', ({ kind, story, foo }) => (
-  <div>
-    {kind} {story} {foo}
-  </div>
-));
+  it('should error when unwrapping invalid arguments', () => {
+    // $FlowExpectedError[prop-missing]
+    storiesOf('', fakeModule).add('', ({ kind, story, foo }) => (
+      <div>
+        {kind} {story} {foo}
+      </div>
+    ));
+  });
+});
 
-// The `addDecorator` function
-storiesOf('', fakeModule)
-  .addDecorator(Decorator)
-  .add('', () => <div />);
+describe('The `addDecorator` function', () => {
+  it('should validate on default usage (local)', () => {
+    storiesOf('', fakeModule)
+      .addDecorator(Decorator)
+      .add('', () => <div />);
+  });
 
-addDecorator(Decorator);
+  it('should validate on default usage (global)', () => {
+    addDecorator(Decorator);
+  });
+});
 
-// The `getStorybook` function
-getStorybook().forEach(({ kind, stories }) =>
-  stories.forEach(({ name, render }) => render())
-);
+describe('The `getStorybook` function', () => {
+  it('should validate on default usage', () => {
+    getStorybook().forEach(({ kind, stories }) =>
+      stories.forEach(({ name, render }) => render())
+    );
+  });
+});
 
-// The `forceReRender` function
-forceReRender();
+describe('The `forceReRender` function', () => {
+  it('should validate on default usage', () => {
+    forceReRender();
+  });
+});
 
-// The `configure` function
-configure(() => undefined, fakeModule);
+describe('The `configure` function', () => {
+  it('should validate on default usage', () => {
+    configure(() => undefined, module);
+  });
+});
 
-// The `setAddon` function
-interface Addon {
-  test<T>(name: string, story: RenderFunction): Story & T;
-}
+describe('The `setAddon` function', () => {
+  it('should validate on default usage', () => {
+    interface Addon {
+      test<T>(name: string, story: RenderFunction): Story & T;
+    }
 
-const TestAddon: Addon = {
-  test(name, story) {
-    console.log(this.kind === 'TestAddon');
-    return this.add(name, story);
-  },
-};
+    const TestAddon: Addon = {
+      test(name, story) {
+        console.log(this.kind === 'TestAddon');
+        return this.add(name, story);
+      },
+    };
 
-setAddon(TestAddon);
+    setAddon(TestAddon);
 
-storiesOf<Addon>('TestAddon', fakeModule)
-  .test('', () => <div />)
-  .test('', () => <div />)
-  .add('', () => <div />)
-  .test('', () => <div />);
+    storiesOf<Addon>('TestAddon', module)
+      .test('', () => <div />)
+      .test('', () => <div />)
+      .add('', () => <div />)
+      .test('', () => <div />);
+  });
+});
