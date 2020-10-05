@@ -136,9 +136,9 @@ describe('expectations', () => {
     await app.unsubscribe('/').expect(200);
 
     // check we're actually type checking using typos
-    // $FlowExpectedError
+    // $FlowExpectedError[prop-missing]
     await app.psot('/').expect(200);
-    // $FlowExpectedError
+    // $FlowExpectedError[prop-missing]
     await app.post('/').expct(200);
   });
 
@@ -169,21 +169,27 @@ describe('expectations', () => {
     (response.notFound: boolean);
     (response.notAcceptable: boolean);
     (response.unprocessableEntity: boolean);
+  });
 
+  it('actually checks types of response', async () => {
     // check we're actually type checking using typos
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
+    const response = await request(serverFunction)
+      .get('/user')
+      .expect(200);
+
     (response.tpye: string);
-  })
+  });
 
   it('there is a called boolean in the request', () => {
     let req = request(serverFunction).get('/user');
     (req.called: boolean);
-    // $FlowExpectedError
+    // $FlowExpectedError[prop-missing]
     req.foo;
 
     req = req.expect(200);
     (req.called: boolean);
-    // $FlowExpectedError
+    // $FlowExpectedError[prop-missing]
     req.foo;
   })
 });
