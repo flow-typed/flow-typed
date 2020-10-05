@@ -158,7 +158,7 @@ declare module 'supertest' {
     query(val: { ... } | string): this;
     redirects(n: number): this;
     responseType(type: string): this;
-    retry(count?: number, callback?: superagent$CallbackHandler): this;
+    retry(count?: number, callback?: (err: any, res: superagent$Response) => boolean | void): this;
     send(data?: string | { ... }): this;
     serialize(serializer: (any) => string): this;
     set(field: { ... }): this;

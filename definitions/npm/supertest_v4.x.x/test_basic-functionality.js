@@ -191,5 +191,33 @@ describe('expectations', () => {
     (req.called: boolean);
     // $FlowExpectedError[prop-missing]
     req.foo;
-  })
+  });
+
+  it('supports retrying requests', async () => {
+    await request(serverFunction)
+      .post('/')
+      .retry()
+      .expect(200);
+
+    await request(serverFunction)
+      .post('/')
+      .retry(2)
+      .expect(200);
+
+    await request(serverFunction)
+      .post('/')
+      .retry(2, (err, res) => {
+        if (res.statusCode === 404) {
+          return true;
+        }
+        return false;
+      })
+      .expect(200);
+
+    await request(serverFunction)
+      .post('/')
+      // $FlowExpectedError[incompatible-call]
+      .retry(1, (err, res) => "foo")
+      .expect(200);
+  });
 });
