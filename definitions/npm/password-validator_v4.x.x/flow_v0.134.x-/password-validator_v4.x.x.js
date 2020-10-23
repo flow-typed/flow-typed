@@ -1,6 +1,3 @@
-// flow-typed signature: 3587dd2cb279eaf68a55c988c6bcb495
-// flow-typed version: <<STUB>>/password-validator_v4.x.x/flow_v0.134.0
-
 declare module 'password-validator' {
   declare type PasswordSchemaRules = {|
     digits(count?: number): PasswordSchemaRules, // specifies password must include digits (optionally provide count paramenter to specify at least n digits)
