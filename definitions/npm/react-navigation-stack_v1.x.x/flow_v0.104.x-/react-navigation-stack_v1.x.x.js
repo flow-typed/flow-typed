@@ -385,7 +385,7 @@ declare module 'react-navigation-stack' {
             ...
           },
       params?: NavigationParams,
-      action?: NavigationNavigateAction
+      action?: NavigationAction
     ) => boolean,
     setParams: (newParams: NavigationParams) => boolean,
     ...
