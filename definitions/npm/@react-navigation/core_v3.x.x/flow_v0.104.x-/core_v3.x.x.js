@@ -385,7 +385,7 @@ declare module '@react-navigation/core' {
             ...
           },
       params?: NavigationParams,
-      action?: NavigationNavigateAction
+      action?: NavigationAction
     ) => boolean,
     setParams: (newParams: NavigationParams) => boolean,
     ...
