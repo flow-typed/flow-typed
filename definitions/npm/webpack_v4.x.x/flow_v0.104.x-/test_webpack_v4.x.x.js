@@ -6,6 +6,10 @@ const options: WebpackOptions = {
   devServer: {
     compress: true
   },
+  infrastructureLogging: {
+    level: 'info',
+    debug: ['MyPlugin', /MyPlugin/, (name) => name.includes('MyPlugin')],
+  },
   output: {
     filename: '[name].bundle.js',
   },
