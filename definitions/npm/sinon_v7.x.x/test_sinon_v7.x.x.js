@@ -203,6 +203,7 @@ function testSpy() {
   sinon.spy().calledBefore(otherSpy);
   sinon.spy().calledImmediatelyAfter(otherSpy);
   sinon.spy().calledImmediatelyBefore(otherSpy);
+  sinon.spy().calledOnceWithExactly('foo');
 }
 
 testOne();
