@@ -247,6 +247,13 @@ function testGetCalls() {
   }
 }
 
+function testLastArg() {
+  let spy = sinon.spy();
+  let date = new Date();
+  spy(1, 2, date);
+  return spy.lastCall.lastArg === date;
+}
+
 function testFake(): boolean {
   const callback = sinon.fake();
   callback();
