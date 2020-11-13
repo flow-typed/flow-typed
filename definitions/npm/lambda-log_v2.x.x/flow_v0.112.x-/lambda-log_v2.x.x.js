@@ -38,34 +38,58 @@ declare module "lambda-log" {
     stdoutStream?: WriteStream;
     stderrStream?: WriteStream;
   }
-  declare interface LogLevels {
-    info: "info";
-    warn: "warn";
-    error: "error";
-    debug: "log" | false;
-    [key: string]: any;
-  }
-  declare export class LambdaLog mixins EventEmitter {
-    LambdaLog: LambdaLog;
-    options: LambdaLogOptions;
-    console: Console;
-  [key: string]: any;
-    constructor(options?: LambdaLogOptions, levels?: any): this;
-    log(level: string, msg: string, meta?: { ... }, tags?: string[]): LogMessage;
-    info(msg: string, meta?: { ... }, tags?: string[]): LogMessage;
-    warn(msg: string, meta?: { ... }, tags?: string[]): LogMessage;
-    error(msg: string | Error, meta?: { ... }, tags?: string[]): LogMessage;
-    debug(msg: string, meta?: { ... }, tags?: string[]): LogMessage;
-    assert(test: any, msg: string, meta?: { ... }, tags?: string[]): boolean | LogMessage;
-  }
 
-  declare export default {|
-    LambdaLog(options?: LambdaLogOptions, levels?: any): LambdaLog;
-    log(level: string, msg: string, meta?: { ... }, tags?: string[]): LogMessage;
-    info(msg: string, meta?: { ... }, tags?: string[]): LogMessage;
-    warn(msg: string, meta?: { ... }, tags?: string[]): LogMessage;
-    error(msg: string | Error, meta?: { ... }, tags?: string[]): LogMessage;
-    debug(msg: string, meta?: { ... }, tags?: string[]): LogMessage;
-    assert(test: any, msg: string, meta?: { ... }, tags?: string[]): boolean | LogMessage;
+  declare type ConsoleMethods = $Keys<typeof console>;
+
+  // The Log Levels object defines custom levels. The value of each level is either a console method name or a function that returns a console method name. https://www.npmjs.com/package/lambda-log#log-levels-object
+  declare export type LogLevelsParam = {
+    [string]: ConsoleMethods | (message) => ConsoleMethods | boolean,
+    ...
+  };
+
+  declare export type DefaultLogLevels = {|
+    info: 'info',
+    warn: 'warn',
+    error: 'error',
+    debug: false
   |};
+
+  declare type GetLevelMethod = <V>(V) => ((msg: string, meta?: { ... }, tags?: string[]) => LogMessage);
+  declare type CustomLogLevelMethods<LogLevels: LogLevelsParam> = $ObjMap<LogLevels, GetLevelMethod>;
+
+  declare export type LambdaLog<LogLevels: LogLevelsParam> = {|
+
+    // extends EventEmitter
+    addListener(event: string | symbol, listener: (...args: any[]) => void): LambdaLog<LogLevels>,
+    on(event: string | symbol, listener: (...args: any[]) => void): LambdaLog<LogLevels>,
+    once(event: string | symbol, listener: (...args: any[]) => void): LambdaLog<LogLevels>,
+    prependListener(event: string | symbol, listener: (...args: any[]) => void): LambdaLog<LogLevels>,
+    prependOnceListener(event: string | symbol, listener: (...args: any[]) => void): LambdaLog<LogLevels>,
+    removeListener(event: string | symbol, listener: (...args: any[]) => void): LambdaLog<LogLevels>,
+    off(event: string | symbol, listener: (...args: any[]) => void): LambdaLog<LogLevels>,
+    removeAllListeners(event?: string | symbol): LambdaLog<LogLevels>,
+    setMaxListeners(n: number): LambdaLog<LogLevels>,
+    getMaxListeners(): number,
+    listeners(event: string | symbol): Function[],
+    rawListeners(event: string | symbol): Function[],
+    emit(event: string | symbol, ...args: any[]): boolean,
+    eventNames(): Array<string | symbol>,
+    listenerCount(type: string | symbol): number,
+
+    // log-level methods
+    info(msg: string, meta?: { ... }, tags?: string[]): LogMessage,
+    warn(msg: string, meta?: { ... }, tags?: string[]): LogMessage,
+    error(msg: string | Error, meta?: { ... }, tags?: string[]): LogMessage,
+    debug(msg: string, meta?: { ... }, tags?: string[]): LogMessage,
+    ...CustomLogLevelMethods<LogLevels>,
+
+    // other methods
+    options: LambdaLogOptions,
+    console: Console,
+    LambdaLog<T>(options?: LambdaLogOptions, levels?: T): LambdaLog<T>,
+    log(level: string, msg: string, meta?: { ... }, tags?: string[]): LogMessage,
+    assert(test: any, msg: string, meta?: { ... }, tags?: string[]): boolean | LogMessage
+  |};
+
+  declare export default LambdaLog<{| |}>;
 }
