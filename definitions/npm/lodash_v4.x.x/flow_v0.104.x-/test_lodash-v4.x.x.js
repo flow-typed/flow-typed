@@ -7,6 +7,7 @@
 import { describe, it } from "flow-typed-test";
 import assignIn from "lodash/assignIn";
 import attempt from "lodash/attempt";
+import castArray from "lodash/castArray";
 import chunk from "lodash/chunk";
 import clone from "lodash/clone";
 import compact from "lodash/compact";
@@ -741,6 +742,17 @@ describe('Function', () => {
 });
 
 describe('Lang', () => {
+  it('castArray', () => {
+    (castArray(1): Array<number>);
+    (castArray({ 'a': 1 }): Array<{...}>);
+    (castArray('abc'): Array<string>);
+    (castArray(null): Array<null>);
+    (castArray(undefined): Array<void>);
+    (castArray(): Array<mixed>);
+    var array = [1, 2, 3];
+    (castArray(array): typeof array);
+  });
+
   it('clone', () => {
     clone({ a: 1 }).a == 1;
     // $FlowExpectedError property `b`. Property not found in object literal
