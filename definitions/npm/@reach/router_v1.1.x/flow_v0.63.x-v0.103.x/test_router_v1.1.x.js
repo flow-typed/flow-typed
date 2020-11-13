@@ -14,8 +14,10 @@ import {
   createMemorySource,
   isRedirect,
   redirectTo,
+  useLocation,
   type MatchProps,
   type LinkProps,
+  type UseLocation,
 } from '@reach/router';
 
 import type { DefaultRouteProps, RouteProps } from '@reach/router';
@@ -101,7 +103,7 @@ describe('@reach/router', () => {
       <Redirect from="aboutus" to="about-us" />;
       <Redirect from="users/:userId" to="profile/:userId" />;
       <Redirect to="/" noThrow />;
-      <Redirect to="/state" state={{srcUrl: '/'}} />;
+      <Redirect to="/state" state={{ srcUrl: '/' }} />;
     });
 
     it('raises error', () => {
@@ -117,7 +119,7 @@ describe('@reach/router', () => {
   describe('Match', () => {
     it('works', () => {
       <Match path="/">
-        {props =>
+        {(props) =>
           props.match ? <div>Hot {props.match.item}</div> : <div>Uncool</div>
         }
       </Match>;
@@ -151,7 +153,7 @@ describe('@reach/router', () => {
 
       it('should define more pure type for match prop', () => {
         <MatchItem path="/:articleId/:commentId">
-          {props => {
+          {(props) => {
             if (props.match) {
               (props.match.articleId: string);
               (props.match.commentId: string);
@@ -185,7 +187,7 @@ describe('@reach/router', () => {
 
   describe('Location', () => {
     it('works', () => {
-      <Location>{props => <div />}</Location>;
+      <Location>{(props) => <div />}</Location>;
     });
 
     it('raises error', () => {
@@ -264,6 +266,12 @@ describe('@reach/router', () => {
     it('raises error', () => {
       // $FlowExpectedError - first param must be a string
       redirectTo({});
+    });
+  });
+
+  describe('react hook', () => {
+    it('useLocation', () => {
+      const location: UseLocation = useLocation();
     });
   });
 });
