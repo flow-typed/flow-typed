@@ -91,7 +91,7 @@ declare module '@reach/router' {
     from?: string,
     to: string,
     noThrow?: boolean,
-    state?: any
+    state?: any,
   |}>;
 
   declare export type MatchProps<Params> = {|
@@ -101,6 +101,13 @@ declare module '@reach/router' {
       location: DomLocation,
       navigate: NavigateFn,
     |}) => React$Node,
+  |};
+
+  declare export type UseLocation = {|
+    key: string,
+    origin: string,
+    pathname: string,
+    state?: any,
   |};
 
   declare export var Match: {
@@ -130,4 +137,6 @@ declare module '@reach/router' {
   declare export function isRedirect(error: any): $Exact<{ uri: string }>;
 
   declare export function redirectTo(uri: string): void;
+
+  declare export function useLocation(): $PropertyType<UseLocation, 'location'>;
 }
