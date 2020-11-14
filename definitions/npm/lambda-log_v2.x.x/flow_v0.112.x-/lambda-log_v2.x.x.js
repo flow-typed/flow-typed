@@ -1,6 +1,5 @@
 import { WriteStream } from "fs";
 import { Console } from "console";
-import { EventEmitter } from "events";
 
 declare module "lambda-log" {
   declare interface LogRecordOptions {
