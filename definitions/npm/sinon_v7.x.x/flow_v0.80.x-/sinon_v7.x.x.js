@@ -98,7 +98,7 @@ declare module 'sinon' {
     calledBefore(call: SinonSpyCall): boolean;
     calledAfter(call: SinonSpyCall): boolean;
     calledWithNew(call: SinonSpyCall): boolean;
-    lastArg: SinonSpyCall;
+    lastArg: mixed;
   }
 
   declare interface SinonSpy extends SinonSpyCallApi, SinonFake {
@@ -245,12 +245,12 @@ declare module 'sinon' {
   }
 
   declare interface SinonFakeUploadProgress {
-    eventListeners: {
+    eventListeners: {|
       progress: Array<any>;
       load: Array<any>;
       abort: Array<any>;
       error: Array<any>;
-    };
+    |};
 
     addEventListener(event: string, listener: (e: Event) => any): void;
     removeEventListener(event: string, listener: (e: Event) => any): void;
@@ -478,7 +478,7 @@ declare module 'sinon' {
     XMLHttpRequest: XMLHttpRequest;
   }
 
-  declare module.exports: {
+  declare module.exports: {|
     createFakeServer(config?: SinonFakeServerConfig): SinonFakeServer;
     createFakeServerWithClock(): SinonFakeServer;
     createSandbox(config?: SinonSandboxConfig): SinonSandbox;
@@ -509,5 +509,5 @@ declare module 'sinon' {
       exception: any,
       id: number,
       errorWithCallStack: any): SinonSpyCall;
-  };
+  |};
 }
