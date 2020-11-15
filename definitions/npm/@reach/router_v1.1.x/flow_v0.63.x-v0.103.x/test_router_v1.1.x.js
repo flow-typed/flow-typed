@@ -15,9 +15,13 @@ import {
   isRedirect,
   redirectTo,
   useLocation,
+  useParams,
+  useNavigate,
+  useMatch,
   type MatchProps,
   type LinkProps,
   type UseLocation,
+  type UseMatch
 } from '@reach/router';
 
 import type { DefaultRouteProps, RouteProps } from '@reach/router';
@@ -269,9 +273,43 @@ describe('@reach/router', () => {
     });
   });
 
-  describe('react hook', () => {
+  describe('react hooks', () => {
     it('useLocation', () => {
       const location: UseLocation = useLocation();
+    });
+
+    it('useParams', () => {
+      const params: { [key: string]: mixed, ... } = useParams();
+    });
+
+    describe('useMatch', () => {
+      it('works', () => {
+        const match: UseMatch = useMatch('/path');
+      });
+
+      it('raises error', () => {
+        // $FlowExpectedError[incompatible-call]
+        const match: UseMatch = useMatch();
+      });
+
+      it('raises error', () => {
+        // $FlowExpectedError[incompatible-call]
+        const match: UseMatch = useMatch(null);
+      });
+    });
+
+    describe('useNavigate', () => {
+      it('works', () => {
+        const navigate = useNavigate();
+        navigate('/');
+        navigate('/', { state: {}, redirect: true });
+      });
+
+      it('raises error', () => {
+        const navigate = useNavigate();
+        // $FlowExpectedError - first param must be a string
+        navigate({});
+      });
     });
   });
 });
