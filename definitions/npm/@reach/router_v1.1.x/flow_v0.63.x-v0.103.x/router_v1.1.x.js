@@ -146,6 +146,6 @@ declare module '@reach/router' {
 
   declare export function useNavigate(): NavigateFn;
 
-  declare export function useParams(): { [key: string]: any };
+  declare export function useParams(): { [key: string]: mixed, ... };
 
 }
