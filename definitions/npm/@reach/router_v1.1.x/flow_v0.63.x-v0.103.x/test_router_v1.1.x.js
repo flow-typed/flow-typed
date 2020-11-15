@@ -281,5 +281,35 @@ describe('@reach/router', () => {
     it('useParams', () => {
       const params: { [key: string]: any } = useParams();
     });
+
+    describe('useMatch', () => {
+      it('works', () => {
+        const match: UseMatch = useMatch('/path');
+      });
+
+      it('raises error', () => {
+        // $FlowExpectedError[incompatible-call]
+        const match: UseMatch = useMatch();
+      });
+
+      it('raises error', () => {
+        // $FlowExpectedError[incompatible-call]
+        const match: UseMatch = useMatch(null);
+      });
+    });
+
+    describe('useNavigate', () => {
+      it('works', () => {
+        const navigate = useNavigate();
+        navigate('/');
+        navigate('/', { state: {}, redirect: true });
+      });
+
+      it('raises error', () => {
+        const navigate = useNavigate();
+        // $FlowExpectedError - first param must be a string
+        navigate({});
+      });
+    });
   });
 });

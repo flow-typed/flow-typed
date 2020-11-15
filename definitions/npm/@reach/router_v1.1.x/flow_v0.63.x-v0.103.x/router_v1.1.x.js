@@ -142,7 +142,7 @@ declare module '@reach/router' {
 
   declare export function useLocation(): UseLocation;
 
-  declare export function useMatch(path?: string | null): UseMatch;
+  declare export function useMatch(path: string): UseMatch;
 
   declare export function useNavigate(): NavigateFn;
 
