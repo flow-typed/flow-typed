@@ -279,7 +279,7 @@ describe('@reach/router', () => {
     });
 
     it('useParams', () => {
-      const params: { [key: string]: any } = useParams();
+      const params: { [key: string]: mixed, ... } = useParams();
     });
 
     describe('useMatch', () => {
