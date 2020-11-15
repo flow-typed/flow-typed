@@ -51,9 +51,9 @@ function ValidScreen(props: {|
   route: NavRoute<'One'>,
 |}) {
   props.navigation.navigate('Another');
-  // $FlowExpectedError invalid params
+  // $FlowFixMe[incompatible-call] invalid params
   props.navigation.navigate('Another', {});
-  // $FlowExpectedError invalid route
+  // $FlowFixMe[incompatible-call] invalid route
   props.navigation.navigate('test', { sup: true, yo: null });
   props.navigation.push('One', { hey: 'sup' });
   props.navigation.pop(5);
@@ -77,14 +77,14 @@ function InvalidScreen(props: {|
     headerTitle: 'ayyyy',
     headerStatusBarHeight: 5,
   });
-  // $FlowExpectedError invalid navigator props
+  // $FlowFixMe[prop-missing] invalid navigator props
   props.navigation.setOptions({ fake: 12 });
   React.useEffect(() => {
     return props.navigation.addListener(
       'transitionStart',
       e => {
         (e.type: 'transitionStart');
-        // $FlowExpectedError swipeStart doesn't support preventDefault
+        // $FlowFixMe[prop-missing] swipeStart doesn't support preventDefault
         e.preventDefault();
       },
     );
@@ -93,15 +93,15 @@ function InvalidScreen(props: {|
 }
 
 <Stack.Screen name="One" component={ValidScreen} />;
-// $FlowExpectedError non-matching component
+// $FlowFixMe[incompatible-type] non-matching component
 <Stack.Screen name="Two" component={ValidScreen} />;
-// $FlowExpectedError invalid route name
+// $FlowFixMe[incompatible-type] invalid route name
 <Stack.Screen name="Four" component={ValidScreen} />;
-// $FlowExpectedError invalid params
+// $FlowFixMe[incompatible-type] invalid params
 <Stack.Screen name="One" component={ValidScreen} initialParams={{ hey: 5 }} />;
-// $FlowExpectedError non-local route
+// $FlowFixMe[incompatible-type] non-local route
 <Stack.Screen name="Another" component={ValidScreen} />;
-// $FlowExpectedError invalid screen props
+// $FlowFixMe[incompatible-type] invalid screen props
 <Stack.Screen name="One" component={InvalidScreen} />;
 
 /**
@@ -113,9 +113,9 @@ function InvalidScreen(props: {|
   headerMode="float"
   keyboardHandlingEnabled={true}
 />;
-// $FlowExpectedError invalid navigator props
+// $FlowFixMe[prop-missing] invalid navigator props
 <Stack.Navigator
-  // $FlowExpectedError invalid navigator props
+  // $FlowFixMe[incompatible-type] invalid navigator props
   mode="FAKE"
   headerMode="float"
   keyboardHandlingEnabled={true}
