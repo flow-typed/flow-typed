@@ -73,6 +73,7 @@ function InvalidScreen(props: {|
   props.navigation.setOptions({
     title: 'sup',
     tabBarLabel: 'SUP',
+    tabBarBadge: 500,
     unmountOnBlur: true,
   });
   // $FlowExpectedError invalid navigator props

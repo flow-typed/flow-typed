@@ -1335,6 +1335,11 @@ declare module '@react-navigation/core' {
       color: string,
       size: number,
     |}) => React$Node,
+    +tabBarIcon: ({|
+      focused: boolean,
+      color: string,
+      size: number,
+    |}) => React$Node,
     +tabBarAccessibilityLabel: string,
     +tabBarTestID: string,
     +tabBarVisible: boolean,
