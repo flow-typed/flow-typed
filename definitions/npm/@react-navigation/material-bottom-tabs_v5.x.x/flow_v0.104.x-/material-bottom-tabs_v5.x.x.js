@@ -1335,6 +1335,8 @@ declare module '@react-navigation/material-bottom-tabs' {
       color: string,
       size: number,
     |}) => React$Node,
+    +tabBarBadge: number | string,
+    +tabBarBadgeStyle: TextStyleProp,
     +tabBarAccessibilityLabel: string,
     +tabBarTestID: string,
     +tabBarVisible: boolean,
