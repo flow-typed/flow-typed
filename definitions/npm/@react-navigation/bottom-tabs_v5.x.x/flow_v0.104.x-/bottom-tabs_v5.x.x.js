@@ -1296,6 +1296,7 @@ declare module '@react-navigation/bottom-tabs' {
     +mode?: 'card' | 'modal',
     +headerMode?: 'float' | 'screen' | 'none',
     +keyboardHandlingEnabled?: boolean,
+    +detachInactiveScreens?: boolean,
   |};
 
   declare export type ExtraStackNavigatorProps = {|
@@ -1437,6 +1438,7 @@ declare module '@react-navigation/bottom-tabs' {
     +lazy?: boolean,
     +tabBar?: BottomTabBarProps => React$Node,
     +tabBarOptions?: BottomTabBarOptions,
+    +detachInactiveScreens?: boolean,
   |};
 
   declare export type ExtraBottomTabNavigatorProps = {|
@@ -1880,6 +1882,7 @@ declare module '@react-navigation/bottom-tabs' {
     +drawerContentOptions?: DrawerContentOptions,
     +sceneContainerStyle?: ViewStyleProp,
     +drawerStyle?: ViewStyleProp,
+    +detachInactiveScreens?: boolean,
   |};
 
   declare export type ExtraDrawerNavigatorProps = {|
