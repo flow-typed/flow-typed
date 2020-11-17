@@ -1328,14 +1328,14 @@ declare module '@react-navigation/stack' {
   declare export type TabBarVisibilityAnimationConfig =
     | {|
         +animation: 'spring',
-        +config: $Diff<
+        +config?: $Diff<
           SpringAnimationConfigSingle,
           { toValue: number | AnimatedValue, useNativeDriver: boolean, ... },
         >,
       |}
     | {|
         +animation: 'timing',
-        +config: $Diff<
+        +config?: $Diff<
           TimingAnimationConfigSingle,
           { toValue: number | AnimatedValue, useNativeDriver: boolean, ... },
         >,
