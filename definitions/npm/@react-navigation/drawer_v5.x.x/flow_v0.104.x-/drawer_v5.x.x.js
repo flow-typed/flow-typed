@@ -745,6 +745,10 @@ declare module '@react-navigation/drawer' {
     ...GlobalEventMap<State>,
     +focus: {| +data: void, +canPreventDefault: false |},
     +blur: {| +data: void, +canPreventDefault: false |},
+    +beforeRemove: {|
+      +data: {| +action: GenericNavigationAction |},
+      +canPreventDefault: true,
+    |},
   |};
   declare type EventListenerCallback<
     EventName: string,
@@ -1254,6 +1258,9 @@ declare module '@react-navigation/drawer' {
       +data: {| +closing: boolean |},
       +canPreventDefault: false,
     |},
+    +gestureStart: {| +data: void, +canPreventDefault: false |},
+    +gestureEnd: {| +data: void, +canPreventDefault: false |},
+    +gestureCancel: {| +data: void, +canPreventDefault: false |},
   |};
 
   declare type InexactStackNavigationProp<
