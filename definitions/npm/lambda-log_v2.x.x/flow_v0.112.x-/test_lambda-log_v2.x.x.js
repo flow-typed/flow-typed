@@ -24,7 +24,12 @@ log.info(1.2345, { key: "value" });
 
 log.assert(true, "this will print");
 
-const logInstance = new log.LambdaLog({
+log.on("log", (message: LogMessage) => { console.log(message.msg); });
+
+// $FlowExpectedError[incompatible-call]
+log.on("log", (message: string) => { console.log(message); });
+
+const logInstance = new log.LambdaLog<>({
   dynamicMeta: (logMessage: LogMessage) => {
     return {
       value: logMessage.value
@@ -37,6 +42,9 @@ logInstance.warn("warn", { key: "value" });
 logInstance.error(new Error("This is an error"), { key: "value" });
 logInstance.debug("debug", { key: "value" });
 logInstance.assert(true, "this will print");
+
+// $FlowExpectedError[prop-missing]
+logInstance.wrong();
 
 const goodLogLevels = {
   fatal: "error",

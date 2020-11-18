@@ -56,24 +56,29 @@ declare module "lambda-log" {
   declare type GetLevelMethod = <V>(V) => ((msg: string, meta?: { ... }, tags?: string[]) => LogMessage);
   declare type CustomLogLevelMethods<LogLevels: LogLevelsParam> = $ObjMap<LogLevels, GetLevelMethod>;
 
+  declare type Event = "log";
+  declare type Listener = LogMessage => void;
+
+  declare type NoCustomLogLevels = {| |};
+
   declare export type LambdaLog<LogLevels: LogLevelsParam> = {|
 
     // extends EventEmitter
-    addListener(event: string | symbol, listener: (...args: any[]) => void): LambdaLog<LogLevels>,
-    on(event: string | symbol, listener: (...args: any[]) => void): LambdaLog<LogLevels>,
-    once(event: string | symbol, listener: (...args: any[]) => void): LambdaLog<LogLevels>,
-    prependListener(event: string | symbol, listener: (...args: any[]) => void): LambdaLog<LogLevels>,
-    prependOnceListener(event: string | symbol, listener: (...args: any[]) => void): LambdaLog<LogLevels>,
-    removeListener(event: string | symbol, listener: (...args: any[]) => void): LambdaLog<LogLevels>,
-    off(event: string | symbol, listener: (...args: any[]) => void): LambdaLog<LogLevels>,
-    removeAllListeners(event?: string | symbol): LambdaLog<LogLevels>,
+    addListener(event: Event, listener: Listener): LambdaLog<LogLevels>,
+    on(event: Event, listener: Listener): LambdaLog<LogLevels>,
+    once(event: Event, listener: Listener): LambdaLog<LogLevels>,
+    prependListener(event: Event, listener: Listener): LambdaLog<LogLevels>,
+    prependOnceListener(event: Event, listener: Listener): LambdaLog<LogLevels>,
+    removeListener(event: Event, listener: Listener): LambdaLog<LogLevels>,
+    off(event: Event, listener: Listener): LambdaLog<LogLevels>,
+    removeAllListeners(event?: Event): LambdaLog<LogLevels>,
     setMaxListeners(n: number): LambdaLog<LogLevels>,
     getMaxListeners(): number,
-    listeners(event: string | symbol): Function[],
-    rawListeners(event: string | symbol): Function[],
-    emit(event: string | symbol, ...args: any[]): boolean,
-    eventNames(): Array<string | symbol>,
-    listenerCount(type: string | symbol): number,
+    listeners(event: Event): Listener,
+    rawListeners(event: Event): Listener,
+    emit(event: Event, LogMessage): boolean,
+    eventNames(): Array<Event>,
+    listenerCount(type: Event): number,
 
     // log-level methods
     info(msg: string, meta?: { ... }, tags?: string[]): LogMessage,
@@ -85,10 +90,10 @@ declare module "lambda-log" {
     // other methods
     options: LambdaLogOptions,
     console: Console,
-    LambdaLog<T>(options?: LambdaLogOptions, levels?: T): LambdaLog<T>,
+    LambdaLog<T = NoCustomLogLevels>(options?: LambdaLogOptions, levels?: T): LambdaLog<T>,
     log(level: string, msg: string, meta?: { ... }, tags?: string[]): LogMessage,
     assert(test: any, msg: string, meta?: { ... }, tags?: string[]): boolean | LogMessage
   |};
 
-  declare export default LambdaLog<{| |}>;
+  declare export default LambdaLog<NoCustomLogLevels>;
 }
