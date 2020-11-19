@@ -1303,6 +1303,7 @@ declare module '@react-navigation/stack' {
     +mode?: 'card' | 'modal',
     +headerMode?: 'float' | 'screen' | 'none',
     +keyboardHandlingEnabled?: boolean,
+    +detachInactiveScreens?: boolean,
   |};
 
   declare export type ExtraStackNavigatorProps = {|
@@ -1444,6 +1445,7 @@ declare module '@react-navigation/stack' {
     +lazy?: boolean,
     +tabBar?: BottomTabBarProps => React$Node,
     +tabBarOptions?: BottomTabBarOptions,
+    +detachInactiveScreens?: boolean,
   |};
 
   declare export type ExtraBottomTabNavigatorProps = {|
@@ -1887,6 +1889,7 @@ declare module '@react-navigation/stack' {
     +drawerContentOptions?: DrawerContentOptions,
     +sceneContainerStyle?: ViewStyleProp,
     +drawerStyle?: ViewStyleProp,
+    +detachInactiveScreens?: boolean,
   |};
 
   declare export type ExtraDrawerNavigatorProps = {|
