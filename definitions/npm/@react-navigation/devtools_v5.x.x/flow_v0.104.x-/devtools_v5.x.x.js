@@ -1333,6 +1333,22 @@ declare module '@react-navigation/devtools' {
     +onPress?: (MouseEvent | PressEvent) => void,
   |};
 
+  declare export type TabBarVisibilityAnimationConfig =
+    | {|
+        +animation: 'spring',
+        +config?: $Diff<
+          SpringAnimationConfigSingle,
+          { toValue: number | AnimatedValue, useNativeDriver: boolean, ... },
+        >,
+      |}
+    | {|
+        +animation: 'timing',
+        +config?: $Diff<
+          TimingAnimationConfigSingle,
+          { toValue: number | AnimatedValue, useNativeDriver: boolean, ... },
+        >,
+      |};
+
   declare export type BottomTabOptions = $Shape<{|
     +title: string,
     +tabBarLabel:
@@ -1348,6 +1364,10 @@ declare module '@react-navigation/devtools' {
     +tabBarAccessibilityLabel: string,
     +tabBarTestID: string,
     +tabBarVisible: boolean,
+    +tabBarVisibilityAnimationConfig: $Shape<{|
+      +show: TabBarVisibilityAnimationConfig,
+      +hide: TabBarVisibilityAnimationConfig,
+    |}>,
     +tabBarButton: BottomTabBarButtonProps => React$Node,
     +unmountOnBlur: boolean,
   |}>;
