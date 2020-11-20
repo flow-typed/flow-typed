@@ -1,7 +1,7 @@
 import { describe, it } from 'flow-typed-test';
 import createEnturService from '@entur/sdk'
 
-describe('#someFunction', () => {
+describe('createEnturService', () => {
   it('create a service', () => {
     const service = createEnturService({
       clientName: 'flow-typed'
