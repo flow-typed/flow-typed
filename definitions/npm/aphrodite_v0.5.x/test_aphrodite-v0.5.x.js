@@ -28,10 +28,10 @@ const styles = StyleSheet.create({
 const fooClassName = css(styles.foo);
 const bigClassName = css(styles.big);
 
-// $FlowExpectedError
+// $FlowExpectedError[incompatible-call]
 css(4);
 
-// $FlowExpectedError
+// $FlowExpectedError[incompatible-call]
 StyleSheet.create('.foo { background-color: red }');
 
 const content = StyleSheetServer.renderStatic(() => `
@@ -50,9 +50,9 @@ StyleSheetTestUtils.clearBufferAndResumeStyleInjection();
 declare var x: number;
 
 css(false);
-// $FlowExpectedError
+// $FlowExpectedError[incompatible-call]
 css(true);
 css(true && styles.big);
-// $FlowExpectedError
+// $FlowExpectedError[incompatible-call]
 css(x && styles.big);
 css(Boolean(x) && styles.big);

@@ -1,4 +1,5 @@
 // @flow
+import { describe, it } from 'flow-typed-test';
 import {
   StyleSheet,
   StyleSheetServer,
