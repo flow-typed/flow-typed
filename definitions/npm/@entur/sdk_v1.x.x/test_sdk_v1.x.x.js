@@ -1,5 +1,5 @@
 import { describe, it } from 'flow-typed-test';
-import createEnturService from '@entur/sdk'
+import createEnturService, { ONSTREET_BUS, FeatureCategory } from '@entur/sdk'
 
 describe('createEnturService', () => {
   it('creates a service', () => {
@@ -35,5 +35,43 @@ describe('findTrips', () => {
 
     // $FlowExpectedError[incompatible-call]
     service.findTrips('Oslo')
+  });
+})
+
+describe('getQuaysForStopPlace', () => {
+  it('can be called with single argument', () => {
+    const service = createEnturService({ clientName: 'flow-typed' })
+    const p: Promise<Array<$entur$sdk$Quay>> = service.getQuaysForStopPlace('NSR:StopPlace:1')
+  });
+
+  it('cannot be called without arguments', () => {
+    const service = createEnturService({ clientName: 'flow-typed' })
+    // $FlowExpectedError[incompatible-call]
+    const p: Promise<Array<$entur$sdk$Quay>> = service.getQuaysForStopPlace()
+  });
+
+  it('can be called with options', () => {
+    const service = createEnturService({ clientName: 'flow-typed' })
+    const p: Promise<Array<$entur$sdk$Quay>> = service.getQuaysForStopPlace('NSR:StopPlace:1', {
+      filterByInUse: true
+    })
+  });
+
+  it('can be called with options', () => {
+    const service = createEnturService({ clientName: 'flow-typed' })
+    // $FlowExpectedError[prop-missing]
+    const p: Promise<Array<$entur$sdk$Quay>> = service.getQuaysForStopPlace('NSR:StopPlace:1', {
+      allowCheeses: ['camembert', 'brie']
+    })
+  });
+})
+
+describe('FeatureCategory constants', () => {
+  it('can import individual constants', () => {
+    const onstreetBus: string = ONSTREET_BUS
+  });
+
+  it('can use FeatureCategory enum', () => {
+    const onstreetBus: string = FeatureCategory.ONSTREET_BUS
   });
 })
