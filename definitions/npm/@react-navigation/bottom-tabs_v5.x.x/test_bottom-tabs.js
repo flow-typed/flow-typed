@@ -51,9 +51,9 @@ function ValidScreen(props: {|
   route: NavRoute<'One'>,
 |}) {
   props.navigation.navigate('Another');
-  // $FlowExpectedError invalid params
+  // $FlowFixMe[incompatible-call] invalid params
   props.navigation.navigate('Another', {});
-  // $FlowExpectedError invalid route
+  // $FlowFixMe[incompatible-call] invalid route
   props.navigation.navigate('test', { sup: true, yo: null });
   props.navigation.jumpTo('Three');
   (props.navigation: NavigationProp<
@@ -73,9 +73,10 @@ function InvalidScreen(props: {|
   props.navigation.setOptions({
     title: 'sup',
     tabBarLabel: 'SUP',
+    tabBarBadge: 500,
     unmountOnBlur: true,
   });
-  // $FlowExpectedError invalid navigator props
+  // $FlowFixMe[prop-missing] invalid navigator props
   props.navigation.setOptions({ fake: 12 });
   React.useEffect(() => {
     return props.navigation.addListener(
@@ -90,15 +91,15 @@ function InvalidScreen(props: {|
 }
 
 <Tab.Screen name="One" component={ValidScreen} />;
-// $FlowExpectedError non-matching component
+// $FlowFixMe[incompatible-type] non-matching component
 <Tab.Screen name="Two" component={ValidScreen} />;
-// $FlowExpectedError invalid route name
+// $FlowFixMe[incompatible-type] invalid route name
 <Tab.Screen name="Four" component={ValidScreen} />;
-// $FlowExpectedError invalid params
+// $FlowFixMe[incompatible-type] invalid params
 <Tab.Screen name="One" component={ValidScreen} initialParams={{ hey: 5 }} />;
-// $FlowExpectedError non-local route
+// $FlowFixMe[incompatible-type] non-local route
 <Tab.Screen name="Another" component={ValidScreen} />;
-// $FlowExpectedError invalid screen props
+// $FlowFixMe[incompatible-type] invalid screen props
 <Tab.Screen name="One" component={InvalidScreen} />;
 
 /**
@@ -106,9 +107,9 @@ function InvalidScreen(props: {|
  */
 
 <Tab.Navigator lazy={true} />;
-// $FlowExpectedError invalid navigator props
+// $FlowFixMe[prop-missing] invalid navigator props
 <Tab.Navigator
-  // $FlowExpectedError invalid navigator props
+  // $FlowFixMe[incompatible-type] invalid navigator props
   lazy={5}
   someOtherProp="fake"
 />;
