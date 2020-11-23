@@ -745,6 +745,10 @@ declare module '@react-navigation/material-bottom-tabs' {
     ...GlobalEventMap<State>,
     +focus: {| +data: void, +canPreventDefault: false |},
     +blur: {| +data: void, +canPreventDefault: false |},
+    +beforeRemove: {|
+      +data: {| +action: GenericNavigationAction |},
+      +canPreventDefault: true,
+    |},
   |};
   declare type EventListenerCallback<
     EventName: string,
@@ -1254,6 +1258,9 @@ declare module '@react-navigation/material-bottom-tabs' {
       +data: {| +closing: boolean |},
       +canPreventDefault: false,
     |},
+    +gestureStart: {| +data: void, +canPreventDefault: false |},
+    +gestureEnd: {| +data: void, +canPreventDefault: false |},
+    +gestureCancel: {| +data: void, +canPreventDefault: false |},
   |};
 
   declare type InexactStackNavigationProp<
@@ -1296,6 +1303,7 @@ declare module '@react-navigation/material-bottom-tabs' {
     +mode?: 'card' | 'modal',
     +headerMode?: 'float' | 'screen' | 'none',
     +keyboardHandlingEnabled?: boolean,
+    +detachInactiveScreens?: boolean,
   |};
 
   declare export type ExtraStackNavigatorProps = {|
@@ -1325,6 +1333,22 @@ declare module '@react-navigation/material-bottom-tabs' {
     +onPress?: (MouseEvent | PressEvent) => void,
   |};
 
+  declare export type TabBarVisibilityAnimationConfig =
+    | {|
+        +animation: 'spring',
+        +config?: $Diff<
+          SpringAnimationConfigSingle,
+          { toValue: number | AnimatedValue, useNativeDriver: boolean, ... },
+        >,
+      |}
+    | {|
+        +animation: 'timing',
+        +config?: $Diff<
+          TimingAnimationConfigSingle,
+          { toValue: number | AnimatedValue, useNativeDriver: boolean, ... },
+        >,
+      |};
+
   declare export type BottomTabOptions = $Shape<{|
     +title: string,
     +tabBarLabel:
@@ -1335,9 +1359,15 @@ declare module '@react-navigation/material-bottom-tabs' {
       color: string,
       size: number,
     |}) => React$Node,
+    +tabBarBadge: number | string,
+    +tabBarBadgeStyle: TextStyleProp,
     +tabBarAccessibilityLabel: string,
     +tabBarTestID: string,
     +tabBarVisible: boolean,
+    +tabBarVisibilityAnimationConfig: $Shape<{|
+      +show: TabBarVisibilityAnimationConfig,
+      +hide: TabBarVisibilityAnimationConfig,
+    |}>,
     +tabBarButton: BottomTabBarButtonProps => React$Node,
     +unmountOnBlur: boolean,
   |}>;
@@ -1435,6 +1465,7 @@ declare module '@react-navigation/material-bottom-tabs' {
     +lazy?: boolean,
     +tabBar?: BottomTabBarProps => React$Node,
     +tabBarOptions?: BottomTabBarOptions,
+    +detachInactiveScreens?: boolean,
   |};
 
   declare export type ExtraBottomTabNavigatorProps = {|
@@ -1878,6 +1909,7 @@ declare module '@react-navigation/material-bottom-tabs' {
     +drawerContentOptions?: DrawerContentOptions,
     +sceneContainerStyle?: ViewStyleProp,
     +drawerStyle?: ViewStyleProp,
+    +detachInactiveScreens?: boolean,
   |};
 
   declare export type ExtraDrawerNavigatorProps = {|

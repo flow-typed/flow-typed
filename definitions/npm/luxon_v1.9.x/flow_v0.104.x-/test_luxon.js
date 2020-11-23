@@ -573,6 +573,25 @@ if (date.equals(new Date())) {
 // $FlowExpectedError[prop-missing]
 (date.toLocaleString({ foo: "bar" }): string);
 
+(date.toRelative(): string);
+(date.toRelative({ base: date }): string);
+// $FlowExpectedError[incompatible-call]
+(date.toRelative({ base: '2020-09-01' }): string);
+(date.toRelative({ locale: "fr" }): string);
+// $FlowExpectedError[prop-missing]
+(date.toRelative({foo: 'bar'}): string);
+
+(date.toRelativeCalendar(): string);
+(date.toRelativeCalendar({ base: date }): string);
+// $FlowExpectedError[incompatible-call]
+(date.toRelativeCalendar({ base: '2020-09-01' }): string);
+(date.toRelativeCalendar({ locale: "fr" }): string);
+// $FlowExpectedError[incompatible-call]
+(date.toRelativeCalendar({ unit: "seconds" }): string);
+(date.toRelativeCalendar({ unit: "quarters" }): string);
+// $FlowExpectedError[prop-missing]
+(date.toRelativeCalendar({foo: 'bar'}): string);
+
 (date.toMillis(): number);
 
 (date.toObject().year: number);
