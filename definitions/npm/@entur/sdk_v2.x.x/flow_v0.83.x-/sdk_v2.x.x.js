@@ -725,24 +725,24 @@ declare module '@entur/sdk' {
     declare type EnturService = {|
         journeyPlannerQuery: <E>(
             queryObj: string,
-            variables?: Object,
+            variables?: {| [string]: any |},
             config?: $entur$sdk$ServiceConfig,
         ) => Promise<E>,
 
         queryJourneyPlanner: <E>(
             queryObj: string,
-            variables?: Object
+            variables?: {| [string]: any |}
         ) => Promise<E>,
 
         nsrQuery: <E>(
             queryObj: string,
-            variables?: Object,
+            variables?: {| [string]: any |},
             config?: $entur$sdk$ServiceConfig,
         ) => Promise<E>,
 
         queryNsr: <E>(
             queryObj: string,
-            variables?: Object,
+            variables?: {| [string]: any |},
         ) => Promise<E>,
 
         getFeatures: (
@@ -852,8 +852,8 @@ declare module '@entur/sdk' {
     |}
 
     declare export default function createEnturService(config: $entur$sdk$Config): EnturService
-    declare export function journeyPlannerQuery<T>(query: string, variables: Object, config: $entur$sdk$ServiceConfig): Promise<T>
-    declare export function nsrQuery<T>(query: string, variables: Object, config: $entur$sdk$ServiceConfig): Promise<T>
+    declare export function journeyPlannerQuery<T>(query: string, variables: {| [string]: any |}, config: $entur$sdk$ServiceConfig): Promise<T>
+    declare export function nsrQuery<T>(query: string, variables: {| [string]: any |}, config: $entur$sdk$ServiceConfig): Promise<T>
 
     /**
      * Constants
@@ -970,7 +970,7 @@ declare module '@entur/sdk' {
      */
     declare export function getTripPatternsQuery(params: $entur$sdk$GetTripPatternsParams): {|
         query: string,
-        variables?: Object
+        variables?: {| [string]: any |}
     |}
 
     declare export function convertFeatureToLocation(feature: $entur$sdk$Feature): $entur$sdk$Location
