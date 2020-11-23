@@ -367,12 +367,14 @@ type StyleSheetTestUtils = {|
 type Aphrodite = {
   StyleSheet: {|
     create: (
-      sheetDefinition: {|
+      sheetDefinition: {
         [key: string]: StyleObject,
-      |},
-    ) => {|
+        ...
+      },
+    ) => {
       [key: string]: SheetDefinition,
-    |},
+      ...
+    },
     rehydrate: (renderedClassNames?: Array<string>) => void,
   |},
   StyleSheetServer: StyleSheetServer,
