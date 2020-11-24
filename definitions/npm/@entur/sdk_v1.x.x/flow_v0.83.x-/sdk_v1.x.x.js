@@ -94,7 +94,7 @@ type $entur$sdk$Config = {|
     |},
     fetch?: (
         url: string,
-        init?: Object,
+        init?: any,
     ) => Promise<any>
 |}
 
@@ -109,7 +109,7 @@ type $entur$sdk$OverrideConfig = {|
     headers?: {| [string]: string |},
     fetch?: (
         url: string,
-        init?: Object,
+        init?: any,
     ) => Promise<any>
 |}
 
