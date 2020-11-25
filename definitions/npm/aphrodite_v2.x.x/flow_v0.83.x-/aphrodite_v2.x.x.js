@@ -327,9 +327,9 @@ declare module 'aphrodite' {
     ...
   };
 
-  type SelectorCallback = (selector: string) => Array<string>;
+  declare type SelectorCallback = (selector: string) => Array<string>;
 
-  type SelectorHandler = (
+  declare type SelectorHandler = (
       selector: string,
       baseSelector: string,
       callback: SelectorCallback
@@ -341,15 +341,15 @@ declare module 'aphrodite' {
     _name: string,
   |};
 
-  type MaybeSheetDefinition = SheetDefinition | false | null | void;
+  declare type MaybeSheetDefinition = SheetDefinition | false | null | void;
 
-  type InjectAndGetClassName = (
+  declare type InjectAndGetClassName = (
     useImportant: boolean,
     styleDefinitions: Array<MaybeSheetDefinition>,
     selectorHandlers: Array<SelectorHandler>,
   ) => string;
 
-  type StyleSheetServer = {|
+  declare type StyleSheetServer = {|
     renderStatic: (renderFunc: () => string) => {|
       html: string,
       css: {|
@@ -359,13 +359,13 @@ declare module 'aphrodite' {
     |}
   |};
 
-  type StyleSheetTestUtils = {|
+  declare type StyleSheetTestUtils = {|
     suppressStyleInjection: () => void,
     clearBufferAndResumeStyleInjection: () => void,
     getBufferedStyles: () => Array<string>,
   |};
 
-  type Aphrodite = {
+  declare type Aphrodite = {
     StyleSheet: {|
       create: (
         sheetDefinition: {
