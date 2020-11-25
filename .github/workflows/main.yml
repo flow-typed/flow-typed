@@ -35,5 +35,10 @@ jobs:
         with:
           node-version: ${{ matrix.node }}
 
+      - name: Before Install
+        run: |
+          git config --global user.name "Travis CI"
+          git config --global user.name "Travis CI"
+
       - name: Tests
-        run: ./travis.sh
+        run: ./build.sh
