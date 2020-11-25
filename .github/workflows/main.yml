@@ -33,8 +33,8 @@ jobs:
 
       - name: Before Install
         run: |
-          git config --global user.name "Travis CI"
-          git config --global user.name "Travis CI"
+          git config --global user.name "flow-typed CI"
+          git config --global user.email "noemail@example.com"
 
       - name: Tests
         run: ./build.sh
