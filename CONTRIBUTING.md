@@ -69,9 +69,10 @@ version range of the directiry. You MUST specify a version range with names like
 v0.106.x").
 
 If you aren't sure which versions of Flow your definition is compatible with,
-start with a very low version like `flow_v0.25.x-`, and the test runner
+start with a low version like `flow_v0.83.x-`, and the test runner
 (which we'll run in a later step) will tell us if there are problems in some
-versions of Flow.
+versions of Flow. `flow_v0.83.x-` is the version where the inexact object syntax
+was added.
 
 You may create multiple flow version directories to target different versions of
 Flow if necessary.
