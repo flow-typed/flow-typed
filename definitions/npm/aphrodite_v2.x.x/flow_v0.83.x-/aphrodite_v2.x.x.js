@@ -377,6 +377,9 @@ declare module 'aphrodite' {
         ...
       },
       rehydrate: (renderedClassNames?: Array<string>) => void,
+      extend: (Array<{|
+        selectorHandler: SelectorHandler,
+      |}>) => Aphrodite,
     |},
     StyleSheetServer: StyleSheetServerObject,
     StyleSheetTestUtils: StyleSheetTestUtilsObject,
