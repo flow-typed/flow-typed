@@ -1,12 +1,12 @@
 declare module 'react-modal' {
-  declare type ModalElementProps = {
+  declare type ModalElementProps = {|
     ref: (node: ?HTMLElement) => mixed,
     id: string,
     className: string,
-    style: { [key: string]: string | number },
-    onClick: (event: SyntheticMouseEvent<*>) => void,
-    onMouseDown: (event: SyntheticMouseEvent<*>) => void,
-  };
+    style: {| [key: string]: string | number |},
+    onClick: (event: SyntheticMouseEvent<any>) => mixed,
+    onMouseDown: (event: SyntheticMouseEvent<any>) => mixed,
+  |};
 
   declare type ModalProps = {
     isOpen?: boolean,

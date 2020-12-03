@@ -1,6 +1,6 @@
 // @flow
 
-import React from 'react';
+import * as React from 'react';
 import ReactModal from 'react-modal';
 import { describe, it } from 'flow-typed-test';
 
