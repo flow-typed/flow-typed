@@ -1,5 +1,5 @@
 declare module '@ungap/promise-all-settled' {
-  declare type SettledPromiseResult<+T> =
+  declare export type SettledPromiseResult<+T> =
     | {|
         +status: 'fulfilled',
         +value: T,
