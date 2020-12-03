@@ -1,5 +1,5 @@
 declare module 'aphrodite' {
-  declare export type StyleObject = {
+  declare type StyleObject = {
     ':active'?: StyleObject,
     ':focus'?: StyleObject,
     ':hover'?: StyleObject,
@@ -335,7 +335,7 @@ declare module 'aphrodite' {
       callback: SelectorCallback
   ) => Array<string> | string | null;
 
-  declare export type SheetDefinition = {|
+  declare type SheetDefinition = {|
     _definition: StyleObject,
     _len: number,
     _name: string,
@@ -349,7 +349,7 @@ declare module 'aphrodite' {
     selectorHandlers: Array<SelectorHandler>,
   ) => string;
 
-  declare type StyleSheetServer = {|
+  declare type StyleSheetServerObject = {|
     renderStatic: (renderFunc: () => string) => {|
       html: string,
       css: {|
@@ -359,7 +359,7 @@ declare module 'aphrodite' {
     |}
   |};
 
-  declare type StyleSheetTestUtils = {|
+  declare type StyleSheetTestUtilsObject = {|
     suppressStyleInjection: () => void,
     clearBufferAndResumeStyleInjection: () => void,
     getBufferedStyles: () => Array<string>,
@@ -378,8 +378,8 @@ declare module 'aphrodite' {
       },
       rehydrate: (renderedClassNames?: Array<string>) => void,
     |},
-    StyleSheetServer: StyleSheetServer,
-    StyleSheetTestUtils: StyleSheetTestUtils,
+    StyleSheetServer: StyleSheetServerObject,
+    StyleSheetTestUtils: StyleSheetTestUtilsObject,
     minify: (shouldMinify: boolean) => void,
     css: (...styleDefinitions: Array<MaybeSheetDefinition>) => string,
     flushToStyleTag: () => void,
