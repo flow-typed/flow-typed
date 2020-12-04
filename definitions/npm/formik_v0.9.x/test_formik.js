@@ -21,7 +21,7 @@ import {
 const config1: FormikConfig = {
   onSubmit: (values: *, formikActions: FormikActions<*>) => {}
 };
-// $ExpectError
+// $FlowExpectedError
 const configRequiresOnSubmit: FormikConfig = {
   onSubmit: null
 };

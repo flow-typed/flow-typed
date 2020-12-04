@@ -104,6 +104,7 @@ declare module "axios" {
     request<T,R>(config: AxiosXHRConfig<T,R>): AxiosPromise<T,R>;
     delete<T,R>(url: string, config?: AxiosXHRConfigBase<T,R>): AxiosPromise<T,R>;
     get<T,R>(url: string, config?: AxiosXHRConfigBase<T,R>): AxiosPromise<T,R>;
+    options<T,R>(url: string, config?: AxiosXHRConfigBase<T,R>): AxiosPromise<T,R>;
     head<T,R>(url: string, config?: AxiosXHRConfigBase<T,R>): AxiosPromise<T,R>;
     post<T,R>(
       url: string,

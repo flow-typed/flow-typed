@@ -11,7 +11,7 @@ import {
 import React from 'react';
 
 const FunctionalScreenComponent = (
-  { navigation }: { navigation: NavigationScreenProp<*> },
+  { navigation }: { navigation: NavigationScreenProp<*>, ... },
 ) => {
   return "Test";
 };
@@ -45,5 +45,5 @@ const fakeNavigateAction = {
   fake: "Navigation/NAVIGATE",
   blah: "Test1",
 };
-// $ExpectError not a valid action!
+// $FlowFixMe[incompatible-call] not a valid action!
 tabRouter.getStateForAction(fakeNavigateAction, null);

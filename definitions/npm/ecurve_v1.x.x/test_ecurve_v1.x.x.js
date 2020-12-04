@@ -13,7 +13,7 @@ var n = new BigInteger('1');
 var h = new BigInteger('1');
 (new Curve(pi, a, b, Gx, Gy, n, h): Curve);
 
-// $ExpectError
+// $FlowExpectedError
 (new Curve(pi, b, Gx, Gy, n, h): Curve);
 
 var curve: Curve = new Curve(pi, a, b, Gx, Gy, n, h); 
@@ -23,9 +23,9 @@ var curve: Curve = new Curve(pi, a, b, Gx, Gy, n, h);
 (curve.n: BigInteger);
 (curve.h: BigInteger);
 
-// $ExpectError
+// $FlowExpectedError
 (curve.Gx: BigInteger);
-// $ExpectError
+// $FlowExpectedError
 (curve.Gy: BigInteger);
 
 (curve.G: Point);
@@ -34,21 +34,21 @@ var curve: Curve = new Curve(pi, a, b, Gx, Gy, n, h);
 var p: Point = curve.G;
 
 (curve.isInfinity(p): boolean);
-// $ExpectError
+// $FlowExpectedError
 (p.isInfinity(curve): boolean);
 
 (curve.G.multiply(a): Point);
 
-// $ExpectError
+// $FlowExpectedError
 (curve.G.multiply(a): BigInteger);
 
-// $ExpectError
+// $FlowExpectedError
 (curve.G.multiply(p): Point);
 
 (getCurveByName("name"): ?Curve);
 
-// $ExpectError
+// $FlowExpectedError
 (getCurveByName("name"): Curve);
 
-// $ExpectError
+// $FlowExpectedError
 (Curve.getCurveByName("name"): Curve);

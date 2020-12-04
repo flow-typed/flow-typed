@@ -155,6 +155,7 @@ declare module 'react-navigation' {
   declare export type NavigationPopToTopAction = {|
     +type: 'Navigation/POP_TO_TOP',
     +immediate?: boolean,
+    +key?: string,
   |};
   declare export type NavigationPushAction = {|
     +type: 'Navigation/PUSH',
@@ -429,7 +430,7 @@ declare module 'react-navigation' {
     headerTitleAllowFontScaling?: boolean,
     headerTintColor?: string,
     headerLeft?: React$Node | React$ElementType,
-    headerBackTitle?: string,
+    headerBackTitle?: ?string,
     headerBackImage?: React$Node | React$ElementType,
     headerTruncatedBackTitle?: string,
     headerBackTitleStyle?: TextStyleProp,
@@ -597,7 +598,7 @@ declare module 'react-navigation' {
       fallback?: $ElementType<
         $PropertyType<
           {|
-            ...{| params: {| [ParamName]: void |} |},
+            ...{| params: { } |},
             ...$Exact<S>,
           |},
           'params'
@@ -607,7 +608,7 @@ declare module 'react-navigation' {
     ) => $ElementType<
       $PropertyType<
         {|
-          ...{| params: {| [ParamName]: void |} |},
+          ...{| params: { } |},
           ...$Exact<S>,
         |},
         'params'
@@ -889,6 +890,7 @@ declare module 'react-navigation' {
     }) => NavigationPopAction,
     popToTop: (payload: {
       immediate?: boolean,
+      key?: string,
     }) => NavigationPopToTopAction,
     push: (payload: {
       routeName: string,
@@ -1003,6 +1005,7 @@ declare module 'react-navigation' {
     style?: ViewStyleProp,
     useNativeAnimations?: boolean,
     drawerBackgroundColor?: string,
+    overlayColor?: string,
     screenProps?: {},
   |};
   declare type _DrawerNavigatorConfig = $Exact<{

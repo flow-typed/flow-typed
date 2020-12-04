@@ -10,20 +10,20 @@ signal.dispatch("string");
 
 signal.add(() => {
 });
-// $ExpectError
+// $FlowExpectedError
 signal.add(null);
 
-// $ExpectError number. this.type is incompatible with boolean
+// $FlowExpectedError number. this.type is incompatible with boolean
 var resultActive: number = signal.active;
 var result2Active: boolean = signal.active;
 
-// $ExpectError number. this.type is incompatible with boolean
+// $FlowExpectedError number. this.type is incompatible with boolean
 var resultMemorize: number = signal.memorize;
 var result2Memorize: boolean = signal.memorize;
 
 signal.addOnce(() => {
 });
-// $ExpectError
+// $FlowExpectedError
 signal.addOnce(11);
 
 signal.dispose();
@@ -31,24 +31,24 @@ signal.dispose();
 signal.forget();
 
 var resultNum: number = signal.getNumListeners();
-// $ExpectError
+// $FlowExpectedError
 var resul2Num: string = signal.getNumListeners();
 
 signal.halt();
 
 var resultHas: boolean = signal.has(listener);
-// $ExpectError
+// $FlowExpectedError
 var resul2Has: string = signal.has(listener);
-// $ExpectError
+// $FlowExpectedError
 signal.has();
 
 signal.remove(listener);
-// $ExpectError
+// $FlowExpectedError
 signal.remove(10);
 
 signal.removeAll();
 
 var resulString: string = signal.toString();
-// $ExpectError
+// $FlowExpectedError
 var result2String: boolean = signal.toString();
 

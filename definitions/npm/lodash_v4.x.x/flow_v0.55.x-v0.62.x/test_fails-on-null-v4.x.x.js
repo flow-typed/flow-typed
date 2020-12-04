@@ -25,49 +25,49 @@ import unzip from "lodash/unzip";
 // These tests are generated with modified script from this issue:
 // https://github.com/flowtype/flow-typed/issues/1639
 
-//$ExpectError
+//$FlowExpectedError
 after(null, null);
-//$ExpectError
+//$FlowExpectedError
 ary(null, null, null);
-//$ExpectError
+//$FlowExpectedError
 before(null, null);
-//$ExpectError
+//$FlowExpectedError
 bind();
-//$ExpectError
+//$FlowExpectedError
 curry(null, null, null);
-//$ExpectError
+//$FlowExpectedError
 curryRight(null, null, null);
-//$ExpectError
+//$FlowExpectedError
 debounce(null, null, null);
-//$ExpectError
+//$FlowExpectedError
 defer();
-//$ExpectError
+//$FlowExpectedError
 delay();
-//$ExpectError
+//$FlowExpectedError
 flip(null);
-//$ExpectError
+//$FlowExpectedError
 memoize(null, null);
-//$ExpectError
+//$FlowExpectedError
 negate(null);
-//$ExpectError
+//$FlowExpectedError
 once(null);
-//$ExpectError
+//$FlowExpectedError
 partial(null, null);
-//$ExpectError
+//$FlowExpectedError
 partialRight(null, null);
-//$ExpectError
+//$FlowExpectedError
 rearg(null, null);
-//$ExpectError
+//$FlowExpectedError
 rest(null, null);
-//$ExpectError
+//$FlowExpectedError
 spread(null, null);
-//$ExpectError
+//$FlowExpectedError
 tap(null, null);
-//$ExpectError
+//$FlowExpectedError
 throttle(null, null, null);
-//$ExpectError
+//$FlowExpectedError
 thru(null, null);
-//$ExpectError
+//$FlowExpectedError
 unary(null);
-//$ExpectError
+//$FlowExpectedError
 unzip(null);

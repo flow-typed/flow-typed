@@ -21,15 +21,15 @@ import type {
   WithTheme,
 } from "@material-ui/core";
 
-// $ExpectError invalid color value.
+// $FlowExpectedError invalid color value.
 let appBar = <AppBar color="black" />;
 
 let button1 = <Button>Click me!</Button>;
 
-// $ExpectError invalid property value.
+// $FlowExpectedError invalid property value.
 let button2 = <Button disableRipple={3} />;
 
-// $ExpectError invalid variant
+// $FlowExpectedError invalid variant
 let typography1 = <Typography variant="wrong" />;
 let typography2 = <Typography variant="headline" />;
 
@@ -53,7 +53,7 @@ const StyledTestComponent = withStyles(styles)(TestComponent);
 
 function renderStyledTestComponentWithError () {
   return (
-    // $ExpectError is missing required prop
+    // $FlowExpectedError is missing required prop
     <StyledTestComponent />
   )
 }
@@ -100,7 +100,7 @@ const StyledWithThemeAndRequiredPropTestComponent = withTheme()(withStyles(style
 
 function renderStyledWithThemeAndRequiredPropTestComponent () {
   return (
-    // $ExpectError missing required prop "requiredProp"
+    // $FlowExpectedError missing required prop "requiredProp"
     <StyledWithThemeAndRequiredPropTestComponent />
   )
 }
@@ -134,7 +134,7 @@ function renderTestComponentWithSpecifiedDefaultProps () {
 // test CircularProgress props "color" and "variant"
 let circularProgress1 = <CircularProgress color="secondary" variant="static" />;
 
-// $ExpectError "black" is not a valid value for the prop "color"
+// $FlowExpectedError "black" is not a valid value for the prop "color"
 let circularProgress2 = <CircularProgress color="black" />;
 
 // test Theme, Breakpoints and Spacing definitions
@@ -151,7 +151,7 @@ const useExistingThemeProps = (theme: Theme) => ({
 // test that our Theme definition forbids access to non-existent properties
 const useNonExistentThemeProps = (theme: Theme) => ({
   root: {
-    // $ExpectError no property 'wigglywoo' in Theme
+    // $FlowExpectedError no property 'wigglywoo' in Theme
     margin: `${theme.wigglywoo}px auto`,
   }
 });
@@ -166,7 +166,7 @@ const withStylesValidOptions = () => (
 
 // withStyles test invalid options
 const withStylesInvalidOptions = () => (
-  // $ExpectError no property 'wigglywoo' in WithStylesOptions
+  // $FlowExpectedError no property 'wigglywoo' in WithStylesOptions
   withStyles({}, {
     wigglywoo: 42,
   })(TestComponent)
@@ -221,7 +221,7 @@ const customPaletteColors = () => {
 const invalidPaletteColors = () => (
   createMuiTheme({
     palette: {
-      // $ExpectError no property 'realdark' on SimplePaletteColorOptions
+      // $FlowExpectedError no property 'realdark' on SimplePaletteColorOptions
       primary: {
         main: '#cecece',
         realDark: '#000000',
@@ -233,22 +233,22 @@ const invalidPaletteColors = () => (
 // createMuiTheme test invalid nested options
 const createMuiCustomThemeInvalidNestedOptions = () => (
   createMuiTheme({
-    // $ExpectError no property 'wigglywoo' in BreakpointsOptions
+    // $FlowExpectedError no property 'wigglywoo' in BreakpointsOptions
     breakpoints: {
       wigglywoo: 42,
     },
-    // $ExpectError no property 'wigglywoo' in MixinsOptions
+    // $FlowExpectedError no property 'wigglywoo' in MixinsOptions
     mixins: {
       wigglywoo: 42,
     },
     palette: {
-      // $ExpectError no property 'realdark' on SimplePaletteColorOptions
+      // $FlowExpectedError no property 'realdark' on SimplePaletteColorOptions
       primary: {
         main: '#cecece',
         realDark: '#000000',
       }
     },
-    // $ExpectError no property 'wigglywoo' in SpacingOptions
+    // $FlowExpectedError no property 'wigglywoo' in SpacingOptions
     spacing: {
       wigglywoo: 42,
     },
@@ -279,7 +279,7 @@ function renderResponsiveComponent () {
 
 function renderResponsiveComponentWithError () {
   return (
-    // $ExpectError is missing required prop
+    // $FlowExpectedError is missing required prop
     <ResponsiveComponent />
   )
 }
@@ -292,7 +292,7 @@ function renderChainedWithMobileComponent () {
     [
       // doesn't require the prop "fullScreen"
       <ChainedWithMobileComponent requiredProp='test' />,
-      // $ExpectError - but still requires other defined props
+      // $FlowExpectedError - but still requires other defined props
       <ChainedWithMobileComponent />
     ]
   )

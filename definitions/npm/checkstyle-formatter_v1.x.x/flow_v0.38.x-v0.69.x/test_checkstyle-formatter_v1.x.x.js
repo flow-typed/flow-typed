@@ -20,11 +20,11 @@ const results = [
 
 const output: string = checkstyleFormatter(results);
 
-// $ExpectError
+// $FlowExpectedError
 const n: number = checkstyleFormatter(results);
 
 const wrongResultFormat1 = [
-  // $ExpectError
+  // $FlowExpectedError
   {
     filename: "foo.js",
     messages: ""
@@ -36,10 +36,10 @@ checkstyleFormatter(wrongResultFormat1);
 const wrongResultFormat2 = [
   {
     filename: "foo.js",
-    // $ExpectError
+    // $FlowExpectedError
     messages: [{ line: 1, column: 2, severity: "unknown" }]
   }
 ];
 
-// $ExpectError
+// $FlowExpectedError
 checkstyleFormatter(wrongResultFormat2);

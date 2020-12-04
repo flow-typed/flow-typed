@@ -1427,7 +1427,7 @@ const basicAuth: SwaggerSchema.Spec = {
   'security': [{basicAuth: []}]
 };
 
-// $ExpectError
+// $FlowExpectedError
 const wrongSchema: SwaggerSchema.Spec = {
   'info': {
     'title': 'Simple API overview',
@@ -1443,7 +1443,7 @@ const wrongPaths: SwaggerSchema.Spec = {
   },
   'paths': {
     '/': {
-      // $ExpectError
+      // $FlowExpectedError
       'get': {
         'operationId': 'listVersionsv2',
         'summary': 'List API versions - No responses',

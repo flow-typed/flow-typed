@@ -3,17 +3,17 @@ import isRelativeUrl from 'is-relative-url';
 isRelativeUrl('any-string');
 (isRelativeUrl('any-string'): boolean);
 
-// $ExpectError
+// $FlowExpectedError
 isRelativeUrl(4);
 
-// $ExpectError
+// $FlowExpectedError
 isRelativeUrl({});
 
-// $ExpectError
+// $FlowExpectedError
 isRelativeUrl();
 
-// $ExpectError
+// $FlowExpectedError
 isRelativeUrl(null);
 
-// $ExpectError
+// $FlowExpectedError
 (isRelativeUrl('any-string'): number);

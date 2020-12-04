@@ -21,12 +21,12 @@ describe("The `A11yDialog` constructor", () => {
   });
 
   it("should error when passing erroneous parameters", () => {
-    // $ExpectError
+    // $FlowExpectedError
     new A11yDialog("");
-    // $ExpectError
+    // $FlowExpectedError
     new A11yDialog(true, true);
     if (el instanceof HTMLElement) {
-      // $ExpectError
+      // $FlowExpectedError
       new A11yDialog(el, true);
     }
   });
@@ -42,7 +42,7 @@ describe("The `create` method", () => {
   });
 
   it("should error when passing erroneous parameters", () => {
-    // $ExpectError
+    // $FlowExpectedError
     dialog.create(true);
   });
 });
@@ -59,7 +59,7 @@ describe("The `show` method", () => {
   });
 
   it("should error when passing erroneous parameters", () => {
-    // $ExpectError
+    // $FlowExpectedError
     dialog.show("");
   });
 });
@@ -76,7 +76,7 @@ describe("The `hide` method", () => {
   });
 
   it("should error when passing erroneous parameters", () => {
-    // $ExpectError
+    // $FlowExpectedError
     dialog.hide("");
   });
 });
@@ -87,7 +87,7 @@ describe("The `destroy` method", () => {
   });
 
   it("should error when passing erroneous parameters", () => {
-    // $ExpectError
+    // $FlowExpectedError
     dialog.create(true);
   });
 });
@@ -113,18 +113,18 @@ describe("The `on` method", () => {
   });
 
   it("should error when passing erroneous parameters", () => {
-    // $ExpectError
+    // $FlowExpectedError
     dialog.on(() => {});
-    // $ExpectError
+    // $FlowExpectedError
     dialog.on("");
-    // $ExpectError
+    // $FlowExpectedError
     dialog.on("foobar");
-    // $ExpectError
+    // $FlowExpectedError
     dialog.on("show", true);
   });
 
   it("should error on missing parameters", () => {
-    // $ExpectError
+    // $FlowExpectedError
     dialog.on("show");
   });
 });
@@ -150,18 +150,18 @@ describe("The `off` method", () => {
   });
 
   it("should error when passing erroneous parameters", () => {
-    // $ExpectError
+    // $FlowExpectedError
     dialog.off(() => {});
-    // $ExpectError
+    // $FlowExpectedError
     dialog.off("");
-    // $ExpectError
+    // $FlowExpectedError
     dialog.off("foobar");
-    // $ExpectError
+    // $FlowExpectedError
     dialog.off("show", true);
   });
 
   it("should error on missing parameters", () => {
-    // $ExpectError
+    // $FlowExpectedError
     dialog.off("show");
   });
 });

@@ -19,15 +19,15 @@ trigger("c");
 
 mousetrap.stopCallback = (e, element, combo) => false;
 
-// $ExpectError - Bind to what?
+// $FlowExpectedError - Bind to what?
 bind("c");
-// $ExpectError - Bind what?
+// $FlowExpectedError - Bind what?
 bind(e => true);
-// $ExpectError - key has to be string or Array<string>
+// $FlowExpectedError - key has to be string or Array<string>
 bind(1, e => true);
-// $ExpectError
+// $FlowExpectedError
 unbind(1);
-// $ExpectError
+// $FlowExpectedError
 trigger(1);
-// $ExpectError
+// $FlowExpectedError
 mousetrap.stopCallback = (e, element, combo) => 123;

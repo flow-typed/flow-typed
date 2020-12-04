@@ -3,21 +3,28 @@
 import {fs} from '../lib/node';
 
 import {getNpmLibDefs} from '../lib/npm/npmLibDefs';
+import typeof Yargs from 'yargs';
 
-export const name = 'validate-defs';
+export const name = 'validate-defs <definitionsDirPath>';
 export const description = 'Validate the structure of the /definitions dir';
 export type Args = {
-  _: Array<string>,
+  definitionsDirPath: mixed, // string
 };
-export async function run(args: Args) {
-  if (args._.length !== 2) {
-    console.error(
+
+export function setup(yargs: Yargs) {
+  return yargs.positional('definitionsDirPath', {
+    describe:
       'Please specify the path of the /definitions directory to be validated ' +
-        'as the first arg of this command.',
-    );
-    return 1;
+      'as the first arg of this command.',
+    type: 'string',
+  });
+}
+
+export async function run(args: Args) {
+  const defsDirPath = args.definitionsDirPath;
+  if (typeof defsDirPath !== 'string') {
+    throw new Error('definitionsDirPath should be a string');
   }
-  const defsDirPath = args._[1];
 
   if (!(await fs.exists(defsDirPath))) {
     console.error('Error: Path does not exist: %s', defsDirPath);

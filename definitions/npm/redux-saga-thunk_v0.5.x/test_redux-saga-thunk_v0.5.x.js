@@ -28,11 +28,11 @@ hasFailed(state, ["FOO", "BAR"]);
 isDone(state, ["FOO", "BAR"]);
 isComplete(state, ["FOO", "BAR"]);
 
-// $ExpectError
+// $FlowExpectedError
 isPending(state, 2);
-// $ExpectError
+// $FlowExpectedError
 hasFailed(state, 2);
-// $ExpectError
+// $FlowExpectedError
 isDone(state, 2);
-// $ExpectError
+// $FlowExpectedError
 isComplete(state, 2);

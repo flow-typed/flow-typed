@@ -66,7 +66,7 @@ const Attrs1: ReactComponentStyledTaggedTemplateLiteral<*> = styled.section.attr
   testProp: 'foo'
 });
 
-// $ExpectError
+// $FlowExpectedError
 const Attrs1Error: ReactComponentStyledTaggedTemplateLiteral<*> = styled.section.attrs({
   testProp: 'foo'
 })``;
@@ -76,7 +76,7 @@ declare var needsString: string => void
 needsReactComponentFunctional(styled.section.attrs({})``)
 needsReactComponentClass(styled.section.attrs({})``)
 
-// $ExpectError
+// $FlowExpectedError
 needsString(styled.section.attrs({})``)
 
 const Attrs2: ReactComponentStyledTaggedTemplateLiteral<*> = styled.section
@@ -119,9 +119,9 @@ const theme: Theme = {
 const withComponent1: ReactComponentStyled<*> = styled.div.withComponent('a');
 const withComponent2: ReactComponentStyled<*> = styled.div.withComponent(withComponent1);
 const withComponent3: ReactComponentStyled<*> = styled.div.withComponent(Attrs3Class);
-// $ExpectError
+// $FlowExpectedError
 const withComponentError1: ReactComponentStyled<*> = styled.div.withComponent(0);
-// $ExpectError
+// $FlowExpectedError
 const withComponentError2: ReactComponentStyled<*> = styled.div.withComponent('NotHere');
 
 // ---- WithTheme ----
@@ -148,7 +148,7 @@ const OpacityKeyFrame: string = keyframes`
   100% { opacity: 1; }
 `;
 
-// $ExpectError
+// $FlowExpectedError
 const NoExistingElementWrapper = styled.nonexisting`
   padding: 4em;
   background: papayawhip;
@@ -156,13 +156,13 @@ const NoExistingElementWrapper = styled.nonexisting`
 
 const num: 9 = 9
 
-// $ExpectError
+// $FlowExpectedError
 const NoExistingComponentWrapper = styled()`
   padding: 4em;
   background: papayawhip;
 `;
 
-// $ExpectError
+// $FlowExpectedError
 const NumberWrapper = styled(num)`
   padding: 4em;
   background: papayawhip;
@@ -199,19 +199,19 @@ const StyledClass: ReactComponentClass<{ foo: string, theme: Theme }> = styled(N
 
 const NeedsFoo1Class: ReactComponentClass<{ foo: string }, { theme: Theme }> = withTheme(NeedsThemeReactClass);
 
-// $ExpectError
+// $FlowExpectedError
 const NeedsFoo0ClassError: ReactComponentClass<{ foo: string }> = withTheme(ReactClass);
-// $ExpectError
+// $FlowExpectedError
 const NeedsFoo1ClassError: ReactComponentClass<{ foo: string }> = withTheme(NeedsFoo1Class);
-// $ExpectError
+// $FlowExpectedError
 const NeedsFoo1ErrorClass: ReactComponentClass<{ foo: number }> = withTheme(NeedsThemeReactClass);
-// $ExpectError
+// $FlowExpectedError
 const NeedsFoo2ErrorClass: ReactComponentClass<{ foo: string }, { theme: string }> = withTheme(NeedsThemeReactClass);
-// $ExpectError
+// $FlowExpectedError
 const NeedsFoo3ErrorClass: ReactComponentClass<{ foo: string, theme: Theme }> = withTheme(NeedsFoo1Class);
-// $ExpectError
+// $FlowExpectedError
 const NeedsFoo4ErrorClass: ReactComponentClass<{ foo: number }> = withTheme(NeedsFoo1Class);
-// $ExpectError
+// $FlowExpectedError
 const NeedsFoo5ErrorClass: ReactComponentClass<{ foo: string, theme: string }> = withTheme(NeedsFoo1Class);
 
 // ---- INTERPOLATION TESTS ----
@@ -219,7 +219,7 @@ const interpolation: Array<Interpolation> = styled.css`
   background-color: red;
 `;
 
-// $ExpectError
+// $FlowExpectedError
 const interpolationError: Array<Interpolation | boolean> = styled.css`
   background-color: red;
 `;
@@ -230,7 +230,7 @@ const defaultComponent: ReactComponentIntersection<{}> = styled.div`
   background-color: red;
 `;
 
-// $ExpectError
+// $FlowExpectedError
 const defaultComponentError: {} => string = styled.div`
   background-color: red;
 `;
@@ -241,7 +241,7 @@ const FunctionalComponent: ReactComponentFunctional<{ foo: string, theme: Theme 
 const NeedsFoo1: ReactComponentFunctional<{ foo: string, theme: Theme }> = styled(FunctionalComponent)`
   background-color: red;
 `;
-// $ExpectError
+// $FlowExpectedError
 const NeedsFoo1Error: ReactComponentFunctional<{ foo: number }> = styled(FunctionalComponent)`
   background-color: red;
 `;
@@ -249,7 +249,7 @@ const NeedsFoo1Error: ReactComponentFunctional<{ foo: number }> = styled(Functio
 const NeedsFoo2: ReactComponentFunctional<{ foo: string, theme: Theme }> = styled(NeedsFoo1)`
   background-color: red;
 `;
-// $ExpectError
+// $FlowExpectedError
 const NeedsFoo2Error: ReactComponentFunctional<{ foo: number }> = styled(NeedsFoo1)`
   background-color: red;
 `;
@@ -258,15 +258,15 @@ const NeedsFoo2Error: ReactComponentFunctional<{ foo: number }> = styled(NeedsFo
 const NeedsFoo1Functional: ReactComponentFunctional<{ foo: string }> = withTheme(FunctionalComponent);
 const NeedsFoo2Functional: ReactComponentFunctional<{ foo: string }> = withTheme(NeedsFoo1Functional);
 
-// $ExpectError
+// $FlowExpectedError
 const NeedsFoo1ErrorFunctional: ReactComponentFunctional<{ foo: number }> = withTheme(FunctionalComponent);
-// $ExpectError
+// $FlowExpectedError
 const NeedsFoo2ErrorFunctional: ReactComponentFunctional<{ foo: string }, { theme: string }> = withTheme(FunctionalComponent);
-// $ExpectError
+// $FlowExpectedError
 const NeedsFoo3ErrorFunctional: ReactComponentFunctional<{ foo: number, theme: Theme }> = withTheme(FunctionalComponent);
-// $ExpectError
+// $FlowExpectedError
 const NeedsFoo4ErrorFunctional: ReactComponentFunctional<{ foo: number }> = withTheme(NeedsFoo1Functional);
-// $ExpectError
+// $FlowExpectedError
 const NeedsFoo5ErrorFunctional: ReactComponentFunctional<{ foo: string }, { theme: string }> = withTheme(NeedsFoo1Functional);
-// $ExpectError
+// $FlowExpectedError
 const NeedsFoo6ErrorFunctional: ReactComponentFunctional<{ foo: number }, { theme: Theme }> = withTheme(NeedsFoo1Functional);

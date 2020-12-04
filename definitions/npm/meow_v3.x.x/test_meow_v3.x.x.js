@@ -39,12 +39,12 @@ if (cli.flags.rainbow) {
   cli.showHelp();
 }
 
-// $ExpectError
+// $FlowExpectedError
 meow(42, {
   alias: {
     r: 'rainbow'
   }
 });
 
-// $ExpectError
+// $FlowExpectedError
 meow('asdf', 42);

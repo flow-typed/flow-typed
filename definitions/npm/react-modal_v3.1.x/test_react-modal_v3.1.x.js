@@ -5,93 +5,85 @@ import ReactModal from 'react-modal';
 
 ReactModal.setAppElement('#foo');
 ReactModal.setAppElement(document.body);
-// $ExpectError
+// $FlowExpectedError[incompatible-call]
 ReactModal.setAppElement(1);
 
 <ReactModal />;
 
 <ReactModal isOpen />;
-// $ExpectError
+// $FlowExpectedError[incompatible-type]
 <ReactModal isOpen={1} />;
 
 <ReactModal portalClassName="foo" />;
-// $ExpectError
+// $FlowExpectedError[incompatible-type]
 <ReactModal portalClassName={1} />;
 
 <ReactModal bodyOpenClassName="foo" />;
-// $ExpectError
+// $FlowExpectedError[incompatible-type]
 <ReactModal bodyOpenClassName={1} />;
 
 <ReactModal ariaHideApp />;
-// $ExpectError
+// $FlowExpectedError[incompatible-type]
 <ReactModal ariaHideApp={1} />;
 
 <ReactModal closeTimeoutMS={10} />;
-// $ExpectError
+// $FlowExpectedError[incompatible-type]
 <ReactModal closeTimeoutMS />;
 
 <ReactModal shouldFocusAfterRender />;
-// $ExpectError
+// $FlowExpectedError[incompatible-type]
 <ReactModal shouldFocusAfterRender={1} />;
 
 <ReactModal shouldCloseOnEsc />;
-// $ExpectError
+// $FlowExpectedError[incompatible-type]
 <ReactModal shouldCloseOnEsc={1} />;
 
 <ReactModal shouldCloseOnOverlayClick />;
-// $ExpectError
+// $FlowExpectedError[incompatible-type]
 <ReactModal shouldCloseOnOverlayClick={1} />;
 
 <ReactModal shouldReturnFocusAfterClose />;
-// $ExpectError
+// $FlowExpectedError[incompatible-type]
 <ReactModal shouldReturnFocusAfterClose={1} />;
 
-// $ExpectError
+// $FlowExpectedError[incompatible-type]
 <ReactModal parentSelector={1} />;
 
 <ReactModal style={{}} />;
-<ReactModal style={{
-  content: {}
-}} />;
-<ReactModal style={{
-  overlay: {}
-}} />;
-// $ExpectError
-<ReactModal style={{
-  content: 1
-}} />;
-// $ExpectError
-<ReactModal style={{
-  overlay: 1
-}} />;
+<ReactModal style={{ content: {} }} />;
+<ReactModal style={{ overlay: {} }} />;
+// $FlowExpectedError[incompatible-type]
+<ReactModal style={{ content: 1 }} />;
+// $FlowExpectedError[incompatible-type]
+<ReactModal style={{ overlay: 1 }} />;
 
 <ReactModal appElement={document.body} />;
 <ReactModal appElement="#foo" />;
-// $ExpectError
+// $FlowExpectedError[incompatible-type]
 <ReactModal appElement={1} />;
 
 <ReactModal onAfterOpen={() => { }} />;
 <ReactModal onAfterOpen={async () => { }} />;
-// $ExpectError
+// $FlowExpectedError[incompatible-type]
 <ReactModal onAfterOpen={1} />;
 
 <ReactModal onRequestClose={() => { }} />;
 <ReactModal onRequestClose={e => { }} />;
-// $ExpectError
+// $FlowExpectedError[incompatible-type]
 <ReactModal onRequestClose={1} />;
 
 <ReactModal role="foo" />;
-// $ExpectError
+// $FlowExpectedError[incompatible-type]
 <ReactModal role={1} />;
 
 <ReactModal contentLabel="foo" />;
-// $ExpectError
+// $FlowExpectedError[incompatible-type]
 <ReactModal contentLabel={1} />;
 
 <ReactModal aria={{
   labelledby: 'foo'
 }} />;
-// $ExpectError
+// $FlowExpectedError[incompatible-type]
 <ReactModal aria={1} />;
 
 <ReactModal className="foo" />;
@@ -100,7 +92,7 @@ ReactModal.setAppElement(1);
   afterOpen: "foo",
   beforeClose: "foo"
 }} />;
-// $ExpectError
+// $FlowExpectedError[incompatible-type]
 <ReactModal className={1} />;
 
 <ReactModal overlayClassName="foo" />;
@@ -109,5 +101,5 @@ ReactModal.setAppElement(1);
   afterOpen: "foo",
   beforeClose: "foo"
 }} />;
-// $ExpectError
+// $FlowExpectedError[incompatible-type]
 <ReactModal overlayClassName={1} />;

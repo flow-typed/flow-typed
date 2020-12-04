@@ -5,7 +5,7 @@ jest.autoMockOff();
 jest.clearAllMocks();
 jest.resetAllMocks();
 
-// $ExpectError property `atoMockOff` not found in object type
+// $FlowExpectedError property `atoMockOff` not found in object type
 jest.atoMockOff();
 
 const mockFn = jest.fn();
@@ -27,10 +27,10 @@ mockFn("a");
 expect("someVal").toBeCalled();
 expect("someVal").toBeCalledWith("a");
 
-// $ExpectError property `toHaveBeeenCalledWith` not found in object type
+// $FlowExpectedError property `toHaveBeeenCalledWith` not found in object type
 expect("someVal").toHaveBeeenCalledWith("a");
 
-// $ExpectError property `fn` not found in Array
+// $FlowExpectedError property `fn` not found in Array
 mockFn.mock.calls.fn();
 
 describe("name", () => {});
@@ -41,12 +41,12 @@ test("test", () => expect("foo").toMatchSnapshot());
 test.only("test", () => expect("foo").toMatchSnapshot());
 test.skip("test", () => expect("foo").toMatchSnapshot());
 
-// $ExpectError property `fonly` not found in object type
+// $FlowExpectedError property `fonly` not found in object type
 test.fonly("test", () => expect("foo").toMatchSnapshot());
 
 xtest("test", () => {});
 
-// $ExpectError property `bar` not found in object type
+// $FlowExpectedError property `bar` not found in object type
 expect.bar();
 
 expect.extend({
@@ -59,8 +59,8 @@ expect.extend({
 });
 
 expect.extend({
+  // $FlowExpectedError property `pass` not found in object literal
   foo(actual, expected) {
-    // $ExpectError property `pass` not found in object literal
     return {};
   }
 });
@@ -118,7 +118,7 @@ expect([1, 2, 3]).toHaveLength(3);
  *  Plugin: jest-enzyme
  */
 
-// $ExpectError
+// $FlowExpectedError
 import { shallow } from "enzyme";
 const Dummy = () => <div />;
 const wrapper = shallow(<Dummy />);
@@ -132,78 +132,87 @@ expect(wrapper).toBeEmpty();
 expect(wrapper).toBePresent();
 
 expect(wrapper).toContainReact(<Dummy />);
-// $ExpectError
+// $FlowExpectedError
 expect(wrapper).toContainReact();
-// $ExpectError
+// $FlowExpectedError
 expect(wrapper).toContainReact("string");
 
 expect(wrapper).toHaveClassName("class");
-// $ExpectError
+// $FlowExpectedError
 expect(wrapper).toHaveClassName();
-// $ExpectError
+// $FlowExpectedError
 expect(wrapper).toHaveClassName(true);
 
 expect(wrapper).toHaveHTML("<span>test</span>");
-// $ExpectError
+// $FlowExpectedError
 expect(wrapper).toHaveHTML();
-// $ExpectError
+// $FlowExpectedError
 expect(wrapper).toHaveHTML(true);
 
 expect(wrapper).toHaveProp("test");
 expect(wrapper).toHaveProp("test", "test");
-// $ExpectError
+// $FlowExpectedError
 expect(wrapper).toHaveProp();
-// $ExpectError
+// $FlowExpectedError
 expect(wrapper).toHaveProp(true);
 
 expect(wrapper).toHaveRef("test");
-// $ExpectError
+// $FlowExpectedError
 expect(wrapper).toHaveRef();
-// $ExpectError
+// $FlowExpectedError
 expect(wrapper).toHaveRef(true);
 
 expect(wrapper).toHaveState("test");
 expect(wrapper).toHaveState("test", "test");
-// $ExpectError
+// $FlowExpectedError
 expect(wrapper).toHaveState();
-// $ExpectError
+// $FlowExpectedError
 expect(wrapper).toHaveState(true);
 
 expect(wrapper).toHaveStyle("color");
 expect(wrapper).toHaveStyle("color", "#ccc");
-// $ExpectError
+// $FlowExpectedError
 expect(wrapper).toHaveStyle();
-// $ExpectError
+// $FlowExpectedError
 expect(wrapper).toHaveStyle(true);
 
 expect(wrapper).toHaveTagName("marquee");
-// $ExpectError
+// $FlowExpectedError
 expect(wrapper).toHaveTagName();
-// $ExpectError
+// $FlowExpectedError
 expect(wrapper).toHaveTagName(true);
 
 expect(wrapper).toHaveText("test");
-// $ExpectError
+// $FlowExpectedError
 expect(wrapper).toHaveText();
-// $ExpectError
+// $FlowExpectedError
 expect(wrapper).toHaveText(true);
 
 expect(wrapper).toIncludeText("test");
-// $ExpectError
+// $FlowExpectedError
 expect(wrapper).toIncludeText();
-// $ExpectError
+// $FlowExpectedError
 expect(wrapper).toIncludeText(true);
 
 expect(wrapper).toHaveValue("test");
 
 expect(wrapper).toMatchElement(<Dummy />);
-// $ExpectError
+// $FlowExpectedError
 expect(wrapper).toMatchElement();
-// $ExpectError
+// $FlowExpectedError
 expect(wrapper).toMatchElement(true);
 
 expect(wrapper).toMatchSelector("span");
-// $ExpectError
+// $FlowExpectedError
 expect(wrapper).toMatchSelector();
-// $ExpectError
+// $FlowExpectedError
 expect(wrapper).toMatchSelector(true);
+
+{
+  // Type hint becomes the returned type
+  const FooModule1: string = jest.requireActual<string>('FooModule');
+  // $ExpectError Type hint becomes the returned type
+  const FooModule2: number = jest.requireActual<string>('FooModule');
+  // No type hint means we return any
+  const FooModule3: boolean = jest.requireActual('FooModule');
+}

@@ -14,7 +14,7 @@ queue.keyPrefix;
 queue.jobs;
 queue.paused;
 queue.settings;
-// $ExpectError
+// $FlowExpectedError
 queue.bogus;
 
 queue.getJob(3, (err, job) => console.log(`Job 3 has status ${job.status}`));
@@ -75,7 +75,7 @@ job
 job.save().then(_job => console.log(`Job ${_job.id} was saved`));
 
 job.on("succeeded", result => {});
-// $ExpectError
+// $FlowExpectedError
 job.on("missing event handler");
 
 job.remove(err => console.log("Job was removed"));

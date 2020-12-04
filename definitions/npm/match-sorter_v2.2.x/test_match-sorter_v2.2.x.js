@@ -2,29 +2,29 @@
 
 import matchSorter, { rankings, caseRankings } from 'match-sorter';
 
-// $ExpectError
+// $FlowExpectedError
 const startsWith: string = rankings.STARTS_WITH;
 
-// $ExpectError
+// $FlowExpectedError
 rankings.foo;
 
-// $ExpectError
+// $FlowExpectedError
 matchSorter(1, 2);
 
-// $ExpectError
+// $FlowExpectedError
 matchSorter([], 2);
 
 const found1: Array<number> = matchSorter([1, 2, 3], '2');
 
-// $ExpectError
+// $FlowExpectedError
 matchSorter([], 'foo', { foo: bar });
 
 const sampleCollection = [{ baz: '1' }, { baz: '2' }, { baz: 'foooooo' }];
 
-// $ExpectError
+// $FlowExpectedError
 matchSorter(sampleCollection, 'foo', { invalidProp: 'bar' });
 
-// $ExpectError
+// $FlowExpectedError
 matchSorter(sampleCollection, 'foo', { keys: 1 });
 
 // string key accessor
@@ -37,5 +37,5 @@ matchSorter(sampleCollection, 'foo', { keys: [item => item.baz] });
 // object key accessor
 matchSorter(sampleCollection, 'foo', { keys: [{ key: 'baz' }] });
 
-// $ExpectError
+// $FlowExpectedError
 matchSorter(sampleCollection, 'foo', { keys: [{ foo: 'baz' }] });

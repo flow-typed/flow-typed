@@ -133,6 +133,7 @@ declare module '@react-navigation/core' {
   declare export type NavigationPopToTopAction = {|
     +type: 'Navigation/POP_TO_TOP',
     +immediate?: boolean,
+    +key?: string,
   |};
   declare export type NavigationPushAction = {|
     +type: 'Navigation/PUSH',
@@ -407,7 +408,7 @@ declare module '@react-navigation/core' {
     headerTitleAllowFontScaling?: boolean,
     headerTintColor?: string,
     headerLeft?: React$Node | React$ElementType,
-    headerBackTitle?: string,
+    headerBackTitle?: ?string,
     headerBackImage?: React$Node | React$ElementType,
     headerTruncatedBackTitle?: string,
     headerBackTitleStyle?: TextStyleProp,
@@ -491,7 +492,7 @@ declare module '@react-navigation/core' {
       fallback?: $ElementType<
         $PropertyType<
           {|
-            ...{| params: {| [ParamName]: void |} |},
+            ...{| params: { } |},
             ...$Exact<S>,
           |},
           'params'
@@ -501,7 +502,7 @@ declare module '@react-navigation/core' {
     ) => $ElementType<
       $PropertyType<
         {|
-          ...{| params: {| [ParamName]: void |} |},
+          ...{| params: { } |},
           ...$Exact<S>,
         |},
         'params'
@@ -721,6 +722,7 @@ declare module '@react-navigation/core' {
     }) => NavigationPopAction,
     popToTop: (payload: {
       immediate?: boolean,
+      key?: string,
     }) => NavigationPopToTopAction,
     push: (payload: {
       routeName: string,

@@ -6,16 +6,16 @@ import { ObjectId } from "bson";
 const bson = new BSON();
 bson.serialize({ foo: "bar" });
 
-// $ExpectError missing arg to serialize
+// $FlowExpectedError missing arg to serialize
 bson.serialize();
-// $ExpectError missing method
+// $FlowExpectedError missing method
 bson.wrong();
 
 const id = new ObjectId();
 
 id.toString();
-// $ExpectError
+// $FlowExpectedError
 id.wrong();
 
-// $ExpectError
+// $FlowExpectedError
 const wrongId = new ObjectId({});

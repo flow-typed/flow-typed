@@ -319,11 +319,11 @@ describe('install (command)', () => {
 
         // Run the install command
         await run({
-          _: [],
           overwrite: false,
           verbose: false,
           skip: false,
           ignoreDeps: [],
+          explicitLibDefs: [],
         });
 
         // Installs libdefs
@@ -344,9 +344,10 @@ describe('install (command)', () => {
         ).toEqual([true, true]);
 
         // Signs installed libdefs
-        const fooLibDefContents = (await fs.readFile(
+        const fooLibDefRawContents = await fs.readFile(
           path.join(FLOWPROJ_DIR, 'flow-typed', 'npm', 'foo_v1.x.x.js'),
-        )).toString();
+        );
+        const fooLibDefContents = fooLibDefRawContents.toString();
         expect(fooLibDefContents).toContain('// flow-typed signature: ');
         expect(fooLibDefContents).toContain('// flow-typed version: ');
       });
@@ -382,11 +383,11 @@ describe('install (command)', () => {
 
         // Run the install command
         await run({
-          _: [],
           overwrite: false,
           verbose: false,
           skip: false,
           ignoreDeps: ['dev', 'optional', 'bundled'],
+          explicitLibDefs: [],
         });
 
         // Installs libdefs
@@ -431,10 +432,10 @@ describe('install (command)', () => {
 
         // Run the install command
         await run({
-          _: [],
           overwrite: false,
           verbose: false,
           skip: false,
+          explicitLibDefs: [],
         });
 
         // Installs a stub for someUntypedDep
@@ -471,10 +472,10 @@ describe('install (command)', () => {
 
         // Run the install command
         await run({
-          _: [],
           overwrite: false,
           verbose: false,
           skip: true,
+          explicitLibDefs: [],
         });
 
         // Installs a stub for someUntypedDep
@@ -509,10 +510,10 @@ describe('install (command)', () => {
 
         // Run the install command
         await run({
-          _: [],
           overwrite: true,
           verbose: false,
           skip: false,
+          explicitLibDefs: [],
         });
 
         // Replaces the stub with the real typedef
@@ -549,10 +550,10 @@ describe('install (command)', () => {
 
         // Run the install command
         await run({
-          _: [],
           overwrite: false,
           verbose: false,
           skip: false,
+          explicitLibDefs: [],
         });
 
         const libdefFilePath = path.join(
@@ -569,10 +570,10 @@ describe('install (command)', () => {
 
         // Run install command again
         await run({
-          _: [],
           overwrite: false,
           verbose: false,
           skip: false,
+          explicitLibDefs: [],
         });
 
         // Verify that the tweaked libdef file wasn't overwritten
@@ -602,10 +603,10 @@ describe('install (command)', () => {
 
         // Run the install command
         await run({
-          _: [],
           overwrite: false,
           verbose: false,
           skip: false,
+          explicitLibDefs: [],
         });
 
         const libdefFilePath = path.join(
@@ -616,17 +617,16 @@ describe('install (command)', () => {
         );
 
         // Tweak the libdef for foo
-        const libdefFileContent = (await fs.readFile(
-          libdefFilePath,
-        )).toString();
+        const libdefFileRawContent = await fs.readFile(libdefFilePath);
+        const libdefFileContent = libdefFileRawContent.toString();
         await fs.writeFile(libdefFilePath, libdefFileContent + '\n// TWEAKED!');
 
         // Run install command again
         await run({
-          _: [],
           overwrite: true,
           skip: false,
           verbose: false,
+          explicitLibDefs: [],
         });
 
         // Verify that the tweaked libdef file wasn't overwritten
@@ -659,11 +659,11 @@ describe('install (command)', () => {
 
         // Run the install command
         await run({
-          _: [],
           overwrite: false,
           verbose: false,
           skip: false,
           packageDir: path.join(FLOWPROJ_DIR, '..'),
+          explicitLibDefs: [],
         });
 
         // Installs libdef
@@ -697,11 +697,11 @@ describe('install (command)', () => {
 
         // Run the install command
         await run({
-          _: [],
           overwrite: false,
           verbose: false,
           skip: false,
           rootDir: path.join(FLOWPROJ_DIR, 'src'),
+          explicitLibDefs: [],
         });
 
         // Installs libdef

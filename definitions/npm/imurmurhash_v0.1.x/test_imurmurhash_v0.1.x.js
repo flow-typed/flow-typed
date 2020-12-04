@@ -20,8 +20,8 @@ hashState.reset().hash('and').hash('some').hash('more');
 ]: number[]);
 
 
-// $ExpectError
+// $FlowExpectedError
 MurmurHash3(123);
 
-// $ExpectError
+// $FlowExpectedError
 hashState.result().hash('abc');

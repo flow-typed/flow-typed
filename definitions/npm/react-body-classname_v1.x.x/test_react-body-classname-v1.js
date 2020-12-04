@@ -13,16 +13,16 @@ const shouldWorkWithChildren = () => (
 );
 
 const shouldFailNonString = () => (
-  // $ExpectError fails on type of props
+  // $FlowExpectedError fails on type of props
   <BodyClassName className={false} />
 );
 
 
 const shouldFailMissingProp = () => (
-  // $ExpectError should not be allowed
+  // $FlowExpectedError should not be allowed
   <BodyClassName />
 );
 
 (BodyClassName.rewind(): string);
-// $ExpectError
+// $FlowExpectedError
 (BodyClassName.rewind(): false);

@@ -11,38 +11,38 @@ const result: string = getit.getUrl('github://DamonOehlman/getit/README.md');
 getit('github://DamonOehlman/getit/README.md', (err, data) => {
   const happyOutput: string = 'more output' + (data || '');
 
-  // $ExpectError
+  // $FlowExpectedError
   const unhappyOutput: string = 'more output' + data;
 
-  // $ExpectError
+  // $FlowExpectedError
   const value: number = 5 + data;
 });
 
-// $ExpectError
-const result: number = getit.getUrl('github://DamonOehlman/getit/README.md');
+// $FlowExpectedError
+const result2: number = getit.getUrl('github://DamonOehlman/getit/README.md');
 
-// $ExpectError
-const result: string = getit.getUrl(5);
+// $FlowExpectedError
+const result3: string = getit.getUrl(5);
 
-// $ExpectError
+// $FlowExpectedError
 getit('github://DamonOehlman/getit/README.md');
 
-// $ExpectError
+// $FlowExpectedError
 getit('github://DamonOehlman/getit/README.md', {
   foo: 'test'
 });
 
-// $ExpectError
+// $FlowExpectedError
 getit(5);
 
-// $ExpectError
+// $FlowExpectedError
 getit({});
 
-// $ExpectError
+// $FlowExpectedError
 getit('github://DamonOehlman/getit/README.md', {});
 
-// $ExpectError
+// $FlowExpectedError
 getit.isRemote(5);
 
-// $ExpectError
+// $FlowExpectedError
 getit.isRemote({});

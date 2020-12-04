@@ -3,7 +3,7 @@ import isoUnfetch from 'isomorphic-unfetch';
 (isoUnfetch('foo'): Promise<Response>);
 (isoUnfetch('foo', {}): Promise<Response>);
 
-// $ExpectError url has to be string
+// $FlowExpectedError url has to be string
 (isoUnfetch(123): Promise<any>);
 
 isoUnfetch('foo', {
@@ -14,7 +14,7 @@ isoUnfetch('foo', {
     body: 'bar'
 });
 
-// $ExpectError number is not a valid body type
+// $FlowExpectedError number is not a valid body type
 isoUnfetch('foo', {
     body: 5
 });
@@ -26,20 +26,20 @@ isoUnfetch('foo').then(res => {
     // Response Headers
     (res.headers: Headers);
     (res.headers.append('foo', 'bar'): void);
-    // $ExpectError
+    // $FlowExpectedError
     (res.headers.append(5, 'bar'): void);
     (res.headers.delete('foo'): void);
-    // $ExpectError
+    // $FlowExpectedError
     (res.headers.delete(5): void);
     (res.headers.entries(): Iterator<*>);
     (res.headers.get('test'): null | string);
-    // $ExpectError
+    // $FlowExpectedError
     (res.headers.get(5): null | string);
     (res.headers.has('foo'): boolean);
-    // $ExpectError
+    // $FlowExpectedError
     (res.headers.has(5): boolean);
     (res.headers.keys(): Iterator<string>);
-    // $ExpectError value should be a string
+    // $FlowExpectedError value should be a string
     (res.headers.set('foo', 5): void);
     (res.headers.values(): Iterator<*>);
 
@@ -50,7 +50,7 @@ isoUnfetch('foo').then(res => {
     // Response type
     (res.type: ResponseType);
     res.type = 'basic';
-    // $ExpectError foo is not a valid option
+    // $FlowExpectedError foo is not a valid option
     res.type = 'foo';
 
     (res.url: string);

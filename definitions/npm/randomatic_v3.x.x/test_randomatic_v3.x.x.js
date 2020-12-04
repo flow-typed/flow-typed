@@ -5,7 +5,7 @@ import randomize from "randomatic";
 
 describe("randomatic", () => {
   it("errors", () => {
-    // $ExpectError
+    // $FlowExpectedError
     randomize();
   });
 

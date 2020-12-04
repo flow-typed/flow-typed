@@ -17,5 +17,5 @@ route.put("/api/:param", async (ctx, param, next) => {
 
 route.post(/public/g, () => {});
 route.all("creator");
-// $ExpectError
+// $FlowExpectedError
 route.all({});

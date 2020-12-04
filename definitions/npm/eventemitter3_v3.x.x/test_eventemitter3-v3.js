@@ -8,19 +8,19 @@ const a: EventEmitter = new A();
 
 a.on('test', async () => {});
 a.on('test', () => {});
-// $ExpectError
+// $FlowExpectedError
 a.on('test');
 
 a.off('test');
-// $ExpectError
+// $FlowExpectedError
 a.off();
 
 a.removeListener('test');
-// $ExpectError
+// $FlowExpectedError
 a.removeListener();
 
 a.once('test', () => {});
-// $ExpectError
+// $FlowExpectedError
 a.once('test');
 
 a.emit('test', 'something');
@@ -28,10 +28,10 @@ a.emit('test');
 
 // a.emit(); Supposedly a bug in Flow, should expect an error here
 
-// $ExpectError
+// $FlowExpectedError
 a.setMaxListeners();
 
-// $ExpectError
+// $FlowExpectedError
 a.getMaxListeners();
 
 (a.listeners('emit'): ListenerFn[]);
@@ -41,8 +41,8 @@ a.getMaxListeners();
 (a.listenerCount(Symbol(42)): number);
 
 // Breaks compatibility with v2.x
-// $ExpectError
+// $FlowExpectedError
 (a.listeners('emit', true): boolean);
 
-// $ExpectError
+// $FlowExpectedError
 (a.listeners('emit', false): ListenerFn[]);

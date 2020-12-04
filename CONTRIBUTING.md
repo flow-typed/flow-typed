@@ -49,7 +49,7 @@ version 4.1.0. **[You've followed all of the
 best practices for writing high quality definitions,](https://github.com/flow-typed/flow-typed/issues/13#issuecomment-214892914)**
 and now you'd like to contribute it:
 
-#### 1) Create a new directory called `definitions/left-pad_v4.1.0/`.
+#### 1) Create a new directory called `definitions/npm/left-pad_v4.1.0/`.
 
 ***We call this the "package version directory".***
 
@@ -57,21 +57,22 @@ The naming scheme of this directory must be formatted as
 `${packageName}_v${packageVersion}`. This convention is enforced by the
 library-definition test runner.
 
-#### 2) In this new directory, create another new directory called `flow_v0.25.x-/`.
+#### 2) In this new directory, create another new directory called `flow_v0.80.x-/`.
 
 ***We call this the "flow version directory".***
 
 This specifies that the definition you are contributing is compatible with the
 version range of the directiry. You MUST specify a version range with names like
-`flow_v0.25.x-` ("any version at or after v0.25.x") or
-`flow_-v0.25.x` ("any version at or before v0.25.x") or
-`flow_v0.25.x-v0.28.x` ("any version inclusively between v0.25.x and
-v0.28.x").
+`flow_v0.80.x-` ("any version at or after v0.80.x") or
+`flow_-v0.80.x` ("any version at or before v0.80.x") or
+`flow_v0.80.x-v0.106.x` ("any version inclusively between v0.80.x and
+v0.106.x").
 
 If you aren't sure which versions of Flow your definition is compatible with,
-start with a very low version like `flow_v0.25.x-`, and the test runner
+start with a low version like `flow_v0.83.x-`, and the test runner
 (which we'll run in a later step) will tell us if there are problems in some
-versions of Flow.
+versions of Flow. `flow_v0.83.x-` is the version where the inexact object syntax
+was added.
 
 You may create multiple flow version directories to target different versions of
 Flow if necessary.
@@ -93,7 +94,7 @@ reasonable degree. At minimum your tests should:
    produce a type error.
 1. Use the library definition in a couple of ways that are *expected* to produce
    a type error. To indicate that a line in a test file expected to cause an
-   error just put a `// $ExpectError` comment above the error-causing line.
+   error just put a `// $FlowExpectedError` comment above the error-causing line.
 
 [Here](https://github.com/flow-typed/flow-typed/blob/master/definitions/npm/highlight.js_v8.x.x/test_highlight.js-v8.js)
 is an example of a nice and thorough test file. You don't necessarily have to be
@@ -118,6 +119,7 @@ flow-typed validate-defs definitions && flow-typed run-tests left-pad
 node dist/cli.js validate-defs ../definitions && \
 node dist/cli.js run-tests left-pad
 ```
+- The helper `./quick_run_def_tests.sh` mentioned above
 
 You may also leave off the argument `left-pad` to run *all* tests (this takes a while).
 
@@ -156,7 +158,7 @@ declare module 'example' {
 
 **So why don't I do that for importing other libdefs?**
 
-Because it just don't work, sorry. You might think this is possible, but it isn't:
+Because it just doesn't work, sorry. You might think this is possible, but it isn't:
 
 ```js
 declare module 'koa-router' {
@@ -249,7 +251,7 @@ Sometimes you see global definitions like `$npm$ModuleName$`. This is due to the
 
 If the function does not mutate input values, always prefer immutable types.
 This is imporant since immutable types accepts mutable types in, but mutable types does not accept immutable types in, see [good example](https://flow.org/try/#0PTAEAEDMBsHsHcBQiAmBTAxtAhgJzaJAK4B2GALgJawmjloDO5AFJSQA5HkBcoAJACU02FAHkS0AJ4BBXLmySAPCSIBbAEZpcAPgCUvAG6xKKANzIMNJoVoBeUMzy5es+UpUate0Le2gA3oigoACQTgB0nAwAFswAjABMAMy6iCH0TI5yuuYAvohAA) and [bad example](https://flow.org/try/#0PTAEAEDMBsHsHcBQiAmBTAxtAhgJzaJAK4B2GALgJawmjloDO5AFJSQA5HkBcoAgrlzYAngB4SRALYAjNLgB8ASl4A3WJRQBuZBhpNCtALyhmeXLwAkAJTTYUAeRLRhAoWIky5S0IfmgA3ogAkPRMpoKK2gC+iEA)
-- Instead of `Array<string>` use `$readOnlyArray<string>`
+- Instead of `Array<string>` use `$ReadOnlyArray<string>`
 - Instead of `{ value: string }` prefer `{ +value: string }` [$ReadOnly<{ value: string }>](https://flow.org/en/docs/types/utilities/#toc-readonly)
 
 ### Prefer exactness
@@ -272,7 +274,7 @@ describe('#someFunction', () => {
   });
 
   // you can also do type checks outside an it statement
-  //$ExpectError
+  //$FlowExpectedError
   const a: number = 'foo';
 })
 ```
@@ -288,7 +290,7 @@ foo('#someFunction', () => {
   });
 
   // you can also do type checks outside an it statement
-  //$ExpectError
+  //$FlowExpectedError
   const a: number = 'foo';
 })
 ```

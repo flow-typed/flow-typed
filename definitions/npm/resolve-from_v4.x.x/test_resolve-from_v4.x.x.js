@@ -2,22 +2,22 @@ import resolveFrom from "resolve-from";
 
 (resolveFrom("abc", "def"): string);
 
-// $ExpectError
+// $FlowExpectedError
 resolveFrom();
 
-// $ExpectError
+// $FlowExpectedError
 resolveFrom("abc");
 
-// $ExpectError
+// $FlowExpectedError
 resolveFrom("abc", 1);
 
 (resolveFrom.silent("abc", "def"): string | null);
 
-// $ExpectError
+// $FlowExpectedError
 resolveFrom.silent();
 
-// $ExpectError
+// $FlowExpectedError
 resolveFrom.silent("abc");
 
-// $ExpectError
+// $FlowExpectedError
 resolveFrom.silent("abc", 1);

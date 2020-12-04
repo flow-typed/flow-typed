@@ -3,10 +3,10 @@
 import { renderGraphiQL } from 'graphql-server-module-graphiql';
 import type { GraphiQLData } from 'graphql-server-module-graphiql';
 
-// $ExpectError
+// $FlowExpectedError
 renderGraphiQL();
 
-// $ExpectError
+// $FlowExpectedError
 renderGraphiQL({});
 
 const html : string = renderGraphiQL({endpointURL: '/graphiql'});

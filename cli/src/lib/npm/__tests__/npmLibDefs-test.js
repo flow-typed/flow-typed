@@ -9,6 +9,7 @@ import {
   getNpmLibDefs,
   findNpmLibDef,
   getScopedPackageName,
+  parseSignedCodeVersion,
 } from '../npmLibDefs';
 
 import path from 'path';
@@ -386,6 +387,20 @@ describe('npmLibDefs', () => {
       });
     });
 
+    it('parses libs installed from git', () => {
+      expect(
+        parsePkgNameVer('git@github.com:flow-typed/flow-typed.git'),
+      ).toEqual({
+        pkgName: 'flow-typed',
+        pkgVersion: {
+          major: 0,
+          minor: 0,
+          patch: 0,
+          prerel: '',
+        },
+      });
+    });
+
     it('parses wildcard minor libs', () => {
       expect(parsePkgNameVer('lib_v1.x.x')).toEqual({
         pkgName: 'lib',
@@ -448,6 +463,20 @@ describe('npmLibDefs', () => {
   describe('validateVersionPart', () => {
     it('returns "x" when given "x"', () => {
       expect(validateVersionPart('x', '')).toBe('x');
+    });
+  });
+
+  describe('parseSignedCodeVersion', function() {
+    it('works on bad stub version found in the wild', () => {
+      expect(
+        parseSignedCodeVersion(
+          '<<STUB>>/babel-plugin-transform-import-commonjs_vhttps://github.com/jedwards1211/babel-plugin-transform-import-commonjs#patch-1-built/flow_v0.59.0',
+        ),
+      ).toEqual({
+        kind: 'Stub',
+        name:
+          'babel-plugin-transform-import-commonjs_vhttps://github.com/jedwards1211/babel-plugin-transform-import-commonjs#patch-1-built/flow_v0.59.0',
+      });
     });
   });
 });

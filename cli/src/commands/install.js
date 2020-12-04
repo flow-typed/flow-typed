@@ -45,10 +45,9 @@ import {createStub, pkgHasFlowFiles} from '../lib/stubUtils';
 
 import typeof Yargs from 'yargs';
 
-export const name = 'install';
+export const name = 'install [explicitLibDefs...]';
 export const description = 'Installs libdefs into the ./flow-typed directory';
 export type Args = {
-  _: Array<string>,
   flowVersion?: mixed, // string
   overwrite: mixed, // boolean
   skip: mixed, // boolean
@@ -59,60 +58,75 @@ export type Args = {
   ignoreDeps?: mixed, // Array<string>
   rootDir?: mixed, // string,
   useCacheUntil?: mixed, // seconds
+  explicitLibDefs: mixed, // Array<string>
 };
 export function setup(yargs: Yargs) {
-  return yargs.usage(`$0 ${name} - ${description}`).options({
-    flowVersion: {
-      alias: 'f',
-      describe:
-        'The Flow version that fetched libdefs must be compatible ' + 'with',
-      type: 'string',
-    },
-    verbose: {
-      describe: 'Print additional, verbose info while installing libdefs',
-      type: 'boolean',
-      demand: false,
-    },
-    skip: {
-      alias: 's',
-      describe: 'Do not generate stubs for missing libdefs',
-      type: 'boolean',
-      demand: false,
-    },
-    libdefDir: {
-      alias: 'l',
-      describe: 'Use a custom directory to install libdefs',
-      type: 'string',
-      demand: false,
-    },
-    cacheDir: {
-      alias: 'c',
-      describe:
-        'Directory (absolute or relative path, ~ is not supported) to store cache of libdefs',
-      type: 'string',
-      demand: false,
-    },
-    packageDir: {
-      alias: 'p',
-      describe: 'The relative path of package.json where flow-bin is installed',
-      type: 'string',
-    },
-    ignoreDeps: {
-      alias: 'i',
-      describe: 'Dependency categories to ignore when installing definitions',
-      type: 'array',
-    },
-    rootDir: {
-      alias: 'r',
-      describe: 'Directory of .flowconfig relative to node_modules',
-      type: 'string',
-    },
-    useCacheUntil: {
-      alias: 'u',
-      describe: 'Use cache until specified time in milliseconds',
-      type: 'number',
-    },
-  });
+  return yargs
+    .usage(`$0 ${name} - ${description}`)
+    .positional('explicitLibDefs', {
+      describe: 'Explicitly specify packages to install',
+      default: [],
+    })
+    .options({
+      flowVersion: {
+        alias: 'f',
+        describe:
+          'The Flow version that fetched libdefs must be compatible with',
+        type: 'string',
+      },
+      verbose: {
+        describe: 'Print additional, verbose info while installing libdefs',
+        type: 'boolean',
+        demandOption: false,
+      },
+      skip: {
+        alias: 's',
+        describe: 'Do not generate stubs for missing libdefs',
+        type: 'boolean',
+        demandOption: false,
+      },
+      libdefDir: {
+        alias: 'l',
+        describe: 'Use a custom directory to install libdefs',
+        type: 'string',
+        demandOption: false,
+      },
+      cacheDir: {
+        alias: 'c',
+        describe:
+          'Directory (absolute or relative path, ~ is not supported) to store cache of libdefs',
+        type: 'string',
+        demandOption: false,
+      },
+      packageDir: {
+        alias: 'p',
+        describe:
+          'The relative path of package.json where flow-bin is installed',
+        type: 'string',
+      },
+      overwrite: {
+        alias: 'o',
+        describe: 'Overwrite an existing libdef',
+        type: 'boolean',
+        demandOption: false,
+      },
+      ignoreDeps: {
+        alias: 'i',
+        describe: 'Dependency categories to ignore when installing definitions',
+        choices: ['dev', 'bundled', 'peer'],
+        type: 'array',
+      },
+      rootDir: {
+        alias: 'r',
+        describe: 'Directory of .flowconfig relative to node_modules',
+        type: 'string',
+      },
+      useCacheUntil: {
+        alias: 'u',
+        describe: 'Use cache until specified time in milliseconds',
+        type: 'number',
+      },
+    });
 }
 export async function run(args: Args) {
   const cwd =
@@ -124,13 +138,24 @@ export async function run(args: Args) {
   const flowVersion = await determineFlowVersion(packageDir, args.flowVersion);
   const libdefDir =
     typeof args.libdefDir === 'string' ? args.libdefDir : 'flow-typed';
-  const explicitLibDefs = args._.slice(1);
   if (args.ignoreDeps !== undefined && !Array.isArray(args.ignoreDeps)) {
     throw new Error('ignoreDeps is not array');
   }
-  const ignoreDeps = (args.ignoreDeps || []).map(dep => {
+  const ignoreDeps = (args.ignoreDeps || []).map((dep) => {
     if (typeof dep !== 'string') {
       throw new Error('ignoreDeps should be array of strings');
+    }
+    return dep;
+  });
+  if (
+    args.explicitLibDefs !== undefined &&
+    !Array.isArray(args.explicitLibDefs)
+  ) {
+    throw new Error('explicitLibDefs is not array');
+  }
+  const explicitLibDefs = (args.explicitLibDefs || []).map((dep) => {
+    if (typeof dep !== 'string') {
+      throw new Error('explicitLibDefs should be array of strings');
     }
     return dep;
   });
@@ -190,7 +215,7 @@ async function installCoreLibDefs(): Promise<number> {
   return 0;
 }
 
-const FLOW_BUILT_IN_NPM_LIBS = ['react', 'react-dom'];
+const FLOW_BUILT_IN_NPM_LIBS = ['react'];
 type installNpmLibDefsArgs = {|
   cwd: string,
   flowVersion: FlowVersion,
@@ -297,8 +322,6 @@ async function installNpmLibDefs({
       } else {
         libDefsToInstall.set(name, libDef);
 
-        // If the libdef is outdated (but still compatible), note this so we can
-        // warn the user
         const libDefLower = getRangeLowerBound(libDef.version);
         const depLower = getRangeLowerBound(ver);
         if (semver.lt(libDefLower, depLower)) {
@@ -351,7 +374,7 @@ async function installNpmLibDefs({
       }),
     );
 
-    if (results.some(res => !res)) {
+    if (results.some((res) => !res)) {
       return 1;
     }
   }
@@ -379,9 +402,7 @@ async function installNpmLibDefs({
             : ['a versioned update', 'this package'];
         console.log(
           `\n` +
-            `  Consider submitting ${libDefPlural[0]} for ${
-              libDefPlural[1]
-            } to \n` +
+            `  Consider submitting ${libDefPlural[0]} for ${libDefPlural[1]} to \n` +
             `  https://github.com/flowtype/flow-typed/\n`,
         );
       },
@@ -434,6 +455,7 @@ async function installNpmLibDefs({
             pkgVerStr,
             overwrite,
             pnpResolver,
+            /* typescript */ false,
             libdefDir,
           );
         }),
@@ -454,7 +476,7 @@ async function installNpmLibDefs({
           : ['a libdef', 'this package', 'it'];
       console.log(
         `\n` +
-          `I've generated ${'`'}any${'`'}-typed stubs for ${plural[1]}, but ` +
+          `We've generated ${'`'}any${'`'}-typed stubs for ${plural[1]}, but ` +
           `consider submitting \n` +
           `${plural[0]} for ${plural[2]} to ` +
           `${colors.bold('https://github.com/flowtype/flow-typed/')}\n`,

@@ -5,7 +5,7 @@ import { describe, it } from "flow-typed-test";
 
 describe("tldjs", () => {
   it("errors", () => {
-    // $ExpectError
+    // $FlowExpectedError
     tld.tldExists();
   });
 

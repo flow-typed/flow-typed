@@ -11,13 +11,13 @@ it('types the return value', () => {
 });
 
 it('errors on invalid input', () => {
-  // $ExpectError
+  // $FlowExpectedError
   pWhilst(() => null);
-  // $ExpectError
+  // $FlowExpectedError
   pWhilst(true, () => null);
 });
 
 it('errors on invalid return type', () => {
-  // $ExpectError
+  // $FlowExpectedError
   (pWhilst(() => true, () => 1): Promise<number>);
 });

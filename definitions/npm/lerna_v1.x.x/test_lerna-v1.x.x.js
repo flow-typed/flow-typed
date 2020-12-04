@@ -1,3 +1,3 @@
 // @flow
-// $ExpectError
+// $FlowExpectedError
 import lerna from 'lerna';

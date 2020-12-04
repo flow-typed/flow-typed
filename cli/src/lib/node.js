@@ -51,7 +51,10 @@ export const child_process = {
           if (err) {
             rej(err);
           } else {
-            res({stdout: stdout, stderr: stderr});
+            res({
+              stdout: typeof stdout === 'string' ? Buffer.from(stdout) : stdout,
+              stderr: typeof stderr === 'string' ? Buffer.from(stderr) : stderr,
+            });
           }
         },
       );
@@ -82,6 +85,7 @@ export const child_process = {
 export const fs = {
   appendFile: fsExtra.appendFile,
   close: fsExtra.close,
+  copy: fsExtra.copy,
   createReadStream: fsExtra.createReadStream,
   createWriteStream: fsExtra.createWriteStream,
   exists: fsExtra.exists,

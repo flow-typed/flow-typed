@@ -6,12 +6,12 @@ var BigInteger = require('bigi');
 (address.fromBase58Check('1CrwjoKxvdbAnPcGzYjpvZ4no4S71neKXT').hash: Buffer);
 (address.fromBase58Check('1CrwjoKxvdbAnPcGzYjpvZ4no4S71neKXT').version: number);
 
-// $ExpectError
+// $FlowExpectedError
 (address.fromBase58Check('1CrwjoKxvdbAnPcGzYjpvZ4no4S71neKXT').hash());
 
 (crypto.hash256(new Buffer(1)): Buffer);
 
-// $ExpectError
+// $FlowExpectedError
 (crypto.hash256("hex"): string);
 
 import {Curve, Point} from 'ecurve';
@@ -27,12 +27,12 @@ var p: Point = new Curve(pi, a, b, Gx, Gy, n, h).G;
 (new ECPair(b): ECPair);
 (new ECPair(null, p): ECPair);
 
-// $ExpectError
+// $FlowExpectedError
 (new ECPair(new Buffer(1)): ECPair);
-// $ExpectError
+// $FlowExpectedError
 (new ECPair(null, new Buffer(1)): ECPair);
 
-// $ExpectError
+// $FlowExpectedError
 (ECPair(new Buffer(1)): ECPair);
 
 (ECPair.fromPublicKeyBuffer(new Buffer(1)): ECPair);
@@ -40,14 +40,14 @@ var p: Point = new Curve(pi, a, b, Gx, Gy, n, h).G;
 var pair = ECPair.makeRandom();
 (pair.verify(new Buffer(1), new ECSignature(new BigInteger('1'), new BigInteger('1'))): boolean);
 
-// $ExpectError
+// $FlowExpectedError
 (pair.verify(new Buffer(1)): boolean);
-// $ExpectError
+// $FlowExpectedError
 (pair.verify(new Buffer(1), new Buffer(1)): boolean);
 
 (new HDNode(pair, new Buffer(1)): HDNode);
 
-// $ExpectError
+// $FlowExpectedError
 (new HDNode(pair): HDNode);
 
 var bitcoinNetwork = {
@@ -65,7 +65,7 @@ var bitcoinNetwork = {
 (HDNode.fromBase58('xpub123'): HDNode);
 (HDNode.fromBase58('xpub123', bitcoinNetwork): HDNode);
 
-// $ExpectError
+// $FlowExpectedError
 (HDNode.fromBase58(new Buffer(1)): HDNode);
 
 (HDNode.fromBase58('xpub123', bitcoinNetwork).getAddress(): string);
@@ -80,7 +80,7 @@ var input = {
 
 t.ins.push(input);
 
-// $ExpectError
+// $FlowExpectedError
 t.addInput(input);
 
 t.addInput(new Buffer(1), 1);

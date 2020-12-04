@@ -1,36 +1,44 @@
 // @flow
 
-import { extract, parse, stringify, parseUrl } from 'query-string';
+import { extract, parse, parseUrl, stringify, stringifyUrl } from 'query-string';
 
 extract('?test');
 
-// $ExpectError: should be a string
+// $FlowExpectedError: should be a string
 extract({});
 
 parse('test');
 
 parse('test', { arrayFormat: 'bracket' });
 
-// $ExpectError: strict is not a parse option
+parse('test', { decode: true, sort: false, parseNumbers: true, parseBooleans: true });
+
+// $FlowExpectedError: strict is not a parse option
 parse('test', { strict: true });
 
-// $ExpectError: should be a string
+// $FlowExpectedError: should be a string
 parse({ test: null });
 
-(parse('foo').foo: null | string | Array<string>);
+(parse('foo').foo: null | string | Array<string | number>);
 
-// $ExpectError: result props cannot be undefined
+// $FlowExpectedError: result props cannot be undefined
 (parse('foo').foo: void);
 
 stringify({ test: null });
 
 stringify({ test: null }, { strict: true });
 
-// $ExpectError: should be an object
+// $FlowExpectedError: should be an object
 stringify('test');
 
-// $ExpectError: true is not a stringify option
+// $FlowExpectedError: true is not a stringify option
 stringify({ test: null }, { test: true });
+
+stringify({ test: [1, 2, 3] }, { arrayFormat: 'bracket' });
+stringify(
+    { test: 1, empty: null },
+    { encode: true, strict: true, sort: false, skipNull: true }
+);
 
 stringify({ test: 1 });
 
@@ -41,6 +49,8 @@ stringify({ test: false });
 stringify({ test: null });
 
 stringify({ test: undefined });
+
+stringify({ test: 'test', empty: null }, { skipNull: true });
 
 // Check we can strongly type the query object.
 type Query = {|
@@ -73,8 +83,18 @@ parseUrl('test');
 
 parseUrl('test', { arrayFormat: 'bracket' });
 
-// $ExpectError: strict is not a parse option
+// $FlowExpectedError: strict is not a parse option
 parseUrl('test', { strict: true });
 
-// $ExpectError: should be a string
+// $FlowExpectedError: should be a string
 parseUrl({ test: null });
+
+stringifyUrl({ url: 'https://example.com' });
+
+stringifyUrl(
+    { url: 'https://example.com', query: { test: [1, 2, 3] } },
+    { encode: true, strict: true, sort: false, skipNull: true }
+);
+
+// $FlowExpectedError: missing url in first param. object
+stringifyUrl({ query: { value: 'test' } });

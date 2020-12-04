@@ -4,13 +4,13 @@ import Backbone, { Collection } from "backbone-collection";
 
 describe("backbone-collection", () => {
   it("Migrated from old format", () => {
-    // $ExpectError
+    // $FlowExpectedError
     (Backbone.$: any);
 
-    // $ExpectError
+    // $FlowExpectedError
     (Backbone._: any);
 
-    // $ExpectError
+    // $FlowExpectedError
     (Backbone.Events.on: Function);
 
     // Model setup
@@ -22,17 +22,17 @@ describe("backbone-collection", () => {
 
     const tasks = new TasksCollection();
 
-    // $ExpectError
+    // $FlowExpectedError
     tasks.toJSON([]);
 
     (tasks.length: number);
 
-    // $ExpectError should not allow to be non number
+    // $FlowExpectedError should not allow to be non number
     tasks.length = false;
 
     (tasks.pluck("name"): Array<any>);
 
-    // $ExpectError
+    // $FlowExpectedError
     (task.pluck(2): Array<any>);
 
     (tasks.forEach: Function);

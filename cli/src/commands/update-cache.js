@@ -20,7 +20,7 @@ export function setup(yargs: Yargs) {
       describe:
         'Directory (absolute or relative path, ~ is not supported) to store cache of libdefs',
       type: 'string',
-      demand: false,
+      demandOption: false,
     },
   });
 }

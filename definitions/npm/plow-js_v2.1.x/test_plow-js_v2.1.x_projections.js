@@ -9,7 +9,7 @@ plow.$get(["foo"], { foo: 2 });
 plow.$get(["foo", 1], { foo: [2] });
 plow.$get(["foo"])({ foo: 2 });
 
-// $ExpectError
+// $FlowExpectedError
 plow.$get({}, { foo: 2 });
 
 /**
@@ -20,10 +20,10 @@ plow.$count(["foo"], { foo: 2 });
 plow.$count(["foo", 1], { foo: [2] });
 plow.$count(["foo"])({ foo: 2 });
 
-// $ExpectError
+// $FlowExpectedError
 plow.$count({}, { foo: 2 });
 
-// $ExpectError
+// $FlowExpectedError
 plow.$count({}, { foo: 2 }).length;
 
 /**
@@ -34,7 +34,7 @@ plow.$contains(2, ["foo"], { foo: [2] });
 plow.$contains(2, "foo")({ foo: [2] });
 plow.$contains(2)("foo")({ foo: [2] });
 
-// $ExpectError
+// $FlowExpectedError
 plow.$contains(2, {}, { foo: 2 });
 
 /**
@@ -45,7 +45,7 @@ plow.$head(["foo"], { foo: [2] });
 plow.$head(["foo"], { foo: [2] });
 plow.$head(["foo"])({ foo: [2] });
 
-// $ExpectError
+// $FlowExpectedError
 plow.$head({}, { foo: 2 });
 
 /**
@@ -57,10 +57,10 @@ plow.$tail(["foo"], { foo: [0, 2] });
 plow.$tail(["foo"])({ foo: [0, 2] });
 plow.$tail(["foo"])({ foo: [0, 2] }).length;
 
-// $ExpectError
+// $FlowExpectedError
 plow.$tail({}, { foo: [0, 2] });
 
-// $ExpectError
+// $FlowExpectedError
 plow.$tail({}, { foo: [0, 2] }) * 2;
 
 /**
@@ -71,7 +71,7 @@ plow.$last(["foo"], { foo: [2] });
 plow.$last(["foo"], { foo: [2] });
 plow.$last(["foo"])({ foo: [2] });
 
-// $ExpectError
+// $FlowExpectedError
 plow.$last({}, { foo: 2 });
 
 /**
@@ -88,10 +88,10 @@ plow.$map(x => x * 2, ["foo"], { foo: [1, 2] });
 plow.$map(x => x * 2, "foo")({ foo: [1, 2] });
 plow.$map(x => x * 2)("foo")({ foo: [1, 2] });
 
-// $ExpectError
+// $FlowExpectedError
 plow.$map(null, {}, { foo: 2 });
 
-// $ExpectError
+// $FlowExpectedError
 plow.$map(x => x * 2, {}, { foo: 2 });
 
 /**
@@ -115,13 +115,13 @@ plow.$transform({
   baz: { qux: "Baz qux" }
 });
 
-// $ExpectError
+// $FlowExpectedError
 plow.$transform("foo", {
   foo: { bar: "Foo bar" },
   baz: { qux: "Baz qux" }
 });
 
-// $ExpectError
+// $FlowExpectedError
 plow.$transform(["foo"], {
   foo: { bar: "Foo bar" },
   baz: { qux: "Baz qux" }
@@ -135,7 +135,7 @@ plow.$resolve(["foo"], { foo: "bar.baz", bar: { baz: 2 } });
 plow.$resolve(["foo"], { foo: "bar.baz", bar: { baz: 2 } });
 plow.$resolve(["foo"])({ foo: "bar.baz", bar: { baz: 2 } });
 
-// $ExpectError
+// $FlowExpectedError
 plow.$resolve({}, { foo: "bar.baz", bar: { baz: 2 } });
 
 /**
@@ -149,7 +149,7 @@ plow.$and(
   foo: [2]
 });
 
-// $ExpectError
+// $FlowExpectedError
 plow.$and(plow.$contains(1, "foo"), { foo: [2] }).length;
 
 /**
@@ -163,7 +163,7 @@ plow.$or(
   foo: [2]
 });
 
-// $ExpectError
+// $FlowExpectedError
 plow.$or(plow.$contains(1, "foo"), { foo: [2] }).length;
 
 /**
@@ -172,11 +172,11 @@ plow.$or(plow.$contains(1, "foo"), { foo: [2] }).length;
 plow.$not(plow.$contains(2, "foo"), { foo: [2] });
 plow.$not(plow.$contains(0, "foo"), { foo: [2] });
 
-// $ExpectError
+// $FlowExpectedError
 plow.$not(plow.$contains(0, "foo"), { foo: [2] }).length;
 
-// $ExpectError
+// $FlowExpectedError
 plow.$not(null, { foo: [2] });
 
-// $ExpectError
+// $FlowExpectedError
 plow.$not(2, { foo: [2] });

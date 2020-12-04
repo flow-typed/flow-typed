@@ -36,34 +36,34 @@ q.enqueue("mno");
 expectMaybeString(q.dequeue());
 expectStringArray(q.toJSON());
 
-// $ExpectError
+// $FlowExpectedError
 q.push(3);
-// $ExpectError
+// $FlowExpectedError
 expectMaybeNumber(q.pop());
-// $ExpectError
+// $FlowExpectedError
 q.unshift(6);
-// $ExpectError
+// $FlowExpectedError
 expectMaybeNumber(q.shift());
-// $ExpectError
+// $FlowExpectedError
 expectMaybeNumber(q.peekBack());
-// $ExpectError
+// $FlowExpectedError
 expectMaybeNumber(q.peekFront());
-// $ExpectError
+// $FlowExpectedError
 expectMaybeNumber(q.get(0));
-// $ExpectError
+// $FlowExpectedError
 expectNumber(q.toNumber());
 
-// $ExpectError
+// $FlowExpectedError
 expectNumber(q.valueOf());
-// $ExpectError
+// $FlowExpectedError
 expectMaybeNumber(q.removeFront());
-// $ExpectError
+// $FlowExpectedError
 expectMaybeNumber(q.removeBack());
-// $ExpectError
+// $FlowExpectedError
 q.insertFront(9);
-// $ExpectError
+// $FlowExpectedError
 q.insertBack(12);
-// $ExpectError
+// $FlowExpectedError
 q.enqueue(15);
-// $ExpectError
+// $FlowExpectedError
 expectMaybeNumber(q.dequeue());

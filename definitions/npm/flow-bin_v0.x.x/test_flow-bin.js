@@ -4,5 +4,5 @@ import flowBinPath from "flow-bin";
 
 (flowBinPath: string);
 
-// $ExpectError
+// $FlowExpectedError
 (flowBinPath: number);

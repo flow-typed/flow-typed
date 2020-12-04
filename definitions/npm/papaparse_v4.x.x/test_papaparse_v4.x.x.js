@@ -25,7 +25,7 @@ res.errors[0].code;
   }
 }): PapaParse$ParseResult);
 
-// $ExpectError
+// $FlowExpectedError
 (Papa.parse(['data']): PapaParse$ParseResult);
 
 var file = new File(['papa'], 'papa.txt');
@@ -54,14 +54,14 @@ var explicitAnyData: PapaParse$UnparseObject = {
 };
 (Papa.unparse(explicitAnyData): string);
 
-// $ExpectError
+// $FlowExpectedError
 var explicitInvalidData: PapaParse$UnparseObject = {
   fields: ['One', 'Two'],
   data: 1
 };
 (Papa.unparse(explicitInvalidData): string);
 
-// $ExpectError
+// $FlowExpectedError
 var explicitInvalidFields: PapaParse$UnparseObject = {
   fields: 'One,Two',
   data: '1,2'

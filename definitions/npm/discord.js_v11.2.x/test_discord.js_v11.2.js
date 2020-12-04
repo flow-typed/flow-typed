@@ -69,7 +69,7 @@ client.on('message', (message: Message) => {
   (channel.toString(): string);
 });
 
-// $ExpectError token should be a string
+// $FlowExpectedError token should be a string
 client.login(123);
 
 client.login('123');

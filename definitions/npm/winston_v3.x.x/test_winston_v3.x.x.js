@@ -1,12 +1,15 @@
-import winston from "winston";
-import type { Logger, Levels, Format, ConsoleTransport, Container } from "winston";
+import winston, { format } from "winston";
+import type { Logger, Levels, Format, ConsoleTransport, Container, FormatSubModule } from "winston";
+
+const winstonAlternative = require('winston');
+(winstonAlternative: typeof winston);
 
 winston.log({
   level: "info",
   message: "default logger info message"
 });
 winston.error("default logger error message");
-// $ExpectError
+// $FlowExpectedError
 winston.nonExistantLevel("default logger nonExistantLevel message");
 
 // See example:
@@ -19,6 +22,7 @@ const customPrintf: Format = winston.format.printf(info => {
 
 let logger: Logger<Levels> = winston.createLogger({
   format: winston.format.combine(
+    winston.format.timestamp(),
     customFormat(),
     winston.format.json(),
     winston.format.label({label: 'label'}),
@@ -32,35 +36,44 @@ let logger: Logger<Levels> = winston.createLogger({
     new winston.transports.File({ filename: "error.log", level: "error" }),
     new winston.transports.Console({
       format: winston.format.combine(
-        winston.format.timestamp(),
+        winston.format.timestamp({ format: 'This is timestamp string' }),
         winston.format.simple()
       )
     })
   ]
 });
-logger.info("info message");
-logger.error("error message");
-logger.log({
-  level: "debug",
-  message: "debug message"
+logger
+  .info("info message")
+  .error("error message")
+  .log({
+    level: "debug",
+    message: "debug message"
+  });
+
+logger
+  .clear()
+  .close();
+
+const consoleTransport: ConsoleTransport<Levels> = new winston.transports.Console({
+  format: winston.format.combine(
+    winston.format.timestamp({ format: () => 'This is timestamp function' }),
+    winston.format.simple()
+  )
 });
-
-logger.clear();
-
-const consoleTransport: ConsoleTransport<Levels> = new winston.transports.Console();
 
 consoleTransport.level = 'debug';
 consoleTransport.silent = true;
 
-logger.add(consoleTransport);
-logger.remove(consoleTransport);
+logger
+  .add(consoleTransport)
+  .remove(consoleTransport);
 
 logger.configure({
   level: "error"
 });
 logger.warn("warn message");
 
-// $ExpectError
+// $FlowExpectedError
 logger = winston.createLogger({
   format: winston.format.prettyPrint(),
   level: "foo",
@@ -71,9 +84,10 @@ logger = winston.createLogger({
   },
   transports: [new winston.transports.Console()]
 });
-logger.foo("foo message");
-logger.bar("bar message");
-logger.info("info message");
+logger
+  .foo("foo message")
+  .bar("bar message")
+  .info("info message");
 
 logger = winston.loggers.add("categoryOneId", {
   format: winston.format.json(),
@@ -83,6 +97,9 @@ logger = winston.loggers.add("categoryOneId", {
 const hasCategoryOneId: boolean = winston.loggers.has("categoryOneId");
 
 logger.debug("categoryOneId debug message");
+
+winston.loggers.close("categoryOneId");
+winston.loggers.close();
 
 const container: Container<Levels> = new winston.Container({
   format: winston.format.json(),
@@ -99,3 +116,8 @@ const hasCategoryThreeId: boolean = container.has("categoryThreeId");
 logger = container.get("categoryTwoId");
 
 logger.error("categoryTwoId error message");
+
+container.close("categoryThreeId");
+container.close();
+
+(format: FormatSubModule);

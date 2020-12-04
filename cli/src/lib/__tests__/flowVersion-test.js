@@ -5,6 +5,7 @@ import {
   __parseVersion as parseVersion,
   toSemverString,
   toDirString,
+  compareFlowVersionAsc,
 } from '../flowVersion';
 
 describe('flowVersion', () => {
@@ -410,6 +411,152 @@ describe('flowVersion', () => {
           },
         }),
       ).toBe('flow_v1.2.3-prerel-v1-v2.2.3-prerel-v1');
+    });
+  });
+
+  describe('compareFlowVersionAsc', () => {
+    it.each([
+      [{kind: 'all'}, {kind: 'all'}, 0],
+      [
+        {kind: 'all'},
+        {
+          kind: 'specific',
+          ver: {
+            major: 0,
+            minor: 1,
+            patch: 2,
+            prerel: null,
+          },
+        },
+        -1, // a is after
+      ],
+      [
+        {
+          kind: 'specific',
+          ver: {
+            major: 0,
+            minor: 1,
+            patch: 2,
+            prerel: null,
+          },
+        },
+        {kind: 'all'},
+        1, // a is before
+      ],
+      [
+        {
+          kind: 'specific',
+          ver: {
+            major: 1,
+            minor: 1,
+            patch: 2,
+            prerel: null,
+          },
+        },
+        {
+          kind: 'specific',
+          ver: {
+            major: 0,
+            minor: 1,
+            patch: 2,
+            prerel: null,
+          },
+        },
+        -1, // a is after
+      ],
+      [
+        {
+          kind: 'range',
+          lower: {
+            major: 0,
+            minor: 80,
+            patch: 0,
+            prerel: null,
+          },
+          upper: null,
+        },
+        {
+          kind: 'specific',
+          ver: {
+            major: 0,
+            minor: 1,
+            patch: 2,
+            prerel: null,
+          },
+        },
+        -1, // a is after
+      ],
+      [
+        {
+          kind: 'range',
+          lower: {
+            major: 0,
+            minor: 80,
+            patch: 0,
+            prerel: null,
+          },
+          upper: null,
+        },
+        {
+          kind: 'range',
+          lower: null,
+          upper: {
+            major: 0,
+            minor: 1,
+            patch: 2,
+            prerel: null,
+          },
+        },
+        -1, // a is after
+      ],
+      [
+        {
+          kind: 'range',
+          lower: {
+            major: 0,
+            minor: 80,
+            patch: 0,
+            prerel: null,
+          },
+          upper: null,
+        },
+        {
+          kind: 'range',
+          lower: null,
+          upper: {
+            major: 0,
+            minor: 102,
+            patch: 2,
+            prerel: null,
+          },
+        },
+        -1, // a is after
+      ],
+      [
+        {
+          kind: 'range',
+          lower: {
+            major: 0,
+            minor: 80,
+            patch: 3,
+            prerel: null,
+          },
+          upper: null,
+        },
+        {
+          kind: 'range',
+          lower: null,
+          upper: {
+            major: 0,
+            minor: 80,
+            patch: 2,
+            prerel: null,
+          },
+        },
+        -1, // a is after
+      ],
+    ])('should compare properly %s to %s', (a, b, expected) => {
+      expect(compareFlowVersionAsc(a, b)).toBe(expected);
     });
   });
 });

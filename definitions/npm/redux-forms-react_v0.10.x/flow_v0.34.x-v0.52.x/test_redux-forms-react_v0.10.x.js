@@ -22,15 +22,15 @@ el = (
   />
 );
 
-// $ExpectError - missing prop
+// $FlowExpectedError - missing prop
 el = (<Form />);
-// $ExpectError - unknown prop
+// $FlowExpectedError - unknown prop
 el = (<Form namee="test" />);
-// $ExpectError - invalid prop
+// $FlowExpectedError - invalid prop
 el = (<Form name="test" persistent="1337" />);
-// $ExpectError - invalid prop
+// $FlowExpectedError - invalid prop
 el = (<Form name="test" onSubmit="1337" />);
-// $ExpectError - invalid prop
+// $FlowExpectedError - invalid prop
 el = (<Form name="test" withRef="1337" />);
 
 /* ========= */
@@ -50,13 +50,13 @@ el = (
   />
 );
 
-// $ExpectError - missing prop
+// $FlowExpectedError - missing prop
 el = (<Field />);
-// $ExpectError - unknown prop
+// $FlowExpectedError - unknown prop
 el = (<Field namee="test" />);
-// $ExpectError - invalid prop
+// $FlowExpectedError - invalid prop
 el = (<Field name="test" validate="bur" />);
-// $ExpectError - invalid prop
+// $FlowExpectedError - invalid prop
 el = (<Field name="test" normalize="bur" />);
 
 /* ============== */
@@ -65,7 +65,7 @@ el = (<Field name="test" normalize="bur" />);
 
 el = (<FieldArray name="test" />);
 
-// $ExpectError - missing prop
+// $FlowExpectedError - missing prop
 el = (<FieldArray />);
-// $ExpectError - unknown prop
+// $FlowExpectedError - unknown prop
 el = (<FieldArray namee="test" />);

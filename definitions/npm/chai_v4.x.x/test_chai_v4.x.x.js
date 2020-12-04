@@ -11,7 +11,7 @@ expect(
   false
 );
 
-// $ExpectError
+// $FlowExpectedError
 expect(1).to.what("nope");
 
 // Fail message
@@ -24,13 +24,13 @@ config.includeStack = true;
 config.showDiff = true;
 config.truncateThreshold = 200;
 
-// $ExpectError
+// $FlowExpectedError
 config.includeStack = 100;
 
-// $ExpectError
+// $FlowExpectedError
 config.showDiff = 100;
 
-// $ExpectError
+// $FlowExpectedError
 config.truncateThreshold = true;
 
 /**
@@ -38,7 +38,7 @@ config.truncateThreshold = true;
  */
 expect(1).to.be.a("number");
 expect([1]).to.be.an("array");
-// $ExpectError
+// $FlowExpectedError
 expect(1).to.be.a(["fail"]);
 
 expect([1]).to.include(1);
@@ -58,6 +58,7 @@ expect(1).to.be.at.most(7);
 expect(1).to.be.within(5, 6);
 
 expect(new Date()).to.be.an.instanceof(Date);
+expect(new Date()).to.be.an.instanceOf(Date);
 expect({ a: 1 }).to.have.property("a");
 expect({ a: 1 })
   .to.have.property("a")
@@ -68,7 +69,7 @@ expect({ a: { b: 1 } }).to.have.nested.property("a.b", 1);
 expect([1, 2, 3]).to.have.length.above(2);
 expect([1, 2, 3]).to.have.lengthOf(3);
 expect([1, 2, 3]).to.have.length(3);
-// $ExpectError
+// $FlowExpectedError
 expect([1, 2, 3]).to.have.length("three");
 
 expect("abc").to.match(/[a-z]{3}/);
@@ -91,7 +92,7 @@ expect({}).to.respondTo("bar");
 expect(Error).itself.to.respondTo("bar");
 
 expect(1).to.satisfy(x => x > 0);
-// $ExpectError
+// $FlowExpectedError
 expect(1).to.satisfy((x, y) => x * y);
 
 expect(0.3 - 0.2).to.be.closeTo(0.1, 1e-3);
@@ -112,11 +113,13 @@ expect(x => x).to.decrease({ val: 0 }, "val");
 // expression
 assert("1" === "1", "with message");
 assert("1" === "1");
-// $ExpectError
+// $FlowExpectedError
 assert("1" === "1", 2);
 
 // test standard assert function with overloaded message
 assert.fail(1, 2, "numbers are not the same");
+assert.fail("aa", "a");
+expect.fail(1, 2, "numbers are not the same");
 assert.fail("aa", "a");
 
 // test constructor / function checking
@@ -125,7 +128,7 @@ class SampleClass {
 }
 var instance = new SampleClass();
 assert.instanceOf(instance, SampleClass, "instance check");
-// $ExpectError
+// $FlowExpectedError
 assert.instanceOf(instance, instance);
 assert.notInstanceOf(instance, Array);
 
@@ -166,13 +169,13 @@ expect(Promise.resolve(true))
   .catch(function() {});
 
 expect(Promise.resolve(true))
-  // $ExpectError
+  // $FlowExpectedError
   .to.eventually.be.rejectedWith(Error, 2)
   .then(function() {})
   .catch(function() {});
 
 expect(Promise.resolve(true))
-  // $ExpectError
+  // $FlowExpectedError
   .to.eventually.be.rejectedWith(Error, 'this is a test', {})
   .then(function() {})
   .catch(function() {});
@@ -180,7 +183,7 @@ expect(Promise.resolve(true))
 // tests for chai-subset
 expect({}).to.containSubset({});
 expect([{}]).to.containSubset([{}]);
-// $ExpectError
+// $FlowExpectedError
 expect({}).to.containSubset(0);
 
 // tests for chai-redux-mock-store
@@ -198,9 +201,9 @@ expect({}).to.contain.dispatchedActions([
 ]);
 expect({}).to.have.dispatchedTypes(["HELLO", "OTHER_ACTION"]);
 expect({}).to.contain.dispatchedTypes(["HELLO", "OTHER_ACTION"]);
-// $ExpectError
+// $FlowExpectedError
 expect({}).to.have.dispatchedActions(["HELLO", "OTHER_ACTION"]);
-// $ExpectError
+// $FlowExpectedError
 expect({}).to.have.dispatchedTypes([
   action => {
     expect(action).to.have.property("type", "HELLO");
@@ -220,5 +223,5 @@ expect('test').to.matchSnapshot();
 expect('<div></div>').to.matchSnapshot('html');
 expect('<div></div>').to.matchSnapshot('html', true);
 expect('<div></div>').to.matchSnapshot('html', true, 'Message');
-// $ExpectError
+// $FlowExpectedError
 expect('<div></div>').to.matchSnapshot('html', 'not_boolean', 'Message');

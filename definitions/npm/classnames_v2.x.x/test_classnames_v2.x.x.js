@@ -14,10 +14,9 @@ classnames({ a: true }, "b");
 classnames({ a: null, b: undefined });
 classnames(undefined);
 classnames(null);
+classnames(true);
+classnames(123);
 classnames("a", false);
 classnames("a", ["b", null, { c: "truthy", d: null }]);
-
-// $ExpectError
-classnames(42);
-// $ExpectError
-classnames("a", ["b", 42]);
+classnames((["a", "b"]: $ReadOnlyArray<string>));
+classnames(['a', ['b', ['c', ['d']]]]);

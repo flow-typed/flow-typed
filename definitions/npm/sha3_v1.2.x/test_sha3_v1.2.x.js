@@ -6,8 +6,8 @@ const hash = new sha3.SHA3Hash(224);
 hash.update('foo');
 hash.digest('hex');
 
-// $ExpectError
+// $FlowExpectedError
 const hashFail = new sha3.SHA3Hash(1024);
 
-// $ExpectError
+// $FlowExpectedError
 hashFail.digest('base64');

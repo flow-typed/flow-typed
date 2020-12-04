@@ -49,10 +49,10 @@ describe('The `withOptions` function', () => {
   });
 
   it('should error on invalid usage', () => {
-    // $ExpectError
+    // $FlowExpectedError
     withOptions(true);
 
-    // $ExpectError
+    // $FlowExpectedError
     withOptions({
       url: true,
       goFullScreen: '',
@@ -61,7 +61,7 @@ describe('The `withOptions` function', () => {
   });
 
   it('should error on removed v3 properties', () => {
-    // $ExpectError
+    // $FlowExpectedError
     withOptions({
       showLeftPanel: true,
       showDownPanel: true,
@@ -78,10 +78,10 @@ describe('The `setOptions` function', () => {
   });
 
   it('should error on invalid usage', () => {
-    // $ExpectError
+    // $FlowExpectedError
     setOptions(true);
 
-    // $ExpectError
+    // $FlowExpectedError
     setOptions({
       url: true,
       goFullScreen: '',
@@ -90,7 +90,7 @@ describe('The `setOptions` function', () => {
   });
 
   it('should error on removed v3 properties', () => {
-    // $ExpectError
+    // $FlowExpectedError
     setOptions({
       showLeftPanel: true,
       showDownPanel: true,

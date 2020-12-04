@@ -1,6 +1,7 @@
 // @flow
 
-import {stringToVersion} from '../semver.js';
+import {stringToVersion, getRangeLowerBound} from '../semver.js';
+import {Range} from 'semver';
 
 describe('semver', () => {
   describe('stringToVersion', () => {
@@ -41,6 +42,18 @@ describe('semver', () => {
         minor: 2,
         patch: 'x',
       });
+    });
+  });
+  describe('getRangeLowerBound', () => {
+    it('gets correct lower bound for string', () => {
+      expect(getRangeLowerBound('v1.2.x')).toEqual('1.2.0');
+      expect(getRangeLowerBound('v1.x.x')).toEqual('1.0.0');
+      expect(getRangeLowerBound('^v0.x.x')).toEqual('0.0.0');
+    });
+    it('gets correct lower bound for string', () => {
+      expect(getRangeLowerBound(new Range('v1.2.x'))).toEqual('1.2.0');
+      expect(getRangeLowerBound(new Range('v1.x.x'))).toEqual('1.0.0');
+      expect(getRangeLowerBound(new Range('^v0.x.x'))).toEqual('0.0.0');
     });
   });
 });

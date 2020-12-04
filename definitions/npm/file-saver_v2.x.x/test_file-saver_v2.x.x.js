@@ -20,9 +20,9 @@ describe('The `data` parameter', () => {
   });
 
   it('should error on invalid usage', () => {
-    // $ExpectError
+    // $FlowExpectedError
     saveAs();
-    // $ExpectError
+    // $FlowExpectedError
     saveAs([]);
   });
 });
@@ -33,9 +33,9 @@ describe('The `filename` parameter', () => {
   });
 
   it('should error on invalid usage', () => {
-    // $ExpectError
+    // $FlowExpectedError
     saveAs('', blob);
-    // $ExpectError
+    // $FlowExpectedError
     saveAs('', []);
   });
 });
@@ -46,13 +46,13 @@ describe('The `options` parameter', () => {
   });
 
   it('should error on invalid usage', () => {
-    // $ExpectError
+    // $FlowExpectedError
     saveAs('', '', {});
-    // $ExpectError
+    // $FlowExpectedError
     saveAs('', '', { test: true });
-    // $ExpectError
+    // $FlowExpectedError
     saveAs('', '', blob);
-    // $ExpectError
+    // $FlowExpectedError
     saveAs('', '', '');
   });
 });

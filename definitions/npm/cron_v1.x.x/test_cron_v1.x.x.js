@@ -48,7 +48,7 @@ const running: boolean | void = job3.running;
 (job3.start(): void);
 (job3.stop(): void);
 
-// $ExpectError
+// $FlowExpectedError
 const job4: CronJob = new CronJob(123456, () => {
   /*
    * Runs every weekday (Monday through Friday)
@@ -66,5 +66,5 @@ const job4: CronJob = new CronJob(123456, () => {
 const cronTime1 = new CronTime('* * * * * *');
 const cronTime2 = new CronTime(new Date());
 
-// $ExpectError
+// $FlowExpectedError
 new CronTime(1234);

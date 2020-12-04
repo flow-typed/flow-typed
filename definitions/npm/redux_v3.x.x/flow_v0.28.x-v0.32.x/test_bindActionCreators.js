@@ -11,13 +11,13 @@ declare var dispatch: Dispatch<Action>;
 
 const ac1 = bindActionCreators((n: number) => ({ type: 'A' }), dispatch)
 ac1(1)
-// $ExpectError
+// $FlowExpectedError
 ac3('wrong') // wrong argument
-// $ExpectError
+// $FlowExpectedError
 const ac2 = bindActionCreators(() => 'wrong', dispatch) // wrong return value
 const ac3 = bindActionCreators((n: number, s: string) => ({ type: 'A' }), dispatch)
 ac3(1, 'ok')
-// $ExpectError
+// $FlowExpectedError
 ac3(1, 2) // wrong argument
 
 //
@@ -30,12 +30,12 @@ const acs1 = bindActionCreators({
 }, dispatch)
 acs1.a(1)
 acs1.b(1, 's')
-// $ExpectError
+// $FlowExpectedError
 acs1.a('s')
-// $ExpectError
+// $FlowExpectedError
 acs1.b(1, 2)
 const acs2 = bindActionCreators({
   a: () => ({ type: 'A' }),
-  // $ExpectError
+  // $FlowExpectedError
   b: () => 'wrong' // wrong return value
 }, dispatch)

@@ -27,7 +27,7 @@ const HelmetComponent = () => (
 
 
 const fail = () => (
-    // $ExpectError
+    // $FlowExpectedError
     <Helmet title={{}} />
 )
 
@@ -43,19 +43,19 @@ heads.forEach((head) => {
   (head.script.toString(): string);
   (head.style.toString(): string);
 
-  // $ExpectError
+  // $FlowExpectedError
   (head.htmlAttributes.toString(): boolean);
-  // $ExpectError
+  // $FlowExpectedError
   (head.title.toString(): boolean);
-  // $ExpectError
+  // $FlowExpectedError
   (head.base.toString(): boolean);
-  // $ExpectError
+  // $FlowExpectedError
   (head.meta.toString(): boolean);
-  // $ExpectError
+  // $FlowExpectedError
   (head.link.toString(): boolean);
-  // $ExpectError
+  // $FlowExpectedError
   (head.script.toString(): boolean);
-  // $ExpectError
+  // $FlowExpectedError
   (head.style.toString(): boolean);
 
   const Component = (

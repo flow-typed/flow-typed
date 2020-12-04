@@ -4,7 +4,7 @@ import RoutesBuiler, { type Routes } from 'next-routes';
 
 const routes: Routes = RoutesBuiler();
 
-// $ExpectError
+// $FlowExpectedError
 routes.add();
 
 const routesV2: Routes = routes.add('about')
@@ -24,24 +24,24 @@ Router.replaceRoute('/blog/hello-world');
 Router.prefetchRoute('blog', {slug: 'hello-world'});
 Router.prefetchRoute('/blog/hello-world')
 
-// $ExpectError
+// $FlowExpectedError
 RoutesBuiler({ Link: null, Router: null});
 
-// $ExpectError
+// $FlowExpectedError
 RoutesBuiler({});
 
-// $ExpectError
+// $FlowExpectedError
 Router.pushRoute();
 
-// $ExpectError
+// $FlowExpectedError
 Router.replaceRoute();
 
-// $ExpectError
+// $FlowExpectedError
 Router.prefetchRoute();
 
-// $ExpectError
+// $FlowExpectedError
 Router.events.on('unknown', (url: string) => {});
-// $ExpectError
+// $FlowExpectedError
 Router.events.off('unknown', (url: string) => {});
 
 Router.events.on('routeChangeStart', (url: string) => {});

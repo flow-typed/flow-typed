@@ -3,13 +3,13 @@
 import { getEmptyImage, NativeTypes } from "react-dnd-html5-backend";
 
 (getEmptyImage(): Image);
-// $ExpectError
+// $FlowExpectedError
 (getEmptyImage(): number);
 
 var a: $npm$reactDnd$NativeTypes = NativeTypes.FILE;
 var a: $npm$reactDnd$NativeTypes = NativeTypes.URL;
 var a: $npm$reactDnd$NativeTypes = NativeTypes.TEXT;
-// $ExpectError
+// $FlowExpectedError
 var a: $npm$reactDnd$NativeTypes = NativeTypes.NOPE;
-// $ExpectError
+// $FlowExpectedError
 var a: $npm$reactDnd$NativeTypes = "FILE";

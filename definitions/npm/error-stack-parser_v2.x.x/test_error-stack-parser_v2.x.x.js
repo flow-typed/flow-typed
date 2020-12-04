@@ -2,5 +2,5 @@ import ErrorStackParser from "error-stack-parser";
 
 ErrorStackParser.parse(new Error());
 
-// $ExpectError
+// $FlowExpectedError
 ErrorStackParser.parse("error");

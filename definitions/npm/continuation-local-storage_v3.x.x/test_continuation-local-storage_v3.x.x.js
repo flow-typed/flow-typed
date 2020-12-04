@@ -9,7 +9,7 @@ cls.getNamespace('namespaceTwo');
 
 ns.run(function() {});
 
-// $ExpectError number. This type is incompatible with Function
+// $FlowExpectedError number. This type is incompatible with Function
 ns.run(3);
 
 function someFunction() {}
@@ -17,11 +17,11 @@ ns.bind(someFunction);
 
 var notAFunction = true;
 
-// $ExpectError boolean. This type is incompatible with Function
+// $FlowExpectedError boolean. This type is incompatible with Function
 ns.bind(notAFunction);
 
-// $ExpectError string. This type is incompatible with Namespace
+// $FlowExpectedError string. This type is incompatible with Namespace
 var ns2: string = cls.getNamespace('namespaceTwo')
 
-// $ExpectError number. This type is incompatible with string
+// $FlowExpectedError number. This type is incompatible with string
 cls.destroyNamespace(3);
