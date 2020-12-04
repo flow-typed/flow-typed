@@ -130,7 +130,7 @@ export async function verifyCLIVersion(): Promise<void> {
     'definitions',
     '.cli-metadata.json',
   );
-  const metadata = JSON.parse(String(await fs.readFile(metadataPath)));
+  const metadata = await fs.readJson(metadataPath);
   const compatibleCLIRange = metadata.compatibleCLIRange;
   if (!compatibleCLIRange) {
     throw new Error(
@@ -139,9 +139,7 @@ export async function verifyCLIVersion(): Promise<void> {
     );
   }
   const thisCLIPkgJsonPath = path.join(__dirname, '..', '..', 'package.json');
-  const thisCLIPkgJson = JSON.parse(
-    String(await fs.readFile(thisCLIPkgJsonPath)),
-  );
+  const thisCLIPkgJson = await fs.readJson(thisCLIPkgJsonPath);
   const thisCLIVersion = thisCLIPkgJson.version;
   if (!semver.satisfies(thisCLIVersion, compatibleCLIRange)) {
     throw new Error(

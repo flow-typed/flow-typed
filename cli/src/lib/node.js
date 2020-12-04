@@ -93,6 +93,7 @@ export const fs = {
   open: fsExtra.open,
   readdir: fsExtra.readdir,
   readFile: fsExtra.readFile,
+  readJson: fsExtra.readJson,
   rename: fsExtra.rename,
   rmdir: fsExtra.rmdir,
   stat: fsExtra.stat,
@@ -100,6 +101,7 @@ export const fs = {
   Stats: fsExtra.Stats,
   unlink: fsExtra.unlink,
   writeFile: fsExtra.writeFile,
+  writeJson: fsExtra.writeJson,
 };
 export const https = node_https;
 export const os = node_os;

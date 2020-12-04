@@ -93,10 +93,10 @@ export function getPackageJsonDependencies(
 
 export async function getPackageJsonData(pathStr: string): Promise<PkgJson> {
   const pkgJsonPath = await findPackageJsonPath(pathStr);
-  const pkgJsonContent = await fs.readFile(pkgJsonPath);
+  const pkgJsonContent = await fs.readJson(pkgJsonPath);
   return {
     pathStr: pkgJsonPath,
-    content: JSON.parse(pkgJsonContent.toString()),
+    content: pkgJsonContent,
   };
 }
 
