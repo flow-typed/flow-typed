@@ -52,7 +52,7 @@ declare module 'mqtt-packet' {
         contentType?: string,
         responseTopic?: string,
         correlationData?: Buffer,
-        userProperties?: Object,
+        userProperties?: { ... },
       |},
     |},
     properties?: {|
@@ -62,7 +62,7 @@ declare module 'mqtt-packet' {
       topicAliasMaximum?: number,
       requestResponseInformation?: boolean,
       requestProblemInformation?: boolean,
-      userProperties?: Object,
+      userProperties?: { ... },
       authenticationMethod?: string,
       authenticationData?: Buffer,
     |},
@@ -82,7 +82,7 @@ declare module 'mqtt-packet' {
       topicAlias?: number,
       responseTopic?: string,
       correlationData?: Buffer,
-      userProperties?: Object,
+      userProperties?: { ... },
       subscriptionIdentifier?: number,
       contentType?: string,
     |},
@@ -102,7 +102,7 @@ declare module 'mqtt-packet' {
       assignedClientIdentifier?: string,
       topicAliasMaximum?: number,
       reasonString?: string,
-      userProperties?: Object,
+      userProperties?: { ... },
       wildcardSubscriptionAvailable?: boolean,
       subscriptionIdentifiersAvailable?: boolean,
       sharedSubscriptionAvailable?: boolean,
@@ -128,7 +128,7 @@ declare module 'mqtt-packet' {
     subscriptions: ISubscription[],
     properties?: {|
       reasonString?: string,
-      userProperties?: Object,
+      userProperties?: { ... },
     |},
   |};
 
@@ -137,9 +137,9 @@ declare module 'mqtt-packet' {
     cmd: 'suback',
     properties?: {|
       reasonString?: string,
-      userProperties?: Object,
+      userProperties?: { ... },
     |},
-    granted: number[] | Object[],
+    granted: number[] | { ... }[],
   |};
 
   declare export type IUnsubscribePacket = {|
@@ -147,7 +147,7 @@ declare module 'mqtt-packet' {
     cmd: 'unsubscribe',
     properties?: {|
       reasonString?: string,
-      userProperties?: Object,
+      userProperties?: { ... },
     |},
     unsubscriptions: string[],
   |};
@@ -157,7 +157,7 @@ declare module 'mqtt-packet' {
     cmd: 'unsuback',
     properties?: {|
       reasonString?: string,
-      userProperties?: Object,
+      userProperties?: { ... },
     |},
   |};
 
@@ -166,7 +166,7 @@ declare module 'mqtt-packet' {
     cmd: 'puback',
     properties?: {|
       reasonString?: string,
-      userProperties?: Object,
+      userProperties?: { ... },
     |},
   |};
 
@@ -175,7 +175,7 @@ declare module 'mqtt-packet' {
     cmd: 'pubcomp',
     properties?: {|
       reasonString?: string,
-      userProperties?: Object,
+      userProperties?: { ... },
     |},
   |};
 
@@ -184,7 +184,7 @@ declare module 'mqtt-packet' {
     cmd: 'pubrel',
     properties?: {|
       reasonString?: string,
-      userProperties?: Object,
+      userProperties?: { ... },
     |},
   |};
 
@@ -193,7 +193,7 @@ declare module 'mqtt-packet' {
     cmd: 'pubrec',
     properties?: {|
       reasonString?: string,
-      userProperties?: Object,
+      userProperties?: { ... },
     |},
   |};
 
@@ -213,7 +213,7 @@ declare module 'mqtt-packet' {
     properties?: {|
       sessionExpiryInterval?: number,
       reasonString?: string,
-      userProperties?: Object,
+      userProperties?: { ... },
       serverReference?: string,
     |},
   |};
@@ -259,10 +259,10 @@ declare module 'mqtt-packet' {
     ...
   };
 
-  declare export function generate(packet: Packet, opts?: Object): Buffer;
+  declare export function generate(packet: Packet, opts?: { ... }): Buffer;
 
   declare export var writeToStream: {|
-    (object: Packet, stream: WritableStream, opts?: Object): void,
+    (object: Packet, stream: WritableStream, opts?: { ... }): void,
     cacheNumbers: boolean,
   |};
 }

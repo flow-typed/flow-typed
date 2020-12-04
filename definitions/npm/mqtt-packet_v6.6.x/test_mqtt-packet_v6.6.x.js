@@ -65,7 +65,7 @@ describe('mqtt-packet', () => {
           contentType: 'foo',
           responseTopic: 'response/topic',
           correlationData: Buffer.alloc(5),
-          userProperties: {},
+          userProperties: { foo: 'bar' },
         },
       },
     };
@@ -93,6 +93,30 @@ describe('mqtt-packet', () => {
       },
     };
 
+    // $FlowFixMe[incompatible-type]
+    const packet3: mqtt.Packet = {
+      cmd: 'connect',
+      clientId: 'foo',
+      protocolVersion: 5,
+      protocolId: 'MQTT',
+      username: 'user',
+      will: {
+        topic: 'some/topic',
+        payload: Buffer.alloc(5),
+        qos: 1,
+        retain: true,
+        properties: {
+          willDelayInterval: 0,
+          payloadFormatIndicator: 0,
+          messageExpiryInterval: 1000,
+          contentType: 'foo',
+          responseTopic: 'response/topic',
+          correlationData: Buffer.alloc(5),
+          userProperties: [],
+        },
+      },
+    };
+
     mqtt.generate({
       cmd: 'connect',
       clientId: 'foo',
@@ -111,7 +135,7 @@ describe('mqtt-packet', () => {
           contentType: 'foo',
           responseTopic: 'response/topic',
           correlationData: Buffer.alloc(5),
-          userProperties: {},
+          userProperties: { baz: 'qux' },
         },
       },
     });
