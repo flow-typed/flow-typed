@@ -141,7 +141,7 @@ export async function run(args: Args) {
   if (args.ignoreDeps !== undefined && !Array.isArray(args.ignoreDeps)) {
     throw new Error('ignoreDeps is not array');
   }
-  const ignoreDeps = (args.ignoreDeps || []).map((dep) => {
+  const ignoreDeps = (args.ignoreDeps || []).map(dep => {
     if (typeof dep !== 'string') {
       throw new Error('ignoreDeps should be array of strings');
     }
@@ -153,7 +153,7 @@ export async function run(args: Args) {
   ) {
     throw new Error('explicitLibDefs is not array');
   }
-  const explicitLibDefs = (args.explicitLibDefs || []).map((dep) => {
+  const explicitLibDefs = (args.explicitLibDefs || []).map(dep => {
     if (typeof dep !== 'string') {
       throw new Error('explicitLibDefs should be array of strings');
     }
@@ -374,7 +374,7 @@ async function installNpmLibDefs({
       }),
     );
 
-    if (results.some((res) => !res)) {
+    if (results.some(res => !res)) {
       return 1;
     }
   }

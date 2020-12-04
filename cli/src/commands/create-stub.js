@@ -75,7 +75,7 @@ export async function run(args: Args): Promise<number> {
   if (args.packages !== undefined && !Array.isArray(args.packages)) {
     throw new Error('packages is not array');
   }
-  const packages = (args.packages || []).map((dep) => {
+  const packages = (args.packages || []).map(dep => {
     if (typeof dep !== 'string') {
       throw new Error('packages should be array of strings');
     }
@@ -102,7 +102,7 @@ export async function run(args: Args): Promise<number> {
   const plural = packages.length > 1 ? 'stubs' : 'stub';
   console.log(`• Creating ${packages.length} ${plural}...`);
   const results = await Promise.all(
-    packages.map((pkg) => {
+    packages.map(pkg => {
       let version = null;
 
       /* Four cases to consider
