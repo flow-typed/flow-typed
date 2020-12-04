@@ -32,11 +32,17 @@ export const fs = {
   mkdir: node_fs.mkdir,
   readdir: node_fs.readdir,
   // $FlowFixMe
-  readFile: jest.fn((filePath: string): Promise<Buffer> => {
+  readFile: jest.fn((filePath: string, encoding?: any): Promise<
+    string | Buffer,
+  > => {
     return new Promise((resolve, reject) => {
       process.nextTick(() => {
         if (fs.mockFiles[filePath]) {
-          resolve(fs.mockFiles[filePath]);
+          resolve(
+            typeof encoding === 'string'
+              ? fs.mockFiles[filePath].toString(encoding)
+              : fs.mockFiles[filePath],
+          );
         } else {
           reject(
             new Error(`ENOENT: no such file or directory, open '${filePath}'`),
@@ -45,6 +51,8 @@ export const fs = {
       });
     });
   }),
+  readJson: (filePath: string): Promise<any> =>
+    fs.readFile(filePath, 'utf8').then(data => JSON.parse(data)),
   rename: node_fs.rename,
   rmdir: node_fs.rmdir,
   stat: node_fs.stat,
@@ -52,6 +60,7 @@ export const fs = {
   Stats: node_fs.Stats,
   unlink: node_fs.unlink,
   writeFile: node_fs.writeFile,
+  writeJson: node_fs.writeJson,
 };
 
 export const https = node_https;
