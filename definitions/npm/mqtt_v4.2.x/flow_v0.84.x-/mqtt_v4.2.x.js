@@ -616,6 +616,7 @@ declare module 'mqtt/lib/client' {
     offline: OnOfflineCallback,
     disconnect: OnDisconnectCallback,
     message: OnMessageCallback,
+    close: CloseCallback,
     packetsend: OnPacketCallback,
     packetreceive: OnPacketCallback,
     error: OnErrorCallback,
