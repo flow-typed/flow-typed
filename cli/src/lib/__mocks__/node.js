@@ -52,7 +52,7 @@ export const fs = {
     });
   }),
   readJson: (filePath: string): Promise<any> =>
-    fs.readFile(filePath, 'utf8').then(data => JSON.parse(data)),
+    fs.readFile(filePath, 'utf8').then(data => JSON.parse(String(data))),
   rename: node_fs.rename,
   rmdir: node_fs.rmdir,
   stat: node_fs.stat,
