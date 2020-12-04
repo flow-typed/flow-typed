@@ -1,3 +1,39 @@
+import EventEmitter from 'events';
+
+declare class TypedEventEmitter<Events> extends EventEmitter {
+  addListener<Event: $Keys<Events>>(
+    event: Event,
+    listener: $ElementType<Events, Event>
+  ): this;
+  emit: <Event: $Keys<Events>>(
+    event: Event,
+    ...$Call<<A>(...args: A) => A, $ElementType<Events, Event>>
+  ) => boolean;
+  eventNames(): Array<$Keys<Events>>;
+  listeners(event: $Keys<Events>): Array<Function>;
+  listenerCount(event: $Keys<Events>): number;
+  on<Event: $Keys<Events>>(
+    event: Event,
+    listener: $ElementType<Events, Event>
+  ): this;
+  once<Event: $Keys<Events>>(
+    event: Event,
+    listener: $ElementType<Events, Event>
+  ): this;
+  prependListener<Event: $Keys<Events>>(
+    event: Event,
+    listener: $ElementType<Events, Event>
+  ): this;
+  prependOnceListener<Event: $Keys<Events>>(
+    event: Event,
+    listener: $ElementType<Events, Event>
+  ): this;
+  removeAllListeners(event?: $Keys<Events>): this;
+  removeListener(event: $Keys<Events>, listener: Function): this;
+  setMaxListeners(n: number): this;
+  getMaxListeners(): number;
+}
+
 declare module 'mqtt-packet' {
   declare export type QoS = 0 | 1 | 2;
 
@@ -30,7 +66,7 @@ declare module 'mqtt-packet' {
     ...
   };
 
-  declare export type IConnectPacket = {|
+  declare export type ConnectPacket = {|
     ...CommonPacketFields,
     cmd: 'connect',
     clientId: string,
@@ -42,7 +78,7 @@ declare module 'mqtt-packet' {
     password?: Buffer,
     will?: {|
       topic: string,
-      payload: Buffer,
+      payload: string | Buffer,
       qos?: QoS,
       retain?: boolean,
       properties?: {|
@@ -68,7 +104,7 @@ declare module 'mqtt-packet' {
     |},
   |};
 
-  declare export type IPublishPacket = {|
+  declare export type PublishPacket = {|
     ...CommonPacketFields,
     cmd: 'publish',
     qos: QoS,
@@ -88,7 +124,7 @@ declare module 'mqtt-packet' {
     |},
   |};
 
-  declare export type IConnackPacket = {|
+  declare export type ConnackPacket = {|
     ...CommonPacketFields,
     cmd: 'connack',
     returnCode: number,
@@ -114,7 +150,7 @@ declare module 'mqtt-packet' {
     |},
   |};
 
-  declare export type ISubscription = {|
+  declare export type Subscription = {|
     topic: string,
     qos: QoS,
     nl?: boolean,
@@ -122,17 +158,17 @@ declare module 'mqtt-packet' {
     rh?: number,
   |};
 
-  declare export type ISubscribePacket = {|
+  declare export type SubscribePacket = {|
     ...CommonPacketFields,
     cmd: 'subscribe',
-    subscriptions: ISubscription[],
+    subscriptions: Subscription[],
     properties?: {|
       reasonString?: string,
       userProperties?: { ... },
     |},
   |};
 
-  declare export type ISubackPacket = {|
+  declare export type SubackPacket = {|
     ...CommonPacketFields,
     cmd: 'suback',
     properties?: {|
@@ -142,7 +178,7 @@ declare module 'mqtt-packet' {
     granted: number[] | { ... }[],
   |};
 
-  declare export type IUnsubscribePacket = {|
+  declare export type UnsubscribePacket = {|
     ...CommonPacketFields,
     cmd: 'unsubscribe',
     properties?: {|
@@ -152,7 +188,7 @@ declare module 'mqtt-packet' {
     unsubscriptions: string[],
   |};
 
-  declare export type IUnsubackPacket = {|
+  declare export type UnsubackPacket = {|
     ...CommonPacketFields,
     cmd: 'unsuback',
     properties?: {|
@@ -161,7 +197,7 @@ declare module 'mqtt-packet' {
     |},
   |};
 
-  declare export type IPubackPacket = {|
+  declare export type PubackPacket = {|
     ...CommonPacketFields,
     cmd: 'puback',
     properties?: {|
@@ -170,7 +206,7 @@ declare module 'mqtt-packet' {
     |},
   |};
 
-  declare export type IPubcompPacket = {|
+  declare export type PubcompPacket = {|
     ...CommonPacketFields,
     cmd: 'pubcomp',
     properties?: {|
@@ -179,7 +215,7 @@ declare module 'mqtt-packet' {
     |},
   |};
 
-  declare export type IPubrelPacket = {|
+  declare export type PubrelPacket = {|
     ...CommonPacketFields,
     cmd: 'pubrel',
     properties?: {|
@@ -188,7 +224,7 @@ declare module 'mqtt-packet' {
     |},
   |};
 
-  declare export type IPubrecPacket = {|
+  declare export type PubrecPacket = {|
     ...CommonPacketFields,
     cmd: 'pubrec',
     properties?: {|
@@ -197,17 +233,17 @@ declare module 'mqtt-packet' {
     |},
   |};
 
-  declare export type IPingreqPacket = {|
+  declare export type PingreqPacket = {|
     ...CommonPacketFields,
     cmd: 'pingreq',
   |};
 
-  declare export type IPingrespPacket = {|
+  declare export type PingrespPacket = {|
     ...CommonPacketFields,
     cmd: 'pingresp',
   |};
 
-  declare export type IDisconnectPacket = {|
+  declare export type DisconnectPacket = {|
     ...CommonPacketFields,
     cmd: 'disconnect',
     properties?: {|
@@ -219,25 +255,30 @@ declare module 'mqtt-packet' {
   |};
 
   declare export type Packet =
-    | IConnectPacket
-    | IPublishPacket
-    | IConnackPacket
-    | ISubscribePacket
-    | ISubackPacket
-    | IUnsubscribePacket
-    | IUnsubackPacket
-    | IPubackPacket
-    | IPubcompPacket
-    | IPubrelPacket
-    | IPingreqPacket
-    | IPingrespPacket
-    | IDisconnectPacket
-    | IPubrecPacket;
+    | ConnectPacket
+    | PublishPacket
+    | ConnackPacket
+    | SubscribePacket
+    | SubackPacket
+    | UnsubscribePacket
+    | UnsubackPacket
+    | PubackPacket
+    | PubcompPacket
+    | PubrelPacket
+    | PingreqPacket
+    | PingrespPacket
+    | DisconnectPacket
+    | PubrecPacket;
 
   declare export type ParserOptions = {
     protocolVersion?: ProtocolVersion,
     ...
   };
+
+  declare type ParserEvents = {|
+    packet: (packet: Packet) => mixed,
+    error: (error: Error) => mixed,
+  |};
 
   declare export class Parser extends EventEmitter {
     on(event: 'packet', callback: (packet: Packet) => void): this;
