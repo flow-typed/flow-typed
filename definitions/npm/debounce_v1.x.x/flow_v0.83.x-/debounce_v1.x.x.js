@@ -1,8 +1,8 @@
 declare module 'debounce' {
-  declare type Cancelable = {
+  declare type Cancelable = {|
     cancel: () => void,
     flush: () => void
-  };
+  |};
 
   declare type Debounce = <T>(func: T, wait: number, immediate?: boolean) => T & Cancelable;
 
