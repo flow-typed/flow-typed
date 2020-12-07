@@ -2,6 +2,7 @@
 
 import md5 from 'md5';
 import through from 'through';
+import { DEFAULT_REPO_NAME } from './repoUtils';
 
 const VERSION_COMMENT_RE = /\/\/ flow-typed version: (.*)$/;
 export function getSignedCodeVersion(signedCode: string): string | null {
@@ -13,20 +14,21 @@ export function getSignedCodeVersion(signedCode: string): string | null {
   return versionMatches[1];
 }
 
-export function signCode(code: string, version: string): string {
-  const versionedCode = `// flow-typed version: ${version}\n\n${code}`;
+export function signCode(code: string, version: string, repoName: string): string {
+  const repoInfo = repoName === DEFAULT_REPO_NAME ? '' : `// flow-typed repository: ${repoName}\n`;
+  const versionedCode = `${repoInfo}// flow-typed version: ${version}\n\n${code}`;
   const hash = md5(versionedCode);
   return `// flow-typed signature: ${hash}\n${versionedCode}`;
 }
 
-export function signCodeStream(version: string) {
+export function signCodeStream(version: string, repoName: string) {
   let code = '';
   return through(
     function write(data) {
       code += data;
     },
     function end() {
-      this.emit('data', signCode(code, version));
+      this.emit('data', signCode(code, version, repoName));
       this.emit('close');
     },
   );

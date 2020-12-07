@@ -6,6 +6,7 @@ export const description = 'Create a libdef stub for an untyped npm package';
 import {createStub} from '../lib/stubUtils.js';
 import {findFlowRoot} from '../lib/flowProjectUtils.js';
 import {path} from '../lib/node';
+import {validateStringArray} from '../lib/validationUtils.js';
 
 export function setup(yargs: Object) {
   return yargs
@@ -71,15 +72,8 @@ function failWithMessage(message: string) {
 }
 
 export async function run(args: Args): Promise<number> {
-  if (args.packages !== undefined && !Array.isArray(args.packages)) {
-    throw new Error('packages is not array');
-  }
-  const packages = (args.packages || []).map(dep => {
-    if (typeof dep !== 'string') {
-      throw new Error('packages should be array of strings');
-    }
-    return dep;
-  });
+  const packages = validateStringArray('packages', args.packages || []);
+
   const cwd =
     typeof args.rootDir === 'string'
       ? path.resolve(args.rootDir)

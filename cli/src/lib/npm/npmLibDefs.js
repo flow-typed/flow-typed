@@ -2,7 +2,7 @@
 
 import {
   ensureCacheRepo,
-  getCacheRepoDir,
+  getCacheRepoDefsDir,
   verifyCLIVersion,
   CACHE_REPO_EXPIRY,
 } from '../cacheRepoUtils';
@@ -180,10 +180,11 @@ async function extractLibDefsFromNpmPkgDir(
   return libDefs;
 }
 
-async function getCacheNpmLibDefs(cacheExpiry) {
-  await ensureCacheRepo(cacheExpiry);
-  await verifyCLIVersion();
-  return getNpmLibDefs(path.join(getCacheRepoDir(), 'definitions'));
+async function getCacheNpmLibDefs(cacheExpiry, repoName: string) {
+  // TODO: repoUrl
+  await ensureCacheRepo(repoName, cacheExpiry);
+  await verifyCLIVersion(repoName);
+  return getNpmLibDefs(getCacheRepoDefsDir(repoName));
 }
 
 const PKG_NAMEVER_RE = /^(.*)_v\^?([0-9]+)\.([0-9]+|x)\.([0-9]+|x)(-.*)?$/;
@@ -344,9 +345,10 @@ export async function findNpmLibDef(
   pkgName: string,
   pkgVersion: string,
   flowVersion: FlowVersion,
+  repoName: string,
   useCacheUntil: number = CACHE_REPO_EXPIRY,
 ): Promise<null | NpmLibDef> {
-  const libDefs = await getCacheNpmLibDefs(useCacheUntil);
+  const libDefs = await getCacheNpmLibDefs(useCacheUntil, repoName);
   const filteredLibDefs = filterLibDefs(libDefs, {
     type: 'exact',
     pkgName,

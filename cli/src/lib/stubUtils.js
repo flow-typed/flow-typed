@@ -16,6 +16,7 @@ import {path} from './node';
 import {signCode} from './codeSign';
 import {verifySignedCode} from './codeSign';
 import {versionToString} from './semver';
+import { DEFAULT_REPO_NAME } from './repoUtils';
 
 export function glob(pattern: string, options: Object): Promise<Array<string>> {
   return new Promise((resolve, reject) =>
@@ -346,7 +347,7 @@ declare module '%s' {
     ? `/flow_${versionToString(flowVersionRaw)}`
     : '';
   const stubVersion = `<<STUB>>/${packageName}_v${packageVersion}${flowVersion}`;
-  await fs.writeFile(filename, signCode(output, stubVersion));
+  await fs.writeFile(filename, signCode(output, stubVersion, DEFAULT_REPO_NAME));
   return filename;
 }
 

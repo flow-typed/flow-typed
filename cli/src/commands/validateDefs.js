@@ -1,8 +1,8 @@
 // @flow
 
 import {fs} from '../lib/node';
-
 import {getNpmLibDefs} from '../lib/npm/npmLibDefs';
+import {validateString} from '../lib/validationUtils';
 import typeof Yargs from 'yargs';
 
 export const name = 'validate-defs <definitionsDirPath>';
@@ -21,10 +21,10 @@ export function setup(yargs: Yargs) {
 }
 
 export async function run(args: Args) {
-  const defsDirPath = args.definitionsDirPath;
-  if (typeof defsDirPath !== 'string') {
-    throw new Error('definitionsDirPath should be a string');
-  }
+  const defsDirPath = validateString(
+    'definitionsDirPath',
+    args.definitionsDirPath,
+  );
 
   if (!(await fs.exists(defsDirPath))) {
     console.error('Error: Path does not exist: %s', defsDirPath);

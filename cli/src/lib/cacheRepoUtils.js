@@ -8,18 +8,22 @@ import {fs, os, path} from './node';
 
 import semver from 'semver';
 
-export const CACHE_REPO_EXPIRY = 1000 * 60; // 1 minute
-const REMOTE_REPO_URL = 'https://github.com/flowtype/flow-typed.git';
+import {isFlowTypedRepoUrl, getGithubRepoUrl} from './repoUtils';
+import md5 from 'md5';
 
-async function cloneCacheRepo() {
-  await mkdirp(getCacheRepoDir());
+export const CACHE_REPO_EXPIRY = 1000 * 60; // 1 minute
+
+async function cloneCacheRepo(repoName: string) {
+  const repoCacheDir = getCacheRepoDir(repoName);
+  const repoUrl = getGithubRepoUrl(repoName);
+  await mkdirp(repoCacheDir);
   try {
-    await cloneInto(REMOTE_REPO_URL, getCacheRepoDir());
+    await cloneInto(repoUrl, repoCacheDir);
   } catch (e) {
     console.error('ERROR: Unable to clone local cache repo!');
     throw e;
   }
-  await fs.writeFile(getLastUpdatedFile(), String(Date.now()));
+  await fs.writeFile(getLastUpdatedFile(repoName), String(Date.now()));
 }
 
 let customCacheDir = null;
@@ -35,31 +39,39 @@ function setCustomCacheDir(dir: string): void {
   customCacheDir = dir;
 }
 
-function getCacheRepoGitDir() {
-  return path.join(getCacheRepoDir(), '.git');
+function getCacheRepoGitDir(repoName: string) {
+  return path.join(getCacheRepoDir(repoName), '.git');
 }
 
-function getLastUpdatedFile() {
-  return path.join(getCacheRepoDir(), 'lastUpdated');
+export function getCacheRepoDefsDir(repoName: string) {
+  return path.join(getCacheRepoDir(repoName), 'definitions');
 }
 
-async function rebaseCacheRepo() {
+export function getCacheRepoNpmDefsDir(repoName: string) {
+  return path.join(getCacheRepoDefsDir(repoName), 'npm');
+}
+
+function getLastUpdatedFile(repoName: string) {
+  return path.join(getCacheRepoDir(repoName), 'lastUpdated');
+}
+
+async function rebaseCacheRepo(repoName: string) {
   if (
-    (await fs.exists(getCacheRepoDir())) &&
-    (await fs.exists(getCacheRepoGitDir()))
+    (await fs.exists(getCacheRepoDir(repoName))) &&
+    (await fs.exists(getCacheRepoGitDir(repoName)))
   ) {
     try {
-      await rebaseRepoMaster(getCacheRepoDir());
+      await rebaseRepoMaster(getCacheRepoDir(repoName));
     } catch (e) {
       console.error(
         'ERROR: Unable to rebase the local cache repo. ' + e.message,
       );
       return false;
     }
-    await fs.writeFile(getLastUpdatedFile(), String(Date.now()));
+    await fs.writeFile(getLastUpdatedFile(repoName), String(Date.now()));
     return true;
   } else {
-    await cloneCacheRepo();
+    await cloneCacheRepo(repoName);
     return true;
   }
 }
@@ -76,6 +88,7 @@ const cacheRepoEnsureToken: {
   pendingEnsurance: Promise.resolve(),
 };
 export async function ensureCacheRepo(
+  repoName: string,
   cacheRepoExpiry: number = CACHE_REPO_EXPIRY,
 ) {
   // Only re-run rebase checks if a check hasn't been run in the last 5 minutes
@@ -87,17 +100,19 @@ export async function ensureCacheRepo(
   const prevEnsurance = cacheRepoEnsureToken.pendingEnsurance;
   return (cacheRepoEnsureToken.pendingEnsurance = prevEnsurance.then(() =>
     (async function() {
-      const repoDirExists = fs.exists(getCacheRepoDir());
-      const repoGitDirExists = fs.exists(getCacheRepoGitDir());
+      const repoDirExists = fs.exists(getCacheRepoDir(repoName));
+      const repoGitDirExists = fs.exists(getCacheRepoGitDir(repoName));
       if (!(await repoDirExists) || !(await repoGitDirExists)) {
         console.log(`• flow-typed cache not found, fetching from GitHub...`);
-        await cloneCacheRepo();
+        await cloneCacheRepo(repoName);
       } else {
         let lastUpdated = 0;
-        if (await fs.exists(getLastUpdatedFile())) {
+        if (await fs.exists(getLastUpdatedFile(repoName))) {
           // If the LAST_UPDATED_FILE has anything other than just a number in
           // it, just assume we need to update.
-          const lastUpdatedRaw = await fs.readFile(getLastUpdatedFile());
+          const lastUpdatedRaw = await fs.readFile(
+            getLastUpdatedFile(repoName),
+          );
           const lastUpdatedNum = parseInt(lastUpdatedRaw, 10);
           if (String(lastUpdatedNum) === String(lastUpdatedRaw)) {
             lastUpdated = lastUpdatedNum;
@@ -106,7 +121,7 @@ export async function ensureCacheRepo(
 
         if (lastUpdated + cacheRepoExpiry < Date.now()) {
           console.log('• rebasing flow-typed cache...');
-          const rebaseSuccessful = await rebaseCacheRepo();
+          const rebaseSuccessful = await rebaseCacheRepo(repoName);
           if (!rebaseSuccessful) {
             console.log(
               "\nNOTE: Unable to rebase local cache! If you don't currently " +
@@ -120,13 +135,14 @@ export async function ensureCacheRepo(
   ));
 }
 
-export function getCacheRepoDir() {
-  return path.join(getCacheDir(), 'repo');
+export function getCacheRepoDir(repoName: string) {
+  const repoDirname = isFlowTypedRepoUrl(repoName) ? 'repo' : `repo-${md5(repoName)}`;
+  return path.join(getCacheDir(), repoDirname);
 }
 
-export async function verifyCLIVersion(): Promise<void> {
+export async function verifyCLIVersion(repoName: string): Promise<void> {
   const metadataPath = path.join(
-    getCacheRepoDir(),
+    getCacheRepoDir(repoName),
     'definitions',
     '.cli-metadata.json',
   );
@@ -158,6 +174,5 @@ export {
   clearCustomCacheDir as _clearCustomCacheDir,
   getCacheRepoGitDir as _getCacheRepoGitDir,
   getLastUpdatedFile as _getLastUpdatedFile,
-  REMOTE_REPO_URL as _REMOTE_REPO_URL,
   setCustomCacheDir as _setCustomCacheDir,
 };

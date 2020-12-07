@@ -6,13 +6,14 @@ import {
   signCodeStream,
   verifySignedCode,
 } from '../codeSign.js';
+import { DEFAULT_REPO_NAME } from '../repoUtils.js';
 
 describe('codeSign', () => {
   describe('verifySignedCode', () => {
     it('verifies signed code', () => {
       const code = 'line 1\nline 2\nline 3';
       const version = 'VersionA';
-      const signedCode = signCode(code, version);
+      const signedCode = signCode(code, version, DEFAULT_REPO_NAME);
       expect(verifySignedCode(signedCode)).toBe(true);
     });
 
@@ -26,14 +27,14 @@ describe('codeSign', () => {
     it('gets version from well-signed code', () => {
       const code = 'line 1\nline 2\nline 3';
       const version = 'VersionA';
-      const signedCode = signCode(code, version);
+      const signedCode = signCode(code, version, DEFAULT_REPO_NAME);
       expect(getSignedCodeVersion(signedCode)).toBe(version);
     });
 
     it('gets version from altered signed code', () => {
       const code = 'line 1\nline 2\nline 3';
       const version = 'VersionA';
-      const signedCode = signCode(code, version);
+      const signedCode = signCode(code, version, DEFAULT_REPO_NAME);
       const alteredCode = `${signedCode}\nline 4`;
       expect(getSignedCodeVersion(alteredCode)).toBe(version);
     });
@@ -47,7 +48,7 @@ describe('codeSign', () => {
   describe('signCodeStream', () => {
     it('signs and versions the output code', () => {
       const version = 'VersionA';
-      const stream = signCodeStream(version);
+      const stream = signCodeStream(version, DEFAULT_REPO_NAME);
       stream.write('line 1\n');
       stream.write('line 2\n');
       stream.write('line 3\n');
