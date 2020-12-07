@@ -55,7 +55,7 @@ declare module 'react-modal' {
       props: ModalElementProps,
       contentElement: HTMLElement
     ) => HTMLElement,
-    preventScroll: boolean,
+    preventScroll?: boolean,
     ...
   };
 
