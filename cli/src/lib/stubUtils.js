@@ -331,8 +331,8 @@ declare module '%s' {
   if (!overwrite) {
     const exists = await fs.exists(filename);
     if (exists) {
-      const existingStub = await fs.readFile(filename);
-      if (!verifySignedCode(existingStub.toString())) {
+      const existingStub = await fs.readFile(filename, 'utf8');
+      if (!verifySignedCode(existingStub)) {
         throw new Error(
           'Stub already exists and has been modified. ' +
             'Use --overwrite to overwrite',

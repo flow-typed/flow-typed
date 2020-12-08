@@ -381,7 +381,7 @@ function validateVersionPart(part, partName, context) {
  */
 async function verifyCLIVersion(defsDirPath) {
   const metadataFilePath = path.join(defsDirPath, '.cli-metadata.json');
-  const metadata = JSON.parse(String(await fs.readFile(metadataFilePath)));
+  const metadata = await fs.readJson(metadataFilePath);
   if (!metadata.compatibleCLIRange) {
     throw new Error(
       `Unable to find the 'compatibleCLIRange' property in ` +
