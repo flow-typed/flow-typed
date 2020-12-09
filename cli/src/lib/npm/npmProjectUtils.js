@@ -27,9 +27,9 @@ type PkgJson = {|
   },
 |};
 
-export type PnpResolver = {
+export type PnpResolver = {|
   resolveToUnqualified: (string, string) => string | null,
-};
+|};
 
 const PKG_JSON_DEP_FIELDS = [
   'dependencies',
