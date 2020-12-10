@@ -1,20 +1,20 @@
 // @flow
 
 declare module "luxon" {
-  declare type UnitLength = "narrow" | "short" | "long";
-  declare type WeekdayLength = UnitLength;
-  declare type EraLength = UnitLength;
-  declare type MonthLength =
+  declare export type UnitLength = "narrow" | "short" | "long";
+  declare export type WeekdayLength = UnitLength;
+  declare export type EraLength = UnitLength;
+  declare export type MonthLength =
     | "numeric"
     | "2-digit"
     | "narrow"
     | "short"
     | "long";
-  declare type NumericLength = "numeric" | "2-digit";
+  declare export type NumericLength = "numeric" | "2-digit";
 
-  declare type HourCycle = "h11" | "h12" | "h23" | "h24";
+  declare export type HourCycle = "h11" | "h12" | "h23" | "h24";
 
-  declare type IntlDateTimeFormatOptions = {|
+  declare export type IntlDateTimeFormatOptions = {|
     localeMatcher?: "lookup" | "best fit",
     timeZone?: string,
     hour12?: boolean,
