@@ -1,5 +1,5 @@
 declare module "koa-views" {
-  declare type Context = { [key: string]: any, ... };
+  declare type Context = any;
 
   declare type Middleware = (
     ctx: Context,
