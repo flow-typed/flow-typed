@@ -2,6 +2,9 @@
 
 const namelessSpy = jasmine.createSpy();
 const spy = jasmine.createSpy('mySpy');
+expect(namelessSpy).toHaveBeenCalledBefore(spy);
+// $FlowExpectedError[incompatible-call]
+expect(namelessSpy).toHaveBeenCalledBefore(1);
 
 // $FlowExpectedError[incompatible-call]
 const badName = jasmine.createSpy(12);
