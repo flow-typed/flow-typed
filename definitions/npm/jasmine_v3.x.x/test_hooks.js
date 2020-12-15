@@ -5,7 +5,7 @@
  */
 
 beforeAll(() => {});
-// $FlowExpectedError
+// $FlowExpectedError[incompatible-call]
 beforeAll();
 
 /**
@@ -13,7 +13,7 @@ beforeAll();
  */
 
 beforeEach(() => {});
-// $FlowExpectedError
+// $FlowExpectedError[incompatible-call]
 beforeEach();
 
 
@@ -22,7 +22,7 @@ beforeEach();
  */
 
 afterAll(() => {});
-// $FlowExpectedError
+// $FlowExpectedError[incompatible-call]
 afterAll();
 
 /**
@@ -30,5 +30,5 @@ afterAll();
  */
 
 afterEach(() => {});
-// $FlowExpectedError
+// $FlowExpectedError[incompatible-call]
 afterEach();

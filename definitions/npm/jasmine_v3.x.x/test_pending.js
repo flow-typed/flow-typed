@@ -3,5 +3,5 @@
 pending('this is not written yet');
 pending();
 
-// $FlowExpectedError
+// $FlowExpectedError[incompatible-call]
 pending(true);

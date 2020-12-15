@@ -58,10 +58,10 @@ jasmine.addMatchers({
   }
 });
 
-// $FlowExpectedError
+// $FlowExpectedError[incompatible-type]
 var badResult1: JasmineMatcherResult = false;
 
-// $FlowExpectedError
+// $FlowExpectedError[prop-missing]
 var badResult2: JasmineMatcherResult = {
   message: 'Did not pass',
 };
@@ -69,14 +69,14 @@ var badResult2: JasmineMatcherResult = {
 var badResult3: JasmineMatcherResult = {
   pass: true,
 
-  // $FlowExpectedError
+  // $FlowExpectedError[incompatible-type]
   message: () => false
 };
 
-// $FlowExpectedError
+// $FlowExpectedError[incompatible-type]
 var badStruct1: JasmineMatcherStruct = 1;
 
-// $FlowExpectedError
+// $FlowFixMe[prop-missing]
 var badStruct2: JasmineMatcherStruct = {
   notCompare: (actual, expected): JasmineMatcherResult => {
     return {
@@ -85,7 +85,7 @@ var badStruct2: JasmineMatcherStruct = {
   }
 }
 
-// $FlowExpectedError
+// $FlowExpectedError[incompatible-type]
 var badMatcher1: JasmineMatcher = (utils, customEqualityTesters, extra) => {
   compare: (actual, expected): JasmineMatcherResult => {
     return {
@@ -94,5 +94,5 @@ var badMatcher1: JasmineMatcher = (utils, customEqualityTesters, extra) => {
   }
 }
 
-// $FlowExpectedError
+// $FlowExpectedError[incompatible-call]
 jasmine.addMatchers('a');

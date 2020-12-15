@@ -2,5 +2,5 @@
 
 jasmine.DEFAULT_TIMEOUT_INTERVAL = 15000;
 
-// $FlowExpectedError
+// $FlowExpectedError[incompatible-type]
 jasmine.DEFAULT_TIMEOUT_INTERVAL = null;

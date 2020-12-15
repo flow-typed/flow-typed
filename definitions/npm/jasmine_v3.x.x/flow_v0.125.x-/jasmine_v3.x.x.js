@@ -14,6 +14,7 @@ type JasmineExpectType = {
   toContain(substringOrElement: mixed): void,
   toEqual(value: mixed): void,
   toHaveBeenCalled(): void,
+  toHaveBeenCalledBefore(spy: mixed): void,
   toHaveBeenCalledTimes(number: number): void,
   toHaveBeenCalledWith(...args: Array<any>): void,
   toMatch(regexp: RegExp): void,
@@ -22,18 +23,18 @@ type JasmineExpectType = {
   ...
 };
 
-declare function describe(name: string, fn: Function): void;
-declare function fdescribe(name: string, fn: Function): void;
-declare function xdescribe(name: string, fn: Function): void;
+declare function describe(name: string, fn: (...any) => any): void;
+declare function fdescribe(name: string, fn: (...any) => any): void;
+declare function xdescribe(name: string, fn: (...any) => any): void;
 
-declare function beforeEach(fn: Function, timeout?: number): void;
-declare function afterEach(fn: Function, timeout?: number): void;
-declare function beforeAll(fn: Function, timeout?: number): void;
-declare function afterAll(fn: Function, timeout?: number): void;
+declare function beforeEach(fn: (...any) => any, timeout?: number): void;
+declare function afterEach(fn: (...any) => any, timeout?: number): void;
+declare function beforeAll(fn: (...any) => any, timeout?: number): void;
+declare function afterAll(fn: (...any) => any, timeout?: number): void;
 
-declare function it(name: string, fn: Function, timeout?: number): void;
-declare function fit(name: string, fn: Function, timeout?: number): void;
-declare function xit(name: string, fn: Function): void;
+declare function it(name: string, fn: (...any) => any, timeout?: number): void;
+declare function fit(name: string, fn: (...any) => any, timeout?: number): void;
+declare function xit(name: string, fn: (...any) => any): void;
 
 declare function expect(value: mixed): JasmineExpectType;
 declare function pending(message?: string): void;
@@ -71,7 +72,7 @@ type JasmineSpyTypeProto = {
   ...
 };
 
-type JasmineSpyType = JasmineSpyTypeProto & Function;
+type JasmineSpyType = JasmineSpyTypeProto & (...any) => any;
 
 type JasmineClockType = {
   install(): void,
@@ -87,7 +88,7 @@ declare type JasmineMatcherResult = {
   ...
 };
 
-declare type JasmineMatcherStruct = { compare<T: any>(actual: T, expected: T): JasmineMatcherResult, ... };
+declare type JasmineMatcherStruct = { compare(actual: any, expected: any): JasmineMatcherResult, ... };
 
 declare type JasmineMatcher = (
   utils?: mixed,
@@ -97,14 +98,14 @@ declare type JasmineMatcher = (
 declare type JasmineMatchers = { [key: string]: JasmineMatcher, ... };
 
 declare var jasmine: {
-  DEFAULT_TIMEOUT_INTERVAL: number,
-  createSpy(name?: string): JasmineSpyType,
+  addMatchers(val: JasmineMatchers): void,
   any(val: mixed): void,
   anything(): void,
-  objectContaining(val: Object): void,
   arrayContaining(val: mixed[]): void,
-  stringMatching(val: string): void,
   clock(): JasmineClockType,
-  addMatchers(val: JasmineMatchers): void,
+  createSpy(name?: string): JasmineSpyType,
+  DEFAULT_TIMEOUT_INTERVAL: number,
+  objectContaining(val: {...}): void,
+  stringMatching(val: string | RegExp): void,
   ...
 };
