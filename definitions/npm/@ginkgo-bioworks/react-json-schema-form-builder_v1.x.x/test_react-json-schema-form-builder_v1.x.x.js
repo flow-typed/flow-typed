@@ -1,12 +1,11 @@
 // @flow
 
-import React from 'react';
+import * as React from 'react';
 import {
   FormBuilder,
   PredefinedGallery,
 } from '@ginkgo-bioworks/react-json-schema-form-builder';
-import { it, describe, expect } from 'flow-typed-test';
-import { mount } from 'enzyme';
+import { it, describe } from 'flow-typed-test';
 
 describe('@ginkgo-bioworks/react-json-schema-form-builder', () => {
   const props = {
@@ -14,13 +13,64 @@ describe('@ginkgo-bioworks/react-json-schema-form-builder', () => {
     uischema: '',
     onChange: (newSchema, newUiSchema) => {},
   };
+  const optionalProps = {
+    schema: '',
+    uischema: '',
+    onChange: (newSchema, newUiSchema) => {},
+    mods: {},
+    className: 'foo'
+  };
+
+  const extraneousProps = {
+    schema: '',
+    uischema: '',
+    onChange: (newSchema, newUiSchema) => {},
+    extraneousProp: 'extraneous'
+  }
+
+  const malformedMods = {
+    schema: '',
+    uischema: '',
+    onChange: (newSchema, newUiSchema) => {},
+    mods: {
+      extraneousProp: 'extraneous'
+    },
+    className: 'foo'
+  }
+
   it('render form builder', () => {
-    const wrapper = mount(<FormBuilder {...props} />);
-    expect(wrapper.exists('.form-body')).toBeTruthy();
+    <FormBuilder {...props} />
+  });
+
+  it('render form builder with optional props', () => {
+    <FormBuilder {...optionalProps} />
+  });
+
+  it('form builder errors on extraneous properties passed in', () => {
+    // $FlowExpectedError
+    <FormBuilder {...extraneousProps} />
+  });
+
+  it('form builder errors on improper mods passed in', () => {
+    // $FlowExpectedError
+    <FormBuilder {...malformedMods} />
   });
 
   it('render predefined gallery', () => {
-    const wrapper = mount(<PredefinedGallery {...props} />);
-    expect(wrapper.exists('.form_gallery_container')).toBeTruthy();
+    <PredefinedGallery {...props} />
+  });
+
+  it('render predefined with optional props', () => {
+    <PredefinedGallery {...optionalProps} />
+  });
+
+  it('predefined gallery errors on extraneous properties passed in', () => {
+    // $FlowExpectedError
+    <PredefinedGallery {...extraneousProps} />
+  });
+
+  it('predefined gallery errors on improper mods passed in', () => {
+    // $FlowExpectedError
+    <PredefinedGallery {...malformedMods} />
   });
 });
