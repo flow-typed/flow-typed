@@ -5,6 +5,7 @@ export const description = 'Create a libdef stub for an untyped npm package';
 
 import {createStub} from '../lib/stubUtils.js';
 import {findFlowRoot} from '../lib/flowProjectUtils.js';
+import {getPackageJsonData, loadPnpResolver} from '../lib/npm/npmProjectUtils';
 import {path} from '../lib/node';
 
 export function setup(yargs: Object) {
@@ -94,6 +95,10 @@ export async function run(args: Args): Promise<number> {
     );
   }
 
+  const pnpResolver = await loadPnpResolver(
+    await getPackageJsonData(projectRoot),
+  );
+
   const plural = packages.length > 1 ? 'stubs' : 'stub';
   console.log(`• Creating ${packages.length} ${plural}...`);
   const results = await Promise.all(
@@ -122,6 +127,7 @@ export async function run(args: Args): Promise<number> {
         packageName,
         version,
         Boolean(args.overwrite),
+        pnpResolver,
         Boolean(args.typescript),
         String(args.libdefDir),
         Number(args.maxDepth),
