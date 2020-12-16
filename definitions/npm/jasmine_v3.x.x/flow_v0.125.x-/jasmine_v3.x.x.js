@@ -1,5 +1,3 @@
-/* eslint-disable flowtype/no-weak-types */
-
 type JasmineExpectType = {|
   not: JasmineExpectType,
   nothing(): void,
