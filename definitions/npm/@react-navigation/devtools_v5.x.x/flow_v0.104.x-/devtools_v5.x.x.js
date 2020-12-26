@@ -416,7 +416,7 @@ declare module '@react-navigation/devtools' {
   >;
   declare type $IsUndefined<X> = $IsA<X, void>;
 
-  declare type $Partial<T> = $Rest<T, {...}>;
+  declare type $Partial<T> = $ReadOnly<$Rest<T, {...}>>;
 
   /**
    * Actions, state, etc.
