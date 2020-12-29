@@ -37,7 +37,7 @@ describe('@ginkgo-bioworks/react-json-schema-form-builder', () => {
           },
           type: 'number',
           cardBody: (props: CardBodyProps) => <div/>,
-          modalBodyProps: (props: CardBodyProps) => <div/>,
+          modalBody: (props: CardBodyProps) => <div/>,
           matchIf: [{
             types: ['number'],
             widget: 'customFormInput0',
@@ -53,7 +53,7 @@ describe('@ginkgo-bioworks/react-json-schema-form-builder', () => {
           },
           type: 'string',
           cardBody: (props: CardBodyProps) => <div/>,
-          modalBodyProps: (props: CardBodyProps) => <div/>,
+          modalBody: (props: CardBodyProps) => <div/>,
           matchIf: [{
             types: ['string'],
             field: 'customFormInput1',
@@ -94,6 +94,10 @@ describe('@ginkgo-bioworks/react-json-schema-form-builder', () => {
     <FormBuilder {...optionalProps} />
   });
 
+  it('render the form builder with props with mods', () => {
+    <FormBuilder {...propsWithMods} />
+  });
+
   it('form builder errors on extraneous properties passed in', () => {
     // $FlowExpectedError
     <FormBuilder {...extraneousProps} />
@@ -108,9 +112,13 @@ describe('@ginkgo-bioworks/react-json-schema-form-builder', () => {
     <PredefinedGallery {...props} />
   });
 
-  it('render predefined with optional props', () => {
+  it('render predefined gallery with optional props', () => {
     <PredefinedGallery {...optionalProps} />
   });
+
+  it('render predefined gallery with mods in props', () => {
+    <PredefinedGallery {...propsWithMods}/>
+  })
 
   it('predefined gallery errors on extraneous properties passed in', () => {
     // $FlowExpectedError
