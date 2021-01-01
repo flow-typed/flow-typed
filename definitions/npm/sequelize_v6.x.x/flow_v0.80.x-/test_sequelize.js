@@ -1,7 +1,8 @@
 // @flow
 
 import Sequelize, { Model, Transaction } from 'sequelize';
-import type { fn } from 'sequelize';
+const { Op } = Sequelize;
+import type { Fn } from 'sequelize';
 import type { DefineAttributes } from 'sequelize';
 import type {
   HasOneGetOne,
@@ -413,10 +414,10 @@ warehouse
 
 warehouse.removeBranches();
 warehouse.removeBranches([branch]);
-warehouse.removeBranches([branch, 2], { validate: false }).then(() => {});
+warehouse.removeBranches([branch, 2]).then(() => {});
 
 warehouse.removeBranch(branch);
-warehouse.removeBranch(2, { validate: true }).then(() => {});
+warehouse.removeBranch(2).then(() => {});
 
 warehouse.hasBranches([branch]);
 warehouse
@@ -450,10 +451,10 @@ customer.createBranch({ id: 1 }, { silent: true }).then(branch => {});
 
 customer.removeBranches();
 customer.removeBranches([branch]);
-customer.removeBranches([branch, 2], { validate: false }).then(() => {});
+customer.removeBranches([branch, 2]).then(() => {});
 
 customer.removeBranch(branch);
-customer.removeBranch(2, { validate: true }).then(() => {});
+customer.removeBranch(2).then(() => {});
 
 customer.hasBranches([branch]);
 customer
@@ -492,16 +493,11 @@ WarehouseProducts.remove(warehouse, [product, 2]).then(
 );
 WarehouseProducts.remove(warehouse, [product, 2], {
   where: {},
-  individualHooks: true,
 }).then((result: typeof WarehouseProducts) => {});
-WarehouseProducts.create(
-  warehouse,
-  {
-    name: 'doodad',
-    price: 2.5,
-  },
-  { individualHooks: true }
-).then((result: ProductInstance) => {});
+WarehouseProducts.create(warehouse, {
+  name: 'doodad',
+  price: 2.5,
+}).then((result: ProductInstance) => {});
 
 WarehouseBranches.get(warehouse).then((branches: Array<BranchInstance>) => {});
 WarehouseBranches.get(warehouse, { scope: 'baz' }).then(
@@ -533,7 +529,6 @@ WarehouseBranches.create(
     through: {
       distance: 4.5,
     },
-    individualHooks: true,
   }
 ).then((result: Branch) => {});
 
@@ -566,7 +561,7 @@ ProductWarehouse.get([product]).then(
 );
 ProductWarehouse.get([product], { scope: 'boo' });
 ProductWarehouse.set(product, warehouse);
-ProductWarehouse.set(product, 1, { scope: 'bar' });
+ProductWarehouse.set(product, 1);
 ProductWarehouse.create(product, {
   address: 'somewhere',
   capacity: 10000,
@@ -1364,15 +1359,15 @@ User.findAll();
 User.findAll({ where: { data: { employment: null } } });
 User.findAll({ where: { aNumber: { gte: 10 } } }).then(u => u[0].isNewRecord);
 User.findAll({
-  where: [s.or({ u: 'b' }, { u: ';' }), s.and({ id: [1, 2] })],
+  where: [Sequelize.or({ u: 'b' }, { u: ';' }), Sequelize.and({ id: [1, 2] })],
   include: [{ model: User }],
 });
 User.findAll({
   where: [
-    s.or({ a: 'b' }, { c: 'd' }),
-    s.and(
+    Sequelize.or({ a: 'b' }, { c: 'd' }),
+    Sequelize.and(
       { id: [1, 2, 3] },
-      s.or({ deletedAt: null }, { deletedAt: { gt: new Date(0) } })
+      Sequelize.or({ deletedAt: null }, { deletedAt: { gt: new Date(0) } })
     ),
   ],
 });
@@ -1384,7 +1379,7 @@ User.findAll({
 User.findAll({ include: [{ model: Task, paranoid: false }] });
 User.findAll({ transaction: t });
 User.findAll({
-  where: { data: { name: { last: 's' }, employment: { $ne: 'a' } } },
+  where: { data: { name: { last: 's' }, employment: { [Op.ne]: 'a' } } },
   order: [['id', 'ASC']],
 });
 User.findAll({ where: { username: ['boo', 'boo2'] } });
@@ -1399,7 +1394,7 @@ User.findAll({ where: { theDate: { between: ['2012-12-10', '2013-01-02'] } } });
 User.findAll({
   where: { theDate: { nbetween: ['2013-01-04', '2013-01-20'] } },
 });
-User.findAll({ order: [s.col('name')] });
+User.findAll({ order: [Sequelize.col('name')] });
 User.findAll({ order: [['theDate', 'DESC']] });
 User.findAll({ include: [User], order: [[User, User, 'numYears', 'c']] });
 User.findAll({
@@ -1423,9 +1418,9 @@ User.findAll({
   attributes: ['a', 'b'],
   include: [{ model: User, attributes: ['c'] }],
 });
-User.findAll({ order: s.literal('email =') });
+User.findAll({ order: Sequelize.literal('email =') });
 User.findAll({
-  order: [s.literal('email = ' + s.escape('test@sequelizejs.com'))],
+  order: [Sequelize.literal('email = ' + s.escape('test@sequelizejs.com'))],
 });
 User.findAll({ order: [['id', ';DELETE YOLO INJECTIONS']] });
 User.findAll({
@@ -1446,17 +1441,17 @@ User.findAll({ attributes: { include: ['username', 'data'] } });
 User.findAll({
   attributes: [['username', 'user_name'], ['email', 'user_email']],
 });
-User.findAll({ attributes: [s.fn('count', Sequelize.col('*'))] });
+User.findAll({ attributes: [Sequelize.fn('count', Sequelize.col('*'))] });
 // currently suffering from flow union type bugs
-// User.findAll( { attributes: [[s.fn('count', Sequelize.col('*')), 'count']] });
-// User.findAll( { attributes: [[s.fn('count', Sequelize.col('*')), 'count']], group: ['sex'] });
-// User.findAll( { attributes: [s.cast(s.fn('count', Sequelize.col('*')), 'INTEGER')] });
-// User.findAll( { attributes: [[s.cast(s.fn('count', Sequelize.col('*')), 'INTEGER'), 'count']] });
-User.findAll({ where: s.fn('count', [0, 10]) });
+// User.findAll( { attributes: [[Sequelize.fn('count', Sequelize.col('*')), 'count']] });
+// User.findAll( { attributes: [[Sequelize.fn('count', Sequelize.col('*')), 'count']], group: ['sex'] });
+// User.findAll( { attributes: [Sequelize.cast(Sequelize.fn('count', Sequelize.col('*')), 'INTEGER')] });
+// User.findAll( { attributes: [[Sequelize.cast(Sequelize.fn('count', Sequelize.col('*')), 'INTEGER'), 'count']] });
+User.findAll({ where: Sequelize.fn('count', [0, 10]) });
 User.findAll({
-  where: s.where(
-    s.fn('lower', s.col('email')),
-    s.fn('lower', 'TEST@SEQUELIZEJS.COM')
+  where: Sequelize.where(
+    Sequelize.fn('lower', Sequelize.col('email')),
+    Sequelize.fn('lower', 'TEST@SEQUELIZEJS.COM')
   ),
 });
 User.findAll({
@@ -1495,11 +1490,11 @@ User.findOne({
 });
 User.findOne({ where: { username: 'someone' }, include: [User] });
 User.findOne({ where: { username: 'barfooz' }, raw: true });
-User.findOne({ where: s.fn('count', []) });
+User.findOne({ where: Sequelize.fn('count', []) });
 User.findOne({
-  where: s.where(
-    s.fn('lower', s.col('email')),
-    s.fn('lower', 'TEST@SEQUELIZEJS.COM')
+  where: Sequelize.where(
+    Sequelize.fn('lower', Sequelize.col('email')),
+    Sequelize.fn('lower', 'TEST@SEQUELIZEJS.COM')
   ),
 });
 /* NOTE https://github.com/DefinitelyTyped/DefinitelyTyped/pull/5590
@@ -1556,8 +1551,8 @@ User.build(
 User.create();
 User.create({ createdAt: 1, updatedAt: 2 }, { silent: true });
 User.create({}, { returning: true });
-User.create({ intVal: s.literal('CAST(1-2 AS') });
-User.create({ secretValue: s.fn('upper', 'sequelize') });
+User.create({ intVal: Sequelize.literal('CAST(1-2 AS') });
+User.create({ secretValue: Sequelize.fn('upper', 'sequelize') });
 User.create({ myvals: [1, 2, 3, 4], mystr: ['One', 'Two', 'Three', 'Four'] });
 User.create({ name: 'Fluffy Bunny', smth: 'else' }, { logging: function() {} });
 User.create({}, { fields: [] });
@@ -1632,7 +1627,11 @@ findOrRetVal = User.findOrCreate({
   defaults: { bool: false },
 });
 
-User.upsert({ id: 42, username: 'doe', foo: s.fn('upper', 'mixedCase2') });
+User.upsert({
+  id: 42,
+  username: 'doe',
+  foo: Sequelize.fn('upper', 'mixedCase2'),
+});
 
 User.bulkCreate([{ aNumber: 10 }, { aNumber: 12 }]).then(i => i[0].isNewRecord);
 User.bulkCreate([
@@ -1683,9 +1682,12 @@ User.update(
   { username: 'Bill', secretValue: '43' },
   { where: { secretValue: '42' }, fields: ['username'] }
 );
-User.update({ username: s.cast('1', 'char') }, { where: { username: 'John' } });
 User.update(
-  { username: s.fn('upper', s.col('username')) },
+  { username: Sequelize.cast('1', 'char') },
+  { where: { username: 'John' } }
+);
+User.update(
+  { username: Sequelize.fn('upper', Sequelize.col('username')) },
   { where: { username: 'John' } }
 );
 User.update(
@@ -1767,9 +1769,8 @@ queryInterface.removeIndex('Group', ['username', 'isAdmin'], {
 });
 queryInterface.showIndex('Group');
 queryInterface.createTable(
-  'table',
-  { name: { type: Sequelize.STRING } },
-  { schema: 'schema' }
+  { tableName: 'table', schema: 'schema' },
+  { name: { type: Sequelize.STRING } }
 );
 queryInterface.showIndex(
   { schema: 'schema', tableName: 'table' },
@@ -1789,14 +1790,8 @@ queryInterface.createTable('t', {
   someEnum: { type: Sequelize.ENUM, values: ['c1', 'c2', 'c3'], field: 'd' },
 });
 queryInterface.createTable(
-  'User',
-  { name: { type: Sequelize.STRING } },
-  { schema: 'hero' }
-);
-queryInterface.rawSelect(
-  'User',
-  { schema: 'hero', logging: function() {} },
-  'name'
+  { tableName: 'User', schema: 'hero' },
+  { name: { type: Sequelize.STRING } }
 );
 queryInterface.renameColumn('_Users', 'username', 'pseudo', {
   logging: function() {},
@@ -1952,17 +1947,6 @@ new Sequelize({
   typeValidation: true,
 });
 
-new Sequelize({
-  operatorsAliases: false,
-});
-
-new Sequelize({
-  operatorsAliases: {
-    $and: Sequelize.Op.and,
-    customAlias: Sequelize.Op.or,
-  },
-});
-
 s.model('Project');
 s.models['Project'];
 s.define('Project', {
@@ -2103,13 +2087,13 @@ s.define(
       {
         name: 'user_and_email_index',
         unique: true,
-        method: 'BTREE',
+        using: 'BTREE',
         fields: [
           'user_id',
-          { attribute: 'email', collate: 'en_US', order: 'DESC', length: 5 },
+          { name: 'email', collate: 'en_US', order: 'DESC', length: 5 },
         ],
         where: {
-          user_id: { $not: null },
+          user_id: { [Op.not]: null },
         },
       },
       {
@@ -2293,7 +2277,7 @@ const Chair = s.define('chair', {});
 Chair.findAll({
   where: {
     color: 'blue',
-    legs: { $in: [3, 4] },
+    legs: { [Op.in]: [3, 4] },
   },
 });
 
