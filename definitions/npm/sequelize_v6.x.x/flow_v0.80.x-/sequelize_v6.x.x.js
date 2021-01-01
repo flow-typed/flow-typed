@@ -3396,10 +3396,7 @@ declare module 'sequelize' {
     TInitAttributes = TAttributes,
     TPlainAttributes = TAttributes
   > {
-    static init(
-      attributes: DefineAttributes,
-      options: DefineOptions<this>
-    ): this;
+    static init(attributes: DefineAttributes, options: InitOptions<this>): this;
 
     static QueryInterface: QueryInterface;
 
@@ -5990,6 +5987,17 @@ declare module 'sequelize' {
    Set to true or a string with the attribute name you want to use to enable.
    */
     version?: boolean | string,
+    sequelize: Sequelize,
+  |};
+
+  /**
+   * Options passed to [[Model.init]]
+   */
+  declare export type InitOptions<TInstance: Model<any>> = {|
+    ...DefineOptions<TInstance>,
+    /**
+     * The sequelize connection. Required ATM.
+     */
     sequelize: Sequelize,
   |};
 
