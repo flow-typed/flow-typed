@@ -1,5 +1,5 @@
 declare module "koa-views" {
-  declare type Context = Object;
+  declare type Context = any;
 
   declare type Middleware = (
     ctx: Context,
@@ -8,13 +8,13 @@ declare module "koa-views" {
 
   declare type Options = {|
     extension?: string,
-    options?: Object,
-    map?: Object,
-    engineSource?: Object
+    options?: { [key: string]: any, ... },
+    map?: { [key: string]: any, ... },
+    engineSource?: { [key: string]: any, ... }
   |};
 
-  declare export default function views(
+  declare module.exports: (
     root: string,
     opts?: Options
-  ): Middleware;
+  ) => Middleware;
 }
