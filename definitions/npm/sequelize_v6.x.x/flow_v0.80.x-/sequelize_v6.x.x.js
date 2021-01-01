@@ -1313,7 +1313,7 @@ declare module 'sequelize' {
     /**
      * A string or a data type to represent the identifier in the table
      */
-    keyType?: DataTypeAbstract,
+    keyType?: DataType,
     ...
   };
 
@@ -1330,7 +1330,7 @@ declare module 'sequelize' {
     /**
      * A string or a data type to represent the identifier in the table
      */
-    keyType?: DataTypeAbstract,
+    keyType?: DataType,
     ...
   };
 
@@ -1342,7 +1342,7 @@ declare module 'sequelize' {
     /**
      * A string or a data type to represent the identifier in the table
      */
-    keyType?: DataTypeAbstract,
+    keyType?: DataType,
     ...
   };
 
@@ -1417,7 +1417,7 @@ declare module 'sequelize' {
     /**
      * A string or a data type
      */
-    type: DataTypeAbstract,
+    type: DataType,
     allowNull?: boolean,
     values?: Array<any>,
     /**
@@ -1710,238 +1710,284 @@ declare module 'sequelize' {
     ): Promise<Target>;
   }
 
-  /**
-   * Abstract DataType interface. Use this if you want to create an interface that has a value any of the
-   * DataTypes that Sequelize supports.
-   */
-  declare export type DataTypeAbstract = {
-    /**
-     * Although this is not needed for the definitions itself, we want to make sure that DataTypeAbstract is not
-     * something than can be evaluated to an empty object.
-     */
-    dialectTypes: string,
-    toSql(): string,
-    ...
-  };
-
-  declare type DataTypeAbstractString<T> = {
-    /**
-     * A variable length string. Default length 255
-     */
-    (options?: { length: number, ... }): T,
-    (length: number): T,
-    /**
-     * Property BINARY for the type
-     */
-    BINARY: T,
-    ...
-  } & DataTypeAbstract;
-
-  declare type DataTypeString = {
-    ...,
-  } & DataTypeAbstractString<DataTypeString>;
-
-  declare type DataTypeChar = { ... } & DataTypeAbstractString<DataTypeString>;
-
-  declare type DataTypeText = DataTypeAbstract & {
-    /**
-    * Length of the text field.
-    *
-   Available lengths: `tiny`, `medium`, `long`
-   */
-    (options?: { length: string, ... }): DataTypeText,
-    (length: string): DataTypeText,
-    ...,
-  };
-
-  declare type DataTypeCitext = DataTypeAbstract & {
-    /**
-     * Length of the text field.
-     *
-    Available lengths: `tiny`, `medium`, `long`
-    */
-    (options?: { length: string, ... }): DataTypeCitext,
-    (length: string): DataTypeCitext,
-    ...,
-  };
-
-  declare type DataTypeAbstractNumber<T> = DataTypeAbstract & {
-    UNSIGNED: T,
-    ZEROFILL: T,
-    ...
-  };
-
-  declare type DataTypeNumber = DataTypeAbstractNumber<DataTypeNumber> & {
-    ...,
-  };
-
-  declare type DataTypeInteger = DataTypeAbstractNumber<DataTypeInteger> & {
-    /**
-     * Length of the number field.
-     */
-    (options?: { length: number, ... }): DataTypeInteger,
-    (length: number): DataTypeInteger,
-    ...,
-  };
-
-  declare type DataTypeBigInt = DataTypeAbstractNumber<DataTypeBigInt> & {
-    /**
-     * Length of the number field.
-     */
-    (options?: { length: number, ... }): DataTypeBigInt,
-    (length: number): DataTypeBigInt,
-    ...,
-  };
-
-  declare type DataTypeFloat = DataTypeAbstractNumber<DataTypeFloat> & {
-    /**
-     * Length of the number field and decimals of the float
-     */
-    (options?: {
-      length: number,
-      decimals?: number,
-      ...
-    }): DataTypeFloat,
-    (length: number, decimals?: number): DataTypeFloat,
-    ...,
-  };
-
-  declare type DataTypeReal = DataTypeAbstractNumber<DataTypeReal> & {
-    /**
-     * Length of the number field and decimals of the real
-     */
-    (options?: {
-      length: number,
-      decimals?: number,
-      ...
-    }): DataTypeReal,
-    (length: number, decimals?: number): DataTypeReal,
-    ...,
-  };
-
-  declare type DataTypeDouble = DataTypeAbstractNumber<DataTypeDouble> & {
-    /**
-     * Length of the number field and decimals of the real
-     */
-    (options?: {
-      length: number,
-      decimals?: number,
-      ...
-    }): DataTypeDouble,
-    (length: number, decimals?: number): DataTypeDouble,
-    ...,
-  };
-
-  declare type DataTypeDecimal = DataTypeAbstractNumber<DataTypeDecimal> & {
-    /**
-     * Precision and scale for the decimal number
-     */
-    (options?: {
-      precision: number,
-      scale?: number,
-      ...
-    }): DataTypeDecimal,
-    (precision: number, scale?: number): DataTypeDecimal,
-    ...,
-  };
-
-  declare type DataTypeBoolean = DataTypeAbstract & { ... };
-
-  declare type DataTypeTime = DataTypeAbstract & { ... };
-
-  declare type DataTypeDate = DataTypeAbstract & {
-    /**
-     * Length of decimal places of time
-     */
-    (options?: { length?: number, ... }): DataTypeDate,
-    (length?: number): DataTypeDate,
-    ...,
-  };
-
-  declare type DataTypeDateOnly = DataTypeAbstract & { ... };
-
-  declare type DataTypeHStore = DataTypeAbstract & { ... };
-
-  declare type DataTypeJSONType = DataTypeAbstract & { ... };
-
-  declare type DataTypeJSONB = DataTypeAbstract & { ... };
-
-  declare type DataTypeNow = DataTypeAbstract & { ... };
-
-  declare type DataTypeBlob = DataTypeAbstract & {
-    /**
-    * Length of the blob field.
-    *
-   Available lengths: `tiny`, `medium`, `long`
-   */
-    (options?: { length: string, ... }): DataTypeBlob,
-    (length: string): DataTypeBlob,
-    ...,
-  };
-
-  declare type DataTypeRange = DataTypeAbstract & {
-    /**
-    * Range field for Postgre
-    *
-   Accepts subtype any of the ranges
-   */
-    (options?: { subtype: DataTypeAbstract, ... }): DataTypeRange,
-    (subtype: DataTypeAbstract): DataTypeRange,
-    ...,
-  };
-
-  declare type DataTypeUUID = DataTypeAbstract & { ... };
-
-  declare type DataTypeUUIDv1 = DataTypeAbstract & { ... };
-
-  declare type DataTypeUUIDv4 = DataTypeAbstract & { ... };
-
-  declare class DataTypeVirtualClass {
-    constructor(
-      subtype: DataTypeAbstract,
-      requireAttributes?: Array<string>
-    ): DataTypeVirtual;
+  declare export class AbstractDataType {
+    key: string;
+    dialectTypes: string;
+    toSql(): string;
+    stringify(value: unknown, options?: object): string;
+    toString(options: object): string;
   }
 
-  declare type DataTypeVirtual = DataTypeAbstract &
-    typeof DataTypeVirtualClass & {
-      (
-        subtype: DataTypeAbstract,
-        requireAttributes?: Array<string>
-      ): DataTypeVirtual,
-      ...,
-    };
+  declare class StringDataType extends AbstractDataType {
+    constructor(length?: number, binary?: boolean): StringDataType;
+    constructor(options?: StringDataTypeOptions): StringDataType;
+    static (length?: number, binary?: boolean): StringDataType;
+    static (options?: StringDataTypeOptions): StringDataType;
+    options?: StringDataTypeOptions;
+    static BINARY: Class<StringDataType>;
+    BINARY: StringDataType;
+    validate(value: any): boolean;
+  }
 
-  declare type DataTypeEnum = DataTypeAbstract & {
-    /**
-    * Enum field
-    *
-   Accepts values
-   */
-    (options?: { values: string | string[], ... }): DataTypeEnum,
-    (values: string | string[]): DataTypeEnum,
-    (...args: string[]): DataTypeEnum,
-    ...,
-  };
+  declare export type StringDataTypeOptions = {|
+    length?: number,
+    binary?: boolean,
+  |};
 
-  declare type DataTypeArray = DataTypeAbstract & {
-    /**
-    * Array field for Postgre
-    *
-   Accepts type any of the DataTypes
-   */
-    (options: { type: DataTypeAbstract, ... }): DataTypeArray,
-    (type: DataTypeAbstract): DataTypeArray,
-    ...,
-  };
+  declare class CharDataType extends StringDataType {
+    constructor(length?: number, binary?: boolean): CharDataType;
+    constructor(options?: CharDataTypeOptions): CharDataType;
+    static (length?: number, binary?: boolean): CharDataType;
+    static (options?: CharDataTypeOptions): CharDataType;
+    options?: CharDataTypeOptions;
+    static BINARY: Class<CharDataType>;
+    BINARY: CharDataType;
+    validate(value: any): boolean;
+  }
 
-  declare type DataTypeGeometry = DataTypeAbstract & {
-    /**
-     * Geometry field for Postgres
-     */
-    (type: string, srid?: number): DataTypeGeometry,
-    ...,
-  };
+  declare export type CharDataTypeOptions = StringDataTypeOptions;
+
+  declare export type TextLength = 'tiny' | 'medium' | 'long';
+
+  declare class TextDataType extends AbstractDataType {
+    constructor(length?: TextLength): TextDataType;
+    static (length?: TextdeataTypeOptions): TextDataType;
+    options: TextDataTypeOptions;
+    validate(value: any): boolean;
+  }
+
+  declare export type TextDataTypeOptions = {| length?: TextLength |};
+
+  declare class NumberDataType extends AbstractDataType {
+    constructor(options?: NumberDataTypeOptions): NumberDataType;
+    static (options?: NumberDataTypeOptions): NumberDataType;
+    +options: NumberDataTypeOptions;
+    static UNSIGNED: Class<NumberDataType>;
+    static ZEROFILL: Class<NumberDataType>;
+    UNSIGNED: NumberDataType;
+    ZEROFILL: NumberDataType;
+    validate(value: any): boolean;
+  }
+
+  declare export type IntegerDataTypeOptions = {|
+    length?: number,
+    zerofill?: boolean,
+    unsigned?: boolean,
+  |};
+  declare export type NumberDataTypeOptions = {|
+    ...IntegerDataTypeOptions,
+    decimals?: number,
+    precision?: number,
+    scale?: number,
+  |};
+
+  declare class TinyIntegerDataType extends IntegerDataType {
+    constructor(length?: number): TinyIntegerDataType;
+    constructor(options?: IntegerDataTypeOptions): TinyIntegerDataType;
+    static (length?: number): TinyIntegerDataType;
+    static (options?: IntegerDataTypeOptions): TinyIntegerDataType;
+  }
+
+  declare class SmallIntegerDataType extends IntegerDataType {
+    constructor(length?: number): SmallIntegerDataType;
+    constructor(options?: IntegerDataTypeOptions): SmallIntegerDataType;
+    static (length?: number): SmallIntegerDataType;
+    static (options?: IntegerDataTypeOptions): SmallIntegerDataType;
+  }
+
+  declare class MediumIntegerDataType extends IntegerDataType {
+    constructor(length?: number): MediumIntegerDataType;
+    constructor(options?: IntegerDataTypeOptions): MediumIntegerDataType;
+    static (length?: number): MediumIntegerDataType;
+    static (options?: IntegerDataTypeOptions): MediumIntegerDataType;
+  }
+
+  declare class IntegerDataType extends NumberDataType {
+    constructor(length?: number): IntegerDataType;
+    constructor(options?: IntegerDataTypeOptions): IntegerDataType;
+    static (length?: number): IntegerDataType;
+    static (options?: IntegerDataTypeOptions): IntegerDataType;
+  }
+
+  declare class BigIntDataType extends IntegerDataType {
+    constructor(length?: number): BigIntDataType;
+    constructor(options?: IntegerDataTypeOptions): BigIntDataType;
+    static (length?: number): BigIntDataType;
+    static (options?: IntegerDataTypeOptions): BigIntDataType;
+  }
+
+  declare class FloatDataType extends NumberDataType {
+    constuctor(length?: number, decimals?: number): FloatDataType;
+    constuctor(options?: FloatDataTypeOptions): FloatDataType;
+    static (length?: number, decimals?: number): FloatDataType;
+    static (options?: FloatDataTypeOptions): FloatDataType;
+  }
+
+  declare export type FloatDataTypeOptions = {|
+    length?: number,
+    decimals?: number,
+  |};
+
+  declare class RealDataType extends NumberDataType {
+    constuctor(length?: number, decimals?: number): RealDataType;
+    constuctor(options?: RealDataTypeOptions): RealDataType;
+    static (length?: number, decimals?: number): RealDataType;
+    static (options?: RealDataTypeOptions): RealDataType;
+  }
+
+  declare export type RealDataTypeOptions = {|
+    length?: number,
+    decimals?: number,
+  |};
+
+  declare class DoubleDataType extends NumberDataType {
+    constuctor(length?: number, decimals?: number): DoubleDataType;
+    constuctor(options?: DoubleDataTypeOptions): DoubleDataType;
+    static (length?: number, decimals?: number): DoubleDataType;
+    static (options?: DoubleDataTypeOptions): DoubleDataType;
+  }
+
+  declare export type DoubleDataTypeOptions = {|
+    length?: number,
+    decimals?: number,
+  |};
+
+  declare class DecimalDataType extends NumberDataType {
+    PRECISION: Class<DecimalDataType>;
+    SCALE: Class<DecimalDataType>;
+    constructor(precision?: number, scale?: number): DecimalDataType;
+    constructor(options?: DecimalDataTypeOptions): DecimalDataType;
+    static (precision?: number, scale?: number): DecimalDataType;
+    static (options?: DecimalDataTypeOptions): DecimalDataType;
+  }
+
+  declare export type DecimalDataTypeOptions = {|
+    precision?: number,
+    scale?: number,
+  |};
+
+  declare class DateDataType extends AbstractDataType {
+    constructor(length?: string | number): DateDataType;
+    constructor(options?: DateDataTypeOptions): DateDataType;
+    static (length?: string | number): DateDataType;
+    static (options?: DateDataTypeOptions): DateDataType;
+    options: DateDataTypeOptions;
+  }
+
+  declare export type DateDataTypeOptions = {|
+    length?: string | number,
+  |};
+
+  declare class DateOnlyDataType extends AbstractDataType {
+    constructor(): DateOnlyDataType;
+    static (): DateOnlyDataType;
+  }
+
+  declare export type BlobSize = 'tiny' | 'medium' | 'long';
+
+  declare class BlobDataType extends AbstractDataType {
+    constructor(length?: BlobSize): BlobDataType;
+    constructor(options?: BlobDataTypeOptions): BlobDataType;
+    static (length?: BlobSize): BlobDataType;
+    static (options?: BlobDataTypeOptions): BlobDataType;
+    options: BlobDataTypeOptions;
+    escape: boolean;
+  }
+
+  declare export type BlobDataTypeOptions = {|
+    length?: BlobSize,
+    escape?: boolean,
+  |};
+
+  declare export type RangeableDataType =
+    | IntegerDataType
+    | Class<IntegerDataType>
+    | BigIntDataType
+    | Class<BigIntDataType>
+    | DecimalDataType
+    | Class<DecimalDataType>
+    | DateOnlyDataType
+    | Class<DateOnlyDataType>
+    | DateDataType
+    | Class<DateDataType>;
+
+  declare class RangeDataType<T: RangeableDataType> extends AbstractDataType {
+    constructor(subtype?: T): RangeDataType<T>;
+    constructor(options: RangeDataTypeOptions<T>): RangeDataType<T>;
+    static <T: RangeableDataType>(subtype?: T): RangeDataType<T>;
+    static <T: RangeableDataType>(
+      options: RangeDataTypeOptions<T>
+    ): RangeDataType<T>;
+    options: RangeDataTypeOptions<T>;
+  }
+
+  declare export type RangeDataTypeOptions<T: RangeableDataType> = {|
+    subtype?: T,
+  |};
+
+  declare class VirtualDataType<T: DataType> extends AbstractDataType {
+    constructor(ReturnType: T, fields?: string[]): VirtualDataType<T>;
+    static <T: DataType>(ReturnType: T, fields?: string[]): VirtualDataType<T>;
+    returnType: T;
+    fields: string[];
+  }
+
+  declare class EnumDataType<T: string> extends AbstractDataType {
+    constructor(...values: T[]): EnumDataType<T>;
+    static <T: string>(...values: T[]): EnumDataType<T>;
+    values: T[];
+    options: EnumDataTypeOptions<T>;
+  }
+
+  declare export type EnumDataTypeOptions<T: string> = {| values: T[] |};
+
+  declare class ArrayDataType<T: DataType> extends AbstractDataType {
+    constructor(type: T): ArrayDataType<T>;
+    constructor(options: ArrayDataTypeOptions<T>): ArrayDataType<T>;
+    static <T: DataType>(type: T): ArrayDataType<T>;
+    static <T: DataType>(options: ArrayDataTypeOptions<T>): ArrayDataType<T>;
+    options: ArrayDataTypeOptions<T>;
+    is(obj: any, type: T): boolean;
+  }
+
+  declare export type ArrayDataTypeOptions<T: DataType> = {| type: T |};
+
+  declare export class GeometryDataType extends AbstractDataType {
+    constructor(type: string, srid?: number): GeometryDataType;
+    constructor(options: GeometryDataTypeOptions): GeometryDataType;
+    static (type: string, srid?: number): GeometryDataType;
+    static (options: GeometryDataTypeOptions): GeometryDataType;
+    options: GeometryDataTypeOptions;
+    type: string;
+    srid?: number;
+    escape: boolean;
+  }
+
+  declare export type GeometryDataTypeOptions = {|
+    type: string,
+    srid?: number,
+  |};
+
+  declare export class GeographyDataType extends AbstractDataType {
+    constructor(type: string, srid?: number): GeographyDataType;
+    constructor(options: GeographyDataTypeOptions): GeographyDataType;
+    static (type: string, srid?: number): GeographyDataType;
+    static (options: GeographyDataTypeOptions): GeographyDataType;
+    options: GeographyDataTypeOptions;
+    type: string;
+    srid?: number;
+    escape: boolean;
+  }
+
+  declare export type GeographyDataTypeOptions = {|
+    type: string,
+    srid?: number,
+  |};
+
+  declare export type DataType =
+    | string
+    | AbstractDataType
+    | Class<AbstractDataType>;
 
   /**
    * A convenience class holding commonly used data types. The datatypes are used when definining a new model
@@ -1979,39 +2025,45 @@ declare module 'sequelize' {
   })
   ```
   */
-  declare export type DataTypes = {
-    ABSTRACT: DataTypeAbstract,
-    STRING: DataTypeString,
-    CHAR: DataTypeChar,
-    TEXT: DataTypeText,
-    CITEXT: DataTypeCitext,
-    NUMBER: DataTypeNumber,
-    INTEGER: DataTypeInteger,
-    BIGINT: DataTypeBigInt,
-    FLOAT: DataTypeFloat,
-    TIME: DataTypeTime,
-    DATE: DataTypeDate,
-    DATEONLY: DataTypeDateOnly,
-    BOOLEAN: DataTypeBoolean,
-    NOW: DataTypeNow,
-    BLOB: DataTypeBlob,
-    DECIMAL: DataTypeDecimal,
-    NUMERIC: DataTypeDecimal,
-    UUID: DataTypeUUID,
-    UUIDV1: DataTypeUUIDv1,
-    UUIDV4: DataTypeUUIDv4,
-    HSTORE: DataTypeHStore,
-    JSON: DataTypeJSONType,
-    JSONB: DataTypeJSONB,
-    VIRTUAL: DataTypeVirtual,
-    ARRAY: DataTypeArray,
-    ENUM: DataTypeEnum,
-    RANGE: DataTypeRange,
-    REAL: DataTypeReal,
-    DOUBLE: DataTypeDouble,
-    GEOMETRY: DataTypeGeometry,
-    ...
-  };
+  declare export type DataTypes = {|
+    ABSTRACT: Class<AbstractDataType>,
+    STRING: Class<StringDataType>,
+    CHAR: Class<CharDataType>,
+    TEXT: Class<TextDataType>,
+    CITEXT: Class<AbstractDataType>,
+    NUMBER: Class<NumberDataType>,
+    INTEGER: Class<IntegerDataType>,
+    TINYINT: Class<TinyIntegerDataType>,
+    SMALLINT: Class<SmallIntegerDataType>,
+    MEDIUMINT: Class<MediumIntegerDataType>,
+    BIGINT: Class<BigIntDataType>,
+    FLOAT: Class<FloatDataType>,
+    TIME: Class<AbstractDataType>,
+    DATE: Class<DateDataType>,
+    DATEONLY: Class<DateOnlyDataType>,
+    BOOLEAN: Class<AbstractDataType>,
+    NOW: Class<AbstractDataType>,
+    BLOB: Class<BlobDataType>,
+    DECIMAL: Class<DecimalDataType>,
+    NUMERIC: Class<DecimalDataType>,
+    UUID: Class<UUIDDataType>,
+    UUIDV1: Class<UUIDv1DataType>,
+    UUIDV4: Class<UUIDv4DataType>,
+    HSTORE: Class<AbstractDataType>,
+    JSON: Class<AbstractDataType>,
+    JSONB: Class<AbstractDataType>,
+    VIRTUAL: Class<VirtualDataType<any>>,
+    ARRAY: Class<ArrayDataType<any>>,
+    ENUM: Class<EnumDataType<any>>,
+    RANGE: Class<RangeDataType<any>>,
+    REAL: Class<RealDataType>,
+    DOUBLE: Class<DoubleDataType>,
+    GEOMETRY: Class<GeometryDataType>,
+    GEOGRAPHY: Class<GeographyDataType>,
+    CIDR: Class<AbstractDataType>,
+    INET: Class<AbstractDataType>,
+    MACADDDR: Class<AbstractDataType>,
+  |};
 
   /**
    * Abstract Deferrable interface. Use this if you want to create an interface that has a value any of the
@@ -3327,7 +3379,7 @@ declare module 'sequelize' {
      * The type of the result. If `field` is a field in this Model, the default will be the type of that field,
      * otherwise defaults to float.
      */
-    dataType?: DataTypeAbstract | string,
+    dataType?: DataType,
     /**
      * Applies DISTINCT to the field being aggregated over
      */
@@ -4781,7 +4833,7 @@ declare module 'sequelize' {
     addColumn(
       table: string | {| schema?: string, tableName?: string |},
       key: string,
-      attribute: DefineAttributeColumnOptions | DataTypeAbstract,
+      attribute: DefineAttributeColumnOptions | DataType,
       options?: QueryInterfaceOptions
     ): Promise<void>;
 
@@ -4805,7 +4857,7 @@ declare module 'sequelize' {
             tableName?: string,
           |},
       attributeName: string,
-      dataTypeOrOptions?: DataTypeAbstract | DefineAttributeColumnOptions,
+      dataTypeOrOptions?: DataType | DefineAttributeColumnOptions,
       options?: QueryInterfaceOptions
     ): Promise<void>;
 
@@ -5223,7 +5275,7 @@ declare module 'sequelize' {
     /**
      * A string or a data type
      */
-    type: string | DataTypeAbstract,
+    type: string | DataType,
     /**
     * If true, the column will get a unique constraint. If a string is provided, the column will be part of a
     * composite unique index. If multiple columns have the same string, they will be part of the same unique
@@ -5304,7 +5356,7 @@ declare module 'sequelize' {
    * @see  Sequelize.define
    */
   declare export type DefineAttributes = {
-    [name: string]: string | DataTypeAbstract | DefineAttributeColumnOptions,
+    [name: string]: string | DataType | DefineAttributeColumnOptions,
     ...,
   };
 
@@ -6419,36 +6471,43 @@ declare module 'sequelize' {
     static ConnectionTimedOutError: typeof ConnectionTimedOutError;
     static EmptyResultError: typeof EmptyResultError;
 
-    static ABSTRACT: DataTypeAbstract;
-    static STRING: DataTypeString;
-    static CHAR: DataTypeChar;
-    static TEXT: DataTypeText;
-    static NUMBER: DataTypeNumber;
-    static INTEGER: DataTypeInteger;
-    static BIGINT: DataTypeBigInt;
-    static FLOAT: DataTypeFloat;
-    static TIME: DataTypeTime;
-    static DATE: DataTypeDate;
-    static DATEONLY: DataTypeDateOnly;
-    static BOOLEAN: DataTypeBoolean;
-    static NOW: DataTypeNow;
-    static BLOB: DataTypeBlob;
-    static DECIMAL: DataTypeDecimal;
-    static NUMERIC: DataTypeDecimal;
-    static UUID: DataTypeUUID;
-    static UUIDV1: DataTypeUUIDv1;
-    static UUIDV4: DataTypeUUIDv4;
-    static HSTORE: DataTypeHStore;
-    static JSON: DataTypeJSONType;
-    static JSONB: DataTypeJSONB;
-    static VIRTUAL: DataTypeVirtual;
-    static ARRAY: DataTypeArray;
-    static NONE: DataTypeVirtual;
-    static ENUM: DataTypeEnum;
-    static RANGE: DataTypeRange;
-    static REAL: DataTypeReal;
-    static DOUBLE: DataTypeDouble;
-    static GEOMETRY: DataTypeGeometry;
+    static ABSTRACT: Class<AbstractDataType>;
+    static STRING: Class<StringDataType>;
+    static CHAR: Class<CharDataType>;
+    static TEXT: Class<TextDataType>;
+    static CITEXT: Class<AbstractDataType>;
+    static NUMBER: Class<NumberDataType>;
+    static INTEGER: Class<IntegerDataType>;
+    static TINYINT: Class<TinyIntegerDataType>;
+    static SMALLINT: Class<SmallIntegerDataType>;
+    static MEDIUMINT: Class<MediumIntegerDataType>;
+    static BIGINT: Class<BigIntDataType>;
+    static FLOAT: Class<FloatDataType>;
+    static TIME: Class<AbstractDataType>;
+    static DATE: Class<DateDataType>;
+    static DATEONLY: Class<DateOnlyDataType>;
+    static BOOLEAN: Class<AbstractDataType>;
+    static NOW: Class<AbstractDataType>;
+    static BLOB: Class<BlobDataType>;
+    static DECIMAL: Class<DecimalDataType>;
+    static NUMERIC: Class<DecimalDataType>;
+    static UUID: Class<UUIDDataType>;
+    static UUIDV1: Class<UUIDv1DataType>;
+    static UUIDV4: Class<UUIDv4DataType>;
+    static HSTORE: Class<AbstractDataType>;
+    static JSON: Class<AbstractDataType>;
+    static JSONB: Class<AbstractDataType>;
+    static VIRTUAL: Class<VirtualDataType<any>>;
+    static ARRAY: Class<ArrayDataType<any>>;
+    static ENUM: Class<EnumDataType<any>>;
+    static RANGE: Class<RangeDataType<any>>;
+    static REAL: Class<RealDataType>;
+    static DOUBLE: Class<DoubleDataType>;
+    static GEOMETRY: Class<GeometryDataType>;
+    static GEOGRAPHY: Class<GeographyDataType>;
+    static CIDR: Class<AbstractDataType>;
+    static INET: Class<AbstractDataType>;
+    static MACADDDR: Class<AbstractDataType>;
 
     /**
      * Add a hook to the model

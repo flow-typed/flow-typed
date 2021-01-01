@@ -32,7 +32,7 @@ import type {
   BelongsToManyHasMany,
   BelongsToManyCount,
   Association,
-  DataTypeAbstract,
+  DataType,
 } from 'sequelize';
 
 //
@@ -300,10 +300,10 @@ Customer.belongsToMany(Branch, { through: 'branchCustomer' });
 
 (Warehouse.associations.branch: Association<WarehouseInstance, BranchInstance>);
 (Warehouse.tableName: string);
-(Warehouse.rawAttributes.blah.type: DataTypeAbstract);
-(Warehouse.tableAttributes.blah.type: DataTypeAbstract);
-(Warehouse.attributes.blah.type: DataTypeAbstract);
-(Warehouse.primaryKeys.blah.type: DataTypeAbstract);
+(Warehouse.rawAttributes.blah.type: DataType);
+(Warehouse.tableAttributes.blah.type: DataType);
+(Warehouse.attributes.blah.type: DataType);
+(Warehouse.primaryKeys.blah.type: DataType);
 
 Warehouse.getAssociations(WarehouseBranch);
 Warehouse.getAssociationForAlias(WarehouseBranch, 'blah');
