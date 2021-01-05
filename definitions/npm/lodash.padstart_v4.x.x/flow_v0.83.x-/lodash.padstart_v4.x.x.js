@@ -1,5 +1,5 @@
 declare module 'lodash.padstart' {
-  module.exports = (
+  declare module.exports: (
     string: string,
     length: number,
     chars?: string,
