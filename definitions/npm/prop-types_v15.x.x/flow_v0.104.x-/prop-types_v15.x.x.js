@@ -17,6 +17,7 @@ declare module 'prop-types' {
   declare var any: React$PropType$Primitive<any>;
   declare var arrayOf: React$PropType$ArrayOf;
   declare var element: React$PropType$Primitive<any>;
+  declare var elementType: React$PropType$Primitive<any>;
   declare var instanceOf: React$PropType$InstanceOf;
   declare var node: React$PropType$Primitive<any>;
   declare var objectOf: React$PropType$ObjectOf;
