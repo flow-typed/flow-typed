@@ -24,12 +24,12 @@ declare module 'match-sorter' {
     keepDiacritics?: boolean,
   |};
 
-  declare module.exports: {
+  declare module.exports: {|
     matchSorter<T>(
       items: Array<T>,
       value: string,
-      options?: Options<T>,
+      options?: Options<T>
     ): Array<T>,
     rankings: $npm$matchSorter$Rankings,
-  };
+  |};
 }
