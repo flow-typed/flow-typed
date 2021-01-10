@@ -17,11 +17,30 @@ describe('body-scroll-lock', () => {
     disableBodyScroll();
   });
 
+  it('disableBodyScroll with options', () => {
+    disableBodyScroll(element, {
+      reserveScrollBarGap: true,
+      allowTouchMove: (el) => true,
+    });
+    disableBodyScroll(element, {
+      reserveScrollBarGap: true,
+    });
+    disableBodyScroll(element, {
+      allowTouchMove: (el) => true,
+    });
+    // $FlowExpectedError[prop-missing]
+    disableBodyScroll(element, {
+      random: true,
+    });
+  });
+
   it('enableBodyScroll', () => {
     (enableBodyScroll(element): void);
     enableBodyScroll(inputElement);
     // $FlowExpectedError[incompatible-call]
     enableBodyScroll();
+    // $FlowExpectedError[extra-arg]
+    enableBodyScroll(element, {});
   });
 
   it('clearAllBodyScrollLocks', () => {

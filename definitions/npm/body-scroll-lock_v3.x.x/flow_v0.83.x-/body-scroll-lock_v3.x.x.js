@@ -1,6 +1,11 @@
 declare module 'body-scroll-lock' {
+  declare type BodyScrollOptions = {|
+    reserveScrollBarGap?: boolean,
+    allowTouchMove?: (el: any) => boolean,
+  |}
+
   declare type BodyScrollLock = {|
-    disableBodyScroll: (target: HTMLElement) => void,
+    disableBodyScroll: (target: HTMLElement, options?: BodyScrollOptions) => void,
     enableBodyScroll: (target: HTMLElement) => void,
     clearAllBodyScrollLocks: () => void,
   |};
