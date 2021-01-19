@@ -49,7 +49,11 @@ declare module 'chance' {
     buffer(options?: { length?: number, ... }): Buffer;
     paragraph(options?: { sentences: number, ... }): string;
     sentence(options?: { words: number, ... }): string;
-    syllable(): string;
+    syllable(options?: {
+      length?: number,
+      capitalize?: boolean,
+      ...
+    }): string;
     word(options?: {
       syllables?: number,
       length?: number,
@@ -189,9 +193,18 @@ declare module 'chance' {
       ...
     }): Date;
     hammertime(): number;
-    hour(): number;
+    hour(options?: {
+      twentyfour?: boolean,
+      min?: number,
+      max?: number,
+      ...
+    }): number;
     millisecond(): number;
-    minute(): number;
+    minute(options? :{
+      min?: number,
+      max: number,
+      ...
+    }): number;
     month(options: { raw: true, ... }): {
       name: string,
       short_name: string,
@@ -199,7 +212,11 @@ declare module 'chance' {
       ...
     };
     month(): string;
-    second(): number;
+    second(options?: {
+      min?: number,
+      max?: number,
+      ...
+    }): number;
     timestamp(): number;
     timezone(): Timezone;
     weekday(options?: { weekday_only?: boolean, ... }): string;
