@@ -212,11 +212,7 @@ declare module 'chance' {
       ...
     };
     month(): string;
-    second(options?: {
-      min?: number,
-      max?: number,
-      ...
-    }): number;
+    second(): number;
     timestamp(): number;
     timezone(): Timezone;
     weekday(options?: { weekday_only?: boolean, ... }): string;

@@ -27,7 +27,5 @@ const ccType = chance.cc_type({ raw: true });
 (chance.hour(): number);
 (chance.minute({ min: 0, max: 30 }): number);
 (chance.minute(): number);
-(chance.second({ min: 0, max: 50 }): number);
-(chance.second(): number);
 (chance.syllable(): string);
 (chance.syllable({ length: 5, capitalize: true }): string);
