@@ -200,7 +200,7 @@ declare module 'chance' {
       ...
     }): number;
     millisecond(): number;
-    minute(options? :{
+    minute(options?: {
       min?: number,
       max: number,
       ...
