@@ -154,7 +154,7 @@ declare module '@testing-library/react' {
   ) => Promise<HTMLElement>;
 
   declare type FindAllByRole = (
-    role: Matcher,
+    role: any,
     options?: ByRoleOptions,
     waitForElementOptions?: WaitForElementOptions
   ) => Promise<HTMLElement[]>;
@@ -265,7 +265,7 @@ declare module '@testing-library/react' {
     container?: HTMLElement,
     baseElement?: HTMLElement,
     hydrate?: boolean,
-    wrapper?: React.ComponentType,
+    wrapper?: React$ComponentType<any>,
   |};
 
   declare export type RenderOptionsWithCustomQueries<
@@ -275,17 +275,17 @@ declare module '@testing-library/react' {
     container?: HTMLElement,
     baseElement?: HTMLElement,
     hydrate?: boolean,
-    wrapper?: React.ComponentType,
+    wrapper?: React$ComponentType<any>,
   |};
 
   declare export function render(
-    ui: React.ReactElement<any>,
+    ui: React$Node,
     options?: RenderOptionsWithoutCustomQueries
   ): RenderResult<>;
   declare export function render<
     CustomQueries: { [string]: (...args: Array<any>) => any, ... }
   >(
-    ui: React.ReactElement<any>,
+    ui: React$Node,
     options: RenderOptionsWithCustomQueries<CustomQueries>
   ): RenderResult<CustomQueries>;
 
