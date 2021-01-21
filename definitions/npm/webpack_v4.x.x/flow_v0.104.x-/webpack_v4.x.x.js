@@ -569,6 +569,14 @@ declare module 'webpack' {
       | false,
     entry?: Entry,
     externals?: Externals,
+    infrastructureLogging?: {|
+      level?: 'none' | 'error' | 'warn' | 'info' | 'log' | 'verbose',
+      debug?:
+        | string
+        | RegExp
+        | ((string) => boolean)
+        | Array<string | RegExp | ((string) => boolean)>,
+    |},
     loader?: { [k: string]: any, ... },
     mode?: 'development' | 'production' | 'none',
     module?: ModuleOptions,
