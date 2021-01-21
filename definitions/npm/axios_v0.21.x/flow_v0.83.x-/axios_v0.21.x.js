@@ -205,7 +205,7 @@ declare module 'axios' {
     Cancel: typeof Cancel;
     CancelToken: typeof CancelToken;
     isCancel(value: mixed): boolean;
-    create(config?: AxiosXHRConfigBase<T, R>): Axios;
+    create<T, R>(config?: AxiosXHRConfigBase<T, R>): Axios;
     all: typeof Promise.all;
     spread<T, R>(callback: (...args: T) => R): (array: T) => R;
   }
