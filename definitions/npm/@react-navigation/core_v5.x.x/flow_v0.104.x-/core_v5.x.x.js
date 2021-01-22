@@ -263,7 +263,7 @@ declare module '@react-navigation/core' {
   // Copied from
   // react-native/Libraries/Components/Touchable/TouchableWithoutFeedback.js
   declare type Stringish = string;
-  declare type EdgeInsetsProp = $ReadOnly<$Shape<EdgeInsets>>;
+  declare type EdgeInsetsProp = $ReadOnly<$Partial<EdgeInsets>>;
   declare type TouchableWithoutFeedbackProps = $ReadOnly<{|
     accessibilityActions?: ?$ReadOnlyArray<AccessibilityActionInfo>,
     accessibilityElementsHidden?: ?boolean,
@@ -416,7 +416,7 @@ declare module '@react-navigation/core' {
   >;
   declare type $IsUndefined<X> = $IsA<X, void>;
 
-  declare type $Partial<T> = $Rest<T, {...}>;
+  declare type $Partial<T> = $ReadOnly<$Rest<T, {...}>>;
 
   /**
    * Actions, state, etc.
@@ -841,12 +841,12 @@ declare module '@react-navigation/core' {
       State,
       EventMap,
     >>,
-    +setOptions: (options: $Shape<ScreenOptions>) => void,
+    +setOptions: (options: $Partial<ScreenOptions>) => void,
     +setParams: (
       params: $If<
         $IsUndefined<$ElementType<ParamList, RouteName>>,
         empty,
-        $Shape<$NonMaybeType<$ElementType<ParamList, RouteName>>>,
+        $Partial<$NonMaybeType<$ElementType<ParamList, RouteName>>>,
       >,
     ) => void,
     ...
@@ -893,7 +893,7 @@ declare module '@react-navigation/core' {
           route: RouteProp<ParamList, RouteName>,
           navigation: NavProp,
         |}) => ScreenListeners<EventMap, State>,
-    +initialParams?: $Shape<$ElementType<ParamList, RouteName>>,
+    +initialParams?: $Partial<$ElementType<ParamList, RouteName>>,
   |};
 
   declare export type ScreenProps<
@@ -1176,7 +1176,7 @@ declare module '@react-navigation/core' {
     +styleInterpolator: StackHeaderStyleInterpolator,
   |};
 
-  declare export type StackHeaderLeftButtonProps = $Shape<{|
+  declare export type StackHeaderLeftButtonProps = $Partial<{|
     +onPress: (() => void),
     +pressColorAndroid: string;
     +backImage: (props: {| tintColor: string |}) => React$Node,
@@ -1204,7 +1204,7 @@ declare module '@react-navigation/core' {
   declare export type StackHeaderTitleInputProps =
     $Exact<StackHeaderTitleInputBase>;
 
-  declare export type StackOptions = $Shape<{|
+  declare export type StackOptions = $Partial<{|
     +title: string,
     +header: StackHeaderProps => React$Node,
     +headerShown: boolean,
@@ -1217,7 +1217,7 @@ declare module '@react-navigation/core' {
     +gestureEnabled: boolean,
     +gestureResponseDistance: {| vertical?: number, horizontal?: number |},
     +gestureVelocityImpact: number,
-    +safeAreaInsets: $Shape<EdgeInsets>,
+    +safeAreaInsets: $Partial<EdgeInsets>,
     // Transition
     ...TransitionPreset,
     // Header
@@ -1349,7 +1349,7 @@ declare module '@react-navigation/core' {
         >,
       |};
 
-  declare export type BottomTabOptions = $Shape<{|
+  declare export type BottomTabOptions = $Partial<{|
     +title: string,
     +tabBarLabel:
       | string
@@ -1364,7 +1364,7 @@ declare module '@react-navigation/core' {
     +tabBarAccessibilityLabel: string,
     +tabBarTestID: string,
     +tabBarVisible: boolean,
-    +tabBarVisibilityAnimationConfig: $Shape<{|
+    +tabBarVisibilityAnimationConfig: $Partial<{|
       +show: TabBarVisibilityAnimationConfig,
       +hide: TabBarVisibilityAnimationConfig,
     |}>,
@@ -1432,7 +1432,7 @@ declare module '@react-navigation/core' {
     BottomTabOptions,
   >;
 
-  declare export type BottomTabBarOptions = $Shape<{|
+  declare export type BottomTabBarOptions = $Partial<{|
     +keyboardHidesTabBar: boolean,
     +activeTintColor: string,
     +inactiveTintColor: string,
@@ -1446,7 +1446,7 @@ declare module '@react-navigation/core' {
     +tabStyle: ViewStyleProp,
     +labelPosition: 'beside-icon' | 'below-icon',
     +adaptive: boolean,
-    +safeAreaInsets: $Shape<EdgeInsets>,
+    +safeAreaInsets: $Partial<EdgeInsets>,
     +style: ViewStyleProp,
   |}>;
 
@@ -1485,7 +1485,7 @@ declare module '@react-navigation/core' {
    * Material bottom tab options
    */
 
-  declare export type MaterialBottomTabOptions = $Shape<{|
+  declare export type MaterialBottomTabOptions = $Partial<{|
     +title: string,
     +tabBarColor: string,
     +tabBarLabel: string,
@@ -1632,7 +1632,7 @@ declare module '@react-navigation/core' {
    * Material top tab options
    */
 
-  declare export type MaterialTopTabOptions = $Shape<{|
+  declare export type MaterialTopTabOptions = $Partial<{|
     +title: string,
     +tabBarLabel:
       | string
@@ -1687,14 +1687,14 @@ declare module '@react-navigation/core' {
     +swipeEnabled: boolean,
     +swipeVelocityImpact?: number,
     +springVelocityScale?: number,
-    +springConfig: $Shape<{|
+    +springConfig: $Partial<{|
       +damping: number,
       +mass: number,
       +stiffness: number,
       +restSpeedThreshold: number,
       +restDisplacementThreshold: number,
     |}>,
-    +timingConfig: $Shape<{|
+    +timingConfig: $Partial<{|
       +duration: number,
     |}>,
   |};
@@ -1724,7 +1724,7 @@ declare module '@react-navigation/core' {
     +getTabWidth: number => number,
   |};
 
-  declare export type MaterialTopTabBarOptions = $Shape<{|
+  declare export type MaterialTopTabBarOptions = $Partial<{|
     +scrollEnabled: boolean,
     +bounces: boolean,
     +pressColor: string,
@@ -1770,7 +1770,7 @@ declare module '@react-navigation/core' {
     ...$Partial<MaterialTopTabPagerCommonProps>,
     +position?: any, // Reanimated.Value<number>
     +tabBarPosition?: 'top' | 'bottom',
-    +initialLayout?: $Shape<{| +width: number, +height: number |}>,
+    +initialLayout?: $Partial<{| +width: number, +height: number |}>,
     +lazy?: boolean,
     +lazyPreloadDistance?: number,
     +removeClippedSubviews?: boolean,
@@ -1801,7 +1801,7 @@ declare module '@react-navigation/core' {
    * Drawer options
    */
 
-  declare export type DrawerOptions = $Shape<{|
+  declare export type DrawerOptions = $Partial<{|
     title: string,
     drawerLabel:
       | string
@@ -1867,7 +1867,7 @@ declare module '@react-navigation/core' {
     DrawerOptions,
   >;
 
-  declare export type DrawerItemListBaseOptions = $Shape<{|
+  declare export type DrawerItemListBaseOptions = $Partial<{|
     +activeTintColor: string,
     +activeBackgroundColor: string,
     +inactiveTintColor: string,
@@ -1876,7 +1876,7 @@ declare module '@react-navigation/core' {
     +labelStyle: TextStyleProp,
   |}>;
 
-  declare export type DrawerContentOptions = $Shape<{|
+  declare export type DrawerContentOptions = $Partial<{|
     ...DrawerItemListBaseOptions,
     +contentContainerStyle: ViewStyleProp,
     +style: ViewStyleProp,
