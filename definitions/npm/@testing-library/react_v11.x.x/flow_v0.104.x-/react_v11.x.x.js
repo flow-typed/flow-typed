@@ -279,13 +279,13 @@ declare module '@testing-library/react' {
   |};
 
   declare export function render(
-    ui: React$Node,
+    ui: React$Element<any>,
     options?: RenderOptionsWithoutCustomQueries
   ): RenderResult<>;
   declare export function render<
     CustomQueries: { [string]: (...args: Array<any>) => any, ... }
   >(
-    ui: React$Node,
+    ui: React$Element<any>,
     options: RenderOptionsWithCustomQueries<CustomQueries>
   ): RenderResult<CustomQueries>;
 
