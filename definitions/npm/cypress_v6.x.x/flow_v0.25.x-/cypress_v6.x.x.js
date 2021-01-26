@@ -446,15 +446,15 @@ declare interface Cypress$Chainable {
   /**
    * @see https://docs.cypress.io/api/commands/request.html
    */
-  request(url: string): Promise<Cypress$RequestResponse>,
-  request(url: string, body: Cypress$RequestBody): Promise<Cypress$RequestResponse>,
-  request(method: Cypress$HttpMethod, url: string): Promise<Cypress$RequestResponse>,
+  request(url: string): Cypress$Global,
+  request(url: string, body: Cypress$RequestBody): Cypress$Global,
+  request(method: Cypress$HttpMethod, url: string): Cypress$Global,
   request(
     method: Cypress$HttpMethod,
     url: string,
     body: Cypress$RequestBody,
-  ): Promise<Cypress$RequestResponse>,
-  request(options: Cypress$RequestOptions): Promise<Cypress$RequestResponse>,
+  ): Cypress$Global,
+  request(options: Cypress$RequestOptions): Cypress$Global,
 
   /**
    * @see https://docs.cypress.io/api/commands/root.html
