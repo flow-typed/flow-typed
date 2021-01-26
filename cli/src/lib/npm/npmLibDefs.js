@@ -261,7 +261,6 @@ function pkgVersionMatch(pkgSemver: string, libDefSemverRaw: string) {
     return libDefSemverRaw;
   })();
 
-
   if (semver.valid(pkgSemver)) {
     // Test the single package version against the LibDef range
     return semver.satisfies(pkgSemver, libDefSemver);
