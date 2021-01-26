@@ -635,19 +635,23 @@ declare interface Cypress$Chainable {
   ): Cypress$FileContents,
 }
 
-declare interface Cypress$DebugOptions {
+declare type Cypress$DebugOptions = {|
   verbose?: boolean
-}
+|}
 
-declare interface Cypress$Loggable {
+declare type Cypress$Loggable = {|
   log?: boolean
-}
+|}
 
-declare interface Cypress$Timeoutable {
+declare type Cypress$Timeoutable  = {|
   timeout?: number
-}
+|};
 
-declare type Cypress$LoggableTimeoutable = { ... } & Cypress$Loggable & Cypress$Timeoutable
+declare type Cypress$LoggableTimeoutable = {
+  ...Cypress$Timeoutable,
+  ...Cypress$Loggable,
+  ...
+}
 
 declare type Cypress$ClockObject = {|
   tick: (milliseconds: number) => Promise<Cypress$ClockObject>,
@@ -655,31 +659,43 @@ declare type Cypress$ClockObject = {|
 |};
 
 declare type Cypress$BlurOptions = {|
-  force?: boolean
-|} & Cypress$Loggable & Cypress$Timeoutable
+  ...Cypress$Timeoutable,
+  ...Cypress$Loggable,
+  force?: boolean,
+|}
 
 declare type Cypress$CheckOptions = {|
+  ...Cypress$Timeoutable,
+  ...Cypress$Loggable,
   interval?: number,
   force?: boolean
-|} & Cypress$Loggable & Cypress$Timeoutable
+|}
 
 declare type Cypress$ClearOptions = {|
+  ...Cypress$Timeoutable,
+  ...Cypress$Loggable,
   force?: boolean,
   interval?: number
-|} & Cypress$Loggable & Cypress$Timeoutable
+|}
 
 declare type Cypress$ClickOptions = {|
+  ...Cypress$Timeoutable,
+  ...Cypress$Loggable,
   force?: boolean,
   multiple?: boolean,
   interval?: number
-|} & Cypress$Loggable & Cypress$Timeoutable
+|}
 
 declare type Cypress$ExecOptions = {|
+  ...Cypress$Timeoutable,
+  ...Cypress$Loggable,
   failOnNonZeroExit?: boolean,
   env?: Object
-|} & Cypress$Loggable & Cypress$Timeoutable
+|}
 
 declare type Cypress$RequestOptions = {|
+  ...Cypress$Timeoutable,
+  ...Cypress$Loggable,
   auth?: Object,
   body?: Cypress$RequestBody,
   failOnStatusCode?: boolean,
@@ -690,7 +706,7 @@ declare type Cypress$RequestOptions = {|
   method?: Cypress$HttpMethod,
   qs?: string,
   url: string
-|} & Cypress$Loggable & Cypress$Timeoutable
+|}
 
 declare interface Cypress$RouteOptions {
   method?: Cypress$HttpMethod,
@@ -710,23 +726,29 @@ declare type Cypress$RouteResponse = {|
 |};
 
 declare type Cypress$ScrollIntoViewOptions = {|
+  ...Cypress$Timeoutable,
+  ...Cypress$Loggable,
   duration?: number,
   easing?: string,
   offset?: {|
     top: number,
     left: number,
   |},
-|} & Cypress$Loggable & Cypress$Timeoutable;
+|}
 
 declare type Cypress$ScrollToOptions = {|
+  ...Cypress$Timeoutable,
+  ...Cypress$Loggable,
   duration?: number,
   easing?: string
-|} & Cypress$Loggable & Cypress$Timeoutable;
+|};
 
 declare type Cypress$SelectOptions = {|
+  ...Cypress$Timeoutable,
+  ...Cypress$Loggable,
   force?: boolean,
   interval?: number
-|} & Cypress$Loggable & Cypress$Timeoutable;
+|};
 
 declare interface Cypress$ServerOptions {
   delay?: number,
@@ -746,13 +768,15 @@ declare interface Cypress$ServerOptions {
 declare type Cypress$SetCookieSameSite = 'lax' | 'strict' | 'no_restriction'
 
 declare type Cypress$SetCookieOptions = {|
+  ...Cypress$Timeoutable,
+  ...Cypress$Loggable,
   path?: string,
   domain?: string,
   secure?: boolean,
   httpOnly?: boolean,
   expiry?: number,
   sameSite?: Cypress$SetCookieSameSite,
-|} & Cypress$Loggable & Cypress$Timeoutable;
+|};
 
 declare type Cypress$SetCookieResponse = {|
   domain: string,
@@ -766,13 +790,17 @@ declare type Cypress$SetCookieResponse = {|
 |};
 
 declare type Cypress$TypeOptions = {|
+  ...Cypress$Timeoutable,
+  ...Cypress$Loggable,
   delay?: number,
   force?: boolean,
   release?: boolean,
   interval?: number
-|} & Cypress$Loggable & Cypress$Timeoutable;
+|};
 
 declare type Cypress$VisitOptions = {|
+  ...Cypress$Timeoutable,
+  ...Cypress$Loggable,
   url?: string,
   method?: 'GET' | 'POST',
   body?: string | { ... },
@@ -786,7 +814,7 @@ declare type Cypress$VisitOptions = {|
   retryOnStatusCodeFailure?: boolean,
   retryOnNetworkFailure?: boolean,
   timeout?: number,
-|} & Cypress$Loggable & Cypress$Timeoutable;
+|};
 
 declare type Cypress$Global = Cypress$Chainable;
 
