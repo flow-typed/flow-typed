@@ -165,6 +165,14 @@ cy.request({ url: 'test' }).then(({ duration }) => {
 
 });
 
+cy.request('test').as('response');
+cy.request('test', 'body').as('response');
+cy.request('test', {}).as('response');
+cy.request('GET', 'test').as('response');
+cy.request('GET', 'test', 'body').as('response');
+cy.request('GET', 'test', {}).as('response');
+cy.request({ url: 'test' }).as('response');
+
 cy.root().click();
 
 cy.route('url').as('test');
