@@ -252,7 +252,6 @@ function pkgVersionMatch(pkgSemver: string, libDefSemverRaw: string) {
   const libDefSemver = (() => {
     const versionSplit = libDefSemverRaw.split('.');
     if (libDefSemverRaw[0] !== '=' && libDefSemverRaw[0] !== '^') {
-
       if (versionSplit[1] !== 'x') {
         return '~' + libDefSemverRaw;
       }
