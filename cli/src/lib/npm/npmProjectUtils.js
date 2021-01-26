@@ -151,6 +151,8 @@ export async function determineFlowVersion(
     return stringToVersion('v' + flowVerStr);
   }
 
+  // If flow-bin isn't specified in package.json the project may be a mono-repo
+  // So check node_modules/flow-bin as a fallback just in case.
   const flowBinPkgJsonData = await getInstalledFlowPackageJsonData(pathStr);
   if (flowBinPkgJsonData) {
     return stringToVersion('v' + flowBinPkgJsonData.content.version);
