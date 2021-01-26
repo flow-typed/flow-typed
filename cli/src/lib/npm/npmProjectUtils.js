@@ -74,6 +74,22 @@ export async function findPackageJsonPath(pathStr: string): Promise<string> {
   return path.join(pkgJsonPathStr, 'package.json');
 }
 
+async function getInstalledFlowPackageJsonData(pathStr: string): Promise<PkgJson | null> {
+  const flowBinPackagePath = 'node_modules/flow-bin/package.json';
+  const pkgJsonPathStr = await searchUpDirPath(
+    pathStr,
+    async p => await fs.exists(path.join(p, flowBinPackagePath)),
+  );
+  if (pkgJsonPathStr === null) {
+    return null;
+  }
+  const jsonData = await fs.readJson(path.join(pkgJsonPathStr, flowBinPackagePath));
+  return {
+    pathStr: pkgJsonPathStr,
+    content: jsonData,
+  };
+}
+
 // TODO: Write tests for this
 export function getPackageJsonDependencies(
   pkgJson: PkgJson,
@@ -133,6 +149,11 @@ export async function determineFlowVersion(
       flowVerStr = flowVerRange.set[0][0].semver.version;
     }
     return stringToVersion('v' + flowVerStr);
+  }
+
+  const flowBinPkgJsonData = await getInstalledFlowPackageJsonData(pathStr);
+  if (flowBinPkgJsonData) {
+    return stringToVersion('v' + flowBinPkgJsonData.content.version);
   }
 
   return null;
