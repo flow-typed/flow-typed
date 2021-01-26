@@ -34,7 +34,6 @@ export type PnpResolver = {|
 const PKG_JSON_DEP_FIELDS = [
   'dependencies',
   'devDependencies',
-  'peerDependencies',
   'bundledDependencies',
 ];
 export async function findPackageJsonDepVersionStr(
