@@ -19,6 +19,7 @@ declare type Cypress$HttpMethod =
   | 'GET'
   | 'POST'
   | 'PUT'
+  | 'PATCH'
   | 'DELETE'
   | 'OPTIONS'
   | 'HEAD'
@@ -708,7 +709,7 @@ declare type Cypress$RequestOptions = {|
   url: string
 |}
 
-declare interface Cypress$RouteOptions {
+declare type Cypress$RouteOptions = {|
   method?: Cypress$HttpMethod,
   url?: string | RegExp,
   response?: any,
@@ -719,7 +720,7 @@ declare interface Cypress$RouteOptions {
   onRequest?: (...args: Array<any>) => any,
   onResponse?: (...args: Array<any>) => any,
   onAbort?: (...args: Array<any>) => any
-}
+|}
 
 declare type Cypress$RouteResponse = {|
   as: (alias: string) => void,
