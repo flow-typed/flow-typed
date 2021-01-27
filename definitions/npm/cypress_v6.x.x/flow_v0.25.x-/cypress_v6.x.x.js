@@ -43,6 +43,8 @@ declare type Cypress$ViewportPreset =
 
 declare type Cypress$RequestBody = string | { ... };
 
+/* This type is no longer used in this libdef.
+   It is kept for backward-compatibility (projects may still rely on it) */
 declare type Cypress$RequestResponse = {
   status: any,
   body: any,
