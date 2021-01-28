@@ -143,27 +143,35 @@ cy.readFile('path', 'encoding');
 cy.reload();
 cy.reload(true);
 
-cy.request('test').then(({ body }) => {
+cy.request('test').then(({ body }: Cypress$RequestResponse) => {
 
 });
-cy.request('test', 'body').then(({ headers }) => {
+cy.request('test', 'body').then(({ headers }: Cypress$RequestResponse) => {
 
 });
-cy.request('test', {}).then(({ status }) => {
+cy.request('test', {}).then(({ status }: Cypress$RequestResponse) => {
 
 });
-cy.request('GET', 'test').then(({ duration }) => {
+cy.request('GET', 'test').then(({ duration }: Cypress$RequestResponse) => {
 
 });
-cy.request('GET', 'test', 'body').then(({ duration }) => {
+cy.request('GET', 'test', 'body').then(({ duration }: Cypress$RequestResponse) => {
 
 });
-cy.request('GET', 'test', {}).then(({ duration }) => {
+cy.request('GET', 'test', {}).then(({ duration }: Cypress$RequestResponse) => {
 
 });
-cy.request({ url: 'test' }).then(({ duration }) => {
+cy.request({ url: 'test' }).then(({ duration }: Cypress$RequestResponse) => {
 
 });
+
+cy.request('test').as('response');
+cy.request('test', 'body').as('response');
+cy.request('test', {}).as('response');
+cy.request('GET', 'test').as('response');
+cy.request('GET', 'test', 'body').as('response');
+cy.request('GET', 'test', {}).as('response');
+cy.request({ url: 'test' }).as('response');
 
 cy.root().click();
 
