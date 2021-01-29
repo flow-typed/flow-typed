@@ -143,25 +143,25 @@ cy.readFile('path', 'utf-8');
 cy.reload();
 cy.reload(true);
 
-cy.request('test').then(({ body }) => {
+cy.request('test').then(({ body }: Cypress$RequestResponse) => {
 
 });
-cy.request('test', 'body').then(({ headers }) => {
+cy.request('test', 'body').then(({ headers }: Cypress$RequestResponse) => {
 
 });
-cy.request('test', {}).then(({ status }) => {
+cy.request('test', {}).then(({ status }: Cypress$RequestResponse) => {
 
 });
-cy.request('GET', 'test').then(({ duration }) => {
+cy.request('GET', 'test').then(({ duration }: Cypress$RequestResponse) => {
 
 });
-cy.request('GET', 'test', 'body').then(({ duration }) => {
+cy.request('GET', 'test', 'body').then(({ duration }: Cypress$RequestResponse) => {
 
 });
-cy.request('GET', 'test', {}).then(({ duration }) => {
+cy.request('GET', 'test', {}).then(({ duration }: Cypress$RequestResponse) => {
 
 });
-cy.request({ url: 'test' }).then(({ duration }) => {
+cy.request({ url: 'test' }).then(({ duration }: Cypress$RequestResponse) => {
 
 });
 
