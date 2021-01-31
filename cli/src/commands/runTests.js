@@ -59,6 +59,7 @@ async function getTestGroups(
   onlyChanged: boolean = false,
 ): Promise<Array<TestGroup>> {
   let libDefs = await getLibDefs(repoDirPath);
+  console.log(libDefs);
   if (onlyChanged) {
     const diff = await getDiff();
     let changedDefs;
