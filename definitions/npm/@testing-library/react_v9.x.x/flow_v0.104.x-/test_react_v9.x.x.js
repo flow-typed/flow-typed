@@ -154,36 +154,35 @@ describe('render', () => {
 
   it('unmount should has 0 arguments', () => {
     unmount();
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-type]
     unmount(1);
   });
 
   it('container should be an html element', () => {
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-type]
     const a: number = container;
     const b: HTMLElement = container;
   });
 
   it('baseElement should be an html element', () => {
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-type]
     const a: number = baseElement;
     const b: HTMLElement = baseElement;
   });
 
   it('asFragment should return a document fragment', () => {
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-type]
     const a: HTMLElement = asFragment();
     const b: DocumentFragment = asFragment();
   });
 
   it('debug maybe has 1 argument an html element', () => {
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-type]
     debug(1);
     debug(container);
   });
 
   it('rerender should has 1 argument an react element', () => {
-    // $FlowExpectedError
     rerender();
     rerender(<Component />);
   });
@@ -193,19 +192,19 @@ describe('render', () => {
   });
 
   it('getAllByAltText should return array of HTML element', () => {
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-type]
     const a: HTMLElement = getAllByAltText('1');
     const b: Array<HTMLElement> = getAllByAltText('2');
   });
 
   it('queryByAltText should return maybe HTML element', () => {
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-type]
     const a: HTMLElement = queryByAltText('1');
     const b: ?HTMLElement = queryByAltText('2');
   });
 
   it('queryAllByAltText should return array of HTML element', () => {
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-type]
     const a: HTMLElement = queryAllByAltText('1');
     const b: Array<HTMLElement> = queryAllByAltText('2');
   });
@@ -215,19 +214,19 @@ describe('render', () => {
   });
 
   it('getAllByDisplayValue should return array of HTML element', () => {
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-type]
     const a: HTMLElement = getAllByDisplayValue('1');
     const b: Array<HTMLElement> = getAllByDisplayValue('2');
   });
 
   it('queryByDisplayValue should return maybe HTML element', () => {
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-type]
     const a: HTMLElement = queryByDisplayValue('1');
     const b: ?HTMLElement = queryByDisplayValue('2');
   });
 
   it('queryAllByDisplayValue should return array of HTML element', () => {
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-type]
     const a: HTMLElement = queryAllByDisplayValue('1');
     const b: Array<HTMLElement> = queryAllByDisplayValue('2');
   });
@@ -237,19 +236,19 @@ describe('render', () => {
   });
 
   it('getAllByLabelText should return array of HTML element', () => {
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-type]
     const a: HTMLElement = getAllByLabelText('1');
     const b: Array<HTMLElement> = getAllByLabelText('2');
   });
 
   it('queryByLabelText should return maybe HTML element', () => {
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-type]
     const a: HTMLElement = queryByLabelText('1');
     const b: ?HTMLElement = queryByLabelText('2');
   });
 
   it('queryAllByLabelText should return array of HTML element', () => {
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-type]
     const a: HTMLElement = queryAllByLabelText('1');
     const b: Array<HTMLElement> = queryAllByLabelText('2');
   });
@@ -259,19 +258,19 @@ describe('render', () => {
   });
 
   it('getAllByPlaceholderText should return array of HTML element', () => {
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-type]
     const a: HTMLElement = getAllByPlaceholderText('1');
     const b: Array<HTMLElement> = getAllByPlaceholderText('2');
   });
 
   it('queryByPlaceholderText should return maybe HTML element', () => {
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-type]
     const a: HTMLElement = queryByPlaceholderText('1');
     const b: ?HTMLElement = queryByPlaceholderText('2');
   });
 
   it('queryAllByPlaceholderText should return array of HTML element', () => {
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-type]
     const a: HTMLElement = queryAllByPlaceholderText('1');
     const b: Array<HTMLElement> = queryAllByPlaceholderText('2');
   });
@@ -281,19 +280,19 @@ describe('render', () => {
   });
 
   it('getAllByRole should return array of HTML element', () => {
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-type]
     const a: HTMLElement = getAllByRole('1');
     const b: Array<HTMLElement> = getAllByRole('2');
   });
 
   it('queryByRole should return maybe HTML element', () => {
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-type]
     const a: HTMLElement = queryByRole('1');
     const b: ?HTMLElement = queryByRole('2');
   });
 
   it('queryAllByRole should return array of HTML element', () => {
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-type]
     const a: HTMLElement = queryAllByRole('1');
     const b: Array<HTMLElement> = queryAllByRole('2');
   });
@@ -303,19 +302,19 @@ describe('render', () => {
   });
 
   it('getAllBySelectText should return array of HTML element', () => {
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-type]
     const a: HTMLElement = getAllBySelectText('1');
     const b: Array<HTMLElement> = getAllBySelectText('2');
   });
 
   it('queryBySelectText should return maybe HTML element', () => {
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-type]
     const a: HTMLElement = queryBySelectText('1');
     const b: ?HTMLElement = queryBySelectText('2');
   });
 
   it('queryAllBySelectText should return array of HTML element', () => {
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-type]
     const a: HTMLElement = queryAllBySelectText('1');
     const b: Array<HTMLElement> = queryAllBySelectText('2');
   });
@@ -325,19 +324,19 @@ describe('render', () => {
   });
 
   it('getAllByTestId should return array of HTML element', () => {
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-type]
     const a: HTMLElement = getAllByTestId('1');
     const b: Array<HTMLElement> = getAllByTestId('2');
   });
 
   it('queryByTestId should return maybe HTML element', () => {
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-type]
     const a: HTMLElement = queryByTestId('1');
     const b: ?HTMLElement = queryByTestId('2');
   });
 
   it('queryAllByTestId should return array of HTML element', () => {
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-type]
     const a: HTMLElement = queryAllByTestId('1');
     const b: Array<HTMLElement> = queryAllByTestId('2');
   });
@@ -347,19 +346,19 @@ describe('render', () => {
   });
 
   it('getAllByText should return array of HTML element', () => {
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-type]
     const a: HTMLElement = getAllByText('1');
     const b: Array<HTMLElement> = getAllByText('2');
   });
 
   it('queryByText should return maybe HTML element', () => {
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-type]
     const a: HTMLElement = queryByText('1');
     const b: ?HTMLElement = queryByText('2');
   });
 
   it('queryAllByText should return array of HTML element', () => {
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-type]
     const a: HTMLElement = queryAllByText('1');
     const b: Array<HTMLElement> = queryAllByText('2');
   });
@@ -369,19 +368,19 @@ describe('render', () => {
   });
 
   it('getAllByTitle should return array of HTML element', () => {
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-type]
     const a: HTMLElement = getAllByTitle('1');
     const b: Array<HTMLElement> = getAllByTitle('2');
   });
 
   it('queryByTitle should return maybe HTML element', () => {
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-type]
     const a: HTMLElement = queryByTitle('1');
     const b: ?HTMLElement = queryByTitle('2');
   });
 
   it('queryAllByTitle should return array of HTML element', () => {
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-type]
     const a: HTMLElement = queryAllByTitle('1');
     const b: Array<HTMLElement> = queryAllByTitle('2');
   });
@@ -391,19 +390,19 @@ describe('render', () => {
   });
 
   it('getAllByValue should return array of HTML element', () => {
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-type]
     const a: HTMLElement = getAllByValue('1');
     const b: Array<HTMLElement> = getAllByValue('2');
   });
 
   it('queryByValue should return maybe HTML element', () => {
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-type]
     const a: HTMLElement = queryByValue('1');
     const b: ?HTMLElement = queryByValue('2');
   });
 
   it('queryAllByValue should return array of HTML element', () => {
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-type]
     const a: HTMLElement = queryAllByValue('1');
     const b: Array<HTMLElement> = queryAllByValue('2');
   });
@@ -412,7 +411,7 @@ describe('render', () => {
 describe('cleanup', () => {
   it('should be a function w/o arguments', () => {
     cleanup();
-    // $FlowExpectedError
+    // $FlowExpectedError[extra-arg]
     cleanup(1);
   });
 });
@@ -422,7 +421,7 @@ describe('within', () => {
   const { container } = render(<Component />);
 
   it('should has html element as argument', () => {
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
     within();
     within(container);
   });
@@ -602,9 +601,9 @@ describe('fireEvent', () => {
   });
 
   it('should throw on invalid arguments', () => {
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
     fireEvent(1);
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
     fireEvent(htmlEl, 1);
   });
 
@@ -1142,11 +1141,11 @@ describe('render() parameters', () => {
     };
     const result = render(<Component />, { queries: customQueries });
     const a: CustomReturnType = result.getByOverride('something');
-    // $FlowExpectedError bad type for getByOverride parameter
+    // $FlowExpectedError[incompatible-call] bad type for getByOverride parameter
     result.getByOverride(1234);
-    // $FlowExpectedError missing getByOverride parameter
+    // $FlowExpectedError[incompatible-call] missing getByOverride parameter
     result.getByOverride();
-    // $FlowExpectedError default queries are not available when using custom queries
+    // $FlowExpectedError[prop-missing] default queries are not available when using custom queries
     result.getByTestId('indifferent');
   });
 });
