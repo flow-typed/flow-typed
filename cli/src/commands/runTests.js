@@ -59,9 +59,9 @@ async function getTestGroups(
   onlyChanged: boolean = false,
 ): Promise<Array<TestGroup>> {
   let libDefs = await getLibDefs(repoDirPath);
-  console.log(libDefs);
   if (onlyChanged) {
     const diff = await getDiff();
+    console.log(diff);
     let changedDefs;
     // $FlowFixMe
     const baseDiff: string[] = diff
@@ -73,6 +73,8 @@ async function getTestGroups(
       })
       .filter(d => d != null);
     changedDefs = baseDiff.map(d => parseRepoDirItem(d).pkgName);
+    console.log('changed---')
+    console.log(changedDefs);
     libDefs = libDefs.filter(def => changedDefs.includes(def.pkgName));
   }
   return libDefs.map(libDef => {
