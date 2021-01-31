@@ -200,6 +200,16 @@ describe('styled builtins', () => {
     // $FlowExpectedError
     const test3 = <AttrsInputExtra size="2em" type={1} />; // error
   });
+
+  it('should destructure a prop, as a function within styled(Component)', () => {
+    const Div = ({ ...rest }) => <div {...rest} />;
+
+    const StyledDiv: StyledComponent<{ color: string, ... }, *, *> = styled(Div)(({ color }) => `
+      color: ${color};
+    `);
+
+    const test = <StyledDiv color="#000">Test</StyledDiv>
+  })
 });
 
 // @NOTE: Not sure how to better test this

@@ -318,12 +318,12 @@ describe('parse path', () => {
     const location = parsePath('/test?query#hash')
 
     const state: {} = location
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-type]
     const key: string = location
   });
 
   it('should not allow to accept void', () => {
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
     const location = parsePath()
 
     const state: {} = location

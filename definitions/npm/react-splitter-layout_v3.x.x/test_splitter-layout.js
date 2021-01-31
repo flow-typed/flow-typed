@@ -48,7 +48,7 @@ it('checks it takes at least 1 pane', () => {
     </SplitterLayout>
   );
 
-  // $FlowExpectedError
+  // $FlowExpectedError[prop-missing]
   element = <SplitterLayout/>;
 });
 
@@ -81,8 +81,8 @@ it('checks various props', () => {
   );
 
   element = (
-    // $FlowExpectedError
     <SplitterLayout
+      // $FlowExpectedError[incompatible-type]
       onSecondaryPaneSizeChange={(size: string) => {}}
     >
       <div>pane 1</div>
@@ -91,8 +91,8 @@ it('checks various props', () => {
   );
 
   element = (
-    // $FlowExpectedError
     <SplitterLayout
+      // $FlowExpectedError[incompatible-type]
       primaryIndex={2}
     >
       <div>pane 1</div>
