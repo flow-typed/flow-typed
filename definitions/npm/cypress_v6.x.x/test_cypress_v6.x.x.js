@@ -82,7 +82,7 @@ cy.find('test').click();
 cy.first().click();
 
 cy.fixture('test').click();
-cy.fixture('path', 'encoding').click();
+cy.fixture('path', 'utf-8').click();
 
 cy.focus().click();
 
@@ -138,32 +138,42 @@ cy.prev().click();
 cy.prev('test').click();
 
 cy.readFile('test');
-cy.readFile('path', 'encoding');
+cy.readFile('path', 'utf-8');
 
 cy.reload();
 cy.reload(true);
 
-cy.request('test').then(({ body }) => {
+cy.request('test').then(({ body }: Cypress$RequestResponse) => {
 
 });
-cy.request('test', 'body').then(({ headers }) => {
+cy.request('test', 'body').then(({ headers }: Cypress$RequestResponse) => {
 
 });
-cy.request('test', {}).then(({ status }) => {
+cy.request('test', {}).then(({ status }: Cypress$RequestResponse) => {
 
 });
-cy.request('GET', 'test').then(({ duration }) => {
+cy.request('GET', 'test').then(({ duration }: Cypress$RequestResponse) => {
 
 });
-cy.request('GET', 'test', 'body').then(({ duration }) => {
+cy.request('GET', 'test', 'body').then(({ duration }: Cypress$RequestResponse) => {
 
 });
-cy.request('GET', 'test', {}).then(({ duration }) => {
+cy.request('GET', 'test', {}).then(({ duration }: Cypress$RequestResponse) => {
 
 });
-cy.request({ url: 'test' }).then(({ duration }) => {
+cy.request({ url: 'test' }).then(({ duration }: Cypress$RequestResponse) => {
 
 });
+
+cy.request('test').as('response');
+cy.request('test', 'body').as('response');
+cy.request('test', {}).as('response');
+cy.request('GET', 'test').as('response');
+cy.request('GET', 'test', 'body').as('response');
+cy.request('GET', 'test', {}).as('response');
+cy.request({ url: 'test' }).as('response');
+
+cy.request({url: 'test', timeout: 1000, log: true});
 
 cy.root().click();
 
@@ -247,7 +257,7 @@ cy.within({ log: true }, () => {}).click();
 cy.wrap({ name: 'test' }).name;
 
 cy.writeFile('file', 'test');
-cy.writeFile('file', 'test', 'encoding');
+cy.writeFile('file', 'test', 'utf-8');
 
 // ---
 
