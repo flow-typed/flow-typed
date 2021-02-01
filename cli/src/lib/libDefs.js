@@ -246,7 +246,7 @@ async function parseLibDefsFromPkgDir(
   }
 
   if (flowDirs.length === 0) {
-    throw new ValidationError('No libdef files found!');
+    throw new ValidationError(`No libdef files found for ${pkgDirPath}!`);
   }
 
   const libDefs = [];
