@@ -450,7 +450,7 @@ declare module '@testing-library/react' {
   |};
 
   declare export type RenderOptionsWithCustomQueries<
-    CustomQueries: { [key: string]: any, ... }
+    CustomQueries: { ... }
   > = {|
     queries: CustomQueries,
     container?: HTMLElement,

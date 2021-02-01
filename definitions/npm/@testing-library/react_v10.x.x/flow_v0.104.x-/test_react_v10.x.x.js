@@ -431,7 +431,7 @@ describe('render', () => {
   });
 
   it('findAllByTestId should return array of HTML element', () => {
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-type]
     const a: HTMLElement = findAllByTestId('1');
     const b: Promise<Array<HTMLElement>> = findAllByTestId('2');
   });
@@ -441,31 +441,31 @@ describe('render', () => {
   });
 
   it('getAllByText should return array of HTML element', () => {
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-type]
     const a: HTMLElement = getAllByText('1');
     const b: Array<HTMLElement> = getAllByText('2');
   });
 
   it('queryByText should return maybe HTML element', () => {
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-type]
     const a: HTMLElement = queryByText('1');
     const b: ?HTMLElement = queryByText('2');
   });
 
   it('queryAllByText should return array of HTML element', () => {
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-type]
     const a: HTMLElement = queryAllByText('1');
     const b: Array<HTMLElement> = queryAllByText('2');
   });
 
   it('findByText should return HTML element', () => {
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-type]
     const a: HTMLElement = findByText('1');
     const b: Promise<HTMLElement> = findByText('1');
   });
 
   it('findAllByText should return array of HTML element', () => {
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-type-arg]
     const a: Promise<HTMLElement> = findAllByText('1');
     const b: Promise<Array<HTMLElement>> = findAllByText('2');
   });
@@ -475,31 +475,31 @@ describe('render', () => {
   });
 
   it('getAllByTitle should return array of HTML element', () => {
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-type]
     const a: HTMLElement = getAllByTitle('1');
     const b: Array<HTMLElement> = getAllByTitle('2');
   });
 
   it('queryByTitle should return maybe HTML element', () => {
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-type]
     const a: HTMLElement = queryByTitle('1');
     const b: ?HTMLElement = queryByTitle('2');
   });
 
   it('queryAllByTitle should return array of HTML element', () => {
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-type]
     const a: HTMLElement = queryAllByTitle('1');
     const b: Array<HTMLElement> = queryAllByTitle('2');
   });
 
   it('findByTitle should return HTML element', () => {
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-type]
     const a: HTMLElement = findByTitle('1');
     const b: Promise<HTMLElement> = findByTitle('1');
   });
 
   it('findAllByTitle should return array of HTML element', () => {
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-type]
     const a: HTMLElement = findAllByTitle('1');
     const b: Promise<Array<HTMLElement>> = findAllByTitle('2');
   });
@@ -508,7 +508,7 @@ describe('render', () => {
 describe('cleanup', () => {
   it('should be a function w/o arguments', () => {
     cleanup();
-    // $FlowExpectedError
+    // $FlowExpectedError[extra-arg]
     cleanup(1);
   });
 });
@@ -518,7 +518,7 @@ describe('within', () => {
   const { container } = render(<Component />);
 
   it('should has html element as argument', () => {
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
     within();
     within(container);
   });
@@ -742,7 +742,7 @@ describe('within', () => {
 
 describe('screen', () => {
   it('should have all the queries available', () => {
-    // $FlowExpectedError
+    // $FlowExpectedError[prop-missing]
     const { notAQuery } = screen;
     const {
       debug,
@@ -812,9 +812,9 @@ describe('fireEvent', () => {
   });
 
   it('should throw on invalid arguments', () => {
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
     fireEvent(1);
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
     fireEvent(htmlEl, 1);
   });
 
@@ -1293,11 +1293,11 @@ describe('render() parameters', () => {
     };
     const result = render(<Component />, { queries: customQueries });
     const a: CustomReturnType = result.getByOverride('something');
-    // $FlowExpectedError bad type for getByOverride parameter
+    // $FlowExpectedError[incompatible-call] bad type for getByOverride parameter
     result.getByOverride(1234);
-    // $FlowExpectedError missing getByOverride parameter
+    // $FlowExpectedError[incompatible-call] missing getByOverride parameter
     result.getByOverride();
-    // $FlowExpectedError default queries are not available when using custom queries
+    // $FlowExpectedError[prop-missing] default queries are not available when using custom queries
     result.getByTestId('indifferent');
   });
 });
