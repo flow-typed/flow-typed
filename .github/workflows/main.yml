@@ -30,7 +30,7 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node }}
-          ref: ${{ github.head_ref }}
+          fetch-depth: 5
 
       - name: Before Install
         run: |
