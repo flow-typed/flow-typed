@@ -403,7 +403,7 @@ describe('render', () => {
   });
 
   it('queryAllByValue should return array of HTML element', () => {
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-type]
     const a: HTMLElement = queryAllByValue('1');
     const b: Array<HTMLElement> = queryAllByValue('2');
   });
@@ -412,7 +412,7 @@ describe('render', () => {
 describe('cleanup', () => {
   it('should be a function w/o arguments', () => {
     cleanup();
-    // $FlowExpectedError
+    // $FlowExpectedError[extra-arg]
     cleanup(1);
   });
 });
@@ -422,7 +422,7 @@ describe('within', () => {
   const { container } = render(<Component />);
 
   it('should has html element as argument', () => {
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
     within();
     within(container);
   });
@@ -602,9 +602,9 @@ describe('fireEvent', () => {
   });
 
   it('should throw on invalid arguments', () => {
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
     fireEvent(1);
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
     fireEvent(htmlEl, 1);
   });
 

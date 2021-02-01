@@ -15,11 +15,11 @@ import { describe, it } from 'flow-typed-test';
 
 describe('act', () => {
   it('should fail on invalid inputs', () => {
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
     act(1);
-    // $FlowExpectedError
+    // $FlowExpectedError[extra-arg]
     act(() => {}, 1);
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
     act(() => 1);
   });
 
@@ -32,13 +32,13 @@ describe('act', () => {
   });
 
   it('should fail on incorrect usage of result', () => {
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-type]
     act(() => {}) + 1;
-    // $FlowExpectedError
+    // $FlowExpectedError[prop-missing]
     act(() => {}).doesNotExist();
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
     act(() => {}).then(1);
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
     act(() => {}).then(() => {}, 1);
   });
 
@@ -50,9 +50,9 @@ describe('act', () => {
 
 describe('wait', () => {
   it('should fail on invalid inputs', () => {
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
     wait(1);
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
     wait(() => {}, 1);
   });
 
@@ -64,9 +64,9 @@ describe('wait', () => {
 
 describe('waitForDomChange', () => {
   it('should fail on invalid inputs', () => {
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
     waitForDomChange(1);
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
     waitForDomChange('1');
   });
 
@@ -78,9 +78,9 @@ describe('waitForDomChange', () => {
 
 describe('waitForElement', () => {
   it('should fail on invalid inputs', () => {
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
     waitForElement(1);
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
     waitForElement(() => {}, 1);
   });
 
@@ -154,7 +154,7 @@ describe('render', () => {
 
   it('unmount should has 0 arguments', () => {
     unmount();
-    // $FlowExpectedError[incompatible-type]
+    // $FlowExpectedError[extra-arg]
     unmount(1);
   });
 
@@ -177,12 +177,13 @@ describe('render', () => {
   });
 
   it('debug maybe has 1 argument an html element', () => {
-    // $FlowExpectedError[incompatible-type]
+    // $FlowExpectedError[incompatible-call]
     debug(1);
     debug(container);
   });
 
   it('rerender should has 1 argument an react element', () => {
+    // $FlowExpectedError[incompatible-call]
     rerender();
     rerender(<Component />);
   });
