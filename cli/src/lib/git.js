@@ -82,6 +82,8 @@ export async function getDiff() {
     }
     return stdout.split('\n');
   } catch (e) {
+    console.error('Unable to find diffs!')
+    console.error(e);
     return [];
   }
 }
