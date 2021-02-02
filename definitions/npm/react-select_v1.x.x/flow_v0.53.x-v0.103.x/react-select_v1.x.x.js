@@ -170,7 +170,9 @@ declare module 'react-select' {
     valueRenderer?: (option: OptionType, idx?: number) => React$Node,
     // optional style to apply to the component wrapper
     wrapperStyle?: {},
-    isSearchable?: boolean
+    isSearchable?: boolean,
+    // whether to cache the search results
+    cache?: {...} | false
   |};
 
   declare type AsyncProps = {|

@@ -73,17 +73,17 @@ describe("call() effect with normal function and without context", () => {
     });
 
     it("must raises an error when passed number but need string", () => {
-      // $ExpectError: First parameter is a string, not a number
+      // $FlowExpectedError: First parameter is a string, not a number
       (c1.payload.args: [number]);
     });
 
     it("must raises an error when passed too few arguments", () => {
-      // $ExpectError: Too few arguments
+      // $FlowExpectedError: Too few arguments
       call(s6, "1", 2, "3", 4);
     });
 
     it("must raises an error when passed wrong argument types", () => {
-      // $ExpectError: Wrong argument types
+      // $FlowExpectedError: Wrong argument types
       call(s1, 1);
     });
   });
@@ -105,20 +105,20 @@ describe("call() effect with normal function and without context", () => {
     });
 
     it("must raises an error when Function return not string", () => {
-      // $ExpectError: fn returns a Saga<number> not Saga<string>
+      // $FlowExpectedError: fn returns a Saga<number> not Saga<string>
       (c1.payload.fn: (a: string) => Saga<string>);
     });
 
     it(`must raises an error when "a" argument isn't string`, () => {
-      // $ExpectError: 'a' is actually of type string
+      // $FlowExpectedError: 'a' is actually of type string
       (c1.payload.fn: (a: boolean) => Saga<number>);
 
-      // $ExpectError: 'a' is actually of type string
+      // $FlowExpectedError: 'a' is actually of type string
       (c4.payload.fn: (a: number, b: number) => Saga<number>);
     });
 
     it("must raises an error when less parameter are noticed", () => {
-      // $ExpectError: Less parameter are noticed
+      // $FlowExpectedError: Less parameter are noticed
       (c6.payload.fn: typeof s1);
     });
   });
@@ -136,7 +136,7 @@ describe("call() effect with normal function and without context", () => {
     });
 
     it("must raises an error when lead context to Object", () => {
-      // $ExpectError
+      // $FlowExpectedError
       (c1.payload.context: {...});
     });
   });

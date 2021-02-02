@@ -2,8 +2,8 @@ import xmlEscape from "xml-escape";
 
 const result: string = xmlEscape("<>'\"&");
 
-// $ExpectError
+// $FlowExpectedError
 xmlEscape(123);
 
-// $ExpectError
+// $FlowExpectedError
 (xmlEscape("foo"): number);

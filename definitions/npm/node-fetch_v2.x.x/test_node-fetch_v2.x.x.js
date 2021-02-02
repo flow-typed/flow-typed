@@ -8,7 +8,7 @@ import type { Readable } from 'stream';
 (nodeFetch('foo'): Promise<Response>);
 (nodeFetch('foo', {}): Promise<Response>);
 
-// $ExpectError url has to be string
+// $FlowExpectedError url has to be string
 (nodeFetch(123): Promise<Response>);
 
 nodeFetch('foo', {
@@ -24,9 +24,9 @@ nodeFetch('foo', {
 });
 
 nodeFetch('foo', {
-    // $ExpectError number is not a valid body type
+    // $FlowExpectedError number is not a valid body type
     body: 5,
-    // $ExpectError number is not a valid agent type
+    // $FlowExpectedError number is not a valid agent type
     agent: 5,
 });
 
@@ -37,25 +37,25 @@ nodeFetch('foo').then(res => {
     // Response Headers
     (res.headers: Headers);
     (res.headers.append('foo', 'bar'): void);
-    // $ExpectError
+    // $FlowExpectedError
     (res.headers.append(5, 'bar'): void);
     (res.headers.delete('foo'): void);
-    // $ExpectError
+    // $FlowExpectedError
     (res.headers.delete(5): void);
-    // $ExpectError `entries` not found in Headers
+    // $FlowExpectedError `entries` not found in Headers
     (res.headers.entries(): Iterator<*>);
     (res.headers.get('test'): string);
-    // $ExpectError
+    // $FlowExpectedError
     (res.headers.get(5): string);
     (res.headers.getAll('test'): Array<string>);
     (res.headers.has('foo'): boolean);
-    // $ExpectError
+    // $FlowExpectedError
     (res.headers.has(5): boolean);
-    // $ExpectError `keys` not found in Headers
+    // $FlowExpectedError `keys` not found in Headers
     (res.headers.keys(): Iterator<string>);
-    // $ExpectError value should be a string
+    // $FlowExpectedError value should be a string
     (res.headers.set('foo', 5): void);
-    // $ExpectError `values` not found in Headers
+    // $FlowExpectedError `values` not found in Headers
     (res.headers.values(): Iterator<*>);
 
 
@@ -66,7 +66,7 @@ nodeFetch('foo').then(res => {
     // Response type
     (res.type: ResponseType);
     res.type = 'basic';
-    // $ExpectError foo is not a valid option
+    // $FlowExpectedError foo is not a valid option
     res.type = 'foo';
 
     (res.url: string);

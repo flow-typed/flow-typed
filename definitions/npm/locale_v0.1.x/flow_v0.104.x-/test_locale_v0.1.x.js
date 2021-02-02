@@ -3,7 +3,7 @@ import {Locale, Locales} from "locale";
 
 const locale = new Locale("en-US");
 
-// $ExpectError
+// $FlowExpectedError
 locale.nonsense();
 
 if(locale.code === "en-US") {
@@ -15,7 +15,7 @@ if(locales.length !== 2) {
   throw new Error("Not all locales accounted for!");
 }
 
-// $ExpectError
+// $FlowExpectedError
 const code = locale.default.code;
 
 if(!!locales.default /*hasDefault*/) {

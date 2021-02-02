@@ -6,8 +6,8 @@ describe('read', () => {
     rll.read('read-last-lines_v1.x.x.js', 25, 'utf-8');
     rll.read('read-last-lines_v1.x.x.js', 25, 'buffer');
 
-    // $ExpectError
+    // $FlowExpectedError
     rll.read();
-    // $ExpectError
+    // $FlowExpectedError
     rll.read('some-file');
 });

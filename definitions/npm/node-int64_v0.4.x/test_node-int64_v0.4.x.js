@@ -1,9 +1,9 @@
-// $ExpectError
+// $FlowExpectedError
 import { Int64 as oha } from 'node-int64';
 
 import Int64 from 'node-int64';
 
-// $ExpectError
+// $FlowExpectedError
 new Int64();
 
 var x = new Int64(Int64.MAX_INT);

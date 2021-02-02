@@ -4,29 +4,29 @@ import { Document as WebpackDocument } from "react-pdf/build/entry.webpack";
 import { Page as NoWorkerPage } from "react-pdf/build/entry.noworker";
 
 function WebpackReactPDF() {
-  // $ExpectError
+  // $FlowExpectedError
   return <WebpackDocument />;
 }
 
 function NoWorkerReactPDF() {
-  // $ExpectError
+  // $FlowExpectedError
   return <Page pageNumber="2" />;
 }
 
 function ReactPDF1() {
-  // $ExpectError
+  // $FlowExpectedError
   return <Document />;
 }
 
 function ReactPDF2() {
-  // $ExpectError
+  // $FlowExpectedError
   return <Document file="file.pdf" />;
 }
 
 function ReactPDF3() {
   return (
     <Document file="file.pdf">
-      {/* $ExpectError */}
+      {/* $FlowExpectedError */}
       <Page rotate="30" />
     </Document>
   );
@@ -35,7 +35,7 @@ function ReactPDF3() {
 function ReactPDF4() {
   return (
     <Document file="file.pdf">
-      {/* $ExpectError */}
+      {/* $FlowExpectedError */}
       <Page rotate="30" pageNumber="1" />
     </Document>
   );
@@ -45,7 +45,7 @@ function ReactPDF5() {
   return (
     <Document file="file.pdf">
       <Page rotate={30} pageNumber={1} />
-      {/* $ExpectError */}
+      {/* $FlowExpectedError */}
       <Outline onLoadSuccess={console.log("Success")} />
     </Document>
   );
@@ -55,18 +55,18 @@ function ReactPDF6() {
   return (
     <Document file="file.pdf">
       <Page rotate={30} pageNumber={1} />
-      {/* $ExpectError */}
+      {/* $FlowExpectedError */}
       <Outline onLoadSuccess={() => console.log("Success")} className={1} />
     </Document>
   );
 }
 
-// $ExpectError
+// $FlowExpectedError
 setOptions({
   invalidKey: "value"
 });
 
-// $ExpectError
+// $FlowExpectedError
 setOptions({
   disabledWorker: "invalid value"
 });

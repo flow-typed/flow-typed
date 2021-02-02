@@ -1,13 +1,13 @@
 // @flow
 import subdomain from 'express-subdomain'
 
-// $ExpectError
+// $FlowExpectedError
 subdomain(5)
 
-// $ExpectError
+// $FlowExpectedError
 subdomain('')
 
-// $ExpectError
+// $FlowExpectedError
 subdomain(5, (_: void): void => {})
 
 subdomain('subdomain', (_: void): void => {})

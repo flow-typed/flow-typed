@@ -6,17 +6,17 @@ glob("**/*.js").then((foo: string[]) => {
   foo.forEach(e => strings.push(e));
 });
 
-// $ExpectError
+// $FlowExpectedError
 glob("**/*.js").then((foo: string) => {
   strings.push(foo);
 });
 
-// $ExpectError
+// $FlowExpectedError
 glob.promise("**/*.js").then((foo: {}) => {
   strings.push(foo);
 });
 
-// $ExpectError
+// $FlowExpectedError
 glob.glob("**/*.js", (foo: {}) => {
   strings.push(foo);
 });
@@ -29,14 +29,14 @@ const inst = new glob.Glob("**/*.js");
 const inst2 = new glob.Glob("**/*.js", {});
 const inst3 = new glob.Glob("**/*.js", (foo: string[]) => {});
 const inst4 = new glob.Glob("**/*.js", { nodir: true }, (foo: string[]) => {});
-// $ExpectError
+// $FlowExpectedError
 const inst5 = new glob.Glob("**/*.js", (foo: string[]): void => {}, {});
 inst.on("end", () => null);
 
 const a: boolean = glob.hasMagic("**/*", {});
-// $ExpectError
+// $FlowExpectedError
 const b: boolean = glob.hasMagic("**/*", { invalidOption: 123 });
 const c = glob.sync("**/*");
 const d: string[] = glob.sync("**/*", { cwd: "/" });
-// $ExpectError
+// $FlowExpectedError
 const e: string = glob.sync("**/*");

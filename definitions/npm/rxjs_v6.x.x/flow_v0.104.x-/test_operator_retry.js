@@ -13,6 +13,6 @@ it("should accept a count parameter", () => {
 });
 
 it("should enforce types", () => {
-  // $ExpectError
+  // $FlowExpectedError
   const o = of(1, 2, 3).pipe(retry("aa"));
 });

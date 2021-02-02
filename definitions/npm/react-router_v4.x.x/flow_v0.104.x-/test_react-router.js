@@ -21,7 +21,7 @@ import type {
 
 describe('Location', () => {
   it('should error if wrong type is passed', () => {
-    // $ExpectError
+    // $FlowExpectedError[incompatible-type]
     const locationError: Location = 'location';
   });
 
@@ -44,7 +44,7 @@ describe('StaticRouter', () => {
     <div />
   </StaticRouter>;
 
-  // $ExpectError
+  // $FlowExpectedError[prop-missing]
   <StaticRouter />;
 });
 
@@ -64,7 +64,7 @@ describe('MemoryRouter', () => {
     <div />
   </MemoryRouter>;
 
-  // $ExpectError
+  // $FlowExpectedError[incompatible-type]
   <MemoryRouter initialEntries={''} />;
 });
 
@@ -74,7 +74,7 @@ describe('RouterHistory', () => {
     <div />
   </Router>;
 
-  // $ExpectError
+  // $FlowExpectedError[prop-missing]
   <Router>
     <div />
   </Router>;
@@ -85,7 +85,7 @@ describe('Prompt', () => {
   <Prompt message={location => 'ok?'} />;
   <Prompt message={location => true} />;
 
-  // $ExpectError
+  // $FlowExpectedError[prop-missing]
   <Prompt />;
 });
 
@@ -100,7 +100,7 @@ describe('Redirect', () => {
   />;
   <Redirect to="/foo" push from="/x" />;
 
-  // $ExpectError
+  // $FlowExpectedError[prop-missing]
   <Redirect />;
 });
 
@@ -116,7 +116,7 @@ describe('Route', () => {
     <div>children</div>
   </Route>;
 
-  // $ExpectError
+  // $FlowExpectedError[incompatible-type]
   <Route path="/user/:username" component={<User />} />;
 });
 
@@ -144,26 +144,26 @@ describe('withRouter', () => {
   const BarWithRouter = withRouter(Bar);
   <BarWithRouter name="name" />;
 
-  // $ExpectError
+  // $FlowExpectedError[incompatible-call]
   withRouter('nope');
 
   // const FooWithRouterError = withRouter(Foo);
   // <FooWithRouterError name={3} />;
 
+  // $FlowExpectedError[incompatible-call]
   const BarWithRouterError = withRouter(Bar);
-  // $ExpectError
   <BarWithRouterError name={3} />;
 
   const IncorrectHistoryUsage = ({ history, name }: FooProps) => {
     // Wrong arguments here
-    // $ExpectError
+    // $FlowExpectedError[incompatible-call]
     history.push(['bla']);
     return <div>{name}</div>;
   };
 
   const IncorrectHistoryBlockUsage = (history: RouterHistory) => {
     // Wrong arguments here
-    // $ExpectError
+    // $FlowExpectedError[incompatible-call]
     history.block(false);
 
     // These are valid
@@ -184,9 +184,9 @@ describe('matchPath', () => {
   const match2: null | Match = matchPath('/the/pathname', '/the/:dynamicId');
   const match3: null | Match = matchPath('/the/pathname');
 
-  // $ExpectError
+  // $FlowExpectedError[incompatible-call]
   matchPath();
-  // $ExpectError
+  // $FlowExpectedError[incompatible-type]
   const matchError: string = matchPath('/the/pathname', 'the/:dynamicId');
 });
 
@@ -200,13 +200,13 @@ describe('Unrouted', () => {
     Unrouted,
   );
 
-  // $ExpectError: This error bubbles up from the assignment in Routed2.
   const Unrouted2: React$ComponentType<{|
     ...ContextRouter,
     someProp: string,
   |}> = () => <span />;
 
   const Routed2: React$ComponentType<{| someProp2: string |}> = withRouter(
+    // $FlowExpectedError[prop-missing]
     Unrouted2,
   );
 });

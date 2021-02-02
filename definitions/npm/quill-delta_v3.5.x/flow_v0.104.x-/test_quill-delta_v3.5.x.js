@@ -37,10 +37,10 @@ type Operation = {
 
 (new Delta().ops: Operation[]);
 
-// $ExpectError
+// $FlowExpectedError
 (new Delta().ops: string[]);
 
-// $ExpectError
+// $FlowExpectedError
 (new Delta("invalid"): Delta);
 
 (new Delta().insert("text"): Delta);
@@ -51,46 +51,46 @@ type Operation = {
 
 (new Delta().insert({ image: "foo.png" }, { bold: true }): Delta);
 
-// $ExpectError
+// $FlowExpectedError
 (new Delta().insert(): Delta);
 
-// $ExpectError
+// $FlowExpectedError
 (new Delta().insert(1): Delta);
 
-// $ExpectError
+// $FlowExpectedError
 (new Delta().insert("text", "invalid"): Delta);
 
-// $ExpectError
+// $FlowExpectedError
 (new Delta().insert({ image: "foo.png" }, "invalid"): Delta);
 
 (new Delta().delete(10): Delta);
 
-// $ExpectError
+// $FlowExpectedError
 (new Delta().delete("invalid"): Delta);
 
 (new Delta().retain(10): Delta);
 
 (new Delta().retain(10, { bold: true }): Delta);
 
-// $ExpectError
+// $FlowExpectedError
 (new Delta().retain("invalid"): Delta);
 
-// $ExpectError
+// $FlowExpectedError
 (new Delta().retain(10, "invalid"): Delta);
 
 (new Delta().concat(new Delta()): Delta);
 
-// $ExpectError
+// $FlowExpectedError
 (new Delta().concat("invalid"): Delta);
 
 (new Delta().diff(new Delta()): Delta);
 
 (new Delta().diff(new Delta(), 10): Delta);
 
-// $ExpectError
+// $FlowExpectedError
 (new Delta().diff("invalid"): Delta);
 
-// $ExpectError
+// $FlowExpectedError
 (new Delta().diff(new Delta(), "invalid"): Delta);
 
 (new Delta().eachLine(function(
@@ -110,21 +110,21 @@ type Operation = {
 }, "\n"): void);
 
 (new Delta().eachLine(
-  // $ExpectError
+  // $FlowExpectedError
   function(line: string, attributes: Object, i: number): void {
     console.log(line, attributes, i);
   }
 ): void);
 
 (new Delta().eachLine(
-  // $ExpectError
+  // $FlowExpectedError
   function(line: Delta, attributes: string, i: number): void {
     console.log(line, attributes, i);
   }
 ): void);
 
 (new Delta().eachLine(
-  // $ExpectError
+  // $FlowExpectedError
   function(line: Delta, attributes: Object, i: string): void {
     console.log(line, attributes, i);
   }
@@ -134,7 +134,7 @@ type Operation = {
   function(line: Delta, attributes: Object, i: number): void {
     console.log(line, attributes, i);
   },
-  // $ExpectError
+  // $FlowExpectedError
   1
 ): void);
 
@@ -143,7 +143,7 @@ type Operation = {
 }): Operation[]);
 
 (new Delta().filter(
-  // $ExpectError
+  // $FlowExpectedError
   function(op: string): boolean {
     return op.length > 0;
   }
@@ -154,7 +154,7 @@ type Operation = {
 }): void);
 
 (new Delta().forEach(
-  // $ExpectError
+  // $FlowExpectedError
   function(op: string): void {
     console.log(op);
   }
@@ -167,7 +167,7 @@ type Operation = {
 }): number[]);
 
 (new Delta().map(
-  // $ExpectError
+  // $FlowExpectedError
   function(op: string): number {
     return op.length;
   }
@@ -178,7 +178,7 @@ type Operation = {
 }): [Operation[], Operation[]]);
 
 (new Delta().partition(
-  // $ExpectError
+  // $FlowExpectedError
   function(op: string): boolean {
     return op.length > 0;
   }
@@ -189,7 +189,7 @@ type Operation = {
 }, 0): number);
 
 (new Delta().reduce(
-  // $ExpectError
+  // $FlowExpectedError
   function(sum: number, op: string): number {
     return sum + op.length;
   },
@@ -202,15 +202,15 @@ type Operation = {
 
 (new Delta().slice(10, 20): Delta);
 
-// $ExpectError
+// $FlowExpectedError
 (new Delta().slice("invalid"): Delta);
 
-// $ExpectError
+// $FlowExpectedError
 (new Delta().slice(10, "invalid"): Delta);
 
 (new Delta().compose(new Delta()): Delta);
 
-// $ExpectError
+// $FlowExpectedError
 (new Delta().compose("invalid"): Delta);
 
 (new Delta().transform(new Delta()): Delta);
@@ -219,13 +219,13 @@ type Operation = {
 
 (new Delta().transform(10): number);
 
-// $ExpectError
+// $FlowExpectedError
 (new Delta().transform("invalid"): Delta);
 
-// $ExpectError
+// $FlowExpectedError
 (new Delta().transform(new Delta(), "invalid"): Delta);
 
 (new Delta().transformPosition(10): number);
 
-// $ExpectError
+// $FlowExpectedError
 (new Delta().transformPosition("invalid"): number);

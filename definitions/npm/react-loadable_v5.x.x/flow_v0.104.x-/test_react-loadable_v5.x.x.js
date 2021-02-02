@@ -9,19 +9,19 @@ class Component extends React.Component<Props> {}
 
 describe('options', () => {
   it('should fail when props is not provided', () => {
-    // $ExpectError
+    // $FlowExpectedError
     Loadable();
   });
 
   it('should fail when loader is missing', () => {
-    // $ExpectError
+    // $FlowExpectedError
     Loadable({
       loading: () => null
     });
   });
 
   it('should fail when loader option does not return a promise that resolves to a react component or a module object with default export which is a react component', () => {
-    // $ExpectError
+    // $FlowExpectedError
     Loadable({
       loader: () => Promise.resolve(1),
       loading: () => null
@@ -29,7 +29,7 @@ describe('options', () => {
   });
 
   it('delay property should be a number', () => {
-    // $ExpectError
+    // $FlowExpectedError
     Loadable({
       loader: () => Promise.resolve(Component),
       loading: () => null,
@@ -44,7 +44,7 @@ describe('options', () => {
   });
 
   it('timeout property should be a number', () => {
-    // $ExpectError
+    // $FlowExpectedError
     Loadable({
       loader: () => Promise.resolve(Component),
       loading: () => null,
@@ -59,7 +59,7 @@ describe('options', () => {
   });
 
   it('webpack option should be a function', () => {
-    // $ExpectError
+    // $FlowExpectedError
     Loadable({
       loader: () => Promise.resolve(Component),
       loading: () => null,
@@ -74,7 +74,7 @@ describe('options', () => {
   });
 
   it('modules options should be an array of strings', () => {
-    // $ExpectError modules option should be an array of module names
+    // $FlowExpectedError modules option should be an array of module names
     Loadable({
       loader: () => Promise.resolve(Component),
       loading: () => null,
@@ -89,7 +89,7 @@ describe('options', () => {
   });
 
   it('render option should take a resolved module and related component props', () => {
-    // $ExpectError render option should take a resolved module and related component props
+    // $FlowExpectedError render option should take a resolved module and related component props
     Loadable({
       loader: () => Promise.resolve(Component),
       loading: () => null,
@@ -113,7 +113,7 @@ describe('props refinements', () => {
     });
 
     const foo = <LoadableComponent a="foo"/>;
-    // $ExpectError
+    // $FlowExpectedError
     const bar = <LoadableComponent a={1} />;
   });
 
@@ -123,7 +123,7 @@ describe('props refinements', () => {
       loading: () => null
     });
 
-    // $ExpectError
+    // $FlowExpectedError
     const noWay = <Loaded1 a={1} />;
     <Loaded1 a="foo"/>;
 
@@ -132,7 +132,7 @@ describe('props refinements', () => {
       loading: () => null
     });
 
-    // $ExpectError
+    // $FlowExpectedError
     const noWay = <Loaded2 a={1} />;
 
     <Loaded2 a="foo"/>
@@ -199,7 +199,7 @@ it('Loadable.Map() can infer type of modules', () => {
     loading: () => null,
     loader,
     render: (loaded, props) => {
-      // $ExpectError
+      // $FlowExpectedError
       (loaded: empty);
       (loaded: {
         Cmp: { foo: React$ComponentType<{

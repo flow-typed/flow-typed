@@ -18,7 +18,7 @@ function testOne() {
   let callback = sinon.spy();
   let proxy = once(callback);
   proxy();
-  // $ExpectError - calledOnce is bool
+  // $FlowExpectedError - calledOnce is bool
   (callback.calledOnce: string)
   if (callback.calledOnce) { console.log("test1 calledOnce success"); } else { console.log("test1 calledOnce failure"); }
 }
@@ -203,6 +203,7 @@ function testSpy() {
   sinon.spy().calledBefore(otherSpy);
   sinon.spy().calledImmediatelyAfter(otherSpy);
   sinon.spy().calledImmediatelyBefore(otherSpy);
+  sinon.spy().calledOnceWithExactly('foo');
 }
 
 testOne();
@@ -244,6 +245,13 @@ function testGetCalls() {
   if (secondCall) {
     secondCall.returnValue === 8;
   }
+}
+
+function testLastArg() {
+  let spy = sinon.spy();
+  let date = new Date();
+  spy(1, 2, date);
+  return spy.lastCall.lastArg === date;
 }
 
 function testFake(): boolean {

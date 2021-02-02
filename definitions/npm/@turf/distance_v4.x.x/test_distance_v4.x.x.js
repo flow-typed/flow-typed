@@ -12,11 +12,11 @@ const howFar: number = distance(pointA, pointA, 'miles');
 
 distance(pointA, pointA);
 
-// $ExpectError
+// $FlowExpectedError
 distance(pointA, pointA, 'foo');
 
-// $ExpectError
+// $FlowExpectedError
 (distance(pointA, pointA, 'meters') : string);
 
-// $ExpectError
+// $FlowExpectedError
 distance(pointA, 'meters');

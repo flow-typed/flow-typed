@@ -6,13 +6,13 @@ import { Provider, createProvider } from "react-redux";
 
 describe('Provider', () => {
   it('should give an error when the store is missing', () => {
-    // $ExpectError
+    // $FlowExpectedError
     <Provider />;
 
     // Also for custom providers
     const CustomProvider: Class<Provider<*>> = createProvider("ikea");
 
-    // $ExpectError
+    // $FlowExpectedError
     <CustomProvider />;
   });
 });

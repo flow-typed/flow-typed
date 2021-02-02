@@ -65,7 +65,7 @@ const NativeAttrs1: NativeReactComponentStyledTaggedTemplateLiteral<*> = nativeS
   testProp: 'foo'
 });
 
-// $ExpectError
+// $FlowExpectedError
 const NativeAttrs1Error: NativeReactComponentStyledTaggedTemplateLiteral<*> = nativeStyled.View.attrs({
   testProp: 'foo'
 })``;
@@ -75,7 +75,7 @@ declare var needsString: string => void
 nativeNeedsReactComponentFunctional(nativeStyled.View.attrs({})``)
 nativeNeedsReactComponentClass(nativeStyled.View.attrs({})``)
 
-// $ExpectError
+// $FlowExpectedError
 needsString(nativeStyled.View.attrs({})``)
 
 const NativeAttrs2: NativeReactComponentStyledTaggedTemplateLiteral<*> = nativeStyled.View
@@ -121,24 +121,24 @@ const NativeWithComponent3: NativeReactComponentStyled<*> = nativeStyled.View.wi
 const NativeWithComponent4: NativeReactComponentStyled<*> = nativeStyled('View').withComponent('Text');
 const NativeWithComponent5: NativeReactComponentStyled<*> = nativeStyled('View').withComponent(NativeWithComponent1);
 const NativeWithComponent6: NativeReactComponentStyled<*> = nativeStyled('View').withComponent(NativeAttrs3Class);
-// $ExpectError
+// $FlowExpectedError
 const NativeWithComponentError1: NativeReactComponentStyled<*> = nativeStyled.View.withComponent(0);
-// $ExpectError
+// $FlowExpectedError
 const NativeWithComponentError2: NativeReactComponentStyled<*> = nativeStyled.View.withComponent('NotHere');
 
 class NativeCustomComponentError3 extends React.Component<{ foo: string, ... }> {
   render() { return <div />; }
 }
 
-// $ExpectError
+// $FlowExpectedError
 const NativeWithComponentError3 = nativeStyled(NativeCustomComponentError3).withComponent('Text');
-// $ExpectError
+// $FlowExpectedError
 const NativeWithComponentError4 = nativeStyled(NativeCustomComponentError3).withComponent(NativeWithComponent1);
-// $ExpectError
+// $FlowExpectedError
 const NativeWithComponentError5 = nativeStyled(NativeCustomComponentError3).withComponent(NativeAttrs3Class);
-// $ExpectError
+// $FlowExpectedError
 const NativeWithComponentError6 = nativeStyled(NativeCustomComponentError3).withComponent(0);
-// $ExpectError
+// $FlowExpectedError
 const NativeWithComponentError7 = nativeStyled(NativeCustomComponentError3).withComponent('NotHere');
 
 // ---- WithTheme ----
@@ -165,7 +165,7 @@ const NativeOpacityKeyFrame: string = nativeKeyframes`
   100% { opacity: 1; }
 `;
 
-// $ExpectError
+// $FlowExpectedError
 const NativeNoExistingElementWrapper = nativeStyled.nonexisting`
   padding: 4em;
   background: papayawhip;
@@ -173,13 +173,13 @@ const NativeNoExistingElementWrapper = nativeStyled.nonexisting`
 
 const nativeNum: 9 = 9
 
-// $ExpectError
+// $FlowExpectedError
 const NativeNoExistingComponentWrapper = nativeStyled()`
   padding: 4em;
   background: papayawhip;
 `;
 
-// $ExpectError
+// $FlowExpectedError
 const NativeNumberWrapper = nativeStyled(nativeNum)`
   padding: 4em;
   background: papayawhip;
@@ -208,23 +208,23 @@ const NativeStyledClass: NativeReactComponentClass<{
 
 const NativeNeedsFoo1Class: NativeReactComponentClass<{ foo: string, ... }, { theme: NativeTheme, ... }> = nativeWithTheme(NativeNeedsThemeReactClass);
 
-// $ExpectError
+// $FlowExpectedError
 const NativeNeedsFoo0ClassError: NativeReactComponentClass<{ foo: string, ... }> = nativeWithTheme(NativeReactClass);
-// $ExpectError
+// $FlowExpectedError
 const NativeNeedsFoo1ClassError: NativeReactComponentClass<{ foo: string, ... }> = nativeWithTheme(NeedsFoo1Class);
-// $ExpectError
+// $FlowExpectedError
 const NativeNeedsFoo1ErrorClass: NativeReactComponentClass<{ foo: number, ... }> = nativeWithTheme(NativeNeedsThemeReactClass);
-// $ExpectError
+// $FlowExpectedError
 const NativeNeedsFoo2ErrorClass: NativeReactComponentClass<{ foo: string, ... }, { theme: string, ... }> = nativeWithTheme(NativeNeedsThemeReactClass);
-// $ExpectError
+// $FlowExpectedError
 const NativeNeedsFoo3ErrorClass: NativeReactComponentClass<{
   foo: string,
   theme: NativeTheme,
   ...
 }> = nativeWithTheme(NativeNeedsFoo1Class);
-// $ExpectError
+// $FlowExpectedError
 const NativeNeedsFoo4ErrorClass: NativeReactComponentClass<{ foo: number, ... }> = nativeWithTheme(NativeNeedsFoo1Class);
-// $ExpectError
+// $FlowExpectedError
 const NativeNeedsFoo5ErrorClass: NativeReactComponentClass<{
   foo: string,
   theme: string,
@@ -236,7 +236,7 @@ const nativeInterpolation: Array<NativeInterpolation> = nativeStyled.css`
   background-color: red;
 `;
 
-// $ExpectError
+// $FlowExpectedError
 const nativeInterpolationError: Array<NativeInterpolation | boolean> = nativeStyled.css`
   background-color: red;
 `;
@@ -247,7 +247,7 @@ const NativeDefaultComponent: NativeReactComponentIntersection<{...}> = nativeSt
   background-color: red;
 `;
 
-// $ExpectError
+// $FlowExpectedError
 const NativeDefaultComponentError: {...} => string = nativeStyled.View`
   background-color: red;
 `;
@@ -267,7 +267,7 @@ const NativeNeedsFoo1: NativeReactComponentFunctionalUndefinedDefaultProps<{
 }> = nativeStyled(NativeFunctionalComponent)`
   background-color: red;
 `;
-// $ExpectError
+// $FlowExpectedError
 const NativeNeedsFoo1Error: NativeReactComponentFunctionalUndefinedDefaultProps<{ foo: number, ... }> = nativeStyled(NativeFunctionalComponent)`
   background-color: red;
 `;
@@ -279,7 +279,7 @@ const NativeNeedsFoo2: NativeReactComponentFunctionalUndefinedDefaultProps<{
 }> = nativeStyled(NativeNeedsFoo1)`
   background-color: red;
 `;
-// $ExpectError
+// $FlowExpectedError
 const NativeNeedsFoo2Error: NativeReactComponentFunctionalUndefinedDefaultProps<{ foo: number, ... }> = nativeStyled(NativeNeedsFoo1)`
   background-color: red;
 `;
@@ -301,19 +301,19 @@ const NativeNeedsFoo1FunctionalDefaultProps: NativeReactComponentFunctional<{
 }, { theme: NativeTheme, ... }> = nativeWithTheme(NativeFunctionalComponent);
 const NativeNeedsFoo2FunctionalDefaultProps: NativeReactComponentFunctional<{ foo: string, ... }, { theme: NativeTheme, ... }> = nativeWithTheme(NativeNeedsFoo1FunctionalDefaultProps);
 
-// $ExpectError
+// $FlowExpectedError
 const NativeNeedsFoo1ErrorFunctional: NativeReactComponentFunctionalUndefinedDefaultProps<{ foo: number, ... }> = nativeWithTheme(NativeFunctionalComponent);
-// $ExpectError
+// $FlowExpectedError
 const NativeNeedsFoo2ErrorFunctional: NativeReactComponentFunctional<{ foo: string, ... }, { theme: string, ... }> = nativeWithTheme(NativeFunctionalComponent);
-// $ExpectError
+// $FlowExpectedError
 const NativeNeedsFoo3ErrorFunctional: NativeReactComponentFunctionalUndefinedDefaultProps<{
   foo: number,
   theme: NativeTheme,
   ...
 }> = nativeWithTheme(NativeFunctionalComponent);
-// $ExpectError
+// $FlowExpectedError
 const NativeNeedsFoo4ErrorFunctional: NativeReactComponentFunctionalUndefinedDefaultProps<{ foo: number, ... }> = nativeWithTheme(NativeNeedsFoo1Functional);
-// $ExpectError
+// $FlowExpectedError
 const NativeNeedsFoo5ErrorFunctional: NativeReactComponentFunctional<{ foo: string, ... }, { theme: string, ... }> = nativeWithTheme(NativeNeedsFoo1Functional);
-// $ExpectError
+// $FlowExpectedError
 const NativeNeedsFoo6ErrorFunctional: NativeReactComponentFunctional<{ foo: number, ... }, { theme: NativeTheme, ... }> = nativeWithTheme(NativeNeedsFoo1Functional);

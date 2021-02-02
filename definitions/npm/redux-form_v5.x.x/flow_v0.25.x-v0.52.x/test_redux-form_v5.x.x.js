@@ -9,21 +9,21 @@ const Input = (props: InputProps) => {
     (props.onUpdate: (v: SyntheticEvent) => mixed);
     (props.onBlur: (v: string) => mixed);
     (props.onBlur: (v: SyntheticEvent) => mixed);
-    // $ExpectError
+    // $FlowExpectedError
     (props.onChange: (v: number) => mixed);
-    // $ExpectError
+    // $FlowExpectedError
     (props.onUpdate: (v: number) => void);
-    // $ExpectError
+    // $FlowExpectedError
     (props.onBlur: (v: number) => void);
 
     (props.onDragStart: Function);
     (props.onDrop: Function);
     (props.onFocus: Function);
-    // $ExpectError
+    // $FlowExpectedError
     (props.onDragStart: void);
-    // $ExpectError
+    // $FlowExpectedError
     (props.onDrop: void);
-    // $ExpectError
+    // $FlowExpectedError
     (props.onFocus: void);
     return (
         <input {...props}/>
@@ -41,8 +41,8 @@ const connected: typeof React.Component = reduxForm({
   fields: ['foobar']
 })(form);
 
-// $ExpectError
+// $FlowExpectedError
 reduxForm({})(React.Component);
 
-// $ExpectError
+// $FlowExpectedError
 reducer({}, null)

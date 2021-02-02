@@ -4,12 +4,12 @@ import { it } from 'flow-typed-test';
 import { DrawerLayout } from 'react-native-gesture-handler';
 
 it('should raises an error when do not pass required props', () => {
-  // $ExpectError: property `renderNavigationView` is missing in props
+  // $FlowExpectedError: property `renderNavigationView` is missing in props
   <DrawerLayout />;
 });
 
 it('should raises an error when do not pass required props', () => {
-  // $ExpectError: undefined is not React.Node
+  // $FlowExpectedError: undefined is not React.Node
   <DrawerLayout renderNavigationView={() => {}} />;
 });
 
@@ -41,35 +41,35 @@ it('should pass when use properly', () => {
 it('should raises an error when use incompatible values', () => {
   <DrawerLayout
     renderNavigationView={() => null}
-    // $ExpectError: not supporter LockMode
+    // $FlowExpectedError: not supporter LockMode
     drawerLockMode="usps..."
-    // $ExpectError: not supporter Position
+    // $FlowExpectedError: not supporter Position
     drawerPosition="top"
-    // $ExpectError: not supporter Type
+    // $FlowExpectedError: not supporter Type
     drawerType="game"
-    // $ExpectError: need string
+    // $FlowExpectedError: need string
     drawerBackgroundColor={123}
-    // $ExpectError: need number
+    // $FlowExpectedError: need number
     drawerWidth={'123'}
-    // $ExpectError: need number
+    // $FlowExpectedError: need number
     edgeWidth={'123'}
-    // $ExpectError: need boolean
+    // $FlowExpectedError: need boolean
     hideStatusBar={123}
-    // $ExpectError: need valid DismissMode
+    // $FlowExpectedError: need valid DismissMode
     keyboardDismissMode="..."
-    // $ExpectError: need number
+    // $FlowExpectedError: need number
     minSwipeDistance={false}
-    // $ExpectError: need function
+    // $FlowExpectedError: need function
     onDrawerClose={[]}
-    // $ExpectError: need function
+    // $FlowExpectedError: need function
     onDrawerOpen={[]}
-    // $ExpectError: need function
+    // $FlowExpectedError: need function
     onDrawerStateChanged={[]}
-    // $ExpectError: need string
+    // $FlowExpectedError: need string
     overlayColor={123}
-    // $ExpectError: need valid type Animation
+    // $FlowExpectedError: need valid type Animation
     statusBarAnimation={'AAAA'}
-    // $ExpectError: need boolean
+    // $FlowExpectedError: need boolean
     useNativeAnimations="да"
   />;
 });

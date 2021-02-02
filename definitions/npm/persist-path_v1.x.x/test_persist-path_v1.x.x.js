@@ -5,20 +5,20 @@ persistPath("test2", "test3");
 persistPath("test4", "test5", "test6");
 (persistPath("str"): string);
 
-// $ExpectError
+// $FlowExpectedError
 persistPath(4);
 
-// $ExpectError
+// $FlowExpectedError
 persistPath(null, "str");
 
-// $ExpectError
+// $FlowExpectedError
 persistPath({});
 
-// $ExpectError
+// $FlowExpectedError
 persistPath("str", { a: 1 });
 
-// $ExpectError
+// $FlowExpectedError
 (persistPath("str"): number);
 
-// $ExpectError
+// $FlowExpectedError
 (persistPath("str"): boolean);

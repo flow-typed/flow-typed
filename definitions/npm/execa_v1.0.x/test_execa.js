@@ -15,7 +15,7 @@ describe('execa', () => {
       (res.code: number);
       (res.killed: boolean);
     });
-    // $ExpectError
+    // $FlowExpectedError
     execa('ls').then(res => res.foo);
 
     execa('foo').catch(err => {
@@ -23,7 +23,7 @@ describe('execa', () => {
       (err.code: ?string);
       (err.errno: $PropertyType<ErrnoError, 'errno'>);
     });
-    // $ExpectError
+    // $FlowExpectedError
     execa('foo').catch(err => err.foo);
 
     async () => {
@@ -41,7 +41,7 @@ describe('execa', () => {
   it('should provide child process info', () => {
     (execa('ls').pid: number);
     execa('ls').stdout.pipe(process.stdout);
-    // $ExpectError
+    // $FlowExpectedError
     execa('ls').foo;
   });
 
@@ -51,18 +51,18 @@ describe('execa', () => {
     execa('ls', { input: 'foobar' });
     execa('ls', { input: new Buffer('foobar') });
     execa('ls', { input: process.stdin });
-    // $ExpectError
+    // $FlowExpectedError
     execa('ls', { foo: 666 });
-    // $ExpectError
+    // $FlowExpectedError
     execa('ls', { input: 42 });
   });
 
   it('should accept args', () => {
     execa('ls', ['-l']).then(printStdout, printErrno);
     execa('ls', ['-l'], { localDir: '~/' }).then(printStdout);
-    // $ExpectError
+    // $FlowExpectedError
     execa(['ls', '-l']).then(printStdout);
-    // $ExpectError
+    // $FlowExpectedError
     execa('ls').then(printErrno);
   });
 });
@@ -76,9 +76,9 @@ describe('execa.stdout', () => {
   it('should accept options and args', () => {
     execa.stdout('ls', { uid: 1000, gid: 100 }).then(stdout => stdout.toLowerCase());
     execa.stdout('ls', ['-l'], { timeout: 5 }).then(stdout => stdout.toLowerCase());
-    // $ExpectError
+    // $FlowExpectedError
     execa.stdout(['ls', '-l']);
-    // $ExpectError
+    // $FlowExpectedError
     execa.stdout('ls', { foo: 666 });
   });
 });
@@ -92,9 +92,9 @@ describe('execa.stderr', () => {
   it('should accept options and args', () => {
     execa.stderr('ls', { uid: 1000, gid: 100 }).then(stdout => stdout.toLowerCase());
     execa.stderr('ls', ['-l'], { timeout: 5 }).then(stdout => stdout.toLowerCase());
-    // $ExpectError
+    // $FlowExpectedError
     execa.stderr(['ls', '-l']);
-    // $ExpectError
+    // $FlowExpectedError
     execa.stderr('ls', { foo: 666 });
   });
 });
@@ -110,9 +110,9 @@ describe('execa.shell', () => {
     };
   });
   it('should not accept options or args', () => {
-    // $ExpectError
+    // $FlowExpectedError
     execa.shell(['ls', 'wc -l']);
-    // $ExpectError
+    // $FlowExpectedError
     execa.shell('ls', 'wc -l', { foo: 666 });
   });
 });
@@ -125,13 +125,13 @@ describe('execa.sync', () => {
     (execa.sync('ls', ['-l'], { localDir: '~/' }).failed: boolean);
   });
   it('should not accept options or args', () => {
-    // $ExpectError
+    // $FlowExpectedError
     execa.sync(['ls']);
-    // $ExpectError
+    // $FlowExpectedError
     execa.sync('ls', { foo: 666 });
-    // $ExpectError
+    // $FlowExpectedError
     execa.sync('ls').killed;
-    // $ExpectError
+    // $FlowExpectedError
     execa.sync('ls', { input: process.stdin });
   });
 });
@@ -142,9 +142,9 @@ describe('execa.shellSync', () => {
     (execa.shellSync('ls | wc -l', { stderr: 'ignore' }).stdout: string);
   });
   it('should not accept invalid options or args', () => {
-    // $ExpectError
+    // $FlowExpectedError
     execa.shellSync(['ls', 'wc -l']);
-    // $ExpectError
+    // $FlowExpectedError
     execa.shellSync('ls', { foo: 666 });
   });
 });

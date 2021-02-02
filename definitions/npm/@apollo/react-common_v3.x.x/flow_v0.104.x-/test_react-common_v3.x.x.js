@@ -48,7 +48,7 @@ const HERO_QUERY = gql`
 
 describe('<ApolloProvider />', () => {
   it('works when passed client', () => {
-    // $ExpectError Should be an instance of ApolloClient
+    // $FlowExpectedError Should be an instance of ApolloClient
     const client = {};
     <ApolloProvider client={client}>
       <div />
@@ -56,7 +56,7 @@ describe('<ApolloProvider />', () => {
   });
 
   it('raises an error when not passed a client', () => {
-    // $ExpectError ApolloProvider requires client prop
+    // $FlowExpectedError ApolloProvider requires client prop
     <ApolloProvider>
       <div />
     </ApolloProvider>;
@@ -66,7 +66,7 @@ describe('<ApolloProvider />', () => {
     // Should be an instance of ApolloClient
     const client = {};
 
-    // $ExpectError ApolloProvider requires client prop
+    // $FlowExpectedError ApolloProvider requires client prop
     <ApolloProvider client={client} />;
   });
 });
@@ -82,7 +82,7 @@ describe('<ApolloConsumer />', () => {
             query: HERO_QUERY,
             variables: { episode: 'episode' },
           });
-          // $ExpectError doSomethingElse is not a method of ApolloClient
+          // $FlowExpectedError doSomethingElse is not a method of ApolloClient
           client.doSomethingElse();
         };
         return <button onClick={onClick}>Click</button>;
@@ -98,7 +98,7 @@ describe('parser', () => {
     const result = parser({});
 
     (result: IDocumentDefinition);
-    // $ExpectError
+    // $FlowExpectedError
     (result: number);
   })
 })
@@ -108,12 +108,12 @@ describe('operationName', () => {
     const result = operationName('Query');
 
     (result: string);
-    // $ExpectError
+    // $FlowExpectedError
     (result: number);
   })
 
   it('requires DocumentType', () => {
-    // $ExpectError must be a DocumentType
+    // $FlowExpectedError must be a DocumentType
     const result = operationName('foo');
   })
 })

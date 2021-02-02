@@ -40,7 +40,7 @@ const str: string = "hello world";
 {
   const xs: Array<number> = _.adjust(2, x => x + 1, ns);
   const xs1: Array<number> = _.adjust(2, x => x + 1)(ns);
-  //$ExpectError
+  //$FlowExpectedError
   const xs3: Array<string> = _.adjust(2)(x => x + 1)(ns);
 
   const as: boolean = _.all(x => x > 1, ns);
@@ -67,13 +67,13 @@ const str: string = "hello world";
       const r1: Array<number|string> = concat(arr1, arr2);
       const r2: Array<number|string> = concat(arr1)(arr2);
 
-      // $ExpectError
+      // $FlowExpectedError
       const r3: Array<number> = concat(arr1)(arr2);
-      // $ExpectError
+      // $FlowExpectedError
       const r4: Array<string> = concat(arr1)(arr2);
     });
     it('should error when concat array with string', () => {
-      // $ExpectError
+      // $FlowExpectedError
       concat("ABC", ["DEF"]);
     });
   });
@@ -126,7 +126,7 @@ const str: string = "hello world";
       })
 
       it('disallows a mismatched string and anything else', () => {
-        // $ExpectError
+        // $FlowExpectedError
         const result: boolean = contains(1, 'bar')
       })
     })
@@ -144,13 +144,13 @@ const str: string = "hello world";
 
       it('does not allow a mismatched element type to the Array', () => {
         const xs: Array<number> = [1]
-        // $ExpectError
+        // $FlowExpectedError
         const result: boolean = contains('foo')(xs)
       })
 
       it('does not allow a mismatched element type to the $ReadOnlyArray', () => {
         const xs: $ReadOnlyArray<number> = [1]
-        // $ExpectError
+        // $FlowExpectedError
         const result: boolean = contains('foo')(xs)
       })
 
@@ -159,7 +159,7 @@ const str: string = "hello world";
       })
 
       it('disallows a mismatched string and anything else', () => {
-        // $ExpectError
+        // $FlowExpectedError
         const result: boolean = contains(1)('bar')
       })
     })
@@ -202,7 +202,7 @@ const str: string = "hello world";
       })
 
       it('disallows a mismatched string and anything else', () => {
-        // $ExpectError
+        // $FlowExpectedError
         const result: boolean = includes(1, 'bar')
       })
     })
@@ -220,13 +220,13 @@ const str: string = "hello world";
 
       it('does not allow a mismatched element type to the Array', () => {
         const xs: Array<number> = [1]
-        // $ExpectError
+        // $FlowExpectedError
         const result: boolean = includes('foo')(xs)
       })
 
       it('does not allow a mismatched element type to the $ReadOnlyArray', () => {
         const xs: $ReadOnlyArray<number> = [1]
-        // $ExpectError
+        // $FlowExpectedError
         const result: boolean = includes('foo')(xs)
       })
 
@@ -235,7 +235,7 @@ const str: string = "hello world";
       })
 
       it('disallows a mismatched string and anything else', () => {
-        // $ExpectError
+        // $FlowExpectedError
         const result: boolean = includes(1)('bar')
       })
     })
@@ -263,7 +263,7 @@ const str: string = "hello world";
     })
 
     it('catches mismatches between the first set and the second', () => {
-      // $ExpectError
+      // $FlowExpectedError
       _.startsWith("1", [1, 2, 3])
     })
 
@@ -296,7 +296,7 @@ const str: string = "hello world";
     })
 
     it('catches mismatches between the first set and the second', () => {
-      // $ExpectError
+      // $FlowExpectedError
       _.endsWith("1", [1, 2, 3])
     })
 
@@ -319,7 +319,7 @@ const str: string = "hello world";
   );
   // Ramda doesn't strictly break if you pass it an object, but it always
   // returns undefined.
-  // $ExpectError
+  // $FlowExpectedError
   const findObj = find(o => o == "bar", { foo: "bar" });
 
   const findxs2: ?{ [k: string]: number | string, ... } = _.findLast(
@@ -355,24 +355,24 @@ const str: string = "hello world";
     })
     describe('fails on', () => {
       it('null and undefined', () => {
-        // $ExpectError
+        // $FlowExpectedError
         length(null)
-        // $ExpectError
+        // $FlowExpectedError
         length()
       })
       it('types that has no length', () => {
-        // $ExpectError
+        // $FlowExpectedError
         length(123)
       })
       it('non-numeric .length property', () => {
-        // $ExpectError
+        // $FlowExpectedError
         length({length: 'size'})
       })
     })
   })
 
   const s4 = _.find(x => x === "2", ["1", "2"]);
-  //$ExpectError
+  //$FlowExpectedError
   const s5: ?{ [key: string]: string, ... } = _.find(x => x === "2", { a: 1, b: 2 });
   const s6: number = _.findIndex(x => x === "2", ["1", "2"]);
   const forEachxs = _.forEach(x => console.log(x), ns);
@@ -388,17 +388,17 @@ const str: string = "hello world";
     it('group function should return string', () => {
       const fn: number => number = x => x;
 
-      // $ExpectError
+      // $FlowExpectedError
       groupBy(fn, [1,2,3]);
-      // $ExpectError
+      // $FlowExpectedError
       groupBy(fn)([1,2,3]);
     });
     it('group function param should match array element', () => {
       const fn: string => string = x => x;
 
-      // $ExpectError
+      // $FlowExpectedError
       groupBy(fn, [1,2,3]);
-      // $ExpectError
+      // $FlowExpectedError
       groupBy(fn)([1,2,3]);
     });
     it('should support readonly array', () => {
@@ -409,9 +409,9 @@ const str: string = "hello world";
       const groupedBy1: { [k: string]: Array<number|string>, ... } = groupBy(fn)(arr1);
 
       const fn1: number => string = x => `${x}`;
-      // $ExpectError
+      // $FlowExpectedError
       groupBy(fn1, arr1);
-      // $ExpectError
+      // $FlowExpectedError
       const groupedBy2: { [k: string]: Array<number> } = groupBy(fn)(arr1);
     });
   });
@@ -424,7 +424,7 @@ const str: string = "hello world";
       it('should returns MaybeOf element type', () => {
         const fn = (arr: number[]) => {
           const xOfXs: ?number = _.head(arr);
-          //$ExpectError
+          //$FlowExpectedError
           const xOfXs: number = _.head(arr);
         }
       });
@@ -438,11 +438,11 @@ const str: string = "hello world";
       it('should works with mixed-type arrays', () => {
         const fn = (arr: Array<number|string>) => {
           const xOfXs: ?(number|string) = _.head(arr);
-          //$ExpectError
+          //$FlowExpectedError
           const xOfXs: ?number = _.head(arr);
           if (arr.length > 0) {
             const xOfXs: number|string = _.head(arr);
-            //$ExpectError
+            //$FlowExpectedError
             const xOfXs: number = _.head(arr);
           }
         }
@@ -458,9 +458,9 @@ const str: string = "hello world";
   const transducer = _.compose(_.map(_.add(1)), _.take(2));
 
   const txs: Array<number> = _.into([], transducer, ns);
-  //$ExpectError
+  //$FlowExpectedError
   const txs1: string = _.into([], transducer, ns);
-  //$ExpectError
+  //$FlowExpectedError
   const txs2: string = _.into([], transducer, ss);
 
   const ind: number = _.indexOf(1, ns);
@@ -551,9 +551,9 @@ const str: string = "hello world";
       const appendResult1: $ReadOnlyArray<number|string> = append('s', readOnly);
       const appendResult2: $ReadOnlyArray<number|string> = append('s')(readOnly);
 
-      //$ExpectError
+      //$FlowExpectedError
       const appendResult3: $ReadOnlyArray<number|null> = append('s', readOnly);
-      //$ExpectError
+      //$FlowExpectedError
       const appendResult4: $ReadOnlyArray<number> = append('s')(readOnly);
     });
   });
@@ -591,15 +591,15 @@ const str: string = "hello world";
       const pl: number[] = _.pluck('key', arr);
     });
     it('should fails on non existing property', () => {
-      //$ExpectError
+      //$FlowExpectedError
       const pl = _.pluck('notExistingKey', [{ key: 42 }, { key: 28, other: 'string' }]);
-      //$ExpectError
+      //$FlowExpectedError
       const pl = _.pluck('other', [{ key: 42 }, { key: 28, other: 'string' }]);
     });
     it('should returns union type of selected property', () => {
       const arr = [{ key: 42 }, { key: 'string', other: 'string' }];
       const pl: Array<number | string> = _.pluck('key', arr);
-      //$ExpectError
+      //$FlowExpectedError
       const pl: number[] = _.pluck('key', arr);
     });
   });
@@ -634,9 +634,9 @@ const str: string = "hello world";
     0,
     ["1", "2", "3"]
   );
-  // $ExpectError
+  // $FlowExpectedError
   const redxs8: number = reduce(
-    // $ExpectError
+    // $FlowExpectedError
     (acc, s) => acc < 4 ? acc + parseInt(s) : _.reduced(s),
     0,
     ["1", "2", "3"]
@@ -650,7 +650,7 @@ const str: string = "hello world";
   const redxsReadOnly1_2: number = reduce<number, number>(subtract)(0, readOnlyArray);
   const redxsReadOnly1_1_1: number = reduce(subtract)(0)(readOnlyArray);
 
-  // $ExpectError reduce will not work with an object.
+  // $FlowExpectedError reduce will not work with an object.
   reduce(subtract, 0, { foo: 1, bar: 2 });
 
   // reduceRight
@@ -660,7 +660,7 @@ const str: string = "hello world";
     _.map(x => [x], ss)
   );
   const redrxs3a: string = _.reduceRight(
-    //$ExpectError
+    //$FlowExpectedError
     (acc: string, value: number): string => acc,
     "",
     ns
@@ -671,9 +671,9 @@ const str: string = "hello world";
     ns
   );
 
-  // $ExpectError reduceRight does not support reduced.
+  // $FlowExpectedError reduceRight does not support reduced.
   const redrxs4: number = _.reduceRight(
-    // $ExpectError reduceRight does not support reduced.
+    // $FlowExpectedError reduceRight does not support reduced.
     (acc, n) => acc < 4 ? acc + n : _.reduced(acc),
     0,
     ns
@@ -744,7 +744,7 @@ const str: string = "hello world";
   const f = n => (n > 50 ? false : [-n, n + 10]);
   const unf11: Array<number> = _.unfold(f, 10);
 
-  //$ExpectError
+  //$FlowExpectedError
   const unf2 = _.unfold(x => x.length > 10 || [x, x + "0"], 2);
 
   const unby: Array<number> = _.uniqBy(Math.abs)([-1, -5, 2, 10, 1, 2]);
@@ -756,7 +756,7 @@ const str: string = "hello world";
   const unw2 = _.uniqWith(strEq)([1, "1", 1]);
   const unw3 = _.uniqWith(strEq)(["1", 1, 1]);
 
-  //$ExpectError
+  //$FlowExpectedError
   const ys6: { [key: string]: string, ... } = _.fromPairs([["h", 2]]);
 
   describe('without', () => {
@@ -765,9 +765,9 @@ const str: string = "hello world";
       const arr2: Array<string> = without(['a'])(['a', 'b', 'c']);
     });
     it('should fail when first list does not match second list type', () => {
-      // $ExpectError
+      // $FlowExpectedError
       const arr1: Array<number> = without(['1', '2'], [1, 2, 3, 4, 5]);
-      // $ExpectError
+      // $FlowExpectedError
       const arr2: Array<string> = without([1])(['a', 'b', 'c']);
     });
     it('should work with readonly array', () => {
@@ -780,7 +780,7 @@ const str: string = "hello world";
       const list1: $ReadOnlyArray<number> =  [1, 3, 5];
       const list2: $ReadOnlyArray<number|string> =  [1, 'four', 5];
       const arr1: Array<number|string> = without(list1, list2);
-      // $ExpectError
+      // $FlowExpectedError
       const arr2: Array<number> = without(list2, list1);
     });
   });
@@ -790,7 +790,7 @@ const str: string = "hello world";
 
   const zipxs: Array<[number, string]> = _.zip([1, 2, 3], ["a", "b", "c"]);
 
-  //$ExpectError
+  //$FlowExpectedError
   const zipxs1: Array<[number, string]> = _.zip([true, false])(["a", "b"]);
 
   const zipos: { [k: string]: number, ... } = _.zipObj(["a", "b", "c"], [1, 2, 3]);
@@ -833,7 +833,7 @@ const str: string = "hello world";
     it('should fail when input out type mismatch', () => {
       const arr:$ReadOnlyArray<string> = ['1', '2', '3'];
       const castType = n => (parseInt(n): number);
-      //$ExpectError
+      //$FlowExpectedError
       const result: Array<string> = chain(castType, arr);
     });
 
@@ -845,7 +845,7 @@ const str: string = "hello world";
     it('should error out when second arugment is function but type mismatches', () => {
       const arr:$ReadOnlyArray<string> = ['1', '2', '3'];
       const castType = n => (parseInt(n): number);
-      //$ExpectError
+      //$FlowExpectedError
       const result: Array<string> = chain(append, castType)(arr)
     });
   });
@@ -886,37 +886,37 @@ const str: string = "hello world";
 
     it('should fail on expecting return type to be a maybe type of the element of the input list', () => {
       const arr: Array<number> = [1, 2, 3]
-      //$ExpectError
+      //$FlowExpectedError
       const nthxs: ?string = nth(2)(arr);
-      //$ExpectError
+      //$FlowExpectedError
       const nthxs1: ?boolean = nth(1)(arr);
     });
 
     it('should fail on expecting return type to mismatch the input array type', () => {
       const arr: Array<number> = [1, 2, 3]
-      //$ExpectError
+      //$FlowExpectedError
       const nthxs: string = nth(2, arr);
-      //$ExpectError
+      //$FlowExpectedError
       const nthxs1: string = nth(2)(arr);
-      //$ExpectError
+      //$FlowExpectedError
       const nthxs2: string = nth(1, ['foo'])
-      //$ExpectError
+      //$FlowExpectedError
       const nthxs3: number = nth(1, arr);
-      //$ExpectError
+      //$FlowExpectedError
       const nthxs4: number = nth(1)(arr);
-      //$ExpectError
+      //$FlowExpectedError
       const nthxs5: number = nth(1, [1])
-      //$ExpectError
+      //$FlowExpectedError
       const nthxs: ?number = nth(2)(['foo']);
     });
 
     it('should fail on passing a non-number to first argument', () => {
-      //$ExpectError
+      //$FlowExpectedError
       const nthxs = nth('foo')(['foo', 'bar'])
     });
 
     it('should fail on passing a non-array to second argument', () => {
-      //$ExpectError
+      //$FlowExpectedError
       const nthxs = nth(2)({}) 
     });
   });
@@ -940,11 +940,11 @@ const str: string = "hello world";
 
     it('should fail when element type mismatches', () => {
       const readOnlyNumbers: $ReadOnlyArray<number> = [1,1,2,3,4,3];
-      //$ExpectError
+      //$FlowExpectedError
       const result:$ReadOnlyArray<string> = uniq(readOnlyNumbers);
 
       const mix = ['1', 2, true];
-      //$ExpectError
+      //$FlowExpectedError
       const result: $ReadOnlyArray<string> = uniq(mix);
     });
 

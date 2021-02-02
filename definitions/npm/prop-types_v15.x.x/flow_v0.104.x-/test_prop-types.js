@@ -36,9 +36,9 @@ describe('checkPropTypes()', () => {
   });
 
   it('raises an error when do not pass all required arguments', () => {
-    // $ExpectError missing arguments
+    // $FlowExpectedError missing arguments
     PropTypes.checkPropTypes({ foo: PropTypes.string }, { foo: 'foo' });
-    // $ExpectError missing argument
+    // $FlowExpectedError missing argument
     PropTypes.checkPropTypes(
       { foo: PropTypes.string },
       { foo: 'foo' },
@@ -52,7 +52,7 @@ describe('checkPropTypes()', () => {
 
     PropTypes.checkPropTypes(
       propTypes,
-      // $ExpectError property not found
+      // $FlowExpectedError property not found
       values,
       'value',
       'TestComponent'
@@ -66,7 +66,7 @@ describe('checkPropTypes()', () => {
         { foo: 'foo' },
         'value',
         'TestComponent',
-        // $ExpectError 123:number -> string
+        // $FlowExpectedError 123:number -> string
         () => 123
       );
     });

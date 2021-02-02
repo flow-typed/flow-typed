@@ -11,11 +11,11 @@ const noColor = chalk.stripColor("a colorful string");
 const colorfulString = chalk.red.bgGreen("a soon to be colorful string");
 const supportsDim = chalk.dim("oh to be dimmed");
 
-// $ExpectError
+// $FlowExpectedError
 const enabledString: string = chalk.enabled;
 
-// $ExpectError
+// $FlowExpectedError
 const enabledString2: string = chalk.hasColor(123);
 
-// $ExpectError
+// $FlowExpectedError
 const enabledString3: string = chalk.stripColor(123);

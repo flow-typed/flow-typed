@@ -7,7 +7,7 @@ describe('The "timezones" component', () => {
     describe('getAllTimezones function', () => {
         it('should return an object of timezones', () => {
             const allTimezones = timezones.getAllTimezones();
-            // $ExpectError
+            // $FlowExpectedError
             (timezones.getAllTimezones(): string);
         });
     });
@@ -15,7 +15,7 @@ describe('The "timezones" component', () => {
     describe('getAllCountries function', () => {
         it('should return an object of countries', () => {
             const allCountries = timezones.getAllCountries();
-            // $ExpectError
+            // $FlowExpectedError
             (timezones.getAllCountries(): string);
         });
     });
@@ -23,12 +23,12 @@ describe('The "timezones" component', () => {
     describe('getTimezonesForCountry function', () => {
         it('should return an array of timezones for specified country', () => {
             const timezone = timezones.getTimezonesForCountry('ES');
-            // $ExpectError
+            // $FlowExpectedError
             (timezones.getTimezonesForCountry('ES'): number);
         });
 
         it('should throw an error without specified country', () => {
-            // $ExpectError
+            // $FlowExpectedError
             timezones.getTimezonesForCountry();
         });
     });
@@ -36,12 +36,12 @@ describe('The "timezones" component', () => {
     describe('getCountriesForTimezone function', () => {
         it('should return an array of countries for specified timezone', () => {
             const timezone = timezones.getCountriesForTimezone('Europe/Berlin');
-            // $ExpectError
+            // $FlowExpectedError
             (timezones.getCountriesForTimezone('Europe/Berlin'): void);
         });
 
         it('should throw an error without specified timezone', () => {
-            // $ExpectError
+            // $FlowExpectedError
             timezones.getCountriesForTimezone();
         });
     });

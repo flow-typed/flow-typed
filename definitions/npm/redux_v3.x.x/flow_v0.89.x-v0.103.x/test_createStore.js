@@ -11,16 +11,16 @@ const reducer = (state: State = [], action: Action): State => state;
 // createStore API
 //
 
-// $ExpectError
+// $FlowExpectedError
 const store1: Store = createStore(() => ({})); // wrong reducer
 const store2: Store = createStore(reducer);
-// $ExpectError
+// $FlowExpectedError
 const store3: Store = createStore(reducer, {}); // wrong initialState shape
 const store4: Store = createStore(reducer, []);
-// $ExpectError
+// $FlowExpectedError
 const store5: Store = createStore(reducer, ['wrong']); // wrong initialState content
 const store6: Store = createStore(reducer, [1]);
-// $ExpectError
+// $FlowExpectedError
 const store7: Store = createStore(reducer, [1], 'wrong'); // wrong enhancer
 declare var myEnhancer: StoreEnhancer<State, Action>;
 const store8: Store = createStore(reducer, [1], myEnhancer);
@@ -31,17 +31,17 @@ const store9: Store = createStore(reducer, undefined, myEnhancer);
 //
 
 const s: State = store2.getState();
-// $ExpectError
+// $FlowExpectedError
 const s: number = store2.getState(); // wrong return type
 
 store2.dispatch({ type: 'A' });
-// $ExpectError
+// $FlowExpectedError
 store2.dispatch({ type: 'wrong' }); // wrong action
 
 store2.replaceReducer(reducer);
-// $ExpectError
+// $FlowExpectedError
 store2.replaceReducer(() => ({})); // wrong reducer
 
 store2.subscribe(() => {});
-// $ExpectError
+// $FlowExpectedError
 store2.subscribe(() => 'wrong'); // wrong subscriber

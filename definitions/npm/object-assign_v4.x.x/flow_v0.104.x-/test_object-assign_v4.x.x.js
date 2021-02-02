@@ -8,14 +8,14 @@ const extendsExistingFields: { a: number, b: string, ... } = objectAssign(
   { b: "hi" }
 );
 
-// $ExpectError
+// $FlowExpectedError
 const extendsExistingFieldsSoundly: { a: number, b: string } = objectAssign(
   {},
   { a: "one" },
   { b: "hi" }
 );
 
-// $ExpectError
+// $FlowExpectedError
 const resultIsObject: string = objectAssign({});
 
 // TODO(facebook/flow#6856): The following should be valid, but is not,

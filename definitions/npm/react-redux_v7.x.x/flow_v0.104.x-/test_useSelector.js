@@ -11,7 +11,7 @@ type State = {|
 describe('useSelector', () => {
   it('passes State as first parameter', () => {
     function Com() {
-      // $ExpectError: the state has no `b`
+      // $FlowExpectedError: the state has no `b`
       const count = useSelector<State, number>(state => state.b);
       return <div>{count}</div>;
     }
@@ -19,7 +19,7 @@ describe('useSelector', () => {
 
   it('passes type of second parameter as params to `equalityFn`', () => {
     function Com2() {
-      // $ExpectError: `equalityFn` is passed params of the second type, do not have `.size`
+      // $FlowExpectedError: `equalityFn` is passed params of the second type, do not have `.size`
       const count = useSelector<State, number>(
         state => state.a,
         (a, b) => a.size === b.size

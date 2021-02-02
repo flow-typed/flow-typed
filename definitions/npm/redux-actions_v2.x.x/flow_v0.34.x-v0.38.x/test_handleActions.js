@@ -20,7 +20,7 @@ function test_handleActions() {
 
       assert(state.count, (x: number) => {})
 
-      // $ExpectError
+      // $FlowExpectedError
       assert(state.count, (x: string) => {})
 
       return state
@@ -31,7 +31,7 @@ function test_handleActions() {
     //   return { foo: 1 }
     // },
 
-    // $ExpectError
+    // $FlowExpectedError
     'REQUIRERS_REDUCER_VALUE': {},
 
     'ACCEPTS_REDUCER_MAP': {

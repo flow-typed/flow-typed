@@ -45,14 +45,14 @@ describe('path-to-regexp', () => {
   it('tokensToFunction', () => {
     tokensToFunction(tokens);
 
-    // $ExpectError
+    // $FlowExpectedError
     tokensToFunction(badTokens);
   });
 
   it('tokensToRegExp', () => {
     tokensToRegExp(tokens);
 
-    // $ExpectError
+    // $FlowExpectedError
     tokensToRegExp(badTokens);
   });
 
@@ -64,14 +64,14 @@ describe('path-to-regexp', () => {
     });
 
     it('should raises an error when call without argument', () => {
-      // $ExpectError: path is required argument
+      // $FlowExpectedError: path is required argument
       pathToRegexp();
     });
 
     it('should raises an error when pass path with invalid type', () => {
       const path = true;
 
-      // $ExpectError: path must be `string` or `RegExp` or `Array<string or RegExp>`
+      // $FlowExpectedError: path must be `string` or `RegExp` or `Array<string or RegExp>`
       pathToRegexp(path);
     });
   });

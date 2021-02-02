@@ -14,7 +14,7 @@ const a1: firebase.app.App = firebase.initializeApp({
 })
 
 // #2
-// $ExpectError
+// $FlowExpectedError
 const a2: firebase.app.App = firebase.initializeApp({
   storageBucker: 'storageBucket',
   projectId: '42',
@@ -40,7 +40,7 @@ firebase.auth().onAuthStateChanged(user => {
     user.isAnonymous
     user.uid
     user.providerData
-    // $ExpectError
+    // $FlowExpectedError
     user.foobar
   }
 })
@@ -55,7 +55,7 @@ if (currentUser) {
   })
   .then(userCredential => {
     userCredential.user
-    // $ExpectError
+    // $FlowExpectedError
     userCredential.foobar
   })
 
@@ -68,20 +68,20 @@ if (currentUser) {
       result.additionalUserInfo
       result.operationType
       result.user
-      // $ExpectError
+      // $FlowExpectedError
       result.foobar
     })
 
   // #8
   const provider2 = new firebase.auth.EmailAuthProvider()
-  currentUser // $ExpectError
+  currentUser // $FlowExpectedError
     .linkWithPopup(provider2)
     .then(result => {
       result.credential
       result.additionalUserInfo
       result.operationType
       result.user
-      // $ExpectError
+      // $FlowExpectedError
       result.foobar
     })
 }
@@ -118,7 +118,7 @@ firebase
 // #12
 firebase
   .database()
-  .ref('users/42') // $ExpectError
+  .ref('users/42') // $FlowExpectedError
   .on('foo', snp => {
     snp.val()
   })
@@ -136,7 +136,7 @@ firebase
 firebase
   .database()
   .ref('users/42')
-  .orderByKey() // $ExpectError
+  .orderByKey() // $FlowExpectedError
   .limitToLast('foo')
 
 // #15
@@ -153,7 +153,7 @@ firebase
   .getMetadata()
   .then(metadata => {
     ;(metadata.bucket: string)
-    // $ExpectError
+    // $FlowExpectedError
     metadata.foo
   })
   .catch()
@@ -165,7 +165,7 @@ firebase
   .put(new File(['foo'], 'foo.txt'))
   .then(snp => {
     ;(snp.bytesTransferred: number)
-    // $ExpectError
+    // $FlowExpectedError
     snp.foo
   })
   .catch()
@@ -173,7 +173,7 @@ firebase
 // #19
 firebase
   .storage()
-  .ref('/foo') // $ExpectError
+  .ref('/foo') // $FlowExpectedError
   .put('foobar')
 
 // #20
@@ -184,7 +184,7 @@ const task = firebase
 const subscribe = task.on('state_changed')
 const unsubscribe = subscribe(snp => {
   ;(snp.bytesTransferred: number)
-  // $ExpectError
+  // $FlowExpectedError
   snp.foo
 })
 ;(unsubscribe(): void)
@@ -196,7 +196,7 @@ firebase
   .put(new File(['foo'], 'foo.txt'))
   .on('state_changed', snp => {
     ;(snp.bytesTransferred: number)
-    // $ExpectError
+    // $FlowExpectedError
     snp.foo
   })()
 
@@ -208,7 +208,7 @@ firebase
   .on('state_changed', {
     next: snp => {
       ;(snp.bytesTransferred: number)
-      // $ExpectError
+      // $FlowExpectedError
       snp.foo
     },
   })()
@@ -217,9 +217,9 @@ firebase
 firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION)
 firebase.auth().setPersistence('local')
 
-// $ExpectError
+// $FlowExpectedError
 firebase.auth().setPersistence(firebase.auth.Auth.Persistence.FOO)
-// $ExpectError
+// $FlowExpectedError
 firebase.auth().setPersistence('foo')
 
 firebase
@@ -228,7 +228,7 @@ firebase
   .get()
   .then(snapshot => {
     ;(snapshot.id: string)
-    // $ExpectError
+    // $FlowExpectedError
     snapshot.foo
   })
   .catch()
@@ -240,9 +240,9 @@ firebase
   .get()
   .then(snapshot => {
     ;(snapshot.id: string)
-    // $ExpectError
+    // $FlowExpectedError
     snapshot.foo
-    // $ExpectError
+    // $FlowExpectedError
     snapshot.forEach(snapshot => {})
   })
   .catch()
@@ -251,11 +251,8 @@ firebase
 ;(firebase.firestore().doc('/foo/bar').id: string)
 
 // #26
-// $ExpectError
-firebase
-  .firestore()
-  .doc('/foo/bar')
-  .limit(4)
+// $FlowExpectedError
+firebase.firestore().doc('/foo/bar').limit(4)
 
 // #27
 firebase
@@ -266,7 +263,7 @@ firebase
     snapshots.forEach(snapshot => {
       ;(snapshot.id: string)
     })
-    // $ExpectError
+    // $FlowExpectedError
     snapshots.foo
   })
   .catch()
@@ -286,7 +283,7 @@ firebase
     snapshots.forEach(snapshot => {
       ;(snapshot.id: string)
     })
-    // $ExpectError
+    // $FlowExpectedError
     snapshots.foo
   })
   .catch()
@@ -322,7 +319,7 @@ firebase
 firebase
  .firestore()
  .collection('/foo')
- // $ExpectError
+ // $FlowExpectedError
  .where('id', 'lte', '5')
  .get({ source: 'cache' });
 
@@ -341,7 +338,7 @@ firebase
   .collection('/foo')
   .add({foo: 'bar'})
   .then(document => {
-    // $ExpectError
+    // $FlowExpectedError
     const foo = document.foo
   })
 
@@ -415,3 +412,59 @@ firebase
       (c.newIndex: number);
     });
   });
+
+// #46
+
+firebase
+  .firestore()
+  .collection('listened-collection')
+  .onSnapshot(
+    // Test with options object present
+    { includeMetadataChanges: true },
+    (snapshot: firebase.firestore.QuerySnapshot) => {
+      snapshot.docChanges().forEach(c => {
+        (c.type: string);
+        (c.doc.id: string);
+        (c.oldIndex: number);
+        (c.newIndex: number);
+      });
+    });
+
+// #47
+
+firebase
+  .firestore()
+  .collection('listened-collection')
+  .onSnapshot(
+    // Test typedef with deprecated options object field
+    // $FlowExpectedError
+    { includeQueryMetadataChanges: true },
+    (snapshot: firebase.firestore.QuerySnapshot) => {
+      snapshot.docChanges().forEach(c => {
+        (c.type: string);
+        (c.doc.id: string);
+        (c.oldIndex: number);
+        (c.newIndex: number);
+      });
+    });
+
+// #48
+
+firebase
+  .firestore()
+  .collection('listened-collection')
+  .onSnapshot(
+    { includeMetadataChanges: true },
+    (snapshot: firebase.firestore.QuerySnapshot) => {
+      snapshot.docChanges().forEach(c => {
+        (c.type: string);
+        (c.doc.id: string);
+        (c.oldIndex: number);
+        (c.newIndex: number);
+      });
+    },
+    // Test with error handler present
+    (error) => {
+      (error: typeof firebase.FirebaseError);
+    }
+  );

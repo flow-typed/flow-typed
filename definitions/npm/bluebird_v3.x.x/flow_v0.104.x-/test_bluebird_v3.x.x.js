@@ -10,8 +10,10 @@ promise.reflect().then(inspection => {
   (inspection.pending(): boolean);
 });
 
-// $ExpectError
+// $FlowExpectedError[incompatible-call]
 new Bluebird();
+
+const emptyPromise: Bluebird<void> = Bluebird.resolve();
 
 Bluebird.all([
   new Bluebird(() => {}),
@@ -34,19 +36,24 @@ let mapSeriesResult: Promise<number[]> = Bluebird.mapSeries([1], mapper);
 
 Bluebird.resolve([1,2,3]).then(function(arr: [1,2,3]) {
   let l = arr.length;
-  // $ExpectError Property not found in Array
+  // $FlowExpectedError[prop-missing] Property not found in Array
   arr.then(r => r);
 });
 
 let response = fetch('/').then(r => r.text())
 Bluebird.resolve(response).then(function(responseBody: string) {
   let length: number = responseBody.length;
-  // $ExpectError Property not found in string
+  // $FlowExpectedError[prop-missing] Property not found in string
   responseBody.then(r => r);
 });
 
 Bluebird.all([1, Bluebird.resolve(1), Promise.resolve(1)]).then(function(r: Array<number>) { });
 Bluebird.all(['hello', Bluebird.resolve('world'), Promise.resolve('!')]).then(function(r: Array<string>) { });
+Bluebird.all(['hello', Bluebird.resolve('world'), Promise.resolve('!')]).then(function(r: [string, string, string]) { });
+
+// $FlowExpectedError[incompatible-call] Wrong tuple type
+Bluebird.all(['hello', Bluebird.resolve('world'), Promise.resolve('!')]).then(function(r: [string, string, number]) { });
+Bluebird.all(['hello', Bluebird.resolve(3), Promise.resolve([1, 2, 3])]).then(function(r: [string, number, Array<number>]) { });
 
 Bluebird.join(1, Bluebird.resolve(2), function (a, b) { return a + b }).then(function (s) { return s + 1 })
 Bluebird.join(
@@ -58,7 +65,7 @@ Bluebird.join(
 Bluebird.join(1, Bluebird.resolve(2),
   function (a, b) { return Bluebird.resolve(a + b) }).then(function (s) { return s + 1 })
 
-// $ExpectError
+// $FlowExpectedError[incompatible-call]
 Bluebird.all([1, Bluebird.resolve(1), Promise.resolve(1)]).then(function(r: Array<string>) { });
 
 function foo(a: number, b: string) {
@@ -71,10 +78,9 @@ fooPromise(1, 'b').catch(function(e) {
 fooPromise(1, 'b').catch(Error, function(e: Error) {
   let m: string = e.message;
 });
-// $ExpectError
-fooPromise(1, 'b').catch(Error, function(e: NetworkError) {
+// $FlowExpectedError[incompatible-call]
+fooPromise(1, 'b').catch(Error, function(e: TypeError) {
   let m: string = e.message;
-  let c: number = e.code;
 });
 
 function fooPlain (a: number, b: string) {
@@ -101,9 +107,9 @@ fooBluebirdPromise(1, 'a').then(function (n: number) {
   let n2 = n;
 });
 
-// $ExpectError
+// $FlowExpectedError[incompatible-call]
 fooPromise('a', 1)
-// $ExpectError
+// $FlowExpectedError[incompatible-call]
 fooPromise()
 
 Bluebird.resolve(['arr', { some: 'value' }, 42])
@@ -137,12 +143,12 @@ Bluebird.delay(500, Bluebird.resolve(5));
 
 Bluebird.resolve().return(5).then((result: number) => {});
 Bluebird.resolve().thenReturn(5).then((result: number) => {});
-// $ExpectError
+// $FlowExpectedError[incompatible-call]
 Bluebird.resolve().return(5).then((result: string) => {});
-// $ExpectError
+// $FlowExpectedError[incompatible-call]
 Bluebird.resolve().thenReturn(5).then((result: string) => {});
 
 let disposable: Disposable<boolean> = Bluebird.resolve(true).disposer((value: boolean) => {});
 Bluebird.using(disposable, (value: boolean) => 9).then((result: number) => {});
-// $ExpectError
+// $FlowExpectedError[incompatible-call]
 Bluebird.using(disposable, (value: number) => 9);

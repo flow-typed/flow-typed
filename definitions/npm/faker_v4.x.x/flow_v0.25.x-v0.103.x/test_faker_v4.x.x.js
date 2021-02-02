@@ -84,21 +84,21 @@ describe("date", () => {
   faker.date.month({ abbr: true });
   faker.date.month({ context: "wide" });
   faker.date.month({ abbr: true, context: "wide" });
-  // $ExpectError
+  // $FlowExpectedError
   faker.date.month({ context: "bad" });
-  // $ExpectError
+  // $FlowExpectedError
   faker.date.month({ abbr: 1 });
-  // $ExpectError
+  // $FlowExpectedError
   faker.date.month({ bad: true });
   faker.date.weekday();
   faker.date.weekday({ abbr: true });
   faker.date.weekday({ context: "wide" });
   faker.date.weekday({ abbr: true, context: "wide" });
-  // $ExpectError
+  // $FlowExpectedError
   faker.date.weekday({ context: "bad" });
-  // $ExpectError
+  // $FlowExpectedError
   faker.date.weekday({ abbr: 1 });
-  // $ExpectError
+  // $FlowExpectedError
   faker.date.weekday({ bad: true });
 });
 
@@ -326,9 +326,9 @@ describe("random", () => {
   faker.random.number({ max: 0 });
   faker.random.number({ precision: 1 });
   faker.random.number({ precision: 1, min: 0, max: 0 });
-  // $ExpectError
+  // $FlowExpectedError
   faker.random.number({ precision: 1, min: 0, max: 0, bad: true });
-  // $ExpectError
+  // $FlowExpectedError
   faker.random.number({ bad: true });
   faker.random.arrayElement([1]);
   faker.random.objectElement({ a: true }, "a");

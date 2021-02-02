@@ -4,8 +4,8 @@ const isLts = require("is-lts");
 
 isLts();
 
-// $ExpectError
+// $FlowExpectedError
 isLts().length;
 
-// $ExpectError
+// $FlowExpectedError
 isLts() * 2;

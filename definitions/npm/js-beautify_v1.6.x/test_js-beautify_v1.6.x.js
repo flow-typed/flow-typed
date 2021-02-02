@@ -23,9 +23,9 @@ var l: string = beautifyCommonJs.css(code);
 var m: string = beautifyCommonJs.js(code);
 var n: string = beautifyCommonJs.html(code);
 
-// $ExpectError
+// $FlowExpectedError
 var o: number = beautifyCommonJs.html(code);
 
-// $ExpectError
+// $FlowExpectedError
 var p: string = beautifyCommonJs.html(1);
 

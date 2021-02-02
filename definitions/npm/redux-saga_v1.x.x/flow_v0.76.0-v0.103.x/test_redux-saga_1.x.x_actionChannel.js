@@ -12,14 +12,14 @@ describe("actionChannel(Pattern, ?Buffer) effect", () => {
     });
 
     it("returned object must be read only", () => {
-      // $ExpectError: read-only  property
+      // $FlowExpectedError: read-only  property
       ach.type = "anyType";
-      // $ExpectError: read-only  property
+      // $FlowExpectedError: read-only  property
       ach.payload = {};
     });
 
     it("returned object must be exact", () => {
-      // $ExpectError: exact type
+      // $FlowExpectedError: exact type
       ach.abc = 69;
     });
   });
@@ -46,9 +46,9 @@ describe("actionChannel(Pattern, ?Buffer) effect", () => {
     });
 
     it("must rises an error", () => {
-      // $ExpectError
+      // $FlowExpectedError
       (ach2.payload.pattern[99]: number);
-      // $ExpectError
+      // $FlowExpectedError
       (ach4.payload.pattern[2]: string);
     });
   });

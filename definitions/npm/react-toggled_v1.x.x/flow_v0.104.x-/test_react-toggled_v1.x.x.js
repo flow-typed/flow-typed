@@ -5,25 +5,25 @@ import Toggle from 'react-toggled';
 import { describe, it } from 'flow-typed-test';
 
 it('defaultOn prop should be boolean', () => {
-  // $ExpectError
+  // $FlowExpectedError
   <Toggle defaultOn={2}><div /></Toggle>;
   <Toggle defaultOn><div /></Toggle>;
 });
 
 it('on prop should be boolean', () => {
-  // $ExpectError
+  // $FlowExpectedError
   <Toggle on={2}><div /></Toggle>;
   <Toggle on><div /></Toggle>;
 });
 
 it('onToggle prop should be a function', () => {
-  // $ExpectError
+  // $FlowExpectedError
   <Toggle onToggle={2}><div /></Toggle>;
   <Toggle onToggle={() => {}}><div /></Toggle>;
 });
 
 it('require children prop', () => {
-  // $ExpectError
+  // $FlowExpectedError
   <Toggle />;
 
   <Toggle><div /></Toggle>;

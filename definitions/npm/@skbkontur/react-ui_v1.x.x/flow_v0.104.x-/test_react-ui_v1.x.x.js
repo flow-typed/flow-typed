@@ -7,7 +7,7 @@ describe('react-ui', () => {
   it('controls prop types', () => {
     <Button>Button</Button>;
 
-    // $ExpectError
+    // $FlowExpectedError
     <Button onClick={1}>Button</Button>;
   });
 });

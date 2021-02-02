@@ -15,21 +15,21 @@ const starfield2 = new Starfield({
 });
 
 const invalidStarfield = new Starfield({
-  // $ExpectError
+  // $FlowExpectedError
   canvas: 0,
-  // $ExpectError
+  // $FlowExpectedError
   vx: "",
-  // $ExpectError
+  // $FlowExpectedError
   vy: "",
-  // $ExpectError
+  // $FlowExpectedError
   maxRadius: "",
-  // $ExpectError
+  // $FlowExpectedError
   maxStars: "",
-  // $ExpectError
+  // $FlowExpectedError
   shootingStarInterval: ""
 });
 
 starfield.start();
 
-// $ExpectError
+// $FlowExpectedError
 starfield.start("a");

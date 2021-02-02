@@ -32,7 +32,7 @@ const editor = (
 
 const invalidEditor = (
   <AceEditor
-    // $ExpectError
+    // $FlowExpectedError
     fontSize="not-a-number"
   />
 );

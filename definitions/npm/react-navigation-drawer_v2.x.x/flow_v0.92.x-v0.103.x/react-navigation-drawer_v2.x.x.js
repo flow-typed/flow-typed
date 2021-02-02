@@ -82,6 +82,7 @@ declare module 'react-navigation-drawer' {
   declare export type NavigationPopToTopAction = {|
     +type: 'Navigation/POP_TO_TOP',
     +immediate?: boolean,
+    +key?: string,
   |};
   declare export type NavigationPushAction = {|
     +type: 'Navigation/PUSH',

@@ -32,5 +32,5 @@ const usernameFor = async (sessionToken: string): Promise<?string> => {
   return username;
 };
 
-// $ExpectError
+// $FlowExpectedError
 parseObject.get(false)

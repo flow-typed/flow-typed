@@ -32,19 +32,38 @@ export const fs = {
   mkdir: node_fs.mkdir,
   readdir: node_fs.readdir,
   // $FlowFixMe
-  readFile: jest.fn((filePath: string): Promise<Buffer> => {
-    return new Promise((resolve, reject) => {
-      process.nextTick(() => {
-        if (fs.mockFiles[filePath]) {
-          resolve(fs.mockFiles[filePath]);
-        } else {
-          reject(
-            new Error(`ENOENT: no such file or directory, open '${filePath}'`),
-          );
-        }
+  readFile: jest.fn(
+    (
+      filePath: string,
+      options?: string | {encoding?: string, ...},
+    ): Promise<string | Buffer> => {
+      const encoding = options instanceof Object ? options.encoding : options;
+      return new Promise((resolve, reject) => {
+        process.nextTick(() => {
+          if (fs.mockFiles[filePath]) {
+            resolve(
+              typeof encoding === 'string'
+                ? fs.mockFiles[filePath].toString(encoding)
+                : fs.mockFiles[filePath],
+            );
+          } else {
+            reject(
+              new Error(
+                `ENOENT: no such file or directory, open '${filePath}'`,
+              ),
+            );
+          }
+        });
       });
-    });
-  }),
+    },
+  ),
+  readJson: (
+    filePath: string,
+    options?: string | {encoding?: string},
+  ): Promise<any> =>
+    fs
+      .readFile(filePath, options || 'utf8')
+      .then(data => JSON.parse(String(data))),
   rename: node_fs.rename,
   rmdir: node_fs.rmdir,
   stat: node_fs.stat,
@@ -52,6 +71,7 @@ export const fs = {
   Stats: node_fs.Stats,
   unlink: node_fs.unlink,
   writeFile: node_fs.writeFile,
+  writeJson: node_fs.writeJson,
 };
 
 export const https = node_https;

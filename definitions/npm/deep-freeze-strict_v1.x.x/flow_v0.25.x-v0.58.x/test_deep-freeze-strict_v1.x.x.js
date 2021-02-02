@@ -7,8 +7,8 @@ const frozen = freeze(a)
 
 const b: number = frozen.a
 
-// $ExpectError
+// $FlowExpectedError
 const c: string = frozen.a
 
-// $ExpectError
+// $FlowExpectedError
 frozen.b

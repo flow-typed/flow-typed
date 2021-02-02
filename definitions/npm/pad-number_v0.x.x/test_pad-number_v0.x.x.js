@@ -4,17 +4,17 @@ import pad from "pad-number";
 pad(10, 3);
 pad(10, 3, "o");
 
-// $ExpectError
+// $FlowExpectedError
 pad("foo", 10);
 
-// $ExpectError
+// $FlowExpectedError
 pad(5, "ok");
 
-// $ExpectError
+// $FlowExpectedError
 pad(null, 10);
 
-// $ExpectError
+// $FlowExpectedError
 pad(10, null);
 
-// $ExpectError
+// $FlowExpectedError
 pad(10, 3, 4);

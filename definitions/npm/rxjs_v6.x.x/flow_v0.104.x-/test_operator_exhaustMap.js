@@ -37,11 +37,11 @@ it("should support an undefined resultSelector", () => {
 });
 
 it("should enforce types", () => {
-  // $ExpectError
+  // $FlowExpectedError
   const o = of(1, 2, 3).pipe(exhaustMap());
 });
 
 it("should enforce the return type", () => {
-  // $ExpectError
+  // $FlowExpectedError
   const o = of(1, 2, 3).pipe(exhaustMap(p => p));
 });

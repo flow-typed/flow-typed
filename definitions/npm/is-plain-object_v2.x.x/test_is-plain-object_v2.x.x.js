@@ -6,5 +6,5 @@ const a: boolean = isPlainObject({});
 const b: boolean = isPlainObject('test');
 //=> false
 
-// $ExpectError
+// $FlowExpectedError
 (isPlainObject({}): string);

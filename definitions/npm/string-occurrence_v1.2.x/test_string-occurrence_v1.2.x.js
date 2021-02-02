@@ -8,8 +8,8 @@ stringOccurrence("foo bar\nFOO BAZ", ["foo", "baz"], {
   caseInsensitive: false
 });
 
-// $ExpectError
+// $FlowExpectedError
 stringOccurrence(["foo", "baz"], "foo");
 
-// $ExpectError
+// $FlowExpectedError
 stringOccurrence("foo bar", 123);

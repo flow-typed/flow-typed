@@ -16,5 +16,5 @@ e.stack;
 
 e.customProperty;
 
-// $ExpectError
+// $FlowExpectedError
 e.wut;

@@ -3,8 +3,8 @@ import stripBom from 'strip-bom';
 const result: string = stripBom('\uFEFFunicorn');
 //=> 'unicorn'
 
-// $ExpectError
+// $FlowExpectedError
 stripBom(42);
 
-// $ExpectError
+// $FlowExpectedError
 (stripBom('asdf'): number);

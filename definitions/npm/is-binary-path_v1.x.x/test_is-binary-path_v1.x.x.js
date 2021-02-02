@@ -3,17 +3,17 @@ import isBinaryPath from 'is-binary-path';
 isBinaryPath('any-string');
 (isBinaryPath('any-string'): boolean);
 
-// $ExpectError
+// $FlowExpectedError
 isBinaryPath(4);
 
-// $ExpectError
+// $FlowExpectedError
 isBinaryPath({});
 
-// $ExpectError
+// $FlowExpectedError
 isBinaryPath();
 
-// $ExpectError
+// $FlowExpectedError
 isBinaryPath(null);
 
-// $ExpectError
+// $FlowExpectedError
 (isBinaryPath('any-string'): number);

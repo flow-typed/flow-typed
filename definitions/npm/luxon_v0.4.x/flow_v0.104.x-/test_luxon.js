@@ -33,7 +33,7 @@ Settings.defaultZone = new CustomZone();
 
 (Info.eras("long"): Array<string>);
 (Info.eras("long", { locale: "de-DE" }): Array<string>);
-// $ExpectError
+// $FlowExpectedError[prop-missing]
 (Info.eras("long", { foo: "bar" }): Array<string>);
 
 (Info.features().intl: boolean);
@@ -53,7 +53,7 @@ Settings.defaultZone = new CustomZone();
   numberingSystem: "latn",
   outputCalendar: "buddhist"
 }): Array<string>);
-// $ExpectError
+// $FlowExpectedError[prop-missing]
 (Info.months("long", { foo: "bar" }): Array<string>);
 
 (Info.monthsFormat("long"): Array<string>);
@@ -63,7 +63,7 @@ Settings.defaultZone = new CustomZone();
   numberingSystem: "latn",
   outputCalendar: "buddhist"
 }): Array<string>);
-// $ExpectError
+// $FlowExpectedError[prop-missing]
 (Info.monthsFormat("long", { foo: "bar" }): Array<string>);
 
 (Info.weekdays("long"): Array<string>);
@@ -73,7 +73,7 @@ Settings.defaultZone = new CustomZone();
   numberingSystem: "latn",
   outputCalendar: "buddhist"
 }): Array<string>);
-// $ExpectError
+// $FlowExpectedError[prop-missing]
 (Info.weekdays("long", { foo: "bar" }): Array<string>);
 
 (Info.weekdaysFormat("long"): Array<string>);
@@ -83,7 +83,7 @@ Settings.defaultZone = new CustomZone();
   numberingSystem: "latn",
   outputCalendar: "buddhist"
 }): Array<string>);
-// $ExpectError
+// $FlowExpectedError[prop-missing]
 (Info.weekdaysFormat("long", { foo: "bar" }): Array<string>);
 
 (DateTime.local().toJSDate(): Date);
@@ -106,21 +106,21 @@ DateTime.fromHTTP("Sun, 06 Nov 1994 08:49:37 GMT", {
   outputCalendar: "gregory",
   numberingSystem: "buddhist"
 });
-// $ExpectError
+// $FlowExpectedError[incompatible-call]
 DateTime.fromHTTP();
-// $ExpectError
+// $FlowExpectedError[incompatible-call]
 DateTime.fromHTTP({});
-// $ExpectError
+// $FlowExpectedError[prop-missing]
 DateTime.fromHTTP("Sun, 06 Nov 1994 08:49:37 GMT", { foo: "bar" });
-// $ExpectError
+// $FlowExpectedError[incompatible-call]
 DateTime.fromHTTP("Sun, 06 Nov 1994 08:49:37 GMT", { zone: 2 });
-// $ExpectError
+// $FlowExpectedError[incompatible-call]
 DateTime.fromHTTP("Sun, 06 Nov 1994 08:49:37 GMT", { locale: 2 });
-// $ExpectError
+// $FlowExpectedError[incompatible-call]
 DateTime.fromHTTP("Sun, 06 Nov 1994 08:49:37 GMT", { setZone: "yes" });
-// $ExpectError
+// $FlowExpectedError[incompatible-call]
 DateTime.fromHTTP("Sun, 06 Nov 1994 08:49:37 GMT", { outputCalendar: 2 });
-// $ExpectError
+// $FlowExpectedError[incompatible-call]
 DateTime.fromHTTP("Sun, 06 Nov 1994 08:49:37 GMT", { numberingSystem: 2 });
 
 var date: DateTime = DateTime.fromObject({ year: 2017, month: 1, day: 23 });
@@ -138,25 +138,25 @@ DateTime.fromObject({
   outputCalendar: "gregory",
   numberingSystem: "buddhist"
 });
-// $ExpectError
+// $FlowExpectedError[incompatible-call]
 DateTime.fromObject();
-// $ExpectError
+// $FlowExpectedError[incompatible-call]
 DateTime.fromObject("blah");
-// $ExpectError
+// $FlowExpectedError[prop-missing]
 DateTime.fromObject({ year: 2017, month: 1, day: 23, foo: "bar" });
-// $ExpectError
+// $FlowExpectedError[incompatible-call]
 DateTime.fromObject({ year: 2017, month: "January", day: 23 });
-// $ExpectError
+// $FlowExpectedError[incompatible-call]
 DateTime.fromObject({ year: 2017, month: 1, day: "Monday" });
-// $ExpectError
+// $FlowExpectedError[incompatible-call]
 DateTime.fromObject({ year: 2017, month: 1, day: 23, zone: 2 });
-// $ExpectError
+// $FlowExpectedError[incompatible-call]
 DateTime.fromObject({ year: 2017, month: 1, day: 23, locale: 2 });
-// $ExpectError
+// $FlowExpectedError[incompatible-call]
 DateTime.fromObject({ year: 2017, month: 1, day: 23, setZone: "yes" });
-// $ExpectError
+// $FlowExpectedError[incompatible-call]
 DateTime.fromObject({ year: 2017, month: 1, day: 23, outputCalendar: 2 });
-// $ExpectError
+// $FlowExpectedError[incompatible-call]
 DateTime.fromObject({ year: 2017, month: 1, day: 23, numberingSystem: 2 });
 
 var date: DateTime = DateTime.fromISO("2017-01-28T23:00:01");
@@ -171,19 +171,19 @@ DateTime.fromISO("2017-01-28T23:00:01", {
   outputCalendar: "gregory",
   numberingSystem: "buddhist"
 });
-// $ExpectError
+// $FlowExpectedError[incompatible-call]
 DateTime.fromISO();
-// $ExpectError
+// $FlowExpectedError[prop-missing]
 DateTime.fromISO("2017-01-28T23:00:01", { foo: "bar" });
-// $ExpectError
+// $FlowExpectedError[incompatible-call]
 DateTime.fromISO("2017-01-28T23:00:01", { zone: 2 });
-// $ExpectError
+// $FlowExpectedError[incompatible-call]
 DateTime.fromISO("2017-01-28T23:00:01", { locale: 2 });
-// $ExpectError
+// $FlowExpectedError[incompatible-call]
 DateTime.fromISO("2017-01-28T23:00:01", { setZone: "yes" });
-// $ExpectError
+// $FlowExpectedError[incompatible-call]
 DateTime.fromISO("2017-01-28T23:00:01", { outputCalendar: 2 });
-// $ExpectError
+// $FlowExpectedError[incompatible-call]
 DateTime.fromISO("2017-01-28T23:00:01", { numberingSystem: 2 });
 
 var date: DateTime = DateTime.fromJSDate(new Date());
@@ -198,21 +198,21 @@ DateTime.fromJSDate(new Date(), {
   outputCalendar: "gregory",
   numberingSystem: "buddhist"
 });
-// $ExpectError
+// $FlowExpectedError[incompatible-call]
 DateTime.fromJSDate();
-// $ExpectError
+// $FlowExpectedError[incompatible-call]
 DateTime.fromJSDate(1234234123);
-// $ExpectError
+// $FlowExpectedError[prop-missing]
 DateTime.fromJSDate(new Date(), { foo: "bar" });
-// $ExpectError
+// $FlowExpectedError[incompatible-call]
 DateTime.fromJSDate(new Date(), { zone: 2 });
-// $ExpectError
+// $FlowExpectedError[incompatible-call]
 DateTime.fromJSDate(new Date(), { locale: 2 });
-// $ExpectError
+// $FlowExpectedError[incompatible-call]
 DateTime.fromJSDate(new Date(), { setZone: "yes" });
-// $ExpectError
+// $FlowExpectedError[incompatible-call]
 DateTime.fromJSDate(new Date(), { outputCalendar: 2 });
-// $ExpectError
+// $FlowExpectedError[incompatible-call]
 DateTime.fromJSDate(new Date(), { numberingSystem: 2 });
 
 var date: DateTime = DateTime.fromMillis(123412323);
@@ -227,21 +227,21 @@ DateTime.fromMillis(123412323, {
   outputCalendar: "gregory",
   numberingSystem: "buddhist"
 });
-// $ExpectError
+// $FlowExpectedError[incompatible-call]
 DateTime.fromMillis();
-// $ExpectError
+// $FlowExpectedError[incompatible-call]
 DateTime.fromMillis("1234234123");
-// $ExpectError
+// $FlowExpectedError[prop-missing]
 DateTime.fromMillis(123412323, { foo: "bar" });
-// $ExpectError
+// $FlowExpectedError[incompatible-call]
 DateTime.fromMillis(123412323, { zone: 2 });
-// $ExpectError
+// $FlowExpectedError[incompatible-call]
 DateTime.fromMillis(123412323, { locale: 2 });
-// $ExpectError
+// $FlowExpectedError[incompatible-call]
 DateTime.fromMillis(123412323, { setZone: "yes" });
-// $ExpectError
+// $FlowExpectedError[incompatible-call]
 DateTime.fromMillis(123412323, { outputCalendar: 2 });
-// $ExpectError
+// $FlowExpectedError[incompatible-call]
 DateTime.fromMillis(123412323, { numberingSystem: 2 });
 
 var date: DateTime = DateTime.fromRFC2822("12/15/2017, 12:47:25 PM");
@@ -256,19 +256,19 @@ DateTime.fromRFC2822("12/15/2017, 12:47:25 PM", {
   outputCalendar: "gregory",
   numberingSystem: "buddhist"
 });
-// $ExpectError
+// $FlowExpectedError[incompatible-call]
 DateTime.fromRFC2822();
-// $ExpectError
+// $FlowExpectedError[prop-missing]
 DateTime.fromRFC2822("12/15/2017, 12:47:25 PM", { foo: "bar" });
-// $ExpectError
+// $FlowExpectedError[incompatible-call]
 DateTime.fromRFC2822("12/15/2017, 12:47:25 PM", { zone: 2 });
-// $ExpectError
+// $FlowExpectedError[incompatible-call]
 DateTime.fromRFC2822("12/15/2017, 12:47:25 PM", { locale: 2 });
-// $ExpectError
+// $FlowExpectedError[incompatible-call]
 DateTime.fromRFC2822("12/15/2017, 12:47:25 PM", { setZone: "yes" });
-// $ExpectError
+// $FlowExpectedError[incompatible-call]
 DateTime.fromRFC2822("12/15/2017, 12:47:25 PM", { outputCalendar: 2 });
-// $ExpectError
+// $FlowExpectedError[incompatible-call]
 DateTime.fromRFC2822("12/15/2017, 12:47:25 PM", { numberingSystem: 2 });
 
 var date: DateTime = DateTime.fromSQL("12/15/2017, 12:47:25 PM");
@@ -283,77 +283,77 @@ DateTime.fromSQL("12/15/2017, 12:47:25 PM", {
   outputCalendar: "gregory",
   numberingSystem: "buddhist"
 });
-// $ExpectError
+// $FlowExpectedError[incompatible-call]
 DateTime.fromSQL();
-// $ExpectError
+// $FlowExpectedError[prop-missing]
 DateTime.fromSQL("12/15/2017, 12:47:25 PM", { foo: "bar" });
-// $ExpectError
+// $FlowExpectedError[incompatible-call]
 DateTime.fromSQL("12/15/2017, 12:47:25 PM", { zone: 2 });
-// $ExpectError
+// $FlowExpectedError[incompatible-call]
 DateTime.fromSQL("12/15/2017, 12:47:25 PM", { locale: 2 });
-// $ExpectError
+// $FlowExpectedError[incompatible-call]
 DateTime.fromSQL("12/15/2017, 12:47:25 PM", { setZone: "yes" });
-// $ExpectError
+// $FlowExpectedError[incompatible-call]
 DateTime.fromSQL("12/15/2017, 12:47:25 PM", { outputCalendar: 2 });
-// $ExpectError
+// $FlowExpectedError[incompatible-call]
 DateTime.fromSQL("12/15/2017, 12:47:25 PM", { numberingSystem: 2 });
 
 var date: DateTime = DateTime.fromFormat(
-  '12/15/2017, 12:47:25 PM',
-  'dd/MM/yyyy h:mm:ss a'
+  "12/15/2017, 12:47:25 PM",
+  "dd/MM/yyyy h:mm:ss a"
 );
-DateTime.fromFormat('12/15/2017, 12:47:25 PM', 'dd/MM/yyyy h:mm:ss a', {});
-DateTime.fromFormat('12/15/2017, 12:47:25 PM', 'dd/MM/yyyy h:mm:ss a', {
-  zone: 'America/Chicago',
+DateTime.fromFormat("12/15/2017, 12:47:25 PM", "dd/MM/yyyy h:mm:ss a", {});
+DateTime.fromFormat("12/15/2017, 12:47:25 PM", "dd/MM/yyyy h:mm:ss a", {
+  zone: "America/Chicago",
 });
-DateTime.fromFormat('12/15/2017, 12:47:25 PM', 'dd/MM/yyyy h:mm:ss a', {
+DateTime.fromFormat("12/15/2017, 12:47:25 PM", "dd/MM/yyyy h:mm:ss a", {
   zone: new CustomZone(),
 });
-DateTime.fromFormat('12/15/2017, 12:47:25 PM', 'dd/MM/yyyy h:mm:ss a', {
-  locale: 'en-US',
+DateTime.fromFormat("12/15/2017, 12:47:25 PM", "dd/MM/yyyy h:mm:ss a", {
+  locale: "en-US",
 });
-DateTime.fromFormat('12/15/2017, 12:47:25 PM', 'dd/MM/yyyy h:mm:ss a', {
-  zone: 'America/Chicago',
+DateTime.fromFormat("12/15/2017, 12:47:25 PM", "dd/MM/yyyy h:mm:ss a", {
+  zone: "America/Chicago",
   setZone: true,
-  locale: 'en-US',
-  outputCalendar: 'gregory',
-  numberingSystem: 'buddhist',
+  locale: "en-US",
+  outputCalendar: "gregory",
+  numberingSystem: "buddhist",
 });
-// $ExpectError
+// $FlowExpectedError[incompatible-call]
 DateTime.fromFormat();
-// $ExpectError
-DateTime.fromFormat('12/15/2017, 12:47:25 PM');
-// $ExpectError
-DateTime.fromFormat('12/15/2017, 12:47:25 PM', 2);
-// $ExpectError
-DateTime.fromFormat('12/15/2017, 12:47:25 PM', { zone: 'America/Chicago' });
-// $ExpectError
-DateTime.fromFormat('12/15/2017, 12:47:25 PM', 'dd/MM/yyyy h:mm:ss a', {
-  foo: 'bar',
+// $FlowExpectedError[incompatible-call]
+DateTime.fromFormat("12/15/2017, 12:47:25 PM");
+// $FlowExpectedError[incompatible-call]
+DateTime.fromFormat("12/15/2017, 12:47:25 PM", 2);
+// $FlowExpectedError[incompatible-call]
+DateTime.fromFormat("12/15/2017, 12:47:25 PM", { zone: "America/Chicago" });
+// $FlowExpectedError[prop-missing]
+DateTime.fromFormat("12/15/2017, 12:47:25 PM", "dd/MM/yyyy h:mm:ss a", {
+  foo: "bar",
 });
-// $ExpectError
-DateTime.fromFormat('12/15/2017, 12:47:25 PM', 'dd/MM/yyyy h:mm:ss a', {
+DateTime.fromFormat("12/15/2017, 12:47:25 PM", "dd/MM/yyyy h:mm:ss a", {
+// $FlowExpectedError[incompatible-call]
   zone: 2,
 });
-// $ExpectError
-DateTime.fromFormat('12/15/2017, 12:47:25 PM', 'dd/MM/yyyy h:mm:ss a', {
+DateTime.fromFormat("12/15/2017, 12:47:25 PM", "dd/MM/yyyy h:mm:ss a", {
+// $FlowExpectedError[incompatible-call]
   locale: 2,
 });
-// $ExpectError
-DateTime.fromFormat('12/15/2017, 12:47:25 PM', 'dd/MM/yyyy h:mm:ss a', {
-  setZone: 'yes',
+DateTime.fromFormat("12/15/2017, 12:47:25 PM", "dd/MM/yyyy h:mm:ss a", {
+// $FlowExpectedError[incompatible-call]
+  setZone: "yes",
 });
-// $ExpectError
-DateTime.fromFormat('12/15/2017, 12:47:25 PM', 'dd/MM/yyyy h:mm:ss a', {
+DateTime.fromFormat("12/15/2017, 12:47:25 PM", "dd/MM/yyyy h:mm:ss a", {
+// $FlowExpectedError[incompatible-call]
   outputCalendar: 2,
 });
-// $ExpectError
-DateTime.fromFormat('12/15/2017, 12:47:25 PM', 'dd/MM/yyyy h:mm:ss a', {
+DateTime.fromFormat("12/15/2017, 12:47:25 PM", "dd/MM/yyyy h:mm:ss a", {
+// $FlowExpectedError[incompatible-call]
   numberingSystem: 2,
 });
 
 var date: DateTime = DateTime.invalid("test");
-// $ExpectError
+// $FlowExpectedError[incompatible-call]
 DateTime.invalid();
 
 // Flow 0.40 - 0.45 allows these but they're incorrect...bug!
@@ -362,9 +362,9 @@ DateTime.invalid();
 
 var date = DateTime.max(DateTime.local(), DateTime.utc(), DateTime.utc());
 var date = DateTime.min(DateTime.local(), DateTime.utc(), DateTime.utc());
-// $ExpectError
+// $FlowExpectedError[incompatible-call]
 var date = DateTime.max(DateTime.local(), null, DateTime.utc());
-// $ExpectError
+// $FlowExpectedError[incompatible-call]
 var date = DateTime.min(DateTime.local(), null, DateTime.utc());
 
 (date.day: number);
@@ -403,62 +403,52 @@ var date = DateTime.min(DateTime.local(), null, DateTime.utc());
 (date.diff(DateTime.utc(), ["year", "month"], {
   conversionAccuracy: "longterm"
 }): Duration);
-// $ExpectError
+// $FlowExpectedError[incompatible-call]
 (date.diff(new Date()): Duration);
-// $ExpectError
 (date.diff(DateTime.utc()): Duration);
-// $ExpectError
+// $FlowExpectedError[incompatible-call]
 (date.diff(DateTime.utc(), "glom"): Duration);
-// $ExpectError
+// $FlowExpectedError[incompatible-call]
 (date.diff(DateTime.utc(), ["year", "glom"]): Duration);
-// $ExpectError
+// $FlowExpectedError[prop-missing]
 (date.diff(DateTime.utc(), ["year", "month"], { foo: "bar" }): Duration);
 
+(date.diffNow(): Duration);
 (date.diffNow("year"): Duration);
 (date.diffNow(["year", "month"]): Duration);
 (date.diffNow(["year", "month"], {}): Duration);
 (date.diffNow(["year", "month"], { conversionAccuracy: "longterm" }): Duration);
-// $ExpectError
-(date.diff(new Date()): Duration);
-// $ExpectError
-(date.diff(DateTime.utc()): Duration);
-// $ExpectError
-(date.diffNow("glom"): Duration);
-// $ExpectError
-(date.diffNow(["year", "glom"]): Duration);
-// $ExpectError
-(date.diffNow(["year", "month"], { foo: "bar" }): Duration);
 
 (date.startOf("year"): DateTime);
 (date.startOf("month"): DateTime);
 (date.startOf("day"): DateTime);
 (date.startOf("seconds"): DateTime);
-// $ExpectError
+// $FlowExpectedError[incompatible-call]
 (date.startOf("secs"): DateTime);
 
 (date.endOf("year"): DateTime);
 (date.endOf("month"): DateTime);
 (date.endOf("day"): DateTime);
 (date.endOf("seconds"): DateTime);
-// $ExpectError
+// $FlowExpectedError[incompatible-call]
 (date.endOf("secs"): DateTime);
 
 if (date.equals(DateTime.utc())) {
 }
-// $ExpectError
+// $FlowExpectedError[incompatible-call]
 if (date.equals(new Date())) {
 }
 
 (date.get("year"): number);
 (date.get("month"): number);
-// $ExpectError
+// $FlowExpectedError[incompatible-call]
 (date.get("secs"): number);
 
 (date.hasSame(DateTime.utc(), "year"): boolean);
 (date.hasSame(DateTime.utc(), "month"): boolean);
-// $ExpectError
+// $FlowExpectedError[incompatible-call]
 (date.hasSame(DateTime.utc(), "secs"): boolean);
-// $ExpectError
+// $FlowExpectedError[incompatible-call]
 (date.hasSame(new Date(), "month"): boolean);
 
 (date.inspect(): string);
@@ -466,13 +456,13 @@ if (date.equals(new Date())) {
 (date.minus({ day: 1 }): DateTime);
 (date.minus(232): DateTime);
 (date.minus(Duration.fromObject({ day: 1 })): DateTime);
-// $ExpectError
+// $FlowExpectedError[incompatible-call]
 (date.minus({ glab: 1 }): DateTime);
 
 (date.plus({ day: 1 }): DateTime);
 (date.plus(232): DateTime);
 (date.plus(Duration.fromObject({ day: 1 })): DateTime);
-// $ExpectError
+// $FlowExpectedError[incompatible-call]
 (date.plus({ glab: 1 }): DateTime);
 
 (date.reconfigure({ zone: "America/Detroit" }): DateTime);
@@ -484,7 +474,7 @@ if (date.equals(new Date())) {
 (date.set({ year: 1, month: 2 }): DateTime);
 (date.set({ minutes: 1, seconds: 2 }): DateTime);
 (date.set({ minutes: 1, seconds: 2, ordinal: 255 }): DateTime);
-// $ExpectError
+// $FlowExpectedError[incompatible-call]
 (date.set({ minutes: 1, seconds: 2, simpsons: 3 }): DateTime);
 
 (date.setLocale("de-DE"): DateTime);
@@ -504,7 +494,7 @@ if (date.equals(new Date())) {
   suppressSeconds: true,
   includeOffset: true
 }): string);
-// $ExpectError
+// $FlowExpectedError[prop-missing]
 (date.toISO({ blah: true }): string);
 
 (date.toISOTime(): string);
@@ -514,7 +504,7 @@ if (date.equals(new Date())) {
   suppressSeconds: true,
   includeOffset: true
 }): string);
-// $ExpectError
+// $FlowExpectedError[prop-missing]
 (date.toISOTime({ blah: true }): string);
 
 (date.toISOWeekDate(): string);
@@ -532,13 +522,13 @@ if (date.equals(new Date())) {
   value: number,
   ...
 }>);
-// $ExpectError
-(date.toLocaleParts({ foo: "bar" }): Array<{ type: string, value: number }>);
+// $FlowExpectedError[prop-missing]
+(date.toLocaleParts({ foo: "bar" }): Array<{ type: string, value: number, ... }>);
 
 (date.toLocaleString(): string);
 (date.toLocaleString({ month: "numeric" }): string);
 (date.toLocaleString({ year: "numeric" }): string);
-// $ExpectError
+// $FlowExpectedError[prop-missing]
 (date.toLocaleString({ foo: "bar" }): string);
 
 (date.toObject().year: number);
@@ -551,11 +541,11 @@ if (date.equals(new Date())) {
 (date.toObject({ includeConfig: true }).locale: string);
 (date.toObject({ includeConfig: true }).outputCalendar: ?string);
 (date.toObject({ includeConfig: true }).numberingSystem: ?string);
-// $ExpectError
+// $FlowExpectedError[prop-missing]
 date.toObject({ includeConfig: false }).locale;
-// $ExpectError
+// $FlowExpectedError[prop-missing]
 date.toObject({ includeConfig: false }).outputCalendar;
-// $ExpectError
+// $FlowExpectedError[prop-missing]
 date.toObject({ includeConfig: false }).numberingSystem;
 
 (date.toRFC2822(): string);
@@ -563,7 +553,7 @@ date.toObject({ includeConfig: false }).numberingSystem;
 (date.toSQL(): string);
 (date.toSQL({}): string);
 (date.toSQL({ includeZone: true, includeOffset: true }): string);
-// $ExpectError
+// $FlowExpectedError[prop-missing]
 (date.toSQL({ blah: true }): string);
 
 (date.toSQLDate(): string);
@@ -571,7 +561,7 @@ date.toObject({ includeConfig: false }).numberingSystem;
 (date.toSQLTime(): string);
 (date.toSQLTime({}): string);
 (date.toSQLTime({ includeZone: true, includeOffset: true }): string);
-// $ExpectError
+// $FlowExpectedError[prop-missing]
 (date.toSQLTime({ blah: true }): string);
 
 (date.toString(): string);
@@ -590,9 +580,9 @@ date.toObject({ includeConfig: false }).numberingSystem;
   numberingSystem: "gujr",
   conversionAccuracy: "casual"
 }): Duration);
-// $ExpectError
+// $FlowExpectedError[incompatible-call]
 (Duration.fromISO(): Duration);
-// $ExpectError
+// $FlowExpectedError[prop-missing]
 (Duration.fromISO("lkasdfa", { foo: "bar" }): Duration);
 
 (Duration.fromObject({ year: 1 }): Duration);
@@ -605,9 +595,9 @@ date.toObject({ includeConfig: false }).numberingSystem;
   numberingSystem: "gujr",
   conversionAccuracy: "casual"
 }): Duration);
-// $ExpectError
+// $FlowExpectedError[incompatible-call]
 (Duration.fromObject(): Duration);
-// $ExpectError
+// $FlowExpectedError[prop-missing]
 (Duration.fromObject({ year: 1, months: 1, foo: "bar" }): Duration);
 
 (Duration.fromMillis(23123412): Duration);
@@ -616,13 +606,13 @@ date.toObject({ includeConfig: false }).numberingSystem;
   numberingSystem: "gujr",
   conversionAccuracy: "casual"
 }): Duration);
-// $ExpectError
+// $FlowExpectedError[incompatible-call]
 (Duration.fromMillis(): Duration);
-// $ExpectError
+// $FlowExpectedError[prop-missing]
 (Duration.fromMillis(23123412, { foo: "bar" }): Duration);
 
 (Duration.invalid("test"): Duration);
-// $ExpectError
+// $FlowExpectedError[incompatible-call]
 (Duration.invalid(): Duration);
 
 var dur: Duration = Duration.invalid("test");
@@ -656,11 +646,11 @@ var dur: Duration = Duration.invalid("test");
 (dur.as("seconds"): number);
 (dur.as("millisecond"): number);
 (dur.as("milliseconds"): number);
-// $ExpectError
+// $FlowExpectedError[incompatible-call]
 (dur.as("date"): number);
 
 (dur.equals(Duration.invalid("test")): boolean);
-// $ExpectError
+// $FlowExpectedError[incompatible-call]
 (dur.equals(new Date()): boolean);
 
 (dur.get("year"): number);
@@ -679,7 +669,7 @@ var dur: Duration = Duration.invalid("test");
 (dur.get("seconds"): number);
 (dur.get("millisecond"): number);
 (dur.get("milliseconds"): number);
-// $ExpectError
+// $FlowExpectedError[incompatible-call]
 (dur.get("date"): number);
 
 (dur.inspect(): string);
@@ -690,37 +680,37 @@ var dur: Duration = Duration.invalid("test");
 (dur.minus({ day: 1 }): Duration);
 (dur.minus(232): Duration);
 (dur.minus(Duration.fromObject({ day: 1 })): Duration);
-// $ExpectError
+// $FlowExpectedError[incompatible-call]
 (dur.minus({ glab: 1 }): Duration);
 
 (dur.plus({ day: 1 }): Duration);
 (dur.plus(232): Duration);
 (dur.plus(Duration.fromObject({ day: 1 })): Duration);
-// $ExpectError
+// $FlowExpectedError[incompatible-call]
 (dur.plus({ glab: 1 }): Duration);
 
 (dur.reconfigure({ locale: "de-DE" }): Duration);
 (dur.reconfigure({ numberingSystem: "latn" }): Duration);
 (dur.reconfigure({ conversionAccuracy: "longterm" }): Duration);
-// $ExpectError
+// $FlowExpectedError[prop-missing]
 (dur.reconfigure({ foo: "bar" }): Duration);
-// $ExpectError
+// $FlowExpectedError[incompatible-call]
 (dur.reconfigure({ conversionAccuracy: "date" }): Duration);
 
 (dur.set({ year: 1 }): Duration);
 (dur.set({ months: 1 }): Duration);
 (dur.set({ months: 1, locale: "de-DE" }): Duration);
-// $ExpectError
+// $FlowExpectedError[prop-missing]
 (dur.set({ foos: 1 }): Duration);
 
 (dur.shiftTo("years"): Duration);
 (dur.shiftTo("years", "days"): Duration);
-// $ExpectError
+// $FlowExpectedError[incompatible-call]
 (dur.shiftTo("years", "mnths", "days"): Duration);
 
 (dur.toFormat("yyyy/MM/dd"): string);
 (dur.toFormat("yyyy/MM/dd", { round: true }): string);
-// $ExpectError
+// $FlowExpectedError[prop-missing]
 (dur.toFormat("yyyy/MM/dd", { rnd: true }): string);
 
 (dur.toISO(): string);
@@ -736,11 +726,11 @@ var dur: Duration = Duration.invalid("test");
 (dur.toObject({ includeConfig: true }).locale: string);
 (dur.toObject({ includeConfig: true }).numberingSystem: ?string);
 (dur.toObject({ includeConfig: true }).conversionAccuracy: ?string);
-// $ExpectError
+// $FlowExpectedError[prop-missing]
 dur.toObject({ includeConfig: false }).locale;
-// $ExpectError
+// $FlowExpectedError[prop-missing]
 dur.toObject({ includeConfig: false }).numberingSystem;
-// $ExpectError
+// $FlowExpectedError[prop-missing]
 dur.toObject({ includeConfig: false }).conversionAccuracy;
 
 (dur.toString(): string);
@@ -754,9 +744,9 @@ dur.toObject({ includeConfig: false }).conversionAccuracy;
 ): Interval);
 (Interval.after({ year: 2017, month: 1 }, { year: 1 }): Interval);
 (Interval.after({ year: 2017, month: 1 }, 123123): Interval);
-// $ExpectError
+// $FlowExpectedError[incompatible-call]
 (Interval.after({ year: 2017, month: 1, foo: "bar" }, { year: 1 }): Interval);
-// $ExpectError
+// $FlowExpectedError[incompatible-call]
 (Interval.after({ year: 2017, month: 1 }, { year: 1, foo: "bar" }): Interval);
 
 (Interval.before(DateTime.utc(), Duration.fromObject({ year: 1 })): Interval);
@@ -768,9 +758,9 @@ dur.toObject({ includeConfig: false }).conversionAccuracy;
 ): Interval);
 (Interval.before({ year: 2017, month: 1 }, { year: 1 }): Interval);
 (Interval.before({ year: 2017, month: 1 }, 123123): Interval);
-// $ExpectError
+// $FlowExpectedError[incompatible-call]
 (Interval.before({ year: 2017, month: 1, foo: "bar" }, { year: 1 }): Interval);
-// $ExpectError
+// $FlowExpectedError[incompatible-call]
 (Interval.before({ year: 2017, month: 1 }, { year: 1, foo: "bar" }): Interval);
 
 (Interval.fromDateTimes(DateTime.utc(), DateTime.utc()): Interval);
@@ -781,13 +771,13 @@ dur.toObject({ includeConfig: false }).conversionAccuracy;
   { year: 2017, month: 1 }
 ): Interval);
 (Interval.fromDateTimes(
-  // $ExpectError
+  // $FlowExpectedError[incompatible-call]
   { year: 2016, month: 1, foo: 'bar' },
   { year: 2017, month: 1 }
 ): Interval);
 (Interval.fromDateTimes(
   { year: 2016, month: 1 },
-  // $ExpectError
+  // $FlowExpectedError[incompatible-call]
   { year: 2017, month: 1, foo: 'bar' }
 ): Interval);
 
@@ -796,24 +786,28 @@ dur.toObject({ includeConfig: false }).conversionAccuracy;
   zone: "America/Chicago",
   locale: "de-DE"
 }): Interval);
-// $ExpectError
+// $FlowExpectedError[prop-missing]
 (Interval.fromISO("23;lkj1", { foo: "bar" }): Interval);
 
 (Interval.invalid("test"): Interval);
-// $ExpectError
+// $FlowExpectedError[incompatible-call]
 (Interval.invalid(): Interval);
 
 var int: Interval = Interval.invalid("test");
 
 (Interval.merge([int]): Array<Interval>);
 (Interval.merge([int, int, int]): Array<Interval>);
-// $ExpectError
-(Interval.merge(int, int, int): Array<Interval>);
+// $FlowExpectedError[extra-arg]
+(Interval.merge([int], int): Array<Interval>);
+// $FlowExpectedError[incompatible-call]
+(Interval.merge(int): Array<Interval>);
 
 (Interval.xor([int]): Array<Interval>);
 (Interval.xor([int, int, int]): Array<Interval>);
-// $ExpectError
-(Interval.xor(int, int, int): Array<Interval>);
+// $FlowExpectedError[extra-arg]
+(Interval.xor([int], int): Array<Interval>);
+// $FlowExpectedError[incompatible-call]
+(Interval.xor(int): Array<Interval>);
 
 (int.end: DateTime);
 (int.invalidReason: ?string);
@@ -840,21 +834,21 @@ var int: Interval = Interval.invalid("test");
 (int.count("milliseconds"): number);
 (int.count("week"): number);
 (int.count("weeks"): number);
-// $ExpectError
+// $FlowExpectedError[incompatible-call]
 (int.count("wks"): number);
-// $ExpectError
+// $FlowExpectedError[incompatible-call]
 (int.count("weekNumber"): number);
-// $ExpectError
+// $FlowExpectedError[incompatible-call]
 (int.count("weekNumbers"): number);
-// $ExpectError
+// $FlowExpectedError[incompatible-call]
 (int.count("weekYear"): number);
-// $ExpectError
+// $FlowExpectedError[incompatible-call]
 (int.count("weekYears"): number);
-// $ExpectError
+// $FlowExpectedError[incompatible-call]
 (int.count("weekday"): number);
-// $ExpectError
+// $FlowExpectedError[incompatible-call]
 (int.count("weekdays"): number);
-// $ExpectError
+// $FlowExpectedError[incompatible-call]
 (int.count("ordinal"): number);
 
 (int.difference(): Interval);
@@ -881,22 +875,22 @@ var int: Interval = Interval.invalid("test");
 (int.hasSame("milliseconds"): boolean);
 (int.hasSame("week"): boolean);
 (int.hasSame("weeks"): boolean);
-// $ExpectError
+// $FlowExpectedError[incompatible-call]
 (int.hasSame("wks"): boolean);
-// $ExpectError
-(int.hasSame("weekNumber"): number);
-// $ExpectError
-(int.hasSame("weekNumbers"): number);
-// $ExpectError
-(int.hasSame("weekYear"): number);
-// $ExpectError
-(int.hasSame("weekYears"): number);
-// $ExpectError
-(int.hasSame("weekday"): number);
-// $ExpectError
-(int.hasSame("weekdays"): number);
-// $ExpectError
-(int.hasSame("ordinal"): number);
+// $FlowExpectedError[incompatible-call]
+(int.hasSame("weekNumber"): boolean);
+// $FlowExpectedError[incompatible-call]
+(int.hasSame("weekNumbers"): boolean);
+// $FlowExpectedError[incompatible-call]
+(int.hasSame("weekYear"): boolean);
+// $FlowExpectedError[incompatible-call]
+(int.hasSame("weekYears"): boolean);
+// $FlowExpectedError[incompatible-call]
+(int.hasSame("weekday"): boolean);
+// $FlowExpectedError[incompatible-call]
+(int.hasSame("weekdays"): boolean);
+// $FlowExpectedError[incompatible-call]
+(int.hasSame("ordinal"): boolean);
 
 (int.inspect(): string);
 
@@ -922,21 +916,21 @@ var int: Interval = Interval.invalid("test");
 (int.length("milliseconds"): number);
 (int.length("week"): number);
 (int.length("weeks"): number);
-// $ExpectError
+// $FlowExpectedError[incompatible-call]
 (int.length("wks"): number);
-// $ExpectError
+// $FlowExpectedError[incompatible-call]
 (int.length("weekNumber"): number);
-// $ExpectError
+// $FlowExpectedError[incompatible-call]
 (int.length("weekNumbers"): number);
-// $ExpectError
+// $FlowExpectedError[incompatible-call]
 (int.length("weekYear"): number);
-// $ExpectError
+// $FlowExpectedError[incompatible-call]
 (int.length("weekYears"): number);
-// $ExpectError
+// $FlowExpectedError[incompatible-call]
 (int.length("weekday"): number);
-// $ExpectError
+// $FlowExpectedError[incompatible-call]
 (int.length("weekdays"): number);
-// $ExpectError
+// $FlowExpectedError[incompatible-call]
 (int.length("ordinal"): number);
 
 (int.overlaps(int): boolean);
@@ -944,7 +938,7 @@ var int: Interval = Interval.invalid("test");
 (int.set({ start: date }): Interval);
 (int.set({ end: date }): Interval);
 (int.set({ start: date, end: date }): Interval);
-// $ExpectError
+// $FlowExpectedError[prop-missing]
 (int.set({ foo: "bar" }): Interval);
 
 (int.splitAt(): Array<Interval>);
@@ -956,9 +950,9 @@ var int: Interval = Interval.invalid("test");
   conversionAccuracy: "longterm"
 }): Duration);
 (int.toDuration("year", { conversionAccuracy: "longterm" }): Duration);
-// $ExpectError
+// $FlowExpectedError[incompatible-call]
 (int.toDuration("year", { conversionAccuracy: "blah" }): Duration);
-// $ExpectError
+// $FlowExpectedError[prop-missing]
 (int.toDuration("year", { foo: "bar" }): Duration);
 
 (int.toISO(): string);
@@ -967,7 +961,7 @@ var int: Interval = Interval.invalid("test");
   suppressSeconds: true,
   includeOffset: true
 }): string);
-// $ExpectError
+// $FlowExpectedError[prop-missing]
 (int.toISO({
   suressMilliseconds: true,
   suppressSeconds: true,

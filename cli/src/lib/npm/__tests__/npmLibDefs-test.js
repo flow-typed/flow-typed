@@ -9,6 +9,7 @@ import {
   getNpmLibDefs,
   findNpmLibDef,
   getScopedPackageName,
+  parseSignedCodeVersion,
 } from '../npmLibDefs';
 
 import path from 'path';
@@ -462,6 +463,20 @@ describe('npmLibDefs', () => {
   describe('validateVersionPart', () => {
     it('returns "x" when given "x"', () => {
       expect(validateVersionPart('x', '')).toBe('x');
+    });
+  });
+
+  describe('parseSignedCodeVersion', function() {
+    it('works on bad stub version found in the wild', () => {
+      expect(
+        parseSignedCodeVersion(
+          '<<STUB>>/babel-plugin-transform-import-commonjs_vhttps://github.com/jedwards1211/babel-plugin-transform-import-commonjs#patch-1-built/flow_v0.59.0',
+        ),
+      ).toEqual({
+        kind: 'Stub',
+        name:
+          'babel-plugin-transform-import-commonjs_vhttps://github.com/jedwards1211/babel-plugin-transform-import-commonjs#patch-1-built/flow_v0.59.0',
+      });
     });
   });
 });

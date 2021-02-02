@@ -6,8 +6,8 @@ const a: string = decamelize('unicornRainbow');
 const b: string = decamelize('unicornRainbow', '-');
 //=> 'unicorn-rainbow'
 
-// $ExpectError
+// $FlowExpectedError
 decamelize(42);
 
-// $ExpectError
+// $FlowExpectedError
 (decamelize('unicornRainbow'): number);

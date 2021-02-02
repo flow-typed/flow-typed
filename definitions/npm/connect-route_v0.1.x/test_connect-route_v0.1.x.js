@@ -1,9 +1,9 @@
 import connectRoute from 'connect-route';
 
-// $ExpectError
+// $FlowExpectedError
 connectRoute('router');
 
 connectRoute((router) => {
-  // $ExpectError
+  // $FlowExpectedError
   router.get(2);
 });

@@ -3,21 +3,21 @@ import Slider from "react-slick";
 
 class BadSlick1 extends Component<*> {
   render() {
-    // $ExpectError
+    // $FlowExpectedError
     return <Slider initialSlide="1" />;
   }
 }
 
 class BadSlick2 extends Component<*> {
   render() {
-    // $ExpectError
+    // $FlowExpectedError
     return <Slider slidesToShow="2" />;
   }
 }
 
 class BadSlick3 extends Component<*> {
   render() {
-    // $ExpectError
+    // $FlowExpectedError
     return <Slider afterChange={(currSlide: string) => console.log(currSlide)} />;
   }
 }

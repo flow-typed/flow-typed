@@ -41,59 +41,59 @@ describe('common part', () => {
       AllGestureHandlers.forEach(GestureHandler => {
         <GestureHandler
           onGestureEvent={event => {
-            // $ExpectError: event exact type
+            // $FlowExpectedError: event exact type
             event.nativeEvent.murAmur = 'test exact';
-            // $ExpectError: event props readonly
+            // $FlowExpectedError: event props readonly
             event.nativeEvent.state = 0;
-            // $ExpectError: event props readonly
+            // $FlowExpectedError: event props readonly
             event.nativeEvent = {};
           }}
           onHandlerStateChange={event => {
-            // $ExpectError: event exact type
+            // $FlowExpectedError: event exact type
             event.nativeEvent.murAmur = 'test exact';
-            // $ExpectError: event props readonly
+            // $FlowExpectedError: event props readonly
             event.nativeEvent.state = 0;
-            // $ExpectError: event props readonly
+            // $FlowExpectedError: event props readonly
             event.nativeEvent = {};
           }}
           onBegan={event => {
-            // $ExpectError: event exact type
+            // $FlowExpectedError: event exact type
             event.nativeEvent.murAmur = 'test exact';
-            // $ExpectError: event props readonly
+            // $FlowExpectedError: event props readonly
             event.nativeEvent.state = 0;
-            // $ExpectError: event props readonly
+            // $FlowExpectedError: event props readonly
             event.nativeEvent = {};
           }}
           onFailed={event => {
-            // $ExpectError: event exact type
+            // $FlowExpectedError: event exact type
             event.nativeEvent.murAmur = 'test exact';
-            // $ExpectError: event props readonly
+            // $FlowExpectedError: event props readonly
             event.nativeEvent.state = 0;
-            // $ExpectError: event props readonly
+            // $FlowExpectedError: event props readonly
             event.nativeEvent = {};
           }}
           onCancelled={event => {
-            // $ExpectError: event exact type
+            // $FlowExpectedError: event exact type
             event.nativeEvent.murAmur = 'test exact';
-            // $ExpectError: event props readonly
+            // $FlowExpectedError: event props readonly
             event.nativeEvent.state = 0;
-            // $ExpectError: event props readonly
+            // $FlowExpectedError: event props readonly
             event.nativeEvent = {};
           }}
           onActivated={event => {
-            // $ExpectError: event exact type
+            // $FlowExpectedError: event exact type
             event.nativeEvent.murAmur = 'test exact';
-            // $ExpectError: event props readonly
+            // $FlowExpectedError: event props readonly
             event.nativeEvent.state = 0;
-            // $ExpectError: event props readonly
+            // $FlowExpectedError: event props readonly
             event.nativeEvent = {};
           }}
           onEnded={event => {
-            // $ExpectError: event exact type
+            // $FlowExpectedError: event exact type
             event.nativeEvent.murAmur = 'test exact';
-            // $ExpectError: event props readonly
+            // $FlowExpectedError: event props readonly
             event.nativeEvent.state = 0;
-            // $ExpectError: event props readonly
+            // $FlowExpectedError: event props readonly
             event.nativeEvent = {};
           }}
         />;
@@ -133,11 +133,11 @@ describe('common part', () => {
     it('should raises an error when pass incompatible types', () => {
       AllGestureHandlers.forEach(GestureHandler => {
         <GestureHandler
-          // $ExpectError: need string
+          // $FlowExpectedError: need string
           id={11}
-          // $ExpectError: need boolean
+          // $FlowExpectedError: need boolean
           enabled={'true'}
-          // $ExpectError: `murAmur` is missing
+          // $FlowExpectedError: `murAmur` is missing
           hitSlop={{
             murAmur: 10,
           }}
@@ -171,13 +171,13 @@ describe('FlingGestureHandler', () => {
     it('should raises an error when use incompatible type', () => {
       <FlingGestureHandler
         onGestureEvent={event => {
-          // $ExpectError - this property have number type
+          // $FlowExpectedError - this property have number type
           (event.nativeEvent.x: string);
-          // $ExpectError - this property have number type
+          // $FlowExpectedError - this property have number type
           (event.nativeEvent.y: string);
-          // $ExpectError - this property have number type
+          // $FlowExpectedError - this property have number type
           (event.nativeEvent.absoluteX: string);
-          // $ExpectError - this property have number type
+          // $FlowExpectedError - this property have number type
           (event.nativeEvent.absoluteY: string);
         }}
       />;
@@ -186,7 +186,7 @@ describe('FlingGestureHandler', () => {
     it('should raises an error when use missing prop', () => {
       <FlingGestureHandler
         onGestureEvent={event => {
-          // $ExpectError - missing prop
+          // $FlowExpectedError - missing prop
           var a = event.nativeEvent.forceShmorse;
         }}
       />;
@@ -199,9 +199,9 @@ describe('FlingGestureHandler', () => {
 
   it('should raises an error when use incompatible values for additional props', () => {
     <FlingGestureHandler
-      // $ExpectError: need number
+      // $FlowExpectedError: need number
       numberOfPointers={'2'}
-      // $ExpectError: need number
+      // $FlowExpectedError: need number
       direction={true}
     />;
   });
@@ -220,7 +220,7 @@ describe('ForceTouchGestureHandler', () => {
     it('should raises an error when use incompatible type', () => {
       <ForceTouchGestureHandler
         onGestureEvent={event => {
-          // $ExpectError - this property have number type
+          // $FlowExpectedError - this property have number type
           (event.nativeEvent.force: string);
         }}
       />;
@@ -229,7 +229,7 @@ describe('ForceTouchGestureHandler', () => {
     it('should raises an error when use missing prop', () => {
       <ForceTouchGestureHandler
         onGestureEvent={event => {
-          // $ExpectError - missing prop
+          // $FlowExpectedError - missing prop
           var a = event.nativeEvent.absoluteY;
         }}
       />;
@@ -250,17 +250,17 @@ describe('ForceTouchGestureHandler', () => {
 
   it('should raises an error when use incompatible values for additional props', () => {
     <ForceTouchGestureHandler
-      // $ExpectError: need number
+      // $FlowExpectedError: need number
       minForce={'1'}
-      // $ExpectError: need number
+      // $FlowExpectedError: need number
       maxForce={true}
-      // $ExpectError: need boolean
+      // $FlowExpectedError: need boolean
       feedbackOnActivation={'false'}
     />;
   });
 
   it('should raises an error when pass missing props', () => {
-    // $ExpectError: missing props in exact type
+    // $FlowExpectedError: missing props in exact type
     <ForceTouchGestureHandler numberOfPointers={'2'} direction={true} />;
   });
 });
@@ -281,13 +281,13 @@ describe('LongPressGestureHandler', () => {
     it('should raises an error when use incompatible type', () => {
       <LongPressGestureHandler
         onGestureEvent={event => {
-          // $ExpectError - this property have number type
+          // $FlowExpectedError - this property have number type
           (event.nativeEvent.x: string);
-          // $ExpectError - this property have number type
+          // $FlowExpectedError - this property have number type
           (event.nativeEvent.y: string);
-          // $ExpectError - this property have number type
+          // $FlowExpectedError - this property have number type
           (event.nativeEvent.absoluteX: string);
-          // $ExpectError - this property have number type
+          // $FlowExpectedError - this property have number type
           (event.nativeEvent.absoluteY: string);
         }}
       />;
@@ -296,7 +296,7 @@ describe('LongPressGestureHandler', () => {
     it('should raises an error when use missing prop', () => {
       <LongPressGestureHandler
         onGestureEvent={event => {
-          // $ExpectError - missing prop
+          // $FlowExpectedError - missing prop
           var a = event.nativeEvent.forceShmorse;
         }}
       />;
@@ -309,15 +309,15 @@ describe('LongPressGestureHandler', () => {
 
   it('should raises an error when use incompatible values for additional props', () => {
     <LongPressGestureHandler
-      // $ExpectError: need number
+      // $FlowExpectedError: need number
       minDurationMs={'1'}
-      // $ExpectError: need number
+      // $FlowExpectedError: need number
       maxDist={[1]}
     />;
   });
 
   it('should raises an error when pass missing props', () => {
-    // $ExpectError: missing props in exact type
+    // $FlowExpectedError: missing props in exact type
     <LongPressGestureHandler
       minForce={'1'}
       maxForce={true}
@@ -346,21 +346,21 @@ describe('PanGestureHandler', () => {
     it('should raises an error when use incompatible type', () => {
       <PanGestureHandler
         onGestureEvent={event => {
-          // $ExpectError - this property have number type
+          // $FlowExpectedError - this property have number type
           (event.nativeEvent.x: boolean);
-          // $ExpectError - this property have number type
+          // $FlowExpectedError - this property have number type
           (event.nativeEvent.y: boolean);
-          // $ExpectError - this property have number type
+          // $FlowExpectedError - this property have number type
           (event.nativeEvent.absoluteX: boolean);
-          // $ExpectError - this property have number type
+          // $FlowExpectedError - this property have number type
           (event.nativeEvent.absoluteY: boolean);
-          // $ExpectError - this property have number type
+          // $FlowExpectedError - this property have number type
           (event.nativeEvent.translationX: boolean);
-          // $ExpectError - this property have number type
+          // $FlowExpectedError - this property have number type
           (event.nativeEvent.translationY: boolean);
-          // $ExpectError - this property have number type
+          // $FlowExpectedError - this property have number type
           (event.nativeEvent.velocityX: boolean);
-          // $ExpectError - this property have number type
+          // $FlowExpectedError - this property have number type
           (event.nativeEvent.velocityY: boolean);
         }}
       />;
@@ -369,7 +369,7 @@ describe('PanGestureHandler', () => {
     it('should raises an error when use missing prop', () => {
       <PanGestureHandler
         onGestureEvent={event => {
-          // $ExpectError - missing prop
+          // $FlowExpectedError - missing prop
           var a = event.nativeEvent.forceShmorse;
         }}
       />;
@@ -401,19 +401,19 @@ describe('PanGestureHandler', () => {
 
   it('should raises an error when use array with more then two elements', () => {
     <PanGestureHandler
-      // $ExpectError: need tuple [number, number]
+      // $FlowExpectedError: need tuple [number, number]
       activeOffsetY={[1, 2, 3]}
-      // $ExpectError: need tuple [number, number]
+      // $FlowExpectedError: need tuple [number, number]
       activeOffsetX={[1, 2, 3]}
-      // $ExpectError: need tuple [number, number]
+      // $FlowExpectedError: need tuple [number, number]
       failOffsetY={[1, 2, 3]}
-      // $ExpectError: need tuple [number, number]
+      // $FlowExpectedError: need tuple [number, number]
       failOffsetX={[1, 2, 3]}
     />;
   });
 
   it('should raises an error when pass missing props', () => {
-    // $ExpectError: missing props in exact type
+    // $FlowExpectedError: missing props in exact type
     <PanGestureHandler minDurationMs={'1'} maxDist={[1]} />;
   });
 });
@@ -434,13 +434,13 @@ describe('PinchGestureHandler', () => {
     it('should raises an error when use incompatible type', () => {
       <PinchGestureHandler
         onGestureEvent={event => {
-          // $ExpectError - this property have number type
+          // $FlowExpectedError - this property have number type
           (event.nativeEvent.scale: Array<any>);
-          // $ExpectError - this property have number type
+          // $FlowExpectedError - this property have number type
           (event.nativeEvent.focalX: Array<any>);
-          // $ExpectError - this property have number type
+          // $FlowExpectedError - this property have number type
           (event.nativeEvent.focalY: Array<any>);
-          // $ExpectError - this property have number type
+          // $FlowExpectedError - this property have number type
           (event.nativeEvent.velocity: Array<any>);
         }}
       />;
@@ -449,7 +449,7 @@ describe('PinchGestureHandler', () => {
     it('should raises an error when use missing prop', () => {
       <PinchGestureHandler
         onGestureEvent={event => {
-          // $ExpectError - missing prop
+          // $FlowExpectedError - missing prop
           var a = event.nativeEvent.x;
         }}
       />;
@@ -473,13 +473,13 @@ describe('RotationGestureHandler', () => {
     it('should raises an error when use incompatible type', () => {
       <RotationGestureHandler
         onGestureEvent={event => {
-          // $ExpectError - this property have number type
+          // $FlowExpectedError - this property have number type
           (event.nativeEvent.rotation: string);
-          // $ExpectError - this property have number type
+          // $FlowExpectedError - this property have number type
           (event.nativeEvent.anchorX: string);
-          // $ExpectError - this property have number type
+          // $FlowExpectedError - this property have number type
           (event.nativeEvent.anchorY: string);
-          // $ExpectError - this property have number type
+          // $FlowExpectedError - this property have number type
           (event.nativeEvent.velocity: string);
         }}
       />;
@@ -488,7 +488,7 @@ describe('RotationGestureHandler', () => {
     it('should raises an error when use missing prop', () => {
       <RotationGestureHandler
         onGestureEvent={event => {
-          // $ExpectError - missing prop
+          // $FlowExpectedError - missing prop
           var a = event.nativeEvent.x;
         }}
       />;
@@ -512,13 +512,13 @@ describe('TapGestureHandler', () => {
     it('should raises an error when use incompatible type', () => {
       <TapGestureHandler
         onGestureEvent={event => {
-          // $ExpectError - this property have number type
+          // $FlowExpectedError - this property have number type
           (event.nativeEvent.x: string);
-          // $ExpectError - this property have number type
+          // $FlowExpectedError - this property have number type
           (event.nativeEvent.y: string);
-          // $ExpectError - this property have number type
+          // $FlowExpectedError - this property have number type
           (event.nativeEvent.absoluteX: string);
-          // $ExpectError - this property have number type
+          // $FlowExpectedError - this property have number type
           (event.nativeEvent.absoluteY: string);
         }}
       />;
@@ -527,7 +527,7 @@ describe('TapGestureHandler', () => {
     it('should raises an error when use missing prop', () => {
       <TapGestureHandler
         onGestureEvent={event => {
-          // $ExpectError - missing prop
+          // $FlowExpectedError - missing prop
           var a = event.nativeEvent.forceShmorse;
         }}
       />;
@@ -548,25 +548,25 @@ describe('TapGestureHandler', () => {
 
   it('should raises an error when use array with more then two elements', () => {
     <TapGestureHandler
-      // $ExpectError: need number
+      // $FlowExpectedError: need number
       maxDurationMs={'ups...'}
-      // $ExpectError: need number
+      // $FlowExpectedError: need number
       maxDelayMs={'ups...'}
-      // $ExpectError: need number
+      // $FlowExpectedError: need number
       numberOfTaps={'ups...'}
-      // $ExpectError: need number
+      // $FlowExpectedError: need number
       maxDeltaX={'ups...'}
-      // $ExpectError: need number
+      // $FlowExpectedError: need number
       maxDeltaY={'ups...'}
-      // $ExpectError: need number
+      // $FlowExpectedError: need number
       maxDist={'ups...'}
-      // $ExpectError: need number
+      // $FlowExpectedError: need number
       minPointers={'ups...'}
     />;
   });
 
   it('should raises an error when pass missing props', () => {
-    // $ExpectError: missing props in exact type
+    // $FlowExpectedError: missing props in exact type
     <TapGestureHandler
       activeOffsetY={[1, 2]}
       activeOffsetX={[1, 2]}

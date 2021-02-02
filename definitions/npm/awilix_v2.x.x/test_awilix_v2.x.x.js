@@ -5,13 +5,13 @@ const awilix = require("awilix");
 function emptyContainer() {
   const container = awilix.createContainer();
 
-  // $ExpectError
+  // $FlowExpectedError
   container.cradle.foo = "bar";
 }
 
 function containerOptions() {
   awilix.createContainer({});
-  // $ExpectError
+  // $FlowExpectedError
   awilix.createContainer({
     name: "test"
   });
@@ -58,7 +58,7 @@ function register() {
     );
   }
 
-  // $ExpectError
+  // $FlowExpectedError
   container.cradle.foo = "baz";
 
   container = container.register({
@@ -67,7 +67,7 @@ function register() {
 
   container.cradle.foo = "baz";
 
-  // $ExpectError
+  // $FlowExpectedError
   container.cradle.num += 123;
 
   container = container.register({
@@ -76,7 +76,7 @@ function register() {
 
   container.cradle.num += 123;
 
-  // $ExpectError
+  // $FlowExpectedError
   container.cradle.nested.object.is.deeply.nested = 1;
 
   container = container.register({
@@ -94,12 +94,12 @@ function register() {
 
   container.cradle.nested.object.is.deeply.nested++;
 
-  // $ExpectError
+  // $FlowExpectedError
   container.cradle.nested.object.is.deeply.nestedString++;
 
   let aBool: boolean = true;
 
-  // $ExpectError
+  // $FlowExpectedError
   aBool = container.cradle.another;
 
   container = container.register({ another: asValue(true) });
@@ -119,7 +119,7 @@ function registerClass() {
 
   let test: TestOne;
 
-  // $ExpectError
+  // $FlowExpectedError
   test = container.cradle.TestOne;
 
   container = container.registerClass(TestOne);
@@ -128,7 +128,7 @@ function registerClass() {
 
   let test2: TestTwo;
 
-  // $ExpectError
+  // $FlowExpectedError
   test2 = container.cradle.TestTwo;
 
   container = container.registerClass("TestDos", TestTwo);
@@ -141,7 +141,7 @@ function registerClass() {
 
   let test3: TestThree;
 
-  // $ExpectError
+  // $FlowExpectedError
   test3 = container.cradle.TestThree;
 
   container = container.registerClass([TestThree, {}]);
@@ -155,7 +155,7 @@ function registerFunction() {
 
   let test: boolean;
 
-  // $ExpectError
+  // $FlowExpectedError
   test = container.cradle.boo;
 
   function boo() {
@@ -165,19 +165,19 @@ function registerFunction() {
   container = container.registerFunction(boo);
 
   let test1: number = container.cradle.boo;
-  // $ExpectError
+  // $FlowExpectedError
   let test2: boolean = container.cradle.boo;
 
   container = container.registerFunction("boo2", boo);
 
   test1 = container.cradle.boo2;
-  // $ExpectError
+  // $FlowExpectedError
   test2 = container.cradle.boo2;
 
   container = container.registerFunction("boo3", boo);
 
   test1 = container.cradle.boo3;
-  // $ExpectError
+  // $FlowExpectedError
   test2 = container.cradle.boo3;
 
   container = container.registerFunction({
@@ -185,7 +185,7 @@ function registerFunction() {
   });
 
   test1 = container.cradle.boo4;
-  // $ExpectError
+  // $FlowExpectedError
   test2 = container.cradle.boo4;
 }
 
@@ -193,14 +193,14 @@ function registerValue() {
   let container = awilix.createContainer();
   container = container.registerValue("foo", "bar");
 
-  // $ExpectError
+  // $FlowExpectedError
   let a: boolean = container.cradle.foo;
 
   let b: "bar" = container.cradle.foo;
 
   container = container.registerValue({ foo2: "bar2" });
 
-  // $ExpectError
+  // $FlowExpectedError
   a = container.cradle.foo2;
 
   let b2: "bar2" = container.cradle.foo2;
@@ -223,17 +223,17 @@ function resolve() {
   });
 
   let foo: "bar" = container.cradle.foo;
-  // $ExpectError
+  // $FlowExpectedError
   let foo2: "bar2" = container.cradle.foo;
   let inst: FooClass = container.cradle.inst;
-  // $ExpectError
+  // $FlowExpectedError
   let inst2: Class<FooClass> = container.cradle.inst;
   let fn2: 123 = container.cradle.fn;
-  // $ExpectError
+  // $FlowExpectedError
   let fn3: 122 = container.cradle.fn;
 
   let fn4: 123 = container.resolve("fn");
-  // $ExpectError
+  // $FlowExpectedError
   let fn5: 124 = container.resolve("fn");
 }
 
@@ -243,10 +243,10 @@ function build() {
 
   let t: true = container.build(() => true);
 
-  // $ExpectError
+  // $FlowExpectedError
   let f: true = container.build(() => false);
 
-  // $ExpectError
+  // $FlowExpectedError
   t = container.build(true);
 
   class Foo {}

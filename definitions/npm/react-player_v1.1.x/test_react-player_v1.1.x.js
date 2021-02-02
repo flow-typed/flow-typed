@@ -3,21 +3,21 @@ import Player from "react-player";
 
 class BadPlayer1 extends Component<*> {
   render() {
-    // $ExpectError
+    // $FlowExpectedError
     return <Player url={10} />;
   }
 }
 
 class BadPlayer2 extends Component<*> {
   render() {
-    // $ExpectError
+    // $FlowExpectedError
     return <Player url="youtube.com/..." playing={"true"} />;
   }
 }
 
 class BadPlayer3 extends Component<*> {
   render() {
-    // $ExpectError
+    // $FlowExpectedError
     return <Player url="youtube.com/..." playing style="margin: 0;" />;
   }
 }

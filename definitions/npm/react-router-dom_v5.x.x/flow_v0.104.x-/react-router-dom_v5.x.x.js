@@ -15,39 +15,42 @@ declare module "react-router-dom" {
   |}>
 
   declare export var Link: React$ComponentType<{
-    className?: string,
-    to: string | LocationShape,
-    replace?: boolean,
-    children?: React$Node,
+    +className?: string,
+    +to: string | LocationShape,
+    +replace?: boolean,
+    +children?: React$Node,
     ...
   }>
 
   declare export var NavLink: React$ComponentType<{
-    to: string | LocationShape,
-    activeClassName?: string,
-    className?: string,
-    activeStyle?: { +[string]: mixed, ... },
-    style?: { +[string]: mixed, ... },
-    isActive?: (match: Match, location: Location) => boolean,
-    children?: React$Node,
-    exact?: boolean,
-    strict?: boolean,
+    +to: string | LocationShape,
+    +activeClassName?: string,
+    +className?: string,
+    +activeStyle?: { +[string]: mixed, ... },
+    +style?: { +[string]: mixed, ... },
+    +isActive?: (match: Match, location: Location) => boolean,
+    +children?: React$Node,
+    +exact?: boolean,
+    +strict?: boolean,
     ...
   }>
 
   // NOTE: Below are duplicated from react-router. If updating these, please
   // update the react-router and react-router-native types as well.
-  declare export type Location = {
+  declare export type Location = $ReadOnly<{
     pathname: string,
     search: string,
     hash: string,
+    state?: any,
+    key?: string,
     ...
-  };
+  }>;
 
   declare export type LocationShape = {
     pathname?: string,
     search?: string,
     hash?: string,
+    state?: any,
     ...
   };
 

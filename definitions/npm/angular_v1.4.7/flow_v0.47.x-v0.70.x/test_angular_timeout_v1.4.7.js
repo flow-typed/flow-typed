@@ -6,15 +6,15 @@ function testTimeout($timeout: $Timeout) {
   $timeout();
   //first argument is a function
   $timeout(() => {});
-  //$ExpectError takes in only function as first argument
+  //$FlowExpectedError takes in only function as first argument
   $timeout(123);
   //second argument is number
   $timeout(() => {}, 123);
-  //$ExpectError takes in only number as second argument
+  //$FlowExpectedError takes in only number as second argument
   $timeout(() => {}, "123");
   //third argument is boolean
   $timeout(() => {}, 123, true);
-  //$ExpectError takes in only number as third argument
+  //$FlowExpectedError takes in only number as third argument
   $timeout(() => {}, 123, "text");
   //fourth argument can be anything
   $timeout(() => {}, 123, true, 123);

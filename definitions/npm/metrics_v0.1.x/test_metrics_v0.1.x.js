@@ -12,7 +12,7 @@ import type { Metric } from 'metrics';
 const meter: Meter = new Meter();
 meter.mark();
 meter.mark(3);
-// $ExpectError wrong argument type
+// $FlowExpectedError wrong argument type
 meter.mark('hello');
 const printed = meter.printObj();
 
@@ -21,7 +21,7 @@ declare var metric: Metric;
 switch (metric.type) {
   case 'meter': {
     (metric: Meter);
-    // $ExpectError
+    // $FlowExpectedError
     (metric: Histogram);
     break;
   }
@@ -35,7 +35,7 @@ switch (metric.type) {
   }
   case 'histogram': {
     (metric: Histogram);
-    // $ExpectError
+    // $FlowExpectedError
     (metric: Counter);
     break;
   }

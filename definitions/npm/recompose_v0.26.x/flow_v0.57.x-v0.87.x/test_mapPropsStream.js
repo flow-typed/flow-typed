@@ -17,7 +17,7 @@ const Comp = ({ a }) => (
   <div>
     {(a: string)}
     {
-      // $ExpectError
+      // $FlowExpectedError
       (a: number)
     }
   </div>
@@ -32,7 +32,7 @@ const enhacer: HOC<*, EnhancedCompProps> = compose(
   // but because of this https://github.com/facebook/flow/issues/4342
   withProps(props => ({
     a: (props.a: string),
-    // $ExpectError but not
+    // $FlowExpectedError but not
     e: Math.round(props.a)
   }))
 );

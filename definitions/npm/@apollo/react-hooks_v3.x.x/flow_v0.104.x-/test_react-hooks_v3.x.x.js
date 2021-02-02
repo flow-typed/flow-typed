@@ -52,7 +52,7 @@ describe('useQuery hook', () => {
   it('handles data correctly', () => {
     if (data) {
       const a: string = data.a;
-      // $ExpectError
+      // $FlowExpectedError
       const b: number = data.b;
     }
   });
@@ -60,7 +60,7 @@ describe('useQuery hook', () => {
     if (error) {
       (error.message: string);
       (error.graphQLErrors: Array<any>);
-      // $ExpectError
+      // $FlowExpectedError
       (error.graphQLErrors: string);
       (error.networkError: Error | null);
       const extraInfo = error.extraInfo;
@@ -68,7 +68,7 @@ describe('useQuery hook', () => {
   });
   it('handles error state correctly', () => {
     (loading: boolean);
-    // $ExpectError
+    // $FlowExpectedError
     (loading: string);
   });
 });
@@ -87,36 +87,36 @@ describe('useMutation hook', () => {
   it('handles data correctly', () => {
     if (data) {
       const a: string = data.a;
-      // $ExpectError
+      // $FlowExpectedError
       const b: number = data.b;
     }
   });
   it('handles variables correctly', async () => {
+    // $FlowExpectedError
     const mutationResult = await mutation({
       variables: {
-        c: 'test'
-      }
+        c: 'test',
+      },
     });
     if (mutationResult.data) {
       (mutationResult.data.a: string);
       (mutationResult.data.b: string);
-      // $ExpectError
       (mutationResult.data.b: number);
     }
-    // $ExpectError
+    // $FlowExpectedError
     mutation('', {});
-    // $ExpectError
+    // $FlowExpectedError
     mutation('', {
       variables: {
-        c: 5
-      }
+        c: 5,
+      },
     });
   });
   it('handles loading state correctly', () => {
     if (error) {
       (error.message: string);
       (error.graphQLErrors: Array<any>);
-      // $ExpectError
+      // $FlowExpectedError
       (error.graphQLErrors: string);
       (error.networkError: Error | null);
       const extraInfo = error.extraInfo;
@@ -124,7 +124,20 @@ describe('useMutation hook', () => {
   });
   it('handles error state correctly', () => {
     (loading: boolean);
-    // $ExpectError
+    // $FlowExpectedError
     (loading: string);
   });
+  it('can manually update the cache after a mutation using update on the mutation function', async () => {
+    const mutationResult = await mutation({
+      variables: {
+        c: 'test'
+      },
+      update: cache => {
+        cache.readQuery({ query: 'test' })
+        cache.readQuery<string, number>({ query: 'test' })
+        // $FlowExpectedError
+        cache.readQuery<string>({ query: 'test' })
+      }
+    });
+  })
 });

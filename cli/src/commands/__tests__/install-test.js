@@ -18,7 +18,7 @@ import {
   setLocalConfig as gitConfig,
 } from '../../lib/git';
 
-import {fs, path} from '../../lib/node';
+import {fs, path, child_process} from '../../lib/node';
 
 import {getNpmLibDefs} from '../../lib/npm/npmLibDefs';
 
@@ -42,7 +42,7 @@ async function touchFile(filePath) {
 }
 
 async function writePkgJson(filePath, pkgJson) {
-  await fs.writeFile(filePath, JSON.stringify(pkgJson));
+  await fs.writeJson(filePath, pkgJson);
 }
 
 describe('install (command)', () => {
@@ -344,6 +344,85 @@ describe('install (command)', () => {
         ).toEqual([true, true]);
 
         // Signs installed libdefs
+        const fooLibDefContents = await fs.readFile(
+          path.join(FLOWPROJ_DIR, 'flow-typed', 'npm', 'foo_v1.x.x.js'),
+          'utf8',
+        );
+        expect(fooLibDefContents).toContain('// flow-typed signature: ');
+        expect(fooLibDefContents).toContain('// flow-typed version: ');
+      });
+    });
+
+    it('installs available libdefs using PnP', () => {
+      return fakeProjectEnv(async FLOWPROJ_DIR => {
+        // Create some dependencies
+        await Promise.all([
+          touchFile(path.join(FLOWPROJ_DIR, '.flowconfig')),
+          writePkgJson(path.join(FLOWPROJ_DIR, 'package.json'), {
+            name: 'test',
+            installConfig: {
+              pnp: true,
+            },
+            devDependencies: {
+              'flow-bin': '^0.43.0',
+            },
+            dependencies: {
+              // Use local foo for initial install
+              foo: 'file:./foo',
+            },
+          }),
+          mkdirp(path.join(FLOWPROJ_DIR, 'foo')),
+        ]);
+
+        await writePkgJson(path.join(FLOWPROJ_DIR, 'foo/package.json'), {
+          name: 'foo',
+          version: '1.2.3',
+        });
+
+        // Yarn install so PnP file resolves to local foo
+        await child_process.execP('yarn install', {cwd: FLOWPROJ_DIR});
+
+        // Overwrite foo dep so it's like we installed from registry instead
+        writePkgJson(path.join(FLOWPROJ_DIR, 'package.json'), {
+          name: 'test',
+          installConfig: {
+            pnp: true,
+          },
+          devDependencies: {
+            'flow-bin': '^0.43.0',
+          },
+          dependencies: {
+            foo: '1.2.3',
+          },
+        });
+
+        // Run the install command
+        await run({
+          overwrite: false,
+          verbose: false,
+          skip: false,
+          ignoreDeps: [],
+          explicitLibDefs: [],
+        });
+
+        // Installs libdefs
+        expect(
+          await Promise.all([
+            fs.exists(
+              path.join(
+                FLOWPROJ_DIR,
+                'flow-typed',
+                'npm',
+                'flow-bin_v0.x.x.js',
+              ),
+            ),
+            fs.exists(
+              path.join(FLOWPROJ_DIR, 'flow-typed', 'npm', 'foo_v1.x.x.js'),
+            ),
+          ]),
+        ).toEqual([true, true]);
+
+        // Signs installed libdefs
         const fooLibDefRawContents = await fs.readFile(
           path.join(FLOWPROJ_DIR, 'flow-typed', 'npm', 'foo_v1.x.x.js'),
         );
@@ -565,7 +644,7 @@ describe('install (command)', () => {
 
         // Tweak the libdef for foo
         const libdefFileContent =
-          (await fs.readFile(libdefFilePath)).toString() + '\n// TWEAKED!';
+          (await fs.readFile(libdefFilePath, 'utf8')) + '\n// TWEAKED!';
         await fs.writeFile(libdefFilePath, libdefFileContent);
 
         // Run install command again
@@ -577,7 +656,7 @@ describe('install (command)', () => {
         });
 
         // Verify that the tweaked libdef file wasn't overwritten
-        expect(await (await fs.readFile(libdefFilePath)).toString()).toBe(
+        expect(await fs.readFile(libdefFilePath, 'utf8')).toBe(
           libdefFileContent,
         );
       });
@@ -617,8 +696,7 @@ describe('install (command)', () => {
         );
 
         // Tweak the libdef for foo
-        const libdefFileRawContent = await fs.readFile(libdefFilePath);
-        const libdefFileContent = libdefFileRawContent.toString();
+        const libdefFileContent = await fs.readFile(libdefFilePath, 'utf8');
         await fs.writeFile(libdefFilePath, libdefFileContent + '\n// TWEAKED!');
 
         // Run install command again
@@ -630,7 +708,7 @@ describe('install (command)', () => {
         });
 
         // Verify that the tweaked libdef file wasn't overwritten
-        expect(await (await fs.readFile(libdefFilePath)).toString()).toBe(
+        expect(await fs.readFile(libdefFilePath, 'utf8')).toBe(
           libdefFileContent,
         );
       });

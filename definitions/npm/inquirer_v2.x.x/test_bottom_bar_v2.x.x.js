@@ -2,7 +2,7 @@
 
 var BottomBar = require('inquirer').ui.BottomBar;
 
-// $ExpectError
+// $FlowExpectedError
 var cmdify = require('cmdify');
 
 var loader = [

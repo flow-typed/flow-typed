@@ -46,10 +46,10 @@ describe('#universalRouter', () => {
               path: '/:username',
               name: 'user',
               action(context, params) {
-                // $ExpectError
+                // $FlowExpectedError
                 const url: number = context.baseUrl;
                 const pathname: string = context.pathname;
-                // $ExpectError
+                // $FlowExpectedError
                 const search: number = context.search;
                 const username = ((params.username: any): string);
 
@@ -93,13 +93,13 @@ describe('#universalRouter', () => {
       search: '?foo=bar',
     });
 
-    // $ExpectError
+    // $FlowExpectedError
     const wrongResult: Promise<string> = router.resolve('/');
 
     const router2 = new UniversalRouter<>([
       {
         async action(context) {
-          // $ExpectError
+          // $FlowExpectedError
           const url: number = context.baseUrl;
 
           const child = await context.next();
@@ -149,10 +149,10 @@ describe('#universalRouter', () => {
               path: '/:username',
               name: 'user',
               action(context, params) {
-                // $ExpectError
+                // $FlowExpectedError
                 const url: number = context.baseUrl;
                 const pathname: string = context.pathname;
-                // $ExpectError
+                // $FlowExpectedError
                 const search: number = context.search;
                 const username = ((params.username: any): string);
 
@@ -196,13 +196,13 @@ describe('#universalRouter', () => {
       search: '?foo=bar',
     });
 
-    // $ExpectError
+    // $FlowExpectedError
     const wrongResultSync: string = routerSync.resolve('/');
 
     const routerSync2 = new UniversalRouterSync<>([
       {
         action(context) {
-          // $ExpectError
+          // $FlowExpectedError
           const url: number = context.baseUrl;
 
           return context.next();
@@ -252,7 +252,7 @@ describe('#universalRouter', () => {
     const path = generateUrls(router);
 
     const resultPath1: string = path('home'); // => '/base'
-    // $ExpectError
+    // $FlowExpectedError
     const resultPath2: number = path('users'); // => '/base/users'
 
     const options = {
@@ -264,11 +264,11 @@ describe('#universalRouter', () => {
       },
     };
 
-    // $ExpectError
+    // $FlowExpectedError
     generateUrls();
-    // $ExpectError
+    // $FlowExpectedError
     generateUrls({});
-    // $ExpectError
+    // $FlowExpectedError
     generateUrls(router, { foo: 'bar' });
 
     const url = generateUrls(router, options);
@@ -279,7 +279,7 @@ describe('#universalRouter', () => {
       category: ['a', 'b'],
       title: 'c',
     }); // => '/base/blog/a/b/c'
-    // $ExpectError
+    // $FlowExpectedError
     const resultUrl4: number = url('home');
   });
 });

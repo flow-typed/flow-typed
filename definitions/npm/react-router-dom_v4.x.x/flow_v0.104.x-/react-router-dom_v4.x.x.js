@@ -15,23 +15,23 @@ declare module "react-router-dom" {
   |}>
 
   declare export var Link: React$ComponentType<{
-    className?: string,
-    to: string | LocationShape,
-    replace?: boolean,
-    children?: React$Node,
+    +className?: string,
+    +to: string | LocationShape,
+    +replace?: boolean,
+    +children?: React$Node,
     ...
   }>
 
   declare export var NavLink: React$ComponentType<{
-    to: string | LocationShape,
-    activeClassName?: string,
-    className?: string,
-    activeStyle?: Object,
-    style?: Object,
-    isActive?: (match: Match, location: Location) => boolean,
-    children?: React$Node,
-    exact?: boolean,
-    strict?: boolean,
+    +to: string | LocationShape,
+    +activeClassName?: string,
+    +className?: string,
+    +activeStyle?: Object,
+    +style?: Object,
+    +isActive?: (match: Match, location: Location) => boolean,
+    +children?: React$Node,
+    +exact?: boolean,
+    +strict?: boolean,
     ...
   }>
 

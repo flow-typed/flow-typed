@@ -13,7 +13,7 @@ execa('ls').then(res => {
   (res.code: number);
   (res.killed: boolean);
 });
-// $ExpectError
+// $FlowExpectedError
 execa('ls').then(res => res.foo);
 
 execa('foo').catch(err => {
@@ -21,12 +21,12 @@ execa('foo').catch(err => {
   (err.code: ?string);
   (err.errno: $PropertyType<ErrnoError, 'errno'>);
 });
-// $ExpectError
+// $FlowExpectedError
 execa('foo').catch(err => err.foo);
 
 (execa('ls').pid: number);
 execa('ls').stdout.pipe(process.stdout);
-// $ExpectError
+// $FlowExpectedError
 execa('ls').foo;
 
 execa('ls', { stderr: 'pipe' }).then(printStdout);
@@ -34,16 +34,16 @@ execa('ls', { stderr: 10 }).then(printStdout);
 execa('ls', { input: 'foobar' });
 execa('ls', { input: new Buffer('foobar') });
 execa('ls', { input: process.stdin });
-// $ExpectError
+// $FlowExpectedError
 execa('ls', { foo: 666 });
-// $ExpectError
+// $FlowExpectedError
 execa('ls', { input: 42 });
 
 execa('ls', ['-l']).then(printStdout, printErrno);
 execa('ls', ['-l'], { localDir: '~/' }).then(printStdout);
-// $ExpectError
+// $FlowExpectedError
 execa(['ls', '-l']).then(printStdout);
-// $ExpectError
+// $FlowExpectedError
 execa('ls').then(printErrno);
 
 (execa.stdout('ls'): Promise<string>);
@@ -51,9 +51,9 @@ execa.stdout('ls').then(stdout => stdout.toLowerCase());
 execa.stdout('ls', ['-l']).then(stdout => stdout.toLowerCase());
 execa.stdout('ls', { uid: 1000, gid: 100 }).then(stdout => stdout.toLowerCase());
 execa.stdout('ls', ['-l'], { timeout: 5 }).then(stdout => stdout.toLowerCase());
-// $ExpectError
+// $FlowExpectedError
 execa.stdout(['ls', '-l']);
-// $ExpectError
+// $FlowExpectedError
 execa.stdout('ls', { foo: 666 });
 
 (execa.stderr('ls'): Promise<string>);
@@ -61,38 +61,38 @@ execa.stderr('ls').then(stdout => stdout.toLowerCase());
 execa.stderr('ls', ['-l']).then(stdout => stdout.toLowerCase());
 execa.stderr('ls', { uid: 1000, gid: 100 }).then(stdout => stdout.toLowerCase());
 execa.stderr('ls', ['-l'], { timeout: 5 }).then(stdout => stdout.toLowerCase());
-// $ExpectError
+// $FlowExpectedError
 execa.stderr(['ls', '-l']);
-// $ExpectError
+// $FlowExpectedError
 execa.stderr('ls', { foo: 666 });
 
 (execa.shell('ls | wc -l'): ThenableChildProcess);
 execa.shell('ls | wc -l').then(printStdout, printErrno);
 execa.shell('ls | wc -l', { cwd: '/' }).then(printStdout);
 execa.shell('foo').catch(printErrno);
-// $ExpectError
+// $FlowExpectedError
 execa.shell(['ls', 'wc -l']);
-// $ExpectError
+// $FlowExpectedError
 execa.stderr('ls', 'wc -l', { foo: 666 });
 
 (execa.sync('ls'): SyncResult);
 (execa.sync('ls', ['-l']).stdout: string);
 (execa.sync('ls', { stderr: 'pipe' }).signal: ?string);
 (execa.sync('ls', ['-l'], { localDir: '~/' }).failed: boolean);
-// $ExpectError
+// $FlowExpectedError
 execa.sync(['ls']);
-// $ExpectError
+// $FlowExpectedError
 execa.stderr('ls', { foo: 666 });
-// $ExpectError
+// $FlowExpectedError
 execa.sync('ls').killed;
-// $ExpectError
+// $FlowExpectedError
 execa.sync('ls', { input: process.stdin });
 
 (execa.shellSync('ls | wc -l'): SyncResult);
 (execa.shellSync('ls | wc -l', { stderr: 'ignore' }).stdout: string);
-// $ExpectError
+// $FlowExpectedError
 execa.shellSync(['ls', 'wc -l']);
-// $ExpectError
+// $FlowExpectedError
 execa.shellSync('ls', { foo: 666 });
 
 async () => {

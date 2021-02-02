@@ -20,14 +20,14 @@ describe('The `storiesOf` function', () => {
   });
 
   it('should error on invalid options', () => {
-    // $ExpectError
+    // $FlowExpectedError
     storiesOf([], module);
-    // $ExpectError
+    // $FlowExpectedError
     storiesOf('', 123);
   });
 
   it('should error on invalid method call', () => {
-    // $ExpectError
+    // $FlowExpectedError
     storiesOf('', module).foo('', () => <div />);
   });
 });
@@ -50,9 +50,9 @@ describe('The `add` method', () => {
   });
 
   it('should error on invalid default usage', () => {
-    // $ExpectError
+    // $FlowExpectedError
     storiesOf('', module).add('', () => '');
-    // $ExpectError
+    // $FlowExpectedError
     storiesOf('', module).add('', () => null);
   });
 
@@ -65,7 +65,7 @@ describe('The `add` method', () => {
   });
 
   it('should error when unwrapping invalid arguments', () => {
-    // $ExpectError
+    // $FlowExpectedError
     storiesOf('', module).add('', ({ kind, story, foo }) => (
       <div>
         {kind} {story} {foo}

@@ -21,20 +21,20 @@ const i18n = { loadNamespaces: () => {} };
 
 <I18nextProvider i18n={i18n} children={<div />} />;
 
-// $ExpectError - missing children prop
+// $FlowExpectedError - missing children prop
 <I18nextProvider i18n={i18n} />;
-// $ExpectError - missing i18n prop
+// $FlowExpectedError - missing i18n prop
 <I18nextProvider children={<div />} />;
 
 // passing
 loadNamespaces({ components: [], i18n });
 loadNamespaces({ components: [() => <div />], i18n });
 
-// $ExpectError - too few arguments
+// $FlowExpectedError - too few arguments
 loadNamespaces();
-// $ExpectError - wrong type
+// $FlowExpectedError - wrong type
 loadNamespaces("");
-// $ExpectError - wrong component type
+// $FlowExpectedError - wrong component type
 loadNamespaces({ components: [{}], i18n });
 
 type OwnProps = { s: string, ... };
@@ -49,20 +49,20 @@ class ClassComp extends React.Component<Props> {
   }
 }
 
-// $ExpectError - wrong argument type
+// $FlowExpectedError - wrong argument type
 const FlowErrorComp = ({ s, t }: Props) => t("", "")
 
 class FlowErrorClassComp extends React.Component<Props> {
   render() {
     const { s, t } = this.props;
-    // $ExpectError - wrong argument type
+    // $FlowExpectedError - wrong argument type
     return <div prop={t({})} />; // misuse of t()
   }
 }
 
 // passing
 translate();
-// $ExpectError - wrong argument type
+// $FlowExpectedError - wrong argument type
 translate({});
 
 const translator: Translator<OwnProps, Props> = translate("");
@@ -71,9 +71,9 @@ const WrappedStatelessComp = translator(Comp);
 // passing
 <WrappedStatelessComp s="" />;
 
-// $ExpectError - missing prop "s"
+// $FlowExpectedError - missing prop "s"
 <WrappedStatelessComp />;
-// $ExpectError - wrong type
+// $FlowExpectedError - wrong type
 <WrappedStatelessComp s={1} />;
 
 const WrappedClassComp = translator(ClassComp);
@@ -81,9 +81,9 @@ const WrappedClassComp = translator(ClassComp);
 // passing
 <WrappedClassComp s="" />;
 
-// $ExpectError - missing prop "s"
+// $FlowExpectedError - missing prop "s"
 <WrappedClassComp />;
-// $ExpectError - wrong type
+// $FlowExpectedError - wrong type
 <WrappedClassComp s={1} />;
 
 // passing
@@ -103,7 +103,7 @@ const WrappedClassComp = translator(ClassComp);
       <button onClick={() => i18n.changeLanguage("en")}>en</button>
     </div>}
 </I18n>;
-// $ExpectError - no children passed to I18n component
+// $FlowExpectedError - no children passed to I18n component
 <I18n ns="translations" />;
 
 // passing
@@ -121,7 +121,7 @@ const WrappedClassComp = translator(ClassComp);
   useDangerouslySetInnerHTML={true}
 />;
 
-// $ExpectError - i18nKey prop wrong type
+// $FlowExpectedError - i18nKey prop wrong type
 <Interpolate i18nKey={1} />;
 
 // passing
@@ -129,13 +129,13 @@ const WrappedClassComp = translator(ClassComp);
 <Trans i18nKey="translation.key" count={5} />;
 <Trans i18nKey="translation.key" count={5} parent="div" i18n={i18n} />;
 
-// $ExpectError - i18nKey prop wrong type
+// $FlowExpectedError - i18nKey prop wrong type
 <Trans i18nKey={5} />;
 
 // passing
 reactI18nextModule.init(i18n);
 reactI18nextModule.type;
-// $ExpectError - no field property on reactI18nextModule
+// $FlowExpectedError - no field property on reactI18nextModule
 reactI18nextModule.field;
 
 // passing
@@ -145,27 +145,27 @@ defaultOptions.bindI18n;
 defaultOptions.bindStore;
 defaultOptions.translateFuncName;
 defaultOptions.nsMode;
-// $ExpectError - no field property on defaultOptions
+// $FlowExpectedError - no field property on defaultOptions
 defaultOptions.field;
 
 // passing
 setDefaults({ wait: true });
-// $ExpectError - setDefaults must be called with an object
+// $FlowExpectedError - setDefaults must be called with an object
 setDefaults("option");
-// $ExpectError - other is not a valid option
+// $FlowExpectedError - other is not a valid option
 setDefaults({ other: true });
 
 // passing
 getDefaults();
-// $ExpectError - no arguments should be passed to getDefaults
+// $FlowExpectedError - no arguments should be passed to getDefaults
 getDefaults("string");
 
 // passing
 getI18n();
-// $ExpectError - no arguments should be passed to getI18n
+// $FlowExpectedError - no arguments should be passed to getI18n
 getI18n("string");
 
 // passing
 setI18n(i18n);
-// $ExpectError - setI18n must be called with an object
+// $FlowExpectedError - setI18n must be called with an object
 setI18n("option");

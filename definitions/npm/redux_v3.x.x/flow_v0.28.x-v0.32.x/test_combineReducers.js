@@ -17,15 +17,15 @@ type State = {
 // combineReducers API
 //
 
-// $ExpectError
+// $FlowExpectedError
 combineReducers() // wrong reducers argument
-// $ExpectError
+// $FlowExpectedError
 combineReducers([]) // wrong reducers argument
 const r1: Reducer<State, Action> = combineReducers({
   a: reducerA,
   b: () => 's'
 })
-// $ExpectError
+// $FlowExpectedError
 const r2: Reducer<State, Action> = combineReducers({
   a: reducerA,
   b: () => 's',

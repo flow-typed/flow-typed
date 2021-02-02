@@ -19,7 +19,7 @@ describe('cors', () => {
       keepHeadersOnError: true,
     });
 
-    // $ExpectError
+    // $FlowExpectedError
     cors({
       foo: 'bar',
     });

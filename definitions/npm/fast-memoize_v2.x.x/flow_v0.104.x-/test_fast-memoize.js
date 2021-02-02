@@ -6,7 +6,7 @@ describe('fast-memoize', () => {
   it('should memoize', () => {
     const fn: string => string = _ => _.trim();
     const memoizedFn1: string => string = memoize(fn)
-    // $ExpectError
+    // $FlowExpectedError
     const memoizedFn2: number => number = memoize(fn)
   })
 

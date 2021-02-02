@@ -37,30 +37,30 @@ describe('class components', () => {
         }
     }
 
-    // $ExpectError - see † below
+    // $FlowExpectedError - see † below
     const C = hoistNonReactStatics(A, B);
 
     it('does not affect a static on target', () => {
         const a1: string = C.a;
-        // $ExpectError
+        // $FlowExpectedError
         const a2: number = C.a;
     });
 
     it('hoists non-React statics from source', () => {
         const b1: string = C.b;
-        // $ExpectError
+        // $FlowExpectedError
         const b2: number = C.b;
     });
 
     it('overwrites statics of the same name on target', () => {
         const c1: number = C.c;
-        // $ExpectError
+        // $FlowExpectedError
         const c2: string = C.c;
     })
 
     it('does not affect non-statics on target', () => {
         const a1: string = C.prototype.getA();
-        // $ExpectError
+        // $FlowExpectedError
         const a2: number = C.prototype.getA();
     });
 
@@ -73,31 +73,31 @@ describe('class components', () => {
     });
 
     it('does not hoist non-statics from source', () => {
-        // $ExpectError
+        // $FlowExpectedError
         C.prototype.getB();
     });
 
     it('does not affect the props type of target', () => {
         <C x={1} />;
         <C x={1} y={2} />;
-        // $ExpectError
+        // $FlowExpectedError
         <C x="x" />;
-        // $ExpectError
+        // $FlowExpectedError
         <C n={42} />;
     });
 
-    // $ExpectError - see † below
+    // $FlowExpectedError - see † below
     const D = hoistNonReactStatics(A, B, { a: true, b: true, c: true });
 
     it('does not affect a static on target even when specified as a custom static', () => {
         const a1: string = D.a;
-        // $ExpectError
+        // $FlowExpectedError
         const a2: number = D.a;
     });
 
     it('does not hoist a static when specified as a custom static', () => {
         const c1: string = D.c;
-        // $ExpectError
+        // $FlowExpectedError
         const c2: number = D.c;
         /**
          * † This does throw an error, but the error is somehow thrown at the function call itself. Seems to

@@ -2,7 +2,7 @@
 
 import clone from 'clone';
 
-// $ExpectError
+// $FlowExpectedError
 (clone({foo: 'bar'}): number);
 
 (clone('yay!'): string);

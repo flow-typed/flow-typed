@@ -14,17 +14,17 @@ class A extends React.Component<OnClickOutsideProps & { a: string }> {
 const B = onClickOutside(A);
 
 {
-  // $ExpectError
+  // $FlowExpectedError
   <B />
 }
 
 {
-  // $ExpectError
+  // $FlowExpectedError
   <B a={12}/>
 }
 
 {
-  // $ExpectError
+  // $FlowExpectedError
   <B a="foo" eventTypes={1} />
 }
 

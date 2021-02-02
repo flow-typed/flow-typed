@@ -11,7 +11,7 @@ const wrapper = renderer.create(<Example />);
 const { root } = wrapper;
 const instance = wrapper.getInstance();
 
-// $ExpectError
+// $FlowExpectedError
 renderer.create(NaN);
 
 // ShallowRenderer

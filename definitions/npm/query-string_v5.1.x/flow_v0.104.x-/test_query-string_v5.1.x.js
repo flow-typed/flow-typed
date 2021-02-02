@@ -11,12 +11,12 @@ describe('query-string', () => {
     });
 
     it('should not accept non-string argument', () => {
-      // $ExpectError: should be a string
+      // $FlowExpectedError: should be a string
       extract({});
     });
 
     it('should not accept more than one arguments', () => {
-      // $ExpectError: Cannot call `extract` because no more than 1 argument is expected by function
+      // $FlowExpectedError: Cannot call `extract` because no more than 1 argument is expected by function
       extract('?test', '&test');
     });
   });
@@ -27,7 +27,7 @@ describe('query-string', () => {
     });
 
     it('should not accept non-string 1st argument', () => {
-      // $ExpectError: should be a string
+      // $FlowExpectedError: should be a string
       parse({ test: null });
     });
 
@@ -36,7 +36,7 @@ describe('query-string', () => {
     });
 
     it('should only accept exact ParserOptions type as second argument', () => {
-      // $ExpectError: strict is not a parse option
+      // $FlowExpectedError: strict is not a parse option
       parse('test', { strict: true });
     });
   });
@@ -47,7 +47,7 @@ describe('query-string', () => {
     });
 
     it('should not accept non-Object 1st argument', () => {
-      // $ExpectError: should be an object
+      // $FlowExpectedError: should be an object
       stringify('test');
     });
 
@@ -56,7 +56,7 @@ describe('query-string', () => {
     });
 
     it('should only accept exact StringifyOptions type as second argument', () => {
-      // $ExpectError: true is not a stringify option
+      // $FlowExpectedError: true is not a stringify option
       stringify({ test: null }, { test: true });
     });
   });
@@ -67,7 +67,7 @@ describe('query-string', () => {
     });
 
     it('should not accept non-string 1st argument', () => {
-      // $ExpectError: should be a string
+      // $FlowExpectedError: should be a string
       parseUrl({ test: null });
     });
 
@@ -76,7 +76,7 @@ describe('query-string', () => {
     });
 
     it('should only accept exact ParserOptions type as second argument', () => {
-      // $ExpectError: strict is not a parse option
+      // $FlowExpectedError: strict is not a parse option
       parseUrl('test', { strict: true });
     });
   });

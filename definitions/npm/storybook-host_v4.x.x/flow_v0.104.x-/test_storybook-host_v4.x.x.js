@@ -3,7 +3,7 @@
 import { describe, it } from "flow-typed-test";
 import React from "react";
 
-// $ExpectError
+// $FlowExpectedError
 import { storiesOf } from "@storybook/react";
 import { host } from "storybook-host";
 
@@ -31,14 +31,14 @@ describe("The `host` decorator", () => {
   });
 
   it("should error on invalid options", () => {
-    // $ExpectError
+    // $FlowExpectedError
     host({
       title: 123
     });
   });
 
   it("should error on unknown options", () => {
-    // $ExpectError
+    // $FlowExpectedError
     host({
       foobar: ""
     });

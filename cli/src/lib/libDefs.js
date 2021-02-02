@@ -246,7 +246,7 @@ async function parseLibDefsFromPkgDir(
   }
 
   if (flowDirs.length === 0) {
-    throw new ValidationError('No libdef files found!');
+    throw new ValidationError(`No libdef files found for ${pkgDirPath}!`);
   }
 
   const libDefs = [];
@@ -381,7 +381,7 @@ function validateVersionPart(part, partName, context) {
  */
 async function verifyCLIVersion(defsDirPath) {
   const metadataFilePath = path.join(defsDirPath, '.cli-metadata.json');
-  const metadata = JSON.parse(String(await fs.readFile(metadataFilePath)));
+  const metadata = await fs.readJson(metadataFilePath);
   if (!metadata.compatibleCLIRange) {
     throw new Error(
       `Unable to find the 'compatibleCLIRange' property in ` +

@@ -138,10 +138,13 @@ type EnzymeMatchersType = {
  toExist(): void,
  toHaveClassName(className: string): void,
  toHaveHTML(html: string): void,
- toHaveProp: ((propKey: string, propValue?: any) => void) & ((props: Object) => void),
+ toHaveProp: ((propKey: string, propValue?: any) => void) &
+   ((props: {...}) => void),
  toHaveRef(refName: string): void,
- toHaveState: ((stateKey: string, stateValue?: any) => void) & ((state: Object) => void),
- toHaveStyle: ((styleKey: string, styleValue?: any) => void) & ((style: Object) => void),
+ toHaveState: ((stateKey: string, stateValue?: any) => void) &
+   ((state: {...}) => void),
+ toHaveStyle: ((styleKey: string, styleValue?: any) => void) &
+   ((style: {...}) => void),
  toHaveTagName(tagName: string): void,
  toHaveText(text: string): void,
  toIncludeText(text: string): void,
@@ -670,7 +673,7 @@ type JestObjectType = {
   * Returns the actual module instead of a mock, bypassing all checks on
   * whether the module should receive a mock implementation or not.
   */
- requireActual(moduleName: string): any,
+ requireActual<T>(m: $Flow$ModuleRef<T> | string): T,
  /**
   * Returns a mock module instead of the actual module, bypassing all checks
   * on whether the module should be required normally or not.

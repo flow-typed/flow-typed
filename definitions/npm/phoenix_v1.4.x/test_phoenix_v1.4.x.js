@@ -15,7 +15,7 @@ describe('#phoenix', () => {
     channel.onError(() => console.log('there was an error!'));
     channel.onClose(() => console.log('the channel has gone away gracefully'));
 
-    // $ExpectError `on` must take a message type as its first argument
+    // $FlowExpectedError `on` must take a message type as its first argument
     channel.on(null, msg => console.log('Got message', msg));
 
     channel.join();
@@ -51,7 +51,7 @@ describe('#phoenix', () => {
   })
 
   it('errors on malformed Channel', () => {
-    // $ExpectError `Channel` instances must take a `Socket` as the final param
+    // $FlowExpectedError `Channel` instances must take a `Socket` as the final param
     const channel = new Channel('foo', {});
   })
 
@@ -69,7 +69,7 @@ describe('#phoenix', () => {
   })
 
   it('errors on malformed transport option', () => {
-    // $ExpectError
+    // $FlowExpectedError
     const socket = new Socket('/socket', {
       params: { userToken: '123' },
       transport: {}

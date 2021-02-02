@@ -8,7 +8,7 @@ new Color({r: 0, g: 0, b: 0});
 new Color().rgb().r;
 (new Color().rgb(0, 0, 0): Color);
 
-// $ExpectError
+// $FlowExpectedError
 new Color().nope;
 
 (Color(): Color);
@@ -17,5 +17,5 @@ Color({r: 0, g: 0, b: 0});
 Color().rgb().r;
 (Color().rgb(0, 0, 0): Color);
 
-// $ExpectError
+// $FlowExpectedError
 Color().nope;

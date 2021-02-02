@@ -37,7 +37,7 @@ describe('browser history', () => {
       keyLength: 6,
     })
 
-    // $ExpectError
+    // $FlowExpectedError[prop-missing]
     history.foo
   });
 
@@ -121,7 +121,7 @@ describe('memory history', () => {
       keyLength: 6,
     })
 
-    // $ExpectError
+    // $FlowExpectedError[prop-missing]
     history.foo
   });
 
@@ -192,9 +192,9 @@ describe('hash history', () => {
       hashType: "slash",
     })
 
-    // $ExpectError
+    // $FlowExpectedError[prop-missing]
     const key: string = history.location.key
-    // $ExpectError
+    // $FlowExpectedError[prop-missing]
     const state: {} = history.location.state
   });
 
@@ -204,7 +204,7 @@ describe('hash history', () => {
       hashType: "slash",
     })
 
-    // $ExpectError
+    // $FlowExpectedError
     history.foo
   });
 

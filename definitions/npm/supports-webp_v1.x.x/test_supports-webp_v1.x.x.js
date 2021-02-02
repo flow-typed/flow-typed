@@ -9,9 +9,9 @@ describe("supports-webp", () => {
   });
 
   it("raises error", () => {
-    // $ExpectError - imported value is a boolean
+    // $FlowExpectedError - imported value is a boolean
     const x: number = supportsWebP;
-    // $ExpectError - imported value is a boolean
+    // $FlowExpectedError - imported value is a boolean
     const y: string = supportsWebP;
   });
 });

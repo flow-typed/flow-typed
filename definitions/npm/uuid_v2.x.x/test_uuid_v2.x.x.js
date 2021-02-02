@@ -11,18 +11,18 @@ uuid.v1({
   nsecs: 5678
 });
 
-// $ExpectError
+// $FlowExpectedError
 uuid.v1({ yolo: true });
-// $ExpectError
+// $FlowExpectedError
 uuid.v4({ yolo: true });
 
 const arr = new Array(32);
 
 uuid.unparse(arr);
 uuid.unparse(arr, 16);
-// $ExpectError
+// $FlowExpectedError
 uuid.unparse('yoloista');
-// $ExpectError
+// $FlowExpectedError
 uuid.unparse(arr, { super: man });
 
 uuid.v4({
@@ -45,12 +45,12 @@ uuid.v4({
   rng: () => Buffer.alloc(16)
 });
 
-// $ExpectError
+// $FlowExpectedError
 uuid.v4({
   rng: () => 'bla'
 });
 
-// $ExpectError
+// $FlowExpectedError
 uuid.parse([23]);
 const buffer1 = uuid.parse('797ff043-11eb-11e1-80d6-510998755d10');
 uuid.unparse(buffer1);

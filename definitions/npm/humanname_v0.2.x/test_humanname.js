@@ -5,7 +5,7 @@ import { describe, it } from 'flow-typed-test';
 
 describe('humanname', () => {
   it('errors', () => {
-    // $ExpectError
+    // $FlowExpectedError
     humanname();
   });
 

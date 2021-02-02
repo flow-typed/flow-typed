@@ -6,7 +6,7 @@ import cuid from "cuid";
 (cuid.slug(): string);
 (cuid.fingerprint(): string);
 
-// $ExpectError
+// $FlowExpectedError
 (cuid(): number);
 (cuid.slug(): number);
 (cuid.fingerprint(): number);

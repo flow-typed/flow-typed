@@ -69,9 +69,10 @@ version range of the directiry. You MUST specify a version range with names like
 v0.106.x").
 
 If you aren't sure which versions of Flow your definition is compatible with,
-start with a very low version like `flow_v0.25.x-`, and the test runner
+start with a low version like `flow_v0.83.x-`, and the test runner
 (which we'll run in a later step) will tell us if there are problems in some
-versions of Flow.
+versions of Flow. `flow_v0.83.x-` is the version where the inexact object syntax
+was added.
 
 You may create multiple flow version directories to target different versions of
 Flow if necessary.
@@ -93,7 +94,7 @@ reasonable degree. At minimum your tests should:
    produce a type error.
 1. Use the library definition in a couple of ways that are *expected* to produce
    a type error. To indicate that a line in a test file expected to cause an
-   error just put a `// $ExpectError` comment above the error-causing line.
+   error just put a `// $FlowExpectedError` comment above the error-causing line.
 
 [Here](https://github.com/flow-typed/flow-typed/blob/master/definitions/npm/highlight.js_v8.x.x/test_highlight.js-v8.js)
 is an example of a nice and thorough test file. You don't necessarily have to be
@@ -273,7 +274,7 @@ describe('#someFunction', () => {
   });
 
   // you can also do type checks outside an it statement
-  //$ExpectError
+  //$FlowExpectedError
   const a: number = 'foo';
 })
 ```
@@ -289,7 +290,7 @@ foo('#someFunction', () => {
   });
 
   // you can also do type checks outside an it statement
-  //$ExpectError
+  //$FlowExpectedError
   const a: number = 'foo';
 })
 ```

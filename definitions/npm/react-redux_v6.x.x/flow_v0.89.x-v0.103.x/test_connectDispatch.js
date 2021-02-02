@@ -35,7 +35,7 @@ function object_differentDispatchesAreNotOK() {
   };
 
   type Action2 = {|
-  //$ExpectError `string` is incompatible with `number` in property `type`
+  //$FlowExpectedError `string` is incompatible with `number` in property `type`
     type: number
   |};
   type Dispatch2 = Action2 => Action2;
@@ -93,7 +93,7 @@ function function_differentDispatchesAreNotOK() {
   });
 
   type Action2 = {|
-  //$ExpectError `string` is incompatible with `number` in property `type`
+  //$FlowExpectedError `string` is incompatible with `number` in property `type`
     type: number
   |};
   type Dispatch2 = Action2 => Action2;

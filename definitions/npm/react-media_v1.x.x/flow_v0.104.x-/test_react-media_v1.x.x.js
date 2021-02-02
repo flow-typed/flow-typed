@@ -3,13 +3,13 @@
 import React from 'react';
 import Media from 'react-media';
 
-// $ExpectError
+// $FlowExpectedError
 const queryError = <Media query={1} />;
-// $ExpectError
+// $FlowExpectedError
 const defaultMatchesError = <Media defaultMatches={1}/>;
-// $ExpectError
+// $FlowExpectedError
 const renderError = <Media render={12} />;
-// $ExpectError
+// $FlowExpectedError
 const childrenError = <Media>{(matches: number) => matches}</Media>;
 
 const str = <Media query="max-width: 500px" />;

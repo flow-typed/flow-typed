@@ -141,6 +141,12 @@ declare class moment$Moment {
   static (string: ?string, format: string | Array<string>): moment$Moment;
   static (
     string: ?string,
+    // Support for strict string parsing without format works since moment v2.25.0
+    // https://github.com/moment/moment/issues/2469
+    strict: boolean
+  ): moment$Moment;
+  static (
+    string: ?string,
     format: string | Array<string>,
     strict: boolean
   ): moment$Moment;
@@ -169,6 +175,12 @@ declare class moment$Moment {
       | void
   ): moment$Moment;
   static utc(string: string, format: string | Array<string>): moment$Moment;
+  static utc(
+    string: string,
+    // Support for strict string parsing without format works since moment v2.25.0
+    // https://github.com/moment/moment/issues/2469
+    strict: boolean
+  ): moment$Moment;
   static utc(
     string: string,
     format: string | Array<string>,

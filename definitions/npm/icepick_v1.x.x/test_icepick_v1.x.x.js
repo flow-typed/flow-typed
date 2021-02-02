@@ -34,10 +34,10 @@ class Foo {}
   const arr = ["a", "b", "c"];
   const newArr: typeof arr = i.assoc(arr, 2, "d"); // ["a", "b", "d"]
 
-  // $ExpectError
+  // $FlowExpectedError
   i.assoc(coll, ["b"], 1);
 
-  // $ExpectError
+  // $FlowExpectedError
   i.assoc(arr, [2], "d");
 }
 
@@ -48,10 +48,10 @@ class Foo {}
   const arr = ["a", "b", "c"];
   i.set(arr, 2, "d"); // ["a", "b", "d"]
 
-  // $ExpectError
+  // $FlowExpectedError
   i.set(coll, ["b"], 4);
 
-  // $ExpectError
+  // $FlowExpectedError
   i.set(arr, [2], "d");
 }
 
@@ -62,10 +62,10 @@ class Foo {}
   const arr = ["a", "b", "c"];
   const newArr: typeof arr = i.dissoc(arr, 2); // ["a", , "c"]
 
-  // $ExpectError
+  // $FlowExpectedError
   i.dissoc(coll, ["b"]);
 
-  // $ExpectError
+  // $FlowExpectedError
   i.dissoc(arr, [2]);
 }
 
@@ -76,10 +76,10 @@ class Foo {}
   const arr = ["a", "b", "c"];
   const newArr: typeof arr = i.unset(arr, 2); // ["a", , "c"]
 
-  // $ExpectError
+  // $FlowExpectedError
   i.unset(coll, ["b"]);
 
-  // $ExpectError
+  // $FlowExpectedError
   i.unset(arr, [2]);
 }
 
@@ -98,10 +98,10 @@ class Foo {}
   const coll2 = {};
   const newColl2: typeof coll2 = i.assocIn(coll2, ["a", "b", "c"], 1);
 
-  // $ExpectError
+  // $FlowExpectedError
   i.assocIn(coll, "b", "baz");
 
-  // $ExpectError
+  // $FlowExpectedError
   i.assocIn(coll2, 1, 1);
 }
 
@@ -120,10 +120,10 @@ class Foo {}
   const coll2 = {};
   const newColl2: typeof coll2 = i.setIn(coll2, ["a", "b", "c"], 1);
 
-  // $ExpectError
+  // $FlowExpectedError
   i.setIn(coll, "b", "baz");
 
-  // $ExpectError
+  // $FlowExpectedError
   i.setIn(coll2, 1, 1);
 }
 
@@ -133,13 +133,13 @@ class Foo {}
 
   const newColl: typeof coll = i.getIn(coll, [1, "b"]); // 2
 
-  // $ExpectError
+  // $FlowExpectedError
   i.getIn(coll, "b");
 
-  // $ExpectError
+  // $FlowExpectedError
   i.getIn(coll, 1);
 
-  // $ExpectError
+  // $FlowExpectedError
   i.getIn(coll, [true]);
 }
 
@@ -150,13 +150,13 @@ class Foo {}
   const doubleVal = (val: number) => val * 2;
   const newColl: typeof coll = i.updateIn(coll, [1, "b"], doubleVal); // [ {a: 1}, {b: 4} ]
 
-  // $ExpectError
+  // $FlowExpectedError
   i.updateIn(coll, "b", doubleVal);
 
-  // $ExpectError
+  // $FlowExpectedError
   i.updateIn(coll, 1, doubleVal);
 
-  // $ExpectError
+  // $FlowExpectedError
   i.updateIn(coll, [true], doubleVal);
 }
 
@@ -242,21 +242,21 @@ class Foo {}
       .value();
     const result4: Symbol = i.chain(Symbol("foo")).value();
 
-    // $ExpectError
+    // $FlowExpectedError
     i.chain(1).value();
-    // $ExpectError
+    // $FlowExpectedError
     i.chain(true).value();
-    // $ExpectError
+    // $FlowExpectedError
     i.chain("test").value();
 
     // Functions and Symbols should be treated as Objects
-    // $ExpectError
+    // $FlowExpectedError
     i.chain(function() {
       return;
     })
       .push(5)
       .value();
-    // $ExpectError
+    // $FlowExpectedError
     i.chain(Symbol("foo"))
       .push(5)
       .value();
@@ -272,7 +272,7 @@ class Foo {}
       .chain(obj)
       .assoc(0, 5)
       .value(); // {"0": 5, foo: 'f', bar...}
-    // $ExpectError
+    // $FlowExpectedError
     i.chain(arr)
       .assoc("key", 5)
       .value();
@@ -288,7 +288,7 @@ class Foo {}
       .chain(obj)
       .set(0, 5)
       .value(); // {"0": 5, foo: 'f', bar...}
-    // $ExpectError
+    // $FlowExpectedError
     i.chain(arr)
       .set("key", 5)
       .value();
@@ -304,7 +304,7 @@ class Foo {}
       .chain(obj)
       .dissoc(0)
       .value();
-    // $ExpectError
+    // $FlowExpectedError
     i.chain(arr)
       .dissoc("key")
       .value();
@@ -320,7 +320,7 @@ class Foo {}
       .chain(obj)
       .unset(0)
       .value();
-    // $ExpectError
+    // $FlowExpectedError
     i.chain(arr)
       .unset("key")
       .value();
@@ -340,7 +340,7 @@ class Foo {}
         return val;
       })
       .value();
-    // $ExpectError
+    // $FlowExpectedError
     i.chain(arr)
       .thru(function(val) {
         return 5;
@@ -354,7 +354,7 @@ class Foo {}
       .chain(arr)
       .push({ key: "value" })
       .value();
-    // $ExpectError
+    // $FlowExpectedError
     i.chain(obj)
       .push({ key: "value" })
       .value();
@@ -366,7 +366,7 @@ class Foo {}
       .chain(arr)
       .pop()
       .value();
-    // $ExpectError
+    // $FlowExpectedError
     i.chain(obj)
       .pop()
       .value();
@@ -378,7 +378,7 @@ class Foo {}
       .chain(arr)
       .shift()
       .value();
-    // $ExpectError
+    // $FlowExpectedError
     i.chain(obj)
       .shift()
       .value();
@@ -390,7 +390,7 @@ class Foo {}
       .chain(arr)
       .unshift(0)
       .value();
-    // $ExpectError
+    // $FlowExpectedError
     i.chain(obj)
       .unshift(0)
       .value();
@@ -402,7 +402,7 @@ class Foo {}
       .chain(arr)
       .reverse()
       .value();
-    // $ExpectError
+    // $FlowExpectedError
     i.chain(obj)
       .reverse()
       .value();
@@ -414,7 +414,7 @@ class Foo {}
       .chain(arr)
       .sort()
       .value();
-    // $ExpectError
+    // $FlowExpectedError
     i.chain(obj)
       .sort()
       .value();
@@ -426,7 +426,7 @@ class Foo {}
       .chain(arr)
       .splice(1, 0)
       .value();
-    // $ExpectError
+    // $FlowExpectedError
     i.chain(obj)
       .splice(1, 0)
       .value();
@@ -438,7 +438,7 @@ class Foo {}
       .chain(arr)
       .slice(0, 1)
       .value();
-    // $ExpectError
+    // $FlowExpectedError
     i.chain(obj)
       .slice(0, 1)
       .value();
@@ -452,7 +452,7 @@ class Foo {}
         return val;
       })
       .value();
-    // $ExpectError
+    // $FlowExpectedError
     i.chain(obj)
       .map(function(val) {
         return val;
@@ -468,7 +468,7 @@ class Foo {}
         return true;
       })
       .value();
-    // $ExpectError
+    // $FlowExpectedError
     i.chain(obj)
       .filter(function(val) {
         return true;

@@ -3,8 +3,8 @@ import camelCase from 'camelcase';
 const result: string = camelCase('foo-bar');
 //=> 'fooBar'
 
-// $ExpectError
+// $FlowExpectedError
 camelCase(42);
 
-// $ExpectError
+// $FlowExpectedError
 (camelCase('foo-bar'): number);

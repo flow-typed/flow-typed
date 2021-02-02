@@ -10,5 +10,5 @@ JSON.parse(stripJsonComments(json, {
 }));
 //=> {unicorn: 'cake'}
 
-// $ExpectError
+// $FlowExpectedError
 stripJsonComments(42);

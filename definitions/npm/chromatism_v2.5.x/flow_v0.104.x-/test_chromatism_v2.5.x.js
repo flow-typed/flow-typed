@@ -49,100 +49,100 @@ declare var fakeColour: {
 };
 
 var convert1: ColourObject = convert(colour);
-// $ExpectError
+// $FlowExpectedError
 var convert2: ColourObject = convert(fakeColour);
 
 var complementary1: ColourObject = complementary(colour);
-// $ExpectError
+// $FlowExpectedError
 var complementary2: ColourObject = complementary1(fakeColour);
 
 var triad1: ColourObjectArray = triad(colour);
-// $ExpectError
+// $FlowExpectedError
 var triad2: ColourObjectArray = triad(fakeColour);
 
 var tetrad1: ColourObjectArray = tetrad(colour);
-// $ExpectError
+// $FlowExpectedError
 var tetrad2: ColourObjectArray = tetrad(fakeColour);
 
 var uniformComplementary1: ColourObject = uniformComplementary(colour);
-// $ExpectError
+// $FlowExpectedError
 var uniformComplementary2: ColourObject = uniformComplementary(fakeColour);
 
 var uniformTriad1: ColourObjectArray = uniformTriad(colour);
-// $ExpectError
+// $FlowExpectedError
 var uniformTriad2: ColourObjectArray = uniformTriad(fakeColour);
 
 var uniformTetrad1: ColourObjectArray = uniformTetrad(colour);
-// $ExpectError
+// $FlowExpectedError
 var uniformTetrad2: ColourObjectArray = uniformTetrad(fakeColour);
 
 var mid1: ColourObject = mid(colourOne, colourTwo);
-// $ExpectError
+// $FlowExpectedError
 var mid2: ColourObject = mid(fakeColour, fakeColour);
 
 var invert1: ColourObject = invert(colour);
-// $ExpectError
+// $FlowExpectedError
 var invert2: ColourObject = invert(fakeColour);
 
 var invertLightness1: ColourObject = invertLightness(colour);
-// $ExpectError
+// $FlowExpectedError
 var invertLightness2: ColourObject = invertLightness(fakeColour);
 
 var multiply1: ColourObject = multiply(colourOne, colourTwo);
-// $ExpectError
+// $FlowExpectedError
 var multiply2: ColourObject = multiply(fakeColour, fakeColour);
 
 var adjacent1: ColourObjectArray = adjacent(degrees, sections, colour);
-// $ExpectError
+// $FlowExpectedError
 var adjacent2: ColourObjectArray = adjacent(degrees, sections, fakeColour);
 
 var fade1: ColourObjectArray = fade(amount, colourFrom, colourTo);
-// $ExpectError
+// $FlowExpectedError
 var fade2: ColourObjectArray = fade(amount, fakeColour, fakeColour);
 
 var shade1: ColourObject = shade(percent, colour);
-// $ExpectError
+// $FlowExpectedError
 var shade2: ColourObject = shade(percent, fakeColour);
 
 var saturation1: ColourObject = saturation(percent, colour);
-// $ExpectError
+// $FlowExpectedError
 var saturation2: ColourObject = saturation(percent, fakeColour);
 
 var brightness1: ColourObject = brightness(percent, colour);
-// $ExpectError
+// $FlowExpectedError
 var brightness2: ColourObject = brightness(percent, fakeColour);
 
 var hue1: ColourObject = hue(degrees, colour);
-// $ExpectError
+// $FlowExpectedError
 var hue2: ColourObject = hue(degrees, fakeColour);
 
 var contrast1: ColourObject = contrast(contrastCoeff, colour);
-// $ExpectError
+// $FlowExpectedError
 var contrast2: ColourObject = contrast(contrastCoeff, fakeColour);
 
 var greyscale1: ColourObject = greyscale(colour);
-// $ExpectError
+// $FlowExpectedError
 var greyscale2: ColourObject = greyscale(fakeColour);
 
 var sepia1: ColourObject = sepia(colour);
-// $ExpectError
+// $FlowExpectedError
 var sepia2: ColourObject = sepia(fakeColour);
 
 var contrastRatio1: ColourObject = contrastRatio(colour);
-// $ExpectError
+// $FlowExpectedError
 var contrastRatio2: ColourObject = contrastRatio(fakeColour);
 
 var adapt1: ColourObject = adapt(colour, illuminantColour);
 var adapt2: ColourObject = adapt(colour, illuminantColour, sourceIlluminant);
-// $ExpectError
+// $FlowExpectedError
 var adapt3: ColourObject = adapt(fakeColour, illuminantColour, sourceIlluminant);
 
 var difference1: number = difference(colourOne, colourTwo);
 var difference2: number = difference(colourOne, colourTwo, luminanceWeight);
 var difference3: number = difference(colourOne, colourTwo, luminanceWeight, chromaWeight);
-// $ExpectError
+// $FlowExpectedError
 var difference4: number = difference(fakeColour, fakeColour, luminanceWeight, chromaWeight);
 
 var temperature1: number = temperature(colour);
-// $ExpectError
+// $FlowExpectedError
 var temperature2: number = temperature(fakeColour);

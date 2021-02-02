@@ -43,7 +43,7 @@ describe('browser history', () => {
       keyLength: 6,
     });
 
-    // $ExpectError
+    // $FlowExpectedError[prop-missing]
     history.foo;
   });
 
@@ -127,7 +127,7 @@ describe('memory history', () => {
       keyLength: 6,
     });
 
-    // $ExpectError
+    // $FlowExpectedError[prop-missing]
     history.foo;
   });
 
@@ -198,9 +198,9 @@ describe('hash history', () => {
       hashType: 'slash',
     });
 
-    // $ExpectError
+    // $FlowExpectedError[incompatible-type]
     const key: string = history.location.key;
-    // $ExpectError
+    // $FlowExpectedError[incompatible-type]
     const state: { ... } = history.location.state;
   });
 
@@ -210,7 +210,7 @@ describe('hash history', () => {
       hashType: 'slash',
     });
 
-    // $ExpectError
+    // $FlowExpectedError[prop-missing]
     history.foo;
   });
 
@@ -268,12 +268,12 @@ describe('create path', () => {
     });
 
     const key: string = path;
-    // $ExpectError
+    // $FlowExpectedError[incompatible-type]
     const state: { ... } = path;
   });
 
   it('should not allow to accept void', () => {
-    // $ExpectError
+    // $FlowExpectedError[incompatible-shape]
     const path = createPath();
 
     const key: string = path;
@@ -285,12 +285,12 @@ describe('parse path', () => {
     const location = parsePath('/test?query#hash');
 
     const state: { ... } = location;
-    // $ExpectError
+    // $FlowExpectedError[incompatible-type]
     const key: string = location;
   });
 
   it('should not allow to accept void', () => {
-    // $ExpectError
+    // $FlowExpectedError[incompatible-call]
     const location = parsePath();
 
     const state: { ... } = location;
@@ -302,7 +302,7 @@ describe('create location', () => {
     const location = createLocation('/test?query#hash');
 
     const state: { ... } = location;
-    // $ExpectError
+    // $FlowExpectedError[incompatible-type]
     const key: string = location;
   });
 
@@ -314,7 +314,7 @@ describe('create location', () => {
     });
 
     const state: { ... } = location;
-    // $ExpectError
+    // $FlowExpectedError[incompatible-type]
     const key: string = location;
   });
 });
@@ -327,7 +327,7 @@ describe('locations are equal', () => {
     );
 
     const bool: boolean = isEqual;
-    // $ExpectError
+    // $FlowExpectedError[incompatible-type]
     const str: string = isEqual;
   });
 });

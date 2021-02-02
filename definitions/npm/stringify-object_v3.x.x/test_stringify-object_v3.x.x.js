@@ -40,13 +40,13 @@ describe('The `obj` parameter', () => {
   });
 
   it('should error on non object types', () => {
-    // $ExpectError
+    // $FlowExpectedError
     stringifyObject('');
 
-    // $ExpectError
+    // $FlowExpectedError
     stringifyObject(true);
 
-    // $ExpectError
+    // $FlowExpectedError
     stringifyObject();
   });
 });
@@ -57,13 +57,13 @@ describe('The `options` parameter', () => {
   });
 
   it('should error on non object types', () => {
-    // $ExpectError
+    // $FlowExpectedError
     stringifyObject(obj, '');
 
-    // $ExpectError
+    // $FlowExpectedError
     stringifyObject(obj, true);
 
-    // $ExpectError
+    // $FlowExpectedError
     stringifyObject(obj, []);
   });
 });
@@ -77,17 +77,17 @@ describe('The `indent` option', () => {
 
   it('should error on non string types', () => {
     stringifyObject(obj, {
-      // $ExpectError
+      // $FlowExpectedError
       indent: true,
     });
 
     stringifyObject(obj, {
-      // $ExpectError
+      // $FlowExpectedError
       indent: 123,
     });
 
     stringifyObject(obj, {
-      // $ExpectError
+      // $FlowExpectedError
       indent: [],
     });
   });
@@ -102,17 +102,17 @@ describe('The `singleQuotes` option', () => {
 
   it('should error on non boolean types', () => {
     stringifyObject(obj, {
-      // $ExpectError
+      // $FlowExpectedError
       singleQuotes: '',
     });
 
     stringifyObject(obj, {
-      // $ExpectError
+      // $FlowExpectedError
       singleQuotes: 123,
     });
 
     stringifyObject(obj, {
-      // $ExpectError
+      // $FlowExpectedError
       singleQuotes: [],
     });
   });
@@ -127,23 +127,23 @@ describe('The `filter` option', () => {
 
   it('should error on non function types', () => {
     stringifyObject(obj, {
-      // $ExpectError
+      // $FlowExpectedError
       filter: true,
     });
 
     stringifyObject(obj, {
-      // $ExpectError
+      // $FlowExpectedError
       filter: '',
     });
 
     stringifyObject(obj, {
-      // $ExpectError
+      // $FlowExpectedError
       filter: [],
     });
 
     it('should error on non boolean return types', () => {
       stringifyObject(obj, {
-        // $ExpectError
+        // $FlowExpectedError
         filter: () => '',
       });
     });
@@ -171,24 +171,24 @@ describe('The `transform` option', () => {
 
   it('should error on non function types', () => {
     stringifyObject(obj, {
-      // $ExpectError
+      // $FlowExpectedError
       transform: true,
     });
 
     stringifyObject(obj, {
-      // $ExpectError
+      // $FlowExpectedError
       transform: 123,
     });
 
     stringifyObject(obj, {
-      // $ExpectError
+      // $FlowExpectedError
       transform: [],
     });
   });
 
   it('should error on non string return types', () => {
     stringifyObject(obj, {
-      // $ExpectError
+      // $FlowExpectedError
       transform: () => true,
     });
   });
@@ -203,17 +203,17 @@ describe('The `inlineCharacterLimit` option', () => {
 
   it('should error on non number types', () => {
     stringifyObject(obj, {
-      // $ExpectError
+      // $FlowExpectedError
       inlineCharacterLimit: '',
     });
 
     stringifyObject(obj, {
-      // $ExpectError
+      // $FlowExpectedError
       inlineCharacterLimit: true,
     });
 
     stringifyObject(obj, {
-      // $ExpectError
+      // $FlowExpectedError
       inlineCharacterLimit: [],
     });
   });
@@ -225,13 +225,13 @@ describe('The `pad` parameter', () => {
   });
 
   it('should error on non string types', () => {
-    // $ExpectError
+    // $FlowExpectedError
     stringifyObject(obj, {}, true);
 
-    // $ExpectError
+    // $FlowExpectedError
     stringifyObject(obj, {}, 123);
 
-    // $ExpectError
+    // $FlowExpectedError
     stringifyObject(obj, {}, []);
   });
 });

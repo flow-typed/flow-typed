@@ -25,14 +25,14 @@ marked.setOptions({
   smartypants: false
 });
 
-// $ExpectError
+// $FlowExpectedError
 marked.setOptions([ 'yoloism', true ])
 
 marked('', (err: ?Error, content: ?string): void => {
   if (err) throw err;
 });
 
-// $ExpectError
+// $FlowExpectedError
 marked(24, function (err, content) {
   if (err) throw err;
   console.log(content);
@@ -41,9 +41,9 @@ marked(24, function (err, content) {
 const x: string = marked('');
 marked('', { tables: false })
 
-// $ExpectError
+// $FlowExpectedError
 marked('up', 'top')
-// $ExpectError
+// $FlowExpectedError
 const y: string = marked(23);
 
 const renderer = new marked.Renderer();
@@ -51,22 +51,22 @@ const renderer = new marked.Renderer();
 renderer.heading = (text, level) => text + (level * 10).toString()
 renderer.tablecell = (content, alignment) => alignment ? content + alignment : content
 
-// $ExpectError
+// $FlowExpectedError
 renderer.heading = (n) => n * 42
 
 marked.parser(marked.lexer('Much markdowwwn!', { pedantic: true }));
 marked.lexer('test')
 
-// $ExpectError
+// $FlowExpectedError
 marked.parser('');
-// $ExpectError
+// $FlowExpectedError
 marked.lexer(false)
 
 const lexer = new marked.Lexer({ lolz: true });
 const tokens = lexer.lex('yoloista');
 marked.parser(tokens);
 
-// $ExpectError
+// $FlowExpectedError
 const lexr = new marked.Lexer([ 'lol' ]);
 
 lexer.rules.xyz = /(mysuperfancyregex)?/

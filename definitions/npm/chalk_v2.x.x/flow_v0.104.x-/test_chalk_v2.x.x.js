@@ -26,5 +26,5 @@ const supportsStringTemplate: string = chalk`{red string template} done`;
 
 const useRequiredChalk: string = requiredChalk.bold("required chalk");
 
-// $ExpectError
+// $FlowExpectedError
 const enabledString: string = chalk.enabled;

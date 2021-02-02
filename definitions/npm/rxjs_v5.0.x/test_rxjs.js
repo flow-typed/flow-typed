@@ -10,20 +10,20 @@ import * as Sub from "rxjs/Subscription";
 
 const numbers: Observable<number> = Observable.of(1, 2, 3);
 const strings: Observable<string> = numbers.map(x => x.toString());
-// $ExpectError
+// $FlowExpectedError
 const bogusStrings: Observable<string> = numbers.map(x => x);
 
 (numbers.audit(() => strings): Observable<number>);
 
 (numbers.auditTime(250): Observable<number>);
 
-// $ExpectError
+// $FlowExpectedError
 numbers.subscribe((x: string) => {});
 strings.subscribe((x: string) => {});
 
 (strings.elementAt(1): Observable<string>);
 (strings.elementAt(1, ""): Observable<string>);
-// $ExpectError
+// $FlowExpectedError
 strings.elementAt(1, 5);
 
 (Observable.of(numbers, numbers).concatAll(): Observable<number>);
@@ -34,7 +34,7 @@ strings.elementAt(1, 5);
 
 (numbers.skipWhile(x => true): Observable<number>);
 
-// $ExpectError -- need the typecast or the error appears at the declaration site
+// $FlowExpectedError -- need the typecast or the error appears at the declaration site
 numbers.merge((strings: Observable<string>));
 
 (Observable.race(
@@ -44,18 +44,18 @@ numbers.merge((strings: Observable<string>));
 
 numbers.let(_numbers => strings);
 numbers.letBind(_numbers => strings);
-// $ExpectError -- need to return an observable
+// $FlowExpectedError -- need to return an observable
 numbers.let(_numbers => 3);
-// $ExpectError -- need to return an observable
+// $FlowExpectedError -- need to return an observable
 numbers.letBind(_numbers => 3);
 
 (numbers.map(number => Observable.of(number)).switch(): Observable<number>);
-// $ExpectError -- .switch can't assert that it's operating on observables, but it can at least trace the type.
+// $FlowExpectedError -- .switch can't assert that it's operating on observables, but it can at least trace the type.
 (numbers.map(number => Observable.of(number)).switch(): Observable<string>);
 
 let dualNumbers = Observable.of(numbers, numbers);
 (dualNumbers.combineAll(): Observable<[number, number]>);
-// $ExpectError -- should return an Observable<string>
+// $FlowExpectedError -- should return an Observable<string>
 (dualNumbers.combineAll((a, b) => `${a}-${b}`): Observable<number>);
 (dualNumbers.combineAll((a, b) => `${a}-${b}`): Observable<string>);
 
@@ -80,11 +80,11 @@ const combinedBad: Observable<{
   n: number,
   s: string,
   ...
-  // $ExpectError
+  // $FlowExpectedError
 }> = Observable.combineLatest(numbers, numbers, (n, s) => ({ n, s }));
 
 (numbers.combineLatest(strings): Observable<[number, string]>);
-// $ExpectError
+// $FlowExpectedError
 (numbers.combineLatest(numbers): Observable<[number, string]>);
 
 (numbers.combineLatest(strings, (a: number, b: string) => ({
@@ -133,7 +133,7 @@ const forked4b: Observable<number> = Observable.forkJoin(
   (...vals: Array<any>) => vals.map(Number).reduce((a, b) => a + b)
 );
 
-// $ExpectError
+// $FlowExpectedError
 const forkedBad: Observable<{ n: number, s: string }> = Observable.forkJoin(
   numbers,
   numbers,
@@ -156,7 +156,7 @@ const zipped3: Observable<[number]> = Observable.zip(numbers);
   [number, string, string]
 >);
 
-// $ExpectError
+// $FlowExpectedError
 const zippedBad: Observable<{ n: number, s: string }> = Observable.zip(
   numbers,
   numbers,
@@ -170,7 +170,7 @@ const zippedBad: Observable<{ n: number, s: string }> = Observable.zip(
 })): Observable<{ a: number, b: string, ... }>);
 
 (numbers.zip(strings): Observable<[number, string]>);
-// $ExpectError
+// $FlowExpectedError
 (numbers.zip(numbers): Observable<[number, string]>);
 
 (numbers.zip(strings, (a: number, b: string) => ({
@@ -186,7 +186,7 @@ const zippedBad: Observable<{ n: number, s: string }> = Observable.zip(
   c
 })): Observable<{ a: number, b: string, c: string, ... }>);
 
-// $ExpectError
+// $FlowExpectedError
 const bogusEmpty: Observable<string> = Observable.empty().concat(
   numbers.map(x => x)
 );
@@ -199,11 +199,11 @@ const never: Observable<number> = Observable.empty()
 const numberOrString: Observable<number | string> = numbers.concat(strings);
 
 (Observable.of(2).startWith(1, 2, 3): Observable<number>);
-// $ExpectError
+// $FlowExpectedError
 (Observable.of(2).startWith(1, "2", 3): Observable<number>);
 
 (numbers.window(Observable.interval(100)): Observable<Observable<number>>);
-// $ExpectError
+// $FlowExpectedError
 (numbers.window(Observable.interval(100)): Observable<Observable<string>>);
 
 (numbers.windowCount(3): Observable<Observable<number>>);
@@ -215,17 +215,17 @@ const numberOrString: Observable<number | string> = numbers.concat(strings);
 ): Observable<Observable<number>>);
 (numbers.windowToggle(
   Observable.interval(100),
-  // $ExpectError
+  // $FlowExpectedError
   Observable.interval(500)
 ): Observable<Observable<number>>);
 (numbers.windowWhen(() => Observable.interval(100)): Observable<
   Observable<number>
 >);
-// $ExpectError
+// $FlowExpectedError
 (numbers.windowWhen(Observable.interval(100)): Observable<Observable<number>>);
 
 (numbers.withLatestFrom(strings): Observable<[number, string]>);
-// $ExpectError
+// $FlowExpectedError
 (numbers.withLatestFrom(numbers): Observable<[number, string]>);
 
 (numbers.withLatestFrom(strings, (a: number, b: string) => ({
@@ -248,15 +248,15 @@ const numberOrString: Observable<number | string> = numbers.concat(strings);
 ): Observable<{ a: number, b: string, c: string, ... }>);
 
 numbers.observeOn(Scheduler.async);
-// $ExpectError
+// $FlowExpectedError
 numbers.observeOn(null);
 
 Observable.fromEvent(null, "click", true);
-// $ExpectError
+// $FlowExpectedError
 Observable.fromEvent(null, "click", { capture: 1 });
 
 Observable.of(1).switchMapTo(Observable.of("test"));
-// $ExpectError
+// $FlowExpectedError
 Observable.of(1).switchMapTo(2);
 
 (strings.map(x => x): Observable<string>);
@@ -275,7 +275,7 @@ Observable.using(
   subscription => new Promise(resolve => {})
 );
 Observable.using(
-  // $ExpectError
+  // $FlowExpectedError
   () => Observable.of("bad"),
   subscription => {}
 );
@@ -297,15 +297,15 @@ const superObserver: Observer<SuperFoo> = new Observer();
 const subObserver: Observer<SubFoo> = new Observer();
 
 (subObservable: Observable<SuperFoo>);
-// $ExpectError -- covariant
+// $FlowExpectedError -- covariant
 (superObservable: Observable<SubFoo>);
 
-// $ExpectError -- invariant. Subjects have their type parameter both in input and output positions.
+// $FlowExpectedError -- invariant. Subjects have their type parameter both in input and output positions.
 (subSubject: Subject<SuperFoo>);
-// $ExpectError -- invariant
+// $FlowExpectedError -- invariant
 (superSubject: Subject<SubFoo>);
 
-// $ExpectError -- contravariant
+// $FlowExpectedError -- contravariant
 (subObserver: Observer<SuperFoo>);
 (superObserver: Observer<SubFoo>);
 
@@ -319,18 +319,18 @@ function f1(cb: (err: Error, result: number) => void): void {}
 function f2(x: string, cb: (err: Error, result: number) => void): void {}
 (Observable.bindNodeCallback(f1)(): Observable<number>);
 (Observable.bindNodeCallback(f2)("arg"): Observable<number>);
-// $ExpectError
+// $FlowExpectedError
 (Observable.bindNodeCallback(f1)(): Observable<string>);
-// $ExpectError
+// $FlowExpectedError
 (Observable.bindNodeCallback(f2)("arg"): Observable<string>);
 
 function f3(cb: (result: number) => void): void {}
 function f4(x: string, cb: (result: number) => void): void {}
 (Observable.bindCallback(f3)(): Observable<number>);
 (Observable.bindCallback(f4)("arg"): Observable<number>);
-// $ExpectError
+// $FlowExpectedError
 (Observable.bindCallback(f3)(): Observable<string>);
-// $ExpectError
+// $FlowExpectedError
 (Observable.bindCallback(f4)("arg"): Observable<string>);
 
 numbers.takeWhile(n => n < 3);
@@ -356,10 +356,10 @@ Observable.of(1)
   .subscribe(() => {});
 
 (numbers.last(): Observable<number>);
-// $ExpectError
+// $FlowExpectedError
 (numbers.last(): Observable<string>);
 
-// $ExpectError
+// $FlowExpectedError
 (Observable.of(0).catch(() => Observable.of('foo')): Observable<string>);
 
 (Observable.of(1, null).filter(Boolean): Observable<number>)

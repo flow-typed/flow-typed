@@ -54,43 +54,43 @@ function test() {
     <div/>
   </FlipMove>;
 
-// $ExpectError
+// $FlowExpectedError
   <FlipMove easing={0}/>;
-// $ExpectError
+// $FlowExpectedError
   <FlipMove duration={true}/>;
-// $ExpectError
+// $FlowExpectedError
   <FlipMove delay={true}/>;
-// $ExpectError
+// $FlowExpectedError
   <FlipMove staggerDurationBy={true}/>;
-// $ExpectError
+// $FlowExpectedError
   <FlipMove staggerDelayBy={true}/>;
-// $ExpectError
+// $FlowExpectedError
   <FlipMove typeName={0}/>;
-// $ExpectError
+// $FlowExpectedError
   <FlipMove appearAnimation="foo"/>;
-// $ExpectError
+// $FlowExpectedError
   <FlipMove enterAnimation={{ from: 0, to: 0 }}/>;
-// $ExpectError
+// $FlowExpectedError
   <FlipMove leaveAnimation={{ from: { height: 0 }, to: { height: 10 } }}/>;
-// $ExpectError
+// $FlowExpectedError
   <FlipMove disableAllAnimations={0}/>;
-// $ExpectError
+// $FlowExpectedError
   <FlipMove getPosition={() => {
   }}/>;
-// $ExpectError
+// $FlowExpectedError
   <FlipMove maintainContainerHeight={0}/>;
-// $ExpectError
+// $FlowExpectedError
   <FlipMove verticalAlignment="foo"/>;
-// $ExpectError
+// $FlowExpectedError
   <FlipMove onStart={(n: number) => {
   }}/>;
-// $ExpectError
+// $FlowExpectedError
   <FlipMove onFinish={(n: number) => {
   }}/>;
-// $ExpectError
+// $FlowExpectedError
   <FlipMove onStartAll={(n: number) => {
   }}/>;
-// $ExpectError
+// $FlowExpectedError
   <FlipMove onFinishAll={(n: number) => {
   }}/>;
 }

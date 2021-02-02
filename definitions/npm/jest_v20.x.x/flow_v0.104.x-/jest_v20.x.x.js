@@ -127,10 +127,13 @@ type EnzymeMatchersType = {
  toExist(): void,
  toHaveClassName(className: string): void,
  toHaveHTML(html: string): void,
- toHaveProp: ((propKey: string, propValue?: any) => void) & ((props: Object) => void),
+ toHaveProp: ((propKey: string, propValue?: any) => void) &
+   ((props: {...}) => void),
  toHaveRef(refName: string): void,
- toHaveState: ((stateKey: string, stateValue?: any) => void) & ((state: Object) => void),
- toHaveStyle: ((styleKey: string, styleValue?: any) => void) & ((style: Object) => void),
+ toHaveState: ((stateKey: string, stateValue?: any) => void) &
+   ((state: {...}) => void),
+ toHaveStyle: ((styleKey: string, styleValue?: any) => void) &
+   ((style: {...}) => void),
  toHaveTagName(tagName: string): void,
  toHaveText(text: string): void,
  toIncludeText(text: string): void,

@@ -119,7 +119,7 @@ $.post('ajax/test.html', { name: 'John', time: '2pm' }, function(data) {
 
 //holdReady(hold: boolean): void;
 $.holdReady(true);
-// $ExpectError
+// $FlowExpectedError
 $.holdReady();
 
 //(selector: string, context?: Element | JQuery): JQuery;
@@ -434,7 +434,7 @@ testSelector = $('div').toggleClass(function() {
 });
 
 //val(_: void): string | string[] | number;
-// $ExpectError
+// $FlowExpectedError
 testString = testSelector.val();
 
 //val(value: string | string[] | number): JQuery;

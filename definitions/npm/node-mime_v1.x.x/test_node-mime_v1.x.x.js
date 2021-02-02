@@ -4,17 +4,17 @@ mime.lookup('file.txt');
 mime.load('./file.txt');
 mime.extension('application/json');
 
-// $ExpectError
+// $FlowExpectedError
 mime.lookup(3);
 
-// $ExpectError
+// $FlowExpectedError
 mime.lookup('file.txt', 3);
 
-// $ExpectError
+// $FlowExpectedError
 mime.extension(3);
 
-// $ExpectError
+// $FlowExpectedError
 mime.load(5);
 
-// $ExpectError
+// $FlowExpectedError
 mime.load(true);

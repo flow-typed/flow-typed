@@ -22,10 +22,10 @@ function getInstanceTest() {
   (amplitude.getInstance(): AmplitudeClient);
   (amplitude.getInstance('name'): AmplitudeClient);
 
-  // $ExpectError: getInstance only accepts strings
+  // $FlowExpectedError: getInstance only accepts strings
   amplitude.getInstance(5);
 
-  // $ExpectError: getInstance only accepts strings
+  // $FlowExpectedError: getInstance only accepts strings
   amplitude.getInstance(new Date());
 }
 
@@ -39,10 +39,10 @@ function identifyTests() {
   i.add('foo', 1);
   i.add('bar', -10);
 
-  // $ExpectError: add requies a name as first parameter
+  // $FlowExpectedError: add requies a name as first parameter
   i.add(15, 21);
 
-  // $ExpectError: add requies a number as second parameter
+  // $FlowExpectedError: add requies a number as second parameter
   i.add('foo', 'bar');
 
   //* append
@@ -98,39 +98,39 @@ function revenueTests() {
   //* setProductId
   r.setProductId('pid');
 
-  // $ExpectError: setProductId only accepts strings
+  // $FlowExpectedError: setProductId only accepts strings
   r.setProductId(5);
 
-  // $ExpectError: setProductId only accepts strings
+  // $FlowExpectedError: setProductId only accepts strings
   r.setProductId();
 
   //* setQuantity
   r.setQuantity(5);
   r.setQuantity();
 
-  // $ExpectError: setProductId only accepts numbers
+  // $FlowExpectedError: setProductId only accepts numbers
   r.setQuantity('foo');
 
   //* setPrice
   r.setPrice(15);
 
-  // $ExpectError: setPrice only accepts numbers
+  // $FlowExpectedError: setPrice only accepts numbers
   r.setPrice();
 
-  // $ExpectError: setPrice only accepts numbers
+  // $FlowExpectedError: setPrice only accepts numbers
   r.setPrice('foo');
 
   //* setRevenueType
   r.setRevenueType('cost');
 
-  // $ExpectError: setRevenueType only accepts strings
+  // $FlowExpectedError: setRevenueType only accepts strings
   r.setRevenueType(5);
 
-  // $ExpectError: setRevenueType only accepts strings
+  // $FlowExpectedError: setRevenueType only accepts strings
   r.setRevenueType();
 
   //* setEventProperties
-  // $ExpectError: setEventProperties requires arguments
+  // $FlowExpectedError: setEventProperties requires arguments
   r.setEventProperties();
   r.setEventProperties({});
   r.setEventProperties({ foo: 1 });
@@ -183,7 +183,7 @@ function amplitudeClientTests() {
   client.setDeviceId('uid');
 
   //* setUserProperties
-  // $ExpectError: setUserProperties requires arguments
+  // $FlowExpectedError: setUserProperties requires arguments
   r.setUserProperties();
   r.setUserProperties({});
   r.setUserProperties({ foo: 1 });

@@ -25,7 +25,8 @@ export function emptyVersion(): Version {
 export function getRangeLowerBound(rangeRaw: string | semver.Range): string {
   const range =
     typeof rangeRaw === 'string' ? new semver.Range(rangeRaw) : rangeRaw;
-  return range.set[0][0].semver.version;
+  // Fix for semver returning a bad comparator when the range is 'v0.x.x'
+  return range.set[0][0].semver.version || '0.0.0';
 }
 
 export function getRangeUpperBound(rangeRaw: string | semver.Range): string {

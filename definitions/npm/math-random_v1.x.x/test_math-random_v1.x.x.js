@@ -6,13 +6,13 @@ import random from "math-random";
 describe("math-random", () => {
   it("does not expect any arguments", () => {
     random();
-    // $ExpectError
+    // $FlowExpectedError
     random(null);
-    // $ExpectError
+    // $FlowExpectedError
     random({});
-    // $ExpectError
+    // $FlowExpectedError
     random("test");
-    // $ExpectError
+    // $FlowExpectedError
     random(5);
   });
 

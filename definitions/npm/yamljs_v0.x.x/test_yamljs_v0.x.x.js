@@ -24,5 +24,5 @@ items:
 const parsed = yamljs.parse(yaml);
 const generatedString = yamljs.stringify(parsed, 4, 4);
 
-// $ExpectError
+// $FlowExpectedError
 yamljs.stringify(parsed, "");

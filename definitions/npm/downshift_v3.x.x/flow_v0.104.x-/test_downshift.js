@@ -16,7 +16,7 @@ describe('Downshift', () => {
 
         (getMenuProps({ refKey: 'rootRef' }): {...});
 
-        // $ExpectError: `refKey` must be a string
+        // $FlowExpectedError: `refKey` must be a string
         (getMenuProps({ refKey: 1 }): {...});
 
         return <i />;
@@ -34,9 +34,9 @@ describe('Downshift', () => {
     });
 
     it('should raise an error when pass incompatible types', () => {
-      // $ExpectError
+      // $FlowExpectedError
       <StrDownshift initialSelectedItem={123} />;
-      // $ExpectError
+      // $FlowExpectedError
       <NumDownshift initialSelectedItem={'need number'} />;
     });
   });

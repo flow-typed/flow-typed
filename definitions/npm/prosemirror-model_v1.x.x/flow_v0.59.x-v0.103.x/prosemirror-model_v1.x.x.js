@@ -31,7 +31,7 @@ declare module "prosemirror-model" {
       f: (node: Node, pos: number, parent: Node, index: number) => ?boolean
     ): void,
 
-    descendents(f: (node: Node, pos: number, parent: Node) => ?boolean): void,
+    descendants(f: (node: Node, pos: number, parent: Node) => ?boolean): void,
 
     textBetween(
       from: number,
@@ -104,7 +104,7 @@ declare module "prosemirror-model" {
       f: (node: Node, start: number, parent: Node, index: number) => ?boolean
     ): void,
 
-    descendents(f: (node: Node, pos: number, parent: Node) => ?boolean): void,
+    descendants(f: (node: Node, pos: number, parent: Node) => ?boolean): void,
 
     append(other: Fragment): Fragment,
 

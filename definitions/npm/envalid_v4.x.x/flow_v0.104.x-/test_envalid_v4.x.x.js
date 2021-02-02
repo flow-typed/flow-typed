@@ -24,10 +24,10 @@ const env1: { NODE_ENV: string, ... } = cleanEnv({ NODE_ENV: 'TEST' }, {
   NODE_ENV: str()
 })
 
-// $ExpectError
+// $FlowExpectedError
 const env2: { NODE_ENV: number, ... } = cleanEnv({ NODE_ENV: 'TEST' }, {
   NODE_ENV: str()
 })
 
-// $ExpectError
+// $FlowExpectedError
 const invalidBooleanValidatorSpec: ValidatorSpec<number> = bool()

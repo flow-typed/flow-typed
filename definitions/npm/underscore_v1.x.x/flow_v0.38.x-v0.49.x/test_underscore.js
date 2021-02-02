@@ -74,23 +74,23 @@ _.findKey({a: {t: 'a'}, b: {t: 'b'}}, (v, k) => k === 'a' && v.t === 'a');
 _.findKey({a: {t: 'a'}, b: {t: 'b'}}, (v, k, o) => k === 'a' && v.t === 'a' && o[k] === v);
 
 
-// $ExpectError
+// $FlowExpectedError
 _.zip([{x:1}], [{x:2,y:1}])[0][2]
-// $ExpectError array literal. Tuple arity mismatch.
+// $FlowExpectedError array literal. Tuple arity mismatch.
 _.bindAll({msg: 'hi', greet: function(){ return this.msg;}}, ['greet', 'toString']);
 
 var identityIsString: string = _.identity('foo');
-// $ExpectError
+// $FlowExpectedError
 var identityIsNotString: string = _.identity(42);
 
 var timesString: Array<string> = _.times(3, (i) => `str${i}`);
 var timesNumber: Array<number> = _.times(3, (i) => i + 1);
-// $ExpectError
+// $FlowExpectedError
 var timesNumberError: Array<string> = _.times(3, (i) => i + 1);
 
 var toArrayString: Array<string> = _.toArray({foo: 'bar', baz: 'qux'});
 var toArrayNumber: Array<number> = _.toArray({foo: 4, bar: 2});
-// $ExpectError
+// $FlowExpectedError
 var toArrayNumberError: Array<string> = _.toArray({foo: 4, baz: 2});
 
 var composed: (prop: {num: number}) => number = _.compose(
@@ -102,7 +102,7 @@ var composed2: (prop: {num: number}) => string = _.compose(
   (prop: {num: number}) => prop.num,
 );
 
-// $ExpectError
+// $FlowExpectedError
 var composedFail: (prop: {num: number}) => number = _.compose(
   (num: number) => num + '',
   (prop: {num: number}) => prop.num,

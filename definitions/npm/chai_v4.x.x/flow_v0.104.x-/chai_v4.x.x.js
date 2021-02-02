@@ -187,6 +187,9 @@ declare module "chai" {
     static isAbove(val: number, abv: number, msg?: string): void;
     static isBelow(val: number, blw: number, msg?: string): void;
 
+    static exists(val : mixed, msg? : string) : void;
+    static notExists(val : mixed, msg? : string) : void;
+
     static isAtMost(val: number, atmst: number, msg?: string): void;
     static isAtLeast(val: number, atlst: number, msg?: string): void;
 
@@ -219,6 +222,9 @@ declare module "chai" {
 
     static notInclude(exp: string, inc: mixed, msg?: string): void;
     static notInclude<T>(exp: Array<T>, inc: T, msg?: string): void;
+
+    static deepInclude<T>(haystack : T[] | string, needle : $Shape<T>, msg?: string) : void;
+    static notDeepInclude<T>(haystack : T[] | string, needle : $Shape<T>, msg?: string) : void;
 
     static match(exp: mixed, re: RegExp, msg?: string): void;
     static notMatch(exp: mixed, re: RegExp, msg?: string): void;

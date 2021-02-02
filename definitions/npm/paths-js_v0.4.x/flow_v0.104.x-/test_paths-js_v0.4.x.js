@@ -17,7 +17,7 @@ const p2: Point = [2, 6];
 const p3: Point = [5, 3];
 const p4: Point = [5, 6];
 
-// $ExpectError
+// $FlowExpectedError
 const _p: Point = 0;
 
 const path: Path = new Path();
@@ -26,14 +26,14 @@ const path1: Path = path.moveto(p1);
 
 const str: string = path1.print();
 
-// $ExpectError
+// $FlowExpectedError
 const x: Path = path.moveto('a', 2);
 
 const r1: Rectangle = new Rectangle(p1, p2, p3, p4);
 
 const cr1: CurvedRectangle = new CurvedRectangle(p1, p2, p3, p4);
 
-// $ExpectError
+// $FlowExpectedError
 const _r: Rectangle = new Rectangle(1,2,3,5);
 
 const poly: Polygon = new Polygon([p1, p2, p3, p4], true);
@@ -48,7 +48,7 @@ const sec: Sector = new Sector(p1, 5, 15, 0, (Math.PI / 2));
 
 const conn: Connector = new Connector(p1, p2, 3.4);
 
-// $ExpectError
+// $FlowExpectedError
 const _conn: Connector = new Connector(p1, p2);
 
 type Country = {
@@ -83,7 +83,7 @@ const barOptions1 = {data: data, width: 1, height: 2, max: 3, min: 4}; // no acc
 const bar: Bar<Country> = new Bar(barOptions);
 const bar1: Bar<Country> = new Bar(barOptions1);
 
-// $ExpectError
+// $FlowExpectedError
 const _bar: Bar<number> = new Bar(data, accessor, 2, 4, 1);
 
 const data1: Array<Country> =[

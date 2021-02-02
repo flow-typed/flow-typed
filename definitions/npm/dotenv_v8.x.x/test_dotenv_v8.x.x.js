@@ -7,16 +7,16 @@ const configResult = dotenv.config();
 if (configResult.error) {
   (configResult.error: Error);
 
-  // $ExpectError
+  // $FlowExpectedError
   (parsed['KEY']: string);
 } else {
   const parsed = configResult.parsed;
   (parsed['KEY']: string);
 
-  // $ExpectError
+  // $FlowExpectedError
   (parsed['KEY']: number);
 
-  // $ExpectError
+  // $FlowExpectedError
   (parsed[1]: string);
 }
 
@@ -34,25 +34,25 @@ dotenv.config({
   debug: true,
 });
 
-// $ExpectError
+// $FlowExpectedError
 dotenv.config({ foo: 'bar' });
 
 const parsed = dotenv.parse('KEY=VALUE');
 (parsed['KEY']: string);
 
-// $ExpectError
+// $FlowExpectedError
 (parsed['KEY']: number);
 
-// $ExpectError
+// $FlowExpectedError
 (parsed[1]: string);
 
 dotenv.parse('KEY=VALUE', { debug: true });
 
-// $ExpectError
+// $FlowExpectedError
 dotenv.parse('KEY=VALUE', { debug: 'foo' });
 
-// $ExpectError
+// $FlowExpectedError
 dotenv.parse('KEY=VALUE', { foo: 'bar' });
 
-// $ExpectError
+// $FlowExpectedError
 dotenv.foo();

@@ -6,12 +6,12 @@ const tempy = require("tempy");
 
 (tempy.file({ name: "foo.txt" }): string);
 
-// $ExpectError
+// $FlowExpectedError
 tempy.file(123);
 
 (tempy.directory(): string);
 
-// $ExpectError
+// $FlowExpectedError
 tempy.directory({});
 
 (tempy.root: string);

@@ -3,17 +3,17 @@ import isTextPath from 'is-text-path';
 isTextPath('any-string');
 (isTextPath('any-string'): boolean);
 
-// $ExpectError
+// $FlowExpectedError
 isTextPath(4);
 
-// $ExpectError
+// $FlowExpectedError
 isTextPath({});
 
-// $ExpectError
+// $FlowExpectedError
 isTextPath();
 
-// $ExpectError
+// $FlowExpectedError
 isTextPath(null);
 
-// $ExpectError
+// $FlowExpectedError
 (isTextPath('any-string'): number);

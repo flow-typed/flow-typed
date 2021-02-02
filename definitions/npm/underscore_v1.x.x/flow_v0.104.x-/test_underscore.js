@@ -58,7 +58,7 @@ _.defaults({zero: 0, one: 1, empty: '', nan: NaN, nothing: null}, {zero: 1, one:
 _.defaults({zero: 0, one: 1, empty: '', nan: NaN, nothing: null}, {empty: 'full'}, {nan: 'nan'}, {word: 'word'}, {word: 'dog'});
 _.defaults(null, {a: 1});
 _.defaults(void 0, {a: 1});
-// $ExpectError
+// $FlowExpectedError
 _.defaults({}, null, void 0, {a: 1});
 
 _.isMatch({name: 'moe', age: 32}, {age: 32});
@@ -81,7 +81,7 @@ _.all(['a', true, 0]);
 _.union([1, 2, 3], [2, 30, 1], [1, 40]);
 _([1, 2, 3]).union([2, 30, 1], [1, 40]);
 _.union([1, 2, 3], [2, 30, 1], [1, 40, [1]]);
-// $ExpectError
+// $FlowExpectedError
 _.union([1, 2, 3], 4)
 
 _.filter([1, 2, 3, 4, 5, 6], function(num: number): boolean { return num % 2 === 0; });
@@ -102,31 +102,31 @@ _.findKey({a: {t: 'a'}, b: {t: 'b'}}, (v) => v.t === 'a');
 _.findKey({a: {t: 'a'}, b: {t: 'b'}}, (v, k) => k === 'a' && v.t === 'a');
 _.findKey({a: {t: 'a'}, b: {t: 'b'}}, (v, k, o) => k === 'a' && v.t === 'a' && o[k] === v);
 
-// $ExpectError
+// $FlowExpectedError
 _.findKey({a: {t: 'a'}, b: {t: 'b'}}, (v) => v.s === 'a');
-// $ExpectError
+// $FlowExpectedError
 _.findKey({a: {t: 'a'}, b: {t: 'b'}}, (v: { t: string, ... }, k: number) => (k === 1) && (v.t === 'a'));
-// $ExpectError
+// $FlowExpectedError
 _.findKey({a: {t: 'a'}, b: {t: 'b'}}, (v, k, o: { t: string, ... }) => k === 'a' && v.t === 'a' && o.t === v);
 
 
-// $ExpectError
+// $FlowExpectedError
 _.zip([{x:1}], [{x:2,y:1}])[0][2]
-// $ExpectError array literal. Tuple arity mismatch.
+// $FlowExpectedError array literal. Tuple arity mismatch.
 _.bindAll({msg: 'hi', greet: function(){ return this.msg;}}, ['greet', 'toString']);
 
 var identityIsString: string = _.identity('foo');
-// $ExpectError
+// $FlowExpectedError
 var identityIsNotString: string = _.identity(42);
 
 var timesString: Array<string> = _.times(3, (i) => `str${i}`);
 var timesNumber: Array<number> = _.times(3, (i) => i + 1);
-// $ExpectError
+// $FlowExpectedError
 var timesNumberError: Array<string> = _.times(3, (i) => i + 1);
 
 var toArrayString: Array<string> = _.toArray({foo: 'bar', baz: 'qux'});
 var toArrayNumber: Array<number> = _.toArray({foo: 4, bar: 2});
-// $ExpectError
+// $FlowExpectedError
 var toArrayNumberError: Array<string> = _.toArray({foo: 4, baz: 2});
 
 var composed: (prop: { num: number, ... }) => number = _.compose(
@@ -138,7 +138,7 @@ var composed2: (prop: { num: number, ... }) => string = _.compose(
   (prop: { num: number, ... }) => prop.num,
 );
 
-// $ExpectError
+// $FlowExpectedError
 var composedFail: (prop: { num: number, ... }) => number = _.compose(
   (num: number) => num + '',
   (prop: { num: number, ... }) => prop.num,
@@ -150,9 +150,9 @@ _({a: {t: 'a'}, b: {t: 'b'}}).findKey((v) => v.t === 'a');
 _({a: {t: 'a'}, b: {t: 'b'}}).findKey((v, k) => k === 'a' && v.t === 'a');
 _({a: {t: 'a'}, b: {t: 'b'}}).findKey((v, k, o) => k === 'a' && v.t === 'a' && o[k] === v);
 
-// $ExpectError
+// $FlowExpectedError
 _({a: {t: 'a'}, b: {t: 'b'}}).findKey((v) => v.s === 'a');
-// $ExpectError
+// $FlowExpectedError
 _({a: {t: 'a'}, b: {t: 'b'}}).findKey((v: { t: string, ... }, k: number) => (k === 1) && (v.t === 'a'));
-// $ExpectError
+// $FlowExpectedError
 _({a: {t: 'a'}, b: {t: 'b'}}).findKey((v, k, o: { t: string, ... }) => k === 'a' && v.t === 'a' && o.t === v);

@@ -2,17 +2,17 @@
 import thesaurus from "thesaurus";
 
 const tokyoSynms: Array<string> = thesaurus.find("tokyo");
-// $ExpectError
+// $FlowExpectedError
 thesaurus.find(2);
 
 thesaurus.load("dummyDatFilePath");
-// $ExpectError
+// $FlowExpectedError
 thesaurus.load(2);
 
 const thesaurusData: { [string]: Array<string>, ... } = thesaurus.get();
-// $ExpectError
+// $FlowExpectedError
 thesaurus.get(2);
 
 const thesaurusDataStr: string = thesaurus.toJson();
-// $ExpectError
+// $FlowExpectedError
 thesaurus.toJson(2);

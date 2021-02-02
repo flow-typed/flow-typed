@@ -239,7 +239,7 @@ declare module "yargs" {
     usage(message: string, opts?: { [key: string]: Options, ... }): this;
 
     version(): this;
-    version(version: string): this;
+    version(version: string | boolean): this;
     version(option: string | (() => string), version: string): this;
     version(
       option: string | (() => string),

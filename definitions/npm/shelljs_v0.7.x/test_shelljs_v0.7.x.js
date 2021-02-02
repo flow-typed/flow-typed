@@ -9,13 +9,13 @@ import type {
 } from 'shelljs';
 import sh from 'shelljs';
 
-// $ExpectError
+// $FlowExpectedError
 sh.ShellString();
-// $ExpectError
+// $FlowExpectedError
 sh.ShellString({});
-// $ExpectError
+// $FlowExpectedError
 sh.ShellString("foo", {});
-// $ExpectError
+// $FlowExpectedError
 sh.ShellString("foo", "bar", {});
 // Success
 (sh.ShellString("foo", "bar", 0): ShellString);
@@ -32,27 +32,27 @@ sh.ShellString("foo", "bar", {});
 // Success
 (sh.ShellString(["foo", "bar"]): Array<string>);
 
-// $ExpectError
+// $FlowExpectedError
 sh.cat();
-// $ExpectError
+// $FlowExpectedError
 sh.cat(0);
 // Success
 (sh.cat('/dev/null'): ShellString);
 
-// $ExpectError
+// $FlowExpectedError
 sh.cd(0);
 // Success
 (sh.cd(): ShellString);
 // Success
 (sh.cd('/tmp'): ShellString);
 
-// $ExpectError
+// $FlowExpectedError
 sh.chmod();
-// $ExpectError
+// $FlowExpectedError
 sh.chmod(755);
-// $ExpectError
+// $FlowExpectedError
 sh.chmod('nope', 755, '~');
-// $ExpectError
+// $FlowExpectedError
 sh.chmod({ '-x': true }, 755, '~');
 // Success
 (sh.chmod({ '-R': true }, 755, '~'): ShellString);
@@ -63,13 +63,13 @@ sh.chmod({ '-x': true }, 755, '~');
 // Success
 (sh.chmod('u+x', '~'): ShellString);
 
-// $ExpectError
+// $FlowExpectedError
 sh.cp();
-// $ExpectError
+// $FlowExpectedError
 sh.cp(0);
-// $ExpectError
+// $FlowExpectedError
 sh.cp('/dev/null');
-// $ExpectError
+// $FlowExpectedError
 sh.cp({ 'nope': true }, '/dev/null', '/tmp/');
 // Success
 (sh.cp({ '-R': true }, '/dev/null', '/tmp/'): ShellString);
@@ -78,21 +78,21 @@ sh.cp({ 'nope': true }, '/dev/null', '/tmp/');
 // Success
 (sh.cp('/dev/null', '/dev/null', '/tmp/'): ShellString);
 
-// $ExpectError
+// $FlowExpectedError
 sh.dirs(0);
-// $ExpectError
+// $FlowExpectedError
 sh.dirs({ 'nope': true });
 // Success
 (sh.dirs('-c'): string[]);
 // Success
 (sh.dirs('-9'): string[]);
 
-// $ExpectError
+// $FlowExpectedError
 sh.echo(new Function());
 // Success
 (sh.echo('foo', 'bar'): ShellString);
 
-// $ExpectError
+// $FlowExpectedError
 sh.env[0];
 // Success
 (sh.env['USER']: string);
@@ -100,7 +100,7 @@ sh.env[0];
 // Success
 (sh.error(): ?string);
 
-// $ExpectError
+// $FlowExpectedError
 sh.exec(0);
 // Success
 (sh.exec('pwd', { async: true, silent: true }, (code, stdout, stderr) => {}): ShellAsync);
@@ -113,29 +113,29 @@ sh.exec(0);
 // Success
 (sh.exec('pwd', (code, stdout, stderr) => {}): ShellAsync);
 
-// $ExpectError
+// $FlowExpectedError
 sh.exit('');
 // Success
 (sh.exit(): void);
 // Success
 (sh.exit(0): void);
 
-// $ExpectError
+// $FlowExpectedError
 sh.find();
-// $ExpectError
+// $FlowExpectedError
 sh.find(0);
 // Success
 (sh.find('~', '/tmp'): ShellArray<string>);
 
-// $ExpectError
+// $FlowExpectedError
 sh.grep();
-// $ExpectError
+// $FlowExpectedError
 sh.grep(0);
-// $ExpectError
+// $FlowExpectedError
 sh.grep({'-x': true }, 'type');
-// $ExpectError
+// $FlowExpectedError
 sh.grep({'-x': true }, 'type');
-// $ExpectError
+// $FlowExpectedError
 sh.grep({ '-x': true }, /type/, 'definitions/**/*.js');
 // Success
 (sh.grep({ '-l': true }, /type/, 'definitions/**/*.js'): ShellString);
@@ -144,31 +144,31 @@ sh.grep({ '-x': true }, /type/, 'definitions/**/*.js');
 // Success
 (sh.grep('type', 'definitions/**/*.js'): ShellString);
 
-// $ExpectError
+// $FlowExpectedError
 sh.head();
-// $ExpectError
+// $FlowExpectedError
 sh.head({});
 // Success
 (sh.head(1, '/dev/random'): ShellString);
 // Success
 (sh.head('/dev/random'): ShellString);
 
-// $ExpectError
+// $FlowExpectedError
 sh.ln();
-// $ExpectError
+// $FlowExpectedError
 sh.ln(0);
-// $ExpectError
+// $FlowExpectedError
 sh.ln('~');
-// $ExpectError
+// $FlowExpectedError
 (sh.ln({ '-x': true }, '~', '/tmp/it-me'): ShellString);
 // Success
 (sh.ln({ '-s': true }, '~', '/tmp/it-me'): ShellString);
 
-// $ExpectError
+// $FlowExpectedError
 sh.ls();
-// $ExpectError
+// $FlowExpectedError
 sh.ls(0);
-// $ExpectError
+// $FlowExpectedError
 sh.ls({ '-x': true }, '~');
 // Success
 (sh.ls({ '-l': true }, '~'): ShellArray<ShellFileStats>);
@@ -179,68 +179,68 @@ sh.ls({ '-x': true }, '~');
 // Success
 (sh.ls('~'): ShellArray<string>);
 
-// $ExpectError
+// $FlowExpectedError
 sh.mkdir();
-// $ExpectError
+// $FlowExpectedError
 sh.mkdir(0);
-// $ExpectError
+// $FlowExpectedError
 sh.mkdir({ '-x': true }, '/tmp/tmp0/tmp1');
 // Success
 (sh.mkdir({ '-p': true }, '/tmp/tmp0/tmp1'): ShellString);
 // Success
 (sh.mkdir('/tmp/tmp0'): ShellString);
 
-// $ExpectError
+// $FlowExpectedError
 sh.mv();
-// $ExpectError
+// $FlowExpectedError
 sh.mv(0);
-// $ExpectError
+// $FlowExpectedError
 sh.mv('/tmp/tmp0');
-// $ExpectError
+// $FlowExpectedError
 sh.mv({ '-x': true }, '/tmp/tmp0');
-// $ExpectError
+// $FlowExpectedError
 sh.mv({ '-x': true }, '/tmp/tmp0', '/tmp/tmp1');
 // Success
 (sh.mv({ '-f': true }, '/tmp/tmp0', '/tmp/tmp1'): ShellString);
 
-// $ExpectError
+// $FlowExpectedError
 sh.pushd();
-// $ExpectError
+// $FlowExpectedError
 sh.pushd(0);
-// $ExpectError
+// $FlowExpectedError
 sh.pushd({ '-x': true }, '/tmp');
 // Success
 (sh.pushd({ '-n': true }, '/tmp'): string[]);
 // Success
 (sh.pushd('/tmp'): string[]);
 
-// $ExpectError
+// $FlowExpectedError
 sh.pwd(0);
 // Success
 (sh.pwd(): ShellString);
 
-// $ExpectError
+// $FlowExpectedError
 sh.rm();
-// $ExpectError
+// $FlowExpectedError
 sh.rm(0);
-// $ExpectError
+// $FlowExpectedError
 sh.rm('/tmp/tmp0', 0);
-// $ExpectError
+// $FlowExpectedError
 sh.rm({ '-x': true }, '/tmp/tmp0', '/tmp/tmp1');
 // Success
 (sh.rm({ '-r': true, '-f': true }, '/tmp/tmp0', '/tmp/tmp1'): ShellString);
 // Success
 (sh.rm('/tmp/tmp0', '/tmp/tmp1'): ShellString);
 
-// $ExpectError
+// $FlowExpectedError
 sh.sed();
-// $ExpectError
+// $FlowExpectedError
 sh.sed(0);
-// $ExpectError
+// $FlowExpectedError
 sh.sed('foo');
-// $ExpectError
+// $FlowExpectedError
 sh.sed('foo', 'bar');
-// $ExpectError
+// $FlowExpectedError
 sh.sed({ '-x': true }, 'foo', 'bar', '/tmp/tmp0');
 // Success
 (sh.sed({ '-i': true }, 'foo', 'bar', '/tmp/tmp0'): ShellString);
@@ -249,58 +249,58 @@ sh.sed({ '-x': true }, 'foo', 'bar', '/tmp/tmp0');
 // Success
 (sh.sed(/foo/, 'bar', '/tmp/tmp0'): ShellString);
 
-// $ExpectError
+// $FlowExpectedError
 sh.set();
-// $ExpectError
+// $FlowExpectedError
 sh.set(0);
-// $ExpectError
+// $FlowExpectedError
 sh.set('-x');
 // Success
 (sh.set('-e'): void);
 // Success
 (sh.set('+e'): void);
 
-// $ExpectError
+// $FlowExpectedError
 sh.sort();
-// $ExpectError
+// $FlowExpectedError
 sh.sort(0);
-// $ExpectError
+// $FlowExpectedError
 sh.sort({ '-x': true }, '/tmp/tmp0');
 // Success
 (sh.sort({ '-r': true }, '/tmp/tmp0'): ShellString);
 // Success
 (sh.sort('/tmp/tmp0'): ShellString);
 
-// $ExpectError
+// $FlowExpectedError
 sh.tail();
-// $ExpectError
+// $FlowExpectedError
 sh.tail({});
 // Success
 (sh.tail(1, '/dev/random'): ShellString);
 // Success
 (sh.tail('/dev/random'): ShellString);
 
-// $ExpectError
+// $FlowExpectedError
 sh.tempdir(0);
 // Success
 (sh.tempdir(): string);
 
-// $ExpectError
+// $FlowExpectedError
 sh.test();
-// $ExpectError
+// $FlowExpectedError
 sh.test(0);
-// $ExpectError
+// $FlowExpectedError
 sh.test('-x');
-// $ExpectError
+// $FlowExpectedError
 sh.test('-x', '~');
 // Success
 (sh.test('-d', '~'): boolean);
 
-// $ExpectError
+// $FlowExpectedError
 sh.touch();
-// $ExpectError
+// $FlowExpectedError
 sh.touch(0);
-// $ExpectError
+// $FlowExpectedError
 sh.touch({ '-x': true }, '/tmp/tmp0');
 // Success
 (sh.touch({ '-c': true }, '/tmp/tmp0'): ShellString);
@@ -309,19 +309,19 @@ sh.touch({ '-x': true }, '/tmp/tmp0');
 // Success
 (sh.touch('/tmp/tmp1'): ShellString);
 
-// $ExpectError
+// $FlowExpectedError
 sh.which();
-// $ExpectError
+// $FlowExpectedError
 sh.which(0);
 // $ExpectSucess
 (sh.which('sh'): ShellString);
 
-// $ExpectError
+// $FlowExpectedError
 sh.cat('/tmp/tmp0').cat(0);
 // Success
 (sh.cat('/tmp/tmp0').cat(): ShellString);
 
-// $ExpectError
+// $FlowExpectedError
 sh.cat('/tmp/tmp0').exec(0);
 // Success
 (sh.cat('/tmp/tmp0').exec('cat', { async: true, silent: true }, (code, stdout, stderr) => {}): ShellAsync);
@@ -334,15 +334,15 @@ sh.cat('/tmp/tmp0').exec(0);
 // Success
 (sh.cat('/tmp/tmp0').exec('cat', (code, stdout, stderr) => {}): ShellAsync);
 
-// $ExpectError
+// $FlowExpectedError
 sh.cat('/tmp/tmp0').grep();
-// $ExpectError
+// $FlowExpectedError
 sh.cat('/tmp/tmp0').grep(0);
-// $ExpectError
+// $FlowExpectedError
 sh.cat('/tmp/tmp0').grep({'-x': true }, 'type');
-// $ExpectError
+// $FlowExpectedError
 sh.cat('/tmp/tmp0').grep({'-x': true }, 'type');
-// $ExpectError
+// $FlowExpectedError
 sh.cat('/tmp/tmp0').grep({ '-x': true }, /type/, 'definitions/**/*.js');
 // Success
 (sh.cat('/tmp/tmp0').grep({ '-l': true }, /type/): ShellString);
@@ -351,52 +351,52 @@ sh.cat('/tmp/tmp0').grep({ '-x': true }, /type/, 'definitions/**/*.js');
 // Success
 (sh.cat('/tmp/tmp0').grep('type'): ShellString);
 
-// $ExpectError
+// $FlowExpectedError
 sh.cat('/tmp/tmp0').head({});
 // Success
 (sh.cat('/tmp/tmp0').head(1): ShellString);
 // Success
 (sh.cat('/tmp/tmp0').head(): ShellString);
 
-// $ExpectError
+// $FlowExpectedError
 sh.cat('/tmp/tmp0').sed();
-// $ExpectError
+// $FlowExpectedError
 sh.cat('/tmp/tmp0').sed(0);
-// $ExpectError
+// $FlowExpectedError
 sh.cat('/tmp/tmp0').sed('foo');
-// $ExpectError
+// $FlowExpectedError
 sh.cat('/tmp/tmp0').sed({ '-x': true }, 'foo', 'bar');
 // Success
 (sh.cat('/tmp/tmp0').sed('foo', 'bar'): ShellString);
 // Success
 (sh.cat('/tmp/tmp0').sed(/foo/, 'bar'): ShellString);
 
-// $ExpectError
+// $FlowExpectedError
 sh.cat('/tmp/tmp0').sort({ '-x': true });
 // Success
 (sh.cat('/tmp/tmp0').sort({ '-r': true }): ShellString);
 // Success
 (sh.cat('/tmp/tmp0').sort(): ShellString);
 
-// $ExpectError
+// $FlowExpectedError
 sh.cat('/tmp/tmp0').tail({});
 // Success
 (sh.cat('/tmp/tmp0').tail(1): ShellString);
 // Success
 (sh.cat('/tmp/tmp0').tail(): ShellString);
 
-// $ExpectError
+// $FlowExpectedError
 sh.cat('/tmp/tmp0').to();
-// $ExpectError
+// $FlowExpectedError
 sh.cat('/tmp/tmp0').to(0);
 // Success
 (sh.cat('/tmp/tmp0').to('/tmp/tmp1'): ShellString);
 // Success
 (sh.cat('/tmp/tmp0').sed(/foo/, 'bar').to('/tmp/tmp1'): ShellString);
 
-// $ExpectError
+// $FlowExpectedError
 sh.cat('/tmp/tmp0').toEnd();
-// $ExpectError
+// $FlowExpectedError
 sh.cat('/tmp/tmp0').toEnd(0);
 // Success
 (sh.cat('/tmp/tmp0').toEnd('/tmp/tmp1'): ShellString);

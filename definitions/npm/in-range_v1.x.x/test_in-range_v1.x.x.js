@@ -4,17 +4,17 @@ import inRange from 'in-range';
 let a: boolean = inRange(2, 3, 4)
 a = inRange(2, 4)
 
-// $ExpectError
+// $FlowExpectedError
 const s: string = inRange(2, 3, 4)
 
-// $ExpectError
+// $FlowExpectedError
 inRange(2)
 
-// $ExpectError
+// $FlowExpectedError
 inRange(2, "2", 2)
 
-// $ExpectError
+// $FlowExpectedError
 inRange(true, 2, 2)
 
-// $ExpectError
+// $FlowExpectedError
 inRange(2, 2, "2")

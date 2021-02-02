@@ -4,21 +4,21 @@ import store from 'react-native-simple-store';
 
 store.get('item');
 store.get([['item', 'item2']]);
-// $ExpectError
+// $FlowExpectedError
 store.get(2);
-// $ExpectError
+// $FlowExpectedError
 store.get(false);
 
 store.save('hasItem', false);
-// $ExpectError
+// $FlowExpectedError
 store.save('hasItem');
 
 store.update('hasItem', false);
-// $ExpectError
+// $FlowExpectedError
 store.update('hasItem');
 
 store.push('items', '1');
-// $ExpectError
+// $FlowExpectedError
 store.push('items');
 
 store.keys();

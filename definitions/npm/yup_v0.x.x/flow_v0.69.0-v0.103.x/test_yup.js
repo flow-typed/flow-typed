@@ -32,12 +32,12 @@ describe('setLocale', () => {
   });
 
   it('should raise an error when passing object with missing key', () => {
-    // $ExpectError: `abc` is missing
+    // $FlowExpectedError: `abc` is missing
     setLocale({ abc: { test: 'test' } });
   });
 
   it('should raise an error when passing invalid locale object', () => {
-    // $ExpectError: `min__` is missing
+    // $FlowExpectedError: `min__` is missing
     setLocale({ number: { min__: 'test' } });
   });
 });
@@ -62,10 +62,10 @@ describe('bool & boolean', () => {
 
     it('should raise an error when passing incompatible arguments', () => {
       [instance, instance2].map(schema => {
-        // $ExpectError
+        // $FlowExpectedError
         schema.nullable('need boolean');
 
-        // $ExpectError
+        // $FlowExpectedError
         schema.required({ need: 'function or string' });
       });
     });
@@ -78,7 +78,7 @@ describe('bool & boolean', () => {
         .validateSync(null);
 
       (val1: boolean);
-      // $ExpectError: check any
+      // $FlowExpectedError: check any
       (val1: number);
 
       const val2 = bool()
@@ -86,7 +86,7 @@ describe('bool & boolean', () => {
         .validateSync(null);
 
       (val2: ?boolean);
-      // $ExpectError: check any
+      // $FlowExpectedError: check any
       (val2: number);
 
       const val3 = bool()
@@ -94,7 +94,7 @@ describe('bool & boolean', () => {
         .validateSync(null);
 
       (val3: boolean);
-      // $ExpectError: check any
+      // $FlowExpectedError: check any
       (val3: number);
 
       const val4 = bool()
@@ -102,7 +102,7 @@ describe('bool & boolean', () => {
         .validateSync(null);
 
       (val4: ?boolean);
-      // $ExpectError: check any
+      // $FlowExpectedError: check any
       (val4: number);
     });
 
@@ -142,7 +142,7 @@ describe('bool & boolean', () => {
         schema.validate(null).then(val => {
           (val: boolean);
 
-          // $ExpectError: check any
+          // $FlowExpectedError: check any
           (val: number);
         });
 
@@ -198,33 +198,33 @@ describe('number', () => {
 
     it('should raise an error when passing incompatible arguments', () => {
       [instance, instance2].map(schema => {
-        // $ExpectError
+        // $FlowExpectedError
         schema.nullable('need number');
-        // $ExpectError
+        // $FlowExpectedError
         schema.required({ need: 'function or string' });
-        // $ExpectError
+        // $FlowExpectedError
         schema.min('need a number');
-        // $ExpectError
+        // $FlowExpectedError
         schema.min(1, { need: 'func or string' });
-        // $ExpectError
+        // $FlowExpectedError
         schema.max('need a number');
-        // $ExpectError
+        // $FlowExpectedError
         schema.max(1, { need: 'func or string' });
-        // $ExpectError
+        // $FlowExpectedError
         schema.lessThan('need a number');
-        // $ExpectError
+        // $FlowExpectedError
         schema.lessThan(1, { need: 'func or string' });
-        // $ExpectError
+        // $FlowExpectedError
         schema.moreThan('need a number');
-        // $ExpectError
+        // $FlowExpectedError
         schema.moreThan(1, { need: 'func or string' });
-        // $ExpectError
+        // $FlowExpectedError
         schema.positive({ need: 'func or string' });
-        // $ExpectError
+        // $FlowExpectedError
         schema.negative({ need: 'func or string' });
-        // $ExpectError
+        // $FlowExpectedError
         schema.integer({ need: 'func or string' });
-        // $ExpectError: `__floor` is missing in enum
+        // $FlowExpectedError: `__floor` is missing in enum
         schema.round('__floor');
       });
     });
@@ -237,7 +237,7 @@ describe('number', () => {
         .validateSync(null);
 
       (val1: number);
-      // $ExpectError: check any
+      // $FlowExpectedError: check any
       (val1: string);
 
       const val2 = number()
@@ -245,7 +245,7 @@ describe('number', () => {
         .validateSync(null);
 
       (val2: ?number);
-      // $ExpectError: check any
+      // $FlowExpectedError: check any
       (val2: string);
 
       const val3 = number()
@@ -253,7 +253,7 @@ describe('number', () => {
         .validateSync(null);
 
       (val3: number);
-      // $ExpectError: check any
+      // $FlowExpectedError: check any
       (val3: string);
 
       const val4 = number()
@@ -261,7 +261,7 @@ describe('number', () => {
         .validateSync(null);
 
       (val4: ?number);
-      // $ExpectError: check any
+      // $FlowExpectedError: check any
       (val4: string);
     });
 
@@ -301,7 +301,7 @@ describe('number', () => {
         schema.validate(null).then(val => {
           (val: number);
 
-          // $ExpectError: check any
+          // $FlowExpectedError: check any
           (val: string);
         });
 
@@ -357,33 +357,33 @@ describe('string', () => {
 
     it('should raise an error when passing incompatible arguments', () => {
       [instance, instance2].map(schema => {
-        // $ExpectError
+        // $FlowExpectedError
         schema.nullable('need string');
-        // $ExpectError
+        // $FlowExpectedError
         schema.required({ need: 'function or string' });
-        // $ExpectError
+        // $FlowExpectedError
         schema.min('need a number');
-        // $ExpectError
+        // $FlowExpectedError
         schema.min(1, { need: 'func or string' });
-        // $ExpectError
+        // $FlowExpectedError
         schema.max('need a number');
-        // $ExpectError
+        // $FlowExpectedError
         schema.max(1, { need: 'func or string' });
-        // $ExpectError
+        // $FlowExpectedError
         schema.length('need a number');
-        // $ExpectError
+        // $FlowExpectedError
         schema.length(1, { need: 'func or string' });
-        // $ExpectError
+        // $FlowExpectedError
         schema.email({ need: 'func or string' });
-        // $ExpectError
+        // $FlowExpectedError
         schema.url({ need: 'func or string' });
-        // $ExpectError
+        // $FlowExpectedError
         schema.trim({ need: 'func or string' });
-        // $ExpectError
+        // $FlowExpectedError
         schema.lowercase({ need: 'func or string' });
-        // $ExpectError
+        // $FlowExpectedError
         schema.uppercase({ need: 'func or string' });
-        // $ExpectError
+        // $FlowExpectedError
         schema.matches('need RegExp');
       });
     });
@@ -396,7 +396,7 @@ describe('string', () => {
         .validateSync(null);
 
       (val1: string);
-      // $ExpectError: check any
+      // $FlowExpectedError: check any
       (val1: number);
 
       const val2 = string()
@@ -404,7 +404,7 @@ describe('string', () => {
         .validateSync(null);
 
       (val2: ?string);
-      // $ExpectError: check any
+      // $FlowExpectedError: check any
       (val2: number);
 
       const val3 = string()
@@ -412,7 +412,7 @@ describe('string', () => {
         .validateSync(null);
 
       (val3: string);
-      // $ExpectError: check any
+      // $FlowExpectedError: check any
       (val3: number);
 
       const val4 = string()
@@ -420,7 +420,7 @@ describe('string', () => {
         .validateSync(null);
 
       (val4: ?string);
-      // $ExpectError: check any
+      // $FlowExpectedError: check any
       (val4: number);
     });
 
@@ -460,7 +460,7 @@ describe('string', () => {
         schema.validate(null).then(val => {
           (val: string);
 
-          // $ExpectError: check any
+          // $FlowExpectedError: check any
           (val: number);
         });
 
@@ -504,21 +504,21 @@ describe('array', () => {
 
     it('should raise an error when passing incompatible arguments', () => {
       [instance, instance2].map(schema => {
-        // $ExpectError
+        // $FlowExpectedError
         schema.nullable('need string');
-        // $ExpectError
+        // $FlowExpectedError
         schema.required({ need: 'function or string' });
-        // $ExpectError
+        // $FlowExpectedError
         schema.min('need a number');
-        // $ExpectError
+        // $FlowExpectedError
         schema.min(1, { need: 'func or string' });
-        // $ExpectError
+        // $FlowExpectedError
         schema.max('need a number');
-        // $ExpectError
+        // $FlowExpectedError
         schema.max(1, { need: 'func or string' });
-        // $ExpectError
+        // $FlowExpectedError
         schema.compact('need function');
-        // $ExpectError need yup schema
+        // $FlowExpectedError need yup schema
         schema.of(123);
       });
     });
@@ -531,7 +531,7 @@ describe('array', () => {
         .validateSync(null);
 
       (val1: Array<number>);
-      // $ExpectError: check any
+      // $FlowExpectedError: check any
       (val1: number);
 
       const val2 = array<number>()
@@ -539,7 +539,7 @@ describe('array', () => {
         .validateSync(null);
 
       (val2: ?Array<number>);
-      // $ExpectError: check any
+      // $FlowExpectedError: check any
       (val2: number);
 
       const val3 = array<number>()
@@ -547,7 +547,7 @@ describe('array', () => {
         .validateSync(null);
 
       (val3: Array<number>);
-      // $ExpectError: check any
+      // $FlowExpectedError: check any
       (val3: number);
 
       const val4 = array<number>()
@@ -555,7 +555,7 @@ describe('array', () => {
         .validateSync(null);
 
       (val4: ?Array<number>);
-      // $ExpectError: check any
+      // $FlowExpectedError: check any
       (val4: number);
     });
 
@@ -593,7 +593,7 @@ describe('array', () => {
         schema.validate(null).then(val => {
           (val: Array<number>);
 
-          // $ExpectError: check any
+          // $FlowExpectedError: check any
           (val: number);
         });
 
@@ -634,18 +634,18 @@ describe('date', () => {
 
     it('should raise an error when passing incompatible arguments', () => {
       [instance, instance2].map(schema => {
-        // $ExpectError
+        // $FlowExpectedError
         schema.nullable('need Date');
-        // $ExpectError
+        // $FlowExpectedError
         schema.required({ need: 'function or string' });
 
-        // $ExpectError: need Date or string or Ref
+        // $FlowExpectedError: need Date or string or Ref
         schema.min(123);
-        // $ExpectError
+        // $FlowExpectedError
         schema.min(new Date(), { need: 'func or string' });
-        // $ExpectError: need Date or string or Ref
+        // $FlowExpectedError: need Date or string or Ref
         schema.max(123);
-        // $ExpectError
+        // $FlowExpectedError
         schema.max(new Date(), { need: 'func or string' });
       });
     });
@@ -658,7 +658,7 @@ describe('date', () => {
         .validateSync(null);
 
       (val1: Date);
-      // $ExpectError: check any
+      // $FlowExpectedError: check any
       (val1: string);
 
       const val2 = date()
@@ -666,7 +666,7 @@ describe('date', () => {
         .validateSync(null);
 
       (val2: ?Date);
-      // $ExpectError: check any
+      // $FlowExpectedError: check any
       (val2: string);
 
       const val3 = date()
@@ -674,7 +674,7 @@ describe('date', () => {
         .validateSync(null);
 
       (val3: Date);
-      // $ExpectError: check any
+      // $FlowExpectedError: check any
       (val3: string);
 
       const val4 = date()
@@ -682,7 +682,7 @@ describe('date', () => {
         .validateSync(null);
 
       (val4: ?Date);
-      // $ExpectError: check any
+      // $FlowExpectedError: check any
       (val4: string);
     });
 
@@ -722,7 +722,7 @@ describe('date', () => {
         schema.validate(null).then(val => {
           (val: Date);
 
-          // $ExpectError: check any
+          // $FlowExpectedError: check any
           (val: string);
         });
 
@@ -759,10 +759,10 @@ describe('mixed', () => {
 
     it('should raise an error when passing incompatible arguments', () => {
       [instance, instance2].map(schema => {
-        // $ExpectError
+        // $FlowExpectedError
         schema.nullable('need mixed');
 
-        // $ExpectError
+        // $FlowExpectedError
         schema.required({ need: 'function or string' });
       });
     });
@@ -775,7 +775,7 @@ describe('mixed', () => {
         .validateSync(null);
 
       (val1: mixed);
-      // $ExpectError: check any
+      // $FlowExpectedError: check any
       (val1: number);
 
       const val2 = mixed()
@@ -783,7 +783,7 @@ describe('mixed', () => {
         .validateSync(null);
 
       (val2: ?mixed);
-      // $ExpectError: check any
+      // $FlowExpectedError: check any
       (val2: number);
 
       const val3 = mixed()
@@ -791,7 +791,7 @@ describe('mixed', () => {
         .validateSync(null);
 
       (val3: mixed);
-      // $ExpectError: check any
+      // $FlowExpectedError: check any
       (val3: number);
 
       const val4 = mixed()
@@ -799,7 +799,7 @@ describe('mixed', () => {
         .validateSync(null);
 
       (val4: ?mixed);
-      // $ExpectError: check any
+      // $FlowExpectedError: check any
       (val4: number);
     });
 
@@ -839,7 +839,7 @@ describe('mixed', () => {
         schema.validate(null).then(val => {
           (val: mixed);
 
-          // $ExpectError: check any
+          // $FlowExpectedError: check any
           (val: number);
         });
 
@@ -877,7 +877,7 @@ describe('object', () => {
 
     (schema: Schema<
       {
-        // $ExpectError: check any
+        // $FlowExpectedError: check any
         a: string,
         b: boolean,
       },
@@ -887,7 +887,7 @@ describe('object', () => {
     (schema: Schema<
       {
         a: number,
-        // $ExpectError: check any
+        // $FlowExpectedError: check any
         b: string,
       },
       any
@@ -909,7 +909,7 @@ describe('object', () => {
       (schema: Schema<
         {
           a: string,
-          // $ExpectError: check any
+          // $FlowExpectedError: check any
           a2: number,
         },
         any
@@ -925,10 +925,10 @@ describe('object', () => {
 
       (schema: Schema<{ a2: string }, any>);
 
-      // $ExpectError: check any
+      // $FlowExpectedError: check any
       (schema: Schema<{ a2: number }, any>);
 
-      // $ExpectError: a missing in new shema
+      // $FlowExpectedError: a missing in new shema
       (schema: Schema<{ a: number }, any>);
     });
   });
@@ -940,7 +940,7 @@ describe('object', () => {
         .validateSync(null);
 
       (val1: { a: number });
-      // $ExpectError: check any
+      // $FlowExpectedError: check any
       (val1: number);
 
       const val2 = object({ a: number() })
@@ -948,7 +948,7 @@ describe('object', () => {
         .validateSync(null);
 
       (val2: ?{ a: number });
-      // $ExpectError: check any
+      // $FlowExpectedError: check any
       (val2: number);
 
       const val3 = object({ a: number() })
@@ -956,7 +956,7 @@ describe('object', () => {
         .validateSync(null);
 
       (val3: { a: number });
-      // $ExpectError: check any
+      // $FlowExpectedError: check any
       (val3: number);
 
       const val4 = object({ a: number() })
@@ -964,7 +964,7 @@ describe('object', () => {
         .validateSync(null);
 
       (val4: ?{ a: number });
-      // $ExpectError: check any
+      // $FlowExpectedError: check any
       (val4: number);
     });
 
@@ -1004,7 +1004,7 @@ describe('object', () => {
       schema.validate(null).then(val => {
         (val: { a: string });
 
-        // $ExpectError: check any
+        // $FlowExpectedError: check any
         (val: number);
       });
 

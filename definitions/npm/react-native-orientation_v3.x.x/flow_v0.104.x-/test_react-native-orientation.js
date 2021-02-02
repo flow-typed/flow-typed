@@ -38,17 +38,17 @@ describe("async function", () => {
   });
 
   it("must throw error when call async function without callback fn", () => {
-    // $ExpectError
+    // $FlowExpectedError
     getOrientation();
-    // $ExpectError
+    // $FlowExpectedError
     getSpecificOrientation();
-    // $ExpectError
+    // $FlowExpectedError
     addOrientationListener();
-    // $ExpectError
+    // $FlowExpectedError
     removeOrientationListener();
-    // $ExpectError
+    // $FlowExpectedError
     addSpecificOrientationListener();
-    // $ExpectError
+    // $FlowExpectedError
     removeSpecificOrientationListener();
   });
 });

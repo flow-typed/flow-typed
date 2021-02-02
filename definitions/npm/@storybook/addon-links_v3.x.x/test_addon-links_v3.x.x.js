@@ -47,13 +47,13 @@ describe('The `linkTo` function', () => {
   });
 
   it('should error on invalid args', () => {
-    // $ExpectError
+    // $FlowExpectedError
     linkTo();
 
-    // $ExpectError
+    // $FlowExpectedError
     linkTo({});
 
-    // $ExpectError
+    // $FlowExpectedError
     linkTo(true, true);
   });
 });
@@ -64,13 +64,13 @@ describe('The `hrefTo` function', () => {
   });
 
   it('should error on invalid args', () => {
-    // $ExpectError
+    // $FlowExpectedError
     hrefTo();
 
-    // $ExpectError
+    // $FlowExpectedError
     hrefTo({});
 
-    // $ExpectError
+    // $FlowExpectedError
     hrefTo(true, true);
   });
 
@@ -79,7 +79,7 @@ describe('The `hrefTo` function', () => {
   });
 
   it('should error on invalid Promise result', () => {
-    // $ExpectError
+    // $FlowExpectedError
     hrefTo('', '').then(result => (result: boolean));
   });
 });
@@ -98,7 +98,7 @@ describe('The `LinkTo` component', () => {
   });
 
   it('should error on invalid properties', () => {
-    // $ExpectError
+    // $FlowExpectedError
     <LinkTo kind={123} story={true}>
       Test
     </LinkTo>;

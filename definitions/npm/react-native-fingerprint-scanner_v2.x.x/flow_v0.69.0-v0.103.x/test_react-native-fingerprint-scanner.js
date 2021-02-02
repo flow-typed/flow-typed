@@ -30,7 +30,7 @@ describe("authenticate({}): Promise<true>", () => {
   });
 
   it("raises an error when not pass argument", () => {
-    // $ExpectError - first argument is required
+    // $FlowExpectedError - first argument is required
     FingerprintScanner.authenticate();
   });
 
@@ -50,7 +50,7 @@ describe("authenticate({}): Promise<true>", () => {
     });
 
     it("raises an error when onAttempt isn't function", () => {
-      // $ExpectError
+      // $FlowExpectedError
       FingerprintScanner.authenticate({
         onAttempt: "ups..."
       });
@@ -74,7 +74,7 @@ describe("authenticate({}): Promise<true>", () => {
     });
 
     it("raises an error when params invalid", () => {
-      // $ExpectError
+      // $FlowExpectedError
       FingerprintScanner.authenticate({
         fallbackEnabled: "ups...",
         description: 123

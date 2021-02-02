@@ -2,66 +2,66 @@
 // Test copied from libdef for older version of re-reselect
 // The API stayed the same, apart from exposing `cache` in ReOutputSelector
 import createCachedSelector from "re-reselect";
+import { it } from 'flow-typed-test';
 
-// TEST: Should pass for 2 selectors given as arguments
 type State = {
   x: number,
   y: number,
   ...
 };
 
-const test1Selector = createCachedSelector(
-  (state: State) => state.x,
-  (state: State) => state.y,
-  (x, y) => {
-    return x + y;
-  }
-)(() => 1)
+it('Should pass for 2 selectors given as arguments', () => {
+  const test1Selector = createCachedSelector(
+    (state: State) => state.x,
+    (state: State) => state.y,
+    (x, y) => {
+      return x + y;
+    }
+  )(() => 1)
 
-test1Selector({ x: 100, y: 200 });
-// $ExpectError invalid state
-test1Selector({ x: 100 });
-// END TEST
+  test1Selector({ x: 100, y: 200 });
+  // $FlowExpectedError invalid state
+  test1Selector({ x: 100 });
+});
 
-// TEST: Should pass for 2 selectors given as array
-const test2Selector = createCachedSelector(
-  [(state: State) => state.x, (state: State) => state.y],
-  (x, y) => {
-    return x + y;
-  }
-)(() => 2)
+it('Should pass for 2 selectors given as array', () => {
+  const test2Selector = createCachedSelector(
+    [(state: State) => state.x, (state: State) => state.y],
+    (x, y) => {
+      return x + y;
+    }
+  )(() => 2)
 
-test2Selector({ x: 100, y: 200 });
-// $ExpectError invalid state
-test2Selector({ x: 100 });
-// END TEST
+  test2Selector({ x: 100, y: 200 });
+  // $FlowExpectedError invalid state
+  test2Selector({ x: 100 });
+});
 
-// TEST: Should pass when selectors have additional Props argument
-type TestProps = {
-  x: number,
-  ...
-};
+it('Should pass when selectors have additional Props argument', () => {
+  type TestProps = {
+    x: number,
+    ...
+  };
 
-const test3Selector = createCachedSelector(
-  (state: State, props: TestProps) => state.x + props.x,
-  (state: State, props: TestProps) => state.y + props.x,
-  (x, y) => {
-    return x + y;
-  }
-)((state, props) => props.x)
+  const test3Selector = createCachedSelector(
+    (state: State, props: TestProps) => state.x + props.x,
+    (state: State, props: TestProps) => state.y + props.x,
+    (x, y) => {
+      return x + y;
+    }
+  )((state, props) => props.x)
 
-test3Selector(
-  { x: 100, y: 200 },
-  { x: 10 }
-);
-// $ExpectError invalid props
-test3Selector({ x: 100 }, { x: 10 });
-// $ExpectError invalid props
-test3Selector({ x: 100, y: 200 }, { y: 10 });
-// END TEST
+  test3Selector(
+    { x: 100, y: 200 },
+    { x: 10 }
+  );
+  // $FlowExpectedError invalid props
+  test3Selector({ x: 100 }, { x: 10 });
+  // $FlowExpectedError invalid props
+  test3Selector({ x: 100, y: 200 }, { y: 10 });
+});
 
-// TEST: Should work when using another selector as functions
-{
+it('Should work when using another selector as functions', () => {
   const simpleSelector = (state: State): string => "foo";
   const resultSelector = (arg: string): string => "foo";
 
@@ -72,13 +72,11 @@ test3Selector({ x: 100, y: 200 }, { y: 10 });
   )(() => 2);
 
   combinedSelector1({ x: 100, y: 200 })
-  // $ExpectError invalid state
+  // $FlowExpectedError invalid state
   combinedSelector1({ x: 100 })
-}
-// END TEST
+});
 
-// TEST: Should work when using more complex selectors as functions
-{
+it('Should work when using more complex selectors as functions', () => {
   const resultFunc = (param1: string, param2: number): number => 42;
   const simpleSelector = (state: State): string => "foo";
   const compoundSelector = createCachedSelector(simpleSelector, () => 42)(() => 1);
@@ -89,17 +87,16 @@ test3Selector({ x: 100, y: 200 }, { y: 10 });
   )(() => 2);
 
   const result: number = selector({ x: 42, y: 42 });
-  // $ExpectError invalid state
+  // $FlowExpectedError invalid state
   selector({ x: 42 });
-}
-// END TEST
+});
 
-// TEST: Should validate parameters based on the return values of nested
-// selectors.
-createCachedSelector(
-  (state: State) => state.x,
-  (state: State) => state.y,
-  // $ExpectError first argument will be a number, not a string.
-  (x: string, y: number) => "foo"
-)
-// END TEST
+it('Should validate parameters based on the return values of nested', () => {
+  // selectors.
+  createCachedSelector(
+    // $FlowExpectedError x is a number, not a string.
+    (state: State) => state.x,
+    (state: State) => state.y,
+    (x: string, y: number) => "foo"
+  )
+});

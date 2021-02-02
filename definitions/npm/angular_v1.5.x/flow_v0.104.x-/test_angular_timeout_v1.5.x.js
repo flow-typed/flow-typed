@@ -40,21 +40,21 @@ describe('angular $Timeout', () => {
   it('cannot be called', () => {
     it('with something other than function as first argument', () => {
       function testTimeout($timeout: $Timeout) {
-        //$ExpectError
+        //$FlowExpectedError
         $timeout(123);
       }
     });
 
     it('with something other than a number in the second argument', () => {
       function testTimeout($timeout: $Timeout) {
-        //$ExpectError
+        //$FlowExpectedError
         $timeout(() => {}, '123');
       }
     });
 
     it('with something other than a boolean in the third argument', () => {
       function testTimeout($timeout: $Timeout) {
-        //$ExpectError
+        //$FlowExpectedError
         $timeout(() => {}, 123, 'text');
       }
     });

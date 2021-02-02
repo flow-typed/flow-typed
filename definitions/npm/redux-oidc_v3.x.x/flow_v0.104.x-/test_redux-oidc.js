@@ -4,7 +4,7 @@
 import type { OidcReducerState, User } from "redux-oidc";
 import React from "react";
 import reduxOidc from "redux-oidc";
-// $ExpectError: flow-typed doesn't support pulling in _other_ modules yet?
+// $FlowExpectedError: flow-typed doesn't support pulling in _other_ modules yet?
 const redux = require("redux");
 // This was also attempted, but still no joy.
 // See https://github.com/flowtype/flow-typed/issues/1331
@@ -53,7 +53,7 @@ const state: OidcReducerState = {
   user: null
 };
 
-// $ExpectError: The user could be null/undefined.
+// $FlowExpectedError: The user could be null/undefined.
 console.log(state.user.expired);
 
 if (state.user) {

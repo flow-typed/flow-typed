@@ -80,6 +80,7 @@ declare module '@react-navigation/core' {
   declare export type NavigationPopToTopAction = {|
     +type: 'Navigation/POP_TO_TOP',
     +immediate?: boolean,
+    +key?: string,
   |};
   declare export type NavigationPushAction = {|
     +type: 'Navigation/PUSH',
@@ -848,7 +849,10 @@ declare module '@react-navigation/core' {
       n?: number,
       immediate?: boolean,
     |}) => NavigationPopAction,
-    popToTop: (payload: {| immediate?: boolean |}) => NavigationPopToTopAction,
+    popToTop: (payload: {|
+      immediate?: boolean,
+      key?: string,
+    |}) => NavigationPopToTopAction,
     push: (payload: {|
       routeName: string,
       params?: NavigationParams,

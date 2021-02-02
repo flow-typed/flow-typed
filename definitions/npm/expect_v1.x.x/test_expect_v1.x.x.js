@@ -5,10 +5,10 @@ import expect from 'expect';
 expect(true).toBe(true);
 expect(true).toBe('foo');
 
-// $ExpectError
+// $FlowExpectedError
 expect.foo();
 
-// $ExpectError
+// $FlowExpectedError
 expect(true).toFoo();
 
 
@@ -16,5 +16,5 @@ expect(true).toFoo();
 
 expect.assert(true, 'mymessage');
 
-// $ExpectError
+// $FlowExpectedError
 expect.assert('foo', '');

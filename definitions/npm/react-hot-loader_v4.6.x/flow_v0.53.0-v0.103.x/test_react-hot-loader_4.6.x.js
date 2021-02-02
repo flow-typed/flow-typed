@@ -17,10 +17,10 @@ describe("react-hot-loader", () => {
         <SomeComponent />
       </AppContainer>;
 
-      // $ExpectError
+      // $FlowExpectedError
       <AppContainer />;
 
-      // $ExpectError
+      // $FlowExpectedError
       <AppContainer>
         <div />
         <div />
@@ -36,7 +36,7 @@ describe("react-hot-loader", () => {
         <div />
       </AppContainer>;
 
-      // $ExpectError
+      // $FlowExpectedError
       <AppContainer errorBoundary={1}>
         <div />
       </AppContainer>;
@@ -64,12 +64,12 @@ describe("react-hot-loader", () => {
         <div />
       </AppContainer>;
 
-      // $ExpectError
+      // $FlowExpectedError
       <AppContainer errorReporter={null}>
         <div />
       </AppContainer>;
 
-      // $ExpectError
+      // $FlowExpectedError
       ErrorReporter = ({ error }: { error: number }) => <div />;
       <AppContainer errorReporter={ErrorReporter}>
         <div />
@@ -81,10 +81,10 @@ describe("react-hot-loader", () => {
     it("accepts some module", () => {
       hot(module);
 
-      // $ExpectError
+      // $FlowExpectedError
       hot();
 
-      // $ExpectError
+      // $FlowExpectedError
       hot({});
     });
 
@@ -95,10 +95,10 @@ describe("react-hot-loader", () => {
       hot(module)(Wrapped, {});
       hot(module)(Wrapped, { errorBoundary: true });
 
-      // $ExpectError
+      // $FlowExpectedError
       hot(module)();
 
-      // $ExpectError
+      // $FlowExpectedError
       hot(module)(Wrapped, { errorBoundary: 1 });
     });
 
@@ -109,10 +109,10 @@ describe("react-hot-loader", () => {
 
       <Component someProp={"some"} />;
 
-      // $ExpectError
+      // $FlowExpectedError
       <Component />;
 
-      // $ExpectError
+      // $FlowExpectedError
       <Component someProp={1} />;
     });
   });
@@ -123,16 +123,16 @@ describe("react-hot-loader", () => {
 
       cold(Component1);
 
-      // $ExpectError
+      // $FlowExpectedError
       cold({});
 
-      // $ExpectError
+      // $FlowExpectedError
       cold(1);
 
-      // $ExpectError
+      // $FlowExpectedError
       cold(true);
 
-      // $ExpectError
+      // $FlowExpectedError
       cold(<div />);
     });
   });
@@ -145,16 +145,16 @@ describe("react-hot-loader", () => {
 
       areComponentsEqual(Component1, Component2);
 
-      // $ExpectError
+      // $FlowExpectedError
       areComponentsEqual(Component1, {});
 
-      // $ExpectError
+      // $FlowExpectedError
       areComponentsEqual(1, Component2);
 
-      // $ExpectError
+      // $FlowExpectedError
       areComponentsEqual(Component1, true);
 
-      // $ExpectError
+      // $FlowExpectedError
       areComponentsEqual(Component1, Component2, Component3);
     });
   });
@@ -177,7 +177,7 @@ describe("react-hot-loader", () => {
     });
 
     it('error when type not match', () => {
-      // $ExpectError
+      // $FlowExpectedError
       setConfig({
         logLevel: 'my value',
         pureSFC: 1,
@@ -196,10 +196,10 @@ describe("react-hot-loader/root", () => {
       rootHot(Wrapped, {});
       rootHot(Wrapped, { errorBoundary: true });
 
-      // $ExpectError
+      // $FlowExpectedError
       rootHot();
 
-      // $ExpectError
+      // $FlowExpectedError
       rootHot(Wrapped, { errorBoundary: 1 });
     });
 
@@ -210,10 +210,10 @@ describe("react-hot-loader/root", () => {
 
       <Component someProp={"some"} />;
 
-      // $ExpectError
+      // $FlowExpectedError
       <Component />;
 
-      // $ExpectError
+      // $FlowExpectedError
       <Component someProp={1} />;
     });
   });

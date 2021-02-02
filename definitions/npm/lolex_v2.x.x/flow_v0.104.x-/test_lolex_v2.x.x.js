@@ -10,7 +10,7 @@ describe('lolex', () => {
       loopLimit: 250,
     });
 
-    // $ExpectError
+    // $FlowExpectedError
     lolex.install(true);
   });
 
@@ -23,7 +23,7 @@ describe('lolex', () => {
     const timeoutId = clock.setTimeout(() => {});
     const intervalId = clock.setInterval(() => {});
     clock.clearTimeout(timeoutId);
-    // $ExpectError
+    // $FlowExpectedError
     clock.clearTimeout(intervalId);
     clock.clearInterval(intervalId);
     clock.runToFrame();

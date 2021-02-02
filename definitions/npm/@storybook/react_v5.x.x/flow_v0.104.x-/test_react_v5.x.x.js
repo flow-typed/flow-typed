@@ -27,14 +27,14 @@ describe('The `storiesOf` function', () => {
   });
 
   it('should error on invalid options', () => {
-    // $ExpectError
+    // $FlowExpectedError
     storiesOf([], module);
-    // $ExpectError
+    // $FlowExpectedError
     storiesOf('', 123);
   });
 
   it('should error on invalid method call', () => {
-    // $ExpectError
+    // $FlowExpectedError
     storiesOf('', module).foo('', () => <div />);
   });
 });
@@ -71,18 +71,18 @@ describe('The `add` method', () => {
   });
 
   it('should error on invalid default usage (parameters)', () => {
-    // $ExpectError
+    // $FlowExpectedError
     storiesOf('', module).add('', () => <Button>test</Button>, '');
-    // $ExpectError
+    // $FlowExpectedError
     storiesOf('', module).add('', parameters, () => <Button>test</Button>);
   });
 
   it('should error on invalid default usage', () => {
-    // $ExpectError
+    // $FlowExpectedError
     storiesOf('', module).add('', () => () => null);
-    // $ExpectError
+    // $FlowExpectedError
     storiesOf('', module).add('', () => Button);
-    // $ExpectError
+    // $FlowExpectedError
     storiesOf('', module).add('', () => null);
   });
 
@@ -95,7 +95,7 @@ describe('The `add` method', () => {
   });
 
   it('should error when unwrapping invalid arguments', () => {
-    // $ExpectError
+    // $FlowExpectedError
     storiesOf('', module).add('', ({ kind, story, foo }) => (
       <div>
         {kind} {story} {foo}
@@ -128,9 +128,9 @@ describe('The `addDecorator` function', () => {
   });
 
   it('should error on invalid usage (global)', () => {
-    // $ExpectError
+    // $FlowExpectedError
     addParameters();
-    // $ExpectError
+    // $FlowExpectedError
     addParameters('');
   });
 });
@@ -141,9 +141,9 @@ describe('The `clearDecorators` function', () => {
   });
 
   it('should error on invalid usage (global)', () => {
-    // $ExpectError
+    // $FlowExpectedError
     clearDecorators(true);
-    // $ExpectError
+    // $FlowExpectedError
     clearDecorators(parameters);
   });
 });

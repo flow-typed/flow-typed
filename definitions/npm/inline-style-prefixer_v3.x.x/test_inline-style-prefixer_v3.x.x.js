@@ -3,7 +3,7 @@ import Prefixer from "inline-style-prefixer";
 import prefixAll from "inline-style-prefixer/static";
 
 const styles: Object = prefixAll({});
-// $ExpectError
+// $FlowExpectedError
 prefixAll();
 
 const prefixer = new Prefixer();

@@ -26,6 +26,7 @@ import {
   findFlowSpecificVer,
   getPackageJsonData,
   getPackageJsonDependencies,
+  loadPnpResolver,
 } from '../lib/npm/npmProjectUtils';
 
 import {
@@ -106,7 +107,7 @@ export function setup(yargs: Yargs) {
       overwrite: {
         alias: 'o',
         describe: 'Overwrite an existing libdef',
-        type: 'string',
+        type: 'boolean',
         demandOption: false,
       },
       ignoreDeps: {
@@ -214,7 +215,7 @@ async function installCoreLibDefs(): Promise<number> {
   return 0;
 }
 
-const FLOW_BUILT_IN_NPM_LIBS = ['react', 'react-dom'];
+const FLOW_BUILT_IN_NPM_LIBS = ['react'];
 type installNpmLibDefsArgs = {|
   cwd: string,
   flowVersion: FlowVersion,
@@ -321,8 +322,6 @@ async function installNpmLibDefs({
       } else {
         libDefsToInstall.set(name, libDef);
 
-        // If the libdef is outdated (but still compatible), note this so we can
-        // warn the user
         const libDefLower = getRangeLowerBound(libDef.version);
         const depLower = getRangeLowerBound(ver);
         if (semver.lt(libDefLower, depLower)) {
@@ -429,13 +428,15 @@ async function installNpmLibDefs({
 
     return 1;
   } else {
+    const pnpResolver = await loadPnpResolver(await getPackageJsonData(cwd));
+
     // If a package that's missing a flow-typed libdef has any .flow files,
     // we'll skip generating a stub for it.
     const untypedMissingLibDefs = [];
     const typedMissingLibDefs = [];
     await Promise.all(
       unavailableLibDefs.map(async ({name: pkgName, ver: pkgVer}) => {
-        const hasFlowFiles = await pkgHasFlowFiles(cwd, pkgName);
+        const hasFlowFiles = await pkgHasFlowFiles(cwd, pkgName, pnpResolver);
         if (hasFlowFiles) {
           typedMissingLibDefs.push([pkgName, pkgVer]);
         } else {
@@ -453,6 +454,7 @@ async function installNpmLibDefs({
             pkgName,
             pkgVerStr,
             overwrite,
+            pnpResolver,
             /* typescript */ false,
             libdefDir,
           );

@@ -2,8 +2,8 @@ const prettyBytes = require("pretty-bytes");
 
 (prettyBytes(123): string);
 
-// $ExpectError
+// $FlowExpectedError
 prettyBytes("123");
 
-// $ExpectError
+// $FlowExpectedError
 prettyBytes(true);

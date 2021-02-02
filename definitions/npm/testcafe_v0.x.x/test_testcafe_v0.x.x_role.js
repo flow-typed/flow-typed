@@ -1,6 +1,6 @@
 import { Role, Selector, t } from 'testcafe';
 
-// $ExpectError - string as Selector
+// $FlowExpectedError - string as Selector
 Selector(123)
 const userName = Selector('#user-name');
 

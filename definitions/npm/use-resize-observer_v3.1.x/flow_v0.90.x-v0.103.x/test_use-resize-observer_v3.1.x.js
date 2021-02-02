@@ -8,7 +8,7 @@ import useResizeObserver from 'use-resize-observer';
 describe('The `useResizeObserver` hook', () => {
   it('should not accept parameters', () => {
     useResizeObserver();
-    // $ExpectError
+    // $FlowExpectedError
     useResizeObserver(null);
   });
 
@@ -38,11 +38,11 @@ describe('The `useResizeObserver` hook', () => {
 
       if (ref.current) {
         (ref.current: HTMLDivElement);
-        // $ExpectError
+        // $FlowExpectedError
         (ref.current: HTMLAnchorElement);
 
         ref.current.getBoundingClientRect();
-        // $ExpectError
+        // $FlowExpectedError
         ref.current.shouldFail();
       }
 
@@ -54,11 +54,11 @@ describe('The `useResizeObserver` hook', () => {
 
       if (ref.current) {
         (ref.current: HTMLInputElement);
-        // $ExpectError
+        // $FlowExpectedError
         (ref.current: HTMLAnchorElement);
 
         ref.current.focus();
-        // $ExpectError
+        // $FlowExpectedError
         ref.current.shouldFail();
       }
 
@@ -76,11 +76,11 @@ describe('The `useResizeObserver` hook', () => {
 
       if (ref.current) {
         (ref.current: HTMLDivElement);
-        // $ExpectError
+        // $FlowExpectedError
         (ref.current: HTMLAnchorElement);
 
         ref.current.getBoundingClientRect();
-        // $ExpectError
+        // $FlowExpectedError
         ref.current.shouldFail();
       }
 

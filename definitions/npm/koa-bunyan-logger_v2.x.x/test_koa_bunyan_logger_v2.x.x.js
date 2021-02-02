@@ -26,7 +26,7 @@ const logger = koaBunyanLogger({
     }
 });
 
-// $ExpectError - name needed
+// $FlowExpectedError - name needed
 koaBunyanLogger({});
 
 const child = logger.child({});
@@ -52,22 +52,22 @@ middleware = koaBunyanLogger.requestIdContext();
 
 middleware = koaBunyanLogger.requestLogger();
 
-// $ExpectError
+// $FlowExpectedError
 middleware = koaBunyanLogger.requestLogger({
     formatRequestMessage: (req) => {string: 'expected'}
 });
 
-// $ExpectError
+// $FlowExpectedError
 middleware = koaBunyanLogger.requestLogger({
     formatResponseMessage: (req) => {string: 'expected'}
 });
 
-// $ExpectError
+// $FlowExpectedError
 middleware = koaBunyanLogger.requestLogger({
     durationField: 1
 });
 
-// $ExpectError
+// $FlowExpectedError
 middleware = koaBunyanLogger.requestLogger({
     levelFn: (status: number, err: Error) => 'INFO',
 });

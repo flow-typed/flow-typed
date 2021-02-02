@@ -15,5 +15,5 @@ declare module '@koa/cors' {
     keepHeadersOnError: boolean,
   |}>;
 
-  declare export default function cors(options?: Options): Middleware;
+  declare module.exports: (options?: Options) => Middleware;
 }
