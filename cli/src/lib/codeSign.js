@@ -1,7 +1,6 @@
 // @flow
 
 import md5 from 'md5';
-import through from 'through';
 
 const VERSION_COMMENT_RE = /\/\/ flow-typed version: (.*)$/;
 export function getSignedCodeVersion(signedCode: string): string | null {
@@ -20,7 +19,7 @@ export function signCode(code: string, version: string): string {
 }
 
 export function signCodeStream(version: string) {
-  return (code) => signCode(code, version);
+  return code => signCode(code, version);
 }
 
 const HASH_COMMENT_RE = /\/\/ flow-typed signature: (.*)$/;
