@@ -21,7 +21,7 @@ export function copyDir(srcPath: string, destPath: string): Promise<void> {
 export function copyFile(
   srcPath: string,
   destPath: string,
-  preProcessor?: stream$Duplex,
+  preProcessor?: (content: string) => string,
 ): Promise<void> {
   return new Promise((res, rej) => {
     if (preProcessor) {

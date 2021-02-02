@@ -19,7 +19,7 @@ export function signCode(code: string, version: string): string {
 }
 
 export function signCodeStream(version: string) {
-  return code => signCode(code, version);
+  return (code: string) => signCode(code, version);
 }
 
 const HASH_COMMENT_RE = /\/\/ flow-typed signature: (.*)$/;
