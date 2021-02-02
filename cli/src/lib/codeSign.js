@@ -20,16 +20,7 @@ export function signCode(code: string, version: string): string {
 }
 
 export function signCodeStream(version: string) {
-  let code = '';
-  return through(
-    function write(data) {
-      code += data;
-    },
-    function end() {
-      this.emit('data', signCode(code, version));
-      this.emit('close');
-    },
-  );
+  return (code) => signCode(code, version);
 }
 
 const HASH_COMMENT_RE = /\/\/ flow-typed signature: (.*)$/;

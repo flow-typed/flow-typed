@@ -24,16 +24,24 @@ export function copyFile(
   preProcessor?: stream$Duplex,
 ): Promise<void> {
   return new Promise((res, rej) => {
-    const reader = fs.createReadStream(srcPath);
-    reader.on('error', rej);
-    const writer = fs.createWriteStream(destPath);
-    writer.on('error', rej);
-    writer.on('close', res);
     if (preProcessor) {
-      reader.pipe(preProcessor);
-      preProcessor.pipe(writer);
+      const content = fs.readFileSync(srcPath, 'utf-8');
+
+      fs.writeFile(destPath, preProcessor(content), err => {
+        if (err) {
+          rej(err);
+        } else {
+          res();
+        }
+      });
     } else {
-      reader.pipe(writer);
+      fs.copyFile(srcPath, destPath, err => {
+        if (err) {
+          rej(err);
+        } else {
+          res();
+        }
+      });
     }
   });
 }
