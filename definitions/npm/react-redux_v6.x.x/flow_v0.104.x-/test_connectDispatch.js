@@ -2,7 +2,7 @@
 import React from "react";
 import { connect } from "react-redux";
 
-export let e = []
+export let e: Array<any> = []
 
 function object_sameDispatchIsOK() {
   type Action1 = {|
@@ -33,7 +33,6 @@ function object_differentDispatchesAreNotOK() {
   };
 
   type Action2 = {|
-  //$FlowExpectedError `string` is incompatible with `number` in property `type`
     type: number
   |};
   type Dispatch2 = Action2 => Action2;
@@ -45,6 +44,7 @@ function object_differentDispatchesAreNotOK() {
   e.push(Connected1);
   <Connected1 />;
 
+  //$FlowExpectedError[invalid-obj-map] `string` is incompatible with `number` in property `type`
   const Connected2 = connect<Props, {||}, _,_,_,Dispatch2>(null, mapDispatchToProps)(Com);
   e.push(Connected2);
   <Connected2 />;
@@ -87,7 +87,6 @@ function function_differentDispatchesAreNotOK() {
   });
 
   type Action2 = {|
-  //$FlowExpectedError `string` is incompatible with `number` in property `type`
     type: number
   |};
   type Dispatch2 = Action2 => Action2;
@@ -99,6 +98,7 @@ function function_differentDispatchesAreNotOK() {
   e.push(Connected1);
   <Connected1 />;
 
+  //$FlowExpectedError[incompatible-call] `string` is incompatible with `number` in property `type`
   const Connected2 = connect<Props, {||}, _,DispatchProps,_,Dispatch2>(null, mapDispatchToProps)(Com);
   e.push(Connected2);
   <Connected2 />;

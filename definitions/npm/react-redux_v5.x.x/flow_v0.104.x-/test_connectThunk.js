@@ -2,7 +2,7 @@
 import React from "react";
 import { connect } from "react-redux";
 
-export let e = []
+export let e: Array<any> = []
 
 function onlyDispatchFunction_samePropsAreOK() {
   type State = {||}
@@ -89,7 +89,6 @@ function onlyDispatchObject_sameDispatchPropsAreErroneous() {
 
   type DispatchProps = {|
     action: typeof action,
-    //$FlowExpectedError here the property returns a thunk...
     thunk: () => Thunk,
   |};
   const mapDispatchToProps = {
@@ -175,7 +174,6 @@ function stateAndDispatchObject_sameDispatchPropsAreErroneous() {
 
   type DispatchProps = {|
     action: typeof action,
-    //$FlowExpectedError here the property returns a thunk...
     thunk: () => Thunk,
   |};
   const mapDispatchToProps = {

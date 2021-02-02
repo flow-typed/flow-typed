@@ -35,7 +35,7 @@ describe('useStore', () => {
   it('returns instance of Store, no extra keys', () => {
     function Com() {
       const store = useStore<Store>();
-      // $FlowExpectedError: `foobar` is not a member of the Store instance
+      // $FlowExpectedError[prop-missing]: `foobar` is not a member of the Store instance
       return <div>{store.getState().foobar}</div>;
     }
   });

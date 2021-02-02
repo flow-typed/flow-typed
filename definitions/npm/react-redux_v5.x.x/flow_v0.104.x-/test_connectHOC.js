@@ -2,7 +2,7 @@
 import * as React from "react";
 import { connect } from "react-redux";
 
-export let e = [];
+export let e: Array<any> = [];
 
 function checkSimplePropertyInjection() {
   type OwnProps = {|
@@ -21,7 +21,7 @@ function checkSimplePropertyInjection() {
   const Connected = connect<Props, OwnProps, _, _, _, _>(mapStateToProps)(Com);
 
   <Connected foo={42} bar="str" />;
-  //$FlowExpectedError property `foo` is missing in props [1] but exists in `OwnProps`
+  //$FlowExpectedError[incompatible-use] property `foo` is missing in props [1] but exists in `OwnProps`
   <Connected bar="str" />;
   e.push(Connected);
 
@@ -40,7 +40,7 @@ function checkSimplePropertyInjection() {
   <Decorated bar="str" />;
   // OK with a not needed `foo`
   <Decorated foo={42} bar="str" />;
-  //$FlowExpectedError property `bar` is missing in props [3] but exists in `Props` [4]
+  //$FlowExpectedError[prop-missing] property `bar` is missing in props [3] but exists in `Props` [4]
   <Decorated />;
   e.push(Decorated);
 }
@@ -82,7 +82,7 @@ function composeWithOtherHOC_OK() {
   <Decorated own1={1} />;
   // OK with a not needed `injected1`
   <Decorated own1={1} injected1="str" />;
-  //$FlowExpectedError property `own1` is missing in props [3] but exists in `Props` [4]
+  //$FlowExpectedError[prop-missing] property `own1` is missing in props [3] but exists in `Props` [4]
   <Decorated />;
   e.push(Decorated);
 }
@@ -121,7 +121,7 @@ function composeWithOtherHOC_exactOK() {
   const Decorated = composedDecorators(Com);
   // OK without `injected1`
   <Decorated own1={1} />;
-  //$FlowExpectedError property `injected1` is missing in `OwnProps` [1] but exists in props
+  //$FlowExpectedError[prop-missing] property `injected1` is missing in `OwnProps` [1] but exists in props
   <Decorated own1={1} injected1="str" />;
   // the ExpectError above masks the misssing `own1` error below :(
   <Decorated />;
@@ -162,7 +162,7 @@ function composeWithOtherHOC_wrongOrder() {
   );
 
   const Decorated = composedDecorators(Com);
-  //$FlowExpectedError property `injected1` is missing in props
+  //$FlowExpectedError[incompatible-use] property `injected1` is missing in props
   <Decorated own1={1} />;
   // OK with an explicitly provided `injected1`
   <Decorated own1={1} injected1="str" />;

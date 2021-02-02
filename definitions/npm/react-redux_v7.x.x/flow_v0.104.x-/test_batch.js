@@ -10,7 +10,7 @@ describe('batch', () => {
   });
 
   it('should not allow a values that is not a function as an argument', () => {
-    // $ExpectError - only a function is allowed
+    //$FlowExpectedError[incompatible-call] - only a function is allowed
     batch(true)
   });
 
@@ -18,10 +18,10 @@ describe('batch', () => {
     (batch(() => {
       // ...
     }): void)
-    
+
     batch(() => {
-      // $ExpectError - function must return void
-      return true; 
+      //$FlowExpectedError[incompatible-call] - function must return void
+      return true;
     })
   });
 });

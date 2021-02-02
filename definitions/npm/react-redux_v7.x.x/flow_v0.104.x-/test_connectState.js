@@ -2,7 +2,7 @@
 import React from "react";
 import { connect } from "react-redux";
 
-export let e = []
+export let e: Array<any> = []
 
 function sameStateIsOK() {
   type Props = {...};
@@ -34,7 +34,7 @@ function differentStatesAreNotOK() {
     b: number
   |};
 
-  //$FlowExpectedError property `b` is missing in `State` but exists in `OtherState`
+  //$FlowExpectedError[incompatible-call] property `b` is missing in `State` but exists in `OtherState`
   const Connected = connect<Props, {||}, _,_,OtherState,empty>(mapStateToProps)(Com);
   e.push(Connected);
   <Connected />;
