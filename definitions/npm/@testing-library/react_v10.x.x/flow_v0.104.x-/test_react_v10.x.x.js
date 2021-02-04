@@ -13,6 +13,7 @@ import {
   within,
   screen,
   getNodeText,
+  getAllByTestId,
 } from '@testing-library/react';
 import { describe, it } from 'flow-typed-test';
 
@@ -897,6 +898,19 @@ describe('getNodeText', () => {
 
   it('should return string', () => {
     const a: string = getNodeText(container);
+  });
+});
+
+describe('getAllByTestId', () => {
+  class Component extends React.Component<{ ... }> {};
+  const { container } = render(<Component />);
+
+  it('should return array of html elements', () => {
+    const a: Array<HTMLElement> = getAllByTestId(container, 'test');
+  });
+
+  it('optionally takes options', () => {
+    getAllByTestId(container, 'test', { ...null });
   });
 });
 
