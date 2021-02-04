@@ -434,7 +434,7 @@ export async function getInstalledNpmLibDef(
   const terseFilePath = path.relative(flowProjectRootDir, fullFilePath);
   const fileStat = await fs.stat(fullFilePath);
   if (fileStat.isFile()) {
-    const fileContent = (await fs.readFile(fullFilePath)).toString();
+    const fileContent = await fs.readFile(fullFilePath, 'utf8');
     if (verifySignedCode(fileContent)) {
       const signedCodeVer = getSignedCodeVersion(fileContent);
       if (signedCodeVer === null) {

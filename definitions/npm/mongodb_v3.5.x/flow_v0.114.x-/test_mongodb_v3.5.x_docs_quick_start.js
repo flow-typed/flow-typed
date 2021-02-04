@@ -1,7 +1,7 @@
 // @flow
 
 import { describe, it } from 'flow-typed-test';
-import type { Db } from 'mongodb';
+import { Db } from 'mongodb';
 
 // http://mongodb.github.io/node-mongodb-native/3.5/quick-start/quick-start/
 describe('Quick Start', () => {
@@ -29,7 +29,7 @@ describe('Quick Start', () => {
     });
   });
 
-  it('insertDocuments', (db: Db, callback: () => void) => {
+  it('insertDocuments', (db: typeof Db, callback: () => void) => {
     const assert = require('assert');
     // Get the documents collection
     const collection = db.collection('documents');
@@ -45,7 +45,7 @@ describe('Quick Start', () => {
     });
   });
 
-  it('findDocuments', (db: Db, callback: () => void) => {
+  it('findDocuments', (db: typeof Db, callback: () => void) => {
     const assert = require('assert');
     // Get the documents collection
     const collection = db.collection('documents');
@@ -58,7 +58,7 @@ describe('Quick Start', () => {
     });
   });
 
-  it('updateDocument', (db: Db, callback: () => void) => {
+  it('updateDocument', (db: typeof Db, callback: () => void) => {
     const assert = require('assert');
     // Get the documents collection
     const collection = db.collection('documents');
@@ -71,7 +71,7 @@ describe('Quick Start', () => {
     });
   });
 
-  it('removeDocument', (db: Db, callback: () => void) => {
+  it('removeDocument', (db: typeof Db, callback: () => void) => {
     const assert = require('assert');
     // Get the documents collection
     const collection = db.collection('documents');
@@ -84,7 +84,7 @@ describe('Quick Start', () => {
     });
   });
 
-  it('indexCollection', (db: Db, callback: () => void) => {
+  it('indexCollection', (db: typeof Db, callback: () => void) => {
     db.collection('documents').createIndex(
       { "a": 1 },
         null,

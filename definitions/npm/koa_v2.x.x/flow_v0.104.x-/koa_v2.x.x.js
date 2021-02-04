@@ -215,6 +215,8 @@ declare module 'koa' {
     accept: $PropertyType<Request, 'accept'>,
     app: Application,
     cookies: Cookies,
+    // koa-views props
+    render: (root: string, opts?: { [key: string]: any, ... }) => Promise<void>,
     // ?
     name?: string,
     originalUrl: string,
