@@ -1286,7 +1286,9 @@ describe('render() parameters', () => {
     const customQueries = {
       getByOverride: (param1: string) => customValue,
     };
-    const result = render(<Component />, { queries: customQueries });
+    const result = render<{|
+      getByOverride: (string) => CustomReturnType,
+    |}>(<Component />, { queries: customQueries });
     const a: CustomReturnType = result.getByOverride('something');
     // $FlowExpectedError[incompatible-call] bad type for getByOverride parameter
     result.getByOverride(1234);
