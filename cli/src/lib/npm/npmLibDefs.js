@@ -243,7 +243,7 @@ function validateVersionNumPart(part: string, partName: string): number {
   return num;
 }
 
-function pkgVersionMatch(pkgSemver: string, libDefSemverRaw: string, name) {
+function pkgVersionMatch(pkgSemver: string, libDefSemverRaw: string) {
   // The package version should be treated as a semver implicitly prefixed by a
   // `^`. (i.e.: "foo_v2.2.x" is the same range as "^2.2.x")
   // UNLESS it is prefixed by the equals character (i.e. "foo_=v2.2.x")
@@ -300,7 +300,7 @@ function filterLibDefs(
           const fullName = def.scope ? `${def.scope}/${def.name}` : def.name;
           filterMatch =
             filter.pkgName.toLowerCase() === fullName.toLowerCase() &&
-            pkgVersionMatch(filter.pkgVersion, def.version, fullName);
+            pkgVersionMatch(filter.pkgVersion, def.version);
           break;
         default:
           (filter: empty);
