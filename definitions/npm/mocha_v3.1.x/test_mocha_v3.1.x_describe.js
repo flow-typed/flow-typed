@@ -6,11 +6,11 @@
 
 describe('desc', () => {});
 
-// $FlowExpectedError number. This type is incompatible with function type.
+// $FlowExpectedError[incompatible-call] number. This type is incompatible with function type.
 describe('desc', 12);
-// $FlowExpectedError number. This type is incompatible with undefined.
+// $FlowExpectedError[incompatible-call] number. This type is incompatible with undefined.
 describe('desc', () => 1);
-// $FlowExpectedError number. This type is incompatible with string.
+// $FlowExpectedError[incompatible-call] number. This type is incompatible with string.
 describe(12, () => {});
 
 
@@ -20,11 +20,11 @@ describe(12, () => {});
 
 describe.skip('desc', () => {});
 
-// $FlowExpectedError number. This type is incompatible with function type.
+// $FlowExpectedError[incompatible-call] number. This type is incompatible with function type.
 describe.skip('desc', 12);
-// $FlowExpectedError number. This type is incompatible with undefined.
+// $FlowExpectedError[incompatible-call] number. This type is incompatible with undefined.
 describe.skip('desc', () => 1);
-// $FlowExpectedError number. This type is incompatible with string.
+// $FlowExpectedError[incompatible-call] number. This type is incompatible with string.
 describe.skip(12, () => {});
 
 /**
@@ -33,11 +33,11 @@ describe.skip(12, () => {});
 
 describe.only('desc', () => {});
 
-// $FlowExpectedError number. This type is incompatible with function type.
+// $FlowExpectedError[incompatible-call] number. This type is incompatible with function type.
 describe.only('desc', 12);
-// $FlowExpectedError number. This type is incompatible with undefined.
+// $FlowExpectedError[incompatible-call] number. This type is incompatible with undefined.
 describe.only('desc', () => 1);
-// $FlowExpectedError number. This type is incompatible with string.
+// $FlowExpectedError[incompatible-call] number. This type is incompatible with string.
 describe.only(12, () => {});
 
 /**
@@ -46,5 +46,5 @@ describe.only(12, () => {});
 
 describe.timeout(1000);
 
-// $FlowExpectedError string. This type is incompatible with number.
+// $FlowExpectedError[incompatible-call] string. This type is incompatible with number.
 describe.timeout('1000');

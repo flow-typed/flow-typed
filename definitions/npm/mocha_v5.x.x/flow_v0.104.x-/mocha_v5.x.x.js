@@ -31,20 +31,20 @@ declare interface $npm$mocha$Suite {
   fullTitle(): string;
 }
 
-declare type $npm$mocha$ContextDefinition = {
+declare type $npm$mocha$ContextDefinition = {|
   (description: string, callback: (/* this: $npm$mocha$SuiteCallbackContext */) => void): $npm$mocha$Suite;
   only(description: string, callback: (/* this: $npm$mocha$SuiteCallbackContext */) => void): $npm$mocha$Suite;
   skip(description: string, callback: (/* this: $npm$mocha$SuiteCallbackContext */) => void): void;
   timeout(ms: number): void;
-}
+|}
 
-declare type $npm$mocha$TestDefinition = {
+declare type $npm$mocha$TestDefinition = {|
   (expectation: string, callback?: (/* this: $npm$mocha$TestCallbackContext, */ done: $npm$mocha$done) => mixed): $npm$mocha$Test;
   only(expectation: string, callback?: (/* this: $npm$mocha$TestCallbackContext, */ done: $npm$mocha$done) => mixed): $npm$mocha$Test;
   skip(expectation: string, callback?: (/* this: $npm$mocha$TestCallbackContext, */ done: $npm$mocha$done) => mixed): void;
   timeout(ms: number): void;
   state: 'failed' | 'passed';
-}
+|}
 
 declare interface $npm$mocha$Runner {}
 
