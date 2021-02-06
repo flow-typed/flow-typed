@@ -1,6 +1,6 @@
 // @flow
 
-import React from 'react';
+import * as React from 'react';
 import {
   act,
   render,
@@ -371,38 +371,38 @@ describe('render', () => {
 
   it('getByRole should return HTML element', () => {
     // $FlowExpectedError[incompatible-type]
-    const a: string = getByRole('1');
-    const b: HTMLElement = getByRole('1');
+    const a: string = getByRole('button');
+    const b: HTMLElement = getByRole('button');
   });
 
   it('getAllByRole should return array of HTML element', () => {
     // $FlowExpectedError[incompatible-type]
-    const a: HTMLElement = getAllByRole('1');
-    const b: Array<HTMLElement> = getAllByRole('2');
+    const a: HTMLElement = getAllByRole('button');
+    const b: Array<HTMLElement> = getAllByRole('button');
   });
 
   it('queryByRole should return maybe HTML element', () => {
     // $FlowExpectedError[incompatible-type]
-    const a: HTMLElement = queryByRole('1');
-    const b: ?HTMLElement = queryByRole('2');
+    const a: HTMLElement = queryByRole('button');
+    const b: ?HTMLElement = queryByRole('button');
   });
 
   it('queryAllByRole should return array of HTML element', () => {
     // $FlowExpectedError[incompatible-type]
-    const a: HTMLElement = queryAllByRole('1');
-    const b: Array<HTMLElement> = queryAllByRole('2');
+    const a: HTMLElement = queryAllByRole('button');
+    const b: Array<HTMLElement> = queryAllByRole('button');
   });
 
   it('findByRole should return HTML element', () => {
     // $FlowExpectedError[incompatible-type]
-    const a: HTMLElement = findByRole('1');
-    const b: Promise<HTMLElement> = findByRole('1');
+    const a: HTMLElement = findByRole('button');
+    const b: Promise<HTMLElement> = findByRole('button');
   });
 
   it('findAllByRole should return array of HTML element', () => {
     // $FlowExpectedError[incompatible-type-arg]
-    const a: Promise<HTMLElement> = findAllByRole('1');
-    const b: Promise<Array<HTMLElement>> = findAllByRole('2');
+    const a: Promise<HTMLElement> = findAllByRole('button');
+    const b: Promise<Array<HTMLElement>> = findAllByRole('button');
   });
 
   it('getByTestId should return HTML element', () => {
@@ -623,27 +623,27 @@ describe('within', () => {
   });
 
   it('should have getByRole', () => {
-    within(container).getByRole('1');
+    within(container).getByRole('button');
   });
 
   it('should have getAllByRole', () => {
-    within(container).getAllByRole('1');
+    within(container).getAllByRole('button');
   });
 
   it('should have queryByRole', () => {
-    within(container).queryByRole('1');
+    within(container).queryByRole('button');
   });
 
   it('should have queryAllByRole', () => {
-    within(container).queryAllByRole('1');
+    within(container).queryAllByRole('button');
   });
 
   it('should have findByRole', async () => {
-    await within(container).findByRole('1');
+    await within(container).findByRole('button');
   });
 
   it('should have findAllByRole', async () => {
-    await within(container).findAllByRole('1');
+    await within(container).findAllByRole('button');
   });
 
   it('should have getByTestId', () => {
@@ -1135,38 +1135,30 @@ describe('text matching API', () => {
     const result: Array<HTMLElement> = queryAllByPlaceholderText('1');
   });
 
-  it('getByRole should accept text match arguments', () => {
-    getByRole('1');
-    getByRole('1', { trim: true, collapseWhitespace: true, exact: true });
-    getByRole(/1/);
-    getByRole(/1/, { trim: true, collapseWhitespace: true, exact: true });
+  it('getByRole should accept by role arguments', () => {
+    getByRole('button');
+    getByRole('button', { hidden: true });
     getByRole((content: string, element) => true);
     getByRole((content: string, element) => true, {
-      trim: true,
-      collapseWhitespace: true,
-      exact: true,
+      hidden: true,
     });
   });
 
-  it('getAllByRole should accept text match arguments', () => {
-    const result: Array<HTMLElement> = getAllByRole('1');
+  it('getAllByRole should accept by role arguments', () => {
+    const result: Array<HTMLElement> = getAllByRole('button');
   });
 
-  it('queryByRole should accept text match arguments', () => {
-    queryByRole('1');
-    queryByRole('1', { trim: true, collapseWhitespace: true, exact: true });
-    queryByRole(/1/);
-    queryByRole(/1/, { trim: true, collapseWhitespace: true, exact: true });
+  it('queryByRole should accept by role arguments', () => {
+    queryByRole('button');
+    queryByRole('button', { hidden: true });
     queryByRole((content: string, element) => true);
     queryByRole((content: string, element) => true, {
-      trim: true,
-      collapseWhitespace: true,
-      exact: true,
+      hidden: true,
     });
   });
 
-  it('queryAllByRole should accept text match arguments', () => {
-    const result: Array<HTMLElement> = queryAllByRole('1');
+  it('queryAllByRole should accept by role arguments', () => {
+    const result: Array<HTMLElement> = queryAllByRole('button');
   });
 
   it('getByTestId should accept text match arguments', () => {
@@ -1294,7 +1286,9 @@ describe('render() parameters', () => {
     const customQueries = {
       getByOverride: (param1: string) => customValue,
     };
-    const result = render(<Component />, { queries: customQueries });
+    const result = render<{|
+      getByOverride: (string) => CustomReturnType,
+    |}>(<Component />, { queries: customQueries });
     const a: CustomReturnType = result.getByOverride('something');
     // $FlowExpectedError[incompatible-call] bad type for getByOverride parameter
     result.getByOverride(1234);

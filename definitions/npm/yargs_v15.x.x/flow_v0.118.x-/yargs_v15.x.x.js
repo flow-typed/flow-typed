@@ -67,7 +67,7 @@ declare module "yargs" {
     | (argv: Argv, yargsInstance?: Yargs) => void
     | (argv: Argv, yargsInstance?: Yargs) => Promise<void>;
 
-  declare type Middleware = MiddlewareCallback | Array<MiddleWareCallback>;
+  declare type Middleware = MiddleWareCallback | Array<MiddleWareCallback>;
 
   declare class Yargs {
     (args: Array<string>): Yargs;

@@ -26,6 +26,8 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       - uses: actions/checkout@v2
+        with:
+          fetch-depth: 2
       - name: Setup Node
         uses: actions/setup-node@v1
         with:
