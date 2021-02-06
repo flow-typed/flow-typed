@@ -63,7 +63,7 @@ async function getTestGroups(
     const diff = await getDiff();
     let changedDefs;
     const baseDiff: string[] = diff
-      .map<string>(d => {
+      .map(d => {
         const match = d.match(basePathRegex);
         if (match) {
           return match[0];
@@ -671,7 +671,7 @@ export const name = 'run-tests [testPatterns...]';
 export const description =
   'Run definition tests for library definitions in the flow-typed project';
 
-export function setup(yargs: Yargs): any {
+export function setup(yargs: Yargs): Yargs {
   return yargs
     .usage(`$0 ${name} - ${description}`)
     .positional('testPatterns', {

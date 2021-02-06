@@ -11,7 +11,7 @@ export type Args = {
   definitionsDirPath: mixed, // string
 };
 
-export function setup(yargs: Yargs): any {
+export function setup(yargs: Yargs): Yargs {
   return yargs.positional('definitionsDirPath', {
     describe:
       'Please specify the path of the /definitions directory to be validated ' +

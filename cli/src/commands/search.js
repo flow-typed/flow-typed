@@ -33,7 +33,7 @@ export const name = 'search <term>';
 export const description =
   'Perform a simple search (by name) of available libdefs';
 
-export function setup(yargs: Yargs): any {
+export function setup(yargs: Yargs): Yargs {
   return yargs
     .positional('term', {
       describe: 'Please provide a term for which to search!',

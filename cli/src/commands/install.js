@@ -61,7 +61,7 @@ export type Args = {
   useCacheUntil?: mixed, // seconds
   explicitLibDefs: mixed, // Array<string>
 };
-export function setup(yargs: Yargs): any {
+export function setup(yargs: Yargs): Yargs {
   return yargs
     .usage(`$0 ${name} - ${description}`)
     .positional('explicitLibDefs', {
