@@ -131,12 +131,12 @@ declare module '@testing-library/react' {
     baseElement?: HTMLElement,
     hydrate?: boolean,
     queries?: any,
-    wrapper?: React.ComponentType,
+    wrapper?: React$ComponentType<any>,
   |};
 
   declare module.exports: {
     render(
-      ui: React.ReactElement<any>,
+      ui: React$Element<any>,
       options?: RenderOptions
     ): RenderResult<>,
 
