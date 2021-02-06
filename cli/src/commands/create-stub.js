@@ -8,7 +8,7 @@ import {findFlowRoot} from '../lib/flowProjectUtils.js';
 import {getPackageJsonData, loadPnpResolver} from '../lib/npm/npmProjectUtils';
 import {path} from '../lib/node';
 
-export function setup(yargs: Object) {
+export function setup(yargs: Object): any {
   return yargs
     .usage(`$0 ${name} ...PACKAGE`)
     .options({

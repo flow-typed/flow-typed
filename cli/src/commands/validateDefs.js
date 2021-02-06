@@ -11,7 +11,7 @@ export type Args = {
   definitionsDirPath: mixed, // string
 };
 
-export function setup(yargs: Yargs) {
+export function setup(yargs: Yargs): any {
   return yargs.positional('definitionsDirPath', {
     describe:
       'Please specify the path of the /definitions directory to be validated ' +
@@ -20,7 +20,7 @@ export function setup(yargs: Yargs) {
   });
 }
 
-export async function run(args: Args) {
+export async function run(args: Args): Promise<number> {
   const defsDirPath = args.definitionsDirPath;
   if (typeof defsDirPath !== 'string') {
     throw new Error('definitionsDirPath should be a string');

@@ -62,15 +62,16 @@ async function getTestGroups(
   if (onlyChanged) {
     const diff = await getDiff();
     let changedDefs;
-    // $FlowFixMe
     const baseDiff: string[] = diff
-      .map(d => {
+      .map<string>(d => {
         const match = d.match(basePathRegex);
         if (match) {
           return match[0];
         }
+        return '';
       })
-      .filter(d => d != null);
+      .filter(d => d !== '');
+
     changedDefs = baseDiff.map(d => parseRepoDirItem(d).pkgName);
     libDefs = libDefs.filter(def => changedDefs.includes(def.pkgName));
   }
@@ -670,7 +671,7 @@ export const name = 'run-tests [testPatterns...]';
 export const description =
   'Run definition tests for library definitions in the flow-typed project';
 
-export function setup(yargs: Yargs) {
+export function setup(yargs: Yargs): any {
   return yargs
     .usage(`$0 ${name} - ${description}`)
     .positional('testPatterns', {

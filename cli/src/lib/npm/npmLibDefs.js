@@ -26,6 +26,7 @@ import {
   getRangeLowerBound,
   getRangeUpperBound,
   versionToString,
+  type Version,
 } from '../semver';
 
 import semver from 'semver';
@@ -188,7 +189,12 @@ async function getCacheNpmLibDefs(cacheExpiry) {
 
 const PKG_NAMEVER_RE = /^(.*)_v\^?([0-9]+)\.([0-9]+|x)\.([0-9]+|x)(-.*)?$/;
 const PKG_GIT_RE = /^([\w\-]+)@([\w\.]+):([\w\-]+)\/([\w\-]+)(?:\.git)$/;
-function parsePkgNameVer(pkgNameVer: string) {
+function parsePkgNameVer(
+  pkgNameVer: string,
+): {|
+  pkgName: string,
+  pkgVersion: Version,
+|} {
   const pkgNameVerMatches = pkgNameVer.match(PKG_NAMEVER_RE);
   const pkgNameGitMatches = pkgNameVer.match(PKG_GIT_RE);
 

@@ -19,7 +19,7 @@ export function signCode(code: string, version: string): string {
   return `// flow-typed signature: ${hash}\n${versionedCode}`;
 }
 
-export function signCodeStream(version: string) {
+export function signCodeStream(version: string): any {
   let code = '';
   return through(
     function write(data) {

@@ -17,7 +17,7 @@ import typeof Yargs from 'yargs';
 
 const identity = <T>(x: T): T => x;
 
-export function runCLI() {
+function runCLI() {
   type CommandModule = {
     name: string,
     description: string,

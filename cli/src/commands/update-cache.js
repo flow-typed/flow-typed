@@ -13,7 +13,7 @@ export const description = 'Update the flow-typed definitions cache';
 export type Args = {
   cacheDir?: mixed,
 };
-export function setup(yargs: Yargs) {
+export function setup(yargs: Yargs): any {
   return yargs.usage(`$0 ${name} - ${description}`).options({
     cacheDir: {
       alias: 'c',
