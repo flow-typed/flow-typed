@@ -5,7 +5,7 @@ import semver from 'semver';
 import {cloneInto, rebaseRepoMaster} from './git.js';
 import {mkdirp} from './fileUtils.js';
 import {fs, path, os} from './node.js';
-import {versionToString, type VersionRange, type Version} from './semver.js';
+import {versionToString, type Version} from './semver.js';
 import {
   disjointVersionsAll,
   parseDirString as parseFlowDirString,

@@ -13,7 +13,7 @@ export const fs = {
   // This is a custom function that our tests can use during setup to specify
   // what the files on the "mock" filesystem should look like when any of the
   // `fs` APIs are used.
-  mockFiles: ({ ...null }: { [key: string]: any }),
+  mockFiles: ({}: {[key: string]: any}),
 
   __setMockFiles: function(newMockFiles: {[key: string]: string}) {
     fs.mockFiles = newMockFiles;
