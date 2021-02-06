@@ -44,6 +44,7 @@ function runCLI() {
           cmd.setup || identity,
           args =>
             cmd
+              // $FlowExpectedError[extra-arg] cmd.run expects only one arg
               .run(args, yargs)
               .catch(err => {
                 if (err.stack) {

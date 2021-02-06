@@ -318,14 +318,7 @@ export function parseRepoDirItem(
   dirItemPath: string,
 ): {|
   pkgName: string,
-  pkgVersion: {|
-    major: number | 'x',
-    minor: number | 'x',
-    patch: number | 'x',
-    prerel: null | string,
-    range?: VersionRange,
-    upperBound?: Version,
-  |},
+  pkgVersion: Version,
 |} {
   const dirItem = path.basename(dirItemPath);
   const itemMatches = dirItem.match(REPO_DIR_ITEM_NAME_RE);
