@@ -5,10 +5,11 @@ import { connect } from "react-redux";
 export let e: Array<any> = [];
 
 function checkSimplePropertyInjection() {
-  type OwnProps = {|
+  type OwnProps = {
     foo: number,
     bar: string,
-  |};
+    ...
+  };
   type Props = {
     ...OwnProps,
     foo: number,

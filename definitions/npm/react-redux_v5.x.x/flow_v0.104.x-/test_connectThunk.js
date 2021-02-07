@@ -100,6 +100,8 @@ function onlyDispatchObject_sameDispatchPropsAreErroneous() {
   ...DispatchProps, ... };
   class Com extends React.Component<Props> {}
 
+  //$FlowExpectedError[incompatible-type-arg] here the property returns a thunk...
+  //$FlowExpectedError[prop-missing]
   const Connected = connect<Props, {||}, _,DispatchProps,_,Dispatch>(null, mapDispatchToProps)(Com);
   e.push(Connected);
   <Connected />;
@@ -189,6 +191,8 @@ function stateAndDispatchObject_sameDispatchPropsAreErroneous() {
   };
   class Com extends React.Component<Props> {}
 
+  //$FlowExpectedError[incompatible-call] here the property returns a thunk...
+  //$FlowExpectedError[prop-missing]
   const Connected = connect<Props, {||}, _,DispatchProps,_,Dispatch>(mapStateToProps, mapDispatchToProps)(Com);
   e.push(Connected);
   <Connected />;

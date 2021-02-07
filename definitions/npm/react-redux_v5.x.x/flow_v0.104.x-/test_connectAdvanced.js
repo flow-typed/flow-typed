@@ -111,8 +111,8 @@ function testConnectAdvancedConnectOptions() {
   //$FlowExpectedError[incompatible-call] storeKey must be a string
   connectAdvanced(selectorFactory, {storeKey: 5});
 
-  //$FlowExpectedError[incompatible-call] forwardRef must be defined if passed in
-  connectAdvanced(selectorFactory, {forwardRef: null});
+  //$FlowExpectedError[incompatible-call] withRef must be defined if passed in
+  connectAdvanced(selectorFactory, {withRef: null});
 
   connectAdvanced(selectorFactory, {otherOption: "other options are allowed"});
 }

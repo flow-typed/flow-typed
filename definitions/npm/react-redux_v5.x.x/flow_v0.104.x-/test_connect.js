@@ -101,7 +101,6 @@ function doesNotRequireDefinedComponentToTypeCheck3case() {
   });
 
   const mapDispatchToProps = () => ({
-
     numProp: false,
   });
 
@@ -599,8 +598,8 @@ function testOptions() {
   }
   // here in Props comes dispatch property
   e.push(connect<{...}, {||}, _,_,_,_>(null, null, null, {pure: true})(Com));
-  e.push(connect<{...}, {||}, _,_,_,_>(null, null, null, {forwardRef: true})(Com));
-  e.push(connect<{...}, {||}, _,_,_,_>(null, null, null, {pure: false, forwardRef: false})(Com));
+  e.push(connect<{...}, {||}, _,_,_,_>(null, null, null, {withRef: true})(Com));
+  e.push(connect<{...}, {||}, _,_,_,_>(null, null, null, {pure: false, withRef: false})(Com));
   // $FlowExpectedError[incompatible-call] wrong type
   e.push(connect<{...}, {||}, _,_,_,_>(null, null, null, {pure: 123})(Com));
   // $FlowExpectedError[incompatible-call] wrong type
