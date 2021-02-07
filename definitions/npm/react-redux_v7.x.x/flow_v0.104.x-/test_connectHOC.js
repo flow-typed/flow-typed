@@ -5,10 +5,11 @@ import { connect } from "react-redux";
 export let e: Array<any> = [];
 
 function checkSimplePropertyInjection() {
-  type OwnProps = {|
+  type OwnProps = {
     foo: number,
     bar: string,
-  |};
+    ...
+  };
   type Props = {
     ...OwnProps,
     foo: number,
@@ -29,7 +30,7 @@ function checkSimplePropertyInjection() {
     Component: React.AbstractComponent<Config>,
   ): React.AbstractComponent<$Diff<Config, { foo: number | void, ... }>> {
     return function WrapperComponent(
-      props: $Diff<Config, { foo: number | void, ... }>,
+      props: $Diff<Config, { foo?: number, ... }>,
     ) {
       return <Component {...props} foo={42} />;
     };
