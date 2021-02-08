@@ -2,7 +2,7 @@
 
 import * as semver from 'semver';
 
-type VersionRange = '>=' | '<=';
+export type VersionRange = '>=' | '<=';
 export type Version = {|
   range?: VersionRange,
   major: number | 'x',
@@ -22,14 +22,18 @@ export function emptyVersion(): Version {
   };
 }
 
-export function getRangeLowerBound(rangeRaw: string | semver.Range): string {
+export function getRangeLowerBound(
+  rangeRaw: string | typeof semver.Range,
+): string {
   const range =
     typeof rangeRaw === 'string' ? new semver.Range(rangeRaw) : rangeRaw;
   // Fix for semver returning a bad comparator when the range is 'v0.x.x'
   return range.set[0][0].semver.version || '0.0.0';
 }
 
-export function getRangeUpperBound(rangeRaw: string | semver.Range): string {
+export function getRangeUpperBound(
+  rangeRaw: string | typeof semver.Range,
+): string {
   const range =
     typeof rangeRaw === 'string' ? new semver.Range(rangeRaw) : rangeRaw;
   return range.set[0][1].semver.version;
