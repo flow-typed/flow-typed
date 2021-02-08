@@ -23,7 +23,7 @@ export function emptyVersion(): Version {
 }
 
 export function getRangeLowerBound(
-  rangeRaw: string | typeof semver.Range,
+  rangeRaw: string | semver.Range,
 ): string {
   const range =
     typeof rangeRaw === 'string' ? new semver.Range(rangeRaw) : rangeRaw;
@@ -32,7 +32,7 @@ export function getRangeLowerBound(
 }
 
 export function getRangeUpperBound(
-  rangeRaw: string | typeof semver.Range,
+  rangeRaw: string | semver.Range,
 ): string {
   const range =
     typeof rangeRaw === 'string' ? new semver.Range(rangeRaw) : rangeRaw;
