@@ -8,13 +8,13 @@ it('desc', () => {});
 it('desc', (done : Function) => {});
 it('desc', () => new Promise((res, rej) => {}));
 
-// $FlowExpectedError number. This type is incompatible with function type.
+// $FlowExpectedError[incompatible-call] number. This type is incompatible with function type.
 it('desc', (done : number) => {});
-// $FlowExpectedError number. This type is incompatible with function type.
+// $FlowExpectedError[incompatible-call] number. This type is incompatible with function type.
 it('desc', 12);
-// $FlowExpectedError number. This type is incompatible with undefined.
+// $FlowExpectedError[incompatible-call] number. This type is incompatible with undefined.
 it('desc', () => 1);
-// $FlowExpectedError number. This type is incompatible with string.
+// $FlowExpectedError[incompatible-call] number. This type is incompatible with string.
 it(12, () => {});
 
 
@@ -26,13 +26,13 @@ it.skip('desc', () => {});
 it.skip('desc', (done : Function) => {});
 it.skip('desc', () => new Promise((res, rej) => {}));
 
-// $FlowExpectedError number. This type is incompatible with function type.
+// $FlowExpectedError[incompatible-call] number. This type is incompatible with function type.
 it.skip('desc', (done : number) => {});
-// $FlowExpectedError number. This type is incompatible with function type.
+// $FlowExpectedError[incompatible-call] number. This type is incompatible with function type.
 it.skip('desc', 12);
-// $FlowExpectedError number. This type is incompatible with undefined.
+// $FlowExpectedError[incompatible-call] number. This type is incompatible with undefined.
 it.skip('desc', () => 1);
-// $FlowExpectedError number. This type is incompatible with string.
+// $FlowExpectedError[incompatible-call] number. This type is incompatible with string.
 it.skip(12, () => {});
 
 // Can also skip a test by not providing a body
@@ -46,13 +46,13 @@ it.only('desc', () => {});
 it.only('desc', (done : Function) => {});
 it.only('desc', () => new Promise((res, rej) => {}));
 
-// $FlowExpectedError number. This type is incompatible with function type.
+// $FlowExpectedError[incompatible-call] number. This type is incompatible with function type.
 it.only('desc', (done : number) => {});
-// $FlowExpectedError number. This type is incompatible with function type.
+// $FlowExpectedError[incompatible-call] number. This type is incompatible with function type.
 it.only('desc', 12);
-// $FlowExpectedError number. This type is incompatible with undefined.
+// $FlowExpectedError[incompatible-call] number. This type is incompatible with undefined.
 it.only('desc', () => 1);
-// $FlowExpectedError number. This type is incompatible with string.
+// $FlowExpectedError[incompatible-call] number. This type is incompatible with string.
 it.only(12, () => {});
 
 /**
@@ -61,5 +61,5 @@ it.only(12, () => {});
 
 it.timeout(1000);
 
-// $FlowExpectedError string. This type is incompatible with number.
+// $FlowExpectedError[incompatible-call] string. This type is incompatible with number.
 it.timeout('1000');

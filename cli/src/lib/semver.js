@@ -2,7 +2,7 @@
 
 import * as semver from 'semver';
 
-type VersionRange = '>=' | '<=';
+export type VersionRange = '>=' | '<=';
 export type Version = {|
   range?: VersionRange,
   major: number | 'x',

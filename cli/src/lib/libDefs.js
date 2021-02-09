@@ -5,7 +5,7 @@ import semver from 'semver';
 import {cloneInto, rebaseRepoMaster} from './git.js';
 import {mkdirp} from './fileUtils.js';
 import {fs, path, os} from './node.js';
-import {versionToString} from './semver.js';
+import {versionToString, type Version} from './semver.js';
 import {
   disjointVersionsAll,
   parseDirString as parseFlowDirString,
@@ -28,13 +28,13 @@ export type LibDef = {|
   testFilePaths: Array<string>,
 |};
 
-export const TEST_FILE_NAME_RE = /^test_.*\.js$/;
+export const TEST_FILE_NAME_RE: RegExp = /^test_.*\.js$/;
 
 const CACHE_DIR = path.join(os.homedir(), '.flow-typed');
-const CACHE_REPO_DIR = path.join(CACHE_DIR, 'repo');
+const CACHE_REPO_DIR: string = path.join(CACHE_DIR, 'repo');
 
 const REMOTE_REPO_URL = 'https://github.com/flowtype/flow-typed.git';
-const LAST_UPDATED_FILE = path.join(CACHE_DIR, 'lastUpdated');
+const LAST_UPDATED_FILE: string = path.join(CACHE_DIR, 'lastUpdated');
 
 async function cloneCacheRepo(verbose?: VerboseOutput) {
   await mkdirp(CACHE_REPO_DIR);
@@ -47,7 +47,7 @@ async function cloneCacheRepo(verbose?: VerboseOutput) {
   await fs.writeFile(LAST_UPDATED_FILE, String(Date.now()));
 }
 
-const CACHE_REPO_GIT_DIR = path.join(CACHE_REPO_DIR, '.git');
+const CACHE_REPO_GIT_DIR: string = path.join(CACHE_REPO_DIR, '.git');
 async function rebaseCacheRepo(verbose?: VerboseOutput) {
   if (
     (await fs.exists(CACHE_REPO_DIR)) &&
@@ -73,7 +73,7 @@ async function rebaseCacheRepo(verbose?: VerboseOutput) {
 /**
  * Utility wrapper for ensureCacheRepo with an update expiry of 0 hours.
  */
-async function updateCacheRepo(verbose?: VerboseOutput) {
+async function updateCacheRepo(verbose?: VerboseOutput): Promise<void> {
   return await ensureCacheRepo(verbose, 0);
 }
 
@@ -92,7 +92,7 @@ export const _cacheRepoAssure: {
 async function ensureCacheRepo(
   verbose?: VerboseOutput,
   cacheRepoExpiry: number = CACHE_REPO_EXPIRY,
-) {
+): Promise<void> {
   // Only re-run rebase checks if a check hasn't been run in the last 5 minutes
   if (_cacheRepoAssure.lastAssured + 5 * 1000 * 60 >= Date.now()) {
     return _cacheRepoAssure.pendingAssure;
@@ -163,7 +163,7 @@ async function addLibDefs(pkgDirPath, libDefs: Array<LibDef>) {
 /**
  * Given a 'definitions/npm' dir, return a list of LibDefs that it contains.
  */
-export async function getLibDefs(defsDir: string) {
+export async function getLibDefs(defsDir: string): Promise<Array<LibDef>> {
   const libDefs: Array<LibDef> = [];
   const defsDirItems = await fs.readdir(defsDir);
   await P.all(
@@ -314,7 +314,12 @@ async function parseLibDefsFromPkgDir(
  * directory's name into a package name and version.
  */
 const REPO_DIR_ITEM_NAME_RE = /^(.*)_v([0-9]+)\.([0-9]+|x)\.([0-9]+|x)(-.*)?$/;
-export function parseRepoDirItem(dirItemPath: string) {
+export function parseRepoDirItem(
+  dirItemPath: string,
+): {|
+  pkgName: string,
+  pkgVersion: Version,
+|} {
   const dirItem = path.basename(dirItemPath);
   const itemMatches = dirItem.match(REPO_DIR_ITEM_NAME_RE);
   if (itemMatches == null) {
@@ -420,7 +425,7 @@ function writeVerbose(stream, msg, writeNewline = true) {
 const CACHE_REPO_DEFS_DIR = path.join(CACHE_REPO_DIR, 'definitions', 'npm');
 export async function getCacheLibDefs(
   verbose?: VerboseOutput = process.stdout,
-) {
+): Promise<Array<LibDef>> {
   await ensureCacheRepo(verbose);
   await verifyCLIVersion(path.join(CACHE_REPO_DIR, 'definitions'));
   return getLibDefs(CACHE_REPO_DEFS_DIR);
