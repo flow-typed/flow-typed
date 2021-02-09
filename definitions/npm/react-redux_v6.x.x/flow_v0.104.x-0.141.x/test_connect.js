@@ -189,7 +189,6 @@ function testExactProps() {
   //$FlowExpectedError[incompatible-use] forMapStateToProps missing
   <Connected passthrough={123}/>;
   //$FlowExpectedError[incompatible-call] takes in only React components
-  //$FlowExpectedError[prop-missing]
   const Connected2 = connect<Props, OwnProps,_,_,_,Dispatch>(mapStateToProps)('');
   e.push(Connected2);
 }

@@ -191,6 +191,8 @@ function stateAndDispatchObject_sameDispatchPropsAreErroneous() {
   };
   class Com extends React.Component<Props> {}
 
+  //$FlowExpectedError[prop-missing] here the property returns a thunk...
+  //$FlowExpectedError[incompatible-call]
   const Connected = connect<Props, {||}, _,DispatchProps,_,Dispatch>(mapStateToProps, mapDispatchToProps)(Com);
   e.push(Connected);
   <Connected />;

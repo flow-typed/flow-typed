@@ -89,10 +89,11 @@ function composeWithOtherHOC_OK() {
 }
 
 function composeWithOtherHOC_exactOK() {
-  type OwnProps = {|
+  type OwnProps = {
     own1: number,
     injected1: string,
-  |};
+    ...
+  };
   type Props = {
     ...$Exact<OwnProps>,
     state1: number,
@@ -122,9 +123,8 @@ function composeWithOtherHOC_exactOK() {
   const Decorated = composedDecorators(Com);
   // OK without `injected1`
   <Decorated own1={1} />;
-  //$FlowExpectedError[prop-missing] property `injected1` is missing in `OwnProps` [1] but exists in props
   <Decorated own1={1} injected1="str" />;
-  // the ExpectError above masks the misssing `own1` error below :(
+  //$FlowExpectedError[prop-missing] property `own1` is missing in props [1] but exists in `OwnProps` [2]
   <Decorated />;
   e.push(Decorated);
 }
