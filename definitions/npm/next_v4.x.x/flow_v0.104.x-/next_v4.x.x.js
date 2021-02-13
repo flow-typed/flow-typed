@@ -1,6 +1,6 @@
 declare module "next" {
   declare type RequestHandler = (
-    req: http$IncomingMessage,
+    req: http$IncomingMessage<>,
     res: http$ServerResponse,
     parsedUrl: any
   ) => Promise<void>;
@@ -9,27 +9,27 @@ declare module "next" {
     prepare(): Promise<void>,
     getRequestHandler(): RequestHandler,
     render(
-      req: http$IncomingMessage,
+      req: http$IncomingMessage<>,
       res: http$ServerResponse,
       pathname: string,
       query?: Object
     ): Promise<void>,
     renderToHTML(
-      req: http$IncomingMessage,
+      req: http$IncomingMessage<>,
       res: http$ServerResponse,
       pathname: string,
       query?: Object
     ): string,
     renderError(
       err: Error,
-      req: http$IncomingMessage,
+      req: http$IncomingMessage<>,
       res: http$ServerResponse,
       pathname: string,
       query?: Object
     ): Promise<void>,
     renderErrorToHTML(
       err: Error,
-      req: http$IncomingMessage,
+      req: http$IncomingMessage<>,
       res: http$ServerResponse,
       pathname: string,
       query?: Object
@@ -142,7 +142,7 @@ declare module "next/document" {
   declare export var Main: Class<React$Component<any, any>>;
   declare export var NextScript: Class<React$Component<any, any>>;
   declare export default Class<React$Component<any, any>> & {
-    getInitialProps: (ctx: Context) => Promise<*>,
+    getInitialProps: (ctx: Context) => Promise<any>,
     renderPage(cb: Function): void,
     ...
   }
