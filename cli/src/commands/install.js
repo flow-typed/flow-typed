@@ -1,5 +1,6 @@
 // @flow
 
+import type {FlowSpecificVer} from '../lib/flowVersion';
 import {signCodeStream} from '../lib/codeSign';
 
 import {copyFile, mkdirp} from '../lib/fileUtils';
@@ -60,7 +61,7 @@ export type Args = {
   useCacheUntil?: mixed, // seconds
   explicitLibDefs: mixed, // Array<string>
 };
-export function setup(yargs: Yargs) {
+export function setup(yargs: Yargs): Yargs {
   return yargs
     .usage(`$0 ${name} - ${description}`)
     .positional('explicitLibDefs', {
@@ -128,7 +129,7 @@ export function setup(yargs: Yargs) {
       },
     });
 }
-export async function run(args: Args) {
+export async function run(args: Args): Promise<number> {
   const cwd =
     typeof args.rootDir === 'string'
       ? path.resolve(args.rootDir)
@@ -188,7 +189,13 @@ export async function run(args: Args) {
   return 0;
 }
 
-async function determineFlowVersion(cwd: string, flowVersionArg?: mixed) {
+async function determineFlowVersion(
+  cwd: string,
+  flowVersionArg?: mixed,
+): Promise<{|
+  kind: 'specific',
+  ver: FlowSpecificVer,
+|}> {
   if (flowVersionArg && typeof flowVersionArg === 'string') {
     // Be permissive if the prefix 'v' is left off
     let flowVersionStr =

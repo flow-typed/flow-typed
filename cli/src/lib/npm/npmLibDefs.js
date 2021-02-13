@@ -26,6 +26,7 @@ import {
   getRangeLowerBound,
   getRangeUpperBound,
   versionToString,
+  type Version,
 } from '../semver';
 
 import semver from 'semver';
@@ -188,7 +189,12 @@ async function getCacheNpmLibDefs(cacheExpiry) {
 
 const PKG_NAMEVER_RE = /^(.*)_v\^?([0-9]+)\.([0-9]+|x)\.([0-9]+|x)(-.*)?$/;
 const PKG_GIT_RE = /^([\w\-]+)@([\w\.]+):([\w\-]+)\/([\w\-]+)(?:\.git)$/;
-function parsePkgNameVer(pkgNameVer: string) {
+function parsePkgNameVer(
+  pkgNameVer: string,
+): {|
+  pkgName: string,
+  pkgVersion: Version,
+|} {
   const pkgNameVerMatches = pkgNameVer.match(PKG_NAMEVER_RE);
   const pkgNameGitMatches = pkgNameVer.match(PKG_GIT_RE);
 
@@ -244,13 +250,22 @@ function validateVersionNumPart(part: string, partName: string): number {
 }
 
 function pkgVersionMatch(pkgSemver: string, libDefSemverRaw: string) {
-  // The package version should be treated as a semver implicitly prefixed by a
-  // `^`. (i.e.: "foo_v2.2.x" is the same range as "^2.2.x")
+  // The package version should be treated as a semver implicitly prefixed by
+  // `^` or `~`. Depending on whether or not the minor value is defined.
+  // i.e.: "foo_v2.2.x" is the same range as "~2.2.x"
+  //        and "foo_v2.x.x" is the same range as "^2.x.x"
   // UNLESS it is prefixed by the equals character (i.e. "foo_=v2.2.x")
-  let libDefSemver =
-    libDefSemverRaw[0] !== '=' && libDefSemverRaw[0] !== '^'
-      ? '^' + libDefSemverRaw
-      : libDefSemverRaw;
+  const libDefSemver = (() => {
+    const versionSplit = libDefSemverRaw.split('.');
+    if (libDefSemverRaw[0] !== '=' && libDefSemverRaw[0] !== '^') {
+      if (versionSplit[1] !== 'x') {
+        return '~' + libDefSemverRaw;
+      }
+      return '^' + libDefSemverRaw;
+    }
+
+    return libDefSemverRaw;
+  })();
 
   if (semver.valid(pkgSemver)) {
     // Test the single package version against the LibDef range

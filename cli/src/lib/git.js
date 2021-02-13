@@ -66,7 +66,7 @@ export async function setLocalConfig(
   }
 }
 
-export async function getDiff() {
+export async function getDiff(): Promise<Array<string>> {
   const gitPath = await getGitPath();
   try {
     let {stdout} = await child_process.spawnP(gitPath, ['diff', '--name-only']);

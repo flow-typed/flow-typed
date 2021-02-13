@@ -17,7 +17,7 @@ import typeof Yargs from 'yargs';
 
 const identity = <T>(x: T): T => x;
 
-export function runCLI() {
+function runCLI() {
   type CommandModule = {
     name: string,
     description: string,
@@ -44,6 +44,7 @@ export function runCLI() {
           cmd.setup || identity,
           args =>
             cmd
+              // $FlowExpectedError[extra-arg] cmd.run expects only one arg
               .run(args, yargs)
               .catch(err => {
                 if (err.stack) {

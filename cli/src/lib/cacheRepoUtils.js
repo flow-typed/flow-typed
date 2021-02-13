@@ -35,11 +35,11 @@ function setCustomCacheDir(dir: string): void {
   customCacheDir = dir;
 }
 
-function getCacheRepoGitDir() {
+function getCacheRepoGitDir(): string {
   return path.join(getCacheRepoDir(), '.git');
 }
 
-function getLastUpdatedFile() {
+function getLastUpdatedFile(): string {
   return path.join(getCacheRepoDir(), 'lastUpdated');
 }
 
@@ -77,7 +77,7 @@ const cacheRepoEnsureToken: {
 };
 export async function ensureCacheRepo(
   cacheRepoExpiry: number = CACHE_REPO_EXPIRY,
-) {
+): Promise<void> {
   // Only re-run rebase checks if a check hasn't been run in the last 5 minutes
   if (cacheRepoEnsureToken.lastEnsured + 5 * 1000 * 60 >= Date.now()) {
     return cacheRepoEnsureToken.pendingEnsurance;
@@ -120,7 +120,7 @@ export async function ensureCacheRepo(
   ));
 }
 
-export function getCacheRepoDir() {
+export function getCacheRepoDir(): string {
   return path.join(getCacheDir(), 'repo');
 }
 

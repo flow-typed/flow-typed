@@ -16,59 +16,59 @@ import type {
 function test_Application() {
   const app = new Koa();
   const context: Context = app.context;
-  // $FlowExpectedError
+  // $FlowExpectedError[incompatible-type]
   const _context: number = app.context;
   const callback: () => (req: http$IncomingMessage<>, res: http$ServerResponse) => void = app.callback;
   const handler: (req: http$IncomingMessage<>, res: http$ServerResponse) => void = app.callback();
-  // $FlowExpectedError
+  // $FlowExpectedError[incompatible-type]
   const _callback: (req: http$IncomingMessage<>, res: http$ServerResponse) => void = app.callback;
   const env: string = app.env;
-  // $FlowExpectedError
+  // $FlowExpectedError[incompatible-type]
   const _env: number = app.env;
   const keys: void|Array<string>|Object = app.keys;
-  // $FlowExpectedError
+  // $FlowExpectedError[incompatible-type]
   const _keys: null = app.keys;
   const middleware: Array<Middleware> = app.middleware;
-  // $FlowExpectedError
+  // $FlowExpectedError[incompatible-type]
   const _middleware: Middleware = app.middleware;
   const name: void|string = app.name;
-  // $FlowExpectedError
+  // $FlowExpectedError[incompatible-type]
   const _name: number = app.name;
   const proxy: boolean = app.proxy;
-  // $FlowExpectedError
+  // $FlowExpectedError[incompatible-type]
   const _proxy: number = app.proxy;
   const request: Request = app.request;
-  // $FlowExpectedError
+  // $FlowExpectedError[incompatible-type]
   const _request: number = app.request;
   const response: Response = app.response;
-  // $FlowExpectedError
+  // $FlowExpectedError[incompatible-type]
   const _response: number = app.response;
   const server: http$Server = app.server;
-  // $FlowExpectedError
+  // $FlowExpectedError[incompatible-type]
   const _server: number = app.server;
   const subdomainOffset: number = app.subdomainOffset;
-  // $FlowExpectedError
+  // $FlowExpectedError[incompatible-type]
   const _subdomainOffset: string = app.subdomainOffset;
   const listen: $PropertyType<http$Server, 'listen'> = app.listen;
-  // $FlowExpectedError
+  // $FlowExpectedError[incompatible-type]
   const _listen: () => string = app.listen;
   const toJSON: () => ApplicationJSON = app.toJSON;
-  // $FlowExpectedError
+  // $FlowExpectedError[incompatible-type]
   const _toJSON: () => string = app.toJSON;
   const inspect: () => ApplicationJSON = app.inspect;
-  // $FlowExpectedError
+  // $FlowExpectedError[incompatible-type]
   const _inspect: () => string = app.inspect;
   app.use( (ctx, next) => {
     const ctx1: Context = ctx;
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-type]
     const _ctx1: number = ctx;
     const next1: () => Promise<void> = next;
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-type-arg]
     const _next1: () => Promise<string> = next;
     return;
   });
   app.use(async (ctx, next) => {
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
     return 'hello';
   });
 }
@@ -76,251 +76,250 @@ function test_Application() {
 function test_response() {
   declare var response:Response;
   const req: http$IncomingMessage<> = response.req;
-  // $FlowExpectedError
+  // $FlowExpectedError[incompatible-type]
   const _req: number = response.req;
   const res: http$ServerResponse = response.res;
-  // $FlowExpectedError
+  // $FlowExpectedError[incompatible-type]
   const _res: number = response.res;
   const ctx: Context = response.ctx;
-  // $FlowExpectedError
+  // $FlowExpectedError[incompatible-type]
   const _ctx: number = response.ctx;
   const request: Request = response.request;
-  // $FlowExpectedError
+  // $FlowExpectedError[incompatible-type]
   const _request: number = response.request;
 
   const body: $PropertyType<Response, 'body'> = response.body;
-  // $FlowExpectedError
+  // $FlowExpectedError[incompatible-type]
   const _body: number = response.body;
   const etag: string = response.etag;
-  // $FlowExpectedError
+  // $FlowExpectedError[incompatible-type]
   const _etag: number = response.etag;
   const header: SimpleHeader = response.header;
-  // $FlowExpectedError
+  // $FlowExpectedError[incompatible-type]
   const _header: { [key: string]: string, ... } = response.header;
   const headers: SimpleHeader = response.headers;
-  // $FlowExpectedError
+  // $FlowExpectedError[incompatible-type]
   const _headers: { [key: string]: string, ... } = response.headers;
   const headerSent: boolean = response.headerSent;
-  // $FlowExpectedError
+  // $FlowExpectedError[incompatible-type]
   const _headerSent: number = response.headerSent;
 
   const lastModified: Date = response.lastModified;
-  // $FlowExpectedError
+  // $FlowExpectedError[incompatible-type]
   const _lastModified: boolean = response.lastModified;
   const message: string = response.message;
-  // $FlowExpectedError
+  // $FlowExpectedError[incompatible-type]
   const _message: number = response.message;
   const socket: net$Socket = response.socket;
-  // $FlowExpectedError
+  // $FlowExpectedError[incompatible-type]
   const _socket: number = response.socket;
   const status: number = response.status;
-  // $FlowExpectedError
+  // $FlowExpectedError[incompatible-type]
   const _status: string = response.status;
   const type: string = response.type;
-  // $FlowExpectedError
+  // $FlowExpectedError[incompatible-type]
   const _type: number = response.type;
   const writable: boolean = response.writable;
-  // $FlowExpectedError
+  // $FlowExpectedError[incompatible-type]
   const _writable: string = response.writable;
 
   const length: number|void = response.length;
-  // $FlowExpectedError
+  // $FlowExpectedError[incompatible-type]
   const _length: number = response.length;
   const append: (field: string, val: string | string[]) => void = response.append;
-  // $FlowExpectedError
+  // $FlowExpectedError[incompatible-call]
   response.append(1, true);
   const attachment: (filename?: string) => void = response.attachment;
-  // $FlowExpectedError
+  // $FlowExpectedError[incompatible-call]
   response.attachment(1);
   const get: (field: string) => string = response.get;
-  // $FlowExpectedError
+  // $FlowExpectedError[incompatible-type]
+  // $FlowExpectedError[incompatible-call]
   const value: number = response.get(1);
   const mimeType: string = response.is();
-  // $FlowExpectedError
+  // $FlowExpectedError[incompatible-type]
   const _mimeType: string[] = response.is();
   const mimeOrFalse1: string|false = response.is('html');
-  // $FlowExpectedError
+  // $FlowExpectedError[incompatible-type]
   const _mimeOrFalse1: string = response.is('html');
   const mimeOrFalse2: string|false = response.is(['html']);
-  // $FlowExpectedError
+  // $FlowExpectedError[incompatible-type]
   const _mimeOrFalse2: string = response.is(['html']);
   const redirect: (url: string, alt?: string) => void = response.redirect;
-  // $FlowExpectedError
+  // $FlowExpectedError[incompatible-call]
   response.redirect(1, true);
   const remove: (field: string) => void = response.remove;
-  // $FlowExpectedError
+  // $FlowExpectedError[incompatible-call]
   response.remove(1);
   response.set({
     'Etag': '1234',
     'Last-Modified': 'date',
   });
-  // $FlowExpectedError
+  // $FlowExpectedError[incompatible-call]
   response.set({
     'Etag': 1234,
     'Last-Modified': 123,
   });
   response.set('Etag', '1234');
-  // $FlowExpectedError
+  // $FlowExpectedError[incompatible-call]
   response.set('Etag', 1234);
   const vary: (field: string) => void = response.vary;
-  // $FlowExpectedError
+  // $FlowExpectedError[incompatible-call]
   response.vary(1);
   const toJSON: () => ResponseJSON = response.toJSON;
-  // $FlowExpectedError
+  // $FlowExpectedError[incompatible-type]
   const _json: number = response.toJSON();
   const inspect: () => ResponseInspect = response.inspect;
-  // $FlowExpectedError
+  // $FlowExpectedError[incompatible-type]
   const _inspectJson: number = response.inspect();
 }
 
 function test_request() {
   declare var request:Request;
   const req: http$IncomingMessage<> = request.req;
-  // $FlowExpectedError
+  // $FlowExpectedError[incompatible-type]
   const _req: number = request.req;
   const res: http$ServerResponse = request.res;
-  // $FlowExpectedError
+  // $FlowExpectedError[incompatible-type]
   const _res: number = request.res;
   const ctx: Context = request.ctx;
-  // $FlowExpectedError
+  // $FlowExpectedError[incompatible-type]
   const _ctx: number = request.ctx;
   const response: Response = request.response;
-  // $FlowExpectedError
+  // $FlowExpectedError[incompatible-type]
   const _response: number = request.response;
   const fresh: boolean = request.fresh;
-  // $FlowExpectedError
+  // $FlowExpectedError[incompatible-type]
   const _fresh: number = request.fresh;
   const header: SimpleHeader = request.header;
-  // $FlowExpectedError
+  // $FlowExpectedError[incompatible-type]
   const _header: { [key: string]: string, ... }  = request.header;
   const headers: SimpleHeader = request.headers;
-  // $FlowExpectedError
+  // $FlowExpectedError[incompatible-type]
   const _headers: { [key: string]: string, ... } = request.headers;
   const host: string = request.host;
-  // $FlowExpectedError
+  // $FlowExpectedError[incompatible-type]
   const _host: number = request.host;
   const hostname: string = request.hostname;
-  // $FlowExpectedError
+  // $FlowExpectedError[incompatible-type]
   const _hostname: number = request.hostname;
   const href: string = request.href;
-  // $FlowExpectedError
+  // $FlowExpectedError[incompatible-type]
   const _href: number = request.href;
   const idempotent: boolean = request.idempotent;
-  // $FlowExpectedError
+  // $FlowExpectedError[incompatible-type]
   const _idempotent: number = request.idempotent;
   const ip: string = request.ip;
-  // $FlowExpectedError
+  // $FlowExpectedError[incompatible-type]
   const _ip: number = request.ip;
   const ips: string[] = request.ips;
-  // $FlowExpectedError
+  // $FlowExpectedError[incompatible-type]
   const _ips: string = request.ips;
   const method: string = request.method;
-  // $FlowExpectedError
+  // $FlowExpectedError[incompatible-type]
   const _method: number = request.method;
   const origin: string = request.origin;
-  // $FlowExpectedError
+  // $FlowExpectedError[incompatible-type]
   const _origin: number = request.origin;
   const originalUrl: string = request.originalUrl;
-  // $FlowExpectedError
+  // $FlowExpectedError[incompatible-type]
   const _originalUrl: string[] = request.originalUrl;
   const path: string = request.path;
-  // $FlowExpectedError
+  // $FlowExpectedError[incompatible-type]
   const _path: number = request.path;
   const protocol: string = request.protocol;
-  // $FlowExpectedError
+  // $FlowExpectedError[incompatible-type]
   const _protocol: number = request.protocol;
   const query: { [key: string]: string, ... } = request.query;
-  // $FlowExpectedError
+  // $FlowExpectedError[incompatible-type]
   const _query: { [key: string]: string|number, ... } = request.query;
   const querystring: string = request.querystring;
-  // $FlowExpectedError
+  // $FlowExpectedError[incompatible-type]
   const _querystring: number = request.querystring;
   const search: string = request.search;
-  // $FlowExpectedError
+  // $FlowExpectedError[incompatible-type]
   const _search: number = request.search;
   const secure: boolean = request.secure;
-  // $FlowExpectedError
+  // $FlowExpectedError[incompatible-type]
   const _secure: number = request.secure;
   const socket: net$Socket = request.socket;
-  // $FlowExpectedError
+  // $FlowExpectedError[incompatible-type]
   const _socket: number = request.socket;
   const stale: boolean = request.stale;
-  // $FlowExpectedError
+  // $FlowExpectedError[incompatible-type]
   const _stale: number = request.stale;
   const subdomains: string[] = request.subdomains;
-  // $FlowExpectedError
+  // $FlowExpectedError[incompatible-type]
   const _subdomains: string = request.subdomains;
   const type: string = request.type;
-  // $FlowExpectedError
+  // $FlowExpectedError[incompatible-type]
   const _type: string[] = request.type;
   const url: string = request.url;
-  // $FlowExpectedError
+  // $FlowExpectedError[incompatible-type]
   const _url: number = request.url;
 
   const charset: string|void = request.charset;
-  // $FlowExpectedError
+  // $FlowExpectedError[incompatible-type]
   const _charset: string = request.charset;
   const length: number|void = request.length;
-  // $FlowExpectedError
+  // $FlowExpectedError[incompatible-type]
   const _length: number = request.length;
 
   const type_: string[] = request.accepts();
-  // $FlowExpectedError
+  // $FlowExpectedError[incompatible-type]
   const _type_: string = request.accepts();
   const typeOrFalse1: string|false = request.accepts('text/html');
-  // $FlowExpectedError
+  // $FlowExpectedError[incompatible-type]
   const _typeOrFalse1: string = request.accepts('text/html');
   const typeOrFalse2: string|false = request.accepts('json', 'text');
-  // $FlowExpectedError
+  // $FlowExpectedError[incompatible-type]
   const _typeOrFalse2: string[] = request.accepts('json', 'text');
   // ToDo: https://github.com/facebook/flow/issues/3009
   const typeOrFalse3: string|false = request.accepts((['json', 'text']:Array<string>));
-  // $FlowExpectedError
+  // $FlowExpectedError[incompatible-type]
   const _typeOrFalse3: string[] = request.accepts((['json', 'text']:Array<string>));
 
   const charsets: string[] = request.acceptsCharsets();
-  // $FlowExpectedError
+  // $FlowExpectedError[incompatible-type]
   const _charsets: string = request.acceptsCharsets();
   const charset1: buffer$Encoding|false =
     request.acceptsCharsets('gzip', 'deflate', 'identity');
-  // $FlowExpectedError
-  const _charset1: number =
-    request.acceptsCharsets('gzip', 'deflate', 'identity');
+  // $FlowExpectedError[incompatible-type]
+  const _charset1: number = request.acceptsCharsets('gzip', 'deflate', 'identity');
   // ToDo: https://github.com/facebook/flow/issues/3009
   const charset2: buffer$Encoding|false =
     request.acceptsCharsets((['gzip', 'deflate', 'identity']:Array<string>));
-  // $FlowExpectedError
-  const _charset2: number =
-    request.acceptsCharsets((['gzip', 'deflate', 'identity']:Array<string>));
+  // $FlowExpectedError[incompatible-type]
+  const _charset2: number = request.acceptsCharsets((['gzip', 'deflate', 'identity']:Array<string>));
 
   const languages: string[] = request.acceptsLanguages();
-  // $FlowExpectedError
+  // $FlowExpectedError[incompatible-type]
   const _languages: string = request.acceptsLanguages();
   const language1: string|false = request.acceptsLanguages('es', 'en');
-  // $FlowExpectedError
+  // $FlowExpectedError[incompatible-type]
   const _language1: string = request.acceptsLanguages('es', 'en');
   const language2: string|false = request.acceptsLanguages((['es', 'en']:string[]));
-  // $FlowExpectedError
+  // $FlowExpectedError[incompatible-type]
   const _language2: string = request.acceptsLanguages((['es', 'en']:string[]));
 
   const get: (field: string) => string = request.get;
-  // $FlowExpectedError
+  // $FlowExpectedError[incompatible-type]
   const _get: (field: number) => number = request.get;
 
   const mimeType: string = request.is();
-  // $FlowExpectedError
+  // $FlowExpectedError[incompatible-type]
   const _mimeType: number = request.is();
   const mimeOrFalse1: string|false|null = request.is('html');
-  // $FlowExpectedError
+  // $FlowExpectedError[incompatible-type]
   const _mimeOrFalse1: string = request.is('html');
   const mimeOrFalse2: string|false|null = request.is(['html']);
-  // $FlowExpectedError
+  // $FlowExpectedError[incompatible-type]
   const _mimeOrFalse2: string = request.is(['html']);
   const toJSON: () => RequestJSON = request.toJSON;
-  // $FlowExpectedError
+  // $FlowExpectedError[incompatible-type]
   const _toJSON: () => number = request.toJSON;
   const inspect: () => RequestInspect = request.inspect;
-  // $FlowExpectedError
+  // $FlowExpectedError[incompatible-type]
   const _inspect: () => RequestJSON = request.inspect;
 }
 
@@ -331,12 +330,12 @@ function test_request() {
 */
 function test_index_md() {
   const app:Koa = new Koa();
-  // $FlowExpectedError
+  // $FlowExpectedError[incompatible-type]
   const _app:number = new Koa();
   app.use((ctx) => {
     ctx.body = 'Hello World';
     ctx.body = { key: 'value' };
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-type]
     ctx.body = 1;
   });
   app.listen(3000);
@@ -349,9 +348,9 @@ function test_index_md() {
       await next();
       const ms = new Date() - start;
       ctx.set('X-Response-Time', `${ms}ms`);
-      // $FlowExpectedError
+      // $FlowExpectedError[incompatible-call]
       ctx.set(ms, `${ms}ms`);
-      // $FlowExpectedError
+      // $FlowExpectedError[incompatible-call]
       ctx.set(`${ms}ms`);
     });
 
@@ -366,7 +365,7 @@ function test_index_md() {
     // response
     app.use(ctx => {
       ctx.body = 'Hello World';
-      // $FlowExpectedError
+      // $FlowExpectedError[incompatible-type]
       ctx.body = 1;
     });
 

@@ -2,7 +2,7 @@
 
 // Mocks for the node modules
 import * as node_child_process from 'child_process';
-const node_fs = jest.genMockFromModule('fs');
+const node_fs: any = jest.genMockFromModule('fs');
 import * as node_https from 'https';
 import * as node_os from 'os';
 import * as node_path from 'path';
@@ -13,7 +13,7 @@ export const fs = {
   // This is a custom function that our tests can use during setup to specify
   // what the files on the "mock" filesystem should look like when any of the
   // `fs` APIs are used.
-  mockFiles: {},
+  mockFiles: ({}: {[key: string]: any}),
 
   __setMockFiles: function(newMockFiles: {[key: string]: string}) {
     fs.mockFiles = newMockFiles;

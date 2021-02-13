@@ -13,12 +13,12 @@
  * https://github.com/flowtype/flow-typed
  */
 
- import fs from 'fs';
-
 declare module 'mkdirp' {
+  import typeof { mkdir, stat } from 'fs';
+
   declare type FsImplementation = {
-    mkdir?: typeof fs.mkdir,
-    stat?: typeof fs.stat,
+    mkdir?: mkdir,
+    stat?: stat,
     ...
   };
 

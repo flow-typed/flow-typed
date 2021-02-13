@@ -1,7 +1,8 @@
 /* @flow */
-import type { Middleware, $Request, $Response } from "express";
 
 declare module "morgan" {
+  import type { Middleware, $Request, $Response } from "express";
+
   declare type FormatFn = (
     tokens: TokenIndexer,
     req: $Request,
