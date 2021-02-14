@@ -286,7 +286,7 @@ function pkgVersionMatch(pkgSemver: string, libDefSemverRaw: string) {
 
   if (libDefRange.set[0].length !== 2) {
     throw new Error(
-      'Invalid npm libdef version! It appears to be a non-continugous range.',
+      'Invalid npm libdef version! It appears to be a non-contiguous range.',
     );
   }
 
