@@ -2,7 +2,7 @@
 
 declare module "next" {
   declare export type RequestHandler = (
-    req: http$IncomingMessage,
+    req: http$IncomingMessage<>,
     res: http$ServerResponse, parsedUrl: any
   ) => Promise<void>;
 
@@ -10,27 +10,27 @@ declare module "next" {
     prepare(): Promise<void>,
     getRequestHandler(): RequestHandler,
     render(
-      req: http$IncomingMessage,
+      req: http$IncomingMessage<>,
       res: http$ServerResponse,
       pathname: string,
       query: any
     ): any,
     renderToHTML(
-      req: http$IncomingMessage,
+      req: http$IncomingMessage<>,
       res: http$ServerResponse,
       pathname: string,
       query: string
     ): string,
     renderError(
       err: Error,
-      req: http$IncomingMessage,
+      req: http$IncomingMessage<>,
       res: http$ServerResponse,
       pathname: any,
       query: any
     ): any,
     renderErrorToHTML(
       err: Error,
-      req: http$IncomingMessage,
+      req: http$IncomingMessage<>,
       res: http$ServerResponse,
       pathname: string,
       query: any
@@ -51,7 +51,7 @@ declare module "next" {
 declare module "next/head" {
   import type { Component } from 'react';
 
-  declare export default Class<Component<*, *>>;
+  declare export default Class<Component<any, any>>;
 }
 
 declare module "next/link" {
@@ -126,11 +126,11 @@ declare module "next/document" {
     ...
   };
 
-  declare export var Head: Class<Component<*, *>>;
-  declare export var Main: Class<Component<*, *>>;
-  declare export var NextScript: Class<Component<*, *>>;
-  declare export default Class<Component<*, *>> & {
-    getInitialProps: (ctx: Context) => Promise<*>,
+  declare export var Head: Class<Component<any, any>>;
+  declare export var Main: Class<Component<any, any>>;
+  declare export var NextScript: Class<Component<any, any>>;
+  declare export default Class<Component<any, any>> & {
+    getInitialProps: (ctx: Context) => Promise<any>,
     renderPage(cb: Function): void,
     ...
   };
