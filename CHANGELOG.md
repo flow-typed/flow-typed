@@ -5,28 +5,52 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [3.3.1] 2021-02-17
+
+### Fixed
+- Fix a regression introduced in 3.3.0 (#4023)
+
+## [3.3.0] 2021-02-17
+
+### Added
+- Locate modules with Yarn PnP in PnP projects (#3963)
+
+### Changed
+- Move from TravisCI to Github Actions
+- Clean up fs.readFile usage (#3966)
+- Update cli flow version to 0.144.0 (#4014)
+- Lock semver to fix install command (#4018)
+- Bump node-fetch from 2.6.0 to 2.6.1 in /cli (#3896)
+- [Docs] Update new libdefs minimum Flow version (#3954)
+
+### Fixed
+- Fix installing patch range lib defs (#4003)
+- Fix broken flow breaking function (#4017)
+- Fix tests not running in CI (#4010)
+- Update git author information for Github Action. (#3952)
+
 ## [3.2.1] 2020-07-23
 
-## Changed
+### Changed
 - Better fix for semver throwing errors for versions of `v0.x.x` (#3866)
 
 ## [3.2.0] 2020-07-12
 
-## Changed
+### Changed
 - Support flow versions > 0.125.0 (#3855)
 - Improved eslint/prettier integration (#3787)
 
-## Fixed
+### Fixed
 - Add workaround for semver throwing errors for versions of `v0.x.x` (#3842)
 - Avoid uncaught error when network fails (#3846)
 - Fix <<STUB>> parsing (#3786)
 
 ## [3.1.0] 2020-03-18
 
-## Changed
+### Changed
 - Remove react-dom from built-in flow libdefs (#3748)
 
-## Fixed
+### Fixed
 - Fix --overwrite install command option type (#3754)
 
 ## [3.0.0] 2020-02-18
