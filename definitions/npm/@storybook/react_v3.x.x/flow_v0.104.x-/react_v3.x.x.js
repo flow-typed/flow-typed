@@ -6,7 +6,7 @@ declare module '@storybook/react' {
     story: string,
     ...
   };
-  declare type Renderable = React$Element<*>;
+  declare type Renderable = React$Element<any>;
   declare type RenderCallback = (
     context: Context
   ) => Renderable | Array<Renderable>;
