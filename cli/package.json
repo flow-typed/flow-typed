@@ -10,7 +10,7 @@
   "bugs": {
     "url": "https://github.com/flow-typed/flow-typed/issues"
   },
-  "version": "3.2.1",
+  "version": "3.3.1",
   "main": "dist/cli.js",
   "bin": "dist/cli.js",
   "engines": {
@@ -37,7 +37,7 @@
     "mkdirp": "^1.0.3",
     "prettier": "^1.19.1",
     "rimraf": "^3.0.2",
-    "semver": "^7.3.2",
+    "semver": "7.3.2",
     "table": "^5.4.6",
     "through": "^2.3.8",
     "unzipper": "^0.10.8",
@@ -55,7 +55,7 @@
     "eslint-config-prettier": "^6.10.1",
     "eslint-plugin-flowtype": "^4.6.0",
     "eslint-plugin-prettier": "^3.1.2",
-    "flow-bin": "^0.118.0",
+    "flow-bin": "^0.144.0",
     "jest": "^25.1.0"
   },
   "keywords": [

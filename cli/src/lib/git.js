@@ -66,7 +66,7 @@ export async function setLocalConfig(
   }
 }
 
-export async function getDiff() {
+export async function getDiff(): Promise<Array<string>> {
   const gitPath = await getGitPath();
   try {
     let {stdout} = await child_process.spawnP(gitPath, ['diff', '--name-only']);
@@ -82,6 +82,8 @@ export async function getDiff() {
     }
     return stdout.split('\n');
   } catch (e) {
+    console.error('Unable to find diffs!');
+    console.error(e);
     return [];
   }
 }
