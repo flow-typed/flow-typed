@@ -68,14 +68,6 @@ describe('The `add` method', () => {
     ]);
   });
 
-  it('should validate on default usage (string)', () => {
-    storiesOf('', fakeModule).add('', () => '');
-  });
-
-  it('should validate on default usage (number)', () => {
-    storiesOf('', fakeModule).add('', () => 0);
-  });
-
   it('should validate on default usage (parameters)', () => {
     storiesOf('', fakeModule).add('', () => <Button>test</Button>, {
       param: 'test',
@@ -86,14 +78,13 @@ describe('The `add` method', () => {
     // $FlowExpectedError[incompatible-call]
     storiesOf('', fakeModule).add('', () => <Button>test</Button>, '');
     // $FlowExpectedError[prop-missing]
+    // $FlowExpectedError[incompatible-function-indexer]
     storiesOf('', fakeModule).add('', parameters, () => <Button>test</Button>);
   });
 
   it('should error on invalid default usage', () => {
     // $FlowExpectedError[incompatible-call]
-    storiesOf('', fakeModule).add('', () => () => null);
-    // $FlowExpectedError[incompatible-call]
-    storiesOf('', fakeModule).add('', () => Button);
+    storiesOf('', fakeModule).add('', () => '');
     // $FlowExpectedError[incompatible-call]
     storiesOf('', fakeModule).add('', () => null);
   });
