@@ -25,10 +25,10 @@ describe('throttle', () => {
   });
 
   it('can not be called with incorrect options', () => {
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
     throttle(() => '');
 
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
     throttle('1', () => '');
   });
 });
@@ -49,10 +49,10 @@ describe('debounce', () => {
   });
 
   it('can not be called with incorrect options', () => {
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
     debounce(() => 1);
 
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
     debounce('1', () => 1);
   });
 });
