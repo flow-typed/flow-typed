@@ -49,7 +49,7 @@ declare module "next" {
 declare module "next/head" {
   import type { Component } from 'react';
 
-  declare export default Class<Component<*, *>>;
+  declare export default Class<Component<any, any>>;
 }
 
 declare module "next/link" {
@@ -119,11 +119,11 @@ declare module "next/document" {
     err?: any,
   };
 
-  declare export var Head: Class<Component<*, *>>;
-  declare export var Main: Class<Component<*, *>>;
-  declare export var NextScript: Class<Component<*, *>>;
-  declare export default Class<Component<*, *>> & {
-    getInitialProps: (ctx: Context) => Promise<*>;
+  declare export var Head: Class<Component<any, any>>;
+  declare export var Main: Class<Component<any, any>>;
+  declare export var NextScript: Class<Component<any, any>>;
+  declare export default Class<Component<any, any>> & {
+    getInitialProps: (ctx: Context) => Promise<any>;
     renderPage(cb: Function): void;
   };
 }

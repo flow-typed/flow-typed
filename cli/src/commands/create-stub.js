@@ -1,13 +1,15 @@
 // @flow
+import typeof Yargs from 'yargs';
 
 export const name = 'create-stub <packages...>';
 export const description = 'Create a libdef stub for an untyped npm package';
 
 import {createStub} from '../lib/stubUtils.js';
 import {findFlowRoot} from '../lib/flowProjectUtils.js';
+import {getPackageJsonData, loadPnpResolver} from '../lib/npm/npmProjectUtils';
 import {path} from '../lib/node';
 
-export function setup(yargs: Object) {
+export function setup(yargs: Yargs): Yargs {
   return yargs
     .usage(`$0 ${name} ...PACKAGE`)
     .options({
@@ -17,28 +19,28 @@ export function setup(yargs: Object) {
         describe:
           'Overwrite an existing stub if it is already present in the ' +
           '`flow-typed` directory and has been modified',
-        type: 'bool',
-        demand: false,
+        type: 'boolean',
+        demandOption: false,
       },
       typescript: {
         default: false,
         alias: 't',
         describe: 'Generate libdef from TypeScript definitions',
-        type: 'bool',
-        demand: false,
+        type: 'boolean',
+        demandOption: false,
       },
       maxDepth: {
         alias: 'd',
         describe: 'Allow to generate deeper template',
         type: 'number',
-        demand: false,
+        demandOption: false,
       },
       libdefDir: {
         default: 'flow-typed',
         alias: 'l',
         describe: 'Use a custom directory to install libdefs',
         type: 'string',
-        demand: false,
+        demandOption: false,
       },
       rootDir: {
         alias: 'r',
@@ -50,8 +52,8 @@ export function setup(yargs: Object) {
       describe: 'Please provide the names of one or more npm packages',
     })
     .array('packages')
-    .example('$0 create-stub foo@^1.2.0')
-    .example('$0 create-stub foo bar baz')
+    .example('$0 create-stub foo@^1.2.0', '')
+    .example('$0 create-stub foo bar baz', '')
     .help('h')
     .alias('h', 'help');
 }
@@ -94,6 +96,10 @@ export async function run(args: Args): Promise<number> {
     );
   }
 
+  const pnpResolver = await loadPnpResolver(
+    await getPackageJsonData(projectRoot),
+  );
+
   const plural = packages.length > 1 ? 'stubs' : 'stub';
   console.log(`• Creating ${packages.length} ${plural}...`);
   const results = await Promise.all(
@@ -122,6 +128,7 @@ export async function run(args: Args): Promise<number> {
         packageName,
         version,
         Boolean(args.overwrite),
+        pnpResolver,
         Boolean(args.typescript),
         String(args.libdefDir),
         Number(args.maxDepth),

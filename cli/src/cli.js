@@ -44,6 +44,7 @@ export function runCLI() {
           cmd.setup || identity,
           args =>
             cmd
+              // $FlowExpectedError[extra-arg] cmd.run expects only one arg
               .run(args, yargs)
               .catch(err => {
                 if (err.stack) {
@@ -78,6 +79,7 @@ if (require.main === module) {
   const CWD = process.cwd();
   let currDir = CWD;
   let lastDir = null;
+  let run = runCLI;
   while (currDir !== lastDir) {
     const localCLIPath = path.join(
       currDir,
@@ -87,7 +89,7 @@ if (require.main === module) {
     );
     try {
       if (fs.statSync(localCLIPath).isFile()) {
-        runCLI = require.call(null, localCLIPath).runCLI;
+        run = require.call(null, localCLIPath).runCLI;
         break;
       }
     } catch (e) {
@@ -96,5 +98,5 @@ if (require.main === module) {
     lastDir = currDir;
     currDir = path.resolve(currDir, '..');
   }
-  runCLI();
+  run();
 }

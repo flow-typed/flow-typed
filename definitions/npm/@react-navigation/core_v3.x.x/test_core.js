@@ -45,5 +45,5 @@ const fakeNavigateAction = {
   fake: "Navigation/NAVIGATE",
   blah: "Test1",
 };
-// $FlowExpectedError not a valid action!
+// $FlowFixMe[incompatible-call] not a valid action!
 tabRouter.getStateForAction(fakeNavigateAction, null);

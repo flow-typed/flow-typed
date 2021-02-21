@@ -13,13 +13,13 @@ const { createServer } = require("http");
 const { parse } = require("url");
 
 // server
-// $FlowExpectedError
+// $FlowExpectedError[incompatible-call]
 next({ dev: 1 });
-// $FlowExpectedError
+// $FlowExpectedError[incompatible-call]
 next({ dir: false });
-// $FlowExpectedError
+// $FlowExpectedError[incompatible-call]
 next({ quiet: "derp" });
-// $FlowExpectedError
+// $FlowExpectedError[incompatible-call]
 next({ staticMarkup: 42 });
 
 const app = next({ dev: true, dir: ".", quiet: false });
@@ -56,10 +56,10 @@ app.prepare().then(() => {
 
 <Link href="/">Index</Link>;
 
-// $FlowExpectedError
+// $FlowExpectedError[incompatible-type]
 <Link href={1}>InvalidNumLink</Link>;
 
-// $FlowExpectedError
+// $FlowExpectedError[prop-missing]
 Router.onRouteChangeStart = {};
 
 Router.onRouteChangeStart = (url: string) => {};
@@ -74,7 +74,7 @@ Router.onRouteChangeError = (err, url) => {
   }
 };
 
-// $FlowExpectedError
+// $FlowExpectedError[incompatible-call]
 Router.push({});
 
 Router.push("/about");
@@ -87,12 +87,12 @@ const p: string = Router.pathname;
 const q: { ... } = Router.query;
 
 export default class TestDocument extends Document {
-  static async getInitialProps(ctx: Context) {
+  static async getInitialProps(ctx: Context): Promise<any> {
     const props = await Document.getInitialProps(ctx);
     return { ...props, customValue: "hi there!" };
   }
 
-  render() {
+  render(): React$Node {
     return (
       <html>
         <DocumentHead />

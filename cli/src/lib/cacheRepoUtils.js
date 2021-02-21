@@ -35,11 +35,11 @@ function setCustomCacheDir(dir: string): void {
   customCacheDir = dir;
 }
 
-function getCacheRepoGitDir() {
+function getCacheRepoGitDir(): string {
   return path.join(getCacheRepoDir(), '.git');
 }
 
-function getLastUpdatedFile() {
+function getLastUpdatedFile(): string {
   return path.join(getCacheRepoDir(), 'lastUpdated');
 }
 
@@ -77,7 +77,7 @@ const cacheRepoEnsureToken: {
 };
 export async function ensureCacheRepo(
   cacheRepoExpiry: number = CACHE_REPO_EXPIRY,
-) {
+): Promise<void> {
   // Only re-run rebase checks if a check hasn't been run in the last 5 minutes
   if (cacheRepoEnsureToken.lastEnsured + 5 * 1000 * 60 >= Date.now()) {
     return cacheRepoEnsureToken.pendingEnsurance;
@@ -120,7 +120,7 @@ export async function ensureCacheRepo(
   ));
 }
 
-export function getCacheRepoDir() {
+export function getCacheRepoDir(): string {
   return path.join(getCacheDir(), 'repo');
 }
 
@@ -130,7 +130,7 @@ export async function verifyCLIVersion(): Promise<void> {
     'definitions',
     '.cli-metadata.json',
   );
-  const metadata = JSON.parse(String(await fs.readFile(metadataPath)));
+  const metadata = await fs.readJson(metadataPath);
   const compatibleCLIRange = metadata.compatibleCLIRange;
   if (!compatibleCLIRange) {
     throw new Error(
@@ -139,9 +139,7 @@ export async function verifyCLIVersion(): Promise<void> {
     );
   }
   const thisCLIPkgJsonPath = path.join(__dirname, '..', '..', 'package.json');
-  const thisCLIPkgJson = JSON.parse(
-    String(await fs.readFile(thisCLIPkgJsonPath)),
-  );
+  const thisCLIPkgJson = await fs.readJson(thisCLIPkgJsonPath);
   const thisCLIVersion = thisCLIPkgJson.version;
   if (!semver.satisfies(thisCLIVersion, compatibleCLIRange)) {
     throw new Error(

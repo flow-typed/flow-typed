@@ -1,5 +1,6 @@
 // @flow
 
+import type {FlowSpecificVer} from '../lib/flowVersion';
 import {signCodeStream} from '../lib/codeSign';
 
 import {copyFile, mkdirp} from '../lib/fileUtils';
@@ -26,6 +27,7 @@ import {
   findFlowSpecificVer,
   getPackageJsonData,
   getPackageJsonDependencies,
+  loadPnpResolver,
 } from '../lib/npm/npmProjectUtils';
 
 import {
@@ -59,7 +61,7 @@ export type Args = {
   useCacheUntil?: mixed, // seconds
   explicitLibDefs: mixed, // Array<string>
 };
-export function setup(yargs: Yargs) {
+export function setup(yargs: Yargs): Yargs {
   return yargs
     .usage(`$0 ${name} - ${description}`)
     .positional('explicitLibDefs', {
@@ -127,7 +129,7 @@ export function setup(yargs: Yargs) {
       },
     });
 }
-export async function run(args: Args) {
+export async function run(args: Args): Promise<number> {
   const cwd =
     typeof args.rootDir === 'string'
       ? path.resolve(args.rootDir)
@@ -187,7 +189,13 @@ export async function run(args: Args) {
   return 0;
 }
 
-async function determineFlowVersion(cwd: string, flowVersionArg?: mixed) {
+async function determineFlowVersion(
+  cwd: string,
+  flowVersionArg?: mixed,
+): Promise<{|
+  kind: 'specific',
+  ver: FlowSpecificVer,
+|}> {
   if (flowVersionArg && typeof flowVersionArg === 'string') {
     // Be permissive if the prefix 'v' is left off
     let flowVersionStr =
@@ -427,13 +435,15 @@ async function installNpmLibDefs({
 
     return 1;
   } else {
+    const pnpResolver = await loadPnpResolver(await getPackageJsonData(cwd));
+
     // If a package that's missing a flow-typed libdef has any .flow files,
     // we'll skip generating a stub for it.
     const untypedMissingLibDefs = [];
     const typedMissingLibDefs = [];
     await Promise.all(
       unavailableLibDefs.map(async ({name: pkgName, ver: pkgVer}) => {
-        const hasFlowFiles = await pkgHasFlowFiles(cwd, pkgName);
+        const hasFlowFiles = await pkgHasFlowFiles(cwd, pkgName, pnpResolver);
         if (hasFlowFiles) {
           typedMissingLibDefs.push([pkgName, pkgVer]);
         } else {
@@ -451,6 +461,7 @@ async function installNpmLibDefs({
             pkgName,
             pkgVerStr,
             overwrite,
+            pnpResolver,
             /* typescript */ false,
             libdefDir,
           );

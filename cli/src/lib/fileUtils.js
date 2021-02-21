@@ -99,7 +99,7 @@ export async function recursiveRmdir(dirPath: string): Promise<void> {
 export async function searchUpDirPath(
   startDir: string,
   testFn: (path: string) => Promise<boolean>,
-) {
+): Promise<string | null> {
   let currDir = startDir;
   let lastDir = null;
   while (currDir !== lastDir) {

@@ -47,7 +47,10 @@ declare module '@apollo/react-hooks' {
   declare export function useLazyQuery<TData, TVariables>(
     query: DocumentNode,
     options?: LazyQueryHookOptions<TData, TVariables>
-  ): QueryTuple<TData, TVariables>;
+  ): [
+    (options?: QueryLazyOptions<TVariables>) => void,
+    QueryResult<TData, TVariables>
+  ];
 
   declare export function useSubscription<TData, TVariables>(
     query: DocumentNode,
@@ -1018,7 +1021,7 @@ declare module '@apollo/react-hooks' {
     complete?: boolean,
   };
 
-  declare interface DataProxy {
+  declare export interface DataProxy {
     readQuery<QueryType, TVariables>(
       options: DataProxyReadQueryOptions<TVariables>,
       optimistic?: boolean

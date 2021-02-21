@@ -818,7 +818,9 @@ declare module "lodash" {
     wrap(value?: any, wrapper?: ?Function): Function;
 
     // Lang
-    castArray(value: *): Array<any>;
+    castArray(): Array<any>;
+    castArray<T: void | null | number | string | {...}>(value: T): Array<T>;
+    castArray<T: Array<any>>(value: T): T;
     clone<T>(value: T): T;
     cloneDeep<T>(value: T): T;
     cloneDeepWith<T, U>(
@@ -2411,7 +2413,9 @@ declare module "lodash/fp" {
     wrap(wrapper: Function, value: any): Function;
 
     // Lang
-    castArray(value: *): Array<any>;
+    castArray(): Array<any>;
+    castArray<T: void | null | number | string | {...}>(value: T): Array<T>;
+    castArray<T: Array<any>>(value: T): T;
     clone<T>(value: T): T;
     cloneDeep<T>(value: T): T;
     cloneDeepWith<T, U>(
