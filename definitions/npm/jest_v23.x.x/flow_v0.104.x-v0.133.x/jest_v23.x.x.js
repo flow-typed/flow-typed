@@ -870,6 +870,11 @@ type JestObjectType = {
 
 type JestSpyType = { calls: JestCallsType, ... };
 
+type JestDoneFn = {|
+  (error?: Error): void,
+  fail: (error: Error) => void,
+ |};
+
 /** Runs this function after every test inside this context */
 declare function afterEach(
   fn: (done: () => void) => ?Promise<mixed>,
