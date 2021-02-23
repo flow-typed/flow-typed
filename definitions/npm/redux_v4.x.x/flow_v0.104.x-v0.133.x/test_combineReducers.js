@@ -36,12 +36,13 @@ const reducer0: Reducer<State, Action> = combineReducers({
   age: reducerAge
 })
 
-// $FlowExpectedError
+// $FlowExpectedError[incompatible-call]
 combineReducers() // wrong reducers argument
-// $FlowExpectedError
+// $FlowExpectedError[incompatible-call]
 combineReducers([]) // wrong reducers argument
 
-// $FlowExpectedError
+// $FlowExpectedError[prop-missing]
+// $FlowExpectedError[incompatible-type]
 const reducer1: Reducer<State, Action> = combineReducers({
   a: reducerA,
   name: reducerName
