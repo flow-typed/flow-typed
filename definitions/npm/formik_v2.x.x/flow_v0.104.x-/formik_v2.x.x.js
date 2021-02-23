@@ -79,6 +79,7 @@ declare module 'formik/@flow-typed' {
     onReset?: (values: Values, formikHelpers: FormikHelpers<Values>) => void,
     validationSchema?: (() => Schema) | Schema,
     validate?: (values: Values) => void | {...} | Promise<FormikErrors<Values>>,
+    innerRef?: { current: FormikProps<Values> | null, ... },
   |};
 
   declare export type FormikProps<Values> = $ReadOnly<{|
