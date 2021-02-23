@@ -17,10 +17,17 @@ declare module '@storybook/react' {
     context: Context
   ) => Renderable | null;
 
+  declare type DecoratorParameters = { [key: string]: any, ... };
+
   declare interface Story {
     +kind: string;
-    add(storyName: string, callback: RenderCallback): Story;
+    add(
+      storyName: string,
+      callback: RenderCallback,
+      parameters?: DecoratorParameters
+    ): Story;
     addDecorator(decorator: StoryDecorator): Story;
+    addParameters(parameters: DecoratorParameters): Story;
   }
 
   declare interface StoryObject {
@@ -35,6 +42,8 @@ declare module '@storybook/react' {
   }
 
   declare function addDecorator(decorator: StoryDecorator): void;
+  declare function addParameters(parameters: DecoratorParameters): void;
+  declare function clearDecorators(): void;
   declare function configure(fn: () => void, module: NodeModule): void;
   declare function setAddon(addon: Object): void;
   declare function storiesOf(name: string, module: NodeModule): Story;

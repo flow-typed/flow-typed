@@ -1,10 +1,12 @@
 // @flow
 
 import { describe, it } from 'flow-typed-test';
-import React from 'react';
+import * as React from 'react';
 import {
   storiesOf,
   addDecorator,
+  addParameters,
+  clearDecorators,
   getStorybook,
   forceReRender,
   configure,
@@ -28,6 +30,8 @@ declare var fakeModule: {
 const Button = props => <button {...props} />;
 
 const Decorator = story => <div>{story()}</div>;
+
+const parameters = { param: 'test' };
 
 describe('The `storiesOf` function', () => {
   it('should validate on default usage', () => {
@@ -64,9 +68,32 @@ describe('The `add` method', () => {
     ]);
   });
 
+  it('should validate on default usage (string)', () => {
+    storiesOf('', fakeModule).add('', () => '');
+  });
+
+  it('should validate on default usage (number)', () => {
+    storiesOf('', fakeModule).add('', () => 0);
+  });
+
+  it('should validate on default usage (parameters)', () => {
+    storiesOf('', fakeModule).add('', () => <Button>test</Button>, {
+      param: 'test',
+    });
+  });
+
+  it('should error on invalid default usage (parameters)', () => {
+    // $FlowExpectedError[incompatible-call]
+    storiesOf('', fakeModule).add('', () => <Button>test</Button>, '');
+    // $FlowExpectedError[prop-missing]
+    storiesOf('', fakeModule).add('', parameters, () => <Button>test</Button>);
+  });
+
   it('should error on invalid default usage', () => {
     // $FlowExpectedError[incompatible-call]
-    storiesOf('', fakeModule).add('', () => '');
+    storiesOf('', fakeModule).add('', () => () => null);
+    // $FlowExpectedError[incompatible-call]
+    storiesOf('', fakeModule).add('', () => Button);
     // $FlowExpectedError[incompatible-call]
     storiesOf('', fakeModule).add('', () => null);
   });
@@ -98,6 +125,38 @@ describe('The `addDecorator` function', () => {
 
   it('should validate on default usage (global)', () => {
     addDecorator(Decorator);
+  });
+});
+
+describe('The `addParameters` function', () => {
+  it('should validate on default usage (local)', () => {
+    storiesOf('', fakeModule)
+      .addParameters(parameters)
+      .add('', () => <div />);
+  });
+
+  it('should validate on default usage (global)', () => {
+    addParameters(parameters);
+  });
+
+  it('should error on invalid usage (global)', () => {
+    // $FlowExpectedError[incompatible-call]
+    addParameters();
+    // $FlowExpectedError[incompatible-call]
+    addParameters('');
+  });
+});
+
+describe('The `clearDecorators` function', () => {
+  it('should validate on default usage (global)', () => {
+    clearDecorators();
+  });
+
+  it('should error on invalid usage (global)', () => {
+    // $FlowExpectedError[extra-arg]
+    clearDecorators(true);
+    // $FlowExpectedError[extra-arg]
+    clearDecorators(parameters);
   });
 });
 
@@ -140,6 +199,7 @@ describe('The `setAddon` function', () => {
       .test('', () => <div />)
       .test('', () => <div />)
       .add('', () => <div />)
-      .test('', () => <div />);
+      .test('', () => <div />)
+      .add('', () => <div />, parameters);
   });
 });

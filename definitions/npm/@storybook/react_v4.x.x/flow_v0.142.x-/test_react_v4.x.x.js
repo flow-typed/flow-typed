@@ -15,6 +15,18 @@ import {
   type Story,
 } from '@storybook/react';
 
+declare var fakeModule: {
+  exports: any,
+  require(id: string): any,
+  id: string,
+  filename: string,
+  loaded: boolean,
+  parent: any,
+  children: Array<any>,
+  builtinModules: Array<string>,
+  ...
+};
+
 const Button = props => <button {...props} />;
 
 const Decorator = story => <div>{story()}</div>;
@@ -23,33 +35,33 @@ const parameters = { param: 'test' };
 
 describe('The `storiesOf` function', () => {
   it('should validate on default usage', () => {
-    storiesOf('', module);
+    storiesOf('', fakeModule);
   });
 
   it('should error on invalid options', () => {
-    // $FlowExpectedError
-    storiesOf([], module);
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
+    storiesOf([], fakeModule);
+    // $FlowExpectedError[incompatible-call]
     storiesOf('', 123);
   });
 
   it('should error on invalid method call', () => {
-    // $FlowExpectedError
-    storiesOf('', module).foo('', () => <div />);
+    // $FlowExpectedError[prop-missing]
+    storiesOf('', fakeModule).foo('', () => <div />);
   });
 });
 
 describe('The `add` method', () => {
   it('should validate on default usage (element)', () => {
-    storiesOf('', module).add('', () => <div />);
+    storiesOf('', fakeModule).add('', () => <div />);
   });
 
   it('should validate on default usage (component)', () => {
-    storiesOf('', module).add('', () => <Button>test</Button>);
+    storiesOf('', fakeModule).add('', () => <Button>test</Button>);
   });
 
   it('should validate on default usage (array)', () => {
-    storiesOf('', module).add('', () => [
+    storiesOf('', fakeModule).add('', () => [
       <Button>test</Button>,
       <Button>test</Button>,
       <Button>test</Button>,
@@ -57,27 +69,28 @@ describe('The `add` method', () => {
   });
 
   it('should validate on default usage (parameters)', () => {
-    storiesOf('', module).add('', () => <Button>test</Button>, {
+    storiesOf('', fakeModule).add('', () => <Button>test</Button>, {
       param: 'test',
     });
   });
 
   it('should error on invalid default usage (parameters)', () => {
-    // $FlowExpectedError
-    storiesOf('', module).add('', () => <Button>test</Button>, '');
-    // $FlowExpectedError
-    storiesOf('', module).add('', parameters, () => <Button>test</Button>);
+    // $FlowExpectedError[incompatible-call]
+    storiesOf('', fakeModule).add('', () => <Button>test</Button>, '');
+    // $FlowExpectedError[prop-missing]
+    // $FlowExpectedError[incompatible-function-indexer]
+    storiesOf('', fakeModule).add('', parameters, () => <Button>test</Button>);
   });
 
   it('should error on invalid default usage', () => {
-    // $FlowExpectedError
-    storiesOf('', module).add('', () => '');
-    // $FlowExpectedError
-    storiesOf('', module).add('', () => null);
+    // $FlowExpectedError[incompatible-call]
+    storiesOf('', fakeModule).add('', () => '');
+    // $FlowExpectedError[incompatible-call]
+    storiesOf('', fakeModule).add('', () => null);
   });
 
   it('should validate when unwrapping arguments', () => {
-    storiesOf('', module).add('', ({ kind, story }) => (
+    storiesOf('', fakeModule).add('', ({ kind, story }) => (
       <div>
         {kind} {story}
       </div>
@@ -85,8 +98,8 @@ describe('The `add` method', () => {
   });
 
   it('should error when unwrapping invalid arguments', () => {
-    // $FlowExpectedError
-    storiesOf('', module).add('', ({ kind, story, foo }) => (
+    // $FlowExpectedError[prop-missing]
+    storiesOf('', fakeModule).add('', ({ kind, story, foo }) => (
       <div>
         {kind} {story} {foo}
       </div>
@@ -96,7 +109,7 @@ describe('The `add` method', () => {
 
 describe('The `addDecorator` function', () => {
   it('should validate on default usage (local)', () => {
-    storiesOf('', module)
+    storiesOf('', fakeModule)
       .addDecorator(Decorator)
       .add('', () => <div />);
   });
@@ -106,9 +119,9 @@ describe('The `addDecorator` function', () => {
   });
 });
 
-describe('The `addDecorator` function', () => {
+describe('The `addParameters` function', () => {
   it('should validate on default usage (local)', () => {
-    storiesOf('', module)
+    storiesOf('', fakeModule)
       .addParameters(parameters)
       .add('', () => <div />);
   });
@@ -118,9 +131,9 @@ describe('The `addDecorator` function', () => {
   });
 
   it('should error on invalid usage (global)', () => {
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
     addParameters();
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
     addParameters('');
   });
 });
@@ -131,9 +144,9 @@ describe('The `clearDecorators` function', () => {
   });
 
   it('should error on invalid usage (global)', () => {
-    // $FlowExpectedError
+    // $FlowExpectedError[extra-arg]
     clearDecorators(true);
-    // $FlowExpectedError
+    // $FlowExpectedError[extra-arg]
     clearDecorators(parameters);
   });
 });
@@ -154,7 +167,7 @@ describe('The `forceReRender` function', () => {
 
 describe('The `configure` function', () => {
   it('should validate on default usage', () => {
-    configure(() => undefined, module);
+    configure(() => undefined, fakeModule);
   });
 });
 
@@ -173,7 +186,7 @@ describe('The `setAddon` function', () => {
 
     setAddon(TestAddon);
 
-    storiesOf<Addon>('TestAddon', module)
+    storiesOf<Addon>('TestAddon', fakeModule)
       .test('', () => <div />)
       .test('', () => <div />)
       .add('', () => <div />)
