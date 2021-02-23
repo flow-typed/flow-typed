@@ -8,17 +8,20 @@ import App, {type AppInitialProps, Container} from "next/app";
 import dynamic from "next/dynamic";
 import getConfig from "next/config";
 
+// $FlowExpectedError[missing-export]
+import {useRouter} from "next/router";
+
 const { createServer } = require("http");
 const { parse } = require("url");
 
 // server
-// $FlowExpectedError
+// $FlowExpectedError[incompatible-call]
 next({ dev: 1 });
-// $FlowExpectedError
+// $FlowExpectedError[incompatible-call]
 next({ dir: false });
-// $FlowExpectedError
+// $FlowExpectedError[incompatible-call]
 next({ quiet: "derp" });
-// $FlowExpectedError
+// $FlowExpectedError[incompatible-call]
 next({ staticMarkup: 42 });
 
 const app = next({ dev: true, dir: ".", quiet: false });
@@ -51,8 +54,8 @@ app.prepare().then(() => {
 
 app.setAssetPrefix('');
 
-class ConfigAwareComponent extends React.Component<*> {
-  render() {
+class ConfigAwareComponent extends React.Component<any> {
+  render(): React$Node {
     const { publicRuntimeConfig, serverRuntimeConfig } = getConfig();
     return (
       <div>
@@ -69,15 +72,15 @@ class ConfigAwareComponent extends React.Component<*> {
 
 <Link href="/">Index</Link>;
 
-// $FlowExpectedError
+// $FlowExpectedError[incompatible-type]
 <Link href={1}>InvalidNumLink</Link>;
 
-// $FlowExpectedError
+// $FlowExpectedError[prop-missing]
 Router.onRouteChangeStart = {};
 
-// $FlowExpectedError
+// $FlowExpectedError[incompatible-call]
 Router.events.on('unknown', (url: string) => {});
-// $FlowExpectedError
+// $FlowExpectedError[incompatible-call]
 Router.events.off('unknown', (url: string) => {});
 
 Router.events.on('routeChangeStart', (url: string) => {});
@@ -108,12 +111,12 @@ const p: string = Router.pathname;
 const q: { ... } = Router.query;
 
 export default class TestDocument extends Document {
-  static async getInitialProps(ctx: Context) {
+  static async getInitialProps(ctx: Context): Promise<any> {
     const props = await Document.getInitialProps(ctx);
     return { ...props, customValue: "hi there!" };
   }
 
-  render() {
+  render(): React$Node {
     return (
       <html>
         <DocumentHead />
@@ -127,12 +130,12 @@ export default class TestDocument extends Document {
 }
 
 export class TestApp extends App {
-  static async getInitialProps({ Component, router, ctx }: AppInitialProps) {
+  static async getInitialProps({ Component, router, ctx }: AppInitialProps): Promise<any> {
     const props = await Component.getInitialProps(ctx);
     return { ...props }
   }
 
-  render () {
+  render(): React$Node {
     const { Component, pageProps } = this.props;
 
     return (

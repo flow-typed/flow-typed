@@ -1,7 +1,6 @@
 // @flow
 
 import md5 from 'md5';
-import through from 'through';
 
 const VERSION_COMMENT_RE = /\/\/ flow-typed version: (.*)$/;
 export function getSignedCodeVersion(signedCode: string): string | null {
@@ -19,17 +18,8 @@ export function signCode(code: string, version: string): string {
   return `// flow-typed signature: ${hash}\n${versionedCode}`;
 }
 
-export function signCodeStream(version: string): stream$Duplex {
-  let code = '';
-  return through(
-    function write(data) {
-      code += data;
-    },
-    function end() {
-      this.emit('data', signCode(code, version));
-      this.emit('close');
-    },
-  );
+export function signCodeStream(version: string): (code: string) => string {
+  return (code: string) => signCode(code, version);
 }
 
 const HASH_COMMENT_RE = /\/\/ flow-typed signature: (.*)$/;

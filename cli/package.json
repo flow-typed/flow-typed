@@ -10,7 +10,7 @@
   "bugs": {
     "url": "https://github.com/flow-typed/flow-typed/issues"
   },
-  "version": "3.2.1",
+  "version": "3.3.1",
   "main": "dist/cli.js",
   "bin": "dist/cli.js",
   "engines": {
@@ -39,7 +39,6 @@
     "rimraf": "^3.0.2",
     "semver": "7.3.2",
     "table": "^5.4.6",
-    "through": "^2.3.8",
     "unzipper": "^0.10.8",
     "which": "^2.0.2",
     "yargs": "^15.1.0"

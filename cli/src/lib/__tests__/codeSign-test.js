@@ -45,24 +45,13 @@ describe('codeSign', () => {
   });
 
   describe('signCodeStream', () => {
-    it('signs and versions the output code', () => {
+    it('signs and versions the output code', async () => {
+      const code = 'line 1\nline 2\nline 3';
       const version = 'VersionA';
-      const stream = signCodeStream(version);
-      stream.write('line 1\n');
-      stream.write('line 2\n');
-      stream.write('line 3\n');
+      const signedCode = await signCodeStream(version)(code);
 
-      let signedCode = '';
-      stream.on('data', data => (signedCode += data));
-
-      return new Promise((res, _rej) => {
-        stream.on('close', () => {
-          expect(verifySignedCode(signedCode)).toBe(true);
-          expect(getSignedCodeVersion(signedCode)).toBe(version);
-          res();
-        });
-        stream.end();
-      });
+      expect(verifySignedCode(signedCode)).toBe(true);
+      expect(getSignedCodeVersion(signedCode)).toBe(version);
     });
   });
 });
