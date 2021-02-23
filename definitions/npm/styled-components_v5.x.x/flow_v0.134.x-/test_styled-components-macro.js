@@ -40,23 +40,23 @@ describe('styled builtins', () => {
     const Span1: StyledComponent<
       { ... },
       { ... },
-      // $FlowExpectedError - should be HTMLSpanElement
       HTMLDivElement
+    // $FlowExpectedError[incompatible-type-arg] - should be HTMLSpanElement
     > = styled.span``;
 
     const Div1: StyledComponent<
       { ... },
       { ... },
-      // $FlowExpectedError - should be HTMLDivElement
       HTMLSpanElement
+    // $FlowExpectedError[incompatible-type-arg] - should be HTMLDivElement
     > = styled.div``;
 
-    // $FlowExpectedError - Should be HTMLSpanElement
+    // $FlowExpectedError[incompatible-type-arg] - Should be HTMLSpanElement
     const Span2: StyledComponent<{ ... }, { ... }, HTMLDivElement> = styled(
       'span'
     )``;
 
-    // $FlowExpectedError - should be HTMLDivElement
+    // $FlowExpectedError[incompatible-type-arg] - should be HTMLDivElement
     const Div2: StyledComponent<{ ... }, { ... }, HTMLSpanElement> = styled(
       'div'
     )``;
@@ -71,29 +71,29 @@ describe('styled builtins', () => {
     const Div: StyledComponent<{ ... }, { ... }, HTMLDivElement> = styled.div``;
 
     const span1: React.Element<
-      React.AbstractComponent<{ ... }, HTMLSpanElement>
+      React.AbstractComponent<{ [key: string]: any, ... }, HTMLSpanElement>
     > = <Span />;
 
     const div1: React.Element<
       // noExpectError - should be HTMLDivElement
-      React.AbstractComponent<{ ... }, HTMLSpanElement>
+      React.AbstractComponent<{ [key: string]: any, ... }, HTMLDivElement>
     > = <Div />;
   });
 
   it("shouldn't style something impossible", () => {
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
     const derp1 = styled(null)``;
 
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
     const derp2 = styled({})``;
 
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
     const derp3 = styled(1)``;
 
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-use]
     const derp4 = styled.derp``;
 
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
     const derp5 = styled('derp')``;
   });
 
@@ -122,7 +122,7 @@ describe('styled builtins', () => {
 
   it('should validate template props', () => {
     const Span: StyledComponent<{ color: string, ... }, *, *> = styled.span`
-      color: ${// $FlowExpectedError - background is not in props
+      color: ${// $FlowExpectedError[prop-missing] - background is not in props
       props => props.background};
     `;
   });
@@ -145,7 +145,7 @@ describe('styled builtins', () => {
     const span1 = <Span color="maroon" className="marooned" />;
     const span2 = <Span color="maroon" style={{ padding: 5 }} />;
 
-    // $FlowExpectedError - Make sure we don't break soundness when props are missing!
+    // $FlowExpectedError[incompatible-use] - Make sure we don't break soundness when props are missing!
     const span3 = <Span style={{ padding: 5 }} />;
   });
 
@@ -163,7 +163,7 @@ describe('styled builtins', () => {
       { accent: string, ... },
       *
     > = styled.span`
-      color: ${// $FlowExpectedError - oops, someone meant accent, not primary
+      color: ${// $FlowExpectedError[prop-missing] - oops, someone meant accent, not primary
       props => props.color || props.theme.primary};
     `;
   });
@@ -194,10 +194,10 @@ describe('styled builtins', () => {
       autoComplete: string,
     |}>(props => ({ autoComplete: 'off' }))``;
 
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-use]
     const test1 = <AttrsInputExtra size="2em" autoComplete={1} type={1} />; // error
     const test2 = <AttrsInputExtra size="2em" autoComplete="on" type="text" />; // ok
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-use]
     const test3 = <AttrsInputExtra size="2em" type={1} />; // error
   });
 });
@@ -229,7 +229,7 @@ describe('ThemeContext', () => {
   it('typechecks the theme', () => {
     const theme = React.useContext<MyTheme>(ThemeContext);
 
-    // $FlowExpectedError
+    // $FlowExpectedError[prop-missing]
     theme.primaryColot;
   });
 
@@ -239,7 +239,7 @@ describe('ThemeContext', () => {
 
     theme.primaryColor;
 
-    // $FlowExpectedError
+    // $FlowExpectedError[prop-missing]
     theme.primaryColot;
   });
 });
@@ -281,7 +281,7 @@ describe('css generator', () => {
 
   // Technically styled-components _does_ accept true, _but_ it usually generates wrong/nonsensical and unexpected output.
   it("doesn't accept true", () => {
-    // $FlowExpectedError - lies!
+    // $FlowExpectedError[incompatible-call] - lies!
     const styles = css`
       ${true};
     `;
@@ -302,7 +302,7 @@ describe('css generator', () => {
   });
 
   it("doesn't accept exotic/non-style objects", () => {
-    // $FlowExpectedError - don't accept non-style objects
+    // $FlowExpectedError[incompatible-call] - don't accept non-style objects
     const styles = css`
       ${{ fun: () => null }};
     `;
@@ -349,14 +349,14 @@ describe('css generator', () => {
 
     const FuncComp: React.ComponentType<*> = () => null;
 
-    // $FlowExpectedError - we don't know how to interpolate non-styled-components components
+    // $FlowExpectedError[incompatible-call] - we don't know how to interpolate non-styled-components components
     const SComp1 = styled.div`
       ${ClassComp} {
         color: pink;
       }
     `;
 
-    // $FlowExpectedError - we don't know how to interpolate non-styled-components components
+    // $FlowExpectedError[incompatible-call] - we don't know how to interpolate non-styled-components components
     const SComp2 = styled.div`
       ${FuncComp} {
         color: pink;
@@ -382,7 +382,7 @@ describe('refs', () => {
   it('errors on wrong component type', () => {
     const ref1: { current: HTMLInputElement | null, ... } = React.createRef();
     const Section = styled.section``;
-    // $FlowExpectedError - Complain about HTMLElement not being compatible wiht HTMLInputElement
+    // $FlowExpectedError[incompatible-use] - Complain about HTMLElement not being compatible wiht HTMLInputElement
     const section = <Section ref={ref1} />;
   });
 
@@ -415,15 +415,16 @@ describe('withTheme', () => {
   );
 
   const MyCompWT = withTheme(MyComp);
+  // $FlowExpectedError[incompatible-call] - wrong prop
   const MyCompWT2 = withTheme(MyCompWT);
 
   it("doesn't interfere with component's own props", () => {
-    // $FlowExpectedError - wrong prop
+    // $FlowExpectedError[incompatible-type] - wrong prop
     const mcwt2 = <MyCompWT ownProp={0} />;
   });
 
   it("errors when theme should be there but isn't", () => {
-    // $FlowExpectedError - missing theme prop
+    // $FlowExpectedError[prop-missing] - missing theme prop
     const mc = <MyComp ownProp="own prop" />;
   });
 
@@ -436,7 +437,6 @@ describe('withTheme', () => {
   it('preserves props when wrapped in two HOCs', () => {
     const mcwt1 = <MyCompWT2 ownProp="own prop" />;
 
-    // $FlowExpectedError - wrong prop
     const mcwt2 = <MyCompWT2 ownProp={0} />;
   });
 });
@@ -453,7 +453,7 @@ describe('useTheme', () => {
   it('returns Theme', () => {
     const theme1: Theme1 = useTheme<Theme1>();
 
-    // $FlowExpectedError - Theme1 !== Theme2
+    // $FlowExpectedError[prop-missing] - Theme1 !== Theme2
     const theme2: Theme2 = useTheme<Theme1>();
   });
 });
@@ -482,7 +482,7 @@ describe('wrapping components', () => {
     const hello1 = <StyledHello name="World" />;
     const hello2 = <StyledHello name="World" color="maroon" />;
 
-    // $FlowExpectedError - Invalid prop type
+    // $FlowExpectedError[incompatible-use] - Invalid prop type
     const hello3 = <StyledHello name={3} />;
   });
 

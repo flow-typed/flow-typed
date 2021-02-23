@@ -7,18 +7,18 @@ import styled from 'styled-components/native';
 const Text1 = styled.Text``;
 const Text2 = styled('Text')``;
 
-// $FlowExpectedError - test for non-existent element
+// $FlowExpectedError[incompatible-use] - test for non-existent element
 const derp1 = styled.derp``;
 
-// $FlowExpectedError - test for non-existent element
+// $FlowExpectedError[incompatible-call] - test for non-existent element
 const derp2 = styled('derp')``;
 
 // Test we don't "accidentally style" something else:
-// $FlowExpectedError
+// $FlowExpectedError[incompatible-call]
 const derp3 = styled(null)``;
 
-// $FlowExpectedError
+// $FlowExpectedError[incompatible-call]
 const derp4 = styled({})``;
 
-// $FlowExpectedError
+// $FlowExpectedError[incompatible-call]
 const derp5 = styled(1)``;
