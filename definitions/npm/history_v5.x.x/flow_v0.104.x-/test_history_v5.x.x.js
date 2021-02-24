@@ -1,5 +1,4 @@
 // @flow
-
 import { describe, it } from 'flow-typed-test';
 
 import {
@@ -19,7 +18,6 @@ describe('browser history', () => {
     const history = createBrowserHistory({
       basename: '',
       forceRefresh: false,
-      keyLength: 6,
     });
 
     const pathname: string = history.location.pathname;
@@ -29,7 +27,6 @@ describe('browser history', () => {
     const history = createBrowserHistory({
       basename: '',
       forceRefresh: false,
-      keyLength: 6,
     });
 
     const key: string = history.location.key;
@@ -40,7 +37,6 @@ describe('browser history', () => {
     const history = createBrowserHistory({
       basename: '',
       forceRefresh: false,
-      keyLength: 6,
     });
 
     // $FlowExpectedError[prop-missing]
@@ -52,7 +48,6 @@ describe('browser history', () => {
       const history = createBrowserHistory({
         basename: '',
         forceRefresh: false,
-        keyLength: 6,
       });
 
       history.push('/');
@@ -62,7 +57,6 @@ describe('browser history', () => {
       const history = createBrowserHistory({
         basename: '',
         forceRefresh: false,
-        keyLength: 6,
       });
 
       history.push({
@@ -77,7 +71,6 @@ describe('browser history', () => {
       const history = createBrowserHistory({
         basename: '',
         forceRefresh: false,
-        keyLength: 6,
       });
 
       history.replace('/');
@@ -87,7 +80,6 @@ describe('browser history', () => {
       const history = createBrowserHistory({
         basename: '',
         forceRefresh: false,
-        keyLength: 6,
       });
 
       history.replace({
@@ -103,7 +95,6 @@ describe('memory history', () => {
     const history = createMemoryHistory({
       initialEntries: ['/'],
       initialIndex: 0,
-      keyLength: 6,
     });
 
     const pathname: string = history.location.pathname;
@@ -113,7 +104,6 @@ describe('memory history', () => {
     const history = createMemoryHistory({
       initialEntries: ['/'],
       initialIndex: 0,
-      keyLength: 6,
     });
 
     const key: string = history.location.key;
@@ -124,7 +114,6 @@ describe('memory history', () => {
     const history = createMemoryHistory({
       initialEntries: ['/'],
       initialIndex: 0,
-      keyLength: 6,
     });
 
     // $FlowExpectedError[prop-missing]
@@ -136,7 +125,6 @@ describe('memory history', () => {
       const history = createMemoryHistory({
         initialEntries: ['/'],
         initialIndex: 0,
-        keyLength: 6,
       });
 
       history.push('/');
@@ -146,7 +134,6 @@ describe('memory history', () => {
       const history = createMemoryHistory({
         initialEntries: ['/'],
         initialIndex: 0,
-        keyLength: 6,
       });
 
       history.push({
@@ -161,7 +148,6 @@ describe('memory history', () => {
       const history = createMemoryHistory({
         initialEntries: ['/'],
         initialIndex: 0,
-        keyLength: 6,
       });
 
       history.replace('/');
@@ -171,7 +157,6 @@ describe('memory history', () => {
       const history = createMemoryHistory({
         initialEntries: ['/'],
         initialIndex: 0,
-        keyLength: 6,
       });
 
       history.replace({
@@ -186,7 +171,6 @@ describe('hash history', () => {
   it('should allow to get location fields', () => {
     const history = createHashHistory({
       basename: '',
-      hashType: 'slash',
     });
 
     const pathname: string = history.location.pathname;
@@ -195,7 +179,6 @@ describe('hash history', () => {
   it('should not allow to get browser and memory specific location fields', () => {
     const history = createHashHistory({
       basename: '',
-      hashType: 'slash',
     });
 
     // $FlowExpectedError[incompatible-type]
@@ -207,7 +190,6 @@ describe('hash history', () => {
   it('should not allow to get field which is absent in the history', () => {
     const history = createHashHistory({
       basename: '',
-      hashType: 'slash',
     });
 
     // $FlowExpectedError[prop-missing]
@@ -218,7 +200,6 @@ describe('hash history', () => {
     it('should allow to use string as first argument', () => {
       const history = createHashHistory({
         basename: '',
-        hashType: 'slash',
       });
 
       history.push('/');
@@ -227,7 +208,6 @@ describe('hash history', () => {
     it('should allow to use partial location as first argument', () => {
       const history = createHashHistory({
         basename: '',
-        hashType: 'slash',
       });
 
       history.push({
@@ -240,7 +220,6 @@ describe('hash history', () => {
     it('should allow to use string as first argument', () => {
       const history = createHashHistory({
         basename: '',
-        hashType: 'slash',
       });
 
       history.replace('/');
@@ -249,7 +228,6 @@ describe('hash history', () => {
     it('should allow to use partial location as first argument', () => {
       const history = createHashHistory({
         basename: '',
-        hashType: 'slash',
       });
 
       history.push({
