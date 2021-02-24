@@ -1,172 +1,106 @@
-declare module "history/createBrowserHistory" {
-  declare function Unblock(): void;
+declare module 'history' {
+  declare type Unregister = () => void;
 
-  declare export type Action = "PUSH" | "REPLACE" | "POP";
+  declare export type Action = 'PUSH' | 'REPLACE' | 'POP';
 
-  declare export type BrowserLocation = {
+  declare export type Location = {|
     pathname: string,
     search: string,
     hash: string,
-    // Browser and Memory specific
-    state: {...},
+    state: { ... },
     key: string,
-    ...
-  };
+  |};
 
-  declare export interface BrowserHistory {
+  declare type History<HistoryLocation = Location> = {|
     length: number,
-    location: $Shape<BrowserLocation>,
+    location: HistoryLocation,
     action: Action,
-    push(path: string, state?: {...}): void,
-    push(location: $Shape<BrowserLocation>): void,
-    replace(path: string, state?: {...}): void,
-    replace(location: $Shape<BrowserLocation>): void,
+    push: ((path: string, state?: { ... }) => void) &
+      ((location: $Shape<HistoryLocation>) => void),
+    replace: ((path: string, state?: { ... }) => void) &
+      ((location: $Shape<HistoryLocation>) => void),
     go(n: number): void,
     goBack(): void,
     goForward(): void,
-    listen: Function,
-    block(message: string): typeof Unblock,
-    block((location: BrowserLocation, action: Action) => string): typeof Unblock,
-  }
+    listen((location: HistoryLocation, action: Action) => void): Unregister,
+    block(
+      prompt:
+        | string
+        | boolean
+        | ((location: HistoryLocation, action: Action) => string | false | void)
+    ): Unregister,
+    createHref(location: $Shape<HistoryLocation>): string,
+  |};
 
-  declare type BrowserHistoryOpts = {
+  declare export type BrowserHistory = History<>;
+
+  declare type BrowserHistoryOpts = {|
     basename?: string,
     forceRefresh?: boolean,
     getUserConfirmation?: (
       message: string,
-      callback: (willContinue: boolean) => void,
+      callback: (willContinue: boolean) => void
     ) => void,
-    ...
-  };
+    keyLength?: number,
+  |};
 
-  declare export default (opts?: BrowserHistoryOpts) => BrowserHistory;
-}
+  declare function createBrowserHistory(
+    opts?: BrowserHistoryOpts
+  ): BrowserHistory;
 
-declare module "history/createMemoryHistory" {
-  declare function Unblock(): void;
-
-  declare export type Action = "PUSH" | "REPLACE" | "POP";
-
-  declare export type MemoryLocation = {
-    pathname: string,
-    search: string,
-    hash: string,
-    // Browser and Memory specific
-    state: {...},
-    key: string,
-    ...
-  };
-
-  declare export interface MemoryHistory {
-    length: number,
-    location: $Shape<MemoryLocation>,
-    action: Action,
+  declare export type MemoryHistory = {|
+    ...History<>,
     index: number,
-    entries: Array<MemoryLocation | string>,
-    push(path: string, state?: {...}): void,
-    push(location: $Shape<MemoryLocation>): void,
-    replace(path: string, state?: {...}): void,
-    replace(location: $Shape<MemoryLocation>): void,
-    go(n: number): void,
-    goBack(): void,
-    goForward(): void,
-    // Memory only
-    canGo?: (n: number) => boolean,
-    listen: Function,
-    block(message: string): typeof Unblock,
-    block((location: MemoryLocation, action: Action) => ?string): typeof Unblock,
-  }
+    entries: Array<string | Location>,
+    canGo(n: number): boolean,
+  |};
 
-  declare type MemoryHistoryOpts = {
-    initialEntries?: Array<MemoryLocation | string>,
+  declare type MemoryHistoryOpts = {|
+    initialEntries?: Array<string>,
     initialIndex?: number,
     keyLength?: number,
     getUserConfirmation?: (
       message: string,
-      callback: (willContinue: boolean) => void,
+      callback: (willContinue: boolean) => void
     ) => void,
-    ...
-  };
+  |};
 
-  declare export default (opts?: MemoryHistoryOpts) => MemoryHistory;
-}
+  declare function createMemoryHistory(opts?: MemoryHistoryOpts): MemoryHistory;
 
-declare module "history/createHashHistory" {
-  declare function Unblock(): void;
+  declare export type HashLocation = {|
+    ...Location,
+    state: void,
+    key: void,
+  |};
 
-  declare export type Action = "PUSH" | "REPLACE" | "POP";
+  declare export type HashHistory = History<HashLocation>;
 
-  declare export type HashLocation = {
-    pathname: string,
-    search: string,
-    hash: string,
-    ...
-  };
-
-  declare export interface HashHistory {
-    length: number,
-    location: $Shape<HashLocation>,
-    action: Action,
-    push(path: string, state?: {...}): void,
-    push(location: $Shape<HashLocation>): void,
-    replace(path: string, state?: {...}): void,
-    replace(location: $Shape<HashLocation>): void,
-    go(n: number): void,
-    goBack(): void,
-    goForward(): void,
-    listen: Function,
-    block(message: string): typeof Unblock,
-    block((location: HashLocation, action: Action) => string): typeof Unblock,
-    push(path: string): void,
-  }
-
-  declare type HashHistoryOpts = {
+  declare type HashHistoryOpts = {|
     basename?: string,
-    hashType: "slash" | "noslash" | "hashbang",
+    hashType: 'slash' | 'noslash' | 'hashbang',
     getUserConfirmation?: (
       message: string,
-      callback: (willContinue: boolean) => void,
+      callback: (willContinue: boolean) => void
     ) => void,
-    ...
-  };
+  |};
 
-  declare export default (opts?: HashHistoryOpts) => HashHistory;
-}
+  declare function createHashHistory(opts?: HashHistoryOpts): HashHistory;
 
-declare module 'history' {
-  import typeof CreateMemoryHistory from 'history/createMemoryHistory';
-  import typeof CreateHashHistory from 'history/createHashHistory';
-  import typeof CreateBrowserHistory from 'history/createBrowserHistory';
+  // PathUtils
+  declare function parsePath(path: string): Location;
 
-  import type {
-    MemoryHistory,
-    MemoryLocation,
-    MemoryHistoryOpts
-  } from 'history/createMemoryHistory';
-  import type {
-    HashHistory,
-    HashLocation,
-    HashHistoryOpts
-  } from 'history/createHashHistory';
-  import type {
-    BrowserHistory,
-    BrowserLocation,
-    BrowserHistoryOpts
-  } from 'history/createBrowserHistory';
+  declare function createPath(location: $Shape<Location>): string;
 
-  declare module.exports: {|
-    createMemoryHistory: CreateMemoryHistory,
-    createHashHistory: CreateHashHistory,
-    createBrowserHistory: CreateBrowserHistory,
-    HashHistory: HashHistory,
-    HashLocation: HashHistory,
-    HashHistoryOpts: HashHistory,
-    MemoryHistory: MemoryHistory,
-    MemoryLocation: MemoryHistory,
-    MemoryHistoryOpts: MemoryHistory,
-    BrowserHistory: BrowserHistory,
-    BrowserLocation: BrowserHistory,
-    BrowserHistoryOpts: BrowserHistory,
-    Action: 'PUSH' | 'REPLACE' | 'POP'
-  |}
+  // LocationUtils
+  declare function locationsAreEqual(
+    a: $Shape<Location>,
+    b: $Shape<Location>
+  ): boolean;
+
+  declare function createLocation(
+    path: string | $Shape<Location>,
+    state?: { ... },
+    key?: string,
+    currentLocation?: Location
+  ): Location;
 }
