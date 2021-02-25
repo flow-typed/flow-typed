@@ -1,13 +1,13 @@
 // @flow
-import type { Reducer } from 'redux'
-import { combineReducers } from 'redux'
+import type { Reducer } from 'redux';
+import { combineReducers } from 'redux';
 
 type Action = { type: 'A', ... } | { type: 'B', ... };
 type AState = { foo: number, ... };
-const initialAState: AState = { foo: 1 }
+const initialAState: AState = { foo: 1 };
 const reducerA: Reducer<AState, Action> = (state = initialAState, action) => {
-  return state
-}
+  return state;
+};
 type State = {
   a: AState,
   name: string,
@@ -19,31 +19,32 @@ type State = {
 // combineReducers API
 //
 
-const initialName = 'initialName'
+const initialName = 'initialName';
 function reducerName(name: string = initialName, action: Action): string {
-  return name
+  return name;
 }
 
-const initialAge = 0
+const initialAge = 0;
 function reducerAge(age: number = initialAge, action: Action): number {
-  return age
+  return age;
 }
 
 // ok
 const reducer0: Reducer<State, Action> = combineReducers({
   a: reducerA,
   name: reducerName,
-  age: reducerAge
-})
+  age: reducerAge,
+});
 
-// $FlowExpectedError
-combineReducers() // wrong reducers argument
-// $FlowExpectedError
-combineReducers([]) // wrong reducers argument
+// $FlowExpectedError[incompatible-call]
+combineReducers(); // wrong reducers argument
+// $FlowExpectedError[incompatible-call]
+combineReducers([]); // wrong reducers argument
 
-// $FlowExpectedError
+// $FlowExpectedError[prop-missing]
+// $FlowExpectedError[incompatible-type]
 const reducer1: Reducer<State, Action> = combineReducers({
   a: reducerA,
-  name: reducerName
+  name: reducerName,
   // missing age reducer
-})
+});
