@@ -9,6 +9,8 @@ import {
   parsePath,
   locationsAreEqual,
   createLocation,
+  type Action,
+  type Location,
 } from 'history';
 
 // browser history
@@ -307,5 +309,35 @@ describe('locations are equal', () => {
     const bool: boolean = isEqual;
     // $FlowExpectedError[incompatible-type]
     const str: string = isEqual;
+  });
+});
+
+describe('block api', () => {
+  const history = createBrowserHistory({
+    basename: '',
+  });
+
+  it('returns a callable function', () => {
+    const unregister = history.block(() => {});
+    unregister();
+
+    // $FlowExpectedError[extra-arg] accepts no args
+    unregister('test')
+  });
+
+  it('passes correct values into blocker', () => {
+    const unregister = history.block((({ action, location, retry }) => {
+      (action: Action);
+      (location: Location);
+
+      retry();
+      // $FlowExpectedError[extra-arg] accepts no args
+      retry('test');
+    }));
+  });
+
+  it('blocker must be provided', () => {
+    // $FlowExpectedError[incompatible-call]
+    const unregister = history.block();
   });
 });

@@ -24,11 +24,7 @@ declare module 'history' {
     goForward(): void,
     listen((location: HistoryLocation, action: Action) => void): Unregister,
     block(
-      transition: ({
-        action,
-        location,
-        retry,
-      }: {|
+      blocker: (transition: {|
         action: Action,
         location: HistoryLocation,
         retry: () => void,
