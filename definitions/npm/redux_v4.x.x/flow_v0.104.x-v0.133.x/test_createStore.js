@@ -11,16 +11,18 @@ const reducer = (state: State = [], action: Action): State => state
 // createStore API
 //
 
-// $FlowExpectedError
+// $FlowExpectedError[incompatible-type-arg]
+// $FlowExpectedError[incompatible-return]
 const store1: Store = createStore(() => ({})); // wrong reducer
 const store2: Store = createStore(reducer);
-// $FlowExpectedError
+// $FlowExpectedError[incompatible-call]
 const store3: Store = createStore(reducer, {}); // wrong initialState shape
 const store4: Store = createStore(reducer, []);
-// $FlowExpectedError
+// $FlowExpectedError[incompatible-type]
+// $FlowExpectedError[incompatible-call]
 const store5: Store = createStore(reducer, ['wrong']); // wrong initialState content
 const store6: Store = createStore(reducer, [1]);
-// $FlowExpectedError
+// $FlowExpectedError[incompatible-call]
 const store7: Store = createStore(reducer, [1], 'wrong'); // wrong enhancer
 declare var myEnhancer: StoreEnhancer<State, Action>;
 const store8: Store = createStore(reducer, [1], myEnhancer);
@@ -31,17 +33,18 @@ const store9: Store = createStore(reducer, undefined, myEnhancer);
 //
 
 const s: State = store2.getState()
-// $FlowExpectedError
+// $FlowExpectedError[incompatible-type]
+// $FlowExpectedError[name-already-bound]
 const s: number = store2.getState() // wrong return type
 
 store2.dispatch({ type: 'A' })
-// $FlowExpectedError
+// $FlowExpectedError[incompatible-call]
 store2.dispatch({ type: 'wrong' }) // wrong action
 
 store2.replaceReducer(reducer)
-// $FlowExpectedError
+// $FlowExpectedError[incompatible-call]
 store2.replaceReducer(() => ({})) // wrong reducer
 
 store2.subscribe(() => {})
-// $FlowExpectedError
+// $FlowExpectedError[incompatible-call]
 store2.subscribe(() => 'wrong') // wrong subscriber

@@ -13,7 +13,7 @@ const reducer = (state: State = [], action: Action): State => state;
 
 applyMiddleware();
 applyMiddleware(api => next => next);
-// $FlowExpectedError
+// $FlowExpectedError[incompatible-call]
 applyMiddleware('wrong');
 
 //
@@ -25,13 +25,13 @@ createStore(
   reducer,
   [1],
   applyMiddleware((api: MiddlewareAPI<State, Action>) => {
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-type]
     const s: number = api.getState(); // wrong return type
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
     api.dispatch({ type: 'wrong' }); // wrong action
-    // $FlowExpectedError
+    // $FlowExpectedError[prop-missing]
     api.replaceReducer(() => ({})); // wrong reducer
-    // $FlowExpectedError
+    // $FlowExpectedError[prop-missing]
     api.subscribe(() => 'wrong'); // wrong subscriber
     return next => next;
   })
