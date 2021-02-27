@@ -21,8 +21,9 @@ import {
 const config1: FormikConfig = {
   onSubmit: (values: *, formikActions: FormikActions<*>) => {}
 };
-// $FlowExpectedError
+
 const configRequiresOnSubmit: FormikConfig = {
+  // $FlowExpectedError[incompatible-type]
   onSubmit: null
 };
 
