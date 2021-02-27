@@ -1,4 +1,11 @@
 declare module 'redux' {
+  import type {
+    Redux$DispatchAPI,
+    Redux$Dispatch,
+    Redux$MiddlewareAPI,
+    Redux$Middleware,
+  } from '@flow-typed/base-redux';
+
   /*
 
     S = State
@@ -9,15 +16,11 @@ declare module 'redux' {
 
   declare export type Action<T> = { type: T, ... }
 
-  declare export type DispatchAPI<A> = (action: A) => A;
+  declare export type DispatchAPI<A> = Redux$DispatchAPI<A>;
 
-  declare export type Dispatch<A: { type: *, ... }> = DispatchAPI<A>;
+  declare export type Dispatch<A> = Redux$Dispatch<A>;
 
-  declare export type MiddlewareAPI<S, A, D = Dispatch<A>> = {
-    dispatch: D,
-    getState(): S,
-    ...
-  };
+  declare export type MiddlewareAPI<S, A, D = Dispatch<A>> = Redux$MiddlewareAPI<S, A, D>;
 
   declare export type Store<S, A, D = Dispatch<A>> = {
     // rewrite MiddlewareAPI members in order to get nicer error messages (intersections produce long messages)
@@ -35,9 +38,7 @@ declare module 'redux' {
     action: A
   ) => S;
 
-  declare export type Middleware<S, A, D = Dispatch<A>> = (
-    api: MiddlewareAPI<S, A, D>
-  ) => (next: D) => D;
+  declare export type Middleware<S, A, D> = Redux$Middleware<S, A, D>;
 
   declare export type StoreCreator<S, A, D = Dispatch<A>> = {
     (reducer: Reducer<S, A>, enhancer?: StoreEnhancer<S, A, D>): Store<S, A, D>,

@@ -301,7 +301,7 @@ async function writeFlowConfig(repoDirPath, testDirPath, libDefPath, version) {
   const flowConfigData = [
     '[libs]',
     path.basename(libDefPath),
-    '/Users/brianchen/projects/flow-typed/definitions/base/.*',
+    '/Users/brianchen/projects/flow-typed/definitions/base/redux/flow_v0.83.x-/base-redux.js',
     path.join(repoDirPath, '..', '__util__', 'tdd_framework.js'),
     '',
     '[options]',
