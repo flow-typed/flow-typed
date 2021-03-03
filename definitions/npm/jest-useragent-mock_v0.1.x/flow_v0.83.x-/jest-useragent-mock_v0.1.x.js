@@ -1,5 +1,5 @@
 declare module 'jest-useragent-mock' {
-  export declare function mockUserAgent(userAgent?: string): void;
+  declare export function mockUserAgent(userAgent?: string): void;
 
-  export declare function clear(): void;
+  declare export function clear(): void;
 }
