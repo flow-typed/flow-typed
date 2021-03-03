@@ -9,15 +9,15 @@ describe('jest-useragent-mock', () => {
     (mockUserAgent(): void);
     // can take one param
     mockUserAgent('test');
-    // $FlowExpectedError must be string
+    // $FlowExpectedError[incompatible-call] must be string
     mockUserAgent(1);
-    // $FlowExpectedError takes a max of one arg
+    // $FlowExpectedError[extra-arg] takes a max of one arg
     mockUserAgent('test', 'test2');
   });
 
   it('clear', () => {
     (clear(): void);
-    // $FlowExpectedError takes no args
+    // $FlowExpectedError[extra-arg] takes no args
     clear('test');
   });
 });
