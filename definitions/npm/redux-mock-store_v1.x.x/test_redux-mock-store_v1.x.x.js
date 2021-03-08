@@ -16,7 +16,7 @@ describe('configureStore', () => {
 
     configureStore([mockMiddleware]);
 
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
     configureStore(['not a middleware']);
   });
 });
@@ -26,9 +26,9 @@ describe('getState', () => {
   it('returned state should be typed', () => {
     store.getState().todos[0].title;
 
-    // $FlowExpectedError
+    // $FlowExpectedError[prop-missing]
     store.getState().todos.title;
-    // $FlowExpectedError
+    // $FlowExpectedError[prop-missing]
     store.getState().somethingNotHere;
   });
 });
