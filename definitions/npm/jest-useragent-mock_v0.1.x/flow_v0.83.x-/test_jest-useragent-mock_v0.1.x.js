@@ -7,6 +7,8 @@ describe('jest-useragent-mock', () => {
   it('mockUserAgent', () => {
     // can take no params
     (mockUserAgent(): void);
+    // can take null
+    mockUserAgent(null);
     // can take one param
     mockUserAgent('test');
     // $FlowExpectedError[incompatible-call] must be string
