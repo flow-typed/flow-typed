@@ -18,4 +18,9 @@ describe('elegant-spinner', () => {
     // $FlowExpectedError[incompatible-cast] Can't be an object
     (spinner.frames: Array<{ ... }>);
   });
+
+  it('frames is readonly', () => {
+    // $FlowExpectedError[cannot-write]
+    spinner.frames = [''];
+  })
 });
