@@ -1,35 +1,28 @@
 // @flow
 import { describe, it } from "flow-typed-test";
 import React from "react";
-// commented out imports are missing tests
 import {
-  // InfiniteQueryObserver,
   MutationCache,
-  // MutationObserver,
-  // onlineManager,
-  // QueriesObserver,
   QueryCache,
   QueryClient,
   QueryClientProvider,
-  // QueryErrorResetBoundary,
-  // QueryObserver,
+  QueryErrorResetBoundary,
+  type QueryObserverResult,
   focusManager,
-  // hashQueryKey,
-  // isCancelledError,
-  // isError,
-  // notifyManager,
-  // setLogger,
-  // useInfiniteQuery,
-  // useIsFetching,
+  hashQueryKey,
+  isCancelledError,
+  isError,
+  onlineManager,
+  setLogger,
+  useInfiniteQuery,
+  useIsFetching,
   useMutation,
   useQueries,
   useQuery,
   useQueryClient,
-  // useQueryErrorResetBoundary,
-  type QueryObserverResult,
+  useQueryErrorResetBoundary,
 } from "react-query";
 
-// largely copied from the react-query unit tests https://github.com/tannerlinsley/react-query/tree/master/src/react/tests
 describe("react-query", () => {
   const dummyQueryFilters = {
     active: true,
@@ -40,7 +33,44 @@ describe("react-query", () => {
     predicate: () => true,
     queryKey: "key",
   };
+  const dummyInvalidateQueryFilters = {
+    active: true,
+    exact: true,
+    inactive: false,
+    stale: false,
+    fetching: true,
+    predicate: () => true,
+    queryKey: "key",
+    refetchActive: false,
+    refetchInactive: true,
+  };
 
+  it("useIsFetching", () => {
+    (useIsFetching(dummyQueryFilters): number);
+    (useIsFetching("key", dummyQueryFilters): number);
+
+    // $FlowExpectedError[incompatible-call]
+    useIsFetching(() => {});
+  });
+
+  // basically not implemented. See comment at the top of the libdef file
+  it("useInfiniteQuery", () => {
+    // overloaded method calls
+    useInfiniteQuery({});
+    useInfiniteQuery("key", {});
+    useInfiniteQuery("key", () => true, {});
+
+    // should be an expected error but poorly typed
+    useInfiniteQuery(() => true);
+    // should be an expected error but poorly typed
+    useInfiniteQuery("key", []);
+    // should be an expected error but poorly typed
+    useInfiniteQuery("key", () => true, []);
+
+    (useInfiniteQuery({}): any); // poorly typed
+  });
+
+  // somewhat copied from the react-query unit tests https://github.com/tannerlinsley/react-query/tree/master/src/react/tests
   it("useQuery", () => {
     // overloaded method calls
     useQuery({});
@@ -355,6 +385,39 @@ describe("react-query", () => {
     useMutation({ retryDelay: () => "string" });
   });
 
+  it("useQueryErrorResetBoundary", () => {
+    (useQueryErrorResetBoundary(): {|
+      clearReset: () => void,
+      isReset: () => boolean,
+      reset: () => void,
+    |});
+  });
+
+  it("QueryErrorResetBoundary", () => {
+    () => (
+      <QueryErrorResetBoundary>
+        <div />
+      </QueryErrorResetBoundary>
+    );
+
+    () => (
+      <QueryErrorResetBoundary>
+        {(value) => {
+          (value: {|
+            clearReset: () => void,
+            isReset: () => boolean,
+            reset: () => void,
+          |});
+
+          return null;
+        }}
+      </QueryErrorResetBoundary>
+    );
+
+    // $FlowExpectedError[prop-missing]
+    () => <QueryErrorResetBoundary />;
+  });
+
   it("useQueryClient", () => {
     const queryClient = useQueryClient();
 
@@ -379,6 +442,7 @@ describe("react-query", () => {
     (queryClient.unmount: () => void);
     (queryClient.isFetching: () => number);
     (queryClient.isFetching("key"): number);
+    (queryClient.isFetching("key", dummyQueryFilters): number);
     (queryClient.getQueryData<boolean>("key"): ?boolean);
     (queryClient.getQueryData<string>("key", dummyQueryFilters): ?string);
     // $FlowExpectedError[prop-missing]
@@ -404,8 +468,11 @@ describe("react-query", () => {
       throwOnError: false,
       cancelRefetch: false,
     }): Promise<void>);
-    (queryClient.invalidateQueries(dummyQueryFilters): Promise<void>);
-    (queryClient.invalidateQueries("key", dummyQueryFilters): Promise<void>);
+    (queryClient.invalidateQueries(dummyInvalidateQueryFilters): Promise<void>);
+    (queryClient.invalidateQueries(
+      "key",
+      dummyInvalidateQueryFilters
+    ): Promise<void>);
 
     // fetchQuery
     queryClient.fetchQuery({});
@@ -467,5 +534,55 @@ describe("react-query", () => {
     });
     // $FlowExpectedError[incompatible-call]
     focusManager.setEventListener(true);
+  });
+
+  it("onlineManager", () => {
+    (onlineManager.setEventListener((setOnline) => {
+      (setOnline: () => void);
+
+      return () => {};
+    }): void);
+    (onlineManager.setOnline(): void);
+    (onlineManager.setOnline(true): void);
+    // $FlowExpectedError[incompatible-call]
+    onlineManager.setOnline("string");
+    (onlineManager.isOnline: boolean);
+  });
+
+  it("hashQueryKey", () => {
+    (hashQueryKey("key"): string);
+    (hashQueryKey(["foo", { a: 4 }, 4, null]): string);
+
+    // $FlowExpectedError[incompatible-call]
+    hashQueryKey(() => {});
+    // $FlowExpectedError[incompatible-call]
+    hashQueryKey({});
+  });
+
+  it("isCancelledError", () => {
+    (isCancelledError(4): boolean);
+    (isCancelledError(new Error("msg")): boolean);
+    (isCancelledError({}): boolean);
+    (isCancelledError(() => {}): boolean);
+  });
+
+  it("isError", () => {
+    (isError(4): boolean);
+    (isError(new Error("msg")): boolean);
+    (isError({}): boolean);
+    (isError(() => {}): boolean);
+  });
+
+  it("setLogger", () => {
+    setLogger({
+      log: (...args: mixed[]) => {},
+      warn: (...args: mixed[]) => {},
+      error: (...args: mixed[]) => {},
+    });
+
+    // $FlowExpectedError[prop-missing]
+    setLogger({ logg: () => {} });
+    // $FlowExpectedError[prop-missing]
+    setLogger({ log: () => {}, warn: () => {} });
   });
 });
