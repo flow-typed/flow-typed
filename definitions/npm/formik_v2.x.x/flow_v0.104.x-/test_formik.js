@@ -335,6 +335,9 @@ describe('Formik', () => {
     it('should work properly', () => {
       <Formik onSubmit={() => {}} />;
     });
+    it('onSumbit can return promise', () => {
+      <Formik onSubmit={() => Promise.resolve(null)} />;
+    });
   });
 
   describe('hook', () => {

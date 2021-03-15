@@ -67,7 +67,7 @@ declare module 'formik/@flow-typed' {
 
   declare export type FormikConfig<Values> = {|
     ...FormikSharedConfig,
-    onSubmit: (values: Values, formikHelpers: FormikHelpers<Values>) => void,
+    onSubmit: (values: Values, formikHelpers: FormikHelpers<Values>) => void | Promise<any>,
 
     component?: React$ComponentType<FormikProps<Values>> | React$Node,
     render?: (props: FormikProps<Values>) => React$Node,
