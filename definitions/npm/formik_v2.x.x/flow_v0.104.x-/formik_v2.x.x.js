@@ -130,6 +130,12 @@ declare module 'formik/@flow-typed' {
     onChange: $ElementType<FormikHandlers, 'handleChange'>,
     onBlur: $ElementType<FormikHandlers, 'handleBlur'>,
   |}>;
+
+  declare export type FieldHelperProps = $ReadOnly<{|
+    setValue: (value: any, shouldValidate?: boolean) => void,
+    setTouched: (value: boolean, shouldValidate?: boolean) => void,
+    setError: (value: any) => void,
+  |}>;
 }
 
 declare module 'formik/@withFormik' {
@@ -179,7 +185,8 @@ declare module 'formik/@Field' {
     FormikProps,
     FieldMetaProps,
     FieldInputProps,
-    FieldValidator
+    FieldValidator,
+    FieldHelperProps,
   } from 'formik/@flow-typed';
 
   declare export type FieldProps<Value> = {|
@@ -213,7 +220,7 @@ declare module 'formik/@Field' {
 
   declare export function useField<Value>(
     propsOrFieldName: string | UseFieldConfig<Value>
-  ): [FieldInputProps<Value>, FieldMetaProps<Value>];
+  ): [FieldInputProps<Value>, FieldMetaProps<Value>, FieldHelperProps];
 
   declare export var Field: { <Props, Value>(props: FieldAttributes<Props, Value>): React$Node, ... };
 

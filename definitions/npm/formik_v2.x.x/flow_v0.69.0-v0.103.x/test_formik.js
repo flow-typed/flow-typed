@@ -173,6 +173,16 @@ describe('useField hook', () => {
     // $FlowExpectedError[incompatible-cast] - check any
     (meta.error: number);
   });
+
+  it('should return FieldHelperProps', () => {
+    const [, , helpers] = useField<string>('name');
+
+    helpers.setValue('a name');
+    helpers.setValue('a name', false);
+    helpers.setTouched(true);
+    helpers.setTouched(true, false);
+    helpers.setError('an error');
+  });
 });
 
 describe('Field and FastField', () => {
