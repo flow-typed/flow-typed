@@ -93,7 +93,7 @@ declare module "react-query" {
     isFetching(filters?: QueryFilters): number;
     isFetching(queryKey?: QueryKey, filters?: QueryFilters): number;
 
-    getQueryData<TData>(queryKey: QueryKey, filters?: QueryFilters): ?TData;
+    getQueryData<TData>(queryKey: QueryKey, filters?: QueryFilters): void | TData;
     setQueryData<TData>(
       queryKey: QueryKey,
       updater: Updater<?TData, TData>,
@@ -247,7 +247,7 @@ declare module "react-query" {
   |};
 
   declare type SuccessAction<TData> = {|
-    data: ?TData,
+    data: void | TData,
     type: "success",
     dataUpdatedAt?: number,
   |};
@@ -324,7 +324,7 @@ declare module "react-query" {
   declare type EnumStatus = "idle" | "loading" | "success" | "error";
   declare export type QueryStatus = EnumStatus;
   declare type QueryState<TData = mixed, TError = mixed> = {|
-    data: ?TData,
+    data: void | TData,
     dataUpdateCount: number,
     dataUpdatedAt: number,
     error: TError | null,
@@ -338,7 +338,7 @@ declare module "react-query" {
     status: QueryStatus,
   |};
 
-  declare type InitialDataFunction<TData> = () => ?TData;
+  declare type InitialDataFunction<TData> = () => void | TData;
   declare type QueryKey = string | $ReadOnlyArray<mixed>;
   declare type PageParam = mixed;
   declare type QueryKeyHashFunction = (queryKey: QueryKey) => string;
@@ -361,7 +361,7 @@ declare module "react-query" {
     retry?: RetryValue<TError>,
     retryDelay?: RetryDelayValue<TError>,
     cacheTime?: number,
-    isDataEqual?: (oldData: ?TData, newData: TData) => boolean,
+    isDataEqual?: (oldData: void | TData, newData: TData) => boolean,
     queryFn?: QueryFunction<TQueryFnData>,
     queryHash?: string,
     queryKey?: QueryKey,
@@ -388,7 +388,7 @@ declare module "react-query" {
     ...QueryOptions<TQueryFnData, TError, TData>,
     staleTime?: number,
   |};
-  declare type PlaceholderDataFunction<TResult> = () => ?TResult;
+  declare type PlaceholderDataFunction<TResult> = () => void | TResult;
 
   declare export type QueryObserverOptions<
     TQueryFnData,
@@ -464,7 +464,7 @@ declare module "react-query" {
     /**
      * This callback will fire any time the query is either successfully fetched or errors and be passed either the data or error.
      */
-    onSettled?: (data: ?TData, error: TError | null) => void,
+    onSettled?: (data: void | TData, error: TError | null) => void,
     /**
      * Whether errors should be thrown instead of setting the `error` property.
      * Defaults to `false`.
@@ -497,7 +497,7 @@ declare module "react-query" {
   //   InfiniteData<TQueryData>>;
 
   declare type QueryObserverBaseResult<TData = mixed, TError = mixed> = {|
-    data: ?TData,
+    data: void | TData,
     dataUpdatedAt: number,
     error: TError | null,
     errorUpdatedAt: number,
@@ -523,7 +523,6 @@ declare module "react-query" {
 
   declare type QueryObserverIdleResult<TData = mixed, TError = mixed> = {|
     ...QueryObserverBaseResult<TData, TError>,
-    // data: null, // TODO should be undefined
     error: null,
     isError: false,
     isIdle: true,
@@ -536,7 +535,6 @@ declare module "react-query" {
 
   declare type QueryObserverLoadingResult<TData = mixed, TError = mixed> = {|
     ...QueryObserverBaseResult<TData, TError>,
-    // data: null, // TODO should be undefined
     error: null,
     isError: false,
     isIdle: false,
@@ -549,7 +547,6 @@ declare module "react-query" {
 
   declare type QueryObserverLoadingErrorResult<TData = mixed, TError = mixed> = {|
     ...QueryObserverBaseResult<TData, TError>,
-    // data: null, // TODO should be undefined
     error: TError,
     isError: true,
     isIdle: false,
@@ -859,18 +856,18 @@ declare module "react-query" {
     onSuccess?: (
       data: TData,
       variables: TVariables,
-      context: ?TContext
+      context: TContext
     ) => Promise<void> | void,
     onError?: (
       error: TError,
       variables: TVariables,
-      context: ?TContext
+      context: TContext
     ) => Promise<void> | void,
     onSettled?: (
-      data: ?TData,
+      data: void | TData,
       error: TError | null,
       variables: TVariables,
-      context: ?TContext
+      context: TContext
     ) => Promise<void> | void,
     retry?: RetryValue<TError>,
     retryDelay?: RetryDelayValue<TError>,
@@ -890,18 +887,18 @@ declare module "react-query" {
     onSuccess?: (
       data: TData,
       variables: TVariables,
-      context: ?TContext
+      context: TContext
     ) => Promise<void> | void,
     onError?: (
       error: TError,
       variables: TVariables,
-      context: ?TContext
+      context: void | TContext
     ) => Promise<void> | void,
     onSettled?: (
-      data: ?TData,
+      data: void | TData,
       error: TError | null,
       variables: TVariables,
-      context: ?TContext
+      context: void | TContext
     ) => Promise<void> | void,
   |};
 
@@ -931,7 +928,7 @@ declare module "react-query" {
   |};
   declare type MutationState<TData = mixed, TError = mixed, TVariables = mixed, TContext = mixed> = {|
     context: ?TContext,
-    data: ?TData,
+    data: void | TData,
     error: TError | null,
     failureCount: number,
     isPaused: boolean,
@@ -1091,7 +1088,7 @@ declare module "react-query" {
       context: ?TContext
     ) => Promise<void> | void,
     onSettled?: (
-      data: ?TData,
+      data: void | TData,
       error: TError | null,
       variables: TVariables,
       context: ?TContext
@@ -1123,7 +1120,7 @@ declare module "react-query" {
     TContext = mixed,
   > = {|
     context: ?TContext,
-    data: ?TData,
+    data: void | TData,
     error: TError | null,
     failureCount: number,
     isError: boolean,

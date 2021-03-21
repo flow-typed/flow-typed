@@ -94,13 +94,15 @@ describe("react-query", () => {
     });
 
     const noQueryFn = useQuery("key");
-    (noQueryFn.data: any);
-    (noQueryFn.error: Error | null);
+    (noQueryFn.data: void);
+    // $FlowExpectedError[incompatible-cast]
+    (noQueryFn.data: null);
+    (noQueryFn.error: null);
 
     // it should infer the result type from the query function
     const fromQueryFn = useQuery("key", () => "test");
-    (fromQueryFn.data: ?string);
-    (fromQueryFn.error: any);
+    (fromQueryFn.data: void | string);
+    (fromQueryFn.error: null | Error);
     (fromQueryFn.status: string);
     (fromQueryFn.isIdle: boolean);
     (fromQueryFn.isLoading: boolean);
@@ -120,7 +122,7 @@ describe("react-query", () => {
     (fromQueryFn.refetch: (options?: {|
       throwOnError?: boolean,
       cancelRefetch?: boolean,
-    |}) => Promise<QueryObserverResult<string, Error>>);
+    |}) => Promise<QueryObserverResult<string, null | Error>>);
     (fromQueryFn.remove: () => void);
 
     // it should be possible to specify the result type
@@ -194,7 +196,9 @@ describe("react-query", () => {
         (error: Error | null);
       },
       useErrorBoundary: false,
-      select: (data) => data,
+      select: (data) => {
+        return (data: number);
+      },
       suspense: false,
       keepPreviousData: false,
       placeholderData: 0,
@@ -279,12 +283,12 @@ describe("react-query", () => {
       // $FlowExpectedError[incompatible-call]
       placeholderData: () => 10,
     });
-    (queryInfo.data: ?string);
+    (queryInfo.data: void | string);
 
     // select
     // should be possible to change data type with select function
     queryInfo = useQuery<string, _, number>("key", () => Promise.resolve("test"), {select: data => 123});
-    (queryInfo.data: ?number);
+    (queryInfo.data: void | number);
 
     // should error if select function returns different type then specified
     useQuery<string, _, number>("key", () => Promise.resolve("test"), {
