@@ -86,6 +86,13 @@ describe("react-query", () => {
     // $FlowExpectedError[incompatible-call]
     useQuery("key", () => true, []);
 
+    // should accept tuple query key but will not be a tuple in query function context
+    queryInfo = useQuery((["key"]: ["key"]), (context) => {
+      // ideally the query key type would be preserved
+      (context.queryKey[0]: mixed);
+      (context.queryKey[1]: mixed);
+    });
+
     const noQueryFn = useQuery("key");
     (noQueryFn.data: any);
     (noQueryFn.error: Error | null);
