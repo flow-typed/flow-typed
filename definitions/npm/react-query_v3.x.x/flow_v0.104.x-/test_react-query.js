@@ -72,6 +72,8 @@ describe("react-query", () => {
 
   // somewhat copied from the react-query unit tests https://github.com/tannerlinsley/react-query/tree/master/src/react/tests
   it("useQuery", () => {
+    let queryInfo;
+
     // overloaded method calls
     useQuery({});
     useQuery("key", {});
@@ -264,11 +266,23 @@ describe("react-query", () => {
       queryFn: (): string => "string",
       placeholderData: () => "diffString",
     });
-    useQuery<string, _, _>({
+    queryInfo = useQuery<string, _, string>({
       queryKey: "key",
       queryFn: () => "string",
       // $FlowExpectedError[incompatible-call]
       placeholderData: () => 10,
+    });
+    (queryInfo.data: ?string);
+
+    // select
+    // should be possible to change data type with select function
+    queryInfo = useQuery<string, _, number>("key", () => Promise.resolve("test"), {select: data => 123});
+    (queryInfo.data: ?number);
+
+    // should error if select function returns different type then specified
+    useQuery<string, _, number>("key", () => Promise.resolve("test"), {
+      // $FlowExpectedError[incompatible-call]
+      select: data => "hello"
     });
   });
 
