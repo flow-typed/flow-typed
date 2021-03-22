@@ -526,14 +526,16 @@ describe("react-query", () => {
 
     // select
     // should be possible to change data type with select function
-    // queryInfo = useInfiniteQuery<string, _, number>("key", () => Promise.resolve("test"), {select: data => 123});
-    // (queryInfo.data: void | number);
+    queryInfo = useInfiniteQuery<string, _, number>("key", () => Promise.resolve("test"), {
+      select: data => ({...data, pages: data.pages.map(() => 123)}),
+    });
+    (queryInfo.data: void | InfiniteData<number>);
 
-    // // should error if select function returns different type then specified
-    // useInfiniteQuery<string, _, number>("key", () => Promise.resolve("test"), {
-    //   // $FlowExpectedError[incompatible-call]
-    //   select: data => "hello"
-    // });
+    // should error if select function returns different type then specified InfiniteData type
+    useInfiniteQuery<string, _, string>("key", () => Promise.resolve("test"), {
+      // $FlowExpectedError[incompatible-call]
+      select: data => "hello"
+    });
   });
 
   it("useMutation", () => {
