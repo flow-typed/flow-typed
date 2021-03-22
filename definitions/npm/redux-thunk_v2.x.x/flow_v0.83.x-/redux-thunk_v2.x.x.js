@@ -1,23 +1,25 @@
 declare module 'redux-thunk' {
-  // Types from redux, should use imports in the near future once we figure out
-  // cross dependency imports in flow-typed
+  // Types from redux with generics removed to be compatible
+  // with redux & redux-mock-store,
+  // should use imports in the not too distant future once we
+  // figure out cross dependency imports in flow-typed
   declare export type DispatchAPI<A> = (action: A) => A;
 
-  declare export type Dispatch<A: { type: any, ... }> = DispatchAPI<A>;
+  declare export type Dispatch = DispatchAPI<{ type: any, ... }>;
 
-  declare export type MiddlewareAPI<S, A, D = Dispatch<A>> = {
-    dispatch: D,
-    getState(): S,
+  declare export type MiddlewareAPI = {
+    dispatch: Dispatch,
+    getState(): any,
     ...
   };
 
-  declare export type Middleware<S, A, D = Dispatch<A>> = (
-    api: MiddlewareAPI<S, A, D>
-  ) => (next: D) => D;
+  declare export type Middleware = (
+    api: MiddlewareAPI
+  ) => (next: any) => any;
   // --- End of types from redux
 
-  declare export type Thunk = Middleware<S, A> & {|
-    withExtraArgument(arg: any): Middleware<S, A>,
+  declare export type Thunk = Middleware & {|
+    withExtraArgument(arg: any): Middleware,
   |};
 
   declare module.exports: Thunk;
