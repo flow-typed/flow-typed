@@ -1,5 +1,4 @@
 // @flow
-
 import { describe, it } from 'flow-typed-test';
 
 import {
@@ -10,6 +9,8 @@ import {
   parsePath,
   locationsAreEqual,
   createLocation,
+  type Action,
+  type Location,
 } from 'history';
 
 // browser history
@@ -19,7 +20,6 @@ describe('browser history', () => {
     const history = createBrowserHistory({
       basename: '',
       forceRefresh: false,
-      keyLength: 6,
     });
 
     const pathname: string = history.location.pathname;
@@ -29,7 +29,6 @@ describe('browser history', () => {
     const history = createBrowserHistory({
       basename: '',
       forceRefresh: false,
-      keyLength: 6,
     });
 
     const key: string = history.location.key;
@@ -40,7 +39,6 @@ describe('browser history', () => {
     const history = createBrowserHistory({
       basename: '',
       forceRefresh: false,
-      keyLength: 6,
     });
 
     // $FlowExpectedError[prop-missing]
@@ -52,7 +50,6 @@ describe('browser history', () => {
       const history = createBrowserHistory({
         basename: '',
         forceRefresh: false,
-        keyLength: 6,
       });
 
       history.push('/');
@@ -62,7 +59,6 @@ describe('browser history', () => {
       const history = createBrowserHistory({
         basename: '',
         forceRefresh: false,
-        keyLength: 6,
       });
 
       history.push({
@@ -77,7 +73,6 @@ describe('browser history', () => {
       const history = createBrowserHistory({
         basename: '',
         forceRefresh: false,
-        keyLength: 6,
       });
 
       history.replace('/');
@@ -87,7 +82,6 @@ describe('browser history', () => {
       const history = createBrowserHistory({
         basename: '',
         forceRefresh: false,
-        keyLength: 6,
       });
 
       history.replace({
@@ -103,7 +97,6 @@ describe('memory history', () => {
     const history = createMemoryHistory({
       initialEntries: ['/'],
       initialIndex: 0,
-      keyLength: 6,
     });
 
     const pathname: string = history.location.pathname;
@@ -113,7 +106,6 @@ describe('memory history', () => {
     const history = createMemoryHistory({
       initialEntries: ['/'],
       initialIndex: 0,
-      keyLength: 6,
     });
 
     const key: string = history.location.key;
@@ -124,7 +116,6 @@ describe('memory history', () => {
     const history = createMemoryHistory({
       initialEntries: ['/'],
       initialIndex: 0,
-      keyLength: 6,
     });
 
     // $FlowExpectedError[prop-missing]
@@ -136,7 +127,6 @@ describe('memory history', () => {
       const history = createMemoryHistory({
         initialEntries: ['/'],
         initialIndex: 0,
-        keyLength: 6,
       });
 
       history.push('/');
@@ -146,7 +136,6 @@ describe('memory history', () => {
       const history = createMemoryHistory({
         initialEntries: ['/'],
         initialIndex: 0,
-        keyLength: 6,
       });
 
       history.push({
@@ -161,7 +150,6 @@ describe('memory history', () => {
       const history = createMemoryHistory({
         initialEntries: ['/'],
         initialIndex: 0,
-        keyLength: 6,
       });
 
       history.replace('/');
@@ -171,7 +159,6 @@ describe('memory history', () => {
       const history = createMemoryHistory({
         initialEntries: ['/'],
         initialIndex: 0,
-        keyLength: 6,
       });
 
       history.replace({
@@ -186,7 +173,6 @@ describe('hash history', () => {
   it('should allow to get location fields', () => {
     const history = createHashHistory({
       basename: '',
-      hashType: 'slash',
     });
 
     const pathname: string = history.location.pathname;
@@ -195,7 +181,6 @@ describe('hash history', () => {
   it('should not allow to get browser and memory specific location fields', () => {
     const history = createHashHistory({
       basename: '',
-      hashType: 'slash',
     });
 
     // $FlowExpectedError[incompatible-type]
@@ -207,7 +192,6 @@ describe('hash history', () => {
   it('should not allow to get field which is absent in the history', () => {
     const history = createHashHistory({
       basename: '',
-      hashType: 'slash',
     });
 
     // $FlowExpectedError[prop-missing]
@@ -218,7 +202,6 @@ describe('hash history', () => {
     it('should allow to use string as first argument', () => {
       const history = createHashHistory({
         basename: '',
-        hashType: 'slash',
       });
 
       history.push('/');
@@ -227,7 +210,6 @@ describe('hash history', () => {
     it('should allow to use partial location as first argument', () => {
       const history = createHashHistory({
         basename: '',
-        hashType: 'slash',
       });
 
       history.push({
@@ -240,7 +222,6 @@ describe('hash history', () => {
     it('should allow to use string as first argument', () => {
       const history = createHashHistory({
         basename: '',
-        hashType: 'slash',
       });
 
       history.replace('/');
@@ -249,7 +230,6 @@ describe('hash history', () => {
     it('should allow to use partial location as first argument', () => {
       const history = createHashHistory({
         basename: '',
-        hashType: 'slash',
       });
 
       history.push({
@@ -329,5 +309,35 @@ describe('locations are equal', () => {
     const bool: boolean = isEqual;
     // $FlowExpectedError[incompatible-type]
     const str: string = isEqual;
+  });
+});
+
+describe('block api', () => {
+  const history = createBrowserHistory({
+    basename: '',
+  });
+
+  it('returns a callable function', () => {
+    const unregister = history.block(() => {});
+    unregister();
+
+    // $FlowExpectedError[extra-arg] accepts no args
+    unregister('test')
+  });
+
+  it('passes correct values into blocker', () => {
+    const unregister = history.block((({ action, location, retry }) => {
+      (action: Action);
+      (location: Location);
+
+      retry();
+      // $FlowExpectedError[extra-arg] accepts no args
+      retry('test');
+    }));
+  });
+
+  it('blocker must be provided', () => {
+    // $FlowExpectedError[incompatible-call]
+    const unregister = history.block();
   });
 });
