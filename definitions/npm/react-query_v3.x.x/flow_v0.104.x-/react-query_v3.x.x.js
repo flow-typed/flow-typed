@@ -1,7 +1,7 @@
 // @flow
 
 // NOTE: useInfiniteQuery is currently very poorly typed. The relevant type definitions have been
-// commented out. useInfiniteQuery will accept `any` config options return `any`.
+// commented out. useInfiniteQuery will accept `any` config options and return `any`.
 
 declare module "react-query" {
   declare class Subscribable<TListener> {
@@ -205,13 +205,13 @@ declare module "react-query" {
     throwOnError?: boolean,
     cancelRefetch?: boolean,
   |};
-  declare type RefetchOptions = ResultOptions;
-  declare type InvalidateOptions = ResultOptions;
-  declare type FetchNextPageOptions<T> = {|
+  declare export type RefetchOptions = ResultOptions;
+  declare export type InvalidateOptions = ResultOptions;
+  declare export type FetchNextPageOptions<T> = {|
     ...ResultOptions,
     pageParam?: T,
   |};
-  declare type FetchPreviousPageOptions<T> = FetchNextPageOptions<T>;
+  declare export type FetchPreviousPageOptions<T> = FetchNextPageOptions<T>;
 
   // retry related
   declare type RetryValue<TError = mixed> =
@@ -448,11 +448,11 @@ declare module "react-query" {
      * If set, the component will only re-render if any of the listed properties change.
      * When set to `['data', 'error']`, the component will only re-render when the `data` or `error` properties change.
      */
-    notifyOnChangeProps?: string[], // TODO: was Array<$Keys<InfiniteQueryObserverResult<_, _>>>,
+    notifyOnChangeProps?: string[],
     /**
      * If set, the component will not re-render if any of the listed properties change.
      */
-    notifyOnChangePropsExclusions?: string[], // TODO: was Array<$Keys<InfiniteQueryObserverResult<_, _>>>,
+    notifyOnChangePropsExclusions?: string[],
     /**
      * This callback will fire any time the query successfully fetches new data.
      */
@@ -491,10 +491,13 @@ declare module "react-query" {
     placeholderData?: TData | PlaceholderDataFunction<TData>,
   |};
 
-  // declare type InfiniteQueryObserverOptions<TQueryFnData = mixed, TError = mixed, TData = TQueryFnData, TQueryData: TQueryFnData> = QueryObserverOptions<InfiniteData<TData>,
-  //   TError,
-  //   TQueryFnData,
-  //   InfiniteData<TQueryData>>;
+  declare type InfiniteQueryObserverOptions<TQueryFnData = mixed, TError = mixed, TData = TQueryFnData, TQueryData = TQueryFnData> =
+    QueryObserverOptions<
+      TQueryFnData,
+      TError,
+      InfiniteData<TData>,
+      InfiniteData<TQueryData>
+    >;
 
   declare type QueryObserverBaseResult<TData = mixed, TError = mixed> = {|
     data: void | TData,
@@ -591,95 +594,93 @@ declare module "react-query" {
     | QueryObserverRefetchErrorResult<TData, TError>
     | QueryObserverSuccessResult<TData, TError>;
 
-  // declare type InfiniteData<TData> = {|
-  //   pages: TData[],
-  //   pageParams: mixed[],
-  // |};
-  // declare type InfiniteQueryObserverBaseResult<TData = mixed, TError = mixed> = {|
-  //   ...QueryObserverBaseResult<InfiniteData<TData>, TError>,
-  //   fetchNextPage: (
-  //     options?: FetchNextPageOptions<*>
-  //   ) => Promise<InfiniteQueryObserverResult<TData, TError>>,
-  //   fetchPreviousPage: (
-  //     options?: FetchPreviousPageOptions<*>
-  //   ) => Promise<InfiniteQueryObserverResult<TData, TError>>,
-  //   hasNextPage?: boolean,
-  //   hasPreviousPage?: boolean,
-  //   isFetchingNextPage: boolean,
-  //   isFetchingPreviousPage: boolean,
-  // |};
+  declare export type InfiniteData<TData> = {|
+    pages: TData[],
+    pageParams: mixed[],
+  |};
 
-  // declare type InfiniteQueryObserverIdleResult<TData = mixed, TError = mixed> = {|
-  //   ...InfiniteQueryObserverBaseResult<TData, TError>,
-  //   data: null, // TODO should be undefined
-  //   error: null,
-  //   isError: false,
-  //   isIdle: true,
-  //   isLoading: false,
-  //   isLoadingError: false,
-  //   isRefetchError: false,
-  //   isSuccess: false,
-  //   status: "idle",
-  // |};
+  declare type InfiniteQueryObserverBaseResult<TData = mixed, TError = mixed> = {|
+    ...QueryObserverBaseResult<InfiniteData<TData>, TError>,
+    fetchNextPage: (
+      options?: FetchNextPageOptions<mixed>
+    ) => Promise<InfiniteQueryObserverResult<TData, TError>>,
+    fetchPreviousPage: (
+      options?: FetchPreviousPageOptions<mixed>
+    ) => Promise<InfiniteQueryObserverResult<TData, TError>>,
+    hasNextPage?: boolean,
+    hasPreviousPage?: boolean,
+    isFetchingNextPage: boolean,
+    isFetchingPreviousPage: boolean,
+  |};
 
-  // declare type InfiniteQueryObserverLoadingResult<TData = mixed, TError = mixed> = {|
-  //   ...InfiniteQueryObserverBaseResult<TData, TError>,
-  //   data: null, // TODO should be undefined
-  //   error: null,
-  //   isError: false,
-  //   isIdle: false,
-  //   isLoading: true,
-  //   isLoadingError: false,
-  //   isRefetchError: false,
-  //   isSuccess: false,
-  //   status: "loading",
-  // |};
+  declare type InfiniteQueryObserverIdleResult<TData = mixed, TError = mixed> = {|
+    ...InfiniteQueryObserverBaseResult<TData, TError>,
+    error: null,
+    isError: false,
+    isIdle: true,
+    isLoading: false,
+    isLoadingError: false,
+    isRefetchError: false,
+    isSuccess: false,
+    status: "idle",
+  |};
 
-  // declare type InfiniteQueryObserverLoadingErrorResult<TData = mixed, TError = mixed> = {|
-  //   ...InfiniteQueryObserverBaseResult<TData, TError>,
-  //   data: null, // TODO should be undefined
-  //   error: TError,
-  //   isError: true,
-  //   isIdle: false,
-  //   isLoading: false,
-  //   isLoadingError: true,
-  //   isRefetchError: false,
-  //   isSuccess: false,
-  //   status: "error",
-  // |};
+  declare type InfiniteQueryObserverLoadingResult<TData = mixed, TError = mixed> = {|
+    ...InfiniteQueryObserverBaseResult<TData, TError>,
+    error: null,
+    isError: false,
+    isIdle: false,
+    isLoading: true,
+    isLoadingError: false,
+    isRefetchError: false,
+    isSuccess: false,
+    status: "loading",
+  |};
 
-  // declare type InfiniteQueryObserverRefetchErrorResult<TData = mixed, TError = mixed> = {|
-  //   ...InfiniteQueryObserverBaseResult<TData, TError>,
-  //   data: InfiniteData<TData>,
-  //   error: TError,
-  //   isError: true,
-  //   isIdle: false,
-  //   isLoading: false,
-  //   isLoadingError: false,
-  //   isRefetchError: true,
-  //   isSuccess: false,
-  //   status: "error",
-  // |};
+  declare type InfiniteQueryObserverLoadingErrorResult<TData = mixed, TError = mixed> = {|
+    ...InfiniteQueryObserverBaseResult<TData, TError>,
+    error: TError,
+    isError: true,
+    isIdle: false,
+    isLoading: false,
+    isLoadingError: true,
+    isRefetchError: false,
+    isSuccess: false,
+    status: "error",
+  |};
 
-  // declare type InfiniteQueryObserverSuccessResult<TData = mixed, TError = mixed> = {|
-  //   ...InfiniteQueryObserverBaseResult<TData, TError>,
-  //   data: InfiniteData<TData>,
-  //   error: null,
-  //   isError: false,
-  //   isIdle: false,
-  //   isLoading: false,
-  //   isLoadingError: false,
-  //   isRefetchError: false,
-  //   isSuccess: true,
-  //   status: "success",
-  // |};
+  declare type InfiniteQueryObserverRefetchErrorResult<TData = mixed, TError = mixed> = {|
+    ...InfiniteQueryObserverBaseResult<TData, TError>,
+    data: InfiniteData<TData>,
+    error: TError,
+    isError: true,
+    isIdle: false,
+    isLoading: false,
+    isLoadingError: false,
+    isRefetchError: true,
+    isSuccess: false,
+    status: "error",
+  |};
 
-  // declare type InfiniteQueryObserverResult<TData = mixed, TError = mixed> =
-  //   | InfiniteQueryObserverIdleResult<TData, TError>
-  //   | InfiniteQueryObserverLoadingErrorResult<TData, TError>
-  //   | InfiniteQueryObserverLoadingResult<TData, TError>
-  //   | InfiniteQueryObserverRefetchErrorResult<TData, TError>
-  //   | InfiniteQueryObserverSuccessResult<TData, TError>;
+  declare type InfiniteQueryObserverSuccessResult<TData = mixed, TError = mixed> = {|
+    ...InfiniteQueryObserverBaseResult<TData, TError>,
+    data: InfiniteData<TData>,
+    error: null,
+    isError: false,
+    isIdle: false,
+    isLoading: false,
+    isLoadingError: false,
+    isRefetchError: false,
+    isSuccess: true,
+    status: "success",
+  |};
+
+  declare export type InfiniteQueryObserverResult<TData = mixed, TError = mixed> =
+    | InfiniteQueryObserverIdleResult<TData, TError>
+    | InfiniteQueryObserverLoadingErrorResult<TData, TError>
+    | InfiniteQueryObserverLoadingResult<TData, TError>
+    | InfiniteQueryObserverRefetchErrorResult<TData, TError>
+    | InfiniteQueryObserverSuccessResult<TData, TError>;
 
   declare type QueryObserverListener<TData = mixed, TError = mixed> = (
     result: QueryObserverResult<TData, TError>
@@ -691,7 +692,7 @@ declare module "react-query" {
   |};
 
   declare export class QueryObserver<
-      TQueryFnData,
+      TQueryFnData = mixed,
       TError = mixed,
       TData = TQueryFnData,
       TQueryData = TQueryFnData,
@@ -746,56 +747,69 @@ declare module "react-query" {
     getCurrentResult(): QueryObserverResult<TData, TError>[];
   }
 
-  // declare type InfiniteQueryObserverListener<TData = mixed, TError = mixed> = (
-  //   result: InfiniteQueryObserverResult<TData, TError>
-  // ) => void;
+  declare type InfiniteQueryObserverListener<TData = mixed, TError = mixed> = (
+    result: InfiniteQueryObserverResult<TData, TError>
+  ) => void;
 
-  // declare export class InfiniteQueryObserver<
-  //     TData,
-  //     TError = mixed,
-  //     TQueryFnData: TData,
-  //     TQueryData: TQueryFnData
-  //   >
-  //   extends
-  //     QueryObserver<
-  //       InfiniteData<TData>,
-  //       TError,
-  //       TQueryFnData,
-  //       InfiniteData<TQueryData>
-  //     > {
-  //   constructor(
-  //     client: QueryClient,
-  //     options: InfiniteQueryObserverOptions<
-  //       InfiniteData<TData>,
-  //       TError,
-  //       TQueryFnData,
-  //       InfiniteData<TQueryData>
-  //     >
-  //   ): this;
+  declare export class InfiniteQueryObserver<
+      TQueryFnData = mixed,
+      TError = mixed,
+      TData = TQueryFnData,
+      TQueryData = TQueryFnData,
+    >
+    extends Subscribable<InfiniteQueryObserverListener<TData, TError>> {
+    constructor(
+      client: QueryClient,
+      options: InfiniteQueryObserverOptions<
+        TQueryFnData,
+        TError,
+        TData,
+        TQueryData
+      >
+    ): this;
 
-  //   // Type override
-  //   subscribe(
-  //     listener?: InfiniteQueryObserverListener<InfiniteData<TData>, TError>
-  //   ): () => void;
+    // Type override
+    subscribe(
+      listener?: InfiniteQueryObserverListener<TData, TError>
+    ): () => void;
 
-  //   // Type override
-  //   getCurrentResult(): InfiniteQueryObserverResult<InfiniteData<TData>, TError>;
+    // Type override
+    getCurrentResult(): InfiniteQueryObserverResult<TData, TError>;
 
-  //   setOptions(
-  //     options?: InfiniteQueryObserverOptions<
-  //       InfiniteData<TData>,
-  //       TError,
-  //       TQueryFnData,
-  //       TQueryData
-  //     >
-  //   ): void;
-  //   fetchNextPage<T>(
-  //     options?: FetchNextPageOptions<T>
-  //   ): Promise<InfiniteQueryObserverResult<TData, TError>>;
-  //   fetchPreviousPage<T>(
-  //     options?: FetchPreviousPageOptions<T>
-  //   ): Promise<InfiniteQueryObserverResult<TData, TError>>;
-  // }
+    willLoadOnMount(): boolean;
+    willRefetchOnMount(): boolean;
+    willFetchOnMount(): boolean;
+    willFetchOnReconnect(): boolean;
+    willFetchOnWindowFocus(): boolean;
+    destroy(): void;
+    getCurrentResult(): InfiniteQueryObserverResult<TData, TError>;
+    getNextResult(
+      options?: ResultOptions
+    ): Promise<InfiniteQueryObserverResult<TData, TError>>;
+    getCurrentQuery(): Query<TQueryData, TError, TQueryFnData>;
+    remove(): void;
+    refetch(
+      options?: RefetchOptions
+    ): Promise<InfiniteQueryObserverResult<TData, TError>>;
+    onQueryUpdate(action: Action<TData, TError>): void;
+
+    ////////////////////
+
+    setOptions(
+      options?: InfiniteQueryObserverOptions<
+        TQueryFnData,
+        TError,
+        TData,
+        TQueryData
+      >
+    ): void;
+    fetchNextPage<T>(
+      options?: FetchNextPageOptions<T>
+    ): Promise<InfiniteQueryObserverResult<TData, TError>>;
+    fetchPreviousPage<T>(
+      options?: FetchPreviousPageOptions<T>
+    ): Promise<InfiniteQueryObserverResult<TData, TError>>;
+  }
 
   declare type SetDataOptions = {| updatedAt?: number |};
 
@@ -927,13 +941,13 @@ declare module "react-query" {
     mutations?: MutationObserverOptions<any, any, any, any>,
   |};
   declare type MutationState<TData = mixed, TError = mixed, TVariables = mixed, TContext = mixed> = {|
-    context: ?TContext,
+    context: void | TContext,
     data: void | TData,
     error: TError | null,
     failureCount: number,
     isPaused: boolean,
     status: MutationStatus,
-    variables: ?TVariables,
+    variables: void | TVariables,
   |};
 
   declare type LoadingAction<TVariables, TContext> = {|
@@ -1037,24 +1051,24 @@ declare module "react-query" {
   }
 
   declare type UseBaseQueryOptions<
-    TQueryFnData,
+    TQueryFnData = mixed,
     TError = mixed,
     TData = TQueryFnData,
     TQueryData = TQueryFnData,
   > = QueryObserverOptions<TQueryFnData, TError, TData, TQueryData>;
 
   declare export type UseQueryOptions<
-    TQueryFnData,
+    TQueryFnData = mixed,
     TError = mixed,
     TData = TQueryFnData,
   > = UseBaseQueryOptions<TQueryFnData, TError, TData, TQueryFnData>;
 
-  // declare type UseInfiniteQueryOptions<
-  //   TData,
-  //   TError,
-  //   TQueryFnData: TData,
-  //   TQueryData: TQueryFnData
-  // > = InfiniteQueryObserverOptions<TQueryFnData, TError, TData, TQueryData>;
+  declare type UseInfiniteQueryOptions<
+    TQueryFnData = mixed,
+    TError = mixed,
+    TData = TQueryFnData,
+    TQueryData = TQueryFnData,
+  > = InfiniteQueryObserverOptions<TQueryFnData, TError, TData, TQueryData>;
 
   declare type UseBaseQueryResult<TData = mixed, TError = mixed> = QueryObserverResult<
     TData,
@@ -1064,10 +1078,10 @@ declare module "react-query" {
     TData,
     TError>;
 
-  // declare type UseInfiniteQueryResult<
-  //   TData,
-  //   TError
-  // > = InfiniteQueryObserverResult<TData, TError>;
+  declare type UseInfiniteQueryResult<
+    TData,
+    TError
+  > = InfiniteQueryObserverResult<TData, TError>;
 
   declare type UseMutationOptions<
     TData = mixed,
@@ -1152,34 +1166,20 @@ declare module "react-query" {
     queries: UseQueryOptions<TQueryFnData, TError, TData>[]
   ): UseQueryResult<TData, TError>[];
 
-  // stub until bugs can be worked out:
-  declare export function useInfiniteQuery(options: any): any;
-  declare export function useInfiniteQuery(
+  declare export function useInfiniteQuery<TQueryFnData = mixed, TError = mixed, TData = TQueryFnData>(options: UseInfiniteQueryOptions<TQueryFnData, TError, TData>): UseInfiniteQueryResult<TData, TError>;
+  declare export function useInfiniteQuery<TQueryFnData = mixed, TError = mixed, TData = TQueryFnData>(
     queryKey: QueryKey,
-    options?: any
-  ): any;
+    options?: UseInfiniteQueryOptions<TQueryFnData, TError, TData>
+  ): UseInfiniteQueryResult<TData, TError>;
   declare export function useInfiniteQuery<
     TQueryFnData = mixed,
     TError = mixed,
     TData = TQueryFnData
   >(
     queryKey: QueryKey,
-    queryFn: QueryFunction<TData | TQueryFnData>,
-    options?: any
-  ): any;
-
-  // declare export function useInfiniteQuery<TQueryFnData = mixed, TError = mixed, TData = TQueryFnData>(
-  //   options: UseInfiniteQueryOptions<TQueryFnData, TError, TData>
-  // ): UseInfiniteQueryResult<TData, TError>;
-  // declare export function useInfiniteQuery<TQueryFnData = mixed, TError = mixed, TData = TQueryFnData>(
-  //   queryKey: QueryKey,
-  //   options?: UseInfiniteQueryOptions<TQueryFnData, TError, TData>
-  // ): UseInfiniteQueryResult<TData, TError>;
-  // declare export function useInfiniteQuery<TQueryFnData = mixed, TError = mixed, TData = TQueryFnData>(
-  //   queryKey: QueryKey,
-  //   queryFn: QueryFunction<TQueryFnData | TData>,
-  //   options?: UseInfiniteQueryOptions<TQueryFnData, TError, TData>
-  // ): UseInfiniteQueryResult<TData, TError>;
+    queryFn: QueryFunction<TQueryFnData>,
+    options?: UseInfiniteQueryOptions<TQueryFnData, TError, TData>
+  ): UseInfiniteQueryResult<TData, TError>;
 
   declare export function useMutation<
     TData = mixed,
