@@ -301,7 +301,7 @@ declare module 'aphrodite' {
     clip?: CSSWideKeyword | string,
     clipPath?: string,
     clipRule?: CSSWideKeyword | 'nonzero' | 'evenodd',
-    color?: CSSWideKeyword | string | number,
+    color?: CSSWideKeyword | string,
     columns?: CSSWideKeyword | string | number,
     columnCount?: CSSWideKeyword | number | 'auto',
     columnFill?: CSSWideKeyword | 'auto' | 'balance',
