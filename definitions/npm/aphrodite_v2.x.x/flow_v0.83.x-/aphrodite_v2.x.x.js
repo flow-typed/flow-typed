@@ -368,6 +368,9 @@ declare module 'aphrodite' {
       | 'inline-table'
       | 'inline-flex'
       | 'inline-grid'
+      /** <display-webkit> values. */
+      | '-webkit-box'
+      | '-webkit-inline-box'
       /** global values. */
       | CSSWideKeyword,
     emptyCells?: string,
