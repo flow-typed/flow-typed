@@ -19,7 +19,7 @@ declare module 'redux-thunk' {
   // --- End of types from redux
 
   declare export type Thunk = Middleware & {|
-    withExtraArgument(arg: any): Middleware,
+    withExtraArgument(arg: $NonMaybeType<mixed>): Middleware,
   |};
 
   declare module.exports: Thunk;
