@@ -1,6 +1,7 @@
-// Types from redux with generics removed to be compatible
-// with redux & redux-mock-store,
-// should use imports in the not too distant future once we
+// Copied basic type structure from redux so that
+// redux-thunk can be used with redux and redux-mock-store.
+//
+// This should be replaced with imports in the not too distant future once we
 // figure out cross dependency imports in flow-typed
 declare module '@@redux' {
   declare export type DispatchAPI<A> = (action: A) => A;
