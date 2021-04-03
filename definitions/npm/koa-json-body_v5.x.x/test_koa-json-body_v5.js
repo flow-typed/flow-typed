@@ -20,7 +20,7 @@ describe('koa-json-body', () => {
       limit: 1000000,
     });
 
-    // $FlowExpectedError
+    // $FlowExpectedError[prop-missing]
     body({
       foo: 'bar',
     });

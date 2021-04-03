@@ -24,10 +24,8 @@ declare module "koa-static" {
     extensions?: Array<string> | false
   |};
 
-  declare function serve(
+  declare module.exports: (
     root: string,
     opts?: Options
-  ): Middleware;
-
-  declare module.exports: typeof serve;
+  ) => Middleware;
 }
