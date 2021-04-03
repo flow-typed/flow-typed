@@ -1,4 +1,4 @@
-const serve = require('koa-static');
+import serve from "koa-static";
 
 // $FlowExpectedError[incompatible-call] (Must pass in a root)
 serve();
