@@ -390,9 +390,9 @@ describe('MongoClientOptions', (options: MongoClientOptions) => {
     const b: boolean = options.fsync;
   });
   it('should supports readPreferenceTags options', () => {
-    const a: Array<{ [string]: string, ... }> | void = options.readPreferenceTags;
+    const a: $ReadOnlyArray<{ [string]: string, ... }> | void = options.readPreferenceTags;
     // $FlowExpectedError[incompatible-type]
-    const b: Array<{ [string]: string, ... }> = options.readPreferenceTags;
+    const b: $ReadOnlyArray<{ [string]: string, ... }> = options.readPreferenceTags;
   });
   it('should supports numberOfRetries options', () => {
     const a: number | void = options.numberOfRetries;
