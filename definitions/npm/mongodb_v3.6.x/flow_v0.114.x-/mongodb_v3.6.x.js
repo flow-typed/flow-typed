@@ -18,11 +18,84 @@ declare module 'mongodb' {
   // http://mongodb.github.io/node-mongodb-native/3.5/api/BSONRegExp.html
   declare export var BSONRegExp: any; // TODO
 
+  // TODO: type all possible operations
+  declare export type FilterQuery<Doc: { ... }> = $ReadOnly<$Shape<Doc> | { ... }>;
+
+  // TODO
+  declare export type UpdatePipeline = $ReadOnlyArray<{ ... }>;
+
+  declare export type BulkWriteInsertOneOperation<Doc: { ... }> = {|
+    +insertOne: {| 
+      +document: $ReadOnly<Doc>
+    |}
+  |};
+
+  declare export type BulkWriteUpdateOneOperation<Doc: { ... }> = {|
+    +updateOne: {| 
+      +filter?: FilterQuery<Doc>,
+      +update: UpdatePipeline | $Shape<Doc> | {|
+        +$set?: $Shape<Doc>,
+        +$setOnInsert?: $Shape<Doc>,
+      |},
+      +upsert?: boolean,
+      +collation?: CollationOptions,
+      +arrayFilters?: $ReadOnlyArray<FilterQuery<Doc>>,
+      +hint?: string | Hint,
+    |}
+  |};
+
+  declare export type BulkWriteUpdateManyOperation<Doc: { ... }> = {|
+    +updateMany: {|
+      +filter?: FilterQuery<Doc>,
+      +update: UpdatePipeline | $Shape<Doc> | {|
+        +$set?: $Shape<Doc>,
+        +$setOnInsert?: $Shape<Doc>,
+      |},
+      +upsert?: boolean,
+      +collation?: CollationOptions,
+      +arrayFilters?: $ReadOnlyArray<FilterQuery<Doc>>,
+      +hint?: string | Hint,
+    |}
+  |};
+
+  declare export type BulkWriteReplaceOneOperation<Doc: { ... }> = {|
+    +replaceOne: {| 
+      +filter?: FilterQuery<Doc>,
+      +replacement: Doc,
+      +upsert?: boolean,
+      +collation?: CollationOptions,
+      +hint?: string | Hint,
+    |}
+  |};
+
+  declare export type BulkWriteDeleteOneOperation<Doc: { ... }> = {|
+    +deleteOne: {| 
+      +filter?: FilterQuery<Doc>,
+      +collation?: CollationOptions,
+    |}
+  |};
+
+  declare export type BulkWriteDeleteManyOperation<Doc: { ... }> = {|
+    +deleteMany: {| 
+      +filter?: FilterQuery<Doc>,
+      +collation?: CollationOptions,
+    |}
+  |};
+
+  declare export type BulkWriteOperation<Doc: { ... }> = 
+    | BulkWriteInsertOneOperation<Doc>
+    | BulkWriteUpdateOneOperation<Doc> 
+    | BulkWriteUpdateManyOperation<Doc>
+    | BulkWriteReplaceOneOperation<Doc>
+    | BulkWriteDeleteOneOperation<Doc>
+    | BulkWriteDeleteManyOperation<Doc>;
+
   // http://mongodb.github.io/node-mongodb-native/3.5/api/BulkOperationBase.html
   declare export type BulkOperationBase = any; // TODO (use type shouldn't be instantiated)
 
   // http://mongodb.github.io/node-mongodb-native/3.5/api/BulkWriteError.html
-  declare export var BulkWriteError: any; // TODO
+  declare type IBulkWriteError = any;
+  declare export var BulkWriteError: IBulkWriteError; // TODO
 
   // http://mongodb.github.io/node-mongodb-native/3.5/api/BulkWriteResult.html
   declare export type BulkWriteResult = any; // TODO (use type shouldn't be instantiated)
@@ -39,8 +112,140 @@ declare module 'mongodb' {
   // http://mongodb.github.io/node-mongodb-native/3.5/api/Code.html
   declare export var Code: any; // TODO
 
+  declare export type BulkWriteOpResult = {| 
+    insertedCount: number,  
+    matchedCount: number,  
+    modifiedCount: number,  
+    deletedCount: number,  
+    upsertedCount: number,  
+    insertedIds: { [number]: IObjectID, ... },  
+    upsertedIds: { [number]: IObjectID, ... },  
+    result: { ... },  
+  |};
+
   // http://mongodb.github.io/node-mongodb-native/3.5/api/Collection.html
-  declare export type Collection = any; // TODO (use type shouldn't be instantiated)
+  declare export interface Collection<Doc: { ... } = { ... }> {
+    +collectionName: string;
+    +dbName: string;
+    +hint: Hint;
+    +namespace: string;
+    +readConcern: ReadConcern;
+    +readPreference: ReadPreference;
+    +writeConcern: WriteConcern;
+    aggregate(
+      pipeline: AggregationPipeline, 
+      options?: AggregateOptions,
+    ): AggregationCursor;
+    aggregate(
+      pipeline: AggregationPipeline, 
+      options: AggregateOptions,
+      (err: IMongoError, cursor: AggregationCursor) => mixed,
+    ): void;
+    aggregate(
+      pipeline: AggregationPipeline, 
+      (err: IMongoError, cursor: AggregationCursor) => mixed,
+    ): void;
+    bulkWrite(
+      operations: $ReadOnlyArray<BulkWriteOperation<Doc>>,
+      options?: BulkWriteOptions<Doc>,
+    ): Promise<BulkWriteOpResult>;
+    bulkWrite(
+      operations: BulkWriteOperation<Doc>,
+      options: BulkWriteOptions<Doc>,
+      (err: IBulkWriteError, result: BulkWriteOpResult) => mixed,
+    ): void;
+    bulkWrite(
+      operations: BulkWriteOperation<Doc>,
+      (err: IBulkWriteError, result: BulkWriteOpResult) => mixed,
+    ): void;
+    count(
+      query: FilterQuery<Doc>,
+      options?: CollectionCountOptions,
+    ): Promise<number>;
+    count(
+      query: FilterQuery<Doc>,
+      options: CollectionCountOptions,
+      (err: IMongoError, result: number) => mixed,
+    ): void;
+    count(
+      query: FilterQuery<Doc>,
+      (err: IMongoError, result: number) => mixed,
+    ): void;
+    countDocuments(
+      query: FilterQuery<Doc>,
+      options?: CollectionCountDocumentsOptions,
+    ): Promise<number>;
+    countDocuments(
+      query: FilterQuery<Doc>,
+      options: CollectionCountDocumentsOptions,
+      (err: IMongoError, result: number) => mixed,
+    ): void;
+    countDocuments(
+      query: FilterQuery<Doc>,
+      (err: IMongoError, result: number) => mixed,
+    ): void;
+    createIndex(...any[]): any;
+    createIndexes(...any[]): any;
+    deleteMany(...any[]): any;
+    deleteOne(...any[]): any;
+    distinct(...any[]): any;
+    drop(...any[]): any;
+    dropAllIndexes(...any[]): any;
+    dropIndex(...any[]): any;
+    dropIndexes(...any[]): any;
+    ensureIndex(...any[]): any;
+    estimatedDocumentCount(...any[]): any;
+    find(...any[]): any;
+    findAndModify(...any[]): any;
+    findAndRemove(...any[]): any;
+    findOne(...any[]): any;
+    findOneAndDelete(...any[]): any;
+    findOneAndReplace(...any[]): any;
+    findOneAndUpdate(...any[]): any;
+    geoHaystackSearch(...any[]): any;
+    group(...any[]): any;
+    indexes(...any[]): any;
+    indexExists(...any[]): any;
+    indexInformation(...any[]): any;
+    initializeOrderedBulkOp(...any[]): any;
+    initializeUnorderedBulkOp(...any[]): any;
+    insert(...any[]): any;
+    insertMany(...any[]): any;
+    insertOne(...any[]): any;
+    isCapped(...any[]): any;
+    listIndexes(...any[]): any;
+    mapReduce(...any[]): any;
+    options(...any[]): any;
+    parallelCollectionScan(...any[]): any;
+    reIndex(...any[]): any;
+    remove(...any[]): any;
+    rename(...any[]): any;
+    replaceOne(...any[]): any;
+    save(...any[]): any;
+    stats(...any[]): any;
+    update(...any[]): any;
+    updateMany(...any[]): any;
+    updateOne(...any[]): any;
+    watch(...any[]): any;
+  }
+
+  declare export type CollectionCountOptions = {|
+    skip?: number,
+    limit?: number,
+    maxTimeMS?: number,
+    hint?: string,
+    readPreference?: ReadPreferenceValue,
+    collation?: CollationOptions,
+    session?: ClientSession,
+  |};
+
+  declare export type CollectionCountDocumentsOptions = {|
+    skip?: number,
+    limit?: number,
+    maxTimeMS?: number,
+    hint?: string,
+    collation?: CollationOptions,
+  |};
 
   // http://mongodb.github.io/node-mongodb-native/3.5/api/CommandCursor.html
   declare export type CommandCursor = any; // TODO (use type shouldn't be instantiated)
@@ -51,12 +256,12 @@ declare module 'mongodb' {
     skipKillCursors?: boolean,
   |};
 
-  declare export type CursorResultCallback<T> = (error: ?(typeof MongoError), result: T) => mixed;
+  declare export type CursorResultCallback<T> = (error: ?(IMongoError), result: T) => mixed;
   declare export type CursorIteratorCallback<T> = (doc: T) => mixed;
-  declare export type CursorEndCallback = (error: ?(typeof MongoError)) => mixed;
+  declare export type CursorEndCallback = (error: ?(IMongoError)) => mixed;
 
   // TODO
-  declare export type CollationOptions = any;
+  declare export type CollationOptions = $ReadOnly<{ ... }>;
 
   declare export type CursorCountOptions = {|
     skip?: number,
@@ -215,8 +420,9 @@ declare module 'mongodb' {
   // http://mongodb.github.io/node-mongodb-native/3.5/api/MongoCryptError.html
   declare export var MongoCryptError: any; // TODO;
 
-  // http://mongodb.github.io/node-mongodb-native/3.5/api/MongoError.html
-  declare export var MongoError: any;
+  // http://mongodb.github.io/node-mongodb-native/3.5/api/IMongoError.html
+  declare type IMongoError = any;
+  declare export var MongoError: IMongoError;
 
   // http://mongodb.github.io/node-mongodb-native/3.5/api/MongoNetworkError.html
   declare export var MongoNetworkError: any;
@@ -237,7 +443,8 @@ declare module 'mongodb' {
   declare export var MongoWriteConcernError: any;
 
   // http://mongodb.github.io/node-mongodb-native/3.5/api/ObjectID.html
-  declare export var ObjectID: any;
+  declare type IObjectID = any;
+  declare export var ObjectID: IObjectID;
 
   // http://mongodb.github.io/node-mongodb-native/3.5/api/OrderedBulkOperation.html
   declare export type OrderedBulkOperation = any; // TODO (use type shouldn't be instantiated)
@@ -273,10 +480,12 @@ declare module 'mongodb' {
   declare export type ReadPreferenceValue = 'primary' | 'primaryPreferred' | 'secondary'
     | 'secondaryPreferred' | 'nearest'
 
+  // http://mongodb.github.io/node-mongodb-native/3.5/api/global.html#ReadConcern
   declare export type ReadConcernLevel = 'local' | 'available' | 'majority' | 'linearizable' | 'snapshot';
 
+  // http://mongodb.github.io/node-mongodb-native/3.5/api/global.html#ReadConcern
   declare export type ReadConcern = {|
-    type: ReadConcernLevel,
+    level: ReadConcernLevel,
   |}
 
   declare export type DriverInfoOptionsObject = {|
@@ -312,11 +521,11 @@ declare module 'mongodb' {
     |},
   |};
 
-  declare export type ConnectCallback = (error: typeof MongoError, client: MongoClient) => mixed;
-  declare export type NoResultCallback = (error: typeof MongoError, null) => mixed;
+  declare export type ConnectCallback = (error: IMongoError, client: MongoClient) => mixed;
+  declare export type NoResultCallback = (error: IMongoError, null) => mixed;
 
   declare export type PkFactory = {
-    createPk(): typeof ObjectID,
+    createPk(): IObjectID,
     ...,
   };
 
@@ -390,7 +599,7 @@ declare module 'mongodb' {
     authMechanism?: 'MDEFAULT' | 'GSSAPI' | 'PLAIN' | 'MONGODB-X509' | 'SCRAM-SHA-1',
     compression?: 'snappy' | 'zlib',
     fsync?: boolean,
-    readPreferenceTags?: Array<{ [string]: string, ... }>,
+    readPreferenceTags?: $ReadOnlyArray<{ [string]: string, ... }>,
     numberOfRetries?: number,
     auto_reconnect?: boolean,
     monitorCommands?: boolean,
@@ -414,7 +623,45 @@ declare module 'mongodb' {
 
   declare export type ClientWatchOptions = { ... }; // TODO
 
+  declare export type AggregateOptions = { 
+    +readPreference?: ReadPreferenceValue,
+    +batchSize?: number,
+    +cursor?: { batchSize?: number, ... },
+    +explain?: boolean,
+    +allowDiskUse?: boolean,
+    +maxTimeMS?: number,
+    +maxAwaitTimeMS?: number,
+    +bypassDocumentValidation?: boolean,
+    +raw?: boolean,
+    +promoteLongs?: boolean,
+    +promoteValues?: boolean,
+    +promoteBuffers?: boolean,
+    +collation?: CollationOptions,
+    +comment?: string,
+    +hint?: string | Hint,
+    +session?: ClientSession,
+    ...
+  };
+
+  declare export type Hint = $ReadOnly<{ ... }>;
+
   declare export type WithSessionOptions = { ... }; // TODO
+
+  declare export type BulkWriteOptions<Doc> = {
+    +ordered?: boolean,
+    +bypassDocumentValidation?: boolean,
+    +arrayFilters?: $ReadOnlyArray<FilterQuery<Doc>>,
+    +w?: WriteConcern,
+    +wtimeout?: number,
+    +j?: boolean,
+    +checkKeys?: boolean,
+    +serializeFunctions?: boolean,
+    +ignoreUndefined?: boolean,
+    +session?: ClientSession,
+    ...,
+  }
+
+  declare export type WriteConcern = number | 'majority';
 
   declare export type Operation = (session: Session) => mixed; // TODO
 }
