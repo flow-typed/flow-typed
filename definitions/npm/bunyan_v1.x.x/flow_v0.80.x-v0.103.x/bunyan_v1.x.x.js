@@ -43,6 +43,7 @@ declare module 'bunyan' {
     level(): string | number;
     level(value: number | string): void;
     levels(name: number | string, value: number | string): void;
+    fields: any;
     trace(...params: Array<void>): boolean;
     trace(error: Error, format?: any, ...params: Array<any>): void;
     trace(buffer: Buffer, format?: any, ...params: Array<any>): void;
