@@ -316,6 +316,14 @@ jest.setSystemTime(new Date());
 // $FlowExpectedError[incompatible-call]
 jest.setSystemTime('');
 
+jest.genMockFromModule('../mocked');
+// $FlowExpectedError[incompatible-call]
+jest.genMockFromModule(1);
+
+jest.createMockFromModule('../mocked');
+// $FlowExpectedError[incompatible-call]
+jest.createMockFromModule(1);
+
 // Test method chaining fixes
 jest.doMock('testModule1', () => {}).doMock('testModule2', () => {});
 
