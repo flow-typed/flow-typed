@@ -9,5 +9,5 @@ declare module 'koa-json-body' {
     strict: boolean,
   |}>;
 
-  declare export default function body(options?: Options): Middleware;
+  declare module.exports: (options?: Options) => Middleware;
 }
