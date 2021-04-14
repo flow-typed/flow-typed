@@ -828,10 +828,14 @@ type JestObjectType = {
    */
   isMockFunction(fn: Function): boolean,
   /**
+   * Alias of `createMockFromModule`.
+   */
+  genMockFromModule(moduleName: string): any,
+  /**
    * Given the name of a module, use the automatic mocking system to generate a
    * mocked version of the module for you.
    */
-  genMockFromModule(moduleName: string): any,
+  createMockFromModule(moduleName: string): any,
   /**
    * Mocks a module with an auto-mocked version when it is being required.
    *
