@@ -79,7 +79,7 @@ declare module '@apollo/react-common' {
   declare export type IDocumentDefinition = {
     type: DocumentType,
     name: string,
-    variables: $ReadonlyArray<VariableDefinitionNode>,
+    variables: $ReadOnlyArray <VariableDefinitionNode>,
     ...
   };
 
