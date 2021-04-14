@@ -2,22 +2,22 @@ declare module '@apollo/react-common' {
   import type { Node } from 'react';
 
   /* start utils */
-  declare type Record<T, U> = {
+  declare export type Record<T, U> = {
     [key: $Keys<T>]: U,
-    ...
+    ...,
   };
   /* end utils */
 
   /* start graphql */
-  declare type DocumentNode = any;
-  declare type ExecutionResult<T> = {
+  declare export type DocumentNode = any;
+  declare export type ExecutionResult<T> = {
     data?: T,
     extensions?: { [string]: any, ... },
     errors?: any[],
     ...
   };
-  declare type GraphQLError = any;
-  declare type VariableDefinitionNode = any;
+  declare export type GraphQLError = any;
+  declare export type VariableDefinitionNode = any;
   /* end graphql */
 
   /* start context */
@@ -25,7 +25,7 @@ declare module '@apollo/react-common' {
     client?: ApolloClient<any>,
     renderPromises?: Record<any, any>,
     ...
-  }
+  };
 
   declare export type ApolloProviderProps<TCache> = {
     client: ApolloClient<TCache>,
@@ -74,14 +74,14 @@ declare module '@apollo/react-common' {
   /* end context */
 
   /* start parser */
-  declare export type DocumentType = 'Query' | 'Mutation' | 'Subscription'
+  declare export type DocumentType = 'Query' | 'Mutation' | 'Subscription';
 
   declare export type IDocumentDefinition = {
     type: DocumentType,
     name: string,
     variables: $ReadonlyArray<VariableDefinitionNode>,
     ...
-  }
+  };
 
   declare export function operationName(type: DocumentType): string;
 
@@ -250,7 +250,10 @@ declare module '@apollo/react-common' {
 
   /* start apollo-client types */
 
-  declare class ObservableQuery<T, V = { [key: string]: any, ... }> extends Observable<ApolloQueryResult<T>> {
+  declare class ObservableQuery<
+    T,
+    V = { [key: string]: any, ... }
+  > extends Observable<ApolloQueryResult<T>> {
     options: WatchQueryOptions;
     queryId: string;
     variables: V;
@@ -477,13 +480,13 @@ declare module '@apollo/react-common' {
     reset(): Promise<void>;
   }
 
-  declare type QueryWithUpdater = {
+  declare export type QueryWithUpdater = {
     updater: MutationQueryReducer<any>,
     query: QueryStoreValue,
     ...
   };
 
-  declare interface MutationStoreValue {
+  declare export interface MutationStoreValue {
     mutationString: string;
     variables: any;
     loading: boolean;
@@ -503,7 +506,7 @@ declare module '@apollo/react-common' {
     ): void;
   }
 
-  declare interface FetchMoreOptions<TData, TVariables> {
+  declare export interface FetchMoreOptions<TData, TVariables> {
     updateQuery: (
       previousQueryResult: TData,
       options: {
@@ -514,11 +517,11 @@ declare module '@apollo/react-common' {
     ) => TData;
   }
 
-  declare interface UpdateQueryOptions {
+  declare export interface UpdateQueryOptions {
     variables?: any;
   }
 
-  declare type ApolloCurrentResult<T> = {
+  declare export type ApolloCurrentResult<T> = {
     data: T | { ... },
     errors?: Array<GraphQLError>,
     loading: boolean,
@@ -528,9 +531,10 @@ declare module '@apollo/react-common' {
     ...
   };
 
-  declare type ModifiableWatchQueryOptions = {
+  declare export type ModifiableWatchQueryOptions = {
     variables?: {
-      [key: string]: any, ...
+      [key: string]: any,
+      ...,
     },
     pollInterval?: number,
     fetchPolicy?: FetchPolicy,
@@ -540,7 +544,7 @@ declare module '@apollo/react-common' {
     ...
   };
 
-  declare type WatchQueryOptions = {
+  declare export type WatchQueryOptions = {
     ...$Exact<ModifiableWatchQueryOptions>,
     query: DocumentNode,
     metadata?: any,
@@ -548,11 +552,14 @@ declare module '@apollo/react-common' {
     ...
   };
 
-  declare type RefetchQueryDescription = Array<string | PureQueryOptions>;
+  declare export type RefetchQueryDescription = Array<
+    string | PureQueryOptions
+  >;
 
-  declare interface MutationBaseOptions<
+  declare export interface MutationBaseOptions<
     T = {
-      [key: string]: any, ...
+      [key: string]: any,
+      ...,
     }
   > {
     optimisticResponse?: any;
@@ -566,7 +573,7 @@ declare module '@apollo/react-common' {
     variables?: any;
   }
 
-  declare type FetchPolicy =
+  declare export type FetchPolicy =
     | 'cache-first'
     | 'cache-and-network'
     | 'network-only'
@@ -574,13 +581,13 @@ declare module '@apollo/react-common' {
     | 'no-cache'
     | 'standby';
 
-  declare type ErrorPolicy = 'none' | 'ignore' | 'all';
+  declare export type ErrorPolicy = 'none' | 'ignore' | 'all';
 
-  declare interface FetchMoreQueryOptions<TVariables> {
+  declare export interface FetchMoreQueryOptions<TVariables> {
     variables: $Shape<TVariables>;
   }
 
-  declare type SubscribeToMoreOptions<
+  declare export type SubscribeToMoreOptions<
     TData,
     TSubscriptionData,
     TSubscriptionVariables = void
@@ -602,24 +609,24 @@ declare module '@apollo/react-common' {
     ...
   };
 
-  declare type MutationUpdaterFn<T = OperationVariables> = (
+  declare export type MutationUpdaterFn<T = OperationVariables> = (
     proxy: DataProxy,
     mutationResult: FetchResult<T>
   ) => void;
 
-  declare type NetworkStatusRaw = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
+  declare export type NetworkStatusRaw = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
 
   declare export class NetworkStatus {
-    [NetworkStatusRaw]: string,
-    string: NetworkStatusRaw,
+    [NetworkStatusRaw]: string;
+    string: NetworkStatusRaw;
   }
 
-  declare type QueryListener = (
+  declare export type QueryListener = (
     queryStoreValue: QueryStoreValue,
     newData?: any
   ) => void;
 
-  declare type QueryStoreValue = {
+  declare export type QueryStoreValue = {
     document: DocumentNode,
     variables: any,
     previousVariables: any,
@@ -630,15 +637,16 @@ declare module '@apollo/react-common' {
     ...
   };
 
-  declare type PureQueryOptions = {
+  declare export type PureQueryOptions = {
     query: DocumentNode,
     variables?: {
-      [key: string]: any, ...
+      [key: string]: any,
+      ...,
     },
     ...
   };
 
-  declare type ApolloQueryResult<T> = {
+  declare export type ApolloQueryResult<T> = {
     data: T,
     errors?: Array<GraphQLError>,
     loading: boolean,
@@ -647,27 +655,31 @@ declare module '@apollo/react-common' {
     ...
   };
 
-  declare type FetchType = 1 | 2 | 3;
+  declare export type FetchType = 1 | 2 | 3;
 
-  declare type MutationQueryReducer<T> = (
+  declare export type MutationQueryReducer<T> = (
     previousResult: {
-      [key: string]: any, ...
+      [key: string]: any,
+      ...,
     },
     options: {
       mutationResult: FetchResult<T>,
       queryName: string | void,
       queryVariables: {
-        [key: string]: any, ...
+        [key: string]: any,
+        ...,
       },
       ...
     }
   ) => {
-    [key: string]: any, ...
+    [key: string]: any,
+    ...,
   };
 
-  declare type MutationQueryReducersMap<
+  declare export type MutationQueryReducersMap<
     T = {
-      [key: string]: any, ...
+      [key: string]: any,
+      ...,
     }
   > = {
     [queryName: string]: MutationQueryReducer<T>,
@@ -683,20 +695,20 @@ declare module '@apollo/react-common' {
   }
   declare export type ApolloError = $ApolloError;
 
-  declare interface ErrorConstructor {
+  declare export interface ErrorConstructor {
     graphQLErrors?: Array<GraphQLError>;
     networkError?: Error | null;
     errorMessage?: string;
     extraInfo?: any;
   }
 
-  declare interface DefaultOptions {
+  declare export interface DefaultOptions {
     +watchQuery?: ModifiableWatchQueryOptions;
     +query?: ModifiableWatchQueryOptions;
     +mutate?: MutationBaseOptions<>;
   }
 
-  declare type ApolloClientOptions<TCacheShape> = {
+  declare export type ApolloClientOptions<TCacheShape> = {
     link: ApolloLink,
     cache: ApolloCache<TCacheShape>,
     ssrMode?: boolean,
@@ -774,46 +786,56 @@ declare module '@apollo/react-common' {
     ): Observable<FetchResult<>> | null;
   }
 
-  declare interface GraphQLRequest {
+  declare export interface GraphQLRequest {
     query: DocumentNode;
     variables?: {
-      [key: string]: any, ...
+      [key: string]: any,
+      ...,
     };
     operationName?: string;
     context?: {
-      [key: string]: any, ...
+      [key: string]: any,
+      ...,
     };
     extensions?: {
-      [key: string]: any, ...
+      [key: string]: any,
+      ...,
     };
   }
 
-  declare interface Operation {
+  declare export interface Operation {
     query: DocumentNode;
     variables: {
-      [key: string]: any, ...
+      [key: string]: any,
+      ...,
     };
     operationName: string;
     extensions: {
-      [key: string]: any, ...
+      [key: string]: any,
+      ...,
     };
     setContext: (context: {
-      [key: string]: any, ...
+      [key: string]: any,
+      ...,
     }) => {
-      [key: string]: any, ...
+      [key: string]: any,
+      ...,
     };
     getContext: () => {
-      [key: string]: any, ...
+      [key: string]: any,
+      ...,
     };
     toKey: () => string;
   }
 
-  declare type FetchResult<
+  declare export type FetchResult<
     C = {
-      [key: string]: any, ...
+      [key: string]: any,
+      ...,
     },
     E = {
-      [key: string]: any, ...
+      [key: string]: any,
+      ...,
     }
   > = ExecutionResult<C> & {
     extension?: E,
@@ -821,9 +843,11 @@ declare module '@apollo/react-common' {
     ...
   };
 
-  declare type NextLink = (operation: Operation) => Observable<FetchResult<>>;
+  declare export type NextLink = (
+    operation: Operation
+  ) => Observable<FetchResult<>>;
 
-  declare type RequestHandler = (
+  declare export type RequestHandler = (
     operation: Operation,
     forward?: NextLink
   ) => Observable<FetchResult<>> | null;
@@ -848,42 +872,42 @@ declare module '@apollo/react-common' {
     of<R>(...args: Array<R>): Observable<R>;
   }
 
-  declare interface Observer<T> {
+  declare export interface Observer<T> {
     start?: (subscription: SubscriptionLINK) => any;
     next?: (value: T) => void;
     error?: (errorValue: any) => void;
     complete?: () => void;
   }
 
-  declare interface SubscriptionLINK {
+  declare export interface SubscriptionLINK {
     closed: boolean;
     unsubscribe(): void;
   }
 
-  declare interface ZenObservableSubscriptionObserver<T> {
+  declare export interface ZenObservableSubscriptionObserver<T> {
     closed: boolean;
     next(value: T): void;
     error(errorValue: any): void;
     complete(): void;
   }
 
-  declare interface ZenObservableSubscription {
+  declare export interface ZenObservableSubscription {
     closed: boolean;
     unsubscribe(): void;
   }
 
-  declare interface ZenObservableObserver<T> {
+  declare export interface ZenObservableObserver<T> {
     start?: (subscription: ZenObservableSubscription) => any;
     next?: (value: T) => void;
     error?: (errorValue: any) => void;
     complete?: () => void;
   }
 
-  declare type ZenObservableSubscriber<T> = (
+  declare export type ZenObservableSubscriber<T> = (
     observer: ZenObservableSubscriptionObserver<T>
   ) => void | (() => void) | SubscriptionLINK;
 
-  declare interface ZenObservableObservableLike<T> {
+  declare export interface ZenObservableObservableLike<T> {
     subscribe?: ZenObservableSubscriber<T>;
   }
   /* apollo-link types */
@@ -923,67 +947,69 @@ declare module '@apollo/react-common' {
     writeData<TData>(options: CacheWriteDataOptions<TData>): void;
   }
 
-  declare type Transaction<T> = (c: ApolloCache<T>) => void;
+  declare export type Transaction<T> = (c: ApolloCache<T>) => void;
 
-  declare type CacheWatchCallback = (newData: any) => void;
+  declare export type CacheWatchCallback = (newData: any) => void;
 
-  declare interface CacheEvictionResult {
+  declare export interface CacheEvictionResult {
     success: boolean;
   }
 
-  declare interface CacheReadOptions extends DataProxyReadQueryOptions {
+  declare export interface CacheReadOptions extends DataProxyReadQueryOptions {
     rootId?: string;
     previousResult?: any;
     optimistic: boolean;
   }
 
-  declare interface CacheWriteOptions extends DataProxyReadQueryOptions {
+  declare export interface CacheWriteOptions extends DataProxyReadQueryOptions {
     dataId: string;
     result: any;
   }
 
-  declare interface CacheDiffOptions extends CacheReadOptions {
+  declare export interface CacheDiffOptions extends CacheReadOptions {
     returnPartialData?: boolean;
   }
 
-  declare interface CacheWatchOptions extends CacheReadOptions {
+  declare export interface CacheWatchOptions extends CacheReadOptions {
     callback: CacheWatchCallback;
   }
 
-  declare interface CacheEvictOptions extends DataProxyReadQueryOptions {
+  declare export interface CacheEvictOptions extends DataProxyReadQueryOptions {
     rootId?: string;
   }
 
-  declare type CacheDiffResult<T> = DataProxyDiffResult<T>;
-  declare type CacheWriteQueryOptions<
+  declare export type CacheDiffResult<T> = DataProxyDiffResult<T>;
+  declare export type CacheWriteQueryOptions<
     TData,
     TVariables
   > = DataProxyWriteQueryOptions<TData, TVariables>;
-  declare type CacheWriteFragmentOptions<
+  declare export type CacheWriteFragmentOptions<
     TData,
     TVariables
   > = DataProxyWriteFragmentOptions<TData, TVariables>;
-  declare type CacheWriteDataOptions<TData> = DataProxyWriteDataOptions<TData>;
+  declare export type CacheWriteDataOptions<
+    TData
+  > = DataProxyWriteDataOptions<TData>;
 
-  declare interface DataProxyReadQueryOptions {
+  declare export interface DataProxyReadQueryOptions {
     query: DocumentNode;
     variables?: TVariables;
   }
 
-  declare interface DataProxyReadFragmentOptions<TVariables> {
+  declare export interface DataProxyReadFragmentOptions<TVariables> {
     id: string;
     fragment: DocumentNode;
     fragmentName?: string;
     variables?: TVariables;
   }
 
-  declare interface DataProxyWriteQueryOptions<TData, TVariables> {
+  declare export interface DataProxyWriteQueryOptions<TData, TVariables> {
     data: TData;
     query: DocumentNode;
     variables?: TVariables;
   }
 
-  declare interface DataProxyWriteFragmentOptions<TData, TVariables> {
+  declare export interface DataProxyWriteFragmentOptions<TData, TVariables> {
     data: TData;
     id: string;
     fragment: DocumentNode;
@@ -991,18 +1017,18 @@ declare module '@apollo/react-common' {
     variables?: TVariables;
   }
 
-  declare interface DataProxyWriteDataOptions<TData> {
+  declare export interface DataProxyWriteDataOptions<TData> {
     data: TData;
     id?: string;
   }
 
-  declare type DataProxyDiffResult<T> = {
+  declare export type DataProxyDiffResult<T> = {
     result?: T,
     complete?: boolean,
     ...
   };
 
-  declare interface DataProxy {
+  declare export interface DataProxy {
     readQuery<QueryType, TVariables>(
       options: DataProxyReadQueryOptions,
       optimistic?: boolean
