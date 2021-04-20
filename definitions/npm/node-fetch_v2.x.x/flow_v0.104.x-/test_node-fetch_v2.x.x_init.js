@@ -11,14 +11,14 @@ import type { URL } from 'url';
 describe('RequestInit', () => {
   it('should accept method option', () => {
     fetch('http://github.com', { method: 'GET' });
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
     fetch('http://github.com', { method: null });
   });
   it('should accept headers option', () => {
     fetch('http://github.com', { headers: { 'Accept-Encoding': 'gzip,deflate' } });
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
     fetch('http://github.com', { headers: null });
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
     fetch('http://github.com', { headers: { 'Accept-Encoding': 3 } });
   });
   it('should accept body option', (stream: Readable, blob: Blob) => {
@@ -26,14 +26,14 @@ describe('RequestInit', () => {
     fetch('http://github.com', { body: null });
     fetch('http://github.com', { body: Buffer.from('Hello World') });
     fetch('http://github.com', { body: blob });
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
     fetch('http://github.com', { body: 34 });
   });
   it('should accept redirect option', () => {
     fetch('http://github.com', { redirect: 'error' });
     fetch('http://github.com', { redirect: 'follow' });
     fetch('http://github.com', { redirect: 'manual' });
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
     fetch('http://github.com', { redirect: 'noop' });
   });
   it('should accept signal option', (signal: AbortSignal) => {
@@ -55,7 +55,7 @@ describe('RequestInit', () => {
       onabort() {}
     }
 
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
     fetch('http://github.com', { signal: new InvalidSignal() });
   });
   it('should accept agent option', (httpAgent: http.Agent, httpsAgent: https.Agent) => {
@@ -71,28 +71,28 @@ describe('RequestInit', () => {
         }
       }
     });
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
     fetch('http://github.com', { agent: {} });
   });
   it('should accept compress option', () => {
     fetch('http://github.com', { compress: true });
     fetch('http://github.com', { compress: false });
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
     fetch('http://github.com', { compress: 'none' });
   });
   it('should accept follow option', () => {
     fetch('http://github.com', { follow: 42 });
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
     fetch('http://github.com', { follow: false });
   });
   it('should accept size option', () => {
     fetch('http://github.com', { size: 42 });
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
     fetch('http://github.com', { size: false });
   });
   it('should accept timeout option', () => {
     fetch('http://github.com', { timeout: 42 });
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
     fetch('http://github.com', { timeout: false });
   });
 });
