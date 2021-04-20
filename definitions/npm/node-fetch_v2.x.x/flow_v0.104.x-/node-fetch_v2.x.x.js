@@ -53,14 +53,16 @@ declare module 'node-fetch' {
   |};
 
   declare export interface FetchError extends Error {
-    name: 'FetchError';
+    // cannot set name due to incompatible extend error
+    // name: 'FetchError';
     type: string;
     code: ?number;
     errno: ?number;
   }
 
   declare export interface AbortError extends Error {
-    name: 'AbortError';
+    // cannot set name due to incompatible extend error
+    // name: 'AbortError';
     type: 'aborted';
   }
 
@@ -83,6 +85,10 @@ declare module 'node-fetch' {
     has(name: string): boolean;
     raw(): { [k: string]: string[], ... };
     set(name: string, value: string): void;
+    entries(): Iterator<[string, string]>;
+    keys(): Iterator<string>;
+    values(): Iterator<string>;
+    @@iterator(): Iterator<[string, string]>;
   }
 
   declare export class Body {
