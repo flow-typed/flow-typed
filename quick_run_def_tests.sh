@@ -10,4 +10,4 @@
 
 set -e
 
-node cli/dist/cli.js run-tests --onlyChanged
+node cli/dist/cli.js run-tests --onlyChanged "$@"
