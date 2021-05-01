@@ -58,20 +58,20 @@ describe('withFormik HOC', () => {
 
     it('should raise an error when pass invalid own props', () => {
       <WithFormikForm
-        // $FlowExpectedError: `__active` is missing in enum
+        // $FlowExpectedError[incompatible-type] -`__active` is missing in enum
         variant={'__active'}
         onSubmit={(v: FormValues) => {}}
       />;
 
       <WithFormikForm
         variant={'passive'}
-        // $FlowExpectedError: need function
+        // $FlowExpectedError[incompatible-type] - need function
         onSubmit={123}
       />;
     });
 
     it('should raise an error when pass injected formik props', () => {
-      // $FlowExpectedError: isSubmitting was extracted
+      // $FlowExpectedError[prop-missing] - isSubmitting was extracted
       <WithFormikForm
         isSubmitting={false}
         variant={'active'}
@@ -95,9 +95,9 @@ describe('withFormik HOC', () => {
             (values.age: number);
             (props.initialName: string);
 
-            // $FlowExpectedError: check any
+            // $FlowExpectedError[incompatible-cast] - check any
             (values.age: boolean);
-            // $FlowExpectedError: check any
+            // $FlowExpectedError[incompatible-cast] - check any
             (props.initialName: boolean);
           },
         });
@@ -115,7 +115,7 @@ describe('withFormik HOC', () => {
       it('should raise an error when `mapPropsToValues` return invalid values', () => {
         withFormik<Props, FormValues>({
           ...requiredOptions,
-          // $FlowExpectedError: `initialAge` is a number but `name` need a string
+          // $FlowExpectedError[incompatible-call] - `initialAge` is a number but `name` need a string
           mapPropsToValues: ({ initialAge }) => ({
             name: initialAge,
           }),
@@ -125,7 +125,7 @@ describe('withFormik HOC', () => {
       it('should raise an error when `mapPropsToValues` return not missing  value', () => {
         withFormik<Props, FormValues>({
           ...requiredOptions,
-          // $FlowExpectedError: `abc` is missing in values
+          // $FlowExpectedError[prop-missing] - `abc` is missing in values
           mapPropsToValues: ({ initialAge }) => ({
             abc: initialAge,
           }),
@@ -154,7 +154,7 @@ describe('useField hook', () => {
   });
 
   it('should raise error when pass object without required prop `name`', () => {
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
     useField({ __name: 'name' });
   });
 
@@ -162,16 +162,26 @@ describe('useField hook', () => {
     const [props, meta] = useField<number>('name');
 
     (props.value: number);
-    // $FlowExpectedError: check any
+    // $FlowExpectedError[incompatible-cast] - check any
     (props.value: boolean);
 
     (meta.touched: boolean);
-    // $FlowExpectedError: check any
+    // $FlowExpectedError[incompatible-cast] - check any
     (meta.touched: number);
 
     (meta.error: ?string);
-    // $FlowExpectedError: check any
+    // $FlowExpectedError[incompatible-cast] - check any
     (meta.error: number);
+  });
+
+  it('should return FieldHelperProps', () => {
+    const [, , helpers] = useField<string>('name');
+
+    helpers.setValue('a name');
+    helpers.setValue('a name', false);
+    helpers.setTouched(true);
+    helpers.setTouched(true, false);
+    helpers.setError('an error');
   });
 });
 
@@ -182,12 +192,12 @@ describe('Field and FastField', () => {
   });
 
   it('should raise an error when pass incompatible name prop', () => {
-    // $FlowExpectedError: `name` must be a string
+    // $FlowExpectedError[incompatible-type] - `name` must be a string
     <Field name={111} />;
 
-    // $FlowExpectedError: `name` is required prop
+    // $FlowExpectedError[prop-missing] - `name` is required prop
     <Field />;
-    // $FlowExpectedError: `name` is required prop
+    // $FlowExpectedError[prop-missing] - `name` is required prop
     <FastField />;
   });
 
@@ -200,9 +210,9 @@ describe('Field and FastField', () => {
 
     Field<{ disabled: boolean, ... }, '1' | '2'>({
       name: 'count',
-      // $FlowExpectedError: need a boolean
+      // $FlowExpectedError[incompatible-call] - need a boolean
       disabled: 123,
-      // $FlowExpectedError: `12` is missing in enum
+      // $FlowExpectedError[incompatible-call] - `12` is missing in enum
       value: '12',
     });
   });
@@ -233,19 +243,19 @@ describe('FormikContext', () => {
       {value => {
         (value.validateOnBlur: ?boolean);
 
-        // $FlowExpectedError: check any
+        // $FlowExpectedError[incompatible-cast] - check any
         (value.validateOnBlur: ?string);
 
         (value.submitForm: () => Promise<void>);
 
-        // $FlowExpectedError: check any
+        // $FlowExpectedError[incompatible-cast] - check any
         (value.submitForm: number);
 
         return null;
       }}
     </FormikConsumer>;
 
-    // $FlowExpectedError: need valid formik context value
+    // $FlowExpectedError[incompatible-type] - need valid formik context value
     <FormikProvider value={123} />;
   });
 
@@ -253,7 +263,7 @@ describe('FormikContext', () => {
     const context = useFormikContext<{ age: number, ... }>();
 
     (context.values.age: number);
-    // $FlowExpectedError: check any
+    // $FlowExpectedError[incompatible-cast] - check any
     (context.values.age: string);
   });
 });
@@ -290,7 +300,7 @@ describe('ErrorMessage', () => {
   });
 
   it('should raise an error when do not pass required prop `name`', () => {
-    // $FlowExpectedError
+    // $FlowExpectedError[prop-missing]
     <ErrorMessage />;
   });
 });
@@ -309,10 +319,10 @@ describe('FieldArray', () => {
     });
 
     it('should raise an error when pass incompatible name prop', () => {
-      // $FlowExpectedError: `name` must be a string
+      // $FlowExpectedError[incompatible-type] - `name` must be a string
       <FieldArray name={111} />;
 
-      // $FlowExpectedError: `name` is required prop
+      // $FlowExpectedError[prop-missing] - `name` is required prop
       <FieldArray />;
     });
   });
@@ -323,10 +333,10 @@ it('should render Form', () => {
 
   <Form aria-hidden={'true'} />;
 
-  // $FlowExpectedError: `onSubmit` already provided to `form` yuo can't overwrite it
+  // $FlowExpectedError[incompatible-type] - `onSubmit` already provided to `form` yuo can't overwrite it
   <Form onSubmit={() => {}} />;
 
-  // $FlowExpectedError: `onReset` already provided to `form` yuo can't overwrite it
+  // $FlowExpectedError[incompatible-type] - `onReset` already provided to `form` yuo can't overwrite it
   <Form onReset={() => {}} />;
 });
 
@@ -334,6 +344,9 @@ describe('Formik', () => {
   describe('Component', () => {
     it('should work properly', () => {
       <Formik onSubmit={() => {}} />;
+    });
+    it('onSumbit can return promise', () => {
+      <Formik onSubmit={() => Promise.resolve(null)} />;
     });
   });
 
@@ -348,18 +361,18 @@ describe('Formik', () => {
 
       formik.setFieldValue('name', '1', true);
 
-      // $FlowExpectedError: `name` is missing in `Values`
+      // $FlowExpectedError[prop-missing] - `name` is missing in `Values`
       formik.setFieldValue('__name', '1');
 
-      // $FlowExpectedError: `name` expect string value, not `123`
+      // $FlowExpectedError[incompatible-call] - `name` expect string value, not `123`
       formik.setFieldValue('name', 123);
 
       (formik.values.name: string);
       (formik.values.age: number);
 
-      // $FlowExpectedError: check any
+      // $FlowExpectedError[incompatible-cast] - check any
       (formik.values.name: boolean);
-      // $FlowExpectedError: check any
+      // $FlowExpectedError[incompatible-cast] - check any
       (formik.values.age: boolean);
     });
   });

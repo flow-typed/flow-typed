@@ -1,6 +1,6 @@
 declare module 'debounce' {
   declare type Cancelable = {|
-    cancel: () => void,
+    clear: () => void,
     flush: () => void
   |};
 

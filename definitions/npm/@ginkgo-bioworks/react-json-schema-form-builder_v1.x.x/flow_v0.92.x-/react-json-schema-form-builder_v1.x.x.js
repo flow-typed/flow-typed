@@ -66,7 +66,15 @@ declare module '@ginkgo-bioworks/react-json-schema-form-builder' {
       cardDisplayName?: string,
       cardDescription?: string,
       cardInputType?: string,
+      cardSectionObjectName?: string,
+      cardSectionDisplayName?: string,
+      cardSectionDescription?: string,
     |},
+    labels?: {|
+      formNameLabel?: string,
+      formDescriptionLabel?: string,
+    |},
+    showFormHead?: boolean,
   |};
 
   declare type FormBuilderProps = {|

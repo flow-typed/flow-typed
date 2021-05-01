@@ -306,6 +306,8 @@ async function writeFlowConfig(repoDirPath, testDirPath, libDefPath, version) {
     '[options]',
     'include_warnings=true',
     'server.max_workers=0',
+    // Fixes out of shared memory error for Mac Rosetta 2, see https://github.com/facebook/flow/issues/8538
+    'sharedmemory.heap_size=3221225472',
     semver.lt(version, '0.125.0')
       ? 'suppress_comment=\\\\(.\\\\|\\n\\\\)*\\\\$FlowExpectedError'
       : '',
