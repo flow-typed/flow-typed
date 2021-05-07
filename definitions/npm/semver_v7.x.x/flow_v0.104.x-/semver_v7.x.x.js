@@ -31,7 +31,7 @@ declare module "semver" {
     semverCompareBuild as compareBuild,
     semverSort as sort,
     semverRsort as rsort,
-  }
+  };
   import type semverGt from "semver/functions/gt"
   import type semverLt from "semver/functions/lt"
   import type semverEq from "semver/functions/eq"
@@ -49,7 +49,7 @@ declare module "semver" {
     semverLte as lte,
     semverCmp as cmp,
     semverCoerce as coerce,
-  }
+  };
   import type semverSatisfies from "semver/functions/satisfies"
   import type semverMaxSatisfying from "semver/ranges/max-satisfying"
   import type semverMinSatisfying from "semver/ranges/min-satisfying"
@@ -75,28 +75,28 @@ declare module "semver" {
     semverIntersects as intersects,
     simplify as simplifyRange,
     rangeSubset as subset,
-  }
+  };
   import type SemVer from "semver/classes/semver"
   import type Range from "semver/classes/range"
   import type Comparator from "semver/classes/comparator"
-  declare export { SemVer, Range, Comparator }
+  declare export { SemVer, Range, Comparator };
   import type identifiers from "semver/internals/identifiers"
-  declare export var compareIdentifiers: typeof identifiers.compareIdentifiers
-  declare export var rcompareIdentifiers: typeof identifiers.rcompareIdentifiers
-  declare export var SEMVER_SPEC_VERSION: "2.0.0"
-  export type ReleaseType =
+  declare export var compareIdentifiers: typeof identifiers.compareIdentifiers;
+  declare export var rcompareIdentifiers: typeof identifiers.rcompareIdentifiers;
+  declare export var SEMVER_SPEC_VERSION: "2.0.0";
+  declare export type ReleaseType =
     | "major"
     | "premajor"
     | "minor"
     | "preminor"
     | "patch"
     | "prepatch"
-    | "prerelease"
-  export interface Options {
+    | "prerelease";
+  declare export interface Options {
     loose?: boolean;
     includePrerelease?: boolean;
   }
-  export type CoerceOptions = {
+  declare export type CoerceOptions = {
     /**
      * Used by `coerce()` to coerce from right to left.
      * @default false
@@ -106,8 +106,8 @@ declare module "semver" {
      */
     rtl?: boolean,
     ...
-  } & Options
-  export type Operator =
+  } & Options;
+  declare export type Operator =
     | "==="
     | "!=="
     | ""
@@ -117,14 +117,14 @@ declare module "semver" {
     | ">"
     | ">="
     | "<"
-    | "<="
+    | "<=";
 
 }
 
 // Generated from @types/semver/preload using github.com/aminya/flowgen-package
 declare module "semver/preload" {
   import type semver from "semver/"
-  declare module.exports: typeof semver
+  declare module.exports: typeof semver;
 
 }
 
@@ -149,7 +149,7 @@ declare module "semver/classes/comparator" {
       optionsOrLoose?: boolean | sermver.Options
     ): boolean;
   }
-  declare module.exports: typeof Comparator
+  declare module.exports: typeof Comparator;
 
 }
 
@@ -175,7 +175,7 @@ declare module "semver/classes/range" {
     test(version: string | SemVer): boolean;
     intersects(range: Range, optionsOrLoose?: boolean | semver.Options): boolean;
   }
-  declare module.exports: typeof Range
+  declare module.exports: typeof Range;
 
 }
 
@@ -232,7 +232,7 @@ declare module "semver/classes/semver" {
     compareBuild(other: string | SemVer): 1 | 0 | -1;
     inc(release: semver.ReleaseType, identifier?: string): SemVer;
   }
-  declare module.exports: typeof SemVer
+  declare module.exports: typeof SemVer;
 
 }
 
@@ -245,8 +245,8 @@ declare module "semver/functions/clean" {
   declare function clean(
     version: string,
     optionsOrLoose?: boolean | semver.Options
-  ): string | null
-  declare module.exports: typeof clean
+  ): string | null;
+  declare module.exports: typeof clean;
 
 }
 
@@ -264,8 +264,8 @@ declare module "semver/functions/cmp" {
     operator: semver.Operator,
     v2: string | SemVer,
     optionsOrLoose?: boolean | semver.Options
-  ): boolean
-  declare module.exports: typeof cmp
+  ): boolean;
+  declare module.exports: typeof cmp;
 
 }
 
@@ -279,8 +279,8 @@ declare module "semver/functions/coerce" {
   declare function coerce(
     version: string | number | SemVer | null | void,
     options?: semver.CoerceOptions
-  ): SemVer | null
-  declare module.exports: typeof coerce
+  ): SemVer | null;
+  declare module.exports: typeof coerce;
 
 }
 
@@ -299,8 +299,8 @@ declare module "semver/functions/compare-build" {
   declare function compareBuild(
     a: string | SemVer,
     b: string | SemVer
-  ): 1 | 0 | -1
-  declare module.exports: typeof compareBuild
+  ): 1 | 0 | -1;
+  declare module.exports: typeof compareBuild;
 
 }
 
@@ -310,8 +310,8 @@ declare module "semver/functions/compare-loose" {
   declare function compareLoose(
     v1: string | SemVer,
     v2: string | SemVer
-  ): 1 | 0 | -1
-  declare module.exports: typeof compareLoose
+  ): 1 | 0 | -1;
+  declare module.exports: typeof compareLoose;
 
 }
 
@@ -331,8 +331,8 @@ declare module "semver/functions/compare" {
     v1: string | SemVer,
     v2: string | SemVer,
     optionsOrLoose?: boolean | semver.Options
-  ): 1 | 0 | -1
-  declare module.exports: typeof compare
+  ): 1 | 0 | -1;
+  declare module.exports: typeof compare;
 
 }
 
@@ -347,8 +347,8 @@ declare module "semver/functions/diff" {
     v1: string | SemVer,
     v2: string | SemVer,
     optionsOrLoose?: boolean | semver.Options
-  ): semver.ReleaseType | null
-  declare module.exports: typeof diff
+  ): semver.ReleaseType | null;
+  declare module.exports: typeof diff;
 
 }
 
@@ -363,8 +363,8 @@ declare module "semver/functions/eq" {
     v1: string | SemVer,
     v2: string | SemVer,
     optionsOrLoose?: boolean | semver.Options
-  ): boolean
-  declare module.exports: typeof eq
+  ): boolean;
+  declare module.exports: typeof eq;
 
 }
 
@@ -379,8 +379,8 @@ declare module "semver/functions/gt" {
     v1: string | SemVer,
     v2: string | SemVer,
     optionsOrLoose?: boolean | semver.Options
-  ): boolean
-  declare module.exports: typeof gt
+  ): boolean;
+  declare module.exports: typeof gt;
 
 }
 
@@ -395,8 +395,8 @@ declare module "semver/functions/gte" {
     v1: string | SemVer,
     v2: string | SemVer,
     optionsOrLoose?: boolean | semver.Options
-  ): boolean
-  declare module.exports: typeof gte
+  ): boolean;
+  declare module.exports: typeof gte;
 
 }
 
@@ -412,13 +412,13 @@ declare module "semver/functions/inc" {
     release: semver.ReleaseType,
     optionsOrLoose?: boolean | semver.Options,
     identifier?: string
-  ): string | null
+  ): string | null;
   declare function inc(
     version: string | SemVer,
     release: semver.ReleaseType,
     identifier?: string
-  ): string | null
-  declare module.exports: typeof inc
+  ): string | null;
+  declare module.exports: typeof inc;
 
 }
 
@@ -433,8 +433,8 @@ declare module "semver/functions/lt" {
     v1: string | SemVer,
     v2: string | SemVer,
     optionsOrLoose?: boolean | semver.Options
-  ): boolean
-  declare module.exports: typeof lt
+  ): boolean;
+  declare module.exports: typeof lt;
 
 }
 
@@ -449,8 +449,8 @@ declare module "semver/functions/lte" {
     v1: string | SemVer,
     v2: string | SemVer,
     optionsOrLoose?: boolean | semver.Options
-  ): boolean
-  declare module.exports: typeof lte
+  ): boolean;
+  declare module.exports: typeof lte;
 
 }
 
@@ -464,8 +464,8 @@ declare module "semver/functions/major" {
   declare function major(
     version: string | SemVer,
     optionsOrLoose?: boolean | semver.Options
-  ): number
-  declare module.exports: typeof major
+  ): number;
+  declare module.exports: typeof major;
 
 }
 
@@ -479,8 +479,8 @@ declare module "semver/functions/minor" {
   declare function minor(
     version: string | SemVer,
     optionsOrLoose?: boolean | semver.Options
-  ): number
-  declare module.exports: typeof minor
+  ): number;
+  declare module.exports: typeof minor;
 
 }
 
@@ -495,8 +495,8 @@ declare module "semver/functions/neq" {
     v1: string | SemVer,
     v2: string | SemVer,
     optionsOrLoose?: boolean | semver.Options
-  ): boolean
-  declare module.exports: typeof neq
+  ): boolean;
+  declare module.exports: typeof neq;
 
 }
 
@@ -510,8 +510,8 @@ declare module "semver/functions/parse" {
   declare function parse(
     version: string | SemVer | null | void,
     optionsOrLoose?: boolean | semver.Options
-  ): SemVer | null
-  declare module.exports: typeof parse
+  ): SemVer | null;
+  declare module.exports: typeof parse;
 
 }
 
@@ -525,8 +525,8 @@ declare module "semver/functions/patch" {
   declare function patch(
     version: string | SemVer,
     optionsOrLoose?: boolean | semver.Options
-  ): number
-  declare module.exports: typeof patch
+  ): number;
+  declare module.exports: typeof patch;
 
 }
 
@@ -540,8 +540,8 @@ declare module "semver/functions/prerelease" {
   declare function prerelease(
     version: string | SemVer,
     optionsOrLoose?: boolean | semver.Options
-  ): $ReadOnlyArray<string | number> | null
-  declare module.exports: typeof prerelease
+  ): $ReadOnlyArray<string | number> | null;
+  declare module.exports: typeof prerelease;
 
 }
 
@@ -558,8 +558,8 @@ declare module "semver/functions/rcompare" {
     v1: string | SemVer,
     v2: string | SemVer,
     optionsOrLoose?: boolean | semver.Options
-  ): 1 | 0 | -1
-  declare module.exports: typeof rcompare
+  ): 1 | 0 | -1;
+  declare module.exports: typeof rcompare;
 
 }
 
@@ -573,8 +573,8 @@ declare module "semver/functions/rsort" {
   declare function rsort<T: string | SemVer>(
     list: T[],
     optionsOrLoose?: boolean | semver.Options
-  ): T[]
-  declare module.exports: typeof rsort
+  ): T[];
+  declare module.exports: typeof rsort;
 
 }
 
@@ -590,8 +590,8 @@ declare module "semver/functions/satisfies" {
     version: string | SemVer,
     range: string | Range,
     optionsOrLoose?: boolean | semver.Options
-  ): boolean
-  declare module.exports: typeof satisfies
+  ): boolean;
+  declare module.exports: typeof satisfies;
 
 }
 
@@ -605,8 +605,8 @@ declare module "semver/functions/sort" {
   declare function sort<T: string | SemVer>(
     list: T[],
     optionsOrLoose?: boolean | semver.Options
-  ): T[]
-  declare module.exports: typeof sort
+  ): T[];
+  declare module.exports: typeof sort;
 
 }
 
@@ -620,8 +620,8 @@ declare module "semver/functions/valid" {
   declare function valid(
     version: string | SemVer | null | void,
     optionsOrLoose?: boolean | semver.Options
-  ): string | null
-  declare module.exports: typeof valid
+  ): string | null;
+  declare module.exports: typeof valid;
 
 }
 
@@ -635,7 +635,7 @@ declare module "semver/internals/identifiers" {
   declare export function compareIdentifiers(
     a: string | null | void,
     b: string | null | void
-  ): 1 | 0 | -1
+  ): 1 | 0 | -1;
 
   /**
    * The reverse of compareIdentifiers.
@@ -645,7 +645,7 @@ declare module "semver/internals/identifiers" {
   declare export function rcompareIdentifiers(
     a: string | null | void,
     b: string | null | void
-  ): 1 | 0 | -1
+  ): 1 | 0 | -1;
 
 }
 
@@ -661,8 +661,8 @@ declare module "semver/ranges/gtr" {
     version: string | SemVer,
     range: string | Range,
     optionsOrLoose?: boolean | semver.Options
-  ): boolean
-  declare module.exports: typeof gtr
+  ): boolean;
+  declare module.exports: typeof gtr;
 
 }
 
@@ -677,8 +677,8 @@ declare module "semver/ranges/intersects" {
     range1: string | Range,
     range2: string | Range,
     optionsOrLoose?: boolean | semver.Options
-  ): boolean
-  declare module.exports: typeof intersects
+  ): boolean;
+  declare module.exports: typeof intersects;
 
 }
 
@@ -694,8 +694,8 @@ declare module "semver/ranges/ltr" {
     version: string | SemVer,
     range: string | Range,
     optionsOrLoose?: boolean | semver.Options
-  ): boolean
-  declare module.exports: typeof ltr
+  ): boolean;
+  declare module.exports: typeof ltr;
 
 }
 
@@ -711,8 +711,8 @@ declare module "semver/ranges/max-satisfying" {
     versions: $ReadOnlyArray<T>,
     range: string | Range,
     optionsOrLoose?: boolean | semver.Options
-  ): T | null
-  declare module.exports: typeof maxSatisfying
+  ): T | null;
+  declare module.exports: typeof maxSatisfying;
 
 }
 
@@ -728,8 +728,8 @@ declare module "semver/ranges/min-satisfying" {
     versions: $ReadOnlyArray<T>,
     range: string | Range,
     optionsOrLoose?: boolean | semver.Options
-  ): T | null
-  declare module.exports: typeof minSatisfying
+  ): T | null;
+  declare module.exports: typeof minSatisfying;
 
 }
 
@@ -744,8 +744,8 @@ declare module "semver/ranges/min-version" {
   declare function minVersion(
     range: string | Range,
     optionsOrLoose?: boolean | semver.Options
-  ): SemVer | null
-  declare module.exports: typeof minVersion
+  ): SemVer | null;
+  declare module.exports: typeof minVersion;
 
 }
 
@@ -763,8 +763,8 @@ declare module "semver/ranges/outside" {
     range: string | Range,
     hilo: ">" | "<",
     optionsOrLoose?: boolean | semver.Options
-  ): boolean
-  declare module.exports: typeof outside
+  ): boolean;
+  declare module.exports: typeof outside;
 
 }
 
@@ -784,8 +784,8 @@ declare module "semver/ranges/simplify" {
     ranges: string[],
     range: string | Range,
     options?: semver.Options
-  ): string | Range
-  declare module.exports: typeof simplify
+  ): string | Range;
+  declare module.exports: typeof simplify;
 
 }
 
@@ -800,8 +800,8 @@ declare module "semver/ranges/subset" {
     sub: string | Range,
     dom: string | Range,
     options?: semver.Options
-  ): boolean
-  declare module.exports: typeof subset
+  ): boolean;
+  declare module.exports: typeof subset;
 
 }
 
@@ -815,8 +815,8 @@ declare module "semver/ranges/to-comparators" {
   declare function toComparators(
     range: string | Range,
     optionsOrLoose?: boolean | semver.Options
-  ): string
-  declare module.exports: typeof toComparators
+  ): string;
+  declare module.exports: typeof toComparators;
 
 }
 
@@ -830,7 +830,7 @@ declare module "semver/ranges/valid" {
   declare function validRange(
     range: string | Range | null | void,
     optionsOrLoose?: boolean | semver.Options
-  ): string
-  declare module.exports: typeof validRange
+  ): string;
+  declare module.exports: typeof validRange;
 
 }
