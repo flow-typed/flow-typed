@@ -13,15 +13,15 @@ const redisClient = new Redis({
   db: 0
 });
 
+// $FlowExpectedError[incompatible-call]
 new Redis({
-  // $FlowExpectedError
   port: '6379',        // Redis port (should be number)
   host: '127.0.0.1',   // Redis host
 });
 
 const promise: Promise<string> = redisClient.get('foo');
 
-// $FlowExpectedError number. This type is incompatible with string
+// $FlowExpectedError[incompatible-call] number. This type is incompatible with string
 const promise2: Promise<string> = redisClient.get(1234);
 
 const cluster = new Redis.Cluster([
@@ -38,5 +38,5 @@ const cluster = new Redis.Cluster([
 })
 
 new Redis.Cluster([], {scaleReads: 'slave'});
-// $FlowExpectedError
+// $FlowExpectedError[incompatible-call]
 new Redis.Cluster([], {scaleReads: 'slaves'});
