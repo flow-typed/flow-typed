@@ -97,7 +97,7 @@ declare module 'styled-components' {
   declare export function isStyledComponent(target: mixed): boolean;
 
   declare type SCMProps = {
-    children?: React.Node,
+    children?: React$Node,
     sheet?: StyleSheet,
     target?: HTMLElement,
     ...
@@ -417,7 +417,7 @@ declare module 'styled-components' {
   >;
 
   declare interface Styled {
-    <Comp: React$ComponentType<P>, Theme, OwnProps = React$ElementConfig<Comp>>(
+    <Comp: React$ComponentType<any>, Theme, OwnProps = React$ElementConfig<Comp>>(
       Comp
     ): StyledFactory<{| ...$Exact<OwnProps> |}, Theme, Comp>;
     <StyleProps, Theme, ElementName: $Keys<BuiltinElementInstances>>(
