@@ -21,7 +21,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node: [ '10', '12' ]
+        node: [ '12', '14' ]
     name: Node ${{ matrix.node }} sample
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
