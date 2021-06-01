@@ -59,6 +59,23 @@ describe('@ginkgo-bioworks/react-json-schema-form-builder', () => {
             field: 'customFormInput1',
           }],
         },
+        customFormInput2: {
+          displayName: 'custom form input 2',
+          defaultDataSchema: {
+            'type': 'string',
+          },
+          defaultUiSchema: {
+            'ui:field': 'customFormInput2',
+          },
+          type: 'string',
+          cardBody: (props: CardBodyProps) => <div/>,
+          modalBody: (props: CardBodyProps) => <div/>,
+          matchIf: [{
+            types: ['null'],
+            field: 'customFormInput2',
+          }],
+        },
+
       },
       tooltipDescriptions: {
         add: 'add text',

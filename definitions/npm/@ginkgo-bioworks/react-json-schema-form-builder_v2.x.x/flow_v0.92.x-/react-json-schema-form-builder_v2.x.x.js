@@ -1,6 +1,6 @@
 declare module '@ginkgo-bioworks/react-json-schema-form-builder' {
   declare type Parameters = {|
-    [string]: string | number | boolean | Array<string | number>,
+    [string]: any,
     name: string,
     path: string,
     definitionData: { [string]: any, ... },
@@ -21,6 +21,7 @@ declare module '@ginkgo-bioworks/react-json-schema-form-builder' {
     | 'integer'
     | 'array'
     | 'object'
+    | 'null';
 
   declare type MatchType = {|
     types: Array<DataType>,
