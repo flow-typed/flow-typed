@@ -749,7 +749,7 @@ declare module ramda {
 
   declare var find: Find;
 
-  declare function findLast<V>(fn: UnaryPredicateFn<V>): (xs: $ReadOnlyArray<V>) => ?V | O;
+  declare function findLast<V>(fn: UnaryPredicateFn<V>): (xs: $ReadOnlyArray<V>) => ?V;
   declare function findLast<V>(fn: UnaryPredicateFn<V>, xs: $ReadOnlyArray<V>): ?V;
 
   declare function findIndex<K, V, T: Array<V> | { [key: K]: V, ... }>(
@@ -836,7 +836,7 @@ declare module ramda {
   >(key: number, list: $ReadOnlyArray<V>): Array<$ElementType<V, number>>;
   declare function pluck<
     T,
-    V: $ReadOnlyArray<V>,
+    V: $ReadOnlyArray<T>,
   >(key: number): (list: $ReadOnlyArray<V>) => Array<$ElementType<V, number>>;
 
   declare var range: CurriedFunction2<number, number, Array<number>>;
@@ -1994,7 +1994,7 @@ declare module ramda {
   ): Fn;
   // End generated complement declaration.
 
-  declare function cond<A>(
+  declare function cond<A, B>(
     fns: $ReadOnlyArray<[
       (...r: Array<A>) => boolean,
       (...r: Array<A>) => B
