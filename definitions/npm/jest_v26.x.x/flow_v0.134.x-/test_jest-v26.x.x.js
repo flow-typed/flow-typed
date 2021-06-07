@@ -608,6 +608,16 @@ expect(wrapper).toHaveDisplayName(true);
   expect(element).toHaveDisplayValue('test');
   expect(element).toHaveDisplayValue(['foo', 'bar']);
   expect(element).toBeChecked();
+  expect(element).toBeEmptyDOMElement();
+  expect(element).toBePartiallyChecked();
+
+  // $FlowExpectedError[incompatible-call]: expected description should be present
+  expect(element).toHaveDescription();
+  expect(element).toHaveDescription('foo');
+  expect(element).toHaveDescription(/[0-9]/);
+  // $FlowExpectedError[incompatible-call]
+  expect(element).toHaveDescription(true);
+
 }
 
 {

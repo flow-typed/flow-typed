@@ -256,6 +256,9 @@ type DomTestingLibraryType = {
   // 5.x
   toHaveDisplayValue(value: string | string[]): void,
   toBeChecked(): void,
+  toBeEmptyDOMElement(): void,
+  toBePartiallyChecked(): void,
+  toHaveDescription(text: string | RegExp): void,
   ...
 };
 
