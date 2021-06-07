@@ -221,7 +221,7 @@ test('name', (done) => {
   done.fail();
   done(new Error('fail'));
   // $FlowExpectedError[incompatible-call]
-  done("foo");
+  done('foo');
 });
 
 test.todo('');
@@ -331,7 +331,6 @@ jest.spyOn({}, 'foo', 'get');
 
 jest.setTimeout(1000);
 
-jest.runTimersToTime(3000);
 jest.advanceTimersByTime(3000);
 
 expect.addSnapshotSerializer({
