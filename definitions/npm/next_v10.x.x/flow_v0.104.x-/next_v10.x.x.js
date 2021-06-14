@@ -146,6 +146,7 @@ declare module "next/router" {
   }) => boolean;
 
   declare export type Router = {
+    +route: string,
     +pathname: string,
     +query: Object,
     +asPath: string,
