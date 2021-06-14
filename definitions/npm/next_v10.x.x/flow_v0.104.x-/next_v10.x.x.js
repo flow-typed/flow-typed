@@ -146,10 +146,16 @@ declare module "next/router" {
   }) => boolean;
 
   declare export type Router = {
-    +route: string,
     +pathname: string,
-    +asPath: string,
     +query: Object,
+    +asPath: string,
+    +isFallback: boolean,
+    +basePath: string,
+    +locale: string,
+    +locales: string[],
+    +defaultLocale: string,
+    +isReady: boolean,
+    +isPreview: boolean,
     events: RouterEvents,
     push(
       url: string | URLObject,
