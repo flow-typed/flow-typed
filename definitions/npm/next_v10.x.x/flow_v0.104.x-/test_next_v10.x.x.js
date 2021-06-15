@@ -103,6 +103,7 @@ Router.prefetch("/dynamic");
 
 Router.beforePopState(({ url, as, options }) => true);
 
+const r: string = Router.route;
 const p: string = Router.pathname;
 const q: { ... } = Router.query;
 const a: string = Router.asPath;
@@ -146,7 +147,18 @@ export class TestApp extends App {
 }
 
 export function TestFunctionComponent(): React$Node {
-  const { pathname, locale }: { +pathname: string, +locale: string, +isReady: boolean, ... } = useRouter();
+  const {
+    route,
+    pathname,
+    locale,
+    isReady,
+  }: {
+    +route: string,
+    +pathname: string,
+    +locale: string,
+    +isReady: boolean,
+    ...
+  } = useRouter();
   return <div />;
 }
 
