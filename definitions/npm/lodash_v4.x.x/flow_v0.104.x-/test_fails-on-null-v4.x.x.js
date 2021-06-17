@@ -24,47 +24,47 @@ import unary from "lodash/unary";
 // These tests are generated with modified script from this issue:
 // https://github.com/flowtype/flow-typed/issues/1639
 
-//$FlowExpectedError
+//$FlowExpectedError[incompatible-call]
 after(null, null);
-//$FlowExpectedError
+//$FlowExpectedError[extra-arg]
 ary(null, null, null);
-//$FlowExpectedError
+//$FlowExpectedError[incompatible-call]
 before(null, null);
-//$FlowExpectedError
+//$FlowExpectedError[incompatible-call]
 bind();
-//$FlowExpectedError
+//$FlowExpectedError[incompatible-call]
 curry(null, null, null);
-//$FlowExpectedError
+//$FlowExpectedError[extra-arg]
 curryRight(null, null, null);
-//$FlowExpectedError
+//$FlowExpectedError[incompatible-call]
 debounce(null, null, null);
-//$FlowExpectedError
+//$FlowExpectedError[incompatible-call]
 defer();
-//$FlowExpectedError
+//$FlowExpectedError[incompatible-call]
 delay();
-//$FlowExpectedError
+//$FlowExpectedError[incompatible-call]
 flip(null);
-//$FlowExpectedError
+//$FlowExpectedError[incompatible-call]
 memoize(null, null);
-//$FlowExpectedError
+//$FlowExpectedError[incompatible-call]
 negate(null);
-//$FlowExpectedError
+//$FlowExpectedError[incompatible-call]
 once(null);
-//$FlowExpectedError
+//$FlowExpectedError[incompatible-call]
 partial(null, null);
-//$FlowExpectedError
+//$FlowExpectedError[incompatible-call]
 partialRight(null, null);
-//$FlowExpectedError
+//$FlowExpectedError[incompatible-call]
 rearg(null, null);
-//$FlowExpectedError
+//$FlowExpectedError[incompatible-call]
 rest(null, null);
-//$FlowExpectedError
+//$FlowExpectedError[extra-arg]
 spread(null, null);
-//$FlowExpectedError
+//$FlowExpectedError[incompatible-call]
 tap(null, null);
-//$FlowExpectedError
+//$FlowExpectedError[incompatible-call]
 throttle(null, null, null);
-//$FlowExpectedError
+//$FlowExpectedError[incompatible-call]
 thru(null, null);
-//$FlowExpectedError
+//$FlowExpectedError[incompatible-call]
 unary(null);
