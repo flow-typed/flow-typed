@@ -254,26 +254,28 @@ declare module "lodash" {
       start?: ?number,
       end?: ?number
     ): Array<T | U>;
-    findIndex<T>(
-      array: $ReadOnlyArray<T>,
-      predicate?: ?Predicate<T>,
-      fromIndex?: ?number
-    ): number;
-    findIndex<T>(
-      array: void | null,
-      predicate?: ?Predicate<T>,
-      fromIndex?: ?number
-    ): -1;
-    findLastIndex<T>(
-      array: $ReadOnlyArray<T>,
-      predicate?: ?Predicate<T>,
-      fromIndex?: ?number
-    ): number;
-    findLastIndex<T>(
-      array: void | null,
-      predicate?: ?Predicate<T>,
-      fromIndex?: ?number
-    ): -1;
+    findIndex:
+      & (<T>(
+        array: $ReadOnlyArray<T>,
+        predicate?: ?Predicate<T>,
+        fromIndex?: ?number
+      ) => number)
+      & (<T>(
+        array: void | null,
+        predicate?: ?Predicate<T>,
+        fromIndex?: ?number
+      ) => -1);
+    findLastIndex:
+      & (<T>(
+        array: $ReadOnlyArray<T>,
+        predicate?: ?Predicate<T>,
+        fromIndex?: ?number
+      ) => number)
+      & (<T>(
+        array: void | null,
+        predicate?: ?Predicate<T>,
+        fromIndex?: ?number
+      ) => -1);
     // alias of _.head
     first<T>(array: ?$ReadOnlyArray<T>): T;
     flatten<T, X>(array?: ?$ReadOnlyArray<$ReadOnlyArray<T> | X>): Array<T | X>;
@@ -281,63 +283,69 @@ declare module "lodash" {
     flattenDepth(array?: ?$ReadOnlyArray<any>, depth?: ?number): Array<any>;
     fromPairs<A, B>(pairs?: ?$ReadOnlyArray<[A, B]>): {| [key: A]: B |};
     head<T>(array: ?$ReadOnlyArray<T>): T;
-    indexOf<T>(array: $ReadOnlyArray<T>, value: T, fromIndex?: number): number;
-    indexOf<T>(array: void | null, value?: ?T, fromIndex?: ?number): -1;
+    indexOf:
+      & (<T>(array: $ReadOnlyArray<T>, value: T, fromIndex?: number) => number)
+      & (<T>(array: void | null, value?: ?T, fromIndex?: ?number) => -1);
     initial<T>(array: ?$ReadOnlyArray<T>): Array<T>;
     intersection<T>(...arrays?: Array<$ReadOnlyArray<T>>): Array<T>;
     //Workaround until (...parameter: T, parameter2: U) works
-    intersectionBy<T>(
-      a1?: ?$ReadOnlyArray<T>,
-      iteratee?: ?ValueOnlyIteratee<T>
-    ): Array<T>;
-    intersectionBy<T>(
-      a1?: ?$ReadOnlyArray<T>,
-      a2?: ?$ReadOnlyArray<T>,
-      iteratee?: ?ValueOnlyIteratee<T>
-    ): Array<T>;
-    intersectionBy<T>(
-      a1?: ?$ReadOnlyArray<T>,
-      a2?: ?$ReadOnlyArray<T>,
-      a3?: ?$ReadOnlyArray<T>,
-      iteratee?: ?ValueOnlyIteratee<T>
-    ): Array<T>;
-    intersectionBy<T>(
-      a1?: ?$ReadOnlyArray<T>,
-      a2?: ?$ReadOnlyArray<T>,
-      a3?: ?$ReadOnlyArray<T>,
-      a4?: ?$ReadOnlyArray<T>,
-      iteratee?: ?ValueOnlyIteratee<T>
-    ): Array<T>;
+    intersectionBy:
+      & (<T>(
+        a1?: ?$ReadOnlyArray<T>,
+        iteratee?: ?ValueOnlyIteratee<T>
+      ) => Array<T>)
+      & (<T>(
+        a1?: ?$ReadOnlyArray<T>,
+        a2?: ?$ReadOnlyArray<T>,
+        iteratee?: ?ValueOnlyIteratee<T>
+      ) => Array<T>)
+      & (<T>(
+        a1?: ?$ReadOnlyArray<T>,
+        a2?: ?$ReadOnlyArray<T>,
+        a3?: ?$ReadOnlyArray<T>,
+        iteratee?: ?ValueOnlyIteratee<T>
+      ) => Array<T>)
+      & (<T>(
+        a1?: ?$ReadOnlyArray<T>,
+        a2?: ?$ReadOnlyArray<T>,
+        a3?: ?$ReadOnlyArray<T>,
+        a4?: ?$ReadOnlyArray<T>,
+        iteratee?: ?ValueOnlyIteratee<T>
+      ) => Array<T>);
     //Workaround until (...parameter: T, parameter2: U) works
-    intersectionWith<T>(
-      a1?: ?$ReadOnlyArray<T>,
-      comparator?: ?Comparator<T>
-    ): Array<T>;
-    intersectionWith<T>(
-      a1?: ?$ReadOnlyArray<T>,
-      a2?: ?$ReadOnlyArray<T>,
-      comparator?: ?Comparator<T>
-    ): Array<T>;
-    intersectionWith<T>(
-      a1?: ?$ReadOnlyArray<T>,
-      a2?: ?$ReadOnlyArray<T>,
-      a3?: ?$ReadOnlyArray<T>,
-      comparator?: ?Comparator<T>
-    ): Array<T>;
-    intersectionWith<T>(
-      a1?: ?$ReadOnlyArray<T>,
-      a2?: ?$ReadOnlyArray<T>,
-      a3?: ?$ReadOnlyArray<T>,
-      a4?: ?$ReadOnlyArray<T>,
-      comparator?: ?Comparator<T>
-    ): Array<T>;
-    join<T>(array: $ReadOnlyArray<T>, separator?: ?string): string;
-    join<T>(array: void | null, separator?: ?string): "";
+    intersectionWith:
+      & (<T>(
+        a1?: ?$ReadOnlyArray<T>,
+        comparator?: ?Comparator<T>
+      ) => Array<T>)
+      & (<T>(
+        a1?: ?$ReadOnlyArray<T>,
+        a2?: ?$ReadOnlyArray<T>,
+        comparator?: ?Comparator<T>
+      ) => Array<T>)
+      & (<T>(
+        a1?: ?$ReadOnlyArray<T>,
+        a2?: ?$ReadOnlyArray<T>,
+        a3?: ?$ReadOnlyArray<T>,
+        comparator?: ?Comparator<T>
+      ) => Array<T>)
+      & (<T>(
+        a1?: ?$ReadOnlyArray<T>,
+        a2?: ?$ReadOnlyArray<T>,
+        a3?: ?$ReadOnlyArray<T>,
+        a4?: ?$ReadOnlyArray<T>,
+        comparator?: ?Comparator<T>
+      ) => Array<T>);
+    join:
+      & (<T>(array: $ReadOnlyArray<T>, separator?: ?string) => string)
+      & (<T>(array: void | null, separator?: ?string) => "");
     last<T>(array: ?$ReadOnlyArray<T>): T;
-    lastIndexOf<T>(array: $ReadOnlyArray<T>, value?: ?T, fromIndex?: ?number): number;
-    lastIndexOf<T>(array: void | null, value?: ?T, fromIndex?: ?number): -1;
-    nth<T>(array: $ReadOnlyArray<T>, n?: ?number): T;
-    nth(array: void | null, n?: ?number): void;
+    lastIndexOf:
+      & (<T>(array: $ReadOnlyArray<T>, value?: ?T, fromIndex?: ?number) => number)
+      & (<T>(array: void | null, value?: ?T, fromIndex?: ?number) => -1);
+    nth:
+      & (<T>(array: $ReadOnlyArray<T>, n?: ?number) => T)
+      & ((array: void | null, n?: ?number) => void);
     pull<T>(array: Array<T>, ...values?: $ReadOnlyArray<?T>): Array<T>;
     pull<T: void | null>(array: T, ...values?: $ReadOnlyArray<?any>): T;
     pullAll<T>(array: Array<T>, values?: ?$ReadOnlyArray<T>): Array<T>;
@@ -720,31 +728,32 @@ declare module "lodash" {
       iteratee?: (accumulator: U, value: any, key: string, object: T) => U,
       accumulator?: U
     ): U;
-    reduceRight<T, U>(
-      array: void | null,
-      iteratee?: ?(
-        accumulator: U,
-        value: T,
-        index: any,
-        array: ?Array<T>
-      ) => U,
-      accumulator?: U
-    ): U;
-    reduceRight<T, U>(
-      array: $ReadOnlyArray<T>,
-      iteratee?: ?(
-        accumulator: U,
-        value: T,
-        index: number,
-        array: ?Array<T>
-      ) => U,
-      accumulator?: ?U
-    ): U;
-    reduceRight<A, T: ReadOnlyIndexerObject<A>, U>(
-      object: T,
-      iteratee?: ?(accumulator: U, value: any, key: string, object: T) => U,
-      accumulator?: ?U
-    ): U;
+    reduceRight:
+      & (<T, U>(
+        array: void | null,
+        iteratee?: ?(
+          accumulator: U,
+          value: T,
+          index: any,
+          array: ?Array<T>
+        ) => U,
+        accumulator?: U
+      ) => U)
+      & (<T, U>(
+        array: $ReadOnlyArray<T>,
+        iteratee?: ?(
+          accumulator: U,
+          value: T,
+          index: number,
+          array: ?Array<T>
+        ) => U,
+        accumulator?: ?U
+      ) => U)
+      & (<A, T: ReadOnlyIndexerObject<A>, U>(
+        object: T,
+        iteratee?: ?(accumulator: U, value: any, key: string, object: T) => U,
+        accumulator?: ?U
+      ) => U);
     reject<T>(array?: ?$ReadOnlyArray<T>, predicate?: ?Predicate<T>): Array<T>;
     reject<A, T: ReadOnlyIndexerObject<A>>(
       object?: ?T,
@@ -754,12 +763,13 @@ declare module "lodash" {
     sampleSize<T>(collection?: ?Collection<T>, n?: ?number): Array<T>;
     shuffle<T>(array?: ?Collection<T>): Array<T>;
     size(collection?: ?Collection<any> | string): number;
-    some<T>(array: void | null, predicate?: ?Predicate<T>): false;
-    some<T>(array: ?$ReadOnlyArray<T>, predicate?: Predicate<T>): boolean;
-    some<A, T: ReadOnlyIndexerObject<A>>(
-      object?: ?T,
-      predicate?: OPredicate<A, T>
-    ): boolean;
+    some:
+      & (<T>(array: void | null, predicate?: ?Predicate<T>) => false)
+      & (<T>(array: ?$ReadOnlyArray<T>, predicate?: Predicate<T>) => boolean)
+      & (<A, T: ReadOnlyIndexerObject<A>>(
+        object?: ?T,
+        predicate?: OPredicate<A, T>
+      ) => boolean);
     sortBy<T>(
       array: ?$ReadOnlyArray<T>,
       ...iteratees?: $ReadOnlyArray<Iteratee<T>>
@@ -879,9 +889,9 @@ declare module "lodash" {
     isFunction(value: any): false;
     isInteger(value: number): boolean;
     isInteger(value: any): false;
-    isLength
-      & ((value: void | null) => false);
-      & (isLength(value: any) => boolean);
+    isLength:
+      & ((value: void | null) => false)
+      & ((value: any) => boolean);
     isMap:
       & ((value: Map<any, any>) => true)
       & ((value: any) => false);
@@ -899,7 +909,7 @@ declare module "lodash" {
     ): boolean;
     isNaN:
       & ((value: number) => boolean)
-      & (isNaN(value: any) => false);
+      & ((value: any) => false);
     isNative:
       & ((value: number | string | void | null | Object) => false)
       & ((value: any) => boolean);
@@ -1464,8 +1474,9 @@ declare module "lodash" {
     stubObject(): {...};
     stubString(): "";
     stubTrue(): true;
-    times(n?: ?number, ...rest?: $ReadOnlyArray<void | null>): Array<number>;
-    times<T>(n: number, iteratee: (i: number) => T): Array<T>;
+    times:
+      & ((n?: ?number, ...rest?: $ReadOnlyArray<void | null>) => Array<number>)
+      & (<T>(n: number, iteratee: (i: number) => T) => Array<T>);
     toPath(value: any): Array<string>;
     uniqueId(prefix?: ?string): string;
 
@@ -2318,19 +2329,20 @@ declare module "lodash/fp" {
       accumulator: U,
       collection: Collection<T>
     ): U;
-    reduceRight<T, U>(
-      iteratee: (value: T, accumulator: U) => U
-    ): ((accumulator: U) => (collection: Collection<T>) => U) &
-      ((accumulator: U, collection: Collection<T>) => U);
-    reduceRight<T, U>(
-      iteratee: (value: T, accumulator: U) => U,
-      accumulator: U
-    ): (collection: Collection<T>) => U;
-    reduceRight<T, U>(
-      iteratee: (value: T, accumulator: U) => U,
-      accumulator: U,
-      collection: Collection<T>
-    ): U;
+    reduceRight:
+      & (<T, U>(
+        iteratee: (value: T, accumulator: U) => U
+      ) => ((accumulator: U) => (collection: Collection<T>) => U) &
+         ((accumulator: U, collection: Collection<T>) => U))
+      & (<T, U>(
+        iteratee: (value: T, accumulator: U) => U,
+        accumulator: U
+      ) => (collection: Collection<T>) => U)
+      & (<T, U>(
+        iteratee: (value: T, accumulator: U) => U,
+        accumulator: U,
+        collection: Collection<T>
+      ) => U);
     reject<T>(
       predicate: Predicate<T> | OPredicate<T>
     ): (collection: Collection<T>) => Array<T>;
@@ -2345,13 +2357,14 @@ declare module "lodash/fp" {
     sampleSize<T>(n: number, collection: Collection<T>): Array<T>;
     shuffle<T>(collection: Collection<T>): Array<T>;
     size(collection: $ReadOnlyArray<any> | Object | string): number;
-    some<T>(
-      predicate: Predicate<T> | OPredicate<T>
-    ): (collection: Collection<T>) => boolean;
-    some<T>(
-      predicate: Predicate<T> | OPredicate<T>,
-      collection: Collection<T>
-    ): boolean;
+    some:
+      & (<T>(
+        predicate: Predicate<T> | OPredicate<T>
+      ) => (collection: Collection<T>) => boolean)
+      & (<T>(
+        predicate: Predicate<T> | OPredicate<T>,
+        collection: Collection<T>
+      ) => boolean);
     any<T>(
       predicate: Predicate<T> | OPredicate<T>
     ): (collection: Collection<T>) => boolean;
@@ -3282,8 +3295,9 @@ declare module "lodash/fp" {
     stubString(): "";
     stubTrue(): true;
     T(): true;
-    times<T>(iteratee: (i: number) => T): (n: number) => Array<T>;
-    times<T>(iteratee: (i: number) => T, n: number): Array<T>;
+    times:
+      & (<T>(iteratee: (i: number) => T) => ((n: number) => Array<T>))
+      & (<T>(iteratee: (i: number) => T, n: number) => Array<T>);
     toPath(value: any): Array<string>;
     uniqueId(prefix: string): string;
 
