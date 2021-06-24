@@ -831,8 +831,9 @@ declare module "lodash" {
     before(n: number, fn: Function): Function;
     bind<F:(...$ReadOnlyArray<any>) => any>(func: F, thisArg: any, ...partials: $ReadOnlyArray<any>): F;
     bindKey(obj?: ?Object, key?: ?string, ...partials?: $ReadOnlyArray<?any>): Function;
-    curry: Curry;
-    curry(func: Function, arity?: number): Function;
+    curry:
+      & Curry
+      & ((func: Function, arity?: number) => Function);
     curryRight(func: Function, arity?: number): Function;
     debounce<F: (...$ReadOnlyArray<any>) => any>(
       func: F,
@@ -845,13 +846,16 @@ declare module "lodash" {
     memoize<A, R>(func: (...A) => R, resolver?: (...A) => any): (...A) => R;
     negate<A, R>(predicate: (...A) => R): (...A) => boolean;
     once<F: (...$ReadOnlyArray<any>) => any>(func: F): F;
-    overArgs(func?: ?Function, ...transforms?: $ReadOnlyArray<Function>): Function;
-    overArgs(func?: ?Function, transforms?: ?$ReadOnlyArray<Function>): Function;
+    overArgs:
+      & ((func?: ?Function, ...transforms?: $ReadOnlyArray<Function>) => Function)
+      & ((func?: ?Function, transforms?: ?$ReadOnlyArray<Function>) => Function);
     partial<R>(func: (...$ReadOnlyArray<any>) => R, ...partials: $ReadOnlyArray<any>): (...Array<any>) => R;
-    partialRight<R>(func: (...$ReadOnlyArray<any>) => R, ...partials: $ReadOnlyArray<any>): (...Array<any>) => R;
-    partialRight<R>(func: (...$ReadOnlyArray<any>) => R, partials: $ReadOnlyArray<any>): (...Array<any>) => R;
-    rearg(func: Function, ...indexes: $ReadOnlyArray<number>): Function;
-    rearg(func: Function, indexes: $ReadOnlyArray<number>): Function;
+    partialRight:
+      & (<R>(func: (...$ReadOnlyArray<any>) => R, ...partials: $ReadOnlyArray<any>) => ((...Array<any>) => R))
+      & (<R>(func: (...$ReadOnlyArray<any>) => R, partials: $ReadOnlyArray<any>) => ((...Array<any>) => R));
+    rearg:
+      & ((func: Function, ...indexes: $ReadOnlyArray<number>) => Function)
+      & ((func: Function, indexes: $ReadOnlyArray<number>) => Function);
     rest(func: Function, start?: number): Function;
     spread(func: Function): Function;
     throttle<F: (...$ReadOnlyArray<any>) => any>(
@@ -863,9 +867,10 @@ declare module "lodash" {
     wrap(value?: any, wrapper?: ?Function): Function;
 
     // Lang
-    castArray(): Array<any>;
-    castArray<T: void | null | number | string | {...}>(value: T): Array<T>;
-    castArray<T: Array<any>>(value: T): T;
+    castArray:
+      & (() => Array<any>)
+      & (<T: void | null | number | string | {...}>(value: T) => Array<T>)
+      & (<T: Array<any>>(value: T) => T);
     clone<T>(value: T): T;
     cloneDeep<T>(value: T): T;
     cloneDeepWith<T, U>(
@@ -883,26 +888,36 @@ declare module "lodash" {
     eq(value: any, other: any): boolean;
     gt(value: any, other: any): boolean;
     gte(value: any, other: any): boolean;
-    isArguments(value: void | null): false;
-    isArguments(value: any): boolean;
-    isArray(value: $ReadOnlyArray<any>): true;
-    isArray(value: any): false;
-    isArrayBuffer(value: ArrayBuffer): true;
-    isArrayBuffer(value: any): false;
-    isArrayLike(value: $ReadOnlyArray<any> | string | { length: number, ... }): true;
-    isArrayLike(value: any): false;
-    isArrayLikeObject(value: { length: number, ... } | $ReadOnlyArray<any>): true;
-    isArrayLikeObject(value: any): false;
-    isBoolean(value: boolean): true;
-    isBoolean(value: any): false;
-    isBuffer(value: void | null): false;
-    isBuffer(value: any): boolean;
-    isDate(value: Date): true;
-    isDate(value: any): false;
-    isElement(value: Element): true;
-    isElement(value: any): false;
-    isEmpty(value: void | null | "" | {...} | [] | number | boolean): true;
-    isEmpty(value: any): boolean;
+    isArguments:
+      & ((value: void | null) => false)
+      & ((value: any) => boolean);
+    isArray:
+      & ((value: $ReadOnlyArray<any>) => true)
+      & ((value: any) => false);
+    isArrayBuffer:
+      & ((value: ArrayBuffer) => true)
+      & ((value: any) => false);
+    isArrayLike:
+      & ((value: $ReadOnlyArray<any> | string | { length: number, ... }) => true)
+      & ((value: any) => false);
+    isArrayLikeObject:
+      & ((value: { length: number, ... } | $ReadOnlyArray<any>) => true)
+      & ((value: any) => false);
+    isBoolean:
+      & ((value: boolean) => true)
+      & ((value: any) => false);
+    isBuffer:
+      & ((value: void | null) => false)
+      & ((value: any) => boolean);
+    isDate:
+      & ((value: Date) => true)
+      & ((value: any) => false);
+    isElement:
+      & ((value: Element) => true)
+      & ((value: any) => false);
+    isEmpty:
+      & ((value: void | null | "" | {...} | [] | number | boolean) => true)
+      & ((value: any) => boolean);
     isEqual(value: any, other: any): boolean;
     isEqualWith<T, U>(
       value?: ?T,
@@ -916,14 +931,16 @@ declare module "lodash" {
         stack: any
       ) => boolean | void
     ): boolean;
-    isError(value: Error): true;
-    isError(value: any): false;
-    isFinite(value: number): boolean;
-    isFinite(value: any): false;
-    isFunction(value: Function): true;
-    isFunction(value: any): false;
-    isInteger(value: number): boolean;
-    isInteger(value: any): false;
+    isError:
+      & ((value: Error) => true)
+      & ((value: any) => false);
+    isFinite:
+      & ((value: number) => boolean)
+      & ((value: any) => false);
+    isFunction(value: any): boolean;
+    isInteger:
+      & ((value: number) => boolean)
+      & ((value: any) => false);
     isLength:
       & ((value: void | null) => false)
       & ((value: any) => boolean);
@@ -986,24 +1003,31 @@ declare module "lodash" {
     isWeakMap:
       & ((value: WeakMap<any, any>) => true)
       & ((value: any) => false);
-    isWeakSet(value: WeakSet<any>): true;
-    isWeakSet(value: any): false;
+    isWeakSet:
+      & ((value: WeakSet<any>) => true)
+      & ((value: any) => false);
     lt(value: any, other: any): boolean;
     lte(value: any, other: any): boolean;
     toArray(value: any): Array<any>;
-    toFinite(value: void | null): 0;
-    toFinite(value: any): number;
-    toInteger(value: void | null): 0;
-    toInteger(value: any): number;
-    toLength(value: void | null): 0;
-    toLength(value: any): number;
-    toNumber(value: void | null): 0;
-    toNumber(value: any): number;
+    toFinite:
+      & ((value: void | null) => 0)
+      & ((value: any) => number);
+    toInteger:
+      & ((value: void | null) => 0)
+      & ((value: any) => number);
+    toLength:
+      & ((value: void | null) => 0)
+      & ((value: any) => number);
+    toNumber:
+      & ((value: void | null) => 0)
+      & ((value: any) => number);
     toPlainObject(value: any): Object;
-    toSafeInteger(value: void | null): 0;
-    toSafeInteger(value: any): number;
-    toString(value: void | null): "";
-    toString(value: any): string;
+    toSafeInteger:
+      & ((value: void | null) => 0)
+      & ((value: any) => number);
+    toString:
+      & ((value: void | null) => "")
+      & ((value: any) => string);
 
     // Math
     add(augend: number, addend: number): number;
