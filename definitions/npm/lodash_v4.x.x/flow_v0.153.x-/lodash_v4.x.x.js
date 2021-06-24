@@ -1445,91 +1445,116 @@ declare module "lodash" {
     // TODO: _.prototype.*
 
     // String
-    camelCase(string: string): string;
-    camelCase(string: void | null): "";
-    capitalize(string: string): string;
-    capitalize(string: void | null): "";
-    deburr(string: string): string;
-    deburr(string: void | null): "";
-    endsWith(string: string, target?: string, position?: ?number): boolean;
-    endsWith(string: void | null, target?: ?string, position?: ?number): false;
-    escape(string: string): string;
-    escape(string: void | null): "";
-    escapeRegExp(string: string): string;
-    escapeRegExp(string: void | null): "";
-    kebabCase(string: string): string;
-    kebabCase(string: void | null): "";
-    lowerCase(string: string): string;
-    lowerCase(string: void | null): "";
-    lowerFirst(string: string): string;
-    lowerFirst(string: void | null): "";
+    camelCase:
+      & ((string: string) => string)
+      & ((string: void | null) => "");
+    capitalize:
+      & ((string: string) => string)
+      & ((string: void | null) => "");
+    deburr:
+      & ((string: string) => string)
+      & ((string: void | null) => "");
+    endsWith:
+      & ((string: string, target?: string, position?: ?number) => boolean)
+      & ((string: void | null, target?: ?string, position?: ?number) => false);
+    escape:
+      & ((string: string) => string)
+      & ((string: void | null) => "");
+    escapeRegExp:
+      & ((string: string) => string)
+      & ((string: void | null) => "");
+    kebabCase:
+      & ((string: string) => string)
+      & ((string: void | null) => "");
+    lowerCase:
+      & ((string: string) => string)
+      & ((string: void | null) => "");
+    lowerFirst:
+      & ((string: string) => string)
+      & ((string: void | null) => "");
     pad(string?: ?string, length?: ?number, chars?: ?string): string;
     padEnd(string?: ?string, length?: ?number, chars?: ?string): string;
     padStart(string?: ?string, length?: ?number, chars?: ?string): string;
     parseInt(string: string, radix?: ?number): number;
-    repeat(string: string, n?: ?number): string;
-    repeat(string: void | null, n?: ?number): "";
-    replace(
-      string: string,
-      pattern: RegExp | string,
-      replacement: ((string: string) => string) | string
-    ): string;
-    replace(
-      string: void | null,
-      pattern?: ?RegExp | ?string,
-      replacement: ?((string: string) => string) | ?string
-    ): "";
-    snakeCase(string: string): string;
-    snakeCase(string: void | null): "";
+    repeat:
+      & ((string: string, n?: ?number) => string)
+      & ((string: void | null, n?: ?number) => "");
+    replace:
+      & ((
+        string: string,
+        pattern: RegExp | string,
+        replacement: ((string: string) => string) | string
+      ) => string)
+      & ((
+        string: void | null,
+        pattern?: ?RegExp | ?string,
+        replacement: ?((string: string) => string) | ?string
+      ) => "");
+    snakeCase:
+      & ((string: string) => string)
+      & ((string: void | null) => "");
     split(
       string?: ?string,
       separator?: ?RegExp | ?string,
       limit?: ?number
     ): Array<string>;
-    startCase(string: string): string;
-    startCase(string: void | null): "";
-    startsWith(string: string, target?: string, position?: number): boolean;
-    startsWith(
-      string: void | null,
-      target?: ?string,
-      position?: ?number
-    ): false;
+    startCase:
+      & ((string: string) => string)
+      & ((string: void | null) => "");
+    startsWith:
+      & ((string: string, target?: string, position?: number) => boolean)
+      & ((
+        string: void | null,
+        target?: ?string,
+        position?: ?number
+      ) => false);
     template(string?: ?string, options?: ?TemplateSettings): Function;
-    toLower(string: string): string;
-    toLower(string: void | null): "";
-    toUpper(string: string): string;
-    toUpper(string: void | null): "";
-    trim(string: string, chars?: string): string;
-    trim(string: void | null, chars?: ?string): "";
-    trimEnd(string: string, chars?: ?string): string;
-    trimEnd(string: void | null, chars?: ?string): "";
-    trimStart(string: string, chars?: ?string): string;
-    trimStart(string: void | null, chars?: ?string): "";
-    truncate(string: string, options?: TruncateOptions): string;
-    truncate(string: void | null, options?: ?TruncateOptions): "";
-    unescape(string: string): string;
-    unescape(string: void | null): "";
-    upperCase(string: string): string;
-    upperCase(string: void | null): "";
-    upperFirst(string: string): string;
-    upperFirst(string: void | null): "";
+    toLower:
+      & ((string: string) => string)
+      & ((string: void | null) => "");
+    toUpper:
+      & ((string: string) => string)
+      & ((string: void | null) => "");
+    trim:
+      & ((string: string, chars?: string) => string)
+      & ((string: void | null, chars?: ?string) => "");
+    trimEnd:
+      & ((string: string, chars?: ?string) => string)
+      & ((string: void | null, chars?: ?string) => "");
+    trimStart:
+      & ((string: string, chars?: ?string) => string)
+      & ((string: void | null, chars?: ?string) => "");
+    truncate:
+      & ((string: string, options?: TruncateOptions) => string)
+      & ((string: void | null, options?: ?TruncateOptions) => "");
+    unescape:
+      & ((string: string) => string)
+      & ((string: void | null) => "");
+    upperCase:
+      & ((string: string) => string)
+      & ((string: void | null) => "");
+    upperFirst:
+      & ((string: string) => string)
+      & ((string: void | null) => "");
     words(string?: ?string, pattern?: ?RegExp | ?string): Array<string>;
 
     // Util
     attempt(func: Function, ...args: $ReadOnlyArray<any>): any;
-    bindAll(object: Object, methodNames?: ?$ReadOnlyArray<string>): Object;
-    bindAll<T: void | null>(object: T, methodNames?: ?$ReadOnlyArray<string>): T;
-    bindAll(object: Object, ...methodNames: $ReadOnlyArray<string>): Object;
+    bindAll:
+      & ((object: Object, methodNames?: ?$ReadOnlyArray<string>) => Object)
+      & (<T: void | null>(object: T, methodNames?: ?$ReadOnlyArray<string>) => T)
+      & ((object: Object, ...methodNames: $ReadOnlyArray<string>) => Object);
     cond(pairs?: ?NestedArray<Function>): Function;
     conforms(source?: ?Object): Function;
     constant<T>(value: T): () => T;
-    defaultTo<T1: void | null, T2>(value: T1, defaultValue: T2): T2;
-    defaultTo<T1: string | boolean, T2>(
-      value: T1,
-      defaultValue: T2
-    ): T1;
-    // NaN is a number instead of its own type, otherwise it would behave like null/void
-    defaultTo<T1: number, T2>(value: T1, defaultValue: T2): T1 | T2;
+    defaultTo:
+      & (<T1: void | null, T2>(value: T1, defaultValue: T2) => T2)
+      & (<T1: string | boolean, T2>(
+        value: T1,
+        defaultValue: T2
+      ) => T1)
+      // NaN is a number instead of its own type, otherwise it would behave like null/void
+      & (<T1: number, T2>(value: T1, defaultValue: T2) => T1 | T2);
     flow: $ComposeReverse & ((funcs: $ReadOnlyArray<Function>) => Function);
     flowRight: $Compose & ((funcs: $ReadOnlyArray<Function>) => Function);
     identity<T>(value: T): T;
@@ -1546,18 +1571,23 @@ declare module "lodash" {
     noConflict(): Lodash;
     noop(...args: $ReadOnlyArray<mixed>): void;
     nthArg(n?: ?number): Function;
-    over(...iteratees: $ReadOnlyArray<Function>): Function;
-    over(iteratees: $ReadOnlyArray<Function>): Function;
-    overEvery(...predicates: $ReadOnlyArray<Function>): Function;
-    overEvery(predicates: $ReadOnlyArray<Function>): Function;
-    overSome(...predicates: $ReadOnlyArray<Function>): Function;
-    overSome(predicates: $ReadOnlyArray<Function>): Function;
+    over:
+      & ((...iteratees: $ReadOnlyArray<Function>) => Function)
+      & ((iteratees: $ReadOnlyArray<Function>) => Function);
+    overEvery:
+      & ((...predicates: $ReadOnlyArray<Function>) => Function)
+      & ((predicates: $ReadOnlyArray<Function>) => Function);
+    overSome:
+      & ((...predicates: $ReadOnlyArray<Function>) => Function)
+      & ((predicates: $ReadOnlyArray<Function>) => Function);
     property(path?: ?Path): Function;
     propertyOf(object?: ?Object): Function;
-    range(start: number, end: number, step?: number): Array<number>;
-    range(end: number, step?: number): Array<number>;
-    rangeRight(start?: ?number, end?: ?number, step?: ?number): Array<number>;
-    rangeRight(end?: ?number, step?: ?number): Array<number>;
+    range:
+      & ((start: number, end: number, step?: number) => Array<number>)
+      & ((end: number, step?: number) => Array<number>);
+    rangeRight:
+      & ((start?: ?number, end?: ?number, step?: ?number) => Array<number>)
+      & (end?: ?number, step?: ?number) => Array<number>;
     runInContext(context?: ?Object): Function;
 
     stubArray(): Array<*>;
