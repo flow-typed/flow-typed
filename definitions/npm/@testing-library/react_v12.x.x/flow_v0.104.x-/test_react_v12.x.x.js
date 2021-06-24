@@ -7,8 +7,6 @@ import {
   fireEvent,
   cleanup,
   waitFor,
-  waitForDomChange,
-  waitForElement,
   waitForElementToBeRemoved,
   within,
   screen,
