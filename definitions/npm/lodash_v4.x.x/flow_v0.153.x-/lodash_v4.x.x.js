@@ -1047,125 +1047,131 @@ declare module "lodash" {
     sumBy<T>(array: $ReadOnlyArray<T>, iteratee?: Iteratee<T>): number;
 
     // number
-    clamp(number?: number, lower?: ?number, upper?: ?number): number;
-    clamp(number: ?number, lower?: ?number, upper?: ?number): 0;
+    clamp:
+      & ((number?: number, lower?: ?number, upper?: ?number) => number)
+      & ((number: ?number, lower?: ?number, upper?: ?number) => 0);
     inRange(number: number, start?: number, end: number): boolean;
     random(lower?: number, upper?: number, floating?: boolean): number;
 
     // Object
     assign(object?: ?Object, ...sources?: $ReadOnlyArray<?Object>): Object;
-    assignIn(): {...};
-    assignIn<A, B>(a: A, b: B): A & B;
-    assignIn<A, B, C>(a: A, b: B, c: C): A & B & C;
-    assignIn<A, B, C, D>(a: A, b: B, c: C, d: D): A & B & C & D;
-    assignIn<A, B, C, D, E>(a: A, b: B, c: C, d: D, e: E): A & B & C & D & E;
-    assignInWith(): {...};
-    assignInWith<T: Object, A: Object>(
-      object: T,
-      s1: A,
-      customizer?: (
-        objValue: any,
-        srcValue: any,
-        key: string,
+    assignIn:
+      & (() => {...})
+      & (<A, B>(a: A, b: B) => A & B)
+      & (<A, B, C>(a: A, b: B, c: C) => A & B & C)
+      & (<A, B, C, D>(a: A, b: B, c: C, d: D) => A & B & C & D)
+      & (<A, B, C, D, E>(a: A, b: B, c: C, d: D, e: E) => A & B & C & D & E);
+    assignInWith:
+      & (() => {...})
+      & (<T: Object, A: Object>(
         object: T,
-        source: A
-      ) => any | void
-    ): Object;
-    assignInWith<T: Object, A: Object, B: Object>(
-      object: T,
-      s1: A,
-      s2: B,
-      customizer?: (
-        objValue: any,
-        srcValue: any,
-        key: string,
+        s1: A,
+        customizer?: (
+          objValue: any,
+          srcValue: any,
+          key: string,
+          object: T,
+          source: A
+        ) => any | void
+      ) => Object)
+      & (<T: Object, A: Object, B: Object>(
         object: T,
-        source: A | B
-      ) => any | void
-    ): Object;
-    assignInWith<T: Object, A: Object, B: Object, C: Object>(
-      object: T,
-      s1: A,
-      s2: B,
-      s3: C,
-      customizer?: (
-        objValue: any,
-        srcValue: any,
-        key: string,
+        s1: A,
+        s2: B,
+        customizer?: (
+          objValue: any,
+          srcValue: any,
+          key: string,
+          object: T,
+          source: A | B
+        ) => any | void
+      ) => Object)
+      & (<T: Object, A: Object, B: Object, C: Object>(
         object: T,
-        source: A | B | C
-      ) => any | void
-    ): Object;
-    assignInWith<T: Object, A: Object, B: Object, C: Object, D: Object>(
-      object: T,
-      s1: A,
-      s2: B,
-      s3: C,
-      s4: D,
-      customizer?: (
-        objValue: any,
-        srcValue: any,
-        key: string,
+        s1: A,
+        s2: B,
+        s3: C,
+        customizer?: (
+          objValue: any,
+          srcValue: any,
+          key: string,
+          object: T,
+          source: A | B | C
+        ) => any | void
+      ) => Object)
+      & (<T: Object, A: Object, B: Object, C: Object, D: Object>(
         object: T,
-        source: A | B | C | D
-      ) => any | void
-    ): Object;
-    assignWith(): {...};
-    assignWith<T: Object, A: Object>(
-      object: T,
-      s1: A,
-      customizer?: (
-        objValue: any,
-        srcValue: any,
-        key: string,
+        s1: A,
+        s2: B,
+        s3: C,
+        s4: D,
+        customizer?: (
+          objValue: any,
+          srcValue: any,
+          key: string,
+          object: T,
+          source: A | B | C | D
+        ) => any | void
+      ) => Object);
+    assignWith:
+      & (() => {...})
+      & (<T: Object, A: Object>(
         object: T,
-        source: A
-      ) => any | void
-    ): Object;
-    assignWith<T: Object, A: Object, B: Object>(
-      object: T,
-      s1: A,
-      s2: B,
-      customizer?: (
-        objValue: any,
-        srcValue: any,
-        key: string,
+        s1: A,
+        customizer?: (
+          objValue: any,
+          srcValue: any,
+          key: string,
+          object: T,
+          source: A
+        ) => any | void
+      ) => Object)
+      & (<T: Object, A: Object, B: Object>(
         object: T,
-        source: A | B
-      ) => any | void
-    ): Object;
-    assignWith<T: Object, A: Object, B: Object, C: Object>(
-      object: T,
-      s1: A,
-      s2: B,
-      s3: C,
-      customizer?: (
-        objValue: any,
-        srcValue: any,
-        key: string,
+        s1: A,
+        s2: B,
+        customizer?: (
+          objValue: any,
+          srcValue: any,
+          key: string,
+          object: T,
+          source: A | B
+        ) => any | void
+      ) => Object)
+      & (<T: Object, A: Object, B: Object, C: Object>(
         object: T,
-        source: A | B | C
-      ) => any | void
-    ): Object;
-    assignWith<T: Object, A: Object, B: Object, C: Object, D: Object>(
-      object: T,
-      s1: A,
-      s2: B,
-      s3: C,
-      s4: D,
-      customizer?: (
-        objValue: any,
-        srcValue: any,
-        key: string,
+        s1: A,
+        s2: B,
+        s3: C,
+        customizer?: (
+          objValue: any,
+          srcValue: any,
+          key: string,
+          object: T,
+          source: A | B | C
+        ) => any | void
+      ) => Object)
+      & (<T: Object, A: Object, B: Object, C: Object, D: Object>(
         object: T,
-        source: A | B | C | D
-      ) => any | void
-    ): Object;
-    at(object?: ?Object, ...paths: $ReadOnlyArray<string>): Array<any>;
-    at(object?: ?Object, paths: $ReadOnlyArray<string>): Array<any>;
-    create(prototype: void | null, properties: void | null): {...};
-    create<T>(prototype: T, properties: Object): T;
-    create(prototype: any, properties: void | null): {...};
+        s1: A,
+        s2: B,
+        s3: C,
+        s4: D,
+        customizer?: (
+          objValue: any,
+          srcValue: any,
+          key: string,
+          object: T,
+          source: A | B | C | D
+        ) => any | void
+      ) => Object);
+    at:
+      & ((object?: ?Object, ...paths: $ReadOnlyArray<string>) => Array<any>)
+      & ((object?: ?Object, paths: $ReadOnlyArray<string>) => Array<any>);
+    create:
+      & ((prototype: void | null, properties: void | null) => {...})
+      & (<T>(prototype: T, properties: Object) => T)
+      & ((prototype: any, properties: void | null) => {...});
     defaults(object?: ?Object, ...sources?: $ReadOnlyArray<?Object>): Object;
     defaultsDeep(object?: ?Object, ...sources?: $ReadOnlyArray<?Object>): Object;
     // alias for _.toPairs
@@ -1173,85 +1179,93 @@ declare module "lodash" {
     // alias for _.toPairsIn
     entriesIn(object?: ?Object): Array<[string, any]>;
     // alias for _.assignIn
-    extend<A, B>(a?: ?A, b?: ?B): A & B;
-    extend<A, B, C>(a: A, b: B, c: C): A & B & C;
-    extend<A, B, C, D>(a: A, b: B, c: C, d: D): A & B & C & D;
-    extend<A, B, C, D, E>(a: A, b: B, c: C, d: D, e: E): A & B & C & D & E;
+    extend:
+      & (<A, B>(a?: ?A, b?: ?B) => A & B)
+      & (<A, B, C>(a: A, b: B, c: C) => A & B & C)
+      & (<A, B, C, D>(a: A, b: B, c: C, d: D) => A & B & C & D)
+      & (<A, B, C, D, E>(a: A, b: B, c: C, d: D, e: E) => A & B & C & D & E);
     // alias for _.assignInWith
-    extendWith<T: Object, A: Object>(
-      object?: ?T,
-      s1?: ?A,
-      customizer?: ?(
-        objValue: any,
-        srcValue: any,
-        key: string,
+    extendWith:
+      & (<T: Object, A: Object>(
+        object?: ?T,
+        s1?: ?A,
+        customizer?: ?(
+          objValue: any,
+          srcValue: any,
+          key: string,
+          object: T,
+          source: A
+        ) => any | void
+      ) => Object)
+      & (<T: Object, A: Object, B: Object>(
         object: T,
-        source: A
-      ) => any | void
-    ): Object;
-    extendWith<T: Object, A: Object, B: Object>(
-      object: T,
-      s1: A,
-      s2: B,
-      customizer?: (
-        objValue: any,
-        srcValue: any,
-        key: string,
+        s1: A,
+        s2: B,
+        customizer?: (
+          objValue: any,
+          srcValue: any,
+          key: string,
+          object: T,
+          source: A | B
+        ) => any | void
+      ) => Object)
+      & (<T: Object, A: Object, B: Object, C: Object>(
         object: T,
-        source: A | B
-      ) => any | void
-    ): Object;
-    extendWith<T: Object, A: Object, B: Object, C: Object>(
-      object: T,
-      s1: A,
-      s2: B,
-      s3: C,
-      customizer?: (
-        objValue: any,
-        srcValue: any,
-        key: string,
+        s1: A,
+        s2: B,
+        s3: C,
+        customizer?: (
+          objValue: any,
+          srcValue: any,
+          key: string,
+          object: T,
+          source: A | B | C
+        ) => any | void
+      ) => Object)
+      & (<T: Object, A: Object, B: Object, C: Object, D: Object>(
         object: T,
-        source: A | B | C
-      ) => any | void
-    ): Object;
-    extendWith<T: Object, A: Object, B: Object, C: Object, D: Object>(
-      object: T,
-      s1: A,
-      s2: B,
-      s3: C,
-      s4: D,
-      customizer?: (
-        objValue: any,
-        srcValue: any,
-        key: string,
+        s1: A,
+        s2: B,
+        s3: C,
+        s4: D,
+        customizer?: (
+          objValue: any,
+          srcValue: any,
+          key: string,
+          object: T,
+          source: A | B | C | D
+        ) => any | void
+      ) => Object);
+    findKey:
+      & (<A, T: ReadOnlyIndexerObject<A>>(
         object: T,
-        source: A | B | C | D
-      ) => any | void
-    ): Object;
-    findKey<A, T: ReadOnlyIndexerObject<A>>(
-      object: T,
-      predicate?: ?OPredicate<A, T>
-    ): string | void;
-    findKey<A, T: ReadOnlyIndexerObject<A>>(
-      object: void | null,
-      predicate?: ?OPredicate<A, T>
-    ): void;
-    findLastKey<A, T: ReadOnlyIndexerObject<A>>(
-      object: T,
-      predicate?: ?OPredicate<A, T>
-    ): string | void;
-    findLastKey<A, T: ReadOnlyIndexerObject<A>>(
-      object: void | null,
-      predicate?: ?OPredicate<A, T>
-    ): void;
-    forIn(object: Object, iteratee?: ?OIteratee<*>): Object;
-    forIn(object: void | null, iteratee?: ?OIteratee<*>): null;
-    forInRight(object: Object, iteratee?: ?OIteratee<*>): Object;
-    forInRight(object: void | null, iteratee?: ?OIteratee<*>): null;
-    forOwn(object: Object, iteratee?: ?OIteratee<*>): Object;
-    forOwn(object: void | null, iteratee?: ?OIteratee<*>): null;
-    forOwnRight(object: Object, iteratee?: ?OIteratee<*>): Object;
-    forOwnRight(object: void | null, iteratee?: ?OIteratee<*>): null;
+        predicate?: ?OPredicate<A, T>
+      ) => string | void)
+      & (<A, T: ReadOnlyIndexerObject<A>>(
+        object: void | null,
+        predicate?: ?OPredicate<A, T>
+      ) => void);
+    findLastKey:
+      & (<A, T: ReadOnlyIndexerObject<A>>(
+        object: T,
+        predicate?: ?OPredicate<A, T>
+      ) => string | void)
+      & (<A, T: ReadOnlyIndexerObject<A>>(
+        object: void | null,
+        predicate?: ?OPredicate<A, T>
+      ) => void);
+    forIn:
+      & ((object: Object, iteratee?: ?OIteratee<*>) => Object)
+      & ((object: void | null, iteratee?: ?OIteratee<*>) => null);
+    forInRight:
+      & ((object: Object, iteratee?: ?OIteratee<*>) => Object)
+      & ((object: void | null, iteratee?: ?OIteratee<*>) => null);
+    forOwn:
+      & ((object: Object, iteratee?: ?OIteratee<*>) => Object)
+      & ((object: void | null, iteratee?: ?OIteratee<*>) => null);
+    forOwnRight:
+      & ((object: Object, iteratee?: ?OIteratee<*>) => Object)
+      & ((object: void | null, iteratee?: ?OIteratee<*>) => null);
     functions(object?: ?Object): Array<string>;
     functionsIn(object?: ?Object): Array<string>;
     get(
@@ -1259,148 +1273,166 @@ declare module "lodash" {
       path?: ?Path,
       defaultValue?: any
     ): any;
-    has(object: Object, path: Path): boolean;
-    has(object: Object, path: void | null): false;
-    has(object: void | null, path?: ?Path): false;
-    hasIn(object: Object, path: Path): boolean;
-    hasIn(object: Object, path: void | null): false;
-    hasIn(object: void | null, path?: ?Path): false;
-    invert(object: Object, multiVal?: ?boolean): Object;
-    invert(object: void | null, multiVal?: ?boolean): {...};
-    invertBy(object: Object, iteratee?: ?Function): Object;
-    invertBy(object: void | null, iteratee?: ?Function): {...};
+    has:
+      & ((object: Object, path: Path) => boolean)
+      & ((object: Object, path: void | null) => false)
+      & ((object: void | null, path?: ?Path) => false);
+    hasIn:
+      & ((object: Object, path: Path) => boolean)
+      & ((object: Object, path: void | null) => false)
+      & ((object: void | null, path?: ?Path) => false);
+    invert:
+      & ((object: Object, multiVal?: ?boolean) => Object)
+      & ((object: void | null, multiVal?: ?boolean) => {...});
+    invertBy:
+      & ((object: Object, iteratee?: ?Function) => Object)
+      & ((object: void | null, iteratee?: ?Function) => {...});
     invoke(
       object?: ?Object,
       path?: ?Path,
       ...args?: $ReadOnlyArray<any>
     ): any;
-    keys<K>(object?: ?ReadOnlyIndexerObject<any, K>): Array<K>;
-    keys(object?: ?Object): Array<string>;
+    keys:
+      & (<K>(object?: ?ReadOnlyIndexerObject<any, K>) => Array<K>)
+      & ((object?: ?Object) => Array<string>);
     keysIn(object?: ?Object): Array<string>;
-    mapKeys(object: Object, iteratee?: ?OIteratee<*>): Object;
-    mapKeys(object: void | null, iteratee?: ?OIteratee<*>): {...};
-    mapValues(object: Object, iteratee?: ?OIteratee<*>): Object;
-    mapValues(object: void | null, iteratee?: ?OIteratee<*>): {...};
+    mapKeys:
+      & ((object: Object, iteratee?: ?OIteratee<*>) => Object)
+      & ((object: void | null, iteratee?: ?OIteratee<*>) => {...});
+    mapValues:
+      & ((object: Object, iteratee?: ?OIteratee<*>) => Object)
+      & ((object: void | null, iteratee?: ?OIteratee<*>) => {...});
     merge(object?: ?Object, ...sources?: $ReadOnlyArray<?Object>): Object;
-    mergeWith(): {...};
-    mergeWith<T: Object, A: Object>(
-      object: T,
-      customizer?: (
-        objValue: any,
-        srcValue: any,
-        key: string,
+    mergeWith:
+      & (() => {...})
+      & (<T: Object, A: Object>(
         object: T,
-        source: A
-      ) => any | void
-    ): Object;
-    mergeWith<T: Object, A: Object, B: Object>(
-      object: T,
-      s1: A,
-      s2: B,
-      customizer?: (
-        objValue: any,
-        srcValue: any,
-        key: string,
+        customizer?: (
+          objValue: any,
+          srcValue: any,
+          key: string,
+          object: T,
+          source: A
+        ) => any | void
+      ) => Object)
+      & (<T: Object, A: Object, B: Object>(
         object: T,
-        source: A | B
-      ) => any | void
-    ): Object;
-    mergeWith<T: Object, A: Object, B: Object, C: Object>(
-      object: T,
-      s1: A,
-      s2: B,
-      s3: C,
-      customizer?: (
-        objValue: any,
-        srcValue: any,
-        key: string,
+        s1: A,
+        s2: B,
+        customizer?: (
+          objValue: any,
+          srcValue: any,
+          key: string,
+          object: T,
+          source: A | B
+        ) => any | void
+      ) => Object)
+      & (<T: Object, A: Object, B: Object, C: Object>(
         object: T,
-        source: A | B | C
-      ) => any | void
-    ): Object;
-    mergeWith<T: Object, A: Object, B: Object, C: Object, D: Object>(
-      object: T,
-      s1: A,
-      s2: B,
-      s3: C,
-      s4: D,
-      customizer?: (
-        objValue: any,
-        srcValue: any,
-        key: string,
+        s1: A,
+        s2: B,
+        s3: C,
+        customizer?: (
+          objValue: any,
+          srcValue: any,
+          key: string,
+          object: T,
+          source: A | B | C
+        ) => any | void
+      ) => Object)
+      & (<T: Object, A: Object, B: Object, C: Object, D: Object>(
         object: T,
-        source: A | B | C | D
-      ) => any | void
-    ): Object;
-    omit(object?: ?Object, ...props: $ReadOnlyArray<string>): Object;
-    omit(object?: ?Object, props: $ReadOnlyArray<string>): Object;
-    omitBy<A, T: ReadOnlyIndexerObject<A>>(
-      object: $ReadOnly<T>,
-      predicate?: ?OPredicate<A, T>
-    ): Object;
-    omitBy<A, T>(object: void | null, predicate?: ?OPredicate<A, T>): {...};
-    pick(object?: ?Object, ...props: $ReadOnlyArray<string>): Object;
-    pick(object?: ?Object, props: $ReadOnlyArray<string>): Object;
-    pickBy<A, T: ReadOnlyIndexerObject<A>>(
-      object: $ReadOnly<T>,
-      predicate?: ?OPredicate<A, T>
-    ): Object;
-    pickBy<A, T>(object: void | null, predicate?: ?OPredicate<A, T>): {...};
+        s1: A,
+        s2: B,
+        s3: C,
+        s4: D,
+        customizer?: (
+          objValue: any,
+          srcValue: any,
+          key: string,
+          object: T,
+          source: A | B | C | D
+        ) => any | void
+      ) => Object);
+    omit:
+      & ((object?: ?Object, ...props: $ReadOnlyArray<string>) => Object)
+      & ((object?: ?Object, props: $ReadOnlyArray<string>) => Object);
+    omitBy:
+      & (<A, T: ReadOnlyIndexerObject<A>>(
+        object: $ReadOnly<T>,
+        predicate?: ?OPredicate<A, T>
+      ) => Object)
+      & (<A, T>(object: void | null, predicate?: ?OPredicate<A, T>) => {...});
+    pick:
+      & ((object?: ?Object, ...props: $ReadOnlyArray<string>) => Object)
+      & ((object?: ?Object, props: $ReadOnlyArray<string>) => Object);
+    pickBy:
+      & (<A, T: ReadOnlyIndexerObject<A>>(
+        object: $ReadOnly<T>,
+        predicate?: ?OPredicate<A, T>
+      ) => Object)
+      & (<A, T>(object: void | null, predicate?: ?OPredicate<A, T>) => {...});
     result(
       object?: ?Object,
       path?: ?Path,
       defaultValue?: any
     ): any;
-    set(object: Object, path?: ?Path, value: any): Object;
-    set<T: void | null>(
-      object: T,
-      path?: ?Path,
-      value?: ?any
-    ): T;
-    setWith<T>(
-      object: T,
-      path?: ?Path,
-      value: any,
-      customizer?: (nsValue: any, key: string, nsObject: T) => any
-    ): Object;
-    setWith<T: void | null>(
-      object: T,
-      path?: ?Path,
-      value?: ?any,
-      customizer?: ?(nsValue: any, key: string, nsObject: T) => any
-    ): T;
+    set:
+      & ((object: Object, path?: ?Path, value: any) => Object)
+      & (<T: void | null>(
+        object: T,
+        path?: ?Path,
+        value?: ?any
+      ) => T);
+    setWith:
+      & (<T>(
+        object: T,
+        path?: ?Path,
+        value: any,
+        customizer?: (nsValue: any, key: string, nsObject: T) => any
+      ) => Object)
+      & (<T: void | null>(
+        object: T,
+        path?: ?Path,
+        value?: ?any,
+        customizer?: ?(nsValue: any, key: string, nsObject: T) => any
+      ) => T);
     toPairs(object?: ?Object | $ReadOnlyArray<*>): Array<[string, any]>;
     toPairsIn(object?: ?Object): Array<[string, any]>;
-    transform(
-      collection: Object | $ReadOnlyArray<any>,
-      iteratee?: ?OIteratee<*>,
-      accumulator?: any
-    ): any;
-    transform(
-      collection: void | null,
-      iteratee?: ?OIteratee<*>,
-      accumulator?: ?any
-    ): {...};
-    unset(object: void | null, path?: ?Path): true;
-    unset(object: Object, path?: ?Path): boolean;
-    update(object: Object, path: Path, updater: Function): Object;
-    update<T: void | null>(
-      object: T,
-      path?: ?Path,
-      updater?: ?Function
-    ): T;
-    updateWith(
-      object: Object,
-      path?: ?Path,
-      updater?: ?Function,
-      customizer?: ?Function
-    ): Object;
-    updateWith<T: void | null>(
-      object: T,
-      path?: ?Path,
-      updater?: ?Function,
-      customizer?: ?Function
-    ): T;
+    transform:
+      & ((
+        collection: Object | $ReadOnlyArray<any>,
+        iteratee?: ?OIteratee<*>,
+        accumulator?: any
+      ) => any)
+      & ((
+        collection: void | null,
+        iteratee?: ?OIteratee<*>,
+        accumulator?: ?any
+      ) => {...});
+    unset:
+      & ((object: void | null, path?: ?Path) => true)
+      & ((object: Object, path?: ?Path) => boolean);
+    update:
+      & ((object: Object, path: Path, updater: Function) => Object)
+      & (<T: void | null>(
+        object: T,
+        path?: ?Path,
+        updater?: ?Function
+      ) => T);
+    updateWith:
+      & ((
+        object: Object,
+        path?: ?Path,
+        updater?: ?Function,
+        customizer?: ?Function
+      ) => Object)
+      & (<T: void | null>(
+        object: T,
+        path?: ?Path,
+        updater?: ?Function,
+        customizer?: ?Function
+      ) => T);
     values(object?: ?Object): Array<any>;
     valuesIn(object?: ?Object): Array<any>;
 

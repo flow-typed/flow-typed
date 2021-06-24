@@ -671,6 +671,7 @@ describe('Collection', () => {
     (sampleSize({ a: 1, b: 'abc' }, 2): (number| string)[]);
 
     // $FlowExpectedError[incompatible-cast]
+    // $FlowExpectedError[extra-arg]
     (shuffle({ a: 1, b: 'abc' }, 2): number[]);
   });
 
