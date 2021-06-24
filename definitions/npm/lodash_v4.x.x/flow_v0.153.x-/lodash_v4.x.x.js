@@ -346,64 +346,76 @@ declare module "lodash" {
     nth:
       & (<T>(array: $ReadOnlyArray<T>, n?: ?number) => T)
       & ((array: void | null, n?: ?number) => void);
-    pull<T>(array: Array<T>, ...values?: $ReadOnlyArray<?T>): Array<T>;
-    pull<T: void | null>(array: T, ...values?: $ReadOnlyArray<?any>): T;
-    pullAll<T>(array: Array<T>, values?: ?$ReadOnlyArray<T>): Array<T>;
-    pullAll<T: void | null>(array: T, values?: ?$ReadOnlyArray<any>): T;
-    pullAllBy<T>(
-      array: Array<T>,
-      values?: ?$ReadOnlyArray<T>,
-      iteratee?: ?ValueOnlyIteratee<T>
-    ): Array<T>;
-    pullAllBy<T: void | null>(
-      array: T,
-      values?: ?$ReadOnlyArray<any>,
-      iteratee?: ?ValueOnlyIteratee<any>
-    ): T;
-    pullAllWith<T: void | null>(
-      array: T,
-      values?: ?$ReadOnlyArray<any>,
-      comparator?: ?Function
-    ): T;
-    pullAllWith<T>(array: Array<T>, values?: ?($ReadOnlyArray<T>), comparator?: ?Function): Array<T>;
-    pullAt<T>(array?: ?Array<T>, ...indexed?: $ReadOnlyArray<?number>): Array<T>;
-    pullAt<T>(array?: ?Array<T>, indexed?: ?$ReadOnlyArray<number>): Array<T>;
+    pull:
+      & (<T>(array: Array<T>, ...values?: $ReadOnlyArray<?T>) => Array<T>)
+      & (<T: void | null>(array: T, ...values?: $ReadOnlyArray<?any>) => T);
+    pullAll:
+      & (<T>(array: Array<T>, values?: ?$ReadOnlyArray<T>) => Array<T>)
+      & (<T: void | null>(array: T, values?: ?$ReadOnlyArray<any>) => T);
+    pullAllBy:
+      & (<T>(
+        array: Array<T>,
+        values?: ?$ReadOnlyArray<T>,
+        iteratee?: ?ValueOnlyIteratee<T>
+      ) => Array<T>)
+      & (<T: void | null>(
+        array: T,
+        values?: ?$ReadOnlyArray<any>,
+        iteratee?: ?ValueOnlyIteratee<any>
+      ) => T);
+    pullAllWith:
+      & (<T: void | null>(
+        array: T,
+        values?: ?$ReadOnlyArray<any>,
+        comparator?: ?Function
+      ) => T)
+      & (<T>(array: Array<T>, values?: ?($ReadOnlyArray<T>), comparator?: ?Function) => Array<T>);
+    pullAt:
+      & (<T>(array?: ?Array<T>, ...indexed?: $ReadOnlyArray<?number>) => Array<T>)
+      & (<T>(array?: ?Array<T>, indexed?: ?$ReadOnlyArray<number>) => Array<T>);
     remove<T>(array?: ?Array<T>, predicate?: ?Predicate<T>): Array<T>;
-    reverse<T>(array: Array<T>): Array<T>;
-    reverse<T: void | null>(array: T): T;
+    reverse:
+      & (<T>(array: Array<T>) => Array<T>)
+      & (<T: void | null>(array: T) => T);
     slice<T>(
       array?: ?$ReadOnlyArray<T>,
       start?: ?number,
       end?: ?number
     ): Array<T>;
-    sortedIndex<T>(array: $ReadOnlyArray<T>, value: T): number;
-    sortedIndex<T>(array: void | null, value: ?T): 0;
-    sortedIndexBy<T>(
-      array: $ReadOnlyArray<T>,
-      value?: ?T,
-      iteratee?: ?ValueOnlyIteratee<T>
-    ): number;
-    sortedIndexBy<T>(
-      array: void | null,
-      value?: ?T,
-      iteratee?: ?ValueOnlyIteratee<T>
-    ): 0;
-    sortedIndexOf<T>(array: $ReadOnlyArray<T>, value: T): number;
-    sortedIndexOf<T>(array: void | null, value?: ?T): -1;
-    sortedLastIndex<T>(array: $ReadOnlyArray<T>, value: T): number;
-    sortedLastIndex<T>(array: void | null, value?: ?T): 0;
-    sortedLastIndexBy<T>(
-      array: $ReadOnlyArray<T>,
-      value: T,
-      iteratee?: ValueOnlyIteratee<T>
-    ): number;
-    sortedLastIndexBy<T>(
-      array: void | null,
-      value?: ?T,
-      iteratee?: ?ValueOnlyIteratee<T>
-    ): 0;
-    sortedLastIndexOf<T>(array: $ReadOnlyArray<T>, value: T): number;
-    sortedLastIndexOf<T>(array: void | null, value?: ?T): -1;
+    sortedIndex:
+      & (<T>(array: $ReadOnlyArray<T>, value: T) => number)
+      & (<T>(array: void | null, value: ?T) => 0);
+    sortedIndexBy:
+      & (<T>(
+        array: $ReadOnlyArray<T>,
+        value?: ?T,
+        iteratee?: ?ValueOnlyIteratee<T>
+      ) => number)
+      & (<T>(
+        array: void | null,
+        value?: ?T,
+        iteratee?: ?ValueOnlyIteratee<T>
+      ) => 0);
+    sortedIndexOf:
+      & (<T>(array: $ReadOnlyArray<T>, value: T) => number)
+      & (<T>(array: void | null, value?: ?T) => -1);
+    sortedLastIndex:
+      & (<T>(array: $ReadOnlyArray<T>, value: T) => number)
+      & (<T>(array: void | null, value?: ?T) => 0);
+    sortedLastIndexBy:
+      & (<T>(
+        array: $ReadOnlyArray<T>,
+        value: T,
+        iteratee?: ValueOnlyIteratee<T>
+      ) => number)
+      & (<T>(
+        array: void | null,
+        value?: ?T,
+        iteratee?: ?ValueOnlyIteratee<T>
+      ) => 0);
+    sortedLastIndexOf:
+      & (<T>(array: $ReadOnlyArray<T>, value: T) => number)
+      & (<T>(array: void | null, value?: ?T) => -1);
     sortedUniq<T>(array?: ?$ReadOnlyArray<T>): Array<T>;
     sortedUniqBy<T>(
       array?: ?$ReadOnlyArray<T>,
@@ -416,48 +428,50 @@ declare module "lodash" {
     takeWhile<T>(array?: ?$ReadOnlyArray<T>, predicate?: ?Predicate<T>): Array<T>;
     union: <T>(...arrays?: Array<$ReadOnlyArray<T>>) => Array<T>;
     //Workaround until (...parameter: T, parameter2: U) works
-    unionBy<T>(
-      a1?: ?$ReadOnlyArray<T>,
-      iteratee?: ?ValueOnlyIteratee<T>
-    ): Array<T>;
-    unionBy<T>(
-      a1?: ?$ReadOnlyArray<T>,
-      a2: $ReadOnlyArray<T>,
-      iteratee?: ValueOnlyIteratee<T>
-    ): Array<T>;
-    unionBy<T>(
-      a1: $ReadOnlyArray<T>,
-      a2: $ReadOnlyArray<T>,
-      a3: $ReadOnlyArray<T>,
-      iteratee?: ValueOnlyIteratee<T>
-    ): Array<T>;
-    unionBy<T>(
-      a1: $ReadOnlyArray<T>,
-      a2: $ReadOnlyArray<T>,
-      a3: $ReadOnlyArray<T>,
-      a4: $ReadOnlyArray<T>,
-      iteratee?: ValueOnlyIteratee<T>
-    ): Array<T>;
+    unionBy:
+      & (<T>(
+        a1?: ?$ReadOnlyArray<T>,
+        iteratee?: ?ValueOnlyIteratee<T>
+      ) => Array<T>)
+      & (<T>(
+        a1?: ?$ReadOnlyArray<T>,
+        a2: $ReadOnlyArray<T>,
+        iteratee?: ValueOnlyIteratee<T>
+      ) => Array<T>)
+      & (<T>(
+        a1: $ReadOnlyArray<T>,
+        a2: $ReadOnlyArray<T>,
+        a3: $ReadOnlyArray<T>,
+        iteratee?: ValueOnlyIteratee<T>
+      ) => Array<T>)
+      & (<T>(
+        a1: $ReadOnlyArray<T>,
+        a2: $ReadOnlyArray<T>,
+        a3: $ReadOnlyArray<T>,
+        a4: $ReadOnlyArray<T>,
+        iteratee?: ValueOnlyIteratee<T>
+      ) => Array<T>);
     //Workaround until (...parameter: T, parameter2: U) works
-    unionWith<T>(a1?: ?$ReadOnlyArray<T>, comparator?: ?Comparator<T>): Array<T>;
-    unionWith<T>(
-      a1: $ReadOnlyArray<T>,
-      a2: $ReadOnlyArray<T>,
-      comparator?: Comparator<T>
-    ): Array<T>;
-    unionWith<T>(
-      a1: $ReadOnlyArray<T>,
-      a2: $ReadOnlyArray<T>,
-      a3: $ReadOnlyArray<T>,
-      comparator?: Comparator<T>
-    ): Array<T>;
-    unionWith<T>(
-      a1: $ReadOnlyArray<T>,
-      a2: $ReadOnlyArray<T>,
-      a3: $ReadOnlyArray<T>,
-      a4: $ReadOnlyArray<T>,
-      comparator?: Comparator<T>
-    ): Array<T>;
+    unionWith:
+      & (<T>(a1?: ?$ReadOnlyArray<T>, comparator?: ?Comparator<T>) => Array<T>)
+      & (<T>(
+        a1: $ReadOnlyArray<T>,
+        a2: $ReadOnlyArray<T>,
+        comparator?: Comparator<T>
+      ) => Array<T>)
+      & (<T>(
+        a1: $ReadOnlyArray<T>,
+        a2: $ReadOnlyArray<T>,
+        a3: $ReadOnlyArray<T>,
+        comparator?: Comparator<T>
+      ) => Array<T>)
+      & (<T>(
+        a1: $ReadOnlyArray<T>,
+        a2: $ReadOnlyArray<T>,
+        a3: $ReadOnlyArray<T>,
+        a4: $ReadOnlyArray<T>,
+        comparator?: Comparator<T>
+      ) => Array<T>);
     uniq<T>(array?: ?$ReadOnlyArray<T>): Array<T>;
     uniqBy<T>(array?: ?$ReadOnlyArray<T>, iteratee?: ?ValueOnlyIteratee<T>): Array<T>;
     uniqWith<T>(array?: ?$ReadOnlyArray<T>, comparator?: ?Comparator<T>): Array<T>;
@@ -466,96 +480,99 @@ declare module "lodash" {
     without<T>(array?: ?$ReadOnlyArray<T>, ...values?: Array<?T>): Array<T>;
     xor<T>(...array: $ReadOnlyArray<$ReadOnlyArray<T>>): Array<T>;
     //Workaround until (...parameter: T, parameter2: U) works
-    xorBy<T>(a1?: ?$ReadOnlyArray<T>, iteratee?: ?ValueOnlyIteratee<T>): Array<T>;
-    xorBy<T>(
+    xorBy:
+      & (<T>(a1?: ?$ReadOnlyArray<T>, iteratee?: ?ValueOnlyIteratee<T>) => Array<T>)
+      & (<T>(
       a1: $ReadOnlyArray<T>,
       a2: $ReadOnlyArray<T>,
       iteratee?: ValueOnlyIteratee<T>
-    ): Array<T>;
-    xorBy<T>(
+    ) => Array<T>)
+    & (<T>(
       a1: $ReadOnlyArray<T>,
       a2: $ReadOnlyArray<T>,
       a3: $ReadOnlyArray<T>,
       iteratee?: ValueOnlyIteratee<T>
-    ): Array<T>;
-    xorBy<T>(
+    ) => Array<T>)
+    & (<T>(
       a1: $ReadOnlyArray<T>,
       a2: $ReadOnlyArray<T>,
       a3: $ReadOnlyArray<T>,
       a4: $ReadOnlyArray<T>,
       iteratee?: ValueOnlyIteratee<T>
-    ): Array<T>;
+    ) => Array<T>);
     //Workaround until (...parameter: T, parameter2: U) works
-    xorWith<T>(a1?: ?$ReadOnlyArray<T>, comparator?: ?Comparator<T>): Array<T>;
-    xorWith<T>(
-      a1: $ReadOnlyArray<T>,
-      a2: $ReadOnlyArray<T>,
-      comparator?: Comparator<T>
-    ): Array<T>;
-    xorWith<T>(
-      a1: $ReadOnlyArray<T>,
-      a2: $ReadOnlyArray<T>,
-      a3: $ReadOnlyArray<T>,
-      comparator?: Comparator<T>
-    ): Array<T>;
-    xorWith<T>(
-      a1: $ReadOnlyArray<T>,
-      a2: $ReadOnlyArray<T>,
-      a3: $ReadOnlyArray<T>,
-      a4: $ReadOnlyArray<T>,
-      comparator?: Comparator<T>
-    ): Array<T>;
-    zip<A, B>(a1?: ?($ReadOnlyArray<A>), a2?: ?($ReadOnlyArray<B>)): Array<[A, B]>;
-    zip<A, B, C>(a1: $ReadOnlyArray<A>, a2: $ReadOnlyArray<B>, a3: $ReadOnlyArray<C>): Array<[A, B, C]>;
-    zip<A, B, C, D>(a1: $ReadOnlyArray<A>, a2: $ReadOnlyArray<B>, a3: $ReadOnlyArray<C>, a4: $ReadOnlyArray<D>): Array<[A, B, C, D]>;
-    zip<A, B, C, D, E>(
-      a1: $ReadOnlyArray<A>,
-      a2: $ReadOnlyArray<B>,
-      a3: $ReadOnlyArray<C>,
-      a4: $ReadOnlyArray<D>,
-      a5: $ReadOnlyArray<E>
-    ): Array<[A, B, C, D, E]>;
+    xorWith:
+      & (<T>(a1?: ?$ReadOnlyArray<T>, comparator?: ?Comparator<T>) => Array<T>)
+      & (<T>(
+        a1: $ReadOnlyArray<T>,
+        a2: $ReadOnlyArray<T>,
+        comparator?: Comparator<T>
+      ) => Array<T>)
+      & (<T>(
+        a1: $ReadOnlyArray<T>,
+        a2: $ReadOnlyArray<T>,
+        a3: $ReadOnlyArray<T>,
+        comparator?: Comparator<T>
+      ) => Array<T>)
+      & (<T>(
+        a1: $ReadOnlyArray<T>,
+        a2: $ReadOnlyArray<T>,
+        a3: $ReadOnlyArray<T>,
+        a4: $ReadOnlyArray<T>,
+        comparator?: Comparator<T>
+      ) => Array<T>);
+    zip:
+      & (<A, B>(a1?: ?($ReadOnlyArray<A>), a2?: ?($ReadOnlyArray<B>)) => Array<[A, B]>)
+      & (<A, B, C>(a1: $ReadOnlyArray<A>, a2: $ReadOnlyArray<B>, a3: $ReadOnlyArray<C>) => Array<[A, B, C]>)
+      & (<A, B, C, D>(a1: $ReadOnlyArray<A>, a2: $ReadOnlyArray<B>, a3: $ReadOnlyArray<C>, a4: $ReadOnlyArray<D>) => Array<[A, B, C, D]>)
+      & (<A, B, C, D, E>(
+        a1: $ReadOnlyArray<A>,
+        a2: $ReadOnlyArray<B>,
+        a3: $ReadOnlyArray<C>,
+        a4: $ReadOnlyArray<D>,
+        a5: $ReadOnlyArray<E>
+      ) => Array<[A, B, C, D, E]>);
 
-    zipObject<K, V>(props: $ReadOnlyArray<K>, values?: ?$ReadOnlyArray<V>): { [key: K]: V, ... };
-    zipObject<K, V>(props: void | null, values?: ?$ReadOnlyArray<V>): {...};
-    zipObjectDeep(props: $ReadOnlyArray<any>, values?: ?any): Object;
-    zipObjectDeep(props: void | null, values?: ?any): {...};
+    zipObject:
+      & (<K, V>(props: $ReadOnlyArray<K>, values?: ?$ReadOnlyArray<V>) => { [key: K]: V, ... })
+      & (<K, V>(props: void | null, values?: ?$ReadOnlyArray<V>) => {...});
+    zipObjectDeep:
+      & ((props: $ReadOnlyArray<any>, values?: ?any) => Object)
+      & ((props: void | null, values?: ?any) => {...});
 
-    zipWith<A>(a1?: ?$ReadOnlyArray<A>): Array<[A]>;
-    zipWith<T, A>(a1: $ReadOnlyArray<A>, iteratee: (A) => T): Array<T>;
-
-    zipWith<A, B>(a1: $ReadOnlyArray<A>, a2: $ReadOnlyArray<B>): Array<[A, B]>;
-    zipWith<T, A, B>(
+    zipWith:
+      & (<A>(a1?: ?$ReadOnlyArray<A>) => Array<[A]>)
+      & (<T, A>(a1: $ReadOnlyArray<A>, iteratee: (A) => T) => Array<T>)
+      & (<A, B>(a1: $ReadOnlyArray<A>, a2: $ReadOnlyArray<B>) => Array<[A, B]>)
+      & (<T, A, B>(
       a1: $ReadOnlyArray<A>,
       a2: $ReadOnlyArray<B>,
       iteratee: (A, B) => T
-    ): Array<T>;
-
-    zipWith<A, B, C>(
+    ) => Array<T>)
+    & (<A, B, C>(
       a1: $ReadOnlyArray<A>,
       a2: $ReadOnlyArray<B>,
       a3: $ReadOnlyArray<C>
-    ): Array<[A, B, C]>;
-    zipWith<T, A, B, C>(
+    ) => Array<[A, B, C]>)
+    & (<T, A, B, C>(
       a1: $ReadOnlyArray<A>,
       a2: $ReadOnlyArray<B>,
       a3: $ReadOnlyArray<C>,
       iteratee: (A, B, C) => T
-    ): Array<T>;
-
-    zipWith<A, B, C, D>(
+    ) => Array<T>)
+    & (<A, B, C, D>(
       a1: $ReadOnlyArray<A>,
       a2: $ReadOnlyArray<B>,
       a3: $ReadOnlyArray<C>,
       a4: $ReadOnlyArray<D>
-    ): Array<[A, B, C, D]>;
-    zipWith<T, A, B, C, D>(
+    ) => Array<[A, B, C, D]>)
+    & (<T, A, B, C, D>(
       a1: $ReadOnlyArray<A>,
       a2: $ReadOnlyArray<B>,
       a3: $ReadOnlyArray<C>,
       a4: $ReadOnlyArray<D>,
       iteratee: (A, B, C, D) => T
-    ): Array<T>;
+    ) => Array<T>);
 
     // Collection
     countBy<T>(array: $ReadOnlyArray<T>, iteratee?: ?ValueOnlyIteratee<T>): { [string]: number, ... };
