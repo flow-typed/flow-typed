@@ -222,7 +222,7 @@ declare module "lodash" {
     | ((item: T, key: string, object: O) => U)
     | propertyIterateeShorthand;
 
-  declare class Lodash {
+  declare type Lodash = {
     // Array
     chunk<T>(array?: ?$ReadOnlyArray<T>, size?: ?number): Array<Array<T>>;
     compact<T, N = ?T | boolean>(array?: ?$ReadOnlyArray<N>): Array<T>;
@@ -406,7 +406,7 @@ declare module "lodash" {
     takeRight<T>(array?: ?$ReadOnlyArray<T>, n?: ?number): Array<T>;
     takeRightWhile<T>(array?: ?$ReadOnlyArray<T>, predicate?: ?Predicate<T>): Array<T>;
     takeWhile<T>(array?: ?$ReadOnlyArray<T>, predicate?: ?Predicate<T>): Array<T>;
-    union<T>(...arrays?: Array<$ReadOnlyArray<T>>): Array<T>;
+    union: <T>(...arrays?: Array<$ReadOnlyArray<T>>) => Array<T>;
     //Workaround until (...parameter: T, parameter2: U) works
     unionBy<T>(
       a1?: ?$ReadOnlyArray<T>,
@@ -879,10 +879,12 @@ declare module "lodash" {
     isFunction(value: any): false;
     isInteger(value: number): boolean;
     isInteger(value: any): false;
-    isLength(value: void | null): false;
-    isLength(value: any): boolean;
-    isMap(value: Map<any, any>): true;
-    isMap(value: any): false;
+    isLength
+      & ((value: void | null) => false);
+      & (isLength(value: any) => boolean);
+    isMap:
+      & ((value: Map<any, any>) => true)
+      & ((value: any) => false);
     isMatch(object?: ?Object, source?: ?Object): boolean;
     isMatchWith<T: Object, U: Object>(
       object?: ?T,
@@ -895,36 +897,50 @@ declare module "lodash" {
         source: U
       ) => boolean | void
     ): boolean;
-    isNaN(value: number): boolean;
-    isNaN(value: any): false;
-    isNative(value: number | string | void | null | Object): false;
-    isNative(value: any): boolean;
-    isNil(value: void | null): true;
-    isNil(value: any): false;
-    isNull(value: null): true;
-    isNull(value: any): false;
-    isNumber(value: number): true;
-    isNumber(value: any): false;
-    isObject(value: any): boolean;
-    isObjectLike(value: void | null): false;
-    isObjectLike(value: any): boolean;
-    isPlainObject(value: any): boolean;
-    isRegExp(value: RegExp): true;
-    isRegExp(value: any): false;
-    isSafeInteger(value: number): boolean;
-    isSafeInteger(value: any): false;
-    isSet(value: Set<any>): true;
-    isSet(value: any): false;
-    isString(value: string): true;
-    isString(value: any): false;
-    isSymbol(value: Symbol): true;
-    isSymbol(value: any): false;
-    isTypedArray(value: $TypedArray): true;
-    isTypedArray(value: any): false;
-    isUndefined(value: void): true;
-    isUndefined(value: any): false;
-    isWeakMap(value: WeakMap<any, any>): true;
-    isWeakMap(value: any): false;
+    isNaN:
+      & ((value: number) => boolean)
+      & (isNaN(value: any) => false);
+    isNative:
+      & ((value: number | string | void | null | Object) => false)
+      & ((value: any) => boolean);
+    isNil:
+      & ((value: void | null) => true)
+      & ((value: any) => false);
+    isNull:
+      & ((value: null) => true)
+      & ((value: any) => false);
+    isNumber:
+      & ((value: number) => true)
+      & ((value: any) => false);
+    isObject: (value: any) => boolean;
+    isObjectLike:
+      & ((value: void | null) => false)
+      & ((value: any) => boolean);
+    isPlainObject: (value: any) => boolean;
+    isRegExp:
+      & ((value: RegExp) => true)
+      & ((value: any) => false);
+    isSafeInteger:
+      & ((value: number) => boolean)
+      & ((value: any) => false);
+    isSet:
+      & ((value: Set<any>) => true)
+      & ((value: any) => false);
+    isString:
+      & ((value: string) => true)
+      & ((value: any) => false);
+    isSymbol:
+      & ((value: Symbol) => true)
+      & ((value: any) => false);
+    isTypedArray:
+      & ((value: $TypedArray) => true)
+      & ((value: any) => false);
+    isUndefined:
+      & ((value: void) => true)
+      & ((value: any) => false);
+    isWeakMap:
+      & ((value: WeakMap<any, any>) => true)
+      & ((value: any) => false);
     isWeakSet(value: WeakSet<any>): true;
     isWeakSet(value: any): false;
     lt(value: any, other: any): boolean;
@@ -1670,7 +1686,7 @@ declare module "lodash/fp" {
     | ((item: T) => U)
     | propertyIterateeShorthand;
 
-  declare class Lodash {
+  declare type Lodash = {
     // Array
     chunk<T>(size: number): (array: $ReadOnlyArray<T>) => Array<Array<T>>;
     chunk<T>(size: number, array: $ReadOnlyArray<T>): Array<Array<T>>;
