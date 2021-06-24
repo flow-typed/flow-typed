@@ -68,45 +68,6 @@ describe('waitFor', () => {
   });
 });
 
-describe('waitForDomChange', () => {
-  it('should fail on invalid inputs', () => {
-    // $FlowExpectedError[incompatible-call]
-    waitForDomChange(1);
-    // $FlowExpectedError[incompatible-call]
-    waitForDomChange('1');
-  });
-
-  it('should pass on correct inputs', () => {
-    waitForDomChange({ container: document.createElement('div') });
-    waitForDomChange({ timeout: 1 });
-  });
-});
-
-describe('waitForElement', () => {
-  it('should fail on invalid inputs', () => {
-    // $FlowExpectedError[incompatible-call]
-    waitForElement(1);
-    // $FlowExpectedError[incompatible-call]
-    waitForElement(() => {}, 1);
-  });
-
-  it('should pass on correct inputs', () => {
-    waitForElement(() => document.createElement('div'));
-    waitForElement(() => document.createElement('div'), {
-      container: document.createElement('div'),
-      timeout: 100,
-    });
-  });
-
-  it('should return a usable value.', async (n) => {
-    const usernameElement = await waitForElement(() =>
-      document.createElement('input')
-    );
-
-    usernameElement.value = 'chucknorris';
-  });
-});
-
 describe('waitForElementToBeRemoved', () => {
   it('should fail on invalid inputs', () => {
     // $FlowExpectedError[incompatible-call]
