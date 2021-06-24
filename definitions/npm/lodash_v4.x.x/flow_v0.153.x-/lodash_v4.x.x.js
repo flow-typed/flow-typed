@@ -575,176 +575,192 @@ declare module "lodash" {
     ) => Array<T>);
 
     // Collection
-    countBy<T>(array: $ReadOnlyArray<T>, iteratee?: ?ValueOnlyIteratee<T>): { [string]: number, ... };
-    countBy<T>(array: void | null, iteratee?: ?ValueOnlyIteratee<T>): {...};
-    countBy(string: string, iteratee?: ?ValueOnlyIteratee<string>): { [string]: number, ... };
-    countBy<T>(object: ReadOnlyIndexerObject<T>, iteratee?: ?ValueOnlyIteratee<T>): { [string]: number, ... };
+    countBy:
+      & (<T>(array: $ReadOnlyArray<T>, iteratee?: ?ValueOnlyIteratee<T>) => { [string]: number, ... })
+      & (<T>(array: void | null, iteratee?: ?ValueOnlyIteratee<T>) => {...})
+      & ((string: string, iteratee?: ?ValueOnlyIteratee<string>) => { [string]: number, ... })
+      & (<T>(object: ReadOnlyIndexerObject<T>, iteratee?: ?ValueOnlyIteratee<T>) => { [string]: number, ... });
     // alias of _.forEach
     each<A, K, T: ReadOnlyIndexerObject<A, K> | $ReadOnlyArray<A> | string | void | null>(collection: T, iteratee?: ?IterateeWithResult<A, K, T, boolean | void>): T;
     // alias of _.forEachRight
     eachRight<A, K, T: ReadOnlyIndexerObject<A, K> | $ReadOnlyArray<A> | string | void | null>(collection: T, iteratee?: ?IterateeWithResult<A, K, T, boolean | void>): T;
-    every<T>(array?: ?$ReadOnlyArray<T>, iteratee?: ?Iteratee<T>): boolean;
-    every(str: string, iteratee?: ?Iteratee<string>): boolean;
-    every<A, T: ReadOnlyIndexerObject<A>>(object: T, iteratee?: OIterateeWithResult<A, string, T, any>): boolean;
-    filter<T>(array?: ?$ReadOnlyArray<T>, predicate?: ?Predicate<T>): Array<T>;
-    filter<A, T: ReadOnlyIndexerObject<A>>(
-      object: T,
-      predicate?: OPredicate<A, T>
-    ): Array<A>;
-    find<T>(
-      array: $ReadOnlyArray<T>,
-      predicate?: ?Predicate<T>,
-      fromIndex?: ?number
-    ): T | void;
-    find<T>(
-      array: void | null,
-      predicate?: ?Predicate<T>,
-      fromIndex?: ?number
-    ): void;
-    find<R, A, T: ReadOnlyIndexerObject<A>>(
-      object: T,
-      predicate?: ?OPredicate<A, T>,
-      fromIndex?: ?number
-    ): R;
-    findLast<T>(
-      array: $ReadOnlyArray<T>,
-      predicate?: ?Predicate<T>,
-      fromIndex?: ?number
-    ): T | void;
-    findLast<T>(
-      array: void | null,
-      predicate?: ?Predicate<T>,
-      fromIndex?: ?number
-    ): void;
-    findLast<R, A, T: ReadOnlyIndexerObject<A>>(
-      object: T,
-      predicate?: ?OPredicate<A, T>,
-      fromIndex?: ?number
-    ): R;
-    flatMap<A, U, T: $ReadOnlyArray<A> = Array<A>>(
-      array: T,
-      iteratee?: ?AFlatMapIteratee<A, T, U>
-    ): Array<U>;
-    flatMap<A, K, U, T: ?ReadOnlyIndexerObject<A, K> | string = IndexerObject<A, K>>(
-      object: T,
-      iteratee?: ?OFlatMapIteratee<A, K, T, U>
-    ): Array<U>;
-    flatMapDeep<A, U, T: $ReadOnlyArray<A> = Array<A>>(
-      array: T,
-      iteratee?: ?AFlatMapIteratee<A, T, any>
-    ): Array<U>;
-    flatMapDeep<A, K, U, T: ?ReadOnlyIndexerObject<A, K> | string = IndexerObject<A, K>>(
-      object: T,
-      iteratee?: ?OFlatMapIteratee<A, K, T, any>
-    ): Array<U>;
-    flatMapDepth<A, U, T: $ReadOnlyArray<A> = Array<A>>(
-      array: T,
-      iteratee?: ?AFlatMapIteratee<A, T, any>,
-      depth?: ?number
-    ): Array<U>;
-    flatMapDepth<A, K, U, T: ?ReadOnlyIndexerObject<A, K> | string = IndexerObject<A, K>>(
-      object: T,
-      iteratee?: ?OFlatMapIteratee<A, K, T, any>,
-      depth?: ?number
-    ): Array<U>;
+    every:
+      & (<T>(array?: ?$ReadOnlyArray<T>, iteratee?: ?Iteratee<T>) => boolean)
+      & ((str: string, iteratee?: ?Iteratee<string>) => boolean)
+      & (<A, T: ReadOnlyIndexerObject<A>>(object: T, iteratee?: OIterateeWithResult<A, string, T, any>) => boolean);
+    filter:
+      & (<T>(array?: ?$ReadOnlyArray<T>, predicate?: ?Predicate<T>) => Array<T>)
+      & (<A, T: ReadOnlyIndexerObject<A>>(
+        object: T,
+        predicate?: OPredicate<A, T>
+      ) => Array<A>);
+    find:
+      & (<T>(
+        array: $ReadOnlyArray<T>,
+        predicate?: ?Predicate<T>,
+        fromIndex?: ?number
+      ) => T | void)
+      & (<T>(
+        array: void | null,
+        predicate?: ?Predicate<T>,
+        fromIndex?: ?number
+      ) => void)
+      & (<R, A, T: ReadOnlyIndexerObject<A>>(
+        object: T,
+        predicate?: ?OPredicate<A, T>,
+        fromIndex?: ?number
+      ) => R);
+    findLast:
+      & (<T>(
+        array: $ReadOnlyArray<T>,
+        predicate?: ?Predicate<T>,
+        fromIndex?: ?number
+      ) => T | void)
+      & (<T>(
+        array: void | null,
+        predicate?: ?Predicate<T>,
+        fromIndex?: ?number
+      ) => void)
+      & (<R, A, T: ReadOnlyIndexerObject<A>>(
+        object: T,
+        predicate?: ?OPredicate<A, T>,
+        fromIndex?: ?number
+      ) => R);
+    flatMap:
+      & (<A, U, T: $ReadOnlyArray<A> = Array<A>>(
+        array: T,
+        iteratee?: ?AFlatMapIteratee<A, T, U>
+      ) => Array<U>)
+      & (<A, K, U, T: ?ReadOnlyIndexerObject<A, K> | string = IndexerObject<A, K>>(
+        object: T,
+        iteratee?: ?OFlatMapIteratee<A, K, T, U>
+      ) => Array<U>);
+    flatMapDeep:
+      & (<A, U, T: $ReadOnlyArray<A> = Array<A>>(
+        array: T,
+        iteratee?: ?AFlatMapIteratee<A, T, any>
+      ) => Array<U>)
+      & (<A, K, U, T: ?ReadOnlyIndexerObject<A, K> | string = IndexerObject<A, K>>(
+        object: T,
+        iteratee?: ?OFlatMapIteratee<A, K, T, any>
+      ) => Array<U>);
+    flatMapDepth:
+      & (<A, U, T: $ReadOnlyArray<A> = Array<A>>(
+        array: T,
+        iteratee?: ?AFlatMapIteratee<A, T, any>,
+        depth?: ?number
+      ) => Array<U>)
+      & (<A, K, U, T: ?ReadOnlyIndexerObject<A, K> | string = IndexerObject<A, K>>(
+        object: T,
+        iteratee?: ?OFlatMapIteratee<A, K, T, any>,
+        depth?: ?number
+      ) => Array<U>);
     forEach<A, K, T: ReadOnlyIndexerObject<A, K> | $ReadOnlyArray<A> | string | void | null>(collection: T, iteratee?: ?IterateeWithResult<A, K, T, boolean | void>): T;
     forEachRight<A, K, T: ReadOnlyIndexerObject<A, K> | $ReadOnlyArray<A> | string | void | null>(collection: T, iteratee?: ?IterateeWithResult<A, K, T, boolean | void>): T;
-    groupBy<V, T>(
-      array: $ReadOnlyArray<T>,
-      iteratee?: ?ValueOnlyIteratee<T>
-    ): { [key: V]: Array<T>, ... };
-    groupBy(array: void | null, iteratee?: ?ValueOnlyIteratee<any>): {...};
-    groupBy<V, A, T: ReadOnlyIndexerObject<A>>(
-      object: T,
-      iteratee?: ValueOnlyIteratee<A>
-    ): { [key: V]: Array<A>, ... };
-    includes<T>(
-      array: $ReadOnlyArray<T>,
-      value: T,
-      fromIndex?: ?number
-    ): boolean;
-    includes<T>(array: void | null, value?: ?T, fromIndex?: ?number): false;
-    includes<A>(object: ReadOnlyIndexerObject<A>, value: A, fromIndex?: number): boolean;
-    includes(str: string, value: string, fromIndex?: number): boolean;
-    invokeMap<T>(
-      array?: ?$ReadOnlyArray<T>,
-      path?: ?((value: T) => Path) | Path,
-      ...args?: $ReadOnlyArray<any>
-    ): Array<any>;
-    invokeMap<A>(
-      object: ReadOnlyIndexerObject<A>,
-      path: ((value: any) => Path) | Path,
-      ...args?: $ReadOnlyArray<any>
-    ): Array<any>;
-    keyBy<T, V>(
-      array: $ReadOnlyArray<T>,
-      iteratee?: ?ValueOnlyIteratee<T>
-    ): { [key: V]: T, ... };
-    keyBy(array: void | null, iteratee?: ?ValueOnlyIteratee<*>): {...};
-    keyBy<V, A, K, T: ReadOnlyIndexerObject<A, K>>(
-      object: T,
-      iteratee?: ?ValueOnlyIteratee<A>
-    ): { [key: V]: A, ... };
-    map<T, U>(
-      array?: ?$ReadOnlyArray<T>,
-      iteratee?: ?ReadOnlyMapIterator<T, U>
-    ): Array<U>;
-    map<V, T: ReadOnlyIndexerObject<V>, U>(
-      object: ?T,
-      iteratee?: OMapIterator<V, T, U>
-    ): Array<U>;
-    map(
-      str: ?string,
-      iteratee?: (char: string, index: number, str: string) => any
-    ): string;
-    orderBy<T>(
-      array: $ReadOnlyArray<T>,
-      iteratees?: ?$ReadOnlyArray<Iteratee<T>> | ?string,
-      orders?: ?$ReadOnlyArray<"asc" | "desc"> | ?string
-    ): Array<T>;
-    orderBy<T>(
-      array: null | void,
-      iteratees?: ?$ReadOnlyArray<Iteratee<T>> | ?string,
-      orders?: ?$ReadOnlyArray<"asc" | "desc"> | ?string
-    ): Array<T>;
-    orderBy<V, T: ReadOnlyIndexerObject<V>>(
-      object: T,
-      iteratees?: $ReadOnlyArray<OIteratee<*>> | string,
-      orders?: $ReadOnlyArray<"asc" | "desc"> | string
-    ): Array<V>;
-    partition<T>(
-      array?: ?$ReadOnlyArray<T>,
-      predicate?: ?Predicate<T>
-    ): [Array<T>, Array<T>];
-    partition<V, A, T: ReadOnlyIndexerObject<A>>(
-      object: T,
-      predicate?: OPredicate<A, T>
-    ): [Array<V>, Array<V>];
-    reduce<T, U>(
-      array: $ReadOnlyArray<T>,
-      iteratee?: (
-        accumulator: U,
+    groupBy:
+      & (<V, T>(
+        array: $ReadOnlyArray<T>,
+        iteratee?: ?ValueOnlyIteratee<T>
+      ) => { [key: V]: Array<T>, ... })
+      & ((array: void | null, iteratee?: ?ValueOnlyIteratee<any>) => {...})
+      & (<V, A, T: ReadOnlyIndexerObject<A>>(
+        object: T,
+        iteratee?: ValueOnlyIteratee<A>
+      ) => { [key: V]: Array<A>, ... });
+    includes:
+      & (<T>(
+        array: $ReadOnlyArray<T>,
         value: T,
-        index: number,
-        array: ?Array<T>
-      ) => U,
-      accumulator?: U
-    ): U;
-    reduce<T, U>(
-      array: void | null,
-      iteratee?: ?(
-        accumulator: U,
-        value: T,
-        index: any,
-        array: ?Array<T>
-      ) => U,
-      accumulator?: U
-    ): U;
-    reduce<A, T: ReadOnlyIndexerObject<A>, U>(
-      object: T,
-      iteratee?: (accumulator: U, value: any, key: string, object: T) => U,
-      accumulator?: U
-    ): U;
+        fromIndex?: ?number
+      ) => boolean)
+      & (<T>(array: void | null, value?: ?T, fromIndex?: ?number) => false)
+      & (<A>(object: ReadOnlyIndexerObject<A>, value: A, fromIndex?: number) => boolean)
+      & ((str: string, value: string, fromIndex?: number) => boolean);
+    invokeMap:
+      & (<T>(
+        array?: ?$ReadOnlyArray<T>,
+        path?: ?((value: T) => Path) | Path,
+        ...args?: $ReadOnlyArray<any>
+      ) => Array<any>)
+      & (<A>(
+        object: ReadOnlyIndexerObject<A>,
+        path: ((value: any) => Path) | Path,
+        ...args?: $ReadOnlyArray<any>
+      ) => Array<any>);
+    keyBy:
+      & (<T, V>(
+        array: $ReadOnlyArray<T>,
+        iteratee?: ?ValueOnlyIteratee<T>
+      ) => { [key: V]: T, ... })
+      & ((array: void | null, iteratee?: ?ValueOnlyIteratee<*>) => {...})
+      & (<V, A, K, T: ReadOnlyIndexerObject<A, K>>(
+        object: T,
+        iteratee?: ?ValueOnlyIteratee<A>
+      ) => { [key: V]: A, ... });
+    map:
+      & (<T, U>(
+        array?: ?$ReadOnlyArray<T>,
+        iteratee?: ?ReadOnlyMapIterator<T, U>
+      ) => Array<U>)
+      & (<V, T: ReadOnlyIndexerObject<V>, U>(
+        object: ?T,
+        iteratee?: OMapIterator<V, T, U>
+      ) => Array<U>)
+      & ((
+        str: ?string,
+        iteratee?: (char: string, index: number, str: string) => any
+      ) => string);
+    orderBy:
+      & (<T>(
+        array: $ReadOnlyArray<T>,
+        iteratees?: ?$ReadOnlyArray<Iteratee<T>> | ?string,
+        orders?: ?$ReadOnlyArray<"asc" | "desc"> | ?string
+      ) => Array<T>)
+      & (<T>(
+        array: null | void,
+        iteratees?: ?$ReadOnlyArray<Iteratee<T>> | ?string,
+        orders?: ?$ReadOnlyArray<"asc" | "desc"> | ?string
+      ) => Array<T>)
+      & (<V, T: ReadOnlyIndexerObject<V>>(
+        object: T,
+        iteratees?: $ReadOnlyArray<OIteratee<*>> | string,
+        orders?: $ReadOnlyArray<"asc" | "desc"> | string
+      ) => Array<V>);
+    partition:
+      & (<T>(
+        array?: ?$ReadOnlyArray<T>,
+        predicate?: ?Predicate<T>
+      ) => [Array<T>, Array<T>])
+      & (<V, A, T: ReadOnlyIndexerObject<A>>(
+        object: T,
+        predicate?: OPredicate<A, T>
+      ) => [Array<V>, Array<V>]);
+    reduce:
+      & (<T, U>(
+        array: $ReadOnlyArray<T>,
+        iteratee?: (
+          accumulator: U,
+          value: T,
+          index: number,
+          array: ?Array<T>
+        ) => U,
+        accumulator?: U
+      ) => U)
+      & (<T, U>(
+        array: void | null,
+        iteratee?: ?(
+          accumulator: U,
+          value: T,
+          index: any,
+          array: ?Array<T>
+        ) => U,
+        accumulator?: U
+      ) => U)
+      & (<A, T: ReadOnlyIndexerObject<A>, U>(
+        object: T,
+        iteratee?: (accumulator: U, value: any, key: string, object: T) => U,
+        accumulator?: U
+      ) => U);
     reduceRight:
       & (<T, U>(
         array: void | null,
@@ -771,11 +787,12 @@ declare module "lodash" {
         iteratee?: ?(accumulator: U, value: any, key: string, object: T) => U,
         accumulator?: ?U
       ) => U);
-    reject<T>(array?: ?$ReadOnlyArray<T>, predicate?: ?Predicate<T>): Array<T>;
-    reject<A, T: ReadOnlyIndexerObject<A>>(
-      object?: ?T,
-      predicate?: ?OPredicate<A, T>
-    ): Array<A>;
+    reject:
+      & (<T>(array?: ?$ReadOnlyArray<T>, predicate?: ?Predicate<T>) => Array<T>)
+      & (<A, T: ReadOnlyIndexerObject<A>>(
+        object?: ?T,
+        predicate?: ?OPredicate<A, T>
+      ) => Array<A>);
     sample<T>(collection: ?Collection<T>): T;
     sampleSize<T>(collection?: ?Collection<T>, n?: ?number): Array<T>;
     shuffle<T>(array?: ?Collection<T>): Array<T>;
@@ -787,22 +804,23 @@ declare module "lodash" {
         object?: ?T,
         predicate?: OPredicate<A, T>
       ) => boolean);
-    sortBy<T>(
-      array: ?$ReadOnlyArray<T>,
-      ...iteratees?: $ReadOnlyArray<Iteratee<T>>
-    ): Array<T>;
-    sortBy<T>(
-      array: ?$ReadOnlyArray<T>,
-      iteratees?: $ReadOnlyArray<Iteratee<T>>
-    ): Array<T>;
-    sortBy<V, T: ReadOnlyIndexerObject<V>>(
-      object: T,
-      ...iteratees?: $ReadOnlyArray<OIteratee<T>>
-    ): Array<V>;
-    sortBy<V, T: ReadOnlyIndexerObject<V>>(
-      object: T,
-      iteratees?: $ReadOnlyArray<OIteratee<T>>
-    ): Array<V>;
+    sortBy:
+      & (<T>(
+        array: ?$ReadOnlyArray<T>,
+        ...iteratees?: $ReadOnlyArray<Iteratee<T>>
+      ) => Array<T>)
+      & (<T>(
+        array: ?$ReadOnlyArray<T>,
+        iteratees?: $ReadOnlyArray<Iteratee<T>>
+      ) => Array<T>)
+      & (<V, T: ReadOnlyIndexerObject<V>>(
+        object: T,
+        ...iteratees?: $ReadOnlyArray<OIteratee<T>>
+      ) => Array<V>)
+      & (<V, T: ReadOnlyIndexerObject<V>>(
+        object: T,
+        iteratees?: $ReadOnlyArray<OIteratee<T>>
+      ) => Array<V>);
 
     // Date
     now(): number;
