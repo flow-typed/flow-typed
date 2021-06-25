@@ -1820,370 +1820,433 @@ declare module "lodash/fp" {
 
   declare type Lodash = {
     // Array
-    chunk<T>(size: number): (array: $ReadOnlyArray<T>) => Array<Array<T>>;
-    chunk<T>(size: number, array: $ReadOnlyArray<T>): Array<Array<T>>;
+    chunk:
+      & (<T>(size: number) => ((array: $ReadOnlyArray<T>) => Array<Array<T>>))
+      & (<T>(size: number, array: $ReadOnlyArray<T>) => Array<Array<T>>);
     compact<T, N: ?T>(array?: ?$ReadOnlyArray<N>): Array<T>;
-    concat<T, U, A: Array<T> | T, B: Array<U> | U>(
-      base: A
-    ): (elements: B) => Array<T | U>;
-    concat<T, U, A: Array<T> | T, B: Array<U> | U>(
-      base: A,
-      elements: B
-    ): Array<T | U>;
-    difference<T>(values: $ReadOnlyArray<T>): (array: $ReadOnlyArray<T>) => Array<T>;
-    difference<T>(values: $ReadOnlyArray<T>, array: $ReadOnlyArray<T>): Array<T>;
-    differenceBy<T>(
-      iteratee: ValueOnlyIteratee<T>
-    ): ((values: $ReadOnlyArray<T>) => (array: $ReadOnlyArray<T>) => Array<T>) &
-      ((values: $ReadOnlyArray<T>, array: $ReadOnlyArray<T>) => Array<T>);
-    differenceBy<T>(
-      iteratee: ValueOnlyIteratee<T>,
-      values: $ReadOnlyArray<T>
-    ): (array: $ReadOnlyArray<T>) => Array<T>;
-    differenceBy<T>(
-      iteratee: ValueOnlyIteratee<T>,
-      values: $ReadOnlyArray<T>,
-      array: $ReadOnlyArray<T>
-    ): Array<T>;
-    differenceWith<T>(
-      comparator: Comparator<T>
-    ): ((first: $ReadOnlyArray<T>) => (second: $ReadOnlyArray<T>) => Array<T>) &
-      ((first: $ReadOnlyArray<T>, second: $ReadOnlyArray<T>) => Array<T>);
-    differenceWith<T>(
-      comparator: Comparator<T>,
-      first: $ReadOnlyArray<T>
-    ): (second: $ReadOnlyArray<T>) => Array<T>;
-    differenceWith<T>(
-      comparator: Comparator<T>,
-      first: $ReadOnlyArray<T>,
-      second: $ReadOnlyArray<T>
-    ): Array<T>;
-    drop<T>(n: number): (array: $ReadOnlyArray<T>) => Array<T>;
-    drop<T>(n: number, array: $ReadOnlyArray<T>): Array<T>;
-    dropLast<T>(n: number): (array: $ReadOnlyArray<T>) => Array<T>;
-    dropLast<T>(n: number, array: $ReadOnlyArray<T>): Array<T>;
-    dropRight<T>(n: number): (array: $ReadOnlyArray<T>) => Array<T>;
-    dropRight<T>(n: number, array: $ReadOnlyArray<T>): Array<T>;
-    dropRightWhile<T>(predicate: Predicate<T>): (array: $ReadOnlyArray<T>) => Array<T>;
-    dropRightWhile<T>(predicate: Predicate<T>, array: $ReadOnlyArray<T>): Array<T>;
-    dropWhile<T>(predicate: Predicate<T>): (array: $ReadOnlyArray<T>) => Array<T>;
-    dropWhile<T>(predicate: Predicate<T>, array: $ReadOnlyArray<T>): Array<T>;
-    dropLastWhile<T>(predicate: Predicate<T>): (array: $ReadOnlyArray<T>) => Array<T>;
-    dropLastWhile<T>(predicate: Predicate<T>, array: $ReadOnlyArray<T>): Array<T>;
-    fill<T, U>(
-      start: number
-    ): ((
-      end: number
-    ) => ((value: U) => (array: Array<T>) => Array<T | U>) &
-      ((value: U, array: Array<T>) => Array<T | U>)) &
-      ((end: number, value: U) => (array: Array<T>) => Array<T | U>) &
-      ((end: number, value: U, array: Array<T>) => Array<T | U>);
-    fill<T, U>(
-      start: number,
-      end: number
-    ): ((value: U) => (array: Array<T>) => Array<T | U>) &
-      ((value: U, array: Array<T>) => Array<T | U>);
-    fill<T, U>(
-      start: number,
-      end: number,
-      value: U
-    ): (array: Array<T>) => Array<T | U>;
-    fill<T, U>(
-      start: number,
-      end: number,
-      value: U,
-      array: Array<T>
-    ): Array<T | U>;
-    findIndex<T>(predicate: Predicate<T>): (array: $ReadOnlyArray<T>) => number;
-    findIndex<T>(predicate: Predicate<T>, array: $ReadOnlyArray<T>): number;
-    findIndexFrom<T>(
+    concat:
+      & (<T, U, A: Array<T> | T, B: Array<U> | U>(
+        base: A
+      ) => (elements: B) => Array<T | U>)
+      & (<T, U, A: Array<T> | T, B: Array<U> | U>(
+        base: A,
+        elements: B
+      ) => Array<T | U>);
+    difference:
+      & (<T>(values: $ReadOnlyArray<T>) => ((array: $ReadOnlyArray<T>) => Array<T>))
+      & (<T>(values: $ReadOnlyArray<T>, array: $ReadOnlyArray<T>) => Array<T>);
+    differenceBy:
+      & (<T>(
+        iteratee: ValueOnlyIteratee<T>
+      ) => (((values: $ReadOnlyArray<T>) => (array: $ReadOnlyArray<T>) => Array<T>) &
+        ((values: $ReadOnlyArray<T>, array: $ReadOnlyArray<T>) => Array<T>)))
+      & (<T>(
+        iteratee: ValueOnlyIteratee<T>,
+        values: $ReadOnlyArray<T>
+      ) => ((array: $ReadOnlyArray<T>) => Array<T>))
+      & (<T>(
+        iteratee: ValueOnlyIteratee<T>,
+        values: $ReadOnlyArray<T>,
+        array: $ReadOnlyArray<T>
+      ) => Array<T>);
+    differenceWith:
+      & (<T>(
+        comparator: Comparator<T>
+      ) => (((first: $ReadOnlyArray<T>) => (second: $ReadOnlyArray<T>) => Array<T>) &
+        ((first: $ReadOnlyArray<T>, second: $ReadOnlyArray<T>) => Array<T>)))
+      & (<T>(
+        comparator: Comparator<T>,
+        first: $ReadOnlyArray<T>
+      ) => ((second: $ReadOnlyArray<T>) => Array<T>))
+      & (<T>(
+        comparator: Comparator<T>,
+        first: $ReadOnlyArray<T>,
+        second: $ReadOnlyArray<T>
+      ) => Array<T>);
+    drop:
+      & (<T>(n: number) => ((array: $ReadOnlyArray<T>) => Array<T>))
+      & (<T>(n: number, array: $ReadOnlyArray<T>) => Array<T>);
+    dropLast:
+      & (<T>(n: number) => ((array: $ReadOnlyArray<T>) => Array<T>))
+      & (<T>(n: number, array: $ReadOnlyArray<T>) => Array<T>);
+    dropRight:
+      & (<T>(n: number) => ((array: $ReadOnlyArray<T>) => Array<T>))
+      & (<T>(n: number, array: $ReadOnlyArray<T>) => Array<T>);
+    dropRightWhile:
+      & (<T>(predicate: Predicate<T>) => (array: $ReadOnlyArray<T>) => Array<T>)
+      & (<T>(predicate: Predicate<T>, array: $ReadOnlyArray<T>) => Array<T>);
+    dropWhile:
+      & (<T>(predicate: Predicate<T>) => ((array: $ReadOnlyArray<T>) => Array<T>))
+      & (<T>(predicate: Predicate<T>, array: $ReadOnlyArray<T>) => Array<T>);
+    dropLastWhile:
+      & (<T>(predicate: Predicate<T>) => ((array: $ReadOnlyArray<T>) => Array<T>))
+      & (<T>(predicate: Predicate<T>, array: $ReadOnlyArray<T>) => Array<T>);
+    fill:
+      & (<T, U>(
+        start: number
+      ) => (((
+        end: number
+      ) => ((value: U) => (array: Array<T>) => Array<T | U>) &
+        ((value: U, array: Array<T>) => Array<T | U>)) &
+        ((end: number, value: U) => (array: Array<T>) => Array<T | U>) &
+        ((end: number, value: U, array: Array<T>) => Array<T | U>)))
+      & (<T, U>(
+        start: number,
+        end: number
+      ) => (((value: U) => (array: Array<T>) => Array<T | U>) &
+        ((value: U, array: Array<T>) => Array<T | U>)))
+      & (<T, U>(
+        start: number,
+        end: number,
+        value: U
+      ) => ((array: Array<T>) => Array<T | U>))
+      & (<T, U>(
+        start: number,
+        end: number,
+        value: U,
+        array: Array<T>
+      ) => Array<T | U>);
+    findIndex:
+      & (<T>(predicate: Predicate<T>) => ((array: $ReadOnlyArray<T>) => number))
+      & (<T>(predicate: Predicate<T>, array: $ReadOnlyArray<T>) => number);
+    findIndexFrom:
+      & (<T>(
       predicate: Predicate<T>
-    ): ((fromIndex: number) => (array: $ReadOnlyArray<T>) => number) &
-      ((fromIndex: number, array: $ReadOnlyArray<T>) => number);
-    findIndexFrom<T>(
+    ) => (((fromIndex: number) => (array: $ReadOnlyArray<T>) => number) &
+      ((fromIndex: number, array: $ReadOnlyArray<T>) => number)))
+    & (<T>(
       predicate: Predicate<T>,
       fromIndex: number
-    ): (array: $ReadOnlyArray<T>) => number;
-    findIndexFrom<T>(
+    ) => ((array: $ReadOnlyArray<T>) => number))
+    & (<T>(
       predicate: Predicate<T>,
       fromIndex: number,
       array: $ReadOnlyArray<T>
-    ): number;
-    findLastIndex<T>(
-      predicate: Predicate<T>
-    ): (array: $ReadOnlyArray<T>) => number;
-    findLastIndex<T>(predicate: Predicate<T>, array: $ReadOnlyArray<T>): number;
-    findLastIndexFrom<T>(
-      predicate: Predicate<T>
-    ): ((fromIndex: number) => (array: $ReadOnlyArray<T>) => number) &
-      ((fromIndex: number, array: $ReadOnlyArray<T>) => number);
-    findLastIndexFrom<T>(
-      predicate: Predicate<T>,
-      fromIndex: number
-    ): (array: $ReadOnlyArray<T>) => number;
-    findLastIndexFrom<T>(
-      predicate: Predicate<T>,
-      fromIndex: number,
-      array: $ReadOnlyArray<T>
-    ): number;
+    ) => number);
+    findLastIndex:
+      & (<T>(
+        predicate: Predicate<T>
+      ) => ((array: $ReadOnlyArray<T>) => number))
+      & (<T>(predicate: Predicate<T>, array: $ReadOnlyArray<T>) => number);
+    findLastIndexFrom:
+      & (<T>(
+        predicate: Predicate<T>
+      ) => (((fromIndex: number) => (array: $ReadOnlyArray<T>) => number) &
+        ((fromIndex: number, array: $ReadOnlyArray<T>) => number)))
+      & (<T>(
+        predicate: Predicate<T>,
+        fromIndex: number
+      ) => ((array: $ReadOnlyArray<T>) => number))
+      & (<T>(
+        predicate: Predicate<T>,
+        fromIndex: number,
+        array: $ReadOnlyArray<T>
+      ) => number);
     // alias of _.head
     first<T>(array: $ReadOnlyArray<T>): T;
     flatten<T, X>(array: $ReadOnlyArray<$ReadOnlyArray<T> | X>): Array<T | X>;
     unnest<T, X>(array: $ReadOnlyArray<$ReadOnlyArray<T> | X>): Array<T | X>;
     flattenDeep<T>(array: $ReadOnlyArray<any>): Array<T>;
-    flattenDepth(depth: number): (array: $ReadOnlyArray<any>) => Array<any>;
-    flattenDepth(depth: number, array: $ReadOnlyArray<any>): Array<any>;
+    flattenDepth:
+      & ((depth: number) => ((array: $ReadOnlyArray<any>) => Array<any>))
+      & ((depth: number, array: $ReadOnlyArray<any>) => Array<any>);
     fromPairs<A, B>(pairs: $ReadOnlyArray<[A, B]>): {| [key: A]: B |};
     head<T>(array: $ReadOnlyArray<T>): T;
-    indexOf<T>(value: T): (array: $ReadOnlyArray<T>) => number;
-    indexOf<T>(value: T, array: $ReadOnlyArray<T>): number;
-    indexOfFrom<T>(
+    indexOf:
+      & (<T>(value: T) => ((array: $ReadOnlyArray<T>) => number))
+      & (<T>(value: T, array: $ReadOnlyArray<T>) => number);
+    indexOfFrom:
+      & (<T>(
       value: T
-    ): ((fromIndex: number) => (array: $ReadOnlyArray<T>) => number) &
-      ((fromIndex: number, array: $ReadOnlyArray<T>) => number);
-    indexOfFrom<T>(value: T, fromIndex: number): (array: $ReadOnlyArray<T>) => number;
-    indexOfFrom<T>(value: T, fromIndex: number, array: $ReadOnlyArray<T>): number;
+    ) => (((fromIndex: number) => (array: $ReadOnlyArray<T>) => number) &
+      ((fromIndex: number, array: $ReadOnlyArray<T>) => number)))
+    & (<T>(value: T, fromIndex: number) => ((array: $ReadOnlyArray<T>) => number))
+    & (<T>(value: T, fromIndex: number, array: $ReadOnlyArray<T>) => number);
     initial<T>(array: $ReadOnlyArray<T>): Array<T>;
     init<T>(array: $ReadOnlyArray<T>): Array<T>;
-    intersection<T>(a1: $ReadOnlyArray<T>): (a2: $ReadOnlyArray<T>) => Array<T>;
-    intersection<T>(a1: $ReadOnlyArray<T>, a2: $ReadOnlyArray<T>): Array<T>;
-    intersectionBy<T>(
-      iteratee: ValueOnlyIteratee<T>
-    ): ((a1: $ReadOnlyArray<T>) => (a2: $ReadOnlyArray<T>) => Array<T>) &
-      ((a1: $ReadOnlyArray<T>, a2: $ReadOnlyArray<T>) => Array<T>);
-    intersectionBy<T>(
-      iteratee: ValueOnlyIteratee<T>,
-      a1: $ReadOnlyArray<T>
-    ): (a2: $ReadOnlyArray<T>) => Array<T>;
-    intersectionBy<T>(
-      iteratee: ValueOnlyIteratee<T>,
-      a1: $ReadOnlyArray<T>,
-      a2: $ReadOnlyArray<T>
-    ): Array<T>;
-    intersectionWith<T>(
-      comparator: Comparator<T>
-    ): ((a1: $ReadOnlyArray<T>) => (a2: $ReadOnlyArray<T>) => Array<T>) &
-      ((a1: $ReadOnlyArray<T>, a2: $ReadOnlyArray<T>) => Array<T>);
-    intersectionWith<T>(
-      comparator: Comparator<T>,
-      a1: $ReadOnlyArray<T>
-    ): (a2: $ReadOnlyArray<T>) => Array<T>;
-    intersectionWith<T>(
-      comparator: Comparator<T>,
-      a1: $ReadOnlyArray<T>,
-      a2: $ReadOnlyArray<T>
-    ): Array<T>;
-    join<T>(separator: string): (array: $ReadOnlyArray<T>) => string;
-    join<T>(separator: string, array: $ReadOnlyArray<T>): string;
+    intersection:
+      & (<T>(a1: $ReadOnlyArray<T>) => ((a2: $ReadOnlyArray<T>) => Array<T>))
+      & (<T>(a1: $ReadOnlyArray<T>, a2: $ReadOnlyArray<T>) => Array<T>);
+    intersectionBy:
+      & (<T>(
+        iteratee: ValueOnlyIteratee<T>
+      ) => (((a1: $ReadOnlyArray<T>) => (a2: $ReadOnlyArray<T>) => Array<T>) &
+        ((a1: $ReadOnlyArray<T>, a2: $ReadOnlyArray<T>) => Array<T>)))
+      & (<T>(
+        iteratee: ValueOnlyIteratee<T>,
+        a1: $ReadOnlyArray<T>
+      ) => ((a2: $ReadOnlyArray<T>) => Array<T>))
+      & (<T>(
+        iteratee: ValueOnlyIteratee<T>,
+        a1: $ReadOnlyArray<T>,
+        a2: $ReadOnlyArray<T>
+      ) => Array<T>);
+    intersectionWith:
+      & (<T>(
+        comparator: Comparator<T>
+      ) => ((a1: $ReadOnlyArray<T>) => (a2: $ReadOnlyArray<T>) => Array<T>) &
+        ((a1: $ReadOnlyArray<T>, a2: $ReadOnlyArray<T>) => Array<T>))
+      & (<T>(
+        comparator: Comparator<T>,
+        a1: $ReadOnlyArray<T>
+      ) => ((a2: $ReadOnlyArray<T>) => Array<T>))
+      & (<T>(
+        comparator: Comparator<T>,
+        a1: $ReadOnlyArray<T>,
+        a2: $ReadOnlyArray<T>
+      ) => Array<T>);
+    join:
+      & (<T>(separator: string) => ((array: $ReadOnlyArray<T>) => string))
+      & (<T>(separator: string, array: $ReadOnlyArray<T>) => string);
     last<T>(array: $ReadOnlyArray<T>): T;
-    lastIndexOf<T>(value: T): (array: $ReadOnlyArray<T>) => number;
-    lastIndexOf<T>(value: T, array: $ReadOnlyArray<T>): number;
-    lastIndexOfFrom<T>(
-      value: T
-    ): ((fromIndex: number) => (array: $ReadOnlyArray<T>) => number) &
-      ((fromIndex: number, array: $ReadOnlyArray<T>) => number);
-    lastIndexOfFrom<T>(
-      value: T,
-      fromIndex: number
-    ): (array: $ReadOnlyArray<T>) => number;
-    lastIndexOfFrom<T>(value: T, fromIndex: number, array: $ReadOnlyArray<T>): number;
-    nth<T>(n: number): (array: $ReadOnlyArray<T>) => T;
-    nth<T>(n: number, array: $ReadOnlyArray<T>): T;
-    pull<T>(value: T): (array: Array<T>) => Array<T>;
-    pull<T>(value: T, array: Array<T>): Array<T>;
-    pullAll<T>(values: $ReadOnlyArray<T>): (array: Array<T>) => Array<T>;
-    pullAll<T>(values: $ReadOnlyArray<T>, array: Array<T>): Array<T>;
-    pullAllBy<T>(
-      iteratee: ValueOnlyIteratee<T>
-    ): ((values: $ReadOnlyArray<T>) => (array: Array<T>) => Array<T>) &
-      ((values: $ReadOnlyArray<T>, array: Array<T>) => Array<T>);
-    pullAllBy<T>(
-      iteratee: ValueOnlyIteratee<T>,
-      values: $ReadOnlyArray<T>
-    ): (array: Array<T>) => Array<T>;
-    pullAllBy<T>(
-      iteratee: ValueOnlyIteratee<T>,
-      values: $ReadOnlyArray<T>,
-      array: Array<T>
-    ): Array<T>;
-    pullAllWith<T>(
-      comparator: Function
-    ): ((values: Array<T>) => (array: Array<T>) => Array<T>) &
-      ((values: Array<T>, array: Array<T>) => Array<T>);
-    pullAllWith<T>(comparator: Function, values: Array<T>): (array: Array<T>) => Array<T>;
-    pullAllWith<T>(comparator: Function, values: Array<T>, array: Array<T>): Array<T>;
-    pullAt<T>(indexed: Array<number>): (array: Array<T>) => Array<T>;
-    pullAt<T>(indexed: Array<number>, array: Array<T>): Array<T>;
-    remove<T>(predicate: Predicate<T>): (array: Array<T>) => Array<T>;
-    remove<T>(predicate: Predicate<T>, array: Array<T>): Array<T>;
+    lastIndexOf:
+      & (<T>(value: T) => (array: $ReadOnlyArray<T>) => number)
+      & (<T>(value: T, array: $ReadOnlyArray<T>) => number);
+    lastIndexOfFrom:
+      & (<T>(
+        value: T
+      ) => (((fromIndex: number) => (array: $ReadOnlyArray<T>) => number) &
+        ((fromIndex: number, array: $ReadOnlyArray<T>) => number)))
+      & (<T>(
+        value: T,
+        fromIndex: number
+      ) => ((array: $ReadOnlyArray<T>) => number))
+      & (<T>(value: T, fromIndex: number, array: $ReadOnlyArray<T>) => number);
+    nth:
+      & (<T>(n: number) => ((array: $ReadOnlyArray<T>) => T))
+      & (<T>(n: number, array: $ReadOnlyArray<T>) => T);
+    pull:
+      & (<T>(value: T) => ((array: Array<T>) => Array<T>))
+      & (<T>(value: T, array: Array<T>) => Array<T>);
+    pullAll:
+      & (<T>(values: $ReadOnlyArray<T>) => ((array: Array<T>) => Array<T>))
+      & (<T>(values: $ReadOnlyArray<T>, array: Array<T>) => Array<T>);
+    pullAllBy:
+      & (<T>(
+        iteratee: ValueOnlyIteratee<T>
+      ) => (((values: $ReadOnlyArray<T>) => (array: Array<T>) => Array<T>) &
+        ((values: $ReadOnlyArray<T>, array: Array<T>) => Array<T>)))
+      & (<T>(
+        iteratee: ValueOnlyIteratee<T>,
+        values: $ReadOnlyArray<T>
+      ) => ((array: Array<T>) => Array<T>))
+      & (<T>(
+        iteratee: ValueOnlyIteratee<T>,
+        values: $ReadOnlyArray<T>,
+        array: Array<T>
+      ) => Array<T>);
+    pullAllWith:
+      & (<T>(
+        comparator: Function
+      ) => (((values: Array<T>) => (array: Array<T>) => Array<T>) &
+        ((values: Array<T>, array: Array<T>) => Array<T>)))
+      & (<T>(comparator: Function, values: Array<T>) => ((array: Array<T>) => Array<T>))
+      & (<T>(comparator: Function, values: Array<T>, array: Array<T>) => Array<T>);
+    pullAt:
+      & (<T>(indexed: Array<number>) => ((array: Array<T>) => Array<T>))
+      & (<T>(indexed: Array<number>, array: Array<T>) => Array<T>);
+    remove:
+      & (<T>(predicate: Predicate<T>) => ((array: Array<T>) => Array<T>))
+      & (<T>(predicate: Predicate<T>, array: Array<T>) => Array<T>);
     reverse<T>(array: Array<T>): Array<T>;
-    slice<T>(
-      start: number
-    ): ((end: number) => (array: $ReadOnlyArray<T>) => Array<T>) &
-      ((end: number, array: $ReadOnlyArray<T>) => Array<T>);
-    slice<T>(start: number, end: number): (array: $ReadOnlyArray<T>) => Array<T>;
-    slice<T>(start: number, end: number, array: $ReadOnlyArray<T>): Array<T>;
-    sortedIndex<T>(value: T): (array: $ReadOnlyArray<T>) => number;
-    sortedIndex<T>(value: T, array: $ReadOnlyArray<T>): number;
-    sortedIndexBy<T>(
-      iteratee: ValueOnlyIteratee<T>
-    ): ((value: T) => (array: $ReadOnlyArray<T>) => number) &
-      ((value: T, array: $ReadOnlyArray<T>) => number);
-    sortedIndexBy<T>(
-      iteratee: ValueOnlyIteratee<T>,
-      value: T
-    ): (array: $ReadOnlyArray<T>) => number;
-    sortedIndexBy<T>(
-      iteratee: ValueOnlyIteratee<T>,
-      value: T,
-      array: $ReadOnlyArray<T>
-    ): number;
-    sortedIndexOf<T>(value: T): (array: $ReadOnlyArray<T>) => number;
-    sortedIndexOf<T>(value: T, array: $ReadOnlyArray<T>): number;
-    sortedLastIndex<T>(value: T): (array: $ReadOnlyArray<T>) => number;
-    sortedLastIndex<T>(value: T, array: $ReadOnlyArray<T>): number;
-    sortedLastIndexBy<T>(
-      iteratee: ValueOnlyIteratee<T>
-    ): ((value: T) => (array: $ReadOnlyArray<T>) => number) &
-      ((value: T, array: $ReadOnlyArray<T>) => number);
-    sortedLastIndexBy<T>(
-      iteratee: ValueOnlyIteratee<T>,
-      value: T
-    ): (array: $ReadOnlyArray<T>) => number;
-    sortedLastIndexBy<T>(
-      iteratee: ValueOnlyIteratee<T>,
-      value: T,
-      array: $ReadOnlyArray<T>
-    ): number;
-    sortedLastIndexOf<T>(value: T): (array: $ReadOnlyArray<T>) => number;
-    sortedLastIndexOf<T>(value: T, array: $ReadOnlyArray<T>): number;
+    slice:
+      & (<T>(
+        start: number
+      ) => (((end: number) => (array: $ReadOnlyArray<T>) => Array<T>) &
+        ((end: number, array: $ReadOnlyArray<T>) => Array<T>)))
+      & (<T>(start: number, end: number) => ((array: $ReadOnlyArray<T>) => Array<T>))
+      & (<T>(start: number, end: number, array: $ReadOnlyArray<T>) => Array<T>);
+    sortedIndex:
+      & (<T>(value: T) => ((array: $ReadOnlyArray<T>) => number))
+      & (<T>(value: T, array: $ReadOnlyArray<T>) => number);
+    sortedIndexBy:
+      & (<T>(
+        iteratee: ValueOnlyIteratee<T>
+      ) => (((value: T) => (array: $ReadOnlyArray<T>) => number) &
+        ((value: T, array: $ReadOnlyArray<T>) => number)))
+      & (<T>(
+        iteratee: ValueOnlyIteratee<T>,
+        value: T
+      ) => ((array: $ReadOnlyArray<T>) => number))
+      & (<T>(
+        iteratee: ValueOnlyIteratee<T>,
+        value: T,
+        array: $ReadOnlyArray<T>
+      ) => number);
+    sortedIndexOf:
+      & (<T>(value: T) => ((array: $ReadOnlyArray<T>) => number))
+      & (<T>(value: T, array: $ReadOnlyArray<T>) => number);
+    sortedLastIndex:
+      & (<T>(value: T) => ((array: $ReadOnlyArray<T>) => number))
+      & (<T>(value: T, array: $ReadOnlyArray<T>) => number);
+    sortedLastIndexBy:
+      & (<T>(
+        iteratee: ValueOnlyIteratee<T>
+      ) => (((value: T) => (array: $ReadOnlyArray<T>) => number) &
+        ((value: T, array: $ReadOnlyArray<T>) => number)))
+      & (<T>(
+        iteratee: ValueOnlyIteratee<T>,
+        value: T
+      ) => ((array: $ReadOnlyArray<T>) => number))
+      & (<T>(
+        iteratee: ValueOnlyIteratee<T>,
+        value: T,
+        array: $ReadOnlyArray<T>
+      ) => number);
+    sortedLastIndexOf:
+      & (<T>(value: T) => ((array: $ReadOnlyArray<T>) => number))
+      & (<T>(value: T, array: $ReadOnlyArray<T>) => number);
     sortedUniq<T>(array: $ReadOnlyArray<T>): Array<T>;
     sortedUniqBy<T>(iteratee: ValueOnlyIteratee<T>, array: $ReadOnlyArray<T>): Array<T>;
     tail<T>(array: $ReadOnlyArray<T>): Array<T>;
-    take<T>(n: number): (array: $ReadOnlyArray<T>) => Array<T>;
-    take<T>(n: number, array: $ReadOnlyArray<T>): Array<T>;
-    takeRight<T>(n: number): (array: $ReadOnlyArray<T>) => Array<T>;
-    takeRight<T>(n: number, array: $ReadOnlyArray<T>): Array<T>;
-    takeLast<T>(n: number): (array: $ReadOnlyArray<T>) => Array<T>;
-    takeLast<T>(n: number, array: $ReadOnlyArray<T>): Array<T>;
-    takeRightWhile<T>(predicate: Predicate<T>): (array: $ReadOnlyArray<T>) => Array<T>;
-    takeRightWhile<T>(predicate: Predicate<T>, array: $ReadOnlyArray<T>): Array<T>;
-    takeLastWhile<T>(predicate: Predicate<T>): (array: $ReadOnlyArray<T>) => Array<T>;
-    takeLastWhile<T>(predicate: Predicate<T>, array: $ReadOnlyArray<T>): Array<T>;
-    takeWhile<T>(predicate: Predicate<T>): (array: $ReadOnlyArray<T>) => Array<T>;
-    takeWhile<T>(predicate: Predicate<T>, array: $ReadOnlyArray<T>): Array<T>;
-    union<T>(a1: $ReadOnlyArray<T>): (a2: $ReadOnlyArray<T>) => Array<T>;
-    union<T>(a1: $ReadOnlyArray<T>, a2: $ReadOnlyArray<T>): Array<T>;
-    unionBy<T>(
+    take:
+      & (<T>(n: number) => ((array: $ReadOnlyArray<T>) => Array<T>))
+      & (<T>(n: number, array: $ReadOnlyArray<T>) => Array<T>);
+    takeRight:
+      & (<T>(n: number) => ((array: $ReadOnlyArray<T>) => Array<T>))
+      & (<T>(n: number, array: $ReadOnlyArray<T>) => Array<T>);
+    takeLast:
+      & (<T>(n: number) => (array: $ReadOnlyArray<T>) => Array<T>)
+      & (<T>(n: number, array: $ReadOnlyArray<T>) => Array<T>);
+    takeRightWhile:
+      & (<T>(predicate: Predicate<T>) => ((array: $ReadOnlyArray<T>) => Array<T>))
+      & (<T>(predicate: Predicate<T>, array: $ReadOnlyArray<T>) => Array<T>);
+    takeLastWhile:
+      & (<T>(predicate: Predicate<T>) => ((array: $ReadOnlyArray<T>) => Array<T>))
+      & (<T>(predicate: Predicate<T>, array: $ReadOnlyArray<T>) => Array<T>);
+    takeWhile:
+      & (<T>(predicate: Predicate<T>) => ((array: $ReadOnlyArray<T>) => Array<T>))
+      & (<T>(predicate: Predicate<T>, array: $ReadOnlyArray<T>) => Array<T>);
+    union:
+      & (<T>(a1: $ReadOnlyArray<T>) => ((a2: $ReadOnlyArray<T>) => Array<T>))
+      & (<T>(a1: $ReadOnlyArray<T>, a2: $ReadOnlyArray<T>) => Array<T>);
+    unionBy:
+      & (<T>(
       iteratee: ValueOnlyIteratee<T>
-    ): ((a1: $ReadOnlyArray<T>) => (a2: $ReadOnlyArray<T>) => Array<T>) &
-      ((a1: $ReadOnlyArray<T>, a2: $ReadOnlyArray<T>) => Array<T>);
-    unionBy<T>(
+    ) => (((a1: $ReadOnlyArray<T>) => (a2: $ReadOnlyArray<T>) => Array<T>) &
+      ((a1: $ReadOnlyArray<T>, a2: $ReadOnlyArray<T>) => Array<T>)))
+    & (<T>(
       iteratee: ValueOnlyIteratee<T>,
       a1: $ReadOnlyArray<T>
-    ): (a2: $ReadOnlyArray<T>) => Array<T>;
-    unionBy<T>(
+    ) => ((a2: $ReadOnlyArray<T>) => Array<T>))
+    & (<T>(
       iteratee: ValueOnlyIteratee<T>,
       a1: $ReadOnlyArray<T>,
       a2: $ReadOnlyArray<T>
-    ): Array<T>;
-    unionWith<T>(
-      comparator: Comparator<T>
-    ): ((a1: $ReadOnlyArray<T>) => (a2: $ReadOnlyArray<T>) => Array<T>) &
-      ((a1: $ReadOnlyArray<T>, a2: $ReadOnlyArray<T>) => Array<T>);
-    unionWith<T>(
-      comparator: Comparator<T>,
-      a1: $ReadOnlyArray<T>
-    ): (a2: $ReadOnlyArray<T>) => Array<T>;
-    unionWith<T>(
-      comparator: Comparator<T>,
-      a1: $ReadOnlyArray<T>,
-      a2: $ReadOnlyArray<T>
-    ): Array<T>;
+    ) => Array<T>);
+    unionWith:
+      & (<T>(
+        comparator: Comparator<T>
+      ) => (((a1: $ReadOnlyArray<T>) => (a2: $ReadOnlyArray<T>) => Array<T>) &
+        ((a1: $ReadOnlyArray<T>, a2: $ReadOnlyArray<T>) => Array<T>)))
+      & (<T>(
+        comparator: Comparator<T>,
+        a1: $ReadOnlyArray<T>
+      ) => ((a2: $ReadOnlyArray<T>) => Array<T>))
+      & (<T>(
+        comparator: Comparator<T>,
+        a1: $ReadOnlyArray<T>,
+        a2: $ReadOnlyArray<T>
+      ) => Array<T>);
     uniq<T>(array: $ReadOnlyArray<T>): Array<T>;
-    uniqBy<T>(iteratee: ValueOnlyIteratee<T>): (array: $ReadOnlyArray<T>) => Array<T>;
-    uniqBy<T>(iteratee: ValueOnlyIteratee<T>, array: $ReadOnlyArray<T>): Array<T>;
-    uniqWith<T>(comparator: Comparator<T>): (array: $ReadOnlyArray<T>) => Array<T>;
-    uniqWith<T>(comparator: Comparator<T>, array: $ReadOnlyArray<T>): Array<T>;
+    uniqBy:
+      & (<T>(iteratee: ValueOnlyIteratee<T>) => ((array: $ReadOnlyArray<T>) => Array<T>))
+      & (<T>(iteratee: ValueOnlyIteratee<T>, array: $ReadOnlyArray<T>) => Array<T>);
+    uniqWith:
+      & (<T>(comparator: Comparator<T>) => ((array: $ReadOnlyArray<T>) => Array<T>))
+      & (<T>(comparator: Comparator<T>, array: $ReadOnlyArray<T>) => Array<T>);
     unzip<T>(array: $ReadOnlyArray<T>): Array<T>;
-    unzipWith<T>(iteratee: Iteratee<T>): (array: $ReadOnlyArray<T>) => Array<T>;
-    unzipWith<T>(iteratee: Iteratee<T>, array: $ReadOnlyArray<T>): Array<T>;
-    without<T>(values: $ReadOnlyArray<T>): (array: $ReadOnlyArray<T>) => Array<T>;
-    without<T>(values: $ReadOnlyArray<T>, array: $ReadOnlyArray<T>): Array<T>;
-    xor<T>(a1: $ReadOnlyArray<T>): (a2: $ReadOnlyArray<T>) => Array<T>;
-    xor<T>(a1: $ReadOnlyArray<T>, a2: $ReadOnlyArray<T>): Array<T>;
-    symmetricDifference<T>(a1: $ReadOnlyArray<T>): (a2: $ReadOnlyArray<T>) => Array<T>;
-    symmetricDifference<T>(a1: $ReadOnlyArray<T>, a2: $ReadOnlyArray<T>): Array<T>;
-    xorBy<T>(
-      iteratee: ValueOnlyIteratee<T>
-    ): ((a1: $ReadOnlyArray<T>) => (a2: $ReadOnlyArray<T>) => Array<T>) &
-      ((a1: $ReadOnlyArray<T>, a2: $ReadOnlyArray<T>) => Array<T>);
-    xorBy<T>(
-      iteratee: ValueOnlyIteratee<T>,
-      a1: $ReadOnlyArray<T>
-    ): (a2: $ReadOnlyArray<T>) => Array<T>;
-    xorBy<T>(
-      iteratee: ValueOnlyIteratee<T>,
-      a1: $ReadOnlyArray<T>,
-      a2: $ReadOnlyArray<T>
-    ): Array<T>;
-    symmetricDifferenceBy<T>(
-      iteratee: ValueOnlyIteratee<T>
-    ): ((a1: $ReadOnlyArray<T>) => (a2: $ReadOnlyArray<T>) => Array<T>) &
-      ((a1: $ReadOnlyArray<T>, a2: $ReadOnlyArray<T>) => Array<T>);
-    symmetricDifferenceBy<T>(
-      iteratee: ValueOnlyIteratee<T>,
-      a1: $ReadOnlyArray<T>
-    ): (a2: $ReadOnlyArray<T>) => Array<T>;
-    symmetricDifferenceBy<T>(
-      iteratee: ValueOnlyIteratee<T>,
-      a1: $ReadOnlyArray<T>,
-      a2: $ReadOnlyArray<T>
-    ): Array<T>;
-    xorWith<T>(
-      comparator: Comparator<T>
-    ): ((a1: $ReadOnlyArray<T>) => (a2: $ReadOnlyArray<T>) => Array<T>) &
-      ((a1: $ReadOnlyArray<T>, a2: $ReadOnlyArray<T>) => Array<T>);
-    xorWith<T>(
-      comparator: Comparator<T>,
-      a1: $ReadOnlyArray<T>
-    ): (a2: $ReadOnlyArray<T>) => Array<T>;
-    xorWith<T>(comparator: Comparator<T>, a1: $ReadOnlyArray<T>, a2: $ReadOnlyArray<T>): Array<T>;
-    symmetricDifferenceWith<T>(
-      comparator: Comparator<T>
-    ): ((a1: $ReadOnlyArray<T>) => (a2: $ReadOnlyArray<T>) => Array<T>) &
-      ((a1: $ReadOnlyArray<T>, a2: $ReadOnlyArray<T>) => Array<T>);
-    symmetricDifferenceWith<T>(
-      comparator: Comparator<T>,
-      a1: $ReadOnlyArray<T>
-    ): (a2: $ReadOnlyArray<T>) => Array<T>;
-    symmetricDifferenceWith<T>(
-      comparator: Comparator<T>,
-      a1: $ReadOnlyArray<T>,
-      a2: $ReadOnlyArray<T>
-    ): Array<T>;
-    zip<A, B>(a1: $ReadOnlyArray<A>): (a2: $ReadOnlyArray<B>) => Array<[A, B]>;
-    zip<A, B>(a1: $ReadOnlyArray<A>, a2: $ReadOnlyArray<B>): Array<[A, B]>;
+    unzipWith:
+      & (<T>(iteratee: Iteratee<T>) => ((array: $ReadOnlyArray<T>) => Array<T>))
+      & (<T>(iteratee: Iteratee<T>, array: $ReadOnlyArray<T>) => Array<T>);
+    without:
+      & (<T>(values: $ReadOnlyArray<T>) => ((array: $ReadOnlyArray<T>) => Array<T>))
+      & (<T>(values: $ReadOnlyArray<T>, array: $ReadOnlyArray<T>) => Array<T>);
+    xor:
+      & (<T>(a1: $ReadOnlyArray<T>) => ((a2: $ReadOnlyArray<T>) => Array<T>))
+      & (<T>(a1: $ReadOnlyArray<T>, a2: $ReadOnlyArray<T>) => Array<T>);
+    symmetricDifference:
+      & (<T>(a1: $ReadOnlyArray<T>) => ((a2: $ReadOnlyArray<T>) => Array<T>))
+      & (<T>(a1: $ReadOnlyArray<T>, a2: $ReadOnlyArray<T>) => Array<T>);
+    xorBy:
+      & (<T>(
+        iteratee: ValueOnlyIteratee<T>
+      ) => (((a1: $ReadOnlyArray<T>) => (a2: $ReadOnlyArray<T>) => Array<T>) &
+        ((a1: $ReadOnlyArray<T>, a2: $ReadOnlyArray<T>) => Array<T>)))
+      & (<T>(
+        iteratee: ValueOnlyIteratee<T>,
+        a1: $ReadOnlyArray<T>
+      ) => ((a2: $ReadOnlyArray<T>) => Array<T>))
+      & (<T>(
+        iteratee: ValueOnlyIteratee<T>,
+        a1: $ReadOnlyArray<T>,
+        a2: $ReadOnlyArray<T>
+      ) => Array<T>);
+    symmetricDifferenceBy:
+      & (<T>(
+        iteratee: ValueOnlyIteratee<T>
+      ) => ((a1: $ReadOnlyArray<T>) => (a2: $ReadOnlyArray<T>) => Array<T>) &
+        ((a1: $ReadOnlyArray<T>, a2: $ReadOnlyArray<T>) => Array<T>))
+      & (<T>(
+        iteratee: ValueOnlyIteratee<T>,
+        a1: $ReadOnlyArray<T>
+      ) => (a2: $ReadOnlyArray<T>) => Array<T>)
+      & (<T>(
+        iteratee: ValueOnlyIteratee<T>,
+        a1: $ReadOnlyArray<T>,
+        a2: $ReadOnlyArray<T>
+      ) => Array<T>);
+    xorWith:
+      & (<T>(
+        comparator: Comparator<T>
+      ) => (((a1: $ReadOnlyArray<T>) => (a2: $ReadOnlyArray<T>) => Array<T>) &
+        ((a1: $ReadOnlyArray<T>, a2: $ReadOnlyArray<T>) => Array<T>)))
+      & (<T>(
+        comparator: Comparator<T>,
+        a1: $ReadOnlyArray<T>
+      ) => ((a2: $ReadOnlyArray<T>) => Array<T>))
+      & (<T>(comparator: Comparator<T>, a1: $ReadOnlyArray<T>, a2: $ReadOnlyArray<T>) => Array<T>);
+    symmetricDifferenceWith:
+      & (<T>(
+        comparator: Comparator<T>
+      ) => (((a1: $ReadOnlyArray<T>) => (a2: $ReadOnlyArray<T>) => Array<T>) &
+        ((a1: $ReadOnlyArray<T>, a2: $ReadOnlyArray<T>) => Array<T>)))
+      & (<T>(
+        comparator: Comparator<T>,
+        a1: $ReadOnlyArray<T>
+      ) => ((a2: $ReadOnlyArray<T>) => Array<T>))
+      & (<T>(
+        comparator: Comparator<T>,
+        a1: $ReadOnlyArray<T>,
+        a2: $ReadOnlyArray<T>
+      ) => Array<T>);
+    zip:
+      & (<A, B>(a1: $ReadOnlyArray<A>) => ((a2: $ReadOnlyArray<B>) => Array<[A, B]>))
+      & (<A, B>(a1: $ReadOnlyArray<A>, a2: $ReadOnlyArray<B>) => Array<[A, B]>);
     zipAll(arrays: $ReadOnlyArray<$ReadOnlyArray<any>>): Array<any>;
-    zipObject<K, V>(props?: $ReadOnlyArray<K>): (values?: $ReadOnlyArray<V>) => { [key: K]: V, ... };
-    zipObject<K, V>(props?: $ReadOnlyArray<K>, values?: $ReadOnlyArray<V>): { [key: K]: V, ... };
-    zipObj(props: $ReadOnlyArray<any>): (values: $ReadOnlyArray<any>) => Object;
-    zipObj(props: $ReadOnlyArray<any>, values: $ReadOnlyArray<any>): Object;
-    zipObjectDeep(props: $ReadOnlyArray<any>): (values: any) => Object;
-    zipObjectDeep(props: $ReadOnlyArray<any>, values: any): Object;
-    zipWith<T>(
-      iteratee: Iteratee<T>
-    ): ((a1: NestedArray<T>) => (a2: NestedArray<T>) => Array<T>) &
-      ((a1: NestedArray<T>, a2: NestedArray<T>) => Array<T>);
-    zipWith<T>(
-      iteratee: Iteratee<T>,
-      a1: NestedArray<T>
-    ): (a2: NestedArray<T>) => Array<T>;
-    zipWith<T>(
-      iteratee: Iteratee<T>,
-      a1: NestedArray<T>,
-      a2: NestedArray<T>
-    ): Array<T>;
+    zipObject:
+      & (<K, V>(props?: $ReadOnlyArray<K>) => ((values?: $ReadOnlyArray<V>) => { [key: K]: V, ... }))
+      & (<K, V>(props?: $ReadOnlyArray<K>, values?: $ReadOnlyArray<V>) => { [key: K]: V, ... });
+    zipObj:
+      & ((props: $ReadOnlyArray<any>) => ((values: $ReadOnlyArray<any>) => Object))
+      & ((props: $ReadOnlyArray<any>, values: $ReadOnlyArray<any>) => Object);
+    zipObjectDeep:
+      & ((props: $ReadOnlyArray<any>) => ((values: any) => Object))
+      & ((props: $ReadOnlyArray<any>, values: any) => Object);
+    zipWith:
+      & (<T>(
+        iteratee: Iteratee<T>
+      ) => (((a1: NestedArray<T>) => (a2: NestedArray<T>) => Array<T>) &
+        ((a1: NestedArray<T>, a2: NestedArray<T>) => Array<T>)))
+      & (<T>(
+        iteratee: Iteratee<T>,
+        a1: NestedArray<T>
+      ) => ((a2: NestedArray<T>) => Array<T>))
+      & (<T>(
+        iteratee: Iteratee<T>,
+        a1: NestedArray<T>,
+        a2: NestedArray<T>
+      ) => Array<T>);
 
     // Collection
     countBy<T>(
