@@ -3440,79 +3440,95 @@ declare module "lodash/fp" {
     camelCase(string: string): string;
     capitalize(string: string): string;
     deburr(string: string): string;
-    endsWith(target: string): (string: string) => boolean;
-    endsWith(target: string, string: string): boolean;
+    endsWith:
+      & ((target: string) => ((string: string) => boolean))
+      & ((target: string, string: string) => boolean);
     escape(string: string): string;
     escapeRegExp(string: string): string;
     kebabCase(string: string): string;
     lowerCase(string: string): string;
     lowerFirst(string: string): string;
-    pad(length: number): (string: string) => string;
-    pad(length: number, string: string): string;
-    padChars(
-      chars: string
-    ): ((length: number) => (string: string) => string) &
-      ((length: number, string: string) => string);
-    padChars(chars: string, length: number): (string: string) => string;
-    padChars(chars: string, length: number, string: string): string;
-    padEnd(length: number): (string: string) => string;
-    padEnd(length: number, string: string): string;
-    padCharsEnd(
-      chars: string
-    ): ((length: number) => (string: string) => string) &
-      ((length: number, string: string) => string);
-    padCharsEnd(chars: string, length: number): (string: string) => string;
-    padCharsEnd(chars: string, length: number, string: string): string;
-    padStart(length: number): (string: string) => string;
-    padStart(length: number, string: string): string;
-    padCharsStart(
-      chars: string
-    ): ((length: number) => (string: string) => string) &
-      ((length: number, string: string) => string);
-    padCharsStart(chars: string, length: number): (string: string) => string;
-    padCharsStart(chars: string, length: number, string: string): string;
-    parseInt(radix: number): (string: string) => number;
-    parseInt(radix: number, string: string): number;
-    repeat(n: number): (string: string) => string;
-    repeat(n: number, string: string): string;
-    replace(
-      pattern: RegExp | string
-    ): ((
-      replacement: ((string: string) => string) | string
-    ) => (string: string) => string) &
-      ((
+    pad:
+      & ((length: number) => ((string: string) => string))
+      & ((length: number, string: string) => string);
+    padChars:
+      & ((
+        chars: string
+      ) => (((length: number) => (string: string) => string) &
+        ((length: number, string: string) => string)))
+      & ((chars: string, length: number) => ((string: string) => string))
+      & ((chars: string, length: number, string: string) => string);
+    padEnd:
+      & ((length: number) => ((string: string) => string))
+      & ((length: number, string: string) => string);
+    padCharsEnd:
+      & ((
+        chars: string
+      ) => (((length: number) => (string: string) => string) &
+        ((length: number, string: string) => string)))
+      & ((chars: string, length: number) => ((string: string) => string))
+      & ((chars: string, length: number, string: string) => string);
+    padStart:
+      & ((length: number) => ((string: string) => string))
+      & ((length: number, string: string) => string);
+    padCharsStart:
+      & ((
+        chars: string
+      ) => (((length: number) => (string: string) => string) &
+        ((length: number, string: string) => string)))
+      & ((chars: string, length: number) => ((string: string) => string))
+      & ((chars: string, length: number, string: string) => string);
+    parseInt:
+      & ((radix: number) => ((string: string) => number))
+      & ((radix: number, string: string) => number);
+    repeat:
+      & ((n: number) => (string: string) => string)
+      & ((n: number, string: string) => string);
+    replace:
+      & ((
+        pattern: RegExp | string
+      ) => (((
+        replacement: ((string: string) => string) | string
+      ) => (string: string) => string) &
+        ((
+          replacement: ((string: string) => string) | string,
+          string: string
+        ) => string)))
+      & ((
+        pattern: RegExp | string,
+        replacement: ((string: string) => string) | string
+      ) => ((string: string) => string))
+      & ((
+        pattern: RegExp | string,
         replacement: ((string: string) => string) | string,
         string: string
       ) => string);
-    replace(
-      pattern: RegExp | string,
-      replacement: ((string: string) => string) | string
-    ): (string: string) => string;
-    replace(
-      pattern: RegExp | string,
-      replacement: ((string: string) => string) | string,
-      string: string
-    ): string;
     snakeCase(string: string): string;
-    split(separator: RegExp | string): (string: string) => Array<string>;
-    split(separator: RegExp | string, string: string): Array<string>;
+    split:
+      & ((separator: RegExp | string) => ((string: string) => Array<string>))
+      & ((separator: RegExp | string, string: string) => Array<string>);
     startCase(string: string): string;
-    startsWith(target: string): (string: string) => boolean;
-    startsWith(target: string, string: string): boolean;
+    startsWith:
+      & ((target: string) => ((string: string) => boolean))
+      & ((target: string, string: string) => boolean);
     template(string: string): Function;
     toLower(string: string): string;
     toUpper(string: string): string;
     trim(string: string): string;
-    trimChars(chars: string): (string: string) => string;
-    trimChars(chars: string, string: string): string;
+    trimChars:
+      & ((chars: string) => ((string: string) => string))
+      & ((chars: string, string: string) => string);
     trimEnd(string: string): string;
-    trimCharsEnd(chars: string): (string: string) => string;
-    trimCharsEnd(chars: string, string: string): string;
+    trimCharsEnd:
+      & ((chars: string) => ((string: string) => string))
+      & ((chars: string, string: string) => string);
     trimStart(string: string): string;
-    trimCharsStart(chars: string): (string: string) => string;
-    trimCharsStart(chars: string, string: string): string;
-    truncate(options: TruncateOptions): (string: string) => string;
-    truncate(options: TruncateOptions, string: string): string;
+    trimCharsStart:
+      & ((chars: string) => ((string: string) => string))
+      & ((chars: string, string: string) => string);
+    truncate:
+      & ((options: TruncateOptions) => ((string: string) => string))
+      & ((options: TruncateOptions, string: string) => string);
     unescape(string: string): string;
     upperCase(string: string): string;
     upperFirst(string: string): string;
@@ -3520,53 +3536,59 @@ declare module "lodash/fp" {
 
     // Util
     attempt(func: Function): any;
-    bindAll(methodNames: $ReadOnlyArray<string>): (object: Object) => Object;
-    bindAll(methodNames: $ReadOnlyArray<string>, object: Object): Object;
+    bindAll:
+      & ((methodNames: $ReadOnlyArray<string>) => ((object: Object) => Object))
+      & ((methodNames: $ReadOnlyArray<string>, object: Object) => Object);
     cond(pairs: NestedArray<Function>): Function;
     constant<T>(value: T): () => T;
     always<T>(value: T): () => T;
-    defaultTo<T1: void | null, T2>(defaultValue: T2): (value: T1) => T2;
-    defaultTo<T1: void | null, T2>(defaultValue: T2, value: T1): T2;
-    defaultTo<T1: string | boolean, T2>(
-      defaultValue: T2
-    ): (value: T1) => T1;
-    defaultTo<T1: string | boolean, T2>(
-      defaultValue: T2,
-      value: T1
-    ): T1;
-    // NaN is a number instead of its own type, otherwise it would behave like null/void
-    defaultTo<T1: number, T2>(defaultValue: T2): (value: T1) => T1 | T2;
-    defaultTo<T1: number, T2>(defaultValue: T2, value: T1): T1 | T2;
+    defaultTo:
+      & (<T1: void | null, T2>(defaultValue: T2) => ((value: T1) => T2))
+      & (<T1: void | null, T2>(defaultValue: T2, value: T1) => T2)
+      & (<T1: string | boolean, T2>(
+        defaultValue: T2
+      ) => ((value: T1) => T1))
+      & (<T1: string | boolean, T2>(
+        defaultValue: T2,
+        value: T1
+      ) => T1)
+      // NaN is a number instead of its own type, otherwise it would behave like null/void
+      & (<T1: number, T2>(defaultValue: T2) => ((value: T1) => T1 | T2))
+      & (<T1: number, T2>(defaultValue: T2, value: T1) => T1 | T2);
     flow: $ComposeReverse & ((funcs: $ReadOnlyArray<Function>) => Function);
     pipe: $ComposeReverse & ((funcs: $ReadOnlyArray<Function>) => Function);
     flowRight: $Compose & ((funcs: $ReadOnlyArray<Function>) => Function);
     compose: $Compose & ((funcs: $ReadOnlyArray<Function>) => Function);
-    compose(funcs: $ReadOnlyArray<Function>): Function;
     identity<T>(value: T): T;
     iteratee(func: any): Function;
-    matches(source: Object): (object: Object) => boolean;
-    matches(source: Object, object: Object): boolean;
-    matchesProperty(path: Path): (srcValue: any) => Function;
-    matchesProperty(path: Path, srcValue: any): Function;
-    propEq(path: Path): (srcValue: any) => Function;
-    propEq(path: Path, srcValue: any): Function;
-    pathEq(path: Path): (srcValue: any) => Function;
-    pathEq(path: Path, srcValue: any): Function;
+    matches:
+      & ((source: Object) => ((object: Object) => boolean))
+      & ((source: Object, object: Object) => boolean);
+    matchesProperty:
+      & ((path: Path) => ((srcValue: any) => Function))
+      & ((path: Path, srcValue: any) => Function);
+    propEq:
+      & ((path: Path) => ((srcValue: any) => Function))
+      & ((path: Path, srcValue: any) => Function);
+    pathEq:
+      & ((path: Path) => ((srcValue: any) => Function))
+      & ((path: Path, srcValue: any) => Function);
     method(path: Path): Function;
     methodOf(object: Object): Function;
-    mixin<T: Function | Object>(
-      object: T
-    ): ((source: Object) => (options: { chain: boolean, ... }) => T) &
-      ((source: Object, options: { chain: boolean, ... }) => T);
-    mixin<T: Function | Object>(
-      object: T,
-      source: Object
-    ): (options: { chain: boolean, ... }) => T;
-    mixin<T: Function | Object>(
-      object: T,
-      source: Object,
-      options: { chain: boolean, ... }
-    ): T;
+    mixin:
+      & (<T: Function | Object>(
+        object: T
+      ) => (((source: Object) => (options: { chain: boolean, ... }) => T) &
+        ((source: Object, options: { chain: boolean, ... }) => T)))
+      & (<T: Function | Object>(
+        object: T,
+        source: Object
+      ) => ((options: { chain: boolean, ... }) => T))
+      & (<T: Function | Object>(
+        object: T,
+        source: Object,
+        options: { chain: boolean, ... }
+      ) => T);
     noConflict(): Lodash;
     noop(...args: $ReadOnlyArray<mixed>): void;
     nthArg(n: number): Function;
@@ -3576,28 +3598,34 @@ declare module "lodash/fp" {
     allPass(predicates: $ReadOnlyArray<Function>): Function;
     overSome(predicates: $ReadOnlyArray<Function>): Function;
     anyPass(predicates: $ReadOnlyArray<Function>): Function;
-    property(
-      path: Path
-    ): (object: Object | $ReadOnlyArray<any>) => any;
-    property(path: Path, object: Object | $ReadOnlyArray<any>): any;
-    propertyOf(object: Object): (path: Path) => Function;
-    propertyOf(object: Object, path: Path): Function;
-    range(start: number): (end: number) => Array<number>;
-    range(start: number, end: number): Array<number>;
-    rangeStep(
+    property:
+      & ((
+        path: Path
+      ) => ((object: Object | $ReadOnlyArray<any>) => any))
+      & ((path: Path, object: Object | $ReadOnlyArray<any>) => any);
+    propertyOf:
+      & ((object: Object) => ((path: Path) => Function))
+      & ((object: Object, path: Path) => Function);
+    range:
+      & ((start: number) => ((end: number) => Array<number>))
+      & (start: number, end: number) => Array<number>;
+    rangeStep:
+      & ((
       step: number
-    ): ((start: number) => (end: number) => Array<number>) &
-      ((start: number, end: number) => Array<number>);
-    rangeStep(step: number, start: number): (end: number) => Array<number>;
-    rangeStep(step: number, start: number, end: number): Array<number>;
-    rangeRight(start: number): (end: number) => Array<number>;
-    rangeRight(start: number, end: number): Array<number>;
-    rangeStepRight(
-      step: number
-    ): ((start: number) => (end: number) => Array<number>) &
-      ((start: number, end: number) => Array<number>);
-    rangeStepRight(step: number, start: number): (end: number) => Array<number>;
-    rangeStepRight(step: number, start: number, end: number): Array<number>;
+    ) => (((start: number) => (end: number) => Array<number>) &
+      ((start: number, end: number) => Array<number>)))
+    & ((step: number, start: number) => ((end: number) => Array<number>))
+    & ((step: number, start: number, end: number) => Array<number>);
+    rangeRight:
+      & ((start: number) => ((end: number) => Array<number>))
+      & ((start: number, end: number) => Array<number>);
+    rangeStepRight:
+      & ((
+        step: number
+      ) => (((start: number) => (end: number) => Array<number>) &
+        ((start: number, end: number) => Array<number>)))
+      & ((step: number, start: number) => ((end: number) => Array<number>))
+      & ((step: number, start: number, end: number) => Array<number>);
     runInContext(context: Object): Function;
 
     stubArray(): Array<*>;
