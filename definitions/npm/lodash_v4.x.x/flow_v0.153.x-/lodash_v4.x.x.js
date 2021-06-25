@@ -2606,56 +2606,74 @@ declare module "lodash/fp" {
     now(): number;
 
     // Function
-    after(fn: Function): (n: number) => Function;
-    after(fn: Function, n: number): Function;
+    after:
+      & ((fn: Function) => ((n: number) => Function))
+      & ((fn: Function, n: number) => Function);
     ary(func: Function): Function;
-    nAry(n: number): (func: Function) => Function;
-    nAry(n: number, func: Function): Function;
-    before(fn: Function): (n: number) => Function;
-    before(fn: Function, n: number): Function;
-    bind(func: Function): (thisArg: any) => Function;
-    bind(func: Function, thisArg: any): Function;
-    bindKey(obj: Object): (key: string) => Function;
-    bindKey(obj: Object, key: string): Function;
+    nAry:
+      & ((n: number) => ((func: Function) => Function))
+      & ((n: number, func: Function) => Function);
+    before:
+      & ((fn: Function) => ((n: number) => Function))
+      & ((fn: Function, n: number) => Function);
+    bind:
+      & ((func: Function) => ((thisArg: any) => Function))
+      & ((func: Function, thisArg: any) => Function);
+    bindKey:
+      & ((obj: Object) => (key: string) => Function)
+      & ((obj: Object, key: string) => Function);
     curry: Curry;
-    curryN(arity: number): (func: Function) => Function;
-    curryN(arity: number, func: Function): Function;
+    curryN:
+      & ((arity: number) => ((func: Function) => Function))
+      & ((arity: number, func: Function) => Function);
     curryRight(func: Function): Function;
-    curryRightN(arity: number): (func: Function) => Function;
-    curryRightN(arity: number, func: Function): Function;
-    debounce(wait: number): <A, R>(func: (...A) => R) => (...A) => R;
-    debounce<A, R>(wait: number, func: (...A) => R): (...A) => R;
+    curryRightN:
+      & ((arity: number) => ((func: Function) => Function))
+      & ((arity: number, func: Function) => Function);
+    debounce:
+      & ((wait: number) => (<A, R>(func: (...A) => R) => (...A) => R))
+      & (<A, R>(wait: number, func: (...A) => R) => ((...A) => R));
     defer(func: (...$ReadOnlyArray<any>) => any): TimeoutID;
-    delay(wait: number): (func: Function) => TimeoutID;
-    delay(wait: number, func: Function): TimeoutID;
+    delay:
+      & ((wait: number) => ((func: Function) => TimeoutID))
+      & ((wait: number, func: Function) => TimeoutID);
     flip(func: Function): Function;
     memoize<F: Function>(func: F): F;
     negate<A, R>(predicate: (...A) => R): (...A) => boolean;
     complement(predicate: Function): Function;
     once(func: Function): Function;
-    overArgs(func: Function): (transforms: $ReadOnlyArray<Function>) => Function;
-    overArgs(func: Function, transforms: $ReadOnlyArray<Function>): Function;
-    useWith(func: Function): (transforms: $ReadOnlyArray<Function>) => Function;
-    useWith(func: Function, transforms: $ReadOnlyArray<Function>): Function;
-    partial(func: Function): (partials: $ReadOnlyArray<any>) => Function;
-    partial(func: Function, partials: $ReadOnlyArray<any>): Function;
-    partialRight(func: Function): (partials: $ReadOnlyArray<any>) => Function;
-    partialRight(func: Function, partials: $ReadOnlyArray<any>): Function;
-    rearg(indexes: $ReadOnlyArray<number>): (func: Function) => Function;
-    rearg(indexes: $ReadOnlyArray<number>, func: Function): Function;
+    overArgs:
+      & ((func: Function) => ((transforms: $ReadOnlyArray<Function>) => Function))
+      & ((func: Function, transforms: $ReadOnlyArray<Function>) => Function);
+    useWith:
+      & ((func: Function) => ((transforms: $ReadOnlyArray<Function>) => Function))
+      & ((func: Function, transforms: $ReadOnlyArray<Function>) => Function);
+    partial:
+      & ((func: Function) => ((partials: $ReadOnlyArray<any>) => Function))
+      & ((func: Function, partials: $ReadOnlyArray<any>) => Function);
+    partialRight:
+      & ((func: Function) => (partials: $ReadOnlyArray<any>) => Function)
+      & ((func: Function, partials: $ReadOnlyArray<any>) => Function);
+    rearg:
+      & ((indexes: $ReadOnlyArray<number>) => ((func: Function) => Function))
+      & ((indexes: $ReadOnlyArray<number>, func: Function) => Function);
     rest(func: Function): Function;
     unapply(func: Function): Function;
-    restFrom(start: number): (func: Function) => Function;
-    restFrom(start: number, func: Function): Function;
+    restFrom:
+      & ((start: number) => ((func: Function) => Function))
+      & ((start: number, func: Function) => Function);
     spread(func: Function): Function;
     apply(func: Function): Function;
-    spreadFrom(start: number): (func: Function) => Function;
-    spreadFrom(start: number, func: Function): Function;
-    throttle<A, R>(wait: number): (func: (...A) => R) => (...A) => R;
-    throttle<A, R>(wait: number, func: (...A) => R): (...A) => R;
+    spreadFrom:
+      & ((start: number) => ((func: Function) => Function))
+      & ((start: number, func: Function) => Function);
+    throttle:
+      & (<A, R>(wait: number) => ((func: (...A) => R) => (...A) => R))
+      & (<A, R>(wait: number, func: (...A) => R) => ((...A) => R));
     unary<T, R>(func: (T, ...$ReadOnlyArray<any>) => R): (T) => R;
-    wrap(wrapper: Function): (value: any) => Function;
-    wrap(wrapper: Function, value: any): Function;
+    wrap:
+      & ((wrapper: Function) => ((value: any) => Function))
+      & ((wrapper: Function, value: any) => Function);
 
     // Lang
     castArray(): Array<any>;
