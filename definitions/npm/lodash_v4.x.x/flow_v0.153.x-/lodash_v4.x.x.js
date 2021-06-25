@@ -222,7 +222,7 @@ declare module "lodash" {
     | ((item: T, key: string, object: O) => U)
     | propertyIterateeShorthand;
 
-  declare type Lodash = {
+  declare type Lodash = {|
     // Array
     chunk<T>(array?: ?$ReadOnlyArray<T>, size?: ?number): Array<Array<T>>;
     compact<T, N = ?T | boolean>(array?: ?$ReadOnlyArray<N>): Array<T>;
@@ -1604,7 +1604,7 @@ declare module "lodash" {
     // Properties
     VERSION: string;
     templateSettings: TemplateSettings;
-  }
+  |}
 
   declare module.exports: Lodash;
 }
@@ -1818,7 +1818,7 @@ declare module "lodash/fp" {
     | ((item: T) => U)
     | propertyIterateeShorthand;
 
-  declare type Lodash = {
+  declare type Lodash = {|
     // Array
     chunk:
       & (<T>(size: number) => ((array: $ReadOnlyArray<T>) => Array<Array<T>>))
@@ -3532,7 +3532,7 @@ declare module "lodash/fp" {
     // Properties
     VERSION: string;
     templateSettings: TemplateSettings;
-  }
+  |}
 
   declare module.exports: Lodash;
 }

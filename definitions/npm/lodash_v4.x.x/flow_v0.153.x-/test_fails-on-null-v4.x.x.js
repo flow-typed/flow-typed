@@ -27,6 +27,7 @@ import unary from "lodash/unary";
 //$FlowExpectedError[incompatible-call]
 after(null, null);
 //$FlowExpectedError[extra-arg]
+//$FlowExpectedError[incompatible-call]
 ary(null, null, null);
 //$FlowExpectedError[incompatible-call]
 before(null, null);
@@ -35,6 +36,7 @@ bind();
 //$FlowExpectedError[incompatible-call]
 curry(null, null, null);
 //$FlowExpectedError[extra-arg]
+//$FlowExpectedError[incompatible-call]
 curryRight(null, null, null);
 //$FlowExpectedError[incompatible-call]
 debounce(null, null, null);
