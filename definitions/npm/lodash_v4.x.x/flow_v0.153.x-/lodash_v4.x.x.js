@@ -2889,20 +2889,23 @@ declare module "lodash/fp" {
     sumBy<T>(iteratee: Iteratee<T>, array: $ReadOnlyArray<T>): number;
 
     // number
-    clamp(
-      lower: number
-    ): ((upper: number) => (number: number) => number) &
-      ((upper: number, number: number) => number);
-    clamp(lower: number, upper: number): (number: number) => number;
-    clamp(lower: number, upper: number, number: number): number;
-    inRange(
-      start: number
-    ): ((end: number) => (number: number) => boolean) &
-      ((end: number, number: number) => boolean);
-    inRange(start: number, end: number): (number: number) => boolean;
-    inRange(start: number, end: number, number: number): boolean;
-    random(lower: number): (upper: number) => number;
-    random(lower: number, upper: number): number;
+    clamp:
+      & ((
+        lower: number
+      ) => (((upper: number) => (number: number) => number) &
+        ((upper: number, number: number) => number)))
+      & ((lower: number, upper: number) => ((number: number) => number))
+      & ((lower: number, upper: number, number: number) => number);
+    inRange:
+      & ((
+        start: number
+      ) => (((end: number) => (number: number) => boolean) &
+        ((end: number, number: number) => boolean)))
+      & ((start: number, end: number) => ((number: number) => boolean))
+      & ((start: number, end: number, number: number) => boolean);
+    random:
+      & ((lower: number) => ((upper: number) => number))
+      & ((lower: number, upper: number) => number);
 
     // Object
     assign(object: Object): (source: Object) => Object;
