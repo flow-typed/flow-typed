@@ -2676,54 +2676,64 @@ declare module "lodash/fp" {
       & ((wrapper: Function, value: any) => Function);
 
     // Lang
-    castArray(): Array<any>;
-    castArray<T: void | null | number | string | {...}>(value: T): Array<T>;
-    castArray<T: Array<any>>(value: T): T;
+    castArray:
+      & (() => Array<any>)
+      & (<T: void | null | number | string | {...}>(value: T) => Array<T>)
+      & (<T: Array<any>>(value: T) => T);
     clone<T>(value: T): T;
     cloneDeep<T>(value: T): T;
-    cloneDeepWith<T, U>(
-      customizer: (value: T, key: number | string, object: T, stack: any) => U
-    ): (value: T) => U;
-    cloneDeepWith<T, U>(
-      customizer: (value: T, key: number | string, object: T, stack: any) => U,
-      value: T
-    ): U;
-    cloneWith<T, U>(
-      customizer: (value: T, key: number | string, object: T, stack: any) => U
-    ): (value: T) => U;
-    cloneWith<T, U>(
-      customizer: (value: T, key: number | string, object: T, stack: any) => U,
-      value: T
-    ): U;
-    conformsTo<T: ReadOnlyIndexerObject<mixed>>(
-      predicates: T & $ReadOnly<{ [key: string]: (x: any) => boolean, ... }>
-    ): (source: T) => boolean;
-    conformsTo<T: ReadOnlyIndexerObject<mixed>>(
-      predicates: T & $ReadOnly<{ [key: string]: (x: any) => boolean, ... }>,
-      source: T
-    ): boolean;
-    where<T: ReadOnlyIndexerObject<mixed>>(
-      predicates: T & $ReadOnly<{ [key: string]: (x: any) => boolean, ... }>
-    ): (source: T) => boolean;
-    where<T: ReadOnlyIndexerObject<mixed>>(
-      predicates: T & $ReadOnly<{ [key: string]: (x: any) => boolean, ... }>,
-      source: T
-    ): boolean;
-    conforms<T: ReadOnlyIndexerObject<mixed>>(
-      predicates: T & $ReadOnly<{ [key: string]: (x: any) => boolean, ... }>
-    ): (source: T) => boolean;
-    conforms<T: ReadOnlyIndexerObject<mixed>>(
-      predicates: T & $ReadOnly<{ [key: string]: (x: any) => boolean, ... }>,
-      source: T
-    ): boolean;
-    eq(value: any): (other: any) => boolean;
-    eq(value: any, other: any): boolean;
-    identical(value: any): (other: any) => boolean;
-    identical(value: any, other: any): boolean;
-    gt(value: any): (other: any) => boolean;
-    gt(value: any, other: any): boolean;
-    gte(value: any): (other: any) => boolean;
-    gte(value: any, other: any): boolean;
+    cloneDeepWith:
+      & (<T, U>(
+        customizer: (value: T, key: number | string, object: T, stack: any) => U
+      ) => ((value: T) => U))
+      & (<T, U>(
+        customizer: (value: T, key: number | string, object: T, stack: any) => U,
+        value: T
+      ) => U);
+    cloneWith:
+      & (<T, U>(
+        customizer: (value: T, key: number | string, object: T, stack: any) => U
+      ) => ((value: T) => U))
+      & (<T, U>(
+        customizer: (value: T, key: number | string, object: T, stack: any) => U,
+        value: T
+      ) => U);
+    conformsTo:
+      & (<T: ReadOnlyIndexerObject<mixed>>(
+        predicates: T & $ReadOnly<{ [key: string]: (x: any) => boolean, ... }>
+      ) => ((source: T) => boolean))
+      & (<T: ReadOnlyIndexerObject<mixed>>(
+        predicates: T & $ReadOnly<{ [key: string]: (x: any) => boolean, ... }>,
+        source: T
+      ) => boolean);
+    where:
+      & (<T: ReadOnlyIndexerObject<mixed>>(
+        predicates: T & $ReadOnly<{ [key: string]: (x: any) => boolean, ... }>
+      ) => ((source: T) => boolean))
+      & (<T: ReadOnlyIndexerObject<mixed>>(
+        predicates: T & $ReadOnly<{ [key: string]: (x: any) => boolean, ... }>,
+        source: T
+      ) => boolean);
+    conforms:
+      & (<T: ReadOnlyIndexerObject<mixed>>(
+        predicates: T & $ReadOnly<{ [key: string]: (x: any) => boolean, ... }>
+      ) => ((source: T) => boolean))
+      & (<T: ReadOnlyIndexerObject<mixed>>(
+        predicates: T & $ReadOnly<{ [key: string]: (x: any) => boolean, ... }>,
+        source: T
+      ) => boolean);
+    eq:
+      & ((value: any) => ((other: any) => boolean))
+      & ((value: any, other: any) => boolean);
+    identical:
+      & ((value: any) => ((other: any) => boolean))
+      & ((value: any, other: any) => boolean);
+    gt:
+      & ((value: any) => (other: any) => boolean)
+      & ((value: any, other: any) => boolean);
+    gte:
+      & ((value: any) => ((other: any) => boolean))
+      & ((value: any, other: any) => boolean);
     isArguments(value: any): boolean;
     isArray(value: any): boolean;
     isArrayBuffer(value: any): boolean;
@@ -2734,85 +2744,91 @@ declare module "lodash/fp" {
     isDate(value: any): boolean;
     isElement(value: any): boolean;
     isEmpty(value: any): boolean;
-    isEqual(value: any): (other: any) => boolean;
-    isEqual(value: any, other: any): boolean;
-    equals(value: any): (other: any) => boolean;
-    equals(value: any, other: any): boolean;
-    isEqualWith<T, U>(
-      customizer: (
-        objValue: any,
-        otherValue: any,
-        key: number | string,
-        object: T,
-        other: U,
-        stack: any
-      ) => boolean | void
-    ): ((value: T) => (other: U) => boolean) &
-      ((value: T, other: U) => boolean);
-    isEqualWith<T, U>(
-      customizer: (
-        objValue: any,
-        otherValue: any,
-        key: number | string,
-        object: T,
-        other: U,
-        stack: any
-      ) => boolean | void,
-      value: T
-    ): (other: U) => boolean;
-    isEqualWith<T, U>(
-      customizer: (
-        objValue: any,
-        otherValue: any,
-        key: number | string,
-        object: T,
-        other: U,
-        stack: any
-      ) => boolean | void,
-      value: T,
-      other: U
-    ): boolean;
+    isEqual:
+      & ((value: any) => ((other: any) => boolean))
+      & ((value: any, other: any) => boolean);
+    equals:
+      & ((value: any) => (other: any) => boolean)
+      & ((value: any, other: any) => boolean);
+    isEqualWith:
+      & (<T, U>(
+        customizer: (
+          objValue: any,
+          otherValue: any,
+          key: number | string,
+          object: T,
+          other: U,
+          stack: any
+        ) => boolean | void
+      ) => (((value: T) => (other: U) => boolean) &
+        ((value: T, other: U) => boolean)))
+      & (<T, U>(
+        customizer: (
+          objValue: any,
+          otherValue: any,
+          key: number | string,
+          object: T,
+          other: U,
+          stack: any
+        ) => boolean | void,
+        value: T
+      ) => ((other: U) => boolean))
+      & (<T, U>(
+        customizer: (
+          objValue: any,
+          otherValue: any,
+          key: number | string,
+          object: T,
+          other: U,
+          stack: any
+        ) => boolean | void,
+        value: T,
+        other: U
+      ) => boolean);
     isError(value: any): boolean;
     isFinite(value: any): boolean;
     isFunction(value: any): boolean;
     isInteger(value: any): boolean;
     isLength(value: any): boolean;
     isMap(value: any): boolean;
-    isMatch(source: Object): (object: Object) => boolean;
-    isMatch(source: Object, object: Object): boolean;
-    whereEq(source: Object): (object: Object) => boolean;
-    whereEq(source: Object, object: Object): boolean;
-    isMatchWith<T: Object, U: Object>(
-      customizer: (
-        objValue: any,
-        srcValue: any,
-        key: number | string,
-        object: T,
+    isMatch:
+      & ((source: Object) => (object: Object) => boolean)
+      & ((source: Object, object: Object) => boolean);
+    whereEq:
+      & ((source: Object) => (object: Object) => boolean)
+      & ((source: Object, object: Object) => boolean);
+    isMatchWith:
+      & (<T: Object, U: Object>(
+        customizer: (
+          objValue: any,
+          srcValue: any,
+          key: number | string,
+          object: T,
+          source: U
+        ) => boolean | void
+      ) => (((source: U) => (object: T) => boolean) &
+        ((source: U, object: T) => boolean)))
+      & (<T: Object, U: Object>(
+        customizer: (
+          objValue: any,
+          srcValue: any,
+          key: number | string,
+          object: T,
+          source: U
+        ) => boolean | void,
         source: U
-      ) => boolean | void
-    ): ((source: U) => (object: T) => boolean) &
-      ((source: U, object: T) => boolean);
-    isMatchWith<T: Object, U: Object>(
-      customizer: (
-        objValue: any,
-        srcValue: any,
-        key: number | string,
-        object: T,
-        source: U
-      ) => boolean | void,
-      source: U
-    ): (object: T) => boolean;
-    isMatchWith<T: Object, U: Object>(
-      customizer: (
-        objValue: any,
-        srcValue: any,
-        key: number | string,
-        object: T,
-        source: U
-      ) => boolean | void,
-      source: U,
-      object: T
-    ): boolean;
+      ) => ((object: T) => boolean))
+      & (<T: Object, U: Object>(
+        customizer: (
+          objValue: any,
+          srcValue: any,
+          key: number | string,
+          object: T,
+          source: U
+        ) => boolean | void,
+        source: U,
+        object: T
+      ) => boolean);
     isNaN(value: any): boolean;
     isNative(value: any): boolean;
     isNil(value: any): boolean;
@@ -2824,17 +2840,20 @@ declare module "lodash/fp" {
     isRegExp(value: any): boolean;
     isSafeInteger(value: any): boolean;
     isSet(value: any): boolean;
-    isString(value: string): true;
-    isString(value: any): false;
+    isString:
+      & ((value: string) => true)
+      & ((value: any) => false);
     isSymbol(value: any): boolean;
     isTypedArray(value: any): boolean;
     isUndefined(value: any): boolean;
     isWeakMap(value: any): boolean;
     isWeakSet(value: any): boolean;
-    lt(value: any): (other: any) => boolean;
-    lt(value: any, other: any): boolean;
-    lte(value: any): (other: any) => boolean;
-    lte(value: any, other: any): boolean;
+    lt:
+      & ((value: any) => ((other: any) => boolean))
+      & ((value: any, other: any) => boolean);
+    lte:
+      & ((value: any) => ((other: any) => boolean))
+      & ((value: any, other: any) => boolean);
     toArray(value: any): Array<any>;
     toFinite(value: any): number;
     toInteger(value: any): number;
