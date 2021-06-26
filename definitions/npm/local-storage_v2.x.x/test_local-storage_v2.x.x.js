@@ -1,5 +1,5 @@
 // @flow
-import ls from 'local-storage-es5';
+import ls from 'local-storage';
 
 const isSet: boolean = ls.set('test', 'test');
 
