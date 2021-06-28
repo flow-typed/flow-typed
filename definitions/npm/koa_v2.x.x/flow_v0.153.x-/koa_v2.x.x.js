@@ -306,8 +306,23 @@ declare module 'koa' {
     response: Response,
     server: http$Server,
     subdomainOffset: number,
-
-    listen: $PropertyType<http$Server, 'listen'>,
+    listen(port?: number, hostname?: string, backlog?: number, callback?: Function): this;
+    // The following signatures are added to allow omitting intermediate arguments
+    listen(port?: number, backlog?: number, callback?: Function): this;
+    listen(port?: number, hostname?: string, callback?: Function): this;
+    listen(port?: number, callback?: Function): this;
+    listen(path: string, callback?: Function): this;
+    listen(handle: {
+      port?: number,
+      host?: string,
+      path?: string,
+      backlog?: number,
+      exclusive?: boolean,
+      readableAll?: boolean,
+      writableAll?: boolean,
+      ipv6Only?: boolean,
+      ...
+    }, callback?: Function): this;
     toJSON(): ApplicationJSON,
     inspect(): ApplicationJSON,
     use(fn: Middleware): this,

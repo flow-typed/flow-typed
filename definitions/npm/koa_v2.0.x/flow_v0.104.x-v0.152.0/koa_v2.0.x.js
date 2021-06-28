@@ -302,7 +302,6 @@ declare module 'koa' {
     response: Response,
     server: http$Server,
     subdomainOffset: number,
-
     listen: $PropertyType<http$Server, 'listen'>,
     toJSON(): ApplicationJSON,
     inspect(): ApplicationJSON,
