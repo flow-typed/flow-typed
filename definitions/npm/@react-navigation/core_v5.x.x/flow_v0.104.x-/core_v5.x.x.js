@@ -787,13 +787,13 @@ declare module '@react-navigation/core' {
     & <DestinationRouteName: $Keys<ParamList>>(
         route:
           | {|
-              key: string,
-              params?: $ElementType<ParamList, DestinationRouteName>,
+              +key: string,
+              +params?: $ElementType<ParamList, DestinationRouteName>,
             |}
           | {|
-              name: DestinationRouteName,
-              key?: string,
-              params?: $ElementType<ParamList, DestinationRouteName>,
+              +name: DestinationRouteName,
+              +key?: string,
+              +params?: $ElementType<ParamList, DestinationRouteName>,
             |},
       ) => void;
 
