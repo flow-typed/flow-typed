@@ -371,8 +371,8 @@ declare interface Cypress$Chainable {
   /**
    * @see https://docs.cypress.io/api/commands/invoke.html
    */
-  invoke(functionName: string | number): void,
-  invoke(functionName: string | number, ...args: Array<any>): void,
+  invoke(functionName: string | number): Cypress$Global,
+  invoke(functionName: string | number, ...args: Array<any>): Cypress$Global,
 
   /**
    * @see https://docs.cypress.io/api/commands/its.html
