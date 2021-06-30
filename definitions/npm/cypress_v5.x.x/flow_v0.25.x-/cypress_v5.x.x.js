@@ -658,10 +658,11 @@ declare type Cypress$BlurOptions = {|
   force?: boolean
 |} & Cypress$Loggable & Cypress$Timeoutable
 
-declare type Cypress$CheckOptions = {|
+declare type Cypress$CheckOptions = {
   interval?: number,
-  force?: boolean
-|} & Cypress$Loggable & Cypress$Timeoutable
+  force?: boolean,
+  ...
+} & Cypress$Loggable & Cypress$Timeoutable
 
 declare type Cypress$ClearOptions = {|
   force?: boolean,
