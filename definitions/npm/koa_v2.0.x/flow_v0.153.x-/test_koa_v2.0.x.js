@@ -182,6 +182,10 @@ function test_response() {
 
 function test_request() {
   declare var request:Request;
+  const body = request.body;
+  body.someValue;
+  // $FlowExpectedError[incompatible-cast] is an object
+  (request.body: string)
   const req: http$IncomingMessage<> = request.req;
   // $FlowExpectedError[incompatible-type]
   const _req: number = request.req;
