@@ -69,6 +69,18 @@ describe("database", () => {
   faker.database.engine();
 });
 
+describe("datatype", () => {
+  (faker.datatype.number(): number);
+  (faker.datatype.float(): number);
+  (faker.datatype.datetime(): Date);
+  (faker.datatype.string(): string);
+  (faker.datatype.uuid(): string);
+  (faker.datatype.boolean(): boolean);
+  (faker.datatype.hexaDecimal(): string);
+  (faker.datatype.json(): string);
+  (faker.datatype.array(): Array<string | number>);
+});
+
 describe("date", () => {
   faker.date.past();
   faker.date.past(2);
@@ -84,21 +96,21 @@ describe("date", () => {
   faker.date.month({ abbr: true });
   faker.date.month({ context: "wide" });
   faker.date.month({ abbr: true, context: "wide" });
-  // $FlowExpectedError
+  // $FlowExpectedError[incompatible-call]
   faker.date.month({ context: "bad" });
-  // $FlowExpectedError
+  // $FlowExpectedError[incompatible-call]
   faker.date.month({ abbr: 1 });
-  // $FlowExpectedError
+  // $FlowExpectedError[prop-missing]
   faker.date.month({ bad: true });
   faker.date.weekday();
   faker.date.weekday({ abbr: true });
   faker.date.weekday({ context: "wide" });
   faker.date.weekday({ abbr: true, context: "wide" });
-  // $FlowExpectedError
+  // $FlowExpectedError[incompatible-call]
   faker.date.weekday({ context: "bad" });
-  // $FlowExpectedError
+  // $FlowExpectedError[incompatible-call]
   faker.date.weekday({ abbr: 1 });
-  // $FlowExpectedError
+  // $FlowExpectedError[prop-missing]
   faker.date.weekday({ bad: true });
 });
 
@@ -326,9 +338,9 @@ describe("random", () => {
   faker.random.number({ max: 0 });
   faker.random.number({ precision: 1 });
   faker.random.number({ precision: 1, min: 0, max: 0 });
-  // $FlowExpectedError
+  // $FlowExpectedError[incompatible-call]
   faker.random.number({ precision: 1, min: 0, max: 0, bad: true });
-  // $FlowExpectedError
+  // $FlowExpectedError[incompatible-call]
   faker.random.number({ bad: true });
   faker.random.arrayElement([1]);
   faker.random.objectElement({ a: true }, "a");
