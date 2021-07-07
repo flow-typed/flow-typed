@@ -60,6 +60,34 @@ declare module "faker" {
       engine: () => string,
       ...
     },
+    datatype: {|
+      number:
+        & ((max?: number) => number)
+        & ((options?: {|
+          min?: number,
+          max?: number,
+          precision?: number,
+        |}) => number),
+      float:
+        & ((precision?: number) => number)
+        & ((options?: {|
+          min?: number,
+          max?: number,
+          precision?: number,
+        |}) => number),
+      datetime:
+        & ((max?: number) => Date)
+        & ((options?: {|
+          min?: number,
+          max?: number,
+        |}) => Date),
+      string: (length?: number) => string,
+      uuid: () => string,
+      boolean: () => boolean,
+      hexaDecimal: (count?: number) => string,
+      json: () => string,
+      array: (length?: number) => Array<string | number>,
+    |},
     date: {
       past: (years?: ?number, refDate?: Date) => Date,
       future: (years?: ?number, refDate?: Date) => Date,
