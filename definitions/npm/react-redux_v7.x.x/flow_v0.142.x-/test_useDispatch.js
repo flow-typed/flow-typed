@@ -1,5 +1,4 @@
 // @flow
-
 import { describe, it } from 'flow-typed-test';
 import React from 'react';
 import { useDispatch } from 'react-redux';

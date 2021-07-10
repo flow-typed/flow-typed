@@ -200,7 +200,12 @@ declare module "react-redux" {
   // Typings for Hooks
   // ------------------------------------------------------------
 
-  declare export function useDispatch<D>(): D;
+  declare export function useDispatch<D>(): (
+    & (<D: { [key: string]: any }>(D) => D)
+    & (<T>((...args: Array<any>) => T) => T)
+    & (<T>((...args: [any, any]) => T) => T)
+    & (<T>((...args: [any, any, any]) => T) => T)
+  );
 
   declare export function useSelector<S, SS>(
     selector: (state: S) => SS,
