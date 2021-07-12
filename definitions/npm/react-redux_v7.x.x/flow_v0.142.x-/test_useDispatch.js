@@ -15,7 +15,10 @@ describe('useDispatch', () => {
       return (
         <button
           onClick={function() {
-            dispatch({ type: 'action' });
+            const action = dispatch({ type: 'action' });
+            (action.type: string);
+            // $FlowExpectedError[incompatible-cast] will be number because of passed generic
+            (action.type: number);
           }}
         >
           Dispatch time
@@ -36,6 +39,24 @@ describe('useDispatch', () => {
         >
           Dispatch time
         </div>
+      );
+    }
+  });
+
+  it('handles action creator passed in and is typed', () => {
+    function Com() {
+      const dispatch = useDispatch();
+      return (
+        <button
+          onClick={function() {
+            const action = dispatch({ anything: 'string' });
+            (action.anything: string);
+            // $FlowExpectedError[incompatible-cast] will be number because of passed action
+            (action.anything: number);
+          }}
+        >
+          Dispatch time
+        </button>
       );
     }
   });

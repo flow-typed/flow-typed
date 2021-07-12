@@ -201,12 +201,13 @@ declare module "react-redux" {
   // ------------------------------------------------------------
 
   declare export function useDispatch<D>(): (
-    & (<D: { [key: string]: any }>(D) => D)
+    & (<T: { [key: string]: any }>(T) => T)
     // Supports thunks at their various lengths and use cases depending if user has typed them as tuple vs array
     & (<T>((...args: [any]) => T) => T)
     & (<T>((...args: [any, any]) => T) => T)
     & (<T>((...args: [any, any, any]) => T) => T)
     & (<T>((...args: Array<any>) => T) => T)
+    & D
   );
 
   declare export function useSelector<S, SS>(
