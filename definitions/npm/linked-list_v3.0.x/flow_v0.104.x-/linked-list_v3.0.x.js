@@ -4,7 +4,7 @@
 **/
 declare module 'linked-list' {
   declare class Item {
-    list: ?List<Item>;
+    list: ?List;
     next: ?Item;
     prev: ?Item;
     head: ?Item;
