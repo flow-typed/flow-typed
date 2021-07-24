@@ -1,5 +1,5 @@
 /*
- * Type def from from source code of linked-list.
+ * Type def from source code of linked-list.
  * this: https://github.com/wooorm/linked-list
 **/
 declare module 'linked-list' {
@@ -33,4 +33,3 @@ declare module 'linked-list' {
     append(item: Item): boolean | Item;
   }
 }
-
