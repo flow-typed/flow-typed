@@ -456,6 +456,11 @@ escape-string-regexp@^1.0.2, escape-string-regexp@^1.0.5:
   resolved "https://registry.yarnpkg.com/escape-string-regexp/-/escape-string-regexp-1.0.5.tgz#1b61c0562190a8dff6ae3bb2cf0200ca130b86d4"
   integrity sha1-G2HAViGQqN/2rjuyzwIAyhMLhtQ=
 
+eslint-plugin-fb-flow@^0.0.1:
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-fb-flow/-/eslint-plugin-fb-flow-0.0.1.tgz#c326eca9a3f6c957c8adcfd5e28bbaf4e8d33b43"
+  integrity sha512-Vx7M50CtsNtHHPz9EJMuMhxgUsTasUdBj07w7xz2t5F5MCAHjRxebmNZFi2k0NIdWZJAhHc/mRbsh4jJ8iCXQA==
+
 eslint-plugin-flowtype@^3.12.2:
   version "3.12.2"
   resolved "https://registry.yarnpkg.com/eslint-plugin-flowtype/-/eslint-plugin-flowtype-3.12.2.tgz#f02fb8a4e20993bff860292bdd39b93d511d7326"
