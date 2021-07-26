@@ -17,7 +17,7 @@ describe('useDispatch', () => {
           onClick={function() {
             const action = dispatch({ type: 'action' });
             (action.type: string);
-            // $FlowExpectedError[incompatible-cast] will be number because of passed generic
+            // $FlowExpectedError[incompatible-cast] will be string because of passed generic
             (action.type: number);
           }}
         >
@@ -51,7 +51,7 @@ describe('useDispatch', () => {
           onClick={function() {
             const action = dispatch({ anything: 'string' });
             (action.anything: string);
-            // $FlowExpectedError[incompatible-cast] will be number because of passed action
+            // $FlowExpectedError[incompatible-cast] will be string because of passed action
             (action.anything: number);
           }}
         >
