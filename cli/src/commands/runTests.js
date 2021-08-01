@@ -78,7 +78,7 @@ async function getTestGroups(
     libDefs = libDefs.filter(def => {
       const baseDefChanged = def.dependenciesPaths.reduce((acc, cur) => {
         if (acc) return acc;
-        return baseDiff.filter((o) => cur.includes(o)).length > 0;
+        return baseDiff.filter(d => cur.includes(d)).length > 0;
       }, false);
       if (baseDefChanged) {
         return true;
