@@ -34,6 +34,9 @@ export const TEST_FILE_NAME_RE: RegExp = /^test_.*\.js$/;
 const CACHE_DIR = path.join(os.homedir(), '.flow-typed');
 const CACHE_REPO_DIR: string = path.join(CACHE_DIR, 'repo');
 
+const CACHE_REPO_DEFS_DIR = path.join(CACHE_REPO_DIR, 'definitions', 'npm');
+const CACHE_REPO_BASE_DIR = path.join(CACHE_REPO_DIR, 'definitions', 'base');
+
 const REMOTE_REPO_URL = 'https://github.com/flowtype/flow-typed.git';
 const LAST_UPDATED_FILE: string = path.join(CACHE_DIR, 'lastUpdated');
 
@@ -280,10 +283,7 @@ async function parseLibDefsFromPkgDir(
           if (flowDirItem === 'package.json') {
             const pkg = JSON.parse(fs.readFileSync(path.join(flowDirPath, flowDirItem), 'utf8'));
             dependenciesPaths.push(...pkg.baseDependencies.map((dep) => {
-              // find the real path with flow version
-              console.log(dep);
-              // return dep;
-              return '/Users/brianchen/projects/flow-typed/definitions/base/base-redux/flow_v0.83.x-/base-redux.js';
+              return path.join(flowDirPath, '..', '..', '..', `/base/${dep}.js`);
             }));
             return;
           }
@@ -440,8 +440,6 @@ function writeVerbose(stream, msg, writeNewline = true) {
  * If the repo checkout does not exist or is out of date, it will be
  * created/updated automatically first.
  */
-const CACHE_REPO_DEFS_DIR = path.join(CACHE_REPO_DIR, 'definitions', 'npm');
-const CACHE_REPO_BASE_DIR = path.join(CACHE_REPO_DIR, 'definitions', 'base');
 export async function getCacheLibDefs(
   verbose?: VerboseOutput = process.stdout,
 ): Promise<Array<LibDef>> {

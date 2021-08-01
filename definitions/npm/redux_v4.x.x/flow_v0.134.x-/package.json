@@ -1,5 +1,5 @@
 {
   "baseDependencies": [
-    "base-redux"
+    "base-redux_0.134.x-"
   ]
 }
