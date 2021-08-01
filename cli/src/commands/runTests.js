@@ -625,22 +625,22 @@ async function runTests(
   numberOfFlowVersions?: number,
 ): Promise<Map<string, Array<string>>> {
   const testPatternRes = testPatterns.map(patt => new RegExp(patt, 'g'));
-  const testGroups = (await getTestGroups(repoDirPath, baseDirPath, onlyChanged)).filter(
-    testGroup => {
-      if (testPatternRes.length === 0) {
+  const testGroups = (
+    await getTestGroups(repoDirPath, baseDirPath, onlyChanged)
+  ).filter(testGroup => {
+    if (testPatternRes.length === 0) {
+      return true;
+    }
+
+    for (var i = 0; i < testPatternRes.length; i++) {
+      const pattern = testPatternRes[i];
+      if (testGroup.id.match(pattern) != null) {
         return true;
       }
+    }
 
-      for (var i = 0; i < testPatternRes.length; i++) {
-        const pattern = testPatternRes[i];
-        if (testGroup.id.match(pattern) != null) {
-          return true;
-        }
-      }
-
-      return false;
-    },
-  );
+    return false;
+  });
 
   try {
     // Create a temp dir to copy files into to run the tests

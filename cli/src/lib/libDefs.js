@@ -157,18 +157,25 @@ export {
   REMOTE_REPO_URL as _REMOTE_REPO_URL,
 };
 
-async function addLibDefs(pkgDirPath, baseDirPath: string, libDefs: Array<LibDef>) {
+async function addLibDefs(
+  pkgDirPath,
+  baseDirPath: string,
+  libDefs: Array<LibDef>,
+) {
   const parsedDirItem = parseRepoDirItem(pkgDirPath);
-  (await parseLibDefsFromPkgDir(parsedDirItem, pkgDirPath, baseDirPath)).forEach(libDef =>
-    libDefs.push(libDef),
-  );
+  (
+    await parseLibDefsFromPkgDir(parsedDirItem, pkgDirPath, baseDirPath)
+  ).forEach(libDef => libDefs.push(libDef));
 }
 
 /**
  * Given a 'definitions/npm' dir, return a list of LibDefs that it contains
  * broken into flow versions.
  */
-export async function getLibDefs(defsDir: string, baseDirPath: string): Promise<Array<LibDef>> {
+export async function getLibDefs(
+  defsDir: string,
+  baseDirPath: string,
+): Promise<Array<LibDef>> {
   const libDefs: Array<LibDef> = [];
   const defsDirItems = await fs.readdir(defsDir);
   await P.all(
@@ -281,10 +288,14 @@ async function parseLibDefsFromPkgDir(
           // If there is a package.json populate dependencies with full path
           // to the base file
           if (flowDirItem === 'package.json') {
-            const pkg = JSON.parse(fs.readFileSync(path.join(flowDirPath, flowDirItem), 'utf8'));
-            dependenciesPaths.push(...pkg.baseDependencies.map((dep) => {
-              return path.join(flowDirPath, '..', '..', '..', `/base/${dep}.js`);
-            }));
+            const pkg = JSON.parse(
+              fs.readFileSync(path.join(flowDirPath, flowDirItem), 'utf8'),
+            );
+            dependenciesPaths.push(
+              ...pkg.baseDependencies.map(dep => {
+                return path.join(baseDirPath, `/${dep}.js`);
+              }),
+            );
             return;
           }
 
