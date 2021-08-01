@@ -54,7 +54,7 @@ type TestGroup = {
  * structs. Each TestGroup represents a Package/PackageVersion/FlowVersion
  * directory.
  */
-const basePathRegex = new RegExp('definitions/npm/(@[^/]*/)?[^/]*/?');
+const basePathRegex = new RegExp('definitions/(npm|base)/(@[^/]*/)?[^/]*/?');
 async function getTestGroups(
   repoDirPath: string,
   baseDirPath: string,
@@ -75,7 +75,20 @@ async function getTestGroups(
       .filter(d => d !== '');
 
     changedDefs = baseDiff.map(d => parseRepoDirItem(d).pkgName);
-    libDefs = libDefs.filter(def => changedDefs.includes(def.pkgName));
+    libDefs = libDefs.filter(def => {
+      const baseDefChanged = def.dependenciesPaths.reduce((acc, cur) => {
+        if (acc) return acc;
+        return baseDiff.filter((o) => cur.includes(o)).length > 0;
+      }, false);
+      if (baseDefChanged) {
+        return true;
+      }
+      // If the package name matches the changed files
+      if (changedDefs.includes(def.pkgName)) {
+        return true;
+      }
+      return false;
+    });
   }
   return libDefs.map(libDef => {
     const groupID = `${libDef.pkgName}_${libDef.pkgVersionStr}/${libDef.flowVersionStr}`;
