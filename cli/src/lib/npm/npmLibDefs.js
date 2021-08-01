@@ -148,6 +148,10 @@ async function extractLibDefsFromNpmPkgDir(
             return;
           }
 
+          if (flowDirItem === 'package.json') {
+            return;
+          }
+
           throw new ValidationError(
             `Unexpected file: ${libDefFileName}. This directory can only contain test files ` +
               `or a libdef file named ${'`' + libDefFileName + '`'}.`,
