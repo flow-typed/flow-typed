@@ -106,7 +106,7 @@ function printSkipMessage(flowVersion, githubUrl) {
  */
 let _flowBinVersionPromise = null;
 async function getOrderedFlowBinVersions(
-  numberOfReleases: number = 15,
+  numberOfReleases?: number = 15,
 ): Promise<Array<string>> {
   if (_flowBinVersionPromise !== null) {
     return _flowBinVersionPromise;
@@ -641,7 +641,6 @@ async function runTests(
       return false;
     },
   );
-  console.log(testGroups);
 
   try {
     // Create a temp dir to copy files into to run the tests
