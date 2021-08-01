@@ -13,6 +13,7 @@ describe('search command', () => {
         flowVersionStr: flowVerStr,
         path: '',
         testFilePaths: [],
+        dependenciesPaths: [],
       };
     }
     it('beautifully formats a table of libDefs', () => {

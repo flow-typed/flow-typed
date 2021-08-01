@@ -121,6 +121,7 @@ describe('libDefs', () => {
         flowVersionStr: flowVerStr,
         path: '',
         testFilePaths: [],
+        dependenciesPaths: [],
       };
     }
 

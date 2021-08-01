@@ -45,6 +45,7 @@ type TestGroup = {
   id: string,
   testFilePaths: Array<string>,
   libDefPath: string,
+  dependenciesPaths: Array<string>,
   flowVersion: FlowVersion,
 };
 
@@ -55,10 +56,11 @@ type TestGroup = {
  */
 const basePathRegex = new RegExp('definitions/npm/(@[^/]*/)?[^/]*/?');
 async function getTestGroups(
-  repoDirPath,
+  repoDirPath: string,
+  baseDirPath: string,
   onlyChanged: boolean = false,
 ): Promise<Array<TestGroup>> {
-  let libDefs = await getLibDefs(repoDirPath);
+  let libDefs = await getLibDefs(repoDirPath, baseDirPath);
   if (onlyChanged) {
     const diff = await getDiff();
     let changedDefs;
@@ -80,6 +82,7 @@ async function getTestGroups(
     return {
       id: groupID,
       testFilePaths: libDef.testFilePaths,
+      dependenciesPaths: libDef.dependenciesPaths,
       libDefPath: libDef.path,
       flowVersion: libDef.flowVersion,
     };
@@ -291,7 +294,13 @@ async function getCachedFlowBinVersions(
   return versions.map(version => `v${version}`);
 }
 
-async function writeFlowConfig(repoDirPath, testDirPath, libDefPath, version) {
+async function writeFlowConfig(
+  repoDirPath,
+  testDirPath,
+  dependenciesPaths: Array<string>,
+  libDefPath,
+  version,
+) {
   // /!\---------------------------------------------------------------------/!\
   // Whenever you introduce a new difference depending on the version, don't
   // forget to update the constant array CONFIGURATION_CHANGE_VERSIONS.
@@ -301,7 +310,7 @@ async function writeFlowConfig(repoDirPath, testDirPath, libDefPath, version) {
   const flowConfigData = [
     '[libs]',
     path.basename(libDefPath),
-    '/Users/brianchen/projects/flow-typed/definitions/base/redux/flow_v0.83.x-/base-redux.js',
+    ...dependenciesPaths,
     path.join(repoDirPath, '..', '__util__', 'tdd_framework.js'),
     '',
     '[options]',
@@ -430,6 +439,7 @@ async function findLowestCapableFlowVersion(
   orderedFlowVersions,
   lowestFlowVersionRan,
   testDirPath,
+  dependenciesPaths: Array<string>,
   libDefPath,
 ) {
   let lowerFlowVersionsToRun = orderedFlowVersions.filter(flowVer => {
@@ -439,6 +449,7 @@ async function findLowestCapableFlowVersion(
   await writeFlowConfig(
     repoDirPath,
     testDirPath,
+    dependenciesPaths,
     libDefPath,
     lowestFlowVersionRan,
   );
@@ -571,6 +582,7 @@ async function runTestGroup(
       await writeFlowConfig(
         repoDirPath,
         testDirPath,
+        testGroup.dependenciesPaths,
         testGroup.libDefPath,
         lowestFlowVersionRanInThisGroup,
       );
@@ -588,6 +600,7 @@ async function runTestGroup(
       orderedFlowVersions,
       lowestFlowVersionRan,
       testDirPath,
+      testGroup.dependenciesPaths,
       testGroup.libDefPath,
     );
 
@@ -606,12 +619,13 @@ async function runTestGroup(
 
 async function runTests(
   repoDirPath: string,
+  baseDirPath: string,
   testPatterns: Array<string>,
   onlyChanged?: boolean,
   numberOfFlowVersions?: number,
 ): Promise<Map<string, Array<string>>> {
   const testPatternRes = testPatterns.map(patt => new RegExp(patt, 'g'));
-  const testGroups = (await getTestGroups(repoDirPath, onlyChanged)).filter(
+  const testGroups = (await getTestGroups(repoDirPath, baseDirPath, onlyChanged)).filter(
     testGroup => {
       if (testPatternRes.length === 0) {
         return true;
@@ -627,6 +641,7 @@ async function runTests(
       return false;
     },
   );
+  console.log(testGroups);
 
   try {
     // Create a temp dir to copy files into to run the tests
@@ -725,6 +740,7 @@ export async function run(argv: Args): Promise<number> {
   let repoDirPath = (await fs.exists(cwdDefsNPMPath))
     ? cwdDefsNPMPath
     : path.join(__dirname, '..', '..', '..', 'definitions', 'npm');
+  const baseDirPath = path.join(repoDirPath, '..', 'base');
 
   if (onlyChanged) {
     console.log(
@@ -744,6 +760,7 @@ export async function run(argv: Args): Promise<number> {
   try {
     results = await runTests(
       repoDirPath,
+      baseDirPath,
       testPatterns,
       onlyChanged,
       numberOfFlowVersions,

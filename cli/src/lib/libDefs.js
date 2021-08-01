@@ -26,6 +26,7 @@ export type LibDef = {|
   flowVersionStr: string,
   path: string,
   testFilePaths: Array<string>,
+  dependenciesPaths: Array<string>,
 |};
 
 export const TEST_FILE_NAME_RE: RegExp = /^test_.*\.js$/;
@@ -153,17 +154,18 @@ export {
   REMOTE_REPO_URL as _REMOTE_REPO_URL,
 };
 
-async function addLibDefs(pkgDirPath, libDefs: Array<LibDef>) {
+async function addLibDefs(pkgDirPath, baseDirPath: string, libDefs: Array<LibDef>) {
   const parsedDirItem = parseRepoDirItem(pkgDirPath);
-  (await parseLibDefsFromPkgDir(parsedDirItem, pkgDirPath)).forEach(libDef =>
+  (await parseLibDefsFromPkgDir(parsedDirItem, pkgDirPath, baseDirPath)).forEach(libDef =>
     libDefs.push(libDef),
   );
 }
 
 /**
- * Given a 'definitions/npm' dir, return a list of LibDefs that it contains.
+ * Given a 'definitions/npm' dir, return a list of LibDefs that it contains
+ * broken into flow versions.
  */
-export async function getLibDefs(defsDir: string): Promise<Array<LibDef>> {
+export async function getLibDefs(defsDir: string, baseDirPath: string): Promise<Array<LibDef>> {
   const libDefs: Array<LibDef> = [];
   const defsDirItems = await fs.readdir(defsDir);
   await P.all(
@@ -181,7 +183,7 @@ export async function getLibDefs(defsDir: string): Promise<Array<LibDef>> {
               const itemStat = await fs.stat(itemPath);
               if (itemStat.isDirectory()) {
                 // itemPath is a lib dir
-                await addLibDefs(itemPath, libDefs);
+                await addLibDefs(itemPath, baseDirPath, libDefs);
               } else {
                 const error = `Expected only directories in the 'definitions/npm/@<scope>' directory!`;
                 throw new ValidationError(error);
@@ -190,7 +192,7 @@ export async function getLibDefs(defsDir: string): Promise<Array<LibDef>> {
           );
         } else {
           // itemPath is a lib dir
-          await addLibDefs(itemPath, libDefs);
+          await addLibDefs(itemPath, baseDirPath, libDefs);
         }
       } else {
         const error = `Expected only directories in the 'definitions/npm' directory!`;
@@ -214,6 +216,7 @@ function parsePkgFlowDirVersion(pkgFlowDirPath): FlowVersion {
 async function parseLibDefsFromPkgDir(
   {pkgName, pkgVersion},
   pkgDirPath,
+  baseDirPath: string,
 ): Promise<Array<LibDef>> {
   const pkgVersionStr = versionToString(pkgVersion);
   const pkgDirItems = await fs.readdir(pkgDirPath);
@@ -253,6 +256,7 @@ async function parseLibDefsFromPkgDir(
   await P.all(
     flowDirs.map(async ([flowDirPath, flowVersion]) => {
       const testFilePaths = [].concat(commonTestFiles);
+      const dependenciesPaths = [];
       const basePkgName =
         pkgName.charAt(0) === '@' ? pkgName.split(path.sep).pop() : pkgName;
       const libDefFileName = `${basePkgName}_${pkgVersionStr}.js`;
@@ -268,6 +272,19 @@ async function parseLibDefsFromPkgDir(
           }
 
           if (path.extname(flowDirItem) === '.swp') {
+            return;
+          }
+
+          // If there is a package.json populate dependencies with full path
+          // to the base file
+          if (flowDirItem === 'package.json') {
+            const pkg = JSON.parse(fs.readFileSync(path.join(flowDirPath, flowDirItem), 'utf8'));
+            dependenciesPaths.push(...pkg.baseDependencies.map((dep) => {
+              // find the real path with flow version
+              console.log(dep);
+              // return dep;
+              return '/Users/brianchen/projects/flow-typed/definitions/base/base-redux/flow_v0.83.x-/base-redux.js';
+            }));
             return;
           }
 
@@ -303,6 +320,7 @@ async function parseLibDefsFromPkgDir(
         flowVersionStr: flowVerToDirString(flowVersion),
         path: libDefFilePath,
         testFilePaths,
+        dependenciesPaths,
       });
     }),
   );
@@ -423,12 +441,13 @@ function writeVerbose(stream, msg, writeNewline = true) {
  * created/updated automatically first.
  */
 const CACHE_REPO_DEFS_DIR = path.join(CACHE_REPO_DIR, 'definitions', 'npm');
+const CACHE_REPO_BASE_DIR = path.join(CACHE_REPO_DIR, 'definitions', 'base');
 export async function getCacheLibDefs(
   verbose?: VerboseOutput = process.stdout,
 ): Promise<Array<LibDef>> {
   await ensureCacheRepo(verbose);
   await verifyCLIVersion(path.join(CACHE_REPO_DIR, 'definitions'));
-  return getLibDefs(CACHE_REPO_DEFS_DIR);
+  return getLibDefs(CACHE_REPO_DEFS_DIR, CACHE_REPO_BASE_DIR);
 }
 
 function packageNameMatch(a: string, b: string): boolean {

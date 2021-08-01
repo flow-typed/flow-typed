@@ -1,0 +1,5 @@
+{
+  "baseDependencies": [
+    "base-redux"
+  ]
+}

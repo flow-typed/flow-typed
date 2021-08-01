@@ -4,7 +4,7 @@ declare module 'redux' {
     Redux$Dispatch,
     Redux$MiddlewareAPI,
     Redux$Middleware,
-  } from '@flow-typed/base-redux';
+  } from '@flow-typed/base-redux';//
 
   /*
 
