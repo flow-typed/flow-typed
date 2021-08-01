@@ -136,7 +136,7 @@ declare module 'mongodb' {
     stream<Input: { ... }>(options: StreamOptions<Input, Doc>): Cursor<Doc>;
     toArray(callback: CursorResultCallback<Doc[]>): void;
     toArray(): Promise<Doc[]>;
-    transformStream(options: StreamOptions<Input, Doc>): Transform;
+    transformStream<Input: { ... }>(options: StreamOptions<Input, Doc>): Readable;
   }
 
   // http://mongodb.github.io/node-mongodb-native/3.5/api/Db.html

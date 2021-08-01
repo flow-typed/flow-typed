@@ -8,7 +8,7 @@ import type { Readable } from 'stream';
 (nodeFetch('foo'): Promise<Response>);
 (nodeFetch('foo', {}): Promise<Response>);
 
-// $FlowExpectedError url has to be string
+// $FlowExpectedError[incompatible-call] url has to be string
 (nodeFetch(123): Promise<Response>);
 
 nodeFetch('foo', {
@@ -24,9 +24,9 @@ nodeFetch('foo', {
 });
 
 nodeFetch('foo', {
-    // $FlowExpectedError number is not a valid body type
+    // $FlowExpectedError[incompatible-call] number is not a valid body type
     body: 5,
-    // $FlowExpectedError number is not a valid agent type
+    // $FlowExpectedError[incompatible-call] number is not a valid agent type
     agent: 5,
 });
 
@@ -37,25 +37,25 @@ nodeFetch('foo').then(res => {
     // Response Headers
     (res.headers: Headers);
     (res.headers.append('foo', 'bar'): void);
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
     (res.headers.append(5, 'bar'): void);
     (res.headers.delete('foo'): void);
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
     (res.headers.delete(5): void);
-    // $FlowExpectedError `entries` not found in Headers
+    // $FlowExpectedError[prop-missing] `entries` not found in Headers
     (res.headers.entries(): Iterator<*>);
     (res.headers.get('test'): string);
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
     (res.headers.get(5): string);
     (res.headers.getAll('test'): Array<string>);
     (res.headers.has('foo'): boolean);
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
     (res.headers.has(5): boolean);
-    // $FlowExpectedError `keys` not found in Headers
+    // $FlowExpectedError[prop-missing] `keys` not found in Headers
     (res.headers.keys(): Iterator<string>);
-    // $FlowExpectedError value should be a string
+    // $FlowExpectedError[incompatible-call] value should be a string
     (res.headers.set('foo', 5): void);
-    // $FlowExpectedError `values` not found in Headers
+    // $FlowExpectedError[prop-missing] `values` not found in Headers
     (res.headers.values(): Iterator<*>);
 
 
@@ -66,7 +66,7 @@ nodeFetch('foo').then(res => {
     // Response type
     (res.type: ResponseType);
     res.type = 'basic';
-    // $FlowExpectedError foo is not a valid option
+    // $FlowExpectedError[incompatible-type] foo is not a valid option
     res.type = 'foo';
 
     (res.url: string);

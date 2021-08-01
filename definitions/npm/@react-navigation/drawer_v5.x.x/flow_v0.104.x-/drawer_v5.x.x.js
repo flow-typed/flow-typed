@@ -317,6 +317,35 @@ declare module '@react-navigation/drawer' {
    * The following is copied from react-native-gesture-handler's libdef
    */
 
+  declare type StateUndetermined = 0;
+  declare type StateFailed = 1;
+  declare type StateBegan = 2;
+  declare type StateCancelled = 3;
+  declare type StateActive = 4;
+  declare type StateEnd = 5;
+
+  declare type GestureHandlerState =
+    | StateUndetermined
+    | StateFailed
+    | StateBegan
+    | StateCancelled
+    | StateActive
+    | StateEnd;
+
+  declare type $SyntheticEvent<T: { ... }> = {
+    +nativeEvent: $ReadOnly<$Exact<T>>,
+    ...
+  };
+
+  declare type $Event<T: { ... }> = $SyntheticEvent<{
+    handlerTag: number,
+    numberOfPointers: number,
+    state: GestureHandlerState,
+    oldState: GestureHandlerState,
+    ...$Exact<T>,
+    ...
+  }>;
+
   declare type $EventHandlers<ExtraProps: {...}> = {|
     onGestureEvent?: ($Event<ExtraProps>) => mixed,
     onHandlerStateChange?: ($Event<ExtraProps>) => mixed,
@@ -567,7 +596,7 @@ declare module '@react-navigation/drawer' {
     +type: $PropertyType<State, 'type'>,
     +getInitialState: (options: RouterConfigOptions) => State,
     +getRehydratedState: (
-      partialState: PossibleStaleNavigationState,
+      partialState: PossiblyStaleNavigationState,
       options: RouterConfigOptions,
     ) => State,
     +getStateForRouteNamesChange: (
@@ -787,13 +816,13 @@ declare module '@react-navigation/drawer' {
     & <DestinationRouteName: $Keys<ParamList>>(
         route:
           | {|
-              key: string,
-              params?: $ElementType<ParamList, DestinationRouteName>,
+              +key: string,
+              +params?: $ElementType<ParamList, DestinationRouteName>,
             |}
           | {|
-              name: DestinationRouteName,
-              key?: string,
-              params?: $ElementType<ParamList, DestinationRouteName>,
+              +name: DestinationRouteName,
+              +key?: string,
+              +params?: $ElementType<ParamList, DestinationRouteName>,
             |},
       ) => void;
 
@@ -865,8 +894,8 @@ declare module '@react-navigation/drawer' {
   |};
 
   declare export type ScreenListeners<
-    EventMap: EventMapBase = EventMapCore<State>,
     State: NavigationState = NavigationState,
+    EventMap: EventMapBase = EventMapCore<State>,
   > = $ObjMapi<
     {| [name: $Keys<EventMap>]: empty |},
     <K: $Keys<EventMap>>(K, empty) => EventListenerCallback<K, State, EventMap>,
@@ -888,11 +917,11 @@ declare module '@react-navigation/drawer' {
           navigation: NavProp,
         |}) => ScreenOptions,
     +listeners?:
-      | ScreenListeners<EventMap, State>
+      | ScreenListeners<State, EventMap>
       | ({|
           route: RouteProp<ParamList, RouteName>,
           navigation: NavProp,
-        |}) => ScreenListeners<EventMap, State>,
+        |}) => ScreenListeners<State, EventMap>,
     +initialParams?: $Partial<$ElementType<ParamList, RouteName>>,
   |};
 
@@ -1551,10 +1580,10 @@ declare module '@react-navigation/drawer' {
   |};
 
   declare export type PaperFonts = {|
-    +regular: Font,
-    +medium: Font,
-    +light: Font,
-    +thin: Font,
+    +regular: PaperFont,
+    +medium: PaperFont,
+    +light: PaperFont,
+    +thin: PaperFont,
   |};
 
   declare export type PaperTheme = {|
@@ -2117,7 +2146,7 @@ declare module '@react-navigation/drawer' {
    */
 
   declare type GestureHandlerRef = React$Ref<
-    React$ComponentType<GestureHandlerProps>,
+    React$ComponentType<PanGestureHandlerProps>,
   >;
   declare export var DrawerGestureContext: React$Context<?GestureHandlerRef>;
 

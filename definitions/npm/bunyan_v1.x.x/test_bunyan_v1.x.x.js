@@ -24,7 +24,9 @@ const logger = Bunyan.createLogger({
     }
 });
 
-// $FlowExpectedError - name needed
+const loggerFields = logger.fields;
+
+// $FlowExpectedError[prop-missing] - name needed
 Bunyan.createLogger({});
 
 const child = logger.child({});
@@ -41,20 +43,21 @@ const s = logger.trace({}, false);
 const b: boolean = logger.trace();
 logger.trace('foo', new Error('foo'));
 
-// $FlowExpectedError
+// $FlowExpectedError[incompatible-type]
 const v: number = Bunyan.VERSION;
 
 Bunyan.safeCycles()('true', false);
 
 const consoleRawStream = new Bunyan.ConsoleRawStream()
 
-// $FlowExpectedError
+// $FlowExpectedError[incompatible-call]
+// $FlowExpectedError[prop-missing]
 consoleRawStream.write({ level: false })
 
-// $FlowExpectedError
+// $FlowExpectedError[prop-missing]
 logger.log()
 
-// $FlowExpectedError
+// $FlowExpectedError[prop-missing]
 logger.addSTream();
 
 logger.trace({ err: new Error('foobar') }, 'error');

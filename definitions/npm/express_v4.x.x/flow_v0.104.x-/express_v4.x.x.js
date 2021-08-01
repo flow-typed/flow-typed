@@ -10,6 +10,15 @@ declare class express$RequestResponseBase {
   get(field: string): string | void;
 }
 
+declare type express$RangeParserOptions = {|
+  +combine?: boolean,
+|};
+
+declare type express$RangeParserRange = {|
+  +start: number,
+  +end: number,
+|};
+
 declare type express$RequestParams = { [param: string]: string, ... }
 
 /*
@@ -68,6 +77,7 @@ declare class express$Request extends http$IncomingMessage mixins express$Reques
   header(field: string): string | void;
   is(type: string): string | false;
   param(name: string, defaultValue?: string): string | void;
+  range(size: number, options?: express$RangeParserOptions): Array<express$RangeParserRange> | number | void;
 }
 
 declare type express$CookieOptions = {

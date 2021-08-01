@@ -58,10 +58,9 @@ declare module 'react-dom/server' {
 }
 
 declare module 'react-dom/test-utils' {
-  declare type Thenable = {
+  declare interface Thenable {
     then(resolve: () => mixed, reject?: () => mixed): mixed,
-    ...
-  };
+  }
 
   declare var Simulate: {
     [eventName: string]: (

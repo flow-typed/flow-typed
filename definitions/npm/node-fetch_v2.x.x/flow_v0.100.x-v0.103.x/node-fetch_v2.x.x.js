@@ -60,6 +60,10 @@ declare module 'node-fetch' {
     has(name: string): boolean;
     raw(): { [k: string]: string[] };
     set(name: string, value: string): void;
+    entries(): Iterator<[string, string]>;
+    keys(): Iterator<string>;
+    values(): Iterator<string>;
+    @@iterator(): Iterator<[string, string]>;
   }
 
   declare export class Body {

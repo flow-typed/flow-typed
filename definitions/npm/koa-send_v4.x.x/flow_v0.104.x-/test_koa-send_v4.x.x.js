@@ -4,22 +4,22 @@ import type { Options, SendResult } from "koa-send";
 const ctx = {};
 const path = "/";
 
-// $FlowExpectedError (Must have ctx and path)
+// $FlowExpectedError[incompatible-call] (Must have ctx and path)
 send();
-// $FlowExpectedError (Must have path)
+// $FlowExpectedError[incompatible-call] (Must have path)
 send(ctx);
 send(ctx, path);
 
-// $FlowExpectedError (Can't use invalid option names)
+// $FlowExpectedError[prop-missing] (Can't use invalid option names)
 send(ctx, path, { hide: true });
 send(ctx, path, { hidden: true });
 
-// $FlowExpectedError (Must use proper types for options)
+// $FlowExpectedError[incompatible-call] (Must use proper types for options)
 send(ctx, path, { immutable: "true" });
 send(ctx, path, { immutable: true });
 
 send(ctx, path).then(result => {
-  // $FlowExpectedError (result should be a string)
+  // $FlowExpectedError[incompatible-cast] (result should be a string)
   (result: number);
   (result: string);
 });

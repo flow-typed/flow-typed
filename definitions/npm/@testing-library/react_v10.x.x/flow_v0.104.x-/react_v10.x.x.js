@@ -1,12 +1,10 @@
 declare module '@testing-library/react' {
-  // This type comes from
-  // https://github.com/facebook/flow/blob/v0.104.0/lib/react-dom.js#L64
-  declare type ReactDOMTestUtilsThenable = {
-    then(resolve: () => mixed, reject?: () => mixed): mixed,
-    ...
-  };
-  // This type comes from
-  // https://github.com/facebook/flow/blob/v0.104.0/lib/react-dom.js#L116
+  // This type comes from react-dom_v17.x.x.js
+  declare interface ReactDOMTestUtilsThenable {
+    then(resolve: () => mixed, reject?: () => mixed): mixed;
+  }
+
+  // This type comes from react-dom_v17.x.x.js
   declare type ReactDOMTestUtilsAct = (
     callback: () => void | ReactDOMTestUtilsThenable
   ) => ReactDOMTestUtilsThenable;
@@ -445,8 +443,6 @@ declare module '@testing-library/react' {
     text: TextMatch,
     options?: TextMatchOptions
   ): HTMLElement;
-  declare export function getNodeText(
-    node: HTMLElement,
-  ): string;
+  declare export function getNodeText(node: HTMLElement): string;
   declare export var screen: Screen<>;
 }

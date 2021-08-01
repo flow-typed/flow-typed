@@ -28,8 +28,8 @@ describe('debounce', () => {
     (debounce(func, 100).flush(): void);
   });
 
-  it('can cancel', () => {
-    (debounce(func, 100).cancel(): void);
+  it('can clear', () => {
+    (debounce(func, 100).clear(): void);
   });
 
   it('contains debounce as a named export', () => {

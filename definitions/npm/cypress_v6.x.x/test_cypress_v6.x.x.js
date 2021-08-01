@@ -102,10 +102,10 @@ cy.go('test');
 
 cy.hash().click();
 
-(cy.invoke('test'): void);
-(cy.invoke(0): void);
-(cy.invoke('test', 1, 2, 3): void);
-(cy.invoke(1, () => {}, true): void);
+cy.invoke('test').click();
+cy.invoke(0).click();
+cy.invoke('test', 1, 2, 3).click();
+cy.invoke(1, () => {}, true).click();
 
 cy.its('test').click();
 
