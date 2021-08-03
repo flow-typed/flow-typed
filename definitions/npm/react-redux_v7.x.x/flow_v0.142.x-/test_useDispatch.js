@@ -57,4 +57,74 @@ describe('useDispatch', () => {
     // $FlowExpectedError[incompatible-cast] it will return a string, not any which could be cast to number
     (dispatched: Promise<number>);
   });
+
+  it('handles thunks defined as a 1 arg tuple', () => {
+    type ThunkAction = () => ((...args: [
+      () => void,
+    ]) => string);
+    const thunkAction: ThunkAction = () => (dispatch) => {
+      dispatch();
+      return '';
+    }
+    const dispatch = useDispatch();
+
+    const a = dispatch(thunkAction());
+    a.toString();
+    // $FlowExpectedError[incompatible-cast] it will return a string, not any which could be cast to number
+    (a: number)
+  });
+
+  it('handles thunks defined as a 2 arg tuple', () => {
+    type ThunkAction = () => ((...args: [
+      () => void,
+      () => { [key: string]: any },
+    ]) => string);
+    const thunkAction: ThunkAction = () => (dispatch, getState) => {
+      dispatch();
+      getState().property1.property2;
+      return '';
+    }
+    const dispatch = useDispatch();
+
+    const a = dispatch(thunkAction());
+    a.toString();
+    // $FlowExpectedError[incompatible-cast] it will return a string, not any which could be cast to number
+    (a: number)
+  });
+
+  it('handles thunks defined as a 3 arg tuple', () => {
+    type ThunkAction = () => ((...args: [
+      () => void,
+      () => { [key: string]: any },
+      {| test: number |},
+    ]) => string);
+    const thunkAction: ThunkAction = () => (dispatch, getState, extraArg) => {
+      dispatch();
+      getState().property1.property2;
+      extraArg.test.toFixed(2);
+      return '';
+    }
+    const dispatch = useDispatch();
+
+    const a = dispatch(thunkAction());
+    a.toString();
+    // $FlowExpectedError[incompatible-cast] it will return a string, not any which could be cast to number
+    (a: number)
+  });
+
+  it('handles thunks without a clear args', () => {
+    type ThunkAction = () => ((...args: Array<any>) => string);
+    const thunkAction: ThunkAction = () => (dispatch, getState, extraArg) => {
+      dispatch.test.a();
+      getState.test.a();
+      extraArg.test.a();
+      return '';
+    }
+    const dispatch = useDispatch();
+
+    const a = dispatch(thunkAction());
+    a.toString();
+    // $FlowExpectedError[incompatible-cast] it will return a string, not any which could be cast to number
+    (a: number)
+  });
 });
