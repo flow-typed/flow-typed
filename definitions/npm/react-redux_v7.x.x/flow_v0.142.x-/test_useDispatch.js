@@ -112,6 +112,26 @@ describe('useDispatch', () => {
     (a: number)
   });
 
+  it('handles thunks defined as each arg', () => {
+    type ThunkAction = () => ((
+      dispatch: () => void,
+      getState: () => { [key: string]: any },
+      extraArg: {| test: number |},
+    ) => string);
+    const thunkAction: ThunkAction = () => (dispatch, getState, extraArg) => {
+      dispatch();
+      getState().property1.property2;
+      extraArg.test.toFixed(2);
+      return '';
+    }
+    const dispatch = useDispatch();
+
+    const a = dispatch(thunkAction());
+    a.toString();
+    // $FlowExpectedError[incompatible-cast] it will return a string, not any which could be cast to number
+    (a: number)
+  });
+
   it('handles thunks without a clear args', () => {
     type ThunkAction = () => ((...args: Array<any>) => string);
     const thunkAction: ThunkAction = () => (dispatch, getState, extraArg) => {
