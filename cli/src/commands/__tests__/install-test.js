@@ -220,6 +220,11 @@ describe('install (command)', () => {
         const FAKE_CACHE_REPO_DIR = path.join(FAKE_CACHE_DIR, 'repo');
         const FLOWPROJ_DIR = path.join(ROOT_DIR, 'flowProj');
         const FLOWTYPED_DIR = path.join(FLOWPROJ_DIR, 'flow-typed', 'npm');
+        const FLOWTYPED_BASE_DIR = path.join(
+          FLOWPROJ_DIR,
+          'flow-typed',
+          'base',
+        );
 
         await Promise.all([mkdirp(FAKE_CACHE_REPO_DIR), mkdirp(FLOWTYPED_DIR)]);
 
@@ -243,7 +248,12 @@ describe('install (command)', () => {
           path.join(FAKE_CACHE_REPO_DIR, 'definitions'),
         );
 
-        await installNpmLibDef(availableLibDefs[0], FLOWTYPED_DIR, false);
+        await installNpmLibDef(
+          availableLibDefs[0],
+          FLOWTYPED_DIR,
+          FLOWTYPED_BASE_DIR,
+          false,
+        );
       });
     });
   });
@@ -346,6 +356,78 @@ describe('install (command)', () => {
         // Signs installed libdefs
         const fooLibDefContents = await fs.readFile(
           path.join(FLOWPROJ_DIR, 'flow-typed', 'npm', 'foo_v1.x.x.js'),
+          'utf8',
+        );
+        expect(fooLibDefContents).toContain('// flow-typed signature: ');
+        expect(fooLibDefContents).toContain('// flow-typed version: ');
+      });
+    });
+
+    it('installs libdefs base dependencies', () => {
+      return fakeProjectEnv(async FLOWPROJ_DIR => {
+        // Create some dependencies
+        await Promise.all([
+          touchFile(path.join(FLOWPROJ_DIR, '.flowconfig')),
+          writePkgJson(path.join(FLOWPROJ_DIR, 'package.json'), {
+            name: 'test',
+            devDependencies: {
+              'flow-bin': '^0.100.0',
+            },
+            dependencies: {
+              'has-base-deps': '1.2.3',
+            },
+          }),
+          mkdirp(path.join(FLOWPROJ_DIR, 'node_modules', 'has-base-deps')),
+          mkdirp(path.join(FLOWPROJ_DIR, 'node_modules', 'flow-bin')),
+        ]);
+
+        // Run the install command
+        await run({
+          overwrite: false,
+          verbose: false,
+          skip: false,
+          ignoreDeps: [],
+          explicitLibDefs: [],
+        });
+
+        // Installs libdefs
+        expect(
+          await Promise.all([
+            fs.exists(
+              path.join(
+                FLOWPROJ_DIR,
+                'flow-typed',
+                'npm',
+                'flow-bin_v0.x.x.js',
+              ),
+            ),
+            fs.exists(
+              path.join(
+                FLOWPROJ_DIR,
+                'flow-typed',
+                'npm',
+                'has-base-deps_v1.x.x.js',
+              ),
+            ),
+            fs.exists(
+              path.join(
+                FLOWPROJ_DIR,
+                'flow-typed',
+                'base',
+                'base-redux_v0.134.x-.js',
+              ),
+            ),
+          ]),
+        ).toEqual([true, true, true]);
+
+        // Signs installed base def
+        const fooLibDefContents = await fs.readFile(
+          path.join(
+            FLOWPROJ_DIR,
+            'flow-typed',
+            'base',
+            'base-redux_v0.134.x-.js',
+          ),
           'utf8',
         );
         expect(fooLibDefContents).toContain('// flow-typed signature: ');

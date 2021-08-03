@@ -129,6 +129,7 @@ export function setup(yargs: Yargs): Yargs {
       },
     });
 }
+
 export async function run(args: Args): Promise<number> {
   const cwd =
     typeof args.rootDir === 'string'
@@ -368,7 +369,9 @@ async function installNpmLibDefs({
   if (libDefsToInstall.size > 0) {
     console.log(`• Installing ${libDefsToInstall.size} libDefs...`);
     const flowTypedDirPath = path.join(flowProjectRoot, libdefDir, 'npm');
+    const baseDirPath = path.join(flowProjectRoot, libdefDir, 'base');
     await mkdirp(flowTypedDirPath);
+    await mkdirp(baseDirPath);
     const results = await Promise.all(
       [...libDefsToInstall.values()].map(async (libDef: NpmLibDef) => {
         const toUninstall = libDefsToUninstall.get(
@@ -377,7 +380,12 @@ async function installNpmLibDefs({
         if (toUninstall != null) {
           await fs.unlink(toUninstall);
         }
-        return installNpmLibDef(libDef, flowTypedDirPath, overwrite);
+        return installNpmLibDef(
+          libDef,
+          flowTypedDirPath,
+          baseDirPath,
+          overwrite,
+        );
       }),
     );
 
@@ -497,6 +505,7 @@ async function installNpmLibDefs({
 async function installNpmLibDef(
   npmLibDef: NpmLibDef,
   npmDir: string,
+  baseDir: string,
   overwrite: boolean,
 ): Promise<boolean> {
   const scopedDir =
@@ -537,6 +546,13 @@ async function installNpmLibDef(
     );
     const codeSignPreprocessor = signCodeStream(repoVersion);
     await copyFile(npmLibDef.path, filePath, codeSignPreprocessor);
+
+    // install extra base files here
+    npmLibDef.dependenciesPaths.forEach(async depPath => {
+      const depPathSplit = depPath.split('/');
+      const depName = depPathSplit[depPathSplit.length - 1];
+      await copyFile(depPath, `${baseDir}/${depName}`, codeSignPreprocessor);
+    });
 
     console.log(
       colors.bold('  • %s\n' + '    └> %s'),

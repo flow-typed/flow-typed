@@ -32,8 +32,15 @@ describe('npmLibDefs', () => {
         'npm',
         'underscore_v1.x.x',
       );
+      const BASE_DEFS_DIR_PATH = path.join(
+        FIXTURE_ROOT,
+        'well-formed',
+        'definitions',
+        'base',
+      );
       const defs = await extractLibDefsFromNpmPkgDir(
         UNDERSCORE_PATH,
+        BASE_DEFS_DIR_PATH,
         null,
         'underscore_v1.x.x',
       );
@@ -65,6 +72,7 @@ describe('npmLibDefs', () => {
             testFilePaths: [
               path.join(UNDERSCORE_PATH, 'test_underscore-v1.js'),
             ],
+            dependenciesPaths: [],
             version: 'v1.x.x',
           },
           {
@@ -89,6 +97,7 @@ describe('npmLibDefs', () => {
               path.join(UNDERSCORE_PATH, 'test_underscore-v1.js'),
               path.join(UNDERSCORE_PATH, 'flow_v0.38.x-', 'test_underscore.js'),
             ],
+            dependenciesPaths: [],
             version: 'v1.x.x',
           },
         ]),
@@ -103,8 +112,19 @@ describe('npmLibDefs', () => {
         'npm',
         'underscore_v1',
       );
+      const BASE_DEFS_DIR_PATH = path.join(
+        FIXTURE_ROOT,
+        'bad-pkg-namever',
+        'definitions',
+        'base',
+      );
       await expect(
-        extractLibDefsFromNpmPkgDir(UNDERSCORE_PATH, null, 'underscore_v1'),
+        extractLibDefsFromNpmPkgDir(
+          UNDERSCORE_PATH,
+          BASE_DEFS_DIR_PATH,
+          null,
+          'underscore_v1',
+        ),
       ).rejects.toThrow(
         'Malformed npm package name! Expected the name to be ' +
           'formatted as <PKGNAME>_v<MAJOR>.<MINOR>.<PATCH> but instead got underscore_v1',
@@ -120,7 +140,12 @@ describe('npmLibDefs', () => {
         'underscore_v1.x.x',
       );
       await expect(
-        extractLibDefsFromNpmPkgDir(UNDERSCORE_PATH, null, 'underscore_v1.x.x'),
+        extractLibDefsFromNpmPkgDir(
+          UNDERSCORE_PATH,
+          '',
+          null,
+          'underscore_v1.x.x',
+        ),
       ).rejects.toThrow(
         'Flow versions must start with `flow_` but instead got asdfdir',
       );
@@ -136,7 +161,12 @@ describe('npmLibDefs', () => {
       );
 
       await expect(
-        extractLibDefsFromNpmPkgDir(UNDERSCORE_PATH, null, 'underscore_v1.x.x'),
+        extractLibDefsFromNpmPkgDir(
+          UNDERSCORE_PATH,
+          '',
+          null,
+          'underscore_v1.x.x',
+        ),
       ).rejects.toThrow('Flow versions not disjoint!');
     });
 
@@ -149,7 +179,12 @@ describe('npmLibDefs', () => {
         'underscore_v1.x.x',
       );
       await expect(
-        extractLibDefsFromNpmPkgDir(UNDERSCORE_PATH, null, 'underscore_v1.x.x'),
+        extractLibDefsFromNpmPkgDir(
+          UNDERSCORE_PATH,
+          '',
+          null,
+          'underscore_v1.x.x',
+        ),
       ).rejects.toThrow('No libdef files found!');
     });
 
@@ -252,6 +287,7 @@ describe('npmLibDefs', () => {
             path: 'flow-typed/npm/semver_v5.1.x.js',
             scope: null,
             testFilePaths: [],
+            dependenciesPaths: [],
             version: 'v5.1.x',
           });
         }
@@ -288,6 +324,7 @@ describe('npmLibDefs', () => {
             path: 'flow-typed/npm/@kadira/storybook_v1.x.x.js',
             scope: '@kadira',
             testFilePaths: [],
+            dependenciesPaths: [],
             version: 'v1.x.x',
           });
           expect(getScopedPackageName(semverLibDef.libDef)).toEqual(
@@ -333,6 +370,7 @@ describe('npmLibDefs', () => {
             path: 'flow-typed/npm/react-redux_v5.x.x.js',
             scope: null,
             testFilePaths: [],
+            dependenciesPaths: [],
             version: 'v5.x.x',
           });
         }

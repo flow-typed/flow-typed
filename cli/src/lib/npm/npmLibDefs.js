@@ -45,6 +45,7 @@ export type NpmLibDef = {|
   flowVersion: FlowVersion,
   path: string,
   testFilePaths: Array<string>,
+  dependenciesPaths: Array<string>,
 |};
 
 export type NpmLibDefFilter = {|
@@ -56,6 +57,7 @@ export type NpmLibDefFilter = {|
 
 async function extractLibDefsFromNpmPkgDir(
   pkgDirPath: string,
+  baseDirPath: string,
   scope: null | string,
   pkgNameVer: string,
   validating?: boolean,
@@ -125,6 +127,7 @@ async function extractLibDefsFromNpmPkgDir(
   await P.all(
     parsedFlowDirs.map(async ([flowDirPath, flowVersion]) => {
       const testFilePaths = [].concat(commonTestFiles);
+      const dependenciesPaths = [];
       let libDefFilePath: null | string = null;
       (await fs.readdir(flowDirPath)).forEach(flowDirItem => {
         const flowDirItemPath = path.join(flowDirPath, flowDirItem);
@@ -138,6 +141,18 @@ async function extractLibDefsFromNpmPkgDir(
           if (flowDirItem === libDefFileName) {
             libDefFilePath = path.join(flowDirPath, flowDirItem);
             return;
+          }
+
+          // Pull base dependencies
+          if (flowDirItem === 'package.json') {
+            const pkg = JSON.parse(
+              fs.readFileSync(path.join(flowDirPath, flowDirItem), 'utf8'),
+            );
+            dependenciesPaths.push(
+              ...pkg.baseDependencies.map(dep => {
+                return path.join(baseDirPath, `/${dep}.js`);
+              }),
+            );
           }
 
           // Is this a test file?
@@ -178,6 +193,7 @@ async function extractLibDefsFromNpmPkgDir(
         flowVersion,
         path: libDefFilePath,
         testFilePaths,
+        dependenciesPaths,
       });
     }),
   );
@@ -442,6 +458,7 @@ export function parseSignedCodeVersion(
       version: versionToString(pkgVersion),
       flowVersion: flowVer,
       testFilePaths: [],
+      dependenciesPaths: [],
     },
   };
 }
@@ -508,6 +525,7 @@ export async function getInstalledNpmLibDefs(
 async function getSingleLibdef(
   itemName: string,
   npmDefsDirPath: string,
+  baseDefsDirPath: string,
   validating?: boolean,
 ): Promise<Array<NpmLibDef>> {
   const itemPath = path.join(npmDefsDirPath, itemName);
@@ -524,6 +542,7 @@ async function getSingleLibdef(
           if (itemStat.isDirectory()) {
             return await extractLibDefsFromNpmPkgDir(
               itemPath,
+              baseDefsDirPath,
               scope,
               itemName,
               validating,
@@ -540,6 +559,7 @@ async function getSingleLibdef(
       // itemPath must be a package dir
       return await extractLibDefsFromNpmPkgDir(
         itemPath,
+        baseDefsDirPath,
         null, // No scope
         itemName,
         validating,
@@ -560,11 +580,17 @@ export async function getNpmLibDefs(
   validating?: boolean,
 ): Promise<Array<NpmLibDef>> {
   const npmDefsDirPath = path.join(defsDirPath, 'npm');
+  const baseDefsDirPath = path.join(defsDirPath, 'base');
   const dirItems = await fs.readdir(npmDefsDirPath);
   const errors = [];
   const proms = dirItems.map(async itemName => {
     try {
-      return await getSingleLibdef(itemName, npmDefsDirPath, validating);
+      return await getSingleLibdef(
+        itemName,
+        npmDefsDirPath,
+        baseDefsDirPath,
+        validating,
+      );
     } catch (e) {
       errors.push(e);
     }
