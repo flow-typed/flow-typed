@@ -85,7 +85,14 @@ describe('keyboard', () => {
     userEvent.keyboard('', { delay: 123 }).then(() => {});
   });
   it('should validate returned keyboard state', () => {
-    const state: KeyboardState = userEvent.keyboard('');
+    // Basic check for shape of state
+    const {
+      pressed,
+      modifiers: { alt, caps, ctrl, meta, shift },
+      activeElement,
+      carryValue,
+      carryChar,
+    } = userEvent.keyboard('');
   });
   it('should error on invalid promise', () => {
     // $FlowExpectedError[prop-missing]
