@@ -24,11 +24,11 @@ describe('the Remarkable constructor', () => {
       },
     });
 
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
     new Remarkable('');
 
     md.render('# Remarkable rulezz!');
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
     md.render(true);
   });
 });
@@ -36,9 +36,9 @@ describe('the Remarkable constructor', () => {
 describe('the parse method', () => {
   it('should accept strings as first param', () => {
     md.parse('');
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
     md.parse(true);
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
     md.parse(1);
   });
 });
@@ -46,9 +46,9 @@ describe('the parse method', () => {
 describe('the parseInline method', () => {
   it('should accept strings as first param', () => {
     md.parseInline('');
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
     md.parseInline(true);
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
     md.parseInline(1);
   });
 });
@@ -69,7 +69,7 @@ describe('the set method', () => {
 describe('the renderInline method', () => {
   it('should accept strings as first param', () => {
     md.renderInline('');
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
     md.renderInline(true);
   });
 });
@@ -105,5 +105,10 @@ describe('the utils helpers', () => {
 describe('the linkify plugin', () => {
   it('should validate on default usage', () => {
     md = new Remarkable().use(linkify);
+  });
+
+  it('should not accept options', () => {
+    // $FlowExpectedError[incompatible-call]
+    md = new Remarkable().use(linkify, {});
   });
 });

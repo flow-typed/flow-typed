@@ -5,7 +5,7 @@ declare module 'remarkable' {
 
   declare type State = any;
 
-  declare type RemarkablePlugin<Option> = (
+  declare export type RemarkablePlugin<Option> = (
     md: Remarkable,
     option: Option
   ) => void;
@@ -112,5 +112,5 @@ declare module 'remarkable' {
 declare module 'remarkable/linkify' {
   import type { RemarkablePlugin } from 'remarkable';
 
-  declare export var linkify: RemarkablePlugin;
+  declare export var linkify: RemarkablePlugin<void>;
 }
