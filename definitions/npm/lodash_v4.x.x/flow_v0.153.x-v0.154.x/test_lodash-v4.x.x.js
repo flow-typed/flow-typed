@@ -528,6 +528,7 @@ describe('Collection', () => {
 
   it('invokeMap', function () {
     (invokeMap([[5, 1, 7], [3, 2, 1]], 'sort'): number[][]);
+    // $FlowExpectedError[incompatible-call]
     // $FlowExpectedError[method-unbinding] caused using string split function
     (invokeMap(['123', '456'], String.prototype.split, ''): string[][]);
 
