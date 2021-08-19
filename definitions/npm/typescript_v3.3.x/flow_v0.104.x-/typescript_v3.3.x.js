@@ -8441,7 +8441,7 @@ declare module "typescript" {
     +getProjectReferences?: () => $ReadOnlyArray<ProjectReference> | void,
     +getLocalizedDiagnosticMessages?: () => any,
     +getCancellationToken?: () => HostCancellationToken,
-    getCurrentDirectory(): string,
+    +getCurrentDirectory: () => string,
     getDefaultLibFileName(options: CompilerOptions): string,
     +log?: (s: string) => void,
     +trace?: (s: string) => void,
