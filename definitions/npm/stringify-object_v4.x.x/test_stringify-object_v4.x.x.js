@@ -34,19 +34,13 @@ const obj = {
   // [Symbol.for('foo')]: Symbol.for('foo'),
 };
 
-describe('The `obj` parameter', () => {
-  it('should accept valid objects', () => {
+describe('The `input` parameter', () => {
+  it('should accept mixed values', () => {
+    // See https://github.com/yeoman/stringify-object/blob/f9e53f4e422510a2868e4876291058c69ca12b80/index.js#L52-L62
     stringifyObject(obj);
-  });
-
-  it('should error on non object types', () => {
-    // $FlowExpectedError
     stringifyObject('');
-
-    // $FlowExpectedError
-    stringifyObject(true);
-
-    // $FlowExpectedError
+    stringifyObject(123);
+    stringifyObject([1, 2, 3]);
     stringifyObject();
   });
 });
@@ -57,14 +51,19 @@ describe('The `options` parameter', () => {
   });
 
   it('should error on non object types', () => {
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
     stringifyObject(obj, '');
 
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
     stringifyObject(obj, true);
 
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
     stringifyObject(obj, []);
+  });
+
+  it('should error on malformed options objects', () => {
+    // $FlowExpectedError[prop-missing]
+    stringifyObject(obj, { foo: 'bar' });
   });
 });
 
@@ -77,17 +76,17 @@ describe('The `indent` option', () => {
 
   it('should error on non string types', () => {
     stringifyObject(obj, {
-      // $FlowExpectedError
+      // $FlowExpectedError[incompatible-call]
       indent: true,
     });
 
     stringifyObject(obj, {
-      // $FlowExpectedError
+      // $FlowExpectedError[incompatible-call]
       indent: 123,
     });
 
     stringifyObject(obj, {
-      // $FlowExpectedError
+      // $FlowExpectedError[incompatible-call]
       indent: [],
     });
   });
@@ -102,17 +101,17 @@ describe('The `singleQuotes` option', () => {
 
   it('should error on non boolean types', () => {
     stringifyObject(obj, {
-      // $FlowExpectedError
+      // $FlowExpectedError[incompatible-call]
       singleQuotes: '',
     });
 
     stringifyObject(obj, {
-      // $FlowExpectedError
+      // $FlowExpectedError[incompatible-call]
       singleQuotes: 123,
     });
 
     stringifyObject(obj, {
-      // $FlowExpectedError
+      // $FlowExpectedError[incompatible-call]
       singleQuotes: [],
     });
   });
@@ -127,23 +126,23 @@ describe('The `filter` option', () => {
 
   it('should error on non function types', () => {
     stringifyObject(obj, {
-      // $FlowExpectedError
+      // $FlowExpectedError[incompatible-call]
       filter: true,
     });
 
     stringifyObject(obj, {
-      // $FlowExpectedError
+      // $FlowExpectedError[incompatible-call]
       filter: '',
     });
 
     stringifyObject(obj, {
-      // $FlowExpectedError
+      // $FlowExpectedError[incompatible-call]
       filter: [],
     });
 
     it('should error on non boolean return types', () => {
       stringifyObject(obj, {
-        // $FlowExpectedError
+        // $FlowExpectedError[incompatible-call]
         filter: () => '',
       });
     });
@@ -171,24 +170,24 @@ describe('The `transform` option', () => {
 
   it('should error on non function types', () => {
     stringifyObject(obj, {
-      // $FlowExpectedError
+      // $FlowExpectedError[incompatible-call]
       transform: true,
     });
 
     stringifyObject(obj, {
-      // $FlowExpectedError
+      // $FlowExpectedError[incompatible-call]
       transform: 123,
     });
 
     stringifyObject(obj, {
-      // $FlowExpectedError
+      // $FlowExpectedError[incompatible-call]
       transform: [],
     });
   });
 
   it('should error on non string return types', () => {
     stringifyObject(obj, {
-      // $FlowExpectedError
+      // $FlowExpectedError[incompatible-call]
       transform: () => true,
     });
   });
@@ -203,17 +202,17 @@ describe('The `inlineCharacterLimit` option', () => {
 
   it('should error on non number types', () => {
     stringifyObject(obj, {
-      // $FlowExpectedError
+      // $FlowExpectedError[incompatible-call]
       inlineCharacterLimit: '',
     });
 
     stringifyObject(obj, {
-      // $FlowExpectedError
+      // $FlowExpectedError[incompatible-call]
       inlineCharacterLimit: true,
     });
 
     stringifyObject(obj, {
-      // $FlowExpectedError
+      // $FlowExpectedError[incompatible-call]
       inlineCharacterLimit: [],
     });
   });
@@ -225,13 +224,13 @@ describe('The `pad` parameter', () => {
   });
 
   it('should error on non string types', () => {
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
     stringifyObject(obj, {}, true);
 
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
     stringifyObject(obj, {}, 123);
 
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
     stringifyObject(obj, {}, []);
   });
 });
