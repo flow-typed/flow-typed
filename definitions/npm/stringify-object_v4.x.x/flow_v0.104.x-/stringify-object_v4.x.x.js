@@ -1,19 +1,44 @@
 declare module 'stringify-object' {
-  // Matches the `prop` parameter `mixed` type.
-  // Prevent errors when using computed properties.
-  declare type AnyObject = { [key: mixed]: mixed, ... };
+  declare type AnyObject = { +[key: mixed]: mixed, ... };
 
-  declare type Options = {|
+  declare export type Options = {|
+    /**
+     * Preferred indentation.
+     * @default '\t'
+     */
     indent?: string,
+    /**
+     * Set to false to get double-quoted strings.
+     * @default true
+     */
     singleQuotes?: boolean,
-    filter?: (obj: AnyObject, prop: mixed) => boolean,
-    transform?: (obj: AnyObject, prop: mixed, originalResult: string) => string,
+    /**
+     * Expected to return a boolean of whether to include the property property
+     * of the object object in the output.
+     */
+    filter?: (input: AnyObject, prop: string | symbol) => boolean,
+    /**
+     * When set, will inline values up to inlineCharacterLimit length for the
+     * sake of more terse output.
+     */
+    transform?: (
+      input: AnyObject | Array<mixed>,
+      prop: number | string | symbol,
+      originalResult: string
+    ) => string,
+    /**
+     * Expected to return a string that transforms the string that resulted from
+     * stringifying object[property]. This can be used to detect special types
+     * of objects that need to be stringified in a particular way.
+     * The transform function might return an alternate string in this case,
+     * otherwise returning the originalResult.
+     */
     inlineCharacterLimit?: number,
   |};
 
-  declare module.exports: (
-    input: AnyObject | Array<*>,
+  declare export default function stringifyObject(
+    input: mixed,
     options?: Options,
     pad?: string
-  ) => string;
+  ): string;
 }
