@@ -4,27 +4,26 @@ import Remarkable from 'remarkable';
 
 /* Trivial case */
 
-// $FlowExpectedError
+// $FlowExpectedError[cannot-resolve-name]
 remarkable.foo();
 
 const rmk = new Remarkable();
 
-// $FlowExpectedError
+// $FlowExpectedError[prop-missing]
 rmk.foo();
-
 
 /* Remarkable#parse() */
 rmk.parse('');
-// $FlowExpectedError
+// $FlowExpectedError[incompatible-call]
 rmk.parse(true);
-// $FlowExpectedError
+// $FlowExpectedError[incompatible-call]
 rmk.parse(1);
 
 /* Remarkable#parseInline() */
 rmk.parseInline('');
-// $FlowExpectedError
+// $FlowExpectedError[incompatible-call]
 rmk.parseInline(true);
-// $FlowExpectedError
+// $FlowExpectedError[incompatible-call]
 rmk.parseInline(1);
 
 /* Remarkable#set() */
@@ -39,10 +38,10 @@ rmk.set({ highlight: (str: string, lang: string) => '' });
 
 /* Remarkable#render() */
 rmk.render('');
-// $FlowExpectedError
+// $FlowExpectedError[incompatible-call]
 rmk.render(true);
 
 /* Remarkable#renderInline() */
 rmk.renderInline('');
-// $FlowExpectedError
+// $FlowExpectedError[incompatible-call]
 rmk.renderInline(true);
