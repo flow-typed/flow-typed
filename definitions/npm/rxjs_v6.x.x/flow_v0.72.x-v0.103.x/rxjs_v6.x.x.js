@@ -2735,7 +2735,7 @@ declare module "rxjs/operators" {
 
   declare export function retryWhen<T>(
     notifier: (errors: rxjs$Observable<any>) => rxjs$Observable<mixed>
-  ): (rxjs$Observable<T>) => rxjs$Observable<T>;
+  ): rxjs$MonoTypeOperatorFunction<T>;
 
   declare export function refCount<T>(): rxjs$MonoTypeOperatorFunction<T>;
 
