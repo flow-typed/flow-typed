@@ -5,7 +5,6 @@ import { call } from "redux-saga/effects";
 describe("call effect", () => {
   describe("structure", () => {
     const c = call(() => {});
-    call((a: string) => {}, '');
 
     it('type must be equal "CALL"', () => {
       (c.type: "CALL");
