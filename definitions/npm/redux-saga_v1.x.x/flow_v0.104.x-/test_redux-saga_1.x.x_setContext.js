@@ -16,23 +16,23 @@ describe("setContext(prop)", () => {
     });
 
     it("returned object must be read only", () => {
-      // $FlowExpectedError: read-only  property
+      // $FlowExpectedError[cannot-write]: read-only  property
       c.type = "anyType";
-      // $FlowExpectedError: read-only  property
+      // $FlowExpectedError[cannot-write]: read-only  property
       c.payload = {};
     });
 
     it("returned object must be exact", () => {
-      // $FlowExpectedError: exact type
+      // $FlowExpectedError[prop-missing]: exact type
       c.abc = 69;
     });
   });
 
   it("must ruses an error when first argument isn't object", () => {
-    // $FlowExpectedError argument required
+    // $FlowExpectedError[incompatible-call] argument required
     setContext();
 
-    // $FlowExpectedError object literal is incompatible with object
+    // $FlowExpectedError[incompatible-call] object literal is incompatible with object
     setContext("TEST");
   });
 });

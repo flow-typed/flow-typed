@@ -11,17 +11,17 @@ describe("eventChannel", () => {
   it("returned Channel must be read only object", () => {
     const ch = eventChannel(simpleSubscribeFn);
 
-    // $FlowExpectedError - read-only
+    // $FlowExpectedError[cannot-write] - read-only
     ch.close = "hi belarus";
-    // $FlowExpectedError - read-only
+    // $FlowExpectedError[cannot-write] - read-only
     ch.take = "hi belarus";
-    // $FlowExpectedError - read-only
+    // $FlowExpectedError[cannot-write] - read-only
     ch.flush = "hi belarus";
   });
 
   it("returned Channel must be exact type", () => {
     const ch = eventChannel(simpleSubscribeFn);
-    // $FlowExpectedError- exact type
+    // $FlowExpectedError[prop-missing]- exact type
     ch.anyOtherProp = "anyValue";
   });
 
@@ -62,7 +62,7 @@ describe("eventChannel", () => {
 
     const ch = eventChannel(subscribeFn, buffers.none());
 
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
     ch.take();
   });
 
@@ -71,7 +71,7 @@ describe("eventChannel", () => {
 
     const ch = eventChannel(subscribeFn, buffers.none());
 
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
     ch.flush();
   });
 });

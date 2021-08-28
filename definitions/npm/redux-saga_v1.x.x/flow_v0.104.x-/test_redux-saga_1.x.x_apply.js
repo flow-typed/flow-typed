@@ -58,13 +58,13 @@ describe("apply(context, fn, [args])", () => {
     });
 
     it("must raises an error", () => {
-      // $FlowExpectedError: Too few arguments
+      // $FlowExpectedError[incompatible-call]: Too few arguments
       apply(context, fn6, "1", 2, "3", 4);
 
-      // $FlowExpectedError: Wrong argument types
+      // $FlowExpectedError[incompatible-call]: Wrong argument types
       apply(context, fn1, 1);
 
-      // $FlowExpectedError: First parameter is a string, not a number
+      // $FlowExpectedError[incompatible-cast]: First parameter is a string, not a number
       (c1.payload.args: [number]);
     });
   });
@@ -85,13 +85,13 @@ describe("apply(context, fn, [args])", () => {
       // NOTE: This should actually fail, but apparently more parameter are fine..
       (c1.payload.fn: typeof fn6);
 
-      // $FlowExpectedError: fn returns a Promise<string> not Promise<number>
+      // $FlowExpectedError[incompatible-cast]: fn returns a Promise<string> not Promise<number>
       (c1.payload.fn: (a: boolean) => Promise<number>);
 
-      // $FlowExpectedError: 'a' is actually of type string
+      // $FlowExpectedError[incompatible-cast]: 'a' is actually of type string
       (c4.payload.fn: (a: number, b: number) => Promise<string>);
 
-      // $FlowExpectedError: Less parameter are noticed
+      // $FlowExpectedError[incompatible-cast]: Less parameter are noticed
       (c6.payload.fn: typeof fn1);
     });
   });
@@ -109,7 +109,7 @@ describe("apply(context, fn, [args])", () => {
     });
 
     it("must raises an error when lead context to null", () => {
-      // $FlowExpectedError
+      // $FlowExpectedError[incompatible-cast]
       (c1.payload.context: null);
     });
   });

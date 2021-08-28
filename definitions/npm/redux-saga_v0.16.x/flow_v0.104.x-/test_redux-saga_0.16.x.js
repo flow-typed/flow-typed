@@ -295,10 +295,10 @@ function eventChannelTest() {
   eventChannel(emitter => () => {}, buffers.dropping(1));
   eventChannel(emitter => () => {}, buffers.dropping(1), () => true);
 
-  // $FlowExpectedError: MatcherFn needs boolean as return type
+  // $FlowExpectedError[incompatible-call]: MatcherFn needs boolean as return type
   eventChannel(emitter => () => {}, buffers.dropping(1), () => "");
 
-  // $FlowExpectedError: second parameter needs to be a Buffer
+  // $FlowExpectedError[prop-missing]: second parameter needs to be a Buffer
   eventChannel(emitter => () => {}, "");
 }
 
@@ -308,25 +308,25 @@ function buffersTest() {
   (buffers.fixed(): Buffer);
   (buffers.fixed(5): Buffer);
 
-  // $FlowExpectedError: limit parameter must be given as a number
+  // $FlowExpectedError[incompatible-call]: limit parameter must be given as a number
   (buffers.fixed("five"): Buffer);
 
   (buffers.dropping(): Buffer);
   (buffers.dropping(6): Buffer);
 
-  // $FlowExpectedError: limit parameter must be given as a number
+  // $FlowExpectedError[incompatible-call]: limit parameter must be given as a number
   (buffers.dropping("six"): Buffer);
 
   (buffers.sliding(): Buffer);
   (buffers.sliding(7): Buffer);
 
-  // $FlowExpectedError: limit parameter must be given as a number
+  // $FlowExpectedError[incompatible-call]: limit parameter must be given as a number
   (buffers.sliding("seven"): Buffer);
 
   (buffers.expanding(): Buffer);
   (buffers.expanding(8): Buffer);
 
-  // $FlowExpectedError: limit parameter must be given as a number
+  // $FlowExpectedError[incompatible-call]: limit parameter must be given as a number
   (buffers.expanding("eight"): Buffer);
 }
 
@@ -340,28 +340,28 @@ function takeTest() {
   take(myChannel);
   take.maybe(myChannel);
 
-  // $FlowExpectedError: PatternFn returns a boolean
+  // $FlowExpectedError[incompatible-call]: PatternFn returns a boolean
   take(action => null);
 
-  // $FlowExpectedError: PatternFn returns a boolean
+  // $FlowExpectedError[incompatible-call]: PatternFn returns a boolean
   take.maybe(action => null);
 
-  // $FlowExpectedError: Only string patterns for arrays
+  // $FlowExpectedError[incompatible-call]: Only string patterns for arrays
   take(["FOO", "BAR", 1]);
 
-  // $FlowExpectedError: Only string patterns for arrays
+  // $FlowExpectedError[incompatible-call]: Only string patterns for arrays
   take.maybe(["FOO", "BAR", 1]);
 
   // $FlowExpectedError: Channels must have take prop
   take({ close: () => undefined, put: msg => undefined });
 
-  // $FlowExpectedError: Channels must have take prop
+  // $FlowExpectedError[incompatible-call]: Channels must have take prop
   take.maybe({ close: () => undefined, put: msg => undefined });
 
-  // $FlowExpectedError: Channels must have close prop
+  // $FlowExpectedError[incompatible-call]: Channels must have close prop
   take({ take: cb => undefined, put: msg => undefined });
 
-  // $FlowExpectedError: Channels must have close prop
+  // $FlowExpectedError[incompatible-call]: Channels must have close prop
   take.maybe({ take: cb => undefined, put: msg => undefined });
 }
 
@@ -374,13 +374,13 @@ function putTest() {
   const put2 = put(myChannel, { type: "test" });
   (put2.PUT.channel: Channel);
 
-  // $FlowExpectedError: Can only be called with objects
+  // $FlowExpectedError[incompatible-call]: Can only be called with objects
   put("FOO");
 
-  // $FlowExpectedError: No null as channel accepted
+  // $FlowExpectedError[incompatible-call]: No null as channel accepted
   put(null, { type: "test" });
 
-  // $FlowExpectedError: This property cannot be inferred
+  // $FlowExpectedError[prop-missing]: This property cannot be inferred
   (put1.PUT.action.unknown: string);
 
   put.resolve({ type: "test" });
@@ -391,13 +391,13 @@ function putTest() {
   const put4 = put.resolve(myChannel, { type: "test" });
   (put4.PUT.channel: Channel);
 
-  // $FlowExpectedError: Can only be called with objects
+  // $FlowExpectedError[incompatible-call]: Can only be called with objects
   put.resolve("FOO");
 
-  // $FlowExpectedError: No null as channel accepted
+  // $FlowExpectedError[incompatible-call]: No null as channel accepted
   put.resolve(null, { type: "test" });
 
-  // $FlowExpectedError: This property cannot be inferred
+  // $FlowExpectedError[prop-missing]: This property cannot be inferred
   (put3.PUT.action.unknown: string);
 }
 
@@ -417,10 +417,10 @@ function callTest() {
   const c7 = call(fn7, "1", 2, "3", 4, "5", 6, "7");
   const c8 = call(fn8, "1", 2, "3", 4, "5", 6, "7", 8);
 
-  // $FlowExpectedError: Too few arguments
+  // $FlowExpectedError[incompatible-call]: Too few arguments
   call(fn6, "1", 2, "3", 4);
 
-  // $FlowExpectedError: Wrong argument types
+  // $FlowExpectedError[incompatible-call]: Wrong argument types
   call(fn1, 1);
 
   const cSpread = call(fnSpread, 1, 2, 3, 1);
@@ -436,7 +436,7 @@ function callTest() {
   (c7.CALL.args: [string, number, string, number, string, number, string]);
   (c8.CALL.args: [string, number, string, number, string, number, string, number]);
 
-  // $FlowExpectedError: First parameter is a string, not a number
+  // $FlowExpectedError[incompatible-cast]: First parameter is a string, not a number
   (c1.CALL.args: [number]);
 
   // Fn tests
@@ -452,13 +452,13 @@ function callTest() {
   // NOTE: This should actually fail, but apparently more parameter are fine..
   (c1.CALL.fn: typeof fn6);
 
-  // $FlowExpectedError: fn returns a Promise<string> not Promise<number>
+  // $FlowExpectedError[incompatible-cast]: fn returns a Promise<string> not Promise<number>
   (c1.CALL.fn: (a: boolean) => Promise<number>);
 
-  // $FlowExpectedError: 'a' is actually of type string
+  // $FlowExpectedError[incompatible-cast]: 'a' is actually of type string
   (c4.CALL.fn: (a: number, b: number) => Promise<string>);
 
-  // $FlowExpectedError: Less parameter are noticed
+  // $FlowExpectedError[incompatible-cast]: Less parameter are noticed
   (c6.CALL.fn: typeof fn1);
 
   // Context tests
@@ -471,7 +471,7 @@ function callTest() {
   (c7.CALL.context: null);
   (c8.CALL.context: null);
 
-  // $FlowExpectedError
+  // $FlowExpectedError[incompatible-cast]
   (c1.CALL.context: {...});
 }
 
@@ -486,10 +486,10 @@ function callNormalFunctionTest() {
   const c7 = call(nfn7, "1", 2, true, "4", 5, false, "7");
   const c8 = call(nfn8, "1", 2, true, "4", 5, false, "7", 8);
 
-  // $FlowExpectedError: Too few arguments
+  // $FlowExpectedError[incompatible-call]: Too few arguments
   call(nfn6, "1", 2, true, "4");
 
-  // $FlowExpectedError: Wrong argument types
+  // $FlowExpectedError[incompatible-call]: Wrong argument types
   call(nfn1, 1);
 
   const cSpread = call(nfnSpread, 1, 2, 3, 4);
@@ -505,7 +505,7 @@ function callNormalFunctionTest() {
   (c7.CALL.args: [string, number, boolean, string, number, boolean, string]);
   (c8.CALL.args: [string, number, boolean, string, number, boolean, string, number]);
 
-  // $FlowExpectedError: First parameter is a string, not a number
+  // $FlowExpectedError[incompatible-cast]: First parameter is a string, not a number
   (c1.CALL.args: [number]);
 
   // Fn tests
@@ -518,16 +518,16 @@ function callNormalFunctionTest() {
   (c7.CALL.fn: typeof nfn7);
   (c8.CALL.fn: typeof nfn8);
 
-  // $FlowExpectedError: fn returns a number not string
+  // $FlowExpectedError[incompatible-cast]: fn returns a number not string
   (c1.CALL.fn: (a: boolean) => string);
 
-  // $FlowExpectedError: 'a' is actually of type string
+  // $FlowExpectedError[incompatible-cast]: 'a' is actually of type string
   (c1.CALL.fn: (a: boolean) => number);
 
-  // $FlowExpectedError: 'a' is actually of type string
+  // $FlowExpectedError[incompatible-cast]: 'a' is actually of type string
   (c4.CALL.fn: (a: number, b: number) => number);
 
-  // $FlowExpectedError: Less parameter are noticed
+  // $FlowExpectedError[incompatible-cast]: Less parameter are noticed
   (c6.CALL.fn: typeof nfn1);
 
   // Context tests
@@ -540,7 +540,7 @@ function callNormalFunctionTest() {
   (c7.CALL.context: null);
   (c8.CALL.context: null);
 
-  // $FlowExpectedError
+  // $FlowExpectedError[incompatible-cast]
   (c1.CALL.context: {...});
 }
 
@@ -555,10 +555,10 @@ function callSagaFunctionTest() {
   const c7 = call(s7, "1", 2, "3", 4, "5", 6, "7");
   const c8 = call(s8, "1", 2, "3", 4, "5", 6, "7", 8);
 
-  // $FlowExpectedError: Too few arguments
+  // $FlowExpectedError[incompatible-call]: Too few arguments
   call(s6, "1", 2, "3", 4);
 
-  // $FlowExpectedError: Wrong argument types
+  // $FlowExpectedError[incompatible-call]: Wrong argument types
   call(s1, 1);
 
   const cSpread = call(sSpread, 1, 2, 3, 4);
@@ -574,7 +574,7 @@ function callSagaFunctionTest() {
   (c7.CALL.args: [string, number, string, number, string, number, string]);
   (c8.CALL.args: [string, number, string, number, string, number, string, number]);
 
-  // $FlowExpectedError: First parameter is a string, not a number
+  // $FlowExpectedError[incompatible-cast]: First parameter is a string, not a number
   (c1.CALL.args: [number]);
 
   // Fn tests
@@ -587,16 +587,16 @@ function callSagaFunctionTest() {
   (c7.CALL.fn: typeof s7);
   (c8.CALL.fn: typeof s8);
 
-  // $FlowExpectedError: fn returns a Saga<number> not Saga<string>
+  // $FlowExpectedError[incompatible-cast]: fn returns a Saga<number> not Saga<string>
   (c1.CALL.fn: (a: string) => Saga<string>);
 
-  // $FlowExpectedError: 'a' is actually of type string
+  // $FlowExpectedError[incompatible-cast]: 'a' is actually of type string
   (c1.CALL.fn: (a: boolean) => Saga<number>);
 
-  // $FlowExpectedError: 'a' is actually of type string
+  // $FlowExpectedError:[incompatible-cast] 'a' is actually of type string
   (c4.CALL.fn: (a: number, b: number) => Saga<number>);
 
-  // $FlowExpectedError: Less parameter are noticed
+  // $FlowExpectedError[incompatible-cast]: Less parameter are noticed
   (c6.CALL.fn: typeof s1);
 
   // Context tests
@@ -609,7 +609,7 @@ function callSagaFunctionTest() {
   (c7.CALL.context: null);
   (c8.CALL.context: null);
 
-  // $FlowExpectedError
+  // $FlowExpectedError[incompatible-cast]
   (c1.CALL.context: {...});
 }
 
@@ -625,10 +625,10 @@ function contextCallTest() {
   const c8 = call([context, fn8], "1", 2, "3", 4, "5", 6, "7", 8);
   const cClass = call([classContext, fn1], "1");
 
-  // $FlowExpectedError: Too few arguments
+  // $FlowExpectedError[incompatible-call]: Too few arguments
   call([context, fn6], "1", 2, "3", 4);
 
-  // $FlowExpectedError: Wrong argument types
+  // $FlowExpectedError[incompatible-call]: Wrong argument types
   call([context, fn1], 1);
 
   const cSpread = call([context, fnSpread], 1, 2, 3, 1);
@@ -644,7 +644,7 @@ function contextCallTest() {
   (c7.CALL.args: [string, number, string, number, string, number, string]);
   (c8.CALL.args: [string, number, string, number, string, number, string, number]);
 
-  // $FlowExpectedError: First parameter is a string, not a number
+  // $FlowExpectedError[incompatible-cast]: First parameter is a string, not a number
   (c1.CALL.args: [number]);
 
   // Fn tests
@@ -660,13 +660,13 @@ function contextCallTest() {
   // NOTE: This should actually fail, but apparently more parameter are fine..
   (c1.CALL.fn: typeof fn6);
 
-  // $FlowExpectedError: fn returns a Promise<string> not Promise<number>
+  // $FlowExpectedError[incompatible-cast]: fn returns a Promise<string> not Promise<number>
   (c1.CALL.fn: (a: boolean) => Promise<number>);
 
-  // $FlowExpectedError: 'a' is actually of type string
+  // $FlowExpectedError[incompatible-cast]: 'a' is actually of type string
   (c4.CALL.fn: (a: number, b: number) => Promise<string>);
 
-  // $FlowExpectedError: Less parameter are noticed
+  // $FlowExpectedError[incompatible-cast]: Less parameter are noticed
   (c6.CALL.fn: typeof fn1);
 
   // Context tests

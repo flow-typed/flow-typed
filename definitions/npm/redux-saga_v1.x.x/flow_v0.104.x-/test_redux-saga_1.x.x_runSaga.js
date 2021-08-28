@@ -69,15 +69,15 @@ describe("runSaga", () => {
     });
 
     it("must raises an error when passed invalid arguments", () => {
-      // $FlowExpectedError: too few args
+      // $FlowExpectedError[incompatible-call]: too few args
       (runSaga({}, s6, "1", 2): Task<number>);
 
-      // $FlowExpectedError: wrong argument type
+      // $FlowExpectedError[incompatible-call]: wrong argument type
       (runSaga({}, s1, 1): Task<number>);
     });
 
     it("must raises an error", () => {
-      // $FlowExpectedError: wrong return type
+      // $FlowExpectedError[incompatible-call]: wrong return type
       (runSaga({}, s1, 1): Task<string>);
     });
   });
@@ -101,7 +101,7 @@ describe("runSaga", () => {
     runSaga({ sagaMonitor }, s0);
     runSaga({ logger }, s0);
 
-    // $FlowExpectedError: error level is a string enum
+    // $FlowExpectedError[incompatible-call]: error level is a string enum
     runSaga({ logger: (level: number) => {} }, s0);
 
     runSaga({ channel }, s1, "");

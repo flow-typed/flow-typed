@@ -4,20 +4,20 @@ import { buffers, type Buffer } from "redux-saga";
 
 describe("buffers", () => {
   it("must be read only object", () => {
-    // $FlowExpectedError
+    // $FlowExpectedError[cannot-write]
     buffers.none = "hi belarus";
-    // $FlowExpectedError
+    // $FlowExpectedError[cannot-write]
     buffers.fixed = "hi belarus";
-    // $FlowExpectedError
+    // $FlowExpectedError[cannot-write]
     buffers.dropping = "hi belarus";
-    // $FlowExpectedError
+    // $FlowExpectedError[cannot-write]
     buffers.sliding = "hi belarus";
-    // $FlowExpectedError
+    // $FlowExpectedError[cannot-write]
     buffers.expanding = "hi belarus";
   });
 
   it("must be exact type", () => {
-    // $FlowExpectedError
+    // $FlowExpectedError[prop-missing]
     buffers.anyOtherProp = "anyValue";
   });
 
@@ -37,7 +37,7 @@ describe("buffers", () => {
     });
 
     it("must raises an error when first argument isn't number", () => {
-      // $FlowExpectedError: limit parameter must be given as a number
+      // $FlowExpectedError[incompatible-call]: limit parameter must be given as a number
       (buffers.fixed("five"): Buffer<*>);
     });
   });
@@ -52,7 +52,7 @@ describe("buffers", () => {
     });
 
     it("must raises an error when first argument isn't number", () => {
-      // $FlowExpectedError: limit parameter must be given as a number
+      // $FlowExpectedError[incompatible-call]: limit parameter must be given as a number
       (buffers.dropping("six"): Buffer<*>);
     });
   });
@@ -67,7 +67,7 @@ describe("buffers", () => {
     });
 
     it("must raises an error when first argument isn't number", () => {
-      // $FlowExpectedError: limit parameter must be given as a number
+      // $FlowExpectedError[incompatible-call]: limit parameter must be given as a number
       (buffers.sliding("seven"): Buffer<*>);
     });
   });
@@ -82,7 +82,7 @@ describe("buffers", () => {
     });
 
     it("must raises an error when first argument isn't number", () => {
-      // $FlowExpectedError: limit parameter must be given as a number
+      // $FlowExpectedError[incompatible-call]: limit parameter must be given as a number
       (buffers.expanding("eight"): Buffer<*>);
     });
   });

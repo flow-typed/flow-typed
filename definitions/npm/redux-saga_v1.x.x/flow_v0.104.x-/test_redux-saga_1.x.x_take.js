@@ -17,19 +17,19 @@ describe("take effect", () => {
     });
 
     it(`payload property must haven't "maybe" property`, () => {
-      // $FlowExpectedError: property `maybe` is missing in type
+      // $FlowExpectedError[prop-missing]: property `maybe` is missing in type
       (c.payload.maybe: true);
     });
 
     it("returned object must be read only", () => {
-      // $FlowExpectedError: read-only  property
+      // $FlowExpectedError[cannot-write]: read-only  property
       c.type = "anyType";
-      // $FlowExpectedError: read-only  property
+      // $FlowExpectedError[cannot-write]: read-only  property
       c.payload = {};
     });
 
     it("returned object must be exact", () => {
-      // $FlowExpectedError: exact type
+      // $FlowExpectedError[prop-missing]: exact type
       c.abc = 69;
     });
   });
@@ -52,10 +52,10 @@ describe("take effect", () => {
     });
 
     it("must raises an error when passed invalid pattern", () => {
-      // $FlowExpectedError: PatternFn returns a boolean
+      // $FlowExpectedError[incompatible-call]: PatternFn returns a boolean
       take(action => null);
 
-      // $FlowExpectedError: Only string patterns for arrays
+      // $FlowExpectedError[incompatible-call]: Only string patterns for arrays
       take(["FOO", "BAR", 1]);
     });
   });
@@ -83,7 +83,7 @@ describe("take effect", () => {
     });
 
     it("must raises an error when passed invalid channel", () => {
-      // $FlowExpectedError: Channels must have take prop
+      // $FlowExpectedError[incompatible-call]: Channels must have take prop
       take({ close: () => {}, put: msg => {} });
     });
   });
