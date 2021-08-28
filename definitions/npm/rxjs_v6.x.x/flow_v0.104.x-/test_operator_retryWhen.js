@@ -9,7 +9,7 @@ it("should infer correctly", () => {
 });
 
 it("should infer correctly when the error observable has a different type", () => {
-  const o = of(1, 2, 3).pipe(retryWhen(retryWhen(errors => of("a", "b", "c"))));
+  const o = of(1, 2, 3).pipe(retryWhen(errors => of("a", "b", "c")));
 });
 
 it("should enforce types", () => {
