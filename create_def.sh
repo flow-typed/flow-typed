@@ -32,4 +32,10 @@ cat > "${DEF_DIR}/test_${LIB_NAME}_v${VERSION}.js" <<- EOM
 // @flow
 import { describe, it } from 'flow-typed-test';
 // import library from '$LIB_NAME';
+
+describe('$LIB_NAME', () => {
+  it('', () => {
+
+  });
+});
 EOM
