@@ -68,12 +68,12 @@ describe("channel", () => {
 
     (ch.close(): void);
 
-    // $FlowExpectedError
     const cbTake = (a: string | TEnd) => {};
+    // $FlowExpectedError[incompatible-call]
     (ch.take(cbTake): void);
 
-    // $FlowExpectedError
     const cbFlush = (a: Array<boolean> | TEnd) => {};
+    // $FlowExpectedError[incompatible-call]
     (ch.flush(cbFlush): void);
 
     // $FlowExpectedError[incompatible-call]

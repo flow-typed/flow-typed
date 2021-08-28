@@ -48,12 +48,12 @@ describe("eventChannel", () => {
 
     const ch = eventChannel(subscribeFn, buffers.none());
 
-    // $FlowExpectedError
     const cbTake = (a: number | TEnd) => {};
+    // $FlowExpectedError[incompatible-call]
     (ch.take(cbTake): void);
 
-    // $FlowExpectedError
     const cbFlush = (a: Array<boolean> | TEnd) => {};
+    // $FlowExpectedError[incompatible-call]
     (ch.flush(cbFlush): void);
   });
 

@@ -128,6 +128,7 @@ describe("retry effect", () => {
       });
 
       it("must raises an error when passed number but need number", () => {
+        // $FlowExpectedError[incompatible-cast]
         // $FlowExpectedError[invalid-tuple-arity]: First parameter is a number, not a string
         (c1.payload.args: [string]);
       });

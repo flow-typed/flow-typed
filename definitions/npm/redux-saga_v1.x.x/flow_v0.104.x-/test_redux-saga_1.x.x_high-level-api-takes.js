@@ -208,6 +208,7 @@ for (const takeEffect of topLevelTakesApi) {
         });
 
         it("must raises an error when passed number but need string", () => {
+          // $FlowExpectedError[incompatible-cast]
           // $FlowExpectedError[invalid-tuple-arity]
           // $FlowExpectedError[prop-missing]: First parameter is a string, not a number
           (e1.payload.args: [number]);
