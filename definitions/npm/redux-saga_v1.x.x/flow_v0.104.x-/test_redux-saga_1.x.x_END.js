@@ -8,12 +8,12 @@ describe("END", () => {
   });
 
   it("property 'type' must be read-only", () => {
-    // $FlowExpectedError - type is read-only
+    // $FlowExpectedError[cannot-write] - type is read-only
     END.type = "Mur Amur";
   });
 
   it("object END must be exact", () => {
-    // $FlowExpectedError - exact type
+    // $FlowExpectedError[prop-missing] - exact type
     END.abc = "Mur Amur";
   });
 });
