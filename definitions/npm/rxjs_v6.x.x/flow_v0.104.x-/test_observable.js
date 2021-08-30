@@ -117,7 +117,7 @@ describe("pipe", () => {
   });
 
   it("should require a type assertion for more than 9 arguments", () => {
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-type-arg]
     const o: Observable<"10"> = of("foo").pipe(
       a("1"),
       a("2"),

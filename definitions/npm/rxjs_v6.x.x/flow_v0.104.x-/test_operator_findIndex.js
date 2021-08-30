@@ -23,20 +23,20 @@ it("should support an argument ", () => {
 });
 
 it("should enforce types", () => {
-  // $FlowExpectedError
+  // $FlowExpectedError[incompatible-call]
   const o = of("foo", "bar", "baz").pipe(findIndex());
 });
 
 it("should enforce predicate types", () => {
-  // $FlowExpectedError
+  // $FlowExpectedError[incompatible-call]
   const o = of("foo", "bar", "baz").pipe(findIndex((p: number) => p === 3));
-  // $FlowExpectedError
+  // $FlowExpectedError[incompatible-call]
   const p = of("foo", "bar", "baz").pipe(findIndex((p, index: string) => p === 3));
-  // $FlowExpectedError
+  // $FlowExpectedError[incompatible-call]
   const q = of("foo", "bar", "baz").pipe(findIndex((p, index, source: Observable<number>) => p === 3));
 });
 
 it("should enforce predicate return type", () => {
-  // $FlowExpectedError
+  // $FlowExpectedError[incompatible-call]
   const o = of("foo", "bar", "baz").pipe(findIndex(p => p));
 });
