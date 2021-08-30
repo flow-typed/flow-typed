@@ -39,7 +39,7 @@ describe('react-helmet', () => {
   );
 
   const fail = () => (
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-type]
     <Helmet title={{}} />
   );
 
@@ -55,19 +55,19 @@ describe('react-helmet', () => {
     (head.script.toString(): string);
     (head.style.toString(): string);
 
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-cast]
     (head.htmlAttributes.toString(): boolean);
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-cast]
     (head.title.toString(): boolean);
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-cast]
     (head.base.toString(): boolean);
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-cast]
     (head.meta.toString(): boolean);
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-cast]
     (head.link.toString(): boolean);
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-cast]
     (head.script.toString(): boolean);
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-cast]
     (head.style.toString(): boolean);
 
     const Component = (
