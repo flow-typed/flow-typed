@@ -38,7 +38,7 @@ declare module 'react-helmet' {
   declare var HelmetExport: typeof Helmet;
   declare export var Helmet: typeof HelmetExport;
   declare export var canUseDOM: boolean;
-  declare module.exports: typeof HelmetExport;
+  declare export default typeof HelmetExport;
   declare interface HelmetData {
     base: HelmetDatum;
     bodyAttributes: HelmetHTMLBodyDatum;
