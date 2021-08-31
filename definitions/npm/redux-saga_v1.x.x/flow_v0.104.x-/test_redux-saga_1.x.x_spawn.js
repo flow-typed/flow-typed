@@ -11,14 +11,14 @@ describe("spawn effect", () => {
     });
 
     it("returned object must be read only", () => {
-      // $FlowExpectedError: read-only  property
+      // $FlowExpectedError[cannot-write]: read-only  property
       c.type = "anyType";
-      // $FlowExpectedError: read-only  property
+      // $FlowExpectedError[cannot-write]: read-only  property
       c.payload = {};
     });
 
     it("returned object must be exact", () => {
-      // $FlowExpectedError: exact type
+      // $FlowExpectedError[prop-missing]: exact type
       c.abc = 69;
     });
   });
@@ -93,17 +93,17 @@ describe("spawn effect", () => {
       });
 
       it("must raises an error when passed number but need string", () => {
-        // $FlowExpectedError: First parameter is a string, not a number
+        // $FlowExpectedError[incompatible-cast]: First parameter is a string, not a number
         (c1.payload.args: [number]);
       });
 
       it("must raises an error when passed too few arguments", () => {
-        // $FlowExpectedError: Too few arguments
+        // $FlowExpectedError[incompatible-call]: Too few arguments
         spawn(nfn6, "1", 2, true, "4");
       });
 
       it("must raises an error when passed wrong argument types", () => {
-        // $FlowExpectedError: Wrong argument types
+        // $FlowExpectedError[incompatible-call]: Wrong argument types
         spawn(nfn1, 1);
       });
     });
@@ -125,20 +125,20 @@ describe("spawn effect", () => {
       });
 
       it("must raises an error when Function return not string", () => {
-        // $FlowExpectedError: fn returns a number not string
+        // $FlowExpectedError[incompatible-cast]: fn returns a number not string
         (c1.payload.fn: (a: boolean) => string);
       });
 
       it(`must raises an error when "a" argument isn't string`, () => {
-        // $FlowExpectedError: 'a' is actually of type string
+        // $FlowExpectedError[incompatible-cast]: 'a' is actually of type string
         (c1.payload.fn: (a: boolean) => number);
 
-        // $FlowExpectedError: 'a' is actually of type string
+        // $FlowExpectedError[incompatible-cast]: 'a' is actually of type string
         (c4.payload.fn: (a: number, b: number) => number);
       });
 
       it("must raises an error when less parameter are noticed", () => {
-        // $FlowExpectedError: Less parameter are noticed
+        // $FlowExpectedError[incompatible-cast]: Less parameter are noticed
         (c6.payload.fn: typeof nfn1);
       });
     });
@@ -156,7 +156,7 @@ describe("spawn effect", () => {
       });
 
       it("must raises an error when lead context to Object", () => {
-        // $FlowExpectedError
+        // $FlowExpectedError[incompatible-cast]
         (c1.payload.context: {...});
       });
     });
@@ -234,17 +234,17 @@ describe("spawn effect", () => {
       });
 
       it("must raises an error when passed number but need string", () => {
-        // $FlowExpectedError: First parameter is a string, not a number
+        // $FlowExpectedError[incompatible-cast]: First parameter is a string, not a number
         (f1.payload.args: [number]);
       });
 
       it("must raises an error when passed too few arguments", () => {
-        // $FlowExpectedError: Too few arguments
+        // $FlowExpectedError[incompatible-call]: Too few arguments
         spawn([context, nfn6], "1", 2, true, "4");
       });
 
       it("must raises an error when passed wrong argument types", () => {
-        // $FlowExpectedError: Wrong argument types
+        // $FlowExpectedError[incompatible-call]: Wrong argument types
         spawn([context, nfn1], 1);
       });
     });
@@ -266,20 +266,20 @@ describe("spawn effect", () => {
       });
 
       it("must raises an error when Function return not string", () => {
-        // $FlowExpectedError: fn returns a number not string
+        // $FlowExpectedError[incompatible-cast]: fn returns a number not string
         (f1.payload.fn: (a: boolean) => string);
       });
 
       it(`must raises an error when "a" argument isn't string`, () => {
-        // $FlowExpectedError: 'a' is actually of type string
+        // $FlowExpectedError[incompatible-cast]: 'a' is actually of type string
         (f1.payload.fn: (a: boolean) => number);
 
-        // $FlowExpectedError: 'a' is actually of type string
+        // $FlowExpectedError[incompatible-cast]: 'a' is actually of type string
         (f4.payload.fn: (a: number, b: number) => number);
       });
 
       it("must raises an error when less parameter are noticed", () => {
-        // $FlowExpectedError: Less parameter are noticed
+        // $FlowExpectedError[incompatible-cast]: Less parameter are noticed
         (f6.payload.fn: typeof nfn1);
       });
     });
@@ -297,7 +297,7 @@ describe("spawn effect", () => {
       });
 
       it("must raises an error when lead context to null", () => {
-        // $FlowExpectedError
+        // $FlowExpectedError[incompatible-cast]
         (f1.payload.context: null);
       });
     });

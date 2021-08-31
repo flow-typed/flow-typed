@@ -34,19 +34,13 @@ const obj = {
   // [Symbol.for('foo')]: Symbol.for('foo'),
 };
 
-describe('The `obj` parameter', () => {
-  it('should accept valid objects', () => {
+describe('The `input` parameter', () => {
+  it('should accept mixed values', () => {
+    // See https://github.com/yeoman/stringify-object/blob/f9e53f4e422510a2868e4876291058c69ca12b80/index.js#L52-L62
     stringifyObject(obj);
-  });
-
-  it('should error on non object types', () => {
-    // $FlowExpectedError[incompatible-call]
     stringifyObject('');
-
-    // $FlowExpectedError[incompatible-call]
-    stringifyObject(true);
-
-    // $FlowExpectedError[incompatible-call]
+    stringifyObject(123);
+    stringifyObject([1, 2, 3]);
     stringifyObject();
   });
 });
@@ -65,6 +59,11 @@ describe('The `options` parameter', () => {
 
     // $FlowExpectedError[incompatible-call]
     stringifyObject(obj, []);
+  });
+
+  it('should error on malformed options objects', () => {
+    // $FlowExpectedError[prop-missing]
+    stringifyObject(obj, { foo: 'bar' });
   });
 });
 

@@ -11,14 +11,14 @@ describe("select effect", () => {
     });
 
     it("returned object must be read only", () => {
-      // $FlowExpectedError: read-only  property
+      // $FlowExpectedError[cannot-write]: read-only  property
       c.type = "anyType";
-      // $FlowExpectedError: read-only  property
+      // $FlowExpectedError[cannot-write]: read-only  property
       c.payload = {};
     });
 
     it("returned object must be exact", () => {
-      // $FlowExpectedError: exact type
+      // $FlowExpectedError[prop-missing]: exact type
       c.abc = 69;
     });
   });
@@ -87,7 +87,7 @@ describe("select effect", () => {
       });
 
       it("must raises an error when passed boolean but need string", () => {
-        // $FlowExpectedError: second args is not a boolean
+        // $FlowExpectedError[incompatible-cast]: second args is not a boolean
         (e3.payload.args: [string, boolean, string]);
       });
     });
@@ -107,7 +107,7 @@ describe("select effect", () => {
       });
 
       it(`must raises an error when "a" argument isn't string`, () => {
-        // $FlowExpectedError: args.a should actually be a string
+        // $FlowExpectedError[incompatible-cast]: args.a should actually be a string
         (e1.payload.selector: (state: Object, a: number) => Object);
       });
     });
