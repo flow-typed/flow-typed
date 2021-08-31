@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
 import Helmet from 'react-helmet';
-import { describe } from 'flow-typed-test';
+import { describe, it } from 'flow-typed-test';
 
 describe('react-helmet', () => {
   it('renders meta tags', () => {
