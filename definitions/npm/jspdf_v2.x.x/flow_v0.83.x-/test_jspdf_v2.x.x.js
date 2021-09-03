@@ -19,6 +19,7 @@ describe('jspdf', () => {
   it('handles text function', () => {
     doc.text('test', 10, 10);
     doc.text(['test', 'text'], 10, 10);
+    doc.text(['test', 'text'], 10, 10, {});
 
     // $FlowExpectedError[incompatible-call] needs offsets
     doc.text('test');
