@@ -99,6 +99,7 @@ export function getPackageJsonDependencies(
         }
         const pkgIgnored = ignoreDefs.reduce((acc, cur) => {
           if (acc) return acc;
+          if (cur === '') return acc;
           return pkgName.startsWith(cur);
         }, false);
         if (pkgIgnored) return;
