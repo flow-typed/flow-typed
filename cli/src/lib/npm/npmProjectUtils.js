@@ -99,8 +99,13 @@ export function getPackageJsonDependencies(
         }
         const pkgIgnored = ignoreDefs.reduce((acc, cur) => {
           if (acc) return acc;
-          if (cur === '') return acc;
-          return pkgName.startsWith(cur);
+          const ignoreDef = cur.trim();
+          if (ignoreDef === '') return acc;
+          // if we are looking to ignore a scope dir
+          if (ignoreDef.charAt(0) === '@' && ignoreDef.indexOf('/') === -1) {
+            return pkgName.startsWith(ignoreDef);
+          }
+          return pkgName === ignoreDef;
         }, false);
         if (pkgIgnored) return;
 
