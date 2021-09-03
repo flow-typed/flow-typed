@@ -97,7 +97,12 @@ export function getPackageJsonDependencies(
         if (deps[pkgName]) {
           console.warn(`Found ${pkgName} listed twice in package.json!`);
         }
-        if (ignoreDefs.includes(pkgName)) return;
+        const pkgIgnored = ignoreDefs.reduce((acc, cur) => {
+          if (acc) return acc;
+          return pkgName.startsWith(cur);
+        }, false);
+        if (pkgIgnored) return;
+
         deps[pkgName] = contentSection[pkgName];
       });
     }

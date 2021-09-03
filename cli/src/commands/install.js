@@ -286,7 +286,9 @@ async function installNpmLibDefs({
   } else {
     let ignoreDefs;
     try {
-      ignoreDefs = fs.readFileSync(path.join(cwd, libdefDir, '.ignore'));
+      ignoreDefs = fs
+        .readFileSync(path.join(cwd, libdefDir, '.ignore'), 'utf-8')
+        .split('\n');
     } catch (e) {
       ignoreDefs = [];
     }

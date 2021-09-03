@@ -849,48 +849,58 @@ describe('install (command)', () => {
       });
     });
 
-    // it('doesn\'t install definitions under an ignored scope', () => {
-    //   return fakeProjectEnv(async FLOWPROJ_DIR => {
-    //     // Create some dependencies
-    //     await Promise.all([
-    //       mkdirp(path.join(FLOWPROJ_DIR, 'src')),
-    //       writePkgJson(path.join(FLOWPROJ_DIR, 'package.json'), {
-    //         name: 'test',
-    //         devDependencies: {
-    //           'flow-bin': '^0.43.0',
-    //         },
-    //         dependencies: {
-    //           foo: '1.2.3',
-    //         },
-    //       }),
-    //       mkdirp(path.join(FLOWPROJ_DIR, 'node_modules', 'foo')),
-    //       mkdirp(path.join(FLOWPROJ_DIR, 'node_modules', 'flow-bin')),
-    //     ]);
+    it("doesn't install definitions under an ignored scope", () => {
+      return fakeProjectEnv(async FLOWPROJ_DIR => {
+        // Create some dependencies
+        await Promise.all([
+          mkdirp(path.join(FLOWPROJ_DIR, 'src')),
+          writePkgJson(path.join(FLOWPROJ_DIR, 'package.json'), {
+            name: 'test',
+            devDependencies: {
+              'flow-bin': '^0.43.0',
+            },
+            dependencies: {
+              '@scoped/package': '1.2.3',
+              foo: '1.2.3',
+            },
+          }),
+          mkdirp(path.join(FLOWPROJ_DIR, 'node_modules', 'foo')),
+          mkdirp(path.join(FLOWPROJ_DIR, 'node_modules', 'flow-bin')),
+        ]);
 
-    //     await touchFile(path.join(FLOWPROJ_DIR, 'src', '.flowconfig'));
+        await touchFile(path.join(FLOWPROJ_DIR, 'src', '.flowconfig'));
+        await mkdirp(path.join(FLOWPROJ_DIR, 'src', 'flow-typed'));
+        await touchFile(
+          path.join(FLOWPROJ_DIR, 'src', 'flow-typed', '.ignore'),
+        );
+        await fs.writeJson(
+          path.join(FLOWPROJ_DIR, 'src', 'flow-typed', '.ignore'),
+          '@scoped',
+        );
 
-    //     // Run the install command
-    //     await run({
-    //       overwrite: false,
-    //       verbose: false,
-    //       skip: false,
-    //       rootDir: path.join(FLOWPROJ_DIR, 'src'),
-    //       explicitLibDefs: [],
-    //     });
+        // Run the install command
+        await run({
+          overwrite: false,
+          verbose: false,
+          skip: false,
+          rootDir: path.join(FLOWPROJ_DIR, 'src'),
+          explicitLibDefs: [],
+        });
 
-    //     // Installs libdef
-    //     expect(
-    //       await fs.exists(
-    //         path.join(
-    //           FLOWPROJ_DIR,
-    //           'src',
-    //           'flow-typed',
-    //           'npm',
-    //           'foo_v1.x.x.js',
-    //         ),
-    //       ),
-    //     ).toEqual(true);
-    //   });
-    // });
+        // Installs libdef
+        expect(
+          await fs.exists(
+            path.join(
+              FLOWPROJ_DIR,
+              'src',
+              'flow-typed',
+              'npm',
+              '@scoped',
+              'package_vx.x.x.js',
+            ),
+          ),
+        ).toEqual(false);
+      });
+    });
   });
 });
