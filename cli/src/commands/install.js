@@ -290,7 +290,11 @@ async function installNpmLibDefs({
         .readFileSync(path.join(cwd, libdefDir, '.ignore'), 'utf-8')
         .replace(/"/g, '')
         .split('\n');
-    } catch (e) {
+    } catch (err) {
+      // If the error is unrelated to file not existing we should continue throwing
+      if (err.code !== 'ENOENT') {
+        throw err;
+      }
       ignoreDefs = [];
     }
 
