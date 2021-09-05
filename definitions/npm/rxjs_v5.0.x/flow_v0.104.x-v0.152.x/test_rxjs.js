@@ -11,7 +11,6 @@ import {
 
 const numbers = Observable.of(1);
 Observable.create(observer => {
-  // $FlowExpectedError[incompatible-call]
   numbers.subscribe(observer);
 });
 
