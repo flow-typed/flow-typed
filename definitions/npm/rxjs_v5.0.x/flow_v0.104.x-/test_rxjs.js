@@ -11,10 +11,11 @@ import {
 
 const numbers = Observable.of(1);
 Observable.create(observer => {
+  // $FlowExpectedError[incompatible-call]
   numbers.subscribe(observer);
 });
 
-// $FlowExpectedError
+// $FlowExpectedError[incompatible-call]
 const distinct1: Observable<number> = Observable.of(1).distinct(1);
 const distinct2: Observable<number> = Observable.of(1).distinct();
 const distinct3: Observable<{ a: string, ... }> = Observable.of({ a: "a" }).distinct(
@@ -68,7 +69,7 @@ const project: Array<Observable<string>> = [
     (x, y, index1, index2) => String(x + y + index1 + index2),
     /* concurrency */ 5
   ),
-  // $FlowExpectedError: the ordering is wrong
+  // $FlowExpectedError[incompatible-call]: the ordering is wrong
   numbers.mergeMap(x => [x], 5, (x, y, index1, index2) =>
     String(x + y + index1 + index2)
   ),
@@ -99,7 +100,7 @@ var buffered = interval.buffer(clicks);
 buffered.subscribe(x => console.log(x));
 
 // http://reactivex.io/rxjs/class/es6/Observable.js~Observable.html#instance-method-bufferCount
-// $FlowExpectedError
+// $FlowExpectedError[incompatible-call]
 clicks.bufferCount();
 var buffered = clicks.bufferCount(2);
 buffered.subscribe(x => console.log(x));
@@ -108,7 +109,7 @@ var buffered = clicks.bufferCount(2, 1);
 buffered.subscribe(x => console.log(x));
 
 // http://reactivex.io/rxjs/class/es6/Observable.js~Observable.html#instance-method-bufferTime
-// $FlowExpectedError
+// $FlowExpectedError[incompatible-call]
 clicks.bufferTime();
 var buffered = clicks.bufferTime(1000);
 buffered.subscribe(x => console.log(x));
@@ -122,7 +123,7 @@ var buffered = clicks.bufferToggle(
   openings,
   i => (i % 2 ? Observable.interval(500) : Observable.empty())
 );
-// $FlowExpectedError
+// $FlowExpectedError[prop-missing]
 clicks.bufferToggle(openings,i => (i.length % 2 ? Observable.interval(500) : Observable.empty()));
 buffered.subscribe(x => console.log(x));
 
@@ -130,6 +131,6 @@ buffered.subscribe(x => console.log(x));
 var buffered = clicks.bufferWhen(() =>
   Observable.interval(1000 + Math.random() * 4000)
 );
-// $FlowExpectedError
+// $FlowExpectedError[cannot-resolve-name]
 click.bufferWhen(() => true);
 buffered.subscribe(x => console.log(x));
