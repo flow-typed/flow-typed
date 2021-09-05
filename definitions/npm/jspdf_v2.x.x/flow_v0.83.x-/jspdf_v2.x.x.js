@@ -1,7 +1,23 @@
 declare module 'jspdf' {
-  declare type Matrix = any;
+  declare class Matrix {
+    constructor(
+      sx: number,
+      shy: number,
+      shx: number,
+      sy: number,
+      tx: number,
+      ty: number,
+    ): Matrix;
 
-  declare class JsPDF {
+    sx: number;
+    shy: number;
+    shx: number;
+    sy: number;
+    tx: number;
+    ty: number;
+  }
+
+  declare export class jsPDF {
     constructor(options?: {|
       orientation?: string,
       unit?: string,
@@ -95,7 +111,7 @@ declare module 'jspdf' {
        *
        * If it is a Matrix, this matrix gets directly applied to the text, which allows shearing effects etc.; the x and y offsets are then applied AFTER the coordinate system has been established by this matrix. This means passing a rotation matrix that is equivalent to some rotation angle will in general yield a DIFFERENT result. A matrix is only allowed in "advanced" API mode.
        */
-      transform: number | Matrix,
+      transform?: number | Matrix,
     ): void;
     save(fileName?: string): void;
     // With jspdf-autotable plugin
@@ -110,7 +126,5 @@ declare module 'jspdf' {
     // End with jspdf-autotable plugin
   }
 
-  declare module.exports: {|
-    jsPDF: typeof JsPDF,
-  |};
+  declare export default typeof jsPDF;
 }

@@ -1,9 +1,13 @@
 // @flow
 import { describe, it } from 'flow-typed-test';
-import { jsPDF } from 'jspdf';
+import jsPDFDefault, { jsPDF } from 'jspdf';
 
 describe('jspdf', () => {
   const doc = new jsPDF();
+
+  it('default export', () => {
+    const defaultDov = new jsPDFDefault();
+  });
 
   it('creates class', () => {
     new jsPDF();
