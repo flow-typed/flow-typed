@@ -97,16 +97,19 @@ export function getPackageJsonDependencies(
         if (deps[pkgName]) {
           console.warn(`Found ${pkgName} listed twice in package.json!`);
         }
-        const pkgIgnored = ignoreDefs.reduce((acc, cur) => {
-          if (acc) return acc;
+        const pkgIgnored = ignoreDefs.some(cur => {
           const ignoreDef = cur.trim();
-          if (ignoreDef === '') return acc;
+          if (ignoreDef === '') return false;
           // if we are looking to ignore a scope dir
-          if (ignoreDef.charAt(0) === '@' && ignoreDef.indexOf('/') === -1) {
+          if (
+            ignoreDef.charAt(0) === '@' &&
+            (ignoreDef.indexOf('/') === -1 ||
+              ignoreDef.indexOf('/') === ignoreDef.length - 1)
+          ) {
             return pkgName.startsWith(ignoreDef);
           }
           return pkgName === ignoreDef;
-        }, false);
+        });
         if (pkgIgnored) return;
 
         deps[pkgName] = contentSection[pkgName];
