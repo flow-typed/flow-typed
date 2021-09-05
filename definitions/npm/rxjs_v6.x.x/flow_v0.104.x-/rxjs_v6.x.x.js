@@ -64,12 +64,12 @@ declare interface rxjs$CompletionObserver<T> {
   +error?: (err: any) => void;
   +complete: () => void;
 }
-declare interface rxjs$PartialObserver<T> {
+declare type rxjs$PartialObserver<T> = {|
   closed?: boolean;
   +next?: (value: T) => void;
   +error?: (err: any) => void;
   +complete?: () => void;
-}
+|}
 declare interface rxjs$Observer<T> {
   closed: boolean;
   next(value: T): void;
