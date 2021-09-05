@@ -17,18 +17,18 @@ describe("multicastChannel", () => {
   it("created channel must be read only", () => {
     const channel = multicastChannel();
 
-    // $FlowExpectedError - take is read-only
+    // $FlowExpectedError[cannot-write] - take is read-only
     channel.take = 69;
-    // $FlowExpectedError - put is read-only
+    // $FlowExpectedError[cannot-write] - put is read-only
     channel.put = 69;
-    // $FlowExpectedError - close is read-only
+    // $FlowExpectedError[cannot-write] - close is read-only
     channel.close = 69;
   });
 
   it("created channel must be exact", () => {
     const channel = multicastChannel();
 
-    // $FlowExpectedError - exact type
+    // $FlowExpectedError[prop-missing] - exact type
     channel.abc = 69;
   });
 });
@@ -47,18 +47,18 @@ describe("stdChannel", () => {
   it("created channel must be read only", () => {
     const channel = stdChannel();
 
-    // $FlowExpectedError - take is read-only
+    // $FlowExpectedError[cannot-write] - take is read-only
     channel.take = 69;
-    // $FlowExpectedError - put is read-only
+    // $FlowExpectedError[cannot-write] - put is read-only
     channel.put = 69;
-    // $FlowExpectedError - close is read-only
+    // $FlowExpectedError[cannot-write] - close is read-only
     channel.close = 69;
   });
 
   it("created channel must be exact", () => {
     const channel = stdChannel();
 
-    // $FlowExpectedError - exact type
+    // $FlowExpectedError[prop-missing] - exact type
     channel.abc = 69;
   });
 });

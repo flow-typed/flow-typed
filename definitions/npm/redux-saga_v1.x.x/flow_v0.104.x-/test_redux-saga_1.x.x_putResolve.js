@@ -12,14 +12,14 @@ describe("putResolve effect", () => {
     });
 
     it("returned object must be read only", () => {
-      // $FlowExpectedError: read-only  property
+      // $FlowExpectedError[cannot-write]: read-only  property
       c.type = "anyType";
-      // $FlowExpectedError: read-only  property
+      // $FlowExpectedError[cannot-write]: read-only  property
       c.payload = {};
     });
 
     it("returned object must be exact", () => {
-      // $FlowExpectedError: exact type
+      // $FlowExpectedError[prop-missing]: exact type
       c.abc = 69;
     });
   });
@@ -35,7 +35,7 @@ describe("putResolve effect", () => {
     });
 
     it(`must raises an error when action isn't object`, () => {
-      // $FlowExpectedError: Can only be called with objects
+      // $FlowExpectedError[incompatible-call]: Can only be called with objects
       putResolve("FOO");
     });
   });
@@ -54,7 +54,7 @@ describe("putResolve effect", () => {
       const myEventChannel = eventChannel(emitter => () => {});
       const myAction = { type: "test" };
 
-      // $FlowExpectedError: event channel hasn"t a put() property
+      // $FlowExpectedError[incompatible-call]: event channel hasn"t a put() property
       putResolve(myEventChannel, myAction);
     });
 
@@ -68,7 +68,7 @@ describe("putResolve effect", () => {
     });
 
     it("must rises an error when channel is null", () => {
-      // $FlowExpectedError: No null as channel accepted
+      // $FlowExpectedError[incompatible-call]: No null as channel accepted
       putResolve(null, { type: "TEST" });
     });
   });

@@ -12,14 +12,14 @@ describe("throttle effect", () => {
     });
 
     it("returned object must be read only", () => {
-      // $FlowExpectedError: read-only  property
+      // $FlowExpectedError[cannot-write]: read-only  property
       c.type = "anyType";
-      // $FlowExpectedError: read-only  property
+      // $FlowExpectedError[cannot-write]: read-only  property
       c.payload = {};
     });
 
     it("returned object must be exact", () => {
-      // $FlowExpectedError: exact type
+      // $FlowExpectedError[prop-missing]: exact type
       c.abc = 69;
     });
   });
@@ -89,17 +89,18 @@ describe("throttle effect", () => {
       });
 
       it("must raises an error when passed number but need number", () => {
-        // $FlowExpectedError: First parameter is a number, not a string
+        // $FlowExpectedError[incompatible-cast]
+        // $FlowExpectedError[invalid-tuple-arity]: First parameter is a number, not a string
         (c1.payload.args: [string]);
       });
 
       it("must raises an error when passed too few arguments", () => {
-        // $FlowExpectedError: Too few arguments
+        // $FlowExpectedError[incompatible-call]: Too few arguments
         throttle(timeMs, pattern, fn6, "1", 2, true, "4");
       });
 
       it("must raises an error when passed wrong argument types", () => {
-        // $FlowExpectedError: Wrong argument types
+        // $FlowExpectedError[incompatible-call]: Wrong argument types
         throttle(timeMs, pattern, fn1, 1);
       });
     });

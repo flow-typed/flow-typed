@@ -14,12 +14,12 @@ describe("delay effect", () => {
     });
 
     it("must raises an error when pass multiple arguments", () => {
-      // $FlowExpectedError: No more than 1 argument is expected by function type
+      // $FlowExpectedError[incompatible-call]: No more than 1 argument is expected by function type
       delay(1, 2, 3);
     });
 
     it("must raises an error when first argument isn't number", () => {
-      // $FlowExpectedError: string incompatible number
+      // $FlowExpectedError[incompatible-call]: string incompatible number
       delay("1");
     });
   });
