@@ -47,23 +47,23 @@ it("should support a resultSelector and concurrent parameter", () => {
 });
 
 it("should enforce types", () => {
-  // $FlowExpectedError
+  // $FlowExpectedError[incompatible-call]
   const o = of(1, 2, 3).pipe(mergeMapTo());
 });
 
 it("should enforce the return type", () => {
-  // $FlowExpectedError
+  // $FlowExpectedError[incompatible-call]
   const o = of(1, 2, 3).pipe(mergeMapTo(p => p));
-  // $FlowExpectedError
+  // $FlowExpectedError[incompatible-call]
   const p = of(1, 2, 3).pipe(mergeMapTo(4));
 });
 
 it("should enforce types of the concurrent parameter", () => {
-  // $FlowExpectedError
+  // $FlowExpectedError[incompatible-call]
   const o = of(1, 2, 3).pipe(mergeMapTo(of("foo"), "4"));
 });
 
 it("should enforce types of the concurrent parameter with a resultSelector", () => {
-  // $FlowExpectedError
+  // $FlowExpectedError[incompatible-call]
   const o = of(1, 2, 3).pipe(mergeMapTo(of("foo"), a => a, "4"));
 });

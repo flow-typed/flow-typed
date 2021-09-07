@@ -15,21 +15,21 @@ it("should infer correctly with compare", () => {
 });
 
 it("should enforce key set", () => {
-  // $FlowExpectedError
+  // $FlowExpectedError[incompatible-call]
   const o = of(sample).pipe(distinctUntilKeyChanged("something"));
 });
 
 it("should enforce key set with compare", () => {
-  // $FlowExpectedError
+  // $FlowExpectedError[incompatible-call]
   const o = of(sample).pipe(distinctUntilKeyChanged("something", () => true));
 });
 
 it("should enforce compare's type", () => {
-  // $FlowExpectedError
+  // $FlowExpectedError[incompatible-call]
   const o = of(sample).pipe(distinctUntilKeyChanged("name", (a: number, b: number) => true));
 });
 
 it("should enforce key set and compare's type", () => {
-  // $FlowExpectedError
+  // $FlowExpectedError[incompatible-call]
   const o = of(sample).pipe(distinctUntilKeyChanged("something", (a: number, b: number) => true));
 });

@@ -9,6 +9,6 @@ it("should infer correctly", () => {
 });
 
 it("should enforce types", () => {
-  // $FlowExpectedError
+  // $FlowExpectedError[incompatible-call]
   const o = of(1, 2, 3).pipe(exhaust());
 });

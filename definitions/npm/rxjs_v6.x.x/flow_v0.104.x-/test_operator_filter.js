@@ -17,13 +17,13 @@ it("should support a predicate and an argument", () => {
 });
 
 it("should enforce types", () => {
-  // $FlowExpectedError
+  // $FlowExpectedError[incompatible-call]
   const o = of(1, 2, 3).pipe(filter());
 });
 
 it("should enforce predicate types", () => {
-  // $FlowExpectedError
+  // $FlowExpectedError[incompatible-call]
   const o = of(1, 2, 3).pipe(filter(value => value < "3"));
-  // $FlowExpectedError
+  // $FlowExpectedError[invalid-compare]
   const p = of(1, 2, 3).pipe(filter((value, index) => index < "3"));
 });

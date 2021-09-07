@@ -17,10 +17,10 @@ it("should support a scheduler", () => {
 });
 
 it("should enforce types", () => {
-  // $FlowExpectedError
+  // $FlowExpectedError[incompatible-call]
   const o = of(1, 2, 3).pipe(delay());
-  // $FlowExpectedError
+  // $FlowExpectedError[incompatible-call]
   const p = of(1, 2, 3).pipe(delay("foo"));
-  // $FlowExpectedError
+  // $FlowExpectedError[prop-missing]
   const q = of(1, 2, 3).pipe(delay(47, "foo"));
 });

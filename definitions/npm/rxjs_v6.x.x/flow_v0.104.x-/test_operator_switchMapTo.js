@@ -43,13 +43,13 @@ it("should support an undefined resultSelector", () => {
 });
 
 it("should enforce types", () => {
-  // $FlowExpectedError
+  // $FlowExpectedError[incompatible-call]
   const o = of(1, 2, 3).pipe(switchMapTo());
 });
 
 it("should enforce the return type", () => {
-  // $FlowExpectedError
+  // $FlowExpectedError[incompatible-call]
   const o = of(1, 2, 3).pipe(switchMapTo(p => p));
-  // $FlowExpectedError
+  // $FlowExpectedError[incompatible-call]
   const p = of(1, 2, 3).pipe(switchMapTo(4));
 });
