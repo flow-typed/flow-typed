@@ -257,13 +257,21 @@ declare module '@testing-library/react' {
     selector?: string,
   |};
 
+  // These two types must be updated kept in sync
   declare export type MixedUnionHTMLElement =
     | HTMLElement
-    | HTMLInputElement;
+    | HTMLInputElement
+    | HTMLAnchorElement
+    | HTMLButtonElement
+    | HTMLSelectElement;
 
   declare export type MixedIntersectionHTMLElement =
     & HTMLElement
-    & HTMLInputElement;
+    & HTMLInputElement
+    & HTMLAnchorElement
+    & HTMLButtonElement
+    & HTMLSelectElement;
+  // End mixed html types
 
   declare type QueryByBoundAttribute = (
     text: Matcher,

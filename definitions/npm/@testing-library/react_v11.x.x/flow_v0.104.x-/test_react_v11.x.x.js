@@ -410,6 +410,13 @@ describe('render', () => {
     const a: MixedIntersectionHTMLElement = getByTestId('1');
   });
 
+  it('getByTestId returns a mixed HTML type', () => {
+    const a = getByTestId('1');
+    a.value;
+    a.disabled;
+    a.href;
+  });
+
   it('getAllByTestId should return array of HTML element', () => {
     // $FlowExpectedError[incompatible-type]
     const a: MixedIntersectionHTMLElement = getAllByTestId('1');
