@@ -13,6 +13,7 @@ import {
   within,
   screen,
   getNodeText,
+  type MixedIntersectionHTMLElement,
 } from '@testing-library/react';
 import { describe, it } from 'flow-typed-test';
 
@@ -217,7 +218,7 @@ describe('render', () => {
 
   it('asFragment should return a document fragment', () => {
     // $FlowExpectedError[incompatible-type]
-    const a: HTMLElement = asFragment();
+    const a: MixedIntersectionHTMLElement = asFragment();
     const b: DocumentFragment = asFragment();
   });
 
@@ -234,277 +235,277 @@ describe('render', () => {
   });
 
   it('getByAltText should return HTML element', () => {
-    const a: HTMLElement = getByAltText('1');
+    const a: MixedIntersectionHTMLElement = getByAltText('1');
   });
 
   it('getAllByAltText should return array of HTML element', () => {
     // $FlowExpectedError[incompatible-type]
-    const a: HTMLElement = getAllByAltText('1');
-    const b: Array<HTMLElement> = getAllByAltText('2');
+    const a: MixedIntersectionHTMLElement = getAllByAltText('1');
+    const b: Array<MixedIntersectionHTMLElement> = getAllByAltText('2');
   });
 
   it('queryByAltText should return maybe HTML element', () => {
     // $FlowExpectedError[incompatible-type]
-    const a: HTMLElement = queryByAltText('1');
-    const b: ?HTMLElement = queryByAltText('2');
+    const a: MixedIntersectionHTMLElement = queryByAltText('1');
+    const b: ?MixedIntersectionHTMLElement = queryByAltText('2');
   });
 
   it('queryAllByAltText should return array of HTML element', () => {
     // $FlowExpectedError[incompatible-type]
-    const a: HTMLElement = queryAllByAltText('1');
-    const b: Array<HTMLElement> = queryAllByAltText('2');
+    const a: MixedIntersectionHTMLElement = queryAllByAltText('1');
+    const b: Array<MixedIntersectionHTMLElement> = queryAllByAltText('2');
   });
 
   it('findByAltText should return HTML element', () => {
     // $FlowExpectedError[incompatible-type]
-    const a: HTMLElement = findByAltText('1');
-    const b: Promise<HTMLElement> = findByAltText('1');
+    const a: MixedIntersectionHTMLElement = findByAltText('1');
+    const b: Promise<MixedIntersectionHTMLElement> = findByAltText('1');
   });
 
   it('findAllByAltText should return array of HTML element', () => {
     // $FlowExpectedError[incompatible-type-arg]
-    const a: Promise<HTMLElement> = findAllByAltText('1');
-    const b: Promise<Array<HTMLElement>> = findAllByAltText('2');
+    const a: Promise<MixedIntersectionHTMLElement> = findAllByAltText('1');
+    const b: Promise<Array<MixedIntersectionHTMLElement>> = findAllByAltText('2');
   });
 
   it('getByDisplayValue should return HTML element', () => {
-    const a: HTMLElement = getByDisplayValue('1');
+    const a: MixedIntersectionHTMLElement = getByDisplayValue('1');
   });
 
   it('getAllByDisplayValue should return array of HTML element', () => {
     // $FlowExpectedError[incompatible-type]
-    const a: HTMLElement = getAllByDisplayValue('1');
-    const b: Array<HTMLElement> = getAllByDisplayValue('2');
+    const a: MixedIntersectionHTMLElement = getAllByDisplayValue('1');
+    const b: Array<MixedIntersectionHTMLElement> = getAllByDisplayValue('2');
   });
 
   it('queryByDisplayValue should return maybe HTML element', () => {
     // $FlowExpectedError[incompatible-type]
-    const a: HTMLElement = queryByDisplayValue('1');
-    const b: ?HTMLElement = queryByDisplayValue('2');
+    const a: MixedIntersectionHTMLElement = queryByDisplayValue('1');
+    const b: ?MixedIntersectionHTMLElement = queryByDisplayValue('2');
   });
 
   it('queryAllByDisplayValue should return array of HTML element', () => {
     // $FlowExpectedError[incompatible-type]
-    const a: HTMLElement = queryAllByDisplayValue('1');
-    const b: Array<HTMLElement> = queryAllByDisplayValue('2');
+    const a: MixedIntersectionHTMLElement = queryAllByDisplayValue('1');
+    const b: Array<MixedIntersectionHTMLElement> = queryAllByDisplayValue('2');
   });
 
   it('findByDisplayValue should return HTML element', () => {
     // $FlowExpectedError[incompatible-type]
-    const a: HTMLElement = findByDisplayValue('1');
-    const b: Promise<HTMLElement> = findByDisplayValue('1');
+    const a: MixedIntersectionHTMLElement = findByDisplayValue('1');
+    const b: Promise<MixedIntersectionHTMLElement> = findByDisplayValue('1');
   });
 
   it('findAllByDisplayValue should return array of HTML element', () => {
     // $FlowExpectedError[incompatible-type-arg]
-    const a: Promise<HTMLElement> = findAllByDisplayValue('1');
-    const b: Promise<Array<HTMLElement>> = findAllByDisplayValue('2');
+    const a: Promise<MixedIntersectionHTMLElement> = findAllByDisplayValue('1');
+    const b: Promise<Array<MixedIntersectionHTMLElement>> = findAllByDisplayValue('2');
   });
 
   it('getByLabelText should return HTML element', () => {
-    const a: HTMLElement = getByLabelText('1');
+    const a: MixedIntersectionHTMLElement = getByLabelText('1');
   });
 
   it('getAllByLabelText should return array of HTML element', () => {
     // $FlowExpectedError[incompatible-type]
-    const a: HTMLElement = getAllByLabelText('1');
-    const b: Array<HTMLElement> = getAllByLabelText('2');
+    const a: MixedIntersectionHTMLElement = getAllByLabelText('1');
+    const b: Array<MixedIntersectionHTMLElement> = getAllByLabelText('2');
   });
 
   it('queryByLabelText should return maybe HTML element', () => {
     // $FlowExpectedError[incompatible-type]
-    const a: HTMLElement = queryByLabelText('1');
-    const b: ?HTMLElement = queryByLabelText('2');
+    const a: MixedIntersectionHTMLElement = queryByLabelText('1');
+    const b: ?MixedIntersectionHTMLElement = queryByLabelText('2');
   });
 
   it('queryAllByLabelText should return array of HTML element', () => {
     // $FlowExpectedError[incompatible-type]
-    const a: HTMLElement = queryAllByLabelText('1');
-    const b: Array<HTMLElement> = queryAllByLabelText('2');
+    const a: MixedIntersectionHTMLElement = queryAllByLabelText('1');
+    const b: Array<MixedIntersectionHTMLElement> = queryAllByLabelText('2');
   });
 
   it('findByLabelText should return HTML element', () => {
     // $FlowExpectedError[incompatible-type]
-    const a: HTMLElement = findByLabelText('1');
-    const b: Promise<HTMLElement> = findByLabelText('1');
+    const a: MixedIntersectionHTMLElement = findByLabelText('1');
+    const b: Promise<MixedIntersectionHTMLElement> = findByLabelText('1');
   });
 
   it('findAllByLabelText should return array of HTML element', () => {
     // $FlowExpectedError[incompatible-type-arg]
-    const a: Promise<HTMLElement> = findAllByLabelText('1');
-    const b: Promise<Array<HTMLElement>> = findAllByLabelText('2');
+    const a: Promise<MixedIntersectionHTMLElement> = findAllByLabelText('1');
+    const b: Promise<Array<MixedIntersectionHTMLElement>> = findAllByLabelText('2');
   });
 
   it('getByPlaceholderText should return HTML element', () => {
-    const a: HTMLElement = getByPlaceholderText('1');
+    const a: MixedIntersectionHTMLElement = getByPlaceholderText('1');
   });
 
   it('getAllByPlaceholderText should return array of HTML element', () => {
     // $FlowExpectedError[incompatible-type]
-    const a: HTMLElement = getAllByPlaceholderText('1');
-    const b: Array<HTMLElement> = getAllByPlaceholderText('2');
+    const a: MixedIntersectionHTMLElement = getAllByPlaceholderText('1');
+    const b: Array<MixedIntersectionHTMLElement> = getAllByPlaceholderText('2');
   });
 
   it('queryByPlaceholderText should return maybe HTML element', () => {
     // $FlowExpectedError[incompatible-type]
-    const a: HTMLElement = queryByPlaceholderText('1');
-    const b: ?HTMLElement = queryByPlaceholderText('2');
+    const a: MixedIntersectionHTMLElement = queryByPlaceholderText('1');
+    const b: ?MixedIntersectionHTMLElement = queryByPlaceholderText('2');
   });
 
   it('queryAllByPlaceholderText should return array of HTML element', () => {
     // $FlowExpectedError[incompatible-type]
-    const a: HTMLElement = queryAllByPlaceholderText('1');
-    const b: Array<HTMLElement> = queryAllByPlaceholderText('2');
+    const a: MixedIntersectionHTMLElement = queryAllByPlaceholderText('1');
+    const b: Array<MixedIntersectionHTMLElement> = queryAllByPlaceholderText('2');
   });
 
   it('findByPlaceholderText should return HTML element', () => {
     // $FlowExpectedError[incompatible-type]
-    const a: HTMLElement = findByPlaceholderText('1');
-    const b: Promise<HTMLElement> = findByPlaceholderText('1');
+    const a: MixedIntersectionHTMLElement = findByPlaceholderText('1');
+    const b: Promise<MixedIntersectionHTMLElement> = findByPlaceholderText('1');
   });
 
   it('findAllByPlaceholderText should return array of HTML element', () => {
     // $FlowExpectedError[incompatible-type-arg]
-    const a: Promise<HTMLElement> = findAllByPlaceholderText('1');
-    const b: Promise<Array<HTMLElement>> = findAllByPlaceholderText('2');
+    const a: Promise<MixedIntersectionHTMLElement> = findAllByPlaceholderText('1');
+    const b: Promise<Array<MixedIntersectionHTMLElement>> = findAllByPlaceholderText('2');
   });
 
   it('getByRole should return HTML element', () => {
     // $FlowExpectedError[incompatible-type]
     const a: string = getByRole('button');
-    const b: HTMLElement = getByRole('button');
+    const b: MixedIntersectionHTMLElement = getByRole('button');
   });
 
   it('getAllByRole should return array of HTML element', () => {
     // $FlowExpectedError[incompatible-type]
-    const a: HTMLElement = getAllByRole('button');
-    const b: Array<HTMLElement> = getAllByRole('button');
+    const a: MixedIntersectionHTMLElement = getAllByRole('button');
+    const b: Array<MixedIntersectionHTMLElement> = getAllByRole('button');
   });
 
   it('queryByRole should return maybe HTML element', () => {
     // $FlowExpectedError[incompatible-type]
-    const a: HTMLElement = queryByRole('button');
-    const b: ?HTMLElement = queryByRole('button');
+    const a: MixedIntersectionHTMLElement = queryByRole('button');
+    const b: ?MixedIntersectionHTMLElement = queryByRole('button');
   });
 
   it('queryAllByRole should return array of HTML element', () => {
     // $FlowExpectedError[incompatible-type]
-    const a: HTMLElement = queryAllByRole('button');
-    const b: Array<HTMLElement> = queryAllByRole('button');
+    const a: MixedIntersectionHTMLElement = queryAllByRole('button');
+    const b: Array<MixedIntersectionHTMLElement> = queryAllByRole('button');
   });
 
   it('findByRole should return HTML element', () => {
     // $FlowExpectedError[incompatible-type]
-    const a: HTMLElement = findByRole('button');
-    const b: Promise<HTMLElement> = findByRole('button');
+    const a: MixedIntersectionHTMLElement = findByRole('button');
+    const b: Promise<MixedIntersectionHTMLElement> = findByRole('button');
   });
 
   it('findAllByRole should return array of HTML element', () => {
     // $FlowExpectedError[incompatible-type-arg]
-    const a: Promise<HTMLElement> = findAllByRole('button');
-    const b: Promise<Array<HTMLElement>> = findAllByRole('button');
+    const a: Promise<MixedIntersectionHTMLElement> = findAllByRole('button');
+    const b: Promise<Array<MixedIntersectionHTMLElement>> = findAllByRole('button');
   });
 
   it('getByTestId should return HTML element', () => {
-    const a: HTMLElement = getByTestId('1');
+    const a: MixedIntersectionHTMLElement = getByTestId('1');
   });
 
   it('getAllByTestId should return array of HTML element', () => {
     // $FlowExpectedError[incompatible-type]
-    const a: HTMLElement = getAllByTestId('1');
-    const b: Array<HTMLElement> = getAllByTestId('2');
+    const a: MixedIntersectionHTMLElement = getAllByTestId('1');
+    const b: Array<MixedIntersectionHTMLElement> = getAllByTestId('2');
   });
 
   it('queryByTestId should return maybe HTML element', () => {
     // $FlowExpectedError[incompatible-type]
-    const a: HTMLElement = queryByTestId('1');
-    const b: ?HTMLElement = queryByTestId('2');
+    const a: MixedIntersectionHTMLElement = queryByTestId('1');
+    const b: ?MixedIntersectionHTMLElement = queryByTestId('2');
   });
 
   it('queryAllByTestId should return array of HTML element', () => {
     // $FlowExpectedError[incompatible-type]
-    const a: HTMLElement = queryAllByTestId('1');
-    const b: Array<HTMLElement> = queryAllByTestId('2');
+    const a: MixedIntersectionHTMLElement = queryAllByTestId('1');
+    const b: Array<MixedIntersectionHTMLElement> = queryAllByTestId('2');
   });
 
   it('findByTestId should return HTML element', () => {
     // $FlowExpectedError[incompatible-type]
-    const a: HTMLElement = findByTestId('1');
-    const b: Promise<HTMLElement> = findByTestId('1');
+    const a: MixedIntersectionHTMLElement = findByTestId('1');
+    const b: Promise<MixedIntersectionHTMLElement> = findByTestId('1');
   });
 
   it('findAllByTestId should return array of HTML element', () => {
     // $FlowExpectedError[incompatible-type]
-    const a: HTMLElement = findAllByTestId('1');
-    const b: Promise<Array<HTMLElement>> = findAllByTestId('2');
+    const a: MixedIntersectionHTMLElement = findAllByTestId('1');
+    const b: Promise<Array<MixedIntersectionHTMLElement>> = findAllByTestId('2');
   });
 
   it('getByText should return HTML element', () => {
-    const a: HTMLElement = getByText('1');
+    const a: MixedIntersectionHTMLElement = getByText('1');
   });
 
   it('getAllByText should return array of HTML element', () => {
     // $FlowExpectedError[incompatible-type]
-    const a: HTMLElement = getAllByText('1');
-    const b: Array<HTMLElement> = getAllByText('2');
+    const a: MixedIntersectionHTMLElement = getAllByText('1');
+    const b: Array<MixedIntersectionHTMLElement> = getAllByText('2');
   });
 
   it('queryByText should return maybe HTML element', () => {
     // $FlowExpectedError[incompatible-type]
-    const a: HTMLElement = queryByText('1');
-    const b: ?HTMLElement = queryByText('2');
+    const a: MixedIntersectionHTMLElement = queryByText('1');
+    const b: ?MixedIntersectionHTMLElement = queryByText('2');
   });
 
   it('queryAllByText should return array of HTML element', () => {
     // $FlowExpectedError[incompatible-type]
-    const a: HTMLElement = queryAllByText('1');
-    const b: Array<HTMLElement> = queryAllByText('2');
+    const a: MixedIntersectionHTMLElement = queryAllByText('1');
+    const b: Array<MixedIntersectionHTMLElement> = queryAllByText('2');
   });
 
   it('findByText should return HTML element', () => {
     // $FlowExpectedError[incompatible-type]
-    const a: HTMLElement = findByText('1');
-    const b: Promise<HTMLElement> = findByText('1');
+    const a: MixedIntersectionHTMLElement = findByText('1');
+    const b: Promise<MixedIntersectionHTMLElement> = findByText('1');
   });
 
   it('findAllByText should return array of HTML element', () => {
     // $FlowExpectedError[incompatible-type-arg]
-    const a: Promise<HTMLElement> = findAllByText('1');
-    const b: Promise<Array<HTMLElement>> = findAllByText('2');
+    const a: Promise<MixedIntersectionHTMLElement> = findAllByText('1');
+    const b: Promise<Array<MixedIntersectionHTMLElement>> = findAllByText('2');
   });
 
   it('getByTitle should return HTML element', () => {
-    const a: HTMLElement = getByTitle('1');
+    const a: MixedIntersectionHTMLElement = getByTitle('1');
   });
 
   it('getAllByTitle should return array of HTML element', () => {
     // $FlowExpectedError[incompatible-type]
-    const a: HTMLElement = getAllByTitle('1');
-    const b: Array<HTMLElement> = getAllByTitle('2');
+    const a: MixedIntersectionHTMLElement = getAllByTitle('1');
+    const b: Array<MixedIntersectionHTMLElement> = getAllByTitle('2');
   });
 
   it('queryByTitle should return maybe HTML element', () => {
     // $FlowExpectedError[incompatible-type]
-    const a: HTMLElement = queryByTitle('1');
-    const b: ?HTMLElement = queryByTitle('2');
+    const a: MixedIntersectionHTMLElement = queryByTitle('1');
+    const b: ?MixedIntersectionHTMLElement = queryByTitle('2');
   });
 
   it('queryAllByTitle should return array of HTML element', () => {
     // $FlowExpectedError[incompatible-type]
-    const a: HTMLElement = queryAllByTitle('1');
-    const b: Array<HTMLElement> = queryAllByTitle('2');
+    const a: MixedIntersectionHTMLElement = queryAllByTitle('1');
+    const b: Array<MixedIntersectionHTMLElement> = queryAllByTitle('2');
   });
 
   it('findByTitle should return HTML element', () => {
     // $FlowExpectedError[incompatible-type]
-    const a: HTMLElement = findByTitle('1');
-    const b: Promise<HTMLElement> = findByTitle('1');
+    const a: MixedIntersectionHTMLElement = findByTitle('1');
+    const b: Promise<MixedIntersectionHTMLElement> = findByTitle('1');
   });
 
   it('findAllByTitle should return array of HTML element', () => {
     // $FlowExpectedError[incompatible-type]
-    const a: HTMLElement = findAllByTitle('1');
-    const b: Promise<Array<HTMLElement>> = findAllByTitle('2');
+    const a: MixedIntersectionHTMLElement = findAllByTitle('1');
+    const b: Promise<Array<MixedIntersectionHTMLElement>> = findAllByTitle('2');
   });
 });
 
@@ -970,7 +971,7 @@ describe('text matching API', () => {
   });
 
   it('getAllByAltText should accept text match arguments', () => {
-    const result: Array<HTMLElement> = getAllByAltText('1');
+    const result: Array<MixedIntersectionHTMLElement> = getAllByAltText('1');
   });
 
   it('queryByAltText should accept text match arguments', () => {
@@ -987,7 +988,7 @@ describe('text matching API', () => {
   });
 
   it('queryAllByAltText should accept text match arguments', () => {
-    const result: Array<HTMLElement> = queryAllByAltText('1');
+    const result: Array<MixedIntersectionHTMLElement> = queryAllByAltText('1');
   });
 
   it('getByDisplayValue should accept text match arguments', () => {
@@ -1012,7 +1013,7 @@ describe('text matching API', () => {
   });
 
   it('getAllByDisplayValue should accept text match arguments', () => {
-    const result: Array<HTMLElement> = getAllByDisplayValue('1');
+    const result: Array<MixedIntersectionHTMLElement> = getAllByDisplayValue('1');
   });
 
   it('queryByDisplayValue should accept text match arguments', () => {
@@ -1037,7 +1038,7 @@ describe('text matching API', () => {
   });
 
   it('queryAllByDisplayValue should accept text match arguments', () => {
-    const result: Array<HTMLElement> = queryAllByDisplayValue('1');
+    const result: Array<MixedIntersectionHTMLElement> = queryAllByDisplayValue('1');
   });
 
   it('getByLabelText should accept text match arguments', () => {
@@ -1055,7 +1056,7 @@ describe('text matching API', () => {
   });
 
   it('getAllByLabelText should accept text match arguments', () => {
-    const result: Array<HTMLElement> = getAllByLabelText('1');
+    const result: Array<MixedIntersectionHTMLElement> = getAllByLabelText('1');
   });
 
   it('queryByLabelText should accept text match arguments', () => {
@@ -1082,7 +1083,7 @@ describe('text matching API', () => {
   });
 
   it('queryAllByLabelText should accept text match arguments', () => {
-    const result: Array<HTMLElement> = queryAllByLabelText('1');
+    const result: Array<MixedIntersectionHTMLElement> = queryAllByLabelText('1');
   });
 
   it('getByPlaceholderText should accept text match arguments', () => {
@@ -1107,7 +1108,7 @@ describe('text matching API', () => {
   });
 
   it('getAllByPlaceholderText should accept text match arguments', () => {
-    const result: Array<HTMLElement> = getAllByPlaceholderText('1');
+    const result: Array<MixedIntersectionHTMLElement> = getAllByPlaceholderText('1');
   });
 
   it('queryByPlaceholderText should accept text match arguments', () => {
@@ -1132,7 +1133,7 @@ describe('text matching API', () => {
   });
 
   it('queryAllByPlaceholderText should accept text match arguments', () => {
-    const result: Array<HTMLElement> = queryAllByPlaceholderText('1');
+    const result: Array<MixedIntersectionHTMLElement> = queryAllByPlaceholderText('1');
   });
 
   it('getByRole should accept by role arguments', () => {
@@ -1145,7 +1146,7 @@ describe('text matching API', () => {
   });
 
   it('getAllByRole should accept by role arguments', () => {
-    const result: Array<HTMLElement> = getAllByRole('button');
+    const result: Array<MixedIntersectionHTMLElement> = getAllByRole('button');
   });
 
   it('queryByRole should accept by role arguments', () => {
@@ -1158,7 +1159,7 @@ describe('text matching API', () => {
   });
 
   it('queryAllByRole should accept by role arguments', () => {
-    const result: Array<HTMLElement> = queryAllByRole('button');
+    const result: Array<MixedIntersectionHTMLElement> = queryAllByRole('button');
   });
 
   it('getByTestId should accept text match arguments', () => {
@@ -1175,7 +1176,7 @@ describe('text matching API', () => {
   });
 
   it('getAllByTestId should accept text match arguments', () => {
-    const result: Array<HTMLElement> = getAllByTestId('1');
+    const result: Array<MixedIntersectionHTMLElement> = getAllByTestId('1');
   });
 
   it('queryByTestId should accept text match arguments', () => {
@@ -1192,7 +1193,7 @@ describe('text matching API', () => {
   });
 
   it('queryAllByTestId should accept text match arguments', () => {
-    const result: Array<HTMLElement> = queryAllByTestId('1');
+    const result: Array<MixedIntersectionHTMLElement> = queryAllByTestId('1');
   });
 
   it('getByText should accept text match arguments', () => {
@@ -1210,7 +1211,7 @@ describe('text matching API', () => {
   });
 
   it('getAllByText should accept text match arguments', () => {
-    const result: Array<HTMLElement> = getAllByText('1');
+    const result: Array<MixedIntersectionHTMLElement> = getAllByText('1');
   });
 
   it('queryByText should accept text match arguments', () => {
@@ -1228,7 +1229,7 @@ describe('text matching API', () => {
   });
 
   it('queryAllByText should accept text match arguments', () => {
-    const result: Array<HTMLElement> = queryAllByText('1');
+    const result: Array<MixedIntersectionHTMLElement> = queryAllByText('1');
   });
 
   it('getByTitle should accept text match arguments', () => {
@@ -1245,7 +1246,7 @@ describe('text matching API', () => {
   });
 
   it('getAllByTitle should accept text match arguments', () => {
-    const result: Array<HTMLElement> = getAllByTitle('1');
+    const result: Array<MixedIntersectionHTMLElement> = getAllByTitle('1');
   });
 
   it('queryByTitle should accept text match arguments', () => {
@@ -1262,7 +1263,7 @@ describe('text matching API', () => {
   });
 
   it('queryAllByTitle should accept text match arguments', () => {
-    const result: Array<HTMLElement> = queryAllByTitle('1');
+    const result: Array<MixedIntersectionHTMLElement> = queryAllByTitle('1');
   });
 });
 
