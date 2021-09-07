@@ -258,14 +258,14 @@ declare module '@testing-library/react' {
   |};
 
   // These two types must be updated kept in sync
-  declare export type MixedUnionHTMLElement =
+  declare export type UnionHTMLElement =
     | HTMLElement
     | HTMLInputElement
     | HTMLAnchorElement
     | HTMLButtonElement
     | HTMLSelectElement;
 
-  declare export type MixedIntersectionHTMLElement =
+  declare export type IntersectionHTMLElement =
     & HTMLElement
     & HTMLInputElement
     & HTMLAnchorElement
@@ -276,83 +276,83 @@ declare module '@testing-library/react' {
   declare type QueryByBoundAttribute = (
     text: Matcher,
     options?: MatcherOptions
-  ) => ?MixedIntersectionHTMLElement;
+  ) => ?IntersectionHTMLElement;
 
   declare type AllByBoundAttribute = (
     text: Matcher,
     options?: MatcherOptions
-  ) => Array<MixedIntersectionHTMLElement>;
+  ) => Array<IntersectionHTMLElement>;
 
   declare type FindAllByBoundAttribute = (
     text: Matcher,
     options?: MatcherOptions,
     waitForElementOptions?: WaitForOptions
-  ) => Promise<MixedIntersectionHTMLElement[]>;
+  ) => Promise<IntersectionHTMLElement[]>;
 
   declare type GetByBoundAttribute = (
     text: Matcher,
     options?: MatcherOptions
-  ) => MixedIntersectionHTMLElement;
+  ) => IntersectionHTMLElement;
 
   declare type FindByBoundAttribute = (
     text: Matcher,
     options?: MatcherOptions,
     waitForElementOptions?: WaitForOptions
-  ) => Promise<MixedIntersectionHTMLElement>;
+  ) => Promise<IntersectionHTMLElement>;
 
   declare type QueryByText = (
     text: Matcher,
     options?: SelectorMatcherOptions
-  ) => ?MixedIntersectionHTMLElement;
+  ) => ?IntersectionHTMLElement;
 
   declare type AllByText = (
     text: Matcher,
     options?: SelectorMatcherOptions
-  ) => Array<MixedIntersectionHTMLElement>;
+  ) => Array<IntersectionHTMLElement>;
 
   declare type FindAllByText = (
     text: Matcher,
     options?: SelectorMatcherOptions,
     waitForElementOptions?: WaitForOptions
-  ) => Promise<MixedIntersectionHTMLElement[]>;
+  ) => Promise<IntersectionHTMLElement[]>;
 
   declare type GetByText = (
     text: Matcher,
     options?: SelectorMatcherOptions
-  ) => MixedIntersectionHTMLElement;
+  ) => IntersectionHTMLElement;
 
   declare type FindByText = (
     text: Matcher,
     options?: SelectorMatcherOptions,
     waitForElementOptions?: WaitForOptions
-  ) => Promise<MixedIntersectionHTMLElement>;
+  ) => Promise<IntersectionHTMLElement>;
 
   declare type AllByRole = (
     role: ByRoleMatcher,
     options?: ByRoleOptions
-  ) => MixedIntersectionHTMLElement[];
+  ) => IntersectionHTMLElement[];
 
   declare type GetByRole = (
     role: ByRoleMatcher,
     options?: ByRoleOptions
-  ) => MixedIntersectionHTMLElement;
+  ) => IntersectionHTMLElement;
 
   declare type QueryByRole = (
     role: ByRoleMatcher,
     options?: ByRoleOptions
-  ) => MixedIntersectionHTMLElement | null;
+  ) => IntersectionHTMLElement | null;
 
   declare type FindByRole = (
     role: ByRoleMatcher,
     options?: ByRoleOptions,
     waitForElementOptions?: WaitForOptions
-  ) => Promise<MixedIntersectionHTMLElement>;
+  ) => Promise<IntersectionHTMLElement>;
 
   declare type FindAllByRole = (
     role: ByRoleMatcher,
     options?: ByRoleOptions,
     waitForElementOptions?: WaitForOptions
-  ) => Promise<MixedIntersectionHTMLElement[]>;
+  ) => Promise<IntersectionHTMLElement[]>;
 
   declare type GetsAndQueries = {|
     getByLabelText: GetByText,
@@ -413,7 +413,7 @@ declare module '@testing-library/react' {
   |};
 
   declare type FireEvent<TInit> = (
-    element: MixedUnionHTMLElement,
+    element: UnionHTMLElement,
     eventProperties?: TInit
   ) => boolean;
 
