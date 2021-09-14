@@ -56,6 +56,7 @@ declare module "redux-saga" {
     cancel: () => void;
     toPromise(): Promise<RT>;
     setContext<C: {...}>(props: $Shape<C>): void;
+    done: Promise<any>;
   }
 
   declare export interface SagaMonitor {
