@@ -275,8 +275,8 @@ declare module 'react-navigation-drawer' {
       |}) => Options);
 
   declare export type NavigationComponent =
-    | NavigationScreenComponent<NavigationRoute, *, *>
-    | NavigationNavigator<*, *, *>;
+    | NavigationScreenComponent<NavigationRoute, any, any>
+    | NavigationNavigator<any, any, any>;
 
   declare interface withOptionalNavigationOptions<Options> {
     navigationOptions?: NavigationScreenConfig<Options>;
@@ -302,7 +302,7 @@ declare module 'react-navigation-drawer' {
     withOptionalNavigationOptions<Options>;
 
   declare type _NavigationRouteConfigCore = {|
-    navigationOptions?: NavigationScreenConfig<*>,
+    navigationOptions?: NavigationScreenConfig<any>,
     params?: NavigationParams,
     path?: string,
   |};
@@ -536,8 +536,8 @@ declare module 'react-navigation-drawer' {
   |};
 
   declare export type NavigationDrawerRouterConfig = {|
-    navigationOptions?: NavigationScreenConfig<*>,
-    defaultNavigationOptions?: NavigationScreenConfig<*>,
+    navigationOptions?: NavigationScreenConfig<any>,
+    defaultNavigationOptions?: NavigationScreenConfig<any>,
     unmountInactiveRoutes?: boolean,
     resetOnBlur?: boolean,
     initialRouteName?: string,
@@ -615,7 +615,7 @@ declare module 'react-navigation-drawer' {
   declare export function createDrawerNavigator(
     routeConfigs: NavigationRouteConfigMap,
     config?: DrawerNavigatorConfig
-  ): NavigationNavigator<*, *, *>;
+  ): NavigationNavigator<any, any, any>;
 
   declare export var DrawerActions: {|
     OPEN_DRAWER: 'Navigation/OPEN_DRAWER',
@@ -632,7 +632,7 @@ declare module 'react-navigation-drawer' {
   declare export function DrawerRouter(
     routeConfigs: NavigationRouteConfigMap,
     stackConfig?: NavigationDrawerRouterConfig
-  ): NavigationRouter<*, NavigationDrawerScreenOptions>;
+  ): NavigationRouter<any, NavigationDrawerScreenOptions>;
 
   declare type _DrawerScene = {|
     route: NavigationRoute,

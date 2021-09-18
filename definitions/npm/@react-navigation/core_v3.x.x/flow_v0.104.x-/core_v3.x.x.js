@@ -275,8 +275,8 @@ declare module '@react-navigation/core' {
       |}) => Options);
 
   declare export type NavigationComponent =
-    | NavigationScreenComponent<NavigationRoute, *, *>
-    | NavigationNavigator<*, *, *>;
+    | NavigationScreenComponent<NavigationRoute, any, any>
+    | NavigationNavigator<any, any, any>;
 
   declare interface withOptionalNavigationOptions<Options> {
     navigationOptions?: NavigationScreenConfig<Options>;
@@ -302,7 +302,7 @@ declare module '@react-navigation/core' {
     withOptionalNavigationOptions<Options>;
 
   declare type _NavigationRouteConfigCore = {|
-    navigationOptions?: NavigationScreenConfig<*>,
+    navigationOptions?: NavigationScreenConfig<any>,
     params?: NavigationParams,
     path?: string,
   |};
@@ -660,8 +660,8 @@ declare module '@react-navigation/core' {
     initialRouteName?: string,
     initialRouteParams?: NavigationParams,
     paths?: NavigationPathsConfig,
-    navigationOptions?: NavigationScreenConfig<*>,
-    defaultNavigationOptions?: NavigationScreenConfig<*>,
+    navigationOptions?: NavigationScreenConfig<any>,
+    defaultNavigationOptions?: NavigationScreenConfig<any>,
     initialRouteKey?: string,
   |};
 
@@ -696,8 +696,8 @@ declare module '@react-navigation/core' {
     initialRouteName?: string,
     initialRouteParams?: NavigationParams,
     paths?: NavigationPathsConfig,
-    navigationOptions?: NavigationScreenConfig<*>,
-    defaultNavigationOptions?: NavigationScreenConfig<*>,
+    navigationOptions?: NavigationScreenConfig<any>,
+    defaultNavigationOptions?: NavigationScreenConfig<any>,
     // todo: type these as the real route names rather than 'string'
     order?: string[],
     // Does the back button cause the router to switch to the initial tab
@@ -792,14 +792,14 @@ declare module '@react-navigation/core' {
   declare type _NavigationView<O, S, N: NavigationScreenProp<S>> = React$ComponentType<{
     descriptors: NavigationDescriptorMap,
     navigation: N,
-    navigationConfig: *,
+    navigationConfig: any,
     ...
   }>;
-  declare export function createNavigator<O: *, S: *, NavigatorConfig: *, N: NavigationScreenProp<S>>(
+  declare export function createNavigator<O: any, S: any, NavigatorConfig: any, N: NavigationScreenProp<S>>(
     view: _NavigationView<O, S, N>,
     router: NavigationRouter<S, O>,
     navigatorConfig?: NavigatorConfig
-  ): NavigationNavigator<S, O, *>;
+  ): NavigationNavigator<S, O, any>;
 
   declare export var NavigationContext: React$Context<
     ?NavigationScreenProp<NavigationState | NavigationRoute>,
@@ -811,7 +811,7 @@ declare module '@react-navigation/core' {
   declare export function createSwitchNavigator(
     routeConfigs: NavigationRouteConfigMap,
     config?: _SwitchNavigatorConfig
-  ): NavigationNavigator<*, *, *>;
+  ): NavigationNavigator<any, any, any>;
 
   declare export var ThemeContext: React$Context<SupportedThemes>;
   declare export var ThemeProvider: $PropertyType<typeof ThemeContext, 'Provider'>;
@@ -888,17 +888,17 @@ declare module '@react-navigation/core' {
   declare export function StackRouter(
     routeConfigs: NavigationRouteConfigMap,
     stackConfig?: NavigationStackRouterConfig
-  ): NavigationRouter<*, NavigationStackScreenOptions>;
+  ): NavigationRouter<any, NavigationStackScreenOptions>;
 
   declare export function TabRouter(
     routeConfigs: NavigationRouteConfigMap,
     config?: NavigationTabRouterConfig
-  ): NavigationRouter<*, NavigationTabScreenOptions>;
+  ): NavigationRouter<any, NavigationTabScreenOptions>;
 
   declare export function SwitchRouter(
     routeConfigs: NavigationRouteConfigMap,
     stackConfig?: NavigationSwitchRouterConfig
-  ): NavigationRouter<*, {| |}>;
+  ): NavigationRouter<any, {| |}>;
 
   declare export function getActiveChildNavigationOptions<
     State: NavigationState,

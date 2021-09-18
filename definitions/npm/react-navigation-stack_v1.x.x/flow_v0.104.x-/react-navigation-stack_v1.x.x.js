@@ -275,8 +275,8 @@ declare module 'react-navigation-stack' {
       |}) => Options);
 
   declare export type NavigationComponent =
-    | NavigationScreenComponent<NavigationRoute, *, *>
-    | NavigationNavigator<*, *, *>;
+    | NavigationScreenComponent<NavigationRoute, any, any>
+    | NavigationNavigator<any, any, any>;
 
   declare interface withOptionalNavigationOptions<Options> {
     navigationOptions?: NavigationScreenConfig<Options>;
@@ -302,7 +302,7 @@ declare module 'react-navigation-stack' {
     withOptionalNavigationOptions<Options>;
 
   declare type _NavigationRouteConfigCore = {|
-    navigationOptions?: NavigationScreenConfig<*>,
+    navigationOptions?: NavigationScreenConfig<any>,
     params?: NavigationParams,
     path?: string,
   |};
@@ -658,8 +658,8 @@ declare module 'react-navigation-stack' {
     initialRouteName?: string,
     initialRouteParams?: NavigationParams,
     paths?: NavigationPathsConfig,
-    navigationOptions?: NavigationScreenConfig<*>,
-    defaultNavigationOptions?: NavigationScreenConfig<*>,
+    navigationOptions?: NavigationScreenConfig<any>,
+    defaultNavigationOptions?: NavigationScreenConfig<any>,
     initialRouteKey?: string,
   |};
 
@@ -799,7 +799,7 @@ declare module 'react-navigation-stack' {
   declare export function createStackNavigator(
     routeConfigMap: NavigationRouteConfigMap,
     stackConfig?: StackNavigatorConfig
-  ): NavigationNavigator<*, *, *>;
+  ): NavigationNavigator<any, any, any>;
 
   declare export var Header: React$ComponentType<HeaderProps> & { HEIGHT: number, ... };
 

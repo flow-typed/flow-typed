@@ -25,7 +25,7 @@ const ss: Array<string> = ["one", "two", "three", "four"];
 const obj: { [k: string]: number, ... } = { a: 1, c: 2 };
 const objMixed: { [k: string]: mixed, ... } = { a: 1, c: "d" };
 const objArr: { [k: string]: mixed, ... } = { a: 1, b: [1,2,3], c: "d"};
-const os: Array<{ [k: string]: *, ... }> = [{ a: 1, c: "d" }, { b: 2 }];
+const os: Array<{ [k: string]: any, ... }> = [{ a: 1, c: "d" }, { b: 2 }];
 const str: string = "hello world";
 
 const cl: number = _.clamp(1, 10, -1);

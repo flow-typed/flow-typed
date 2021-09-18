@@ -343,10 +343,10 @@ describe("Form", () => {
     class BadTestComponent extends React.Component<PropsBadTest> {}
 
     // create is a function
-    const GoodWrappedTestForm: React$ComponentType<$Diff<PropsGoodTest, { form: *, ... }>> =
+    const GoodWrappedTestForm: React$ComponentType<$Diff<PropsGoodTest, { form: any, ... }>> =
       Form.create<PropsGoodTest>({name: 'good_test_form'})(GoodTestComponent);
 
-    const BadWrappedTestForm: React$ComponentType<$Diff<PropsBadTest, { form: *, ... }>> =
+    const BadWrappedTestForm: React$ComponentType<$Diff<PropsBadTest, { form: any, ... }>> =
       // $FlowExpectedError PropsBadTest. it must contain form attribute
       Form.create<PropsBadTest>({name: 'bad_test_form'})(BadTestComponent);
 
