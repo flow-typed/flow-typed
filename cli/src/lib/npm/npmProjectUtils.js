@@ -11,11 +11,15 @@ import type {Version} from '../semver.js';
 
 import semver from 'semver';
 
+import glob from 'glob';
+
 type PkgJson = {|
   pathStr: string,
   content: {
     name: string,
     version: string,
+    private?: boolean,
+    workspaces?: string[],
 
     installConfig?: {pnp?: boolean},
 
@@ -72,6 +76,51 @@ export async function findPackageJsonPath(pathStr: string): Promise<string> {
     throw new Error(`Unable to find a package.json for ${pathStr}!`);
   }
   return path.join(pkgJsonPathStr, 'package.json');
+}
+
+export async function findWorkspacesPackagePaths(
+  pkgJson: PkgJson,
+  cwd: string,
+): Promise<string[]> {
+  if (
+    pkgJson.content.private !== true ||
+    !Array.isArray(pkgJson.content.workspaces)
+  ) {
+    return [];
+  }
+
+  const tasks = await Promise.all(
+    pkgJson.content.workspaces.map(pattern => {
+      return new Promise((resolve, reject) => {
+        glob(`${pattern}/package.json`, {cwd, absolute: true}, (err, files) => {
+          if (err) {
+            reject(err);
+          } else {
+            resolve(files);
+          }
+        });
+      });
+    }),
+  );
+
+  return tasks.flat();
+}
+
+export async function findWorkspacesPackages(
+  pkgJson: PkgJson,
+  cwd: string,
+): Promise<PkgJson[]> {
+  const paths = await findWorkspacesPackagePaths(pkgJson, cwd);
+
+  return Promise.all(
+    paths.map(async pathStr => {
+      const pkgJsonContent = await fs.readJson(pathStr);
+      return {
+        pathStr,
+        content: pkgJsonContent,
+      };
+    }),
+  );
 }
 
 // TODO: Write tests for this

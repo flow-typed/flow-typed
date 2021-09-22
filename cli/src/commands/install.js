@@ -25,6 +25,7 @@ import {
 
 import {
   findFlowSpecificVer,
+  findWorkspacesPackages,
   getPackageJsonData,
   getPackageJsonDependencies,
   loadPnpResolver,
@@ -265,7 +266,17 @@ async function installNpmLibDefs({
       const termMatches = term.match(/(@[^@\/]+\/)?([^@]+)@(.+)/);
       if (termMatches == null) {
         const pkgJsonData = await getPackageJsonData(cwd);
-        const pkgJsonDeps = getPackageJsonDependencies(pkgJsonData, []);
+        const workspacesPckJsonData = await findWorkspacesPackages(
+          pkgJsonData,
+          cwd,
+        );
+        const pkgJsonDeps = workspacesPckJsonData.reduce((acc, pckData) => {
+          return {
+            ...acc,
+            // TODO: warn duplicates with different versions
+            ...getPackageJsonDependencies(pckData, []),
+          };
+        }, getPackageJsonDependencies(pkgJsonData, []));
         const packageVersion = pkgJsonDeps[term];
         if (packageVersion) {
           libdefsToSearchFor.set(term, packageVersion);
@@ -285,7 +296,17 @@ async function installNpmLibDefs({
     console.log(`• Searching for ${libdefsToSearchFor.size} libdefs...`);
   } else {
     const pkgJsonData = await getPackageJsonData(cwd);
-    const pkgJsonDeps = getPackageJsonDependencies(pkgJsonData, ignoreDeps);
+    const workspacesPckJsonData = await findWorkspacesPackages(
+      pkgJsonData,
+      cwd,
+    );
+    const pkgJsonDeps = workspacesPckJsonData.reduce((acc, pckData) => {
+      return {
+        ...acc,
+        // TODO: warn duplicates with different versions
+        ...getPackageJsonDependencies(pckData, ignoreDeps),
+      };
+    }, getPackageJsonDependencies(pkgJsonData, ignoreDeps));
     for (const pkgName in pkgJsonDeps) {
       libdefsToSearchFor.set(pkgName, pkgJsonDeps[pkgName]);
     }
