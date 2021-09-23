@@ -266,8 +266,8 @@ async function installNpmLibDefs({
       const termMatches = term.match(/(@[^@\/]+\/)?([^@]+)@(.+)/);
       if (termMatches == null) {
         const pkgJsonData = await getPackageJsonData(cwd);
-        const workspacesPckJsonData = await findWorkspacesPackages(pkgJsonData);
-        const pkgJsonDeps = workspacesPckJsonData.reduce((acc, pckData) => {
+        const workspacesPkgJsonData = await findWorkspacesPackages(pkgJsonData);
+        const pkgJsonDeps = workspacesPkgJsonData.reduce((acc, pckData) => {
           return {
             ...acc,
             // TODO: warn duplicates with different versions
@@ -293,8 +293,8 @@ async function installNpmLibDefs({
     console.log(`• Searching for ${libdefsToSearchFor.size} libdefs...`);
   } else {
     const pkgJsonData = await getPackageJsonData(cwd);
-    const workspacesPckJsonData = await findWorkspacesPackages(pkgJsonData);
-    const pkgJsonDeps = workspacesPckJsonData.reduce((acc, pckData) => {
+    const workspacesPkgJsonData = await findWorkspacesPackages(pkgJsonData);
+    const pkgJsonDeps = workspacesPkgJsonData.reduce((acc, pckData) => {
       return {
         ...acc,
         // TODO: warn duplicates with different versions
