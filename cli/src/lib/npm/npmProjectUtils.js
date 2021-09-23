@@ -81,10 +81,7 @@ export async function findPackageJsonPath(pathStr: string): Promise<string> {
 export async function findWorkspacesPackagePaths(
   pkgJson: PkgJson,
 ): Promise<string[]> {
-  if (
-    pkgJson.content.private !== true ||
-    !Array.isArray(pkgJson.content.workspaces)
-  ) {
+  if (!Array.isArray(pkgJson.content.workspaces)) {
     return [];
   }
 
