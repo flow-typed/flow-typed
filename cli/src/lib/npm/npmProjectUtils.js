@@ -80,7 +80,6 @@ export async function findPackageJsonPath(pathStr: string): Promise<string> {
 
 export async function findWorkspacesPackagePaths(
   pkgJson: PkgJson,
-  cwd: string,
 ): Promise<string[]> {
   if (
     pkgJson.content.private !== true ||
@@ -92,13 +91,17 @@ export async function findWorkspacesPackagePaths(
   const tasks = await Promise.all(
     pkgJson.content.workspaces.map(pattern => {
       return new Promise((resolve, reject) => {
-        glob(`${pattern}/package.json`, {cwd, absolute: true}, (err, files) => {
-          if (err) {
-            reject(err);
-          } else {
-            resolve(files);
-          }
-        });
+        glob(
+          `${path.dirname(pkgJson.pathStr)}/${pattern}/package.json`,
+          {absolute: true},
+          (err, files) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(files);
+            }
+          },
+        );
       });
     }),
   );
@@ -108,9 +111,8 @@ export async function findWorkspacesPackagePaths(
 
 export async function findWorkspacesPackages(
   pkgJson: PkgJson,
-  cwd: string,
 ): Promise<PkgJson[]> {
-  const paths = await findWorkspacesPackagePaths(pkgJson, cwd);
+  const paths = await findWorkspacesPackagePaths(pkgJson);
 
   return Promise.all(
     paths.map(async pathStr => {
