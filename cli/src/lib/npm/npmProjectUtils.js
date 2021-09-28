@@ -19,7 +19,7 @@ type PkgJson = {|
     name: string,
     version: string,
     private?: boolean,
-    workspaces?: string[],
+    workspaces?: string[] | {packages: string[], ...},
 
     installConfig?: {pnp?: boolean},
 
@@ -78,15 +78,26 @@ export async function findPackageJsonPath(pathStr: string): Promise<string> {
   return path.join(pkgJsonPathStr, 'package.json');
 }
 
+function getWorkspacePatterns(pkgJson: PkgJson): string[] {
+  if (Array.isArray(pkgJson.content.workspaces)) {
+    return pkgJson.content.workspaces;
+  }
+
+  if (
+    pkgJson.content.workspaces &&
+    Array.isArray(pkgJson.content.workspaces.packages)
+  ) {
+    return pkgJson.content.workspaces.packages;
+  }
+
+  return [];
+}
+
 export async function findWorkspacesPackagePaths(
   pkgJson: PkgJson,
 ): Promise<string[]> {
-  if (!Array.isArray(pkgJson.content.workspaces)) {
-    return [];
-  }
-
   const tasks = await Promise.all(
-    pkgJson.content.workspaces.map(pattern => {
+    getWorkspacePatterns(pkgJson).map(pattern => {
       return new Promise((resolve, reject) => {
         glob(
           `${path.dirname(pkgJson.pathStr)}/${pattern}/package.json`,

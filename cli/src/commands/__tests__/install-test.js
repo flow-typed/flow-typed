@@ -849,9 +849,46 @@ describe('install (command)', () => {
       });
     }
 
-    it('installs available libdefs', () => {
+    it('supports yarn workspace', () => {
       return fakeProjectEnv(async FLOWPROJ_DIR => {
         await copyDir(path.join(FIXTURE_ROOT, 'yarn-workspace'), FLOWPROJ_DIR);
+
+        // Run the install command
+        await run({
+          overwrite: false,
+          verbose: false,
+          skip: false,
+          ignoreDeps: [],
+          explicitLibDefs: [],
+        });
+
+        // Installs libdefs
+        expect(
+          await fs.readdir(path.join(FLOWPROJ_DIR, 'flow-typed', 'npm')),
+        ).toEqual([
+          'a_vx.x.x.js',
+          'bar_v1.x.x.js',
+          'c_vx.x.x.js',
+          'flow-bin_v0.x.x.js',
+          'foo_v1.x.x.js',
+        ]);
+
+        // Signs installed libdefs
+        const fooLibDefContents = await fs.readFile(
+          path.join(FLOWPROJ_DIR, 'flow-typed', 'npm', 'foo_v1.x.x.js'),
+          'utf8',
+        );
+        expect(fooLibDefContents).toContain('// flow-typed signature: ');
+        expect(fooLibDefContents).toContain('// flow-typed version: ');
+      });
+    });
+
+    it('supports legacy workspace', () => {
+      return fakeProjectEnv(async FLOWPROJ_DIR => {
+        await copyDir(
+          path.join(FIXTURE_ROOT, 'legacy-workspace'),
+          FLOWPROJ_DIR,
+        );
 
         // Run the install command
         await run({
