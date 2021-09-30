@@ -498,6 +498,7 @@ export async function createStub(
       const rootDependencies = await getPackageJsonDependencies(
         pkgJsonData,
         [],
+        [],
       );
       version = rootDependencies[packageName] || null;
     } catch (e) {}

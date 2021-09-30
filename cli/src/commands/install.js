@@ -271,9 +271,9 @@ async function installNpmLibDefs({
           return {
             ...acc,
             // TODO: warn duplicates with different versions
-            ...getPackageJsonDependencies(pckData, []),
+            ...getPackageJsonDependencies(pckData, [], []),
           };
-        }, getPackageJsonDependencies(pkgJsonData, []));
+        }, getPackageJsonDependencies(pkgJsonData, [], []));
         const packageVersion = pkgJsonDeps[term];
         if (packageVersion) {
           libdefsToSearchFor.set(term, packageVersion);
@@ -292,15 +292,29 @@ async function installNpmLibDefs({
     }
     console.log(`• Searching for ${libdefsToSearchFor.size} libdefs...`);
   } else {
+    let ignoreDefs;
+    try {
+      ignoreDefs = fs
+        .readFileSync(path.join(cwd, libdefDir, '.ignore'), 'utf-8')
+        .replace(/"/g, '')
+        .split('\n');
+    } catch (err) {
+      // If the error is unrelated to file not existing we should continue throwing
+      if (err.code !== 'ENOENT') {
+        throw err;
+      }
+      ignoreDefs = [];
+    }
+
     const pkgJsonData = await getPackageJsonData(cwd);
     const workspacesPkgJsonData = await findWorkspacesPackages(pkgJsonData);
     const pkgJsonDeps = workspacesPkgJsonData.reduce((acc, pckData) => {
       return {
         ...acc,
         // TODO: warn duplicates with different versions
-        ...getPackageJsonDependencies(pckData, ignoreDeps),
+        ...getPackageJsonDependencies(pckData, ignoreDeps, ignoreDefs),
       };
-    }, getPackageJsonDependencies(pkgJsonData, ignoreDeps));
+    }, getPackageJsonDependencies(pkgJsonData, ignoreDeps, ignoreDefs));
     for (const pkgName in pkgJsonDeps) {
       libdefsToSearchFor.set(pkgName, pkgJsonDeps[pkgName]);
     }

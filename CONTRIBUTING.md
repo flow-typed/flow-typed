@@ -49,6 +49,8 @@ version 4.1.0. **[You've followed all of the
 best practices for writing high quality definitions,](https://github.com/flow-typed/flow-typed/issues/13#issuecomment-214892914)**
 and now you'd like to contribute it:
 
+> Flow-typed comes with a handy script to simplify the file creation process `./create_def.sh` which takes two args, the library name and the version you'd like to type. In the :point_down: example that would be `./create_def.sh left-pad 4.x.x`.
+
 #### 1) Create a new directory called `definitions/npm/left-pad_v4.1.0/`.
 
 ***We call this the "package version directory".***
@@ -245,7 +247,7 @@ When you export a module, you have a choice to use CommonJS or ES6 syntax. We ge
 
 ### Avoid global types
 
-Sometimes you see global definitions like `$npm$ModuleName$`. This is due to the fact that in the past Flow didn't support private types. **Global types should not be used anymore**. Since then Flow has added support for `declare export` which means that every type which doesn't have it are defined as private and can't be imported, see https://flow.org/en/docs/libdefs/creation/#toc-declaring-an-es-module for details. 
+Sometimes you see global definitions like `$npm$ModuleName$`. This is due to the fact that in the past Flow didn't support private types. **Global types should not be used anymore**. Since then Flow has added support for `declare export` which means that every type which doesn't have it are defined as private and can't be imported, see https://flow.org/en/docs/libdefs/creation/#toc-declaring-an-es-module for details.
 
 ### Prefer immutability
 
