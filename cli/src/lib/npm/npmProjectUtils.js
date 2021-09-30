@@ -77,7 +77,14 @@ export async function findPackageJsonPath(pathStr: string): Promise<string> {
 // TODO: Write tests for this
 export function getPackageJsonDependencies(
   pkgJson: PkgJson,
+  /**
+   * dependency groups to ignore
+   */
   ignoreDeps: Array<string>,
+  /**
+   * dependencies or scopes of dependencies to be ignored
+   */
+  ignoreDefs: Array<string>,
 ): {[depName: string]: string} {
   const depFields = PKG_JSON_DEP_FIELDS.filter(field => {
     return ignoreDeps.indexOf(field.slice(0, -12)) === -1;
@@ -90,6 +97,21 @@ export function getPackageJsonDependencies(
         if (deps[pkgName]) {
           console.warn(`Found ${pkgName} listed twice in package.json!`);
         }
+        const pkgIgnored = ignoreDefs.some(cur => {
+          const ignoreDef = cur.trim();
+          if (ignoreDef === '') return false;
+          // if we are looking to ignore a scope dir
+          if (
+            ignoreDef.charAt(0) === '@' &&
+            (ignoreDef.indexOf('/') === -1 ||
+              ignoreDef.indexOf('/') === ignoreDef.length - 1)
+          ) {
+            return pkgName.startsWith(ignoreDef);
+          }
+          return pkgName === ignoreDef;
+        });
+        if (pkgIgnored) return;
+
         deps[pkgName] = contentSection[pkgName];
       });
     }

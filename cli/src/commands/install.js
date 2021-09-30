@@ -265,7 +265,7 @@ async function installNpmLibDefs({
       const termMatches = term.match(/(@[^@\/]+\/)?([^@]+)@(.+)/);
       if (termMatches == null) {
         const pkgJsonData = await getPackageJsonData(cwd);
-        const pkgJsonDeps = getPackageJsonDependencies(pkgJsonData, []);
+        const pkgJsonDeps = getPackageJsonDependencies(pkgJsonData, [], []);
         const packageVersion = pkgJsonDeps[term];
         if (packageVersion) {
           libdefsToSearchFor.set(term, packageVersion);
@@ -284,8 +284,26 @@ async function installNpmLibDefs({
     }
     console.log(`• Searching for ${libdefsToSearchFor.size} libdefs...`);
   } else {
+    let ignoreDefs;
+    try {
+      ignoreDefs = fs
+        .readFileSync(path.join(cwd, libdefDir, '.ignore'), 'utf-8')
+        .replace(/"/g, '')
+        .split('\n');
+    } catch (err) {
+      // If the error is unrelated to file not existing we should continue throwing
+      if (err.code !== 'ENOENT') {
+        throw err;
+      }
+      ignoreDefs = [];
+    }
+
     const pkgJsonData = await getPackageJsonData(cwd);
-    const pkgJsonDeps = getPackageJsonDependencies(pkgJsonData, ignoreDeps);
+    const pkgJsonDeps = getPackageJsonDependencies(
+      pkgJsonData,
+      ignoreDeps,
+      ignoreDefs,
+    );
     for (const pkgName in pkgJsonDeps) {
       libdefsToSearchFor.set(pkgName, pkgJsonDeps[pkgName]);
     }
