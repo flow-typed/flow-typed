@@ -368,7 +368,10 @@ export async function pkgHasFlowFiles(
   projectRoot: string,
   packageName: string,
   pnpjs: PnpResolver | null,
-): Promise<boolean> {
+): Promise<{|
+  flowTyped: boolean,
+  path?: string,
+|}> {
   try {
     let pathToPackage = await resolvePkgDirPath(
       packageName,
@@ -381,9 +384,14 @@ export async function pkgHasFlowFiles(
       ignore: 'node_modules/**',
     });
 
-    return files.length > 0;
+    return {
+      flowTyped: files.length > 0,
+      path: pathToPackage,
+    };
   } catch (e) {
-    return false;
+    return {
+      flowTyped: false,
+    };
   }
 }
 

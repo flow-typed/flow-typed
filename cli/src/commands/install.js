@@ -257,6 +257,20 @@ async function installNpmLibDefs({
 
   const libdefsToSearchFor: Map<string, string> = new Map();
 
+  let ignoreDefs;
+  try {
+    ignoreDefs = fs
+      .readFileSync(path.join(cwd, libdefDir, '.ignore'), 'utf-8')
+      .replace(/"/g, '')
+      .split('\n');
+  } catch (err) {
+    // If the error is unrelated to file not existing we should continue throwing
+    if (err.code !== 'ENOENT') {
+      throw err;
+    }
+    ignoreDefs = [];
+  }
+
   // If a specific pkg/version was specified, only add those packages.
   // Otherwise, extract dependencies from the package.json
   if (explicitLibDefs.length > 0) {
@@ -284,20 +298,6 @@ async function installNpmLibDefs({
     }
     console.log(`• Searching for ${libdefsToSearchFor.size} libdefs...`);
   } else {
-    let ignoreDefs;
-    try {
-      ignoreDefs = fs
-        .readFileSync(path.join(cwd, libdefDir, '.ignore'), 'utf-8')
-        .replace(/"/g, '')
-        .split('\n');
-    } catch (err) {
-      // If the error is unrelated to file not existing we should continue throwing
-      if (err.code !== 'ENOENT') {
-        throw err;
-      }
-      ignoreDefs = [];
-    }
-
     const pkgJsonData = await getPackageJsonData(cwd);
     const pkgJsonDeps = getPackageJsonDependencies(
       pkgJsonData,
@@ -335,26 +335,71 @@ async function installNpmLibDefs({
     {name: string, ver: string},
   ][] = [];
   const unavailableLibDefs = [];
-  await Promise.all(
-    libDefsToSearchForEntries.map(async ([name, ver]) => {
-      if (FLOW_BUILT_IN_NPM_LIBS.indexOf(name) !== -1) {
-        return;
-      }
 
-      const libDef = await findNpmLibDef(name, ver, flowVersion, useCacheUntil);
-      if (libDef === null) {
-        unavailableLibDefs.push({name, ver});
-      } else {
-        libDefsToInstall.set(name, libDef);
-
-        const libDefLower = getRangeLowerBound(libDef.version);
-        const depLower = getRangeLowerBound(ver);
-        if (semver.lt(libDefLower, depLower)) {
-          outdatedLibDefsToInstall.push([libDef, {name, ver}]);
+  const getLibDefsToInstall = async (entries: Array<[string, string]>) => {
+    await Promise.all(
+      entries.map(async ([name, ver]) => {
+        if (FLOW_BUILT_IN_NPM_LIBS.indexOf(name) !== -1) {
+          return;
         }
+
+        const libDef = await findNpmLibDef(name, ver, flowVersion, useCacheUntil);
+        if (libDef === null) {
+          unavailableLibDefs.push({name, ver});
+        } else {
+          libDefsToInstall.set(name, libDef);
+
+          const libDefLower = getRangeLowerBound(libDef.version);
+          const depLower = getRangeLowerBound(ver);
+          if (semver.lt(libDefLower, depLower)) {
+            outdatedLibDefsToInstall.push([libDef, {name, ver}]);
+          }
+        }
+      }),
+    );
+  };
+  await getLibDefsToInstall(libDefsToSearchForEntries);
+
+  const pnpResolver = await loadPnpResolver(await getPackageJsonData(cwd));
+
+  // If a package that's missing a flow-typed libdef has any .flow files,
+  // we'll skip generating a stub for it.
+  const untypedMissingLibDefs: Array<[string, string]> = [];
+  const typedMissingLibDefs: Array<[string, string, string]> = [];
+  await Promise.all(
+    unavailableLibDefs.map(async ({name: pkgName, ver: pkgVer}) => {
+      const hasFlowFiles = await pkgHasFlowFiles(cwd, pkgName, pnpResolver);
+      if (hasFlowFiles.flowTyped && hasFlowFiles.path) {
+        typedMissingLibDefs.push([pkgName, pkgVer, hasFlowFiles.path]);
+      } else {
+        untypedMissingLibDefs.push([pkgName, pkgVer]);
       }
     }),
   );
+
+  // If there are any typed packages we should try install any missing
+  // lib defs for that package.
+  // Scanning through all typed dependencies then checking their immediate deps
+  // but do not overwrite the lib def that the project itself wants
+  if (typedMissingLibDefs.length > 0) {
+    const typedDepsLibDefsToSearchFor: Array<[string, string]> = [];
+    await Promise.all(
+      typedMissingLibDefs.map(async (typedLibDef) => {
+        const pkgJsonData = await getPackageJsonData(`${typedLibDef[2]}/package.json`);
+        const pkgJsonDeps = getPackageJsonDependencies(
+          pkgJsonData,
+          ignoreDeps,
+          ignoreDefs,
+        );
+        for (const pkgName in pkgJsonDeps) {
+          if (!libDefsToInstall.has(pkgName)) {
+            typedDepsLibDefsToSearchFor.push([pkgName, pkgJsonDeps[pkgName]]);
+          }
+        }
+      }),
+    );
+    await getLibDefsToInstall(typedDepsLibDefsToSearchFor);
+  }
 
   // Scan libdefs that are already installed
   const libDefsToUninstall = new Map();
@@ -453,23 +498,6 @@ async function installNpmLibDefs({
 
     return 1;
   } else {
-    const pnpResolver = await loadPnpResolver(await getPackageJsonData(cwd));
-
-    // If a package that's missing a flow-typed libdef has any .flow files,
-    // we'll skip generating a stub for it.
-    const untypedMissingLibDefs = [];
-    const typedMissingLibDefs = [];
-    await Promise.all(
-      unavailableLibDefs.map(async ({name: pkgName, ver: pkgVer}) => {
-        const hasFlowFiles = await pkgHasFlowFiles(cwd, pkgName, pnpResolver);
-        if (hasFlowFiles) {
-          typedMissingLibDefs.push([pkgName, pkgVer]);
-        } else {
-          untypedMissingLibDefs.push([pkgName, pkgVer]);
-        }
-      }),
-    );
-
     if (untypedMissingLibDefs.length > 0 && !skip) {
       console.log('• Generating stubs for untyped dependencies...');
       await Promise.all(
