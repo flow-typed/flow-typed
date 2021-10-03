@@ -1038,7 +1038,6 @@ describe('install (command)', () => {
               untyped: '1.2.3',
             },
           }),
-          mkdirp(path.join(FLOWPROJ_DIR, 'node_modules', 'bar')),
           mkdirp(path.join(FLOWPROJ_DIR, 'node_modules', 'flow-bin')),
           mkdirp(path.join(FLOWPROJ_DIR, 'node_modules', 'untyped')),
         ]);
@@ -1083,6 +1082,75 @@ describe('install (command)', () => {
             ),
           ),
         ).toEqual(true);
+      });
+    });
+
+    it('does not install dependencies lib defs if the dependency has no flow files', () => {
+      return fakeProjectEnv(async FLOWPROJ_DIR => {
+        // Create some dependencies
+        await Promise.all([
+          mkdirp(path.join(FLOWPROJ_DIR, 'src')),
+          writePkgJson(path.join(FLOWPROJ_DIR, 'package.json'), {
+            name: 'test',
+            devDependencies: {
+              'flow-bin': '^0.43.0',
+            },
+            dependencies: {
+              untyped: '1.2.3',
+            },
+          }),
+          mkdirp(path.join(FLOWPROJ_DIR, 'node_modules', 'flow-bin')),
+          mkdirp(path.join(FLOWPROJ_DIR, 'node_modules', 'untyped')),
+        ]);
+
+        await touchFile(
+          path.join(FLOWPROJ_DIR, 'node_modules', 'untyped', 'package.json'),
+        );
+        await writePkgJson(
+          path.join(FLOWPROJ_DIR, 'node_modules', 'untyped', 'package.json'),
+          {
+            name: 'untyped',
+            dependencies: {
+              foo: '^1.2.3',
+            },
+          },
+        );
+
+        await touchFile(path.join(FLOWPROJ_DIR, 'src', '.flowconfig'));
+        await mkdirp(path.join(FLOWPROJ_DIR, 'src', 'flow-typed'));
+
+        // Run the install command
+        await run({
+          overwrite: false,
+          verbose: false,
+          skip: false,
+          rootDir: path.join(FLOWPROJ_DIR, 'src'),
+          explicitLibDefs: [],
+        });
+
+        // Installs libdef
+        expect(
+          await fs.exists(
+            path.join(
+              FLOWPROJ_DIR,
+              'src',
+              'flow-typed',
+              'npm',
+              'untyped_vx.x.x.js',
+            ),
+          ),
+        ).toEqual(true);
+        expect(
+          await fs.exists(
+            path.join(
+              FLOWPROJ_DIR,
+              'src',
+              'flow-typed',
+              'npm',
+              'foo_v1.x.x.js',
+            ),
+          ),
+        ).toEqual(false);
       });
     });
   });
