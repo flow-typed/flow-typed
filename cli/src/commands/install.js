@@ -343,7 +343,12 @@ async function installNpmLibDefs({
           return;
         }
 
-        const libDef = await findNpmLibDef(name, ver, flowVersion, useCacheUntil);
+        const libDef = await findNpmLibDef(
+          name,
+          ver,
+          flowVersion,
+          useCacheUntil,
+        );
         if (libDef === null) {
           unavailableLibDefs.push({name, ver});
         } else {
@@ -384,8 +389,10 @@ async function installNpmLibDefs({
   if (typedMissingLibDefs.length > 0) {
     const typedDepsLibDefsToSearchFor: Array<[string, string]> = [];
     await Promise.all(
-      typedMissingLibDefs.map(async (typedLibDef) => {
-        const pkgJsonData = await getPackageJsonData(`${typedLibDef[2]}/package.json`);
+      typedMissingLibDefs.map(async typedLibDef => {
+        const pkgJsonData = await getPackageJsonData(
+          `${typedLibDef[2]}/package.json`,
+        );
         const pkgJsonDeps = getPackageJsonDependencies(
           pkgJsonData,
           ignoreDeps,
