@@ -43,7 +43,7 @@ declare module 'styled-components' {
   >;
   declare export type CreateGlobalStyleConstructor = TaggedTemplateLiteral<
     any, // eslint-disable-line flowtype/no-weak-types
-    React$ComponentType<*>
+    React$ComponentType<any>
   >;
 
   declare interface Tag<T> {
@@ -55,7 +55,7 @@ declare module 'styled-components' {
     removeRules(id: string): void;
     css(): string;
     toHTML(additionalAttrs: ?string): string;
-    toElement(): React$Element<*>;
+    toElement(): React$Element<any>;
     clone(): Tag<T>;
     sealed: boolean;
   }

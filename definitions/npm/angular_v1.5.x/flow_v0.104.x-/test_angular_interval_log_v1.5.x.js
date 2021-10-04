@@ -67,7 +67,7 @@ describe('angular $Interval', () => {
 
   it('returns back the angular promise', () => {
     function testInterval($interval: $Interval) {
-      ($interval(() => {}, 0): AngularPromise<*>);
+      ($interval(() => {}, 0): AngularPromise<any>);
     }
   });
 });

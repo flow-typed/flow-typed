@@ -7,17 +7,17 @@ import type {
   Cancel,
   AxiosPromise,
 } from 'axios';
-(axios.get('foo'): Promise<*>);
+(axios.get('foo'): Promise<any>);
 (axios.post('bar', {}, {
   headers: {
     foo: 'asdf',
   },
   xsrfCookieName: 'cookie',
-}): Promise<*>);
+}): Promise<any>);
 // $FlowExpectedError
-(axios.post(123): Promise<*>);
+(axios.post(123): Promise<any>);
 
-(axios('url'): Promise<*>);
+(axios('url'): Promise<any>);
 
 const client = axios.create();
 

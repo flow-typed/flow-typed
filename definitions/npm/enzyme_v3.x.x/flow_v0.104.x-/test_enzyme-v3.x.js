@@ -91,7 +91,7 @@ describe('Wrapper', () => {
 
   it('find', () => {
     // Test selector functionality
-    declare class ClassComponent extends React.Component<*, *> {}
+    declare class ClassComponent extends React.Component<any, any> {}
     const StatelessComponent = () => <div />;
 
     shallow(<div />).find(ClassComponent);
@@ -126,7 +126,7 @@ describe('Wrapper', () => {
   });
 
   it('instance', () => {
-    class TestInstance extends React.Component<*> {
+    class TestInstance extends React.Component<any> {
       method = () => 'test';
     }
 

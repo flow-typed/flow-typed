@@ -25,11 +25,11 @@ describe("channel", () => {
   it("must passes when first argument buffer or nothing", () => {
     const ch = channel();
 
-    (ch: Channel<*>);
+    (ch: Channel<any>);
 
     const ch2 = channel(buffers.none());
 
-    (ch2: Channel<*>);
+    (ch2: Channel<any>);
   });
 
   it("must raises an error first argument isn't buffer or nothing", () => {

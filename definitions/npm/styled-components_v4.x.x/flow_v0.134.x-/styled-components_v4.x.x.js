@@ -34,7 +34,7 @@ declare module 'styled-components' {
 
   declare export type CSSConstructor = TaggedTemplateLiteral<any, CSSRules> // eslint-disable-line flowtype/no-weak-types
   declare export type KeyFramesConstructor = TaggedTemplateLiteral<any, KeyFrames> // eslint-disable-line flowtype/no-weak-types
-  declare export type CreateGlobalStyleConstructor = TaggedTemplateLiteral<any, React$ComponentType<*>> // eslint-disable-line flowtype/no-weak-types
+  declare export type CreateGlobalStyleConstructor = TaggedTemplateLiteral<any, React$ComponentType<any>> // eslint-disable-line flowtype/no-weak-types
 
   declare interface Tag<T> {
     styleTag: HTMLStyleElement | null;
@@ -45,7 +45,7 @@ declare module 'styled-components' {
     removeRules(id: string): void;
     css(): string;
     toHTML(additionalAttrs: ?string): string;
-    toElement(): React$Element<*>;
+    toElement(): React$Element<any>;
     clone(): Tag<T>;
     sealed: boolean;
   }

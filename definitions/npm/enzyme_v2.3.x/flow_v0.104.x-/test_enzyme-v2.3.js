@@ -23,7 +23,7 @@ shallow(<div />).findWhere((x: ShallowWrapper) => true);
 
 // Test selector functionality
 
-declare class ClassComponent extends React.Component<*, *> {}
+declare class ClassComponent extends React.Component<any, any> {}
 
 const StatelessComponent = () => <div />;
 

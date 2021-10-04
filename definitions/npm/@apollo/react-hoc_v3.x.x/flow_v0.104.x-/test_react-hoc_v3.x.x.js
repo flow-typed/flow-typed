@@ -131,7 +131,7 @@ it("works with class component with it's own variable Props specified at the end
   const withFancyData2: OperationComponent<
     IQuery,
     Cmplx2OwnProps,
-    *,
+    any,
     Cmplx2ComponentProps
   > = graphql(query);
   const Cmplx2WithData = withFancyData2(Cmplx2Component);

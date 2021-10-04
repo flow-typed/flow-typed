@@ -702,7 +702,7 @@ describe("react-query", () => {
     }): string);
     // $FlowExpectedError[incompatible-call]
     (queryClient.setQueryData<string>("key", (old) => 10): string);
-    const queryState = queryClient.getQueryState<number, *>("key");
+    const queryState = queryClient.getQueryState<number, any>("key");
     (queryState?.data: ?number);
     (queryClient.removeQueries: () => void);
     (queryClient.removeQueries("key", dummyQueryFilters): void);

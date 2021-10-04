@@ -37,7 +37,7 @@ const form = (): React$Element<any> => (
   </form>
 );
 
-const connected: React.ComponentType<*> = reduxForm({
+const connected: React.ComponentType<any> = reduxForm({
   form: 'name',
   fields: ['foobar']
 })(form);
