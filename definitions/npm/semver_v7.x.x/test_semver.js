@@ -2,6 +2,7 @@
 
 import { describe, it } from 'flow-typed-test';
 import semver, {Comparator, Range, SemVer} from 'semver';
+import semverPreload from 'semver/preload';
 
 const optionOne = true;
 const optionTwo = {
@@ -96,5 +97,9 @@ describe('semver', () => {
 
     // range object as a ctor arg is okay
     new Range(range);
+  });
+
+  it('exports the same functions from preload', () => {
+    semverPreload.valid('foobar');
   });
 });

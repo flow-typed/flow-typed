@@ -199,6 +199,16 @@ declare module "semver" {
   declare function intersects(
     range: Range
   ): boolean;
+  declare function simplify(
+    ranges: Array<string>,
+    range: string | Range,
+    options?: Options,
+  ): string | Range;
+  declare function subset(
+      sub: string | Range,
+      dom: string | Range,
+      options?: Options,
+  ): boolean;
 
   // Coercion
   declare function coerce(
@@ -212,4 +222,8 @@ declare module "semver" {
     range: string | Range,
     options?: Options
   ): Array<Array<string>>;
+}
+
+declare module "semver/preload" {
+  declare module.exports: $Exports<"semver">;
 }
