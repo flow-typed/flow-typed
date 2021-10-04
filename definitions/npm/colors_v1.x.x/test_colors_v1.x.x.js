@@ -19,13 +19,13 @@ describe("The `colors` safe API", () => {
   describe("The `enable` method", () => {
     it("should not accept parameters", () => {
       colors.enable();
-      // $FlowExpectedError
+      // $FlowExpectedError[extra-arg]
       colors.enable("");
     });
 
     it("should return void", () => {
       (colors.enable(): void);
-      // $FlowExpectedError
+      // $FlowExpectedError[incompatible-cast]
       (colors.enable(): string);
     });
   });
@@ -33,13 +33,13 @@ describe("The `colors` safe API", () => {
   describe("The `disable` method", () => {
     it("should not accept parameters", () => {
       colors.disable();
-      // $FlowExpectedError
+      // $FlowExpectedError[extra-arg]
       colors.disable("");
     });
 
     it("should return void", () => {
       (colors.disable(): void);
-      // $FlowExpectedError
+      // $FlowExpectedError[incompatible-cast]
       (colors.disable(): string);
     });
   });
@@ -47,13 +47,13 @@ describe("The `colors` safe API", () => {
   describe("The `disable` method", () => {
     it("should not accept parameters", () => {
       colors.disable();
-      // $FlowExpectedError
+      // $FlowExpectedError[extra-arg]
       colors.disable("");
     });
 
     it("should return void", () => {
       (colors.disable(): void);
-      // $FlowExpectedError
+      // $FlowExpectedError[incompatible-cast]
       (colors.disable(): string);
     });
   });
@@ -61,13 +61,13 @@ describe("The `colors` safe API", () => {
   describe("The `setTheme` method", () => {
     it("should accept a `theme` Object as parameter", () => {
       colors.setTheme({});
-      // $FlowExpectedError
+      // $FlowExpectedError[incompatible-call]
       colors.setTheme("");
     });
 
     it("should return void", () => {
       (colors.setTheme({}): void);
-      // $FlowExpectedError
+      // $FlowExpectedError[incompatible-cast]
       (colors.setTheme({}): string);
     });
   });
@@ -75,13 +75,13 @@ describe("The `colors` safe API", () => {
   describe("The `strip` method", () => {
     it("should accept a String as parameter", () => {
       colors.strip("");
-      // $FlowExpectedError
+      // $FlowExpectedError[incompatible-call]
       colors.strip();
     });
 
     it("should return a String", () => {
       (colors.strip(""): string);
-      // $FlowExpectedError
+      // $FlowExpectedError[incompatible-cast]
       (colors.strip(""): void);
     });
   });
@@ -89,13 +89,13 @@ describe("The `colors` safe API", () => {
   describe("The `stripColors` method", () => {
     it("should accept a String as parameter", () => {
       colors.stripColors("");
-      // $FlowExpectedError
+      // $FlowExpectedError[incompatible-call]
       colors.stripColors();
     });
 
     it("should return a String", () => {
       (colors.stripColors(""): string);
-      // $FlowExpectedError
+      // $FlowExpectedError[incompatible-cast]
       (colors.stripColors(""): void);
     });
   });
@@ -103,13 +103,13 @@ describe("The `colors` safe API", () => {
   describe("The `black` method", () => {
     it("should accept a String as parameter", () => {
       colors.black("");
-      // $FlowExpectedError
+      // $FlowExpectedError[incompatible-call]
       colors.black();
     });
 
     it("should return a String", () => {
       (colors.black(""): string);
-      // $FlowExpectedError
+      // $FlowExpectedError[incompatible-cast]
       (colors.black(""): void);
     });
   });
@@ -117,13 +117,13 @@ describe("The `colors` safe API", () => {
   describe("The `red` method", () => {
     it("should accept a String as parameter", () => {
       colors.red("");
-      // $FlowExpectedError
+      // $FlowExpectedError[incompatible-call]
       colors.red();
     });
 
     it("should return a String", () => {
       (colors.red(""): string);
-      // $FlowExpectedError
+      // $FlowExpectedError[incompatible-cast]
       (colors.red(""): void);
     });
   });
@@ -131,13 +131,13 @@ describe("The `colors` safe API", () => {
   describe("The `green` method", () => {
     it("should accept a String as parameter", () => {
       colors.green("");
-      // $FlowExpectedError
+      // $FlowExpectedError[incompatible-call]
       colors.green();
     });
 
     it("should return a String", () => {
       (colors.green(""): string);
-      // $FlowExpectedError
+      // $FlowExpectedError[incompatible-cast]
       (colors.green(""): void);
     });
   });
@@ -145,13 +145,13 @@ describe("The `colors` safe API", () => {
   describe("The `yellow` method", () => {
     it("should accept a String as parameter", () => {
       colors.yellow("");
-      // $FlowExpectedError
+      // $FlowExpectedError[incompatible-call]
       colors.yellow();
     });
 
     it("should return a String", () => {
       (colors.yellow(""): string);
-      // $FlowExpectedError
+      // $FlowExpectedError[incompatible-cast]
       (colors.yellow(""): void);
     });
   });
@@ -159,13 +159,13 @@ describe("The `colors` safe API", () => {
   describe("The `blue` method", () => {
     it("should accept a String as parameter", () => {
       colors.blue("");
-      // $FlowExpectedError
+      // $FlowExpectedError[incompatible-call]
       colors.blue();
     });
 
     it("should return a String", () => {
       (colors.blue(""): string);
-      // $FlowExpectedError
+      // $FlowExpectedError[incompatible-cast]
       (colors.blue(""): void);
     });
   });
@@ -173,13 +173,13 @@ describe("The `colors` safe API", () => {
   describe("The `magenta` method", () => {
     it("should accept a String as parameter", () => {
       colors.magenta("");
-      // $FlowExpectedError
+      // $FlowExpectedError[incompatible-call]
       colors.magenta();
     });
 
     it("should return a String", () => {
       (colors.magenta(""): string);
-      // $FlowExpectedError
+      // $FlowExpectedError[incompatible-cast]
       (colors.magenta(""): void);
     });
   });
@@ -187,13 +187,13 @@ describe("The `colors` safe API", () => {
   describe("The `cyan` method", () => {
     it("should accept a String as parameter", () => {
       colors.cyan("");
-      // $FlowExpectedError
+      // $FlowExpectedError[incompatible-call]
       colors.cyan();
     });
 
     it("should return a String", () => {
       (colors.cyan(""): string);
-      // $FlowExpectedError
+      // $FlowExpectedError[incompatible-cast]
       (colors.cyan(""): void);
     });
   });
@@ -201,13 +201,13 @@ describe("The `colors` safe API", () => {
   describe("The `white` method", () => {
     it("should accept a String as parameter", () => {
       colors.white("");
-      // $FlowExpectedError
+      // $FlowExpectedError[incompatible-call]
       colors.white();
     });
 
     it("should return a String", () => {
       (colors.white(""): string);
-      // $FlowExpectedError
+      // $FlowExpectedError[incompatible-cast]
       (colors.white(""): void);
     });
   });
@@ -215,13 +215,13 @@ describe("The `colors` safe API", () => {
   describe("The `gray` method", () => {
     it("should accept a String as parameter", () => {
       colors.gray("");
-      // $FlowExpectedError
+      // $FlowExpectedError[incompatible-call]
       colors.gray();
     });
 
     it("should return a String", () => {
       (colors.gray(""): string);
-      // $FlowExpectedError
+      // $FlowExpectedError[incompatible-cast]
       (colors.gray(""): void);
     });
   });
@@ -229,13 +229,13 @@ describe("The `colors` safe API", () => {
   describe("The `grey` method", () => {
     it("should accept a String as parameter", () => {
       colors.grey("");
-      // $FlowExpectedError
+      // $FlowExpectedError[incompatible-call]
       colors.grey();
     });
 
     it("should return a String", () => {
       (colors.grey(""): string);
-      // $FlowExpectedError
+      // $FlowExpectedError[incompatible-cast]
       (colors.grey(""): void);
     });
   });
@@ -243,13 +243,13 @@ describe("The `colors` safe API", () => {
   describe("The `bgBlack` method", () => {
     it("should accept a String as parameter", () => {
       colors.bgBlack("");
-      // $FlowExpectedError
+      // $FlowExpectedError[incompatible-call]
       colors.bgBlack();
     });
 
     it("should return a String", () => {
       (colors.bgBlack(""): string);
-      // $FlowExpectedError
+      // $FlowExpectedError[incompatible-cast]
       (colors.bgBlack(""): void);
     });
   });
@@ -257,13 +257,13 @@ describe("The `colors` safe API", () => {
   describe("The `bgRed` method", () => {
     it("should accept a String as parameter", () => {
       colors.bgRed("");
-      // $FlowExpectedError
+      // $FlowExpectedError[incompatible-call]
       colors.bgRed();
     });
 
     it("should return a String", () => {
       (colors.bgRed(""): string);
-      // $FlowExpectedError
+      // $FlowExpectedError[incompatible-cast]
       (colors.bgRed(""): void);
     });
   });
@@ -271,13 +271,13 @@ describe("The `colors` safe API", () => {
   describe("The `bgGreen` method", () => {
     it("should accept a String as parameter", () => {
       colors.bgGreen("");
-      // $FlowExpectedError
+      // $FlowExpectedError[incompatible-call]
       colors.bgGreen();
     });
 
     it("should return a String", () => {
       (colors.bgGreen(""): string);
-      // $FlowExpectedError
+      // $FlowExpectedError[incompatible-cast]
       (colors.bgGreen(""): void);
     });
   });
@@ -285,13 +285,13 @@ describe("The `colors` safe API", () => {
   describe("The `bgYellow` method", () => {
     it("should accept a String as parameter", () => {
       colors.bgYellow("");
-      // $FlowExpectedError
+      // $FlowExpectedError[incompatible-call]
       colors.bgYellow();
     });
 
     it("should return a String", () => {
       (colors.bgYellow(""): string);
-      // $FlowExpectedError
+      // $FlowExpectedError[incompatible-cast]
       (colors.bgYellow(""): void);
     });
   });
@@ -299,13 +299,13 @@ describe("The `colors` safe API", () => {
   describe("The `bgBlue` method", () => {
     it("should accept a String as parameter", () => {
       colors.bgBlue("");
-      // $FlowExpectedError
+      // $FlowExpectedError[incompatible-call]
       colors.bgBlue();
     });
 
     it("should return a String", () => {
       (colors.bgBlue(""): string);
-      // $FlowExpectedError
+      // $FlowExpectedError[incompatible-cast]
       (colors.bgBlue(""): void);
     });
   });
@@ -313,13 +313,13 @@ describe("The `colors` safe API", () => {
   describe("The `bgMagenta` method", () => {
     it("should accept a String as parameter", () => {
       colors.bgMagenta("");
-      // $FlowExpectedError
+      // $FlowExpectedError[incompatible-call]
       colors.bgMagenta();
     });
 
     it("should return a String", () => {
       (colors.bgMagenta(""): string);
-      // $FlowExpectedError
+      // $FlowExpectedError[incompatible-cast]
       (colors.bgMagenta(""): void);
     });
   });
@@ -327,13 +327,13 @@ describe("The `colors` safe API", () => {
   describe("The `bgCyan` method", () => {
     it("should accept a String as parameter", () => {
       colors.bgCyan("");
-      // $FlowExpectedError
+      // $FlowExpectedError[incompatible-call]
       colors.bgCyan();
     });
 
     it("should return a String", () => {
       (colors.bgCyan(""): string);
-      // $FlowExpectedError
+      // $FlowExpectedError[incompatible-cast]
       (colors.bgCyan(""): void);
     });
   });
@@ -341,13 +341,13 @@ describe("The `colors` safe API", () => {
   describe("The `bgWhite` method", () => {
     it("should accept a String as parameter", () => {
       colors.bgWhite("");
-      // $FlowExpectedError
+      // $FlowExpectedError[incompatible-call]
       colors.bgWhite();
     });
 
     it("should return a String", () => {
       (colors.bgWhite(""): string);
-      // $FlowExpectedError
+      // $FlowExpectedError[incompatible-cast]
       (colors.bgWhite(""): void);
     });
   });
@@ -355,13 +355,13 @@ describe("The `colors` safe API", () => {
   describe("The `reset` method", () => {
     it("should accept a String as parameter", () => {
       colors.reset("");
-      // $FlowExpectedError
+      // $FlowExpectedError[incompatible-call]
       colors.reset();
     });
 
     it("should return a String", () => {
       (colors.reset(""): string);
-      // $FlowExpectedError
+      // $FlowExpectedError[incompatible-cast]
       (colors.reset(""): void);
     });
   });
@@ -369,13 +369,13 @@ describe("The `colors` safe API", () => {
   describe("The `bold` method", () => {
     it("should accept a String as parameter", () => {
       colors.bold("");
-      // $FlowExpectedError
+      // $FlowExpectedError[incompatible-call]
       colors.bold();
     });
 
     it("should return a String", () => {
       (colors.bold(""): string);
-      // $FlowExpectedError
+      // $FlowExpectedError[incompatible-cast]
       (colors.bold(""): void);
     });
   });
@@ -383,13 +383,13 @@ describe("The `colors` safe API", () => {
   describe("The `dim` method", () => {
     it("should accept a String as parameter", () => {
       colors.dim("");
-      // $FlowExpectedError
+      // $FlowExpectedError[incompatible-call]
       colors.dim();
     });
 
     it("should return a String", () => {
       (colors.dim(""): string);
-      // $FlowExpectedError
+      // $FlowExpectedError[incompatible-cast]
       (colors.dim(""): void);
     });
   });
@@ -397,13 +397,13 @@ describe("The `colors` safe API", () => {
   describe("The `italic` method", () => {
     it("should accept a String as parameter", () => {
       colors.italic("");
-      // $FlowExpectedError
+      // $FlowExpectedError[incompatible-call]
       colors.italic();
     });
 
     it("should return a String", () => {
       (colors.italic(""): string);
-      // $FlowExpectedError
+      // $FlowExpectedError[incompatible-cast]
       (colors.italic(""): void);
     });
   });
@@ -411,13 +411,13 @@ describe("The `colors` safe API", () => {
   describe("The `underline` method", () => {
     it("should accept a String as parameter", () => {
       colors.underline("");
-      // $FlowExpectedError
+      // $FlowExpectedError[incompatible-call]
       colors.underline();
     });
 
     it("should return a String", () => {
       (colors.underline(""): string);
-      // $FlowExpectedError
+      // $FlowExpectedError[incompatible-cast]
       (colors.underline(""): void);
     });
   });
@@ -425,13 +425,13 @@ describe("The `colors` safe API", () => {
   describe("The `inverse` method", () => {
     it("should accept a String as parameter", () => {
       colors.inverse("");
-      // $FlowExpectedError
+      // $FlowExpectedError[incompatible-call]
       colors.inverse();
     });
 
     it("should return a String", () => {
       (colors.inverse(""): string);
-      // $FlowExpectedError
+      // $FlowExpectedError[incompatible-cast]
       (colors.inverse(""): void);
     });
   });
@@ -439,13 +439,13 @@ describe("The `colors` safe API", () => {
   describe("The `hidden` method", () => {
     it("should accept a String as parameter", () => {
       colors.hidden("");
-      // $FlowExpectedError
+      // $FlowExpectedError[incompatible-call]
       colors.hidden();
     });
 
     it("should return a String", () => {
       (colors.hidden(""): string);
-      // $FlowExpectedError
+      // $FlowExpectedError[incompatible-cast]
       (colors.hidden(""): void);
     });
   });
@@ -453,13 +453,13 @@ describe("The `colors` safe API", () => {
   describe("The `strikethrough` method", () => {
     it("should accept a String as parameter", () => {
       colors.strikethrough("");
-      // $FlowExpectedError
+      // $FlowExpectedError[incompatible-call]
       colors.strikethrough();
     });
 
     it("should return a String", () => {
       (colors.strikethrough(""): string);
-      // $FlowExpectedError
+      // $FlowExpectedError[incompatible-cast]
       (colors.strikethrough(""): void);
     });
   });
@@ -467,13 +467,13 @@ describe("The `colors` safe API", () => {
   describe("The `rainbow` method", () => {
     it("should accept a String as parameter", () => {
       colors.rainbow("");
-      // $FlowExpectedError
+      // $FlowExpectedError[incompatible-call]
       colors.rainbow();
     });
 
     it("should return a String", () => {
       (colors.rainbow(""): string);
-      // $FlowExpectedError
+      // $FlowExpectedError[incompatible-cast]
       (colors.rainbow(""): void);
     });
   });
@@ -481,13 +481,13 @@ describe("The `colors` safe API", () => {
   describe("The `zebra` method", () => {
     it("should accept a String as parameter", () => {
       colors.zebra("");
-      // $FlowExpectedError
+      // $FlowExpectedError[incompatible-call]
       colors.zebra();
     });
 
     it("should return a String", () => {
       (colors.zebra(""): string);
-      // $FlowExpectedError
+      // $FlowExpectedError[incompatible-cast]
       (colors.zebra(""): void);
     });
   });
@@ -495,13 +495,13 @@ describe("The `colors` safe API", () => {
   describe("The `america` method", () => {
     it("should accept a String as parameter", () => {
       colors.america("");
-      // $FlowExpectedError
+      // $FlowExpectedError[incompatible-call]
       colors.america();
     });
 
     it("should return a String", () => {
       (colors.america(""): string);
-      // $FlowExpectedError
+      // $FlowExpectedError[incompatible-cast]
       (colors.america(""): void);
     });
   });
@@ -509,13 +509,13 @@ describe("The `colors` safe API", () => {
   describe("The `trap` method", () => {
     it("should accept a String as parameter", () => {
       colors.trap("");
-      // $FlowExpectedError
+      // $FlowExpectedError[incompatible-call]
       colors.trap();
     });
 
     it("should return a String", () => {
       (colors.trap(""): string);
-      // $FlowExpectedError
+      // $FlowExpectedError[incompatible-cast]
       (colors.trap(""): void);
     });
   });
@@ -523,13 +523,13 @@ describe("The `colors` safe API", () => {
   describe("The `random` method", () => {
     it("should accept a String as parameter", () => {
       colors.random("");
-      // $FlowExpectedError
+      // $FlowExpectedError[incompatible-call]
       colors.random();
     });
 
     it("should return a String", () => {
       (colors.random(""): string);
-      // $FlowExpectedError
+      // $FlowExpectedError[incompatible-cast]
       (colors.random(""): void);
     });
   });
@@ -537,13 +537,13 @@ describe("The `colors` safe API", () => {
   describe("The `zalgo` method", () => {
     it("should accept a String as parameter", () => {
       colors.zalgo("");
-      // $FlowExpectedError
+      // $FlowExpectedError[incompatible-call]
       colors.zalgo();
     });
 
     it("should return a String", () => {
       (colors.zalgo(""): string);
-      // $FlowExpectedError
+      // $FlowExpectedError[incompatible-cast]
       (colors.zalgo(""): void);
     });
   });
