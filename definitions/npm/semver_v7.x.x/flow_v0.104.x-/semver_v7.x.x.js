@@ -199,7 +199,7 @@ declare module "semver" {
   declare function intersects(
     range: Range
   ): boolean;
-  declare function simplify(
+  declare function simplifyRange(
     ranges: Array<string>,
     range: string | Range,
     options?: Options,
