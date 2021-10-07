@@ -2,6 +2,7 @@
 
 import { describe, it } from 'flow-typed-test';
 import semver, {Comparator, Range, SemVer} from 'semver';
+import semverPreload from 'semver/preload';
 
 const optionOne = true;
 const optionTwo = {
@@ -53,6 +54,7 @@ describe('semver', () => {
     semver.rcompareIdentifiers('9.8.7', new SemVer('1.2.3'));
     semver.rcompare('9.8.7', new SemVer('1.2.3'));
     semver.diff('9.8.7', new SemVer('1.2.3'));
+    semver.minVersion('^1.2.x');
 
     semver.validRange('3.x || 4.x');
     semver.validRange(new Range('3.x || 4.x'));
@@ -72,6 +74,7 @@ describe('semver', () => {
     semver.toComparators(new Range('3.x || 4.x'), optionTwo);
 
     (semver.coerce('4.6.3.9.2-alpha2'): ?SemVer);
+    (semver.coerce('4.6.3.9.2-alpha2', {rtl: true}): ?SemVer);
 
     // $FlowExpectedError[incompatible-call]
     semver.cmp('1.2.3', '> ', '1.2.4');
@@ -94,5 +97,9 @@ describe('semver', () => {
 
     // range object as a ctor arg is okay
     new Range(range);
+  });
+
+  it('exports the same functions from preload', () => {
+    semverPreload.valid('foobar');
   });
 });
