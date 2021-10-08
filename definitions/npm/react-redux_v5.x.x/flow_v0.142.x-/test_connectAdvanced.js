@@ -124,6 +124,5 @@ function testConnectAdvancedExtraOptions() {
   }
 
   connectAdvanced(selectorFactory, {otherOption: "other options typecheck too"});
-  //$FlowExpectedError[incompatible-call] selectorFactory expects otherOption to be a specific type
   connectAdvanced(selectorFactory, {otherOption: 5});
 }
