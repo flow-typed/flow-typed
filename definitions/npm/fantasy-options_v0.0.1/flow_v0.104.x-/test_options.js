@@ -5,10 +5,10 @@ import Option from 'fantasy-options';
 
 const { Some, None } = Option;
 
-const testFoo = (name: string): OptionType<*> =>
+const testFoo = (name: string): OptionType<any> =>
   name === 'foo' ? Some('correct') : None;
 
-let f: OptionType<*> = testFoo('bar');
+let f: OptionType<any> = testFoo('bar');
 
 // $FlowExpectedError
 const testFooError = (name: string): OptionType<string> =>

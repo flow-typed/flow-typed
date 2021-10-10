@@ -21,7 +21,7 @@ const z: {a: string, ...} = Either.of({a: 'alpha'}).merge();
 
 const concatC = a => b => a.concat(b);
 
-const applicative: Either<*, Array<string>> = Either.of(concatC)
+const applicative: Either<any, Array<string>> = Either.of(concatC)
   .ap(Either.of(['a']))
   .ap(Either.of(['b']));
 
@@ -32,12 +32,12 @@ const cata = Either.of('test').cata({
   Left: l => new Error(l),
   Right: r => r.concat('test')
 });
-const swap: Either<*, string> = Either.Left('swapped').swap();
-const bimap1: Either<number, *> = Either.Left('1').bimap(x => parseInt(x, 10), x => x);
-const bimap2: Either<*, number> = Either.Right('1').bimap(x => x, x => parseInt(x, 10));
-const leftMap: Either<number, *> = Either.Left('1').leftMap(x => parseInt(x, 10));
-const orElse: Either<number, *> = Either.Left('1').orElse(l => Either.Left(parseInt(l, 10)));
-const concat: Either<*, string[]> = Either.Right(['a']).concat(Either.of(['b']));
+const swap: Either<any, string> = Either.Left('swapped').swap();
+const bimap1: Either<number, any> = Either.Left('1').bimap(x => parseInt(x, 10), x => x);
+const bimap2: Either<any, number> = Either.Right('1').bimap(x => x, x => parseInt(x, 10));
+const leftMap: Either<number, any> = Either.Left('1').leftMap(x => parseInt(x, 10));
+const orElse: Either<number, any> = Either.Left('1').orElse(l => Either.Left(parseInt(l, 10)));
+const concat: Either<any, string[]> = Either.Right(['a']).concat(Either.of(['b']));
 
 // --- Errors
 // $FlowExpectedError
@@ -62,10 +62,10 @@ const _cata = Either.of('test').cata({
   ARight: r => r.concat('test')
 });
 // $FlowExpectedError
-const _bimap: Either<*, number> = Either.Right('1').bimap(x => x);
+const _bimap: Either<any, number> = Either.Right('1').bimap(x => x);
 // $FlowExpectedError
-const _leftMap: Either<number, *> = Either.Left('1').leftMap(x => x);
+const _leftMap: Either<number, any> = Either.Left('1').leftMap(x => x);
 // $FlowExpectedError
-const _orElse: Either<number, *> = Either.Left('1').orElse(l => l);
+const _orElse: Either<number, any> = Either.Left('1').orElse(l => l);
 // $FlowExpectedError
-const _concat: Either<*, string[]> = Either.Right(1).concat(['b']);
+const _concat: Either<any, string[]> = Either.Right(1).concat(['b']);

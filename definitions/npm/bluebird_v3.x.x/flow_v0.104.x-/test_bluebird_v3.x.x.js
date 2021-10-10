@@ -3,7 +3,7 @@ import Bluebird from 'bluebird';
 import type { Disposable } from 'bluebird';
 
 const defer: Bluebird.Defer = Bluebird.defer();
-const promise: Bluebird<*> = defer.promise;
+const promise: Bluebird<any> = defer.promise;
 (promise.isFulfilled(): boolean);
 promise.reflect().then(inspection => {
   (inspection.isCancelled(): boolean);

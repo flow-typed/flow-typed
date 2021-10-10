@@ -283,6 +283,8 @@ declare module "react-redux" {
 
   declare export function batch(() => void): void
 
+  declare export function shallowEqual<T>(left: T, right: any): boolean
+
   declare export default {
     Provider: typeof Provider,
     createProvider: typeof createProvider,

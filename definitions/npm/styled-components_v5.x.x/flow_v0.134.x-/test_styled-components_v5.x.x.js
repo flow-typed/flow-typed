@@ -98,7 +98,7 @@ describe('styled builtins', () => {
   });
 
   it('should accept style props', () => {
-    const Span: StyledComponent<{ color: string, ... }, *, *> = styled.span`
+    const Span: StyledComponent<{ color: string, ... }, any, any> = styled.span`
       color: ${props => props.color};
     `;
 
@@ -110,8 +110,8 @@ describe('styled builtins', () => {
         background?: string,
         ...
       },
-      *,
-      *
+      any,
+      any
     > = styled.div`
       color: ${props => props.color};
     `;
@@ -121,7 +121,7 @@ describe('styled builtins', () => {
   });
 
   it('should validate template props', () => {
-    const Span: StyledComponent<{ color: string, ... }, *, *> = styled.span`
+    const Span: StyledComponent<{ color: string, ... }, any, any> = styled.span`
       color: ${// $FlowExpectedError[prop-missing] - background is not in props
       props => props.background};
     `;
@@ -131,14 +131,14 @@ describe('styled builtins', () => {
     const Span: StyledComponent<
       { color?: string, ... },
       { accent: string, ... },
-      *
+      any
     > = styled.span`
       color: ${props => props.color || props.theme.accent};
     `;
   });
 
   it('supports common props that styled components accept', () => {
-    const Span: StyledComponent<{ color: string, ... }, *, *> = styled.span`
+    const Span: StyledComponent<{ color: string, ... }, any, any> = styled.span`
       color: ${props => props.color};
     `;
 
@@ -150,7 +150,7 @@ describe('styled builtins', () => {
   });
 
   it('exposes common props inside interpolations', () => {
-    const Span: StyledComponent<{ color: string, ... }, *, *> = styled.span`
+    const Span: StyledComponent<{ color: string, ... }, any, any> = styled.span`
       color: ${props => props.color};
       /* People reading this test: this is a horrible way to dynamically scale your component! */
       height: calc(${props => React.Children.count(props.children)} * 20px);
@@ -161,7 +161,7 @@ describe('styled builtins', () => {
     const Span: StyledComponent<
       { color?: string, ... },
       { accent: string, ... },
-      *
+      any
     > = styled.span`
       color: ${// $FlowExpectedError[prop-missing] - oops, someone meant accent, not primary
       props => props.color || props.theme.primary};
@@ -204,7 +204,7 @@ describe('styled builtins', () => {
   it('should destructure a prop, as a function within styled(Component)', () => {
     const Div = ({ ...rest }) => <div {...rest} />;
 
-    const StyledDiv: StyledComponent<{ color: string, ... }, *, *> = styled(Div)(({ color }) => `
+    const StyledDiv: StyledComponent<{ color: string, ... }, any, any> = styled(Div)(({ color }) => `
       color: ${color};
     `);
 
@@ -215,7 +215,7 @@ describe('styled builtins', () => {
 // @NOTE: Not sure how to better test this
 describe('createGlobalStyle & GlobalStyles', () => {
   it('can be created and rendered', () => {
-    const GlobalStyles: React.ComponentType<*> = createGlobalStyle``;
+    const GlobalStyles: React.ComponentType<any> = createGlobalStyle``;
 
     const App = () => (
       <div>
@@ -357,7 +357,7 @@ describe('css generator', () => {
       }
     }
 
-    const FuncComp: React.ComponentType<*> = () => null;
+    const FuncComp: React.ComponentType<any> = () => null;
 
     // $FlowExpectedError[incompatible-call] - we don't know how to interpolate non-styled-components components
     const SComp1 = styled.div`
