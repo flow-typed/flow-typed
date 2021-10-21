@@ -38,25 +38,25 @@
     "prettier": "^1.19.1",
     "rimraf": "^3.0.2",
     "semver": "7.3.2",
-    "table": "^5.4.6",
-    "unzipper": "^0.10.8",
+    "table": "^6.7.2",
+    "unzipper": "^0.10.11",
     "which": "^2.0.2",
-    "yargs": "^15.1.0"
+    "yargs": "^17.2.1"
   },
   "devDependencies": {
-    "@babel/cli": "^7.8.4",
-    "@babel/core": "^7.8.4",
-    "@babel/preset-env": "^7.8.4",
-    "@babel/preset-flow": "^7.8.3",
+    "@babel/cli": "^7.15.7",
+    "@babel/core": "^7.15.7",
+    "@babel/preset-env": "^7.15.7",
+    "@babel/preset-flow": "^7.14.5",
     "babel-eslint": "^10.0.3",
-    "babel-jest": "^25.1.0",
-    "eslint": "^6.8.0",
+    "babel-jest": "^27.3.1",
+    "eslint": "^7.32.0",
     "eslint-config-prettier": "^6.10.1",
     "eslint-plugin-fb-flow": "^0.0.1",
     "eslint-plugin-flowtype": "^4.6.0",
     "eslint-plugin-prettier": "^3.1.2",
     "flow-bin": "^0.144.0",
-    "jest": "^25.1.0"
+    "jest": "^27.3.1"
   },
   "keywords": [
     "flow",
