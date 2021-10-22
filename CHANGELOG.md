@@ -5,6 +5,30 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [3.4.0] 2021-10-20
+
+### Added
+- `quick_run_def_tests` now supports arguments (#4064)
+- Add `eslint-plugin-fb-flow` ESLint plugin (#4114)
+- New `create-def` command and script for easier libdef creation (#4125)
+- Add support for .ignore file (#4133)
+
+### Changed
+- Add package health badge to the README (#4049)
+- Update CI node versions in Github Actions to 12 & 14 (#4082)
+
+### Fixed
+- Fix flow-typed sometimes writing an empty file (#4011)
+- Bump y18n from 4.0.0 to 4.0.1 (#4054)
+- Bump lodash from 4.17.19 to 4.17.21 (#4077)
+- Bump hosted-git-info from 2.7.1 to 2.8.9 (#4079)
+- Bump browserslist from 4.8.7 to 4.16.6 (#4081)
+- Bump ws from 7.2.1 to 7.4.6 (#4084)
+- Bump normalize-url from 4.5.0 to 4.5.1 (#4090)
+- Bump glob-parent from 5.0.0 to 5.1.2 (#4091)
+- Bump path-parse from 1.0.6 to 1.0.7 (#4118)
+- Bump tmpl from 1.0.4 to 1.0.5 (#4139)
+
 ## [3.3.1] 2021-02-17
 
 ### Fixed
