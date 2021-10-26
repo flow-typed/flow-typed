@@ -45,11 +45,11 @@ describe("The `copy` function", () => {
   });
 
   it("should error on erroneous usage", () => {
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
     fs.copy(src).then(() => {});
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
     fs.copy(src);
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
     fs.copy(
       src,
       dest,
@@ -75,12 +75,12 @@ describe("The `copySync` function", () => {
   });
 
   it("should error on erroneous usage", () => {
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
     fs.copySync(src);
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
     fs.copy(src).then(() => {});
     fs.copySync(src, dest, {
-      // $FlowExpectedError
+      // $FlowExpectedError[incompatible-call]
       filter: (src: string, dest: string): Promise<boolean> =>
         Promise.resolve(false)
     });
@@ -94,9 +94,9 @@ describe("The `emptyDir` function", () => {
   });
 
   it("should error on erroneous usage", () => {
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
     fs.emptyDir().then(() => {});
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
     fs.emptyDir(path, true);
   });
 });
@@ -107,9 +107,9 @@ describe("The `emptyDirSync` function", () => {
   });
 
   it("should error on erroneous usage", () => {
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
     fs.emptyDirSync();
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-use]
     fs.emptyDirSync(path).then(() => {});
   });
 });
@@ -121,9 +121,9 @@ describe("The `ensureFile` function", () => {
   });
 
   it("should error on erroneous usage", () => {
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
     fs.ensureFile().then(() => {});
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
     fs.ensureFile(path, true);
   });
 });
@@ -134,9 +134,9 @@ describe("The `ensureFileSync` function", () => {
   });
 
   it("should error on erroneous usage", () => {
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
     fs.ensureFileSync();
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-use]
     fs.ensureFileSync(path).then(() => {});
   });
 });
@@ -148,9 +148,9 @@ describe("The `ensureDir` function", () => {
   });
 
   it("should error on erroneous usage", () => {
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
     fs.ensureDir().then(() => {});
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
     fs.ensureDir(path, true);
   });
 });
@@ -158,9 +158,9 @@ describe("The `ensureDir` function", () => {
 describe("The `createReadStream` function", () => {
   it("take in string and options object", () => {
     fs.createReadStream('str', {});
-    // $FlowExpectedError number not allowed
+    // $FlowExpectedError[incompatible-call] number not allowed
     fs.createReadStream(123, {});
-    // $FlowExpectedError options should be object
+    // $FlowExpectedError[incompatible-call] options should be object
     fs.createReadStream('str', 123);
   });
 });
@@ -168,9 +168,9 @@ describe("The `createReadStream` function", () => {
 describe("The `createWriteStream` function", () => {
   it("take in string and options object", () => {
     fs.createWriteStream('str', {});
-    // $FlowExpectedError number not allowed
+    // $FlowExpectedError[incompatible-call] number not allowed
     fs.createWriteStream(123, {});
-    // $FlowExpectedError options should be object
+    // $FlowExpectedError[incompatible-call] options should be object
     fs.createWriteStream('str', 123);
   });
 });
@@ -181,9 +181,9 @@ describe("The `ensureDirSync` function", () => {
   });
 
   it("should error on erroneous usage", () => {
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
     fs.ensureDirSync();
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-use]
     fs.ensureDirSync(path).then(() => {});
   });
 });
@@ -191,7 +191,7 @@ describe("The `ensureDirSync` function", () => {
 describe("The `exists` function", () => {
   it("take in string", () => {
     (fs.exists('str'): Promise<boolean>);
-    // $FlowExpectedError number not allowed
+    // $FlowExpectedError[incompatible-call] number not allowed
     fs.exists(123);
 
     fs.exists('str', (exists) => {(exists: boolean)})
@@ -205,15 +205,15 @@ describe("The `ensureLink` function", () => {
   });
 
   it("should error on erroneous usage", () => {
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
     fs.ensureLink().then(() => {});
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
     fs.ensureLink(path).then(() => {});
     fs.ensureLink(path, path).then(ret => {
-      // $FlowExpectedError
+      // $FlowExpectedError[incompatible-cast]
       (ret: boolean);
     });
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
     fs.ensureLink(path, path, true);
   });
 });
@@ -224,11 +224,11 @@ describe("The `ensureLinkSync` function", () => {
   });
 
   it("should error on erroneous usage", () => {
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
     fs.ensureLinkSync();
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
     fs.ensureLinkSync(path);
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-use]
     fs.ensureLinkSync(path, path).then(() => {});
   });
 });
@@ -242,13 +242,13 @@ describe("The `ensureSymlink` function", () => {
   });
 
   it("should error on erroneous usage", () => {
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
     fs.ensureSymlink(path).then(() => {});
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
     fs.ensureSymlink(path, path, "test").then(() => {});
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
     fs.ensureSymlink(path, path, true);
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
     fs.ensureSymlink(path, path, "file", true);
   });
 });
@@ -260,11 +260,11 @@ describe("The `ensureSymlinkSync` function", () => {
   });
 
   it("should error on erroneous usage", () => {
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
     fs.ensureSymlinkSync(path);
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
     fs.ensureSymlinkSync(path, path, "test");
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-use]
     fs.ensureSymlinkSync(path, path).then(() => {});
   });
 });
@@ -276,9 +276,9 @@ describe("The `mkdirp` function", () => {
   });
 
   it("should error on erroneous usage", () => {
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
     fs.mkdirp().then(() => {});
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
     fs.mkdirp(dir, true);
   });
 });
@@ -289,9 +289,9 @@ describe("The `mkdirpSync` function", () => {
   });
 
   it("should error on erroneous usage", () => {
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
     fs.mkdirpSync();
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-use]
     fs.mkdirpSync(dir).then(() => {});
   });
 });
@@ -303,9 +303,9 @@ describe("The `mkdirs` function", () => {
   });
 
   it("should error on erroneous usage", () => {
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
     fs.mkdirs().then(() => {});
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
     fs.mkdirs(dir, true);
   });
 });
@@ -316,9 +316,9 @@ describe("The `mkdirsSync` function", () => {
   });
 
   it("should error on erroneous usage", () => {
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
     fs.mkdirsSync();
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-use]
     fs.mkdirsSync(dir).then(() => {});
   });
 });
@@ -333,19 +333,19 @@ describe("The `move` function", () => {
   });
 
   it("should error on erroneous usage", () => {
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
     fs.move().then(() => {});
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
     fs.move(src).then(() => {});
     fs.move(src, dest).then(ret => {
-      // $FlowExpectedError
+      // $FlowExpectedError[incompatible-cast]
       (ret: boolean);
     });
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
     fs.move(src, dest, { overwrite: 123 }).then(() => {});
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
     fs.move({}, () => {});
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
     fs.move(() => {});
   });
 });
@@ -358,15 +358,15 @@ describe("The `moveSync` function", () => {
   });
 
   it("should error on erroneous usage", () => {
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
     fs.moveSync();
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
     fs.moveSync(src);
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
     fs.moveSync(src, dest, true);
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
     fs.moveSync(src, dest, { overwrite: 123 });
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-use]
     fs.moveSync(src, dest).then(() => {});
   });
 });
@@ -380,13 +380,13 @@ describe("The `outputFile` function", () => {
   });
 
   it("should error on erroneous usage", () => {
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
     fs.outputFile().then(() => {});
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
     fs.outputFile(file, data, { mode: true }).then(() => {});
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
     fs.outputFile(file, data, true);
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
     fs.outputFile(file, data, { mode: true }, errorCallback);
   });
 });
@@ -398,11 +398,11 @@ describe("The `outputFileSync` function", () => {
   });
 
   it("should error on erroneous usage", () => {
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
     fs.outputFileSync();
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-use]
     fs.outputFileSync(file, data).then(() => {});
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
     fs.outputFileSync(file, data, { mode: true });
   });
 });
@@ -436,11 +436,11 @@ describe("The `outputJson` function", () => {
   });
 
   it("should error on erroneous usage", () => {
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
     fs.outputJson().then(() => {});
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
     fs.outputJSON().then(() => {});
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
     fs.outputJson(
       file,
       data,
@@ -449,7 +449,7 @@ describe("The `outputJson` function", () => {
       },
       errorCallback
     );
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
     fs.outputJSON(
       file,
       data,
@@ -458,9 +458,9 @@ describe("The `outputJson` function", () => {
       },
       errorCallback
     );
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
     fs.outputJson(file, data, true);
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
     fs.outputJSON(file, data, true);
   });
 });
@@ -474,17 +474,17 @@ describe("The `outputJsonSync` function", () => {
   });
 
   it("should error on erroneous usage", () => {
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
     fs.outputJsonSync();
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
     fs.outputJsonSync(file, data, true);
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
     fs.outputJSONSync();
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
     fs.outputJSONSync(file, data, true);
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-use]
     fs.outputJsonSync(file, data, writeOptions).then(() => {});
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-use]
     fs.outputJSONSync(file, data, writeOptions).then(() => {});
   });
 });
@@ -501,12 +501,12 @@ describe("The `pathExists` function", () => {
   });
 
   it("should error on erroneous usage", () => {
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
     fs.pathExists();
     fs.pathExists(path, (err, exists) => {
-      // $FlowExpectedError
+      // $FlowExpectedError[incompatible-cast]
       (err: boolean);
-      // $FlowExpectedError
+      // $FlowExpectedError[incompatible-cast]
       (exists: string);
     });
   });
@@ -518,11 +518,11 @@ describe("The `pathExistsSync` function", () => {
   });
 
   it("should error on erroneous usage", () => {
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
     fs.pathExistsSync();
-    // $FlowExpectedError
+    // $FlowExpectedError[prop-missing]
     fs.pathExistsSync(path).then(() => {});
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-type]
     let exists: string = fs.pathExistsSync(path);
   });
 });
@@ -546,24 +546,24 @@ describe("The `readJson` function", () => {
   });
 
   it("should error on erroneous usage", () => {
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
     fs.readJson().then(() => {});
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
     fs.readJSON().then(() => {});
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
     fs.readJson(file, true).then(() => {});
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
     fs.readJSON(file, true).then(() => {});
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
     fs.readJson(file, true, false);
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
     fs.readJSON(file, true, false);
     fs.readJson(file, readOptions, (err, jsonObject) => {
-      // $FlowExpectedError
+      // $FlowExpectedError[incompatible-cast]
       (err: boolean);
     });
     fs.readJSON(file, readOptions, (err, jsonObject) => {
-      // $FlowExpectedError
+      // $FlowExpectedError[incompatible-cast]
       (err: boolean);
     });
   });
@@ -578,13 +578,13 @@ describe("The `readJsonSync` function", () => {
   });
 
   it("should error on erroneous usage", () => {
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
     fs.readJsonSync();
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
     fs.readJSONSync();
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
     fs.readJsonSync(file, true);
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
     fs.readJSONSync(file, true);
   });
 });
@@ -596,9 +596,9 @@ describe("The `remove` function", () => {
   });
 
   it("should error on erroneous usage", () => {
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
     fs.remove();
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
     fs.remove(true);
   });
 });
@@ -609,11 +609,12 @@ describe("The `removeSync` function", () => {
   });
 
   it("should error on erroneous usage", () => {
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
     fs.removeSync();
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
     fs.removeSync(true);
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
+    // $FlowExpectedError[incompatible-use]
     fs.removeSync().then(() => {});
   });
 });
@@ -631,17 +632,17 @@ describe("The `writeJson` function", () => {
   });
 
   it("should error on erroneous usage", () => {
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
     fs.writeJson().then(() => {});
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
     fs.writeJSON().then(() => {});
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
     fs.writeJson(file, object, true, errorCallback);
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
     fs.writeJSON(file, object, true, errorCallback);
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-use]
     fs.writeJson(file, object, writeOptions, errorCallback).then(() => {});
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-use]
     fs.writeJSON(file, object, writeOptions, errorCallback).then(() => {});
   });
 });
@@ -653,17 +654,17 @@ describe("The `writeJsonSync` function", () => {
   });
 
   it("should error on erroneous usage", () => {
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
     fs.writeJsonSync();
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
     fs.writeJsonSync(true);
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-use]
     fs.writeJsonSync(file, object).then(() => {});
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
     fs.writeJSONSync();
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
     fs.writeJSONSync(true);
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-use]
     fs.writeJSONSync(file, object).then(() => {});
   });
 });
