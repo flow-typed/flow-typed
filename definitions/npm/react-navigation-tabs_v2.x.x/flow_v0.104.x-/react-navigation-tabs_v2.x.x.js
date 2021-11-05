@@ -275,8 +275,8 @@ declare module 'react-navigation-tabs' {
       |}) => Options);
 
   declare export type NavigationComponent =
-    | NavigationScreenComponent<NavigationRoute, *, *>
-    | NavigationNavigator<*, *, *>;
+    | NavigationScreenComponent<NavigationRoute, any, any>
+    | NavigationNavigator<any, any, any>;
 
   declare interface withOptionalNavigationOptions<Options> {
     navigationOptions?: NavigationScreenConfig<Options>;
@@ -302,7 +302,7 @@ declare module 'react-navigation-tabs' {
     withOptionalNavigationOptions<Options>;
 
   declare type _NavigationRouteConfigCore = {|
-    navigationOptions?: NavigationScreenConfig<*>,
+    navigationOptions?: NavigationScreenConfig<any>,
     params?: NavigationParams,
     path?: string,
   |};
@@ -535,8 +535,8 @@ declare module 'react-navigation-tabs' {
     initialRouteName?: string,
     initialRouteParams?: NavigationParams,
     paths?: NavigationPathsConfig,
-    navigationOptions?: NavigationScreenConfig<*>,
-    defaultNavigationOptions?: NavigationScreenConfig<*>,
+    navigationOptions?: NavigationScreenConfig<any>,
+    defaultNavigationOptions?: NavigationScreenConfig<any>,
     // todo: type these as the real route names rather than 'string'
     order?: string[],
     // Does the back button cause the router to switch to the initial tab
@@ -677,11 +677,11 @@ declare module 'react-navigation-tabs' {
   declare export function createBottomTabNavigator(
     routeConfigs: NavigationRouteConfigMap,
     config?: BottomTabNavigatorConfig
-  ): NavigationNavigator<*, *, *>;
+  ): NavigationNavigator<any, any, any>;
   declare export function createMaterialTopTabNavigator(
     routeConfigs: NavigationRouteConfigMap,
     config?: MaterialTopTabNavigatorConfig
-  ): NavigationNavigator<*, *, *>;
+  ): NavigationNavigator<any, any, any>;
 
   declare type _SharedTabBarProps = {|
     getAccessibilityLabel: (props: {| route: NavigationRoute |}) => ?string,
@@ -774,6 +774,6 @@ declare module 'react-navigation-tabs' {
   ): (
     routeConfigMap: NavigationRouteConfigMap,
     tabConfig?: TabNavigatorConfig<CustomProps>
-  ) => NavigationNavigator<*, *, *>;
+  ) => NavigationNavigator<any, any, any>;
 
 }

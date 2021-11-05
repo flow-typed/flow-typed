@@ -288,7 +288,7 @@ describe("$resource", () => {
     it("has a get function that returns a special $resource result", () => {
       angular.mock.inject(($resource: AngularResourceFactory) => {
         const resource: AngularResource = $resource("/foo");
-        const promise: AngularPromise<*> = resource.get().$promise;
+        const promise: AngularPromise<any> = resource.get().$promise;
       });
     });
   });
@@ -362,7 +362,7 @@ describe("mock", () => {
 describe("$http", () => {
   it("can POST", () => {
     angular.mock.inject(($http: AngularHttpService) => {
-      const promise: AngularPromise<*> = $http.post("/foo", { bar: "bazz" });
+      const promise: AngularPromise<any> = $http.post("/foo", { bar: "bazz" });
     });
   });
 });

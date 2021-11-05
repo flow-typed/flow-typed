@@ -17,7 +17,7 @@ type Action<T> = { type: T, ... };
 
 type DispatchAPI<A> = (action: A) => A;
 
-type Dispatch<A: { type: *, ... }> = DispatchAPI<A>;
+type Dispatch<A: { type: any, ... }> = DispatchAPI<A>;
 
 type Reducer<S, A> = (state: S | void, action: A) => S;
 
@@ -83,7 +83,7 @@ describe('Test createReactor', () => {
       initialCount: number,
       ...
     };
-    
+
     const incrementReactor = createReactor<State, 'INCREMENT'>('INCREMENT', (state, action) => {
       if(!state) return {};
       if(typeof action.payload !== 'number') return state;

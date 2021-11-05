@@ -26,7 +26,7 @@ declare module "react-hot-loader" {
     ignoreSFCWhenInjected?: boolean,
     ignoreComponents?: boolean,
     errorReporter?: React$ComponentType<errorReporterProps>,
-    ErrorOverlay?: React$ComponentType<*>,
+    ErrorOverlay?: React$ComponentType<any>,
   |}): void;
 
   declare export class AppContainer extends React$Component<

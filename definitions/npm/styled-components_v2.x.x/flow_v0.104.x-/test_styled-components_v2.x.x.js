@@ -22,51 +22,51 @@ import type {
 
 const TitleTaggedTemplateLiteral: ReactComponentStyledTaggedTemplateLiteral<{...}> = styled.h1;
 
-const TitleStyled: ReactComponentStyled<*> = styled.h1`
+const TitleStyled: ReactComponentStyled<any> = styled.h1`
   font-size: 1.5em;
 `;
 
-const TitleGeneric: ReactComponentIntersection<*> = styled.h1`
+const TitleGeneric: ReactComponentIntersection<any> = styled.h1`
   font-size: 1.5em;
 `;
 ``
-const TitleFunctional: ReactComponentFunctional<*> = styled.h1`
+const TitleFunctional: ReactComponentFunctional<any> = styled.h1`
   font-size: 1.5em;
 `;
 
-const TitleClass: ReactComponentClass<*> = styled.h1`
+const TitleClass: ReactComponentClass<any> = styled.h1`
   font-size: 1.5em;
 `;
 
-declare var needsReactComponentFunctional: ReactComponentFunctional<*> => void
-declare var needsReactComponentClass: ReactComponentClass<*> => void
+declare var needsReactComponentFunctional: ReactComponentFunctional<any> => void
+declare var needsReactComponentClass: ReactComponentClass<any> => void
 
 needsReactComponentFunctional(TitleStyled)
 needsReactComponentClass(TitleStyled)
 
-const ExtendedTitle: ReactComponentIntersection<*> = styled(TitleStyled)`
+const ExtendedTitle: ReactComponentIntersection<any> = styled(TitleStyled)`
   font-size: 2em;
 `;
 
-const Wrapper: ReactComponentIntersection<*> = styled.section`
+const Wrapper: ReactComponentIntersection<any> = styled.section`
   padding: 4em;
   background: ${({theme}) => theme.background};
 `;
 
 // ---- EXTEND ----
-const Attrs0ReactComponent: ReactComponentStyled<*> = styled.div.extend``;
-const Attrs0ExtendReactComponent: ReactComponentIntersection<*> = Attrs0ReactComponent.extend``;
+const Attrs0ReactComponent: ReactComponentStyled<any> = styled.div.extend``;
+const Attrs0ExtendReactComponent: ReactComponentIntersection<any> = Attrs0ReactComponent.extend``;
 
-const Attrs0SyledComponent: ReactComponentStyledTaggedTemplateLiteral<*> = styled.div;
-const Attrs0ExtendStyledComponent: ReactComponentIntersection<*> = Attrs0SyledComponent.extend``;
+const Attrs0SyledComponent: ReactComponentStyledTaggedTemplateLiteral<any> = styled.div;
+const Attrs0ExtendStyledComponent: ReactComponentIntersection<any> = Attrs0SyledComponent.extend``;
 
 // ---- ATTRIBUTES ----
-const Attrs1: ReactComponentStyledTaggedTemplateLiteral<*> = styled.section.attrs({
+const Attrs1: ReactComponentStyledTaggedTemplateLiteral<any> = styled.section.attrs({
   testProp: 'foo'
 });
 
 // $FlowExpectedError
-const Attrs1Error: ReactComponentStyledTaggedTemplateLiteral<*> = styled.section.attrs({
+const Attrs1Error: ReactComponentStyledTaggedTemplateLiteral<any> = styled.section.attrs({
   testProp: 'foo'
 })``;
 
@@ -78,7 +78,7 @@ needsReactComponentClass(styled.section.attrs({})``)
 // $FlowExpectedError
 needsString(styled.section.attrs({})``)
 
-const Attrs2: ReactComponentStyledTaggedTemplateLiteral<*> = styled.section
+const Attrs2: ReactComponentStyledTaggedTemplateLiteral<any> = styled.section
   .attrs({
     testProp1: 'foo'
   })
@@ -86,25 +86,25 @@ const Attrs2: ReactComponentStyledTaggedTemplateLiteral<*> = styled.section
     testProp2: 'bar'
   });
 
-const Attrs3Styled: ReactComponentStyled<*> = styled.section.attrs({
+const Attrs3Styled: ReactComponentStyled<any> = styled.section.attrs({
   testProp: 'foo'
 })`
   background-color: red;
 `;
 
-const Attrs3Generic: ReactComponentIntersection<*> = styled.section.attrs({
+const Attrs3Generic: ReactComponentIntersection<any> = styled.section.attrs({
   testProp: 'foo'
 })`
   background-color: red;
 `;
 
-const Attrs3Functional: ReactComponentFunctional<*> = styled.section.attrs({
+const Attrs3Functional: ReactComponentFunctional<any> = styled.section.attrs({
   testProp: 'foo'
 })`
   background-color: red;
 `;
 
-const Attrs3Class: ReactComponentClass<*> = styled.section.attrs({
+const Attrs3Class: ReactComponentClass<any> = styled.section.attrs({
   testProp: 'foo'
 })`
   background-color: red;
@@ -115,16 +115,16 @@ const theme: Theme = {
 };
 
 // ---- WithComponent ----
-const withComponent1: ReactComponentStyled<*> = styled.div.withComponent('a');
-const withComponent2: ReactComponentStyled<*> = styled.div.withComponent(withComponent1);
-const withComponent3: ReactComponentStyled<*> = styled.div.withComponent(Attrs3Class);
-const withComponent4: ReactComponentStyled<*> = styled('div').withComponent('a');
-const withComponent5: ReactComponentStyled<*> = styled('div').withComponent(withComponent1);
-const withComponent6: ReactComponentStyled<*> = styled('div').withComponent(Attrs3Class);
+const withComponent1: ReactComponentStyled<any> = styled.div.withComponent('a');
+const withComponent2: ReactComponentStyled<any> = styled.div.withComponent(withComponent1);
+const withComponent3: ReactComponentStyled<any> = styled.div.withComponent(Attrs3Class);
+const withComponent4: ReactComponentStyled<any> = styled('div').withComponent('a');
+const withComponent5: ReactComponentStyled<any> = styled('div').withComponent(withComponent1);
+const withComponent6: ReactComponentStyled<any> = styled('div').withComponent(Attrs3Class);
 // $FlowExpectedError
-const withComponentError1: ReactComponentStyled<*> = styled.div.withComponent(0);
+const withComponentError1: ReactComponentStyled<any> = styled.div.withComponent(0);
 // $FlowExpectedError
-const withComponentError2: ReactComponentStyled<*> = styled.div.withComponent('NotHere');
+const withComponentError2: ReactComponentStyled<any> = styled.div.withComponent('NotHere');
 
 class CustomComponentError3 extends React.Component<{ foo: string, ... }> {
   render() { return <div />; }

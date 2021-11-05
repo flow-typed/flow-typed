@@ -37,7 +37,7 @@ function test_handleAction_typeMismatch() {
   // argument to `handleAction` and the action type in this very specific
   // scenario. Unfortunately Flow does not detect the mismatch when the action
   // type is given using the `ActionType` helper.
-  const reducer: Reducer<*, {
+  const reducer: Reducer<any, {
     type: 'INCREMENT',
     payload: number,
     ...

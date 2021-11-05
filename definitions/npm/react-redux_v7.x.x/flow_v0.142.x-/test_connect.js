@@ -336,7 +336,7 @@ function testMapDispatchToProps() {
     }
   }
   type MapDispatchToPropsProps = { forMapDispatchToProps: string, ... }
-  const mapDispatchToProps = (dispatch: *, ownProps: MapDispatchToPropsProps) => {
+  const mapDispatchToProps = (dispatch: any, ownProps: MapDispatchToPropsProps) => {
     return {fromMapDispatchToProps: ownProps.forMapDispatchToProps}
   }
   const Connected = connect<Props, OwnProps, _,_,_,_>(mapStateToProps, mapDispatchToProps)(Com);
@@ -360,8 +360,8 @@ function testMapDispatchToPropsDoesNotPassDispatch() {
     }
   }
 
-  const mapStateToProps = (state: *, props: *) => ({})
-  const mapDispatchToProps = (dispatch: *, ownProps: *) => {
+  const mapStateToProps = (state: any, props: any) => ({})
+  const mapDispatchToProps = (dispatch: any, ownProps: any) => {
     return {fromMapDispatchToProps: 'yo'}
   }
   // $FlowExpectedError[prop-missing] dispatch should not be provided in Props when mapDispatchToProps is present
@@ -391,7 +391,7 @@ function testMapDispatchToPropsWithoutMapStateToProps() {
   }
 
   type MapDispatchToPropsProps = { forMapDispatchToProps: string, ... };
-  const mapDispatchToProps = (dispatch: *, ownProps: MapDispatchToPropsProps) => {
+  const mapDispatchToProps = (dispatch: any, ownProps: MapDispatchToPropsProps) => {
     return {fromMapDispatchToProps: ownProps.forMapDispatchToProps}
   }
   const Connected = connect<Props, OwnProps, _,_,_,_>(null, mapDispatchToProps)(Com);
@@ -571,7 +571,7 @@ function testMergeProps() {
     }
   }
   type MapDispatchToPropsProps = { forMapDispatchToProps: string, ... }
-  const mapDispatchToProps = (dispatch: *, ownProps: MapDispatchToPropsProps) => {
+  const mapDispatchToProps = (dispatch: any, ownProps: MapDispatchToPropsProps) => {
     return {fromMapDispatchToProps: ownProps.forMapDispatchToProps}
   }
   const mergeProps = (stateProps, dispatchProps, ownProps: { forMergeProps: number, ... }) => {
@@ -770,7 +770,7 @@ function testPassingDispatchTypeIsPassedThrough() {
     }
   }
 
-  const mapStateToProps = (state: *, props: *) => ({});
+  const mapStateToProps = (state: any, props: any) => ({});
 
   // $FlowExpectedError[incompatible-type-arg] dispatch mismatched from type Dispatch
   const Connected = connect<Props, OwnProps,_,_,_,Dispatch>(mapStateToProps)(Com);

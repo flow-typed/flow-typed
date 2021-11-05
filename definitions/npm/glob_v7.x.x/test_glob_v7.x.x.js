@@ -46,23 +46,23 @@ let options = {
 describe("The `glob` function", () => {
   it("should validate the pattern, callback signature", () => {
     glob(pattern, callback);
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
     glob(pattern);
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
     glob({}, {});
   });
 
   it("should validate the pattern, options, callback signature", () => {
     glob(pattern, options, callback);
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
     glob(pattern, options);
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
     glob(pattern, callback, options);
   });
 
   it("should return undefined", () => {
     (glob(pattern, callback): void);
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-cast]
     (glob(pattern, callback): boolean);
   });
 });
@@ -70,20 +70,20 @@ describe("The `glob` function", () => {
 describe("The `glob.hasMagic` function", () => {
   it("should accept a string for its `pattern` parameter", () => {
     glob.hasMagic(pattern);
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
     glob.hasMagic({});
   });
 
   it("should accept an object for its `options` parameter", () => {
     glob.hasMagic(pattern, {});
     glob.hasMagic(pattern, options);
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-exact]
     glob.hasMagic(pattern, callback);
   });
 
   it("should return a boolean", () => {
     (glob.hasMagic(pattern): boolean);
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-cast]
     (glob.hasMagic(pattern): string);
   });
 });
@@ -91,20 +91,20 @@ describe("The `glob.hasMagic` function", () => {
 describe("The `glob.sync` function", () => {
   it("should accept a string for its `pattern` parameter", () => {
     glob.sync(pattern);
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
     glob.sync({});
   });
 
   it("should accept an object for its `options` parameter", () => {
     glob.sync(pattern, {});
     glob.sync(pattern, options);
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-exact]
     glob.sync(pattern, callback);
   });
 
   it("should return a matches Array", () => {
     (glob.sync(pattern): Array<string>);
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-cast]
     (glob.sync(pattern): string);
   });
 });
@@ -112,19 +112,19 @@ describe("The `glob.sync` function", () => {
 describe("The `Glob` constructor", () => {
   it("should validate the pattern signature", () => {
     new Glob(pattern);
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
     new Glob({});
   });
 
   it("should validate the pattern, callback signature", () => {
     new Glob(pattern, callback);
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
     new Glob(pattern, options);
   });
 
   it("should validate the pattern, options, callback signature", () => {
     new Glob(pattern, options, callback);
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
     new Glob(pattern, callback, options);
   });
 });
@@ -154,11 +154,11 @@ describe("The `Glob` methods", () => {
     mg.pause();
     mg.resume();
     mg.abort();
-    // $FlowExpectedError
+    // $FlowExpectedError[extra-arg]
     mg.pause(() => {});
-    // $FlowExpectedError
+    // $FlowExpectedError[extra-arg]
     mg.resume(() => {});
-    // $FlowExpectedError
+    // $FlowExpectedError[extra-arg]
     mg.abort(() => {});
   });
 });

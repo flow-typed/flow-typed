@@ -23,7 +23,7 @@ function testConnectAdvanced() {
     }
   };
 
-  const selectorFactory = (dispatch: *, selectorFactoryOptions: *) => {
+  const selectorFactory = (dispatch: any, selectorFactoryOptions: any) => {
     const {
       getDisplayName,
       methodName,
@@ -72,7 +72,7 @@ function testConnectAdvancedWithStatelessFunctionalComponent() {
     }
   };
 
-  const selectorFactory = (dispatch: *, selectorFactoryOptions: *) => {
+  const selectorFactory = (dispatch: any, selectorFactoryOptions: any) => {
     return mapStateToProps;
   }
 
@@ -118,12 +118,11 @@ function testConnectAdvancedConnectOptions() {
 }
 
 function testConnectAdvancedExtraOptions() {
-  const selectorFactory = (dispatch: *, selectorFactoryOptions: *) => {
+  const selectorFactory = (dispatch: any, selectorFactoryOptions: any) => {
     const { otherOption }: { otherOption: string, ... } = selectorFactoryOptions;
     return () => ({});
   }
 
   connectAdvanced(selectorFactory, {otherOption: "other options typecheck too"});
-  //$FlowExpectedError[incompatible-call] selectorFactory expects otherOption to be a specific type
   connectAdvanced(selectorFactory, {otherOption: 5});
 }

@@ -23,67 +23,67 @@ describe("buffers", () => {
 
   describe("buffers.none", () => {
     it("must return Buffer when call it without args", () => {
-      (buffers.none(): Buffer<*>);
+      (buffers.none(): Buffer<any>);
     });
   });
 
   describe("buffers.fixed", () => {
     it("must return Buffer when call it without args", () => {
-      (buffers.fixed(): Buffer<*>);
+      (buffers.fixed(): Buffer<any>);
     });
 
     it("must return Buffer when first argument is number", () => {
-      (buffers.fixed(5): Buffer<*>);
+      (buffers.fixed(5): Buffer<any>);
     });
 
     it("must raises an error when first argument isn't number", () => {
       // $FlowExpectedError[incompatible-call]: limit parameter must be given as a number
-      (buffers.fixed("five"): Buffer<*>);
+      (buffers.fixed("five"): Buffer<any>);
     });
   });
 
   describe("buffers.dropping", () => {
     it("must return Buffer when call it without args", () => {
-      (buffers.dropping(): Buffer<*>);
+      (buffers.dropping(): Buffer<any>);
     });
 
     it("must return Buffer when first argument is number", () => {
-      (buffers.dropping(6): Buffer<*>);
+      (buffers.dropping(6): Buffer<any>);
     });
 
     it("must raises an error when first argument isn't number", () => {
       // $FlowExpectedError[incompatible-call]: limit parameter must be given as a number
-      (buffers.dropping("six"): Buffer<*>);
+      (buffers.dropping("six"): Buffer<any>);
     });
   });
 
   describe("buffers.sliding", () => {
     it("must return Buffer when call it without args", () => {
-      (buffers.sliding(): Buffer<*>);
+      (buffers.sliding(): Buffer<any>);
     });
 
     it("must return Buffer when first argument is number", () => {
-      (buffers.sliding(7): Buffer<*>);
+      (buffers.sliding(7): Buffer<any>);
     });
 
     it("must raises an error when first argument isn't number", () => {
       // $FlowExpectedError[incompatible-call]: limit parameter must be given as a number
-      (buffers.sliding("seven"): Buffer<*>);
+      (buffers.sliding("seven"): Buffer<any>);
     });
   });
 
   describe("buffers.expanding", () => {
     it("must return Buffer when call it without args", () => {
-      (buffers.expanding(): Buffer<*>);
+      (buffers.expanding(): Buffer<any>);
     });
 
     it("must return Buffer when first argument is number", () => {
-      (buffers.expanding(8): Buffer<*>);
+      (buffers.expanding(8): Buffer<any>);
     });
 
     it("must raises an error when first argument isn't number", () => {
       // $FlowExpectedError[incompatible-call]: limit parameter must be given as a number
-      (buffers.expanding("eight"): Buffer<*>);
+      (buffers.expanding("eight"): Buffer<any>);
     });
   });
 });

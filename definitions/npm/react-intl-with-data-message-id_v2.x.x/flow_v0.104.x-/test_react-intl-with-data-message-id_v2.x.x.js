@@ -128,7 +128,7 @@ const InjectedTestComponentWithDefault
 //   return <div>{formatHTMLMessage(messageDescriptorMap.messagekey2)}</div>;
 // });
 const DateComponent: React.ComponentType<
-  *
+  any
 > = injectIntl((props: { intl: IntlShape, ... }) => {
   const { formatDate } = props.intl;
   return (
@@ -138,7 +138,7 @@ const DateComponent: React.ComponentType<
   );
 });
 const TimeComponent: React.ComponentType<
-  *
+  any
 > = injectIntl((props: { intl: IntlShape, ... }) => {
   const { formatTime } = props.intl;
   return (
@@ -148,7 +148,7 @@ const TimeComponent: React.ComponentType<
   );
 });
 const RelativeComponent: React.ComponentType<
-  *
+  any
 > = injectIntl((props: { intl: IntlShape, ... }) => {
   const { formatRelative } = props.intl;
   return (
@@ -158,7 +158,7 @@ const RelativeComponent: React.ComponentType<
   );
 });
 const NumberComponent: React.ComponentType<
-  *
+  any
 > = injectIntl((props: { intl: IntlShape, ... }) => {
   const { formatNumber } = props.intl;
   return (
@@ -168,7 +168,7 @@ const NumberComponent: React.ComponentType<
   );
 });
 const PluralComponent: React.ComponentType<
-  *
+  any
 > = injectIntl((props: { intl: IntlShape, ... }) => {
   const { formatPlural } = props.intl;
   return (
