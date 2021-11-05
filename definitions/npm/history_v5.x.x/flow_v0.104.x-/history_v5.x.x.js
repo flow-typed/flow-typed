@@ -22,7 +22,7 @@ declare module 'history' {
     go(n: number): void,
     goBack(): void,
     goForward(): void,
-    listen(({ location: HistoryLocation, action: Action }) => void): Unregister,
+    listen(({| location: HistoryLocation, action: Action |}) => void): Unregister,
     block(
       blocker: (transition: {|
         action: Action,
