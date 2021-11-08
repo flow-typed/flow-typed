@@ -20,8 +20,8 @@ declare module 'history' {
     replace: ((path: string, state?: { ... }) => void) &
       ((location: $Shape<HistoryLocation>) => void),
     go(n: number): void,
-    goBack(): void,
-    goForward(): void,
+    back(): void,
+    forward(): void,
     listen(({| location: HistoryLocation, action: Action |}) => void): Unregister,
     block(
       blocker: (transition: {|
