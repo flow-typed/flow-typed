@@ -2381,10 +2381,10 @@ flatted@^2.0.0:
   resolved "https://registry.yarnpkg.com/flatted/-/flatted-2.0.1.tgz#69e57caa8f0eacbc281d2e2cb458d46fdb449e08"
   integrity sha512-a1hQMktqW9Nmqr5aktAux3JMNqaucxGcjtjWnZLHX7yyPCmlSV3M54nGYbqT8K+0GhF3NBgmJCc3ma+WOgX8Jg==
 
-flow-bin@^0.162.1:
-  version "0.162.1"
-  resolved "https://registry.yarnpkg.com/flow-bin/-/flow-bin-0.162.1.tgz#5aaac790dab8664ce363fd0f09764fb9f0daed20"
-  integrity sha512-gFNWkEzBuQ9YzQcPKcVL16V5MZixbiQ+Kn867iwaCfs1TAFuhQQcng4vX3Rtyd7JI3O+g8jToEX7pEDhdzG80Q==
+flow-bin@^0.164.0:
+  version "0.164.0"
+  resolved "https://registry.yarnpkg.com/flow-bin/-/flow-bin-0.164.0.tgz#dc2a1f1cd59670e7d95320232a673c6e31b11ff3"
+  integrity sha512-cSAA0LLa1SlQ1YmNCYpJ19ES39WYrqjfxX8Oqhbvn6+DET8Cs+EnVkJWHVSkfK8zUupbxvSt7pDoFXePYbcJRA==
 
 flowgen@^1.10.0:
   version "1.10.0"
