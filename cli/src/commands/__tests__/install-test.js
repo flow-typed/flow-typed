@@ -288,6 +288,7 @@ describe('install (command)', () => {
 
         setCustomCacheDir(FAKE_CACHE_DIR);
 
+        // $FlowExpectedError[method-unbinding]
         const origCWD = process.cwd;
         (process: any).cwd = () => FLOWPROJ_DIR;
         try {

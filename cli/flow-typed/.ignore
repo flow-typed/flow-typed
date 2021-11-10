@@ -1,0 +1,8 @@
+@babel/
+babel-eslint
+babel-jest
+eslint
+eslint-config-prettier
+eslint-plugin-fb-flow
+eslint-plugin-flowtype
+eslint-plugin-prettier

@@ -27,7 +27,7 @@ export function copyFile(
     if (preProcessor) {
       const content = fs.readFileSync(srcPath, 'utf-8');
 
-      fs.writeFile(destPath, preProcessor(content), err => {
+      fs.writeFile(destPath, preProcessor(content), (err: Error) => {
         if (err) {
           rej(err);
         } else {
