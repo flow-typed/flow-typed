@@ -1066,7 +1066,7 @@ describe('install (command)', () => {
 
         setCustomCacheDir(FAKE_CACHE_DIR);
 
-        const origCWD = process.cwd;
+        const origCWD = process.cwd.bind(process);
         (process: any).cwd = () => FLOWPROJ_DIR;
         try {
           await runTest(FLOWPROJ_DIR);
