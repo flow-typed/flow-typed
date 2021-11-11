@@ -331,7 +331,7 @@ declare module "redux-saga" {
     ...
   };
 
-  declare export type CallEffect<Ctx, Fn: Function, Args: $ReadOnlyArray<*>> = {
+  declare export type CallEffect<Ctx, Fn: Function, Args: $ReadOnlyArray<any>> = {
     +"@@redux-saga/IO": true,
     +CALL: {
       +context: Ctx,
@@ -342,7 +342,7 @@ declare module "redux-saga" {
     ...
   };
 
-  declare export type ForkEffect<Ctx, Fn: Function, Args: $ReadOnlyArray<*>> = {
+  declare export type ForkEffect<Ctx, Fn: Function, Args: $ReadOnlyArray<any>> = {
     +"@@redux-saga/IO": true,
     +FORK: {
       +context: Ctx,
@@ -353,7 +353,7 @@ declare module "redux-saga" {
     ...
   };
 
-  declare export type CpsEffect<Ctx, Fn: Function, Args: $ReadOnlyArray<*>> = {
+  declare export type CpsEffect<Ctx, Fn: Function, Args: $ReadOnlyArray<any>> = {
     +"@@redux-saga/IO": true,
     +CPS: {
       +context: Ctx,
@@ -367,7 +367,7 @@ declare module "redux-saga" {
   declare export type SpawnEffect<
     Ctx,
     Fn: Function,
-    Args: $ReadOnlyArray<*>
+    Args: $ReadOnlyArray<any>
   > = {
     +"@@redux-saga/IO": true,
     +SPAWN: {
@@ -379,21 +379,21 @@ declare module "redux-saga" {
     ...
   };
 
-  declare export type JoinEffect<T: Task<*>> = {
+  declare export type JoinEffect<T: Task<any>> = {
     +"@@redux-saga/IO": true,
     +JOIN: T,
     ...
   };
 
   declare export type CancelEffect<
-    T: Task<*> | "@@redux-saga/SELF_CANCELLATION"
+    T: Task<any> | "@@redux-saga/SELF_CANCELLATION"
   > = {
     +"@@redux-saga/IO": true,
     +CANCEL: T,
     ...
   };
 
-  declare export type SelectEffect<Fn: Function | void, Args: $ReadOnlyArray<*>> = {
+  declare export type SelectEffect<Fn: Function | void, Args: $ReadOnlyArray<any>> = {
     +"@@redux-saga/IO": true,
     +SELECT: {
       +selector: Fn,
@@ -452,21 +452,21 @@ declare module "redux-saga" {
   };
 
   declare export type Effect =
-    | TakeEffect<*, *, *>
-    | PutEffect<*, *>
-    | CallEffect<*, *, *>
-    | ForkEffect<*, *, *>
-    | CpsEffect<*, *, *>
-    | SpawnEffect<*, *, *>
-    | JoinEffect<*>
-    | CancelEffect<*>
-    | SelectEffect<*, *>
-    | ActionChannelEffect<*, *>
+    | TakeEffect<any, any, any>
+    | PutEffect<any, any>
+    | CallEffect<any, any, any>
+    | ForkEffect<any, any, any>
+    | CpsEffect<any, any, any>
+    | SpawnEffect<any, any, any>
+    | JoinEffect<any>
+    | CancelEffect<any>
+    | SelectEffect<any, any>
+    | ActionChannelEffect<any, any>
     | FlushEffect
     | CancelledEffect
-    | SetContextEffect<*>
+    | SetContextEffect<any>
     | GetContextEffect
-    | RaceEffect<*>
+    | RaceEffect<any>
     | AllEffect;
 }
 
@@ -1518,15 +1518,15 @@ declare module "redux-saga/effects" {
   };
 
   declare export var join: {
-    <T: Task<*>>(task: T): JoinEffect<T>,
-    (task: Task<*>, ...tasks: $ReadOnlyArray<Task<any>>): AllEffect,
+    <T: Task<any>>(task: T): JoinEffect<T>,
+    (task: Task<any>, ...tasks: $ReadOnlyArray<Task<any>>): AllEffect,
     ...
   };
 
   declare export var cancel: {
     (): CancelEffect<"@@redux-saga/SELF_CANCELLATION">,
-    <T: Task<*>>(task: T): CancelEffect<T>,
-    (task: Task<*>, ...tasks: $ReadOnlyArray<Task<any>>): AllEffect,
+    <T: Task<any>>(task: T): CancelEffect<T>,
+    (task: Task<any>, ...tasks: $ReadOnlyArray<Task<any>>): AllEffect,
     ...
   };
 

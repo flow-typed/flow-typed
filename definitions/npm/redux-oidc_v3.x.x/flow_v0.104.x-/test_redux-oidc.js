@@ -80,7 +80,7 @@ const StatelessComponent = () => {
   );
 };
 
-type Props = { redirectToLink: (user?: User<*>) => void, ... };
+type Props = { redirectToLink: (user?: User<any>) => void, ... };
 
 const ExampleComponent = ({ redirectToLink }: Props) => {
   return (

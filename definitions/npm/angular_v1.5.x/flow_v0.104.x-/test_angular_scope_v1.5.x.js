@@ -224,12 +224,12 @@ function testScope$id($scope: $Scope<{ myVar: boolean, ... }>) {
 
 function testScope$parent($scope: $Scope<{ myVar: boolean, ... }>) {
   // is scope
-  ($scope.$parent: $Scope<*>);
+  ($scope.$parent: $Scope<any>);
 }
 
 function testScope$root($scope: $Scope<{ myVar: boolean, ... }>) {
   // is scope
-  ($scope.$root: $Scope<*>);
+  ($scope.$root: $Scope<any>);
 }
 
 function testScopeExtraProps($scope: $Scope<{ myVar: boolean, ... }>) {

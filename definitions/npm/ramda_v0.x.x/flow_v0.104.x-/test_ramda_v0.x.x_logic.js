@@ -17,7 +17,7 @@ const ns: Array<number> = [1, 2, 3, 4, 5];
 const ss: Array<string> = ['one', 'two', 'three', 'four'];
 const obj: { [k: string]: number, ... } = { a: 1, c: 2 };
 const objMixed: { [k: string]: mixed, ... } = { a: 1, c: 'd' };
-const os: Array<{ [k: string]: *, ... }> = [{ a: 1, c: 'd' }, { b: 2 }];
+const os: Array<{ [k: string]: any, ... }> = [{ a: 1, c: 'd' }, { b: 2 }];
 const str: string = 'hello world';
 
 //Logic
@@ -34,7 +34,7 @@ const a: boolean = _.and(true, true);
 const a_: (a: boolean) => boolean = _.and(true);
 
 const nonBooleanAnd: number = _.and(69, 42);
-const nonBooleanAnd_: (nonBooleanAnd: number) => * = _.and(69);
+const nonBooleanAnd_: (nonBooleanAnd: number) => any = _.and(69);
 
 const gte = _.anyPass([_.gt, _.equals]);
 const ge: boolean = gte(3, 2);

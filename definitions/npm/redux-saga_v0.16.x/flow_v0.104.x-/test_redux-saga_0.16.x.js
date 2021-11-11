@@ -1337,7 +1337,7 @@ function joinTest() {
   (j1.JOIN: typeof task1);
 
   // $FlowExpectedError[prop-missing]: This is not a join effect but an all effect
-  (j2.JOIN: Task<*>);
+  (j2.JOIN: Task<any>);
 }
 
 function cancelTest() {
@@ -1352,7 +1352,7 @@ function cancelTest() {
   (c1.CANCEL: typeof task1);
 
   // $FlowExpectedError[prop-missing]: This is not a cancel effect but an all effect
-  (c2.CANCEL: Task<*>);
+  (c2.CANCEL: Task<any>);
 }
 
 function raceTest() {

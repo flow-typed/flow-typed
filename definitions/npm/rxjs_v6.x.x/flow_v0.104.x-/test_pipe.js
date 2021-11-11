@@ -134,7 +134,7 @@ it("should require a type assertion for more than 9 arguments", () => {
 });
 
 it("should return generic OperatorFunction 1", () => {
-  const customOperator = p => (a: Observable<*>) => a;
+  const customOperator = p => (a: Observable<any>) => a;
 
   const staticPipe = pipe(customOperator("infer"));
   const o = of("foo").pipe(staticPipe);
@@ -148,7 +148,7 @@ it("should return generic OperatorFunction 2", () => {
 });
 
 it("should return generic OperatorFunction 3", () => {
-  const customOperator = () => (a: Observable<*>) => a;
+  const customOperator = () => (a: Observable<any>) => a;
 
   const staticPipe = pipe(customOperator());
   const o = of("foo").pipe(staticPipe);

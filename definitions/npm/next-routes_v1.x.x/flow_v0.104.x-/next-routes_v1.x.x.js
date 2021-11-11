@@ -80,7 +80,7 @@ declare module 'next-routes' {
       as: ?string,
       options?: EventChangeOptions
     ): Promise<boolean>,
-    prefetch(url: string): Promise<*>,
+    prefetch(url: string): Promise<any>,
     pushRoute(
       route: string,
       params?: { [name: string]: string, ... },
@@ -95,7 +95,7 @@ declare module 'next-routes' {
       route: string,
       params?: { [name: string]: string, ... },
       options?: any
-    ): Promise<*>,
+    ): Promise<any>,
     ...
   };
 
