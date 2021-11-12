@@ -6,6 +6,41 @@ import auth from 'firebase/auth';
 import firestore from 'firebase/firestore';
 
 describe('firebase', () => {
+  it('INTERNAL', () => {
+    // It's an object with stuff in it
+    firebase.INTERNAL.a();
+  });
+
+  it('SDK_VERSION', () => {
+    firebase.SDK_VERSION.toLowerCase();
+    // $FlowExpectedError[incompatible-cast] Is a string
+    (firebase.SDK_VERSION: number);
+  });
+
+  it('initializeApp', () => {
+    // Can accept basically nothing
+    firebase.initializeApp({});
+
+    // Testing all object property types
+    firebase.initializeApp({
+      apiKey: 'test',
+      authDomain: 'test',
+      projectId: 'test',
+      storageBucket: 'test',
+      messagingSenderId: 'test',
+      appId: 'test',
+      measurementId: 'test',
+    });
+
+    // $FlowExpectedError[prop-missing] can't pass invalid properties
+    firebase.initializeApp({
+      random: 'test',
+    });
+
+    // $FlowExpectedError[incompatible-call]
+    firebase.initializeApp();
+  });
+
   describe('auth', () => {
     const auth = firebase.auth();
 
