@@ -2,7 +2,6 @@
 
 import type {FlowSpecificVer} from '../lib/flowVersion';
 import {signCodeStream} from '../lib/codeSign';
-
 import {copyFile, mkdirp} from '../lib/fileUtils';
 
 import {findFlowRoot} from '../lib/flowProjectUtils';
@@ -29,6 +28,7 @@ import {
   getPackageJsonData,
   getPackageJsonDependencies,
   loadPnpResolver,
+  mergePackageJsonDependencies,
 } from '../lib/npm/npmProjectUtils';
 
 import {
@@ -268,11 +268,10 @@ async function installNpmLibDefs({
         const pkgJsonData = await getPackageJsonData(cwd);
         const workspacesPkgJsonData = await findWorkspacesPackages(pkgJsonData);
         const pkgJsonDeps = workspacesPkgJsonData.reduce((acc, pckData) => {
-          return {
-            ...acc,
-            // TODO: warn duplicates with different versions
-            ...getPackageJsonDependencies(pckData, [], []),
-          };
+          return mergePackageJsonDependencies(
+            acc,
+            getPackageJsonDependencies(pckData, [], []),
+          );
         }, getPackageJsonDependencies(pkgJsonData, [], []));
         const packageVersion = pkgJsonDeps[term];
         if (packageVersion) {
@@ -309,11 +308,10 @@ async function installNpmLibDefs({
     const pkgJsonData = await getPackageJsonData(cwd);
     const workspacesPkgJsonData = await findWorkspacesPackages(pkgJsonData);
     const pkgJsonDeps = workspacesPkgJsonData.reduce((acc, pckData) => {
-      return {
-        ...acc,
-        // TODO: warn duplicates with different versions
-        ...getPackageJsonDependencies(pckData, ignoreDeps, ignoreDefs),
-      };
+      return mergePackageJsonDependencies(
+        acc,
+        getPackageJsonDependencies(pckData, ignoreDeps, ignoreDefs),
+      );
     }, getPackageJsonDependencies(pkgJsonData, ignoreDeps, ignoreDefs));
     for (const pkgName in pkgJsonDeps) {
       libdefsToSearchFor.set(pkgName, pkgJsonDeps[pkgName]);

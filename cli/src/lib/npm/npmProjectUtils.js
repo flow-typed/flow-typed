@@ -9,7 +9,8 @@ import {fs, path} from '../node.js';
 import {stringToVersion} from '../semver.js';
 import type {Version} from '../semver.js';
 
-import semver from 'semver';
+import semver, { intersects } from 'semver';
+import colors from 'colors/safe';
 
 import glob from 'glob';
 
@@ -176,6 +177,30 @@ export function getPackageJsonDependencies(
     }
     return deps;
   }, {});
+}
+
+export function mergePackageJsonDependencies(
+  a: {[depName: string]: string},
+  b: {[depName: string]: string},
+): {[depName: string]: string} {
+  const result = { ...a }; 
+  for (const dep of Object.keys(b)) {
+    const version = b[dep];
+    if (a[dep] != null && !intersects(result[dep], version)) {
+      console.log(
+        colors.yellow(
+          "\t  Conflicting versions for '%s' between '%s' and '%s'",
+        ),
+        dep,
+        a[dep],
+        version,
+      );
+    } else {
+      result[dep] = version;
+    }
+  }
+
+  return result;
 }
 
 export async function getPackageJsonData(pathStr: string): Promise<PkgJson> {

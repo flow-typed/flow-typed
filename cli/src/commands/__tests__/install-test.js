@@ -23,6 +23,7 @@ import {fs, path, child_process} from '../../lib/node';
 import {getNpmLibDefs} from '../../lib/npm/npmLibDefs';
 
 import {testProject} from '../../lib/TEST_UTILS';
+import colors from 'colors/safe';
 
 import {
   _determineFlowVersion as determineFlowVersion,
@@ -1036,13 +1037,16 @@ describe('install (command)', () => {
 
     const origConsoleLog = console.log;
     const origConsoleError = console.error;
+    const origConsoleWarn = console.warn;
     beforeEach(() => {
       (console: any).log = jest.fn();
       (console: any).error = jest.fn();
+      (console: any).warn = jest.fn();
     });
     afterEach(() => {
       (console: any).log = origConsoleLog;
       (console: any).error = origConsoleError;
+      (console: any).warn = origConsoleWarn;
     });
 
     async function fakeProjectEnv(runTest) {
@@ -1066,7 +1070,8 @@ describe('install (command)', () => {
 
         setCustomCacheDir(FAKE_CACHE_DIR);
 
-        const origCWD = process.cwd.bind(process);
+        // $FlowExpectedError[method-unbinding]
+        const origCWD = process.cwd;
         (process: any).cwd = () => FLOWPROJ_DIR;
         try {
           await runTest(FLOWPROJ_DIR);
@@ -1145,6 +1150,47 @@ describe('install (command)', () => {
         );
         expect(fooLibDefContents).toContain('// flow-typed signature: ');
         expect(fooLibDefContents).toContain('// flow-typed version: ');
+      });
+    });
+
+    it('warns conflicting versions', () => {
+      return fakeProjectEnv(async FLOWPROJ_DIR => {
+        await copyDir(path.join(FIXTURE_ROOT, 'with-conflict'), FLOWPROJ_DIR);
+
+        // Run the install command
+        await run({
+          overwrite: false,
+          verbose: false,
+          skip: false,
+          ignoreDeps: [],
+          explicitLibDefs: [],
+        });
+
+        // Installs libdefs
+        expect(
+          await fs.readdir(path.join(FLOWPROJ_DIR, 'flow-typed', 'npm')),
+        ).toEqual([
+          'a_vx.x.x.js',
+          'c_vx.x.x.js',
+          'flow-bin_v0.x.x.js',
+          'foo_v1.x.x.js',
+        ]);
+
+        // Signs installed libdefs
+        const fooLibDefContents = await fs.readFile(
+          path.join(FLOWPROJ_DIR, 'flow-typed', 'npm', 'foo_v1.x.x.js'),
+          'utf8',
+        );
+        expect(fooLibDefContents).toContain('// flow-typed signature: ');
+        expect(fooLibDefContents).toContain('// flow-typed version: ');
+        expect(console.log).toHaveBeenCalledWith(
+          colors.yellow(
+            "\t  Conflicting versions for '%s' between '%s' and '%s'",
+          ),
+          'foo',
+          '^1.1.0',
+          '^2.0.0'
+        );
       });
     });
   });
