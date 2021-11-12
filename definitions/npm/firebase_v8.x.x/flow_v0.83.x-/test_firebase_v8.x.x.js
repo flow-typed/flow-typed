@@ -175,8 +175,29 @@ describe('firebase', () => {
 });
 
 describe('firebase/analytics', () => {
-  it('returns void', () => {
-    (analytics: void)
+  const analytic = analytics();
+
+  it('logEvent', () => {
+    analytic.logEvent('test');
+    analytic.logEvent('test', { a: 'b' });
+
+    // $FlowExpectedError[incompatible-call] needs at least the event name
+    analytic.logEvent();
+    // $FlowExpectedError[incompatible-call] event must be string
+    analytic.logEvent(123);
+    // $FlowExpectedError[incompatible-call] second arg must be object
+    analytic.logEvent('test', 'test');
+  });
+
+  it('setUserProperties', () => {
+    analytic.setUserProperties({ a: 'b' });
+
+    // $FlowExpectedError[incompatible-call] must have args
+    analytic.setUserProperties();
+    // $FlowExpectedError[incompatible-call] arg must be string
+    analytic.setUserProperties('test');
+    // $FlowExpectedError[extra-arg] only takes one arg
+    analytic.setUserProperties({ a: 'b' }, 'test');
   });
 });
 

@@ -110,7 +110,15 @@ declare module 'firebase/app' {
 }
 
 declare module 'firebase/analytics' {
-  declare module.exports: void;
+  declare type Analytics = () => {|
+    logEvent: (
+      event: string,
+      options?: {| [key: string]: any |},
+    ) => void,
+    setUserProperties: ({| [key: string]: any |}) => void,
+  |};
+
+  declare module.exports: Analytics;
 }
 
 declare module 'firebase/auth' {
