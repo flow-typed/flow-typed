@@ -9,7 +9,7 @@ import {fs, path} from '../node.js';
 import {stringToVersion} from '../semver.js';
 import type {Version} from '../semver.js';
 
-import semver, { intersects } from 'semver';
+import semver, {intersects} from 'semver';
 import colors from 'colors/safe';
 
 import glob from 'glob';
@@ -183,7 +183,7 @@ export function mergePackageJsonDependencies(
   a: {[depName: string]: string},
   b: {[depName: string]: string},
 ): {[depName: string]: string} {
-  const result = { ...a }; 
+  const result = {...a};
   for (const dep of Object.keys(b)) {
     const version = b[dep];
     if (a[dep] != null && !intersects(result[dep], version)) {
