@@ -1,6 +1,6 @@
 // @flow
 import { describe, it } from 'flow-typed-test';
-import firebase from 'firebase/app';
+import firebase, { type Firestore$Collection } from 'firebase/app';
 import analytics from 'firebase/analytics';
 import auth from 'firebase/auth';
 import firestore from 'firebase/firestore';
@@ -22,7 +22,7 @@ describe('firebase', () => {
       auth.createUserWithEmailAndPassword('test', 'test').then(({ user }) => {
         user.email.toLowerCase();
         // $FlowExpectedError[prop-missing] it's typed as current user obj
-        user.random
+        user.random;
       });
       // $FlowExpectedError[incompatible-call] missing password
       auth.createUserWithEmailAndPassword('test');
@@ -42,7 +42,7 @@ describe('firebase', () => {
       auth.signInWithEmailAndPassword('test', 'test').then(({ user }) => {
         user.email.toLowerCase();
         // $FlowExpectedError[prop-missing] it's typed as current user obj
-        user.random
+        user.random;
       });
       // $FlowExpectedError[incompatible-call] missing password
       auth.signInWithEmailAndPassword('test');
@@ -57,6 +57,49 @@ describe('firebase', () => {
 
       // $FlowExpectedError[extra-arg] accepts no args
       auth.signOut('test')
+    });
+  });
+
+  describe('firestore', () => {
+    const firestore = firebase.firestore();
+
+    describe('collection', () => {
+      // $FlowExpectedError[incompatible-call] must be passed a collection id
+      firestore.collection();
+      const collection = firestore.collection('test');
+
+      it('add', () => {
+        collection.add({ a: 'b' }).then((res) => {
+          res.id.toLowerCase();
+          // $FlowExpectedError[prop-missing] it's typed as a doc ref
+          res.random;
+        });
+      });
+
+      it('doc', () => {
+        const doc = collection.doc('test');
+        doc.get().then(({ data }) => {
+          // data() typed as any because it can be anything
+          const a: string = data();
+        });
+        doc.set({ a: 'b' }).then((res) => {
+          res.id.toLowerCase();
+          // $FlowExpectedError[prop-missing] it's typed as a doc ref
+          res.random;
+        });
+        doc.update({ a: 'b' }).then((res) => {
+          res.id.toLowerCase();
+          // $FlowExpectedError[prop-missing] it's typed as a doc ref
+          res.random;
+        });
+        doc.delete().then((res) => {
+          (res: void);
+        });
+        (doc.collection: Firestore$Collection);
+
+        // $FlowExpectedError[incompatible-call] must be passed a doc id
+        collection.doc();
+      });
     });
   });
 });
