@@ -1,5 +1,5 @@
-// flow-typed signature: eac649e17745d209e4363554e5c0984f
-// flow-typed version: c6154227d1/colors_v1.3.x/flow_>=v0.104.x
+// flow-typed signature: 6c56e55f6af24f47c33f50f10270785f
+// flow-typed version: 590676b089/colors_v1.x.x/flow_>=v0.104.x
 
 declare module "colors" {
   declare type Color = {

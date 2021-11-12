@@ -1,5 +1,5 @@
-// flow-typed signature: dc381ee55406f66b7272c6343db0834b
-// flow-typed version: da30fe6876/semver_v5.1.x/flow_>=v0.25.x
+// flow-typed signature: bf6205896c200fb28700dfa8d29f2b8a
+// flow-typed version: 3d76504c27/semver_v7.x.x/flow_>=v0.104.x
 
 declare module "semver" {
   declare type Release =
@@ -35,21 +35,22 @@ declare module "semver" {
     raw: string;
     version: string;
 
-    constructor(version: string | SemVer, loose?: boolean): SemVer;
+    constructor(version: string | SemVer, options?: Options): SemVer;
     compare(other: string | SemVer): -1 | 0 | 1;
     compareMain(other: string | SemVer): -1 | 0 | 1;
     comparePre(other: string | SemVer): -1 | 0 | 1;
+    compareBuild(other: string | SemVer): -1 | 0 | 1;
     format(): string;
     inc(release: Release, identifier: string): this;
   }
 
   declare class Comparator {
-    loose?: boolean;
+    options?: Options;
     operator: Operator;
     semver: SemVer;
     value: string;
 
-    constructor(comp: string | Comparator, loose?: boolean): Comparator;
+    constructor(comp: string | Comparator, options?: Options): Comparator;
     parse(comp: string): void;
     test(version: string): boolean;
   }
@@ -59,7 +60,7 @@ declare module "semver" {
     raw: string;
     set: Array<Array<Comparator>>;
 
-    constructor(range: string | Range, loose?: boolean): Range;
+    constructor(range: string | Range, options?: Options): Range;
     format(): string;
     parseRange(range: string): Array<Comparator>;
     test(version: string): boolean;
@@ -70,13 +71,19 @@ declare module "semver" {
   declare var re: Array<RegExp>;
   declare var src: Array<string>;
 
+  declare type Options = {
+    options?: Options,
+    includePrerelease?: boolean,
+    ...
+  } | boolean;
+
   // Functions
-  declare function valid(v: string | SemVer, loose?: boolean): string | null;
-  declare function clean(v: string | SemVer, loose?: boolean): string | null;
+  declare function valid(v: string | SemVer, options?: Options): string | null;
+  declare function clean(v: string | SemVer, options?: Options): string | null;
   declare function inc(
     v: string | SemVer,
     release: Release,
-    loose?: boolean,
+    options?: Options,
     identifier?: string
   ): string | null;
   declare function inc(
@@ -84,69 +91,68 @@ declare module "semver" {
     release: Release,
     identifier: string
   ): string | null;
-  declare function major(v: string | SemVer, loose?: boolean): number;
-  declare function minor(v: string | SemVer, loose?: boolean): number;
-  declare function patch(v: string | SemVer, loose?: boolean): number;
+  declare function major(v: string | SemVer, options?: Options): number;
+  declare function minor(v: string | SemVer, options?: Options): number;
+  declare function patch(v: string | SemVer, options?: Options): number;
+  declare function intersects(r1: string | SemVer, r2: string | SemVer, loose?: boolean): boolean;
+  declare function minVersion(r: string | Range): Range | null;
 
   // Comparison
   declare function gt(
     v1: string | SemVer,
     v2: string | SemVer,
-    loose?: boolean
+    options?: Options
   ): boolean;
   declare function gte(
     v1: string | SemVer,
     v2: string | SemVer,
-    loose?: boolean
+    options?: Options
   ): boolean;
   declare function lt(
     v1: string | SemVer,
     v2: string | SemVer,
-    loose?: boolean
+    options?: Options
   ): boolean;
   declare function lte(
     v1: string | SemVer,
     v2: string | SemVer,
-    loose?: boolean
+    options?: Options
   ): boolean;
   declare function eq(
     v1: string | SemVer,
     v2: string | SemVer,
-    loose?: boolean
+    options?: Options
   ): boolean;
   declare function neq(
     v1: string | SemVer,
     v2: string | SemVer,
-    loose?: boolean
+    options?: Options
   ): boolean;
   declare function cmp(
     v1: string | SemVer,
     comparator: Operator,
     v2: string | SemVer,
-    loose?: boolean
+    options?: Options
   ): boolean;
   declare function compare(
     v1: string | SemVer,
     v2: string | SemVer,
-    loose?: boolean
+    options?: Options
   ): -1 | 0 | 1;
   declare function rcompare(
     v1: string | SemVer,
     v2: string | SemVer,
-    loose?: boolean
-  ): -1 | 0 | 1;
-  declare function compareLoose(
-    v1: string | SemVer,
-    v2: string | SemVer
+    options?: Options
   ): -1 | 0 | 1;
   declare function diff(v1: string | SemVer, v2: string | SemVer): ?Release;
+  declare function intersects(comparator: Comparator): boolean;
   declare function sort(
     list: Array<string | SemVer>,
-    loose?: boolean
+    options?: Options
   ): Array<string | SemVer>;
   declare function rsort(
     list: Array<string | SemVer>,
-    loose?: boolean
+    options?: Options
   ): Array<string | SemVer>;
   declare function compareIdentifiers(
     v1: string | SemVer,
@@ -160,39 +166,67 @@ declare module "semver" {
   // Ranges
   declare function validRange(
     range: string | Range,
-    loose?: boolean
+    options?: Options
   ): string | null;
   declare function satisfies(
     version: string | SemVer,
     range: string | Range,
-    loose?: boolean
+    options?: Options
   ): boolean;
   declare function maxSatisfying(
     versions: Array<string | SemVer>,
     range: string | Range,
-    loose?: boolean
+    options?: Options
+  ): string | SemVer | null;
+  declare function minSatisfying(
+    versions: Array<string | SemVer>,
+    range: string | Range,
+    options?: Options
   ): string | SemVer | null;
   declare function gtr(
     version: string | SemVer,
     range: string | Range,
-    loose?: boolean
+    options?: Options
   ): boolean;
   declare function ltr(
     version: string | SemVer,
     range: string | Range,
-    loose?: boolean
+    options?: Options
   ): boolean;
   declare function outside(
     version: string | SemVer,
     range: string | Range,
     hilo: ">" | "<",
-    loose?: boolean
+    options?: Options
+  ): boolean;
+  declare function intersects(
+    range: Range
+  ): boolean;
+  declare function simplifyRange(
+    ranges: Array<string>,
+    range: string | Range,
+    options?: Options,
+  ): string | Range;
+  declare function subset(
+      sub: string | Range,
+      dom: string | Range,
+      options?: Options,
   ): boolean;
 
+  // Coercion
+  declare function coerce(
+    version: string | SemVer,
+    options?: Options
+  ): ?SemVer
+
   // Not explicitly documented, or deprecated
-  declare function parse(version: string, loose?: boolean): ?SemVer;
+  declare function parse(version: string, options?: Options): ?SemVer;
   declare function toComparators(
     range: string | Range,
-    loose?: boolean
+    options?: Options
   ): Array<Array<string>>;
+}
+
+declare module "semver/preload" {
+  declare module.exports: $Exports<"semver">;
 }
