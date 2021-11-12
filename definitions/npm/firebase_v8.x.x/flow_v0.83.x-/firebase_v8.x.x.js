@@ -37,21 +37,20 @@ declare module 'firebase/app' {
     id: string,
   |};
 
-  declare type Firestore$Get = () => Promise<{|
-    forEach: (({|
+  declare type Firestore$ArrayPayload = {|
+    forEach: ((callback: {|
       id: string,
       data: () => any,
     |}) => void) => void,
-  |}>;
+  |};
+
+  declare type Firestore$Get = () => Promise<Firestore$ArrayPayload>;
 
   declare type Firestore$Unsubscribe = () => void;
 
-  declare type Firestore$Snapshot = ((snapshot: {|
-    forEach: (({|
-      id: string,
-      data: () => any,
-    |}) => void) => void,
-  |}) => void) => Firestore$Unsubscribe;
+  declare type Firestore$Snapshot = (
+    (snapshot: Firestore$ArrayPayload) => void
+  ) => Firestore$Unsubscribe;
 
   declare type Firestore$Collection = (collection: string) => ({|
     add: ({ [key: string]: any }) => Promise<DocRef>,

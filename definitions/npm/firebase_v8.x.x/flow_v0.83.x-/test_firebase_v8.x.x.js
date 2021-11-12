@@ -100,6 +100,41 @@ describe('firebase', () => {
         // $FlowExpectedError[incompatible-call] must be passed a doc id
         collection.doc();
       });
+
+      it('get', () => {
+        collection.get().then(({ forEach }) => {
+          const empty: void = forEach((res) => {
+            res.id.toLowerCase();
+            // data() typed as any because it can be anything
+            const a: string = res.data();
+          });
+        });
+      });
+
+      it('onSnapshot', () => {
+        const unsub = collection.onSnapshot(({ forEach }) => {
+          const empty: void = forEach((res) => {
+            res.id.toLowerCase();
+            // data() typed as any because it can be anything
+            const a: string = res.data();
+          });
+        });
+
+        unsub();
+        // $FlowExpectedError[extra-arg] takes no args
+        unsub('test');
+      });
+
+      it('where', () => {
+        const value = collection.where('test', '<');
+        value.get();
+        value.onSnapshot(() => {});
+        // $FlowExpectedError[prop-missing] checking that it's not any typed
+        value.random();
+
+        // $FlowExpectedError[incompatible-call] can only accept a subset of values for second arg
+        collection.where('test', 'blah');
+      });
     });
   });
 });
