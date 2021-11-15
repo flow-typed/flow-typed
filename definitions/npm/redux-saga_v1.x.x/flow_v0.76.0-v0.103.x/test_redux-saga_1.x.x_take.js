@@ -45,6 +45,7 @@ describe("take effect", () => {
   describe("take(pattern)", () => {
     it("must passes when used properly", () => {
       take(action => action.type === "foo");
+      take(action => action.type);
       take([action => action.type === "foo", action => action.type === "foo"]);
 
       take("ACTION_1");
@@ -52,9 +53,6 @@ describe("take effect", () => {
     });
 
     it("must raises an error when passed invalid pattern", () => {
-      // $FlowExpectedError: PatternFn returns a boolean
-      take(action => null);
-
       // $FlowExpectedError: Only string patterns for arrays
       take(["FOO", "BAR", 1]);
     });
