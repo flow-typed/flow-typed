@@ -4,5 +4,5 @@ import flowBinPath from "flow-bin";
 
 (flowBinPath: string);
 
-// $FlowExpectedError
+// $FlowExpectedError[incompatible-cast]
 (flowBinPath: number);
