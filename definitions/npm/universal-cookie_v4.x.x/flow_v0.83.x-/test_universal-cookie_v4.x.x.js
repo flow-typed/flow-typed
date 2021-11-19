@@ -27,7 +27,10 @@ describe('universal-cookie', () => {
   });
 
   it('getAll', () => {
-
+    const a: string = cookies.getAll({ doNotParse: true });
+    cookies.getAll({}, { decode: (s: string) => s });
+    // $FlowExpectedError[incompatible-type] Can optionally accept generic
+    const b: string = cookies.getAll<number>({ doNotParse: true });
   });
 
   it('set', () => {
