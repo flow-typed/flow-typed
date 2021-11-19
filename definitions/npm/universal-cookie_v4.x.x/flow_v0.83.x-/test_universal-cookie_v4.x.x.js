@@ -3,8 +3,9 @@ import { describe, it } from 'flow-typed-test';
 import Cookies from 'universal-cookie';
 
 describe('universal-cookie', () => {
+  const cookies = new Cookies();
+
   it('constructor', () => {
-    const cookies = new Cookies();
     new Cookies('test');
     new Cookies({ foo: 'bar' });
     new Cookies(null);
@@ -15,5 +16,33 @@ describe('universal-cookie', () => {
     new Cookies(123);
     // $FlowExpectedError[prop-missing] Only accepts decode in second arg obj
     new Cookies('test', { foo: () => {} });
+  });
+
+  it('get', () => {
+    const a: string = cookies.get('test');
+    cookies.get('test', { doNotParse: true });
+    cookies.get('test', {}, { decode: (s: string) => s });
+    // $FlowExpectedError[incompatible-type] Can optionally accept generic
+    const b: string = cookies.get<number>('test');
+  });
+
+  it('getAll', () => {
+
+  });
+
+  it('set', () => {
+
+  });
+
+  it('remove', () => {
+
+  });
+
+  it('addChangeListener', () => {
+
+  });
+
+  it('removeChangeListener', () => {
+
   });
 });
