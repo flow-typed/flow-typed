@@ -1,5 +1,5 @@
 declare module 'universal-cookie' {
-  declare opaque type Cookie;
+  declare type Cookie = $NonMaybeType<mixed>;
 
   declare type CookieParseOptions = {|
     decode: (value: string) => string,

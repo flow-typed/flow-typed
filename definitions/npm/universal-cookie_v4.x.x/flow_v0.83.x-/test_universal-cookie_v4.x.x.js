@@ -34,7 +34,83 @@ describe('universal-cookie', () => {
   });
 
   it('set', () => {
+    (cookies.set('test', 'value'): void);
+    cookies.set(
+      'test',
+      'value',
+      {
+        path: 'test',
+        expires: new Date(),
+        maxAge: 123,
+        domain: 'test',
+        secure: true,
+        httpOnly: true,
+        sameSite: true,
+        encode: (s: string) => s,
+      },
+    );
+    cookies.set(
+      'test',
+      'value',
+      {
+        path: 'test',
+        expires: new Date(),
+        maxAge: 123,
+        domain: 'test',
+        secure: true,
+        httpOnly: true,
+        sameSite: 'none',
+        encode: (s: string) => s,
+      },
+    );
+    cookies.set(
+      'test',
+      'value',
+      {
+        path: 'test',
+        expires: new Date(),
+        maxAge: 123,
+        domain: 'test',
+        secure: true,
+        httpOnly: true,
+        sameSite: 'lax',
+        encode: (s: string) => s,
+      },
+    );
+    cookies.set(
+      'test',
+      'value',
+      {
+        path: 'test',
+        expires: new Date(),
+        maxAge: 123,
+        domain: 'test',
+        secure: true,
+        httpOnly: true,
+        sameSite: 'strict',
+        encode: (s: string) => s,
+      },
+    );
 
+    // $FlowExpectedError[incompatible-call] must pass name
+    cookies.set();
+    // $FlowExpectedError[incompatible-call] must pass value
+    cookies.set('test');
+    cookies.set(
+      'test',
+      'value',
+      {
+        path: 'test',
+        expires: new Date(),
+        maxAge: 123,
+        domain: 'test',
+        secure: true,
+        httpOnly: true,
+        // $FlowExpectedError[incompatible-call] Not boolean or valid union
+        sameSite: 'blah',
+        encode: (s: string) => s,
+      },
+    );
   });
 
   it('remove', () => {
