@@ -249,7 +249,7 @@ function validateVersionNumPart(part: string, partName: string): number {
   return num;
 }
 
-function pkgVersionMatch(pkgSemver: string, libDefSemverRaw: string) {
+function pkgVersionMatch(pkgSemverRaw: string, libDefSemverRaw: string) {
   // The package version should be treated as a semver implicitly prefixed by
   // `^` or `~`. Depending on whether or not the minor value is defined.
   // i.e.: "foo_v2.2.x" is the same range as "~2.2.x"
@@ -265,6 +265,20 @@ function pkgVersionMatch(pkgSemver: string, libDefSemverRaw: string) {
     }
 
     return libDefSemverRaw;
+  })();
+
+  const pkgSemver = (() => {
+    // If pkg version is prefixed with `>=` we should be treated as `^`
+    // Normally `>=` would mean anything greater than a particular version so
+    // ">=2.1.0" would match 2.1.0 up to anything such as 3.4.5
+    // But in the case of flow types, an import of a lib should probably match
+    // the lowest version that matches the range to assume backwards compatibility usage
+    const gtEq = '>=';
+    if (pkgSemverRaw.startsWith(gtEq)) {
+      return pkgSemverRaw.replace(gtEq, '^');
+    }
+
+    return pkgSemverRaw;
   })();
 
   if (semver.valid(pkgSemver)) {
