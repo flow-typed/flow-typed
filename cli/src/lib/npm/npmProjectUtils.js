@@ -9,13 +9,18 @@ import {fs, path} from '../node.js';
 import {stringToVersion} from '../semver.js';
 import type {Version} from '../semver.js';
 
-import semver from 'semver';
+import semver, {intersects} from 'semver';
+import colors from 'colors/safe';
+
+import glob from 'glob';
 
 type PkgJson = {|
   pathStr: string,
   content: {
     name: string,
     version: string,
+    private?: boolean,
+    workspaces?: string[] | {packages: string[], ...},
 
     installConfig?: {pnp?: boolean},
 
@@ -74,6 +79,61 @@ export async function findPackageJsonPath(pathStr: string): Promise<string> {
   return path.join(pkgJsonPathStr, 'package.json');
 }
 
+function getWorkspacePatterns(pkgJson: PkgJson): string[] {
+  if (Array.isArray(pkgJson.content.workspaces)) {
+    return pkgJson.content.workspaces;
+  }
+
+  if (
+    pkgJson.content.workspaces &&
+    Array.isArray(pkgJson.content.workspaces.packages)
+  ) {
+    return pkgJson.content.workspaces.packages;
+  }
+
+  return [];
+}
+
+export async function findWorkspacesPackagePaths(
+  pkgJson: PkgJson,
+): Promise<string[]> {
+  const tasks = await Promise.all(
+    getWorkspacePatterns(pkgJson).map(pattern => {
+      return new Promise((resolve, reject) => {
+        glob(
+          `${path.dirname(pkgJson.pathStr)}/${pattern}/package.json`,
+          {absolute: true},
+          (err, files) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(files);
+            }
+          },
+        );
+      });
+    }),
+  );
+
+  return tasks.flat();
+}
+
+export async function findWorkspacesPackages(
+  pkgJson: PkgJson,
+): Promise<PkgJson[]> {
+  const paths = await findWorkspacesPackagePaths(pkgJson);
+
+  return Promise.all(
+    paths.map(async pathStr => {
+      const pkgJsonContent = await fs.readJson(pathStr);
+      return {
+        pathStr,
+        content: pkgJsonContent,
+      };
+    }),
+  );
+}
+
 // TODO: Write tests for this
 export function getPackageJsonDependencies(
   pkgJson: PkgJson,
@@ -117,6 +177,30 @@ export function getPackageJsonDependencies(
     }
     return deps;
   }, {});
+}
+
+export function mergePackageJsonDependencies(
+  a: {[depName: string]: string},
+  b: {[depName: string]: string},
+): {[depName: string]: string} {
+  const result = {...a};
+  for (const dep of Object.keys(b)) {
+    const version = b[dep];
+    if (a[dep] != null && !intersects(result[dep], version)) {
+      console.log(
+        colors.yellow(
+          "\t  Conflicting versions for '%s' between '%s' and '%s'",
+        ),
+        dep,
+        a[dep],
+        version,
+      );
+    } else {
+      result[dep] = version;
+    }
+  }
+
+  return result;
 }
 
 export async function getPackageJsonData(pathStr: string): Promise<PkgJson> {

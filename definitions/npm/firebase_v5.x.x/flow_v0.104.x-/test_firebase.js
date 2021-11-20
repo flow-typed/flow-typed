@@ -14,7 +14,7 @@ const a1: firebase.app.App = firebase.initializeApp({
 })
 
 // #2
-// $FlowExpectedError
+// $FlowExpectedError[prop-missing]
 const a2: firebase.app.App = firebase.initializeApp({
   storageBucker: 'storageBucket',
   projectId: '42',
@@ -40,7 +40,7 @@ firebase.auth().onAuthStateChanged(user => {
     user.isAnonymous
     user.uid
     user.providerData
-    // $FlowExpectedError
+    // $FlowExpectedError[prop-missing]
     user.foobar
   }
 })
@@ -55,7 +55,7 @@ if (currentUser) {
   })
   .then(userCredential => {
     userCredential.user
-    // $FlowExpectedError
+    // $FlowExpectedError[prop-missing]
     userCredential.foobar
   })
 
@@ -68,20 +68,20 @@ if (currentUser) {
       result.additionalUserInfo
       result.operationType
       result.user
-      // $FlowExpectedError
+      // $FlowExpectedError[prop-missing]
       result.foobar
     })
 
   // #8
   const provider2 = new firebase.auth.EmailAuthProvider()
-  currentUser // $FlowExpectedError
+  currentUser // $FlowExpectedError[incompatible-call]
     .linkWithPopup(provider2)
     .then(result => {
       result.credential
       result.additionalUserInfo
       result.operationType
       result.user
-      // $FlowExpectedError
+      // $FlowExpectedError[prop-missing]
       result.foobar
     })
 }
@@ -118,7 +118,7 @@ firebase
 // #12
 firebase
   .database()
-  .ref('users/42') // $FlowExpectedError
+  .ref('users/42') // $FlowExpectedError[incompatible-call]
   .on('foo', snp => {
     snp.val()
   })
@@ -136,7 +136,7 @@ firebase
 firebase
   .database()
   .ref('users/42')
-  .orderByKey() // $FlowExpectedError
+  .orderByKey() // $FlowExpectedError[incompatible-call]
   .limitToLast('foo')
 
 // #15
@@ -153,7 +153,7 @@ firebase
   .getMetadata()
   .then(metadata => {
     ;(metadata.bucket: string)
-    // $FlowExpectedError
+    // $FlowExpectedError[prop-missing]
     metadata.foo
   })
   .catch()
@@ -165,7 +165,7 @@ firebase
   .put(new File(['foo'], 'foo.txt'))
   .then(snp => {
     ;(snp.bytesTransferred: number)
-    // $FlowExpectedError
+    // $FlowExpectedError[prop-missing]
     snp.foo
   })
   .catch()
@@ -173,7 +173,7 @@ firebase
 // #19
 firebase
   .storage()
-  .ref('/foo') // $FlowExpectedError
+  .ref('/foo') // $FlowExpectedError[incompatible-call]
   .put('foobar')
 
 // #20
@@ -184,7 +184,7 @@ const task = firebase
 const subscribe = task.on('state_changed')
 const unsubscribe = subscribe(snp => {
   ;(snp.bytesTransferred: number)
-  // $FlowExpectedError
+  // $FlowExpectedError[prop-missing]
   snp.foo
 })
 ;(unsubscribe(): void)
@@ -196,7 +196,7 @@ firebase
   .put(new File(['foo'], 'foo.txt'))
   .on('state_changed', snp => {
     ;(snp.bytesTransferred: number)
-    // $FlowExpectedError
+    // $FlowExpectedError[prop-missing]
     snp.foo
   })()
 
@@ -208,7 +208,7 @@ firebase
   .on('state_changed', {
     next: snp => {
       ;(snp.bytesTransferred: number)
-      // $FlowExpectedError
+      // $FlowExpectedError[prop-missing]
       snp.foo
     },
   })()
@@ -217,9 +217,9 @@ firebase
 firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION)
 firebase.auth().setPersistence('local')
 
-// $FlowExpectedError
+// $FlowExpectedError[prop-missing]
 firebase.auth().setPersistence(firebase.auth.Auth.Persistence.FOO)
-// $FlowExpectedError
+// $FlowExpectedError[incompatible-call]
 firebase.auth().setPersistence('foo')
 
 firebase
@@ -228,7 +228,7 @@ firebase
   .get()
   .then(snapshot => {
     ;(snapshot.id: string)
-    // $FlowExpectedError
+    // $FlowExpectedError[prop-missing]
     snapshot.foo
   })
   .catch()
@@ -240,9 +240,9 @@ firebase
   .get()
   .then(snapshot => {
     ;(snapshot.id: string)
-    // $FlowExpectedError
+    // $FlowExpectedError[prop-missing]
     snapshot.foo
-    // $FlowExpectedError
+    // $FlowExpectedError[prop-missing]
     snapshot.forEach(snapshot => {})
   })
   .catch()
@@ -251,7 +251,7 @@ firebase
 ;(firebase.firestore().doc('/foo/bar').id: string)
 
 // #26
-// $FlowExpectedError
+// $FlowExpectedError[prop-missing]
 firebase.firestore().doc('/foo/bar').limit(4)
 
 // #27
@@ -263,7 +263,7 @@ firebase
     snapshots.forEach(snapshot => {
       ;(snapshot.id: string)
     })
-    // $FlowExpectedError
+    // $FlowExpectedError[prop-missing]
     snapshots.foo
   })
   .catch()
@@ -283,7 +283,7 @@ firebase
     snapshots.forEach(snapshot => {
       ;(snapshot.id: string)
     })
-    // $FlowExpectedError
+    // $FlowExpectedError[prop-missing]
     snapshots.foo
   })
   .catch()
@@ -319,7 +319,7 @@ firebase
 firebase
  .firestore()
  .collection('/foo')
- // $FlowExpectedError
+ // $FlowExpectedError[incompatible-call]
  .where('id', 'lte', '5')
  .get({ source: 'cache' });
 
@@ -338,7 +338,7 @@ firebase
   .collection('/foo')
   .add({foo: 'bar'})
   .then(document => {
-    // $FlowExpectedError
+    // $FlowExpectedError[prop-missing]
     const foo = document.foo
   })
 
@@ -437,7 +437,7 @@ firebase
   .collection('listened-collection')
   .onSnapshot(
     // Test typedef with deprecated options object field
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
     { includeQueryMetadataChanges: true },
     (snapshot: firebase.firestore.QuerySnapshot) => {
       snapshot.docChanges().forEach(c => {

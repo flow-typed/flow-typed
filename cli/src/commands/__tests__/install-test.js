@@ -23,6 +23,7 @@ import {fs, path, child_process} from '../../lib/node';
 import {getNpmLibDefs} from '../../lib/npm/npmLibDefs';
 
 import {testProject} from '../../lib/TEST_UTILS';
+import colors from 'colors/safe';
 
 import {
   _determineFlowVersion as determineFlowVersion,
@@ -288,6 +289,7 @@ describe('install (command)', () => {
 
         setCustomCacheDir(FAKE_CACHE_DIR);
 
+        // $FlowExpectedError[method-unbinding]
         const origCWD = process.cwd;
         (process: any).cwd = () => FLOWPROJ_DIR;
         try {
@@ -1021,6 +1023,174 @@ describe('install (command)', () => {
             ),
           ),
         ).toEqual(false);
+      });
+    });
+  });
+
+  describe('workspace tests', () => {
+    const FIXTURE_ROOT = path.join(BASE_FIXTURE_ROOT, 'workspace');
+
+    const FIXTURE_FAKE_CACHE_REPO_DIR = path.join(
+      FIXTURE_ROOT,
+      'fakeCacheRepo',
+    );
+
+    const origConsoleLog = console.log;
+    const origConsoleError = console.error;
+    const origConsoleWarn = console.warn;
+    beforeEach(() => {
+      (console: any).log = jest.fn();
+      (console: any).error = jest.fn();
+      (console: any).warn = jest.fn();
+    });
+    afterEach(() => {
+      (console: any).log = origConsoleLog;
+      (console: any).error = origConsoleError;
+      (console: any).warn = origConsoleWarn;
+    });
+
+    async function fakeProjectEnv(runTest) {
+      return await testProject(async ROOT_DIR => {
+        const FAKE_CACHE_DIR = path.join(ROOT_DIR, 'fakeCache');
+        const FAKE_CACHE_REPO_DIR = path.join(FAKE_CACHE_DIR, 'repo');
+        const FLOWPROJ_DIR = path.join(ROOT_DIR, 'flowProj');
+        const FLOWTYPED_DIR = path.join(FLOWPROJ_DIR, 'flow-typed', 'npm');
+
+        await Promise.all([mkdirp(FAKE_CACHE_REPO_DIR), mkdirp(FLOWTYPED_DIR)]);
+
+        await copyDir(FIXTURE_FAKE_CACHE_REPO_DIR, FAKE_CACHE_REPO_DIR);
+
+        await gitInit(FAKE_CACHE_REPO_DIR),
+          await Promise.all([
+            gitConfig(FAKE_CACHE_REPO_DIR, 'user.name', 'Test Author'),
+            gitConfig(FAKE_CACHE_REPO_DIR, 'user.email', 'test@flow-typed.org'),
+          ]);
+        await gitAdd(FAKE_CACHE_REPO_DIR, 'definitions');
+        await gitCommit(FAKE_CACHE_REPO_DIR, 'FIRST');
+
+        setCustomCacheDir(FAKE_CACHE_DIR);
+
+        // $FlowExpectedError[method-unbinding]
+        const origCWD = process.cwd;
+        (process: any).cwd = () => FLOWPROJ_DIR;
+        try {
+          await runTest(FLOWPROJ_DIR);
+        } finally {
+          (process: any).cwd = origCWD;
+          clearCustomCacheDir();
+        }
+      });
+    }
+
+    it('supports yarn workspace', () => {
+      return fakeProjectEnv(async FLOWPROJ_DIR => {
+        await copyDir(path.join(FIXTURE_ROOT, 'yarn-workspace'), FLOWPROJ_DIR);
+
+        // Run the install command
+        await run({
+          overwrite: false,
+          verbose: false,
+          skip: false,
+          ignoreDeps: [],
+          explicitLibDefs: [],
+        });
+
+        // Installs libdefs
+        expect(
+          await fs.readdir(path.join(FLOWPROJ_DIR, 'flow-typed', 'npm')),
+        ).toEqual([
+          'a_vx.x.x.js',
+          'bar_v1.x.x.js',
+          'c_vx.x.x.js',
+          'flow-bin_v0.x.x.js',
+          'foo_v1.x.x.js',
+        ]);
+
+        // Signs installed libdefs
+        const fooLibDefContents = await fs.readFile(
+          path.join(FLOWPROJ_DIR, 'flow-typed', 'npm', 'foo_v1.x.x.js'),
+          'utf8',
+        );
+        expect(fooLibDefContents).toContain('// flow-typed signature: ');
+        expect(fooLibDefContents).toContain('// flow-typed version: ');
+      });
+    });
+
+    it('supports legacy workspace', () => {
+      return fakeProjectEnv(async FLOWPROJ_DIR => {
+        await copyDir(
+          path.join(FIXTURE_ROOT, 'legacy-workspace'),
+          FLOWPROJ_DIR,
+        );
+
+        // Run the install command
+        await run({
+          overwrite: false,
+          verbose: false,
+          skip: false,
+          ignoreDeps: [],
+          explicitLibDefs: [],
+        });
+
+        // Installs libdefs
+        expect(
+          await fs.readdir(path.join(FLOWPROJ_DIR, 'flow-typed', 'npm')),
+        ).toEqual([
+          'a_vx.x.x.js',
+          'bar_v1.x.x.js',
+          'c_vx.x.x.js',
+          'flow-bin_v0.x.x.js',
+          'foo_v1.x.x.js',
+        ]);
+
+        // Signs installed libdefs
+        const fooLibDefContents = await fs.readFile(
+          path.join(FLOWPROJ_DIR, 'flow-typed', 'npm', 'foo_v1.x.x.js'),
+          'utf8',
+        );
+        expect(fooLibDefContents).toContain('// flow-typed signature: ');
+        expect(fooLibDefContents).toContain('// flow-typed version: ');
+      });
+    });
+
+    it('warns conflicting versions', () => {
+      return fakeProjectEnv(async FLOWPROJ_DIR => {
+        await copyDir(path.join(FIXTURE_ROOT, 'with-conflict'), FLOWPROJ_DIR);
+
+        // Run the install command
+        await run({
+          overwrite: false,
+          verbose: false,
+          skip: false,
+          ignoreDeps: [],
+          explicitLibDefs: [],
+        });
+
+        // Installs libdefs
+        expect(
+          await fs.readdir(path.join(FLOWPROJ_DIR, 'flow-typed', 'npm')),
+        ).toEqual([
+          'a_vx.x.x.js',
+          'c_vx.x.x.js',
+          'flow-bin_v0.x.x.js',
+          'foo_v1.x.x.js',
+        ]);
+
+        // Signs installed libdefs
+        const fooLibDefContents = await fs.readFile(
+          path.join(FLOWPROJ_DIR, 'flow-typed', 'npm', 'foo_v1.x.x.js'),
+          'utf8',
+        );
+        expect(fooLibDefContents).toContain('// flow-typed signature: ');
+        expect(fooLibDefContents).toContain('// flow-typed version: ');
+        expect(console.log).toHaveBeenCalledWith(
+          colors.yellow(
+            "\t  Conflicting versions for '%s' between '%s' and '%s'",
+          ),
+          'foo',
+          '^1.1.0',
+          '^2.0.0',
+        );
       });
     });
   });
