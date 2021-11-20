@@ -1,0 +1,68 @@
+name: Request a definition
+description: Request a new type definition
+labels: [libdef, request]
+body:
+  - type: input
+    id: library
+    attributes:
+      label: Which library are you requesting?
+      placeholder: jest
+    validations:
+      required: true
+
+  - type: input
+    id: registry_link
+    attributes:
+      label: NPM registry
+      description: Paste the link to the latest version of the package on NPM.
+      placeholder: https://www.npmjs.com/package/lodash/v/4.17.21
+    validations:
+      required: false
+
+  - type: dropdown
+    id: existing_libdef
+    attributes:
+      label: Does the library have an existing definition in flow-typed?
+      options:
+        - 'Yes'
+        - 'No'
+    validations:
+      required: true
+
+  - type: dropdown
+    id: ships_with_flow_definition
+    attributes:
+      label: Does the library ship with its own Flow type definitions?
+      options:
+        - 'Yes'
+        - 'No'
+    validations:
+      required: true
+
+  - type: dropdown
+    id: ships_with_any_definition
+    attributes:
+      label: "Does the library ship with other type definitions (eg: TypeScript)?"
+      options:
+        - 'Yes'
+        - 'No'
+    validations:
+      required: true
+
+  - type: textarea
+    id: additional_context
+    attributes:
+      label: Additional context
+      description: Add any other context about the request here.
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: code_of_conduct
+    attributes:
+      label: Code of Conduct
+      description: The Code of Conduct helps create a safe space for everyone. We require
+        that everyone agrees to it.
+      options:
+        - label: I agree to follow this project's [Code of Conduct](https://github.com/flow-typed/flow-typed/blob/master/CODE_OF_CONDUCT.md)
+          required: true
