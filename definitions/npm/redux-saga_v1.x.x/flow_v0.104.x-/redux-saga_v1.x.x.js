@@ -282,7 +282,7 @@ declare module "redux-saga" {
   declare export default typeof sagaMiddlewareFactory;
 
   // Effect types
-  declare export type SubPattern = string | (any => boolean);
+  declare export type SubPattern = string | (any => any);
 
   declare export type Pattern = SubPattern | Array<SubPattern>;
 

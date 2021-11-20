@@ -8,7 +8,7 @@ const auth: firebase.auth.Auth = firebase.auth(app);
 const db: firebase.database.Database = firebase.database();
 const ref: firebase.database.Reference = db.ref('test');
 
-// $FlowExpectedError number. This type is incompatible
+// $FlowExpectedError[incompatible-call] number. This type is incompatible
 const ref2 = db.ref(100);
 
 const provider = new firebase.auth.GoogleAuthProvider();
@@ -17,7 +17,7 @@ firebase.auth()
     .signInWithPopup(provider)
     .then((result) => {
       let user = result.user;
-      // $FlowExpectedError
+      // $FlowExpectedError[prop-missing]
       firebase.auth().logOut();
       firebase.auth().signOut();
     })
@@ -37,7 +37,7 @@ firebase.database().ref('users/' + userId).set({
 });
 firebase.database().ref('test').set(null);
 
-// $FlowExpectedError update should receive an object
+// $FlowExpectedError[incompatible-call] update should receive an object
 firebase.database().ref('test').update("test");
 
 const userRef = firebase.database().ref('users/' + userId);
