@@ -134,10 +134,52 @@ describe('universal-cookie', () => {
   });
 
   it('addChangeListener', () => {
+    (cookies.addChangeListener(({
+      name,
+      value,
+      options,
+    }) => {
+      name.toLowerCase();
+      // $FlowExpectedError[prop-missing] Name is a string not number or any
+      name.toFixed(2);
 
+      if (value) {
+        // value is any
+        value.toLowerCase();
+        value.toFixed(2);
+      }
+      // $FlowExpectedError[incompatible-use] value may not exist
+      value.toLowerCase();
+
+      options?.path
+      // $FlowExpectedError[incompatible-use]
+      // $FlowExpectedError[prop-missing] property does not exist
+      options.foo
+    }): void);
   });
 
   it('removeChangeListener', () => {
+    (cookies.removeChangeListener(({
+      name,
+      value,
+      options,
+    }) => {
+      name.toLowerCase();
+      // $FlowExpectedError[prop-missing] Name is a string not number or any
+      name.toFixed(2);
 
+      if (value) {
+        // value is any
+        value.toLowerCase();
+        value.toFixed(2);
+      }
+      // $FlowExpectedError[incompatible-use] value may not exist
+      value.toLowerCase();
+
+      options?.path
+      // $FlowExpectedError[incompatible-use]
+      // $FlowExpectedError[prop-missing] property does not exist
+      options.foo
+    }): void);
   });
 });
