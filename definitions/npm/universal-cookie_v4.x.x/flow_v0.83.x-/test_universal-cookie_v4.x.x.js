@@ -114,7 +114,23 @@ describe('universal-cookie', () => {
   });
 
   it('remove', () => {
+    (cookies.remove('test'): void);
+    cookies.remove(
+      'test',
+      {
+        path: 'test',
+        expires: new Date(),
+        maxAge: 123,
+        domain: 'test',
+        secure: true,
+        httpOnly: true,
+        sameSite: 'strict',
+        encode: (s: string) => s,
+      },
+    );
 
+    // $FlowExpectedError[incompatible-call] must pass name
+    cookies.remove();
   });
 
   it('addChangeListener', () => {
