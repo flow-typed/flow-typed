@@ -1,6 +1,6 @@
 name: Bug Report
 description: File a bug report on the CLI
-labels: [bug]
+labels: [bug, cli]
 body:
   - type: input
     id: cli_version
@@ -69,7 +69,7 @@ body:
       required: false
 
   - type: dropdown
-    id: want_to_submit_pr_to_fix_bug
+    id: want_to_submit_pr
     attributes:
       label: Do you want to submit a pull request to fix this bug?
       options:
