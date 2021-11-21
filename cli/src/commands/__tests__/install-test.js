@@ -1026,6 +1026,48 @@ describe('install (command)', () => {
       });
     });
 
+    it('treats dependency prefixed with `>=` the same as `^`', () => {
+      return fakeProjectEnv(async FLOWPROJ_DIR => {
+        // Create some dependencies
+        await Promise.all([
+          mkdirp(path.join(FLOWPROJ_DIR, 'src')),
+          writePkgJson(path.join(FLOWPROJ_DIR, 'package.json'), {
+            name: 'test',
+            devDependencies: {
+              'flow-bin': '^0.43.0',
+            },
+            dependencies: {
+              foo: '>=1.2.3',
+            },
+          }),
+          mkdirp(path.join(FLOWPROJ_DIR, 'node_modules', 'foo')),
+          mkdirp(path.join(FLOWPROJ_DIR, 'node_modules', 'flow-bin')),
+        ]);
+
+        // Run the install command
+        await run({
+          overwrite: false,
+          verbose: false,
+          skip: false,
+          rootDir: path.join(FLOWPROJ_DIR, 'src'),
+          explicitLibDefs: [],
+        });
+
+        // Installs libdef
+        expect(
+          await fs.exists(
+            path.join(
+              FLOWPROJ_DIR,
+              'src',
+              'flow-typed',
+              'npm',
+              'foo_v1.x.x.js',
+            ),
+          ),
+        ).toEqual(false);
+      });
+    });
+
     it('installs dependencies lib defs if the dependency ships with with flow files', () => {
       return fakeProjectEnv(async FLOWPROJ_DIR => {
         // Create some dependencies
