@@ -1,5 +1,5 @@
 name: Definition Improvement
-description: Tell us about something that isn't working or missing from a flow libdef
+description: Tell us about something that isn't working or missing from an existing flow-typed definition
 labels: [libdef, bug]
 body:
   - type: input
@@ -34,7 +34,7 @@ body:
     attributes:
       label: Description
       description: What the is the issue you are experiencing?
-      placeholder: I'm trying to import... and...
+      placeholder: I'm trying to import ... and ...
     validations:
       required: true
 

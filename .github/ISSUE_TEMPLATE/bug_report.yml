@@ -36,7 +36,7 @@ body:
       description: Give us a ordered list of the steps to reproduce the problem.
       placeholder: |
         1. Go to ...
-        2. Do ....
+        2. Do ...
         3. See bug
     validations:
       required: true
@@ -55,7 +55,7 @@ body:
     attributes:
       label: Flow configuration
       description: Copy/paste your Flow configuration into this field.
-      placeholder: 'Tip: you can find your ESLint configuration in the `.flowconfig` file.'
+      placeholder: 'Tip: you can find your Flow configuration in the `.flowconfig` file.'
     validations:
       required: true
 
@@ -64,7 +64,7 @@ body:
     attributes:
       label: Anything else?
       description: If there's anything else we need to know, tell us about it here.
-      placeholder: By the way, you also need to know about...
+      placeholder: By the way, you also need to know about ...
     validations:
       required: false
 

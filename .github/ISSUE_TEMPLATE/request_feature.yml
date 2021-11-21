@@ -15,7 +15,7 @@ body:
     id: problem_that_needs_solving
     attributes:
       label: What problem do you want to solve?
-      description: Tell us about your problem.
+      description: Tell us about your problem
       placeholder: New Node version is not supported officially
     validations:
       required: true
@@ -24,7 +24,7 @@ body:
     id: proposed_solution
     attributes:
       label: Your take on the correct solution?
-      description: Tell us your idea to solve the problem.
+      description: Tell us your idea to solve the problem
       placeholder: Update Node versions in `package.json`
     validations:
       required: true
@@ -33,8 +33,8 @@ body:
     id: anything_else
     attributes:
       label: Anything else?
-      description: If there's anything else we need to know, tell us about it here.
-      placeholder: By the way, you also need to know about...
+      description: If there's anything else we need to know, tell us about it here
+      placeholder: By the way, you also need to know about ...
     validations:
       required: false
 
