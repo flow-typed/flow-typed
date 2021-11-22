@@ -4,6 +4,10 @@ import * as React from 'React'
 import Measure, { withContentRect } from 'react-measure'
 
 describe('react-measure', () => {
+  it('can be passed nothing', () => {
+    <Measure />
+  });
+
   it('handles basic use case', () => {
     const dimensions = {
       width: -1,
@@ -29,6 +33,39 @@ describe('react-measure', () => {
         )}
       </Measure>
     );
+  });
+
+  it('ref can be passed correctly', () => {
+    const ref = React.createRef();
+    <Measure innerRef={ref.current} />;
+
+    <Measure innerRef={null} />;
+
+    const ele = document.getElementById('test');
+    <Measure innerRef={ele} />;
+
+    // $FlowExpectedError[incompatible-type] must be HTMLElement if populated
+    <Measure innerRef="test" />;
+  })
+
+  it('error cases', () => {
+    // $FlowExpectedError[prop-missing] Component does not accept `random` as a prop
+    <Measure
+      // $FlowExpectedError[incompatible-type] boolean only
+      client={123}
+      // $FlowExpectedError[incompatible-type] boolean only
+      offset={123}
+      // $FlowExpectedError[incompatible-type] boolean only
+      scroll={123}
+      // $FlowExpectedError[incompatible-type] boolean only
+      bounds={123}
+      // $FlowExpectedError[incompatible-type] boolean only
+      margin={123}
+      random
+    >
+      {/** $FlowExpectedError[incompatible-type] accepts render functions only */}
+      123
+    </Measure>
   });
 
   describe('withContentRect', () => {
