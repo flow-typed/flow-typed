@@ -27,7 +27,7 @@ body:
       description: What minimum flow version do you need this working on
       placeholder: 0.83.0
     validations:
-      required: true
+      required: false
 
   - type: textarea
     id: extra_info
