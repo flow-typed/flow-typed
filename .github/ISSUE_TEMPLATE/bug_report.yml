@@ -1,0 +1,80 @@
+name: Bug Report
+description: File a bug report on the CLI
+labels: [bug, cli]
+body:
+  - type: input
+    id: cli_version
+    attributes:
+      label: CLI Version
+      description: What version of `flow-typed` do you have installed?
+      placeholder: 3.4.0
+    validations:
+      required: true
+
+  - type: input
+    id: operating_system
+    attributes:
+      label: Operating system
+      description: Tell us what operating system you use, and what version.
+      placeholder: macOS Big Sur, version 11.4
+    validations:
+      required: true
+
+  - type: textarea
+    id: bug_description
+    attributes:
+      label: Bug description
+      description: Describe the bug at a high level.
+      placeholder: I was doing ..., but I expected ...
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps_to_reproduce
+    attributes:
+      label: Steps to reproduce
+      description: Give us a ordered list of the steps to reproduce the problem.
+      placeholder: |
+        1. Go to ...
+        2. Do ...
+        3. See bug
+    validations:
+      required: true
+
+  - type: textarea
+    id: error_output_screenshots
+    attributes:
+      label: Error output/screenshots
+      description: Copy/paste any error messages or helpful screenshots into this field.
+      placeholder: 'Tip: you can copy/paste error messages in here. You can click and drag screenshots into this field.'
+    validations:
+      required: false
+
+  - type: textarea
+    id: flow_config
+    attributes:
+      label: Flow configuration
+      description: Copy/paste your Flow configuration into this field.
+      placeholder: 'Tip: you can find your Flow configuration in the `.flowconfig` file.'
+    validations:
+      required: true
+
+  - type: textarea
+    id: anything_else
+    attributes:
+      label: Anything else?
+      description: If there's anything else we need to know, tell us about it here.
+      placeholder: By the way, you also need to know about ...
+    validations:
+      required: false
+
+  - type: dropdown
+    id: want_to_submit_pr
+    attributes:
+      label: Do you want to submit a pull request to fix this bug?
+      options:
+        - 'Yes'
+        - 'Yes, but need help'
+        - 'No (hope someone else can)'
+    validations:
+      required: true

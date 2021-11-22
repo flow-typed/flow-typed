@@ -1,0 +1,50 @@
+name: Request a CLI change
+description: Request, discuss, suggest a new feature or improvement
+labels: [cli, enhancement]
+body:
+  - type: input
+    id: cli_version
+    attributes:
+      label: CLI Version
+      description: What version of `flow-typed` are you using?
+      placeholder: 3.4.0
+    validations:
+      required: true
+
+  - type: textarea
+    id: problem_that_needs_solving
+    attributes:
+      label: What problem do you want to solve?
+      description: Tell us about your problem
+      placeholder: New Node version is not supported officially
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposed_solution
+    attributes:
+      label: Your take on the correct solution?
+      description: Tell us your idea to solve the problem
+      placeholder: Update Node versions in `package.json`
+    validations:
+      required: true
+
+  - type: textarea
+    id: anything_else
+    attributes:
+      label: Anything else?
+      description: If there's anything else we need to know, tell us about it here
+      placeholder: By the way, you also need to know about ...
+    validations:
+      required: false
+
+  - type: dropdown
+    id: want_to_submit_pr
+    attributes:
+      label: Do you want to submit a pull request to implement this change?
+      options:
+        - 'Yes'
+        - 'Yes, but need help'
+        - 'No (hope someone else can)'
+    validations:
+      required: true
