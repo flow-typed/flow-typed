@@ -61,7 +61,6 @@ async function getTestGroups(
   let libDefs = await getLibDefs(repoDirPath);
   if (onlyChanged) {
     const diff = await getDiff();
-    let changedDefs;
     const baseDiff: string[] = diff
       .map(d => {
         const match = d.match(basePathRegex);
@@ -72,8 +71,20 @@ async function getTestGroups(
       })
       .filter(d => d !== '');
 
-    changedDefs = baseDiff.map(d => parseRepoDirItem(d).pkgName);
-    libDefs = libDefs.filter(def => changedDefs.includes(def.pkgName));
+    const changedDefs = baseDiff.map(d => {
+      const { pkgName, pkgVersion } = parseRepoDirItem(d);
+      const { major, minor, patch } = pkgVersion;
+      return {
+        name: pkgName,
+        version: `v${major}.${minor}.${patch}`,
+      };
+    });
+    libDefs = libDefs.filter(def => (
+      changedDefs.some((d) => (
+        d.name === def.pkgName
+        && d.version === def.pkgVersionStr
+      ))
+    ));
   }
   return libDefs.map(libDef => {
     const groupID = `${libDef.pkgName}_${libDef.pkgVersionStr}/${libDef.flowVersionStr}`;
@@ -610,6 +621,7 @@ async function runTests(
   numberOfFlowVersions?: number,
 ): Promise<Map<string, Array<string>>> {
   const testPatternRes = testPatterns.map(patt => new RegExp(patt, 'g'));
+  console.log(testPatternRes);
   const testGroups = (await getTestGroups(repoDirPath, onlyChanged)).filter(
     testGroup => {
       if (testPatternRes.length === 0) {
