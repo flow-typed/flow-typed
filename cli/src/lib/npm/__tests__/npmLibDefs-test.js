@@ -185,9 +185,10 @@ describe('npmLibDefs', () => {
         const pkgName = 'jest-test-npm-package';
         const pkgVersion = 'v1.0.0';
         const flowVersion = {kind: 'all'};
+        const skipCache = false;
 
         await expect(
-          findNpmLibDef(pkgName, pkgVersion, flowVersion),
+          findNpmLibDef(pkgName, pkgVersion, flowVersion, undefined, skipCache),
         ).resolves.toEqual(null);
       });
     });
@@ -197,11 +198,18 @@ describe('npmLibDefs', () => {
         const pkgName = 'flow-bin';
         const pkgVersion = 'github:flowtype/flow-bin';
         const flowVersion = {kind: 'all'};
+        const skipCache = false;
 
         let filtered;
         let error;
         try {
-          filtered = await findNpmLibDef(pkgName, pkgVersion, flowVersion);
+          filtered = await findNpmLibDef(
+            pkgName,
+            pkgVersion,
+            flowVersion,
+            undefined,
+            skipCache,
+          );
         } catch (e) {
           error = e;
         }

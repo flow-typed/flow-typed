@@ -123,6 +123,7 @@ describe('install (command)', () => {
           verbose: false,
           overwrite: false,
           skip: false,
+          skipCache: false,
           ignoreDeps: [],
           useCacheUntil: 1000 * 60,
         });
@@ -157,6 +158,7 @@ describe('install (command)', () => {
             verbose: false,
             overwrite: false,
             skip: false,
+            skipCache: false,
             ignoreDeps: [],
             useCacheUntil: 1000 * 60,
           });
@@ -187,6 +189,7 @@ describe('install (command)', () => {
           verbose: false,
           overwrite: false,
           skip: false,
+          skipCache: false,
           ignoreDeps: [],
           useCacheUntil: 1000 * 60,
         });

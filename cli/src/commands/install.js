@@ -53,6 +53,7 @@ export type Args = {
   flowVersion?: mixed, // string
   overwrite: mixed, // boolean
   skip: mixed, // boolean
+  skipCache?: mixed, // boolean
   verbose: mixed, // boolean
   libdefDir?: mixed, // string
   cacheDir?: mixed, // string
@@ -84,6 +85,11 @@ export function setup(yargs: Yargs): Yargs {
       skip: {
         alias: 's',
         describe: 'Do not generate stubs for missing libdefs',
+        type: 'boolean',
+        demandOption: false,
+      },
+      skipCache: {
+        describe: 'Do not update cache prior to installing libdefs',
         type: 'boolean',
         demandOption: false,
       },
@@ -181,6 +187,7 @@ export async function run(args: Args): Promise<number> {
     verbose: Boolean(args.verbose),
     overwrite: Boolean(args.overwrite),
     skip: Boolean(args.skip),
+    skipCache: Boolean(args.skipCache),
     ignoreDeps: ignoreDeps,
     useCacheUntil: Number(args.useCacheUntil) || CACHE_REPO_EXPIRY,
   });
@@ -232,6 +239,7 @@ type installNpmLibDefsArgs = {|
   verbose: boolean,
   overwrite: boolean,
   skip: boolean,
+  skipCache: boolean,
   ignoreDeps: Array<string>,
   useCacheUntil: number,
 |};
@@ -243,6 +251,7 @@ async function installNpmLibDefs({
   verbose,
   overwrite,
   skip,
+  skipCache,
   ignoreDeps,
   useCacheUntil,
 }: installNpmLibDefsArgs): Promise<number> {
@@ -357,6 +366,7 @@ async function installNpmLibDefs({
           ver,
           flowVersion,
           useCacheUntil,
+          skipCache,
         );
         if (libDef === null) {
           unavailableLibDefs.push({name, ver});
