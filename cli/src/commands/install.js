@@ -348,6 +348,13 @@ async function installNpmLibDefs({
   const getLibDefsToInstall = async (entries: Array<[string, string]>) => {
     await Promise.all(
       entries.map(async ([name, ver]) => {
+        // To comment in json files a work around is to give a key value pair
+        // of `"//": "comment"` we should exclude these so the install doesn't crash
+        // Ref: https://stackoverflow.com/a/14221781/430128
+        if (name === '//') {
+          return;
+        }
+
         if (FLOW_BUILT_IN_NPM_LIBS.indexOf(name) !== -1) {
           return;
         }
