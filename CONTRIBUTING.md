@@ -35,7 +35,9 @@ to build the CLI. Once that's finished, you can repeatedly run
 $ ./quick_run_def_tests.sh
 ```
 
-to run tests for any libdefs that have changes. (Caveat: the tests are only run for the most recent flow version of the libdef, so if you make changes to an earlier flow version of the libdef, the tests won't run against them.
+to run tests for any libdefs that have changes. Caveat: the tests are only run for the most recent flow version of the libdef, so if you make changes to an earlier flow version of the libdef, the tests won't run against them.
+
+> If you ever find that your new definition isn't getting run it may be because you haven't tracked your files. `./quick_run_def_tests.sh` gets defs to tests against by running a git diff against changes and master. Just run `git add -A` and it will start working without the need of making a commit first.
 
 If you ever make changes to the CLI files, make sure you rerun the `./build_and_test_cli.sh` to update the local build of the CLI with your changes.
 
