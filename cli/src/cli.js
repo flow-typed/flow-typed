@@ -6,12 +6,13 @@ import {fs, path} from './lib/node.js';
 
 import * as Install from './commands/install.js';
 import * as CreateDef from './commands/create-def';
-import * as CreateStub from './commands/create-stub.js';
+import * as CreateStub from './commands/create-stub';
+import * as Outdated from './commands/outdated';
 import * as RunTests from './commands/runTests.js';
 import * as Search from './commands/search.js';
 import * as Update from './commands/update.js';
 import * as UpdateCache from './commands/update-cache';
-import * as ValidateDefs from './commands/validateDefs.js';
+import * as ValidateDefs from './commands/validateDefs';
 
 import type {Argv} from 'yargs';
 import typeof Yargs from 'yargs';
@@ -29,6 +30,7 @@ export function runCLI() {
     CreateDef,
     CreateStub,
     Install,
+    Outdated,
     RunTests,
     Search,
     Update,

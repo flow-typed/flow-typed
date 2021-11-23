@@ -59,7 +59,7 @@ export type Args = {
   packageDir?: mixed, // string
   ignoreDeps?: mixed, // Array<string>
   rootDir?: mixed, // string,
-  useCacheUntil?: mixed, // seconds
+  useCacheUntil?: mixed, // number (milliseconds)
   explicitLibDefs: mixed, // Array<string>
 };
 export function setup(yargs: Yargs): Yargs {
