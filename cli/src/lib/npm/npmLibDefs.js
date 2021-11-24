@@ -181,7 +181,7 @@ async function extractLibDefsFromNpmPkgDir(
   return libDefs;
 }
 
-async function getCacheNpmLibDefs(cacheExpiry, skipCache) {
+async function getCacheNpmLibDefs(cacheExpiry, skipCache = false) {
   if (!skipCache) {
     await ensureCacheRepo(cacheExpiry);
   }
@@ -376,7 +376,7 @@ export async function findNpmLibDef(
   pkgVersion: string,
   flowVersion: FlowVersion,
   useCacheUntil: number = CACHE_REPO_EXPIRY,
-  skipCache: boolean,
+  skipCache: boolean = false,
 ): Promise<null | NpmLibDef> {
   const libDefs = await getCacheNpmLibDefs(useCacheUntil, skipCache);
   const filteredLibDefs = filterLibDefs(libDefs, {
