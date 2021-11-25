@@ -15,12 +15,12 @@ test('flow', { timeout: 100 }, (t) => {
   t.end();
 });
 
-// $FlowExpectedError
+// $FlowExpectedError[incompatible-call]
 test('flow', { skip: 1 }, (t) => {
   t.end();
 });
 
-// $FlowExpectedError
+// $FlowExpectedError[incompatible-call]
 test('flow', { timeout: '' }, (t) => {
   t.end();
 });
@@ -130,7 +130,7 @@ test('flow', (t: tape$Context) => {
 
   t.comment('test');
 
-  // $FlowExpectedError: needs message
+  // $FlowExpectedError[incompatible-call]: needs message
   t.comment();
 
   t.end();
@@ -140,7 +140,7 @@ const htest = test.createHarness();
 htest.createStream().pipe(process.stdout);
 htest.createStream({ objectMode: true }).pipe(process.stdout);
 
-// $FlowExpectedError: objectMode should be a boolean
+// $FlowExpectedError[incompatible-call]: objectMode should be a boolean
 htest.createStream({ objectMode: '' }).pipe(process.stdout);
 
 test.createStream({ objectMode: true }).on('data', (row) => {
