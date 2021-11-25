@@ -1262,6 +1262,51 @@ describe('install (command)', () => {
         ).toEqual(false);
       });
     });
+
+    it('does not crash with dependency listed as // for comments', () => {
+      return fakeProjectEnv(async FLOWPROJ_DIR => {
+        // Create some dependencies
+        await Promise.all([
+          mkdirp(path.join(FLOWPROJ_DIR, 'src')),
+          writePkgJson(path.join(FLOWPROJ_DIR, 'package.json'), {
+            name: 'test',
+            devDependencies: {
+              '//': 'some comment that should not install nor crash',
+              'flow-bin': '^0.43.0',
+            },
+            dependencies: {
+              foo: '1.2.3',
+            },
+          }),
+          mkdirp(path.join(FLOWPROJ_DIR, 'node_modules', 'flow-bin')),
+          mkdirp(path.join(FLOWPROJ_DIR, 'node_modules', 'foo')),
+        ]);
+
+        await touchFile(path.join(FLOWPROJ_DIR, 'src', '.flowconfig'));
+
+        // Run the install command
+        await run({
+          overwrite: false,
+          verbose: false,
+          skip: false,
+          rootDir: path.join(FLOWPROJ_DIR, 'src'),
+          explicitLibDefs: [],
+        });
+
+        // Installs libdef
+        expect(
+          await fs.exists(
+            path.join(
+              FLOWPROJ_DIR,
+              'src',
+              'flow-typed',
+              'npm',
+              'foo_v1.x.x.js',
+            ),
+          ),
+        ).toEqual(true);
+      });
+    });
   });
 
   describe('workspace tests', () => {
