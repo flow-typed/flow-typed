@@ -62,7 +62,9 @@ export type Args = {
   rootDir?: mixed, // string,
   useCacheUntil?: mixed, // seconds
   explicitLibDefs: mixed, // Array<string>
+  ...
 };
+
 export function setup(yargs: Yargs): Yargs {
   return yargs
     .usage(`$0 ${name} - ${description}`)

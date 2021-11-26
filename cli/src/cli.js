@@ -24,6 +24,7 @@ export function runCLI() {
     description: string,
     setup?: (yargs: Yargs) => Yargs,
     run: (argv: Argv) => Promise<number>,
+    ...
   };
   const commands: Array<CommandModule> = [
     CreateDef,

@@ -1,13 +1,12 @@
 {
-  "parser": "babel-eslint",
+  "parser": "@babel/eslint-parser",
   "env": {
     "es6": true
   },
   "plugins": ["flowtype", "fb-flow"],
   "extends": [
     "plugin:flowtype/recommended",
-    "plugin:prettier/recommended",
-    "prettier/flowtype"
+    "plugin:prettier/recommended"
   ],
   "globals": {},
   "rules": {
