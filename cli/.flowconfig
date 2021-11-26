@@ -16,6 +16,6 @@ unnecessary-optional-chain=error
 
 [options]
 exact_by_default=true
-format.bracket_spacing=true
+format.bracket_spacing=false
 format.single_quotes=true
 include_warnings=true
