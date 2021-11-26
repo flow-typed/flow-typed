@@ -20,7 +20,7 @@ jobs:
     strategy:
       matrix:
         node: [ '14', '16' ]
-    name: Node ${{ matrix.node }} sample
+    name: Node ${{ matrix.node }}
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       - uses: actions/checkout@v2
