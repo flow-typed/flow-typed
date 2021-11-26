@@ -37,4 +37,4 @@ jobs:
           git config --global user.email "noemail@example.com"
 
       - name: Tests
-        run: ./build.sh
+        run: ./build.cmd
