@@ -21,7 +21,7 @@ export const fs = {
 
   createReadStream: node_fs.createReadStream,
   createWriteStream: node_fs.createWriteStream,
-  // $FlowFixMe
+  // $FlowFixMe[signature-verification-failure]
   exists: jest.fn((dirOrFilePath: string): Promise<boolean> => {
     return new Promise(resolve => {
       process.nextTick(() =>
@@ -31,7 +31,7 @@ export const fs = {
   }),
   mkdir: node_fs.mkdir,
   readdir: node_fs.readdir,
-  // $FlowFixMe
+  // $FlowFixMe[signature-verification-failure]
   readFile: jest.fn(
     (
       filePath: string,

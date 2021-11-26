@@ -20,6 +20,7 @@ export type Args = {
   onlyChanged?: mixed, //boolean
   numberOfFlowVersions?: mixed, // number
   testPatterns: mixed, // Array<string>
+  ...
 };
 
 // Used to decide which binary to fetch for each version of Flow

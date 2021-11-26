@@ -9,5 +9,13 @@ flow-typed
 <PROJECT_ROOT>/node_modules/.*config-chain/test/broken.json
 .*/__.*-fixtures__/.*
 
+[lints]
+deprecated-type=error
+deprecated-utility=error
+unnecessary-optional-chain=error
+
 [options]
-experimental.const_params=true
+exact_by_default=true
+format.bracket_spacing=false
+format.single_quotes=true
+include_warnings=true
