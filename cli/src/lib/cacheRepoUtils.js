@@ -105,7 +105,6 @@ export async function ensureCacheRepo(
         }
 
         if (lastUpdated + cacheRepoExpiry < Date.now()) {
-          console.log('• rebasing flow-typed cache...');
           const rebaseSuccessful = await rebaseCacheRepo();
           if (!rebaseSuccessful) {
             console.log(
