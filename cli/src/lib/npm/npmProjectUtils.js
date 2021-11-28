@@ -252,7 +252,7 @@ export async function loadPnpResolver(
   }
   const pnpJsFile = path.resolve(pkgJson.pathStr, '..', '.pnp.js');
   if (await fs.exists(pnpJsFile)) {
-    // $FlowFixMe
+    // $FlowFixMe[unsupported-syntax]
     return require(pnpJsFile);
   }
   throw new Error(

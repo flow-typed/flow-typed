@@ -10,7 +10,7 @@
   "bugs": {
     "url": "https://github.com/flow-typed/flow-typed/issues"
   },
-  "version": "3.4.0",
+  "version": "3.5.0",
   "main": "dist/cli.js",
   "bin": "dist/cli.js",
   "engines": {
@@ -23,7 +23,7 @@
     "lint": "eslint .",
     "prepublish": "mkdirp dist && yarn test",
     "test": "yarn clean && yarn build && yarn test-quick",
-    "test-quick": "jest && yarn lint",
+    "test-quick": "jest && yarn lint && yarn flow",
     "watch": "mkdirp dist && babel --source-maps --watch=./src --out-dir=./dist"
   },
   "dependencies": {
@@ -38,25 +38,26 @@
     "prettier": "^1.19.1",
     "rimraf": "^3.0.2",
     "semver": "7.3.2",
-    "table": "^5.4.6",
+    "table": "^6.7.3",
     "unzipper": "^0.10.8",
     "which": "^2.0.2",
     "yargs": "^15.1.0"
   },
   "devDependencies": {
-    "@babel/cli": "^7.8.4",
-    "@babel/core": "^7.8.4",
-    "@babel/preset-env": "^7.8.4",
-    "@babel/preset-flow": "^7.8.3",
-    "babel-eslint": "^10.0.3",
-    "babel-jest": "^25.1.0",
-    "eslint": "^6.8.0",
-    "eslint-config-prettier": "^6.10.1",
-    "eslint-plugin-fb-flow": "^0.0.1",
-    "eslint-plugin-flowtype": "^4.6.0",
-    "eslint-plugin-prettier": "^3.1.2",
-    "flow-bin": "^0.164.0",
-    "jest": "^25.1.0"
+    "@babel/cli": "^7.16.0",
+    "@babel/core": "^7.16.0",
+    "@babel/eslint-parser": "^7.16.3",
+    "@babel/plugin-syntax-flow": "^7.16.0",
+    "@babel/plugin-transform-react-jsx": "^7.16.0",
+    "@babel/preset-env": "^7.16.4",
+    "@babel/preset-flow": "^7.16.0",
+    "eslint": "^8.3.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-fb-flow": "^0.0.4",
+    "eslint-plugin-flowtype": "^8.0.3",
+    "eslint-plugin-prettier": "^4.0.0",
+    "flow-bin": "^0.165.1",
+    "jest": "^27.3.1"
   },
   "keywords": [
     "flow",

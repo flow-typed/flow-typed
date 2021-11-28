@@ -9,6 +9,7 @@ export const name = 'validate-defs <definitionsDirPath>';
 export const description = 'Validate the structure of the /definitions dir';
 export type Args = {
   definitionsDirPath: mixed, // string
+  ...
 };
 
 export function setup(yargs: Yargs): Yargs {
