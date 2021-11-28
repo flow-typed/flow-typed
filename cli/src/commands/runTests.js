@@ -10,7 +10,7 @@ import {getDiff} from '../lib/git';
 
 import got from 'got';
 import * as semver from 'semver';
-import * as unzip from 'unzipper';
+import StreamZip from 'node-stream-zip';
 import typeof Yargs from 'yargs';
 import type {FlowVersion} from '../lib/flowVersion.js';
 import {ValidationError} from '../lib/ValidationError';
@@ -229,17 +229,12 @@ async function getOrderedFlowBinVersions(
         // Extract the flow binary
         const flowBinDirPath = path.join(BIN_DIR, 'TMP-flow-' + version);
         await fs.mkdir(flowBinDirPath);
+
         console.log('  Extracting flow-%s...', version);
-        await new Promise((res, rej) => {
-          const unzipExtractor = unzip.Extract({path: flowBinDirPath});
-          unzipExtractor.on('error', function(err) {
-            rej(err);
-          });
-          unzipExtractor.on('close', function() {
-            res();
-          });
-          fs.createReadStream(zipPath).pipe(unzipExtractor);
-        });
+        const zip = new StreamZip.async({file: zipPath});
+        const extractedCount = await zip.extract(null, flowBinDirPath);
+        console.log('  Extracted %s entries', extractedCount);
+
         if (IS_WINDOWS) {
           await fs.rename(
             path.join(flowBinDirPath, 'flow', 'flow.exe'),
