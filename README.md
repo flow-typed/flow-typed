@@ -4,24 +4,19 @@
   width="400"
 />
 
-![Build](https://github.com/flow-typed/flow-typed/workflows/CI/badge.svg)
-[![npm](https://img.shields.io/npm/dm/flow-typed.svg)](https://www.npmjs.com/package/flow-typed)
-[![Join the chat at https://discordapp.com/invite/8ezwRUK](https://img.shields.io/discord/539606376339734558.svg?label=discord&logo=discord&logoColor=white)](https://discordapp.com/invite/8ezwRUK)
-[![flow-typed](https://snyk.io/advisor/npm-package/flow-typed/badge.svg)](https://snyk.io/advisor/npm-package/flow-typed)
+![CI](https://github.com/flow-typed/flow-typed/workflows/CI/badge.svg)
+[![npm](https://img.shields.io/npm/v/flow-typed.svg)](https://www.npmjs.com/package/flow-typed)
+[![docs](https://img.shields.io/badge/docs-pages-blueviolet)](https://flow-typed.github.io/flow-typed/)
+[![health](https://snyk.io/advisor/npm-package/flow-typed/badge.svg?label=health)](https://snyk.io/advisor/npm-package/flow-typed)
+[![discord](https://img.shields.io/discord/539606376339734558.svg?label=chat&logo=discord&logoColor=white)](https://discordapp.com/invite/8ezwRUK)
 
-`flow-typed` is a [repository](https://github.com/flow-typed/flow-typed/tree/master/definitions) of third-party
-[library interface definitions](https://flow.org/en/docs/libdefs)
+`flow-typed` is a [repository](https://github.com/flow-typed/flow-typed/tree/master/definitions) of
+high-quality, third-party [library type definitions](https://flow.org/en/docs/libdefs)
 for use with [Flow](http://flow.org).
 
-You can grab definitions directly from this GitHub repo, or you can use the CLI to install a libdef for a given library:
-```bash
-$ yarn global add flow-typed
-
-$ cd /path/to/my/project
-$ yarn install
-$ flow-typed install rxjs@5.0.x
-'rxjs_v5.0.x.js' installed at /path/to/my/project/flow-typed/npm/rxjs_v5.0.x.js
-```
+Check out the [quick start](https://flow-typed.github.io/flow-typed/#/quickstart) page
+in the docs to get started. It will walk you through installing typedefs, using them,
+as well as writing and including your own.
 
 ## Huh?
 
@@ -45,17 +40,11 @@ is run `flow-typed install`. This will search the libdef repo and download all
 the libdefs that are relevant for your project and install them for you. After
 that, **simply check them in** and be on your way!
 
-## Getting Started
-
-Check out the [quick start](https://flow-typed.github.io/flow-typed/#/quickstart) page
-in the docs. It will walk you through installing typedefs, using them,
-as well as writing and including your own.
-
 ## The CLI
 
 The `flow-typed` npm package provides a CLI that includes several commands for
-working with this repository. The full list of commands is available at
-[CLI commands](https://flow-typed.github.io/flow-typed/#/install) in the docs.
+working with this repository. The full list of commands is available
+[in the docs](https://flow-typed.github.io/flow-typed/#/install) .
 
 ## FAQs
 
@@ -67,10 +56,10 @@ Chances are your question has already been answered! If not, don't hesitate to
 
 Just send a pull request! The docs on
 [contributing definitions](https://flow-typed.github.io/flow-typed/#/contributing)
-detail the format of new contributions. Contributions should follow the best practices outlined on
+detail the format of new contributions. Contributions should follow the best practices outlined in
 [CONTRIBUTING.md](https://github.com/flow-typed/flow-typed/blob/master/CONTRIBUTING.md).
 
-#### Contributing to the CLI
+### Contributing to the CLI
 
 Bugfixes and improvements to the core CLI are welcome. If you'd like to contribute
 a new feature, consider opening an issue first to discuss it.
