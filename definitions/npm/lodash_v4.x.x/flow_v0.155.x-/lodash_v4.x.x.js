@@ -174,7 +174,7 @@ declare module "lodash" {
   declare type NestedArray<V> = Array<Array<V>>;
   declare type Collection<V, K = Key> = $ReadOnlyArray<V> | ReadOnlyIndexerObject<V, K>;
 
-  declare type matchesIterateeShorthand = { [Key]: any, ... };
+  declare type matchesIterateeShorthand = { [key: string]: any, ... };
   declare type matchesPropertyIterateeShorthand = [string, any];
   declare type propertyIterateeShorthand = string;
 
@@ -576,10 +576,10 @@ declare module "lodash" {
 
     // Collection
     countBy:
-      & (<T>(array: $ReadOnlyArray<T>, iteratee?: ?ValueOnlyIteratee<T>) => { [string]: number, ... })
-      & (<T>(array: void | null, iteratee?: ?ValueOnlyIteratee<T>) => {...})
-      & ((string: string, iteratee?: ?ValueOnlyIteratee<string>) => { [string]: number, ... })
-      & (<T>(object: ReadOnlyIndexerObject<T>, iteratee?: ?ValueOnlyIteratee<T>) => { [string]: number, ... });
+      & (<T>(array: $ReadOnlyArray<T>, iteratee?: ?ValueOnlyIteratee<T>) => { [key: string]: number, ... })
+      & (<T>(array: void | null, iteratee?: ?ValueOnlyIteratee<T>) => { [key: string]: number, ... })
+      & ((string: string, iteratee?: ?ValueOnlyIteratee<string>) => { [key: string]: number, ... })
+      & (<T>(object: ReadOnlyIndexerObject<T>, iteratee?: ?ValueOnlyIteratee<T>) => { [key: string]: number, ... });
     // alias of _.forEach
     each<A, K, T: ReadOnlyIndexerObject<A, K> | $ReadOnlyArray<A> | string | void | null>(collection: T, iteratee?: ?IterateeWithResult<A, K, T, boolean | void>): T;
     // alias of _.forEachRight
@@ -591,7 +591,7 @@ declare module "lodash" {
     filter:
       & (<T>(array?: ?$ReadOnlyArray<T>, predicate?: ?Predicate<T>) => Array<T>)
       & (<A, T: ReadOnlyIndexerObject<A>>(
-        object: T,
+        object?: ?T,
         predicate?: OPredicate<A, T>
       ) => Array<A>);
     find:
