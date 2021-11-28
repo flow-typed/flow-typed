@@ -44,7 +44,7 @@ declare module "react-redux" {
 }
 ```
 
-Think **very carefully** before you import types from other libraries. We have no smart way to track dependencies between libdefs.
+> Think **very carefully** before you import types from other libraries. We have no smart way to track dependencies between libdefs.
 
 ## Issues
 

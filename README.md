@@ -1,18 +1,22 @@
-<img
-  alt="Flow Logo"
-  src="https://raw.githubusercontent.com/flow-typed/flow-typed/master/flow-typed-logo.png"
-  width="400"
-/>
+<p align="center">
+  <a href="https://flow-typed.github.io/flow-typed">
+    <img alt="flow-typed" src="./docs/_media/flow.svg">
+  </a>
+</p>
 
-![CI](https://github.com/flow-typed/flow-typed/workflows/CI/badge.svg)
-[![npm](https://img.shields.io/npm/v/flow-typed.svg)](https://www.npmjs.com/package/flow-typed)
-[![docs](https://img.shields.io/badge/docs-pages-blueviolet)](https://flow-typed.github.io/flow-typed/)
-[![health](https://snyk.io/advisor/npm-package/flow-typed/badge.svg?label=health)](https://snyk.io/advisor/npm-package/flow-typed)
-[![discord](https://img.shields.io/discord/539606376339734558.svg?label=chat&logo=discord&logoColor=white)](https://discordapp.com/invite/8ezwRUK)
+<p align="center">
+  A <a href="https://github.com/flow-typed/flow-typed/tree/master/definitions">repository</a> of
+  high-quality, third-party <a href="https://flow.org/en/docs/libdefs">library type definitions</a>
+  for use with <a href="http://flow.org">Flow</a>.
+</p>
 
-`flow-typed` is a [repository](https://github.com/flow-typed/flow-typed/tree/master/definitions) of
-high-quality, third-party [library type definitions](https://flow.org/en/docs/libdefs)
-for use with [Flow](http://flow.org).
+<p align="center">
+  <a><img src="https://github.com/flow-typed/flow-typed/workflows/CI/badge.svg" alt="ci status"></a>
+  <a><img src="https://img.shields.io/npm/v/flow-typed.svg" alt="npm package"></a>
+  <a><img src="https://img.shields.io/badge/docs-pages-blueviolet" alt="docs"></a>
+  <a><img src="https://snyk.io/advisor/npm-package/flow-typed/badge.svg?label=health" alt="package health"></a>
+  <a><img src="https://img.shields.io/discord/539606376339734558.svg?label=chat&logo=discord&logoColor=white" alt="discord"></a>
+</p>
 
 Check out the [quick start](https://flow-typed.github.io/flow-typed/#/quickstart) page
 in the docs to get started. It will walk you through installing typedefs, using them,

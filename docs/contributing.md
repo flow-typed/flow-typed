@@ -11,20 +11,20 @@ format:
 └ definitions/npm/
   ├ yargs_v4.x.x/           # <-- The name of the library, followed by _v<VERSION>
   | |
-  | ├ flow_v0.23.x/         # <-- A folder containing libdefs tested against the
-  | | |                     #     specified version(s) of Flow (v0.23.x in this
+  | ├ flow_v0.83.x/         # <-- A folder containing libdefs tested against the
+  | | |                     #     specified version(s) of Flow (v0.83.x in this
   | | |                     #     case).
   | | |
   | | └ yargs_v4.x.x.js     # <-- The libdef file meant for the Flow version
   | |                       #     specified by the containing directory's name.
   | |                       #     Must be named `<LIB>_v<VERSION>.js`.
   | |
-  | ├ flow_v0.19.x-v0.22.x/ # <-- A folder containing libdefs tested against a
+  | ├ flow_v0.85.x-v0.91.x/ # <-- A folder containing libdefs tested against a
   | | |                     #     different range of Flow versions:
-  | | |                     #     Anything from v0.19.x to v0.22.x (inclusive)
+  | | |                     #     Anything from v0.85.x to v0.91.x (inclusive)
   | | |
   | | ├ yargs_v4.x.x.js     # <-- The libdef file for versions of Flow from
-  | | |                     #     v0.19.x to v0.22.x (inclusive)
+  | | |                     #     v0.85.x to v0.91.x (inclusive)
   | | |
   | | └ test_yargs.js       # <-- Tests in this directory only apply to the
   | |                       #     adjacent libdef (and thus, are specific to
@@ -42,9 +42,9 @@ Versions are semantically versioned (semver) with some restrictions:
   specify `x` in place of a number for MINOR and PATCH, but MAJOR cannot be `x`.
 * Library versions cannot specify a semver range, but Flow versions can of the
   following forms:
-  * **`flow_v0.22.x-`**: Flow v0.22.x and above
-  * **`flow_v0.22.x-v0.28.x`**: Flow versions v0.22.x up to v0.28.x (inclusive)
-  * **`flow_-v0.22.x`**: Every version under (and including) Flow v0.22.x
+  * **`flow_v0.83.x-`**: Flow v0.22.x and above
+  * **`flow_v0.85.x-v0.91.x`**: Flow versions v0.22.x up to v0.28.x (inclusive)
+  * **`flow_-v0.106.x`**: Every version under (and including) Flow v0.22.x
 
 **We structure files this way to enable automated testing and tooling.**
 Tests ensure that library definitions continue to work as expected and the
