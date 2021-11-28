@@ -36,7 +36,7 @@ format:
   ├ ...
 ```
 
-Versions are semver versions with some restrictions:
+Versions are semantically versioned (semver) with some restrictions:
 
 * All of MAJOR, MINOR, and PATCH versions must be specified. It's acceptable to
   specify `x` in place of a number for MINOR and PATCH, but MAJOR cannot be `x`.
@@ -51,9 +51,7 @@ Tests ensure that library definitions continue to work as expected and the
 `flow-typed` tooling ensures that it's as easy as possible to find and install
 library definitions.
 
-When submitting new library definitions, opt for `flow_v0.83.x-` instead of `flow_all`. Starting with Flow v0.83 you can use the syntax `declare module.exports: type;`.
-
-### Writing LibDef Tests
+## Writing tests
 
 **When you contribute a new library definition (or make a change to an existing
 one), you must include tests with your change.**
@@ -65,7 +63,13 @@ then run all applicable versions of Flow against the test file to be sure that
 only *expected* errors occur.
 
 In order to write code where you expect an error, you can put `// $FlowExpectedError`
-on the line above one of the lines listed in the error. This tells the test
-runner to ignore errors that mention that line. **We require at least 1
+with a suppression code on the line above one of the lines listed in the error.
+This tells the test runner to ignore errors that mention that line. **We require at least 1
 `// $FlowExpectedError` in each test**. This helps to ensure that the test is actually
 exercising types like the author expects it to be.
+
+## A note on flowgen
+
+[flowgen](https://github.com/joarwilk/flowgen) is a CLI tool that generates flowtype definitions from TypeScript types.
+While it supports most of the TypeScript syntax, in some cases manual changes may be needed before use.
+You can check out supported syntax constructs in thier section on the [state of the converter](https://github.com/joarwilk/flowgen#the-state-of-the-converter).

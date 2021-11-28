@@ -47,81 +47,33 @@ that, **simply check them in** and be on your way!
 
 ## Getting Started
 
-Check out [Importing And Using Type Definitions](https://github.com/flow-typed/flow-typed/wiki/Importing-And-Using-Type-Definitions)
-in the wiki. It will walk you through using typedefs installed through flow-typed,
+Check out the [quick start](https://flow-typed.github.io/flow-typed/#/quickstart) page
+in the docs. It will walk you through installing typedefs, using them,
 as well as writing and including your own.
+
+## The CLI
+
+The `flow-typed` npm package provides a CLI that includes several commands for
+working with this repository. The full list of commands is available at
+[CLI commands](https://flow-typed.github.io/flow-typed/#/install) in the docs.
 
 ## FAQs
 
-Before opening an issue, take a look at the [FAQs](https://github.com/flow-typed/flow-typed/wiki/FAQs).
+Before opening an issue, take a look at the [FAQs](https://flow-typed.github.io/flow-typed/#/faq).
 Chances are your question has already been answered! If not, don't hesitate to
 [open an issue](https://github.com/flow-typed/flow-typed/issues/new).
 
 ## How Do I Contribute Library Definitions?
 
-Just send a pull request! The wiki on
-[Contributing Library Definitions](https://github.com/flow-typed/flow-typed/wiki/Contributing-Library-Definitions)
-details the format of new contributions. Contributions should follow the best practices outline on
+Just send a pull request! The docs on
+[contributing definitions](https://flow-typed.github.io/flow-typed/#/contributing)
+detail the format of new contributions. Contributions should follow the best practices outlined on
 [CONTRIBUTING.md](https://github.com/flow-typed/flow-typed/blob/master/CONTRIBUTING.md).
 
 #### Contributing to the CLI
 
 Bugfixes and improvements to the core CLI are welcome. If you'd like to contribute
 a new feature, consider opening an issue first to discuss it.
-
-## `flow-typed` CLI
-
-The `flow-typed` npm package provides a CLI that includes several commands for
-working with this repository. The full list of commands is available at
-[CLI Commands & Flags](https://github.com/flow-typed/flow-typed/wiki/CLI-Commands-and-Flags).
-
-##### `flow-typed install [package-specification] [--ignoreDeps deps]`
-
-Installs libdefs from looking at your package.json.
-
-If `package-specification` was specified, only that one libdef will be installed.
-If the `--ignoreDeps` flag was specified, the libdefs for the specified deps will be ignored. i.e: `--ignoreDeps dev bundled peer`.
-
-```bash
-flow-typed install foo@1.2.3
-```
-
-##### `flow-typed validate-defs`
-
-Verifies that all files under the `/definitions/` directory are structured and
-named properly. **It does not run tests**, it only asserts that file and
-directory names match the expected conventions.
-
-This command is run during CI.
-
-##### `flow-typed run-tests [optional-pattern]`
-
-For each libdef, find each test and run it with all compatible versions of Flow.
-If any errors arise that are not *`// $FlowExpectedError`*, the test has failed.
-
-Note that this command assumes that the `/definitions/` directory is correctly
-structured. It should be run *after* running `flow-typed validate-defs`.
-
-##### `flow-typed update-cache [--debug]`
-
-By default flow-typed retrieves all available libdefs from its related upstream
-repository. To make this process more efficient, those libdefs are cached once
-on your local filesystem. Usually, the cache will automatically be updated after
-a short grace period during a libdef installation, but sometimes it is useful to
-do this update manually. Use this command if you want to download the most
-recent definitions into the cache for yourself.
-
-##### `flow-typed create-stub package-specification [--typescript]`
-
-Creates `any`-typed libdef that you can fill in.
-
-If the `--typescript` flag was set to `true`, TypeScript definition would be converted to flow-typed libdef format if possible.
-Please report any issues that you have encountered to [flowgen](https://github.com/joarwilk/flowgen/issues) repository.
-
-[flowgen](https://github.com/joarwilk/flowgen) supports most of the TypeScript syntax, however, in some cases manual changes may be needed before use.
-You can check out supported syntax constructs in flowgen's [&ldquo;The state of converter&rdquo; section](https://github.com/joarwilk/flowgen#the-state-of-the-converter).
-
-After you have edited these files, consider [contributing](CONTRIBUTING.md) them back to flow-typed.
 
 ## Active Maintenance Team
 

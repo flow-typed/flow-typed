@@ -1,6 +1,6 @@
 # FAQs
 
-## General Questions
+## General questions
 
 ### Why do I need to commit the libdefs that `flow-typed` installs for my project?
 
@@ -21,7 +21,7 @@ project's version control, you can do so explicitly with the
 
 > I'm writing a Node module. I would like to expose my module's types so that dependent projects (if they are also using Flow) may automatically use types. Should I PR a libdef into flow-typed after publishing my module? Or is it better to just include .js.flow file(s) with my published code?
 
-If you're not planing on versioning your definitions, the preferred way is to copy source files to `*.js.flow` format, and include them with the release.
+If you're not planing on versioning your definitions, the preferred way is to copy source files to `*.js.flow` format, and include them with the release. A tool like [flow-copy-source](https://www.npmjs.com/package/flow-copy-source) works really well for this.
 
 ### How do I build type definitions that depend on other definitions?
 

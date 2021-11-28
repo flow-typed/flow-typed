@@ -4,8 +4,8 @@
   - [Advanced configuration](advanced.md)
   - [Contributing definitions](contributing.md)
 - CLI commands
-  - [create-stub](stub.md)
   - [install](install.md)
+  - [create-stub](stub.md)
   - [run-tests](tests.md)
   - [search](search.md)
   - [update](update.md)

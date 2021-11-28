@@ -33,9 +33,9 @@ that, **simply check them in** and be on your way!
 
 Before opening an issue, take a look at the [FAQs](faqs.md). Chances are your 
 question has already been answered! If not, don't hesitate to
-[open an issue](https://github.com/flow-typed/flow-typed/issues/new).
+[open an issue](https://github.com/flow-typed/flow-typed/issues/new/choose).
 
-## How Do I Contribute Library Definitions?
+## How do I contribute library definitions?
 
 Just send a pull request! The page on [Contributing library definitions](contributing.md)
 details the format of new contributions. Contributions should follow the 

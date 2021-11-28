@@ -1,10 +1,10 @@
-# Importing Type Definitions
+# Importing type definitions
 
-This guide assumes you've followed the installation steps in the [Quick start guide](quickstart.md), and that you've installed the the definitions for your project's dependencies.
+This guide assumes you've followed the installation steps in the [quick start guide](quickstart.md), and that you've installed the the definitions for your project's dependencies.
 
-## Existing Definitions
+## Existing definitions
 
-> Using the `/flow-typed` directory for `libdefs` is a convention that enables Flow to JustWork™ out of the box and encourages consistency across projects that use Flow, but it is also possible to explicitly configure Flow to look elsewhere for `libdefs` using the `[libs]` section of your `.flowconfig`.[ [1] ](https://flow.org/en/docs/libdefs/)_
+> Using the `/flow-typed` directory for `libdefs` is a convention that enables Flow to JustWork™ out of the box and encourages consistency across projects that use Flow, but it is also possible to explicitly configure Flow to look elsewhere for `libdefs` using the `[libs]` section of your `.flowconfig`.[[1]](https://flow.org/en/docs/libdefs/)
 
 Once you've installed the definitions (via `flow-typed install`), you can start using them right away. For instance, if you're using `underscore` methods, simply import the underscore library:
 
@@ -21,9 +21,9 @@ import { reduxForm } from 'redux-form';
 import type { FormProps } from 'redux-form'; 
 ```
 
-## Manual/Custom Definitions
+## Custom definitions
 
-> The flow docs has a great a page on [Creating Library Definitions](https://flow.org/en/docs/libdefs/creation/).
+> The flow docs have a great page on [creating library definitions](https://flow.org/en/docs/libdefs/creation/).
 
 If you're unable to find a definition using `flow-typed`, you can simply create it yourself. Start by creating a folder called `custom-definitions` at the root of your project, and adding it to the `[libs]` section of the `.flowconfig` file.
 

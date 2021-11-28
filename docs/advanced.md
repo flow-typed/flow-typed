@@ -2,9 +2,9 @@
 
 Congrats on getting `flow-typed` set up! There are a small number of configuration options available through the CLI, but using all those flags can be tiring. This tiny guide will walk through setting up custom scripts in `package.json`.
 
-## Custom Scripts
+## Custom scripts
 
-Before editing your `package.json`, take a look at the available [[CLI Commands & Flags|CLI-Commands-and-Flags]]. Create an entry for each command you'd like to customize.
+Before editing your `package.json`, take a look at the available [CLI commands](install.md). Create an entry for each command you'd like to customize.
 
 ```
 "scripts": {
