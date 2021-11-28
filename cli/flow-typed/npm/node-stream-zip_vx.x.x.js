@@ -187,7 +187,7 @@ declare module 'node-stream-zip' {
 
     close(callback?: (err?: any) => void): void;
 
-    static async: StreamZipAsync;
+    async: Class<StreamZipAsync>;
   }
 
   declare module.exports: StreamZip;
