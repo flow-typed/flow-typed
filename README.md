@@ -13,7 +13,7 @@
 [library interface definitions](https://flow.org/en/docs/libdefs)
 for use with [Flow](http://flow.org).
 
-You can grab definitions directly from this GitHub repo, or you can use the CLI (currently in beta) to install a libdef for a given library:
+You can grab definitions directly from this GitHub repo, or you can use the CLI to install a libdef for a given library:
 ```bash
 $ yarn global add flow-typed
 
@@ -125,6 +125,6 @@ After you have edited these files, consider [contributing](CONTRIBUTING.md) them
 
 ## Active Maintenance Team
 
-[![Andrew Smith](https://github.com/andrewsouthpaw.png?size=100)](https://github.com/andrewsouthpaw) | [![Georges-Antoine Assi](https://github.com/gantoine.png?size=100)](https://github.com/gantoine) | [![Pascal Duez](https://github.com/pascalduez.png?size=100)](https://github.com/pascalduez) | [![Ville Saukkonen](https://github.com/villesau.png?size=100)](https://github.com/villesau)
-:---:|:---:|:---:|:---:
-[@AndrewSouthpaw](https://github.com/andrewsouthpaw) | [@GAntoine](https://github.com/gantoine) | [@pascalduez](https://github.com/pascalduez) | [@villesau](https://github.com/villesau)
+[![Andrew Smith](https://github.com/andrewsouthpaw.png?size=100)](https://github.com/andrewsouthpaw) | [![Brian Chen](https://github.com/Brianzchen.png?size=100)](https://github.com/Brianzchen)  | [![Georges-Antoine Assi](https://github.com/gantoine.png?size=100)](https://github.com/gantoine) | [![Pascal Duez](https://github.com/pascalduez.png?size=100)](https://github.com/pascalduez) | [![Ville Saukkonen](https://github.com/villesau.png?size=100)](https://github.com/villesau)
+:---:|:---:|:---:|:---:|:---:
+[@AndrewSouthpaw](https://github.com/andrewsouthpaw) | [@Brianzchen](https://github.com/Brianzchen) | [@GAntoine](https://github.com/gantoine) | [@pascalduez](https://github.com/pascalduez) | [@villesau](https://github.com/villesau)
