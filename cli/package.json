@@ -10,7 +10,7 @@
   "bugs": {
     "url": "https://github.com/flow-typed/flow-typed/issues"
   },
-  "version": "3.4.0",
+  "version": "3.5.0",
   "main": "dist/cli.js",
   "bin": "dist/cli.js",
   "engines": {
