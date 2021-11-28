@@ -147,14 +147,7 @@ declare module 'node-stream-zip' {
     declare class StreamZip {
       constructor(config: StreamZipOptions): this;
   
-      /**
-      * number of entries in the archive
-      */
       entriesCount: number;
-  
-      /**
-      * archive comment
-      */
       comment: string;
    
       on(event: 'error', handler: (error: any) => void): void;
@@ -187,9 +180,9 @@ declare module 'node-stream-zip' {
   
       close(callback?: (err?: any) => void): void;
   
-      async: Class<StreamZipAsync>;
+      static async: Class<StreamZipAsync>;
     }
   
-    declare module.exports: StreamZip;
+    declare module.exports: Class<StreamZip>;
   }
   
