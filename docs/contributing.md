@@ -68,6 +68,12 @@ This tells the test runner to ignore errors that mention that line. **We require
 `// $FlowExpectedError` in each test**. This helps to ensure that the test is actually
 exercising types like the author expects it to be.
 
+## Partial/definitions definitions
+
+We welcome contributions of partial, incomplete or work-in-progress definitions!
+When submitting a partial definition, please stub out the missing parts with `any`.
+If the definition was generated from `create-stub`, those parts should already be stubbed.
+
 ## A note on flowgen
 
 [flowgen](https://github.com/joarwilk/flowgen) is a CLI tool that generates flowtype definitions from TypeScript types.
