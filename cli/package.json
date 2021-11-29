@@ -21,7 +21,8 @@
     "clean": "rimraf dist",
     "flow": "flow",
     "lint": "eslint .",
-    "prepublish": "mkdirp dist && yarn test",
+    "prepare": "mkdirp dist && yarn test",
+    "prepublishOnly": "cp ../README.md .",
     "test": "yarn clean && yarn build && yarn test-quick",
     "test-quick": "jest && yarn lint && yarn flow",
     "watch": "mkdirp dist && babel --source-maps --watch=./src --out-dir=./dist"
