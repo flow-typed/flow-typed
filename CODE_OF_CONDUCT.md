@@ -55,7 +55,8 @@ further defined and clarified by project maintainers.
 ## Enforcement
 
 Instances of abusive, harassing, or otherwise unacceptable behavior may be
-reported by contacting the project team at andrewsmith@alumni.stanford.edu. All
+reported to [flowtyped@gmail.com](mailto:flowtyped@gmail.com), or to a flow-typed
+team member on the [Flow Discord](https://discord.gg/e6p4b2q3eD) server. All
 complaints will be reviewed and investigated and will result in a response that
 is deemed necessary and appropriate to the circumstances. The project team is
 obligated to maintain confidentiality with regard to the reporter of an incident.
