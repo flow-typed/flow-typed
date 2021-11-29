@@ -580,6 +580,10 @@ async function installNpmLibDef(
   npmDir: string,
   overwrite: boolean,
 ): Promise<boolean> {
+  // When installing a lib def also check if there is an `eslintrc.js`
+  // If it doesn't exist create one, otherwise use existing which may
+  // have been modified
+
   const scopedDir =
     npmLibDef.scope === null ? npmDir : path.join(npmDir, npmLibDef.scope);
   mkdirp(scopedDir);
