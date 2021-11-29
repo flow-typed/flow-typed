@@ -11,11 +11,17 @@
 </p>
 
 <p align="center">
-  <a><img src="https://github.com/flow-typed/flow-typed/workflows/CI/badge.svg" alt="ci status"></a>
-  <a><img src="https://img.shields.io/npm/v/flow-typed.svg" alt="npm package"></a>
-  <a><img src="https://img.shields.io/badge/docs-pages-blueviolet" alt="docs"></a>
-  <a><img src="https://snyk.io/advisor/npm-package/flow-typed/badge.svg?label=health" alt="package health"></a>
-  <a><img src="https://img.shields.io/discord/539606376339734558.svg?label=chat&logo=discord&logoColor=white" alt="discord"></a>
+  <a href="https://github.com/flow-typed/flow-typed/actions/workflows/main.yml">
+    <img src="https://github.com/flow-typed/flow-typed/workflows/CI/badge.svg" alt="ci status">
+  </a>
+  <a href="https://www.npmjs.com/package/flow-typed"><img src="https://img.shields.io/npm/v/flow-typed.svg" alt="npm package"></a>
+  <a href="https://flow-typed.github.io/flow-typed/#/"><img src="https://img.shields.io/badge/docs-open-blueviolet" alt="docs"></a>
+  <a href="https://discordapp.com/invite/8ezwRUK">
+    <img src="https://img.shields.io/discord/539606376339734558.svg?label=&logo=discord&logoColor=ffffff&color=7389D8&labelColor=555555&cacheSeconds=60" alt="discord">
+  </a>
+  <a href="https://snyk.io/advisor/npm-package/flow-typed">
+    <img src="https://snyk.io/advisor/npm-package/flow-typed/badge.svg?" alt="package health">
+  </a>
 </p>
 
 Check out the [quick start](https://flow-typed.github.io/flow-typed/#/quickstart) page
