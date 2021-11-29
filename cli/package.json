@@ -2,13 +2,13 @@
   "name": "flow-typed",
   "description": "A repository of high quality flow type definitions",
   "license": "MIT",
-  "homepage": "https://github.com/flow-typed/flow-typed#readme",
+  "homepage": "https://flow-typed.github.io/flow-typed",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/flow-typed/flow-typed.git"
   },
   "bugs": {
-    "url": "https://github.com/flow-typed/flow-typed/issues"
+    "url": "https://github.com/flow-typed/flow-typed/issues/new/choose"
   },
   "version": "3.5.0",
   "main": "dist/cli.js",
