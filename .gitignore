@@ -34,6 +34,7 @@ cli/dist/*
 cli/.test-dir/*
 cli/.flow-bins-cache/*
 cli/package-lock.json
+cli/README.md
 
 # Editors
 .vscode
