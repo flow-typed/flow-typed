@@ -7,7 +7,7 @@ import {
   _setCustomCacheDir as setCustomCacheDir,
 } from '../../lib/cacheRepoUtils';
 
-import {copyDir, mkdirp} from '../../lib/fileUtils';
+import {copyDir, writeFile, mkdirp} from '../../lib/fileUtils';
 
 import {parseDirString as parseFlowDirString} from '../../lib/flowVersion';
 
@@ -1305,6 +1305,93 @@ describe('install (command)', () => {
             ),
           ),
         ).toEqual(true);
+      });
+    });
+
+    describe('eslint', () => {
+      it('creates an eslintrc file if none exists', () => {
+        return fakeProjectEnv(async FLOWPROJ_DIR => {
+          // Create some dependencies
+          await Promise.all([
+            mkdirp(path.join(FLOWPROJ_DIR, 'src')),
+            writePkgJson(path.join(FLOWPROJ_DIR, 'package.json'), {
+              name: 'test',
+              devDependencies: {
+                'flow-bin': '^0.43.0',
+              },
+              dependencies: {
+                foo: '1.2.3',
+              },
+            }),
+            mkdirp(path.join(FLOWPROJ_DIR, 'node_modules', 'flow-bin')),
+            mkdirp(path.join(FLOWPROJ_DIR, 'node_modules', 'foo')),
+          ]);
+
+          await touchFile(path.join(FLOWPROJ_DIR, 'src', '.flowconfig'));
+
+          // Run the install command
+          await run({
+            overwrite: false,
+            verbose: false,
+            skip: false,
+            rootDir: path.join(FLOWPROJ_DIR, 'src'),
+            explicitLibDefs: [],
+          });
+
+          // Installs libdef
+          expect(
+            await fs.exists(
+              path.join(
+                FLOWPROJ_DIR,
+                'src',
+                'flow-typed',
+                'npm',
+                '.eslintrc.js',
+              ),
+            ),
+          ).toEqual(true);
+        });
+      });
+
+      it('does not create or override the eslintrc file if one exists', () => {
+        return fakeProjectEnv(async FLOWPROJ_DIR => {
+          // Create some dependencies
+          await Promise.all([
+            mkdirp(path.join(FLOWPROJ_DIR, 'src')),
+            writePkgJson(path.join(FLOWPROJ_DIR, 'package.json'), {
+              name: 'test',
+              devDependencies: {
+                'flow-bin': '^0.43.0',
+              },
+              dependencies: {
+                foo: '1.2.3',
+              },
+            }),
+            mkdirp(path.join(FLOWPROJ_DIR, 'node_modules', 'flow-bin')),
+            mkdirp(path.join(FLOWPROJ_DIR, 'node_modules', 'foo')),
+          ]);
+
+          await touchFile(path.join(FLOWPROJ_DIR, 'src', '.flowconfig'));
+          await writeFile(
+            path.join(FLOWPROJ_DIR, 'flow-typed', 'npm', '.eslintrc.js'),
+            'test',
+          );
+
+          // Run the install command
+          await run({
+            overwrite: false,
+            verbose: false,
+            skip: false,
+            rootDir: path.join(FLOWPROJ_DIR, 'src'),
+            explicitLibDefs: [],
+          });
+
+          const eslintContents = await fs.readFile(
+            path.join(FLOWPROJ_DIR, 'flow-typed', 'npm', '.eslintrc.js'),
+            'utf8',
+          );
+          expect(eslintContents).toBe('test');
+        });
       });
     });
   });
