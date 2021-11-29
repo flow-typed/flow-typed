@@ -2,7 +2,7 @@
 
 import type {FlowSpecificVer} from '../lib/flowVersion';
 import {signCodeStream} from '../lib/codeSign';
-import {copyFile, mkdirp} from '../lib/fileUtils';
+import {copyFile, writeFile, mkdirp} from '../lib/fileUtils';
 
 import {findFlowRoot} from '../lib/flowProjectUtils';
 
@@ -583,6 +583,13 @@ async function installNpmLibDef(
   // When installing a lib def also check if there is an `eslintrc.js`
   // If it doesn't exist create one, otherwise use existing which may
   // have been modified
+  const eslintPath = path.join(npmDir, '.eslintrc.js');
+  if (!(await fs.exists(eslintPath))) {
+    const content = `module.exports = {
+  ignorePatterns: ['**/*.js'],
+};`;
+    await writeFile(eslintPath, content);
+  }
 
   const scopedDir =
     npmLibDef.scope === null ? npmDir : path.join(npmDir, npmLibDef.scope);

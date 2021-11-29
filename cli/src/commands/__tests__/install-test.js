@@ -1381,6 +1381,7 @@ describe('install (command)', () => {
         expect(
           await fs.readdir(path.join(FLOWPROJ_DIR, 'flow-typed', 'npm')),
         ).toEqual([
+          '.eslintrc.js',
           'a_vx.x.x.js',
           'bar_v1.x.x.js',
           'c_vx.x.x.js',
@@ -1418,6 +1419,7 @@ describe('install (command)', () => {
         expect(
           await fs.readdir(path.join(FLOWPROJ_DIR, 'flow-typed', 'npm')),
         ).toEqual([
+          '.eslintrc.js',
           'a_vx.x.x.js',
           'bar_v1.x.x.js',
           'c_vx.x.x.js',
@@ -1452,6 +1454,7 @@ describe('install (command)', () => {
         expect(
           await fs.readdir(path.join(FLOWPROJ_DIR, 'flow-typed', 'npm')),
         ).toEqual([
+          '.eslintrc.js',
           'a_vx.x.x.js',
           'c_vx.x.x.js',
           'flow-bin_v0.x.x.js',

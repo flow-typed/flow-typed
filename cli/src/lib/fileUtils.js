@@ -18,6 +18,18 @@ export function copyDir(srcPath: string, destPath: string): Promise<void> {
   });
 }
 
+export function writeFile(destPath: string, content: string): Promise<void> {
+  return new Promise((resolve, reject) => {
+    fs.writeFile(destPath, content, (err: Error) => {
+      if (err) {
+        reject(err);
+      } else {
+        resolve();
+      }
+    });
+  });
+}
+
 export function copyFile(
   srcPath: string,
   destPath: string,
@@ -27,13 +39,13 @@ export function copyFile(
     if (preProcessor) {
       const content = fs.readFileSync(srcPath, 'utf-8');
 
-      fs.writeFile(destPath, preProcessor(content), (err: Error) => {
-        if (err) {
-          rej(err);
-        } else {
+      writeFile(destPath, preProcessor(content))
+        .then(() => {
           res();
-        }
-      });
+        })
+        .catch((err: Error) => {
+          rej(err);
+        });
     } else {
       fs.copyFile(srcPath, destPath, err => {
         if (err) {
