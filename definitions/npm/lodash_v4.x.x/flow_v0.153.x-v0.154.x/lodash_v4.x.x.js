@@ -591,7 +591,7 @@ declare module "lodash" {
     filter:
       & (<T>(array?: ?$ReadOnlyArray<T>, predicate?: ?Predicate<T>) => Array<T>)
       & (<A, T: ReadOnlyIndexerObject<A>>(
-        object?: ?T,
+        object: T,
         predicate?: OPredicate<A, T>
       ) => Array<A>);
     find:
