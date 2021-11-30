@@ -174,7 +174,7 @@ declare module "lodash" {
   declare type NestedArray<V> = Array<Array<V>>;
   declare type Collection<V, K = Key> = $ReadOnlyArray<V> | ReadOnlyIndexerObject<V, K>;
 
-  declare type matchesIterateeShorthand = { [Key]: any, ... };
+  declare type matchesIterateeShorthand = { [key: string]: any, ... };
   declare type matchesPropertyIterateeShorthand = [string, any];
   declare type propertyIterateeShorthand = string;
 
@@ -576,10 +576,10 @@ declare module "lodash" {
 
     // Collection
     countBy:
-      & (<T>(array: $ReadOnlyArray<T>, iteratee?: ?ValueOnlyIteratee<T>) => { [string]: number, ... })
-      & (<T>(array: void | null, iteratee?: ?ValueOnlyIteratee<T>) => {...})
-      & ((string: string, iteratee?: ?ValueOnlyIteratee<string>) => { [string]: number, ... })
-      & (<T>(object: ReadOnlyIndexerObject<T>, iteratee?: ?ValueOnlyIteratee<T>) => { [string]: number, ... });
+      & (<T>(array: $ReadOnlyArray<T>, iteratee?: ?ValueOnlyIteratee<T>) => { [key: string]: number, ... })
+      & (<T>(array: void | null, iteratee?: ?ValueOnlyIteratee<T>) => { [key: string]: number, ... })
+      & ((string: string, iteratee?: ?ValueOnlyIteratee<string>) => { [key: string]: number, ... })
+      & (<T>(object: ReadOnlyIndexerObject<T>, iteratee?: ?ValueOnlyIteratee<T>) => { [key: string]: number, ... });
     // alias of _.forEach
     each<A, K, T: ReadOnlyIndexerObject<A, K> | $ReadOnlyArray<A> | string | void | null>(collection: T, iteratee?: ?IterateeWithResult<A, K, T, boolean | void>): T;
     // alias of _.forEachRight
@@ -3382,12 +3382,6 @@ declare module "lodash/fp" {
     unset:
       & ((path: Path) => ((object: Object) => Object))
       & ((path: Path, object: Object) => Object);
-    dissoc:
-      & ((path: Path) => ((object: Object) => Object))
-      & ((path: Path, object: Object) => Object);
-    dissocPath:
-      & ((path: Path) => ((object: Object) => Object))
-      & ((path: Path, object: Object) => Object);
     update:
       & ((
         path: Path
@@ -6116,14 +6110,6 @@ declare module "lodash/fp/transform" {
 
 declare module "lodash/fp/unset" {
   declare module.exports: $PropertyType<$Exports<"lodash/fp">, "unset">;
-}
-
-declare module "lodash/fp/dissoc" {
-  declare module.exports: $PropertyType<$Exports<"lodash/fp">, "dissoc">;
-}
-
-declare module "lodash/fp/dissocPath" {
-  declare module.exports: $PropertyType<$Exports<"lodash/fp">, "dissocPath">;
 }
 
 declare module "lodash/fp/update" {
