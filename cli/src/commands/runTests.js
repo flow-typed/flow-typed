@@ -6,7 +6,7 @@ import {gitHubClient} from '../lib/github.js';
 import {getLibDefs, parseRepoDirItem} from '../lib/libDefs.js';
 import isInFlowTypedRepo from '../lib/isInFlowTypedRepo';
 import {toSemverString as flowVerToSemverString} from '../lib/flowVersion';
-import {getDiff} from '../lib/git';
+import {getDefinitionsDiff} from '../lib/git';
 
 import got from 'got';
 import * as semver from 'semver';
@@ -61,7 +61,7 @@ async function getTestGroups(
 ): Promise<Array<TestGroup>> {
   let libDefs = await getLibDefs(repoDirPath);
   if (onlyChanged) {
-    const diff = await getDiff();
+    const diff = await getDefinitionsDiff();
     const baseDiff: string[] = diff
       .map(d => {
         const match = d.match(basePathRegex);
