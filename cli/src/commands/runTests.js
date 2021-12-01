@@ -72,19 +72,8 @@ async function getTestGroups(
       })
       .filter(d => d !== '');
 
-    const changedDefs = baseDiff.map(d => {
-      const {pkgName, pkgVersion} = parseRepoDirItem(d);
-      const {major, minor, patch} = pkgVersion;
-      return {
-        name: pkgName,
-        version: `v${major}.${minor}.${patch}`,
-      };
-    });
-    libDefs = libDefs.filter(def =>
-      changedDefs.some(
-        d => d.name === def.pkgName && d.version === def.pkgVersionStr,
-      ),
-    );
+    const changedDefs = baseDiff.map(d => parseRepoDirItem(d).pkgName);
+    libDefs = libDefs.filter(def => changedDefs.includes(def.pkgName));
   }
   return libDefs.map(libDef => {
     const groupID = `${libDef.pkgName}_${libDef.pkgVersionStr}/${libDef.flowVersionStr}`;
