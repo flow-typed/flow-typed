@@ -3,6 +3,7 @@
 import type {FlowSpecificVer} from '../lib/flowVersion';
 import {signCodeStream} from '../lib/codeSign';
 import {copyFile, mkdirp} from '../lib/fileUtils';
+import {child_process} from '../lib/node';
 
 import {findFlowRoot} from '../lib/flowProjectUtils';
 
@@ -196,6 +197,15 @@ export async function run(args: Args): Promise<number> {
   if (npmLibDefResult !== 0) {
     return npmLibDefResult;
   }
+
+  // Once complete restart flow to solve flow issues when scanning large diffs
+  try {
+    await child_process.execP('npx flow stop');
+    await child_process.execP('npx flow');
+  } catch (e) {
+    console.log(colors.red('!! Flow restarted with some errors'));
+  }
+
   return 0;
 }
 
