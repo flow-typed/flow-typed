@@ -71,6 +71,8 @@ export async function getDiff(): Promise<Array<string>> {
   try {
     let {stdout} = await child_process.spawnP(gitPath, ['diff', '--name-only']);
 
+    console.log('===========this is stdout', stdout);
+
     if (stdout === '') {
       // We are probably already on master, so compare to the last commit.
       const {stdout: headDiff} = await child_process.spawnP(gitPath, [
@@ -78,6 +80,7 @@ export async function getDiff(): Promise<Array<string>> {
         'HEAD~1',
         '--name-only',
       ]);
+      console.log('---------headDiff', headDiff);
       stdout = headDiff;
     }
     return stdout.split('\n');
