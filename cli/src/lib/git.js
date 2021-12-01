@@ -80,7 +80,9 @@ export async function getDefinitionsDiff(): Promise<Array<string>> {
       '--name-only',
     ]);
 
-    if (stdout.split('\n').filter((o) => o.startsWith('definitions/')).length === 0) {
+    if (
+      stdout.split('\n').filter(o => o.startsWith('definitions/')).length === 0
+    ) {
       // We are probably already on master, so compare to the last commit.
       const {stdout: headDiff} = await child_process.spawnP(gitPath, [
         'diff',
