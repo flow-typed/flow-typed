@@ -77,6 +77,7 @@ export async function getDefinitionsDiff(): Promise<Array<string>> {
     let {stdout} = await child_process.spawnP(gitPath, [
       'diff',
       branchName.replace(/\n/g, ''),
+      'master',
       '--name-only',
     ]);
 
