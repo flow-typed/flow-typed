@@ -55,6 +55,7 @@ export type Args = {
   overwrite: mixed, // boolean
   skip: mixed, // boolean
   skipCache?: mixed, // boolean
+  skipFlowRestart?: mixed, // boolean
   verbose: mixed, // boolean
   libdefDir?: mixed, // string
   cacheDir?: mixed, // string
@@ -93,6 +94,11 @@ export function setup(yargs: Yargs): Yargs {
       },
       skipCache: {
         describe: 'Do not update cache prior to installing libdefs',
+        type: 'boolean',
+        demandOption: false,
+      },
+      skipFlowRestart: {
+        describe: 'Do not restart flow after installing libdefs',
         type: 'boolean',
         demandOption: false,
       },
@@ -199,11 +205,13 @@ export async function run(args: Args): Promise<number> {
   }
 
   // Once complete restart flow to solve flow issues when scanning large diffs
-  try {
-    await child_process.execP('npx flow stop');
-    await child_process.execP('npx flow');
-  } catch (e) {
-    console.log(colors.red('!! Flow restarted with some errors'));
+  if (!args.skipFlowRestart) {
+    try {
+      await child_process.execP('npx flow stop');
+      await child_process.execP('npx flow');
+    } catch (e) {
+      console.log(colors.red('!! Flow restarted with some errors'));
+    }
   }
 
   return 0;
