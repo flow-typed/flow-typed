@@ -62,7 +62,6 @@ async function getTestGroups(
   let libDefs = await getLibDefs(repoDirPath);
   if (onlyChanged) {
     const diff = await getDiff();
-    console.log('---- the diff', diff);
     const baseDiff: string[] = diff
       .map(d => {
         const match = d.match(basePathRegex);

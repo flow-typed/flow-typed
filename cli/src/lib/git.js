@@ -69,9 +69,17 @@ export async function setLocalConfig(
 export async function getDiff(): Promise<Array<string>> {
   const gitPath = await getGitPath();
   try {
-    let {stdout} = await child_process.spawnP(gitPath, ['diff', '--name-only']);
-
-    console.log('===========this is stdout', stdout);
+    const {stdout: branchName} = await child_process.spawnP(gitPath, [
+      'rev-parse',
+      '--abbrev-ref',
+      'HEAD',
+    ]);
+    let {stdout} = await child_process.spawnP(gitPath, [
+      'diff',
+      branchName.replace(/\n/g, ''),
+      'origin/master',
+      '--name-only',
+    ]);
 
     if (stdout === '') {
       // We are probably already on master, so compare to the last commit.
