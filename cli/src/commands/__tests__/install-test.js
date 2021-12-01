@@ -35,7 +35,7 @@ import {
 const BASE_FIXTURE_ROOT = path.join(__dirname, '__install-fixtures__');
 
 function _mock(mockFn) {
-  return ((mockFn: any): JestMockFn<*, *>);
+  return ((mockFn: any): JestMockFn<any, any>);
 }
 
 async function touchFile(filePath) {
@@ -45,6 +45,14 @@ async function touchFile(filePath) {
 async function writePkgJson(filePath, pkgJson) {
   await fs.writeJson(filePath, pkgJson);
 }
+
+const defaultRunProps = {
+  overwrite: false,
+  verbose: false,
+  skip: false,
+  skipFlowRestart: true,
+  explicitLibDefs: [],
+};
 
 describe('install (command)', () => {
   describe('determineFlowVersion', () => {
@@ -262,6 +270,7 @@ describe('install (command)', () => {
 
     const origConsoleLog = console.log;
     const origConsoleError = console.error;
+
     beforeEach(() => {
       (console: any).log = jest.fn();
       (console: any).error = jest.fn();
@@ -324,11 +333,8 @@ describe('install (command)', () => {
 
         // Run the install command
         await run({
-          overwrite: false,
-          verbose: false,
-          skip: false,
+          ...defaultRunProps,
           ignoreDeps: [],
-          explicitLibDefs: [],
         });
 
         // Installs libdefs
@@ -403,11 +409,8 @@ describe('install (command)', () => {
 
         // Run the install command
         await run({
-          overwrite: false,
-          verbose: false,
-          skip: false,
+          ...defaultRunProps,
           ignoreDeps: [],
-          explicitLibDefs: [],
         });
 
         // Installs libdefs
@@ -467,11 +470,8 @@ describe('install (command)', () => {
 
         // Run the install command
         await run({
-          overwrite: false,
-          verbose: false,
-          skip: false,
+          ...defaultRunProps,
           ignoreDeps: ['dev', 'optional', 'bundled'],
-          explicitLibDefs: [],
         });
 
         // Installs libdefs
@@ -515,12 +515,7 @@ describe('install (command)', () => {
         ]);
 
         // Run the install command
-        await run({
-          overwrite: false,
-          verbose: false,
-          skip: false,
-          explicitLibDefs: [],
-        });
+        await run(defaultRunProps);
 
         // Installs a stub for someUntypedDep
         expect(
@@ -555,12 +550,7 @@ describe('install (command)', () => {
         ]);
 
         // Run the install command
-        await run({
-          overwrite: false,
-          verbose: false,
-          skip: true,
-          explicitLibDefs: [],
-        });
+        await run(defaultRunProps);
 
         // Installs a stub for someUntypedDep
         expect(
@@ -594,10 +584,8 @@ describe('install (command)', () => {
 
         // Run the install command
         await run({
+          ...defaultRunProps,
           overwrite: true,
-          verbose: false,
-          skip: false,
-          explicitLibDefs: [],
         });
 
         // Replaces the stub with the real typedef
@@ -633,12 +621,7 @@ describe('install (command)', () => {
         ]);
 
         // Run the install command
-        await run({
-          overwrite: false,
-          verbose: false,
-          skip: false,
-          explicitLibDefs: [],
-        });
+        await run(defaultRunProps);
 
         const libdefFilePath = path.join(
           FLOWPROJ_DIR,
@@ -653,12 +636,7 @@ describe('install (command)', () => {
         await fs.writeFile(libdefFilePath, libdefFileContent);
 
         // Run install command again
-        await run({
-          overwrite: false,
-          verbose: false,
-          skip: false,
-          explicitLibDefs: [],
-        });
+        await run(defaultRunProps);
 
         // Verify that the tweaked libdef file wasn't overwritten
         expect(await fs.readFile(libdefFilePath, 'utf8')).toBe(
@@ -686,12 +664,7 @@ describe('install (command)', () => {
         ]);
 
         // Run the install command
-        await run({
-          overwrite: false,
-          verbose: false,
-          skip: false,
-          explicitLibDefs: [],
-        });
+        await run(defaultRunProps);
 
         const libdefFilePath = path.join(
           FLOWPROJ_DIR,
@@ -706,10 +679,8 @@ describe('install (command)', () => {
 
         // Run install command again
         await run({
+          ...defaultRunProps,
           overwrite: true,
-          skip: false,
-          verbose: false,
-          explicitLibDefs: [],
         });
 
         // Verify that the tweaked libdef file wasn't overwritten
@@ -742,11 +713,8 @@ describe('install (command)', () => {
 
         // Run the install command
         await run({
-          overwrite: false,
-          verbose: false,
-          skip: false,
+          ...defaultRunProps,
           packageDir: path.join(FLOWPROJ_DIR, '..'),
-          explicitLibDefs: [],
         });
 
         // Installs libdef
@@ -780,11 +748,8 @@ describe('install (command)', () => {
 
         // Run the install command
         await run({
-          overwrite: false,
-          verbose: false,
-          skip: false,
+          ...defaultRunProps,
           rootDir: path.join(FLOWPROJ_DIR, 'src'),
-          explicitLibDefs: [],
         });
 
         // Installs libdef
@@ -832,11 +797,8 @@ describe('install (command)', () => {
 
         // Run the install command
         await run({
-          overwrite: false,
-          verbose: false,
-          skip: false,
+          ...defaultRunProps,
           rootDir: path.join(FLOWPROJ_DIR, 'src'),
-          explicitLibDefs: [],
         });
 
         // Installs libdef
@@ -886,11 +848,8 @@ describe('install (command)', () => {
 
         // Run the install command
         await run({
-          overwrite: false,
-          verbose: false,
-          skip: false,
+          ...defaultRunProps,
           rootDir: path.join(FLOWPROJ_DIR, 'src'),
-          explicitLibDefs: [],
         });
 
         // Installs libdef
@@ -952,11 +911,8 @@ describe('install (command)', () => {
 
         // Run the install command
         await run({
-          overwrite: false,
-          verbose: false,
-          skip: false,
+          ...defaultRunProps,
           rootDir: path.join(FLOWPROJ_DIR, 'src'),
-          explicitLibDefs: [],
         });
 
         // Installs libdef
@@ -1006,11 +962,8 @@ describe('install (command)', () => {
 
         // Run the install command
         await run({
-          overwrite: false,
-          verbose: false,
-          skip: false,
+          ...defaultRunProps,
           rootDir: path.join(FLOWPROJ_DIR, 'src'),
-          explicitLibDefs: [],
         });
 
         // Installs libdef
@@ -1049,11 +1002,8 @@ describe('install (command)', () => {
 
         // Run the install command
         await run({
-          overwrite: false,
-          verbose: false,
-          skip: false,
+          ...defaultRunProps,
           rootDir: path.join(FLOWPROJ_DIR, 'src'),
-          explicitLibDefs: [],
         });
 
         // Installs libdef
@@ -1110,11 +1060,8 @@ describe('install (command)', () => {
 
         // Run the install command
         await run({
-          overwrite: false,
-          verbose: false,
-          skip: false,
+          ...defaultRunProps,
           rootDir: path.join(FLOWPROJ_DIR, 'src'),
-          explicitLibDefs: [],
         });
 
         // Installs libdef
@@ -1172,11 +1119,8 @@ describe('install (command)', () => {
 
         // Run the install command
         await run({
-          overwrite: false,
-          verbose: false,
-          skip: false,
+          ...defaultRunProps,
           rootDir: path.join(FLOWPROJ_DIR, 'src'),
-          explicitLibDefs: [],
         });
 
         // Installs libdef
@@ -1230,11 +1174,8 @@ describe('install (command)', () => {
 
         // Run the install command
         await run({
-          overwrite: false,
-          verbose: false,
-          skip: false,
+          ...defaultRunProps,
           rootDir: path.join(FLOWPROJ_DIR, 'src'),
-          explicitLibDefs: [],
         });
 
         // Installs libdef
@@ -1286,11 +1227,8 @@ describe('install (command)', () => {
 
         // Run the install command
         await run({
-          overwrite: false,
-          verbose: false,
-          skip: false,
+          ...defaultRunProps,
           rootDir: path.join(FLOWPROJ_DIR, 'src'),
-          explicitLibDefs: [],
         });
 
         // Installs libdef
@@ -1370,11 +1308,8 @@ describe('install (command)', () => {
 
         // Run the install command
         await run({
-          overwrite: false,
-          verbose: false,
-          skip: false,
+          ...defaultRunProps,
           ignoreDeps: [],
-          explicitLibDefs: [],
         });
 
         // Installs libdefs
@@ -1407,11 +1342,8 @@ describe('install (command)', () => {
 
         // Run the install command
         await run({
-          overwrite: false,
-          verbose: false,
-          skip: false,
+          ...defaultRunProps,
           ignoreDeps: [],
-          explicitLibDefs: [],
         });
 
         // Installs libdefs
@@ -1441,11 +1373,8 @@ describe('install (command)', () => {
 
         // Run the install command
         await run({
-          overwrite: false,
-          verbose: false,
-          skip: false,
+          ...defaultRunProps,
           ignoreDeps: [],
-          explicitLibDefs: [],
         });
 
         // Installs libdefs
