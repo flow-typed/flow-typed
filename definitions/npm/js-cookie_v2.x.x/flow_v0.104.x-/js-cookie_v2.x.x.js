@@ -1,4 +1,4 @@
-declare module 'js-cookie' {//
+declare module 'js-cookie' {
     declare type CookieOptions = {
         expires?: number | Date,
         path?: string,
