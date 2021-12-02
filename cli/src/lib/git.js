@@ -80,6 +80,7 @@ export async function getDefinitionsDiff(): Promise<Array<string>> {
       'master',
       '--name-only',
     ]);
+    console.log(stdout);
 
     if (
       stdout.split('\n').filter(o => o.startsWith('definitions/')).length === 0
