@@ -19,8 +19,6 @@ jobs:
         uses: actions/checkout@v2
         with:
           fetch-depth: 0
-      - name: Pull master branch
-        run: git fetch origin
       - name: Setup Node
         uses: actions/setup-node@v1
         with:
