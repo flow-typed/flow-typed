@@ -17,14 +17,14 @@ flow-typed install --ignoreDeps peer bundle
 |Shorthand|Longhand|Description|Type|
 |---------|--------|-----------|----|
 |-f|--flowVersion|The Flow version that fetched libdefs must be compatible with|string|
-|-o|--overwrite|Overwrite an existing libdef, of the same version, if it is already present in the`flow-typed` directory and has been modified|boolean|
 ||--verbose|Print additional, verbose info while installing libdefs|boolean|
 |-s|--skip|Do not generate stubs for missing libdefs|boolean|
 ||--skipCache|Do not update cache prior to installing libdefs|boolean|
 ||--skipFlowRestart|Do not restart flow after installing libdefs|boolean|
-|-p|--packageDir|The relative path of package.json where flow-bin is installed|string|
 |-l|--libdefDir|Use a custom directory to install libdefs (instead of the default, `./flow-typed`)|string|
 |-c|--cacheDir|Directory (absolute or relative path, ~ is not supported) to store cache of libdefs|string|
+|-p|--packageDir|The relative path of package.json where flow-bin is installed|string|
+|-o|--overwrite|Overwrite an existing libdef, of the same version, if it is already present in the`flow-typed` directory and has been modified|boolean|
 |-i|--ignoreDeps|Dependency categories to ignore when installing definitions. Available options are `dev`, `bundle`, and `peer`.|array|
 |-r|--rootDir|Directory of .flowconfig relative to node_modules|string|
 |-u|--useCacheUntil|Use cache until specified time in milliseconds|number|
