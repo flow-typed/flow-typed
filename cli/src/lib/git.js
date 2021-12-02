@@ -69,15 +69,14 @@ export async function setLocalConfig(
 export async function getDefinitionsDiff(): Promise<Array<string>> {
   const gitPath = await getGitPath();
   try {
-    const {stdout: branchName} = await child_process.spawnP(gitPath, [
-      'rev-parse',
-      '--abbrev-ref',
-      'HEAD',
-    ]);
+    // const {stdout: branchName} = await child_process.spawnP(gitPath, [
+    //   'rev-parse',
+    //   '--abbrev-ref',
+    //   'HEAD',
+    // ]);
     let {stdout} = await child_process.spawnP(gitPath, [
       'diff',
-      branchName.replace(/\n/g, ''),
-      'master',
+      'origin/master',
       '--name-only',
     ]);
     console.log(stdout);
