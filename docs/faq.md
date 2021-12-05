@@ -63,3 +63,22 @@ You may need to install OpenSSL. Try setting up
 
 This issue was first reported here:
 [#331](https://github.com/flowtype/flow-typed/issues/331)
+
+### My flow-typed/npm dir is throwing lots of eslint errors after installing definitions
+
+When you install lib defs using `flow-typed install` the files are copied from the central [definition registry](https://github.com/flow-typed/flow-typed/tree/master/definitions/npm) which have their own code styles and standards which may (probably will) be vastly different to the ones in your project.
+
+You may first consider fixing the linting errors every time you install (eg: `yarn eslint ./flow-typed/npm --fix`) though you shouldn't, definitions may get updates which can install next time you run `flow-typed install` but the CLI will not update a definition if it sees a definition has been modified.
+
+Instead the simplest way is to disable eslint from running in this dir with either
+```
+// .eslintignore
+flow-typed/npm
+```
+or
+```
+// .eslintrc.js
+module.exports = {
+  ignorePatterns: ['**/*.js'],
+};
+```
