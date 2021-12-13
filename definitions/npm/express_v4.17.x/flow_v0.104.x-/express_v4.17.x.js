@@ -132,6 +132,10 @@ declare class express$Response extends http$ServerResponse mixins express$Reques
     locals?: { [name: string]: mixed, ... },
     callback?: express$RenderCallback
   ): this;
+  render(
+    view: string,
+    callback?: express$RenderCallback
+  ): this;
   send(body?: mixed): this;
   sendFile(
     path: string,
