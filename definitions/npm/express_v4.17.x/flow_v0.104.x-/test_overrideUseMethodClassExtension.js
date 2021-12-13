@@ -21,7 +21,7 @@ declare class test_express$CustomApplication extends express$Application<
 }
 
 // Class Extensions: Test Functions
-function test_express$CustomApplication(
+function test_express$CustomApplicationFunc(
   expressConstructor: expressConstructor,
 ) {
   const express = expressConstructor();
