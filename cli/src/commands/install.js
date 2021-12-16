@@ -2,7 +2,6 @@
 
 import type {FlowSpecificVer} from '../lib/flowVersion';
 import {signCodeStream} from '../lib/codeSign';
-import {ensureCacheRepo} from '../lib/cacheRepoUtils';
 import {copyFile, mkdirp} from '../lib/fileUtils';
 import {child_process} from '../lib/node';
 
@@ -376,11 +375,7 @@ async function installNpmLibDefs({
   ][] = [];
   const unavailableLibDefs = [];
 
-  if (!skipCache) {
-    await ensureCacheRepo();
-  }
-
-  const libDefs = await getCacheNpmLibDefs(useCacheUntil, undefined);
+  const libDefs = await getCacheNpmLibDefs(useCacheUntil, skipCache);
 
   const getLibDefsToInstall = async (entries: Array<[string, string]>) => {
     await Promise.all(
