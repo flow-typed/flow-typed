@@ -67,9 +67,9 @@ Versions are semantically versioned (semver) with some restrictions:
   specify `x` in place of a number for MINOR and PATCH, but MAJOR cannot be `x`.
 * Library versions cannot specify a semver range, but Flow versions can of the
   following forms:
-  * **`flow_v0.83.x-`**: Flow v0.22.x and above
-  * **`flow_v0.85.x-v0.91.x`**: Flow versions v0.22.x up to v0.28.x (inclusive)
-  * **`flow_-v0.106.x`**: Every version under (and including) Flow v0.22.x
+  * **`flow_v0.83.x-`**: Flow v0.83.x and above
+  * **`flow_v0.85.x-v0.91.x`**: Flow versions v0.85.x up to v0.91.x (inclusive)
+  * **`flow_-v0.106.x`**: Every version under (and including) Flow v0.106.x
 
 **We structure files this way to enable automated testing and tooling.**
 Tests ensure that library definitions continue to work as expected and the
@@ -79,11 +79,11 @@ library definitions.
 ## Making a contribution
 
 Now that we understand where definitions go, let's say you've created a definition for an npm package in your own project called `left-pad` at
-version 4.1.0. **[You've followed all of the
+version `4.1.0`. **[You've followed all of the
 best practices for writing high quality definitions,](https://github.com/flow-typed/flow-typed/issues/13#issuecomment-214892914)**
 and now you'd like to contribute it.
 
-> Flow-typed comes with a handy script to simplify the file creation process `./create_def.sh` which takes two args, the library name and the version you'd like to type. In the :point_down: example that would be `./create_def.sh left-pad 4.x.x`.
+> Flow-typed comes with a handy script to simplify the file creation process (`./create_def.sh`) which takes two args, the library name and the version you'd like to type. In the :point_down: example that would be `./create_def.sh left-pad 4.x.x`.
 >
 > This will cover steps 1 - 4, of course without real definitions or tests written for you.
 
@@ -101,7 +101,7 @@ You'll notice we specified the minor and patch as `x`, this will ensure that thi
 
 ***We call this the "flow version directory".***
 
-If you aren't sure which versions of Flow your definition is compatible with,
+If you aren't sure which versions of flow your definition is compatible with,
 just start with `flow_v0.83.x-`, and the test runner
 (which we'll run in a later step) will tell us if there are problems in some
 versions of Flow. `flow_v0.83.x-` is the version where the inexact object syntax
@@ -132,30 +132,30 @@ reasonable degree. At minimum your tests should:
 1. Use the library definition in a couple of common ways that *should not*
    produce a type error.
 1. Use the library definition in a couple of ways that are *expected* to produce
-   a type error. Though type errors will fail your test you can add [error suppressions](https://flow.org/en/docs/errors/) to the line above just like you would in your own codebase.
+   a type error. Though type errors should fail your tests, you can add [error suppressions](https://flow.org/en/docs/errors/) to the line above just like you would in your own codebase.
 
 [Here](https://github.com/flow-typed/flow-typed/blob/master/definitions/npm/highlight.js_v8.x.x/test_highlight.js-v8.js)
 is an example of a nice and thorough test file. You don't necessarily have to be
 this thorough, but the more thorough you are the better!
 
-Sometimes you may want to break down your test suite instead of having one gigantic file. In that case you can actually write as many test files as you like as long as their names start with `test_`. This is how [redux](https://github.com/flow-typed/flow-typed/tree/master/definitions/npm/redux_v4.x.x/flow_v0.134.x-) does it.
+Sometimes you may want to break down your test suite instead of having one gigantic file. In that case you can actually write as many test files as you like as long as their names start with `test_`. [Redux](https://github.com/flow-typed/flow-typed/tree/master/definitions/npm/redux_v4.x.x/flow_v0.134.x-) followed this pattern.
 
 Alternatively you can add test files in the **package version directory** which will be run by
-the test-runner for *all* versions of Flow the package version supports. Though general best practice as outlined above is using the **flow version directory**.
+the test-runner for *all* versions of flow the package version supports. Though general best practice as outlined above is using the **flow version directory**.
 
 #### 5) Run your tests
 
 ```sh
 # You only need to run this once which will
 # build your local CLI allowing the test suite to run
-# and then run definitions validation/test
+# and run definition validations/tests
 #
-# But if you ever make changes to the CLI files,
+# If you ever make changes to the CLI files,
 # make sure you rerun `./build.sh` to update the
 # local build of the CLI with your changes.
 ./build.sh
 
-# Subsequent testing after first build can just use the following.
+# Subsequent testing after initial build can just use the following.
 # This will run all changed files based on a git diff
 # note: If you find that your changed files aren't being picked up
 #       you can try `git add -A` then run the following script
@@ -166,7 +166,7 @@ the test-runner for *all* versions of Flow the package version supports. Though 
 # local cli script and run tests against it
 node dist/cli.js run-tests left-pad
 
-# Running the local cli without any args will run **all**
+# Running the local cli without any args will run `all`
 # tests which may take a while
 node dist/cli.js run-tests
 ```
@@ -198,7 +198,7 @@ declare module 'other-module' {
 
 **But wait, I want my React types!**
 
-Good news! You can use the raw, private React types (e.g. `React$Node`, `React$ComponentType`) directly without importing them. You can also import types built into Flow *inside* the module declaration:
+Good news! You can use the raw, private React types (e.g. `React$Node`, `React$ComponentType`) directly without importing them. You can also import types built into flow *inside* the module declaration:
 
 ```js
 declare module 'example' {
@@ -219,13 +219,13 @@ declare module 'koa-router' {
 To be super clear:
 
 1. You can't import types from other libdefs in flow-typed
-1. You can import types built into Flow (e.g. from `react` or `fs`), only if you put the import statement inside the module declaration
+1. You can import types built into flow (e.g. from `react` or `fs`), only if you put the import statement inside the module declaration
 
 [Further discussion here](https://github.com/flow-typed/flow-typed/issues/1857) and [here](https://github.com/flow-typed/flow-typed/issues/2023).
 
 ### Avoid `any` when possible
 
-Using the `any` type for a variable or interface results in the loss of type information as types pass through it. That means if a type passes through `any` before propogating on to other code, the `any` will potentially cause Flow to miss type errors!
+Using the `any` type for a variable or interface results in the loss of type information as types pass through it. That means if a type passes through `any` before propogating on to other code, the `any` will potentially cause flow to miss type errors!
 
 In many places it is better (but also stricter) to use the `mixed` type rather than the `any` type. The `mixed` type is safer in that it allows anything to flow in to it, but can never be used downstream without [dynamic type tests](https://flow.org/en/docs/lang/refinements/#_) that verify the type at runtime.
 
@@ -247,7 +247,7 @@ someString.length; // but because we used `any`, we don't know toerror here!
 
 Because we've typed the values of the map as `any`, we open ourselves up to type errors:
 
-If, however, we had used `mixed` instead of `any`, Flow would ask us to verify that the type we got back from `getCache()` is in fact a `string` before using it as one:
+If, however, we had used `mixed` instead of `any`, flow would ask us to verify that the type we got back from `getCache()` is in fact a `string` before using it as one:
 
 ```js
 const cache = new Map();
@@ -267,7 +267,7 @@ if (typeof someString === 'string') {
 }
 ```
 
-Because we used a dynamic type test in the second example, we've proved to Flow that the `mixed` result must be a string. If we hadn't done this, Flow would have given us an error reminding us that the value could be anything and it isn't safe to assume without checking first.
+Because we used a dynamic type test in the second example, we've proved to flow that the `mixed` result must be a string. If we hadn't done this, flow would have given us an error reminding us that the value could be anything and it isn't safe to assume without checking first.
 
 There is sometimes a trade-off with using `mixed`, though. Using `mixed` means that if your variable ever does flow downstream, you'll always have to prove what kind of type it is (with a type test) before you can use it. Sometimes this is just too annoying and the risk involved with `any` is just worth the trade-off.
 
@@ -295,7 +295,7 @@ When you export a module, you have a choice to use CommonJS or ES6 syntax. We ge
 
 ### Avoid global types
 
-Sometimes you see global definitions like `$npm$ModuleName$`. This is due to the fact that in the past Flow didn't support private types. **Global types should not be used anymore**. Since then Flow has added support for `declare export` which means that every type which doesn't have it are defined as private and can't be imported, see https://flow.org/en/docs/libdefs/creation/#toc-declaring-an-es-module for details.
+Sometimes you see global definitions like `$npm$ModuleName$`. This is due to the fact that in the past flow didn't support private types. **Global types should not be used anymore**. Since then Flow has added support for `declare export` which means that every type which doesn't have it are defined as private and can't be imported, see https://flow.org/en/docs/libdefs/creation/#toc-declaring-an-es-module for details.
 
 ### Prefer immutability
 
