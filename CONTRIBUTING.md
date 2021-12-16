@@ -4,10 +4,14 @@ Contributing library definitions is as easy as sending a pull request!
 
 ## ToC
 
-# [Understanding the definitions structure](#understanding-the-definitions-structure)
+* [Understanding the definitions structure](#understanding-the-definitions-structure)
 * [Making a contribution](#making-a-contribution)
-* [Running libdef tests](#running-libdef-tests)
-* [Creating a new library definition](#creating-a-new-library-definition)
+  * [Create package directory](1-create-a-new-directory-called-definitionsnpmleft-pad_v4xx)
+  * [Create flow directory](2-in-this-new-directory-create-another-new-directory-called-flow_v083x-)
+  * [Create definition](3-place-your-libdef-inside-the-flow-version-directory-and-name-it-left-pad_v4xxjs)
+  * [Create tests](4-write-a-test-file-whose-name-starts-with-test_-in-the-flow-version-directory)
+  * [Run tests](5-run-your-tests)
+  * [Raise pull request](6-send-a-pull-request)
 * [Writing libdefs best practices](#writing-libdefs-best-practices)
   * [Read flow docs](#read-flow-docs)
   * [Don't import types from other libdefs](#dont-import-types-from-other-libdefs)
@@ -16,6 +20,8 @@ Contributing library definitions is as easy as sending a pull request!
   * [Avoid global types](#avoid-global-types)
   * [Prefer immutability](#prefer-immutability)
   * [Prefer exactness](#prefer-exactness)
+  * [Partial/definitions definitions](partialdefinitions-definitions)
+  * [A note on flowgen](a-note-on-flowgen)
 * [Writing tests](#writing-tests)
   * [Use `describe` and `it` blocks to limit scope](#use-describe-and-it-blocks-to-limit-scope)
 
