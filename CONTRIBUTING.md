@@ -1,11 +1,11 @@
-# Library Definition Best Practices
+# Contributing
 
-This is a set of best practices to keep in mind while writing a libdef. These
-best practices should also be considered when reviewing new libdefs or changes
-to existing libdefs.
+Contributing library definitions is as easy as sending a pull request!
 
 ## ToC
 
+# [Understanding the definitions structure](#understanding-the-definitions-structure)
+* [Making a contribution](#making-a-contribution)
 * [Running libdef tests](#running-libdef-tests)
 * [Creating a new library definition](#creating-a-new-library-definition)
 * [Writing libdefs best practices](#writing-libdefs-best-practices)
@@ -19,41 +19,69 @@ to existing libdefs.
 * [Writing tests](#writing-tests)
   * [Use `describe` and `it` blocks to limit scope](#use-describe-and-it-blocks-to-limit-scope)
 
-## Running libdef tests
+## Understanding the definitions structure
 
-We write tests for libdefs. When you make changes to a libdef, verify that the tests still pass and add tests to cover new functionality.
-
-Running tests requires the flow-typed CLI to be installed, which we have scripts set up to build locally in a dist folder. To run your tests, you'll first have to run
-
-```
-$ ./build_and_test_cli.sh
-```
-
-to build the CLI. Once that's finished, you can repeatedly run
+All definitions sit under the
+[/definitions](https://github.com/flowtype/flow-typed/tree/master/definitions)
+directory. They all must follow the following directory structure and naming
+format:
 
 ```
-$ ./quick_run_def_tests.sh
+└ definitions/npm/
+  ├ yargs_v4.x.x/           # <-- The name of the library, followed by _v<VERSION>
+  | |
+  | ├ flow_v0.83.x/         # <-- A folder containing libdefs tested against the
+  | | |                     #     specified version(s) of Flow (v0.83.x in this
+  | | |                     #     case).
+  | | |
+  | | └ yargs_v4.x.x.js     # <-- The libdef file meant for the Flow version
+  | |                       #     specified by the containing directory's name.
+  | |                       #     Must be named `<LIB>_v<VERSION>.js`.
+  | |
+  | ├ flow_v0.85.x-v0.91.x/ # <-- A folder containing libdefs tested against a
+  | | |                     #     different range of Flow versions:
+  | | |                     #     Anything from v0.85.x to v0.91.x (inclusive)
+  | | |
+  | | ├ yargs_v4.x.x.js     # <-- The libdef file for versions of Flow from
+  | | |                     #     v0.85.x to v0.91.x (inclusive)
+  | | |
+  | | └ test_yargs.js       # <-- Tests in this directory only apply to the
+  | |                       #     adjacent libdef (and thus, are specific to
+  | |                       #     the libdefs for this specific Flow version)
+  | |
+  | └ test_yargs.js         # <-- Tests in this directory apply to libdefs for
+  |                         #     all versions of Flow.
+  ├ color_v0.7.x/
+  ├ ...
 ```
 
-to run tests for any libdefs that have changes. Caveat: the tests are only run for the most recent flow version of the libdef, so if you make changes to an earlier flow version of the libdef, the tests won't run against them.
+Versions are semantically versioned (semver) with some restrictions:
 
-> If you ever find that your new definition isn't getting run it may be because you haven't tracked your files. `./quick_run_def_tests.sh` gets defs to tests against by running a git diff against changes and master. Just run `git add -A` and it will start working without the need of making a commit first.
+* All of MAJOR, MINOR, and PATCH versions must be specified. It's acceptable to
+  specify `x` in place of a number for MINOR and PATCH, but MAJOR cannot be `x`.
+* Library versions cannot specify a semver range, but Flow versions can of the
+  following forms:
+  * **`flow_v0.83.x-`**: Flow v0.22.x and above
+  * **`flow_v0.85.x-v0.91.x`**: Flow versions v0.22.x up to v0.28.x (inclusive)
+  * **`flow_-v0.106.x`**: Every version under (and including) Flow v0.22.x
 
-If you ever make changes to the CLI files, make sure you rerun the `./build_and_test_cli.sh` to update the local build of the CLI with your changes.
+**We structure files this way to enable automated testing and tooling.**
+Tests ensure that library definitions continue to work as expected and the
+`flow-typed` tooling ensures that it's as easy as possible to find and install
+library definitions.
 
-## Creating a new library definition
+## Making a contribution
 
-All definitions are contained in the [definitions/](https://github.com/flow-typed/flow-typed/tree/master/definitions)
-directory and are named and structured very explicitly.
-
-Let's say you've created a definition for an npm package called `left-pad` at
+Now that we understand where definitions go, let's say you've created a definition for an npm package in your own project called `left-pad` at
 version 4.1.0. **[You've followed all of the
 best practices for writing high quality definitions,](https://github.com/flow-typed/flow-typed/issues/13#issuecomment-214892914)**
-and now you'd like to contribute it:
+and now you'd like to contribute it.
 
 > Flow-typed comes with a handy script to simplify the file creation process `./create_def.sh` which takes two args, the library name and the version you'd like to type. In the :point_down: example that would be `./create_def.sh left-pad 4.x.x`.
+>
+> This will cover steps 1 - 4, of course without real definitions or tests written for you.
 
-#### 1) Create a new directory called `definitions/npm/left-pad_v4.1.0/`.
+#### 1) Create a new directory called `definitions/npm/left-pad_v4.x.x/`.
 
 ***We call this the "package version directory".***
 
@@ -61,19 +89,14 @@ The naming scheme of this directory must be formatted as
 `${packageName}_v${packageVersion}`. This convention is enforced by the
 library-definition test runner.
 
-#### 2) In this new directory, create another new directory called `flow_v0.80.x-/`.
+You'll notice we specified the minor and patch as `x`, this will ensure that this libdef can cater to as many other consumers as possible, though you may opt to refine the version more if the library you're typing changes dramatically on minor/patch updates.
+
+#### 2) In this new directory, create another new directory called `flow_v0.83.x-/`.
 
 ***We call this the "flow version directory".***
 
-This specifies that the definition you are contributing is compatible with the
-version range of the directory. You MUST specify a version range with names like
-`flow_v0.80.x-` ("any version at or after v0.80.x") or
-`flow_-v0.80.x` ("any version at or before v0.80.x") or
-`flow_v0.80.x-v0.106.x` ("any version inclusively between v0.80.x and
-v0.106.x").
-
 If you aren't sure which versions of Flow your definition is compatible with,
-start with a low version like `flow_v0.83.x-`, and the test runner
+just start with `flow_v0.83.x-`, and the test runner
 (which we'll run in a later step) will tell us if there are problems in some
 versions of Flow. `flow_v0.83.x-` is the version where the inexact object syntax
 was added.
@@ -81,57 +104,74 @@ was added.
 You may create multiple flow version directories to target different versions of
 Flow if necessary.
 
-#### 3) Place your libdef inside the flow version directory and name it `left-pad_v4.1.0.js`.
+#### 3) Place your libdef inside the flow version directory and name it `left-pad_v4.x.x.js`.
 
 The name of the definition file must match the name of the package version
 directory two levels up. This, too, will be enforced by the library-definition
 test runner.
 
-#### 4) Write a test file whose name starts with `test_` in the package version directory.
+#### 4) Write a test file whose name starts with `test_` in the flow version directory.
+
+> Such as `test_left-pad_v4.x.x.js`
+
+Tests are simply `test_*.js` files that sit next to the library definition
+file. They are normal @flow-ified .js files that import from and use the types
+declared in the libdef in a way they are expected to be used.
 
 The purpose of a test file is to exercise the library definition to some
 reasonable degree. At minimum your tests should:
 
-1. Import at least one thing from each of the modules `declare`d in the
+1. Import at least one thing from each of the modules `declare`'d in the
    definition.
 1. Use the library definition in a couple of common ways that *should not*
    produce a type error.
 1. Use the library definition in a couple of ways that are *expected* to produce
-   a type error. To indicate that a line in a test file expected to cause an
-   error just put a `// $FlowExpectedError` comment above the error-causing line.
+   a type error. Though type errors will fail your test you can add [error suppressions](https://flow.org/en/docs/errors/) to the line above just like you would in your own codebase.
 
 [Here](https://github.com/flow-typed/flow-typed/blob/master/definitions/npm/highlight.js_v8.x.x/test_highlight.js-v8.js)
 is an example of a nice and thorough test file. You don't necessarily have to be
 this thorough, but the more thorough you are the better!
 
-You can write as many test files as you like as long as their names start with
-`test_`.
+Sometimes you may want to break down your test suite instead of having one gigantic file. In that case you can actually write as many test files as you like as long as their names start with `test_`. This is how [redux](https://github.com/flow-typed/flow-typed/tree/master/definitions/npm/redux_v4.x.x/flow_v0.134.x-) does it.
 
-All test files that sit in the package version directory will be run by
-the test-runner for *all* versions of Flow the package version supports. If you
-ever need to write a test for a particular version of Flow, you can put the
-`test_` file in the appropriate flow version directory.
+Alternatively you can add test files in the **package version directory** which will be run by
+the test-runner for *all* versions of Flow the package version supports. Though general best practice as outlined above is using the **flow version directory**.
 
-#### 5) Run your tests using one of the following:
-- globally installed `'flow-typed'`:
-```
-flow-typed validate-defs definitions && flow-typed run-tests left-pad
-```
-- local flow-typed CLI that we've built before (see instructions about `'./build_and_test_cli.sh'` above):
-```
-# assuming current directory is './cli'
-node dist/cli.js validate-defs ../definitions && \
+#### 5) Run your tests
+
+```sh
+# You only need to run this once which will
+# build your local CLI allowing the test suite to run
+# and then run definitions validation/test
+#
+# But if you ever make changes to the CLI files,
+# make sure you rerun `./build.sh` to update the
+# local build of the CLI with your changes.
+./build.sh
+
+# Subsequent testing after first build can just use the following.
+# This will run all changed files based on a git diff
+# note: If you find that your changed files aren't being picked up
+#       you can try `git add -A` then run the following script
+./quick_run_def_tests.sh
+
+# If you want to run something very specific,
+# taking the left-pad example you can point to the
+# local cli script and run tests against it
 node dist/cli.js run-tests left-pad
-```
-- The helper `./quick_run_def_tests.sh` mentioned above
 
-You may also leave off the argument `left-pad` to run *all* tests (this takes a while).
+# Running the local cli without any args will run **all**
+# tests which may take a while
+node dist/cli.js run-tests
+```
+
+> Windows instructions TBD if someone wants to help :construction_worker:
 
 #### 6) Send a pull request
 
 You know how to do it.
 
-## Writing libdefs best practices
+## Libdef best practices
 
 ### Read flow docs
 
@@ -173,7 +213,7 @@ declare module 'koa-router' {
 To be super clear:
 
 1. You can't import types from other libdefs in flow-typed
-1. You can import types built into Flow (e.g. from `react`), only if you put the import statement inside the module declaration
+1. You can import types built into Flow (e.g. from `react` or `fs`), only if you put the import statement inside the module declaration
 
 [Further discussion here](https://github.com/flow-typed/flow-typed/issues/1857) and [here](https://github.com/flow-typed/flow-typed/issues/2023).
 
@@ -262,6 +302,18 @@ This is imporant since immutable types accepts mutable types in, but mutable typ
 
 If the object has known set of properties, always define them as exact:
 - Instead of `{ +value: string }` prefer `{| +value: string |}`
+
+### Partial/definitions definitions
+
+We welcome contributions of partial, incomplete or work-in-progress definitions!
+When submitting a partial definition, please stub out the missing parts with `any`.
+If the definition was generated from `create-stub`, those parts should already be stubbed.
+
+### A note on flowgen
+
+[flowgen](https://github.com/joarwilk/flowgen) is a CLI tool that generates flowtype definitions from TypeScript types.
+While it supports most of the TypeScript syntax, in some cases manual changes may be needed before use.
+You can check out supported syntax constructs in thier section on the [state of the converter](https://github.com/joarwilk/flowgen#the-state-of-the-converter).
 
 ## Writing tests
 

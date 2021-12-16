@@ -2,7 +2,6 @@
   - [Quick start](quickstart.md)
   - [Importing types](usage.md)
   - [Advanced configuration](advanced.md)
-  - [Contributing definitions](contributing.md)
 - CLI commands
   - [install](install.md)
   - [create-stub](stub.md)
