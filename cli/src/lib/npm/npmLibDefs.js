@@ -181,12 +181,15 @@ async function extractLibDefsFromNpmPkgDir(
   return libDefs;
 }
 
-async function getCacheNpmLibDefs(cacheExpiry, skipCache = false) {
+export async function getCacheNpmLibDefs(
+  cacheExpiry: number,
+  skipCache: boolean = false,
+): Promise<Array<NpmLibDef>> {
   if (!skipCache) {
     await ensureCacheRepo(cacheExpiry);
   }
   await verifyCLIVersion();
-  return getNpmLibDefs(path.join(getCacheRepoDir(), 'definitions'));
+  return await getNpmLibDefs(path.join(getCacheRepoDir(), 'definitions'));
 }
 
 const PKG_NAMEVER_RE = /^(.*)_v\^?([0-9]+)\.([0-9]+|x)\.([0-9]+|x)(-.*)?$/;
@@ -377,8 +380,10 @@ export async function findNpmLibDef(
   flowVersion: FlowVersion,
   useCacheUntil: number = CACHE_REPO_EXPIRY,
   skipCache?: boolean = false,
+  extLibDefs?: Array<NpmLibDef>,
 ): Promise<null | NpmLibDef> {
-  const libDefs = await getCacheNpmLibDefs(useCacheUntil, skipCache);
+  const libDefs =
+    extLibDefs ?? (await getCacheNpmLibDefs(useCacheUntil, skipCache));
   const filteredLibDefs = filterLibDefs(libDefs, {
     type: 'exact',
     pkgName,
