@@ -35,9 +35,9 @@ Before opening an issue, take a look at the [FAQs](faqs.md). Chances are your
 question has already been answered! If not, don't hesitate to
 [open an issue](https://github.com/flow-typed/flow-typed/issues/new/choose).
 
-## How Do I Contribute Library Definitions?
+## How do I contribute library definitions?
 
-Just send a pull request! The documentation highlighted in [CONTRIBUTING.md](https://github.com/flow-typed/flow-typed/blob/master/CONTRIBUTING.md) should give a detailed overview of how to raise a pull request following our best practices.
+Just send a pull request! You can read out [Contributing](contributing.md) guide which should give a detailed overview of how to raise a pull request following our best practices.
 
 ## Community
 
