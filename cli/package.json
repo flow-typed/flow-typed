@@ -28,7 +28,7 @@
     "watch": "mkdirp dist && babel --source-maps --watch=./src --out-dir=./dist"
   },
   "dependencies": {
-    "@octokit/rest": "^16.43.1",
+    "@octokit/rest": "^18.12.0",
     "colors": "^1.4.0",
     "flowgen": "^1.10.0",
     "fs-extra": "^8.1.0",

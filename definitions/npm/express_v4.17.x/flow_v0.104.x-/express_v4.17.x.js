@@ -63,6 +63,7 @@ declare class express$Request extends http$IncomingMessage mixins express$Reques
   path: string;
   protocol: "https" | "http";
   query: { [name: string]: string | Array<string>, ... };
+  res?: express$Response;
   route: string;
   secure: boolean;
   signedCookies: { [signedCookie: string]: string, ... };
@@ -130,6 +131,10 @@ declare class express$Response extends http$ServerResponse mixins express$Reques
   render(
     view: string,
     locals?: { [name: string]: mixed, ... },
+    callback?: express$RenderCallback
+  ): this;
+  render(
+    view: string,
     callback?: express$RenderCallback
   ): this;
   send(body?: mixed): this;
