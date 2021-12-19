@@ -193,6 +193,53 @@ describe('npmLibDefs', () => {
       });
     });
 
+    describe('extLibDefs', () => {
+      it('does not retrieve a new cache of lib defs if one is passed into it', async () => {
+        const ensureCacheRepo = jest.fn(() => Promise.resolve());
+        jest
+          .spyOn(cacheRepoUtils, 'ensureCacheRepo')
+          .mockImplementation(ensureCacheRepo);
+
+        const pkgName = 'flow-bin';
+        const pkgVersion = 'github:flowtype/flow-bin';
+        const flowVersion = {kind: 'all'};
+        const skipCache = false;
+
+        await findNpmLibDef(
+          pkgName,
+          pkgVersion,
+          flowVersion,
+          undefined,
+          skipCache,
+          [],
+        );
+
+        expect(ensureCacheRepo).not.toHaveBeenCalled();
+      });
+
+      it('retrieve a new cache of lib defs if an external one is not passed in', async () => {
+        const ensureCacheRepo = jest.fn(() => Promise.resolve());
+        jest
+          .spyOn(cacheRepoUtils, 'ensureCacheRepo')
+          .mockImplementation(ensureCacheRepo);
+
+        const pkgName = 'flow-bin';
+        const pkgVersion = 'github:flowtype/flow-bin';
+        const flowVersion = {kind: 'all'};
+        const skipCache = false;
+
+        await findNpmLibDef(
+          pkgName,
+          pkgVersion,
+          flowVersion,
+          undefined,
+          skipCache,
+        );
+
+        expect(ensureCacheRepo).toHaveBeenCalled();
+      });
+    });
+
     describe('when non-semver package provided', () => {
       it("doesn't throw error", async () => {
         const pkgName = 'flow-bin';

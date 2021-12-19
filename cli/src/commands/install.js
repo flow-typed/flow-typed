@@ -17,6 +17,7 @@ import {fs, path} from '../lib/node';
 
 import {
   findNpmLibDef,
+  getCacheNpmLibDefs,
   getInstalledNpmLibDefs,
   getNpmLibDefVersionHash,
   getScopedPackageName,
@@ -374,6 +375,8 @@ async function installNpmLibDefs({
   ][] = [];
   const unavailableLibDefs = [];
 
+  const libDefs = await getCacheNpmLibDefs(useCacheUntil, skipCache);
+
   const getLibDefsToInstall = async (entries: Array<[string, string]>) => {
     await Promise.all(
       entries.map(async ([name, ver]) => {
@@ -393,7 +396,8 @@ async function installNpmLibDefs({
           ver,
           flowVersion,
           useCacheUntil,
-          skipCache,
+          true,
+          libDefs,
         );
         if (libDef === null) {
           unavailableLibDefs.push({name, ver});
