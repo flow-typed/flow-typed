@@ -2,7 +2,7 @@
 
 ## What is it?
 
-> flow-typed is a [repository](https://github.com/flow-typed/flow-typed/tree/master/definitions) 
+> flow-typed is a [repository](https://github.com/flow-typed/flow-typed/tree/master/definitions)
 of third-party [library interface definitions](https://flow.org/en/docs/libdefs)
 for use with [Flow](http://flow.org).
 
@@ -31,15 +31,13 @@ that, **simply check them in** and be on your way!
 
 ## FAQs
 
-Before opening an issue, take a look at the [FAQs](faqs.md). Chances are your 
+Before opening an issue, take a look at the [FAQs](faqs.md). Chances are your
 question has already been answered! If not, don't hesitate to
 [open an issue](https://github.com/flow-typed/flow-typed/issues/new/choose).
 
 ## How do I contribute library definitions?
 
-Just send a pull request! The page on [Contributing library definitions](contributing.md)
-details the format of new contributions. Contributions should follow the 
-best practices outline on [CONTRIBUTING.md](https://github.com/flow-typed/flow-typed/blob/master/CONTRIBUTING.md).
+Just send a pull request! You can read out [Contributing](contributing.md) guide which should give a detailed overview of how to raise a pull request following our best practices.
 
 ## Community
 

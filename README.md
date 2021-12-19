@@ -64,10 +64,7 @@ Chances are your question has already been answered! If not, don't hesitate to
 
 ## How Do I Contribute Library Definitions?
 
-Just send a pull request! The docs on
-[contributing definitions](https://flow-typed.github.io/flow-typed/#/contributing)
-detail the format of new contributions. Contributions should follow the best practices outlined in
-[CONTRIBUTING.md](https://github.com/flow-typed/flow-typed/blob/master/CONTRIBUTING.md).
+Just send a pull request! The documentation highlighted in [CONTRIBUTING.md](https://github.com/flow-typed/flow-typed/blob/master/CONTRIBUTING.md) should give a detailed overview of how to raise a pull request following our best practices.
 
 ### Contributing to the CLI
 
