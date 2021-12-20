@@ -1,6 +1,7 @@
 // @flow
 import path from 'path';
 import typeof Yargs from 'yargs';
+import {table} from 'table';
 
 import {findFlowRoot} from '../lib/flowProjectUtils';
 import {
@@ -70,10 +71,13 @@ export async function run({
   const cachedLibDefs = await getCacheNpmLibDefs(Number(useCacheUntil), true);
   const installedLibDefs = await getInstalledNpmLibDefs(
     flowProjectRoot,
-    String(libdefDir),
+    libdefDir ? String(libdefDir) : undefined,
   );
 
-  const outdatedList = [];
+  const outdatedList: Array<{
+    name: string,
+    message: string,
+  }> = [];
 
   cachedLibDefs.forEach(cachedDef => {
     installedLibDefs.forEach(installedDef => {
@@ -82,7 +86,11 @@ export async function run({
         installedDef.name === cachedDef.name
       ) {
         // a previously stubbed libdef has now been typed
-        outdatedList.push('stub blah blah');
+        outdatedList.push({
+          name: installedDef.name,
+          message:
+            'A new libdef has been published to the registry replacing your stub',
+        });
       }
       if (
         installedDef.kind === 'LibDef' &&
@@ -90,10 +98,25 @@ export async function run({
       ) {
         // need to somehow compare the two defs and if there's a difference
         // we assume they're outdated
-        outdatedList.push('this is outdated');
+        outdatedList.push({
+          name: installedDef.libDef.name,
+          message:
+            'This libdef is outdated you can update it with `flow-typed update`',
+        });
       }
     });
   });
+
+  if (outdatedList.length > 0) {
+    console.log(
+      table([
+        ['Name', 'Details'],
+        ...outdatedList.map(o => [o.name, o.message]),
+      ]),
+    );
+  } else {
+    console.log('All your lib defs are up to date!');
+  }
 
   return 0;
 }

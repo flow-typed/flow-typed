@@ -2,15 +2,15 @@
 // @flow
 
 import yargs from 'yargs';
-import {fs, path} from './lib/node.js';
+import {fs, path} from './lib/node';
 
-import * as Install from './commands/install.js';
+import * as Install from './commands/install';
 import * as CreateDef from './commands/create-def';
 import * as CreateStub from './commands/create-stub';
 import * as Outdated from './commands/outdated';
-import * as RunTests from './commands/runTests.js';
-import * as Search from './commands/search.js';
-import * as Update from './commands/update.js';
+import * as RunTests from './commands/runTests';
+import * as Search from './commands/search';
+import * as Update from './commands/update';
 import * as UpdateCache from './commands/update-cache';
 import * as ValidateDefs from './commands/validateDefs';
 
