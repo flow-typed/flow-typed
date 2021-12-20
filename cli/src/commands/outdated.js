@@ -91,11 +91,18 @@ export async function run({
           message:
             'A new libdef has been published to the registry replacing your stub',
         });
+        return;
       }
       if (
         installedDef.kind === 'LibDef' &&
         installedDef.libDef.name === cachedDef.name
       ) {
+        // Need to find the range to only check on libdefs that match
+        // JSON.stringify(installedDef.libDef.flowVersion) ===
+        //   JSON.stringify(cachedDef.flowVersion)
+        // But if we don't find one in range it could have been changed mid way
+        // and we should add that to the outdated list
+
         // need to somehow compare the two defs and if there's a difference
         // we assume they're outdated
         outdatedList.push({
@@ -103,6 +110,7 @@ export async function run({
           message:
             'This libdef is outdated you can update it with `flow-typed update`',
         });
+        return;
       }
     });
   });
