@@ -2968,10 +2968,6 @@ declare module "lodash/fp" {
     ): any;
     unset(path: Path): (object: Object) => boolean;
     unset(path: Path, object: Object): boolean;
-    dissoc(path: Path): (object: Object) => boolean;
-    dissoc(path: Path, object: Object): boolean;
-    dissocPath(path: Path): (object: Object) => boolean;
-    dissocPath(path: Path, object: Object): boolean;
     update(
       path: Path
     ): ((updater: Function) => (object: Object) => Object) &

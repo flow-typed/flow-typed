@@ -10,9 +10,9 @@ describe('express#use', () => {
     customApp.use("/something", express.Router());
     customApp.use(express.Router(), express.Router());
 
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
     customApp.use("/something", "/something");
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
     customApp.use("/something", "/something", express.Router());
   });
 });

@@ -27,6 +27,7 @@ export function setup(yargs: Yargs): Yargs {
 type Args = {
   libName: mixed, // string
   ver: mixed, // string
+  ...
 };
 
 export async function run({libName, ver}: Args): Promise<number> {

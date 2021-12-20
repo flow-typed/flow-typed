@@ -5,6 +5,41 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [3.5.0] 2021-11-27
+
+### Added
+- Added support for Yarn monorepos (#4140)
+- New --skipCache option for `install` command (#4170)
+- Add @babel/eslint-parser@7.16.3
+- Add @babel/plugin-syntax-flow@7.16.0
+- Add @babel/plugin-transform-react-jsx@7.16.0
+
+### Changed
+- Update flow-bin version to latest version (#4153)
+- `install` will also install lib defs of dependencies that ship with library (#4143)
+- Only test against changed versions with `only-changed` option (#4168)
+- Bump `table` from 5.4.6 to 6.7.3 (#4175)
+- Bump `ansi-regex` from 5.0.0 to 5.0.1 (#4177)
+- Update multiple devDependencies (#4174)
+  - Bump @babel/cli from 7.8.4 to 7.16.0
+  - Bump @babel/core from 7.8.4 to 7.16.0
+  - Bump @babel/preset-env from 7.8.4 to 7.16.4
+  - Bump @babel/preset-flow from 7.8.3 to 7.16.0
+  - Bump eslint from 6.8.0 to 8.3.0
+  - Bump eslint-config-prettier from 6.10.1 to 8.3.0
+  - Bump eslint-plugin-fb-flow from 0.0.1 to 0.0.4
+  - Bump eslint-plugin-flowtype from 4.6.0 to 8.0.3
+  - Bump eslint-plugin-prettier from 3.1.2 to 4.0.0
+  - Bump flow-bin from 0.164.0 to 0.165.1
+  - Bump jest from 25.1.027.3.1
+
+### Fixed
+- Fix installing lib def package when dependency version uses >= (#4157)
+- Support for slash-style comments in dependencies (#4169)
+- Remove babel-eslint@10.0.3
+- Remove babel-jest@25.1.0
+
+
 ## [3.4.0] 2021-10-20
 
 ### Added

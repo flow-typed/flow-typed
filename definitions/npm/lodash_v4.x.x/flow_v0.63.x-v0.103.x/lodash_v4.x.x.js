@@ -3029,10 +3029,6 @@ declare module "lodash/fp" {
     ): any;
     unset(path: Path): (object: Object) => Object;
     unset(path: Path, object: Object): Object;
-    dissoc(path: Path): (object: Object) => Object;
-    dissoc(path: Path, object: Object): Object;
-    dissocPath(path: Path): (object: Object) => Object;
-    dissocPath(path: Path, object: Object): Object;
     update(
       path: Path
     ): ((updater: Function) => (object: Object) => Object) &
@@ -5727,14 +5723,6 @@ declare module "lodash/fp/transform" {
 
 declare module "lodash/fp/unset" {
   declare module.exports: $PropertyType<$Exports<"lodash/fp">, "unset">;
-}
-
-declare module "lodash/fp/dissoc" {
-  declare module.exports: $PropertyType<$Exports<"lodash/fp">, "dissoc">;
-}
-
-declare module "lodash/fp/dissocPath" {
-  declare module.exports: $PropertyType<$Exports<"lodash/fp">, "dissocPath">;
 }
 
 declare module "lodash/fp/update" {

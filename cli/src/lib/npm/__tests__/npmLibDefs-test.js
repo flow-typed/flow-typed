@@ -11,6 +11,7 @@ import {
   getScopedPackageName,
   parseSignedCodeVersion,
 } from '../npmLibDefs';
+import * as cacheRepoUtils from '../../cacheRepoUtils';
 
 import path from 'path';
 import {ValidationError} from '../../ValidationError';
@@ -192,6 +193,53 @@ describe('npmLibDefs', () => {
       });
     });
 
+    describe('extLibDefs', () => {
+      it('does not retrieve a new cache of lib defs if one is passed into it', async () => {
+        const ensureCacheRepo = jest.fn(() => Promise.resolve());
+        jest
+          .spyOn(cacheRepoUtils, 'ensureCacheRepo')
+          .mockImplementation(ensureCacheRepo);
+
+        const pkgName = 'flow-bin';
+        const pkgVersion = 'github:flowtype/flow-bin';
+        const flowVersion = {kind: 'all'};
+        const skipCache = false;
+
+        await findNpmLibDef(
+          pkgName,
+          pkgVersion,
+          flowVersion,
+          undefined,
+          skipCache,
+          [],
+        );
+
+        expect(ensureCacheRepo).not.toHaveBeenCalled();
+      });
+
+      it('retrieve a new cache of lib defs if an external one is not passed in', async () => {
+        const ensureCacheRepo = jest.fn(() => Promise.resolve());
+        jest
+          .spyOn(cacheRepoUtils, 'ensureCacheRepo')
+          .mockImplementation(ensureCacheRepo);
+
+        const pkgName = 'flow-bin';
+        const pkgVersion = 'github:flowtype/flow-bin';
+        const flowVersion = {kind: 'all'};
+        const skipCache = false;
+
+        await findNpmLibDef(
+          pkgName,
+          pkgVersion,
+          flowVersion,
+          undefined,
+          skipCache,
+        );
+
+        expect(ensureCacheRepo).toHaveBeenCalled();
+      });
+    });
+
     describe('when non-semver package provided', () => {
       it("doesn't throw error", async () => {
         const pkgName = 'flow-bin';
@@ -208,6 +256,45 @@ describe('npmLibDefs', () => {
 
         expect(error).toBeUndefined();
         expect(filtered).toBeNull();
+      });
+    });
+
+    describe('skipCache', () => {
+      it("doesn't update the cache when it's provided", async () => {
+        const ensureCacheRepo = jest.fn(() => Promise.resolve());
+        jest
+          .spyOn(cacheRepoUtils, 'ensureCacheRepo')
+          .mockImplementation(ensureCacheRepo);
+
+        const pkgName = 'jest-test-npm-package';
+        const pkgVersion = 'v1.0.0';
+        const flowVersion = {kind: 'all'};
+        const skipCache = true;
+
+        await findNpmLibDef(
+          pkgName,
+          pkgVersion,
+          flowVersion,
+          undefined,
+          skipCache,
+        );
+
+        expect(ensureCacheRepo).not.toHaveBeenCalled();
+      });
+
+      it("does update the cache when it's not provided", async () => {
+        const ensureCacheRepo = jest.fn(() => Promise.resolve());
+        jest
+          .spyOn(cacheRepoUtils, 'ensureCacheRepo')
+          .mockImplementation(ensureCacheRepo);
+
+        const pkgName = 'jest-test-npm-package';
+        const pkgVersion = 'v1.0.0';
+        const flowVersion = {kind: 'all'};
+
+        await findNpmLibDef(pkgName, pkgVersion, flowVersion);
+
+        expect(ensureCacheRepo).toHaveBeenCalled();
       });
     });
   });

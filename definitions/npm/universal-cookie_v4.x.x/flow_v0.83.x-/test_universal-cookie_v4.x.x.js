@@ -1,0 +1,185 @@
+// @flow
+import { describe, it } from 'flow-typed-test';
+import Cookies from 'universal-cookie';
+
+describe('universal-cookie', () => {
+  const cookies = new Cookies();
+
+  it('constructor', () => {
+    new Cookies('test');
+    new Cookies({ foo: 'bar' });
+    new Cookies(null);
+
+    new Cookies('test', { decode: (a: string) => a });
+
+    // $FlowExpectedError[incompatible-call] Does not accept just anything
+    new Cookies(123);
+    // $FlowExpectedError[prop-missing] Only accepts decode in second arg obj
+    new Cookies('test', { foo: () => {} });
+  });
+
+  it('get', () => {
+    const a: string = cookies.get('test');
+    cookies.get('test', { doNotParse: true });
+    cookies.get('test', {}, { decode: (s: string) => s });
+    // $FlowExpectedError[incompatible-type] Can optionally accept generic
+    const b: string = cookies.get<number>('test');
+  });
+
+  it('getAll', () => {
+    const a: string = cookies.getAll({ doNotParse: true });
+    cookies.getAll({}, { decode: (s: string) => s });
+    // $FlowExpectedError[incompatible-type] Can optionally accept generic
+    const b: string = cookies.getAll<number>({ doNotParse: true });
+  });
+
+  it('set', () => {
+    (cookies.set('test', 'value'): void);
+    cookies.set(
+      'test',
+      'value',
+      {
+        path: 'test',
+        expires: new Date(),
+        maxAge: 123,
+        domain: 'test',
+        secure: true,
+        httpOnly: true,
+        sameSite: true,
+        encode: (s: string) => s,
+      },
+    );
+    cookies.set(
+      'test',
+      'value',
+      {
+        path: 'test',
+        expires: new Date(),
+        maxAge: 123,
+        domain: 'test',
+        secure: true,
+        httpOnly: true,
+        sameSite: 'none',
+        encode: (s: string) => s,
+      },
+    );
+    cookies.set(
+      'test',
+      'value',
+      {
+        path: 'test',
+        expires: new Date(),
+        maxAge: 123,
+        domain: 'test',
+        secure: true,
+        httpOnly: true,
+        sameSite: 'lax',
+        encode: (s: string) => s,
+      },
+    );
+    cookies.set(
+      'test',
+      'value',
+      {
+        path: 'test',
+        expires: new Date(),
+        maxAge: 123,
+        domain: 'test',
+        secure: true,
+        httpOnly: true,
+        sameSite: 'strict',
+        encode: (s: string) => s,
+      },
+    );
+
+    // $FlowExpectedError[incompatible-call] must pass name
+    cookies.set();
+    // $FlowExpectedError[incompatible-call] must pass value
+    cookies.set('test');
+    cookies.set(
+      'test',
+      'value',
+      {
+        path: 'test',
+        expires: new Date(),
+        maxAge: 123,
+        domain: 'test',
+        secure: true,
+        httpOnly: true,
+        // $FlowExpectedError[incompatible-call] Not boolean or valid union
+        sameSite: 'blah',
+        encode: (s: string) => s,
+      },
+    );
+  });
+
+  it('remove', () => {
+    (cookies.remove('test'): void);
+    cookies.remove(
+      'test',
+      {
+        path: 'test',
+        expires: new Date(),
+        maxAge: 123,
+        domain: 'test',
+        secure: true,
+        httpOnly: true,
+        sameSite: 'strict',
+        encode: (s: string) => s,
+      },
+    );
+
+    // $FlowExpectedError[incompatible-call] must pass name
+    cookies.remove();
+  });
+
+  it('addChangeListener', () => {
+    (cookies.addChangeListener(({
+      name,
+      value,
+      options,
+    }) => {
+      name.toLowerCase();
+      // $FlowExpectedError[prop-missing] Name is a string not number or any
+      name.toFixed(2);
+
+      if (value) {
+        // value is any
+        value.toLowerCase();
+        value.toFixed(2);
+      }
+      // $FlowExpectedError[incompatible-use] value may not exist
+      value.toLowerCase();
+
+      options?.path
+      // $FlowExpectedError[incompatible-use]
+      // $FlowExpectedError[prop-missing] property does not exist
+      options.foo
+    }): void);
+  });
+
+  it('removeChangeListener', () => {
+    (cookies.removeChangeListener(({
+      name,
+      value,
+      options,
+    }) => {
+      name.toLowerCase();
+      // $FlowExpectedError[prop-missing] Name is a string not number or any
+      name.toFixed(2);
+
+      if (value) {
+        // value is any
+        value.toLowerCase();
+        value.toFixed(2);
+      }
+      // $FlowExpectedError[incompatible-use] value may not exist
+      value.toLowerCase();
+
+      options?.path
+      // $FlowExpectedError[incompatible-use]
+      // $FlowExpectedError[prop-missing] property does not exist
+      options.foo
+    }): void);
+  });
+});

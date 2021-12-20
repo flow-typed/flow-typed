@@ -5,19 +5,19 @@ Cookie.set('version', 20, {
     path: '/'
 });
 
-// $FlowExpectedError
+// $FlowExpectedError[incompatible-type]
 const v: string = Cookie.get('version');
 
 const all: Object = Cookie.get();
 
-// $FlowExpectedError
+// $FlowExpectedError[incompatible-call]
 Cookie.set(12, 'should fail');
 
 Cookie.remove('version', {
     path: '/'
 });
 
-// $FlowExpectedError
+// $FlowExpectedError[prop-missing]
 Cookie.removeCookie()
 
 Cookie.set('data', {
@@ -26,7 +26,7 @@ Cookie.set('data', {
 }, { secure: true });
 
 
-// $FlowExpectedError
+// $FlowExpectedError[prop-missing]
 Cookie.getJson();
 
 const data: Object = Cookie.getJSON('data');
@@ -46,7 +46,7 @@ cookieWithConverter.defaults = {
 };
 
 
-// $FlowExpectedError
 Cookie.defaults = {
+    // $FlowExpectedError[incompatible-type]
     secure: 1
 };

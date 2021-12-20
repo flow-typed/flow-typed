@@ -3,6 +3,7 @@
 import type {FlowSpecificVer} from '../lib/flowVersion';
 import {signCodeStream} from '../lib/codeSign';
 import {copyFile, mkdirp} from '../lib/fileUtils';
+import {child_process} from '../lib/node';
 
 import {findFlowRoot} from '../lib/flowProjectUtils';
 
@@ -16,6 +17,7 @@ import {fs, path} from '../lib/node';
 
 import {
   findNpmLibDef,
+  getCacheNpmLibDefs,
   getInstalledNpmLibDefs,
   getNpmLibDefVersionHash,
   getScopedPackageName,
@@ -53,6 +55,8 @@ export type Args = {
   flowVersion?: mixed, // string
   overwrite: mixed, // boolean
   skip: mixed, // boolean
+  skipCache?: mixed, // boolean
+  skipFlowRestart?: mixed, // boolean
   verbose: mixed, // boolean
   libdefDir?: mixed, // string
   cacheDir?: mixed, // string
@@ -61,7 +65,9 @@ export type Args = {
   rootDir?: mixed, // string,
   useCacheUntil?: mixed, // number (milliseconds)
   explicitLibDefs: mixed, // Array<string>
+  ...
 };
+
 export function setup(yargs: Yargs): Yargs {
   return yargs
     .usage(`$0 ${name} - ${description}`)
@@ -84,6 +90,16 @@ export function setup(yargs: Yargs): Yargs {
       skip: {
         alias: 's',
         describe: 'Do not generate stubs for missing libdefs',
+        type: 'boolean',
+        demandOption: false,
+      },
+      skipCache: {
+        describe: 'Do not update cache prior to installing libdefs',
+        type: 'boolean',
+        demandOption: false,
+      },
+      skipFlowRestart: {
+        describe: 'Do not restart flow after installing libdefs',
         type: 'boolean',
         demandOption: false,
       },
@@ -181,12 +197,24 @@ export async function run(args: Args): Promise<number> {
     verbose: Boolean(args.verbose),
     overwrite: Boolean(args.overwrite),
     skip: Boolean(args.skip),
+    skipCache: Boolean(args.skipCache),
     ignoreDeps: ignoreDeps,
     useCacheUntil: Number(args.useCacheUntil) || CACHE_REPO_EXPIRY,
   });
   if (npmLibDefResult !== 0) {
     return npmLibDefResult;
   }
+
+  // Once complete restart flow to solve flow issues when scanning large diffs
+  if (!args.skipFlowRestart) {
+    try {
+      await child_process.execP('npx flow stop');
+      await child_process.execP('npx flow');
+    } catch (e) {
+      console.log(colors.red('!! Flow restarted with some errors'));
+    }
+  }
+
   return 0;
 }
 
@@ -232,6 +260,7 @@ type installNpmLibDefsArgs = {|
   verbose: boolean,
   overwrite: boolean,
   skip: boolean,
+  skipCache: boolean,
   ignoreDeps: Array<string>,
   useCacheUntil: number,
 |};
@@ -243,6 +272,7 @@ async function installNpmLibDefs({
   verbose,
   overwrite,
   skip,
+  skipCache,
   ignoreDeps,
   useCacheUntil,
 }: installNpmLibDefsArgs): Promise<number> {
@@ -345,9 +375,18 @@ async function installNpmLibDefs({
   ][] = [];
   const unavailableLibDefs = [];
 
+  const libDefs = await getCacheNpmLibDefs(useCacheUntil, skipCache);
+
   const getLibDefsToInstall = async (entries: Array<[string, string]>) => {
     await Promise.all(
       entries.map(async ([name, ver]) => {
+        // To comment in json files a work around is to give a key value pair
+        // of `"//": "comment"` we should exclude these so the install doesn't crash
+        // Ref: https://stackoverflow.com/a/14221781/430128
+        if (name === '//') {
+          return;
+        }
+
         if (FLOW_BUILT_IN_NPM_LIBS.indexOf(name) !== -1) {
           return;
         }
@@ -357,6 +396,8 @@ async function installNpmLibDefs({
           ver,
           flowVersion,
           useCacheUntil,
+          true,
+          libDefs,
         );
         if (libDef === null) {
           unavailableLibDefs.push({name, ver});

@@ -27,6 +27,7 @@ export function _formatDefTable(defs: Array<LibDef>): string {
 export type Args = {
   flowVersion: mixed, // ?string
   term: mixed, // string
+  ...
 };
 
 export const name = 'search <term>';
