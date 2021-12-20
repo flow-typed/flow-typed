@@ -1,25 +1,36 @@
 // @flow
 import path from 'path';
-import fs from 'fs';
 import typeof Yargs from 'yargs';
 
-import { CACHE_REPO_EXPIRY, ensureCacheRepo } from "../lib/cacheRepoUtils";
+import {findFlowRoot} from '../lib/flowProjectUtils';
+import {
+  getCacheNpmLibDefs,
+  getInstalledNpmLibDefs,
+} from '../lib/npm/npmLibDefs';
 
 export const name = 'outdated [explicitLibDefs...]';
-export const description = 'Update the flow-typed cache and print any outdated libdefs in current project';
+export const description =
+  'Update the flow-typed cache and print any outdated libdefs in current project';
 
 export function setup(yargs: Yargs): Yargs {
   return yargs
     .usage(`$0 ${name}`)
-    .positional('explicitLibDefs', {
-      describe: 'Explicitly specify packages check',
-      default: [],
-    })
     .options({
       useCacheUntil: {
         alias: 'u',
         describe: 'Use cache until specified time in milliseconds',
         type: 'number',
+      },
+      libdefDir: {
+        alias: 'l',
+        describe: 'Scan currently installed libdefs from a custom directory',
+        type: 'string',
+        demandOption: false,
+      },
+      rootDir: {
+        alias: 'r',
+        describe: 'Directory of .flowconfig relative to node_modules',
+        type: 'string',
       },
     })
     .example('$0 outdated', '')
@@ -28,44 +39,61 @@ export function setup(yargs: Yargs): Yargs {
 }
 
 type Args = {
-  explicitLibDefs?: mixed, // Array<string>
   useCacheUntil?: mixed, // number (milliseconds)
+  libdefDir?: mixed, // string
+  rootDir?: mixed, // string,
+  ...
 };
 
+/**
+ * 1. Update and pull the cache
+ * 2. Compare current installed with what's in the cache
+ * 3. Create a list to print out
+ */
 export async function run({
-  explicitLibDefs = [],
   useCacheUntil,
+  libdefDir,
+  rootDir,
 }: Args): Promise<number> {
-  /**
-   * 1. Update the cache
-   * 2. Are we looking at all install libdefs or explicit
-   *    a. if explicit use explicit
-   *    b. else create list of all libdefs in `.flow-typed/npm` dir
-   * 3. Compare current installed with what's in the cache
-   * 4. Create a list to print out
-   */
-  await ensureCacheRepo(
-    Number(useCacheUntil) || CACHE_REPO_EXPIRY,
-  );
-
-  if (!Array.isArray(explicitLibDefs)) {
+  const cwd =
+    typeof rootDir === 'string' ? path.resolve(rootDir) : process.cwd();
+  const flowProjectRoot = await findFlowRoot(cwd);
+  if (flowProjectRoot === null) {
+    console.error(
+      'Error: Unable to find a flow project in the current dir or any of ' +
+        "it's parent dirs!\n" +
+        'Please run this command from within a Flow project.',
+    );
     return 1;
   }
 
-  let libDefsToCompare;
-  if (explicitLibDefs.length === 0) {
-    // get all libdefs currently in flow-typed/npm
-    libDefsToCompare = [];
-  } else {
-    libDefsToCompare = explicitLibDefs;
-  }
+  const cachedLibDefs = await getCacheNpmLibDefs(Number(useCacheUntil), true);
+  const installedLibDefs = await getInstalledNpmLibDefs(
+    flowProjectRoot,
+    String(libdefDir),
+  );
 
-  libDefsToCompare.forEach((def) => {
-    // compare between the cache and installed
-    // if file contents are different then all to a list
+  const outdatedList = [];
+
+  cachedLibDefs.forEach(cachedDef => {
+    installedLibDefs.forEach(installedDef => {
+      if (
+        installedDef.kind === 'Stub' &&
+        installedDef.name === cachedDef.name
+      ) {
+        // a previously stubbed libdef has now been typed
+        outdatedList.push('stub blah blah');
+      }
+      if (
+        installedDef.kind === 'LibDef' &&
+        installedDef.libDef.name === cachedDef.name
+      ) {
+        // need to somehow compare the two defs and if there's a difference
+        // we assume they're outdated
+        outdatedList.push('this is outdated');
+      }
+    });
   });
-
-  // Print out some list for user to see
 
   return 0;
 }
