@@ -64,16 +64,19 @@ declare module "react-redux" {
     // and provide the DispatchProps type to the DP type parameter.
     | ((dispatch: D, ownProps: OP) => (dispatch: D, ownProps: OP) => DP);
 
-  declare class ConnectedComponent<OP, +WC> extends React$Component<OP> {
+  declare class ConnectedComponentClass<OP, +WC> extends React$Component<OP> {
     static +WrappedComponent: WC;
     getWrappedInstance(): React$ElementRef<WC>;
   }
+
+  declare export type ConnectedComponent = typeof ConnectedComponentClass;
+
   // The connection of the Wrapped Component and the Connected Component
   // happens here in `MP: P`. It means that type wise MP belongs to P,
   // so to say MP >= P.
   declare type Connector<P, OP, MP: P> = <WC: React$ComponentType<P>>(
     WC,
-  ) => Class<ConnectedComponent<OP, WC>> & WC;
+  ) => Class<ConnectedComponentClass<OP, WC>> & WC;
 
   // No `mergeProps` argument
 
