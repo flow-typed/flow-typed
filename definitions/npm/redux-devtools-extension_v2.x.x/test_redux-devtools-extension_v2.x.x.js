@@ -41,20 +41,20 @@ const options1: Options = {
 (options1: OptionsLog);
 (options1: OptionsLogProd);
 
-// $FlowExpectedError
 const options2: Options = {
+  // $FlowExpectedError[incompatible-type]
   name: 54
 };
-// $FlowExpectedError
 const options3: OptionsDev = {
+  // $FlowExpectedError[incompatible-type]
   name: 54
 };
-// $FlowExpectedError
 const options4: OptionsLog = {
+  // $FlowExpectedError[incompatible-type]
   name: 54
 };
-// $FlowExpectedError
 const options5: OptionsLogProd = {
+  // $FlowExpectedError[incompatible-type]
   name: 54
 };
 
@@ -70,9 +70,9 @@ const options5: OptionsLogProd = {
 (compose(options1): * => Function);
 (compose((x: number): boolean => x === 0): number => boolean);
 (compose((b: boolean): Array<number> => b?[0]:[], (x: number): boolean => x === 0): number => Array<number>);
-// $FlowExpectedError
+// $FlowExpectedError[incompatible-cast]
 (compose((b: boolean): Array<number> => b?[0]:[], (x: number): boolean => x === 0): Array<number> => number);
-// $FlowExpectedError
+// $FlowExpectedError[incompatible-cast]
 (compose((s: string): number => parseInt(s), (n: number): string => String(n)): string => string);
 (compose((s: string): number => parseInt(s), (n: number): string => String(n)): number => number);
 
