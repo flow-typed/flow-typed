@@ -688,7 +688,7 @@ function itsOkToReturnMoreThanNeededPropsFromMapStateToProps() {
   e.push(Connected)
 }
 
-function doesNotRequireDefinedComponentToTypeCheck2case() {
+function doesNotRequireDefinedComponentToTypeCheck2caseAgain() {
   type Props = {
     stringProp: string,
     numProp: number,
