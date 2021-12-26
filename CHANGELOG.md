@@ -10,9 +10,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Added
 - Add a published readme (#4182)
 
-### Changed
+### Fixed
 - Dramatically improve install time (#4193)
 - Replace unzipper with node-stream-zip (#4180)
+- Install will restart flow bin (#4185)
 - Upgrade octokit/rest version (#4197)
 - [Docs] Move wiki to /docs and serve with docsify (#4179)
 
