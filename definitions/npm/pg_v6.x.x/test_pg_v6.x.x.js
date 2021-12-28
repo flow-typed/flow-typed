@@ -15,10 +15,10 @@ import type {
 
 pg.types.setTypeParser(1184, v => v);
 pg.types.setTypeParser(1184, 'text', (v: string) => v);
-// $FlowExpectedError
+// $FlowExpectedError[incompatible-call]
 pg.types.setTypeParser(1184, 'binary', (v: string) => v)
 pg.types.setTypeParser(1184, 'binary', (v: Buffer) => v)
-// $FlowExpectedError
+// $FlowExpectedError[incompatible-call]
 pg.types.setTypeParser(1184, (v: Buffer) => v)
 
 // There are two common ways to use node-postgres.
@@ -27,55 +27,55 @@ function test_pg() {
   function test_pool(pool: Pool) {
     // 1.1 you can run queries directly against the pool
     const rq: Promise<ResultSet> = pool.query('select * from table;');
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-type-arg]
     const rqw: Promise<number> = pool.query('select * from table;');
     const rq2: Promise<ResultSet> = pool.query('Parameterized Queries',[1],
      (err, result) => {
        const _err: PG_ERROR|null = err;
-       // $FlowExpectedError
+       // $FlowExpectedError[incompatible-type]
        const _err_w: number = err;
        const _result: ResultSet|void = result;
-       // $FlowExpectedError
+       // $FlowExpectedError[incompatible-type]
        const _result_w: number = result;
      });
-     // $FlowExpectedError
+     // $FlowExpectedError[incompatible-call]
     const rq2_w: Promise<ResultSet> = pool.query('Parameterized Queries',1);
 
     // 1.2 the pool also supports checking out a client for
     // multiple operations, such as a transaction
     const rc: Promise<PoolClient> = pool.connect( (err, client, done) => {
       const _err: PG_ERROR|null = err;
-      // $FlowExpectedError
+      // $FlowExpectedError[incompatible-type]
       const _err_w: number = err;
       const _client: PoolClient|null = client;
-      // $FlowExpectedError
+      // $FlowExpectedError[incompatible-type]
       const _client_w: number = client;
       const _done: DoneCallback = done;
-      // $FlowExpectedError
+      // $FlowExpectedError[incompatible-type]
       const _done_w: number = done;
     });
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-type]
     const rc_w: number = pool.connect();
 
     const rt: Promise<PoolClient> = pool.take( (err, client, done) => {
       const _err: PG_ERROR|null = err;
-      // $FlowExpectedError
+      // $FlowExpectedError[incompatible-type]
       const _err_w: number = err;
       const _client: PoolClient|null = client;
-      // $FlowExpectedError
+      // $FlowExpectedError[incompatible-type]
       const _client_w: number = client;
       const _done: DoneCallback = done;
-      // $FlowExpectedError
+      // $FlowExpectedError[incompatible-type]
       const _done_w: number = done;
     });
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-type]
     const rt_w: number = pool.take();
 
     const re: Promise<void> = pool.end( err => {
-      // $FlowExpectedError
+      // $FlowExpectedError[incompatible-type]
       const _err_w: string = err; // ?:mixed
     });
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-type-arg]
     const re_w: Promise<null> = pool.end();
 
     // Note: There is a slight different between pool.query and client.query.
@@ -84,17 +84,17 @@ function test_pg() {
     function test_PoolClient(client: PoolClient) {
       const rr: void = client.release('any msg');
       const rr1: void = client.release();
-      // $FlowExpectedError
+      // $FlowExpectedError[incompatible-type]
       const rr_w: null = client.release();
       const rq: QueryType = client.query('select * from table;');
-      // $FlowExpectedError
+      // $FlowExpectedError[incompatible-type-arg]
       const rqw: Promise<number> = pool.query('select * from table;');
       rq.on('row', (row, result) => {
         const _row: Row = row;
         const _result: ResultBuilder = result;
-        // $FlowExpectedError
+        // $FlowExpectedError[incompatible-type]
         const _row_w: number = row;
-        // $FlowExpectedError
+        // $FlowExpectedError[incompatible-type]
         const _result_w: number = result;
       });
       rq.on('end', (result) => {
@@ -102,23 +102,23 @@ function test_pg() {
       });
       rq.on('error', (err) => {
         const _err: PG_ERROR = err;
-        // $FlowExpectedError
+        // $FlowExpectedError[incompatible-type]
         const _err_w: number = err;
       });
-      // $FlowExpectedError
+      // $FlowExpectedError[incompatible-call]
       rq.on('wrong', ()=>{});
 
 
       const rq2: Promise<ResultSet> = client.query('Parameterized Queries',[1],
        (err, result) => {
          const _err: PG_ERROR|null = err;
-         // $FlowExpectedError
+         // $FlowExpectedError[incompatible-type]
          const _err_w: number = err;
          const _result: ResultSet|void = result;
-         // $FlowExpectedError
+         // $FlowExpectedError[incompatible-type]
          const _result_w: number = result;
        });
-       // $FlowExpectedError
+       // $FlowExpectedError[incompatible-call]
       const rq2_w: Promise<ResultSet> = client.query('Parameterized Queries',1);
     }
   }
@@ -134,37 +134,37 @@ function test_pg() {
         const rq2: Promise<ResultSet> = _client.query('Parameterized Queries',[1],
          (err, result) => {
            const _err: PG_ERROR|null = err;
-           // $FlowExpectedError
+           // $FlowExpectedError[incompatible-type]
            const _err_w: number = err;
            const _result: ResultSet|void = result;
-           // $FlowExpectedError
+           // $FlowExpectedError[incompatible-type]
            const _result_w: number = result;
          });
-         // $FlowExpectedError
+         // $FlowExpectedError[incompatible-call]
         const rq2_w: Promise<ResultSet> = _client.query('Parameterized Queries',1);
 
         _client.on('drain', _ => {
           const a: void = _;
         });
-        // $FlowExpectedError
+        // $FlowExpectedError[incompatible-call]
         _client.on('drain',1);
         _client.on('error', err => {
           const _err: PG_ERROR = err;
         });
-        // $FlowExpectedError
+        // $FlowExpectedError[incompatible-call]
         _client.on('error',1);
         _client.on('notification', msg => {
         });
-        // $FlowExpectedError
+        // $FlowExpectedError[incompatible-call]
         _client.on('notification',1);
         _client.on('notice', msg => {
         });
-        // $FlowExpectedError
+        // $FlowExpectedError[incompatible-call]
         _client.on('notice',1);
         _client.on('end', _ => {
           const a: void = _;
         });
-        // $FlowExpectedError
+        // $FlowExpectedError[incompatible-call]
         _client.on('end',1);
       }
     });
@@ -183,16 +183,16 @@ const pool = new pg.Pool({
 
 // use pool
 const promise_r = pool.query('select * from table;', ['11']);
-// $FlowExpectedError
+// $FlowExpectedError[incompatible-type]
 const p:boolean = promise_r; // Promise
 promise_r.then( result => {
-  // $FlowExpectedError
+  // $FlowExpectedError[incompatible-type]
   const v:boolean = result.command; // string
-  // $FlowExpectedError
+  // $FlowExpectedError[incompatible-type]
   const v2:boolean = result.oid; // string
-  // $FlowExpectedError
+  // $FlowExpectedError[incompatible-type]
   const v3:boolean = result.rowCount; // string
-  // $FlowExpectedError
+  // $FlowExpectedError[incompatible-type]
   const v4:boolean = result.rows; // Array
   const rt:ResultSet = result; // the type of result
 })
@@ -202,7 +202,7 @@ const promise_client = pool.connect();
 promise_client.then( client => {
   client.query('select * from table;')
     .then( result => {
-      // $FlowExpectedError
+      // $FlowExpectedError[incompatible-type]
       const v:boolean = result; // result should be typed
     });
   client.release('error msg'); // accept error msg
