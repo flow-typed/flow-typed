@@ -6,12 +6,12 @@ Contributing library definitions is as easy as sending a pull request!
 
 * [Understanding the definitions structure](#understanding-the-definitions-structure)
 * [Making a contribution](#making-a-contribution)
-  * [Create package directory](1-create-a-new-directory-called-definitionsnpmleft-pad_v4xx)
-  * [Create flow directory](2-in-this-new-directory-create-another-new-directory-called-flow_v083x-)
-  * [Create definition](3-place-your-libdef-inside-the-flow-version-directory-and-name-it-left-pad_v4xxjs)
-  * [Create tests](4-write-a-test-file-whose-name-starts-with-test_-in-the-flow-version-directory)
-  * [Run tests](5-run-your-tests)
-  * [Raise pull request](6-send-a-pull-request)
+  * [Create package directory](#1-create-a-new-directory-called-definitionsnpmleft-pad_v4xx)
+  * [Create flow directory](#2-in-this-new-directory-create-another-new-directory-called-flow_v083x-)
+  * [Create definition](#3-place-your-libdef-inside-the-flow-version-directory-and-name-it-left-pad_v4xxjs)
+  * [Create tests](#4-write-a-test-file-whose-name-starts-with-test_-in-the-flow-version-directory)
+  * [Run tests](#5-run-your-tests)
+  * [Raise pull request](#6-send-a-pull-request)
 * [Writing libdefs best practices](#writing-libdefs-best-practices)
   * [Read flow docs](#read-flow-docs)
   * [Don't import types from other libdefs](#dont-import-types-from-other-libdefs)
@@ -164,11 +164,11 @@ the test-runner for *all* versions of flow the package version supports. Though 
 # If you want to run something very specific,
 # taking the left-pad example you can point to the
 # local cli script and run tests against it
-node dist/cli.js run-tests left-pad
+node cli/dist/cli.js run-tests left-pad
 
 # Running the local cli without any args will run `all`
 # tests which may take a while
-node dist/cli.js run-tests
+node cli/dist/cli.js run-tests
 ```
 
 > Windows instructions TBD if someone wants to help :construction_worker:
