@@ -29,6 +29,7 @@ declare module 'koa' {
     // props added by middlewares.
     [key: string]: mixed,
     app: Application,
+    body: { [key: string]: any, ... },
     req: http$IncomingMessage<>,
     res: http$ServerResponse,
     ctx: Context,

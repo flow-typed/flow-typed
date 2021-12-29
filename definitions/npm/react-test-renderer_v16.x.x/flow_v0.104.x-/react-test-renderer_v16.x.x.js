@@ -3,6 +3,8 @@
 
 type ReactComponentInstance = React$Component<any>;
 
+type ReactInstance = React$Component<any, any> | React$Element<any>;
+
 type ReactTestRendererJSON = {
   type: string,
   props: { [propName: string]: any, ... },
@@ -67,7 +69,7 @@ declare module "react-test-renderer" {
 declare module "react-test-renderer/shallow" {
   declare export default class ShallowRenderer {
     static createRenderer(): ShallowRenderer;
-    getMountedInstance(): ReactTestInstance;
+    getMountedInstance<I: ReactInstance>(): I;
     getRenderOutput<E: React$Element<any>>(): E;
     getRenderOutput(): React$Element<any>;
     render(element: React$Element<any>, context?: any): void;
