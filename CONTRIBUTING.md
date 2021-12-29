@@ -20,8 +20,8 @@ Contributing library definitions is as easy as sending a pull request!
   * [Avoid global types](#avoid-global-types)
   * [Prefer immutability](#prefer-immutability)
   * [Prefer exactness](#prefer-exactness)
-  * [Partial/definitions definitions](partialdefinitions-definitions)
-  * [A note on flowgen](a-note-on-flowgen)
+  * [Partial/definitions definitions](#partialdefinitions-definitions)
+  * [A note on flowgen](#a-note-on-flowgen)
 * [Writing tests](#writing-tests)
   * [Use `describe` and `it` blocks to limit scope](#use-describe-and-it-blocks-to-limit-scope)
 
