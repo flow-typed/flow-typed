@@ -61,7 +61,7 @@ declare module 'pg' {
     // database host. defaults to localhost
     host?: string,
     // whether to try SSL/TLS to connect to server. default value: false
-    ssl?: boolean,
+    ssl?: boolean | { rejectUnauthorized: boolean, ... },
     // name displayed in the pg_stat_activity view and included in CSV log entries
     // default value: process.env.PGAPPNAME
     application_name?: string,
@@ -166,7 +166,7 @@ declare module 'pg' {
     // database host. defaults to localhost
     host?: string,
     // whether to try SSL/TLS to connect to server. default value: false
-    ssl?: boolean,
+    ssl?: boolean | { rejectUnauthorized: boolean, ... },
     // name displayed in the pg_stat_activity view and included in CSV log entries
     // default value: process.env.PGAPPNAME
     application_name?: string,
