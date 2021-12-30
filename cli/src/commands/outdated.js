@@ -5,6 +5,7 @@ import {table} from 'table';
 
 import {findFlowRoot} from '../lib/flowProjectUtils';
 import {
+  findNpmLibDef,
   getCacheNpmLibDefs,
   getInstalledNpmLibDefs,
 } from '../lib/npm/npmLibDefs';
@@ -79,8 +80,11 @@ export async function run({
     message: string,
   }> = [];
 
+  // For each cached def loop we'll check if it's installed as a stub
+  // if so then we should mark as outdated
+  // But if it's not stubbed
   cachedLibDefs.forEach(cachedDef => {
-    installedLibDefs.forEach(installedDef => {
+    installedLibDefs.forEach(async installedDef => {
       if (
         installedDef.kind === 'Stub' &&
         installedDef.name === cachedDef.name
@@ -97,6 +101,15 @@ export async function run({
         installedDef.kind === 'LibDef' &&
         installedDef.libDef.name === cachedDef.name
       ) {
+        // This can be used to check if the version breakdown has changed
+        await findNpmLibDef(
+          installedDef.libDef.name,
+          installedDef.libDef.version,
+          installedDef.libDef.flowVersion,
+          Number(useCacheUntil),
+          undefined,
+          cachedLibDefs,
+        );
         // Need to find the range to only check on libdefs that match
         // JSON.stringify(installedDef.libDef.flowVersion) ===
         //   JSON.stringify(cachedDef.flowVersion)
