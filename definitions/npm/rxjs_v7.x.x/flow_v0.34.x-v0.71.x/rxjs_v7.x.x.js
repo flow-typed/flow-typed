@@ -47,7 +47,7 @@ declare class rxjs$Observable<+T> {
     project: (self: rxjs$Observable<T>) => rxjs$Observable<U>
   ): rxjs$Observable<U>;
 
-  observeOn(scheduler: rxjs$SchedulerClass): rxjs$Observable<T>;
+  observeOn(scheduler: rxjs$SchedulerLike): rxjs$Observable<T>;
 
   pipe(): rxjs$Observable<T>;
 
@@ -107,23 +107,17 @@ declare class rxjs$Observable<+T> {
     op6: rxjs$OperatorFunction<E, F>,
     op7: rxjs$OperatorFunction<F, G>,
     ...operations: rxjs$OperatorFunctionLast<any, any>[]
-  ): any;
+  ): rxjs$Observable<mixed>;
 
   toArray(): rxjs$Observable<T[]>;
 
-  toPromise(): Promise<T>;
+  /** @deprecated use firstValueFrom or lastValueFrom */
+  toPromise(): Promise<T | void>;
 
   subscribe(observer: rxjs$PartialObserver<T>): rxjs$Subscription;
-  subscribe(
-    onNext: ?(value: T) => mixed,
-    onError: ?(error: any) => mixed,
-    onCompleted: ?() => mixed
-  ): rxjs$Subscription;
-
-  _subscribe(observer: rxjs$Subscriber<T>): rxjs$Subscription;
-
-  _isScalar: boolean;
+  /** @deprecated */
   source: ?rxjs$Observable<any>;
+  /** @deprecated */
   operator: ?rxjs$Operator<any, any>;
 }
 
@@ -132,27 +126,27 @@ declare module 'rxjs/observable/bindCallback' {
     bindCallback(
       callbackFunc: (callback: (_: void) => any) => any,
       selector?: void,
-      scheduler?: rxjs$SchedulerClass
+      scheduler?: rxjs$SchedulerLike
     ): () => rxjs$Observable<void>;
     bindCallback<U>(
       callbackFunc: (callback: (result: U) => any) => any,
       selector?: void,
-      scheduler?: rxjs$SchedulerClass
+      scheduler?: rxjs$SchedulerLike
     ): () => rxjs$Observable<U>;
     bindCallback<T, U>(
       callbackFunc: (v1: T, callback: (result: U) => any) => any,
       selector?: void,
-      scheduler?: rxjs$SchedulerClass
+      scheduler?: rxjs$SchedulerLike
     ): (v1: T) => rxjs$Observable<U>;
     bindCallback<T, T2, U>(
       callbackFunc: (v1: T, v2: T2, callback: (result: U) => any) => any,
       selector?: void,
-      scheduler?: rxjs$SchedulerClass
+      scheduler?: rxjs$SchedulerLike
     ): (v1: T, v2: T2) => rxjs$Observable<U>;
     bindCallback<T, T2, T3, U>(
       callbackFunc: (v1: T, v2: T2, v3: T3, callback: (result: U) => any) => any,
       selector?: void,
-      scheduler?: rxjs$SchedulerClass
+      scheduler?: rxjs$SchedulerLike
     ): (v1: T, v2: T2, v3: T3) => rxjs$Observable<U>;
     bindCallback<T, T2, T3, T4, U>(
       callbackFunc: (
@@ -163,7 +157,7 @@ declare module 'rxjs/observable/bindCallback' {
         callback: (result: U) => any
       ) => any,
       selector?: void,
-      scheduler?: rxjs$SchedulerClass
+      scheduler?: rxjs$SchedulerLike
     ): (v1: T, v2: T2, v3: T3, v4: T4) => rxjs$Observable<U>;
     bindCallback<T, T2, T3, T4, T5, U>(
       callbackFunc: (
@@ -175,7 +169,7 @@ declare module 'rxjs/observable/bindCallback' {
         callback: (result: U) => any
       ) => any,
       selector?: void,
-      scheduler?: rxjs$SchedulerClass
+      scheduler?: rxjs$SchedulerLike
     ): (v1: T, v2: T2, v3: T3, v4: T4, v5: T5) => rxjs$Observable<U>;
     bindCallback<T, T2, T3, T4, T5, T6, U>(
       callbackFunc: (
@@ -188,17 +182,17 @@ declare module 'rxjs/observable/bindCallback' {
         callback: (result: U) => any
       ) => any,
       selector?: void,
-      scheduler?: rxjs$SchedulerClass
+      scheduler?: rxjs$SchedulerLike
     ): (v1: T, v2: T2, v3: T3, v4: T4, v5: T5, v6: T6) => rxjs$Observable<U>;
     bindCallback<U>(
       callbackFunc: (callback: (...args: Array<any>) => any) => any,
       selector: (...args: Array<any>) => U,
-      scheduler?: rxjs$SchedulerClass
+      scheduler?: rxjs$SchedulerLike
     ): () => rxjs$Observable<U>;
     bindCallback<T, U>(
       callbackFunc: (v1: T, callback: (...args: Array<any>) => any) => any,
       selector: (...args: Array<any>) => U,
-      scheduler?: rxjs$SchedulerClass
+      scheduler?: rxjs$SchedulerLike
     ): (v1: T) => rxjs$Observable<U>;
     bindCallback<T, T2, U>(
       callbackFunc: (
@@ -207,7 +201,7 @@ declare module 'rxjs/observable/bindCallback' {
         callback: (...args: Array<any>) => any
       ) => any,
       selector: (...args: Array<any>) => U,
-      scheduler?: rxjs$SchedulerClass
+      scheduler?: rxjs$SchedulerLike
     ): (v1: T, v2: T2) => rxjs$Observable<U>;
     bindCallback<T, T2, T3, U>(
       callbackFunc: (
@@ -217,7 +211,7 @@ declare module 'rxjs/observable/bindCallback' {
         callback: (...args: Array<any>) => any
       ) => any,
       selector: (...args: Array<any>) => U,
-      scheduler?: rxjs$SchedulerClass
+      scheduler?: rxjs$SchedulerLike
     ): (v1: T, v2: T2, v3: T3) => rxjs$Observable<U>;
     bindCallback<T, T2, T3, T4, U>(
       callbackFunc: (
@@ -228,7 +222,7 @@ declare module 'rxjs/observable/bindCallback' {
         callback: (...args: Array<any>) => any
       ) => any,
       selector: (...args: Array<any>) => U,
-      scheduler?: rxjs$SchedulerClass
+      scheduler?: rxjs$SchedulerLike
     ): (v1: T, v2: T2, v3: T3, v4: T4) => rxjs$Observable<U>;
     bindCallback<T, T2, T3, T4, T5, U>(
       callbackFunc: (
@@ -240,7 +234,7 @@ declare module 'rxjs/observable/bindCallback' {
         callback: (...args: Array<any>) => any
       ) => any,
       selector: (...args: Array<any>) => U,
-      scheduler?: rxjs$SchedulerClass
+      scheduler?: rxjs$SchedulerLike
     ): (v1: T, v2: T2, v3: T3, v4: T4, v5: T5) => rxjs$Observable<U>;
     bindCallback<T, T2, T3, T4, T5, T6, U>(
       callbackFunc: (
@@ -253,17 +247,17 @@ declare module 'rxjs/observable/bindCallback' {
         callback: (...args: Array<any>) => any
       ) => any,
       selector: (...args: Array<any>) => U,
-      scheduler?: rxjs$SchedulerClass
+      scheduler?: rxjs$SchedulerLike
     ): (v1: T, v2: T2, v3: T3, v4: T4, v5: T5, v6: T6) => rxjs$Observable<U>;
     bindCallback<T>(
       callbackFunc: Function,
       selector?: void,
-      scheduler?: rxjs$SchedulerClass
+      scheduler?: rxjs$SchedulerLike
     ): (...args: Array<any>) => rxjs$Observable<T>;
     bindCallback<T>(
       callbackFunc: Function,
       selector?: (...args: Array<any>) => T,
-      scheduler?: rxjs$SchedulerClass
+      scheduler?: rxjs$SchedulerLike
     ): (...args: Array<any>) => rxjs$Observable<T>;
   }
 }
@@ -272,12 +266,12 @@ declare module 'rxjs/observable/bindNodeCallback' {
     bindNodeCallback<U>(
       callbackFunc: (callback: (err: any, result: U) => any) => any,
       selector?: void,
-      scheduler?: rxjs$SchedulerClass
+      scheduler?: rxjs$SchedulerLike
     ): () => rxjs$Observable<U>;
     bindNodeCallback<T, U>(
       callbackFunc: (v1: T, callback: (err: any, result: U) => any) => any,
       selector?: void,
-      scheduler?: rxjs$SchedulerClass
+      scheduler?: rxjs$SchedulerLike
     ): (v1: T) => rxjs$Observable<U>;
     bindNodeCallback<T, T2, U>(
       callbackFunc: (
@@ -286,7 +280,7 @@ declare module 'rxjs/observable/bindNodeCallback' {
         callback: (err: any, result: U) => any
       ) => any,
       selector?: void,
-      scheduler?: rxjs$SchedulerClass
+      scheduler?: rxjs$SchedulerLike
     ): (v1: T, v2: T2) => rxjs$Observable<U>;
     bindNodeCallback<T, T2, T3, U>(
       callbackFunc: (
@@ -296,7 +290,7 @@ declare module 'rxjs/observable/bindNodeCallback' {
         callback: (err: any, result: U) => any
       ) => any,
       selector?: void,
-      scheduler?: rxjs$SchedulerClass
+      scheduler?: rxjs$SchedulerLike
     ): (v1: T, v2: T2, v3: T3) => rxjs$Observable<U>;
     bindNodeCallback<T, T2, T3, T4, U>(
       callbackFunc: (
@@ -307,7 +301,7 @@ declare module 'rxjs/observable/bindNodeCallback' {
         callback: (err: any, result: U) => any
       ) => any,
       selector?: void,
-      scheduler?: rxjs$SchedulerClass
+      scheduler?: rxjs$SchedulerLike
     ): (v1: T, v2: T2, v3: T3, v4: T4) => rxjs$Observable<U>;
     bindNodeCallback<T, T2, T3, T4, T5, U>(
       callbackFunc: (
@@ -319,7 +313,7 @@ declare module 'rxjs/observable/bindNodeCallback' {
         callback: (err: any, result: U) => any
       ) => any,
       selector?: void,
-      scheduler?: rxjs$SchedulerClass
+      scheduler?: rxjs$SchedulerLike
     ): (v1: T, v2: T2, v3: T3, v4: T4, v5: T5) => rxjs$Observable<U>;
     bindNodeCallback<T, T2, T3, T4, T5, T6, U>(
       callbackFunc: (
@@ -332,17 +326,17 @@ declare module 'rxjs/observable/bindNodeCallback' {
         callback: (err: any, result: U) => any
       ) => any,
       selector?: void,
-      scheduler?: rxjs$SchedulerClass
+      scheduler?: rxjs$SchedulerLike
     ): (v1: T, v2: T2, v3: T3, v4: T4, v5: T5, v6: T6) => rxjs$Observable<U>;
     bindNodeCallback<T>(
       callbackFunc: Function,
       selector?: void,
-      scheduler?: rxjs$SchedulerClass
+      scheduler?: rxjs$SchedulerLike
     ): (...args: Array<any>) => rxjs$Observable<T>;
     bindNodeCallback<T>(
       callbackFunc: Function,
       selector?: (...args: Array<any>) => T,
-      scheduler?: rxjs$SchedulerClass
+      scheduler?: rxjs$SchedulerLike
     ): (...args: Array<any>) => rxjs$Observable<T>;
   }
 }
@@ -622,7 +616,7 @@ declare module 'rxjs/observable/from' {
   declare module.exports: {
     from<+T>(
       input: rxjs$ObservableInput<T>,
-      scheduler?: rxjs$SchedulerClass
+      scheduler?: rxjs$SchedulerLike
     ): rxjs$Observable<T>;
   }
 }
@@ -723,7 +717,7 @@ declare module 'rxjs/observable/range' {
     range(
       start?: number,
       count?: number,
-      scheduler?: rxjs$SchedulerClass
+      scheduler?: rxjs$SchedulerLike
     ): rxjs$Observable<number>;
   }
 }
@@ -737,7 +731,7 @@ declare module 'rxjs/observable/timer' {
     timer(
       initialDelay: number | Date,
       period?: number,
-      scheduler?: rxjs$SchedulerClass
+      scheduler?: rxjs$SchedulerLike
     ): rxjs$Observable<number>;
   }
 }
@@ -887,7 +881,7 @@ declare module "rxjs/operators" {
 
     auditTime<+T>(
       duration: number,
-      scheduler?: rxjs$SchedulerClass
+      scheduler?: rxjs$SchedulerLike
     ): rxjs$Observable<T> => rxjs$Observable<T>;
 
     race<+T>(other: rxjs$Observable<T>): rxjs$Observable<T> => rxjs$Observable<T>;
@@ -905,7 +899,7 @@ declare module "rxjs/operators" {
       bufferTimeSpan: number,
       bufferCreationInterval?: number,
       maxBufferSize?: number,
-      scheduler?: rxjs$SchedulerClass
+      scheduler?: rxjs$SchedulerLike
     ): rxjs$Observable<T> => rxjs$Observable<Array<T>>;
 
     bufferToggle<+T, U>(
@@ -941,12 +935,12 @@ declare module "rxjs/operators" {
 
     debounceTime<+T>(
       dueTime: number,
-      scheduler?: rxjs$SchedulerClass
+      scheduler?: rxjs$SchedulerLike
     ): rxjs$Observable<T> => rxjs$Observable<T>;
 
     defaultIfEmpty<+T, U>(defaultValue: U): rxjs$Observable<T> => rxjs$Observable<T | U>;
 
-    delay<+T>(dueTime: number, scheduler?: rxjs$SchedulerClass): rxjs$Observable<T> => rxjs$Observable<T>;
+    delay<+T>(dueTime: number, scheduler?: rxjs$SchedulerLike): rxjs$Observable<T> => rxjs$Observable<T>;
 
     delayWhen<+T>(
       delayDurationSelector: (value: T) => rxjs$Observable<any>,
@@ -984,7 +978,7 @@ declare module "rxjs/operators" {
     expand<+T>(
       project: (value: T, index: number) => rxjs$Observable<T>,
       concurrent?: number,
-      scheduler?: rxjs$SchedulerClass
+      scheduler?: rxjs$SchedulerLike
     ): rxjs$Observable<T> => rxjs$Observable<T>;
 
     filter<+T>(
@@ -1161,13 +1155,13 @@ declare module "rxjs/operators" {
 
     sampleTime<+T>(
       delay: number,
-      scheduler?: rxjs$SchedulerClass
+      scheduler?: rxjs$SchedulerLike
     ): rxjs$Observable<T> => rxjs$Observable<T>;
 
     publishReplay<+T>(
       bufferSize?: number,
       windowTime?: number,
-      scheduler?: rxjs$SchedulerClass
+      scheduler?: rxjs$SchedulerLike
     ): rxjs$Observable<T> => rxjs$ConnectableObservable<T>;
 
     retry<+T>(retryCount: ?number): rxjs$Observable<T> => rxjs$Observable<T>;
@@ -1190,7 +1184,7 @@ declare module "rxjs/operators" {
 
     startWith<+T>(...values: Array<T>): rxjs$Observable<T> => rxjs$Observable<T>;
 
-    subscribeOn<+T>(scheduler: rxjs$SchedulerClass): rxjs$Observable<T> => rxjs$Observable<T>;
+    subscribeOn<+T>(scheduler: rxjs$SchedulerLike): rxjs$Observable<T> => rxjs$Observable<T>;
 
     take<+T>(count: number): rxjs$Observable<T> => rxjs$Observable<T>;
 
@@ -1219,7 +1213,7 @@ declare module "rxjs/operators" {
     timeoutWith<+T, U>(
       due: number | Date,
       withObservable: rxjs$Observable<U>,
-      scheduler?: rxjs$SchedulerClass
+      scheduler?: rxjs$SchedulerLike
     ): rxjs$Observable<T> => rxjs$Observable<T | U>;
 
     toArray<+T>(): rxjs$Observable<T> => rxjs$Observable<T[]>;
@@ -1380,7 +1374,7 @@ type rxjs$Operators$zip = rxjs$Operators$withLatestFrom;
 type rxjs$Operators$combineLatest = rxjs$Operators$withLatestFrom;
 
 declare class rxjs$GroupedObservable<K, V> extends rxjs$Observable<V> {
-  key: K;
+  +key: K;
 }
 
 declare class rxjs$Observer<-T> {
@@ -1427,13 +1421,14 @@ declare class rxjs$ReplaySubject<T> extends rxjs$Subject<T> {
   constructor(
     bufferSize?: number,
     windowTime?: number,
-    scheduler?: rxjs$SchedulerClass
+    timestampProvider?: rxjs$TimestampProvider
   ): void;
 }
 
 declare class rxjs$Subscription {
   unsubscribe(): void;
-  add(teardown: rxjs$TeardownLogic): rxjs$Subscription;
+  add(teardown: rxjs$TeardownLogic): void;
+  remove(subscription: rxjs$Subscription | () => void): void;
 }
 
 declare class rxjs$Subscriber<T> extends rxjs$Subscription {
@@ -1443,18 +1438,17 @@ declare class rxjs$Subscriber<T> extends rxjs$Subscription {
     complete?: () => void
   ): rxjs$Subscriber<T>;
 
-  constructor(
-    destinationOrNext?: rxjs$PartialObserver<any> | ((value: T) => void),
-    error?: (e?: any) => void,
-    complete?: () => void
-  ): void;
+  constructor(destination?: rxjs$Subscriber | rxjs$Observer): void;
   next(value?: T): void;
   error(err?: any): void;
   complete(): void;
   unsubscribe(): void;
 }
 
-declare class rxjs$SchedulerClass {
+declare interface rxjs$TimestampProvider {
+  now(): number;
+}
+declare interface rxjs$SchedulerLike extends rxjs$TimestampProvider {
   schedule<T>(
     work: (state?: T) => void,
     delay?: number,
@@ -1469,11 +1463,19 @@ declare class rxjs$TimeoutError extends Error {}
 declare class rxjs$UnsubscriptionError extends Error {}
 
 declare module "rxjs" {
+  declare interface FirstValueFromConfig<T> {
+    defaultValue: T
+  }
+
+  declare interface LastValueFromConfig<T> {
+    defaultValue: T
+  }
+
   declare module.exports: {
     concat<+T>(...sources: rxjs$Observable<T>[]): rxjs$Observable<T>,
     from<+T>(
       input: rxjs$ObservableInput<T>,
-      scheduler?: rxjs$SchedulerClass
+      scheduler?: rxjs$SchedulerLike
     ): rxjs$Observable<T>,
     of<+T>(...values: T[]): rxjs$Observable<T>,
     defer<+T>(factory: () => ?rxjs$ObservableInput<T>): rxjs$Observable<T>,
@@ -1482,12 +1484,12 @@ declare module "rxjs" {
     bindNodeCallback<U>(
       callbackFunc: (callback: (err: any, result: U) => any) => any,
       selector?: void,
-      scheduler?: rxjs$SchedulerClass
+      scheduler?: rxjs$SchedulerLike
     ): () => rxjs$Observable<U>,
     bindNodeCallback<T, U>(
       callbackFunc: (v1: T, callback: (err: any, result: U) => any) => any,
       selector?: void,
-      scheduler?: rxjs$SchedulerClass
+      scheduler?: rxjs$SchedulerLike
     ): (v1: T) => rxjs$Observable<U>,
     bindNodeCallback<T, T2, U>(
       callbackFunc: (
@@ -1496,7 +1498,7 @@ declare module "rxjs" {
         callback: (err: any, result: U) => any
       ) => any,
       selector?: void,
-      scheduler?: rxjs$SchedulerClass
+      scheduler?: rxjs$SchedulerLike
     ): (v1: T, v2: T2) => rxjs$Observable<U>,
     bindNodeCallback<T, T2, T3, U>(
       callbackFunc: (
@@ -1506,7 +1508,7 @@ declare module "rxjs" {
         callback: (err: any, result: U) => any
       ) => any,
       selector?: void,
-      scheduler?: rxjs$SchedulerClass
+      scheduler?: rxjs$SchedulerLike
     ): (v1: T, v2: T2, v3: T3) => rxjs$Observable<U>,
     bindNodeCallback<T, T2, T3, T4, U>(
       callbackFunc: (
@@ -1517,7 +1519,7 @@ declare module "rxjs" {
         callback: (err: any, result: U) => any
       ) => any,
       selector?: void,
-      scheduler?: rxjs$SchedulerClass
+      scheduler?: rxjs$SchedulerLike
     ): (v1: T, v2: T2, v3: T3, v4: T4) => rxjs$Observable<U>,
     bindNodeCallback<T, T2, T3, T4, T5, U>(
       callbackFunc: (
@@ -1529,7 +1531,7 @@ declare module "rxjs" {
         callback: (err: any, result: U) => any
       ) => any,
       selector?: void,
-      scheduler?: rxjs$SchedulerClass
+      scheduler?: rxjs$SchedulerLike
     ): (v1: T, v2: T2, v3: T3, v4: T4, v5: T5) => rxjs$Observable<U>,
     bindNodeCallback<T, T2, T3, T4, T5, T6, U>(
       callbackFunc: (
@@ -1542,31 +1544,31 @@ declare module "rxjs" {
         callback: (err: any, result: U) => any
       ) => any,
       selector?: void,
-      scheduler?: rxjs$SchedulerClass
+      scheduler?: rxjs$SchedulerLike
     ): (v1: T, v2: T2, v3: T3, v4: T4, v5: T5, v6: T6) => rxjs$Observable<U>,
     bindNodeCallback<T>(
       callbackFunc: Function,
       selector?: void,
-      scheduler?: rxjs$SchedulerClass
+      scheduler?: rxjs$SchedulerLike
     ): (...args: Array<any>) => rxjs$Observable<T>,
     bindNodeCallback<T>(
       callbackFunc: Function,
       selector?: (...args: Array<any>) => T,
-      scheduler?: rxjs$SchedulerClass
+      scheduler?: rxjs$SchedulerLike
     ): (...args: Array<any>) => rxjs$Observable<T>,
     timer(
       initialDelay: number | Date,
       period?: number,
-      scheduler?: rxjs$SchedulerClass
+      scheduler?: rxjs$SchedulerLike
     ): rxjs$Observable<number>,
     interval(
       period?: number,
-      scheduler?: rxjs$SchedulerClass
+      scheduler?: rxjs$SchedulerLike
     ): rxjs$Observable<number>,
     range(
       start?: number,
       count?: number,
-      scheduler?: rxjs$SchedulerClass
+      scheduler?: rxjs$SchedulerLike
     ): rxjs$Observable<number>,
     merge: (<+T, U>(
       source0: rxjs$Observable<T>,
@@ -1608,10 +1610,10 @@ declare module "rxjs" {
     BehaviorSubject: typeof rxjs$BehaviorSubject,
     ReplaySubject: typeof rxjs$ReplaySubject,
     Scheduler: {
-      asap: rxjs$SchedulerClass,
-      queue: rxjs$SchedulerClass,
-      animationFrame: rxjs$SchedulerClass,
-      async: rxjs$SchedulerClass
+      asap: rxjs$SchedulerLike,
+      queue: rxjs$SchedulerLike,
+      animationFrame: rxjs$SchedulerLike,
+      async: rxjs$SchedulerLike
     },
     Subscription: typeof rxjs$Subscription,
     ArgumentOutOfRangeError: typeof rxjs$ArgumentOutOfRangeError,
@@ -1620,6 +1622,8 @@ declare module "rxjs" {
     TimeoutError: typeof rxjs$TimeoutError,
     UnsubscriptionError: typeof rxjs$UnsubscriptionError,
     throwError(error: any): rxjs$Observable<any>,
+    firstValueFrom: <+T, +D>(source: Observable<T>, config?: FirstValueFromConfig<D>) => Promise<T | D>,
+    lastValueFrom: <+T, +D>(source: Observable<T>, config?: LastValueFromConfig<D>) => Promise<T | D>,
   };
 }
 
@@ -1668,7 +1672,7 @@ declare module "rxjs/Subscription" {
 
 declare module "rxjs/testing" {
   declare module.exports: {
-    TestScheduler: typeof rxjs$SchedulerClass
+    TestScheduler: typeof rxjs$SchedulerLike
   };
 }
 

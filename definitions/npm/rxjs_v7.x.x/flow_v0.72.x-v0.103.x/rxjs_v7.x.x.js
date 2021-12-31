@@ -33,11 +33,6 @@ declare type rxjs$SubscribableOrPromise<T> =
 /** OBSERVABLE INTERFACES */
 declare interface rxjs$Subscribable<T> {
   subscribe(observer?: rxjs$PartialObserver<T>): rxjs$Unsubscribable;
-  subscribe(
-    next?: (value: T) => void,
-    error?: (error: any) => void,
-    complete?: () => void
-  ): rxjs$Unsubscribable;
 }
 declare type rxjs$ObservableInput<T> =
   | rxjs$SubscribableOrPromise<T>
@@ -79,8 +74,10 @@ declare interface rxjs$Observer<T> {
   complete(): void;
 }
 /** SCHEDULER INTERFACES */
-declare interface rxjs$SchedulerLike {
+declare interface rxjs$TimestampProvider {
   now(): number;
+}
+declare interface rxjs$SchedulerLike extends rxjs$TimestampProvider {
   schedule<T>(
     work: (state?: T) => void,
     delay?: number,
@@ -98,8 +95,6 @@ declare interface rxjs$EventListenerOptions {
 }
 
 declare class rxjs$Observable<T> implements rxjs$Subscribable<T> {
-  // @internal
-  _isScalar: boolean;
   // @deprecated  This is an internal implementation detail, do not use.
   source: rxjs$Observable<any>;
   // @deprecated  This is an internal implementation detail, do not use.
@@ -110,25 +105,16 @@ declare class rxjs$Observable<T> implements rxjs$Subscribable<T> {
   static create(
     subscribe?: (subscriber: rxjs$Subscriber<T>) => rxjs$TeardownLogic
   ): rxjs$Observable<T>;
-  lift<R>(operator: rxjs$Operator<T, R>): rxjs$Observable<R>;
   subscribe(observer?: rxjs$PartialObserver<T>): rxjs$Subscription;
   subscribe(
     next?: (value: T) => void,
     error?: (error: any) => void,
     complete?: () => void
   ): rxjs$Subscription;
-  // @deprecated  This is an internal implementation detail, do not use.
-  _trySubscribe(sink: rxjs$Subscriber<T>): rxjs$TeardownLogic;
   forEach(
     next: (value: T) => void,
     promiseCtor?: Promise.constructor
   ): Promise<void>;
-  // @internal  This is an internal implementation detail, do not use.
-  _subscribe(subscriber: rxjs$Subscriber<any>): rxjs$TeardownLogic;
-  // @deprecated  In favor of iif creation function: import { iif } from 'rxjs';
-  static if: typeof rxjs$iif;
-  // @deprecated  In favor of throwError creation function: import { throwError } from 'rxjs';
-  static throw: typeof rxjs$throwError;
   pipe(): rxjs$Observable<T>;
   pipe<A>(op1: rxjs$OperatorFunction<T, A>): rxjs$Observable<A>;
   pipe<A, B>(
@@ -202,23 +188,22 @@ declare class rxjs$Observable<T> implements rxjs$Subscribable<T> {
     op8: rxjs$OperatorFunction<G, H>,
     op9: rxjs$OperatorFunction<H, I>,
     ...operations: rxjs$OperatorFunction<any, any>[]
-  ): rxjs$Observable<{}>;
-  toPromise<T>(): Promise<T>;
-  toPromise<T>(PromiseCtor: typeof Promise): Promise<T>;
-  toPromise<T>(PromiseCtor: Promise.constructor): Promise<T>;
+  ): rxjs$Observable<mixed>;
+  /** @deprecated use firstValueFrom or lastValueFrom */
+  toPromise(): Promise<T | void>;
+  /** @deprecated use firstValueFrom or lastValueFrom */
+  toPromise<T>(PromiseCtor: typeof Promise): Promise<T | void>;
+  /** @deprecated use firstValueFrom or lastValueFrom */
+  toPromise<T>(PromiseCtor: Promise.constructor): Promise<T | void>;
 }
 
 declare class rxjs$Subscription implements rxjs$SubscriptionLike {
   static EMPTY: rxjs$Subscription;
   closed: boolean;
-  // @internal
-  _parent: rxjs$Subscription;
-  // @internal
-  _parents: rxjs$Subscription[];
   constructor(unsubscribe?: () => void): void;
   unsubscribe(): void;
-  add(teardown: rxjs$TeardownLogic): rxjs$Subscription;
-  remove(subscription: rxjs$Subscription): void;
+  add(teardown: rxjs$TeardownLogic): void;
+  remove(subscription: rxjs$Subscription | rxjs$Unsubscribable | () => void): void;
 }
 
 declare interface rxjs$Operator<T, R> {
@@ -232,19 +217,9 @@ declare class rxjs$Subscriber<T> extends rxjs$Subscription
     error?: (e?: any) => void,
     complete?: () => void
   ): rxjs$Subscriber<T>;
-  // @internal
-  syncErrorValue: any;
-  // @internal
-  syncErrorThrown: boolean;
-  // @internal
-  syncErrorThrowable: boolean;
   isStopped: boolean;
-  destination: rxjs$PartialObserver<any> | rxjs$Subscriber<any>;
-  constructor(
-    destinationOrNext?: rxjs$PartialObserver<any> | ((value: T) => void),
-    error?: (e?: any) => void,
-    complete?: () => void
-  ): void;
+  destination: rxjs$Observer<any> | rxjs$Subscriber<any>;
+  constructor(destination?: rxjs$Subscriber | rxjs$Observer): void;
   next(value?: T): void;
   error(err?: any): void;
   complete(): void;
@@ -252,8 +227,6 @@ declare class rxjs$Subscriber<T> extends rxjs$Subscription
   _next(value: T): void;
   _error(err: any): void;
   _complete(): void;
-  // @deprecated  This is an internal implementation detail, do not use.
-  _unsubscribeAndRecycle(): rxjs$Subscriber<T>;
 }
 
 declare class rxjs$ConnectableObservable<T> extends rxjs$Observable<T> {
@@ -262,8 +235,6 @@ declare class rxjs$ConnectableObservable<T> extends rxjs$Observable<T> {
   _subject: rxjs$Subject<T>;
   _refCount: number;
   _connection: rxjs$Subscription;
-  // @internal
-  _isComplete: boolean;
   constructor(
     source: rxjs$Observable<T>,
     subjectFactory: () => rxjs$Subject<T>
@@ -284,7 +255,6 @@ declare class rxjs$Subject<T> extends rxjs$Observable<T>
   thrownError: any;
   constructor(): void;
   static create: Function;
-  lift<R>(operator: rxjs$Operator<T, R>): rxjs$Observable<R>;
   next(value?: T): void;
   error(err: any): void;
   complete(): void;
@@ -297,10 +267,10 @@ declare class rxjs$Subject<T> extends rxjs$Observable<T>
 }
 
 declare class rxjs$Notification<T> {
-  kind: string;
-  value: T;
-  error: any;
-  hasValue: boolean;
+  +kind: string;
+  +value: T;
+  +error: any;
+  +hasValue: boolean;
   constructor(kind: string, value?: T, error?: any): void;
   observe(observer: rxjs$PartialObserver<T>): any;
   do(
@@ -320,15 +290,7 @@ declare class rxjs$Notification<T> {
 }
 
 declare class rxjs$GroupedObservable<K, T> extends rxjs$Observable<T> {
-  key: K;
-  // @deprecated  Do not construct this type. Internal use only
-  constructor(
-    key: K,
-    groupSubject: rxjs$Subject<T>,
-    refCountSubscription?: rxjs$RefCountSubscription
-  ): void;
-  // @deprecated  This is an internal implementation detail, do not use.
-  _subscribe(subscriber: rxjs$Subscriber<T>): rxjs$Subscription;
+  +key: K;
 }
 
 declare interface rxjs$RefCountSubscription {
@@ -350,6 +312,14 @@ declare function rxjs$iif<T, F>(
 ): rxjs$Observable<T | F>;
 
 declare module "rxjs" {
+  declare interface FirstValueFromConfig<T> {
+    defaultValue: T
+  }
+
+  declare interface LastValueFromConfig<T> {
+    defaultValue: T
+  }
+
   declare module.exports: {
     Observable: typeof rxjs$Observable,
     Subscriber: typeof rxjs$Subscriber,
@@ -444,7 +414,7 @@ declare module "rxjs" {
         fn8: rxjs$UnaryFunction<G, H>,
         fn9: rxjs$UnaryFunction<H, I>,
         ...fns: rxjs$UnaryFunction<any, any>[]
-      ) => rxjs$UnaryFunction<T, {}>),
+      ) => rxjs$UnaryFunction<T, mixed>),
     noop(): void,
     identity<T>(x: T): T,
     isObservable<T>(obj: any): boolean,
@@ -494,7 +464,7 @@ declare module "rxjs" {
         ...observables: (rxjs$ObservableInput<any> | rxjs$SchedulerLike)[]
       ) => rxjs$Observable<R>),
     defer<T>(
-      observableFactory: () => rxjs$SubscribableOrPromise<T> | null
+      observableFactory: () => rxjs$SubscribableOrPromise<T>
     ): rxjs$Observable<T>,
     forkJoin: (<T>(
       sources: [rxjs$ObservableInput<T>]
@@ -775,7 +745,7 @@ declare module "rxjs" {
         i: T9,
         scheduler?: rxjs$SchedulerLike
       ) => rxjs$Observable<T | T2 | T3 | T4 | T5 | T6 | T7 | T8 | T9>) &
-      (<T>(...args: Array<T | rxjs$SchedulerLike>) => rxjs$Observable<T>),
+      (<T>(...args: Array<T>) => rxjs$Observable<T>),
     onErrorResumeNext: (<R>(v: rxjs$ObservableInput<R>) => rxjs$Observable<R>) &
       (<T2, T3, R>(
         v2: rxjs$ObservableInput<T2>,
@@ -805,6 +775,7 @@ declare module "rxjs" {
         >
       ) => rxjs$Observable<R>) &
       (<R>(array: rxjs$ObservableInput<any>[]) => rxjs$Observable<R>),
+    // @deprecated use Object.entries instead
     pairs<T>(
       obj: Object,
       scheduler?: rxjs$SchedulerLike
@@ -1716,14 +1687,14 @@ declare module "rxjs" {
           | ((...values: Array<any>) => R)
           | rxjs$SchedulerLike
         >
-      ) => rxjs$Observable<R>)
+      ) => rxjs$Observable<R>),
+    firstValueFrom: <+T, +D>(source: Observable<T>, config?: FirstValueFromConfig<D>) => Promise<T | D>,
+    lastValueFrom: <+T, +D>(source: Observable<T>, config?: LastValueFromConfig<D>) => Promise<T | D>
   };
 
   declare class BehaviorSubject<T> extends rxjs$Subject<T> {
     constructor(_value: T): void;
-    +value: T;
-    // @deprecated  This is an internal implementation detail, do not use.
-    _subscribe(subscriber: rxjs$Subscriber<T>): rxjs$Subscription;
+    get value(): T;
     getValue(): T;
     next(value?: T): void;
   }
@@ -1732,16 +1703,11 @@ declare module "rxjs" {
     constructor(
       bufferSize?: number,
       windowTime?: number,
-      scheduler?: rxjs$SchedulerLike
+      timestampProvider?: rxjs$TimestampProvider
     ): void;
-    // @deprecated  This is an internal implementation detail, do not use.
-    _subscribe(subscriber: rxjs$Subscriber<T>): rxjs$Subscription;
-    _getNow(): number;
   }
 
   declare class AsyncSubject<T> extends rxjs$Subject<T> {
-    // @deprecated  This is an internal implementation detail, do not use.
-    _subscribe(subscriber: rxjs$Subscriber<*>): rxjs$Subscription;
     next(value?: T): void;
     error(error: any): void;
     complete(): void;
@@ -1778,7 +1744,6 @@ declare module "rxjs" {
       delay?: number
     ): any;
     _execute(state: T, delay: number): any;
-    static sortActions<T>(a: VirtualAction<T>, b: VirtualAction<T>): 1 | -1 | 0;
   }
 
   declare class Scheduler implements rxjs$SchedulerLike {
@@ -2121,7 +2086,7 @@ declare module "rxjs/operators" {
   ): rxjs$OperatorFunction<T, R>;
 
   declare export function count<T>(
-    predicate?: (value: T, index: number, source: rxjs$Observable<T>) => boolean
+    predicate?: (value: T, index: number) => boolean
   ): rxjs$OperatorFunction<T, number>;
 
   declare export function debounce<T>(
@@ -2797,21 +2762,25 @@ declare module "rxjs/operators" {
   ): rxjs$MonoTypeOperatorFunction<T>;
 
   declare export function startWith<T>(
+    /** @deprecated */
     scheduler?: rxjs$SchedulerLike
   ): rxjs$MonoTypeOperatorFunction<T>;
 
   declare export function startWith<T>(
+    /** @deprecated */
     scheduler?: rxjs$SchedulerLike
   ): rxjs$MonoTypeOperatorFunction<T>;
 
   declare export function startWith<T, D>(
     v1: D,
+    /** @deprecated */
     scheduler?: rxjs$SchedulerLike
   ): rxjs$OperatorFunction<T, T | D>;
 
   declare export function startWith<T, D, E>(
     v1: D,
     v2: E,
+    /** @deprecated */
     scheduler?: rxjs$SchedulerLike
   ): rxjs$OperatorFunction<T, T | D | E>;
 
@@ -2819,6 +2788,7 @@ declare module "rxjs/operators" {
     v1: D,
     v2: E,
     v3: F,
+    /** @deprecated */
     scheduler?: rxjs$SchedulerLike
   ): rxjs$OperatorFunction<T, T | D | E | F>;
 
@@ -2827,6 +2797,7 @@ declare module "rxjs/operators" {
     v2: E,
     v3: F,
     v4: G,
+    /** @deprecated */
     scheduler?: rxjs$SchedulerLike
   ): rxjs$OperatorFunction<T, T | D | E | F | G>;
 
@@ -2836,6 +2807,7 @@ declare module "rxjs/operators" {
     v3: F,
     v4: G,
     v5: H,
+    /** @deprecated */
     scheduler?: rxjs$SchedulerLike
   ): rxjs$OperatorFunction<T, T | D | E | F | G | H>;
 
@@ -2846,11 +2818,12 @@ declare module "rxjs/operators" {
     v4: G,
     v5: H,
     v6: I,
+    /** @deprecated */
     scheduler?: rxjs$SchedulerLike
   ): rxjs$OperatorFunction<T, T | D | E | F | G | H | I>;
 
   declare export function startWith<T, D>(
-    ...array: Array<D | rxjs$SchedulerLike>
+    ...array: Array<D>
   ): rxjs$OperatorFunction<T, D>;
 
   declare export function subscribeOn<T>(
@@ -2963,7 +2936,7 @@ declare module "rxjs/operators" {
   ): rxjs$OperatorFunction<T, T | R>;
 
   declare export function timestamp<T>(
-    scheduler?: rxjs$SchedulerLike
+    scheduler?: rxjs$TimestampProvider
   ): rxjs$OperatorFunction<T, rxjs$Timestamp<T>>;
 
   declare export function toArray<T>(): rxjs$OperatorFunction<T, T[]>;
@@ -3215,20 +3188,39 @@ declare module "rxjs/operators" {
 
 declare module "rxjs/ajax" {
   declare export interface AjaxRequest {
-    url?: string;
+    url: string;
     body?: any;
+    method: string;
+    async: boolean;
+    headers: Object;
+    timeout: number;
     user?: string;
+    password?: string;
+    crossDomain: boolean;
+    withCredentials: boolean;
+    responseType: string;
+  }
+
+  declare export interface AjaxConfig {
+    url: string;
+    body?: any;
     async?: boolean;
     method?: string;
     headers?: Object;
     timeout?: number;
+    user?: string;
     password?: string;
-    hasContent?: boolean;
     crossDomain?: boolean;
     withCredentials?: boolean;
-    createXHR?: () => XMLHttpRequest;
-    progressSubscriber?: rxjs$Subscriber<mixed>;
+    xsrfCookieName?: string;
+    xsrfHeaderName?: string;
     responseType?: string;
+    createXHR?: () => XMLHttpRequest;
+    /** @deprecated */
+    progressSubscriber?: rxjs$Subscriber<mixed>;
+    includeDownloadProgress?: boolean;
+    includeUploadProgress?: boolean;
+    queryParams?: string | Object;
   }
 
   declare export class AjaxResponse {
@@ -3257,7 +3249,7 @@ declare module "rxjs/ajax" {
   declare export interface AjaxTimeoutError extends AjaxError {}
 
   declare interface AjaxCreationMethod {
-    (urlOrRequest: string | AjaxRequest): rxjs$Observable<AjaxResponse>;
+    (urlOrRequest: string | AjaxConfig): rxjs$Observable<AjaxResponse>;
     get(url: string, headers?: Object): rxjs$Observable<AjaxResponse>;
     post(
       url: string,
@@ -3322,7 +3314,6 @@ declare module "rxjs/webSocket" {
         | rxjs$Observable<T>,
       destination?: rxjs$Observer<T>
     ): void;
-    lift<R>(operator: rxjs$Operator<T, R>): WebSocketSubject<R>;
     multiplex(
       subMsg: () => any,
       unsubMsg: () => any,
