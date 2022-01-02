@@ -33,6 +33,11 @@ describe('browser-interaction-time', () => {
       callback: () => console.log('callback'),
     };
     timer.addTimeIntervalEllapsedCallback(cb);
+
+    // $FlowExpectedError[incompatible-call]
+    timer.addTimeIntervalEllapsedCallback();
+    // $FlowExpectedError[prop-missing]
+    timer.addTimeIntervalEllapsedCallback({});
   });
 
   it('addAbsoluteTimeEllapsedCallback', () => {
@@ -42,50 +47,109 @@ describe('browser-interaction-time', () => {
       pending: true,
     };
     timer.addAbsoluteTimeEllapsedCallback(cb);
+
+    // $FlowExpectedError[incompatible-call]
+    timer.addAbsoluteTimeEllapsedCallback();
+    // $FlowExpectedError[prop-missing]
+    timer.addAbsoluteTimeEllapsedCallback({});
   });
 
   it('addBrowserTabInactiveCallback', () => {
-    const callback = () => console.log('some callback');
+    const callback = (timeInMs) => {
+      timeInMs.toFixed(2);
+      // $FlowExpectedError[prop-missing] is a number
+      timeInMs.toLowerCase();
+    };
     timer.addBrowserTabInactiveCallback(callback);
+
+    // $FlowExpectedError[incompatible-call]
+    timer.addBrowserTabInactiveCallback();
+    // $FlowExpectedError[prop-missing]
+    timer.addBrowserTabInactiveCallback({});
   });
 
   it('addBrowserTabActiveCallback', () => {
-    const callback = () => console.log('some callback');
+    const callback = (timeInMs) => {
+      timeInMs.toFixed(2);
+      // $FlowExpectedError[prop-missing] is a number
+      timeInMs.toLowerCase();
+    };
     timer.addBrowserTabActiveCallback(callback);
+
+    // $FlowExpectedError[incompatible-call]
+    timer.addBrowserTabActiveCallback();
+    // $FlowExpectedError[prop-missing]
+    timer.addBrowserTabActiveCallback({});
   });
 
   it('addIdleCallback', () => {
-    const callback = () => console.log('some callback');
+    const callback = (timeInMs) => {
+      timeInMs.toFixed(2);
+      // $FlowExpectedError[prop-missing] is a number
+      timeInMs.toLowerCase();
+    };
     timer.addIdleCallback(callback);
+
+    // $FlowExpectedError[incompatible-call]
+    timer.addIdleCallback();
+    // $FlowExpectedError[prop-missing]
+    timer.addIdleCallback({});
   });
 
   it('addActiveCallback', () => {
-    const callback = () => console.log('some callback');
+    const callback = (timeInMs) => {
+      timeInMs.toFixed(2);
+      // $FlowExpectedError[prop-missing] is a number
+      timeInMs.toLowerCase();
+    };
     timer.addActiveCallback(callback);
+
+    // $FlowExpectedError[incompatible-call]
+    timer.addActiveCallback();
+    // $FlowExpectedError[prop-missing]
+    timer.addActiveCallback({});
   });
 
   it('getTimeInMilliseconds', () => {
     (timer.getTimeInMilliseconds(): number);
+
+    // $FlowExpectedError[extra-arg]
+    timer.getTimeInMilliseconds(2);
   });
 
   it('isRunning', () => {
     (timer.isRunning(): boolean);
+
+    // $FlowExpectedError[extra-arg]
+    timer.isRunning(2);
   });
 
   it('isIdle', () => {
     (timer.isIdle(): boolean);
+
+    // $FlowExpectedError[extra-arg]
+    timer.isIdle(2);
   });
 
   it('reset', () => {
-    timer.reset();
+    (timer.reset(): void);
+
+    // $FlowExpectedError[extra-arg]
+    timer.reset(2);
   });
 
   it('destroy', () => {
-    timer.destroy();
+    (timer.destroy(): void);
+
+    // $FlowExpectedError[extra-arg]
+    timer.destroy(2);
   });
 
   it('mark', () => {
-    timer.mark('a-mark');
+    (timer.mark('a-mark'): void);
+
+    // $FlowExpectedError[incompatible-call]
+    timer.mark();
   });
 
   it('getMarks', () => {
@@ -98,6 +162,13 @@ describe('browser-interaction-time', () => {
 
   it('measure', () => {
     timer.measure('a-measure', 'a-mark', 'b-mark');
+
+    // $FlowExpectedError[incompatible-call]
+    timer.measure();
+    // $FlowExpectedError[incompatible-call]
+    timer.measure('a-measure');
+    // $FlowExpectedError[incompatible-call]
+    timer.measure('a-measure', 'a-mark');
   });
 
   it('getMeasures', () => {
