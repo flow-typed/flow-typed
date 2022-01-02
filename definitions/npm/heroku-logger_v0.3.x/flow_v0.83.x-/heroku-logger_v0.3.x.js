@@ -1,6 +1,7 @@
 declare module 'heroku-logger' {
   declare type LogStructure = (
     message: string | Error,
+    addTest: (any) => any,
     data?: { [key: string]: any, ... },
   ) => void;
 

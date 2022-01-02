@@ -23,14 +23,16 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node }}
+      - id: files
+        uses: jitterbit/get-changed-files@v1
       - name: Before Install
         run: |
           git config --global user.name "flow-typed CI"
           git config --global user.email "noemail@example.com"
+      - name: Run eslint on changed definition files
+        run: yarn --cwd ./definitions && yarn --cwd ./definitions/ eslint {{ steps.files.outputs.all }}
       - name: Tests
         run: ./build.sh
-      - name: Run eslint on changed definition files
-        run: yarn --cwd ./definitions && yarn --cwd ./definitions/ eslint __util__
   analyze:
     name: Analyze ${{ matrix.language }}
     runs-on: ubuntu-latest
