@@ -1699,8 +1699,8 @@ declare module "rxjs" {
           | rxjs$SchedulerLike
         >
       ) => rxjs$Observable<R>),
-    firstValueFrom: <+T, +D>(source: Observable<T>, config?: FirstValueFromConfig<D>) => Promise<T | D>,
-    lastValueFrom: <+T, +D>(source: Observable<T>, config?: LastValueFromConfig<D>) => Promise<T | D>,
+    firstValueFrom: <+T, +D>(source: rxjs$Observable<T>, config?: FirstValueFromConfig<D>) => Promise<T | D>,
+    lastValueFrom: <+T, +D>(source: rxjs$Observable<T>, config?: LastValueFromConfig<D>) => Promise<T | D>,
     ...
   };
 
