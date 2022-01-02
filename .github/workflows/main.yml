@@ -39,12 +39,7 @@ jobs:
               definition_files="${foo} ${changed_file:${#prefix}}"
             fi
           done
-          yarn --cwd ./definitions/ eslint --output-file eslint_report.json --format json ${definition_files}
-      - name: Annotate Code Linting Results
-        uses: ataylorme/eslint-annotate-action@1.2.0
-        with:
-          repo-token: "${{ secrets.GITHUB_TOKEN }}"
-          report-json: "./definitions/eslint_report.json"
+          yarn --cwd ./definitions/ eslint ${definition_files}
       - name: Tests
         run: ./build.sh
   analyze:
