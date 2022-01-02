@@ -43,16 +43,16 @@ declare module 'browser-interaction-time' {
     reset(): void;
     destroy(): void;
     mark(key: string): void;
-    getMarks(name: string): {|
-      time: number
-    |} | void;
+    getMarks(name: string): Array<{|
+      time: number,
+    |}> | void;
     measure(name: string, startMarkName: string, endMarkName: string): void;
-    getMeasures(name: string): {|
-      name: string
-      startTime: number
-      duration: number
-    |} | void;
+    getMeasures(name: string): Array<{|
+      name: string,
+      startTime: number,
+      duration: number,
+    |}> | void;
   }
 
-  declare module.exports: any;
+  declare module.exports: typeof BrowserInteractionTime;
 }
