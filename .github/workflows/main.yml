@@ -30,7 +30,14 @@ jobs:
           git config --global user.name "flow-typed CI"
           git config --global user.email "noemail@example.com"
       - name: Run eslint on changed definition files
-        run: yarn --cwd ./definitions && yarn --cwd ./definitions/ eslint ${{ steps.files.outputs.all }}
+        run: |
+          yarn --cwd ./definitions
+          for changed_file in ${{ steps.files.outputs.all }}; do
+            if [ ${changed_file} == definitions/* ]; then
+              prefix="definitions/"
+              yarn --cwd ./definitions/ eslint ${changed_file:#prefix}}
+            fi
+          done
       - name: Tests
         run: ./build.sh
   analyze:
