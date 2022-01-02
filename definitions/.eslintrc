@@ -2,7 +2,7 @@
   "parser": "babel-eslint",
   "plugins": ["flowtype", "fb-flow"],
   "rules": {
-    "flowtype/no-weak-types": "error",
+    "flowtype/no-weak-types": "warn",
     "fb-flow/use-indexed-access-type": "warn",
     "no-warning-comments": [
       "error",
