@@ -35,7 +35,7 @@ jobs:
           for changed_file in ${{ steps.files.outputs.all }}; do
             if [[ ${changed_file} == definitions/* ]]; then
               prefix="definitions/"
-              yarn --cwd ./definitions/ eslint ${changed_file:#prefix}}
+              yarn --cwd ./definitions/ eslint ${changed_file:${#prefix}}}
             fi
           done
       - name: Tests
