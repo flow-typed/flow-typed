@@ -30,7 +30,7 @@ jobs:
           git config --global user.name "flow-typed CI"
           git config --global user.email "noemail@example.com"
       - name: Run eslint on changed definition files
-        run: yarn --cwd ./definitions && yarn --cwd ./definitions/ eslint {{ steps.files.outputs.all }}
+        run: yarn --cwd ./definitions && yarn --cwd ./definitions/ eslint ${{ steps.files.outputs.all }}
       - name: Tests
         run: ./build.sh
   analyze:
