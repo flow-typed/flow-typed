@@ -32,12 +32,19 @@ jobs:
       - name: Run eslint on changed definition files
         run: |
           yarn --cwd ./definitions
+          definition_files=""
           for changed_file in ${{ steps.files.outputs.all }}; do
             if [[ ${changed_file} == definitions/* ]]; then
               prefix="definitions/"
-              yarn --cwd ./definitions/ eslint ${changed_file:${#prefix}}
+              definition_files="${foo} ${changed_file:${#prefix}}"
             fi
           done
+          yarn --cwd ./definitions/ eslint --output-file eslint_report.json --format json ${definition_files}
+      - name: Annotate Code Linting Results
+        uses: ataylorme/eslint-annotate-action@1.2.0
+        with:
+          repo-token: "${{ secrets.GITHUB_TOKEN }}"
+          report-json: "eslint_report.json"
       - name: Tests
         run: ./build.sh
   analyze:
