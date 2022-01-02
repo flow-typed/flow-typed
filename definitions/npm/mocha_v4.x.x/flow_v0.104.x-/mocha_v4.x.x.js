@@ -202,7 +202,7 @@ type AfterEach =
 declare var setup: Setup;
 declare var teardown: Teardown;
 declare var suiteSetup: SuiteSetup;
-declare var suiteTeardown;
+declare var suiteTeardown: SuiteTeardown;
 declare var before: Before
 declare var after: After;
 declare var beforeEach: BeforeEach;
