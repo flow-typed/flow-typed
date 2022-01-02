@@ -29,6 +29,8 @@ jobs:
           git config --global user.email "noemail@example.com"
       - name: Tests
         run: ./build.sh
+      - name: Run eslint on changed definition files
+        run: yarn --cwd ./definitions && yarn --cwd ./definitions/ eslint __util__
   analyze:
     name: Analyze ${{ matrix.language }}
     runs-on: ubuntu-latest
