@@ -219,7 +219,7 @@ declare class rxjs$Subscriber<T> extends rxjs$Subscription
   ): rxjs$Subscriber<T>;
   isStopped: boolean;
   destination: rxjs$Observer<any> | rxjs$Subscriber<any>;
-  constructor(destination?: rxjs$Subscriber | rxjs$Observer): void;
+  constructor(destination?: rxjs$Subscriber<T> | rxjs$Observer<T>): void;
   next(value?: T): void;
   error(err?: any): void;
   complete(): void;
