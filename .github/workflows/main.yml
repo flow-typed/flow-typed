@@ -39,7 +39,8 @@ jobs:
               definition_files="${foo} ${changed_file:${#prefix}}"
             fi
           done
-          yarn --cwd ./definitions/ eslint ${definition_files}
+          yarn --cwd ./definitions/ eslint --output-file eslint_report.json --format json ${definition_files}
+          echo eslint_report.json
       - name: Tests
         run: ./build.sh
   analyze:
