@@ -40,7 +40,7 @@ jobs:
             fi
           done
           yarn --cwd ./definitions/ eslint --output-file eslint_report.json --format json ${definition_files}
-          echo eslint_report.json
+          echo ${definitions/eslint_report.json}
       - name: Tests
         run: ./build.sh
   analyze:
