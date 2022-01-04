@@ -168,6 +168,8 @@ export async function getLibDefs(defsDir: string): Promise<Array<LibDef>> {
   const defsDirItems = await fs.readdir(defsDir);
   await P.all(
     defsDirItems.map(async item => {
+      // If a user opens definitions dir in finder it will create `.DS_Store`
+      // which will need to be excluded while parsing
       if (item === '.DS_Store') return;
 
       const itemPath = path.join(defsDir, item);
