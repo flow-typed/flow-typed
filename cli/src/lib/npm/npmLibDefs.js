@@ -536,22 +536,24 @@ async function getSingleLibdef(
       const scope = itemName;
       const scopeDirItems = await fs.readdir(itemPath);
       const settled = await P.all(
-        scopeDirItems.map(async itemName => {
-          const itemPath = path.join(npmDefsDirPath, scope, itemName);
-          const itemStat = await fs.stat(itemPath);
-          if (itemStat.isDirectory()) {
-            return await extractLibDefsFromNpmPkgDir(
-              itemPath,
-              scope,
-              itemName,
-              validating,
-            );
-          } else {
-            throw new ValidationError(
-              `Expected only sub-directories in this dir!`,
-            );
-          }
-        }),
+        scopeDirItems
+          .filter(item => item !== '.DS_Store')
+          .map(async itemName => {
+            const itemPath = path.join(npmDefsDirPath, scope, itemName);
+            const itemStat = await fs.stat(itemPath);
+            if (itemStat.isDirectory()) {
+              return await extractLibDefsFromNpmPkgDir(
+                itemPath,
+                scope,
+                itemName,
+                validating,
+              );
+            } else {
+              throw new ValidationError(
+                `Expected only sub-directories in this dir!`,
+              );
+            }
+          }),
       );
       return [].concat(...settled);
     } else {
@@ -581,6 +583,10 @@ export async function getNpmLibDefs(
   const dirItems = await fs.readdir(npmDefsDirPath);
   const errors = [];
   const proms = dirItems.map(async itemName => {
+    // If a user opens definitions dir in finder it will create `.DS_Store`
+    // which will need to be excluded while parsing
+    if (itemName === '.DS_Store') return;
+
     try {
       return await getSingleLibdef(itemName, npmDefsDirPath, validating);
     } catch (e) {
