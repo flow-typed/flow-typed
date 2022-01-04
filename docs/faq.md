@@ -77,7 +77,7 @@ flow-typed/npm
 ```
 or
 ```
-// .eslintrc.js
+// flow-typed/.eslintrc.js
 module.exports = {
   ignorePatterns: ['**/*.js'],
 };
