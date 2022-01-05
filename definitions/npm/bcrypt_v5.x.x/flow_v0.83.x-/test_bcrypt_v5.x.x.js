@@ -99,14 +99,46 @@ describe('bcrypt', () => {
   });
 
   it('compareSync', () => {
+    (bcrypt.compareSync('test', '123'): boolean)
 
+    // $FlowExpectedError[incompatible-call]
+    bcrypt.compareSync();
+    // $FlowExpectedError[incompatible-call]
+    bcrypt.compareSync('test');
+    // $FlowExpectedError[extra-arg]
+    bcrypt.compareSync('test', '123', 123);
   });
 
   it('compare', () => {
+    bcrypt.compare('test', '123').then((valid) => {
+      (valid: boolean);
+    });
+    bcrypt.compare('test', '123', (err, valid) => {
+      if (err) {
+        (err: Error);
+      }
 
+      (valid: boolean);
+      // $FlowExpectedError[incompatible-cast]
+      (valid: number);
+    });
+
+    // $FlowExpectedError[incompatible-call]
+    bcrypt.compare();
+    // $FlowExpectedError[incompatible-call]
+    bcrypt.compare('test');
+    // $FlowExpectedError[incompatible-call]
+    bcrypt.compare('test', '123', 123);
   });
 
   it('getRounds', () => {
+    (bcrypt.getRounds('test'): number);
 
+    // $FlowExpectedError[incompatible-call]
+    bcrypt.getRounds();
+    // $FlowExpectedError[incompatible-call]
+    bcrypt.getRounds(123);
+    // $FlowExpectedError[extra-arg]
+    bcrypt.getRounds('test', 123);
   });
 });
