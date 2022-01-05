@@ -43,12 +43,12 @@ declare module 'bcrypt' {
      *     // ...
      * });
      */
-    genSalt(callback: (err: Error | void, salt: string) => any): void;
-    genSalt(rounds: number, callback: (err: Error | void, salt: string) => any): void;
+    genSalt(callback: (err: Error | void, salt: string) => void): void;
+    genSalt(rounds: number, callback: (err: Error | void, salt: string) => void): void;
     genSalt(
       rounds: number,
       minor: AOrB,
-      callback: (err: Error | void, salt: string) => any,
+      callback: (err: Error | void, salt: string) => void,
     ): void;
 
     /**
@@ -122,7 +122,7 @@ declare module 'bcrypt' {
     hash(
       data: string | Buffer,
       saltOrRounds: string | number,
-      callback: (err: Error | void, encrypted: string) => any,
+      callback: (err: Error | void, encrypted: string) => void,
     ): void;
 
     /**
@@ -182,7 +182,7 @@ declare module 'bcrypt' {
     compare(
       data: string | Buffer,
       encrypted: string,
-      callback: (err: Error | void, same: boolean) => any,
+      callback: (err: Error | void, same: boolean) => void,
     ): void;
 
     /**
@@ -192,5 +192,5 @@ declare module 'bcrypt' {
     getRounds(encrypted: string): number;
   }
 
-  declare module.exports: typeof Bcrypt;
+  declare module.exports: Bcrypt;
 }
