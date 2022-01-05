@@ -16,5 +16,5 @@ describe('email-validator', () => {
   it('has only one property', () => {
     // $FlowExpectedError[prop-missing]
     validator.blah();
-  })
+  });
 });
