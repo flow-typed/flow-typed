@@ -5,11 +5,16 @@ const validator = require('email-validator');
 
 describe('email-validator', () => {
   it('validates', () => {
-    (validator('test'): boolean);
+    (validator.validate('test'): boolean);
 
     // $FlowExpectedError[incompatible-cast]
-    (validator('test'): string);
+    (validator.validate('test'): string);
     // $FlowExpectedError[incompatible-call]
-    validator(123);
+    validator.validate(123);
   });
+
+  it('has only one property', () => {
+    // $FlowExpectedError[prop-missing]
+    validator.blah();
+  })
 });
