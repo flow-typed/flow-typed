@@ -1,7 +1,7 @@
 declare module 'bcrypt' {
   declare type AOrB = 'a' | 'b';
 
-  declare class Bcrypt {
+  declare interface Bcrypt {
     /**
      * @param rounds The cost of processing the data. Default 10.
      * @param minor The minor version of bcrypt to use. Either 'a' or 'b'. Default 'b'.

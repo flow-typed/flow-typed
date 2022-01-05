@@ -54,11 +54,48 @@ describe('bcrypt', () => {
   });
 
   it('hashSync', () => {
+    (bcrypt.hashSync('test', 10): string);
+    bcrypt.hashSync('test', '123');
 
+    // $FlowExpectedError[incompatible-call]
+    bcrypt.hashSync();
+    // $FlowExpectedError[incompatible-call]
+    bcrypt.hashSync('test');
+    // $FlowExpectedError[incompatible-call]
+    bcrypt.hashSync(10);
+    // $FlowExpectedError[incompatible-call]
+    bcrypt.hashSync('test', true);
+    // $FlowExpectedError[extra-arg]
+    bcrypt.hashSync('test', 10, 'test');
   });
 
   it('hash', () => {
+    bcrypt.hash('test', 10).then((hashedPassword) => {
+      (hashedPassword: string);
+      // $FlowExpectedError[incompatible-cast]
+      (hashedPassword: number);
+    });
+    bcrypt.hash('test', 10, (err, hashedPassword) => {
+      if (err) {
+        (err: Error);
+      }
 
+      (hashedPassword: string);
+      // $FlowExpectedError[incompatible-cast]
+      (hashedPassword: number);
+    });
+    bcrypt.hash('test', '123');
+
+    // $FlowExpectedError[incompatible-call]
+    bcrypt.hash();
+    // $FlowExpectedError[incompatible-call]
+    bcrypt.hash('test');
+    // $FlowExpectedError[incompatible-call]
+    bcrypt.hash(10);
+    // $FlowExpectedError[incompatible-call]
+    bcrypt.hash('test', true);
+    // $FlowExpectedError[incompatible-call]
+    bcrypt.hash('test', 10, 'test');
   });
 
   it('compareSync', () => {
