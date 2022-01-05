@@ -254,7 +254,10 @@ function validateVersionNumPart(part: string, partName: string): number {
   return num;
 }
 
-function pkgVersionMatch(pkgSemverRaw: string, libDefSemverRaw: string) {
+export function pkgVersionMatch(
+  pkgSemverRaw: string,
+  libDefSemverRaw: string,
+): boolean {
   // The package version should be treated as a semver implicitly prefixed by
   // `^` or `~`. Depending on whether or not the minor value is defined.
   // i.e.: "foo_v2.2.x" is the same range as "~2.2.x"
