@@ -63,7 +63,7 @@ declare module 'password-validator' {
         list?: boolean,
         details?: boolean,
       |},
-    ): boolean | Array<string | { [key: string]: any, ... }>,
+    ): boolean | Array<string & { [key: string]: any, ... }>,
   }
 
   declare module.exports: typeof PasswordValidator;
