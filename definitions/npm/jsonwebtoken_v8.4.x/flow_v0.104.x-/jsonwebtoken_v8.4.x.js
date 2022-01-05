@@ -65,6 +65,7 @@ declare module "jsonwebtoken" {
     clockTolerance: number,
     maxAge: string | number,
     clockTimestamp: number,
+    nonce?: string,
     ...
   }>;
 

@@ -60,6 +60,9 @@ declare module "jsonwebtoken" {
     clockTolerance: number,
     maxAge: string | number,
     clockTimestamp: number
+    nonce?: string,
+    /** return an object with the decoded `{ payload, header, signature }` instead of only the usual content of the payload. */
+    complete?: boolean,
   }>;
 
   declare type DecodingOptions = $Shape<{
