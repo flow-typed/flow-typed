@@ -43,7 +43,7 @@ jobs:
           node scripts/genEslintAnnotations.js
 
       - name: Annotate
-        uses: yuzutech/annotations-action@v0.1.0
+        uses: yuzutech/annotations-action@v0.4.0
         with:
           repo-token: "${{ secrets.GITHUB_TOKEN }}"
           title: 'eslint'
