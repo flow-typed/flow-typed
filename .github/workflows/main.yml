@@ -40,8 +40,14 @@ jobs:
             fi
           done
           yarn --cwd ./definitions/ eslint --output-file eslint_report.json --format json ${definition_files}
-          echo ${definitions/eslint_report.json}
-          echo ${eslint_report.json}
+          node scripts/genEslintAnnotations.js
+
+      - name: Annotate
+        uses: yuzutech/annotations-action@v0.1.0
+        with:
+          repo-token: "${{ secrets.GITHUB_TOKEN }}"
+          title: 'eslint'
+          input: './definitions/eslint_annotation.json'
       - name: Tests
         run: ./build.sh
   analyze:
