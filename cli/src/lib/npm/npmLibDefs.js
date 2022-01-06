@@ -254,7 +254,10 @@ function validateVersionNumPart(part: string, partName: string): number {
   return num;
 }
 
-function pkgVersionMatch(pkgSemverRaw: string, libDefSemverRaw: string) {
+export function pkgVersionMatch(
+  pkgSemverRaw: string,
+  libDefSemverRaw: string,
+): boolean {
   // The package version should be treated as a semver implicitly prefixed by
   // `^` or `~`. Depending on whether or not the minor value is defined.
   // i.e.: "foo_v2.2.x" is the same range as "~2.2.x"
@@ -313,7 +316,23 @@ function pkgVersionMatch(pkgSemverRaw: string, libDefSemverRaw: string) {
   const libDefUpper = getRangeUpperBound(libDefRange);
 
   const pkgBelowLower = semver.gtr(libDefLower, pkgSemver);
-  const pkgAboveUpper = semver.ltr(libDefUpper, pkgSemver);
+  // semver.coerce explanation:
+  // We compare a libdef version against a package version
+  // to check if it matches the range, if pkgAboveUpper would be true
+  // that means it doesn't match.
+  //
+  // Mismatches occur when for example libdef is defined as is 8.5.x
+  // which makes it's upper <8.6.0
+  // pkgSemver is ^8.5.1 who's range will reach a max of <9.0.0
+  // therefore libDefUpper is less than maximum pkgSemver range.
+  //
+  // coerce will transform any semver passed in to an explicit
+  // version, in this case, ^8.5.1 becomes 8.5.1 which allows
+  // 8.6.0 (libdef) to be above 8.5.1 (pkg).
+  const pkgAboveUpper = semver.ltr(
+    libDefUpper,
+    semver.coerce(pkgSemver)?.version ?? pkgSemver,
+  );
   if (pkgBelowLower || pkgAboveUpper) {
     return false;
   }
@@ -536,22 +555,24 @@ async function getSingleLibdef(
       const scope = itemName;
       const scopeDirItems = await fs.readdir(itemPath);
       const settled = await P.all(
-        scopeDirItems.map(async itemName => {
-          const itemPath = path.join(npmDefsDirPath, scope, itemName);
-          const itemStat = await fs.stat(itemPath);
-          if (itemStat.isDirectory()) {
-            return await extractLibDefsFromNpmPkgDir(
-              itemPath,
-              scope,
-              itemName,
-              validating,
-            );
-          } else {
-            throw new ValidationError(
-              `Expected only sub-directories in this dir!`,
-            );
-          }
-        }),
+        scopeDirItems
+          .filter(item => item !== '.DS_Store')
+          .map(async itemName => {
+            const itemPath = path.join(npmDefsDirPath, scope, itemName);
+            const itemStat = await fs.stat(itemPath);
+            if (itemStat.isDirectory()) {
+              return await extractLibDefsFromNpmPkgDir(
+                itemPath,
+                scope,
+                itemName,
+                validating,
+              );
+            } else {
+              throw new ValidationError(
+                `Expected only sub-directories in this dir!`,
+              );
+            }
+          }),
       );
       return [].concat(...settled);
     } else {
@@ -581,6 +602,10 @@ export async function getNpmLibDefs(
   const dirItems = await fs.readdir(npmDefsDirPath);
   const errors = [];
   const proms = dirItems.map(async itemName => {
+    // If a user opens definitions dir in finder it will create `.DS_Store`
+    // which will need to be excluded while parsing
+    if (itemName === '.DS_Store') return;
+
     try {
       return await getSingleLibdef(itemName, npmDefsDirPath, validating);
     } catch (e) {
