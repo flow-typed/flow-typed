@@ -35,7 +35,7 @@ fs.readFile(`${definitionsDir}/eslint_report.json`, 'utf8', (err, content) => {
     ];
   }, []);
 
-  fs.writeFile(`${definitionsDir}/eslint_annotation.json`, contentAnnotations, (err) => {
+  fs.writeFile(`${definitionsDir}/eslint_annotation.json`, JSON.stringify(contentAnnotations), (err) => {
     if (err) {
       console.error(err);
     }
