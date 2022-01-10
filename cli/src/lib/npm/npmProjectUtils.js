@@ -10,7 +10,7 @@ import {stringToVersion} from '../semver.js';
 import type {Version} from '../semver.js';
 
 import semver, {intersects} from 'semver';
-import colors from 'colors/safe';
+import chalk from 'chalk';
 
 import glob from 'glob';
 
@@ -188,9 +188,7 @@ export function mergePackageJsonDependencies(
     const version = b[dep];
     if (a[dep] != null && !intersects(result[dep], version)) {
       console.log(
-        colors.yellow(
-          "\t  Conflicting versions for '%s' between '%s' and '%s'",
-        ),
+        chalk.yellow("\t  Conflicting versions for '%s' between '%s' and '%s'"),
         dep,
         a[dep],
         version,

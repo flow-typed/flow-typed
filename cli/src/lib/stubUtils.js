@@ -1,6 +1,6 @@
 /* @flow */
 
-import colors from 'colors/safe';
+import chalk from 'chalk';
 import got from 'got';
 import flowgen from 'flowgen';
 import prettier from 'prettier';
@@ -488,7 +488,7 @@ export async function createStub(
         typescriptTypingsContent = response.body;
       } catch (e) {
         console.log(
-          colors.red("❌\t%s%s': %s"),
+          chalk.red("❌\t%s%s': %s"),
           packageName,
           version ? '@' + version : '',
           e.message,
@@ -533,14 +533,14 @@ export async function createStub(
     );
     const terseFilename = path.relative(projectRoot, filename);
     console.log(
-      colors.bold('  • %s@%s\n' + '    └> %s'),
+      chalk.bold('  • %s@%s\n' + '    └> %s'),
       packageName,
       version,
-      colors.red(terseFilename),
+      chalk.red(terseFilename),
     );
     if (resolutionError) {
       console.log(
-        colors.yellow(
+        chalk.yellow(
           "\t  Unable to stub all files in '%s', " +
             'so only created a stub for the main module (%s)',
         ),
@@ -551,7 +551,7 @@ export async function createStub(
     return true;
   } catch (e) {
     console.log(
-      colors.red("❌\t%s%s': %s"),
+      chalk.red("❌\t%s%s': %s"),
       packageName,
       version ? '@' + version : '',
       e.message,

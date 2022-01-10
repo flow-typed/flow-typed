@@ -23,7 +23,7 @@ import {fs, path, child_process} from '../../lib/node';
 import {getNpmLibDefs} from '../../lib/npm/npmLibDefs';
 
 import {testProject} from '../../lib/TEST_UTILS';
-import colors from 'colors/safe';
+import chalk from 'chalk';
 
 import {
   _determineFlowVersion as determineFlowVersion,
@@ -1395,7 +1395,7 @@ describe('install (command)', () => {
         expect(fooLibDefContents).toContain('// flow-typed signature: ');
         expect(fooLibDefContents).toContain('// flow-typed version: ');
         expect(console.log).toHaveBeenCalledWith(
-          colors.yellow(
+          chalk.yellow(
             "\t  Conflicting versions for '%s' between '%s' and '%s'",
           ),
           'foo',
