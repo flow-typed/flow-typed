@@ -8,7 +8,7 @@ describe('puppeteer.defaultArgs', () => {
     (puppeteer.defaultArgs(): Array<string>);
   });
   it('should complain if passed args', () => {
-    // $FlowExpectedError no arguments are expected by function type
+    // $FlowExpectedError[extra-arg] no arguments are expected by function type
     (puppeteer.defaultArgs('testing...'): Array<string>);
   });
 });
