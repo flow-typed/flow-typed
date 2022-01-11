@@ -6,4 +6,11 @@ describe('faker', () => {
   it('is empty', () => {
     (faker: void);
   });
+
+  it('errors', () => {
+    // $FlowExpectedError[incompatible-use]
+    faker.address.zipCode();
+    // $FlowExpectedError[incompatible-use]
+    faker.seed(12);
+  });
 });
