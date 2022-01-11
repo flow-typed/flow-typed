@@ -10,7 +10,7 @@
   "bugs": {
     "url": "https://github.com/flow-typed/flow-typed/issues/new/choose"
   },
-  "version": "3.6.0",
+  "version": "3.6.1",
   "main": "dist/cli.js",
   "bin": "dist/cli.js",
   "engines": {
@@ -29,7 +29,7 @@
   },
   "dependencies": {
     "@octokit/rest": "^18.12.0",
-    "colors": "^1.4.0",
+    "colors": "1.4.0",
     "flowgen": "^1.10.0",
     "fs-extra": "^8.1.0",
     "glob": "^7.1.6",
