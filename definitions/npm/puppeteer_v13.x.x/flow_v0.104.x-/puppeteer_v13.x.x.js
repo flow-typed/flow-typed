@@ -1358,7 +1358,7 @@ declare module 'puppeteer' {
    ...
   };
 
-  declare export default {
+  declare module.exports: {
     /** Attaches Puppeteer to an existing Chromium instance */
     connect: (options?: ConnectOptions) => Promise<Browser>;
     /** The default flags that Chromium will be launched with */
