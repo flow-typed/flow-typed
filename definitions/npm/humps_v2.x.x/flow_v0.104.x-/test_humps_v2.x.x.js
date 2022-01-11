@@ -31,5 +31,8 @@ describe("tests", () => {
     (pascalizeKeys({ foo: 1 }): { [string]: mixed, ... });
     (decamelizeKeys({ foo: 1 }): { [string]: mixed, ... });
     (depascalizeKeys({ foo: 1 }): { [string]: mixed, ... });
+
+    (camelizeKeys([{ foo: 1 }]): Array<{ [string]: mixed, ... }>);
+    (camelizeKeys([{ foo: "bar" }]): Array<{ [string]: mixed, ... }>);
   });
 });

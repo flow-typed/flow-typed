@@ -18,9 +18,9 @@ declare module "humps" {
   declare export function depascalize(string, options?: Options): string;
 
   declare export function camelizeKeys(
-    Object | Array<Object>,
+    { +[string]: mixed, ... },
     options?: Options
-  ): Object;
+  ): { [string]: mixed, ... };
   declare export function pascalizeKeys(
     { +[string]: mixed, ... },
     options?: Options
@@ -33,6 +33,11 @@ declare module "humps" {
     { +[string]: mixed, ... },
     options?: Options
   ): { [string]: mixed, ... };
+
+  declare export function camelizeKeys(
+    Array<{ +[string]: mixed, ... }>,
+    options?: Options
+  ): Array<{ [string]: mixed, ... }>;
 
   declare export default {|
     camelize: typeof camelize,
