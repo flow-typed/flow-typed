@@ -5,7 +5,7 @@
  * https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/puppeteer
  */
 
- declare module 'puppeteer' {
+declare module 'puppeteer' {
   import type { ChildProcess } from 'child_process';
 
   declare class OverridableEventEmitter extends events$EventEmitter {
@@ -1358,7 +1358,7 @@
    ...
   };
 
-  declare export default {
+  declare module.exports: {
     /** Attaches Puppeteer to an existing Chromium instance */
     connect: (options?: ConnectOptions) => Promise<Browser>;
     /** The default flags that Chromium will be launched with */
