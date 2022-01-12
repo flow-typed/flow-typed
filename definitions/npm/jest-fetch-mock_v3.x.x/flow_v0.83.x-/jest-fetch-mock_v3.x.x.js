@@ -121,14 +121,5 @@ interface FetchMock {
 declare var fetchMock: FetchMock;
 
 declare module 'jest-fetch-mock' {
-  /**
-   * alias of fetchMock.enableMocks() for ES6 import syntax to not clash with other libraries
-   */
-  declare export function enableFetchMocks(): void;
-  /**
-   * alias of fetchMock.disableMocks() for ease of ES6 import syntax to not clash with other libraries
-   */
-  declare export function disableFetchMocks(): void;
-
-  declare export default FetchMock;
+  declare module.exports: FetchMock;
 }
