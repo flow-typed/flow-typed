@@ -107,8 +107,15 @@ interface FetchMock {
   dontMockOnce(fn?: MockResponseInitFunction): FetchMock;
   dontMockOnce(response: string, responseInit?: MockParams): FetchMock;
 
-  dontMockIf(urlOrPredicate: UrlOrPredicate, fn?: MockResponseInitFunction): FetchMock;
-  dontMockIf(urlOrPredicate: UrlOrPredicate, response: string, responseInit?: MockParams): FetchMock;
+  dontMockIf(
+    urlOrPredicate: UrlOrPredicate,
+    fn?: MockResponseInitFunction,
+  ): FetchMock;
+  dontMockIf(
+    urlOrPredicate: UrlOrPredicate,
+    response: string,
+    responseInit?: MockParams,
+  ): FetchMock;
 
   dontMockOnceIf(urlOrPredicate: UrlOrPredicate, fn?: MockResponseInitFunction): FetchMock;
   dontMockOnceIf(urlOrPredicate: UrlOrPredicate, response: string, responseInit?: MockParams): FetchMock;
