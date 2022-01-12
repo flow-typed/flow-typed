@@ -267,6 +267,259 @@ describe('jest-fetch-mock', () => {
   });
 
   describe('global', () => {
+    it('mockResponse', () => {
+      fetchMock.mockResponse(() => '',).disableMocks();
+      fetchMock.mockResponse('test');
+      fetchMock.mockResponse('test', { statusText: 'test' });
 
+      // $FlowExpectedError[incompatible-call]
+      fetchMock.mockResponse();
+      // $FlowExpectedError[incompatible-call]
+      fetchMock.mockResponse(123);
+    });
+
+    it('mockResponseOnce', () => {
+      fetchMock.mockResponseOnce(() => '',).disableMocks();
+      fetchMock.mockResponseOnce('test');
+      fetchMock.mockResponseOnce('test', { statusText: 'test' });
+
+      // $FlowExpectedError[incompatible-call]
+      fetchMock.mockResponseOnce();
+      // $FlowExpectedError[incompatible-call]
+      fetchMock.mockResponseOnce(123);
+    });
+
+    it('once', () => {
+      fetchMock.once(() => '',).disableMocks();
+      fetchMock.once('test');
+      fetchMock.once('test', { statusText: 'test' });
+
+      // $FlowExpectedError[incompatible-call]
+      fetchMock.once();
+      // $FlowExpectedError[incompatible-call]
+      fetchMock.once(123);
+    });
+
+    it('mockResponses', () => {
+      fetchMock.mockResponses();
+      fetchMock.mockResponses(
+        'test',
+        () => '',
+        'test',
+        ['test', { statusText: 'test' }],
+      ).disableMocks();
+      fetchMock.mockResponses(
+        () => '',
+        ['test', { statusText: 'test' }],
+        'test',
+        'test',
+        );
+
+      // $FlowExpectedError[incompatible-call]
+      fetchMock.mockResponses(123);
+    });
+
+    it('mockReject', () => {
+      fetchMock.mockReject().disableMocks();
+      fetchMock.mockReject(() => Promise.resolve());
+      fetchMock.mockReject(new Error());
+
+      // $FlowExpectedError[incompatible-call]
+      fetchMock.mockReject('test');
+      // $FlowExpectedError[incompatible-call]
+      fetchMock.mockReject(() => {});
+    });
+
+    it('mockRejectOnce', () => {
+      fetchMock.mockRejectOnce().disableMocks();
+      fetchMock.mockRejectOnce(() => Promise.resolve());
+      fetchMock.mockRejectOnce(new Error());
+
+      // $FlowExpectedError[incompatible-call]
+      fetchMock.mockRejectOnce('test');
+      // $FlowExpectedError[incompatible-call]
+      fetchMock.mockRejectOnce(() => {});
+    });
+
+    it('mockAbort', () => {
+      fetchMock.mockAbort().disableMocks();
+
+      // $FlowExpectedError[extra-arg]
+      fetchMock.mockAbort('test');
+    });
+
+    it('mockAbortOnce', () => {
+      fetchMock.mockAbortOnce().disableMocks();
+
+      // $FlowExpectedError[extra-arg]
+      fetchMock.mockAbortOnce('test');
+    });
+
+    it('isMocking', () => {
+      (fetchMock.isMocking('test'): boolean);
+      fetchMock.isMocking(new Request('test'));
+
+      // $FlowExpectedError[prop-missing]
+      fetchMock.isMocking('test').disableMocks();
+      // $FlowExpectedError[incompatible-call]
+      fetchMock.isMocking();
+      // $FlowExpectedError[incompatible-call]
+      fetchMock.isMocking(123);
+    });
+
+    it('doMock', () => {
+      fetchMock.doMock().disableMocks();
+      fetchMock.doMock(() => '',).disableMocks();
+      fetchMock.doMock('test');
+      fetchMock.doMock('test', { statusText: 'test' });
+
+      // $FlowExpectedError[incompatible-call]
+      fetchMock.doMock(123);
+    });
+
+    it('doMockOnce', () => {
+      fetchMock.doMockOnce().disableMocks();
+      fetchMock.doMockOnce(() => '',).disableMocks();
+      fetchMock.doMockOnce('test');
+      fetchMock.doMockOnce('test', { statusText: 'test' });
+
+      // $FlowExpectedError[incompatible-call]
+      fetchMock.doMockOnce(123);
+    });
+
+    it('mockOnce', () => {
+      fetchMock.mockOnce().disableMocks();
+      fetchMock.mockOnce(() => '',).disableMocks();
+      fetchMock.mockOnce('test');
+      fetchMock.mockOnce('test', { statusText: 'test' });
+
+      // $FlowExpectedError[incompatible-call]
+      fetchMock.mockOnce(123);
+    });
+
+    it('doMockIf', () => {
+      fetchMock.doMockIf('test').disableMocks();
+      fetchMock.doMockIf(/ /g);
+      fetchMock.doMockIf((input: Request) => true);
+      fetchMock.doMockIf('test', () => '');
+      fetchMock.doMockIf('test', 'test');
+      fetchMock.doMockIf('test', 'test', { statusText: 'test' });
+
+      // $FlowExpectedError[incompatible-call]
+      fetchMock.doMockIf();
+      // $FlowExpectedError[incompatible-call]
+      fetchMock.doMockIf(123);
+    });
+
+    it('mockIf', () => {
+      fetchMock.mockIf('test').disableMocks();
+      fetchMock.mockIf(/ /g);
+      fetchMock.mockIf((input: Request) => true);
+      fetchMock.mockIf('test', () => '');
+      fetchMock.mockIf('test', 'test');
+      fetchMock.mockIf('test', 'test', { statusText: 'test' });
+
+      // $FlowExpectedError[incompatible-call]
+      fetchMock.mockIf();
+      // $FlowExpectedError[incompatible-call]
+      fetchMock.mockIf(123);
+    });
+
+    it('doMockOnceIf', () => {
+      fetchMock.doMockOnceIf('test').disableMocks();
+      fetchMock.doMockOnceIf(/ /g);
+      fetchMock.doMockOnceIf((input: Request) => true);
+      fetchMock.doMockOnceIf('test', () => '');
+      fetchMock.doMockOnceIf('test', 'test');
+      fetchMock.doMockOnceIf('test', 'test', { statusText: 'test' });
+
+      // $FlowExpectedError[incompatible-call]
+      fetchMock.doMockOnceIf();
+      // $FlowExpectedError[incompatible-call]
+      fetchMock.doMockOnceIf(123);
+    });
+
+    it('mockOnceIf', () => {
+      fetchMock.mockOnceIf('test').disableMocks();
+      fetchMock.mockOnceIf(/ /g);
+      fetchMock.mockOnceIf((input: Request) => true);
+      fetchMock.mockOnceIf('test', () => '');
+      fetchMock.mockOnceIf('test', 'test');
+      fetchMock.mockOnceIf('test', 'test', { statusText: 'test' });
+
+      // $FlowExpectedError[incompatible-call]
+      fetchMock.mockOnceIf();
+      // $FlowExpectedError[incompatible-call]
+      fetchMock.mockOnceIf(123);
+    });
+
+    it('dontMock', () => {
+      fetchMock.dontMock().disableMocks();
+      fetchMock.dontMock(() => '',).disableMocks();
+      fetchMock.dontMock('test');
+      fetchMock.dontMock('test', { statusText: 'test' });
+
+      // $FlowExpectedError[incompatible-call]
+      fetchMock.dontMock(123);
+    });
+
+    it('dontMockOnce', () => {
+      fetchMock.dontMockOnce().disableMocks();
+      fetchMock.dontMockOnce(() => '',).disableMocks();
+      fetchMock.dontMockOnce('test');
+      fetchMock.dontMockOnce('test', { statusText: 'test' });
+
+      // $FlowExpectedError[incompatible-call]
+      fetchMock.dontMockOnce(123);
+    });
+
+    it('dontMockIf', () => {
+      fetchMock.dontMockIf('test').disableMocks();
+      fetchMock.dontMockIf(/ /g);
+      fetchMock.dontMockIf((input: Request) => true);
+      fetchMock.dontMockIf('test', () => '');
+      fetchMock.dontMockIf('test', 'test');
+      fetchMock.dontMockIf('test', 'test', { statusText: 'test' });
+
+      // $FlowExpectedError[incompatible-call]
+      fetchMock.dontMockIf();
+      // $FlowExpectedError[incompatible-call]
+      fetchMock.dontMockIf(123);
+    });
+
+    it('dontMockOnceIf', () => {
+      fetchMock.dontMockOnceIf('test').disableMocks();
+      fetchMock.dontMockOnceIf(/ /g);
+      fetchMock.dontMockOnceIf((input: Request) => true);
+      fetchMock.dontMockOnceIf('test', () => '');
+      fetchMock.dontMockOnceIf('test', 'test');
+      fetchMock.dontMockOnceIf('test', 'test', { statusText: 'test' });
+
+      // $FlowExpectedError[incompatible-call]
+      fetchMock.dontMockOnceIf();
+      // $FlowExpectedError[incompatible-call]
+      fetchMock.dontMockOnceIf(123);
+    });
+
+    it('resetMocks', () => {
+      (fetchMock.resetMocks(): void);
+
+      // $FlowExpectedError[extra-arg]
+      fetchMock.resetMocks('test');
+    });
+
+    it('enableMocks', () => {
+      (fetchMock.enableMocks(): void);
+
+      // $FlowExpectedError[extra-arg]
+      fetchMock.enableMocks('test');
+    });
+
+    it('disableMocks', () => {
+      (fetchMock.disableMocks(): void);
+
+      // $FlowExpectedError[extra-arg]
+      fetchMock.disableMocks('test');
+    });
   });
 });
