@@ -35,7 +35,7 @@ declare module '@octokit/rest' {
       getContent: ({|
         owner: string,
         repo: string,
-        path: string,
+        path?: string,
         ref?: string,
       |}) => Promise<{|
         data: Array<{|
