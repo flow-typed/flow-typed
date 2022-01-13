@@ -1,8 +1,10 @@
 // @flow
 import { describe, it } from 'flow-typed-test';
-// import library from '@octokit/rest';
+import { Octokit } from '@octokit/rest';
 
 describe('@octokit/rest', () => {
+  const octokit = new Octokit();
+
   it('', () => {
 
   });
