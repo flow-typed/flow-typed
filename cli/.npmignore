@@ -5,4 +5,5 @@ __tests__/
 dist/**/*.js.map
 flow-typed/
 **/__tests__/
+**/__mocks__/
 TEST_UTILS.js
