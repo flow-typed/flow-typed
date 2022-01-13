@@ -15,7 +15,8 @@ import {
 
 describe("tests", () => {
   it("errors", () => {
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
+    // $FlowExpectedError[incompatible-cast]
     (camelize(42): number);
   });
 
