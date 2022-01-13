@@ -35,22 +35,37 @@ export async function run({libName, ver}: Args): Promise<number> {
     return 1;
   }
 
-  const definitionsPath = path.join(process.cwd(), '/definitions/npm');
-  const rootDefDir = `${definitionsPath}/${libName}_v${ver}`;
+  const scope = libName.startsWith('@') ? libName.split('/')[0] : '';
+  const packageName = scope ? libName.split('/')[1] : libName;
+  const definitionsPath = path.join(
+    process.cwd(),
+    '/definitions/npm',
+    scope ?? '',
+  );
+  const rootDefDir = `${definitionsPath}/${packageName}_v${ver}`;
   const defDir = `${rootDefDir}/flow_v${flowVersion}-`;
 
+  if (scope) {
+    try {
+      fs.mkdirSync(definitionsPath);
+    } catch (err) {
+      if (err.code !== 'EEXIST') {
+        throw err;
+      }
+    }
+  }
   fs.mkdirSync(rootDefDir);
   fs.mkdirSync(defDir);
 
   fs.writeFileSync(
-    `${defDir}/${libName}_v${ver}.js`,
+    `${defDir}/${packageName}_v${ver}.js`,
     `declare module '${libName}' {
   declare module.exports: any;
 }`,
   );
 
   fs.writeFileSync(
-    `${defDir}/test_${libName}_v${ver}.js`,
+    `${defDir}/test_${packageName}_v${ver}.js`,
     `// @flow
 import { describe, it } from 'flow-typed-test';
 // import library from '${libName}';

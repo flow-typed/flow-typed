@@ -34,6 +34,11 @@ declare module "humps" {
     options?: Options
   ): { [string]: mixed, ... };
 
+  declare export function camelizeKeys(
+    Array<{ +[string]: mixed, ... }>,
+    options?: Options
+  ): Array<{ [string]: mixed, ... }>;
+
   declare export default {|
     camelize: typeof camelize,
     pascalize: typeof pascalize,
