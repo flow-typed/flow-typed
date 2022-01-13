@@ -45,7 +45,7 @@ jobs:
       - name: Annotate
         uses: yuzutech/annotations-action@v0.4.0
         with:
-          repo-token: "${{ secrets.GH_TOK }}"
+          repo-token: "${{ secrets.GITHUB_TOKEN }}"
           title: 'eslint'
           input: './definitions/eslint_annotation.json'
       - name: Tests
