@@ -7,6 +7,8 @@ on:
     branches:
       - master
   workflow_dispatch:
+permissions:
+  checks: write
 jobs:
   build:
     name: Build Node@${{ matrix.node }}
@@ -44,8 +46,6 @@ jobs:
 
       - name: Annotate
         uses: yuzutech/annotations-action@v0.4.0
-        permissions:
-          checks: write
         with:
           repo-token: "${{ secrets.GITHUB_TOKEN }}"
           title: 'eslint'
