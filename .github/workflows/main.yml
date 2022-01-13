@@ -7,8 +7,7 @@ on:
     branches:
       - master
   workflow_dispatch:
-permissions:
-  checks: write
+permissions: write-all
 jobs:
   build:
     name: Build Node@${{ matrix.node }}
