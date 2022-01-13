@@ -17,7 +17,8 @@
     "node": ">=10.0.0"
   },
   "scripts": {
-    "build": "mkdirp dist && babel ./src --out-dir=./dist",
+    "build:flow": "flow-copy-source --ignore '**/__tests__/**' src dist",
+    "build": "mkdirp dist && babel ./src --out-dir=./dist && yarn build:flow",
     "clean": "rimraf dist",
     "flow": "flow",
     "lint": "eslint .",
@@ -58,6 +59,7 @@
     "eslint-plugin-flowtype": "^8.0.3",
     "eslint-plugin-prettier": "^4.0.0",
     "flow-bin": "^0.165.1",
+    "flow-copy-source": "^2.0.9",
     "jest": "^27.3.1"
   },
   "keywords": [
