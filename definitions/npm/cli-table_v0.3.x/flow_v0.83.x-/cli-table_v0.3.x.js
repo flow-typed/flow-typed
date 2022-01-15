@@ -29,12 +29,13 @@ declare module 'cli-table' {
       compact?: boolean,
     |},
     head?: Array<string>,
+    rows?: Array<Array<string>>,
   |};
 
   declare class Table extends Array<any> {
-    (options?: TableOptions): this;
+    constructor(options?: TableOptions): this;
     toString(): string;
-    version: string;
+    static version: string;
   }
 
   declare module.exports: typeof Table;
