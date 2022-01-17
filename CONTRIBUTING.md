@@ -320,7 +320,7 @@ import Foo, { type Func } from 'my-module';
 
 ---
 
-Because of this feature you may opt to break down types into separate declarations as opposed to inlining them on a variable or property. Such as,
+Because of this feature you may opt to break down types into separate declarations as opposed to inlining them on a variable or property to make it easier for library consumers to cast or annotate a variable.
 
 ```js
 declare type Options = { ... };
