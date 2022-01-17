@@ -1,4 +1,4 @@
-declare module "faker" {
+declare module "@faker-js/faker" {
   declare type SeedType = number | $ReadOnlyArray<number>;
 
   declare module.exports: {
