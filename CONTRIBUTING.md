@@ -293,6 +293,30 @@ Using `mixed` in place of `any` for the return type of a function or the type of
 
 When you export a module, you have a choice to use CommonJS or ES6 syntax. We generally recommend to use ES6 syntax. As [discussed here](https://github.com/flow-typed/flow-typed/issues/1859#issuecomment-374575368), if you need both named exports and a default export, then you need to use the ES6 syntax.
 
+Learn to export [es6](https://flow.org/en/docs/libdefs/creation/#toc-declaring-an-es-module) or [commonjs](https://flow.org/en/docs/libdefs/creation/#toc-declaring-a-commonjs-module) modules.
+
+#### Exporting types
+
+Types on the other hand when declared inside a module do not need to be explicitly exported as they will be exported automatically.
+
+These two will work the same
+```js
+declare type Func = () => void;
+declare export type Func = () => void;
+```
+
+It can then be used like the following, though be aware that even if you're using commonjs in your consuming module your imports will still use es6 import syntax.
+```js
+// In a commonjs module
+import type { Func } from 'my-module';
+
+const Foo = require('my-module');
+
+// ---
+// IN an es module
+import Foo, { type Func } from 'my-module';
+```
+
 ### Avoid global types
 
 Sometimes you see global definitions like `$npm$ModuleName$`. This is due to the fact that in the past flow didn't support private types. **Global types should not be used anymore**. Since then Flow has added support for `declare export` which means that every type which doesn't have it are defined as private and can't be imported, see https://flow.org/en/docs/libdefs/creation/#toc-declaring-an-es-module for details.
