@@ -73,10 +73,10 @@ describe('semver', () => {
 
     (semver.coerce('4.6.3.9.2-alpha2'): ?SemVer);
 
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
     semver.cmp('1.2.3', '> ', '1.2.4');
 
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
     semver.outside('1.2.3', '1.2', '> ');
   });
 

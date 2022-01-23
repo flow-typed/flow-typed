@@ -62,7 +62,7 @@ describe('angular $Timeout', () => {
 
   it('returns back the angular promise', () => {
     function testTimeout($timeout: $Timeout) {
-      ($timeout(): AngularPromise<*>);
+      ($timeout(): AngularPromise<any>);
     }
   });
 });

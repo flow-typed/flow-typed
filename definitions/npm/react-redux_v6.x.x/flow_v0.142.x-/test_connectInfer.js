@@ -164,7 +164,7 @@ function testMapDispatchToProps() {
     }
   }
   type MapDispatchToPropsProps = { forMapDispatchToProps: string, ... }
-  const mapDispatchToProps = (dispatch: *, ownProps: MapDispatchToPropsProps) => {
+  const mapDispatchToProps = (dispatch: any, ownProps: MapDispatchToPropsProps) => {
     return {fromMapDispatchToProps: ownProps.forMapDispatchToProps}
   }
   const Connected = connect(mapStateToProps, mapDispatchToProps)(Com);
@@ -196,7 +196,7 @@ function testMapDispatchToPropsWithoutMapStateToProps() {
   }
 
   type MapDispatchToPropsProps = { forMapDispatchToProps: string, ... };
-  const mapDispatchToProps = (dispatch: *, ownProps: MapDispatchToPropsProps) => {
+  const mapDispatchToProps = (dispatch: any, ownProps: MapDispatchToPropsProps) => {
     return {fromMapDispatchToProps: ownProps.forMapDispatchToProps}
   }
   const Connected = connect(null, mapDispatchToProps)(Com);
@@ -372,7 +372,7 @@ function testMergeProps() {
     }
   }
   type MapDispatchToPropsProps = { forMapDispatchToProps: string, ... }
-  const mapDispatchToProps = (dispatch: *, ownProps: MapDispatchToPropsProps) => {
+  const mapDispatchToProps = (dispatch: any, ownProps: MapDispatchToPropsProps) => {
     return {fromMapDispatchToProps: ownProps.forMapDispatchToProps}
   }
   const mergeProps = (stateProps, dispatchProps, ownProps: { forMergeProps: number, ... }) => {

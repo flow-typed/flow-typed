@@ -55,10 +55,10 @@ semver.parse('3.5.2', true);
 semver.toComparators('3.x || 4.x');
 semver.toComparators(new Range('3.x || 4.x'), true);
 
-// $FlowExpectedError
+// $FlowExpectedError[incompatible-call]
 semver.cmp('1.2.3', '> ', '1.2.4');
 
-// $FlowExpectedError
+// $FlowExpectedError[incompatible-call]
 semver.outside('1.2.3', '1.2', '> ');
 
 // Range

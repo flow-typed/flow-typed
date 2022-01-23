@@ -1,4 +1,4 @@
-declare module pg {
+declare module 'pg' {
   // Note: Currently There are some issues in Function overloading.
   // https://github.com/facebook/flow/issues/2423
   // So i temporarily remove the

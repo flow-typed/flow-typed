@@ -3,5 +3,5 @@
 import {ReactShallowRender, createRenderer} from 'react-addons-test-utils';
 
 (createRenderer(): ReactShallowRender);
-// $FlowExpectedError
+// $FlowExpectedError[incompatible-cast]
 (createRenderer(): number);

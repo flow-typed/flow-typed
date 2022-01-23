@@ -66,12 +66,24 @@ export async function setLocalConfig(
   }
 }
 
-export async function getDiff(): Promise<Array<string>> {
+export async function getDefinitionsDiff(): Promise<Array<string>> {
   const gitPath = await getGitPath();
   try {
-    let {stdout} = await child_process.spawnP(gitPath, ['diff', '--name-only']);
+    // const {stdout: branchName} = await child_process.spawnP(gitPath, [
+    //   'rev-parse',
+    //   '--abbrev-ref',
+    //   'HEAD',
+    // ]);
+    let {stdout} = await child_process.spawnP(gitPath, [
+      'diff',
+      'origin/master',
+      '--name-only',
+    ]);
+    console.log(stdout);
 
-    if (stdout === '') {
+    if (
+      stdout.split('\n').filter(o => o.startsWith('definitions/')).length === 0
+    ) {
       // We are probably already on master, so compare to the last commit.
       const {stdout: headDiff} = await child_process.spawnP(gitPath, [
         'diff',

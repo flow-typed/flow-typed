@@ -5,6 +5,7 @@ import yargs from 'yargs';
 import {fs, path} from './lib/node.js';
 
 import * as Install from './commands/install.js';
+import * as CreateDef from './commands/create-def';
 import * as CreateStub from './commands/create-stub.js';
 import * as RunTests from './commands/runTests.js';
 import * as Search from './commands/search.js';
@@ -22,10 +23,11 @@ export function runCLI() {
     name: string,
     description: string,
     setup?: (yargs: Yargs) => Yargs,
-    // $FlowFixMe
     run: (argv: Argv) => Promise<number>,
+    ...
   };
   const commands: Array<CommandModule> = [
+    CreateDef,
     CreateStub,
     Install,
     RunTests,

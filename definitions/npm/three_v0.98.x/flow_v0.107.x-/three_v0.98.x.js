@@ -531,7 +531,7 @@ declare module three {
     lookAt(vector: Vector3): void;
     // TODO: Find out if the array type is based on the specific Object3D
     // subtype.
-    raycast(raycaster: Raycaster, intersects: Array<*>): Array<*>;
+    raycast(raycaster: Raycaster, intersects: Array<any>): Array<any>;
     // Expressed this way to ensure at least one object to remove.
     remove(object: Object3D, ...otherObjects: Array<Object3D>): void;
     rotateOnAxis(axis: Vector3, angle: number): void;

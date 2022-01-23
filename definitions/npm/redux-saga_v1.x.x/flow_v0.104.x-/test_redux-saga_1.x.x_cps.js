@@ -11,14 +11,14 @@ describe("cps effect", () => {
     });
 
     it("returned object must be read only", () => {
-      // $FlowExpectedError: read-only  property
+      // $FlowExpectedError[cannot-write]: read-only  property
       c.type = "anyType";
-      // $FlowExpectedError: read-only  property
+      // $FlowExpectedError[cannot-write]: read-only  property
       c.payload = {};
     });
 
     it("returned object must be exact", () => {
-      // $FlowExpectedError: exact type
+      // $FlowExpectedError[prop-missing]: exact type
       c.abc = 69;
     });
   });
@@ -118,7 +118,7 @@ describe("cps effect", () => {
         (e7.payload.fn: typeof cpsfn7);
         (e8.payload.fn: typeof cpsfn8);
 
-        // $FlowExpectedError: wrong fn
+        // $FlowExpectedError[incompatible-cast]: wrong fn
         (e6.payload.fn: typeof cpsfn1);
       });
     });
@@ -157,7 +157,7 @@ describe("cps effect", () => {
         (e7.payload.context: typeof context);
         (e8.payload.context: typeof context);
 
-        // $FlowExpectedError: not null
+        // $FlowExpectedError[incompatible-cast]: not null
         (e8.payload.context: null);
       });
 
@@ -171,7 +171,7 @@ describe("cps effect", () => {
         (e7.payload.fn: typeof cpsfn7);
         (e8.payload.fn: typeof cpsfn8);
 
-        // $FlowExpectedError: wrong fn
+        // $FlowExpectedError[incompatible-cast]: wrong fn
         (e6.payload.fn: typeof cpsfn1);
       });
     });
@@ -210,7 +210,7 @@ describe("cps effect", () => {
         (e7.payload.context: typeof context);
         (e8.payload.context: typeof context);
 
-        // $FlowExpectedError: not null
+        // $FlowExpectedError[incompatible-cast]: not null
         (e8.payload.context: null);
       });
 
@@ -224,7 +224,7 @@ describe("cps effect", () => {
         (e7.payload.fn: typeof cpsfn7);
         (e8.payload.fn: typeof cpsfn8);
 
-        // $FlowExpectedError: wrong fn
+        // $FlowExpectedError[incompatible-cast]: wrong fn
         (e6.payload.fn: typeof cpsfn1);
       });
     });

@@ -6,7 +6,7 @@ const ns: Array<number> = [1, 2, 3, 4, 5];
 const ss: Array<string> = ["one", "two", "three", "four"];
 const obj: { [k: string]: number, ... } = { a: 1, c: 2 };
 const objMixed: { [k: string]: mixed, ... } = { a: 1, c: "d" };
-const os: Array<{ [k: string]: *, ... }> = [{ a: 1, c: "d" }, { b: 2 }];
+const os: Array<{ [k: string]: any, ... }> = [{ a: 1, c: "d" }, { b: 2 }];
 const str: string = "hello world";
 
 // TODO: "Gap" Functions: Started failing in v31...

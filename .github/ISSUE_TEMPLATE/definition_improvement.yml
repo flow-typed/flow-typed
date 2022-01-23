@@ -1,0 +1,49 @@
+name: Definition Improvement
+description: Tell us about something that isn't working or missing from an existing flow-typed definition
+labels: [libdef, bug]
+body:
+  - type: input
+    id: libdef
+    attributes:
+      label: Library definition file name
+      description: Which definition is causing you issues?
+      placeholder: react-dom_v17.x.x.js
+    validations:
+      required: true
+
+  - type: input
+    id: consumers_version
+    attributes:
+      label: Your dependent version
+      description: What actual version of the dependency are you using
+      placeholder: 17.1.1
+    validations:
+      required: true
+
+  - type: input
+    id: flow_version
+    attributes:
+      label: Flow Version
+      description: What flow version are you running in your project
+      placeholder: 0.83.0
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: What the is the issue you are experiencing?
+      placeholder: I'm trying to import ... and ...
+    validations:
+      required: true
+
+  - type: dropdown
+    id: want_to_submit_pr
+    attributes:
+      label: Do you want to submit a pull request to fix this issue?
+      options:
+        - 'Yes'
+        - 'No (hope someone else can)'
+    validations:
+      required: true

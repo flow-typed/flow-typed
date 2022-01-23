@@ -71,7 +71,7 @@ declare module "redux-saga" {
     effectRejected?: (effectId: number, error: any) => void;
     effectCancelled?: (effectId: number) => void;
 
-    actionDispatched?: <A>(action: A) => void;
+    actionDispatched?: (action: { [key: string]: any, ... }) => void;
   }
 
   declare export type Saga<T> = Generator<Effect, T, any>;
@@ -282,7 +282,7 @@ declare module "redux-saga" {
   declare export default typeof sagaMiddlewareFactory;
 
   // Effect types
-  declare export type SubPattern = string | (any => boolean);
+  declare export type SubPattern = string | (any => any);
 
   declare export type Pattern = SubPattern | Array<SubPattern>;
 

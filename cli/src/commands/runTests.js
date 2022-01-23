@@ -6,11 +6,11 @@ import {gitHubClient} from '../lib/github.js';
 import {getLibDefs, parseRepoDirItem} from '../lib/libDefs.js';
 import isInFlowTypedRepo from '../lib/isInFlowTypedRepo';
 import {toSemverString as flowVerToSemverString} from '../lib/flowVersion';
-import {getDiff} from '../lib/git';
+import {getDefinitionsDiff} from '../lib/git';
 
 import got from 'got';
 import * as semver from 'semver';
-import * as unzip from 'unzipper';
+import StreamZip from 'node-stream-zip';
 import typeof Yargs from 'yargs';
 import type {FlowVersion} from '../lib/flowVersion.js';
 import {ValidationError} from '../lib/ValidationError';
@@ -20,6 +20,7 @@ export type Args = {
   onlyChanged?: mixed, //boolean
   numberOfFlowVersions?: mixed, // number
   testPatterns: mixed, // Array<string>
+  ...
 };
 
 // Used to decide which binary to fetch for each version of Flow
@@ -62,8 +63,7 @@ async function getTestGroups(
 ): Promise<Array<TestGroup>> {
   let libDefs = await getLibDefs(repoDirPath, baseDirPath);
   if (onlyChanged) {
-    const diff = await getDiff();
-    let changedDefs;
+    const diff = await getDefinitionsDiff();
     const baseDiff: string[] = diff
       .map(d => {
         const match = d.match(basePathRegex);
@@ -74,7 +74,14 @@ async function getTestGroups(
       })
       .filter(d => d !== '');
 
-    changedDefs = baseDiff.map(d => parseRepoDirItem(d).pkgName);
+    const changedDefs = baseDiff.map(d => {
+      const {pkgName, pkgVersion} = parseRepoDirItem(d);
+      const {major, minor, patch} = pkgVersion;
+      return {
+        name: pkgName,
+        version: `v${major}.${minor}.${patch}`,
+      };
+    });
     libDefs = libDefs.filter(def => {
       const baseDefChanged = def.dependenciesPaths.reduce((acc, cur) => {
         if (acc) return acc;
@@ -83,11 +90,10 @@ async function getTestGroups(
       if (baseDefChanged) {
         return true;
       }
-      // If the package name matches the changed files
-      if (changedDefs.includes(def.pkgName)) {
-        return true;
-      }
-      return false;
+
+      return changedDefs.some(
+        d => d.name === def.pkgName && d.version === def.pkgVersionStr,
+      );
     });
   }
   return libDefs.map(libDef => {
@@ -234,17 +240,12 @@ async function getOrderedFlowBinVersions(
         // Extract the flow binary
         const flowBinDirPath = path.join(BIN_DIR, 'TMP-flow-' + version);
         await fs.mkdir(flowBinDirPath);
+
         console.log('  Extracting flow-%s...', version);
-        await new Promise((res, rej) => {
-          const unzipExtractor = unzip.Extract({path: flowBinDirPath});
-          unzipExtractor.on('error', function(err) {
-            rej(err);
-          });
-          unzipExtractor.on('close', function() {
-            res();
-          });
-          fs.createReadStream(zipPath).pipe(unzipExtractor);
-        });
+        const zip = new StreamZip.async({file: zipPath});
+        const extractedCount = await zip.extract(null, flowBinDirPath);
+        console.log('  Extracted %s entries', extractedCount);
+
         if (IS_WINDOWS) {
           await fs.rename(
             path.join(flowBinDirPath, 'flow', 'flow.exe'),

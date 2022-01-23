@@ -16,7 +16,7 @@ import React from 'react';
  */
 
 const FunctionalScreenComponent = (
-  { navigation }: { navigation: NavigationScreenProp<*>, ... },
+  { navigation }: { navigation: NavigationScreenProp<any>, ... },
 ) => {
   return "Test";
 };
@@ -24,7 +24,7 @@ TabNavigator({
   Test1: { screen: FunctionalScreenComponent },
 });
 
-class ClassScreenComponent extends React.Component<*> {
+class ClassScreenComponent extends React.Component<any> {
   render() {
     return "Test";
   }
@@ -123,7 +123,7 @@ StackNavigator({
   },
 });
 
-class ComponentWithNavOptions extends React.Component<*> {
+class ComponentWithNavOptions extends React.Component<any> {
   static navigationOptions = {
     headerTitle: "Home",
   };
@@ -135,9 +135,9 @@ StackNavigator({
   Test1: { screen: ComponentWithNavOptions },
 });
 
-class ComponentWithFunctionalNavOptions extends React.Component<*> {
+class ComponentWithFunctionalNavOptions extends React.Component<any> {
   static navigationOptions = (
-    { navigation }: { navigation: NavigationScreenProp<*>, ... },
+    { navigation }: { navigation: NavigationScreenProp<any>, ... },
   ) => ({
     headerTitle: navigation.state.routeName,
   });

@@ -10,20 +10,20 @@ import * as Sub from "rxjs/Subscription";
 
 const numbers: Observable<number> = Observable.of(1, 2, 3);
 const strings: Observable<string> = numbers.map(x => x.toString());
-// $FlowExpectedError
+// $FlowExpectedError[incompatible-call]
 const bogusStrings: Observable<string> = numbers.map(x => x);
 
 (numbers.audit(() => strings): Observable<number>);
 
 (numbers.auditTime(250): Observable<number>);
 
-// $FlowExpectedError
+// $FlowExpectedError[incompatible-call]
 numbers.subscribe((x: string) => {});
 strings.subscribe((x: string) => {});
 
 (strings.elementAt(1): Observable<string>);
 (strings.elementAt(1, ""): Observable<string>);
-// $FlowExpectedError
+// $FlowExpectedError[incompatible-call]
 strings.elementAt(1, 5);
 
 (Observable.of(numbers, numbers).concatAll(): Observable<number>);
@@ -34,7 +34,7 @@ strings.elementAt(1, 5);
 
 (numbers.skipWhile(x => true): Observable<number>);
 
-// $FlowExpectedError -- need the typecast or the error appears at the declaration site
+// $FlowExpectedError[incompatible-call] -- need the typecast or the error appears at the declaration site
 numbers.merge((strings: Observable<string>));
 
 (Observable.race(
@@ -44,18 +44,18 @@ numbers.merge((strings: Observable<string>));
 
 numbers.let(_numbers => strings);
 numbers.letBind(_numbers => strings);
-// $FlowExpectedError -- need to return an observable
+// $FlowExpectedError[incompatible-call] -- need to return an observable
 numbers.let(_numbers => 3);
-// $FlowExpectedError -- need to return an observable
+// $FlowExpectedError[incompatible-call] -- need to return an observable
 numbers.letBind(_numbers => 3);
 
 (numbers.map(number => Observable.of(number)).switch(): Observable<number>);
-// $FlowExpectedError -- .switch can't assert that it's operating on observables, but it can at least trace the type.
+// $FlowExpectedError[incompatible-cast] -- .switch can't assert that it's operating on observables, but it can at least trace the type.
 (numbers.map(number => Observable.of(number)).switch(): Observable<string>);
 
 let dualNumbers = Observable.of(numbers, numbers);
 (dualNumbers.combineAll(): Observable<[number, number]>);
-// $FlowExpectedError -- should return an Observable<string>
+// $FlowExpectedError[incompatible-cast] -- should return an Observable<string>
 (dualNumbers.combineAll((a, b) => `${a}-${b}`): Observable<number>);
 (dualNumbers.combineAll((a, b) => `${a}-${b}`): Observable<string>);
 
@@ -80,11 +80,11 @@ const combinedBad: Observable<{
   n: number,
   s: string,
   ...
-  // $FlowExpectedError
+  // $FlowExpectedError[incompatible-call]
 }> = Observable.combineLatest(numbers, numbers, (n, s) => ({ n, s }));
 
 (numbers.combineLatest(strings): Observable<[number, string]>);
-// $FlowExpectedError
+// $FlowExpectedError[incompatible-cast]
 (numbers.combineLatest(numbers): Observable<[number, string]>);
 
 (numbers.combineLatest(strings, (a: number, b: string) => ({
@@ -133,10 +133,10 @@ const forked4b: Observable<number> = Observable.forkJoin(
   (...vals: Array<any>) => vals.map(Number).reduce((a, b) => a + b)
 );
 
-// $FlowExpectedError
-const forkedBad: Observable<{ n: number, s: string }> = Observable.forkJoin(
+const forkedBad: Observable<{| n: number, s: string |}> = Observable.forkJoin(
   numbers,
   numbers,
+  // $FlowExpectedError[incompatible-call]
   (n, s) => ({ n, s })
 );
 
@@ -156,10 +156,10 @@ const zipped3: Observable<[number]> = Observable.zip(numbers);
   [number, string, string]
 >);
 
-// $FlowExpectedError
-const zippedBad: Observable<{ n: number, s: string }> = Observable.zip(
+const zippedBad: Observable<{| n: number, s: string |}> = Observable.zip(
   numbers,
   numbers,
+  // $FlowExpectedError[incompatible-call]
   (n, s) => ({ n, s })
 );
 
@@ -170,7 +170,7 @@ const zippedBad: Observable<{ n: number, s: string }> = Observable.zip(
 })): Observable<{ a: number, b: string, ... }>);
 
 (numbers.zip(strings): Observable<[number, string]>);
-// $FlowExpectedError
+// $FlowExpectedError[incompatible-cast]
 (numbers.zip(numbers): Observable<[number, string]>);
 
 (numbers.zip(strings, (a: number, b: string) => ({
@@ -186,8 +186,8 @@ const zippedBad: Observable<{ n: number, s: string }> = Observable.zip(
   c
 })): Observable<{ a: number, b: string, c: string, ... }>);
 
-// $FlowExpectedError
 const bogusEmpty: Observable<string> = Observable.empty().concat(
+  // $FlowExpectedError[incompatible-call]
   numbers.map(x => x)
 );
 
@@ -199,11 +199,11 @@ const never: Observable<number> = Observable.empty()
 const numberOrString: Observable<number | string> = numbers.concat(strings);
 
 (Observable.of(2).startWith(1, 2, 3): Observable<number>);
-// $FlowExpectedError
+// $FlowExpectedError[incompatible-cast]
 (Observable.of(2).startWith(1, "2", 3): Observable<number>);
 
 (numbers.window(Observable.interval(100)): Observable<Observable<number>>);
-// $FlowExpectedError
+// $FlowExpectedError[incompatible-cast]
 (numbers.window(Observable.interval(100)): Observable<Observable<string>>);
 
 (numbers.windowCount(3): Observable<Observable<number>>);
@@ -215,17 +215,17 @@ const numberOrString: Observable<number | string> = numbers.concat(strings);
 ): Observable<Observable<number>>);
 (numbers.windowToggle(
   Observable.interval(100),
-  // $FlowExpectedError
+  // $FlowExpectedError[prop-missing]
   Observable.interval(500)
 ): Observable<Observable<number>>);
 (numbers.windowWhen(() => Observable.interval(100)): Observable<
   Observable<number>
 >);
-// $FlowExpectedError
+// $FlowExpectedError[prop-missing]
 (numbers.windowWhen(Observable.interval(100)): Observable<Observable<number>>);
 
 (numbers.withLatestFrom(strings): Observable<[number, string]>);
-// $FlowExpectedError
+// $FlowExpectedError[incompatible-cast]
 (numbers.withLatestFrom(numbers): Observable<[number, string]>);
 
 (numbers.withLatestFrom(strings, (a: number, b: string) => ({
@@ -248,15 +248,15 @@ const numberOrString: Observable<number | string> = numbers.concat(strings);
 ): Observable<{ a: number, b: string, c: string, ... }>);
 
 numbers.observeOn(Scheduler.async);
-// $FlowExpectedError
+// $FlowExpectedError[incompatible-call]
 numbers.observeOn(null);
 
 Observable.fromEvent(null, "click", true);
-// $FlowExpectedError
+// $FlowExpectedError[incompatible-call]
 Observable.fromEvent(null, "click", { capture: 1 });
 
 Observable.of(1).switchMapTo(Observable.of("test"));
-// $FlowExpectedError
+// $FlowExpectedError[incompatible-call]
 Observable.of(1).switchMapTo(2);
 
 (strings.map(x => x): Observable<string>);
@@ -275,7 +275,7 @@ Observable.using(
   subscription => new Promise(resolve => {})
 );
 Observable.using(
-  // $FlowExpectedError
+  // $FlowExpectedError[prop-missing]
   () => Observable.of("bad"),
   subscription => {}
 );
@@ -297,15 +297,15 @@ const superObserver: Observer<SuperFoo> = new Observer();
 const subObserver: Observer<SubFoo> = new Observer();
 
 (subObservable: Observable<SuperFoo>);
-// $FlowExpectedError -- covariant
+// $FlowExpectedError[prop-missing] -- covariant
 (superObservable: Observable<SubFoo>);
 
-// $FlowExpectedError -- invariant. Subjects have their type parameter both in input and output positions.
+// $FlowExpectedError[prop-missing] -- invariant. Subjects have their type parameter both in input and output positions.
 (subSubject: Subject<SuperFoo>);
-// $FlowExpectedError -- invariant
+// $FlowExpectedError[prop-missing] -- invariant
 (superSubject: Subject<SubFoo>);
 
-// $FlowExpectedError -- contravariant
+// $FlowExpectedError[prop-missing] -- contravariant
 (subObserver: Observer<SuperFoo>);
 (superObserver: Observer<SubFoo>);
 
@@ -319,18 +319,18 @@ function f1(cb: (err: Error, result: number) => void): void {}
 function f2(x: string, cb: (err: Error, result: number) => void): void {}
 (Observable.bindNodeCallback(f1)(): Observable<number>);
 (Observable.bindNodeCallback(f2)("arg"): Observable<number>);
-// $FlowExpectedError
+// $FlowExpectedError[incompatible-cast]
 (Observable.bindNodeCallback(f1)(): Observable<string>);
-// $FlowExpectedError
+// $FlowExpectedError[incompatible-cast]
 (Observable.bindNodeCallback(f2)("arg"): Observable<string>);
 
 function f3(cb: (result: number) => void): void {}
 function f4(x: string, cb: (result: number) => void): void {}
 (Observable.bindCallback(f3)(): Observable<number>);
 (Observable.bindCallback(f4)("arg"): Observable<number>);
-// $FlowExpectedError
+// $FlowExpectedError[incompatible-cast]
 (Observable.bindCallback(f3)(): Observable<string>);
-// $FlowExpectedError
+// $FlowExpectedError[incompatible-cast]
 (Observable.bindCallback(f4)("arg"): Observable<string>);
 
 numbers.takeWhile(n => n < 3);
@@ -356,10 +356,10 @@ Observable.of(1)
   .subscribe(() => {});
 
 (numbers.last(): Observable<number>);
-// $FlowExpectedError
+// $FlowExpectedError[incompatible-cast]
 (numbers.last(): Observable<string>);
 
-// $FlowExpectedError
+// $FlowExpectedError[incompatible-cast]
 (Observable.of(0).catch(() => Observable.of('foo')): Observable<string>);
 
 (Observable.of(1, null).filter(Boolean): Observable<number>)

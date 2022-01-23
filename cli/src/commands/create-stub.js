@@ -65,6 +65,7 @@ type Args = {
   libdefDir?: mixed, // string
   rootDir?: mixed, // string
   packages: mixed, // Array<string>
+  ...
 };
 
 function failWithMessage(message: string) {

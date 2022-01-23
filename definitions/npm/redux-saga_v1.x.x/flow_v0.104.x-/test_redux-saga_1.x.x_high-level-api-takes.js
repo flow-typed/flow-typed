@@ -15,14 +15,14 @@ for (const takeEffect of topLevelTakesApi) {
       });
 
       it("returned object must be read only", () => {
-        // $FlowExpectedError: read-only  property
+        // $FlowExpectedError[cannot-write]: read-only  property
         c.type = "anyType";
-        // $FlowExpectedError: read-only  property
+        // $FlowExpectedError[cannot-write]: read-only  property
         c.payload = {};
       });
 
       it("returned object must be exact", () => {
-        // $FlowExpectedError: exact type
+        // $FlowExpectedError[prop-missing]: exact type
         c.abc = 69;
       });
     });
@@ -122,17 +122,18 @@ for (const takeEffect of topLevelTakesApi) {
         });
 
         it("must raises an error when passed number but need string", () => {
-          // $FlowExpectedError: First parameter is a string, not a number
+          // $FlowExpectedError[incompatible-cast]
+          // $FlowExpectedError[invalid-tuple-arity]: First parameter is a string, not a number
           (e1.payload.args: [number]);
         });
 
         it("must raises an error when passed too few arguments", () => {
-          // $FlowExpectedError: Too few arguments
+          // $FlowExpectedError[cannot-resolve-name]: Too few arguments
           fork("ACTION_NAME", s6, "1", 2, true, "4");
         });
 
         it("must raises an error when passed wrong argument types", () => {
-          // $FlowExpectedError: Wrong argument types
+          // $FlowExpectedError[cannot-resolve-name]: Wrong argument types
           fork("ACTION_NAME", s1, 1);
         });
       });
@@ -207,17 +208,19 @@ for (const takeEffect of topLevelTakesApi) {
         });
 
         it("must raises an error when passed number but need string", () => {
-          // $FlowExpectedError: First parameter is a string, not a number
+          // $FlowExpectedError[incompatible-cast]
+          // $FlowExpectedError[invalid-tuple-arity]
+          // $FlowExpectedError[prop-missing]: First parameter is a string, not a number
           (e1.payload.args: [number]);
         });
 
         it("must raises an error when passed too few arguments", () => {
-          // $FlowExpectedError: Too few arguments
+          // $FlowExpectedError[cannot-resolve-name]: Too few arguments
           fork(myChannel, s6, "1", 2, true, "4");
         });
 
         it("must raises an error when passed wrong argument types", () => {
-          // $FlowExpectedError: Wrong argument types
+          // $FlowExpectedError[cannot-resolve-name]: Wrong argument types
           fork(myChannel, s1, 1);
         });
       });

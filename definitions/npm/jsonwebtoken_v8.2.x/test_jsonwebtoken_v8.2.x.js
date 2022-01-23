@@ -6,12 +6,12 @@ const payload = {
   foo: 'bar'
 };
 
-// $FlowExpectedError
+// $FlowExpectedError[incompatible-call]
 jwt.sign(payload);
 
 jwt.sign(payload, 'secret');
 
-// $FlowExpectedError
+// $FlowExpectedError[incompatible-call]
 jwt.sign(payload, 'secret', (err: number) => undefined);
 
 jwt.sign(payload, 'secret', (err: Error, token: string) => undefined);
@@ -26,24 +26,24 @@ jwt.sign(payload, Buffer.from('secret'), {
   algorithm: 'RS256'
 });
 
-// $FlowExpectedError
+// $FlowExpectedError[incompatible-call]
 jwt.sign(payload, Buffer.from('secret'), {
   algorithm: 'RS256',
   mutatePayload: 1,
 });
 
-// $FlowExpectedError
+// $FlowExpectedError[incompatible-call]
 jwt.sign(payload, Buffer.from('secret'), {
   algorithm: 'PEMDAS'
 });
 
-// $FlowExpectedError
+// $FlowExpectedError[incompatible-call]
 jwt.sign(payload, { key: 'foo', passphrase: 'bar' });
 
-// $FlowExpectedError
+// $FlowExpectedError[incompatible-call]
 jwt.sign(payload, { key: 'foo', passphrase: 'bar' }, { subject: 'missing algo' });
 
-// $FlowExpectedError
+// $FlowExpectedError[incompatible-call]
 jwt.sign(payload, { key: 'foo', passphrase: 'bar' }, (foo) => undefined);
 
 jwt.sign(payload, { key: 'foo', passphrase: 'bar' }, { algorithm: 'ES512' }, (err: Error) => undefined);
@@ -52,10 +52,10 @@ jwt.verify('token', 'secret');
 
 jwt.verify('token', 'secret', err => undefined);
 
-// $FlowExpectedError
+// $FlowExpectedError[incompatible-call]
 jwt.verify('token', { key: 'secret', passphrase: 'foo' });
 
-// $FlowExpectedError
+// $FlowExpectedError[incompatible-call]
 jwt.verify('token', { key: 'secret', passphrase: 'foo' }, { algorithms: ['not-real'] });
 
 jwt.verify('token', { key: 'secret', passphrase: 'foo' }, { algorithms: ['ES512'] });
@@ -66,5 +66,5 @@ jwt.decode('foo', {
   json: true
 });
 
-// $FlowExpectedError
+// $FlowExpectedError[incompatible-call]
 jwt.decode(1234);

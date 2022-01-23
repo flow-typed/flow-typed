@@ -5,7 +5,7 @@
  * https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/puppeteer
  */
 
-declare module 'puppeteer' {
+ declare module 'puppeteer' {
   import type { ChildProcess } from 'child_process';
 
   declare class OverridableEventEmitter extends events$EventEmitter {
@@ -1144,7 +1144,7 @@ declare module 'puppeteer' {
     target(): Target;
 
     /** Returns the page's title. */
-    title(): Promise<string>;
+    +title: () => Promise<string>;
 
     /** Returns the virtual touchscreen object. */
     touchscreen: Touchscreen;
@@ -1163,7 +1163,7 @@ declare module 'puppeteer' {
     /**
      * The page's URL. This is a shortcut for `page.mainFrame().url()`
      */
-    url(): string;
+    +url: () => string;
 
     /** Gets the page viewport. */
     viewport(): Viewport;

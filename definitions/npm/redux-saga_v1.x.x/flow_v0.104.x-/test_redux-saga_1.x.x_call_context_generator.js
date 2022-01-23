@@ -76,17 +76,17 @@ describe("call() effect with normal function and without context", () => {
       });
 
       it("must raises an error when passed number but need string", () => {
-        // $FlowExpectedError: First parameter is a string, not a number
+        // $FlowExpectedError[incompatible-cast]: First parameter is a string, not a number
         (c1.payload.args: [number]);
       });
 
       it("must raises an error when passed too few arguments", () => {
-        // $FlowExpectedError: Too few arguments
+        // $FlowExpectedError[incompatible-call]: Too few arguments
         call([context, s6], "1", 2, "3", 4);
       });
 
       it("must raises an error when passed wrong argument types", () => {
-        // $FlowExpectedError: Wrong argument types
+        // $FlowExpectedError[incompatible-call]: Wrong argument types
         call([context, s1], 1);
       });
     });
@@ -108,20 +108,20 @@ describe("call() effect with normal function and without context", () => {
       });
 
       it("must raises an error when Function return not string", () => {
-        // $FlowExpectedError: fn returns a Saga<number> not Saga<string>
+        // $FlowExpectedError[incompatible-cast]: fn returns a Saga<number> not Saga<string>
         (c1.payload.fn: (a: string) => Saga<string>);
       });
 
       it(`must raises an error when "a" argument isn't string`, () => {
-        // $FlowExpectedError: 'a' is actually of type string
+        // $FlowExpectedError[incompatible-cast]: 'a' is actually of type string
         (c1.payload.fn: (a: boolean) => Saga<number>);
 
-        // $FlowExpectedError: 'a' is actually of type string
+        // $FlowExpectedError[incompatible-cast]: 'a' is actually of type string
         (c4.payload.fn: (a: number, b: number) => Saga<number>);
       });
 
       it("must raises an error when less parameter are noticed", () => {
-        // $FlowExpectedError: Less parameter are noticed
+        // $FlowExpectedError[incompatible-cast]: Less parameter are noticed
         (c6.payload.fn: typeof s1);
       });
     });
@@ -139,7 +139,7 @@ describe("call() effect with normal function and without context", () => {
       });
 
       it("must raises an error when lead context to null", () => {
-        // $FlowExpectedError
+        // $FlowExpectedError[incompatible-cast]
         (c1.payload.context: null);
       });
     });
@@ -242,17 +242,17 @@ describe("call() effect with normal function and without context", () => {
       });
 
       it("must raises an error when passed number but need string", () => {
-        // $FlowExpectedError: First parameter is a string, not a number
+        // $FlowExpectedError[incompatible-cast]: First parameter is a string, not a number
         (c1.payload.args: [number]);
       });
 
       it("must raises an error when passed too few arguments", () => {
-        // $FlowExpectedError: Too few arguments
+        // $FlowExpectedError[incompatible-call]: Too few arguments
         call([context6, "someFn6"], "1", 2, "3", 4);
       });
 
       it("must raises an error when passed wrong argument types", () => {
-        // $FlowExpectedError: Wrong argument types
+        // $FlowExpectedError[incompatible-call]: Wrong argument types
         call([context1, "someFn1"], 1);
       });
     });
@@ -274,20 +274,20 @@ describe("call() effect with normal function and without context", () => {
       });
 
       it("must raises an error when Function return not string", () => {
-        // $FlowExpectedError: fn returns a Saga<number> not Saga<string>
+        // $FlowExpectedError[incompatible-cast]: fn returns a Saga<number> not Saga<string>
         (c1.payload.fn: (a: string) => Saga<string>);
       });
 
       it(`must raises an error when "a" argument isn't string`, () => {
-        // $FlowExpectedError: 'a' is actually of type string
+        // $FlowExpectedError[incompatible-cast]: 'a' is actually of type string
         (c1.payload.fn: (a: boolean) => Saga<number>);
 
-        // $FlowExpectedError: 'a' is actually of type string
+        // $FlowExpectedError[incompatible-cast]: 'a' is actually of type string
         (c4.payload.fn: (a: number, b: number) => Saga<number>);
       });
 
       it("must raises an error when less parameter are noticed", () => {
-        // $FlowExpectedError: Less parameter are noticed
+        // $FlowExpectedError[incompatible-cast]: Less parameter are noticed
         (c6.payload.fn: $PropertyType<typeof context1, "someFn1">);
       });
     });
@@ -305,7 +305,7 @@ describe("call() effect with normal function and without context", () => {
       });
 
       it("must raises an error when lead context to null", () => {
-        // $FlowExpectedError
+        // $FlowExpectedError[incompatible-cast]
         (c1.payload.context: null);
       });
     });
@@ -383,17 +383,17 @@ describe("call() effect with normal function and without context", () => {
       });
 
       it("must raises an error when passed number but need string", () => {
-        // $FlowExpectedError: First parameter is a string, not a number
+        // $FlowExpectedError[incompatible-cast]: First parameter is a string, not a number
         (c1.payload.args: [number]);
       });
 
       it("must raises an error when passed too few arguments", () => {
-        // $FlowExpectedError: Too few arguments
+        // $FlowExpectedError[incompatible-call]: Too few arguments
         call({ context, fn: s6 }, "1", 2, "3", 4);
       });
 
       it("must raises an error when passed wrong argument types", () => {
-        // $FlowExpectedError: Wrong argument types
+        // $FlowExpectedError[incompatible-call]: Wrong argument types
         call({ context, fn: s1 }, 1);
       });
     });
@@ -415,20 +415,20 @@ describe("call() effect with normal function and without context", () => {
       });
 
       it("must raises an error when Function return not string", () => {
-        // $FlowExpectedError: fn returns a Saga<number> not Saga<string>
+        // $FlowExpectedError[incompatible-cast]: fn returns a Saga<number> not Saga<string>
         (c1.payload.fn: (a: string) => Saga<string>);
       });
 
       it(`must raises an error when "a" argument isn't string`, () => {
-        // $FlowExpectedError: 'a' is actually of type string
+        // $FlowExpectedError[incompatible-cast]: 'a' is actually of type string
         (c1.payload.fn: (a: boolean) => Saga<number>);
 
-        // $FlowExpectedError: 'a' is actually of type string
+        // $FlowExpectedError[incompatible-cast]: 'a' is actually of type string
         (c4.payload.fn: (a: number, b: number) => Saga<number>);
       });
 
       it("must raises an error when less parameter are noticed", () => {
-        // $FlowExpectedError: Less parameter are noticed
+        // $FlowExpectedError[incompatible-cast]: Less parameter are noticed
         (c6.payload.fn: typeof s1);
       });
     });
@@ -446,7 +446,7 @@ describe("call() effect with normal function and without context", () => {
       });
 
       it("must raises an error when lead context to null", () => {
-        // $FlowExpectedError
+        // $FlowExpectedError[incompatible-cast]
         (c1.payload.context: null);
       });
     });

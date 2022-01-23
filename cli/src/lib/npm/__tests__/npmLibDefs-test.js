@@ -10,7 +10,9 @@ import {
   findNpmLibDef,
   getScopedPackageName,
   parseSignedCodeVersion,
+  pkgVersionMatch,
 } from '../npmLibDefs';
+import * as cacheRepoUtils from '../../cacheRepoUtils';
 
 import path from 'path';
 import {ValidationError} from '../../ValidationError';
@@ -227,6 +229,53 @@ describe('npmLibDefs', () => {
       });
     });
 
+    describe('extLibDefs', () => {
+      it('does not retrieve a new cache of lib defs if one is passed into it', async () => {
+        const ensureCacheRepo = jest.fn(() => Promise.resolve());
+        jest
+          .spyOn(cacheRepoUtils, 'ensureCacheRepo')
+          .mockImplementation(ensureCacheRepo);
+
+        const pkgName = 'flow-bin';
+        const pkgVersion = 'github:flowtype/flow-bin';
+        const flowVersion = {kind: 'all'};
+        const skipCache = false;
+
+        await findNpmLibDef(
+          pkgName,
+          pkgVersion,
+          flowVersion,
+          undefined,
+          skipCache,
+          [],
+        );
+
+        expect(ensureCacheRepo).not.toHaveBeenCalled();
+      });
+
+      it('retrieve a new cache of lib defs if an external one is not passed in', async () => {
+        const ensureCacheRepo = jest.fn(() => Promise.resolve());
+        jest
+          .spyOn(cacheRepoUtils, 'ensureCacheRepo')
+          .mockImplementation(ensureCacheRepo);
+
+        const pkgName = 'flow-bin';
+        const pkgVersion = 'github:flowtype/flow-bin';
+        const flowVersion = {kind: 'all'};
+        const skipCache = false;
+
+        await findNpmLibDef(
+          pkgName,
+          pkgVersion,
+          flowVersion,
+          undefined,
+          skipCache,
+        );
+
+        expect(ensureCacheRepo).toHaveBeenCalled();
+      });
+    });
+
     describe('when non-semver package provided', () => {
       it("doesn't throw error", async () => {
         const pkgName = 'flow-bin';
@@ -244,6 +293,94 @@ describe('npmLibDefs', () => {
         expect(error).toBeUndefined();
         expect(filtered).toBeNull();
       });
+    });
+
+    describe('skipCache', () => {
+      it("doesn't update the cache when it's provided", async () => {
+        const ensureCacheRepo = jest.fn(() => Promise.resolve());
+        jest
+          .spyOn(cacheRepoUtils, 'ensureCacheRepo')
+          .mockImplementation(ensureCacheRepo);
+
+        const pkgName = 'jest-test-npm-package';
+        const pkgVersion = 'v1.0.0';
+        const flowVersion = {kind: 'all'};
+        const skipCache = true;
+
+        await findNpmLibDef(
+          pkgName,
+          pkgVersion,
+          flowVersion,
+          undefined,
+          skipCache,
+        );
+
+        expect(ensureCacheRepo).not.toHaveBeenCalled();
+      });
+
+      it("does update the cache when it's not provided", async () => {
+        const ensureCacheRepo = jest.fn(() => Promise.resolve());
+        jest
+          .spyOn(cacheRepoUtils, 'ensureCacheRepo')
+          .mockImplementation(ensureCacheRepo);
+
+        const pkgName = 'jest-test-npm-package';
+        const pkgVersion = 'v1.0.0';
+        const flowVersion = {kind: 'all'};
+
+        await findNpmLibDef(pkgName, pkgVersion, flowVersion);
+
+        expect(ensureCacheRepo).toHaveBeenCalled();
+      });
+    });
+  });
+
+  describe('pkgVersionMatch', () => {
+    it('matches minor libdef', () => {
+      expect(pkgVersionMatch('^8.5.1', '8.5.x')).toBe(true);
+      expect(pkgVersionMatch('~8.5.1', '8.5.x')).toBe(true);
+    });
+
+    it('matches major libdef', () => {
+      expect(pkgVersionMatch('^8.5.1', '8.x.x')).toBe(true);
+      expect(pkgVersionMatch('~8.5.1', '8.x.x')).toBe(true);
+    });
+
+    it('will not match a lower libdef', () => {
+      expect(pkgVersionMatch('^8.5.1', '8.4.x')).toBe(false);
+      expect(pkgVersionMatch('~8.5.1', '8.4.x')).toBe(false);
+    });
+
+    it('will not match a lower libdef by major value', () => {
+      expect(pkgVersionMatch('^8.5.1', '7.x.x')).toBe(false);
+      expect(pkgVersionMatch('~8.5.1', '7.x.x')).toBe(false);
+    });
+
+    it('will not match a greater libdef by minor value', () => {
+      expect(pkgVersionMatch('^8.5.1', '8.6.x')).toBe(false);
+      expect(pkgVersionMatch('~8.5.1', '8.6.x')).toBe(false);
+    });
+
+    it('will not match a greater libdef by major value', () => {
+      expect(pkgVersionMatch('^8.5.1', '9.x.x')).toBe(false);
+      expect(pkgVersionMatch('~8.5.1', '9.x.x')).toBe(false);
+    });
+
+    it('matches lowest range when version has >=', () => {
+      expect(pkgVersionMatch('>=8.5.1', '8.x.x')).toBe(true);
+      expect(pkgVersionMatch('>=8.5.1', '8.5.x')).toBe(true);
+    });
+
+    it('will not match any greater libdef when version has >=', () => {
+      expect(pkgVersionMatch('>=8.5.1', '9.x.x')).toBe(false);
+    });
+
+    it('matches explicit libdef with major range libdef', () => {
+      expect(pkgVersionMatch('8.5.1', '8.x.x')).toBe(true);
+    });
+
+    it('matches explicit libdef with minor range libdef', () => {
+      expect(pkgVersionMatch('8.5.1', '8.5.x')).toBe(true);
     });
   });
 

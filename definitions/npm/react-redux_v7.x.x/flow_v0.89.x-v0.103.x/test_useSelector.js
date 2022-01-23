@@ -2,7 +2,7 @@
 
 import { describe, it } from 'flow-typed-test';
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, shallowEqual } from 'react-redux';
 
 type State = {|
   a: number,
@@ -36,6 +36,13 @@ describe('useSelector', () => {
       );
       // `count` is type `number` and allows addition
       return <div>{count + 5}</div>;
+    }
+  });
+
+  it('can use shallowEqual as the `equalityFn`', () => {
+    function Com4() {
+      const count = useSelector<State, number>(state => state.a, shallowEqual);
+      return <div>{count}</div>;
     }
   });
 });

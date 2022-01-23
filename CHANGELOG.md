@@ -5,6 +5,92 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [3.6.1] 2022-01-09
+
+### Changed
+- Provide better logs related to dir structure when running tests (#4213)
+
+### Fixed
+- Pin colors@1.4.0 to fix security vuln (#4229)
+- Fix installing minor libdef version (#4224)
+- Allow .DS_Store files in definitions nested directories (#4217)
+- [docs] Fix some link issues in contributing docs (#4212)
+- [docs] Fix the documented pathing for an ignoring eslint (#4218)
+
+## [3.6.0] 2021-12-25
+
+### Added
+- Add a published readme (#4182)
+
+### Fixed
+- Dramatically improve install time (#4193)
+- Replace unzipper with node-stream-zip (#4180)
+- Install will restart flow bin (#4185)
+- Upgrade octokit/rest version (#4197)
+- [docs] Move wiki to /docs and serve with docsify (#4179)
+
+### Removed
+- Fix definitions not running in ci env (#4187)
+
+## [3.5.0] 2021-11-27
+
+### Added
+- Added support for Yarn monorepos (#4140)
+- New --skipCache option for `install` command (#4170)
+- Add @babel/eslint-parser@7.16.3
+- Add @babel/plugin-syntax-flow@7.16.0
+- Add @babel/plugin-transform-react-jsx@7.16.0
+
+### Changed
+- Update flow-bin version to latest version (#4153)
+- `install` will also install lib defs of dependencies that ship with library (#4143)
+- Only test against changed versions with `only-changed` option (#4168)
+- Bump `table` from 5.4.6 to 6.7.3 (#4175)
+- Bump `ansi-regex` from 5.0.0 to 5.0.1 (#4177)
+- Update multiple devDependencies (#4174)
+  - Bump @babel/cli from 7.8.4 to 7.16.0
+  - Bump @babel/core from 7.8.4 to 7.16.0
+  - Bump @babel/preset-env from 7.8.4 to 7.16.4
+  - Bump @babel/preset-flow from 7.8.3 to 7.16.0
+  - Bump eslint from 6.8.0 to 8.3.0
+  - Bump eslint-config-prettier from 6.10.1 to 8.3.0
+  - Bump eslint-plugin-fb-flow from 0.0.1 to 0.0.4
+  - Bump eslint-plugin-flowtype from 4.6.0 to 8.0.3
+  - Bump eslint-plugin-prettier from 3.1.2 to 4.0.0
+  - Bump flow-bin from 0.164.0 to 0.165.1
+  - Bump jest from 25.1.027.3.1
+
+### Fixed
+- Fix installing lib def package when dependency version uses >= (#4157)
+- Support for slash-style comments in dependencies (#4169)
+- Remove babel-eslint@10.0.3
+- Remove babel-jest@25.1.0
+
+
+## [3.4.0] 2021-10-20
+
+### Added
+- `quick_run_def_tests` now supports arguments (#4064)
+- Add `eslint-plugin-fb-flow` ESLint plugin (#4114)
+- New `create-def` command and script for easier libdef creation (#4125)
+- Add support for .ignore file (#4133)
+
+### Changed
+- Add package health badge to the README (#4049)
+- Update CI node versions in Github Actions to 12 & 14 (#4082)
+
+### Fixed
+- Fix flow-typed sometimes writing an empty file (#4011)
+- Bump y18n from 4.0.0 to 4.0.1 (#4054)
+- Bump lodash from 4.17.19 to 4.17.21 (#4077)
+- Bump hosted-git-info from 2.7.1 to 2.8.9 (#4079)
+- Bump browserslist from 4.8.7 to 4.16.6 (#4081)
+- Bump ws from 7.2.1 to 7.4.6 (#4084)
+- Bump normalize-url from 4.5.0 to 4.5.1 (#4090)
+- Bump glob-parent from 5.0.0 to 5.1.2 (#4091)
+- Bump path-parse from 1.0.6 to 1.0.7 (#4118)
+- Bump tmpl from 1.0.4 to 1.0.5 (#4139)
+
 ## [3.3.1] 2021-02-17
 
 ### Fixed

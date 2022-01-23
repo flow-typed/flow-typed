@@ -18,14 +18,14 @@ mkdirp.sync('/tmp/foo/bar/baz', { mode: 493 });
 mkdirp.sync('/tmp/foo/bar/baz', { fs: fs });
 mkdirp.sync('/tmp/foo/bar/baz', { mode: 493, fs: fs });
 
-// $FlowExpectedError
+// $FlowExpectedError[incompatible-call]
 mkdirp();
 
-// $FlowExpectedError
+// $FlowExpectedError[incompatible-call]
 mkdirp(1);
 
-// $FlowExpectedError
+// $FlowExpectedError[incompatible-call]
 mkdirp.sync();
 
-// $FlowExpectedError
+// $FlowExpectedError[incompatible-call]
 mkdirp.sync(1);

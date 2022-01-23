@@ -15,7 +15,8 @@ import {
 
 describe("tests", () => {
   it("errors", () => {
-    // $FlowExpectedError
+    // $FlowExpectedError[incompatible-call]
+    // $FlowExpectedError[incompatible-cast]
     (camelize(42): number);
   });
 
@@ -31,5 +32,8 @@ describe("tests", () => {
     (pascalizeKeys({ foo: 1 }): { [string]: mixed, ... });
     (decamelizeKeys({ foo: 1 }): { [string]: mixed, ... });
     (depascalizeKeys({ foo: 1 }): { [string]: mixed, ... });
+
+    (camelizeKeys([{ foo: 1 }]): Array<{ [string]: mixed, ... }>);
+    (camelizeKeys([{ foo: "bar" }]): Array<{ [string]: mixed, ... }>);
   });
 });

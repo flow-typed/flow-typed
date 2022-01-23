@@ -1,0 +1,5 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Documentation
+    url: https://flow-typed.github.io/flow-typed/#/
+    about: Our how-to docs and best practices

@@ -1,0 +1,49 @@
+name: Definition Request
+description: Request someone more experienced to create a new flow-typed definition module
+labels: [libdef, request]
+body:
+  - type: input
+    id: dependency
+    attributes:
+      label: Dependency link
+      description: Provide a link to the dependency you'd like typed
+      placeholder: https://www.npmjs.com/package/flow-bin
+    validations:
+      required: true
+
+  - type: input
+    id: version
+    attributes:
+      label: Dependency Version
+      description: What version range do you need typed
+      placeholder: 3.x.x
+    validations:
+      required: true
+
+  - type: input
+    id: flow_version
+    attributes:
+      label: Flow Version
+      description: What minimum flow version do you need this working on
+      placeholder: 0.83.0
+    validations:
+      required: false
+
+  - type: textarea
+    id: extra_info
+    attributes:
+      label: Extra information
+      description: Anything extra you can provide us to help write this definition more easily? Link from TS equivalent, sample usage, docs, etc
+      placeholder: https:// ...
+    validations:
+      required: false
+
+  - type: dropdown
+    id: want_to_submit_pr
+    attributes:
+      label: Do you want to submit a pull request on your own?
+      options:
+        - 'Yes'
+        - 'No (hope someone else can)'
+    validations:
+      required: true

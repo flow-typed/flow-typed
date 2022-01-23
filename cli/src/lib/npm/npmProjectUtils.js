@@ -9,13 +9,18 @@ import {fs, path} from '../node.js';
 import {stringToVersion} from '../semver.js';
 import type {Version} from '../semver.js';
 
-import semver from 'semver';
+import semver, {intersects} from 'semver';
+import colors from 'colors/safe';
+
+import glob from 'glob';
 
 type PkgJson = {|
   pathStr: string,
   content: {
     name: string,
     version: string,
+    private?: boolean,
+    workspaces?: string[] | {packages: string[], ...},
 
     installConfig?: {pnp?: boolean},
 
@@ -74,10 +79,72 @@ export async function findPackageJsonPath(pathStr: string): Promise<string> {
   return path.join(pkgJsonPathStr, 'package.json');
 }
 
+function getWorkspacePatterns(pkgJson: PkgJson): string[] {
+  if (Array.isArray(pkgJson.content.workspaces)) {
+    return pkgJson.content.workspaces;
+  }
+
+  if (
+    pkgJson.content.workspaces &&
+    Array.isArray(pkgJson.content.workspaces.packages)
+  ) {
+    return pkgJson.content.workspaces.packages;
+  }
+
+  return [];
+}
+
+export async function findWorkspacesPackagePaths(
+  pkgJson: PkgJson,
+): Promise<string[]> {
+  const tasks = await Promise.all(
+    getWorkspacePatterns(pkgJson).map(pattern => {
+      return new Promise((resolve, reject) => {
+        glob(
+          `${path.dirname(pkgJson.pathStr)}/${pattern}/package.json`,
+          {absolute: true},
+          (err, files) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(files);
+            }
+          },
+        );
+      });
+    }),
+  );
+
+  return tasks.flat();
+}
+
+export async function findWorkspacesPackages(
+  pkgJson: PkgJson,
+): Promise<PkgJson[]> {
+  const paths = await findWorkspacesPackagePaths(pkgJson);
+
+  return Promise.all(
+    paths.map(async pathStr => {
+      const pkgJsonContent = await fs.readJson(pathStr);
+      return {
+        pathStr,
+        content: pkgJsonContent,
+      };
+    }),
+  );
+}
+
 // TODO: Write tests for this
 export function getPackageJsonDependencies(
   pkgJson: PkgJson,
+  /**
+   * dependency groups to ignore
+   */
   ignoreDeps: Array<string>,
+  /**
+   * dependencies or scopes of dependencies to be ignored
+   */
+  ignoreDefs: Array<string>,
 ): {[depName: string]: string} {
   const depFields = PKG_JSON_DEP_FIELDS.filter(field => {
     return ignoreDeps.indexOf(field.slice(0, -12)) === -1;
@@ -90,11 +157,50 @@ export function getPackageJsonDependencies(
         if (deps[pkgName]) {
           console.warn(`Found ${pkgName} listed twice in package.json!`);
         }
+        const pkgIgnored = ignoreDefs.some(cur => {
+          const ignoreDef = cur.trim();
+          if (ignoreDef === '') return false;
+          // if we are looking to ignore a scope dir
+          if (
+            ignoreDef.charAt(0) === '@' &&
+            (ignoreDef.indexOf('/') === -1 ||
+              ignoreDef.indexOf('/') === ignoreDef.length - 1)
+          ) {
+            return pkgName.startsWith(ignoreDef);
+          }
+          return pkgName === ignoreDef;
+        });
+        if (pkgIgnored) return;
+
         deps[pkgName] = contentSection[pkgName];
       });
     }
     return deps;
   }, {});
+}
+
+export function mergePackageJsonDependencies(
+  a: {[depName: string]: string},
+  b: {[depName: string]: string},
+): {[depName: string]: string} {
+  const result = {...a};
+  for (const dep of Object.keys(b)) {
+    const version = b[dep];
+    if (a[dep] != null && !intersects(result[dep], version)) {
+      console.log(
+        colors.yellow(
+          "\t  Conflicting versions for '%s' between '%s' and '%s'",
+        ),
+        dep,
+        a[dep],
+        version,
+      );
+    } else {
+      result[dep] = version;
+    }
+  }
+
+  return result;
 }
 
 export async function getPackageJsonData(pathStr: string): Promise<PkgJson> {
@@ -146,7 +252,7 @@ export async function loadPnpResolver(
   }
   const pnpJsFile = path.resolve(pkgJson.pathStr, '..', '.pnp.js');
   if (await fs.exists(pnpJsFile)) {
-    // $FlowFixMe
+    // $FlowFixMe[unsupported-syntax]
     return require(pnpJsFile);
   }
   throw new Error(
