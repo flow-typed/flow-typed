@@ -397,6 +397,7 @@ describe('install (command)', () => {
           overwrite: false,
           verbose: false,
           skip: false,
+          skipFlowRestart: true,
           ignoreDeps: [],
           explicitLibDefs: [],
         });
