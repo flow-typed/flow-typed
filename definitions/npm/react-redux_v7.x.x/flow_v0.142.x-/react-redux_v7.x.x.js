@@ -69,7 +69,7 @@ declare module "react-redux" {
     getWrappedInstance(): React$ElementRef<WC>;
   }
 
-  declare export type ConnectedComponent = typeof ConnectedComponentClass;
+  declare export type ConnectedComponent<OP, +WC> = ConnectedComponentClass<OP, WC>;
 
   // The connection of the Wrapped Component and the Connected Component
   // happens here in `MP: P`. It means that type wise MP belongs to P,
