@@ -2,7 +2,7 @@
  * A local copy from:
  * https://github.com/A11yance/aria-query/blob/2e6a3011a0d8987655f3a14853934fe3df38a8d8/flow/aria.js
  */
-declare module '@@aria-query' {
+ declare module '@@aria-query' {
   declare export type ARIAAbstractRole =
     | 'command'
     | 'composite'
@@ -257,86 +257,102 @@ declare module '@testing-library/react' {
     selector?: string,
   |};
 
+  // These two types must be updated kept in sync
+  declare export type UnionHTMLElement =
+    | HTMLElement
+    | HTMLInputElement
+    | HTMLAnchorElement
+    | HTMLButtonElement
+    | HTMLSelectElement;
+
+  declare export type IntersectionHTMLElement =
+    & HTMLElement
+    & HTMLInputElement
+    & HTMLAnchorElement
+    & HTMLButtonElement
+    & HTMLSelectElement;
+  // End mixed html types
+
   declare type QueryByBoundAttribute = (
     text: Matcher,
     options?: MatcherOptions
-  ) => ?HTMLElement;
+  ) => ?IntersectionHTMLElement;
 
   declare type AllByBoundAttribute = (
     text: Matcher,
     options?: MatcherOptions
-  ) => Array<HTMLElement>;
+  ) => Array<IntersectionHTMLElement>;
 
   declare type FindAllByBoundAttribute = (
     text: Matcher,
     options?: MatcherOptions,
     waitForElementOptions?: WaitForOptions
-  ) => Promise<HTMLElement[]>;
+  ) => Promise<IntersectionHTMLElement[]>;
 
   declare type GetByBoundAttribute = (
     text: Matcher,
     options?: MatcherOptions
-  ) => HTMLElement;
+  ) => IntersectionHTMLElement;
 
   declare type FindByBoundAttribute = (
     text: Matcher,
     options?: MatcherOptions,
     waitForElementOptions?: WaitForOptions
-  ) => Promise<HTMLElement>;
+  ) => Promise<IntersectionHTMLElement>;
 
   declare type QueryByText = (
     text: Matcher,
     options?: SelectorMatcherOptions
-  ) => ?HTMLElement;
+  ) => ?IntersectionHTMLElement;
 
   declare type AllByText = (
     text: Matcher,
     options?: SelectorMatcherOptions
-  ) => Array<HTMLElement>;
+  ) => Array<IntersectionHTMLElement>;
 
   declare type FindAllByText = (
     text: Matcher,
     options?: SelectorMatcherOptions,
     waitForElementOptions?: WaitForOptions
-  ) => Promise<HTMLElement[]>;
+  ) => Promise<IntersectionHTMLElement[]>;
 
   declare type GetByText = (
     text: Matcher,
     options?: SelectorMatcherOptions
-  ) => HTMLElement;
+  ) => IntersectionHTMLElement;
 
   declare type FindByText = (
     text: Matcher,
     options?: SelectorMatcherOptions,
     waitForElementOptions?: WaitForOptions
-  ) => Promise<HTMLElement>;
+  ) => Promise<IntersectionHTMLElement>;
 
   declare type AllByRole = (
     role: ByRoleMatcher,
     options?: ByRoleOptions
-  ) => HTMLElement[];
+  ) => IntersectionHTMLElement[];
 
   declare type GetByRole = (
     role: ByRoleMatcher,
     options?: ByRoleOptions
-  ) => HTMLElement;
+  ) => IntersectionHTMLElement;
 
   declare type QueryByRole = (
     role: ByRoleMatcher,
     options?: ByRoleOptions
-  ) => HTMLElement | null;
+  ) => IntersectionHTMLElement | null;
 
   declare type FindByRole = (
     role: ByRoleMatcher,
     options?: ByRoleOptions,
     waitForElementOptions?: WaitForOptions
-  ) => Promise<HTMLElement>;
+  ) => Promise<IntersectionHTMLElement>;
 
   declare type FindAllByRole = (
     role: ByRoleMatcher,
     options?: ByRoleOptions,
     waitForElementOptions?: WaitForOptions
-  ) => Promise<HTMLElement[]>;
+  ) => Promise<IntersectionHTMLElement[]>;
 
   declare type GetsAndQueries = {|
     getByLabelText: GetByText,
@@ -397,7 +413,7 @@ declare module '@testing-library/react' {
   |};
 
   declare type FireEvent<TInit> = (
-    element: HTMLElement,
+    element: UnionHTMLElement,
     eventProperties?: TInit
   ) => boolean;
 
@@ -474,7 +490,7 @@ declare module '@testing-library/react' {
   declare export function waitFor<T>(
     callback: () => T | Promise<T>,
     options?: {|
-      container?: HTMLElement,
+      container?: UnionHTMLElement,
       timeout?: number,
       interval?: number,
       mutationObserverOptions?: MutationObserverInit,
@@ -484,7 +500,7 @@ declare module '@testing-library/react' {
   declare export function waitForElementToBeRemoved<T>(
     callback: (() => T) | T,
     options?: {|
-      container?: HTMLElement,
+      container?: UnionHTMLElement,
       timeout?: number,
       interval?: number,
       mutationObserverOptions?: MutationObserverInit,
@@ -496,7 +512,7 @@ declare module '@testing-library/react' {
    * In most cases you should be able to find/replace `wait` with `waitFor`.
    * Learn more: https://testing-library.com/docs/dom-testing-library/api-async#waitfor.
    */
-  declare export function wait(
+   declare export function wait(
     callback?: () => void,
     options?: {
       timeout?: number,
@@ -510,7 +526,7 @@ declare module '@testing-library/react' {
    * Use `waitFor` instead: https://testing-library.com/docs/dom-testing-library/api-async#waitfor.
    */
   declare export function waitForDomChange<T>(options?: {
-    container?: HTMLElement,
+    container?: UnionHTMLElement,
     timeout?: number,
     mutationObserverOptions?: MutationObserverInit,
     ...
@@ -524,7 +540,7 @@ declare module '@testing-library/react' {
   declare export function waitForElement<T>(
     callback?: () => T,
     options?: {
-      container?: HTMLElement,
+      container?: UnionHTMLElement,
       timeout?: number,
       mutationObserverOptions?: MutationObserverInit,
       ...
@@ -532,12 +548,12 @@ declare module '@testing-library/react' {
   ): Promise<T>;
 
   declare export function within(
-    element: HTMLElement,
+    element: UnionHTMLElement,
     queriesToBind?: GetsAndQueries | Array<GetsAndQueries>
   ): GetsAndQueries;
 
   declare export var fireEvent: {|
-    (element: HTMLElement, event: Event): void,
+    (element: UnionHTMLElement, event: Event): void,
 
     copy: FireEvent<Event$Init>,
     cut: FireEvent<Event$Init>,
@@ -611,55 +627,55 @@ declare module '@testing-library/react' {
   |};
   // dom-testing-library re-declares
   declare export function queryByTestId(
-    container: HTMLElement,
+    container: UnionHTMLElement,
     id: Matcher,
     options?: MatcherOptions
-  ): ?HTMLElement;
+  ): ?IntersectionHTMLElement;
   declare export function getByTestId(
-    container: HTMLElement,
+    container: UnionHTMLElement,
     id: Matcher,
     options?: MatcherOptions
-  ): HTMLElement;
+  ): IntersectionHTMLElement;
   declare export function queryByText(
-    container: HTMLElement,
+    container: UnionHTMLElement,
     text: Matcher,
     options?: MatcherOptions
-  ): ?HTMLElement;
+  ): ?IntersectionHTMLElement;
   declare export function getByText(
-    container: HTMLElement,
+    container: UnionHTMLElement,
     text: Matcher,
     options?: { selector?: string, ... } & MatcherOptions
-  ): HTMLElement;
+  ): IntersectionHTMLElement;
   declare export function queryByPlaceholderText(
-    container: HTMLElement,
+    container: UnionHTMLElement,
     text: Matcher,
     options?: MatcherOptions
-  ): ?HTMLElement;
+  ): ?IntersectionHTMLElement;
   declare export function getByPlaceholderText(
-    container: HTMLElement,
+    container: UnionHTMLElement,
     text: Matcher,
     options?: MatcherOptions
-  ): HTMLElement;
+  ): IntersectionHTMLElement;
   declare export function queryByLabelText(
-    container: HTMLElement,
+    container: UnionHTMLElement,
     text: Matcher,
     options?: MatcherOptions
-  ): ?HTMLElement;
+  ): ?IntersectionHTMLElement;
   declare export function getByLabelText(
-    container: HTMLElement,
+    container: UnionHTMLElement,
     text: Matcher,
     options?: { selector?: string, ... } & MatcherOptions
-  ): HTMLElement;
+  ): IntersectionHTMLElement;
   declare export function queryByAltText(
-    container: HTMLElement,
+    container: UnionHTMLElement,
     text: Matcher,
     options?: MatcherOptions
-  ): ?HTMLElement;
+  ): ?IntersectionHTMLElement;
   declare export function getByAltText(
-    container: HTMLElement,
+    container: UnionHTMLElement,
     text: Matcher,
     options?: MatcherOptions
-  ): HTMLElement;
-  declare export function getNodeText(node: HTMLElement): string;
+  ): IntersectionHTMLElement;
+  declare export function getNodeText(node: UnionHTMLElement): string;
   declare export var screen: Screen<>;
 }
