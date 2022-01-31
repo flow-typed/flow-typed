@@ -275,19 +275,7 @@ export function pkgVersionMatch(
     return libDefSemverRaw;
   })();
 
-  const pkgSemver = (() => {
-    // If pkg version is prefixed with `>=` we should be treated as `^`
-    // Normally `>=` would mean anything greater than a particular version so
-    // ">=2.1.0" would match 2.1.0 up to anything such as 3.4.5
-    // But in the case of flow types, an import of a lib should probably match
-    // the lowest version that matches the range to assume backwards compatibility usage
-    const gtEq = '>=';
-    if (pkgSemverRaw.startsWith(gtEq)) {
-      return pkgSemverRaw.replace(gtEq, '^');
-    }
-
-    return pkgSemverRaw;
-  })();
+  const pkgSemver = semver.coerce(pkgSemverRaw)?.version ?? pkgSemverRaw;
 
   if (semver.valid(pkgSemver)) {
     // Test the single package version against the LibDef range
@@ -316,23 +304,7 @@ export function pkgVersionMatch(
   const libDefUpper = getRangeUpperBound(libDefRange);
 
   const pkgBelowLower = semver.gtr(libDefLower, pkgSemver);
-  // semver.coerce explanation:
-  // We compare a libdef version against a package version
-  // to check if it matches the range, if pkgAboveUpper would be true
-  // that means it doesn't match.
-  //
-  // Mismatches occur when for example libdef is defined as is 8.5.x
-  // which makes it's upper <8.6.0
-  // pkgSemver is ^8.5.1 who's range will reach a max of <9.0.0
-  // therefore libDefUpper is less than maximum pkgSemver range.
-  //
-  // coerce will transform any semver passed in to an explicit
-  // version, in this case, ^8.5.1 becomes 8.5.1 which allows
-  // 8.6.0 (libdef) to be above 8.5.1 (pkg).
-  const pkgAboveUpper = semver.ltr(
-    libDefUpper,
-    semver.coerce(pkgSemver)?.version ?? pkgSemver,
-  );
+  const pkgAboveUpper = semver.ltr(libDefUpper, pkgSemver);
   if (pkgBelowLower || pkgAboveUpper) {
     return false;
   }

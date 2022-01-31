@@ -340,12 +340,21 @@ describe('npmLibDefs', () => {
       expect(pkgVersionMatch('>=8.5.1', '9.x.x')).toBe(false);
     });
 
-    it('matches explicit libdef with major range libdef', () => {
+    it('matches explicit version with major range libdef', () => {
       expect(pkgVersionMatch('8.5.1', '8.x.x')).toBe(true);
     });
 
-    it('matches explicit libdef with minor range libdef', () => {
+    it('matches explicit version with minor range libdef', () => {
       expect(pkgVersionMatch('8.5.1', '8.5.x')).toBe(true);
+    });
+
+    it('matches alpha version with libdef', () => {
+      expect(pkgVersionMatch('8.5.1-alpha.0', '8.5.x')).toBe(true);
+      expect(pkgVersionMatch('8.5.1-alpha.0', '8.x.x')).toBe(true);
+    });
+
+    it('matches non-semantic version alpha version with libdef', () => {
+      expect(pkgVersionMatch('42.6.7.9.3-alpha', '42.6.x')).toBe(true);
     });
   });
 
