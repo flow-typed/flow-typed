@@ -255,7 +255,7 @@ function validateVersionNumPart(part: string, partName: string): number {
 }
 
 export function pkgVersionMatch(
-  pkgSemverRaw: string,
+  pkgSemver: string,
   libDefSemverRaw: string,
 ): boolean {
   // The package version should be treated as a semver implicitly prefixed by
@@ -275,19 +275,21 @@ export function pkgVersionMatch(
     return libDefSemverRaw;
   })();
 
-  const pkgSemver = (() => {
-    // If pkg version is prefixed with `>=` we should be treated as `^`
-    // Normally `>=` would mean anything greater than a particular version so
-    // ">=2.1.0" would match 2.1.0 up to anything such as 3.4.5
-    // But in the case of flow types, an import of a lib should probably match
-    // the lowest version that matches the range to assume backwards compatibility usage
-    const gtEq = '>=';
-    if (pkgSemverRaw.startsWith(gtEq)) {
-      return pkgSemverRaw.replace(gtEq, '^');
-    }
-
-    return pkgSemverRaw;
-  })();
+  // If pkg version is prefixed with `>=` we should be treated as `^`
+  // Normally `>=` would mean anything greater than a particular version so
+  // ">=2.1.0" would match 2.1.0 up to anything such as 3.4.5
+  // But in the case of flow types, an import of a lib should probably match
+  // the lowest version that matches the range to assume backwards compatibility usage
+  const gtEq = '>=';
+  if (pkgSemver.startsWith(gtEq)) {
+    pkgSemver = pkgSemver.replace(gtEq, '^');
+  }
+  // Libraries that are released with an alpha versioning (eg: v6.0.0-alpha.0)
+  // Need to have the alpha version details removed to have a semver match against
+  // a libdef version.
+  if (pkgSemver.includes('-')) {
+    pkgSemver = pkgSemver.substring(0, pkgSemver.indexOf('-'));
+  }
 
   if (semver.valid(pkgSemver)) {
     // Test the single package version against the LibDef range
