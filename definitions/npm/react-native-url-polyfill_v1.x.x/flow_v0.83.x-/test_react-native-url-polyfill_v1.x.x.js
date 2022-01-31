@@ -19,5 +19,11 @@ describe('react-native-url-polyfill', () => {
   it('convenient usage', () => {
     const url = new URL('https://github.com');
     const searchParams = new URLSearchParams('q=GitHub');
+
+    // Has the same methods as node `url`
+    // $FlowExpectedError[extra-arg]
+    url.toJSON('test');
+    // $FlowExpectedError[incompatible-call]
+    searchParams.delete();
   });
 });
