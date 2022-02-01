@@ -5,5 +5,5 @@ const constants = keymirror({a: null, b: null});
 
 const a: string = constants.a;
 
-// $FlowExpectedError
+// $FlowExpectedError[prop-missing]
 constants.c;
