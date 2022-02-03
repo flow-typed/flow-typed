@@ -254,7 +254,10 @@ function validateVersionNumPart(part: string, partName: string): number {
   return num;
 }
 
-function pkgVersionMatch(pkgSemverRaw: string, libDefSemverRaw: string) {
+export function pkgVersionMatch(
+  pkgSemverRaw: string,
+  libDefSemverRaw: string,
+): boolean {
   // The package version should be treated as a semver implicitly prefixed by
   // `^` or `~`. Depending on whether or not the minor value is defined.
   // i.e.: "foo_v2.2.x" is the same range as "~2.2.x"
@@ -272,19 +275,7 @@ function pkgVersionMatch(pkgSemverRaw: string, libDefSemverRaw: string) {
     return libDefSemverRaw;
   })();
 
-  const pkgSemver = (() => {
-    // If pkg version is prefixed with `>=` we should be treated as `^`
-    // Normally `>=` would mean anything greater than a particular version so
-    // ">=2.1.0" would match 2.1.0 up to anything such as 3.4.5
-    // But in the case of flow types, an import of a lib should probably match
-    // the lowest version that matches the range to assume backwards compatibility usage
-    const gtEq = '>=';
-    if (pkgSemverRaw.startsWith(gtEq)) {
-      return pkgSemverRaw.replace(gtEq, '^');
-    }
-
-    return pkgSemverRaw;
-  })();
+  const pkgSemver = semver.coerce(pkgSemverRaw)?.version ?? pkgSemverRaw;
 
   if (semver.valid(pkgSemver)) {
     // Test the single package version against the LibDef range
@@ -536,22 +527,24 @@ async function getSingleLibdef(
       const scope = itemName;
       const scopeDirItems = await fs.readdir(itemPath);
       const settled = await P.all(
-        scopeDirItems.map(async itemName => {
-          const itemPath = path.join(npmDefsDirPath, scope, itemName);
-          const itemStat = await fs.stat(itemPath);
-          if (itemStat.isDirectory()) {
-            return await extractLibDefsFromNpmPkgDir(
-              itemPath,
-              scope,
-              itemName,
-              validating,
-            );
-          } else {
-            throw new ValidationError(
-              `Expected only sub-directories in this dir!`,
-            );
-          }
-        }),
+        scopeDirItems
+          .filter(item => item !== '.DS_Store')
+          .map(async itemName => {
+            const itemPath = path.join(npmDefsDirPath, scope, itemName);
+            const itemStat = await fs.stat(itemPath);
+            if (itemStat.isDirectory()) {
+              return await extractLibDefsFromNpmPkgDir(
+                itemPath,
+                scope,
+                itemName,
+                validating,
+              );
+            } else {
+              throw new ValidationError(
+                `Expected only sub-directories in this dir!`,
+              );
+            }
+          }),
       );
       return [].concat(...settled);
     } else {
@@ -581,6 +574,10 @@ export async function getNpmLibDefs(
   const dirItems = await fs.readdir(npmDefsDirPath);
   const errors = [];
   const proms = dirItems.map(async itemName => {
+    // If a user opens definitions dir in finder it will create `.DS_Store`
+    // which will need to be excluded while parsing
+    if (itemName === '.DS_Store') return;
+
     try {
       return await getSingleLibdef(itemName, npmDefsDirPath, validating);
     } catch (e) {

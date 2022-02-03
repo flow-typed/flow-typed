@@ -168,6 +168,10 @@ export async function getLibDefs(defsDir: string): Promise<Array<LibDef>> {
   const defsDirItems = await fs.readdir(defsDir);
   await P.all(
     defsDirItems.map(async item => {
+      // If a user opens definitions dir in finder it will create `.DS_Store`
+      // which will need to be excluded while parsing
+      if (item === '.DS_Store') return;
+
       const itemPath = path.join(defsDir, item);
       const itemStat = await fs.stat(itemPath);
       if (itemStat.isDirectory()) {
@@ -177,13 +181,15 @@ export async function getLibDefs(defsDir: string): Promise<Array<LibDef>> {
           const defsDirItems = await fs.readdir(itemPath);
           await P.all(
             defsDirItems.map(async item => {
+              if (item === '.DS_Store') return;
+
               const itemPath = path.join(defsDir, scope, item);
               const itemStat = await fs.stat(itemPath);
               if (itemStat.isDirectory()) {
                 // itemPath is a lib dir
                 await addLibDefs(itemPath, libDefs);
               } else {
-                const error = `Expected only directories in the 'definitions/npm/@<scope>' directory!`;
+                const error = `Expected only directories in the 'definitions/npm/@<scope>' directory! Please remove or change ${itemPath}`;
                 throw new ValidationError(error);
               }
             }),
@@ -193,7 +199,7 @@ export async function getLibDefs(defsDir: string): Promise<Array<LibDef>> {
           await addLibDefs(itemPath, libDefs);
         }
       } else {
-        const error = `Expected only directories in the 'definitions/npm' directory!`;
+        const error = `Expected only directories in the 'definitions/npm' directory! Please remove or change ${itemPath}`;
         throw new ValidationError(error);
       }
     }),
@@ -246,7 +252,7 @@ async function parseLibDefsFromPkgDir(
   }
 
   if (flowDirs.length === 0) {
-    throw new ValidationError(`No libdef files found for ${pkgDirPath}!`);
+    throw new ValidationError(`No libdef files found in ${pkgDirPath}!`);
   }
 
   const libDefs = [];
@@ -290,7 +296,7 @@ async function parseLibDefsFromPkgDir(
       if (libDefFilePath == null) {
         libDefFilePath = path.join(flowDirPath, libDefFileName);
         if (pkgName !== 'ERROR') {
-          const error = 'No libdef file found!';
+          const error = `No libdef file found in ${flowDirPath}`;
           throw new ValidationError(error);
         }
         return;

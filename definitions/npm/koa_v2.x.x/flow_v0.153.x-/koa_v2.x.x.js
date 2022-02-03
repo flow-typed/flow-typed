@@ -180,6 +180,7 @@ declare module 'koa' {
     socket: '<original node socket>',
     ...
   };
+
   // https://github.com/pillarjs/cookies
   declare type CookiesSetOptions = {
     // domain of the cookie (no default).
@@ -201,6 +202,7 @@ declare module 'koa' {
     overwrite?: boolean,
     ...
   };
+
   declare type Cookies = {
     get: (name: string, options?: { signed: boolean, ... }) => string|void,
     set: ((name: string, value: string, options?: CookiesSetOptions) => Context)&
@@ -208,6 +210,67 @@ declare module 'koa' {
     ( (name: string) => Context),
     ...
   };
+
+  declare type UserAgent$Agent = {|
+    isYaBrowser: boolean,
+    isAuthoritative: boolean,
+    isMobile: boolean,
+    isMobileNative: boolean,
+    isTablet: boolean,
+    isiPad: boolean,
+    isiPod: boolean,
+    isiPhone: boolean,
+    isiPhoneNative: boolean,
+    isAndroid: boolean,
+    isAndroidNative: boolean,
+    isBlackberry: boolean,
+    isOpera: boolean,
+    isIE: boolean,
+    isEdge: boolean,
+    isIECompatibilityMode: boolean,
+    isSafari: boolean,
+    isFirefox: boolean,
+    isWebkit: boolean,
+    isChrome: boolean,
+    isKonqueror: boolean,
+    isOmniWeb: boolean,
+    isSeaMonkey: boolean,
+    isFlock: boolean,
+    isAmaya: boolean,
+    isPhantomJS: boolean,
+    isEpiphany: boolean,
+    isDesktop: boolean,
+    isWindows: boolean,
+    isLinux: boolean,
+    isLinux64: boolean,
+    isMac: boolean,
+    isChromeOS: boolean,
+    isBada: boolean,
+    isSamsung: boolean,
+    isRaspberry: boolean,
+    isBot: string,
+    isCurl: boolean,
+    isAndroidTablet: boolean,
+    isWinJs: boolean,
+    isKindleFire: boolean,
+    isSilk: boolean,
+    isCaptive: boolean,
+    isSmartTV: boolean,
+    isUC: boolean,
+    isFacebook: boolean,
+    isAlamoFire: boolean,
+    isElectron: boolean,
+    silkAccelerated: boolean,
+    browser: string,
+    version: string,
+    os: string,
+    platform: string,
+    geoIp: { [key: string]: any, ... },
+    source: string,
+    isWechat: boolean,
+    electronVersion: string,
+  |};
+
   // The default props of context come from two files
   // `application.createContext` & `context.js`
   declare type Context = {
@@ -218,6 +281,10 @@ declare module 'koa' {
     cookies: Cookies,
     // koa-views props
     render: (root: string, opts?: { [key: string]: any, ... }) => Promise<void>,
+    // koa-useragent props
+    userAgent: {|
+      _agent: UserAgent$Agent,
+    |},
     // ?
     name?: string,
     originalUrl: string,

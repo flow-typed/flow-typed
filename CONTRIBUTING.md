@@ -17,6 +17,7 @@ Contributing library definitions is as easy as sending a pull request!
   * [Don't import types from other libdefs](#dont-import-types-from-other-libdefs)
   * [Avoid `any` when possible](#avoid-any-when-possible)
   * [Exporting modules](#exporting-modules)
+  * [Declaring types](#declaring-types)
   * [Avoid global types](#avoid-global-types)
   * [Prefer immutability](#prefer-immutability)
   * [Prefer exactness](#prefer-exactness)
@@ -292,6 +293,47 @@ Using `mixed` in place of `any` for the return type of a function or the type of
 ### Exporting modules
 
 When you export a module, you have a choice to use CommonJS or ES6 syntax. We generally recommend to use ES6 syntax. As [discussed here](https://github.com/flow-typed/flow-typed/issues/1859#issuecomment-374575368), if you need both named exports and a default export, then you need to use the ES6 syntax.
+
+Learn to export [es6](https://flow.org/en/docs/libdefs/creation/#toc-declaring-an-es-module) or [commonjs](https://flow.org/en/docs/libdefs/creation/#toc-declaring-a-commonjs-module) modules.
+
+### Declaring types
+
+Types in contract to variables when declared inside a module do not need to be explicitly exported as they will be exported automatically.
+
+These two will work the same
+```js
+declare type Func = () => void;
+declare export type Func = () => void;
+```
+
+It can then be used like the following, though be aware that even if you're using commonjs in your consuming module your imports will still use es6 import syntax.
+```js
+// In a commonjs module
+import type { Func } from 'my-module';
+
+const Foo = require('my-module');
+
+// ---
+// In an es module
+import Foo, { type Func } from 'my-module';
+```
+
+---
+
+Because of this feature you may opt to break down types into separate declarations as opposed to inlining them on a variable or property to make it easier for library consumers to cast or annotate a variable.
+
+```js
+declare type Options = { ... };
+
+class Foo {
+  constructor(options?: Options): this;
+}
+
+// or
+type Bar = { ... };
+
+declare module.exports: Bar;
+```
 
 ### Avoid global types
 

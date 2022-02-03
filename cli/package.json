@@ -10,14 +10,15 @@
   "bugs": {
     "url": "https://github.com/flow-typed/flow-typed/issues/new/choose"
   },
-  "version": "3.6.0",
+  "version": "3.6.1",
   "main": "dist/cli.js",
   "bin": "dist/cli.js",
   "engines": {
     "node": ">=10.0.0"
   },
   "scripts": {
-    "build": "mkdirp dist && babel ./src --out-dir=./dist",
+    "build:flow": "flow-copy-source --ignore '**/__tests__/**' src dist",
+    "build": "mkdirp dist && babel ./src --out-dir=./dist && yarn build:flow",
     "clean": "rimraf dist",
     "flow": "flow",
     "lint": "eslint .",
@@ -29,7 +30,7 @@
   },
   "dependencies": {
     "@octokit/rest": "^18.12.0",
-    "colors": "^1.4.0",
+    "colors": "1.4.0",
     "flowgen": "^1.10.0",
     "fs-extra": "^8.1.0",
     "glob": "^7.1.6",
@@ -58,6 +59,7 @@
     "eslint-plugin-flowtype": "^8.0.3",
     "eslint-plugin-prettier": "^4.0.0",
     "flow-bin": "^0.165.1",
+    "flow-copy-source": "^2.0.9",
     "jest": "^27.3.1"
   },
   "keywords": [

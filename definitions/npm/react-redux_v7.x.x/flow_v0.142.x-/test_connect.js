@@ -1,6 +1,7 @@
 // @flow
 import React from "react";
 import { connect } from "react-redux";
+import type { ConnectedComponent } from "react-redux";
 
 export let e: Array<any> = []
 
@@ -776,4 +777,43 @@ function testPassingDispatchTypeIsPassedThrough() {
   const Connected = connect<Props, OwnProps,_,_,_,Dispatch>(mapStateToProps)(Com);
   e.push(Connected);
   <Connected />;
+}
+
+function testNestedComponent() {
+  type OwnProps = {|
+    passthrough: number
+  |};
+  type Props = {
+    ...OwnProps,
+    fromStateToProps: string,
+    fromDispatchToProps: string,
+    ...
+  };
+
+  const Component = ({ passthrough, fromStateToProps, fromDispatchToProps }: Props) => {
+    return <span>{`${passthrough}: ${fromStateToProps}, ${fromDispatchToProps}`}</span>;
+  };
+
+  const Wrapper = ({ children }: { children: React$Element<any>, ... }) => {
+    return <span>{children}</span>;
+  };
+
+  const mapStateToProps = (state: {...}) => ({
+    fromStateToProps: '',
+  });
+
+  const mapDispatchToProps = () => ({
+    fromDispatchToProps: '',
+  });
+
+  const Connected = (connect<Props, OwnProps, _, _, _, _>(
+    mapStateToProps,
+    mapDispatchToProps
+  )(Component): Class<ConnectedComponent<OwnProps, typeof Component>>);
+
+  return (
+    <Wrapper>
+      <Connected passthrough={2} />
+    </Wrapper>
+  );
 }

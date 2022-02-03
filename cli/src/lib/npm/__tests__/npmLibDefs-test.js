@@ -10,6 +10,7 @@ import {
   findNpmLibDef,
   getScopedPackageName,
   parseSignedCodeVersion,
+  pkgVersionMatch,
 } from '../npmLibDefs';
 import * as cacheRepoUtils from '../../cacheRepoUtils';
 
@@ -296,6 +297,64 @@ describe('npmLibDefs', () => {
 
         expect(ensureCacheRepo).toHaveBeenCalled();
       });
+    });
+  });
+
+  describe('pkgVersionMatch', () => {
+    it('matches minor libdef', () => {
+      expect(pkgVersionMatch('^8.5.1', '8.5.x')).toBe(true);
+      expect(pkgVersionMatch('~8.5.1', '8.5.x')).toBe(true);
+    });
+
+    it('matches major libdef', () => {
+      expect(pkgVersionMatch('^8.5.1', '8.x.x')).toBe(true);
+      expect(pkgVersionMatch('~8.5.1', '8.x.x')).toBe(true);
+    });
+
+    it('will not match a lower libdef', () => {
+      expect(pkgVersionMatch('^8.5.1', '8.4.x')).toBe(false);
+      expect(pkgVersionMatch('~8.5.1', '8.4.x')).toBe(false);
+    });
+
+    it('will not match a lower libdef by major value', () => {
+      expect(pkgVersionMatch('^8.5.1', '7.x.x')).toBe(false);
+      expect(pkgVersionMatch('~8.5.1', '7.x.x')).toBe(false);
+    });
+
+    it('will not match a greater libdef by minor value', () => {
+      expect(pkgVersionMatch('^8.5.1', '8.6.x')).toBe(false);
+      expect(pkgVersionMatch('~8.5.1', '8.6.x')).toBe(false);
+    });
+
+    it('will not match a greater libdef by major value', () => {
+      expect(pkgVersionMatch('^8.5.1', '9.x.x')).toBe(false);
+      expect(pkgVersionMatch('~8.5.1', '9.x.x')).toBe(false);
+    });
+
+    it('matches lowest range when version has >=', () => {
+      expect(pkgVersionMatch('>=8.5.1', '8.x.x')).toBe(true);
+      expect(pkgVersionMatch('>=8.5.1', '8.5.x')).toBe(true);
+    });
+
+    it('will not match any greater libdef when version has >=', () => {
+      expect(pkgVersionMatch('>=8.5.1', '9.x.x')).toBe(false);
+    });
+
+    it('matches explicit version with major range libdef', () => {
+      expect(pkgVersionMatch('8.5.1', '8.x.x')).toBe(true);
+    });
+
+    it('matches explicit version with minor range libdef', () => {
+      expect(pkgVersionMatch('8.5.1', '8.5.x')).toBe(true);
+    });
+
+    it('matches alpha version with libdef', () => {
+      expect(pkgVersionMatch('8.5.1-alpha.0', '8.5.x')).toBe(true);
+      expect(pkgVersionMatch('8.5.1-alpha.0', '8.x.x')).toBe(true);
+    });
+
+    it('matches non-semantic version alpha version with libdef', () => {
+      expect(pkgVersionMatch('42.6.7.9.3-alpha', '42.6.x')).toBe(true);
     });
   });
 
