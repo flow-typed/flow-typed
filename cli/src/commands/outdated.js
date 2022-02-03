@@ -144,6 +144,9 @@ export async function run(args: Args): Promise<number> {
                 path.join(cwd, installedDef.libDef.path),
                 'utf8',
               );
+              // From the file contents, pull the first 2 lines
+              // Then get the contents of npmLibDef's signature and compare
+              // If anything differs then it's not a match
               console.log(file);
 
               outdatedList.push({
