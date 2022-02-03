@@ -4,6 +4,8 @@ jest.unmock('../libDefs.js');
 jest.unmock('../semver.js');
 jest.unmock('semver');
 jest.unmock('../flowVersion');
+jest.unmock('colors/lib/styles');
+jest.unmock('wrappy');
 
 import {fs} from '../node.js';
 
