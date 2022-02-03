@@ -8,9 +8,12 @@ import {
   findNpmLibDef,
   getCacheNpmLibDefs,
   getInstalledNpmLibDefs,
+  getNpmLibDefVersionHash,
 } from '../lib/npm/npmLibDefs';
 import {fs} from '../lib/node';
 import {determineFlowSpecificVersion} from '../lib/flowVersion';
+import {signCodeStream} from '../lib/codeSign';
+import {getCacheRepoDir} from '../lib/cacheRepoUtils';
 
 export const name = 'outdated [explicitLibDefs...]';
 export const description =
@@ -140,20 +143,34 @@ export async function run(args: Args): Promise<number> {
             );
 
             if (npmLibDef) {
+              const pullSignature = v => v.split('\n').slice(0, 2);
+
               const file = await fs.readFile(
                 path.join(cwd, installedDef.libDef.path),
                 'utf8',
               );
-              // From the file contents, pull the first 2 lines
-              // Then get the contents of npmLibDef's signature and compare
-              // If anything differs then it's not a match
-              console.log(file);
+              const installedSignatureArray = pullSignature(file);
 
-              outdatedList.push({
-                name: installedDef.libDef.name,
-                message:
-                  'This libdef does not match what we found in the registry, update it with `flow-typed update`',
-              });
+              const repoVersion = await getNpmLibDefVersionHash(
+                getCacheRepoDir(),
+                npmLibDef,
+              );
+              const codeSignPreprocessor = signCodeStream(repoVersion);
+              const content = fs.readFileSync(npmLibDef.path, 'utf-8');
+              const cacheSignatureArray = pullSignature(
+                codeSignPreprocessor(content),
+              );
+
+              if (
+                installedSignatureArray[0] !== cacheSignatureArray[0] &&
+                installedSignatureArray[1] !== cacheSignatureArray[1]
+              ) {
+                outdatedList.push({
+                  name: installedDef.libDef.name,
+                  message:
+                    'This libdef does not match what we found in the registry, update it with `flow-typed update`',
+                });
+              }
             }
           }
         }),
@@ -162,6 +179,13 @@ export async function run(args: Args): Promise<number> {
   );
 
   if (outdatedList.length > 0) {
+    outdatedList = outdatedList.reduce((acc, cur) => {
+      if (acc.find(o => o.name === cur.name)) {
+        return acc;
+      }
+      return [...acc, cur];
+    }, []);
+
     console.log(
       table([
         ['Name', 'Details'],
