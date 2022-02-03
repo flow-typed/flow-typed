@@ -119,22 +119,30 @@ export async function run(args: Args): Promise<number> {
           // But if it's not stubbed
           if (
             installedDef.kind === 'Stub' &&
-            installedDef.name === cachedDef.name
+            installedDef.name.startsWith(`${cachedDef.name}_`)
           ) {
+            const stubName = installedDef.name.substring(
+              0,
+              installedDef.name.indexOf('_'),
+            );
             outdatedList.push({
-              name: installedDef.name,
-              message: `A new libdef has been published to the registry replacing your stub install it with \`flow-typed install ${installedDef.name}\``,
+              name: stubName,
+              message: `A new libdef has been published to the registry replacing your stub install it with \`flow-typed install ${stubName}\``,
             });
           }
           if (
             installedDef.kind === 'LibDef' &&
-            installedDef.libDef.name === cachedDef.name
+            installedDef.libDef.name === cachedDef.name &&
+            installedDef.libDef.scope === cachedDef.scope
           ) {
+            const definitionFullName = installedDef.libDef.scope
+              ? `${installedDef.libDef.scope}/${installedDef.libDef.name}`
+              : installedDef.libDef.name;
             // If we've found a match we need to know if definition has changed
             // We can just find a compatible matching library and then
             // figure out if the flow signatures has changed
             const npmLibDef = await findNpmLibDef(
-              installedDef.libDef.name,
+              definitionFullName,
               installedDef.libDef.version,
               flowVersion,
               args.useCacheUntil ? Number(args.useCacheUntil) : undefined,
@@ -166,7 +174,7 @@ export async function run(args: Args): Promise<number> {
                 installedSignatureArray[1] !== cacheSignatureArray[1]
               ) {
                 outdatedList.push({
-                  name: installedDef.libDef.name,
+                  name: definitionFullName,
                   message:
                     'This libdef does not match what we found in the registry, update it with `flow-typed update`',
                 });
@@ -179,6 +187,7 @@ export async function run(args: Args): Promise<number> {
   );
 
   if (outdatedList.length > 0) {
+    // Cleanup duplicated dependencies which come from nested libraries that ship flow
     outdatedList = outdatedList.reduce((acc, cur) => {
       if (acc.find(o => o.name === cur.name)) {
         return acc;
