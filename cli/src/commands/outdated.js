@@ -13,9 +13,9 @@ import {
 import {fs} from '../lib/node';
 import {determineFlowSpecificVersion} from '../lib/flowVersion';
 import {signCodeStream} from '../lib/codeSign';
-import {getCacheRepoDir} from '../lib/cacheRepoUtils';
+import {CACHE_REPO_EXPIRY, getCacheRepoDir} from '../lib/cacheRepoUtils';
 
-export const name = 'outdated [explicitLibDefs...]';
+export const name = 'outdated';
 export const description =
   'Update the flow-typed cache and print any outdated libdefs in current project';
 
@@ -83,10 +83,6 @@ export async function run(args: Args): Promise<number> {
     packageDir,
     args.flowVersion,
   );
-  if (flowVersion === null) {
-    // Add logs here
-    return 1;
-  }
   if (flowProjectRoot === null) {
     console.error(
       'Error: Unable to find a flow project in the current dir or any of ' +
@@ -97,7 +93,7 @@ export async function run(args: Args): Promise<number> {
   }
 
   const cachedLibDefs = await getCacheNpmLibDefs(
-    Number(args.useCacheUntil),
+    Number(args.useCacheUntil) || CACHE_REPO_EXPIRY,
     true,
   );
   const installedLibDefs = await getInstalledNpmLibDefs(
@@ -116,7 +112,6 @@ export async function run(args: Args): Promise<number> {
         [...installedLibDefs.values()].map(async installedDef => {
           // For each cached def we'll check if it's installed as a stub
           // if so then we should mark as outdated
-          // But if it's not stubbed
           if (
             installedDef.kind === 'Stub' &&
             installedDef.name.startsWith(`${cachedDef.name}_`)
