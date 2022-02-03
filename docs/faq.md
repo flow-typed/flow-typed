@@ -46,6 +46,15 @@ declare module "react-redux" {
 
 > Think **very carefully** before you import types from other libraries. We have no smart way to track dependencies between libdefs.
 
+### How come some definition's types use `$` as a delimiter
+
+Older versions of Flow had trouble with scoping in definitions. Types were effectively globally scoped in a libdef. It used to be recommended that we use a $ delimited definition such as `express$Foo`.
+
+Mostly what you're seeing is legacy and nobody has gotten around to updating it.
+
+The question was asked here:
+[#2818](https://github.com/flow-typed/flow-typed/issues/2818#issuecomment-507407754)
+
 ## Issues
 
 ### When I install the `flow-typed` CLI, I get an error that mentions `OpenSSL or Libgcrypt`
