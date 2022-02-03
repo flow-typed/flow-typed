@@ -5,6 +5,7 @@
   - [Contributing](contributing.md)
 - CLI commands
   - [install](install.md)
+  - [outdated](outdated.md)
   - [create-stub](stub.md)
   - [run-tests](tests.md)
   - [search](search.md)
