@@ -52,7 +52,8 @@ Older versions of Flow had trouble with scoping in definitions. Types were effec
 
 Mostly what you're seeing is legacy and nobody has gotten around to updating it.
 
-> [Answered](https://github.com/flow-typed/flow-typed/issues/2818#issuecomment-507407754) by @LoganBarnett
+The question was asked here:
+[#2818](https://github.com/flow-typed/flow-typed/issues/2818#issuecomment-507407754)
 
 ## Issues
 
