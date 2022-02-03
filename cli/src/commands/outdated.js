@@ -9,6 +9,8 @@ import {
   getCacheNpmLibDefs,
   getInstalledNpmLibDefs,
 } from '../lib/npm/npmLibDefs';
+import {fs} from '../lib/node';
+import {determineFlowSpecificVersion} from '../lib/flowVersion';
 
 export const name = 'outdated [explicitLibDefs...]';
 export const description =
@@ -18,6 +20,12 @@ export function setup(yargs: Yargs): Yargs {
   return yargs
     .usage(`$0 ${name}`)
     .options({
+      flowVersion: {
+        alias: 'f',
+        describe:
+          'The Flow version that outdated libdefs must be compatible with',
+        type: 'string',
+      },
       useCacheUntil: {
         alias: 'u',
         describe: 'Use cache until specified time in milliseconds',
@@ -34,6 +42,12 @@ export function setup(yargs: Yargs): Yargs {
         describe: 'Directory of .flowconfig relative to node_modules',
         type: 'string',
       },
+      packageDir: {
+        alias: 'p',
+        describe:
+          'The relative path of package.json where flow-bin is installed',
+        type: 'string',
+      },
     })
     .example('$0 outdated', '')
     .help('h')
@@ -41,9 +55,11 @@ export function setup(yargs: Yargs): Yargs {
 }
 
 type Args = {
+  flowVersion?: mixed, // string
   useCacheUntil?: mixed, // number (milliseconds)
   libdefDir?: mixed, // string
-  rootDir?: mixed, // string,
+  rootDir?: mixed, // string
+  packageDir?: mixed, // string
   ...
 };
 
@@ -52,14 +68,22 @@ type Args = {
  * 2. Compare current installed with what's in the cache
  * 3. Create a list to print out
  */
-export async function run({
-  useCacheUntil,
-  libdefDir,
-  rootDir,
-}: Args): Promise<number> {
+export async function run(args: Args): Promise<number> {
   const cwd =
-    typeof rootDir === 'string' ? path.resolve(rootDir) : process.cwd();
+    typeof args.rootDir === 'string'
+      ? path.resolve(args.rootDir)
+      : process.cwd();
   const flowProjectRoot = await findFlowRoot(cwd);
+  const packageDir =
+    typeof args.packageDir === 'string' ? path.resolve(args.packageDir) : cwd;
+  const flowVersion = await determineFlowSpecificVersion(
+    packageDir,
+    args.flowVersion,
+  );
+  if (flowVersion === null) {
+    // Add logs here
+    return 1;
+  }
   if (flowProjectRoot === null) {
     console.error(
       'Error: Unable to find a flow project in the current dir or any of ' +
@@ -69,64 +93,70 @@ export async function run({
     return 1;
   }
 
-  const cachedLibDefs = await getCacheNpmLibDefs(Number(useCacheUntil), true);
+  const cachedLibDefs = await getCacheNpmLibDefs(
+    Number(args.useCacheUntil),
+    true,
+  );
   const installedLibDefs = await getInstalledNpmLibDefs(
     flowProjectRoot,
-    libdefDir ? String(libdefDir) : undefined,
+    args.libdefDir ? String(args.libdefDir) : undefined,
   );
 
-  const outdatedList: Array<{
+  let outdatedList: Array<{
     name: string,
     message: string,
   }> = [];
 
-  // For each cached def loop we'll check if it's installed as a stub
-  // if so then we should mark as outdated
-  // But if it's not stubbed
-  cachedLibDefs.forEach(cachedDef => {
-    installedLibDefs.forEach(async installedDef => {
-      if (
-        installedDef.kind === 'Stub' &&
-        installedDef.name === cachedDef.name
-      ) {
-        // a previously stubbed libdef has now been typed
-        outdatedList.push({
-          name: installedDef.name,
-          message:
-            'A new libdef has been published to the registry replacing your stub',
-        });
-        return;
-      }
-      if (
-        installedDef.kind === 'LibDef' &&
-        installedDef.libDef.name === cachedDef.name
-      ) {
-        // This can be used to check if the version breakdown has changed
-        await findNpmLibDef(
-          installedDef.libDef.name,
-          installedDef.libDef.version,
-          installedDef.libDef.flowVersion,
-          Number(useCacheUntil),
-          undefined,
-          cachedLibDefs,
-        );
-        // Need to find the range to only check on libdefs that match
-        // JSON.stringify(installedDef.libDef.flowVersion) ===
-        //   JSON.stringify(cachedDef.flowVersion)
-        // But if we don't find one in range it could have been changed mid way
-        // and we should add that to the outdated list
+  await Promise.all(
+    cachedLibDefs.map(async cachedDef => {
+      await Promise.all(
+        [...installedLibDefs.values()].map(async installedDef => {
+          // For each cached def we'll check if it's installed as a stub
+          // if so then we should mark as outdated
+          // But if it's not stubbed
+          if (
+            installedDef.kind === 'Stub' &&
+            installedDef.name === cachedDef.name
+          ) {
+            outdatedList.push({
+              name: installedDef.name,
+              message: `A new libdef has been published to the registry replacing your stub install it with \`flow-typed install ${installedDef.name}\``,
+            });
+          }
+          if (
+            installedDef.kind === 'LibDef' &&
+            installedDef.libDef.name === cachedDef.name
+          ) {
+            // If we've found a match we need to know if definition has changed
+            // We can just find a compatible matching library and then
+            // figure out if the flow signatures has changed
+            const npmLibDef = await findNpmLibDef(
+              installedDef.libDef.name,
+              installedDef.libDef.version,
+              flowVersion,
+              args.useCacheUntil ? Number(args.useCacheUntil) : undefined,
+              undefined,
+              cachedLibDefs,
+            );
 
-        // need to somehow compare the two defs and if there's a difference
-        // we assume they're outdated
-        outdatedList.push({
-          name: installedDef.libDef.name,
-          message:
-            'This libdef is outdated you can update it with `flow-typed update`',
-        });
-        return;
-      }
-    });
-  });
+            if (npmLibDef) {
+              const file = await fs.readFile(
+                path.join(cwd, installedDef.libDef.path),
+                'utf8',
+              );
+              console.log(file);
+
+              outdatedList.push({
+                name: installedDef.libDef.name,
+                message:
+                  'This libdef does not match what we found in the registry, update it with `flow-typed update`',
+              });
+            }
+          }
+        }),
+      );
+    }),
+  );
 
   if (outdatedList.length > 0) {
     console.log(

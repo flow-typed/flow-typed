@@ -1,4 +1,5 @@
 // @flow
+import {findFlowSpecificVer} from './npm/npmProjectUtils';
 
 import {ValidationError} from './ValidationError';
 
@@ -205,6 +206,34 @@ export function parseFlowSpecificVer(verStr: string): FlowSpecificVer {
     patch: 'x',
     prerel: null,
   };
+}
+
+export async function determineFlowSpecificVersion(
+  cwd: string,
+  flowVersionArg?: mixed,
+): Promise<{|
+  kind: 'specific',
+  ver: FlowSpecificVer,
+|}> {
+  if (flowVersionArg && typeof flowVersionArg === 'string') {
+    // Be permissive if the prefix 'v' is left off
+    let flowVersionStr =
+      flowVersionArg[0] === 'v' ? flowVersionArg : `v${flowVersionArg}`;
+
+    if (/^v[0-9]+\.[0-9]+$/.test(flowVersionStr)) {
+      flowVersionStr = `${flowVersionStr}.0`;
+    }
+
+    return {
+      kind: 'specific',
+      ver: parseFlowSpecificVer(flowVersionStr),
+    };
+  } else {
+    return {
+      kind: 'specific',
+      ver: await findFlowSpecificVer(cwd),
+    };
+  }
 }
 
 /**

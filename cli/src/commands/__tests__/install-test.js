@@ -26,7 +26,6 @@ import {testProject} from '../../lib/TEST_UTILS';
 import colors from 'colors/safe';
 
 import {
-  _determineFlowVersion as determineFlowVersion,
   _installNpmLibDefs as installNpmLibDefs,
   _installNpmLibDef as installNpmLibDef,
   run,
@@ -55,61 +54,6 @@ const defaultRunProps = {
 };
 
 describe('install (command)', () => {
-  describe('determineFlowVersion', () => {
-    it('infers version from path if arg not passed', () => {
-      return testProject(async ROOT_DIR => {
-        const ARBITRARY_PATH = path.join(ROOT_DIR, 'some', 'arbitrary', 'path');
-        await Promise.all([
-          mkdirp(ARBITRARY_PATH),
-          touchFile(path.join(ROOT_DIR, '.flowconfig')),
-          writePkgJson(path.join(ROOT_DIR, 'package.json'), {
-            name: 'test',
-            devDependencies: {
-              'flow-bin': '^0.40.0',
-            },
-          }),
-        ]);
-
-        const flowVer = await determineFlowVersion(ARBITRARY_PATH);
-        expect(flowVer).toEqual({
-          kind: 'specific',
-          ver: {
-            major: 0,
-            minor: 40,
-            patch: 0,
-            prerel: null,
-          },
-        });
-      });
-    });
-
-    it('uses explicitly specified version', async () => {
-      const explicitVer = await determineFlowVersion('/', '0.7.0');
-      expect(explicitVer).toEqual({
-        kind: 'specific',
-        ver: {
-          major: 0,
-          minor: 7,
-          patch: 0,
-          prerel: null,
-        },
-      });
-    });
-
-    it("uses 'v'-prefixed explicitly specified version", async () => {
-      const explicitVer = await determineFlowVersion('/', 'v0.7.0');
-      expect(explicitVer).toEqual({
-        kind: 'specific',
-        ver: {
-          major: 0,
-          minor: 7,
-          patch: 0,
-          prerel: null,
-        },
-      });
-    });
-  });
-
   describe('installNpmLibDefs', () => {
     const origConsoleError = console.error;
 
