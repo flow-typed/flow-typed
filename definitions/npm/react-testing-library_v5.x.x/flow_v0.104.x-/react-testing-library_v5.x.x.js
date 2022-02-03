@@ -96,13 +96,14 @@ declare module 'react-testing-library' {
   |};
 
   declare type RenderResult = {|
+    ...GetsAndQueries,
     container: HTMLDivElement,
     unmount: () => void,
     baseElement: HTMLElement,
     asFragment: () => DocumentFragment,
     debug: (baseElement?: HTMLElement) => void,
     rerender: (ui: React$Element<*>) => void,
-  |} & GetsAndQueries;
+  |};
 
   declare type FireEvent<TInit> = (
     element: HTMLElement,
