@@ -165,7 +165,7 @@ export async function run(args: Args): Promise<number> {
               );
 
               if (
-                installedSignatureArray[0] !== cacheSignatureArray[0] &&
+                installedSignatureArray[0] !== cacheSignatureArray[0] ||
                 installedSignatureArray[1] !== cacheSignatureArray[1]
               ) {
                 outdatedList.push({
