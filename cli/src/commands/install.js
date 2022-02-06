@@ -46,6 +46,10 @@ import {createStub, pkgHasFlowFiles} from '../lib/stubUtils';
 
 import typeof Yargs from 'yargs';
 
+type FtConfig = {
+  env?: mixed, // Array<string>,
+};
+
 export const name = 'install [explicitLibDefs...]';
 export const description = 'Installs libdefs into the ./flow-typed directory';
 export type Args = {
@@ -178,9 +182,18 @@ export async function run(args: Args): Promise<number> {
     return dep;
   });
 
-  const coreLibDefResult = await installCoreLibDefs();
-  if (coreLibDefResult !== 0) {
-    return coreLibDefResult;
+  let ftConfig: void | FtConfig;
+  try {
+    ftConfig = JSON.parse(
+      fs.readFileSync(path.join(cwd, libdefDir, 'ft-config.json'), 'utf-8'),
+    );
+  } catch (e) {}
+
+  if (ftConfig) {
+    const coreLibDefResult = await installCoreLibDefs(ftConfig);
+    if (coreLibDefResult !== 0) {
+      return coreLibDefResult;
+    }
   }
 
   if (args.cacheDir) {
@@ -218,8 +231,27 @@ export async function run(args: Args): Promise<number> {
   return 0;
 }
 
-async function installCoreLibDefs(): Promise<number> {
-  // TODO...
+async function installCoreLibDefs({env}: FtConfig): Promise<number> {
+  if (env) {
+    if (!Array.isArray(env)) {
+      console.log(
+        colors.yellow(
+          'Warning: `env` in `ft-config.json` must be of type Array<string>',
+        ),
+      );
+      return 0;
+    }
+
+    // Go through each env and try to install a libdef of the same name
+    // for the given flow version,
+    // if none is found throw a warning and continue. We shouldn't block the user.
+    env.forEach(en => {
+      if (typeof en === 'string') {
+        // Try install
+      }
+    });
+  }
+
   return 0;
 }
 
