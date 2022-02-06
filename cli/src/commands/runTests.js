@@ -54,12 +54,14 @@ type TestGroup = {
  * structs. Each TestGroup represents a Package/PackageVersion/FlowVersion
  * directory.
  */
-const basePathRegex = new RegExp('definitions/npm/(@[^/]*/)?[^/]*/?');
+const basePathRegex = new RegExp('definitions/(npm|core)/(@[^/]*/)?[^/]*/?');
 async function getTestGroups(
   repoDirPath,
+  coreDirPath,
   onlyChanged: boolean = false,
 ): Promise<Array<TestGroup>> {
   let libDefs = await getLibDefs(repoDirPath);
+  let coreDefs = await getLibDefs(coreDirPath);
   if (onlyChanged) {
     const diff = await getDefinitionsDiff();
     const baseDiff: string[] = diff
@@ -80,10 +82,13 @@ async function getTestGroups(
         version: `v${major}.${minor}.${patch}`,
       };
     });
-    libDefs = libDefs.filter(def =>
-      changedDefs.some(
-        d => d.name === def.pkgName && d.version === def.pkgVersionStr,
-      ),
+    libDefs = [...libDefs, ...coreDefs].filter(def =>
+      changedDefs.some(d => {
+        if (d.version === 'vx.x.x') {
+          return d.name === def.pkgName;
+        }
+        return d.name === def.pkgName && d.version === def.pkgVersionStr;
+      }),
     );
   }
   return libDefs.map(libDef => {
@@ -611,27 +616,28 @@ async function runTestGroup(
 
 async function runTests(
   repoDirPath: string,
+  coreDirPath: string,
   testPatterns: Array<string>,
   onlyChanged?: boolean,
   numberOfFlowVersions?: number,
 ): Promise<Map<string, Array<string>>> {
   const testPatternRes = testPatterns.map(patt => new RegExp(patt, 'g'));
-  const testGroups = (await getTestGroups(repoDirPath, onlyChanged)).filter(
-    testGroup => {
-      if (testPatternRes.length === 0) {
+  const testGroups = (
+    await getTestGroups(repoDirPath, coreDirPath, onlyChanged)
+  ).filter(testGroup => {
+    if (testPatternRes.length === 0) {
+      return true;
+    }
+
+    for (var i = 0; i < testPatternRes.length; i++) {
+      const pattern = testPatternRes[i];
+      if (testGroup.id.match(pattern) != null) {
         return true;
       }
+    }
 
-      for (var i = 0; i < testPatternRes.length; i++) {
-        const pattern = testPatternRes[i];
-        if (testGroup.id.match(pattern) != null) {
-          return true;
-        }
-      }
-
-      return false;
-    },
-  );
+    return false;
+  });
 
   try {
     // Create a temp dir to copy files into to run the tests
@@ -727,21 +733,25 @@ export async function run(argv: Args): Promise<number> {
   const cwd = process.cwd();
   const basePath = argv.path ? String(argv.path) : cwd;
   const cwdDefsNPMPath = path.join(basePath, 'definitions', 'npm');
-  let repoDirPath = (await fs.exists(cwdDefsNPMPath))
+  const repoDirPath = (await fs.exists(cwdDefsNPMPath))
     ? cwdDefsNPMPath
+    : path.join(__dirname, '..', '..', '..', 'definitions', 'npm');
+  const cwdDefsCorePath = path.join(basePath, 'definitions', 'core');
+  const coreDirPath = (await fs.exists(cwdDefsCorePath))
+    ? cwdDefsCorePath
     : path.join(__dirname, '..', '..', '..', 'definitions', 'npm');
 
   if (onlyChanged) {
     console.log(
       'Running changed definition tests against latest %s flow versions in %s...\n',
       numberOfFlowVersions,
-      repoDirPath,
+      path.join(repoDirPath, '..'),
     );
   } else {
     console.log(
       'Running definition tests against latest %s flow versions in %s...\n',
       numberOfFlowVersions,
-      repoDirPath,
+      path.join(repoDirPath, '..'),
     );
   }
 
@@ -749,6 +759,7 @@ export async function run(argv: Args): Promise<number> {
   try {
     results = await runTests(
       repoDirPath,
+      coreDirPath,
       testPatterns,
       onlyChanged,
       numberOfFlowVersions,
