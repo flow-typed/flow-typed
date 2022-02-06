@@ -26,6 +26,7 @@
     "prepublishOnly": "cp ../README.md .",
     "test": "yarn clean && yarn build && yarn test-quick",
     "test-quick": "jest && yarn lint && yarn flow",
+    "test:watch": "yarn clean && yarn build && yarn jest --watch",
     "watch": "mkdirp dist && babel --source-maps --watch=./src --out-dir=./dist"
   },
   "dependencies": {

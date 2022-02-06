@@ -1,11 +1,14 @@
 // @flow
-
+import {fs, path} from '../../lib/node';
+import {testProject} from '../TEST_UTILS';
+import {mkdirp} from '../fileUtils';
 import {
   parseDirString,
   __parseVersion as parseVersion,
   toSemverString,
   toDirString,
   compareFlowVersionAsc,
+  determineFlowSpecificVersion,
 } from '../flowVersion';
 
 describe('flowVersion', () => {
@@ -557,6 +560,69 @@ describe('flowVersion', () => {
       ],
     ])('should compare properly %s to %s', (a, b, expected) => {
       expect(compareFlowVersionAsc(a, b)).toBe(expected);
+    });
+  });
+
+  describe('determineFlowSpecificVersion', () => {
+    async function touchFile(filePath) {
+      await fs.close(await fs.open(filePath, 'w'));
+    }
+
+    async function writePkgJson(filePath, pkgJson) {
+      await fs.writeJson(filePath, pkgJson);
+    }
+
+    it('infers version from path if arg not passed', () => {
+      return testProject(async ROOT_DIR => {
+        const ARBITRARY_PATH = path.join(ROOT_DIR, 'some', 'arbitrary', 'path');
+        await Promise.all([
+          mkdirp(ARBITRARY_PATH),
+          touchFile(path.join(ROOT_DIR, '.flowconfig')),
+          writePkgJson(path.join(ROOT_DIR, 'package.json'), {
+            name: 'test',
+            devDependencies: {
+              'flow-bin': '^0.40.0',
+            },
+          }),
+        ]);
+
+        const flowVer = await determineFlowSpecificVersion(ARBITRARY_PATH);
+        expect(flowVer).toEqual({
+          kind: 'specific',
+          ver: {
+            major: 0,
+            minor: 40,
+            patch: 0,
+            prerel: null,
+          },
+        });
+      });
+    });
+
+    it('uses explicitly specified version', async () => {
+      const explicitVer = await determineFlowSpecificVersion('/', '0.7.0');
+      expect(explicitVer).toEqual({
+        kind: 'specific',
+        ver: {
+          major: 0,
+          minor: 7,
+          patch: 0,
+          prerel: null,
+        },
+      });
+    });
+
+    it("uses 'v'-prefixed explicitly specified version", async () => {
+      const explicitVer = await determineFlowSpecificVersion('/', 'v0.7.0');
+      expect(explicitVer).toEqual({
+        kind: 'specific',
+        ver: {
+          major: 0,
+          minor: 7,
+          patch: 0,
+          prerel: null,
+        },
+      });
     });
   });
 });

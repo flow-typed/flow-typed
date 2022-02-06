@@ -1,6 +1,4 @@
 // @flow
-
-import type {FlowSpecificVer} from '../lib/flowVersion';
 import {signCodeStream} from '../lib/codeSign';
 import {copyFile, mkdirp} from '../lib/fileUtils';
 import {child_process} from '../lib/node';
@@ -9,7 +7,7 @@ import {findFlowRoot} from '../lib/flowProjectUtils';
 
 import {
   toSemverString as flowVersionToSemver,
-  parseFlowSpecificVer,
+  determineFlowSpecificVersion,
 } from '../lib/flowVersion';
 import type {FlowVersion} from '../lib/flowVersion';
 
@@ -25,7 +23,6 @@ import {
 } from '../lib/npm/npmLibDefs';
 
 import {
-  findFlowSpecificVer,
   findWorkspacesPackages,
   getPackageJsonData,
   getPackageJsonDependencies,
@@ -63,7 +60,7 @@ export type Args = {
   packageDir?: mixed, // string
   ignoreDeps?: mixed, // Array<string>
   rootDir?: mixed, // string,
-  useCacheUntil?: mixed, // seconds
+  useCacheUntil?: mixed, // number (milliseconds)
   explicitLibDefs: mixed, // Array<string>
   ...
 };
@@ -153,7 +150,10 @@ export async function run(args: Args): Promise<number> {
       : process.cwd();
   const packageDir =
     typeof args.packageDir === 'string' ? path.resolve(args.packageDir) : cwd;
-  const flowVersion = await determineFlowVersion(packageDir, args.flowVersion);
+  const flowVersion = await determineFlowSpecificVersion(
+    packageDir,
+    args.flowVersion,
+  );
   const libdefDir =
     typeof args.libdefDir === 'string' ? args.libdefDir : 'flow-typed';
   if (args.ignoreDeps !== undefined && !Array.isArray(args.ignoreDeps)) {
@@ -216,34 +216,6 @@ export async function run(args: Args): Promise<number> {
   }
 
   return 0;
-}
-
-async function determineFlowVersion(
-  cwd: string,
-  flowVersionArg?: mixed,
-): Promise<{|
-  kind: 'specific',
-  ver: FlowSpecificVer,
-|}> {
-  if (flowVersionArg && typeof flowVersionArg === 'string') {
-    // Be permissive if the prefix 'v' is left off
-    let flowVersionStr =
-      flowVersionArg[0] === 'v' ? flowVersionArg : `v${flowVersionArg}`;
-
-    if (/^v[0-9]+\.[0-9]+$/.test(flowVersionStr)) {
-      flowVersionStr = `${flowVersionStr}.0`;
-    }
-
-    return {
-      kind: 'specific',
-      ver: parseFlowSpecificVer(flowVersionStr),
-    };
-  } else {
-    return {
-      kind: 'specific',
-      ver: await findFlowSpecificVer(cwd),
-    };
-  }
 }
 
 async function installCoreLibDefs(): Promise<number> {
@@ -666,7 +638,6 @@ async function installNpmLibDef(
 }
 
 export {
-  determineFlowVersion as _determineFlowVersion,
   installNpmLibDefs as _installNpmLibDefs,
   installNpmLibDef as _installNpmLibDef,
 };
