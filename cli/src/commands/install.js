@@ -189,13 +189,6 @@ export async function run(args: Args): Promise<number> {
     );
   } catch (e) {}
 
-  if (ftConfig) {
-    const coreLibDefResult = await installCoreLibDefs(ftConfig);
-    if (coreLibDefResult !== 0) {
-      return coreLibDefResult;
-    }
-  }
-
   if (args.cacheDir) {
     const cacheDir = path.resolve(String(args.cacheDir));
     console.log('• Setting cache dir', cacheDir);
@@ -216,6 +209,14 @@ export async function run(args: Args): Promise<number> {
   });
   if (npmLibDefResult !== 0) {
     return npmLibDefResult;
+  }
+
+  // Must be after `installNpmLibDefs` to ensure cache is updated first
+  if (ftConfig) {
+    const coreLibDefResult = await installCoreLibDefs(ftConfig);
+    if (coreLibDefResult !== 0) {
+      return coreLibDefResult;
+    }
   }
 
   // Once complete restart flow to solve flow issues when scanning large diffs
