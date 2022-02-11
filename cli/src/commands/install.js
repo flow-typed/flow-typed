@@ -243,12 +243,20 @@ async function installCoreLibDefs({env}: FtConfig): Promise<number> {
       return 0;
     }
 
+    // Get a list of all core defs
+    // getNpmLibDefs(path.join(getCacheRepoDir(), 'definitions'));
+
     // Go through each env and try to install a libdef of the same name
     // for the given flow version,
     // if none is found throw a warning and continue. We shouldn't block the user.
     env.forEach(en => {
       if (typeof en === 'string') {
         // Try install
+        // 1. Check if it's already installed
+        // 2. Check if it's been overriden
+        // 3. Uninstall prev installed
+        // 4. With cached def, code sign it
+        // 5. Write it to dir
       }
     });
   }
