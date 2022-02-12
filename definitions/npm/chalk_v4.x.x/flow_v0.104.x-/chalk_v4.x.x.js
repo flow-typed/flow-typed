@@ -85,7 +85,7 @@ declare module "chalk" {
     +bgBlueBright: Chalk,
     +bgMagentaBright: Chalk,
     +bgCyanBright: Chalk,
-    +bgWhiteBrigh: Chalk,
+    +bgWhiteBright: Chalk,
 
     supportsColor: ColorSupport
   }
