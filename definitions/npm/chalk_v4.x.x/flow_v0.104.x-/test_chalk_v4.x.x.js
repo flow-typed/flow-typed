@@ -1,6 +1,6 @@
 // @flow
 
-import chalk, { bold, Chalk } from 'chalk';
+import chalk, { bold, type Chalk } from 'chalk';
 
 const requiredChalk = require('chalk');
 
