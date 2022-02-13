@@ -208,6 +208,8 @@ export async function run(args: Args): Promise<number> {
     const coreLibDefResult = await installCoreLibDefs(
       ftConfig,
       flowVersion,
+      cwd,
+      libdefDir,
       useCacheUntil,
     );
     if (coreLibDefResult !== 0) {
@@ -231,19 +233,21 @@ export async function run(args: Args): Promise<number> {
 async function installCoreLibDefs(
   {env}: FtConfig,
   flowVersion: FlowVersion,
+  flowProjectRoot,
+  libdefDir,
   useCacheUntil: number,
 ): Promise<number> {
   if (env) {
     console.log(
       colors.green(
-        '`env` key found in `ft-config`, attempting to install core definitions...',
+        '• `env` key found in `ft-config`, attempting to install core definitions...',
       ),
     );
 
     if (!Array.isArray(env)) {
       console.log(
         colors.yellow(
-          'Warning: `env` in `ft-config.json` must be of type Array<string>',
+          'Warning: `env` in `ft-config.json` must be of type Array<string> - skipping',
         ),
       );
       return 0;
@@ -251,6 +255,9 @@ async function installCoreLibDefs(
 
     // Get a list of all core defs
     const coreDefs = (await getCoreDefs()).flat();
+
+    const flowTypedDirPath = path.join(flowProjectRoot, libdefDir, 'core');
+    await mkdirp(flowTypedDirPath);
 
     // Go through each env and try to install a libdef of the same name
     // for the given flow version,
@@ -266,7 +273,18 @@ async function installCoreLibDefs(
           );
 
           if (def) {
-            // install it here
+            // check it needs to be deleted first
+            // const toUninstall = libDefsToUninstall.get(
+            //   getScopedPackageName(libDef),
+            // );
+            // delete it
+            // if (toUninstall != null) {
+            //   await fs.unlink(toUninstall);
+            // }
+            // try to install it now, which if it still exists we know
+            // it's been modified and we will flag it unless `overwrite`
+            // is passed
+            // installNpmLibDef(libDef, flowTypedDirPath, overwrite);
           } else {
             console.log(
               colors.yellow(
@@ -274,13 +292,6 @@ async function installCoreLibDefs(
               ),
             );
           }
-          // Try install
-          // 1. Check if it's already installed
-          //    - if not install it immediately
-          // 2. Check if it's been overriden
-          // 3. Uninstall prev installed
-          // 4. With cached def, code sign it
-          // 5. Write it to dir
         }
       }),
     );
