@@ -9,7 +9,7 @@ import {
   CACHE_REPO_EXPIRY,
 } from '../lib/cacheRepoUtils';
 import {signCodeStream} from '../lib/codeSign';
-import {getCoreDefs} from '../lib/coreDefs';
+import {getCoreDefs, findCoreDef} from '../lib/coreDefs';
 import {copyFile, mkdirp} from '../lib/fileUtils';
 import {findFlowRoot} from '../lib/flowProjectUtils';
 import {
@@ -185,6 +185,8 @@ export async function run(args: Args): Promise<number> {
     setCustomCacheDir(cacheDir);
   }
 
+  const useCacheUntil = Number(args.useCacheUntil) || CACHE_REPO_EXPIRY;
+
   const npmLibDefResult = await installNpmLibDefs({
     cwd,
     flowVersion,
@@ -203,7 +205,11 @@ export async function run(args: Args): Promise<number> {
 
   // Must be after `installNpmLibDefs` to ensure cache is updated first
   if (ftConfig) {
-    const coreLibDefResult = await installCoreLibDefs(ftConfig);
+    const coreLibDefResult = await installCoreLibDefs(
+      ftConfig,
+      flowVersion,
+      useCacheUntil,
+    );
     if (coreLibDefResult !== 0) {
       return coreLibDefResult;
     }
@@ -222,8 +228,18 @@ export async function run(args: Args): Promise<number> {
   return 0;
 }
 
-async function installCoreLibDefs({env}: FtConfig): Promise<number> {
+async function installCoreLibDefs(
+  {env}: FtConfig,
+  flowVersion: FlowVersion,
+  useCacheUntil: number,
+): Promise<number> {
   if (env) {
+    console.log(
+      colors.green(
+        '`env` key found in `ft-config`, attempting to install core definitions...',
+      ),
+    );
+
     if (!Array.isArray(env)) {
       console.log(
         colors.yellow(
@@ -234,29 +250,40 @@ async function installCoreLibDefs({env}: FtConfig): Promise<number> {
     }
 
     // Get a list of all core defs
-    const coreDefs = await getCoreDefs();
-
-    console.log(coreDefs);
+    const coreDefs = (await getCoreDefs()).flat();
 
     // Go through each env and try to install a libdef of the same name
     // for the given flow version,
     // if none is found throw a warning and continue. We shouldn't block the user.
-    env.forEach(en => {
-      if (typeof en === 'string') {
-        const def = coreDefs.find(def => def === en);
+    await Promise.all(
+      env.map(async en => {
+        if (typeof en === 'string') {
+          const def = await findCoreDef(
+            en,
+            flowVersion,
+            useCacheUntil,
+            coreDefs,
+          );
 
-        if (def) {
-          // install it here
+          if (def) {
+            // install it here
+          } else {
+            console.log(
+              colors.yellow(
+                `Was unable to install ${en}. The env might not exist or there is not a version compatible with your version of flow`,
+              ),
+            );
+          }
+          // Try install
+          // 1. Check if it's already installed
+          //    - if not install it immediately
+          // 2. Check if it's been overriden
+          // 3. Uninstall prev installed
+          // 4. With cached def, code sign it
+          // 5. Write it to dir
         }
-        // Try install
-        // 1. Check if it's already installed
-        //    - if not install it immediately
-        // 2. Check if it's been overriden
-        // 3. Uninstall prev installed
-        // 4. With cached def, code sign it
-        // 5. Write it to dir
-      }
-    });
+      }),
+    );
   }
 
   return 0;

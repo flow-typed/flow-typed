@@ -1,5 +1,6 @@
 // @flow
 import path from 'path';
+import semver from 'semver';
 
 import {getCacheRepoDir} from './cacheRepoUtils';
 import {fs} from './node';
@@ -7,6 +8,7 @@ import {ValidationError} from './ValidationError';
 import {
   disjointVersionsAll as disjointFlowVersionsAll,
   parseDirString as parseFlowDirString,
+  toSemverString as flowVersionToSemver,
   type FlowVersion,
 } from './flowVersion';
 import {TEST_FILE_NAME_RE} from './libDefs';
@@ -145,3 +147,31 @@ async function extractLibDefsFromNpmPkgDir(
 
   return coreDefs;
 }
+
+export const findCoreDef = (
+  defName: string,
+  flowVersion: FlowVersion,
+  useCacheUntil: number,
+  coreDefs: Array<CoreLibDef>,
+): CoreLibDef | void => {
+  return coreDefs.filter(def => {
+    let filterMatch = def.name === defName;
+
+    if (!filterMatch) {
+      return false;
+    }
+
+    switch (def.flowVersion.kind) {
+      case 'all':
+        return true;
+      case 'ranged':
+      case 'specific':
+        return semver.satisfies(
+          flowVersionToSemver(flowVersion),
+          flowVersionToSemver(def.flowVersion),
+        );
+      default:
+        return true;
+    }
+  })[0];
+};
