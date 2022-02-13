@@ -1,18 +1,23 @@
 // @flow
+import colors from 'colors/safe';
+import semver from 'semver';
+import typeof Yargs from 'yargs';
+
+import {
+  getCacheRepoDir,
+  _setCustomCacheDir as setCustomCacheDir,
+  CACHE_REPO_EXPIRY,
+} from '../lib/cacheRepoUtils';
 import {signCodeStream} from '../lib/codeSign';
+import {getCoreDefs} from '../lib/coreDefs';
 import {copyFile, mkdirp} from '../lib/fileUtils';
-import {child_process} from '../lib/node';
-
 import {findFlowRoot} from '../lib/flowProjectUtils';
-
 import {
   toSemverString as flowVersionToSemver,
   determineFlowSpecificVersion,
+  type FlowVersion,
 } from '../lib/flowVersion';
-import type {FlowVersion} from '../lib/flowVersion';
-
-import {fs, path} from '../lib/node';
-
+import {fs, path, child_process} from '../lib/node';
 import {
   findNpmLibDef,
   getCacheNpmLibDefs,
@@ -21,7 +26,6 @@ import {
   getScopedPackageName,
   type NpmLibDef,
 } from '../lib/npm/npmLibDefs';
-
 import {
   findWorkspacesPackages,
   getPackageJsonData,
@@ -29,22 +33,8 @@ import {
   loadPnpResolver,
   mergePackageJsonDependencies,
 } from '../lib/npm/npmProjectUtils';
-
-import {
-  getCacheRepoDir,
-  _setCustomCacheDir as setCustomCacheDir,
-  CACHE_REPO_EXPIRY,
-} from '../lib/cacheRepoUtils';
-
 import {getRangeLowerBound} from '../lib/semver';
-
-import colors from 'colors/safe';
-
-import semver from 'semver';
-
 import {createStub, pkgHasFlowFiles} from '../lib/stubUtils';
-
-import typeof Yargs from 'yargs';
 
 type FtConfig = {
   env?: mixed, // Array<string>,
@@ -244,15 +234,23 @@ async function installCoreLibDefs({env}: FtConfig): Promise<number> {
     }
 
     // Get a list of all core defs
-    // getNpmLibDefs(path.join(getCacheRepoDir(), 'definitions'));
+    const coreDefs = await getCoreDefs();
+
+    console.log(coreDefs);
 
     // Go through each env and try to install a libdef of the same name
     // for the given flow version,
     // if none is found throw a warning and continue. We shouldn't block the user.
     env.forEach(en => {
       if (typeof en === 'string') {
+        const def = coreDefs.find(def => def === en);
+
+        if (def) {
+          // install it here
+        }
         // Try install
         // 1. Check if it's already installed
+        //    - if not install it immediately
         // 2. Check if it's been overriden
         // 3. Uninstall prev installed
         // 4. With cached def, code sign it
@@ -388,6 +386,7 @@ async function installNpmLibDefs({
   ][] = [];
   const unavailableLibDefs = [];
 
+  // This updates the cache for all definition types, npm/core/etc
   const libDefs = await getCacheNpmLibDefs(useCacheUntil, skipCache);
 
   const getLibDefsToInstall = async (entries: Array<[string, string]>) => {
