@@ -1,6 +1,6 @@
 // @flow
 
-import chalk, { bold, type Chalk } from 'chalk';
+import chalk, { bold, type Chalk, type Color } from 'chalk';
 
 const requiredChalk = require('chalk');
 
@@ -28,3 +28,7 @@ const supportsStringTemplate: string = chalk`{red string template} done`;
 const useRequiredChalk: string = requiredChalk.bold("required chalk");
 
 const ctx: Chalk = new chalk.Instance({level: 0});
+
+// $FlowExpectedError[incompatible-type] Color must be one of supported colors
+const a: Color = 'random';
+const b: Color = 'black';

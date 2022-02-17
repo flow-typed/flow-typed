@@ -1,6 +1,48 @@
 // From: https://github.com/chalk/chalk/blob/master/index.d.ts
 
 declare module "chalk" {
+  declare type ForegroundColor =
+    | 'black'
+    | 'red'
+    | 'green'
+    | 'yellow'
+    | 'blue'
+    | 'magenta'
+    | 'cyan'
+    | 'white'
+    | 'gray'
+    | 'grey'
+    | 'blackBright'
+    | 'redBright'
+    | 'greenBright'
+    | 'yellowBright'
+    | 'blueBright'
+    | 'magentaBright'
+    | 'cyanBright'
+    | 'whiteBright';
+
+  declare type BackgroundColor =
+    | 'bgBlack'
+    | 'bgRed'
+    | 'bgGreen'
+    | 'bgYellow'
+    | 'bgBlue'
+    | 'bgMagenta'
+    | 'bgCyan'
+    | 'bgWhite'
+    | 'bgGray'
+    | 'bgGrey'
+    | 'bgBlackBright'
+    | 'bgRedBright'
+    | 'bgGreenBright'
+    | 'bgYellowBright'
+    | 'bgBlueBright'
+    | 'bgMagentaBright'
+    | 'bgCyanBright'
+    | 'bgWhiteBright';
+
+  declare type Color = ForegroundColor | BackgroundColor;
+
   declare type TemplateStringsArray = $ReadOnlyArray<string>;
 
   declare type Level = $Values<{
