@@ -4,8 +4,10 @@ import {PassThrough as PassThroughStream} from 'stream';
 import ora, { oraPromise } from 'ora';
 
 describe('ora', () => {
+  const spinner = ora('Loading unicorns');
+
   it('inits', () => {
-    const spinner = ora('Loading unicorns');
+    ora({});
     ora({text: 'Loading unicorns'});
     ora({prefixText: 'Loading unicorns'});
     ora({prefixText: () => 'Loading unicorns dynamically'});
@@ -20,6 +22,13 @@ describe('ora', () => {
     ora({isEnabled: true});
     ora({isSilent: false});
     ora({discardStdin: true});
+
+    // $FlowExpectedError[incompatible-call]
+    ora();
+    // $FlowExpectedError[incompatible-call]
+    ora(123);
+    // $FlowExpectedError[incompatible-call]
+    ora({ foo: 'bar' });
   });
 
   it('sets values', () => {
@@ -28,6 +37,9 @@ describe('ora', () => {
     (spinner.isSpinning: boolean);
     spinner.spinner = 'dots';
     spinner.indent = 5;
+
+    // $FlowExpectedError[prop-missing]
+    spinner.random = 5;
   });
 
   it('calls funcs', () => {
