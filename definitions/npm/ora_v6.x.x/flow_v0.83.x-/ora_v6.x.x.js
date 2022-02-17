@@ -158,7 +158,7 @@ declare module 'ora' {
     You could for example set this to `process.stdout` instead.
     @default process.stderr
     */
-    +stream?: WritableStream;
+    +stream?: stream$Writable;
 
     /**
     Force enable/disable the spinner. If not specified, the spinner will be enabled if the `stream` is being run inside a TTY context (not spawned or piped) and/or not in a CI environment.
