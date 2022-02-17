@@ -43,6 +43,17 @@ declare module "chalk" {
 
   declare type Color = ForegroundColor | BackgroundColor;
 
+  declare type Modifiers =
+    | 'reset'
+    | 'bold'
+    | 'dim'
+    | 'italic'
+    | 'underline'
+    | 'inverse'
+    | 'hidden'
+    | 'strikethrough'
+    | 'visible';
+
   declare type TemplateStringsArray = $ReadOnlyArray<string>;
 
   declare type Level = $Values<{

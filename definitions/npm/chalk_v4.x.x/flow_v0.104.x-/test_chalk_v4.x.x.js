@@ -1,6 +1,6 @@
 // @flow
 
-import chalk, { bold, type Chalk, type Color } from 'chalk';
+import chalk, { bold, type Chalk, type Color, type Modifiers } from 'chalk';
 
 const requiredChalk = require('chalk');
 
@@ -30,5 +30,9 @@ const useRequiredChalk: string = requiredChalk.bold("required chalk");
 const ctx: Chalk = new chalk.Instance({level: 0});
 
 // $FlowExpectedError[incompatible-type] Color must be one of supported colors
-const a: Color = 'random';
-const b: Color = 'black';
+const color1: Color = 'random';
+const color2: Color = 'black';
+
+// $FlowExpectedError[incompatible-type] Modifier must be one of supported modifiers
+const modifier1: Modifiers = 'random';
+const modifier2: Modifiers = 'underline';
