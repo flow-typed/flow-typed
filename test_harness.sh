@@ -17,14 +17,13 @@ else
   cd harness
   npm init -y
   npm i --save-dev $lib
-  npx flow-setup library
-  tee -a definition.js <<EOF
+  npx flow-setup flow-typed-harness
+  cat <<EOF > definition.js
 declare module "" {
 
 }
-
 EOF
-  tee -a test_definition.js <<EOF
+  cat <<EOF > test_definition.js
 // @flow
 import { describe, it } from 'flow-typed-test';
 // import lib from 'test';
@@ -34,6 +33,16 @@ describe('', () => {
 
   });
 });
-
 EOF
 fi
+
+cat <<EOF > README.md
+# flow-typed Test Harness
+
+Welcome, this is a testing ground created to help you write and test flow definitions
+before contributing them back to our registry.
+
+This directory is git ignored so please feel free to add any settings to `.flowconfig`
+or dependencies to package.json or other library definitions to achieve
+your library definition.
+EOF
