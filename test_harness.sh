@@ -1,14 +1,22 @@
 #!/bin/sh
 
+flowVersion=$1
+if [ -z "$flowVersion" ]
+then
+  lib="flow-bin@latest"
+else
+  lib="flow-bin@$flowVersion"
+fi
+
 if [ -d "./harness" ]
 then
   cd harness
-  npm i --save-dev flow-bin # load up a different version of harness
+  npm i --save-dev $lib
 else
   mkdir harness
   cd harness
   npm init -y
-  npm i --save-dev flow-bin # here add the @ version or use latest
+  npm i --save-dev $lib
   npx flow-setup library
   tee -a definition.js <<EOF
 declare module "" {
