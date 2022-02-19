@@ -2,7 +2,8 @@
 
 if [ -d "./harness" ]
 then
-  echo "it's here"
+  cd harness
+  npm i --save-dev flow-bin # load up a different version of harness
 else
   mkdir harness
   cd harness
@@ -13,9 +14,18 @@ else
 declare module "" {
 
 }
+
 EOF
   tee -a test_definition.js <<EOF
 // @flow
-// import lib from 'lib';
+import { describe, it } from 'flow-typed-test';
+// import lib from 'test';
+
+describe('', () => {
+  it('', () => {
+
+  });
+});
+
 EOF
 fi
