@@ -18,7 +18,7 @@ else
   npm init -y
   npm i --save-dev $lib
   npx flow-setup flow-typed-harness
-  cp ../docs/harness.md harness
+  cp ../docs/harness.md README.md
   cat <<EOF > definition.js
 declare module "" {
 
