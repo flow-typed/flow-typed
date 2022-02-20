@@ -9,7 +9,7 @@ import {
   CACHE_REPO_EXPIRY,
 } from '../lib/cacheRepoUtils';
 import {signCodeStream} from '../lib/codeSign';
-import {getCoreDefs, findCoreDef} from '../lib/coreDefs';
+import {getCoreDefs, findCoreDef, getCoreDefVersionHash} from '../lib/coreDefs';
 import {copyFile, mkdirp} from '../lib/fileUtils';
 import {findFlowRoot} from '../lib/flowProjectUtils';
 import {
@@ -240,7 +240,7 @@ async function installCoreLibDefs(
   if (env) {
     console.log(
       colors.green(
-        '• `env` key found in `ft-config`, attempting to install core definitions...',
+        '• `env` key found in `ft-config`, attempting to install core definitions...\n',
       ),
     );
 
@@ -273,6 +273,34 @@ async function installCoreLibDefs(
           );
 
           if (def) {
+            const fileName = `${en}.js`;
+            const defLocalPath = path.join(flowTypedDirPath, fileName);
+            const envAlreadyInstalled = await fs.exists(defLocalPath);
+            if (envAlreadyInstalled) {
+              // try generate signature and compare with def
+              // only if not overwrite mode enabled
+              // if they are not the same then it's been overwritten
+              // and log a message and then return
+              // otherwise delete it so that later steps can install it
+              // return;
+            }
+
+            const repoVersion = await getCoreDefVersionHash(
+              getCacheRepoDir(),
+              def,
+            );
+            const codeSignPreprocessor = signCodeStream(repoVersion);
+            await copyFile(def.path, defLocalPath, codeSignPreprocessor);
+
+            console.log(
+              colors.bold('  • %s\n' + '    └> %s'),
+              en,
+              colors.green(`.${defLocalPath}`),
+            );
+            // if def does not exist install it
+            // otherwise read the file and compare the signature
+            // if
+
             // check it needs to be deleted first
             // const toUninstall = libDefsToUninstall.get(
             //   getScopedPackageName(libDef),
@@ -287,6 +315,8 @@ async function installCoreLibDefs(
             // installNpmLibDef(libDef, flowTypedDirPath, overwrite);
           } else {
             console.log(
+              colors.bold('  • %s\n' + '    └> %s'),
+              en,
               colors.yellow(
                 `Was unable to install ${en}. The env might not exist or there is not a version compatible with your version of flow`,
               ),

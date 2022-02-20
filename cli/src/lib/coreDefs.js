@@ -12,6 +12,7 @@ import {
   type FlowVersion,
 } from './flowVersion';
 import {TEST_FILE_NAME_RE} from './libDefs';
+import {findLatestFileCommitHash} from './git';
 
 type CoreLibDef = {
   name: string,
@@ -175,3 +176,16 @@ export const findCoreDef = (
     }
   })[0];
 };
+
+export async function getCoreDefVersionHash(
+  repoDirPath: string,
+  libDef: CoreLibDef,
+): Promise<string> {
+  const latestCommitHash = await findLatestFileCommitHash(
+    repoDirPath,
+    path.relative(repoDirPath, libDef.path),
+  );
+  return `${latestCommitHash.substr(0, 10)}/${
+    libDef.name
+  }/flow_${flowVersionToSemver(libDef.flowVersion)}`;
+}
