@@ -201,7 +201,7 @@ export async function run(args: Args): Promise<number> {
             'core',
             `${en}.js`,
           );
-          if (!fs.exists(localDefPath)) {
+          if (!(await fs.exists(localDefPath))) {
             outdatedList.push({
               name: en,
               message:

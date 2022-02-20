@@ -61,8 +61,17 @@ describe('outdated (command)', () => {
         const FAKE_CACHE_REPO_DIR = path.join(FAKE_CACHE_DIR, 'repo');
         const FLOWPROJ_DIR = path.join(ROOT_DIR, 'flowProj');
         const FLOWTYPED_DIR = path.join(FLOWPROJ_DIR, 'flow-typed', 'npm');
+        const FLOWTYPED_CORE_DIR = path.join(
+          FLOWPROJ_DIR,
+          'flow-typed',
+          'core',
+        );
 
-        await Promise.all([mkdirp(FAKE_CACHE_REPO_DIR), mkdirp(FLOWTYPED_DIR)]);
+        await Promise.all([
+          mkdirp(FAKE_CACHE_REPO_DIR),
+          mkdirp(FLOWTYPED_DIR),
+          mkdirp(FLOWTYPED_CORE_DIR),
+        ]);
 
         await copyDir(FIXTURE_FAKE_CACHE_REPO_DIR, FAKE_CACHE_REPO_DIR);
 
@@ -124,8 +133,6 @@ declare module 'foo' {
           }),
           mkdirp(path.join(FLOWPROJ_DIR, 'node_modules', 'foo')),
           mkdirp(path.join(FLOWPROJ_DIR, 'node_modules', 'flow-bin')),
-          mkdirp(path.join(FLOWPROJ_DIR, 'flow-typed')),
-          mkdirp(path.join(FLOWPROJ_DIR, 'flow-typed', 'npm')),
           touchFile(
             path.join(FLOWPROJ_DIR, 'flow-typed', 'npm', 'foo_vx.x.x.js'),
           ),
@@ -178,8 +185,6 @@ declare module 'foo' {}`;
           }),
           mkdirp(path.join(FLOWPROJ_DIR, 'node_modules', 'foo')),
           mkdirp(path.join(FLOWPROJ_DIR, 'node_modules', 'flow-bin')),
-          mkdirp(path.join(FLOWPROJ_DIR, 'flow-typed')),
-          mkdirp(path.join(FLOWPROJ_DIR, 'flow-typed', 'npm')),
           touchFile(
             path.join(FLOWPROJ_DIR, 'flow-typed', 'npm', 'foo_v1.x.x.js'),
           ),
@@ -251,6 +256,120 @@ declare module 'foo' {}`;
 
         expect(console.log).toHaveBeenCalledWith(
           'All your lib defs are up to date!',
+        );
+      });
+    });
+
+    it('reports outdated core definitions as needing updates', () => {
+      const fooLibdef = `// flow-typed signature: fa26c13e83581eea415de59d5f03e416
+// flow-typed version: /jsx/flow_>=v0.83.x
+
+declare module 'foo' {}`;
+
+      return fakeProjectEnv(async FLOWPROJ_DIR => {
+        // Create some dependencies
+        await Promise.all([
+          touchFile(path.join(FLOWPROJ_DIR, '.flowconfig')),
+          writePkgJson(path.join(FLOWPROJ_DIR, 'package.json'), {
+            name: 'test',
+            devDependencies: {
+              'flow-bin': '^0.162.0',
+            },
+          }),
+          mkdirp(path.join(FLOWPROJ_DIR, 'node_modules', 'foo')),
+          mkdirp(path.join(FLOWPROJ_DIR, 'node_modules', 'flow-bin')),
+          fs.writeFile(
+            path.join(FLOWPROJ_DIR, 'flow-typed', 'core', 'jsx.js'),
+            fooLibdef,
+          ),
+          fs.writeFile(
+            path.join(FLOWPROJ_DIR, 'flow-typed', 'ft-config.json'),
+            '{ "env": ["jsx"] }',
+          ),
+        ]);
+
+        await run({});
+
+        expect(
+          await Promise.all([
+            fs.exists(path.join(FLOWPROJ_DIR, 'flow-typed', 'core', 'jsx.js')),
+          ]),
+        ).toEqual([true]);
+
+        expect(console.log).toHaveBeenCalledWith(
+          table([
+            ['Name', 'Details'],
+            [
+              'jsx',
+              'This core definition does not match what we found in the registry, update it with `flow-typed update`',
+            ],
+          ]),
+        );
+      });
+    });
+
+    it('reports outdated core definitions which do not exist in the registry', () => {
+      return fakeProjectEnv(async FLOWPROJ_DIR => {
+        // Create some dependencies
+        await Promise.all([
+          touchFile(path.join(FLOWPROJ_DIR, '.flowconfig')),
+          writePkgJson(path.join(FLOWPROJ_DIR, 'package.json'), {
+            name: 'test',
+            devDependencies: {
+              'flow-bin': '^0.162.0',
+            },
+          }),
+          mkdirp(path.join(FLOWPROJ_DIR, 'node_modules', 'foo')),
+          mkdirp(path.join(FLOWPROJ_DIR, 'node_modules', 'flow-bin')),
+          fs.writeFile(
+            path.join(FLOWPROJ_DIR, 'flow-typed', 'ft-config.json'),
+            '{ "env": ["random"] }',
+          ),
+        ]);
+
+        await run({});
+
+        expect(console.log).toHaveBeenCalledWith(
+          table([
+            ['Name', 'Details'],
+            [
+              'random',
+              'This core definition does not exist in the registry or there is no compatible definition for your version of flow',
+            ],
+          ]),
+        );
+      });
+    });
+
+    it('reports outdated core definition when it exists ft-config and registry but has not been installed', () => {
+      return fakeProjectEnv(async FLOWPROJ_DIR => {
+        // Create some dependencies
+        await Promise.all([
+          touchFile(path.join(FLOWPROJ_DIR, '.flowconfig')),
+          writePkgJson(path.join(FLOWPROJ_DIR, 'package.json'), {
+            name: 'test',
+            devDependencies: {
+              'flow-bin': '^0.162.0',
+            },
+          }),
+          mkdirp(path.join(FLOWPROJ_DIR, 'node_modules', 'foo')),
+          mkdirp(path.join(FLOWPROJ_DIR, 'node_modules', 'flow-bin')),
+          fs.writeFile(
+            path.join(FLOWPROJ_DIR, 'flow-typed', 'ft-config.json'),
+            '{ "env": ["jsx"] }',
+          ),
+        ]);
+
+        await run({});
+
+        expect(console.log).toHaveBeenCalledWith(
+          table([
+            ['Name', 'Details'],
+            [
+              'jsx',
+              'This core def has not yet been installed try running `flow-typed install`',
+            ],
+          ]),
         );
       });
     });
