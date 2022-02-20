@@ -1,5 +1,3 @@
-// @flow
-
 declare type jsx$HTMLElementProps = {|
   /**
    * Specifies a shortcut key to activate/focus an element

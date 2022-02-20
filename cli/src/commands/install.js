@@ -8,7 +8,7 @@ import {
   _setCustomCacheDir as setCustomCacheDir,
   CACHE_REPO_EXPIRY,
 } from '../lib/cacheRepoUtils';
-import {signCodeStream} from '../lib/codeSign';
+import {signCodeStream, verifySignedCode} from '../lib/codeSign';
 import {getCoreDefs, findCoreDef, getCoreDefVersionHash} from '../lib/coreDefs';
 import {copyFile, mkdirp} from '../lib/fileUtils';
 import {findFlowRoot} from '../lib/flowProjectUtils';
@@ -211,6 +211,7 @@ export async function run(args: Args): Promise<number> {
       cwd,
       libdefDir,
       useCacheUntil,
+      Boolean(args.overwrite),
     );
     if (coreLibDefResult !== 0) {
       return coreLibDefResult;
@@ -236,6 +237,7 @@ async function installCoreLibDefs(
   flowProjectRoot,
   libdefDir,
   useCacheUntil: number,
+  overwrite: boolean,
 ): Promise<number> {
   if (env) {
     console.log(
@@ -277,12 +279,39 @@ async function installCoreLibDefs(
             const defLocalPath = path.join(flowTypedDirPath, fileName);
             const envAlreadyInstalled = await fs.exists(defLocalPath);
             if (envAlreadyInstalled) {
-              // try generate signature and compare with def
-              // only if not overwrite mode enabled
-              // if they are not the same then it's been overwritten
-              // and log a message and then return
-              // otherwise delete it so that later steps can install it
-              // return;
+              const localFile = fs.readFileSync(defLocalPath, 'utf-8');
+
+              if (!verifySignedCode(localFile) && !overwrite) {
+                console.log(
+                  colors.bold(
+                    '  • %s\n' +
+                      '    └> %s\n' +
+                      '       %s\n' +
+                      '       %s\n' +
+                      '       %s\n' +
+                      '       %s',
+                  ),
+                  en,
+                  colors.red(
+                    `${en} already exists and appears to have been manually written or changed!`,
+                  ),
+                  colors.yellow(
+                    `Consider contributing your changes back to flow-typed repository :)`,
+                  ),
+                  colors.yellow(
+                    `${en} already exists and appears to have been manually written or changed!`,
+                  ),
+                  colors.yellow(
+                    `Read more at https://github.com/flow-typed/flow-typed/blob/master/CONTRIBUTING.md`,
+                  ),
+                  colors.yellow(
+                    `Use --overwrite to overwrite the existing core defs.`,
+                  ),
+                );
+                return;
+              }
+
+              fs.unlink(defLocalPath);
             }
 
             const repoVersion = await getCoreDefVersionHash(
@@ -295,24 +324,10 @@ async function installCoreLibDefs(
             console.log(
               colors.bold('  • %s\n' + '    └> %s'),
               en,
-              colors.green(`.${defLocalPath}`),
+              colors.green(
+                `.${path.sep}${path.relative(flowProjectRoot, defLocalPath)}`,
+              ),
             );
-            // if def does not exist install it
-            // otherwise read the file and compare the signature
-            // if
-
-            // check it needs to be deleted first
-            // const toUninstall = libDefsToUninstall.get(
-            //   getScopedPackageName(libDef),
-            // );
-            // delete it
-            // if (toUninstall != null) {
-            //   await fs.unlink(toUninstall);
-            // }
-            // try to install it now, which if it still exists we know
-            // it's been modified and we will flag it unless `overwrite`
-            // is passed
-            // installNpmLibDef(libDef, flowTypedDirPath, overwrite);
           } else {
             console.log(
               colors.bold('  • %s\n' + '    └> %s'),
@@ -708,7 +723,7 @@ async function installNpmLibDef(
         colors.green(
           `Consider contributing your changes back to flow-typed repository :)`,
         ),
-        `Read more at https://github.com/flowtype/flow-typed/wiki/Contributing-Library-Definitions`,
+        `Read more at https://github.com/flow-typed/flow-typed/blob/master/CONTRIBUTING.md`,
         'Use --overwrite to overwrite the existing libdef.',
       );
       return true;

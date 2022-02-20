@@ -4,7 +4,6 @@
  * cf. https://github.com/microsoft/TypeScript/blob/master/lib/lib.es5.d.ts
  * Flowgen v1.10.0
  * and somewhat updated by comparison with the core lib built into Flow
- * @flow
  */
 
 declare var NaN: number;
