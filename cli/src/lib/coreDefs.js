@@ -43,7 +43,7 @@ export const getCoreDefs = async (): Promise<Array<CoreLibDef>> => {
   if (errors.length) {
     throw errors;
   }
-  return [...settled].filter(Boolean);
+  return [...settled].filter(Boolean).flat();
 };
 
 const getSingleCoreDef = async (defName, coreDefPath) => {
@@ -51,7 +51,7 @@ const getSingleCoreDef = async (defName, coreDefPath) => {
   const itemStat = await fs.stat(itemPath);
   if (itemStat.isDirectory()) {
     // itemPath must be an env dir
-    return await extractLibDefsFromNpmPkgDir(itemPath, defName);
+    return await extractCoreDefs(itemPath, defName);
   } else {
     throw new ValidationError(
       `Expected only directories to be present in this directory.`,
@@ -59,7 +59,7 @@ const getSingleCoreDef = async (defName, coreDefPath) => {
   }
 };
 
-async function extractLibDefsFromNpmPkgDir(
+async function extractCoreDefs(
   envDirPath: string,
   defName: string,
 ): Promise<Array<CoreLibDef>> {

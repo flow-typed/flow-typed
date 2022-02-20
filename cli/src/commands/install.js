@@ -17,6 +17,7 @@ import {
   determineFlowSpecificVersion,
   type FlowVersion,
 } from '../lib/flowVersion';
+import {getFtConfig, type FtConfig} from '../lib/ftConfig';
 import {fs, path, child_process} from '../lib/node';
 import {
   findNpmLibDef,
@@ -35,10 +36,6 @@ import {
 } from '../lib/npm/npmProjectUtils';
 import {getRangeLowerBound} from '../lib/semver';
 import {createStub, pkgHasFlowFiles} from '../lib/stubUtils';
-
-type FtConfig = {
-  env?: mixed, // Array<string>,
-};
 
 export const name = 'install [explicitLibDefs...]';
 export const description = 'Installs libdefs into the ./flow-typed directory';
@@ -172,12 +169,7 @@ export async function run(args: Args): Promise<number> {
     return dep;
   });
 
-  let ftConfig: void | FtConfig;
-  try {
-    ftConfig = JSON.parse(
-      fs.readFileSync(path.join(cwd, libdefDir, 'ft-config.json'), 'utf-8'),
-    );
-  } catch (e) {}
+  const ftConfig = getFtConfig(cwd, libdefDir);
 
   if (args.cacheDir) {
     const cacheDir = path.resolve(String(args.cacheDir));
@@ -256,7 +248,7 @@ async function installCoreLibDefs(
     }
 
     // Get a list of all core defs
-    const coreDefs = (await getCoreDefs()).flat();
+    const coreDefs = await getCoreDefs();
 
     const flowTypedDirPath = path.join(flowProjectRoot, libdefDir, 'core');
     await mkdirp(flowTypedDirPath);
