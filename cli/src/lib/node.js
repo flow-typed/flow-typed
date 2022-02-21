@@ -21,7 +21,7 @@ export const child_process = {
         if (err) {
           rej(err);
         } else {
-          res({stdout: new Buffer(stdout), stderr: new Buffer(stderr)});
+          res({stdout: Buffer.from(stdout), stderr: Buffer.from(stderr)});
         }
       });
     });
