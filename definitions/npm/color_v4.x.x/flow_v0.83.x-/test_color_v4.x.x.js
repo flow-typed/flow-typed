@@ -8,6 +8,9 @@ describe('color', () => {
     Color({r: 255, g: 255, b: 255});
     Color.rgb(255, 255, 255);
     Color.rgb([255, 255, 255]);
+
+    // $FlowExpectedError[prop-missing]
+    Color.random();
   });
 
   it('getters', () => {
@@ -71,5 +74,8 @@ describe('color', () => {
       .rotate(0)
       .mix(Color(), 0)
       .hsl();
+
+    // $FlowExpectedError[prop-missing]
+    Color().random();
   });
 });
