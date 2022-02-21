@@ -94,6 +94,19 @@ declare module 'color' {
     opaquer(ratio: number): Color;
     rotate(degrees: number): Color;
     mix(mixinColor: Color, weight?: number): Color;
+
+    rgb(...args: Array<number>): Color;
+    hsl(...args: Array<number>): Color;
+    hsv(...args: Array<number>): Color;
+    hwb(...args: Array<number>): Color;
+    cmyk(...args: Array<number>): Color;
+    xyz(...args: Array<number>): Color;
+    lab(...args: Array<number>): Color;
+    lch(...args: Array<number>): Color;
+    ansi16(...args: Array<number>): Color;
+    ansi256(...args: Array<number>): Color;
+    hcg(...args: Array<number>): Color;
+    apple(...args: Array<number>): Color;
   }
 
   declare type ConvertColors =
