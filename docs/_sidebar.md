@@ -13,5 +13,6 @@
   - [update-cache](cache.md)
   - [validate-defs](validate.md)
   - [version](version.md)
+- [Test Harness](harness.md)
 - [FAQ](faq.md)
 - [Changelog](changelog.md)
