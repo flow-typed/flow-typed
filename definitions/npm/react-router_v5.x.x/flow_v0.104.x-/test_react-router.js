@@ -229,6 +229,14 @@ describe('react hook', () => {
     const params: { [key: string]: ?string, ... } = useParams();
   });
 
+  it('useParams with generic', () => {
+    type ParamsType = {|
+      +slug: string,
+    |};
+
+    const params: ParamsType = useParams<ParamsType>();
+  });
+
   it('useRouteMatch', () => {
     const match: Match = useRouteMatch();
     const matchPath: Match = useRouteMatch('/path');
