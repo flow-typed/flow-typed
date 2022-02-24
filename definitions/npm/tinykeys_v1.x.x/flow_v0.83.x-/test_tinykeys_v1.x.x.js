@@ -65,5 +65,8 @@ describe('tinykeys', () => {
 
   it('parseKeybinding', () => {
     let parsedShortcut = parseKeybinding('$mod+Shift+K $mod+1')
+
+    // $FlowExpectedError[incompatible-call]
+    parseKeybinding();
   });
 });
