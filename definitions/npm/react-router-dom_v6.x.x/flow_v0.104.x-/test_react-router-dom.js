@@ -7,10 +7,13 @@ import {
   NavLink,
   matchPath,
   withRouter,
+  Outlet,
   Redirect,
   Route,
+  Routes,
   useHistory,
   useLocation,
+  useOutletContext,
   useParams,
   useRouteMatch,
 } from "react-router-dom";
@@ -386,7 +389,27 @@ describe("react-router-dom", () => {
       // $FlowExpectedError[prop-missing] - unexpected prop xxx
       <Route xxx="1" />;
     });
-  })
+  });
+
+  describe('Routes', () => {
+    it('works', () => {
+      const Component = ({}) => <div>Hi!</div>;
+      <Routes>
+        <Route path="/login" element={<Component />} />
+      </Routes>;
+    });
+  });
+
+  describe('Outlet', () => {
+    it('can be used alone', () => {
+      <Outlet />;
+    });
+
+    it('can be passed anything', () => {
+      const [count, setCount] = React.useState(0);
+      <Outlet context={[count, setCount]} />;
+    });
+  });
 
   describe('react hook', () => {
     it('useHistory', () => {
@@ -395,6 +418,15 @@ describe("react-router-dom", () => {
 
     it('useLocation', () => {
       const location: Location = useLocation();
+    });
+
+    it('useOutlet', () => {
+      const [count, setCount] = useOutletContext();
+      const increment = () => setCount((c) => c + 1);
+      <button onClick={increment}>{count}</button>;
+
+      // $FlowExpectedError[extra-arg]
+      useOutletContext('');
     });
 
     it('useParams', () => {

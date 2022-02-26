@@ -138,6 +138,10 @@ declare module "react-router-dom" {
     when?: boolean
   |}>
 
+  declare export var Outlet: React$ComponentType<{|
+    context?: mixed;
+  |}>
+
   declare export var Redirect: React$ComponentType<{|
     to: string | LocationShape,
     push?: boolean,
