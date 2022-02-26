@@ -125,6 +125,14 @@ declare module "react-router-dom" {
     children?: React$Node
   |}>
 
+  declare export var Route: React$ComponentType<{|
+    caseSensitive?: boolean,
+    children?: React$Node,
+    element?: React$Element<any> | null,
+    index?: boolean,
+    path?: string,
+  |}>
+
   declare export var Prompt: React$ComponentType<{|
     message: string | ((location: Location) => string | boolean),
     when?: boolean
@@ -139,17 +147,14 @@ declare module "react-router-dom" {
   |}>
 
   declare export var Route: React$ComponentType<{|
-    component?: React$ComponentType<*>,
-    render?: (router: ContextRouter) => React$Node,
-    children?: React$ComponentType<ContextRouter> | React$Node,
-    path?: string | Array<string>,
-    exact?: boolean,
-    strict?: boolean,
-    location?: LocationShape,
-    sensitive?: boolean
+    caseSensitive?: boolean,
+    children?: React$Node,
+    element?: React$Element<any> | null,
+    index?: boolean,
+    path?: string,
   |}>
 
-  declare export var Switch: React$ComponentType<{|
+  declare export var Routes: React$ComponentType<{|
     children?: React$Node,
     location?: Location
   |}>
@@ -174,8 +179,41 @@ declare module "react-router-dom" {
 
   declare export function useHistory(): $PropertyType<ContextRouter, 'history'>;
   declare export function useLocation(): $PropertyType<ContextRouter, 'location'>;
+  declare export function useOutletContext<T>(): T;
   declare export function useParams<Params = $PropertyType<$PropertyType<ContextRouter, 'match'>, 'params'>>(): Params;
   declare export function useRouteMatch(path?: MatchPathOptions | string | string[]): $PropertyType<ContextRouter, 'match'>;
 
   declare export function generatePath(pattern?: string, params?: { +[string]: mixed, ... }): string;
+
+  declare type RouteObject = {|
+    caseSensitive?: boolean,
+    children?: Array<RouteObject>,
+    element?: React$Node,
+    index?: boolean,
+    path?: string,
+  |};
+
+  declare export function createRoutesFromChildren(
+    children: React$Node,
+  ): Array<RouteObject>;
+
+  declare type Params<Key: string> = {
+    +[key: Key]: string | void;
+  };
+
+  declare type RouteMatch<ParamKey: string> = {|
+    params: Params<ParamKey>,
+    pathname: string,
+    route: RouteObject,
+  |};
+
+  declare function matchRoutes(
+    routes: Array<RouteObject>,
+    location: LocationShape | string,
+    basename?: string,
+  ): Array<RouteMatch<string>> | null;
+
+  declare function renderMatches(
+    matches: Array<RouteMatch<string>> | null,
+  ): React$Element<any> | null;
 }
