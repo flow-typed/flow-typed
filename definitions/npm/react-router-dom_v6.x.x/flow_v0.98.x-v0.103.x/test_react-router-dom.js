@@ -361,23 +361,11 @@ describe("react-router-dom", () => {
       const Component = ({}) => <div>Hi!</div>;
       <Route path="/login" />;
 
-      <Route path={["/login", "/logout"]} />;
-
-      <Route path="/login" component={Component} />;
-
-      <Route path="/login" render={(context: ContextRouter) => <Component />} />;
-
-      <Route path="/login" children={(context: ContextRouter) => <Component />} />;
+      <Route path="/login" element={<Component />} />;
 
       <Route
-        location={{
-          pathname: "/courses",
-          search: "?sort=name",
-          hash: "#the-hash"
-        }}
-        exact
-        strict
-        sensitive
+        index
+        caseSensitive
       />;
     });
 
