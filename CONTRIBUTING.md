@@ -12,7 +12,7 @@ Contributing library definitions is as easy as sending a pull request!
   * [Create tests](#4-write-a-test-file-whose-name-starts-with-test_-in-the-flow-version-directory)
   * [Run tests](#5-run-your-tests)
   * [Raise pull request](#6-send-a-pull-request)
-  * [Core definitions](core-definitions)
+  * [Environment definitions](environment-definitions)
 * [Writing libdefs best practices](#writing-libdefs-best-practices)
   * [Read flow docs](#read-flow-docs)
   * [Don't import types from other libdefs](#dont-import-types-from-other-libdefs)
@@ -63,14 +63,14 @@ format:
     ├ color_v0.7.x/
     ├ ...
   |
-  ├ core/
-    ├ jsx/                    # <-- The name of the core environment
+  ├ environments/
+    ├ jsx/                    # <-- The name of the env environment
     | |
     | ├ flow_v0.83.x-/        # <-- A folder containing definition tested against the
     | | |                     #     specified version(s) of Flow (v0.83.x and onwards
     | | |                     #     in this case).
     | | |
-    | | └ jsx.js              # <-- The core definition file meant for the Flow version
+    | | └ jsx.js              # <-- The environment definition file meant for the Flow version
     | ├ ...
     ├ ...
   ├ ...
@@ -196,9 +196,9 @@ You know how to do it.
 
 ---
 
-#### Core definitions
+#### Environment definitions
 
-The above are instructions on how to submit a library definition against npm packages though the process is similar if contributing core definitions except instead of a package directory you just have an environment package that is the name of the environment without the need of versions.
+The above are instructions on how to submit a library definition against npm packages though the process is similar if contributing environment definitions. Except instead of a package directory you just have an environment package that is the name of the environment without the need of versions.
 
 ## Libdef best practices
 

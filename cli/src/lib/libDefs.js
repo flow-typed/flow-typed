@@ -331,8 +331,8 @@ export function parseRepoDirItem(
 |} {
   const dirItem = path.basename(dirItemPath);
 
-  // Core definitions don't have versions nor need any sort of name validation
-  if (dirItemPath.includes('definitions/core')) {
+  // env definitions don't have versions nor need any sort of name validation
+  if (dirItemPath.includes('definitions/environments')) {
     return {
       pkgName: dirItem,
       pkgVersion: {

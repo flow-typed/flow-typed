@@ -15,7 +15,7 @@ import {determineFlowSpecificVersion} from '../lib/flowVersion';
 import {signCodeStream} from '../lib/codeSign';
 import {CACHE_REPO_EXPIRY, getCacheRepoDir} from '../lib/cacheRepoUtils';
 import {getFtConfig} from '../lib/ftConfig';
-import {findCoreDef, getCoreDefVersionHash, getCoreDefs} from '../lib/coreDefs';
+import {findEnvDef, getEnvDefVersionHash, getEnvDefs} from '../lib/envDefs';
 
 const pullSignature = v => v.split('\n').slice(0, 2);
 
@@ -183,36 +183,36 @@ export async function run(args: Args): Promise<number> {
     }),
   );
 
-  const ftConfig = getFtConfig(cwd, libdefDir);
+  const ftConfig = getFtConfig(cwd);
   const {env} = ftConfig ?? {};
 
   if (Array.isArray(env)) {
-    const coreDefs = await getCoreDefs();
+    const envDefs = await getEnvDefs();
     await Promise.all(
       env.map(async en => {
         if (typeof en !== 'string') return;
 
-        const def = await findCoreDef(en, flowVersion, useCacheUntil, coreDefs);
+        const def = await findEnvDef(en, flowVersion, useCacheUntil, envDefs);
 
         if (def) {
           const localDefPath = path.join(
             flowProjectRoot,
             libdefDir,
-            'core',
+            'environments',
             `${en}.js`,
           );
           if (!(await fs.exists(localDefPath))) {
             outdatedList.push({
               name: en,
               message:
-                'This core def has not yet been installed try running `flow-typed install`',
+                'This env def has not yet been installed try running `flow-typed install`',
             });
             return;
           } else {
             const installedDef = fs.readFileSync(localDefPath, 'utf-8');
             const installedSignatureArray = pullSignature(installedDef);
 
-            const repoVersion = await getCoreDefVersionHash(
+            const repoVersion = await getEnvDefVersionHash(
               getCacheRepoDir(),
               def,
             );
@@ -229,7 +229,7 @@ export async function run(args: Args): Promise<number> {
               outdatedList.push({
                 name: en,
                 message:
-                  'This core definition does not match what we found in the registry, update it with `flow-typed update`',
+                  'This env definition does not match what we found in the registry, update it with `flow-typed update`',
               });
             }
           }
@@ -237,7 +237,7 @@ export async function run(args: Args): Promise<number> {
           outdatedList.push({
             name: en,
             message:
-              'This core definition does not exist in the registry or there is no compatible definition for your version of flow',
+              'This env definition does not exist in the registry or there is no compatible definition for your version of flow',
           });
         }
       }),

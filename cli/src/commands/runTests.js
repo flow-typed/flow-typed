@@ -54,14 +54,16 @@ type TestGroup = {
  * structs. Each TestGroup represents a Package/PackageVersion/FlowVersion
  * directory.
  */
-const basePathRegex = new RegExp('definitions/(npm|core)/(@[^/]*/)?[^/]*/?');
+const basePathRegex = new RegExp(
+  'definitions/(npm|environments)/(@[^/]*/)?[^/]*/?',
+);
 async function getTestGroups(
   repoDirPath,
-  coreDirPath,
+  envDirPath,
   onlyChanged: boolean = false,
 ): Promise<Array<TestGroup>> {
   let libDefs = await getLibDefs(repoDirPath);
-  let coreDefs = await getLibDefs(coreDirPath);
+  let envDefs = await getLibDefs(envDirPath);
   if (onlyChanged) {
     const diff = await getDefinitionsDiff();
     const baseDiff: string[] = diff
@@ -82,7 +84,7 @@ async function getTestGroups(
         version: `v${major}.${minor}.${patch}`,
       };
     });
-    libDefs = [...libDefs, ...coreDefs].filter(def =>
+    libDefs = [...libDefs, ...envDefs].filter(def =>
       changedDefs.some(d => {
         if (d.version === 'vx.x.x') {
           return d.name === def.pkgName;
@@ -616,14 +618,14 @@ async function runTestGroup(
 
 async function runTests(
   repoDirPath: string,
-  coreDirPath: string,
+  envDirPath: string,
   testPatterns: Array<string>,
   onlyChanged?: boolean,
   numberOfFlowVersions?: number,
 ): Promise<Map<string, Array<string>>> {
   const testPatternRes = testPatterns.map(patt => new RegExp(patt, 'g'));
   const testGroups = (
-    await getTestGroups(repoDirPath, coreDirPath, onlyChanged)
+    await getTestGroups(repoDirPath, envDirPath, onlyChanged)
   ).filter(testGroup => {
     if (testPatternRes.length === 0) {
       return true;
@@ -736,9 +738,9 @@ export async function run(argv: Args): Promise<number> {
   const repoDirPath = (await fs.exists(cwdDefsNPMPath))
     ? cwdDefsNPMPath
     : path.join(__dirname, '..', '..', '..', 'definitions', 'npm');
-  const cwdDefsCorePath = path.join(basePath, 'definitions', 'core');
-  const coreDirPath = (await fs.exists(cwdDefsCorePath))
-    ? cwdDefsCorePath
+  const cwdDefsEnvPath = path.join(basePath, 'definitions', 'environments');
+  const envDirPath = (await fs.exists(cwdDefsEnvPath))
+    ? cwdDefsEnvPath
     : path.join(__dirname, '..', '..', '..', 'definitions', 'npm');
 
   if (onlyChanged) {
@@ -759,7 +761,7 @@ export async function run(argv: Args): Promise<number> {
   try {
     results = await runTests(
       repoDirPath,
-      coreDirPath,
+      envDirPath,
       testPatterns,
       onlyChanged,
       numberOfFlowVersions,

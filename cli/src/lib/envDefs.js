@@ -14,18 +14,18 @@ import {
 import {TEST_FILE_NAME_RE} from './libDefs';
 import {findLatestFileCommitHash} from './git';
 
-type CoreLibDef = {
+type EnvLibDef = {
   name: string,
   flowVersion: FlowVersion,
   path: string,
   testFilePaths: Array<string>,
 };
 
-export const getCoreDefs = async (): Promise<Array<CoreLibDef>> => {
+export const getEnvDefs = async (): Promise<Array<EnvLibDef>> => {
   const definitionsDir = path.join(getCacheRepoDir(), 'definitions');
-  const coreDefsDirPath = path.join(definitionsDir, 'core');
+  const envDefsDirPath = path.join(definitionsDir, 'environments');
 
-  const dirItems = await fs.readdir(coreDefsDirPath);
+  const dirItems = await fs.readdir(envDefsDirPath);
   const errors = [];
   const proms = dirItems.map(async itemName => {
     // If a user opens definitions dir in finder it will create `.DS_Store`
@@ -33,7 +33,7 @@ export const getCoreDefs = async (): Promise<Array<CoreLibDef>> => {
     if (itemName === '.DS_Store') return;
 
     try {
-      return await getSingleCoreDef(itemName, coreDefsDirPath);
+      return await getSingleEnvDef(itemName, envDefsDirPath);
     } catch (e) {
       errors.push(e);
     }
@@ -46,12 +46,12 @@ export const getCoreDefs = async (): Promise<Array<CoreLibDef>> => {
   return [...settled].filter(Boolean).flat();
 };
 
-const getSingleCoreDef = async (defName, coreDefPath) => {
-  const itemPath = path.join(coreDefPath, defName);
+const getSingleEnvDef = async (defName, envDefPath) => {
+  const itemPath = path.join(envDefPath, defName);
   const itemStat = await fs.stat(itemPath);
   if (itemStat.isDirectory()) {
     // itemPath must be an env dir
-    return await extractCoreDefs(itemPath, defName);
+    return await extractEnvDefs(itemPath, defName);
   } else {
     throw new ValidationError(
       `Expected only directories to be present in this directory.`,
@@ -59,11 +59,11 @@ const getSingleCoreDef = async (defName, coreDefPath) => {
   }
 };
 
-async function extractCoreDefs(
+async function extractEnvDefs(
   envDirPath: string,
   defName: string,
-): Promise<Array<CoreLibDef>> {
-  const coreDefFileName = `${defName}.js`;
+): Promise<Array<EnvLibDef>> {
+  const envDefFileName = `${defName}.js`;
   const envDirItems = await fs.readdir(envDirPath);
 
   const commonTestFiles = [];
@@ -91,7 +91,7 @@ async function extractCoreDefs(
     throw new ValidationError('No libdef files found!');
   }
 
-  const coreDefs = [];
+  const envDefs = [];
   await Promise.all(
     parsedFlowDirs.map(async ([flowDirPath, flowVersion]) => {
       const testFilePaths = [...commonTestFiles];
@@ -104,8 +104,8 @@ async function extractCoreDefs(
             return;
           }
 
-          // Is this the libdef file?
-          if (flowDirItem === coreDefFileName) {
+          // Is this the env def file?
+          if (flowDirItem === envDefFileName) {
             libDefFilePath = path.join(flowDirPath, flowDirItem);
             return;
           }
@@ -119,25 +119,25 @@ async function extractCoreDefs(
           }
 
           throw new ValidationError(
-            `Unexpected file: ${coreDefFileName}. This directory can only contain test files ` +
-              `or a libdef file named \`${coreDefFileName}\`.`,
+            `Unexpected file: ${envDefFileName}. This directory can only contain test files ` +
+              `or a env def file named \`${envDefFileName}\`.`,
           );
         } else {
           throw new ValidationError(
             `Unexpected sub-directory. This directory can only contain test ` +
-              `files or a libdef file named \`${coreDefFileName}\`.`,
+              `files or a env def file named \`${envDefFileName}\`.`,
           );
         }
       });
 
       if (libDefFilePath === null) {
-        libDefFilePath = path.join(flowDirPath, coreDefFileName);
+        libDefFilePath = path.join(flowDirPath, envDefFileName);
         throw new ValidationError(
-          `No libdef file found. Looking for a file named ${coreDefFileName}`,
+          `No env def file found. Looking for a file named ${envDefFileName}`,
         );
       }
 
-      coreDefs.push({
+      envDefs.push({
         name: defName,
         flowVersion,
         path: libDefFilePath,
@@ -146,16 +146,16 @@ async function extractCoreDefs(
     }),
   );
 
-  return coreDefs;
+  return envDefs;
 }
 
-export const findCoreDef = (
+export const findEnvDef = (
   defName: string,
   flowVersion: FlowVersion,
   useCacheUntil: number,
-  coreDefs: Array<CoreLibDef>,
-): CoreLibDef | void => {
-  return coreDefs.filter(def => {
+  envDefs: Array<EnvLibDef>,
+): EnvLibDef | void => {
+  return envDefs.filter(def => {
     let filterMatch = def.name === defName;
 
     if (!filterMatch) {
@@ -177,9 +177,9 @@ export const findCoreDef = (
   })[0];
 };
 
-export async function getCoreDefVersionHash(
+export async function getEnvDefVersionHash(
   repoDirPath: string,
-  libDef: CoreLibDef,
+  libDef: EnvLibDef,
 ): Promise<string> {
   const latestCommitHash = await findLatestFileCommitHash(
     repoDirPath,

@@ -1233,8 +1233,8 @@ describe('install (command)', () => {
       });
     });
 
-    describe('core defs', () => {
-      it('installs core definitions if it exists in ft-config', () => {
+    describe('env defs', () => {
+      it('installs env definitions if it exists in flow-typed.config.json', () => {
         return fakeProjectEnv(async FLOWPROJ_DIR => {
           // Create some dependencies
           await Promise.all([
@@ -1251,10 +1251,10 @@ describe('install (command)', () => {
           await touchFile(path.join(FLOWPROJ_DIR, 'src', '.flowconfig'));
           await mkdirp(path.join(FLOWPROJ_DIR, 'src', 'flow-typed'));
           await touchFile(
-            path.join(FLOWPROJ_DIR, 'src', 'flow-typed', 'ft-config.json'),
+            path.join(FLOWPROJ_DIR, 'src', 'flow-typed.config.json'),
           );
           await fs.writeJson(
-            path.join(FLOWPROJ_DIR, 'src', 'flow-typed', 'ft-config.json'),
+            path.join(FLOWPROJ_DIR, 'src', 'flow-typed.config.json'),
             {env: ['jsx']},
           );
 
@@ -1264,10 +1264,16 @@ describe('install (command)', () => {
             rootDir: path.join(FLOWPROJ_DIR, 'src'),
           });
 
-          // Installs core definitions
+          // Installs env definitions
           expect(
             await fs.exists(
-              path.join(FLOWPROJ_DIR, 'src', 'flow-typed', 'core', 'jsx.js'),
+              path.join(
+                FLOWPROJ_DIR,
+                'src',
+                'flow-typed',
+                'environments',
+                'jsx.js',
+              ),
             ),
           ).toEqual(true);
         });
@@ -1294,19 +1300,33 @@ declare type jsx$HTMLElementProps = {||}`;
 
           await touchFile(path.join(FLOWPROJ_DIR, 'src', '.flowconfig'));
           await mkdirp(path.join(FLOWPROJ_DIR, 'src', 'flow-typed'));
-          await mkdirp(path.join(FLOWPROJ_DIR, 'src', 'flow-typed', 'core'));
+          await mkdirp(
+            path.join(FLOWPROJ_DIR, 'src', 'flow-typed', 'environments'),
+          );
           await touchFile(
-            path.join(FLOWPROJ_DIR, 'src', 'flow-typed', 'core', 'jsx.js'),
+            path.join(
+              FLOWPROJ_DIR,
+              'src',
+              'flow-typed',
+              'environments',
+              'jsx.js',
+            ),
           );
           await fs.writeFile(
-            path.join(FLOWPROJ_DIR, 'src', 'flow-typed', 'core', 'jsx.js'),
+            path.join(
+              FLOWPROJ_DIR,
+              'src',
+              'flow-typed',
+              'environments',
+              'jsx.js',
+            ),
             installedDef,
           );
           await touchFile(
-            path.join(FLOWPROJ_DIR, 'src', 'flow-typed', 'ft-config.json'),
+            path.join(FLOWPROJ_DIR, 'src', 'flow-typed.config.json'),
           );
           await fs.writeJson(
-            path.join(FLOWPROJ_DIR, 'src', 'flow-typed', 'ft-config.json'),
+            path.join(FLOWPROJ_DIR, 'src', 'flow-typed.config.json'),
             {env: ['jsx']},
           );
 
@@ -1316,17 +1336,23 @@ declare type jsx$HTMLElementProps = {||}`;
             rootDir: path.join(FLOWPROJ_DIR, 'src'),
           });
 
-          // Installs core definitions
+          // Installs env definitions
           expect(
             await fs.readFile(
-              path.join(FLOWPROJ_DIR, 'src', 'flow-typed', 'core', 'jsx.js'),
+              path.join(
+                FLOWPROJ_DIR,
+                'src',
+                'flow-typed',
+                'environments',
+                'jsx.js',
+              ),
               'utf-8',
             ),
           ).toEqual(installedDef);
         });
       });
 
-      it('overrides the core definition if overwrite arg is passed in', () => {
+      it('overrides the env definition if overwrite arg is passed in', () => {
         const installedDef = `// flow-typed signature: fa26c13e83581eea415de59d5f03e123
 // flow-typed version: /jsx/flow_>=v0.83.x
 
@@ -1347,19 +1373,33 @@ declare type jsx$HTMLElementProps = {||}`;
 
           await touchFile(path.join(FLOWPROJ_DIR, 'src', '.flowconfig'));
           await mkdirp(path.join(FLOWPROJ_DIR, 'src', 'flow-typed'));
-          await mkdirp(path.join(FLOWPROJ_DIR, 'src', 'flow-typed', 'core'));
+          await mkdirp(
+            path.join(FLOWPROJ_DIR, 'src', 'flow-typed', 'environments'),
+          );
           await touchFile(
-            path.join(FLOWPROJ_DIR, 'src', 'flow-typed', 'core', 'jsx.js'),
+            path.join(
+              FLOWPROJ_DIR,
+              'src',
+              'flow-typed',
+              'environments',
+              'jsx.js',
+            ),
           );
           await fs.writeFile(
-            path.join(FLOWPROJ_DIR, 'src', 'flow-typed', 'core', 'jsx.js'),
+            path.join(
+              FLOWPROJ_DIR,
+              'src',
+              'flow-typed',
+              'environments',
+              'jsx.js',
+            ),
             installedDef,
           );
           await touchFile(
-            path.join(FLOWPROJ_DIR, 'src', 'flow-typed', 'ft-config.json'),
+            path.join(FLOWPROJ_DIR, 'src', 'flow-typed.config.json'),
           );
           await fs.writeJson(
-            path.join(FLOWPROJ_DIR, 'src', 'flow-typed', 'ft-config.json'),
+            path.join(FLOWPROJ_DIR, 'src', 'flow-typed.config.json'),
             {env: ['jsx']},
           );
 
@@ -1370,10 +1410,16 @@ declare type jsx$HTMLElementProps = {||}`;
             overwrite: true,
           });
 
-          // Installs core definitions
+          // Installs env definitions
           expect(
             await fs.readFile(
-              path.join(FLOWPROJ_DIR, 'src', 'flow-typed', 'core', 'jsx.js'),
+              path.join(
+                FLOWPROJ_DIR,
+                'src',
+                'flow-typed',
+                'environments',
+                'jsx.js',
+              ),
               'utf-8',
             ),
           ).not.toEqual(installedDef);

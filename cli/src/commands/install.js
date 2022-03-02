@@ -9,7 +9,7 @@ import {
   CACHE_REPO_EXPIRY,
 } from '../lib/cacheRepoUtils';
 import {signCodeStream, verifySignedCode} from '../lib/codeSign';
-import {getCoreDefs, findCoreDef, getCoreDefVersionHash} from '../lib/coreDefs';
+import {getEnvDefs, findEnvDef, getEnvDefVersionHash} from '../lib/envDefs';
 import {copyFile, mkdirp} from '../lib/fileUtils';
 import {findFlowRoot} from '../lib/flowProjectUtils';
 import {
@@ -169,7 +169,7 @@ export async function run(args: Args): Promise<number> {
     return dep;
   });
 
-  const ftConfig = getFtConfig(cwd, libdefDir);
+  const ftConfig = getFtConfig(cwd);
 
   if (args.cacheDir) {
     const cacheDir = path.resolve(String(args.cacheDir));
@@ -197,7 +197,7 @@ export async function run(args: Args): Promise<number> {
 
   // Must be after `installNpmLibDefs` to ensure cache is updated first
   if (ftConfig) {
-    const coreLibDefResult = await installCoreLibDefs(
+    const envLibDefResult = await installEnvLibDefs(
       ftConfig,
       flowVersion,
       cwd,
@@ -205,8 +205,8 @@ export async function run(args: Args): Promise<number> {
       useCacheUntil,
       Boolean(args.overwrite),
     );
-    if (coreLibDefResult !== 0) {
-      return coreLibDefResult;
+    if (envLibDefResult !== 0) {
+      return envLibDefResult;
     }
   }
 
@@ -223,7 +223,7 @@ export async function run(args: Args): Promise<number> {
   return 0;
 }
 
-async function installCoreLibDefs(
+async function installEnvLibDefs(
   {env}: FtConfig,
   flowVersion: FlowVersion,
   flowProjectRoot,
@@ -234,23 +234,27 @@ async function installCoreLibDefs(
   if (env) {
     console.log(
       colors.green(
-        '• `env` key found in `ft-config`, attempting to install core definitions...\n',
+        '• `env` key found in `flow-typed.config.json`, attempting to install env definitions...\n',
       ),
     );
 
     if (!Array.isArray(env)) {
       console.log(
         colors.yellow(
-          'Warning: `env` in `ft-config.json` must be of type Array<string> - skipping',
+          'Warning: `env` in `flow-typed.config.json` must be of type Array<string> - skipping',
         ),
       );
       return 0;
     }
 
-    // Get a list of all core defs
-    const coreDefs = await getCoreDefs();
+    // Get a list of all environment defs
+    const envDefs = await getEnvDefs();
 
-    const flowTypedDirPath = path.join(flowProjectRoot, libdefDir, 'core');
+    const flowTypedDirPath = path.join(
+      flowProjectRoot,
+      libdefDir,
+      'environments',
+    );
     await mkdirp(flowTypedDirPath);
 
     // Go through each env and try to install a libdef of the same name
@@ -259,12 +263,7 @@ async function installCoreLibDefs(
     await Promise.all(
       env.map(async en => {
         if (typeof en === 'string') {
-          const def = await findCoreDef(
-            en,
-            flowVersion,
-            useCacheUntil,
-            coreDefs,
-          );
+          const def = await findEnvDef(en, flowVersion, useCacheUntil, envDefs);
 
           if (def) {
             const fileName = `${en}.js`;
@@ -297,7 +296,7 @@ async function installCoreLibDefs(
                     `Read more at https://github.com/flow-typed/flow-typed/blob/master/CONTRIBUTING.md`,
                   ),
                   colors.yellow(
-                    `Use --overwrite to overwrite the existing core defs.`,
+                    `Use --overwrite to overwrite the existing env defs.`,
                   ),
                 );
                 return;
@@ -306,7 +305,7 @@ async function installCoreLibDefs(
               fs.unlink(defLocalPath);
             }
 
-            const repoVersion = await getCoreDefVersionHash(
+            const repoVersion = await getEnvDefVersionHash(
               getCacheRepoDir(),
               def,
             );
@@ -461,7 +460,7 @@ async function installNpmLibDefs({
   ][] = [];
   const unavailableLibDefs = [];
 
-  // This updates the cache for all definition types, npm/core/etc
+  // This updates the cache for all definition types, npm/env/etc
   const libDefs = await getCacheNpmLibDefs(useCacheUntil, skipCache);
 
   const getLibDefsToInstall = async (entries: Array<[string, string]>) => {

@@ -61,16 +61,16 @@ describe('outdated (command)', () => {
         const FAKE_CACHE_REPO_DIR = path.join(FAKE_CACHE_DIR, 'repo');
         const FLOWPROJ_DIR = path.join(ROOT_DIR, 'flowProj');
         const FLOWTYPED_DIR = path.join(FLOWPROJ_DIR, 'flow-typed', 'npm');
-        const FLOWTYPED_CORE_DIR = path.join(
+        const FLOWTYPED_ENV_DIR = path.join(
           FLOWPROJ_DIR,
           'flow-typed',
-          'core',
+          'environments',
         );
 
         await Promise.all([
           mkdirp(FAKE_CACHE_REPO_DIR),
           mkdirp(FLOWTYPED_DIR),
-          mkdirp(FLOWTYPED_CORE_DIR),
+          mkdirp(FLOWTYPED_ENV_DIR),
         ]);
 
         await copyDir(FIXTURE_FAKE_CACHE_REPO_DIR, FAKE_CACHE_REPO_DIR);
@@ -260,7 +260,7 @@ declare module 'foo' {}`;
       });
     });
 
-    it('reports outdated core definitions as needing updates', () => {
+    it('reports outdated env definitions as needing updates', () => {
       const fooLibdef = `// flow-typed signature: fa26c13e83581eea415de59d5f03e416
 // flow-typed version: /jsx/flow_>=v0.83.x
 
@@ -279,11 +279,11 @@ declare module 'foo' {}`;
           mkdirp(path.join(FLOWPROJ_DIR, 'node_modules', 'foo')),
           mkdirp(path.join(FLOWPROJ_DIR, 'node_modules', 'flow-bin')),
           fs.writeFile(
-            path.join(FLOWPROJ_DIR, 'flow-typed', 'core', 'jsx.js'),
+            path.join(FLOWPROJ_DIR, 'flow-typed', 'environments', 'jsx.js'),
             fooLibdef,
           ),
           fs.writeFile(
-            path.join(FLOWPROJ_DIR, 'flow-typed', 'ft-config.json'),
+            path.join(FLOWPROJ_DIR, 'flow-typed.config.json'),
             '{ "env": ["jsx"] }',
           ),
         ]);
@@ -292,7 +292,9 @@ declare module 'foo' {}`;
 
         expect(
           await Promise.all([
-            fs.exists(path.join(FLOWPROJ_DIR, 'flow-typed', 'core', 'jsx.js')),
+            fs.exists(
+              path.join(FLOWPROJ_DIR, 'flow-typed', 'environments', 'jsx.js'),
+            ),
           ]),
         ).toEqual([true]);
 
@@ -301,14 +303,14 @@ declare module 'foo' {}`;
             ['Name', 'Details'],
             [
               'jsx',
-              'This core definition does not match what we found in the registry, update it with `flow-typed update`',
+              'This env definition does not match what we found in the registry, update it with `flow-typed update`',
             ],
           ]),
         );
       });
     });
 
-    it('reports outdated core definitions which do not exist in the registry', () => {
+    it('reports outdated env definitions which do not exist in the registry', () => {
       return fakeProjectEnv(async FLOWPROJ_DIR => {
         // Create some dependencies
         await Promise.all([
@@ -322,7 +324,7 @@ declare module 'foo' {}`;
           mkdirp(path.join(FLOWPROJ_DIR, 'node_modules', 'foo')),
           mkdirp(path.join(FLOWPROJ_DIR, 'node_modules', 'flow-bin')),
           fs.writeFile(
-            path.join(FLOWPROJ_DIR, 'flow-typed', 'ft-config.json'),
+            path.join(FLOWPROJ_DIR, 'flow-typed.config.json'),
             '{ "env": ["random"] }',
           ),
         ]);
@@ -334,14 +336,14 @@ declare module 'foo' {}`;
             ['Name', 'Details'],
             [
               'random',
-              'This core definition does not exist in the registry or there is no compatible definition for your version of flow',
+              'This env definition does not exist in the registry or there is no compatible definition for your version of flow',
             ],
           ]),
         );
       });
     });
 
-    it('reports outdated core definition when it exists ft-config and registry but has not been installed', () => {
+    it('reports outdated env definition when it exists flow-typed.config.json and registry but has not been installed', () => {
       return fakeProjectEnv(async FLOWPROJ_DIR => {
         // Create some dependencies
         await Promise.all([
@@ -355,7 +357,7 @@ declare module 'foo' {}`;
           mkdirp(path.join(FLOWPROJ_DIR, 'node_modules', 'foo')),
           mkdirp(path.join(FLOWPROJ_DIR, 'node_modules', 'flow-bin')),
           fs.writeFile(
-            path.join(FLOWPROJ_DIR, 'flow-typed', 'ft-config.json'),
+            path.join(FLOWPROJ_DIR, 'flow-typed.config.json'),
             '{ "env": ["jsx"] }',
           ),
         ]);
@@ -367,7 +369,7 @@ declare module 'foo' {}`;
             ['Name', 'Details'],
             [
               'jsx',
-              'This core def has not yet been installed try running `flow-typed install`',
+              'This env def has not yet been installed try running `flow-typed install`',
             ],
           ]),
         );
