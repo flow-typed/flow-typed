@@ -1,7 +1,7 @@
 /**
  * https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes#list_of_global_attributes
  */
-declare type jsx$HTMLElement$Attributes = {
+ declare type jsx$HTMLElement = {
   /**
    * Specifies a shortcut key to activate/focus an element
    */
@@ -60,7 +60,7 @@ declare type jsx$HTMLElement$Attributes = {
 /**
  * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#input_types
  */
-declare type jsx$HTMLInputElement$Attributes$Type =
+declare type jsx$HTMLInputElement$Type =
   | 'button'
   | 'checkbox'
   | 'color'
@@ -87,9 +87,9 @@ declare type jsx$HTMLInputElement$Attributes$Type =
 /**
  * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attributes
  */
-declare type jsx$HTMLInputElement$Attributes = {
-  ...jsx$HTMLElement$Attributes,
+declare type jsx$HTMLInputElement = {
+  ...jsx$HTMLElement,
   value?: string,
-  type?: jsx$HTMLInputElement$Attributes$Type,
+  type?: jsx$HTMLInputElement$Type,
   ...
 };
