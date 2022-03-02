@@ -15,5 +15,6 @@
   - [validate-defs](validate.md)
   - [version](version.md)
 - [Core definitions](core-definitions.md)
+- [Test Harness](harness.md)
 - [FAQ](faq.md)
 - [Changelog](changelog.md)

@@ -36,6 +36,9 @@ cli/.flow-bins-cache/*
 cli/package-lock.json
 cli/README.md
 
+# Test harness
+harness/
+
 # Editors
 .vscode
 .idea

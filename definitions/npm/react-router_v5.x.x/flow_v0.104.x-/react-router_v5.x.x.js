@@ -135,7 +135,7 @@ declare module "react-router" {
 
   declare export function useHistory(): $PropertyType<ContextRouter, 'history'>;
   declare export function useLocation(): $PropertyType<ContextRouter, 'location'>;
-  declare export function useParams(): $PropertyType<$PropertyType<ContextRouter, 'match'>, 'params'>;
+  declare export function useParams<Params = $PropertyType<$PropertyType<ContextRouter, 'match'>, 'params'>>(): Params;
   declare export function useRouteMatch(path?: MatchPathOptions | string | string[]): $PropertyType<ContextRouter, 'match'>;
 
   declare export function generatePath(pattern?: string, params?: {...}): string;

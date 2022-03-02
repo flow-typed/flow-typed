@@ -102,6 +102,8 @@ and now you'd like to contribute it.
 >
 > This will cover steps 1 - 4, of course without real definitions or tests written for you.
 
+> Before you start, if you think you have a fairly complicated library definition or one that you have not yet written and tested with your personal project you may consider leveraging our **test harness** which allows you to write code immediately in a simplified clean environment. Learn more [here](https://flow-typed.github.io/flow-typed/#/harness) or just create the harness (`./test_harness.sh`) to get started.
+
 #### 1) Create a new directory called `definitions/npm/left-pad_v4.x.x/`.
 
 ***We call this the "package version directory".***

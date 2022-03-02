@@ -692,3 +692,15 @@ expect(wrapper).toHaveDisplayName(true);
   // No type hint means we return any
   const FooModule3: boolean = jest.requireActual('FooModule');
 }
+
+it.each`
+  x    | y    | z
+  ${1} | ${2} | ${3}
+  ${2} | ${3} | ${5}
+  ${3} | ${4} | ${7}
+`(
+  'x=$x, y=$y, and z=$z',
+  ({ x, y, z }) => {
+      // perform tests
+  }
+);

@@ -5,6 +5,23 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [3.7.0] 2022-02-21
+
+### Added
+- New `outdated` command (#4171) 
+
+### Changed
+- CLI tool now ships with flowtypes (#4233) 
+- Install can match with alpha versions now (#4247) 
+
+### Fixed
+- Fix create def with scopes (#4234)
+- Fix buffer deprecation error (#4270)
+- Temporarily turn off validate-def checks against npm (#4249) 
+- Bump ajv from 6.11.0 to 6.12.6 in /cli (#4260) 
+- Bump node-fetch from 2.6.6 to 2.6.7 in /cli (#4254) 
+- Bump shelljs from 0.8.3 to 0.8.5 in /cli (#4237) 
+
 ## [3.6.1] 2022-01-09
 
 ### Changed
