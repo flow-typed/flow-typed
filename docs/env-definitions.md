@@ -8,11 +8,21 @@ To make it more concrete, lets take a look at some examples of when you might wa
 
 ### jsx
 
-Flow is built by Meta and ships with react definitions it does not type or provide a list of available jsx properties. These can live as an env definition instead.
+Flow is built by Meta and ships with `react` library definitions. You'd expect because of that, everything react related would work perfectly and has sound static analysis working out of the box with a react stack. It however does not, you get no type checking or intellisense when using jsx elements nor are there any available list of HTML attributes for each HTML element type.
+
+```js
+const Comp = () => (
+  <input type="foo" anything={0} />
+);
+```
+
+Typically you'd expect the above to error in some capacity because `foo` is not a valid `type` and `anything` isn't a prop that `<input />` accepts. But you get nothing and there's currently no way to add type definitions to primitive jsx as a third party tool.
+
+But with environment definitions serving reusable type definitions, at the minimum you can soundly type reusable components across your application.
 
 ```
 type Props = {|
-  ...jsx$HTMLElementProps,
+  ...$Exact<jsx$HTMLElement$Attributes>,
   foo: string,
 |};
 

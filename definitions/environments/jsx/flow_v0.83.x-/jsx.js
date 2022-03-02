@@ -1,7 +1,7 @@
 /**
  * https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes#list_of_global_attributes
  */
-declare type jsx$HTMLElement$Attributes = {|
+declare type jsx$HTMLElement$Attributes = {
   /**
    * Specifies a shortcut key to activate/focus an element
    */
@@ -54,7 +54,8 @@ declare type jsx$HTMLElement$Attributes = {|
     * Specifies whether the content of an element should be translated or not
     */
    translate?: string,
-|};
+   ...
+};
 
 /**
  * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#input_types
@@ -86,8 +87,9 @@ declare type jsx$HTMLInputElement$Attributes$Type =
 /**
  * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attributes
  */
-declare type jsx$HTMLInputElement$Attributes = {|
+declare type jsx$HTMLInputElement$Attributes = {
   ...jsx$HTMLElement$Attributes,
   value?: string,
   type?: jsx$HTMLInputElement$Attributes$Type,
-|};
+  ...
+};
