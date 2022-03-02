@@ -1,4 +1,7 @@
-declare type jsx$HTMLElementProps = {|
+/**
+ * https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes#list_of_global_attributes
+ */
+declare type jsx$HTMLElement$Attributes = {|
   /**
    * Specifies a shortcut key to activate/focus an element
    */
@@ -53,7 +56,10 @@ declare type jsx$HTMLElementProps = {|
    translate?: string,
 |};
 
-declare type jsx$HTMLInputElementProps$Type =
+/**
+ * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#input_types
+ */
+declare type jsx$HTMLInputElement$Attributes$Type =
   | 'button'
   | 'checkbox'
   | 'color'
@@ -77,8 +83,11 @@ declare type jsx$HTMLInputElementProps$Type =
   | 'url'
   | 'week';
 
-declare type jsx$HTMLInputElementProps = {|
-  ...jsx$HTMLElementProps,
+/**
+ * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attributes
+ */
+declare type jsx$HTMLInputElement$Attributes = {|
+  ...jsx$HTMLElement$Attributes,
   value?: string,
-  type?: jsx$HTMLInputElementProps$Type,
+  type?: jsx$HTMLInputElement$Attributes$Type,
 |};
