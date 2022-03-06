@@ -239,7 +239,7 @@ declare module 'webpack' {
 
   declare type OptimizationOptions = {
     checkWasmTypes?: boolean,
-    chunkIds?: 'natural' | 'named' | 'size' | 'total-size' | false,
+    chunkIds?: 'natural' | 'named' | 'deterministic' | 'size' | 'total-size' | false,
     concatenateModules?: boolean,
     flagIncludedChunks?: boolean,
     hashedModuleIds?: boolean,
@@ -247,7 +247,7 @@ declare module 'webpack' {
     mergeDuplicateChunks?: boolean,
     minimize?: boolean,
     minimizer?: Array<WebpackPluginInstance | WebpackPluginFunction>,
-    moduleIds?: 'natural' | 'named' | 'hashed' | 'size' | 'total-size' | false,
+    moduleIds?: 'natural' | 'named' | 'hashed' | 'deterministic' | 'size' | false,
     namedChunks?: boolean,
     namedModules?: boolean,
     noEmitOnErrors?: boolean,
