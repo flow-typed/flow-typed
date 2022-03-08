@@ -300,7 +300,7 @@ Learn to export [es6](https://flow.org/en/docs/libdefs/creation/#toc-declaring-a
 
 ### Declaring types
 
-Types in contract to variables when declared inside a module do not need to be explicitly exported as they will be exported automatically.
+Types in contrast to variables when declared inside a module do not need to be explicitly exported as they will be exported automatically.
 
 These two will work the same
 ```js
