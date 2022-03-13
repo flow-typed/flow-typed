@@ -7,12 +7,13 @@ import {
   NavLink,
   matchPath,
   withRouter,
+  Navigate,
   Outlet,
-  Redirect,
   Route,
   Routes,
   useHistory,
   useLocation,
+  useNavigate,
   useOutletContext,
   useParams,
   useRouteMatch,
@@ -339,33 +340,50 @@ describe("react-router-dom", () => {
     });
   });
 
-  describe("Redirect", () => {
+  describe("Navigate", () => {
     it("works", () => {
-      <Redirect to="/login" />;
+      <Navigate to="/login" />;
 
-      <Redirect exact strict to="/new-path" from="/old-Path" />;
+      <Navigate to="/new-path" replace />;
 
-      <Redirect
+      <Navigate
         to={{
           pathname: "/courses",
           search: "?sort=name",
           hash: "#the-hash",
           state: { fromDashboard: true }
         }}
-        from="/x"
-        push
+        state={{}}
       />;
     });
 
     it("raises error if passed incorrect props", () => {
       // $FlowExpectedError[prop-missing] - to prop is required
-      <Redirect />;
+      <Navigate />;
 
       // $FlowExpectedError[incompatible-type] - to prop must be a string or LocationShape
-      <Redirect to={[]} />;
+      <Navigate to={[]} />;
 
       // $FlowExpectedError[prop-missing] - unexpected prop xxx
-      <Redirect to='/x' xxx="1"/>;
+      <Navigate to='/x' xxx="1"/>;
+    });
+  });
+
+  describe('useNavigate', () => {
+    it('works', () => {
+      const navigate = useNavigate();
+
+      navigate("../success");
+      navigate("../success", { replace: true });
+      navigate(-1);
+    });
+
+    it('raises errors if used incorrectly', () => {
+      // $FlowExpectedError[extra-arg] takes no args
+      const navigate = useNavigate('test');
+
+      // $FlowExpectedError[incompatible-call]
+      navigate(true);
     });
   });
 
