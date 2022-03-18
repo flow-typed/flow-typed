@@ -533,17 +533,15 @@ export async function createStub(
       typescriptTypingsContent,
     );
     const terseFilename = path.relative(projectRoot, filename);
-    listItem(`${packageName}@${version}`, colors.red(terseFilename));
-    if (resolutionError) {
-      console.log(
-        colors.yellow(
-          "\t  Unable to stub all files in '%s', " +
-            'so only created a stub for the main module (%s)',
-        ),
-        packageName,
-        resolutionError.message,
-      );
-    }
+    listItem(
+      `${packageName}@${version}`,
+      colors.red(terseFilename),
+      resolutionError
+        ? colors.yellow(
+            `Unable to stub all files in ${packageName}, so only created a stub for the main module (${resolutionError.message})`,
+          )
+        : undefined,
+    );
     return true;
   } catch (e) {
     console.log(
