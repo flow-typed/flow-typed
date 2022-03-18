@@ -19,6 +19,7 @@ import {path} from './node';
 import {signCode} from './codeSign';
 import {verifySignedCode} from './codeSign';
 import {versionToString} from './semver';
+import {listItem} from './logger';
 
 export function glob(pattern: string, options: Object): Promise<Array<string>> {
   return new Promise((resolve, reject) =>
@@ -532,12 +533,7 @@ export async function createStub(
       typescriptTypingsContent,
     );
     const terseFilename = path.relative(projectRoot, filename);
-    console.log(
-      colors.bold('  • %s@%s\n' + '    └> %s'),
-      packageName,
-      version,
-      colors.red(terseFilename),
-    );
+    listItem(`${packageName}@${version}`, colors.red(terseFilename));
     if (resolutionError) {
       console.log(
         colors.yellow(

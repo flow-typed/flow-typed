@@ -36,6 +36,7 @@ import {
 } from '../lib/npm/npmProjectUtils';
 import {getRangeLowerBound} from '../lib/semver';
 import {createStub, pkgHasFlowFiles} from '../lib/stubUtils';
+import {listItem} from '../lib/logger';
 
 export const name = 'install [explicitLibDefs...]';
 export const description = 'Installs libdefs into the ./flow-typed directory';
@@ -273,15 +274,7 @@ async function installEnvLibDefs(
               const localFile = fs.readFileSync(defLocalPath, 'utf-8');
 
               if (!verifySignedCode(localFile) && !overwrite) {
-                console.log(
-                  colors.bold(
-                    '  • %s\n' +
-                      '    └> %s\n' +
-                      '       %s\n' +
-                      '       %s\n' +
-                      '       %s\n' +
-                      '       %s',
-                  ),
+                listItem(
                   en,
                   colors.red(
                     `${en} already exists and appears to have been manually written or changed!`,
@@ -312,16 +305,14 @@ async function installEnvLibDefs(
             const codeSignPreprocessor = signCodeStream(repoVersion);
             await copyFile(def.path, defLocalPath, codeSignPreprocessor);
 
-            console.log(
-              colors.bold('  • %s\n' + '    └> %s'),
+            listItem(
               en,
               colors.green(
                 `.${path.sep}${path.relative(flowProjectRoot, defLocalPath)}`,
               ),
             );
           } else {
-            console.log(
-              colors.bold('  • %s\n' + '    └> %s'),
+            listItem(
               en,
               colors.yellow(
                 `Was unable to install ${en}. The env might not exist or there is not a version compatible with your version of flow`,
@@ -703,8 +694,7 @@ async function installNpmLibDef(
     );
 
     if (!overwrite && (await fs.exists(filePath))) {
-      console.error(
-        '  • %s\n' + '    %s\n    %s\n    └> %s',
+      listItem(
         colors.bold(
           colors.red(
             `${terseFilePath} already exists and appears to have been manually ` +
@@ -727,11 +717,7 @@ async function installNpmLibDef(
     const codeSignPreprocessor = signCodeStream(repoVersion);
     await copyFile(npmLibDef.path, filePath, codeSignPreprocessor);
 
-    console.log(
-      colors.bold('  • %s\n' + '    └> %s'),
-      fileName,
-      colors.green(`.${path.sep}${terseFilePath}`),
-    );
+    listItem(fileName, colors.green(`.${path.sep}${terseFilePath}`));
 
     // Remove any lingering stubs
     console.log(npmLibDef.name);
