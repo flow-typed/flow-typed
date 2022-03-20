@@ -191,6 +191,7 @@ export async function run(args: Args): Promise<number> {
     skipCache: Boolean(args.skipCache),
     ignoreDeps: ignoreDeps,
     useCacheUntil: Number(args.useCacheUntil) || CACHE_REPO_EXPIRY,
+    ftConfig,
   });
   if (npmLibDefResult !== 0) {
     return npmLibDefResult;
@@ -339,6 +340,7 @@ type installNpmLibDefsArgs = {|
   skipCache: boolean,
   ignoreDeps: Array<string>,
   useCacheUntil: number,
+  ftConfig?: FtConfig,
 |};
 async function installNpmLibDefs({
   cwd,
@@ -351,6 +353,7 @@ async function installNpmLibDefs({
   skipCache,
   ignoreDeps,
   useCacheUntil,
+  ftConfig = {},
 }: installNpmLibDefsArgs): Promise<number> {
   const flowProjectRoot = await findFlowRoot(cwd);
   if (flowProjectRoot === null) {
@@ -365,17 +368,22 @@ async function installNpmLibDefs({
   const libdefsToSearchFor: Map<string, string> = new Map();
 
   let ignoreDefs;
-  try {
-    ignoreDefs = fs
-      .readFileSync(path.join(cwd, libdefDir, '.ignore'), 'utf-8')
-      .replace(/"/g, '')
-      .split('\n');
-  } catch (err) {
-    // If the error is unrelated to file not existing we should continue throwing
-    if (err.code !== 'ENOENT') {
-      throw err;
+
+  if (Array.isArray(ftConfig.ignore)) {
+    ignoreDefs = ftConfig.ignore;
+  } else {
+    try {
+      ignoreDefs = fs
+        .readFileSync(path.join(cwd, libdefDir, '.ignore'), 'utf-8')
+        .replace(/"/g, '')
+        .split('\n');
+    } catch (err) {
+      // If the error is unrelated to file not existing we should continue throwing
+      if (err.code !== 'ENOENT') {
+        throw err;
+      }
+      ignoreDefs = [];
     }
-    ignoreDefs = [];
   }
 
   // If a specific pkg/version was specified, only add those packages.
