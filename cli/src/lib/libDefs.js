@@ -419,7 +419,12 @@ async function verifyCLIVersion(defsDirPath) {
   }
   const minCLIVersion = metadata.compatibleCLIRange;
   const thisCLIVersion = require('../../package.json').version;
-  if (!semver.satisfies(thisCLIVersion, minCLIVersion)) {
+  if (
+    !semver.satisfies(
+      semver.coerce(thisCLIVersion) ?? thisCLIVersion,
+      minCLIVersion,
+    )
+  ) {
     throw new Error(
       `Please upgrade your CLI version! This CLI is version ` +
         `${thisCLIVersion}, but the latest flow-typed definitions are only ` +
