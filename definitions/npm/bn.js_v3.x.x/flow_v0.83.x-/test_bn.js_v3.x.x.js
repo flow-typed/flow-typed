@@ -16,6 +16,17 @@ describe('BN main usages', () => {
     new BN(new BN('dead', 'hex'));
   });
 
+  it('prevents invalid constructors', () => {
+    // $FlowExpectedError[incompatible-call]
+    new BN({});
+
+    // $FlowExpectedError[incompatible-call]
+    new BN('dead', 'dec', 'le');
+
+    // $FlowExpectedError[incompatible-call]
+    new BN('dead', 'hex', 'le', {});
+  });
+
   it('handles arithmetics', () => {
     const a = new BN(21);
     const b = new BN(42);
@@ -77,6 +88,16 @@ describe('BN main usages', () => {
       .redNeg();
   });
 
+  it('prevents calling functions with wrong input types', () => {
+    const a = new BN(21);
+
+    // $FlowExpectedError[incompatible-call]
+    a.mul(2);
+
+    // $FlowExpectedError[incompatible-call]
+    a.muln(new BN(2));
+  });
+
   it('handles utilities', () => {
     const a = new BN();
 
@@ -87,5 +108,34 @@ describe('BN main usages', () => {
     a.byteLength();
     a.cmp(new BN(2));
     a.toRed(BN.red('p192')).fromRed();
+  });
+
+  it('prevents invalid utilities usage', () => {
+    const a = new BN();
+
+    // $FlowExpectedError[incompatible-call]
+    a.toString('dec');
+
+    // $FlowExpectedError[incompatible-call]
+    a.toArray('other');
+  });
+
+  it('prevents calling functions that were added in later versions', () => {
+    const a = new BN();
+
+    // $FlowExpectedError[prop-missing]
+    a.lt(2);
+
+    // $FlowExpectedError[prop-missing]
+    a.ltn(new BN(2));
+
+    // $FlowExpectedError[prop-missing]
+    a.toArrayLike(Buffer, 'le', 8);
+
+    // $FlowExpectedError[prop-missing]
+    a.toBuffer('be', 8);
+
+    // $FlowExpectedError[prop-missing]
+    a.toArrayLike(Buffer, 'le', 8);
   });
 });

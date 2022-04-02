@@ -3,7 +3,7 @@ import { describe, it } from 'flow-typed-test';
 import BN from 'bn.js';
 
 describe('BN main usages', () => {
-  it('support different constructors', () => {
+  it('supports different constructors', () => {
     new BN(2);
     new BN('2');
     new BN('dead', 'hex');
@@ -14,6 +14,17 @@ describe('BN main usages', () => {
     new BN([1, 2, 3, 4], 'le');
     new BN(Buffer.from('dead', 'hex'));
     new BN(new BN('dead', 'hex'));
+  });
+
+  it('prevents invalid constructors', () => {
+    // $FlowExpectedError[incompatible-call]
+    new BN({});
+
+    // $FlowExpectedError[incompatible-call]
+    new BN('dead', 'dec', 'le');
+
+    // $FlowExpectedError[incompatible-call]
+    new BN('dead', 'hex', 'le', {});
   });
 
   it('handles arithmetics', () => {
@@ -77,6 +88,22 @@ describe('BN main usages', () => {
       .redNeg();
   });
 
+  it('prevents calling functions with wrong input types', () => {
+    const a = new BN(21);
+
+    // $FlowExpectedError[incompatible-call]
+    a.lt(2);
+
+    // $FlowExpectedError[incompatible-call]
+    a.ltn(new BN(2));
+
+    // $FlowExpectedError[incompatible-call]
+    a.mul(2);
+
+    // $FlowExpectedError[incompatible-call]
+    a.muln(new BN(2));
+  });
+
   it('handles utilities', () => {
     const a = new BN();
 
@@ -93,5 +120,21 @@ describe('BN main usages', () => {
     a.gte(new BN(2));
     a.toTwos(8);
     a.toRed(BN.red('p192')).fromRed();
+  });
+
+  it('prevents invalid utilities usage', () => {
+    const a = new BN();
+
+    // $FlowExpectedError[incompatible-call]
+    a.toString('dec');
+
+    // $FlowExpectedError[incompatible-call]
+    a.toArray('other');
+
+    // $FlowExpectedError[incompatible-call]
+    a.toArrayLike(Object, 'le', 8);
+
+    // $FlowExpectedError[incompatible-call]
+    a.cmp(0);
   });
 });
