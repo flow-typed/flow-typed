@@ -190,7 +190,7 @@ export function mergePackageJsonDependencies(
     try {
       doesIntersect = intersects(result[dep], version);
     } catch (e) {
-      doesIntersect = false;
+      doesIntersect = result[dep] === version;
     }
 
     if (a[dep] != null && !doesIntersect) {
