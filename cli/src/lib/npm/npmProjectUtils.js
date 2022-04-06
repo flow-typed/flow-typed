@@ -186,7 +186,14 @@ export function mergePackageJsonDependencies(
   const result = {...a};
   for (const dep of Object.keys(b)) {
     const version = b[dep];
-    if (a[dep] != null && !intersects(result[dep], version)) {
+    let doesIntersect;
+    try {
+      doesIntersect = intersects(result[dep], version);
+    } catch (e) {
+      doesIntersect = false;
+    }
+
+    if (a[dep] != null && !doesIntersect) {
       console.log(
         colors.yellow(
           "\t  Conflicting versions for '%s' between '%s' and '%s'",
