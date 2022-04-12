@@ -43,6 +43,20 @@ declare module 'react-dom' {
   ): React$ElementRef<ElementType>;
 }
 
+declare module 'react-dom/client' {
+  declare type Root = {|
+    render: <ElementType: React$ElementType>(element: React$Element<ElementType>) => void,
+    unmount: () => void,
+  |};
+
+  declare export function createRoot(container: Element): Root;
+
+  declare export function hydrateRoot<ElementType: React$ElementType>(
+    container: Element,
+    element: React$Element<ElementType>,
+  ): void;
+}
+
 declare module 'react-dom/server' {
   declare var version: string;
 
