@@ -19,6 +19,7 @@ import {path} from './node';
 import {signCode} from './codeSign';
 import {verifySignedCode} from './codeSign';
 import {versionToString} from './semver';
+import {listItem} from './logger';
 
 export function glob(pattern: string, options: Object): Promise<Array<string>> {
   return new Promise((resolve, reject) =>
@@ -532,22 +533,15 @@ export async function createStub(
       typescriptTypingsContent,
     );
     const terseFilename = path.relative(projectRoot, filename);
-    console.log(
-      colors.bold('  • %s@%s\n' + '    └> %s'),
-      packageName,
-      version,
+    listItem(
+      `${packageName}@${version}`,
       colors.red(terseFilename),
+      resolutionError
+        ? colors.yellow(
+            `Unable to stub all files in ${packageName}, so only created a stub for the main module (${resolutionError.message})`,
+          )
+        : undefined,
     );
-    if (resolutionError) {
-      console.log(
-        colors.yellow(
-          "\t  Unable to stub all files in '%s', " +
-            'so only created a stub for the main module (%s)',
-        ),
-        packageName,
-        resolutionError.message,
-      );
-    }
     return true;
   } catch (e) {
     console.log(

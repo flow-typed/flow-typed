@@ -57,7 +57,7 @@ async function extractLibDefsFromNpmPkgDir(
   pkgDirPath: string,
   scope: null | string,
   pkgNameVer: string,
-  // Remove eslint error after `core.es5` change
+  // Remove eslint error after `environments.es5` change
   // eslint-disable-next-line no-unused-vars
   validating?: boolean,
 ): Promise<Array<NpmLibDef>> {
@@ -73,8 +73,8 @@ async function extractLibDefsFromNpmPkgDir(
 
   /**
    * TODO:
-   * The following block is commented out until `core.es5` has been moved to
-   * somewhere else such as core
+   * The following block is commented out until `environments.es5` has been moved to
+   * somewhere else such as environments
    */
   // if (validating) {
   //   const fullPkgName = `${scope === null ? '' : scope + '/'}${pkgName}`;
@@ -366,7 +366,7 @@ function filterLibDefs(
     });
 }
 
-// TODO Unused until `core.es5`
+// TODO Unused until `environments.es5`
 // async function _npmExists(pkgName: string): Promise<Function> {
 //   const pkgUrl = `https://api.npms.io/v2/package/${encodeURIComponent(
 //     pkgName,

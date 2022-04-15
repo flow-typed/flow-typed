@@ -1,18 +1,24 @@
 // @flow
-import {signCodeStream} from '../lib/codeSign';
+import colors from 'colors/safe';
+import semver from 'semver';
+import typeof Yargs from 'yargs';
+
+import {
+  getCacheRepoDir,
+  _setCustomCacheDir as setCustomCacheDir,
+  CACHE_REPO_EXPIRY,
+} from '../lib/cacheRepoUtils';
+import {signCodeStream, verifySignedCode} from '../lib/codeSign';
+import {getEnvDefs, findEnvDef, getEnvDefVersionHash} from '../lib/envDefs';
 import {copyFile, mkdirp} from '../lib/fileUtils';
-import {child_process} from '../lib/node';
-
 import {findFlowRoot} from '../lib/flowProjectUtils';
-
 import {
   toSemverString as flowVersionToSemver,
   determineFlowSpecificVersion,
+  type FlowVersion,
 } from '../lib/flowVersion';
-import type {FlowVersion} from '../lib/flowVersion';
-
-import {fs, path} from '../lib/node';
-
+import {getFtConfig, type FtConfig} from '../lib/ftConfig';
+import {fs, path, child_process} from '../lib/node';
 import {
   findNpmLibDef,
   getCacheNpmLibDefs,
@@ -21,7 +27,6 @@ import {
   getScopedPackageName,
   type NpmLibDef,
 } from '../lib/npm/npmLibDefs';
-
 import {
   findWorkspacesPackages,
   getPackageJsonData,
@@ -29,22 +34,9 @@ import {
   loadPnpResolver,
   mergePackageJsonDependencies,
 } from '../lib/npm/npmProjectUtils';
-
-import {
-  getCacheRepoDir,
-  _setCustomCacheDir as setCustomCacheDir,
-  CACHE_REPO_EXPIRY,
-} from '../lib/cacheRepoUtils';
-
 import {getRangeLowerBound} from '../lib/semver';
-
-import colors from 'colors/safe';
-
-import semver from 'semver';
-
 import {createStub, pkgHasFlowFiles} from '../lib/stubUtils';
-
-import typeof Yargs from 'yargs';
+import {listItem} from '../lib/logger';
 
 export const name = 'install [explicitLibDefs...]';
 export const description = 'Installs libdefs into the ./flow-typed directory';
@@ -178,16 +170,15 @@ export async function run(args: Args): Promise<number> {
     return dep;
   });
 
-  const coreLibDefResult = await installCoreLibDefs();
-  if (coreLibDefResult !== 0) {
-    return coreLibDefResult;
-  }
+  const ftConfig = getFtConfig(cwd);
 
   if (args.cacheDir) {
     const cacheDir = path.resolve(String(args.cacheDir));
     console.log('• Setting cache dir', cacheDir);
     setCustomCacheDir(cacheDir);
   }
+
+  const useCacheUntil = Number(args.useCacheUntil) || CACHE_REPO_EXPIRY;
 
   const npmLibDefResult = await installNpmLibDefs({
     cwd,
@@ -200,9 +191,25 @@ export async function run(args: Args): Promise<number> {
     skipCache: Boolean(args.skipCache),
     ignoreDeps: ignoreDeps,
     useCacheUntil: Number(args.useCacheUntil) || CACHE_REPO_EXPIRY,
+    ftConfig,
   });
   if (npmLibDefResult !== 0) {
     return npmLibDefResult;
+  }
+
+  // Must be after `installNpmLibDefs` to ensure cache is updated first
+  if (ftConfig) {
+    const envLibDefResult = await installEnvLibDefs(
+      ftConfig,
+      flowVersion,
+      cwd,
+      libdefDir,
+      useCacheUntil,
+      Boolean(args.overwrite),
+    );
+    if (envLibDefResult !== 0) {
+      return envLibDefResult;
+    }
   }
 
   // Once complete restart flow to solve flow issues when scanning large diffs
@@ -218,8 +225,106 @@ export async function run(args: Args): Promise<number> {
   return 0;
 }
 
-async function installCoreLibDefs(): Promise<number> {
-  // TODO...
+async function installEnvLibDefs(
+  {env}: FtConfig,
+  flowVersion: FlowVersion,
+  flowProjectRoot,
+  libdefDir,
+  useCacheUntil: number,
+  overwrite: boolean,
+): Promise<number> {
+  if (env) {
+    console.log(
+      colors.green(
+        '• `env` key found in `flow-typed.config.json`, attempting to install env definitions...\n',
+      ),
+    );
+
+    if (!Array.isArray(env)) {
+      console.log(
+        colors.yellow(
+          'Warning: `env` in `flow-typed.config.json` must be of type Array<string> - skipping',
+        ),
+      );
+      return 0;
+    }
+
+    // Get a list of all environment defs
+    const envDefs = await getEnvDefs();
+
+    const flowTypedDirPath = path.join(
+      flowProjectRoot,
+      libdefDir,
+      'environments',
+    );
+    await mkdirp(flowTypedDirPath);
+
+    // Go through each env and try to install a libdef of the same name
+    // for the given flow version,
+    // if none is found throw a warning and continue. We shouldn't block the user.
+    await Promise.all(
+      env.map(async en => {
+        if (typeof en === 'string') {
+          const def = await findEnvDef(en, flowVersion, useCacheUntil, envDefs);
+
+          if (def) {
+            const fileName = `${en}.js`;
+            const defLocalPath = path.join(flowTypedDirPath, fileName);
+            const envAlreadyInstalled = await fs.exists(defLocalPath);
+            if (envAlreadyInstalled) {
+              const localFile = fs.readFileSync(defLocalPath, 'utf-8');
+
+              if (!verifySignedCode(localFile) && !overwrite) {
+                listItem(
+                  en,
+                  colors.red(
+                    `${en} already exists and appears to have been manually written or changed!`,
+                  ),
+                  colors.yellow(
+                    `Consider contributing your changes back to flow-typed repository :)`,
+                  ),
+                  colors.yellow(
+                    `${en} already exists and appears to have been manually written or changed!`,
+                  ),
+                  colors.yellow(
+                    `Read more at https://github.com/flow-typed/flow-typed/blob/master/CONTRIBUTING.md`,
+                  ),
+                  colors.yellow(
+                    `Use --overwrite to overwrite the existing env defs.`,
+                  ),
+                );
+                return;
+              }
+
+              fs.unlink(defLocalPath);
+            }
+
+            const repoVersion = await getEnvDefVersionHash(
+              getCacheRepoDir(),
+              def,
+            );
+            const codeSignPreprocessor = signCodeStream(repoVersion);
+            await copyFile(def.path, defLocalPath, codeSignPreprocessor);
+
+            listItem(
+              en,
+              colors.green(
+                `.${path.sep}${path.relative(flowProjectRoot, defLocalPath)}`,
+              ),
+            );
+          } else {
+            listItem(
+              en,
+              colors.yellow(
+                `Was unable to install ${en}. The env might not exist or there is not a version compatible with your version of flow`,
+              ),
+            );
+          }
+        }
+      }),
+    );
+  }
+
   return 0;
 }
 
@@ -235,6 +340,7 @@ type installNpmLibDefsArgs = {|
   skipCache: boolean,
   ignoreDeps: Array<string>,
   useCacheUntil: number,
+  ftConfig?: FtConfig,
 |};
 async function installNpmLibDefs({
   cwd,
@@ -247,6 +353,7 @@ async function installNpmLibDefs({
   skipCache,
   ignoreDeps,
   useCacheUntil,
+  ftConfig = {},
 }: installNpmLibDefsArgs): Promise<number> {
   const flowProjectRoot = await findFlowRoot(cwd);
   if (flowProjectRoot === null) {
@@ -261,17 +368,22 @@ async function installNpmLibDefs({
   const libdefsToSearchFor: Map<string, string> = new Map();
 
   let ignoreDefs;
-  try {
-    ignoreDefs = fs
-      .readFileSync(path.join(cwd, libdefDir, '.ignore'), 'utf-8')
-      .replace(/"/g, '')
-      .split('\n');
-  } catch (err) {
-    // If the error is unrelated to file not existing we should continue throwing
-    if (err.code !== 'ENOENT') {
-      throw err;
+
+  if (Array.isArray(ftConfig.ignore)) {
+    ignoreDefs = ftConfig.ignore;
+  } else {
+    try {
+      ignoreDefs = fs
+        .readFileSync(path.join(cwd, libdefDir, '.ignore'), 'utf-8')
+        .replace(/"/g, '')
+        .split('\n');
+    } catch (err) {
+      // If the error is unrelated to file not existing we should continue throwing
+      if (err.code !== 'ENOENT') {
+        throw err;
+      }
+      ignoreDefs = [];
     }
-    ignoreDefs = [];
   }
 
   // If a specific pkg/version was specified, only add those packages.
@@ -347,6 +459,7 @@ async function installNpmLibDefs({
   ][] = [];
   const unavailableLibDefs = [];
 
+  // This updates the cache for all definition types, npm/env/etc
   const libDefs = await getCacheNpmLibDefs(useCacheUntil, skipCache);
 
   const getLibDefsToInstall = async (entries: Array<[string, string]>) => {
@@ -589,8 +702,7 @@ async function installNpmLibDef(
     );
 
     if (!overwrite && (await fs.exists(filePath))) {
-      console.error(
-        '  • %s\n' + '    %s\n    %s\n    └> %s',
+      listItem(
         colors.bold(
           colors.red(
             `${terseFilePath} already exists and appears to have been manually ` +
@@ -600,7 +712,7 @@ async function installNpmLibDef(
         colors.green(
           `Consider contributing your changes back to flow-typed repository :)`,
         ),
-        `Read more at https://github.com/flowtype/flow-typed/wiki/Contributing-Library-Definitions`,
+        `Read more at https://github.com/flow-typed/flow-typed/blob/master/CONTRIBUTING.md`,
         'Use --overwrite to overwrite the existing libdef.',
       );
       return true;
@@ -613,11 +725,7 @@ async function installNpmLibDef(
     const codeSignPreprocessor = signCodeStream(repoVersion);
     await copyFile(npmLibDef.path, filePath, codeSignPreprocessor);
 
-    console.log(
-      colors.bold('  • %s\n' + '    └> %s'),
-      fileName,
-      colors.green(`.${path.sep}${terseFilePath}`),
-    );
+    listItem(fileName, colors.green(`.${path.sep}${terseFilePath}`));
 
     // Remove any lingering stubs
     console.log(npmLibDef.name);

@@ -3,6 +3,7 @@
   - [Importing types](usage.md)
   - [Advanced configuration](advanced.md)
   - [Contributing](contributing.md)
+  - [flow-typed config](flow-typed-config.md)
 - CLI commands
   - [install](install.md)
   - [outdated](outdated.md)
@@ -13,6 +14,7 @@
   - [update-cache](cache.md)
   - [validate-defs](validate.md)
   - [version](version.md)
-- [Test Harness](harness.md)
+- [Environment definitions](env-definitions.md)
+- [Test harness](harness.md)
 - [FAQ](faq.md)
 - [Changelog](changelog.md)

@@ -14,6 +14,10 @@ import {fs} from '../lib/node';
 import {determineFlowSpecificVersion} from '../lib/flowVersion';
 import {signCodeStream} from '../lib/codeSign';
 import {CACHE_REPO_EXPIRY, getCacheRepoDir} from '../lib/cacheRepoUtils';
+import {getFtConfig} from '../lib/ftConfig';
+import {findEnvDef, getEnvDefVersionHash, getEnvDefs} from '../lib/envDefs';
+
+const pullSignature = v => v.split('\n').slice(0, 2);
 
 export const name = 'outdated';
 export const description =
@@ -77,12 +81,15 @@ export async function run(args: Args): Promise<number> {
       ? path.resolve(args.rootDir)
       : process.cwd();
   const flowProjectRoot = await findFlowRoot(cwd);
+  const libdefDir =
+    typeof args.libdefDir === 'string' ? args.libdefDir : 'flow-typed';
   const packageDir =
     typeof args.packageDir === 'string' ? path.resolve(args.packageDir) : cwd;
   const flowVersion = await determineFlowSpecificVersion(
     packageDir,
     args.flowVersion,
   );
+  const useCacheUntil = Number(args.useCacheUntil) || CACHE_REPO_EXPIRY;
   if (flowProjectRoot === null) {
     console.error(
       'Error: Unable to find a flow project in the current dir or any of ' +
@@ -92,13 +99,10 @@ export async function run(args: Args): Promise<number> {
     return 1;
   }
 
-  const cachedLibDefs = await getCacheNpmLibDefs(
-    Number(args.useCacheUntil) || CACHE_REPO_EXPIRY,
-    true,
-  );
+  const cachedLibDefs = await getCacheNpmLibDefs(useCacheUntil, true);
   const installedLibDefs = await getInstalledNpmLibDefs(
     flowProjectRoot,
-    args.libdefDir ? String(args.libdefDir) : undefined,
+    libdefDir,
   );
 
   let outdatedList: Array<{
@@ -146,11 +150,9 @@ export async function run(args: Args): Promise<number> {
             );
 
             if (npmLibDef) {
-              const pullSignature = v => v.split('\n').slice(0, 2);
-
               const file = await fs.readFile(
                 path.join(cwd, installedDef.libDef.path),
-                'utf8',
+                'utf-8',
               );
               const installedSignatureArray = pullSignature(file);
 
@@ -180,6 +182,67 @@ export async function run(args: Args): Promise<number> {
       );
     }),
   );
+
+  const ftConfig = getFtConfig(cwd);
+  const {env} = ftConfig ?? {};
+
+  if (Array.isArray(env)) {
+    const envDefs = await getEnvDefs();
+    await Promise.all(
+      env.map(async en => {
+        if (typeof en !== 'string') return;
+
+        const def = await findEnvDef(en, flowVersion, useCacheUntil, envDefs);
+
+        if (def) {
+          const localDefPath = path.join(
+            flowProjectRoot,
+            libdefDir,
+            'environments',
+            `${en}.js`,
+          );
+          if (!(await fs.exists(localDefPath))) {
+            outdatedList.push({
+              name: en,
+              message:
+                'This env def has not yet been installed try running `flow-typed install`',
+            });
+            return;
+          } else {
+            const installedDef = fs.readFileSync(localDefPath, 'utf-8');
+            const installedSignatureArray = pullSignature(installedDef);
+
+            const repoVersion = await getEnvDefVersionHash(
+              getCacheRepoDir(),
+              def,
+            );
+            const codeSignPreprocessor = signCodeStream(repoVersion);
+            const content = fs.readFileSync(def.path, 'utf-8');
+            const cacheSignatureArray = pullSignature(
+              codeSignPreprocessor(content),
+            );
+
+            if (
+              installedSignatureArray[0] !== cacheSignatureArray[0] ||
+              installedSignatureArray[1] !== cacheSignatureArray[1]
+            ) {
+              outdatedList.push({
+                name: en,
+                message:
+                  'This env definition does not match what we found in the registry, update it with `flow-typed update`',
+              });
+            }
+          }
+        } else {
+          outdatedList.push({
+            name: en,
+            message:
+              'This env definition does not exist in the registry or there is no compatible definition for your version of flow',
+          });
+        }
+      }),
+    );
+  }
 
   if (outdatedList.length > 0) {
     // Cleanup duplicated dependencies which come from nested libraries that ship flow

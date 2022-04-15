@@ -141,7 +141,12 @@ export async function verifyCLIVersion(): Promise<void> {
   const thisCLIPkgJsonPath = path.join(__dirname, '..', '..', 'package.json');
   const thisCLIPkgJson = await fs.readJson(thisCLIPkgJsonPath);
   const thisCLIVersion = thisCLIPkgJson.version;
-  if (!semver.satisfies(thisCLIVersion, compatibleCLIRange)) {
+  if (
+    !semver.satisfies(
+      semver.coerce(thisCLIVersion) ?? thisCLIVersion,
+      compatibleCLIRange,
+    )
+  ) {
     throw new Error(
       `Please upgrade your flow-typed CLI! This CLI is version ` +
         `${thisCLIVersion}, but the latest flow-typed definitions are only ` +

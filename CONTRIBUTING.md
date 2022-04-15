@@ -12,6 +12,7 @@ Contributing library definitions is as easy as sending a pull request!
   * [Create tests](#4-write-a-test-file-whose-name-starts-with-test_-in-the-flow-version-directory)
   * [Run tests](#5-run-your-tests)
   * [Raise pull request](#6-send-a-pull-request)
+  * [Environment definitions](environment-definitions)
 * [Writing libdefs best practices](#writing-libdefs-best-practices)
   * [Read flow docs](#read-flow-docs)
   * [Don't import types from other libdefs](#dont-import-types-from-other-libdefs)
@@ -34,35 +35,48 @@ directory. They all must follow the following directory structure and naming
 format:
 
 ```
-└ definitions/npm/
-  ├ yargs_v4.x.x/           # <-- The name of the library, followed by _v<VERSION>
-  | |
-  | ├ flow_v0.83.x/         # <-- A folder containing libdefs tested against the
-  | | |                     #     specified version(s) of Flow (v0.83.x in this
-  | | |                     #     case).
-  | | |
-  | | └ yargs_v4.x.x.js     # <-- The libdef file meant for the Flow version
-  | |                       #     specified by the containing directory's name.
-  | |                       #     Must be named `<LIB>_v<VERSION>.js`.
-  | |
-  | ├ flow_v0.85.x-v0.91.x/ # <-- A folder containing libdefs tested against a
-  | | |                     #     different range of Flow versions:
-  | | |                     #     Anything from v0.85.x to v0.91.x (inclusive)
-  | | |
-  | | ├ yargs_v4.x.x.js     # <-- The libdef file for versions of Flow from
-  | | |                     #     v0.85.x to v0.91.x (inclusive)
-  | | |
-  | | └ test_yargs.js       # <-- Tests in this directory only apply to the
-  | |                       #     adjacent libdef (and thus, are specific to
-  | |                       #     the libdefs for this specific Flow version)
-  | |
-  | └ test_yargs.js         # <-- Tests in this directory apply to libdefs for
-  |                         #     all versions of Flow.
-  ├ color_v0.7.x/
+└ definitions/
+  ├ npm/
+    ├ yargs_v4.x.x/           # <-- The name of the library, followed by _v<VERSION>
+    | |
+    | ├ flow_v0.83.x/         # <-- A folder containing libdefs tested against the
+    | | |                     #     specified version(s) of Flow (v0.83.x in this
+    | | |                     #     case).
+    | | |
+    | | └ yargs_v4.x.x.js     # <-- The libdef file meant for the Flow version
+    | |                       #     specified by the containing directory's name.
+    | |                       #     Must be named `<LIB>_v<VERSION>.js`.
+    | |
+    | ├ flow_v0.85.x-v0.91.x/ # <-- A folder containing libdefs tested against a
+    | | |                     #     different range of Flow versions:
+    | | |                     #     Anything from v0.85.x to v0.91.x (inclusive)
+    | | |
+    | | ├ yargs_v4.x.x.js     # <-- The libdef file for versions of Flow from
+    | | |                     #     v0.85.x to v0.91.x (inclusive)
+    | | |
+    | | └ test_yargs.js       # <-- Tests in this directory only apply to the
+    | |                       #     adjacent libdef (and thus, are specific to
+    | |                       #     the libdefs for this specific Flow version)
+    | |
+    | └ test_yargs.js         # <-- Tests in this directory apply to libdefs for
+    |                         #     all versions of Flow.
+    ├ color_v0.7.x/
+    ├ ...
+  |
+  ├ environments/
+    ├ jsx/                    # <-- The name of the env environment
+    | |
+    | ├ flow_v0.83.x-/        # <-- A folder containing definition tested against the
+    | | |                     #     specified version(s) of Flow (v0.83.x and onwards
+    | | |                     #     in this case).
+    | | |
+    | | └ jsx.js              # <-- The environment definition file meant for the Flow version
+    | ├ ...
+    ├ ...
   ├ ...
 ```
 
-Versions are semantically versioned (semver) with some restrictions:
+Flow versions are semantically versioned (semver) with some restrictions:
 
 * All of MAJOR, MINOR, and PATCH versions must be specified. It's acceptable to
   specify `x` in place of a number for MINOR and PATCH, but MAJOR cannot be `x`.
@@ -179,6 +193,12 @@ node cli/dist/cli.js run-tests
 #### 6) Send a pull request
 
 You know how to do it.
+
+---
+
+#### Environment definitions
+
+The above are instructions on how to submit a library definition against npm packages though the process is similar if contributing environment definitions. Except instead of a package directory you just have an environment package that is the name of the environment without the need of versions.
 
 ## Libdef best practices
 
@@ -300,7 +320,7 @@ Learn to export [es6](https://flow.org/en/docs/libdefs/creation/#toc-declaring-a
 
 ### Declaring types
 
-Types in contract to variables when declared inside a module do not need to be explicitly exported as they will be exported automatically.
+Types in contrast to variables when declared inside a module do not need to be explicitly exported as they will be exported automatically.
 
 These two will work the same
 ```js

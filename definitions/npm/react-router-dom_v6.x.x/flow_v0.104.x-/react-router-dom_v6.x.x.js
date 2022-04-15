@@ -142,13 +142,21 @@ declare module "react-router-dom" {
     context?: mixed;
   |}>
 
-  declare export var Redirect: React$ComponentType<{|
-    to: string | LocationShape,
-    push?: boolean,
-    from?: string,
-    exact?: boolean,
-    strict?: boolean
-  |}>
+  declare export var useNavigate: () => (
+    & ((
+      to: To,
+      options?: {|
+        replace?: boolean, state?: any,
+      |},
+    ) => void)
+    & ((delta: number) => void)
+  );
+
+  declare export var Navigate: (props: {|
+    to: To;
+    replace?: boolean;
+    state?: any;
+  |}) => null;
 
   declare export var Route: React$ComponentType<{|
     caseSensitive?: boolean,

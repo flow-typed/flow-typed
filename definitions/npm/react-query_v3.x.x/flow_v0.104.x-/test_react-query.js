@@ -20,6 +20,7 @@ import {
   useQuery,
   useQueryClient,
   useQueryErrorResetBoundary,
+  type DefaultOptions,
   type FetchNextPageOptions,
   type FetchPreviousPageOptions,
   type InfiniteData,
@@ -279,6 +280,18 @@ describe("react-query", () => {
     useQuery<string, _, number>("key", () => Promise.resolve("test"), {
       // $FlowExpectedError[incompatible-call]
       select: data => "hello"
+    });
+
+    // notifyOnChangeProps
+    useQuery({
+      notifyOnChangeProps: ['foo', 'bar'],
+    });
+    useQuery({
+      notifyOnChangeProps: 'tracked',
+    });
+    // $FlowExpectedError[incompatible-call]
+    useQuery({
+      notifyOnChangeProps: 'foo',
     });
   });
 
@@ -686,9 +699,9 @@ describe("react-query", () => {
       },
     });
 
-    (queryClient.mount: () => void);
-    (queryClient.unmount: () => void);
-    (queryClient.isFetching: () => number);
+    (queryClient.mount(): void);
+    (queryClient.unmount(): void);
+    (queryClient.isFetching(): number);
     (queryClient.isFetching("key"): number);
     (queryClient.isFetching("key", dummyQueryFilters): number);
     (queryClient.getQueryData<boolean>("key"): ?boolean);
@@ -704,7 +717,7 @@ describe("react-query", () => {
     (queryClient.setQueryData<string>("key", (old) => 10): string);
     const queryState = queryClient.getQueryState<number, any>("key");
     (queryState?.data: ?number);
-    (queryClient.removeQueries: () => void);
+    (queryClient.removeQueries(): void);
     (queryClient.removeQueries("key", dummyQueryFilters): void);
     (queryClient.cancelQueries(dummyQueryFilters): Promise<void>);
     (queryClient.cancelQueries("key", dummyQueryFilters): Promise<void>);
@@ -744,18 +757,18 @@ describe("react-query", () => {
     // $FlowExpectedError[incompatible-call]
     queryClient.prefetchQuery("key", () => true, []);
 
-    (queryClient.cancelMutations: () => Promise<void>);
-    (queryClient.resumePausedMutations: () => Promise<void>);
+    (queryClient.cancelMutations(): Promise<void>);
+    (queryClient.resumePausedMutations(): Promise<void>);
     (queryClient.executeMutation<string, _, _, _>({}): Promise<string>);
-    (queryClient.getQueryCache: () => QueryCache);
-    (queryClient.getMutationCache: () => MutationCache);
-    queryClient.getDefaultOptions();
+    (queryClient.getQueryCache(): QueryCache);
+    (queryClient.getMutationCache(): MutationCache);
+    (queryClient.getDefaultOptions(): DefaultOptions);
     (queryClient.setDefaultOptions({}): void);
     queryClient.setQueryDefaults("key", {});
     queryClient.getQueryDefaults("key");
     queryClient.setMutationDefaults("key", {});
     queryClient.getMutationDefaults("key");
-    (queryClient.clear: () => void);
+    (queryClient.clear(): void);
   });
 
   it("QueryClientProvider", () => {

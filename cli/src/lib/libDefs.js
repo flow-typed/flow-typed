@@ -161,7 +161,7 @@ async function addLibDefs(pkgDirPath, libDefs: Array<LibDef>) {
 }
 
 /**
- * Given a 'definitions/npm' dir, return a list of LibDefs that it contains.
+ * Given a 'definitions/...' dir, return a list of LibDefs that it contains.
  */
 export async function getLibDefs(defsDir: string): Promise<Array<LibDef>> {
   const libDefs: Array<LibDef> = [];
@@ -261,7 +261,10 @@ async function parseLibDefsFromPkgDir(
       const testFilePaths = [].concat(commonTestFiles);
       const basePkgName =
         pkgName.charAt(0) === '@' ? pkgName.split(path.sep).pop() : pkgName;
-      const libDefFileName = `${basePkgName}_${pkgVersionStr}.js`;
+      const libDefFileName =
+        pkgVersionStr === 'vx.x.x'
+          ? `${basePkgName}.js`
+          : `${basePkgName}_${pkgVersionStr}.js`;
       let libDefFilePath;
       (await fs.readdir(flowDirPath)).forEach(flowDirItem => {
         const flowDirItemPath = path.join(flowDirPath, flowDirItem);
@@ -327,6 +330,20 @@ export function parseRepoDirItem(
   pkgVersion: Version,
 |} {
   const dirItem = path.basename(dirItemPath);
+
+  // env definitions don't have versions nor need any sort of name validation
+  if (dirItemPath.includes('definitions/environments')) {
+    return {
+      pkgName: dirItem,
+      pkgVersion: {
+        major: 'x',
+        minor: 'x',
+        patch: 'x',
+        prerel: null,
+      },
+    };
+  }
+
   const itemMatches = dirItem.match(REPO_DIR_ITEM_NAME_RE);
   if (itemMatches == null) {
     const error =
@@ -402,7 +419,12 @@ async function verifyCLIVersion(defsDirPath) {
   }
   const minCLIVersion = metadata.compatibleCLIRange;
   const thisCLIVersion = require('../../package.json').version;
-  if (!semver.satisfies(thisCLIVersion, minCLIVersion)) {
+  if (
+    !semver.satisfies(
+      semver.coerce(thisCLIVersion) ?? thisCLIVersion,
+      minCLIVersion,
+    )
+  ) {
     throw new Error(
       `Please upgrade your CLI version! This CLI is version ` +
         `${thisCLIVersion}, but the latest flow-typed definitions are only ` +

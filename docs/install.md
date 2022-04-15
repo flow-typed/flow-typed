@@ -31,8 +31,11 @@ flow-typed install --ignoreDeps peer bundle
 
 ### Ignoring dependencies
 
-Sometimes you will come across dependencies that you both don't use in code and aren't defined in `flow-typed`, `@babel/core` is a good example and you don't want it polluting your codebase or causing unnecessarily large diffs during updates. Alternatively you may have some specific libdef version different to what is referenced in package.json and you don't want that swapped out.
+Sometimes you will come across dependencies that you both don't use in code and aren't defined in `flow-typed`. `@babel/core` is a good example of this where you don't want it polluting your codebase or causing unnecessarily large diffs during updates. Alternatively you may have some specific libdef version different to what is referenced in package.json and you don't want that swapped out.
 
+You can achieve this with the `ignore` property in [flow-typed.config.js](flow-typed-config.md)
+
+#### .ignore _(deprecated)_
 The `.ignore` file which you can place in `./flow-typed` can solve this by referencing scopes or packages you'd like to explicitly exclude when `flow-typed` tries to install/update libdefs for you.
 
 ```
