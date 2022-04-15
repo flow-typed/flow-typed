@@ -22,6 +22,27 @@ declare module 'react-dom' {
     container: Element
   ): React$Portal;
 
+  declare type CreateRootOptions = {
+    unstable_strictMode?: boolean,
+    unstable_concurrentUpdatesByDefault?: boolean,
+    identifierPrefix?: string,
+    onRecoverableError?: (error: mixed) => void,
+    transitionCallbacks?: any,
+    ...
+  };
+
+  declare type RootType = {
+    render(children: any): void,
+    unmount(): void,
+    _internalRoot: any | null,
+    ...
+  };
+
+  declare function createRoot(
+    container: Element | DocumentFragment,
+    options?: CreateRootOptions,
+  ): RootType | void
+
   declare function unmountComponentAtNode(container: any): boolean;
 
   declare function unstable_batchedUpdates<A, B, C, D, E>(
