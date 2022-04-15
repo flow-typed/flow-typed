@@ -1,3 +1,75 @@
+/**
+ * Copied from react-reconciler
+ * https://github.com/facebook/react/blob/168da8d55782f3b34e2a6aa0c4dd0587696afdbd/packages/react-reconciler/src/ReactInternalTypes.js#L271
+ */
+type TransitionTracingCallbacks = {
+  onTransitionStart?: (transitionName: string, startTime: number) => void,
+  onTransitionProgress?: (
+    transitionName: string,
+    startTime: number,
+    currentTime: number,
+    pending: Array<{|
+      name: null | string,
+    |}>,
+  ) => void,
+  onTransitionIncomplete?: (
+    transitionName: string,
+    startTime: number,
+    deletions: Array<{|
+      type: string,
+      name?: string,
+      newName?: string,
+      endTime: number,
+    |}>,
+  ) => void,
+  onTransitionComplete?: (
+    transitionName: string,
+    startTime: number,
+    endTime: number,
+  ) => void,
+  onMarkerProgress?: (
+    transitionName: string,
+    marker: string,
+    startTime: number,
+    currentTime: number,
+    pending: Array<{name: null | string}>,
+  ) => void,
+  onMarkerIncomplete?: (
+    transitionName: string,
+    marker: string,
+    startTime: number,
+    deletions: Array<{|
+      type: string,
+      name?: string,
+      newName?: string,
+      endTime: number,
+    |}>,
+  ) => void,
+  onMarkerComplete?: (
+    transitionName: string,
+    marker: string,
+    startTime: number,
+    endTime: number,
+  ) => void,
+};
+
+type HydrateRootOptions = {
+  // Hydration options
+  hydratedSources?: Array<MutableSource<any>>,
+  onHydrated?: (suspenseNode: Comment) => void,
+  onDeleted?: (suspenseNode: Comment) => void,
+  // Options for all roots
+  unstable_strictMode?: boolean,
+  unstable_concurrentUpdatesByDefault?: boolean,
+  identifierPrefix?: string,
+  onRecoverableError?: (error: mixed) => void,
+  ...
+};
+
+type ReactEmpty = null | void | boolean;
+
+type ReactNodeList = ReactEmpty | React$Node;
+
 declare module 'react-dom' {
   declare var version: string;
 
@@ -44,16 +116,33 @@ declare module 'react-dom' {
 }
 
 declare module 'react-dom/client' {
-  declare type Root = {|
-    render: <ElementType: React$ElementType>(element: React$Element<ElementType>) => void,
-    unmount: () => void,
-  |};
+  declare opaque type FiberRoot;
 
-  declare export function createRoot(container: Element): Root;
+  declare type RootType = {
+    render(children: ReactNodeList): void,
+    unmount(): void,
+    _internalRoot: FiberRoot | null,
+    ...
+  };
+
+  declare type CreateRootOptions = {
+    unstable_strictMode?: boolean,
+    unstable_concurrentUpdatesByDefault?: boolean,
+    identifierPrefix?: string,
+    onRecoverableError?: (error: mixed) => void,
+    transitionCallbacks?: TransitionTracingCallbacks,
+    ...
+  };
+
+  declare export function createRoot(
+    container: Element | DocumentFragment,
+    options?: CreateRootOptions,
+  ): RootType;
 
   declare export function hydrateRoot<ElementType: React$ElementType>(
-    container: Element,
-    element: React$Element<ElementType>,
+    container: Document | Element,
+    initialChildren: ReactNodeList,
+    options?: HydrateRootOptions,
   ): void;
 }
 
