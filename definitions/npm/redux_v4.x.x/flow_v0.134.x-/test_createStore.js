@@ -1,6 +1,6 @@
 // @flow
 import type { Store as ReduxStore, StoreEnhancer } from 'redux'
-import { createStore } from 'redux'
+import { createStore, legacy_createStore } from 'redux'
 
 type State = Array<number>;
 type Action = { type: 'A', ... };
@@ -27,6 +27,23 @@ const store7: Store = createStore(reducer, [1], 'wrong'); // wrong enhancer
 declare var myEnhancer: StoreEnhancer<State, Action>;
 const store8: Store = createStore(reducer, [1], myEnhancer);
 const store9: Store = createStore(reducer, undefined, myEnhancer);
+
+// $FlowExpectedError[incompatible-type-arg]
+// $FlowExpectedError[incompatible-call]
+const legacyStore1: Store = legacy_createStore(() => ({})); // wrong reducer
+const legacyStore2: Store = legacy_createStore(reducer);
+// $FlowExpectedError[incompatible-call]
+const legacyStore3: Store = legacy_createStore(reducer, {}); // wrong initialState shape
+const legacyStore4: Store = legacy_createStore(reducer, []);
+// $FlowExpectedError[incompatible-type]
+// $FlowExpectedError[incompatible-call]
+const legacyStore5: Store = legacy_createStore(reducer, ['wrong']); // wrong initialState content
+const legacyStore6: Store = legacy_createStore(reducer, [1]);
+// $FlowExpectedError[incompatible-call]
+const legacyStore7: Store = legacy_createStore(reducer, [1], 'wrong'); // wrong enhancer
+declare var legacyMyEnhancer: StoreEnhancer<State, Action>;
+const legacyStore8: Store = legacy_createStore(reducer, [1], myEnhancer);
+const legacyStore9: Store = legacy_createStore(reducer, undefined, myEnhancer);
 
 //
 // store members
