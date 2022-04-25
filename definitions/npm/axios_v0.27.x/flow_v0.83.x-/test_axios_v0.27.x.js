@@ -1,6 +1,6 @@
 // @flow
 import { describe, it } from 'flow-typed-test';
-import axios, { toFormData } from 'axios';
+import axios, { AxiosError, toFormData } from 'axios';
 import type {
   $AxiosError,
   $AxiosXHR,
@@ -479,5 +479,21 @@ describe('formData', () => {
 
     // $FlowExpectedError[incompatible-call] second arg must be FormData type
     toFormData({}, '');
+  });
+});
+
+describe('AxiosError', () => {
+  it('contains static error codes', () => {
+    (AxiosError.ERR_NETWORK: string);
+    (AxiosError.ERR_BAD_OPTION_VALUE: string);
+    (AxiosError.ERR_BAD_OPTION: string);
+    (AxiosError.ECONNABORTED: string);
+    (AxiosError.ETIMEDOUT: string);
+    (AxiosError.ERR_NETWORK: string);
+    (AxiosError.ERR_FR_TOO_MANY_REDIRECTS: string);
+    (AxiosError.ERR_DEPRECATED: string);
+    (AxiosError.ERR_BAD_RESPONSE: string);
+    (AxiosError.ERR_BAD_REQUEST: string);
+    (AxiosError.ERR_CANCELED: string);
   });
 });
