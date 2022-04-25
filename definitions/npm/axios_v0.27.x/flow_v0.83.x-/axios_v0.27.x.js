@@ -208,6 +208,10 @@ declare module 'axios' {
     create<T, R>(config?: AxiosXHRConfigBase<T, R>): Axios;
     all: typeof Promise.all;
     spread<T, R>(callback: (...args: T) => R): (array: T) => R;
+    toFormData: (
+      obj: { [key: string]: any, ... },
+      formData?: FormData,
+    ) => FormData,
   }
 
   declare type $AxiosXHRConfigBase<T, R = T> = AxiosXHRConfigBase<T, R>;
