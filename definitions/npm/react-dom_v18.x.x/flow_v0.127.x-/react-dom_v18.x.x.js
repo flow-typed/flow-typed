@@ -1,74 +1,105 @@
-/**
- * Copied from react-reconciler
- * https://github.com/facebook/react/blob/168da8d55782f3b34e2a6aa0c4dd0587696afdbd/packages/react-reconciler/src/ReactInternalTypes.js#L271
- */
-type TransitionTracingCallbacks = {
-  onTransitionStart?: (transitionName: string, startTime: number) => void,
-  onTransitionProgress?: (
-    transitionName: string,
-    startTime: number,
-    currentTime: number,
-    pending: Array<{|
-      name: null | string,
-    |}>,
-  ) => void,
-  onTransitionIncomplete?: (
-    transitionName: string,
-    startTime: number,
-    deletions: Array<{|
-      type: string,
-      name?: string,
-      newName?: string,
+declare module 'react-dom_shared-types' {
+  /**
+   * Copied from react-reconciler
+   * https://github.com/facebook/react/blob/168da8d55782f3b34e2a6aa0c4dd0587696afdbd/packages/react-reconciler/src/ReactInternalTypes.js#L271
+   */
+  declare type TransitionTracingCallbacks = {|
+    onTransitionStart?: (transitionName: string, startTime: number) => void,
+    onTransitionProgress?: (
+      transitionName: string,
+      startTime: number,
+      currentTime: number,
+      pending: Array<{|
+        name: null | string,
+      |}>,
+    ) => void,
+    onTransitionIncomplete?: (
+      transitionName: string,
+      startTime: number,
+      deletions: Array<{|
+        type: string,
+        name?: string,
+        newName?: string,
+        endTime: number,
+      |}>,
+    ) => void,
+    onTransitionComplete?: (
+      transitionName: string,
+      startTime: number,
       endTime: number,
-    |}>,
-  ) => void,
-  onTransitionComplete?: (
-    transitionName: string,
-    startTime: number,
-    endTime: number,
-  ) => void,
-  onMarkerProgress?: (
-    transitionName: string,
-    marker: string,
-    startTime: number,
-    currentTime: number,
-    pending: Array<{name: null | string}>,
-  ) => void,
-  onMarkerIncomplete?: (
-    transitionName: string,
-    marker: string,
-    startTime: number,
-    deletions: Array<{|
-      type: string,
-      name?: string,
-      newName?: string,
+    ) => void,
+    onMarkerProgress?: (
+      transitionName: string,
+      marker: string,
+      startTime: number,
+      currentTime: number,
+      pending: Array<{|
+        name: null | string
+      |}>,
+    ) => void,
+    onMarkerIncomplete?: (
+      transitionName: string,
+      marker: string,
+      startTime: number,
+      deletions: Array<{|
+        type: string,
+        name?: string,
+        newName?: string,
+        endTime: number,
+      |}>,
+    ) => void,
+    onMarkerComplete?: (
+      transitionName: string,
+      marker: string,
+      startTime: number,
       endTime: number,
-    |}>,
-  ) => void,
-  onMarkerComplete?: (
-    transitionName: string,
-    marker: string,
-    startTime: number,
-    endTime: number,
-  ) => void,
-};
+    ) => void,
+  |};
 
-type HydrateRootOptions = {
-  // Hydration options
-  hydratedSources?: Array<MutableSource<any>>,
-  onHydrated?: (suspenseNode: Comment) => void,
-  onDeleted?: (suspenseNode: Comment) => void,
-  // Options for all roots
-  unstable_strictMode?: boolean,
-  unstable_concurrentUpdatesByDefault?: boolean,
-  identifierPrefix?: string,
-  onRecoverableError?: (error: mixed) => void,
-  ...
-};
+  declare type ReactEmpty = null | void | boolean;
 
-type ReactEmpty = null | void | boolean;
+  declare type ReactNodeList = ReactEmpty | React$Node;
 
-type ReactNodeList = ReactEmpty | React$Node;
+  // Mutable source version can be anything (e.g. number, string, immutable data structure)
+  // so long as it changes every time any part of the source changes.
+  declare type MutableSourceVersion = $NonMaybeType<mixed>;
+
+  declare type MutableSourceGetVersionFn = (
+    source: $NonMaybeType<mixed>,
+  ) => MutableSourceVersion;
+
+  declare type MutableSource<Source: $NonMaybeType<mixed>> = {|
+    _source: Source,
+
+    _getVersion: MutableSourceGetVersionFn,
+
+    // Tracks the version of this source at the time it was most recently read.
+    // Used to determine if a source is safe to read from before it has been subscribed to.
+    // Version number is only used during mount,
+    // since the mechanism for determining safety after subscription is expiration time.
+    //
+    // As a workaround to support multiple concurrent renderers,
+    // we categorize some renderers as primary and others as secondary.
+    // We only expect there to be two concurrent renderers at most:
+    // React Native (primary) and Fabric (secondary);
+    // React DOM (primary) and React ART (secondary).
+    // Secondary renderers store their context values on separate fields.
+    // We use the same approach for Context.
+    _workInProgressVersionPrimary: null | MutableSourceVersion,
+    _workInProgressVersionSecondary: null | MutableSourceVersion,
+
+    // DEV only
+    // Used to detect multiple renderers using the same mutable source.
+    _currentPrimaryRenderer?: any,
+    _currentSecondaryRenderer?: any,
+
+    // DEV only
+    // Used to detect side effects that update a mutable source during render.
+    // See https://github.com/facebook/react/issues/19948
+    _currentlyRenderingFiber?: any,
+    _initialVersionAsOfFirstRender?: MutableSourceVersion | null,
+  |};
+}
 
 declare module 'react-dom' {
   declare var version: string;
@@ -116,6 +147,12 @@ declare module 'react-dom' {
 }
 
 declare module 'react-dom/client' {
+  import type {
+    TransitionTracingCallbacks,
+    ReactNodeList,
+    MutableSource,
+  } from 'react-dom_shared-types';
+
   declare opaque type FiberRoot;
 
   declare type RootType = {
@@ -138,6 +175,19 @@ declare module 'react-dom/client' {
     container: Element | DocumentFragment,
     options?: CreateRootOptions,
   ): RootType;
+
+  declare type HydrateRootOptions = {
+    // Hydration options
+    hydratedSources?: Array<MutableSource<any>>,
+    onHydrated?: (suspenseNode: Comment) => void,
+    onDeleted?: (suspenseNode: Comment) => void,
+    // Options for all roots
+    unstable_strictMode?: boolean,
+    unstable_concurrentUpdatesByDefault?: boolean,
+    identifierPrefix?: string,
+    onRecoverableError?: (error: mixed) => void,
+    ...
+  };
 
   declare export function hydrateRoot<ElementType: React$ElementType>(
     container: Document | Element,

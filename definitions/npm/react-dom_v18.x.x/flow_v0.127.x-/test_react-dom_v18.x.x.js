@@ -181,6 +181,7 @@ describe('react-dom/client', () => {
     it('works', () => {
       declare var container: HTMLElement;
       hydrateRoot(container, <div />);
+      hydrateRoot(container);
     });
 
     it('errors', () => {
@@ -188,8 +189,6 @@ describe('react-dom/client', () => {
 
       // $FlowExpectedError[incompatible-call] can't be empty
       hydrateRoot();
-      // $FlowExpectedError[incompatible-call] missing react element
-      hydrateRoot(container);
     });
   });
 });
