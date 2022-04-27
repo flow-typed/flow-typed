@@ -1,7 +1,8 @@
 // @flow
-
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
+import { createRoot, hydrateRoot } from 'react-dom/client';
+import { describe, it } from 'flow-typed-test';
 
 // All of these tests were originally in the flow repository.
 
@@ -147,3 +148,47 @@ ReactDOM.render(<Example2 />, test$querySelector('#site'), {});
 ReactDOM.render(<Example2 />, test$querySelector('#site'), '');
 // $FlowExpectedError[incompatible-call]
 ReactDOM.render(<Example2 />, test$querySelector('#site'), null);
+
+describe('react-dom/client', () => {
+  describe('createRoot', () => {
+    it('works', () => {
+      declare var container: HTMLElement;
+
+      const root = createRoot(container);
+      (root.render(<div />): void);
+      (root.unmount(): void);
+    });
+
+    it('needs createRoot to have valid param', () => {
+      // $FlowExpectedError[incompatible-call] needs to be non-null container
+      createRoot(document.getElementById('root'));
+      // $FlowExpectedError[incompatible-call] takes container only
+      createRoot('test');
+    });
+
+    it('unmount takes no params and returns nothing', () => {
+      declare var container: HTMLElement;
+
+      const root = createRoot(container);
+      // $FlowExpectedError[extra-arg]
+      root.unmount('test');
+      // $FlowExpectedError[incompatible-cast]
+      (root.unmount(): string);
+    });
+  });
+
+  describe('hydrateRoot', () => {
+    it('works', () => {
+      declare var container: HTMLElement;
+      hydrateRoot(container, <div />);
+      hydrateRoot(container);
+    });
+
+    it('errors', () => {
+      declare var container: HTMLElement;
+
+      // $FlowExpectedError[incompatible-call] can't be empty
+      hydrateRoot();
+    });
+  });
+});
