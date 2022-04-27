@@ -189,11 +189,11 @@ declare module 'react-dom/client' {
     ...
   };
 
-  declare export function hydrateRoot<ElementType: React$ElementType>(
+  declare export function hydrateRoot(
     container: Document | Element,
     initialChildren: ReactNodeList,
     options?: HydrateRootOptions,
-  ): void;
+  ): RootType;
 }
 
 declare module 'react-dom/server' {
