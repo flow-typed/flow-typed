@@ -109,7 +109,15 @@ declare module 'react-dom' {
     hydrateRoot as client_hydrateRoot,
   } from 'react-dom/client';
 
+  /**
+   * @deprecated
+   * You are importing createRoot from "react-dom" which is not supported. You should instead import it from "react-dom/client".
+   */
   declare var createRoot: client_createRoot;
+  /**
+   * @deprecated
+   * You are importing hydrateRoot from "react-dom" which is not supported. You should instead import it from "react-dom/client".
+   */
   declare var hydrateRoot: client_hydrateRoot;
 
   declare var version: string;
