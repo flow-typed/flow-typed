@@ -63,6 +63,16 @@ declare module 'redux' {
     enhancer?: StoreEnhancer<S, A, D>
   ): Store<S, A, D>;
 
+  declare export function legacy_createStore<S, A, D>(
+    reducer: Reducer<S, A>,
+    enhancer?: StoreEnhancer<S, A, D>
+  ): Store<S, A, D>;
+  declare export function legacy_createStore<S, A, D>(
+    reducer: Reducer<S, A>,
+    preloadedState?: S,
+    enhancer?: StoreEnhancer<S, A, D>
+  ): Store<S, A, D>;
+
   declare export function applyMiddleware<S, A, D>(
     ...middlewares: Array<Middleware<S, A, D>>
   ): StoreEnhancer<S, A, D>;
