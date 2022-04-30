@@ -99,9 +99,19 @@ declare module 'react-dom_shared-types' {
     _currentlyRenderingFiber?: any,
     _initialVersionAsOfFirstRender?: MutableSourceVersion | null,
   |};
+
+  declare opaque type FiberRoot;
 }
 
 declare module 'react-dom' {
+  import typeof {
+    createRoot as client_createRoot,
+    hydrateRoot as client_hydrateRoot,
+  } from 'react-dom/client';
+
+  declare var createRoot: client_createRoot;
+  declare var hydrateRoot: client_hydrateRoot;
+
   declare var version: string;
 
   declare function findDOMNode(
@@ -151,9 +161,8 @@ declare module 'react-dom/client' {
     TransitionTracingCallbacks,
     ReactNodeList,
     MutableSource,
+    FiberRoot,
   } from 'react-dom_shared-types';
-
-  declare opaque type FiberRoot;
 
   declare type RootType = {
     render(children: ReactNodeList): void,
