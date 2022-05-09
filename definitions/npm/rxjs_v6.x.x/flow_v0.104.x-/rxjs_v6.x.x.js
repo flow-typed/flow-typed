@@ -2527,20 +2527,16 @@ declare module "rxjs/operators" {
   ): rxjs$UnaryFunction<rxjs$Observable<T>, rxjs$ConnectableObservable<T>>;
 
   declare export function multicast<T>(
-    rxjs$SubjectFactory: () => rxjs$Subject<T>
-  ): rxjs$UnaryFunction<rxjs$Observable<T>, rxjs$ConnectableObservable<T>>;
-
-  declare export function multicast<T>(
-    rxjs$SubjectFactory: () => rxjs$Subject<T>,
+    subjectOrSubjectFactory: rxjs$FactoryOrValue<rxjs$Subject<T>>,
     selector?: rxjs$MonoTypeOperatorFunction<T>
   ): rxjs$MonoTypeOperatorFunction<T>;
 
   declare export function multicast<T, R>(
-    rxjs$SubjectFactory: () => rxjs$Subject<T>
+    subjectOrSubjectFactory: rxjs$FactoryOrValue<rxjs$Subject<T>>, 
   ): rxjs$UnaryFunction<rxjs$Observable<T>, rxjs$ConnectableObservable<R>>;
 
   declare export function multicast<T, R>(
-    rxjs$SubjectFactory: () => rxjs$Subject<T>,
+    subjectOrSubjectFactory: rxjs$FactoryOrValue<rxjs$Subject<T>>,
     selector?: rxjs$OperatorFunction<T, R>
   ): rxjs$OperatorFunction<T, R>;
 
