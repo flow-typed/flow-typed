@@ -1,4 +1,4 @@
-type JestMockFn<TArguments: $ReadOnlyArray<*>, TReturn> = {
+type JestMockFn<TArguments: $ReadOnlyArray<any>, TReturn> = {
   (...args: TArguments): TReturn,
   /**
    * An object for introspecting mock calls
@@ -10,6 +10,12 @@ type JestMockFn<TArguments: $ReadOnlyArray<*>, TReturn> = {
      * passed during the call.
      */
     calls: Array<TArguments>,
+    /**
+     * An array containing the call arguments of the last call that was made
+     * to this mock function. If the function was not called, it will return
+     * undefined.
+     */
+    lastCall: TArguments,
     /**
      * An array that contains all the object instances that have been
      * instantiated from this mock function.

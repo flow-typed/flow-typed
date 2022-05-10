@@ -72,6 +72,10 @@ mockedDoStuff.mock.calls[0][0].indexOf('a');
 // $FlowExpectedError[prop-missing] function `doesntExist` not found in string.
 mockedDoStuff.mock.calls[0][0].doesntExist('a');
 
+mockedDoStuff.mock.lastCall[0].indexOf('a');
+// $FlowExpectedError[prop-missing] function `doesntExist` not found in string.
+mockedDoStuff.mock.lastCall[0].doesntExist('a');
+
 mockedDoStuff.mock.instances[0] > 5;
 // $FlowExpectedError[prop-missing] function `doesntExist` not found in number.
 mockedDoStuff.mock.instances[0].indexOf('a');
@@ -794,9 +798,6 @@ it.each`
   ${1} | ${2} | ${3}
   ${2} | ${3} | ${5}
   ${3} | ${4} | ${7}
-`(
-  'x=$x, y=$y, and z=$z',
-  ({ x, y, z }) => {
-      // perform tests
-  }
-);
+`('x=$x, y=$y, and z=$z', ({ x, y, z }) => {
+  // perform tests
+});
