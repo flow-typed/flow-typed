@@ -99,7 +99,7 @@ declare module 'validator' {
 // ===========================================================
 
 declare module 'validator/es/lib/blacklist' {
-  declare module.exports: any;
+  declare module.exports: $Exports<'validator/lib/blacklist'>;
 }
 
 declare module 'validator/es/lib/contains' {
@@ -107,87 +107,87 @@ declare module 'validator/es/lib/contains' {
 }
 
 declare module 'validator/es/lib/equals' {
-  declare module.exports: any;
+  declare module.exports: $Exports<'validator/lib/equals'>;
 }
 
 declare module 'validator/es/lib/escape' {
-  declare module.exports: any;
+  declare module.exports: $Exports<'validator/lib/escape'>;
 }
 
 declare module 'validator/es/lib/isAfter' {
-  declare module.exports: any;
+  declare module.exports: $Exports<'validator/lib/isAfter'>;
 }
 
 declare module 'validator/es/lib/isAlpha' {
-  declare module.exports: any;
+  declare module.exports: $Exports<'validator/lib/isAlpha'>;
 }
 
 declare module 'validator/es/lib/isAlphanumeric' {
-  declare module.exports: any;
+  declare module.exports: $Exports<'validator/lib/isAlphanumeric'>;
 }
 
 declare module 'validator/es/lib/isAscii' {
-  declare module.exports: any;
+  declare module.exports: $Exports<'validator/lib/isAscii'>;
 }
 
 declare module 'validator/es/lib/isBase32' {
-  declare module.exports: any;
+  declare module.exports: $Exports<'validator/lib/isBase32'>;
 }
 
 declare module 'validator/es/lib/isBase58' {
-  declare module.exports: any;
+  declare module.exports: $Exports<'validator/lib/isBase58'>;
 }
 
 declare module 'validator/es/lib/isBase64' {
-  declare module.exports: any;
+  declare module.exports: $Exports<'validator/lib/isBase64'>;
 }
 
 declare module 'validator/es/lib/isBefore' {
-  declare module.exports: any;
+  declare module.exports: $Exports<'validator/lib/isBefore'>;
 }
 
 declare module 'validator/es/lib/isBIC' {
-  declare module.exports: any;
+  declare module.exports: $Exports<'validator/lib/isBIC'>;
 }
 
 declare module 'validator/es/lib/isBoolean' {
-  declare module.exports: any;
+  declare module.exports: $Exports<'validator/lib/isBoolean'>;
 }
 
 declare module 'validator/es/lib/isBtcAddress' {
-  declare module.exports: any;
+  declare module.exports: $Exports<'validator/lib/isBtcAddress'>;
 }
 
 declare module 'validator/es/lib/isByteLength' {
-  declare module.exports: any;
+  declare module.exports: $Exports<'validator/lib/isByteLength'>;
 }
 
 declare module 'validator/es/lib/isCreditCard' {
-  declare module.exports: any;
+  declare module.exports: $Exports<'validator/lib/isCreditCard'>;
 }
 
 declare module 'validator/es/lib/isCurrency' {
-  declare module.exports: any;
+  declare module.exports: $Exports<'validator/lib/isCurrency'>;
 }
 
 declare module 'validator/es/lib/isDataURI' {
-  declare module.exports: any;
+  declare module.exports: $Exports<'validator/lib/isDataURI'>;
 }
 
 declare module 'validator/es/lib/isDate' {
-  declare module.exports: any;
+  declare module.exports: $Exports<'validator/lib/isDate'>;
 }
 
 declare module 'validator/es/lib/isDecimal' {
-  declare module.exports: any;
+  declare module.exports: $Exports<'validator/lib/isDecimal'>;
 }
 
 declare module 'validator/es/lib/isDivisibleBy' {
-  declare module.exports: any;
+  declare module.exports: $Exports<'validator/lib/isDivisibleBy'>;
 }
 
 declare module 'validator/es/lib/isEAN' {
-  declare module.exports: any;
+  declare module.exports: $Exports<'validator/lib/isEAN'>;
 }
 
 declare module 'validator/es/lib/isEmail' {
@@ -195,279 +195,279 @@ declare module 'validator/es/lib/isEmail' {
 }
 
 declare module 'validator/es/lib/isEmpty' {
-  declare module.exports: any;
+  declare module.exports: $Exports<'validator/lib/isEmpty'>;
 }
 
 declare module 'validator/es/lib/isEthereumAddress' {
-  declare module.exports: any;
+  declare module.exports: $Exports<'validator/lib/isEthereumAddress'>;
 }
 
 declare module 'validator/es/lib/isFloat' {
-  declare module.exports: any;
+  declare module.exports: $Exports<'validator/lib/isFloat'>;
 }
 
 declare module 'validator/es/lib/isFQDN' {
-  declare module.exports: any;
+  declare module.exports: $Exports<'validator/lib/isFQDN'>;
 }
 
 declare module 'validator/es/lib/isFullWidth' {
-  declare module.exports: any;
+  declare module.exports: $Exports<'validator/lib/isFullWidth'>;
 }
 
 declare module 'validator/es/lib/isHalfWidth' {
-  declare module.exports: any;
+  declare module.exports: $Exports<'validator/lib/isHalfWidth'>;
 }
 
 declare module 'validator/es/lib/isHash' {
-  declare module.exports: any;
+  declare module.exports: $Exports<'validator/lib/isHash'>;
 }
 
 declare module 'validator/es/lib/isHexadecimal' {
-  declare module.exports: any;
+  declare module.exports: $Exports<'validator/lib/isHexadecimal'>;
 }
 
 declare module 'validator/es/lib/isHexColor' {
-  declare module.exports: any;
+  declare module.exports: $Exports<'validator/lib/isHexColor'>;
 }
 
 declare module 'validator/es/lib/isHSL' {
-  declare module.exports: any;
+  declare module.exports: $Exports<'validator/lib/isHSL'>;
 }
 
 declare module 'validator/es/lib/isIBAN' {
-  declare module.exports: any;
+  declare module.exports: $Exports<'validator/lib/isIBAN'>;
 }
 
 declare module 'validator/es/lib/isIdentityCard' {
-  declare module.exports: any;
+  declare module.exports: $Exports<'validator/lib/isIdentityCard'>;
 }
 
 declare module 'validator/es/lib/isIMEI' {
-  declare module.exports: any;
+  declare module.exports: $Exports<'validator/lib/isIMEI'>;
 }
 
 declare module 'validator/es/lib/isIn' {
-  declare module.exports: any;
+  declare module.exports: $Exports<'validator/lib/isIn'>;
 }
 
 declare module 'validator/es/lib/isInt' {
-  declare module.exports: any;
+  declare module.exports: $Exports<'validator/lib/isInt'>;
 }
 
 declare module 'validator/es/lib/isIP' {
-  declare module.exports: any;
+  declare module.exports: $Exports<'validator/lib/isIP'>;
 }
 
 declare module 'validator/es/lib/isIPRange' {
-  declare module.exports: any;
+  declare module.exports: $Exports<'validator/lib/isIPRange'>;
 }
 
 declare module 'validator/es/lib/isISBN' {
-  declare module.exports: any;
+  declare module.exports: $Exports<'validator/lib/isISBN'>;
 }
 
 declare module 'validator/es/lib/isISIN' {
-  declare module.exports: any;
+  declare module.exports: $Exports<'validator/lib/isISIN'>;
 }
 
 declare module 'validator/es/lib/isISO31661Alpha2' {
-  declare module.exports: any;
+  declare module.exports: $Exports<'validator/lib/isISO31661Alpha2'>;
 }
 
 declare module 'validator/es/lib/isISO31661Alpha3' {
-  declare module.exports: any;
+  declare module.exports: $Exports<'validator/lib/isISO31661Alpha3'>;
 }
 
 declare module 'validator/es/lib/isISO4217' {
-  declare module.exports: any;
+  declare module.exports: $Exports<'validator/lib/isISO4217'>;
 }
 
 declare module 'validator/es/lib/isISO8601' {
-  declare module.exports: any;
+  declare module.exports: $Exports<'validator/lib/isISO8601'>;
 }
 
 declare module 'validator/es/lib/isISRC' {
-  declare module.exports: any;
+  declare module.exports: $Exports<'validator/lib/isISRC'>;
 }
 
 declare module 'validator/es/lib/isISSN' {
-  declare module.exports: any;
+  declare module.exports: $Exports<'validator/lib/isISSN'>;
 }
 
 declare module 'validator/es/lib/isJSON' {
-  declare module.exports: any;
+  declare module.exports: $Exports<'validator/lib/isJSON'>;
 }
 
 declare module 'validator/es/lib/isJWT' {
-  declare module.exports: any;
+  declare module.exports: $Exports<'validator/lib/isJWT'>;
 }
 
 declare module 'validator/es/lib/isLatLong' {
-  declare module.exports: any;
+  declare module.exports: $Exports<'validator/lib/isLatLong'>;
 }
 
 declare module 'validator/es/lib/isLength' {
-  declare module.exports: any;
+  declare module.exports: $Exports<'validator/lib/isLength'>;
 }
 
 declare module 'validator/es/lib/isLicensePlate' {
-  declare module.exports: any;
+  declare module.exports: $Exports<'validator/lib/isLicensePlate'>;
 }
 
 declare module 'validator/es/lib/isLocale' {
-  declare module.exports: any;
+  declare module.exports: $Exports<'validator/lib/isLocale'>;
 }
 
 declare module 'validator/es/lib/isLowercase' {
-  declare module.exports: any;
+  declare module.exports: $Exports<'validator/lib/isLowercase'>;
 }
 
 declare module 'validator/es/lib/isMACAddress' {
-  declare module.exports: any;
+  declare module.exports: $Exports<'validator/lib/isMACAddress'>;
 }
 
 declare module 'validator/es/lib/isMagnetURI' {
-  declare module.exports: any;
+  declare module.exports: $Exports<'validator/lib/isMagnetURI'>;
 }
 
 declare module 'validator/es/lib/isMD5' {
-  declare module.exports: any;
+  declare module.exports: $Exports<'validator/lib/isMD5'>;
 }
 
 declare module 'validator/es/lib/isMimeType' {
-  declare module.exports: any;
+  declare module.exports: $Exports<'validator/lib/isMimeType'>;
 }
 
 declare module 'validator/es/lib/isMobilePhone' {
-  declare module.exports: any;
+  declare module.exports: $Exports<'validator/lib/isMobilePhone'>;
 }
 
 declare module 'validator/es/lib/isMongoId' {
-  declare module.exports: any;
+  declare module.exports: $Exports<'validator/lib/isMongoId'>;
 }
 
 declare module 'validator/es/lib/isMultibyte' {
-  declare module.exports: any;
+  declare module.exports: $Exports<'validator/lib/isMultibyte'>;
 }
 
 declare module 'validator/es/lib/isNumeric' {
-  declare module.exports: any;
+  declare module.exports: $Exports<'validator/lib/isNumeric'>;
 }
 
 declare module 'validator/es/lib/isOctal' {
-  declare module.exports: any;
+  declare module.exports: $Exports<'validator/lib/isOctal'>;
 }
 
 declare module 'validator/es/lib/isPassportNumber' {
-  declare module.exports: any;
+  declare module.exports: $Exports<'validator/lib/isPassportNumber'>;
 }
 
 declare module 'validator/es/lib/isPort' {
-  declare module.exports: any;
+  declare module.exports: $Exports<'validator/lib/isPort'>;
 }
 
 declare module 'validator/es/lib/isPostalCode' {
-  declare module.exports: any;
+  declare module.exports: $Exports<'validator/lib/isPostalCode'>;
 }
 
 declare module 'validator/es/lib/isRFC3339' {
-  declare module.exports: any;
+  declare module.exports: $Exports<'validator/lib/isRFC3339'>;
 }
 
 declare module 'validator/es/lib/isRgbColor' {
-  declare module.exports: any;
+  declare module.exports: $Exports<'validator/lib/isRgbColor'>;
 }
 
 declare module 'validator/es/lib/isSemVer' {
-  declare module.exports: any;
+  declare module.exports: $Exports<'validator/lib/isSemVer'>;
 }
 
 declare module 'validator/es/lib/isSlug' {
-  declare module.exports: any;
+  declare module.exports: $Exports<'validator/lib/isSlug'>;
 }
 
 declare module 'validator/es/lib/isStrongPassword' {
-  declare module.exports: any;
+  declare module.exports: $Exports<'validator/lib/isStrongPassword'>;
 }
 
 declare module 'validator/es/lib/isSurrogatePair' {
-  declare module.exports: any;
+  declare module.exports: $Exports<'validator/lib/isSurrogatePair'>;
 }
 
 declare module 'validator/es/lib/isTaxID' {
-  declare module.exports: any;
+  declare module.exports: $Exports<'validator/lib/isTaxID'>;
 }
 
 declare module 'validator/es/lib/isUppercase' {
-  declare module.exports: any;
+  declare module.exports: $Exports<'validator/lib/isUppercase'>;
 }
 
 declare module 'validator/es/lib/isURL' {
-  declare module.exports: any;
+  declare module.exports: $Exports<'validator/lib/isURL'>;
 }
 
 declare module 'validator/es/lib/isUUID' {
-  declare module.exports: any;
+  declare module.exports: $Exports<'validator/lib/isUUID'>;
 }
 
 declare module 'validator/es/lib/isVariableWidth' {
-  declare module.exports: any;
+  declare module.exports: $Exports<'validator/lib/isVariableWidth'>;
 }
 
 declare module 'validator/es/lib/isVAT' {
-  declare module.exports: any;
+  declare module.exports: $Exports<'validator/lib/isVAT'>;
 }
 
 declare module 'validator/es/lib/isWhitelisted' {
-  declare module.exports: any;
+  declare module.exports: $Exports<'validator/lib/isWhitelisted'>;
 }
 
 declare module 'validator/es/lib/ltrim' {
-  declare module.exports: any;
+  declare module.exports: $Exports<'validator/lib/ltrim'>;
 }
 
 declare module 'validator/es/lib/matches' {
-  declare module.exports: any;
+  declare module.exports: $Exports<'validator/lib/matches'>;
 }
 
 declare module 'validator/es/lib/normalizeEmail' {
-  declare module.exports: any;
+  declare module.exports: $Exports<'validator/lib/normalizeEmail'>;
 }
 
 declare module 'validator/es/lib/rtrim' {
-  declare module.exports: any;
+  declare module.exports: $Exports<'validator/lib/rtrim'>;
 }
 
 declare module 'validator/es/lib/stripLow' {
-  declare module.exports: any;
+  declare module.exports: $Exports<'validator/lib/stripLow'>;
 }
 
 declare module 'validator/es/lib/toBoolean' {
-  declare module.exports: any;
+  declare module.exports: $Exports<'validator/lib/toBoolean'>;
 }
 
 declare module 'validator/es/lib/toDate' {
-  declare module.exports: any;
+  declare module.exports: $Exports<'validator/lib/toDate'>;
 }
 
 declare module 'validator/es/lib/toFloat' {
-  declare module.exports: any;
+  declare module.exports: $Exports<'validator/lib/toFloat'>;
 }
 
 declare module 'validator/es/lib/toInt' {
-  declare module.exports: any;
+  declare module.exports: $Exports<'validator/lib/toInt'>;
 }
 
 declare module 'validator/es/lib/trim' {
-  declare module.exports: any;
+  declare module.exports: $Exports<'validator/lib/trim'>;
 }
 
 declare module 'validator/es/lib/unescape' {
-  declare module.exports: any;
+  declare module.exports: $Exports<'validator/lib/unescape'>;
 }
 
 declare module 'validator/es/lib/whitelist' {
-  declare module.exports: any;
+  declare module.exports: $Exports<'validator/lib/whitelist'>;
 }
 
 // ===========================================================
