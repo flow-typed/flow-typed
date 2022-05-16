@@ -23,4 +23,5 @@
 declare module 'flow-typed-test' {
   declare export function describe(label: string, fn: (...any) => void): void;
   declare export function it(label: string, fn: (...any) => void | Promise<void>): void;
+  declare export function test(label: string, fn: (...any) => void | Promise<void>): void;
 }
