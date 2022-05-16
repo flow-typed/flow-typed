@@ -34,7 +34,6 @@ declare module "react-redux" {
   // ------------------------------------------------------------
 
   declare export type Options<S, OP, SP, MP> = {|
-    pure?: boolean,
     forwardRef?: boolean,
     areStatesEqual?: (next: S, prev: S) => boolean,
     areOwnPropsEqual?: (next: OP, prev: OP) => boolean,

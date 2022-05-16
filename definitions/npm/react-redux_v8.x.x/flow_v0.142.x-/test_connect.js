@@ -598,11 +598,11 @@ function testOptions() {
     }
   }
   // here in Props comes dispatch property
-  e.push(connect<{...}, {||}, _,_,_,_>(null, null, null, {pure: true})(Com));
+  e.push(connect<{...}, {||}, _,_,_,_>(null, null, null, {storeKey: 'test'})(Com));
   e.push(connect<{...}, {||}, _,_,_,_>(null, null, null, {forwardRef: true})(Com));
-  e.push(connect<{...}, {||}, _,_,_,_>(null, null, null, {pure: false, forwardRef: false})(Com));
+  e.push(connect<{...}, {||}, _,_,_,_>(null, null, null, {storeKey: 'test', forwardRef: false})(Com));
   // $FlowExpectedError[incompatible-call] wrong type
-  e.push(connect<{...}, {||}, _,_,_,_>(null, null, null, {pure: 123})(Com));
+  e.push(connect<{...}, {||}, _,_,_,_>(null, null, null, {storeKey: 123})(Com));
   // $FlowExpectedError[incompatible-call] wrong type
   e.push(connect<{...}, {||}, _,_,_,_>(null, null, null, {ref: 123})(Com));
   // $FlowExpectedError[incompatible-call] wrong key

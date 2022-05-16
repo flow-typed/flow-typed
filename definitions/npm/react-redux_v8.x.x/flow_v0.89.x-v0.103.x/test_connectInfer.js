@@ -387,11 +387,11 @@ function testOptions() {
       return <div></div>;
     }
   }
-  connect(null, null, null, {pure: true})(Com);
+  connect(null, null, null, {storeKey: 'test'})(Com);
   connect(null, null, null, {forwardRef: true})(Com);
-  connect(null, null, null, {pure: false, forwardRef: false})(Com);
+  connect(null, null, null, {storeKey: 'test', forwardRef: false})(Com);
   // $FlowExpectedError wrong type
-  connect(null, null, null, {pure: 123})(Com);
+  connect(null, null, null, {storeKey: 123})(Com);
   // $FlowExpectedError wrong type
   connect(null, null, null, {ref: 123})(Com);
   // $FlowExpectedError wrong key
