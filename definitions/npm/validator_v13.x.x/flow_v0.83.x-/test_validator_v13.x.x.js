@@ -265,43 +265,171 @@ describe('validator', () => {
 
   describe('isBoolean', () => {
     it('works', () => {
+      validator.isBoolean('test');
+      validator.isBoolean('test', {
+        loose: true,
+      });
+    });
 
+    it('fails', () => {
+      // $FlowExpectedError[incompatible-call]
+      validator.isBoolean();
+      // $FlowExpectedError[incompatible-call]
+      validator.isBoolean(123);
+      // $FlowExpectedError[incompatible-call]
+      validator.isBoolean('test', 123);
+      // $FlowExpectedError[prop-missing]
+      validator.isBoolean('test', {
+        foo: 'bar',
+      });
+      validator.isBoolean('test', {
+        // $FlowExpectedError[incompatible-call]
+        loose: 'test',
+      });
     });
   });
 
   describe('isBtcAddress', () => {
     it('works', () => {
+      validator.isBtcAddress('test');
+    });
 
+    it('fails', () => {
+      // $FlowExpectedError[incompatible-call]
+      validator.isBtcAddress();
+      // $FlowExpectedError[incompatible-call]
+      validator.isBtcAddress(123);
+      // $FlowExpectedError[extra-arg]
+      validator.isBtcAddress('test', 'test');
     });
   });
 
   describe('isByteLength', () => {
     it('works', () => {
+      validator.isByteLength('test');
+      validator.isByteLength('test', {
+        min: 1,
+        max: 5,
+      });
+    });
 
+    it('fails', () => {
+      // $FlowExpectedError[incompatible-call]
+      validator.isByteLength();
+      // $FlowExpectedError[incompatible-call]
+      validator.isByteLength(123);
+      // $FlowExpectedError[incompatible-call]
+      validator.isByteLength('test', 123);
+      // $FlowExpectedError[prop-missing]
+      validator.isByteLength('test', {
+        foo: 'bar',
+      });
+      validator.isByteLength('test', {
+        // $FlowExpectedError[incompatible-call]
+        min: 'test',
+      });
+      validator.isByteLength('test', {
+        // $FlowExpectedError[incompatible-call]
+        max: 'test',
+      });
     });
   });
 
   describe('isCreditCard', () => {
     it('works', () => {
+      validator.isCreditCard('test');
+    });
 
+    it('fails', () => {
+      // $FlowExpectedError[incompatible-call]
+      validator.isCreditCard();
+      // $FlowExpectedError[incompatible-call]
+      validator.isCreditCard(123);
+      // $FlowExpectedError[extra-arg]
+      validator.isCreditCard('test', 'test');
     });
   });
 
   describe('isCurrency', () => {
     it('works', () => {
+      validator.isCurrency('test');
+      validator.isCurrency('test', {
+        symbol: '$',
+        require_symbol: true,
+        allow_space_after_symbol: true,
+        symbol_after_digits: true,
+        allow_negatives: true,
+        parens_for_negatives: true,
+        negative_sign_before_digits: true,
+        negative_sign_after_digits: true,
+        allow_negative_sign_placeholder: true,
+        thousands_separator: '.',
+        decimal_separator: ',',
+        allow_decimal: true,
+        require_decimal: true,
+        digits_after_decimal: [1],
+        allow_space_after_digits: true,
+      });
+    });
 
+    it('fails', () => {
+      // $FlowExpectedError[incompatible-call]
+      validator.isCurrency();
+      // $FlowExpectedError[incompatible-call]
+      validator.isCurrency(123);
+      // $FlowExpectedError[prop-missing]
+      validator.isCurrency('test', {
+        foo: 'bar',
+      });
     });
   });
 
   describe('isDataURI', () => {
     it('works', () => {
+      validator.isDataURI('test');
+    });
 
+    it('fails', () => {
+      // $FlowExpectedError[incompatible-call]
+      validator.isDataURI();
+      // $FlowExpectedError[incompatible-call]
+      validator.isDataURI(123);
+      // $FlowExpectedError[extra-arg]
+      validator.isDataURI('test', 'test');
     });
   });
 
   describe('isDate', () => {
     it('works', () => {
+      validator.isDate('test');
+      validator.isDate('test', {
+        format: 'test',
+        strictMode: true,
+        delimiters: ['/'],
+      });
+    });
 
+    it('fails', () => {
+      // $FlowExpectedError[incompatible-call]
+      validator.isDate();
+      // $FlowExpectedError[incompatible-call]
+      validator.isDate(123);
+      // $FlowExpectedError[prop-missing]
+      validator.isDate('test', {
+        foo: 'bar',
+      });
+      validator.isDate('test', {
+        // $FlowExpectedError[incompatible-call]
+        format: 123,
+      });
+      validator.isDate('test', {
+        // $FlowExpectedError[incompatible-call]
+        strictMode: 'test',
+      });
+      validator.isDate('test', {
+        // $FlowExpectedError[incompatible-call]
+        delimiters: [1],
+      });
     });
   });
 
