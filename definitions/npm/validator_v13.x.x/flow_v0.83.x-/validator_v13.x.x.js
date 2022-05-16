@@ -7,6 +7,7 @@ declare module 'validator' {
     isAfter: $Exports<'validator/lib/isAfter'>,
     isAlpha: $Exports<'validator/lib/isAlpha'>,
     isAlphanumeric: $Exports<'validator/lib/isAlphanumeric'>,
+    isAscii: $Exports<'validator/lib/isAscii'>,
     isBase32: $Exports<'validator/lib/isBase32'>,
     isBase58: $Exports<'validator/lib/isBase58'>,
     isBase64: $Exports<'validator/lib/isBase64'>,
@@ -484,12 +485,23 @@ declare module 'validator/lib/blacklist' {
 }
 
 declare module 'validator/lib/contains' {
+  declare type Options = {|
+    /**
+     * @default false
+     */
+    ignoreCase?: boolean,
+    /**
+     * @default 1
+     */
+    minOccurrences?: number,
+  |}
+
   /**
    * Check if the string contains the seed.
    *
    * @param seed - Seed
    */
-  declare module.exports: (str: string, seed: any) => boolean;
+  declare module.exports: (str: string, seed: $NonMaybeType<mixed>, options?: Options) => boolean;
 }
 
 declare module 'validator/lib/equals' {
@@ -514,7 +526,7 @@ declare module 'validator/lib/isAfter' {
    *
    * @param [date] - Date string (defaults to now)
    */
-  declare module.exports: (str: string, date?: string) => boolean;
+  declare module.exports: (str: string, date?: string | number | Date) => boolean;
 }
 
 declare module 'validator/lib/isAlpha' {
@@ -578,7 +590,7 @@ declare module 'validator/lib/isAlpha' {
     /**
      * @default undefined
      */
-    ignore?: string | RegExp | void,
+    ignore?: string | RegExp,
   |};
 
   /**
@@ -651,7 +663,7 @@ declare module 'validator/lib/isAlphanumeric' {
     /**
      * @default undefined
      */
-    ignore?: string | RegExp | void,
+    ignore?: string | RegExp,
   |};
 
   /**
@@ -706,7 +718,7 @@ declare module 'validator/lib/isBefore' {
    *
    * @param [date] - Date string (defaults to now)
    */
-  declare module.exports: (str: string, date?: string) => boolean;
+  declare module.exports: (str: string, date?: string | number | Date) => boolean;
 }
 
 declare module 'validator/lib/isBIC' {
