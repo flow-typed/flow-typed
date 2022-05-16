@@ -571,55 +571,160 @@ describe('validator', () => {
 
   describe('isFloat', () => {
     it('works', () => {
+      validator.isFloat('test');
+      validator.isFloat('test', {
+        min: 1,
+        max: 5,
+        gt: 1,
+        lt: 5,
+        locale: 'pl-Pl',
+      });
+    });
 
+    it('fails', () => {
+      // $FlowExpectedError[incompatible-call]
+      validator.isFloat();
+      // $FlowExpectedError[incompatible-call]
+      validator.isFloat(123);
+      // $FlowExpectedError[incompatible-call]
+      validator.isFloat('test', 123);
+      // $FlowExpectedError[prop-missing]
+      validator.isFloat('test', {
+        foo: 'bar',
+      });
     });
   });
 
   describe('isFQDN', () => {
     it('works', () => {
+      validator.isFQDN('test');
+      validator.isFQDN('test', {
+        require_tld: true,
+        allow_underscores: true,
+        allow_trailing_dot: true,
+        allow_numeric_tld: true,
+        allow_wildcard: true,
+      });
+    });
 
+    it('fails', () => {
+      // $FlowExpectedError[incompatible-call]
+      validator.isFQDN();
+      // $FlowExpectedError[incompatible-call]
+      validator.isFQDN(123);
+      // $FlowExpectedError[incompatible-call]
+      validator.isFQDN('test', 123);
+      // $FlowExpectedError[prop-missing]
+      validator.isFQDN('test', {
+        foo: 'bar',
+      });
     });
   });
 
   describe('isFullWidth', () => {
     it('works', () => {
+      validator.isFullWidth('test');
+    });
 
+    it('fails', () => {
+      // $FlowExpectedError[incompatible-call]
+      validator.isFullWidth();
+      // $FlowExpectedError[incompatible-call]
+      validator.isFullWidth(123);
+      // $FlowExpectedError[extra-arg]
+      validator.isFullWidth('test', 'test');
     });
   });
 
   describe('isHalfWidth', () => {
     it('works', () => {
+      validator.isHalfWidth('test');
+    });
 
+    it('fails', () => {
+      // $FlowExpectedError[incompatible-call]
+      validator.isHalfWidth();
+      // $FlowExpectedError[incompatible-call]
+      validator.isHalfWidth(123);
+      // $FlowExpectedError[extra-arg]
+      validator.isHalfWidth('test', 'test');
     });
   });
 
   describe('isHash', () => {
     it('works', () => {
+      validator.isHash('test', 'md5');
+    });
 
+    it('fails', () => {
+      // $FlowExpectedError[incompatible-call]
+      validator.isHash();
+      // $FlowExpectedError[incompatible-call]
+      validator.isHash(123);
+      // $FlowExpectedError[incompatible-call]
+      validator.isHash('test');
+      // $FlowExpectedError[incompatible-call]
+      validator.isHash('test', 123);
     });
   });
 
   describe('isHexadecimal', () => {
     it('works', () => {
+      validator.isHexadecimal('test');
+    });
 
+    it('fails', () => {
+      // $FlowExpectedError[incompatible-call]
+      validator.isHexadecimal();
+      // $FlowExpectedError[incompatible-call]
+      validator.isHexadecimal(123);
+      // $FlowExpectedError[extra-arg]
+      validator.isHexadecimal('test', 'test');
     });
   });
 
   describe('isHexColor', () => {
     it('works', () => {
+      validator.isHexColor('test');
+    });
 
+    it('fails', () => {
+      // $FlowExpectedError[incompatible-call]
+      validator.isHexColor();
+      // $FlowExpectedError[incompatible-call]
+      validator.isHexColor(123);
+      // $FlowExpectedError[extra-arg]
+      validator.isHexColor('test', 'test');
     });
   });
 
   describe('isHSL', () => {
     it('works', () => {
+      validator.isHSL('test');
+    });
 
+    it('fails', () => {
+      // $FlowExpectedError[incompatible-call]
+      validator.isHSL();
+      // $FlowExpectedError[incompatible-call]
+      validator.isHSL(123);
+      // $FlowExpectedError[extra-arg]
+      validator.isHSL('test', 'test');
     });
   });
 
   describe('isIBAN', () => {
     it('works', () => {
+      validator.isIBAN('test');
+    });
 
+    it('fails', () => {
+      // $FlowExpectedError[incompatible-call]
+      validator.isIBAN();
+      // $FlowExpectedError[incompatible-call]
+      validator.isIBAN(123);
+      // $FlowExpectedError[extra-arg]
+      validator.isIBAN('test', 'test');
     });
   });
 
