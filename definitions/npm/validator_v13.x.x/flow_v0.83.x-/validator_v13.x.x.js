@@ -1920,9 +1920,9 @@ declare module 'validator/lib/isVariableWidth' {
 
 declare module 'validator/lib/isVAT' {
   /**
-   * Checks that the string is a [valid VAT number
+   * Checks that the string is a [valid VAT number]
    */
-  declare module.exports: any;
+  declare module.exports: (str: string, countryCode: string) => boolean;
 }
 
 declare module 'validator/lib/isWhitelisted' {
@@ -1954,7 +1954,7 @@ declare module 'validator/lib/matches' {
    */
   declare type MatchesPattern = (str: string, pattern: string, modifiers?: string) => boolean;
 
-  declare module.exports: MatchesRegex | MatchesPattern;
+  declare module.exports: MatchesRegex & MatchesPattern;
 }
 
 declare module 'validator/lib/normalizeEmail' {
