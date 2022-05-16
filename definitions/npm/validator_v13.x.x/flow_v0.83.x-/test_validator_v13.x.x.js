@@ -435,37 +435,137 @@ describe('validator', () => {
 
   describe('isDecimal', () => {
     it('works', () => {
+      validator.isDecimal('test');
+      validator.isDecimal('test', {
+        force_decimal: true,
+        decimal_digits: 'test',
+        locale: 'en-US',
+      });
+    });
 
+    it('fails', () => {
+      // $FlowExpectedError[incompatible-call]
+      validator.isDecimal();
+      // $FlowExpectedError[incompatible-call]
+      validator.isDecimal(123);
+      // $FlowExpectedError[incompatible-call]
+      validator.isDecimal('test', 123);
+      // $FlowExpectedError[prop-missing]
+      validator.isDecimal('test', {
+        foo: 'bar',
+      });
+      validator.isDecimal('test', {
+        // $FlowExpectedError[incompatible-call]
+        force_decimal: 'test',
+      });
+      validator.isDecimal('test', {
+        // $FlowExpectedError[incompatible-call]
+        decimal_digits: true,
+      });
+      validator.isDecimal('test', {
+        // $FlowExpectedError[incompatible-call]
+        locale: 'test',
+      });
     });
   });
 
   describe('isDivisibleBy', () => {
     it('works', () => {
+      validator.isDivisibleBy('test', 123);
+    });
 
+    it('fails', () => {
+      // $FlowExpectedError[incompatible-call]
+      validator.isDivisibleBy();
+      // $FlowExpectedError[incompatible-call]
+      validator.isDivisibleBy('test');
+      // $FlowExpectedError[incompatible-call]
+      validator.isDivisibleBy('test', 'test');
     });
   });
 
   describe('isEAN', () => {
     it('works', () => {
+      validator.isEAN('test');
+    });
 
+    it('fails', () => {
+      // $FlowExpectedError[incompatible-call]
+      validator.isEAN();
+      // $FlowExpectedError[incompatible-call]
+      validator.isEAN(123);
+      // $FlowExpectedError[extra-arg]
+      validator.isEAN('test', 'test');
     });
   });
 
   describe('isEmail', () => {
     it('works', () => {
+      validator.isEmail('test');
+      validator.isEmail('test', {
+        allow_display_name: true,
+        require_display_name: true,
+        allow_utf8_local_part: true,
+        require_tld: true,
+        ignore_max_length: true,
+        allow_ip_domain: true,
+        domain_specific_validation: true,
+        host_blacklist: ['test'],
+      });
+    });
 
+    it('fails', () => {
+      // $FlowExpectedError[incompatible-call]
+      validator.isEmail();
+      // $FlowExpectedError[incompatible-call]
+      validator.isEmail(123);
+      // $FlowExpectedError[incompatible-call]
+      validator.isEmail('test', 123);
+      // $FlowExpectedError[prop-missing]
+      validator.isEmail('test', {
+        foo: 'bar',
+      });
     });
   });
 
   describe('isEmpty', () => {
     it('works', () => {
+      validator.isEmpty('test');
+      validator.isEmpty('test', {
+        ignore_whitespace: true,
+      });
+    });
 
+    it('fails', () => {
+      // $FlowExpectedError[incompatible-call]
+      validator.isEmpty();
+      // $FlowExpectedError[incompatible-call]
+      validator.isEmpty(123);
+      // $FlowExpectedError[incompatible-call]
+      validator.isEmpty('test', 123);
+      // $FlowExpectedError[prop-missing]
+      validator.isEmpty('test', {
+        foo: 'bar',
+      });
+      validator.isEmpty('test', {
+        // $FlowExpectedError[incompatible-call]
+        ignore_whitespace: 'test',
+      });
     });
   });
 
   describe('isEthereumAddress', () => {
     it('works', () => {
+      validator.isEthereumAddress('test');
+    });
 
+    it('fails', () => {
+      // $FlowExpectedError[incompatible-call]
+      validator.isEthereumAddress();
+      // $FlowExpectedError[incompatible-call]
+      validator.isEthereumAddress(123);
+      // $FlowExpectedError[extra-arg]
+      validator.isEthereumAddress('test', 'test');
     });
   });
 
