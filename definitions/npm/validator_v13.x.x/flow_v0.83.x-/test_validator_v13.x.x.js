@@ -1604,55 +1604,173 @@ describe('validator', () => {
 
   describe('normalizeEmail', () => {
     it('works', () => {
+      validator.normalizeEmail('test');
+      validator.normalizeEmail('test', {
+        all_lowercase: true,
+        gmail_lowercase: true,
+        gmail_remove_dots: true,
+        gmail_remove_subaddress: true,
+        gmail_convert_googlemaildotcom: true,
+        outlookdotcom_lowercase: true,
+        outlookdotcom_remove_subaddress: true,
+        yahoo_lowercase: true,
+        yahoo_remove_subaddress: true,
+        icloud_lowercase: true,
+        icloud_remove_subaddress: true,
+      });
+    });
 
+    it('fails', () => {
+      // $FlowExpectedError[incompatible-call]
+      validator.normalizeEmail();
+      // $FlowExpectedError[incompatible-call]
+      validator.normalizeEmail(123);
+      // $FlowExpectedError[incompatible-call]
+      validator.normalizeEmail('test', 'test');
+      // $FlowExpectedError[prop-missing]
+      validator.normalizeEmail('test', {
+        foo: 'bar',
+      });
     });
   });
 
   describe('rtrim', () => {
     it('works', () => {
+      validator.rtrim('test');
+      validator.rtrim('test', 'test');
+    });
 
+    it('fails', () => {
+      // $FlowExpectedError[incompatible-call]
+      validator.rtrim();
+      // $FlowExpectedError[incompatible-call]
+      validator.rtrim(123);
+      // $FlowExpectedError[incompatible-call]
+      validator.rtrim('test', 123);
     });
   });
 
   describe('stripLow', () => {
     it('works', () => {
+      validator.stripLow('test');
+      validator.stripLow('test', true);
+    });
 
+    it('fails', () => {
+      // $FlowExpectedError[incompatible-call]
+      validator.stripLow();
+      // $FlowExpectedError[incompatible-call]
+      validator.stripLow(123);
+      // $FlowExpectedError[incompatible-call]
+      validator.stripLow('test', 'test');
     });
   });
 
   describe('toBoolean', () => {
     it('works', () => {
+      validator.toBoolean('test');
+      validator.toBoolean('test', true);
+    });
 
+    it('fails', () => {
+      // $FlowExpectedError[incompatible-call]
+      validator.toBoolean();
+      // $FlowExpectedError[incompatible-call]
+      validator.toBoolean(123);
+      // $FlowExpectedError[incompatible-call]
+      validator.toBoolean('test', 'test');
     });
   });
 
   describe('toDate', () => {
     it('works', () => {
+      (validator.toDate('test'): Date | null);
+    });
 
+    it('fails', () => {
+      // $FlowExpectedError[incompatible-call]
+      validator.toDate();
+      // $FlowExpectedError[incompatible-call]
+      validator.toDate(123);
+      // $FlowExpectedError[extra-arg]
+      validator.toDate('test', 'test');
     });
   });
 
   describe('toFloat', () => {
     it('works', () => {
+      (validator.toFloat('test'): number);
+    });
 
+    it('fails', () => {
+      // $FlowExpectedError[incompatible-call]
+      validator.toFloat();
+      // $FlowExpectedError[incompatible-call]
+      validator.toFloat(123);
+      // $FlowExpectedError[extra-arg]
+      validator.toFloat('test', 'test');
     });
   });
 
   describe('toInt', () => {
     it('works', () => {
+      (validator.toInt('test'): number);
+      validator.toInt('test', 10);
+    });
 
+    it('fails', () => {
+      // $FlowExpectedError[incompatible-call]
+      validator.toInt();
+      // $FlowExpectedError[incompatible-call]
+      validator.toInt(123);
+      // $FlowExpectedError[incompatible-call]
+      validator.toInt('test', 'test');
     });
   });
 
   describe('trim', () => {
     it('works', () => {
+      (validator.trim('test'): string);
+      validator.trim('test', 'test');
+    });
 
+    it('fails', () => {
+      // $FlowExpectedError[incompatible-call]
+      validator.trim();
+      // $FlowExpectedError[incompatible-call]
+      validator.trim(123);
+      // $FlowExpectedError[incompatible-call]
+      validator.trim('test', 123);
+    });
+  });
+
+  describe('unescape', () => {
+    it('works', () => {
+      (validator.unescape('test'): string);
+    });
+
+    it('fails', () => {
+      // $FlowExpectedError[incompatible-call]
+      validator.unescape();
+      // $FlowExpectedError[incompatible-call]
+      validator.unescape(123);
+      // $FlowExpectedError[extra-arg]
+      validator.unescape('test', 'test');
     });
   });
 
   describe('whitelist', () => {
     it('works', () => {
+      (validator.whitelist('test', 'test'): string);
+    });
 
+    it('fails', () => {
+      // $FlowExpectedError[incompatible-call]
+      validator.whitelist();
+      // $FlowExpectedError[incompatible-call]
+      validator.whitelist(123);
+      // $FlowExpectedError[incompatible-call]
+      validator.whitelist('test', 123);
     });
   });
 });

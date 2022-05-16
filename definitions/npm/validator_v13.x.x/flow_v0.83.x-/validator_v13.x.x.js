@@ -90,7 +90,8 @@ declare module 'validator' {
     toDate: $Exports<'validator/lib/toDate'>,
     toFloat: $Exports<'validator/lib/toFloat'>,
     toInt: $Exports<'validator/lib/toInt'>,
-    trim: $Exports<'validator/lib/unescape'>,
+    trim: $Exports<'validator/lib/trim'>,
+    unescape: $Exports<'validator/lib/unescape'>,
     whitelist: $Exports<'validator/lib/whitelist'>,
   |};
 }
