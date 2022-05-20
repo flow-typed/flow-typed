@@ -69,17 +69,15 @@ describe("react-query", () => {
     useQuery("key", () => true, {});
 
     // $FlowExpectedError[incompatible-call]
-    useQuery(() => true);
-    // $FlowExpectedError[incompatible-call]
     useQuery("key", []);
     // $FlowExpectedError[incompatible-call]
     useQuery("key", () => true, []);
 
-    // should accept tuple query key but will not be a tuple in query function context
+    // should infer query key in query fn context
     queryInfo = useQuery((["key"]: ["key"]), (context) => {
-      // ideally the query key type would be preserved
-      (context.queryKey[0]: mixed);
-      (context.queryKey[1]: mixed);
+      (context.queryKey: ["key"]);
+      // $FlowExpectedError[incompatible-cast]
+      (context.queryKey: "wrong");
     });
 
     const noQueryFn = useQuery("key");
@@ -89,9 +87,9 @@ describe("react-query", () => {
     (noQueryFn.error: null);
 
     // it should infer the result type from the query function
-    const fromQueryFn = useQuery("key", () => "test");
-    (fromQueryFn.data: void | string);
-    (fromQueryFn.error: null | Error);
+    const fromQueryFn = useQuery("key", () => 1);
+    (fromQueryFn.data: void | number);
+    (fromQueryFn.error: null | mixed);
     (fromQueryFn.status: string);
     (fromQueryFn.isIdle: boolean);
     (fromQueryFn.isLoading: boolean);
@@ -108,13 +106,13 @@ describe("react-query", () => {
     (fromQueryFn.dataUpdatedAt: number);
     (fromQueryFn.errorUpdatedAt: number);
     (fromQueryFn.failureCount: number);
-    (fromQueryFn.refetch: (options?: RefetchOptions) => Promise<QueryObserverResult<string, null | Error>>);
+    (fromQueryFn.refetch: (options?: RefetchOptions) => Promise<QueryObserverResult<number, null | mixed>>);
     (fromQueryFn.remove: () => void);
 
     // it should be possible to specify the result type
-    const withResult = useQuery<string, _, _>("key", () => "test");
-    (withResult.data: ?string);
-    (withResult.error: Error | null);
+    const withResult = useQuery<"test", _, _>("key", () => "test");
+    (withResult.data: void | "test");
+    (withResult.error: mixed | null);
 
     // it should be possible to specify the error type
     const withError = useQuery<string, ReferenceError, _>("key", () => "test");
@@ -135,26 +133,8 @@ describe("react-query", () => {
     // $FlowExpectedError[incompatible-call]
     useQuery<number, _, _>("key", () => "test");
 
-    // it should infer the result type from a generic query function
-    function queryFn<T: string>(a?: T): Promise<T> {
-      // force cast
-      const out = (("": any): Promise<T>);
-      return out;
-    }
-
-    const fromGenericQueryFn = useQuery("key", () => queryFn());
-    (fromGenericQueryFn.data: ?string);
-    (fromGenericQueryFn.error: Error | null);
-
-    const fromGenericOptionsQueryFn = useQuery({
-      queryKey: "key",
-      queryFn: () => queryFn(),
-    });
-    (fromGenericOptionsQueryFn.data: ?string);
-    (fromGenericOptionsQueryFn.error: Error | null);
-
     // All input options
-    useQuery({
+    useQuery<number>({
       queryKey: "key",
       queryFn: () => 10,
       enabled: true,
@@ -175,11 +155,11 @@ describe("react-query", () => {
         (data: number);
       },
       onError: (error) => {
-        (error: Error);
+        (error: mixed);
       },
       onSettled: (data, error) => {
         (data: ?number);
-        (error: Error | null);
+        (error: mixed | null);
       },
       useErrorBoundary: false,
       select: (data) => {
@@ -191,31 +171,27 @@ describe("react-query", () => {
     });
 
     // retry
-    useQuery({
-      queryKey: "key",
-      queryFn: () => true,
+    useQuery("key", () => true, {
       retry: 4,
     });
-    useQuery({
-      queryKey: "key",
-      queryFn: () => true,
+    useQuery<boolean>("key", () => true, {
       retry: (failureCount, error) => {
         (failureCount: number);
-        (error: Error);
+        (error: mixed);
         return true;
       },
     });
     // $FlowExpectedError[incompatible-call]
-    useQuery({
-      queryKey: "key",
-      queryFn: () => true,
+    useQuery<boolean>("key", () => true, {
       retry: "wrong",
+    });
+    useQuery<boolean>("key", () => true, {
+      // $FlowExpectedError[incompatible-call]
+      retry: () => "wrong",
     });
 
     // retryDelay
-    useQuery({
-      queryKey: "key",
-      queryFn: () => true,
+    useQuery("key", () => true, {
       retryDelay: (failureCount, error) => {
         (failureCount: number);
         (error: Error);
@@ -224,43 +200,31 @@ describe("react-query", () => {
     });
 
     // refetchInterval
-    useQuery({
-      queryKey: "key",
-      queryFn: () => true,
+    useQuery("key", () => true, {
       refetchInterval: 10,
     });
 
     // the "always" types
-    useQuery({
-      queryKey: "key",
-      queryFn: () => true,
+    useQuery("key", () => true, {
       refetchOnWindowFocus: "always",
       refetchOnReconnect: "always",
       refetchOnMount: "always",
     });
     // $FlowExpectedError[incompatible-call]
-    useQuery({
-      queryKey: "key",
-      queryFn: () => true,
+    useQuery("key", () => true, {
       refetchOnWindowFocus: "sometimes",
     });
     // $FlowExpectedError[incompatible-call]
-    useQuery({
-      queryKey: "key",
-      queryFn: () => true,
+    useQuery("key", () => true, {
       refetchOnReconnect: "sometimes",
     });
     // $FlowExpectedError[incompatible-call]
-    useQuery({
-      queryKey: "key",
-      queryFn: () => true,
+    useQuery("key", () => true, {
       refetchOnMount: "sometimes",
     });
 
     // placeholderData
-    useQuery({
-      queryKey: "key",
-      queryFn: (): string => "string",
+    useQuery("key", () => true, {
       placeholderData: () => "diffString",
     });
     queryInfo = useQuery<string, _, string>({
@@ -283,14 +247,14 @@ describe("react-query", () => {
     });
 
     // notifyOnChangeProps
-    useQuery({
+    useQuery('', () => '', {
       notifyOnChangeProps: ['foo', 'bar'],
     });
-    useQuery({
+    useQuery('', () => '', {
       notifyOnChangeProps: 'tracked',
     });
     // $FlowExpectedError[incompatible-call]
-    useQuery({
+    useQuery('', () => '', {
       notifyOnChangeProps: 'foo',
     });
   });
@@ -322,17 +286,13 @@ describe("react-query", () => {
     useInfiniteQuery("key", () => true, {});
 
     // $FlowExpectedError[incompatible-call]
-    useInfiniteQuery(() => true);
-    // $FlowExpectedError[incompatible-call]
-    useInfiniteQuery("key", []);
-    // $FlowExpectedError[incompatible-call]
     useInfiniteQuery("key", () => true, []);
 
-    // should accept tuple query key but will not be a tuple in query function context
+    // should infer query key in query fn context
     queryInfo = useInfiniteQuery((["key"]: ["key"]), (context) => {
-      // ideally the query key type would be preserved
-      (context.queryKey[0]: mixed);
-      (context.queryKey[1]: mixed);
+      (context.queryKey: ["key"]);
+      // $FlowExpectedError[incompatible-cast]
+      (context.queryKey: "wrong");
     });
 
     const noQueryFn = useInfiniteQuery("key");
@@ -341,7 +301,7 @@ describe("react-query", () => {
     (noQueryFn.data: null);
     (noQueryFn.error: null);
 
-    // it should infer the result type from the query function
+    // should infer the result type from the query function
     const fromQueryFn = useInfiniteQuery("key", () => "test");
     (fromQueryFn.data: void | InfiniteData<string>);
     (fromQueryFn.error: null | Error);
@@ -412,17 +372,12 @@ describe("react-query", () => {
     (fromGenericQueryFn.data: void | InfiniteData<string>);
     (fromGenericQueryFn.error: Error | null);
 
-    const fromGenericOptionsQueryFn = useInfiniteQuery({
-      queryKey: "key",
-      queryFn: () => queryFn(),
-    });
+    const fromGenericOptionsQueryFn = useInfiniteQuery("key", () => queryFn());
     (fromGenericOptionsQueryFn.data: void | InfiniteData<string>);
     (fromGenericOptionsQueryFn.error: Error | null);
 
     // All input options
-    useInfiniteQuery({
-      queryKey: "key",
-      queryFn: () => 10,
+    useInfiniteQuery("key", () => 1, {
       enabled: true,
       retry: true,
       retryOnMount: true,
@@ -449,7 +404,8 @@ describe("react-query", () => {
       },
       useErrorBoundary: false,
       select: (data) => {
-        return (data: InfiniteData<number>);
+        (data: InfiniteData<number>);
+        return data;
       },
       suspense: false,
       keepPreviousData: false,
@@ -457,14 +413,10 @@ describe("react-query", () => {
     });
 
     // retry
-    useInfiniteQuery({
-      queryKey: "key",
-      queryFn: () => true,
+    useInfiniteQuery("key", () => true, {
       retry: 4,
     });
-    useInfiniteQuery({
-      queryKey: "key",
-      queryFn: () => true,
+    useInfiniteQuery("key", () => true, {
       retry: (failureCount, error) => {
         (failureCount: number);
         (error: Error);
@@ -472,16 +424,12 @@ describe("react-query", () => {
       },
     });
     // $FlowExpectedError[incompatible-call]
-    useInfiniteQuery({
-      queryKey: "key",
-      queryFn: () => true,
+    useInfiniteQuery("key", () => true, {
       retry: "wrong",
     });
 
     // retryDelay
-    useInfiniteQuery({
-      queryKey: "key",
-      queryFn: () => true,
+    useInfiniteQuery("key", () => true, {
       retryDelay: (failureCount, error) => {
         (failureCount: number);
         (error: Error);
@@ -490,43 +438,31 @@ describe("react-query", () => {
     });
 
     // refetchInterval
-    useInfiniteQuery({
-      queryKey: "key",
-      queryFn: () => true,
+    useInfiniteQuery("key", () => true, {
       refetchInterval: 10,
     });
 
     // the "always" types
-    useInfiniteQuery({
-      queryKey: "key",
-      queryFn: () => true,
+    useInfiniteQuery("key", () => true, {
       refetchOnWindowFocus: "always",
       refetchOnReconnect: "always",
       refetchOnMount: "always",
     });
     // $FlowExpectedError[incompatible-call]
-    useInfiniteQuery({
-      queryKey: "key",
-      queryFn: () => true,
+    useInfiniteQuery("key", () => true, {
       refetchOnWindowFocus: "sometimes",
     });
     // $FlowExpectedError[incompatible-call]
-    useInfiniteQuery({
-      queryKey: "key",
-      queryFn: () => true,
+    useInfiniteQuery("key", () => true, {
       refetchOnReconnect: "sometimes",
     });
     // $FlowExpectedError[incompatible-call]
-    useInfiniteQuery({
-      queryKey: "key",
-      queryFn: () => true,
+    useInfiniteQuery("key", () => true, {
       refetchOnMount: "sometimes",
     });
 
     // placeholderData
-    useInfiniteQuery({
-      queryKey: "key",
-      queryFn: (): string => "string",
+    useInfiniteQuery("key", () => true, {
       placeholderData: () => ({pages: ['diffstring'], pageParams: [0]}),
     });
     queryInfo = useInfiniteQuery<string, _, string>({

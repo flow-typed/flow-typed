@@ -1,8 +1,5 @@
 // @flow
 
-// NOTE: useInfiniteQuery is currently very poorly typed. The relevant type definitions have been
-// commented out. useInfiniteQuery will accept `any` config options and return `any`.
-
 declare module "react-query" {
   declare export class Subscribable<TListener> {
     subscribe(listener?: TListener): () => void;
@@ -175,11 +172,11 @@ declare module "react-query" {
     setDefaultOptions(options: DefaultOptions): void;
     setQueryDefaults(
       queryKey: QueryKey,
-      options: QueryObserverOptions<any, any, any, any>
+      options: QueryObserverOptions<any, any, any, any, any>
     ): void;
     getQueryDefaults(
       queryKey?: QueryKey
-    ): ?QueryObserverOptions<any, any, any, any>;
+    ): ?QueryObserverOptions<any, any, any, any, any>;
     setMutationDefaults(
       mutationKey: MutationKey,
       options: MutationObserverOptions<any, any, any, any>
@@ -188,7 +185,7 @@ declare module "react-query" {
       mutationKey?: MutationKey
     ): ?MutationObserverOptions<any, any, any, any>;
     defaultQueryOptions<T: QueryOptions<any, any, any>>(options?: T): T;
-    defaultQueryObserverOptions<T: QueryObserverOptions<any, any, any, any>>(
+    defaultQueryObserverOptions<T: QueryObserverOptions<any, any, any, any, any>>(
       options?: T
     ): T;
     defaultMutationOptions<T: MutationOptions<any, any, any, any>>(
@@ -339,16 +336,14 @@ declare module "react-query" {
   |};
 
   declare export type InitialDataFunction<TData> = () => void | TData;
-  declare export type QueryKey = string | $ReadOnlyArray<mixed>;
+  declare export type QueryKey = string | mixed[] | $ReadOnlyArray<mixed>;
   declare export type PageParam = mixed;
-  declare export type QueryKeyHashFunction = (queryKey: QueryKey) => string;
+  declare export type QueryKeyHashFunction<TQueryKey = QueryKey> = (queryKey: TQueryKey) => string;
   declare export type QueryFunctionContext<TQueryKey = QueryKey, TPageParam = PageParam> = {|
     queryKey: TQueryKey,
     pageParam?: TPageParam,
   |};
-  declare export type QueryFunction<TQueryFnData, TQueryKey = QueryKey, TPageParam = PageParam> = (
-    context: QueryFunctionContext<QueryKey, PageParam>
-  ) => Promise<TQueryFnData> | TQueryFnData;
+  declare export type QueryFunction<TQueryFnData, TQueryKey = QueryKey, TPageParam = PageParam> = (context: QueryFunctionContext<TQueryKey, TPageParam>) => Promise<TQueryFnData> | TQueryFnData;
   declare export type GetPreviousPageParamFunction<TQueryFnData = mixed, U = mixed> = (
     firstPage: TQueryFnData,
     allPages: TQueryFnData[]
@@ -357,15 +352,15 @@ declare module "react-query" {
     lastPage: TQueryFnData,
     allPages: TQueryFnData[]
   ) => U;
-  declare export type QueryOptions<TQueryFnData = mixed, TError = mixed, TData = TQueryFnData> = {|
+  declare export type QueryOptions<TQueryFnData = mixed, TError = mixed, TData = TQueryFnData, TQueryKey = QueryKey> = {|
     retry?: RetryValue<TError>,
     retryDelay?: RetryDelayValue<TError>,
     cacheTime?: number,
     isDataEqual?: (oldData: void | TData, newData: TData) => boolean,
-    queryFn?: QueryFunction<TQueryFnData>,
+    queryFn?: QueryFunction<TQueryFnData, TQueryKey>,
     queryHash?: string,
-    queryKey?: QueryKey,
-    queryKeyHashFn?: QueryKeyHashFunction,
+    queryKey?: TQueryKey,
+    queryKeyHashFn?: QueryKeyHashFunction<TQueryKey>,
     initialData?: TData | InitialDataFunction<TData>,
     behavior?: QueryBehavior<TQueryFnData, TError, TData>,
     /**
@@ -384,8 +379,8 @@ declare module "react-query" {
      */
     getNextPageParam?: GetNextPageParamFunction<TQueryFnData, any>,
   |};
-  declare export type FetchQueryOptions<TQueryFnData = mixed, TError = mixed, TData = TQueryFnData> = {|
-    ...QueryOptions<TQueryFnData, TError, TData>,
+  declare export type FetchQueryOptions<TQueryFnData = mixed, TError = mixed, TData = TQueryFnData, TQueryKey = QueryKey> = {|
+    ...QueryOptions<TQueryFnData, TError, TData, TQueryKey>,
     staleTime?: number,
   |};
   declare export type PlaceholderDataFunction<TResult> = () => void | TResult;
@@ -394,9 +389,10 @@ declare module "react-query" {
     TQueryFnData,
     TError = mixed,
     TData = TQueryFnData,
-    TQueryData = TQueryFnData
+    TQueryData = TQueryFnData,
+    TQueryKey = QueryKey,
   > = {|
-    ...QueryOptions<TQueryFnData, TError, TData>,
+    ...QueryOptions<TQueryFnData, TError, TData, TQueryKey>,
     /**
      * Set this to `false` to disable automatic refetching when the query mounts or changes query keys.
      * To refetch the query, use the `refetch` method returned from the `useQuery` instance.
@@ -491,12 +487,13 @@ declare module "react-query" {
     placeholderData?: TData | PlaceholderDataFunction<TData>,
   |};
 
-  declare export type InfiniteQueryObserverOptions<TQueryFnData = mixed, TError = mixed, TData = TQueryFnData, TQueryData = TQueryFnData> =
+  declare export type InfiniteQueryObserverOptions<TQueryFnData = mixed, TError = mixed, TData = TQueryFnData, TQueryData = TQueryFnData, TQueryKey = QueryKey> =
     QueryObserverOptions<
       TQueryFnData,
       TError,
       InfiniteData<TData>,
-      InfiniteData<TQueryData>
+      InfiniteData<TQueryData>,
+      TQueryKey,
     >;
 
   declare export type QueryObserverBaseResult<TData = mixed, TError = mixed> = {|
@@ -695,14 +692,15 @@ declare module "react-query" {
       TQueryFnData = mixed,
       TError = mixed,
       TData = TQueryFnData,
-      TQueryData = TQueryFnData,
+      TQueryKey = QueryKey,
+      TPageParam = PageParam,
     >
     extends Subscribable<QueryObserverListener<TData, TError>> {
-    +options: QueryObserverOptions<TQueryFnData, TError, TData, TQueryData>;
+    +options: QueryObserverOptions<TQueryFnData, TError, TData, TQueryFnData, TQueryKey>;
 
     constructor(
       client: QueryClient,
-      options: QueryObserverOptions<TQueryFnData, TError, TData, TQueryData>
+      options: QueryObserverOptions<TQueryFnData, TError, TData, TQueryFnData, TQueryKey>
     ): this;
 
     willLoadOnMount(): boolean;
@@ -712,13 +710,13 @@ declare module "react-query" {
     willFetchOnWindowFocus(): boolean;
     destroy(): void;
     setOptions(
-      options?: QueryObserverOptions<TQueryFnData, TError, TData, TQueryData>
+      options?: QueryObserverOptions<TQueryFnData, TError, TData, TQueryFnData, TQueryKey>
     ): void;
     getCurrentResult(): QueryObserverResult<TData, TError>;
     getNextResult(
       options?: ResultOptions
     ): Promise<QueryObserverResult<TData, TError>>;
-    getCurrentQuery(): Query<TQueryData, TError, TQueryFnData>;
+    getCurrentQuery(): Query<TQueryFnData, TError, TData>;
     remove(): void;
     refetch(
       options?: RefetchOptions
@@ -733,16 +731,16 @@ declare module "react-query" {
       TQueryFnData,
       TError = mixed,
       TData = TQueryFnData,
-      TQueryData = TQueryFnData,
+      TQueryKey = QueryKey,
     >
     extends Subscribable<QueriesObserverListener<TData, TError>> {
     constructor(
       client: QueryClient,
-      queries?: QueryObserverOptions<TQueryFnData, TError, TData, TQueryData>[]
+      queries?: QueryObserverOptions<TQueryFnData, TError, TData, TQueryFnData, TQueryKey>[]
     ): this;
     destroy(): void;
     setQueries(
-      queries: QueryObserverOptions<TQueryFnData, TError, TData, TQueryData>[]
+      queries: QueryObserverOptions<TQueryFnData, TError, TData, TQueryFnData, TQueryKey>[]
     ): void;
     getCurrentResult(): QueryObserverResult<TData, TError>[];
   }
@@ -755,7 +753,7 @@ declare module "react-query" {
       TQueryFnData = mixed,
       TError = mixed,
       TData = TQueryFnData,
-      TQueryData = TQueryFnData,
+      TQueryKey = QueryKey,
     >
     extends Subscribable<InfiniteQueryObserverListener<TData, TError>> {
     constructor(
@@ -764,7 +762,8 @@ declare module "react-query" {
         TQueryFnData,
         TError,
         TData,
-        TQueryData
+        TQueryFnData,
+        TQueryKey
       >
     ): this;
 
@@ -786,7 +785,7 @@ declare module "react-query" {
     getNextResult(
       options?: ResultOptions
     ): Promise<InfiniteQueryObserverResult<TData, TError>>;
-    getCurrentQuery(): Query<TQueryData, TError, TQueryFnData>;
+    getCurrentQuery(): Query<TQueryFnData, TError, TData>;
     remove(): void;
     refetch(
       options?: RefetchOptions
@@ -800,7 +799,8 @@ declare module "react-query" {
         TQueryFnData,
         TError,
         TData,
-        TQueryData
+        TQueryFnData,
+        TQueryKey
       >
     ): void;
     fetchNextPage<T>(
@@ -813,15 +813,15 @@ declare module "react-query" {
 
   declare export type SetDataOptions = {| updatedAt?: number |};
 
-  declare export class Query<TQueryFnData = mixed, TError = mixed, TData = TQueryFnData> {
+  declare export class Query<TQueryFnData = mixed, TError = mixed, TData = TQueryFnData, TQueryKey = QueryKey> {
     +queryKey: QueryKey;
     +queryHash: string;
-    +options: QueryOptions<TQueryFnData, TError, TData>;
+    +options: QueryOptions<TQueryFnData, TError, TData, TQueryKey>;
     +state: QueryState<TData, TError>;
     +cacheTime: number;
 
     constructor(config: QueryConfig<TQueryFnData, TError, TData>): this;
-    setDefaultOptions(options: QueryOptions<TQueryFnData, TError, TData>): void;
+    setDefaultOptions(options: QueryOptions<TQueryFnData, TError, TData, TQueryKey>): void;
     setData(updater: Updater<?TData, TData>, options?: SetDataOptions): TData;
     setState(state: QueryState<TData, TError>): void;
     cancel(options?: CancelOptions): Promise<void>;
@@ -836,7 +836,7 @@ declare module "react-query" {
     removeObserver(observer: QueryObserver<any, any, any, any>): void;
     invalidate(): void;
     fetch(
-      options?: QueryOptions<TQueryFnData, TError, TData>,
+      options?: QueryOptions<TQueryFnData, TError, TData, TQueryKey>,
       fetchOptions?: FetchOptions
     ): Promise<TData>;
   }
@@ -937,7 +937,7 @@ declare module "react-query" {
   |};
 
   declare export type DefaultOptions = {|
-    queries?: QueryObserverOptions<any, any, any, any>,
+    queries?: QueryObserverOptions<any, any, any, any, any>,
     mutations?: MutationObserverOptions<any, any, any, any>,
   |};
   declare export type MutationState<TData = mixed, TError = mixed, TVariables = mixed, TContext = mixed> = {|
@@ -1054,21 +1054,22 @@ declare module "react-query" {
     TQueryFnData = mixed,
     TError = mixed,
     TData = TQueryFnData,
-    TQueryData = TQueryFnData,
-  > = QueryObserverOptions<TQueryFnData, TError, TData, TQueryData>;
+    TQueryKey = QueryKey,
+  > = QueryObserverOptions<TQueryFnData, TError, TData, TQueryFnData, TQueryKey>;
 
   declare export type UseQueryOptions<
     TQueryFnData = mixed,
     TError = mixed,
     TData = TQueryFnData,
-  > = UseBaseQueryOptions<TQueryFnData, TError, TData, TQueryFnData>;
+    TQueryKey = QueryKey,
+  > = UseBaseQueryOptions<TQueryFnData, TError, TData, TQueryKey>;
 
   declare export type UseInfiniteQueryOptions<
     TQueryFnData = mixed,
     TError = mixed,
     TData = TQueryFnData,
-    TQueryData = TQueryFnData,
-  > = InfiniteQueryObserverOptions<TQueryFnData, TError, TData, TQueryData>;
+    TQueryKey = QueryKey,
+  > = InfiniteQueryObserverOptions<TQueryFnData, TError, TData, TQueryFnData, TQueryKey>;
 
   declare export type UseBaseQueryResult<TData = mixed, TError = mixed> = QueryObserverResult<
     TData,
@@ -1149,36 +1150,37 @@ declare module "react-query" {
     variables: ?TVariables,
   |};
 
-  declare export function useQuery<TQueryFnData = mixed, TError = mixed, TData = TQueryFnData>(
-    options: UseQueryOptions<TQueryFnData, TError, TData>
+  declare export function useQuery<TQueryFnData = mixed, TError = mixed, TData = TQueryFnData, TQueryKey = QueryKey>(
+    options: UseQueryOptions<TQueryFnData, TError, TData, TQueryKey>
   ): UseQueryResult<TData, TError>;
-  declare export function useQuery<TQueryFnData = mixed, TError = mixed, TData = TQueryFnData>(
-    queryKey: QueryKey,
-    options?: UseQueryOptions<TQueryFnData, TError, TData>
+  declare export function useQuery<TQueryFnData = mixed, TError = mixed, TData = TQueryFnData, TQueryKey = QueryKey>(
+    queryKey: TQueryKey,
+    options?: UseQueryOptions<TQueryFnData, TError, TData, TQueryKey>
   ): UseQueryResult<TData, TError>;
-  declare export function useQuery<TQueryFnData = mixed, TError = mixed, TData = TQueryFnData>(
-    queryKey: QueryKey,
-    queryFn: QueryFunction<TQueryFnData>,
-    options?: UseQueryOptions<TQueryFnData, TError, TData>
+  declare export function useQuery<TQueryFnData = mixed, TError = mixed, TData = TQueryFnData, TQueryKey = QueryKey>(
+    queryKey: TQueryKey,
+    queryFn: QueryFunction<TQueryFnData, TQueryKey>,
+    options?: UseQueryOptions<TQueryFnData, TError, TData, TQueryKey>
   ): UseQueryResult<TData, TError>;
 
-  declare export function useQueries<TQueryFnData = mixed, TError = mixed, TData = TQueryFnData>(
-    queries: UseQueryOptions<TQueryFnData, TError, TData>[]
+  declare export function useQueries<TQueryFnData = mixed, TError = mixed, TData = TQueryFnData, TQueryKey = QueryKey>(
+    queries: UseQueryOptions<TQueryFnData, TError, TData, TQueryKey>[]
   ): UseQueryResult<TData, TError>[];
 
-  declare export function useInfiniteQuery<TQueryFnData = mixed, TError = mixed, TData = TQueryFnData>(options: UseInfiniteQueryOptions<TQueryFnData, TError, TData>): UseInfiniteQueryResult<TData, TError>;
-  declare export function useInfiniteQuery<TQueryFnData = mixed, TError = mixed, TData = TQueryFnData>(
-    queryKey: QueryKey,
-    options?: UseInfiniteQueryOptions<TQueryFnData, TError, TData>
+  declare export function useInfiniteQuery<TQueryFnData = mixed, TError = mixed, TData = TQueryFnData, TQueryKey = QueryKey>(options: UseInfiniteQueryOptions<TQueryFnData, TError, TData, TQueryKey>): UseInfiniteQueryResult<TData, TError>;
+  declare export function useInfiniteQuery<TQueryFnData = mixed, TError = mixed, TData = TQueryFnData, TQueryKey = QueryKey>(
+    queryKey: TQueryKey,
+    options?: UseInfiniteQueryOptions<TQueryFnData, TError, TData, TQueryKey>
   ): UseInfiniteQueryResult<TData, TError>;
   declare export function useInfiniteQuery<
     TQueryFnData = mixed,
     TError = mixed,
-    TData = TQueryFnData
+    TData = TQueryFnData,
+    TQueryKey = QueryKey
   >(
-    queryKey: QueryKey,
-    queryFn: QueryFunction<TQueryFnData>,
-    options?: UseInfiniteQueryOptions<TQueryFnData, TError, TData>
+    queryKey: TQueryKey,
+    queryFn: QueryFunction<TQueryFnData, TQueryKey>,
+    options?: UseInfiniteQueryOptions<TQueryFnData, TError, TData, TQueryKey>
   ): UseInfiniteQueryResult<TData, TError>;
 
   declare export function useMutation<
