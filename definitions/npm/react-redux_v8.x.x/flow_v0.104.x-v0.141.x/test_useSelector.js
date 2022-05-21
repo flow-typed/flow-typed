@@ -11,11 +11,8 @@ type State = {|
 describe('useSelector', () => {
   it('passes State as first parameter', () => {
     function Com() {
-      // $FlowExpectedError[incompatible-call]
-      const count = useSelector<State, number>(state => {
-        // $FlowExpectedError[prop-missing]: the state has no `b`
-        state.b
-      });
+      // $FlowExpectedError[prop-missing]: the state has no `b`
+      const count = useSelector<State, number>(state => state.b);
       return <div>{count}</div>;
     }
   });
