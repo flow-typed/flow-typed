@@ -121,6 +121,7 @@ declare class express$Response extends http$ServerResponse mixins express$Reques
   redirect(url: string, ...args: Array<void>): this;
   redirect(status: number, url: string, ...args: Array<void>): this;
   render(view: string, locals?: { [name: string]: mixed, ... }, callback?: express$RenderCallback): this;
+  render(view: string, callback?: express$RenderCallback): this;
   send(body?: mixed): this;
   sendFile(path: string, options?: express$SendFileOptions, callback?: (err?: ?Error) => mixed): this;
   sendStatus(statusCode: number): this;
@@ -190,6 +191,8 @@ declare class express$Route<
   connect: express$RouteMethodType<this, Req, Res>;
 }
 
+declare type express$IncomingMessage = http$IncomingMessage<tls$TLSSocket> | http$IncomingMessage<>;
+
 declare class express$Router<
   Req: express$Request = express$Request,
   Res: express$Response = express$Response,
@@ -206,7 +209,7 @@ declare class express$Router<
     ...middleware: Array<express$Middleware<Req, Res>>
   ): this;
   use(path: string, router: express$Router<Req, Res>): this;
-  handle(req: http$IncomingMessage<>, res: http$ServerResponse, next: express$NextFunction): void;
+  handle(req: express$IncomingMessage, res: http$ServerResponse, next: express$NextFunction): void;
   param(
     param: string,
     callback: (
@@ -217,7 +220,7 @@ declare class express$Router<
       paramName: string,
     ) => mixed
   ): void;
-  (req: http$IncomingMessage<>, res: http$ServerResponse, next?: ?express$NextFunction): void;
+  (req: express$IncomingMessage, res: http$ServerResponse, next?: ?express$NextFunction): void;
 }
 
 declare class express$Application<
@@ -242,10 +245,11 @@ declare class express$Application<
    */
   //   get(name: string): mixed;
   set(name: string, value: mixed): mixed;
-  render(name: string, optionsOrFunction: { [name: string]: mixed, ... }, callback: express$RenderCallback): void;
-  handle(req: http$IncomingMessage<>, res: http$ServerResponse, next?: ?express$NextFunction): void;
+  render(name: string, options: { [name: string]: mixed, ... }, callback: express$RenderCallback): void;
+  render(name: string, callback: express$RenderCallback): void;
+  handle(req: express$IncomingMessage, res: http$ServerResponse, next?: ?express$NextFunction): void;
   // callable signature is not inherited
-  (req: http$IncomingMessage<>, res: http$ServerResponse, next?: ?express$NextFunction): void;
+  (req: express$IncomingMessage, res: http$ServerResponse, next?: ?express$NextFunction): void;
 }
 
 declare module 'express' {
