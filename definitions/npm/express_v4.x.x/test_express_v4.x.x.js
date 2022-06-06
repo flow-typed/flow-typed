@@ -1,5 +1,10 @@
-/* @flow */
+// @flow
+import { describe, test } from 'flow-typed-test'
 import express, { Router } from 'express';
+
+const http = require('http')
+const https = require('https')
+const fs = require('fs')
 
 const app = express();
 
@@ -155,4 +160,22 @@ const validPaths = ['string', 'pattern?', /a[b-f]+g/];
 
 app.get(validPaths, (req: express$Request, res: express$Response) => {
   res.end();
+});
+
+describe('express', () => {
+  test('http vs https server usage', () => {
+    const app = express();
+
+    // start http server
+    const port = 15000;
+    let server = http.createServer(app).listen(port);
+
+    // start https server
+    const sslOptions = {
+      key: fs.readFileSync('key.pem'),
+      cert: fs.readFileSync('cert.pem')
+    };
+
+    let serverHttps = https.createServer(sslOptions, app).listen(443);
+  });
 });
