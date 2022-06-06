@@ -73,4 +73,30 @@ describe('jsx', () => {
       const c = <Input type="random" />
     });
   });
+
+  describe('HTMLTextAreaElement', () => {
+    it('has textarea props', () => {
+      type Props = {|
+        ...$Exact<jsx$HTMLTextAreaElement>,
+        foo?: string,
+      |};
+
+      const TextArea = ({
+        foo,
+        // $FlowExpectedError[prop-missing]
+        bar,
+        ...otherProps
+      }: Props) => {
+        return (
+          <textarea foo={foo} {...otherProps} />
+        );
+      };
+
+      (<TextArea autoComplete="on" />);
+      // $FlowExpectedError[incompatible-type]
+      (<TextArea autoComplete={true} />);
+      // $FlowExpectedError[incompatible-type]
+      (<TextArea autoComplete="yes" />);
+    });
+  });
 });
