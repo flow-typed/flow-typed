@@ -2,9 +2,9 @@
 import { describe, test } from 'flow-typed-test'
 import express, { Router } from 'express';
 
-const http = require('http')
-const https = require('https')
-const fs = require('fs')
+const http = require('http');
+const https = require('https');
+const fs = require('fs');
 
 const app = express();
 
