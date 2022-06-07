@@ -20,7 +20,7 @@ declare class test_express$CustomApplication extends express$Application<
   constructor(expressConstructor: expressConstructor): this;
 }
 
-// Class Extensions: Test Functions
+// $FlowExpectedError[name-already-bound] Class Extensions: Test Functions
 function test_express$CustomApplication(
   expressConstructor: expressConstructor,
 ) {
@@ -41,15 +41,15 @@ function test_express$CustomApplication(
 // Class Extensions: Test
 const customApp = new test_express$CustomApplication(express);
 
-// $FlowExpectedError
+// $FlowExpectedError[incompatible-call]
 const customApp_error = new test_express$CustomApplication();
 
 customApp.use(
   "/something",
   (req: express$Request, res: express$Response, next: express$NextFunction) => {
-    // $FlowExpectedError
+    // $FlowExpectedError[prop-missing]
     req.foo;
-    // $FlowExpectedError
+    // $FlowExpectedError[prop-missing]
     res.bar;
     next();
   }
@@ -63,14 +63,14 @@ customApp.use(
   ) => {
     req.foo;
     res.bar;
-    // $FlowExpectedError
+    // $FlowExpectedError[prop-missing]
     req.notHere;
-    // $FlowExpectedError
+    // $FlowExpectedError[prop-missing]
     res.notHere;
   }
 );
 
-// $FlowExpectedError
+// $FlowExpectedError[incompatible-call]
 customApp.use("/something", (req: string, res: string, next: Function) => {
   next();
 });
