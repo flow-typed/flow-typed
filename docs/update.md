@@ -6,7 +6,6 @@ Download updates for any installed libdefs. Note: This is just an alias of `flow
 
 ```
 flow-typed update
-flow-typed update underscore
 ```
 
 ### Flags
