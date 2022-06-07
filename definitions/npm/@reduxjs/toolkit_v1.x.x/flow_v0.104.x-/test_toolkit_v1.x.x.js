@@ -1,6 +1,11 @@
 // @flow
-import { describe, it } from 'flow-typed-test';
-import { createAction, createReducer } from '@reduxjs/toolkit';
+import { describe, it, test } from 'flow-typed-test';
+import {
+  createAction,
+  createReducer,
+  configureStore,
+  type Middleware,
+} from '@reduxjs/toolkit';
 
 describe('@redux/toolkit', () => {
   describe('createAction', () => {
@@ -45,5 +50,62 @@ describe('@redux/toolkit', () => {
         });
       });
     });
+  });
+
+  describe('createStore', () => {
+    const reducer = createReducer({}, {
+      'a': (state, action) => {
+        state.name = action.payload.name;
+      },
+    });
+
+    test('with basic reducer', () => {
+      configureStore({
+        reducer,
+      });
+    });
+
+    test('full example', () => {
+      const preloadedState = {
+        todos: [
+          {
+            text: 'Eat food',
+            completed: true,
+          },
+          {
+            text: 'Exercise',
+            completed: false,
+          },
+        ],
+        visibilityFilter: 'SHOW_COMPLETED',
+      };
+      const reduxBatch: any = {};
+
+      configureStore({
+        reducer,
+        devTools: process.env.NODE_ENV !== 'production',
+        preloadedState,
+        enhancers: [reduxBatch],
+      })
+    });
+
+    test('middleware', () => {
+      declare var logger: Middleware<any, any>;
+
+      configureStore({
+        reducer,
+        middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
+      })
+
+      configureStore({
+        reducer,
+        middleware: [logger],
+      })
+    });
+
+    test('errors', () => {
+      // $FlowExpectedError[incompatible-call]
+      configureStore();
+    })
   });
 });

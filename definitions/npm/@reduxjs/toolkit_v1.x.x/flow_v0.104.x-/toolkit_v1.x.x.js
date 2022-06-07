@@ -442,7 +442,7 @@ declare module '@reduxjs/toolkit' {
      * @example `middleware: (gDM) => gDM().concat(logger, apiMiddleware, yourCustomMiddleware)`
      * @see https://redux-toolkit.js.org/api/getDefaultMiddleware#intended-usage
      */
-    middleware?: M,
+    middleware?: M | ((gDM: () => M) => M),
     /**
      * Whether to enable Redux DevTools integration. Defaults to `true`.
      *
