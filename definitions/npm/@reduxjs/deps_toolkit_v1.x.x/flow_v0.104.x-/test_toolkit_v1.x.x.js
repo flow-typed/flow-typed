@@ -6,8 +6,8 @@ import {
   configureStore,
   type Middleware,
   type Store,
-  type Action,
 } from '@reduxjs/toolkit';
+import type { Action } from 'redux';
 
 describe('@redux/toolkit', () => {
   describe('createAction', () => {

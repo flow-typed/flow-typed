@@ -313,6 +313,11 @@ async function writeFlowConfig(repoDirPath, testDirPath, libDefPath, version) {
 
   const flowConfigData = [
     '[libs]',
+    path.join(
+      repoDirPath,
+      '..',
+      '/npm/redux_v4.x.x/flow_v0.134.x-/redux_v4.x.x.js',
+    ),
     path.basename(libDefPath),
     path.join(repoDirPath, '..', '__util__', 'tdd_framework.js'),
     '',
