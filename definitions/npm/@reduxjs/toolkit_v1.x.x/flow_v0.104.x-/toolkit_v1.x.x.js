@@ -49,7 +49,7 @@ declare module '@reduxjs/toolkit' {
 
   // --------------------
 
-  declare type Middlewares<S> = $ReadOnlyArray<Middleware<{ ... }, S>>;
+  declare type Middlewares<S> = $ReadOnlyArray<Middleware<S, { type: any, ... }>>;
 
   declare type DevToolsOptions = {|
     /**
@@ -423,7 +423,7 @@ declare module '@reduxjs/toolkit' {
    */
   declare type ConfigureEnhancersCallback = <S, A>(defaultEnhancers: $ReadOnlyArray<StoreEnhancer<S, A>>) => Array<StoreEnhancer<S, A>>;
 
-  declare type ReducersMapObject = <V>(V) => Reducer<V, { ... }>;
+  declare type ReducersMapObject = <V>(V) => Reducer<V, Action<any>>;
 
   /**
    * Options for `configureStore()`.
