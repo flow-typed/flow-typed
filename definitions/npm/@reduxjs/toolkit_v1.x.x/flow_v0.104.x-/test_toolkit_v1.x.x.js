@@ -5,6 +5,8 @@ import {
   createReducer,
   configureStore,
   type Middleware,
+  type Store,
+  type Action,
 } from '@reduxjs/toolkit';
 
 describe('@redux/toolkit', () => {
@@ -63,6 +65,41 @@ describe('@redux/toolkit', () => {
       configureStore({
         reducer,
       });
+
+      const store: Store<{
+        test: { ... },
+        test2: number,
+        ...
+      }, Action<{ ... }>> = configureStore({
+        reducer: {
+          test: (a) => ({}),
+          test2: (a) => 2,
+        },
+      });
+
+      const failedStore: Store<{|
+        test: { ... },
+        test2: number,
+      // $FlowExpectedError[prop-missing] foo is missing
+      |}, Action<{ ... }>> = configureStore({
+        reducer: {
+          test: (a) => ({}),
+          test2: (a) => 2,
+          foo: () => 'bar',
+        },
+      });
+
+      // const failedStore2: Store<{
+      //   test: { ... },
+      //   // Expect this to fail but currently does not
+      //   test2: string,
+      //   ...
+      // }, Action<{ ... }>> = configureStore({
+      //   reducer: {
+      //     test: (a) => ({}),
+      //     test2: (a) => 2,
+      //   },
+      // });
     });
 
     test('full example', () => {

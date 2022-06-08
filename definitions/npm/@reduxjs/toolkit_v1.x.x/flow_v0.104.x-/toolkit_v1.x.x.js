@@ -49,7 +49,7 @@ declare module '@reduxjs/toolkit' {
 
   // --------------------
 
-  declare type Middlewares<S> = $ReadOnlyArray<Middleware<{ ... }, S>>;
+  declare type Middlewares<S> = $ReadOnlyArray<Middleware<S, { type: any, ... }>>;
 
   declare type DevToolsOptions = {|
     /**
@@ -423,6 +423,8 @@ declare module '@reduxjs/toolkit' {
    */
   declare type ConfigureEnhancersCallback = <S, A>(defaultEnhancers: $ReadOnlyArray<StoreEnhancer<S, A>>) => Array<StoreEnhancer<S, A>>;
 
+  declare type ReducersMapObject = <V>(V) => Reducer<V, Action<any>>;
+
   /**
    * Options for `configureStore()`.
    */
@@ -431,10 +433,7 @@ declare module '@reduxjs/toolkit' {
      * A single reducer function that will be used as the root reducer, or an
      * object of slice reducers that will be passed to `combineReducers()`.
      */
-    reducer: Reducer<S, A> | {
-      [key: string]: Reducer<S, A>,
-      ...
-    },
+    reducer: Reducer<S, A> | $ObjMap<S, ReducersMapObject>,
     /**
      * An array of Redux middleware to install. If not supplied, defaults to
      * the set of middleware returned by `getDefaultMiddleware()`.
