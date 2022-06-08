@@ -77,18 +77,7 @@ describe('@redux/toolkit', () => {
         },
       });
 
-      const failedStore: Store<{
-        test: { ... },
-        test2: string,
-        ...
-      }, Action<{ ... }>> = configureStore({
-        reducer: {
-          test: (a) => ({}),
-          test2: (a) => 2,
-        },
-      });
-
-      const failedStore2: Store<{|
+      const failedStore: Store<{|
         test: { ... },
         test2: number,
       // $FlowExpectedError[prop-missing] foo is missing
@@ -99,6 +88,18 @@ describe('@redux/toolkit', () => {
           foo: () => 'bar',
         },
       });
+
+      // const failedStore2: Store<{
+      //   test: { ... },
+      //   // Expect this to fail but currently does not
+      //   test2: string,
+      //   ...
+      // }, Action<{ ... }>> = configureStore({
+      //   reducer: {
+      //     test: (a) => ({}),
+      //     test2: (a) => 2,
+      //   },
+      // });
     });
 
     test('full example', () => {
