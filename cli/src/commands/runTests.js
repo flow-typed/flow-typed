@@ -603,67 +603,7 @@ async function runTestGroup(
 
     const flowErrors = [];
 
-    // Map through every dependency and their versions and replace with
-    // the definition's path.
-    // Then shuffle to create a new Array<Array<>> that will test
-    // All dependencies across various supported versions.
-    const depsTestGroups = (() => {
-      const flowDirVersionSplit = testGroup.id.split('/');
-      const flowDirVersion =
-        flowDirVersionSplit[flowDirVersionSplit.length - 1];
-      const npmDefsDir = '/npm/';
-      const depBasePath = testGroup.libDefPath.substring(
-        0,
-        testGroup.libDefPath.indexOf(npmDefsDir) + npmDefsDir.length,
-      );
-
-      const mappedDepPaths = Object.keys(testGroup.deps).map(depName => {
-        const nameSplit = depName.split('/');
-        const scope = nameSplit.length > 1 ? `${nameSplit[0]}/` : '';
-        const packageName = nameSplit.length > 1 ? nameSplit[1] : depName;
-
-        return testGroup.deps[depName].map(version => {
-          const tempPath = `${depBasePath}${scope}deps_${packageName}_${version}/${flowDirVersion}/${packageName}_${version}.js`;
-          const path = `${depBasePath}${scope}${packageName}_${version}/${flowDirVersion}/${packageName}_${version}.js`;
-          if (fs.existsSync(tempPath)) {
-            return tempPath;
-          }
-
-          if (!fs.existsSync(path)) {
-            throw new Error(
-              colors.red(
-                `${depName}@${version} cannot be a dependency of ${testGroup.id} because either the dependency@version does't exist or they do not have matching flow version ranges`,
-              ),
-            );
-          }
-
-          return path;
-        });
-      });
-
-      const longestDep = mappedDepPaths.reduce((acc, cur) => {
-        if (cur.length > acc) {
-          return cur.length;
-        }
-        return acc;
-      }, 0);
-
-      const depGroup = [];
-      for (let i = 0, len = longestDep; i < len; i++) {
-        const newGroup = [];
-        mappedDepPaths.forEach(o => {
-          if (!o[i]) {
-            newGroup.push(o[0]);
-          } else {
-            newGroup.push(o[i]);
-          }
-        });
-        depGroup.push(newGroup);
-      }
-      return depGroup;
-    })();
-
-    for (const depPaths of depsTestGroups) {
+    const runTests = async (depPaths = []) => {
       for (const sublistOfFlowVersions of groups) {
         const lowestFlowVersionRanInThisGroup = sublistOfFlowVersions[0];
         await writeFlowConfig(
@@ -695,6 +635,74 @@ async function runTestGroup(
         console.log(`Tests for ${testGroup.id} ran successfully on flow ${lowestCapableFlowVersion}.
         Consider setting ${lowestCapableFlowVersion} as the lower bound!`);
       }
+    };
+
+    if (Object.keys(testGroup.deps).length > 0) {
+      // Map through every dependency and their versions and replace with
+      // the definition's path.
+      // Then shuffle to create a new Array<Array<>> that will test
+      // All dependencies across various supported versions.
+      const depsTestGroups = (() => {
+        const flowDirVersionSplit = testGroup.id.split('/');
+        const flowDirVersion =
+          flowDirVersionSplit[flowDirVersionSplit.length - 1];
+        const npmDefsDir = '/npm/';
+        const depBasePath = testGroup.libDefPath.substring(
+          0,
+          testGroup.libDefPath.indexOf(npmDefsDir) + npmDefsDir.length,
+        );
+
+        const mappedDepPaths = Object.keys(testGroup.deps).map(depName => {
+          const nameSplit = depName.split('/');
+          const scope = nameSplit.length > 1 ? `${nameSplit[0]}/` : '';
+          const packageName = nameSplit.length > 1 ? nameSplit[1] : depName;
+
+          return testGroup.deps[depName].map(version => {
+            const tempPath = `${depBasePath}${scope}deps_${packageName}_${version}/${flowDirVersion}/${packageName}_${version}.js`;
+            const path = `${depBasePath}${scope}${packageName}_${version}/${flowDirVersion}/${packageName}_${version}.js`;
+            if (fs.existsSync(tempPath)) {
+              return tempPath;
+            }
+
+            if (!fs.existsSync(path)) {
+              throw new Error(
+                colors.red(
+                  `${depName}@${version} cannot be a dependency of ${testGroup.id} because either the dependency@version does't exist or they do not have matching flow version ranges`,
+                ),
+              );
+            }
+
+            return path;
+          });
+        });
+
+        const longestDep = mappedDepPaths.reduce((acc, cur) => {
+          if (cur.length > acc) {
+            return cur.length;
+          }
+          return acc;
+        }, 0);
+
+        const depGroup = [];
+        for (let i = 0, len = longestDep; i < len; i++) {
+          const newGroup = [];
+          mappedDepPaths.forEach(o => {
+            if (!o[i]) {
+              newGroup.push(o[0]);
+            } else {
+              newGroup.push(o[i]);
+            }
+          });
+          depGroup.push(newGroup);
+        }
+        return depGroup;
+      })();
+
+      for (const depPaths of depsTestGroups) {
+        runTests(depPaths);
+      }
+    } else {
+      runTests();
     }
 
     return flowErrors;
