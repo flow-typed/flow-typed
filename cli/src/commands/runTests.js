@@ -641,45 +641,61 @@ async function runTestGroup(
         });
       });
 
-      // This logic currently only supports a single dep
-      return mappedDepPaths[0].map(o => [o]);
+      const longestDep = mappedDepPaths.reduce((acc, cur) => {
+        if (cur.length > acc) {
+          return cur.length;
+        }
+        return acc;
+      }, 0);
+
+      const depGroup = [];
+      for (let i = 0, len = longestDep; i < len; i++) {
+        const newGroup = [];
+        mappedDepPaths.forEach(o => {
+          if (!o[i]) {
+            newGroup.push(o[0]);
+          } else {
+            newGroup.push(o[i]);
+          }
+        });
+        depGroup.push(newGroup);
+      }
+      return depGroup;
     })();
 
-    await Promise.all(
-      depsTestGroups.map(async depPaths => {
-        for (const sublistOfFlowVersions of groups) {
-          const lowestFlowVersionRanInThisGroup = sublistOfFlowVersions[0];
-          await writeFlowConfig(
-            repoDirPath,
-            testDirPath,
-            testGroup.libDefPath,
-            lowestFlowVersionRanInThisGroup,
-            depPaths,
-          );
-          const flowErrorsForThisGroup = await runFlowTypeDefTests(
-            sublistOfFlowVersions,
-            testGroup.id,
-            testDirPath,
-          );
-          flowErrors.push(...flowErrorsForThisGroup);
-        }
-
-        const lowestFlowVersionRan = flowVersionsToRun[0];
-        const lowestCapableFlowVersion = await findLowestCapableFlowVersion(
+    for (const depPaths of depsTestGroups) {
+      for (const sublistOfFlowVersions of groups) {
+        const lowestFlowVersionRanInThisGroup = sublistOfFlowVersions[0];
+        await writeFlowConfig(
           repoDirPath,
-          orderedFlowVersions,
-          lowestFlowVersionRan,
           testDirPath,
           testGroup.libDefPath,
+          lowestFlowVersionRanInThisGroup,
           depPaths,
         );
+        const flowErrorsForThisGroup = await runFlowTypeDefTests(
+          [...sublistOfFlowVersions],
+          testGroup.id,
+          testDirPath,
+        );
+        flowErrors.push(...flowErrorsForThisGroup);
+      }
 
-        if (lowestCapableFlowVersion !== lowestFlowVersionRan) {
-          console.log(`Tests for ${testGroup.id} ran successfully on flow ${lowestCapableFlowVersion}.
-          Consider setting ${lowestCapableFlowVersion} as the lower bound!`);
-        }
-      }),
-    );
+      const lowestFlowVersionRan = flowVersionsToRun[0];
+      const lowestCapableFlowVersion = await findLowestCapableFlowVersion(
+        repoDirPath,
+        orderedFlowVersions,
+        lowestFlowVersionRan,
+        testDirPath,
+        testGroup.libDefPath,
+        depPaths,
+      );
+
+      if (lowestCapableFlowVersion !== lowestFlowVersionRan) {
+        console.log(`Tests for ${testGroup.id} ran successfully on flow ${lowestCapableFlowVersion}.
+        Consider setting ${lowestCapableFlowVersion} as the lower bound!`);
+      }
+    }
 
     return flowErrors;
   } finally {
