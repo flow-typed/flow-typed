@@ -91,14 +91,14 @@ async function getTestGroups(
         version: `v${major}.${minor}.${patch}`,
       };
     });
-    libDefs = [...libDefs, ...envDefs].filter(def =>
-      changedDefs.some(d => {
+    libDefs = [...libDefs, ...envDefs].filter(def => {
+      return changedDefs.some(d => {
         if (d.version === 'vx.x.x') {
           return d.name === def.pkgName;
         }
         return d.name === def.pkgName && d.version === def.pkgVersionStr;
-      }),
-    );
+      });
+    });
   }
   return libDefs.map(libDef => {
     const groupID = `${libDef.pkgName}_${libDef.pkgVersionStr}/${libDef.flowVersionStr}`;
@@ -732,6 +732,13 @@ async function runTests(
       const pattern = testPatternRes[i];
       if (testGroup.id.match(pattern) != null) {
         return true;
+      }
+
+      const depsList = Object.keys(testGroup.deps);
+      if (depsList.length > 0) {
+        return depsList.some(dep => {
+          return testGroup.deps[dep].some(o => `${dep}_${o}`.match(pattern));
+        });
       }
     }
 
