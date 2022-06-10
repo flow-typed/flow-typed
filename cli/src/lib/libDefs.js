@@ -249,7 +249,7 @@ async function parseLibDefsFromPkgDir(
   });
 
   if (!disjointVersionsAll(flowDirs.map(([_, ver]) => ver))) {
-    throw new ValidationError('Flow versions not disjoint!');
+    throw new ValidationError(`Flow versions not disjoint on ${pkgName}`);
   }
 
   if (flowDirs.length === 0) {
