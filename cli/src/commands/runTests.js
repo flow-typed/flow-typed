@@ -93,8 +93,18 @@ async function getTestGroups(
     });
     libDefs = [...libDefs, ...envDefs].filter(def => {
       return changedDefs.some(d => {
+        // This is for env defs
         if (d.version === 'vx.x.x') {
           return d.name === def.pkgName;
+        }
+        // If the definition is a dependant of a changed package
+        if (def.pkgJsonPath) {
+          const deps = JSON.parse(fs.readFileSync(def.pkgJsonPath, 'utf-8'))
+            .deps;
+          const isDependantOfChanged = Object.keys(deps).some(
+            dep => dep === d.name && deps[dep].some(s => s === d.version),
+          );
+          if (isDependantOfChanged) return true;
         }
         return d.name === def.pkgName && d.version === def.pkgVersionStr;
       });
