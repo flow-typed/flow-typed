@@ -1,9 +1,7 @@
 declare module '@reduxjs/toolkit' {
-  import type { Action } from 'redux';
+  import type { Action, Reducer } from 'redux';
   // These types are copied directly from the redux libdef.
   // Importing them in this libdef causes a loss in type coverage.
-
-  declare type Reducer<S, A> = (state: S | void, action: A) => S;
 
   declare type DispatchAPI<A> = (action: A) => A;
 
