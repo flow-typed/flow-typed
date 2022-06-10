@@ -1,4 +1,5 @@
 // @flow
+import colors from 'colors';
 
 import {child_process, fs, os, path} from '../lib/node.js';
 import {copyFile, recursiveRmdir} from '../lib/fileUtils.js';
@@ -47,6 +48,12 @@ type TestGroup = {
   testFilePaths: Array<string>,
   libDefPath: string,
   flowVersion: FlowVersion,
+  /**
+   * Object of dependencies and the supported versions of current definition
+   */
+  deps: {
+    [key: string]: Array<string>,
+  },
 };
 
 /**
@@ -95,11 +102,17 @@ async function getTestGroups(
   }
   return libDefs.map(libDef => {
     const groupID = `${libDef.pkgName}_${libDef.pkgVersionStr}/${libDef.flowVersionStr}`;
+
+    const deps = libDef.pkgJsonPath
+      ? JSON.parse(fs.readFileSync(libDef.pkgJsonPath, 'utf-8')).deps
+      : {};
+
     return {
       id: groupID,
       testFilePaths: libDef.testFilePaths,
       libDefPath: libDef.path,
       flowVersion: libDef.flowVersion,
+      deps,
     };
   });
 }
@@ -304,7 +317,13 @@ async function getCachedFlowBinVersions(
   return versions.map(version => `v${version}`);
 }
 
-async function writeFlowConfig(repoDirPath, testDirPath, libDefPath, version) {
+async function writeFlowConfig(
+  repoDirPath,
+  testDirPath,
+  libDefPath,
+  version,
+  depPaths: Array<string>,
+) {
   // /!\---------------------------------------------------------------------/!\
   // Whenever you introduce a new difference depending on the version, don't
   // forget to update the constant array CONFIGURATION_CHANGE_VERSIONS.
@@ -313,11 +332,7 @@ async function writeFlowConfig(repoDirPath, testDirPath, libDefPath, version) {
 
   const flowConfigData = [
     '[libs]',
-    path.join(
-      repoDirPath,
-      '..',
-      '/npm/redux_v4.x.x/flow_v0.134.x-/redux_v4.x.x.js',
-    ),
+    [...depPaths],
     path.basename(libDefPath),
     path.join(repoDirPath, '..', '__util__', 'tdd_framework.js'),
     '',
@@ -448,6 +463,7 @@ async function findLowestCapableFlowVersion(
   lowestFlowVersionRan,
   testDirPath,
   libDefPath,
+  depPaths,
 ) {
   let lowerFlowVersionsToRun = orderedFlowVersions.filter(flowVer => {
     return semver.lt(flowVer, lowestFlowVersionRan);
@@ -458,6 +474,7 @@ async function findLowestCapableFlowVersion(
     testDirPath,
     libDefPath,
     lowestFlowVersionRan,
+    depPaths,
   );
   return await testLowestCapableFlowVersion(
     lowerFlowVersionsToRun,
@@ -485,9 +502,11 @@ const CONFIGURATION_CHANGE_VERSIONS = [
   'v0.125.0', // Remove suppress_comments
 ];
 
-// This function splits a list of flow versions into a list of lists of versions
-// where the flowconfig configuration is compatible.
-// The list of versions need to be sorted for this function to work properly.
+/**
+ * This function splits a list of flow versions into a list of lists of versions
+ * where the flowconfig configuration is compatible.
+ * The list of versions need to be sorted for this function to work properly.
+ */
 function partitionListOfFlowVersionsPerConfigChange(
   flowVersions: $ReadOnlyArray<string>,
 ): Array<Array<string>> {
@@ -563,7 +582,7 @@ async function runTestGroup(
           await copyFile(filePath, path.join(testDirPath, destBasename));
         }),
       ),
-      copyFile(testGroup.libDefPath, destLibDefPath),
+      await copyFile(testGroup.libDefPath, destLibDefPath),
     ]);
 
     // For each compatible version of Flow, run `flow check` and verify there
@@ -583,35 +602,84 @@ async function runTestGroup(
     );
 
     const flowErrors = [];
-    for (const sublistOfFlowVersions of groups) {
-      const lowestFlowVersionRanInThisGroup = sublistOfFlowVersions[0];
-      await writeFlowConfig(
-        repoDirPath,
-        testDirPath,
-        testGroup.libDefPath,
-        lowestFlowVersionRanInThisGroup,
-      );
-      const flowErrorsForThisGroup = await runFlowTypeDefTests(
-        sublistOfFlowVersions,
-        testGroup.id,
-        testDirPath,
-      );
-      flowErrors.push(...flowErrorsForThisGroup);
-    }
 
-    const lowestFlowVersionRan = flowVersionsToRun[0];
-    const lowestCapableFlowVersion = await findLowestCapableFlowVersion(
-      repoDirPath,
-      orderedFlowVersions,
-      lowestFlowVersionRan,
-      testDirPath,
-      testGroup.libDefPath,
+    // Map through every dependency and their versions and replace with
+    // the definition's path.
+    // Then shuffle to create a new Array<Array<>> that will test
+    // All dependencies across various supported versions.
+    const depsTestGroups = (() => {
+      const flowDirVersionSplit = testGroup.id.split('/');
+      const flowDirVersion =
+        flowDirVersionSplit[flowDirVersionSplit.length - 1];
+      const npmDefsDir = '/npm/';
+      const depBasePath = testGroup.libDefPath.substring(
+        0,
+        testGroup.libDefPath.indexOf(npmDefsDir) + npmDefsDir.length,
+      );
+
+      const mappedDepPaths = Object.keys(testGroup.deps).map(depName => {
+        const nameSplit = depName.split('/');
+        const scope = nameSplit.length > 1 ? `${nameSplit[0]}/` : '';
+        const packageName = nameSplit.length > 1 ? nameSplit[1] : depName;
+
+        return testGroup.deps[depName].map(version => {
+          const tempPath = `${depBasePath}${scope}deps_${packageName}_${version}/${flowDirVersion}/${packageName}_${version}.js`;
+          const path = `${depBasePath}${scope}${packageName}_${version}/${flowDirVersion}/${packageName}_${version}.js`;
+          if (fs.existsSync(tempPath)) {
+            return tempPath;
+          }
+
+          if (!fs.existsSync(path)) {
+            throw new Error(
+              colors.red(
+                `${depName}@${version} cannot be a dependency of ${testGroup.id} because either the dependency@version does't exist or they do not have matching flow version ranges`,
+              ),
+            );
+          }
+
+          return path;
+        });
+      });
+
+      // This logic currently only supports a single dep
+      return mappedDepPaths[0].map(o => [o]);
+    })();
+
+    await Promise.all(
+      depsTestGroups.map(async depPaths => {
+        for (const sublistOfFlowVersions of groups) {
+          const lowestFlowVersionRanInThisGroup = sublistOfFlowVersions[0];
+          await writeFlowConfig(
+            repoDirPath,
+            testDirPath,
+            testGroup.libDefPath,
+            lowestFlowVersionRanInThisGroup,
+            depPaths,
+          );
+          const flowErrorsForThisGroup = await runFlowTypeDefTests(
+            sublistOfFlowVersions,
+            testGroup.id,
+            testDirPath,
+          );
+          flowErrors.push(...flowErrorsForThisGroup);
+        }
+
+        const lowestFlowVersionRan = flowVersionsToRun[0];
+        const lowestCapableFlowVersion = await findLowestCapableFlowVersion(
+          repoDirPath,
+          orderedFlowVersions,
+          lowestFlowVersionRan,
+          testDirPath,
+          testGroup.libDefPath,
+          depPaths,
+        );
+
+        if (lowestCapableFlowVersion !== lowestFlowVersionRan) {
+          console.log(`Tests for ${testGroup.id} ran successfully on flow ${lowestCapableFlowVersion}.
+          Consider setting ${lowestCapableFlowVersion} as the lower bound!`);
+        }
+      }),
     );
-
-    if (lowestCapableFlowVersion !== lowestFlowVersionRan) {
-      console.log(`Tests for ${testGroup.id} ran successfully on flow ${lowestCapableFlowVersion}.
-        Consider setting ${lowestCapableFlowVersion} as the lower bound!`);
-    }
 
     return flowErrors;
   } finally {
