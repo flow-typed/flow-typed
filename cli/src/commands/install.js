@@ -571,7 +571,7 @@ async function installNpmLibDefs({
     }
   });
   while (Object.keys(defDepsToInstall).length > 0) {
-    getLibDefsToInstall(
+    await getLibDefsToInstall(
       ...Object.keys(defDepsToInstall).map(dep =>
         Object.keys(defDepsToInstall[dep]).map(ver => [dep, ver]),
       ),
