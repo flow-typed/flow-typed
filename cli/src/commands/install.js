@@ -36,7 +36,7 @@ import {
 } from '../lib/npm/npmProjectUtils';
 import {getRangeLowerBound} from '../lib/semver';
 import {createStub, pkgHasFlowFiles} from '../lib/stubUtils';
-import {listItem} from '../lib/logger';
+import {listItem, sectionHeader} from '../lib/logger';
 
 export const name = 'install [explicitLibDefs...]';
 export const description = 'Installs libdefs into the ./flow-typed directory';
@@ -563,19 +563,36 @@ async function installNpmLibDefs({
   }
 
   // Now that we've captured all package.json libdefs and typed package libdefs
-  // We can compare libDefsToInstall with defDepsToInstall and remove any that
-  // Already plan to be installed
-  [...libDefsToInstall.entries()].forEach(([libDefName]) => {
-    if (defDepsToInstall[libDefName]) {
-      delete defDepsToInstall[libDefName];
+  // We can compare libDefsToInstall with defDepsToInstall and override any that
+  // are already needed but don't match the supported dependency versions.
+  if (Object.keys(defDepsToInstall).length > 0) {
+    sectionHeader('Running definition dependency check');
+    while (Object.keys(defDepsToInstall).length > 0) {
+      await getLibDefsToInstall(
+        ...Object.keys(defDepsToInstall).map(dep => {
+          const libDef = libDefsToInstall.get(dep);
+          if (libDef) {
+            const defVersions = Object.keys(defDepsToInstall[dep]);
+            if (!defVersions.includes(libDef.version)) {
+              listItem(
+                colors.yellow(
+                  `One of your definitions has a dependency to ${dep} @ version(s) ${defVersions.join(
+                    ', ',
+                  )}`,
+                ),
+                `You have version ${colors.yellow(libDef.version)} installed`,
+                `We're overriding to a supported version to fix flow-typed ${colors.red(
+                  'but you may experience other errors',
+                )}`,
+              );
+            }
+          }
+
+          return Object.keys(defDepsToInstall[dep]).map(ver => [dep, ver]);
+        }),
+      );
     }
-  });
-  while (Object.keys(defDepsToInstall).length > 0) {
-    await getLibDefsToInstall(
-      ...Object.keys(defDepsToInstall).map(dep =>
-        Object.keys(defDepsToInstall[dep]).map(ver => [dep, ver]),
-      ),
-    );
+    sectionHeader('Check complete');
   }
 
   // Scan libdefs that are already installed
