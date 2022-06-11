@@ -4,9 +4,13 @@ import colors from 'colors';
 import {child_process, fs, os, path} from '../lib/node.js';
 import {copyFile, recursiveRmdir} from '../lib/fileUtils.js';
 import {gitHubClient} from '../lib/github.js';
+import {getNpmLibDefDirFromNested} from '../lib/npm/npmLibDefs';
 import {getLibDefs, parseRepoDirItem} from '../lib/libDefs.js';
 import isInFlowTypedRepo from '../lib/isInFlowTypedRepo';
-import {toSemverString as flowVerToSemverString} from '../lib/flowVersion';
+import {
+  toSemverString as flowVerToSemverString,
+  extractFlowDirFromFlowDirPath,
+} from '../lib/flowVersion';
 import {getDefinitionsDiff} from '../lib/git';
 
 import got from 'got';
@@ -653,14 +657,8 @@ async function runTestGroup(
       // Then shuffle to create a new Array<Array<>> that will test
       // All dependencies across various supported versions.
       const depsTestGroups = (() => {
-        const flowDirVersionSplit = testGroup.id.split('/');
-        const flowDirVersion =
-          flowDirVersionSplit[flowDirVersionSplit.length - 1];
-        const npmDefsDir = '/npm/';
-        const depBasePath = testGroup.libDefPath.substring(
-          0,
-          testGroup.libDefPath.indexOf(npmDefsDir) + npmDefsDir.length,
-        );
+        const flowDirVersion = extractFlowDirFromFlowDirPath(testGroup.id);
+        const depBasePath = getNpmLibDefDirFromNested(testGroup.libDefPath);
 
         const mappedDepPaths = Object.keys(testGroup.deps).map(depName => {
           const nameSplit = depName.split('/');

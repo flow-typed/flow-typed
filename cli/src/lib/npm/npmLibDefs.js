@@ -15,6 +15,7 @@ import {
   disjointVersionsAll as disjointFlowVersionsAll,
   parseDirString as parseFlowDirString,
   toSemverString as flowVersionToSemver,
+  extractFlowDirFromFlowDirPath,
 } from '../flowVersion';
 
 import {findLatestFileCommitHash} from '../git';
@@ -37,21 +38,35 @@ import {TEST_FILE_NAME_RE} from '../libDefs';
 
 const P = Promise;
 
-export type NpmLibDef = {|
+export type NpmLibDef = {
   scope: null | string,
   name: string,
   version: string,
   flowVersion: FlowVersion,
   path: string,
   testFilePaths: Array<string>,
-|};
+  depPaths: {
+    [deps: string]: {
+      [version: string]: string,
+    },
+  } | null,
+};
 
-export type NpmLibDefFilter = {|
+export type NpmLibDefFilter = {
   type: 'exact',
   pkgName: string,
   pkgVersion: string,
   flowVersion?: FlowVersion,
-|};
+};
+
+/**
+ * When in a nested directory of npm libdefs such as package/libdef dir
+ * find and return the root npm dir
+ */
+export const getNpmLibDefDirFromNested = (path: string): string => {
+  const npmDefsDir = '/npm/';
+  return path.substring(0, path.indexOf(npmDefsDir) + npmDefsDir.length);
+};
 
 async function extractLibDefsFromNpmPkgDir(
   pkgDirPath: string,
@@ -128,6 +143,7 @@ async function extractLibDefsFromNpmPkgDir(
   }
 
   const libDefs = [];
+  const depPaths = {};
   await P.all(
     parsedFlowDirs.map(async ([flowDirPath, flowVersion]) => {
       const testFilePaths = [].concat(commonTestFiles);
@@ -151,6 +167,30 @@ async function extractLibDefsFromNpmPkgDir(
 
           if (isValidTestFile) {
             testFilePaths.push(flowDirItemPath);
+            return;
+          }
+
+          // Here we need to look at the deps and add it to the npmLibDef.
+          // Later if installing this libdef
+          // try to install the dependencies if not already installed elsewhere
+          if (flowDirItem === 'package.json') {
+            const deps = JSON.parse(
+              fs.readFileSync(path.join(flowDirPath, flowDirItem), 'utf-8'),
+            ).deps;
+
+            if (deps) {
+              Object.keys(deps).forEach(dep => {
+                const flowDir = extractFlowDirFromFlowDirPath(flowDirPath);
+                const npmDir = getNpmLibDefDirFromNested(flowDirPath);
+                depPaths[dep] = deps[dep].reduce((acc, cur) => {
+                  return {
+                    ...acc,
+                    [cur]: `${npmDir}${dep}_${cur}/${flowDir}/${dep}_${cur}.js`,
+                  };
+                }, {});
+              });
+            }
+
             return;
           }
 
@@ -180,6 +220,7 @@ async function extractLibDefsFromNpmPkgDir(
         flowVersion,
         path: libDefFilePath,
         testFilePaths,
+        depPaths,
       });
     }),
   );
@@ -460,6 +501,7 @@ export function parseSignedCodeVersion(
       version: versionToString(pkgVersion),
       flowVersion: flowVer,
       testFilePaths: [],
+      depPaths: null,
     },
   };
 }
