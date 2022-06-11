@@ -458,6 +458,11 @@ async function installNpmLibDefs({
     {name: string, ver: string},
   ][] = [];
   const unavailableLibDefs = [];
+  const defDepsToInstall: {
+    [deps: string]: {
+      [version: string]: string,
+    },
+  } = {};
 
   // This updates the cache for all definition types, npm/env/etc
   const libDefs = await getCacheNpmLibDefs(useCacheUntil, skipCache);
@@ -465,6 +470,8 @@ async function installNpmLibDefs({
   const getLibDefsToInstall = async (entries: Array<[string, string]>) => {
     await Promise.all(
       entries.map(async ([name, ver]) => {
+        delete defDepsToInstall[name];
+
         // To comment in json files a work around is to give a key value pair
         // of `"//": "comment"` we should exclude these so the install doesn't crash
         // Ref: https://stackoverflow.com/a/14221781/430128
@@ -493,6 +500,18 @@ async function installNpmLibDefs({
           const depLower = getRangeLowerBound(ver);
           if (semver.lt(libDefLower, depLower)) {
             outdatedLibDefsToInstall.push([libDef, {name, ver}]);
+          }
+
+          // If this libdef has dependencies let's first add it to a giant list
+          if (libDef.depPaths) {
+            Object.keys(libDef.depPaths).forEach(dep => {
+              if (libDef.depPaths) {
+                // This may result in overriding other libDef dependencies
+                // but we don't care because either way a project cannot have the
+                // same module declared twice.
+                defDepsToInstall[dep] = libDef.depPaths[dep];
+              }
+            });
           }
         }
       }),
@@ -541,6 +560,22 @@ async function installNpmLibDefs({
       }),
     );
     await getLibDefsToInstall(typedDepsLibDefsToSearchFor);
+  }
+
+  // Now that we've captured all package.json libdefs and typed package libdefs
+  // We can compare libDefsToInstall with defDepsToInstall and remove any that
+  // Already plan to be installed
+  [...libDefsToInstall.entries()].forEach(([libDefName]) => {
+    if (defDepsToInstall[libDefName]) {
+      delete defDepsToInstall[libDefName];
+    }
+  });
+  while (Object.keys(defDepsToInstall).length > 0) {
+    getLibDefsToInstall(
+      ...Object.keys(defDepsToInstall).map(dep =>
+        Object.keys(defDepsToInstall[dep]).map(ver => [dep, ver]),
+      ),
+    );
   }
 
   // Scan libdefs that are already installed
