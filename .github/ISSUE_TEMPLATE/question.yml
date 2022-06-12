@@ -1,0 +1,13 @@
+name: Question
+description: Any questions about flow-typed or the CLI
+labels: [question]
+title: "[Question]: "
+body:
+  - type: textarea
+    id: question
+    attributes:
+      label: What do you want to know?
+      description: More detail is better than less
+      placeholder: I'm wondering...
+    validations:
+      required: true
