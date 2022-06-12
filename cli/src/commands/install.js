@@ -459,9 +459,7 @@ async function installNpmLibDefs({
   ][] = [];
   const unavailableLibDefs = [];
   const defDepsToInstall: {
-    [deps: string]: {
-      [version: string]: string,
-    },
+    [deps: string]: Array<string>,
   } = {};
 
   // This updates the cache for all definition types, npm/env/etc
@@ -503,13 +501,13 @@ async function installNpmLibDefs({
           }
 
           // If this libdef has dependencies let's first add it to a giant list
-          if (libDef.depPaths) {
-            Object.keys(libDef.depPaths).forEach(dep => {
-              if (libDef.depPaths) {
+          if (libDef.depVersions) {
+            Object.keys(libDef.depVersions).forEach(dep => {
+              if (libDef.depVersions) {
                 // This may result in overriding other libDef dependencies
                 // but we don't care because either way a project cannot have the
                 // same module declared twice.
-                defDepsToInstall[dep] = libDef.depPaths[dep];
+                defDepsToInstall[dep] = libDef.depVersions[dep];
               }
             });
           }
@@ -572,8 +570,8 @@ async function installNpmLibDefs({
         Object.keys(defDepsToInstall)
           .map(dep => {
             const libDef = libDefsToInstall.get(dep);
+            const defVersions = defDepsToInstall[dep];
             if (libDef) {
-              const defVersions = Object.keys(defDepsToInstall[dep]);
               if (!defVersions.includes(libDef.version)) {
                 // If no supported version warn it'll be overridden and continue
                 listItem(
@@ -597,12 +595,7 @@ async function installNpmLibDefs({
 
             // This only hits if no supported version installed,
             // we will find the last version in dependency to install
-            return [
-              dep,
-              Object.keys(defDepsToInstall[dep])[
-                Object.keys(defDepsToInstall[dep]).length - 1
-              ],
-            ];
+            return [dep, defVersions[defVersions.length - 1]];
           })
           .filter(o => !!o[0]),
       );

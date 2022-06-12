@@ -15,7 +15,6 @@ import {
   disjointVersionsAll as disjointFlowVersionsAll,
   parseDirString as parseFlowDirString,
   toSemverString as flowVersionToSemver,
-  extractFlowDirFromFlowDirPath,
 } from '../flowVersion';
 
 import {findLatestFileCommitHash} from '../git';
@@ -45,10 +44,8 @@ export type NpmLibDef = {
   flowVersion: FlowVersion,
   path: string,
   testFilePaths: Array<string>,
-  depPaths: {
-    [deps: string]: {
-      [version: string]: string,
-    },
+  depVersions: {
+    [deps: string]: Array<string>,
   } | null,
 };
 
@@ -143,11 +140,11 @@ async function extractLibDefsFromNpmPkgDir(
   }
 
   const libDefs = [];
-  const depPaths = {};
   await P.all(
     parsedFlowDirs.map(async ([flowDirPath, flowVersion]) => {
       const testFilePaths = [].concat(commonTestFiles);
       let libDefFilePath: null | string = null;
+      const depVersions = {};
       (await fs.readdir(flowDirPath)).forEach(flowDirItem => {
         const flowDirItemPath = path.join(flowDirPath, flowDirItem);
         const flowDirItemStat = fs.statSync(flowDirItemPath);
@@ -157,7 +154,10 @@ async function extractLibDefsFromNpmPkgDir(
           }
 
           // Is this the libdef file?
-          if (flowDirItem === libDefFileName) {
+          if (
+            flowDirItem === libDefFileName ||
+            flowDirItem === libDefFileName.substring('deps_'.length)
+          ) {
             libDefFilePath = path.join(flowDirPath, flowDirItem);
             return;
           }
@@ -180,14 +180,7 @@ async function extractLibDefsFromNpmPkgDir(
 
             if (deps) {
               Object.keys(deps).forEach(dep => {
-                const flowDir = extractFlowDirFromFlowDirPath(flowDirPath);
-                const npmDir = getNpmLibDefDirFromNested(flowDirPath);
-                depPaths[dep] = deps[dep].reduce((acc, cur) => {
-                  return {
-                    ...acc,
-                    [cur]: `${npmDir}${dep}_${cur}/${flowDir}/${dep}_${cur}.js`,
-                  };
-                }, {});
+                depVersions[dep] = [...deps[dep]];
               });
             }
 
@@ -220,7 +213,7 @@ async function extractLibDefsFromNpmPkgDir(
         flowVersion,
         path: libDefFilePath,
         testFilePaths,
-        depPaths,
+        depVersions: Object.keys(depVersions).length > 0 ? depVersions : null,
       });
     }),
   );
@@ -371,7 +364,9 @@ function filterLibDefs(
         case 'exact':
           const fullName = def.scope ? `${def.scope}/${def.name}` : def.name;
           filterMatch =
-            filter.pkgName.toLowerCase() === fullName.toLowerCase() &&
+            (filter.pkgName.toLowerCase() === fullName.toLowerCase() ||
+              `deps_${filter.pkgName.toLowerCase()}` ===
+                fullName.toLowerCase()) &&
             pkgVersionMatch(filter.pkgVersion, def.version);
           break;
         default:
@@ -431,6 +426,7 @@ export async function findNpmLibDef(
     pkgVersion,
     flowVersion,
   });
+  // TODO: Sort and make sure dep_ prefix is prioritized
   return filteredLibDefs.length === 0 ? null : filteredLibDefs[0];
 }
 
@@ -501,7 +497,7 @@ export function parseSignedCodeVersion(
       version: versionToString(pkgVersion),
       flowVersion: flowVer,
       testFilePaths: [],
-      depPaths: null,
+      depVersions: null,
     },
   };
 }
