@@ -569,27 +569,42 @@ async function installNpmLibDefs({
     sectionHeader('Running definition dependency check');
     while (Object.keys(defDepsToInstall).length > 0) {
       await getLibDefsToInstall(
-        ...Object.keys(defDepsToInstall).map(dep => {
-          const libDef = libDefsToInstall.get(dep);
-          if (libDef) {
-            const defVersions = Object.keys(defDepsToInstall[dep]);
-            if (!defVersions.includes(libDef.version)) {
-              listItem(
-                colors.yellow(
-                  `One of your definitions has a dependency to ${dep} @ version(s) ${defVersions.join(
-                    ', ',
+        Object.keys(defDepsToInstall)
+          .map(dep => {
+            const libDef = libDefsToInstall.get(dep);
+            if (libDef) {
+              const defVersions = Object.keys(defDepsToInstall[dep]);
+              if (!defVersions.includes(libDef.version)) {
+                // If no supported version warn it'll be overridden and continue
+                listItem(
+                  colors.yellow(
+                    `One of your definitions has a dependency to ${dep} @ version(s) ${defVersions.join(
+                      ', ',
+                    )}`,
+                  ),
+                  `You have version ${colors.yellow(libDef.version)} installed`,
+                  `We're overriding to a supported version to fix flow-typed ${colors.red(
+                    'but you may experience other errors',
                   )}`,
-                ),
-                `You have version ${colors.yellow(libDef.version)} installed`,
-                `We're overriding to a supported version to fix flow-typed ${colors.red(
-                  'but you may experience other errors',
-                )}`,
-              );
+                );
+              } else {
+                // If a supported version already installed return dummy tuple
+                // to get filtered out
+                delete defDepsToInstall[dep];
+                return ['', ''];
+              }
             }
-          }
 
-          return Object.keys(defDepsToInstall[dep]).map(ver => [dep, ver]);
-        }),
+            // This only hits if no supported version installed,
+            // we will find the last version in dependency to install
+            return [
+              dep,
+              Object.keys(defDepsToInstall[dep])[
+                Object.keys(defDepsToInstall[dep]).length - 1
+              ],
+            ];
+          })
+          .filter(o => !!o[0]),
       );
     }
     sectionHeader('Check complete');
