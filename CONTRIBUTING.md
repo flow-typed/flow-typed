@@ -43,9 +43,12 @@ format:
     | | |                     #     specified version(s) of Flow (v0.83.x in this
     | | |                     #     case).
     | | |
-    | | └ yargs_v4.x.x.js     # <-- The libdef file meant for the Flow version
-    | |                       #     specified by the containing directory's name.
-    | |                       #     Must be named `<LIB>_v<VERSION>.js`.
+    | | ├ yargs_v4.x.x.js     # <-- The libdef file meant for the Flow version
+    | | |                     #     specified by the containing directory's name.
+    | | |                     #     Must be named `<LIB>_v<VERSION>.js`.
+    | | |
+    | | └ package.json        # <-- An optional file to hold configurations of the
+    | |                       #     definition such as dependent definitions
     | |
     | ├ flow_v0.85.x-v0.91.x/ # <-- A folder containing libdefs tested against a
     | | |                     #     different range of Flow versions:
@@ -206,22 +209,42 @@ The above are instructions on how to submit a library definition against npm pac
 
 There's a solid writeup in the [Flow docs](https://flow.org/en/docs/libdefs/creation/) about creating new library definitions. Give it a read!
 
-### Don't import types from other libdefs
+### Importing types from other libdefs
 
-You might think it would be possible to import types from other libdefs, much the same way you do in your own code:
+Often times you may find yourself typing a package that relies on the types from another package. You can do this by first finding the definition at the flow version you'd like to import to and add a `package.json` file.
 
-```js
-import type { MyType } from 'some-module';
-declare module 'other-module' {
-  declare export function takesMyType(val: MyType): number;
+Here you can declare a `deps` property that holds an object of dependent versions and their supported versions
+
+```json
+{
+  "deps": {
+    "redux": ["v3.x.x", "v4.x.x"],
+    "koa": ["2.0.x", "2.x.x"]
+  }
 }
 ```
 
-...but you would be wrong. Flow silently converts `MyType` to be typed `any`, and then sadness ensues.
+Then in your definition module
 
-**But wait, I want my React types!**
+```js
+declare module 'other-module' {
+  import type { Action } from 'redux';
 
-Good news! You can use the raw, private React types (e.g. `React$Node`, `React$ComponentType`) directly without importing them. You can also import types built into flow *inside* the module declaration:
+  declare export function takesMyType(val: Action): number;
+}
+```
+
+One important note here is that all definition flow version ranges **must** be aligned if you want them to depend on each other. This is a limitation of our test suite architecture.
+
+Say you have `react-redux` depending on `redux`, if the flow version with the dependency in `react-redux` is `v0.104.x-0.141.x` then that exact version range must exist in `redux` for testing compatibility. All other flow version ranges in either definitions can have any range they please if they don't depend on one another.
+
+> Yes, this could lead to overly fragmented flow definition ranges if a definition has many dependencies.
+
+---
+
+**What about `react` types??**
+
+You can use the raw, private React types (e.g. `React$Node`, `React$ComponentType`) directly without importing them. You can also import the types without declaring it as `"deps"` as they're part of the core flow libs like other node internal packages:
 
 ```js
 declare module 'example' {
@@ -229,26 +252,9 @@ declare module 'example' {
 }
 ```
 
-**So why don't I do that for importing other libdefs?**
-
-Because it just doesn't work, sorry. You might think this is possible, but it isn't:
-
-```js
-declare module 'koa-router' {
-  import type { Middleware } from 'koa';
-}
-```
-
-To be super clear:
-
-1. You can't import types from other libdefs in flow-typed
-1. You can import types built into flow (e.g. from `react` or `fs`), only if you put the import statement inside the module declaration
-
-[Further discussion here](https://github.com/flow-typed/flow-typed/issues/1857) and [here](https://github.com/flow-typed/flow-typed/issues/2023).
-
 ### Avoid `any` when possible
 
-Using the `any` type for a variable or interface results in the loss of type information as types pass through it. That means if a type passes through `any` before propogating on to other code, the `any` will potentially cause flow to miss type errors!
+Using the `any` type for a variable or interface results in the loss of type information as types pass through it. That means if a type passes through `any` before propagating on to other code, the `any` will potentially cause flow to miss type errors!
 
 In many places it is better (but also stricter) to use the `mixed` type rather than the `any` type. The `mixed` type is safer in that it allows anything to flow in to it, but can never be used downstream without [dynamic type tests](https://flow.org/en/docs/lang/refinements/#_) that verify the type at runtime.
 
