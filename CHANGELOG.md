@@ -5,6 +5,22 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [3.8.0] 2022-02-21
+
+### Added
+- **Core definitions (#4255)**
+- Create test harness (#4268)
+- Make use of flow-typed.config.js for ignored (#4288)
+
+### Changed
+- Consistent list logging (#4287) 
+- Coerce cli version with semver to allow for prerelease tags (#4291)
+- Fix if dependency is resolved npm package (#4298)
+- Bump minimist from 1.2.0 to 1.2.6 in (#4293)
+- [docs] contract -> contrast (#4281)
+- [docs] update command doesn't take positional arguments (#4328)
+- [docs] document create-stub --typescript flag (#4329)
+
 ## [3.7.0] 2022-02-21
 
 ### Added
