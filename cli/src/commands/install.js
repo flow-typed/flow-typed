@@ -630,7 +630,7 @@ async function installNpmLibDefs({
   });
 
   if (libDefsToInstall.size > 0) {
-    console.log(`• Installing ${libDefsToInstall.size} libDefs...`);
+    sectionHeader(`Installing ${libDefsToInstall.size} libDefs...`);
     const flowTypedDirPath = path.join(flowProjectRoot, libdefDir, 'npm');
     await mkdirp(flowTypedDirPath);
     const results = await Promise.all(

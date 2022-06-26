@@ -510,7 +510,7 @@ export function parseSignedCodeVersion(
   };
 }
 
-export async function getInstalledNpmLibDef(
+async function getInstalledNpmLibDef(
   flowProjectRootDir: string,
   fullFilePath: string,
 ): Promise<?[string, InstalledNpmLibDef]> {
