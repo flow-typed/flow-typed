@@ -42,6 +42,7 @@ describe('npmLibDefs', () => {
       expect(defs).toEqual(
         expect.arrayContaining([
           {
+            depVersions: null,
             flowVersion: {
               kind: 'ranged',
               lower: {
@@ -70,6 +71,7 @@ describe('npmLibDefs', () => {
             version: 'v1.x.x',
           },
           {
+            depVersions: null,
             flowVersion: {
               kind: 'ranged',
               lower: {
@@ -385,6 +387,7 @@ describe('npmLibDefs', () => {
           expect(semverLibDef.kind).toBe('LibDef');
         } else {
           expect(semverLibDef.libDef).toEqual({
+            depVersions: null,
             flowVersion: {
               kind: 'specific',
               ver: {
@@ -421,6 +424,7 @@ describe('npmLibDefs', () => {
           expect(semverLibDef.kind).toBe('LibDef');
         } else {
           expect(semverLibDef.libDef).toEqual({
+            depVersions: null,
             flowVersion: {
               kind: 'specific',
               ver: {
@@ -460,6 +464,7 @@ describe('npmLibDefs', () => {
           expect(semverLibDef.kind).toBe('LibDef');
         } else {
           expect(semverLibDef.libDef).toEqual({
+            depVersions: null,
             flowVersion: {
               kind: 'ranged',
               lower: {
