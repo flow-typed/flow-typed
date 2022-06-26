@@ -426,8 +426,16 @@ export async function findNpmLibDef(
     pkgVersion,
     flowVersion,
   });
-  // TODO: Sort and make sure dep_ prefix is prioritized
-  return filteredLibDefs.length === 0 ? null : filteredLibDefs[0];
+
+  return filteredLibDefs.length === 0
+    ? null
+    : filteredLibDefs.sort(o => {
+        // `deps_` prefixed definitions are prioritized
+        if (o.name.startsWith('deps_')) {
+          return -1;
+        }
+        return 0;
+      })[0];
 }
 
 type InstalledNpmLibDef =

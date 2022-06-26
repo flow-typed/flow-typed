@@ -444,8 +444,7 @@ async function installNpmLibDefs({
       });
     } else {
       console.log(
-        `• Found ${libdefsToSearchFor.size} dependencies in package.json to ` +
-          `install libdefs for. Searching...`,
+        `• Found ${libdefsToSearchFor.size} dependencies in package.json to install libdefs for. Searching...`,
       );
     }
   }
