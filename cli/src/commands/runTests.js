@@ -617,7 +617,7 @@ async function runTestGroup(
 
     const flowErrors = [];
 
-    const runTests = async (depPaths = []) => {
+    const executeTests = async (depPaths = []) => {
       for (const sublistOfFlowVersions of groups) {
         const lowestFlowVersionRanInThisGroup = sublistOfFlowVersions[0];
         await writeFlowConfig(
@@ -707,10 +707,10 @@ async function runTestGroup(
       })();
 
       for (const depPaths of depsTestGroups) {
-        runTests(depPaths);
+        await executeTests(depPaths);
       }
     } else {
-      runTests();
+      await executeTests();
     }
 
     return flowErrors;
