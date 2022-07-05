@@ -581,7 +581,7 @@ async function installNpmLibDefs({
                   ),
                   `You have version ${colors.yellow(libDef.version)} installed`,
                   `We're overriding to a supported version to fix flow-typed ${colors.red(
-                    'but you may experience other errors',
+                    'but you may experience other type errors',
                   )}`,
                 );
               } else {
