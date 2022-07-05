@@ -236,7 +236,7 @@ declare module 'other-module' {
 
 One important note here is that all definition flow version ranges **must** be aligned if you want them to depend on each other. This is a limitation of our test suite architecture.
 
-Say you have `react-redux` depending on `redux`, if the flow version with the dependency in `react-redux` is `v0.104.x-0.141.x` then that exact version range must exist in `redux` for testing compatibility. All other flow version ranges in either definitions can have any range they please if they don't depend on one another.
+Say you have `react-redux` depending on `redux`; if the flow version with the dependency in `react-redux` is `v0.104.x-0.141.x` then that exact version range must exist in `redux` for testing compatibility. Any other flow version ranges in either definitions can have any range they please if they don't depend on one another.
 
 > Yes, this could lead to overly fragmented flow definition ranges if a definition has many dependencies.
 
