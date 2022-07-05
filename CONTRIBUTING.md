@@ -47,7 +47,7 @@ format:
     | | |                     #     specified by the containing directory's name.
     | | |                     #     Must be named `<LIB>_v<VERSION>.js`.
     | | |
-    | | └ package.json        # <-- An optional file to hold configurations of the
+    | | └ config.json        # <-- An optional file to hold configurations of the
     | |                       #     definition such as dependent definitions
     | |
     | ├ flow_v0.85.x-v0.91.x/ # <-- A folder containing libdefs tested against a
@@ -211,7 +211,7 @@ There's a solid writeup in the [Flow docs](https://flow.org/en/docs/libdefs/crea
 
 ### Importing types from other libdefs
 
-Often times you may find yourself typing a package that relies on the types from another package. You can do this by first finding the definition at the flow version you'd like to import to and add a `package.json` file.
+Often times you may find yourself typing a package that relies on the types from another package. You can do this by first finding the definition at the flow version you'd like to import to and add a `config.json` file.
 
 Here you can declare a `deps` property that holds an object of dependent versions and their supported versions
 
