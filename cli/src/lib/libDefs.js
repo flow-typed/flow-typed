@@ -282,7 +282,7 @@ async function parseLibDefsFromPkgDir(
             return;
           }
 
-          if (flowDirItem === 'package.json') {
+          if (flowDirItem === 'config.json') {
             pkgJsonPath = path.join(flowDirPath, flowDirItem);
             return;
           }

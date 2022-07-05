@@ -173,7 +173,7 @@ async function extractLibDefsFromNpmPkgDir(
           // Here we need to look at the deps and add it to the npmLibDef.
           // Later if installing this libdef
           // try to install the dependencies if not already installed elsewhere
-          if (flowDirItem === 'package.json') {
+          if (flowDirItem === 'config.json') {
             const deps = JSON.parse(
               fs.readFileSync(path.join(flowDirPath, flowDirItem), 'utf-8'),
             ).deps;
