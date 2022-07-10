@@ -148,13 +148,15 @@ function _parseVersion(
 }
 
 export function parseDirString(verStr: string): FlowVersion {
-  if (verStr.substr(0, 'flow_'.length) !== 'flow_') {
+  const prefix = 'flow_';
+
+  if (!verStr.startsWith(prefix)) {
     throw new ValidationError(
-      'Flow versions must start with `flow_` but instead got ' + verStr,
+      `Flow versions must start with \`${prefix}\` but instead got ${verStr}`,
     );
   }
 
-  const afterPrefix = verStr.substr('flow_'.length);
+  const afterPrefix = verStr.substr(verStr.indexOf(prefix) + prefix.length);
 
   if (afterPrefix === 'all' || afterPrefix === 'vx.x.x') {
     return {kind: 'all'};
@@ -162,7 +164,7 @@ export function parseDirString(verStr: string): FlowVersion {
     return {
       kind: 'ranged',
       lower: null,
-      upper: _parseVersion(verStr.substr('flow_-'.length), false)[1],
+      upper: _parseVersion(verStr.substr(`${prefix}-`.length), false)[1],
     };
   } else {
     const [offset, lowerVer] = _parseVersion(afterPrefix, true);
@@ -438,6 +440,11 @@ export function compareFlowVersionAsc(a: FlowVersion, b: FlowVersion): number {
   }
   return 0;
 }
+
+export const extractFlowDirFromFlowDirPath = (path: string): string => {
+  const split = path.split('/');
+  return split[split.length - 1];
+};
 
 // Exported for tests
 export {_parseVersion as __parseVersion};

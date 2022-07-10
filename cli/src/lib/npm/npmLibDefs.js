@@ -44,6 +44,9 @@ export type NpmLibDef = {|
   flowVersion: FlowVersion,
   path: string,
   testFilePaths: Array<string>,
+  depVersions: {
+    [deps: string]: Array<string>,
+  } | null,
 |};
 
 export type NpmLibDefFilter = {|
@@ -52,6 +55,15 @@ export type NpmLibDefFilter = {|
   pkgVersion: string,
   flowVersion?: FlowVersion,
 |};
+
+/**
+ * When in a nested directory of npm libdefs such as package/libdef dir
+ * find and return the root npm dir
+ */
+export const getNpmLibDefDirFromNested = (path: string): string => {
+  const npmDefsDir = '/npm/';
+  return path.substring(0, path.indexOf(npmDefsDir) + npmDefsDir.length);
+};
 
 async function extractLibDefsFromNpmPkgDir(
   pkgDirPath: string,
@@ -132,6 +144,7 @@ async function extractLibDefsFromNpmPkgDir(
     parsedFlowDirs.map(async ([flowDirPath, flowVersion]) => {
       const testFilePaths = [].concat(commonTestFiles);
       let libDefFilePath: null | string = null;
+      const depVersions = {};
       (await fs.readdir(flowDirPath)).forEach(flowDirItem => {
         const flowDirItemPath = path.join(flowDirPath, flowDirItem);
         const flowDirItemStat = fs.statSync(flowDirItemPath);
@@ -141,7 +154,10 @@ async function extractLibDefsFromNpmPkgDir(
           }
 
           // Is this the libdef file?
-          if (flowDirItem === libDefFileName) {
+          if (
+            flowDirItem === libDefFileName ||
+            flowDirItem === libDefFileName.substring('deps_'.length)
+          ) {
             libDefFilePath = path.join(flowDirPath, flowDirItem);
             return;
           }
@@ -151,6 +167,23 @@ async function extractLibDefsFromNpmPkgDir(
 
           if (isValidTestFile) {
             testFilePaths.push(flowDirItemPath);
+            return;
+          }
+
+          // Here we need to look at the deps and add it to the npmLibDef.
+          // Later if installing this libdef
+          // try to install the dependencies if not already installed elsewhere
+          if (flowDirItem === 'config.json') {
+            const deps = JSON.parse(
+              fs.readFileSync(path.join(flowDirPath, flowDirItem), 'utf-8'),
+            ).deps;
+
+            if (deps) {
+              Object.keys(deps).forEach(dep => {
+                depVersions[dep] = [...deps[dep]];
+              });
+            }
+
             return;
           }
 
@@ -180,6 +213,7 @@ async function extractLibDefsFromNpmPkgDir(
         flowVersion,
         path: libDefFilePath,
         testFilePaths,
+        depVersions: Object.keys(depVersions).length > 0 ? depVersions : null,
       });
     }),
   );
@@ -330,7 +364,9 @@ function filterLibDefs(
         case 'exact':
           const fullName = def.scope ? `${def.scope}/${def.name}` : def.name;
           filterMatch =
-            filter.pkgName.toLowerCase() === fullName.toLowerCase() &&
+            (filter.pkgName.toLowerCase() === fullName.toLowerCase() ||
+              `deps_${filter.pkgName.toLowerCase()}` ===
+                fullName.toLowerCase()) &&
             pkgVersionMatch(filter.pkgVersion, def.version);
           break;
         default:
@@ -390,7 +426,16 @@ export async function findNpmLibDef(
     pkgVersion,
     flowVersion,
   });
-  return filteredLibDefs.length === 0 ? null : filteredLibDefs[0];
+
+  return filteredLibDefs.length === 0
+    ? null
+    : filteredLibDefs.sort(o => {
+        // `deps_` prefixed definitions are prioritized
+        if (o.name.startsWith('deps_')) {
+          return -1;
+        }
+        return 0;
+      })[0];
 }
 
 type InstalledNpmLibDef =
@@ -460,11 +505,12 @@ export function parseSignedCodeVersion(
       version: versionToString(pkgVersion),
       flowVersion: flowVer,
       testFilePaths: [],
+      depVersions: null,
     },
   };
 }
 
-export async function getInstalledNpmLibDef(
+async function getInstalledNpmLibDef(
   flowProjectRootDir: string,
   fullFilePath: string,
 ): Promise<?[string, InstalledNpmLibDef]> {
