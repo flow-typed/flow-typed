@@ -6,6 +6,7 @@ on:
   pull_request:
     branches:
       - master
+      - v4
   workflow_dispatch:
 jobs:
   build:
