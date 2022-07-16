@@ -6,6 +6,7 @@ declare module 'deep-freeze' {
     <T>(o: T): $ReadOnly<
       $ObjMapi<T, <P>(P) => DeepReadOnly<$ElementType<T, P>>>
     >,
+    <T: Function>(f: T): T,
   |};
 
   declare export type DeepReadOnly<T> = $Call<deepFreezeFnType, T>

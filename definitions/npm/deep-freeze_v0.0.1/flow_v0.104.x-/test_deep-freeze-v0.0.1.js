@@ -99,3 +99,22 @@ describe('Number', () => {
 describe('string', () => {
   const test1: string = deepFreeze('3');
 });
+
+
+describe('Function', () => {
+    const example = (foo: number) => 'bar';
+    const frozenExample = deepFreeze(example);
+
+    it('works', () => {
+        example(3);
+        frozenExample(3);
+    });
+
+    it('raises error', () => {
+        // $FlowExpectedError[incompatible-call]
+        example('foo');
+
+        // $FlowExpectedError[incompatible-call]
+        frozenExample('foo');
+    });
+  });
