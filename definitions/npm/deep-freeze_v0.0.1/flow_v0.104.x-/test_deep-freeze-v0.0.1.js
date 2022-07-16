@@ -60,16 +60,6 @@ describe('$ReadOnlyArray', () => {
   });
 });
 
-describe('Nested object', () => {
-  const test1: $ReadOnlyArray<DeepReadOnly<{| name: string |}>> = deepFreeze(
-    ([{ name: 'foo' }]: $ReadOnlyArray<{| name: string |}>)
-  );
-
-  it('raises error', () => {
-    // $FlowExpectedError[cannot-write]
-    test1[0].name = true;
-  });
-});
 
 describe('Complex object', () => {
   const test1: $ReadOnlyArray<DeepReadOnly<{foo: Array<{bar: Array<{foobar: boolean, ...}>, ...}>, ...}>> = deepFreeze([
