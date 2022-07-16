@@ -12,4 +12,5 @@ declare module 'deep-freeze' {
   declare export type DeepReadOnly<T> = $Call<deepFreezeFnType, T>
 
   declare module.exports: deepFreezeFnType;
+
 }
