@@ -7,6 +7,12 @@ declare module "@faker-js/faker" {
 
   declare type Casing = 'lower' | 'upper' | 'mixed';
 
+  /**
+   * bigint is currently unsupported, replace this with real one when it's implemented
+   * ref: https://github.com/facebook/flow/issues/6639
+   */
+  declare type BigInt = number;
+
   declare type Faker = {
     seedValue: ?SeedType,
     seed: (SeedType) => void,
@@ -125,32 +131,30 @@ declare module "@faker-js/faker" {
       type: () => string,
     |},
     datatype: {|
-      number:
-        & ((max?: number) => number)
-        & ((options?: {|
-          min?: number,
-          max?: number,
-          precision?: number,
-        |}) => number),
-      float:
-        & ((precision?: number) => number)
-        & ((options?: {|
-          min?: number,
-          max?: number,
-          precision?: number,
-        |}) => number),
-      datetime:
-        & ((max?: number) => Date)
-        & ((options?: {|
-          min?: number,
-          max?: number,
-        |}) => Date),
+      array: (length?: number) => Array<string | number>,
+      bigInt: (options?: BigInt | boolean | number | string | {|
+        max: BigInt | boolean | number | string,
+        min: BigInt | boolean | number | string
+      |}) => BigInt,
+      boolean: () => boolean,
+      datetime: (options?: number | {|
+        max: number,
+        min: number
+      |}) => Date,
+      float: (options?: number | {|
+        max: number,
+        min: number,
+        precision: number
+      |}) => number,
+      hexadecimal: (length?: number) => string,
+      json: () => string,
+      number: (options?: number | {|
+        max: number,
+        min: number,
+        precision: number
+      |}) => number,
       string: (length?: number) => string,
       uuid: () => string,
-      boolean: () => boolean,
-      hexaDecimal: (count?: number) => string,
-      json: () => string,
-      array: (length?: number) => Array<string | number>,
     |},
     date: {
       past: (years?: ?number, refDate?: Date) => Date,

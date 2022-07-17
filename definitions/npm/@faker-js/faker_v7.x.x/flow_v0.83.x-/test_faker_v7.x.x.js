@@ -48,7 +48,7 @@ describe("commerce", () => {
 describe("company", () => {
   faker.company.suffixes();
   faker.company.companyName();
-  faker.company.companyName("mustacheTemplate");
+  faker.company.companyName(1);
   faker.company.companySuffix();
   faker.company.catchPhrase();
   faker.company.bs();
@@ -74,7 +74,7 @@ describe("datatype", () => {
   (faker.datatype.string(): string);
   (faker.datatype.uuid(): string);
   (faker.datatype.boolean(): boolean);
-  (faker.datatype.hexaDecimal(): string);
+  (faker.datatype.hexadecimal(): string);
   (faker.datatype.json(): string);
   (faker.datatype.array(): Array<string | number>);
 });
