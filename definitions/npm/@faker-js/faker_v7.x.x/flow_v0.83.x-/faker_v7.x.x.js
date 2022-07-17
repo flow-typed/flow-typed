@@ -156,17 +156,29 @@ declare module "@faker-js/faker" {
       string: (length?: number) => string,
       uuid: () => string,
     |},
-    date: {
-      past: (years?: ?number, refDate?: Date) => Date,
-      future: (years?: ?number, refDate?: Date) => Date,
-      between: (from: Date, to: Date) => Date,
-      recent: (days?: number) => Date,
-      soon: () => Date,
-      month: (options?: {| abbr?: boolean, context?: "wide" |}) => Date,
-      weekday: (options?: {| abbr?: boolean, context?: "wide" |}) => Date,
-      ...
-    },
-    fake: (mustacheTemplate: string) => string,
+    date: {|
+      between: (from?: Date | number | string, to?: Date | number | string) => Date,
+      betweens: (from?: Date | number | string, to?: Date | number | string, num: number) => Array<Date>,
+      birthdate: (options?: {|
+        max?: number,
+        min?: number,
+        mode?: 'age' | 'year',
+        refDate?: Date | number | string,
+      |}) => Date,
+      future: (years?: number, refDate?: Date | number | string) => Date,
+      month: (options?: {|
+        abbr?: boolean,
+        context?: boolean,
+      |}) => string,
+      past: (years?: number, refDate?: Date | number | string) => Date,
+      recent: (days?: number, refDate?: Date | number | string) => Date,
+      soon: (days?: number, refDate?: Date | number | string) => Date,
+      weekday: (options?: {|
+        abbr?: boolean,
+        context?: boolean
+      |}) => string,
+    |},
+    fake: (str: string) => string,
     finance: {
       account: (length?: number) => string,
       accountName: () => string,

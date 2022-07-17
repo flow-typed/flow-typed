@@ -92,8 +92,8 @@ describe("date", () => {
   faker.date.soon();
   faker.date.month();
   faker.date.month({ abbr: true });
-  faker.date.month({ context: "wide" });
-  faker.date.month({ abbr: true, context: "wide" });
+  faker.date.month({ context: true });
+  faker.date.month({ abbr: true, context: true });
   // $FlowExpectedError[incompatible-call]
   faker.date.month({ context: "bad" });
   // $FlowExpectedError[incompatible-call]
@@ -102,8 +102,8 @@ describe("date", () => {
   faker.date.month({ bad: true });
   faker.date.weekday();
   faker.date.weekday({ abbr: true });
-  faker.date.weekday({ context: "wide" });
-  faker.date.weekday({ abbr: true, context: "wide" });
+  faker.date.weekday({ context: true });
+  faker.date.weekday({ abbr: true, context: true });
   // $FlowExpectedError[incompatible-call]
   faker.date.weekday({ context: "bad" });
   // $FlowExpectedError[incompatible-call]
