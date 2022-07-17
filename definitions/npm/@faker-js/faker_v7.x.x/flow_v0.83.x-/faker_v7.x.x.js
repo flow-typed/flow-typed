@@ -1,6 +1,12 @@
 declare module "@faker-js/faker" {
   declare type SeedType = number | $ReadOnlyArray<number>;
 
+  declare type StringColorFormat = 'css' | 'binary';
+  declare type NumberColorFormat = 'decimal';
+  declare type ColorFormat = StringColorFormat | NumberColorFormat;
+
+  declare type Casing = 'lower' | 'upper' | 'mixed';
+
   declare type Faker = {
     seedValue: ?SeedType,
     seed: (SeedType) => void,
@@ -13,12 +19,12 @@ declare module "@faker-js/faker" {
       cityPrefix: () => string,
       citySuffix: () => string,
       country: () => string,
-      countryCode: (alphaCode?: 'alpha-2' | 'alpha-3' = 'alpha-2') => string,
+      countryCode: (alphaCode?: 'alpha-2' | 'alpha-3') => string,
       county: () => string,
       direction: (useAbbr?: boolean) => string,
       latitude: (max?: number, min?: number, precision?: number) => string,
       longitude: (max?: number, min?: number, precision?: number) => string,
-      nearbyGPSCoordinate: (coordinate?: [latitude: number, longitude: number], radius?: number, isMetric?: boolean) => [latitude: string, longitude: string],
+      nearbyGPSCoordinate: (coordinate?: [number, number], radius?: number, isMetric?: boolean) => [string, string],
       ordinalDirection: (useAbbr?: boolean) => string,
       secondaryAddress: () => string,
       state: () => string,
@@ -31,6 +37,54 @@ declare module "@faker-js/faker" {
       timeZone: () => string,
       zipCode: (format?: string) => string,
       zipCodeByState: (state?: string) => string,
+    |},
+    animal: {|
+      bear: () => string,
+      bird: () => string,
+      cat: () => string,
+      cetacean: () => string,
+      cow: () => string,
+      crocodilia: () => string,
+      dog: () => string,
+      fish: () => string,
+      horse: () => string,
+      insect: () => string,
+      lion: () => string,
+      rabbit: () => string,
+      snake: () => string,
+      type: () => string,
+    |},
+    color: {|
+      cmyk: (options?: {|
+        format: ColorFormat
+      |}) => string | Array<number>,
+      colorByCSSColorSpace: (options?: {|
+        format: ColorFormat,
+        space: 'a98-rgb' | 'display-p3' | 'prophoto-rgb' | 'rec2020' | 'sRGB'
+      |}) => string | Array<number>,
+      cssSupportedFunction: () => string,
+      cssSupportedSpace: () => string,
+      hsl: (options?: {|
+        format: ColorFormat,
+        includeAlpha: boolean
+      |}) => string | Array<number>,
+      human: () => string,
+      hwb: (options?: {|
+        format: ColorFormat
+      |}) => string | Array<number>,
+      lab: (options?: {|
+        format: ColorFormat
+      |}) => string | Array<number>,
+      lch: (options?: {|
+        format: ColorFormat
+      |}) => string | Array<number>,
+      rgb: (options?: {|
+        casing: Casing,
+        format: 'hex' | ColorFormat,
+        includeAlpha: boolean,
+        prefix: string
+      |}) => string | Array<number>,
+      space: () => string,
     |},
     commerce: {
       color: () => string,

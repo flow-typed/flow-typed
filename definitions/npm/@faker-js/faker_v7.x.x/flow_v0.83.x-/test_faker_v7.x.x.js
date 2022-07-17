@@ -26,8 +26,6 @@ describe("address", () => {
   faker.address.country();
   faker.address.countryCode();
   faker.address.state();
-  faker.address.state(true);
-  faker.address.state(false);
   faker.address.stateAbbr();
   faker.address.latitude();
   faker.address.longitude();
