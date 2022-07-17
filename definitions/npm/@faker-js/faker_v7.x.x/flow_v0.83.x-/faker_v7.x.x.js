@@ -86,42 +86,44 @@ declare module "@faker-js/faker" {
       |}) => string | Array<number>,
       space: () => string,
     |},
-    commerce: {
+    commerce: {|
+      /**
+       * @deprecated
+       */
       color: () => string,
       department: () => string,
-      productName: () => string,
       price: (
         min?: ?number,
         max?: ?number,
         dec?: ?number,
         symbol?: ?string
       ) => string,
-      productAdjective: () => string,
-      productMaterial: () => string,
       product: () => string,
-      ...
-    },
-    company: {
-      suffixes: () => string,
-      companyName: (mustacheTemplate?: string) => string,
-      companySuffix: () => string,
-      catchPhrase: () => string,
+      productAdjective: () => string,
+      productDescription: () => string,
+      productMaterial: () => string,
+      productName: () => string,
+    |},
+    company: {|
       bs: () => string,
-      catchPhraseAdjective: () => string,
-      catchPhraseDescriptor: () => string,
-      catchPhraseNoun: () => string,
       bsAdjective: () => string,
       bsBuzz: () => string,
       bsNoun: () => string,
-      ...
-    },
-    database: {
-      column: () => string,
-      type: () => string,
+      catchPhrase: () => string,
+      catchPhraseAdjective: () => string,
+      catchPhraseDescriptor: () => string,
+      catchPhraseNoun: () => string,
+      companyName: (format?: number) => string,
+      companySuffix: () => string,
+      suffixes: () => Array<string>,
+    |},
+    database: {|
       collation: () => string,
+      column: () => string,
       engine: () => string,
-      ...
-    },
+      mongodbObjectId: () => string,
+      type: () => string,
+    |},
     datatype: {|
       number:
         & ((max?: number) => number)
