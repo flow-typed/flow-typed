@@ -1,4 +1,4 @@
-declare module "@faker-js/faker" {
+declare module '@faker-js/faker' {
   declare type StringColorFormat = 'css' | 'binary';
   declare type NumberColorFormat = 'decimal';
   declare type ColorFormat = StringColorFormat | NumberColorFormat;
@@ -35,8 +35,8 @@ declare module "@faker-js/faker" {
       maxRetries: number,
       maxTime: number,
       startTime: number,
-      store: { [key: string]: any, ... }
-    |}): any,
+      store: { [key: string]: any, ... },
+    |}) => any,
     address: {|
       buildingNumber: () => string,
       cardinalDirection: (useAbbr?: boolean) => string,
@@ -429,4 +429,230 @@ declare module "@faker-js/faker" {
   |};
 }
 
-// todo reexport locale types
+declare module '@faker-js/faker/locale/af_ZA' {
+  declare module.exports: $Exports<'@faker-js/faker'>;
+}
+
+declare module '@faker-js/faker/locale/ar' {
+  declare module.exports: $Exports<'@faker-js/faker'>;
+}
+
+declare module '@faker-js/faker/locale/az' {
+  declare module.exports: $Exports<'@faker-js/faker'>;
+}
+
+declare module '@faker-js/faker/locale/cz' {
+  declare module.exports: $Exports<'@faker-js/faker'>;
+}
+
+declare module '@faker-js/faker/locale/de' {
+  declare module.exports: $Exports<'@faker-js/faker'>;
+}
+
+declare module '@faker-js/faker/locale/de_AT' {
+  declare module.exports: $Exports<'@faker-js/faker'>;
+}
+
+declare module '@faker-js/faker/locale/de_CH' {
+  declare module.exports: $Exports<'@faker-js/faker'>;
+}
+
+declare module '@faker-js/faker/locale/el' {
+  declare module.exports: $Exports<'@faker-js/faker'>;
+}
+
+declare module '@faker-js/faker/locale/en' {
+  declare module.exports: $Exports<'@faker-js/faker'>;
+}
+
+declare module '@faker-js/faker/locale/en_AU' {
+  declare module.exports: $Exports<'@faker-js/faker'>;
+}
+
+declare module '@faker-js/faker/locale/en_AU_ocker' {
+  declare module.exports: $Exports<'@faker-js/faker'>;
+}
+
+declare module '@faker-js/faker/locale/en_BORK' {
+  declare module.exports: $Exports<'@faker-js/faker'>;
+}
+
+declare module '@faker-js/faker/locale/en_CA' {
+  declare module.exports: $Exports<'@faker-js/faker'>;
+}
+
+declare module '@faker-js/faker/locale/en_GB' {
+  declare module.exports: $Exports<'@faker-js/faker'>;
+}
+
+declare module '@faker-js/faker/locale/en_GH' {
+  declare module.exports: $Exports<'@faker-js/faker'>;
+}
+
+declare module '@faker-js/faker/locale/en_IE' {
+  declare module.exports: $Exports<'@faker-js/faker'>;
+}
+
+declare module '@faker-js/faker/locale/en_IND' {
+  declare module.exports: $Exports<'@faker-js/faker'>;
+}
+
+declare module '@faker-js/faker/locale/en_NG' {
+  declare module.exports: $Exports<'@faker-js/faker'>;
+}
+
+declare module '@faker-js/faker/locale/en_US' {
+  declare module.exports: $Exports<'@faker-js/faker'>;
+}
+
+declare module '@faker-js/faker/locale/en_ZA' {
+  declare module.exports: $Exports<'@faker-js/faker'>;
+}
+
+declare module '@faker-js/faker/locale/es' {
+  declare module.exports: $Exports<'@faker-js/faker'>;
+}
+
+declare module '@faker-js/faker/locale/es_MX' {
+  declare module.exports: $Exports<'@faker-js/faker'>;
+}
+
+declare module '@faker-js/faker/locale/fa' {
+  declare module.exports: $Exports<'@faker-js/faker'>;
+}
+
+declare module '@faker-js/faker/locale/fi' {
+  declare module.exports: $Exports<'@faker-js/faker'>;
+}
+
+declare module '@faker-js/faker/locale/fr' {
+  declare module.exports: $Exports<'@faker-js/faker'>;
+}
+
+declare module '@faker-js/faker/locale/fr_BE' {
+  declare module.exports: $Exports<'@faker-js/faker'>;
+}
+
+declare module '@faker-js/faker/locale/fr_CA' {
+  declare module.exports: $Exports<'@faker-js/faker'>;
+}
+
+declare module '@faker-js/faker/locale/fr_CH' {
+  declare module.exports: $Exports<'@faker-js/faker'>;
+}
+
+declare module '@faker-js/faker/locale/ge' {
+  declare module.exports: $Exports<'@faker-js/faker'>;
+}
+
+declare module '@faker-js/faker/locale/he' {
+  declare module.exports: $Exports<'@faker-js/faker'>;
+}
+
+declare module '@faker-js/faker/locale/hr' {
+  declare module.exports: $Exports<'@faker-js/faker'>;
+}
+
+declare module '@faker-js/faker/locale/hu' {
+  declare module.exports: $Exports<'@faker-js/faker'>;
+}
+
+declare module '@faker-js/faker/locale/hy' {
+  declare module.exports: $Exports<'@faker-js/faker'>;
+}
+
+declare module '@faker-js/faker/locale/id_ID' {
+  declare module.exports: $Exports<'@faker-js/faker'>;
+}
+
+declare module '@faker-js/faker/locale/it' {
+  declare module.exports: $Exports<'@faker-js/faker'>;
+}
+
+declare module '@faker-js/faker/locale/ja' {
+  declare module.exports: $Exports<'@faker-js/faker'>;
+}
+
+declare module '@faker-js/faker/locale/ko' {
+  declare module.exports: $Exports<'@faker-js/faker'>;
+}
+
+declare module '@faker-js/faker/locale/lv' {
+  declare module.exports: $Exports<'@faker-js/faker'>;
+}
+
+declare module '@faker-js/faker/locale/mk' {
+  declare module.exports: $Exports<'@faker-js/faker'>;
+}
+
+declare module '@faker-js/faker/locale/nb_NO' {
+  declare module.exports: $Exports<'@faker-js/faker'>;
+}
+
+declare module '@faker-js/faker/locale/ne' {
+  declare module.exports: $Exports<'@faker-js/faker'>;
+}
+
+declare module '@faker-js/faker/locale/nl' {
+  declare module.exports: $Exports<'@faker-js/faker'>;
+}
+
+declare module '@faker-js/faker/locale/nl_BE' {
+  declare module.exports: $Exports<'@faker-js/faker'>;
+}
+
+declare module '@faker-js/faker/locale/pl' {
+  declare module.exports: $Exports<'@faker-js/faker'>;
+}
+
+declare module '@faker-js/faker/locale/pt_BR' {
+  declare module.exports: $Exports<'@faker-js/faker'>;
+}
+
+declare module '@faker-js/faker/locale/pt_PT' {
+  declare module.exports: $Exports<'@faker-js/faker'>;
+}
+
+declare module '@faker-js/faker/locale/ro' {
+  declare module.exports: $Exports<'@faker-js/faker'>;
+}
+
+declare module '@faker-js/faker/locale/ru' {
+  declare module.exports: $Exports<'@faker-js/faker'>;
+}
+
+declare module '@faker-js/faker/locale/sk' {
+  declare module.exports: $Exports<'@faker-js/faker'>;
+}
+
+declare module '@faker-js/faker/locale/sv' {
+  declare module.exports: $Exports<'@faker-js/faker'>;
+}
+
+declare module '@faker-js/faker/locale/tr' {
+  declare module.exports: $Exports<'@faker-js/faker'>;
+}
+
+declare module '@faker-js/faker/locale/uk' {
+  declare module.exports: $Exports<'@faker-js/faker'>;
+}
+
+declare module '@faker-js/faker/locale/ur' {
+  declare module.exports: $Exports<'@faker-js/faker'>;
+}
+
+declare module '@faker-js/faker/locale/vi' {
+  declare module.exports: $Exports<'@faker-js/faker'>;
+}
+
+declare module '@faker-js/faker/locale/zh_CN' {
+  declare module.exports: $Exports<'@faker-js/faker'>;
+}
+
+declare module '@faker-js/faker/locale/zh_TW' {
+  declare module.exports: $Exports<'@faker-js/faker'>;
+}
+
+declare module '@faker-js/faker/locale/zu_ZA' {
+  declare module.exports: $Exports<'@faker-js/faker'>;
+}
