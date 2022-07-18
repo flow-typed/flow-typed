@@ -2,9 +2,6 @@ import { describe, it } from "flow-typed-test";
 import { faker } from "@faker-js/faker";
 
 describe("prototype", () => {
-  faker.seed(12);
-  faker.seed([1, 2, 3]);
-  faker.seedValue;
   faker.setLocale('ru');
 });
 
@@ -270,37 +267,23 @@ describe("lorem", () => {
   faker.lorem.words();
   faker.lorem.words(1);
   faker.lorem.sentences();
-  faker.lorem.sentences(1);
-  faker.lorem.sentences(1, "separator");
   faker.lorem.slug();
   faker.lorem.slug(1);
   faker.lorem.sentence();
-  faker.lorem.sentence(1);
-  faker.lorem.sentence(1, 1);
   faker.lorem.paragraph();
   faker.lorem.paragraph(1);
   faker.lorem.paragraphs();
   faker.lorem.paragraphs(1);
   faker.lorem.paragraphs(1, "separator");
   faker.lorem.text();
-  faker.lorem.text(1);
   faker.lorem.lines();
-  faker.lorem.lines(1);
 });
 
 describe("name", () => {
   faker.name.firstName();
-  faker.name.firstName("M");
-  faker.name.lastName();
-  faker.name.lastName("F");
-  faker.name.findName();
-  faker.name.findName("firstName");
-  faker.name.findName("firstName", "lastName");
-  faker.name.findName("firstName", "lastName", "F");
   faker.name.jobTitle();
   faker.name.prefix();
   faker.name.suffix();
-  faker.name.title();
   faker.name.jobDescriptor();
   faker.name.jobArea();
   faker.name.jobType();

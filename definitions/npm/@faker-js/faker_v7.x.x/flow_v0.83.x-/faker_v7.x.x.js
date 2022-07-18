@@ -1,6 +1,4 @@
 declare module "@faker-js/faker" {
-  declare type SeedType = number | $ReadOnlyArray<number>;
-
   declare type StringColorFormat = 'css' | 'binary';
   declare type NumberColorFormat = 'decimal';
   declare type ColorFormat = StringColorFormat | NumberColorFormat;
@@ -11,6 +9,8 @@ declare module "@faker-js/faker" {
 
   declare type HTTPStatusCodeType = 'informational' | 'success' | 'clientError' | 'serverError' | 'redirection';
 
+  declare type GenderType = 'female' | 'male';
+
   /**
    * bigint is currently unsupported, replace this with real one when it's implemented
    * ref: https://github.com/facebook/flow/issues/6639
@@ -18,8 +18,7 @@ declare module "@faker-js/faker" {
   declare type BigInt = number;
 
   declare type Faker = {
-    seedValue: ?SeedType,
-    seed: (SeedType) => void,
+    locale: string,
     setLocale: (string) => void,
     address: {|
       buildingNumber: () => string,
@@ -289,41 +288,46 @@ declare module "@faker-js/faker" {
       userAgent: () => string,
       userName: (firstName?: string, lastName?: string) => string,
     |},
-    lorem: {
-      word: (count?: number) => string,
-      words: (count?: number) => string,
-      sentences: (sentenceCount?: ?number, separator?: string) => string,
-      slug: (wordCount?: number) => string,
-      sentence: (wordCount?: ?number, range?: number) => string,
+    lorem: {|
+      lines: (lineCount?: number) => string,
       paragraph: (sentenceCount?: number) => string,
       paragraphs: (paragraphCount?: ?number, separator?: string) => string,
-      text: (times?: number) => string,
-      lines: (lineCount?: number) => string,
-      ...
-    },
-    name: {
-      firstName: (gender?: mixed) => string,
-      lastName: (gender?: mixed) => string,
-      findName: (
-        firstName?: ?string,
-        lastName?: ?string,
-        gender?: mixed
-      ) => string,
-      jobTitle: () => string,
-      prefix: () => string,
-      suffix: () => string,
-      title: () => string,
-      jobDescriptor: () => string,
+      sentence: (wordCount?: number) => string,
+      sentences: (sentenceCount?: number, separator?: string) => string,
+      slug: (wordCount?: number) => string,
+      text: () => string,
+      word: (length?: number) => string,
+      words: (num?: number) => string,
+    |},
+    mersenne: {|
+      rand: (max?: number, min?: number) => number,
+      seed: (S: number) => void,
+      seed_array: (A: Array<number>) => void,
+    |},
+    music: {|
+      genre: () => string,
+      songName: () => string,
+    |},
+    name: {|
+      findName: (firstName?: string, lastName?: string, gender?: GenderType) => string,
+      firstName: (gender?: GenderType) => string,
+      gender: (binary?: boolean) => string,
       jobArea: () => string,
+      jobDescriptor: () => string,
+      jobTitle: () => string,
       jobType: () => string,
-      ...
-    },
-    phone: {
-      phoneNumber: (format?: string) => string,
-      phoneNumberFormat: (formatArrayIndex?: number) => string,
+      lastName: (gender?: GenderType) => string,
+      middleName: (gender?: GenderType) => string,
+      prefix: (gender?: GenderType) => string,
+      suffix: () => string,
+    |},
+    phone: {|
+      imei: () => string,
+      number: (format?: string) => string,
       phoneFormats: () => string,
-      ...
-    },
+      phoneNumber: (format?: string) => string,
+      phoneNumberFormat: (phoneFormatsArrayIndex?: number) => string,
+    |},
     random: {
       number: (
         options?: number | {| max?: number, min?: number, precision?: number |}
@@ -363,3 +367,5 @@ declare module "@faker-js/faker" {
     faker: Faker,
   |};
 }
+
+// todo reexport locale types
