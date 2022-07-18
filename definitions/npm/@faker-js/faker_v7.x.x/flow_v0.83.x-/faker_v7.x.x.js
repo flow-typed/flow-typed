@@ -4,6 +4,11 @@ declare module "@faker-js/faker" {
   declare type ColorFormat = StringColorFormat | NumberColorFormat;
 
   declare type Casing = 'lower' | 'upper' | 'mixed';
+  declare type LowerAlphaChar = 'a' | 'b' | 'c' | 'd' | 'e' | 'f' | 'g' | 'h' | 'i' | 'j' | 'k' | 'l' | 'm' | 'n' | 'o' | 'p' | 'q' | 'r' | 's' | 't' | 'u' | 'v' | 'w' | 'x' | 'y' | 'z';
+  declare type UpperAlphaChar = 'A' | 'B' | 'C' | 'D' | 'E' | 'F' | 'G' | 'H' | 'I' | 'J' | 'K' | 'L' | 'M' | 'N' | 'O' | 'P' | 'Q' | 'R' | 'S' | 'T' | 'U' | 'V' | 'W' | 'X' | 'Y' | 'Z';
+  declare type NumericChar = '0' | '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9';
+  declare type AlphaChar = LowerAlphaChar | UpperAlphaChar;
+  declare type AlphaNumericChar = AlphaChar | NumericChar;
 
   declare type EmojiType = 'smiley' | 'body' | 'person' | 'nature' | 'food' | 'travel' | 'activity' | 'object' | 'symbol' | 'flag';
 
@@ -17,9 +22,21 @@ declare module "@faker-js/faker" {
    */
   declare type BigInt = number;
 
-  declare type Faker = {
+  declare type Faker = {|
     locale: string,
     setLocale: (string) => void,
+    /**
+     * TODO improve inference with generics
+     */
+    unique: (method: any, args?: any, options: {|
+      compare: (obj: { [key: string]: any, ... }, key: string) => -1 | 0,
+      currentIterations: number,
+      exclude: string | Array<string>,
+      maxRetries: number,
+      maxTime: number,
+      startTime: number,
+      store: { [key: string]: any, ... }
+    |}): any,
     address: {|
       buildingNumber: () => string,
       cardinalDirection: (useAbbr?: boolean) => string,
@@ -328,40 +345,84 @@ declare module "@faker-js/faker" {
       phoneNumber: (format?: string) => string,
       phoneNumberFormat: (phoneFormatsArrayIndex?: number) => string,
     |},
-    random: {
-      number: (
-        options?: number | {| max?: number, min?: number, precision?: number |}
-      ) => number,
-      arrayElement: <Element>(Array<Element>) => Element,
-      objectElement: <Key, Value>(
-        object: { [Key]: Value, ... },
-        field: Key
-      ) => Value,
-      uuid: () => string,
-      boolean: () => boolean,
-      word: (type?: string) => string,
-      words: (count?: number) => string,
-      image: () => string,
+    random: {|
+      alpha: (options?: number | {|
+        bannedChars?: $ReadOnlyArray<AlphaChar> | AlphaChar,
+        casing?: Casing,
+        count?: number,
+        upcase?: boolean,
+      |}) => string,
+      alphaNumeric: (count?: number, options?: {|
+        bannedChars?: $ReadOnlyArray<AlphaNumericChar> | AlphaNumericChar,
+        casing?: Casing
+      |}) => string,
       locale: () => string,
-      alphaNumeric: (count?: number) => string,
-      hexaDecimal: () => string,
-      ...
-    },
-    system: {
-      fileName: (ext?: ?string, type?: string) => string,
-      commonFileName: () => string,
-      mimeType: () => string,
-      commonFileType: (ext?: ?string, type?: string) => string,
-      commonFileExt: (type?: string) => string,
-      fileType: () => string,
-      fileExt: (mimeType?: string) => string,
+      numeric: (length?: number, options?: {|
+        allowLeadingZeros?: boolean,
+        bannedDigits?: $ReadOnlyArray<NumericChar> | NumericChar,
+      |}) => string,
+      word: () => string,
+      words: (count?: number) => string,
+    |},
+    science: {|
+      chemicalElement: () => {|
+        /**
+         * The symbol for the element (e.g. `'He'`).
+         */
+        symbol: string,
+        /**
+         * The name for the element (e.g. `'Cerium'`).
+         */
+        name: string,
+        /**
+         * The atomic number for the element (e.g. `52`).
+         */
+        atomicNumber: number,
+      |},
+      unit: () => {|
+        /**
+         * The long version of the unit (e.g. `meter`).
+         */
+        name: string,
+        /**
+         * The short version/abbreviation of the element (e.g. `Pa`).
+         */
+        symbol: string,
+      |},
+    |},
+    system: {|
+      commonFileExt: () => string,
+      commonFileName: (ext?: string) => string,
+      commonFileType: () => string,
       directoryPath: () => string,
+      fileExt: (mimeType?: string) => string,
+      fileName: () => string,
       filePath: () => string,
+      fileType: () => string,
+      mimeType: () => string,
       semver: () => string,
-      ...
-    },
-    ...
-  };
+    |},
+    vehicle: {|
+      bicycle: () => string,
+      color: () => string,
+      fuel: () => string,
+      manufacturer: () => string,
+      model: () => string,
+      type: () => string,
+      vehicle: () => string,
+      vin: () => string,
+      vrm: () => string,
+    |},
+    word: {|
+      adjective: (length?: number) => string,
+      adverb: (length?: number) => string,
+      conjunction: (length?: number) => string,
+      interjection: (length?: number) => string,
+      noun: (length?: number) => string,
+      preposition: (length?: number) => string,
+      verb: (length?: number) => string,
+    |},
+  |};
 
   declare module.exports: {|
     faker: Faker,
