@@ -165,11 +165,6 @@ describe("image", () => {
   faker.image.image(1, 1);
   faker.image.image(1, 1, true);
   faker.image.image(1, 1, false);
-  faker.image.avatar();
-  faker.image.avatar(1);
-  faker.image.avatar(1, 1);
-  faker.image.avatar(1, 1, true);
-  faker.image.avatar(1, 1, false);
   faker.image.imageUrl();
   faker.image.imageUrl(1);
   faker.image.imageUrl(1, 1);
@@ -267,11 +262,6 @@ describe("internet", () => {
   faker.internet.color(255, 255);
   faker.internet.color(255, 255, 255);
   faker.internet.mac();
-  faker.internet.password();
-  faker.internet.password(8);
-  faker.internet.password(8, true);
-  faker.internet.password(8, true, "pattern");
-  faker.internet.password(8, true, "pattern", "prefix");
 });
 
 describe("lorem", () => {

@@ -7,6 +7,10 @@ declare module "@faker-js/faker" {
 
   declare type Casing = 'lower' | 'upper' | 'mixed';
 
+  declare type EmojiType = 'smiley' | 'body' | 'person' | 'nature' | 'food' | 'travel' | 'activity' | 'object' | 'symbol' | 'flag';
+
+  declare type HTTPStatusCodeType = 'informational' | 'success' | 'clientError' | 'serverError' | 'redirection';
+
   /**
    * bigint is currently unsupported, replace this with real one when it's implemented
    * ref: https://github.com/facebook/flow/issues/6639
@@ -236,106 +240,55 @@ declare module "@faker-js/faker" {
       slugify: (string?: string) => string,
       uniqueArray: <T>(source?: (() => T) | $ReadOnlyArray<T>, length?: number) => Array<T>,
     |},
-    image: {
-      image: (width?: ?number, height?: ?number, randomize?: boolean) => string,
-      avatar: (
-        width?: ?number,
-        height?: ?number,
-        randomize?: boolean
-      ) => string,
-      imageUrl: (
-        width?: ?number,
-        height?: ?number,
-        category?: ?string,
-        randomize?: boolean
-      ) => string,
-      abstract: (
-        width?: ?number,
-        height?: ?number,
-        randomize?: boolean
-      ) => string,
-      animals: (
-        width?: ?number,
-        height?: ?number,
-        randomize?: boolean
-      ) => string,
-      business: (
-        width?: ?number,
-        height?: ?number,
-        randomize?: boolean
-      ) => string,
-      cats: (width?: ?number, height?: ?number, randomize?: boolean) => string,
-      city: (width?: ?number, height?: ?number, randomize?: boolean) => string,
-      food: (width?: ?number, height?: ?number, randomize?: boolean) => string,
-      nightlife: (
-        width?: ?number,
-        height?: ?number,
-        randomize?: boolean
-      ) => string,
-      fashion: (
-        width?: ?number,
-        height?: ?number,
-        randomize?: boolean
-      ) => string,
-      people: (
-        width?: ?number,
-        height?: ?number,
-        randomize?: boolean
-      ) => string,
-      nature: (
-        width?: ?number,
-        height?: ?number,
-        randomize?: boolean
-      ) => string,
-      sports: (
-        width?: ?number,
-        height?: ?number,
-        randomize?: boolean
-      ) => string,
-      technics: (
-        width?: ?number,
-        height?: ?number,
-        randomize?: boolean
-      ) => string,
-      transport: (
-        width?: ?number,
-        height?: ?number,
-        randomize?: boolean
-      ) => string,
-      dataUri: (width?: ?number, height?: ?number) => string,
-      ...
-    },
-    internet: {
+    image: {|
+      abstract: (width?: number, height?: number, randomize?: boolean) => string,
+      animals: (width?: number, height?: number, randomize?: boolean) => string,
       avatar: () => string,
-      email: (
-        firstName?: ?string,
-        lastName?: ?string,
-        provider?: ?string
-      ) => string,
-      exampleEmail: (firstName?: ?string, lastName?: ?string) => string,
-      userName: (firstName?: ?string, lastName?: ?string) => string,
-      protocol: () => string,
-      url: () => string,
+      business: (width?: number, height?: number, randomize?: boolean) => string,
+      cats: (width?: number, height?: number, randomize?: boolean) => string,
+      city: (width?: number, height?: number, randomize?: boolean) => string,
+      dataUri: (width?: number, height?: number, color?: string) => string,
+      fashion: (width?: number, height?: number, randomize?: boolean) => string,
+      food: (width?: number, height?: number, randomize?: boolean) => string,
+      image: (width?: number, height?: number, randomize?: boolean) => string,
+      imageUrl: (width?: number, height?: number, category?: string, randomize?: boolean) => string,
+      nature: (width?: number, height?: number, randomize?: boolean) => string,
+      nightlife: (width?: number, height?: number, randomize?: boolean) => string,
+      people: (width?: number, height?: number, randomize?: boolean) => string,
+      sports: (width?: number, height?: number, randomize?: boolean) => string,
+      technics: (width?: number, height?: number, randomize?: boolean) => string,
+      transport: (width?: number, height?: number, randomize?: boolean) => string,
+    |},
+    internet: {|
+      avatar: () => string,
+      color: (redBase?: number, greenBase?: number, blueBase?: number) => string,
       domainName: () => string,
       domainSuffix: () => string,
       domainWord: () => string,
+      email: (firstName?: string, lastName?: string, provider?: string, options?: {|
+        allowSpecialCharacters?: boolean,
+      |}) => string,
+      emoji: (options?: {|
+        types?: $ReadOnlyArray<EmojiType>,
+      |}) => string,
+      exampleEmail: (firstName?: string, lastName?: string, options?: {|
+        allowSpecialCharacters: boolean
+      |}) => string,
+      httpMethod: () => 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH';
+      httpStatusCode:(options?: {|
+        types?: $ReadOnlyArray<HTTPStatusCodeType>,
+      |}) => number,
       ip: () => string,
+      ipv4: () => string,
       ipv6: () => string,
+      mac: (sep?: string) => string,
+      password: (len?: number, memorable?: boolean, pattern?: RegExp, prefix?: string) => string,
+      port: () => number,
+      protocol: () => 'http' | 'https',
+      url: () => string,
       userAgent: () => string,
-      color: (
-        baseRed255?: ?number,
-        baseGreen255?: ?number,
-        baseBlue255?: ?number
-      ) => string,
-      mac: () => string,
-      password: (
-        len?: ?number,
-        memorable?: ?boolean,
-        pattern?: ?string,
-        prefix?: ?string
-      ) => string,
-      ...
-    },
+      userName: (firstName?: string, lastName?: string) => string,
+    |},
     lorem: {
       word: (count?: number) => string,
       words: (count?: number) => string,
