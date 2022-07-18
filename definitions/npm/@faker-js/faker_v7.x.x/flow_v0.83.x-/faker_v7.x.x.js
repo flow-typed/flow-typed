@@ -24,7 +24,15 @@ declare module '@faker-js/faker' {
 
   declare type Faker = {|
     locale: string,
+    /**
+     * Set Faker's locale
+     *
+     * @param locale The locale to set (e.g. `en` or `en_AU`, `en_AU_ocker`).
+     */
     setLocale: (string) => void,
+    seed:
+      | ((seed?: number) => number)
+      | ((seedArray: Array<number>) => Array<number>),
     /**
      * TODO improve inference with generics
      */
