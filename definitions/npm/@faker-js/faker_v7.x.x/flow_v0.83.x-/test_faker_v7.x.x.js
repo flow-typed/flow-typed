@@ -151,17 +151,12 @@ describe("hacker", () => {
 });
 
 describe("helpers", () => {
-  faker.helpers.randomize([]);
   faker.helpers.slugify("string");
   faker.helpers.replaceSymbolWithNumber("string");
   faker.helpers.replaceSymbolWithNumber("string", "symbol");
   faker.helpers.replaceSymbols("string");
   faker.helpers.shuffle([]);
   faker.helpers.mustache("template", {});
-  faker.helpers.createCard();
-  faker.helpers.contextualCard();
-  faker.helpers.userCard();
-  faker.helpers.createTransaction();
 });
 
 describe("image", () => {

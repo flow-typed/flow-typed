@@ -200,28 +200,42 @@ declare module "@faker-js/faker" {
       transactionDescription: () => string,
       transactionType: () => string,
     |},
-    hacker: {
+    git: {|
+      branch: () => string,
+      commitEntry: (options?: {|
+        eol?: 'CRLF' | 'LF',
+        merge?: boolean,
+      |}) => string,
+      commitMessage: () => string,
+      commitSha: () => string,
+      shortSha: () => string,
+    |},
+    hacker: {|
       abbreviation: () => string,
       adjective: () => string,
-      noun: () => string,
-      verb: () => string,
       ingverb: () => string,
-      phrase: () => string,
-      ...
-    },
-    helpers: {
-      randomize: <Element>(Array<Element>) => Element,
-      slugify: string => string,
-      replaceSymbolWithNumber: (string, symbol?: string) => string,
-      replaceSymbols: string => string,
-      shuffle: <Arr: Array<any>>(Arr) => Arr,
-      mustache: (template: string, data: Object) => string,
-      createCard: () => string,
-      contextualCard: () => string,
-      userCard: () => string,
-      createTransaction: () => string,
-      ...
-    },
+      noun: () => string,
+      phrase:  () => string,
+      verb: () => string,
+    |},
+    helpers: {|
+      arrayElement: <T>(array?: $ReadOnlyArray<T>) => T,
+      arrayElements: <T>(array?: $ReadOnlyArray<T>, count?: number) => Array<T>,
+      maybe: <T>(callback: () => T, options?: {|
+        probability?: number
+      |}) => T,
+      mustache: (str?: string, data?: { [key: string]: ((substring: string, args: Array<any>) => string) | string, ... }) => string,
+      objectKey: <T = string>(object: { [key: T]: any, ... }) => (T | void),
+      objectValue: <T>(object: { [key: string]: T, ... }) => (T | void),
+      regexpStyleStringParse: (string?: string) => string,
+      repeatString: (string?: string, num?: number) => string,
+      replaceCreditCardSymbols: (string?: string, symbol?: string) => string,
+      replaceSymbolWithNumber: (string?: string, symbol?: string) => string,
+      replaceSymbols: (string?: string) => string,
+      shuffle: <T>(o?: Array<T>) => Array<T>,
+      slugify: (string?: string) => string,
+      uniqueArray: <T>(source?: (() => T) | $ReadOnlyArray<T>, length?: number) => Array<T>,
+    |},
     image: {
       image: (width?: ?number, height?: ?number, randomize?: boolean) => string,
       avatar: (
