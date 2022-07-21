@@ -22,6 +22,7 @@ const P = Promise;
 export type LibDef = {|
   pkgName: string,
   pkgVersionStr: string,
+  pkgJsonPath: string | null,
   flowVersion: FlowVersion,
   flowVersionStr: string,
   path: string,
@@ -248,7 +249,7 @@ async function parseLibDefsFromPkgDir(
   });
 
   if (!disjointVersionsAll(flowDirs.map(([_, ver]) => ver))) {
-    throw new ValidationError('Flow versions not disjoint!');
+    throw new ValidationError(`Flow versions not disjoint on ${pkgName}`);
   }
 
   if (flowDirs.length === 0) {
@@ -266,6 +267,7 @@ async function parseLibDefsFromPkgDir(
           ? `${basePkgName}.js`
           : `${basePkgName}_${pkgVersionStr}.js`;
       let libDefFilePath;
+      let pkgJsonPath;
       (await fs.readdir(flowDirPath)).forEach(flowDirItem => {
         const flowDirItemPath = path.join(flowDirPath, flowDirItem);
         const flowDirItemStat = fs.statSync(flowDirItemPath);
@@ -277,6 +279,11 @@ async function parseLibDefsFromPkgDir(
           }
 
           if (path.extname(flowDirItem) === '.swp') {
+            return;
+          }
+
+          if (flowDirItem === 'config.json') {
+            pkgJsonPath = path.join(flowDirPath, flowDirItem);
             return;
           }
 
@@ -308,6 +315,7 @@ async function parseLibDefsFromPkgDir(
       libDefs.push({
         pkgName,
         pkgVersionStr,
+        pkgJsonPath: pkgJsonPath ?? null,
         flowVersion: flowVersion,
         flowVersionStr: flowVerToDirString(flowVersion),
         path: libDefFilePath,
