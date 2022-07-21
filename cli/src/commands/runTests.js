@@ -346,7 +346,7 @@ async function writeFlowConfig(
 
   const flowConfigData = [
     '[libs]',
-    [...depPaths],
+    ...depPaths,
     path.basename(libDefPath),
     path.join(repoDirPath, '..', '__util__', 'tdd_framework.js'),
     '',

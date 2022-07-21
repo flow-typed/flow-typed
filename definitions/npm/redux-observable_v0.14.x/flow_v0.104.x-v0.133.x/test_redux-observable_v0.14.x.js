@@ -38,7 +38,8 @@ const epic4: Epic<State, Action, number> =
 const actionsObsOf1: ActionsObservable<Action> =
   ActionsObservable.of({ type: 'A' }, { type: 'A' }, { type: 'B' });
 const actionsObsOf2: ActionsObservable<Action> =
-  // $FlowExpectedError
+  // $FlowExpectedError[incompatible-type-arg]
+  // $FlowExpectedError[incompatible-call]
   ActionsObservable.of(1, 2, 3); // Wrong type of parameters
 
 /*
@@ -47,7 +48,8 @@ const actionsObsOf2: ActionsObservable<Action> =
 const actionsObsFrom1: ActionsObservable<Action> =
   ActionsObservable.from([{ type: 'A' }, { type: 'A' }, { type: 'B' }]);
 const actionsObsFrom2: ActionsObservable<Action> =
-  // $FlowExpectedError
+  // $FlowExpectedError[incompatible-type-arg]
+  // $FlowExpectedError[incompatible-call]
   ActionsObservable.from([1, 2, 3]); // Wrong type of parameters
 
 /*
@@ -64,7 +66,8 @@ const epic5: Epic<State, Action, number> =
 const epic6: Epic<State, Action, number> = combineEpics();
 const epic7: Epic<State, Action, number> = combineEpics(epic2);
 const epic8: Epic<State, Action, number> = combineEpics(epic2, epic3);
-// $FlowExpectedError
+// $FlowExpectedError[incompatible-type-arg]
+// $FlowExpectedError[incompatible-call]
 const epic9: Epic<State, Action, number> = combineEpics(epic1, epic2); // Wrong dependencies type on result
 const epic10: Epic<State, Action, void> = combineEpics(epic1, epic2);
 
@@ -81,7 +84,7 @@ const epicMiddleware2: EpicMiddleware<State, Action> = createEpicMiddleware(
 const epicMiddleware3: EpicMiddleware<State, Action> = createEpicMiddleware(
   epic3,
   {
-      // $FlowExpectedError
+      // $FlowExpectedError[incompatible-call]
       adapter: 5 // Wrong type
   }
 );

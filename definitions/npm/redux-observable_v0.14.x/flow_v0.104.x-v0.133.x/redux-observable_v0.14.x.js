@@ -1,6 +1,5 @@
-import { Observable } from 'rxjs';
-
 declare module 'redux-observable' {
+  import { Observable } from 'rxjs';
   import type { MiddlewareAPI, Dispatch } from 'redux';
 
   declare export type Epic<S, A, D> = (action$: ActionsObservable<A>, store: MiddlewareAPI<S, A>, dependencies: D) => Observable<A>;
@@ -21,7 +20,7 @@ declare module 'redux-observable' {
     ...
   }
 
-  declare export class ActionsObservable<A: { +type: $Subtype<string>, ... }> extends Observable<A> {
+  declare export class ActionsObservable<A: { +type: any, ... }> extends Observable<A> {
     static of(...actions: Array<A>): ActionsObservable<A>;
     static from(actions: Iterable<A>, scheduler: rxjs$SchedulerClass): ActionsObservable<A>;
     constructor(actionsSubject: Observable<A>): void;
