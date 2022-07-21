@@ -5,7 +5,7 @@
 </p>
 
 <p align="center">
-  A <a href="https://github.com/flow-typed/flow-typed/tree/master/definitions">repository</a> of
+  A <a href="https://github.com/flow-typed/flow-typed/tree/main/definitions">repository</a> of
   high-quality, third-party <a href="https://flow.org/en/docs/libdefs">library type definitions</a>
   for use with <a href="http://flow.org">Flow</a>.
 </p>
@@ -64,7 +64,7 @@ Chances are your question has already been answered! If not, don't hesitate to
 
 ## How Do I Contribute Library Definitions?
 
-Just send a pull request! The documentation highlighted in [CONTRIBUTING.md](https://github.com/flow-typed/flow-typed/blob/master/CONTRIBUTING.md) should give a detailed overview of how to raise a pull request following our best practices.
+Just send a pull request! The documentation highlighted in [CONTRIBUTING.md](https://github.com/flow-typed/flow-typed/blob/main/CONTRIBUTING.md) should give a detailed overview of how to raise a pull request following our best practices.
 
 ### Contributing to the CLI
 

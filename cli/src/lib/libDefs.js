@@ -2,7 +2,7 @@
 
 import semver from 'semver';
 
-import {cloneInto, rebaseRepoMaster} from './git.js';
+import {cloneInto, rebaseRepoMainline} from './git.js';
 import {mkdirp} from './fileUtils.js';
 import {fs, path, os} from './node.js';
 import {versionToString, type Version} from './semver.js';
@@ -55,7 +55,7 @@ async function rebaseCacheRepo(verbose?: VerboseOutput) {
     (await fs.exists(CACHE_REPO_GIT_DIR))
   ) {
     try {
-      await rebaseRepoMaster(CACHE_REPO_DIR);
+      await rebaseRepoMainline(CACHE_REPO_DIR);
     } catch (e) {
       writeVerbose(
         verbose,

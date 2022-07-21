@@ -75,7 +75,7 @@ This issue was first reported here:
 
 ### My flow-typed/npm dir is throwing lots of eslint errors after installing definitions
 
-When you install lib defs using `flow-typed install` the files are copied from the central [definition registry](https://github.com/flow-typed/flow-typed/tree/master/definitions/npm) which have their own code styles and standards which may (probably will) be vastly different to the ones in your project.
+When you install lib defs using `flow-typed install` the files are copied from the central [definition registry](https://github.com/flow-typed/flow-typed/tree/main/definitions/npm) which have their own code styles and standards which may (probably will) be vastly different to the ones in your project.
 
 You may first consider fixing the linting errors every time you install (eg: `yarn eslint ./flow-typed/npm --fix`) though you shouldn't, definitions may get updates which can install next time you run `flow-typed install` but the CLI will not update a definition if it sees a definition has been modified.
 
