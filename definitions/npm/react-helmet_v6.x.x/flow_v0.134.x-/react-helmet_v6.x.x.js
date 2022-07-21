@@ -30,13 +30,12 @@ declare module 'react-helmet' {
     titleAttributes?: { [key: string]: any } | void;
     titleTemplate?: string | void;
   }
-  declare class Helmet mixins React$Component<HelmetProps> {
+  declare export class Helmet mixins React$Component<HelmetProps> {
     static rewind(): HelmetData;
     static renderStatic(): HelmetData;
     static canUseDOM: boolean;
   }
   declare var HelmetExport: typeof Helmet;
-  declare export var Helmet: typeof HelmetExport;
   declare export var canUseDOM: boolean;
   declare export default typeof HelmetExport;
   declare interface HelmetData {

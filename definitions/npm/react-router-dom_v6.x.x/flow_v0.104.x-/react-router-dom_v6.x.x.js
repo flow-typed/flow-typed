@@ -158,14 +158,6 @@ declare module "react-router-dom" {
     state?: any;
   |}) => null;
 
-  declare export var Route: React$ComponentType<{|
-    caseSensitive?: boolean,
-    children?: React$Node,
-    element?: React$Element<any> | null,
-    index?: boolean,
-    path?: string,
-  |}>
-
   declare export var Routes: React$ComponentType<{|
     children?: React$Node,
     location?: Location
