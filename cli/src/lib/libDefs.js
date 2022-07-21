@@ -287,16 +287,6 @@ async function parseLibDefsFromPkgDir(
             return;
           }
 
-          const depsLibDefPrefix = 'deps_';
-
-          if (
-            libDefFileName.startsWith(depsLibDefPrefix) &&
-            libDefFileName.substring(depsLibDefPrefix.length) === flowDirItem
-          ) {
-            libDefFilePath = path.join(flowDirPath, flowDirItem);
-            return;
-          }
-
           if (flowDirItem === libDefFileName) {
             libDefFilePath = path.join(flowDirPath, flowDirItem);
             return;

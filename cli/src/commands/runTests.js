@@ -666,11 +666,7 @@ async function runTestGroup(
           const packageName = nameSplit.length > 1 ? nameSplit[1] : depName;
 
           return testGroup.deps[depName].map(version => {
-            const tempPath = `${depBasePath}${scope}deps_${packageName}_${version}/${flowDirVersion}/${packageName}_${version}.js`;
             const path = `${depBasePath}${scope}${packageName}_${version}/${flowDirVersion}/${packageName}_${version}.js`;
-            if (fs.existsSync(tempPath)) {
-              return tempPath;
-            }
 
             if (!fs.existsSync(path)) {
               throw new Error(

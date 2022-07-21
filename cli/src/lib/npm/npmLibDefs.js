@@ -154,10 +154,7 @@ async function extractLibDefsFromNpmPkgDir(
           }
 
           // Is this the libdef file?
-          if (
-            flowDirItem === libDefFileName ||
-            flowDirItem === libDefFileName.substring('deps_'.length)
-          ) {
+          if (flowDirItem === libDefFileName) {
             libDefFilePath = path.join(flowDirPath, flowDirItem);
             return;
           }
@@ -364,9 +361,7 @@ function filterLibDefs(
         case 'exact':
           const fullName = def.scope ? `${def.scope}/${def.name}` : def.name;
           filterMatch =
-            (filter.pkgName.toLowerCase() === fullName.toLowerCase() ||
-              `deps_${filter.pkgName.toLowerCase()}` ===
-                fullName.toLowerCase()) &&
+            filter.pkgName.toLowerCase() === fullName.toLowerCase() &&
             pkgVersionMatch(filter.pkgVersion, def.version);
           break;
         default:
@@ -427,15 +422,7 @@ export async function findNpmLibDef(
     flowVersion,
   });
 
-  return filteredLibDefs.length === 0
-    ? null
-    : filteredLibDefs.sort(o => {
-        // `deps_` prefixed definitions are prioritized
-        if (o.name.startsWith('deps_')) {
-          return -1;
-        }
-        return 0;
-      })[0];
+  return filteredLibDefs.length === 0 ? null : filteredLibDefs[0];
 }
 
 type InstalledNpmLibDef =
