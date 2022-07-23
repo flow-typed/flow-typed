@@ -65,15 +65,6 @@ export const getNpmLibDefDirFromNested = (path: string): string => {
   return path.substring(0, path.indexOf(npmDefsDir) + npmDefsDir.length);
 };
 
-/**
- * When in a nested directory of npm libdefs such as package/libdef dir
- * find and return the root npm dir
- */
-export const getNpmLibDefDirFromNested = (path: string): string => {
-  const npmDefsDir = '/npm/';
-  return path.substring(0, path.indexOf(npmDefsDir) + npmDefsDir.length);
-};
-
 async function extractLibDefsFromNpmPkgDir(
   pkgDirPath: string,
   scope: null | string,

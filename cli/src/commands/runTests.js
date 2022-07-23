@@ -6,6 +6,7 @@ import {copyFile, recursiveRmdir} from '../lib/fileUtils.js';
 import {gitHubClient} from '../lib/github.js';
 import {getNpmLibDefDirFromNested} from '../lib/npm/npmLibDefs';
 import {getLibDefs, parseRepoDirItem} from '../lib/libDefs.js';
+import {listItem} from '../lib/logger';
 import isInFlowTypedRepo from '../lib/isInFlowTypedRepo';
 import {
   toSemverString as flowVerToSemverString,
@@ -669,10 +670,13 @@ async function runTestGroup(
             const path = `${depBasePath}${scope}${packageName}_${version}/${flowDirVersion}/${packageName}_${version}.js`;
 
             if (!fs.existsSync(path)) {
-              throw new Error(
+              throw listItem(
                 colors.red(
                   `${depName}@${version} cannot be a dependency of ${testGroup.id} because either the dependency@version does't exist or they do not have matching flow version ranges`,
                 ),
+                `Learn more about configuring definition dependencies at ${colors.green(
+                  'https://github.com/flow-typed/flow-typed/blob/main/CONTRIBUTING.md#importing-types-from-other-libdefs',
+                )}`,
               );
             }
 
@@ -680,12 +684,7 @@ async function runTestGroup(
           });
         });
 
-        const longestDep = mappedDepPaths.reduce((acc, cur) => {
-          if (cur.length > acc) {
-            return cur.length;
-          }
-          return acc;
-        }, 0);
+        const longestDep = Math.max(...mappedDepPaths.map(x => x.length));
 
         const depGroup = [];
         for (let i = 0, len = longestDep; i < len; i++) {
