@@ -161,25 +161,25 @@ declare module '@faker-js/faker' {
     datatype: {|
       array: (length?: number) => Array<string | number>,
       bigInt: (options?: BigInt | boolean | number | string | {|
-        max: BigInt | boolean | number | string,
-        min: BigInt | boolean | number | string
+        max?: BigInt | boolean | number | string,
+        min?: BigInt | boolean | number | string
       |}) => BigInt,
       boolean: () => boolean,
       datetime: (options?: number | {|
-        max: number,
-        min: number
+        max?: number,
+        min?: number
       |}) => Date,
       float: (options?: number | {|
-        max: number,
-        min: number,
-        precision: number
+        max?: number,
+        min?: number,
+        precision?: number
       |}) => number,
       hexadecimal: (length?: number) => string,
       json: () => string,
       number: (options?: number | {|
-        max: number,
-        min: number,
-        precision: number
+        max?: number,
+        min?: number,
+        precision?: number
       |}) => number,
       string: (length?: number) => string,
       uuid: () => string,

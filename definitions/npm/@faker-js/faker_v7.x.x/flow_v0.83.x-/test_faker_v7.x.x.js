@@ -876,4 +876,196 @@ describe('@faker-js/faker', () => {
       faker.database.type('');
     });
   });
+
+  describe('datatype', () => {
+    test('array', () => {
+      (faker.datatype.array(): Array<string | number>);
+      faker.datatype.array(123);
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.datatype.array(): number);
+      // $FlowExpectedError[incompatible-call]
+      faker.datatype.array('');
+    });
+
+    test('bigInt', () => {
+      // Flow does not support BigInt datatype so don't test casting
+      faker.datatype.bigInt();
+      faker.datatype.bigInt(123);
+      faker.datatype.bigInt('');
+      faker.datatype.bigInt(true);
+      faker.datatype.bigInt({});
+      faker.datatype.bigInt({
+        max: 123,
+        min: 123,
+      });
+      faker.datatype.bigInt({
+        max: '',
+        min: '',
+      });
+      faker.datatype.bigInt({
+        max: true,
+        min: true,
+      });
+
+      // $FlowExpectedError[incompatible-call]
+      faker.datatype.bigInt({
+        foo: 'bar',
+      });
+      // $FlowExpectedError[incompatible-call]
+      faker.datatype.bigInt({
+        max: {},
+      });
+      // $FlowExpectedError[incompatible-call]
+      faker.datatype.bigInt({
+        min: {},
+      });
+    });
+
+    test('boolean', () => {
+      (faker.datatype.boolean(): boolean);
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.datatype.boolean(): number);
+      // $FlowExpectedError[extra-arg]
+      faker.datatype.boolean('');
+    });
+
+    test('datetime', () => {
+      (faker.datatype.datetime(): Date);
+      faker.datatype.datetime(123);
+      faker.datatype.datetime({});
+      faker.datatype.datetime({
+        max: 123,
+        min: 123,
+      });
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.datatype.datetime(): number);
+      // $FlowExpectedError[incompatible-call]
+      faker.datatype.datetime('');
+      // $FlowExpectedError[incompatible-call]
+      faker.datatype.datetime({
+        foo: 'bar',
+      });
+      // $FlowExpectedError[incompatible-call]
+      faker.datatype.datetime({
+        max: '',
+      });
+      // $FlowExpectedError[incompatible-call]
+      faker.datatype.datetime({
+        min: '',
+      });
+    });
+
+    test('float', () => {
+      (faker.datatype.float(): number);
+      faker.datatype.float(123);
+      faker.datatype.float({});
+      faker.datatype.float({
+        max: 123,
+        min: 123,
+      });
+      faker.datatype.float({
+        max: 123,
+        min: 123,
+        precision: 123,
+      });
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.datatype.float(): string);
+      // $FlowExpectedError[incompatible-call]
+      faker.datatype.float('');
+      // $FlowExpectedError[incompatible-call]
+      faker.datatype.float({
+        foo: 'bar',
+      });
+      // $FlowExpectedError[incompatible-call]
+      faker.datatype.float({
+        max: '',
+      });
+      // $FlowExpectedError[incompatible-call]
+      faker.datatype.float({
+        min: '',
+      });
+      // $FlowExpectedError[incompatible-call]
+      faker.datatype.float({
+        precision: '',
+      });
+    });
+
+    test('hexadecimal', () => {
+      (faker.datatype.hexadecimal(): string);
+      faker.datatype.hexadecimal(123);
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.datatype.hexadecimal(): number);
+      // $FlowExpectedError[incompatible-call]
+      faker.datatype.hexadecimal('');
+    });
+
+    test('json', () => {
+      (faker.datatype.json(): string);
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.datatype.json(): number);
+      // $FlowExpectedError[extra-arg]
+      faker.datatype.json('');
+    });
+
+    test('number', () => {
+      (faker.datatype.number(): number);
+      faker.datatype.number(123);
+      faker.datatype.number({});
+      faker.datatype.number({
+        max: 123,
+        min: 123,
+      });
+      faker.datatype.number({
+        max: 123,
+        min: 123,
+        precision: 123,
+      });
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.datatype.number(): string);
+      // $FlowExpectedError[incompatible-call]
+      faker.datatype.number('');
+      // $FlowExpectedError[incompatible-call]
+      faker.datatype.number({
+        foo: 'bar',
+      });
+      // $FlowExpectedError[incompatible-call]
+      faker.datatype.number({
+        max: '',
+      });
+      // $FlowExpectedError[incompatible-call]
+      faker.datatype.number({
+        min: '',
+      });
+      // $FlowExpectedError[incompatible-call]
+      faker.datatype.number({
+        precision: '',
+      });
+    });
+
+    test('string', () => {
+      (faker.datatype.string(): string);
+      faker.datatype.string(123);
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.datatype.string(): number);
+      // $FlowExpectedError[incompatible-call]
+      faker.datatype.string('');
+    });
+
+    test('uuid', () => {
+      (faker.datatype.uuid(): string);
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.datatype.uuid(): number);
+      // $FlowExpectedError[extra-arg]
+      faker.datatype.uuid('');
+    });
+  });
 });
