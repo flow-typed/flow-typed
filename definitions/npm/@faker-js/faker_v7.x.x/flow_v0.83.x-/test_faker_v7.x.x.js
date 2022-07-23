@@ -1465,4 +1465,68 @@ describe('@faker-js/faker', () => {
       faker.finance.transactionType('');
     });
   });
+
+  describe('git', () => {
+    test('branch', () => {
+      (faker.git.branch(): string);
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.git.branch(): number);
+      // $FlowExpectedError[extra-arg]
+      faker.git.branch('');
+    });
+
+    test('commitEntry', () => {
+      (faker.git.commitEntry(): string);
+      faker.git.commitEntry({});
+      faker.git.commitEntry({
+        eol: 'CRLF',
+        merge: true,
+      });
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.git.commitEntry(): number);
+      // $FlowExpectedError[incompatible-call]
+      faker.git.commitEntry('');
+      // $FlowExpectedError[prop-missing]
+      faker.git.commitEntry({
+        foo: 'bar',
+      });
+      faker.git.commitEntry({
+        // $FlowExpectedError[incompatible-call]
+        eol: 'crlf',
+      });
+      faker.git.commitEntry({
+        // $FlowExpectedError[incompatible-call]
+        merge: '',
+      });
+    });
+
+    test('commitMessage', () => {
+      (faker.git.commitMessage(): string);
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.git.commitMessage(): number);
+      // $FlowExpectedError[extra-arg]
+      faker.git.commitMessage('');
+    });
+
+    test('commitSha', () => {
+      (faker.git.commitSha(): string);
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.git.commitSha(): number);
+      // $FlowExpectedError[extra-arg]
+      faker.git.commitSha('');
+    });
+
+    test('shortSha', () => {
+      (faker.git.shortSha(): string);
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.git.shortSha(): number);
+      // $FlowExpectedError[extra-arg]
+      faker.git.shortSha('');
+    });
+  });
 });
