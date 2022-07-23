@@ -1255,4 +1255,214 @@ describe('@faker-js/faker', () => {
       });
     });
   });
+
+  describe('fake', () => {
+    test('fake', () => {
+      (faker.fake(''): string);
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.fake(''): number);
+      // $FlowExpectedError[incompatible-call]
+      faker.fake();
+    });
+  });
+
+  describe('finance', () => {
+    test('account', () => {
+      (faker.finance.account(): string);
+      faker.finance.account(123);
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.finance.account(): number);
+      // $FlowExpectedError[incompatible-call]
+      faker.finance.account('');
+    });
+
+    test('accountName', () => {
+      (faker.finance.accountName(): string);
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.finance.accountName(): number);
+      // $FlowExpectedError[extra-arg]
+      faker.finance.accountName('');
+    });
+
+    test('amount', () => {
+      (faker.finance.amount(): string);
+      faker.finance.amount(1);
+      faker.finance.amount(1, 2);
+      faker.finance.amount(1, 2, 3);
+      faker.finance.amount(1, 2, 3, '');
+      faker.finance.amount(1, 2, 3, '', true);
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.finance.amount(): number);
+      // $FlowExpectedError[incompatible-call]
+      faker.finance.amount('');
+      // $FlowExpectedError[incompatible-call]
+      faker.finance.amount(1, '');
+      // $FlowExpectedError[incompatible-call]
+      faker.finance.amount(1, 2, '');
+      // $FlowExpectedError[incompatible-call]
+      faker.finance.amount(1, 2, 3, 4);
+      // $FlowExpectedError[incompatible-call]
+      faker.finance.amount(1, 2, 3, '', '');
+    });
+
+    test('bic', () => {
+      (faker.finance.bic(): string);
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.finance.bic(): number);
+      // $FlowExpectedError[extra-arg]
+      faker.finance.bic('');
+    });
+
+    test('bitcoinAddress', () => {
+      (faker.finance.bitcoinAddress(): string);
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.finance.bitcoinAddress(): number);
+      // $FlowExpectedError[extra-arg]
+      faker.finance.bitcoinAddress('');
+    });
+
+    test('creditCardCVV', () => {
+      (faker.finance.creditCardCVV(): string);
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.finance.creditCardCVV(): number);
+      // $FlowExpectedError[extra-arg]
+      faker.finance.creditCardCVV('');
+    });
+
+    test('creditCardIssuer', () => {
+      (faker.finance.creditCardIssuer(): string);
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.finance.creditCardIssuer(): number);
+      // $FlowExpectedError[extra-arg]
+      faker.finance.creditCardIssuer('');
+    });
+
+    test('creditCardNumber', () => {
+      (faker.finance.creditCardNumber(): string);
+      faker.finance.creditCardNumber('');
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.finance.creditCardNumber(): number);
+      // $FlowExpectedError[incompatible-call]
+      faker.finance.creditCardNumber(123);
+    });
+
+    test('currencyCode', () => {
+      (faker.finance.currencyCode(): string);
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.finance.currencyCode(): number);
+      // $FlowExpectedError[extra-arg]
+      faker.finance.currencyCode('');
+    });
+
+    test('currencyName', () => {
+      (faker.finance.currencyName(): string);
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.finance.currencyName(): number);
+      // $FlowExpectedError[extra-arg]
+      faker.finance.currencyName('');
+    });
+
+    test('currencySymbol', () => {
+      (faker.finance.currencySymbol(): string);
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.finance.currencySymbol(): number);
+      // $FlowExpectedError[extra-arg]
+      faker.finance.currencySymbol('');
+    });
+
+    test('ethereumAddress', () => {
+      (faker.finance.ethereumAddress(): string);
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.finance.ethereumAddress(): number);
+      // $FlowExpectedError[extra-arg]
+      faker.finance.ethereumAddress('');
+    });
+
+    test('iban', () => {
+      (faker.finance.iban(): string);
+      faker.finance.iban(true);
+      faker.finance.iban(true, '');
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.finance.iban(): number);
+      // $FlowExpectedError[incompatible-call]
+      faker.finance.iban('');
+      // $FlowExpectedError[incompatible-call]
+      faker.finance.iban(true, true);
+    });
+
+    test('litecoinAddress', () => {
+      (faker.finance.litecoinAddress(): string);
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.finance.litecoinAddress(): number);
+      // $FlowExpectedError[extra-arg]
+      faker.finance.litecoinAddress('');
+    });
+
+    test('mask', () => {
+      (faker.finance.mask(): string);
+      faker.finance.mask(1);
+      faker.finance.mask(1, true, true);
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.finance.mask(): number);
+      // $FlowExpectedError[incompatible-call]
+      faker.finance.mask('');
+      // $FlowExpectedError[incompatible-call]
+      faker.finance.mask(1, '');
+      // $FlowExpectedError[incompatible-call]
+      faker.finance.mask(1, true, '');
+    });
+
+    test('pin', () => {
+      (faker.finance.pin(): string);
+      faker.finance.pin(1);
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.finance.pin(): number);
+      // $FlowExpectedError[incompatible-call]
+      faker.finance.pin('');
+    });
+
+    test('routingNumber', () => {
+      (faker.finance.routingNumber(): string);
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.finance.routingNumber(): number);
+      // $FlowExpectedError[extra-arg]
+      faker.finance.routingNumber('');
+    });
+
+    test('transactionDescription', () => {
+      (faker.finance.transactionDescription(): string);
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.finance.transactionDescription(): number);
+      // $FlowExpectedError[extra-arg]
+      faker.finance.transactionDescription('');
+    });
+
+    test('transactionType', () => {
+      (faker.finance.transactionType(): string);
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.finance.transactionType(): number);
+      // $FlowExpectedError[extra-arg]
+      faker.finance.transactionType('');
+    });
+  });
 });
