@@ -90,33 +90,33 @@ declare module '@faker-js/faker' {
     |},
     color: {|
       cmyk: (options?: {|
-        format: ColorFormat
+        format?: ColorFormat
       |}) => string | Array<number>,
       colorByCSSColorSpace: (options?: {|
-        format: ColorFormat,
-        space: 'a98-rgb' | 'display-p3' | 'prophoto-rgb' | 'rec2020' | 'sRGB'
+        format?: ColorFormat,
+        space?: 'a98-rgb' | 'display-p3' | 'prophoto-rgb' | 'rec2020' | 'sRGB'
       |}) => string | Array<number>,
       cssSupportedFunction: () => string,
       cssSupportedSpace: () => string,
       hsl: (options?: {|
-        format: ColorFormat,
-        includeAlpha: boolean
+        format?: ColorFormat,
+        includeAlpha?: boolean
       |}) => string | Array<number>,
       human: () => string,
       hwb: (options?: {|
-        format: ColorFormat
+        format?: ColorFormat
       |}) => string | Array<number>,
       lab: (options?: {|
-        format: ColorFormat
+        format?: ColorFormat
       |}) => string | Array<number>,
       lch: (options?: {|
-        format: ColorFormat
+        format?: ColorFormat
       |}) => string | Array<number>,
       rgb: (options?: {|
-        casing: Casing,
-        format: 'hex' | ColorFormat,
-        includeAlpha: boolean,
-        prefix: string
+        casing?: Casing,
+        format?: 'hex' | ColorFormat,
+        includeAlpha?: boolean,
+        prefix?: string
       |}) => string | Array<number>,
       space: () => string,
     |},

@@ -389,4 +389,258 @@ describe('@faker-js/faker', () => {
       faker.animal.type('');
     });
   });
+
+  describe('color', () => {
+    test('cmyk', () => {
+      (faker.color.cmyk(): string | Array<number>);
+      faker.color.cmyk({});
+      faker.color.cmyk({
+        format: 'css',
+      });
+      faker.color.cmyk({
+        format: 'decimal',
+      });
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.color.cmyk(): string);
+      // $FlowExpectedError[incompatible-cast]
+      (faker.color.cmyk(): boolean);
+      // $FlowExpectedError[prop-missing]
+      faker.color.cmyk({
+        foo: 'bar',
+      });
+      faker.color.cmyk({
+        // $FlowExpectedError[incompatible-call]
+        format: 'test',
+      });
+    });
+
+    test('colorByCSSColorSpace', () => {
+      (faker.color.colorByCSSColorSpace(): string | Array<number>);
+      faker.color.colorByCSSColorSpace({});
+      faker.color.colorByCSSColorSpace({
+        format: 'css',
+      });
+      faker.color.colorByCSSColorSpace({
+        format: 'decimal',
+      });
+      faker.color.colorByCSSColorSpace({
+        format: 'decimal',
+        space: 'a98-rgb',
+      });
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.color.colorByCSSColorSpace(): string);
+      // $FlowExpectedError[incompatible-cast]
+      (faker.color.colorByCSSColorSpace(): boolean);
+      // $FlowExpectedError[prop-missing]
+      faker.color.colorByCSSColorSpace({
+        foo: 'bar',
+      });
+      faker.color.colorByCSSColorSpace({
+        // $FlowExpectedError[incompatible-call]
+        format: 'test',
+      });
+      faker.color.colorByCSSColorSpace({
+        format: 'decimal',
+        // $FlowExpectedError[incompatible-call]
+        space: 'a98-rgba',
+      });
+    });
+
+    test('cssSupportedFunction', () => {
+      (faker.color.cssSupportedFunction(): string);
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.color.cssSupportedFunction(): number);
+      // $FlowExpectedError[extra-arg]
+      faker.color.cssSupportedFunction('');
+    });
+
+    test('cssSupportedSpace', () => {
+      (faker.color.cssSupportedSpace(): string);
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.color.cssSupportedSpace(): number);
+      // $FlowExpectedError[extra-arg]
+      faker.color.cssSupportedSpace('');
+    });
+
+    test('hsl', () => {
+      (faker.color.hsl(): string | Array<number>);
+      faker.color.hsl({});
+      faker.color.hsl({
+        format: 'css',
+      });
+      faker.color.hsl({
+        format: 'decimal',
+      });
+      faker.color.hsl({
+        format: 'decimal',
+        includeAlpha: true,
+      });
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.color.hsl(): string);
+      // $FlowExpectedError[incompatible-cast]
+      (faker.color.hsl(): boolean);
+      // $FlowExpectedError[prop-missing]
+      faker.color.hsl({
+        foo: 'bar',
+      });
+      faker.color.hsl({
+        // $FlowExpectedError[incompatible-call]
+        format: 'test',
+      });
+      faker.color.hsl({
+        format: 'decimal',
+        // $FlowExpectedError[incompatible-call]
+        includeAlpha: 'a98-rgba',
+      });
+    });
+
+    test('human', () => {
+      (faker.color.human(): string);
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.color.human(): number);
+      // $FlowExpectedError[extra-arg]
+      faker.color.human('');
+    });
+
+    test('hwb', () => {
+      (faker.color.hwb(): string | Array<number>);
+      faker.color.hwb({});
+      faker.color.hwb({
+        format: 'css',
+      });
+      faker.color.hwb({
+        format: 'decimal',
+      });
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.color.hwb(): string);
+      // $FlowExpectedError[incompatible-cast]
+      (faker.color.hwb(): boolean);
+      // $FlowExpectedError[prop-missing]
+      faker.color.hwb({
+        foo: 'bar',
+      });
+      faker.color.hwb({
+        // $FlowExpectedError[incompatible-call]
+        format: 'test',
+      });
+    });
+
+    test('lab', () => {
+      (faker.color.lab(): string | Array<number>);
+      faker.color.lab({});
+      faker.color.lab({
+        format: 'css',
+      });
+      faker.color.lab({
+        format: 'decimal',
+      });
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.color.lab(): string);
+      // $FlowExpectedError[incompatible-cast]
+      (faker.color.lab(): boolean);
+      // $FlowExpectedError[prop-missing]
+      faker.color.lab({
+        foo: 'bar',
+      });
+      faker.color.lab({
+        // $FlowExpectedError[incompatible-call]
+        format: 'test',
+      });
+    });
+
+    test('lch', () => {
+      (faker.color.lch(): string | Array<number>);
+      faker.color.lch({});
+      faker.color.lch({
+        format: 'css',
+      });
+      faker.color.lch({
+        format: 'decimal',
+      });
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.color.lch(): string);
+      // $FlowExpectedError[incompatible-cast]
+      (faker.color.lch(): boolean);
+      // $FlowExpectedError[prop-missing]
+      faker.color.lch({
+        foo: 'bar',
+      });
+      faker.color.lch({
+        // $FlowExpectedError[incompatible-call]
+        format: 'test',
+      });
+    });
+
+    test('rgb', () => {
+      (faker.color.rgb(): string | Array<number>);
+      faker.color.rgb({});
+      faker.color.rgb({
+        format: 'css',
+      });
+      faker.color.rgb({
+        format: 'decimal',
+      });
+      faker.color.rgb({
+        format: 'decimal',
+        casing: 'lower',
+      });
+      faker.color.rgb({
+        format: 'decimal',
+        casing: 'lower',
+        includeAlpha: true,
+      });
+      faker.color.rgb({
+        format: 'decimal',
+        casing: 'lower',
+        includeAlpha: true,
+        prefix: '',
+      });
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.color.rgb(): string);
+      // $FlowExpectedError[incompatible-cast]
+      (faker.color.rgb(): boolean);
+      // $FlowExpectedError[prop-missing]
+      faker.color.rgb({
+        foo: 'bar',
+      });
+      faker.color.rgb({
+        // $FlowExpectedError[incompatible-call]
+        format: 'test',
+      });
+      faker.color.rgb({
+        format: 'decimal',
+        // $FlowExpectedError[incompatible-call]
+        includeAlpha: 'a98-rgba',
+      });
+      faker.color.rgb({
+        format: 'decimal',
+        // $FlowExpectedError[incompatible-call]
+        casing: 'a98-rgba',
+      });
+      faker.color.rgb({
+        format: 'decimal',
+        // $FlowExpectedError[incompatible-call]
+        prefix: 123,
+      });
+    });
+
+    test('space', () => {
+      (faker.color.space(): string);
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.color.space(): number);
+      // $FlowExpectedError[extra-arg]
+      faker.color.space('');
+    });
+  });
 });
