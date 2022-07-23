@@ -1585,4 +1585,179 @@ describe('@faker-js/faker', () => {
       faker.hacker.verb('');
     });
   });
+
+  describe('helpers', () => {
+    test('arrayElement', () => {
+      faker.helpers.arrayElement();
+      (faker.helpers.arrayElement<string>(): string);
+      faker.helpers.arrayElement<string>(['']);
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.helpers.arrayElement<string>(): number);
+      // $FlowExpectedError[incompatible-call]
+      faker.helpers.arrayElement<string>([123]);
+      // $FlowExpectedError[incompatible-call]
+      faker.helpers.arrayElement<string>(['', 123]);
+    });
+
+    test('arrayElements', () => {
+      faker.helpers.arrayElements();
+      (faker.helpers.arrayElements<string>(): Array<string>);
+      faker.helpers.arrayElements<string>(['']);
+      faker.helpers.arrayElements([''], 1);
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.helpers.arrayElements<string>(): number);
+      // $FlowExpectedError[incompatible-call]
+      faker.helpers.arrayElements<string>([123]);
+      // $FlowExpectedError[incompatible-call]
+      faker.helpers.arrayElements<string>(['', 123]);
+      // $FlowExpectedError[incompatible-call]
+      faker.helpers.arrayElements([1], '');
+    });
+
+    test('maybe', () => {
+      (faker.helpers.maybe<string>(() => ''): string);
+      faker.helpers.maybe(() => '', { probability: 1 });
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.helpers.maybe<string>(() => ''): number);
+      // $FlowExpectedError[incompatible-call]
+      faker.helpers.maybe<string>(() => 1);
+      // $FlowExpectedError[prop-missing]
+      faker.helpers.maybe<string>(() => '', { foo: 'bar' });
+      // $FlowExpectedError[incompatible-call]
+      faker.helpers.maybe<string>(() => '', { probability: '' });
+    });
+
+    test('mustache', () => {
+      (faker.helpers.mustache(): string);
+      faker.helpers.mustache('I found {{count}} instances of "{{word}}".', {
+        count: () => `${faker.datatype.number()}`,
+        word: "this word",
+      });
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.helpers.mustache(): number);
+      // $FlowExpectedError[incompatible-call]
+      faker.helpers.mustache(123);
+      faker.helpers.mustache('', {
+        // $FlowExpectedError[incompatible-call]
+        count: 123,
+      });
+    });
+
+    test('objectKey', () => {
+      (faker.helpers.objectKey({ a: 'b' }): string | void);
+
+      // $FlowExpectedError[incompatible-call]
+      faker.helpers.objectKey('');
+    });
+
+    test('objectValue', () => {
+      (faker.helpers.objectValue({ a: 'b' }): string | void);
+      faker.helpers.objectValue<number>({ a: 1 });
+
+      // $FlowExpectedError[incompatible-call]
+      faker.helpers.objectValue('');
+      // $FlowExpectedError[incompatible-call]
+      faker.helpers.objectValue<number>({ a: '' });
+    });
+
+    test('regexpStyleStringParse', () => {
+      (faker.helpers.regexpStyleStringParse(): string);
+      faker.helpers.regexpStyleStringParse('');
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.helpers.regexpStyleStringParse(): number);
+      // $FlowExpectedError[incompatible-call]
+      faker.helpers.regexpStyleStringParse(123);
+    });
+
+    test('repeatString', () => {
+      (faker.helpers.repeatString(): string);
+      faker.helpers.repeatString('');
+      faker.helpers.repeatString('', 1);
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.helpers.repeatString(): number);
+      // $FlowExpectedError[incompatible-call]
+      faker.helpers.repeatString(123);
+      // $FlowExpectedError[incompatible-call]
+      faker.helpers.repeatString('', '');
+    });
+
+    test('replaceCreditCardSymbols', () => {
+      (faker.helpers.replaceCreditCardSymbols(): string);
+      faker.helpers.replaceCreditCardSymbols('');
+      faker.helpers.replaceCreditCardSymbols('', '');
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.helpers.replaceCreditCardSymbols(): number);
+      // $FlowExpectedError[incompatible-call]
+      faker.helpers.replaceCreditCardSymbols(123);
+      // $FlowExpectedError[incompatible-call]
+      faker.helpers.replaceCreditCardSymbols('', 123);
+    });
+
+    test('replaceSymbolWithNumber', () => {
+      (faker.helpers.replaceSymbolWithNumber(): string);
+      faker.helpers.replaceSymbolWithNumber('');
+      faker.helpers.replaceSymbolWithNumber('', '');
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.helpers.replaceSymbolWithNumber(): number);
+      // $FlowExpectedError[incompatible-call]
+      faker.helpers.replaceSymbolWithNumber(123);
+      // $FlowExpectedError[incompatible-call]
+      faker.helpers.replaceSymbolWithNumber('', 123);
+    });
+
+    test('replaceSymbols', () => {
+      (faker.helpers.replaceSymbols(): string);
+      faker.helpers.replaceSymbols('');
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.helpers.replaceSymbols(): number);
+      // $FlowExpectedError[incompatible-call]
+      faker.helpers.replaceSymbols(123);
+    });
+
+    test('shuffle', () => {
+      faker.helpers.shuffle();
+      (faker.helpers.shuffle<string>(): Array<string>);
+      faker.helpers.shuffle<string>(['']);
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.helpers.shuffle<string>(): number);
+      // $FlowExpectedError[incompatible-call]
+      faker.helpers.shuffle<string>([123]);
+      // $FlowExpectedError[incompatible-call]
+      faker.helpers.shuffle<string>(['', 123]);
+    });
+
+    test('slugify', () => {
+      (faker.helpers.slugify(): string);
+      faker.helpers.slugify('');
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.helpers.slugify(): number);
+      // $FlowExpectedError[incompatible-call]
+      faker.helpers.slugify(123);
+    });
+
+    test('uniqueArray', () => {
+      (faker.helpers.uniqueArray<string>(): Array<string>);
+      faker.helpers.uniqueArray(faker.random.word);
+      faker.helpers.uniqueArray(faker.random.word, 50);
+      faker.helpers.uniqueArray(["Hello", "World", "Goodbye"], 2);
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.helpers.uniqueArray<string>(): string);
+      // $FlowExpectedError[incompatible-call]
+      faker.helpers.uniqueArray('');
+      // $FlowExpectedError[incompatible-call]
+      faker.helpers.uniqueArray(faker.random.word, '');
+    });
+  });
 });

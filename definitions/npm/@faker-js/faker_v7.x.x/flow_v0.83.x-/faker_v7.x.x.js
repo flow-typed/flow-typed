@@ -252,7 +252,13 @@ declare module '@faker-js/faker' {
       maybe: <T>(callback: () => T, options?: {|
         probability?: number
       |}) => T,
-      mustache: (str?: string, data?: { [key: string]: ((substring: string, args: Array<any>) => string) | string, ... }) => string,
+      mustache: (
+        str?: string,
+        data?: {
+          [key: string]: ((substring: string, args: Array<any>) => string) | string,
+          ...
+        },
+      ) => string,
       objectKey: <T = string>(object: { [key: T]: any, ... }) => (T | void),
       objectValue: <T>(object: { [key: string]: T, ... }) => (T | void),
       regexpStyleStringParse: (string?: string) => string,
