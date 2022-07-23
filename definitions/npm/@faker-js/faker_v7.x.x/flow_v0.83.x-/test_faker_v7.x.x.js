@@ -1068,4 +1068,191 @@ describe('@faker-js/faker', () => {
       faker.datatype.uuid('');
     });
   });
+
+  describe('date', () => {
+    test('between', () => {
+      (faker.date.between(): Date);
+      faker.date.between(new Date());
+      faker.date.between(123);
+      faker.date.between('test');
+      faker.date.between(123, new Date());
+      faker.date.between(123, 123);
+      faker.date.between(123, 'test');
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.date.between(): number);
+      // $FlowExpectedError[incompatible-call]
+      faker.date.between(true);
+      // $FlowExpectedError[incompatible-call]
+      faker.date.between(123, true);
+    });
+
+    test('betweens', () => {
+      (faker.date.betweens(): Array<Date>);
+      faker.date.betweens(new Date());
+      faker.date.betweens(123);
+      faker.date.betweens('test');
+      faker.date.betweens(123, new Date());
+      faker.date.betweens(123, 123);
+      faker.date.betweens(123, 'test');
+      faker.date.betweens(123, 'test', 123);
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.date.betweens(): number);
+      // $FlowExpectedError[incompatible-call]
+      faker.date.betweens(true);
+      // $FlowExpectedError[incompatible-call]
+      faker.date.betweens(123, true);
+      // $FlowExpectedError[incompatible-call]
+      faker.date.betweens(123, 123, true);
+    });
+
+    test('birthdate', () => {
+      (faker.date.birthdate(): Date);
+      faker.date.birthdate({});
+      faker.date.birthdate({
+        max: 123,
+        min: 123,
+        mode: 'age',
+        refDate: new Date,
+      });
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.date.birthdate(): number);
+      // $FlowExpectedError[incompatible-call]
+      faker.date.birthdate('');
+      // $FlowExpectedError[prop-missing]
+      faker.date.birthdate({
+        foo: 'bar',
+      });
+      faker.date.birthdate({
+        // $FlowExpectedError[incompatible-call]
+        max: '',
+      });
+      faker.date.birthdate({
+        // $FlowExpectedError[incompatible-call]
+        min: '',
+      });
+      faker.date.birthdate({
+        // $FlowExpectedError[incompatible-call]
+        mode: 'test',
+      });
+      faker.date.birthdate({
+        // $FlowExpectedError[incompatible-call]
+        refDate: true,
+      });
+    });
+
+    test('future', () => {
+      (faker.date.future(): Date);
+      faker.date.future(123);
+      faker.date.future(123, new Date());
+      faker.date.future(123, 123);
+      faker.date.future(123, 'test');
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.date.future(): number);
+      // $FlowExpectedError[incompatible-call]
+      faker.date.future(true);
+      // $FlowExpectedError[incompatible-call]
+      faker.date.future(123, true);
+    });
+
+    test('month', () => {
+      (faker.date.month(): string);
+      faker.date.month({});
+      faker.date.month({
+        abbr: true,
+        context: true,
+      });
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.date.month(): number);
+      // $FlowExpectedError[incompatible-call]
+      faker.date.month('');
+      // $FlowExpectedError[prop-missing]
+      faker.date.month({
+        foo: 'bar',
+      });
+      faker.date.month({
+        // $FlowExpectedError[incompatible-call]
+        abbr: '',
+      });
+      faker.date.month({
+        // $FlowExpectedError[incompatible-call]
+        context: '',
+      });
+    });
+
+    test('past', () => {
+      (faker.date.past(): Date);
+      faker.date.past(123);
+      faker.date.past(123, new Date());
+      faker.date.past(123, 123);
+      faker.date.past(123, 'test');
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.date.past(): number);
+      // $FlowExpectedError[incompatible-call]
+      faker.date.past(true);
+      // $FlowExpectedError[incompatible-call]
+      faker.date.past(123, true);
+    });
+
+    test('recent', () => {
+      (faker.date.recent(): Date);
+      faker.date.recent(123);
+      faker.date.recent(123, new Date());
+      faker.date.recent(123, 123);
+      faker.date.recent(123, 'test');
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.date.recent(): number);
+      // $FlowExpectedError[incompatible-call]
+      faker.date.recent(true);
+      // $FlowExpectedError[incompatible-call]
+      faker.date.recent(123, true);
+    });
+
+    test('soon', () => {
+      (faker.date.soon(): Date);
+      faker.date.soon(123);
+      faker.date.soon(123, new Date());
+      faker.date.soon(123, 123);
+      faker.date.soon(123, 'test');
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.date.soon(): number);
+      // $FlowExpectedError[incompatible-call]
+      faker.date.soon(true);
+      // $FlowExpectedError[incompatible-call]
+      faker.date.soon(123, true);
+    });
+
+    test('weekday', () => {
+      (faker.date.weekday(): string);
+      faker.date.weekday({});
+      faker.date.weekday({
+        abbr: true,
+        context: true,
+      });
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.date.weekday(): number);
+      // $FlowExpectedError[incompatible-call]
+      faker.date.weekday('');
+      // $FlowExpectedError[prop-missing]
+      faker.date.weekday({
+        foo: 'bar',
+      });
+      faker.date.weekday({
+        // $FlowExpectedError[incompatible-call]
+        abbr: '',
+      });
+      faker.date.weekday({
+        // $FlowExpectedError[incompatible-call]
+        context: '',
+      });
+    });
+  });
 });

@@ -186,7 +186,7 @@ declare module '@faker-js/faker' {
     |},
     date: {|
       between: (from?: Date | number | string, to?: Date | number | string) => Date,
-      betweens: (from?: Date | number | string, to?: Date | number | string, num: number) => Array<Date>,
+      betweens: (from?: Date | number | string, to?: Date | number | string, num?: number) => Array<Date>,
       birthdate: (options?: {|
         max?: number,
         min?: number,
