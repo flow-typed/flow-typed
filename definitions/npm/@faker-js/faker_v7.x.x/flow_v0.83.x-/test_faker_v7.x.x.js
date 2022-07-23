@@ -261,4 +261,132 @@ describe('@faker-js/faker', () => {
       faker.address.zipCodeByState(123);
     });
   });
+
+  describe('animal', () => {
+    test('bear', () => {
+      (faker.animal.bear(): string);
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.animal.bear(): number);
+      // $FlowExpectedError[extra-arg]
+      faker.animal.bear('');
+    });
+
+    test('bird', () => {
+      (faker.animal.bird(): string);
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.animal.bird(): number);
+      // $FlowExpectedError[extra-arg]
+      faker.animal.bird('');
+    });
+
+    test('cat', () => {
+      (faker.animal.cat(): string);
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.animal.cat(): number);
+      // $FlowExpectedError[extra-arg]
+      faker.animal.cat('');
+    });
+
+    test('cetacean', () => {
+      (faker.animal.cetacean(): string);
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.animal.cetacean(): number);
+      // $FlowExpectedError[extra-arg]
+      faker.animal.cetacean('');
+    });
+
+    test('cow', () => {
+      (faker.animal.cow(): string);
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.animal.cow(): number);
+      // $FlowExpectedError[extra-arg]
+      faker.animal.cow('');
+    });
+
+    test('crocodilia', () => {
+      (faker.animal.crocodilia(): string);
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.animal.crocodilia(): number);
+      // $FlowExpectedError[extra-arg]
+      faker.animal.crocodilia('');
+    });
+
+    test('dog', () => {
+      (faker.animal.dog(): string);
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.animal.dog(): number);
+      // $FlowExpectedError[extra-arg]
+      faker.animal.dog('');
+    });
+
+    test('fish', () => {
+      (faker.animal.fish(): string);
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.animal.fish(): number);
+      // $FlowExpectedError[extra-arg]
+      faker.animal.fish('');
+    });
+
+    test('horse', () => {
+      (faker.animal.horse(): string);
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.animal.horse(): number);
+      // $FlowExpectedError[extra-arg]
+      faker.animal.horse('');
+    });
+
+    test('insect', () => {
+      (faker.animal.insect(): string);
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.animal.insect(): number);
+      // $FlowExpectedError[extra-arg]
+      faker.animal.insect('');
+    });
+
+    test('lion', () => {
+      (faker.animal.lion(): string);
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.animal.lion(): number);
+      // $FlowExpectedError[extra-arg]
+      faker.animal.lion('');
+    });
+
+    test('rabbit', () => {
+      (faker.animal.rabbit(): string);
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.animal.rabbit(): number);
+      // $FlowExpectedError[extra-arg]
+      faker.animal.rabbit('');
+    });
+
+    test('snake', () => {
+      (faker.animal.snake(): string);
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.animal.snake(): number);
+      // $FlowExpectedError[extra-arg]
+      faker.animal.snake('');
+    });
+
+    test('type', () => {
+      (faker.animal.type(): string);
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.animal.type(): number);
+      // $FlowExpectedError[extra-arg]
+      faker.animal.type('');
+    });
+  });
 });
