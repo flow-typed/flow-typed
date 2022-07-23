@@ -1529,4 +1529,60 @@ describe('@faker-js/faker', () => {
       faker.git.shortSha('');
     });
   });
+
+  describe('hacker', () => {
+    test('abbreviation', () => {
+      (faker.hacker.abbreviation(): string);
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.hacker.abbreviation(): number);
+      // $FlowExpectedError[extra-arg]
+      faker.hacker.abbreviation('');
+    });
+
+    test('adjective', () => {
+      (faker.hacker.adjective(): string);
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.hacker.adjective(): number);
+      // $FlowExpectedError[extra-arg]
+      faker.hacker.adjective('');
+    });
+
+    test('ingverb', () => {
+      (faker.hacker.ingverb(): string);
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.hacker.ingverb(): number);
+      // $FlowExpectedError[extra-arg]
+      faker.hacker.ingverb('');
+    });
+
+    test('noun', () => {
+      (faker.hacker.noun(): string);
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.hacker.noun(): number);
+      // $FlowExpectedError[extra-arg]
+      faker.hacker.noun('');
+    });
+
+    test('phrase', () => {
+      (faker.hacker.phrase(): string);
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.hacker.phrase(): number);
+      // $FlowExpectedError[extra-arg]
+      faker.hacker.phrase('');
+    });
+
+    test('verb', () => {
+      (faker.hacker.verb(): string);
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.hacker.verb(): number);
+      // $FlowExpectedError[extra-arg]
+      faker.hacker.verb('');
+    });
+  });
 });
