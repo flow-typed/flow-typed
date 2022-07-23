@@ -21,7 +21,7 @@ import {
   updateCacheRepo,
 } from '../libDefs.js';
 import {parseDirString as parseFlowDirString} from '../flowVersion';
-import {cloneInto, rebaseRepoMaster} from '../git.js';
+import {cloneInto, rebaseRepoMainline} from '../git.js';
 
 /**
  * Jest's process of mocking in place fools Flow, so we use this as an explicit
@@ -35,7 +35,7 @@ describe('libDefs', () => {
   describe('ensureCacheRepo', () => {
     beforeEach(() => {
       _mock(cloneInto).mockClear();
-      _mock(rebaseRepoMaster).mockClear();
+      _mock(rebaseRepoMainline).mockClear();
       cacheRepoAssure.lastAssured = 0;
       cacheRepoAssure.pendingAssure = Promise.resolve();
     });
@@ -69,7 +69,7 @@ describe('libDefs', () => {
       });
 
       await ensureCacheRepo();
-      expect(_mock(rebaseRepoMaster).mock.calls[0]).toEqual([CACHE_REPO_DIR]);
+      expect(_mock(rebaseRepoMainline).mock.calls[0]).toEqual([CACHE_REPO_DIR]);
     });
 
     it('does NOT rebase if on disk, but lastUpdated is recent', async () => {
@@ -87,13 +87,13 @@ describe('libDefs', () => {
       });
 
       await ensureCacheRepo();
-      expect(_mock(rebaseRepoMaster).mock.calls).toEqual([]);
+      expect(_mock(rebaseRepoMainline).mock.calls).toEqual([]);
     });
   });
 
   describe('updateCacheRepo', () => {
     beforeEach(() => {
-      _mock(rebaseRepoMaster).mockClear();
+      _mock(rebaseRepoMainline).mockClear();
       cacheRepoAssure.lastAssured = 0;
       cacheRepoAssure.pendingAssure = Promise.resolve();
     });
@@ -110,7 +110,7 @@ describe('libDefs', () => {
       });
 
       await updateCacheRepo();
-      expect(_mock(rebaseRepoMaster).mock.calls).toEqual([[CACHE_REPO_DIR]]);
+      expect(_mock(rebaseRepoMainline).mock.calls).toEqual([[CACHE_REPO_DIR]]);
     });
   });
 
