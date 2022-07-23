@@ -43,7 +43,7 @@ const BIN_PLATFORM = (_ => {
   }
 })();
 const PKG_ROOT_DIR = path.join(__dirname, '..', '..');
-const TEST_DIR = path.join(PKG_ROOT_DIR, '.test-dir');
+export const TEST_DIR: string = path.join(PKG_ROOT_DIR, '.test-dir');
 const BIN_DIR = path.join(PKG_ROOT_DIR, '.flow-bins-cache');
 const P = Promise;
 
@@ -331,11 +331,11 @@ async function getCachedFlowBinVersions(
   return versions.map(version => `v${version}`);
 }
 
-async function writeFlowConfig(
-  repoDirPath,
-  testDirPath,
-  libDefPath,
-  version,
+export async function writeFlowConfig(
+  repoDirPath: string,
+  testDirPath: string,
+  libDefPath: string,
+  version: string,
   depPaths: Array<string>,
 ) {
   // /!\---------------------------------------------------------------------/!\
@@ -346,7 +346,7 @@ async function writeFlowConfig(
 
   const flowConfigData = [
     '[libs]',
-    [...depPaths],
+    ...depPaths,
     path.basename(libDefPath),
     path.join(repoDirPath, '..', '__util__', 'tdd_framework.js'),
     '',
@@ -666,11 +666,7 @@ async function runTestGroup(
           const packageName = nameSplit.length > 1 ? nameSplit[1] : depName;
 
           return testGroup.deps[depName].map(version => {
-            const tempPath = `${depBasePath}${scope}deps_${packageName}_${version}/${flowDirVersion}/${packageName}_${version}.js`;
             const path = `${depBasePath}${scope}${packageName}_${version}/${flowDirVersion}/${packageName}_${version}.js`;
-            if (fs.existsSync(tempPath)) {
-              return tempPath;
-            }
 
             if (!fs.existsSync(path)) {
               throw new Error(

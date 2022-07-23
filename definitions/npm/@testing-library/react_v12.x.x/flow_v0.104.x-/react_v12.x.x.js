@@ -184,7 +184,7 @@ declare module '@testing-library/react' {
 
   declare type MatcherFunction = (
     content: string,
-    element: ?Element
+    element: HTMLElement
   ) => boolean;
 
   declare type Matcher = MatcherFunction | RegExp | string | number;

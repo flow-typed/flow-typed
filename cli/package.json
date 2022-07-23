@@ -10,7 +10,7 @@
   "bugs": {
     "url": "https://github.com/flow-typed/flow-typed/issues/new/choose"
   },
-  "version": "3.8.0-1",
+  "version": "3.8.0",
   "main": "dist/cli.js",
   "bin": "dist/cli.js",
   "engines": {
@@ -35,7 +35,7 @@
     "flowgen": "^1.10.0",
     "fs-extra": "^8.1.0",
     "glob": "^7.1.6",
-    "got": "^10.5.7",
+    "got": "^11.8.5",
     "md5": "^2.2.1",
     "mkdirp": "^1.0.3",
     "node-stream-zip": "^1.15.0",
@@ -59,7 +59,7 @@
     "eslint-plugin-fb-flow": "^0.0.4",
     "eslint-plugin-flowtype": "^8.0.3",
     "eslint-plugin-prettier": "^4.0.0",
-    "flow-bin": "^0.165.1",
+    "flow-bin": "^0.183.0",
     "flow-copy-source": "^2.0.9",
     "jest": "^27.3.1"
   },

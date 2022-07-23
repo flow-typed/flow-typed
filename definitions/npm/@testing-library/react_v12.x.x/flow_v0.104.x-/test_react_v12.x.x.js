@@ -193,6 +193,12 @@ describe('render', () => {
     rerender(<Component />);
   });
 
+  it('matcher function should receive HTMLElement type elements', () => {
+    const a: IntersectionHTMLElement = getByText(
+      (_, node) => node.style.height === '100px'
+    );
+  });
+
   it('getByAltText should return HTML element', () => {
     const a: IntersectionHTMLElement = getByAltText('1');
   });

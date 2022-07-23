@@ -6,7 +6,7 @@ Flow-typed supports a config file to help you set various project level settings
 
 ## env
 
-`env` accepts an array of strings that map to environment definitions that you can you can find [here](https://github.com/flow-typed/flow-typed/tree/master/definitions/environments).
+`env` accepts an array of strings that map to environment definitions that you can you can find [here](https://github.com/flow-typed/flow-typed/tree/main/definitions/environments).
 
 ```js
 {

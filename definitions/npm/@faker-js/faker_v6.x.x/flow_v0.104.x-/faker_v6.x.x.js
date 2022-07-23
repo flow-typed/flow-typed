@@ -1,7 +1,7 @@
 declare module "@faker-js/faker" {
   declare type SeedType = number | $ReadOnlyArray<number>;
 
-  declare module.exports: {
+  declare type Faker = {
     seedValue: ?SeedType,
     seed: (SeedType) => void,
     setLocale: (string) => void,
@@ -310,4 +310,8 @@ declare module "@faker-js/faker" {
     },
     ...
   };
+
+  declare module.exports: {|
+    faker: Faker,
+  |};
 }

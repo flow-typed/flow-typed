@@ -1,5 +1,5 @@
 import { describe, it } from "flow-typed-test";
-import faker from "@faker-js/faker";
+import { faker } from "@faker-js/faker";
 
 describe("prototype", () => {
   faker.seed(12);

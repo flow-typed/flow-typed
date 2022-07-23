@@ -65,6 +65,15 @@ export const getNpmLibDefDirFromNested = (path: string): string => {
   return path.substring(0, path.indexOf(npmDefsDir) + npmDefsDir.length);
 };
 
+/**
+ * When in a nested directory of npm libdefs such as package/libdef dir
+ * find and return the root npm dir
+ */
+export const getNpmLibDefDirFromNested = (path: string): string => {
+  const npmDefsDir = '/npm/';
+  return path.substring(0, path.indexOf(npmDefsDir) + npmDefsDir.length);
+};
+
 async function extractLibDefsFromNpmPkgDir(
   pkgDirPath: string,
   scope: null | string,
@@ -427,15 +436,7 @@ export async function findNpmLibDef(
     flowVersion,
   });
 
-  return filteredLibDefs.length === 0
-    ? null
-    : filteredLibDefs.sort(o => {
-        // `deps_` prefixed definitions are prioritized
-        if (o.name.startsWith('deps_')) {
-          return -1;
-        }
-        return 0;
-      })[0];
+  return filteredLibDefs.length === 0 ? null : filteredLibDefs[0];
 }
 
 type InstalledNpmLibDef =

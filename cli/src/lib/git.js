@@ -137,7 +137,7 @@ export async function findLatestFileCommitHash(
   }
 }
 
-export async function rebaseRepoMaster(repoDirPath: string) {
+export async function rebaseRepoMainline(repoDirPath: string) {
   const gitPath = await getGitPath();
   await child_process
     .spawnP(gitPath, ['checkout', 'main'], {cwd: repoDirPath})
