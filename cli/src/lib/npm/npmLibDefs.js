@@ -154,10 +154,7 @@ async function extractLibDefsFromNpmPkgDir(
           }
 
           // Is this the libdef file?
-          if (
-            flowDirItem === libDefFileName ||
-            flowDirItem === libDefFileName.substring('deps_'.length)
-          ) {
+          if (flowDirItem === libDefFileName) {
             libDefFilePath = path.join(flowDirPath, flowDirItem);
             return;
           }
@@ -364,9 +361,7 @@ function filterLibDefs(
         case 'exact':
           const fullName = def.scope ? `${def.scope}/${def.name}` : def.name;
           filterMatch =
-            (filter.pkgName.toLowerCase() === fullName.toLowerCase() ||
-              `deps_${filter.pkgName.toLowerCase()}` ===
-                fullName.toLowerCase()) &&
+            filter.pkgName.toLowerCase() === fullName.toLowerCase() &&
             pkgVersionMatch(filter.pkgVersion, def.version);
           break;
         default:

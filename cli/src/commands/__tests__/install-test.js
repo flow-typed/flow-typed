@@ -1642,79 +1642,6 @@ declare type jsx$HTMLElementProps = {||}`;
         });
       });
 
-      it('installs deps_ prefix definition as priority if it exists', () => {
-        return fakeProjectEnv(async FLOWPROJ_DIR => {
-          // Create some dependencies
-          await Promise.all([
-            mkdirp(path.join(FLOWPROJ_DIR, 'src')),
-            writePkgJson(path.join(FLOWPROJ_DIR, 'package.json'), {
-              name: 'test',
-              devDependencies: {
-                'flow-bin': '^0.43.0',
-              },
-              dependencies: {
-                'a-override': '^1.0.0',
-                override: '^1.0.0',
-              },
-            }),
-            mkdirp(path.join(FLOWPROJ_DIR, 'node_modules', 'flow-bin')),
-            mkdirp(path.join(FLOWPROJ_DIR, 'node_modules', 'a-override')),
-            mkdirp(path.join(FLOWPROJ_DIR, 'node_modules', 'override')),
-          ]);
-
-          await touchFile(path.join(FLOWPROJ_DIR, 'src', '.flowconfig'));
-          await mkdirp(path.join(FLOWPROJ_DIR, 'src', 'flow-typed'));
-
-          // Run the install command
-          await run({
-            ...defaultRunProps,
-            rootDir: path.join(FLOWPROJ_DIR, 'src'),
-          });
-
-          // Installs libdef
-          expect(
-            await Promise.all([
-              fs.exists(
-                path.join(
-                  FLOWPROJ_DIR,
-                  'src',
-                  'flow-typed',
-                  'npm',
-                  'deps_override_v1.x.x.js',
-                ),
-              ),
-              fs.exists(
-                path.join(
-                  FLOWPROJ_DIR,
-                  'src',
-                  'flow-typed',
-                  'npm',
-                  'override_v1.x.x.js',
-                ),
-              ),
-              fs.exists(
-                path.join(
-                  FLOWPROJ_DIR,
-                  'src',
-                  'flow-typed',
-                  'npm',
-                  'deps_a-override_v1.x.x.js',
-                ),
-              ),
-              fs.exists(
-                path.join(
-                  FLOWPROJ_DIR,
-                  'src',
-                  'flow-typed',
-                  'npm',
-                  'a-override_v1.x.x.js',
-                ),
-              ),
-            ]),
-          ).toEqual([true, false, true, false]);
-        });
-      });
-
       it('can recursively install dependency definitions of dependencies', () => {
         return fakeProjectEnv(async FLOWPROJ_DIR => {
           // Create some dependencies
@@ -1760,7 +1687,7 @@ declare type jsx$HTMLElementProps = {||}`;
                   'src',
                   'flow-typed',
                   'npm',
-                  'deps_override_v1.x.x.js',
+                  'override_v1.x.x.js',
                 ),
               ),
               fs.exists(
@@ -1769,7 +1696,7 @@ declare type jsx$HTMLElementProps = {||}`;
                   'src',
                   'flow-typed',
                   'npm',
-                  'deps_a-override_v1.x.x.js',
+                  'a-override_v1.x.x.js',
                 ),
               ),
             ]),
