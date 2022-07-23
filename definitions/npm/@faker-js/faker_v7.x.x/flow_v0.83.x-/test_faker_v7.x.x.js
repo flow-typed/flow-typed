@@ -643,4 +643,190 @@ describe('@faker-js/faker', () => {
       faker.color.space('');
     });
   });
+
+  describe('commerce', () => {
+    test('color', () => {
+      (faker.commerce.color(): string);
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.commerce.color(): number);
+      // $FlowExpectedError[extra-arg]
+      faker.commerce.color('');
+    });
+
+    test('department', () => {
+      (faker.commerce.department(): string);
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.commerce.department(): number);
+      // $FlowExpectedError[extra-arg]
+      faker.commerce.department('');
+    });
+
+    test('department', () => {
+      (faker.commerce.price(): string);
+      faker.commerce.price(1);
+      faker.commerce.price(1, 2);
+      faker.commerce.price(1, 2, 3);
+      faker.commerce.price(1, 2, 3, '');
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.commerce.price(): number);
+      // $FlowExpectedError[incompatible-call]
+      faker.commerce.price('');
+      // $FlowExpectedError[incompatible-call]
+      faker.commerce.price(1, '');
+      // $FlowExpectedError[incompatible-call]
+      faker.commerce.price(1, 2, '');
+      // $FlowExpectedError[incompatible-call]
+      faker.commerce.price(1, 2, 3, 4);
+    });
+
+    test('product', () => {
+      (faker.commerce.product(): string);
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.commerce.product(): number);
+      // $FlowExpectedError[extra-arg]
+      faker.commerce.product('');
+    });
+
+    test('productAdjective', () => {
+      (faker.commerce.productAdjective(): string);
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.commerce.productAdjective(): number);
+      // $FlowExpectedError[extra-arg]
+      faker.commerce.productAdjective('');
+    });
+
+    test('productDescription', () => {
+      (faker.commerce.productDescription(): string);
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.commerce.productDescription(): number);
+      // $FlowExpectedError[extra-arg]
+      faker.commerce.productDescription('');
+    });
+
+    test('productMaterial', () => {
+      (faker.commerce.productMaterial(): string);
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.commerce.productMaterial(): number);
+      // $FlowExpectedError[extra-arg]
+      faker.commerce.productMaterial('');
+    });
+
+    test('productName', () => {
+      (faker.commerce.productName(): string);
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.commerce.productName(): number);
+      // $FlowExpectedError[extra-arg]
+      faker.commerce.productName('');
+    });
+  });
+
+  describe('company', () => {
+    test('bs', () => {
+      (faker.company.bs(): string);
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.company.bs(): number);
+      // $FlowExpectedError[extra-arg]
+      faker.company.bs('');
+    });
+
+    test('bsAdjective', () => {
+      (faker.company.bsAdjective(): string);
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.company.bsAdjective(): number);
+      // $FlowExpectedError[extra-arg]
+      faker.company.bsAdjective('');
+    });
+
+    test('bsBuzz', () => {
+      (faker.company.bsBuzz(): string);
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.company.bsBuzz(): number);
+      // $FlowExpectedError[extra-arg]
+      faker.company.bsBuzz('');
+    });
+
+    test('bsNoun', () => {
+      (faker.company.bsNoun(): string);
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.company.bsNoun(): number);
+      // $FlowExpectedError[extra-arg]
+      faker.company.bsNoun('');
+    });
+
+    test('catchPhrase', () => {
+      (faker.company.catchPhrase(): string);
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.company.catchPhrase(): number);
+      // $FlowExpectedError[extra-arg]
+      faker.company.catchPhrase('');
+    });
+
+    test('catchPhraseAdjective', () => {
+      (faker.company.catchPhraseAdjective(): string);
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.company.catchPhraseAdjective(): number);
+      // $FlowExpectedError[extra-arg]
+      faker.company.catchPhraseAdjective('');
+    });
+
+    test('catchPhraseDescriptor', () => {
+      (faker.company.catchPhraseDescriptor(): string);
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.company.catchPhraseDescriptor(): number);
+      // $FlowExpectedError[extra-arg]
+      faker.company.catchPhraseDescriptor('');
+    });
+
+    test('catchPhraseNoun', () => {
+      (faker.company.catchPhraseNoun(): string);
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.company.catchPhraseNoun(): number);
+      // $FlowExpectedError[extra-arg]
+      faker.company.catchPhraseNoun('');
+    });
+
+    test('companyName', () => {
+      (faker.company.companyName(): string);
+      faker.company.companyName(123);
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.company.companyName(): number);
+      // $FlowExpectedError[incompatible-call]
+      faker.company.companyName('');
+    });
+
+    test('companySuffix', () => {
+      (faker.company.companySuffix(): string);
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.company.companySuffix(): number);
+      // $FlowExpectedError[extra-arg]
+      faker.company.companySuffix('');
+    });
+
+    test('suffixes', () => {
+      (faker.company.suffixes(): Array<string>);
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.company.suffixes(): number);
+      // $FlowExpectedError[extra-arg]
+      faker.company.suffixes('');
+    });
+  });
 });
