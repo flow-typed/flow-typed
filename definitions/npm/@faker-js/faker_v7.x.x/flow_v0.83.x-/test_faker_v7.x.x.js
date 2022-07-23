@@ -829,4 +829,51 @@ describe('@faker-js/faker', () => {
       faker.company.suffixes('');
     });
   });
+
+  describe('database', () => {
+    test('collation', () => {
+      (faker.database.collation(): string);
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.database.collation(): number);
+      // $FlowExpectedError[extra-arg]
+      faker.database.collation('');
+    });
+
+    test('column', () => {
+      (faker.database.column(): string);
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.database.column(): number);
+      // $FlowExpectedError[extra-arg]
+      faker.database.column('');
+    });
+
+    test('engine', () => {
+      (faker.database.engine(): string);
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.database.engine(): number);
+      // $FlowExpectedError[extra-arg]
+      faker.database.engine('');
+    });
+
+    test('mongodbObjectId', () => {
+      (faker.database.mongodbObjectId(): string);
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.database.mongodbObjectId(): number);
+      // $FlowExpectedError[extra-arg]
+      faker.database.mongodbObjectId('');
+    });
+
+    test('type', () => {
+      (faker.database.type(): string);
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.database.type(): number);
+      // $FlowExpectedError[extra-arg]
+      faker.database.type('');
+    });
+  });
 });
