@@ -1,6 +1,7 @@
 declare module 'redux-observable' {
-  import typeof { Observable } from 'rxjs';
   import type { MiddlewareAPI, Dispatch } from 'redux';
+
+  declare type Observable = $Exports<'rxjs'>['Observable'];
 
   declare export type Epic<S, A, D> = (action$: ActionsObservable<A>, store: MiddlewareAPI<S, A>, dependencies: D) => Observable<A>;
 

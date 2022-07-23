@@ -1,6 +1,6 @@
 {
   "deps": {
     "redux": ["v4.x.x"],
-    "rxjs": ["v7.x.x"]
+    "rxjs": ["v6.x.x"]
   }
 }
