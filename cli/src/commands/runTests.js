@@ -43,7 +43,7 @@ const BIN_PLATFORM = (_ => {
   }
 })();
 const PKG_ROOT_DIR = path.join(__dirname, '..', '..');
-const TEST_DIR = path.join(PKG_ROOT_DIR, '.test-dir');
+export const TEST_DIR: string = path.join(PKG_ROOT_DIR, '.test-dir');
 const BIN_DIR = path.join(PKG_ROOT_DIR, '.flow-bins-cache');
 const P = Promise;
 
@@ -331,11 +331,11 @@ async function getCachedFlowBinVersions(
   return versions.map(version => `v${version}`);
 }
 
-async function writeFlowConfig(
-  repoDirPath,
-  testDirPath,
-  libDefPath,
-  version,
+export async function writeFlowConfig(
+  repoDirPath: string,
+  testDirPath: string,
+  libDefPath: string,
+  version: string,
   depPaths: Array<string>,
 ) {
   // /!\---------------------------------------------------------------------/!\
