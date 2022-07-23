@@ -2,7 +2,7 @@
 
 ## What is it?
 
-> flow-typed is a [repository](https://github.com/flow-typed/flow-typed/tree/master/definitions)
+> flow-typed is a [repository](https://github.com/flow-typed/flow-typed/tree/main/definitions)
 of third-party [library interface definitions](https://flow.org/en/docs/libdefs)
 for use with [Flow](http://flow.org).
 

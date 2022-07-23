@@ -30,7 +30,7 @@ Contributing library definitions is as easy as sending a pull request!
 ## Understanding the definitions structure
 
 All definitions sit under the
-[/definitions](https://github.com/flowtype/flow-typed/tree/master/definitions)
+[/definitions](https://github.com/flowtype/flow-typed/tree/main/definitions)
 directory. They all must follow the following directory structure and naming
 format:
 
@@ -151,11 +151,11 @@ reasonable degree. At minimum your tests should:
 1. Use the library definition in a couple of ways that are *expected* to produce
    a type error. Though type errors should fail your tests, you can add [error suppressions](https://flow.org/en/docs/errors/) to the line above just like you would in your own codebase.
 
-[Here](https://github.com/flow-typed/flow-typed/blob/master/definitions/npm/highlight.js_v8.x.x/test_highlight.js-v8.js)
+[Here](https://github.com/flow-typed/flow-typed/blob/main/definitions/npm/highlight.js_v8.x.x/test_highlight.js-v8.js)
 is an example of a nice and thorough test file. You don't necessarily have to be
 this thorough, but the more thorough you are the better!
 
-Sometimes you may want to break down your test suite instead of having one gigantic file. In that case you can actually write as many test files as you like as long as their names start with `test_`. [Redux](https://github.com/flow-typed/flow-typed/tree/master/definitions/npm/redux_v4.x.x/flow_v0.134.x-) followed this pattern.
+Sometimes you may want to break down your test suite instead of having one gigantic file. In that case you can actually write as many test files as you like as long as their names start with `test_`. [Redux](https://github.com/flow-typed/flow-typed/tree/main/definitions/npm/redux_v4.x.x/flow_v0.134.x-) followed this pattern.
 
 Alternatively you can add test files in the **package version directory** which will be run by
 the test-runner for *all* versions of flow the package version supports. Though general best practice as outlined above is using the **flow version directory**.

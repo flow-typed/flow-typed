@@ -1,5 +1,5 @@
 // @flow
-(require('../../lib/git'): any).rebaseRepoMaster = jest.fn();
+(require('../../lib/git'): any).rebaseRepoMainline = jest.fn();
 
 import {table} from 'table';
 import {

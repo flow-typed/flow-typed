@@ -84,7 +84,7 @@ export async function getDefinitionsDiff(): Promise<Array<string>> {
     if (
       stdout.split('\n').filter(o => o.startsWith('definitions/')).length === 0
     ) {
-      // We are probably already on master, so compare to the last commit.
+      // We are probably already on main, so compare to the last commit.
       const {stdout: headDiff} = await child_process.spawnP(gitPath, [
         'diff',
         'HEAD~1',
@@ -137,13 +137,13 @@ export async function findLatestFileCommitHash(
   }
 }
 
-export async function rebaseRepoMaster(repoDirPath: string) {
+export async function rebaseRepoMainline(repoDirPath: string) {
   const gitPath = await getGitPath();
   await child_process
     .spawnP(gitPath, ['checkout', 'main'], {cwd: repoDirPath})
     .catch(({stderr}) => {
       throw new Error(
-        'Error checking out the `master` branch of the following repo:\n' +
+        'Error checking out the `main` branch of the following repo:\n' +
           `${repoDirPath}\n\n${stderr}`,
       );
     });
@@ -155,7 +155,7 @@ export async function rebaseRepoMaster(repoDirPath: string) {
   } catch (e) {
     const {stderr} = e;
     throw new Error(
-      'Error rebasing the `master` branch of the following repo:\n' +
+      'Error rebasing the `main` branch of the following repo:\n' +
         `${repoDirPath}\n\n${stderr}`,
     );
   }

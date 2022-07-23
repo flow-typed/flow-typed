@@ -13,7 +13,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Make use of flow-typed.config.js for ignored (#4288)
 
 ### Changed
-- Consistent list logging (#4287) 
+- Consistent list logging (#4287)
 - Coerce cli version with semver to allow for prerelease tags (#4291)
 - Fix if dependency is resolved npm package (#4298)
 - Bump minimist from 1.2.0 to 1.2.6 in (#4293)
@@ -24,19 +24,19 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [3.7.0] 2022-02-21
 
 ### Added
-- New `outdated` command (#4171) 
+- New `outdated` command (#4171)
 
 ### Changed
-- CLI tool now ships with flowtypes (#4233) 
-- Install can match with alpha versions now (#4247) 
+- CLI tool now ships with flowtypes (#4233)
+- Install can match with alpha versions now (#4247)
 
 ### Fixed
 - Fix create def with scopes (#4234)
 - Fix buffer deprecation error (#4270)
-- Temporarily turn off validate-def checks against npm (#4249) 
-- Bump ajv from 6.11.0 to 6.12.6 in /cli (#4260) 
-- Bump node-fetch from 2.6.6 to 2.6.7 in /cli (#4254) 
-- Bump shelljs from 0.8.3 to 0.8.5 in /cli (#4237) 
+- Temporarily turn off validate-def checks against npm (#4249)
+- Bump ajv from 6.11.0 to 6.12.6 in /cli (#4260)
+- Bump node-fetch from 2.6.6 to 2.6.7 in /cli (#4254)
+- Bump shelljs from 0.8.3 to 0.8.5 in /cli (#4237)
 
 ## [3.6.1] 2022-01-09
 
@@ -249,7 +249,7 @@ A week after this release, all previous versions of `flow-typed` on npm will be 
 ### Added
 - Allow any file type (.md, .json) under `/definitions/npm/<library>_vx.x.x/` (#1962)
 - `describe` and `it` can now be importing from `'flow-typed-test'` in `_test` files (#1942)
-  - See [CONTRIBUTING.md](https://github.com/flow-typed/flow-typed/blob/master/CONTRIBUTING.md)
+  - See [CONTRIBUTING.md](https://github.com/flow-typed/flow-typed/blob/main/CONTRIBUTING.md)
 - Root directory option (-rootDir) to install command (#1835)
 
 ### Changed
