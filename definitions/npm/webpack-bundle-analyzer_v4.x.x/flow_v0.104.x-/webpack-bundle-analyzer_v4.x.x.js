@@ -9,7 +9,7 @@ declare module 'webpack-bundle-analyzer' {
     | ((assetName: string) => boolean)
     | Array<(assetName: string) => boolean>;
 
-  declare type  ToJsonOptionsObject = {|
+  declare type ToJsonOptionsObject = {|
     /** fallback value for stats options when an option is not defined (has precedence over local webpack defaults) */
     all?: boolean,
     /** Add asset Information */
@@ -174,6 +174,8 @@ declare module 'webpack-bundle-analyzer' {
   |};
 
   declare class BundleAnalyzerPlugin implements WebpackPluginInstance {
+    constructor(options?: Options): this;
+
     apply: (compiler: WebpackCompiler) => void;
   }
 
