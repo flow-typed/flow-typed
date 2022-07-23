@@ -1,12 +1,3 @@
-/**
- * @flow
- */
-
-type KoaRouter$Middleware = (
-  ctx: any,
-  next: () => Promise<void>
-) => Promise<void> | void;
-
 type KoaRouter$ParamMiddleware = (
   param: string,
   ctx: any,
@@ -14,6 +5,8 @@ type KoaRouter$ParamMiddleware = (
 ) => Promise<void> | void;
 
 declare module "koa-router" {
+  import type { Middleware } from 'koa';
+
   declare class Router {
     constructor(opts?: {
       prefix?: string,
@@ -26,89 +19,89 @@ declare module "koa-router" {
     get(
       name: string,
       route: string | string[],
-      handler: KoaRouter$Middleware
+      handler: Middleware
     ): this;
     get(
       route: string | string[],
-      ...middleware: Array<KoaRouter$Middleware>
+      ...middleware: Array<Middleware>
     ): this;
 
     patch(
       name: string,
       route: string | string[],
-      handler: KoaRouter$Middleware
+      handler: Middleware
     ): this;
     patch(
       route: string | string[],
-      ...middleware: Array<KoaRouter$Middleware>
+      ...middleware: Array<Middleware>
     ): this;
 
     post(
       name: string,
       route: string | string[],
-      handler: KoaRouter$Middleware
+      handler: Middleware
     ): this;
     post(
       route: string | string[],
-      ...middleware: Array<KoaRouter$Middleware>
+      ...middleware: Array<Middleware>
     ): this;
 
     put(
       name: string,
       route: string | string[],
-      handler: KoaRouter$Middleware
+      handler: Middleware
     ): this;
     put(
       route: string | string[],
-      ...middleware: Array<KoaRouter$Middleware>
+      ...middleware: Array<Middleware>
     ): this;
 
     delete(
       name: string,
       route: string | string[],
-      handler: KoaRouter$Middleware
+      handler: Middleware
     ): this;
     delete(
       route: string | string[],
-      ...middleware: Array<KoaRouter$Middleware>
+      ...middleware: Array<Middleware>
     ): this;
 
     del(
       name: string,
       route: string | string[],
-      handler: KoaRouter$Middleware
+      handler: Middleware
     ): this;
     del(
       route: string | string[],
-      ...middleware: Array<KoaRouter$Middleware>
+      ...middleware: Array<Middleware>
     ): this;
 
     all(
       name: string,
       route: string | string[],
-      handler: KoaRouter$Middleware
+      handler: Middleware
     ): this;
     all(
       route: string | string[],
-      ...middleware: Array<KoaRouter$Middleware>
+      ...middleware: Array<Middleware>
     ): this;
 
-    use(...middleware: Array<KoaRouter$Middleware>): this;
+    use(...middleware: Array<Middleware>): this;
     use(
       path: string | Array<string>,
-      ...middleware: Array<KoaRouter$Middleware>
+      ...middleware: Array<Middleware>
     ): this;
 
     prefix(prefix: string): this;
 
-    routes(): KoaRouter$Middleware;
+    routes(): Middleware;
 
     allowedMethods(options?: {
       throw?: boolean,
       notImplemented?: () => any,
       methodNotAllowed?: () => any,
       ...
-    }): KoaRouter$Middleware;
+    }): Middleware;
 
     param(param: string, middleware: KoaRouter$ParamMiddleware): this;
 
