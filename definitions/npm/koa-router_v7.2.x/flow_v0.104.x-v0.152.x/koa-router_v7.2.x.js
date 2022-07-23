@@ -1,11 +1,14 @@
-type KoaRouter$ParamMiddleware = (
-  param: string,
-  ctx: any,
-  next: () => Promise<void>
-) => Promise<void> | void;
-
 declare module "koa-router" {
-  import type { Middleware } from 'koa';
+  import type { Context, Middleware } from 'koa';
+
+  /**
+   * Same as Middleware but has extra param arg
+   */
+  declare type KoaRouter$ParamMiddleware = (
+    param: string,
+    ctx: Context,
+    next: () => Promise<void>
+  ) => Promise<void> | void;
 
   declare class Router {
     constructor(opts?: {
