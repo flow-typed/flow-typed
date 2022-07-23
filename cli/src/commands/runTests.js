@@ -689,11 +689,11 @@ async function runTestGroup(
         const depGroup = [];
         for (let i = 0, len = longestDep; i < len; i++) {
           const newGroup = [];
-          mappedDepPaths.forEach(o => {
-            if (!o[i]) {
-              newGroup.push(o[0]);
+          mappedDepPaths.forEach(depPaths => {
+            if (!depPaths[i]) {
+              newGroup.push(depPaths[0]);
             } else {
-              newGroup.push(o[i]);
+              newGroup.push(depPaths[i]);
             }
           });
           depGroup.push(newGroup);
@@ -737,6 +737,10 @@ async function runTests(
         return true;
       }
 
+      // For a definition, if their dependencies have modifications
+      // we should run tests against the definition to ensure changes
+      // to the dependency has not broken it's dependents
+      // by adding the matched definition to the test group.
       const depsList = Object.keys(testGroup.deps);
       if (depsList.length > 0) {
         return depsList.some(dep => {
