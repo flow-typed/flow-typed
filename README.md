@@ -24,6 +24,22 @@
   </a>
 </p>
 
+---
+
+## We're migrating our mainline from `master` to `main`
+
+And with that comes new features, most notably the support for **definition dependencies**.
+
+Learn how to add dependencies to a definition from the `main` branch [docs](https://github.com/flow-typed/flow-typed/blob/main/CONTRIBUTING.md#importing-types-from-other-libdefs) which can be consumed with the `v4` CLI.
+
+```bash
+$ yarn global add flow-typed@next
+# or
+$ npm install -g flow-typed@next
+```
+
+---
+
 Check out the [quick start](https://flow-typed.github.io/flow-typed/#/quickstart) page
 in the docs to get started. It will walk you through installing typedefs, using them,
 as well as writing and including your own.
