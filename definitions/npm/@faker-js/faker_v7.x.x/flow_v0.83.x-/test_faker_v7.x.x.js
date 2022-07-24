@@ -1760,4 +1760,271 @@ describe('@faker-js/faker', () => {
       faker.helpers.uniqueArray(faker.random.word, '');
     });
   });
+
+  describe('image', () => {
+    test('abstract', () => {
+      (faker.image.abstract(): string);
+      faker.image.abstract(1);
+      faker.image.abstract(1, 2);
+      faker.image.abstract(1, 2, true);
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.image.abstract(): number);
+      // $FlowExpectedError[incompatible-call]
+      faker.image.abstract('');
+      // $FlowExpectedError[incompatible-call]
+      faker.image.abstract(1, '');
+      // $FlowExpectedError[incompatible-call]
+      faker.image.abstract(1, 2, '');
+    });
+
+    test('animals', () => {
+      (faker.image.animals(): string);
+      faker.image.animals(1);
+      faker.image.animals(1, 2);
+      faker.image.animals(1, 2, true);
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.image.animals(): number);
+      // $FlowExpectedError[incompatible-call]
+      faker.image.animals('');
+      // $FlowExpectedError[incompatible-call]
+      faker.image.animals(1, '');
+      // $FlowExpectedError[incompatible-call]
+      faker.image.animals(1, 2, '');
+    });
+
+    test('avatar', () => {
+      (faker.image.avatar(): string);
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.image.avatar(): number);
+      // $FlowExpectedError[extra-arg]
+      faker.image.avatar('');
+    });
+
+    test('business', () => {
+      (faker.image.business(): string);
+      faker.image.business(1);
+      faker.image.business(1, 2);
+      faker.image.business(1, 2, true);
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.image.business(): number);
+      // $FlowExpectedError[incompatible-call]
+      faker.image.business('');
+      // $FlowExpectedError[incompatible-call]
+      faker.image.business(1, '');
+      // $FlowExpectedError[incompatible-call]
+      faker.image.business(1, 2, '');
+    });
+
+    test('cats', () => {
+      (faker.image.cats(): string);
+      faker.image.cats(1);
+      faker.image.cats(1, 2);
+      faker.image.cats(1, 2, true);
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.image.cats(): number);
+      // $FlowExpectedError[incompatible-call]
+      faker.image.cats('');
+      // $FlowExpectedError[incompatible-call]
+      faker.image.cats(1, '');
+      // $FlowExpectedError[incompatible-call]
+      faker.image.cats(1, 2, '');
+    });
+
+    test('city', () => {
+      (faker.image.city(): string);
+      faker.image.city(1);
+      faker.image.city(1, 2);
+      faker.image.city(1, 2, true);
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.image.city(): number);
+      // $FlowExpectedError[incompatible-call]
+      faker.image.city('');
+      // $FlowExpectedError[incompatible-call]
+      faker.image.city(1, '');
+      // $FlowExpectedError[incompatible-call]
+      faker.image.city(1, 2, '');
+    });
+
+    test('dataUri', () => {
+      (faker.image.dataUri(): string);
+      faker.image.dataUri(1);
+      faker.image.dataUri(1, 2);
+      faker.image.dataUri(1, 2, '');
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.image.dataUri(): number);
+      // $FlowExpectedError[incompatible-call]
+      faker.image.dataUri('');
+      // $FlowExpectedError[incompatible-call]
+      faker.image.dataUri(1, '');
+      // $FlowExpectedError[incompatible-call]
+      faker.image.dataUri(1, 2, true);
+    });
+
+    test('fashion', () => {
+      (faker.image.fashion(): string);
+      faker.image.fashion(1);
+      faker.image.fashion(1, 2);
+      faker.image.fashion(1, 2, true);
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.image.fashion(): number);
+      // $FlowExpectedError[incompatible-call]
+      faker.image.fashion('');
+      // $FlowExpectedError[incompatible-call]
+      faker.image.fashion(1, '');
+      // $FlowExpectedError[incompatible-call]
+      faker.image.fashion(1, 2, '');
+    });
+
+    test('food', () => {
+      (faker.image.food(): string);
+      faker.image.food(1);
+      faker.image.food(1, 2);
+      faker.image.food(1, 2, true);
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.image.food(): number);
+      // $FlowExpectedError[incompatible-call]
+      faker.image.food('');
+      // $FlowExpectedError[incompatible-call]
+      faker.image.food(1, '');
+      // $FlowExpectedError[incompatible-call]
+      faker.image.food(1, 2, '');
+    });
+
+    test('image', () => {
+      (faker.image.image(): string);
+      faker.image.image(1);
+      faker.image.image(1, 2);
+      faker.image.image(1, 2, true);
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.image.image(): number);
+      // $FlowExpectedError[incompatible-call]
+      faker.image.image('');
+      // $FlowExpectedError[incompatible-call]
+      faker.image.image(1, '');
+      // $FlowExpectedError[incompatible-call]
+      faker.image.image(1, 2, '');
+    });
+
+    test('imageUrl', () => {
+      (faker.image.imageUrl(): string);
+      faker.image.imageUrl(1);
+      faker.image.imageUrl(1, 2);
+      faker.image.imageUrl(1, 2, '');
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.image.imageUrl(): number);
+      // $FlowExpectedError[incompatible-call]
+      faker.image.imageUrl('');
+      // $FlowExpectedError[incompatible-call]
+      faker.image.imageUrl(1, '');
+      // $FlowExpectedError[incompatible-call]
+      faker.image.imageUrl(1, 2, true);
+    });
+
+    test('nature', () => {
+      (faker.image.nature(): string);
+      faker.image.nature(1);
+      faker.image.nature(1, 2);
+      faker.image.nature(1, 2, true);
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.image.nature(): number);
+      // $FlowExpectedError[incompatible-call]
+      faker.image.nature('');
+      // $FlowExpectedError[incompatible-call]
+      faker.image.nature(1, '');
+      // $FlowExpectedError[incompatible-call]
+      faker.image.nature(1, 2, '');
+    });
+
+    test('nightlife', () => {
+      (faker.image.nightlife(): string);
+      faker.image.nightlife(1);
+      faker.image.nightlife(1, 2);
+      faker.image.nightlife(1, 2, true);
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.image.nightlife(): number);
+      // $FlowExpectedError[incompatible-call]
+      faker.image.nightlife('');
+      // $FlowExpectedError[incompatible-call]
+      faker.image.nightlife(1, '');
+      // $FlowExpectedError[incompatible-call]
+      faker.image.nightlife(1, 2, '');
+    });
+
+    test('people', () => {
+      (faker.image.people(): string);
+      faker.image.people(1);
+      faker.image.people(1, 2);
+      faker.image.people(1, 2, true);
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.image.people(): number);
+      // $FlowExpectedError[incompatible-call]
+      faker.image.people('');
+      // $FlowExpectedError[incompatible-call]
+      faker.image.people(1, '');
+      // $FlowExpectedError[incompatible-call]
+      faker.image.people(1, 2, '');
+    });
+
+    test('sports', () => {
+      (faker.image.sports(): string);
+      faker.image.sports(1);
+      faker.image.sports(1, 2);
+      faker.image.sports(1, 2, true);
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.image.sports(): number);
+      // $FlowExpectedError[incompatible-call]
+      faker.image.sports('');
+      // $FlowExpectedError[incompatible-call]
+      faker.image.sports(1, '');
+      // $FlowExpectedError[incompatible-call]
+      faker.image.sports(1, 2, '');
+    });
+
+    test('technics', () => {
+      (faker.image.technics(): string);
+      faker.image.technics(1);
+      faker.image.technics(1, 2);
+      faker.image.technics(1, 2, true);
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.image.technics(): number);
+      // $FlowExpectedError[incompatible-call]
+      faker.image.technics('');
+      // $FlowExpectedError[incompatible-call]
+      faker.image.technics(1, '');
+      // $FlowExpectedError[incompatible-call]
+      faker.image.technics(1, 2, '');
+    });
+
+    test('transport', () => {
+      (faker.image.transport(): string);
+      faker.image.transport(1);
+      faker.image.transport(1, 2);
+      faker.image.transport(1, 2, true);
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.image.transport(): number);
+      // $FlowExpectedError[incompatible-call]
+      faker.image.transport('');
+      // $FlowExpectedError[incompatible-call]
+      faker.image.transport(1, '');
+      // $FlowExpectedError[incompatible-call]
+      faker.image.transport(1, 2, '');
+    });
+  });
 });
