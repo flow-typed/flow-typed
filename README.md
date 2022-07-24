@@ -38,6 +38,12 @@ $ yarn global add flow-typed@next
 $ npm install -g flow-typed@next
 ```
 
+### What's happening to `master`?
+
+Nothing for the most part! CLI versions < `v4` will still pull definitions from `master` so if you have library definitions that don't require dependencies we still recommend you contribute to `master` and it'll get periodically synced back to `main` for users >= `v4`.
+
+Eventually we will deprecate `master` in favour of `main`.
+
 ---
 
 Check out the [quick start](https://flow-typed.github.io/flow-typed/#/quickstart) page
