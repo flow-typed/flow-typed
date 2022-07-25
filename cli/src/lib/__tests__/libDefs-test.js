@@ -3,6 +3,7 @@ jest.enableAutomock();
 jest.unmock('../libDefs.js');
 jest.unmock('../semver.js');
 jest.unmock('semver');
+jest.unmock('simple-git');
 jest.unmock('../flowVersion');
 jest.unmock('colors/lib/styles');
 jest.unmock('wrappy');
