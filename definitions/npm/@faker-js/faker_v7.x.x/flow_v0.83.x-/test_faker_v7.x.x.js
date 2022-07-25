@@ -2027,4 +2027,203 @@ describe('@faker-js/faker', () => {
       faker.image.transport(1, 2, '');
     });
   });
+
+  describe('internet', () => {
+    test('avatar', () => {
+      (faker.internet.avatar(): string);
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.internet.avatar(): number);
+      // $FlowExpectedError[extra-arg]
+      faker.internet.avatar('');
+    });
+
+    test('color', () => {
+      (faker.internet.color(): string);
+      faker.internet.color(1);
+      faker.internet.color(1, 2);
+      faker.internet.color(1, 2, 3);
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.internet.color(): number);
+      // $FlowExpectedError[incompatible-call]
+      faker.internet.color('');
+      // $FlowExpectedError[incompatible-call]
+      faker.internet.color(1, '');
+      // $FlowExpectedError[incompatible-call]
+      faker.internet.color(1, 2, '');
+    });
+
+    test('domainName', () => {
+      (faker.internet.domainName(): string);
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.internet.domainName(): number);
+      // $FlowExpectedError[extra-arg]
+      faker.internet.domainName('');
+    });
+
+    test('domainSuffix', () => {
+      (faker.internet.domainSuffix(): string);
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.internet.domainSuffix(): number);
+      // $FlowExpectedError[extra-arg]
+      faker.internet.domainSuffix('');
+    });
+
+    test('domainWord', () => {
+      (faker.internet.domainWord(): string);
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.internet.domainWord(): number);
+      // $FlowExpectedError[extra-arg]
+      faker.internet.domainWord('');
+    });
+
+    test('email', () => {
+      (faker.internet.email(): string);
+      faker.internet.email('');
+      faker.internet.email('', '');
+      faker.internet.email('', '', '');
+      faker.internet.email('', '', '', {});
+      faker.internet.email('', '', '', {
+        allowSpecialCharacters: true,
+      });
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.internet.email(): number);
+      // $FlowExpectedError[incompatible-call]
+      faker.internet.email(1);
+      // $FlowExpectedError[incompatible-call]
+      faker.internet.email('', 2);
+      // $FlowExpectedError[incompatible-call]
+      faker.internet.email('', '', 3);
+      // $FlowExpectedError[incompatible-call]
+      faker.internet.email('', '', '', '');
+      // $FlowExpectedError[prop-missing]
+      faker.internet.email('', '', '', {
+        foo: 'bar',
+      });
+      faker.internet.email('', '', '', {
+        // $FlowExpectedError[incompatible-call]
+        allowSpecialCharacters: 'bar',
+      });
+    });
+
+    test('emoji', () => {
+      (faker.internet.emoji(): string);
+      faker.internet.emoji({});
+      faker.internet.emoji({
+        types: ['smiley'],
+      });
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.internet.emoji(): number);
+      // $FlowExpectedError[incompatible-call]
+      faker.internet.emoji('');
+      // $FlowExpectedError[prop-missing]
+      faker.internet.emoji({
+        foo: 'bar',
+      });
+      faker.internet.emoji({
+        // $FlowExpectedError[incompatible-call]
+        types: 'smiley',
+      });
+    });
+
+    test('exampleEmail', () => {
+      (faker.internet.exampleEmail(): string);
+      faker.internet.exampleEmail('');
+      faker.internet.exampleEmail('', '');
+      faker.internet.exampleEmail('', '', {});
+      faker.internet.exampleEmail('', '', {
+        allowSpecialCharacters: true,
+      });
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.internet.exampleEmail(): number);
+      // $FlowExpectedError[incompatible-call]
+      faker.internet.exampleEmail(1);
+      // $FlowExpectedError[incompatible-call]
+      faker.internet.exampleEmail('', 2);
+      // $FlowExpectedError[incompatible-call]
+      faker.internet.exampleEmail('', '', 3);
+      // $FlowExpectedError[prop-missing]
+      faker.internet.exampleEmail('', '', {
+        foo: 'bar',
+      });
+      faker.internet.exampleEmail('', '', {
+        // $FlowExpectedError[incompatible-call]
+        allowSpecialCharacters: 'bar',
+      });
+    });
+
+    test('httpMethod', () => {
+      (faker.internet.httpMethod(): 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH');
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.internet.httpMethod(): number);
+      // $FlowExpectedError[extra-arg]
+      faker.internet.httpMethod('');
+    });
+
+    test('httpStatusCode', () => {
+      (faker.internet.httpStatusCode(): number);
+      faker.internet.httpStatusCode({});
+      faker.internet.httpStatusCode({
+        types: ['informational'],
+      });
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.internet.httpStatusCode(): string);
+      // $FlowExpectedError[incompatible-call]
+      faker.internet.httpStatusCode('');
+      // $FlowExpectedError[prop-missing]
+      faker.internet.httpStatusCode({
+        foo: 'bar',
+      });
+      faker.internet.httpStatusCode({
+        // $FlowExpectedError[incompatible-call]
+        types: 'informational',
+      });
+    });
+
+    test('ip', () => {
+      (faker.internet.ip(): string);
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.internet.ip(): number);
+      // $FlowExpectedError[extra-arg]
+      faker.internet.ip('');
+    });
+
+    test('ipv4', () => {
+      (faker.internet.ipv4(): string);
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.internet.ipv4(): number);
+      // $FlowExpectedError[extra-arg]
+      faker.internet.ipv4('');
+    });
+
+    test('ipv6', () => {
+      (faker.internet.ipv6(): string);
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.internet.ipv6(): number);
+      // $FlowExpectedError[extra-arg]
+      faker.internet.ipv6('');
+    });
+
+    test('mac', () => {
+      (faker.internet.mac(): string);
+      faker.internet.mac('');
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.internet.mac(): number);
+      // $FlowExpectedError[incompatible-call]
+      faker.internet.mac(123);
+    });
+  });
 });

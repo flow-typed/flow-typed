@@ -302,7 +302,7 @@ declare module '@faker-js/faker' {
         types?: $ReadOnlyArray<EmojiType>,
       |}) => string,
       exampleEmail: (firstName?: string, lastName?: string, options?: {|
-        allowSpecialCharacters: boolean
+        allowSpecialCharacters?: boolean
       |}) => string,
       httpMethod: () => 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH';
       httpStatusCode:(options?: {|
