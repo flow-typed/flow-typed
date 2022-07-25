@@ -37,7 +37,7 @@ import {TEST_FILE_NAME_RE} from '../libDefs';
 
 const P = Promise;
 
-export type NpmLibDef = {|
+export type NpmLibDef = {
   scope: null | string,
   name: string,
   version: string,
@@ -47,14 +47,14 @@ export type NpmLibDef = {|
   depVersions: {
     [deps: string]: Array<string>,
   } | null,
-|};
+};
 
-export type NpmLibDefFilter = {|
+export type NpmLibDefFilter = {
   type: 'exact',
   pkgName: string,
   pkgVersion: string,
   flowVersion?: FlowVersion,
-|};
+};
 
 /**
  * When in a nested directory of npm libdefs such as package/libdef dir

@@ -84,7 +84,7 @@ async function extractEnvDefs(
   });
 
   if (!disjointFlowVersionsAll(parsedFlowDirs.map(([_, ver]) => ver))) {
-    throw new ValidationError('Flow versions not disjoint!');
+    throw new ValidationError(`Flow versions not disjoint on ${defName}!`);
   }
 
   if (parsedFlowDirs.length === 0) {
