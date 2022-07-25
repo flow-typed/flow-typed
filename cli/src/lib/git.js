@@ -9,11 +9,7 @@ const mainlineBranch = 'main';
 const isMainlineBranch = async (cacheDirPath: string): Promise<boolean> => {
   const git = simpleGit().cwd(cacheDirPath);
 
-  if ((await git.branch()).current === mainlineBranch) {
-    return true;
-  }
-
-  return false;
+  return (await git.branch()).current === mainlineBranch;
 };
 
 const checkoutToMainlineBranch = async (
