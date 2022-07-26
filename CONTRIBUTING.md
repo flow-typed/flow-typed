@@ -13,7 +13,7 @@ Contributing library definitions is as easy as sending a pull request!
   * [Run tests](#5-run-your-tests)
   * [Raise pull request](#6-send-a-pull-request)
   * [Environment definitions](environment-definitions)
-* [Writing libdefs best practices](#writing-libdefs-best-practices)
+* [Libdef best practices](#libdef-best-practices)
   * [Read flow docs](#read-flow-docs)
   * [Don't import types from other libdefs](#dont-import-types-from-other-libdefs)
   * [Avoid `any` when possible](#avoid-any-when-possible)
