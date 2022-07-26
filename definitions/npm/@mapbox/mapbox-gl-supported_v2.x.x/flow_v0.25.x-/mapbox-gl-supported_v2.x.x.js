@@ -1,5 +1,3 @@
-// @flow
-
 declare module '@mapbox/mapbox-gl-supported' {
   declare type OptionsT = {
     failIfMajorPerformanceCaveat: boolean,
