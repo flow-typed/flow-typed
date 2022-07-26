@@ -1,7 +1,5 @@
 // @flow
-
 import { describe, it } from 'flow-typed-test';
-
 import { extract, parse, stringify, parseUrl } from 'query-string';
 
 describe('query-string', () => {
@@ -38,6 +36,11 @@ describe('query-string', () => {
     it('should only accept exact ParserOptions type as second argument', () => {
       // $FlowExpectedError[prop-missing]: strict is not a parse option
       parse('test', { strict: true });
+    });
+
+    it('can be passed into stringify', () => {
+      const query = parse('?hello=world');
+      const search = stringify(query);
     });
   });
 
