@@ -19,7 +19,7 @@ declare module 'query-string' {
       query: { [name: string]: string | Array<string>, ... },
       ...
     },
-    stringify(obj: { [name: string]: mixed, ... }, options?: StringifyOptions): string,
+    stringify(obj: { [name: string]: any, ... }, options?: StringifyOptions): string,
     ...
   }
 }
