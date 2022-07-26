@@ -42,6 +42,7 @@
     "prettier": "^1.19.1",
     "rimraf": "^3.0.2",
     "semver": "7.3.2",
+    "simple-git": "^3.10.0",
     "table": "^6.7.3",
     "which": "^2.0.2",
     "yargs": "^15.1.0"

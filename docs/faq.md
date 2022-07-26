@@ -91,3 +91,23 @@ module.exports = {
   ignorePatterns: ['**/*.js'],
 };
 ```
+
+### When running `flow-typed install` I get `UNCAUGHT ERROR`
+
+If you are getting this error upon the cache rebase step you most likely have a corrupt cache.
+
+```
+• rebasing flow-typed cache...
+UNCAUGHT ERROR: [
+  {}
+]
+```
+
+Try clearing it and running a fresh install but if that doesn't work please raise an [issue](https://github.com/flow-typed/flow-typed/issues/new/choose) with us.
+
+```
+rm -rf ~/.flow-typed
+flow-typed install
+```
+
+> You shouldn't experience this unless you've been messing around in the cache itself
