@@ -286,8 +286,8 @@ declare module 'koa' {
     ...
   }
 
-  declare type Middleware =
-    (ctx: Context, next: () => Promise<void>) => Promise<void>|void;
+  declare type Middleware = (ctx: Context, next: () => Promise<void>) => Promise<void> | void;
+
   declare type ApplicationJSON = {
     'subdomainOffset': mixed,
     'proxy': mixed,

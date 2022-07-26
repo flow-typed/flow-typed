@@ -2,7 +2,7 @@
 
 import {mkdirp} from './fileUtils';
 
-import {cloneInto, rebaseRepoMaster} from './git';
+import {cloneInto, rebaseRepoMainline} from './git';
 
 import {fs, os, path} from './node';
 
@@ -49,7 +49,7 @@ async function rebaseCacheRepo() {
     (await fs.exists(getCacheRepoGitDir()))
   ) {
     try {
-      await rebaseRepoMaster(getCacheRepoDir());
+      await rebaseRepoMainline(getCacheRepoDir());
     } catch (e) {
       console.error(
         'ERROR: Unable to rebase the local cache repo. ' + e.message,
