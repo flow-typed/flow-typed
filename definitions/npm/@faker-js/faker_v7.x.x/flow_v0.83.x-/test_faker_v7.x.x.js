@@ -2757,4 +2757,98 @@ describe('@faker-js/faker', () => {
       faker.science.unit('');
     });
   });
+
+  describe('system', () => {
+    test('commonFileExt', () => {
+      (faker.system.commonFileExt(): string);
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.system.commonFileExt(): number);
+      // $FlowExpectedError[extra-arg]
+      faker.system.commonFileExt('');
+    });
+
+    test('commonFileName', () => {
+      (faker.system.commonFileName(): string);
+      faker.system.commonFileName('');
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.system.commonFileName(): number);
+      // $FlowExpectedError[incompatible-call]
+      faker.system.commonFileName(1);
+    });
+
+    test('commonFileType', () => {
+      (faker.system.commonFileType(): string);
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.system.commonFileType(): number);
+      // $FlowExpectedError[extra-arg]
+      faker.system.commonFileType('');
+    });
+
+    test('directoryPath', () => {
+      (faker.system.directoryPath(): string);
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.system.directoryPath(): number);
+      // $FlowExpectedError[extra-arg]
+      faker.system.directoryPath('');
+    });
+
+    test('fileExt', () => {
+      (faker.system.fileExt(): string);
+      faker.system.fileExt('');
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.system.fileExt(): number);
+      // $FlowExpectedError[incompatible-call]
+      faker.system.fileExt(1);
+    });
+
+    test('fileName', () => {
+      (faker.system.fileName(): string);
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.system.fileName(): number);
+      // $FlowExpectedError[extra-arg]
+      faker.system.fileName('');
+    });
+
+    test('filePath', () => {
+      (faker.system.filePath(): string);
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.system.filePath(): number);
+      // $FlowExpectedError[extra-arg]
+      faker.system.filePath('');
+    });
+
+    test('fileType', () => {
+      (faker.system.fileType(): string);
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.system.fileType(): number);
+      // $FlowExpectedError[extra-arg]
+      faker.system.fileType('');
+    });
+
+    test('mimeType', () => {
+      (faker.system.mimeType(): string);
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.system.mimeType(): number);
+      // $FlowExpectedError[extra-arg]
+      faker.system.mimeType('');
+    });
+
+    test('semver', () => {
+      (faker.system.semver(): string);
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.system.semver(): number);
+      // $FlowExpectedError[extra-arg]
+      faker.system.semver('');
+    });
+  });
 });
