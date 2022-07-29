@@ -2225,5 +2225,73 @@ describe('@faker-js/faker', () => {
       // $FlowExpectedError[incompatible-call]
       faker.internet.mac(123);
     });
+
+    test('password', () => {
+      (faker.internet.password(): string);
+      faker.internet.password(1);
+      faker.internet.password(1, true);
+      faker.internet.password(1, true, / /);
+      faker.internet.password(1, true, / /, '');
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.internet.password(): number);
+      // $FlowExpectedError[incompatible-call]
+      faker.internet.password('');
+      // $FlowExpectedError[incompatible-call]
+      faker.internet.password(1, '');
+      // $FlowExpectedError[incompatible-call]
+      faker.internet.password(1, true, '');
+      // $FlowExpectedError[incompatible-call]
+      faker.internet.password(1, true, / /, 1);
+    });
+
+    test('port', () => {
+      (faker.internet.port(): number);
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.internet.port(): string);
+      // $FlowExpectedError[extra-arg]
+      faker.internet.port('');
+    });
+
+    test('protocol', () => {
+      (faker.internet.protocol(): string);
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.internet.protocol(): number);
+      // $FlowExpectedError[extra-arg]
+      faker.internet.protocol('');
+    });
+
+    test('url', () => {
+      (faker.internet.url(): string);
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.internet.url(): number);
+      // $FlowExpectedError[extra-arg]
+      faker.internet.url('');
+    });
+
+    test('userAgent', () => {
+      (faker.internet.userAgent(): string);
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.internet.userAgent(): number);
+      // $FlowExpectedError[extra-arg]
+      faker.internet.userAgent('');
+    });
+
+    test('userName', () => {
+      (faker.internet.userName(): string);
+      faker.internet.userName('');
+      faker.internet.userName('', '');
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.internet.userName(): number);
+      // $FlowExpectedError[incompatible-call]
+      faker.internet.userName(1);
+      // $FlowExpectedError[incompatible-call]
+      faker.internet.userName('', 1);
+    });
   });
 });
