@@ -2559,4 +2559,54 @@ describe('@faker-js/faker', () => {
       faker.name.suffix('');
     });
   });
+
+  describe('phone', () => {
+    test('imei', () => {
+      (faker.phone.imei(): string);
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.phone.imei(): number);
+      // $FlowExpectedError[extra-arg]
+      faker.phone.imei('');
+    });
+
+    test('number', () => {
+      (faker.phone.number(): string);
+      faker.phone.number('');
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.phone.number(): number);
+      // $FlowExpectedError[incompatible-call]
+      faker.phone.number(1);
+    });
+
+    test('phoneFormats', () => {
+      (faker.phone.phoneFormats(): string);
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.phone.phoneFormats(): number);
+      // $FlowExpectedError[extra-arg]
+      faker.phone.phoneFormats('');
+    });
+
+    test('phoneNumber', () => {
+      (faker.phone.phoneNumber(): string);
+      faker.phone.phoneNumber('');
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.phone.phoneNumber(): number);
+      // $FlowExpectedError[incompatible-call]
+      faker.phone.phoneNumber(1);
+    });
+
+    test('phoneNumberFormat', () => {
+      (faker.phone.phoneNumberFormat(): string);
+      faker.phone.phoneNumberFormat(1);
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.phone.phoneNumberFormat(): number);
+      // $FlowExpectedError[incompatible-call]
+      faker.phone.phoneNumberFormat('');
+    });
+  });
 });
