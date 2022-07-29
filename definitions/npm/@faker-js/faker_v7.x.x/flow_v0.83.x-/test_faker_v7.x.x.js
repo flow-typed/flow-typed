@@ -2851,4 +2851,87 @@ describe('@faker-js/faker', () => {
       faker.system.semver('');
     });
   });
+
+  describe('vehicle', () => {
+    test('bicycle', () => {
+      (faker.vehicle.bicycle(): string);
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.vehicle.bicycle(): number);
+      // $FlowExpectedError[extra-arg]
+      faker.vehicle.bicycle('');
+    });
+
+    test('color', () => {
+      (faker.vehicle.color(): string);
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.vehicle.color(): number);
+      // $FlowExpectedError[extra-arg]
+      faker.vehicle.color('');
+    });
+
+    test('fuel', () => {
+      (faker.vehicle.fuel(): string);
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.vehicle.fuel(): number);
+      // $FlowExpectedError[extra-arg]
+      faker.vehicle.fuel('');
+    });
+
+    test('manufacturer', () => {
+      (faker.vehicle.manufacturer(): string);
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.vehicle.manufacturer(): number);
+      // $FlowExpectedError[extra-arg]
+      faker.vehicle.manufacturer('');
+    });
+
+    test('model', () => {
+      (faker.vehicle.model(): string);
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.vehicle.model(): number);
+      // $FlowExpectedError[extra-arg]
+      faker.vehicle.model('');
+    });
+
+    test('type', () => {
+      (faker.vehicle.type(): string);
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.vehicle.type(): number);
+      // $FlowExpectedError[extra-arg]
+      faker.vehicle.type('');
+    });
+
+    test('vehicle', () => {
+      (faker.vehicle.vehicle(): string);
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.vehicle.vehicle(): number);
+      // $FlowExpectedError[extra-arg]
+      faker.vehicle.vehicle('');
+    });
+
+    test('vin', () => {
+      (faker.vehicle.vin(): string);
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.vehicle.vin(): number);
+      // $FlowExpectedError[extra-arg]
+      faker.vehicle.vin('');
+    });
+
+    test('vrm', () => {
+      (faker.vehicle.vrm(): string);
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.vehicle.vrm(): number);
+      // $FlowExpectedError[extra-arg]
+      faker.vehicle.vrm('');
+    });
+  });
 });
