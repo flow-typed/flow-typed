@@ -2934,4 +2934,76 @@ describe('@faker-js/faker', () => {
       faker.vehicle.vrm('');
     });
   });
+
+  describe('word', () => {
+    test('adjective', () => {
+      (faker.word.adjective(): string);
+      faker.word.adjective(1);
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.word.adjective(): number);
+      // $FlowExpectedError[incompatible-call]
+      faker.word.adjective('');
+    });
+
+    test('adverb', () => {
+      (faker.word.adverb(): string);
+      faker.word.adverb(1);
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.word.adverb(): number);
+      // $FlowExpectedError[incompatible-call]
+      faker.word.adverb('');
+    });
+
+    test('conjunction', () => {
+      (faker.word.conjunction(): string);
+      faker.word.conjunction(1);
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.word.conjunction(): number);
+      // $FlowExpectedError[incompatible-call]
+      faker.word.conjunction('');
+    });
+
+    test('interjection', () => {
+      (faker.word.interjection(): string);
+      faker.word.interjection(1);
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.word.interjection(): number);
+      // $FlowExpectedError[incompatible-call]
+      faker.word.interjection('');
+    });
+
+    test('noun', () => {
+      (faker.word.noun(): string);
+      faker.word.noun(1);
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.word.noun(): number);
+      // $FlowExpectedError[incompatible-call]
+      faker.word.noun('');
+    });
+
+    test('preposition', () => {
+      (faker.word.preposition(): string);
+      faker.word.preposition(1);
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.word.preposition(): number);
+      // $FlowExpectedError[incompatible-call]
+      faker.word.preposition('');
+    });
+
+    test('verb', () => {
+      (faker.word.verb(): string);
+      faker.word.verb(1);
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.word.verb(): number);
+      // $FlowExpectedError[incompatible-call]
+      faker.word.verb('');
+    });
+  });
 });
