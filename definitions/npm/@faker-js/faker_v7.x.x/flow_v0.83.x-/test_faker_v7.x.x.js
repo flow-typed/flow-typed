@@ -2446,4 +2446,117 @@ describe('@faker-js/faker', () => {
       faker.music.songName('');
     });
   });
+
+  describe('name', () => {
+    test('findName', () => {
+      (faker.name.findName(): string);
+      faker.name.findName('');
+      faker.name.findName('', '');
+      faker.name.findName('', '', 'male');
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.name.findName(): number);
+      // $FlowExpectedError[incompatible-call]
+      faker.name.findName(1, '');
+      // $FlowExpectedError[incompatible-call]
+      faker.name.findName('', 1);
+      // $FlowExpectedError[incompatible-call]
+      faker.name.findName('', '', 'test');
+    });
+
+    test('firstName', () => {
+      (faker.name.firstName(): string);
+      faker.name.firstName('male');
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.name.firstName(): number);
+      // $FlowExpectedError[incompatible-call]
+      faker.name.firstName('test');
+    });
+
+    test('gender', () => {
+      (faker.name.gender(): string);
+      faker.name.gender(true);
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.name.gender(): number);
+      // $FlowExpectedError[incompatible-call]
+      faker.name.gender('test');
+    });
+
+    test('jobArea', () => {
+      (faker.name.jobArea(): string);
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.name.jobArea(): number);
+      // $FlowExpectedError[extra-arg]
+      faker.name.jobArea('');
+    });
+
+    test('jobDescriptor', () => {
+      (faker.name.jobDescriptor(): string);
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.name.jobDescriptor(): number);
+      // $FlowExpectedError[extra-arg]
+      faker.name.jobDescriptor('');
+    });
+
+    test('jobTitle', () => {
+      (faker.name.jobTitle(): string);
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.name.jobTitle(): number);
+      // $FlowExpectedError[extra-arg]
+      faker.name.jobTitle('');
+    });
+
+    test('jobType', () => {
+      (faker.name.jobType(): string);
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.name.jobType(): number);
+      // $FlowExpectedError[extra-arg]
+      faker.name.jobType('');
+    });
+
+    test('lastName', () => {
+      (faker.name.lastName(): string);
+      faker.name.lastName('male');
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.name.lastName(): number);
+      // $FlowExpectedError[incompatible-call]
+      faker.name.lastName('test');
+    });
+
+    test('middleName', () => {
+      (faker.name.middleName(): string);
+      faker.name.middleName('male');
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.name.middleName(): number);
+      // $FlowExpectedError[incompatible-call]
+      faker.name.middleName('test');
+    });
+
+    test('prefix', () => {
+      (faker.name.prefix(): string);
+      faker.name.prefix('male');
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.name.prefix(): number);
+      // $FlowExpectedError[incompatible-call]
+      faker.name.prefix('test');
+    });
+
+    test('suffix', () => {
+      (faker.name.suffix(): string);
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.name.suffix(): number);
+      // $FlowExpectedError[extra-arg]
+      faker.name.suffix('');
+    });
+  });
 });

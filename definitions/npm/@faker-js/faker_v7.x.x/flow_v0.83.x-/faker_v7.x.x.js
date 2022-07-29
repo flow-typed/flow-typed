@@ -340,6 +340,9 @@ declare module '@faker-js/faker' {
       songName: () => string,
     |},
     name: {|
+      /**
+       * @deprecated
+       */
       findName: (firstName?: string, lastName?: string, gender?: GenderType) => string,
       firstName: (gender?: GenderType) => string,
       gender: (binary?: boolean) => string,
