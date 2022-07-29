@@ -2426,4 +2426,24 @@ describe('@faker-js/faker', () => {
       faker.mersenne.seed_array(['']);
     });
   });
+
+  describe('music', () => {
+    test('genre', () => {
+      (faker.music.genre(): string);
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.music.genre(): number);
+      // $FlowExpectedError[extra-arg]
+      faker.music.genre('');
+    });
+
+    test('songName', () => {
+      (faker.music.songName(): string);
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.music.songName(): number);
+      // $FlowExpectedError[extra-arg]
+      faker.music.songName('');
+    });
+  });
 });
