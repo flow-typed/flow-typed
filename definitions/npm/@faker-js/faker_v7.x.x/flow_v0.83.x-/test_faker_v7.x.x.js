@@ -2730,4 +2730,31 @@ describe('@faker-js/faker', () => {
       faker.random.words('');
     });
   });
+
+  describe('science', () => {
+    test('chemicalElement', () => {
+      (faker.science.chemicalElement(): {|
+        symbol: string,
+        name: string,
+        atomicNumber: number,
+      |});
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.science.chemicalElement(): number);
+      // $FlowExpectedError[extra-arg]
+      faker.science.chemicalElement('');
+    });
+
+    test('unit', () => {
+      (faker.science.unit(): {|
+        symbol: string,
+        name: string,
+      |});
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.science.unit(): number);
+      // $FlowExpectedError[extra-arg]
+      faker.science.unit('');
+    });
+  });
 });
