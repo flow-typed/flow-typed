@@ -2294,4 +2294,101 @@ describe('@faker-js/faker', () => {
       faker.internet.userName('', 1);
     });
   });
+
+  describe('lorem', () => {
+    test('lines', () => {
+      (faker.lorem.lines(): string);
+      faker.lorem.lines(1);
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.lorem.lines(): number);
+      // $FlowExpectedError[incompatible-call]
+      faker.lorem.lines('');
+    });
+
+    test('paragraph', () => {
+      (faker.lorem.paragraph(): string);
+      faker.lorem.paragraph(1);
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.lorem.paragraph(): number);
+      // $FlowExpectedError[incompatible-call]
+      faker.lorem.paragraph('');
+    });
+
+    test('paragraphs', () => {
+      (faker.lorem.paragraphs(): string);
+      faker.lorem.paragraphs(1);
+      faker.lorem.paragraphs(1, '');
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.lorem.paragraphs(): number);
+      // $FlowExpectedError[incompatible-call]
+      faker.lorem.paragraphs('');
+      // $FlowExpectedError[incompatible-call]
+      faker.lorem.paragraphs(1, 1);
+    });
+
+    test('sentence', () => {
+      (faker.lorem.sentence(): string);
+      faker.lorem.sentence(1);
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.lorem.sentence(): number);
+      // $FlowExpectedError[incompatible-call]
+      faker.lorem.sentence('');
+    });
+
+    test('sentences', () => {
+      (faker.lorem.sentences(): string);
+      faker.lorem.sentences(1);
+      faker.lorem.sentences(1, '');
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.lorem.sentences(): number);
+      // $FlowExpectedError[incompatible-call]
+      faker.lorem.sentences('');
+      // $FlowExpectedError[incompatible-call]
+      faker.lorem.sentences(1, 1);
+    });
+
+    test('slug', () => {
+      (faker.lorem.slug(): string);
+      faker.lorem.slug(1);
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.lorem.slug(): number);
+      // $FlowExpectedError[incompatible-call]
+      faker.lorem.slug('');
+    });
+
+    test('text', () => {
+      (faker.lorem.text(): string);
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.lorem.text(): number);
+      // $FlowExpectedError[extra-arg]
+      faker.lorem.text('');
+    });
+
+    test('word', () => {
+      (faker.lorem.word(): string);
+      faker.lorem.word(1);
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.lorem.word(): number);
+      // $FlowExpectedError[incompatible-call]
+      faker.lorem.word('');
+    });
+
+    test('words', () => {
+      (faker.lorem.words(): string);
+      faker.lorem.words(1);
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.lorem.words(): number);
+      // $FlowExpectedError[incompatible-call]
+      faker.lorem.words('');
+    });
+  });
 });
