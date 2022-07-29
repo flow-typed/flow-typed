@@ -2391,4 +2391,39 @@ describe('@faker-js/faker', () => {
       faker.lorem.words('');
     });
   });
+
+  describe('mersenne', () => {
+    test('rand', () => {
+      (faker.mersenne.rand(): number);
+      faker.mersenne.rand(1);
+      faker.mersenne.rand(1, 2);
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.mersenne.rand(): string);
+      // $FlowExpectedError[incompatible-call]
+      faker.mersenne.rand('');
+      // $FlowExpectedError[incompatible-call]
+      faker.mersenne.rand(1, '');
+    });
+
+    test('seed', () => {
+      (faker.mersenne.seed(1): void);
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.mersenne.seed(1): string);
+      // $FlowExpectedError[incompatible-call]
+      faker.mersenne.seed('');
+    });
+
+    test('seed_array', () => {
+      (faker.mersenne.seed_array([1]): void);
+
+      // $FlowExpectedError[incompatible-cast]
+      (faker.mersenne.seed_array([1]): string);
+      // $FlowExpectedError[incompatible-call]
+      faker.mersenne.seed_array('');
+      // $FlowExpectedError[incompatible-call]
+      faker.mersenne.seed_array(['']);
+    });
+  });
 });
