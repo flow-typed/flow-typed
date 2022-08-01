@@ -4,6 +4,8 @@ We recommend installing the CLI globally.
 
 ```bash
 $ yarn global add flow-typed
+# or
+$ npm install -g flow-typed
 ```
 
 ## Initialize
