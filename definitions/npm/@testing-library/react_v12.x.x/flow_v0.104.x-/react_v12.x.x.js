@@ -276,10 +276,12 @@ declare module '@testing-library/react' {
     & HTMLSelectElement;
   // End mixed html types
 
+  declare type MaybeIntersectionHTMLElement = null | IntersectionHTMLElement;
+
   declare type QueryByBoundAttribute = (
     text: Matcher,
     options?: MatcherOptions
-  ) => ?IntersectionHTMLElement;
+  ) => MaybeIntersectionHTMLElement;
 
   declare type AllByBoundAttribute = (
     text: Matcher,
@@ -306,7 +308,7 @@ declare module '@testing-library/react' {
   declare type QueryByText = (
     text: Matcher,
     options?: SelectorMatcherOptions
-  ) => ?IntersectionHTMLElement;
+  ) => MaybeIntersectionHTMLElement;
 
   declare type AllByText = (
     text: Matcher,
@@ -593,7 +595,7 @@ declare module '@testing-library/react' {
     container: UnionHTMLElement,
     id: Matcher,
     options?: MatcherOptions
-  ): ?IntersectionHTMLElement;
+  ): MaybeIntersectionHTMLElement;
   declare export function getByTestId(
     container: UnionHTMLElement,
     id: Matcher,
@@ -603,7 +605,7 @@ declare module '@testing-library/react' {
     container: UnionHTMLElement,
     text: Matcher,
     options?: MatcherOptions
-  ): ?IntersectionHTMLElement;
+  ): MaybeIntersectionHTMLElement;
   declare export function getByText(
     container: UnionHTMLElement,
     text: Matcher,
@@ -613,7 +615,7 @@ declare module '@testing-library/react' {
     container: UnionHTMLElement,
     text: Matcher,
     options?: MatcherOptions
-  ): ?IntersectionHTMLElement;
+  ): MaybeIntersectionHTMLElement;
   declare export function getByPlaceholderText(
     container: UnionHTMLElement,
     text: Matcher,
@@ -623,7 +625,7 @@ declare module '@testing-library/react' {
     container: UnionHTMLElement,
     text: Matcher,
     options?: MatcherOptions
-  ): ?IntersectionHTMLElement;
+  ): MaybeIntersectionHTMLElement;
   declare export function getByLabelText(
     container: UnionHTMLElement,
     text: Matcher,
@@ -633,7 +635,7 @@ declare module '@testing-library/react' {
     container: UnionHTMLElement,
     text: Matcher,
     options?: MatcherOptions
-  ): ?IntersectionHTMLElement;
+  ): MaybeIntersectionHTMLElement;
   declare export function getByAltText(
     container: UnionHTMLElement,
     text: Matcher,
