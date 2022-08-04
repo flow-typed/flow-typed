@@ -1,0 +1,5 @@
+{
+  "deps": {
+    "aria-query": ["v5.x.x"]
+  }
+}
