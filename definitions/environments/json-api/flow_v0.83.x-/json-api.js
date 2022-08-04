@@ -1,3 +1,9 @@
+/**
+ * A collection of flow types representing json:api
+ *
+ * Visit https://jsonapi.org/ to learn more about the specification
+ */
+
 declare type JsonApi$Json =
 	| null
 	| void
@@ -7,7 +13,7 @@ declare type JsonApi$Json =
 	| { [key: string]: JsonApi$Json }
 	| Array<JsonApi$Json>;
 
-declare type JsonApi$Meta = { [key: string]: Json };
+declare type JsonApi$Meta = { [key: string]: JsonApi$Json };
 
 declare type JsonApi$Link =
 	| string
@@ -48,18 +54,18 @@ declare type JsonApi$Error = {|
 
 declare type JsonApi$Object = {|
 	version?: string,
-	meta?: JsonApi$ApiMeta,
+	meta?: JsonApi$Meta,
 |};
 
 declare type JsonApi$Attributes = {
-	[key: string]: JSON,
+	[key: string]: JsonApi$Json,
   ...
 };
 
 declare type JsonApi$ResourceIdentifier = {|
 	id: string,
 	type: string,
-	meta?: JsonApi$ApiMeta,
+	meta?: JsonApi$Meta,
 |};
 
 declare type JsonApi$ResourceLinkage =
