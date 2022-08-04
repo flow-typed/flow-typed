@@ -275,6 +275,7 @@ declare module 'knex' {
     routine: string,
     ...
   };
+  declare type Transaction<R> = Knex$Transaction<R>;
   declare type Knex = Knex$Knex<any>;
   declare type $QueryBuilder<R> = Knex$QueryBuilder<R>;
   declare module.exports: typeof Knex$Knex;
