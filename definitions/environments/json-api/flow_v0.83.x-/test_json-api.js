@@ -98,4 +98,168 @@ describe('json-api', () => {
       first: 1,
     }: JsonApi$PaginationLinks);
   });
+
+  test('JsonApi$Error', () => {
+    ({ ...null }: JsonApi$Error);
+    ({
+      id: 'test',
+      links: {
+        about: {
+          href: 'test',
+        },
+      },
+      status: 'test',
+      code: 'test',
+      title: 'test',
+      detail: 'test',
+      source: {
+        pointer: 'test',
+        parameter: 'test',
+      },
+      meta: {
+        foo: null,
+      },
+    }: JsonApi$Error);
+
+    ({
+      // $FlowExpectedError[incompatible-cast]
+      id: 1,
+    }: JsonApi$Error);
+    ({
+      // $FlowExpectedError[incompatible-cast]
+      links: 'test',
+    }: JsonApi$Error);
+    ({
+      // $FlowExpectedError[incompatible-cast]
+      status: 1,
+    }: JsonApi$Error);
+    ({
+      // $FlowExpectedError[incompatible-cast]
+      code: 1,
+    }: JsonApi$Error);
+    ({
+      // $FlowExpectedError[incompatible-cast]
+      title: 1,
+    }: JsonApi$Error);
+    ({
+      // $FlowExpectedError[incompatible-cast]
+      detail: 1,
+    }: JsonApi$Error);
+    ({
+      // $FlowExpectedError[incompatible-cast]
+      source: 1,
+    }: JsonApi$Error);
+    // $FlowExpectedError[prop-missing]
+    ({
+      source: {
+        foo: 'test',
+      },
+    }: JsonApi$Error);
+    ({
+      // $FlowExpectedError[incompatible-cast]
+      meta: 'test',
+    }: JsonApi$Error);
+  });
+
+  test('JsonApi$Object', () => {
+    ({ ...null }: JsonApi$Object);
+    ({
+      version: 'test',
+      meta: {
+        foo: 'test',
+      }
+    }: JsonApi$Object);
+
+    ({
+      // $FlowExpectedError[incompatible-cast]
+      version: 1,
+    }: JsonApi$Object);
+    ({
+      // $FlowExpectedError[incompatible-cast]
+      meta: 1,
+    }: JsonApi$Object);
+    // $FlowExpectedError[prop-missing]
+    ({
+      foo: 'test',
+    }: JsonApi$Object);
+  });
+
+  test('JsonApi$Attributes', () => {
+    ({}: JsonApi$Attributes);
+    ({
+      foo: '',
+      bar: {},
+      baz: null,
+    }: JsonApi$Attributes);
+
+    // $FlowExpectedError[incompatible-function-indexer]
+    (() => {}: JsonApi$Attributes);
+  });
+
+  test('JsonApi$ResourceIdentifier', () => {
+    ({
+      id: 'test',
+      type: 'test',
+    }: JsonApi$ResourceIdentifier);
+    ({
+      id: 'test',
+      type: 'test',
+      meta: {
+        foo: 'a',
+      }
+    }: JsonApi$ResourceIdentifier);
+
+    // $FlowExpectedError[prop-missing]
+    ({ ...null }: JsonApi$ResourceIdentifier);
+    // $FlowExpectedError[prop-missing]
+    ({
+      id: 'test',
+      type: 'test',
+      foo: 'test',
+    }: JsonApi$ResourceIdentifier);
+  });
+
+  test('JsonApi$ResourceLinkage', () => {
+    const resourceIdentifier: JsonApi$ResourceIdentifier = {
+      id: 'test',
+      type: 'test',
+    };
+
+    (resourceIdentifier: JsonApi$ResourceLinkage);
+    ([resourceIdentifier]: JsonApi$ResourceLinkage);
+    (null: JsonApi$ResourceLinkage);
+
+    // $FlowExpectedError[incompatible-cast]
+    ({ foo: 'a' }: JsonApi$ResourceLinkage);
+    // $FlowExpectedError[incompatible-cast]
+    (['', resourceIdentifier]: JsonApi$ResourceLinkage);
+  });
+
+  test('JsonApi$Relationship', () => {
+
+  });
+
+  test('JsonApi$Relationships', () => {
+
+  });
+
+  test('JsonApi$Resource', () => {
+
+  });
+
+  test('JsonApi$DataDocument', () => {
+
+  });
+
+  test('JsonApi$MetaDocument', () => {
+
+  });
+
+  test('JsonApi$ErrorDocument', () => {
+
+  });
+
+  test('JsonApi$Document', () => {
+
+  });
 });
