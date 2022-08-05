@@ -74,16 +74,14 @@ declare type JsonApi$ResourceLinkage =
 	| null;
 
 declare type JsonApi$Relationship = {|
-	links?: {|
-		self?: JsonApi$Link,
-		related?: JsonApi$Link,
-	|} & JsonApi$Links,
+	links?: JsonApi$Links,
 	data?: JsonApi$ResourceLinkage,
 	meta?: JsonApi$Meta,
 |};
 
 declare type JsonApi$Relationships = {
 	[string]: JsonApi$Relationship,
+	...
 };
 
 declare type JsonApi$Resource = {|

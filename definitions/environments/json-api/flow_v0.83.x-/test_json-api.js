@@ -21,6 +21,8 @@ describe('json-api', () => {
     ({ a: '' }: JsonApi$Meta);
     ({ a: { a: { a: '' } } }: JsonApi$Meta);
 
+    (JSON.parse(''): JsonApi$Meta);
+
     // $FlowExpectedError[incompatible-cast]
     ('test': JsonApi$Meta);
   });
@@ -236,11 +238,51 @@ describe('json-api', () => {
   });
 
   test('JsonApi$Relationship', () => {
+    ({ ...null }: JsonApi$Relationship);
+    ({
+      links: {
+        self: {
+          href: 'test',
+        },
+        related: {
+          href: 'test',
+        },
+        foo: {
+          href: 'test',
+        },
+      },
+      data: [{
+        id: 'test',
+        type: 'test',
+      }],
+      meta: {
+        a: 'test',
+        b: 1,
+      },
+    }: JsonApi$Relationship);
 
+    ({
+      // $FlowExpectedError[incompatible-cast]
+      links: 1,
+    }: JsonApi$Relationship);
+    ({
+      // $FlowExpectedError[incompatible-cast]
+      data: 'test',
+    }: JsonApi$Relationship);
+    ({
+      // $FlowExpectedError[incompatible-cast]
+      meta: 'test',
+    }: JsonApi$Relationship);
   });
 
   test('JsonApi$Relationships', () => {
+    declare var relationship: JsonApi$Relationship;
 
+    ({}: JsonApi$Relationships);
+    ({ a: relationship, b: relationship }: JsonApi$Relationships);
+
+    // $FlowExpectedError[incompatible-cast]
+    ({ a: 'test' }: JsonApi$Relationships);
   });
 
   test('JsonApi$Resource', () => {
