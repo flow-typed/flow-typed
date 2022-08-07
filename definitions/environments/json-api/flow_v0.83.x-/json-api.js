@@ -101,7 +101,7 @@ declare type JsonApi$DataDocument = {|
 		| null,
 	meta?: JsonApi$Meta,
 	jsonapi?: JsonApi$Object,
-	links?: JsonApi$PaginationLinks & JsonApi$Links,
+	links?: JsonApi$PaginationLinks | JsonApi$Links,
 	included?: Array<JsonApi$Resource>,
 |};
 

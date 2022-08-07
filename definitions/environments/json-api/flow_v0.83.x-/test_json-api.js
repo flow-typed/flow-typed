@@ -286,22 +286,189 @@ describe('json-api', () => {
   });
 
   test('JsonApi$Resource', () => {
+    declare var attributes: JsonApi$Attributes;
+    declare var relationships: JsonApi$Relationships;
+    declare var links: JsonApi$Links;
+    declare var meta: JsonApi$Meta;
 
+    ({ type: 'test' }: JsonApi$Resource);
+    ({
+      type: 'test',
+      id: 'test',
+      attributes,
+      relationships,
+      links,
+      meta,
+    }: JsonApi$Resource);
+
+    // $FlowExpectedError[prop-missing]
+    ({ ...null }: JsonApi$Resource);
+    ({
+      type: 'test',
+      // $FlowExpectedError[incompatible-cast]
+      id: 1,
+     }: JsonApi$Resource);
+     ({
+      type: 'test',
+      // $FlowExpectedError[incompatible-cast]
+      attributes: 1,
+     }: JsonApi$Resource);
+     ({
+      type: 'test',
+      // $FlowExpectedError[incompatible-cast]
+      relationships: 1,
+     }: JsonApi$Resource);
+     ({
+      type: 'test',
+      // $FlowExpectedError[incompatible-cast]
+      links: 1,
+     }: JsonApi$Resource);
+     ({
+      type: 'test',
+      // $FlowExpectedError[incompatible-cast]
+      meta: 1,
+     }: JsonApi$Resource);
   });
 
   test('JsonApi$DataDocument', () => {
+    declare var resource: JsonApi$Resource;
+    declare var resourceIdentifier: JsonApi$ResourceIdentifier;
+    declare var meta: JsonApi$Meta;
+    declare var object: JsonApi$Object;
+    declare var links: JsonApi$Links;
+    declare var paginationLinks: JsonApi$PaginationLinks;
 
+    ({
+      data: [resource, resourceIdentifier],
+    }: JsonApi$DataDocument);
+    ({
+    data: resource,
+    }: JsonApi$DataDocument);
+    ({
+    data: resourceIdentifier,
+    }: JsonApi$DataDocument);
+    ({
+    data: null,
+    meta,
+    jsonapi: object,
+    links,
+    included: [resource],
+    }: JsonApi$DataDocument);
+    ({
+    data: null,
+    links: paginationLinks,
+    }: JsonApi$DataDocument);
+
+    // $FlowExpectedError[prop-missing]
+    ({ ...null }: JsonApi$DataDocument);
+    ({
+      data: null,
+      // $FlowExpectedError[incompatible-cast]
+      meta: 1,
+    }: JsonApi$DataDocument);
+    ({
+      data: null,
+      // $FlowExpectedError[incompatible-cast]
+      jsonapi: 1,
+    }: JsonApi$DataDocument);
+    ({
+      data: null,
+      // $FlowExpectedError[incompatible-cast]
+      links: 1,
+    }: JsonApi$DataDocument);
+    ({
+      data: null,
+      // $FlowExpectedError[incompatible-cast]
+      included: 1,
+    }: JsonApi$DataDocument);
+    ({
+      data: null,
+      // $FlowExpectedError[incompatible-cast]
+      included: resource,
+    }: JsonApi$DataDocument);
   });
 
   test('JsonApi$MetaDocument', () => {
+    declare var meta: JsonApi$Meta;
+    declare var object: JsonApi$Object;
+    declare var links: JsonApi$Links;
 
+    ({
+      meta,
+    }: JsonApi$MetaDocument);
+    ({
+      meta,
+      jsonapi: object,
+      links,
+    }: JsonApi$MetaDocument);
+
+    // $FlowExpectedError[prop-missing]
+    ({ ...null }: JsonApi$MetaDocument);
+    ({
+      // $FlowExpectedError[incompatible-cast]
+      meta: 1,
+    }: JsonApi$MetaDocument);
+    ({
+      meta,
+      // $FlowExpectedError[incompatible-cast]
+      jsonapi: 1,
+    }: JsonApi$MetaDocument);
+    ({
+      meta,
+      // $FlowExpectedError[incompatible-cast]
+      links: 1,
+    }: JsonApi$MetaDocument);
   });
 
   test('JsonApi$ErrorDocument', () => {
+    declare var error: JsonApi$Error;
+    declare var meta: JsonApi$Meta;
+    declare var object: JsonApi$Object;
+    declare var links: JsonApi$Links;
 
+    ({
+      errors: [error],
+    }: JsonApi$ErrorDocument);
+    ({
+      errors: [error],
+      meta,
+      jsonapi: object,
+      links,
+    }: JsonApi$ErrorDocument);
+
+    // $FlowExpectedError[prop-missing]
+    ({ ...null }: JsonApi$ErrorDocument);
+    ({
+      // $FlowExpectedError[incompatible-cast]
+      errors: error,
+    }: JsonApi$ErrorDocument);
+    ({
+      errors: [error],
+      // $FlowExpectedError[incompatible-cast]
+      meta: 1,
+    }: JsonApi$ErrorDocument);
+    ({
+      errors: [error],
+      // $FlowExpectedError[incompatible-cast]
+      jsonapi: 1,
+    }: JsonApi$ErrorDocument);
+    ({
+      errors: [error],
+      // $FlowExpectedError[incompatible-cast]
+      links: 1,
+    }: JsonApi$ErrorDocument);
   });
 
   test('JsonApi$Document', () => {
+    declare var dataDocument: JsonApi$DataDocument;
+    declare var metaDocument: JsonApi$MetaDocument;
+    declare var errorDocument: JsonApi$ErrorDocument;
 
+    (dataDocument: JsonApi$Document);
+    (metaDocument: JsonApi$Document);
+    (errorDocument: JsonApi$Document);
+
+    // $FlowExpectedError[incompatible-cast]
+    ('': JsonApi$Document);
   });
 });
