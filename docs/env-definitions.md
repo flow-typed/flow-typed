@@ -1,12 +1,12 @@
 # Environment Definitions
 
-Flow is a static analysis tool that exposes a range of global definitions (core libs) to help you type your application. But flow only supports for the most part, two types of environments, node and browser. But sometimes you want something a little extra, but it's not the best fit for the flow core libs.
+Flow is a static analysis tool that exposes a range of global definitions (core libs) to help you type your application. But flow only supports for the most part, two types of environments, node and browser. Sometimes you want something a little extra, but it's not the best fit for the flow core libs.
 
 That's where environment definitions™ from flow-typed come into play, a home for all those global definitions to share and reuse and standardize for specific environments.
 
 ## Usage
 
-You'll need to be version `>=3.8.0` and have a [flow-typed.config.json](flow-typed-config.md)
+If you're on version `>=3.8.0` you can make use of the `env` property in [flow-typed.config.json](flow-typed-config.md).
 
 ```json
 {
@@ -14,7 +14,7 @@ You'll need to be version `>=3.8.0` and have a [flow-typed.config.json](flow-typ
 }
 ```
 
-You can find a full list of environments from the [definitions](https://github.com/flow-typed/flow-typed/tree/master/definitions/environments) project directory.
+A full list of environments can be found in the [definitions](https://github.com/flow-typed/flow-typed/tree/master/definitions/environments) project directory.
 
 ## Examples
 
