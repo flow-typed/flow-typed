@@ -1,11 +1,7 @@
-declare module 'braces' {
-  declare type Options = { ... };
-}
-
 declare module 'micromatch' {
   import type { Options as BracesOptions } from 'braces';
 
-  declare type Item =  {|
+  declare type Item = {|
     glob: string,
     regex: RegExp,
     input: string,
