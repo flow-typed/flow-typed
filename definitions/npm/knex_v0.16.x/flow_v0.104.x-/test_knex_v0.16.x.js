@@ -1,7 +1,7 @@
-import Knex from 'knex';
+import Knex, { type Transaction } from 'knex';
 
 const knex = Knex({});
-// $FlowExpectedError - invalid Client
+// $FlowExpectedError[incompatible-call] - invalid Client
 Knex({
   client: 'foo',
 });
@@ -17,7 +17,7 @@ knex
   .orWhere('bar', 'foo')
   .whereNot('asd', 1)
   .whereIn('batz', [1, 2]);
-// $FlowExpectedError - raw is not accepted as an input type
+// $FlowExpectedError[incompatible-call] - raw is not accepted as an input type
 knex.select(knex.raw(''));
 
 knex.innerJoin('bar', function() {
@@ -44,7 +44,7 @@ knex('foo').insert({
 });
 knex('foo').truncate();
 knex('bar').del();
-// $FlowExpectedError
+// $FlowExpectedError[incompatible-call]
 knex.from();
 
 knex.table('foo');
@@ -67,7 +67,9 @@ knex
       .insert({ a: 1 })
       .into('foo')
       .transacting(trx)
+      // $FlowExpectedError[method-unbinding]
       .then(trx.commit)
+      // $FlowExpectedError[method-unbinding]
       .catch(trx.rollback);
   })
   .then(function(result) {})
@@ -91,38 +93,38 @@ knex.on('start', () => {});
 /* Having tests */
 knex('foo').having('count', '>', 100);
 knex('foo').havingIn('count', [1, 2, 3]);
-// $FlowExpectedError
+// $FlowExpectedError[incompatible-call]
 knex('foo').havingIn('count', 'string');
 knex('foo').havingNotIn('count', [1, 2, 3]);
 knex('foo').havingNull('count');
-// $FlowExpectedError
+// $FlowExpectedError[incompatible-call]
 knex('foo').havingNull(null);
 knex('foo').havingExists(function() {
   this.select('*');
 });
-// $FlowExpectedError - raw is not accepted as an input type
+// $FlowExpectedError[incompatible-call] - raw is not accepted as an input type
 knex('foo').havingExists(knex.raw(''));
 knex('foo').havingBetween('count', [1, 5]);
-// $FlowExpectedError
+// $FlowExpectedError[invalid-tuple-arity]
 knex('foo').havingBetween('count', [1, 2, 3]);
 knex('foo').havingRaw('count > 10');
 
 /* Where tests */
 knex('foo').where('count', '>', 100);
 knex('foo').whereIn('count', [1, 2, 3]);
-// $FlowExpectedError
+// $FlowExpectedError[incompatible-call]
 knex('foo').whereIn('count', 'string');
 knex('foo').whereNotIn('count', [1, 2, 3]);
 knex('foo').whereNull('count');
-// $FlowExpectedError
+// $FlowExpectedError[incompatible-call]
 knex('foo').whereNull(null);
 knex('foo').whereExists(function() {
   this.select('*');
 });
-// $FlowExpectedError - raw is not accepted as an input type
+// $FlowExpectedError[incompatible-call] - raw is not accepted as an input type
 knex('foo').whereExists(knex.raw(''));
 knex('foo').whereBetween('count', [1, 5]);
-// $FlowExpectedError
+// $FlowExpectedError[invalid-tuple-arity]
 knex('foo').whereBetween('count', [1, 2, 3]);
 knex('foo').whereRaw('count > 10');
 
@@ -139,15 +141,15 @@ knex('foo').whereRaw('', ['a']);
 knex('foo').joinRaw('');
 knex('foo').joinRaw('', ['a']);
 
-// $FlowExpectedError
+// $FlowExpectedError[prop-missing]
 knex('foo').raw();
-// $FlowExpectedError
+// $FlowExpectedError[prop-missing]
 knex('foo').raw('', '');
-// $FlowExpectedError
+// $FlowExpectedError[incompatible-call]
 knex('foo').havingRaw();
-// $FlowExpectedError
+// $FlowExpectedError[incompatible-call]
 knex('foo').whereRaw();
-// $FlowExpectedError
+// $FlowExpectedError[incompatible-call]
 knex('foo').joinRaw();
 
 knex.batchInsert('foo', [{ foo: 'bar' }]);
@@ -193,7 +195,7 @@ knex.migrate
     console.log(`Please write your migration in ${filePath}`);
   })
   .catch(console.error);
-// $FlowExpectedError
+// $FlowExpectedError[incompatible-call]
 knex.migrate.make();
 
 knex.migrate
@@ -233,3 +235,11 @@ knex.migrate
     console.log(`Current version of the data: ${version}`);
   })
   .catch(console.error);
+
+function doSomeStuffInTransaction(trx: Transaction<string>) {
+  // $FlowExpectedError[prop-missing] Can use `Transaction` type
+  trx.func();
+  (trx.savepoint(): Promise<string>);
+  // $FlowExpectedError[incompatible-cast]
+  (trx.savepoint(): Promise<number>);
+}
