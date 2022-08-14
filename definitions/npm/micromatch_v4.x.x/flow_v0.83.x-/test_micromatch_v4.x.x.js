@@ -1,9 +1,10 @@
 // @flow
-import { describe, it } from 'flow-typed-test';
-// import library from 'micromatch';
+import { describe, test } from 'flow-typed-test';
+
+const micromatch = require('micromatch');
 
 describe('micromatch', () => {
-  it('', () => {
-
+  test('main', () => {
+    (micromatch(['foo', 'bar', 'baz', 'qux'], ['f*', 'b*']): Array<string>);
   });
 });
