@@ -130,7 +130,7 @@ declare module 'node-fetch' {
   }
 
   declare type HeaderInit = Headers | Array<string>;
-  declare type BodyInit = string | null | Buffer | Blob | Readable;
+  declare type BodyInit = string | null | Buffer | Blob | Readable | URLSearchParams;
 
   declare export default function fetch(url: string | Request, init?: RequestInit): Promise<Response>
 }
