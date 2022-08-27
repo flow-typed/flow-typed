@@ -225,4 +225,32 @@ describe('micromatch', () => {
       windows: '',
     });
   });
+
+  test('match', () => {
+    (micromatch.match(['foo', 'bar', 'baz', 'qux'], ''): Array<string>);
+    micromatch.match(['foo', 'bar', 'baz', 'qux'], 'test');
+
+    // $FlowExpectedError[incompatible-cast]
+    (micromatch.match(['foo', 'bar', 'baz', 'qux'], ''): string);
+    // $FlowExpectedError[incompatible-call]
+    micromatch.match('test', 'test');
+    // $FlowExpectedError[incompatible-call]
+    micromatch.match(['foo', 'bar', 'baz', 'qux']);
+    // $FlowExpectedError[incompatible-call]
+    micromatch.match(['foo', 'bar', 'baz', 'qux'], 1);
+  });
+
+  test('isMatch', () => {
+    (micromatch.isMatch('test', ['f*', 'b*']): boolean);
+    micromatch.isMatch('test', 'test');
+
+    // $FlowExpectedError[incompatible-cast]
+    (micromatch.isMatch('test', ['f*', 'b*']): string);
+    // $FlowExpectedError[incompatible-call]
+    micromatch.isMatch(['test'], 'test');
+    // $FlowExpectedError[incompatible-call]
+    micromatch.isMatch('test');
+    // $FlowExpectedError[incompatible-call]
+    micromatch.isMatch('test', 1);
+  });
 });
