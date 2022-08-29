@@ -41,7 +41,7 @@ import {listItem} from '../lib/logger';
 export const name = 'install [explicitLibDefs...]';
 export const description = 'Installs libdefs into the ./flow-typed directory';
 export type Args = {
-  flowVersion?: mixed, // string
+  flowVersion?: mixed,
   overwrite: mixed, // boolean
   skip: mixed, // boolean
   skipCache?: mixed, // boolean
