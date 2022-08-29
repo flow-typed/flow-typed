@@ -557,25 +557,61 @@ function getDepTestGroups(testGroup) {
   const flowDirVersion = extractFlowDirFromFlowDirPath(testGroup.id);
   const depBasePath = getNpmLibDefDirFromNested(testGroup.libDefPath);
 
-  const mappedDepPaths = Object.keys(testGroup.deps).map(depName => {
-    const nameSplit = depName.split('/');
-    const scope = nameSplit.length > 1 ? `${nameSplit[0]}/` : '';
-    const packageName = nameSplit.length > 1 ? nameSplit[1] : depName;
+  const getMappedDepPaths = (deps: {
+    [key: string]: Array<string>,
+  }): Array<
+    Array<{
+      main: string,
+      deps: Array<string>,
+    }>,
+  > => {
+    return Object.keys(deps).map(depName => {
+      const nameSplit = depName.split('/');
+      const scope = nameSplit.length > 1 ? `${nameSplit[0]}/` : '';
+      const packageName = nameSplit.length > 1 ? nameSplit[1] : depName;
 
-    return testGroup.deps[depName].map(version => {
-      const path = `${depBasePath}${scope}${packageName}_${version}/${flowDirVersion}/${packageName}_${version}.js`;
+      return deps[depName].map(version => {
+        const flowDirPath = `${depBasePath}${scope}${packageName}_${version}/${flowDirVersion}`;
+        const defPath = `${flowDirPath}/${packageName}_${version}.js`;
 
-      if (!fs.existsSync(path)) {
-        throw new Error(
-          colors.red(
-            `${depName}@${version} cannot be a dependency of ${testGroup.id} because either the dependency@version does't exist or they do not have matching flow version ranges`,
-          ),
-        );
-      }
+        if (!fs.existsSync(defPath)) {
+          throw new Error(
+            colors.red(
+              `${depName}@${version} cannot be a dependency of ${testGroup.id} because either the dependency@version does't exist or they do not have matching flow version ranges`,
+            ),
+          );
+        }
 
-      return path;
+        // For the current dependency check if it has nested dependencies
+        let defDeps;
+        try {
+          defDeps = JSON.parse(
+            fs.readFileSync(`${flowDirPath}/config.json`, 'utf-8'),
+          ).deps;
+        } catch (e) {}
+
+        return {
+          main: defPath,
+          // Create a recursive list of main def and def dep paths
+          // that are later used to inject into the test group so that
+          // dependencies can resolve their dependencies.
+          //
+          // Note: This strategy doesn't create an exhaustive list validating
+          // a dependency to each dep version of dependency's dependency.
+          // That isn't necessary in this instance and would be tested by
+          // the dependency's own test group.
+          deps: [
+            ...(defDeps
+              ? getMappedDepPaths(defDeps).reduce((acc, cur) => {
+                  return [...acc, cur[0].main, ...cur[0].deps];
+                }, [])
+              : []),
+          ],
+        };
+      });
     });
-  });
+  };
+  const mappedDepPaths = getMappedDepPaths(testGroup.deps);
 
   const longestDep = mappedDepPaths.reduce((acc, cur) => {
     if (cur.length > acc) {
@@ -589,9 +625,9 @@ function getDepTestGroups(testGroup) {
     const newGroup = [];
     mappedDepPaths.forEach(o => {
       if (!o[i]) {
-        newGroup.push(o[0]);
+        newGroup.push(o[0].main, ...o[0].deps);
       } else {
-        newGroup.push(o[i]);
+        newGroup.push(o[i].main, ...o[i].deps);
       }
     });
     depGroup.push(newGroup);
