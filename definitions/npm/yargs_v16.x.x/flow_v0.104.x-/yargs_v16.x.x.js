@@ -24,6 +24,7 @@ declare module "yargs" {
     description: string,
     global: boolean,
     group: string,
+    hidden: boolean,
     implies: string | { [key: string]: string, ... },
     nargs: number,
     normalize: boolean,
@@ -267,11 +268,13 @@ declare module "yargs" {
 
     showHelpOnFail(enable: boolean, message?: string): this;
 
-    strict(): this;
-
     skipValidation(key: string): this;
 
-    strict(global?: boolean): this;
+    strict(enabled?: boolean): this;
+
+    strictCommands(enabled?: boolean): this;
+
+    strictOptions(enabled?: boolean): this;
 
     string(key: string | Array<string>): this;
 
