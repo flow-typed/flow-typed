@@ -83,7 +83,8 @@ const argv2 = yargs(["-x"])
           return resolve(file);
         }
         return file;
-      }
+      },
+      hidden: false,
     }
   })
   .string(["user", "pass"])
