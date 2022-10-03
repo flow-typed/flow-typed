@@ -12,8 +12,11 @@ declare module "query-string" {
 
   declare module.exports: {
     extract(str: string): string,
-    parse(str: string, opts?: ParseOptions): Object,
-    stringify(obj: { [name: string]: mixed, ... }, opts?: StringifyOptions): string,
+    parse(str: string, opts?: ParseOptions): {
+      [key: string]: string | Array<string>,
+      ...
+    },
+    stringify(obj: { [name: string]: any, ... }, opts?: StringifyOptions): string,
     ...
   };
 }

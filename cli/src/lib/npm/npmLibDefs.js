@@ -30,7 +30,7 @@ import {
 
 import semver from 'semver';
 
-// import got from 'got';
+import got from 'got';
 
 import {ValidationError} from '../ValidationError';
 import {TEST_FILE_NAME_RE} from '../libDefs';
@@ -69,8 +69,6 @@ async function extractLibDefsFromNpmPkgDir(
   pkgDirPath: string,
   scope: null | string,
   pkgNameVer: string,
-  // Remove eslint error after `environments.es5` change
-  // eslint-disable-next-line no-unused-vars
   validating?: boolean,
 ): Promise<Array<NpmLibDef>> {
   const parsedPkgNameVer = parsePkgNameVer(pkgNameVer);
@@ -83,36 +81,17 @@ async function extractLibDefsFromNpmPkgDir(
   const libDefFileName = `${pkgName}_${pkgVersionStr}.js`;
   const pkgDirItems = await fs.readdir(pkgDirPath);
 
-  /**
-   * TODO:
-   * The following block is commented out until `environments.es5` has been moved to
-   * somewhere else such as environments
-   */
-  // if (validating) {
-  //   const fullPkgName = `${scope === null ? '' : scope + '/'}${pkgName}`;
-  //   await _npmExists(fullPkgName)
-  //     .then()
-  //     .catch(error => {
-  //       if (error.HTTPError && error.HTTPError.response.statusCode === 404) {
-  //         // Some times NPM returns 404 even though the package exists.
-  //         // Try to avoid false negatives by retrying
-  //         return new Promise((resolve, reject) =>
-  //           setTimeout(() => {
-  //             _npmExists(fullPkgName)
-  //               .then(resolve)
-  //               .catch(reject);
-  //           }, 1000),
-  //         );
-  //       }
-  //     })
-  //     .then()
-  //     .catch(error => {
-  //       // Only fail on 404, not on timeout
-  //       if (error.HTTPError && error.HTTPError.statusCode === 404) {
-  //         throw new ValidationError(`Package does not exist on npm!`);
-  //       }
-  //     });
-  // }
+  if (validating) {
+    const fullPkgName = `${scope === null ? '' : scope + '/'}${pkgName}`;
+
+    try {
+      await _npmExists(fullPkgName);
+    } catch (e) {
+      throw new ValidationError(
+        `Package \`${fullPkgName}\` does not exist on npm, is this meant to be an environment instead?`,
+      );
+    }
+  }
 
   const commonTestFiles = [];
   const parsedFlowDirs: Array<[string, FlowVersion]> = [];
@@ -397,13 +376,10 @@ function filterLibDefs(
     });
 }
 
-// TODO Unused until `environments.es5`
-// async function _npmExists(pkgName: string): Promise<Function> {
-//   const pkgUrl = `https://api.npms.io/v2/package/${encodeURIComponent(
-//     pkgName,
-//   )}`;
-//   return got(pkgUrl, {method: 'HEAD'});
-// }
+async function _npmExists(pkgName: string): Promise<Function> {
+  const pkgUrl = `https://registry.npmjs.org/${encodeURIComponent(pkgName)}`;
+  return got(pkgUrl, {method: 'HEAD'});
+}
 
 export async function findNpmLibDef(
   pkgName: string,

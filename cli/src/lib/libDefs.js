@@ -22,7 +22,7 @@ const P = Promise;
 export type LibDef = {|
   pkgName: string,
   pkgVersionStr: string,
-  pkgJsonPath: string | null,
+  configPath: string | null,
   flowVersion: FlowVersion,
   flowVersionStr: string,
   path: string,
@@ -267,7 +267,7 @@ async function parseLibDefsFromPkgDir(
           ? `${basePkgName}.js`
           : `${basePkgName}_${pkgVersionStr}.js`;
       let libDefFilePath;
-      let pkgJsonPath;
+      let configPath;
       (await fs.readdir(flowDirPath)).forEach(flowDirItem => {
         const flowDirItemPath = path.join(flowDirPath, flowDirItem);
         const flowDirItemStat = fs.statSync(flowDirItemPath);
@@ -283,7 +283,7 @@ async function parseLibDefsFromPkgDir(
           }
 
           if (flowDirItem === 'config.json') {
-            pkgJsonPath = path.join(flowDirPath, flowDirItem);
+            configPath = path.join(flowDirPath, flowDirItem);
             return;
           }
 
@@ -315,7 +315,7 @@ async function parseLibDefsFromPkgDir(
       libDefs.push({
         pkgName,
         pkgVersionStr,
-        pkgJsonPath: pkgJsonPath ?? null,
+        configPath: configPath ?? null,
         flowVersion: flowVersion,
         flowVersionStr: flowVerToDirString(flowVersion),
         path: libDefFilePath,
