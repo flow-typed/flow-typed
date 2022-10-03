@@ -6,7 +6,6 @@ import {copyFile, recursiveRmdir} from '../lib/fileUtils.js';
 import {gitHubClient} from '../lib/github.js';
 import {getNpmLibDefDirFromNested} from '../lib/npm/npmLibDefs';
 import {getLibDefs, parseRepoDirItem} from '../lib/libDefs.js';
-import {listItem} from '../lib/logger';
 import isInFlowTypedRepo from '../lib/isInFlowTypedRepo';
 import {
   toSemverString as flowVerToSemverString,
