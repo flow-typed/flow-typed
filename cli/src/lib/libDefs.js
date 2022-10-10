@@ -182,7 +182,7 @@ export async function getLibDefs(defsDir: string): Promise<Array<LibDef>> {
           const defsDirItems = await fs.readdir(itemPath);
           await P.all(
             defsDirItems.map(async item => {
-              if (item === '.DS_Store') return;
+              if (['.DS_Store', 'CODEOWNERS'].includes(item)) return;
 
               const itemPath = path.join(defsDir, scope, item);
               const itemStat = await fs.stat(itemPath);
