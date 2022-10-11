@@ -8,7 +8,7 @@ import {
 
 import {getSignedCodeVersion, verifySignedCode} from '../codeSign';
 
-import {getFilesInDir} from '../fileUtils';
+import {getFilesInDir, isExcludedFile} from '../fileUtils';
 
 import type {FlowVersion} from '../flowVersion';
 import {
@@ -546,7 +546,7 @@ async function getSingleLibdef(
       const scopeDirItems = await fs.readdir(itemPath);
       const settled = await P.all(
         scopeDirItems
-          .filter(item => item !== '.DS_Store')
+          .filter(item => !isExcludedFile(item))
           .map(async itemName => {
             const itemPath = path.join(npmDefsDirPath, scope, itemName);
             const itemStat = await fs.stat(itemPath);
@@ -592,9 +592,7 @@ export async function getNpmLibDefs(
   const dirItems = await fs.readdir(npmDefsDirPath);
   const errors = [];
   const proms = dirItems.map(async itemName => {
-    // If a user opens definitions dir in finder it will create `.DS_Store`
-    // which will need to be excluded while parsing
-    if (itemName === '.DS_Store') return;
+    if (isExcludedFile(itemName)) return;
 
     try {
       return await getSingleLibdef(itemName, npmDefsDirPath, validating);

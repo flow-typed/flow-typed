@@ -80,10 +80,15 @@ async function getTestGroups(
     const diff = await getDefinitionsDiff();
     const baseDiff: string[] = diff
       .map(d => {
+        if (d.endsWith('CODEOWNERS')) {
+          return '';
+        }
+
         const match = d.match(basePathRegex);
         if (match) {
           return match[0];
         }
+
         return '';
       })
       .filter(d => d !== '');
