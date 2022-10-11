@@ -3,7 +3,7 @@
 import semver from 'semver';
 
 import {cloneInto, rebaseRepoMainline} from './git.js';
-import {mkdirp} from './fileUtils.js';
+import {mkdirp, isExcludedFile} from './fileUtils.js';
 import {fs, path, os} from './node.js';
 import {versionToString, type Version} from './semver.js';
 import {
@@ -169,9 +169,7 @@ export async function getLibDefs(defsDir: string): Promise<Array<LibDef>> {
   const defsDirItems = await fs.readdir(defsDir);
   await P.all(
     defsDirItems.map(async item => {
-      // If a user opens definitions dir in finder it will create `.DS_Store`
-      // which will need to be excluded while parsing
-      if (item === '.DS_Store') return;
+      if (isExcludedFile(item)) return;
 
       const itemPath = path.join(defsDir, item);
       const itemStat = await fs.stat(itemPath);
@@ -182,7 +180,7 @@ export async function getLibDefs(defsDir: string): Promise<Array<LibDef>> {
           const defsDirItems = await fs.readdir(itemPath);
           await P.all(
             defsDirItems.map(async item => {
-              if (['.DS_Store', 'CODEOWNERS'].includes(item)) return;
+              if (isExcludedFile(item)) return;
 
               const itemPath = path.join(defsDir, scope, item);
               const itemStat = await fs.stat(itemPath);

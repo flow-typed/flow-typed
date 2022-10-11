@@ -119,3 +119,13 @@ export async function searchUpDirPath(
   }
   return null;
 }
+
+/**
+ * Returns whether a file matches one of the excluded file names
+ * which would be used by an external system and shouldn't be parsed
+ * by flow-typed cli.
+ */
+export function isExcludedFile(item: string): boolean {
+  // If a user opens definitions dir in finder it will create `.DS_Store`
+  return ['.DS_Store', 'CODEOWNERS'].includes(item);
+}
