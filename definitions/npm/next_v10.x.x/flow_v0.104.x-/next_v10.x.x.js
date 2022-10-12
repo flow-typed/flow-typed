@@ -49,10 +49,16 @@ declare module "next" {
   declare export type Context = {
     +pathname: string,
     +query: any,
-    +req?: any,
-    +res?: any,
+    +req?: http$IncomingMessage<>,
+    +res?: http$ServerResponse,
     +xhr?: any,
-    +err?: any,
+    +err?: (Error & {
+      statusCode?: number;
+  }) | null;,
+    +resolvedUrl?: string,
+    +locales?: Array<string>,
+    +locale?: string,
+    +defaultLocale?: string,
     ...
   };
 
