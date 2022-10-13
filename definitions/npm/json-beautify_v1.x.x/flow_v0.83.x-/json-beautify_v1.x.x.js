@@ -1,10 +1,11 @@
 declare module 'json-beautify' {
   declare module.exports: (
-    value: any,
+    value: $NonMaybeType<mixed>,
     replacer?:
-      | (...args: Array<any>) => any
+      | ((...args: Array<any>) => any)
       | { ... }
-      | Array<any>,
+      | Array<any>
+      | null,
     space?: number | string,
     limit?: number,
   ) => string;
