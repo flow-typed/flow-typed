@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import { createRoot, hydrateRoot } from 'react-dom/client';
+import { createRoot, hydrateRoot, type RootType } from 'react-dom/client';
 import { describe, it } from 'flow-typed-test';
 
 // All of these tests were originally in the flow repository.
@@ -11,7 +11,7 @@ declare function test$getElementById(string): HTMLElement | null;
 declare class MyPortalComponent extends React.Component<{ ... }> {}
 
 class MyComponent extends React.Component<{ ... }> {
-  render() {
+  render(): React.Node {
     return ReactDOM.createPortal(
       <MyPortalComponent />,
       // $FlowExpectedError[incompatible-call]
@@ -26,7 +26,7 @@ class JDiv extends React.Component<{ id: string, ... }> {}
 <JDiv id={42} />;
 
 class Example extends React.Component<{ bar: string, ... }> {
-  render() {
+  render(): React.Node {
     return <div>{this.props.bar}</div>;
   }
 }
@@ -38,7 +38,9 @@ ReactDOM.render(
   document.body
 );
 
-function Clock(props) {
+function Clock(props: {|
+  date: Date,
+|}) {
   return (
     <div>
       <h1>Hello, world!</h1>
@@ -58,7 +60,7 @@ function tick() {
 import TestUtils from 'react-dom/test-utils';
 
 class MyTestingComponent extends React.Component<{ ... }> {
-  render() {
+  render(): React.Node {
     return <button className="my-button" />;
   }
 }
@@ -169,7 +171,7 @@ describe('react-dom/client', () => {
     it('unmount takes no params and returns nothing', () => {
       declare var container: HTMLElement;
 
-      const root = createRoot(container);
+      const root: RootType = createRoot(container);
       // $FlowExpectedError[extra-arg]
       root.unmount('test');
       // $FlowExpectedError[incompatible-cast]
