@@ -25,6 +25,11 @@ describe('useDispatch', () => {
     dispatch();
   });
 
+  it('errors if given invalid type argument', () => {
+    // $FlowExpectedError[incompatible-call]: string incompatible with Dispatch
+    useDispatch<string>()
+  });
+
   it('handles action creator passed in and is typed', () => {
     const dispatch = useDispatch();
 
