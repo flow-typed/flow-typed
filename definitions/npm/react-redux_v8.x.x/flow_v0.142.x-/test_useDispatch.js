@@ -35,7 +35,7 @@ describe('useDispatch', () => {
   });
 
   it('handles thunks being passed to return the right value', () => {
-    const thunkAction = () => (dispatch) => {
+    const thunkAction = () => (dispatch: Dispatch) => {
       return '';
     }
     const dispatch = useDispatch();
@@ -47,7 +47,7 @@ describe('useDispatch', () => {
   });
 
   it('handles thunks defined as a promise to keep their type', () => {
-    const thunkPromiseAction = () => (dispatch) => new Promise((resolve) => {
+    const thunkPromiseAction = () => (dispatch: Dispatch) => new Promise((resolve) => {
       resolve('');
     });
     const dispatch = useDispatch();
