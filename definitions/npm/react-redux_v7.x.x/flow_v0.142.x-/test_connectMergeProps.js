@@ -97,7 +97,7 @@ function onlyStateProps_ok() {
   };
   class Com extends React.Component<Props> {}
 
-  const mapStateToProps = state => ({state1: state.state1})
+  const mapStateToProps = (state: StateProps) => ({state1: state.state1})
 
   const mergeProps = (stateProps: StateProps, dispatchProps: {|dispatch: Dispatch|}, ownProps: OwnProps) => {
     return {
@@ -131,7 +131,7 @@ function onlyStateProps_wrongDispatch() {
   };
   class Com extends React.Component<Props> {}
 
-  const mapStateToProps = state => ({
+  const mapStateToProps = (state: StateProps) => ({
     state1: state.state1
   })
 
@@ -252,7 +252,7 @@ function onlyDispatchPropsFunction_ok() {
   };
   class Com extends React.Component<Props> {}
 
-  const mapDispatchToPropsFn = dispatch => ({
+  const mapDispatchToPropsFn = (dispatch: Dispatch) => ({
     action1: () => dispatch(action1())
   })
 
@@ -328,7 +328,7 @@ function onlyDispatchPropsFunction_wrongDispatchProp() {
   };
   class Com extends React.Component<Props> {}
 
-  const mapDispatchToPropsFn = dispatch => ({
+  const mapDispatchToPropsFn = (dispatch: Dispatch) => ({
     action1: () => 123
   })
 
@@ -374,11 +374,11 @@ function stateAndDispatchPropsFunction_ok() {
   };
   class Com extends React.Component<Props> {}
 
-  const mapStateToProps = state => ({
+  const mapStateToProps = (state: StateProps) => ({
     state1: state.state1
   })
 
-  const mapDispatchToPropsFn = dispatch => ({
+  const mapDispatchToPropsFn = (dispatch: Dispatch) => ({
     action1: () => dispatch(action1())
   })
 
@@ -424,11 +424,11 @@ function stateAndDispatchPropsFunction_wrongState() {
   };
   class Com extends React.Component<Props> {}
 
-  const mapStateToProps = state => ({
+  const mapStateToProps = (state: StateProps) => ({
     state1: state.state1
   })
 
-  const mapDispatchToPropsFn = dispatch => ({
+  const mapDispatchToPropsFn = (dispatch: Dispatch) => ({
     action1: () => dispatch(action1())
   })
 
@@ -480,11 +480,11 @@ function stateAndDispatchPropsFunction_wrongDispatch() {
   };
   class Com extends React.Component<Props> {}
 
-  const mapStateToProps = state => ({
+  const mapStateToProps = (state: StateProps) => ({
     state1: state.state1
   })
 
-  const mapDispatchToPropsFn = dispatch => ({
+  const mapDispatchToPropsFn = (dispatch: Dispatch) => ({
     action1: () => 123
   })
 
@@ -531,11 +531,11 @@ function returnsTotallyDifferentProps() {
   };
   class Com extends React.Component<Props> {}
 
-  const mapStateToProps = state => ({
+  const mapStateToProps = (state: StateProps) => ({
     state1: state.state1
   })
 
-  const mapDispatchToPropsFn = dispatch => ({
+  const mapDispatchToPropsFn = (dispatch: Dispatch) => ({
     action1: () => dispatch(action1())
   })
 
@@ -582,11 +582,11 @@ function returnsTotallyDifferentPropsWithError() {
   };
   class Com extends React.Component<Props> {}
 
-  const mapStateToProps = state => ({
+  const mapStateToProps = (state: StateProps) => ({
     state1: state.state1
   })
 
-  const mapDispatchToPropsFn = dispatch => ({
+  const mapDispatchToPropsFn = (dispatch: Dispatch) => ({
     action1: () => dispatch(action1())
   })
 
