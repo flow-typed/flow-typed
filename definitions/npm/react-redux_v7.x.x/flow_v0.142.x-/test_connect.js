@@ -1,5 +1,5 @@
 // @flow
-import React from "react";
+import * as React from "react";
 import { connect } from "react-redux";
 import type { ConnectedComponent } from "react-redux";
 
@@ -17,8 +17,8 @@ function testPassingPropsToConnectedComponent() {
     ...
   };
   class Com extends React.Component<Props> {
-    static defaultProps = { passthroughWithDefaultProp: 123 };
-    render() {
+    static defaultProps: { passthroughWithDefaultProp: number, ... } = { passthroughWithDefaultProp: 123 };
+    render(): React.Node {
       return <div>{this.props.passthrough} {this.props.fromStateToProps}</div>;
     }
   }
@@ -161,7 +161,7 @@ function testExactProps() {
   |};
 
   class Com extends React.Component<Props> {
-    render() {
+    render(): React.Node {
       return <div>{this.props.passthrough} {this.props.fromStateToProps}</div>;
     }
   }
@@ -208,7 +208,7 @@ function testInexactOwnProps() {
   };
 
   class Com extends React.Component<Props> {
-    render() {
+    render(): React.Node {
       return <div>{this.props.passthrough} {this.props.fromStateToProps}</div>;
     }
   }
@@ -288,7 +288,7 @@ function testMapStateToPropsDoesNotNeedProps() {
     ...
   };
   class Com extends React.Component<Props> {
-    render() {
+    render(): React.Node {
       return <div>{this.props.passthrough}</div>;
     }
   }
@@ -320,7 +320,7 @@ function testMapDispatchToProps() {
     ...
   };
   class Com extends React.Component<Props> {
-    render() {
+    render(): React.Node {
       return <div>
         {this.props.passthrough}
         {this.props.fromMapDispatchToProps}
@@ -356,7 +356,7 @@ function testMapDispatchToPropsDoesNotPassDispatch() {
   type OwnProps = {||};
   type Props = {| ...OwnProps, fromMapDispatchToProps: string, dispatch: Dispatch |};
   class Com extends React.Component<Props> {
-    render() {
+    render(): React.Node {
       return <div>{this.props.fromMapDispatchToProps}</div>;
     }
   }
@@ -383,7 +383,7 @@ function testMapDispatchToPropsWithoutMapStateToProps() {
     ...
   };
   class Com extends React.Component<Props> {
-    render() {
+    render(): React.Node {
       return <div>
         {this.props.passthrough}
         {this.props.fromMapDispatchToProps}
@@ -415,7 +415,7 @@ function testMapDispatchToPropsPassesActionCreators() {
     ...
   };
   class Com extends React.Component<Props> {
-    render() {
+    render(): React.Node {
       return <div>{this.props.passthrough}</div>;
     }
   }
@@ -461,7 +461,7 @@ function testMapDispatchToPropsPassesActionCreatorsWithMapStateToProps() {
     ...
   };
   class Com extends React.Component<Props> {
-    render() {
+    render(): React.Node {
       return <div>{this.props.passthrough}</div>;
     }
   }
@@ -510,7 +510,7 @@ function testMapDispatchToPropsPassesActionCreatorsWithMapStateToPropsAndMergePr
     ...
   };
   class Com extends React.Component<Props> {
-    render() {
+    render(): React.Node {
       return <div>{this.props.passthrough}</div>;
     }
   }
@@ -525,7 +525,11 @@ function testMapDispatchToPropsPassesActionCreatorsWithMapStateToPropsAndMergePr
     dispatch1: () => {},
     dispatch2: () => {}
   };
-  const mergeProps = (stateProps, dispatchProps, ownProps: { forMergeProps: number, ... }) => {
+  const mergeProps = (
+    stateProps: { ... },
+    dispatchProps: { ... },
+    ownProps: { forMergeProps: number, ... },
+  ) => {
     return Object.assign({}, stateProps, dispatchProps, { fromMergeProps: 123 });
   }
   const Connected = connect<Props, OwnProps1, _,_,_,_>(mapStateToProps, mapDispatchToProps, mergeProps)(Com);
@@ -557,7 +561,7 @@ function testMergeProps() {
   |};
   type Props = { fromMergeProps: number, ... };
   class Com extends React.Component<Props> {
-    render() {
+    render(): React.Node {
       return <div>
         {this.props.fromMergeProps}
       </div>;
@@ -575,7 +579,7 @@ function testMergeProps() {
   const mapDispatchToProps = (dispatch: any, ownProps: MapDispatchToPropsProps) => {
     return {fromMapDispatchToProps: ownProps.forMapDispatchToProps}
   }
-  const mergeProps = (stateProps, dispatchProps, ownProps: { forMergeProps: number, ... }) => {
+  const mergeProps = (stateProps: { ... }, dispatchProps: { ... }, ownProps: { forMergeProps: number, ... }) => {
     return {fromMergeProps: 123};
   }
   const Connected = connect<Props, OwnProps, _,_,_,_>(mapStateToProps, mapDispatchToProps, mergeProps)(Com);
@@ -593,7 +597,7 @@ function testMergeProps() {
 
 function testOptions() {
   class Com extends React.Component<{...}> {
-    render() {
+    render(): React.Node {
       return <div></div>;
     }
   }
@@ -612,7 +616,7 @@ function testOptions() {
 function testDispatch() {
   type Props = { dispatch: empty => empty, ... }
   class Com extends React.Component<Props> {
-    render() {
+    render(): React.Node {
       return <div></div>;
     }
   }
@@ -621,7 +625,7 @@ function testDispatch() {
 function testNoDispatch() {
   type Props = {||}
   class Com extends React.Component<Props> {
-    render() {
+    render(): React.Node {
       return <div></div>;
     }
   }
@@ -641,10 +645,10 @@ function testHoistConnectedComponent() {
     ...
   };
   class Com extends React.Component<Props> {
-    static defaultProps = { passthroughWithDefaultProp: 123 };
+    static defaultProps: { passthroughWithDefaultProp: number, ... } = { passthroughWithDefaultProp: 123 };
     static myStatic = 1;
 
-    render() {
+    render(): React.Node {
       return <div>{this.props.passthrough} {this.props.fromStateToProps}</div>;
     }
   }
@@ -729,7 +733,7 @@ function checkIfStateTypeIsRespectedAgain() {
   type Props = { str: string, ... };
 
   class Com extends React.Component<Props> {
-    render() {
+    render(): React.Node {
       return <div>{this.props.str}</div>;
     }
   }
@@ -745,7 +749,7 @@ function testPassingDispatchPropWithoutDispatchFunction() {
   type OwnProps = {||}
   type Props = {| ...OwnProps, dispatch: Dispatch |};
   class Com extends React.Component<Props> {
-    render() {
+    render(): React.Node {
       return <div />;
     }
   }
@@ -766,7 +770,7 @@ function testPassingDispatchTypeIsPassedThrough() {
   type OwnProps = {||}
   type Props = {| ...OwnProps, dispatch: string |};
   class Com extends React.Component<Props> {
-    render() {
+    render(): React.Node {
       return <div />;
     }
   }
