@@ -1,3 +1,6 @@
+type DepromisifyMatcher = (<T>(Promise<T>, any) => T) & (<T>(any, T) => T);
+type Depromisify<X> = $Call<DepromisifyMatcher, X, X>;
+
 type JestMockFn<TArguments: $ReadOnlyArray<any>, TReturn> = {
   (...args: TArguments): TReturn,
   /**
@@ -88,12 +91,12 @@ type JestMockFn<TArguments: $ReadOnlyArray<any>, TReturn> = {
   /**
    * Sugar for jest.fn().mockImplementation(() => Promise.resolve(value))
    */
-  mockResolvedValue(value: TReturn): JestMockFn<TArguments, Promise<TReturn>>,
+  mockResolvedValue(value: DepromisifyMatcher<TReturn>): JestMockFn<TArguments, Promise<TReturn>>,
   /**
    * Sugar for jest.fn().mockImplementationOnce(() => Promise.resolve(value))
    */
   mockResolvedValueOnce(
-    value: TReturn
+    value: DepromisifyMatcher<TReturn>
   ): JestMockFn<TArguments, Promise<TReturn>>,
   /**
    * Sugar for jest.fn().mockImplementation(() => Promise.reject(value))

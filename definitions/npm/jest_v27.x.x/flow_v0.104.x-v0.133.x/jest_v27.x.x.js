@@ -1,3 +1,6 @@
+type PromiseMatcher = (<T>(Promise<T>, any) => T) & (<T>(any, T) => T);
+type Depromisify<X> = $Call<PromiseMatcher, X, X>;
+
 type JestMockFn<TArguments: $ReadOnlyArray<*>, TReturn> = {
   (...args: TArguments): TReturn,
   /**
@@ -82,12 +85,12 @@ type JestMockFn<TArguments: $ReadOnlyArray<*>, TReturn> = {
   /**
    * Sugar for jest.fn().mockImplementation(() => Promise.resolve(value))
    */
-  mockResolvedValue(value: TReturn): JestMockFn<TArguments, Promise<TReturn>>,
+  mockResolvedValue(value:  Depromisify<TReturn>): JestMockFn<TArguments, Promise<TReturn>>,
   /**
    * Sugar for jest.fn().mockImplementationOnce(() => Promise.resolve(value))
    */
   mockResolvedValueOnce(
-    value: TReturn
+    value: Depromisify<TReturn>
   ): JestMockFn<TArguments, Promise<TReturn>>,
   /**
    * Sugar for jest.fn().mockImplementation(() => Promise.reject(value))
@@ -831,10 +834,14 @@ type JestObjectType = {
    */
   isMockFunction(fn: Function): boolean,
   /**
+   * Alias of `createMockFromModule`.
+   */
+  genMockFromModule(moduleName: string): any,
+  /**
    * Given the name of a module, use the automatic mocking system to generate a
    * mocked version of the module for you.
    */
-  genMockFromModule(moduleName: string): any,
+  createMockFromModule(moduleName: string): any,
   /**
    * Mocks a module with an auto-mocked version when it is being required.
    *
@@ -1033,11 +1040,20 @@ declare var it: {
    * @param {Function} Test
    * @param {number} Timeout for the test, in milliseconds.
    */
-  skip(
-    name: JestTestName,
-    fn?: (done: JestDoneFn) => ?Promise<mixed>,
-    timeout?: number
-  ): void,
+  skip: {|
+    (
+      name: JestTestName,
+      fn?: (done: JestDoneFn) => ?Promise<mixed>,
+      timeout?: number
+    ): void,
+    each(
+      ...table: Array<Array<mixed> | mixed> | [Array<string>, string]
+    ): (
+      name: JestTestName,
+      fn?: (...args: Array<any>) => ?Promise<mixed>,
+      timeout?: number
+    ) => void,
+  |},
   /**
    * Highlight planned tests in the summary output
    *

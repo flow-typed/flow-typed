@@ -1,3 +1,6 @@
+type PromiseMatcher = (<T>(Promise<T>, any) => T) & (<T>(any, T) => T);
+type Depromisify<X> = $Call<PromiseMatcher, X, X>;
+
 type JestMockFn<TArguments: $ReadOnlyArray<*>, TReturn> = {
  (...args: TArguments): TReturn,
  /**
