@@ -770,3 +770,13 @@ expect(wrapper).toHaveDisplayName(true);
   // No type hint means we return any
   const FooModule3: boolean = jest.requireActual('FooModule');
 }
+
+const mock = jest.fn().mockImplementation(async (): Promise<string> => 'banana');
+
+mock
+  .mockResolvedValue('orange')
+  .mockReturnValue(Promise.resolve('apple'))
+  .mockResolvedValueOnce('tomato')
+  .mockImplementation(() => Promise<'pineapple'>)
+
+

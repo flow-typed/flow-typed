@@ -758,3 +758,12 @@ it.each`
       // perform tests
   }
 );
+
+const mock = jest.fn().mockImplementation(async (): Promise<string> => 'banana');
+
+mock
+  .mockResolvedValue('orange')
+  .mockReturnValue(Promise.resolve('apple'))
+  .mockResolvedValueOnce('tomato')
+  .mockImplementation(() => Promise<'pineapple'>)
+

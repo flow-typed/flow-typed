@@ -801,3 +801,12 @@ it.each`
 `('x=$x, y=$y, and z=$z', ({ x, y, z }) => {
   // perform tests
 });
+
+const mock = jest.fn().mockImplementation(async (): Promise<string> => 'banana');
+
+mock
+  .mockResolvedValue('orange')
+  .mockReturnValue(Promise.resolve('apple'))
+  .mockResolvedValueOnce('tomato')
+  .mockImplementation(() => Promise.resolve('pineapple'))
+
