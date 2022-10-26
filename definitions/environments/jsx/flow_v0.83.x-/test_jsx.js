@@ -33,6 +33,23 @@ describe('jsx', () => {
     });
   });
 
+  describe('hidden property', () => {
+    it('should accept all valid spec usages', () => {
+      type Props = {|
+        ...$Exact<jsx$HTMLElement>,
+      |};
+
+      const Foo = (props: Props) => <p {...props} />;
+
+      <>
+        <Foo hidden />
+        <Foo hidden="" />
+        <Foo hidden="hidden" />
+        <Foo hidden="until-found" />
+      </>;
+    });
+  });
+
   describe('HTMLInputElement', () => {
     it('has input props', () => {
       type Props = {|
