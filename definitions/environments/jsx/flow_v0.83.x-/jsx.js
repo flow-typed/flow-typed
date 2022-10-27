@@ -29,19 +29,41 @@
    /**
     * Specifies that an element is not yet, or is no longer, relevant
     */
-   hidden?: string,
+   hidden?: boolean | '' | 'hidden' | 'until-found',
    /**
     * Specifies a unique id for an element
     */
    id?: string,
    /**
+    * Specify that a standard HTML element should behave like a defined custom
+    * built-in element
+    * @see https://html.spec.whatwg.org/multipage/custom-elements.html#attr-is
+    */
+   is?: string,
+   /**
     * Specifies the language of the element's content
     */
    lang?: string,
+   /*
+    * Roles define the semantic meaning of content, allowing screen readers and
+    * other tools to present and support interaction with an object in a way that
+    * is consistent with user expectations of that type of object.
+    */
+   role?: string,
+   /*
+    * Assigns a slot in a shadow DOM shadow tree to an element: An element with a
+    * slot attribute is assigned to the slot created by the <slot> element whose
+    * name attribute's value matches that slot attribute's value.
+    */
+   slot?: string,
    /**
     * Specifies whether the element is to have its spelling and grammar checked or not
     */
    spellCheck?: string,
+   /*
+    * Contains CSS styling declarations to be applied to the element.
+    */
+   style?: { +[string]: string | number, ... },
    /**
     * Specifies the tabbing order of an element
     */
