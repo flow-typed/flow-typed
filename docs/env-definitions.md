@@ -36,7 +36,7 @@ But with environment definitions serving reusable type definitions, at the minim
 
 ```js
 type Props = {|
-  ...$Exact<jsx$HTMLElement$Attributes>,
+  ...$Exact<jsx$HTMLElement>,
   foo: string,
 |};
 
