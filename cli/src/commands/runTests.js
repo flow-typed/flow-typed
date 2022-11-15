@@ -786,6 +786,10 @@ async function runTests(
         return true;
       }
 
+      // For a definition, if their dependencies have modifications
+      // we should run tests against the definition to ensure changes
+      // to the dependency has not broken it's dependents
+      // by adding the matched definition to the test group.
       const depsList = Object.keys(testGroup.deps);
       if (depsList.length > 0) {
         return depsList.some(dep => {

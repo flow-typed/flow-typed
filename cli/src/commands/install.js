@@ -36,7 +36,7 @@ import {
 } from '../lib/npm/npmProjectUtils';
 import {getRangeLowerBound} from '../lib/semver';
 import {createStub, pkgHasFlowFiles} from '../lib/stubUtils';
-import {listItem} from '../lib/logger';
+import {listItem, sectionHeader} from '../lib/logger';
 
 export const name = 'install [explicitLibDefs...]';
 export const description = 'Installs libdefs into the ./flow-typed directory';
@@ -444,8 +444,7 @@ async function installNpmLibDefs({
       });
     } else {
       console.log(
-        `• Found ${libdefsToSearchFor.size} dependencies in package.json to ` +
-          `install libdefs for. Searching...`,
+        `• Found ${libdefsToSearchFor.size} dependencies in package.json to install libdefs for. Searching...`,
       );
     }
   }
@@ -458,6 +457,9 @@ async function installNpmLibDefs({
     {name: string, ver: string},
   ][] = [];
   const unavailableLibDefs = [];
+  const defDepsToInstall: {
+    [deps: string]: Array<string>,
+  } = {};
 
   // This updates the cache for all definition types, npm/env/etc
   const libDefs = await getCacheNpmLibDefs(useCacheUntil, skipCache);
@@ -465,6 +467,8 @@ async function installNpmLibDefs({
   const getLibDefsToInstall = async (entries: Array<[string, string]>) => {
     await Promise.all(
       entries.map(async ([name, ver]) => {
+        delete defDepsToInstall[name];
+
         // To comment in json files a work around is to give a key value pair
         // of `"//": "comment"` we should exclude these so the install doesn't crash
         // Ref: https://stackoverflow.com/a/14221781/430128
@@ -493,6 +497,18 @@ async function installNpmLibDefs({
           const depLower = getRangeLowerBound(ver);
           if (semver.lt(libDefLower, depLower)) {
             outdatedLibDefsToInstall.push([libDef, {name, ver}]);
+          }
+
+          // If this libdef has dependencies let's first add it to a giant list
+          if (libDef.depVersions) {
+            Object.keys(libDef.depVersions).forEach(dep => {
+              if (libDef.depVersions) {
+                // This may result in overriding other libDef dependencies
+                // but we don't care because either way a project cannot have the
+                // same module declared twice.
+                defDepsToInstall[dep] = libDef.depVersions[dep];
+              }
+            });
           }
         }
       }),
@@ -543,6 +559,49 @@ async function installNpmLibDefs({
     await getLibDefsToInstall(typedDepsLibDefsToSearchFor);
   }
 
+  // Now that we've captured all package.json libdefs and typed package libdefs
+  // We can compare libDefsToInstall with defDepsToInstall and override any that
+  // are already needed but don't match the supported dependency versions.
+  if (Object.keys(defDepsToInstall).length > 0) {
+    sectionHeader('Running definition dependency check');
+    while (Object.keys(defDepsToInstall).length > 0) {
+      await getLibDefsToInstall(
+        Object.keys(defDepsToInstall)
+          .map(dep => {
+            const libDef = libDefsToInstall.get(dep);
+            const defVersions = defDepsToInstall[dep];
+            if (libDef) {
+              if (!defVersions.includes(libDef.version)) {
+                // If no supported version warn it'll be overridden and continue
+                listItem(
+                  colors.yellow(
+                    `One of your definitions has a dependency to ${dep} @ version(s) ${defVersions.join(
+                      ', ',
+                    )}`,
+                  ),
+                  `You have version ${colors.yellow(libDef.version)} installed`,
+                  `We're overriding to a supported version to fix flow-typed ${colors.red(
+                    'but you may experience other type errors',
+                  )}`,
+                );
+              } else {
+                // If a supported version already installed return dummy tuple
+                // to get filtered out
+                delete defDepsToInstall[dep];
+                return ['', ''];
+              }
+            }
+
+            // This only hits if no supported version installed,
+            // we will find the last version in dependency to install
+            return [dep, defVersions[defVersions.length - 1]];
+          })
+          .filter(o => !!o[0]),
+      );
+    }
+    sectionHeader('Check complete');
+  }
+
   // Scan libdefs that are already installed
   const libDefsToUninstall = new Map();
   const alreadyInstalledLibDefs = await getInstalledNpmLibDefs(
@@ -571,7 +630,7 @@ async function installNpmLibDefs({
   });
 
   if (libDefsToInstall.size > 0) {
-    console.log(`• Installing ${libDefsToInstall.size} libDefs...`);
+    sectionHeader(`Installing ${libDefsToInstall.size} libDefs...`);
     const flowTypedDirPath = path.join(flowProjectRoot, libdefDir, 'npm');
     await mkdirp(flowTypedDirPath);
     const results = await Promise.all(

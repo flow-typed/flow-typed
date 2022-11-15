@@ -1,5 +1,4 @@
 // @flow
-
 import {mkdirp} from './fileUtils';
 
 import {cloneInto, rebaseRepoMainline} from './git';
@@ -75,6 +74,7 @@ const cacheRepoEnsureToken: {
   lastEnsured: 0,
   pendingEnsurance: Promise.resolve(),
 };
+
 export async function ensureCacheRepo(
   cacheRepoExpiry: number = CACHE_REPO_EXPIRY,
 ): Promise<void> {

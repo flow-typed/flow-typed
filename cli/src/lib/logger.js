@@ -30,3 +30,7 @@ export const listItem = (...values: Array<string | void>): void => {
     .filter(o => !!o);
   console.log(createListItem(validItems));
 };
+
+export const sectionHeader = (title: string): void => {
+  console.log(colors.green(`===> ${colors.bold(title)} <===`));
+};

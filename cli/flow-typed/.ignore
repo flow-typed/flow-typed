@@ -6,3 +6,4 @@ eslint-config-prettier
 eslint-plugin-fb-flow
 eslint-plugin-flowtype
 eslint-plugin-prettier
+flow-copy-source
