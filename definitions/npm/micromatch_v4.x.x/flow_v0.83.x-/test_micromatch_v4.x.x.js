@@ -304,7 +304,7 @@ describe('micromatch', () => {
   test('any', () => {
     (micromatch.any('list', ['f*', 'b*']): boolean);
     micromatch.any(['test'], 'test');
-    micromatch.any('list', 'test')
+    micromatch.any('list', 'test');
     micromatch.any('test', 'test', { basename: true });
 
     // $FlowExpectedError[incompatible-cast]
@@ -324,7 +324,7 @@ describe('micromatch', () => {
   test('all', () => {
     (micromatch.all('list', ['f*', 'b*']): boolean);
     micromatch.all(['test'], 'test');
-    micromatch.all('list', 'test')
+    micromatch.all('list', 'test');
     micromatch.all('test', 'test', { basename: true });
 
     // $FlowExpectedError[incompatible-cast]
@@ -337,6 +337,45 @@ describe('micromatch', () => {
     micromatch.all('test', 'test', 1);
     // $FlowExpectedError[prop-missing]
     micromatch.all('test', 'test', {
+      foo: 'bar',
+    });
+  });
+
+  test('not', () => {
+    (micromatch.not(['test'], ['f*', 'b*']): Array<string>);
+    micromatch.not(['test'], 'test');
+    micromatch.not(['test'], 'test', { basename: true });
+
+    // $FlowExpectedError[incompatible-cast]
+    (micromatch.not(['test'], ['f*', 'b*']): string);
+    // $FlowExpectedError[incompatible-call]
+    micromatch.not(['test']);
+    // $FlowExpectedError[incompatible-call]
+    micromatch.not(['test'], 1);
+    // $FlowExpectedError[incompatible-call]
+    micromatch.not(['test'], 'test', 1);
+    // $FlowExpectedError[prop-missing]
+    micromatch.not(['test'], 'test', {
+      foo: 'bar',
+    });
+  });
+
+  test('contains', () => {
+    (micromatch.contains('list', ['f*', 'b*']): boolean);
+    micromatch.contains('list', 'test');
+    micromatch.contains('list', ['test']);
+    micromatch.contains('test', 'test', { basename: true });
+
+    // $FlowExpectedError[incompatible-cast]
+    (micromatch.contains('test', ['f*', 'b*']): string);
+    // $FlowExpectedError[incompatible-call]
+    micromatch.contains('test');
+    // $FlowExpectedError[incompatible-call]
+    micromatch.contains('test', 1);
+    // $FlowExpectedError[incompatible-call]
+    micromatch.contains('test', 'test', 1);
+    // $FlowExpectedError[prop-missing]
+    micromatch.contains('test', 'test', {
       foo: 'bar',
     });
   });
