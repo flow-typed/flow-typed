@@ -9,7 +9,7 @@ describe('search command', () => {
       return {
         pkgName: name,
         pkgVersionStr: verStr,
-        pkgJsonPath: null,
+        configPath: null,
         flowVersion: parseFlowDirString(flowVerStr),
         flowVersionStr: flowVerStr,
         path: '',

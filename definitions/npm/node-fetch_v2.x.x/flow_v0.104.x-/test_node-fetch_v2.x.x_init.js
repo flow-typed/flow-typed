@@ -21,13 +21,14 @@ describe('RequestInit', () => {
     // $FlowExpectedError[incompatible-call]
     fetch('http://github.com', { headers: { 'Accept-Encoding': 3 } });
   });
-  it('should accept body option', (stream: Readable, blob: Blob) => {
+  it('should accept body option', (stream: Readable, blob: Blob, urlSearchParams: URLSearchParams) => {
     fetch('http://github.com', { body: 'Hello World' });
     fetch('http://github.com', { body: null });
     fetch('http://github.com', { body: Buffer.from('Hello World') });
     fetch('http://github.com', { body: blob });
     // $FlowExpectedError[incompatible-call]
     fetch('http://github.com', { body: 34 });
+    fetch('http://github.com', { body: urlSearchParams });
   });
   it('should accept redirect option', () => {
     fetch('http://github.com', { redirect: 'error' });

@@ -1,5 +1,5 @@
 // @flow
-import React from "react";
+import * as React from "react";
 import { connectAdvanced } from "react-redux";
 
 function testConnectAdvanced() {
@@ -9,7 +9,7 @@ function testConnectAdvanced() {
     ...
   };
   class Com extends React.Component<Props> {
-    render() {
+    render(): React.Node {
       return <div>{this.props.fromInputProps} {this.props.fromStateToProps}</div>;
     }
   }

@@ -11,6 +11,7 @@ import {
   toSemverString as flowVersionToSemver,
   type FlowVersion,
 } from './flowVersion';
+import {isExcludedFile} from './fileUtils';
 import {TEST_FILE_NAME_RE} from './libDefs';
 import {findLatestFileCommitHash} from './git';
 
@@ -28,9 +29,7 @@ export const getEnvDefs = async (): Promise<Array<EnvLibDef>> => {
   const dirItems = await fs.readdir(envDefsDirPath);
   const errors = [];
   const proms = dirItems.map(async itemName => {
-    // If a user opens definitions dir in finder it will create `.DS_Store`
-    // which will need to be excluded while parsing
-    if (itemName === '.DS_Store') return;
+    if (isExcludedFile(itemName)) return;
 
     try {
       return await getSingleEnvDef(itemName, envDefsDirPath);

@@ -155,7 +155,7 @@ declare module 'react-dom/client' {
 
   declare opaque type FiberRoot;
 
-  declare type RootType = {
+  declare export type RootType = {
     render(children: ReactNodeList): void,
     unmount(): void,
     _internalRoot: FiberRoot | null,

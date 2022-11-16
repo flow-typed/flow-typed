@@ -125,7 +125,7 @@ function stateAndDispatchObject_differentDispatchPropsAreOK() {
   type StateProps = {|
     state1: 'state1',
   |};
-  const mapStateToProps = state => ({
+  const mapStateToProps = (state: State) => ({
     state1: state.state1
   })
 
@@ -170,7 +170,7 @@ function stateAndDispatchObject_sameDispatchPropsAreErroneous() {
   type StateProps = {|
     state1: 'state1',
   |};
-  const mapStateToProps = state => ({
+  const mapStateToProps = (state: StateProps) => ({
     state1: state.state1
   })
 

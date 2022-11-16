@@ -18,7 +18,9 @@
   },
   "scripts": {
     "build:flow": "flow-copy-source --ignore '**/__tests__/**' src dist",
-    "build": "mkdirp dist && babel ./src --out-dir=./dist && yarn build:flow",
+    "build:src": "babel ./src --out-dir=./dist",
+    "build": "mkdirp dist && yarn build:src && yarn build:flow",
+    "build:watch": "yarn build:src --watch",
     "clean": "rimraf dist",
     "flow": "flow",
     "lint": "eslint .",

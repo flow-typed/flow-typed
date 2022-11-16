@@ -17,6 +17,16 @@ import * as ValidateDefs from './commands/validateDefs';
 import type {Argv} from 'yargs';
 import typeof Yargs from 'yargs';
 
+export const install = Install.run;
+export const createDef = CreateDef.run;
+export const createStub = CreateStub.run;
+export const outdated = Outdated.run;
+export const runTests = RunTests.run;
+export const search = Search.run;
+export const update = Update.run;
+export const updateCache = UpdateCache.run;
+export const validateDefs = ValidateDefs.run;
+
 const identity = <T>(x: T): T => x;
 
 export function runCLI() {
