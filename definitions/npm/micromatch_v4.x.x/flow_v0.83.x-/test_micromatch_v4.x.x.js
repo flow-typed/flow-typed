@@ -243,6 +243,7 @@ describe('micromatch', () => {
   test('isMatch', () => {
     (micromatch.isMatch('test', ['f*', 'b*']): boolean);
     micromatch.isMatch('test', 'test');
+    micromatch.isMatch('test', 'test', { basename: true });
 
     // $FlowExpectedError[incompatible-cast]
     (micromatch.isMatch('test', ['f*', 'b*']): string);
@@ -252,5 +253,91 @@ describe('micromatch', () => {
     micromatch.isMatch('test');
     // $FlowExpectedError[incompatible-call]
     micromatch.isMatch('test', 1);
+    // $FlowExpectedError[incompatible-call]
+    micromatch.isMatch('test', 'test', 1);
+    // $FlowExpectedError[prop-missing]
+    micromatch.isMatch('test', 'test', {
+      foo: 'bar',
+    });
+  });
+
+  test('some', () => {
+    (micromatch.some('list', ['f*', 'b*']): boolean);
+    micromatch.some(['test'], 'test');
+    micromatch.some('list', 'test')
+    micromatch.some('test', 'test', { basename: true });
+
+    // $FlowExpectedError[incompatible-cast]
+    (micromatch.some('test', ['f*', 'b*']): string);
+    // $FlowExpectedError[incompatible-call]
+    micromatch.some('test');
+    // $FlowExpectedError[incompatible-call]
+    micromatch.some('test', 1);
+    // $FlowExpectedError[incompatible-call]
+    micromatch.some('test', 'test', 1);
+    // $FlowExpectedError[prop-missing]
+    micromatch.some('test', 'test', {
+      foo: 'bar',
+    });
+  });
+
+  test('every', () => {
+    (micromatch.every('list', ['f*', 'b*']): boolean);
+    micromatch.every(['test'], 'test');
+    micromatch.every('list', 'test')
+    micromatch.every('test', 'test', { basename: true });
+
+    // $FlowExpectedError[incompatible-cast]
+    (micromatch.every('test', ['f*', 'b*']): string);
+    // $FlowExpectedError[incompatible-call]
+    micromatch.every('test');
+    // $FlowExpectedError[incompatible-call]
+    micromatch.every('test', 1);
+    // $FlowExpectedError[incompatible-call]
+    micromatch.every('test', 'test', 1);
+    // $FlowExpectedError[prop-missing]
+    micromatch.every('test', 'test', {
+      foo: 'bar',
+    });
+  });
+
+  test('any', () => {
+    (micromatch.any('list', ['f*', 'b*']): boolean);
+    micromatch.any(['test'], 'test');
+    micromatch.any('list', 'test')
+    micromatch.any('test', 'test', { basename: true });
+
+    // $FlowExpectedError[incompatible-cast]
+    (micromatch.any('test', ['f*', 'b*']): string);
+    // $FlowExpectedError[incompatible-call]
+    micromatch.any('test');
+    // $FlowExpectedError[incompatible-call]
+    micromatch.any('test', 1);
+    // $FlowExpectedError[incompatible-call]
+    micromatch.any('test', 'test', 1);
+    // $FlowExpectedError[prop-missing]
+    micromatch.any('test', 'test', {
+      foo: 'bar',
+    });
+  });
+
+  test('all', () => {
+    (micromatch.all('list', ['f*', 'b*']): boolean);
+    micromatch.all(['test'], 'test');
+    micromatch.all('list', 'test')
+    micromatch.all('test', 'test', { basename: true });
+
+    // $FlowExpectedError[incompatible-cast]
+    (micromatch.all('test', ['f*', 'b*']): string);
+    // $FlowExpectedError[incompatible-call]
+    micromatch.all('test');
+    // $FlowExpectedError[incompatible-call]
+    micromatch.all('test', 1);
+    // $FlowExpectedError[incompatible-call]
+    micromatch.all('test', 'test', 1);
+    // $FlowExpectedError[prop-missing]
+    micromatch.all('test', 'test', {
+      foo: 'bar',
+    });
   });
 });
