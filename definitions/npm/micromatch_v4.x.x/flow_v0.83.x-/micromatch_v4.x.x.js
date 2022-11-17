@@ -261,23 +261,6 @@ declare module 'micromatch' {
     windows?: boolean,
   |};
 
-  declare type ScanOptions = {|
-    ...Options,
-    /**
-     * When `true`, the returned object will include an array of `tokens` (objects), representing each path "segment" in the scanned glob pattern.
-     *
-     * @default false
-     */
-    tokens?: boolean,
-    /**
-     * When `true`, the returned object will include an array of strings representing each path "segment" in the scanned glob pattern.
-     * This is automatically enabled when `options.tokens` is `true`.
-     *
-     * @default false
-     */
-    parts?: boolean,
-  |};
-
   declare type ScanInfo = {|
     prefix: string,
     input: string,
@@ -661,9 +644,32 @@ declare module 'micromatch' {
      * Scan a glob pattern to separate the pattern into segments.
      */
     scan:
-      | (pattern: string, options: {| ...ScanOptions, parts: true |}) => ScanInfoWithParts
-      | (pattern: string, options: {| ...ScanOptions, tokens: true |}) => ScanInfoWithTokens
-      | (pattern: string, options?: ScanOptions) => ScanInfo,
+      | (
+        pattern: string,
+        options: {|
+          ...Options,
+          /**
+           * When `true`, the returned object will include an array of strings representing each path "segment" in the scanned glob pattern.
+           * This is automatically enabled when `options.tokens` is `true`.
+           *
+           * @default false
+           */
+          parts: true,
+        |}
+      ) => ScanInfoWithParts
+      | (
+        pattern: string,
+        options: {|
+          ...Options,
+          /**
+           * When `true`, the returned object will include an array of `tokens` (objects), representing each path "segment" in the scanned glob pattern.
+           *
+           * @default false
+           */
+          tokens: true,
+        |}
+      ) => ScanInfoWithTokens
+      | (pattern: string, options?: Options) => ScanInfo,
   |};
 
   declare module.exports: Micromatch;

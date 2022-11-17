@@ -1,5 +1,6 @@
 // @flow
 import { describe, test } from 'flow-typed-test';
+import type { ScanInfo } from 'micromatch';
 
 const micromatch = require('micromatch');
 
@@ -378,5 +379,127 @@ describe('micromatch', () => {
     micromatch.contains('test', 'test', {
       foo: 'bar',
     });
+  });
+
+  test('matchKeys', () => {
+    (micromatch.matchKeys('any', 'test'): any);
+    (micromatch.matchKeys({ a: 'a', b: 'b' }, 'test'): $Shape<{| a: string, b: string |}>);
+    micromatch.matchKeys('any', ['test']);
+    micromatch.matchKeys('any', 'test', { basename: true });
+    micromatch.matchKeys<{| a: string, b: number |}>({ a: '', b: 2 }, 'test').b.toFixed(2);;
+
+    // $FlowExpectedError[incompatible-call]
+    micromatch.matchKeys<{| a: string, b: number |}>({ a: 'a', b: 'b' }, ['f*', 'b*']);
+    // $FlowExpectedError[incompatible-cast]
+    (micromatch.matchKeys({ a: 'a', b: 'b' }, ['f*', 'b*']): string);
+    // $FlowExpectedError[incompatible-call]
+    micromatch.matchKeys({ a: 'a', b: 'b' });
+    // $FlowExpectedError[incompatible-call]
+    micromatch.matchKeys({ a: 'a', b: 'b' }, 1);
+    // $FlowExpectedError[incompatible-call]
+    micromatch.matchKeys({ a: 'a', b: 'b' }, 'test', 1);
+    // $FlowExpectedError[prop-missing]
+    micromatch.matchKeys({ a: 'a', b: 'b' }, 'test', {
+      foo: 'bar',
+    });
+  });
+
+  test('matcher', () => {
+    const matcher = micromatch.matcher('test');
+
+    (matcher('test'): boolean);
+    micromatch.matcher('test');
+    micromatch.matcher('test', { basename: true });
+
+    // $FlowExpectedError[incompatible-call]
+    matcher(2);
+    // $FlowExpectedError[incompatible-cast]
+    (matcher('test'): string);
+    micromatch.matcher('test');
+    // $FlowExpectedError[prop-missing]
+    micromatch.matcher('test', {
+      foo: 'bar',
+    });
+  });
+
+  test('capture', () => {
+    const capture = micromatch.capture('list', 'test');
+    if (capture) {
+      (capture: Array<string>);
+    } else {
+      (capture: null);
+    }
+    micromatch.capture('test', 'test', { basename: true });
+
+    // $FlowExpectedError[incompatible-cast]
+    (micromatch.capture('test', 'test'): string);
+    // $FlowExpectedError[incompatible-call]
+    micromatch.capture('test');
+    // $FlowExpectedError[incompatible-call]
+    micromatch.capture('test', 1);
+    // $FlowExpectedError[incompatible-call]
+    micromatch.capture('test', 'test', 1);
+    // $FlowExpectedError[prop-missing]
+    micromatch.capture('test', 'test', {
+      foo: 'bar',
+    });
+  });
+
+  test('makeRe', () => {
+    const makeRe = micromatch.makeRe('test');
+
+    (makeRe.test('test'): boolean);
+    micromatch.makeRe('test');
+    micromatch.makeRe('test', { basename: true });
+
+    // $FlowExpectedError[incompatible-call]
+    micromatch.makeRe(2);
+    // $FlowExpectedError[prop-missing]
+    micromatch.makeRe('test', {
+      foo: 'bar',
+    });
+  });
+
+  test('braces', () => {
+    (micromatch.braces('test'): Array<string>);
+    micromatch.braces('test', { maxLength: 2 });
+
+    // $FlowExpectedError[incompatible-cast]
+    (micromatch.braces('test'): string);
+    // $FlowExpectedError[incompatible-call]
+    micromatch.braces(2);
+    // $FlowExpectedError[prop-missing]
+    micromatch.braces('test', {
+      foo: 'bar',
+    });
+  });
+
+  test('parse', () => {
+    const parsed = micromatch.parse('list');
+    parsed.a.toString();
+    micromatch.parse('test', { basename: true });
+
+    // $FlowExpectedError[prop-missing]
+    parsed();
+    // $FlowExpectedError[incompatible-cast]
+    (micromatch.parse('test'): string);
+    // $FlowExpectedError[incompatible-call]
+    micromatch.parse(1);
+    // $FlowExpectedError[incompatible-call]
+    micromatch.parse('test', 1);
+    // $FlowExpectedError[prop-missing]
+    micromatch.parse('test', {
+      foo: 'bar',
+    });
+  });
+
+  test('scan', () => {
+    const scanInfo = micromatch.scan('test');
+    scanInfo.prefix.toLowerCase();
+    (micromatch.scan(''): ScanInfo);
+
+    const scanInfoWithParts = micromatch.scan('test', { basename: true, parts: true });
+    scanInfoWithParts.slashes[0];
+    scanInfoWithParts.parts[0];
   });
 });
