@@ -1,6 +1,5 @@
 // @flow
 import { describe, test } from 'flow-typed-test';
-import type { ScanInfo } from 'micromatch';
 
 const micromatch = require('micromatch');
 
@@ -496,10 +495,35 @@ describe('micromatch', () => {
   test('scan', () => {
     const scanInfo = micromatch.scan('test');
     scanInfo.prefix.toLowerCase();
-    (micromatch.scan(''): ScanInfo);
+
+    // $FlowExpectedError[prop-missing]
+    // $FlowExpectedError[incompatible-use]
+    scanInfo.slashes[0];
+    // $FlowExpectedError[prop-missing]
+    // $FlowExpectedError[incompatible-use]
+    scanInfo.parts[0];
+
+    const scanInfoWithOptions = micromatch.scan('test', { basename: true });
+    scanInfoWithOptions.prefix.toLowerCase();
+
+    // $FlowExpectedError[prop-missing]
+    // $FlowExpectedError[incompatible-use]
+    scanInfoWithOptions.slashes[0];
+    // $FlowExpectedError[prop-missing]
+    // $FlowExpectedError[incompatible-use]
+    scanInfoWithOptions.parts[0];
 
     const scanInfoWithParts = micromatch.scan('test', { basename: true, parts: true });
     scanInfoWithParts.slashes[0];
     scanInfoWithParts.parts[0];
+
+    // $FlowExpectedError[prop-missing]
+    // $FlowExpectedError[incompatible-use]
+    scanInfoWithParts.maxDepth.toFixed(2);
+
+    const scanInfoWithTokens = micromatch.scan('test', { basename: true, tokens: true });
+    scanInfoWithTokens.slashes[0];
+    scanInfoWithTokens.maxDepth.toFixed(2);
+    scanInfoWithTokens.tokens[0].value.toLowerCase();
   });
 });

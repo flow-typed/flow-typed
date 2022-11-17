@@ -644,7 +644,7 @@ declare module 'micromatch' {
      * Scan a glob pattern to separate the pattern into segments.
      */
     scan:
-      | (
+      & ((
         pattern: string,
         options: {|
           ...Options,
@@ -656,8 +656,8 @@ declare module 'micromatch' {
            */
           parts: true,
         |}
-      ) => ScanInfoWithParts
-      | (
+      ) => ScanInfoWithParts)
+      & ((
         pattern: string,
         options: {|
           ...Options,
@@ -668,8 +668,8 @@ declare module 'micromatch' {
            */
           tokens: true,
         |}
-      ) => ScanInfoWithTokens
-      | (pattern: string, options?: Options) => ScanInfo,
+      ) => ScanInfoWithTokens)
+      & ((pattern: string, options?: Options) => ScanInfo),
   |};
 
   declare module.exports: Micromatch;
