@@ -1,5 +1,3 @@
-// This will tag someone additional
-
 declare interface PapaParse$Static {
 
     // Parses a csv string or a csv file
