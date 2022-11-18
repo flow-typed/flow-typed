@@ -26,6 +26,7 @@ Contributing library definitions is as easy as sending a pull request!
   * [A note on flowgen](#a-note-on-flowgen)
 * [Writing tests](#writing-tests)
   * [Use `describe` and `it` blocks to limit scope](#use-describe-and-it-blocks-to-limit-scope)
+* [Owning definitions](#owning-definitions)
 
 ## Understanding the definitions structure
 
@@ -424,5 +425,13 @@ foo('#someFunction', () => {
   // you can also do type checks outside an it statement
   //$FlowExpectedError
   const a: number = 'foo';
-})
+});
 ```
+
+## Owning definitions
+
+So you've contributed to a definition and would like to be involved in future maintenance if it gets updated. `flow-typed` allows you to add a `CODEOWNERS` file in either a definition scope (`@scope/`) or definition version (`package_vx.x.x/`) level.
+
+Just add your github handle to the file as a newline and you'll be notified next time a pull request is raised if it touched files nested in the `CODEOWNERS` directory.
+
+![bot-pr-comment](docs/_media/bot-pr-comment.png)
