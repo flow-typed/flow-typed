@@ -83,11 +83,7 @@ declare module "backbone" {
     cidPrefix: string;
     attributes: Backbone$Attrs;
     changed: Object;
-    defaults: {
-      (): Backbone$Attrs,
-      ...Backbone$Attrs,
-      ...
-    };
+    defaults(): Backbone$Attrs;
     toJSON(): Backbone$Attrs;
     sync: typeof sync;
     //Start jQuery XHR

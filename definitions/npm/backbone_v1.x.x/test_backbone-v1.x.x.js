@@ -1,5 +1,11 @@
 // @flow
-import Backbone, {Model, Collection, Events} from "backbone";
+import Backbone, {
+  Model,
+  Collection,
+  Events,
+  type Backbone$Attrs,
+  type ModelOpts,
+} from "backbone";
 
 const otherBackbone: typeof Backbone = Backbone.noConflict();
 
@@ -104,5 +110,15 @@ const myView = new MyView({el: ".some-selector"});
 class MyView2 extends Backbone.View {
   initialize() {
     // code
+  }
+}
+
+class EntityModel extends Backbone.Model {
+  defaults(): Backbone$Attrs {
+    return {foo: "bar"};
+  }
+
+  constructor(attributes?: Backbone$Attrs, options?: ModelOpts): void {
+    super(attributes, options);
   }
 }
