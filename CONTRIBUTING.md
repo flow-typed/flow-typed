@@ -432,6 +432,8 @@ foo('#someFunction', () => {
 
 So you've contributed to a definition and would like to be involved in future maintenance if it gets updated. `flow-typed` allows you to add a `CODEOWNERS` file in either a definition scope (`@scope/`) or definition version (`package_vx.x.x/`) level.
 
+Equally if you want to get notified of updates to `environment` definitions you can add or update the `CODEOWNERS` file in the `environment/env` directory.
+
 Just add your github handle to the file as a newline and you'll be notified next time a pull request is raised if it touched files nested in the `CODEOWNERS` directory.
 
 ![bot-pr-comment](docs/_media/bot-pr-comment.png)
