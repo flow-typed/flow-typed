@@ -1,11 +1,17 @@
 // @flow
-import Backbone, {Model, Collection, Events} from "backbone";
+import Backbone, {
+  Model,
+  Collection,
+  Events,
+  type Backbone$Attrs,
+  type ModelOpts,
+} from "backbone";
 
 const otherBackbone: typeof Backbone = Backbone.noConflict();
 
 (otherBackbone.Model: typeof Backbone.Model);
 
-// $FlowExpectedError should be a view type
+// $FlowExpectedError[incompatible-cast] should be a view type
 (otherBackbone.View: void);
 
 (Backbone.version: string);
@@ -36,29 +42,29 @@ class TasksCollection extends Collection<TaskModel> {
 
 const tasks = new TasksCollection();
 
-// $FlowExpectedError
+// $FlowExpectedError[incompatible-call]
 tasks.toJSON([]);
 
 (tasks.length: number);
 
-// $FlowExpectedError should not allow to be non number
+// $FlowExpectedError[incompatible-type] should not allow to be non number
 tasks.length = false;
 
 (tasks.pluck("name"): Array<any>);
 
-// $FlowExpectedError
+// $FlowExpectedError[cannot-resolve-name]
 (task.pluck(2): Array<any>);
 
 (tasks.forEach: Function);
 (tasks.sync: Function);
-// $FlowExpectedError
+// $FlowExpectedError[incompatible-call]
 instance.fetch(null);
-// $FlowExpectedError
+// $FlowExpectedError[incompatible-call]
 instance.set(10);
 
 instance.toJSON();
 
-// $FlowExpectedError
+// $FlowExpectedError[incompatible-cast]
 (instance.foo(): number);
 
 instance.get("field");
@@ -71,7 +77,7 @@ class TasksRouter extends Backbone.Router {
   constructor() {
     super();
     this.routes = {
-      // $FlowExpectedError
+      // $FlowExpectedError[incompatible-type]
       "10": false,
     };
   }
@@ -81,10 +87,10 @@ const router = new TasksRouter();
 
 router.route("/create", "createRoute");
 
-// $FlowExpectedError
+// $FlowExpectedError[incompatible-call]
 router.route("/create", "delete", null);
 
-// $FlowExpectedError
+// $FlowExpectedError[incompatible-call]
 Backbone.history.start({root: false});
 
 Backbone.history.start({pushState: true});
@@ -104,5 +110,15 @@ const myView = new MyView({el: ".some-selector"});
 class MyView2 extends Backbone.View {
   initialize() {
     // code
+  }
+}
+
+class EntityModel extends Backbone.Model {
+  defaults(): Backbone$Attrs {
+    return {foo: "bar"};
+  }
+
+  constructor(attributes?: Backbone$Attrs, options?: ModelOpts): void {
+    super(attributes, options);
   }
 }
