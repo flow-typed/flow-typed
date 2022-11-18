@@ -83,16 +83,12 @@ declare module "backbone" {
     cidPrefix: string;
     attributes: Backbone$Attrs;
     changed: Object;
-    defaults: {
-      (): Backbone$Attrs,
-      ...Backbone$Attrs,
-      ...
-    };
+    defaults(): Backbone$Attrs;
     toJSON(): Backbone$Attrs;
     sync: typeof sync;
     //Start jQuery XHR
     // @TODO should return a jQuery XHR, but I cannot define this without the dependency on jquery lib def
-    fetch(options?: Object): any;
+    fetch(options?: { [key: string]: any, ... }): any;
     save(attrs: Backbone$Attrs, options?: Object): any;
     save(attr: string, value: mixed, options?: Object): any;
     destroy(options?: Object): any;
@@ -135,7 +131,7 @@ declare module "backbone" {
     model: TModel;
     modelId(attributes: TModel): string;
     models: TModel[];
-    toJSON(options?: Object): TModel[];
+    toJSON(options?: { [key: string]: any, ... }): TModel[];
     sync: typeof sync;
     // Underscore Methods
     // @TODO should be defined by the underscore library defintion and not as generic functions.
@@ -198,7 +194,7 @@ declare module "backbone" {
     url: () => string | string;
     parse(response: Object, options: Object): Object;
     clone(): this;
-    fetch(options?: Object): void;
+    fetch(options?: { [key: string]: any, ... }): void;
     create(attributes: Object, options?: Object): void;
   }
 
