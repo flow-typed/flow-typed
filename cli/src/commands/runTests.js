@@ -154,7 +154,7 @@ function printSkipMessage(flowVersion, githubUrl) {
  */
 let _flowBinVersionPromise = null;
 async function getOrderedFlowBinVersions(
-  numberOfReleases: number = 15,
+  numberOfReleases: number,
 ): Promise<Array<string>> {
   if (_flowBinVersionPromise !== null) {
     return _flowBinVersionPromise;
@@ -167,13 +167,37 @@ async function getOrderedFlowBinVersions(
     const QUERY_PAGE_SIZE = numberOfReleases;
     const OS_ARCH_FILTER_RE = new RegExp(`flow-${BIN_PLATFORM}`);
 
-    let page = 0;
     const apiPayload = await GH_CLIENT.repos.listReleases({
       owner: 'facebook',
       repo: 'flow',
-      page: page++,
+      page: 1,
       per_page: QUERY_PAGE_SIZE,
     });
+
+    console.log('im starting');
+    const d = Date.now();
+    console.log(d);
+    const versions = [];
+    let foundAllFlowVersions = false;
+    let page = 1;
+    while (!foundAllFlowVersions) {
+      try {
+        const pageVersions = await GH_CLIENT.repos.listReleases({
+          owner: 'facebook',
+          repo: 'flow',
+          page,
+          per_page: 100,
+        });
+        page++;
+        versions.push(pageVersions);
+        console.log(Date.now());
+      } catch (e) {
+        foundAllFlowVersions = true;
+      }
+    }
+    console.log('done');
+    console.log(versions.length);
+    console.log(Date.now() - d);
 
     const flowBins = apiPayload.data
       .filter(rel => {
@@ -319,7 +343,7 @@ function checkFlowFilename(name) {
  * API limit.
  */
 async function getCachedFlowBinVersions(
-  numberOfReleases: number = 15,
+  numberOfReleases: number,
 ): Promise<Array<string>> {
   // read the files with name `flow-vx.x.x` from the bin dir and remove the leading `flow-v` prefix
   const versions: any[] = (await fs.readdir(path.join(BIN_DIR)))
@@ -770,7 +794,7 @@ async function runTests(
   envDirPath: string,
   testPatterns: Array<string>,
   onlyChanged?: boolean,
-  numberOfFlowVersions?: number,
+  numberOfFlowVersions: number,
 ): Promise<Map<string, Array<string>>> {
   const testPatternRes = testPatterns.map(patt => new RegExp(patt, 'g'));
   const testGroups = (
@@ -823,6 +847,9 @@ async function runTests(
           numberOfFlowVersions,
         );
       }
+
+      // before this we should check the versions touch and probably pull starting from some version range
+      console.log(orderedFlowVersions);
 
       const testGroupErrors = await runTestGroup(
         repoDirPath,
@@ -903,19 +930,13 @@ export async function run(argv: Args): Promise<number> {
     ? cwdDefsEnvPath
     : path.join(__dirname, '..', '..', '..', 'definitions', 'npm');
 
-  if (onlyChanged) {
-    console.log(
-      'Running changed definition tests against latest %s flow versions in %s...\n',
-      numberOfFlowVersions,
-      path.join(repoDirPath, '..'),
-    );
-  } else {
-    console.log(
-      'Running definition tests against latest %s flow versions in %s...\n',
-      numberOfFlowVersions,
-      path.join(repoDirPath, '..'),
-    );
-  }
+  console.info(
+    `Running ${
+      onlyChanged ? 'changed' : ''
+    } definition tests against latest ${colors.green(
+      numberOfFlowVersions.toString(),
+    )} flow versions in ${path.join(repoDirPath, '..')}...\n`,
+  );
 
   let results;
   try {
@@ -934,7 +955,7 @@ export async function run(argv: Args): Promise<number> {
       throw e;
     }
   }
-  console.log(' ');
+
   Array.from(results).forEach(([testGroupName, errors]) => {
     console.log('ERROR: %s', testGroupName);
     errors.forEach(err =>
@@ -950,7 +971,7 @@ export async function run(argv: Args): Promise<number> {
     );
   });
   if (results.size === 0) {
-    console.log('All tests passed!');
+    console.log('✨ All tests passed!');
     return 0;
   }
   return 1;
