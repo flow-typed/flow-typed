@@ -1,13 +1,12 @@
 // @flow
-
 import {Octokit} from '@octokit/rest';
 
-const CLIENT = new Octokit();
+const CLIENT = process.env.GITHUB_TOKEN
+  ? new Octokit({
+      auth: process.env.GITHUB_TOKEN,
+    })
+  : new Octokit();
 
-if (process.env.GH_TOK) {
-  CLIENT.authenticate({type: 'oauth', token: process.env.GH_TOK});
-}
-
-export function gitHubClient(): Object {
+export function gitHubClient(): Octokit {
   return CLIENT;
 }

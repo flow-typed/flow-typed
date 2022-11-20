@@ -155,7 +155,9 @@ function printSkipMessage(flowVersion, githubUrl) {
 let _flowBinVersionPromise = null;
 async function getOrderedFlowBinVersions(
   numberOfReleases: number,
+  flowVersion: FlowVersion,
 ): Promise<Array<string>> {
+  console.log(flowVersion);
   if (_flowBinVersionPromise !== null) {
     return _flowBinVersionPromise;
   }
@@ -163,20 +165,10 @@ async function getOrderedFlowBinVersions(
     console.log('Fetching all Flow binaries...');
     const IS_WINDOWS = os.type() === 'Windows_NT';
     const GH_CLIENT = gitHubClient();
-    // We only test against the latest numberOfReleases Versions
-    const QUERY_PAGE_SIZE = numberOfReleases;
     const OS_ARCH_FILTER_RE = new RegExp(`flow-${BIN_PLATFORM}`);
 
-    const apiPayload = await GH_CLIENT.repos.listReleases({
-      owner: 'facebook',
-      repo: 'flow',
-      page: 1,
-      per_page: QUERY_PAGE_SIZE,
-    });
-
-    console.log('im starting');
-    const d = Date.now();
-    console.log(d);
+    // Fetching all available flow versions
+    // before deciding which to run
     const versions = [];
     let foundAllFlowVersions = false;
     let page = 1;
@@ -188,18 +180,25 @@ async function getOrderedFlowBinVersions(
           page,
           per_page: 100,
         });
-        page++;
-        versions.push(pageVersions);
-        console.log(Date.now());
+        page += 1;
+        versions.push(...pageVersions.data);
+
+        // check if the current query satisfies the flow versions
+        // necessary
+        if (
+          flowVersion.kind === 'ranged' &&
+          (flowVersion.upper === null || flowVersion.upper.minor)
+        ) {
+          foundAllFlowVersions = true;
+        }
       } catch (e) {
+        console.error(e);
         foundAllFlowVersions = true;
       }
     }
-    console.log('done');
-    console.log(versions.length);
-    console.log(Date.now() - d);
 
-    const flowBins = apiPayload.data
+    const flowBins = versions
+      .slice(0, numberOfReleases)
       .filter(rel => {
         if (rel.tag_name.endsWith('-rc')) {
           return false;
@@ -841,6 +840,7 @@ async function runTests(
       try {
         orderedFlowVersions = await getOrderedFlowBinVersions(
           numberOfFlowVersions,
+          testGroup.flowVersion,
         );
       } catch (e) {
         orderedFlowVersions = await getCachedFlowBinVersions(
