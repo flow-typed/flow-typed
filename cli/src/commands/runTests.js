@@ -6,6 +6,7 @@ import {copyFile, recursiveRmdir} from '../lib/fileUtils.js';
 import {gitHubClient} from '../lib/github.js';
 import {getNpmLibDefDirFromNested} from '../lib/npm/npmLibDefs';
 import {getLibDefs, parseRepoDirItem} from '../lib/libDefs.js';
+import {listItem, sectionHeader} from '../lib/logger';
 import isInFlowTypedRepo from '../lib/isInFlowTypedRepo';
 import {
   toSemverString as flowVerToSemverString,
@@ -155,14 +156,14 @@ function printSkipMessage(flowVersion, githubUrl) {
 let _flowBinVersionPromise = null;
 async function getOrderedFlowBinVersions(
   numberOfReleases: number,
-  flowVersion: FlowVersion,
 ): Promise<Array<string>> {
-  console.log(flowVersion);
+  // Once we've fetched flow bin releases they will be cached
+  // For subsequent tests within the same test run.
   if (_flowBinVersionPromise !== null) {
     return _flowBinVersionPromise;
   }
   return (_flowBinVersionPromise = (async function() {
-    console.log('Fetching all Flow binaries...');
+    sectionHeader('Fetching all Flow binaries...');
     const IS_WINDOWS = os.type() === 'Windows_NT';
     const GH_CLIENT = gitHubClient();
     const OS_ARCH_FILTER_RE = new RegExp(`flow-${BIN_PLATFORM}`);
@@ -178,17 +179,13 @@ async function getOrderedFlowBinVersions(
           owner: 'facebook',
           repo: 'flow',
           page,
-          per_page: 100,
+          per_page: 50,
         });
+        listItem(`Fetched page: ${page}`);
         page += 1;
         versions.push(...pageVersions.data);
 
-        // check if the current query satisfies the flow versions
-        // necessary
-        if (
-          flowVersion.kind === 'ranged' &&
-          (flowVersion.upper === null || flowVersion.upper.minor)
-        ) {
+        if (pageVersions.data.length === 0) {
           foundAllFlowVersions = true;
         }
       } catch (e) {
@@ -840,7 +837,6 @@ async function runTests(
       try {
         orderedFlowVersions = await getOrderedFlowBinVersions(
           numberOfFlowVersions,
-          testGroup.flowVersion,
         );
       } catch (e) {
         orderedFlowVersions = await getCachedFlowBinVersions(
@@ -848,13 +844,15 @@ async function runTests(
         );
       }
 
+      // TODO at this point we have a list, and should perform filtering.
+      //
       // before this we should check the versions touch and probably pull starting from some version range
       console.log(orderedFlowVersions);
 
       const testGroupErrors = await runTestGroup(
         repoDirPath,
         testGroup,
-        orderedFlowVersions,
+        orderedFlowVersions.slice(0, 15),
       );
       if (testGroupErrors.length > 0) {
         const errors = results.get(testGroup.id) || [];
