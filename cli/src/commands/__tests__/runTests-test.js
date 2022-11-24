@@ -1,7 +1,12 @@
 // @flow
 import fs from 'fs';
 
-import {run, writeFlowConfig, TEST_DIR} from '../runTests';
+import {
+  run,
+  writeFlowConfig,
+  TEST_DIR,
+  selectFlowTestVersions,
+} from '../runTests';
 import {path} from '../../lib/node';
 
 describe('run-tests (command)', () => {
@@ -194,6 +199,219 @@ describe('run-tests (command)', () => {
       matches.forEach((match, i) => {
         expect(flowConfigSplit[i]).toMatch(match);
       });
+    });
+  });
+
+  describe('selectFlowTestVersions', () => {
+    const orderedFlowVersions = [
+      'v0.193.0',
+      'v0.192.0',
+      'v0.191.0',
+      'v0.190.1',
+      'v0.190.0',
+      'v0.189.0',
+      'v0.188.2',
+      'v0.188.1',
+      'v0.188.0',
+      'v0.187.1',
+      'v0.187.0',
+      'v0.186.0',
+      'v0.185.2',
+      'v0.185.1',
+      'v0.185.0',
+      'v0.184.0',
+      'v0.183.1',
+      'v0.183.0',
+      'v0.182.0',
+      'v0.181.2',
+      'v0.181.1',
+      'v0.181.0',
+      'v0.180.1',
+      'v0.180.0',
+      'v0.179.0',
+      'v0.178.1',
+      'v0.178.0',
+      'v0.177.0',
+      'v0.176.3',
+      'v0.176.2',
+      'v0.176.1',
+      'v0.176.0',
+      'v0.175.1',
+      'v0.175.0',
+      'v0.174.1',
+      'v0.174.0',
+      'v0.173.0',
+      'v0.172.0',
+      'v0.171.0',
+      'v0.170.0',
+      'v0.169.0',
+      'v0.168.0',
+      'v0.167.1',
+      'v0.167.0',
+      'v0.166.1',
+      'v0.166.0',
+      'v0.165.1',
+      'v0.165.0',
+      'v0.164.0',
+      'v0.163.0',
+      'v0.162.1',
+      'v0.162.0',
+      'v0.161.0',
+      'v0.160.2',
+      'v0.160.1',
+      'v0.160.0',
+      'v0.159.0',
+      'v0.158.0',
+      'v0.157.0',
+      'v0.156.0',
+      'v0.155.1',
+      'v0.155.0',
+      'v0.154.0',
+      'v0.153.0',
+      'v0.152.0',
+      'v0.151.0',
+      'v0.150.1',
+      'v0.150.0',
+      'v0.149.0',
+      'v0.148.0',
+      'v0.147.0',
+      'v0.146.0',
+      'v0.145.0',
+      'v0.144.0',
+      'v0.143.1',
+      'v0.143.0',
+      'v0.142.0',
+      'v0.141.0',
+      'v0.140.0',
+      'v0.139.0',
+      'v0.138.0',
+      'v0.137.0',
+      'v0.136.0',
+      'v0.135.0',
+      'v0.134.0',
+      'v0.133.0',
+      'v0.132.0',
+      'v0.131.0',
+      'v0.130.0',
+      'v0.129.0',
+      'v0.128.0',
+      'v0.127.0',
+      'v0.126.1',
+      'v0.126.0',
+      'v0.125.1',
+      'v0.125.0',
+      'v0.124.0',
+      'v0.123.0',
+      'v0.122.0',
+      'v0.121.0',
+    ];
+
+    it('returns the first 15 normally', () => {
+      expect(
+        selectFlowTestVersions(
+          orderedFlowVersions,
+          {
+            kind: 'ranged',
+            lower: {major: 0, minor: 104, patch: 'x', prerel: null},
+            upper: null,
+          },
+          15,
+        ),
+      ).toEqual([
+        'v0.193.0',
+        'v0.192.0',
+        'v0.191.0',
+        'v0.190.1',
+        'v0.190.0',
+        'v0.189.0',
+        'v0.188.2',
+        'v0.188.1',
+        'v0.188.0',
+        'v0.187.1',
+        'v0.187.0',
+        'v0.186.0',
+        'v0.185.2',
+        'v0.185.1',
+        'v0.185.0',
+      ]);
+    });
+
+    it('returns all versions in a range if there are not enough versions in the range', () => {
+      expect(
+        selectFlowTestVersions(
+          orderedFlowVersions,
+          {
+            kind: 'ranged',
+            lower: {major: 0, minor: 188, patch: 'x', prerel: null},
+            upper: null,
+          },
+          15,
+        ),
+      ).toEqual([
+        'v0.193.0',
+        'v0.192.0',
+        'v0.191.0',
+        'v0.190.1',
+        'v0.190.0',
+        'v0.189.0',
+        'v0.188.2',
+        'v0.188.1',
+        'v0.188.0',
+      ]);
+    });
+
+    it('returns versions only within set range', () => {
+      expect(
+        selectFlowTestVersions(
+          orderedFlowVersions,
+          {
+            kind: 'ranged',
+            lower: {major: 0, minor: 185, patch: 'x', prerel: null},
+            upper: {major: 0, minor: 188, patch: 'x', prerel: null},
+          },
+          15,
+        ),
+      ).toEqual([
+        'v0.188.2',
+        'v0.188.1',
+        'v0.188.0',
+        'v0.187.1',
+        'v0.187.0',
+        'v0.186.0',
+        'v0.185.2',
+        'v0.185.1',
+        'v0.185.0',
+      ]);
+    });
+
+    it('returns versions only within set range up to max release versions', () => {
+      expect(
+        selectFlowTestVersions(
+          orderedFlowVersions,
+          {
+            kind: 'ranged',
+            lower: {major: 0, minor: 105, patch: 'x', prerel: null},
+            upper: {major: 0, minor: 188, patch: 'x', prerel: null},
+          },
+          15,
+        ),
+      ).toEqual([
+        'v0.188.2',
+        'v0.188.1',
+        'v0.188.0',
+        'v0.187.1',
+        'v0.187.0',
+        'v0.186.0',
+        'v0.185.2',
+        'v0.185.1',
+        'v0.185.0',
+        'v0.184.0',
+        'v0.183.1',
+        'v0.183.0',
+        'v0.182.0',
+        'v0.181.2',
+        'v0.181.1',
+      ]);
     });
   });
 });

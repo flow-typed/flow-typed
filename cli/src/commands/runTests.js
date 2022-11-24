@@ -156,6 +156,7 @@ function printSkipMessage(flowVersion, githubUrl) {
 let _flowBinVersionPromise = null;
 async function getOrderedFlowBinVersions(
   numberOfReleases: number,
+  flowVersion: FlowVersion,
 ): Promise<Array<string>> {
   // Once we've fetched flow bin releases they will be cached
   // For subsequent tests within the same test run.
@@ -194,8 +195,14 @@ async function getOrderedFlowBinVersions(
       }
     }
 
+    const filteredVersions = selectFlowTestVersions(
+      versions.map(o => o.tag_name),
+      flowVersion,
+      numberOfReleases,
+    );
+
     const flowBins = versions
-      .slice(0, numberOfReleases)
+      .filter(ver => filteredVersions.includes(ver.tag_name))
       .filter(rel => {
         if (rel.tag_name.endsWith('-rc')) {
           return false;
@@ -340,21 +347,20 @@ function checkFlowFilename(name) {
  */
 async function getCachedFlowBinVersions(
   numberOfReleases: number,
+  flowVersion: FlowVersion,
 ): Promise<Array<string>> {
-  // read the files with name `flow-vx.x.x` from the bin dir and remove the leading `flow-v` prefix
+  // read the files with name `flow-vx.x.x` from the bin dir and remove the leading `flow-` prefix
   const versions: any[] = (await fs.readdir(path.join(BIN_DIR)))
     .filter(checkFlowFilename)
-    .map(dir => dir.slice(6));
+    .map(dir => dir.slice('flow-'.length));
 
-  // sort the versions that we have inplace
+  // sort the versions that we have in-place
+  // removing the `v` prefix before semver comparison
   versions.sort((a, b) => {
-    return semver.lt(a, b) ? -1 : 1;
+    return semver.lt(a.substring(1), b.substring(1)) ? -1 : 1;
   });
 
-  versions.splice(0, versions.length - numberOfReleases);
-
-  // return the versions with a leading 'v' to satisfy the expected return value
-  return versions.map(version => `v${version}`);
+  return selectFlowTestVersions(versions, flowVersion, numberOfReleases);
 }
 
 export async function writeFlowConfig(
@@ -785,6 +791,72 @@ async function runTestGroup(
   }
 }
 
+/**
+ * Takes a list of ordered flow version string in the format of
+ * `vx.x.x` from latest to oldest and returns a filtered list of flow versions
+ * depending on the definitions testing requirements
+ */
+export function selectFlowTestVersions(
+  orderedFlowVersions: Array<string>,
+  flowVersion: FlowVersion,
+  numberOfFlowVersions: number,
+): Array<string> {
+  // This retains original logic in cases
+  // where we want all or specific flow versions for testing.
+  // This is a pretty uncommon use case though.
+  if (flowVersion.kind === 'all' || flowVersion.kind === 'specific') {
+    return orderedFlowVersions.slice(0, numberOfFlowVersions);
+  }
+
+  const {upper, lower} = flowVersion;
+
+  const selectedFlowVersions = [];
+
+  const findSelectedFlowVersions = (flowVersions: Array<string>) => {
+    let versionExceedsLower = false;
+    while (
+      selectedFlowVersions.length < numberOfFlowVersions &&
+      !versionExceedsLower
+    ) {
+      const version = flowVersions[selectedFlowVersions.length];
+
+      const [major, minor, patch] = version.substring(1).split('.');
+      if (
+        lower &&
+        (lower.major === 'x' || lower.major <= Number(major)) &&
+        (lower.minor === 'x' || lower.minor <= Number(minor)) &&
+        (lower.patch === 'x' || lower.patch <= Number(patch))
+      ) {
+        selectedFlowVersions.push(version);
+      } else {
+        versionExceedsLower = true;
+      }
+    }
+  };
+
+  if (upper == null) {
+    findSelectedFlowVersions(orderedFlowVersions);
+  } else {
+    // If upper exists we should find the first version that satisfies
+    // upper and find the first `numberOfFlowVersions` until we hit the
+    // lower boundary.
+    const upperFlowVersion = orderedFlowVersions.findIndex(o => {
+      const [major, minor, patch] = o.substring(1).split('.');
+      if (
+        (upper.major === 'x' || upper.major >= Number(major)) &&
+        (upper.minor === 'x' || upper.minor >= Number(minor)) &&
+        (upper.patch === 'x' || upper.patch >= Number(patch))
+      ) {
+        return true;
+      }
+    });
+    const upperBoundFlowVersions = orderedFlowVersions.slice(upperFlowVersion);
+    findSelectedFlowVersions(upperBoundFlowVersions);
+  }
+
+  return selectedFlowVersions;
+}
+
 async function runTests(
   repoDirPath: string,
   envDirPath: string,
@@ -837,22 +909,19 @@ async function runTests(
       try {
         orderedFlowVersions = await getOrderedFlowBinVersions(
           numberOfFlowVersions,
+          testGroup.flowVersion,
         );
       } catch (e) {
         orderedFlowVersions = await getCachedFlowBinVersions(
           numberOfFlowVersions,
+          testGroup.flowVersion,
         );
       }
-
-      // TODO at this point we have a list, and should perform filtering.
-      //
-      // before this we should check the versions touch and probably pull starting from some version range
-      console.log(orderedFlowVersions);
 
       const testGroupErrors = await runTestGroup(
         repoDirPath,
         testGroup,
-        orderedFlowVersions.slice(0, 15),
+        orderedFlowVersions,
       );
       if (testGroupErrors.length > 0) {
         const errors = results.get(testGroup.id) || [];
