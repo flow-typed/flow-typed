@@ -1,5 +1,9 @@
 declare module '@octokit/rest' {
   declare class Octokit {
+    constructor(options?: {|
+      auth?: string,
+    |}): this;
+
     (options?: {| [key: string]: any |}): this;
 
     actions: {| [key: string]: any |},
@@ -57,6 +61,69 @@ declare module '@octokit/rest' {
         headers: {| [key: string]: any |},
         status: number,
         url: string,
+      |}>,
+      /**
+       * This returns a list of releases, which does not include regular Git tags that have not been associated with a release. To get a list of Git tags, use the Repository Tags API.
+       *
+       * Information about published releases are available to everyone. Only users with push access will receive listings for draft releases.
+       */
+      listReleases: ({|
+        /**
+         * The account owner of the repository. The name is not case sensitive.
+         */
+        owner: string,
+        /**
+         * The name of the repository. The name is not case sensitive.
+         */
+        repo: string,
+        /**
+         * The number of results per page (max 100).
+         */
+        page?: number,
+        /**
+         * Page number of the results to fetch.
+         */
+        per_page?: number,
+      |}) => Promise<{|
+        data: Array<{|
+          url: string,
+          assets_url: string,
+          upload_url: string,
+          html_url: string,
+          id: number,
+          author: {|
+            login: string,
+            id: number,
+            node_id: string,
+            avatar_url: string,
+            gravatar_id: string,
+            url: string,
+            html_url: string,
+            followers_url: string,
+            following_url: string,
+            gists_url: string,
+            starred_url: string,
+            subscriptions_url: string,
+            organizations_url: string,
+            repos_url: string,
+            events_url: string,
+            received_events_url: string,
+            type: string,
+            site_admin: boolean,
+          |},
+          node_id: string,
+          tag_name: string,
+          target_commitish: string,
+          name: any,
+          draft: boolean,
+          prerelease: boolean,
+          created_at: string,
+          published_at: string,
+          assets: Array<any>,
+          tarball_url: string,
+          zipball_url: string,
+          body: string,
+        |}>,
       |}>,
       [key: string]: any,
     },

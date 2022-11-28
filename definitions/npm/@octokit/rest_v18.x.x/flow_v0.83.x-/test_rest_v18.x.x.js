@@ -1,14 +1,24 @@
 // @flow
-import { describe, it } from 'flow-typed-test';
+import { describe, test } from 'flow-typed-test';
 import { Octokit } from '@octokit/rest';
 
 describe('@octokit/rest', () => {
   const octokit = new Octokit();
 
+  test('constructor', () => {
+    new Octokit();
+    new Octokit({ auth: '123' });
+
+    // $FlowExpectedError[incompatible-call]
+    new Octokit(123);
+    // $FlowExpectedError[incompatible-call]
+    new Octokit({ auth: 1 });
+  });
+
   describe('repos', () => {
     const { repos } = octokit;
 
-    it('getContent', () => {
+    test('getContent', () => {
       repos.getContent({
         owner: 'flow-typed',
         repo: 'eslint-plugin-ft-flow',
@@ -60,6 +70,10 @@ describe('@octokit/rest', () => {
       repos.getContent({
         repo: 'flow-typed',
       });
+    });
+
+    test('listReleases', () => {
+
     });
   });
 });
