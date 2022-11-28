@@ -1,13 +1,51 @@
-// flow-typed signature: a09a5a92a3c1ded961684da6ff393a70
-// flow-typed version: 15ea1b476e/@octokit/rest_v18.x.x/flow_>=v0.83.x
+// flow-typed signature: 6103021a6389a42ea8b41c577b3f91b3
+// flow-typed version: 79dc43986b/@octokit/rest_v18.x.x/flow_>=v0.83.x
 
 declare module '@octokit/rest' {
+  /**
+   * Octokit-specific request options which are ignored for the actual request, but can be used by Octokit or plugins to manipulate how the request is sent or how a response is handled
+   */
+  declare type RequestRequestOptions = {|
+    /**
+     * Node only. Useful for custom proxy, certificate, or dns lookup.
+     *
+     * @see https://nodejs.org/api/http.html#http_class_http_agent
+     */
+    agent?: mixed,
+    /**
+     * Custom replacement for built-in fetch method. Useful for testing or request hooks.
+     */
+    fetch?: any,
+    /**
+     * Use an `AbortController` instance to cancel a request. In node you can only cancel streamed requests.
+     */
+    signal?: any,
+    /**
+     * Node only. Request/response timeout in ms, it resets on redirect. 0 to disable (OS limit applies). `options.request.signal` is recommended instead.
+     */
+    timeout?: number,
+    [option: string]: any,
+  |};
+
   declare class Octokit {
     constructor(options?: {|
-      auth?: string,
+      authStrategy?: any,
+      auth?: any,
+      userAgent?: string,
+      previews?: Array<string>,
+      baseUrl?: string,
+      log?: {|
+        debug?: (message: string) => mixed;
+        info?: (message: string) => mixed;
+        warn?: (message: string) => mixed;
+        error?: (message: string) => mixed;
+      |},
+      request?: RequestRequestOptions,
+      timeZone?: string,
+      [option: string]: any,
     |}): this;
 
-    (options?: {| [key: string]: any |}): this;
+    static VERSION: string;
 
     actions: {| [key: string]: any |},
     activity: {| [key: string]: any |},
@@ -45,6 +83,9 @@ declare module '@octokit/rest' {
         path?: string,
         ref?: string,
       |}) => Promise<{|
+        headers: {| [key: string]: any |},
+        status: number,
+        url: string,
         data: Array<{|
           download_url: any,
           git_url: string,
@@ -61,9 +102,6 @@ declare module '@octokit/rest' {
             self: string,
           |}
         |}>,
-        headers: {| [key: string]: any |},
-        status: number,
-        url: string,
       |}>,
       /**
        * This returns a list of releases, which does not include regular Git tags that have not been associated with a release. To get a list of Git tags, use the Repository Tags API.
@@ -88,13 +126,16 @@ declare module '@octokit/rest' {
          */
         per_page?: number,
       |}) => Promise<{|
+        headers: {| [key: string]: any |},
+        status: number,
+        url: string,
         data: Array<{|
           url: string,
           assets_url: string,
           upload_url: string,
           html_url: string,
           id: number,
-          author: {
+          author: {|
             login: string,
             id: number,
             node_id: string,
@@ -113,7 +154,7 @@ declare module '@octokit/rest' {
             received_events_url: string,
             type: string,
             site_admin: boolean,
-          },
+          |},
           node_id: string,
           tag_name: string,
           target_commitish: string,
