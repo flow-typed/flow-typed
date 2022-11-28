@@ -42,6 +42,9 @@ declare module '@octokit/rest' {
         path?: string,
         ref?: string,
       |}) => Promise<{|
+        headers: {| [key: string]: any |},
+        status: number,
+        url: string,
         data: Array<{|
           download_url: any,
           git_url: string,
@@ -58,9 +61,6 @@ declare module '@octokit/rest' {
             self: string,
           |}
         |}>,
-        headers: {| [key: string]: any |},
-        status: number,
-        url: string,
       |}>,
       /**
        * This returns a list of releases, which does not include regular Git tags that have not been associated with a release. To get a list of Git tags, use the Repository Tags API.
@@ -85,6 +85,9 @@ declare module '@octokit/rest' {
          */
         per_page?: number,
       |}) => Promise<{|
+        headers: {| [key: string]: any |},
+        status: number,
+        url: string,
         data: Array<{|
           url: string,
           assets_url: string,
