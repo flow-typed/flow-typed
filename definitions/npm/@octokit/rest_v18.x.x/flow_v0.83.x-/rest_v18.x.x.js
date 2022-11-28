@@ -43,7 +43,6 @@ declare module '@octokit/rest' {
     |}): this;
 
     static VERSION: string;
-    static defaults: this;
 
     actions: {| [key: string]: any |},
     activity: {| [key: string]: any |},
