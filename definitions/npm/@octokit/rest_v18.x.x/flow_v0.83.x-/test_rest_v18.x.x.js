@@ -34,6 +34,12 @@ describe('@octokit/rest', () => {
     new Octokit(123);
   });
 
+  test('static', () => {
+    Octokit.VERSION.toLowerCase();
+    // $FlowExpectedError[prop-missing]
+    Octokit.VERSION.toFixed(2);
+  });
+
   describe('repos', () => {
     const { repos } = octokit;
 
