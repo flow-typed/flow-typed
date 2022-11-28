@@ -7,12 +7,31 @@ describe('@octokit/rest', () => {
 
   test('constructor', () => {
     new Octokit();
-    new Octokit({ auth: '123' });
+    new Octokit({});
+    new Octokit({
+      auth: {
+        appId: 123,
+        privateKey: process.env.PRIVATE_KEY,
+        // optional: this will make appOctokit authenticate as app (JWT)
+        //           or installation (access token), depending on the request URL
+        installationId: 123,
+      },
+    });
+    new Octokit({
+      auth: '123',
+      userAgent: 'chrome something',
+      previews: ['', ''],
+      baseUrl: 'test',
+      log: {
+        debug: (message) => { message.toString() },
+        info: (message) => { message.toString() },
+        warn: (message) => { message.toString() },
+        error: (message) => { message.toString() },
+      },
+    });
 
     // $FlowExpectedError[incompatible-call]
     new Octokit(123);
-    // $FlowExpectedError[incompatible-call]
-    new Octokit({ auth: 1 });
   });
 
   describe('repos', () => {

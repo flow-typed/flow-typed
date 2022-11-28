@@ -1,7 +1,45 @@
 declare module '@octokit/rest' {
+  /**
+   * Octokit-specific request options which are ignored for the actual request, but can be used by Octokit or plugins to manipulate how the request is sent or how a response is handled
+   */
+  declare type RequestRequestOptions = {|
+    /**
+     * Node only. Useful for custom proxy, certificate, or dns lookup.
+     *
+     * @see https://nodejs.org/api/http.html#http_class_http_agent
+     */
+    agent?: mixed,
+    /**
+     * Custom replacement for built-in fetch method. Useful for testing or request hooks.
+     */
+    fetch?: any,
+    /**
+     * Use an `AbortController` instance to cancel a request. In node you can only cancel streamed requests.
+     */
+    signal?: any,
+    /**
+     * Node only. Request/response timeout in ms, it resets on redirect. 0 to disable (OS limit applies). `options.request.signal` is recommended instead.
+     */
+    timeout?: number,
+    [option: string]: any,
+  |};
+
   declare class Octokit {
     constructor(options?: {|
-      auth?: string,
+      authStrategy?: any,
+      auth?: any,
+      userAgent?: string,
+      previews?: Array<string>,
+      baseUrl?: string,
+      log?: {|
+        debug?: (message: string) => mixed;
+        info?: (message: string) => mixed;
+        warn?: (message: string) => mixed;
+        error?: (message: string) => mixed;
+      |},
+      request?: RequestRequestOptions,
+      timeZone?: string,
+      [option: string]: any,
     |}): this;
 
     (options?: {| [key: string]: any |}): this;
