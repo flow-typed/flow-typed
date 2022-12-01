@@ -181,6 +181,10 @@ the test-runner for *all* versions of flow the package version supports. Though 
 # note: If you find that your changed files aren't being picked up
 #       you can try `git add -A` then run the following script
 ./quick_run_def_tests.sh
+# If you run this command at a high rate you may reach github's
+# unauthenticated rate limit.
+# Try adding a github auth token in those cases
+GITHUB_TOKEN=your_token ./quick_run_def_tests.sh
 
 # If you want to run something very specific,
 # taking the left-pad example you can point to the
