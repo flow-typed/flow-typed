@@ -4,6 +4,13 @@ import Counterpart from 'counterpart';
 import type { NotFoundHandler, LocaleChangeHandler } from 'counterpart';
 
 describe('counterpart', () => {
+  // This matches the readme example.
+  it('should be the translate reference from the export', () => {
+    const translate = require('counterpart');
+    translate('text');
+    translate.getLocale();
+    translate.setLocale('locale');
+  });
   it('should be a callable class from the Instance export', () => {
     const instance = new Counterpart.Instance();
     instance.translate('text');

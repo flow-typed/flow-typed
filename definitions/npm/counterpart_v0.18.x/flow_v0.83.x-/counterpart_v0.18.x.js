@@ -15,10 +15,12 @@ declare module 'counterpart' {
     oldLocale: string
   ) => void;
 
+  declare function translate(key: string | string[], options?: { ... }): string;
+
   declare class Counterpart {
     constructor(): this;
-    translate: (key: string | string[], options?: { ... }) => string;
 
+    translate: typeof translate;
     setSeparator(value: string): string;
     onTranslationNotFound(callback: NotFoundHandler): void;
     offTranslationNotFound(callback: NotFoundHandler): void;
@@ -34,9 +36,11 @@ declare module 'counterpart' {
       callback: (value: string, options: { ... }) => string
     ): string;
     localize(date: Date, options: { ... }): string;
-    Instance: Class<Counterpart>;
-    Translator: Class<Counterpart>;
   }
 
-  declare module.exports: Counterpart;
+  declare module.exports: {|
+    Instance: Class<Counterpart>,
+    Translator: Class<Counterpart>,
+  |} & Counterpart &
+    typeof translate;
 }
