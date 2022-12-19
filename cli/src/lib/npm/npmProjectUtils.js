@@ -1,18 +1,13 @@
 // @flow
-
-import {searchUpDirPath} from '../fileUtils.js';
-
-import type {FlowSpecificVer} from '../flowVersion.js';
-
-import {fs, path} from '../node.js';
-
-import {stringToVersion} from '../semver.js';
-import type {Version} from '../semver.js';
-
-import semver, {intersects} from 'semver';
 import colors from 'colors/safe';
-
 import glob from 'glob';
+import semver, {intersects} from 'semver';
+
+import {searchUpDirPath} from '../fileUtils';
+import type {FlowSpecificVer} from '../flowVersion';
+import type {FtConfig} from '../ftConfig';
+import {fs, path} from '../node';
+import {stringToVersion, type Version} from '../semver';
 
 type PkgJson = {|
   pathStr: string,
@@ -94,11 +89,12 @@ function getWorkspacePatterns(pkgJson: PkgJson): string[] {
   return [];
 }
 
-export async function findWorkspacesPackagePaths(
+async function findWorkspacesPackagePaths(
   pkgJson: PkgJson,
+  workspaces,
 ): Promise<string[]> {
   const tasks = await Promise.all(
-    getWorkspacePatterns(pkgJson).map(pattern => {
+    workspaces.map(pattern => {
       return new Promise((resolve, reject) => {
         glob(
           `${path.dirname(pkgJson.pathStr)}/${pattern}/package.json`,
@@ -120,11 +116,18 @@ export async function findWorkspacesPackagePaths(
 
 export async function findWorkspacesPackages(
   pkgJson: PkgJson,
+  ftConfig: FtConfig,
 ): Promise<PkgJson[]> {
-  const paths = await findWorkspacesPackagePaths(pkgJson);
+  const paths = await findWorkspacesPackagePaths(
+    pkgJson,
+    getWorkspacePatterns(pkgJson),
+  );
+  const configPaths = ftConfig.workspaces
+    ? await findWorkspacesPackagePaths(pkgJson, ftConfig.workspaces)
+    : [];
 
   return Promise.all(
-    paths.map(async pathStr => {
+    [...paths, ...configPaths].map(async pathStr => {
       const pkgJsonContent = await fs.readJson(pathStr);
       return {
         pathStr,
