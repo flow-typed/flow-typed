@@ -1717,11 +1717,13 @@ declare type jsx$HTMLElementProps = {||}`;
     const origConsoleLog = console.log;
     const origConsoleError = console.error;
     const origConsoleWarn = console.warn;
+
     beforeEach(() => {
       (console: any).log = jest.fn();
       (console: any).error = jest.fn();
       (console: any).warn = jest.fn();
     });
+
     afterEach(() => {
       (console: any).log = origConsoleLog;
       (console: any).error = origConsoleError;
@@ -1861,6 +1863,40 @@ declare type jsx$HTMLElementProps = {||}`;
           '^1.1.0',
           '^2.0.0',
         );
+      });
+    });
+
+    it('supports flow-typed.config.json workspaces', () => {
+      return fakeProjectEnv(async FLOWPROJ_DIR => {
+        await copyDir(
+          path.join(FIXTURE_ROOT, 'flow-config-workspaces'),
+          FLOWPROJ_DIR,
+        );
+
+        // Run the install command
+        await run({
+          ...defaultRunProps,
+          ignoreDeps: [],
+        });
+
+        // Installs libdefs
+        expect(
+          await fs.readdir(path.join(FLOWPROJ_DIR, 'flow-typed', 'npm')),
+        ).toEqual([
+          'a_vx.x.x.js',
+          'bar_v1.x.x.js',
+          'c_vx.x.x.js',
+          'flow-bin_v0.x.x.js',
+          'foo_v1.x.x.js',
+        ]);
+
+        // Signs installed libdefs
+        const fooLibDefContents = await fs.readFile(
+          path.join(FLOWPROJ_DIR, 'flow-typed', 'npm', 'foo_v1.x.x.js'),
+          'utf8',
+        );
+        expect(fooLibDefContents).toContain('// flow-typed signature: ');
+        expect(fooLibDefContents).toContain('// flow-typed version: ');
       });
     });
   });
