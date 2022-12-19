@@ -2,7 +2,7 @@
 
 Since version `>=3.8.0`, flow-typed supports a config file to help you set various project level settings.
 
-**To get started, create a config file at the root of your project, generally as a sibling t `.flowconfig`**
+**To get started, create a config file at the root of your project, generally as a sibling to `.flowconfig`**
 
 `<PROJECT_ROOT>/flow-typed.config.json`
 
@@ -32,7 +32,7 @@ When you have a dependencies you don't want updated or swapped out during the `i
 
 ### workspaces
 
-Flow-typed works out of the box with yarn or npm workspaces to install sub project dependencies. But if your monorepo uses neither you can still let flow-typed know where to pull dependencies to search for definitions from with the `workspaces` key.
+Flow-typed works out of the box with yarn or npm workspaces to install sub project dependencies. But if your monorepo uses neither you can still let flow-typed know where to pull dependencies to search for definitions from with the `workspaces` key which follows the same glob format as yarn or npm.
 
 ```json
 {
