@@ -36,6 +36,7 @@ describe('command()', () => {
 
   it('example', () => {
     yargs.example('fetch', 'fetch [...files]');
+    yargs.example([['fetch', 'fetch [...files]']]);
   });
 });
 
