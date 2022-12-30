@@ -202,8 +202,8 @@ declare module "@apollo/client" {
   declare type ASTNode = Object;
   declare function print(ast: ASTNode): string;
 
-  // import { TypedGraphQL$DocumentNode } from "@graphql-typed-document-node/core";
-  declare type TypedGraphQL$DocumentNode<Result = { [key: string]: any }, Variables = { [key: string]: any }> = {|
+  // import { TypedDocumentNode } from "@graphql-typed-document-node/core";
+  declare type TypedDocumentNode<Result = { [key: string]: any }, Variables = { [key: string]: any }> = {|
     ...GraphQL$DocumentNode,
 
     /**
@@ -938,7 +938,7 @@ declare module "@apollo/client" {
 
   declare export interface DataProxy$Fragment<TVariables, TData> {
     id?: string;
-    fragment: GraphQL$DocumentNode | TypedGraphQL$DocumentNode<TData, TVariables>;
+    fragment: GraphQL$DocumentNode | TypedDocumentNode<TData, TVariables>;
     fragmentName?: string;
     variables?: TVariables;
   }
@@ -997,7 +997,7 @@ declare module "@apollo/client" {
   };
 
   declare export interface DataProxy$Query<TVariables, TData> {
-    query: GraphQL$DocumentNode | TypedGraphQL$DocumentNode<TData, TVariables>;
+    query: GraphQL$DocumentNode | TypedDocumentNode<TData, TVariables>;
     variables?: TVariables;
     id?: string;
   }
@@ -1137,7 +1137,7 @@ declare module "@apollo/client" {
   declare export type RefetchWritePolicy = "merge" | "overwrite";
   declare export type ErrorPolicy = "none" | "ignore" | "all";
   declare export interface QueryOptions<TVariables = OperationVariables, TData = any> {
-    query: GraphQL$DocumentNode | TypedGraphQL$DocumentNode<TData, TVariables>;
+    query: GraphQL$DocumentNode | TypedDocumentNode<TData, TVariables>;
     variables?: TVariables;
     errorPolicy?: ErrorPolicy;
     context?: any;
@@ -1167,7 +1167,7 @@ declare module "@apollo/client" {
     initialFetchPolicy: WatchQueryFetchPolicy;
   }
   declare export type FetchMoreQueryOptions<TVariables, TData = any> = {|
-    query?: GraphQL$DocumentNode | TypedGraphQL$DocumentNode<TData, TVariables>,
+    query?: GraphQL$DocumentNode | TypedDocumentNode<TData, TVariables>,
     variables?: $Rest<TVariables, { ... }>,
     context?: any
   |};
@@ -1191,7 +1191,7 @@ declare module "@apollo/client" {
     TSubscriptionVariables = OperationVariables,
     TSubscriptionData = TData
   > = {
-    document: GraphQL$DocumentNode | TypedGraphQL$DocumentNode<TSubscriptionData, TSubscriptionVariables>,
+    document: GraphQL$DocumentNode | TypedDocumentNode<TSubscriptionData, TSubscriptionVariables>,
     variables?: TSubscriptionVariables,
     updateQuery?: UpdateQueryFn<TData, TSubscriptionVariables, TSubscriptionData>,
     onError?: (error: Error) => void,
@@ -1199,7 +1199,7 @@ declare module "@apollo/client" {
     ...
   };
   declare export interface SubscriptionOptions<TVariables = OperationVariables, TData = any> {
-    query: GraphQL$DocumentNode | TypedGraphQL$DocumentNode<TData, TVariables>;
+    query: GraphQL$DocumentNode | TypedDocumentNode<TData, TVariables>;
     variables?: TVariables;
     fetchPolicy?: FetchPolicy;
     errorPolicy?: ErrorPolicy;
@@ -1227,7 +1227,7 @@ declare module "@apollo/client" {
     TContext = DefaultContext,
     TCache: ApolloCache<any> = ApolloCache<any>
   > = {
-    mutation: GraphQL$DocumentNode | TypedGraphQL$DocumentNode<TData, TVariables>,
+    mutation: GraphQL$DocumentNode | TypedDocumentNode<TData, TVariables>,
     fetchPolicy?: MutationFetchPolicy,
     keepRootFields?: boolean,
     ...
@@ -1441,7 +1441,7 @@ declare module "@apollo/client" {
     +options: WatchQueryOptions<TVariables, TData>;
     +queryId: string;
     +queryName?: string;
-    query: TypedGraphQL$DocumentNode<TData, TVariables>;
+    query: TypedDocumentNode<TData, TVariables>;
     variables: TVariables | void;
     constructor(x: {
       queryManager: QueryManager<any>,
@@ -1670,7 +1670,7 @@ declare module "@apollo/client" {
 
   declare export type QueryComponentOptions<TData = any, TVariables = OperationVariables> = {
     children: (result: QueryResult<TData, TVariables>) => React$Node | null,
-    query: GraphQL$DocumentNode | TypedGraphQL$DocumentNode<TData, TVariables>,
+    query: GraphQL$DocumentNode | TypedDocumentNode<TData, TVariables>,
     ...
   } & QueryFunctionOptions<TData, TVariables>;
   declare export type MutationComponentOptions<
@@ -1679,7 +1679,7 @@ declare module "@apollo/client" {
     TContext = DefaultContext,
     TCache: ApolloCache<any> = ApolloCache<any>
   > = {
-    mutation: GraphQL$DocumentNode | TypedGraphQL$DocumentNode<TData, TVariables>,
+    mutation: GraphQL$DocumentNode | TypedDocumentNode<TData, TVariables>,
     children: (
       mutateFunction: MutationFunction<TData, TVariables, TContext>,
       result: MutationResult<TData>
@@ -1687,7 +1687,7 @@ declare module "@apollo/client" {
     ...
   } & BaseMutationOptions<TData, TVariables, TContext, TCache>;
   declare export type SubscriptionComponentOptions<TData = any, TVariables = OperationVariables> = {
-    subscription: GraphQL$DocumentNode | TypedGraphQL$DocumentNode<TData, TVariables>,
+    subscription: GraphQL$DocumentNode | TypedDocumentNode<TData, TVariables>,
     children?: null | ((result: SubscriptionResult<TData>) => React$Node | null),
     ...
   } & BaseSubscriptionOptions<TData, TVariables>;
@@ -1874,7 +1874,7 @@ declare module "@apollo/client" {
   // @apollo/client/react/hooks/useLazyQuery.d.ts
 
   declare export function useLazyQuery<TData, TVariables>(
-    query: GraphQL$DocumentNode | TypedGraphQL$DocumentNode<TData, TVariables>,
+    query: GraphQL$DocumentNode | TypedDocumentNode<TData, TVariables>,
     options?: LazyQueryHookOptions<TData, TVariables>
   ): LazyQueryResultTuple<TData, TVariables>;
 
@@ -1886,26 +1886,26 @@ declare module "@apollo/client" {
     TContext = DefaultContext,
     TCache: ApolloCache<any> = ApolloCache<any>
   >(
-    mutation: GraphQL$DocumentNode | TypedGraphQL$DocumentNode<TData, TVariables>,
+    mutation: GraphQL$DocumentNode | TypedDocumentNode<TData, TVariables>,
     options?: MutationHookOptions<TData, TVariables, TContext>
   ): MutationTuple<TData, TVariables, TContext, TCache>;
 
   // @apollo/client/react/hooks/useQuery.d.ts
 
   declare export function useQuery<TData, TVariables>(
-    query: GraphQL$DocumentNode | TypedGraphQL$DocumentNode<TData, TVariables>,
+    query: GraphQL$DocumentNode | TypedDocumentNode<TData, TVariables>,
     options?: QueryHookOptions<TData, TVariables>
   ): QueryResult<TData, TVariables>;
   declare export function useInternalState<TData, TVariables>(
     client: ApolloClient<any>,
-    query: GraphQL$DocumentNode | TypedGraphQL$DocumentNode<TData, TVariables>
+    query: GraphQL$DocumentNode | TypedDocumentNode<TData, TVariables>
   ): InternalState<TData, TVariables>;
   declare export class InternalState<TData, TVariables> {
     +client: $Call<<R>((...args: any[]) => R) => R, typeof useApolloClient>;
-    +query: GraphQL$DocumentNode | TypedGraphQL$DocumentNode<TData, TVariables>;
+    +query: GraphQL$DocumentNode | TypedDocumentNode<TData, TVariables>;
     constructor(
       client: $Call<<R>((...args: any[]) => R) => R, typeof useApolloClient>,
-      query: GraphQL$DocumentNode | TypedGraphQL$DocumentNode<TData, TVariables>,
+      query: GraphQL$DocumentNode | TypedDocumentNode<TData, TVariables>,
       previous?: InternalState<TData, TVariables>
     ): this;
     forceUpdate(): void;
@@ -1922,7 +1922,7 @@ declare module "@apollo/client" {
   // @apollo/client/react/hooks/useSubscription.d.ts
 
   declare export function useSubscription<TData, TVariables>(
-    subscription: GraphQL$DocumentNode | TypedGraphQL$DocumentNode<TData, TVariables>,
+    subscription: GraphQL$DocumentNode | TypedDocumentNode<TData, TVariables>,
     options?: SubscriptionHookOptions<TData, TVariables>
   ): SubscriptionResult<TData, any>;
 
@@ -2045,11 +2045,11 @@ declare module "@apollo/client" {
   } & ObservableQueryFields<TData, TVariables>;
   declare export type QueryDataOptions<TData = any, TVariables = OperationVariables> = {
     children?: (result: QueryResult<TData, TVariables>) => Node,
-    query: GraphQL$DocumentNode | TypedGraphQL$DocumentNode<TData, TVariables>,
+    query: GraphQL$DocumentNode | TypedDocumentNode<TData, TVariables>,
     ...
   } & QueryFunctionOptions<TData, TVariables>;
   declare export type QueryHookOptions<TData = any, TVariables = OperationVariables> = {
-    query?: GraphQL$DocumentNode | TypedGraphQL$DocumentNode<TData, TVariables>,
+    query?: GraphQL$DocumentNode | TypedDocumentNode<TData, TVariables>,
     ...
   } & QueryFunctionOptions<TData, TVariables>;
   declare export type LazyQueryHookOptions<TData = any, TVariables = OperationVariables> = { ... } & $Diff<
@@ -2089,7 +2089,7 @@ declare module "@apollo/client" {
     TContext = DefaultContext,
     TCache: ApolloCache<any> = ApolloCache<any>
   > = {
-    mutation?: GraphQL$DocumentNode | TypedGraphQL$DocumentNode<TData, TVariables>,
+    mutation?: GraphQL$DocumentNode | TypedDocumentNode<TData, TVariables>,
     ...
   } & BaseMutationOptions<TData, TVariables, TContext, TCache>;
   declare export interface MutationResult<TData = any> {
@@ -2112,7 +2112,7 @@ declare module "@apollo/client" {
     TContext = DefaultContext,
     TCache: ApolloCache<any> = ApolloCache<any>
   > = {
-    mutation?: GraphQL$DocumentNode | TypedGraphQL$DocumentNode<TData, TVariables>,
+    mutation?: GraphQL$DocumentNode | TypedDocumentNode<TData, TVariables>,
     ...
   } & BaseMutationOptions<TData, TVariables, TContext, TCache>;
   declare export type MutationDataOptions<
@@ -2121,7 +2121,7 @@ declare module "@apollo/client" {
     TContext = DefaultContext,
     TCache: ApolloCache<any> = ApolloCache<any>
   > = {
-    mutation: GraphQL$DocumentNode | TypedGraphQL$DocumentNode<TData, TVariables>,
+    mutation: GraphQL$DocumentNode | TypedDocumentNode<TData, TVariables>,
     ...
   } & BaseMutationOptions<TData, TVariables, TContext, TCache>;
   declare export type MutationTuple<
@@ -2161,11 +2161,11 @@ declare module "@apollo/client" {
     variables?: TVariables;
   }
   declare export type SubscriptionHookOptions<TData = any, TVariables = OperationVariables> = {
-    subscription?: GraphQL$DocumentNode | TypedGraphQL$DocumentNode<TData, TVariables>,
+    subscription?: GraphQL$DocumentNode | TypedDocumentNode<TData, TVariables>,
     ...
   } & BaseSubscriptionOptions<TData, TVariables>;
   declare export type SubscriptionDataOptions<TData = any, TVariables = OperationVariables> = {
-    subscription: GraphQL$DocumentNode | TypedGraphQL$DocumentNode<TData, TVariables>,
+    subscription: GraphQL$DocumentNode | TypedDocumentNode<TData, TVariables>,
     children?: null | ((result: SubscriptionResult<TData>) => React$Node | null),
     ...
   } & BaseSubscriptionOptions<TData, TVariables>;
@@ -2444,76 +2444,36 @@ declare module "@apollo/client/link/core" {
 
   // @apollo/client/link/core/types.d.ts
 
-  declare export type ApolloClient$Path = $ReadOnlyArray<string | number>;
-  declare export type ApolloClient$Data<T> = T | null | void;
-  declare export interface ApolloClient$ExecutionPatchResultBase {
-    hasNext?: boolean;
-  }
-  declare export type ApolloClient$ExecutionPatchInitialResult<
+  declare export type Path = ApolloClient$Path;
+  declare export type Data<T> = ApolloClient$Data<T>;
+  declare export interface ExecutionPatchResultBase extends ApolloClient$ExecutionPatchResultBase {}
+  declare export type ExecutionPatchInitialResult<
     TData = { [key: string]: any, ... },
     TExtensions = { [key: string]: any, ... }
-  > = {
-    data: ApolloClient$Data<TData>,
-    incremental?: empty,
-    errors?: $ReadOnlyArray<GraphQL$GraphQLError>,
-    extensions?: TExtensions,
-    ...
-  } & ApolloClient$ExecutionPatchResultBase;
-  declare export interface ApolloClient$IncrementalPayload<TData, TExtensions> {
-    data: ApolloClient$Data<TData>;
-    label?: string;
-    path: ApolloClient$Path;
-    errors?: $ReadOnlyArray<GraphQL$GraphQLError>;
-    extensions?: TExtensions;
-  }
-  declare export type ApolloClient$ExecutionPatchIncrementalResult<
+  > = ApolloClient$ExecutionPatchInitialResult<TData, TExtensions>;
+  declare export interface IncrementalPayload<TData, TExtensions> extends ApolloClient$IncrementalPayload<TData, TExtensions> {}
+  declare export type ExecutionPatchIncrementalResult<
     TData = { [key: string]: any, ... },
     TExtensions = { [key: string]: any, ... }
-  > = {
-    incremental?: ApolloClient$IncrementalPayload<TData, TExtensions>[],
-    data?: empty,
-    errors?: empty,
-    extensions?: empty,
-    ...
-  } & ApolloClient$ExecutionPatchResultBase;
-  declare export type ApolloClient$ExecutionPatchResult<
+  > = ApolloClient$ExecutionPatchIncrementalResult<TData, TExtensions>;
+  declare export type ExecutionPatchResult<
     TData = { [key: string]: any, ... },
     TExtensions = { [key: string]: any, ... }
-  > = ApolloClient$ExecutionPatchInitialResult<TData, TExtensions> | ApolloClient$ExecutionPatchIncrementalResult<TData, TExtensions>;
-  declare export interface ApolloClient$GraphQLRequest {
-    query: GraphQL$DocumentNode;
-    variables?: { [key: string]: any, ... };
-    operationName?: string;
-    context?: { [key: string]: any, ... };
-    extensions?: { [key: string]: any, ... };
-  }
-  declare export interface ApolloClient$Operation {
-    query: GraphQL$DocumentNode;
-    variables: { [key: string]: any, ... };
-    operationName: string;
-    extensions: { [key: string]: any, ... };
-    setContext: (context: { [key: string]: any, ... }) => {
-      [key: string]: any,
-      ...,
-    };
-    getContext: () => { [key: string]: any, ... };
-  }
-  declare export type ApolloClient$SingleExecutionResult<
+  > = ApolloClient$ExecutionPatchResult<TData, TExtensions>;
+  declare export interface GraphQLRequest extends ApolloClient$GraphQLRequest {}
+  declare export interface Operation extends ApolloClient$Operation {}
+  declare export type SingleExecutionResult<
     TData = { [key: string]: any, ... },
     TContext = { [key: string]: any, ... },
     TExtensions = { [key: string]: any, ... }
-  > = {
-    data?: ApolloClient$Data<TData>,
-    context?: TContext,
-    ...
-  } & GraphQL$ExecutionResult<TData, TExtensions>;
-  declare export type ApolloClient$FetchResult<
+  > = ApolloClient$SingleExecutionResult<TData, TContext, TExtensions>;
+  declare export type FetchResult<
     TData = { [key: string]: any, ... },
     TContext = { [key: string]: any, ... },
     TExtensions = { [key: string]: any, ... }
-  > = ApolloClient$SingleExecutionResult<TData, TContext, TExtensions> | ApolloClient$ExecutionPatchResult<TData, TExtensions>;
-  declare export type ApolloClient$NextLink = (operation: ApolloClient$Operation) => ZenObservable$Observable<ApolloClient$FetchResult<>>;
-  declare export type ApolloClient$RequestHandler = (operation: ApolloClient$Operation, forward: ApolloClient$NextLink) => ZenObservable$Observable<ApolloClient$FetchResult<>> | null;
+  > = ApolloClient$FetchResult<TData, TContext, TExtensions>
+  declare export type NextLink = ApolloClient$NextLink;
+  declare export type RequestHandler = ApolloClient$RequestHandler;
 }
 
 declare module "@apollo/client/link/error" {
