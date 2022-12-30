@@ -1,10 +1,11 @@
 // @flow
 
 import { describe, it } from 'flow-typed-test';
-import { ApolloCache, ApolloClient, ApolloProvider, useSubscription } from '@apollo/client';
+import { ApolloCache, ApolloClient, ApolloLink, ApolloProvider, useSubscription } from '@apollo/client';
 import type { FetchResult, OnSubscriptionDataOptions } from '@apollo/client';
 import { MockedProvider } from "@apollo/client/testing";
 import * as React from 'react';
+import { RetryLink } from '@apollo/client/link/retry';
 
 const client = new ApolloClient({ cache: new ApolloCache() });
 
@@ -15,6 +16,19 @@ type MutationData = {|
 type MutationVariables = {|
   myVar: string,
 |};
+
+describe('ApolloLink', () => {
+  it('concatenates from an array of links', () => {
+    const link = ApolloLink.from([new RetryLink()]);
+  });
+
+  it('rejects construction from wrong type', () => {
+    class BadLink {}
+
+    // $FlowExpectedError[incompatible-call]
+    const link = ApolloLink.from([new BadLink()]);
+  });
+});
 
 describe('ApolloClient', () => {
   describe('mutate', () => {
