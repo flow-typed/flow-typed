@@ -1,8 +1,8 @@
 // @flow
 
 import { describe, it } from 'flow-typed-test';
-import { ApolloCache, ApolloClient, ApolloProvider } from '@apollo/client';
-import type { FetchResult } from '@apollo/client';
+import { ApolloCache, ApolloClient, ApolloProvider, useSubscription } from '@apollo/client';
+import type { FetchResult, OnSubscriptionDataOptions } from '@apollo/client';
 import { MockedProvider } from "@apollo/client/testing";
 import * as React from 'react';
 
@@ -32,6 +32,37 @@ describe('ApolloClient', () => {
       // $FlowExpectedError[prop-missing]
       client.mutate<MutationData, MutationVariables>({mutation: {}, variables: {wrongVariable: 99}});
     });
+  });
+});
+
+type SubscriptionData = {|
+  id: string,
+|};
+
+type SubscriptionVariables = {|
+  scope: string,
+|};
+
+type WrongData = {|
+  wrong: "type",
+|};
+
+describe('useSubscription', () => {
+  it('obSubscriptionData accepts correct subscription data type', () => {
+    const query = {};
+    const onSubscriptionData = (data: OnSubscriptionDataOptions<SubscriptionData>) => {
+      const subscriptionData: ?SubscriptionData = data.subscriptionData.data;
+    };
+    useSubscription<SubscriptionData, SubscriptionVariables>(query, { onSubscriptionData });
+  });
+
+  it('obSubscriptionData rejects wrong subscription data type', () => {
+    const query = {};
+    const onSubscriptionData = (data: OnSubscriptionDataOptions<WrongData>) => {
+      const subscriptionData: ?WrongData = data.subscriptionData.data;
+    };
+    // $FlowExpectedError[prop-missing]
+    useSubscription<SubscriptionData, SubscriptionVariables>(query, { onSubscriptionData });
   });
 });
 

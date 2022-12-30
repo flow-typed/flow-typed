@@ -1873,7 +1873,7 @@ declare module "@apollo/client" {
 
   // @apollo/client/react/hooks/useSubscription.d.ts
 
-  declare function useSubscription<TData, TVariables>(
+  declare export function useSubscription<TData, TVariables>(
     subscription: DocumentNode | TypedDocumentNode<TData, TVariables>,
     options?: SubscriptionHookOptions<TData, TVariables>
   ): SubscriptionResult<TData, any>;
