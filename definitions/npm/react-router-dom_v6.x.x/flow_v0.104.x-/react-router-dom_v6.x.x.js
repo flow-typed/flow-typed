@@ -261,6 +261,14 @@ declare module "react-router-dom" {
     pattern: PathPattern | string
   ): PathMatch<ParamKey> | null;
 
+  declare export function useMatches<Data = mixed, Handle = mixed>(): Array<{|
+    id: string;
+    pathname: string;
+    params: Params<string>;
+    data: Data;
+    handle: Handle;
+  |}>;
+
   declare export function useOutlet<T = any>(): React$Element<T> | null;
 
   declare export function useRoutes<T = any>(

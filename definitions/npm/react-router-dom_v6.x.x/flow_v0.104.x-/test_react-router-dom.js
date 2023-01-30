@@ -17,6 +17,7 @@ import {
   useOutletContext,
   useParams,
   useRouteMatch,
+  useMatches,
 } from "react-router-dom";
 import type {
   Location,
@@ -483,6 +484,60 @@ describe("react-router-dom", () => {
       const matchObject2: Match = useRouteMatch({
         sensitive: 'foo',
       });
+    });
+
+    it('useMatches', () => {
+      type Params<Key: string> = {
+        +[key: Key]: string | void,
+      };
+
+      type Matches = Array<{|
+        id: string,
+        pathname: string,
+        params: Params<string>,
+        data: mixed,
+        handle: {|
+          custom: string,
+        |},
+      |}>;
+      const matches: Matches = useMatches();
+
+      type MatchesWithHandle = Array<{|
+        id: string,
+        pathname: string,
+        params: Params<string>,
+        data: mixed,
+        handle: {|
+          custom: string,
+        |},
+      |}>;
+      const matchesWithHandle: MatchesWithHandle = useMatches<
+        mixed,
+        {|
+          custom: string,
+        |}
+      >();
+
+      type InvalidMatchesMissingPathname = Array<{|
+        id: string,
+        params: Params<string>,
+        data: mixed,
+        handle: mixed,
+      |}>;
+      // $FlowExpectedError[prop-missing]
+      const matchesMissingPathname: InvalidMatchesMissingPathname = useMatches();
+
+      type InvalidMatchesIcompatibleParams = Array<{|
+        id: string,
+        pathname: string,
+        params: Params<number>,
+        data: mixed,
+        handle: mixed,
+      |}>;
+
+      // $FlowExpectedError[incompatible-type]
+      // $FlowExpectedError[incompatible-type-arg]
+      const matchesIncompatibleParams: InvalidMatchesIcompatibleParams = useMatches();
     });
   });
 });
