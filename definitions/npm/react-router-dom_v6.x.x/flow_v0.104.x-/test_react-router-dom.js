@@ -25,6 +25,7 @@ import type {
   Match,
   StaticRouterContext,
   RouterHistory,
+  Params,
 } from "react-router-dom";
 import { it, describe } from "flow-typed-test";
 
@@ -487,10 +488,6 @@ describe("react-router-dom", () => {
     });
 
     it('useMatches', () => {
-      type Params<Key: string> = {
-        +[key: Key]: string | void,
-      };
-
       type Matches = Array<{|
         id: string,
         pathname: string,
@@ -535,7 +532,6 @@ describe("react-router-dom", () => {
         handle: mixed,
       |}>;
 
-      // $FlowExpectedError[incompatible-type]
       // $FlowExpectedError[incompatible-type-arg]
       const matchesIncompatibleParams: InvalidMatchesIcompatibleParams = useMatches();
     });

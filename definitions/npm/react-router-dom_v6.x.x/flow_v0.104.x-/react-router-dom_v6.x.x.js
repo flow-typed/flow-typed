@@ -201,7 +201,7 @@ declare module "react-router-dom" {
     children: React$Node,
   ): Array<RouteObject>;
 
-  declare type Params<Key: string> = {
+  declare export type Params<Key: string> = {
     +[key: Key]: string | void;
   };
 
