@@ -201,7 +201,7 @@ declare module "react-router-dom" {
     children: React$Node,
   ): Array<RouteObject>;
 
-  declare type Params<Key: string> = {
+  declare export type Params<Key: string> = {
     +[key: Key]: string | void;
   };
 
@@ -260,6 +260,14 @@ declare module "react-router-dom" {
   declare export function useMatch<ParamKey: string = string>(
     pattern: PathPattern | string
   ): PathMatch<ParamKey> | null;
+
+  declare export function useMatches<Data = mixed, Handle = mixed>(): Array<{|
+    id: string;
+    pathname: string;
+    params: Params<string>;
+    data: Data;
+    handle: Handle;
+  |}>;
 
   declare export function useOutlet<T = any>(): React$Element<T> | null;
 
