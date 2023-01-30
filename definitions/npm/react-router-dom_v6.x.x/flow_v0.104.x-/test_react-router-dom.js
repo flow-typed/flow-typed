@@ -272,7 +272,7 @@ describe("react-router-dom", () => {
     describe("Class Components", () => {
       it("passes if the component is passed required props", () => {
         class Comp extends React.Component<Props> {
-          render() {
+          render(): React$Element<'div'> {
             return <div />;
           }
         }
@@ -285,7 +285,7 @@ describe("react-router-dom", () => {
 
       it("errors if the component is not passed the correct props", () => {
         class Comp extends React.Component<Props> {
-          render() {
+          render(): React$Element<'div'> {
             return <div />;
           }
         }
@@ -303,11 +303,15 @@ describe("react-router-dom", () => {
       });
 
       it("passes if a required prop is handled by defaultProps", () => {
+        type OwnProps = {|
+          s: string,
+        |};
+
         class Comp extends React.Component<Props> {
-          static defaultProps = {
+          static defaultProps: OwnProps = {
             s: "defaultS"
           };
-          render() {
+          render(): React$Element<'div'> {
             return <div />;
           }
         }
@@ -321,11 +325,15 @@ describe("react-router-dom", () => {
       });
 
       it("errors if a required prop that has a defaultProp is passed the wrong type", () => {
+        type OwnProps = {|
+          s: string,
+        |};
+
         class Comp extends React.Component<Props> {
-          static defaultProps = {
+          static defaultProps: OwnProps = {
             s: "defaultS"
           };
-          render() {
+          render(): React$Element<'div'> {
             return <div />;
           }
         }
@@ -389,7 +397,7 @@ describe("react-router-dom", () => {
 
   describe("Route", () => {
     it("works", () => {
-      const Component = ({}) => <div>Hi!</div>;
+      const Component = () => <div>Hi!</div>;
       <Route path="/login" />;
 
       <Route path="/login" element={<Component />} />;
@@ -411,7 +419,7 @@ describe("react-router-dom", () => {
 
   describe('Routes', () => {
     it('works', () => {
-      const Component = ({}) => <div>Hi!</div>;
+      const Component = () => <div>Hi!</div>;
       <Routes>
         <Route path="/login" element={<Component />} />
       </Routes>;
