@@ -408,6 +408,25 @@ describe("react-router-dom", () => {
         index
         caseSensitive
       />;
+
+      <Route><div>Hi!</div></Route>;
+
+      <Route
+        caseSensitive
+        path="/login"
+        id="login"
+        loader={({ request, params }) => {
+          const myRequest: Request = request;
+          const myParams: Params<string> = params;
+        }}
+        action={() => {}}
+        hasErrorBoundary
+        shouldRevalidate={() => false}
+        handle={{ breadcrumb: 'login'}}
+        index={false}
+        element={<Component />}
+        errorElement={<Component />}
+      />;
     });
 
     it("raises error if passed incorrect props", () => {
@@ -416,6 +435,35 @@ describe("react-router-dom", () => {
 
       // $FlowExpectedError[prop-missing] - unexpected prop xxx
       <Route xxx="1" />;
+
+      // $FlowExpectedError[incompatible-type]
+      <Route action={(invalid: number) => true} />;
+
+      // $FlowExpectedError[incompatible-type]
+      <Route caseSensitive="123" />;
+
+      <Route loader={({ request, params, ...loaderArgs}) => {
+        // $FlowExpectedError[incompatible-type]
+        const myRequest: string = request;
+
+        // $FlowExpectedError[incompatible-type]
+        const myParams: string = params;
+
+        // $FlowExpectedError[prop-missing]
+        const missing: any = loaderArgs.missing;
+
+        return false;
+      }} />;
+
+      // $FlowExpectedError[incompatible-type]
+      <Route hasErrorBoundary="invalid" />;
+
+      // $FlowExpectedError[incompatible-type]
+      // $FlowExpectedError[prop-missing]
+      <Route shouldRevalidate={({ currentUrl }: {| currentUrl: number |}) => true} />;
+
+      // $FlowExpectedError[incompatible-type]
+      <Route index="invalid" />;
     });
   });
 

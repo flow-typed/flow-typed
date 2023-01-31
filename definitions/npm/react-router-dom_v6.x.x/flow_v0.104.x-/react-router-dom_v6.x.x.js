@@ -125,13 +125,66 @@ declare module "react-router-dom" {
     children?: React$Node
   |}>
 
-  declare export var Route: React$ComponentType<{|
-    caseSensitive?: boolean,
-    children?: React$Node,
-    element?: React$Element<any> | null,
-    index?: boolean,
-    path?: string,
-  |}>
+
+  declare type DataFunctionArgs = {|
+    request: Request;
+    params: Params<string>;
+    context?: any;
+  |}
+
+  declare export type LoaderFunction = (args: DataFunctionArgs) => Promise<Response> | Response | Promise<any> | any;
+
+  declare export type ActionFunction  = (args: DataFunctionArgs) => Promise<Response> | Response | Promise<any> | any;
+
+  declare export class DeferredData {
+    (data: mixed, responseInit?: ResponseOptions): void;
+    subscribe: mixed,
+    cancel: mixed,
+    resolveData: mixed,
+    done: mixed,
+    unwrappedData: mixed,
+    pendingKeys: mixed,
+  }
+
+  declare export type ShouldRevalidateFunction = (args: {|
+    currentUrl: URL;
+    currentParams: Params<string>;
+    nextUrl: URL;
+    nextParams: Params<string>;
+    formMethod?: "get" | "post" | "put" | "patch" | "delete";
+    formAction?: string;
+    formEncType?: "application/x-www-form-urlencoded" | "multipart/form-data";
+    formData?: FormData;
+    actionResult?: {|
+      type: 'data'|'deferred'|'redirect'|'error';
+      data?: any;
+      statusCode?: number;
+      headers?: Headers;
+      deferredData?: DeferredData;
+      status?: Number;
+      location?: string;
+      revalidate?: boolean;
+      error?: any;
+    |};
+    defaultShouldRevalidate: boolean;
+  |}) => boolean;
+
+  declare export type RouteProps = {|
+    caseSensitive?: boolean;
+    path?: string;
+    id?: string;
+    loader?: LoaderFunction;
+    action?: ActionFunction;
+    hasErrorBoundary?: boolean;
+    shouldRevalidate?: ShouldRevalidateFunction;
+    handle?: mixed;
+    index?: boolean;
+    children?: React$Node;
+    element?: React$Node | null;
+    errorElement?: React$Node | null;
+  |}
+
+  declare export var Route: React$ComponentType<RouteProps>
 
   declare export var Prompt: React$ComponentType<{|
     message: string | ((location: Location) => string | boolean),
