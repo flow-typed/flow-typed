@@ -17,6 +17,7 @@ import {
   useOutletContext,
   useParams,
   useRouteMatch,
+  useMatches,
 } from "react-router-dom";
 import type {
   Location,
@@ -24,6 +25,7 @@ import type {
   Match,
   StaticRouterContext,
   RouterHistory,
+  Params,
 } from "react-router-dom";
 import { it, describe } from "flow-typed-test";
 
@@ -272,7 +274,7 @@ describe("react-router-dom", () => {
     describe("Class Components", () => {
       it("passes if the component is passed required props", () => {
         class Comp extends React.Component<Props> {
-          render() {
+          render(): React$Element<'div'> {
             return <div />;
           }
         }
@@ -285,7 +287,7 @@ describe("react-router-dom", () => {
 
       it("errors if the component is not passed the correct props", () => {
         class Comp extends React.Component<Props> {
-          render() {
+          render(): React$Element<'div'> {
             return <div />;
           }
         }
@@ -303,11 +305,15 @@ describe("react-router-dom", () => {
       });
 
       it("passes if a required prop is handled by defaultProps", () => {
+        type OwnProps = {|
+          s: string,
+        |};
+
         class Comp extends React.Component<Props> {
-          static defaultProps = {
+          static defaultProps: OwnProps = {
             s: "defaultS"
           };
-          render() {
+          render(): React$Element<'div'> {
             return <div />;
           }
         }
@@ -321,11 +327,15 @@ describe("react-router-dom", () => {
       });
 
       it("errors if a required prop that has a defaultProp is passed the wrong type", () => {
+        type OwnProps = {|
+          s: string,
+        |};
+
         class Comp extends React.Component<Props> {
-          static defaultProps = {
+          static defaultProps: OwnProps = {
             s: "defaultS"
           };
-          render() {
+          render(): React$Element<'div'> {
             return <div />;
           }
         }
@@ -389,7 +399,7 @@ describe("react-router-dom", () => {
 
   describe("Route", () => {
     it("works", () => {
-      const Component = ({}) => <div>Hi!</div>;
+      const Component = () => <div>Hi!</div>;
       <Route path="/login" />;
 
       <Route path="/login" element={<Component />} />;
@@ -398,20 +408,67 @@ describe("react-router-dom", () => {
         index
         caseSensitive
       />;
+
+      <Route><div>Hi!</div></Route>;
+
+      <Route
+        caseSensitive
+        path="/login"
+        id="login"
+        loader={({ request, params }) => {
+          const myRequest: Request = request;
+          const myParams: Params<string> = params;
+        }}
+        action={() => {}}
+        hasErrorBoundary
+        shouldRevalidate={() => false}
+        handle={{ breadcrumb: 'login'}}
+        index={false}
+        element={<Component />}
+        errorElement={<Component />}
+      />;
     });
 
     it("raises error if passed incorrect props", () => {
       // $FlowExpectedError[incompatible-type] - prop must be a string
       <Route path={123} />;
 
-      // $FlowExpectedError[prop-missing] - unexpected prop xxx
+      // $FlowExpectedError[incompatible-type] - unexpected prop xxx
       <Route xxx="1" />;
+
+      // $FlowExpectedError[incompatible-type]
+      <Route action={(invalid: number) => true} />;
+
+      // $FlowExpectedError[incompatible-type]
+      <Route caseSensitive="123" />;
+
+      <Route loader={({ request, params, ...loaderArgs}) => {
+        // $FlowExpectedError[incompatible-type]
+        const myRequest: string = request;
+
+        // $FlowExpectedError[incompatible-type]
+        const myParams: string = params;
+
+        // $FlowExpectedError[prop-missing]
+        const missing: any = loaderArgs.missing;
+
+        return false;
+      }} />;
+
+      // $FlowExpectedError[incompatible-type]
+      <Route hasErrorBoundary="invalid" />;
+
+      // $FlowExpectedError[incompatible-type]
+      <Route shouldRevalidate={({ currentUrl }: {| currentUrl: number |}) => true} />;
+
+      // $FlowExpectedError[incompatible-type]
+      <Route index="invalid" />;
     });
   });
 
   describe('Routes', () => {
     it('works', () => {
-      const Component = ({}) => <div>Hi!</div>;
+      const Component = () => <div>Hi!</div>;
       <Routes>
         <Route path="/login" element={<Component />} />
       </Routes>;
@@ -475,6 +532,55 @@ describe("react-router-dom", () => {
       const matchObject2: Match = useRouteMatch({
         sensitive: 'foo',
       });
+    });
+
+    it('useMatches', () => {
+      type Matches = Array<{|
+        id: string,
+        pathname: string,
+        params: Params<string>,
+        data: mixed,
+        handle: {|
+          custom: string,
+        |},
+      |}>;
+      const matches: Matches = useMatches();
+
+      type MatchesWithHandle = Array<{|
+        id: string,
+        pathname: string,
+        params: Params<string>,
+        data: mixed,
+        handle: {|
+          custom: string,
+        |},
+      |}>;
+      const matchesWithHandle: MatchesWithHandle = useMatches<
+        mixed,
+        {|
+          custom: string,
+        |}
+      >();
+
+      type InvalidMatchesMissingPathname = Array<{|
+        id: string,
+        params: Params<string>,
+        data: mixed,
+        handle: mixed,
+      |}>;
+      // $FlowExpectedError[prop-missing]
+      const matchesMissingPathname: InvalidMatchesMissingPathname = useMatches();
+
+      type InvalidMatchesIcompatibleParams = Array<{|
+        id: string,
+        pathname: string,
+        params: Params<number>,
+        data: mixed,
+        handle: mixed,
+      |}>;
+
+      // $FlowExpectedError[incompatible-type-arg]
+      const matchesIncompatibleParams: InvalidMatchesIcompatibleParams = useMatches();
     });
   });
 });
