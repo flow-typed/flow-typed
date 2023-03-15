@@ -122,9 +122,7 @@ describe("react-router-dom", () => {
 
       <NavLink
         to="/about"
-        activeClassName="active"
         className="link"
-        activeStyle={{ color: "red" }}
         style={{ color: "blue" }}
         isActive={(match, location) => true}
         strict
@@ -164,7 +162,35 @@ describe("react-router-dom", () => {
 
       // $FlowExpectedError[incompatible-type] - to prop must be a string or LocationShape
       <NavLink to={[]} />;
+
+      // activeClassName and activeStyle have been dropped unfortunately props cannot be strict so no errors can be expected
+      <NavLink
+        to="/about"
+        activeClassName="active"
+        activeStyle={{ color: "red" }}
+      >
+        About
+      </NavLink>;
     });
+
+    it('supports enhanced className & style props', () => {
+      <NavLink
+        to="/about"
+        className={({ isActive, isPending}) =>
+          isPending ? "pending" : isActive ? "active" : undefined
+        }
+        style={({ isActive, isPending}) =>
+          isPending ? { color: "red" } : isActive ? { color: "blue" } : undefined
+        }
+      >
+        About
+      </NavLink>;
+
+      // $FlowExpectedError[incompatible-type]
+      <NavLink to="/about" className={{'invalid': ''}} />;
+      // $FlowExpectedError[incompatible-type]
+      <NavLink to="/about" style={3} />;
+    })
   });
 
   describe("matchPath", () => {

@@ -24,10 +24,8 @@ declare module "react-router-dom" {
 
   declare export var NavLink: React$ComponentType<{
     +to: string | LocationShape,
-    +activeClassName?: string,
-    +className?: string,
-    +activeStyle?: { +[string]: mixed, ... },
-    +style?: { +[string]: mixed, ... },
+    +className?: string | (props: {| isActive: boolean, isPending: boolean |}) => string | void,
+    +style?: { +[string]: mixed, ... } | (props: {| isActive: boolean, isPending: boolean|}) => { +[string]: mixed, ... } | void,
     +isActive?: (match: Match, location: Location) => boolean,
     +children?: React$Node,
     +exact?: boolean,
