@@ -319,6 +319,7 @@ async function writeFlowConfig(repoDirPath, testDirPath, libDefPath, version) {
     '[options]',
     'include_warnings=true',
     'server.max_workers=0',
+    semver.gte(version, '0.200.0') ? 'exact_by_default=true' : '', // from version 0.202.0 default is true
     // Fixes out of shared memory error for Mac Rosetta 2, see https://github.com/facebook/flow/issues/8538
     'sharedmemory.heap_size=3221225472',
     semver.lt(version, '0.125.0')
@@ -478,6 +479,7 @@ async function removeTrashFromBinDir() {
 const CONFIGURATION_CHANGE_VERSIONS = [
   'v0.104.0', // Adding lint
   'v0.125.0', // Remove suppress_comments
+  'v0.200.0', // exact_by_default become required
 ];
 
 // This function splits a list of flow versions into a list of lists of versions
