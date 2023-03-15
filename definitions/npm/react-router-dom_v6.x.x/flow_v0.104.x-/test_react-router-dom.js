@@ -14,6 +14,7 @@ import {
   useHistory,
   useLocation,
   useNavigate,
+  useOutlet,
   useOutletContext,
   useParams,
   useRouteMatch,
@@ -496,12 +497,34 @@ describe("react-router-dom", () => {
     });
 
     it('useOutlet', () => {
+      useOutlet()
+
+      const Component = () => <div>Hi!</div>;
+
+      useOutlet<typeof Component>()
+
+      // $FlowExpectedError[extra-arg]
+      useOutlet('')
+    })
+
+    it('useOutletContext', () => {
       const [count, setCount] = useOutletContext();
       const increment = () => setCount((c) => c + 1);
       <button onClick={increment}>{count}</button>;
 
       // $FlowExpectedError[extra-arg]
       useOutletContext('');
+
+      const t1: number = useOutletContext<number>();
+
+      type Tuple = [string, (foo: string) => void];
+
+      const [foo, setFoo] = useOutletContext<Tuple>();
+      (foo: string);
+      (setFoo: (foo: string) => void);
+
+      // $FlowExpectedError[incompatible-type]
+      const t2: string = useOutletContext<Tuple>();
     });
 
     it('useParams', () => {
