@@ -126,7 +126,7 @@ describe("react-router-dom", () => {
         style={{ color: "blue" }}
         isActive={(match, location) => true}
         strict
-        exact
+        end
       >
         About
       </NavLink>;
@@ -163,11 +163,12 @@ describe("react-router-dom", () => {
       // $FlowExpectedError[incompatible-type] - to prop must be a string or LocationShape
       <NavLink to={[]} />;
 
-      // activeClassName and activeStyle have been dropped unfortunately props cannot be strict so no errors can be expected
+      // activeClassName, activeStyle and end have been dropped unfortunately props cannot be strict so no errors can be expected
       <NavLink
         to="/about"
         activeClassName="active"
         activeStyle={{ color: "red" }}
+        end
       >
         About
       </NavLink>;
