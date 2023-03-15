@@ -192,6 +192,14 @@ describe("react-router-dom", () => {
       // $FlowExpectedError[incompatible-type]
       <NavLink to="/about" style={3} />;
     });
+
+    it('supports render prop as children', () => {
+      <NavLink to="/about">
+        {({ isActive, isPending }) => (
+          <span className={isActive ? "active" : ""}>Tasks</span>
+        )}
+      </NavLink>
+    });
   });
 
   describe("matchPath", () => {
