@@ -26,7 +26,6 @@ declare module "react-router-dom" {
     +to: string | LocationShape,
     +className?: string | (props: {| isActive: boolean, isPending: boolean |}) => string | void,
     +style?: { +[string]: mixed, ... } | (props: {| isActive: boolean, isPending: boolean|}) => { +[string]: mixed, ... } | void,
-    +isActive?: (match: Match, location: Location) => boolean,
     +children?: React$Node,
     +end?: boolean,
     +strict?: boolean,
