@@ -6,6 +6,8 @@ import {
   Link,
   NavLink,
   matchPath,
+  matchRoutes,
+  renderMatches,
   withRouter,
   Navigate,
   Outlet,
@@ -21,6 +23,8 @@ import {
   useMatches,
 } from "react-router-dom";
 import type {
+  AgnosticRouteMatch,
+  RouteObject,
   Location,
   ContextRouter,
   Match,
@@ -230,6 +234,58 @@ describe("react-router-dom", () => {
       const matchError: string = matchPath("/the/pathname", {
         path: "the/:dynamicId"
       });
+    });
+  });
+
+  describe('renderMatches', () => {
+    it('works', () => {
+      renderMatches([]);
+
+      renderMatches<RouteObject>([]);
+
+      const contentWithEmptyMatches: null|React$Element<any> = renderMatches([]);
+
+      const contentWithMatches: null|React$Element<any> = renderMatches([{
+        params: {},
+        pathname: '/',
+        pathnameBase: '',
+        route: {
+          index: false,
+          children: [{
+            index: true,
+          }],
+        },
+      }]);
+    });
+
+    it('raises', () => {
+      // $FlowExpectedError[incompatible-call]
+      renderMatches(5);
+
+      // $FlowExpectedError[incompatible-type]
+      const contentWithEmptyMatches: number = renderMatches([]);
+    });
+  });
+
+  describe('matchRoutes', () => {
+    it('works', () => {
+      matchRoutes([], '/');
+
+      matchRoutes<RouteObject>([], '/');
+
+      const contentWithEmptyMatches: Array<AgnosticRouteMatch<string, RouteObject>> | null = matchRoutes([], '/');
+
+      const contentWithMatches: Array<AgnosticRouteMatch<string, RouteObject>> | null = matchRoutes([{
+        id: 'bar',
+        path: 'bar',
+        index: false,
+        children: [],
+      }], '/');
+    });
+
+    it('raises an error with invalid arguments', () => {
+      // $FlowExpectedError[incompatible-call]
+      matchRoutes(5, '/');
     });
   });
 
