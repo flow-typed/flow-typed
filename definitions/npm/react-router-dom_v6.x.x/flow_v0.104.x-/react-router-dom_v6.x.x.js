@@ -24,13 +24,10 @@ declare module "react-router-dom" {
 
   declare export var NavLink: React$ComponentType<{
     +to: string | LocationShape,
-    +activeClassName?: string,
-    +className?: string,
-    +activeStyle?: { +[string]: mixed, ... },
-    +style?: { +[string]: mixed, ... },
-    +isActive?: (match: Match, location: Location) => boolean,
-    +children?: React$Node,
-    +exact?: boolean,
+    +className?: string | (props: {| isActive: boolean, isPending: boolean |}) => string | void,
+    +style?: { +[string]: mixed, ... } | (props: {| isActive: boolean, isPending: boolean|}) => { +[string]: mixed, ... } | void,
+    +children?: React$Node | ({| isActive: boolean, isPending: boolean |}) => React$Node,
+    +end?: boolean,
     +strict?: boolean,
     ...
   }>
@@ -464,28 +461,23 @@ declare module "react-router-dom" {
 
   declare export type RouteObject = IndexRouteObject | NonIndexRouteObject;
 
-  declare export function createRoutesFromChildren(
-    children: React$Node,
-  ): Array<RouteObject>;
+  declare export function createRoutesFromElements(elements: React$Node): RouteObject[]
+  declare export var createRoutesFromChildren: typeof createRoutesFromElements;
 
   declare export type Params<Key: string> = {
     +[key: Key]: string | void;
   };
 
-  declare type RouteMatch<ParamKey: string> = {|
-    params: Params<ParamKey>,
-    pathname: string,
-    route: RouteObject,
-  |};
+  declare export type RouteMatch<ParamKey: string = string, RouteObjectType: RouteObject = RouteObject> = AgnosticRouteMatch<ParamKey, RouteObjectType>
 
-  declare export function matchRoutes(
+  declare export function matchRoutes<RouteObjectType: RouteObject = RouteObject>(
     routes: Array<RouteObject>,
     location: LocationShape | string,
     basename?: string,
-  ): Array<RouteMatch<string>> | null;
+  ): Array<AgnosticRouteMatch<string, RouteObjectType>> | null;
 
-  declare export function renderMatches(
-    matches: Array<RouteMatch<string>> | null,
+  declare export function renderMatches<RouteObjectType = RouteObject>(
+    matches: Array<RouteMatch<string, RouteObjectType>> | null,
   ): React$Element<any> | null;
 
   declare type PathPattern = {|
