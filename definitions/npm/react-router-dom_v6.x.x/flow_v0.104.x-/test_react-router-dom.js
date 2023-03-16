@@ -1,5 +1,5 @@
 // @flow
-import React from "react";
+import React from 'react';
 import {
   BrowserRouter,
   HashRouter,
@@ -21,7 +21,7 @@ import {
   useParams,
   useRouteMatch,
   useMatches,
-} from "react-router-dom";
+} from 'react-router-dom';
 import type {
   AgnosticRouteMatch,
   RouteObject,
@@ -31,12 +31,12 @@ import type {
   StaticRouterContext,
   RouterHistory,
   Params,
-} from "react-router-dom";
-import { it, describe } from "flow-typed-test";
+} from 'react-router-dom';
+import { it, describe } from 'flow-typed-test';
 
-describe("react-router-dom", () => {
-  describe("BrowserRouter", () => {
-    it("works", () => {
+describe('react-router-dom', () => {
+  describe('BrowserRouter', () => {
+    it('works', () => {
       <BrowserRouter>
         <div />
       </BrowserRouter>;
@@ -51,14 +51,14 @@ describe("react-router-dom", () => {
       </BrowserRouter>;
     });
 
-    it("raises error if passed incorrect props", () => {
+    it('raises error if passed incorrect props', () => {
       // $FlowExpectedError[incompatible-type] - basename must be a string
       <BrowserRouter basename={{}} />;
     });
   });
 
-  describe("HashRouter", () => {
-    it("works", () => {
+  describe('HashRouter', () => {
+    it('works', () => {
       <HashRouter>
         <div />
       </HashRouter>;
@@ -72,14 +72,14 @@ describe("react-router-dom", () => {
       </HashRouter>;
     });
 
-    it("raises error if passed incorrect props", () => {
+    it('raises error if passed incorrect props', () => {
       // $FlowExpectedError[incompatible-type] - hashType must be a string
       <HashRouter hashType="magic" />;
     });
   });
 
-  describe("<Link />", () => {
-    it("works", () => {
+  describe('<Link />', () => {
+    it('works', () => {
       <Link to="/about">About</Link>;
 
       <Link replace to="/about">
@@ -88,17 +88,17 @@ describe("react-router-dom", () => {
 
       <Link
         to={{
-          pathname: "/courses",
-          search: "?sort=name",
-          hash: "#the-hash",
-          state: { fromDashboard: true }
+          pathname: '/courses',
+          search: '?sort=name',
+          hash: '#the-hash',
+          state: { fromDashboard: true },
         }}
       >
         About
       </Link>;
     });
 
-    it("allows attributes of <a> element", () => {
+    it('allows attributes of <a> element', () => {
       <Link
         to="/about"
         download
@@ -108,10 +108,12 @@ describe("react-router-dom", () => {
         target="_self"
         type="foo"
         onClick={() => {}}
-      >About</Link>;
+      >
+        About
+      </Link>;
     });
 
-    it("raises error if passed incorrect props", () => {
+    it('raises error if passed incorrect props', () => {
       // $FlowExpectedError[prop-missing] - to prop is required
       <Link />;
 
@@ -120,14 +122,14 @@ describe("react-router-dom", () => {
     });
   });
 
-  describe("<NavLink />", () => {
-    it("works", () => {
+  describe('<NavLink />', () => {
+    it('works', () => {
       <NavLink to="/about">About</NavLink>;
 
       <NavLink
         to="/about"
         className="link"
-        style={{ color: "blue" }}
+        style={{ color: 'blue' }}
         strict
         end
       >
@@ -136,17 +138,17 @@ describe("react-router-dom", () => {
 
       <NavLink
         to={{
-          pathname: "/courses",
-          search: "?sort=name",
-          hash: "#the-hash",
-          state: { fromDashboard: true }
+          pathname: '/courses',
+          search: '?sort=name',
+          hash: '#the-hash',
+          state: { fromDashboard: true },
         }}
       >
         About
       </NavLink>;
     });
 
-    it("allows attributes of <a> element", () => {
+    it('allows attributes of <a> element', () => {
       <NavLink
         to="/about"
         download
@@ -156,10 +158,12 @@ describe("react-router-dom", () => {
         target="_self"
         type="foo"
         onClick={() => {}}
-      >About</NavLink>;
+      >
+        About
+      </NavLink>;
     });
 
-    it("raises error if passed incorrect props", () => {
+    it('raises error if passed incorrect props', () => {
       // $FlowExpectedError[prop-missing] - to prop is required
       <NavLink />;
 
@@ -170,7 +174,7 @@ describe("react-router-dom", () => {
       <NavLink
         to="/about"
         activeClassName="active"
-        activeStyle={{ color: "red" }}
+        activeStyle={{ color: 'red' }}
         isActive={(match: any, location: any) => true}
         end
       >
@@ -181,18 +185,22 @@ describe("react-router-dom", () => {
     it('supports enhanced className & style props', () => {
       <NavLink
         to="/about"
-        className={({ isActive, isPending}) =>
-          isPending ? "pending" : isActive ? "active" : undefined
+        className={({ isActive, isPending }) =>
+          isPending ? 'pending' : isActive ? 'active' : undefined
         }
-        style={({ isActive, isPending}) =>
-          isPending ? { color: "red" } : isActive ? { color: "blue" } : undefined
+        style={({ isActive, isPending }) =>
+          isPending
+            ? { color: 'red' }
+            : isActive
+            ? { color: 'blue' }
+            : undefined
         }
       >
         About
       </NavLink>;
 
       // $FlowExpectedError[incompatible-type]
-      <NavLink to="/about" className={{'invalid': ''}} />;
+      <NavLink to="/about" className={{ invalid: '' }} />;
       // $FlowExpectedError[incompatible-type]
       <NavLink to="/about" style={3} />;
     });
@@ -200,39 +208,42 @@ describe("react-router-dom", () => {
     it('supports render prop as children', () => {
       <NavLink to="/about">
         {({ isActive, isPending }) => (
-          <span className={isActive ? "active" : ""}>Tasks</span>
+          <span className={isActive ? 'active' : ''}>Tasks</span>
         )}
-      </NavLink>
+      </NavLink>;
     });
   });
 
-  describe("matchPath", () => {
-    it("works", () => {
-      const match: null | Match = matchPath("/the/pathname", {
-        path: "/the/:dynamicId",
-        exact: true,
-        strict: false
-      });
-      const match2: null | Match = matchPath("/the/pathname", {
-        path: ["/the/:dynamicId", "/the/otherRoute"],
+  describe('matchPath', () => {
+    it('works', () => {
+      const match: null | Match = matchPath('/the/pathname', {
+        path: '/the/:dynamicId',
         exact: true,
         strict: false,
       });
-      const match3: null | Match = matchPath("/the/pathname", "/the/:dynamicId");
-      const match4: null | Match = matchPath("/the/pathname", [
-        "/the/:dynamicId",
-        "/the/otherRoute",
+      const match2: null | Match = matchPath('/the/pathname', {
+        path: ['/the/:dynamicId', '/the/otherRoute'],
+        exact: true,
+        strict: false,
+      });
+      const match3: null | Match = matchPath(
+        '/the/pathname',
+        '/the/:dynamicId'
+      );
+      const match4: null | Match = matchPath('/the/pathname', [
+        '/the/:dynamicId',
+        '/the/otherRoute',
       ]);
-      const match5: null | Match = matchPath("/the/pathname");
+      const match5: null | Match = matchPath('/the/pathname');
     });
 
-    it("raises an error if passed invalid argument", () => {
+    it('raises an error if passed invalid argument', () => {
       // $FlowExpectedError[incompatible-call] - pathname argument is required
       matchPath();
 
       // $FlowExpectedError[incompatible-type] - matchPath returns Match or null
-      const matchError: string = matchPath("/the/pathname", {
-        path: "the/:dynamicId"
+      const matchError: string = matchPath('/the/pathname', {
+        path: 'the/:dynamicId',
       });
     });
   });
@@ -243,19 +254,25 @@ describe("react-router-dom", () => {
 
       renderMatches<RouteObject>([]);
 
-      const contentWithEmptyMatches: null|React$Element<any> = renderMatches([]);
+      const contentWithEmptyMatches: null | React$Element<any> = renderMatches(
+        []
+      );
 
-      const contentWithMatches: null|React$Element<any> = renderMatches([{
-        params: {},
-        pathname: '/',
-        pathnameBase: '',
-        route: {
-          index: false,
-          children: [{
-            index: true,
-          }],
+      const contentWithMatches: null | React$Element<any> = renderMatches([
+        {
+          params: {},
+          pathname: '/',
+          pathnameBase: '',
+          route: {
+            index: false,
+            children: [
+              {
+                index: true,
+              },
+            ],
+          },
         },
-      }]);
+      ]);
     });
 
     it('raises', () => {
@@ -273,14 +290,23 @@ describe("react-router-dom", () => {
 
       matchRoutes<RouteObject>([], '/');
 
-      const contentWithEmptyMatches: Array<AgnosticRouteMatch<string, RouteObject>> | null = matchRoutes([], '/');
+      const contentWithEmptyMatches: Array<
+        AgnosticRouteMatch<string, RouteObject>
+      > | null = matchRoutes([], '/');
 
-      const contentWithMatches: Array<AgnosticRouteMatch<string, RouteObject>> | null = matchRoutes([{
-        id: 'bar',
-        path: 'bar',
-        index: false,
-        children: [],
-      }], '/');
+      const contentWithMatches: Array<
+        AgnosticRouteMatch<string, RouteObject>
+      > | null = matchRoutes(
+        [
+          {
+            id: 'bar',
+            path: 'bar',
+            index: false,
+            children: [],
+          },
+        ],
+        '/'
+      );
     });
 
     it('raises an error with invalid arguments', () => {
@@ -289,7 +315,7 @@ describe("react-router-dom", () => {
     });
   });
 
-  describe("withRouter", () => {
+  describe('withRouter', () => {
     type Props = {
       history: RouterHistory,
       location: Location,
@@ -298,14 +324,14 @@ describe("react-router-dom", () => {
       s: string,
       ...
     };
-    describe("Stateless Functional Components", () => {
-      it("passes if the component is passed required props", () => {
+    describe('Stateless Functional Components', () => {
+      it('passes if the component is passed required props', () => {
         const Comp = ({
           history,
           location,
           match,
           staticContext,
-          s
+          s,
         }: Props) => <div />;
         const WrappedComp = withRouter(Comp);
         <WrappedComp s="" />;
@@ -314,13 +340,13 @@ describe("react-router-dom", () => {
         <ChainedHOC s="" />;
       });
 
-      it("errors if the component is not passed correct props", () => {
+      it('errors if the component is not passed correct props', () => {
         const Comp = ({
           history,
           location,
           match,
           staticContext,
-          s
+          s,
         }: Props) => <div />;
         const WrappedComp = withRouter(Comp);
         // $FlowExpectedError[prop-missing] - missing prop "s"
@@ -335,19 +361,20 @@ describe("react-router-dom", () => {
         <ChainedHOC s={1} />;
       });
 
-      it("errors if trying to access a prop that withRouter does not supply", () => {
-        const Comp = ({ histry, s }: {
+      it('errors if trying to access a prop that withRouter does not supply', () => {
+        const Comp = ({
+          histry,
+          s,
+        }: {
           histry: RouterHistory,
           s: string,
           ...
-        }) => (
-          <div />
-        );
+        }) => <div />;
         const WrappedComp = withRouter(Comp);
       });
 
-      it("errors if using block() incorrectly", () => {
-        const Comp = ({history}: { history: RouterHistory, ... }) => {
+      it('errors if using block() incorrectly', () => {
+        const Comp = ({ history }: { history: RouterHistory, ... }) => {
           // $FlowExpectedError[incompatible-call] - wrong param
           history.block(false);
 
@@ -363,8 +390,8 @@ describe("react-router-dom", () => {
       });
     });
 
-    describe("Class Components", () => {
-      it("passes if the component is passed required props", () => {
+    describe('Class Components', () => {
+      it('passes if the component is passed required props', () => {
         class Comp extends React.Component<Props> {
           render(): React$Element<'div'> {
             return <div />;
@@ -377,7 +404,7 @@ describe("react-router-dom", () => {
         <ChainedHOC s="" />;
       });
 
-      it("errors if the component is not passed the correct props", () => {
+      it('errors if the component is not passed the correct props', () => {
         class Comp extends React.Component<Props> {
           render(): React$Element<'div'> {
             return <div />;
@@ -396,14 +423,14 @@ describe("react-router-dom", () => {
         <ChainedHOC s={1} />;
       });
 
-      it("passes if a required prop is handled by defaultProps", () => {
+      it('passes if a required prop is handled by defaultProps', () => {
         type OwnProps = {|
           s: string,
         |};
 
         class Comp extends React.Component<Props> {
           static defaultProps: OwnProps = {
-            s: "defaultS"
+            s: 'defaultS',
           };
           render(): React$Element<'div'> {
             return <div />;
@@ -418,14 +445,14 @@ describe("react-router-dom", () => {
         <ChainedHOC s="" />;
       });
 
-      it("errors if a required prop that has a defaultProp is passed the wrong type", () => {
+      it('errors if a required prop that has a defaultProp is passed the wrong type', () => {
         type OwnProps = {|
           s: string,
         |};
 
         class Comp extends React.Component<Props> {
           static defaultProps: OwnProps = {
-            s: "defaultS"
+            s: 'defaultS',
           };
           render(): React$Element<'div'> {
             return <div />;
@@ -442,24 +469,24 @@ describe("react-router-dom", () => {
     });
   });
 
-  describe("Navigate", () => {
-    it("works", () => {
+  describe('Navigate', () => {
+    it('works', () => {
       <Navigate to="/login" />;
 
       <Navigate to="/new-path" replace />;
 
       <Navigate
         to={{
-          pathname: "/courses",
-          search: "?sort=name",
-          hash: "#the-hash",
-          state: { fromDashboard: true }
+          pathname: '/courses',
+          search: '?sort=name',
+          hash: '#the-hash',
+          state: { fromDashboard: true },
         }}
         state={{}}
       />;
     });
 
-    it("raises error if passed incorrect props", () => {
+    it('raises error if passed incorrect props', () => {
       // $FlowExpectedError[prop-missing] - to prop is required
       <Navigate />;
 
@@ -467,7 +494,7 @@ describe("react-router-dom", () => {
       <Navigate to={[]} />;
 
       // $FlowExpectedError[prop-missing] - unexpected prop xxx
-      <Navigate to='/x' xxx="1"/>;
+      <Navigate to="/x" xxx="1" />;
     });
   });
 
@@ -475,8 +502,8 @@ describe("react-router-dom", () => {
     it('works', () => {
       const navigate = useNavigate();
 
-      navigate("../success");
-      navigate("../success", { replace: true });
+      navigate('../success');
+      navigate('../success', { replace: true });
       navigate(-1);
     });
 
@@ -489,19 +516,18 @@ describe("react-router-dom", () => {
     });
   });
 
-  describe("Route", () => {
-    it("works", () => {
+  describe('Route', () => {
+    it('works', () => {
       const Component = () => <div>Hi!</div>;
       <Route path="/login" />;
 
       <Route path="/login" element={<Component />} />;
 
-      <Route
-        index
-        caseSensitive
-      />;
+      <Route index caseSensitive />;
 
-      <Route><div>Hi!</div></Route>;
+      <Route>
+        <div>Hi!</div>
+      </Route>;
 
       <Route
         caseSensitive
@@ -514,14 +540,14 @@ describe("react-router-dom", () => {
         action={() => {}}
         hasErrorBoundary
         shouldRevalidate={() => false}
-        handle={{ breadcrumb: 'login'}}
+        handle={{ breadcrumb: 'login' }}
         index={false}
         element={<Component />}
         errorElement={<Component />}
       />;
     });
 
-    it("raises error if passed incorrect props", () => {
+    it('raises error if passed incorrect props', () => {
       // $FlowExpectedError[incompatible-type] - prop must be a string
       <Route path={123} />;
 
@@ -534,24 +560,28 @@ describe("react-router-dom", () => {
       // $FlowExpectedError[incompatible-type]
       <Route caseSensitive="123" />;
 
-      <Route loader={({ request, params, ...loaderArgs}) => {
-        // $FlowExpectedError[incompatible-type]
-        const myRequest: string = request;
+      <Route
+        loader={({ request, params, ...loaderArgs }) => {
+          // $FlowExpectedError[incompatible-type]
+          const myRequest: string = request;
 
-        // $FlowExpectedError[incompatible-type]
-        const myParams: string = params;
+          // $FlowExpectedError[incompatible-type]
+          const myParams: string = params;
 
-        // $FlowExpectedError[prop-missing]
-        const missing: any = loaderArgs.missing;
+          // $FlowExpectedError[prop-missing]
+          const missing: any = loaderArgs.missing;
 
-        return false;
-      }} />;
+          return false;
+        }}
+      />;
 
       // $FlowExpectedError[incompatible-type]
       <Route hasErrorBoundary="invalid" />;
 
       // $FlowExpectedError[incompatible-type]
-      <Route shouldRevalidate={({ currentUrl }: {| currentUrl: number |}) => true} />;
+      <Route
+        shouldRevalidate={({ currentUrl }: {| currentUrl: number |}) => true}
+      />;
 
       // $FlowExpectedError[incompatible-type]
       <Route index="invalid" />;
@@ -588,15 +618,15 @@ describe("react-router-dom", () => {
     });
 
     it('useOutlet', () => {
-      useOutlet()
+      useOutlet();
 
       const Component = () => <div>Hi!</div>;
 
-      useOutlet<typeof Component>()
+      useOutlet<typeof Component>();
 
       // $FlowExpectedError[extra-arg]
-      useOutlet('')
-    })
+      useOutlet('');
+    });
 
     it('useOutletContext', () => {
       const [count, setCount] = useOutletContext();
@@ -682,8 +712,9 @@ describe("react-router-dom", () => {
         data: mixed,
         handle: mixed,
       |}>;
-      // $FlowExpectedError[prop-missing]
-      const matchesMissingPathname: InvalidMatchesMissingPathname = useMatches();
+      const matchesMissingPathname: InvalidMatchesMissingPathname =
+        // $FlowExpectedError[prop-missing]
+        useMatches();
 
       type InvalidMatchesIcompatibleParams = Array<{|
         id: string,
@@ -693,8 +724,9 @@ describe("react-router-dom", () => {
         handle: mixed,
       |}>;
 
-      // $FlowExpectedError[incompatible-type-arg]
-      const matchesIncompatibleParams: InvalidMatchesIcompatibleParams = useMatches();
+      const matchesIncompatibleParams: InvalidMatchesIcompatibleParams =
+        // $FlowExpectedError[incompatible-type-arg]
+        useMatches();
     });
   });
 });

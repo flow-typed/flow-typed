@@ -1,18 +1,18 @@
-declare module "react-router-dom" {
+declare module 'react-router-dom' {
   declare export var BrowserRouter: React$ComponentType<{|
     basename?: string,
     forceRefresh?: boolean,
     getUserConfirmation?: GetUserConfirmation,
     keyLength?: number,
-    children?: React$Node
-  |}>
+    children?: React$Node,
+  |}>;
 
   declare export var HashRouter: React$ComponentType<{|
     basename?: string,
     getUserConfirmation?: GetUserConfirmation,
-    hashType?: "slash" | "noslash" | "hashbang",
-    children?: React$Node
-  |}>
+    hashType?: 'slash' | 'noslash' | 'hashbang',
+    children?: React$Node,
+  |}>;
 
   declare export var Link: React$ComponentType<{
     +className?: string,
@@ -20,17 +20,26 @@ declare module "react-router-dom" {
     +replace?: boolean,
     +children?: React$Node,
     ...
-  }>
+  }>;
 
   declare export var NavLink: React$ComponentType<{
     +to: string | LocationShape,
-    +className?: string | (props: {| isActive: boolean, isPending: boolean |}) => string | void,
-    +style?: { +[string]: mixed, ... } | (props: {| isActive: boolean, isPending: boolean|}) => { +[string]: mixed, ... } | void,
-    +children?: React$Node | ({| isActive: boolean, isPending: boolean |}) => React$Node,
+    +className?:
+      | string
+      | ((props: {| isActive: boolean, isPending: boolean |}) => string | void),
+    +style?:
+      | { +[string]: mixed, ... }
+      | ((props: {| isActive: boolean, isPending: boolean |}) => {
+          +[string]: mixed,
+          ...
+        } | void),
+    +children?:
+      | React$Node
+      | (({| isActive: boolean, isPending: boolean |}) => React$Node),
     +end?: boolean,
     +strict?: boolean,
     ...
-  }>
+  }>;
 
   // NOTE: Below are duplicated from react-router. If updating these, please
   // update the react-router and react-router-native types as well.
@@ -51,7 +60,7 @@ declare module "react-router-dom" {
     ...
   };
 
-  declare export type HistoryAction = "PUSH" | "REPLACE" | "POP";
+  declare export type HistoryAction = 'PUSH' | 'REPLACE' | 'POP';
 
   declare export type RouterHistory = {
     length: number,
@@ -67,7 +76,9 @@ declare module "react-router-dom" {
     goForward(): void,
     canGo?: (n: number) => boolean,
     block(
-      callback: string | (location: Location, action: HistoryAction) => ?string
+      callback:
+        | string
+        | ((location: Location, action: HistoryAction) => ?string)
     ): () => void,
     ...
   };
@@ -84,7 +95,7 @@ declare module "react-router-dom" {
     history: RouterHistory,
     location: Location,
     match: Match,
-    staticContext?: StaticRouterContext
+    staticContext?: StaticRouterContext,
   |};
 
   declare type ContextRouterVoid = {
@@ -106,75 +117,75 @@ declare module "react-router-dom" {
     basename?: string,
     location?: string | Location,
     context: StaticRouterContext,
-    children?: React$Node
-  |}>
+    children?: React$Node,
+  |}>;
 
   declare export var MemoryRouter: React$ComponentType<{|
     initialEntries?: Array<LocationShape | string>,
     initialIndex?: number,
     getUserConfirmation?: GetUserConfirmation,
     keyLength?: number,
-    children?: React$Node
-  |}>
+    children?: React$Node,
+  |}>;
 
   declare export var Router: React$ComponentType<{|
     history: RouterHistory,
-    children?: React$Node
-  |}>
+    children?: React$Node,
+  |}>;
 
-  declare export type ResultTypeData = 'data'
-  declare export type ResultTypeDeferred = 'deferred'
-  declare export type ResultTypeRedirect = 'redirect'
-  declare export type ResultTypeError = 'error'
+  declare export type ResultTypeData = 'data';
+  declare export type ResultTypeDeferred = 'deferred';
+  declare export type ResultTypeRedirect = 'redirect';
+  declare export type ResultTypeError = 'error';
 
   /**
    * Successful result from a loader or action
    */
   declare export type SuccessResult = {|
-    type: ResultTypeData;
-    data: any;
-    statusCode?: number;
-    headers?: Headers;
-  |}
+    type: ResultTypeData,
+    data: any,
+    statusCode?: number,
+    headers?: Headers,
+  |};
 
   declare export class DeferredData {
     (data: mixed, responseInit?: ResponseOptions): void;
-    subscribe: mixed,
-    cancel: mixed,
-    resolveData: mixed,
-    done: mixed,
-    unwrappedData: mixed,
-    pendingKeys: mixed,
+    subscribe: mixed;
+    cancel: mixed;
+    resolveData: mixed;
+    done: mixed;
+    unwrappedData: mixed;
+    pendingKeys: mixed;
   }
 
   /**
    * Successful defer() result from a loader or action
    */
   declare export type DeferredResult = {|
-    type: ResultTypeDeferred;
-    deferredData: DeferredData;
-    statusCode?: number;
-    headers?: Headers;
-  |}
+    type: ResultTypeDeferred,
+    deferredData: DeferredData,
+    statusCode?: number,
+    headers?: Headers,
+  |};
 
   /**
    * Redirect result from a loader or action
    */
   declare export type RedirectResult = {|
-    type: ResultTypeRedirect;
-    status: number;
-    location: string;
-    revalidate: boolean;
-  |}
+    type: ResultTypeRedirect,
+    status: number,
+    location: string,
+    revalidate: boolean,
+  |};
 
   /**
    * Unsuccessful result from a loader or action
    */
   declare export type ErrorResult = {|
-    type: ResultTypeError;
-    error: any;
-    headers?: Headers;
-  |}
+    type: ResultTypeError,
+    error: any,
+    headers?: Headers,
+  |};
 
   /**
    * Result from a loader or action - potentially successful or unsuccessful
@@ -185,11 +196,11 @@ declare module "react-router-dom" {
     | RedirectResult
     | ErrorResult;
 
-  declare export type MutationFormMethod = "post" | "put" | "patch" | "delete";
-  declare export type FormMethod = "get" | MutationFormMethod;
+  declare export type MutationFormMethod = 'post' | 'put' | 'patch' | 'delete';
+  declare export type FormMethod = 'get' | MutationFormMethod;
   declare export type FormEncType =
-    | "application/x-www-form-urlencoded"
-    | "multipart/form-data";
+    | 'application/x-www-form-urlencoded'
+    | 'multipart/form-data';
 
   /**
    * @private
@@ -197,36 +208,36 @@ declare module "react-router-dom" {
    * external consumption
    */
   declare export type Submission = {|
-    formMethod: FormMethod;
-    formAction: string;
-    formEncType: FormEncType;
-    formData: FormData;
-  |}
+    formMethod: FormMethod,
+    formAction: string,
+    formEncType: FormEncType,
+    formData: FormData,
+  |};
 
   /**
    * Index routes must not have children
    */
   declare export type AgnosticIndexRouteObject = {|
     ...AgnosticBaseRouteObject,
-    children?: void;
-    index: true;
+    children?: void,
+    index: true,
   |};
 
   declare export type AgnosticDataIndexRouteObject = {|
     ...AgnosticIndexRouteObject,
-    id: string;
+    id: string,
   |};
 
   declare export type AgnosticNonIndexRouteObject = {|
     ...AgnosticBaseRouteObject,
-    children?: AgnosticRouteObject[];
-    index?: false;
+    children?: AgnosticRouteObject[],
+    index?: false,
   |};
 
   declare export type AgnosticDataNonIndexRouteObject = {|
     ...AgnosticNonIndexRouteObject,
-    children?: AgnosticDataRouteObject[];
-    id: string;
+    children?: AgnosticDataRouteObject[],
+    id: string,
   |};
 
   /**
@@ -254,22 +265,25 @@ declare module "react-router-dom" {
     /**
      * The names and values of dynamic parameters in the URL.
      */
-    params: Params<ParamKey>;
+    params: Params<ParamKey>,
     /**
      * The portion of the URL pathname that was matched.
      */
-    pathname: string;
+    pathname: string,
     /**
      * The portion of the URL pathname that was matched before child routes.
      */
-    pathnameBase: string;
+    pathnameBase: string,
     /**
      * The route object that was used to match.
      */
-    route: RouteObjectType;
-  |}
+    route: RouteObjectType,
+  |};
 
-  declare export type AgnosticDataRouteMatch = AgnosticRouteMatch<string, AgnosticDataRouteObject>;
+  declare export type AgnosticDataRouteMatch = AgnosticRouteMatch<
+    string,
+    AgnosticDataRouteObject
+  >;
 
   /**
    * @private
@@ -277,16 +291,15 @@ declare module "react-router-dom" {
    * this as a private implementation detail in case they diverge in the future.
    */
   declare type DataFunctionArgs = {|
-    request: Request;
-    params: Params<string>;
-    context?: any;
-  |}
+    request: Request,
+    params: Params<string>,
+    context?: any,
+  |};
 
   /**
    * Arguments passed to loader functions
    */
   declare export type LoaderFunctionArgs = DataFunctionArgs;
-
 
   /**
    * Arguments passed to action functions
@@ -296,12 +309,16 @@ declare module "react-router-dom" {
   /**
    * Route loader function signature
    */
-  declare export type LoaderFunction = (args: LoaderFunctionArgs) => Promise<Response> | Response | Promise<any> | any;
+  declare export type LoaderFunction = (
+    args: LoaderFunctionArgs
+  ) => Promise<Response> | Response | Promise<any> | any;
 
   /**
    * Route action function signature
    */
-  declare export type ActionFunction  = (args: ActionFunctionArgs) => Promise<Response> | Response | Promise<any> | any;
+  declare export type ActionFunction = (
+    args: ActionFunctionArgs
+  ) => Promise<Response> | Response | Promise<any> | any;
 
   /**
    * Route shouldRevalidate function signature.  This runs after any submission
@@ -311,116 +328,123 @@ declare module "react-router-dom" {
    * have to re-run based on the data models that were potentially mutated.
    */
   declare export type ShouldRevalidateFunction = (args: {|
-      currentUrl: URL;
-      currentParams: AgnosticDataRouteMatch["params"];
-      nextUrl: URL;
-      nextParams: AgnosticDataRouteMatch["params"];
-      formMethod?: Submission["formMethod"];
-      formAction?: Submission["formAction"];
-      formEncType?: Submission["formEncType"];
-      formData?: Submission["formData"];
-      actionResult?: DataResult;
-      defaultShouldRevalidate: boolean;
-    |}) => boolean;
+    currentUrl: URL,
+    currentParams: AgnosticDataRouteMatch['params'],
+    nextUrl: URL,
+    nextParams: AgnosticDataRouteMatch['params'],
+    formMethod?: Submission['formMethod'],
+    formAction?: Submission['formAction'],
+    formEncType?: Submission['formEncType'],
+    formData?: Submission['formData'],
+    actionResult?: DataResult,
+    defaultShouldRevalidate: boolean,
+  |}) => boolean;
 
   /**
    * Base RouteObject with common props shared by all types of routes
    */
   declare type AgnosticBaseRouteObject = {|
-    caseSensitive?: boolean;
-    path?: string;
-    id?: string;
-    loader?: LoaderFunction;
-    action?: ActionFunction;
-    hasErrorBoundary?: boolean;
-    shouldRevalidate?: ShouldRevalidateFunction;
-    handle?: mixed;
+    caseSensitive?: boolean,
+    path?: string,
+    id?: string,
+    loader?: LoaderFunction,
+    action?: ActionFunction,
+    hasErrorBoundary?: boolean,
+    shouldRevalidate?: ShouldRevalidateFunction,
+    handle?: mixed,
   |};
 
   declare export type NonIndexRouteObject = {|
-    caseSensitive?: AgnosticNonIndexRouteObject["caseSensitive"];
-    path?: AgnosticNonIndexRouteObject["path"];
-    id?: AgnosticNonIndexRouteObject["id"];
-    loader?: AgnosticNonIndexRouteObject["loader"];
-    action?: AgnosticNonIndexRouteObject["action"];
-    hasErrorBoundary?: AgnosticNonIndexRouteObject["hasErrorBoundary"];
-    shouldRevalidate?: AgnosticNonIndexRouteObject["shouldRevalidate"];
-    handle?: AgnosticNonIndexRouteObject["handle"];
-    index?: false;
-    children?: RouteObject[];
-    element?: React$Node | null;
-    errorElement?: React$Node | null;
-  |}
+    caseSensitive?: AgnosticNonIndexRouteObject['caseSensitive'],
+    path?: AgnosticNonIndexRouteObject['path'],
+    id?: AgnosticNonIndexRouteObject['id'],
+    loader?: AgnosticNonIndexRouteObject['loader'],
+    action?: AgnosticNonIndexRouteObject['action'],
+    hasErrorBoundary?: AgnosticNonIndexRouteObject['hasErrorBoundary'],
+    shouldRevalidate?: AgnosticNonIndexRouteObject['shouldRevalidate'],
+    handle?: AgnosticNonIndexRouteObject['handle'],
+    index?: false,
+    children?: RouteObject[],
+    element?: React$Node | null,
+    errorElement?: React$Node | null,
+  |};
 
   declare export type PathRouteProps = {|
-    caseSensitive?: NonIndexRouteObject["caseSensitive"];
-    path?: NonIndexRouteObject["path"];
-    id?: NonIndexRouteObject["id"];
-    loader?: NonIndexRouteObject["loader"];
-    action?: NonIndexRouteObject["action"];
-    hasErrorBoundary?: NonIndexRouteObject["hasErrorBoundary"];
-    shouldRevalidate?: NonIndexRouteObject["shouldRevalidate"];
-    handle?: NonIndexRouteObject["handle"];
-    index?: false;
-    children?: React$Node;
-    element?: React$Node | null;
-    errorElement?: React$Node | null;
-  |}
+    caseSensitive?: NonIndexRouteObject['caseSensitive'],
+    path?: NonIndexRouteObject['path'],
+    id?: NonIndexRouteObject['id'],
+    loader?: NonIndexRouteObject['loader'],
+    action?: NonIndexRouteObject['action'],
+    hasErrorBoundary?: NonIndexRouteObject['hasErrorBoundary'],
+    shouldRevalidate?: NonIndexRouteObject['shouldRevalidate'],
+    handle?: NonIndexRouteObject['handle'],
+    index?: false,
+    children?: React$Node,
+    element?: React$Node | null,
+    errorElement?: React$Node | null,
+  |};
 
-  declare export type LayoutRouteProps = PathRouteProps
+  declare export type LayoutRouteProps = PathRouteProps;
 
   declare export type IndexRouteProps = {|
-    caseSensitive?: IndexRouteObject["caseSensitive"];
-    path?: IndexRouteObject["path"];
-    id?: IndexRouteObject["id"];
-    loader?: IndexRouteObject["loader"];
-    action?: IndexRouteObject["action"];
-    hasErrorBoundary?: IndexRouteObject["hasErrorBoundary"];
-    shouldRevalidate?: IndexRouteObject["shouldRevalidate"];
-    handle?: IndexRouteObject["handle"];
-    index: true;
-    children?: void;
-    element?: React$Node | null;
-    errorElement?: React$Node | null;
-  |}
+    caseSensitive?: IndexRouteObject['caseSensitive'],
+    path?: IndexRouteObject['path'],
+    id?: IndexRouteObject['id'],
+    loader?: IndexRouteObject['loader'],
+    action?: IndexRouteObject['action'],
+    hasErrorBoundary?: IndexRouteObject['hasErrorBoundary'],
+    shouldRevalidate?: IndexRouteObject['shouldRevalidate'],
+    handle?: IndexRouteObject['handle'],
+    index: true,
+    children?: void,
+    element?: React$Node | null,
+    errorElement?: React$Node | null,
+  |};
 
-  declare export type RouteProps = PathRouteProps | LayoutRouteProps | IndexRouteProps;
+  declare export type RouteProps =
+    | PathRouteProps
+    | LayoutRouteProps
+    | IndexRouteProps;
 
-  declare export var Route: React$ComponentType<RouteProps>
+  declare export var Route: React$ComponentType<RouteProps>;
 
   declare export var Prompt: React$ComponentType<{|
     message: string | ((location: Location) => string | boolean),
-    when?: boolean
-  |}>
+    when?: boolean,
+  |}>;
 
   declare export var Outlet: React$ComponentType<{|
-    context?: mixed;
-  |}>
+    context?: mixed,
+  |}>;
 
-  declare export var useNavigate: () => (
-    & ((
-      to: To,
-      options?: {|
-        replace?: boolean, state?: any,
-      |},
-    ) => void)
-    & ((delta: number) => void)
-  );
+  declare export var useNavigate: () => ((
+    to: To,
+    options?: {|
+      replace?: boolean,
+      state?: any,
+    |}
+  ) => void) &
+    ((delta: number) => void);
 
   declare export var Navigate: (props: {|
-    to: To;
-    replace?: boolean;
-    state?: any;
+    to: To,
+    replace?: boolean,
+    state?: any,
   |}) => null;
 
   declare export var Routes: React$ComponentType<{|
     children?: React$Node,
-    location?: Location
-  |}>
+    location?: Location,
+  |}>;
 
-  declare export function withRouter<Props: {...}, Component: React$ComponentType<Props>>(
+  declare export function withRouter<
+    Props: { ... },
+    Component: React$ComponentType<Props>
+  >(
     WrappedComponent: Component
-  ): React$ComponentType<$Diff<React$ElementConfig<Component>, ContextRouterVoid>>;
+  ): React$ComponentType<
+    $Diff<React$ElementConfig<Component>, ContextRouterVoid>
+  >;
 
   declare type MatchPathOptions = {
     path?: string | string[],
@@ -437,47 +461,64 @@ declare module "react-router-dom" {
   ): null | Match;
 
   declare export function useHistory(): $PropertyType<ContextRouter, 'history'>;
-  declare export function useLocation(): $PropertyType<ContextRouter, 'location'>;
+  declare export function useLocation(): $PropertyType<
+    ContextRouter,
+    'location'
+  >;
   declare export function useOutletContext<T = any>(): T;
-  declare export function useParams<Params = $PropertyType<$PropertyType<ContextRouter, 'match'>, 'params'>>(): Params;
-  declare export function useRouteMatch(path?: MatchPathOptions | string | string[]): $PropertyType<ContextRouter, 'match'>;
+  declare export function useParams<
+    Params = $PropertyType<$PropertyType<ContextRouter, 'match'>, 'params'>
+  >(): Params;
+  declare export function useRouteMatch(
+    path?: MatchPathOptions | string | string[]
+  ): $PropertyType<ContextRouter, 'match'>;
 
-  declare export function generatePath(pattern?: string, params?: { +[string]: mixed, ... }): string;
+  declare export function generatePath(
+    pattern?: string,
+    params?: { +[string]: mixed, ... }
+  ): string;
 
   declare export type IndexRouteObject = {|
-    caseSensitive?: AgnosticIndexRouteObject["caseSensitive"];
-    path?: AgnosticIndexRouteObject["path"];
-    id?: AgnosticIndexRouteObject["id"];
-    loader?: AgnosticIndexRouteObject["loader"];
-    action?: AgnosticIndexRouteObject["action"];
-    hasErrorBoundary?: AgnosticIndexRouteObject["hasErrorBoundary"];
-    shouldRevalidate?: AgnosticIndexRouteObject["shouldRevalidate"];
-    handle?: AgnosticIndexRouteObject["handle"];
-    index: true;
-    children?: void;
-    element?: React$Node | null;
-    errorElement?: React$Node | null;
-  |}
+    caseSensitive?: AgnosticIndexRouteObject['caseSensitive'],
+    path?: AgnosticIndexRouteObject['path'],
+    id?: AgnosticIndexRouteObject['id'],
+    loader?: AgnosticIndexRouteObject['loader'],
+    action?: AgnosticIndexRouteObject['action'],
+    hasErrorBoundary?: AgnosticIndexRouteObject['hasErrorBoundary'],
+    shouldRevalidate?: AgnosticIndexRouteObject['shouldRevalidate'],
+    handle?: AgnosticIndexRouteObject['handle'],
+    index: true,
+    children?: void,
+    element?: React$Node | null,
+    errorElement?: React$Node | null,
+  |};
 
   declare export type RouteObject = IndexRouteObject | NonIndexRouteObject;
 
-  declare export function createRoutesFromElements(elements: React$Node): RouteObject[]
+  declare export function createRoutesFromElements(
+    elements: React$Node
+  ): RouteObject[];
   declare export var createRoutesFromChildren: typeof createRoutesFromElements;
 
   declare export type Params<Key: string> = {
-    +[key: Key]: string | void;
+    +[key: Key]: string | void,
   };
 
-  declare export type RouteMatch<ParamKey: string = string, RouteObjectType: RouteObject = RouteObject> = AgnosticRouteMatch<ParamKey, RouteObjectType>
+  declare export type RouteMatch<
+    ParamKey: string = string,
+    RouteObjectType: RouteObject = RouteObject
+  > = AgnosticRouteMatch<ParamKey, RouteObjectType>;
 
-  declare export function matchRoutes<RouteObjectType: RouteObject = RouteObject>(
+  declare export function matchRoutes<
+    RouteObjectType: RouteObject = RouteObject
+  >(
     routes: Array<RouteObject>,
     location: LocationShape | string,
-    basename?: string,
+    basename?: string
   ): Array<AgnosticRouteMatch<string, RouteObjectType>> | null;
 
   declare export function renderMatches<RouteObjectType = RouteObject>(
-    matches: Array<RouteMatch<string, RouteObjectType>> | null,
+    matches: Array<RouteMatch<string, RouteObjectType>> | null
   ): React$Element<any> | null;
 
   declare type PathPattern = {|
@@ -494,7 +535,7 @@ declare module "react-router-dom" {
 
   declare export function matchPath<ParamKey: string = string>(
     pattern: PathPattern | string,
-    pathname: string,
+    pathname: string
   ): PathMatch<ParamKey> | null;
 
   declare type To = LocationShape | string;
@@ -505,10 +546,7 @@ declare module "react-router-dom" {
     hash: string,
   |};
 
-  declare export function resolvePath(
-    to: To,
-    fromPathname?: string
-  ): Path;
+  declare export function resolvePath(to: To, fromPathname?: string): Path;
 
   declare export function useHref(to: To): string;
 
@@ -521,18 +559,18 @@ declare module "react-router-dom" {
   ): PathMatch<ParamKey> | null;
 
   declare export function useMatches<Data = mixed, Handle = mixed>(): Array<{|
-    id: string;
-    pathname: string;
-    params: Params<string>;
-    data: Data;
-    handle: Handle;
+    id: string,
+    pathname: string,
+    params: Params<string>,
+    data: Data,
+    handle: Handle,
   |}>;
 
   declare export function useOutlet<T = any>(): React$Element<T> | null;
 
   declare export function useRoutes<T = any>(
     routes: Array<RouteObject>,
-    location?: LocationShape | string,
+    location?: LocationShape | string
   ): React$Element<T> | null;
 
   declare export function useSearchParams(
@@ -554,6 +592,6 @@ declare module "react-router-dom" {
   ) => void;
 
   declare export function createSearchParams(
-    init?: URLSearchParamsInit,
+    init?: URLSearchParamsInit
   ): URLSearchParams;
 }
