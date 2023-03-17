@@ -35,185 +35,6 @@ import type {
 import { it, describe } from 'flow-typed-test';
 
 describe('react-router-dom', () => {
-  describe('BrowserRouter', () => {
-    it('works', () => {
-      <BrowserRouter>
-        <div />
-      </BrowserRouter>;
-
-      <BrowserRouter
-        basename="/base"
-        forceRefresh
-        getUserConfirmation={(message, callback) => {}}
-        keyLength={3}
-      >
-        <div />
-      </BrowserRouter>;
-    });
-
-    it('raises error if passed incorrect props', () => {
-      // $FlowExpectedError[incompatible-type] - basename must be a string
-      <BrowserRouter basename={{}} />;
-    });
-  });
-
-  describe('HashRouter', () => {
-    it('works', () => {
-      <HashRouter>
-        <div />
-      </HashRouter>;
-
-      <HashRouter
-        basename="/base"
-        getUserConfirmation={(message, callback) => {}}
-        hashType="noslash"
-      >
-        <div />
-      </HashRouter>;
-    });
-
-    it('raises error if passed incorrect props', () => {
-      // $FlowExpectedError[incompatible-type] - hashType must be a string
-      <HashRouter hashType="magic" />;
-    });
-  });
-
-  describe('<Link />', () => {
-    it('works', () => {
-      <Link to="/about">About</Link>;
-
-      <Link replace to="/about">
-        About
-      </Link>;
-
-      <Link
-        to={{
-          pathname: '/courses',
-          search: '?sort=name',
-          hash: '#the-hash',
-          state: { fromDashboard: true },
-        }}
-      >
-        About
-      </Link>;
-    });
-
-    it('allows attributes of <a> element', () => {
-      <Link
-        to="/about"
-        download
-        hreflang="de"
-        ping="https://www.example.com"
-        referrerpolicy="no-referrer"
-        target="_self"
-        type="foo"
-        onClick={() => {}}
-      >
-        About
-      </Link>;
-    });
-
-    it('raises error if passed incorrect props', () => {
-      // $FlowExpectedError[prop-missing] - to prop is required
-      <Link />;
-
-      // $FlowExpectedError[incompatible-type] - to prop must be a string or LocationShape
-      <Link to={[]} />;
-    });
-  });
-
-  describe('<NavLink />', () => {
-    it('works', () => {
-      <NavLink to="/about">About</NavLink>;
-
-      <NavLink
-        to="/about"
-        className="link"
-        style={{ color: 'blue' }}
-        strict
-        end
-      >
-        About
-      </NavLink>;
-
-      <NavLink
-        to={{
-          pathname: '/courses',
-          search: '?sort=name',
-          hash: '#the-hash',
-          state: { fromDashboard: true },
-        }}
-      >
-        About
-      </NavLink>;
-    });
-
-    it('allows attributes of <a> element', () => {
-      <NavLink
-        to="/about"
-        download
-        hreflang="de"
-        ping="https://www.example.com"
-        referrerpolicy="no-referrer"
-        target="_self"
-        type="foo"
-        onClick={() => {}}
-      >
-        About
-      </NavLink>;
-    });
-
-    it('raises error if passed incorrect props', () => {
-      // $FlowExpectedError[prop-missing] - to prop is required
-      <NavLink />;
-
-      // $FlowExpectedError[incompatible-type] - to prop must be a string or LocationShape
-      <NavLink to={[]} />;
-
-      // activeClassName, activeStyle, end, isActive have been dropped unfortunately props cannot be strict so no errors can be expected
-      <NavLink
-        to="/about"
-        activeClassName="active"
-        activeStyle={{ color: 'red' }}
-        isActive={(match: any, location: any) => true}
-        end
-      >
-        About
-      </NavLink>;
-    });
-
-    it('supports enhanced className & style props', () => {
-      <NavLink
-        to="/about"
-        className={({ isActive, isPending }) =>
-          isPending ? 'pending' : isActive ? 'active' : undefined
-        }
-        style={({ isActive, isPending }) =>
-          isPending
-            ? { color: 'red' }
-            : isActive
-            ? { color: 'blue' }
-            : undefined
-        }
-      >
-        About
-      </NavLink>;
-
-      // $FlowExpectedError[incompatible-type]
-      <NavLink to="/about" className={{ invalid: '' }} />;
-      // $FlowExpectedError[incompatible-type]
-      <NavLink to="/about" style={3} />;
-    });
-
-    it('supports render prop as children', () => {
-      <NavLink to="/about">
-        {({ isActive, isPending }) => (
-          <span className={isActive ? 'active' : ''}>Tasks</span>
-        )}
-      </NavLink>;
-    });
-  });
-
   describe('matchPath', () => {
     it('works', () => {
       const match: null | Match = matchPath('/the/pathname', {
@@ -727,6 +548,189 @@ describe('react-router-dom', () => {
       const matchesIncompatibleParams: InvalidMatchesIcompatibleParams =
         // $FlowExpectedError[incompatible-type-arg]
         useMatches();
+    });
+  });
+
+  // ----------------------------------/
+  // `react-router-dom`                /
+  // ----------------------------------/
+
+  describe('BrowserRouter', () => {
+    it('works', () => {
+      <BrowserRouter>
+        <div />
+      </BrowserRouter>;
+
+      <BrowserRouter
+        basename="/base"
+        forceRefresh
+        getUserConfirmation={(message, callback) => {}}
+        keyLength={3}
+      >
+        <div />
+      </BrowserRouter>;
+    });
+
+    it('raises error if passed incorrect props', () => {
+      // $FlowExpectedError[incompatible-type] - basename must be a string
+      <BrowserRouter basename={{}} />;
+    });
+  });
+
+  describe('HashRouter', () => {
+    it('works', () => {
+      <HashRouter>
+        <div />
+      </HashRouter>;
+
+      <HashRouter
+        basename="/base"
+        getUserConfirmation={(message, callback) => {}}
+        hashType="noslash"
+      >
+        <div />
+      </HashRouter>;
+    });
+
+    it('raises error if passed incorrect props', () => {
+      // $FlowExpectedError[incompatible-type] - hashType must be a string
+      <HashRouter hashType="magic" />;
+    });
+  });
+
+  describe('<Link />', () => {
+    it('works', () => {
+      <Link to="/about">About</Link>;
+
+      <Link replace to="/about">
+        About
+      </Link>;
+
+      <Link
+        to={{
+          pathname: '/courses',
+          search: '?sort=name',
+          hash: '#the-hash',
+          state: { fromDashboard: true },
+        }}
+      >
+        About
+      </Link>;
+    });
+
+    it('allows attributes of <a> element', () => {
+      <Link
+        to="/about"
+        download
+        hreflang="de"
+        ping="https://www.example.com"
+        referrerpolicy="no-referrer"
+        target="_self"
+        type="foo"
+        onClick={() => {}}
+      >
+        About
+      </Link>;
+    });
+
+    it('raises error if passed incorrect props', () => {
+      // $FlowExpectedError[prop-missing] - to prop is required
+      <Link />;
+
+      // $FlowExpectedError[incompatible-type] - to prop must be a string or LocationShape
+      <Link to={[]} />;
+    });
+  });
+
+  describe('<NavLink />', () => {
+    it('works', () => {
+      <NavLink to="/about">About</NavLink>;
+
+      <NavLink
+        to="/about"
+        className="link"
+        style={{ color: 'blue' }}
+        strict
+        end
+      >
+        About
+      </NavLink>;
+
+      <NavLink
+        to={{
+          pathname: '/courses',
+          search: '?sort=name',
+          hash: '#the-hash',
+          state: { fromDashboard: true },
+        }}
+      >
+        About
+      </NavLink>;
+    });
+
+    it('allows attributes of <a> element', () => {
+      <NavLink
+        to="/about"
+        download
+        hreflang="de"
+        ping="https://www.example.com"
+        referrerpolicy="no-referrer"
+        target="_self"
+        type="foo"
+        onClick={() => {}}
+      >
+        About
+      </NavLink>;
+    });
+
+    it('raises error if passed incorrect props', () => {
+      // $FlowExpectedError[prop-missing] - to prop is required
+      <NavLink />;
+
+      // $FlowExpectedError[incompatible-type] - to prop must be a string or LocationShape
+      <NavLink to={[]} />;
+
+      // activeClassName, activeStyle, end, isActive have been dropped unfortunately props cannot be strict so no errors can be expected
+      <NavLink
+        to="/about"
+        activeClassName="active"
+        activeStyle={{ color: 'red' }}
+        isActive={(match: any, location: any) => true}
+        end
+      >
+        About
+      </NavLink>;
+    });
+
+    it('supports enhanced className & style props', () => {
+      <NavLink
+        to="/about"
+        className={({ isActive, isPending }) =>
+          isPending ? 'pending' : isActive ? 'active' : undefined
+        }
+        style={({ isActive, isPending }) =>
+          isPending
+            ? { color: 'red' }
+            : isActive
+            ? { color: 'blue' }
+            : undefined
+        }
+      >
+        About
+      </NavLink>;
+
+      // $FlowExpectedError[incompatible-type]
+      <NavLink to="/about" className={{ invalid: '' }} />;
+      // $FlowExpectedError[incompatible-type]
+      <NavLink to="/about" style={3} />;
+    });
+
+    it('supports render prop as children', () => {
+      <NavLink to="/about">
+        {({ isActive, isPending }) => (
+          <span className={isActive ? 'active' : ''}>Tasks</span>
+        )}
+      </NavLink>;
     });
   });
 });

@@ -1,46 +1,4 @@
 declare module 'react-router-dom' {
-  declare export var BrowserRouter: React$ComponentType<{|
-    basename?: string,
-    forceRefresh?: boolean,
-    getUserConfirmation?: GetUserConfirmation,
-    keyLength?: number,
-    children?: React$Node,
-  |}>;
-
-  declare export var HashRouter: React$ComponentType<{|
-    basename?: string,
-    getUserConfirmation?: GetUserConfirmation,
-    hashType?: 'slash' | 'noslash' | 'hashbang',
-    children?: React$Node,
-  |}>;
-
-  declare export var Link: React$ComponentType<{
-    +className?: string,
-    +to: string | LocationShape,
-    +replace?: boolean,
-    +children?: React$Node,
-    ...
-  }>;
-
-  declare export var NavLink: React$ComponentType<{
-    +to: string | LocationShape,
-    +className?:
-      | string
-      | ((props: {| isActive: boolean, isPending: boolean |}) => string | void),
-    +style?:
-      | { +[string]: mixed, ... }
-      | ((props: {| isActive: boolean, isPending: boolean |}) => {
-          +[string]: mixed,
-          ...
-        } | void),
-    +children?:
-      | React$Node
-      | (({| isActive: boolean, isPending: boolean |}) => React$Node),
-    +end?: boolean,
-    +strict?: boolean,
-    ...
-  }>;
-
   // NOTE: Below are duplicated from react-router. If updating these, please
   // update the react-router and react-router-native types as well.
   declare export type Location = $ReadOnly<{
@@ -51,14 +9,6 @@ declare module 'react-router-dom' {
     key?: string,
     ...
   }>;
-
-  declare export type LocationShape = {
-    pathname?: string,
-    search?: string,
-    hash?: string,
-    state?: any,
-    ...
-  };
 
   declare export type HistoryAction = 'PUSH' | 'REPLACE' | 'POP';
 
@@ -105,11 +55,6 @@ declare module 'react-router-dom' {
     staticContext?: StaticRouterContext | void,
     ...
   };
-
-  declare export type GetUserConfirmation = (
-    message: string,
-    callback: (confirmed: boolean) => void
-  ) => void;
 
   declare export type StaticRouterContext = { url?: string, ... };
 
@@ -195,12 +140,6 @@ declare module 'react-router-dom' {
     | DeferredResult
     | RedirectResult
     | ErrorResult;
-
-  declare export type MutationFormMethod = 'post' | 'put' | 'patch' | 'delete';
-  declare export type FormMethod = 'get' | MutationFormMethod;
-  declare export type FormEncType =
-    | 'application/x-www-form-urlencoded'
-    | 'multipart/form-data';
 
   /**
    * @private
@@ -538,8 +477,6 @@ declare module 'react-router-dom' {
     pathname: string
   ): PathMatch<ParamKey> | null;
 
-  declare type To = LocationShape | string;
-
   declare type Path = {|
     pathname: string,
     search: string,
@@ -573,9 +510,18 @@ declare module 'react-router-dom' {
     location?: LocationShape | string
   ): React$Element<T> | null;
 
-  declare export function useSearchParams(
-    defaultInit?: URLSearchParamsInit
-  ): [URLSearchParams, SetURLSearchParams];
+  // ----------------------------------/
+  // `@remix-run/router`               /
+  // ----------------------------------/
+
+  // ----------------------------------/
+  // `react-router`                    /
+  // ----------------------------------/
+  declare type To = LocationShape | string;
+
+  // ----------------------------------/
+  // `react-router-dom`                /
+  // ----------------------------------/
 
   declare type URLSearchParamsInit =
     | string
@@ -591,7 +537,77 @@ declare module 'react-router-dom' {
     |}
   ) => void;
 
+  declare export type FormEncType =
+    | 'application/x-www-form-urlencoded'
+    | 'multipart/form-data';
+  declare export type FormMethod = 'get' | MutationFormMethod;
+
+  declare export var BrowserRouter: React$ComponentType<{|
+    basename?: string,
+    forceRefresh?: boolean,
+    getUserConfirmation?: GetUserConfirmation,
+    keyLength?: number,
+    children?: React$Node,
+  |}>;
+
+  declare export var HashRouter: React$ComponentType<{|
+    basename?: string,
+    getUserConfirmation?: GetUserConfirmation,
+    hashType?: 'slash' | 'noslash' | 'hashbang',
+    children?: React$Node,
+  |}>;
+
+  declare export var Link: React$ComponentType<{
+    +className?: string,
+    +to: string | LocationShape,
+    +replace?: boolean,
+    +children?: React$Node,
+    ...
+  }>;
+
+  declare export var NavLink: React$ComponentType<{
+    +to: string | LocationShape,
+    +className?:
+      | string
+      | ((props: {| isActive: boolean, isPending: boolean |}) => string | void),
+    +style?:
+      | { +[string]: mixed, ... }
+      | ((props: {| isActive: boolean, isPending: boolean |}) => {
+          +[string]: mixed,
+          ...
+        } | void),
+    +children?:
+      | React$Node
+      | (({| isActive: boolean, isPending: boolean |}) => React$Node),
+    +end?: boolean,
+    +strict?: boolean,
+    ...
+  }>;
+
+  declare export function useSearchParams(
+    defaultInit?: URLSearchParamsInit
+  ): [URLSearchParams, SetURLSearchParams];
+
   declare export function createSearchParams(
     init?: URLSearchParamsInit
   ): URLSearchParams;
+
+  // ----------------------------------/
+  // WIP (or unofficial)               /
+  // ----------------------------------/
+
+  declare export type GetUserConfirmation = (
+    message: string,
+    callback: (confirmed: boolean) => void
+  ) => void;
+
+  declare export type LocationShape = {
+    pathname?: string,
+    search?: string,
+    hash?: string,
+    state?: any,
+    ...
+  };
+
+  declare export type MutationFormMethod = 'post' | 'put' | 'patch' | 'delete';
 }
