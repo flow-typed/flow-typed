@@ -6,6 +6,8 @@ import {
   Link,
   NavLink,
   matchPath,
+  matchRoutes,
+  renderMatches,
   withRouter,
   Navigate,
   Outlet,
@@ -14,12 +16,15 @@ import {
   useHistory,
   useLocation,
   useNavigate,
+  useOutlet,
   useOutletContext,
   useParams,
   useRouteMatch,
   useMatches,
 } from "react-router-dom";
 import type {
+  AgnosticRouteMatch,
+  RouteObject,
   Location,
   ContextRouter,
   Match,
@@ -121,13 +126,10 @@ describe("react-router-dom", () => {
 
       <NavLink
         to="/about"
-        activeClassName="active"
         className="link"
-        activeStyle={{ color: "red" }}
         style={{ color: "blue" }}
-        isActive={(match, location) => true}
         strict
-        exact
+        end
       >
         About
       </NavLink>;
@@ -163,6 +165,44 @@ describe("react-router-dom", () => {
 
       // $FlowExpectedError[incompatible-type] - to prop must be a string or LocationShape
       <NavLink to={[]} />;
+
+      // activeClassName, activeStyle, end, isActive have been dropped unfortunately props cannot be strict so no errors can be expected
+      <NavLink
+        to="/about"
+        activeClassName="active"
+        activeStyle={{ color: "red" }}
+        isActive={(match: any, location: any) => true}
+        end
+      >
+        About
+      </NavLink>;
+    });
+
+    it('supports enhanced className & style props', () => {
+      <NavLink
+        to="/about"
+        className={({ isActive, isPending}) =>
+          isPending ? "pending" : isActive ? "active" : undefined
+        }
+        style={({ isActive, isPending}) =>
+          isPending ? { color: "red" } : isActive ? { color: "blue" } : undefined
+        }
+      >
+        About
+      </NavLink>;
+
+      // $FlowExpectedError[incompatible-type]
+      <NavLink to="/about" className={{'invalid': ''}} />;
+      // $FlowExpectedError[incompatible-type]
+      <NavLink to="/about" style={3} />;
+    });
+
+    it('supports render prop as children', () => {
+      <NavLink to="/about">
+        {({ isActive, isPending }) => (
+          <span className={isActive ? "active" : ""}>Tasks</span>
+        )}
+      </NavLink>
     });
   });
 
@@ -194,6 +234,58 @@ describe("react-router-dom", () => {
       const matchError: string = matchPath("/the/pathname", {
         path: "the/:dynamicId"
       });
+    });
+  });
+
+  describe('renderMatches', () => {
+    it('works', () => {
+      renderMatches([]);
+
+      renderMatches<RouteObject>([]);
+
+      const contentWithEmptyMatches: null|React$Element<any> = renderMatches([]);
+
+      const contentWithMatches: null|React$Element<any> = renderMatches([{
+        params: {},
+        pathname: '/',
+        pathnameBase: '',
+        route: {
+          index: false,
+          children: [{
+            index: true,
+          }],
+        },
+      }]);
+    });
+
+    it('raises', () => {
+      // $FlowExpectedError[incompatible-call]
+      renderMatches(5);
+
+      // $FlowExpectedError[incompatible-type]
+      const contentWithEmptyMatches: number = renderMatches([]);
+    });
+  });
+
+  describe('matchRoutes', () => {
+    it('works', () => {
+      matchRoutes([], '/');
+
+      matchRoutes<RouteObject>([], '/');
+
+      const contentWithEmptyMatches: Array<AgnosticRouteMatch<string, RouteObject>> | null = matchRoutes([], '/');
+
+      const contentWithMatches: Array<AgnosticRouteMatch<string, RouteObject>> | null = matchRoutes([{
+        id: 'bar',
+        path: 'bar',
+        index: false,
+        children: [],
+      }], '/');
+    });
+
+    it('raises an error with invalid arguments', () => {
+      // $FlowExpectedError[incompatible-call]
+      matchRoutes(5, '/');
     });
   });
 
@@ -496,12 +588,34 @@ describe("react-router-dom", () => {
     });
 
     it('useOutlet', () => {
+      useOutlet()
+
+      const Component = () => <div>Hi!</div>;
+
+      useOutlet<typeof Component>()
+
+      // $FlowExpectedError[extra-arg]
+      useOutlet('')
+    })
+
+    it('useOutletContext', () => {
       const [count, setCount] = useOutletContext();
       const increment = () => setCount((c) => c + 1);
       <button onClick={increment}>{count}</button>;
 
       // $FlowExpectedError[extra-arg]
       useOutletContext('');
+
+      const t1: number = useOutletContext<number>();
+
+      type Tuple = [string, (foo: string) => void];
+
+      const [foo, setFoo] = useOutletContext<Tuple>();
+      (foo: string);
+      (setFoo: (foo: string) => void);
+
+      // $FlowExpectedError[incompatible-type]
+      const t2: string = useOutletContext<Tuple>();
     });
 
     it('useParams', () => {
