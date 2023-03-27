@@ -78,11 +78,9 @@ declare module "kafkajs" {
     subscribe: (options: ConsumerSubscribeOptions) => Promise<void>;
   }
 
-  declare type CustomPartitioner = () => Partitioner
-
   declare type ProducerOptions = {|
     +allowAutoTopicCreation?: boolean,
-    +createPartitioner?: CustomPartitioner,
+    +createPartitioner?: Partitioner,
     +idempotent?: boolean,
     +maxQueueSize?: number,
     +retry?: {|
