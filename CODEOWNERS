@@ -23,3 +23,5 @@
 
 /definitions/npm/sequelize_*/**/* @jedwards1211
 
+/definitions/npm/kafkajs_*/**/* @edoardo-bluframe
+/definitions/npm/react-helmet_v6*/**/* @edoardo-bluframe
