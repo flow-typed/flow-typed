@@ -65,19 +65,6 @@ declare module 'react-router-dom' {
     children?: React$Node,
   |}>;
 
-  declare export var MemoryRouter: React$ComponentType<{|
-    initialEntries?: Array<LocationShape | string>,
-    initialIndex?: number,
-    getUserConfirmation?: GetUserConfirmation,
-    keyLength?: number,
-    children?: React$Node,
-  |}>;
-
-  declare export var Router: React$ComponentType<{|
-    history: RouterHistory,
-    children?: React$Node,
-  |}>;
-
   declare export type ResultTypeData = 'data';
   declare export type ResultTypeDeferred = 'deferred';
   declare export type ResultTypeRedirect = 'redirect';
@@ -293,87 +280,9 @@ declare module 'react-router-dom' {
     handle?: mixed,
   |};
 
-  declare export type NonIndexRouteObject = {|
-    caseSensitive?: AgnosticNonIndexRouteObject['caseSensitive'],
-    path?: AgnosticNonIndexRouteObject['path'],
-    id?: AgnosticNonIndexRouteObject['id'],
-    loader?: AgnosticNonIndexRouteObject['loader'],
-    action?: AgnosticNonIndexRouteObject['action'],
-    hasErrorBoundary?: AgnosticNonIndexRouteObject['hasErrorBoundary'],
-    shouldRevalidate?: AgnosticNonIndexRouteObject['shouldRevalidate'],
-    handle?: AgnosticNonIndexRouteObject['handle'],
-    index?: false,
-    children?: RouteObject[],
-    element?: React$Node | null,
-    errorElement?: React$Node | null,
-  |};
-
-  declare export type PathRouteProps = {|
-    caseSensitive?: NonIndexRouteObject['caseSensitive'],
-    path?: NonIndexRouteObject['path'],
-    id?: NonIndexRouteObject['id'],
-    loader?: NonIndexRouteObject['loader'],
-    action?: NonIndexRouteObject['action'],
-    hasErrorBoundary?: NonIndexRouteObject['hasErrorBoundary'],
-    shouldRevalidate?: NonIndexRouteObject['shouldRevalidate'],
-    handle?: NonIndexRouteObject['handle'],
-    index?: false,
-    children?: React$Node,
-    element?: React$Node | null,
-    errorElement?: React$Node | null,
-  |};
-
-  declare export type LayoutRouteProps = PathRouteProps;
-
-  declare export type IndexRouteProps = {|
-    caseSensitive?: IndexRouteObject['caseSensitive'],
-    path?: IndexRouteObject['path'],
-    id?: IndexRouteObject['id'],
-    loader?: IndexRouteObject['loader'],
-    action?: IndexRouteObject['action'],
-    hasErrorBoundary?: IndexRouteObject['hasErrorBoundary'],
-    shouldRevalidate?: IndexRouteObject['shouldRevalidate'],
-    handle?: IndexRouteObject['handle'],
-    index: true,
-    children?: void,
-    element?: React$Node | null,
-    errorElement?: React$Node | null,
-  |};
-
-  declare export type RouteProps =
-    | PathRouteProps
-    | LayoutRouteProps
-    | IndexRouteProps;
-
-  declare export var Route: React$ComponentType<RouteProps>;
-
   declare export var Prompt: React$ComponentType<{|
     message: string | ((location: Location) => string | boolean),
     when?: boolean,
-  |}>;
-
-  declare export var Outlet: React$ComponentType<{|
-    context?: mixed,
-  |}>;
-
-  declare export var useNavigate: () => ((
-    to: To,
-    options?: {|
-      replace?: boolean,
-      state?: any,
-    |}
-  ) => void) &
-    ((delta: number) => void);
-
-  declare export var Navigate: (props: {|
-    to: To,
-    replace?: boolean,
-    state?: any,
-  |}) => null;
-
-  declare export var Routes: React$ComponentType<{|
-    children?: React$Node,
-    location?: Location,
   |}>;
 
   declare export function withRouter<
@@ -400,53 +309,19 @@ declare module 'react-router-dom' {
   ): null | Match;
 
   declare export function useHistory(): $PropertyType<ContextRouter, 'history'>;
-  declare export function useLocation(): $PropertyType<
-    ContextRouter,
-    'location'
-  >;
-  declare export function useOutletContext<T = any>(): T;
-  declare export function useParams<
-    Params = $PropertyType<$PropertyType<ContextRouter, 'match'>, 'params'>
-  >(): Params;
-  declare export function useRouteMatch(
-    path?: MatchPathOptions | string | string[]
-  ): $PropertyType<ContextRouter, 'match'>;
 
   declare export function generatePath(
     pattern?: string,
     params?: { +[string]: mixed, ... }
   ): string;
 
-  declare export type IndexRouteObject = {|
-    caseSensitive?: AgnosticIndexRouteObject['caseSensitive'],
-    path?: AgnosticIndexRouteObject['path'],
-    id?: AgnosticIndexRouteObject['id'],
-    loader?: AgnosticIndexRouteObject['loader'],
-    action?: AgnosticIndexRouteObject['action'],
-    hasErrorBoundary?: AgnosticIndexRouteObject['hasErrorBoundary'],
-    shouldRevalidate?: AgnosticIndexRouteObject['shouldRevalidate'],
-    handle?: AgnosticIndexRouteObject['handle'],
-    index: true,
-    children?: void,
-    element?: React$Node | null,
-    errorElement?: React$Node | null,
-  |};
-
-  declare export type RouteObject = IndexRouteObject | NonIndexRouteObject;
-
   declare export function createRoutesFromElements(
     elements: React$Node
   ): RouteObject[];
-  declare export var createRoutesFromChildren: typeof createRoutesFromElements;
 
   declare export type Params<Key: string> = {
     +[key: Key]: string | void,
   };
-
-  declare export type RouteMatch<
-    ParamKey: string = string,
-    RouteObjectType: RouteObject = RouteObject
-  > = AgnosticRouteMatch<ParamKey, RouteObjectType>;
 
   declare export function matchRoutes<
     RouteObjectType: RouteObject = RouteObject
@@ -455,10 +330,6 @@ declare module 'react-router-dom' {
     location: LocationShape | string,
     basename?: string
   ): Array<AgnosticRouteMatch<string, RouteObjectType>> | null;
-
-  declare export function renderMatches<RouteObjectType = RouteObject>(
-    matches: Array<RouteMatch<string, RouteObjectType>> | null
-  ): React$Element<any> | null;
 
   declare type PathPattern = {|
     path: string,
@@ -485,15 +356,165 @@ declare module 'react-router-dom' {
 
   declare export function resolvePath(to: To, fromPathname?: string): Path;
 
+  // ----------------------------------/
+  // `@remix-run/router`               /
+  // ----------------------------------/
+
+  declare type To = LocationShape | string;
+
+  // ----------------------------------/
+  // `react-router`                    /
+  // ----------------------------------/
+
+  declare export type IndexRouteObject = {|
+    caseSensitive?: AgnosticIndexRouteObject['caseSensitive'],
+    path?: AgnosticIndexRouteObject['path'],
+    id?: AgnosticIndexRouteObject['id'],
+    loader?: AgnosticIndexRouteObject['loader'],
+    action?: AgnosticIndexRouteObject['action'],
+    hasErrorBoundary?: AgnosticIndexRouteObject['hasErrorBoundary'],
+    shouldRevalidate?: AgnosticIndexRouteObject['shouldRevalidate'],
+    handle?: AgnosticIndexRouteObject['handle'],
+    index: true,
+    children?: void,
+    element?: React$Node | null,
+    errorElement?: React$Node | null,
+  |};
+
+  declare export type NonIndexRouteObject = {|
+    caseSensitive?: AgnosticNonIndexRouteObject['caseSensitive'],
+    path?: AgnosticNonIndexRouteObject['path'],
+    id?: AgnosticNonIndexRouteObject['id'],
+    loader?: AgnosticNonIndexRouteObject['loader'],
+    action?: AgnosticNonIndexRouteObject['action'],
+    hasErrorBoundary?: AgnosticNonIndexRouteObject['hasErrorBoundary'],
+    shouldRevalidate?: AgnosticNonIndexRouteObject['shouldRevalidate'],
+    handle?: AgnosticNonIndexRouteObject['handle'],
+    index?: false,
+    children?: RouteObject[],
+    element?: React$Node | null,
+    errorElement?: React$Node | null,
+  |};
+
+  declare export type RouteObject = IndexRouteObject | NonIndexRouteObject;
+
+  declare export type IndexRouteProps = {|
+    caseSensitive?: IndexRouteObject['caseSensitive'],
+    path?: IndexRouteObject['path'],
+    id?: IndexRouteObject['id'],
+    loader?: IndexRouteObject['loader'],
+    action?: IndexRouteObject['action'],
+    hasErrorBoundary?: IndexRouteObject['hasErrorBoundary'],
+    shouldRevalidate?: IndexRouteObject['shouldRevalidate'],
+    handle?: IndexRouteObject['handle'],
+    index: true,
+    children?: void,
+    element?: React$Node | null,
+    errorElement?: React$Node | null,
+  |};
+
+  declare export type RouteProps =
+    | PathRouteProps
+    | LayoutRouteProps
+    | IndexRouteProps;
+
+  declare export type PathRouteProps = {|
+    caseSensitive?: NonIndexRouteObject['caseSensitive'],
+    path?: NonIndexRouteObject['path'],
+    id?: NonIndexRouteObject['id'],
+    loader?: NonIndexRouteObject['loader'],
+    action?: NonIndexRouteObject['action'],
+    hasErrorBoundary?: NonIndexRouteObject['hasErrorBoundary'],
+    shouldRevalidate?: NonIndexRouteObject['shouldRevalidate'],
+    handle?: NonIndexRouteObject['handle'],
+    index?: false,
+    children?: React$Node,
+    element?: React$Node | null,
+    errorElement?: React$Node | null,
+  |};
+
+  declare export type LayoutRouteProps = PathRouteProps;
+
+  declare export var createRoutesFromChildren: typeof createRoutesFromElements;
+
+  declare export function renderMatches<RouteObjectType = RouteObject>(
+    matches: Array<RouteMatch<string, RouteObjectType>> | null
+  ): React$Element<any> | null;
+
+  declare export type RouteMatch<
+    ParamKey: string = string,
+    RouteObjectType: RouteObject = RouteObject
+  > = AgnosticRouteMatch<ParamKey, RouteObjectType>;
+
+  declare export var MemoryRouter: React$ComponentType<{|
+    initialEntries?: Array<LocationShape | string>,
+    initialIndex?: number,
+    getUserConfirmation?: GetUserConfirmation,
+    keyLength?: number,
+    children?: React$Node,
+  |}>;
+
+  declare export var Navigate: (props: {|
+    to: To,
+    replace?: boolean,
+    state?: any,
+  |}) => null;
+
+  declare export var Outlet: React$ComponentType<{|
+    context?: mixed,
+  |}>;
+
+  declare export var Route: React$ComponentType<RouteProps>;
+
+  declare export var Router: React$ComponentType<{|
+    history: RouterHistory,
+    children?: React$Node,
+  |}>;
+
+  declare export var Routes: React$ComponentType<{|
+    children?: React$Node,
+    location?: Location,
+  |}>;
+
   declare export function useHref(to: To): string;
 
   declare export function useInRouterContext(): boolean;
 
-  declare export function useNavigationType(): 'POP' | 'PUSH' | 'REPLACE';
+  declare export function useLocation(): $PropertyType<
+    ContextRouter,
+    'location'
+  >;
 
   declare export function useMatch<ParamKey: string = string>(
     pattern: PathPattern | string
   ): PathMatch<ParamKey> | null;
+
+  declare export function useNavigationType(): 'POP' | 'PUSH' | 'REPLACE';
+
+  declare export var useNavigate: () => ((
+    to: To,
+    options?: {|
+      replace?: boolean,
+      state?: any,
+    |}
+  ) => void) &
+    ((delta: number) => void);
+
+  declare export function useOutlet<T = any>(): React$Element<T> | null;
+
+  declare export function useOutletContext<T = any>(): T;
+
+  declare export function useParams<
+    Params = $PropertyType<$PropertyType<ContextRouter, 'match'>, 'params'>
+  >(): Params;
+  declare export function useRouteMatch(
+    path?: MatchPathOptions | string | string[]
+  ): $PropertyType<ContextRouter, 'match'>;
+
+  declare export function useRoutes<T = any>(
+    routes: Array<RouteObject>,
+    location?: LocationShape | string
+  ): React$Element<T> | null;
 
   declare export function useMatches<Data = mixed, Handle = mixed>(): Array<{|
     id: string,
@@ -502,22 +523,6 @@ declare module 'react-router-dom' {
     data: Data,
     handle: Handle,
   |}>;
-
-  declare export function useOutlet<T = any>(): React$Element<T> | null;
-
-  declare export function useRoutes<T = any>(
-    routes: Array<RouteObject>,
-    location?: LocationShape | string
-  ): React$Element<T> | null;
-
-  // ----------------------------------/
-  // `@remix-run/router`               /
-  // ----------------------------------/
-
-  // ----------------------------------/
-  // `react-router`                    /
-  // ----------------------------------/
-  declare type To = LocationShape | string;
 
   // ----------------------------------/
   // `react-router-dom`                /

@@ -69,42 +69,6 @@ describe('react-router-dom', () => {
     });
   });
 
-  describe('renderMatches', () => {
-    it('works', () => {
-      renderMatches([]);
-
-      renderMatches<RouteObject>([]);
-
-      const contentWithEmptyMatches: null | React$Element<any> = renderMatches(
-        []
-      );
-
-      const contentWithMatches: null | React$Element<any> = renderMatches([
-        {
-          params: {},
-          pathname: '/',
-          pathnameBase: '',
-          route: {
-            index: false,
-            children: [
-              {
-                index: true,
-              },
-            ],
-          },
-        },
-      ]);
-    });
-
-    it('raises', () => {
-      // $FlowExpectedError[incompatible-call]
-      renderMatches(5);
-
-      // $FlowExpectedError[incompatible-type]
-      const contentWithEmptyMatches: number = renderMatches([]);
-    });
-  });
-
   describe('matchRoutes', () => {
     it('works', () => {
       matchRoutes([], '/');
@@ -290,6 +254,50 @@ describe('react-router-dom', () => {
     });
   });
 
+  // ----------------------------------/
+  // `@remix-run/router`               /
+  // ----------------------------------/
+
+  // ----------------------------------/
+  // `react-router`                    /
+  // ----------------------------------/
+
+  describe('renderMatches', () => {
+    it('works', () => {
+      renderMatches([]);
+
+      renderMatches<RouteObject>([]);
+
+      const contentWithEmptyMatches: null | React$Element<any> = renderMatches(
+        []
+      );
+
+      const contentWithMatches: null | React$Element<any> = renderMatches([
+        {
+          params: {},
+          pathname: '/',
+          pathnameBase: '',
+          route: {
+            index: false,
+            children: [
+              {
+                index: true,
+              },
+            ],
+          },
+        },
+      ]);
+    });
+
+    it('raises', () => {
+      // $FlowExpectedError[incompatible-call]
+      renderMatches(5);
+
+      // $FlowExpectedError[incompatible-type]
+      const contentWithEmptyMatches: number = renderMatches([]);
+    });
+  });
+
   describe('Navigate', () => {
     it('works', () => {
       <Navigate to="/login" />;
@@ -319,21 +327,14 @@ describe('react-router-dom', () => {
     });
   });
 
-  describe('useNavigate', () => {
-    it('works', () => {
-      const navigate = useNavigate();
-
-      navigate('../success');
-      navigate('../success', { replace: true });
-      navigate(-1);
+  describe('Outlet', () => {
+    it('can be used alone', () => {
+      <Outlet />;
     });
 
-    it('raises errors if used incorrectly', () => {
-      // $FlowExpectedError[extra-arg] takes no args
-      const navigate = useNavigate('test');
-
-      // $FlowExpectedError[incompatible-call]
-      navigate(true);
+    it('can be passed anything', () => {
+      const [count, setCount] = React.useState(0);
+      <Outlet context={[count, setCount]} />;
     });
   });
 
@@ -418,136 +419,141 @@ describe('react-router-dom', () => {
     });
   });
 
-  describe('Outlet', () => {
-    it('can be used alone', () => {
-      <Outlet />;
+  it('useHistory', () => {
+    const history: RouterHistory = useHistory();
+  });
+
+  it('useLocation', () => {
+    const location: Location = useLocation();
+  });
+
+  it('useOutlet', () => {
+    useOutlet();
+
+    const Component = () => <div>Hi!</div>;
+
+    useOutlet<typeof Component>();
+
+    // $FlowExpectedError[extra-arg]
+    useOutlet('');
+  });
+
+  it('useOutletContext', () => {
+    const [count, setCount] = useOutletContext();
+    const increment = () => setCount((c) => c + 1);
+    <button onClick={increment}>{count}</button>;
+
+    // $FlowExpectedError[extra-arg]
+    useOutletContext('');
+
+    const t1: number = useOutletContext<number>();
+
+    type Tuple = [string, (foo: string) => void];
+
+    const [foo, setFoo] = useOutletContext<Tuple>();
+    (foo: string);
+    (setFoo: (foo: string) => void);
+
+    // $FlowExpectedError[incompatible-type]
+    const t2: string = useOutletContext<Tuple>();
+  });
+
+  it('useParams', () => {
+    const params: { [key: string]: ?string, ... } = useParams();
+  });
+
+  it('useParams with generic', () => {
+    type ParamsType = {|
+      +slug: string,
+    |};
+
+    const params: ParamsType = useParams<ParamsType>();
+  });
+
+  it('useRouteMatch', () => {
+    const match: Match = useRouteMatch();
+    const matchPath: Match = useRouteMatch('/path');
+    const matchArray: Match = useRouteMatch(['/path', '/the/otherRoute']);
+
+    const matchObject: Match = useRouteMatch({
+      path: '/path',
+      strict: true,
+      sensitive: true,
+      exact: true,
     });
 
-    it('can be passed anything', () => {
-      const [count, setCount] = React.useState(0);
-      <Outlet context={[count, setCount]} />;
+    // $FlowExpectedError[incompatible-call]
+    const matchObject2: Match = useRouteMatch({
+      sensitive: 'foo',
     });
   });
 
-  describe('react hook', () => {
-    it('useHistory', () => {
-      const history: RouterHistory = useHistory();
+  it('useMatches', () => {
+    type Matches = Array<{|
+      id: string,
+      pathname: string,
+      params: Params<string>,
+      data: mixed,
+      handle: {|
+        custom: string,
+      |},
+    |}>;
+    const matches: Matches = useMatches();
+
+    type MatchesWithHandle = Array<{|
+      id: string,
+      pathname: string,
+      params: Params<string>,
+      data: mixed,
+      handle: {|
+        custom: string,
+      |},
+    |}>;
+    const matchesWithHandle: MatchesWithHandle = useMatches<
+      mixed,
+      {|
+        custom: string,
+      |}
+    >();
+
+    type InvalidMatchesMissingPathname = Array<{|
+      id: string,
+      params: Params<string>,
+      data: mixed,
+      handle: mixed,
+    |}>;
+    const matchesMissingPathname: InvalidMatchesMissingPathname =
+      // $FlowExpectedError[prop-missing]
+      useMatches();
+
+    type InvalidMatchesIcompatibleParams = Array<{|
+      id: string,
+      pathname: string,
+      params: Params<number>,
+      data: mixed,
+      handle: mixed,
+    |}>;
+
+    const matchesIncompatibleParams: InvalidMatchesIcompatibleParams =
+      // $FlowExpectedError[incompatible-type-arg]
+      useMatches();
+  });
+
+  describe('useNavigate', () => {
+    it('works', () => {
+      const navigate = useNavigate();
+
+      navigate('../success');
+      navigate('../success', { replace: true });
+      navigate(-1);
     });
 
-    it('useLocation', () => {
-      const location: Location = useLocation();
-    });
-
-    it('useOutlet', () => {
-      useOutlet();
-
-      const Component = () => <div>Hi!</div>;
-
-      useOutlet<typeof Component>();
-
-      // $FlowExpectedError[extra-arg]
-      useOutlet('');
-    });
-
-    it('useOutletContext', () => {
-      const [count, setCount] = useOutletContext();
-      const increment = () => setCount((c) => c + 1);
-      <button onClick={increment}>{count}</button>;
-
-      // $FlowExpectedError[extra-arg]
-      useOutletContext('');
-
-      const t1: number = useOutletContext<number>();
-
-      type Tuple = [string, (foo: string) => void];
-
-      const [foo, setFoo] = useOutletContext<Tuple>();
-      (foo: string);
-      (setFoo: (foo: string) => void);
-
-      // $FlowExpectedError[incompatible-type]
-      const t2: string = useOutletContext<Tuple>();
-    });
-
-    it('useParams', () => {
-      const params: { [key: string]: ?string, ... } = useParams();
-    });
-
-    it('useParams with generic', () => {
-      type ParamsType = {|
-        +slug: string,
-      |};
-
-      const params: ParamsType = useParams<ParamsType>();
-    });
-
-    it('useRouteMatch', () => {
-      const match: Match = useRouteMatch();
-      const matchPath: Match = useRouteMatch('/path');
-      const matchArray: Match = useRouteMatch(['/path', '/the/otherRoute']);
-
-      const matchObject: Match = useRouteMatch({
-        path: '/path',
-        strict: true,
-        sensitive: true,
-        exact: true,
-      });
+    it('raises errors if used incorrectly', () => {
+      // $FlowExpectedError[extra-arg] takes no args
+      const navigate = useNavigate('test');
 
       // $FlowExpectedError[incompatible-call]
-      const matchObject2: Match = useRouteMatch({
-        sensitive: 'foo',
-      });
-    });
-
-    it('useMatches', () => {
-      type Matches = Array<{|
-        id: string,
-        pathname: string,
-        params: Params<string>,
-        data: mixed,
-        handle: {|
-          custom: string,
-        |},
-      |}>;
-      const matches: Matches = useMatches();
-
-      type MatchesWithHandle = Array<{|
-        id: string,
-        pathname: string,
-        params: Params<string>,
-        data: mixed,
-        handle: {|
-          custom: string,
-        |},
-      |}>;
-      const matchesWithHandle: MatchesWithHandle = useMatches<
-        mixed,
-        {|
-          custom: string,
-        |}
-      >();
-
-      type InvalidMatchesMissingPathname = Array<{|
-        id: string,
-        params: Params<string>,
-        data: mixed,
-        handle: mixed,
-      |}>;
-      const matchesMissingPathname: InvalidMatchesMissingPathname =
-        // $FlowExpectedError[prop-missing]
-        useMatches();
-
-      type InvalidMatchesIcompatibleParams = Array<{|
-        id: string,
-        pathname: string,
-        params: Params<number>,
-        data: mixed,
-        handle: mixed,
-      |}>;
-
-      const matchesIncompatibleParams: InvalidMatchesIcompatibleParams =
-        // $FlowExpectedError[incompatible-type-arg]
-        useMatches();
+      navigate(true);
     });
   });
 
