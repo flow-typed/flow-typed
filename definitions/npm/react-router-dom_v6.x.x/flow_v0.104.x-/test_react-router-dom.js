@@ -35,6 +35,10 @@ import type {
 import { it, describe } from 'flow-typed-test';
 
 describe('react-router-dom', () => {
+  // ----------------------------------/
+  // `@remix-run/router`               /
+  // ----------------------------------/
+
   describe('matchPath', () => {
     it('works', () => {
       const match: null | Match = matchPath('/the/pathname', {
@@ -99,164 +103,6 @@ describe('react-router-dom', () => {
       matchRoutes(5, '/');
     });
   });
-
-  describe('withRouter', () => {
-    type Props = {
-      history: RouterHistory,
-      location: Location,
-      match: Match,
-      staticContext: StaticRouterContext,
-      s: string,
-      ...
-    };
-    describe('Stateless Functional Components', () => {
-      it('passes if the component is passed required props', () => {
-        const Comp = ({
-          history,
-          location,
-          match,
-          staticContext,
-          s,
-        }: Props) => <div />;
-        const WrappedComp = withRouter(Comp);
-        <WrappedComp s="" />;
-
-        const ChainedHOC = withRouter(WrappedComp);
-        <ChainedHOC s="" />;
-      });
-
-      it('errors if the component is not passed correct props', () => {
-        const Comp = ({
-          history,
-          location,
-          match,
-          staticContext,
-          s,
-        }: Props) => <div />;
-        const WrappedComp = withRouter(Comp);
-        // $FlowExpectedError[prop-missing] - missing prop "s"
-        <WrappedComp />;
-        // $FlowExpectedError[incompatible-type] - wrong type
-        <WrappedComp s={1} />;
-
-        const ChainedHOC = withRouter(WrappedComp);
-        // $FlowExpectedError[prop-missing] - missing prop "s"
-        <ChainedHOC />;
-        // $FlowExpectedError[incompatible-type] - wrong type
-        <ChainedHOC s={1} />;
-      });
-
-      it('errors if trying to access a prop that withRouter does not supply', () => {
-        const Comp = ({
-          histry,
-          s,
-        }: {
-          histry: RouterHistory,
-          s: string,
-          ...
-        }) => <div />;
-        const WrappedComp = withRouter(Comp);
-      });
-
-      it('errors if using block() incorrectly', () => {
-        const Comp = ({ history }: { history: RouterHistory, ... }) => {
-          // $FlowExpectedError[incompatible-call] - wrong param
-          history.block(false);
-
-          // These are valid
-          history.block('Are you sure you want to leave this page?');
-          history.block((location, action) => {
-            return 'Are you sure you want to leave this page?';
-          });
-
-          return <div />;
-        };
-        const WrappedComp = withRouter(Comp);
-      });
-    });
-
-    describe('Class Components', () => {
-      it('passes if the component is passed required props', () => {
-        class Comp extends React.Component<Props> {
-          render(): React$Element<'div'> {
-            return <div />;
-          }
-        }
-        const WrappedComp = withRouter(Comp);
-        <WrappedComp s="" />;
-
-        const ChainedHOC = withRouter(WrappedComp);
-        <ChainedHOC s="" />;
-      });
-
-      it('errors if the component is not passed the correct props', () => {
-        class Comp extends React.Component<Props> {
-          render(): React$Element<'div'> {
-            return <div />;
-          }
-        }
-        const WrappedComp = withRouter(Comp);
-        // $FlowExpectedError[prop-missing] - missing prop "s"
-        <WrappedComp />;
-        // $FlowExpectedError[incompatible-type] - wrong type
-        <WrappedComp s={1} />;
-
-        const ChainedHOC = withRouter(WrappedComp);
-        // $FlowExpectedError[prop-missing] - missing prop "s"
-        <ChainedHOC />;
-        // $FlowExpectedError[incompatible-type] - wrong type
-        <ChainedHOC s={1} />;
-      });
-
-      it('passes if a required prop is handled by defaultProps', () => {
-        type OwnProps = {|
-          s: string,
-        |};
-
-        class Comp extends React.Component<Props> {
-          static defaultProps: OwnProps = {
-            s: 'defaultS',
-          };
-          render(): React$Element<'div'> {
-            return <div />;
-          }
-        }
-        const WrappedComp = withRouter(Comp);
-        <WrappedComp />;
-        <WrappedComp s="" />;
-
-        const ChainedHOC = withRouter(WrappedComp);
-        <ChainedHOC />;
-        <ChainedHOC s="" />;
-      });
-
-      it('errors if a required prop that has a defaultProp is passed the wrong type', () => {
-        type OwnProps = {|
-          s: string,
-        |};
-
-        class Comp extends React.Component<Props> {
-          static defaultProps: OwnProps = {
-            s: 'defaultS',
-          };
-          render(): React$Element<'div'> {
-            return <div />;
-          }
-        }
-        const WrappedComp = withRouter(Comp);
-        // $FlowExpectedError[incompatible-type] - wrong type
-        <WrappedComp s={123} />;
-
-        const ChainedHOC = withRouter(WrappedComp);
-        // $FlowExpectedError[incompatible-type] - wrong type
-        <ChainedHOC s={123} />;
-      });
-    });
-  });
-
-  // ----------------------------------/
-  // `@remix-run/router`               /
-  // ----------------------------------/
 
   // ----------------------------------/
   // `react-router`                    /
@@ -737,6 +583,164 @@ describe('react-router-dom', () => {
           <span className={isActive ? 'active' : ''}>Tasks</span>
         )}
       </NavLink>;
+    });
+  });
+
+  // ----------------------------------/
+  // WIP (or unofficial)               /
+  // ----------------------------------/
+
+  describe('withRouter', () => {
+    type Props = {
+      history: RouterHistory,
+      location: Location,
+      match: Match,
+      staticContext: StaticRouterContext,
+      s: string,
+      ...
+    };
+    describe('Stateless Functional Components', () => {
+      it('passes if the component is passed required props', () => {
+        const Comp = ({
+          history,
+          location,
+          match,
+          staticContext,
+          s,
+        }: Props) => <div />;
+        const WrappedComp = withRouter(Comp);
+        <WrappedComp s="" />;
+
+        const ChainedHOC = withRouter(WrappedComp);
+        <ChainedHOC s="" />;
+      });
+
+      it('errors if the component is not passed correct props', () => {
+        const Comp = ({
+          history,
+          location,
+          match,
+          staticContext,
+          s,
+        }: Props) => <div />;
+        const WrappedComp = withRouter(Comp);
+        // $FlowExpectedError[prop-missing] - missing prop "s"
+        <WrappedComp />;
+        // $FlowExpectedError[incompatible-type] - wrong type
+        <WrappedComp s={1} />;
+
+        const ChainedHOC = withRouter(WrappedComp);
+        // $FlowExpectedError[prop-missing] - missing prop "s"
+        <ChainedHOC />;
+        // $FlowExpectedError[incompatible-type] - wrong type
+        <ChainedHOC s={1} />;
+      });
+
+      it('errors if trying to access a prop that withRouter does not supply', () => {
+        const Comp = ({
+          histry,
+          s,
+        }: {
+          histry: RouterHistory,
+          s: string,
+          ...
+        }) => <div />;
+        const WrappedComp = withRouter(Comp);
+      });
+
+      it('errors if using block() incorrectly', () => {
+        const Comp = ({ history }: { history: RouterHistory, ... }) => {
+          // $FlowExpectedError[incompatible-call] - wrong param
+          history.block(false);
+
+          // These are valid
+          history.block('Are you sure you want to leave this page?');
+          history.block((location, action) => {
+            return 'Are you sure you want to leave this page?';
+          });
+
+          return <div />;
+        };
+        const WrappedComp = withRouter(Comp);
+      });
+    });
+
+    describe('Class Components', () => {
+      it('passes if the component is passed required props', () => {
+        class Comp extends React.Component<Props> {
+          render(): React$Element<'div'> {
+            return <div />;
+          }
+        }
+        const WrappedComp = withRouter(Comp);
+        <WrappedComp s="" />;
+
+        const ChainedHOC = withRouter(WrappedComp);
+        <ChainedHOC s="" />;
+      });
+
+      it('errors if the component is not passed the correct props', () => {
+        class Comp extends React.Component<Props> {
+          render(): React$Element<'div'> {
+            return <div />;
+          }
+        }
+        const WrappedComp = withRouter(Comp);
+        // $FlowExpectedError[prop-missing] - missing prop "s"
+        <WrappedComp />;
+        // $FlowExpectedError[incompatible-type] - wrong type
+        <WrappedComp s={1} />;
+
+        const ChainedHOC = withRouter(WrappedComp);
+        // $FlowExpectedError[prop-missing] - missing prop "s"
+        <ChainedHOC />;
+        // $FlowExpectedError[incompatible-type] - wrong type
+        <ChainedHOC s={1} />;
+      });
+
+      it('passes if a required prop is handled by defaultProps', () => {
+        type OwnProps = {|
+          s: string,
+        |};
+
+        class Comp extends React.Component<Props> {
+          static defaultProps: OwnProps = {
+            s: 'defaultS',
+          };
+          render(): React$Element<'div'> {
+            return <div />;
+          }
+        }
+        const WrappedComp = withRouter(Comp);
+        <WrappedComp />;
+        <WrappedComp s="" />;
+
+        const ChainedHOC = withRouter(WrappedComp);
+        <ChainedHOC />;
+        <ChainedHOC s="" />;
+      });
+
+      it('errors if a required prop that has a defaultProp is passed the wrong type', () => {
+        type OwnProps = {|
+          s: string,
+        |};
+
+        class Comp extends React.Component<Props> {
+          static defaultProps: OwnProps = {
+            s: 'defaultS',
+          };
+          render(): React$Element<'div'> {
+            return <div />;
+          }
+        }
+        const WrappedComp = withRouter(Comp);
+        // $FlowExpectedError[incompatible-type] - wrong type
+        <WrappedComp s={123} />;
+
+        const ChainedHOC = withRouter(WrappedComp);
+        // $FlowExpectedError[incompatible-type] - wrong type
+        <ChainedHOC s={123} />;
+      });
     });
   });
 });

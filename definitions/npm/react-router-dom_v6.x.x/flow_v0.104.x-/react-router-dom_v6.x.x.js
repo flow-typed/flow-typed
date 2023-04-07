@@ -1,6 +1,15 @@
 declare module 'react-router-dom' {
-  // NOTE: Below are duplicated from react-router. If updating these, please
-  // update the react-router and react-router-native types as well.
+  // NOTE: Below are duplicated from react-router
+  // A work in progress of refactoring will move related types to their own
+  // package definition as the main branch of flow-typed is able to handle this
+  // type of structuration.
+
+  // ----------------------------------/
+  // `@remix-run/router`               /
+  // ----------------------------------/
+
+  declare type To = LocationShape | string;
+
   declare export type Location = $ReadOnly<{
     pathname: string,
     search: string,
@@ -9,136 +18,6 @@ declare module 'react-router-dom' {
     key?: string,
     ...
   }>;
-
-  declare export type HistoryAction = 'PUSH' | 'REPLACE' | 'POP';
-
-  declare export type RouterHistory = {
-    length: number,
-    location: Location,
-    action: HistoryAction,
-    listen(
-      callback: (location: Location, action: HistoryAction) => void
-    ): () => void,
-    push(path: string | LocationShape, state?: any): void,
-    replace(path: string | LocationShape, state?: any): void,
-    go(n: number): void,
-    goBack(): void,
-    goForward(): void,
-    canGo?: (n: number) => boolean,
-    block(
-      callback:
-        | string
-        | ((location: Location, action: HistoryAction) => ?string)
-    ): () => void,
-    ...
-  };
-
-  declare export type Match = {
-    params: { [key: string]: ?string, ... },
-    isExact: boolean,
-    path: string,
-    url: string,
-    ...
-  };
-
-  declare export type ContextRouter = {|
-    history: RouterHistory,
-    location: Location,
-    match: Match,
-    staticContext?: StaticRouterContext,
-  |};
-
-  declare type ContextRouterVoid = {
-    history: RouterHistory | void,
-    location: Location | void,
-    match: Match | void,
-    staticContext?: StaticRouterContext | void,
-    ...
-  };
-
-  declare export type StaticRouterContext = { url?: string, ... };
-
-  declare export var StaticRouter: React$ComponentType<{|
-    basename?: string,
-    location?: string | Location,
-    context: StaticRouterContext,
-    children?: React$Node,
-  |}>;
-
-  declare export type ResultTypeData = 'data';
-  declare export type ResultTypeDeferred = 'deferred';
-  declare export type ResultTypeRedirect = 'redirect';
-  declare export type ResultTypeError = 'error';
-
-  /**
-   * Successful result from a loader or action
-   */
-  declare export type SuccessResult = {|
-    type: ResultTypeData,
-    data: any,
-    statusCode?: number,
-    headers?: Headers,
-  |};
-
-  declare export class DeferredData {
-    (data: mixed, responseInit?: ResponseOptions): void;
-    subscribe: mixed;
-    cancel: mixed;
-    resolveData: mixed;
-    done: mixed;
-    unwrappedData: mixed;
-    pendingKeys: mixed;
-  }
-
-  /**
-   * Successful defer() result from a loader or action
-   */
-  declare export type DeferredResult = {|
-    type: ResultTypeDeferred,
-    deferredData: DeferredData,
-    statusCode?: number,
-    headers?: Headers,
-  |};
-
-  /**
-   * Redirect result from a loader or action
-   */
-  declare export type RedirectResult = {|
-    type: ResultTypeRedirect,
-    status: number,
-    location: string,
-    revalidate: boolean,
-  |};
-
-  /**
-   * Unsuccessful result from a loader or action
-   */
-  declare export type ErrorResult = {|
-    type: ResultTypeError,
-    error: any,
-    headers?: Headers,
-  |};
-
-  /**
-   * Result from a loader or action - potentially successful or unsuccessful
-   */
-  declare export type DataResult =
-    | SuccessResult
-    | DeferredResult
-    | RedirectResult
-    | ErrorResult;
-
-  /**
-   * @private
-   * Internal interface to pass around for action submissions, not intended for
-   * external consumption
-   */
-  declare export type Submission = {|
-    formMethod: FormMethod,
-    formAction: string,
-    formEncType: FormEncType,
-    formData: FormData,
-  |};
 
   /**
    * Index routes must not have children
@@ -280,20 +159,6 @@ declare module 'react-router-dom' {
     handle?: mixed,
   |};
 
-  declare export var Prompt: React$ComponentType<{|
-    message: string | ((location: Location) => string | boolean),
-    when?: boolean,
-  |}>;
-
-  declare export function withRouter<
-    Props: { ... },
-    Component: React$ComponentType<Props>
-  >(
-    WrappedComponent: Component
-  ): React$ComponentType<
-    $Diff<React$ElementConfig<Component>, ContextRouterVoid>
-  >;
-
   declare type MatchPathOptions = {
     path?: string | string[],
     exact?: boolean,
@@ -302,22 +167,22 @@ declare module 'react-router-dom' {
     ...
   };
 
+  // FIXME: 2 declarations of the same function
   declare export function matchPath(
     pathname: string,
     options?: MatchPathOptions | string | string[],
     parent?: Match
   ): null | Match;
 
-  declare export function useHistory(): $PropertyType<ContextRouter, 'history'>;
+  declare export function matchPath<ParamKey: string = string>(
+    pattern: PathPattern | string,
+    pathname: string
+  ): PathMatch<ParamKey> | null;
 
   declare export function generatePath(
     pattern?: string,
     params?: { +[string]: mixed, ... }
   ): string;
-
-  declare export function createRoutesFromElements(
-    elements: React$Node
-  ): RouteObject[];
 
   declare export type Params<Key: string> = {
     +[key: Key]: string | void,
@@ -343,11 +208,6 @@ declare module 'react-router-dom' {
     pattern: PathPattern,
   |};
 
-  declare export function matchPath<ParamKey: string = string>(
-    pattern: PathPattern | string,
-    pathname: string
-  ): PathMatch<ParamKey> | null;
-
   declare type Path = {|
     pathname: string,
     search: string,
@@ -355,12 +215,6 @@ declare module 'react-router-dom' {
   |};
 
   declare export function resolvePath(to: To, fromPathname?: string): Path;
-
-  // ----------------------------------/
-  // `@remix-run/router`               /
-  // ----------------------------------/
-
-  declare type To = LocationShape | string;
 
   // ----------------------------------/
   // `react-router`                    /
@@ -475,6 +329,10 @@ declare module 'react-router-dom' {
     children?: React$Node,
     location?: Location,
   |}>;
+
+  declare export function createRoutesFromElements(
+    elements: React$Node
+  ): RouteObject[];
 
   declare export function useHref(to: To): string;
 
@@ -615,4 +473,153 @@ declare module 'react-router-dom' {
   };
 
   declare export type MutationFormMethod = 'post' | 'put' | 'patch' | 'delete';
+
+  // named `Action` in `@remix-run/router`
+  declare export type HistoryAction = 'PUSH' | 'REPLACE' | 'POP';
+
+  // named `History` in `@remix-run/router`
+  declare export type RouterHistory = {
+    length: number,
+    location: Location,
+    action: HistoryAction,
+    listen(
+      callback: (location: Location, action: HistoryAction) => void
+    ): () => void,
+    push(path: string | LocationShape, state?: any): void,
+    replace(path: string | LocationShape, state?: any): void,
+    go(n: number): void,
+    goBack(): void,
+    goForward(): void,
+    canGo?: (n: number) => boolean,
+    block(
+      callback:
+        | string
+        | ((location: Location, action: HistoryAction) => ?string)
+    ): () => void,
+    ...
+  };
+
+  declare export type Match = {
+    params: { [key: string]: ?string, ... },
+    isExact: boolean,
+    path: string,
+    url: string,
+    ...
+  };
+
+  declare export type ContextRouter = {|
+    history: RouterHistory,
+    location: Location,
+    match: Match,
+    staticContext?: StaticRouterContext,
+  |};
+
+  declare type ContextRouterVoid = {
+    history: RouterHistory | void,
+    location: Location | void,
+    match: Match | void,
+    staticContext?: StaticRouterContext | void,
+    ...
+  };
+
+  declare export type StaticRouterContext = { url?: string, ... };
+
+  declare export var StaticRouter: React$ComponentType<{|
+    basename?: string,
+    location?: string | Location,
+    context: StaticRouterContext,
+    children?: React$Node,
+  |}>;
+
+  declare export type ResultTypeData = 'data';
+  declare export type ResultTypeDeferred = 'deferred';
+  declare export type ResultTypeRedirect = 'redirect';
+  declare export type ResultTypeError = 'error';
+
+  /**
+   * Successful result from a loader or action
+   */
+  declare export type SuccessResult = {|
+    type: ResultTypeData,
+    data: any,
+    statusCode?: number,
+    headers?: Headers,
+  |};
+
+  // named UNSAFE_DeferredData in `@remix-run/router`
+  declare export class DeferredData {
+    (data: mixed, responseInit?: ResponseOptions): void;
+    subscribe: mixed;
+    cancel: mixed;
+    resolveData: mixed;
+    done: mixed;
+    unwrappedData: mixed;
+    pendingKeys: mixed;
+  }
+
+  /**
+   * Successful defer() result from a loader or action
+   */
+  declare export type DeferredResult = {|
+    type: ResultTypeDeferred,
+    deferredData: DeferredData,
+    statusCode?: number,
+    headers?: Headers,
+  |};
+
+  /**
+   * Redirect result from a loader or action
+   */
+  declare export type RedirectResult = {|
+    type: ResultTypeRedirect,
+    status: number,
+    location: string,
+    revalidate: boolean,
+  |};
+
+  /**
+   * Unsuccessful result from a loader or action
+   */
+  declare export type ErrorResult = {|
+    type: ResultTypeError,
+    error: any,
+    headers?: Headers,
+  |};
+
+  /**
+   * Result from a loader or action - potentially successful or unsuccessful
+   */
+  declare export type DataResult =
+    | SuccessResult
+    | DeferredResult
+    | RedirectResult
+    | ErrorResult;
+
+  /**
+   * @private
+   * Internal interface to pass around for action submissions, not intended for
+   * external consumption
+   */
+  declare export type Submission = {|
+    formMethod: FormMethod,
+    formAction: string,
+    formEncType: FormEncType,
+    formData: FormData,
+  |};
+
+  declare export var Prompt: React$ComponentType<{|
+    message: string | ((location: Location) => string | boolean),
+    when?: boolean,
+  |}>;
+
+  declare export function withRouter<
+    Props: { ... },
+    Component: React$ComponentType<Props>
+  >(
+    WrappedComponent: Component
+  ): React$ComponentType<
+    $Diff<React$ElementConfig<Component>, ContextRouterVoid>
+  >;
+
+  declare export function useHistory(): $PropertyType<ContextRouter, 'history'>;
 }
