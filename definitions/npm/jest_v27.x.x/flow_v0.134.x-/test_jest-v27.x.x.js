@@ -798,3 +798,17 @@ it.each`
       // perform tests
   }
 );
+
+const mock = jest.fn().mockImplementation(async (): Promise<string> => 'banana');
+
+mock
+  .mockResolvedValue('orange')
+  .mockReturnValue(Promise.resolve('apple'))
+  .mockResolvedValueOnce('tomato')
+  .mockImplementation(() => Promise.resolve('pineapple'))
+  // $FlowExpectedError[incompatible-call]
+  .mockResolvedValue(3)
+  // $FlowExpectedError[incompatible-call]
+  .mockResolvedValue(Promise.resolve('out of fruit ideas'))
+  // $FlowExpectedError[incompatible-call]
+  .mockReturnValue('got one: plum')
