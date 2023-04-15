@@ -1,4 +1,6 @@
 declare module 'react-router-dom' {
+  import type { Node as ReactNode } from 'react';
+
   // NOTE: Below are duplicated from react-router
   // A work in progress of refactoring will move related types to their own
   // package definition as the main branch of flow-typed is able to handle this
@@ -7,6 +9,14 @@ declare module 'react-router-dom' {
   // ----------------------------------/
   // `@remix-run/router`               /
   // ----------------------------------/
+
+  declare type FutureConfig = {|
+    v7_normalizeFormMethod: boolean,
+  |};
+
+  declare type RouteData = {|
+    [routeId: string]: any,
+  |};
 
   declare type To = LocationShape | string;
 
@@ -220,6 +230,13 @@ declare module 'react-router-dom' {
   // `react-router`                    /
   // ----------------------------------/
 
+  declare export type RouterProviderProps = {|
+    fallbackElement?: ReactNode;
+    router: Router;
+  |}
+
+  declare export function RouterProvider(RouterProviderProps): ReactNode;
+
   declare export type IndexRouteObject = {|
     caseSensitive?: AgnosticIndexRouteObject['caseSensitive'],
     path?: AgnosticIndexRouteObject['path'],
@@ -385,6 +402,23 @@ declare module 'react-router-dom' {
   // ----------------------------------/
   // `react-router-dom`                /
   // ----------------------------------/
+
+  declare type DOMRouterOpts = {
+    basename?: string,
+    future?: FutureConfig,
+    hydrationData?: {|
+      loaderData: RouteData,
+      actionData: RouteData | null,
+      errors: RouteData | null,
+    |},
+    // Should be Window type but flow doesn't have this
+    window?: any,
+  };
+
+  declare export function createBrowserRouter(
+    routes: Array<RouteObject>,
+    opts?: DOMRouterOpts
+  ): Router;
 
   declare type URLSearchParamsInit =
     | string
