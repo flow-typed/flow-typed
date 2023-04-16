@@ -24,6 +24,7 @@ import {
   useRouteMatch,
   useMatches,
   useRouteError,
+  useLoaderData,
 } from 'react-router-dom';
 import type {
   AgnosticRouteMatch,
@@ -412,6 +413,14 @@ describe('react-router-dom', () => {
 
     // $FlowExpectedError[extra-arg] it takes no args
     useRouteError('test');
+  });
+
+  describe('useLoaderData', () => {
+    // It is described as any in the type def, but unknown the actual library
+    (useLoaderData(): string);
+
+    // $FlowExpectedError[extra-arg] it takes no args
+    useLoaderData('test');
   });
 
   // ----------------------------------/

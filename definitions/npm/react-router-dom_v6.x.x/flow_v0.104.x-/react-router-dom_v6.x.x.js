@@ -397,6 +397,11 @@ declare module 'react-router-dom' {
    */
   declare export function useRouteError(): any;
 
+  /**
+   * Returns the loader data for the nearest ancestor Route loader
+   */
+  declare export function useLoaderData(): any;
+
   declare export type RouterProviderProps = {|
     fallbackElement?: React$Node;
     router: typeof Router;
