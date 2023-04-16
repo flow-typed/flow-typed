@@ -1,6 +1,4 @@
 declare module 'react-router-dom' {
-  import type { Node as ReactNode } from 'react';
-
   // NOTE: Below are duplicated from react-router
   // A work in progress of refactoring will move related types to their own
   // package definition as the main branch of flow-typed is able to handle this
@@ -230,13 +228,6 @@ declare module 'react-router-dom' {
   // `react-router`                    /
   // ----------------------------------/
 
-  declare export type RouterProviderProps = {|
-    fallbackElement?: ReactNode;
-    router: Router;
-  |}
-
-  declare export function RouterProvider(RouterProviderProps): ReactNode;
-
   declare export type IndexRouteObject = {|
     caseSensitive?: AgnosticIndexRouteObject['caseSensitive'],
     path?: AgnosticIndexRouteObject['path'],
@@ -399,11 +390,18 @@ declare module 'react-router-dom' {
     handle: Handle,
   |}>;
 
+  declare export type RouterProviderProps = {|
+    fallbackElement?: React$Node;
+    router: typeof Router;
+  |}
+
+  declare export function RouterProvider(RouterProviderProps): React$Node;
+
   // ----------------------------------/
   // `react-router-dom`                /
   // ----------------------------------/
 
-  declare type DOMRouterOpts = {
+  declare type DOMRouterOpts = {|
     basename?: string,
     future?: FutureConfig,
     hydrationData?: {|
@@ -413,12 +411,12 @@ declare module 'react-router-dom' {
     |},
     // Should be Window type but flow doesn't have this
     window?: any,
-  };
+  |};
 
   declare export function createBrowserRouter(
     routes: Array<RouteObject>,
     opts?: DOMRouterOpts
-  ): Router;
+  ): typeof Router;
 
   declare type URLSearchParamsInit =
     | string
