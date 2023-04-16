@@ -1,6 +1,8 @@
 // @flow
 import React from 'react';
 import {
+  createBrowserRouter,
+  RouterProvider,
   BrowserRouter,
   HashRouter,
   Link,
@@ -406,6 +408,62 @@ describe('react-router-dom', () => {
   // ----------------------------------/
   // `react-router-dom`                /
   // ----------------------------------/
+
+  describe('RouterProvider use case', () => {
+    it('works', () => {
+      const router = createBrowserRouter([
+        {
+          path: "/",
+          element: <div>Hello world!</div>,
+        },
+      ]);
+
+      (() => (
+        <RouterProvider router={router} />
+      ))
+    });
+
+    it('catches createBrowserRouter error usages', () => {
+      // $FlowExpectedError[incompatible-call]
+      createBrowserRouter();
+      // $FlowExpectedError[incompatible-cast]
+      (createBrowserRouter([]): string);
+      // $FlowExpectedError[incompatible-call]
+      createBrowserRouter('test');
+
+      createBrowserRouter([], {});
+      createBrowserRouter([], {
+        basename: 'test',
+        future: {
+          v7_normalizeFormMethod: true,
+        },
+        hydrationData: {
+          loaderData: { a: 1 },
+          actionData: { a: 1 },
+          errors: null,
+        },
+        window: {},
+      });
+
+      createBrowserRouter([], {
+        // $FlowExpectedError[incompatible-call]
+        basename: 1,
+      });
+      // $FlowExpectedError[prop-missing]
+      createBrowserRouter([], {
+        // $FlowExpectedError[prop-missing]
+        future: {
+          a: 1,
+        },
+      });
+      createBrowserRouter([], {
+        hydrationData: {
+          // $FlowExpectedError[incompatible-call]
+          loaderData: null,
+        },
+      });
+    });
+  });
 
   describe('BrowserRouter', () => {
     it('works', () => {

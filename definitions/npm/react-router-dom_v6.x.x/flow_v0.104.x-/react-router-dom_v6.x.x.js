@@ -405,9 +405,9 @@ declare module 'react-router-dom' {
     basename?: string,
     future?: FutureConfig,
     hydrationData?: {|
-      loaderData: RouteData,
-      actionData: RouteData | null,
-      errors: RouteData | null,
+      loaderData?: RouteData,
+      actionData?: RouteData | null,
+      errors?: RouteData | null,
     |},
     // Should be Window type but flow doesn't have this
     window?: any,
