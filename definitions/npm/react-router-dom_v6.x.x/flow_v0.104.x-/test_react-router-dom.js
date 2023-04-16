@@ -23,6 +23,7 @@ import {
   useParams,
   useRouteMatch,
   useMatches,
+  useRouteError,
 } from 'react-router-dom';
 import type {
   AgnosticRouteMatch,
@@ -403,6 +404,14 @@ describe('react-router-dom', () => {
       // $FlowExpectedError[incompatible-call]
       navigate(true);
     });
+  });
+
+  describe('useRouteError', () => {
+    // It is described as any in the type def, but unknown the actual library
+    (useRouteError(): string);
+
+    // $FlowExpectedError[extra-arg] it takes no args
+    useRouteError('test');
   });
 
   // ----------------------------------/

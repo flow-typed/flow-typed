@@ -390,6 +390,13 @@ declare module 'react-router-dom' {
     handle: Handle,
   |}>;
 
+  /**
+   * Returns the nearest ancestor Route error, which could be a loader/action
+   * error or a render error.  This is intended to be called from your
+   * ErrorBoundary/errorElement to display a proper error message.
+   */
+  declare export function useRouteError(): any;
+
   declare export type RouterProviderProps = {|
     fallbackElement?: React$Node;
     router: typeof Router;
