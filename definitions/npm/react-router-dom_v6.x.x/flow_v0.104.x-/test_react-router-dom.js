@@ -25,6 +25,7 @@ import {
   useMatches,
   useRouteError,
   useLoaderData,
+  useSearchParams,
 } from 'react-router-dom';
 import type {
   AgnosticRouteMatch,
@@ -421,6 +422,36 @@ describe('react-router-dom', () => {
 
     // $FlowExpectedError[extra-arg] it takes no args
     useLoaderData('test');
+  });
+
+  describe('useSearchParams', () => {
+    const [searchParams, setSearchParams] = useSearchParams();
+
+    describe('setSearchParams', () => {
+      it('accepts a new object', () => {
+        setSearchParams({
+          a: 'b',
+        });
+
+        // $FlowExpectedError[incompatible-call]
+        setSearchParams({
+          a: 1,
+        });
+      });
+
+      it('accepts a function', () => {
+        setSearchParams((pSearchParams) => {
+          return {
+            a: 'b',
+          }
+        });
+      });
+
+      it('cannot be passed anything', () => {
+        // $FlowExpectedError[incompatible-call]
+        setSearchParams(123);
+      })
+    });
   });
 
   // ----------------------------------/

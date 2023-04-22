@@ -437,7 +437,9 @@ declare module 'react-router-dom' {
     | URLSearchParams;
 
   declare type SetURLSearchParams = (
-    nextInit?: URLSearchParamsInit,
+    nextInit?:
+      | URLSearchParamsInit
+      | (prevSearchParam: URLSearchParams) => URLSearchParamsInit,
     navigateOpts?: {|
       replace?: boolean,
       state?: any,
