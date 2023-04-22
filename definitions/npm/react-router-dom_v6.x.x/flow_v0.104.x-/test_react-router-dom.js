@@ -446,6 +446,11 @@ describe('react-router-dom', () => {
           }
         });
       });
+
+      it('cannot be passed anything', () => {
+        // $FlowExpectedError[incompatible-call]
+        setSearchParams(123);
+      })
     });
   });
 
