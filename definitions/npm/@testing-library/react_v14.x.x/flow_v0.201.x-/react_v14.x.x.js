@@ -189,7 +189,7 @@ declare module '@testing-library/react' {
 
   declare type Matcher = MatcherFunction | RegExp | string | number;
 
-  declare type ByRoleMatcher = ARIARole | MatcherFunction;
+  declare type ByRoleMatcher = ARIARole | string;
 
   declare type NormalizerFn = (text: string) => string;
 
