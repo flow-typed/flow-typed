@@ -678,7 +678,6 @@ async function runTests(
           numberOfFlowVersions,
         );
       } catch (e) {
-        console.log(e);
         orderedFlowVersions = await getCachedFlowBinVersions(
           numberOfFlowVersions,
         );
