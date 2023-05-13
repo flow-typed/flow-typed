@@ -1105,7 +1105,10 @@ describe('text matching API', () => {
   it('getByRole should accept by role arguments', () => {
     getByRole('button');
     getByRole('button', { hidden: true });
+
+    // $FlowExpectedError[incompatible-call] only takes string
     getByRole((content: string, element) => true);
+    // $FlowExpectedError[incompatible-call] only takes string
     getByRole((content: string, element) => true, {
       hidden: true,
     });
@@ -1118,7 +1121,10 @@ describe('text matching API', () => {
   it('queryByRole should accept by role arguments', () => {
     queryByRole('button');
     queryByRole('button', { hidden: true });
+
+    // $FlowExpectedError[incompatible-call] only takes string
     queryByRole((content: string, element) => true);
+    // $FlowExpectedError[incompatible-call] only takes string
     queryByRole((content: string, element) => true, {
       hidden: true,
     });
