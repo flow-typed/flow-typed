@@ -10,7 +10,7 @@ declare function test$getElementById(string): HTMLElement | null;
 declare class MyPortalComponent extends React.Component<{ ... }> {}
 
 class MyComponent extends React.Component<{ ... }> {
-  render() {
+  render(): React.Node {
     return ReactDOM.createPortal(
       <MyPortalComponent />,
       // $FlowExpectedError[incompatible-call]
@@ -25,7 +25,7 @@ class JDiv extends React.Component<{ id: string, ... }> {}
 <JDiv id={42} />;
 
 class Example extends React.Component<{ bar: string, ... }> {
-  render() {
+  render(): React.Node {
     return <div>{this.props.bar}</div>;
   }
 }
@@ -37,7 +37,7 @@ ReactDOM.render(
   document.body
 );
 
-function Clock(props) {
+function Clock(props: {| date: any |}) {
   return (
     <div>
       <h1>Hello, world!</h1>
@@ -57,7 +57,7 @@ function tick() {
 import TestUtils from 'react-dom/test-utils';
 
 class MyTestingComponent extends React.Component<{ ... }> {
-  render() {
+  render(): React.Node {
     return <button className="my-button" />;
   }
 }
