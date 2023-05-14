@@ -31,12 +31,12 @@ describe('act', () => {
     act(() => {});
     act(() => Promise.resolve());
     act(() => ({
-      then: (resolve) => {},
+      then: (resolve: () => mixed) => {},
     }));
   });
 
   it('should fail on incorrect usage of result', () => {
-    // $FlowExpectedError[incompatible-type]
+    // $FlowExpectedError[unsafe-addition]
     act(() => {}) + 1;
     // $FlowExpectedError[prop-missing]
     act(() => {}).doesNotExist();
@@ -78,8 +78,8 @@ describe('waitForDomChange', () => {
   });
 
   it('should pass on correct inputs', () => {
-    waitForDomChange({ container: document.createElement('div') });
-    waitForDomChange({ timeout: 1 });
+    waitForDomChange<any>({ container: document.createElement('div') });
+    waitForDomChange<any>({ timeout: 1 });
   });
 });
 
