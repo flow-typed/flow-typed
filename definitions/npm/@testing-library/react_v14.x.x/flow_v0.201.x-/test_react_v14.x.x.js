@@ -29,12 +29,12 @@ describe('act', () => {
     act(() => {});
     act(() => Promise.resolve());
     act(() => ({
-      then: (resolve) => {},
+      then: (resolve: () => mixed) => {},
     }));
   });
 
   it('should fail on incorrect usage of result', () => {
-    // $FlowExpectedError[incompatible-type]
+    // $FlowExpectedError[unsafe-addition]
     act(() => {}) + 1;
     // $FlowExpectedError[prop-missing]
     act(() => {}).doesNotExist();
@@ -1107,9 +1107,9 @@ describe('text matching API', () => {
     getByRole('button', { hidden: true });
 
     // $FlowExpectedError[incompatible-call] only takes string
-    getByRole((content: string, element) => true);
+    getByRole((content: string) => true);
     // $FlowExpectedError[incompatible-call] only takes string
-    getByRole((content: string, element) => true, {
+    getByRole((content: string) => true, {
       hidden: true,
     });
   });
@@ -1123,9 +1123,9 @@ describe('text matching API', () => {
     queryByRole('button', { hidden: true });
 
     // $FlowExpectedError[incompatible-call] only takes string
-    queryByRole((content: string, element) => true);
+    queryByRole((content: string) => true);
     // $FlowExpectedError[incompatible-call] only takes string
-    queryByRole((content: string, element) => true, {
+    queryByRole((content: string) => true, {
       hidden: true,
     });
   });
