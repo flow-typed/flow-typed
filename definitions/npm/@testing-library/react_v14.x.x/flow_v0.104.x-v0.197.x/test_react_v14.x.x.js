@@ -34,7 +34,7 @@ describe('act', () => {
   });
 
   it('should fail on incorrect usage of result', () => {
-    // $FlowExpectedError[unsafe-addition]
+    // $FlowExpectedError[incompatible-type]
     act(() => {}) + 1;
     // $FlowExpectedError[prop-missing]
     act(() => {}).doesNotExist();

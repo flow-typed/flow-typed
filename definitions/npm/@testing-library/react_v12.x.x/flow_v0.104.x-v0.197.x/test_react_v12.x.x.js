@@ -15,6 +15,8 @@ import {
 } from '@testing-library/react';
 import { describe, it } from 'flow-typed-test';
 
+declare type MaybeIntersectionHTMLElement = null | IntersectionHTMLElement;
+
 describe('act', () => {
   it('should fail on invalid inputs', () => {
     // $FlowExpectedError[incompatible-call]
@@ -34,7 +36,7 @@ describe('act', () => {
   });
 
   it('should fail on incorrect usage of result', () => {
-    // $FlowExpectedError[unsafe-addition]
+    // $FlowExpectedError[incompatible-type]
     act(() => {}) + 1;
     // $FlowExpectedError[prop-missing]
     act(() => {}).doesNotExist();
@@ -193,6 +195,12 @@ describe('render', () => {
     rerender(<Component />);
   });
 
+  it('matcher function should receive HTMLElement type elements', () => {
+    const a: IntersectionHTMLElement = getByText(
+      (_, node) => node.style.height === '100px'
+    );
+  });
+
   it('getByAltText should return HTML element', () => {
     const a: IntersectionHTMLElement = getByAltText('1');
   });
@@ -206,7 +214,7 @@ describe('render', () => {
   it('queryByAltText should return maybe HTML element', () => {
     // $FlowExpectedError[incompatible-type]
     const a: IntersectionHTMLElement = queryByAltText('1');
-    const b: ?IntersectionHTMLElement = queryByAltText('2');
+    const b: MaybeIntersectionHTMLElement = queryByAltText('2');
   });
 
   it('queryAllByAltText should return array of HTML element', () => {
@@ -240,7 +248,7 @@ describe('render', () => {
   it('queryByDisplayValue should return maybe HTML element', () => {
     // $FlowExpectedError[incompatible-type]
     const a: IntersectionHTMLElement = queryByDisplayValue('1');
-    const b: ?IntersectionHTMLElement = queryByDisplayValue('2');
+    const b: MaybeIntersectionHTMLElement = queryByDisplayValue('2');
   });
 
   it('queryAllByDisplayValue should return array of HTML element', () => {
@@ -274,7 +282,7 @@ describe('render', () => {
   it('queryByLabelText should return maybe HTML element', () => {
     // $FlowExpectedError[incompatible-type]
     const a: IntersectionHTMLElement = queryByLabelText('1');
-    const b: ?IntersectionHTMLElement = queryByLabelText('2');
+    const b: MaybeIntersectionHTMLElement = queryByLabelText('2');
   });
 
   it('queryAllByLabelText should return array of HTML element', () => {
@@ -308,7 +316,7 @@ describe('render', () => {
   it('queryByPlaceholderText should return maybe HTML element', () => {
     // $FlowExpectedError[incompatible-type]
     const a: IntersectionHTMLElement = queryByPlaceholderText('1');
-    const b: ?IntersectionHTMLElement = queryByPlaceholderText('2');
+    const b: MaybeIntersectionHTMLElement = queryByPlaceholderText('2');
   });
 
   it('queryAllByPlaceholderText should return array of HTML element', () => {
@@ -344,7 +352,7 @@ describe('render', () => {
   it('queryByRole should return maybe HTML element', () => {
     // $FlowExpectedError[incompatible-type]
     const a: IntersectionHTMLElement = queryByRole('button');
-    const b: ?IntersectionHTMLElement = queryByRole('button');
+    const b: MaybeIntersectionHTMLElement = queryByRole('button');
   });
 
   it('queryAllByRole should return array of HTML element', () => {
@@ -385,7 +393,7 @@ describe('render', () => {
   it('queryByTestId should return maybe HTML element', () => {
     // $FlowExpectedError[incompatible-type]
     const a: IntersectionHTMLElement = queryByTestId('1');
-    const b: ?IntersectionHTMLElement = queryByTestId('2');
+    const b: MaybeIntersectionHTMLElement = queryByTestId('2');
   });
 
   it('queryAllByTestId should return array of HTML element', () => {
@@ -419,7 +427,7 @@ describe('render', () => {
   it('queryByText should return maybe HTML element', () => {
     // $FlowExpectedError[incompatible-type]
     const a: IntersectionHTMLElement = queryByText('1');
-    const b: ?IntersectionHTMLElement = queryByText('2');
+    const b: MaybeIntersectionHTMLElement = queryByText('2');
   });
 
   it('queryAllByText should return array of HTML element', () => {
@@ -453,7 +461,7 @@ describe('render', () => {
   it('queryByTitle should return maybe HTML element', () => {
     // $FlowExpectedError[incompatible-type]
     const a: IntersectionHTMLElement = queryByTitle('1');
-    const b: ?IntersectionHTMLElement = queryByTitle('2');
+    const b: MaybeIntersectionHTMLElement = queryByTitle('2');
   });
 
   it('queryAllByTitle should return array of HTML element', () => {
