@@ -76,6 +76,7 @@ describe('run-tests (command)', () => {
         '[options]',
         'include_warnings=true',
         'server.max_workers=0',
+        '',
         'sharedmemory.heap_size=3221225472',
         '',
         '',
