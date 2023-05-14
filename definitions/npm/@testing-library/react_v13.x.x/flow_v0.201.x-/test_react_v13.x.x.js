@@ -29,12 +29,12 @@ describe('act', () => {
     act(() => {});
     act(() => Promise.resolve());
     act(() => ({
-      then: (resolve) => {},
+      then: (resolve: () => mixed) => {},
     }));
   });
 
   it('should fail on incorrect usage of result', () => {
-    // $FlowExpectedError[incompatible-type]
+    // $FlowExpectedError[unsafe-addition]
     act(() => {}) + 1;
     // $FlowExpectedError[prop-missing]
     act(() => {}).doesNotExist();

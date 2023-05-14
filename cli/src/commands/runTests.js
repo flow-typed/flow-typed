@@ -29,12 +29,28 @@ export type Args = {
   ...
 };
 
-// Used to decide which binary to fetch for each version of Flow
-const BIN_PLATFORM = (_ => {
+/**
+ * Used to decide which binary to fetch for each version of Flow.
+ *
+ * Return type matches the binaries returned by flow releases
+ * https://github.com/facebook/flow/releases
+ *
+ * eg: If the binary for the OS is `flow-linux-arm64-v0.206.0.zip`
+ * we will return `linux-arm64`
+ */
+const BIN_PLATFORM = (() => {
+  const arch = os.arch();
+
   switch (os.type()) {
     case 'Linux':
+      if (arch === 'arm') {
+        return 'linux-arm64';
+      }
       return 'linux64';
     case 'Darwin':
+      if (arch === 'arm') {
+        return 'osx-arm64';
+      }
       return 'osx';
     case 'Windows_NT':
       return 'win64';
@@ -43,6 +59,7 @@ const BIN_PLATFORM = (_ => {
       throw new Error('Unsupported os.type()! ' + os.type());
   }
 })();
+
 const PKG_ROOT_DIR = path.join(__dirname, '..', '..');
 export const TEST_DIR: string = path.join(PKG_ROOT_DIR, '.test-dir');
 const BIN_DIR = path.join(PKG_ROOT_DIR, '.flow-bins-cache');
@@ -164,7 +181,7 @@ async function getOrderedFlowBinVersions(
   sectionHeader('Fetching flow binaries...');
   const IS_WINDOWS = os.type() === 'Windows_NT';
   const GH_CLIENT = gitHubClient();
-  const OS_ARCH_FILTER_RE = new RegExp(`flow-${BIN_PLATFORM}`);
+  const OS_ARCH_FILTER_RE = new RegExp(`flow-${BIN_PLATFORM}-v`);
 
   // Fetching all available flow versions
   // before deciding which to run
