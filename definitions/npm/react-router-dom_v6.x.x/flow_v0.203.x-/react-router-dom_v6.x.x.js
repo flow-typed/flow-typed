@@ -224,7 +224,7 @@ declare module 'react-router-dom' {
 
   declare export function resolvePath(to: To, fromPathname?: string): Path;
 
-  declare export type InitialEntry = string | $Partial<Location>;
+  declare export type InitialEntry = string | Partial<Location>;
 
   // ----------------------------------/
   // `react-router`                    /
