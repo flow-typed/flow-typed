@@ -152,7 +152,23 @@ describe('react-router-dom', () => {
   });
 
   describe('redirect', () => {
-    // todo
+    it('works', () => {
+      (redirect('test'): Response);
+      redirect('test', 1);
+      declare var options: ResponseOptions;
+      redirect('test', options);
+    });
+
+    it('fails', () => {
+      // $FlowExpectedError[incompatible-call]
+      redirect();
+      // $FlowExpectedError[incompatible-call]
+      redirect('test', 'fail');
+      // $FlowExpectedError[extra-arg]
+      redirect('test', 1, 'fail');
+      // $FlowExpectedError[incompatible-cast]
+      (redirect('test'): string);
+    });
   });
 
   describe('Navigate', () => {
