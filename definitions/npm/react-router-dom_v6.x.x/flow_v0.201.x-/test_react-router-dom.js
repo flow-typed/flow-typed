@@ -11,7 +11,7 @@ import {
   matchPath,
   matchRoutes,
   renderMatches,
-  redirect
+  redirect,
   withRouter,
   Navigate,
   Outlet,
