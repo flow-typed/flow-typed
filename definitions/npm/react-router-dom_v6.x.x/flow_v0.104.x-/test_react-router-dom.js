@@ -6,6 +6,7 @@ import {
   BrowserRouter,
   HashRouter,
   Link,
+  MemoryRouter,
   NavLink,
   matchPath,
   matchRoutes,
@@ -450,7 +451,35 @@ describe('react-router-dom', () => {
       it('cannot be passed anything', () => {
         // $FlowExpectedError[incompatible-call]
         setSearchParams(123);
-      })
+      });
+    });
+  });
+
+  describe('MemoryRouter', () => {
+    it('works', () => {
+      () => (
+        <>
+          <MemoryRouter />
+          <MemoryRouter
+            basename="foo"
+            initialEntries={['/bar']}
+            initialIndex={1}
+          >
+            <div>Hello</div>
+          </MemoryRouter>
+        </>
+      );
+    });
+
+    it('catches usage errors', () => {
+      () => (
+        <>
+          {/* $FlowExpectedError[incompatible-type] */}
+          <MemoryRouter initialEntries="bar" />
+          {/* $FlowExpectedError[prop-missing] */}
+          <MemoryRouter foo="bar" />
+        </>
+      );
     });
   });
 

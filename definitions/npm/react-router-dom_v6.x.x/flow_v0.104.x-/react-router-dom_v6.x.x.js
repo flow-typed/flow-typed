@@ -224,6 +224,8 @@ declare module 'react-router-dom' {
 
   declare export function resolvePath(to: To, fromPathname?: string): Path;
 
+  declare export type InitialEntry = string | $Partial<Location>;
+
   // ----------------------------------/
   // `react-router`                    /
   // ----------------------------------/
@@ -308,13 +310,14 @@ declare module 'react-router-dom' {
     RouteObjectType: RouteObject = RouteObject
   > = AgnosticRouteMatch<ParamKey, RouteObjectType>;
 
-  declare export var MemoryRouter: React$ComponentType<{|
-    initialEntries?: Array<LocationShape | string>,
-    initialIndex?: number,
-    getUserConfirmation?: GetUserConfirmation,
-    keyLength?: number,
-    children?: React$Node,
-  |}>;
+  declare export type MemoryRouterProps = {|
+    basename?: string;
+    children?: React$Node;
+    initialEntries?: InitialEntry[];
+    initialIndex?: number;
+  |}
+
+  declare export var MemoryRouter: React$ComponentType<MemoryRouterProps>;
 
   declare export var Navigate: (props: {|
     to: To,
