@@ -345,6 +345,12 @@ declare module 'react-router-dom' {
     elements: React$Node
   ): RouteObject[];
 
+  declare export function redirect(
+    url: string,
+    init?: number | ResponseOptions,
+  ): Response;
+
+
   declare export function useHref(to: To): string;
 
   declare export function useInRouterContext(): boolean;

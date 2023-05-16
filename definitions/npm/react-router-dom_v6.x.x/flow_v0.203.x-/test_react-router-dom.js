@@ -11,6 +11,7 @@ import {
   matchPath,
   matchRoutes,
   renderMatches,
+  redirect
   withRouter,
   Navigate,
   Outlet,
@@ -148,6 +149,10 @@ describe('react-router-dom', () => {
       // $FlowExpectedError[incompatible-type]
       const contentWithEmptyMatches: number = renderMatches([]);
     });
+  });
+
+  describe('redirect', () => {
+    // todo
   });
 
   describe('Navigate', () => {
