@@ -1,0 +1,6 @@
+{
+  "deps": {
+    "aria-query": ["v5.x.x"],
+    "react-dom": ["v17.x.x", "v18.x.x"]
+  }
+}
