@@ -11,6 +11,7 @@ import {
   matchPath,
   matchRoutes,
   renderMatches,
+  redirect,
   withRouter,
   Navigate,
   Outlet,
@@ -147,6 +148,26 @@ describe('react-router-dom', () => {
 
       // $FlowExpectedError[incompatible-type]
       const contentWithEmptyMatches: number = renderMatches([]);
+    });
+  });
+
+  describe('redirect', () => {
+    it('works', () => {
+      (redirect('test'): Response);
+      redirect('test', 1);
+      declare var options: ResponseOptions;
+      redirect('test', options);
+    });
+
+    it('fails', () => {
+      // $FlowExpectedError[incompatible-call]
+      redirect();
+      // $FlowExpectedError[incompatible-call]
+      redirect('test', 'fail');
+      // $FlowExpectedError[extra-arg]
+      redirect('test', 1, 'fail');
+      // $FlowExpectedError[incompatible-cast]
+      (redirect('test'): string);
     });
   });
 
