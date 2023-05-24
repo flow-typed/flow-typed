@@ -2,6 +2,8 @@
 import React from 'react';
 import {
   createBrowserRouter,
+  createMemoryRouter,
+  createRoutesFromChildren,
   RouterProvider,
   BrowserRouter,
   HashRouter,
@@ -38,6 +40,8 @@ import type {
   StaticRouterContext,
   RouterHistory,
   Params,
+  RemixRouter,
+  RouterNavigateOptions,
 } from 'react-router-dom';
 import { it, describe } from 'flow-typed-test';
 
@@ -108,6 +112,21 @@ describe('react-router-dom', () => {
     it('raises an error with invalid arguments', () => {
       // $FlowExpectedError[incompatible-call]
       matchRoutes(5, '/');
+    });
+
+    it('can be used with `createRoutesFromChildren`', () => {
+      const element = (
+        <Route path="/">
+          <Route index />
+        </Route>
+      );
+      // FlowExpectedError[incompatible-call]
+      const routeMatches: Array<
+        AgnosticRouteMatch<string, RouteObject>
+      > | null = matchRoutes<RouteObject>(
+        createRoutesFromChildren(element),
+        '/'
+      );
     });
   });
 
@@ -465,7 +484,7 @@ describe('react-router-dom', () => {
         setSearchParams((pSearchParams) => {
           return {
             a: 'b',
-          }
+          };
         });
       });
 
@@ -504,6 +523,29 @@ describe('react-router-dom', () => {
     });
   });
 
+  describe('createMemoryRouter', () => {
+    it('works', () => {
+      const router: RemixRouter = createMemoryRouter([]);
+      createMemoryRouter([{ path: '/', element: <div>Hello world</div> }], {
+        basename: '/foo',
+        future: {
+          v7_normalizeFormMethod: false,
+        },
+        hydrationData: {},
+        initialEntries: ['/'],
+        initialIndex: 0,
+      });
+    });
+
+    it('catch usage errors', () => {
+      // $FlowExpectedError[incompatible-call]
+      // $FlowExpectedError[prop-missing]
+      createMemoryRouter('/', {
+        invalid: {},
+      });
+    });
+  });
+
   // ----------------------------------/
   // `react-router-dom`                /
   // ----------------------------------/
@@ -512,14 +554,12 @@ describe('react-router-dom', () => {
     it('works', () => {
       const router = createBrowserRouter([
         {
-          path: "/",
+          path: '/',
           element: <div>Hello world!</div>,
         },
       ]);
 
-      (() => (
-        <RouterProvider router={router} />
-      ))
+      () => <RouterProvider router={router} />;
     });
 
     it('catches createBrowserRouter error usages', () => {
@@ -898,6 +938,26 @@ describe('react-router-dom', () => {
         // $FlowExpectedError[incompatible-type] - wrong type
         <ChainedHOC s={123} />;
       });
+    });
+  });
+
+  describe('RemixRouter', () => {
+    it('works', () => {
+      const router: RemixRouter = {
+        navigate: (to, opts) => {
+          if (opts) {
+            (opts: RouterNavigateOptions);
+          }
+          return Promise.resolve();
+        },
+      };
+    });
+
+    it('errors if incorrectly instanciated', () => {
+      // $FlowExpectedError[prop-missing]
+      const router: RemixRouter = {
+        foo: '',
+      };
     });
   });
 });
