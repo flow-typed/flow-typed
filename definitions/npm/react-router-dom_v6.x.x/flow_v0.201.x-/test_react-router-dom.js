@@ -531,7 +531,11 @@ describe('react-router-dom', () => {
         future: {
           v7_normalizeFormMethod: false,
         },
-        hydrationData: {},
+        hydrationData: {
+          loaderData: { a: 1 },
+          actionData: { a: 1 },
+          errors: null,
+        },
         initialEntries: ['/'],
         initialIndex: 0,
       });

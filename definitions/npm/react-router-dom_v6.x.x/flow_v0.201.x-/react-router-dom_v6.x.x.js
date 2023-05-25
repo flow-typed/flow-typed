@@ -417,12 +417,12 @@ declare module 'react-router-dom' {
     /**
      * Map of current fetchers
      */
-    fetchers: Map<string, Fetcher<>>,
+    fetchers: { [key: string]: Fetcher<> },
 
     /**
      * Map of current blockers
      */
-    blockers: Map<string, Blocker>,
+    blockers: { [key: string]: Blocker<> },
   |};
 
   /**
@@ -452,7 +452,8 @@ declare module 'react-router-dom' {
   /**
    * Options for a navigate() call for a Form navigation
    */
-  declare type SubmissionNavigateOptions = BaseNavigateOptions & {
+  declare type SubmissionNavigateOptions = {
+    ...BaseNavigateOptions,
     formMethod?: HTMLFormMethod,
     formEncType?: FormEncType,
     formData: FormData,
@@ -786,13 +787,19 @@ declare module 'react-router-dom' {
     ...
   };
 
-  // exported as FormMethod in `@remix/router` but there is name collision in `react-router-dom`
+  /**
+   * exported as FormMethod in `@remix/router` but there is name collision in `react-router-dom`
+   */
   declare export type RemixFormMethod = LowerCaseFormMethod;
 
-  // named `Action` in `@remix-run/router`
+  /**
+   * named `Action` in `@remix-run/router`
+   */
   declare export type HistoryAction = 'PUSH' | 'REPLACE' | 'POP';
 
-  // named `History` in `@remix-run/router`
+  /**
+   * named `History` in `@remix-run/router`
+   */
   declare export type RouterHistory = {
     length: number,
     location: Location,
@@ -846,8 +853,10 @@ declare module 'react-router-dom' {
     children?: React$Node,
   |}>;
 
-  // exported as `Router` from `@remix/router` but `react-router` also export the component `Router`.
-  // Note: the current type ommits private and internal properties and might need to be added in the futur.
+  /**
+   * exported as `Router` from `@remix/router` but `react-router` also export the component `Router`.
+   * Note: the current type ommits private and internal properties and might need to be added in the futur.
+   */
   declare export type RemixRouter = {|
     /**
      * Navigate to the given path
