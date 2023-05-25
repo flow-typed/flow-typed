@@ -350,7 +350,10 @@ async function writeFlowConfig(repoDirPath, testDirPath, libDefPath, version) {
     path.join(testDirPath, '..', '..', 'node_modules'),
     '',
     '[lints]',
-    semver.gte(version, '0.104.0') ? 'implicit-inexact-object=error' : '',
+    semver.gte(version, '0.104.0') && semver.lt(version, '0.201.0')
+      ? 'implicit-inexact-object=error'
+      : '',
+    semver.gte(version, '0.201.0') ? 'ambiguous-object-type=error' : '',
   ].join('\n');
   await fs.writeFile(destFlowConfigPath, flowConfigData);
 }
