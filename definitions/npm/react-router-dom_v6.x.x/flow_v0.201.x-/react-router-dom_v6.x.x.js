@@ -226,6 +226,246 @@ declare module 'react-router-dom' {
 
   declare export type InitialEntry = string | Partial<Location>;
 
+  declare type LowerCaseFormMethod =
+    | 'get'
+    | 'post'
+    | 'put'
+    | 'patch'
+    | 'delete';
+  declare type UpperCaseFormMethod =
+    | 'GET'
+    | 'POST'
+    | 'PUT'
+    | 'PATCH'
+    | 'DELETE';
+
+  /**
+   * Users can specify either lowercase or uppercase form methods on <Form>,
+   * useSubmit(), <fetcher.Form>, etc.
+   */
+  declare export type HTMLFormMethod =
+    | LowerCaseFormMethod
+    | UpperCaseFormMethod;
+
+  declare type V7_FormMethod = UpperCaseFormMethod;
+
+  declare export type FormEncType =
+    | 'application/x-www-form-urlencoded'
+    | 'multipart/form-data';
+
+  /**
+   * Potential states for state.navigation
+   */
+  declare export type NavigationStates = {|
+    Idle: {|
+      state: 'idle',
+      location: void,
+      formMethod: void,
+      formAction: void,
+      formEncType: void,
+      formData: void,
+    |},
+    Loading: {|
+      state: 'loading',
+      location: Location,
+      formMethod: RemixFormMethod | V7_FormMethod | void,
+      formAction: string | void,
+      formEncType: FormEncType | void,
+      formData: FormData | void,
+    |},
+    Submitting: {|
+      state: 'submitting',
+      location: Location,
+      formMethod: RemixFormMethod | V7_FormMethod,
+      formAction: string,
+      formEncType: FormEncType,
+      formData: FormData,
+    |},
+  |};
+
+  declare export type Navigation = NavigationStates[$Keys<NavigationStates>];
+
+  declare export type RevalidationState = 'idle' | 'loading';
+
+  /**
+   * Potential states for fetchers
+   */
+  declare type FetcherStates<TData = any> = {|
+    Idle: {|
+      state: 'idle',
+      formMethod: void,
+      formAction: void,
+      formEncType: void,
+      formData: void,
+      data: TData | void,
+      ' _hasFetcherDoneAnything '?: boolean,
+    |},
+    Loading: {|
+      state: 'loading',
+      formMethod: RemixFormMethod | V7_FormMethod | void,
+      formAction: string | void,
+      formEncType: FormEncType | void,
+      formData: FormData | void,
+      data: TData | void,
+      ' _hasFetcherDoneAnything '?: boolean,
+    |},
+    Submitting: {|
+      state: 'submitting',
+      formMethod: RemixFormMethod | V7_FormMethod,
+      formAction: string,
+      formEncType: FormEncType,
+      formData: FormData,
+      data: TData | void,
+      ' _hasFetcherDoneAnything '?: boolean,
+    |},
+  |};
+
+  declare export type Fetcher<TData = any> = FetcherStates<TData>[$Keys<
+    FetcherStates<TData>
+  >];
+
+  declare type BlockerBlocked = {|
+    state: 'blocked',
+    reset(): void,
+    proceed(): void,
+    location: Location,
+  |};
+
+  declare type BlockerUnblocked = {|
+    state: 'unblocked',
+    reset: void,
+    proceed: void,
+    location: void,
+  |};
+
+  declare type BlockerProceeding = {|
+    state: 'proceeding',
+    reset: void,
+    proceed: void,
+    location: Location,
+  |};
+
+  declare export type Blocker =
+    | BlockerUnblocked
+    | BlockerBlocked
+    | BlockerProceeding;
+
+  /**
+   * State maintained internally by the router.  During a navigation, all states
+   * reflect the the "old" location unless otherwise noted.
+   */
+  declare export type RouterState = {|
+    /**
+     * The action of the most recent navigation
+     */
+    historyAction: HistoryAction,
+
+    /**
+     * The current location reflected by the router
+     */
+    location: Location,
+
+    /**
+     * The current set of route matches
+     */
+    matches: AgnosticDataRouteMatch[],
+
+    /**
+     * Tracks whether we've completed our initial data load
+     */
+    initialized: boolean,
+
+    /**
+     * Current scroll position we should start at for a new view
+     *  - number -> scroll position to restore to
+     *  - false -> do not restore scroll at all (used during submissions)
+     *  - null -> don't have a saved position, scroll to hash or top of page
+     */
+    restoreScrollPosition: number | false | null,
+
+    /**
+     * Indicate whether this navigation should skip resetting the scroll position
+     * if we are unable to restore the scroll position
+     */
+    preventScrollReset: boolean,
+
+    /**
+     * Tracks the state of the current navigation
+     */
+    navigation: Navigation,
+
+    /**
+     * Tracks any in-progress revalidations
+     */
+    revalidation: RevalidationState,
+
+    /**
+     * Data from the loaders for the current matches
+     */
+    loaderData: RouteData,
+
+    /**
+     * Data from the action for the current matches
+     */
+    actionData: RouteData | null,
+
+    /**
+     * Errors caught from loaders for the current matches
+     */
+    errors: RouteData | null,
+
+    /**
+     * Map of current fetchers
+     */
+    fetchers: { [key: string]: Fetcher<> },
+
+    /**
+     * Map of current blockers
+     */
+    blockers: { [key: string]: Blocker<> },
+  |};
+
+  /**
+   * Data that can be passed into hydrate a Router from SSR
+   */
+  declare export type HydrationState = Partial<{|
+    loaderData: RouterState['loaderData'],
+    actionData: RouterState['actionData'],
+    errors: RouterState['errors'],
+  |}>;
+
+  declare export type RelativeRoutingType = 'route' | 'path';
+
+  declare type BaseNavigateOptions = {|
+    replace?: boolean,
+    state?: any,
+    preventScrollReset?: boolean,
+    relative?: RelativeRoutingType,
+    fromRouteId?: string,
+  |};
+
+  /**
+   * Options for a navigate() call for a Link navigation
+   */
+  declare type LinkNavigateOptions = BaseNavigateOptions;
+
+  /**
+   * Options for a navigate() call for a Form navigation
+   */
+  declare type SubmissionNavigateOptions = {|
+    ...BaseNavigateOptions,
+    formMethod?: HTMLFormMethod,
+    formEncType?: FormEncType,
+    formData: FormData,
+  |};
+
+  /**
+   * Options to pass to navigate() for either a Link or Form navigation
+   */
+  declare export type RouterNavigateOptions =
+    | LinkNavigateOptions
+    | SubmissionNavigateOptions;
+
   // ----------------------------------/
   // `react-router`                    /
   // ----------------------------------/
@@ -311,13 +551,24 @@ declare module 'react-router-dom' {
   > = AgnosticRouteMatch<ParamKey, RouteObjectType>;
 
   declare export type MemoryRouterProps = {|
-    basename?: string;
-    children?: React$Node;
-    initialEntries?: InitialEntry[];
-    initialIndex?: number;
-  |}
+    basename?: string,
+    children?: React$Node,
+    initialEntries?: InitialEntry[],
+    initialIndex?: number,
+  |};
 
   declare export var MemoryRouter: React$ComponentType<MemoryRouterProps>;
+
+  declare export function createMemoryRouter(
+    routes: RouteObject[],
+    opts?: {|
+      basename?: string,
+      future?: FutureConfig,
+      hydrationData?: HydrationState,
+      initialEntries?: InitialEntry[],
+      initialIndex?: number,
+    |}
+  ): RemixRouter;
 
   declare export var Navigate: (props: {|
     to: To,
@@ -360,7 +611,7 @@ declare module 'react-router-dom' {
    */
   declare export function redirect(
     url: string,
-    init?: number | ResponseOptions,
+    init?: number | ResponseOptions
   ): Response;
 
   declare export function useHref(to: To): string;
@@ -424,9 +675,9 @@ declare module 'react-router-dom' {
   declare export function useLoaderData(): any;
 
   declare export type RouterProviderProps = {|
-    fallbackElement?: React$Node;
-    router: typeof Router;
-  |}
+    fallbackElement?: React$Node,
+    router: RemixRouter,
+  |};
 
   declare export function RouterProvider(RouterProviderProps): React$Node;
 
@@ -449,7 +700,7 @@ declare module 'react-router-dom' {
   declare export function createBrowserRouter(
     routes: Array<RouteObject>,
     opts?: DOMRouterOpts
-  ): typeof Router;
+  ): RemixRouter;
 
   declare type URLSearchParamsInit =
     | string
@@ -460,17 +711,14 @@ declare module 'react-router-dom' {
   declare type SetURLSearchParams = (
     nextInit?:
       | URLSearchParamsInit
-      | (prevSearchParam: URLSearchParams) => URLSearchParamsInit,
+      | ((prevSearchParam: URLSearchParams) => URLSearchParamsInit),
     navigateOpts?: {|
       replace?: boolean,
       state?: any,
     |}
   ) => void;
 
-  declare export type FormEncType =
-    | 'application/x-www-form-urlencoded'
-    | 'multipart/form-data';
-  declare export type FormMethod = 'get' | MutationFormMethod;
+  declare export type FormMethod = 'get' | RemixFormMethod;
 
   declare export var BrowserRouter: React$ComponentType<{|
     basename?: string,
@@ -539,12 +787,19 @@ declare module 'react-router-dom' {
     ...
   };
 
-  declare export type MutationFormMethod = 'post' | 'put' | 'patch' | 'delete';
+  /**
+   * exported as FormMethod in `@remix/router` but there is name collision in `react-router-dom`
+   */
+  declare export type RemixFormMethod = LowerCaseFormMethod;
 
-  // named `Action` in `@remix-run/router`
+  /**
+   * named `Action` in `@remix-run/router`
+   */
   declare export type HistoryAction = 'PUSH' | 'REPLACE' | 'POP';
 
-  // named `History` in `@remix-run/router`
+  /**
+   * named `History` in `@remix-run/router`
+   */
   declare export type RouterHistory = {
     length: number,
     location: Location,
@@ -597,6 +852,19 @@ declare module 'react-router-dom' {
     context: StaticRouterContext,
     children?: React$Node,
   |}>;
+
+  /**
+   * exported as `Router` from `@remix/router` but `react-router` also export the component `Router`.
+   * Note: the current type ommits private and internal properties and might need to be added in the futur.
+   */
+  declare export type RemixRouter = {|
+    /**
+     * Navigate to the given path
+     * @param to Path to navigate to
+     * @param opts Navigation options (method, submission, etc.)
+     */
+    navigate(to: To | null, opts?: RouterNavigateOptions): Promise<void>,
+  |};
 
   declare export type ResultTypeData = 'data';
   declare export type ResultTypeDeferred = 'deferred';
