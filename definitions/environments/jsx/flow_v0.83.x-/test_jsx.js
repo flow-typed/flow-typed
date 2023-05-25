@@ -63,9 +63,7 @@ describe('jsx', () => {
         bar,
         ...otherProps
       }: Props) => {
-        return (
-          <input foo={foo} {...otherProps} />
-        );
+        return <input foo={foo} {...otherProps} />;
       };
     });
 
@@ -75,19 +73,14 @@ describe('jsx', () => {
         type: jsx$HTMLInputElement$Type | 'extra',
       |};
 
-      const Input = ({
-        type,
-        ...otherProps
-      }: Props) => {
-        return (
-          <input type={type} {...otherProps} />
-        );
+      const Input = ({ type, ...otherProps }: Props) => {
+        return <input type={type} {...otherProps} />;
       };
 
-      const a = <Input type="text" />
-      const b = <Input type="extra" />
+      const a = <Input type="text" />;
+      const b = <Input type="extra" />;
       // $FlowExpectedError[incompatible-type]
-      const c = <Input type="random" />
+      const c = <Input type="random" />;
     });
   });
 
@@ -104,16 +97,38 @@ describe('jsx', () => {
         bar,
         ...otherProps
       }: Props) => {
-        return (
-          <textarea foo={foo} {...otherProps} />
-        );
+        return <textarea foo={foo} {...otherProps} />;
       };
 
-      (<TextArea autoComplete="on" />);
+      <TextArea autoComplete="on" />;
       // $FlowExpectedError[incompatible-type]
-      (<TextArea autoComplete={true} />);
+      <TextArea autoComplete={true} />;
       // $FlowExpectedError[incompatible-type]
-      (<TextArea autoComplete="yes" />);
+      <TextArea autoComplete="yes" />;
+    });
+  });
+
+  describe('HTMLButtonElement', () => {
+    it('has button props', () => {
+      type Props = {|
+        ...$Exact<jsx$HTMLButtonElement>,
+        foo?: string,
+      |};
+
+      const Button = ({
+        foo,
+        // $FlowExpectedError[prop-missing]
+        bar,
+        ...otherProps
+      }: Props) => {
+        return <button foo={foo} {...otherProps} />;
+      };
+
+      <Button type="button" />;
+      // $FlowExpectedError[incompatible-type]
+      <Button type={true} />;
+      // $FlowExpectedError[incompatible-type]
+      <Button type="fail" />;
     });
   });
 });
