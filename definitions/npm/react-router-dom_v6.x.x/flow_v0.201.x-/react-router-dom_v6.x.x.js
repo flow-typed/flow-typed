@@ -256,32 +256,32 @@ declare module 'react-router-dom' {
   /**
    * Potential states for state.navigation
    */
-  declare export type NavigationStates = {
-    Idle: {
+  declare export type NavigationStates = {|
+    Idle: {|
       state: 'idle',
       location: void,
       formMethod: void,
       formAction: void,
       formEncType: void,
       formData: void,
-    },
-    Loading: {
+    |},
+    Loading: {|
       state: 'loading',
       location: Location,
       formMethod: RemixFormMethod | V7_FormMethod | void,
       formAction: string | void,
       formEncType: FormEncType | void,
       formData: FormData | void,
-    },
-    Submitting: {
+    |},
+    Submitting: {|
       state: 'submitting',
       location: Location,
       formMethod: RemixFormMethod | V7_FormMethod,
       formAction: string,
       formEncType: FormEncType,
       formData: FormData,
-    },
-  };
+    |},
+  |};
 
   declare export type Navigation = NavigationStates[$Keys<NavigationStates>];
 
@@ -290,8 +290,8 @@ declare module 'react-router-dom' {
   /**
    * Potential states for fetchers
    */
-  declare type FetcherStates<TData = any> = {
-    Idle: {
+  declare type FetcherStates<TData = any> = {|
+    Idle: {|
       state: 'idle',
       formMethod: void,
       formAction: void,
@@ -299,8 +299,8 @@ declare module 'react-router-dom' {
       formData: void,
       data: TData | void,
       ' _hasFetcherDoneAnything '?: boolean,
-    },
-    Loading: {
+    |},
+    Loading: {|
       state: 'loading',
       formMethod: RemixFormMethod | V7_FormMethod | void,
       formAction: string | void,
@@ -308,8 +308,8 @@ declare module 'react-router-dom' {
       formData: FormData | void,
       data: TData | void,
       ' _hasFetcherDoneAnything '?: boolean,
-    },
-    Submitting: {
+    |},
+    Submitting: {|
       state: 'submitting',
       formMethod: RemixFormMethod | V7_FormMethod,
       formAction: string,
@@ -317,8 +317,8 @@ declare module 'react-router-dom' {
       formData: FormData,
       data: TData | void,
       ' _hasFetcherDoneAnything '?: boolean,
-    },
-  };
+    |},
+  |};
 
   declare export type Fetcher<TData = any> = FetcherStates<TData>[$Keys<
     FetcherStates<TData>
@@ -436,13 +436,13 @@ declare module 'react-router-dom' {
 
   declare export type RelativeRoutingType = 'route' | 'path';
 
-  declare type BaseNavigateOptions = {
+  declare type BaseNavigateOptions = {|
     replace?: boolean,
     state?: any,
     preventScrollReset?: boolean,
     relative?: RelativeRoutingType,
     fromRouteId?: string,
-  };
+  |};
 
   /**
    * Options for a navigate() call for a Link navigation
@@ -452,12 +452,12 @@ declare module 'react-router-dom' {
   /**
    * Options for a navigate() call for a Form navigation
    */
-  declare type SubmissionNavigateOptions = {
+  declare type SubmissionNavigateOptions = {|
     ...BaseNavigateOptions,
     formMethod?: HTMLFormMethod,
     formEncType?: FormEncType,
     formData: FormData,
-  };
+  |};
 
   /**
    * Options to pass to navigate() for either a Link or Form navigation
