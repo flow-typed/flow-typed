@@ -131,4 +131,26 @@ describe('jsx', () => {
       <Button type="fail" />;
     });
   });
+
+  describe('HTMLAnchorElement', () => {
+    it('has button props', () => {
+      type Props = {|
+        ...$Exact<jsx$HTMLAnchorElement>,
+        foo?: string,
+      |};
+
+      const Link = ({
+        foo,
+        // $FlowExpectedError[prop-missing]
+        bar,
+        ...otherProps
+      }: Props) => {
+        return <a foo={foo} {...otherProps} />;
+      };
+
+      <Link href="/" />;
+      // $FlowExpectedError[incompatible-type]
+      <Link href={true} />;
+    });
+  });
 });

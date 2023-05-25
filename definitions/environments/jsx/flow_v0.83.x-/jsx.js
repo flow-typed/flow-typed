@@ -201,7 +201,7 @@ declare type jsx$HTMLTextAreaElement = {
 };
 
 /**
- * https://developer.mozilla.org/en-US/docs/Web/API/HTMLButtonElement
+ * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#attributes
  */
 declare type jsx$HTMLButtonElement = {
   ...jsx$HTMLElement,
@@ -286,5 +286,80 @@ declare type jsx$HTMLButtonElement = {
    * Defines the value associated with the button's name when it's submitted with the form data. This value is passed to the server in params when the form is submitted using this button.
    */
   value?: string,
+  ...
+};
+
+/**
+ * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a#attributes
+ */
+declare type jsx$HTMLAnchorElement = {
+  ...jsx$HTMLElement,
+  /**
+   * Causes the browser to treat the linked URL as a download. Can be used with or without a filename value:
+   *
+   * Without a value, the browser will suggest a filename/extension, generated from various sources:
+   *  The Content-Disposition HTTP header
+   *  The final segment in the URL path
+   *  The media type (from the Content-Type header, the start of a data: URL, or Blob.type for a blob: URL)
+   * filename: defining a value suggests it as the filename. / and \ characters are converted to underscores (_). Filesystems may forbid other characters in filenames, so browsers will adjust the suggested name if necessary.
+   */
+  download?: string,
+  /**
+   * The URL that the hyperlink points to. Links are not restricted to HTTP-based URLs — they can use any URL scheme supported by browsers:
+   *
+   *  Sections of a page with document fragments
+   *  Specific text portions with text fragments
+   *  Pieces of media files with media fragments
+   *  Telephone numbers with tel: URLs
+   *  Email addresses with mailto: URLs
+   *  While web browsers may not support other URL schemes, websites can with registerProtocolHandler()
+   */
+  href?: string,
+  /**
+   * Hints at the human language of the linked URL. No built-in functionality. Allowed values are the same as the global lang attribute.
+   */
+  hrefLang?: string,
+  /**
+   * A space-separated list of URLs. When the link is followed, the browser will send POST requests with the body PING to the URLs. Typically for tracking.
+   */
+  ping?: string,
+  /**
+   * How much of the referrer to send when following the link.
+   *
+   * no-referrer: The Referer header will not be sent.
+   * no-referrer-when-downgrade: The Referer header will not be sent to origins without TLS (HTTPS).
+   * origin: The sent referrer will be limited to the origin of the referring page: its scheme, host, and port.
+   * origin-when-cross-origin: The referrer sent to other origins will be limited to the scheme, the host, and the port. Navigations on the same origin will still include the path.
+   * same-origin: A referrer will be sent for same origin, but cross-origin requests will contain no referrer information.
+   * strict-origin: Only send the origin of the document as the referrer when the protocol security level stays the same (HTTPS→HTTPS), but don't send it to a less secure destination (HTTPS→HTTP).
+   * strict-origin-when-cross-origin (default): Send a full URL when performing a same-origin request, only send the origin when the protocol security level stays the same (HTTPS→HTTPS), and send no header to a less secure destination (HTTPS→HTTP).
+   * unsafe-url: The referrer will include the origin and the path (but not the fragment, password, or username). This value is unsafe, because it leaks origins and paths from TLS-protected resources to insecure origins.
+   */
+  referrerPolicy?:
+    | 'no-referrer'
+    | 'no-referrer-when-downgrade'
+    | 'origin'
+    | 'origin-when-cross-origin'
+    | 'same-origin'
+    | 'strict-origin'
+    | 'strict-origin-when-cross-origin'
+    | 'unsafe-url',
+  /**
+   * The relationship of the linked URL as space-separated link types.
+   */
+  rel?: string,
+  /**
+   * Where to display the linked URL, as the name for a browsing context (a tab, window, or <iframe>). The following keywords have special meanings for where to load the URL:
+   *
+   * _self: the current browsing context. (Default)
+   * _blank: usually a new tab, but users can configure browsers to open a new window instead.
+   * _parent: the parent browsing context of the current one. If no parent, behaves as _self.
+   * _top: the topmost browsing context (the "highest" context that's an ancestor of the current one). If no ancestors, behaves as _self.
+   */
+  target?: '_self' | '_blank' | '_parent' | '_top',
+  /**
+   * Hints at the linked URL's format with a MIME type. No built-in functionality.
+   */
+  type?: string,
   ...
 };
