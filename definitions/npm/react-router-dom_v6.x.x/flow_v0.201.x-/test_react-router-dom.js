@@ -564,6 +564,17 @@ describe('react-router-dom', () => {
       ]);
 
       () => <RouterProvider router={router} />;
+
+      () => (
+        <RouterProvider
+          router={createMemoryRouter([
+            {
+              path: '/',
+              element: <div>Hello world!</div>,
+            },
+          ])}
+        />
+      );
     });
 
     it('catches createBrowserRouter error usages', () => {

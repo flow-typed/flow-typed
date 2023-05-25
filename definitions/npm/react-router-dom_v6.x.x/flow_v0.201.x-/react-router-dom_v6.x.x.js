@@ -676,7 +676,7 @@ declare module 'react-router-dom' {
 
   declare export type RouterProviderProps = {|
     fallbackElement?: React$Node,
-    router: typeof Router,
+    router: RemixRouter,
   |};
 
   declare export function RouterProvider(RouterProviderProps): React$Node;
@@ -700,7 +700,7 @@ declare module 'react-router-dom' {
   declare export function createBrowserRouter(
     routes: Array<RouteObject>,
     opts?: DOMRouterOpts
-  ): typeof Router;
+  ): RemixRouter;
 
   declare type URLSearchParamsInit =
     | string
