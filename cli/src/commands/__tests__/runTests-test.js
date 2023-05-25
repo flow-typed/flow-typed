@@ -90,6 +90,7 @@ describe('run-tests (command)', () => {
         '',
         '[lints]',
         'implicit-inexact-object=error',
+        '',
       ];
 
       matches.forEach((match, i) => {
@@ -117,6 +118,7 @@ describe('run-tests (command)', () => {
         '',
         '[lints]',
         'implicit-inexact-object=error',
+        '',
       ];
 
       matches.forEach((match, i) => {
@@ -143,6 +145,7 @@ describe('run-tests (command)', () => {
         /.*\/cli\/node_modules$/,
         '',
         '[lints]',
+        '',
         '',
       ];
 
@@ -171,6 +174,7 @@ describe('run-tests (command)', () => {
         '',
         '[lints]',
         'implicit-inexact-object=error',
+        '',
       ];
 
       matches.forEach((match, i) => {
@@ -197,6 +201,7 @@ describe('run-tests (command)', () => {
         /.*\/cli\/node_modules$/,
         '',
         '[lints]',
+        '',
         'ambiguous-object-type=error',
       ];
 
@@ -229,6 +234,7 @@ describe('run-tests (command)', () => {
         /.*\/cli\/node_modules$/,
         '',
         '[lints]',
+        '',
         '',
       ];
 
