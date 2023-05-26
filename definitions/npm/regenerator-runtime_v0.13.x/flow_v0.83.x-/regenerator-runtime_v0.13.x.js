@@ -186,7 +186,7 @@ declare module 'regenerator-runtime/runtime' {
     awrap<V>(arg: V): {| +__await: V |},
     AsyncIterator: any,
     async: any,
-    keys(object: { [key: string]: any }): (() => IteratorResult<string, void>);
+    keys(object: { [key: string]: any }): (() => IteratorResult<string, void>),
     values: (
       | <I: Iterator<mixed, mixed, mixed>>(iterable: { [key: typeof Symbol.iterator]: () => I }) => I
       | <T>(iterableOrArrayLike: Iterable<T> | Array<T>) => Iterator<T, mixed, mixed>
