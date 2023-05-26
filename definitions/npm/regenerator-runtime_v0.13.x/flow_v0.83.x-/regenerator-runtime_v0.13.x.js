@@ -148,7 +148,7 @@ declare module 'regenerator-runtime/runtime' {
      * @param nextLoc The label of the location where to resume iteration.
      */
     delegateYield(
-        iterable: { [key: typeof Symbol.iterator]: Iterator<TYield, mixed, mixed> },
+        iterable: { [key: typeof Symbol.iterator]: () => Iterator<TYield, mixed, mixed> },
         resultName: string,
         nextLoc: ContextLocation,
     ): mixed;
@@ -183,10 +183,13 @@ declare module 'regenerator-runtime/runtime' {
     ): Generator<TYield, TReturn, TNext>,
     isGeneratorFunction(func: mixed): boolean,
     mark(func: (...args: Array<any>) => any): any,
-    awrap<V>(args: V): {| __await: V |},
-    // AsyncIterator
-    // async
-    // keys
-    // values
+    awrap<V>(arg: V): {| +__await: V |},
+    AsyncIterator: any,
+    async: any,
+    keys(object: { [key: string]: any }): (() => IteratorResult<string, void>);
+    values: (
+      | <I: Iterator<mixed, mixed, mixed>>(iterable: { [key: typeof Symbol.iterator]: () => I }) => I
+      | <T>(iterableOrArrayLike: Iterable<T> | Array<T>) => Iterator<T, mixed, mixed>
+    ),
   |};
 }
