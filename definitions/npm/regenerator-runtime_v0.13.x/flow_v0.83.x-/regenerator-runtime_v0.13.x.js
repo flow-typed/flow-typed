@@ -181,9 +181,9 @@ declare module 'regenerator-runtime/runtime' {
       self?: T,
       tryLocsList?: TryLocationsList,
     ): Generator<TYield, TReturn, TNext>,
-    // isGeneratorFunction
-    // mark
-    // awrap
+    isGeneratorFunction(func: mixed): boolean,
+    mark(func: (...args: Array<any>) => any): any,
+    awrap<V>(args: V): {| __await: V |},
     // AsyncIterator
     // async
     // keys
