@@ -51,7 +51,18 @@ describe('regenerator-runtime', () => {
   });
 
   test('keys', () => {
+    keys({});
+    keys([]);
+    const keysResult = keys({ a: 'b' });
 
+    (keysResult(): IteratorResult<string, void>);
+    // $FlowExpectedError[incompatible-cast]
+    (keysResult(): string);
+    // $FlowExpectedError[extra-arg]
+    keysResult('');
+
+    // $FlowExpectedError[incompatible-call]
+    keys();
   });
 
   test('values', () => {
