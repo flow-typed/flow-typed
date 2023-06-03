@@ -680,6 +680,11 @@ describe('react-router-dom', () => {
       >
         About
       </Link>;
+
+      () => {
+        const location = useLocation();
+        return <Link to={location}>Location</Link>;
+      };
     });
 
     it('allows attributes of <a> element', () => {
