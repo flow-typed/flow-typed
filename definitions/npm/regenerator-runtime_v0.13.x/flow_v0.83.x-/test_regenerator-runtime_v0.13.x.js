@@ -14,7 +14,53 @@ const {
 
 describe('regenerator-runtime', () => {
   test('wrap', () => {
+    const gen = wrap(
+      () => {},
+    );
 
+    gen.next();
+    // $FlowExpectedError[prop-missing]
+    gen.foo();
+
+    wrap(
+      () => {},
+      () => {},
+    );
+    wrap(
+      () => {},
+      null,
+    );
+    wrap<string>(
+      () => {},
+      () => {},
+      '',
+    );
+    wrap<number>(
+      () => {},
+      () => {},
+      // $FlowExpectedError[incompatible-call]
+      '',
+    );
+    wrap<string>(
+      () => {},
+      () => {},
+      '',
+      [[1, 2]],
+    );
+    wrap<string>(
+      () => {},
+      () => {},
+      '',
+      // $FlowExpectedError[incompatible-call]
+      [[1, 2], [1]],
+    );
+    wrap<string>(
+      () => {},
+      () => {},
+      '',
+      // $FlowExpectedError[incompatible-call]
+      [1, 2],
+    );
   });
 
   test('isGeneratorFunction', () => {
