@@ -47,6 +47,21 @@ describe('run-tests (command)', () => {
     const testDir = path.join(TEST_DIR, 'unit-test');
     const flowConfigFile = path.join(testDir, '.flowconfig');
 
+    const createFlowConfig = async (
+      version: string,
+      depPaths?: Array<string> = [],
+    ) => {
+      await writeFlowConfig(
+        fixtureBasePath,
+        testDir,
+        path.join(fixtureBasePath, 'definitions/npm/def/'),
+        version,
+        depPaths,
+      );
+
+      return fs.readFileSync(flowConfigFile, 'utf-8').split('\n');
+    };
+
     beforeAll(() => {
       fs.mkdirSync(testDir, {recursive: true});
     });
@@ -56,17 +71,7 @@ describe('run-tests (command)', () => {
     });
 
     it('writes the file correctly', async () => {
-      await writeFlowConfig(
-        fixtureBasePath,
-        testDir,
-        path.join(fixtureBasePath, 'definitions/npm/def/'),
-        '0.181.0',
-        [],
-      );
-
-      const flowConfigSplit = fs
-        .readFileSync(flowConfigFile, 'utf-8')
-        .split('\n');
+      const flowConfigSplit = await createFlowConfig('0.181.0');
 
       const matches = [
         '[libs]',
@@ -85,6 +90,7 @@ describe('run-tests (command)', () => {
         '',
         '[lints]',
         'implicit-inexact-object=error',
+        '',
       ];
 
       matches.forEach((match, i) => {
@@ -93,17 +99,7 @@ describe('run-tests (command)', () => {
     });
 
     it('writes flow suppression if flow version is less than 0.125.0', async () => {
-      await writeFlowConfig(
-        fixtureBasePath,
-        testDir,
-        path.join(fixtureBasePath, 'definitions/npm/def/'),
-        '0.124.0',
-        [],
-      );
-
-      const flowConfigSplit = fs
-        .readFileSync(flowConfigFile, 'utf-8')
-        .split('\n');
+      const flowConfigSplit = await createFlowConfig('0.124.0');
 
       const matches = [
         '[libs]',
@@ -122,6 +118,7 @@ describe('run-tests (command)', () => {
         '',
         '[lints]',
         'implicit-inexact-object=error',
+        '',
       ];
 
       matches.forEach((match, i) => {
@@ -129,18 +126,8 @@ describe('run-tests (command)', () => {
       });
     });
 
-    it('does not have inexplicit lint when less than flow version less than 0.104.0', async () => {
-      await writeFlowConfig(
-        fixtureBasePath,
-        testDir,
-        path.join(fixtureBasePath, 'definitions/npm/def/'),
-        '0.103.0',
-        [],
-      );
-
-      const flowConfigSplit = fs
-        .readFileSync(flowConfigFile, 'utf-8')
-        .split('\n');
+    it('does not have inexplicit lint when flow version less than 0.104.0', async () => {
+      const flowConfigSplit = await createFlowConfig('0.103.0');
 
       const matches = [
         '[libs]',
@@ -159,6 +146,63 @@ describe('run-tests (command)', () => {
         '',
         '[lints]',
         '',
+        '',
+      ];
+
+      matches.forEach((match, i) => {
+        expect(flowConfigSplit[i]).toMatch(match);
+      });
+    });
+
+    it('has inexplicit lint when flow version above 0.104.0 and below 0.201.0', async () => {
+      const flowConfigSplit = await createFlowConfig('0.200.1');
+
+      const matches = [
+        '[libs]',
+        'def',
+        /.*cli\/src\/commands\/__tests__\/__util__\/tdd_framework\.js$/,
+        '',
+        '[options]',
+        'include_warnings=true',
+        'server.max_workers=0',
+        '',
+        'sharedmemory.heap_size=3221225472',
+        '',
+        '',
+        '[ignore]',
+        /.*\/cli\/node_modules$/,
+        '',
+        '[lints]',
+        'implicit-inexact-object=error',
+        '',
+      ];
+
+      matches.forEach((match, i) => {
+        expect(flowConfigSplit[i]).toMatch(match);
+      });
+    });
+
+    it('has ambiguous obj instead of inexplicit lint beyond expected version', async () => {
+      const flowConfigSplit = await createFlowConfig('0.201.0');
+
+      const matches = [
+        '[libs]',
+        'def',
+        /.*cli\/src\/commands\/__tests__\/__util__\/tdd_framework\.js$/,
+        '',
+        '[options]',
+        'include_warnings=true',
+        'server.max_workers=0',
+        '',
+        'sharedmemory.heap_size=3221225472',
+        '',
+        '',
+        '[ignore]',
+        /.*\/cli\/node_modules$/,
+        '',
+        '[lints]',
+        '',
+        'ambiguous-object-type=error',
       ];
 
       matches.forEach((match, i) => {
@@ -167,17 +211,10 @@ describe('run-tests (command)', () => {
     });
 
     it('writes the dependency definitions correctly', async () => {
-      await writeFlowConfig(
-        fixtureBasePath,
-        testDir,
-        path.join(fixtureBasePath, 'definitions/npm/def/'),
-        '0.183.0',
-        ['dep-1', 'dep-2'],
-      );
-
-      const flowConfigSplit = fs
-        .readFileSync(flowConfigFile, 'utf-8')
-        .split('\n');
+      const flowConfigSplit = await createFlowConfig('0.183.0', [
+        'dep-1',
+        'dep-2',
+      ]);
 
       const matches = [
         '[libs]',
@@ -197,6 +234,7 @@ describe('run-tests (command)', () => {
         /.*\/cli\/node_modules$/,
         '',
         '[lints]',
+        '',
         '',
       ];
 
