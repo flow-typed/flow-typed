@@ -8,6 +8,7 @@ import type {
   $AxiosXHRConfigBase,
   Axios,
   AxiosAdapter,
+  AxiosPromise,
   Canceler,
   CancelTokenSource,
 } from 'axios';
@@ -394,7 +395,7 @@ describe('Cancellation', () => {
 describe('Extended', () => {
   it('create extended', () => {
     class AxiosExtended extends axios.Axios {
-      specialPut(...args) {
+      specialPut(...args: Array<any>): AxiosPromise<any, any> {
         return super.put(...args);
       }
     }

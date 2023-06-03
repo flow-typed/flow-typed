@@ -1,6 +1,6 @@
 // @flow
 import { describe, it } from 'flow-typed-test';
-import axios from 'axios';
+import axios, { AxiosError, toFormData } from 'axios';
 import type {
   $AxiosError,
   $AxiosXHR,
@@ -8,6 +8,7 @@ import type {
   $AxiosXHRConfigBase,
   Axios,
   AxiosAdapter,
+  AxiosPromise,
   Canceler,
   CancelTokenSource,
 } from 'axios';
@@ -394,7 +395,7 @@ describe('Cancellation', () => {
 describe('Extended', () => {
   it('create extended', () => {
     class AxiosExtended extends axios.Axios {
-      specialPut(...args) {
+      specialPut(...args: Array<any>): AxiosPromise<any, any> {
         return super.put(...args);
       }
     }
@@ -451,5 +452,49 @@ describe('options', () => {
       .options('a url', axiosConfig)
       .then(handleResponse)
       .catch(handleError)
+  });
+});
+
+describe('formData', () => {
+  it('returns FormData', () => {
+    const form = toFormData({
+      val: 123,
+      nested: {
+        arr: ['hello', 'world']
+      }
+    });
+
+    form.keys();
+    form.get('val');
+    form.getAll('arr[]');
+
+    // $FlowExpectedError[incompatible-call]
+    toFormData();
+    // $FlowExpectedError[incompatible-call] takes object as first arg
+    toFormData('');
+  });
+
+  it('can accept another FormData', () => {
+    declare var formData: FormData;
+    toFormData({}, formData);
+
+    // $FlowExpectedError[incompatible-call] second arg must be FormData type
+    toFormData({}, '');
+  });
+});
+
+describe('AxiosError', () => {
+  it('contains static error codes', () => {
+    (AxiosError.ERR_NETWORK: string);
+    (AxiosError.ERR_BAD_OPTION_VALUE: string);
+    (AxiosError.ERR_BAD_OPTION: string);
+    (AxiosError.ECONNABORTED: string);
+    (AxiosError.ETIMEDOUT: string);
+    (AxiosError.ERR_NETWORK: string);
+    (AxiosError.ERR_FR_TOO_MANY_REDIRECTS: string);
+    (AxiosError.ERR_DEPRECATED: string);
+    (AxiosError.ERR_BAD_RESPONSE: string);
+    (AxiosError.ERR_BAD_REQUEST: string);
+    (AxiosError.ERR_CANCELED: string);
   });
 });
