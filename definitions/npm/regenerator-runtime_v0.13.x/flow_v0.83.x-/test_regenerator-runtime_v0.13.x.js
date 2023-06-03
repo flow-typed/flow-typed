@@ -64,7 +64,12 @@ describe('regenerator-runtime', () => {
   });
 
   test('isGeneratorFunction', () => {
+    (isGeneratorFunction(''): boolean);
+    isGeneratorFunction(2);
+    isGeneratorFunction();
 
+    // $FlowExpectedError[incompatible-cast]
+    (isGeneratorFunction(1): string);
   });
 
   test('mark', () => {
@@ -112,6 +117,19 @@ describe('regenerator-runtime', () => {
   });
 
   test('values', () => {
+    declare var anyIterableIterator: Iterable<any>;
+    declare var anyGenerator: Generator<any, any, any>;
 
+    const iterator = values(['']);
+    (iterator: Iterator<string>);
+    // $FlowExpectedError[incompatible-cast]
+    (iterator: Iterator<number>);
+    values(anyIterableIterator);
+    values(anyGenerator);
+
+    // $FlowExpectedError[incompatible-call]
+    values();
+    // $FlowExpectedError[incompatible-call]
+    values('');
   });
 });
