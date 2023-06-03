@@ -16,7 +16,7 @@ declare module 'react-router-dom' {
     [routeId: string]: any,
   |};
 
-  declare type To = LocationShape | string;
+  declare export type To = Partial<Location> | string;
 
   declare export type Location = $ReadOnly<{
     pathname: string,
@@ -200,7 +200,7 @@ declare module 'react-router-dom' {
     RouteObjectType: RouteObject = RouteObject
   >(
     routes: Array<RouteObject>,
-    location: LocationShape | string,
+    location: Partial<Location> | string,
     basename?: string
   ): Array<AgnosticRouteMatch<string, RouteObjectType>> | null;
 
@@ -651,7 +651,7 @@ declare module 'react-router-dom' {
 
   declare export function useRoutes<T = any>(
     routes: Array<RouteObject>,
-    location?: LocationShape | string
+    location?: Partial<Location> | string
   ): React$Element<T> | null;
 
   declare export function useMatches<Data = mixed, Handle = mixed>(): Array<{|
@@ -737,14 +737,14 @@ declare module 'react-router-dom' {
 
   declare export var Link: React$ComponentType<{
     +className?: string,
-    +to: string | LocationShape,
+    +to: To,
     +replace?: boolean,
     +children?: React$Node,
     ...
   }>;
 
   declare export var NavLink: React$ComponentType<{
-    +to: string | LocationShape,
+    +to: To,
     +className?:
       | string
       | ((props: {| isActive: boolean, isPending: boolean |}) => string | void),
@@ -779,14 +779,6 @@ declare module 'react-router-dom' {
     callback: (confirmed: boolean) => void
   ) => void;
 
-  declare export type LocationShape = {
-    pathname?: string,
-    search?: string,
-    hash?: string,
-    state?: any,
-    ...
-  };
-
   /**
    * exported as FormMethod in `@remix/router` but there is name collision in `react-router-dom`
    */
@@ -807,8 +799,8 @@ declare module 'react-router-dom' {
     listen(
       callback: (location: Location, action: HistoryAction) => void
     ): () => void,
-    push(path: string | LocationShape, state?: any): void,
-    replace(path: string | LocationShape, state?: any): void,
+    push(path: To, state?: any): void,
+    replace(path: To, state?: any): void,
     go(n: number): void,
     goBack(): void,
     goForward(): void,
