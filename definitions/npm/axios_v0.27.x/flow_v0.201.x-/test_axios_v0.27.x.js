@@ -1,6 +1,6 @@
 // @flow
 import { describe, it } from 'flow-typed-test';
-import axios from 'axios';
+import axios, { AxiosError, toFormData } from 'axios';
 import type {
   $AxiosError,
   $AxiosXHR,
@@ -8,6 +8,7 @@ import type {
   $AxiosXHRConfigBase,
   Axios,
   AxiosAdapter,
+  AxiosPromise,
   Canceler,
   CancelTokenSource,
 } from 'axios';
@@ -119,21 +120,21 @@ describe('Headers', () => {
 
 describe('Request methods', () => {
   it('returns a promise', () => {
-    axios({
+    axios<any, any>({
       url: '/user',
       method: 'get',
     })
       .then(handleResponse)
       .catch(handleError);
 
-    axios('/user', {
+    axios<any, any>('/user', {
       method: 'post',
     })
       .then(handleResponse)
       .catch(handleError);
 
     axios
-      .request({
+      .request<any, any>({
         url: '/user',
         method: 'POST',
       })
@@ -141,42 +142,42 @@ describe('Request methods', () => {
       .catch(handleError);
 
     axios
-      .delete('/user')
+      .delete<any>('/user')
       .then(handleResponse)
       .catch(handleError);
 
     axios
-      .get('/user', { params: { id: 12345 } })
+      .get<any>('/user', { params: { id: 12345 } })
       .then(handleResponse)
       .catch(handleError);
 
     axios
-      .get('/user?id=12345')
+      .get<any>('/user?id=12345')
       .then(handleResponse)
       .catch(handleError);
 
     axios
-      .head('/user')
+      .head<any>('/user')
       .then(handleResponse)
       .catch(handleError);
 
     axios
-      .post('/user', { foo: 'bar' })
+      .post<any, any>('/user', { foo: 'bar' })
       .then(handleResponse)
       .catch(handleError);
 
     axios
-      .post('/user', { foo: 'bar' }, { headers: { 'X-FOO': 'bar' } })
+      .post<any, any>('/user', { foo: 'bar' }, { headers: { 'X-FOO': 'bar' } })
       .then(handleResponse)
       .catch(handleError);
 
     axios
-      .put('/user', { foo: 'bar' })
+      .put<any, any>('/user', { foo: 'bar' })
       .then(handleResponse)
       .catch(handleError);
 
     axios
-      .patch('/user', { foo: 'bar' })
+      .patch<any, any>('/user', { foo: 'bar' })
       .then(handleResponse)
       .catch(handleError);
 
@@ -231,14 +232,14 @@ describe('Create instance', () => {
     const instance1: Axios = axios.create();
     const instance2: Axios = axios.create(config);
 
-    instance1('/user', {
+    instance1<any, any>('/user', {
       method: 'POST',
     })
       .then(handleResponse)
       .catch(handleError);
 
     instance1
-      .request({
+      .request<any, any>({
         url: '/user',
         method: 'POST',
       })
@@ -246,22 +247,22 @@ describe('Create instance', () => {
       .catch(handleError);
 
     instance1
-      .get('/user?id=12345')
+      .get<any>('/user?id=12345')
       .then(handleResponse)
       .catch(handleError);
 
     instance1
-      .get('/user', { params: { id: 12345 } })
+      .get<any>('/user', { params: { id: 12345 } })
       .then(handleResponse)
       .catch(handleError);
 
     instance1
-      .post('/user', { foo: 'bar' })
+      .post<any, any>('/user', { foo: 'bar' })
       .then(handleResponse)
       .catch(handleError);
 
     instance1
-      .post('/user', { foo: 'bar' }, { headers: { 'X-FOO': 'bar' } })
+      .post<any, any>('/user', { foo: 'bar' }, { headers: { 'X-FOO': 'bar' } })
       .then(handleResponse)
       .catch(handleError);
   });
@@ -368,7 +369,7 @@ describe('Concurrency', () => {
   it('axios.spread', () => {
     const fn1 = (a: number, b: number, c: number) => `${a}-${b}-${c}`;
     const fn2: (arr: Array<number>) => string = axios.spread(fn1);
-    // $FlowExpectedError[incompatible-type]
+    // $FlowExpectedError[incompatible-call]
     const fn3: (arr: Array<string>) => string = axios.spread(fn1);
   });
 });
@@ -377,7 +378,7 @@ describe('Cancellation', () => {
   it('use a CancelToken', () => {
     const source: CancelTokenSource = axios.CancelToken.source();
 
-    axios.get('/user', {
+    axios.get<any>('/user', {
       cancelToken: source.token,
     });
 
@@ -394,7 +395,7 @@ describe('Cancellation', () => {
 describe('Extended', () => {
   it('create extended', () => {
     class AxiosExtended extends axios.Axios {
-      specialPut(...args) {
+      specialPut(...args: Array<any>): AxiosPromise<any, any> {
         return super.put(...args);
       }
     }
@@ -402,7 +403,7 @@ describe('Extended', () => {
     const extended = new AxiosExtended();
 
     extended
-      .put('/user', { foo: 'bar' })
+      .put<any, any>('/user', { foo: 'bar' })
       .then(handleResponse)
       .catch(handleError);
 
@@ -432,12 +433,12 @@ describe('options', () => {
   it('accepts string url only', () => {
     //$FlowExpectedError[incompatible-call]
     axios.options(123)
-    axios.options('a url')
+    axios.options<any>('a url')
   });
 
   it('takes a url and returns a promise', () => {
     axios
-      .options('anyUrl')
+      .options<any>('anyUrl')
       .then(handleResponse)
       .catch(handleError);
   });
@@ -451,5 +452,49 @@ describe('options', () => {
       .options('a url', axiosConfig)
       .then(handleResponse)
       .catch(handleError)
+  });
+});
+
+describe('formData', () => {
+  it('returns FormData', () => {
+    const form = toFormData({
+      val: 123,
+      nested: {
+        arr: ['hello', 'world']
+      }
+    });
+
+    form.keys();
+    form.get('val');
+    form.getAll('arr[]');
+
+    // $FlowExpectedError[incompatible-call]
+    toFormData();
+    // $FlowExpectedError[incompatible-call] takes object as first arg
+    toFormData('');
+  });
+
+  it('can accept another FormData', () => {
+    declare var formData: FormData;
+    toFormData({}, formData);
+
+    // $FlowExpectedError[incompatible-call] second arg must be FormData type
+    toFormData({}, '');
+  });
+});
+
+describe('AxiosError', () => {
+  it('contains static error codes', () => {
+    (AxiosError.ERR_NETWORK: string);
+    (AxiosError.ERR_BAD_OPTION_VALUE: string);
+    (AxiosError.ERR_BAD_OPTION: string);
+    (AxiosError.ECONNABORTED: string);
+    (AxiosError.ETIMEDOUT: string);
+    (AxiosError.ERR_NETWORK: string);
+    (AxiosError.ERR_FR_TOO_MANY_REDIRECTS: string);
+    (AxiosError.ERR_DEPRECATED: string);
+    (AxiosError.ERR_BAD_RESPONSE: string);
+    (AxiosError.ERR_BAD_REQUEST: string);
+    (AxiosError.ERR_CANCELED: string);
   });
 });
