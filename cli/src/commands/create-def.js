@@ -35,6 +35,11 @@ export async function run({libName, ver}: Args): Promise<number> {
     return 1;
   }
 
+  if (ver.startsWith('v')) {
+    console.error("ERROR: You don't need to specify `v` with your version");
+    return 1;
+  }
+
   const scope = libName.startsWith('@') ? libName.split('/')[0] : '';
   const packageName = scope ? libName.split('/')[1] : libName;
   const definitionsPath = path.join(
