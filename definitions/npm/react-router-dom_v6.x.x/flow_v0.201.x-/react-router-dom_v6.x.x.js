@@ -73,7 +73,7 @@ declare module 'react-router-dom' {
    */
   declare export type AgnosticRouteMatch<
     ParamKey: string = string,
-    RouteObjectType: AgnosticRouteObject = AgnosticRouteObject
+    RouteObjectType: AgnosticRouteObject | AgnosticDataRouteObject = AgnosticRouteObject
   > = {|
     /**
      * The names and values of dynamic parameters in the URL.
