@@ -36,10 +36,10 @@ ac1(1);
 // $FlowExpectedError[incompatible-call]
 bindActionCreators((n: number) => ({ type: 'wrong' }), dispatch); // wrong action
 
-const ac2 = bindActionCreators((n: number) => (dispatch, getState) => {}, dispatch);
+const ac2 = bindActionCreators((n: number) => (dispatch: Dispatch, getState: () => State) => {}, dispatch);
 ac2(1);
 // $FlowExpectedError[incompatible-call]
-bindActionCreators((n: number) => (dispatch, getState) => 'wrong', dispatch); // wrong thunk
+bindActionCreators((n: number) => (dispatch: Dispatch, getState: () => State) => 'wrong', dispatch); // wrong thunk
 
 //
 // createStore API

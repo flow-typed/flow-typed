@@ -11,14 +11,12 @@ const reducer = (state: State = [], action: Action): State => state
 // createStore API
 //
 
-// $FlowExpectedError[incompatible-type-arg]
 // $FlowExpectedError[incompatible-call]
 const store1: Store = createStore(() => ({})); // wrong reducer
 const store2: Store = createStore(reducer);
 // $FlowExpectedError[incompatible-call]
 const store3: Store = createStore(reducer, {}); // wrong initialState shape
 const store4: Store = createStore(reducer, []);
-// $FlowExpectedError[incompatible-type]
 // $FlowExpectedError[incompatible-call]
 const store5: Store = createStore(reducer, ['wrong']); // wrong initialState content
 const store6: Store = createStore(reducer, [1]);
@@ -28,14 +26,12 @@ declare var myEnhancer: StoreEnhancer<State, Action>;
 const store8: Store = createStore(reducer, [1], myEnhancer);
 const store9: Store = createStore(reducer, undefined, myEnhancer);
 
-// $FlowExpectedError[incompatible-type-arg]
 // $FlowExpectedError[incompatible-call]
 const legacyStore1: Store = legacy_createStore(() => ({})); // wrong reducer
 const legacyStore2: Store = legacy_createStore(reducer);
 // $FlowExpectedError[incompatible-call]
 const legacyStore3: Store = legacy_createStore(reducer, {}); // wrong initialState shape
 const legacyStore4: Store = legacy_createStore(reducer, []);
-// $FlowExpectedError[incompatible-type]
 // $FlowExpectedError[incompatible-call]
 const legacyStore5: Store = legacy_createStore(reducer, ['wrong']); // wrong initialState content
 const legacyStore6: Store = legacy_createStore(reducer, [1]);
@@ -50,7 +46,6 @@ const legacyStore9: Store = legacy_createStore(reducer, undefined, myEnhancer);
 //
 
 const s: State = store2.getState()
-// $FlowExpectedError[incompatible-type]
 // $FlowExpectedError[name-already-bound]
 const s: number = store2.getState() // wrong return type
 
