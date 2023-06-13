@@ -14,7 +14,7 @@ declare module 'webpack' {
     hasErrors(): boolean;
     hasWarnings(): boolean;
     toJson(options?: StatsOptions): any;
-    toString(options?: { ...StatsOptions, colors?: boolean, ... }): string;
+    toString(options?: { ...StatsOptionsObject, colors?: boolean, ... }): string;
   }
 
   declare type Callback = (error: WebpackError, stats: Stats) => void;
@@ -374,10 +374,7 @@ declare module 'webpack' {
 
   declare type FilterTypes = FilterItemTypes | Array<FilterItemTypes>;
 
-  declare type StatsOptions =
-    | boolean
-    | ('none' | 'errors-only' | 'minimal' | 'normal' | 'detailed' | 'verbose')
-    | {
+  declare type StatsOptionsObject = {
     all?: boolean,
     assets?: boolean,
     assetsSort?: string,
@@ -431,6 +428,11 @@ declare module 'webpack' {
     warningsFilter?: FilterTypes,
     ...
   };
+
+  declare type StatsOptions =
+    | boolean
+    | ('none' | 'errors-only' | 'minimal' | 'normal' | 'detailed' | 'verbose')
+    | StatsOptionsObject;
 
   declare type WatchOptions = {
     aggregateTimeout?: number,
