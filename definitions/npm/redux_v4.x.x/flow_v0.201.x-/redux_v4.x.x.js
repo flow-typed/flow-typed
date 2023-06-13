@@ -30,11 +30,6 @@ declare module 'redux' {
 
   declare export type Reducer<S, A> = (state: S, action: A) => S;
 
-  declare export type CombinedReducer<S, A> = (
-    state: ($Shape<S> & {...}) | void,
-    action: A
-  ) => S;
-
   declare export type Middleware<S, A, D = Dispatch<A>> = (
     api: MiddlewareAPI<S, A, D>
   ) => (next: D) => D;
@@ -98,9 +93,9 @@ declare module 'redux' {
     dispatch: D
   ): C;
 
-  declare export function combineReducers<O: {...}, A>(
-    reducers: O
-  ): CombinedReducer<$ObjMap<O, <S>(r: Reducer<S, any>) => S>, A>;
+  declare export function combineReducers<RootState: {...}, A>(
+    reducers: $ObjMap<RootState, <V>(V) => Reducer<V, A>>,
+  ): Reducer<RootState, A>;
 
   declare export var compose: $Compose;
 }
