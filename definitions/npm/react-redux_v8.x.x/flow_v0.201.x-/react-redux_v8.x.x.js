@@ -216,7 +216,8 @@ declare module "react-redux" {
 
   declare export type AnyAction = {
     ...Action<any>,
-    [string]: any
+    [string]: any,
+    ...
   }
 
   declare export type Dispatch<-A: Action<any>> = (action: A, ...extraArgs: any[]) => mixed
