@@ -4,9 +4,9 @@ import {
   lock,
   unlock,
   clearBodyLocks,
-} from 'tua-body-scroll';
+} from 'tua-body-scroll-lock';
 
-describe('tua-body-scroll', () => {
+describe('tua-body-scroll-lock', () => {
   test('lock', () => {
     declare var htmlElement: HTMLElement;
 
