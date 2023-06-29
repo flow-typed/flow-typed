@@ -105,6 +105,7 @@ describe('jsx', () => {
       <TextArea autoComplete={true} />;
       // $FlowExpectedError[incompatible-type]
       <TextArea autoComplete="yes" />;
+      <TextArea value="foo" onChange={(evt) => { (evt.currentTarget.rows: number) }} />;
     });
   });
 
