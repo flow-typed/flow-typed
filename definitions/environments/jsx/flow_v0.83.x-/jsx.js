@@ -197,6 +197,19 @@ declare type jsx$HTMLTextAreaElement = {
    * If this attribute is not specified, soft is its default value.
    */
   wrap?: 'hard' | 'soft' | 'off',
+  /**
+   * React specific : Control the text inside the textarea.
+   */
+  value?: string,  
+  /**
+   * React specific : Specifies the initial value for a text area.
+   */
+  defaultValue?: string  
+  /**
+   * React specific: An Event handler function. Required for controlled text areas. Fires immediately when the input’s value is changed by the user (for example, it fires on every keystroke). 
+   * Behaves like the browser input event.
+   */
+  onChange?: (evt: SyntheticEvent<HTMLTextAreaElement>) => mixed,
   ...
 };
 
