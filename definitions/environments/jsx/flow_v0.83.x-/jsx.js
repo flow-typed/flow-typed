@@ -200,13 +200,13 @@ declare type jsx$HTMLTextAreaElement = {
   /**
    * React specific : Control the text inside the textarea.
    */
-  value?: string,  
+  value?: string,
   /**
    * React specific : Specifies the initial value for a text area.
    */
-  defaultValue?: string  
+  defaultValue?: string,
   /**
-   * React specific: An Event handler function. Required for controlled text areas. Fires immediately when the input’s value is changed by the user (for example, it fires on every keystroke). 
+   * React specific: An Event handler function. Required for controlled text areas. Fires immediately when the input’s value is changed by the user (for example, it fires on every keystroke).
    * Behaves like the browser input event.
    */
   onChange?: (evt: SyntheticEvent<HTMLTextAreaElement>) => mixed,
