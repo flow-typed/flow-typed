@@ -15,6 +15,19 @@ jest.atoMockOff();
 const mockFn = jest.fn();
 mockFn.mock.calls.map(String).map((a) => a + a);
 
+type Value = {
+  value: number,
+};
+
+const valueArray: Array<Value> = [
+  {
+    value: 0,
+  },
+  {
+    value: 1,
+  },
+];
+
 type Foo = {
   doStuff: (string) => number,
   doAsyncStuff: (string) => Promise<number>,
@@ -368,13 +381,14 @@ expect.hasAssertions();
 
 expect.anything();
 expect.any(Error);
-expect.objectContaining({
-  foo: 'bar',
-});
 expect.arrayContaining(['red', 'blue']);
+expect.arrayContaining(valueArray);
+expect.objectContaining({ foo: 'bar' });
+expect.stringContaining('foobar');
 expect.stringMatching('*this part*');
 
 expect.not.arrayContaining(['red', 'blue']);
+expect.not.arrayContaining(valueArray);
 expect.not.objectContaining({ foo: 'bar' });
 expect.not.stringContaining('foobar');
 expect.not.stringMatching(/foobar/);
