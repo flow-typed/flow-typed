@@ -15,11 +15,16 @@ jest.atoMockOff();
 const mockFn = jest.fn();
 mockFn.mock.calls.map(String).map((a) => a + a);
 
-type Value = {
+type ExactType = {|
+  value: number
+|};
+
+type InexactType = {
   value: number,
+  ...
 };
 
-const valueArray: Array<Value> = [
+const valueArray: Array<ExactType | InexactType> = [
   {
     value: 0,
   },
