@@ -12,7 +12,7 @@ describe('jsx', () => {
       };
 
       type ErrorProps = {|
-        ...jsx$HTMLElement,
+        ...$Exact<jsx$HTMLElement>,
         foo: string,
       |};
     });
@@ -26,7 +26,7 @@ describe('jsx', () => {
 
     it('can override an attribute', () => {
       type Props = {|
-        ...jsx$HTMLElement,
+        ...$Exact<jsx$HTMLElement>,
         accessKey?: number,
         className: string,
       |};
@@ -105,6 +105,12 @@ describe('jsx', () => {
       <TextArea autoComplete={true} />;
       // $FlowExpectedError[incompatible-type]
       <TextArea autoComplete="yes" />;
+      <TextArea
+        value="foo"
+        onChange={evt => {
+          (evt.currentTarget.rows: number);
+        }}
+      />;
     });
   });
 
