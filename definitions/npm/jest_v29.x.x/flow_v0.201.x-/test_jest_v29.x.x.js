@@ -12,7 +12,7 @@ jest.restoreAllMocks();
 // $FlowExpectedError[prop-missing] property `atoMockOff` not found in object type
 jest.atoMockOff();
 
-const mockFn = jest.fn();
+const mockFn = jest.fn<[string], number>();
 mockFn.mock.calls.map(String).map((a) => a + a);
 
 type ExactType = {|
@@ -47,45 +47,45 @@ const foo: Foo = {
   },
 };
 
-foo.doStuff = jest.fn().mockImplementation((str) => 10);
-foo.doStuff = jest.fn().mockImplementation((str) => parseInt(str, 10));
-foo.doStuff = jest.fn().mockImplementation((str) => str.indexOf('a'));
+foo.doStuff = jest.fn<[string], number>().mockImplementation((str) => 10);
+foo.doStuff = jest.fn<[string], number>().mockImplementation((str) => parseInt(str, 10));
+foo.doStuff = jest.fn<[string], number>().mockImplementation((str) => str.indexOf('a'));
 // $FlowExpectedError[prop-missing] function `doesntExist` not found in string.
-foo.doStuff = jest.fn().mockImplementation((str) => str.doesntExist());
+foo.doStuff = jest.fn<[string], number>().mockImplementation((str) => str.doesntExist());
 // $FlowExpectedError[incompatible-call] Mock function expected to return number, not string.
-foo.doStuff = jest.fn().mockImplementation((str) => '10');
-foo.doStuff = jest.fn().mockImplementationOnce((str) => 10);
-foo.doStuff = jest.fn().mockImplementationOnce((str) => parseInt(str, 10));
-foo.doStuff = jest.fn().mockImplementationOnce((str) => str.indexOf('a'));
+foo.doStuff = jest.fn<[string], number>().mockImplementation((str) => '10');
+foo.doStuff = jest.fn<[string], number>().mockImplementationOnce((str) => 10);
+foo.doStuff = jest.fn<[string], number>().mockImplementationOnce((str) => parseInt(str, 10));
+foo.doStuff = jest.fn<[string], number>().mockImplementationOnce((str) => str.indexOf('a'));
 // $FlowExpectedError[prop-missing] function `doesntExist` not found in string.
-foo.doStuff = jest.fn().mockImplementationOnce((str) => str.doesntExist());
+foo.doStuff = jest.fn<[string], number>().mockImplementationOnce((str) => str.doesntExist());
 // $FlowExpectedError[incompatible-call] Mock function expected to return number, not string.
-foo.doStuff = jest.fn().mockImplementationOnce((str) => '10');
+foo.doStuff = jest.fn<[string], number>().mockImplementationOnce((str) => '10');
 
-foo.doStuff = jest.fn().mockReturnValue(10);
+foo.doStuff = jest.fn<[string], number>().mockReturnValue(10);
 // $FlowExpectedError[incompatible-call] Mock function expected to return number, not string.
-foo.doStuff = jest.fn().mockReturnValue('10');
+foo.doStuff = jest.fn<[string], number>().mockReturnValue('10');
 
-foo.doStuff = jest.fn().mockReturnValueOnce(10);
+foo.doStuff = jest.fn<[string], number>().mockReturnValueOnce(10);
 // $FlowExpectedError[incompatible-call] Mock function expected to return number, not string.
-foo.doStuff = jest.fn().mockReturnValueOnce('10');
+foo.doStuff = jest.fn<[string], number>().mockReturnValueOnce('10');
 
-foo.doAsyncStuff = jest.fn().mockResolvedValue(10);
+foo.doAsyncStuff = jest.fn<[string], number>().mockResolvedValue(10);
 // $FlowExpectedError[incompatible-call] Mock function expected to return Promise<number>, not Promise<string>
-foo.doAsyncStuff = jest.fn().mockResolvedValue('10');
+foo.doAsyncStuff = jest.fn<[string], number>().mockResolvedValue('10');
 
-foo.doAsyncStuff = jest.fn().mockResolvedValueOnce(10);
+foo.doAsyncStuff = jest.fn<[string], number>().mockResolvedValueOnce(10);
 // $FlowExpectedError[incompatible-call] Mock function expected to return Promise<number>, not Promise<string>
-foo.doAsyncStuff = jest.fn().mockResolvedValueOnce('10');
+foo.doAsyncStuff = jest.fn<[string], number>().mockResolvedValueOnce('10');
 
-foo.doAsyncStuff = jest.fn().mockRejectedValue(10);
-foo.doAsyncStuff = jest.fn().mockRejectedValueOnce(10);
+foo.doAsyncStuff = jest.fn<[string], number>().mockRejectedValue(10);
+foo.doAsyncStuff = jest.fn<[string], number>().mockRejectedValueOnce(10);
 
-foo.doStuff = jest.fn().mockName('10');
+foo.doStuff = jest.fn<[string], number>().mockName('10');
 // $FlowExpectedError[incompatible-call] mockName expects a string, not a number
-foo.doStuff = jest.fn().mockName(10);
+foo.doStuff = jest.fn<[string], number>().mockName(10);
 
-const mockedDoStuff = (foo.doStuff = jest.fn().mockImplementation((str) => 10));
+const mockedDoStuff = (foo.doStuff = jest.fn<[string], number>().mockImplementation((str) => 10));
 mockedDoStuff.mock.calls[0][0].indexOf('a');
 // $FlowExpectedError[prop-missing] function `doesntExist` not found in string.
 mockedDoStuff.mock.calls[0][0].doesntExist('a');
@@ -692,7 +692,7 @@ expect(wrapper).toHaveDisplayName(true);
   expect(null).toBeNil();
 
   {
-    const greaterThanOneButNotThree = (n) => n > 1 && n !== 3;
+    const greaterThanOneButNotThree = (n: number): boolean => n > 1 && n !== 3;
     expect(100).toSatisfy(greaterThanOneButNotThree);
   }
 
@@ -705,7 +705,7 @@ expect(wrapper).toHaveDisplayName(true);
   expect([1, 2, 3]).toIncludeAnyMembers([2, 1, 3]);
 
   {
-    const isOdd = (el) => el % 2 === 1;
+    const isOdd = (el: number): boolean => el % 2 === 1;
     expect([1, 3, 5, 7]).toSatisfyAll(isOdd);
   }
 
@@ -717,8 +717,8 @@ expect(wrapper).toHaveDisplayName(true);
 
   {
     const timeout = (n: number) => {};
-    const mock1 = jest.fn(timeout(1));
-    const mock2 = jest.fn(timeout(1));
+    const mock1 = jest.fn<[number], void>(timeout(1));
+    const mock2 = jest.fn<[number], void>(timeout(1));
     expect(mock1).toHaveBeenCalledBefore(mock2);
   }
 
