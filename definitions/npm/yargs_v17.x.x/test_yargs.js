@@ -13,8 +13,8 @@ describe('command()', () => {
       (argv) => {}
     );
     yargs.command('fetch', 'Download files', {
-      builder: (yargs) => yargs,
-      handler: (argv) => {},
+      builder: (yargs: any) => yargs,
+      handler: (argv: any) => {},
     });
     yargs.command({
       command: 'fetch',
