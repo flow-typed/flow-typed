@@ -1,4 +1,4 @@
-// Typescript Built-in Types
+// Typescript Built-in Types//
 
 declare interface TypeScript$IArguments {
   [index: number]: any;
@@ -166,7 +166,9 @@ declare class ApolloClient$ApolloLink {
   concat(next: ApolloClient$ApolloLink | ApolloClient$RequestHandler): ApolloClient$ApolloLink;
   request(operation: ApolloClient$Operation, forward?: ApolloClient$NextLink): ZenObservable$Observable<ApolloClient$FetchResult<>> | null;
   onError(error: any, observer?: ZenObservable$Observer<ApolloClient$FetchResult<>>): false | void;
-  setOnError(fn: $PropertyType<ApolloClient$ApolloLink, "onError">): this;
+  setOnError(
+    fn: (error: any, observer?: ZenObservable$Observer<ApolloClient$FetchResult<>>) => false | void,
+  ): this;
 }
 
 declare module "@apollo/client" {
@@ -2214,8 +2216,7 @@ declare module "@apollo/client" {
 
   // @apollo/client/link/http/parseAndCheckHttpResponse.d.ts
 
-  declare export type ServerParseError = {|
-    ...Error,
+  declare export type ServerParseError = Error & {|
     response: Response,
     statusCode: number,
     bodyText: string,
@@ -2307,7 +2308,7 @@ declare module "@apollo/client" {
     fallbackConfig: HttpConfig,
     ...configs: Array<HttpConfig>
   ): {
-    options: { ...HttpConfig, [key: string]: any, ... },
+    options: HttpConfig & { [key: string]: any, ... },
     body: Body,
     ...
   };
@@ -2316,7 +2317,7 @@ declare module "@apollo/client" {
     printer: Printer,
     ...configs: HttpConfig[]
   ): {
-    options: { ...HttpConfig, [key: string]: any, ... },
+    options: HttpConfig & { [key: string]: any, ... },
     body: Body,
     ...
   };
@@ -2351,8 +2352,7 @@ declare module "@apollo/client" {
 
   // @apollo/client/link/utils/throwServerError.d.ts
 
-  declare type ServerError = {
-    ...Error,
+  declare type ServerError = Error & {
     response: Response,
     result: { [key: string]: any, ... },
     statusCode: number,
