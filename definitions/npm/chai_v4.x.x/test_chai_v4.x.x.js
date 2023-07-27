@@ -11,7 +11,7 @@ expect(
   false
 );
 
-// $FlowExpectedError
+// $FlowExpectedError[prop-missing]
 expect(1).to.what("nope");
 
 // Fail message
@@ -24,13 +24,13 @@ config.includeStack = true;
 config.showDiff = true;
 config.truncateThreshold = 200;
 
-// $FlowExpectedError
+// $FlowExpectedError[incompatible-type]
 config.includeStack = 100;
 
-// $FlowExpectedError
+// $FlowExpectedError[incompatible-type]
 config.showDiff = 100;
 
-// $FlowExpectedError
+// $FlowExpectedError[incompatible-type]
 config.truncateThreshold = true;
 
 /**
@@ -38,7 +38,7 @@ config.truncateThreshold = true;
  */
 expect(1).to.be.a("number");
 expect([1]).to.be.an("array");
-// $FlowExpectedError
+// $FlowExpectedError[incompatible-call]
 expect(1).to.be.a(["fail"]);
 
 expect([1]).to.include(1);
@@ -69,7 +69,7 @@ expect({ a: { b: 1 } }).to.have.nested.property("a.b", 1);
 expect([1, 2, 3]).to.have.length.above(2);
 expect([1, 2, 3]).to.have.lengthOf(3);
 expect([1, 2, 3]).to.have.length(3);
-// $FlowExpectedError
+// $FlowExpectedError[incompatible-call]
 expect([1, 2, 3]).to.have.length("three");
 
 expect("abc").to.match(/[a-z]{3}/);
@@ -92,7 +92,7 @@ expect({}).to.respondTo("bar");
 expect(Error).itself.to.respondTo("bar");
 
 expect(1).to.satisfy(x => x > 0);
-// $FlowExpectedError
+// $FlowExpectedError[unsafe-arithmetic]
 expect(1).to.satisfy((x, y) => x * y);
 
 expect(0.3 - 0.2).to.be.closeTo(0.1, 1e-3);
@@ -102,9 +102,9 @@ expect([1, 2, 3]).to.have.ordered.members([1, 2, 3]);
 
 expect("a").to.be.oneOf(["a", "b", "c"]);
 
-expect(x => x).to.change({ val: 0 }, "val");
-expect(x => x).to.increase({ val: 0 }, "val");
-expect(x => x).to.decrease({ val: 0 }, "val");
+expect((x: number) => x).to.change({ val: 0 }, "val");
+expect((x: number) => x).to.increase({ val: 0 }, "val");
+expect((x: number) => x).to.decrease({ val: 0 }, "val");
 
 /**
  * assert API (http://chaijs.com/api/assert/)
@@ -113,7 +113,7 @@ expect(x => x).to.decrease({ val: 0 }, "val");
 // expression
 assert("1" === "1", "with message");
 assert("1" === "1");
-// $FlowExpectedError
+// $FlowExpectedError[incompatible-call]
 assert("1" === "1", 2);
 
 // test standard assert function with overloaded message
@@ -128,7 +128,7 @@ class SampleClass {
 }
 var instance = new SampleClass();
 assert.instanceOf(instance, SampleClass, "instance check");
-// $FlowExpectedError
+// $FlowExpectedError[incompatible-call]
 assert.instanceOf(instance, instance);
 assert.notInstanceOf(instance, Array);
 
@@ -169,13 +169,13 @@ expect(Promise.resolve(true))
   .catch(function() {});
 
 expect(Promise.resolve(true))
-  // $FlowExpectedError
+  // $FlowExpectedError[incompatible-call]
   .to.eventually.be.rejectedWith(Error, 2)
   .then(function() {})
   .catch(function() {});
 
 expect(Promise.resolve(true))
-  // $FlowExpectedError
+  // $FlowExpectedError[incompatible-call]
   .to.eventually.be.rejectedWith(Error, 'this is a test', {})
   .then(function() {})
   .catch(function() {});
@@ -183,7 +183,7 @@ expect(Promise.resolve(true))
 // tests for chai-subset
 expect({}).to.containSubset({});
 expect([{}]).to.containSubset([{}]);
-// $FlowExpectedError
+// $FlowExpectedError[incompatible-call]
 expect({}).to.containSubset(0);
 
 // tests for chai-redux-mock-store
@@ -201,13 +201,15 @@ expect({}).to.contain.dispatchedActions([
 ]);
 expect({}).to.have.dispatchedTypes(["HELLO", "OTHER_ACTION"]);
 expect({}).to.contain.dispatchedTypes(["HELLO", "OTHER_ACTION"]);
-// $FlowExpectedError
+// $FlowExpectedError[incompatible-call]
 expect({}).to.have.dispatchedActions(["HELLO", "OTHER_ACTION"]);
-// $FlowExpectedError
 expect({}).to.have.dispatchedTypes([
+  // $FlowExpectedError[missing-local-annot]
+  // $FlowExpectedError[incompatible-call]
   action => {
     expect(action).to.have.property("type", "HELLO");
   },
+  // $FlowExpectedError[incompatible-call]
   { type: "SOME_TYPE", payload: { name: "John Doe" } }
 ]);
 
@@ -223,5 +225,5 @@ expect('test').to.matchSnapshot();
 expect('<div></div>').to.matchSnapshot('html');
 expect('<div></div>').to.matchSnapshot('html', true);
 expect('<div></div>').to.matchSnapshot('html', true, 'Message');
-// $FlowExpectedError
+// $FlowExpectedError[incompatible-call]
 expect('<div></div>').to.matchSnapshot('html', 'not_boolean', 'Message');
