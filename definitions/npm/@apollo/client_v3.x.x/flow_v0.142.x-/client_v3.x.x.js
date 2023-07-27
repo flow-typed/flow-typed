@@ -1,4 +1,4 @@
-// Typescript Built-in Types//
+// Typescript Built-in Types
 
 declare interface TypeScript$IArguments {
   [index: number]: any;
