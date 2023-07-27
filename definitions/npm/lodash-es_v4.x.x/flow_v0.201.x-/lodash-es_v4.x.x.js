@@ -1,4 +1,3 @@
-// @flow
 declare module "lodash-es" {
   declare type __CurriedFunction1<A, R, AA: A> = (...r: [AA]) => R;
   declare type CurriedFunction1<A, R> = __CurriedFunction1<A, R, any>;
