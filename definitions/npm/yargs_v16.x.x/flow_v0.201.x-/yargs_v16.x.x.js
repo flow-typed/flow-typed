@@ -75,10 +75,10 @@ declare module "yargs" {
 
     alias(key: string, alias: string): this;
     alias(alias: { [key: string]: string | Array<string>, ... }): this;
-    argv: Argv | Promise<Argv>;
+    argv: Argv;
     array(key: string | Array<string>): this;
     boolean(parameter: string | Array<string>): this;
-    check(fn: (argv: Argv, options: Array<string>) => mixed): this;
+    check(fn: (argv: Argv, options: Array<string>) => ?boolean): this;
     choices(key: string, allowed: Array<string>): this;
     choices(allowed: { [key: string]: Array<string>, ... }): this;
     coerce(key: string, fn: (value: any) => mixed): this;
@@ -88,32 +88,17 @@ declare module "yargs" {
     command(
       cmd: string | Array<string>,
       desc: string | false,
-      builder?:
-        | { [key: string]: Options, ... }
-        | ((yargsInstance: Yargs) => mixed),
+      builder?: { [key: string]: Options, ... } | ((yargsInstance: Yargs) => mixed),
       handler?: Function
     ): this;
+
     command(
       cmd: string | Array<string>,
       desc: string | false,
       module: ModuleObject
     ): this;
-    command(module: ModuleObject): this;
 
-    commands(
-      cmd: string | Array<string>,
-      desc: string | false,
-      builder?:
-        | { [key: string]: Options, ... }
-        | ((yargsInstance: Yargs) => mixed),
-      handler?: Function
-    ): this;
-    commands(
-      cmd: string | Array<string>,
-      desc: string | false,
-      module: ModuleObject
-    ): this;
-    commands(module: ModuleObject): this;
+    command(module: ModuleObject): this;
 
     commandDir(
       directory: string,
@@ -191,10 +176,7 @@ declare module "yargs" {
 
     fail(fn: (failureMessage: string, err: Error, yargs: Yargs) => mixed): this;
 
-    getCompletion(
-      args: Array<string>,
-      fn: (err: Error | null, completions: Array<string> | void) => void
-    ): Promise<Array<string> | void>;
+    getCompletion(args: Array<string>, fn: () => void): this;
 
     global(globals: string | Array<string>, isGlobal?: boolean): this;
 
@@ -243,6 +225,8 @@ declare module "yargs" {
 
     number(key: string | Array<string>): this;
 
+    onFinishCommand(handler: () => mixed): this;
+
     option(key: string, options?: Options): this;
     option(optionMap: { [key: string]: Options, ... }): this;
 
@@ -253,28 +237,8 @@ declare module "yargs" {
       args?: string | Array<string>,
       context?: { [key: string]: any, ... },
       parseCallback?: (err: Error, argv: Argv, output?: string) => void
-    ): Argv | Promise<Argv>;
-    parse(
-      args?: string | Array<string>,
-      parseCallback?: (err: Error, argv: Argv, output?: string) => void
-    ): Argv | Promise<Argv>;
-
-    parseAsync(
-      args?: string | Array<string>,
-      context?: { [key: string]: any, ... },
-      parseCallback?: (err: Error, argv: Argv, output?: string) => void
-    ): Promise<Argv>;
-    parseAsync(
-      args?: string | Array<string>,
-      parseCallback?: (err: Error, argv: Argv, output?: string) => void
-    ): Promise<Argv>;
-
-    parseSync(
-      args?: string | Array<string>,
-      context?: { [key: string]: any, ... },
-      parseCallback?: (err: Error, argv: Argv, output?: string) => void
     ): Argv;
-    parseSync(
+    parse(
       args?: string | Array<string>,
       parseCallback?: (err: Error, argv: Argv, output?: string) => void
     ): Argv;
@@ -293,6 +257,8 @@ declare module "yargs" {
 
     requiresArg(key: string | Array<string>): this;
 
+    reset(): this;
+
     scriptName(name: string): this;
 
     showCompletionScript(): this;
@@ -303,9 +269,6 @@ declare module "yargs" {
     showHelpOnFail(enable: boolean, message?: string): this;
 
     skipValidation(key: string): this;
-
-    showVersion(consoleLevel?: "error" | "warn" | "log"): this;
-    showVersion(printCallback: (usageData: string) => void): this;
 
     strict(enabled?: boolean): this;
 
@@ -335,8 +298,4 @@ declare module "yargs" {
   }
 
   declare module.exports: Yargs;
-}
-
-declare module 'yargs/helpers' {
-  declare module.exports: any;
 }
