@@ -22,13 +22,29 @@ export function emptyVersion(): Version {
   };
 }
 
+/**
+ * Find the lowest compatible explicit version based on a version range
+ * of a flow-typed definition
+ * ie: a type definition is 1.2.x, and the lower bound of that would be 1.2.0
+ */
 export function getRangeLowerBound(rangeRaw: string | semver.Range): string {
   const range =
     typeof rangeRaw === 'string' ? new semver.Range(rangeRaw) : rangeRaw;
-  // Fix for semver returning a bad comparator when the range is 'v0.x.x'
-  return range.set[0][0].semver.version || '0.0.0';
+
+  // When the range only has one object in the set, it implicitly means
+  // there is a range of anything up to the upper bound.
+  // Therefore we return `'0.0.0'`.
+  if (range.set[0].length === 1) {
+    return '0.0.0';
+  }
+  return range.set[0][0].semver.version;
 }
 
+/**
+ * Find the highest compatible explicit version based on a version range
+ * of a flow-typed definition
+ * ie: a type definition is 1.2.x, and the upper bound of that would be 1.3.0
+ */
 export function getRangeUpperBound(rangeRaw: string | semver.Range): string {
   const range =
     typeof rangeRaw === 'string' ? new semver.Range(rangeRaw) : rangeRaw;
