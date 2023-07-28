@@ -48,6 +48,13 @@ export function getRangeLowerBound(rangeRaw: string | semver.Range): string {
 export function getRangeUpperBound(rangeRaw: string | semver.Range): string {
   const range =
     typeof rangeRaw === 'string' ? new semver.Range(rangeRaw) : rangeRaw;
+
+  // When the range only has one object in the set, it implicitly means
+  // there is a range of anything up to the upper bound.
+  // So we'll return the first object version representing the upper bound.
+  if (range.set[0].length === 1) {
+    return range.set[0][0].semver.version;
+  }
   return range.set[0][1].semver.version;
 }
 
