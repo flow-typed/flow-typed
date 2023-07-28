@@ -697,8 +697,7 @@ declare module "lodash-es" {
   declare export function before(n: number, fn: Function): Function;
   declare export function bind(func: Function, thisArg: any, ...partials: Array<any>): Function;
   declare export function bindKey(obj?: ?Object, key?: ?string, ...partials?: Array<?any>): Function;
-  declare export var curry: Curry;
-  declare export function curry(func: Function, arity?: number): Function;
+  declare export var curry: Curry | ((func: Function, arity?: number) => Function);
   declare export function curryRight(func: Function, arity?: number): Function;
   declare export function debounce<F: Function>(func: F, wait?: number, options?: DebounceOptions): F;
   declare export function defer(func: Function, ...args?: Array<any>): TimeoutID;
