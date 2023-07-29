@@ -1,6 +1,10 @@
 // @flow
 
-import {stringToVersion, getRangeLowerBound} from '../semver.js';
+import {
+  stringToVersion,
+  getRangeLowerBound,
+  getRangeUpperBound,
+} from '../semver.js';
 import {Range} from 'semver';
 
 describe('semver', () => {
@@ -44,16 +48,32 @@ describe('semver', () => {
       });
     });
   });
+
   describe('getRangeLowerBound', () => {
     it('gets correct lower bound for string', () => {
       expect(getRangeLowerBound('v1.2.x')).toEqual('1.2.0');
       expect(getRangeLowerBound('v1.x.x')).toEqual('1.0.0');
       expect(getRangeLowerBound('^v0.x.x')).toEqual('0.0.0');
     });
+
     it('gets correct lower bound for string', () => {
       expect(getRangeLowerBound(new Range('v1.2.x'))).toEqual('1.2.0');
       expect(getRangeLowerBound(new Range('v1.x.x'))).toEqual('1.0.0');
       expect(getRangeLowerBound(new Range('^v0.x.x'))).toEqual('0.0.0');
+    });
+  });
+
+  describe('getRangeUpperBound', () => {
+    it('gets correct upper bound for string', () => {
+      expect(getRangeUpperBound('v1.2.x')).toEqual('1.3.0-0');
+      expect(getRangeUpperBound('v1.x.x')).toEqual('2.0.0-0');
+      expect(getRangeUpperBound('^v0.x.x')).toEqual('1.0.0-0');
+    });
+
+    it('gets correct upper bound for string', () => {
+      expect(getRangeUpperBound(new Range('v1.2.x'))).toEqual('1.3.0-0');
+      expect(getRangeUpperBound(new Range('v1.x.x'))).toEqual('2.0.0-0');
+      expect(getRangeUpperBound(new Range('^v0.x.x'))).toEqual('1.0.0-0');
     });
   });
 });

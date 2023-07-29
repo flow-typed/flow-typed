@@ -336,3 +336,7 @@ declare module "yargs" {
 
   declare module.exports: Yargs;
 }
+
+declare module 'yargs/helpers' {
+  declare module.exports: any;
+}
