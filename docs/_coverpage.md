@@ -2,7 +2,7 @@
 
 ![logo](_media/flow.svg)
 
-# flow-typed <small>3.8.0</small>
+# flow-typed <small>3.9.0</small>
 
 > High-quality library definitions for [Flow](http://flow.org).
 
