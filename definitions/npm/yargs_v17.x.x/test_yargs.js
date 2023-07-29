@@ -2,6 +2,7 @@
 
 import { describe, it, test } from 'flow-typed-test';
 import yargs from 'yargs';
+const { hideBin } = require('yargs/helpers');
 
 describe('command()', () => {
   it('command', () => {
@@ -13,8 +14,8 @@ describe('command()', () => {
       (argv) => {}
     );
     yargs.command('fetch', 'Download files', {
-      builder: (yargs) => yargs,
-      handler: (argv) => {},
+      builder: (yargs: any) => yargs,
+      handler: (argv: any) => {},
     });
     yargs.command({
       command: 'fetch',
@@ -161,4 +162,10 @@ test('version()', () => {
   yargs.version('1.0');
   yargs.version(false);
   yargs.version('1.0.1', 'version', 'Display version');
+});
+
+describe('helper', () => {
+  test('hideBin', () => {
+    hideBin(process.argv);
+  });
 });

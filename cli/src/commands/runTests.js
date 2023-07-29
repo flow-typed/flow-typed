@@ -1013,7 +1013,7 @@ export async function run(argv: Args): Promise<number> {
   const cwdDefsEnvPath = path.join(basePath, 'definitions', 'environments');
   const envDirPath = (await fs.exists(cwdDefsEnvPath))
     ? cwdDefsEnvPath
-    : path.join(__dirname, '..', '..', '..', 'definitions', 'npm');
+    : path.join(__dirname, '..', '..', '..', 'definitions', 'environments');
 
   console.info(
     `Running ${

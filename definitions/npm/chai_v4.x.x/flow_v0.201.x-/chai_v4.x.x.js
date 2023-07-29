@@ -28,7 +28,7 @@ declare module "chai" {
     eql: (value: T, message?: string) => ExpectChain<T>,
     equal: (value: T, message?: string) => ExpectChain<T>,
     equals: (value: T, message?: string) => ExpectChain<T>,
-    above: (value: T & number, message?: string) => ExpectChain<T>,
+    above: (value: number, message?: string) => ExpectChain<T>,
     gt: (value: T & number, message?: string) => ExpectChain<T>,
     greaterThan: (value: T & number, message?: string) => ExpectChain<T>,
     least: (value: T & number, message?: string) => ExpectChain<T>,
@@ -223,8 +223,8 @@ declare module "chai" {
     static notInclude(exp: string, inc: mixed, msg?: string): void;
     static notInclude<T>(exp: Array<T>, inc: T, msg?: string): void;
 
-    static deepInclude<T>(haystack : T[] | string, needle : $Shape<T>, msg?: string) : void;
-    static notDeepInclude<T>(haystack : T[] | string, needle : $Shape<T>, msg?: string) : void;
+    static deepInclude<T>(haystack : T[] | string, needle : Partial<T>, msg?: string) : void;
+    static notDeepInclude<T>(haystack : T[] | string, needle : Partial<T>, msg?: string) : void;
 
     static match(exp: mixed, re: RegExp, msg?: string): void;
     static notMatch(exp: mixed, re: RegExp, msg?: string): void;

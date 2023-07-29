@@ -1,4 +1,4 @@
-declare module 'tua-body-scroll' {
+declare module 'tua-body-scroll-lock' {
   declare type AcceptedElement = HTMLElement | Array<HTMLElement> | null | void;
 
   declare module.exports: {|

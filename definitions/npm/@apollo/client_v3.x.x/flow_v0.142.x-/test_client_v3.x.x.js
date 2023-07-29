@@ -7,7 +7,7 @@ import { MockedProvider } from "@apollo/client/testing";
 import * as React from 'react';
 import { RetryLink } from '@apollo/client/link/retry';
 
-const client = new ApolloClient({ cache: new ApolloCache() });
+const client = new ApolloClient<{ ... }>({ cache: new ApolloCache() });
 
 type MutationData = {|
   id: string,
