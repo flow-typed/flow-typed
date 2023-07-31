@@ -56,9 +56,6 @@ describe('@redux/toolkit', () => {
   });
 
   describe('createStore', () => {
-
-    // declare function createReducer<S>(state: S, createActions: { [key: string]: ((S) => S)}): { ... };
-
     const reducer = createReducer({ name: 'test' }, {
       'a': (state, action) => {
         state.name = action.payload.name;
@@ -95,12 +92,12 @@ describe('@redux/toolkit', () => {
       const failedStore: Store<{|
         test: { ... },
         test2: number,
-        |}, Action<{ ... }>> = configureStore({
-          // $FlowExpectedError[incompatible-call] foo is missing
-          reducer: {
-            test: (a: any) => ({}),
-            test2: (a: any) => 2,
-            foo: () => 'bar',
+      |}, Action<{ ... }>> = configureStore({
+        // $FlowExpectedError[incompatible-call] foo is missing
+        reducer: {
+          test: (a: any) => ({}),
+          test2: (a: any) => 2,
+          foo: () => 'bar',
         },
       });
 
