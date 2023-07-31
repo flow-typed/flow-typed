@@ -418,10 +418,12 @@ declare module '@reduxjs/toolkit' {
 
   declare type ReducersMapObject = <V>(V) => Reducer<V, Action<any>>;
 
+  declare type GetDefaultMiddleware = () => Middlewares<any>;
+
   /**
    * Options for `configureStore()`.
    */
-  declare type ConfigureStoreOptions<S, A, M> = {|
+  declare type ConfigureStoreOptions<S, A, M: Middlewares<S>> = {|
     /**
      * A single reducer function that will be used as the root reducer, or an
      * object of slice reducers that will be passed to `combineReducers()`.
@@ -434,7 +436,7 @@ declare module '@reduxjs/toolkit' {
      * @example `middleware: (gDM) => gDM().concat(logger, apiMiddleware, yourCustomMiddleware)`
      * @see https://redux-toolkit.js.org/api/getDefaultMiddleware#intended-usage
      */
-    middleware?: M | ((gDM: () => M) => M),
+    middleware?: M | ((gDM: GetDefaultMiddleware<S>) => M),
     /**
      * Whether to enable Redux DevTools integration. Defaults to `true`.
      *
@@ -469,5 +471,5 @@ declare module '@reduxjs/toolkit' {
    *
    * @public
    */
-  declare function configureStore<S = any, A: Action<any> = Action<any>, M: Middlewares<S> = []>(options: ConfigureStoreOptions<S, A, M>): Store<S, A>;
+  declare function configureStore<S = any, A: Action<any> = Action<any>>(options: ConfigureStoreOptions<S, A>): Store<S, A>;
 }
