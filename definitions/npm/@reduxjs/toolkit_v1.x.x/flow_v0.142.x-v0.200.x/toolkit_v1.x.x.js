@@ -383,11 +383,10 @@ declare module '@reduxjs/toolkit' {
    *
    * @public
    */
-  declare function createReducer<S, CR = {| [string]: (S, Action<string>) => S |}, A = any>(
+  declare function createReducer<S>(
     initialState: S,
-    actionsMap: CR
+    actionsMap: { [key: string]: ((state: S, action: Action<string>) => S)}
   ): (state: S | void, action: A) => S;
-
 
   /**
    * A utility function that allows defining a reducer as a mapping from action
