@@ -231,7 +231,7 @@ declare module '@reduxjs/toolkit' {
      * @param actionCreator
      * @param reducer
      */
-    addCase<ActionCreator = TypedActionCreator<string>>(actionCreator: ActionCreator, reducer: (State, ReturnType<ActionCreator>) => void): ActionReducerMapBuilder<State>;
+    addCase<ActionCreator = TypedActionCreator<string>>(actionCreator: ActionCreator, reducer: (state: State, action: Action<string>) => void): ActionReducerMapBuilder<State>;
     /**
      * Add a case reducer for actions with the specified type.
      * @param type
@@ -385,8 +385,8 @@ declare module '@reduxjs/toolkit' {
    */
   declare function createReducer<S>(
     initialState: S,
-    actionsMap: { [key: string]: ((state: S, action: Action<string>) => S)}
-  ): (state: S | void, action: A) => S;
+    actionsMap: { [key: string]: ((state: S, action: Action<string>) => S | void)}
+  ): (state: S | void, action: Action<string>) => S;
 
   /**
    * A utility function that allows defining a reducer as a mapping from action
@@ -405,10 +405,10 @@ declare module '@reduxjs/toolkit' {
    *
    * @public
    */
-  declare function createReducer<S, A>(
+  declare function createReducer<S>(
     initialState: S,
     builderCallback: (builder: ActionReducerMapBuilder<S>) => void,
-  ): (state: S | void, action: A) => S;
+  ): (state: S | void, action: Action<string>) => S;
 
   /**
    * Callback function type, to be used in `ConfigureStoreOptions.enhancers`
@@ -422,7 +422,7 @@ declare module '@reduxjs/toolkit' {
   /**
    * Options for `configureStore()`.
    */
-  declare type ConfigureStoreOptions<S, A, M: Middlewares<S>> = {|
+  declare type ConfigureStoreOptions<S, A, M = Middlewares<S>> = {|
     /**
      * A single reducer function that will be used as the root reducer, or an
      * object of slice reducers that will be passed to `combineReducers()`.
@@ -435,7 +435,7 @@ declare module '@reduxjs/toolkit' {
      * @example `middleware: (gDM) => gDM().concat(logger, apiMiddleware, yourCustomMiddleware)`
      * @see https://redux-toolkit.js.org/api/getDefaultMiddleware#intended-usage
      */
-    middleware?: M | ((gDM: GetDefaultMiddleware<S>) => M),
+    middleware?: M | ((gDM: GetDefaultMiddleware) => M),
     /**
      * Whether to enable Redux DevTools integration. Defaults to `true`.
      *
@@ -450,7 +450,7 @@ declare module '@reduxjs/toolkit' {
      * function (either directly or indirectly by passing an object as `reducer`),
      * this must be an object with the same shape as the reducer map keys.
      */
-    preloadedState?: { [key: string]: any },
+    preloadedState?: { [key: string]: any, ... },
     /**
      * The store enhancers to apply. See Redux's `createStore()`.
      * All enhancers will be included before the DevTools Extension enhancer.

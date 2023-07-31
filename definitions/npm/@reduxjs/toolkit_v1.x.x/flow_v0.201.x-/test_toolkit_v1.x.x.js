@@ -6,6 +6,7 @@ import {
   configureStore,
   type Middleware,
   type Store,
+  type GetDefaultMiddleware,
 } from '@reduxjs/toolkit';
 import type { Action } from 'redux';
 
@@ -55,11 +56,21 @@ describe('@redux/toolkit', () => {
   });
 
   describe('createStore', () => {
-    const reducer = createReducer({}, {
+
+    // declare function createReducer<S>(state: S, createActions: { [key: string]: ((S) => S)}): { ... };
+
+    const reducer = createReducer({ name: 'test' }, {
       'a': (state, action) => {
         state.name = action.payload.name;
       },
     });
+
+
+    createReducer({
+      name: 'a',
+    }, {
+      'a': (state) => { state.name; return state },
+    })
 
     test('with basic reducer', () => {
       configureStore({
@@ -72,20 +83,24 @@ describe('@redux/toolkit', () => {
         ...
       }, Action<{ ... }>> = configureStore({
         reducer: {
-          test: (a) => ({}),
-          test2: (a) => 2,
+          test: (a: any) => ({}),
+          test2: (a: any) => 2,
         },
       });
+
+      store.getState().test2.toFixed(2);
+      // $FlowExpectedError[prop-missing]
+      store.getState().foo;
 
       const failedStore: Store<{|
         test: { ... },
         test2: number,
-      // $FlowExpectedError[prop-missing] foo is missing
-      |}, Action<{ ... }>> = configureStore({
-        reducer: {
-          test: (a) => ({}),
-          test2: (a) => 2,
-          foo: () => 'bar',
+        |}, Action<{ ... }>> = configureStore({
+          // $FlowExpectedError[incompatible-call] foo is missing
+          reducer: {
+            test: (a: any) => ({}),
+            test2: (a: any) => 2,
+            foo: () => 'bar',
         },
       });
 
@@ -131,7 +146,7 @@ describe('@redux/toolkit', () => {
 
       configureStore({
         reducer,
-        middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
+        middleware: (getDefaultMiddleware: GetDefaultMiddleware) => getDefaultMiddleware().concat(logger),
       })
 
       configureStore({

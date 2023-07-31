@@ -7,7 +7,7 @@ declare module 'redux' {
 
   */
 
-  declare export type Action<T> = { type: T, [key: string]: any, ... }
+  declare export type Action<T> = { type: T, [key: string]: any, ... };
 
   declare export type DispatchAPI<A> = (action: A) => A;
 
