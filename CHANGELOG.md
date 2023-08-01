@@ -5,7 +5,21 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-## [3.8.0] 2022-02-21
+## [3.9.0] 2023-07-28
+
+### Fixed
+- [cli] Bump semver to patch vulnerability (#4479) 
+- [cli:test] Fix CI tests for environments (#4463)
+- [cli] Fix a bug from flow that stopped testing for ambiguous obj exac… 
+- [cli] Fix running definition tests locally on MacOS (#4440) 
+- [cli]Fix runTests command for flow@^0.200.0 set exact_by_default option (#4423)
+- Bump http-cache-semantics from 4.0.4 to 4.1.1 in /cli (#4420) 
+- Bump json5 from 2.1.1 to 2.2.3 in /cli (#4416) 
+- Bump minimatch from 3.0.4 to 3.1.2 in /cli (#4409) 
+- Bump word-wrap from 1.2.3 to 1.2.4 in /cli (#4469) 
+- Bump tough-cookie from 4.0.0 to 4.1.3 in /cli (#4464) 
+
+## [3.8.0] 2022-06-26
 
 ### Added
 - **Core definitions (#4255)**
