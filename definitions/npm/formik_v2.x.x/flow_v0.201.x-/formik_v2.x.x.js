@@ -40,9 +40,9 @@ declare module 'formik/@flow-typed' {
     setFieldValue(fieldName: string, value: any, shouldValidate?: boolean): void,
     setFieldError(fieldName: $Keys<Values>, message: string): void,
     setFieldTouched(fieldName: $Keys<Values>, isTouched?: boolean, shouldValidate?: boolean): void,
-    validateForm(values?: $Shape<Values>): Promise<FormikErrors<Values>>,
+    validateForm(values?: Partial<Values>): Promise<FormikErrors<Values>>,
     validateField(field: string): void,
-    resetForm(nextState?: $Shape<FormikState<Values>>): void,
+    resetForm(nextState?: Partial<FormikState<Values>>): void,
     setFormikState(
       state:
         | FormikState<Values>
@@ -72,7 +72,7 @@ declare module 'formik/@flow-typed' {
     component?: React$ComponentType<FormikProps<Values>> | React$Node,
     render?: (props: FormikProps<Values>) => React$Node,
     children?: ((props: FormikProps<Values>) => React$Node) | React$Node,
-    initialValues?: $Shape<Values>,
+    initialValues?: Partial<Values>,
     initialStatus?: any,
     initialErrors?: FormikErrors<Values>,
     initialTouched?: FormikTouched<Values>,
@@ -102,8 +102,8 @@ declare module 'formik/@flow-typed' {
   |};
 
   declare export type FormikContextType<Values> = FormikProps<Values> & {
-    validate: $ElementType<FormikConfig<Values>, 'validate'>,
-    validationSchema: $ElementType<FormikConfig<Values>, 'validationSchema'>,
+    validate: FormikConfig<Values>['validate'],
+    validationSchema: FormikConfig<Values>['validationSchema'],
     ...
   };
 
@@ -127,8 +127,8 @@ declare module 'formik/@flow-typed' {
     name: string,
     multiple?: boolean,
     checked?: boolean,
-    onChange: $ElementType<FormikHandlers, 'handleChange'>,
-    onBlur: $ElementType<FormikHandlers, 'handleBlur'>,
+    onChange: FormikHandlers['handleChange'],
+    onBlur: FormikHandlers['handleBlur'],
   |}>;
 
   declare export type FieldHelperProps = $ReadOnly<{|
@@ -164,7 +164,7 @@ declare module 'formik/@withFormik' {
     handleSubmit: (values: Values, formikBag: FormikBag<Props, Values>) => void,
 
     displayName?: string,
-    mapPropsToValues?: (props: Props) => $Shape<Values>,
+    mapPropsToValues?: (props: Props) => Partial<Values>,
     mapPropsToStatus?: (props: Props) => any,
     mapPropsToTouched?: (props: Props) => FormikTouched<Values>,
     mapPropsToErrors?: (props: Props) => FormikErrors<Values>,
@@ -257,8 +257,8 @@ declare module 'formik/@FormikContext' {
 
   declare export var FormikContext: React$Context<FormikContextType<{...}>>;
 
-  declare export var FormikProvider: $ElementType<typeof FormikContext, 'Provider'>;
-  declare export var FormikConsumer: $ElementType<typeof FormikContext, 'Consumer'>;
+  declare export var FormikProvider: typeof FormikContext['Provider'];
+  declare export var FormikConsumer: typeof FormikContext['Consumer'];
 
   declare export function useFormikContext<Values>(): FormikContextType<Values>;
 }
@@ -362,7 +362,7 @@ declare module 'formik/@Formik' {
   declare export function useFormik<Values>(
     options: FormikConfig<Values>
   ): {
-    initialValues: $Shape<Values>,
+    initialValues: Partial<Values>,
     initialErrors: FormikErrors<Values>,
     initialTouched: FormikTouched<Values>,
     initialStatus: any,
@@ -372,7 +372,7 @@ declare module 'formik/@Formik' {
     handleChange(event: {...}): void,
     handleReset: (e?: {...}) => void,
     handleSubmit: (e?: {...}) => void,
-    resetForm: (nextState?: $Shape<FormikState<Values>>) => void,
+    resetForm: (nextState?: Partial<FormikState<Values>>) => void,
     setErrors: (errors: FormikErrors<Values>) => void,
     setFormikState: (
       stateOrCb:
@@ -386,14 +386,14 @@ declare module 'formik/@Formik' {
     ) => void,
     setFieldValue: <Name: $Keys<Values>>(
       fieldName: Name,
-      value: $ElementType<Values, Name>,
+      value: Values[Name],
       shouldValidate?: boolean
     ) => void,
     setFieldError: (fieldName: $Keys<Values>, value: ?string) => void,
     setStatus: (status: any) => void,
     setSubmitting: (isSubmitting: boolean) => void,
     setTouched: (touched: FormikTouched<Values>) => void,
-    setValues: (values: $Shape<Values>) => void,
+    setValues: (values: Partial<Values>) => void,
     submitForm: () => Promise<void>,
     validateForm: (values?: Values) => Promise<FormikErrors<Values>>,
     validateField: (name: $Keys<Values>) => Promise<?string>,
@@ -404,8 +404,8 @@ declare module 'formik/@Formik' {
     getFieldProps<Name>(
       name: Name | UseFieldConfig<Name>
     ): [
-      FieldInputProps<$ElementType<Values, Name>>,
-      FieldMetaProps<$ElementType<Values, Name>>
+      FieldInputProps<Values[Name]>,
+      FieldMetaProps<Values[Name]>
     ],
     validateOnBlur: boolean,
     validateOnChange: boolean,
@@ -430,7 +430,7 @@ declare module 'formik/@Formik' {
     schema: Schema,
     sync?: boolean,
     context?: any
-  ): Promise<$Shape<Values>>;
+  ): Promise<Partial<Values>>;
 }
 
 declare module 'formik/@connect' {

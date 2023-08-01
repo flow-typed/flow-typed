@@ -115,8 +115,8 @@ describe('withFormik HOC', () => {
       it('should raise an error when `mapPropsToValues` return invalid values', () => {
         withFormik<Props, FormValues>({
           ...requiredOptions,
-          // $FlowExpectedError[incompatible-call] - `initialAge` is a number but `name` need a string
           mapPropsToValues: ({ initialAge }) => ({
+            // $FlowExpectedError[incompatible-call] - `initialAge` is a number but `name` need a string
             name: initialAge,
           }),
         });
