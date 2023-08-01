@@ -101,7 +101,7 @@ declare module 'formik/@flow-typed' {
     registerField(fieldName: $Keys<Values>, fns: FnsOptions): void,
   |};
 
-  declare export type FormikContext<Values> = FormikProps<Values> & {
+  declare export type FormikContextType<Values> = FormikProps<Values> & {
     validate: $ElementType<FormikConfig<Values>, 'validate'>,
     validationSchema: $ElementType<FormikConfig<Values>, 'validationSchema'>,
     ...
@@ -253,14 +253,14 @@ declare module 'formik/@utils' {
 }
 
 declare module 'formik/@FormikContext' {
-  import type { FormikContext } from 'formik/@flow-typed';
+  import type { FormikContextType } from 'formik/@flow-typed';
 
-  declare type _Context = React$Context<FormikContext<{...}>>;
+  declare export var FormikContext: React$Context<FormikContextType<{...}>>;
 
-  declare export var FormikProvider: $ElementType<_Context, 'Provider'>;
-  declare export var FormikConsumer: $ElementType<_Context, 'Consumer'>;
+  declare export var FormikProvider: $ElementType<typeof FormikContext, 'Provider'>;
+  declare export var FormikConsumer: $ElementType<typeof FormikContext, 'Consumer'>;
 
-  declare export function useFormikContext<Values>(): FormikContext<Values>;
+  declare export function useFormikContext<Values>(): FormikContextType<Values>;
 }
 
 declare module 'formik/@ErrorMessage' {
