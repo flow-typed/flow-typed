@@ -11,6 +11,7 @@ import {
   within,
   screen,
   getNodeText,
+  renderHook,
   type IntersectionHTMLElement,
 } from '@testing-library/react';
 import { describe, it } from 'flow-typed-test';
@@ -1269,5 +1270,84 @@ describe('render() parameters', () => {
     result.getByOverride();
     // $FlowExpectedError[prop-missing] default queries are not available when using custom queries
     result.getByTestId('indifferent');
+  });
+});
+
+describe('renderHook', () => {
+  const useNumber = () => { return 12; };
+
+  it('works with basic usage', () => {
+    const { result } = renderHook<number>(() => useNumber());
+
+    result.current.toFixed(2);
+    // $FlowExpectedError[prop-missing] validate it's not any
+    result.current.blah();
+  });
+
+  it('matches result type to hook type', () => {
+    // $FlowExpectedError[incompatible-call] string generic doesn't match useNumber result
+    renderHook<string>(() => useNumber());
+  });
+
+  it('has result properties', () => {
+    const results = renderHook(() => useNumber());
+
+    results.result.current.toFixed(1);
+    // $FlowExpectedError[prop-missing]
+    results.result.foo;
+    (results.unmount(): void);
+    // $FlowExpectedError[incompatible-cast]
+    (results.unmount(): string);
+    // $FlowExpectedError[extra-arg]
+    results.unmount(2);
+    results.rerender();
+    (results.rerender({ a: 2 }): void);
+    // $FlowExpectedError[incompatible-cast]
+    (results.rerender({ a: 2 }): string);
+    // $FlowExpectedError[prop-missing]
+    results.foo;
+  });
+
+  it('takes options', () => {
+    renderHook(() => useNumber(), {});
+    // $FlowExpectedError[incompatible-call]
+    renderHook(() => useNumber(), 123);
+    // $FlowExpectedError[prop-missing]
+    renderHook(() => useNumber(), { foo: 'bar' });
+
+    renderHook(() => useNumber(), {
+      initialProps: {},
+      queries: {},
+      container: document.createElement('a'),
+      baseElement: document.createElement('a'),
+      hydrate: true,
+      legacyRoot: true,
+      wrapper: () => {},
+    });
+
+    renderHook(() => useNumber(), {
+      // $FlowExpectedError[incompatible-call]
+      queries: '',
+    });
+    renderHook(() => useNumber(), {
+      // $FlowExpectedError[incompatible-call]
+      container: '',
+    });
+    renderHook(() => useNumber(), {
+      // $FlowExpectedError[incompatible-call]
+      baseElement: '',
+    });
+    renderHook(() => useNumber(), {
+      // $FlowExpectedError[incompatible-call]
+      hydrate: '',
+    });
+    renderHook(() => useNumber(), {
+      // $FlowExpectedError[incompatible-call]
+      legacyRoot: '',
+    });
+    renderHook(() => useNumber(), {
+      // $FlowExpectedError[incompatible-call]
+      wrapper: '',
+    });
   });
 });
