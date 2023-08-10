@@ -1588,7 +1588,7 @@ describe('@faker-js/faker', () => {
 
   describe('helpers', () => {
     test('arrayElement', () => {
-      faker.helpers.arrayElement();
+      faker.helpers.arrayElement<string>();
       (faker.helpers.arrayElement<string>(): string);
       faker.helpers.arrayElement<string>(['']);
 
@@ -1601,7 +1601,7 @@ describe('@faker-js/faker', () => {
     });
 
     test('arrayElements', () => {
-      faker.helpers.arrayElements();
+      faker.helpers.arrayElements<string>();
       (faker.helpers.arrayElements<string>(): Array<string>);
       faker.helpers.arrayElements<string>(['']);
       faker.helpers.arrayElements([''], 1);
@@ -1724,7 +1724,7 @@ describe('@faker-js/faker', () => {
     });
 
     test('shuffle', () => {
-      faker.helpers.shuffle();
+      faker.helpers.shuffle<string>();
       (faker.helpers.shuffle<string>(): Array<string>);
       faker.helpers.shuffle<string>(['']);
 
