@@ -469,10 +469,47 @@ declare module '@testing-library/react' {
   declare export type RenderOptionsWithCustomQueries<
     CustomQueries: { ... }
   > = {|
+    /**
+     * Queries to bind. Overrides the default set from DOM Testing Library unless merged.
+     *
+     *  @see https://testing-library.com/docs/react-testing-library/api/#queries
+     */
     queries: CustomQueries,
+    /**
+     * By default, React Testing Library will create a div and append that div to the document.body. Your React component will be rendered in the created div. If you provide your own HTMLElement container via this option,
+     *  it will not be appended to the document.body automatically.
+     *
+     *  For example: If you are unit testing a `<tbody>` element, it cannot be a child of a div. In this case, you can
+     *  specify a table as the render container.
+     *
+     *  @see https://testing-library.com/docs/react-testing-library/api/#container
+     */
     container?: HTMLElement,
+    /**
+     * Defaults to the container if the container is specified. Otherwise `document.body` is used for the default. This is used as
+     *  the base element for the queries as well as what is printed when you use `debug()`.
+     *
+     *  @see https://testing-library.com/docs/react-testing-library/api/#baseelement
+     */
     baseElement?: HTMLElement,
+    /**
+     * If `hydrate` is set to `true`, then it will render with `ReactDOM.hydrate`. This may be useful if you are using server-side
+     *  rendering and use ReactDOM.hydrate to mount your components.
+     *
+     *  @see https://testing-library.com/docs/react-testing-library/api/#hydrate)
+     */
     hydrate?: boolean,
+    /**
+     * Set to `true` if you want to force synchronous `ReactDOM.render`.
+     * Otherwise `render` will default to concurrent React if available.
+     */
+    legacyRoot?: boolean,
+    /**
+     * Pass a React Component as the wrapper option to have it rendered around the inner element. This is most useful for creating
+     *  reusable custom render functions for common data providers. See setup for examples.
+     *
+     *  @see https://testing-library.com/docs/react-testing-library/api/#wrapper
+     */
     wrapper?: React$ComponentType<any>,
   |};
 
@@ -641,4 +678,44 @@ declare module '@testing-library/react' {
   ): IntersectionHTMLElement;
   declare export function getNodeText(node: UnionHTMLElement): string;
   declare export var screen: Screen<>;
+
+  declare export type RenderHookOptions<P, Q> = {|
+    ...RenderOptionsWithCustomQueries<Q>,
+    /**
+     * The argument passed to the renderHook callback. Can be useful if you plan
+     * to use the rerender utility to change the values passed to your hook.
+     */
+    +initialProps?: P,
+  |};
+
+  declare type RenderHookResult<P, R> = {|
+    /**
+     * This is a stable reference to the latest value returned by your renderHook
+     * callback
+     */
+    +result: {|
+      /**
+       * The value returned by your renderHook callback
+       */
+      +current: R,
+    |},
+    /**
+     * Unmounts the test component. This is useful for when you need to test
+     * any cleanup your useEffects have.
+     */
+    +unmount: () => void,
+    /**
+     * Triggers a re-render. The props will be passed to your renderHook callback.
+     */
+    +rerender: (newProps?: P) => void,
+  |};
+
+  /**
+   * Allows you to render a hook within a test React component without having to
+   * create that component yourself.
+   */
+  declare export function renderHook<P, R, Q = { ... }>(
+    render: (initialProps: P) => R,
+    options?: RenderHookOptions<P, Q>
+  ): RenderHookResult<P, R>
 }
