@@ -115,8 +115,8 @@ describe('withFormik HOC', () => {
       it('should raise an error when `mapPropsToValues` return invalid values', () => {
         withFormik<Props, FormValues>({
           ...requiredOptions,
-          // $FlowExpectedError[incompatible-call] - `initialAge` is a number but `name` need a string
           mapPropsToValues: ({ initialAge }) => ({
+            // $FlowExpectedError[incompatible-call] - `initialAge` is a number but `name` need a string
             name: initialAge,
           }),
         });
@@ -146,11 +146,11 @@ describe('withFormik HOC', () => {
 
 describe('useField hook', () => {
   it('should call with string', () => {
-    useField('name');
+    useField<string>('name');
   });
 
   it('also should call with options', () => {
-    useField({ name: 'name' });
+    useField<string>({ name: 'name' });
   });
 
   it('should raise error when pass object without required prop `name`', () => {
@@ -233,7 +233,7 @@ describe('utils', () => {
 
     getIn({ a: { b: 2 } }, ['a', 'b']);
     setIn({ a: { b: 2 } }, 'a', 3);
-    setNestedObjectValues({}, 1);
+    setNestedObjectValues<any>({}, 1);
   });
 });
 
