@@ -474,7 +474,7 @@ declare module '@testing-library/react' {
      *
      *  @see https://testing-library.com/docs/react-testing-library/api/#queries
      */
-    queries: CustomQueries,
+    queries?: CustomQueries,
     /**
      * By default, React Testing Library will create a div and append that div to the document.body. Your React component will be rendered in the created div. If you provide your own HTMLElement container via this option,
      *  it will not be appended to the document.body automatically.
@@ -714,7 +714,11 @@ declare module '@testing-library/react' {
    * Allows you to render a hook within a test React component without having to
    * create that component yourself.
    */
-  declare export function renderHook<P, R, Q = { ... }>(
+  declare export function renderHook<
+    R,
+    P = { ... },
+    Q = { ... },
+  >(
     render: (initialProps: P) => R,
     options?: RenderHookOptions<P, Q>
   ): RenderHookResult<P, R>
