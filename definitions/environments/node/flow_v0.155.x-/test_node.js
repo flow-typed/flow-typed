@@ -10,6 +10,8 @@ import url from 'url';
 
 import nodeEvents from 'node:events';
 import fsPromises from 'fs/promises';
+import importProcess from 'process';
+import nodeProcess from 'node:process';
 import nodeFs from 'node:fs';
 import nodeFsPromises from 'node:fs/promises';
 import nodeOs from 'node:os';
@@ -27,6 +29,18 @@ describe('node', () => {
   describe('fs/promises', () => {
     it('should retrieve the corresponding Flow core types', () => {
       (fsPromises.writeFile: typeof fs.promises.writeFile);
+    });
+  });
+
+  describe('process', () => {
+    it('should retrieve the corresponding Flow core types', () => {
+      (importProcess.exit: typeof process.exit);
+    });
+  });
+
+  describe('node:process', () => {
+    it('should retrieve the corresponding Flow core types', () => {
+      (nodeProcess.exit: typeof process.exit);
     });
   });
 

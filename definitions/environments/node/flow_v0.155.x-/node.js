@@ -4,6 +4,14 @@ declare module 'fs/promises' {
   declare module.exports: $Exports<'fs'>['promises'];
 }
 
+declare module 'process' {
+  declare module.exports: typeof process;
+}
+
+declare module 'node:process' {
+  declare module.exports: $Exports<'process'>;
+}
+
 // https://nodejs.org/api/esm.html#node-imports
 
 declare module 'node:events' {
