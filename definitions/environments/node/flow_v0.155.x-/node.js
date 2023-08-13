@@ -5,7 +5,7 @@ declare module 'fs/promises' {
 }
 
 declare module 'process' {
-  declare module.exports: typeof process;
+  declare module.exports: Process;
 }
 
 declare module 'node:process' {

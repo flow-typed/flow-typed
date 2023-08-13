@@ -32,15 +32,31 @@ describe('node', () => {
     });
   });
 
+  /**
+   * Tested differently as process exports a class
+   */
   describe('process', () => {
     it('should retrieve the corresponding Flow core types', () => {
-      (importProcess.exit: typeof process.exit);
+      const returnValue = process.cwd();
+      (importProcess.cwd(): typeof returnValue);
+      // $FlowExpectedError[incompatible-cast] does not match return type of process function
+      (importProcess.cwd(): number);
+      // $FlowExpectedError[extra-arg] does not match  type of process function
+      (importProcess.cwd(''));
     });
   });
 
+  /**
+   * Tested differently as process exports a class
+   */
   describe('node:process', () => {
     it('should retrieve the corresponding Flow core types', () => {
-      (nodeProcess.exit: typeof process.exit);
+      const returnValue = process.cwd();
+      (nodeProcess.cwd(): typeof returnValue);
+      // $FlowExpectedError[incompatible-cast] does not match return type of process function
+      (nodeProcess.cwd(): number);
+      // $FlowExpectedError[extra-arg] does not match  type of process function
+      (nodeProcess.cwd(''));
     });
   });
 
