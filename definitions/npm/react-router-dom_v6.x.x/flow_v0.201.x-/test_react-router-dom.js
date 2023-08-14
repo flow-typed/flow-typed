@@ -19,6 +19,7 @@ import {
   Outlet,
   Route,
   Routes,
+  ScrollRestoration,
   useHistory,
   useLocation,
   useNavigate,
@@ -43,7 +44,7 @@ import type {
   RemixRouter,
   RouterNavigateOptions,
 } from 'react-router-dom';
-import { it, describe } from 'flow-typed-test';
+import { it, test, describe } from 'flow-typed-test';
 
 describe('react-router-dom', () => {
   // ----------------------------------/
@@ -555,14 +556,14 @@ describe('react-router-dom', () => {
   // ----------------------------------/
 
   describe('RouterProvider use case', () => {
-    it('works', () => {
-      const router = createBrowserRouter([
-        {
-          path: '/',
-          element: <div>Hello world!</div>,
-        },
-      ]);
+    const router = createBrowserRouter([
+      {
+        path: '/',
+        element: <div>Hello world!</div>,
+      },
+    ]);
 
+    it('works', () => {
       () => <RouterProvider router={router} />;
 
       () => (
@@ -573,6 +574,46 @@ describe('react-router-dom', () => {
               element: <div>Hello world!</div>,
             },
           ])}
+        />
+      );
+    });
+
+    test('future', () => {
+      () => (
+        <RouterProvider
+          router={router}
+          // $FlowExpectedError[prop-missing]
+          future={{}}
+        />
+      );
+
+      () => (
+        <RouterProvider
+          router={router}
+          future={{
+            v7_startTransition: true,
+          }}
+        />
+      );
+
+      () => (
+        <RouterProvider
+          router={router}
+          future={{
+            // $FlowExpectedError[incompatible-type]
+            v7_startTransition: '123',
+          }}
+        />
+      );
+
+      () => (
+        // $FlowExpectedError[prop-missing]
+        <RouterProvider
+          router={router}
+          // $FlowExpectedError[prop-missing]
+          future={{
+            foo: 'bar',
+          }}
         />
       );
     });
@@ -978,6 +1019,77 @@ describe('react-router-dom', () => {
       const router: RemixRouter = {
         foo: '',
       };
+    });
+  });
+
+  describe('ScrollRestoration', () => {
+    test('default', () => {
+      const Comp = () => (
+        <ScrollRestoration />
+      );
+    });
+
+    test('getKey', () => {
+      const Comp = () => (
+        <ScrollRestoration
+          getKey={(location, matches) => {
+            // default behavior
+            return location.key;
+          }}
+        />
+      );
+
+      const FailProp = () => (
+        <ScrollRestoration
+          // $FlowExpectedError[incompatible-type]
+          getKey="test"
+        />
+      );
+
+      const FailReturn = () => (
+        <ScrollRestoration
+          getKey={(location, matches) => {
+            // $FlowExpectedError[incompatible-type]
+            return 1;
+          }}
+        />
+      );
+
+      const Pathname = () => (
+        <ScrollRestoration
+          getKey={(location, matches) => {
+            return location.pathname;
+          }}
+        />
+      );
+
+      const Complex = () => (
+        <ScrollRestoration
+          getKey={(location, matches) => {
+            const paths = ["/home", "/notifications"];
+            return paths.includes(location.pathname)
+              ? // home and notifications restore by pathname
+                location.pathname
+              : // everything else by location like the browser
+                location.key;
+          }}
+        />
+      )
+    });
+
+    test('storageKey', () => {
+      const Comp = () => (
+        <ScrollRestoration
+          storageKey="test"
+        />
+      );
+
+      const Fail = () => (
+        <ScrollRestoration
+          // $FlowExpectedError[incompatible-type]
+          storageKey={1}
+        />
+      );
     });
   });
 });
