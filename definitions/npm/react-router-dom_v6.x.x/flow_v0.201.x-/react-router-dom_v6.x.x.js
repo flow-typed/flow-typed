@@ -962,7 +962,7 @@ declare module 'react-router-dom' {
   |};
 
   declare export var ScrollRestoration: React$ComponentType<{|
-    getKey?: (location: Location, matches: Array<UseMatchesMatch>) => string | null,
+    getKey?: (location: Location, matches: Array<UseMatchesMatch>) => string | void,
     storageKey?: string,
   |}>;
 }
