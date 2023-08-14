@@ -556,14 +556,14 @@ describe('react-router-dom', () => {
   // ----------------------------------/
 
   describe('RouterProvider use case', () => {
-    it('works', () => {
-      const router = createBrowserRouter([
-        {
-          path: '/',
-          element: <div>Hello world!</div>,
-        },
-      ]);
+    const router = createBrowserRouter([
+      {
+        path: '/',
+        element: <div>Hello world!</div>,
+      },
+    ]);
 
+    it('works', () => {
       () => <RouterProvider router={router} />;
 
       () => (
@@ -574,6 +574,46 @@ describe('react-router-dom', () => {
               element: <div>Hello world!</div>,
             },
           ])}
+        />
+      );
+    });
+
+    test('future', () => {
+      () => (
+        <RouterProvider
+          router={router}
+          // $FlowExpectedError[prop-missing]
+          future={{}}
+        />
+      );
+
+      () => (
+        <RouterProvider
+          router={router}
+          future={{
+            v7_startTransition: true,
+          }}
+        />
+      );
+
+      () => (
+        <RouterProvider
+          router={router}
+          future={{
+            // $FlowExpectedError[incompatible-type]
+            v7_startTransition: '123',
+          }}
+        />
+      );
+
+      () => (
+        // $FlowExpectedError[prop-missing]
+        <RouterProvider
+          router={router}
+          // $FlowExpectedError[prop-missing]
+          future={{
+            foo: 'bar',
+          }}
         />
       );
     });
