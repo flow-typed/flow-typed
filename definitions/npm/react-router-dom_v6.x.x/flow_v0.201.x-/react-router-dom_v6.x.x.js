@@ -677,6 +677,9 @@ declare module 'react-router-dom' {
   declare export type RouterProviderProps = {|
     fallbackElement?: React$Node,
     router: RemixRouter,
+    future?: {|
+      v7_startTransition: boolean,
+    |},
   |};
 
   declare export function RouterProvider(RouterProviderProps): React$Node;
@@ -949,4 +952,17 @@ declare module 'react-router-dom' {
   >;
 
   declare export function useHistory(): $PropertyType<ContextRouter, 'history'>;
+
+  declare type UseMatchesMatch = {|
+    id: string,
+    pathname: string,
+    params: AgnosticRouteMatch<>['params'],
+    data: any,
+    handle: any,
+  |};
+
+  declare export var ScrollRestoration: React$ComponentType<{|
+    getKey?: (location: Location, matches: Array<UseMatchesMatch>) => string | null,
+    storageKey?: string,
+  |}>;
 }
