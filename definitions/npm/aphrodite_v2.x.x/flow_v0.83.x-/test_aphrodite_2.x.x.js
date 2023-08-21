@@ -86,6 +86,14 @@ describe('aphrodite', () => {
     // $FlowExpectedError[incompatible-call]
     resetInjectedStyle();
   });
+
+  it('pass refined objects into the style', () => {
+    const test: {| color: string |} = { color: 'black' };
+
+    const styles = StyleSheet.create({
+      test: test,
+    });
+  });
 });
 
 describe('aphrodite/no-important', () => {
