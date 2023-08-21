@@ -3,8 +3,8 @@ declare module 'copy-dir' {
     /**
      * keep addTime or modifyTime if true
      */
-    utimes:
-      | false
+    utimes?:
+      | boolean
       | {|
         atime: string | number | Date,
         mtime: string | number | Date,
@@ -27,8 +27,8 @@ declare module 'copy-dir' {
 
   declare type Callback = (error: Error) => void
 
-  declare module.exports: {
-    (from: string, to: string, options: Options, callback: Callback) => void,
-    sync: (from: string, to: string, options: Options) => void,
-  };
+  declare module.exports: {|
+    (from: string, to: string, options?: Options, callback?: Callback): void,
+    sync: (from: string, to: string, options?: Options) => void,
+  |};
 }
