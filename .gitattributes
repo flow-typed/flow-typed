@@ -1,0 +1,2 @@
+# So that definition hashes are always consistent across OS
+*.js text eol=lf

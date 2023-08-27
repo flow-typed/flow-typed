@@ -10,7 +10,7 @@ declare module 'aphrodite' {
       fontWeight?: string | number;
     |};
 
-  declare type StyleObject = {
+  declare type StyleObject = $ReadOnly<{
     '::-ms-clear'?: StyleObject,
     '::-ms-expand'?: StyleObject,
     '::-webkit-scrollbar'?: StyleObject,
@@ -765,7 +765,7 @@ declare module 'aphrodite' {
     zoom?: CSSWideKeyword | string | number,
     [key: string]: any,
     ...
-  };
+  }>;
 
   declare type SelectorCallback = (selector: string) => Array<string>;
 
