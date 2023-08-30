@@ -67,8 +67,8 @@ type OptionalQuery = {|
 |};
 
 const query: Query = { parameter: 'foo' };
-const shapedQuery1: $Shape<Query> = { parameter: 'foo' };
-const shapedQuery2: $Shape<Query> = {};
+const shapedQuery1: Partial<Query> = { parameter: 'foo' };
+const shapedQuery2: Partial<Query> = {};
 const optionalQuery1: OptionalQuery = { parameter: 'foo' };
 const optionalQuery2: OptionalQuery = { parameter: 'foo', other: 'bar' };
 const readOnlyQuery: ReadOnlyQuery = { parameter: 'foo' };
@@ -82,6 +82,8 @@ stringify(readOnlyQuery);
 parseUrl('test');
 
 parseUrl('test', { arrayFormat: 'bracket' });
+
+parseUrl('test', { parseFragmentIdentifier: false });
 
 // $FlowExpectedError[prop-missing]: strict is not a parse option
 parseUrl('test', { strict: true });
