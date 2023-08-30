@@ -83,6 +83,8 @@ parseUrl('test');
 
 parseUrl('test', { arrayFormat: 'bracket' });
 
+parseUrl('test', { parseFragmentIdentifier: false });
+
 // $FlowExpectedError[prop-missing]: strict is not a parse option
 parseUrl('test', { strict: true });
 
