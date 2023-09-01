@@ -2,6 +2,7 @@
 import React from 'react';
 import {
   createBrowserRouter,
+  createHashRouter,
   createMemoryRouter,
   createRoutesFromChildren,
   RouterProvider,
@@ -652,6 +653,47 @@ describe('react-router-dom', () => {
         },
       });
       createBrowserRouter([], {
+        hydrationData: {
+          // $FlowExpectedError[incompatible-call]
+          loaderData: null,
+        },
+      });
+    });
+
+    it('catches createHashRouter error usages', () => {
+      // $FlowExpectedError[incompatible-call]
+      createHashRouter();
+      // $FlowExpectedError[incompatible-cast]
+      (createHashRouter([]): string);
+      // $FlowExpectedError[incompatible-call]
+      createHashRouter('test');
+
+      createHashRouter([], {});
+      createHashRouter([], {
+        basename: 'test',
+        future: {
+          v7_normalizeFormMethod: true,
+        },
+        hydrationData: {
+          loaderData: { a: 1 },
+          actionData: { a: 1 },
+          errors: null,
+        },
+        window: {},
+      });
+
+      createHashRouter([], {
+        // $FlowExpectedError[incompatible-call]
+        basename: 1,
+      });
+      // $FlowExpectedError[prop-missing]
+      createHashRouter([], {
+        // $FlowExpectedError[prop-missing]
+        future: {
+          a: 1,
+        },
+      });
+      createHashRouter([], {
         hydrationData: {
           // $FlowExpectedError[incompatible-call]
           loaderData: null,
