@@ -68,7 +68,7 @@ declare module 'react-responsive' {
   declare export var useMediaQuery: (
     settings: MediaQuerySettings,
     device?: MediaQueryMatchers,
-    onChange?: ((_: boolean) => void),
+    onChange?: ((matches: boolean) => void),
   ) => boolean;
 
   declare export var toQuery: (obj: MediaQueryAllQueryable) => string;
@@ -84,8 +84,8 @@ declare module 'react-responsive' {
     className?: string,
     device?: MediaQueryMatchers,
     values?: MediaQueryMatchers,
-    onBeforeChange?: (_matches: boolean) => void,
-    onChange?: (_matches: boolean) => void,
+    onBeforeChange?: (matches: boolean) => void,
+    onChange?: (matches: boolean) => void,
   |}>;
 
   declare export default MediaQuery;
