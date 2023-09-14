@@ -1,7 +1,7 @@
 // @flow
 
 import { describe, it, test } from 'flow-typed-test';
-import yargs from 'yargs';
+import yargs, { type YargsType, type Argv } from 'yargs';
 const { hideBin } = require('yargs/helpers');
 
 describe('command()', () => {
@@ -57,6 +57,23 @@ describe('command()', () => {
     ]);
     // $FlowExpectedError[incompatible-call]
     yargs.example([1]);
+  });
+
+  it('middleware', () => {
+    yargs.middleware(() => {});
+    yargs.middleware(async () => {});
+    yargs.middleware(() => { return { runAll: true } });
+    yargs.middleware(async () => { return { runAll: true }});
+
+    yargs.middleware((args, innerYargs) => {
+      (args: Argv);
+      (innerYargs: YargsType | void);
+    });
+
+    // $FlowExpectedError[incompatible-call]
+    yargs.middleware();
+    // $FlowExpectedError[incompatible-call]
+    yargs.middleware(() => 1);
   });
 });
 

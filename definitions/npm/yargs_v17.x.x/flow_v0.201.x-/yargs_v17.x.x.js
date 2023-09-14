@@ -64,8 +64,12 @@ declare module "yargs" {
     | ModuleObjectDescribe
     | ModuleObjectDescription;
 
-  declare type MiddleWareCallback =
-    | (argv: Argv, yargsInstance?: Yargs) => void
+  declare type MiddleWareCallback = (argv: Argv, yargsInstance?: Yargs) => (
+    void
+    | Promise<void>
+    | { ... }
+    | Promise<{ ... }>
+  )
     | (argv: Argv, yargsInstance?: Yargs) => Promise<void>;
 
   declare type Middleware = MiddleWareCallback | Array<MiddleWareCallback>;
@@ -334,6 +338,8 @@ declare module "yargs" {
 
     wrap(columns: number | null): this;
   }
+
+  declare type YargsType = Yargs;
 
   declare module.exports: Yargs;
 }
