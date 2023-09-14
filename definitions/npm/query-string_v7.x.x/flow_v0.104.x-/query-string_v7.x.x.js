@@ -8,6 +8,11 @@ declare module 'query-string' {
     parseBooleans?: boolean,
   |}
 
+  declare type ParseUrlOptions = {|
+    ...ParseOptions,
+    parseFragmentIdentifier?: boolean,
+  |}
+
   declare type StringifyOptions = {|
     arrayFormat?: ArrayFormat,
     encode?: boolean,
@@ -27,9 +32,10 @@ declare module 'query-string' {
   declare module.exports: {
     extract(str: string): string,
     parse(str: string, opts?: ParseOptions): QueryParameters,
-    parseUrl(str: string, opts?: ParseOptions): {
+    parseUrl(str: string, opts?: ParseUrlOptions): {
       url: string,
       query: QueryParameters,
+      fragmentIdentifier?: string,
       ...
     },
     stringify(obj: ObjectParameters, opts?: StringifyOptions): string,

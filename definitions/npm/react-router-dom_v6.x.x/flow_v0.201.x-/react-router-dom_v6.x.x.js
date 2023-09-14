@@ -705,6 +705,8 @@ declare module 'react-router-dom' {
     opts?: DOMRouterOpts
   ): RemixRouter;
 
+  declare export var createHashRouter: typeof createBrowserRouter;
+
   declare type URLSearchParamsInit =
     | string
     | Array<[string, string]>
