@@ -37,6 +37,26 @@ describe('command()', () => {
 
   it('example', () => {
     yargs.example('fetch', 'fetch [...files]');
+    yargs.example('fetch');
+
+    yargs.example([
+      ['fetch', 'fetch [...files]'],
+      ['fetch', 'fetch [...files]'],
+      ['fetch', undefined],
+    ]);
+
+    // $FlowExpectedError[incompatible-call]
+    yargs.example();
+    // $FlowExpectedError[incompatible-call]
+    yargs.example(1);
+    // $FlowExpectedError[incompatible-call]
+    yargs.example('fetch', 1);
+    // $FlowExpectedError[incompatible-call]
+    yargs.example([
+      [],
+    ]);
+    // $FlowExpectedError[incompatible-call]
+    yargs.example([1]);
   });
 });
 

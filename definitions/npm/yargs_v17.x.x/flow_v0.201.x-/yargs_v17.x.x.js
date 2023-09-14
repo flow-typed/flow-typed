@@ -186,6 +186,7 @@ declare module "yargs" {
     epilogue(text: string): this;
 
     example(cmd: string, desc?: string): this;
+    example(examples: Array<[string, string | void]>): this;
 
     exitProcess(enable: boolean): this;
 
