@@ -14,7 +14,7 @@ Since version `>=3.8.0`, flow-typed supports a config file to help you set vario
 
 ```json
 {
-  env: ["jsx", "node"],
+  "env": ["jsx", "node"],
 }
 ```
 
@@ -26,7 +26,7 @@ When you have a dependencies you don't want updated or swapped out during the `i
 
 ```json
 {
-  ignore: ["@babel", "@custom/", "eslint", "eslint-plugin-ft-flow"]
+  "ignore": ["@babel", "@custom/", "eslint", "eslint-plugin-ft-flow"]
 }
 ```
 
@@ -36,6 +36,6 @@ Flow-typed works out of the box with yarn or npm workspaces to install sub proje
 
 ```json
 {
-  workspaces: ["web", "packages/*"]
+  "workspaces": ["web", "packages/*"]
 }
 ```
