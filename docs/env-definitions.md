@@ -10,7 +10,7 @@ If you're on version `>=3.8.0` you can make use of the `env` property in [flow-t
 
 ```json
 {
-  env: ["jsx", "node", ...],
+  "env": ["jsx", "node", ...],
 }
 ```
 
