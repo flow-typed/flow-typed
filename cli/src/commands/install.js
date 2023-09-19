@@ -552,7 +552,9 @@ async function installNpmLibDefs({
         );
         const pkgJsonDeps = getPackageJsonDependencies(
           pkgJsonData,
-          ignoreDeps,
+          // Only get their production dependencies
+          // as the rest aren't installed anyways
+          ['dev', 'peer', ...ignoreDeps],
           ignoreDefs,
         );
         for (const pkgName in pkgJsonDeps) {

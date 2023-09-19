@@ -142,6 +142,8 @@ export function getPackageJsonDependencies(
   pkgJson: PkgJson,
   /**
    * dependency groups to ignore
+   *
+   * eg: dev, optional, bundled, peer, etc
    */
   ignoreDeps: Array<string>,
   /**
@@ -150,7 +152,7 @@ export function getPackageJsonDependencies(
   ignoreDefs: Array<string>,
 ): {[depName: string]: string} {
   const depFields = PKG_JSON_DEP_FIELDS.filter(field => {
-    return ignoreDeps.indexOf(field.slice(0, -12)) === -1;
+    return ignoreDeps.indexOf(field.slice(0, -'Dependencies'.length)) === -1;
   });
 
   return depFields.reduce((deps, section) => {

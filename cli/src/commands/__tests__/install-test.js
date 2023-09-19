@@ -1098,6 +1098,12 @@ describe('install (command)', () => {
             dependencies: {
               foo: '^1.2.3',
             },
+            peerDependencies: {
+              'a-override': '^1.0.0',
+            },
+            devDependencies: {
+              'a-override': '^1.0.0',
+            },
           },
         );
         await touchFile(
@@ -1125,6 +1131,17 @@ describe('install (command)', () => {
             ),
           ),
         ).toEqual(true);
+        expect(
+          await fs.exists(
+            path.join(
+              FLOWPROJ_DIR,
+              'src',
+              'flow-typed',
+              'npm',
+              'a-override_v1.x.x.js',
+            ),
+          ),
+        ).toEqual(false);
       });
     });
 
