@@ -1,0 +1,5 @@
+{
+  "deps": {
+    "@apollo/client": ["v3.x.x"]
+  }
+}

@@ -2190,7 +2190,7 @@ declare module "@apollo/client" {
 
   // @apollo/client/link/http/createHttpLink.d.ts
 
-  declare export var createHttpLink: (linkOptions?: HttpOptions) => ApolloClient$ApolloLink;
+  declare export var createHttpLink: (linkOptions?: HttpOptions) => ApolloLink;
 
   // @apollo/client/link/http/createSignalIfSupported.d.ts
 
@@ -2353,6 +2353,7 @@ declare module "@apollo/client" {
   // @apollo/client/link/utils/throwServerError.d.ts
 
   declare type ServerError = Error & {
+    ...Error,
     response: Response,
     result: { [key: string]: any, ... },
     statusCode: number,
