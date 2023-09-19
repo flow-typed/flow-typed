@@ -1,9 +1,10 @@
 // @flow
 
 import { describe, it } from 'flow-typed-test';
-import { ApolloCache, ApolloClient, ApolloLink, ApolloProvider, useSubscription } from '@apollo/client';
+import { ApolloCache, ApolloClient, ApolloLink, ApolloProvider, createHttpLink, useSubscription } from '@apollo/client';
 import type { FetchResult, OnSubscriptionDataOptions } from '@apollo/client';
 import { MockedProvider } from "@apollo/client/testing";
+import { onError } from "@apollo/client/link/error";
 import * as React from 'react';
 import { RetryLink } from '@apollo/client/link/retry';
 
@@ -127,4 +128,13 @@ describe('MockedProvider', () => {
     ];
     <MockedProvider mocks={mocks}><div /></MockedProvider>;
   });
+});
+
+describe("links", () => {
+  it("creates httpLink", () => {
+    const httpLink: ApolloLink = createHttpLink({ uri: "http://example.com" });
+  });
+  it("creates onError link", () => {
+    onError(({ operation, networkError, response }) => {});
+  })
 });
