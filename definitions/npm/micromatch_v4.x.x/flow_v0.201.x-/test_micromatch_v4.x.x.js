@@ -381,11 +381,17 @@ describe('micromatch', () => {
   });
 
   test('matchKeys', () => {
-    (micromatch.matchKeys('any', 'test'): any);
-    (micromatch.matchKeys({ a: 'a', b: 'b' }, 'test'): $Shape<{| a: string, b: string |}>);
-    micromatch.matchKeys('any', ['test']);
-    micromatch.matchKeys('any', 'test', { basename: true });
-    micromatch.matchKeys<{| a: string, b: number |}>({ a: '', b: 2 }, 'test').b.toFixed(2);;
+    (micromatch.matchKeys({ a: 'a', b: 'b' }, 'test'): any);
+    (micromatch.matchKeys({ a: 'a', b: 'b' }, 'test'): Partial<{| a: string, b: string |}>);
+    micromatch.matchKeys({ a: 'a', b: 'b' }, ['test']);
+    micromatch.matchKeys({ a: 'a', b: 'b' }, 'test', { basename: true });
+
+    const { b } = micromatch.matchKeys<{| a: string, b: number |}>({ a: '', b: 2 }, 'test')
+    // $FlowExpectedError[incompatible-use] it's partial now
+    b.toFixed(2);
+    if (b) {
+      b.toFixed(2);;
+    }
 
     // $FlowExpectedError[incompatible-call]
     micromatch.matchKeys<{| a: string, b: number |}>({ a: 'a', b: 'b' }, ['f*', 'b*']);
