@@ -8,6 +8,7 @@
   "scripts": {
     "test": "eslint **/**/test_* --quiet"
   },
+  "packageManager": "yarn@1.22.19",
   "devDependencies": {
     "babel-eslint": "^10.0.2",
     "eslint": "^6.1.0",
