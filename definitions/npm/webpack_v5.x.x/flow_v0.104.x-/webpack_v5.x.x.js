@@ -10,6 +10,29 @@ declare module 'webpack' {
 
   declare type WebpackError = $WebpackError;
 
+  declare type WebpackLogger = {|
+    getChildLogger: (arg0: string | (() => string)) => WebpackLogger,
+    error(...args: any[]): void,
+    warn(...args: any[]): void,
+    info(...args: any[]): void,
+    log(...args: any[]): void,
+    debug(...args: any[]): void,
+    assert(assertion: any, ...args: any[]): void,
+    trace(): void,
+    clear(): void,
+    status(...args: any[]): void,
+    group(...args: any[]): void,
+    groupCollapsed(...args: any[]): void,
+    groupEnd(...args: any[]): void,
+    profile(label?: any): void,
+    profileEnd(label?: any): void,
+    time(label?: any): void,
+    timeLog(label?: any): void,
+    timeEnd(label?: any): void,
+    timeAggregate(label?: any): void,
+    timeAggregateEnd(label?: any): void,
+  |};
+
   declare interface Stats {
     hasErrors(): boolean;
     hasWarnings(): boolean;
@@ -676,6 +699,93 @@ declare module 'webpack' {
       $NonMaybeType<$PropertyType<ResolveOptions, 'plugins'>>,
       number
     >;
+  }
+
+  /**
+   * Options object for the ProgressPlugin.
+   */
+  declare type ProgressPluginOptions = {|
+    /**
+     * Show active modules count and one active module in progress message.
+     */
+    activeModules?: boolean,
+
+    /**
+     * Show dependencies count in progress message.
+     */
+    dependencies?: boolean,
+
+    /**
+     * Minimum dependencies count to start with. For better progress calculation. Default: 10000.
+     */
+    dependenciesCount?: number,
+
+    /**
+     * Show entries count in progress message.
+     */
+    entries?: boolean,
+
+    /**
+     * Function that executes for every progress step.
+     */
+    handler?: (percentage: number, msg: string, ...args: string[]) => void,
+
+    /**
+     * Show modules count in progress message.
+     */
+    modules?: boolean,
+
+    /**
+     * Minimum modules count to start with. For better progress calculation. Default: 5000.
+     */
+    modulesCount?: number,
+
+    /**
+     * Collect percent algorithm. By default it calculates by a median from modules, entries and dependencies percent.
+     */
+    percentBy?: null | "entries" | "modules" | "dependencies",
+
+    /**
+     * Collect profile data for progress steps. Default: false.
+     */
+    profile?: null | boolean,
+  |};
+
+  declare type ProgressPluginArgument =
+    | ProgressPluginOptions
+    | ((percentage: number, msg: string, ...args: string[]) => void);
+
+  declare class ProgressPlugin {
+    constructor(options?: ProgressPluginArgument): $ElementType<
+      $NonMaybeType<$PropertyType<ResolveOptions, 'plugins'>>,
+      number
+    >;
+    profile?: null | boolean;
+    handler?: (percentage: number, msg: string, ...args: string[]) => void;
+    modulesCount?: number;
+    dependenciesCount?: number;
+    showEntries?: boolean;
+    showModules?: boolean;
+    showDependencies?: boolean;
+    showActiveModules?: boolean;
+    percentBy?: null | "entries" | "modules" | "dependencies";
+    apply(compiler: WebpackCompiler | WebpackMultiCompiler): void;
+    static getReporter(
+      compiler: WebpackCompiler
+    ): void | ((p: number, ...args: string[]) => void);
+    static defaultOptions: {|
+      profile: boolean;
+      modulesCount: number;
+      dependenciesCount: number;
+      modules: boolean;
+      dependencies: boolean;
+      activeModules: boolean;
+      entries: boolean;
+    |};
+    static createDefaultHandler: (
+      profile: void | null | boolean,
+      logger: WebpackLogger
+    ) => (percentage: number, msg: string, ...args: string[]) => void;
   }
 
   declare function builder(
