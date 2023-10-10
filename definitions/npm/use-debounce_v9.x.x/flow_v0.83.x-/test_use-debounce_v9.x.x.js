@@ -5,7 +5,7 @@ import { useDebounce, useDebouncedCallback, useThrottledCallback } from 'use-deb
 
 describe('use-debounce', () => {
   test('useDebounce', () => {
-    const [value] = useDebounce('test', 1000, {
+    const [value, debouncedState] = useDebounce('test', 1000, {
       maxWait: 1,
       leading: true,
       trailing: true,
@@ -14,6 +14,9 @@ describe('use-debounce', () => {
       },
     });
     (value: string);
+
+    // $FlowExpectedError[incompatible-cast] infers as a string
+    (value: number);
   });
 
   test('useDebouncedCallback', () => {
@@ -27,6 +30,13 @@ describe('use-debounce', () => {
       // delay in ms
       1000
     );
+
+    debounced.cancel();
+    debounced.flush();
+    debounced.isPending();
+
+    // $FlowExpectedError[prop-missing]
+    debounced.foo();
   });
 
   test('useThrottledCallback', () => {
@@ -40,5 +50,12 @@ describe('use-debounce', () => {
       // delay in ms
       1000
     );
-  })
+
+    debounced.cancel();
+    debounced.flush();
+    debounced.isPending();
+
+    // $FlowExpectedError[prop-missing]
+    debounced.foo();
+  });
 });
