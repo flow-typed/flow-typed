@@ -701,6 +701,8 @@ declare module 'webpack' {
     >;
   }
 
+  declare type ProgressHandler = (percentage: number, msg: string, ...args: string[]) => void;
+
   /**
    * Options object for the ProgressPlugin.
    */
@@ -728,7 +730,7 @@ declare module 'webpack' {
     /**
      * Function that executes for every progress step.
      */
-    handler?: (percentage: number, msg: string, ...args: string[]) => void,
+    handler?: ProgressHandler,
 
     /**
      * Show modules count in progress message.
@@ -753,7 +755,7 @@ declare module 'webpack' {
 
   declare type ProgressPluginArgument =
     | ProgressPluginOptions
-    | ((percentage: number, msg: string, ...args: string[]) => void);
+    | ProgressHandler;
 
   declare class ProgressPlugin {
     constructor(options?: ProgressPluginArgument): $ElementType<
@@ -804,6 +806,7 @@ declare module 'webpack' {
     SourceMapDevToolPlugin: typeof SourceMapDevToolPlugin,
     HotModuleReplacementPlugin: typeof HotModuleReplacementPlugin,
     ContextReplacementPlugin: typeof ContextReplacementPlugin,
+    ProgressPlugin: typeof ProgressPlugin,
     ...
   };
 }

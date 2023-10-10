@@ -110,6 +110,57 @@ describe('webpack', () => {
   });
 
   test('ProgressPlugin', () => {
+    webpack({
+      plugins: [
+        new webpack.ProgressPlugin({
+          activeModules: false,
+          dependencies: false,
+          dependenciesCount: 1,
+          entries: false,
+          handler: (percentage, msg) => {
+            percentage.toFixed(2);
+            msg.toLowerCase();
 
+            // $FlowExpectedError[prop-missing]
+            msg.toFixed(2);
+            // $FlowExpectedError[prop-missing]
+            percentage.toLowerCase();
+          },
+          modules: false,
+          modulesCount: 1,
+          percentBy: 'entries',
+          profile: true,
+        }),
+      ]
+    });
+
+    webpack({
+      plugins: [
+        new webpack.ProgressPlugin((percentage, msg) => {
+          percentage.toFixed(2);
+          msg.toLowerCase();
+
+          // $FlowExpectedError[prop-missing]
+          msg.toFixed(2);
+          // $FlowExpectedError[prop-missing]
+          percentage.toLowerCase();
+        }),
+      ]
+    });
+
+    webpack({
+      plugins: [
+        // $FlowExpectedError[incompatible-call]
+        new webpack.ProgressPlugin({
+          foo: 'bar',
+        }),
+      ]
+    });
+    webpack({
+      plugins: [
+        // $FlowExpectedError[incompatible-call]
+        new webpack.ProgressPlugin('test'),
+      ]
+    });
   });
 });
