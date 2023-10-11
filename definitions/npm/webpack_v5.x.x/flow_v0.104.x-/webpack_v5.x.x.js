@@ -12,18 +12,18 @@ declare module 'webpack' {
 
   declare type WebpackLogger = {|
     getChildLogger: (arg0: string | (() => string)) => WebpackLogger,
-    error(...args: any[]): void,
-    warn(...args: any[]): void,
-    info(...args: any[]): void,
-    log(...args: any[]): void,
-    debug(...args: any[]): void,
-    assert(assertion: any, ...args: any[]): void,
+    error(...args: $ReadOnlyArray<any>): void,
+    warn(...args: $ReadOnlyArray<any>): void,
+    info(...args: $ReadOnlyArray<any>): void,
+    log(...args: $ReadOnlyArray<any>): void,
+    debug(...args: $ReadOnlyArray<any>): void,
+    assert(assertion: any, ...args: $ReadOnlyArray<any>): void,
     trace(): void,
     clear(): void,
-    status(...args: any[]): void,
-    group(...args: any[]): void,
-    groupCollapsed(...args: any[]): void,
-    groupEnd(...args: any[]): void,
+    status(...args: $ReadOnlyArray<any>): void,
+    group(...args: $ReadOnlyArray<any>): void,
+    groupCollapsed(...args: $ReadOnlyArray<any>): void,
+    groupEnd(...args: $ReadOnlyArray<any>): void,
     profile(label?: any): void,
     profileEnd(label?: any): void,
     time(label?: any): void,
@@ -701,7 +701,7 @@ declare module 'webpack' {
     >;
   }
 
-  declare type ProgressHandler = (percentage: number, msg: string, ...args: string[]) => void;
+  declare type ProgressHandler = (percentage: number, msg: string, ...args: $ReadOnlyArray<string>) => void;
 
   /**
    * Options object for the ProgressPlugin.
@@ -763,7 +763,7 @@ declare module 'webpack' {
       number
     >;
     profile?: null | boolean;
-    handler?: (percentage: number, msg: string, ...args: string[]) => void;
+    handler?: (percentage: number, msg: string, ...args: $ReadOnlyArray<string>) => void;
     modulesCount?: number;
     dependenciesCount?: number;
     showEntries?: boolean;
@@ -774,7 +774,7 @@ declare module 'webpack' {
     apply(compiler: WebpackCompiler | WebpackMultiCompiler): void;
     static getReporter(
       compiler: WebpackCompiler
-    ): void | ((p: number, ...args: string[]) => void);
+    ): void | ((p: number, ...args: $ReadOnlyArray<string>) => void);
     static defaultOptions: {|
       profile: boolean;
       modulesCount: number;
@@ -787,7 +787,7 @@ declare module 'webpack' {
     static createDefaultHandler: (
       profile: void | null | boolean,
       logger: WebpackLogger
-    ) => (percentage: number, msg: string, ...args: string[]) => void;
+    ) => (percentage: number, msg: string, ...args: $ReadOnlyArray<string>) => void;
   }
 
   declare function builder(
