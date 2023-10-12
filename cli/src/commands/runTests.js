@@ -612,6 +612,7 @@ function getDepTestGroups(testGroup) {
     Array<{
       main: string,
       deps: Array<string>,
+      npmDeps: {[key: string]: string},
     }>,
   > => {
     return Object.keys(deps).map(depName => {
@@ -633,10 +634,13 @@ function getDepTestGroups(testGroup) {
 
         // For the current dependency check if it has nested dependencies
         let defDeps;
+        let npmDeps = {};
         try {
-          defDeps = JSON.parse(
+          const definitionsConfig = JSON.parse(
             fs.readFileSync(`${flowDirPath}/config.json`, 'utf-8'),
-          ).deps;
+          );
+          defDeps = definitionsConfig.deps;
+          npmDeps = definitionsConfig.npmDeps ?? {};
         } catch (e) {}
 
         return {
@@ -656,6 +660,7 @@ function getDepTestGroups(testGroup) {
                 }, [])
               : []),
           ],
+          npmDeps: npmDeps,
         };
       });
     });
@@ -767,6 +772,7 @@ async function runTestGroup(
           lowestFlowVersionRanInThisGroup,
           depPaths,
         );
+        console.log(testGroup);
         const flowErrorsForThisGroup = await runFlowTypeDefTests(
           [...sublistOfFlowVersions],
           testGroup.id,
