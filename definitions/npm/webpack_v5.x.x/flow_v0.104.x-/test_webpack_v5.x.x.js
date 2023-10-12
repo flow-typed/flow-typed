@@ -1,3 +1,4 @@
+import { describe, test } from 'flow-typed-test';
 import webpack from 'webpack';
 
 import type { WebpackError, Stats, WebpackOptions } from 'webpack';
@@ -72,35 +73,94 @@ const options: WebpackOptions = {
   ],
 };
 
-webpack(options, function(err: WebpackError, stats: Stats) {
-  if (err) {
-    console.error(err.stack || err);
-    if (err.details) {
-      console.error(err.details);
-    }
-    return;
-  }
+describe('webpack', () => {
+  test('basic', () => {
+    webpack(options, function(err: WebpackError, stats: Stats) {
+      if (err) {
+        console.error(err.stack || err);
+        if (err.details) {
+          console.error(err.details);
+        }
+        return;
+      }
 
-  const info = stats.toJson();
+      const info = stats.toJson();
 
-  if (stats.hasErrors()) {
-    console.error(info.errors);
-  }
+      if (stats.hasErrors()) {
+        console.error(info.errors);
+      }
 
-  if (stats.hasWarnings()) {
-    console.warn(info.warnings);
-  }
+      if (stats.hasWarnings()) {
+        console.warn(info.warnings);
+      }
+    });
+
+    const compiler1 = webpack(options);
+    compiler1.run(function(err: WebpackError, stats: Stats) {});
+
+    const compiler2 = webpack(options);
+    const watching2 = compiler2.watch({}, function(err: WebpackError, stats: Stats) {});
+    watching2.invalidate();
+    watching2.close();
+
+    const compiler3 = webpack([options, options]);
+    const watching3 = compiler3.watch({}, function(err: WebpackError, stats: Stats) {});
+    watching3.invalidate();
+    watching3.close();
+  });
+
+  test('ProgressPlugin', () => {
+    webpack({
+      plugins: [
+        new webpack.ProgressPlugin({
+          activeModules: false,
+          dependencies: false,
+          dependenciesCount: 1,
+          entries: false,
+          handler: (percentage, msg) => {
+            percentage.toFixed(2);
+            msg.toLowerCase();
+
+            // $FlowExpectedError[prop-missing]
+            msg.toFixed(2);
+            // $FlowExpectedError[prop-missing]
+            percentage.toLowerCase();
+          },
+          modules: false,
+          modulesCount: 1,
+          percentBy: 'entries',
+          profile: true,
+        }),
+      ]
+    });
+
+    webpack({
+      plugins: [
+        new webpack.ProgressPlugin((percentage, msg) => {
+          percentage.toFixed(2);
+          msg.toLowerCase();
+
+          // $FlowExpectedError[prop-missing]
+          msg.toFixed(2);
+          // $FlowExpectedError[prop-missing]
+          percentage.toLowerCase();
+        }),
+      ]
+    });
+
+    webpack({
+      plugins: [
+        // $FlowExpectedError[incompatible-call]
+        new webpack.ProgressPlugin({
+          foo: 'bar',
+        }),
+      ]
+    });
+    webpack({
+      plugins: [
+        // $FlowExpectedError[incompatible-call]
+        new webpack.ProgressPlugin('test'),
+      ]
+    });
+  });
 });
-
-const compiler1 = webpack(options);
-compiler1.run(function(err: WebpackError, stats: Stats) {});
-
-const compiler2 = webpack(options);
-const watching2 = compiler2.watch({}, function(err: WebpackError, stats: Stats) {});
-watching2.invalidate();
-watching2.close();
-
-const compiler3 = webpack([options, options]);
-const watching3 = compiler3.watch({}, function(err: WebpackError, stats: Stats) {});
-watching3.invalidate();
-watching3.close();

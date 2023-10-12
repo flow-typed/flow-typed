@@ -1,6 +1,7 @@
 // @flow
 import { describe, it } from 'flow-typed-test';
 
+import assert from 'assert';
 import events from 'events';
 import fs from 'fs';
 import os from 'os';
@@ -8,6 +9,8 @@ import path from 'path';
 import util from 'util';
 import url from 'url';
 
+import nodeAssert from 'node:assert';
+import nodeAssertStrict from 'node:assert/strict';
 import nodeEvents from 'node:events';
 import fsPromises from 'fs/promises';
 import importProcess from 'process';
@@ -20,6 +23,18 @@ import nodeUtil from 'node:util';
 import nodeUrl from 'node:url';
 
 describe('node', () => {
+  describe('node:assert', () => {
+    it('should retrieve the corresponding Flow core types', () => {
+      (nodeAssert.equal: typeof assert.equal);
+    });
+  });
+
+  describe('node:assert/strict', () => {
+    it('should retrieve the corresponding Flow core types', () => {
+      (nodeAssertStrict.equal: typeof assert.strict.equal);
+    });
+  });
+
   describe('node:events', () => {
     it('should retrieve the corresponding Flow core types', () => {
       (nodeEvents.EventEmitter: typeof events.EventEmitter);
