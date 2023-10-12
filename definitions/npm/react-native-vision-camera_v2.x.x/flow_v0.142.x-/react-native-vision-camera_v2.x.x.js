@@ -570,6 +570,8 @@ declare module "react-native-vision-camera" {
     suggestedFrameProcessorFps: number;
   }
   declare type CameraProps = {
+    ...ViewProps,
+
     /**
      * The Camera Device to use.
      *
@@ -770,7 +772,7 @@ declare module "react-native-vision-camera" {
      */
     frameProcessorFps?: number | "auto",
     ...
-  } & ViewProps;
+  };
 
   /**
    * Represents a temporary file in the local filesystem.
