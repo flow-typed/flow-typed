@@ -76,6 +76,15 @@ type TestGroup = {
   deps: {
     [key: string]: Array<string>,
   },
+  /**
+   * Object of dependency version pairs for dependencies to install
+   * and load for testing so that definitions can be tested against
+   * typed libraries they depend as they would when installed
+   * in a real project
+   */
+  npmDeps: {
+    [key: string]: string,
+  },
 };
 
 /**
@@ -129,10 +138,12 @@ async function getTestGroups(
         if (def.configPath) {
           const deps = JSON.parse(fs.readFileSync(def.configPath, 'utf-8'))
             .deps;
-          const isDependantOfChanged = Object.keys(deps).some(
-            dep => dep === d.name && deps[dep].some(s => s === d.version),
-          );
-          if (isDependantOfChanged) return true;
+          if (deps) {
+            const isDependantOfChanged = Object.keys(deps).some(
+              dep => dep === d.name && deps[dep].some(s => s === d.version),
+            );
+            if (isDependantOfChanged) return true;
+          }
         }
         return d.name === def.pkgName && d.version === def.pkgVersionStr;
       });
@@ -141,8 +152,8 @@ async function getTestGroups(
   return libDefs.map(libDef => {
     const groupID = `${libDef.pkgName}_${libDef.pkgVersionStr}/${libDef.flowVersionStr}`;
 
-    const deps = libDef.configPath
-      ? JSON.parse(fs.readFileSync(libDef.configPath, 'utf-8')).deps
+    const definitionConfig = libDef.configPath
+      ? JSON.parse(fs.readFileSync(libDef.configPath, 'utf-8'))
       : {};
 
     return {
@@ -150,7 +161,8 @@ async function getTestGroups(
       testFilePaths: libDef.testFilePaths,
       libDefPath: libDef.path,
       flowVersion: libDef.flowVersion,
-      deps,
+      deps: definitionConfig.deps ?? {},
+      npmDeps: definitionConfig.npmDeps ?? {},
     };
   });
 }
@@ -612,7 +624,6 @@ function getDepTestGroups(testGroup) {
     Array<{
       main: string,
       deps: Array<string>,
-      npmDeps: {[key: string]: string},
     }>,
   > => {
     return Object.keys(deps).map(depName => {
@@ -634,13 +645,10 @@ function getDepTestGroups(testGroup) {
 
         // For the current dependency check if it has nested dependencies
         let defDeps;
-        let npmDeps = {};
         try {
-          const definitionsConfig = JSON.parse(
+          defDeps = JSON.parse(
             fs.readFileSync(`${flowDirPath}/config.json`, 'utf-8'),
-          );
-          defDeps = definitionsConfig.deps;
-          npmDeps = definitionsConfig.npmDeps ?? {};
+          ).deps;
         } catch (e) {}
 
         return {
@@ -660,7 +668,6 @@ function getDepTestGroups(testGroup) {
                 }, [])
               : []),
           ],
-          npmDeps: npmDeps,
         };
       });
     });
