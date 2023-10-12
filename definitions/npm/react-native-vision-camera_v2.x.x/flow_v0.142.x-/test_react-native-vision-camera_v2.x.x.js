@@ -2,7 +2,13 @@
 
 import { describe, it } from 'flow-typed-test';
 import * as React from 'react';
-import { Camera, useCameraDevices, useFrameProcessor } from "react-native-vision-camera";
+import {
+  Camera,
+  CameraCaptureError,
+  CameraRuntimeError,
+  useCameraDevices,
+  useFrameProcessor,
+} from 'react-native-vision-camera';
 
 describe("Camera", () => {
   it("instantiates with frame processor", () => {
@@ -40,3 +46,15 @@ describe("Camera", () => {
     />
   });
 });
+
+describe("CameraCaptureError", () => {
+  it("is an Error", () => {
+    const error: Error = new CameraCaptureError("capture/invalid-photo-format", "goodbye world");
+  });
+});
+
+describe("CameraRuntimeError", () => {
+  it("is an Error", () => {
+    const error: Error = new CameraRuntimeError("permission/microphone-permission-denied", "hello world");
+  })
+})

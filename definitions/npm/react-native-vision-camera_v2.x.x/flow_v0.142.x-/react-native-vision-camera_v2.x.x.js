@@ -432,7 +432,7 @@ declare module "react-native-vision-camera" {
     | CaptureError
     | SystemError
     | UnknownError;
-  declare class CameraError<TCode: CameraErrorCode> mixins Error {
+  declare class CameraError<TCode: CameraErrorCode> extends Error {
     code: TCode;
     message: string;
     cause: Error | void;
@@ -445,19 +445,19 @@ declare module "react-native-vision-camera" {
   }
 
   /**
-   * Represents any kind of error that occured while trying to capture a video or photo.
+   * Represents any kind of error that occurred while trying to capture a video or photo.
    *
    * See the ["Camera Errors" documentation](https://react-native-vision-camera.com/docs/guides/errors) for more information about Camera Errors.
    */
-  declare class CameraCaptureError mixins CameraError<CaptureError> {}
+  declare class CameraCaptureError extends CameraError<CaptureError> {}
 
   /**
-   * Represents any kind of error that occured in the Camera View Module.
+   * Represents any kind of error that occurred in the Camera View Module.
    *
    * See the ["Camera Errors" documentation](https://react-native-vision-camera.com/docs/guides/errors) for more information about Camera Errors.
    */
   declare class CameraRuntimeError
-    mixins
+    extends
       CameraError<
         | PermissionError
         | ParameterError
@@ -1044,16 +1044,16 @@ declare module "react-native-vision-camera" {
    * ```
    * @component
    */
-  declare class Camera mixins React$Component<CameraProps> {
+  declare class Camera extends React$PureComponent<CameraProps> {
     /**
      * @internal
      */
-    static displayName: string;
+    static displayName?: ?string;
 
     /**
      * @internal
      */
-    displayName: string;
+    displayName?: ?string;
 
     /**
      * @internal
