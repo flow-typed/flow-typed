@@ -1,4 +1,5 @@
 // @flow
+import {execSync} from 'child_process';
 import colors from 'colors';
 
 import {child_process, fs, os, path} from '../lib/node.js';
@@ -6,7 +7,7 @@ import {copyFile, recursiveRmdir} from '../lib/fileUtils.js';
 import {gitHubClient} from '../lib/github.js';
 import {getNpmLibDefDirFromNested} from '../lib/npm/npmLibDefs';
 import {getLibDefs, parseRepoDirItem} from '../lib/libDefs.js';
-import {listItem, sectionHeader} from '../lib/logger';
+import {listItem, sectionHeader, info} from '../lib/logger';
 import isInFlowTypedRepo from '../lib/isInFlowTypedRepo';
 import {
   toSemverString as flowVerToSemverString,
@@ -217,6 +218,12 @@ async function getOrderedFlowBinVersions(
         }
       } catch (e) {
         console.error(e);
+        info(
+          `\nYou've exceeded the API rate limit, try adding GITHUB_TOKEN env variable before calling tests`,
+        );
+        info(
+          'You can generate a token here: https://github.com/settings/tokens',
+        );
         foundAllFlowVersions = true;
       }
     }
@@ -422,6 +429,9 @@ export async function writeFlowConfig(
     // CLI repository!
     '[ignore]',
     path.join(testDirPath, '..', '..', 'node_modules'),
+    path.join(testDirPath, 'node_modules'),
+    // TODO: Now need to include some logic to specifically reinclude node_modules
+    // that we want to test against
     '',
     '[lints]',
     semver.gte(version, '0.104.0') && semver.lt(version, '0.201.0')
@@ -696,6 +706,19 @@ function getDepTestGroups(testGroup) {
   return depGroup;
 }
 
+function installNpmDependencies(testDirPath: string, testGroup: TestGroup) {
+  const {npmDeps} = testGroup;
+  const depKeys = Object.keys(npmDeps);
+  if (depKeys.length === 0) return;
+
+  execSync(`(cd ${testDirPath}; npm init -y)`);
+
+  depKeys.forEach(dep => {
+    execSync(`(cd ${testDirPath}; npm i ${dep}@${npmDeps[dep]})`);
+    info(`${dep} has been installed for testing`);
+  });
+}
+
 /**
  * Given a TestGroup structure determine all versions of Flow that match the
  * FlowVersion specification and, for each, run `flow check` on the test
@@ -779,7 +802,9 @@ async function runTestGroup(
           lowestFlowVersionRanInThisGroup,
           depPaths,
         );
-        console.log(testGroup);
+
+        installNpmDependencies(testDirPath, testGroup);
+
         const flowErrorsForThisGroup = await runFlowTypeDefTests(
           [...sublistOfFlowVersions],
           testGroup.id,

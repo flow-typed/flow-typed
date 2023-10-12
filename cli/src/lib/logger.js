@@ -34,3 +34,7 @@ export const listItem = (...values: Array<string | void>): void => {
 export const sectionHeader = (title: string): void => {
   console.log(colors.green(`===> ${colors.bold(title)} <===`));
 };
+
+export const info = (message: string) => {
+  console.log(colors.green(colors.bold(message)));
+};

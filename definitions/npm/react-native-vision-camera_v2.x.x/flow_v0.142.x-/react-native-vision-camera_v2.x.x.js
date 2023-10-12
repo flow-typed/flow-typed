@@ -1,6 +1,5 @@
 declare module "react-native-vision-camera" {
-  // import type { ViewProps } from "react-native";
-  declare type ViewProps = {...};
+  import type { ViewProps } from "react-native";
 
   /**
    * Represents the camera device position.
