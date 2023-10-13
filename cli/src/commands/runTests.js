@@ -401,6 +401,7 @@ export async function writeFlowConfig(
   libDefPath: string,
   version: string,
   depPaths: Array<string>,
+  npmDeps: Array<string>,
 ) {
   // /!\---------------------------------------------------------------------/!\
   // Whenever you introduce a new difference depending on the version, don't
@@ -430,8 +431,9 @@ export async function writeFlowConfig(
     '[ignore]',
     path.join(testDirPath, '..', '..', 'node_modules'),
     path.join(testDirPath, 'node_modules'),
-    // TODO: Now need to include some logic to specifically reinclude node_modules
-    // that we want to test against
+    ...npmDeps.map(
+      dep => `!${path.join(testDirPath, 'node_modules', dep, '.*')}`,
+    ),
     '',
     '[lints]',
     semver.gte(version, '0.104.0') && semver.lt(version, '0.201.0')
@@ -549,6 +551,7 @@ async function findLowestCapableFlowVersion(
   testDirPath,
   libDefPath,
   depPaths,
+  npmDeps,
 ) {
   let lowerFlowVersionsToRun = orderedFlowVersions.filter(flowVer => {
     return semver.lt(flowVer, lowestFlowVersionRan);
@@ -560,6 +563,7 @@ async function findLowestCapableFlowVersion(
     libDefPath,
     lowestFlowVersionRan,
     depPaths,
+    npmDeps,
   );
   return await testLowestCapableFlowVersion(
     lowerFlowVersionsToRun,
@@ -714,6 +718,7 @@ function installNpmDependencies(testDirPath: string, testGroup: TestGroup) {
   execSync(`(cd ${testDirPath}; npm init -y)`);
 
   depKeys.forEach(dep => {
+    info(`Installing ${dep}...`);
     execSync(`(cd ${testDirPath}; npm i ${dep}@${npmDeps[dep]})`);
     info(`${dep} has been installed for testing`);
   });
@@ -801,6 +806,7 @@ async function runTestGroup(
           testGroup.libDefPath,
           lowestFlowVersionRanInThisGroup,
           depPaths,
+          Object.keys(testGroup.npmDeps),
         );
 
         installNpmDependencies(testDirPath, testGroup);
@@ -821,6 +827,7 @@ async function runTestGroup(
         testDirPath,
         testGroup.libDefPath,
         depPaths,
+        Object.keys(testGroup.npmDeps),
       );
 
       if (lowestCapableFlowVersion !== lowestFlowVersionRan) {
