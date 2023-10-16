@@ -46,4 +46,17 @@ describe('OpenAIApi', () => {
     // $FlowExpectedError[incompatible-call] unsupported method
     openai.models.list({method: "wrong"});
   });
+
+  it('Moderation has valid response categories', async () => {
+    const response = await openai.moderations.create({input: ""});
+    const harassment: boolean = response.results[0].categories["harassment"];
+    const harassmentThreatening: boolean = response.results[0].categories["harassment/threatening"];
+    const harassmentScore: number = response.results[0].category_scores["harassment"];
+    const harassmentThreateningScore: number = response.results[0].category_scores["harassment/threatening"];
+
+    // $FlowExpectedError[incompatible-type]
+    const unknownCategory: boolean = response.results[0].categories["not-a-category"];
+    // $FlowExpectedError[incompatible-type]
+    const unknownCategoryScore: number = response.results[0].category_scores["not-a-category"];
+  })
 });
