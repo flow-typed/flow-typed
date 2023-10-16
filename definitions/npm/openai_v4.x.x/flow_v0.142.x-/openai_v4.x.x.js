@@ -65,37 +65,37 @@ declare module "openai" {
     +status: 429;
   }
   declare class Errors$InternalServerError extends Errors$APIError {}
-  declare export type Agent = any;
-  declare export type RequestInfo = any;
-  declare export type RequestInit = any;
-  declare export type Response = any;
-  declare export type HeadersInit = any;
-  declare export type FilePropertyBag = any;
-  declare export type FileFromPathOptions = any;
-  declare export type File = any;
-  declare export type Readable = any;
-  declare export type FsReadStream = any;
-  declare export function fileFromPath(
+  declare type Agent = any;
+  declare type RequestInfo = any;
+  declare type RequestInit = any;
+  declare type Response = any;
+  declare type HeadersInit = any;
+  declare type FilePropertyBag = any;
+  declare type FileFromPathOptions = any;
+  declare type File = any;
+  declare type Readable = any;
+  declare type FsReadStream = any;
+  declare function fileFromPath(
     path: string,
     options?: FileFromPathOptions
   ): Promise<File>;
-  declare export function fileFromPath(
+  declare function fileFromPath(
     path: string,
     filename?: string,
     options?: FileFromPathOptions
   ): Promise<File>;
-  declare export type BlobLikePart =
+  declare type BlobLikePart =
     | string
     | ArrayBuffer
     | $ArrayBufferView
     | BlobLike
     | Uint8Array
     | DataView;
-  declare export type Uploadable = FileLike | ResponseLike | FsReadStream;
+  declare type Uploadable = FileLike | ResponseLike | FsReadStream;
   /**
    * Intended to match web.Blob, node.Blob, node-fetch.Blob, etc.
    */
-  declare export interface BlobLike {
+  declare interface BlobLike {
     /**
      * [MDN Reference](https://developer.mozilla.org/docs/Web/API/Blob/size)
      */
@@ -119,7 +119,7 @@ declare module "openai" {
   /**
    * Intended to match web.File, node.File, node-fetch.File, etc.
    */
-  declare export type FileLike = {
+  declare type FileLike = {
     /**
      * [MDN Reference](https://developer.mozilla.org/docs/Web/API/File/lastModified)
      */
@@ -135,22 +135,22 @@ declare module "openai" {
   /**
    * Intended to match web.Response, node.Response, node-fetch.Response, etc.
    */
-  declare export interface ResponseLike {
+  declare interface ResponseLike {
     url: string;
     blob(): Promise<BlobLike>;
   }
-  declare export type ToFileInput =
+  declare type ToFileInput =
     | Uploadable
     | Exclude<BlobLikePart, string>
     | AsyncIterable<BlobLikePart>;
-  declare export function toFile(
+  declare function toFile(
     value: ToFileInput | Promise<ToFileInput>,
     name?: string | null | void,
     options?: FilePropertyBag | void
   ): Promise<FileLike>;
-  declare export type Fetch = (url: RequestInfo, init?: RequestInit) => Promise<Response>;
-  declare export type PromiseOrValue<T> = T | Promise<T>;
-  declare export type APIResponseProps = {
+  declare type Fetch = (url: RequestInfo, init?: RequestInit) => Promise<Response>;
+  declare type PromiseOrValue<T> = T | Promise<T>;
+  declare type APIResponseProps = {
     response: Response,
     options: FinalRequestOptions<>,
     controller: AbortController,
@@ -279,7 +279,7 @@ declare module "openai" {
     ): Promise<Response>;
     getRequestClient(): RequestClient;
   }
-  declare export type PageInfo =
+  declare type PageInfo =
     | {
     url: URL,
     ...
@@ -337,14 +337,14 @@ declare module "openai" {
      */
     @@asyncIterator: () => AsyncGenerator<Item, void, mixed>;
   }
-  declare export type HTTPMethod = "get" | "post" | "put" | "patch" | "delete";
-  declare export type RequestClient = {
+  declare type HTTPMethod = "get" | "post" | "put" | "patch" | "delete";
+  declare type RequestClient = {
     fetch: Fetch,
     ...
   };
-  declare export type Headers = { [key: string]: string | null | void, ... };
-  declare export type DefaultQuery = { [key: string]: string | void, ... };
-  declare export type RequestOptions<
+  declare type Headers = { [key: string]: string | null | void, ... };
+  declare type DefaultQuery = { [key: string]: string | void, ... };
+  declare type RequestOptions<
     Req: { ... } = { [key: string]: mixed, ... } | Readable
   > = {
     method?: HTTPMethod,
@@ -360,7 +360,7 @@ declare module "openai" {
     idempotencyKey?: string,
     ...
   };
-  declare export type FinalRequestOptions<
+  declare type FinalRequestOptions<
     Req: { ... } = { [key: string]: mixed, ... } | Readable
   > = {
     ...RequestOptions<Req>,
@@ -370,7 +370,7 @@ declare module "openai" {
     |},
     ...
   };
-  declare export interface PageResponse<Item> {
+  declare interface PageResponse<Item> {
     data: Array<Item>;
     object: string;
   }
@@ -395,10 +395,10 @@ declare module "openai" {
     nextPageParams(): null;
     nextPageInfo(): null;
   }
-  declare export interface CursorPageResponse<Item> {
+  declare interface CursorPageResponse<Item> {
     data: Array<Item>;
   }
-  declare export interface CursorPageParams {
+  declare interface CursorPageParams {
     /**
      * Identifier for the last job from the previous pagination request.
      */
@@ -462,10 +462,10 @@ declare module "openai" {
       options?: RequestOptions<>
     ): APIPromise<Translation>;
   }
-  declare export interface Translation {
+  declare interface Translation {
     text: string;
   }
-  declare export interface TranslationCreateParams {
+  declare interface TranslationCreateParams {
     /**
      * The audio file object (not file name) translate, in one of these formats: flac,
      * mp3, mp4, mpeg, mpga, m4a, ogg, wav, or webm.
@@ -509,10 +509,10 @@ declare module "openai" {
       options?: RequestOptions<>
     ): APIPromise<Transcription>;
   }
-  declare export interface Transcription {
+  declare interface Transcription {
     text: string;
   }
-  declare export interface TranscriptionCreateParams {
+  declare interface TranscriptionCreateParams {
     /**
      * The audio file object (not file name) to transcribe, in one of these formats:
      * flac, mp3, mp4, mpeg, mpga, m4a, ogg, wav, or webm.
@@ -558,7 +558,7 @@ declare module "openai" {
     transcriptions: Transcriptions;
     translations: Translations;
   }
-  declare export class Stream<Item> /* extends AsyncIterable<Item> */ {
+  declare class Stream<Item> /* extends AsyncIterable<Item> */ {
     controller: AbortController;
     constructor(response: Response, controller: AbortController): this;
     @@asyncIterator: () => AsyncIterator<Item>;
@@ -567,7 +567,7 @@ declare module "openai" {
    * Represents a completion response from the  Note: both the streamed and
    * non-streamed response objects share the same shape (unlike the chat endpoint).
    */
-  declare export interface Completion {
+  declare interface Completion {
     /**
      * A unique identifier for the completion.
      */
@@ -612,7 +612,7 @@ declare module "openai" {
   /**
    * Usage statistics for the completion request.
    */
-  declare export interface CompletionUsage {
+  declare interface CompletionUsage {
     /**
      * Number of tokens in the generated completion.
      */
@@ -628,10 +628,10 @@ declare module "openai" {
      */
     total_tokens: number;
   }
-  declare export type CompletionCreateParams =
+  declare type CompletionCreateParams =
     | CompletionCreateParamsNonStreaming
     | CompletionCreateParamsStreaming;
-  declare export interface CompletionCreateParamsBase {
+  declare interface CompletionCreateParamsBase {
     /**
      * ID of the model to use. You can use the
      * [List models](https://platform.openai.com/docs/api-reference/models/list) API to
@@ -789,7 +789,7 @@ declare module "openai" {
      */
     user?: string;
   }
-  declare export type CompletionCreateParamsNonStreaming = {
+  declare type CompletionCreateParamsNonStreaming = {
     /**
      * Whether to stream back partial progress. If set, tokens will be sent as
      * data-only
@@ -801,7 +801,7 @@ declare module "openai" {
     stream?: false | null,
     ...
   } & CompletionCreateParamsBase;
-  declare export type CompletionCreateParamsStreaming = {
+  declare type CompletionCreateParamsStreaming = {
     /**
      * Whether to stream back partial progress. If set, tokens will be sent as
      * data-only
@@ -834,7 +834,7 @@ declare module "openai" {
    * Represents a chat completion response returned by model, based on the provided
    * input.
    */
-  declare export interface ChatCompletion {
+  declare interface ChatCompletion {
     /**
      * A unique identifier for the chat completion.
      */
@@ -891,7 +891,7 @@ declare module "openai" {
    * Represents a streamed chunk of a chat completion response returned by model,
    * based on the provided input.
    */
-  declare export interface ChatCompletionChunk {
+  declare interface ChatCompletionChunk {
     /**
      * A unique identifier for the chat completion. Each chunk has the same ID.
      */
@@ -923,7 +923,7 @@ declare module "openai" {
   /**
    * A chat completion delta generated by streamed model responses.
    */
-  declare export interface ChatCompletionChunk$Choice$Delta {
+  declare interface ChatCompletionChunk$Choice$Delta {
     /**
      * The contents of the chunk message.
      */
@@ -940,7 +940,7 @@ declare module "openai" {
      */
     role?: ChatCompletionRole;
   }
-  declare export interface ChatCompletionChunk$Choice {
+  declare interface ChatCompletionChunk$Choice {
     /**
      * A chat completion delta generated by streamed model responses.
      */
@@ -981,7 +981,7 @@ declare module "openai" {
   /**
    * A chat completion message generated by the model.
    */
-  declare export interface ChatCompletionMessage {
+  declare interface ChatCompletionMessage {
     /**
      * The contents of the message.
      */
@@ -1016,7 +1016,7 @@ declare module "openai" {
      */
     name: string;
   }
-  declare export interface ChatCompletionMessageParam {
+  declare interface ChatCompletionMessageParam {
     /**
      * The contents of the message. `content` is required for all messages, and may be
      * null for assistant messages with function calls.
@@ -1065,12 +1065,12 @@ declare module "openai" {
   /**
    * The role of the author of this message.
    */
-  declare export type ChatCompletionRole = "system" | "user" | "assistant" | "function";
+  declare type ChatCompletionRole = "system" | "user" | "assistant" | "function";
   /**
    * @deprecated ChatCompletionMessageParam should be used instead
    */
-  declare export type CreateChatCompletionRequestMessage = ChatCompletionMessageParam;
-  declare export interface ChatCompletionCreateParamsBase {
+  declare type CreateChatCompletionRequestMessage = ChatCompletionMessageParam;
+  declare interface ChatCompletionCreateParamsBase {
     /**
      * A list of messages comprising the conversation so far.
      * [Example Python code](https://github.com/openai/openai-cookbook/blob/main/examples/How_to_format_inputs_to_ChatGPT_models.ipynb).
@@ -1201,7 +1201,7 @@ declare module "openai" {
     name: string;
   }
 
-  declare export interface ChatCompletionCreateParams$Function {
+  declare interface ChatCompletionCreateParams$Function {
     /**
      * The name of the function to be called. Must be a-z, A-Z, 0-9, or contain
      * underscores and dashes, with a maximum length of 64.
@@ -1232,7 +1232,7 @@ declare module "openai" {
 
   declare type ChatCompletionCreateParams$ChatCompletionCreateParamsStreaming =
     ChatCompletionCreateParamsStreaming;
-  declare export type ChatCompletionCreateParamsNonStreaming = {
+  declare type ChatCompletionCreateParamsNonStreaming = {
     /**
      * If set, partial message deltas will be sent, like in ChatGPT. Tokens will be
      * sent as data-only
@@ -1244,7 +1244,7 @@ declare module "openai" {
     stream?: false | null,
     ...
   } & ChatCompletionCreateParamsBase;
-  declare export type ChatCompletionCreateParamsStreaming = {
+  declare type ChatCompletionCreateParamsStreaming = {
     /**
      * If set, partial message deltas will be sent, like in ChatGPT. Tokens will be
      * sent as data-only
@@ -1291,7 +1291,7 @@ declare module "openai" {
   /**
    * Represents an embedding vector returned by embedding endpoint.
    */
-  declare export interface Embedding {
+  declare interface Embedding {
     /**
      * The embedding vector, which is a list of floats. The length of vector depends on
      * the model as listed in the
@@ -1309,7 +1309,7 @@ declare module "openai" {
      */
     object: string;
   }
-  declare export interface EmbeddingCreateParams {
+  declare interface EmbeddingCreateParams {
     /**
      * Input text to embed, encoded as a string or array of tokens. To embed multiple
      * inputs in a single request, pass an array of strings or array of token arrays.
@@ -1369,7 +1369,7 @@ declare module "openai" {
      */
     text: string;
   }
-  declare export interface EditCreateParams {
+  declare interface EditCreateParams {
     /**
      * The instruction that tells the model how to edit the prompt.
      */
@@ -1459,8 +1459,8 @@ declare module "openai" {
     ): Promise<FileObject>;
   }
   declare class FileObjectsPage extends Page<FileObject> {}
-  declare export type FileContent = string;
-  declare export interface FileDeleted {
+  declare type FileContent = string;
+  declare interface FileDeleted {
     id: string;
     deleted: boolean;
     object: string;
@@ -1468,7 +1468,7 @@ declare module "openai" {
   /**
    * The `File` object represents a document that has been uploaded to OpenAI.
    */
-  declare export interface FileObject {
+  declare interface FileObject {
     /**
      * The file identifier, which can be referenced in the API endpoints.
      */
@@ -1511,7 +1511,7 @@ declare module "openai" {
      */
     status_details?: string | null;
   }
-  declare export interface FileCreateParams {
+  declare interface FileCreateParams {
     /**
      * Name of the [JSON Lines](https://jsonlines.readthedocs.io/en/latest/) file to be
      * uploaded.
@@ -1637,17 +1637,17 @@ declare module "openai" {
      */
     compute_classification_metrics?: boolean;
   }
-  declare export interface FineTuneEvent {
+  declare interface FineTuneEvent {
     created_at: number;
     level: string;
     message: string;
     object: string;
   }
-  declare export interface FineTuneEventsListResponse {
+  declare interface FineTuneEventsListResponse {
     data: Array<FineTuneEvent>;
     object: string;
   }
-  declare export interface FineTuneCreateParams {
+  declare interface FineTuneCreateParams {
     /**
      * The ID of an uploaded file that contains training data.
      *
@@ -1781,10 +1781,10 @@ declare module "openai" {
      */
     validation_file?: string | null;
   }
-  declare export type FineTuneListEventsParams =
+  declare type FineTuneListEventsParams =
     | FineTuneListEventsParamsNonStreaming
     | FineTuneListEventsParamsStreaming;
-  declare export interface FineTuneListEventsParamsBase {
+  declare interface FineTuneListEventsParamsBase {
     /**
      * Whether to stream events for the fine-tune job. If set to true, events will be
      * sent as data-only
@@ -1796,7 +1796,7 @@ declare module "openai" {
      */
     stream?: boolean;
   }
-  declare export type FineTuneListEventsParamsNonStreaming = {
+  declare type FineTuneListEventsParamsNonStreaming = {
     /**
      * Whether to stream events for the fine-tune job. If set to true, events will be
      * sent as data-only
@@ -1809,7 +1809,7 @@ declare module "openai" {
     stream?: false,
     ...
   } & FineTuneListEventsParamsBase;
-  declare export type FineTuneListEventsParamsStreaming = {
+  declare type FineTuneListEventsParamsStreaming = {
     /**
      * Whether to stream events for the fine-tune job. If set to true, events will be
      * sent as data-only
@@ -1885,7 +1885,7 @@ declare module "openai" {
    * The `fine_tuning.job` object represents a fine-tuning job that has been created
    * through the API.
    */
-  declare export interface FineTuningJob {
+  declare interface FineTuningJob {
     /**
      * The object identifier, which can be referenced in the API endpoints.
      */
@@ -2004,7 +2004,7 @@ declare module "openai" {
      */
     n_epochs: "auto" | number;
   }
-  declare export interface FineTuningJobEvent {
+  declare interface FineTuningJobEvent {
     id: string;
     created_at: number;
     level: "info" | "warn" | "error";
@@ -2027,8 +2027,8 @@ declare module "openai" {
      */
     n_epochs?: "auto" | number;
   }
-  declare export type JobListParams = { ... } & CursorPageParams;
-  declare export type JobListEventsParams = { ... } & CursorPageParams;
+  declare type JobListParams = { ... } & CursorPageParams;
+  declare type JobListEventsParams = { ... } & CursorPageParams;
   declare class FineTuning extends APIResource {
     jobs: Jobs;
   }
@@ -2060,7 +2060,7 @@ declare module "openai" {
   /**
    * Represents the url or the content of an image generated by the OpenAI
    */
-  declare export interface Image {
+  declare interface Image {
     /**
      * The base64-encoded JSON of the generated image, if `response_format` is
      * `b64_json`.
@@ -2072,11 +2072,11 @@ declare module "openai" {
      */
     url?: string;
   }
-  declare export interface ImagesResponse {
+  declare interface ImagesResponse {
     created: number;
     data: Array<Image>;
   }
-  declare export interface ImageCreateVariationParams {
+  declare interface ImageCreateVariationParams {
     /**
      * The image to use as the basis for the variation(s). Must be a valid PNG file,
      * less than 4MB, and square.
@@ -2107,7 +2107,7 @@ declare module "openai" {
      */
     user?: string;
   }
-  declare export interface ImageEditParams {
+  declare interface ImageEditParams {
     /**
      * The image to edit. Must be a valid PNG file, less than 4MB, and square. If mask
      * is not provided, image must have transparency, which will be used as the mask.
@@ -2151,7 +2151,7 @@ declare module "openai" {
      */
     user?: string;
   }
-  declare export interface ImageGenerateParams {
+  declare interface ImageGenerateParams {
     /**
      * A text description of the desired image(s). The maximum length is 1000
      * characters.
@@ -2205,7 +2205,7 @@ declare module "openai" {
   /**
    * Describes an OpenAI model offering that can be used with the
    */
-  declare export interface Model {
+  declare interface Model {
     /**
      * The model identifier, which can be referenced in the API endpoints.
      */
@@ -2226,7 +2226,7 @@ declare module "openai" {
      */
     owned_by: string;
   }
-  declare export interface ModelDeleted {
+  declare interface ModelDeleted {
     id: string;
     deleted: boolean;
     object: string;
@@ -2241,7 +2241,7 @@ declare module "openai" {
     ): APIPromise<ModerationCreateResponse>;
   }
 
-  declare export interface Moderation {
+  declare interface Moderation {
     /**
      * A list of the categories, and whether they are flagged or not.
      */
@@ -2346,7 +2346,7 @@ declare module "openai" {
    * Represents policy compliance report by OpenAI's content moderation model against
    * a given input.
    */
-  declare export interface ModerationCreateResponse {
+  declare interface ModerationCreateResponse {
     /**
      * The unique identifier for the moderation request.
      */
@@ -2362,7 +2362,7 @@ declare module "openai" {
      */
     results: Array<Moderation>;
   }
-  declare export interface ModerationCreateParams {
+  declare interface ModerationCreateParams {
     /**
      * The input text to classify
      */
@@ -2382,7 +2382,7 @@ declare module "openai" {
       | "text-moderation-latest"
       | "text-moderation-stable";
   }
-  declare export interface ClientOptions {
+  declare interface ClientOptions {
     /**
      * Defaults to process.env["OPENAI_API_KEY"].
      */
@@ -2451,7 +2451,7 @@ declare module "openai" {
   /**
    * API Client for interfacing with the OpenAI
    */
-  declare export class OpenAI extends APIClient {
+  declare class OpenAI extends APIClient {
     apiKey: string;
     organization?: string | null;
 
@@ -2498,18 +2498,18 @@ declare module "openai" {
     static PermissionDeniedError: typeof Errors$PermissionDeniedError;
     static UnprocessableEntityError: typeof Errors$UnprocessableEntityError;
   }
-  declare export var OpenAIError: typeof Errors$OpenAIError;
-  declare export var APIError: typeof Errors$APIError;
-  declare export var APIConnectionError: typeof Errors$APIConnectionError;
-  declare export var APIConnectionTimeoutError: typeof Errors$APIConnectionTimeoutError;
-  declare export var APIUserAbortError: typeof Errors$APIUserAbortError;
-  declare export var NotFoundError: typeof Errors$NotFoundError;
-  declare export var ConflictError: typeof Errors$ConflictError;
-  declare export var RateLimitError: typeof Errors$RateLimitError;
-  declare export var BadRequestError: typeof Errors$BadRequestError;
-  declare export var AuthenticationError: typeof Errors$AuthenticationError;
-  declare export var InternalServerError: typeof Errors$InternalServerError;
-  declare export var PermissionDeniedError: typeof Errors$PermissionDeniedError;
-  declare export var UnprocessableEntityError: typeof Errors$UnprocessableEntityError;
-  declare export { OpenAI as default };
+  declare var OpenAIError: typeof Errors$OpenAIError;
+  declare var APIError: typeof Errors$APIError;
+  declare var APIConnectionError: typeof Errors$APIConnectionError;
+  declare var APIConnectionTimeoutError: typeof Errors$APIConnectionTimeoutError;
+  declare var APIUserAbortError: typeof Errors$APIUserAbortError;
+  declare var NotFoundError: typeof Errors$NotFoundError;
+  declare var ConflictError: typeof Errors$ConflictError;
+  declare var RateLimitError: typeof Errors$RateLimitError;
+  declare var BadRequestError: typeof Errors$BadRequestError;
+  declare var AuthenticationError: typeof Errors$AuthenticationError;
+  declare var InternalServerError: typeof Errors$InternalServerError;
+  declare var PermissionDeniedError: typeof Errors$PermissionDeniedError;
+  declare var UnprocessableEntityError: typeof Errors$UnprocessableEntityError;
+  declare module.exports: Class<OpenAI>;
 }
