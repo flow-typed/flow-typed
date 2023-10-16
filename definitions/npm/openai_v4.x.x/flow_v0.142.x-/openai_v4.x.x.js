@@ -1088,7 +1088,6 @@ declare module "openai" {
      * table for details on which models work with the Chat
      */
     model:
-      // | (string & {...})
       | "gpt-4"
       | "gpt-4-0314"
       | "gpt-4-0613"
