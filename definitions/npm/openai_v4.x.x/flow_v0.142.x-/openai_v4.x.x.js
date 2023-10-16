@@ -1879,7 +1879,7 @@ declare module "openai" {
     ): PagePromise<FineTuningJobEventsPage, FineTuningJobEvent>;
   }
   declare class FineTuningJobsPage extends CursorPage<FineTuningJob> {}
-  declare class FineTuningJobEventsPage /* extends CursorPage<FineTuningJobEvent> */ {}
+  declare class FineTuningJobEventsPage extends CursorPage<FineTuningJobEvent> {}
 
   /**
    * The `fine_tuning.job` object represents a fine-tuning job that has been created
