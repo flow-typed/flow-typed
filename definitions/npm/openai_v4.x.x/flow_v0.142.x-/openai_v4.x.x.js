@@ -409,12 +409,7 @@ declare module "openai" {
      */
     limit?: number;
   }
-  declare class CursorPage<
-    Item: {
-      id: string,
-      ...
-    }
-  >
+  declare class CursorPage<Item>
     extends AbstractPage<Item>
     implements CursorPageResponse<Item>
   {
@@ -1839,7 +1834,7 @@ declare module "openai" {
     create(
       body: typeof JobCreateParams,
       options?: RequestOptions<>
-    ): APIPromise<typeof FineTuningJob>;
+    ): APIPromise<FineTuningJob>;
 
     /**
      * Get info about a fine-tuning job.
@@ -1849,7 +1844,7 @@ declare module "openai" {
     retrieve(
       fineTuningJobId: string,
       options?: RequestOptions<>
-    ): APIPromise<typeof FineTuningJob>;
+    ): APIPromise<FineTuningJob>;
 
     /**
      * List your organization's fine-tuning jobs
@@ -1857,10 +1852,10 @@ declare module "openai" {
     list(
       query?: JobListParams,
       options?: RequestOptions<>
-    ): PagePromise<FineTuningJobsPage, typeof FineTuningJob>;
+    ): PagePromise<FineTuningJobsPage, FineTuningJob>;
     list(
       options?: RequestOptions<>
-    ): PagePromise<FineTuningJobsPage, typeof FineTuningJob>;
+    ): PagePromise<FineTuningJobsPage, FineTuningJob>;
 
     /**
      * Immediately cancel a fine-tune job.
@@ -1868,7 +1863,7 @@ declare module "openai" {
     cancel(
       fineTuningJobId: string,
       options?: RequestOptions<>
-    ): APIPromise<typeof FineTuningJob>;
+    ): APIPromise<FineTuningJob>;
 
     /**
      * Get status updates for a fine-tuning job.
@@ -1883,19 +1878,96 @@ declare module "openai" {
       options?: RequestOptions<>
     ): PagePromise<FineTuningJobEventsPage, FineTuningJobEvent>;
   }
-  declare class FineTuningJobsPage /* extends CursorPage<typeof FineTuningJob> */ {}
+  declare class FineTuningJobsPage extends CursorPage<FineTuningJob> {}
   declare class FineTuningJobEventsPage /* extends CursorPage<FineTuningJobEvent> */ {}
+
   /**
    * The `fine_tuning.job` object represents a fine-tuning job that has been created
-   * through the
+   * through the API.
    */
-  declare var FineTuningJob: typeof npm$namespace$FineTuningJob;
+  declare export interface FineTuningJob {
+    /**
+     * The object identifier, which can be referenced in the API endpoints.
+     */
+    id: string;
 
-  declare var npm$namespace$FineTuningJob: {|
-    Error: Class<FineTuningJob$Error>,
-    Hyperparameters: Class<FineTuningJob$Hyperparameters>,
-  |};
+    /**
+     * The Unix timestamp (in seconds) for when the fine-tuning job was created.
+     */
+    created_at: number;
 
+    /**
+     * For fine-tuning jobs that have `failed`, this will contain more information on
+     * the cause of the failure.
+     */
+    error: FineTuningJob$Error | null;
+
+    /**
+     * The name of the fine-tuned model that is being created. The value will be null
+     * if the fine-tuning job is still running.
+     */
+    fine_tuned_model: string | null;
+
+    /**
+     * The Unix timestamp (in seconds) for when the fine-tuning job was finished. The
+     * value will be null if the fine-tuning job is still running.
+     */
+    finished_at: number | null;
+
+    /**
+     * The hyperparameters used for the fine-tuning job. See the
+     * [fine-tuning guide](https://platform.openai.com/docs/guides/fine-tuning) for
+     * more details.
+     */
+    hyperparameters: FineTuningJob$Hyperparameters;
+
+    /**
+     * The base model that is being fine-tuned.
+     */
+    model: string;
+
+    /**
+     * The object type, which is always "fine_tuning.job".
+     */
+    object: string;
+
+    /**
+     * The organization that owns the fine-tuning job.
+     */
+    organization_id: string;
+
+    /**
+     * The compiled results file ID(s) for the fine-tuning job. You can retrieve the
+     * results with the
+     * [Files API](https://platform.openai.com/docs/api-reference/files/retrieve-contents).
+     */
+    result_files: Array<string>;
+
+    /**
+     * The current status of the fine-tuning job, which can be either
+     * `validating_files`, `queued`, `running`, `succeeded`, `failed`, or `cancelled`.
+     */
+    status: string;
+
+    /**
+     * The total number of billable tokens processed by this fine-tuning job. The value
+     * will be null if the fine-tuning job is still running.
+     */
+    trained_tokens: number | null;
+
+    /**
+     * The file ID used for training. You can retrieve the training data with the
+     * [Files API](https://platform.openai.com/docs/api-reference/files/retrieve-contents).
+     */
+    training_file: string;
+
+    /**
+     * The file ID used for validation. You can retrieve the validation results with
+     * the
+     * [Files API](https://platform.openai.com/docs/api-reference/files/retrieve-contents).
+     */
+    validation_file: string | null;
+  }
   /**
    * For fine-tuning jobs that have `failed`, this will contain more information on
    * the cause of the failure.
