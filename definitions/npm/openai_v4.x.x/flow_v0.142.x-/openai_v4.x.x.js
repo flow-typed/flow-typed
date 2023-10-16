@@ -288,7 +288,7 @@ declare module "openai" {
     params: { [key: string]: mixed, ... } | null,
     ...
   };
-  declare class AbstractPage<Item> /* extends AsyncIterable<Item> */ {
+  declare class AbstractPage<Item> extends $AsyncIterable<Item, void, void> {
     options: FinalRequestOptions<>;
     response: Response;
     body: mixed;
@@ -308,7 +308,7 @@ declare module "openai" {
     hasNextPage(): boolean;
     getNextPage(): Promise<this>;
     iterPages(): AsyncGenerator<AbstractPage<Item>, void, mixed>;
-    // @@asyncIterator: () => AsyncGenerator<Awaited<Item>, void, mixed>;
+    @@asyncIterator: () => AsyncGenerator<Item, void, mixed>;
   }
   declare class PagePromise<
     PageClass,
