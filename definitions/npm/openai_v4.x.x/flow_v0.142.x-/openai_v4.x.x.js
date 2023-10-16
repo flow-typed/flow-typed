@@ -3,19 +3,19 @@ declare module "openai" {
   declare class Errors$APIError extends Errors$OpenAIError {
     +status: number | void;
     +headers: Headers | void;
-    +error: Object | void;
+    +error: { [key: string]: any, ... } | void;
     +code: string | null | void;
     +param: string | null | void;
     +type: string | void;
     constructor(
       status: number | void,
-      error: Object | void,
+      error: { [key: string]: any, ... } | void,
       message: string | void,
       headers: Headers | void
     ): this;
     static generate(
       status: number | void,
-      errorResponse: Object | void,
+      errorResponse: { [key: string]: any, ... } | void,
       message: string | void,
       headers: Headers | void
     ): Errors$APIError;
@@ -92,7 +92,7 @@ declare module "openai" {
     | Uint8Array
     | DataView;
   /**
-   * [object Object],[object Object],[object Object]
+   * [object { [key: string]: any, ... }],[object { [key: string]: any, ... }],[object { [key: string]: any, ... }]
    */
   declare export type Uploadable = FileLike | ResponseLike | FsReadStream;
   /**
@@ -147,13 +147,13 @@ declare module "openai" {
     | Exclude<BlobLikePart, string>
     | AsyncIterable<BlobLikePart>;
   /**
-   * [object Object],[object Object],[object Object]
-   * @param value [object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object]
+   * [object { [key: string]: any, ... }],[object { [key: string]: any, ... }],[object { [key: string]: any, ... }]
+   * @param value [object { [key: string]: any, ... }],[object { [key: string]: any, ... }],[object { [key: string]: any, ... }],[object { [key: string]: any, ... }],[object { [key: string]: any, ... }],[object { [key: string]: any, ... }],[object { [key: string]: any, ... }],[object { [key: string]: any, ... }],[object { [key: string]: any, ... }]
    * @param {string=} name the name of the file. If omitted, toFile will try to determine a file name from bits if possible
-   * @param {Object=} options additional properties
+   * @param {{ [key: string]: any, ... }=} options additional properties
    * @param {string=} options.type the MIME type of the content
    * @param {number=} options.lastModified the last modified timestamp
-   * @returns [object Object],[object Object],[object Object]
+   * @returns [object { [key: string]: any, ... }],[object { [key: string]: any, ... }],[object { [key: string]: any, ... }]
    */
   declare export function toFile(
     value: ToFileInput | Promise<ToFileInput>,
@@ -176,12 +176,12 @@ declare module "openai" {
     _thenUnwrap<U>(transform: (data: T) => U): APIPromise<U>;
 
     /**
-     * [object Object],[object Object],[object Object]
+     * [object { [key: string]: any, ... }],[object { [key: string]: any, ... }],[object { [key: string]: any, ... }]
      */
     asResponse(): Promise<Response>;
 
     /**
-     * [object Object],[object Object],[object Object]
+     * [object { [key: string]: any, ... }],[object { [key: string]: any, ... }],[object { [key: string]: any, ... }]
      */
     withResponse(): Promise<{
       data: T,
@@ -287,7 +287,7 @@ declare module "openai" {
     };
     makeStatusError(
       status: number | void,
-      error: Object | void,
+      error: { [key: string]: any, ... } | void,
       message: string | void,
       headers: Headers | void
     ): Errors$APIError;
@@ -1249,7 +1249,7 @@ declare module "openai" {
      * To describe a function that accepts no parameters, provide the value
      * `{"type": "object", "properties": {}}`.
      */
-    parameters: Object;
+    parameters: { [key: string]: any, ... };
 
     /**
      * A description of what the function does, used by the model to choose when and
