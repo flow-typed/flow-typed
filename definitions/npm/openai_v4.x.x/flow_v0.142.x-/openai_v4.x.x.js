@@ -461,7 +461,7 @@ declare module "openai" {
     /**
      * ID of the model to use. Only `whisper-1` is currently available.
      */
-    model: /* string & {} | */ "whisper-1";
+    model: "whisper-1";
 
     /**
      * An optional text to guide the model's style or continue a previous audio
@@ -508,7 +508,7 @@ declare module "openai" {
     /**
      * ID of the model to use. Only `whisper-1` is currently available.
      */
-    model: /* string & {} | */ "whisper-1";
+    model: "whisper-1";
 
     /**
      * The language of the input audio. Supplying the input language in
@@ -626,7 +626,6 @@ declare module "openai" {
      * descriptions of them.
      */
     model:
-    // | string & {}
       | "babbage-002"
       | "davinci-002"
       | "gpt-3.5-turbo-instruct"
@@ -1325,7 +1324,7 @@ declare module "openai" {
      * [Model overview](https://platform.openai.com/docs/models/overview) for
      * descriptions of them.
      */
-    model: /* string & {} } | */ "text-embedding-ada-002";
+    model: "text-embedding-ada-002";
 
     /**
      * A unique identifier representing your end-user, which can help OpenAI to monitor
@@ -1378,7 +1377,6 @@ declare module "openai" {
      * `code-davinci-edit-001` model with this endpoint.
      */
     model:
-    // | string & {}
       | "text-davinci-edit-001"
       | "code-davinci-edit-001";
 
@@ -1730,7 +1728,6 @@ declare module "openai" {
      * [Models](https://platform.openai.com/docs/models) documentation.
      */
     model?:
-    // | string & {}
       | "ada"
       | "babbage"
       | "curie"
@@ -2302,7 +2299,6 @@ declare module "openai" {
      * `text-moderation-latest`.
      */
     model?:
-    // | string & {}
       | "text-moderation-latest"
       | "text-moderation-stable";
   }
