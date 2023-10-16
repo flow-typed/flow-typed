@@ -143,15 +143,6 @@ declare module "openai" {
     | Uploadable
     | Exclude<BlobLikePart, string>
     | AsyncIterable<BlobLikePart>;
-  /**
-   * [object { [key: string]: any, ... }],[object { [key: string]: any, ... }],[object { [key: string]: any, ... }]
-   * @param value [object { [key: string]: any, ... }],[object { [key: string]: any, ... }],[object { [key: string]: any, ... }],[object { [key: string]: any, ... }],[object { [key: string]: any, ... }],[object { [key: string]: any, ... }],[object { [key: string]: any, ... }],[object { [key: string]: any, ... }],[object { [key: string]: any, ... }]
-   * @param {string=} name the name of the file. If omitted, toFile will try to determine a file name from bits if possible
-   * @param {{ [key: string]: any, ... }=} options additional properties
-   * @param {string=} options.type the MIME type of the content
-   * @param {number=} options.lastModified the last modified timestamp
-   * @returns [object { [key: string]: any, ... }],[object { [key: string]: any, ... }],[object { [key: string]: any, ... }]
-   */
   declare export function toFile(
     value: ToFileInput | Promise<ToFileInput>,
     name?: string | null | void,
@@ -170,35 +161,14 @@ declare module "openai" {
       responsePromise: Promise<APIResponseProps>,
       parseResponse?: (props: APIResponseProps) => PromiseOrValue<T>
     ): this;
-    _thenUnwrap<U>(transform: (data: T) => U): APIPromise<U>;
 
-    /**
-     * [object { [key: string]: any, ... }],[object { [key: string]: any, ... }],[object { [key: string]: any, ... }]
-     */
     asResponse(): Promise<Response>;
 
-    /**
-     * [object { [key: string]: any, ... }],[object { [key: string]: any, ... }],[object { [key: string]: any, ... }]
-     */
     withResponse(): Promise<{
       data: T,
       response: Response,
       ...
     }>;
-    // then<TResult1, TResult2>(
-    //   onfulfilled?:
-    //     | ((value: T) => TResult1 | Promise<TResult1>)
-    //     | void
-    //     | null,
-    //   onrejected?:
-    //     | ((reason: any) => TResult2 | Promise<TResult2>)
-    //     | void
-    //     | null
-    // ): Promise<TResult1 | TResult2>;
-    catch<TResult>(
-      onrejected?: ((reason: any) => TResult | Promise<TResult>) | void | null
-    ): Promise<T | TResult>;
-    // finally(onfinally?: (() => void) | void | null): Promise<T>;
   }
   declare class APIClient {
     baseURL: string;
