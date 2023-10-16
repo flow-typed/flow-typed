@@ -320,12 +320,12 @@ declare module "openai" {
       number
     >
   >
-    extends APIPromise<PageClass> /* , AsyncIterable<Item> */
+    extends APIPromise<PageClass> implements $AsyncIterable<Item, void, void>
   {
     constructor(
       client: APIClient,
       request: Promise<APIResponseProps>,
-      Page: (...args: any /* ConstructorParameters<typeof AbstractPage> */) => PageClass
+      Page: (client: APIClient, response: Response, body: mixed, options: FinalRequestOptions<>) => PageClass
     ): this;
 
     /**
@@ -335,7 +335,7 @@ declare module "openai" {
      *      console.log(item)
      *    }
      */
-    // @@asyncIterator: () => AsyncGenerator<Awaited<Item>, void, mixed>;
+    @@asyncIterator: () => AsyncGenerator<Item, void, mixed>;
   }
   declare export type HTTPMethod = "get" | "post" | "put" | "patch" | "delete";
   declare export type RequestClient = {
