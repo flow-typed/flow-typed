@@ -432,12 +432,31 @@ declare module "openai" {
   declare class APIResource {
     client: OpenAI;
     constructor(client: OpenAI): this;
-    // get: $PropertyType<OpenAI, "get">;
-    // post: $PropertyType<OpenAI, "post">;
-    // patch: $PropertyType<OpenAI, "patch">;
-    // put: $PropertyType<OpenAI, "put">;
-    // delete: $PropertyType<OpenAI, "delete">;
-    // getAPIList: $PropertyType<OpenAI, "getAPIList">;
+    get<Req: { ... }, Rsp>(
+      path: string,
+      opts?: PromiseOrValue<RequestOptions<Req>>
+    ): APIPromise<Rsp>;
+    post<Req: { ... }, Rsp>(
+      path: string,
+      opts?: PromiseOrValue<RequestOptions<Req>>
+    ): APIPromise<Rsp>;
+    patch<Req: { ... }, Rsp>(
+      path: string,
+      opts?: PromiseOrValue<RequestOptions<Req>>
+    ): APIPromise<Rsp>;
+    put<Req: { ... }, Rsp>(
+      path: string,
+      opts?: PromiseOrValue<RequestOptions<Req>>
+    ): APIPromise<Rsp>;
+    delete<Req: { ... }, Rsp>(
+      path: string,
+      opts?: PromiseOrValue<RequestOptions<Req>>
+    ): APIPromise<Rsp>;
+    getAPIList<Item, PageClass: AbstractPage<Item>>(
+      path: string,
+      Page: (...args: any[]) => PageClass,
+      opts?: RequestOptions<any>
+    ): PagePromise<PageClass, Item>;
   }
   declare class Translations extends APIResource {
     /**
