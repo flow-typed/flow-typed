@@ -87,13 +87,10 @@ declare module "openai" {
   declare export type BlobLikePart =
     | string
     | ArrayBuffer
-    // | ArrayBufferView
+    | $ArrayBufferView
     | BlobLike
     | Uint8Array
     | DataView;
-  /**
-   * [object { [key: string]: any, ... }],[object { [key: string]: any, ... }],[object { [key: string]: any, ... }]
-   */
   declare export type Uploadable = FileLike | ResponseLike | FsReadStream;
   /**
    * Intended to match web.Blob, node.Blob, node-fetch.Blob, etc.
