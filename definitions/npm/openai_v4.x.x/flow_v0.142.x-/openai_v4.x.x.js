@@ -263,7 +263,7 @@ declare module "openai" {
       remainingRetries?: number | null
     ): APIPromise<Rsp>;
     requestAPIList<Item, PageClass: AbstractPage<Item>>(
-      Page: (...args: any /* ConstructorParameters<typeof AbstractPage> */) => PageClass,
+      Page: (client: APIClient, response: Response, body: mixed, options: FinalRequestOptions<>) => PageClass,
       options: FinalRequestOptions<>
     ): PagePromise<PageClass, Item>;
     buildURL<Req: { [key: string]: mixed, ... }>(
