@@ -36,7 +36,6 @@ describe('OpenAIApi', () => {
   it('creates a streaming response with true "stream" param', async () => {
     const streamingResult = await openai.chat.completions.create({stream: true, model: "gpt-3.5-turbo", messages: [], functions: [{name: "hello-world", parameters: {}}]});
     for await (const chunk: ChatCompletionChunk of streamingResult) {
-      // process.stdout.write(chunk.choices[0]?.text || '');
     }
   });
 
