@@ -1169,16 +1169,6 @@ declare module "openai" {
     stop?: string | null | Array<string>;
 
     /**
-     * If set, partial message deltas will be sent, like in ChatGPT. Tokens will be
-     * sent as data-only
-     * [server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#Event_stream_format)
-     * as they become available, with the stream terminated by a `data: [DONE]`
-     * message.
-     * [Example Python code](https://github.com/openai/openai-cookbook/blob/main/examples/How_to_stream_completions.ipynb).
-     */
-    // stream?: boolean | null;
-
-    /**
      * What sampling temperature to use, between 0 and 2. Higher values like 0.8 will
      * make the output more random, while lower values like 0.2 will make it more
      * focused and deterministic.
