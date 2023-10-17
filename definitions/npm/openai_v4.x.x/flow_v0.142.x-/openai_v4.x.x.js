@@ -1343,13 +1343,31 @@ declare module "openai" {
      *
      * https://openai.com/blog/gpt-4-api-general-availability#deprecation-of-the-edits-api
      */
-    create(body: EditCreateParams, options?: RequestOptions<>): APIPromise<typeof Edit>;
+    create(body: EditCreateParams, options?: RequestOptions<>): APIPromise<Edit>;
   }
-  declare var Edit: typeof npm$namespace$Edit;
 
-  declare var npm$namespace$Edit: {|
-    Choice: Class<Edit$Choice>,
-  |};
+  declare export interface Edit {
+    /**
+     * A list of edit choices. Can be more than one if `n` is greater than 1.
+     */
+    choices: Array<Edit$Choice>;
+
+    /**
+     * The Unix timestamp (in seconds) of when the edit was created.
+     */
+    created: number;
+
+    /**
+     * The object type, which is always `edit`.
+     */
+    object: string;
+
+    /**
+     * Usage statistics for the completion request.
+     */
+    usage: CompletionUsage;
+  }
+
   declare interface Edit$Choice {
     /**
      * The reason the model stopped generating tokens. This will be `stop` if the model
