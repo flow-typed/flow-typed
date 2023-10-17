@@ -1198,12 +1198,9 @@ declare module "openai" {
      */
     user?: string;
   }
-  declare var ChatCompletionCreateParams: typeof npm$namespace$ChatCompletionCreateParams;
-
-  declare var npm$namespace$ChatCompletionCreateParams: {|
-    FunctionCallOption: Class<ChatCompletionCreateParams$FunctionCallOption>,
-    Function: Class<ChatCompletionCreateParams$Function>,
-  |};
+  declare export type ChatCompletionCreateParams =
+    | ChatCompletionCreateParamsNonStreaming
+    | ChatCompletionCreateParamsStreaming;
   declare interface ChatCompletionCreateParams$FunctionCallOption {
     /**
      * The name of the function to call.
