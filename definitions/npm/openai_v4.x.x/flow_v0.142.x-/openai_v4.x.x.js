@@ -1559,7 +1559,7 @@ declare module "openai" {
     create(
       body: FineTuneCreateParams,
       options?: RequestOptions<>
-    ): APIPromise<typeof FineTune>;
+    ): APIPromise<FineTune>;
 
     /**
      * Gets info about the fine-tune job.
@@ -1569,17 +1569,17 @@ declare module "openai" {
     retrieve(
       fineTuneId: string,
       options?: RequestOptions<>
-    ): APIPromise<typeof FineTune>;
+    ): APIPromise<FineTune>;
 
     /**
      * List your organization's fine-tuning jobs
      */
-    list(options?: RequestOptions<>): PagePromise<FineTunesPage, typeof FineTune>;
+    list(options?: RequestOptions<>): PagePromise<FineTunesPage, FineTune>;
 
     /**
      * Immediately cancel a fine-tune job.
      */
-    cancel(fineTuneId: string, options?: RequestOptions<>): APIPromise<typeof FineTune>;
+    cancel(fineTuneId: string, options?: RequestOptions<>): APIPromise<FineTune>;
 
     /**
      * Get fine-grained status updates for a fine-tune job.
@@ -1600,16 +1600,81 @@ declare module "openai" {
       options?: RequestOptions<>
     ): APIPromise<Stream<FineTuneEvent> | FineTuneEventsListResponse>;
   }
-  declare class FineTunesPage extends Page<typeof FineTune> {}
+  declare class FineTunesPage extends Page<FineTune> {}
+
   /**
    * The `FineTune` object represents a legacy fine-tune job that has been created
-   * through the
+   * through the API.
    */
-  declare var FineTune: typeof npm$namespace$FineTune;
+  declare export interface FineTune {
+    /**
+     * The object identifier, which can be referenced in the API endpoints.
+     */
+    id: string;
 
-  declare var npm$namespace$FineTune: {|
-    Hyperparams: Class<FineTune$Hyperparams>,
-  |};
+    /**
+     * The Unix timestamp (in seconds) for when the fine-tuning job was created.
+     */
+    created_at: number;
+
+    /**
+     * The name of the fine-tuned model that is being created.
+     */
+    fine_tuned_model: string | null;
+
+    /**
+     * The hyperparameters used for the fine-tuning job. See the
+     * [fine-tuning guide](https://platform.openai.com/docs/guides/legacy-fine-tuning/hyperparameters)
+     * for more details.
+     */
+    hyperparams: FineTune$Hyperparams;
+
+    /**
+     * The base model that is being fine-tuned.
+     */
+    model: string;
+
+    /**
+     * The object type, which is always "fine-tune".
+     */
+    object: string;
+
+    /**
+     * The organization that owns the fine-tuning job.
+     */
+    organization_id: string;
+
+    /**
+     * The compiled results files for the fine-tuning job.
+     */
+    result_files: Array<FileObject>;
+
+    /**
+     * The current status of the fine-tuning job, which can be either `created`,
+     * `running`, `succeeded`, `failed`, or `cancelled`.
+     */
+    status: string;
+
+    /**
+     * The list of files used for training.
+     */
+    training_files: Array<FileObject>;
+
+    /**
+     * The Unix timestamp (in seconds) for when the fine-tuning job was last updated.
+     */
+    updated_at: number;
+
+    /**
+     * The list of files used for validation.
+     */
+    validation_files: Array<FileObject>;
+
+    /**
+     * The list of events that have been observed in the lifecycle of the FineTune job.
+     */
+    events?: Array<FineTuneEvent>;
+  }
 
   /**
    * The hyperparameters used for the fine-tuning job. See the
@@ -1850,7 +1915,7 @@ declare module "openai" {
      * [Learn more about fine-tuning](https://platform.openai.com/docs/guides/fine-tuning)
      */
     create(
-      body: typeof JobCreateParams,
+      body: JobCreateParams,
       options?: RequestOptions<>
     ): APIPromise<FineTuningJob>;
 
@@ -2029,12 +2094,57 @@ declare module "openai" {
     message: string;
     object: string;
   }
-  declare var JobCreateParams: typeof npm$namespace$JobCreateParams;
+  declare export interface JobCreateParams {
+    /**
+     * The name of the model to fine-tune. You can select one of the
+     * [supported models](https://platform.openai.com/docs/guides/fine-tuning/what-models-can-be-fine-tuned).
+     */
+    model: 'babbage-002' | 'davinci-002' | 'gpt-3.5-turbo';
 
-  declare var npm$namespace$JobCreateParams: {|
-    Hyperparameters: Class<JobCreateParams$Hyperparameters>,
-  |};
+    /**
+     * The ID of an uploaded file that contains training data.
+     *
+     * See [upload file](https://platform.openai.com/docs/api-reference/files/upload)
+     * for how to upload a file.
+     *
+     * Your dataset must be formatted as a JSONL file. Additionally, you must upload
+     * your file with the purpose `fine-tune`.
+     *
+     * See the [fine-tuning guide](https://platform.openai.com/docs/guides/fine-tuning)
+     * for more details.
+     */
+    training_file: string;
 
+    /**
+     * The hyperparameters used for the fine-tuning job.
+     */
+    hyperparameters?: JobCreateParams$Hyperparameters;
+
+    /**
+     * A string of up to 18 characters that will be added to your fine-tuned model
+     * name.
+     *
+     * For example, a `suffix` of "custom-model-name" would produce a model name like
+     * `ft:gpt-3.5-turbo:openai:custom-model-name:7p4lURel`.
+     */
+    suffix?: string | null;
+
+    /**
+     * The ID of an uploaded file that contains validation data.
+     *
+     * If you provide this file, the data is used to generate validation metrics
+     * periodically during fine-tuning. These metrics can be viewed in the fine-tuning
+     * results file. The same data should not be present in both train and validation
+     * files.
+     *
+     * Your dataset must be formatted as a JSONL file. You must upload your file with
+     * the purpose `fine-tune`.
+     *
+     * See the [fine-tuning guide](https://platform.openai.com/docs/guides/fine-tuning)
+     * for more details.
+     */
+    validation_file?: string | null;
+  }
   /**
    * The hyperparameters used for the fine-tuning job.
    */
