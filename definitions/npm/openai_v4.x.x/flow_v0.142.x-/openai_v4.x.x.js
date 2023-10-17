@@ -2516,18 +2516,5 @@ declare module "openai" {
     static PermissionDeniedError: typeof Errors$PermissionDeniedError;
     static UnprocessableEntityError: typeof Errors$UnprocessableEntityError;
   }
-  declare var OpenAIError: typeof Errors$OpenAIError;
-  declare var APIError: typeof Errors$APIError;
-  declare var APIConnectionError: typeof Errors$APIConnectionError;
-  declare var APIConnectionTimeoutError: typeof Errors$APIConnectionTimeoutError;
-  declare var APIUserAbortError: typeof Errors$APIUserAbortError;
-  declare var NotFoundError: typeof Errors$NotFoundError;
-  declare var ConflictError: typeof Errors$ConflictError;
-  declare var RateLimitError: typeof Errors$RateLimitError;
-  declare var BadRequestError: typeof Errors$BadRequestError;
-  declare var AuthenticationError: typeof Errors$AuthenticationError;
-  declare var InternalServerError: typeof Errors$InternalServerError;
-  declare var PermissionDeniedError: typeof Errors$PermissionDeniedError;
-  declare var UnprocessableEntityError: typeof Errors$UnprocessableEntityError;
   declare module.exports: Class<OpenAI>;
 }
