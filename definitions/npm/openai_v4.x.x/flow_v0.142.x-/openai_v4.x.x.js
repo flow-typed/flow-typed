@@ -576,7 +576,7 @@ declare module "openai" {
     /**
      * The list of completion choices the model generated for the input prompt.
      */
-    choices: Array<typeof CompletionChoice>;
+    choices: Array<CompletionChoice>;
 
     /**
      * The Unix timestamp (in seconds) of when the completion was created.
@@ -598,11 +598,21 @@ declare module "openai" {
      */
     usage?: CompletionUsage;
   }
-  declare var CompletionChoice: typeof npm$namespace$CompletionChoice;
+  declare export interface CompletionChoice {
+    /**
+     * The reason the model stopped generating tokens. This will be `stop` if the model
+     * hit a natural stop point or a provided stop sequence, `length` if the maximum
+     * number of tokens specified in the request was reached, or `content_filter` if
+     * content was omitted due to a flag from our content filters.
+     */
+    finish_reason: 'stop' | 'length' | 'content_filter';
 
-  declare var npm$namespace$CompletionChoice: {|
-    Logprobs: Class<CompletionChoice$Logprobs>,
-  |};
+    index: number;
+
+    logprobs: CompletionChoice$Logprobs | null;
+
+    text: string;
+  }
   declare interface CompletionChoice$Logprobs {
     text_offset?: Array<number>;
     token_logprobs?: Array<number>;
