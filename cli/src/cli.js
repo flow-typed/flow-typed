@@ -1,6 +1,5 @@
 #!/usr/bin/env node
 // @flow
-
 import yargs from 'yargs';
 import {fs, path} from './lib/node';
 

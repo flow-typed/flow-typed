@@ -424,6 +424,15 @@ export async function writeFlowConfig(
     semver.lt(version, '0.125.0')
       ? 'suppress_comment=\\\\(.\\\\|\\n\\\\)*\\\\$FlowExpectedError'
       : '',
+    // ...npmDeps.map(
+    //   dep =>
+    //     `module.name_mapper='^${dep}$' -> '${path.join(
+    //       testDirPath,
+    //       'node_modules',
+    //       dep,
+    //     )}'`,
+    // ),
+    `module.name_mapper='^react-native$' -> '${testDirPath}}/node_modules/react-native'`,
     '',
 
     // Be sure to ignore stuff in the node_modules directory of the flow-typed
@@ -431,9 +440,10 @@ export async function writeFlowConfig(
     '[ignore]',
     path.join(testDirPath, '..', '..', 'node_modules'),
     path.join(testDirPath, 'node_modules'),
-    ...npmDeps.map(
-      dep => `!${path.join(testDirPath, 'node_modules', dep, '.*')}`,
-    ),
+
+    // TODO under this config key is more correct
+    // '[declarations]',
+    ...npmDeps.map(dep => `!${path.join(testDirPath, 'node_modules', dep)}`),
     '',
     '[lints]',
     semver.gte(version, '0.104.0') && semver.lt(version, '0.201.0')
@@ -849,7 +859,7 @@ async function runTestGroup(
     return flowErrors;
   } finally {
     if (await fs.exists(testDirPath)) {
-      await recursiveRmdir(testDirPath);
+      // await recursiveRmdir(testDirPath);
     }
   }
 }
@@ -995,7 +1005,8 @@ async function runTests(
     return results;
   } finally {
     if (await fs.exists(TEST_DIR)) {
-      await recursiveRmdir(TEST_DIR);
+      // TODO: Add a debug mode that won't delete this
+      // await recursiveRmdir(TEST_DIR);
     }
   }
 }
