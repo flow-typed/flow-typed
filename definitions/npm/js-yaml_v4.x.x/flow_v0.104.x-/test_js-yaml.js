@@ -7,6 +7,8 @@ import type {
 const yaml = require('js-yaml');
 
 describe('js-yaml', () => {
+  declare var schema: yaml.Schema;
+
   test('load', () => {
     const doc = yaml.load('some string');
     // $FlowExpectedError[incompatible-use]
@@ -18,8 +20,6 @@ describe('js-yaml', () => {
     if (doc && typeof doc === 'object') {
       doc.a.b();
     }
-
-    declare var schema: yaml.Schema;
 
     yaml.load('test', {
       filename: 'test',
@@ -100,6 +100,87 @@ describe('js-yaml', () => {
     });
     // $FlowExpectedError[incompatible-call]
     yaml.loadAll('test', null, {
+      foo: 'bar',
+    });
+  });
+
+  test('dump', () => {
+    const dumpResult = yaml.dump({ a: 1, b: 2 });
+    dumpResult.toLowerCase();
+    // $FlowExpectedError[prop-missing] test that it's definitely a string
+    dumpResult.toFixed();
+
+    yaml.dump({ a: 1, b: 2 }, {
+      indent: 1,
+      noArrayIndent: true,
+      skipInvalid: true,
+      flowLevel: 1,
+      styles: {},
+      schema,
+      sortKeys: true,
+      lineWidth: 1,
+      noRefs: true,
+      noCompatMode: true,
+      condenseFlow: true,
+      quotingType: '\'',
+      forceQuotes: true,
+      replacer: () => {},
+    });
+
+    yaml.dump({ a: 1, b: 2 }, {
+      // $FlowExpectedError[incompatible-call]
+      indent: 'test',
+    });
+    yaml.dump({ a: 1, b: 2 }, {
+      // $FlowExpectedError[incompatible-call]
+      noArrayIndent: 'test',
+    });
+    yaml.dump({ a: 1, b: 2 }, {
+      // $FlowExpectedError[incompatible-call]
+      skipInvalid: 'test',
+    });
+    yaml.dump({ a: 1, b: 2 }, {
+      // $FlowExpectedError[incompatible-call]
+      flowLevel: 'test',
+    });
+    yaml.dump({ a: 1, b: 2 }, {
+      // $FlowExpectedError[incompatible-call]
+      styles: 'test',
+    });
+    yaml.dump({ a: 1, b: 2 }, {
+      // $FlowExpectedError[incompatible-call]
+      schema: 'test',
+    });
+    yaml.dump({ a: 1, b: 2 }, {
+      // $FlowExpectedError[incompatible-call]
+      lineWidth: 'test',
+    });
+    yaml.dump({ a: 1, b: 2 }, {
+      // $FlowExpectedError[incompatible-call]
+      noRefs: 'test',
+    });
+    yaml.dump({ a: 1, b: 2 }, {
+      // $FlowExpectedError[incompatible-call]
+      noCompatMode: 'test',
+    });
+    yaml.dump({ a: 1, b: 2 }, {
+      // $FlowExpectedError[incompatible-call]
+      condenseFlow: 'test',
+    });
+    yaml.dump({ a: 1, b: 2 }, {
+      // $FlowExpectedError[incompatible-call]
+      quotingType: 'test',
+    });
+    yaml.dump({ a: 1, b: 2 }, {
+      // $FlowExpectedError[incompatible-call]
+      forceQuotes: 'test',
+    });
+    yaml.dump({ a: 1, b: 2 }, {
+      // $FlowExpectedError[incompatible-call]
+      replacer: 'test',
+    });
+    // $FlowExpectedError[prop-missing]
+    yaml.dump({ a: 1, b: 2 }, {
       foo: 'bar',
     });
   });
