@@ -10,7 +10,7 @@ import type {FtConfig} from '../ftConfig';
 import {fs, path} from '../node';
 import {stringToVersion, type Version} from '../semver';
 
-type PkgJson = {|
+export type PkgJson = {|
   pathStr: string,
   content: {
     name: string,

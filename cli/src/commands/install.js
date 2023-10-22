@@ -386,6 +386,8 @@ async function installNpmLibDefs({
     }
   }
 
+  let workspacesPkgJsonData;
+
   // If a specific pkg/version was specified, only add those packages.
   // Otherwise, extract dependencies from the package.json
   if (explicitLibDefs.length > 0) {
@@ -394,7 +396,7 @@ async function installNpmLibDefs({
       const termMatches = term.match(/(@[^@\/]+\/)?([^@]+)@(.+)/);
       if (termMatches == null) {
         const pkgJsonData = await getPackageJsonData(cwd);
-        const workspacesPkgJsonData = await findWorkspacesPackages(
+        workspacesPkgJsonData = await findWorkspacesPackages(
           cwd,
           pkgJsonData,
           ftConfig,
@@ -424,7 +426,7 @@ async function installNpmLibDefs({
     console.log(`• Searching for ${libdefsToSearchFor.size} libdefs...`);
   } else {
     const pkgJsonData = await getPackageJsonData(cwd);
-    const workspacesPkgJsonData = await findWorkspacesPackages(
+    workspacesPkgJsonData = await findWorkspacesPackages(
       cwd,
       pkgJsonData,
       ftConfig,
@@ -532,7 +534,12 @@ async function installNpmLibDefs({
   const typedMissingLibDefs: Array<[string, string, string]> = [];
   await Promise.all(
     unavailableLibDefs.map(async ({name: pkgName, ver: pkgVer}) => {
-      const hasFlowFiles = await pkgHasFlowFiles(cwd, pkgName, pnpResolver);
+      const hasFlowFiles = await pkgHasFlowFiles(
+        cwd,
+        pkgName,
+        pnpResolver,
+        workspacesPkgJsonData,
+      );
       if (hasFlowFiles.flowTyped && hasFlowFiles.path) {
         typedMissingLibDefs.push([pkgName, pkgVer, hasFlowFiles.path]);
       } else {
