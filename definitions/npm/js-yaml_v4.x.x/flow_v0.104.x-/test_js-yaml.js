@@ -78,27 +78,27 @@ describe('js-yaml', () => {
       listener: () => {},
     });
 
+    // $FlowExpectedError[incompatible-call]
     yaml.loadAll('test', null, {
-      // $FlowExpectedError[incompatible-call]
       filename: 1,
     });
+    // $FlowExpectedError[incompatible-call]
     yaml.loadAll('test', null, {
-      // $FlowExpectedError[incompatible-call]
       onWarning: () => true,
     });
+    // $FlowExpectedError[incompatible-call]
     yaml.loadAll('test', null, {
-      // $FlowExpectedError[incompatible-call]
       schema: 123,
     });
+    // $FlowExpectedError[incompatible-call]
     yaml.loadAll('test', null, {
-      // $FlowExpectedError[incompatible-call]
       json: 123,
     });
+    // $FlowExpectedError[incompatible-call]
     yaml.loadAll('test', null, {
-      // $FlowExpectedError[incompatible-call]
       listener: 123,
     });
-    // $FlowExpectedError[prop-missing]
+    // $FlowExpectedError[incompatible-call]
     yaml.loadAll('test', null, {
       foo: 'bar',
     });

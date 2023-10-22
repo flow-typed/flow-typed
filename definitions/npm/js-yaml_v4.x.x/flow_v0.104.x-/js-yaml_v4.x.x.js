@@ -84,8 +84,6 @@ declare module 'js-yaml' {
 
   declare type LoadReturn = string | number | { [key: string]: any } | null | void;
 
-  declare function load(str: string, opts?: LoadOptions): LoadReturn;
-
   declare type SchemaDefinition = {|
     implicit?: Type[],
     explicit?: Type[],
@@ -95,10 +93,6 @@ declare module 'js-yaml' {
       constructor(definition: SchemaDefinition | Type[] | Type): this;
       extend(types: SchemaDefinition | Type[] | Type): Schema;
   }
-
-  declare var loadAll:
-    | (str: string, iterator?: null, opts?: LoadOptions) => LoadReturn[]
-    | (str: string, iterator: (doc: LoadReturn) => void, opts?: LoadOptions) => void;
 
   declare type DumpOptions = {|
     /** indentation width to use (in spaces). */
@@ -134,12 +128,11 @@ declare module 'js-yaml' {
     replacer?: (key: string, value: any) => any,
   |};
 
-  declare var dump: (obj: any, opts?: DumpOptions) => string;
-
-  declare module.exports: {|
-    load: typeof load,
-    loadAll: typeof loadAll,
-    dump: typeof dump,
+  declare class Exports {
+    load(str: string, opts?: LoadOptions): LoadReturn;
+    loadAll(str: string, iterator?: null, opts?: LoadOptions): LoadReturn[];
+    loadAll(str: string, iterator: (doc: LoadReturn) => void, opts?: LoadOptions): void;
+    dump(obj: any, opts?: DumpOptions): string;
     Schema: typeof Schema,
     YAMLException: typeof YAMLException,
     /** only strings, arrays and plain objects: http://www.yaml.org/spec/1.2/spec.html#id2802346 */
@@ -150,5 +143,7 @@ declare module 'js-yaml' {
     CORE_SCHEMA: Schema,
     /** all supported YAML types */
     DEFAULT_SCHEMA: Schema,
-  |};
+  }
+
+  declare module.exports: Exports;
 }
