@@ -1,0 +1,7 @@
+{
+	"name": "c",
+	"version": "0.0.0",
+	"devDependencies": {
+		"bar": "^1.0.0"
+	}
+}
