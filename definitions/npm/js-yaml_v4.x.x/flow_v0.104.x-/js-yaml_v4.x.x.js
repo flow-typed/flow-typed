@@ -1,102 +1,147 @@
 declare module 'js-yaml' {
-
-  declare type Kind = 'sequence' | 'scalar' | 'mapping';
-
-  declare type DumpOptions = {|
-    indent?: number,
-    skipInvalid?: boolean,
-    flowLevel?: number,
-    styles?: { [string]: any, ... },
-    schema?: Schema,
-    sortKeys?: boolean | ((a: any, b: any) => number),
-    lineWidth?: number,
-    noRefs?: boolean,
-    noCompatMode?: boolean,
-    condenseFlow?: boolean,
+  declare type Mark = {|
+    buffer: string,
+    column: number,
+    line: number,
+    name: string,
+    position: number,
+    snippet: string,
   |};
-
-  declare type LoadOptions = {|
-    filename?: string,
-    strict?: boolean,
-    schema?: Schema,
-    json?: boolean,
-  |};
-
-  declare type SchemaDefinition = {|
-    implicit?: Array<Type>,
-    explicit?: Array<Type>,
-    include?: Array<Schema>,
-  |};
-
-  declare type TypeConstructorOptions = {|
-    kind?: Kind,
-    resolve?: (data: any) => boolean,
-    construct?: (data: any) => any,
-    instanceOf?: Object,
-    predicate?: string,
-    represent?: ((data: Object) => any) | { [string]: (data: Object) => any, ... },
-    defaultStyle?: string,
-    styleAliases?: { [string]: any, ... },
-  |};
-
-  declare class Schema {  // implements SchemaDefinition
-    static DEFAULT: ?Schema;
-
-    implicit: Array<Type>;
-    explicit: Array<Type>;
-    include: Array<Schema>;
-
-    compiledImplicit: Array<Type>;
-    compiledExplicit: Array<Type>;
-    compiledTypeMap: { [Kind | 'fallback']: { [string]: Type, ... }, ... };
-
-    constructor(definition: SchemaDefinition): this;
-
-    static create(types: Array<Type> | Type): Schema;
-    static create(schemas: Array<Schema> | Schema, types: Array<Type> | Type): Schema;
-  }
-
-  declare class Type {
-    tag: string;
-    kind: Kind;
-    instanceOf: ?Object;
-    predicate: ?string;
-    represent: ((data: Object) => any) | { [string]: (data: Object) => any, ... } | null;
-    defaultStyle: ?string;
-    styleAliases: { [string]: any, ... };
-
-    constructor(tag: string, opts?: TypeConstructorOptions): this;
-
-    resolve(data: any): boolean;
-
-    construct(data: any): any;
-  }
 
   declare class YAMLException extends Error {
-    constructor(reason?: any, mark?: any): this;
+    constructor(reason?: string, mark?: Mark): this;
 
     toString(compact?: boolean): string;
+
+    name: string;
+
+    reason: string;
+
+    message: string;
+
+    mark: Mark;
   }
 
-  declare var CORE_SCHEMA: Schema;
-  declare var DEFAULT_FULL_SCHEMA: Schema;
-  declare var DEFAULT_SAFE_SCHEMA: Schema;
-  declare var FAILSAFE_SCHEMA: Schema;
-  declare var JSON_SCHEMA: Schema;
-  declare var MINIMAL_SCHEMA: Schema;
-  declare var SAFE_SCHEMA: Schema;
+  declare type TypeConstructorOptions = {|
+    kind?: "sequence" | "scalar" | "mapping",
+    resolve?: (data: any) => boolean,
+    construct?: (data: any, type?: string) => any,
+    instanceOf?: { ... },
+    predicate?: (data: { ... }) => boolean,
+    represent?: ((data: { ... }) => any) | { [x: string]: (data: { ... }) => any },
+    representName?: (data: { ... }) => any,
+    defaultStyle?: string,
+    multi?: boolean,
+    styleAliases?: { [x: string]: any },
+  |};
 
-  declare function load(input: string, opts?: LoadOptions): mixed;
+  declare class Type {
+    constructor(tag: string, opts?: TypeConstructorOptions): this;
+    kind: "sequence" | "scalar" | "mapping" | null;
+    resolve(data: any): boolean;
+    construct(data: any, type?: string): any;
+    instanceOf: { ... } | null;
+    predicate: ((data: { ... }) => boolean) | null;
+    represent: ((data: { ... }) => any) | { [x: string]: (data: { ... }) => any } | null;
+    representName: ((data: { ... }) => any) | null;
+    defaultStyle: string | null;
+    multi: boolean;
+    styleAliases: { [x: string]: any };
+  }
 
-  declare function safeLoad(input: string, opts?: LoadOptions): mixed;
+  declare type State = {|
+    input: string,
+    filename: string | null,
+    schema: Schema,
+    onWarning: (this: null, e: YAMLException) => void,
+    json: boolean,
+    length: number,
+    position: number,
+    line: number,
+    lineStart: number,
+    lineIndent: number,
+    version: null | number,
+    checkLineBreaks: boolean,
+    kind: string,
+    result: any,
+    implicitTypes: Type[],
+  |};
 
-  declare function loadAll(input: string, output?: void | null, opts?: LoadOptions): Array<mixed>;
-  declare function loadAll(input: string, output: (doc: mixed) => void, opts?: LoadOptions): void;
+  declare type EventType = "open" | "close";
 
-  declare function safeLoadAll(input: string, output?: void | null, opts?: LoadOptions): Array<mixed>;
-  declare function safeLoadAll(input: string, output: (doc: mixed) => void, opts?: LoadOptions): void;
+  declare type LoadOptions = {|
+    /** string to be used as a file path in error/warning messages. */
+    filename?: string,
+    /** function to call on warning messages. */
+    onWarning?: (this: null, e: YAMLException) => void,
+    /** specifies a schema to use. */
+    schema?: Schema,
+    /** compatibility with JSON.parse behaviour. */
+    json?: boolean,
+    /** listener for parse events */
+    listener?: (this: State, eventType: EventType, state: State) => void,
+  |};
 
-  declare function dump(input: mixed, opts?: DumpOptions): string;
+  declare function load(str: string, opts?: LoadOptions): mixed;
 
-  declare function safeDump(input: mixed, opts?: DumpOptions): string;
+  declare type SchemaDefinition = {|
+    implicit?: Type[],
+    explicit?: Type[],
+  |};
+
+  declare class Schema {
+      constructor(definition: SchemaDefinition | Type[] | Type): this;
+      extend(types: SchemaDefinition | Type[] | Type): Schema;
+  }
+
+  declare var loadAll:
+    | (str: string, iterator?: null, opts?: LoadOptions) => mixed[]
+    | (str: string, iterator: (doc: mixed) => void, opts?: LoadOptions) => void;
+
+  declare type DumpOptions = {|
+    /** indentation width to use (in spaces). */
+    indent?: number,
+    /** when true, will not add an indentation level to array elements */
+    noArrayIndent?: boolean,
+    /** do not throw on invalid types (like function in the safe schema) and skip pairs and single values with such types. */
+    skipInvalid?: boolean,
+    /** specifies level of nesting, when to switch from block to flow style for collections. -1 means block style everwhere */
+    flowLevel?: number,
+    /** Each tag may have own set of styles.    - "tag" => "style" map. */
+    styles?: { [x: string]: any },
+    /** specifies a schema to use. */
+    schema?: Schema,
+    /** if true, sort keys when dumping YAML. If a function, use the function to sort the keys. (default: false) */
+    sortKeys?: boolean | ((a: any, b: any) => number),
+    /** set max line width. (default: 80) */
+    lineWidth?: number,
+    /** if true, don't convert duplicate objects into references (default: false) */
+    noRefs?: boolean,
+    /** if true don't try to be compatible with older yaml versions. Currently: don't quote "yes", "no" and so on, as required for YAML 1.1 (default: false) */
+    noCompatMode?: boolean,
+    /**
+     * if true flow sequences will be condensed, omitting the space between `key: value` or `a, b`. Eg. `'[a,b]'` or `{a:{b:c}}`.
+     * Can be useful when using yaml for pretty URL query params as spaces are %-encoded. (default: false).
+     */
+    condenseFlow?: boolean,
+    /** strings will be quoted using this quoting style. If you specify single quotes, double quotes will still be used for non-printable characters. (default: `'`) */
+    quotingType?: "'" | "\"",
+    /** if true, all non-key strings will be quoted even if they normally don't need to. (default: false) */
+    forceQuotes?: boolean,
+    /** callback `function (key, value)` called recursively on each key/value in source object (see `replacer` docs for `JSON.stringify`). */
+    replacer?: (key: string, value: any) => any,
+  |};
+
+  declare var dump: (obj: any, opts?: DumpOptions) => string;
+
+  declare module.exports: {|
+    /** only strings, arrays and plain objects: http://www.yaml.org/spec/1.2/spec.html#id2802346 */
+    FAILSAFE_SCHEMA: Schema,
+    /** only strings, arrays and plain objects: http://www.yaml.org/spec/1.2/spec.html#id2802346 */
+    JSON_SCHEMA: Schema,
+    /** same as JSON_SCHEMA: http://www.yaml.org/spec/1.2/spec.html#id2804923 */
+    CORE_SCHEMA: Schema,
+    /** all supported YAML types */
+    DEFAULT_SCHEMA: Schema,
+  |};
 }
