@@ -82,7 +82,9 @@ declare module 'js-yaml' {
     listener?: (this: State, eventType: EventType, state: State) => void,
   |};
 
-  declare function load(str: string, opts?: LoadOptions): mixed;
+  declare type LoadReturn = string | number | { [key: string]: any } | null | void;
+
+  declare function load(str: string, opts?: LoadOptions): LoadReturn;
 
   declare type SchemaDefinition = {|
     implicit?: Type[],
@@ -95,8 +97,8 @@ declare module 'js-yaml' {
   }
 
   declare var loadAll:
-    | (str: string, iterator?: null, opts?: LoadOptions) => mixed[]
-    | (str: string, iterator: (doc: mixed) => void, opts?: LoadOptions) => void;
+    | (str: string, iterator?: null, opts?: LoadOptions) => LoadReturn[]
+    | (str: string, iterator: (doc: LoadReturn) => void, opts?: LoadOptions) => void;
 
   declare type DumpOptions = {|
     /** indentation width to use (in spaces). */
@@ -135,6 +137,11 @@ declare module 'js-yaml' {
   declare var dump: (obj: any, opts?: DumpOptions) => string;
 
   declare module.exports: {|
+    load: typeof load,
+    loadAll: typeof loadAll,
+    dump: typeof dump,
+    Schema: typeof Schema,
+    YAMLException: typeof YAMLException,
     /** only strings, arrays and plain objects: http://www.yaml.org/spec/1.2/spec.html#id2802346 */
     FAILSAFE_SCHEMA: Schema,
     /** only strings, arrays and plain objects: http://www.yaml.org/spec/1.2/spec.html#id2802346 */
