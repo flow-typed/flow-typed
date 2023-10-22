@@ -395,6 +395,7 @@ async function installNpmLibDefs({
       if (termMatches == null) {
         const pkgJsonData = await getPackageJsonData(cwd);
         const workspacesPkgJsonData = await findWorkspacesPackages(
+          cwd,
           pkgJsonData,
           ftConfig,
         );
@@ -424,6 +425,7 @@ async function installNpmLibDefs({
   } else {
     const pkgJsonData = await getPackageJsonData(cwd);
     const workspacesPkgJsonData = await findWorkspacesPackages(
+      cwd,
       pkgJsonData,
       ftConfig,
     );
