@@ -2,6 +2,7 @@
 import colors from 'colors/safe';
 import glob from 'glob';
 import semver, {intersects} from 'semver';
+import {load} from 'js-yaml';
 
 import {searchUpDirPath} from '../fileUtils';
 import type {FlowSpecificVer} from '../flowVersion';
@@ -9,7 +10,7 @@ import type {FtConfig} from '../ftConfig';
 import {fs, path} from '../node';
 import {stringToVersion, type Version} from '../semver';
 
-type PkgJson = {|
+export type PkgJson = {|
   pathStr: string,
   content: {
     name: string,
@@ -74,7 +75,17 @@ export async function findPackageJsonPath(pathStr: string): Promise<string> {
   return path.join(pkgJsonPathStr, 'package.json');
 }
 
-function getWorkspacePatterns(pkgJson: PkgJson): string[] {
+function getWorkspacePatterns(cwd: string, pkgJson: PkgJson): string[] {
+  const pnpmWorkspacePath = path.join(cwd, 'pnpm-workspace.yaml');
+  const hasPnpmWorkspaces = fs.existsSync(pnpmWorkspacePath);
+
+  if (hasPnpmWorkspaces) {
+    const doc = load(fs.readFileSync(pnpmWorkspacePath, 'utf-8'));
+    if (doc && typeof doc === 'object' && doc.packages) {
+      return doc.packages;
+    }
+  }
+
   if (Array.isArray(pkgJson.content.workspaces)) {
     return pkgJson.content.workspaces;
   }
@@ -115,12 +126,13 @@ async function findWorkspacesPackagePaths(
 }
 
 export async function findWorkspacesPackages(
+  cwd: string,
   pkgJson: PkgJson,
   ftConfig: FtConfig,
 ): Promise<PkgJson[]> {
   const paths = await findWorkspacesPackagePaths(
     pkgJson,
-    getWorkspacePatterns(pkgJson),
+    getWorkspacePatterns(cwd, pkgJson),
   );
   const configPaths = ftConfig.workspaces
     ? await findWorkspacesPackagePaths(pkgJson, ftConfig.workspaces)

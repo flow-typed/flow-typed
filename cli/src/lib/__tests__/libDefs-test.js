@@ -1,5 +1,6 @@
 // @flow
 jest.enableAutomock();
+jest.unmock('js-yaml');
 jest.unmock('../libDefs.js');
 jest.unmock('../semver.js');
 jest.unmock('semver');

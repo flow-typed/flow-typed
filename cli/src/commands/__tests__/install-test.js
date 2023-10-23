@@ -1811,6 +1811,76 @@ declare type jsx$HTMLElementProps = {||}`;
       });
     });
 
+    it('supports pnpm workspaces', () => {
+      return fakeProjectEnv(async FLOWPROJ_DIR => {
+        await copyDir(path.join(FIXTURE_ROOT, 'pnpm-workspace'), FLOWPROJ_DIR);
+
+        await mkdirp(
+          path.join(FLOWPROJ_DIR, 'packages', 'c', 'node_modules', 'untyped'),
+        );
+        await touchFile(
+          path.join(
+            FLOWPROJ_DIR,
+            'packages',
+            'c',
+            'node_modules',
+            'untyped',
+            'package.json',
+          ),
+        );
+        await writePkgJson(
+          path.join(
+            FLOWPROJ_DIR,
+            'packages',
+            'c',
+            'node_modules',
+            'untyped',
+            'package.json',
+          ),
+          {
+            name: 'untyped',
+            dependencies: {
+              random: '^0.5.0',
+            },
+          },
+        );
+        await touchFile(
+          path.join(
+            FLOWPROJ_DIR,
+            'packages',
+            'c',
+            'node_modules',
+            'untyped',
+            'index.js.flow',
+          ),
+        );
+
+        // Run the install command
+        await run({
+          ...defaultRunProps,
+          ignoreDeps: [],
+        });
+
+        // Installs libdefs
+        expect(
+          await fs.readdir(path.join(FLOWPROJ_DIR, 'flow-typed', 'npm')),
+        ).toEqual([
+          'a_vx.x.x.js',
+          'c_vx.x.x.js',
+          'flow-bin_v0.x.x.js',
+          'foo_v1.x.x.js',
+        ]);
+
+        // Signs installed libdefs
+        const fooLibDefContents = await fs.readFile(
+          path.join(FLOWPROJ_DIR, 'flow-typed', 'npm', 'foo_v1.x.x.js'),
+          'utf8',
+        );
+        expect(fooLibDefContents).toContain('// flow-typed signature: ');
+        expect(fooLibDefContents).toContain('// flow-typed version: ');
+      });
+    });
+
     it('supports legacy workspace', () => {
       return fakeProjectEnv(async FLOWPROJ_DIR => {
         await copyDir(
