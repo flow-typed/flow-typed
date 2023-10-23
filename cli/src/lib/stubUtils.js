@@ -377,8 +377,8 @@ export async function pkgHasFlowFiles(
   pnpjs: PnpResolver | null,
   workspacesPkgJsonData: Array<PkgJson>,
 ): Promise<{|
-  flowTyped: boolean,
-  path?: string,
+  isFlowTyped: boolean,
+  pkgPath?: string,
 |}> {
   const findTypedFiles = async (path: string): Promise<void | string> => {
     try {
@@ -401,8 +401,8 @@ export async function pkgHasFlowFiles(
 
   if (rootTypedPath) {
     return {
-      flowTyped: true,
-      path: rootTypedPath,
+      isFlowTyped: true,
+      pkgPath: rootTypedPath,
     };
   }
 
@@ -414,13 +414,13 @@ export async function pkgHasFlowFiles(
   const workspacePath = typedWorkspacePaths.find(o => !!o);
   if (workspacePath) {
     return {
-      flowTyped: true,
-      path: path.dirname(workspacePath),
+      isFlowTyped: true,
+      pkgPath: workspacePath,
     };
   }
 
   return {
-    flowTyped: false,
+    isFlowTyped: false,
   };
 }
 

@@ -67,7 +67,7 @@ describe('install (command)', () => {
 
     it('errors if unable to find a project root (.flowconfig)', () => {
       return testProject(async ROOT_DIR => {
-        const result = await installNpmLibDefs({
+        const {status} = await installNpmLibDefs({
           cwd: ROOT_DIR,
           flowVersion: parseFlowDirString('flow_v0.40.0'),
           explicitLibDefs: [],
@@ -79,7 +79,7 @@ describe('install (command)', () => {
           ignoreDeps: [],
           useCacheUntil: 1000 * 60,
         });
-        expect(result).toBe(1);
+        expect(status).toBe(1);
         expect(_mock(console.error).mock.calls).toEqual([
           [
             'Error: Unable to find a flow project in the current dir or any of ' +
@@ -102,7 +102,7 @@ describe('install (command)', () => {
               'flow-bin': '^0.40.0',
             },
           });
-          const result = await installNpmLibDefs({
+          const {status} = await installNpmLibDefs({
             cwd: ROOT_DIR,
             flowVersion: parseFlowDirString('flow_v0.40.0'),
             explicitLibDefs: ['INVALID'],
@@ -114,7 +114,7 @@ describe('install (command)', () => {
             ignoreDeps: [],
             useCacheUntil: 1000 * 60,
           });
-          expect(result).toBe(1);
+          expect(status).toBe(1);
           expect(_mock(console.error).mock.calls).toEqual([
             [
               'ERROR: Package not found from package.json.\n' +
@@ -133,7 +133,7 @@ describe('install (command)', () => {
             name: 'test',
           }),
         ]);
-        const result = await installNpmLibDefs({
+        const {status} = await installNpmLibDefs({
           cwd: ROOT_DIR,
           flowVersion: parseFlowDirString('flow_v0.40.0'),
           explicitLibDefs: [],
@@ -145,7 +145,7 @@ describe('install (command)', () => {
           ignoreDeps: [],
           useCacheUntil: 1000 * 60,
         });
-        expect(result).toBe(0);
+        expect(status).toBe(0);
         expect(_mock(console.error).mock.calls).toEqual([
           ["No dependencies were found in this project's package.json!"],
         ]);

@@ -180,7 +180,7 @@ export async function run(args: Args): Promise<number> {
 
   const useCacheUntil = Number(args.useCacheUntil) || CACHE_REPO_EXPIRY;
 
-  const npmLibDefResult = await installNpmLibDefs({
+  const {status: npmLibDefResult, dependencyEnvs} = await installNpmLibDefs({
     cwd,
     flowVersion,
     explicitLibDefs,
@@ -354,7 +354,10 @@ async function installNpmLibDefs({
   ignoreDeps,
   useCacheUntil,
   ftConfig = {},
-}: installNpmLibDefsArgs): Promise<number> {
+}: installNpmLibDefsArgs): Promise<{|
+  status: number,
+  dependencyEnvs: Array<string>,
+|}> {
   const flowProjectRoot = await findFlowRoot(cwd);
   if (flowProjectRoot === null) {
     console.error(
@@ -362,7 +365,10 @@ async function installNpmLibDefs({
         "it's parent dirs!\n" +
         'Please run this command from within a Flow project.',
     );
-    return 1;
+    return {
+      status: 1,
+      dependencyEnvs: [],
+    };
   }
 
   const libdefsToSearchFor: Map<string, string> = new Map();
@@ -415,7 +421,10 @@ async function installNpmLibDefs({
             'ERROR: Package not found from package.json.\n' +
               'Please specify version for the package in the format of `foo@1.2.3`',
           );
-          return 1;
+          return {
+            status: 1,
+            dependencyEnvs: [],
+          };
         }
       } else {
         const [_, npmScope, pkgName, pkgVerStr] = termMatches;
@@ -445,7 +454,10 @@ async function installNpmLibDefs({
       console.error(
         "No dependencies were found in this project's package.json!",
       );
-      return 0;
+      return {
+        status: 0,
+        dependencyEnvs: [],
+      };
     }
 
     if (verbose) {
@@ -528,20 +540,37 @@ async function installNpmLibDefs({
 
   const pnpResolver = await loadPnpResolver(await getPackageJsonData(cwd));
 
+  const dependencyEnvs: Array<string> = [];
+
   // If a package that's missing a flow-typed libdef has any .flow files,
   // we'll skip generating a stub for it.
   const untypedMissingLibDefs: Array<[string, string]> = [];
   const typedMissingLibDefs: Array<[string, string, string]> = [];
   await Promise.all(
     unavailableLibDefs.map(async ({name: pkgName, ver: pkgVer}) => {
-      const hasFlowFiles = await pkgHasFlowFiles(
+      const {isFlowTyped, pkgPath} = await pkgHasFlowFiles(
         cwd,
         pkgName,
         pnpResolver,
         workspacesPkgJsonData,
       );
-      if (hasFlowFiles.flowTyped && hasFlowFiles.path) {
-        typedMissingLibDefs.push([pkgName, pkgVer, hasFlowFiles.path]);
+      if (isFlowTyped && pkgPath) {
+        typedMissingLibDefs.push([pkgName, pkgVer, pkgPath]);
+
+        try {
+          // If the flow typed dependency has a flow-typed config
+          // check if they have env's defined and if so keep them in
+          // a list so we can later install them along with project
+          // defined envs.
+          const pkgFlowTypedConfig: FtConfig = await fs.readJson(
+            path.join(pkgPath, 'flow-typed.config.json'),
+          );
+          if (pkgFlowTypedConfig.env) {
+            dependencyEnvs.push(...pkgFlowTypedConfig.env);
+          }
+        } catch (e) {
+          // Ignore if we cannot read flow-typed config
+        }
       } else {
         untypedMissingLibDefs.push([pkgName, pkgVer]);
       }
@@ -663,7 +692,10 @@ async function installNpmLibDefs({
     );
 
     if (results.some(res => !res)) {
-      return 1;
+      return {
+        status: 1,
+        dependencyEnvs: [],
+      };
     }
   }
 
@@ -714,7 +746,10 @@ async function installNpmLibDefs({
       colors.bold(`flow-typed create-stub ${explicitLibDefs.join(' ')}`),
     );
 
-    return 1;
+    return {
+      status: 1,
+      dependencyEnvs: [],
+    };
   } else {
     if (untypedMissingLibDefs.length > 0 && !skip) {
       console.log('• Generating stubs for untyped dependencies...');
@@ -755,7 +790,10 @@ async function installNpmLibDefs({
     }
   }
 
-  return 0;
+  return {
+    status: 0,
+    dependencyEnvs,
+  };
 }
 
 async function installNpmLibDef(
