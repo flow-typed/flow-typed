@@ -1504,6 +1504,118 @@ declare type jsx$HTMLElementProps = {||}`;
           ).not.toEqual(installedDef);
         });
       });
+
+      it('installs envs from dependency flow-typed.config even if no local flow-typed.config', () => {
+        return fakeProjectEnv(async FLOWPROJ_DIR => {
+          // Create some dependencies
+          await Promise.all([
+            writePkgJson(path.join(FLOWPROJ_DIR, 'package.json'), {
+              name: 'test',
+              devDependencies: {
+                'flow-bin': '^0.140.0',
+                untyped: '^1.0.0',
+              },
+            }),
+            mkdirp(path.join(FLOWPROJ_DIR, 'node_modules', 'untyped')),
+          ]);
+          await touchFile(path.join(FLOWPROJ_DIR, '.flowconfig'));
+
+          await touchFile(
+            path.join(FLOWPROJ_DIR, 'node_modules', 'untyped', 'index.js.flow'),
+          );
+          await touchFile(
+            path.join(
+              FLOWPROJ_DIR,
+              'node_modules',
+              'untyped',
+              'flow-typed.config.json',
+            ),
+          );
+          await fs.writeJson(
+            path.join(
+              FLOWPROJ_DIR,
+              'node_modules',
+              'untyped',
+              'flow-typed.config.json',
+            ),
+            {env: ['jsx']},
+          );
+
+          // Run the install command
+          await run({
+            ...defaultRunProps,
+            rootDir: path.join(FLOWPROJ_DIR),
+          });
+
+          // Installs env definitions
+          expect(
+            await fs.exists(
+              path.join(FLOWPROJ_DIR, 'flow-typed', 'environments', 'jsx.js'),
+            ),
+          ).toEqual(true);
+        });
+      });
+
+      it('installs envs that exist in both dependency and own flow-typed.config', () => {
+        return fakeProjectEnv(async FLOWPROJ_DIR => {
+          // Create some dependencies
+          await Promise.all([
+            writePkgJson(path.join(FLOWPROJ_DIR, 'package.json'), {
+              name: 'test',
+              devDependencies: {
+                'flow-bin': '^0.140.0',
+                untyped: '^1.0.0',
+              },
+            }),
+            mkdirp(path.join(FLOWPROJ_DIR, 'node_modules', 'untyped')),
+          ]);
+          await touchFile(path.join(FLOWPROJ_DIR, '.flowconfig'));
+          await touchFile(path.join(FLOWPROJ_DIR, 'flow-typed.config.json'));
+          await fs.writeJson(
+            path.join(FLOWPROJ_DIR, 'flow-typed.config.json'),
+            {env: ['jsx']},
+          );
+
+          await touchFile(
+            path.join(FLOWPROJ_DIR, 'node_modules', 'untyped', 'index.js.flow'),
+          );
+          await touchFile(
+            path.join(
+              FLOWPROJ_DIR,
+              'node_modules',
+              'untyped',
+              'flow-typed.config.json',
+            ),
+          );
+          await fs.writeJson(
+            path.join(
+              FLOWPROJ_DIR,
+              'node_modules',
+              'untyped',
+              'flow-typed.config.json',
+            ),
+            {env: ['jsx', 'react']},
+          );
+
+          // Run the install command
+          await run({
+            ...defaultRunProps,
+            rootDir: path.join(FLOWPROJ_DIR),
+          });
+
+          // Installs env definitions
+          expect(
+            await fs.exists(
+              path.join(FLOWPROJ_DIR, 'flow-typed', 'environments', 'jsx.js'),
+            ),
+          ).toEqual(true);
+          expect(
+            await fs.exists(
+              path.join(FLOWPROJ_DIR, 'flow-typed', 'environments', 'react.js'),
+            ),
+          ).toEqual(true);
+        });
+      });
     });
 
     describe('definitions with dependencies', () => {

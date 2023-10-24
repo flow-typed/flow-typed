@@ -198,9 +198,9 @@ export async function run(args: Args): Promise<number> {
   }
 
   // Must be after `installNpmLibDefs` to ensure cache is updated first
-  if (ftConfig) {
+  if (ftConfig?.env || dependencyEnvs.length > 0) {
     const envLibDefResult = await installEnvLibDefs(
-      [...new Set([...(ftConfig.env ?? []), ...dependencyEnvs])],
+      [...new Set([...(ftConfig?.env ?? []), ...dependencyEnvs])],
       flowVersion,
       cwd,
       libdefDir,
