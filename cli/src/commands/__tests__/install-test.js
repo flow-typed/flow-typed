@@ -67,7 +67,7 @@ describe('install (command)', () => {
 
     it('errors if unable to find a project root (.flowconfig)', () => {
       return testProject(async ROOT_DIR => {
-        const result = await installNpmLibDefs({
+        const {status} = await installNpmLibDefs({
           cwd: ROOT_DIR,
           flowVersion: parseFlowDirString('flow_v0.40.0'),
           explicitLibDefs: [],
@@ -79,7 +79,7 @@ describe('install (command)', () => {
           ignoreDeps: [],
           useCacheUntil: 1000 * 60,
         });
-        expect(result).toBe(1);
+        expect(status).toBe(1);
         expect(_mock(console.error).mock.calls).toEqual([
           [
             'Error: Unable to find a flow project in the current dir or any of ' +
@@ -102,7 +102,7 @@ describe('install (command)', () => {
               'flow-bin': '^0.40.0',
             },
           });
-          const result = await installNpmLibDefs({
+          const {status} = await installNpmLibDefs({
             cwd: ROOT_DIR,
             flowVersion: parseFlowDirString('flow_v0.40.0'),
             explicitLibDefs: ['INVALID'],
@@ -114,7 +114,7 @@ describe('install (command)', () => {
             ignoreDeps: [],
             useCacheUntil: 1000 * 60,
           });
-          expect(result).toBe(1);
+          expect(status).toBe(1);
           expect(_mock(console.error).mock.calls).toEqual([
             [
               'ERROR: Package not found from package.json.\n' +
@@ -133,7 +133,7 @@ describe('install (command)', () => {
             name: 'test',
           }),
         ]);
-        const result = await installNpmLibDefs({
+        const {status} = await installNpmLibDefs({
           cwd: ROOT_DIR,
           flowVersion: parseFlowDirString('flow_v0.40.0'),
           explicitLibDefs: [],
@@ -145,7 +145,7 @@ describe('install (command)', () => {
           ignoreDeps: [],
           useCacheUntil: 1000 * 60,
         });
-        expect(result).toBe(0);
+        expect(status).toBe(0);
         expect(_mock(console.error).mock.calls).toEqual([
           ["No dependencies were found in this project's package.json!"],
         ]);
@@ -1502,6 +1502,118 @@ declare type jsx$HTMLElementProps = {||}`;
               'utf-8',
             ),
           ).not.toEqual(installedDef);
+        });
+      });
+
+      it('installs envs from dependency flow-typed.config even if no local flow-typed.config', () => {
+        return fakeProjectEnv(async FLOWPROJ_DIR => {
+          // Create some dependencies
+          await Promise.all([
+            writePkgJson(path.join(FLOWPROJ_DIR, 'package.json'), {
+              name: 'test',
+              devDependencies: {
+                'flow-bin': '^0.140.0',
+                untyped: '^1.0.0',
+              },
+            }),
+            mkdirp(path.join(FLOWPROJ_DIR, 'node_modules', 'untyped')),
+          ]);
+          await touchFile(path.join(FLOWPROJ_DIR, '.flowconfig'));
+
+          await touchFile(
+            path.join(FLOWPROJ_DIR, 'node_modules', 'untyped', 'index.js.flow'),
+          );
+          await touchFile(
+            path.join(
+              FLOWPROJ_DIR,
+              'node_modules',
+              'untyped',
+              'flow-typed.config.json',
+            ),
+          );
+          await fs.writeJson(
+            path.join(
+              FLOWPROJ_DIR,
+              'node_modules',
+              'untyped',
+              'flow-typed.config.json',
+            ),
+            {env: ['jsx']},
+          );
+
+          // Run the install command
+          await run({
+            ...defaultRunProps,
+            rootDir: path.join(FLOWPROJ_DIR),
+          });
+
+          // Installs env definitions
+          expect(
+            await fs.exists(
+              path.join(FLOWPROJ_DIR, 'flow-typed', 'environments', 'jsx.js'),
+            ),
+          ).toEqual(true);
+        });
+      });
+
+      it('installs envs that exist in both dependency and own flow-typed.config', () => {
+        return fakeProjectEnv(async FLOWPROJ_DIR => {
+          // Create some dependencies
+          await Promise.all([
+            writePkgJson(path.join(FLOWPROJ_DIR, 'package.json'), {
+              name: 'test',
+              devDependencies: {
+                'flow-bin': '^0.140.0',
+                untyped: '^1.0.0',
+              },
+            }),
+            mkdirp(path.join(FLOWPROJ_DIR, 'node_modules', 'untyped')),
+          ]);
+          await touchFile(path.join(FLOWPROJ_DIR, '.flowconfig'));
+          await touchFile(path.join(FLOWPROJ_DIR, 'flow-typed.config.json'));
+          await fs.writeJson(
+            path.join(FLOWPROJ_DIR, 'flow-typed.config.json'),
+            {env: ['jsx']},
+          );
+
+          await touchFile(
+            path.join(FLOWPROJ_DIR, 'node_modules', 'untyped', 'index.js.flow'),
+          );
+          await touchFile(
+            path.join(
+              FLOWPROJ_DIR,
+              'node_modules',
+              'untyped',
+              'flow-typed.config.json',
+            ),
+          );
+          await fs.writeJson(
+            path.join(
+              FLOWPROJ_DIR,
+              'node_modules',
+              'untyped',
+              'flow-typed.config.json',
+            ),
+            {env: ['jsx', 'react']},
+          );
+
+          // Run the install command
+          await run({
+            ...defaultRunProps,
+            rootDir: path.join(FLOWPROJ_DIR),
+          });
+
+          // Installs env definitions
+          expect(
+            await fs.exists(
+              path.join(FLOWPROJ_DIR, 'flow-typed', 'environments', 'jsx.js'),
+            ),
+          ).toEqual(true);
+          expect(
+            await fs.exists(
+              path.join(FLOWPROJ_DIR, 'flow-typed', 'environments', 'react.js'),
+            ),
+          ).toEqual(true);
         });
       });
     });
