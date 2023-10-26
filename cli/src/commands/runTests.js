@@ -1,4 +1,5 @@
 // @flow
+import {execSync} from 'child_process';
 import colors from 'colors';
 
 import {child_process, fs, os, path} from '../lib/node.js';
@@ -6,7 +7,7 @@ import {copyFile, recursiveRmdir} from '../lib/fileUtils.js';
 import {gitHubClient} from '../lib/github.js';
 import {getNpmLibDefDirFromNested} from '../lib/npm/npmLibDefs';
 import {getLibDefs, parseRepoDirItem} from '../lib/libDefs.js';
-import {listItem, sectionHeader} from '../lib/logger';
+import {listItem, sectionHeader, info} from '../lib/logger';
 import isInFlowTypedRepo from '../lib/isInFlowTypedRepo';
 import {
   toSemverString as flowVerToSemverString,
@@ -76,6 +77,15 @@ type TestGroup = {
   deps: {
     [key: string]: Array<string>,
   },
+  /**
+   * Object of dependency version pairs for dependencies to install
+   * and load for testing so that definitions can be tested against
+   * typed libraries they depend as they would when installed
+   * in a real project
+   */
+  npmDeps: {
+    [key: string]: string,
+  },
 };
 
 /**
@@ -129,10 +139,12 @@ async function getTestGroups(
         if (def.configPath) {
           const deps = JSON.parse(fs.readFileSync(def.configPath, 'utf-8'))
             .deps;
-          const isDependantOfChanged = Object.keys(deps).some(
-            dep => dep === d.name && deps[dep].some(s => s === d.version),
-          );
-          if (isDependantOfChanged) return true;
+          if (deps) {
+            const isDependantOfChanged = Object.keys(deps).some(
+              dep => dep === d.name && deps[dep].some(s => s === d.version),
+            );
+            if (isDependantOfChanged) return true;
+          }
         }
         return d.name === def.pkgName && d.version === def.pkgVersionStr;
       });
@@ -141,8 +153,8 @@ async function getTestGroups(
   return libDefs.map(libDef => {
     const groupID = `${libDef.pkgName}_${libDef.pkgVersionStr}/${libDef.flowVersionStr}`;
 
-    const deps = libDef.configPath
-      ? JSON.parse(fs.readFileSync(libDef.configPath, 'utf-8')).deps
+    const definitionConfig = libDef.configPath
+      ? JSON.parse(fs.readFileSync(libDef.configPath, 'utf-8'))
       : {};
 
     return {
@@ -150,7 +162,8 @@ async function getTestGroups(
       testFilePaths: libDef.testFilePaths,
       libDefPath: libDef.path,
       flowVersion: libDef.flowVersion,
-      deps,
+      deps: definitionConfig.deps ?? {},
+      npmDeps: definitionConfig.npmDeps ?? {},
     };
   });
 }
@@ -205,6 +218,12 @@ async function getOrderedFlowBinVersions(
         }
       } catch (e) {
         console.error(e);
+        info(
+          `\nYou've exceeded the API rate limit, try adding GITHUB_TOKEN env variable before calling tests`,
+        );
+        info(
+          'You can generate a token here: https://github.com/settings/tokens',
+        );
         foundAllFlowVersions = true;
       }
     }
@@ -382,6 +401,7 @@ export async function writeFlowConfig(
   libDefPath: string,
   version: string,
   depPaths: Array<string>,
+  npmDeps: Array<string>,
 ) {
   // /!\---------------------------------------------------------------------/!\
   // Whenever you introduce a new difference depending on the version, don't
@@ -404,12 +424,26 @@ export async function writeFlowConfig(
     semver.lt(version, '0.125.0')
       ? 'suppress_comment=\\\\(.\\\\|\\n\\\\)*\\\\$FlowExpectedError'
       : '',
+    // ...npmDeps.map(
+    //   dep =>
+    //     `module.name_mapper='^${dep}$' -> '${path.join(
+    //       testDirPath,
+    //       'node_modules',
+    //       dep,
+    //     )}'`,
+    // ),
+    `module.name_mapper='^react-native$' -> '${testDirPath}}/node_modules/react-native'`,
     '',
 
     // Be sure to ignore stuff in the node_modules directory of the flow-typed
     // CLI repository!
     '[ignore]',
     path.join(testDirPath, '..', '..', 'node_modules'),
+    path.join(testDirPath, 'node_modules'),
+
+    // TODO under this config key is more correct
+    // '[declarations]',
+    ...npmDeps.map(dep => `!${path.join(testDirPath, 'node_modules', dep)}`),
     '',
     '[lints]',
     semver.gte(version, '0.104.0') && semver.lt(version, '0.201.0')
@@ -527,6 +561,7 @@ async function findLowestCapableFlowVersion(
   testDirPath,
   libDefPath,
   depPaths,
+  npmDeps,
 ) {
   let lowerFlowVersionsToRun = orderedFlowVersions.filter(flowVer => {
     return semver.lt(flowVer, lowestFlowVersionRan);
@@ -538,6 +573,7 @@ async function findLowestCapableFlowVersion(
     libDefPath,
     lowestFlowVersionRan,
     depPaths,
+    npmDeps,
   );
   return await testLowestCapableFlowVersion(
     lowerFlowVersionsToRun,
@@ -684,6 +720,20 @@ function getDepTestGroups(testGroup) {
   return depGroup;
 }
 
+function installNpmDependencies(testDirPath: string, testGroup: TestGroup) {
+  const {npmDeps} = testGroup;
+  const depKeys = Object.keys(npmDeps);
+  if (depKeys.length === 0) return;
+
+  execSync(`(cd ${testDirPath}; npm init -y)`);
+
+  depKeys.forEach(dep => {
+    info(`Installing ${dep}...`);
+    execSync(`(cd ${testDirPath}; npm i ${dep}@${npmDeps[dep]})`);
+    info(`${dep} has been installed for testing`);
+  });
+}
+
 /**
  * Given a TestGroup structure determine all versions of Flow that match the
  * FlowVersion specification and, for each, run `flow check` on the test
@@ -766,7 +816,11 @@ async function runTestGroup(
           testGroup.libDefPath,
           lowestFlowVersionRanInThisGroup,
           depPaths,
+          Object.keys(testGroup.npmDeps),
         );
+
+        installNpmDependencies(testDirPath, testGroup);
+
         const flowErrorsForThisGroup = await runFlowTypeDefTests(
           [...sublistOfFlowVersions],
           testGroup.id,
@@ -783,6 +837,7 @@ async function runTestGroup(
         testDirPath,
         testGroup.libDefPath,
         depPaths,
+        Object.keys(testGroup.npmDeps),
       );
 
       if (lowestCapableFlowVersion !== lowestFlowVersionRan) {
@@ -804,7 +859,7 @@ async function runTestGroup(
     return flowErrors;
   } finally {
     if (await fs.exists(testDirPath)) {
-      await recursiveRmdir(testDirPath);
+      // await recursiveRmdir(testDirPath);
     }
   }
 }
@@ -950,7 +1005,8 @@ async function runTests(
     return results;
   } finally {
     if (await fs.exists(TEST_DIR)) {
-      await recursiveRmdir(TEST_DIR);
+      // TODO: Add a debug mode that won't delete this
+      // await recursiveRmdir(TEST_DIR);
     }
   }
 }

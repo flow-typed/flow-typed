@@ -50,6 +50,7 @@ describe('run-tests (command)', () => {
     const createFlowConfig = async (
       version: string,
       depPaths?: Array<string> = [],
+      npmDeps?: Array<string> = [],
     ) => {
       await writeFlowConfig(
         fixtureBasePath,
@@ -57,6 +58,7 @@ describe('run-tests (command)', () => {
         path.join(fixtureBasePath, 'definitions/npm/def/'),
         version,
         depPaths,
+        npmDeps,
       );
 
       return fs.readFileSync(flowConfigFile, 'utf-8').split('\n');
