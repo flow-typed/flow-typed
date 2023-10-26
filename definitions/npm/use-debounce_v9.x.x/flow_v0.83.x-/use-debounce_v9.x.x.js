@@ -37,10 +37,7 @@ declare module 'use-debounce' {
    * Subsequent calls to the debounced function `debounced.callback` return the result of the last func invocation.
    * Note, that if there are no previous invocations it's mean you will get undefined. You should check it in your code properly.
    */
-  declare type DebouncedState<R, T: (...args: any) => R> = {|
-    ...ControlFunctions,
-    (...args: Parameters<T>): R | void,
-  |};
+  declare type DebouncedState<R, T: (...args: any) => R> = ControlFunctions & ((...args: Parameters<T>) => R | void);
 
   declare module.exports: {|
     useDebounce: <T>(value: T, delay: number, options?: {|
