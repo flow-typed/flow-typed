@@ -1,4 +1,4 @@
-declare module 'body-scroll-lock' {
+declare module 'body-scroll-lock-upgrade' {
   declare type BodyScrollOptions = {|
     reserveScrollBarGap?: boolean,
     allowTouchMove?: (el: any) => boolean,

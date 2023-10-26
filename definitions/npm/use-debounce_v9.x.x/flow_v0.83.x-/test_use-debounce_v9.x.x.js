@@ -31,11 +31,15 @@ describe('use-debounce', () => {
       1000
     );
 
+    debounced('test');
+    // $FlowExpectedError[incompatible-call] it matches the type of the callback
+    debounced(123);
+
     debounced.cancel();
     debounced.flush();
     debounced.isPending();
 
-    // $FlowExpectedError[prop-missing]
+    // $FlowExpectedError[incompatible-call]
     debounced.foo();
   });
 
@@ -51,11 +55,15 @@ describe('use-debounce', () => {
       1000
     );
 
+    debounced('test');
+    // $FlowExpectedError[incompatible-call] it matches the type of the callback
+    debounced(123);
+
     debounced.cancel();
     debounced.flush();
     debounced.isPending();
 
-    // $FlowExpectedError[prop-missing]
+    // $FlowExpectedError[incompatible-call]
     debounced.foo();
   });
 });
