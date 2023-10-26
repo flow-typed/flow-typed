@@ -4,7 +4,7 @@ import {
   disableBodyScroll,
   enableBodyScroll,
   clearAllBodyScrollLocks,
-} from 'body-scroll-lock';
+} from 'body-scroll-lock-upgrade';
 
 declare var element: HTMLElement;
 declare var inputElement: HTMLInputElement;
