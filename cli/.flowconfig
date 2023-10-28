@@ -1,5 +1,4 @@
 [libs]
-flow-typed
 
 [ignore]
 .*/node_modules/json5/.*
