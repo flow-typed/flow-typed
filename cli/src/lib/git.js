@@ -38,7 +38,7 @@ async function getGitPath() {
   }
 }
 
-function which(executable): Promise<string> {
+function which(executable: string): Promise<string> {
   return new Promise((res, rej) => {
     whichCb(executable, (err, resolvedPath) => {
       if (err) {

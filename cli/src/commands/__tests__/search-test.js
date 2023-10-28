@@ -5,7 +5,11 @@ import {parseDirString as parseFlowDirString} from '../../lib/flowVersion.js';
 
 describe('search command', () => {
   describe('_formatDefTable()', () => {
-    function _generateFixturePkg(name, verStr, flowVerStr) {
+    function _generateFixturePkg(
+      name: string,
+      verStr: string,
+      flowVerStr: string,
+    ) {
       return {
         pkgName: name,
         pkgVersionStr: verStr,

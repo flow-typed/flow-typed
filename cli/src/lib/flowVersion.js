@@ -307,7 +307,11 @@ function disjointVersions(a: FlowVersion, b: FlowVersion): boolean {
 /**
  * Given an array of versions, returns whether they are mutually disjoint.
  */
-function _disjointVersionsAll(vers, len, i) {
+function _disjointVersionsAll(
+  vers: Array<FlowVersion>,
+  len: number,
+  i: number,
+) {
   if (i + 1 >= len) return true;
   for (let j = i + 1; j < len; j++) {
     if (!disjointVersions(vers[i], vers[j])) {

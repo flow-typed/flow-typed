@@ -88,8 +88,8 @@ const basePathRegex = new RegExp(
 );
 
 async function getTestGroups(
-  repoDirPath,
-  envDirPath,
+  repoDirPath: string,
+  envDirPath: string,
   onlyChanged: boolean = false,
 ): Promise<Array<TestGroup>> {
   let libDefs = await getLibDefs(repoDirPath);
@@ -155,7 +155,7 @@ async function getTestGroups(
   });
 }
 
-function printSkipMessage(flowVersion, githubUrl) {
+function printSkipMessage(flowVersion: string, githubUrl: string) {
   console.log(
     '==========================================================================================',
   );
@@ -348,7 +348,7 @@ const flowNameRegex = /^flow-v[0-9]+.[0-9]+.[0-9]+(\.exe)?$/;
  * flow filename should be `flow-vx.x.x`
  * @param {string} name
  */
-function checkFlowFilename(name) {
+function checkFlowFilename(name: string) {
   return flowNameRegex.test(name);
 }
 
@@ -420,7 +420,7 @@ export async function writeFlowConfig(
   await fs.writeFile(destFlowConfigPath, flowConfigData);
 }
 
-function testTypeDefinition(flowVer, testDirPath) {
+function testTypeDefinition(flowVer: string, testDirPath: string) {
   return new Promise(res => {
     const IS_WINDOWS = os.type() === 'Windows_NT';
     const child = child_process.exec(
@@ -447,7 +447,11 @@ function testTypeDefinition(flowVer, testDirPath) {
   });
 }
 
-async function runFlowTypeDefTests(flowVersionsToRun, groupId, testDirPath) {
+async function runFlowTypeDefTests(
+  flowVersionsToRun: Array<string>,
+  groupId: string,
+  testDirPath: string,
+) {
   const errors = [];
   while (flowVersionsToRun.length > 0) {
     // Run tests in batches to avoid saturation
@@ -486,11 +490,11 @@ async function runFlowTypeDefTests(flowVersionsToRun, groupId, testDirPath) {
 }
 
 async function testLowestCapableFlowVersion(
-  lowerVersions,
-  testDirPath,
-  lowestFlowVersionRan,
+  lowerVersions: Array<string>,
+  testDirPath: string,
+  lowestFlowVersionRan: string,
 ) {
-  let lowerFlowVersionsToRun = lowerVersions;
+  let lowerFlowVersionsToRun: Array<string> = lowerVersions;
   let lowestCapableFlowVersion = lowestFlowVersionRan;
   while (lowerFlowVersionsToRun.length > 0) {
     const lowerTestBatch = lowerFlowVersionsToRun
@@ -521,12 +525,12 @@ async function testLowestCapableFlowVersion(
 }
 
 async function findLowestCapableFlowVersion(
-  repoDirPath,
-  orderedFlowVersions,
-  lowestFlowVersionRan,
-  testDirPath,
-  libDefPath,
-  depPaths,
+  repoDirPath: string,
+  orderedFlowVersions: Array<string>,
+  lowestFlowVersionRan: string,
+  testDirPath: string,
+  libDefPath: string,
+  depPaths: Array<string>,
 ) {
   let lowerFlowVersionsToRun = orderedFlowVersions.filter(flowVer => {
     return semver.lt(flowVer, lowestFlowVersionRan);
@@ -602,7 +606,7 @@ function partitionListOfFlowVersionsPerConfigChange(
  * Then shuffle to create a new Array<Array<>> that will test
  * All dependencies across various supported versions.
  */
-function getDepTestGroups(testGroup) {
+function getDepTestGroups(testGroup: TestGroup) {
   const flowDirVersion = extractFlowDirFromFlowDirPath(testGroup.id);
   const depBasePath = getNpmLibDefDirFromNested(testGroup.libDefPath);
 
@@ -757,7 +761,7 @@ async function runTestGroup(
 
     const flowErrors = [];
 
-    const executeTests = async (depPaths = []) => {
+    const executeTests = async (depPaths: Array<string> = []) => {
       for (const sublistOfFlowVersions of groups) {
         const lowestFlowVersionRanInThisGroup = sublistOfFlowVersions[0];
         await writeFlowConfig(

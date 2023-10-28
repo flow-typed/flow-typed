@@ -123,7 +123,9 @@ async function extractLibDefsFromNpmPkgDir(
     parsedFlowDirs.map(async ([flowDirPath, flowVersion]) => {
       const testFilePaths = [].concat(commonTestFiles);
       let libDefFilePath: null | string = null;
-      const depVersions = {};
+      const depVersions: {
+        [key: string]: Array<string>,
+      } = {};
       (await fs.readdir(flowDirPath)).forEach(flowDirItem => {
         const flowDirItemPath = path.join(flowDirPath, flowDirItem);
         const flowDirItemStat = fs.statSync(flowDirItemPath);
@@ -233,16 +235,20 @@ function parsePkgNameVer(
     );
   }
 
-  let [_, pkgName, major, minor, patch, prerel] = pkgNameVerMatches;
-  major = validateVersionNumPart(major, 'major');
-  minor = validateVersionPart(minor, 'minor');
-  patch = validateVersionPart(patch, 'patch');
+  const [_, pkgName, majorStr, minorStr, patchStr, prerel] = pkgNameVerMatches;
+  const major = validateVersionNumPart(majorStr, 'major');
+  const minor = validateVersionPart(minorStr, 'minor');
+  const patch = validateVersionPart(patchStr, 'patch');
 
-  if (prerel != null) {
-    prerel = prerel.substr(1);
-  }
-
-  return {pkgName, pkgVersion: {major, minor, patch, prerel}};
+  return {
+    pkgName,
+    pkgVersion: {
+      major,
+      minor,
+      patch,
+      prerel: prerel != null ? prerel.substr(1) : prerel,
+    },
+  };
 }
 
 /**
