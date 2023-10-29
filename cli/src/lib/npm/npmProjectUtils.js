@@ -102,7 +102,7 @@ function getWorkspacePatterns(cwd: string, pkgJson: PkgJson): string[] {
 
 async function findWorkspacesPackagePaths(
   pkgJson: PkgJson,
-  workspaces,
+  workspaces: Array<string>,
 ): Promise<string[]> {
   const tasks = await Promise.all(
     workspaces.map(pattern => {
@@ -167,7 +167,7 @@ export function getPackageJsonDependencies(
     return ignoreDeps.indexOf(field.slice(0, -'Dependencies'.length)) === -1;
   });
 
-  return depFields.reduce((deps, section) => {
+  return depFields.reduce<{[key: string]: string}>((deps, section) => {
     const contentSection = pkgJson.content[section];
     if (contentSection) {
       Object.keys(contentSection).forEach(pkgName => {

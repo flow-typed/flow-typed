@@ -228,8 +228,8 @@ export async function run(args: Args): Promise<number> {
 async function installEnvLibDefs(
   env: Array<string>,
   flowVersion: FlowVersion,
-  flowProjectRoot,
-  libdefDir,
+  flowProjectRoot: string,
+  libdefDir: string,
   useCacheUntil: number,
   overwrite: boolean,
 ): Promise<number> {

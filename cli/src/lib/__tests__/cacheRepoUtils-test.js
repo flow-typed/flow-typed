@@ -18,8 +18,8 @@ import {cloneInto, rebaseRepoMainline} from '../git';
 
 import {fs} from '../node';
 
-function _mock(mockFn) {
-  return ((mockFn: any): JestMockFn<*, *>);
+function _mock(mockFn: any) {
+  return (mockFn: JestMockFn<any, any>);
 }
 
 describe('cacheRepoUtils', () => {

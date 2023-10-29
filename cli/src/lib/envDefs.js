@@ -45,7 +45,7 @@ export const getEnvDefs = async (): Promise<Array<EnvLibDef>> => {
   return [...settled].filter(Boolean).flat();
 };
 
-const getSingleEnvDef = async (defName, envDefPath) => {
+const getSingleEnvDef = async (defName: string, envDefPath: string) => {
   const itemPath = path.join(envDefPath, defName);
   const itemStat = await fs.stat(itemPath);
   if (itemStat.isDirectory()) {

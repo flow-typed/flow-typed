@@ -29,8 +29,8 @@ import {cloneInto, rebaseRepoMainline} from '../git.js';
  * Jest's process of mocking in place fools Flow, so we use this as an explicit
  * escape hatch when we need to side-step Flow.
  */
-function _mock(mockFn) {
-  return (mockFn: any);
+function _mock(mockFn: any) {
+  return (mockFn: JestMockFn<any, any>);
 }
 
 describe('libDefs', () => {
@@ -117,7 +117,11 @@ describe('libDefs', () => {
   });
 
   describe('filterLibDefs', () => {
-    function _generateMockLibdef(name, verStr, flowVerStr) {
+    function _generateMockLibdef(
+      name: string,
+      verStr: string,
+      flowVerStr: string,
+    ) {
       return {
         pkgName: name,
         pkgVersionStr: verStr,

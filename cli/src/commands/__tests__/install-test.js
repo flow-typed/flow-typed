@@ -33,15 +33,15 @@ import {
 
 const BASE_FIXTURE_ROOT = path.join(__dirname, '__install-fixtures__');
 
-function _mock(mockFn) {
-  return ((mockFn: any): JestMockFn<any, any>);
+function _mock(mockFn: any) {
+  return (mockFn: JestMockFn<any, any>);
 }
 
-async function touchFile(filePath) {
+async function touchFile(filePath: string) {
   await fs.close(await fs.open(filePath, 'w'));
 }
 
-async function writePkgJson(filePath, pkgJson) {
+async function writePkgJson(filePath: string, pkgJson: {...}) {
   await fs.writeJson(filePath, pkgJson);
 }
 
@@ -224,7 +224,9 @@ describe('install (command)', () => {
       (console: any).error = origConsoleError;
     });
 
-    async function fakeProjectEnv(runTest) {
+    async function fakeProjectEnv(
+      runTest: (flowProjectDir: string) => Promise<void>,
+    ) {
       return await testProject(async ROOT_DIR => {
         const FAKE_CACHE_DIR = path.join(ROOT_DIR, 'fakeCache');
         const FAKE_CACHE_REPO_DIR = path.join(FAKE_CACHE_DIR, 'repo');
@@ -1859,7 +1861,9 @@ declare type jsx$HTMLElementProps = {||}`;
       (console: any).warn = origConsoleWarn;
     });
 
-    async function fakeProjectEnv(runTest) {
+    async function fakeProjectEnv(
+      runTest: (flowProjectDir: string) => Promise<void>,
+    ) {
       return await testProject(async ROOT_DIR => {
         const FAKE_CACHE_DIR = path.join(ROOT_DIR, 'fakeCache');
         const FAKE_CACHE_REPO_DIR = path.join(FAKE_CACHE_DIR, 'repo');
