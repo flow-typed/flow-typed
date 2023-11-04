@@ -71,10 +71,6 @@ declare interface GraphQL$ExecutionResult<
   extensions?: TExtensions;
 }
 
-// @apollo/client/link/core/types.d.ts
-// Globals to support global ApolloLink class
-declare type ApolloClient$Path = $ReadOnlyArray<string | number>;
-
 declare module "@apollo/client" {
   import type { ApolloLink, GraphQLRequest, FetchResult, Operation, RequestHandler } from "@apollo/client/link/core";
 
@@ -2352,7 +2348,7 @@ declare module "@apollo/client/link/core" {
 
   // @apollo/client/link/core/types.d.ts
 
-  declare export type Path = ApolloClient$Path;
+  declare export type Path = $ReadOnlyArray<string | number>;
   declare export interface ExecutionPatchResultBase {
     hasNext?: boolean;
   }
@@ -2369,7 +2365,7 @@ declare module "@apollo/client/link/core" {
   declare export interface IncrementalPayload<TData, TExtensions> {
     data: ?TData;
     label?: string;
-    path: ApolloClient$Path;
+    path: Path;
     errors?: $ReadOnlyArray<GraphQL$GraphQLError>;
     extensions?: TExtensions;
   }
