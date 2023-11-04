@@ -7,6 +7,7 @@ import { MockedProvider } from "@apollo/client/testing";
 import { onError } from "@apollo/client/link/error";
 import * as React from 'react';
 import { RetryLink } from '@apollo/client/link/retry';
+import { getMainDefinition } from "@apollo/client/utilities";
 
 const client = new ApolloClient<{ ... }>({ cache: new ApolloCache() });
 
@@ -142,4 +143,14 @@ describe("links", () => {
       const opx: ApolloLink = operation;
     });
   })
+});
+
+describe("getMainDefinition utility", () => {
+  it("returns a definition given a query", () => {
+    const fun = ({ query }: Operation) => {
+      const definition = getMainDefinition(query);
+      const kind: string = definition.kind;
+      const operation: string = definition.string;
+    }
+  });
 });

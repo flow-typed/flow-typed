@@ -70,9 +70,24 @@ declare interface GraphQL$ExecutionResult<
   data?: TData | null;
   extensions?: TExtensions;
 }
+declare type GraphQL$VariableNode = Object;
+declare type GraphQL$SelectionSetNode = Object;
+declare type GraphQL$DirectiveNode = Object;
+declare type GraphQL$FieldNode = Object;
+declare type GraphQL$ValueNode = Object;
+declare type GraphQL$NameNode = Object;
+declare type GraphQL$InlineFragmentNode = Object;
+declare type GraphQL$SelectionNode = Object;
+declare type GraphQL$DefinitionNode = Object;
+declare type GraphQL$VariableDefinitionNode = Object;
+declare type GraphQL$FragmentDefinitionNode = Object;
+declare type GraphQL$ASTNode = Object;
+declare function GraphQL$print(ast: GraphQL$ASTNode): string;
 
 declare module "@apollo/client" {
   import type { ApolloLink, GraphQLRequest, FetchResult, Operation, RequestHandler } from "@apollo/client/link/core";
+  import type { Concast, FragmentMap, FragmentMapFunction, Reference, StoreObject, StoreValue } from "@apollo/client/utilities";
+  import typeof { isReference } from "@apollo/client/utilities";
 
   // External Types
 
@@ -87,23 +102,6 @@ declare module "@apollo/client" {
     name: string;
     constructor(message?: string | number): this;
   }
-
-  // import ... from "graphql";
-
-  declare type DirectiveNode = Object;
-  declare type FieldNode = Object;
-  declare type VariableNode = Object;
-  declare type InlineFragmentNode = Object;
-  declare type ValueNode = Object;
-  declare type SelectionNode = Object;
-  declare type NameNode = Object;
-  declare type SelectionSetNode = Object;
-  declare type Location = Object;
-  declare type DefinitionNode = Object;
-  declare type VariableDefinitionNode = Object;
-  declare type FragmentDefinitionNode = Object;
-  declare type ASTNode = Object;
-  declare function print(ast: ASTNode): string;
 
   // import { TypedDocumentNode } from "@graphql-typed-document-node/core";
   declare type TypedDocumentNode<Result = { [key: string]: any }, Variables = { [key: string]: any }> = {|
@@ -143,66 +141,6 @@ declare module "@apollo/client" {
       ...
     }): this;
   }
-
-  // @apollo/client/utilities/graphql/fragments.d.ts
-
-  declare export function getFragmentQueryDocument(document: GraphQL$DocumentNode, fragmentName?: string): GraphQL$DocumentNode;
-  declare export interface FragmentMap {
-    [fragmentName: string]: FragmentDefinitionNode;
-  }
-  declare export type FragmentMapFunction = (fragmentName: string) => FragmentDefinitionNode | null;
-  declare export function createFragmentMap(fragments?: FragmentDefinitionNode[]): FragmentMap;
-  declare export function getFragmentFromSelection(
-    selection: SelectionNode,
-    fragmentMap?: FragmentMap | FragmentMapFunction
-  ): InlineFragmentNode | FragmentDefinitionNode | null;
-
-  // @apollo/client/utilities/graphql/storeUtils.d.ts
-
-  declare export interface Reference {
-    +__ref: string;
-  }
-  declare export function makeReference(id: string): Reference;
-  declare export function isReference(obj: any): boolean;
-  declare export type StoreValue = number | string | string[] | Reference | Reference[] | null | void | void | Object;
-  declare export interface StoreObject {
-    __typename?: string;
-    [storeFieldName: string]: StoreValue;
-  }
-  declare export function isGraphQL$DocumentNode(value: any): boolean;
-  declare export function valueToObjectRepresentation(
-    argObj: any,
-    name: NameNode,
-    value: ValueNode,
-    variables?: Object
-  ): void;
-  declare export function storeKeyNameFromField(field: FieldNode, variables?: Object): string;
-  declare export type Directives = {
-    [directiveName: string]: {
-      [argName: string]: any,
-    },
-  };
-  declare export var getStoreKeyName: ((
-    fieldName: string,
-    args?: { ... } | null,
-    directives?: Directives
-  ) => string) & {|
-    setStringify(s: typeof stringify): (value: any) => string,
-  |};
-  declare export var stringify: (value: any) => string;
-  declare export function argumentsObjectFromField(
-    field: FieldNode | DirectiveNode,
-    variables?: { [key: string]: any, ... }
-  ): Object | null;
-  declare export function resultKeyNameFromField(field: FieldNode): string;
-  declare export function getTypenameFromResult(
-    result: { [key: string]: any, ... },
-    selectionSet: SelectionSetNode,
-    fragmentMap?: FragmentMap
-  ): string | void;
-  declare export function isField(selection: SelectionNode): boolean;
-  declare export function isInlineFragment(selection: SelectionNode): boolean;
-  declare export type VariableValue = (node: VariableNode) => any;
 
   // @apollo/client/cache/core/types/Cache.d.ts
 
@@ -364,7 +302,7 @@ declare module "@apollo/client" {
 
   declare export interface FragmentRegistryAPI {
     register(...fragments: GraphQL$DocumentNode[]): FragmentRegistryAPI;
-    lookup(fragmentName: string): FragmentDefinitionNode | null;
+    lookup(fragmentName: string): GraphQL$FragmentDefinitionNode | null;
     transform<D: GraphQL$DocumentNode>(document: D): D;
   }
   declare export function createFragmentRegistry(...fragments: GraphQL$DocumentNode[]): FragmentRegistryAPI;
@@ -438,7 +376,7 @@ declare module "@apollo/client" {
     ...
   } & ApolloReducerConfig;
   declare export interface MergeInfo {
-    field: FieldNode;
+    field: GraphQL$FieldNode;
     typename: string | void;
     merge: FieldMergeFunction<>;
   }
@@ -556,7 +494,7 @@ declare module "@apollo/client" {
     isFresh(
       result: { [key: string]: any, ... },
       parent: StoreObject | Reference,
-      selectionSet: SelectionSetNode,
+      selectionSet: GraphQL$SelectionSetNode,
       context: ReadMergeModifyContext
     ): boolean;
   }
@@ -565,7 +503,7 @@ declare module "@apollo/client" {
 
   declare export type WriteContext = {
     +written: {
-      [dataId: string]: SelectionSetNode[],
+      [dataId: string]: GraphQL$SelectionSetNode[],
     },
     +fragmentMap: FragmentMap,
     lookupFragment: FragmentMapFunction,
@@ -576,7 +514,7 @@ declare module "@apollo/client" {
       {
         storeObject: StoreObject,
         mergeTree?: MergeTree,
-        fieldNodeSet: Set<FieldNode>,
+        fieldNodeSet: Set<GraphQL$FieldNode>,
         ...
       }
     >,
@@ -616,7 +554,7 @@ declare module "@apollo/client" {
     typename: string | void,
     storeObject: StoreObject,
     readField: ReadFieldFunction,
-    selectionSet?: SelectionSetNode,
+    selectionSet?: GraphQL$SelectionSetNode,
     fragmentMap?: FragmentMap,
     keyObject?: { [key: string]: any, ... },
     ...
@@ -641,7 +579,7 @@ declare module "@apollo/client" {
     context: {
       typename: string,
       fieldName: string,
-      field: FieldNode | null,
+      field: GraphQL$FieldNode | null,
       variables?: { [key: string]: any, ... },
       ...
     }
@@ -665,9 +603,9 @@ declare module "@apollo/client" {
     args: TArgs | null;
     fieldName: string;
     storeFieldName: string;
-    field: FieldNode | null;
+    field: GraphQL$FieldNode | null;
     variables?: TVars;
-    isReference: typeof isReference;
+    isReference: isReference;
     toReference: ToReferenceFunction;
     storage: StorageType;
     cache: InMemoryCache;
@@ -712,7 +650,7 @@ declare module "@apollo/client" {
     addTypePolicies(typePolicies: TypePolicies): void;
     addPossibleTypes(possibleTypes: PossibleTypesMap): void;
     fragmentMatches(
-      fragment: InlineFragmentNode | FragmentDefinitionNode,
+      fragment: GraphQL$InlineFragmentNode | GraphQL$FragmentDefinitionNode,
       typename: string | void,
       result?: { [key: string]: any, ... },
       variables?: { [key: string]: any, ... }
@@ -773,7 +711,7 @@ declare module "@apollo/client" {
   declare export interface FieldSpecifier {
     typename?: string;
     fieldName: string;
-    field?: FieldNode;
+    field?: GraphQL$FieldNode;
     args?: { [key: string]: any, ... };
     variables?: { [key: string]: any, ... };
   }
@@ -799,7 +737,7 @@ declare module "@apollo/client" {
       storeFieldName: string,
       readField: ReadFieldFunction,
       canRead: CanReadFunction,
-      isReference: typeof isReference,
+      isReference: isReference,
       toReference: ToReferenceFunction,
       storage: StorageType,
       ...
@@ -930,6 +868,11 @@ declare module "@apollo/client" {
     ): TData | null;
   }
 
+  // @apollo/client/core/index.d.ts
+
+  declare export { DocumentTransformCacheKey, Observer, ObservableSubscription, Reference, StoreObject } from "@apollo/client/utilities";
+  declare export { DocumentTransform, Observable, isReference, makeReference, } from "@apollo/client/utilities";
+
   // @apollo/client/core/QueryInfo.d.ts
 
   declare export type QueryStoreValue = {|
@@ -985,22 +928,6 @@ declare module "@apollo/client" {
     markError(error: ApolloError): ApolloError;
   }
   declare export function shouldWriteResult<T>(result: FetchResult<T>, errorPolicy?: ErrorPolicy): boolean;
-
-  // @apollo/client/utilities/observables/Concast.d.ts
-
-  declare export type MaybeAsync<T> = T | Promise<T>;
-  declare export type Source<T> = MaybeAsync<ZenObservable$Observable<T>>;
-  declare export type ConcastSourcesIterable<T> = Iterable<Source<T>>;
-  declare export type ConcastSourcesArray<T> = Array<Source<T>>;
-  declare export class Concast<T> mixins ZenObservable$Observable<T> {
-    constructor(sources: MaybeAsync<ConcastSourcesIterable<T>> | ZenObservable$Subscriber<T>): this;
-    addObserver(observer: ZenObservable$Observer<T>): void;
-    removeObserver(observer: ZenObservable$Observer<T>): void;
-    +promise: Promise<T>;
-    beforeNext(callback: NextResultListener): void;
-    cancel: (reason: any) => void;
-  }
-  declare export type NextResultListener = (method: "next" | "error" | "complete", arg?: any) => any;
 
   // @apollo/client/core/watchQueryOptions.d.ts
 
@@ -1126,7 +1053,7 @@ declare module "@apollo/client" {
     args?: any,
     context?: any,
     info?: {
-      field: FieldNode,
+      field: GraphQL$FieldNode,
       fragmentMap: FragmentMap,
       ...
     }
@@ -1178,7 +1105,7 @@ declare module "@apollo/client" {
     ): Promise<{
       [x: string]: any,
     }>;
-    shouldForceResolvers(document: ASTNode): boolean;
+    shouldForceResolvers(document: GraphQL$ASTNode): boolean;
   }
 
   // @apollo/client/core/QueryManager.d.ts
@@ -1809,7 +1736,7 @@ declare module "@apollo/client" {
   declare export interface IDocumentDefinition {
     type: $Values<typeof DocumentType>;
     name: string;
-    variables: $ReadOnlyArray<VariableDefinitionNode>;
+    variables: $ReadOnlyArray<GraphQL$VariableDefinitionNode>;
   }
   declare export function operationName(type: $Values<typeof DocumentType>): string;
   declare export function parser(document: GraphQL$DocumentNode): IDocumentDefinition;
@@ -2127,7 +2054,7 @@ declare module "@apollo/client" {
   // @apollo/client/link/http/selectHttpOptionsAndBody.d.ts
 
   declare export interface Printer {
-    (node: ASTNode, originalPrint: typeof print): string;
+    (node: GraphQL$ASTNode, originalPrint: typeof GraphQL$print): string;
   }
   declare export interface UriFunction {
     (operation: Operation): string;
@@ -2772,4 +2699,131 @@ declare module "@apollo/client/testing" {
     render(): React$Node | null;
     componentWillUnmount(): void;
   }
+}
+
+declare module "@apollo/client/utilities" {
+  // @apollo/client/utilities/graphql/DocumentTransform.d.ts
+
+  declare export type DocumentTransformCacheKey = $ReadOnlyArray<mixed>;
+  declare type TransformFn = (document: DocumentNode) => GraphQL$DocumentNode;
+  declare interface DocumentTransformOptions {
+    cache?: boolean;
+    getCacheKey?: (document: DocumentNode) => DocumentTransformCacheKey | void;
+  }
+  declare export class DocumentTransform {
+    static identity(): DocumentTransform;
+    static split(predicate: (document: DocumentNode) => boolean, left: DocumentTransform, right?: DocumentTransform): DocumentTransform;
+    constructor(transform: TransformFn, options?: DocumentTransformOptions): this;
+    transformDocument(document: DocumentNode): DocumentNode;
+    concat(otherTransform: DocumentTransform): DocumentTransform;
+    getStableCacheEntry(document: DocumentNode): {|
+      key: DocumentTransformCacheKey;
+      value?: DocumentNode | void;
+    |} | void;
+  }
+
+  // @apollo/client/utilities/graphql/fragments.d.ts
+
+  declare export function getFragmentQueryDocument(document: GraphQL$DocumentNode, fragmentName?: string): GraphQL$DocumentNode;
+  declare export interface FragmentMap {
+    [fragmentName: string]: GraphQL$FragmentDefinitionNode;
+  }
+  declare export type FragmentMapFunction = (fragmentName: string) => GraphQL$FragmentDefinitionNode | null;
+  declare export function createFragmentMap(fragments?: GraphQL$FragmentDefinitionNode[]): FragmentMap;
+  declare export function getFragmentFromSelection(
+    selection: GraphQL$SelectionNode,
+    fragmentMap?: FragmentMap | FragmentMapFunction
+  ): GraphQL$InlineFragmentNode | GraphQL$FragmentDefinitionNode | null;
+
+  // @apollo/client/utilities/graphql/getFromAST.d.ts
+
+  declare type DocumentNode = GraphQL$DocumentNode;
+  declare type OperationDefinitionNode = GraphQL$DocumentNode;
+  declare type FragmentDefinitionNode = GraphQL$DocumentNode;
+
+  declare export function checkDocument(doc: DocumentNode): DocumentNode;
+
+  declare export function getOperationDefinition(doc: DocumentNode): OperationDefinitionNode | void;
+
+  declare export function getOperationName(doc: DocumentNode): string | null;
+
+  declare export function getFragmentDefinitions(doc: DocumentNode): FragmentDefinitionNode[];
+
+  declare export function getQueryDefinition(doc: DocumentNode): OperationDefinitionNode;
+
+  declare export function getFragmentDefinition(doc: DocumentNode): FragmentDefinitionNode;
+
+  declare export function getMainDefinition(queryDoc: DocumentNode): OperationDefinitionNode | FragmentDefinitionNode;
+
+  declare export function getDefaultValues(definition: OperationDefinitionNode | void): { [key: string]: any };
+
+  // @apollo/client/utilities/graphql/storeUtils.d.ts
+
+  declare export interface Reference {
+    +__ref: string;
+  }
+  declare export function makeReference(id: string): Reference;
+  declare export function isReference(obj: any): boolean;
+  declare export type StoreValue = number | string | string[] | Reference | Reference[] | null | void | void | Object;
+  declare export interface StoreObject {
+    __typename?: string;
+    [storeFieldName: string]: StoreValue;
+  }
+  declare export function isGraphQL$DocumentNode(value: any): boolean;
+  declare export function valueToObjectRepresentation(
+    argObj: any,
+    name: GraphQL$NameNode,
+    value: GraphQL$ValueNode,
+    variables?: Object
+  ): void;
+  declare export function storeKeyNameFromField(field: GraphQL$FieldNode, variables?: Object): string;
+  declare export type Directives = {
+    [directiveName: string]: {
+      [argName: string]: any,
+    },
+  };
+  declare export var getStoreKeyName: ((
+    fieldName: string,
+    args?: { ... } | null,
+    directives?: Directives
+  ) => string) & {|
+    setStringify(s: typeof stringify): (value: any) => string,
+  |};
+  declare export var stringify: (value: any) => string;
+  declare export function argumentsObjectFromField(
+    field: GraphQL$FieldNode | GraphQL$DirectiveNode,
+    variables?: { [key: string]: any, ... }
+  ): Object | null;
+  declare export function resultKeyNameFromField(field: GraphQL$FieldNode): string;
+  declare export function getTypenameFromResult(
+    result: { [key: string]: any, ... },
+    selectionSet: GraphQL$SelectionSetNode,
+    fragmentMap?: FragmentMap
+  ): string | void;
+  declare export function isField(selection: GraphQL$SelectionNode): boolean;
+  declare export function isInlineFragment(selection: GraphQL$SelectionNode): boolean;
+  declare export type VariableValue = (node: GraphQL$VariableNode) => any;
+
+  // @apollo/client/utilities/observables/Observable.d.ts
+
+  declare export type Observer<T> = ZenObservable$Observable<T>;
+  declare export type ObservableSubscription = ZenObservable$ObservableSubscription;
+  declare export type Subscriber<T> = ZenObservable$Subscriber<T>;
+  declare export type Observable<T> = ZenObservable$Observable<T>;
+
+  // @apollo/client/utilities/observables/Concast.d.ts
+
+  declare export type MaybeAsync<T> = T | Promise<T>;
+  declare export type Source<T> = MaybeAsync<ZenObservable$Observable<T>>;
+  declare export type ConcastSourcesIterable<T> = Iterable<Source<T>>;
+  declare export type ConcastSourcesArray<T> = Array<Source<T>>;
+  declare export class Concast<T> mixins ZenObservable$Observable<T> {
+    constructor(sources: MaybeAsync<ConcastSourcesIterable<T>> | ZenObservable$Subscriber<T>): this;
+    addObserver(observer: ZenObservable$Observer<T>): void;
+    removeObserver(observer: ZenObservable$Observer<T>): void;
+    +promise: Promise<T>;
+    beforeNext(callback: NextResultListener): void;
+    cancel: (reason: any) => void;
+  }
+  declare export type NextResultListener = (method: "next" | "error" | "complete", arg?: any) => any;
 }
