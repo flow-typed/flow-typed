@@ -118,16 +118,9 @@ declare type ApolloClient$ExecutionPatchResult<
   TData = { [key: string]: any, ... },
   TExtensions = { [key: string]: any, ... }
 > = ApolloClient$ExecutionPatchInitialResult<TData, TExtensions> | ApolloClient$ExecutionPatchIncrementalResult<TData, TExtensions>;
-declare interface ApolloClient$GraphQLRequest {
-  query: GraphQL$DocumentNode;
-  variables?: Object;
-  operationName?: string;
-  context?: Object;
-  extensions?: Object;
-}
 
 declare module "@apollo/client" {
-  import type { ApolloLink, FetchResult, Operation, RequestHandler } from "@apollo/client/link/core";
+  import type { ApolloLink, GraphQLRequest, FetchResult, Operation, RequestHandler } from "@apollo/client/link/core";
 
   // External Types
 
@@ -1557,7 +1550,7 @@ declare module "@apollo/client" {
     writeQuery<TData, TVariables>(options: Cache$WriteQueryOptions<TData, TVariables>): void;
     writeFragment<TData, TVariables>(options: Cache$WriteFragmentOptions<TData, TVariables>): void;
     __actionHookForDevTools(cb: () => any): void;
-    __requestRaw(payload: ApolloClient$GraphQLRequest): ZenObservable$Observable<GraphQL$ExecutionResult<>>;
+    __requestRaw(payload: GraphQLRequest): ZenObservable$Observable<GraphQL$ExecutionResult<>>;
     resetStore(): Promise<ApolloQueryResult<any>[] | null>;
     clearStore(): Promise<any[]>;
     onResetStore(cb: () => Promise<any>): () => void;
@@ -2267,7 +2260,7 @@ declare module "@apollo/client" {
 
   // @apollo/client/link/utils/createOperation.d.ts
 
-  declare function createOperation(starting: any, operation: ApolloClient$GraphQLRequest): Operation;
+  declare function createOperation(starting: any, operation: GraphQLRequest): Operation;
 
   // @apollo/client/link/utils/fromError.d.ts
 
@@ -2294,11 +2287,11 @@ declare module "@apollo/client" {
 
   // @apollo/client/link/utils/transformOperation.d.ts
 
-  declare function transformOperation(operation: ApolloClient$GraphQLRequest): ApolloClient$GraphQLRequest;
+  declare function transformOperation(operation: GraphQLRequest): GraphQLRequest;
 
   // @apollo/client/link/utils/validateOperation.d.ts
 
-  declare function validateOperation(operation: ApolloClient$GraphQLRequest): ApolloClient$GraphQLRequest;
+  declare function validateOperation(operation: GraphQLRequest): GraphQLRequest;
 }
 
 declare module "@apollo/client/link/batch" {
@@ -2366,11 +2359,11 @@ declare module "@apollo/client/link/batch-http" {
 }
 
 declare module "@apollo/client/link/context" {
-  import type { ApolloLink } from "@apollo/client/link/core";
+  import type { ApolloLink, GraphQLRequest } from "@apollo/client/link/core";
 
   // @apollo/client/link/context/index.d.ts
 
-  declare export type ContextSetter = (operation: ApolloClient$GraphQLRequest, prevContext: any) => Promise<any> | any;
+  declare export type ContextSetter = (operation: GraphQLRequest, prevContext: any) => Promise<any> | any;
   declare export function setContext(setter: ContextSetter): ApolloLink;
 }
 
@@ -2385,7 +2378,7 @@ declare module "@apollo/client/link/core" {
       left: ApolloLink | RequestHandler,
       right?: ApolloLink | RequestHandler
     ): ApolloLink;
-    static execute(link: ApolloLink, operation: ApolloClient$GraphQLRequest): ZenObservable$Observable<FetchResult<>>;
+    static execute(link: ApolloLink, operation: GraphQLRequest): ZenObservable$Observable<FetchResult<>>;
     static concat(first: ApolloLink | RequestHandler, second: ApolloLink | RequestHandler): ApolloLink;
     constructor(request?: RequestHandler): this;
     split(
@@ -2419,7 +2412,13 @@ declare module "@apollo/client/link/core" {
     TData = { [key: string]: any, ... },
     TExtensions = { [key: string]: any, ... }
   > = ApolloClient$ExecutionPatchResult<TData, TExtensions>;
-  declare export interface GraphQLRequest extends ApolloClient$GraphQLRequest {}
+  declare export interface GraphQLRequest {
+    query: GraphQL$DocumentNode;
+    variables?: Object;
+    operationName?: string;
+    context?: Object;
+    extensions?: Object;
+  }
   declare export interface Operation {
     query: GraphQL$DocumentNode;
     variables: { [key: string]: any, ... };
@@ -2643,7 +2642,7 @@ declare module "@apollo/client/link/ws" {
 
 declare module "@apollo/client/testing" {
   import type { ApolloCache, ApolloClient, ApolloQueryResult, DefaultOptions, NormalizedCacheObject, ObservableQuery, QueryManager, Resolvers } from "@apollo/client";
-  import type { ApolloLink, FetchResult, Operation } from "@apollo/client/link/core";
+  import type { ApolloLink, FetchResult, GraphQLRequest, Operation } from "@apollo/client/link/core";
 
   // Typescript built-in type
   declare type RequestInit = any;
@@ -2684,7 +2683,7 @@ declare module "@apollo/client/testing" {
 
   declare type ResultFunction<T> = () => T;
   declare type MockedResponse<TData = { [key: string]: any, ... }> = {|
-    request: ApolloClient$GraphQLRequest;
+    request: GraphQLRequest;
     result?: FetchResult<TData> | ResultFunction<FetchResult<TData>>;
     error?: Error;
     delay?: number;
