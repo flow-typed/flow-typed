@@ -114,10 +114,6 @@ declare type ApolloClient$ExecutionPatchInitialResult<
   extensions?: TExtensions,
   ...
 } & ApolloClient$ExecutionPatchResultBase;
-declare type ApolloClient$ExecutionPatchResult<
-  TData = { [key: string]: any, ... },
-  TExtensions = { [key: string]: any, ... }
-> = ApolloClient$ExecutionPatchInitialResult<TData, TExtensions> | ApolloClient$ExecutionPatchIncrementalResult<TData, TExtensions>;
 
 declare module "@apollo/client" {
   import type { ApolloLink, GraphQLRequest, FetchResult, Operation, RequestHandler } from "@apollo/client/link/core";
@@ -2411,7 +2407,7 @@ declare module "@apollo/client/link/core" {
   declare export type ExecutionPatchResult<
     TData = { [key: string]: any, ... },
     TExtensions = { [key: string]: any, ... }
-  > = ApolloClient$ExecutionPatchResult<TData, TExtensions>;
+  > = ApolloClient$ExecutionPatchInitialResult<TData, TExtensions> | ApolloClient$ExecutionPatchIncrementalResult<TData, TExtensions>;
   declare export interface GraphQLRequest {
     query: GraphQL$DocumentNode;
     variables?: Object;
@@ -2439,7 +2435,7 @@ declare module "@apollo/client/link/core" {
     TData = { [key: string]: any, ... },
     TContext = { [key: string]: any, ... },
     TExtensions = { [key: string]: any, ... }
-  > = ApolloClient$SingleExecutionResult<TData, TContext, TExtensions> | ApolloClient$ExecutionPatchResult<TData, TExtensions>;
+  > = ApolloClient$SingleExecutionResult<TData, TContext, TExtensions> | ExecutionPatchResult<TData, TExtensions>;
   declare export type NextLink = (operation: Operation) => ZenObservable$Observable<FetchResult<>>;
   declare export type RequestHandler = (operation: Operation, forward: NextLink) => ZenObservable$Observable<FetchResult<>> | null;
 }
