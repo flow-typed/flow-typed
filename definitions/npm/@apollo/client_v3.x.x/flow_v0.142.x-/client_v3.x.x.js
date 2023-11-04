@@ -104,16 +104,6 @@ declare type ApolloClient$ExecutionPatchIncrementalResult<
   extensions?: empty,
   ...
 } & ApolloClient$ExecutionPatchResultBase;
-declare type ApolloClient$ExecutionPatchInitialResult<
-  TData = { [key: string]: any, ... },
-  TExtensions = { [key: string]: any, ... }
-> = {
-  data: ApolloClient$Data<TData>,
-  incremental?: empty,
-  errors?: $ReadOnlyArray<GraphQL$GraphQLError>,
-  extensions?: TExtensions,
-  ...
-} & ApolloClient$ExecutionPatchResultBase;
 
 declare module "@apollo/client" {
   import type { ApolloLink, GraphQLRequest, FetchResult, Operation, RequestHandler } from "@apollo/client/link/core";
@@ -2398,7 +2388,13 @@ declare module "@apollo/client/link/core" {
   declare export type ExecutionPatchInitialResult<
     TData = { [key: string]: any, ... },
     TExtensions = { [key: string]: any, ... }
-  > = ApolloClient$ExecutionPatchInitialResult<TData, TExtensions>;
+  > = {
+    data: ApolloClient$Data<TData>,
+    incremental?: empty,
+    errors?: $ReadOnlyArray<GraphQL$GraphQLError>,
+    extensions?: TExtensions,
+    ...
+  } & ApolloClient$ExecutionPatchResultBase;
   declare export interface IncrementalPayload<TData, TExtensions> extends ApolloClient$IncrementalPayload<TData, TExtensions> {}
   declare export type ExecutionPatchIncrementalResult<
     TData = { [key: string]: any, ... },
@@ -2407,7 +2403,7 @@ declare module "@apollo/client/link/core" {
   declare export type ExecutionPatchResult<
     TData = { [key: string]: any, ... },
     TExtensions = { [key: string]: any, ... }
-  > = ApolloClient$ExecutionPatchInitialResult<TData, TExtensions> | ApolloClient$ExecutionPatchIncrementalResult<TData, TExtensions>;
+  > = ExecutionPatchInitialResult<TData, TExtensions> | ApolloClient$ExecutionPatchIncrementalResult<TData, TExtensions>;
   declare export interface GraphQLRequest {
     query: GraphQL$DocumentNode;
     variables?: Object;
