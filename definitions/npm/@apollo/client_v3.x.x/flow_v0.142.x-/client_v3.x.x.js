@@ -75,15 +75,6 @@ declare interface GraphQL$ExecutionResult<
 // Globals to support global ApolloLink class
 declare type ApolloClient$Path = $ReadOnlyArray<string | number>;
 declare type ApolloClient$Data<T> = T | null | void;
-declare type ApolloClient$SingleExecutionResult<
-  TData = { [key: string]: any, ... },
-  TContext = { [key: string]: any, ... },
-  TExtensions = { [key: string]: any, ... }
-> = {
-  data?: ApolloClient$Data<TData>,
-  context?: TContext,
-  ...
-} & GraphQL$ExecutionResult<TData, TExtensions>;
 
 declare module "@apollo/client" {
   import type { ApolloLink, GraphQLRequest, FetchResult, Operation, RequestHandler } from "@apollo/client/link/core";
@@ -2420,12 +2411,16 @@ declare module "@apollo/client/link/core" {
     TData = { [key: string]: any, ... },
     TContext = { [key: string]: any, ... },
     TExtensions = { [key: string]: any, ... }
-  > = ApolloClient$SingleExecutionResult<TData, TContext, TExtensions>;
+  > = {
+    data?: ApolloClient$Data<TData>,
+    context?: TContext,
+    ...
+  } & GraphQL$ExecutionResult<TData, TExtensions>;
   declare export type FetchResult<
     TData = { [key: string]: any, ... },
     TContext = { [key: string]: any, ... },
     TExtensions = { [key: string]: any, ... }
-  > = ApolloClient$SingleExecutionResult<TData, TContext, TExtensions> | ExecutionPatchResult<TData, TExtensions>;
+  > = SingleExecutionResult<TData, TContext, TExtensions> | ExecutionPatchResult<TData, TExtensions>;
   declare export type NextLink = (operation: Operation) => ZenObservable$Observable<FetchResult<>>;
   declare export type RequestHandler = (operation: Operation, forward: NextLink) => ZenObservable$Observable<FetchResult<>> | null;
 }
