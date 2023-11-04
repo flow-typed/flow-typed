@@ -2,7 +2,7 @@
 
 import { describe, it } from 'flow-typed-test';
 import { ApolloCache, ApolloClient, ApolloLink, ApolloProvider, createHttpLink, useSubscription } from '@apollo/client';
-import type { FetchResult, OnSubscriptionDataOptions } from '@apollo/client';
+import type { FetchResult, OnSubscriptionDataOptions, Operation } from '@apollo/client';
 import { MockedProvider } from "@apollo/client/testing";
 import { onError } from "@apollo/client/link/error";
 import * as React from 'react';
@@ -135,6 +135,11 @@ describe("links", () => {
     const httpLink: ApolloLink = createHttpLink({ uri: "http://example.com" });
   });
   it("creates onError link", () => {
-    onError(({ operation, networkError, response }) => {});
+    onError(({ operation, networkError, response }) => {
+      const op: Operation = operation;
+
+      // $FlowExpectedError[incompatible-type]
+      const opx: ApolloLink = operation;
+    });
   })
 });

@@ -73,17 +73,6 @@ declare interface GraphQL$ExecutionResult<
 
 // @apollo/client/link/core/types.d.ts
 // Globals to support global ApolloLink class
-declare interface ApolloClient$Operation {
-  query: GraphQL$DocumentNode;
-  variables: { [key: string]: any, ... };
-  operationName: string;
-  extensions: { [key: string]: any, ... };
-  setContext: (context: { [key: string]: any, ... }) => {
-    [key: string]: any,
-    ...,
-  };
-  getContext: () => { [key: string]: any, ... };
-}
 declare type ApolloClient$Path = $ReadOnlyArray<string | number>;
 declare type ApolloClient$Data<T> = T | null | void;
 declare type ApolloClient$SingleExecutionResult<
@@ -135,7 +124,6 @@ declare type ApolloClient$FetchResult<
   TExtensions = { [key: string]: any, ... }
 > = ApolloClient$SingleExecutionResult<TData, TContext, TExtensions> | ApolloClient$ExecutionPatchResult<TData, TExtensions>;
 
-declare type ApolloClient$NextLink = (operation: ApolloClient$Operation) => ZenObservable$Observable<ApolloClient$FetchResult<>>;
 declare interface ApolloClient$GraphQLRequest {
   query: GraphQL$DocumentNode;
   variables?: Object;
@@ -143,10 +131,9 @@ declare interface ApolloClient$GraphQLRequest {
   context?: Object;
   extensions?: Object;
 }
-declare type ApolloClient$RequestHandler = (operation: ApolloClient$Operation, forward: ApolloClient$NextLink) => ZenObservable$Observable<ApolloClient$FetchResult<>> | null;
 
 declare module "@apollo/client" {
-  import type { ApolloLink } from "@apollo/client/link/core";
+  import type { ApolloLink, Operation, RequestHandler } from "@apollo/client/link/core";
 
   // External Types
 
@@ -2156,7 +2143,7 @@ declare module "@apollo/client" {
   // $FlowFixMe[type-as-value] See https://stackoverflow.com/questions/74525879/flowtype-libdefs-how-to-export-a-class-definition-from-one-module-and-extend
   declare export class HttpLink extends ApolloLink {
     options: HttpOptions;
-    requester: ApolloClient$RequestHandler;
+    requester: RequestHandler;
     constructor(options?: HttpOptions): this;
   }
 
@@ -2176,9 +2163,9 @@ declare module "@apollo/client" {
   };
   declare export function parseJsonBody<T>(response: Response, bodyText: string): T;
   declare export function handleError(err: any, observer: ZenObservable$Observer<any>): void;
-  declare export function readJsonBody<T>(response: Response, operation: ApolloClient$Operation, observer: ZenObservable$Observer<T>): void;
+  declare export function readJsonBody<T>(response: Response, operation: Operation, observer: ZenObservable$Observer<T>): void;
   declare export function parseAndCheckHttpResponse(
-    operations: ApolloClient$Operation | ApolloClient$Operation[]
+    operations: Operation | Operation[]
   ): (response: Response) => Promise<any>;
 
   // @apollo/client/link/http/rewriteURIForGET.d.ts
@@ -2204,7 +2191,7 @@ declare module "@apollo/client" {
     (node: ASTNode, originalPrint: typeof print): string;
   }
   declare export interface UriFunction {
-    (operation: ApolloClient$Operation): string;
+    (operation: Operation): string;
   }
   declare export interface Body {
     query?: string;
@@ -2250,7 +2237,7 @@ declare module "@apollo/client" {
   };
   declare export var defaultPrinter: Printer;
   declare export function selectHttpOptionsAndBody(
-    operation: ApolloClient$Operation,
+    operation: Operation,
     fallbackConfig: HttpConfig,
     ...configs: Array<HttpConfig>
   ): {
@@ -2259,7 +2246,7 @@ declare module "@apollo/client" {
     ...
   };
   declare export function selectHttpOptionsAndBodyInternal(
-    operation: ApolloClient$Operation,
+    operation: Operation,
     printer: Printer,
     ...configs: HttpConfig[]
   ): {
@@ -2271,8 +2258,8 @@ declare module "@apollo/client" {
   // @apollo/client/link/http/selectURI.d.ts
 
   declare export var selectURI: (
-    operation: ApolloClient$Operation,
-    fallbackURI?: string | ((operation: ApolloClient$Operation) => string) | void
+    operation: Operation,
+    fallbackURI?: string | ((operation: Operation) => string) | void
   ) => any;
 
   // @apollo/client/link/http/serializeFetchParameter.d.ts
@@ -2286,7 +2273,7 @@ declare module "@apollo/client" {
 
   // @apollo/client/link/utils/createOperation.d.ts
 
-  declare function createOperation(starting: any, operation: ApolloClient$GraphQLRequest): ApolloClient$Operation;
+  declare function createOperation(starting: any, operation: ApolloClient$GraphQLRequest): Operation;
 
   // @apollo/client/link/utils/fromError.d.ts
 
@@ -2321,17 +2308,17 @@ declare module "@apollo/client" {
 }
 
 declare module "@apollo/client/link/batch" {
-  import type { ApolloLink } from "@apollo/client/link/core";
+  import type { ApolloLink, NextLink, Operation } from "@apollo/client/link/core";
 
   // @apollo/client/link/batch/batching.d.ts
 
   declare export type BatchHandler = (
-    operations: ApolloClient$Operation[],
-    forward?: (ApolloClient$NextLink | void)[]
+    operations: Operation[],
+    forward?: (NextLink | void)[]
   ) => ZenObservable$Observable<ApolloClient$FetchResult<>[]> | null;
   declare export interface BatchableRequest {
-    operation: ApolloClient$Operation;
-    forward?: ApolloClient$NextLink;
+    operation: Operation;
+    forward?: NextLink;
   }
   declare export class OperationBatcher {
     constructor(x: {
@@ -2339,7 +2326,7 @@ declare module "@apollo/client/link/batch" {
       batchInterval?: number,
       batchMax?: number,
       batchHandler: BatchHandler,
-      batchKey?: (operation: ApolloClient$Operation) => string,
+      batchKey?: (operation: Operation) => string,
       ...
     }): this;
     enqueueRequest(request: BatchableRequest): ZenObservable$Observable<ApolloClient$FetchResult<>>;
@@ -2353,19 +2340,19 @@ declare module "@apollo/client/link/batch" {
     batchDebounce?: boolean;
     batchMax?: number;
     batchHandler?: BatchHandler;
-    batchKey?: (operation: ApolloClient$Operation) => string;
+    batchKey?: (operation: Operation) => string;
   }
 
   // $FlowFixMe[type-as-value] See https://stackoverflow.com/questions/74525879/flowtype-libdefs-how-to-export-a-class-definition-from-one-module-and-extend
   declare export class BatchLink extends ApolloLink {
     constructor(fetchParams?: BatchLink$Options): this;
-    request(operation: ApolloClient$Operation, forward?: ApolloClient$NextLink): ZenObservable$Observable<ApolloClient$FetchResult<>> | null;
+    request(operation: Operation, forward?: NextLink): ZenObservable$Observable<ApolloClient$FetchResult<>> | null;
   }
 }
 
 declare module "@apollo/client/link/batch-http" {
   import type { HttpOptions } from "@apollo/client";
-  import type { ApolloLink } from "@apollo/client/link/core";
+  import type { ApolloLink, Operation } from "@apollo/client/link/core";
 
   // @apollo/client/link/batch-http/batchHttpLink.d.ts
 
@@ -2373,14 +2360,14 @@ declare module "@apollo/client/link/batch-http" {
     batchInterval?: number,
     batchDebounce?: boolean,
     batchMax?: number,
-    batchKey?: (operation: ApolloClient$Operation) => string,
+    batchKey?: (operation: Operation) => string,
     ...HttpOptions,
   |};
 
   // $FlowFixMe[type-as-value] See https://stackoverflow.com/questions/74525879/flowtype-libdefs-how-to-export-a-class-definition-from-one-module-and-extend
   declare export class BatchHttpLink extends ApolloLink {
     constructor(fetchParams?: BatchHttpLink$Options): this;
-    request(operation: ApolloClient$Operation): ZenObservable$Observable<ApolloClient$FetchResult<>> | null;
+    request(operation: Operation): ZenObservable$Observable<ApolloClient$FetchResult<>> | null;
   }
 }
 
@@ -2398,22 +2385,22 @@ declare module "@apollo/client/link/core" {
 
   declare export class ApolloLink {
     static empty(): ApolloLink;
-    static from(links: (ApolloLink | ApolloClient$RequestHandler)[]): ApolloLink;
+    static from(links: (ApolloLink | RequestHandler)[]): ApolloLink;
     static split(
-      test: (op: ApolloClient$Operation) => boolean,
-      left: ApolloLink | ApolloClient$RequestHandler,
-      right?: ApolloLink | ApolloClient$RequestHandler
+      test: (op: Operation) => boolean,
+      left: ApolloLink | RequestHandler,
+      right?: ApolloLink | RequestHandler
     ): ApolloLink;
     static execute(link: ApolloLink, operation: ApolloClient$GraphQLRequest): ZenObservable$Observable<ApolloClient$FetchResult<>>;
-    static concat(first: ApolloLink | ApolloClient$RequestHandler, second: ApolloLink | ApolloClient$RequestHandler): ApolloLink;
-    constructor(request?: ApolloClient$RequestHandler): this;
+    static concat(first: ApolloLink | RequestHandler, second: ApolloLink | RequestHandler): ApolloLink;
+    constructor(request?: RequestHandler): this;
     split(
-      test: (op: ApolloClient$Operation) => boolean,
-      left: ApolloLink | ApolloClient$RequestHandler,
-      right?: ApolloLink | ApolloClient$RequestHandler
+      test: (op: Operation) => boolean,
+      left: ApolloLink | RequestHandler,
+      right?: ApolloLink | RequestHandler
     ): ApolloLink;
-    concat(next: ApolloLink | ApolloClient$RequestHandler): ApolloLink;
-    request(operation: ApolloClient$Operation, forward?: ApolloClient$NextLink): ZenObservable$Observable<ApolloClient$FetchResult<>> | null;
+    concat(next: ApolloLink | RequestHandler): ApolloLink;
+    request(operation: Operation, forward?: NextLink): ZenObservable$Observable<ApolloClient$FetchResult<>> | null;
     onError(error: any, observer?: ZenObservable$Observer<ApolloClient$FetchResult<>>): false | void;
     setOnError(
       fn: (error: any, observer?: ZenObservable$Observer<ApolloClient$FetchResult<>>) => false | void,
@@ -2439,7 +2426,17 @@ declare module "@apollo/client/link/core" {
     TExtensions = { [key: string]: any, ... }
   > = ApolloClient$ExecutionPatchResult<TData, TExtensions>;
   declare export interface GraphQLRequest extends ApolloClient$GraphQLRequest {}
-  declare export interface Operation extends ApolloClient$Operation {}
+  declare export interface Operation {
+    query: GraphQL$DocumentNode;
+    variables: { [key: string]: any, ... };
+    operationName: string;
+    extensions: { [key: string]: any, ... };
+    setContext: (context: { [key: string]: any, ... }) => {
+      [key: string]: any,
+      ...,
+    };
+    getContext: () => { [key: string]: any, ... };
+  }
   declare export type SingleExecutionResult<
     TData = { [key: string]: any, ... },
     TContext = { [key: string]: any, ... },
@@ -2450,13 +2447,13 @@ declare module "@apollo/client/link/core" {
     TContext = { [key: string]: any, ... },
     TExtensions = { [key: string]: any, ... }
   > = ApolloClient$FetchResult<TData, TContext, TExtensions>
-  declare export type NextLink = ApolloClient$NextLink;
-  declare export type RequestHandler = ApolloClient$RequestHandler;
+  declare export type NextLink = (operation: Operation) => ZenObservable$Observable<ApolloClient$FetchResult<>>;
+  declare export type RequestHandler = (operation: Operation, forward: NextLink) => ZenObservable$Observable<ApolloClient$FetchResult<>> | null;
 }
 
 declare module "@apollo/client/link/error" {
   import type { GraphQLErrors, NetworkError } from "@apollo/client";
-  import type { ApolloLink } from "@apollo/client/link/core";
+  import type { ApolloLink, NextLink, Operation } from "@apollo/client/link/core";
 
   // @apollo/client/link/error/index.d.ts
 
@@ -2464,8 +2461,8 @@ declare module "@apollo/client/link/error" {
     graphQLErrors?: GraphQLErrors;
     networkError?: NetworkError;
     response?: GraphQL$ExecutionResult<>;
-    operation: ApolloClient$Operation;
-    forward: ApolloClient$NextLink;
+    operation: Operation;
+    forward: NextLink;
   }
 
   declare export var npm$namespace$ErrorLink: {|
@@ -2480,13 +2477,13 @@ declare module "@apollo/client/link/error" {
   // $FlowFixMe[type-as-value] See https://stackoverflow.com/questions/74525879/flowtype-libdefs-how-to-export-a-class-definition-from-one-module-and-extend
   declare export class ErrorLink extends ApolloLink {
     constructor(errorHandler: ErrorLink$ErrorHandler): this;
-    request(operation: ApolloClient$Operation, forward?: ApolloClient$NextLink): ZenObservable$Observable<ApolloClient$FetchResult<>> | null;
+    request(operation: Operation, forward?: NextLink): ZenObservable$Observable<ApolloClient$FetchResult<>> | null;
   }
 }
 
 declare module "@apollo/client/link/persisted-queries" {
   import type { NetworkError } from "@apollo/client";
-  import type { ApolloLink } from "@apollo/client/link/core";
+  import type { ApolloLink, Operation } from "@apollo/client/link/core";
 
   // @apollo/client/link/persisted-queries/index.d.ts
 
@@ -2495,7 +2492,7 @@ declare module "@apollo/client/link/persisted-queries" {
     graphQLErrors?: $ReadOnlyArray<GraphQL$GraphQLError>;
     networkError?: NetworkError;
     response?: GraphQL$ExecutionResult<>;
-    operation: ApolloClient$Operation;
+    operation: Operation;
   }
   declare type SHA256Function = (...args: any[]) => string | Promise<string>;
   declare type GenerateHashFunction = (document: GraphQL$DocumentNode) => string | Promise<string>;
@@ -2531,12 +2528,12 @@ declare module "@apollo/client/link/persisted-queries" {
 }
 
 declare module "@apollo/client/link/retry" {
-  import type { ApolloLink } from "@apollo/client/link/core";
+  import type { ApolloLink, NextLink, Operation } from "@apollo/client/link/core";
 
   // @apollo/client/link/retry/delayFunction.d.ts
 
   declare export interface DelayFunction {
-    (count: number, operation: ApolloClient$Operation, error: any): number;
+    (count: number, operation: Operation, error: any): number;
   }
   declare export interface DelayFunctionOptions {
     initial?: number;
@@ -2548,11 +2545,11 @@ declare module "@apollo/client/link/retry" {
   // @apollo/client/link/retry/retryFunction.d.ts
 
   declare export interface RetryFunction {
-    (count: number, operation: ApolloClient$Operation, error: any): boolean | Promise<boolean>;
+    (count: number, operation: Operation, error: any): boolean | Promise<boolean>;
   }
   declare export interface RetryFunctionOptions {
     max?: number;
-    retryIf?: (error: any, operation: ApolloClient$Operation) => boolean | Promise<boolean>;
+    retryIf?: (error: any, operation: Operation) => boolean | Promise<boolean>;
   }
   declare export function buildRetryFunction(retryOptions?: RetryFunctionOptions): RetryFunction;
 
@@ -2566,12 +2563,13 @@ declare module "@apollo/client/link/retry" {
   // $FlowFixMe[type-as-value] See https://stackoverflow.com/questions/74525879/flowtype-libdefs-how-to-export-a-class-definition-from-one-module-and-extend
   declare export class RetryLink extends ApolloLink {
     constructor(options?: RetryLink$Options): this;
-    request(operation: ApolloClient$Operation, nextLink?: ApolloClient$NextLink): ZenObservable$Observable<ApolloClient$FetchResult<>>;
+    request(operation: Operation, nextLink?: NextLink): ZenObservable$Observable<ApolloClient$FetchResult<>>;
   }
 }
 
 declare module "@apollo/client/link/schema" {
   import type { GraphQLSchema } from "@apollo/client";
+  import type { Operation } from "@apollo/client/link/core";
 
   // @apollo/client/link/schema/index.d.ts
 
@@ -2582,10 +2580,10 @@ declare module "@apollo/client/link/schema" {
   |};
   declare export class SchemaLink$SchemaLink {
     constructor(options: SchemaLink$Options): this;
-    request(operation: ApolloClient$Operation): ZenObservable$Observable<ApolloClient$FetchResult<>>;
+    request(operation: Operation): ZenObservable$Observable<ApolloClient$FetchResult<>>;
   }
   declare export type SchemaLink$ResolverContext = { ... };
-  declare export type SchemaLink$ResolverContextFunction = (operation: ApolloClient$Operation) => SchemaLink$ResolverContext | Promise<SchemaLink$ResolverContext>;
+  declare export type SchemaLink$ResolverContextFunction = (operation: Operation) => SchemaLink$ResolverContext | Promise<SchemaLink$ResolverContext>;
   declare export interface SchemaLink$Options {
     schema: GraphQLSchema;
     rootValue?: any;
@@ -2596,7 +2594,7 @@ declare module "@apollo/client/link/schema" {
 
 declare module "@apollo/client/link/subscriptions" {
   import type { GraphQLSchema } from "@apollo/client";
-  import type { ApolloLink } from "@apollo/client/link/core";
+  import type { ApolloLink, Operation } from "@apollo/client/link/core";
 
   // @apollo/client/link/subscriptions/index.d.ts
 
@@ -2606,7 +2604,7 @@ declare module "@apollo/client/link/subscriptions" {
   declare type SchemaLink$ResolverContext = { [key: string]: any, ... };
 
   declare type SchemaLink$ResolverContextFunction = (
-    operation: ApolloClient$Operation
+    operation: Operation
   ) => SchemaLink$ResolverContext | Promise<SchemaLink$ResolverContext>;
 
   declare interface SchemaLink$Options {
@@ -2623,12 +2621,12 @@ declare module "@apollo/client/link/subscriptions" {
     context: $PropertyType<SchemaLink$Options, "context">;
     validate: boolean;
     constructor(options: SchemaLink$Options): this;
-    request(operation: ApolloClient$Operation): ZenObservable$Observable<ApolloClient$FetchResult<>>;
+    request(operation: Operation): ZenObservable$Observable<ApolloClient$FetchResult<>>;
   }
 }
 
 declare module "@apollo/client/link/ws" {
-  import type { ApolloLink } from "@apollo/client/link/core";
+  import type { ApolloLink, Operation } from "@apollo/client/link/core";
 
   // @apollo/client/link/ws/index.d.ts
 
@@ -2645,13 +2643,13 @@ declare module "@apollo/client/link/ws" {
   // $FlowFixMe[type-as-value] See https://stackoverflow.com/questions/74525879/flowtype-libdefs-how-to-export-a-class-definition-from-one-module-and-extend
   declare export class WebSocketLink extends ApolloLink {
     constructor(paramsOrClient: WebSocketLink$Configuration): this;
-    request(operation: ApolloClient$Operation): ZenObservable$Observable<ApolloClient$FetchResult<>> | null;
+    request(operation: Operation): ZenObservable$Observable<ApolloClient$FetchResult<>> | null;
   }
 }
 
 declare module "@apollo/client/testing" {
   import type { ApolloCache, ApolloClient, ApolloQueryResult, DefaultOptions, NormalizedCacheObject, ObservableQuery, QueryManager, Resolvers } from "@apollo/client";
-  import type { ApolloLink } from "@apollo/client/link/core";
+  import type { ApolloLink, Operation } from "@apollo/client/link/core";
 
   // Typescript built-in type
   declare type RequestInit = any;
@@ -2701,14 +2699,14 @@ declare module "@apollo/client/testing" {
 
   // $FlowFixMe[type-as-value] See https://stackoverflow.com/questions/74525879/flowtype-libdefs-how-to-export-a-class-definition-from-one-module-and-extend
   declare class MockLink extends ApolloLink {
-    operation: ApolloClient$Operation;
+    operation: Operation;
     addTypename: Boolean;
     constructor(mockedResponses: $ReadOnlyArray<MockedResponse<>>, addTypename?: Boolean): this;
     addMockedResponse(mockedResponse: MockedResponse<>): void;
-    request(operation: ApolloClient$Operation): ZenObservable$Observable<ApolloClient$FetchResult<>> | null;
+    request(operation: Operation): ZenObservable$Observable<ApolloClient$FetchResult<>> | null;
   }
   declare type MockApolloLink = {
-    operation?: ApolloClient$Operation,
+    operation?: Operation,
     ...
   } & ApolloLink;
   declare function mockSingleLink(...mockedResponses: Array<any>): MockApolloLink;
@@ -2724,7 +2722,7 @@ declare module "@apollo/client/testing" {
   // @apollo/client/testing/core/mocking/mockSubscriptionLink.d.ts
 
   declare interface MockedSubscription {
-    request: ApolloClient$Operation;
+    request: Operation;
   }
   declare interface MockedSubscriptionResult {
     result?: ApolloClient$FetchResult<>;
@@ -2736,10 +2734,10 @@ declare module "@apollo/client/testing" {
   declare class MockSubscriptionLink extends ApolloLink {
     unsubscribers: any[];
     setups: any[];
-    operation: ApolloClient$Operation;
+    operation: Operation;
     constructor(): this;
     request(
-      operation: ApolloClient$Operation
+      operation: Operation
     ): ZenObservable$Observable<ApolloClient$FetchResult<{ [key: string]: any, ... }, { [key: string]: any, ... }, { [key: string]: any, ... }>>;
     simulateResult(result: MockedSubscriptionResult, complete?: boolean): void;
     simulateComplete(): void;
