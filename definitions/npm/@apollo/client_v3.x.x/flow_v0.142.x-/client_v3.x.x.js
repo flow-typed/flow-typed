@@ -2676,7 +2676,7 @@ declare module "@apollo/client/testing" {
 }
 
 declare module "@apollo/client/utilities" {
-  import type { ArgumentNode, ASTNode, DirectiveNode, DocumentNode, FieldNode, FragmentDefinitionNode, InlineFragmentNode, OperationDefinitionNode, NameNode, SelectionNode, SelectionSetNode, ValueNode, VariableNode } from "graphql";
+  import type { ArgumentNode, ASTNode, DirectiveNode, DocumentNode, FieldNode, FragmentDefinitionNode, FragmentSpreadNode, InlineFragmentNode, OperationDefinitionNode, NameNode, SelectionNode, SelectionSetNode, ValueNode, VariableDefinitionNode, VariableNode } from "graphql";
   import type { FieldPolicy, KeySpecifier, KeyArgsFunction } from "@apollo/client";
 
   // @apollo/client/utilities/globals/index.d.ts
@@ -2803,6 +2803,34 @@ declare module "@apollo/client/utilities" {
   declare export function isField(selection: SelectionNode): boolean;
   declare export function isInlineFragment(selection: SelectionNode): boolean;
   declare export type VariableValue = (node: VariableNode) => any;
+
+  // @apollo/client/utilities/graphql/transform.d.ts
+
+  declare export type RemoveNodeConfig<N> = {|
+    name?: string;
+    test?: (node: N) => boolean;
+    remove?: boolean;
+  |};
+  declare export type GetNodeConfig<N> = {|
+    name?: string;
+    test?: (node: N) => boolean;
+  |};
+  declare export type RemoveDirectiveConfig = RemoveNodeConfig<DirectiveNode>;
+  declare export type GetDirectiveConfig = GetNodeConfig<DirectiveNode>;
+  declare export type RemoveArgumentsConfig = RemoveNodeConfig<ArgumentNode>;
+  declare export type GetFragmentSpreadConfig = GetNodeConfig<FragmentSpreadNode>;
+  declare export type RemoveFragmentSpreadConfig = RemoveNodeConfig<FragmentSpreadNode>;
+  declare export type RemoveFragmentDefinitionConfig = RemoveNodeConfig<FragmentDefinitionNode>;
+  declare export type RemoveVariableDefinitionConfig = RemoveNodeConfig<VariableDefinitionNode>;
+  declare export function removeDirectivesFromDocument(directives: RemoveDirectiveConfig[], doc: DocumentNode): DocumentNode | null;
+  declare export var addTypenameToDocument: (<TNode: ASTNode>(doc: TNode) => TNode) & {|
+    added(field: FieldNode): boolean;
+  |};
+  declare export function removeConnectionDirectiveFromDocument(doc: DocumentNode): DocumentNode | null;
+  declare export function removeArgumentsFromDocument(config: RemoveArgumentsConfig[], doc: DocumentNode): DocumentNode | null;
+  declare export function removeFragmentSpreadFromDocument(config: RemoveFragmentSpreadConfig[], doc: DocumentNode): DocumentNode | null;
+  declare export function buildQueryFromSelectionSet(document: DocumentNode): DocumentNode;
+  declare export function removeClientSetsFromDocument(document: DocumentNode): DocumentNode | null;
 
   // @apollo/client/utilities/graphql/policies/pagination.d.ts
 
