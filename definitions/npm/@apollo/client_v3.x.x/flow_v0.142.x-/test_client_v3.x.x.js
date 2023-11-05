@@ -1,7 +1,15 @@
 // @flow
 
 import { describe, it } from 'flow-typed-test';
-import { ApolloCache, ApolloClient, ApolloLink, ApolloProvider, createHttpLink, useSubscription } from '@apollo/client';
+import {
+  ApolloCache,
+  ApolloClient,
+  ApolloLink,
+  ApolloProvider,
+  createHttpLink,
+  useQuery,
+  useSubscription,
+} from '@apollo/client';
 import type { FetchResult, OnSubscriptionDataOptions, Operation } from '@apollo/client';
 import { MockedProvider } from "@apollo/client/testing";
 import { onError } from "@apollo/client/link/error";
@@ -91,6 +99,36 @@ describe('useSubscription', () => {
   });
 });
 
+type DataType = {|
+  id: string,
+|};
+
+describe('useQuery', () => {
+  const validVariables = { myVar: 'foo' };
+
+  it('accepts correct data and variables type', () => {
+    const testFun = (query: DocumentNode) => {
+      const { data } = useQuery<DataType, typeof validVariables>(query, {
+        fetchPolicy: "cache-first",
+        variables: validVariables
+      });
+      const myData: ?DataType = data;
+    };
+  });
+
+  it('rejects incorrect variables type', () => {
+    const invalidVariables = { wrong: 'type' };
+    const testFun = (query: DocumentNode) => {
+      const { data } = useQuery<DataType, typeof validVariables>(query, {
+        fetchPolicy: "cache-first",
+        // $FlowExpectedError[prop-missing]
+        variables: invalidVariables
+      });
+      const myData: ?DataType = data;
+    };
+  });
+});
+
 describe('ApolloProvider', () => {
   it('accepts a client and children', () => {
     <ApolloProvider client={client} ><div /></ApolloProvider>;
@@ -165,6 +203,7 @@ describe("getMainDefinition utility", () => {
         const operation: string = definition.operation;
       } else {
         // $FlowExpectedError[prop-missing]
+        // $FlowExpectedError[incompatible-type]
         const operation: string = definition.operation;
       }
     }
