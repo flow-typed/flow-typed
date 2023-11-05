@@ -1500,7 +1500,7 @@ declare module "@apollo/client" {
     operation: IDocumentDefinition,
     props: TProps
   ): OperationVariables;
-  declare export type RefSetter<TChildProps> = (ref: Component<TChildProps>) => void | void;
+  declare export type RefSetter<TChildProps> = (ref: Component<TChildProps>) => void;
   declare export class GraphQLBase<TProps, TChildProps, TState = any> extends React$Component<TProps, TState> {
     withRef: boolean;
     constructor(props: TProps): this;
@@ -2735,7 +2735,7 @@ declare module "@apollo/client/utilities" {
   }
   declare export function makeReference(id: string): Reference;
   declare export function isReference(obj: any): boolean;
-  declare export type StoreValue = number | string | string[] | Reference | Reference[] | null | void | void | { ... };
+  declare export type StoreValue = number | string | string[] | Reference | Reference[] | null | void | { ... };
   declare export interface StoreObject {
     __typename?: string;
     [storeFieldName: string]: StoreValue;
