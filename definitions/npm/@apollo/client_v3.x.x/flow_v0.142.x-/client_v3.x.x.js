@@ -2905,6 +2905,10 @@ declare module "@apollo/client/utilities" {
     shallowCopyForMerge<T>(value: T): T;
   }
 
+  // @apollo/client/utilities/common/cloneDeep.d.ts
+
+  declare export function cloneDeep<T>(value: T): T;
+
   // @apollo/client/utilities/observables/Concast.d.ts
 
   declare export type MaybeAsync<T> = T | Promise<T>;
