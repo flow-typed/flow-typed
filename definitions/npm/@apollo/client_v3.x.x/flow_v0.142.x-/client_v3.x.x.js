@@ -2216,6 +2216,7 @@ declare module "@apollo/client/link/context" {
 
 declare module "@apollo/client/link/core" {
   import type { DocumentNode, ExecutionResult, GraphQLError } from "graphql";
+  import type { DefaultContext } from "@apollo/client";
 
   // @apollo/client/link/core/ApolloLink.d.ts
 
@@ -2676,6 +2677,7 @@ declare module "@apollo/client/testing" {
 
 declare module "@apollo/client/utilities" {
   import type { ArgumentNode, ASTNode, DirectiveNode, DocumentNode, FieldNode, FragmentDefinitionNode, InlineFragmentNode, OperationDefinitionNode, NameNode, SelectionNode, SelectionSetNode, ValueNode, VariableNode } from "graphql";
+  import type { FieldPolicy, KeySpecifier, KeyArgsFunction } from "@apollo/client";
 
   // @apollo/client/utilities/globals/index.d.ts
 
@@ -2801,6 +2803,34 @@ declare module "@apollo/client/utilities" {
   declare export function isField(selection: SelectionNode): boolean;
   declare export function isInlineFragment(selection: SelectionNode): boolean;
   declare export type VariableValue = (node: VariableNode) => any;
+
+  // @apollo/client/utilities/graphql/policies/pagination.d.ts
+
+  declare type KeyArgs = KeySpecifier | KeyArgsFunction | false;
+  declare export function concatPagination<T = Reference>(keyArgs?: KeyArgs): FieldPolicy<T[]>;
+  declare export function offsetLimitPagination<T = Reference>(keyArgs?: KeyArgs): FieldPolicy<T[]>;
+  declare export type TRelayEdge<TNode> = {|
+    cursor?: string;
+    node: TNode;
+  |} | (Reference & {|
+    cursor?: string;
+  |});
+  declare export type TRelayPageInfo = {|
+    hasPreviousPage: boolean;
+    hasNextPage: boolean;
+    startCursor: string;
+    endCursor: string;
+  |};
+  declare export type TExistingRelay<TNode> = {|
+    +edges: TRelayEdge<TNode>[];
+    +pageInfo: TRelayPageInfo;
+  |};
+  declare export type TIncomingRelay<TNode> = {|
+    edges?: TRelayEdge<TNode>[];
+    pageInfo?: TRelayPageInfo;
+  |};
+  declare export type RelayFieldPolicy<TNode> = FieldPolicy<TExistingRelay<TNode> | null, TIncomingRelay<TNode> | null, TIncomingRelay<TNode> | null>;
+  declare export function relayStylePagination<TNode: Reference = Reference>(keyArgs?: KeyArgs): RelayFieldPolicy<TNode>;
 
   // @apollo/client/utilities/observables/Observable.d.ts
 

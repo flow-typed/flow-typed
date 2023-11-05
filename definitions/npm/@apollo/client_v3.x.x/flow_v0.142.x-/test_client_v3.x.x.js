@@ -6,7 +6,7 @@ import {
   ApolloClient,
   ApolloLink,
   ApolloProvider,
-  createHttpLink,
+  createHttpLink, InMemoryCache,
   useQuery,
   useSubscription,
 } from '@apollo/client';
@@ -15,7 +15,7 @@ import { MockedProvider } from "@apollo/client/testing";
 import { onError } from "@apollo/client/link/error";
 import * as React from 'react';
 import { RetryLink } from '@apollo/client/link/retry';
-import { getMainDefinition } from "@apollo/client/utilities";
+import { getMainDefinition, relayStylePagination } from "@apollo/client/utilities";
 import type { DocumentNode } from 'graphql';
 
 const client = new ApolloClient<{ ... }>({ cache: new ApolloCache() });
@@ -207,5 +207,25 @@ describe("getMainDefinition utility", () => {
         const operation: string = definition.operation;
       }
     }
+  });
+});
+
+describe("relayStylePagination utility", () => {
+  it("can be used in cache", () => {
+    new InMemoryCache({
+      typePolicies: {
+        Query: {
+          fields: {
+            paginationWithCustomId: relayStylePagination(["customId"]),
+            paginationWithDefaultId: relayStylePagination(),
+          },
+        },
+      },
+    })
+  });
+
+  it("rejects invalid key specifier", () => {
+    // $FlowExpectedError[incompatible-call]
+    relayStylePagination("cannotBeAString");
   });
 });
