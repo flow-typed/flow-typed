@@ -94,7 +94,7 @@ declare module "@apollo/client" {
   declare export function isApolloError(err: Error): boolean;
   declare export type GraphQLErrors = $ReadOnlyArray<GraphQLError>;
   declare export type NetworkError = Error | ServerParseError | ServerError | null;
-  declare export class ApolloError mixins Error {
+  declare export class ApolloError extends Error {
     message: string;
     graphQLErrors: GraphQLErrors;
     clientErrors: $ReadOnlyArray<Error>;
@@ -223,7 +223,7 @@ declare module "@apollo/client" {
     static Root: typeof EntityStore$Root;
   }
 
-  declare export class EntityStore$Root mixins EntityStore {
+  declare export class EntityStore$Root extends EntityStore {
     constructor(x: {
       policies: Policies,
       resultCaching?: boolean,
@@ -247,7 +247,7 @@ declare module "@apollo/client" {
     dirty(dataId: string, storeFieldName: string): void;
   }
   declare export function maybeDependOnExistenceOfEntity(store: NormalizedCache, entityId: string): void;
-  declare export class Layer mixins EntityStore {
+  declare export class Layer extends EntityStore {
     +id: string;
     +parent: EntityStore;
     +replay: (layer: EntityStore) => any;
@@ -259,7 +259,7 @@ declare module "@apollo/client" {
     findChildRefIds(dataId: string): { [key: string]: true, ... };
     getStorage(): StorageType;
   }
-  declare export class Stump mixins Layer {
+  declare export class Stump extends Layer {
     constructor(root: EntityStore$Root): this;
     removeLayer(): EntityStore;
     merge(): any;
@@ -393,7 +393,7 @@ declare module "@apollo/client" {
       lastDiff: Cache$DiffResult<any> | void
     ) => any;
   |};
-  declare export class InMemoryCache mixins ApolloCache<NormalizedCacheObject> {
+  declare export class InMemoryCache extends ApolloCache<NormalizedCacheObject> {
     config: InMemoryCacheConfig;
     +policies: Policies;
     +makeVar: typeof makeVar;
@@ -664,7 +664,7 @@ declare module "@apollo/client" {
     | {
     [key: string]: MissingTree,
   };
-  declare export class MissingFieldError mixins Error {
+  declare export class MissingFieldError extends Error {
     +path: MissingTree | Array<string | number>;
     +query: DocumentNode;
     +variables?: { [key: string]: any, ... } | void;
@@ -1205,7 +1205,7 @@ declare module "@apollo/client" {
     variables?: TVariables;
   }
   declare export class ObservableQuery<TData = any, TVariables = OperationVariables>
-    mixins ZenObservable$Observable<ApolloQueryResult<TData>> {
+    extends ZenObservable$Observable<ApolloQueryResult<TData>> {
     +options: WatchQueryOptions<TVariables, TData>;
     +queryId: string;
     +queryName?: string;
@@ -2666,7 +2666,7 @@ declare module "@apollo/client/testing" {
   declare interface MockedProviderState {
     client: ApolloClient<any>;
   }
-  declare export class MockedProvider mixins React$Component<MockedProviderProps<>, MockedProviderState> {
+  declare export class MockedProvider extends React$Component<MockedProviderProps<>, MockedProviderState> {
     static defaultProps: MockedProviderProps<>;
     constructor(props: MockedProviderProps<>): this;
     render(): React$Node | null;
@@ -2788,7 +2788,7 @@ declare module "@apollo/client/utilities" {
   declare export type Source<T> = MaybeAsync<ZenObservable$Observable<T>>;
   declare export type ConcastSourcesIterable<T> = Iterable<Source<T>>;
   declare export type ConcastSourcesArray<T> = Array<Source<T>>;
-  declare export class Concast<T> mixins ZenObservable$Observable<T> {
+  declare export class Concast<T> extends ZenObservable$Observable<T> {
     constructor(sources: MaybeAsync<ConcastSourcesIterable<T>> | ZenObservable$Subscriber<T>): this;
     addObserver(observer: ZenObservable$Observer<T>): void;
     removeObserver(observer: ZenObservable$Observer<T>): void;
