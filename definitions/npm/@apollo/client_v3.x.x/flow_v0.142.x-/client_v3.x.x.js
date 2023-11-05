@@ -2909,6 +2909,10 @@ declare module "@apollo/client/utilities" {
 
   declare export function cloneDeep<T>(value: T): T;
 
+  // @apollo/client/utilities/common/maybeDeepFreeze.d.ts
+
+  declare export function maybeDeepFreeze<T>(obj: T): T;
+
   // @apollo/client/utilities/observables/Concast.d.ts
 
   declare export type MaybeAsync<T> = T | Promise<T>;
