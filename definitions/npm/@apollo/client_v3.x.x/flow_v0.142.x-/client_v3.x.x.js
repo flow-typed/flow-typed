@@ -2677,6 +2677,14 @@ declare module "@apollo/client/testing" {
 declare module "@apollo/client/utilities" {
   import type { DirectiveNode, DocumentNode, FieldNode, FragmentDefinitionNode, InlineFragmentNode, OperationDefinitionNode, NameNode, SelectionNode, SelectionSetNode, ValueNode, VariableNode } from "graphql";
 
+  // @apollo/client/utilities/globals/index.d.ts
+
+  declare export var DEV: boolean;
+
+  // @apollo/client/utilities/globals/maybe.d.ts
+
+  declare export function maybe<T>(thunk: () => T): T | void;
+
   // @apollo/client/utilities/graphql/DocumentTransform.d.ts
 
   declare export type DocumentTransformCacheKey = $ReadOnlyArray<mixed>;
