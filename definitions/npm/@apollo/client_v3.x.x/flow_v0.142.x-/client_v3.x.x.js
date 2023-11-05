@@ -2675,7 +2675,7 @@ declare module "@apollo/client/testing" {
 }
 
 declare module "@apollo/client/utilities" {
-  import type { DirectiveNode, DocumentNode, FieldNode, FragmentDefinitionNode, InlineFragmentNode, OperationDefinitionNode, NameNode, SelectionNode, SelectionSetNode, ValueNode, VariableNode } from "graphql";
+  import type { ArgumentNode, ASTNode, DirectiveNode, DocumentNode, FieldNode, FragmentDefinitionNode, InlineFragmentNode, OperationDefinitionNode, NameNode, SelectionNode, SelectionSetNode, ValueNode, VariableNode } from "graphql";
 
   // @apollo/client/utilities/globals/index.d.ts
 
@@ -2684,6 +2684,25 @@ declare module "@apollo/client/utilities" {
   // @apollo/client/utilities/globals/maybe.d.ts
 
   declare export function maybe<T>(thunk: () => T): T | void;
+
+  // @apollo/client/utilities/graphql/directives.d.ts
+
+  declare export type DirectiveInfo = {
+    [fieldName: string]: {
+      [argName: string]: any;
+    };
+  };
+  declare export function shouldInclude(selectionNode: SelectionNode, variables?: Record<string, any>): boolean;
+  declare export function getDirectiveNames(root: ASTNode): string[];
+  declare export function hasAnyDirectives(names: string[], root: ASTNode): boolean;
+  declare export function hasAllDirectives(names: string[], root: ASTNode): boolean;
+  declare export function hasDirectives(names: string[], root: ASTNode, all?: boolean): boolean;
+  declare export function hasClientExports(document: DocumentNode): boolean;
+  declare export type InclusionDirectives = Array<{|
+      directive: DirectiveNode;
+      ifArgument: ArgumentNode;
+    |}>;
+  declare export function getInclusionDirectives(directives: $ReadOnlyArray<DirectiveNode>): InclusionDirectives;
 
   // @apollo/client/utilities/graphql/DocumentTransform.d.ts
 
