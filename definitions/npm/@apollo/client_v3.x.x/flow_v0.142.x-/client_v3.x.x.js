@@ -2832,6 +2832,12 @@ declare module "@apollo/client/utilities" {
   declare export function buildQueryFromSelectionSet(document: DocumentNode): DocumentNode;
   declare export function removeClientSetsFromDocument(document: DocumentNode): DocumentNode | null;
 
+  // @apollo/client/utilities/graphql/operations.d.ts
+
+  declare export function isMutationOperation(document: DocumentNode): boolean;
+  declare export function isQueryOperation(document: DocumentNode): boolean;
+  declare export function isSubscriptionOperation(document: DocumentNode): boolean;
+
   // @apollo/client/utilities/graphql/policies/pagination.d.ts
 
   declare type KeyArgs = KeySpecifier | KeyArgsFunction | false;
