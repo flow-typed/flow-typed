@@ -2892,6 +2892,19 @@ declare module "@apollo/client/utilities" {
   declare export function isStatefulPromise<TValue>(promise: Promise<TValue>): PromiseWithState<TValue>;
   declare export function wrapPromiseWithState<TValue>(promise: Promise<TValue>): PromiseWithState<TValue>;
 
+  // @apollo/client/utilities/common/mergeDeep.d.ts
+
+  declare export type TupleToIntersection<T: any[]> = { ... };
+  declare export function mergeDeep<T: any[]>(...sources: T): TupleToIntersection<T>;
+  declare export function mergeDeepArray<T>(sources: T[]): T;
+  declare export type ReconcilerFunction<TContextArgs: any[]> = (this: DeepMerger<TContextArgs>, target: Record<string | number, any>, source: Record<string | number, any>, property: string | number, ...context: TContextArgs) => any;
+  declare export class DeepMerger<TContextArgs: any[]> {
+    constructor(reconciler?: ReconcilerFunction<TContextArgs>): this;
+    merge(target: any, source: any, ...context: TContextArgs): any;
+    isObject: typeof isNonNullObject;
+    shallowCopyForMerge<T>(value: T): T;
+  }
+
   // @apollo/client/utilities/observables/Concast.d.ts
 
   declare export type MaybeAsync<T> = T | Promise<T>;
@@ -2907,4 +2920,9 @@ declare module "@apollo/client/utilities" {
     cancel: (reason: any) => void;
   }
   declare export type NextResultListener = (method: "next" | "error" | "complete", arg?: any) => any;
+
+  // @apollo/client/utilities/common/objects.d.ts
+
+  declare export function isNonNullObject(obj: any): Record<string | number, any>;
+  declare export function isPlainObject(obj: any): Record<string | number, any>;
 }
