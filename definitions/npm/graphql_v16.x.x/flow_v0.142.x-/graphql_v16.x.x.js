@@ -311,14 +311,14 @@ declare module "graphql" {
   /**
    * Document
    */
-  declare export interface DocumentNode {
+  declare export type DocumentNode = {|
     +kind: typeof Kind.DOCUMENT;
     +loc?: Location;
     +definitions: $ReadOnlyArray<DefinitionNode>;
-  }
+  |};
   declare export type DefinitionNode = ExecutableDefinitionNode | TypeSystemDefinitionNode | TypeSystemExtensionNode;
   declare export type ExecutableDefinitionNode = OperationDefinitionNode | FragmentDefinitionNode;
-  declare export interface OperationDefinitionNode {
+  declare export type OperationDefinitionNode = {|
     +kind: typeof Kind.OPERATION_DEFINITION;
     +loc?: Location;
     +operation: $Values<typeof OperationTypeNode>;
@@ -326,7 +326,7 @@ declare module "graphql" {
     +variableDefinitions?: $ReadOnlyArray<VariableDefinitionNode>;
     +directives?: $ReadOnlyArray<DirectiveNode>;
     +selectionSet: SelectionSetNode;
-  }
+  |};
 
   declare export var OperationTypeNode: {|
     +QUERY: "query", // "query"
@@ -334,26 +334,26 @@ declare module "graphql" {
     +SUBSCRIPTION: "subscription" // "subscription"
   |};
 
-  declare export interface VariableDefinitionNode {
+  declare export type VariableDefinitionNode = {|
     +kind: typeof Kind.VARIABLE_DEFINITION;
     +loc?: Location;
     +variable: VariableNode;
     +type: TypeNode;
     +defaultValue?: ConstValueNode;
     +directives?: $ReadOnlyArray<ConstDirectiveNode>;
-  }
-  declare export interface VariableNode {
+  |};
+  declare export type VariableNode = {|
     +kind: typeof Kind.VARIABLE;
     +loc?: Location;
     +name: NameNode;
-  }
-  declare export interface SelectionSetNode {
+  |};
+  declare export type SelectionSetNode = {|
     kind: typeof Kind.SELECTION_SET;
     loc?: Location;
     selections: $ReadOnlyArray<SelectionNode>;
-  }
+  |};
   declare export type SelectionNode = FieldNode | FragmentSpreadNode | InlineFragmentNode;
-  declare export interface FieldNode {
+  declare export type FieldNode = {|
     +kind: typeof Kind.FIELD;
     +loc?: Location;
     +alias?: NameNode;
@@ -361,37 +361,37 @@ declare module "graphql" {
     +arguments?: $ReadOnlyArray<ArgumentNode>;
     +directives?: $ReadOnlyArray<DirectiveNode>;
     +selectionSet?: SelectionSetNode;
-  }
-  declare export interface ArgumentNode {
+  |};
+  declare export type ArgumentNode = {|
     +kind: typeof Kind.ARGUMENT;
     +loc?: Location;
     +name: NameNode;
     +value: ValueNode;
-  }
-  declare export interface ConstArgumentNode {
+  |};
+  declare export type ConstArgumentNode = {|
     +kind: typeof Kind.ARGUMENT;
     +loc?: Location;
     +name: NameNode;
     +value: ConstValueNode;
-  }
+  |};
 
   /**
    * Fragments
    */
-  declare export interface FragmentSpreadNode {
+  declare export type FragmentSpreadNode = {|
     +kind: typeof Kind.FRAGMENT_SPREAD;
     +loc?: Location;
     +name: NameNode;
     +directives?: $ReadOnlyArray<DirectiveNode>;
-  }
-  declare export interface InlineFragmentNode {
+  |};
+  declare export type InlineFragmentNode = {|
     +kind: typeof Kind.INLINE_FRAGMENT;
     +loc?: Location;
     +typeCondition?: NamedTypeNode;
     +directives?: $ReadOnlyArray<DirectiveNode>;
     +selectionSet: SelectionSetNode;
-  }
-  declare export interface FragmentDefinitionNode {
+  |};
+  declare export type FragmentDefinitionNode = {|
     +kind: typeof Kind.FRAGMENT_DEFINITION;
     +loc?: Location;
     +name: NameNode;
@@ -403,7 +403,7 @@ declare module "graphql" {
     +typeCondition: NamedTypeNode;
     +directives?: $ReadOnlyArray<DirectiveNode>;
     +selectionSet: SelectionSetNode;
-  }
+  |};
 
   /**
    * Values
@@ -427,122 +427,122 @@ declare module "graphql" {
     | EnumValueNode
     | ConstListValueNode
     | ConstObjectValueNode;
-  declare export interface IntValueNode {
+  declare export type IntValueNode = {|
     +kind: typeof Kind.INT;
     +loc?: Location;
     +value: string;
-  }
-  declare export interface FloatValueNode {
+  |};
+  declare export type FloatValueNode = {|
     +kind: typeof Kind.FLOAT;
     +loc?: Location;
     +value: string;
-  }
-  declare export interface StringValueNode {
+  |};
+  declare export type StringValueNode = {|
     +kind: typeof Kind.STRING;
     +loc?: Location;
     +value: string;
     +block?: boolean;
-  }
-  declare export interface BooleanValueNode {
+  |};
+  declare export type BooleanValueNode = {|
     +kind: typeof Kind.BOOLEAN;
     +loc?: Location;
     +value: boolean;
-  }
-  declare export interface NullValueNode {
+  |};
+  declare export type NullValueNode = {|
     +kind: typeof Kind.NULL;
     +loc?: Location;
-  }
-  declare export interface EnumValueNode {
+  |};
+  declare export type EnumValueNode = {|
     +kind: typeof Kind.ENUM;
     +loc?: Location;
     +value: string;
-  }
-  declare export interface ListValueNode {
+  |};
+  declare export type ListValueNode = {|
     +kind: typeof Kind.LIST;
     +loc?: Location;
     +values: $ReadOnlyArray<ValueNode>;
-  }
-  declare export interface ConstListValueNode {
+  |};
+  declare export type ConstListValueNode = {|
     +kind: typeof Kind.LIST;
     +loc?: Location;
     +values: $ReadOnlyArray<ConstValueNode>;
-  }
-  declare export interface ObjectValueNode {
+  |};
+  declare export type ObjectValueNode = {|
     +kind: typeof Kind.OBJECT;
     +loc?: Location;
     +fields: $ReadOnlyArray<ObjectFieldNode>;
-  }
-  declare export interface ConstObjectValueNode {
+  |};
+  declare export type ConstObjectValueNode = {|
     +kind: typeof Kind.OBJECT;
     +loc?: Location;
     +fields: $ReadOnlyArray<ConstObjectFieldNode>;
-  }
-  declare export interface ObjectFieldNode {
+  |};
+  declare export type ObjectFieldNode = {|
     +kind: typeof Kind.OBJECT_FIELD;
     +loc?: Location;
     +name: NameNode;
     +value: ValueNode;
-  }
-  declare export interface ConstObjectFieldNode {
+  |};
+  declare export type ConstObjectFieldNode = {|
     +kind: typeof Kind.OBJECT_FIELD;
     +loc?: Location;
     +name: NameNode;
     +value: ConstValueNode;
-  }
+  |};
 
   /**
    * Directives
    */
-  declare export interface DirectiveNode {
+  declare export type DirectiveNode = {|
     +kind: typeof Kind.DIRECTIVE;
     +loc?: Location;
     +name: NameNode;
     +arguments?: $ReadOnlyArray<ArgumentNode>;
-  }
-  declare export interface ConstDirectiveNode {
+  |};
+  declare export type ConstDirectiveNode = {|
     +kind: typeof Kind.DIRECTIVE;
     +loc?: Location;
     +name: NameNode;
     +arguments?: $ReadOnlyArray<ConstArgumentNode>;
-  }
+  |};
 
   /**
    * Type Reference
    */
   declare export type TypeNode = NamedTypeNode | ListTypeNode | NonNullTypeNode;
-  declare export interface NamedTypeNode {
+  declare export type NamedTypeNode = {|
     +kind: typeof Kind.NAMED_TYPE;
     +loc?: Location;
     +name: NameNode;
-  }
-  declare export interface ListTypeNode {
+  |};
+  declare export type ListTypeNode = {|
     +kind: typeof Kind.LIST_TYPE;
     +loc?: Location;
     +type: TypeNode;
-  }
-  declare export interface NonNullTypeNode {
+  |};
+  declare export type NonNullTypeNode = {|
     +kind: typeof Kind.NON_NULL_TYPE;
     +loc?: Location;
     +type: NamedTypeNode | ListTypeNode;
-  }
+  |};
 
   /**
    * Type System Definition
    */
   declare export type TypeSystemDefinitionNode = SchemaDefinitionNode | TypeDefinitionNode | DirectiveDefinitionNode;
-  declare export interface SchemaDefinitionNode {
+  declare export type SchemaDefinitionNode = {|
     +kind: typeof Kind.SCHEMA_DEFINITION;
     +loc?: Location;
     +description?: StringValueNode;
     +directives?: $ReadOnlyArray<ConstDirectiveNode>;
     +operationTypes: $ReadOnlyArray<OperationTypeDefinitionNode>;
-  }
-  declare export interface OperationTypeDefinitionNode {
+  |};
+  declare export type OperationTypeDefinitionNode = {|
     +kind: typeof Kind.OPERATION_TYPE_DEFINITION;
     +loc?: Location;
     +operation: $Values<typeof OperationTypeNode>;
     +type: NamedTypeNode;
-  }
+  |};
 
   /**
    * Type Definition
@@ -554,14 +554,14 @@ declare module "graphql" {
     | UnionTypeDefinitionNode
     | EnumTypeDefinitionNode
     | InputObjectTypeDefinitionNode;
-  declare export interface ScalarTypeDefinitionNode {
+  declare export type ScalarTypeDefinitionNode = {|
     +kind: typeof Kind.SCALAR_TYPE_DEFINITION;
     +loc?: Location;
     +description?: StringValueNode;
     +name: NameNode;
     +directives?: $ReadOnlyArray<ConstDirectiveNode>;
-  }
-  declare export interface ObjectTypeDefinitionNode {
+  |};
+  declare export type ObjectTypeDefinitionNode = {|
     +kind: typeof Kind.OBJECT_TYPE_DEFINITION;
     +loc?: Location;
     +description?: StringValueNode;
@@ -569,8 +569,8 @@ declare module "graphql" {
     +interfaces?: $ReadOnlyArray<NamedTypeNode>;
     +directives?: $ReadOnlyArray<ConstDirectiveNode>;
     +fields?: $ReadOnlyArray<FieldDefinitionNode>;
-  }
-  declare export interface FieldDefinitionNode {
+  |};
+  declare export type FieldDefinitionNode = {|
     +kind: typeof Kind.FIELD_DEFINITION;
     +loc?: Location;
     +description?: StringValueNode;
@@ -578,8 +578,8 @@ declare module "graphql" {
     +arguments?: $ReadOnlyArray<InputValueDefinitionNode>;
     +type: TypeNode;
     +directives?: $ReadOnlyArray<ConstDirectiveNode>;
-  }
-  declare export interface InputValueDefinitionNode {
+  |};
+  declare export type InputValueDefinitionNode = {|
     +kind: typeof Kind.INPUT_VALUE_DEFINITION;
     +loc?: Location;
     +description?: StringValueNode;
@@ -587,8 +587,8 @@ declare module "graphql" {
     +type: TypeNode;
     +defaultValue?: ConstValueNode;
     +directives?: $ReadOnlyArray<ConstDirectiveNode>;
-  }
-  declare export interface InterfaceTypeDefinitionNode {
+  |};
+  declare export type InterfaceTypeDefinitionNode = {|
     +kind: typeof Kind.INTERFACE_TYPE_DEFINITION;
     +loc?: Location;
     +description?: StringValueNode;
@@ -596,43 +596,43 @@ declare module "graphql" {
     +interfaces?: $ReadOnlyArray<NamedTypeNode>;
     +directives?: $ReadOnlyArray<ConstDirectiveNode>;
     +fields?: $ReadOnlyArray<FieldDefinitionNode>;
-  }
-  declare export interface UnionTypeDefinitionNode {
+  |};
+  declare export type UnionTypeDefinitionNode = {|
     +kind: typeof Kind.UNION_TYPE_DEFINITION;
     +loc?: Location;
     +description?: StringValueNode;
     +name: NameNode;
     +directives?: $ReadOnlyArray<ConstDirectiveNode>;
     +types?: $ReadOnlyArray<NamedTypeNode>;
-  }
-  declare export interface EnumTypeDefinitionNode {
+  |};
+  declare export type EnumTypeDefinitionNode = {|
     +kind: typeof Kind.ENUM_TYPE_DEFINITION;
     +loc?: Location;
     +description?: StringValueNode;
     +name: NameNode;
     +directives?: $ReadOnlyArray<ConstDirectiveNode>;
     +values?: $ReadOnlyArray<EnumValueDefinitionNode>;
-  }
-  declare export interface EnumValueDefinitionNode {
+  |};
+  declare export type EnumValueDefinitionNode = {|
     +kind: typeof Kind.ENUM_VALUE_DEFINITION;
     +loc?: Location;
     +description?: StringValueNode;
     +name: NameNode;
     +directives?: $ReadOnlyArray<ConstDirectiveNode>;
-  }
-  declare export interface InputObjectTypeDefinitionNode {
+  |};
+  declare export type InputObjectTypeDefinitionNode = {|
     +kind: typeof Kind.INPUT_OBJECT_TYPE_DEFINITION;
     +loc?: Location;
     +description?: StringValueNode;
     +name: NameNode;
     +directives?: $ReadOnlyArray<ConstDirectiveNode>;
     +fields?: $ReadOnlyArray<InputValueDefinitionNode>;
-  }
+  |};
 
   /**
    * Directive Definitions
    */
-  declare export interface DirectiveDefinitionNode {
+  declare export type DirectiveDefinitionNode = {|
     +kind: typeof Kind.DIRECTIVE_DEFINITION;
     +loc?: Location;
     +description?: StringValueNode;
@@ -640,18 +640,18 @@ declare module "graphql" {
     +arguments?: $ReadOnlyArray<InputValueDefinitionNode>;
     +repeatable: boolean;
     +locations: $ReadOnlyArray<NameNode>;
-  }
+  |};
 
   /**
    * Type System Extensions
    */
   declare export type TypeSystemExtensionNode = SchemaExtensionNode | TypeExtensionNode;
-  declare export interface SchemaExtensionNode {
+  declare export type SchemaExtensionNode = {|
     +kind: typeof Kind.SCHEMA_EXTENSION;
     +loc?: Location;
     +directives?: $ReadOnlyArray<ConstDirectiveNode>;
     +operationTypes?: $ReadOnlyArray<OperationTypeDefinitionNode>;
-  }
+  |};
 
   /**
    * Type Extensions
@@ -663,49 +663,49 @@ declare module "graphql" {
     | UnionTypeExtensionNode
     | EnumTypeExtensionNode
     | InputObjectTypeExtensionNode;
-  declare export interface ScalarTypeExtensionNode {
+  declare export type ScalarTypeExtensionNode = {|
     +kind: typeof Kind.SCALAR_TYPE_EXTENSION;
     +loc?: Location;
     +name: NameNode;
     +directives?: $ReadOnlyArray<ConstDirectiveNode>;
-  }
-  declare export interface ObjectTypeExtensionNode {
+  |};
+  declare export type ObjectTypeExtensionNode = {|
     +kind: typeof Kind.OBJECT_TYPE_EXTENSION;
     +loc?: Location;
     +name: NameNode;
     +interfaces?: $ReadOnlyArray<NamedTypeNode>;
     +directives?: $ReadOnlyArray<ConstDirectiveNode>;
     +fields?: $ReadOnlyArray<FieldDefinitionNode>;
-  }
-  declare export interface InterfaceTypeExtensionNode {
+  |};
+  declare export type InterfaceTypeExtensionNode = {|
     +kind: typeof Kind.INTERFACE_TYPE_EXTENSION;
     +loc?: Location;
     +name: NameNode;
     +interfaces?: $ReadOnlyArray<NamedTypeNode>;
     +directives?: $ReadOnlyArray<ConstDirectiveNode>;
     +fields?: $ReadOnlyArray<FieldDefinitionNode>;
-  }
-  declare export interface UnionTypeExtensionNode {
+  |};
+  declare export type UnionTypeExtensionNode = {|
     +kind: typeof Kind.UNION_TYPE_EXTENSION;
     +loc?: Location;
     +name: NameNode;
     +directives?: $ReadOnlyArray<ConstDirectiveNode>;
     +types?: $ReadOnlyArray<NamedTypeNode>;
-  }
-  declare export interface EnumTypeExtensionNode {
+  |};
+  declare export type EnumTypeExtensionNode = {|
     +kind: typeof Kind.ENUM_TYPE_EXTENSION;
     +loc?: Location;
     +name: NameNode;
     +directives?: $ReadOnlyArray<ConstDirectiveNode>;
     +values?: $ReadOnlyArray<EnumValueDefinitionNode>;
-  }
-  declare export interface InputObjectTypeExtensionNode {
+  |};
+  declare export type InputObjectTypeExtensionNode = {|
     +kind: typeof Kind.INPUT_OBJECT_TYPE_EXTENSION;
     +loc?: Location;
     +name: NameNode;
     +directives?: $ReadOnlyArray<ConstDirectiveNode>;
     +fields?: $ReadOnlyArray<InputValueDefinitionNode>;
-  }
+  |};
 
   /**
    * Represents a location in a Source.
