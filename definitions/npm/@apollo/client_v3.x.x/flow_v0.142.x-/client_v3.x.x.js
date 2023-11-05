@@ -2873,6 +2873,25 @@ declare module "@apollo/client/utilities" {
   declare export type Subscriber<T> = ZenObservable$Subscriber<T>;
   declare export type Observable<T> = ZenObservable$Observable<T>;
 
+  // @apollo/client/utilities/promises/decoration.d.ts
+
+  declare export interface PendingPromise<TValue> extends Promise<TValue> {
+    status: "pending";
+  }
+  declare export interface FulfilledPromise<TValue> extends Promise<TValue> {
+    status: "fulfilled";
+    value: TValue;
+  }
+  declare export interface RejectedPromise<TValue> extends Promise<TValue> {
+    status: "rejected";
+    reason: mixed;
+  }
+  declare export type PromiseWithState<TValue> = PendingPromise<TValue> | FulfilledPromise<TValue> | RejectedPromise<TValue>;
+  declare export function createFulfilledPromise<TValue>(value: TValue): FulfilledPromise<TValue>;
+  declare export function createRejectedPromise<TValue = mixed>(reason: mixed): RejectedPromise<TValue>;
+  declare export function isStatefulPromise<TValue>(promise: Promise<TValue>): PromiseWithState<TValue>;
+  declare export function wrapPromiseWithState<TValue>(promise: Promise<TValue>): PromiseWithState<TValue>;
+
   // @apollo/client/utilities/observables/Concast.d.ts
 
   declare export type MaybeAsync<T> = T | Promise<T>;
