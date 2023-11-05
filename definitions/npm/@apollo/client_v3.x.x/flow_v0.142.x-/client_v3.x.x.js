@@ -82,10 +82,10 @@ declare module "@apollo/client" {
      */
     __apiType?: (variables: Variables) => Result,
   |};
-  declare export type GraphQLSchema = Object;
+  declare export type GraphQLSchema = { ... };
 
   // import { Trie } from "@wry/trie";
-  declare type Trie = Object;
+  declare type Trie = { ... };
 
   declare export * from "@apollo/client/link/core";
 
@@ -282,7 +282,7 @@ declare module "@apollo/client" {
     id?: string,
     _id?: string,
     ...
-  } & Object;
+  } & { ... };
   declare export type IdGetter = (value: IdGetterObj) => string | void;
   declare export interface NormalizedCache {
     has(dataId: string): boolean;
@@ -317,7 +317,7 @@ declare module "@apollo/client" {
   declare export type ReadQueryOptions = {
     store: NormalizedCache,
     query: DocumentNode,
-    variables?: Object,
+    variables?: { ... },
     previousResult?: any,
     canonizeResults?: boolean,
     rootId?: string,
@@ -2282,10 +2282,10 @@ declare module "@apollo/client/link/core" {
   > = ExecutionPatchInitialResult<TData, TExtensions> | ExecutionPatchIncrementalResult<TData, TExtensions>;
   declare export interface GraphQLRequest {
     query: DocumentNode;
-    variables?: Object;
+    variables?: { ... };
     operationName?: string;
-    context?: Object;
-    extensions?: Object;
+    context?: { ... };
+    extensions?: { ... };
   }
   declare export interface Operation {
     query: DocumentNode;
@@ -2536,7 +2536,7 @@ declare module "@apollo/client/testing" {
     ok: boolean;
     status: number;
     statusText?: string;
-    json(): Promise<Object>;
+    json(): Promise<{ ... }>;
   }
   declare interface MockedFetchResponse {
     url: string;
@@ -2544,7 +2544,7 @@ declare module "@apollo/client/testing" {
     result: MockedIResponse;
     delay?: number;
   }
-  declare function createMockedIResponse(result: Object, options?: any): MockedIResponse;
+  declare function createMockedIResponse(result: { ... }, options?: any): MockedIResponse;
   declare class MockFetch {
     constructor(...mockedResponses: MockedFetchResponse[]): this;
     addMockedResponse(mockedResponse: MockedFetchResponse): void;
@@ -2735,7 +2735,7 @@ declare module "@apollo/client/utilities" {
   }
   declare export function makeReference(id: string): Reference;
   declare export function isReference(obj: any): boolean;
-  declare export type StoreValue = number | string | string[] | Reference | Reference[] | null | void | void | Object;
+  declare export type StoreValue = number | string | string[] | Reference | Reference[] | null | void | void | { ... };
   declare export interface StoreObject {
     __typename?: string;
     [storeFieldName: string]: StoreValue;
@@ -2745,9 +2745,9 @@ declare module "@apollo/client/utilities" {
     argObj: any,
     name: NameNode,
     value: ValueNode,
-    variables?: Object
+    variables?: { ... }
   ): void;
-  declare export function storeKeyNameFromField(field: FieldNode, variables?: Object): string;
+  declare export function storeKeyNameFromField(field: FieldNode, variables?: { ... }): string;
   declare export type Directives = {
     [directiveName: string]: {
       [argName: string]: any,
@@ -2764,7 +2764,7 @@ declare module "@apollo/client/utilities" {
   declare export function argumentsObjectFromField(
     field: FieldNode | DirectiveNode,
     variables?: { [key: string]: any, ... }
-  ): Object | null;
+  ): { ... } | null;
   declare export function resultKeyNameFromField(field: FieldNode): string;
   declare export function getTypenameFromResult(
     result: { [key: string]: any, ... },
