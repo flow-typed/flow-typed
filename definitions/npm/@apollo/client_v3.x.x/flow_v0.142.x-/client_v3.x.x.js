@@ -2913,6 +2913,10 @@ declare module "@apollo/client/utilities" {
 
   declare export function maybeDeepFreeze<T>(obj: T): T;
 
+  // @apollo/client/utilities/observables/iteration.d.ts
+
+  declare export function iterateObserversSafely<E, A>(observers: Set<Observer<E>>, method: $Keys<Observer<E>>, argument?: A): void;
+
   // @apollo/client/utilities/observables/Concast.d.ts
 
   declare export type MaybeAsync<T> = T | Promise<T>;
