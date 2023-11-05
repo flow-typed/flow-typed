@@ -55,45 +55,13 @@ declare class ZenObservable$Observable<T> {
   static of<R>(...items: R[]): ZenObservable$Observable<R>;
 }
 
-// graphql
-
-declare class GraphQL$GraphQLError extends Error {}
-declare type GraphQL$DocumentNode = Object;
-declare interface GraphQL$ObjMap<T> {
-  [key: string]: T;
-}
-declare interface GraphQL$ExecutionResult<
-  TData = GraphQL$ObjMap<any>,
-  TExtensions = GraphQL$ObjMap<any>,
-> {
-  errors?: $ReadOnlyArray<GraphQL$GraphQLError>;
-  data?: TData | null;
-  extensions?: TExtensions;
-}
-declare type GraphQL$VariableNode = Object;
-declare type GraphQL$SelectionSetNode = Object;
-declare type GraphQL$DirectiveNode = Object;
-declare type GraphQL$FieldNode = Object;
-declare type GraphQL$ValueNode = Object;
-declare type GraphQL$NameNode = Object;
-declare type GraphQL$InlineFragmentNode = Object;
-declare type GraphQL$SelectionNode = Object;
-declare type GraphQL$DefinitionNode = Object;
-declare type GraphQL$VariableDefinitionNode = Object;
-declare type GraphQL$FragmentDefinitionNode = Object;
-declare type GraphQL$ASTNode = Object;
-declare function GraphQL$print(ast: GraphQL$ASTNode): string;
-
 declare module "@apollo/client" {
   import type { ApolloLink, GraphQLRequest, FetchResult, Operation, RequestHandler } from "@apollo/client/link/core";
   import type { Concast, FragmentMap, FragmentMapFunction, Reference, StoreObject, StoreValue } from "@apollo/client/utilities";
   import typeof { isReference } from "@apollo/client/utilities";
-
-  // External Types
-
-  // React
-
   import type { Component, ComponentType, Context, Node } from "react";
+  import type { ASTNode, DocumentNode, ExecutionResult, FieldNode, FragmentDefinitionNode, GraphQLError, InlineFragmentNode, SelectionSetNode, VariableDefinitionNode } from "graphql";
+  import typeof { print as PrintType } from "graphql";
 
   // ts-invariant
 
@@ -105,7 +73,7 @@ declare module "@apollo/client" {
 
   // import { TypedDocumentNode } from "@graphql-typed-document-node/core";
   declare type TypedDocumentNode<Result = { [key: string]: any }, Variables = { [key: string]: any }> = {|
-    ...GraphQL$DocumentNode,
+    ...DocumentNode,
 
     /**
      * This type is used to ensure that the variables you pass in to the query are assignable to Variables
@@ -124,7 +92,7 @@ declare module "@apollo/client" {
   // @apollo/client/errors/index.d.ts
 
   declare export function isApolloError(err: Error): boolean;
-  declare export type GraphQLErrors = $ReadOnlyArray<GraphQL$GraphQLError>;
+  declare export type GraphQLErrors = $ReadOnlyArray<GraphQLError>;
   declare export type NetworkError = Error | ServerParseError | ServerError | null;
   declare export class ApolloError mixins Error {
     message: string;
@@ -133,7 +101,7 @@ declare module "@apollo/client" {
     networkError: Error | ServerParseError | ServerError | null;
     extraInfo: any;
     constructor(x: {
-      graphQLErrors?: $ReadOnlyArray<GraphQL$GraphQLError>,
+      graphQLErrors?: $ReadOnlyArray<GraphQLError>,
       clientErrors?: $ReadOnlyArray<Error>,
       networkError?: Error | ServerParseError | ServerError | null,
       errorMessage?: string,
@@ -301,11 +269,11 @@ declare module "@apollo/client" {
   // @apollo/client/cache/inmemory/fragmentRegistry.d.ts
 
   declare export interface FragmentRegistryAPI {
-    register(...fragments: GraphQL$DocumentNode[]): FragmentRegistryAPI;
-    lookup(fragmentName: string): GraphQL$FragmentDefinitionNode | null;
-    transform<D: GraphQL$DocumentNode>(document: D): D;
+    register(...fragments: DocumentNode[]): FragmentRegistryAPI;
+    lookup(fragmentName: string): FragmentDefinitionNode | null;
+    transform<D: DocumentNode>(document: D): D;
   }
-  declare export function createFragmentRegistry(...fragments: GraphQL$DocumentNode[]): FragmentRegistryAPI;
+  declare export function createFragmentRegistry(...fragments: DocumentNode[]): FragmentRegistryAPI;
 
   // @apollo/client/cache/inmemory/types.d.ts
 
@@ -348,7 +316,7 @@ declare module "@apollo/client" {
   };
   declare export type ReadQueryOptions = {
     store: NormalizedCache,
-    query: GraphQL$DocumentNode,
+    query: DocumentNode,
     variables?: Object,
     previousResult?: any,
     canonizeResults?: boolean,
@@ -376,7 +344,7 @@ declare module "@apollo/client" {
     ...
   } & ApolloReducerConfig;
   declare export interface MergeInfo {
-    field: GraphQL$FieldNode;
+    field: FieldNode;
     typename: string | void;
     merge: FieldMergeFunction<>;
   }
@@ -450,8 +418,8 @@ declare module "@apollo/client" {
     removeOptimistic(idToRemove: string): void;
     batch<TUpdateResult>(options: Cache$BatchOptions<ApolloCache<NormalizedCacheObject>, TUpdateResult>): TUpdateResult;
     performTransaction(update: (cache: InMemoryCache) => any, optimisticId?: string | null): any;
-    transformDocument(document: GraphQL$DocumentNode): GraphQL$DocumentNode;
-    transformForLink(document: GraphQL$DocumentNode): GraphQL$DocumentNode;
+    transformDocument(document: DocumentNode): DocumentNode;
+    transformForLink(document: DocumentNode): DocumentNode;
     broadcastWatches(options?: BroadcastOptions): void;
   }
 
@@ -494,7 +462,7 @@ declare module "@apollo/client" {
     isFresh(
       result: { [key: string]: any, ... },
       parent: StoreObject | Reference,
-      selectionSet: GraphQL$SelectionSetNode,
+      selectionSet: SelectionSetNode,
       context: ReadMergeModifyContext
     ): boolean;
   }
@@ -503,7 +471,7 @@ declare module "@apollo/client" {
 
   declare export type WriteContext = {
     +written: {
-      [dataId: string]: GraphQL$SelectionSetNode[],
+      [dataId: string]: SelectionSetNode[],
     },
     +fragmentMap: FragmentMap,
     lookupFragment: FragmentMapFunction,
@@ -514,7 +482,7 @@ declare module "@apollo/client" {
       {
         storeObject: StoreObject,
         mergeTree?: MergeTree,
-        fieldNodeSet: Set<GraphQL$FieldNode>,
+        fieldNodeSet: Set<FieldNode>,
         ...
       }
     >,
@@ -554,7 +522,7 @@ declare module "@apollo/client" {
     typename: string | void,
     storeObject: StoreObject,
     readField: ReadFieldFunction,
-    selectionSet?: GraphQL$SelectionSetNode,
+    selectionSet?: SelectionSetNode,
     fragmentMap?: FragmentMap,
     keyObject?: { [key: string]: any, ... },
     ...
@@ -579,7 +547,7 @@ declare module "@apollo/client" {
     context: {
       typename: string,
       fieldName: string,
-      field: GraphQL$FieldNode | null,
+      field: FieldNode | null,
       variables?: { [key: string]: any, ... },
       ...
     }
@@ -603,7 +571,7 @@ declare module "@apollo/client" {
     args: TArgs | null;
     fieldName: string;
     storeFieldName: string;
-    field: GraphQL$FieldNode | null;
+    field: FieldNode | null;
     variables?: TVars;
     isReference: isReference;
     toReference: ToReferenceFunction;
@@ -650,7 +618,7 @@ declare module "@apollo/client" {
     addTypePolicies(typePolicies: TypePolicies): void;
     addPossibleTypes(possibleTypes: PossibleTypesMap): void;
     fragmentMatches(
-      fragment: GraphQL$InlineFragmentNode | GraphQL$FragmentDefinitionNode,
+      fragment: InlineFragmentNode | FragmentDefinitionNode,
       typename: string | void,
       result?: { [key: string]: any, ... },
       variables?: { [key: string]: any, ... }
@@ -698,12 +666,12 @@ declare module "@apollo/client" {
   };
   declare export class MissingFieldError mixins Error {
     +path: MissingTree | Array<string | number>;
-    +query: GraphQL$DocumentNode;
+    +query: DocumentNode;
     +variables?: { [key: string]: any, ... } | void;
     constructor(
       message: string,
       path: MissingTree | Array<string | number>,
-      query: GraphQL$DocumentNode,
+      query: DocumentNode,
       variables?: { [key: string]: any, ... } | void
     ): this;
     +missing: MissingTree;
@@ -711,7 +679,7 @@ declare module "@apollo/client" {
   declare export interface FieldSpecifier {
     typename?: string;
     fieldName: string;
-    field?: GraphQL$FieldNode;
+    field?: FieldNode;
     args?: { [key: string]: any, ... };
     variables?: { [key: string]: any, ... };
   }
@@ -751,7 +719,7 @@ declare module "@apollo/client" {
 
   declare export interface DataProxy$Fragment<TVariables, TData> {
     id?: string;
-    fragment: GraphQL$DocumentNode | TypedDocumentNode<TData, TVariables>;
+    fragment: DocumentNode | TypedDocumentNode<TData, TVariables>;
     fragmentName?: string;
     variables?: TVariables;
   }
@@ -810,7 +778,7 @@ declare module "@apollo/client" {
   };
 
   declare export interface DataProxy$Query<TVariables, TData> {
-    query: GraphQL$DocumentNode | TypedDocumentNode<TData, TVariables>;
+    query: DocumentNode | TypedDocumentNode<TData, TVariables>;
     variables?: TVariables;
     id?: string;
   }
@@ -843,8 +811,8 @@ declare module "@apollo/client" {
     batch<U>(options: Cache$BatchOptions<ApolloCache<TSerialized>, U>): U;
     performTransaction(transaction: Transaction<TSerialized>, optimisticId?: string | null): void;
     recordOptimisticTransaction(transaction: Transaction<TSerialized>, optimisticId: string): void;
-    transformDocument(document: GraphQL$DocumentNode): GraphQL$DocumentNode;
-    transformForLink(document: GraphQL$DocumentNode): GraphQL$DocumentNode;
+    transformDocument(document: DocumentNode): DocumentNode;
+    transformForLink(document: DocumentNode): DocumentNode;
     identify(object: StoreObject | Reference): string | void;
     gc(): string[];
     modify(options: Cache$ModifyOptions): boolean;
@@ -879,7 +847,7 @@ declare module "@apollo/client" {
     variables?: { [key: string]: any, ... };
     networkStatus?: $Values<typeof NetworkStatus>;
     networkError?: Error | null;
-    graphQLErrors?: $ReadOnlyArray<GraphQL$GraphQLError>;
+    graphQLErrors?: $ReadOnlyArray<GraphQLError>;
   |};
   declare export var CacheWriteBehavior: {|
     +FORBID: 0,
@@ -889,17 +857,17 @@ declare module "@apollo/client" {
   declare export class QueryInfo {
     +queryId: string;
     listeners: Set<QueryListener>;
-    document: GraphQL$DocumentNode | null;
+    document: DocumentNode | null;
     lastRequestId: number;
     subscriptions: Set<ZenObservable$ObservableSubscription>;
     variables?: { [key: string]: any, ... };
     networkStatus?: $Values<typeof NetworkStatus>;
     networkError?: Error | null;
-    graphQLErrors?: $ReadOnlyArray<GraphQL$GraphQLError>;
+    graphQLErrors?: $ReadOnlyArray<GraphQLError>;
     stopped: boolean;
     constructor(queryManager: QueryManager<any>, queryId?: string): this;
     init(query: {
-      document: GraphQL$DocumentNode,
+      document: DocumentNode,
       variables: { [key: string]: any, ... } | void,
       networkStatus?: $Values<typeof NetworkStatus>,
       observableQuery?: ObservableQuery<any>,
@@ -916,7 +884,7 @@ declare module "@apollo/client" {
     resetLastWrite(): void;
     markResult<T>(
       result: FetchResult<T>,
-      document: GraphQL$DocumentNode,
+      document: DocumentNode,
       options: {|
         fetchPolicy?: WatchQueryFetchPolicy;
         variables?: OperationVariables;
@@ -937,7 +905,7 @@ declare module "@apollo/client" {
   declare export type RefetchWritePolicy = "merge" | "overwrite";
   declare export type ErrorPolicy = "none" | "ignore" | "all";
   declare export interface QueryOptions<TVariables = OperationVariables, TData = any> {
-    query: GraphQL$DocumentNode | TypedDocumentNode<TData, TVariables>;
+    query: DocumentNode | TypedDocumentNode<TData, TVariables>;
     variables?: TVariables;
     errorPolicy?: ErrorPolicy;
     context?: any;
@@ -967,7 +935,7 @@ declare module "@apollo/client" {
     initialFetchPolicy: WatchQueryFetchPolicy;
   }
   declare export type FetchMoreQueryOptions<TVariables, TData = any> = {|
-    query?: GraphQL$DocumentNode | TypedDocumentNode<TData, TVariables>,
+    query?: DocumentNode | TypedDocumentNode<TData, TVariables>,
     variables?: $Rest<TVariables, { ... }>,
     context?: any
   |};
@@ -991,7 +959,7 @@ declare module "@apollo/client" {
     TSubscriptionVariables = OperationVariables,
     TSubscriptionData = TData
   > = {
-    document: GraphQL$DocumentNode | TypedDocumentNode<TSubscriptionData, TSubscriptionVariables>,
+    document: DocumentNode | TypedDocumentNode<TSubscriptionData, TSubscriptionVariables>,
     variables?: TSubscriptionVariables,
     updateQuery?: UpdateQueryFn<TData, TSubscriptionVariables, TSubscriptionData>,
     onError?: (error: Error) => void,
@@ -999,7 +967,7 @@ declare module "@apollo/client" {
     ...
   };
   declare export interface SubscriptionOptions<TVariables = OperationVariables, TData = any> {
-    query: GraphQL$DocumentNode | TypedDocumentNode<TData, TVariables>;
+    query: DocumentNode | TypedDocumentNode<TData, TVariables>;
     variables?: TVariables;
     fetchPolicy?: FetchPolicy;
     errorPolicy?: ErrorPolicy;
@@ -1027,7 +995,7 @@ declare module "@apollo/client" {
     TContext = DefaultContext,
     TCache: ApolloCache<any> = ApolloCache<any>
   > = {
-    mutation: GraphQL$DocumentNode | TypedDocumentNode<TData, TVariables>,
+    mutation: DocumentNode | TypedDocumentNode<TData, TVariables>,
     fetchPolicy?: MutationFetchPolicy,
     keepRootFields?: boolean,
     ...
@@ -1053,7 +1021,7 @@ declare module "@apollo/client" {
     args?: any,
     context?: any,
     info?: {
-      field: GraphQL$FieldNode,
+      field: FieldNode,
       fragmentMap: FragmentMap,
       ...
     }
@@ -1082,7 +1050,7 @@ declare module "@apollo/client" {
     setResolvers(resolvers: Resolvers | Resolvers[]): void;
     getResolvers(): Resolvers;
     runResolvers<TData>(x: {
-      document: GraphQL$DocumentNode | null,
+      document: DocumentNode | null,
       remoteResult: FetchResult<TData>,
       context?: { [key: string]: any, ... },
       variables?: { [key: string]: any, ... },
@@ -1091,40 +1059,40 @@ declare module "@apollo/client" {
     }): Promise<FetchResult<TData>>;
     setFragmentMatcher(fragmentMatcher: FragmentMatcher): void;
     getFragmentMatcher(): FragmentMatcher;
-    clientQuery(document: GraphQL$DocumentNode): GraphQL$DocumentNode | null;
-    serverQuery(document: GraphQL$DocumentNode): GraphQL$DocumentNode | null;
+    clientQuery(document: DocumentNode): DocumentNode | null;
+    serverQuery(document: DocumentNode): DocumentNode | null;
     prepareContext(context?: { [key: string]: any, ... }): {
       cache: ApolloCache<TCacheShape>,
       getCacheKey(obj: StoreObject): string | void,
       ...
     };
     addExportedVariables(
-      document: GraphQL$DocumentNode,
+      document: DocumentNode,
       variables?: OperationVariables,
       context?: { ... }
     ): Promise<{
       [x: string]: any,
     }>;
-    shouldForceResolvers(document: GraphQL$ASTNode): boolean;
+    shouldForceResolvers(document: ASTNode): boolean;
   }
 
   // @apollo/client/core/QueryManager.d.ts
 
   declare export interface MutationStoreValue {
-    mutation: GraphQL$DocumentNode;
+    mutation: DocumentNode;
     variables: { [key: string]: any, ... };
     loading: boolean;
     error: Error | null;
   }
   declare export type UpdateQueries<TData> = $PropertyType<MutationOptions<TData, any, any>, "updateQueries">;
   declare export interface TransformCacheEntry {
-    document: GraphQL$DocumentNode;
+    document: DocumentNode;
     hasClientExports: boolean;
     hasForcedResolvers: boolean;
-    clientQuery: GraphQL$DocumentNode | null;
-    serverQuery: GraphQL$DocumentNode | null;
+    clientQuery: DocumentNode | null;
+    serverQuery: DocumentNode | null;
     defaultVars: OperationVariables;
-    asQuery: GraphQL$DocumentNode;
+    asQuery: DocumentNode;
   }
   declare export class QueryManager<TStore> {
     cache: ApolloCache<TStore>;
@@ -1155,7 +1123,7 @@ declare module "@apollo/client" {
       mutation: {
         mutationId: string,
         result: FetchResult<TData>,
-        document: GraphQL$DocumentNode,
+        document: DocumentNode,
         variables?: TVariables,
         fetchPolicy?: MutationFetchPolicy,
         errorPolicy: ErrorPolicy,
@@ -1175,7 +1143,7 @@ declare module "@apollo/client" {
       optimisticResponse: any,
       mutation: {
         mutationId: string,
-        document: GraphQL$DocumentNode,
+        document: DocumentNode,
         variables?: TVariables,
         fetchPolicy?: MutationFetchPolicy,
         errorPolicy: ErrorPolicy,
@@ -1193,7 +1161,7 @@ declare module "@apollo/client" {
     ): Promise<ApolloQueryResult<TData>>;
     getQueryStore(): { [key: string]: QueryStoreValue, ... };
     resetErrors(queryId: string): void;
-    transform(document: GraphQL$DocumentNode): TransformCacheEntry;
+    transform(document: DocumentNode): TransformCacheEntry;
     watchQuery<T, TVariables>(options: WatchQueryOptions<TVariables, T>): ObservableQuery<T, TVariables>;
     query<TData, TVars>(options: QueryOptions<TVars, TData>, queryId?: string): Promise<ApolloQueryResult<TData>>;
     generateQueryId(): string;
@@ -1299,7 +1267,7 @@ declare module "@apollo/client" {
     diff: Cache$DiffResult<any>,
     lastDiff: Cache$DiffResult<any> | void
   ) => boolean | TResult;
-  declare export type RefetchQueryDescriptor = string | GraphQL$DocumentNode;
+  declare export type RefetchQueryDescriptor = string | DocumentNode;
   declare export type InternalRefetchQueryDescriptor = RefetchQueryDescriptor | QueryOptions<>;
   declare export type RefetchQueriesIncludeShorthand = "all" | "active";
   declare export type RefetchQueriesInclude = RefetchQueryDescriptor[] | RefetchQueriesIncludeShorthand;
@@ -1334,7 +1302,7 @@ declare module "@apollo/client" {
   declare export type OperationVariables = { [key: string]: any, ... };
   declare export type ApolloQueryResult<T> = {
     data: T,
-    errors?: $ReadOnlyArray<GraphQL$GraphQLError>,
+    errors?: $ReadOnlyArray<GraphQLError>,
     error?: ApolloError,
     loading: boolean,
     networkStatus: $Values<typeof NetworkStatus>,
@@ -1397,7 +1365,7 @@ declare module "@apollo/client" {
     defaultOptions?: DefaultOptions,
     assumeImmutableResults?: boolean,
     resolvers?: Resolvers | Resolvers[],
-    typeDefs?: string | string[] | GraphQL$DocumentNode | GraphQL$DocumentNode[],
+    typeDefs?: string | string[] | DocumentNode | DocumentNode[],
     fragmentMatcher?: FragmentMatcher,
     name?: string,
     version?: string,
@@ -1429,7 +1397,7 @@ declare module "@apollo/client" {
     writeQuery<TData, TVariables>(options: Cache$WriteQueryOptions<TData, TVariables>): void;
     writeFragment<TData, TVariables>(options: Cache$WriteFragmentOptions<TData, TVariables>): void;
     __actionHookForDevTools(cb: () => any): void;
-    __requestRaw(payload: GraphQLRequest): ZenObservable$Observable<GraphQL$ExecutionResult<>>;
+    __requestRaw(payload: GraphQLRequest): ZenObservable$Observable<ExecutionResult<>>;
     resetStore(): Promise<ApolloQueryResult<any>[] | null>;
     clearStore(): Promise<any[]>;
     onResetStore(cb: () => Promise<any>): () => void;
@@ -1470,7 +1438,7 @@ declare module "@apollo/client" {
 
   declare export type QueryComponentOptions<TData = any, TVariables = OperationVariables> = {
     children: (result: QueryResult<TData, TVariables>) => React$Node | null,
-    query: GraphQL$DocumentNode | TypedDocumentNode<TData, TVariables>,
+    query: DocumentNode | TypedDocumentNode<TData, TVariables>,
     ...
   } & QueryFunctionOptions<TData, TVariables>;
   declare export type MutationComponentOptions<
@@ -1479,7 +1447,7 @@ declare module "@apollo/client" {
     TContext = DefaultContext,
     TCache: ApolloCache<any> = ApolloCache<any>
   > = {
-    mutation: GraphQL$DocumentNode | TypedDocumentNode<TData, TVariables>,
+    mutation: DocumentNode | TypedDocumentNode<TData, TVariables>,
     children: (
       mutateFunction: MutationFunction<TData, TVariables, TContext>,
       result: MutationResult<TData>
@@ -1487,7 +1455,7 @@ declare module "@apollo/client" {
     ...
   } & BaseMutationOptions<TData, TVariables, TContext, TCache>;
   declare export type SubscriptionComponentOptions<TData = any, TVariables = OperationVariables> = {
-    subscription: GraphQL$DocumentNode | TypedDocumentNode<TData, TVariables>,
+    subscription: DocumentNode | TypedDocumentNode<TData, TVariables>,
     children?: null | ((result: SubscriptionResult<TData>) => React$Node | null),
     ...
   } & BaseSubscriptionOptions<TData, TVariables>;
@@ -1518,7 +1486,7 @@ declare module "@apollo/client" {
   // @apollo/client/react/hoc/graphql.d.ts
 
   declare export function graphql<TProps: { ... }, TData, TGraphQLVariables, TChildProps>(
-    document: GraphQL$DocumentNode,
+    document: DocumentNode,
     operationOptions?: OperationOption<TProps, TData, TGraphQLVariables, TChildProps>
   ): (WrappedComponent: React$ComponentType<{| ...TProps, ...TChildProps |}>) => React$Component<TProps>;
 
@@ -1550,21 +1518,21 @@ declare module "@apollo/client" {
     TContext,
     TCache: ApolloCache<any>
   >(
-    document: GraphQL$DocumentNode,
+    document: DocumentNode,
     operationOptions?: OperationOption<TProps, TData, TGraphQLVariables, TChildProps>
   ): (WrappedComponent: ComponentType<{| ...TProps, ...TChildProps |}>) => Component<TProps>;
 
   // @apollo/client/react/hoc/query-hoc.d.ts
 
   declare export function withQuery<TProps: { ... }, TData, TGraphQLVariables, TChildProps>(
-    document: GraphQL$DocumentNode,
+    document: DocumentNode,
     operationOptions?: OperationOption<TProps, TData, TGraphQLVariables, TChildProps>
   ): (WrappedComponent: ComponentType<{| ...TProps, ...TChildProps |}>) => Component<TProps>;
 
   // @apollo/client/react/hoc/subscription-hoc.d.ts
 
   declare function withSubscription<TProps: { ... }, TData, TGraphQLVariables, TChildProps>(
-    document: GraphQL$DocumentNode,
+    document: DocumentNode,
     operationOptions?: OperationOption<TProps, TData, TGraphQLVariables, TChildProps>
   ): (WrappedComponent: ComponentType<{| ...TProps, ...TChildProps |}>) => Component<TProps>;
 
@@ -1674,7 +1642,7 @@ declare module "@apollo/client" {
   // @apollo/client/react/hooks/useLazyQuery.d.ts
 
   declare export function useLazyQuery<TData, TVariables>(
-    query: GraphQL$DocumentNode | TypedDocumentNode<TData, TVariables>,
+    query: DocumentNode | TypedDocumentNode<TData, TVariables>,
     options?: LazyQueryHookOptions<TData, TVariables>
   ): LazyQueryResultTuple<TData, TVariables>;
 
@@ -1686,26 +1654,26 @@ declare module "@apollo/client" {
     TContext = DefaultContext,
     TCache: ApolloCache<any> = ApolloCache<any>
   >(
-    mutation: GraphQL$DocumentNode | TypedDocumentNode<TData, TVariables>,
+    mutation: DocumentNode | TypedDocumentNode<TData, TVariables>,
     options?: MutationHookOptions<TData, TVariables, TContext>
   ): MutationTuple<TData, TVariables, TContext, TCache>;
 
   // @apollo/client/react/hooks/useQuery.d.ts
 
   declare export function useQuery<TData, TVariables>(
-    query: GraphQL$DocumentNode | TypedDocumentNode<TData, TVariables>,
+    query: DocumentNode | TypedDocumentNode<TData, TVariables>,
     options?: QueryHookOptions<TData, TVariables>
   ): QueryResult<TData, TVariables>;
   declare export function useInternalState<TData, TVariables>(
     client: ApolloClient<any>,
-    query: GraphQL$DocumentNode | TypedDocumentNode<TData, TVariables>
+    query: DocumentNode | TypedDocumentNode<TData, TVariables>
   ): InternalState<TData, TVariables>;
   declare export class InternalState<TData, TVariables> {
     +client: $Call<<R>((...args: any[]) => R) => R, typeof useApolloClient>;
-    +query: GraphQL$DocumentNode | TypedDocumentNode<TData, TVariables>;
+    +query: DocumentNode | TypedDocumentNode<TData, TVariables>;
     constructor(
       client: $Call<<R>((...args: any[]) => R) => R, typeof useApolloClient>,
-      query: GraphQL$DocumentNode | TypedDocumentNode<TData, TVariables>,
+      query: DocumentNode | TypedDocumentNode<TData, TVariables>,
       previous?: InternalState<TData, TVariables>
     ): this;
     forceUpdate(): void;
@@ -1722,7 +1690,7 @@ declare module "@apollo/client" {
   // @apollo/client/react/hooks/useSubscription.d.ts
 
   declare export function useSubscription<TData, TVariables>(
-    subscription: GraphQL$DocumentNode | TypedDocumentNode<TData, TVariables>,
+    subscription: DocumentNode | TypedDocumentNode<TData, TVariables>,
     options?: SubscriptionHookOptions<TData, TVariables>
   ): SubscriptionResult<TData, any>;
 
@@ -1736,11 +1704,11 @@ declare module "@apollo/client" {
   declare export interface IDocumentDefinition {
     type: $Values<typeof DocumentType>;
     name: string;
-    variables: $ReadOnlyArray<GraphQL$VariableDefinitionNode>;
+    variables: $ReadOnlyArray<VariableDefinitionNode>;
   }
   declare export function operationName(type: $Values<typeof DocumentType>): string;
-  declare export function parser(document: GraphQL$DocumentNode): IDocumentDefinition;
-  declare export function verifyDocumentType(document: GraphQL$DocumentNode, type: $Values<typeof DocumentType>): void;
+  declare export function parser(document: DocumentNode): IDocumentDefinition;
+  declare export function verifyDocumentType(document: DocumentNode, type: $Values<typeof DocumentType>): void;
 
   // @apollo/client/react/ssr/getDataFromTree.d.ts
 
@@ -1845,11 +1813,11 @@ declare module "@apollo/client" {
   } & ObservableQueryFields<TData, TVariables>;
   declare export type QueryDataOptions<TData = any, TVariables = OperationVariables> = {
     children?: (result: QueryResult<TData, TVariables>) => Node,
-    query: GraphQL$DocumentNode | TypedDocumentNode<TData, TVariables>,
+    query: DocumentNode | TypedDocumentNode<TData, TVariables>,
     ...
   } & QueryFunctionOptions<TData, TVariables>;
   declare export type QueryHookOptions<TData = any, TVariables = OperationVariables> = {
-    query?: GraphQL$DocumentNode | TypedDocumentNode<TData, TVariables>,
+    query?: DocumentNode | TypedDocumentNode<TData, TVariables>,
     ...
   } & QueryFunctionOptions<TData, TVariables>;
   declare export type LazyQueryHookOptions<TData = any, TVariables = OperationVariables> = { ... } & $Diff<
@@ -1889,7 +1857,7 @@ declare module "@apollo/client" {
     TContext = DefaultContext,
     TCache: ApolloCache<any> = ApolloCache<any>
   > = {
-    mutation?: GraphQL$DocumentNode | TypedDocumentNode<TData, TVariables>,
+    mutation?: DocumentNode | TypedDocumentNode<TData, TVariables>,
     ...
   } & BaseMutationOptions<TData, TVariables, TContext, TCache>;
   declare export interface MutationResult<TData = any> {
@@ -1912,7 +1880,7 @@ declare module "@apollo/client" {
     TContext = DefaultContext,
     TCache: ApolloCache<any> = ApolloCache<any>
   > = {
-    mutation?: GraphQL$DocumentNode | TypedDocumentNode<TData, TVariables>,
+    mutation?: DocumentNode | TypedDocumentNode<TData, TVariables>,
     ...
   } & BaseMutationOptions<TData, TVariables, TContext, TCache>;
   declare export type MutationDataOptions<
@@ -1921,7 +1889,7 @@ declare module "@apollo/client" {
     TContext = DefaultContext,
     TCache: ApolloCache<any> = ApolloCache<any>
   > = {
-    mutation: GraphQL$DocumentNode | TypedDocumentNode<TData, TVariables>,
+    mutation: DocumentNode | TypedDocumentNode<TData, TVariables>,
     ...
   } & BaseMutationOptions<TData, TVariables, TContext, TCache>;
   declare export type MutationTuple<
@@ -1961,11 +1929,11 @@ declare module "@apollo/client" {
     variables?: TVariables;
   }
   declare export type SubscriptionHookOptions<TData = any, TVariables = OperationVariables> = {
-    subscription?: GraphQL$DocumentNode | TypedDocumentNode<TData, TVariables>,
+    subscription?: DocumentNode | TypedDocumentNode<TData, TVariables>,
     ...
   } & BaseSubscriptionOptions<TData, TVariables>;
   declare export type SubscriptionDataOptions<TData = any, TVariables = OperationVariables> = {
-    subscription: GraphQL$DocumentNode | TypedDocumentNode<TData, TVariables>,
+    subscription: DocumentNode | TypedDocumentNode<TData, TVariables>,
     children?: null | ((result: SubscriptionResult<TData>) => React$Node | null),
     ...
   } & BaseSubscriptionOptions<TData, TVariables>;
@@ -2054,7 +2022,7 @@ declare module "@apollo/client" {
   // @apollo/client/link/http/selectHttpOptionsAndBody.d.ts
 
   declare export interface Printer {
-    (node: GraphQL$ASTNode, originalPrint: typeof GraphQL$print): string;
+    (node: ASTNode, originalPrint: PrintType): string;
   }
   declare export interface UriFunction {
     (operation: Operation): string;
@@ -2247,6 +2215,8 @@ declare module "@apollo/client/link/context" {
 }
 
 declare module "@apollo/client/link/core" {
+  import type { DocumentNode, ExecutionResult, GraphQLError } from "graphql";
+
   // @apollo/client/link/core/ApolloLink.d.ts
 
   declare export class ApolloLink {
@@ -2285,7 +2255,7 @@ declare module "@apollo/client/link/core" {
   > = {
     data: ?TData,
     incremental?: empty,
-    errors?: $ReadOnlyArray<GraphQL$GraphQLError>,
+    errors?: $ReadOnlyArray<GraphQLError>,
     extensions?: TExtensions,
     ...
   } & ExecutionPatchResultBase;
@@ -2293,7 +2263,7 @@ declare module "@apollo/client/link/core" {
     data: ?TData;
     label?: string;
     path: Path;
-    errors?: $ReadOnlyArray<GraphQL$GraphQLError>;
+    errors?: $ReadOnlyArray<GraphQLError>;
     extensions?: TExtensions;
   }
   declare export type ExecutionPatchIncrementalResult<
@@ -2311,14 +2281,14 @@ declare module "@apollo/client/link/core" {
     TExtensions = { [key: string]: any, ... }
   > = ExecutionPatchInitialResult<TData, TExtensions> | ExecutionPatchIncrementalResult<TData, TExtensions>;
   declare export interface GraphQLRequest {
-    query: GraphQL$DocumentNode;
+    query: DocumentNode;
     variables?: Object;
     operationName?: string;
     context?: Object;
     extensions?: Object;
   }
   declare export interface Operation {
-    query: GraphQL$DocumentNode;
+    query: DocumentNode;
     variables: { [key: string]: any, ... };
     operationName: string;
     extensions: { [key: string]: any, ... };
@@ -2336,7 +2306,7 @@ declare module "@apollo/client/link/core" {
     data?: ?TData,
     context?: TContext,
     ...
-  } & GraphQL$ExecutionResult<TData, TExtensions>;
+  } & ExecutionResult<TData, TExtensions>;
   declare export type FetchResult<
     TData = { [key: string]: any, ... },
     TContext = { [key: string]: any, ... },
@@ -2349,13 +2319,14 @@ declare module "@apollo/client/link/core" {
 declare module "@apollo/client/link/error" {
   import type { GraphQLErrors, NetworkError } from "@apollo/client";
   import type { ApolloLink, FetchResult, NextLink, Operation } from "@apollo/client/link/core";
+  import type { ExecutionResult } from "graphql";
 
   // @apollo/client/link/error/index.d.ts
 
   declare export interface ErrorResponse {
     graphQLErrors?: GraphQLErrors;
     networkError?: NetworkError;
-    response?: GraphQL$ExecutionResult<>;
+    response?: ExecutionResult<>;
     operation: Operation;
     forward: NextLink;
   }
@@ -2379,18 +2350,19 @@ declare module "@apollo/client/link/error" {
 declare module "@apollo/client/link/persisted-queries" {
   import type { NetworkError } from "@apollo/client";
   import type { ApolloLink, Operation } from "@apollo/client/link/core";
+  import type { DocumentNode, ExecutionResult, GraphQLError } from "graphql";
 
   // @apollo/client/link/persisted-queries/index.d.ts
 
   declare export var VERSION: 1;
   declare export interface ErrorResponse {
-    graphQLErrors?: $ReadOnlyArray<GraphQL$GraphQLError>;
+    graphQLErrors?: $ReadOnlyArray<GraphQLError>;
     networkError?: NetworkError;
-    response?: GraphQL$ExecutionResult<>;
+    response?: ExecutionResult<>;
     operation: Operation;
   }
   declare type SHA256Function = (...args: any[]) => string | Promise<string>;
-  declare type GenerateHashFunction = (document: GraphQL$DocumentNode) => string | Promise<string>;
+  declare type GenerateHashFunction = (document: DocumentNode) => string | Promise<string>;
   declare var PersistedQueryLink: typeof npm$namespace$PersistedQueryLink;
 
   declare var npm$namespace$PersistedQueryLink: {|
@@ -2545,6 +2517,7 @@ declare module "@apollo/client/link/ws" {
 declare module "@apollo/client/testing" {
   import type { ApolloCache, ApolloClient, ApolloQueryResult, DefaultOptions, NormalizedCacheObject, ObservableQuery, QueryManager, Resolvers } from "@apollo/client";
   import type { ApolloLink, FetchResult, GraphQLRequest, Operation } from "@apollo/client/link/core";
+  import type { DocumentNode } from "graphql";
 
   // Typescript built-in type
   declare type RequestInit = any;
@@ -2553,7 +2526,7 @@ declare module "@apollo/client/testing" {
 
   declare function createMockClient<TData>(
     data: TData,
-    query: GraphQL$DocumentNode,
+    query: DocumentNode,
     variables?: { ... }
   ): ApolloClient<NormalizedCacheObject>;
 
@@ -2702,10 +2675,12 @@ declare module "@apollo/client/testing" {
 }
 
 declare module "@apollo/client/utilities" {
+  import type { DirectiveNode, DocumentNode, FieldNode, FragmentDefinitionNode, InlineFragmentNode, OperationDefinitionNode, NameNode, SelectionNode, SelectionSetNode, ValueNode, VariableNode } from "graphql";
+
   // @apollo/client/utilities/graphql/DocumentTransform.d.ts
 
   declare export type DocumentTransformCacheKey = $ReadOnlyArray<mixed>;
-  declare type TransformFn = (document: DocumentNode) => GraphQL$DocumentNode;
+  declare type TransformFn = (document: DocumentNode) => DocumentNode;
   declare interface DocumentTransformOptions {
     cache?: boolean;
     getCacheKey?: (document: DocumentNode) => DocumentTransformCacheKey | void;
@@ -2724,22 +2699,18 @@ declare module "@apollo/client/utilities" {
 
   // @apollo/client/utilities/graphql/fragments.d.ts
 
-  declare export function getFragmentQueryDocument(document: GraphQL$DocumentNode, fragmentName?: string): GraphQL$DocumentNode;
+  declare export function getFragmentQueryDocument(document: DocumentNode, fragmentName?: string): DocumentNode;
   declare export interface FragmentMap {
-    [fragmentName: string]: GraphQL$FragmentDefinitionNode;
+    [fragmentName: string]: FragmentDefinitionNode;
   }
-  declare export type FragmentMapFunction = (fragmentName: string) => GraphQL$FragmentDefinitionNode | null;
-  declare export function createFragmentMap(fragments?: GraphQL$FragmentDefinitionNode[]): FragmentMap;
+  declare export type FragmentMapFunction = (fragmentName: string) => FragmentDefinitionNode | null;
+  declare export function createFragmentMap(fragments?: FragmentDefinitionNode[]): FragmentMap;
   declare export function getFragmentFromSelection(
-    selection: GraphQL$SelectionNode,
+    selection: SelectionNode,
     fragmentMap?: FragmentMap | FragmentMapFunction
-  ): GraphQL$InlineFragmentNode | GraphQL$FragmentDefinitionNode | null;
+  ): InlineFragmentNode | FragmentDefinitionNode | null;
 
   // @apollo/client/utilities/graphql/getFromAST.d.ts
-
-  declare type DocumentNode = GraphQL$DocumentNode;
-  declare type OperationDefinitionNode = GraphQL$DocumentNode;
-  declare type FragmentDefinitionNode = GraphQL$DocumentNode;
 
   declare export function checkDocument(doc: DocumentNode): DocumentNode;
 
@@ -2769,14 +2740,14 @@ declare module "@apollo/client/utilities" {
     __typename?: string;
     [storeFieldName: string]: StoreValue;
   }
-  declare export function isGraphQL$DocumentNode(value: any): boolean;
+  declare export function isDocumentNode(value: any): boolean;
   declare export function valueToObjectRepresentation(
     argObj: any,
-    name: GraphQL$NameNode,
-    value: GraphQL$ValueNode,
+    name: NameNode,
+    value: ValueNode,
     variables?: Object
   ): void;
-  declare export function storeKeyNameFromField(field: GraphQL$FieldNode, variables?: Object): string;
+  declare export function storeKeyNameFromField(field: FieldNode, variables?: Object): string;
   declare export type Directives = {
     [directiveName: string]: {
       [argName: string]: any,
@@ -2791,18 +2762,18 @@ declare module "@apollo/client/utilities" {
   |};
   declare export var stringify: (value: any) => string;
   declare export function argumentsObjectFromField(
-    field: GraphQL$FieldNode | GraphQL$DirectiveNode,
+    field: FieldNode | DirectiveNode,
     variables?: { [key: string]: any, ... }
   ): Object | null;
-  declare export function resultKeyNameFromField(field: GraphQL$FieldNode): string;
+  declare export function resultKeyNameFromField(field: FieldNode): string;
   declare export function getTypenameFromResult(
     result: { [key: string]: any, ... },
-    selectionSet: GraphQL$SelectionSetNode,
+    selectionSet: SelectionSetNode,
     fragmentMap?: FragmentMap
   ): string | void;
-  declare export function isField(selection: GraphQL$SelectionNode): boolean;
-  declare export function isInlineFragment(selection: GraphQL$SelectionNode): boolean;
-  declare export type VariableValue = (node: GraphQL$VariableNode) => any;
+  declare export function isField(selection: SelectionNode): boolean;
+  declare export function isInlineFragment(selection: SelectionNode): boolean;
+  declare export type VariableValue = (node: VariableNode) => any;
 
   // @apollo/client/utilities/observables/Observable.d.ts
 

@@ -8,6 +8,7 @@ import { onError } from "@apollo/client/link/error";
 import * as React from 'react';
 import { RetryLink } from '@apollo/client/link/retry';
 import { getMainDefinition } from "@apollo/client/utilities";
+import type { DocumentNode } from 'graphql';
 
 const client = new ApolloClient<{ ... }>({ cache: new ApolloCache() });
 
@@ -34,19 +35,25 @@ describe('ApolloLink', () => {
 
 describe('ApolloClient', () => {
   describe('mutate', () => {
-    it('returns data type', async () => {
-      const result: FetchResult<MutationData> = await client.mutate<MutationData, MutationVariables>({ mutation: {}, variables: { myVar: 'foo' } });
-      const data: ?MutationData = result.data;
+    it('returns data type', () => {
+      const testFun = async (mutation: DocumentNode) => {
+        const result: FetchResult<MutationData> = await client.mutate<MutationData, MutationVariables>({ mutation, variables: { myVar: 'foo' } });
+        const data: ?MutationData = result.data;
 
-      // $FlowExpectedError[prop-missing]
-      const notData: ?{| wrong: string |} = result.data;
+        // $FlowExpectedError[prop-missing]
+        const notData: ?{| wrong: string |} = result.data;
+      };
     });
     it('accepts correct variables type', () => {
-      client.mutate<MutationData, MutationVariables>({ mutation: {}, variables: { myVar: 'foo' } });
+      const testFun = async (mutation: DocumentNode) => {
+        client.mutate<MutationData, MutationVariables>({ mutation, variables: { myVar: 'foo' } });
+      };
     });
     it('rejects wrong variables type', () => {
-      // $FlowExpectedError[prop-missing]
-      client.mutate<MutationData, MutationVariables>({mutation: {}, variables: {wrongVariable: 99}});
+      const testFun = async (mutation: DocumentNode) => {
+        // $FlowExpectedError[prop-missing]
+        client.mutate<MutationData, MutationVariables>({ mutation, variables: { wrongVariable: 99 } });
+      };
     });
   });
 });
@@ -65,20 +72,22 @@ type WrongData = {|
 
 describe('useSubscription', () => {
   it('obSubscriptionData accepts correct subscription data type', () => {
-    const query = {};
-    const onSubscriptionData = (data: OnSubscriptionDataOptions<SubscriptionData>) => {
-      const subscriptionData: ?SubscriptionData = data.subscriptionData.data;
+    const testFun = (subscriptionDocumentNode: DocumentNode) => {
+      const onSubscriptionData = (data: OnSubscriptionDataOptions<SubscriptionData>) => {
+        const subscriptionData: ?SubscriptionData = data.subscriptionData.data;
+      };
+      useSubscription<SubscriptionData, SubscriptionVariables>(subscriptionDocumentNode, { onSubscriptionData });
     };
-    useSubscription<SubscriptionData, SubscriptionVariables>(query, { onSubscriptionData });
   });
 
   it('obSubscriptionData rejects wrong subscription data type', () => {
-    const query = {};
-    const onSubscriptionData = (data: OnSubscriptionDataOptions<WrongData>) => {
-      const subscriptionData: ?WrongData = data.subscriptionData.data;
+    const testFun = (subscriptionDocumentNode: DocumentNode) => {
+      const onSubscriptionData = (data: OnSubscriptionDataOptions<WrongData>) => {
+        const subscriptionData: ?WrongData = data.subscriptionData.data;
+      };
+      // $FlowExpectedError[prop-missing]
+      useSubscription<SubscriptionData, SubscriptionVariables>(subscriptionDocumentNode, { onSubscriptionData });
     };
-    // $FlowExpectedError[prop-missing]
-    useSubscription<SubscriptionData, SubscriptionVariables>(query, { onSubscriptionData });
   });
 });
 
@@ -100,34 +109,37 @@ describe('ApolloProvider', () => {
 
 describe('MockedProvider', () => {
   it('accepts mocks', () => {
-    const query = {};
-    const mocks = [
-      {
-        request: {
-          query,
-          variables: {
-            filters: {
-              startDate: null,
-              endDate: null,
+    const testFun = (query: DocumentNode) => {
+      const mocks = [
+        {
+          request: {
+            query,
+            variables: {
+              filters: {
+                startDate: null,
+                endDate: null,
+                contractingCompanyIds: null,
+                maintenanceEventIds: null,
+                subsystemIds: null,
+              },
               contractingCompanyIds: null,
               maintenanceEventIds: null,
               subsystemIds: null,
             },
-            contractingCompanyIds: null,
-            maintenanceEventIds: null,
-            subsystemIds: null,
+          },
+          result: {
+            data: {
+              getChartData: {
+                chartData: [],
+              }
+            },
           },
         },
-        result: {
-          data: {
-            getChartData: {
-              chartData: [],
-            }
-          },
-        },
-      },
-    ];
-    <MockedProvider mocks={mocks}><div /></MockedProvider>;
+      ];
+      <MockedProvider mocks={mocks}>
+        <div />
+      </MockedProvider>;
+    };
   });
 });
 
@@ -149,8 +161,12 @@ describe("getMainDefinition utility", () => {
   it("returns a definition given a query", () => {
     const fun = ({ query }: Operation) => {
       const definition = getMainDefinition(query);
-      const kind: string = definition.kind;
-      const operation: string = definition.string;
+      if (definition.kind === "OperationDefinition") {
+        const operation: string = definition.operation;
+      } else {
+        // $FlowExpectedError[prop-missing]
+        const operation: string = definition.operation;
+      }
     }
   });
 });
