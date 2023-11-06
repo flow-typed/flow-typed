@@ -1,12 +1,22 @@
 // @flow
 
 import { describe, it } from 'flow-typed-test';
-import { ApolloCache, ApolloClient, ApolloLink, ApolloProvider, createHttpLink, useSubscription } from '@apollo/client';
-import type { FetchResult, OnSubscriptionDataOptions } from '@apollo/client';
+import {
+  ApolloCache,
+  ApolloClient,
+  ApolloLink,
+  ApolloProvider,
+  createHttpLink, InMemoryCache,
+  useQuery,
+  useSubscription,
+} from '@apollo/client';
+import type { FetchResult, OnSubscriptionDataOptions, Operation } from '@apollo/client';
 import { MockedProvider } from "@apollo/client/testing";
 import { onError } from "@apollo/client/link/error";
 import * as React from 'react';
 import { RetryLink } from '@apollo/client/link/retry';
+import { getMainDefinition, relayStylePagination } from "@apollo/client/utilities";
+import type { DocumentNode } from 'graphql';
 
 const client = new ApolloClient<{ ... }>({ cache: new ApolloCache() });
 
@@ -33,19 +43,25 @@ describe('ApolloLink', () => {
 
 describe('ApolloClient', () => {
   describe('mutate', () => {
-    it('returns data type', async () => {
-      const result: FetchResult<MutationData> = await client.mutate<MutationData, MutationVariables>({ mutation: {}, variables: { myVar: 'foo' } });
-      const data: ?MutationData = result.data;
+    it('returns data type', () => {
+      const testFun = async (mutation: DocumentNode) => {
+        const result: FetchResult<MutationData> = await client.mutate<MutationData, MutationVariables>({ mutation, variables: { myVar: 'foo' } });
+        const data: ?MutationData = result.data;
 
-      // $FlowExpectedError[prop-missing]
-      const notData: ?{| wrong: string |} = result.data;
+        // $FlowExpectedError[prop-missing]
+        const notData: ?{| wrong: string |} = result.data;
+      };
     });
     it('accepts correct variables type', () => {
-      client.mutate<MutationData, MutationVariables>({ mutation: {}, variables: { myVar: 'foo' } });
+      const testFun = async (mutation: DocumentNode) => {
+        client.mutate<MutationData, MutationVariables>({ mutation, variables: { myVar: 'foo' } });
+      };
     });
     it('rejects wrong variables type', () => {
-      // $FlowExpectedError[prop-missing]
-      client.mutate<MutationData, MutationVariables>({mutation: {}, variables: {wrongVariable: 99}});
+      const testFun = async (mutation: DocumentNode) => {
+        // $FlowExpectedError[prop-missing]
+        client.mutate<MutationData, MutationVariables>({ mutation, variables: { wrongVariable: 99 } });
+      };
     });
   });
 });
@@ -64,20 +80,52 @@ type WrongData = {|
 
 describe('useSubscription', () => {
   it('obSubscriptionData accepts correct subscription data type', () => {
-    const query = {};
-    const onSubscriptionData = (data: OnSubscriptionDataOptions<SubscriptionData>) => {
-      const subscriptionData: ?SubscriptionData = data.subscriptionData.data;
+    const testFun = (subscriptionDocumentNode: DocumentNode) => {
+      const onSubscriptionData = (data: OnSubscriptionDataOptions<SubscriptionData>) => {
+        const subscriptionData: ?SubscriptionData = data.subscriptionData.data;
+      };
+      useSubscription<SubscriptionData, SubscriptionVariables>(subscriptionDocumentNode, { onSubscriptionData });
     };
-    useSubscription<SubscriptionData, SubscriptionVariables>(query, { onSubscriptionData });
   });
 
   it('obSubscriptionData rejects wrong subscription data type', () => {
-    const query = {};
-    const onSubscriptionData = (data: OnSubscriptionDataOptions<WrongData>) => {
-      const subscriptionData: ?WrongData = data.subscriptionData.data;
+    const testFun = (subscriptionDocumentNode: DocumentNode) => {
+      const onSubscriptionData = (data: OnSubscriptionDataOptions<WrongData>) => {
+        const subscriptionData: ?WrongData = data.subscriptionData.data;
+      };
+      // $FlowExpectedError[prop-missing]
+      useSubscription<SubscriptionData, SubscriptionVariables>(subscriptionDocumentNode, { onSubscriptionData });
     };
-    // $FlowExpectedError[prop-missing]
-    useSubscription<SubscriptionData, SubscriptionVariables>(query, { onSubscriptionData });
+  });
+});
+
+type DataType = {|
+  id: string,
+|};
+
+describe('useQuery', () => {
+  const validVariables = { myVar: 'foo' };
+
+  it('accepts correct data and variables type', () => {
+    const testFun = (query: DocumentNode) => {
+      const { data } = useQuery<DataType, typeof validVariables>(query, {
+        fetchPolicy: "cache-first",
+        variables: validVariables
+      });
+      const myData: ?DataType = data;
+    };
+  });
+
+  it('rejects incorrect variables type', () => {
+    const invalidVariables = { wrong: 'type' };
+    const testFun = (query: DocumentNode) => {
+      const { data } = useQuery<DataType, typeof validVariables>(query, {
+        fetchPolicy: "cache-first",
+        // $FlowExpectedError[prop-missing]
+        variables: invalidVariables
+      });
+      const myData: ?DataType = data;
+    };
   });
 });
 
@@ -99,34 +147,37 @@ describe('ApolloProvider', () => {
 
 describe('MockedProvider', () => {
   it('accepts mocks', () => {
-    const query = {};
-    const mocks = [
-      {
-        request: {
-          query,
-          variables: {
-            filters: {
-              startDate: null,
-              endDate: null,
+    const testFun = (query: DocumentNode) => {
+      const mocks = [
+        {
+          request: {
+            query,
+            variables: {
+              filters: {
+                startDate: null,
+                endDate: null,
+                contractingCompanyIds: null,
+                maintenanceEventIds: null,
+                subsystemIds: null,
+              },
               contractingCompanyIds: null,
               maintenanceEventIds: null,
               subsystemIds: null,
             },
-            contractingCompanyIds: null,
-            maintenanceEventIds: null,
-            subsystemIds: null,
+          },
+          result: {
+            data: {
+              getChartData: {
+                chartData: [],
+              }
+            },
           },
         },
-        result: {
-          data: {
-            getChartData: {
-              chartData: [],
-            }
-          },
-        },
-      },
-    ];
-    <MockedProvider mocks={mocks}><div /></MockedProvider>;
+      ];
+      <MockedProvider mocks={mocks}>
+        <div />
+      </MockedProvider>;
+    };
   });
 });
 
@@ -135,6 +186,46 @@ describe("links", () => {
     const httpLink: ApolloLink = createHttpLink({ uri: "http://example.com" });
   });
   it("creates onError link", () => {
-    onError(({ operation, networkError, response }) => {});
+    onError(({ operation, networkError, response }) => {
+      const op: Operation = operation;
+
+      // $FlowExpectedError[incompatible-type]
+      const opx: ApolloLink = operation;
+    });
   })
+});
+
+describe("getMainDefinition utility", () => {
+  it("returns a definition given a query", () => {
+    const fun = ({ query }: Operation) => {
+      const definition = getMainDefinition(query);
+      if (definition.kind === "OperationDefinition") {
+        const operation: string = definition.operation;
+      } else {
+        // $FlowExpectedError[prop-missing]
+        // $FlowExpectedError[incompatible-type]
+        const operation: string = definition.operation;
+      }
+    }
+  });
+});
+
+describe("relayStylePagination utility", () => {
+  it("can be used in cache", () => {
+    new InMemoryCache({
+      typePolicies: {
+        Query: {
+          fields: {
+            paginationWithCustomId: relayStylePagination(["customId"]),
+            paginationWithDefaultId: relayStylePagination(),
+          },
+        },
+      },
+    })
+  });
+
+  it("rejects invalid key specifier", () => {
+    // $FlowExpectedError[incompatible-call]
+    relayStylePagination("cannotBeAString");
+  });
 });
