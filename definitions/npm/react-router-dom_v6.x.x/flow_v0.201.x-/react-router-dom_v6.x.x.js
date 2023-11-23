@@ -601,6 +601,13 @@ declare module 'react-router-dom' {
 
   declare export var UNSAFE_NavigationContext: React$Context<NavigationContextObject>;
 
+  declare export type LocationContextObject = {|
+    location: Location,
+    navigationType: HistoryAction,
+  |}
+
+  declare export var UNSAFE_LocationContext: React$Context<LocationContextObject>;
+
   declare export type IndexRouteObject = {|
     caseSensitive?: AgnosticIndexRouteObject['caseSensitive'],
     path?: AgnosticIndexRouteObject['path'],
