@@ -608,6 +608,14 @@ declare module 'react-router-dom' {
 
   declare export var UNSAFE_LocationContext: React$Context<LocationContextObject>;
 
+  declare export type RouteContextObject = {|
+    outlet: React$Node,
+    matches: Array<any>,
+    isDataRoute: boolean,
+  |};
+
+  declare export var UNSAFE_RouteContext: React$Context<RouteContextObject>;
+
   declare export type IndexRouteObject = {|
     caseSensitive?: AgnosticIndexRouteObject['caseSensitive'],
     path?: AgnosticIndexRouteObject['path'],
