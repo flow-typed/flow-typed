@@ -1,5 +1,5 @@
 // @flow
-import { describe, it } from 'flow-typed-test';
+import { describe, it, test } from 'flow-typed-test';
 
 import assert from 'assert';
 import events from 'events';
@@ -8,6 +8,10 @@ import os from 'os';
 import path from 'path';
 import util from 'util';
 import url from 'url';
+import {
+  Worker,
+  isMainThread,
+} from 'worker_threads';
 
 import nodeAssert from 'node:assert';
 import nodeAssertStrict from 'node:assert/strict';
@@ -21,6 +25,10 @@ import nodeOs from 'node:os';
 import nodePath from 'node:path';
 import nodeUtil from 'node:util';
 import nodeUrl from 'node:url';
+import {
+  Worker as nodeWorker,
+  isMainThread as nodeIsMainThread,
+} from 'node:worker_threads';
 
 describe('node', () => {
   describe('node:assert', () => {
@@ -108,6 +116,38 @@ describe('node', () => {
   describe('node:url', () => {
     it('should retrieve the corresponding Flow core types', () => {
       (nodeUrl.pathToFileURL: typeof url.pathToFileURL);
+    });
+  });
+
+  describe('worker_threads', () => {
+    test('Worker', () => {
+      const worker = new Worker('filename', {
+        workerData: 'test',
+      });
+      worker.on('message', () => {});
+      worker.on('error', () => {});
+    });
+
+    test('isMainThread', () => {
+      (isMainThread: boolean);
+      // $FlowExpectedError[incompatible-cast]
+      (isMainThread: string);
+    });
+  });
+
+  describe('node:worker_threads', () => {
+    test('Worker', () => {
+      const worker = new nodeWorker('filename', {
+        workerData: 'test',
+      });
+      worker.on('message', () => {});
+      worker.on('error', () => {});
+    });
+
+    test('isMainThread', () => {
+      (nodeIsMainThread: boolean);
+      // $FlowExpectedError[incompatible-cast]
+      (nodeIsMainThread: string);
     });
   });
 });

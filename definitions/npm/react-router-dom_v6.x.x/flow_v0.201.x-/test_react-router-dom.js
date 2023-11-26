@@ -1,5 +1,5 @@
 // @flow
-import React from 'react';
+import * as React from 'react';
 import {
   createBrowserRouter,
   createHashRouter,
@@ -32,6 +32,9 @@ import {
   useRouteError,
   useLoaderData,
   useSearchParams,
+  UNSAFE_NavigationContext,
+  UNSAFE_LocationContext,
+  UNSAFE_RouteContext,
 } from 'react-router-dom';
 import type {
   AgnosticRouteMatch,
@@ -44,6 +47,10 @@ import type {
   Params,
   RemixRouter,
   RouterNavigateOptions,
+  Navigator,
+  NavigationContextObject,
+  LocationContextObject,
+  RouteContextObject,
 } from 'react-router-dom';
 import { it, test, describe } from 'flow-typed-test';
 
@@ -1041,6 +1048,139 @@ describe('react-router-dom', () => {
         // $FlowExpectedError[incompatible-type] - wrong type
         <ChainedHOC s={123} />;
       });
+    });
+  });
+
+  describe('UNSAFE_ contexts', () => {
+    test('UNSAFE_NavigationContext', () => {
+      const Comp = ({ context }: {| context: NavigationContextObject |}) => {
+        return (
+          <UNSAFE_NavigationContext.Provider value={context}>
+            <div></div>
+          </UNSAFE_NavigationContext.Provider>
+        );
+      };
+
+      declare var nav: Navigator;
+
+      const A = (<Comp
+        context={{
+          basename: 'test',
+          navigator: nav,
+          static: false,
+        }}
+      />);
+      const B = (<Comp
+        // $FlowExpectedError[prop-missing]
+        context={{}}
+      />);
+      const C = (<Comp
+        context={{
+          // $FlowExpectedError[incompatible-type]
+          basename: 123,
+          navigator: nav,
+          static: false,
+        }}
+      />);
+      const D = (<Comp
+        context={{
+          basename: 'test',
+          // $FlowExpectedError[incompatible-type]
+          navigator: 'test',
+          static: false,
+        }}
+      />);
+      const E = (<Comp
+        context={{
+          basename: 'test',
+          navigator: nav,
+          // $FlowExpectedError[incompatible-type]
+          static: 123,
+        }}
+      />);
+    });
+
+    test('UNSAFE_LocationContext', () => {
+      const Comp = ({ context }: {| context: LocationContextObject |}) => {
+        return (
+          <UNSAFE_LocationContext.Provider value={context}>
+            <div></div>
+          </UNSAFE_LocationContext.Provider>
+        );
+      };
+
+      declare var location: Location;
+
+      const A = (<Comp
+        context={{
+          location: location,
+          navigationType: 'PUSH',
+        }}
+      />);
+      const B = (<Comp
+        // $FlowExpectedError[prop-missing]
+        context={{}}
+      />);
+      const C = (<Comp
+        context={{
+          // $FlowExpectedError[incompatible-type]
+          location: 'test',
+          navigationType: 'PUSH',
+        }}
+      />);
+      const D = (<Comp
+        context={{
+          location: location,
+          // $FlowExpectedError[incompatible-type]
+          navigationType: 'PASS',
+        }}
+      />);
+    });
+
+    test('UNSAFE_RouteContext', () => {
+      const Comp = ({ context }: {| context: RouteContextObject |}) => {
+        return (
+          <UNSAFE_RouteContext.Provider value={context}>
+            <div></div>
+          </UNSAFE_RouteContext.Provider>
+        );
+      };
+
+      const A = (<Comp
+        context={{
+          outlet: <div></div>,
+          matches: [],
+          isDataRoute: true,
+        }}
+      />);
+      const B = (<Comp
+        // $FlowExpectedError[prop-missing]
+        context={{}}
+      />);
+      const C = (<Comp
+        context={{
+          // $FlowExpectedError[incompatible-type]
+          outlet: HTMLElement,
+          matches: [],
+          isDataRoute: true,
+        }}
+      />);
+      const D = (<Comp
+        context={{
+          outlet: <div></div>,
+          // $FlowExpectedError[incompatible-type]
+          matches: 'test',
+          isDataRoute: true,
+        }}
+      />);
+      const E = (<Comp
+        context={{
+          outlet: <div></div>,
+          matches: ['test'],
+          // $FlowExpectedError[incompatible-type]
+          isDataRoute: 'test',
+        }}
+      />);
     });
   });
 
