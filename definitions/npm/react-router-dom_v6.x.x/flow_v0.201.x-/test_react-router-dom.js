@@ -1,5 +1,5 @@
 // @flow
-import React from 'react';
+import * as React from 'react';
 import {
   createBrowserRouter,
   createHashRouter,
@@ -32,6 +32,9 @@ import {
   useRouteError,
   useLoaderData,
   useSearchParams,
+  UNSAFE_NavigationContext,
+  UNSAFE_LocationContext,
+  UNSAFE_RouteContext,
 } from 'react-router-dom';
 import type {
   AgnosticRouteMatch,
@@ -44,6 +47,8 @@ import type {
   Params,
   RemixRouter,
   RouterNavigateOptions,
+  Navigator,
+  NavigationContextObject,
 } from 'react-router-dom';
 import { it, test, describe } from 'flow-typed-test';
 
@@ -1041,6 +1046,64 @@ describe('react-router-dom', () => {
         // $FlowExpectedError[incompatible-type] - wrong type
         <ChainedHOC s={123} />;
       });
+    });
+  });
+
+  describe('UNSAFE_ contexts', () => {
+    test('UNSAFE_NavigationContext', () => {
+      const Comp = ({ context }: {| context: NavigationContextObject |}) => {
+        return (
+          <UNSAFE_NavigationContext.Provider value={context}>
+            <div></div>
+          </UNSAFE_NavigationContext.Provider>
+        );
+      };
+
+      declare var nav: Navigator;
+
+      const A = (<Comp
+        context={{
+          basename: 'test',
+          navigator: nav,
+          static: false,
+        }}
+      />);
+      const B = (<Comp
+        // $FlowExpectedError[prop-missing]
+        context={{}}
+      />);
+      const C = (<Comp
+        context={{
+          // $FlowExpectedError[incompatible-type]
+          basename: 123,
+          navigator: nav,
+          static: false,
+        }}
+      />);
+      const D = (<Comp
+        context={{
+          basename: 'test',
+          // $FlowExpectedError[incompatible-type]
+          navigator: 'test',
+          static: false,
+        }}
+      />);
+      const E = (<Comp
+        context={{
+          basename: 'test',
+          navigator: nav,
+          // $FlowExpectedError[incompatible-type]
+          static: 123,
+        }}
+      />);
+    });
+
+    test('UNSAFE_LocationContext', () => {
+
+    });
+
+    test('UNSAFE_RouteContext', () => {
+
     });
   });
 
