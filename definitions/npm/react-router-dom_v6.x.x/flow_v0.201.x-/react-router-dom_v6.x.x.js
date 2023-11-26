@@ -466,9 +466,155 @@ declare module 'react-router-dom' {
     | LinkNavigateOptions
     | SubmissionNavigateOptions;
 
+  /**
+   * A change to the current location.
+   */
+  declare export type Update = {|
+    /**
+     * The action that triggered the change.
+     */
+    action: HistoryAction,
+    /**
+     * The new location.
+     */
+    location: Location,
+    /**
+     * The delta between this location and the former location in the history stack
+     */
+    delta: number | null,
+  |};
+
+  /**
+   * A function that receives notifications about location changes.
+   */
+  declare export type Listener = {|
+    (update: Update): void,
+  |};
+
+  /**
+   * A history is an interface to the navigation stack. The history serves as the
+   * source of truth for the current location, as well as provides a set of
+   * methods that may be used to change it.
+   *
+   * It is similar to the DOM's `window.history` object, but with a smaller, more
+   * focused API.
+   */
+  declare export type History = {|
+    /**
+     * The last action that modified the current location. This will always be
+     * Action.Pop when a history instance is first created. This value is mutable.
+     */
+    +action: HistoryAction,
+    /**
+     * The current location. This value is mutable.
+     */
+    +location: Location,
+    /**
+     * Returns a valid href for the given `to` value that may be used as
+     * the value of an <a href> attribute.
+     *
+     * @param to - The destination URL
+     */
+    createHref(to: To): string,
+    /**
+     * Returns a URL for the given `to` value
+     *
+     * @param to - The destination URL
+     */
+    createURL(to: To): URL,
+    /**
+     * Encode a location the same way window.history would do (no-op for memory
+     * history) so we ensure our PUSH/REPLACE navigations for data routers
+     * behave the same as POP
+     *
+     * @param to Unencoded path
+     */
+    encodeLocation(to: To): Path,
+    /**
+     * Pushes a new location onto the history stack, increasing its length by one.
+     * If there were any entries in the stack after the current one, they are
+     * lost.
+     *
+     * @param to - The new URL
+     * @param state - Data to associate with the new location
+     */
+    push(to: To, state?: any): void,
+    /**
+     * Replaces the current location in the history stack with a new one.  The
+     * location that was replaced will no longer be available.
+     *
+     * @param to - The new URL
+     * @param state - Data to associate with the new location
+     */
+    replace(to: To, state?: any): void,
+    /**
+     * Navigates `n` entries backward/forward in the history stack relative to the
+     * current index. For example, a "back" navigation would use go(-1).
+     *
+     * @param delta - The delta in the stack index
+     */
+    go(delta: number): void,
+    /**
+     * Sets up a listener that will be called whenever the current location
+     * changes.
+     *
+     * @param listener - A function that will be called when the location changes
+     * @returns unlisten - A function that may be used to stop listening
+     */
+    listen(listener: Listener): () => void,
+  |};
+
   // ----------------------------------/
   // `react-router`                    /
   // ----------------------------------/
+
+  declare export type NavigateOptions = {|
+    replace?: boolean,
+    state?: any,
+    preventScrollReset?: boolean,
+    relative?: RelativeRoutingType,
+    unstable_viewTransition?: boolean,
+  |};
+
+  /**
+   * A Navigator is a "location changer"; it's how you get to different locations.
+   *
+   * Every history instance conforms to the Navigator interface, but the
+   * distinction is useful primarily when it comes to the low-level `<Router>` API
+   * where both the location and a navigator must be provided separately in order
+   * to avoid "tearing" that may occur in a suspense-enabled app if the action
+   * and/or location were to be read directly from the history instance.
+   */
+  declare export type Navigator = {|
+    createHref: History['createHref'],
+    encodeLocation?: History['encodeLocation'],
+    go: History['go'],
+    push(to: To, state?: any, opts?: NavigateOptions): void,
+    replace(to: To, state?: any, opts?: NavigateOptions): void,
+  |}
+
+  declare export type NavigationContextObject = {|
+    basename: string,
+    navigator: Navigator,
+    static: boolean,
+  |};
+
+  declare export var UNSAFE_NavigationContext: React$Context<NavigationContextObject>;
+
+  declare export type LocationContextObject = {|
+    location: Location,
+    navigationType: HistoryAction,
+  |}
+
+  declare export var UNSAFE_LocationContext: React$Context<LocationContextObject>;
+
+  declare export type RouteContextObject = {|
+    outlet: React$Node,
+    matches: Array<any>,
+    isDataRoute: boolean,
+  |};
+
+  declare export var UNSAFE_RouteContext: React$Context<RouteContextObject>;
 
   declare export type IndexRouteObject = {|
     caseSensitive?: AgnosticIndexRouteObject['caseSensitive'],
