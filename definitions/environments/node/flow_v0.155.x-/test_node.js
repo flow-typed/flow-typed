@@ -11,7 +11,6 @@ import url from 'url';
 import {
   Worker,
   isMainThread,
-  parentPort,
 } from 'worker_threads';
 
 import nodeAssert from 'node:assert';
@@ -29,7 +28,6 @@ import nodeUrl from 'node:url';
 import {
   Worker as nodeWorker,
   isMainThread as nodeIsMainThread,
-  parentPort as nodeParentPort,
 } from 'node:worker_threads';
 
 describe('node', () => {
