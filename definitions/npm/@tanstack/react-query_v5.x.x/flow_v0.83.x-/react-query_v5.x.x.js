@@ -1,20 +1,118 @@
-declare module "react-query" {
-  declare export type UseQueryOptions = {
-    queryKey:  string | Array<string>,
-    queryFn: () => Promise<any>,
-  }
+declare module "@tanstack/react-query" {
+  declare type QueryFunctionContext = { [key: string]: any };
 
-  declare export type UseMutationOptions = {
+  declare type UseQueryOptions<T> = {|
+    queryKey: Array<any>,
+    queryFn?: (context: QueryFunctionContext) => Promise<T>,
+    cacheTime?: any,
+    enabled?: any,
+    networkMode?: any,
+    initialData?: any,
+    initialDataUpdatedAt?: any,
+    keepPreviousData?: any,
+    meta?: any,
+    notifyOnChangeProps?: any,
+    onError?: any,
+    onSettled?: any,
+    onSuccess?: any,
+    placeholderData?: any,
+    queryKeyHashFn?: any,
+    refetchInterval?: any,
+    refetchIntervalInBackground?: any,
+    refetchOnMount?: any,
+    refetchOnReconnect?: any,
+    refetchOnWindowFocus?: any,
+    retry?: any,
+    retryOnMount?: any,
+    retryDelay?: any,
+    select?: any,
+    staleTime?: any,
+    structuralSharing?: any,
+    suspense?: any,
+    useErrorBoundary?: any,
+  |};
+
+  declare type UseQueryReturn<TData, TError> = {|
+    isLoading: boolean,
+    data: TData,
+    dataUpdatedAt: number,
+    error: null | TError,
+    errorUpdatedAt: number,
+    failureCount: number,
+    failureReason: null | TError,
+    fetchStatus: any,
+    isError: boolean,
+    isFetched: boolean,
+    isFetchedAfterMount: boolean,
+    isFetching: boolean,
+    isInitialLoading: boolean,
+    isLoadingError: boolean,
+    isPaused: boolean,
+    isPending: boolean,
+    isPlaceholderData: boolean,
+    isRefetchError: boolean,
+    isRefetching: boolean,
+    isStale: boolean,
+    isSuccess: boolean,
+    refetch: any,
+    status: string,
+  |};
+
+  declare type UseMutationOptions<TData, TError> = {
     mutationKey: string | Array<string>,
-    mutationFn: () => Promise<any>,
-    onSuccess?: () => Promise<any>,
-    onError?: () => Promise<any>,
-    onSettled?: () => Promise<any>,,
+    mutationFn: () => Promise<TData>,
+    onSuccess?: (data: TData, variables: any) => Promise<any>,
+    onError?: (error: TError) => Promise<any>,
+    onSettled?: (data: TData | undefined, error: TError | null, variables: any) => Promise<any>,
     onMutate?: () => Promise<any>,
+    cacheTime?: any,
+    mutationKey?: any,
+    networkMode?: any,
+    onMutate?: any,
+    retry?: any,
+    retryDelay?: any,
+    useErrorBoundary?: any,
+    meta?: any,
   }
 
-  declare export type QueryClientProvider = {
+  declare type UseMutationReturn<TData, TError> = {
+    data: TData | undefined,
+    error: TError | null,
+    isError: boolean,
+    isIdle: boolean,
+    isLoading: boolean,
+    isPaused: boolean,
+    isSuccess: boolean,
+    failureCount: number,
+    failureReason: TError | null,
+    mutate: (
+      variables: any,
+      options?: {
+        onError?: (error: TError) => Promise<any>,
+        onSettled?: (data: TData | undefined, error: TError | null, variables: any) => Promise<any>,
+        onSuccess?: (data: TData, variables: any) => Promise<any>,
+      }
+    ) => Promise<any>,
+    mutateAsync: (
+      variables: any,
+      options?: {
+        onError?: (error: TError) => Promise<any>,
+        onSettled?: (data: TData | undefined, error: TError | null, variables: any) => Promise<any>,
+        onSuccess?: (data: TData, variables: any) => Promise<any>,
+      }
+    ) => Promise<TData>,
+    reset: () => void,
+    status: string,
+  };
+
+  declare type QueryClientProviderOptions = {
     client: QueryClient,
     children?: React.Node
+  }
+
+  declare module.exports = {
+    useQuery: <T = any>(queryOptions: UseQueryOptions<T>) => UseQueryReturn<T>,
+    useMutation: (options: UseMutationOptions) => void,
+    QueryClientProvider: (options: QueryClientProviderOptions) => React.Node,
   }
 }
