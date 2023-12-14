@@ -59,7 +59,7 @@ declare module "@tanstack/react-query" {
   |};
 
   declare type UseMutationOptions<TData, TError> = {|
-    mutationKey: string | Array<string>,
+    mutationKey: Array<string>,
     mutationFn: () => Promise<TData>,
     onSuccess?: (data: TData, variables: any) => Promise<any>,
     onError?: (error: TError) => Promise<any>,
@@ -68,7 +68,6 @@ declare module "@tanstack/react-query" {
     cacheTime?: any,
     mutationKey?: any,
     networkMode?: any,
-    onMutate?: any,
     retry?: any,
     retryDelay?: any,
     useErrorBoundary?: any,
@@ -112,7 +111,7 @@ declare module "@tanstack/react-query" {
 
   declare module.exports: {
     useQuery: <T = any, E = any>(queryOptions: UseQueryOptions<T>) => UseQueryReturn<T,E>,
-    useMutation: <T = any, E = any>(options: UseMutationOptions<T,E>) => void,
+    useMutation: <T = any, E = any>(options: UseMutationOptions<T,E>) => UseMutationReturn<T,E>,
     QueryClientProvider: (options: QueryClientProviderOptions) => React$Node,
     ...
   }
