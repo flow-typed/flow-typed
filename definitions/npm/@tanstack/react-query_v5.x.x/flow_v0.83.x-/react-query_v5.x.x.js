@@ -58,12 +58,12 @@ declare module "@tanstack/react-query" {
     status: string,
   |};
 
-  declare type UseMutationOptions<TData, TError> = {
+  declare type UseMutationOptions<TData, TError> = {|
     mutationKey: string | Array<string>,
     mutationFn: () => Promise<TData>,
     onSuccess?: (data: TData, variables: any) => Promise<any>,
     onError?: (error: TError) => Promise<any>,
-    onSettled?: (data: TData | undefined, error: TError | null, variables: any) => Promise<any>,
+    onSettled?: (data: TData | void, error: TError | null, variables: any) => Promise<any>,
     onMutate?: () => Promise<any>,
     cacheTime?: any,
     mutationKey?: any,
@@ -73,10 +73,10 @@ declare module "@tanstack/react-query" {
     retryDelay?: any,
     useErrorBoundary?: any,
     meta?: any,
-  }
+  |}
 
-  declare type UseMutationReturn<TData, TError> = {
-    data: TData | undefined,
+  declare type UseMutationReturn<TData, TError> = {|
+    data: TData | void,
     error: TError | null,
     isError: boolean,
     isIdle: boolean,
@@ -87,32 +87,33 @@ declare module "@tanstack/react-query" {
     failureReason: TError | null,
     mutate: (
       variables: any,
-      options?: {
+      options?: {|
         onError?: (error: TError) => Promise<any>,
-        onSettled?: (data: TData | undefined, error: TError | null, variables: any) => Promise<any>,
+        onSettled?: (data: TData | void, error: TError | null, variables: any) => Promise<any>,
         onSuccess?: (data: TData, variables: any) => Promise<any>,
-      }
+      |}
     ) => Promise<any>,
     mutateAsync: (
       variables: any,
-      options?: {
+      options?: {|
         onError?: (error: TError) => Promise<any>,
-        onSettled?: (data: TData | undefined, error: TError | null, variables: any) => Promise<any>,
+        onSettled?: (data: TData | void, error: TError | null, variables: any) => Promise<any>,
         onSuccess?: (data: TData, variables: any) => Promise<any>,
-      }
+      |}
     ) => Promise<TData>,
     reset: () => void,
     status: string,
-  };
+  |};
 
-  declare type QueryClientProviderOptions = {
-    client: QueryClient,
-    children?: React.Node
-  }
+  declare type QueryClientProviderOptions = {|
+    client: any,
+    children?: React$Node,
+  |}
 
-  declare module.exports = {
-    useQuery: <T = any>(queryOptions: UseQueryOptions<T>) => UseQueryReturn<T>,
-    useMutation: (options: UseMutationOptions) => void,
-    QueryClientProvider: (options: QueryClientProviderOptions) => React.Node,
+  declare module.exports: {
+    useQuery: <T = any, E = any>(queryOptions: UseQueryOptions<T>) => UseQueryReturn<T,E>,
+    useMutation: <T = any, E = any>(options: UseMutationOptions<T,E>) => void,
+    QueryClientProvider: (options: QueryClientProviderOptions) => React$Node,
+    ...
   }
 }

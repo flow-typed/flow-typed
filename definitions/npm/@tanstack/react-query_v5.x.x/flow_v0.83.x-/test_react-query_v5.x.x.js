@@ -14,8 +14,8 @@ describe('react-query', ()=> {
     });
 
     // Incorrect usage (expect Flow to catch the error)
-    // $FlowExpectedError[incompatible-call]
     useQuery({
+      // $FlowExpectedError[incompatible-call]
       queryKey: 123, // Error: Expected string | Array<string>
       queryFn: async () => {
         const response = await fetch('https://api.example.com/data');
@@ -23,4 +23,5 @@ describe('react-query', ()=> {
         return data;
       },
     });
+  });
 })
