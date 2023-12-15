@@ -140,6 +140,8 @@ declare module "@tanstack/react-query" {
     useQueryErrorResetBoundary: any,
     focusManager: any,
     onlineManager: any,
-    hydration: any,
+    dehydrate: any,
+    hydrate: any,
+    HydrationBoundary : any,
   |};
 }
