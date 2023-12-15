@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { describe, test } from 'flow-typed-test';
-import { useQuery, QueryClientProvider, useMutation } from '@tanstack/react-query';
+import { useQuery, QueryClientProvider, useMutation, QueryClient } from '@tanstack/react-query';
 
 describe('react-query', ()=> {
-  test('UseQueryOptions', () => {
+  test('UseQuery', () => {
     // Correct usage
     const { isLoading, isSuccess, data } = useQuery({
       queryKey: ['example'],
@@ -28,7 +28,7 @@ describe('react-query', ()=> {
     });
   });
 
-  test('UseMutationOptions', () => {
+  test('UseMutation', () => {
     // Correct usage
     const {isLoading, isSuccess } = useMutation({
       mutationKey: ['example'],
@@ -73,9 +73,8 @@ describe('react-query', ()=> {
   });
 
   test('QueryClientProvider', () => {
-    // Correct usage, but not as string. Need to import QueryClient from @tanstack/react-query
-    const queryClient = 'new QueryClient()';
-    <QueryClientProvider client={queryClient}>{/* Your component */}</QueryClientProvider>;
+    // Correct usage
+    const queryClient = new QueryClient();
+    <QueryClientProvider client={queryClient}><div /></QueryClientProvider>;
   });
-
 })

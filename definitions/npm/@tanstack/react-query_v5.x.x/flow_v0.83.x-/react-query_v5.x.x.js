@@ -1,9 +1,9 @@
 declare module "@tanstack/react-query" {
   declare type QueryFunctionContext = { [key: string]: any };
 
-  declare type UseQueryOptions<T> = {|
+  declare type UseQueryOptions<TData> = {|
     queryKey: Array<any>,
-    queryFn?: (context: QueryFunctionContext) => Promise<T>,
+    queryFn?: (context: QueryFunctionContext) => Promise<TData>,
     cacheTime?: any,
     enabled?: any,
     networkMode?: any,
@@ -104,15 +104,42 @@ declare module "@tanstack/react-query" {
     status: string,
   |};
 
-  declare type QueryClientProviderOptions = {|
-    client: any,
-    children?: React$Node,
-  |}
+  declare class QueryClient {
+    queryCache?: any,
+    mutationCache?: any,
+    defaultOptions?: any,
+  }
 
-  declare module.exports: {
+  declare type QueryClientProviderOptions = {|
+    client: QueryClient,
+    children?: React$Node,
+  |};
+
+  declare module.exports: {|
     useQuery: <T = any, E = any>(queryOptions: UseQueryOptions<T>) => UseQueryReturn<T,E>,
     useMutation: <T = any, E = any>(options: UseMutationOptions<T,E>) => UseMutationReturn<T,E>,
     QueryClientProvider: (options: QueryClientProviderOptions) => React$Node,
-    ...
-  }
+    QueryClient: typeof QueryClient,
+    useQueries: any,
+    useInfiniteQuery: any,
+    useIsFetching: any,
+    useIsMutating: any,
+    useMutationState: any,
+    useSuspenseQuery: any,
+    useSuspenseInfiniteQuery: any,
+    useSuspenseQueries: any,
+    useQueryClient: any,
+    queryOptions: any,
+    infiniteQueryOptions: any,
+    QueryCache: any,
+    MutationCache: any,
+    QueryObserver: any,
+    InfiniteQueryObserver: any,
+    QueriesObserver: any,
+    QueryErrorResetBoundary: any,
+    useQueryErrorResetBoundary: any,
+    focusManager: any,
+    onlineManager: any,
+    hydration: any,
+  |};
 }
