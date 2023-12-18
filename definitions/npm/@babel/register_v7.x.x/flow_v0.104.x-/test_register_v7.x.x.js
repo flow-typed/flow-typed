@@ -3,7 +3,7 @@ import { describe, it } from 'flow-typed-test';
 
 describe('unknown properties', () => {
   it('are not allowed', () => {
-    // $FlowExpectedError does not accept unknown props
+    // $FlowExpectedError[prop-missing] does not accept unknown props
     require('@babel/register')({
       unknown: 'property'
     });
@@ -20,14 +20,12 @@ describe('plugins', () => {
     });
   });
   it('does not accept anything else', () => {
-    // $FlowExpectedError no numbers
     require('@babel/register')({
-      plugins: [
-        123
-      ]
+      // $FlowExpectedError[incompatible-call] no numbers
+      plugins: [123]
     });
-    // $FlowExpectedError should be array
     require('@babel/register')({
+      // $FlowExpectedError[incompatible-call] should be array
       plugins: 'my-plugin'
     });
   })
