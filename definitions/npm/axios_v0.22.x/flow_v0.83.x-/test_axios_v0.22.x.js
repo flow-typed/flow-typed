@@ -84,6 +84,7 @@ const config: $AxiosXHRConfigBase<RequestDataUser, User> = {
   maxContentLength: 2000,
   validateStatus: (status: number) => status >= 200 && status < 300,
   maxRedirects: 5,
+  signal: (new AbortController()).signal,
   proxy: {
     host: '127.0.0.1',
     port: 9000,
