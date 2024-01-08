@@ -308,6 +308,7 @@ describe('Interceptors', () => {
     );
 
     axios.interceptors.request.eject(requestInterceptorId);
+    axios.interceptors.request.clear();
 
     axios.interceptors.request.use(
       (config: $AxiosXHRConfig<mixed>) => Promise.resolve(config),
@@ -327,6 +328,7 @@ describe('Interceptors', () => {
     );
 
     axios.interceptors.response.eject(responseInterceptorId);
+    axios.interceptors.response.clear();
 
     axios.interceptors.response.use(
       (response: $AxiosXHR<mixed>) => Promise.resolve(response),
