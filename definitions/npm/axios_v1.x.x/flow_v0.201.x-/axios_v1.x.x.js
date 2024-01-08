@@ -120,6 +120,7 @@ declare module 'axios' {
       onRejected: ?(error: mixed) => mixed
     ): AxiosInterceptorIdent,
     eject(ident: AxiosInterceptorIdent): void,
+    clear(): void,
   |};
 
   declare type AxiosResponseInterceptor<T, R = T> = {|
@@ -128,6 +129,7 @@ declare module 'axios' {
       onRejected: ?(error: mixed) => mixed
     ): AxiosInterceptorIdent,
     eject(ident: AxiosInterceptorIdent): void,
+    clear(): void,
   |};
 
   declare type AxiosPromise<T, R = T> = Promise<AxiosXHR<T, R>>;
