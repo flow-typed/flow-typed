@@ -1068,6 +1068,9 @@ describe('react-router-dom', () => {
           basename: 'test',
           navigator: nav,
           static: false,
+          future: {
+            v7_relativeSplatPath: true,
+          },
         }}
       />);
       const B = (<Comp
@@ -1080,6 +1083,9 @@ describe('react-router-dom', () => {
           basename: 123,
           navigator: nav,
           static: false,
+          future: {
+            v7_relativeSplatPath: true,
+          },
         }}
       />);
       const D = (<Comp
@@ -1088,6 +1094,9 @@ describe('react-router-dom', () => {
           // $FlowExpectedError[incompatible-type]
           navigator: 'test',
           static: false,
+          future: {
+            v7_relativeSplatPath: true,
+          },
         }}
       />);
       const E = (<Comp
@@ -1096,6 +1105,18 @@ describe('react-router-dom', () => {
           navigator: nav,
           // $FlowExpectedError[incompatible-type]
           static: 123,
+          future: {
+            v7_relativeSplatPath: true,
+          },
+        }}
+      />);
+      const F = (<Comp
+        context={{
+          basename: 'test',
+          navigator: nav,
+          static: 123,
+          // $FlowExpectedError[prop-missing]
+          future: {},
         }}
       />);
     });
