@@ -78,6 +78,7 @@ declare module 'axios' {
     httpsAgent?: HttpsAgent,
     maxContentLength?: number,
     maxRedirects?: number,
+    signal?: AbortSignal,
     socketPath?: string | null,
     params?: { [key: string]: mixed, ...},
     paramsSerializer?: (params: { [key: string]: mixed, ...}) => string,

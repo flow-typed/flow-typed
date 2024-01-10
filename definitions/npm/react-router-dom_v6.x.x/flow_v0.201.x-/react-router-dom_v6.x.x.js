@@ -597,6 +597,7 @@ declare module 'react-router-dom' {
     basename: string,
     navigator: Navigator,
     static: boolean,
+    future: {| v7_relativeSplatPath: boolean |},
   |};
 
   declare export var UNSAFE_NavigationContext: React$Context<NavigationContextObject>;

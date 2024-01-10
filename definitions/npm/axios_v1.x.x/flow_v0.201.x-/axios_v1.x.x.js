@@ -73,6 +73,7 @@ declare module 'axios' {
     httpsAgent?: HttpsAgent,
     maxContentLength?: number,
     maxRedirects?: number,
+    signal?: AbortSignal,
     socketPath?: string | null,
     params?: { [key: string]: mixed, ...},
     paramsSerializer?: (params: { [key: string]: mixed, ...}) => string,
@@ -119,6 +120,7 @@ declare module 'axios' {
       onRejected: ?(error: mixed) => mixed
     ): AxiosInterceptorIdent,
     eject(ident: AxiosInterceptorIdent): void,
+    clear(): void,
   |};
 
   declare type AxiosResponseInterceptor<T, R = T> = {|
@@ -127,6 +129,7 @@ declare module 'axios' {
       onRejected: ?(error: mixed) => mixed
     ): AxiosInterceptorIdent,
     eject(ident: AxiosInterceptorIdent): void,
+    clear(): void,
   |};
 
   declare type AxiosPromise<T, R = T> = Promise<AxiosXHR<T, R>>;
