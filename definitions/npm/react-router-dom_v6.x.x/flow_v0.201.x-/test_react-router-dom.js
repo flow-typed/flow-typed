@@ -1114,7 +1114,7 @@ describe('react-router-dom', () => {
         context={{
           basename: 'test',
           navigator: nav,
-          static: 123,
+          static: false,
           // $FlowExpectedError[prop-missing]
           future: {},
         }}
