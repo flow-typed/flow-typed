@@ -253,7 +253,7 @@ describe('create path', () => {
   });
 
   it('should not allow to accept void', () => {
-    // $FlowExpectedError[incompatible-shape]
+    // $FlowExpectedError[incompatible-call]
     const path = createPath();
 
     const key: string = path;
