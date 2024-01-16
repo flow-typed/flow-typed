@@ -163,4 +163,31 @@ describe('webpack', () => {
       ]
     });
   });
+
+  test('ProvidePlugin', () => {
+    webpack({
+      plugins: [
+        new webpack.ProvidePlugin({
+          process: 'process/browser.js',
+          foo: ['bar', 'baz'],
+        }),
+      ]
+    });
+
+    webpack({
+      plugins: [
+        new webpack.ProvidePlugin({
+          // $FlowExpectedError[incompatible-call]
+          foo: 1,
+        }),
+      ]
+    });
+
+    webpack({
+      plugins: [
+        // $FlowExpectedError[incompatible-call]
+        new webpack.ProvidePlugin('test'),
+      ]
+    });
+  });
 });

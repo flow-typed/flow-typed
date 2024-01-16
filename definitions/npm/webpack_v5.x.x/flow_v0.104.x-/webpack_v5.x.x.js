@@ -769,6 +769,16 @@ declare module 'webpack' {
     ) => (percentage: number, msg: string, ...args: $ReadOnlyArray<string>) => void;
   }
 
+  declare class ProvidePlugin {
+    constructor(definitions: { [key: string]: string | string[] }): $NonMaybeType<ResolveOptions['plugins']>[number];
+    definitions: { [key: string]: string | string[] };
+
+    /**
+     * Apply the plugin
+     */
+    apply(compiler: WebpackCompiler | WebpackMultiCompiler): void;
+  }
+
   declare function builder(
     options: WebpackOptions,
     callback?: Callback
@@ -786,6 +796,7 @@ declare module 'webpack' {
     HotModuleReplacementPlugin: typeof HotModuleReplacementPlugin,
     ContextReplacementPlugin: typeof ContextReplacementPlugin,
     ProgressPlugin: typeof ProgressPlugin,
+    ProvidePlugin: typeof ProvidePlugin,
     ...
   };
 }
