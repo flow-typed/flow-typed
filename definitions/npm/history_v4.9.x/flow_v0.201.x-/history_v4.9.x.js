@@ -18,9 +18,9 @@ declare module 'history' {
     location: BrowserLocation;
     action: Action;
     push(path: string, state?: {...}): void;
-    push(location: $Shape<BrowserLocation>): void;
+    push(location: Partial<BrowserLocation>): void;
     replace(path: string, state?: {...}): void;
-    replace(location: $Shape<BrowserLocation>): void;
+    replace(location: Partial<BrowserLocation>): void;
     go(n: number): void;
     goBack(): void;
     goForward(): void;
@@ -64,9 +64,9 @@ declare module 'history' {
     index: number;
     entries: Array<string>;
     push(path: string, state?: {...}): void;
-    push(location: $Shape<MemoryLocation>): void;
+    push(location: Partial<MemoryLocation>): void;
     replace(path: string, state?: {...}): void;
-    replace(location: $Shape<MemoryLocation>): void;
+    replace(location: Partial<MemoryLocation>): void;
     go(n: number): void;
     goBack(): void;
     goForward(): void;
@@ -104,9 +104,9 @@ declare module 'history' {
     location: HashLocation;
     action: Action;
     push(path: string, state?: {...}): void;
-    push(location: $Shape<HashLocation>): void;
+    push(location: Partial<HashLocation>): void;
     replace(path: string, state?: {...}): void;
-    replace(location: $Shape<HashLocation>): void;
+    replace(location: Partial<HashLocation>): void;
     go(n: number): void;
     goBack(): void;
     goForward(): void;
