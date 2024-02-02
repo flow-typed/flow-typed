@@ -127,6 +127,8 @@ declare module 'react-dom' {
 
   declare function unmountComponentAtNode(container: any): boolean;
 
+  declare function flushSync(callback: () => mixed): void;
+
   declare function unstable_batchedUpdates<A, B, C, D, E>(
     callback: (a: A, b: B, c: C, d: D, e: E) => mixed,
     a: A,
