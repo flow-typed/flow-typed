@@ -23,7 +23,7 @@
     "clean": "rimraf dist",
     "flow": "flow",
     "lint": "eslint .",
-    "prepare": "mkdirp dist",
+    "prepare": "mkdirp dist && yarn test",
     "prepublishOnly": "cp ../README.md .",
     "test": "yarn clean && yarn build && yarn test-quick",
     "test-quick": "jest && yarn lint && yarn flow",
