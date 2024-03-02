@@ -2,8 +2,10 @@
 import {run} from '../runTests';
 import {path} from '../../lib/node';
 
-const runTest = async () => {
-  jest.spyOn(console, 'log').mockImplementation(jest.fn());
+const runTest = async (mockConsole: boolean) => {
+  if (mockConsole) {
+    jest.spyOn(console, 'log').mockImplementation(jest.fn());
+  }
   const args = {
     testPatterns: ['regression-1385_v1.x.x'],
     numberOfFlowVersions: 2, // this can be reduced to 1 when latest flow release is not ignored
@@ -19,12 +21,12 @@ describe('run-tests (command)', () => {
     });
 
     it("returns error code if $FlowExpectedError test doesn't fail", async () => {
-      const status = await runTest();
+      const status = await runTest(false);
       expect(status).toEqual(1);
     });
 
     it('console logs about unused suppression', async () => {
-      await runTest();
+      await runTest(true);
 
       const expectedError = `Unused suppression`;
       const calls = ((console.log: any): JestMockFn<any, any>).mock.calls;
