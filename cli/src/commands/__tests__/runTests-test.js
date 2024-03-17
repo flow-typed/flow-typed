@@ -12,7 +12,7 @@ const runTest = async (mockConsole: boolean) => {
     path: path.join(__dirname, '__runTests-fixtures__'),
   };
   return await run(args);
-}
+};
 
 describe('run-tests (command)', () => {
   describe('regression 1385', () => {
