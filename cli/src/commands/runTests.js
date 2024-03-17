@@ -1,6 +1,4 @@
 // @flow
-import fileSys from 'fs';
-
 import {child_process, fs, os, path} from '../lib/node.js';
 import {copyFile, recursiveRmdir} from '../lib/fileUtils.js';
 import {gitHubClient} from '../lib/github.js';
@@ -491,12 +489,8 @@ async function removeTrashFromBinDir() {
     .filter(name => !checkFlowFilename(name))
     .forEach(async el => {
       const dir = path.resolve(BIN_DIR, el);
-      if (fs.exists(dir)) {
-        if (fileSys.lstatSync(dir).isDirectory()) {
-          fs.rm(dir, {recursive: true});
-        } else {
-          await fs.unlink(dir);
-        }
+      if (!fs.exists(dir)) {
+        await fs.unlink(dir);
       }
     });
 }
