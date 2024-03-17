@@ -151,6 +151,10 @@ ReactDOM.render(<Example2 />, test$querySelector('#site'), '');
 // $FlowExpectedError[incompatible-call]
 ReactDOM.render(<Example2 />, test$querySelector('#site'), null);
 
+(ReactDOM.flushSync(() => ''): void);
+// $FlowExpectedError[incompatible-call]
+ReactDOM.flushSync();
+
 describe('react-dom/client', () => {
   describe('createRoot', () => {
     it('works', () => {

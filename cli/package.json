@@ -66,14 +66,13 @@
     "eslint-plugin-prettier": "^4.0.0",
     "flow-bin": "0.200.0",
     "flow-copy-source": "^2.0.9",
-    "jest": "^27.3.1"
+    "jest": "^29.7.0"
   },
   "keywords": [
     "flow",
     "flowtype"
   ],
   "jest": {
-    "name": "flow-typed-cli",
     "modulePathIgnorePatterns": [
       "<rootDir>/dist/.*",
       "<rootDir>/node_modules/.*"

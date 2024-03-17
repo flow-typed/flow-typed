@@ -557,7 +557,10 @@ async function removeTrashFromBinDir() {
   (await fs.readdir(path.join(BIN_DIR)))
     .filter(name => !checkFlowFilename(name))
     .forEach(async el => {
-      await fs.unlink(path.resolve(BIN_DIR, el));
+      const dir = path.resolve(BIN_DIR, el);
+      if (!fs.exists(dir)) {
+        await fs.unlink(dir);
+      }
     });
 }
 
