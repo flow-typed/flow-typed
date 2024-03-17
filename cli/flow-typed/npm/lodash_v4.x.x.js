@@ -1,5 +1,5 @@
-// flow-typed signature: fd88436625196dbb8bf813a1f1684e58
-// flow-typed version: 179ae71d58/lodash_v4.x.x/flow_>=v0.155.x
+// flow-typed signature: 306d9e867540bad092198f975ca96b18
+// flow-typed version: 6912183195/lodash_v4.x.x/flow_>=v0.155.x <=v0.200.x
 
 declare module "lodash" {
   declare type Path = $ReadOnlyArray<string | number> | string | number;
