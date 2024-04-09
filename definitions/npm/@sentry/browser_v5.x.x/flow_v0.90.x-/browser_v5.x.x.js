@@ -5,15 +5,27 @@ declare module '@sentry/browser' {
     declare export function addBreadcrumb(breadcrumb: Breadcrumb): void;
     declare export function captureException(
         message: mixed,
-        severity?: $Values<typeof Severity>,
+        captureContext?: CaptureContext,
     ): void;
     declare export function captureMessage(
         message: mixed,
-        severity?: $Values<typeof Severity>,
+        captureContext?: CaptureContext | $Values<typeof Severity>,
     ): void;
     declare export function configureScope((Scope) => void): void;
     declare export function getCurrentHub(): Hub;
     declare export function getHubFromCarrier(carrier: Carrier): Hub;
+
+    declare export type CaptureContext = Scope | $Shape<ScopeContext> | ((scope: Scope) => Scope)
+    
+    declare export type ScopeContext = {
+        user?: User;
+        level: $Values<typeof Severity>;
+        extra:  { [key: string]: any, ... };
+        contexts: {| [key: string]: { ... } |};
+        tags: { [key: string]: string, ... };
+        fingerprint?: $ReadOnlyArray<string>;
+        requestSession: RequestSession;
+    }
 
     declare export class Hub {
         constructor(client: BrowserClient<Options>): Hub;
