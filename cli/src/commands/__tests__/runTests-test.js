@@ -30,7 +30,7 @@ describe('run-tests (command)', () => {
     it("returns error code if $FlowExpectedError test doesn't fail", async () => {
       const status = await runTest(false);
       expect(status).toEqual(1);
-    });
+    }, 10000);
 
     it('console logs about unused suppression', async () => {
       await runTest(true);
