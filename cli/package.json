@@ -45,7 +45,7 @@
     "node-stream-zip": "^1.15.0",
     "prettier": "^1.19.1",
     "rimraf": "^3.0.2",
-    "semver": "^7.5.4",
+    "semver": "^7.6.3",
     "simple-git": "^3.10.0",
     "table": "^6.7.3",
     "which": "^2.0.2",
