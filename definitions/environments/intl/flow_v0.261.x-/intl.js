@@ -64,6 +64,8 @@ declare class Intl$DateTimeFormat {
 
   format (value?: Date | number): string;
 
+  formatRange(startDate?: Date | number, endDate?: Date | number): string;
+
   formatToParts (value?: Date | number): Array<{
     type: FormatToPartsType,
     value: string,
