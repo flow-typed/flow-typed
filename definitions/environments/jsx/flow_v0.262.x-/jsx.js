@@ -1327,6 +1327,7 @@ type ReactDOM$linkProps = {|
   imageSizes?: ?string,
   imageSrcSet?: ?string,
   referrerPolicy?: ?ReactDOM$HTMLAttributeReferrerPolicy,
+  rel?: ?string,
   sizes?: ?string,
   type?: ?string,
   charSet?: ?string,
