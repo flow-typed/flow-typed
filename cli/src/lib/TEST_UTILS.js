@@ -5,7 +5,7 @@ import {mkdirp, recursiveRmdir} from './fileUtils';
 import {fs, os, path} from './node';
 
 const TMP_DIR = os.tmpdir();
-const pendingTestProjects = new Map();
+const pendingTestProjects = new Map<string, boolean>();
 export async function testProject(cb: string => Promise<void>) {
   let _ROOT_DIR = null;
   for (var i = 0; i < 10; i++) {

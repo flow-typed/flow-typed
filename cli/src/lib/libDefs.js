@@ -85,7 +85,7 @@ async function updateCacheRepo(verbose?: VerboseOutput): Promise<void> {
 const CACHE_REPO_EXPIRY = 1000 * 60; // 1 minute
 export const _cacheRepoAssure: {
   lastAssured: number,
-  pendingAssure: Promise<*>,
+  pendingAssure: Promise<void>,
 } = {
   lastAssured: 0,
   pendingAssure: Promise.resolve(),
@@ -264,7 +264,8 @@ async function parseLibDefsFromPkgDir(
   await P.all(
     flowDirs.map(async ([flowDirPath, flowVersion]) => {
       const testFilePaths = [].concat(commonTestFiles);
-      const basePkgName =
+      const basePkgName: string =
+        // $FlowFixMe[incompatible-type]
         pkgName.charAt(0) === '@' ? pkgName.split(path.sep).pop() : pkgName;
       const libDefFileName =
         pkgVersionStr === 'vx.x.x'
@@ -365,7 +366,8 @@ export function parseRepoDirItem(
   }
 
   const [_, pkgName, majorStr, minorStr, patchStr, prerel] = itemMatches;
-  const item = path
+  // $FlowFixMe[incompatible-type]
+  const item: string = path
     .dirname(dirItemPath)
     .split(path.sep)
     .pop();

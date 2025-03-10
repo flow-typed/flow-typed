@@ -69,7 +69,7 @@ async function rebaseCacheRepo() {
  */
 const cacheRepoEnsureToken: {
   lastEnsured: number,
-  pendingEnsurance: Promise<*>,
+  pendingEnsurance: Promise<void>,
 } = {
   lastEnsured: 0,
   pendingEnsurance: Promise.resolve(),

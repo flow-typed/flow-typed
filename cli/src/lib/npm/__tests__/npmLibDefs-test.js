@@ -198,7 +198,7 @@ describe('npmLibDefs', () => {
 
     describe('extLibDefs', () => {
       it('does not retrieve a new cache of lib defs if one is passed into it', async () => {
-        const ensureCacheRepo = jest.fn(() => Promise.resolve());
+        const ensureCacheRepo = jest.fn<any, any>(() => Promise.resolve());
         jest
           .spyOn(cacheRepoUtils, 'ensureCacheRepo')
           .mockImplementation(ensureCacheRepo);
@@ -221,7 +221,7 @@ describe('npmLibDefs', () => {
       });
 
       it('retrieve a new cache of lib defs if an external one is not passed in', async () => {
-        const ensureCacheRepo = jest.fn(() => Promise.resolve());
+        const ensureCacheRepo = jest.fn<any, any>(() => Promise.resolve());
         jest
           .spyOn(cacheRepoUtils, 'ensureCacheRepo')
           .mockImplementation(ensureCacheRepo);
@@ -264,7 +264,7 @@ describe('npmLibDefs', () => {
 
     describe('skipCache', () => {
       it("doesn't update the cache when it's provided", async () => {
-        const ensureCacheRepo = jest.fn(() => Promise.resolve());
+        const ensureCacheRepo = jest.fn<any, any>(() => Promise.resolve());
         jest
           .spyOn(cacheRepoUtils, 'ensureCacheRepo')
           .mockImplementation(ensureCacheRepo);
@@ -286,7 +286,7 @@ describe('npmLibDefs', () => {
       });
 
       it("does update the cache when it's not provided", async () => {
-        const ensureCacheRepo = jest.fn(() => Promise.resolve());
+        const ensureCacheRepo = jest.fn<any, any>(() => Promise.resolve());
         jest
           .spyOn(cacheRepoUtils, 'ensureCacheRepo')
           .mockImplementation(ensureCacheRepo);

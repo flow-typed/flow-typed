@@ -310,7 +310,7 @@ declare module '%s' {
 `;
 
     const [fileDecls, aliases] = files.reduce(
-      ([fileDecls, aliases], file) => {
+      ([fileDecls, aliases]: [Array<string>, Array<string>], file) => {
         const ext = path.extname(file);
         const name = file.substr(0, file.length - ext.length);
         const moduleName = `${packageName}/${name}`;
@@ -454,7 +454,7 @@ export async function createStub(
   libdefDir?: string,
   maxDepth?: number,
 ): Promise<boolean> {
-  let files = [];
+  let files: Array<string> = [];
   let resolutionError = null;
   let pathToPackage = null;
   let version = explicitVersion || null;
