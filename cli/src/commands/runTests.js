@@ -77,6 +77,9 @@ type TestGroup = {
   deps: {
     [key: string]: Array<string>,
   },
+  envDeps: {
+    [key: string]: Array<string>,
+  },
 };
 
 /**
@@ -128,8 +131,13 @@ async function getTestGroups(
         }
         // If the definition is a dependant of a changed package
         if (def.configPath) {
-          const deps = JSON.parse(fs.readFileSync(def.configPath, 'utf-8'))
-            .deps;
+          const configJson = JSON.parse(
+            fs.readFileSync(def.configPath, 'utf-8'),
+          );
+          const deps = {
+            ...configJson.deps,
+            ...(configJson.envDeps || {}),
+          };
           const isDependantOfChanged = Object.keys(deps).some(
             dep => dep === d.name && deps[dep].some(s => s === d.version),
           );
@@ -145,6 +153,9 @@ async function getTestGroups(
     const deps = libDef.configPath
       ? JSON.parse(fs.readFileSync(libDef.configPath, 'utf-8')).deps
       : {};
+    const envDeps = libDef.configPath
+      ? JSON.parse(fs.readFileSync(libDef.configPath, 'utf-8')).envDeps
+      : {};
 
     return {
       id: groupID,
@@ -152,6 +163,7 @@ async function getTestGroups(
       libDefPath: libDef.path,
       flowVersion: libDef.flowVersion,
       deps,
+      envDeps,
     };
   });
 }
@@ -605,6 +617,11 @@ function partitionListOfFlowVersionsPerConfigChange(
   return result;
 }
 
+const getEnvironmentLibDefDirFromNested = (path: string): string => {
+  const npmDefsDir = '/environments/';
+  return path.substring(0, path.indexOf(npmDefsDir) + npmDefsDir.length);
+};
+
 /**
  * Map through every dependency + their versions and replace with
  * the definition's path,
@@ -616,6 +633,9 @@ function partitionListOfFlowVersionsPerConfigChange(
 function getDepTestGroups(testGroup: TestGroup) {
   const flowDirVersion = extractFlowDirFromFlowDirPath(testGroup.id);
   const depBasePath = getNpmLibDefDirFromNested(testGroup.libDefPath);
+  const envDepBasePath = getEnvironmentLibDefDirFromNested(
+    testGroup.libDefPath,
+  );
 
   const getMappedDepPaths = (deps: {
     [key: string]: Array<string>,
@@ -672,6 +692,64 @@ function getDepTestGroups(testGroup: TestGroup) {
     });
   };
   const mappedDepPaths = getMappedDepPaths(testGroup.deps);
+
+  const getMappedEnvDepPaths = (
+    envDeps: {[key: string]: Array<string>},
+    visited: Set<string>,
+  ): Array<
+    Array<{
+      main: string,
+      deps: Array<string>,
+    }>,
+  > => {
+    return Object.keys(envDeps).map(depName => {
+      if (visited.has(depName)) {
+        return [];
+      }
+      visited.add(depName);
+      return envDeps[depName].map(_ => {
+        const flowDirPath = `${envDepBasePath}${depName}/${flowDirVersion}`;
+        const defPath = `${flowDirPath}/${depName}.js`;
+
+        if (!fs.existsSync(defPath)) {
+          throw new Error(
+            colors.red(
+              `${depName} cannot be a dependency of ${testGroup.id} because either the dependency does't exist or they do not have matching flow version ranges`,
+            ),
+          );
+        }
+
+        // For the current dependency check if it has nested dependencies
+        let defDeps;
+        try {
+          defDeps = JSON.parse(
+            fs.readFileSync(`${flowDirPath}/config.json`, 'utf-8'),
+          ).deps;
+        } catch (e) {}
+
+        return {
+          main: defPath,
+          // Create a recursive list of main def and def dep paths
+          // that are later used to inject into the test group so that
+          // dependencies can resolve their dependencies.
+          //
+          // Note: This strategy doesn't create an exhaustive list validating
+          // a dependency to each dep version of dependency's dependency.
+          // That isn't necessary in this instance and would be tested by
+          // the dependency's own test group.
+          deps: [
+            ...(defDeps
+              ? getMappedEnvDepPaths(defDeps, visited).reduce((acc, cur) => {
+                  return [...acc, cur[0].main, ...cur[0].deps];
+                }, [])
+              : []),
+          ],
+        };
+      });
+    });
+  };
+  const mappedEnvDepPaths = getMappedEnvDepPaths(testGroup.envDeps, new Set());
+  mappedDepPaths.push(...mappedEnvDepPaths);
 
   const longestDep = mappedDepPaths.reduce((acc, cur) => {
     if (cur.length > acc) {
@@ -802,7 +880,10 @@ async function runTestGroup(
       }
     };
 
-    if (Object.keys(testGroup.deps).length > 0) {
+    if (
+      Object.keys(testGroup.deps || {}).length > 0 ||
+      Object.keys(testGroup.envDeps || {}).length > 0
+    ) {
       const depsTestGroups = getDepTestGroups(testGroup);
 
       for (const depPaths of depsTestGroups) {
