@@ -1,4 +1,5 @@
 // @flow
+
 import colors from 'colors';
 
 import {child_process, fs, os, path} from '../lib/node.js';
@@ -167,7 +168,7 @@ function printSkipMessage(flowVersion: string, githubUrl: string) {
 
 // Once we've fetched flow bin releases they will be cached
 // For subsequent tests within the same test run.
-let _flowReleases = [];
+let _flowReleases: Array<any> = [];
 
 /**
  * Memoized function that queries the GitHub releases for Flow, downloads the
@@ -420,7 +421,10 @@ export async function writeFlowConfig(
   await fs.writeFile(destFlowConfigPath, flowConfigData);
 }
 
-function testTypeDefinition(flowVer: string, testDirPath: string) {
+function testTypeDefinition(
+  flowVer: string,
+  testDirPath: string,
+): Promise<{stdErrOut: string, errCode: ?number, execError: any}> {
   return new Promise(res => {
     const IS_WINDOWS = os.type() === 'Windows_NT';
     const child = child_process.exec(
@@ -452,7 +456,7 @@ async function runFlowTypeDefTests(
   groupId: string,
   testDirPath: string,
 ) {
-  const errors = [];
+  const errors: Array<string> = [];
   while (flowVersionsToRun.length > 0) {
     // Run tests in batches to avoid saturation
     const testBatch = flowVersionsToRun
@@ -676,9 +680,9 @@ function getDepTestGroups(testGroup: TestGroup) {
     return acc;
   }, 0);
 
-  const depGroup = [];
+  const depGroup: Array<Array<string>> = [];
   for (let i = 0, len = longestDep; i < len; i++) {
-    const newGroup = [];
+    const newGroup: Array<string> = [];
     mappedDepPaths.forEach(o => {
       if (!o[i]) {
         newGroup.push(o[0].main, ...o[0].deps);
@@ -724,7 +728,7 @@ async function runTestGroup(
       testDirPath,
       path.basename(testGroup.libDefPath),
     );
-    const copiedFileNames = new Set();
+    const copiedFileNames = new Set<string>();
     await P.all([
       P.all(
         testGroup.testFilePaths.map(async (filePath, idx) => {
@@ -762,7 +766,7 @@ async function runTestGroup(
       flowVersionsToRun,
     );
 
-    const flowErrors = [];
+    const flowErrors: Array<string> = [];
 
     const executeTests = async (depPaths: Array<string> = []) => {
       for (const sublistOfFlowVersions of groups) {
@@ -835,7 +839,7 @@ export function selectFlowTestVersions(
 
   const {upper, lower} = flowVersion;
 
-  const selectedFlowVersions = [];
+  const selectedFlowVersions: Array<string> = [];
 
   const findSelectedFlowVersions = (flowVersions: Array<string>) => {
     let versionExceedsLower = false;
@@ -848,6 +852,7 @@ export function selectFlowTestVersions(
       const [major, minor, patch] = version.substring(1).split('.');
       if (
         lower &&
+        // $FlowFixMe[incompatible-type]
         (lower.major === 'x' || lower.major <= Number(major)) &&
         (lower.minor === 'x' || lower.minor <= Number(minor)) &&
         (lower.patch === 'x' || lower.patch <= Number(patch))
@@ -868,6 +873,7 @@ export function selectFlowTestVersions(
     const upperFlowVersion = orderedFlowVersions.findIndex(o => {
       const [major, minor, patch] = o.substring(1).split('.');
       if (
+        // $FlowFixMe[incompatible-type]
         (upper.major === 'x' || upper.major >= Number(major)) &&
         (upper.minor === 'x' || upper.minor >= Number(minor)) &&
         (upper.patch === 'x' || upper.patch >= Number(patch))
@@ -925,9 +931,10 @@ async function runTests(
     }
     await fs.mkdir(TEST_DIR);
 
-    const results = new Map();
+    const results = new Map<string, Array<string>>();
     while (testGroups.length > 0) {
-      const testGroup = testGroups.shift();
+      // $FlowFixMe[incompatible-type]
+      const testGroup: TestGroup = testGroups.shift();
       // Prepare bin folder to collect flow instances
       await removeTrashFromBinDir();
       let orderedFlowVersions;

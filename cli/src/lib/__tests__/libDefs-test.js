@@ -9,6 +9,7 @@ jest.unmock('../flowVersion');
 jest.unmock('colors/lib/styles');
 jest.unmock('wrappy');
 
+import type {LibDef} from '../libDefs';
 import {fs} from '../node.js';
 
 import {
@@ -121,7 +122,7 @@ describe('libDefs', () => {
       name: string,
       verStr: string,
       flowVerStr: string,
-    ) {
+    ): LibDef {
       return {
         pkgName: name,
         pkgVersionStr: verStr,

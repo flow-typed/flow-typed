@@ -9,7 +9,7 @@ import * as node_path from 'path';
 import * as node_url from 'url';
 
 export const child_process = node_child_process;
-export const fs = {
+export const fs: any = {
   // This is a custom function that our tests can use during setup to specify
   // what the files on the "mock" filesystem should look like when any of the
   // `fs` APIs are used.
@@ -21,7 +21,6 @@ export const fs = {
 
   createReadStream: node_fs.createReadStream,
   createWriteStream: node_fs.createWriteStream,
-  // $FlowFixMe[signature-verification-failure]
   exists: jest.fn((dirOrFilePath: string): Promise<boolean> => {
     return new Promise(resolve => {
       process.nextTick(() =>
@@ -31,7 +30,6 @@ export const fs = {
   }),
   mkdir: node_fs.mkdir,
   readdir: node_fs.readdir,
-  // $FlowFixMe[signature-verification-failure]
   readFile: jest.fn(
     (
       filePath: string,

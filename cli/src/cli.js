@@ -31,10 +31,10 @@ const identity = <T>(x: T): T => x;
 
 export function runCLI() {
   type CommandModule = {
-    name: string,
-    description: string,
-    setup?: (yargs: Yargs) => Yargs,
-    run: (argv: Argv) => Promise<number>,
+    +name: string,
+    +description: string,
+    +setup?: (yargs: Yargs) => Yargs,
+    +run: (argv: Argv) => Promise<number>,
     ...
   };
   const commands: Array<CommandModule> = [
@@ -91,8 +91,8 @@ export function runCLI() {
  */
 if (require.main === module) {
   const CWD = process.cwd();
-  let currDir = CWD;
-  let lastDir = null;
+  let currDir: string = CWD;
+  let lastDir: string | null = null;
   let run = runCLI;
   while (currDir !== lastDir) {
     const localCLIPath = path.join(
