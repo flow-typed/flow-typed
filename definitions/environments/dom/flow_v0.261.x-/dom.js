@@ -4460,7 +4460,6 @@ declare var localStorage: Storage;
 declare var devicePixelRatio: number;
 declare function focus(): void;
 declare function onfocus(ev: Event): any;
-declare function onmessage(ev: MessageEvent): any;
 declare function open(url?: string, target?: string, features?: string, replace?: boolean): any;
 declare var parent: WindowProxy;
 declare function print(): void;
