@@ -5,8 +5,7 @@ if (navigator.storage) {
   // $FlowExpectedError[incompatible-use]
   const persisted: Promise<boolean> = navigator.storage.persisted(); // correct
 
-  // $FlowExpectedError[incompatible-type]
-  if (navigator.storage.estimate) {
+  if (navigator.storage?.estimate) {
     navigator.storage.estimate().then((estimate: StorageEstimate) => {
       const usage: number = estimate.usage; // correct
       const quota: number = estimate.quota; // correct 

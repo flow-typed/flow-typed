@@ -410,12 +410,6 @@ declare class CSSStyleDeclaration {
   setPropertyPriority(property: string, priority: string): void;
 }
 
-declare class TransitionEvent extends Event {
-  elapsedTime: number; // readonly
-  pseudoElement: string; // readonly
-  propertyName: string; // readonly
-}
-
 type AnimationPlayState = 'idle' | 'running' | 'paused' | 'finished'
 type AnimationReplaceState = 'active' | 'removed' | 'persisted'
 type FillMode = 'none' | 'forwards' | 'backwards' | 'both' | 'auto'

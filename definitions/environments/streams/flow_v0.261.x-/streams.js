@@ -1,9 +1,5 @@
 type TextEncodeOptions = { options?: boolean, ... };
 
-declare class TextEncoder {
-  encode(buffer: string, options?: TextEncodeOptions): Uint8Array,
-}
-
 declare class ReadableStreamController {
   constructor(
     stream: ReadableStream,
