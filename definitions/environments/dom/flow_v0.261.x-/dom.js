@@ -214,7 +214,7 @@ type BeforeUnloadEventTypes = 'beforeunload';
 type StorageEventTypes = 'storage';
 type SecurityPolicyViolationEventTypes = 'securitypolicyviolation';
 type USBConnectionEventTypes = 'connect' | 'disconnect';
-
+type ToggleEventTypes = 'beforetoggle' | 'toggle';
 type EventListenerOptionsOrUseCapture = boolean | {
        capture?: boolean,
        once?: boolean,
@@ -950,6 +950,19 @@ declare class SecurityPolicyViolationEvent extends Event {
 // https://developer.mozilla.org/en-US/docs/Web/API/USBConnectionEvent
 declare class USBConnectionEvent extends Event {
   device: USBDevice,
+}
+
+type ToggleEvent$Init = {
+  ...Event$Init,
+  oldState: string,
+  newState: string,
+  ...
+}
+
+declare class ToggleEvent extends Event {
+  constructor(type: ToggleEventTypes, eventInit?: ToggleEvent$Init): void;
+  +oldState: string;
+  +newState: string;
 }
 
 // TODO: *Event
@@ -2064,6 +2077,11 @@ declare class HTMLElement extends Element {
   focus(options?: FocusOptions): void;
   getBoundingClientRect(): DOMRect;
   forceSpellcheck(): void;
+
+  showPopover(options?: {| source?: HTMLElement |}): void;
+  hidePopover(): void;
+  togglePopover(options?: boolean | {| force?: boolean, source?: HTMLElement |}): boolean;
+
   accessKey: string;
   accessKeyLabel: string;
   contentEditable: string;
@@ -2147,6 +2165,7 @@ declare class HTMLElement extends Element {
   onsuspend: ?Function;
   ontimeupdate: ?Function;
   ontoggle: ?Function;
+  onbeforetoggle: ?Function;
   onvolumechange: ?Function;
   onwaiting: ?Function;
   properties: any;
@@ -2155,6 +2174,11 @@ declare class HTMLElement extends Element {
   tabIndex: number;
   title: string;
   translate: boolean;
+  popover: '' | 'auto' | 'manual' | 'hint';
+
+  +popoverVisibilityState: 'hidden' | 'showing';
+
+  +popoverInvoker: HTMLElement | null;
 }
 
 declare class HTMLSlotElement extends HTMLElement {
@@ -3772,6 +3796,8 @@ declare class HTMLInputElement extends HTMLElement {
   vspace: number;
   width: string;
   willValidate: boolean;
+  popoverTargetElement: Element | null;
+  popoverTargetAction: 'toggle' | 'show' | 'hide';
 
   checkValidity(): boolean;
   reportValidity(): boolean;
@@ -3802,6 +3828,8 @@ declare class HTMLButtonElement extends HTMLElement {
   checkValidity(): boolean;
   reportValidity(): boolean;
   setCustomValidity(error: string): void;
+  popoverTargetElement: Element | null;
+  popoverTargetAction: 'toggle' | 'show' | 'hide';
 }
 
 // https://w3c.github.io/html/sec-forms.html#the-textarea-element
