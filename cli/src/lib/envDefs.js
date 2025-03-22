@@ -103,6 +103,12 @@ async function extractEnvDefs(
             return;
           }
 
+          // Is this the config file?
+          if (flowDirItem === 'config.json') {
+            libDefFilePath = path.join(flowDirPath, flowDirItem);
+            return;
+          }
+
           // Is this the env def file?
           if (flowDirItem === envDefFileName) {
             libDefFilePath = path.join(flowDirPath, flowDirItem);
