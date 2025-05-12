@@ -105,7 +105,6 @@ async function extractEnvDefs(
 
           // Is this the config file?
           if (flowDirItem === 'config.json') {
-            libDefFilePath = path.join(flowDirPath, flowDirItem);
             return;
           }
 
