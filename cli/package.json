@@ -10,7 +10,7 @@
   "bugs": {
     "url": "https://github.com/flow-typed/flow-typed/issues/new/choose"
   },
-  "version": "4.1.0",
+  "version": "4.1.1",
   "main": "dist/cli.js",
   "bin": "dist/cli.js",
   "packageManager": "yarn@1.22.19",
