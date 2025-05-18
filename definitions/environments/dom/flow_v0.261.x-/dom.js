@@ -1059,7 +1059,7 @@ declare class Attr extends Node {
   localName: string;
 }
 
-declare class HTMLCollection<+Elem: HTMLElement> {
+declare class HTMLCollection<+Elem: Element> {
   @@iterator(): Iterator<Elem>;
   length: number;
   item(nameOrIndex?: any, optionalIndex?: any): Elem | null;
@@ -1128,70 +1128,9 @@ declare class Document extends Node {
   createCDATASection(data: string): Text;
   createComment(data: string): Comment;
   createDocumentFragment(): DocumentFragment;
-  createElement(tagName: 'a', options?: ElementCreationOptions): HTMLAnchorElement;
-  createElement(tagName: 'area', options?: ElementCreationOptions): HTMLAreaElement;
-  createElement(tagName: 'audio', options?: ElementCreationOptions): HTMLAudioElement;
-  createElement(tagName: 'blockquote', options?: ElementCreationOptions): HTMLQuoteElement;
-  createElement(tagName: 'body', options?: ElementCreationOptions): HTMLBodyElement;
-  createElement(tagName: 'br', options?: ElementCreationOptions): HTMLBRElement;
-  createElement(tagName: 'button', options?: ElementCreationOptions): HTMLButtonElement;
-  createElement(tagName: 'canvas', options?: ElementCreationOptions): HTMLCanvasElement;
-  createElement(tagName: 'col', options?: ElementCreationOptions): HTMLTableColElement;
-  createElement(tagName: 'colgroup', options?: ElementCreationOptions): HTMLTableColElement;
-  createElement(tagName: 'data', options?: ElementCreationOptions): HTMLDataElement;
-  createElement(tagName: 'datalist', options?: ElementCreationOptions): HTMLDataListElement;
-  createElement(tagName: 'del', options?: ElementCreationOptions): HTMLModElement;
-  createElement(tagName: 'details', options?: ElementCreationOptions): HTMLDetailsElement;
-  createElement(tagName: 'dialog', options?: ElementCreationOptions): HTMLDialogElement;
-  createElement(tagName: 'div', options?: ElementCreationOptions): HTMLDivElement;
-  createElement(tagName: 'dl', options?: ElementCreationOptions): HTMLDListElement;
-  createElement(tagName: 'embed', options?: ElementCreationOptions): HTMLEmbedElement;
-  createElement(tagName: 'fieldset', options?: ElementCreationOptions): HTMLFieldSetElement;
-  createElement(tagName: 'form', options?: ElementCreationOptions): HTMLFormElement;
-  createElement(tagName: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6', options?: ElementCreationOptions): HTMLHeadingElement;
-  createElement(tagName: 'head', options?: ElementCreationOptions): HTMLHeadElement;
-  createElement(tagName: 'hr', options?: ElementCreationOptions): HTMLHRElement;
-  createElement(tagName: 'html', options?: ElementCreationOptions): HTMLHtmlElement;
-  createElement(tagName: 'iframe', options?: ElementCreationOptions): HTMLIFrameElement;
-  createElement(tagName: 'img', options?: ElementCreationOptions): HTMLImageElement;
-  createElement(tagName: 'input', options?: ElementCreationOptions): HTMLInputElement;
-  createElement(tagName: 'ins', options?: ElementCreationOptions): HTMLModElement;
-  createElement(tagName: 'label', options?: ElementCreationOptions): HTMLLabelElement;
-  createElement(tagName: 'legend', options?: ElementCreationOptions): HTMLLegendElement;
-  createElement(tagName: 'li', options?: ElementCreationOptions): HTMLLIElement;
-  createElement(tagName: 'link', options?: ElementCreationOptions): HTMLLinkElement;
-  createElement(tagName: 'map', options?: ElementCreationOptions): HTMLMapElement;
-  createElement(tagName: 'meta', options?: ElementCreationOptions): HTMLMetaElement;
-  createElement(tagName: 'meter', options?: ElementCreationOptions): HTMLMeterElement;
-  createElement(tagName: 'object', options?: ElementCreationOptions): HTMLObjectElement;
-  createElement(tagName: 'ol', options?: ElementCreationOptions): HTMLOListElement;
-  createElement(tagName: 'optgroup', options?: ElementCreationOptions): HTMLOptGroupElement;
-  createElement(tagName: 'option', options?: ElementCreationOptions): HTMLOptionElement;
-  createElement(tagName: 'p', options?: ElementCreationOptions): HTMLParagraphElement;
-  createElement(tagName: 'param', options?: ElementCreationOptions): HTMLParamElement;
-  createElement(tagName: 'picture', options?: ElementCreationOptions): HTMLPictureElement;
-  createElement(tagName: 'pre', options?: ElementCreationOptions): HTMLPreElement;
-  createElement(tagName: 'progress', options?: ElementCreationOptions): HTMLProgressElement;
-  createElement(tagName: 'q', options?: ElementCreationOptions): HTMLQuoteElement;
-  createElement(tagName: 'script', options?: ElementCreationOptions): HTMLScriptElement;
-  createElement(tagName: 'select', options?: ElementCreationOptions): HTMLSelectElement;
-  createElement(tagName: 'source', options?: ElementCreationOptions): HTMLSourceElement;
-  createElement(tagName: 'span', options?: ElementCreationOptions): HTMLSpanElement;
-  createElement(tagName: 'style', options?: ElementCreationOptions): HTMLStyleElement;
-  createElement(tagName: 'textarea', options?: ElementCreationOptions): HTMLTextAreaElement;
-  createElement(tagName: 'time', options?: ElementCreationOptions): HTMLTimeElement;
-  createElement(tagName: 'title', options?: ElementCreationOptions): HTMLTitleElement;
-  createElement(tagName: 'track', options?: ElementCreationOptions): HTMLTrackElement;
-  createElement(tagName: 'video', options?: ElementCreationOptions): HTMLVideoElement;
-  createElement(tagName: 'table', options?: ElementCreationOptions): HTMLTableElement;
-  createElement(tagName: 'caption', options?: ElementCreationOptions): HTMLTableCaptionElement;
-  createElement(tagName: 'thead' | 'tfoot' | 'tbody', options?: ElementCreationOptions): HTMLTableSectionElement;
-  createElement(tagName: 'tr', options?: ElementCreationOptions): HTMLTableRowElement;
-  createElement(tagName: 'td' | 'th', options?: ElementCreationOptions): HTMLTableCellElement;
-  createElement(tagName: 'template', options?: ElementCreationOptions): HTMLTemplateElement;
-  createElement(tagName: 'ul', options?: ElementCreationOptions): HTMLUListElement;
-  createElement(tagName: string, options?: ElementCreationOptions): HTMLElement;
-  createElementNS(namespaceURI: string | null, qualifiedName: string, options?: ElementCreationOptions): Element;
+  createElement<TName: $Keys<HTMLElementTagNameMap>>(localName: TName, options?: string | ElementCreationOptions): HTMLElementTagNameMap[TName];
+  createElementNS<TName: $Keys<HTMLElementTagNameMap>>(namespaceURI: 'http://www.w3.org/1999/xhtml', qualifiedName: TName, options?: string | ElementCreationOptions): HTMLElementTagNameMap[TName];
+  createElementNS(namespaceURI: string | null, qualifiedName: string, options?: string | ElementCreationOptions): Element;
   createTextNode(data: string): Text;
   currentScript: HTMLScriptElement | null;
   dir: 'rtl' | 'ltr';
@@ -1209,132 +1148,9 @@ declare class Document extends Node {
   fullscreenEnabled: boolean;
   getElementsByClassName(classNames: string): HTMLCollection<HTMLElement>;
   getElementsByName(elementName: string): HTMLCollection<HTMLElement>;
-  getElementsByTagName(name: 'a'): HTMLCollection<HTMLAnchorElement>;
-  getElementsByTagName(name: 'area'): HTMLCollection<HTMLAreaElement>;
-  getElementsByTagName(name: 'audio'): HTMLCollection<HTMLAudioElement>;
-  getElementsByTagName(name: 'blockquote'): HTMLCollection<HTMLQuoteElement>;
-  getElementsByTagName(name: 'body'): HTMLCollection<HTMLBodyElement>;
-  getElementsByTagName(name: 'br'): HTMLCollection<HTMLBRElement>;
-  getElementsByTagName(name: 'button'): HTMLCollection<HTMLButtonElement>;
-  getElementsByTagName(name: 'canvas'): HTMLCollection<HTMLCanvasElement>;
-  getElementsByTagName(name: 'col'): HTMLCollection<HTMLTableColElement>;
-  getElementsByTagName(name: 'colgroup'): HTMLCollection<HTMLTableColElement>;
-  getElementsByTagName(name: 'data'): HTMLCollection<HTMLDataElement>;
-  getElementsByTagName(name: 'datalist'): HTMLCollection<HTMLDataListElement>;
-  getElementsByTagName(name: 'del'): HTMLCollection<HTMLModElement>;
-  getElementsByTagName(name: 'details'): HTMLCollection<HTMLDetailsElement>;
-  getElementsByTagName(name: 'dialog'): HTMLCollection<HTMLDialogElement>;
-  getElementsByTagName(name: 'div'): HTMLCollection<HTMLDivElement>;
-  getElementsByTagName(name: 'dl'): HTMLCollection<HTMLDListElement>;
-  getElementsByTagName(name: 'embed'): HTMLCollection<HTMLEmbedElement>;
-  getElementsByTagName(name: 'fieldset'): HTMLCollection<HTMLFieldSetElement>;
-  getElementsByTagName(name: 'form'): HTMLCollection<HTMLFormElement>;
-  getElementsByTagName(name: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'): HTMLCollection<HTMLHeadingElement>;
-  getElementsByTagName(name: 'head'): HTMLCollection<HTMLHeadElement>;
-  getElementsByTagName(name: 'hr'): HTMLCollection<HTMLHRElement>;
-  getElementsByTagName(name: 'html'): HTMLCollection<HTMLHtmlElement>;
-  getElementsByTagName(name: 'iframe'): HTMLCollection<HTMLIFrameElement>;
-  getElementsByTagName(name: 'img'): HTMLCollection<HTMLImageElement>;
-  getElementsByTagName(name: 'input'): HTMLCollection<HTMLInputElement>;
-  getElementsByTagName(name: 'ins'): HTMLCollection<HTMLModElement>;
-  getElementsByTagName(name: 'label'): HTMLCollection<HTMLLabelElement>;
-  getElementsByTagName(name: 'legend'): HTMLCollection<HTMLLegendElement>;
-  getElementsByTagName(name: 'li'): HTMLCollection<HTMLLIElement>;
-  getElementsByTagName(name: 'link'): HTMLCollection<HTMLLinkElement>;
-  getElementsByTagName(name: 'map'): HTMLCollection<HTMLMapElement>;
-  getElementsByTagName(name: 'meta'): HTMLCollection<HTMLMetaElement>;
-  getElementsByTagName(name: 'meter'): HTMLCollection<HTMLMeterElement>;
-  getElementsByTagName(name: 'object'): HTMLCollection<HTMLObjectElement>;
-  getElementsByTagName(name: 'ol'): HTMLCollection<HTMLOListElement>;
-  getElementsByTagName(name: 'option'): HTMLCollection<HTMLOptionElement>;
-  getElementsByTagName(name: 'optgroup'): HTMLCollection<HTMLOptGroupElement>;
-  getElementsByTagName(name: 'p'): HTMLCollection<HTMLParagraphElement>;
-  getElementsByTagName(name: 'param'): HTMLCollection<HTMLParamElement>;
-  getElementsByTagName(name: 'picture'): HTMLCollection<HTMLPictureElement>;
-  getElementsByTagName(name: 'pre'): HTMLCollection<HTMLPreElement>;
-  getElementsByTagName(name: 'progress'): HTMLCollection<HTMLProgressElement>;
-  getElementsByTagName(name: 'q'): HTMLCollection<HTMLQuoteElement>;
-  getElementsByTagName(name: 'script'): HTMLCollection<HTMLScriptElement>;
-  getElementsByTagName(name: 'select'): HTMLCollection<HTMLSelectElement>;
-  getElementsByTagName(name: 'source'): HTMLCollection<HTMLSourceElement>;
-  getElementsByTagName(name: 'span'): HTMLCollection<HTMLSpanElement>;
-  getElementsByTagName(name: 'style'): HTMLCollection<HTMLStyleElement>;
-  getElementsByTagName(name: 'textarea'): HTMLCollection<HTMLTextAreaElement>;
-  getElementsByTagName(name: 'time'): HTMLCollection<HTMLTimeElement>;
-  getElementsByTagName(name: 'title'): HTMLCollection<HTMLTitleElement>;
-  getElementsByTagName(name: 'track'): HTMLCollection<HTMLTrackElement>;
-  getElementsByTagName(name: 'video'): HTMLCollection<HTMLVideoElement>;
-  getElementsByTagName(name: 'table'): HTMLCollection<HTMLTableElement>;
-  getElementsByTagName(name: 'caption'): HTMLCollection<HTMLTableCaptionElement>;
-  getElementsByTagName(name: 'thead' | 'tfoot' | 'tbody'): HTMLCollection<HTMLTableSectionElement>;
-  getElementsByTagName(name: 'tr'): HTMLCollection<HTMLTableRowElement>;
-  getElementsByTagName(name: 'td' | 'th'): HTMLCollection<HTMLTableCellElement>;
-  getElementsByTagName(name: 'template'): HTMLCollection<HTMLTemplateElement>;
-  getElementsByTagName(name: 'ul'): HTMLCollection<HTMLUListElement>;
-  getElementsByTagName(name: string): HTMLCollection<HTMLElement>;
-  getElementsByTagNameNS(namespaceURI: string | null, localName: 'a'): HTMLCollection<HTMLAnchorElement>;
-  getElementsByTagNameNS(namespaceURI: string | null, localName: 'area'): HTMLCollection<HTMLAreaElement>;
-  getElementsByTagNameNS(namespaceURI: string | null, localName: 'audio'): HTMLCollection<HTMLAudioElement>;
-  getElementsByTagNameNS(namespaceURI: string | null, localName: 'blockquote'): HTMLCollection<HTMLQuoteElement>;
-  getElementsByTagNameNS(namespaceURI: string | null, localName: 'body'): HTMLCollection<HTMLBodyElement>;
-  getElementsByTagNameNS(namespaceURI: string | null, localName: 'br'): HTMLCollection<HTMLBRElement>;
-  getElementsByTagNameNS(namespaceURI: string | null, localName: 'button'): HTMLCollection<HTMLButtonElement>;
-  getElementsByTagNameNS(namespaceURI: string | null, localName: 'canvas'): HTMLCollection<HTMLCanvasElement>;
-  getElementsByTagNameNS(namespaceURI: string | null, localName: 'col'): HTMLCollection<HTMLTableColElement>;
-  getElementsByTagNameNS(namespaceURI: string | null, localName: 'colgroup'): HTMLCollection<HTMLTableColElement>;
-  getElementsByTagNameNS(namespaceURI: string | null, localName: 'data'): HTMLCollection<HTMLDataElement>;
-  getElementsByTagNameNS(namespaceURI: string | null, localName: 'datalist'): HTMLCollection<HTMLDataListElement>;
-  getElementsByTagNameNS(namespaceURI: string | null, localName: 'del'): HTMLCollection<HTMLModElement>;
-  getElementsByTagNameNS(namespaceURI: string | null, localName: 'details'): HTMLCollection<HTMLDetailsElement>;
-  getElementsByTagNameNS(namespaceURI: string | null, localName: 'dialog'): HTMLCollection<HTMLDialogElement>;
-  getElementsByTagNameNS(namespaceURI: string | null, localName: 'div'): HTMLCollection<HTMLDivElement>;
-  getElementsByTagNameNS(namespaceURI: string | null, localName: 'dl'): HTMLCollection<HTMLDListElement>;
-  getElementsByTagNameNS(namespaceURI: string | null, localName: 'embed'): HTMLCollection<HTMLEmbedElement>;
-  getElementsByTagNameNS(namespaceURI: string | null, localName: 'fieldset'): HTMLCollection<HTMLFieldSetElement>;
-  getElementsByTagNameNS(namespaceURI: string | null, localName: 'form'): HTMLCollection<HTMLFormElement>;
-  getElementsByTagNameNS(namespaceURI: string | null, localName: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'): HTMLCollection<HTMLHeadingElement>;
-  getElementsByTagNameNS(namespaceURI: string | null, localName: 'head'): HTMLCollection<HTMLHeadElement>;
-  getElementsByTagNameNS(namespaceURI: string | null, localName: 'hr'): HTMLCollection<HTMLHRElement>;
-  getElementsByTagNameNS(namespaceURI: string | null, localName: 'html'): HTMLCollection<HTMLHtmlElement>;
-  getElementsByTagNameNS(namespaceURI: string | null, localName: 'iframe'): HTMLCollection<HTMLIFrameElement>;
-  getElementsByTagNameNS(namespaceURI: string | null, localName: 'img'): HTMLCollection<HTMLImageElement>;
-  getElementsByTagNameNS(namespaceURI: string | null, localName: 'input'): HTMLCollection<HTMLInputElement>;
-  getElementsByTagNameNS(namespaceURI: string | null, localName: 'ins'): HTMLCollection<HTMLModElement>;
-  getElementsByTagNameNS(namespaceURI: string | null, localName: 'label'): HTMLCollection<HTMLLabelElement>;
-  getElementsByTagNameNS(namespaceURI: string | null, localName: 'legend'): HTMLCollection<HTMLLegendElement>;
-  getElementsByTagNameNS(namespaceURI: string | null, localName: 'li'): HTMLCollection<HTMLLIElement>;
-  getElementsByTagNameNS(namespaceURI: string | null, localName: 'link'): HTMLCollection<HTMLLinkElement>;
-  getElementsByTagNameNS(namespaceURI: string | null, localName: 'map'): HTMLCollection<HTMLMapElement>;
-  getElementsByTagNameNS(namespaceURI: string | null, localName: 'meta'): HTMLCollection<HTMLMetaElement>;
-  getElementsByTagNameNS(namespaceURI: string | null, localName: 'meter'): HTMLCollection<HTMLMeterElement>;
-  getElementsByTagNameNS(namespaceURI: string | null, localName: 'object'): HTMLCollection<HTMLObjectElement>;
-  getElementsByTagNameNS(namespaceURI: string | null, localName: 'ol'): HTMLCollection<HTMLOListElement>;
-  getElementsByTagNameNS(namespaceURI: string | null, localName: 'option'): HTMLCollection<HTMLOptionElement>;
-  getElementsByTagNameNS(namespaceURI: string | null, localName: 'optgroup'): HTMLCollection<HTMLOptGroupElement>;
-  getElementsByTagNameNS(namespaceURI: string | null, localName: 'p'): HTMLCollection<HTMLParagraphElement>;
-  getElementsByTagNameNS(namespaceURI: string | null, localName: 'param'): HTMLCollection<HTMLParamElement>;
-  getElementsByTagNameNS(namespaceURI: string | null, localName: 'picture'): HTMLCollection<HTMLPictureElement>;
-  getElementsByTagNameNS(namespaceURI: string | null, localName: 'pre'): HTMLCollection<HTMLPreElement>;
-  getElementsByTagNameNS(namespaceURI: string | null, localName: 'progress'): HTMLCollection<HTMLProgressElement>;
-  getElementsByTagNameNS(namespaceURI: string | null, localName: 'q'): HTMLCollection<HTMLQuoteElement>;
-  getElementsByTagNameNS(namespaceURI: string | null, localName: 'script'): HTMLCollection<HTMLScriptElement>;
-  getElementsByTagNameNS(namespaceURI: string | null, localName: 'select'): HTMLCollection<HTMLSelectElement>;
-  getElementsByTagNameNS(namespaceURI: string | null, localName: 'source'): HTMLCollection<HTMLSourceElement>;
-  getElementsByTagNameNS(namespaceURI: string | null, localName: 'span'): HTMLCollection<HTMLSpanElement>;
-  getElementsByTagNameNS(namespaceURI: string | null, localName: 'style'): HTMLCollection<HTMLStyleElement>;
-  getElementsByTagNameNS(namespaceURI: string | null, localName: 'textarea'): HTMLCollection<HTMLTextAreaElement>;
-  getElementsByTagNameNS(namespaceURI: string | null, localName: 'time'): HTMLCollection<HTMLTimeElement>;
-  getElementsByTagNameNS(namespaceURI: string | null, localName: 'title'): HTMLCollection<HTMLTitleElement>;
-  getElementsByTagNameNS(namespaceURI: string | null, localName: 'track'): HTMLCollection<HTMLTrackElement>;
-  getElementsByTagNameNS(namespaceURI: string | null, localName: 'video'): HTMLCollection<HTMLVideoElement>;
-  getElementsByTagNameNS(namespaceURI: string | null, localName: 'table'): HTMLCollection<HTMLTableElement>;
-  getElementsByTagNameNS(namespaceURI: string | null, localName: 'caption'): HTMLCollection<HTMLTableCaptionElement>;
-  getElementsByTagNameNS(namespaceURI: string | null, localName: 'thead' | 'tfoot' | 'tbody'): HTMLCollection<HTMLTableSectionElement>;
-  getElementsByTagNameNS(namespaceURI: string | null, localName: 'tr'): HTMLCollection<HTMLTableRowElement>;
-  getElementsByTagNameNS(namespaceURI: string | null, localName: 'td' | 'th'): HTMLCollection<HTMLTableCellElement>;
-  getElementsByTagNameNS(namespaceURI: string | null, localName: 'template'): HTMLCollection<HTMLTemplateElement>;
-  getElementsByTagNameNS(namespaceURI: string | null, localName: 'ul'): HTMLCollection<HTMLUListElement>;
-  getElementsByTagNameNS(namespaceURI: string | null, localName: string): HTMLCollection<HTMLElement>;
+  getElementsByTagName<TName: $Keys<HTMLElementTagNameMap>>(qualifiedName: TName): HTMLCollection<HTMLElementTagNameMap[TName]>;
+  getElementsByTagNameNS<TName: $Keys<HTMLElementTagNameMap>>(namespaceURI: 'http://www.w3.org/1999/xhtml', qualifiedName: TName): HTMLCollection<HTMLElementTagNameMap[TName]>;
+  getElementsByTagNameNS(namespaceURI: string | null, qualifiedName: string): HTMLCollection<Element>;
   head: HTMLHeadElement | null;
   images: HTMLCollection<HTMLImageElement>;
   +implementation: DOMImplementation;
@@ -1390,134 +1206,8 @@ declare class Document extends Node {
   append(...nodes: Array<string | Node>): void;
   prepend(...nodes: Array<string | Node>): void;
 
-  querySelector(selector: 'a'): HTMLAnchorElement | null;
-  querySelector(selector: 'area'): HTMLAreaElement | null;
-  querySelector(selector: 'audio'): HTMLAudioElement | null;
-  querySelector(selector: 'blockquote'): HTMLQuoteElement | null;
-  querySelector(selector: 'body'): HTMLBodyElement | null;
-  querySelector(selector: 'br'): HTMLBRElement | null;
-  querySelector(selector: 'button'): HTMLButtonElement | null;
-  querySelector(selector: 'canvas'): HTMLCanvasElement | null;
-  querySelector(selector: 'col'): HTMLTableColElement | null;
-  querySelector(selector: 'colgroup'): HTMLTableColElement | null;
-  querySelector(selector: 'data'): HTMLDataElement | null;
-  querySelector(selector: 'datalist'): HTMLDataListElement | null;
-  querySelector(selector: 'del'): HTMLModElement | null;
-  querySelector(selector: 'details'): HTMLDetailsElement | null;
-  querySelector(selector: 'dialog'): HTMLDialogElement | null;
-  querySelector(selector: 'div'): HTMLDivElement | null;
-  querySelector(selector: 'dl'): HTMLDListElement | null;
-  querySelector(selector: 'embed'): HTMLEmbedElement | null;
-  querySelector(selector: 'fieldset'): HTMLFieldSetElement | null;
-  querySelector(selector: 'form'): HTMLFormElement | null;
-  querySelector(selector: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'): HTMLHeadingElement;
-  querySelector(selector: 'head'): HTMLHeadElement | null;
-  querySelector(selector: 'hr'): HTMLHRElement | null;
-  querySelector(selector: 'html'): HTMLHtmlElement | null;
-  querySelector(selector: 'iframe'): HTMLIFrameElement | null;
-  querySelector(selector: 'img'): HTMLImageElement | null;
-  querySelector(selector: 'ins'): HTMLModElement | null;
-  querySelector(selector: 'input'): HTMLInputElement | null;
-  querySelector(selector: 'label'): HTMLLabelElement | null;
-  querySelector(selector: 'legend'): HTMLLegendElement | null;
-  querySelector(selector: 'li'): HTMLLIElement | null;
-  querySelector(selector: 'link'): HTMLLinkElement | null;
-  querySelector(selector: 'map'): HTMLMapElement | null;
-  querySelector(selector: 'meta'): HTMLMetaElement | null;
-  querySelector(selector: 'meter'): HTMLMeterElement | null;
-  querySelector(selector: 'object'): HTMLObjectElement | null;
-  querySelector(selector: 'ol'): HTMLOListElement | null;
-  querySelector(selector: 'option'): HTMLOptionElement | null;
-  querySelector(selector: 'optgroup'): HTMLOptGroupElement | null;
-  querySelector(selector: 'p'): HTMLParagraphElement | null;
-  querySelector(selector: 'param'): HTMLParamElement | null;
-  querySelector(selector: 'picture'): HTMLPictureElement | null;
-  querySelector(selector: 'pre'): HTMLPreElement | null;
-  querySelector(selector: 'progress'): HTMLProgressElement | null;
-  querySelector(selector: 'q'): HTMLQuoteElement | null;
-  querySelector(selector: 'script'): HTMLScriptElement | null;
-  querySelector(selector: 'select'): HTMLSelectElement | null;
-  querySelector(selector: 'source'): HTMLSourceElement | null;
-  querySelector(selector: 'span'): HTMLSpanElement | null;
-  querySelector(selector: 'style'): HTMLStyleElement | null;
-  querySelector(selector: 'textarea'): HTMLTextAreaElement | null;
-  querySelector(selector: 'time'): HTMLTimeElement | null;
-  querySelector(selector: 'title'): HTMLTitleElement | null;
-  querySelector(selector: 'track'): HTMLTrackElement | null;
-  querySelector(selector: 'video'): HTMLVideoElement | null;
-  querySelector(selector: 'table'): HTMLTableElement | null;
-  querySelector(selector: 'caption'): HTMLTableCaptionElement | null;
-  querySelector(selector: 'thead' | 'tfoot' | 'tbody'): HTMLTableSectionElement | null;
-  querySelector(selector: 'tr'): HTMLTableRowElement | null;
-  querySelector(selector: 'td' | 'th'): HTMLTableCellElement | null;
-  querySelector(selector: 'template'): HTMLTemplateElement | null;
-  querySelector(selector: 'ul'): HTMLUListElement | null;
-  querySelector(selector: string): HTMLElement | null;
-
-  querySelectorAll(selector: 'a'): NodeList<HTMLAnchorElement>;
-  querySelectorAll(selector: 'area'): NodeList<HTMLAreaElement>;
-  querySelectorAll(selector: 'audio'): NodeList<HTMLAudioElement>;
-  querySelectorAll(selector: 'blockquote'): NodeList<HTMLQuoteElement>;
-  querySelectorAll(selector: 'body'): NodeList<HTMLBodyElement>;
-  querySelectorAll(selector: 'br'): NodeList<HTMLBRElement>;
-  querySelectorAll(selector: 'button'): NodeList<HTMLButtonElement>;
-  querySelectorAll(selector: 'canvas'): NodeList<HTMLCanvasElement>;
-  querySelectorAll(selector: 'col'): NodeList<HTMLTableColElement>;
-  querySelectorAll(selector: 'colgroup'): NodeList<HTMLTableColElement>;
-  querySelectorAll(selector: 'data'): NodeList<HTMLDataElement>;
-  querySelectorAll(selector: 'datalist'): NodeList<HTMLDataListElement>;
-  querySelectorAll(selector: 'del'): NodeList<HTMLModElement>;
-  querySelectorAll(selector: 'details'): NodeList<HTMLDetailsElement>;
-  querySelectorAll(selector: 'dialog'): NodeList<HTMLDialogElement>;
-  querySelectorAll(selector: 'div'): NodeList<HTMLDivElement>;
-  querySelectorAll(selector: 'dl'): NodeList<HTMLDListElement>;
-  querySelectorAll(selector: 'embed'): NodeList<HTMLEmbedElement>;
-  querySelectorAll(selector: 'fieldset'): NodeList<HTMLFieldSetElement>;
-  querySelectorAll(selector: 'form'): NodeList<HTMLFormElement>;
-  querySelectorAll(selector: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'): NodeList<HTMLHeadingElement>;
-  querySelectorAll(selector: 'head'): NodeList<HTMLHeadElement>;
-  querySelectorAll(selector: 'hr'): NodeList<HTMLHRElement>;
-  querySelectorAll(selector: 'html'): NodeList<HTMLHtmlElement>;
-  querySelectorAll(selector: 'iframe'): NodeList<HTMLIFrameElement>;
-  querySelectorAll(selector: 'img'): NodeList<HTMLImageElement>;
-  querySelectorAll(selector: 'input'): NodeList<HTMLInputElement>;
-  querySelectorAll(selector: 'ins'): NodeList<HTMLModElement>;
-  querySelectorAll(selector: 'label'): NodeList<HTMLLabelElement>;
-  querySelectorAll(selector: 'legend'): NodeList<HTMLLegendElement>;
-  querySelectorAll(selector: 'li'): NodeList<HTMLLIElement>;
-  querySelectorAll(selector: 'link'): NodeList<HTMLLinkElement>;
-  querySelectorAll(selector: 'map'): NodeList<HTMLMapElement>;
-  querySelectorAll(selector: 'meta'): NodeList<HTMLMetaElement>;
-  querySelectorAll(selector: 'meter'): NodeList<HTMLMeterElement>;
-  querySelectorAll(selector: 'object'): NodeList<HTMLObjectElement>;
-  querySelectorAll(selector: 'ol'): NodeList<HTMLOListElement>;
-  querySelectorAll(selector: 'option'): NodeList<HTMLOptionElement>;
-  querySelectorAll(selector: 'optgroup'): NodeList<HTMLOptGroupElement>;
-  querySelectorAll(selector: 'p'): NodeList<HTMLParagraphElement>;
-  querySelectorAll(selector: 'param'): NodeList<HTMLParamElement>;
-  querySelectorAll(selector: 'picture'): NodeList<HTMLPictureElement>;
-  querySelectorAll(selector: 'pre'): NodeList<HTMLPreElement>;
-  querySelectorAll(selector: 'progress'): NodeList<HTMLProgressElement>;
-  querySelectorAll(selector: 'q'): NodeList<HTMLQuoteElement>;
-  querySelectorAll(selector: 'script'): NodeList<HTMLScriptElement>;
-  querySelectorAll(selector: 'select'): NodeList<HTMLSelectElement>;
-  querySelectorAll(selector: 'source'): NodeList<HTMLSourceElement>;
-  querySelectorAll(selector: 'span'): NodeList<HTMLSpanElement>;
-  querySelectorAll(selector: 'style'): NodeList<HTMLStyleElement>;
-  querySelectorAll(selector: 'textarea'): NodeList<HTMLTextAreaElement>;
-  querySelectorAll(selector: 'time'): NodeList<HTMLTimeElement>;
-  querySelectorAll(selector: 'title'): NodeList<HTMLTitleElement>;
-  querySelectorAll(selector: 'track'): NodeList<HTMLTrackElement>;
-  querySelectorAll(selector: 'video'): NodeList<HTMLVideoElement>;
-  querySelectorAll(selector: 'table'): NodeList<HTMLTableElement>;
-  querySelectorAll(selector: 'caption'): NodeList<HTMLTableCaptionElement>;
-  querySelectorAll(selector: 'thead' | 'tfoot' | 'tbody'): NodeList<HTMLTableSectionElement>;
-  querySelectorAll(selector: 'tr'): NodeList<HTMLTableRowElement>;
-  querySelectorAll(selector: 'td' | 'th'): NodeList<HTMLTableCellElement>;
-  querySelectorAll(selector: 'template'): NodeList<HTMLTemplateElement>;
-  querySelectorAll(selector: 'ul'): NodeList<HTMLUListElement>;
-  querySelectorAll(selector: string): NodeList<HTMLElement>;
-
+  querySelector<TSelector: $Keys<HTMLElementTagNameMap>>(selector: TSelector): HTMLElementTagNameMap[TSelector] | null;
+  querySelectorAll<TSelector: $Keys<HTMLElementTagNameMap>>(selector: TSelector): NodeList<HTMLElementTagNameMap[TSelector]>;
   // Interface DocumentTraversal
   // http://www.w3.org/TR/2000/REC-DOM-Level-2-Traversal-Range-20001113/traversal.html#Traversal-Document
 
@@ -1785,114 +1475,10 @@ declare class Element extends Node implements Animatable {
   getBoundingClientRect(): DOMRect;
   getClientRects(): DOMRectList;
   getElementsByClassName(names: string): HTMLCollection<HTMLElement>;
-  getElementsByTagName(name: 'a'): HTMLCollection<HTMLAnchorElement>;
-  getElementsByTagName(name: 'audio'): HTMLCollection<HTMLAudioElement>;
-  getElementsByTagName(name: 'br'): HTMLCollection<HTMLBRElement>;
-  getElementsByTagName(name: 'button'): HTMLCollection<HTMLButtonElement>;
-  getElementsByTagName(name: 'canvas'): HTMLCollection<HTMLCanvasElement>;
-  getElementsByTagName(name: 'col'): HTMLCollection<HTMLTableColElement>;
-  getElementsByTagName(name: 'colgroup'): HTMLCollection<HTMLTableColElement>;
-  getElementsByTagName(name: 'data'): HTMLCollection<HTMLDataElement>;
-  getElementsByTagName(name: 'datalist'): HTMLCollection<HTMLDataElement>;
-  getElementsByTagName(name: 'del'): HTMLCollection<HTMLModElement>;
-  getElementsByTagName(name: 'details'): HTMLCollection<HTMLDetailsElement>;
-  getElementsByTagName(name: 'dialog'): HTMLCollection<HTMLDialogElement>;
-  getElementsByTagName(name: 'div'): HTMLCollection<HTMLDivElement>;
-  getElementsByTagName(name: 'dl'): HTMLCollection<HTMLDListElement>;
-  getElementsByTagName(name: 'fieldset'): HTMLCollection<HTMLFieldSetElement>;
-  getElementsByTagName(name: 'form'): HTMLCollection<HTMLFormElement>;
-  getElementsByTagName(name: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'): HTMLCollection<HTMLHeadingElement>;
-  getElementsByTagName(name: 'head'): HTMLCollection<HTMLHeadElement>;
-  getElementsByTagName(name: 'hr'): HTMLCollection<HTMLHRElement>;
-  getElementsByTagName(name: 'iframe'): HTMLCollection<HTMLIFrameElement>;
-  getElementsByTagName(name: 'img'): HTMLCollection<HTMLImageElement>;
-  getElementsByTagName(name: 'input'): HTMLCollection<HTMLInputElement>;
-  getElementsByTagName(name: 'ins'): HTMLCollection<HTMLModElement>;
-  getElementsByTagName(name: 'label'): HTMLCollection<HTMLLabelElement>;
-  getElementsByTagName(name: 'legend'): HTMLCollection<HTMLLegendElement>;
-  getElementsByTagName(name: 'li'): HTMLCollection<HTMLLIElement>;
-  getElementsByTagName(name: 'link'): HTMLCollection<HTMLLinkElement>;
-  getElementsByTagName(name: 'meta'): HTMLCollection<HTMLMetaElement>;
-  getElementsByTagName(name: 'meter'): HTMLCollection<HTMLMeterElement>;
-  getElementsByTagName(name: 'object'): HTMLCollection<HTMLObjectElement>;
-  getElementsByTagName(name: 'ol'): HTMLCollection<HTMLOListElement>;
-  getElementsByTagName(name: 'option'): HTMLCollection<HTMLOptionElement>;
-  getElementsByTagName(name: 'optgroup'): HTMLCollection<HTMLOptGroupElement>;
-  getElementsByTagName(name: 'p'): HTMLCollection<HTMLParagraphElement>;
-  getElementsByTagName(name: 'param'): HTMLCollection<HTMLParamElement>;
-  getElementsByTagName(name: 'picture'): HTMLCollection<HTMLPictureElement>;
-  getElementsByTagName(name: 'pre'): HTMLCollection<HTMLPreElement>;
-  getElementsByTagName(name: 'progress'): HTMLCollection<HTMLProgressElement>;
-  getElementsByTagName(name: 'script'): HTMLCollection<HTMLScriptElement>;
-  getElementsByTagName(name: 'select'): HTMLCollection<HTMLSelectElement>;
-  getElementsByTagName(name: 'source'): HTMLCollection<HTMLSourceElement>;
-  getElementsByTagName(name: 'span'): HTMLCollection<HTMLSpanElement>;
-  getElementsByTagName(name: 'style'): HTMLCollection<HTMLStyleElement>;
-  getElementsByTagName(name: 'textarea'): HTMLCollection<HTMLTextAreaElement>;
-  getElementsByTagName(name: 'video'): HTMLCollection<HTMLVideoElement>;
-  getElementsByTagName(name: 'table'): HTMLCollection<HTMLTableElement>;
-  getElementsByTagName(name: 'title'): HTMLCollection<HTMLTitleElement>;
-  getElementsByTagName(name: 'caption'): HTMLCollection<HTMLTableCaptionElement>;
-  getElementsByTagName(name: 'thead' | 'tfoot' | 'tbody'): HTMLCollection<HTMLTableSectionElement>;
-  getElementsByTagName(name: 'tr'): HTMLCollection<HTMLTableRowElement>;
-  getElementsByTagName(name: 'td' | 'th'): HTMLCollection<HTMLTableCellElement>;
-  getElementsByTagName(name: 'template'): HTMLCollection<HTMLTemplateElement>;
-  getElementsByTagName(name: 'ul'): HTMLCollection<HTMLUListElement>;
-  getElementsByTagName(name: string): HTMLCollection<HTMLElement>;
-  getElementsByTagNameNS(namespaceURI: string | null, localName: 'a'): HTMLCollection<HTMLAnchorElement>;
-  getElementsByTagNameNS(namespaceURI: string | null, localName: 'audio'): HTMLCollection<HTMLAudioElement>;
-  getElementsByTagNameNS(namespaceURI: string | null, localName: 'br'): HTMLCollection<HTMLBRElement>;
-  getElementsByTagNameNS(namespaceURI: string | null, localName: 'button'): HTMLCollection<HTMLButtonElement>;
-  getElementsByTagNameNS(namespaceURI: string | null, localName: 'canvas'): HTMLCollection<HTMLCanvasElement>;
-  getElementsByTagNameNS(namespaceURI: string | null, localName: 'col'): HTMLCollection<HTMLTableColElement>;
-  getElementsByTagNameNS(namespaceURI: string | null, localName: 'colgroup'): HTMLCollection<HTMLTableColElement>;
-  getElementsByTagNameNS(namespaceURI: string | null, localName: 'data'): HTMLCollection<HTMLDataElement>;
-  getElementsByTagNameNS(namespaceURI: string | null, localName: 'datalist'): HTMLCollection<HTMLDataListElement>;
-  getElementsByTagNameNS(namespaceURI: string | null, localName: 'del'): HTMLCollection<HTMLModElement>;
-  getElementsByTagNameNS(namespaceURI: string | null, localName: 'details'): HTMLCollection<HTMLDetailsElement>;
-  getElementsByTagNameNS(namespaceURI: string | null, localName: 'dialog'): HTMLCollection<HTMLDialogElement>;
-  getElementsByTagNameNS(namespaceURI: string | null, localName: 'div'): HTMLCollection<HTMLDivElement>;
-  getElementsByTagNameNS(namespaceURI: string | null, localName: 'dl'): HTMLCollection<HTMLDListElement>;
-  getElementsByTagNameNS(namespaceURI: string | null, localName: 'fieldset'): HTMLCollection<HTMLFieldSetElement>;
-  getElementsByTagNameNS(namespaceURI: string | null, localName: 'form'): HTMLCollection<HTMLFormElement>;
-  getElementsByTagNameNS(namespaceURI: string | null, localName: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'): HTMLCollection<HTMLHeadingElement>;
-  getElementsByTagNameNS(namespaceURI: string | null, localName: 'head'): HTMLCollection<HTMLHeadElement>;
-  getElementsByTagNameNS(namespaceURI: string | null, localName: 'hr'): HTMLCollection<HTMLHRElement>;
-  getElementsByTagNameNS(namespaceURI: string | null, localName: 'iframe'): HTMLCollection<HTMLIFrameElement>;
-  getElementsByTagNameNS(namespaceURI: string | null, localName: 'img'): HTMLCollection<HTMLImageElement>;
-  getElementsByTagNameNS(namespaceURI: string | null, localName: 'input'): HTMLCollection<HTMLInputElement>;
-  getElementsByTagNameNS(namespaceURI: string | null, localName: 'ins'): HTMLCollection<HTMLModElement>;
-  getElementsByTagNameNS(namespaceURI: string | null, localName: 'label'): HTMLCollection<HTMLLabelElement>;
-  getElementsByTagNameNS(namespaceURI: string | null, localName: 'legend'): HTMLCollection<HTMLLegendElement>;
-  getElementsByTagNameNS(namespaceURI: string | null, localName: 'li'): HTMLCollection<HTMLLIElement>;
-  getElementsByTagNameNS(namespaceURI: string | null, localName: 'link'): HTMLCollection<HTMLLinkElement>;
-  getElementsByTagNameNS(namespaceURI: string | null, localName: 'meta'): HTMLCollection<HTMLMetaElement>;
-  getElementsByTagNameNS(namespaceURI: string | null, localName: 'meter'): HTMLCollection<HTMLMeterElement>;
-  getElementsByTagNameNS(namespaceURI: string | null, localName: 'object'): HTMLCollection<HTMLObjectElement>;
-  getElementsByTagNameNS(namespaceURI: string | null, localName: 'ol'): HTMLCollection<HTMLOListElement>;
-  getElementsByTagNameNS(namespaceURI: string | null, localName: 'option'): HTMLCollection<HTMLOptionElement>;
-  getElementsByTagNameNS(namespaceURI: string | null, localName: 'optgroup'): HTMLCollection<HTMLOptGroupElement>;
-  getElementsByTagNameNS(namespaceURI: string | null, localName: 'p'): HTMLCollection<HTMLParagraphElement>;
-  getElementsByTagNameNS(namespaceURI: string | null, localName: 'param'): HTMLCollection<HTMLParamElement>;
-  getElementsByTagNameNS(namespaceURI: string | null, localName: 'picture'): HTMLCollection<HTMLPictureElement>;
-  getElementsByTagNameNS(namespaceURI: string | null, localName: 'pre'): HTMLCollection<HTMLPreElement>;
-  getElementsByTagNameNS(namespaceURI: string | null, localName: 'progress'): HTMLCollection<HTMLProgressElement>;
-  getElementsByTagNameNS(namespaceURI: string | null, localName: 'script'): HTMLCollection<HTMLScriptElement>;
-  getElementsByTagNameNS(namespaceURI: string | null, localName: 'select'): HTMLCollection<HTMLSelectElement>;
-  getElementsByTagNameNS(namespaceURI: string | null, localName: 'source'): HTMLCollection<HTMLSourceElement>;
-  getElementsByTagNameNS(namespaceURI: string | null, localName: 'span'): HTMLCollection<HTMLSpanElement>;
-  getElementsByTagNameNS(namespaceURI: string | null, localName: 'style'): HTMLCollection<HTMLStyleElement>;
-  getElementsByTagNameNS(namespaceURI: string | null, localName: 'textarea'): HTMLCollection<HTMLTextAreaElement>;
-  getElementsByTagNameNS(namespaceURI: string | null, localName: 'video'): HTMLCollection<HTMLVideoElement>;
-  getElementsByTagNameNS(namespaceURI: string | null, localName: 'table'): HTMLCollection<HTMLTableElement>;
-  getElementsByTagNameNS(namespaceURI: string | null, localName: 'title'): HTMLCollection<HTMLTitleElement>;
-  getElementsByTagNameNS(namespaceURI: string | null, localName: 'caption'): HTMLCollection<HTMLTableCaptionElement>;
-  getElementsByTagNameNS(namespaceURI: string | null, localName: 'thead' | 'tfoot' | 'tbody'): HTMLCollection<HTMLTableSectionElement>;
-  getElementsByTagNameNS(namespaceURI: string | null, localName: 'tr'): HTMLCollection<HTMLTableRowElement>;
-  getElementsByTagNameNS(namespaceURI: string | null, localName: 'td' | 'th'): HTMLCollection<HTMLTableCellElement>;
-  getElementsByTagNameNS(namespaceURI: string | null, localName: 'template'): HTMLCollection<HTMLTemplateElement>;
-  getElementsByTagNameNS(namespaceURI: string | null, localName: 'ul'): HTMLCollection<HTMLUListElement>;
-  getElementsByTagNameNS(namespaceURI: string | null, localName: string): HTMLCollection<HTMLElement>;
+  getElementsByTagName<TName: $Keys<HTMLElementTagNameMap>>(qualifiedName: TName): HTMLCollection<HTMLElementTagNameMap[TName]>;
+  getElementsByTagNameNS<TName: $Keys<HTMLElementTagNameMap>>(namespaceURI: 'http://www.w3.org/1999/xhtml', qualifiedName: TName): HTMLCollection<HTMLElementTagNameMap[TName]>;
+  getElementsByTagNameNS(namespaceURI: string | null, qualifiedName: string): HTMLCollection<Element>;
+
   hasAttribute(name: string): boolean;
   hasAttributeNS(namespaceURI: string | null, localName: string): boolean;
   hasAttributes(): boolean;
@@ -1936,133 +1522,8 @@ declare class Element extends Node implements Animatable {
   append(...nodes: Array<string | Node>): void;
   prepend(...nodes: Array<string | Node>): void;
 
-  querySelector(selector: 'a'): HTMLAnchorElement | null;
-  querySelector(selector: 'area'): HTMLAreaElement | null;
-  querySelector(selector: 'audio'): HTMLAudioElement | null;
-  querySelector(selector: 'blockquote'): HTMLQuoteElement | null;
-  querySelector(selector: 'body'): HTMLBodyElement | null;
-  querySelector(selector: 'br'): HTMLBRElement | null;
-  querySelector(selector: 'button'): HTMLButtonElement | null;
-  querySelector(selector: 'canvas'): HTMLCanvasElement | null;
-  querySelector(selector: 'col'): HTMLTableColElement | null;
-  querySelector(selector: 'colgroup'): HTMLTableColElement | null;
-  querySelector(selector: 'data'): HTMLDataElement | null;
-  querySelector(selector: 'datalist'): HTMLDataListElement | null;
-  querySelector(selector: 'del'): HTMLModElement | null;
-  querySelector(selector: 'details'): HTMLDetailsElement | null;
-  querySelector(selector: 'dialog'): HTMLDialogElement | null;
-  querySelector(selector: 'div'): HTMLDivElement | null;
-  querySelector(selector: 'dl'): HTMLDListElement | null;
-  querySelector(selector: 'embed'): HTMLEmbedElement | null;
-  querySelector(selector: 'fieldset'): HTMLFieldSetElement | null;
-  querySelector(selector: 'form'): HTMLFormElement | null;
-  querySelector(selector: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'): HTMLHeadingElement;
-  querySelector(selector: 'head'): HTMLHeadElement | null;
-  querySelector(selector: 'hr'): HTMLHRElement | null;
-  querySelector(selector: 'html'): HTMLHtmlElement | null;
-  querySelector(selector: 'iframe'): HTMLIFrameElement | null;
-  querySelector(selector: 'img'): HTMLImageElement | null;
-  querySelector(selector: 'ins'): HTMLModElement | null;
-  querySelector(selector: 'input'): HTMLInputElement | null;
-  querySelector(selector: 'label'): HTMLLabelElement | null;
-  querySelector(selector: 'legend'): HTMLLegendElement | null;
-  querySelector(selector: 'li'): HTMLLIElement | null;
-  querySelector(selector: 'link'): HTMLLinkElement | null;
-  querySelector(selector: 'map'): HTMLMapElement | null;
-  querySelector(selector: 'meta'): HTMLMetaElement | null;
-  querySelector(selector: 'meter'): HTMLMeterElement | null;
-  querySelector(selector: 'object'): HTMLObjectElement | null;
-  querySelector(selector: 'ol'): HTMLOListElement | null;
-  querySelector(selector: 'option'): HTMLOptionElement | null;
-  querySelector(selector: 'optgroup'): HTMLOptGroupElement | null;
-  querySelector(selector: 'p'): HTMLParagraphElement | null;
-  querySelector(selector: 'param'): HTMLParamElement | null;
-  querySelector(selector: 'picture'): HTMLPictureElement | null;
-  querySelector(selector: 'pre'): HTMLPreElement | null;
-  querySelector(selector: 'progress'): HTMLProgressElement | null;
-  querySelector(selector: 'q'): HTMLQuoteElement | null;
-  querySelector(selector: 'script'): HTMLScriptElement | null;
-  querySelector(selector: 'select'): HTMLSelectElement | null;
-  querySelector(selector: 'source'): HTMLSourceElement | null;
-  querySelector(selector: 'span'): HTMLSpanElement | null;
-  querySelector(selector: 'style'): HTMLStyleElement | null;
-  querySelector(selector: 'textarea'): HTMLTextAreaElement | null;
-  querySelector(selector: 'time'): HTMLTimeElement | null;
-  querySelector(selector: 'title'): HTMLTitleElement | null;
-  querySelector(selector: 'track'): HTMLTrackElement | null;
-  querySelector(selector: 'video'): HTMLVideoElement | null;
-  querySelector(selector: 'table'): HTMLTableElement | null;
-  querySelector(selector: 'caption'): HTMLTableCaptionElement | null;
-  querySelector(selector: 'thead' | 'tfoot' | 'tbody'): HTMLTableSectionElement | null;
-  querySelector(selector: 'tr'): HTMLTableRowElement | null;
-  querySelector(selector: 'td' | 'th'): HTMLTableCellElement | null;
-  querySelector(selector: 'template'): HTMLTemplateElement | null;
-  querySelector(selector: 'ul'): HTMLUListElement | null;
-  querySelector(selector: string): HTMLElement | null;
-
-  querySelectorAll(selector: 'a'): NodeList<HTMLAnchorElement>;
-  querySelectorAll(selector: 'area'): NodeList<HTMLAreaElement>;
-  querySelectorAll(selector: 'audio'): NodeList<HTMLAudioElement>;
-  querySelectorAll(selector: 'blockquote'): NodeList<HTMLQuoteElement>;
-  querySelectorAll(selector: 'body'): NodeList<HTMLBodyElement>;
-  querySelectorAll(selector: 'br'): NodeList<HTMLBRElement>;
-  querySelectorAll(selector: 'button'): NodeList<HTMLButtonElement>;
-  querySelectorAll(selector: 'canvas'): NodeList<HTMLCanvasElement>;
-  querySelectorAll(selector: 'col'): NodeList<HTMLTableColElement>;
-  querySelectorAll(selector: 'colgroup'): NodeList<HTMLTableColElement>;
-  querySelectorAll(selector: 'data'): NodeList<HTMLDataElement>;
-  querySelectorAll(selector: 'datalist'): NodeList<HTMLDataListElement>;
-  querySelectorAll(selector: 'del'): NodeList<HTMLModElement>;
-  querySelectorAll(selector: 'details'): NodeList<HTMLDetailsElement>;
-  querySelectorAll(selector: 'dialog'): NodeList<HTMLDialogElement>;
-  querySelectorAll(selector: 'div'): NodeList<HTMLDivElement>;
-  querySelectorAll(selector: 'dl'): NodeList<HTMLDListElement>;
-  querySelectorAll(selector: 'embed'): NodeList<HTMLEmbedElement>;
-  querySelectorAll(selector: 'fieldset'): NodeList<HTMLFieldSetElement>;
-  querySelectorAll(selector: 'form'): NodeList<HTMLFormElement>;
-  querySelectorAll(selector: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'): NodeList<HTMLHeadingElement>;
-  querySelectorAll(selector: 'head'): NodeList<HTMLHeadElement>;
-  querySelectorAll(selector: 'hr'): NodeList<HTMLHRElement>;
-  querySelectorAll(selector: 'html'): NodeList<HTMLHtmlElement>;
-  querySelectorAll(selector: 'iframe'): NodeList<HTMLIFrameElement>;
-  querySelectorAll(selector: 'img'): NodeList<HTMLImageElement>;
-  querySelectorAll(selector: 'input'): NodeList<HTMLInputElement>;
-  querySelectorAll(selector: 'ins'): NodeList<HTMLModElement>;
-  querySelectorAll(selector: 'label'): NodeList<HTMLLabelElement>;
-  querySelectorAll(selector: 'legend'): NodeList<HTMLLegendElement>;
-  querySelectorAll(selector: 'li'): NodeList<HTMLLIElement>;
-  querySelectorAll(selector: 'link'): NodeList<HTMLLinkElement>;
-  querySelectorAll(selector: 'map'): NodeList<HTMLMapElement>;
-  querySelectorAll(selector: 'meta'): NodeList<HTMLMetaElement>;
-  querySelectorAll(selector: 'meter'): NodeList<HTMLMeterElement>;
-  querySelectorAll(selector: 'object'): NodeList<HTMLObjectElement>;
-  querySelectorAll(selector: 'ol'): NodeList<HTMLOListElement>;
-  querySelectorAll(selector: 'option'): NodeList<HTMLOptionElement>;
-  querySelectorAll(selector: 'optgroup'): NodeList<HTMLOptGroupElement>;
-  querySelectorAll(selector: 'p'): NodeList<HTMLParagraphElement>;
-  querySelectorAll(selector: 'param'): NodeList<HTMLParamElement>;
-  querySelectorAll(selector: 'picture'): NodeList<HTMLPictureElement>;
-  querySelectorAll(selector: 'pre'): NodeList<HTMLPreElement>;
-  querySelectorAll(selector: 'progress'): NodeList<HTMLProgressElement>;
-  querySelectorAll(selector: 'q'): NodeList<HTMLQuoteElement>;
-  querySelectorAll(selector: 'script'): NodeList<HTMLScriptElement>;
-  querySelectorAll(selector: 'select'): NodeList<HTMLSelectElement>;
-  querySelectorAll(selector: 'source'): NodeList<HTMLSourceElement>;
-  querySelectorAll(selector: 'span'): NodeList<HTMLSpanElement>;
-  querySelectorAll(selector: 'style'): NodeList<HTMLStyleElement>;
-  querySelectorAll(selector: 'textarea'): NodeList<HTMLTextAreaElement>;
-  querySelectorAll(selector: 'time'): NodeList<HTMLTimeElement>;
-  querySelectorAll(selector: 'title'): NodeList<HTMLTitleElement>;
-  querySelectorAll(selector: 'track'): NodeList<HTMLTrackElement>;
-  querySelectorAll(selector: 'video'): NodeList<HTMLVideoElement>;
-  querySelectorAll(selector: 'table'): NodeList<HTMLTableElement>;
-  querySelectorAll(selector: 'caption'): NodeList<HTMLTableCaptionElement>;
-  querySelectorAll(selector: 'thead' | 'tfoot' | 'tbody'): NodeList<HTMLTableSectionElement>;
-  querySelectorAll(selector: 'tr'): NodeList<HTMLTableRowElement>;
-  querySelectorAll(selector: 'td' | 'th'): NodeList<HTMLTableCellElement>;
-  querySelectorAll(selector: 'template'): NodeList<HTMLTemplateElement>;
-  querySelectorAll(selector: 'ul'): NodeList<HTMLUListElement>;
-  querySelectorAll(selector: string): NodeList<HTMLElement>;
+  querySelector<TSelector: $Keys<HTMLElementTagNameMap>>(selector: TSelector): HTMLElementTagNameMap[TSelector] | null;
+  querySelectorAll<TSelector: $Keys<HTMLElementTagNameMap>>(selector: TSelector): NodeList<HTMLElementTagNameMap[TSelector]>;
 
   // from ChildNode interface
   after(...nodes: Array<string | Node>): void;
@@ -4622,3 +4083,120 @@ declare class Notification extends EventTarget {
 
   close(): void;
 }
+
+
+type HTMLElementTagNameMap = {
+  a: HTMLAnchorElement,
+  abbr: HTMLElement,
+  address: HTMLElement,
+  area: HTMLAreaElement,
+  article: HTMLElement,
+  aside: HTMLElement,
+  audio: HTMLAudioElement,
+  b: HTMLElement,
+  base: HTMLBaseElement,
+  bdi: HTMLElement,
+  bdo: HTMLElement,
+  blockquote: HTMLQuoteElement,
+  body: HTMLBodyElement,
+  br: HTMLBRElement,
+  button: HTMLButtonElement,
+  canvas: HTMLCanvasElement,
+  caption: HTMLTableCaptionElement,
+  cite: HTMLElement,
+  code: HTMLElement,
+  col: HTMLTableColElement,
+  colgroup: HTMLTableColElement,
+  data: HTMLDataElement,
+  datalist: HTMLDataListElement,
+  dd: HTMLElement,
+  del: HTMLModElement,
+  details: HTMLDetailsElement,
+  dfn: HTMLElement,
+  dialog: HTMLDialogElement,
+  div: HTMLDivElement,
+  dl: HTMLDListElement,
+  dt: HTMLElement,
+  em: HTMLElement,
+  embed: HTMLEmbedElement,
+  fieldset: HTMLFieldSetElement,
+  figcaption: HTMLElement,
+  figure: HTMLElement,
+  footer: HTMLElement,
+  form: HTMLFormElement,
+  h1: HTMLHeadingElement,
+  h2: HTMLHeadingElement,
+  h3: HTMLHeadingElement,
+  h4: HTMLHeadingElement,
+  h5: HTMLHeadingElement,
+  h6: HTMLHeadingElement,
+  head: HTMLHeadElement,
+  header: HTMLElement,
+  hgroup: HTMLElement,
+  hr: HTMLHRElement,
+  html: HTMLHtmlElement,
+  i: HTMLElement,
+  iframe: HTMLIFrameElement,
+  img: HTMLImageElement,
+  input: HTMLInputElement,
+  ins: HTMLModElement,
+  kbd: HTMLElement,
+  label: HTMLLabelElement,
+  legend: HTMLLegendElement,
+  li: HTMLLIElement,
+  link: HTMLLinkElement,
+  main: HTMLElement,
+  map: HTMLMapElement,
+  mark: HTMLElement,
+  menu: HTMLMenuElement,
+  meta: HTMLMetaElement,
+  meter: HTMLMeterElement,
+  nav: HTMLElement,
+  noscript: HTMLElement,
+  object: HTMLObjectElement,
+  ol: HTMLOListElement,
+  optgroup: HTMLOptGroupElement,
+  option: HTMLOptionElement,
+  output: HTMLOutputElement,
+  p: HTMLParagraphElement,
+  picture: HTMLPictureElement,
+  pre: HTMLPreElement,
+  progress: HTMLProgressElement,
+  q: HTMLQuoteElement,
+  rp: HTMLElement,
+  rt: HTMLElement,
+  ruby: HTMLElement,
+  s: HTMLElement,
+  samp: HTMLElement,
+  script: HTMLScriptElement,
+  search: HTMLElement,
+  section: HTMLElement,
+  select: HTMLSelectElement,
+  slot: HTMLSlotElement,
+  small: HTMLElement,
+  source: HTMLSourceElement,
+  span: HTMLSpanElement,
+  strong: HTMLElement,
+  style: HTMLStyleElement,
+  sub: HTMLElement,
+  summary: HTMLElement,
+  sup: HTMLElement,
+  table: HTMLTableElement,
+  tbody: HTMLTableSectionElement,
+  td: HTMLTableCellElement,
+  template: HTMLTemplateElement,
+  textarea: HTMLTextAreaElement,
+  tfoot: HTMLTableSectionElement,
+  th: HTMLTableCellElement,
+  thead: HTMLTableSectionElement,
+  time: HTMLTimeElement,
+  title: HTMLTitleElement,
+  tr: HTMLTableRowElement,
+  track: HTMLTrackElement,
+  u: HTMLElement,
+  ul: HTMLUListElement,
+  var: HTMLElement,
+  video: HTMLVideoElement,
+  wbr: HTMLElement,
+  [string]: Element,
+};
