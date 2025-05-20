@@ -32,17 +32,22 @@ let tests = [
   function (element: HTMLElement) {
     const str: string = 'a';
     // broad
-    element.getElementsByTagName(str) as HTMLCollection<HTMLElement>;
-    element.getElementsByTagNameNS(null, str) as HTMLCollection<HTMLElement>;
-    element.querySelector(str) as HTMLElement | null;
-    element.querySelectorAll(str) as NodeList<HTMLElement>;
+    element.getElementsByTagName(str) as HTMLCollection<Element>;
+    element.getElementsByTagNameNS(null, str) as HTMLCollection<Element>;
+    element.querySelector(str) as Element | null;
+    element.querySelectorAll(str) as NodeList<Element>;
+    element.getElementsByTagName(str) as HTMLCollection<Element>;
+    element.getElementsByTagNameNS(null, str) as HTMLCollection<Element>;
+    element.querySelector(str) as Element | null;
+    element.querySelectorAll(str) as NodeList<Element>;
 
     // specific
     element.getElementsByTagName('a') as HTMLCollection<HTMLAnchorElement>;
     element.getElementsByTagNameNS(
-      null,
+      'http://www.w3.org/1999/xhtml',
       'a',
     ) as HTMLCollection<HTMLAnchorElement>;
+    element.getElementsByTagNameNS(null, 'a') as HTMLCollection<Element>;
     element.querySelector('a') as HTMLAnchorElement | null;
     element.querySelectorAll('a') as NodeList<HTMLAnchorElement>;
 
