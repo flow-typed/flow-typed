@@ -3780,6 +3780,7 @@ declare class URL {
   static createObjectURL(blob: Blob): string;
   static createObjectURL(mediaSource: MediaSource): string;
   static revokeObjectURL(url: string): void;
+  static parse(url: string, base?: string): URL | null;
   constructor(url: string, base?: string | URL): void;
   hash: string;
   host: string;
