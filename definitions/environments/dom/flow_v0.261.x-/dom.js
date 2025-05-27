@@ -1821,13 +1821,6 @@ declare class ImageData {
   constructor(width: number, height: number): void;
 };
 
-interface DOMPointInit {
-  w?: number;
-  x?: number;
-  y?: number;
-  z?: number;
-}
-
 declare class CanvasRenderingContext2D {
   canvas: HTMLCanvasElement;
 
