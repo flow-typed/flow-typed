@@ -692,50 +692,6 @@ declare class MutationObserver {
     disconnect(): void;
 }
 
-declare class DOMRectReadOnly {
-  static fromRect(rectangle?: {
-    x: number,
-    y: number,
-    width: number,
-    height: number,
-    ...
-  }): DOMRectReadOnly;
-  constructor(x: number, y: number, width: number, height: number): void;
-  +bottom: number;
-  +height: number;
-  +left: number;
-  +right: number;
-  +top: number;
-  +width: number;
-  +x: number;
-  +y: number;
-}
-
-declare class DOMRect extends DOMRectReadOnly {
-  static fromRect(rectangle?: {
-    x: number,
-    y: number,
-    width: number,
-    height: number,
-    ...
-  }): DOMRect;
-  bottom: number;
-  height: number;
-  left: number;
-  right: number;
-  top: number;
-  width: number;
-  x: number;
-  y: number;
-}
-
-declare class DOMRectList {
-  @@iterator(): Iterator<DOMRect>;
-  length: number;
-  item(index: number): DOMRect;
-  [index: number]: DOMRect;
-}
-
 declare type IntersectionObserverEntry = {
   boundingClientRect: DOMRectReadOnly,
   intersectionRatio: number,
