@@ -1411,13 +1411,6 @@ declare class SVGMatrix {
   mRotate(angle: number): SVGMatrix;
 };
 
-interface DOMPointInit {
-  w?: number;
-  x?: number;
-  y?: number;
-  z?: number;
-}
-
 // WebGL idl: https://www.khronos.org/registry/webgl/specs/latest/1.0/webgl.idl
 
 type WebGLContextAttributes = {
