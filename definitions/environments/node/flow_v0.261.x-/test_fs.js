@@ -178,11 +178,40 @@ declare var boolVar: boolean;
 
 (fs.promises.glob('some/path', {
   withFileTypes: true,
-}): AsyncIterable<fs.Dirent>);
+}): AsyncIterator<fs.Dirent>);
 (fs.promises.glob('some/path', {withFileTypes: false}): AsyncIterator<string>);
 (fs.promises.glob('some/path', {}): AsyncIterator<string>);
 (fs.promises.glob('some/path'): AsyncIterator<string>);
 (fs.promises.glob('some/path', {withFileTypes: boolVar}):
-  | AsyncIterable<string>
-  | AsyncIterable<fs.Dirent>);
+  | AsyncIterator<string>
+  | AsyncIterator<fs.Dirent>);
+
+
+// $FlowExpectedError - returns Dirents
+(fs.globSync('some/path', {withFileTypes: true}): Array<string>);
+// $FlowExpectedError - returns strings
+(fs.globSync('some/path', {withFileTypes: false}): Array<fs.Dirent>);
+// $FlowExpectedError - returns strings
+(fs.globSync('some/path', {}): Array<fs.Dirent>);
+// $FlowExpectedError - returns strings
+(fs.globSync('some/path'): Array<fs.Dirent>);
+// $FlowExpectedError - returns strings or Dirents
+(fs.globSync('some/path', {withFileTypes: boolVar}): Array<string>);
+// $FlowExpectedError - returns strings or Dirents
+(fs.globSync('some/path', {withFileTypes: boolVar}): Array<fs.Dirent>);
+
+(fs.globSync('some/path', {
+  withFileTypes: true,
+  // $FlowExpectedError - arg is a Dirent
+  exclude: (file: string) => false,
+}): Array<fs.Dirent>);
+(fs.globSync('some/path', {
+  withFileTypes: false,
+  // $FlowExpectedError - arg is a string
+  exclude: (file: fs.Dirent) => false,
+}): Array<string>);
+(fs.globSync('some/path', {
+  // $FlowExpectedError - arg is a string
+  exclude: (file: fs.Dirent) => false,
+}): Array<string>);
 
