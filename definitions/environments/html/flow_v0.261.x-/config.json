@@ -6,6 +6,7 @@
     "dom": ["v0.261.x-"],
     "geometry": ["v0.261.x-"],
     "serviceworkers": ["v0.261.x-"],
-    "streams": ["v0.261.x-"]
+    "streams": ["v0.261.x-"],
+    "web-animations": ["v0.261.x-"]
   }
 }
