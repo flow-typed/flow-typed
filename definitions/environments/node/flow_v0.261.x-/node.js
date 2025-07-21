@@ -1318,13 +1318,13 @@ declare module "fs" {
      * Current working directory.
      * @default process.cwd()
      */
-    cwd?: ?string | void,
+    cwd?: string | void,
     /**
      * `true` if the glob should return paths as `Dirent`s, `false` otherwise.
      * @default false
      * @since v22.2.0
      */
-    WithFileTypes?: WithTypes,
+    WithFileTypes?: WithFileTypes,
     /**
      * Function to filter out files/directories or a
      * list of glob patterns to be excluded. If a function is provided, return
