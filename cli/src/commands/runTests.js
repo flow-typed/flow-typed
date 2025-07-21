@@ -96,8 +96,10 @@ async function getTestGroups(
   envDirPath: string,
   onlyChanged: boolean = false,
 ): Promise<Array<TestGroup>> {
-  let libDefs = await getLibDefs(repoDirPath);
-  let envDefs = await getLibDefs(envDirPath);
+  let libDefs = [
+    ...(await getLibDefs(repoDirPath)),
+    ...(await getLibDefs(envDirPath)),
+  ];
   if (onlyChanged) {
     const diff = await getDefinitionsDiff();
     const baseDiff: string[] = diff
@@ -123,13 +125,13 @@ async function getTestGroups(
         version: `v${major}.${minor}.${patch}`,
       };
     });
-    libDefs = [...libDefs, ...envDefs].filter(def => {
+    libDefs = libDefs.filter(def => {
       return changedDefs.some(d => {
         // This is for env defs
         if (d.version === 'vx.x.x') {
           return d.name === def.pkgName;
         }
-        // If the definition is a dependant of a changed package
+        // If the definition is a dependent of a changed package
         if (def.configPath) {
           const configJson = JSON.parse(
             fs.readFileSync(def.configPath, 'utf-8'),
@@ -138,10 +140,10 @@ async function getTestGroups(
             ...configJson.deps,
             ...(configJson.envDeps || {}),
           };
-          const isDependantOfChanged = Object.keys(deps).some(
+          const isDependentOfChanged = Object.keys(deps).some(
             dep => dep === d.name && deps[dep].some(s => s === d.version),
           );
-          if (isDependantOfChanged) return true;
+          if (isDependentOfChanged) return true;
         }
         return d.name === def.pkgName && d.version === def.pkgVersionStr;
       });
@@ -236,7 +238,7 @@ async function getOrderedFlowBinVersions(
         return false;
       }
 
-      if (rel.tag_name === 'v0.67.0') {
+      if (rel.assets.length === 0) {
         printSkipMessage(
           rel.tag_name,
           'https://github.com/facebook/flow/issues/5922',
@@ -274,7 +276,9 @@ async function getOrderedFlowBinVersions(
         throw new Error(
           'Unexpected number of ' +
             BIN_PLATFORM +
-            ' assets for flow-' +
+            ' assets (' +
+            binZip.length +
+            ') for flow-' +
             rel.tag_name +
             '! ' +
             JSON.stringify(binZip),
@@ -837,6 +841,7 @@ async function runTestGroup(
 
     // Windows hasn't flow < 30.0 but we have tests for flow < 30.0. We need skip it. Example: redux_v3
     if (!flowVersionsToRun.length) {
+      console.log('No flow versions to run!');
       return [];
     }
 
@@ -977,9 +982,8 @@ async function runTests(
   numberOfFlowVersions: number,
 ): Promise<Map<string, Array<string>>> {
   const testPatternRes = testPatterns.map(patt => new RegExp(patt, 'g'));
-  const testGroups = (
-    await getTestGroups(repoDirPath, envDirPath, onlyChanged)
-  ).filter(testGroup => {
+  let testGroups = await getTestGroups(repoDirPath, envDirPath, onlyChanged);
+  testGroups = testGroups.filter(testGroup => {
     if (testPatternRes.length === 0) {
       return true;
     }
@@ -1016,6 +1020,7 @@ async function runTests(
     while (testGroups.length > 0) {
       // $FlowFixMe[incompatible-type]
       const testGroup: TestGroup = testGroups.shift();
+      console.log('Running tests for ' + testGroup.id);
       // Prepare bin folder to collect flow instances
       await removeTrashFromBinDir();
       let orderedFlowVersions;
