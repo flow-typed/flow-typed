@@ -1356,7 +1356,7 @@ declare module "fs" {
 
   declare function glob<WithFileTypes: boolean = false>(
     pattern: string | $ReadOnlyArray<string>,
-    options: GlobOptions<WithTypes>,
+    options: GlobOptions<WithFileTypes>,
     callback: (
       err: ?ErrnoError,
       matches: Node$Conditional<WithFileTypes, Array<Dirent>, Array<string>>,
