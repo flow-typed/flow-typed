@@ -1479,6 +1479,14 @@ declare module "fs" {
     ftruncate(filehandle: FileHandle, len?: number): Promise<void>,
     futimes(filehandle: FileHandle, atime: number | string | Date, mtime: number | string | Date): Promise<void>,
     lchmod(path: FSPromisePath, mode: number): Promise<void>,
+    glob<WithFileTypes: boolean = false>(
+      pattern: string | $ReadOnlyArray<string>,
+      options?: GlobOptions<WithFileTypes>,
+    ): Node$Conditional<
+      WithFileTypes,
+      AsyncIterator<Dirent>,
+      AsyncIterator<string>,
+    >,
     lchown(path: FSPromisePath, uid: number, guid: number): Promise<void>,
     link(existingPath: FSPromisePath, newPath: FSPromisePath): Promise<void>,
     lstat(path: FSPromisePath): Promise<Stats>,
