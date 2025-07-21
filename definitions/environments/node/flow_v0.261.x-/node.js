@@ -1334,6 +1334,7 @@ declare module "fs" {
     exclude?:
       | ((fileName: Node$Conditional<WithFileTypes, Dirent, string>) => boolean)
       | $ReadOnlyArray<string>,
+    ...
   }>;
 
   /**
