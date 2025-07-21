@@ -1324,7 +1324,7 @@ declare module "fs" {
      * @default false
      * @since v22.2.0
      */
-    WithFileTypes?: WithFileTypes,
+    withFileTypes?: WithFileTypes,
     /**
      * Function to filter out files/directories or a
      * list of glob patterns to be excluded. If a function is provided, return
