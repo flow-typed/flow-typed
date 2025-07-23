@@ -153,3 +153,65 @@ fs.readFile(0, {}, (_, data) => {
 (fs.readdirSync("file.exp", { encoding: "utf8", withFileTypes: true }): Array<fs.Dirent>);
 
 (fs.readdirSync("file.exp", { encoding: "utf8", withFileTypes: false }): Array<string>);
+
+/* glob */
+declare var boolVar: boolean;
+(fs.globSync('some/path', {withFileTypes: true}): Array<fs.Dirent>);
+(fs.globSync('some/path', {withFileTypes: false}): Array<string>);
+(fs.globSync('some/path', {}): Array<string>);
+(fs.globSync('some/path'): Array<string>);
+(fs.globSync('some/path', {withFileTypes: boolVar}):
+  | Array<string>
+  | Array<fs.Dirent>);
+
+(fs.globSync('some/path', {
+  withFileTypes: true,
+  exclude: (file: fs.Dirent) => false,
+}): Array<fs.Dirent>);
+(fs.globSync('some/path', {
+  withFileTypes: false,
+  exclude: (file: string) => false,
+}): Array<string>);
+(fs.globSync('some/path', {
+  exclude: (file: string) => false,
+}): Array<string>);
+
+(fs.promises.glob('some/path', {
+  withFileTypes: true,
+}): AsyncIterator<fs.Dirent>);
+(fs.promises.glob('some/path', {withFileTypes: false}): AsyncIterator<string>);
+(fs.promises.glob('some/path', {}): AsyncIterator<string>);
+(fs.promises.glob('some/path'): AsyncIterator<string>);
+(fs.promises.glob('some/path', {withFileTypes: boolVar}):
+  | AsyncIterator<string>
+  | AsyncIterator<fs.Dirent>);
+
+
+// $FlowExpectedError - returns Dirents
+(fs.globSync('some/path', {withFileTypes: true}): Array<string>);
+// $FlowExpectedError - returns strings
+(fs.globSync('some/path', {withFileTypes: false}): Array<fs.Dirent>);
+// $FlowExpectedError - returns strings
+(fs.globSync('some/path', {}): Array<fs.Dirent>);
+// $FlowExpectedError - returns strings
+(fs.globSync('some/path'): Array<fs.Dirent>);
+// $FlowExpectedError - returns strings or Dirents
+(fs.globSync('some/path', {withFileTypes: boolVar}): Array<string>);
+// $FlowExpectedError - returns strings or Dirents
+(fs.globSync('some/path', {withFileTypes: boolVar}): Array<fs.Dirent>);
+
+(fs.globSync('some/path', {
+  withFileTypes: true,
+  // $FlowExpectedError - arg is a Dirent
+  exclude: (file: string) => false,
+}): Array<fs.Dirent>);
+(fs.globSync('some/path', {
+  withFileTypes: false,
+  // $FlowExpectedError - arg is a string
+  exclude: (file: fs.Dirent) => false,
+}): Array<string>);
+(fs.globSync('some/path', {
+  // $FlowExpectedError - arg is a string
+  exclude: (file: fs.Dirent) => false,
+}): Array<string>);
+
