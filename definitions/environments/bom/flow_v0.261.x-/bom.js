@@ -660,38 +660,6 @@ declare class FormData {
     entries(): Iterator<[string, FormDataEntryValue]>;
 }
 
-declare class MutationRecord {
-    type: 'attributes' | 'characterData' | 'childList';
-    target: Node;
-    addedNodes: NodeList<Node>;
-    removedNodes: NodeList<Node>;
-    previousSibling: ?Node;
-    nextSibling: ?Node;
-    attributeName: ?string;
-    attributeNamespace: ?string;
-    oldValue: ?string;
-}
-
-type MutationObserverInitRequired =
-    | { childList: true, ... }
-    | { attributes: true, ... }
-    | { characterData: true, ... }
-
-declare type MutationObserverInit = MutationObserverInitRequired & {
-  subtree?: boolean,
-  attributeOldValue?: boolean,
-  characterDataOldValue?: boolean,
-  attributeFilter?: Array<string>,
-  ...
-}
-
-declare class MutationObserver {
-    constructor(callback: (arr: Array<MutationRecord>, observer: MutationObserver) => mixed): void;
-    observe(target: Node, options: MutationObserverInit): void;
-    takeRecords(): Array<MutationRecord>;
-    disconnect(): void;
-}
-
 declare type IntersectionObserverEntry = {
   boundingClientRect: DOMRectReadOnly,
   intersectionRatio: number,
@@ -1639,21 +1607,6 @@ declare class Request {
     formData(): Promise<FormData>;
     json(): Promise<any>;
     text(): Promise<string>;
-}
-
-declare class AbortController {
-    constructor(): void;
-    +signal: AbortSignal;
-    abort(reason?: any): void;
-}
-
-declare class AbortSignal extends EventTarget {
-    +aborted: boolean;
-    +reason: any;
-    abort(reason?: any): AbortSignal;
-    onabort: (event: Event) => mixed;
-    throwIfAborted(): void;
-    timeout(time: number): AbortSignal;
 }
 
 declare function fetch(input: RequestInfo, init?: RequestOptions): Promise<Response>;
