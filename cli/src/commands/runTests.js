@@ -25,6 +25,7 @@ import {ValidationError} from '../lib/ValidationError';
 export type Args = {
   path?: mixed, // string
   onlyChanged?: mixed, //boolean
+  environmentOnly?: boolean, // boolean
   numberOfFlowVersions?: mixed, // number
   testPatterns: mixed, // Array<string>
   ...
@@ -95,11 +96,18 @@ async function getTestGroups(
   repoDirPath: string,
   envDirPath: string,
   onlyChanged: boolean = false,
+  environmentOnly: boolean = false,
 ): Promise<Array<TestGroup>> {
   let libDefs = [
     ...(await getLibDefs(repoDirPath)),
     ...(await getLibDefs(envDirPath)),
   ];
+  if (environmentOnly) {
+    libDefs = libDefs.filter(def =>
+      def.path.includes('/definitions/environments/'),
+    );
+  }
+
   if (onlyChanged) {
     const diff = await getDefinitionsDiff();
     const baseDiff: string[] = diff
@@ -980,9 +988,15 @@ async function runTests(
   testPatterns: Array<string>,
   onlyChanged?: boolean,
   numberOfFlowVersions: number,
+  environmentOnly: boolean,
 ): Promise<Map<string, Array<string>>> {
   const testPatternRes = testPatterns.map(patt => new RegExp(patt, 'g'));
-  let testGroups = await getTestGroups(repoDirPath, envDirPath, onlyChanged);
+  let testGroups = await getTestGroups(
+    repoDirPath,
+    envDirPath,
+    onlyChanged,
+    environmentOnly,
+  );
   testGroups = testGroups.filter(testGroup => {
     if (testPatternRes.length === 0) {
       return true;
@@ -1078,6 +1092,11 @@ export function setup(yargs: Yargs): Yargs {
         description: 'Run only changed definition tests',
         demandOption: false,
       },
+      environmentOnly: {
+        type: 'boolean',
+        description: 'Run only environment definition tests',
+        demandOption: false,
+      },
       numberOfFlowVersions: {
         type: 'number',
         description: 'Only run against the latest X versions of flow',
@@ -1103,6 +1122,7 @@ export async function run(argv: Args): Promise<number> {
     : [];
   const onlyChanged = Boolean(argv.onlyChanged);
   const numberOfFlowVersions = Number(argv.numberOfFlowVersions) || 15;
+  const environmentOnly = Boolean(argv.environmentOnly) || false;
 
   const cwd = process.cwd();
   const basePath = argv.path ? String(argv.path) : cwd;
@@ -1116,9 +1136,9 @@ export async function run(argv: Args): Promise<number> {
     : path.join(__dirname, '..', '..', '..', 'definitions', 'environments');
 
   console.info(
-    `Running ${
-      onlyChanged ? 'changed' : ''
-    } definition tests against latest ${colors.green(
+    `Running ${onlyChanged ? 'changed' : 'all'} ${
+      environmentOnly ? 'environment' : 'definition'
+    } tests against latest ${colors.green(
       numberOfFlowVersions.toString(),
     )} flow versions in ${path.join(repoDirPath, '..')}...\n`,
   );
@@ -1131,6 +1151,7 @@ export async function run(argv: Args): Promise<number> {
       testPatterns,
       onlyChanged,
       numberOfFlowVersions,
+      environmentOnly,
     );
   } catch (e) {
     if (e instanceof ValidationError) {
