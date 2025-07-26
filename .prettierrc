@@ -1,4 +1,7 @@
 ---
 singleQuote: true
-trailingComma: "es5"
-parser: "flow"
+trailingComma: 'es5'
+overrides:
+  - files: '*.js'
+    options:
+      parser: 'flow'
