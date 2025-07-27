@@ -2,12 +2,11 @@
   "deps": {},
   "envDeps": {
     "bom": ["v0.261.x-"],
+    "dom": ["v0.261.x-"],
     "cssom": ["v0.261.x-"],
     "geometry": ["v0.261.x-"],
     "html": ["v0.261.x-"],
-    "node": ["v0.261.x-"],
     "serviceworkers": ["v0.261.x-"],
-    "streams": ["v0.261.x-"],
-    "web-animations": ["v0.261.x-"]
+    "streams": ["v0.261.x-"]
   }
 }
