@@ -151,8 +151,8 @@ describe('json-api', () => {
       // $FlowExpectedError[incompatible-cast]
       source: 1,
     }: JsonApi$Error);
-    // $FlowExpectedError[prop-missing]
     ({
+      // $FlowExpectedError[prop-missing]
       source: {
         foo: 'test',
       },
@@ -169,7 +169,7 @@ describe('json-api', () => {
       version: 'test',
       meta: {
         foo: 'test',
-      }
+      },
     }: JsonApi$Object);
 
     ({
@@ -208,7 +208,7 @@ describe('json-api', () => {
       type: 'test',
       meta: {
         foo: 'a',
-      }
+      },
     }: JsonApi$ResourceIdentifier);
 
     // $FlowExpectedError[prop-missing]
@@ -251,10 +251,12 @@ describe('json-api', () => {
           href: 'test',
         },
       },
-      data: [{
-        id: 'test',
-        type: 'test',
-      }],
+      data: [
+        {
+          id: 'test',
+          type: 'test',
+        },
+      ],
       meta: {
         a: 'test',
         b: 1,
@@ -307,27 +309,27 @@ describe('json-api', () => {
       type: 'test',
       // $FlowExpectedError[incompatible-cast]
       id: 1,
-     }: JsonApi$Resource);
-     ({
+    }: JsonApi$Resource);
+    ({
       type: 'test',
       // $FlowExpectedError[incompatible-cast]
       attributes: 1,
-     }: JsonApi$Resource);
-     ({
+    }: JsonApi$Resource);
+    ({
       type: 'test',
       // $FlowExpectedError[incompatible-cast]
       relationships: 1,
-     }: JsonApi$Resource);
-     ({
+    }: JsonApi$Resource);
+    ({
       type: 'test',
       // $FlowExpectedError[incompatible-cast]
       links: 1,
-     }: JsonApi$Resource);
-     ({
+    }: JsonApi$Resource);
+    ({
       type: 'test',
       // $FlowExpectedError[incompatible-cast]
       meta: 1,
-     }: JsonApi$Resource);
+    }: JsonApi$Resource);
   });
 
   test('JsonApi$DataDocument', () => {
@@ -342,21 +344,21 @@ describe('json-api', () => {
       data: [resource, resourceIdentifier],
     }: JsonApi$DataDocument);
     ({
-    data: resource,
+      data: resource,
     }: JsonApi$DataDocument);
     ({
-    data: resourceIdentifier,
+      data: resourceIdentifier,
     }: JsonApi$DataDocument);
     ({
-    data: null,
-    meta,
-    jsonapi: object,
-    links,
-    included: [resource],
+      data: null,
+      meta,
+      jsonapi: object,
+      links,
+      included: [resource],
     }: JsonApi$DataDocument);
     ({
-    data: null,
-    links: paginationLinks,
+      data: null,
+      links: paginationLinks,
     }: JsonApi$DataDocument);
 
     // $FlowExpectedError[prop-missing]

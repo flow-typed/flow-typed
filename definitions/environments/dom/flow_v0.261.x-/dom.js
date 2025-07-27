@@ -1336,9 +1336,7 @@ declare class DOMTokenList {
 }
 
 
-declare class Element extends Node implements Animatable {
-  animate(keyframes: Keyframe[] | PropertyIndexedKeyframes | null, options?: number | KeyframeAnimationOptions): Animation;
-  getAnimations(options?: GetAnimationsOptions): Animation[];
+declare class Element extends Node mixins mixin$Animatable {
   assignedSlot: ?HTMLSlotElement;
   attachShadow(shadowRootInitDict: ShadowRootInit): ShadowRoot;
   attributes: NamedNodeMap;
