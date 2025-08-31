@@ -822,6 +822,36 @@ declare class SecurityPolicyViolationEvent extends Event {
   +columnNumber: number;
 };
 
+https://developer.mozilla.org/en-US/docs/Web/API/Scheduler
+type AbortSignalReason = any;
+
+declare class AbortSignal extends EventTarget {
+  aborted: boolean;
+  +reason: AbortSignalReason;
+  static abort(reason: any): AbortSignal;
+  static any(iterable: Iterable<AbortSignal>): AbortSignal;
+  static timeout(time: number): AbortSignal;
+  throwIfAborted(): void;
+}
+
+declare class TaskSignal extends AbortSignal {
+  +priority: number;
+}
+
+type SchedulerPostTaskOptions = {
+  priority?: "user-blocking" | "user-visible" | "background",
+  signal?: TaskSignal | AbortSignal,
+  delay?: number,
+};
+
+declare class Scheduler {
+  postTask<T>(
+    callback: () => T,
+    options?: SchedulerPostTaskOptions,
+  ): Promise<T>;
+  yield(): Promise<void | AbortSignalReason>;
+}
+
 // https://developer.mozilla.org/en-US/docs/Web/API/USBConnectionEvent
 declare class USBConnectionEvent extends Event {
   device: USBDevice,
