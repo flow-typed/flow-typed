@@ -822,6 +822,9 @@ declare class SecurityPolicyViolationEvent extends Event {
   +columnNumber: number;
 };
 
+// https://developer.mozilla.org/en-US/docs/Web/API/Window/structuredClone
+declare function structuredClone<T>(value: T, options?: {| transfer: any[] |}): T;
+
 // https://developer.mozilla.org/en-US/docs/Web/API/USBConnectionEvent
 declare class USBConnectionEvent extends Event {
   device: USBDevice,
