@@ -822,20 +822,9 @@ declare class SecurityPolicyViolationEvent extends Event {
   +columnNumber: number;
 };
 
-https://developer.mozilla.org/en-US/docs/Web/API/Scheduler
-type AbortSignalReason = any;
-
-declare class AbortSignal extends EventTarget {
-  aborted: boolean;
-  +reason: AbortSignalReason;
-  static abort(reason: any): AbortSignal;
-  static any(iterable: Iterable<AbortSignal>): AbortSignal;
-  static timeout(time: number): AbortSignal;
-  throwIfAborted(): void;
-}
-
+// https://developer.mozilla.org/en-US/docs/Web/API/Scheduler
 declare class TaskSignal extends AbortSignal {
-  +priority: number;
+  readonly priority: number;
 }
 
 type SchedulerPostTaskOptions = {
