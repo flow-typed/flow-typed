@@ -822,6 +822,25 @@ declare class SecurityPolicyViolationEvent extends Event {
   +columnNumber: number;
 };
 
+// https://developer.mozilla.org/en-US/docs/Web/API/Scheduler
+declare class TaskSignal extends AbortSignal {
+  readonly priority: number;
+}
+
+type SchedulerPostTaskOptions = {
+  priority?: "user-blocking" | "user-visible" | "background",
+  signal?: TaskSignal | AbortSignal,
+  delay?: number,
+};
+
+declare class Scheduler {
+  postTask<T>(
+    callback: () => T,
+    options?: SchedulerPostTaskOptions,
+  ): Promise<T>;
+  yield(): Promise<void | AbortSignalReason>;
+}
+
 // https://developer.mozilla.org/en-US/docs/Web/API/Window/structuredClone
 declare function structuredClone<T>(value: T, options?: {| transfer: any[] |}): T;
 
