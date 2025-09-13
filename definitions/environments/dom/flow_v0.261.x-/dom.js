@@ -824,7 +824,7 @@ declare class SecurityPolicyViolationEvent extends Event {
 
 // https://developer.mozilla.org/en-US/docs/Web/API/Scheduler
 declare class TaskSignal extends AbortSignal {
-  readonly priority: number;
+  +priority: number;
 }
 
 type SchedulerPostTaskOptions = {
