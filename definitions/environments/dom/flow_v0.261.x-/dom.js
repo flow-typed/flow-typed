@@ -838,7 +838,7 @@ declare class Scheduler {
     callback: () => T,
     options?: SchedulerPostTaskOptions,
   ): Promise<T>;
-  yield(): Promise<void | AbortSignalReason>;
+  yield(): Promise<void>;
 }
 
 // https://developer.mozilla.org/en-US/docs/Web/API/Window/structuredClone
