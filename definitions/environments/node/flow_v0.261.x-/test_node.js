@@ -7,6 +7,7 @@ import events from 'events';
 import fs from 'fs';
 import os from 'os';
 import path from 'path';
+import readline from 'readline';
 import util from 'util';
 import url from 'url';
 import {
@@ -25,6 +26,7 @@ import nodeFs from 'node:fs';
 import nodeFsPromises from 'node:fs/promises';
 import nodeOs from 'node:os';
 import nodePath from 'node:path';
+import nodeReadline from 'node:readline';
 import nodeUtil from 'node:util';
 import nodeUrl from 'node:url';
 import {
@@ -112,6 +114,12 @@ describe('node', () => {
   describe('node:path', () => {
     it('should retrieve the corresponding Flow core types', () => {
       (nodePath.resolve: typeof path.resolve);
+    });
+  });
+
+  describe('node:readline', () => {
+    it('should retrieve the corresponding Flow core types', () => {
+      (nodeReadline.createInterface: typeof readline.createInterface);
     });
   });
 

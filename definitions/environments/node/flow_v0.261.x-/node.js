@@ -3555,6 +3555,10 @@ declare module 'node:process' {
   declare module.exports: $Exports<'process'>;
 }
 
+declare module 'node:readline' {
+  declare module.exports: $Exports<'readline'>;
+}
+
 declare module 'node:util' {
   declare module.exports: $Exports<'util'>;
 }
