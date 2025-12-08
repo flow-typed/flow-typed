@@ -3519,6 +3519,10 @@ declare module 'node:assert/strict' {
   declare module.exports: $Exports<'assert'>['strict'];
 }
 
+declare module 'node:crypto' {
+  declare module.exports: $Exports<'crypto'>;
+}
+
 declare module 'node:events' {
   declare module.exports: $Exports<'events'>;
 }
@@ -3549,6 +3553,10 @@ declare module 'process' {
 
 declare module 'node:process' {
   declare module.exports: $Exports<'process'>;
+}
+
+declare module 'node:readline' {
+  declare module.exports: $Exports<'readline'>;
 }
 
 declare module 'node:util' {

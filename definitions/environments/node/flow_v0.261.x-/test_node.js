@@ -2,10 +2,12 @@
 import { describe, it, test } from 'flow-typed-test';
 
 import assert from 'assert';
+import crypto from 'crypto';
 import events from 'events';
 import fs from 'fs';
 import os from 'os';
 import path from 'path';
+import readline from 'readline';
 import util from 'util';
 import url from 'url';
 import {
@@ -15,6 +17,7 @@ import {
 
 import nodeAssert from 'node:assert';
 import nodeAssertStrict from 'node:assert/strict';
+import nodeCrypto from 'node:crypto';
 import nodeEvents from 'node:events';
 import fsPromises from 'fs/promises';
 import importProcess from 'process';
@@ -23,6 +26,7 @@ import nodeFs from 'node:fs';
 import nodeFsPromises from 'node:fs/promises';
 import nodeOs from 'node:os';
 import nodePath from 'node:path';
+import nodeReadline from 'node:readline';
 import nodeUtil from 'node:util';
 import nodeUrl from 'node:url';
 import {
@@ -40,6 +44,12 @@ describe('node', () => {
   describe('node:assert/strict', () => {
     it('should retrieve the corresponding Flow core types', () => {
       (nodeAssertStrict.equal: typeof assert.strict.equal);
+    });
+  });
+
+  describe('node:crypto', () => {
+    it('should retrieve the corresponding Flow core types', () => {
+      (nodeCrypto.createHash: typeof crypto.createHash);
     });
   });
 
@@ -104,6 +114,12 @@ describe('node', () => {
   describe('node:path', () => {
     it('should retrieve the corresponding Flow core types', () => {
       (nodePath.resolve: typeof path.resolve);
+    });
+  });
+
+  describe('node:readline', () => {
+    it('should retrieve the corresponding Flow core types', () => {
+      (nodeReadline.createInterface: typeof readline.createInterface);
     });
   });
 
