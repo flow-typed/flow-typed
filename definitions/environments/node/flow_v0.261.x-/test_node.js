@@ -2,6 +2,7 @@
 import { describe, it, test } from 'flow-typed-test';
 
 import assert from 'assert';
+import crypto from 'crypto';
 import events from 'events';
 import fs from 'fs';
 import os from 'os';
@@ -15,6 +16,7 @@ import {
 
 import nodeAssert from 'node:assert';
 import nodeAssertStrict from 'node:assert/strict';
+import nodeCrypto from 'node:crypto';
 import nodeEvents from 'node:events';
 import fsPromises from 'fs/promises';
 import importProcess from 'process';
@@ -40,6 +42,12 @@ describe('node', () => {
   describe('node:assert/strict', () => {
     it('should retrieve the corresponding Flow core types', () => {
       (nodeAssertStrict.equal: typeof assert.strict.equal);
+    });
+  });
+
+  describe('node:crypto', () => {
+    it('should retrieve the corresponding Flow core types', () => {
+      (nodeCrypto.createHash: typeof crypto.createHash);
     });
   });
 
