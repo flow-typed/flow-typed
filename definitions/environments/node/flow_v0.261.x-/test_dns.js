@@ -22,20 +22,20 @@ dns.lookup("test.com", { family: 6 }, (err, address, family) => {
   (family: number);
 });
 
-// $FlowExpectedError[incompatible-call]
+// $FlowExpectedError[incompatible-type]
 dns.lookup(); // error
 
-// $FlowExpectedError[incompatible-call]
+// $FlowExpectedError[incompatible-type]
 dns.lookup("test.com"); // error
 
-// $FlowExpectedError[incompatible-call]
+// $FlowExpectedError[incompatible-type]
 dns.lookup("test.com", 4); // error
 
-// $FlowExpectedError[incompatible-call]
+// $FlowExpectedError[incompatible-type]
 dns.lookup("test.com", { family: 6 }); // error
 
-// $FlowExpectedError[incompatible-call]
+// $FlowExpectedError[incompatible-type]
 dns.lookup("test.com", null, (err: mixed, address: mixed, family: mixed) => {}); // error
 
-// $FlowExpectedError[incompatible-call]
+// $FlowExpectedError[incompatible-type]
 dns.lookup((err: mixed, address: mixed, family: mixed) => {}); // error

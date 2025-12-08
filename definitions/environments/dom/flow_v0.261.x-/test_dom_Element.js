@@ -11,11 +11,11 @@ let tests = [
     element.scrollIntoView({ behavior: 'smooth' });
 
     // fails
-    // $FlowExpectedError[incompatible-call]
+    // $FlowExpectedError[incompatible-type]
     element.scrollIntoView({ behavior: 'invalid' });
-    // $FlowExpectedError[incompatible-call]
+    // $FlowExpectedError[incompatible-type]
     element.scrollIntoView({ block: 'invalid' });
-    // $FlowExpectedError[incompatible-call]
+    // $FlowExpectedError[incompatible-type]
     element.scrollIntoView(1);
   }
 ];

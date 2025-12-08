@@ -72,7 +72,7 @@ describe('node', () => {
     it('should retrieve the corresponding Flow core types', () => {
       const returnValue = process.cwd();
       (importProcess.cwd(): typeof returnValue);
-      // $FlowExpectedError[incompatible-cast] does not match return type of process function
+      // $FlowExpectedError[incompatible-type] does not match return type of process function
       (importProcess.cwd(): number);
       // $FlowExpectedError[extra-arg] does not match  type of process function
       (importProcess.cwd(''));
@@ -86,7 +86,7 @@ describe('node', () => {
     it('should retrieve the corresponding Flow core types', () => {
       const returnValue = process.cwd();
       (nodeProcess.cwd(): typeof returnValue);
-      // $FlowExpectedError[incompatible-cast] does not match return type of process function
+      // $FlowExpectedError[incompatible-type] does not match return type of process function
       (nodeProcess.cwd(): number);
       // $FlowExpectedError[extra-arg] does not match  type of process function
       (nodeProcess.cwd(''));
@@ -146,7 +146,7 @@ describe('node', () => {
 
     test('isMainThread', () => {
       (isMainThread: boolean);
-      // $FlowExpectedError[incompatible-cast]
+      // $FlowExpectedError[incompatible-type]
       (isMainThread: string);
     });
   });
@@ -162,7 +162,7 @@ describe('node', () => {
 
     test('isMainThread', () => {
       (nodeIsMainThread: boolean);
-      // $FlowExpectedError[incompatible-cast]
+      // $FlowExpectedError[incompatible-type]
       (nodeIsMainThread: string);
     });
   });

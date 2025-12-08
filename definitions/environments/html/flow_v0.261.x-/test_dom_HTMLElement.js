@@ -20,11 +20,11 @@ let tests = [
     element.scrollIntoView({behavior: 'smooth'});
 
     // fails
-    // $FlowExpectedError[incompatible-call]
+    // $FlowExpectedError[incompatible-type]
     element.scrollIntoView({behavior: 'invalid'});
-    // $FlowExpectedError[incompatible-call]
+    // $FlowExpectedError[incompatible-type]
     element.scrollIntoView({block: 'invalid'});
-    // $FlowExpectedError[incompatible-call]
+    // $FlowExpectedError[incompatible-type]
     element.scrollIntoView(1);
   },
 
@@ -52,29 +52,29 @@ let tests = [
     element.querySelectorAll('a') as NodeList<HTMLAnchorElement>;
 
     // overly broad input (fails)
-    // $FlowExpectedError[incompatible-cast]
+    // $FlowExpectedError[incompatible-type]
     element.getElementsByTagName(str) as HTMLCollection<HTMLAnchorElement>;
-    // $FlowExpectedError[incompatible-cast]
+    // $FlowExpectedError[incompatible-type]
     element.getElementsByTagNameNS(
       null,
       str,
     ) as HTMLCollection<HTMLAnchorElement>;
-    // $FlowExpectedError[incompatible-cast]
+    // $FlowExpectedError[incompatible-type]
     element.querySelector(str) as HTMLAnchorElement | null;
-    // $FlowExpectedError[incompatible-cast]
+    // $FlowExpectedError[incompatible-type]
     element.querySelectorAll(str) as NodeList<HTMLAnchorElement>;
 
     // wrong specific input (fails)
-    // $FlowExpectedError[incompatible-cast]
+    // $FlowExpectedError[incompatible-type]
     element.getElementsByTagName('div') as HTMLCollection<HTMLAnchorElement>;
-    // $FlowExpectedError[incompatible-cast]
+    // $FlowExpectedError[incompatible-type]
     element.getElementsByTagNameNS(
       null,
       'div',
     ) as HTMLCollection<HTMLAnchorElement>;
-    // $FlowExpectedError[incompatible-cast]
+    // $FlowExpectedError[incompatible-type]
     element.querySelector('div') as HTMLAnchorElement | null;
-    // $FlowExpectedError[incompatible-cast]
+    // $FlowExpectedError[incompatible-type]
     element.querySelectorAll('div') as NodeList<HTMLAnchorElement>;
   },
 
@@ -86,9 +86,9 @@ let tests = [
     element.focus({preventScroll: false});
 
     // fails
-    // $FlowExpectedError[incompatible-call]
+    // $FlowExpectedError[incompatible-type]
     element.focus({preventScroll: 'invalid'});
-    // $FlowExpectedError[incompatible-call]
+    // $FlowExpectedError[incompatible-type]
     element.focus(1);
   },
 ];

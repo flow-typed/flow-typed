@@ -27,19 +27,19 @@ fs.readFile(0, {}, (_, data) => {
 /* readFileSync */
 
 (fs.readFileSync("file.exp") : Buffer);
-// $FlowExpectedError[incompatible-cast]
+// $FlowExpectedError[incompatible-type]
 (fs.readFileSync("file.exp") : string); // error
 
 (fs.readFileSync("file.exp", "blah") : string);
-// $FlowExpectedError[incompatible-cast]
+// $FlowExpectedError[incompatible-type]
 (fs.readFileSync("file.exp", "blah") : Buffer); // error
 
 (fs.readFileSync("file.exp", { encoding: "blah" }) : string);
-// $FlowExpectedError[incompatible-cast]
+// $FlowExpectedError[incompatible-type]
 (fs.readFileSync("file.exp", { encoding: "blah" }) : Buffer); // error
 
 (fs.readFileSync("file.exp", {}) : Buffer);
-// $FlowExpectedError[incompatible-cast]
+// $FlowExpectedError[incompatible-type]
 (fs.readFileSync("file.exp", {}) : string); // error
 
 /* write */
@@ -121,7 +121,7 @@ fs.readFile(0, {}, (_, data) => {
 
 (fs.readdir("file.exp", { withFileTypes: true }, (err, files) => {
   (err: ?ErrnoError);
-  // $FlowExpectedError[incompatible-cast]
+  // $FlowExpectedError[incompatible-type]
   (files: Array<string>); // error
 }): void);
 
@@ -147,7 +147,7 @@ fs.readFile(0, {}, (_, data) => {
 
 (fs.readdirSync("file.exp", { withFileTypes: false }): Array<string>);
 
-// $FlowExpectedError[incompatible-cast]
+// $FlowExpectedError[incompatible-type]
 (fs.readdirSync("file.exp", { withFileTypes: true }): Array<string>); // error
 
 (fs.readdirSync("file.exp", { encoding: "utf8", withFileTypes: true }): Array<fs.Dirent>);
@@ -187,31 +187,31 @@ declare var boolVar: boolean;
   | AsyncIterator<fs.Dirent>);
 
 
-// $FlowExpectedError[incompatible-cast] - returns Dirents
+// $FlowExpectedError[incompatible-type] - returns Dirents
 (fs.globSync('some/path', {withFileTypes: true}): Array<string>);
-// $FlowExpectedError[incompatible-cast] - returns strings
+// $FlowExpectedError[incompatible-type] - returns strings
 (fs.globSync('some/path', {withFileTypes: false}): Array<fs.Dirent>);
-// $FlowExpectedError[incompatible-cast] - returns strings
+// $FlowExpectedError[incompatible-type] - returns strings
 (fs.globSync('some/path', {}): Array<fs.Dirent>);
-// $FlowExpectedError[incompatible-cast] - returns strings
+// $FlowExpectedError[incompatible-type] - returns strings
 (fs.globSync('some/path'): Array<fs.Dirent>);
-// $FlowExpectedError[incompatible-cast] - returns strings or Dirents
+// $FlowExpectedError[incompatible-type] - returns strings or Dirents
 (fs.globSync('some/path', {withFileTypes: boolVar}): Array<string>);
-// $FlowExpectedError[incompatible-cast] - returns strings or Dirents
+// $FlowExpectedError[incompatible-type] - returns strings or Dirents
 (fs.globSync('some/path', {withFileTypes: boolVar}): Array<fs.Dirent>);
 
 (fs.globSync('some/path', {
   withFileTypes: true,
-  // $FlowExpectedError[incompatible-call] - arg is a Dirent
+  // $FlowExpectedError[incompatible-type] - arg is a Dirent
   exclude: (file: string) => false,
 }): Array<fs.Dirent>);
 (fs.globSync('some/path', {
   withFileTypes: false,
-  // $FlowExpectedError[incompatible-call] - arg is a string
+  // $FlowExpectedError[incompatible-type] - arg is a string
   exclude: (file: fs.Dirent) => false,
 }): Array<string>);
 (fs.globSync('some/path', {
-  // $FlowExpectedError[incompatible-call] - arg is a string
+  // $FlowExpectedError[incompatible-type] - arg is a string
   exclude: (file: fs.Dirent) => false,
 }): Array<string>);
 

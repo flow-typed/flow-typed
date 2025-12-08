@@ -26,12 +26,12 @@ let tests = [
   // rootNode must be a Node
   function() {
     document.createNodeIterator(document_body); // valid
-    // $FlowExpectedError[incompatible-call]
+    // $FlowExpectedError[incompatible-type]
     document.createNodeIterator({}); // invalid
   },
   function() {
     document.createTreeWalker(document_body);
-    // $FlowExpectedError[incompatible-call]
+    // $FlowExpectedError[incompatible-type]
     document.createTreeWalker({}); // invalid
   },
   // Type Parameters
@@ -185,22 +185,22 @@ let tests = [
   // NodeFilterInterface
   function() {
     document.createNodeIterator(document_body, -1, node => NodeFilter.FILTER_ACCEPT); // valid
-    // $FlowExpectedError[incompatible-call]
+    // $FlowExpectedError[incompatible-type]
     document.createNodeIterator(document_body, -1, node => 'accept'); // invalid
     document.createNodeIterator(document_body, -1, { acceptNode: node => NodeFilter.FILTER_ACCEPT }); // valid
-    // $FlowExpectedError[incompatible-call]
+    // $FlowExpectedError[incompatible-type]
     document.createNodeIterator(document_body, -1, { acceptNode: node => 'accept' }); // invalid
-    // $FlowExpectedError[incompatible-call]
+    // $FlowExpectedError[incompatible-type]
     document.createNodeIterator(document_body, -1, {}); // invalid
   },
   function() {
     document.createTreeWalker(document_body, -1, node => NodeFilter.FILTER_ACCEPT); // valid
-    // $FlowExpectedError[incompatible-call]
+    // $FlowExpectedError[incompatible-type]
     document.createTreeWalker(document_body, -1, node => 'accept'); // invalid
     document.createTreeWalker(document_body, -1, { acceptNode: node => NodeFilter.FILTER_ACCEPT }); // valid
-    // $FlowExpectedError[incompatible-call]
+    // $FlowExpectedError[incompatible-type]
     document.createTreeWalker(document_body, -1, { acceptNode: node => 'accept' }); // invalid
-    // $FlowExpectedError[incompatible-call]
+    // $FlowExpectedError[incompatible-type]
     document.createTreeWalker(document_body, -1, {}); // invalid
   },
 ];

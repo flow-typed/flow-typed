@@ -8,22 +8,22 @@ if (PluralRules) {
   // $FlowExpectedError[prop-missing]
   const b = PluralRules(); // incorrect
   const c = new PluralRules(); // correct
-  // $FlowExpectedError[incompatible-call]
+  // $FlowExpectedError[incompatible-type]
   new PluralRules(1); // incorrect
   new PluralRules('en'); // correct
   new PluralRules([ 'en', 'pt' ]); // correct
   new PluralRules('en', {
-    // $FlowExpectedError[incompatible-call]
+    // $FlowExpectedError[incompatible-type]
     localeMatcher: 'best one',
-    // $FlowExpectedError[incompatible-call]
+    // $FlowExpectedError[incompatible-type]
     type: 'count',
-    // $FlowExpectedError[incompatible-call]
+    // $FlowExpectedError[incompatible-type]
     minimumIntegerDigits: '',
     minimumFractionDigits: a,
     maximumFractionDigits: b,
-    // $FlowExpectedError[incompatible-call]
+    // $FlowExpectedError[incompatible-type]
     minimumSignificantDigits: c,
-    // $FlowExpectedError[incompatible-call]
+    // $FlowExpectedError[incompatible-type]
     maximumSignificantDigits: '' 
   }); // all kinds of incorrect
   new PluralRules('en', {
@@ -38,7 +38,7 @@ if (PluralRules) {
 
   // $FlowExpectedError[prop-missing]
   new PluralRules().format() // incorrect
-  // $FlowExpectedError[incompatible-call]
+  // $FlowExpectedError[incompatible-type]
   new PluralRules().select() // incorrect
 
   new PluralRules().select(1) // correct
@@ -48,7 +48,7 @@ if (PluralRules) {
   // $FlowExpectedError[prop-missing]
   PluralRules.getCanonicalLocales() // incorrect
 
-  // $FlowExpectedError[incompatible-call]
+  // $FlowExpectedError[incompatible-type]
   PluralRules.supportedLocalesOf(1) // incorrect
   PluralRules.supportedLocalesOf('en') // correct
   PluralRules.supportedLocalesOf([ 'en' ]) // correct

@@ -26,9 +26,9 @@ let tests = [
     isOpen = element.togglePopover({ force: false, source: document.createElement('button') });
     
     // fails
-    // $FlowExpectedError[incompatible-call]
+    // $FlowExpectedError[incompatible-type]
     element.showPopover('invalid');
-    // $FlowExpectedError[incompatible-call]
+    // $FlowExpectedError[incompatible-type]
     element.togglePopover({ force: 'invalid' });
   },
   

@@ -11,13 +11,13 @@ https.get(url, () => {});
 https.get(url, {}, () => {});
 https.get(url, {host: 'localhost'}, () => {});
 
-// $FlowExpectedError[incompatible-call]
+// $FlowExpectedError[incompatible-type]
 https.get(-1); // error
-// $FlowExpectedError[incompatible-call]
+// $FlowExpectedError[incompatible-type]
 https.get({port: 'expects number'}); // error
-// $FlowExpectedError[incompatible-call]
+// $FlowExpectedError[incompatible-type]
 https.get(url, {}, -1); // error
-// $FlowExpectedError[incompatible-call]
+// $FlowExpectedError[incompatible-type]
 https.get(url, {port: 'expects number'}, () => {}); // error
 }
 
@@ -32,13 +32,13 @@ https.request(url, () => {});
 https.request(url, {}, () => {});
 https.request(url, {host: 'localhost'}, () => {});
 
-// $FlowExpectedError[incompatible-call]
+// $FlowExpectedError[incompatible-type]
 https.request(-1); // error
-// $FlowExpectedError[incompatible-call]
+// $FlowExpectedError[incompatible-type]
 https.request({port: 'expects number'}); // error
-// $FlowExpectedError[incompatible-call]
+// $FlowExpectedError[incompatible-type]
 https.request(url, {}, -1); // error
-// $FlowExpectedError[incompatible-call]
+// $FlowExpectedError[incompatible-type]
 https.request(url, {port: 'expects number'}, () => {}); // error
 }
 
@@ -109,32 +109,32 @@ server.listen(8000, undefined, 123, function() {});
 // These should fail
 server.listen(() => {}, {});
 server.listen(function() {}, {});
-// $FlowExpectedError[incompatible-call]
+// $FlowExpectedError[incompatible-type]
 server.listen({}, () => {}, 'localhost', 123);
-// $FlowExpectedError[incompatible-call]
+// $FlowExpectedError[incompatible-type]
 server.listen({}, function() {}, 'localhost', 123);
-// $FlowExpectedError[incompatible-call]
+// $FlowExpectedError[incompatible-type]
 server.listen({}, () => {}, 123);
-// $FlowExpectedError[incompatible-call]
+// $FlowExpectedError[incompatible-type]
 server.listen({}, function() {}, 123);
 server.listen(() => {}, 123);
 server.listen(function() {}, 123);
-// $FlowExpectedError[incompatible-call]
+// $FlowExpectedError[incompatible-type]
 server.listen(() => {}, 'localhost', 123);
-// $FlowExpectedError[incompatible-call]
+// $FlowExpectedError[incompatible-type]
 server.listen(function() {}, 'localhost', 123);
 server.listen(() => {}, 'localhost');
 server.listen(function() {}, 'localhost');
-// $FlowExpectedError[incompatible-call]
+// $FlowExpectedError[incompatible-type]
 server.listen(8443, () => {}, 'localhost', 123);
-// $FlowExpectedError[incompatible-call]
+// $FlowExpectedError[incompatible-type]
 server.listen(8443, function() {}, 'localhost', 123);
-// $FlowExpectedError[incompatible-call]
+// $FlowExpectedError[incompatible-type]
 server.listen(8443, () => {}, 123);
-// $FlowExpectedError[incompatible-call]
+// $FlowExpectedError[incompatible-type]
 server.listen(8443, function() {}, 123);
-// $FlowExpectedError[incompatible-call]
+// $FlowExpectedError[incompatible-type]
 server.listen(8443, () => {}, 'localhost');
-// $FlowExpectedError[incompatible-call]
+// $FlowExpectedError[incompatible-type]
 server.listen(8443, function() {}, 'localhost');
 }

@@ -4,27 +4,27 @@ const a: Intl$NumberFormat = Intl.NumberFormat() // correct
 const b: Intl$NumberFormat = new Intl.NumberFormat() // correct
 // $FlowExpectedError[incompatible-type]
 const c: Intl$DateTimeFormat = new Intl.NumberFormat() // incorrect
-// $FlowExpectedError[incompatible-call]
+// $FlowExpectedError[incompatible-type]
 Intl.NumberFormat(1, {
-  // $FlowExpectedError[incompatible-call]
+  // $FlowExpectedError[incompatible-type]
   localeMatcher: 'best',
-  // $FlowExpectedError[incompatible-call]
+  // $FlowExpectedError[incompatible-type]
   style: 'octal',
-  // $FlowExpectedError[incompatible-call]
+  // $FlowExpectedError[incompatible-type]
   currency: 123,
-  // $FlowExpectedError[incompatible-call]
+  // $FlowExpectedError[incompatible-type]
   currencyDisplay: 'sym',
-  // $FlowExpectedError[incompatible-call]
+  // $FlowExpectedError[incompatible-type]
   useGrouping: 5,
-  // $FlowExpectedError[incompatible-call]
+  // $FlowExpectedError[incompatible-type]
   minimumIntegerDigits: {},
-  // $FlowExpectedError[incompatible-call]
+  // $FlowExpectedError[incompatible-type]
   minimumFractionDigits: '',
-  // $FlowExpectedError[incompatible-call]
+  // $FlowExpectedError[incompatible-type]
   maximumFractionDigits: null,
-  // $FlowExpectedError[incompatible-call]
+  // $FlowExpectedError[incompatible-type]
   minimumSignificantDigits: '',
-  // $FlowExpectedError[incompatible-call]
+  // $FlowExpectedError[incompatible-type]
   maximumSignificantDigits: null
 }) // incorrect
 Intl.NumberFormat('en') // correct
@@ -43,7 +43,7 @@ Intl.NumberFormat([ 'en', 'en-GB' ], {
 const NumberFormat = Intl.NumberFormat;
 // $FlowExpectedError[prop-missing]
 new NumberFormat().select() // incorrect
-// $FlowExpectedError[incompatible-call]
+// $FlowExpectedError[incompatible-type]
 new NumberFormat().format() // incorrect
 
 new NumberFormat().format(1) // correct
@@ -53,7 +53,7 @@ new NumberFormat().resolvedOptions() // correct
 // $FlowExpectedError[prop-missing]
 NumberFormat.getCanonicalLocales() // incorrect
 
-// $FlowExpectedError[incompatible-call]
+// $FlowExpectedError[incompatible-type]
 NumberFormat.supportedLocalesOf(1) // incorrect
 NumberFormat.supportedLocalesOf('en') // correct
 NumberFormat.supportedLocalesOf([ 'en' ]) // correct

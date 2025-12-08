@@ -4,33 +4,33 @@ const a: Intl$DateTimeFormat = Intl.DateTimeFormat() // correct
 const b: Intl$DateTimeFormat = new Intl.DateTimeFormat() // correct
 // $FlowExpectedError[incompatible-type]
 const c: Intl$NumberFormat = new Intl.DateTimeFormat() // incorrect
-// $FlowExpectedError[incompatible-call]
+// $FlowExpectedError[incompatible-type]
 Intl.DateTimeFormat(1, {
-  // $FlowExpectedError[incompatible-call]
+  // $FlowExpectedError[incompatible-type]
   localeMatcher: 'look',
-  // $FlowExpectedError[incompatible-call]
+  // $FlowExpectedError[incompatible-type]
   timeZone: 1,
-  // $FlowExpectedError[incompatible-call]
+  // $FlowExpectedError[incompatible-type]
   hour12: '',
-  // $FlowExpectedError[incompatible-call]
+  // $FlowExpectedError[incompatible-type]
   formatMatcher: 'basic fit',
-  // $FlowExpectedError[incompatible-call]
+  // $FlowExpectedError[incompatible-type]
   weekday: '2-digit',
-  // $FlowExpectedError[incompatible-call]
+  // $FlowExpectedError[incompatible-type]
   era: '',
-  // $FlowExpectedError[incompatible-call]
+  // $FlowExpectedError[incompatible-type]
   year: '',
-  // $FlowExpectedError[incompatible-call]
+  // $FlowExpectedError[incompatible-type]
   month: '',
-  // $FlowExpectedError[incompatible-call]
+  // $FlowExpectedError[incompatible-type]
   day: '',
-  // $FlowExpectedError[incompatible-call]
+  // $FlowExpectedError[incompatible-type]
   hour: '',
-  // $FlowExpectedError[incompatible-call]
+  // $FlowExpectedError[incompatible-type]
   minute: 'long',
-  // $FlowExpectedError[incompatible-call]
+  // $FlowExpectedError[incompatible-type]
   second: 'short',
-  // $FlowExpectedError[incompatible-call]
+  // $FlowExpectedError[incompatible-type]
   timeZoneName: 'narrow'
 }) // incorrect
 Intl.DateTimeFormat('en') // correct
@@ -66,7 +66,7 @@ new DateTimeFormat().resolvedOptions() // correct
 // $FlowExpectedError[prop-missing]
 DateTimeFormat.getCanonicalLocales() // incorrect
 
-// $FlowExpectedError[incompatible-call]
+// $FlowExpectedError[incompatible-type]
 DateTimeFormat.supportedLocalesOf(1) // incorrect
 DateTimeFormat.supportedLocalesOf('en') // correct
 DateTimeFormat.supportedLocalesOf([ 'en' ]) // correct

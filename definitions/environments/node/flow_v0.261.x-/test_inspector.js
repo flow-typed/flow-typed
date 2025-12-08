@@ -9,16 +9,16 @@ inspector.open(8080);
 inspector.open(8080, 'http://localhost');
 inspector.open(8080, 'http://localhost', true);
 
-// $FlowExpectedError[incompatible-call]
+// $FlowExpectedError[incompatible-type]
 inspector.open('8080'); // error
-// $FlowExpectedError[incompatible-call]
+// $FlowExpectedError[incompatible-type]
 inspector.open(8080, 127001); // error
-// $FlowExpectedError[incompatible-call]
+// $FlowExpectedError[incompatible-type]
 inspector.open(8080, 'http://localhost', 1000); // error
 
 (inspector.open() : void);
 
-// $FlowExpectedError[incompatible-cast]
+// $FlowExpectedError[incompatible-type]
 (inspector.open() : string); // error
 
 /* close */
@@ -27,7 +27,7 @@ inspector.close();
 
 (inspector.close() : void);
 
-// $FlowExpectedError[incompatible-cast]
+// $FlowExpectedError[incompatible-type]
 (inspector.close() : string); // error
 
 /* console */
@@ -40,7 +40,7 @@ inspector.url();
 
 (inspector.url() : string | void);
 
-// $FlowExpectedError[incompatible-cast]
+// $FlowExpectedError[incompatible-type]
 (inspector.url() : number); // error
 
 /* waitForDebugger */
@@ -49,7 +49,7 @@ inspector.waitForDebugger();
 
 (inspector.waitForDebugger() : void);
 
-// $FlowExpectedError[incompatible-cast]
+// $FlowExpectedError[incompatible-type]
 (inspector.waitForDebugger() : number); // error
 
 /* Session.connect */
@@ -95,11 +95,11 @@ session.post('Profiler.enable');
 session.post('Runtime.evaluate', { expression: '2 + 2' });
 session.post('Profiler.enable', null, () => {});
 
-// $FlowExpectedError[incompatible-call]
+// $FlowExpectedError[incompatible-type]
 session.post(); // error
 
 (session.post('Profiler.enable') : void);
 
-// $FlowExpectedError[incompatible-call]
-// $FlowExpectedError[incompatible-cast]
+// $FlowExpectedError[incompatible-type]
+// $FlowExpectedError[incompatible-type]
 (session.post() : string); // error

@@ -1,20 +1,20 @@
 /* @flow */
 
 const a = new URLSearchParams("key1=value1"); // correct
-// $FlowExpectedError[incompatible-call]
+// $FlowExpectedError[incompatible-type]
 const b = new URLSearchParams(['key1', 'value1']); // not correct
 const c = new URLSearchParams({'key1': 'value1'}); // correct
 const d = new URLSearchParams(c); // correct
 const e: URLSearchParams = new URLSearchParams(); // correct
 e.append('key1', 'value1'); // correct
-// $FlowExpectedError[incompatible-call]
+// $FlowExpectedError[incompatible-type]
 e.append('key1'); // not correct
-// $FlowExpectedError[incompatible-call]
+// $FlowExpectedError[incompatible-type]
 e.append({'key1': 'value1'}); // not correct
 e.set('key1', 'value1'); // correct
-// $FlowExpectedError[incompatible-call]
+// $FlowExpectedError[incompatible-type]
 e.set('key1'); // not correct
-// $FlowExpectedError[incompatible-call]
+// $FlowExpectedError[incompatible-type]
 e.set({'key1': 'value1'}); // not correct
 
 // $FlowExpectedError[incompatible-type]

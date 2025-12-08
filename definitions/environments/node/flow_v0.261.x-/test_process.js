@@ -7,15 +7,15 @@ process.emitWarning(new Error('blah'));
 process.emitWarning('blah', 'blah');
 process.emitWarning('blah', 'blah', () => {});
 
-// $FlowExpectedError[incompatible-call]
+// $FlowExpectedError[incompatible-type]
 process.emitWarning(); // error
-// $FlowExpectedError[incompatible-call]
+// $FlowExpectedError[incompatible-type]
 process.emitWarning(42); // error
-// $FlowExpectedError[incompatible-call]
+// $FlowExpectedError[incompatible-type]
 process.emitWarning('blah', 42); // error
-// $FlowExpectedError[incompatible-call]
+// $FlowExpectedError[incompatible-type]
 process.emitWarning('blah', 'blah', 42); // error
-// $FlowExpectedError[incompatible-cast]
+// $FlowExpectedError[incompatible-type]
 process.emitWarning('blah') as string; // error
 
 
@@ -29,7 +29,7 @@ process.nextTick(
 );
 
 process.nextTick(
-  // $FlowExpectedError[incompatible-call]
+  // $FlowExpectedError[incompatible-type]
   (a: string, b: number, c: boolean) => {},
   0, // Error: number ~> string
   1,
@@ -37,7 +37,7 @@ process.nextTick(
 );
 
 process.nextTick(
-  // $FlowExpectedError[incompatible-call]
+  // $FlowExpectedError[incompatible-type]
   (a: string, b: number, c: boolean) => {},
   'z',
   'y', // Error: string ~> number
@@ -45,11 +45,11 @@ process.nextTick(
 );
 
 process.nextTick(
-  // $FlowExpectedError[incompatible-call]
+  // $FlowExpectedError[incompatible-type]
   (a: string, b: number, c: boolean) => {} // Error: too few arguments
 );
 
 process.allowedNodeEnvironmentFlags as Set<string>;
 
-// $FlowExpectedError[incompatible-cast]
+// $FlowExpectedError[incompatible-type]
 process.allowedNodeEnvironmentFlags as string; // error

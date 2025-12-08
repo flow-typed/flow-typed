@@ -8,7 +8,7 @@ let tests = [
 
   // moveTo
   function(ctx: CanvasRenderingContext2D) {
-    // $FlowExpectedError[incompatible-call]
+    // $FlowExpectedError[incompatible-type]
     ctx.moveTo('0', '1');  // error: should be numbers
   },
 ];

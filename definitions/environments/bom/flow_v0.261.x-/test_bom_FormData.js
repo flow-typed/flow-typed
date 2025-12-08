@@ -2,14 +2,14 @@
 
 // constructor
 const a: FormData = new FormData(); // correct
-// $FlowExpectedError[incompatible-call]
+// $FlowExpectedError[incompatible-type]
 new FormData(''); // incorrect
-// $FlowExpectedError[incompatible-call]
+// $FlowExpectedError[incompatible-type]
 new FormData(document.createElement('input')); // incorrect
 new FormData(document.createElement('form')); // correct
 new FormData(document.createElement('form'), null); // correct
 new FormData(document.createElement('form'), document.createElement("button")); // correct
-// $FlowExpectedError[incompatible-call]
+// $FlowExpectedError[incompatible-type]
 new FormData(document.createElement('form'), "submitter"); // incorrect
 
 // has
@@ -22,7 +22,7 @@ const d: string = a.get('foo'); // incorrect
 // $FlowExpectedError[incompatible-type]
 const e: Blob = a.get('foo'); // incorrect 
 const f: ?(string | File | Blob) = a.get('foo'); // incorrect
-// $FlowExpectedError[incompatible-call]
+// $FlowExpectedError[incompatible-type]
 a.get(2); // incorrect
 
 // getAll
@@ -31,47 +31,47 @@ const a1: Array<string | File> = a.getAll('foo'); // correct
 const a2: Array<string | File | number> = a.getAll('foo'); // incorrect
 // $FlowExpectedError[incompatible-type]
 const a3: Array<string | Blob | File> = a.getAll('foo'); // incorrect
-// $FlowExpectedError[incompatible-call]
+// $FlowExpectedError[incompatible-type]
 a.getAll(23); // incorrect
 
 // set
 a.set('foo', 'bar'); // correct
-// $FlowExpectedError[incompatible-call]
+// $FlowExpectedError[incompatible-type]
 a.set('foo', {}); // incorrect
-// $FlowExpectedError[incompatible-call]
+// $FlowExpectedError[incompatible-type]
 a.set(2, 'bar'); // incorrect
-// $FlowExpectedError[incompatible-call]
+// $FlowExpectedError[incompatible-type]
 a.set('foo', 'bar', 'baz'); // incorrect
 a.set('bar', new File([], 'q')) // correct
 a.set('bar', new File([], 'q'), 'x') // correct
-// $FlowExpectedError[incompatible-call]
+// $FlowExpectedError[incompatible-type]
 a.set('bar', new File([], 'q'), 2) // incorrect
 a.set('bar', new Blob) // correct
 a.set('bar', new Blob, 'x') // correct
-// $FlowExpectedError[incompatible-call]
+// $FlowExpectedError[incompatible-type]
 a.set('bar', new Blob, 2) // incorrect
 
 // append
 a.append('foo', 'bar'); // correct
-// $FlowExpectedError[incompatible-call]
+// $FlowExpectedError[incompatible-type]
 a.append('foo', {}); // incorrect
-// $FlowExpectedError[incompatible-call]
+// $FlowExpectedError[incompatible-type]
 a.append(2, 'bar'); // incorrect
-// $FlowExpectedError[incompatible-call]
+// $FlowExpectedError[incompatible-type]
 a.append('foo', 'bar', 'baz'); // incorrect
 a.append('foo', 'bar'); // correct
 a.append('bar', new File([], 'q')) // correct
 a.append('bar', new File([], 'q'), 'x') // correct
-// $FlowExpectedError[incompatible-call]
+// $FlowExpectedError[incompatible-type]
 a.append('bar', new File([], 'q'), 2) // incorrect
 a.append('bar', new Blob) // correct
 a.append('bar', new Blob, 'x') // correct
-// $FlowExpectedError[incompatible-call]
+// $FlowExpectedError[incompatible-type]
 a.append('bar', new Blob, 2) // incorrect
 
 // delete
 a.delete('xx'); // correct
-// $FlowExpectedError[incompatible-call]
+// $FlowExpectedError[incompatible-type]
 a.delete(3); // incorrect
 
 // keys

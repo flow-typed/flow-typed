@@ -827,11 +827,11 @@ declare class TaskSignal extends AbortSignal {
   +priority: number;
 }
 
-type SchedulerPostTaskOptions = {
+type SchedulerPostTaskOptions = {|
   priority?: "user-blocking" | "user-visible" | "background",
   signal?: TaskSignal | AbortSignal,
   delay?: number,
-};
+|};
 
 declare class Scheduler {
   postTask<T>(
@@ -963,6 +963,7 @@ declare class HTMLCollection<+Elem: Element> {
   length: number;
   item(nameOrIndex?: any, optionalIndex?: any): Elem | null;
   namedItem(name: string): Elem | null;
+  // $FlowExpectedError[incompatible-variance]
   [index: number | string]: Elem;
 }
 

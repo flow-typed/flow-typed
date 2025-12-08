@@ -13,7 +13,7 @@ let tests = [
     let path = new Path2D();
     path.arcTo(0, 0, 0, 0, 10) as void; // valid
     path.arcTo(0, 0, 0, 0, 10, 20, 5) as void; // valid
-    // $FlowExpectedError[incompatible-call]
+    // $FlowExpectedError[incompatible-type]
     path.arcTo(0, 0, 0, 0, 10, '20', 5) as void; // invalid
   },
 ];
