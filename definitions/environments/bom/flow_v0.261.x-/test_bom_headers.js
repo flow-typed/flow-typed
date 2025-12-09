@@ -1,21 +1,21 @@
 /* @flow */
 
-// $FlowExpectedError[incompatible-call]
+// $FlowExpectedError[incompatible-type]
 const a = new Headers("'Content-Type': 'image/jpeg'"); // not correct
-// $FlowExpectedError[incompatible-call]
+// $FlowExpectedError[incompatible-type]
 const b = new Headers(['Content-Type', 'image/jpeg']); // not correct
 const c = new Headers({'Content-Type': 'image/jpeg'}); // correct
 const d = new Headers(c); // correct
 const e: Headers = new Headers(); // correct
 e.append('Content-Type', 'image/jpeg'); // correct
-// $FlowExpectedError[incompatible-call]
+// $FlowExpectedError[incompatible-type]
 e.append('Content-Type'); // not correct
-// $FlowExpectedError[incompatible-call]
+// $FlowExpectedError[incompatible-type]
 e.append({'Content-Type': 'image/jpeg'}); // not correct
 e.set('Content-Type', 'image/jpeg'); // correct
-// $FlowExpectedError[incompatible-call]
+// $FlowExpectedError[incompatible-type]
 e.set('Content-Type'); // not correct
-// $FlowExpectedError[incompatible-call]
+// $FlowExpectedError[incompatible-type]
 e.set({'Content-Type': 'image/jpeg'}); // not correct
 
 // $FlowExpectedError[incompatible-type]

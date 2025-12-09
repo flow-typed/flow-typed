@@ -7,9 +7,9 @@ const getCanonicalLocales = Intl.getCanonicalLocales;
 if (getCanonicalLocales) {
   // $FlowExpectedError[incompatible-type]
   const b: string = getCanonicalLocales(); // incorrect
-  // $FlowExpectedError[incompatible-call]
+  // $FlowExpectedError[incompatible-type]
   const c: string[] = getCanonicalLocales(null); // incorrect
-  // $FlowExpectedError[incompatible-call]
+  // $FlowExpectedError[incompatible-type]
   const d: string[] = getCanonicalLocales([ 1, 2 ]); // incorrect
   const e: string[] = getCanonicalLocales(); // correct
   const f: string[] = getCanonicalLocales('ar'); // correct

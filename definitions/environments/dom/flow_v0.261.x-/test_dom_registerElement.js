@@ -29,9 +29,9 @@ let tests = [
       prototype: {
         attributeChangedCallback(
           localName: string,
-          // $FlowExpectedError[incompatible-call]
+          // $FlowExpectedError[incompatible-type]
           oldVal: string, // Error: This might be null
-          // $FlowExpectedError[incompatible-call]
+          // $FlowExpectedError[incompatible-type]
           newVal: string, // Error: This might be null
           namespace: string) {}
       },

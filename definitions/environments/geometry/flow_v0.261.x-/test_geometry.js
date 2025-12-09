@@ -37,7 +37,7 @@ matrixA = matrixA.multiply({
 });
 matrixA = matrixA.translateSelf(1.0, 2.0, 3.0);
 
-// $FlowExpectedError[incompatible-call]
+// $FlowExpectedError[incompatible-type]
 matrixA = matrixA.multiply({
   is2D: false,
   a: 2,

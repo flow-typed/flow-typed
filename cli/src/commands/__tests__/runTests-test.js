@@ -70,7 +70,7 @@ describe('run-tests (command)', () => {
     });
 
     afterAll(() => {
-      fs.rmdirSync(testDir, {recursive: true});
+      fs.rmSync(testDir, {force: true, recursive: true});
     });
 
     it('writes the file correctly', async () => {

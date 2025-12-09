@@ -33,7 +33,7 @@ var pipe = new MyReadStream()
 
 pipe as stream.Writable;
 pipe as MyWriteStream;
-// $FlowExpectedError[incompatible-cast]
+// $FlowExpectedError[incompatible-type]
 pipe as MyDuplex; // error
 
 var pipeline = stream.pipeline(
@@ -43,23 +43,23 @@ var pipeline = stream.pipeline(
   new MyWriteStream(),
   error => {
     error as ?Error;
-    // $FlowExpectedError[incompatible-cast]
+    // $FlowExpectedError[incompatible-type]
     error as null; // error
   },
 );
 
 pipeline as MyWriteStream;
-// $FlowExpectedError[incompatible-cast]
+// $FlowExpectedError[incompatible-type]
 pipeline as MyDuplex; // error
 
-// $FlowExpectedError[incompatible-call]
+// $FlowExpectedError[incompatible-type]
 stream.pipeline(
   new MyWriteStream(), // error - first stream must be Readable
   new MyDuplex(),
   () => {},
 );
 
-// $FlowExpectedError[incompatible-call]
+// $FlowExpectedError[incompatible-type]
 stream.pipeline(
   new MyDuplex(),
   new MyWriteStream(), // error - middle stream must be Duplex
@@ -67,7 +67,7 @@ stream.pipeline(
   () => {},
 );
 
-// $FlowExpectedError[incompatible-call]
+// $FlowExpectedError[incompatible-type]
 stream.pipeline(
   new MyDuplex(),
   new MyDuplex(),
@@ -87,9 +87,9 @@ async function* generator() {
 
 stream.Readable.from(generator());
 
-// $FlowExpectedError[incompatible-call]
+// $FlowExpectedError[incompatible-type]
 stream.Readable.from('banana'); // ERROR
-// $FlowExpectedError[incompatible-call]
+// $FlowExpectedError[incompatible-type]
 stream.Readable.from(101); // error - TypeError [ERR_INVALID_ARG_TYPE]: The "iterable" argument must be an instance of Iterable. Received type number (101)
-// $FlowExpectedError[incompatible-call]
+// $FlowExpectedError[incompatible-type]
 stream.Readable.from(null); // error - TypeError [ERR_INVALID_ARG_TYPE]: The "iterable" argument must be an instance of Iterable. Received null

@@ -12,7 +12,7 @@ const u32: Uint32Array = crypto.getRandomValues(new Uint32Array(2));
 const i64: BigInt64Array = crypto.getRandomValues(new BigInt64Array(2));
 const u64: BigUint64Array = crypto.getRandomValues(new BigUint64Array(2));
 
-// $FlowExpectedError[incompatible-call]
+// $FlowExpectedError[incompatible-type]
 const f32: Float32Array = crypto.getRandomValues(new Float32Array(2)); // incorrect
-// $FlowExpectedError[incompatible-call]
+// $FlowExpectedError[incompatible-type]
 const f64: Float64Array = crypto.getRandomValues(new Float64Array(2)); // incorrect

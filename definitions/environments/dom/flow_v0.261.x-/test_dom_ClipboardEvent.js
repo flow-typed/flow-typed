@@ -7,7 +7,7 @@ let tests = [
     const pasteEvent = new ClipboardEvent('paste'); // valid
     const cutEvent = new ClipboardEvent('cut'); // valid
     const changeEvent = new ClipboardEvent('clipboardchange'); // valid
-    // $FlowExpectedError[incompatible-call]
+    // $FlowExpectedError[incompatible-type]
     const invalidEvent = new ClipboardEvent('invalid'); // invalid
   },
   function() {
@@ -26,7 +26,7 @@ let tests = [
       // $FlowExpectedError[prop-missing]
       {}, // invalid, clipboardData may not be omitted
     );
-    // $FlowExpectedError[incompatible-call]
+    // $FlowExpectedError[incompatible-type]
     const invalid2 = new ClipboardEvent('cut', {clipboardData: {
       'text/plain': 'thats not how you do it'}}); // invalid
   },
