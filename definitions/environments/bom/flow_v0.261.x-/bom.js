@@ -826,7 +826,6 @@ declare class SharedWorker extends EventTarget {
 declare function importScripts(...urls: Array<string | TrustedScriptURL>): void;
 
 declare class WorkerGlobalScope extends EventTarget {
-    // $FlowExpectedError[incompatible-variance]
     self: this;
     location: WorkerLocation;
     navigator: WorkerNavigator;
