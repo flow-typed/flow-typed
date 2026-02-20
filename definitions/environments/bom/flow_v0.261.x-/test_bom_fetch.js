@@ -9,7 +9,7 @@ const a: Promise<string> =
   fetch(myRequest)
   .then(response => response.text());
 
-// $FlowExpectedError[incompatible-type-arg]
+// $FlowExpectedError[incompatible-type]
 const b: Promise<string> = fetch(myRequest); // incorrect
 
 var myInit = { method: 'GET',
@@ -23,5 +23,5 @@ const c: Promise<Blob> =
   fetch('image.png')
   .then(response => response.blob()); // correct
 
-// $FlowExpectedError[incompatible-type-arg]
+// $FlowExpectedError[incompatible-type]
 const d: Promise<Blob> = fetch('image.png'); // incorrect

@@ -34,9 +34,9 @@ declare interface Crypto {
     T: Int8Array | Uint8Array | Uint8ClampedArray | Int16Array | Uint16Array | Int32Array | Uint32Array | BigInt64Array | BigUint64Array
   >(typedArray: T) => T;
   randomUUID: () => string;
-  subtle: {
+  subtle: {|
     digest(algorithm: string, data: Uint8Array): Promise<ArrayBuffer>
-  },
+  |},
 }
 declare var crypto: Crypto;
 
