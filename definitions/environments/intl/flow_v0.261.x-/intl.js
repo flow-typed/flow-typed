@@ -4,6 +4,7 @@ declare var Intl: {
   Locale: Class<Intl$LocaleClass>,
   NumberFormat: Class<Intl$NumberFormat>,
   PluralRules: ?Class<Intl$PluralRules>,
+  Segmenter: Class<Intl$Segmenter>,
   getCanonicalLocales?: (locales?: Intl$Locales) => Intl$Locale[],
   ...
 }
@@ -181,3 +182,44 @@ declare type Intl$PluralRulesOptions = {
   maximumSignificantDigits?: number,
   ...
 }
+
+type Intl$SegmenterGranularity = 'grapheme' | 'word' | 'sentence';
+
+declare type Intl$SegmenterOptions = {
+  localeMatcher?: 'lookup' | 'best fit',
+  granularity?: Intl$SegmenterGranularity,
+  ...
+};
+
+declare class Intl$Segmenter {
+  constructor (
+    locales?: Intl$Locales,
+    options?: Intl$SegmenterOptions
+  ): Intl$Segmenter;
+
+  static supportedLocalesOf (
+    locales: Intl$Locales,
+    options?: { localeMatcher?: 'lookup' | 'best fit' }
+  ): Intl$Locale[];
+
+  segment(input: string): Intl$Segments;
+
+  resolvedOptions(): {
+    locale: Intl$Locale,
+    granularity: Intl$SegmenterGranularity,
+    ...
+  };
+}
+
+declare class Intl$Segments {
+  @@iterator(): Iterator<Intl$SegmentData>;
+  containing(codeUnitIndex?: number): Intl$SegmentData;
+}
+
+declare type Intl$SegmentData = {
+  segment: string,
+  index: number,
+  input: string,
+  isWordLike?: boolean,
+  ...
+};
