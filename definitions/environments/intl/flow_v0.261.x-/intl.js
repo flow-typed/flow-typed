@@ -199,7 +199,7 @@ declare class Intl$Segmenter {
 
   static supportedLocalesOf (
     locales: Intl$Locales,
-    options?: { localeMatcher?: 'lookup' | 'best fit' }
+    options?: {| localeMatcher?: 'lookup' | 'best fit' |}
   ): Intl$Locale[];
 
   segment(input: string): Intl$Segments;
