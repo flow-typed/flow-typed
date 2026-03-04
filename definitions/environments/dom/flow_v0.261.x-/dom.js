@@ -1387,6 +1387,7 @@ declare class Element extends Node mixins mixin$Animatable {
   scrollLeft: number;
   scrollTop: number;
   scrollWidth: number;
+  role: string | null;
   +tagName: string;
 
   // TODO: a lot more ARIA properties
