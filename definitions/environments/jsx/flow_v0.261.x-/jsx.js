@@ -24,7 +24,7 @@ declare class SyntheticEvent<+T: EventTarget = EventTarget, +E: Event = Event> {
   isDefaultPrevented(): boolean;
   isPropagationStopped(): boolean;
   isTrusted: boolean;
-  nativeEvent: E;
+  +nativeEvent: E;
   persist(): void;
   preventDefault(): void;
   stopPropagation(): void;
