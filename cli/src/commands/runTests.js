@@ -421,6 +421,7 @@ export async function writeFlowConfig(
     path.join(repoDirPath, '..', '__util__', 'tdd_framework.js'),
     '',
     '[options]',
+    'all=true',
     'include_warnings=true',
     'server.max_workers=0',
     semver.gte(version, '0.200.0') ? 'exact_by_default=true' : '', // from version 0.202.0 default is true
@@ -456,7 +457,6 @@ function testTypeDefinition(
         path.join(BIN_DIR, 'flow-' + flowVer + (IS_WINDOWS ? '.exe' : '')),
         'check',
         '--strip-root',
-        '--all',
         testDirPath,
       ].join(' '),
     );
