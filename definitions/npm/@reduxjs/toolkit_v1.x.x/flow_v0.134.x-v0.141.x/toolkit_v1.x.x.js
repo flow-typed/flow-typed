@@ -449,7 +449,7 @@ declare module '@reduxjs/toolkit' {
      * function (either directly or indirectly by passing an object as `reducer`),
      * this must be an object with the same shape as the reducer map keys.
      */
-    preloadedState?: { [key: string]: any },
+    preloadedState?: { [key: string]: any, ... },
     /**
      * The store enhancers to apply. See Redux's `createStore()`.
      * All enhancers will be included before the DevTools Extension enhancer.
