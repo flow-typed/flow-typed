@@ -1,5 +1,4 @@
 [libs]
-flow-typed
 
 [ignore]
 .*/node_modules/json5/.*
@@ -7,12 +6,12 @@ flow-typed
 .*/node_modules/resolve/test/.*
 <PROJECT_ROOT>/.test-dir/.*
 <PROJECT_ROOT>/.flow-bins-cache/.*
+<PROJECT_ROOT>/dist/.*
 <PROJECT_ROOT>/node_modules/.*config-chain/test/broken.json
 .*/__.*-fixtures__/.*
 
 [lints]
 deprecated-type=error
-deprecated-utility=error
 unnecessary-optional-chain=error
 
 [options]

@@ -110,13 +110,15 @@ function _parseVersion(
         // It's possible that a prerel *and* a range co-exist!
         // v0.1.x-prerel-v0.2.x
         let prerelParts = verAfterParts.substr(1).split('-'); // ['prerel', 'v0.2.x']
-        let prerel = prerelParts.shift(); // 'prerel'
+        // $FlowFixMe[incompatible-type]
+        let prerel: string = prerelParts.shift(); // 'prerel'
         while (prerelParts.length > 0) {
           try {
             _parseVersion(prerelParts.join('-'), false);
             break;
           } catch (e) {
-            prerel += '-' + prerelParts.shift();
+            // $FlowFixMe[incompatible-cast]
+            prerel += '-' + (prerelParts.shift(): string);
           }
         }
 
@@ -148,13 +150,15 @@ function _parseVersion(
 }
 
 export function parseDirString(verStr: string): FlowVersion {
-  if (verStr.substr(0, 'flow_'.length) !== 'flow_') {
+  const prefix = 'flow_';
+
+  if (!verStr.startsWith(prefix)) {
     throw new ValidationError(
-      'Flow versions must start with `flow_` but instead got ' + verStr,
+      `Flow versions must start with \`${prefix}\` but instead got ${verStr}`,
     );
   }
 
-  const afterPrefix = verStr.substr('flow_'.length);
+  const afterPrefix = verStr.substr(verStr.indexOf(prefix) + prefix.length);
 
   if (afterPrefix === 'all' || afterPrefix === 'vx.x.x') {
     return {kind: 'all'};
@@ -162,7 +166,7 @@ export function parseDirString(verStr: string): FlowVersion {
     return {
       kind: 'ranged',
       lower: null,
-      upper: _parseVersion(verStr.substr('flow_-'.length), false)[1],
+      upper: _parseVersion(verStr.substr(`${prefix}-`.length), false)[1],
     };
   } else {
     const [offset, lowerVer] = _parseVersion(afterPrefix, true);
@@ -305,7 +309,11 @@ function disjointVersions(a: FlowVersion, b: FlowVersion): boolean {
 /**
  * Given an array of versions, returns whether they are mutually disjoint.
  */
-function _disjointVersionsAll(vers, len, i) {
+function _disjointVersionsAll(
+  vers: Array<FlowVersion>,
+  len: number,
+  i: number,
+): boolean {
   if (i + 1 >= len) return true;
   for (let j = i + 1; j < len; j++) {
     if (!disjointVersions(vers[i], vers[j])) {
@@ -438,6 +446,11 @@ export function compareFlowVersionAsc(a: FlowVersion, b: FlowVersion): number {
   }
   return 0;
 }
+
+export const extractFlowDirFromFlowDirPath = (path: string): string => {
+  const split = path.split('/');
+  return split[split.length - 1];
+};
 
 // Exported for tests
 export {_parseVersion as __parseVersion};

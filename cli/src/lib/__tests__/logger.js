@@ -4,7 +4,7 @@ import colors from 'colors';
 import {listItem} from '../logger';
 
 describe('logger', () => {
-  const consoleLog = jest.fn();
+  const consoleLog = jest.fn<any, any>();
   jest.spyOn(console, 'log').mockImplementation(consoleLog);
 
   beforeEach(() => {

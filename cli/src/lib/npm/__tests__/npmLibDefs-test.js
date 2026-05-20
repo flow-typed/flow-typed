@@ -42,6 +42,7 @@ describe('npmLibDefs', () => {
       expect(defs).toEqual(
         expect.arrayContaining([
           {
+            depVersions: null,
             flowVersion: {
               kind: 'ranged',
               lower: {
@@ -70,6 +71,7 @@ describe('npmLibDefs', () => {
             version: 'v1.x.x',
           },
           {
+            depVersions: null,
             flowVersion: {
               kind: 'ranged',
               lower: {
@@ -196,7 +198,7 @@ describe('npmLibDefs', () => {
 
     describe('extLibDefs', () => {
       it('does not retrieve a new cache of lib defs if one is passed into it', async () => {
-        const ensureCacheRepo = jest.fn(() => Promise.resolve());
+        const ensureCacheRepo = jest.fn<any, any>(() => Promise.resolve());
         jest
           .spyOn(cacheRepoUtils, 'ensureCacheRepo')
           .mockImplementation(ensureCacheRepo);
@@ -219,7 +221,7 @@ describe('npmLibDefs', () => {
       });
 
       it('retrieve a new cache of lib defs if an external one is not passed in', async () => {
-        const ensureCacheRepo = jest.fn(() => Promise.resolve());
+        const ensureCacheRepo = jest.fn<any, any>(() => Promise.resolve());
         jest
           .spyOn(cacheRepoUtils, 'ensureCacheRepo')
           .mockImplementation(ensureCacheRepo);
@@ -262,7 +264,7 @@ describe('npmLibDefs', () => {
 
     describe('skipCache', () => {
       it("doesn't update the cache when it's provided", async () => {
-        const ensureCacheRepo = jest.fn(() => Promise.resolve());
+        const ensureCacheRepo = jest.fn<any, any>(() => Promise.resolve());
         jest
           .spyOn(cacheRepoUtils, 'ensureCacheRepo')
           .mockImplementation(ensureCacheRepo);
@@ -284,7 +286,7 @@ describe('npmLibDefs', () => {
       });
 
       it("does update the cache when it's not provided", async () => {
-        const ensureCacheRepo = jest.fn(() => Promise.resolve());
+        const ensureCacheRepo = jest.fn<any, any>(() => Promise.resolve());
         jest
           .spyOn(cacheRepoUtils, 'ensureCacheRepo')
           .mockImplementation(ensureCacheRepo);
@@ -385,6 +387,7 @@ describe('npmLibDefs', () => {
           expect(semverLibDef.kind).toBe('LibDef');
         } else {
           expect(semverLibDef.libDef).toEqual({
+            depVersions: null,
             flowVersion: {
               kind: 'specific',
               ver: {
@@ -421,6 +424,7 @@ describe('npmLibDefs', () => {
           expect(semverLibDef.kind).toBe('LibDef');
         } else {
           expect(semverLibDef.libDef).toEqual({
+            depVersions: null,
             flowVersion: {
               kind: 'specific',
               ver: {
@@ -460,6 +464,7 @@ describe('npmLibDefs', () => {
           expect(semverLibDef.kind).toBe('LibDef');
         } else {
           expect(semverLibDef.libDef).toEqual({
+            depVersions: null,
             flowVersion: {
               kind: 'ranged',
               lower: {

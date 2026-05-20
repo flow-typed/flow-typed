@@ -1,0 +1,5 @@
+{
+  "deps": {
+    "a-override": ["v1.x.x"]
+  }
+}

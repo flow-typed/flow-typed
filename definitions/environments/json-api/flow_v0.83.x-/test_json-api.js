@@ -12,7 +12,7 @@ describe('json-api', () => {
 
     (JSON.parse(''): JsonApi$Json);
 
-    // $FlowExpectedError[incompatible-cast]
+    // $FlowExpectedError[incompatible-type]
     (() => {}: JsonApi$Json);
   });
 
@@ -23,7 +23,7 @@ describe('json-api', () => {
 
     (JSON.parse(''): JsonApi$Meta);
 
-    // $FlowExpectedError[incompatible-cast]
+    // $FlowExpectedError[incompatible-type]
     ('test': JsonApi$Meta);
   });
 
@@ -39,18 +39,18 @@ describe('json-api', () => {
       },
     }: JsonApi$Link);
 
-    // $FlowExpectedError[incompatible-cast]
+    // $FlowExpectedError[incompatible-type]
     ({}: JsonApi$Link);
-    // $FlowExpectedError[incompatible-cast]
+    // $FlowExpectedError[incompatible-type]
     ({
       href: 1,
     }: JsonApi$Link);
-    // $FlowExpectedError[incompatible-cast]
+    // $FlowExpectedError[incompatible-type]
     ({
       href: 'test',
       meta: 1,
     }: JsonApi$Link);
-    // $FlowExpectedError[incompatible-cast]
+    // $FlowExpectedError[incompatible-type]
     ({
       href: 'test',
       foo: 1,
@@ -68,11 +68,11 @@ describe('json-api', () => {
     }: JsonApi$Links);
 
     ({
-      // $FlowExpectedError[incompatible-cast]
+      // $FlowExpectedError[incompatible-type]
       related: 1,
     }: JsonApi$Links);
     ({
-      // $FlowExpectedError[incompatible-cast]
+      // $FlowExpectedError[incompatible-type]
       foo: 1,
     }: JsonApi$Links);
   });
@@ -96,7 +96,7 @@ describe('json-api', () => {
       foo: 'test',
     }: JsonApi$PaginationLinks);
     ({
-      // $FlowExpectedError[incompatible-cast]
+      // $FlowExpectedError[incompatible-type]
       first: 1,
     }: JsonApi$PaginationLinks);
   });
@@ -124,41 +124,41 @@ describe('json-api', () => {
     }: JsonApi$Error);
 
     ({
-      // $FlowExpectedError[incompatible-cast]
+      // $FlowExpectedError[incompatible-type]
       id: 1,
     }: JsonApi$Error);
     ({
-      // $FlowExpectedError[incompatible-cast]
+      // $FlowExpectedError[incompatible-type]
       links: 'test',
     }: JsonApi$Error);
     ({
-      // $FlowExpectedError[incompatible-cast]
+      // $FlowExpectedError[incompatible-type]
       status: 1,
     }: JsonApi$Error);
     ({
-      // $FlowExpectedError[incompatible-cast]
+      // $FlowExpectedError[incompatible-type]
       code: 1,
     }: JsonApi$Error);
     ({
-      // $FlowExpectedError[incompatible-cast]
+      // $FlowExpectedError[incompatible-type]
       title: 1,
     }: JsonApi$Error);
     ({
-      // $FlowExpectedError[incompatible-cast]
+      // $FlowExpectedError[incompatible-type]
       detail: 1,
     }: JsonApi$Error);
     ({
-      // $FlowExpectedError[incompatible-cast]
+      // $FlowExpectedError[incompatible-type]
       source: 1,
     }: JsonApi$Error);
-    // $FlowExpectedError[prop-missing]
     ({
+      // $FlowExpectedError[prop-missing]
       source: {
         foo: 'test',
       },
     }: JsonApi$Error);
     ({
-      // $FlowExpectedError[incompatible-cast]
+      // $FlowExpectedError[incompatible-type]
       meta: 'test',
     }: JsonApi$Error);
   });
@@ -169,15 +169,15 @@ describe('json-api', () => {
       version: 'test',
       meta: {
         foo: 'test',
-      }
+      },
     }: JsonApi$Object);
 
     ({
-      // $FlowExpectedError[incompatible-cast]
+      // $FlowExpectedError[incompatible-type]
       version: 1,
     }: JsonApi$Object);
     ({
-      // $FlowExpectedError[incompatible-cast]
+      // $FlowExpectedError[incompatible-type]
       meta: 1,
     }: JsonApi$Object);
     // $FlowExpectedError[prop-missing]
@@ -208,7 +208,7 @@ describe('json-api', () => {
       type: 'test',
       meta: {
         foo: 'a',
-      }
+      },
     }: JsonApi$ResourceIdentifier);
 
     // $FlowExpectedError[prop-missing]
@@ -231,9 +231,9 @@ describe('json-api', () => {
     ([resourceIdentifier]: JsonApi$ResourceLinkage);
     (null: JsonApi$ResourceLinkage);
 
-    // $FlowExpectedError[incompatible-cast]
+    // $FlowExpectedError[incompatible-type]
     ({ foo: 'a' }: JsonApi$ResourceLinkage);
-    // $FlowExpectedError[incompatible-cast]
+    // $FlowExpectedError[incompatible-type]
     (['', resourceIdentifier]: JsonApi$ResourceLinkage);
   });
 
@@ -251,10 +251,12 @@ describe('json-api', () => {
           href: 'test',
         },
       },
-      data: [{
-        id: 'test',
-        type: 'test',
-      }],
+      data: [
+        {
+          id: 'test',
+          type: 'test',
+        },
+      ],
       meta: {
         a: 'test',
         b: 1,
@@ -262,15 +264,15 @@ describe('json-api', () => {
     }: JsonApi$Relationship);
 
     ({
-      // $FlowExpectedError[incompatible-cast]
+      // $FlowExpectedError[incompatible-type]
       links: 1,
     }: JsonApi$Relationship);
     ({
-      // $FlowExpectedError[incompatible-cast]
+      // $FlowExpectedError[incompatible-type]
       data: 'test',
     }: JsonApi$Relationship);
     ({
-      // $FlowExpectedError[incompatible-cast]
+      // $FlowExpectedError[incompatible-type]
       meta: 'test',
     }: JsonApi$Relationship);
   });
@@ -281,7 +283,7 @@ describe('json-api', () => {
     ({}: JsonApi$Relationships);
     ({ a: relationship, b: relationship }: JsonApi$Relationships);
 
-    // $FlowExpectedError[incompatible-cast]
+    // $FlowExpectedError[incompatible-type]
     ({ a: 'test' }: JsonApi$Relationships);
   });
 
@@ -305,29 +307,29 @@ describe('json-api', () => {
     ({ ...null }: JsonApi$Resource);
     ({
       type: 'test',
-      // $FlowExpectedError[incompatible-cast]
+      // $FlowExpectedError[incompatible-type]
       id: 1,
-     }: JsonApi$Resource);
-     ({
+    }: JsonApi$Resource);
+    ({
       type: 'test',
-      // $FlowExpectedError[incompatible-cast]
+      // $FlowExpectedError[incompatible-type]
       attributes: 1,
-     }: JsonApi$Resource);
-     ({
+    }: JsonApi$Resource);
+    ({
       type: 'test',
-      // $FlowExpectedError[incompatible-cast]
+      // $FlowExpectedError[incompatible-type]
       relationships: 1,
-     }: JsonApi$Resource);
-     ({
+    }: JsonApi$Resource);
+    ({
       type: 'test',
-      // $FlowExpectedError[incompatible-cast]
+      // $FlowExpectedError[incompatible-type]
       links: 1,
-     }: JsonApi$Resource);
-     ({
+    }: JsonApi$Resource);
+    ({
       type: 'test',
-      // $FlowExpectedError[incompatible-cast]
+      // $FlowExpectedError[incompatible-type]
       meta: 1,
-     }: JsonApi$Resource);
+    }: JsonApi$Resource);
   });
 
   test('JsonApi$DataDocument', () => {
@@ -342,48 +344,48 @@ describe('json-api', () => {
       data: [resource, resourceIdentifier],
     }: JsonApi$DataDocument);
     ({
-    data: resource,
+      data: resource,
     }: JsonApi$DataDocument);
     ({
-    data: resourceIdentifier,
+      data: resourceIdentifier,
     }: JsonApi$DataDocument);
     ({
-    data: null,
-    meta,
-    jsonapi: object,
-    links,
-    included: [resource],
+      data: null,
+      meta,
+      jsonapi: object,
+      links,
+      included: [resource],
     }: JsonApi$DataDocument);
     ({
-    data: null,
-    links: paginationLinks,
+      data: null,
+      links: paginationLinks,
     }: JsonApi$DataDocument);
 
     // $FlowExpectedError[prop-missing]
     ({ ...null }: JsonApi$DataDocument);
     ({
       data: null,
-      // $FlowExpectedError[incompatible-cast]
+      // $FlowExpectedError[incompatible-type]
       meta: 1,
     }: JsonApi$DataDocument);
     ({
       data: null,
-      // $FlowExpectedError[incompatible-cast]
+      // $FlowExpectedError[incompatible-type]
       jsonapi: 1,
     }: JsonApi$DataDocument);
     ({
       data: null,
-      // $FlowExpectedError[incompatible-cast]
+      // $FlowExpectedError[incompatible-type]
       links: 1,
     }: JsonApi$DataDocument);
     ({
       data: null,
-      // $FlowExpectedError[incompatible-cast]
+      // $FlowExpectedError[incompatible-type]
       included: 1,
     }: JsonApi$DataDocument);
     ({
       data: null,
-      // $FlowExpectedError[incompatible-cast]
+      // $FlowExpectedError[incompatible-type]
       included: resource,
     }: JsonApi$DataDocument);
   });
@@ -405,17 +407,17 @@ describe('json-api', () => {
     // $FlowExpectedError[prop-missing]
     ({ ...null }: JsonApi$MetaDocument);
     ({
-      // $FlowExpectedError[incompatible-cast]
+      // $FlowExpectedError[incompatible-type]
       meta: 1,
     }: JsonApi$MetaDocument);
     ({
       meta,
-      // $FlowExpectedError[incompatible-cast]
+      // $FlowExpectedError[incompatible-type]
       jsonapi: 1,
     }: JsonApi$MetaDocument);
     ({
       meta,
-      // $FlowExpectedError[incompatible-cast]
+      // $FlowExpectedError[incompatible-type]
       links: 1,
     }: JsonApi$MetaDocument);
   });
@@ -439,22 +441,22 @@ describe('json-api', () => {
     // $FlowExpectedError[prop-missing]
     ({ ...null }: JsonApi$ErrorDocument);
     ({
-      // $FlowExpectedError[incompatible-cast]
+      // $FlowExpectedError[incompatible-type]
       errors: error,
     }: JsonApi$ErrorDocument);
     ({
       errors: [error],
-      // $FlowExpectedError[incompatible-cast]
+      // $FlowExpectedError[incompatible-type]
       meta: 1,
     }: JsonApi$ErrorDocument);
     ({
       errors: [error],
-      // $FlowExpectedError[incompatible-cast]
+      // $FlowExpectedError[incompatible-type]
       jsonapi: 1,
     }: JsonApi$ErrorDocument);
     ({
       errors: [error],
-      // $FlowExpectedError[incompatible-cast]
+      // $FlowExpectedError[incompatible-type]
       links: 1,
     }: JsonApi$ErrorDocument);
   });
@@ -468,7 +470,7 @@ describe('json-api', () => {
     (metaDocument: JsonApi$Document);
     (errorDocument: JsonApi$Document);
 
-    // $FlowExpectedError[incompatible-cast]
+    // $FlowExpectedError[incompatible-type]
     ('': JsonApi$Document);
   });
 });

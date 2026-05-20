@@ -189,11 +189,10 @@ declare module 'webpack' {
 
   declare type WebpackPluginFunction = (compiler: WebpackCompiler) => void;
 
-  declare type WebpackPluginInstance = {
-    [k: string]: any,
-    apply: WebpackPluginFunction,
-    ...
-  };
+  declare interface WebpackPluginInstance {
+    apply: WebpackPluginFunction;
+    [k: string]: any;
+  }
 
   declare type OptimizationSplitChunksOptions = {
     automaticNameDelimiter?: string,

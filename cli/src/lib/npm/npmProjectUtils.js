@@ -1,20 +1,16 @@
 // @flow
-
-import {searchUpDirPath} from '../fileUtils.js';
-
-import type {FlowSpecificVer} from '../flowVersion.js';
-
-import {fs, path} from '../node.js';
-
-import {stringToVersion} from '../semver.js';
-import type {Version} from '../semver.js';
-
-import semver, {intersects} from 'semver';
 import colors from 'colors/safe';
-
 import glob from 'glob';
+import semver, {intersects} from 'semver';
+import {load} from 'js-yaml';
 
-type PkgJson = {|
+import {searchUpDirPath} from '../fileUtils';
+import type {FlowSpecificVer} from '../flowVersion';
+import type {FtConfig} from '../ftConfig';
+import {fs, path} from '../node';
+import {stringToVersion, type Version} from '../semver';
+
+export type PkgJson = {|
   pathStr: string,
   content: {
     name: string,
@@ -45,9 +41,9 @@ const PKG_JSON_DEP_FIELDS = [
 export async function findPackageJsonDepVersionStr(
   pkgJson: PkgJson,
   depName: string,
-): Promise<null | string> {
+): Promise<?string> {
   let matchedFields = [];
-  const deps = PKG_JSON_DEP_FIELDS.reduce((deps, section) => {
+  const deps = PKG_JSON_DEP_FIELDS.reduce((deps: Array<string>, section) => {
     const contentSection = pkgJson.content[section];
     if (contentSection && contentSection[depName]) {
       matchedFields.push(section);
@@ -79,7 +75,17 @@ export async function findPackageJsonPath(pathStr: string): Promise<string> {
   return path.join(pkgJsonPathStr, 'package.json');
 }
 
-function getWorkspacePatterns(pkgJson: PkgJson): string[] {
+function getWorkspacePatterns(cwd: string, pkgJson: PkgJson): string[] {
+  const pnpmWorkspacePath = path.join(cwd, 'pnpm-workspace.yaml');
+  const hasPnpmWorkspaces = fs.existsSync(pnpmWorkspacePath);
+
+  if (hasPnpmWorkspaces) {
+    const doc = load(fs.readFileSync(pnpmWorkspacePath, 'utf-8'));
+    if (doc && typeof doc === 'object' && doc.packages) {
+      return doc.packages;
+    }
+  }
+
   if (Array.isArray(pkgJson.content.workspaces)) {
     return pkgJson.content.workspaces;
   }
@@ -94,12 +100,13 @@ function getWorkspacePatterns(pkgJson: PkgJson): string[] {
   return [];
 }
 
-export async function findWorkspacesPackagePaths(
+async function findWorkspacesPackagePaths(
   pkgJson: PkgJson,
+  workspaces: Array<string>,
 ): Promise<string[]> {
   const tasks = await Promise.all(
-    getWorkspacePatterns(pkgJson).map(pattern => {
-      return new Promise((resolve, reject) => {
+    workspaces.map(pattern => {
+      return new Promise<Array<string>>((resolve, reject) => {
         glob(
           `${path.dirname(pkgJson.pathStr)}/${pattern}/package.json`,
           {absolute: true},
@@ -119,12 +126,20 @@ export async function findWorkspacesPackagePaths(
 }
 
 export async function findWorkspacesPackages(
+  cwd: string,
   pkgJson: PkgJson,
+  ftConfig: FtConfig,
 ): Promise<PkgJson[]> {
-  const paths = await findWorkspacesPackagePaths(pkgJson);
+  const paths = await findWorkspacesPackagePaths(
+    pkgJson,
+    getWorkspacePatterns(cwd, pkgJson),
+  );
+  const configPaths = ftConfig.workspaces
+    ? await findWorkspacesPackagePaths(pkgJson, ftConfig.workspaces)
+    : [];
 
   return Promise.all(
-    paths.map(async pathStr => {
+    [...paths, ...configPaths].map(async pathStr => {
       const pkgJsonContent = await fs.readJson(pathStr);
       return {
         pathStr,
@@ -139,6 +154,8 @@ export function getPackageJsonDependencies(
   pkgJson: PkgJson,
   /**
    * dependency groups to ignore
+   *
+   * eg: dev, optional, bundled, peer, etc
    */
   ignoreDeps: Array<string>,
   /**
@@ -147,10 +164,10 @@ export function getPackageJsonDependencies(
   ignoreDefs: Array<string>,
 ): {[depName: string]: string} {
   const depFields = PKG_JSON_DEP_FIELDS.filter(field => {
-    return ignoreDeps.indexOf(field.slice(0, -12)) === -1;
+    return ignoreDeps.indexOf(field.slice(0, -'Dependencies'.length)) === -1;
   });
 
-  return depFields.reduce((deps, section) => {
+  return depFields.reduce<{[key: string]: string}>((deps, section) => {
     const contentSection = pkgJson.content[section];
     if (contentSection) {
       Object.keys(contentSection).forEach(pkgName => {
@@ -228,7 +245,7 @@ export async function determineFlowVersion(
     'flow-bin',
   );
 
-  if (flowBinVersionStr !== null) {
+  if (flowBinVersionStr != null) {
     let flowVerStr;
     if (semver.valid(flowBinVersionStr)) {
       flowVerStr = flowBinVersionStr;

@@ -1,18 +1,25 @@
 // @flow
 
+import type {LibDef} from '../../lib/libDefs.js';
+
 import {_formatDefTable} from '../search.js';
 import {parseDirString as parseFlowDirString} from '../../lib/flowVersion.js';
 
 describe('search command', () => {
   describe('_formatDefTable()', () => {
-    function _generateFixturePkg(name, verStr, flowVerStr) {
+    function _generateFixturePkg(
+      name: string,
+      verStr: string,
+      flowVerStr: string,
+    ) {
       return {
         pkgName: name,
         pkgVersionStr: verStr,
+        configPath: null,
         flowVersion: parseFlowDirString(flowVerStr),
         flowVersionStr: flowVerStr,
         path: '',
-        testFilePaths: [],
+        testFilePaths: ([]: Array<string>),
       };
     }
     it('beautifully formats a table of libDefs', () => {
@@ -43,7 +50,7 @@ describe('search command', () => {
     });
 
     it('gracefully handles not finding any definitions', () => {
-      const fixture = [];
+      const fixture: Array<LibDef> = [];
       const formatted = _formatDefTable(fixture);
       expect(formatted).toEqual('No definitions found, sorry!');
     });

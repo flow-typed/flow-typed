@@ -1,6 +1,6 @@
 // @flow
 
-(require('../../lib/git'): any).rebaseRepoMaster = jest.fn();
+(require('../../lib/git'): any).rebaseRepoMainline = jest.fn();
 
 import {
   _clearCustomCacheDir as clearCustomCacheDir,
@@ -33,15 +33,15 @@ import {
 
 const BASE_FIXTURE_ROOT = path.join(__dirname, '__install-fixtures__');
 
-function _mock(mockFn) {
-  return ((mockFn: any): JestMockFn<any, any>);
+function _mock(mockFn: any) {
+  return (mockFn: JestMockFn<any, any>);
 }
 
-async function touchFile(filePath) {
+async function touchFile(filePath: string) {
   await fs.close(await fs.open(filePath, 'w'));
 }
 
-async function writePkgJson(filePath, pkgJson) {
+async function writePkgJson(filePath: string, pkgJson: {...}) {
   await fs.writeJson(filePath, pkgJson);
 }
 
@@ -67,7 +67,7 @@ describe('install (command)', () => {
 
     it('errors if unable to find a project root (.flowconfig)', () => {
       return testProject(async ROOT_DIR => {
-        const result = await installNpmLibDefs({
+        const {status} = await installNpmLibDefs({
           cwd: ROOT_DIR,
           flowVersion: parseFlowDirString('flow_v0.40.0'),
           explicitLibDefs: [],
@@ -79,7 +79,7 @@ describe('install (command)', () => {
           ignoreDeps: [],
           useCacheUntil: 1000 * 60,
         });
-        expect(result).toBe(1);
+        expect(status).toBe(1);
         expect(_mock(console.error).mock.calls).toEqual([
           [
             'Error: Unable to find a flow project in the current dir or any of ' +
@@ -102,7 +102,7 @@ describe('install (command)', () => {
               'flow-bin': '^0.40.0',
             },
           });
-          const result = await installNpmLibDefs({
+          const {status} = await installNpmLibDefs({
             cwd: ROOT_DIR,
             flowVersion: parseFlowDirString('flow_v0.40.0'),
             explicitLibDefs: ['INVALID'],
@@ -114,7 +114,7 @@ describe('install (command)', () => {
             ignoreDeps: [],
             useCacheUntil: 1000 * 60,
           });
-          expect(result).toBe(1);
+          expect(status).toBe(1);
           expect(_mock(console.error).mock.calls).toEqual([
             [
               'ERROR: Package not found from package.json.\n' +
@@ -133,7 +133,7 @@ describe('install (command)', () => {
             name: 'test',
           }),
         ]);
-        const result = await installNpmLibDefs({
+        const {status} = await installNpmLibDefs({
           cwd: ROOT_DIR,
           flowVersion: parseFlowDirString('flow_v0.40.0'),
           explicitLibDefs: [],
@@ -145,7 +145,7 @@ describe('install (command)', () => {
           ignoreDeps: [],
           useCacheUntil: 1000 * 60,
         });
-        expect(result).toBe(0);
+        expect(status).toBe(0);
         expect(_mock(console.error).mock.calls).toEqual([
           ["No dependencies were found in this project's package.json!"],
         ]);
@@ -224,7 +224,9 @@ describe('install (command)', () => {
       (console: any).error = origConsoleError;
     });
 
-    async function fakeProjectEnv(runTest) {
+    async function fakeProjectEnv(
+      runTest: (flowProjectDir: string) => Promise<void>,
+    ) {
       return await testProject(async ROOT_DIR => {
         const FAKE_CACHE_DIR = path.join(ROOT_DIR, 'fakeCache');
         const FAKE_CACHE_REPO_DIR = path.join(FAKE_CACHE_DIR, 'repo');
@@ -1098,6 +1100,12 @@ describe('install (command)', () => {
             dependencies: {
               foo: '^1.2.3',
             },
+            peerDependencies: {
+              'a-override': '^1.0.0',
+            },
+            devDependencies: {
+              'a-override': '^1.0.0',
+            },
           },
         );
         await touchFile(
@@ -1125,6 +1133,17 @@ describe('install (command)', () => {
             ),
           ),
         ).toEqual(true);
+        expect(
+          await fs.exists(
+            path.join(
+              FLOWPROJ_DIR,
+              'src',
+              'flow-typed',
+              'npm',
+              'a-override_v1.x.x.js',
+            ),
+          ),
+        ).toEqual(false);
       });
     });
 
@@ -1487,6 +1506,334 @@ declare type jsx$HTMLElementProps = {||}`;
           ).not.toEqual(installedDef);
         });
       });
+
+      it('installs envs from dependency flow-typed.config even if no local flow-typed.config', () => {
+        return fakeProjectEnv(async FLOWPROJ_DIR => {
+          // Create some dependencies
+          await Promise.all([
+            writePkgJson(path.join(FLOWPROJ_DIR, 'package.json'), {
+              name: 'test',
+              devDependencies: {
+                'flow-bin': '^0.140.0',
+                untyped: '^1.0.0',
+              },
+            }),
+            mkdirp(path.join(FLOWPROJ_DIR, 'node_modules', 'untyped')),
+          ]);
+          await touchFile(path.join(FLOWPROJ_DIR, '.flowconfig'));
+
+          await touchFile(
+            path.join(FLOWPROJ_DIR, 'node_modules', 'untyped', 'index.js.flow'),
+          );
+          await touchFile(
+            path.join(
+              FLOWPROJ_DIR,
+              'node_modules',
+              'untyped',
+              'flow-typed.config.json',
+            ),
+          );
+          await fs.writeJson(
+            path.join(
+              FLOWPROJ_DIR,
+              'node_modules',
+              'untyped',
+              'flow-typed.config.json',
+            ),
+            {env: ['jsx']},
+          );
+
+          // Run the install command
+          await run({
+            ...defaultRunProps,
+            rootDir: path.join(FLOWPROJ_DIR),
+          });
+
+          // Installs env definitions
+          expect(
+            await fs.exists(
+              path.join(FLOWPROJ_DIR, 'flow-typed', 'environments', 'jsx.js'),
+            ),
+          ).toEqual(true);
+        });
+      });
+
+      it('installs envs that exist in both dependency and own flow-typed.config', () => {
+        return fakeProjectEnv(async FLOWPROJ_DIR => {
+          // Create some dependencies
+          await Promise.all([
+            writePkgJson(path.join(FLOWPROJ_DIR, 'package.json'), {
+              name: 'test',
+              devDependencies: {
+                'flow-bin': '^0.140.0',
+                untyped: '^1.0.0',
+              },
+            }),
+            mkdirp(path.join(FLOWPROJ_DIR, 'node_modules', 'untyped')),
+          ]);
+          await touchFile(path.join(FLOWPROJ_DIR, '.flowconfig'));
+          await touchFile(path.join(FLOWPROJ_DIR, 'flow-typed.config.json'));
+          await fs.writeJson(
+            path.join(FLOWPROJ_DIR, 'flow-typed.config.json'),
+            {env: ['jsx']},
+          );
+
+          await touchFile(
+            path.join(FLOWPROJ_DIR, 'node_modules', 'untyped', 'index.js.flow'),
+          );
+          await touchFile(
+            path.join(
+              FLOWPROJ_DIR,
+              'node_modules',
+              'untyped',
+              'flow-typed.config.json',
+            ),
+          );
+          await fs.writeJson(
+            path.join(
+              FLOWPROJ_DIR,
+              'node_modules',
+              'untyped',
+              'flow-typed.config.json',
+            ),
+            {env: ['jsx', 'react']},
+          );
+
+          // Run the install command
+          await run({
+            ...defaultRunProps,
+            rootDir: path.join(FLOWPROJ_DIR),
+          });
+
+          // Installs env definitions
+          expect(
+            await fs.exists(
+              path.join(FLOWPROJ_DIR, 'flow-typed', 'environments', 'jsx.js'),
+            ),
+          ).toEqual(true);
+          expect(
+            await fs.exists(
+              path.join(FLOWPROJ_DIR, 'flow-typed', 'environments', 'react.js'),
+            ),
+          ).toEqual(true);
+        });
+      });
+    });
+
+    describe('definitions with dependencies', () => {
+      it('installs a dependency of appropriate version if not installed by project', () => {
+        return fakeProjectEnv(async FLOWPROJ_DIR => {
+          // Create some dependencies
+          await Promise.all([
+            mkdirp(path.join(FLOWPROJ_DIR, 'src')),
+            writePkgJson(path.join(FLOWPROJ_DIR, 'package.json'), {
+              name: 'test',
+              devDependencies: {
+                'flow-bin': '^0.43.0',
+              },
+              dependencies: {
+                'has-dep': '1.2.3',
+              },
+            }),
+            mkdirp(path.join(FLOWPROJ_DIR, 'node_modules', 'flow-bin')),
+            mkdirp(path.join(FLOWPROJ_DIR, 'node_modules', 'has-dep')),
+          ]);
+
+          await touchFile(path.join(FLOWPROJ_DIR, 'src', '.flowconfig'));
+          await mkdirp(path.join(FLOWPROJ_DIR, 'src', 'flow-typed'));
+
+          // Run the install command
+          await run({
+            ...defaultRunProps,
+            rootDir: path.join(FLOWPROJ_DIR, 'src'),
+          });
+
+          // Installs libdef
+          expect(
+            await fs.exists(
+              path.join(
+                FLOWPROJ_DIR,
+                'src',
+                'flow-typed',
+                'npm',
+                'foo_v1.x.x.js',
+              ),
+            ),
+          ).toEqual(true);
+        });
+      });
+
+      it('will not need to install a dependency if it is already installed by project', () => {
+        return fakeProjectEnv(async FLOWPROJ_DIR => {
+          // Create some dependencies
+          await Promise.all([
+            mkdirp(path.join(FLOWPROJ_DIR, 'src')),
+            writePkgJson(path.join(FLOWPROJ_DIR, 'package.json'), {
+              name: 'test',
+              devDependencies: {
+                'flow-bin': '^0.43.0',
+              },
+              dependencies: {
+                foo: '0.5.1',
+                'has-dep': '1.2.3',
+              },
+            }),
+            mkdirp(path.join(FLOWPROJ_DIR, 'node_modules', 'flow-bin')),
+            mkdirp(path.join(FLOWPROJ_DIR, 'node_modules', 'foo')),
+            mkdirp(path.join(FLOWPROJ_DIR, 'node_modules', 'has-dep')),
+          ]);
+
+          await touchFile(path.join(FLOWPROJ_DIR, 'src', '.flowconfig'));
+          await mkdirp(path.join(FLOWPROJ_DIR, 'src', 'flow-typed'));
+
+          // Run the install command
+          await run({
+            ...defaultRunProps,
+            rootDir: path.join(FLOWPROJ_DIR, 'src'),
+          });
+
+          // Installs libdef
+          expect(
+            await Promise.all([
+              fs.exists(
+                path.join(
+                  FLOWPROJ_DIR,
+                  'src',
+                  'flow-typed',
+                  'npm',
+                  'foo_v1.x.x.js',
+                ),
+              ),
+              fs.exists(
+                path.join(
+                  FLOWPROJ_DIR,
+                  'src',
+                  'flow-typed',
+                  'npm',
+                  'foo_v0.5.x.js',
+                ),
+              ),
+            ]),
+          ).toEqual([false, true]);
+        });
+      });
+
+      it('will install appropriate version of dependency if definition installed by project is not appropriate', () => {
+        return fakeProjectEnv(async FLOWPROJ_DIR => {
+          // Create some dependencies
+          await Promise.all([
+            mkdirp(path.join(FLOWPROJ_DIR, 'src')),
+            writePkgJson(path.join(FLOWPROJ_DIR, 'package.json'), {
+              name: 'test',
+              devDependencies: {
+                'flow-bin': '^0.43.0',
+              },
+              dependencies: {
+                foo: '2.0.0',
+                'has-dep': '1.2.3',
+              },
+            }),
+            mkdirp(path.join(FLOWPROJ_DIR, 'node_modules', 'flow-bin')),
+            mkdirp(path.join(FLOWPROJ_DIR, 'node_modules', 'foo')),
+            mkdirp(path.join(FLOWPROJ_DIR, 'node_modules', 'has-dep')),
+          ]);
+
+          await touchFile(path.join(FLOWPROJ_DIR, 'src', '.flowconfig'));
+          await mkdirp(path.join(FLOWPROJ_DIR, 'src', 'flow-typed'));
+
+          // Run the install command
+          await run({
+            ...defaultRunProps,
+            rootDir: path.join(FLOWPROJ_DIR, 'src'),
+          });
+
+          // Installs libdef
+          expect(
+            await Promise.all([
+              fs.exists(
+                path.join(
+                  FLOWPROJ_DIR,
+                  'src',
+                  'flow-typed',
+                  'npm',
+                  'foo_v2.x.x.js',
+                ),
+              ),
+              fs.exists(
+                path.join(
+                  FLOWPROJ_DIR,
+                  'src',
+                  'flow-typed',
+                  'npm',
+                  'foo_v1.x.x.js',
+                ),
+              ),
+            ]),
+          ).toEqual([false, true]);
+        });
+      });
+
+      it('can recursively install dependency definitions of dependencies', () => {
+        return fakeProjectEnv(async FLOWPROJ_DIR => {
+          // Create some dependencies
+          await Promise.all([
+            mkdirp(path.join(FLOWPROJ_DIR, 'src')),
+            writePkgJson(path.join(FLOWPROJ_DIR, 'package.json'), {
+              name: 'test',
+              devDependencies: {
+                'flow-bin': '^0.43.0',
+              },
+              dependencies: {
+                'has-dep': '^1.0.0',
+              },
+            }),
+            mkdirp(path.join(FLOWPROJ_DIR, 'node_modules', 'flow-bin')),
+            mkdirp(path.join(FLOWPROJ_DIR, 'node_modules', 'has-dep')),
+          ]);
+
+          await touchFile(path.join(FLOWPROJ_DIR, 'src', '.flowconfig'));
+          await mkdirp(path.join(FLOWPROJ_DIR, 'src', 'flow-typed'));
+
+          // Run the install command
+          await run({
+            ...defaultRunProps,
+            rootDir: path.join(FLOWPROJ_DIR, 'src'),
+          });
+
+          // Installs libdef
+          expect(
+            await Promise.all([
+              fs.exists(
+                path.join(
+                  FLOWPROJ_DIR,
+                  'src',
+                  'flow-typed',
+                  'npm',
+                  'has-dep_v1.x.x.js',
+                ),
+              ),
+              fs.exists(
+                path.join(
+                  FLOWPROJ_DIR,
+                  'src',
+                  'flow-typed',
+                  'npm',
+                  'override_v1.x.x.js',
+                ),
+              ),
+              fs.exists(
+                path.join(
+                  FLOWPROJ_DIR,
+                  'src',
+                  'flow-typed',
+                  'npm',
+                  'a-override_v1.x.x.js',
+                ),
+              ),
+            ]),
+          ).toEqual([true, true, true]);
+        });
+      });
     });
   });
 
@@ -1501,18 +1848,22 @@ declare type jsx$HTMLElementProps = {||}`;
     const origConsoleLog = console.log;
     const origConsoleError = console.error;
     const origConsoleWarn = console.warn;
+
     beforeEach(() => {
       (console: any).log = jest.fn();
       (console: any).error = jest.fn();
       (console: any).warn = jest.fn();
     });
+
     afterEach(() => {
       (console: any).log = origConsoleLog;
       (console: any).error = origConsoleError;
       (console: any).warn = origConsoleWarn;
     });
 
-    async function fakeProjectEnv(runTest) {
+    async function fakeProjectEnv(
+      runTest: (flowProjectDir: string) => Promise<void>,
+    ) {
       return await testProject(async ROOT_DIR => {
         const FAKE_CACHE_DIR = path.join(ROOT_DIR, 'fakeCache');
         const FAKE_CACHE_REPO_DIR = path.join(FAKE_CACHE_DIR, 'repo');
@@ -1561,6 +1912,76 @@ declare type jsx$HTMLElementProps = {||}`;
         ).toEqual([
           'a_vx.x.x.js',
           'bar_v1.x.x.js',
+          'c_vx.x.x.js',
+          'flow-bin_v0.x.x.js',
+          'foo_v1.x.x.js',
+        ]);
+
+        // Signs installed libdefs
+        const fooLibDefContents = await fs.readFile(
+          path.join(FLOWPROJ_DIR, 'flow-typed', 'npm', 'foo_v1.x.x.js'),
+          'utf8',
+        );
+        expect(fooLibDefContents).toContain('// flow-typed signature: ');
+        expect(fooLibDefContents).toContain('// flow-typed version: ');
+      });
+    });
+
+    it('supports pnpm workspaces', () => {
+      return fakeProjectEnv(async FLOWPROJ_DIR => {
+        await copyDir(path.join(FIXTURE_ROOT, 'pnpm-workspace'), FLOWPROJ_DIR);
+
+        await mkdirp(
+          path.join(FLOWPROJ_DIR, 'packages', 'c', 'node_modules', 'untyped'),
+        );
+        await touchFile(
+          path.join(
+            FLOWPROJ_DIR,
+            'packages',
+            'c',
+            'node_modules',
+            'untyped',
+            'package.json',
+          ),
+        );
+        await writePkgJson(
+          path.join(
+            FLOWPROJ_DIR,
+            'packages',
+            'c',
+            'node_modules',
+            'untyped',
+            'package.json',
+          ),
+          {
+            name: 'untyped',
+            dependencies: {
+              random: '^0.5.0',
+            },
+          },
+        );
+        await touchFile(
+          path.join(
+            FLOWPROJ_DIR,
+            'packages',
+            'c',
+            'node_modules',
+            'untyped',
+            'index.js.flow',
+          ),
+        );
+
+        // Run the install command
+        await run({
+          ...defaultRunProps,
+          ignoreDeps: [],
+        });
+
+        // Installs libdefs
+        expect(
+          await fs.readdir(path.join(FLOWPROJ_DIR, 'flow-typed', 'npm')),
+        ).toEqual([
+          'a_vx.x.x.js',
           'c_vx.x.x.js',
           'flow-bin_v0.x.x.js',
           'foo_v1.x.x.js',
@@ -1645,6 +2066,40 @@ declare type jsx$HTMLElementProps = {||}`;
           '^1.1.0',
           '^2.0.0',
         );
+      });
+    });
+
+    it('supports flow-typed.config.json workspaces', () => {
+      return fakeProjectEnv(async FLOWPROJ_DIR => {
+        await copyDir(
+          path.join(FIXTURE_ROOT, 'flow-config-workspaces'),
+          FLOWPROJ_DIR,
+        );
+
+        // Run the install command
+        await run({
+          ...defaultRunProps,
+          ignoreDeps: [],
+        });
+
+        // Installs libdefs
+        expect(
+          await fs.readdir(path.join(FLOWPROJ_DIR, 'flow-typed', 'npm')),
+        ).toEqual([
+          'a_vx.x.x.js',
+          'bar_v1.x.x.js',
+          'c_vx.x.x.js',
+          'flow-bin_v0.x.x.js',
+          'foo_v1.x.x.js',
+        ]);
+
+        // Signs installed libdefs
+        const fooLibDefContents = await fs.readFile(
+          path.join(FLOWPROJ_DIR, 'flow-typed', 'npm', 'foo_v1.x.x.js'),
+          'utf8',
+        );
+        expect(fooLibDefContents).toContain('// flow-typed signature: ');
+        expect(fooLibDefContents).toContain('// flow-typed version: ');
       });
     });
   });

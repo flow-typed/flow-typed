@@ -36,7 +36,7 @@ import {
 } from '../lib/npm/npmProjectUtils';
 import {getRangeLowerBound} from '../lib/semver';
 import {createStub, pkgHasFlowFiles} from '../lib/stubUtils';
-import {listItem} from '../lib/logger';
+import {listItem, sectionHeader} from '../lib/logger';
 
 export const name = 'install [explicitLibDefs...]';
 export const description = 'Installs libdefs into the ./flow-typed directory';
@@ -180,7 +180,7 @@ export async function run(args: Args): Promise<number> {
 
   const useCacheUntil = Number(args.useCacheUntil) || CACHE_REPO_EXPIRY;
 
-  const npmLibDefResult = await installNpmLibDefs({
+  const {status: npmLibDefResult, dependencyEnvs} = await installNpmLibDefs({
     cwd,
     flowVersion,
     explicitLibDefs,
@@ -198,9 +198,9 @@ export async function run(args: Args): Promise<number> {
   }
 
   // Must be after `installNpmLibDefs` to ensure cache is updated first
-  if (ftConfig) {
+  if (ftConfig?.env || dependencyEnvs.length > 0) {
     const envLibDefResult = await installEnvLibDefs(
-      ftConfig,
+      [...new Set([...(ftConfig?.env ?? []), ...dependencyEnvs])],
       flowVersion,
       cwd,
       libdefDir,
@@ -226,10 +226,10 @@ export async function run(args: Args): Promise<number> {
 }
 
 async function installEnvLibDefs(
-  {env}: FtConfig,
+  env: Array<string>,
   flowVersion: FlowVersion,
-  flowProjectRoot,
-  libdefDir,
+  flowProjectRoot: string,
+  libdefDir: string,
   useCacheUntil: number,
   overwrite: boolean,
 ): Promise<number> {
@@ -287,7 +287,7 @@ async function installEnvLibDefs(
                     `${en} already exists and appears to have been manually written or changed!`,
                   ),
                   colors.yellow(
-                    `Read more at https://github.com/flow-typed/flow-typed/blob/master/CONTRIBUTING.md`,
+                    `Read more at https://github.com/flow-typed/flow-typed/blob/main/CONTRIBUTING.md`,
                   ),
                   colors.yellow(
                     `Use --overwrite to overwrite the existing env defs.`,
@@ -354,7 +354,10 @@ async function installNpmLibDefs({
   ignoreDeps,
   useCacheUntil,
   ftConfig = {},
-}: installNpmLibDefsArgs): Promise<number> {
+}: installNpmLibDefsArgs): Promise<{|
+  status: number,
+  dependencyEnvs: Array<string>,
+|}> {
   const flowProjectRoot = await findFlowRoot(cwd);
   if (flowProjectRoot === null) {
     console.error(
@@ -362,12 +365,15 @@ async function installNpmLibDefs({
         "it's parent dirs!\n" +
         'Please run this command from within a Flow project.',
     );
-    return 1;
+    return {
+      status: 1,
+      dependencyEnvs: [],
+    };
   }
 
   const libdefsToSearchFor: Map<string, string> = new Map();
 
-  let ignoreDefs;
+  let ignoreDefs: Array<string>;
 
   if (Array.isArray(ftConfig.ignore)) {
     ignoreDefs = ftConfig.ignore;
@@ -386,6 +392,8 @@ async function installNpmLibDefs({
     }
   }
 
+  let workspacesPkgJsonData;
+
   // If a specific pkg/version was specified, only add those packages.
   // Otherwise, extract dependencies from the package.json
   if (explicitLibDefs.length > 0) {
@@ -394,7 +402,11 @@ async function installNpmLibDefs({
       const termMatches = term.match(/(@[^@\/]+\/)?([^@]+)@(.+)/);
       if (termMatches == null) {
         const pkgJsonData = await getPackageJsonData(cwd);
-        const workspacesPkgJsonData = await findWorkspacesPackages(pkgJsonData);
+        workspacesPkgJsonData = await findWorkspacesPackages(
+          cwd,
+          pkgJsonData,
+          ftConfig,
+        );
         const pkgJsonDeps = workspacesPkgJsonData.reduce((acc, pckData) => {
           return mergePackageJsonDependencies(
             acc,
@@ -409,7 +421,10 @@ async function installNpmLibDefs({
             'ERROR: Package not found from package.json.\n' +
               'Please specify version for the package in the format of `foo@1.2.3`',
           );
-          return 1;
+          return {
+            status: 1,
+            dependencyEnvs: [],
+          };
         }
       } else {
         const [_, npmScope, pkgName, pkgVerStr] = termMatches;
@@ -420,7 +435,11 @@ async function installNpmLibDefs({
     console.log(`• Searching for ${libdefsToSearchFor.size} libdefs...`);
   } else {
     const pkgJsonData = await getPackageJsonData(cwd);
-    const workspacesPkgJsonData = await findWorkspacesPackages(pkgJsonData);
+    workspacesPkgJsonData = await findWorkspacesPackages(
+      cwd,
+      pkgJsonData,
+      ftConfig,
+    );
     const pkgJsonDeps = workspacesPkgJsonData.reduce((acc, pckData) => {
       return mergePackageJsonDependencies(
         acc,
@@ -435,7 +454,10 @@ async function installNpmLibDefs({
       console.error(
         "No dependencies were found in this project's package.json!",
       );
-      return 0;
+      return {
+        status: 0,
+        dependencyEnvs: [],
+      };
     }
 
     if (verbose) {
@@ -444,8 +466,7 @@ async function installNpmLibDefs({
       });
     } else {
       console.log(
-        `• Found ${libdefsToSearchFor.size} dependencies in package.json to ` +
-          `install libdefs for. Searching...`,
+        `• Found ${libdefsToSearchFor.size} dependencies in package.json to install libdefs for. Searching...`,
       );
     }
   }
@@ -458,6 +479,9 @@ async function installNpmLibDefs({
     {name: string, ver: string},
   ][] = [];
   const unavailableLibDefs = [];
+  const defDepsToInstall: {
+    [deps: string]: Array<string>,
+  } = {};
 
   // This updates the cache for all definition types, npm/env/etc
   const libDefs = await getCacheNpmLibDefs(useCacheUntil, skipCache);
@@ -465,6 +489,8 @@ async function installNpmLibDefs({
   const getLibDefsToInstall = async (entries: Array<[string, string]>) => {
     await Promise.all(
       entries.map(async ([name, ver]) => {
+        delete defDepsToInstall[name];
+
         // To comment in json files a work around is to give a key value pair
         // of `"//": "comment"` we should exclude these so the install doesn't crash
         // Ref: https://stackoverflow.com/a/14221781/430128
@@ -494,6 +520,18 @@ async function installNpmLibDefs({
           if (semver.lt(libDefLower, depLower)) {
             outdatedLibDefsToInstall.push([libDef, {name, ver}]);
           }
+
+          // If this libdef has dependencies let's first add it to a giant list
+          if (libDef.depVersions) {
+            Object.keys(libDef.depVersions).forEach(dep => {
+              if (libDef.depVersions) {
+                // This may result in overriding other libDef dependencies
+                // but we don't care because either way a project cannot have the
+                // same module declared twice.
+                defDepsToInstall[dep] = libDef.depVersions[dep];
+              }
+            });
+          }
         }
       }),
     );
@@ -502,15 +540,37 @@ async function installNpmLibDefs({
 
   const pnpResolver = await loadPnpResolver(await getPackageJsonData(cwd));
 
+  const dependencyEnvs: Array<string> = [];
+
   // If a package that's missing a flow-typed libdef has any .flow files,
   // we'll skip generating a stub for it.
   const untypedMissingLibDefs: Array<[string, string]> = [];
   const typedMissingLibDefs: Array<[string, string, string]> = [];
   await Promise.all(
     unavailableLibDefs.map(async ({name: pkgName, ver: pkgVer}) => {
-      const hasFlowFiles = await pkgHasFlowFiles(cwd, pkgName, pnpResolver);
-      if (hasFlowFiles.flowTyped && hasFlowFiles.path) {
-        typedMissingLibDefs.push([pkgName, pkgVer, hasFlowFiles.path]);
+      const {isFlowTyped, pkgPath} = await pkgHasFlowFiles(
+        cwd,
+        pkgName,
+        pnpResolver,
+        workspacesPkgJsonData,
+      );
+      if (isFlowTyped && pkgPath) {
+        typedMissingLibDefs.push([pkgName, pkgVer, pkgPath]);
+
+        try {
+          // If the flow typed dependency has a flow-typed config
+          // check if they have env's defined and if so keep them in
+          // a list so we can later install them along with project
+          // defined envs.
+          const pkgFlowTypedConfig: FtConfig = await fs.readJson(
+            path.join(pkgPath, 'flow-typed.config.json'),
+          );
+          if (pkgFlowTypedConfig.env) {
+            dependencyEnvs.push(...pkgFlowTypedConfig.env);
+          }
+        } catch (e) {
+          // Ignore if we cannot read flow-typed config
+        }
       } else {
         untypedMissingLibDefs.push([pkgName, pkgVer]);
       }
@@ -530,7 +590,9 @@ async function installNpmLibDefs({
         );
         const pkgJsonDeps = getPackageJsonDependencies(
           pkgJsonData,
-          ignoreDeps,
+          // Only get their production dependencies
+          // as the rest aren't installed anyways
+          ['dev', 'peer', ...ignoreDeps],
           ignoreDefs,
         );
         for (const pkgName in pkgJsonDeps) {
@@ -543,8 +605,51 @@ async function installNpmLibDefs({
     await getLibDefsToInstall(typedDepsLibDefsToSearchFor);
   }
 
+  // Now that we've captured all package.json libdefs and typed package libdefs
+  // We can compare libDefsToInstall with defDepsToInstall and override any that
+  // are already needed but don't match the supported dependency versions.
+  if (Object.keys(defDepsToInstall).length > 0) {
+    sectionHeader('Running definition dependency check');
+    while (Object.keys(defDepsToInstall).length > 0) {
+      await getLibDefsToInstall(
+        Object.keys(defDepsToInstall)
+          .map((dep): [string, string] => {
+            const libDef = libDefsToInstall.get(dep);
+            const defVersions = defDepsToInstall[dep];
+            if (libDef) {
+              if (!defVersions.includes(libDef.version)) {
+                // If no supported version warn it'll be overridden and continue
+                listItem(
+                  colors.yellow(
+                    `One of your definitions has a dependency to ${dep} @ version(s) ${defVersions.join(
+                      ', ',
+                    )}`,
+                  ),
+                  `You have version ${colors.yellow(libDef.version)} installed`,
+                  `We're overriding to a supported version to fix flow-typed ${colors.red(
+                    'but you may experience other type errors',
+                  )}`,
+                );
+              } else {
+                // If a supported version already installed return dummy tuple
+                // to get filtered out
+                delete defDepsToInstall[dep];
+                return ['', ''];
+              }
+            }
+
+            // This only hits if no supported version installed,
+            // we will find the last version in dependency to install
+            return [dep, defVersions[defVersions.length - 1]];
+          })
+          .filter(o => !!o[0]),
+      );
+    }
+    sectionHeader('Check complete');
+  }
+
   // Scan libdefs that are already installed
-  const libDefsToUninstall = new Map();
+  const libDefsToUninstall = new Map<string, string>();
   const alreadyInstalledLibDefs = await getInstalledNpmLibDefs(
     path.join(flowProjectRoot),
     libdefDir,
@@ -571,7 +676,7 @@ async function installNpmLibDefs({
   });
 
   if (libDefsToInstall.size > 0) {
-    console.log(`• Installing ${libDefsToInstall.size} libDefs...`);
+    sectionHeader(`Installing ${libDefsToInstall.size} libDefs...`);
     const flowTypedDirPath = path.join(flowProjectRoot, libdefDir, 'npm');
     await mkdirp(flowTypedDirPath);
     const results = await Promise.all(
@@ -587,7 +692,10 @@ async function installNpmLibDefs({
     );
 
     if (results.some(res => !res)) {
-      return 1;
+      return {
+        status: 1,
+        dependencyEnvs: [],
+      };
     }
   }
 
@@ -638,7 +746,10 @@ async function installNpmLibDefs({
       colors.bold(`flow-typed create-stub ${explicitLibDefs.join(' ')}`),
     );
 
-    return 1;
+    return {
+      status: 1,
+      dependencyEnvs: [],
+    };
   } else {
     if (untypedMissingLibDefs.length > 0 && !skip) {
       console.log('• Generating stubs for untyped dependencies...');
@@ -679,7 +790,10 @@ async function installNpmLibDefs({
     }
   }
 
-  return 0;
+  return {
+    status: 0,
+    dependencyEnvs,
+  };
 }
 
 async function installNpmLibDef(
@@ -712,7 +826,7 @@ async function installNpmLibDef(
         colors.green(
           `Consider contributing your changes back to flow-typed repository :)`,
         ),
-        `Read more at https://github.com/flow-typed/flow-typed/blob/master/CONTRIBUTING.md`,
+        `Read more at https://github.com/flow-typed/flow-typed/blob/main/CONTRIBUTING.md`,
         'Use --overwrite to overwrite the existing libdef.',
       );
       return true;

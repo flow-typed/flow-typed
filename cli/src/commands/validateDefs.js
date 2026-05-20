@@ -1,4 +1,5 @@
 // @flow
+import chalk from 'chalk';
 
 import {fs} from '../lib/node';
 
@@ -38,6 +39,9 @@ export async function run(args: Args): Promise<number> {
     return 1;
   }
   try {
+    console.log(
+      chalk.green(`Validating all definitions from \`${defsDirPath}\``),
+    );
     const npmLibDefs = await getNpmLibDefs(defsDirPath, true);
     console.log(
       'All libdefs are named and structured correctly. ' +

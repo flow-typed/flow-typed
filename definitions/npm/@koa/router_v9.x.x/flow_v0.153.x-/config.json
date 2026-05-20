@@ -1,0 +1,5 @@
+{
+  "deps": {
+    "koa-router": ["v9.x.x"]
+  }
+}

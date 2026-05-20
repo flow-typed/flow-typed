@@ -75,7 +75,7 @@ This issue was first reported here:
 
 ### My flow-typed/npm dir is throwing lots of eslint errors after installing definitions
 
-When you install lib defs using `flow-typed install` the files are copied from the central [definition registry](https://github.com/flow-typed/flow-typed/tree/master/definitions/npm) which have their own code styles and standards which may (probably will) be vastly different to the ones in your project.
+When you install lib defs using `flow-typed install` the files are copied from the central [definition registry](https://github.com/flow-typed/flow-typed/tree/main/definitions/npm) which have their own code styles and standards which may (probably will) be vastly different to the ones in your project.
 
 You may first consider fixing the linting errors every time you install (eg: `yarn eslint ./flow-typed/npm --fix`) though you shouldn't, definitions may get updates which can install next time you run `flow-typed install` but the CLI will not update a definition if it sees a definition has been modified.
 
@@ -91,3 +91,23 @@ module.exports = {
   ignorePatterns: ['**/*.js'],
 };
 ```
+
+### When running `flow-typed install` I get `UNCAUGHT ERROR`
+
+If you are getting this error upon the cache rebase step you most likely have a corrupt cache.
+
+```
+• rebasing flow-typed cache...
+UNCAUGHT ERROR: [
+  {}
+]
+```
+
+Try clearing it and running a fresh install but if that doesn't work please raise an [issue](https://github.com/flow-typed/flow-typed/issues/new/choose) with us.
+
+```
+rm -rf ~/.flow-typed
+flow-typed install
+```
+
+> You shouldn't experience this unless you've been messing around in the cache itself

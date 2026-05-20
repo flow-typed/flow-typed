@@ -564,11 +564,11 @@ describe('flowVersion', () => {
   });
 
   describe('determineFlowSpecificVersion', () => {
-    async function touchFile(filePath) {
+    async function touchFile(filePath: string) {
       await fs.close(await fs.open(filePath, 'w'));
     }
 
-    async function writePkgJson(filePath, pkgJson) {
+    async function writePkgJson(filePath: string, pkgJson: {...}) {
       await fs.writeJson(filePath, pkgJson);
     }
 

@@ -8,7 +8,7 @@ import {
 
 import {getSignedCodeVersion, verifySignedCode} from '../codeSign';
 
-import {getFilesInDir} from '../fileUtils';
+import {getFilesInDir, isExcludedFile} from '../fileUtils';
 
 import type {FlowVersion} from '../flowVersion';
 import {
@@ -30,35 +30,45 @@ import {
 
 import semver from 'semver';
 
-// import got from 'got';
+import got from 'got';
 
 import {ValidationError} from '../ValidationError';
 import {TEST_FILE_NAME_RE} from '../libDefs';
 
 const P = Promise;
 
-export type NpmLibDef = {|
+export type NpmLibDef = {
   scope: null | string,
   name: string,
   version: string,
   flowVersion: FlowVersion,
   path: string,
   testFilePaths: Array<string>,
-|};
+  depVersions: {
+    [deps: string]: Array<string>,
+  } | null,
+};
 
-export type NpmLibDefFilter = {|
+export type NpmLibDefFilter = {
   type: 'exact',
   pkgName: string,
   pkgVersion: string,
   flowVersion?: FlowVersion,
-|};
+};
+
+/**
+ * When in a nested directory of npm libdefs such as package/libdef dir
+ * find and return the root npm dir
+ */
+export const getNpmLibDefDirFromNested = (path: string): string => {
+  const npmDefsDir = '/npm/';
+  return path.substring(0, path.indexOf(npmDefsDir) + npmDefsDir.length);
+};
 
 async function extractLibDefsFromNpmPkgDir(
   pkgDirPath: string,
   scope: null | string,
   pkgNameVer: string,
-  // Remove eslint error after `environments.es5` change
-  // eslint-disable-next-line no-unused-vars
   validating?: boolean,
 ): Promise<Array<NpmLibDef>> {
   const parsedPkgNameVer = parsePkgNameVer(pkgNameVer);
@@ -71,36 +81,17 @@ async function extractLibDefsFromNpmPkgDir(
   const libDefFileName = `${pkgName}_${pkgVersionStr}.js`;
   const pkgDirItems = await fs.readdir(pkgDirPath);
 
-  /**
-   * TODO:
-   * The following block is commented out until `environments.es5` has been moved to
-   * somewhere else such as environments
-   */
-  // if (validating) {
-  //   const fullPkgName = `${scope === null ? '' : scope + '/'}${pkgName}`;
-  //   await _npmExists(fullPkgName)
-  //     .then()
-  //     .catch(error => {
-  //       if (error.HTTPError && error.HTTPError.response.statusCode === 404) {
-  //         // Some times NPM returns 404 even though the package exists.
-  //         // Try to avoid false negatives by retrying
-  //         return new Promise((resolve, reject) =>
-  //           setTimeout(() => {
-  //             _npmExists(fullPkgName)
-  //               .then(resolve)
-  //               .catch(reject);
-  //           }, 1000),
-  //         );
-  //       }
-  //     })
-  //     .then()
-  //     .catch(error => {
-  //       // Only fail on 404, not on timeout
-  //       if (error.HTTPError && error.HTTPError.statusCode === 404) {
-  //         throw new ValidationError(`Package does not exist on npm!`);
-  //       }
-  //     });
-  // }
+  if (validating) {
+    const fullPkgName = `${scope === null ? '' : scope + '/'}${pkgName}`;
+
+    try {
+      await _npmExists(fullPkgName);
+    } catch (e) {
+      throw new ValidationError(
+        `Package \`${fullPkgName}\` does not exist on npm, is this meant to be an environment instead?`,
+      );
+    }
+  }
 
   const commonTestFiles = [];
   const parsedFlowDirs: Array<[string, FlowVersion]> = [];
@@ -132,6 +123,9 @@ async function extractLibDefsFromNpmPkgDir(
     parsedFlowDirs.map(async ([flowDirPath, flowVersion]) => {
       const testFilePaths = [].concat(commonTestFiles);
       let libDefFilePath: null | string = null;
+      const depVersions: {
+        [key: string]: Array<string>,
+      } = {};
       (await fs.readdir(flowDirPath)).forEach(flowDirItem => {
         const flowDirItemPath = path.join(flowDirPath, flowDirItem);
         const flowDirItemStat = fs.statSync(flowDirItemPath);
@@ -151,6 +145,23 @@ async function extractLibDefsFromNpmPkgDir(
 
           if (isValidTestFile) {
             testFilePaths.push(flowDirItemPath);
+            return;
+          }
+
+          // Here we need to look at the deps and add it to the npmLibDef.
+          // Later if installing this libdef
+          // try to install the dependencies if not already installed elsewhere
+          if (flowDirItem === 'config.json') {
+            const deps = JSON.parse(
+              fs.readFileSync(path.join(flowDirPath, flowDirItem), 'utf-8'),
+            ).deps;
+
+            if (deps) {
+              Object.keys(deps).forEach(dep => {
+                depVersions[dep] = [...deps[dep]];
+              });
+            }
+
             return;
           }
 
@@ -180,6 +191,7 @@ async function extractLibDefsFromNpmPkgDir(
         flowVersion,
         path: libDefFilePath,
         testFilePaths,
+        depVersions: Object.keys(depVersions).length > 0 ? depVersions : null,
       });
     }),
   );
@@ -223,16 +235,20 @@ function parsePkgNameVer(
     );
   }
 
-  let [_, pkgName, major, minor, patch, prerel] = pkgNameVerMatches;
-  major = validateVersionNumPart(major, 'major');
-  minor = validateVersionPart(minor, 'minor');
-  patch = validateVersionPart(patch, 'patch');
+  const [_, pkgName, majorStr, minorStr, patchStr, prerel] = pkgNameVerMatches;
+  const major = validateVersionNumPart(majorStr, 'major');
+  const minor = validateVersionPart(minorStr, 'minor');
+  const patch = validateVersionPart(patchStr, 'patch');
 
-  if (prerel != null) {
-    prerel = prerel.substr(1);
-  }
-
-  return {pkgName, pkgVersion: {major, minor, patch, prerel}};
+  return {
+    pkgName,
+    pkgVersion: {
+      major,
+      minor,
+      patch,
+      prerel: prerel != null ? prerel.substr(1) : prerel,
+    },
+  };
 }
 
 /**
@@ -366,13 +382,10 @@ function filterLibDefs(
     });
 }
 
-// TODO Unused until `environments.es5`
-// async function _npmExists(pkgName: string): Promise<Function> {
-//   const pkgUrl = `https://api.npms.io/v2/package/${encodeURIComponent(
-//     pkgName,
-//   )}`;
-//   return got(pkgUrl, {method: 'HEAD'});
-// }
+async function _npmExists(pkgName: string): Promise<Function> {
+  const pkgUrl = `https://registry.npmjs.org/${encodeURIComponent(pkgName)}`;
+  return got(pkgUrl, {method: 'HEAD'});
+}
 
 export async function findNpmLibDef(
   pkgName: string,
@@ -390,6 +403,7 @@ export async function findNpmLibDef(
     pkgVersion,
     flowVersion,
   });
+
   return filteredLibDefs.length === 0 ? null : filteredLibDefs[0];
 }
 
@@ -460,11 +474,12 @@ export function parseSignedCodeVersion(
       version: versionToString(pkgVersion),
       flowVersion: flowVer,
       testFilePaths: [],
+      depVersions: null,
     },
   };
 }
 
-export async function getInstalledNpmLibDef(
+async function getInstalledNpmLibDef(
   flowProjectRootDir: string,
   fullFilePath: string,
 ): Promise<?[string, InstalledNpmLibDef]> {
@@ -537,7 +552,7 @@ async function getSingleLibdef(
       const scopeDirItems = await fs.readdir(itemPath);
       const settled = await P.all(
         scopeDirItems
-          .filter(item => item !== '.DS_Store')
+          .filter(item => !isExcludedFile(item))
           .map(async itemName => {
             const itemPath = path.join(npmDefsDirPath, scope, itemName);
             const itemStat = await fs.stat(itemPath);
@@ -583,9 +598,7 @@ export async function getNpmLibDefs(
   const dirItems = await fs.readdir(npmDefsDirPath);
   const errors = [];
   const proms = dirItems.map(async itemName => {
-    // If a user opens definitions dir in finder it will create `.DS_Store`
-    // which will need to be excluded while parsing
-    if (itemName === '.DS_Store') return;
+    if (isExcludedFile(itemName)) return;
 
     try {
       return await getSingleLibdef(itemName, npmDefsDirPath, validating);

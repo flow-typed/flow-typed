@@ -2,8 +2,8 @@
 
 import semver from 'semver';
 
-import {cloneInto, rebaseRepoMaster} from './git.js';
-import {mkdirp} from './fileUtils.js';
+import {cloneInto, rebaseRepoMainline} from './git.js';
+import {mkdirp, isExcludedFile} from './fileUtils.js';
 import {fs, path, os} from './node.js';
 import {versionToString, type Version} from './semver.js';
 import {
@@ -22,6 +22,7 @@ const P = Promise;
 export type LibDef = {|
   pkgName: string,
   pkgVersionStr: string,
+  configPath: string | null,
   flowVersion: FlowVersion,
   flowVersionStr: string,
   path: string,
@@ -54,7 +55,7 @@ async function rebaseCacheRepo(verbose?: VerboseOutput) {
     (await fs.exists(CACHE_REPO_GIT_DIR))
   ) {
     try {
-      await rebaseRepoMaster(CACHE_REPO_DIR);
+      await rebaseRepoMainline(CACHE_REPO_DIR);
     } catch (e) {
       writeVerbose(
         verbose,
@@ -84,7 +85,7 @@ async function updateCacheRepo(verbose?: VerboseOutput): Promise<void> {
 const CACHE_REPO_EXPIRY = 1000 * 60; // 1 minute
 export const _cacheRepoAssure: {
   lastAssured: number,
-  pendingAssure: Promise<*>,
+  pendingAssure: Promise<void>,
 } = {
   lastAssured: 0,
   pendingAssure: Promise.resolve(),
@@ -153,7 +154,7 @@ export {
   REMOTE_REPO_URL as _REMOTE_REPO_URL,
 };
 
-async function addLibDefs(pkgDirPath, libDefs: Array<LibDef>) {
+async function addLibDefs(pkgDirPath: string, libDefs: Array<LibDef>) {
   const parsedDirItem = parseRepoDirItem(pkgDirPath);
   (await parseLibDefsFromPkgDir(parsedDirItem, pkgDirPath)).forEach(libDef =>
     libDefs.push(libDef),
@@ -168,9 +169,7 @@ export async function getLibDefs(defsDir: string): Promise<Array<LibDef>> {
   const defsDirItems = await fs.readdir(defsDir);
   await P.all(
     defsDirItems.map(async item => {
-      // If a user opens definitions dir in finder it will create `.DS_Store`
-      // which will need to be excluded while parsing
-      if (item === '.DS_Store') return;
+      if (isExcludedFile(item)) return;
 
       const itemPath = path.join(defsDir, item);
       const itemStat = await fs.stat(itemPath);
@@ -181,7 +180,7 @@ export async function getLibDefs(defsDir: string): Promise<Array<LibDef>> {
           const defsDirItems = await fs.readdir(itemPath);
           await P.all(
             defsDirItems.map(async item => {
-              if (item === '.DS_Store') return;
+              if (isExcludedFile(item)) return;
 
               const itemPath = path.join(defsDir, scope, item);
               const itemStat = await fs.stat(itemPath);
@@ -207,7 +206,7 @@ export async function getLibDefs(defsDir: string): Promise<Array<LibDef>> {
   return libDefs;
 }
 
-function parsePkgFlowDirVersion(pkgFlowDirPath): FlowVersion {
+function parsePkgFlowDirVersion(pkgFlowDirPath: string): FlowVersion {
   const pkgFlowDirName = path.basename(pkgFlowDirPath);
   return parseFlowDirString(pkgFlowDirName);
 }
@@ -218,8 +217,14 @@ function parsePkgFlowDirVersion(pkgFlowDirPath): FlowVersion {
  * flow-versioned definition file.
  */
 async function parseLibDefsFromPkgDir(
-  {pkgName, pkgVersion},
-  pkgDirPath,
+  {
+    pkgName,
+    pkgVersion,
+  }: {
+    pkgName: string,
+    pkgVersion: Version,
+  },
+  pkgDirPath: string,
 ): Promise<Array<LibDef>> {
   const pkgVersionStr = versionToString(pkgVersion);
   const pkgDirItems = await fs.readdir(pkgDirPath);
@@ -248,7 +253,7 @@ async function parseLibDefsFromPkgDir(
   });
 
   if (!disjointVersionsAll(flowDirs.map(([_, ver]) => ver))) {
-    throw new ValidationError('Flow versions not disjoint!');
+    throw new ValidationError(`Flow versions not disjoint on ${pkgName}`);
   }
 
   if (flowDirs.length === 0) {
@@ -259,13 +264,15 @@ async function parseLibDefsFromPkgDir(
   await P.all(
     flowDirs.map(async ([flowDirPath, flowVersion]) => {
       const testFilePaths = [].concat(commonTestFiles);
-      const basePkgName =
+      const basePkgName: string =
+        // $FlowFixMe[incompatible-type]
         pkgName.charAt(0) === '@' ? pkgName.split(path.sep).pop() : pkgName;
       const libDefFileName =
         pkgVersionStr === 'vx.x.x'
           ? `${basePkgName}.js`
           : `${basePkgName}_${pkgVersionStr}.js`;
       let libDefFilePath;
+      let configPath;
       (await fs.readdir(flowDirPath)).forEach(flowDirItem => {
         const flowDirItemPath = path.join(flowDirPath, flowDirItem);
         const flowDirItemStat = fs.statSync(flowDirItemPath);
@@ -277,6 +284,11 @@ async function parseLibDefsFromPkgDir(
           }
 
           if (path.extname(flowDirItem) === '.swp') {
+            return;
+          }
+
+          if (flowDirItem === 'config.json') {
+            configPath = path.join(flowDirPath, flowDirItem);
             return;
           }
 
@@ -308,6 +320,7 @@ async function parseLibDefsFromPkgDir(
       libDefs.push({
         pkgName,
         pkgVersionStr,
+        configPath: configPath ?? null,
         flowVersion: flowVersion,
         flowVersionStr: flowVerToDirString(flowVersion),
         path: libDefFilePath,
@@ -352,29 +365,31 @@ export function parseRepoDirItem(
     throw new ValidationError(error);
   }
 
-  let [_, pkgName, major, minor, patch, prerel] = itemMatches;
-  const item = path
+  const [_, pkgName, majorStr, minorStr, patchStr, prerel] = itemMatches;
+  // $FlowFixMe[incompatible-type]
+  const item: string = path
     .dirname(dirItemPath)
     .split(path.sep)
     .pop();
-  if (item.charAt(0) === '@') {
-    pkgName = `${item}${path.sep}${pkgName}`;
-  }
-  major = validateVersionNumPart(major, 'major', dirItemPath);
-  minor = validateVersionPart(minor, 'minor', dirItemPath);
-  patch = validateVersionPart(patch, 'patch', dirItemPath);
+  const major = validateVersionNumPart(majorStr, 'major', dirItemPath);
+  const minor = validateVersionPart(minorStr, 'minor', dirItemPath);
+  const patch = validateVersionPart(patchStr, 'patch', dirItemPath);
 
-  if (prerel != null) {
-    prerel = prerel.substr(1);
-  }
-
-  return {pkgName, pkgVersion: {major, minor, patch, prerel}};
+  return {
+    pkgName: item.charAt(0) === '@' ? `${item}${path.sep}${pkgName}` : pkgName,
+    pkgVersion: {
+      major,
+      minor,
+      patch,
+      prerel: prerel != null ? prerel.substr(1) : prerel,
+    },
+  };
 }
 
 /**
  * Given a path to an assumed test file, ensure that it is named as expected.
  */
-function validateTestFile(testFilePath) {
+function validateTestFile(testFilePath: string) {
   const testFileName = path.basename(testFilePath);
   return TEST_FILE_NAME_RE.test(testFileName);
 }
@@ -383,7 +398,11 @@ function validateTestFile(testFilePath) {
  * Given a number-only part of a version string (i.e. the `major` part), parse
  * the string into a number.
  */
-function validateVersionNumPart(part, partName, context) {
+function validateVersionNumPart(
+  part: string,
+  partName: string,
+  context: string,
+) {
   const num = parseInt(part, 10);
   if (String(num) !== part) {
     const error = `'${context}': Invalid ${partName} number: '${part}'. Expected a number.`;
@@ -396,7 +415,7 @@ function validateVersionNumPart(part, partName, context) {
  * Given a number-or-wildcard part of a version string (i.e. a `minor` or
  * `patch` part), parse the string into either a number or 'x'.
  */
-function validateVersionPart(part, partName, context) {
+function validateVersionPart(part: string, partName: string, context: string) {
   if (part === 'x') {
     return part;
   }
@@ -407,7 +426,7 @@ function validateVersionPart(part, partName, context) {
  * Given a path to a 'definitions' dir, assert that the currently-running
  * version of the CLI is compatible with the repo.
  */
-async function verifyCLIVersion(defsDirPath) {
+async function verifyCLIVersion(defsDirPath: string) {
   const metadataFilePath = path.join(defsDirPath, '.cli-metadata.json');
   const metadata = await fs.readJson(metadataFilePath);
   if (!metadata.compatibleCLIRange) {
@@ -438,7 +457,11 @@ async function verifyCLIVersion(defsDirPath) {
  * provided.
  */
 type VerboseOutput = stream$Writable | tty$WriteStream;
-function writeVerbose(stream, msg, writeNewline = true) {
+function writeVerbose(
+  stream?: VerboseOutput,
+  msg: string,
+  writeNewline: boolean = true,
+) {
   if (stream != null) {
     stream.write(msg + (writeNewline ? '\n' : ''));
   }

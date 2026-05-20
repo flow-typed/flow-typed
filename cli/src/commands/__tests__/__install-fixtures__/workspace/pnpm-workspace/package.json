@@ -1,0 +1,7 @@
+{
+	"name": "root-workspace",
+	"private": true,
+	"devDependencies": {
+		"flow-bin": "^0.43.0"
+	}
+}

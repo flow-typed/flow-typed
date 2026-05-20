@@ -1,7 +1,32 @@
 // @flow
-
 import whichCb from 'which';
+import simpleGit from 'simple-git';
+
 import {child_process} from './node';
+
+const mainlineBranch = 'main';
+
+const isMainlineBranch = async (cacheDirPath: string): Promise<boolean> => {
+  const git = simpleGit().cwd(cacheDirPath);
+
+  return (await git.branch()).current === mainlineBranch;
+};
+
+const checkoutToMainlineBranch = async (
+  cacheDirPath: string,
+): Promise<void> => {
+  const git = simpleGit().cwd(cacheDirPath);
+
+  try {
+    await git.fetch('origin', 'main');
+    await git.checkout('main');
+  } catch (e) {
+    throw new Error(
+      `Error checking out the \`${mainlineBranch}\` branch of the following repo:\n` +
+        `${cacheDirPath}\n\n${e}`,
+    );
+  }
+};
 
 async function getGitPath() {
   try {
@@ -13,7 +38,7 @@ async function getGitPath() {
   }
 }
 
-function which(executable): Promise<string> {
+function which(executable: string): Promise<string> {
   return new Promise((res, rej) => {
     whichCb(executable, (err, resolvedPath) => {
       if (err) {
@@ -76,7 +101,7 @@ export async function getDefinitionsDiff(): Promise<Array<string>> {
     // ]);
     let {stdout} = await child_process.spawnP(gitPath, [
       'diff',
-      'origin/master',
+      `origin/${mainlineBranch}`,
       '--name-only',
     ]);
     console.log(stdout);
@@ -84,7 +109,7 @@ export async function getDefinitionsDiff(): Promise<Array<string>> {
     if (
       stdout.split('\n').filter(o => o.startsWith('definitions/')).length === 0
     ) {
-      // We are probably already on master, so compare to the last commit.
+      // We are probably already on mainline, so compare to the last commit.
       const {stdout: headDiff} = await child_process.spawnP(gitPath, [
         'diff',
         'HEAD~1',
@@ -104,6 +129,9 @@ export async function cloneInto(gitURL: string, destDirPath: string) {
   const gitPath = await getGitPath();
   try {
     await child_process.spawnP(gitPath, ['clone', gitURL, destDirPath]);
+    if (!(await isMainlineBranch(destDirPath))) {
+      await checkoutToMainlineBranch(destDirPath);
+    }
   } catch (e) {
     throw new Error(`Error cloning repo: ${e.message}`);
   }
@@ -137,16 +165,11 @@ export async function findLatestFileCommitHash(
   }
 }
 
-export async function rebaseRepoMaster(repoDirPath: string) {
+export async function rebaseRepoMainline(repoDirPath: string) {
   const gitPath = await getGitPath();
-  await child_process
-    .spawnP(gitPath, ['checkout', 'master'], {cwd: repoDirPath})
-    .catch(({stderr}) => {
-      throw new Error(
-        'Error checking out the `master` branch of the following repo:\n' +
-          `${repoDirPath}\n\n${stderr}`,
-      );
-    });
+  if (!(await isMainlineBranch(repoDirPath))) {
+    await checkoutToMainlineBranch(repoDirPath);
+  }
 
   try {
     await child_process.execFileP(gitPath, ['pull', '--rebase'], {
@@ -155,7 +178,7 @@ export async function rebaseRepoMaster(repoDirPath: string) {
   } catch (e) {
     const {stderr} = e;
     throw new Error(
-      'Error rebasing the `master` branch of the following repo:\n' +
+      `Error rebasing the \`${mainlineBranch}\` branch of the following repo:\n` +
         `${repoDirPath}\n\n${stderr}`,
     );
   }

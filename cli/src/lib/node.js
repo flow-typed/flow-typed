@@ -1,5 +1,5 @@
 // @flow
-
+import * as realFs from 'fs';
 import * as node_child_process from 'child_process';
 import * as node_https from 'https';
 import * as node_os from 'os';
@@ -21,6 +21,7 @@ export const child_process = {
         if (err) {
           rej(err);
         } else {
+          // $FlowFixMe[incompatible-call]
           res({stdout: Buffer.from(stdout), stderr: Buffer.from(stderr)});
         }
       });
@@ -90,6 +91,7 @@ export const fs = {
   createReadStream: fsExtra.createReadStream,
   createWriteStream: fsExtra.createWriteStream,
   exists: fsExtra.exists,
+  existsSync: realFs.existsSync,
   mkdir: fsExtra.mkdir,
   open: fsExtra.open,
   readdir: fsExtra.readdir,

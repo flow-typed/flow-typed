@@ -14,12 +14,12 @@ import {
   verifyCLIVersion,
 } from '../cacheRepoUtils';
 
-import {cloneInto, rebaseRepoMaster} from '../git';
+import {cloneInto, rebaseRepoMainline} from '../git';
 
 import {fs} from '../node';
 
-function _mock(mockFn) {
-  return ((mockFn: any): JestMockFn<*, *>);
+function _mock(mockFn: any) {
+  return (mockFn: JestMockFn<any, any>);
 }
 
 describe('cacheRepoUtils', () => {
@@ -27,7 +27,7 @@ describe('cacheRepoUtils', () => {
     let origConsoleLog = console.log;
     beforeEach(() => {
       _mock(cloneInto).mockClear();
-      _mock(rebaseRepoMaster).mockClear();
+      _mock(rebaseRepoMainline).mockClear();
       (console: any).log = jest.fn();
       cacheRepoEnsureToken.lastEnsured = 0;
       cacheRepoEnsureToken.pendingEnsurance = Promise.resolve();
@@ -69,7 +69,7 @@ describe('cacheRepoUtils', () => {
       });
 
       await ensureCacheRepo();
-      expect(_mock(rebaseRepoMaster).mock.calls[0]).toEqual([
+      expect(_mock(rebaseRepoMainline).mock.calls[0]).toEqual([
         getCacheRepoDir(),
       ]);
     });
@@ -89,7 +89,7 @@ describe('cacheRepoUtils', () => {
       });
 
       await ensureCacheRepo();
-      expect(_mock(rebaseRepoMaster).mock.calls).toEqual([]);
+      expect(_mock(rebaseRepoMainline).mock.calls).toEqual([]);
     });
   });
 

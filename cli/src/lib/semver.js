@@ -72,12 +72,12 @@ export function stringToVersion(verStr: string): Version {
         '`',
     );
   }
-  let [
+  const [
     _1,
     range,
-    major,
-    minor,
-    patch,
+    majorStr,
+    minorStr,
+    patchStr,
     prerel,
     _2,
     upperRange,
@@ -95,43 +95,43 @@ export function stringToVersion(verStr: string): Version {
     );
   }
 
-  major = _validateVersionNumberPart(verStr, 'major', major);
-  if (minor !== 'x') {
-    minor = _validateVersionNumberPart(verStr, 'minor', minor);
-  }
-  if (patch !== 'x') {
-    patch = _validateVersionNumberPart(verStr, 'patch', patch);
-  }
+  const major = _validateVersionNumberPart(verStr, 'major', majorStr);
+  const minor =
+    minorStr !== 'x'
+      ? _validateVersionNumberPart(verStr, 'minor', minorStr)
+      : minorStr;
+  const patch =
+    patchStr !== 'x'
+      ? _validateVersionNumberPart(verStr, 'patch', patchStr)
+      : patchStr;
 
-  let upperBound;
-  if (upperMajor) {
-    upperMajor = _validateVersionNumberPart(
-      verStr,
-      'upper-bound major',
-      upperMajor,
-    );
-    if (upperMinor !== 'x') {
-      upperMinor = _validateVersionNumberPart(
-        verStr,
-        'upper-bound minor',
-        upperMinor,
-      );
-    }
-    if (upperPatch !== 'x') {
-      upperPatch = _validateVersionNumberPart(
-        verStr,
-        'upper-bound patch',
-        upperPatch,
-      );
-    }
-    upperBound = {
-      range: upperRange,
-      major: upperMajor,
-      minor: upperMinor,
-      patch: upperPatch,
-      prerel: upperPrerel.substr(1),
-    };
-  }
+  const upperBound = upperMajor
+    ? {
+        range: upperRange,
+        major: _validateVersionNumberPart(
+          verStr,
+          'upper-bound major',
+          upperMajor,
+        ),
+        minor:
+          upperMinor !== 'x'
+            ? _validateVersionNumberPart(
+                verStr,
+                'upper-bound minor',
+                upperMinor,
+              )
+            : upperMinor,
+        patch:
+          upperPatch !== 'x'
+            ? _validateVersionNumberPart(
+                verStr,
+                'upper-bound patch',
+                upperPatch,
+              )
+            : upperPatch,
+        prerel: upperPrerel.substr(1),
+      }
+    : undefined;
 
   if (range === '<=' && ((major === minor) === patch) === 0) {
     throw new Error(
@@ -139,11 +139,14 @@ export function stringToVersion(verStr: string): Version {
     );
   }
 
-  if (prerel != null) {
-    prerel = prerel.substr(1);
-  }
-
-  return {range, major, minor, patch, prerel, upperBound};
+  return {
+    range,
+    major,
+    minor,
+    patch,
+    prerel: prerel != null ? prerel.substr(1) : prerel,
+    upperBound,
+  };
 }
 
 export function versionToString(ver: Version): string {
@@ -153,7 +156,11 @@ export function versionToString(ver: Version): string {
   return `${rangeStr}v${ver.major}.${ver.minor}.${ver.patch}${prerel}${upperStr}`;
 }
 
-function _validateVersionNumberPart(context, partName, part) {
+function _validateVersionNumberPart(
+  context: string,
+  partName: string,
+  part: string,
+) {
   const num = parseInt(part, 10);
   if (String(num) !== part) {
     throw new Error(

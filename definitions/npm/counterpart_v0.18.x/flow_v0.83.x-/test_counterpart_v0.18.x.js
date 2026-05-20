@@ -1,7 +1,13 @@
 // @flow
 import { describe, it } from 'flow-typed-test';
 import Counterpart from 'counterpart';
-import type { NotFoundHandler, LocaleChangeHandler } from 'counterpart';
+import type {
+  NotFoundHandler,
+  MissingEntryGenerator,
+  LocaleChangeHandler,
+  KeyTransformer,
+  ErrorHandler,
+} from 'counterpart';
 
 describe('counterpart', () => {
   // This matches the readme example.
@@ -35,8 +41,30 @@ describe('counterpart', () => {
   describe('methods', () => {
     const instance = new Counterpart.Instance();
 
+    it('getSeparator', () => {
+      let separator: string = instance.getSeparator();
+
+      // $FlowExpectedError[extra-arg]
+      instance.getSeparator('.');
+    });
+
     it('setSeparator', () => {
       instance.setSeparator('*');
+    });
+
+    it('getMissingEntryGenerator', () => {
+      let generator: MissingEntryGenerator = instance.getMissingEntryGenerator();
+
+      // $FlowExpectedError[extra-arg]
+      instance.getMissingEntryGenerator((key: string) => 'MISSING: ' + key);
+    });
+
+    it('setMissingEntryGenerator', () => {
+      const generator = function(key: string) {
+        return 'Ooops! Translation missing for ' + key + '!!!';
+      };
+
+      instance.setMissingEntryGenerator(generator);
     });
 
     it('registerTranslations', () => {
@@ -60,9 +88,53 @@ describe('counterpart', () => {
       instance.getLocale('locale');
     });
 
+    it('getFallbackLocale', () => {
+      let locales: string[] = instance.getFallbackLocale();
+
+      // $FlowExpectedError[extra-arg]
+      instance.getFallbackLocale('locale');
+    });
+
     it('setFallbackLocale', () => {
       instance.setFallbackLocale('locale');
       instance.setFallbackLocale(['locale']);
+    });
+
+    it('getAvailableLocales', () => {
+      let locales: string[] = instance.getAvailableLocales();
+
+      // $FlowExpectedError[extra-arg]
+      instance.getAvailableLocales('locale');
+    });
+
+    it('setAvailableLocales', () => {
+      instance.setAvailableLocales(['locale']);
+    });
+
+    it('getKeyTransformer', () => {
+      let transformer: KeyTransformer = instance.getKeyTransformer();
+
+      // $FlowExpectedError[extra-arg]
+      instance.getKeyTransformer((key: string) => key);
+    });
+
+    it('setKeyTransformer', () => {
+      const transformer = function(key: string | string[], options?: { ... }) {
+        return key;
+      };
+
+      instance.setKeyTransformer(transformer);
+    });
+
+    it('getInterpolate', () => {
+      let interpolate: boolean = instance.getInterpolate();
+
+      // $FlowExpectedError[extra-arg]
+      instance.getInterpolate(false);
+    });
+
+    it('setInterpolate', () => {
+      instance.setInterpolate(false);
     });
 
     it('onTranslationNotFound', () => {
@@ -86,6 +158,61 @@ describe('counterpart', () => {
       instance.onLocaleChange(
         // $FlowExpectedError[incompatible-call]
         (locale: number, key: boolean, fallback: () => void, scope: null) => {}
+      );
+    });
+
+    it('onError', () => {
+      const callback: ErrorHandler = () => {
+        // nothing
+      };
+      instance.onError(callback);
+
+      instance.onError(
+        // $FlowExpectedError[incompatible-call]
+        (err: Error, entry: number, values: boolean) => {}
+      );
+    });
+
+    it('withLocale', () => {
+      const callback = () => {
+        // nothing
+      };
+      instance.withLocale('foo', callback);
+      instance.withLocale('foo', callback, { bar: 'baz' });
+
+      instance.withLocale(
+        'foo',
+        // $FlowExpectedError[incompatible-call]
+        (key: string) => {}
+      );
+    });
+
+    it('withScope', () => {
+      const callback = () => {
+        // nothing
+      };
+      instance.withScope('foo', callback);
+      instance.withScope(['foo', 'boo'], callback);
+      instance.withScope('foo', callback, { bar: 'baz' });
+
+      instance.withScope(
+        'foo',
+        // $FlowExpectedError[incompatible-call]
+        (key: string) => {}
+      );
+    });
+
+    it('withSeparator', () => {
+      const callback = () => {
+        // nothing
+      };
+      instance.withSeparator('.', callback);
+      instance.withSeparator('.', callback, { bar: 'baz' });
+
+      instance.withSeparator(
+        '.',
+        // $FlowExpectedError[incompatible-call]
+        (key: string) => {}
       );
     });
   });

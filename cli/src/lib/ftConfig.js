@@ -2,8 +2,9 @@
 import {fs, path} from './node';
 
 export type FtConfig = {
-  env?: mixed, // Array<string>,
+  env?: Array<string>,
   ignore?: Array<string>,
+  workspaces?: Array<string>,
 };
 
 export const getFtConfig = (cwd: string): FtConfig | void => {

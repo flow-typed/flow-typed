@@ -13,6 +13,7 @@ import {getPackageJsonData} from './npm/npmProjectUtils';
 import {
   getPackageJsonDependencies,
   type PnpResolver,
+  type PkgJson,
 } from './npm/npmProjectUtils';
 import {mkdirp} from './fileUtils';
 import {path} from './node';
@@ -309,7 +310,7 @@ declare module '%s' {
 `;
 
     const [fileDecls, aliases] = files.reduce(
-      ([fileDecls, aliases], file) => {
+      ([fileDecls, aliases]: [Array<string>, Array<string>], file) => {
         const ext = path.extname(file);
         const name = file.substr(0, file.length - ext.length);
         const moduleName = `${packageName}/${name}`;
@@ -365,35 +366,62 @@ declare module '%s' {
   return filename;
 }
 
+/**
+ * Look across a project root node_modules as well as
+ * each workspace's node_modules to find the dependency
+ * to determine if it is flow typed.
+ */
 export async function pkgHasFlowFiles(
   projectRoot: string,
   packageName: string,
   pnpjs: PnpResolver | null,
+  workspacesPkgJsonData: Array<PkgJson>,
 ): Promise<{|
-  flowTyped: boolean,
-  path?: string,
+  isFlowTyped: boolean,
+  pkgPath?: string,
 |}> {
-  try {
-    let pathToPackage = await resolvePkgDirPath(
-      packageName,
-      projectRoot,
-      pnpjs,
-    );
+  const findTypedFiles = async (path: string): Promise<void | string> => {
+    try {
+      let pathToPackage = await resolvePkgDirPath(packageName, path, pnpjs);
 
-    const files = await glob('**/*.flow', {
-      cwd: pathToPackage,
-      ignore: 'node_modules/**',
-    });
+      const typedFiles = await glob('**/*.flow', {
+        cwd: pathToPackage,
+        ignore: 'node_modules/**',
+      });
 
+      if (typedFiles.length > 0) {
+        return pathToPackage;
+      }
+    } catch (e) {
+      return undefined;
+    }
+  };
+
+  const rootTypedPath = await findTypedFiles(projectRoot);
+
+  if (rootTypedPath) {
     return {
-      flowTyped: files.length > 0,
-      path: pathToPackage,
-    };
-  } catch (e) {
-    return {
-      flowTyped: false,
+      isFlowTyped: true,
+      pkgPath: rootTypedPath,
     };
   }
+
+  const typedWorkspacePaths = await Promise.all(
+    workspacesPkgJsonData.map(async pkgJson =>
+      findTypedFiles(path.dirname(pkgJson.pathStr)),
+    ),
+  );
+  const workspacePath = typedWorkspacePaths.find(o => !!o);
+  if (workspacePath) {
+    return {
+      isFlowTyped: true,
+      pkgPath: workspacePath,
+    };
+  }
+
+  return {
+    isFlowTyped: false,
+  };
 }
 
 async function getDefinitelyTypedPackage(
@@ -426,7 +454,7 @@ export async function createStub(
   libdefDir?: string,
   maxDepth?: number,
 ): Promise<boolean> {
-  let files = [];
+  let files: Array<string> = [];
   let resolutionError = null;
   let pathToPackage = null;
   let version = explicitVersion || null;

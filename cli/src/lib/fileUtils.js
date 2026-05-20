@@ -8,7 +8,7 @@ const P = Promise;
 
 export function copyDir(srcPath: string, destPath: string): Promise<void> {
   return new Promise((res, rej) => {
-    fs.copy(srcPath, destPath, err => {
+    fs.copy(srcPath, destPath, (err: any) => {
       if (err) {
         rej(err);
       } else {
@@ -54,7 +54,7 @@ export async function getFilesInDir(
   let dirItemStats = await P.all(
     dirItems.map(item => fs.stat(path.join(dirPath, item))),
   );
-  const installedLibDefs = new Set();
+  const installedLibDefs = new Set<string>();
   await P.all(
     dirItems.map(async (itemName, idx) => {
       const itemStat = dirItemStats[idx];
@@ -72,7 +72,7 @@ export async function getFilesInDir(
   return installedLibDefs;
 }
 
-export function mkdirp(path: string): Promise<*> {
+export function mkdirp(path: string): Promise<string | void> {
   return mkdirpLib(path);
 }
 
@@ -109,7 +109,7 @@ export async function searchUpDirPath(
   testFn: (path: string) => Promise<boolean>,
 ): Promise<string | null> {
   let currDir = startDir;
-  let lastDir = null;
+  let lastDir: string | null = null;
   while (currDir !== lastDir) {
     if (await testFn(currDir)) {
       return currDir;
@@ -118,4 +118,14 @@ export async function searchUpDirPath(
     currDir = path.resolve(currDir, '..');
   }
   return null;
+}
+
+/**
+ * Returns whether a file matches one of the excluded file names
+ * which would be used by an external system and shouldn't be parsed
+ * by flow-typed cli.
+ */
+export function isExcludedFile(item: string): boolean {
+  // If a user opens definitions dir in finder it will create `.DS_Store`
+  return ['.DS_Store', 'CODEOWNERS'].includes(item);
 }

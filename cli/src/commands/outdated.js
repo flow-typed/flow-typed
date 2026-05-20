@@ -17,7 +17,7 @@ import {CACHE_REPO_EXPIRY, getCacheRepoDir} from '../lib/cacheRepoUtils';
 import {getFtConfig} from '../lib/ftConfig';
 import {findEnvDef, getEnvDefVersionHash, getEnvDefs} from '../lib/envDefs';
 
-const pullSignature = v => v.split('\n').slice(0, 2);
+const pullSignature = (v: string) => v.split('\n').slice(0, 2);
 
 export const name = 'outdated';
 export const description =

@@ -30,13 +30,13 @@ const Comp = () => (
 );
 ```
 
-Typically you'd expect the above to error in some capacity because `foo` is not a valid `type` and `anything` isn't a prop that `<input />` accepts. But you get nothing and there's currently no way to add type definitions to primitive jsx as a third party tool.
+Typically you'd expect the above to error in some capacity because `foo` is not a valid `type` and `anything` isn't a prop that `<input />` accepts. But you get no errors.
 
-But with environment definitions serving reusable type definitions, at the minimum you can soundly type reusable components across your application.
+But with environment definitions, you will have accurate jsx intrinsics typing.
 
 ```js
 type Props = {|
-  ...$Exact<jsx$HTMLElement>,
+  ...React.PropsOf<'input'>,
   foo: string,
 |};
 

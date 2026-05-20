@@ -1,5 +1,5 @@
-// flow-typed signature: 9aa4b5b65a89b6c5ddbb3f442e747bbb
-// flow-typed version: 830640f51c/yargs_v15.x.x/flow_>=v0.118.x <=v0.200.x
+// flow-typed signature: 25e998ddd6918cb00471e78e50ebaf26
+// flow-typed version: 830640f51c/yargs_v15.x.x/flow_>=v0.201.x
 
 declare module "yargs" {
   declare type Argv = {
@@ -9,7 +9,7 @@ declare module "yargs" {
     ...
   };
 
-  declare type Options = $Shape<{
+  declare type Options = Partial<{
     alias: string | Array<string>,
     array: boolean,
     boolean: boolean,

@@ -15,7 +15,7 @@ Contributing library definitions is as easy as sending a pull request!
   * [Environment definitions](environment-definitions)
 * [Libdef best practices](#libdef-best-practices)
   * [Read flow docs](#read-flow-docs)
-  * [Don't import types from other libdefs](#dont-import-types-from-other-libdefs)
+  * [Importing types from other libdefs](#importing-types-from-other-libdefs)
   * [Avoid `any` when possible](#avoid-any-when-possible)
   * [Exporting modules](#exporting-modules)
   * [Declaring types](#declaring-types)
@@ -26,11 +26,12 @@ Contributing library definitions is as easy as sending a pull request!
   * [A note on flowgen](#a-note-on-flowgen)
 * [Writing tests](#writing-tests)
   * [Use `describe` and `it` blocks to limit scope](#use-describe-and-it-blocks-to-limit-scope)
+* [Owning definitions](#owning-definitions)
 
 ## Understanding the definitions structure
 
 All definitions sit under the
-[/definitions](https://github.com/flowtype/flow-typed/tree/master/definitions)
+[/definitions](https://github.com/flowtype/flow-typed/tree/main/definitions)
 directory. They all must follow the following directory structure and naming
 format:
 
@@ -43,9 +44,12 @@ format:
     | | |                     #     specified version(s) of Flow (v0.83.x in this
     | | |                     #     case).
     | | |
-    | | └ yargs_v4.x.x.js     # <-- The libdef file meant for the Flow version
-    | |                       #     specified by the containing directory's name.
-    | |                       #     Must be named `<LIB>_v<VERSION>.js`.
+    | | ├ yargs_v4.x.x.js     # <-- The libdef file meant for the Flow version
+    | | |                     #     specified by the containing directory's name.
+    | | |                     #     Must be named `<LIB>_v<VERSION>.js`.
+    | | |
+    | | └ config.json        # <-- An optional file to hold configurations of the
+    | |                       #     definition such as dependent definitions
     | |
     | ├ flow_v0.85.x-v0.91.x/ # <-- A folder containing libdefs tested against a
     | | |                     #     different range of Flow versions:
@@ -151,11 +155,11 @@ reasonable degree. At minimum your tests should:
 1. Use the library definition in a couple of ways that are *expected* to produce
    a type error. Though type errors should fail your tests, you can add [error suppressions](https://flow.org/en/docs/errors/) to the line above just like you would in your own codebase.
 
-[Here](https://github.com/flow-typed/flow-typed/blob/master/definitions/npm/highlight.js_v8.x.x/test_highlight.js-v8.js)
+[Here](https://github.com/flow-typed/flow-typed/blob/main/definitions/npm/highlight.js_v8.x.x/test_highlight.js-v8.js)
 is an example of a nice and thorough test file. You don't necessarily have to be
 this thorough, but the more thorough you are the better!
 
-Sometimes you may want to break down your test suite instead of having one gigantic file. In that case you can actually write as many test files as you like as long as their names start with `test_`. [Redux](https://github.com/flow-typed/flow-typed/tree/master/definitions/npm/redux_v4.x.x/flow_v0.134.x-) followed this pattern.
+Sometimes you may want to break down your test suite instead of having one gigantic file. In that case you can actually write as many test files as you like as long as their names start with `test_`. [Redux](https://github.com/flow-typed/flow-typed/tree/main/definitions/npm/redux_v4.x.x/flow_v0.134.x-) followed this pattern.
 
 Alternatively you can add test files in the **package version directory** which will be run by
 the test-runner for *all* versions of flow the package version supports. Though general best practice as outlined above is using the **flow version directory**.
@@ -177,6 +181,10 @@ the test-runner for *all* versions of flow the package version supports. Though 
 # note: If you find that your changed files aren't being picked up
 #       you can try `git add -A` then run the following script
 ./quick_run_def_tests.sh
+# If you run this command at a high rate you may reach github's
+# unauthenticated rate limit.
+# Try adding a github auth token in those cases
+GITHUB_TOKEN=your_token ./quick_run_def_tests.sh
 
 # If you want to run something very specific,
 # taking the left-pad example you can point to the
@@ -206,22 +214,42 @@ The above are instructions on how to submit a library definition against npm pac
 
 There's a solid writeup in the [Flow docs](https://flow.org/en/docs/libdefs/creation/) about creating new library definitions. Give it a read!
 
-### Don't import types from other libdefs
+### Importing types from other libdefs
 
-You might think it would be possible to import types from other libdefs, much the same way you do in your own code:
+Often times you may find yourself typing a package that relies on the types from another package. You can do this by first finding the definition at the flow version you'd like to import to and add a `config.json` file.
 
-```js
-import type { MyType } from 'some-module';
-declare module 'other-module' {
-  declare export function takesMyType(val: MyType): number;
+Here you can declare a `deps` property that holds an object of dependent versions and their supported versions
+
+```json
+{
+  "deps": {
+    "redux": ["v3.x.x", "v4.x.x"],
+    "koa": ["2.0.x", "2.x.x"]
+  }
 }
 ```
 
-...but you would be wrong. Flow silently converts `MyType` to be typed `any`, and then sadness ensues.
+Then in your definition module
 
-**But wait, I want my React types!**
+```js
+declare module 'other-module' {
+  import type { Action } from 'redux';
 
-Good news! You can use the raw, private React types (e.g. `React$Node`, `React$ComponentType`) directly without importing them. You can also import types built into flow *inside* the module declaration:
+  declare export function takesMyType(val: Action): number;
+}
+```
+
+One important note here is that all definition flow version ranges **must** be aligned if you want them to depend on each other. This is a limitation of our test suite architecture.
+
+Say you have `react-redux` depending on `redux`; if the flow version with the dependency in `react-redux` is `v0.104.x-0.141.x` then that exact version range must exist in `redux` for testing compatibility. Any other flow version ranges in either definitions can have any range they please if they don't depend on one another.
+
+> Yes, this could lead to overly fragmented flow definition ranges if a definition has many dependencies.
+
+---
+
+**What about `react` types??**
+
+You can use the raw, private React types (e.g. `React$Node`, `React$ComponentType`) directly without importing them. You can also import the types without declaring it as `"deps"` as they're part of the core flow libs like other node internal packages:
 
 ```js
 declare module 'example' {
@@ -229,26 +257,9 @@ declare module 'example' {
 }
 ```
 
-**So why don't I do that for importing other libdefs?**
-
-Because it just doesn't work, sorry. You might think this is possible, but it isn't:
-
-```js
-declare module 'koa-router' {
-  import type { Middleware } from 'koa';
-}
-```
-
-To be super clear:
-
-1. You can't import types from other libdefs in flow-typed
-1. You can import types built into flow (e.g. from `react` or `fs`), only if you put the import statement inside the module declaration
-
-[Further discussion here](https://github.com/flow-typed/flow-typed/issues/1857) and [here](https://github.com/flow-typed/flow-typed/issues/2023).
-
 ### Avoid `any` when possible
 
-Using the `any` type for a variable or interface results in the loss of type information as types pass through it. That means if a type passes through `any` before propogating on to other code, the `any` will potentially cause flow to miss type errors!
+Using the `any` type for a variable or interface results in the loss of type information as types pass through it. That means if a type passes through `any` before propagating on to other code, the `any` will potentially cause flow to miss type errors!
 
 In many places it is better (but also stricter) to use the `mixed` type rather than the `any` type. The `mixed` type is safer in that it allows anything to flow in to it, but can never be used downstream without [dynamic type tests](https://flow.org/en/docs/lang/refinements/#_) that verify the type at runtime.
 
@@ -418,5 +429,15 @@ foo('#someFunction', () => {
   // you can also do type checks outside an it statement
   //$FlowExpectedError
   const a: number = 'foo';
-})
+});
 ```
+
+## Owning definitions
+
+So you've contributed to a definition and would like to be involved in future maintenance if it gets updated. `flow-typed` allows you to add a `CODEOWNERS` file in either a definition scope (`@scope/`) or definition version (`package_vx.x.x/`) level.
+
+Equally if you want to get notified of updates to `environment` definitions you can add or update the `CODEOWNERS` file in the `environment/env` directory.
+
+Just add your github handle to the file as a newline and you'll be notified next time a pull request is raised if it touched files nested in the `CODEOWNERS` directory.
+
+![bot-pr-comment](docs/_media/bot-pr-comment.png)

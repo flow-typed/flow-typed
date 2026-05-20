@@ -5,7 +5,7 @@
 </p>
 
 <p align="center">
-  A <a href="https://github.com/flow-typed/flow-typed/tree/master/definitions">repository</a> of
+  A <a href="https://github.com/flow-typed/flow-typed/tree/main/definitions">repository</a> of
   high-quality, third-party <a href="https://flow.org/en/docs/libdefs">library type definitions</a>
   for use with <a href="http://flow.org">Flow</a>.
 </p>
@@ -24,27 +24,10 @@
   </a>
 </p>
 
----
-
-## ⚠️ Version 4.0 will release soon! ⚠️
-
-And with it comes new features, most notably the support for **definition dependencies**.
-
-Learn how to add dependencies to a definition from the `main` branch [docs](https://github.com/flow-typed/flow-typed/blob/main/CONTRIBUTING.md#importing-types-from-other-libdefs) which can be consumed with the `v4` CLI.
-
-```bash
-$ yarn global add flow-typed@next
-# or
-$ npm install -g flow-typed@next
-```
-
-### What's happening to `master`?
-
-Nothing for the most part! CLI versions < `v4` will still pull definitions from `master` so if you have library definitions that don't require dependencies we still recommend you contribute to `master` and it'll get periodically synced back to `main` for users >= `v4`.
-
-Eventually we will deprecate `master` in favour of `main`.
-
----
+> [!NOTE]  
+> We want to keep the flow-typed community informed about the current state and future direction of the project. As you might have noticed, our activity has slowed down in recent months. However, we are committed to maintaining the functionality of flow-typed and will continue to fix any issues that arise with new releases of Flow.
+>
+> While we're not planning any major new features at the moment, we remain open to feature contributions from the community. Our focus remains on ensuring that the existing features work well and that type definitions are kept up to date. We appreciate the value that these contributions bring and encourage anyone interested in enhancing flow-typed to get involved.
 
 Check out the [quick start](https://flow-typed.github.io/flow-typed/#/quickstart) page
 in the docs to get started. It will walk you through installing typedefs, using them,
@@ -86,7 +69,7 @@ Chances are your question has already been answered! If not, don't hesitate to
 
 ## How Do I Contribute Library Definitions?
 
-Just send a pull request! The documentation highlighted in [CONTRIBUTING.md](https://github.com/flow-typed/flow-typed/blob/master/CONTRIBUTING.md) should give a detailed overview of how to raise a pull request following our best practices.
+Just send a pull request! The documentation highlighted in [CONTRIBUTING.md](https://github.com/flow-typed/flow-typed/blob/main/CONTRIBUTING.md) should give a detailed overview of how to raise a pull request following our best practices.
 
 ### Contributing to the CLI
 

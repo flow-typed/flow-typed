@@ -17,14 +17,24 @@ import * as ValidateDefs from './commands/validateDefs';
 import type {Argv} from 'yargs';
 import typeof Yargs from 'yargs';
 
+export const install = Install.run;
+export const createDef = CreateDef.run;
+export const createStub = CreateStub.run;
+export const outdated = Outdated.run;
+export const runTests = RunTests.run;
+export const search = Search.run;
+export const update = Update.run;
+export const updateCache = UpdateCache.run;
+export const validateDefs = ValidateDefs.run;
+
 const identity = <T>(x: T): T => x;
 
 export function runCLI() {
   type CommandModule = {
-    name: string,
-    description: string,
-    setup?: (yargs: Yargs) => Yargs,
-    run: (argv: Argv) => Promise<number>,
+    +name: string,
+    +description: string,
+    +setup?: (yargs: Yargs) => Yargs,
+    +run: (argv: Argv) => Promise<number>,
     ...
   };
   const commands: Array<CommandModule> = [
@@ -81,8 +91,8 @@ export function runCLI() {
  */
 if (require.main === module) {
   const CWD = process.cwd();
-  let currDir = CWD;
-  let lastDir = null;
+  let currDir: string = CWD;
+  let lastDir: string | null = null;
   let run = runCLI;
   while (currDir !== lastDir) {
     const localCLIPath = path.join(
