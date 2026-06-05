@@ -26,10 +26,7 @@ declare module 'jsonwebtoken' {
     date: Date;
   }
 
-  declare type Secret =
-    | string
-    | Buffer
-    | { key: string | Buffer, passphrase: string, ... };
+  declare type Secret = string | { key: string, passphrase: string, ... };
 
   declare type SignOptions = {
     algorithm?: Algorithm,
@@ -105,7 +102,7 @@ declare module 'jsonwebtoken' {
 
   declare module.exports: {
     sign(
-      payload: string | Buffer | { ... },
+      payload: string | { ... },
       secretOrPrivateKey: Secret,
       optionsOrCallback?: SignOptions | SignCallback,
       callback?: SignCallback,
