@@ -11,7 +11,6 @@ import {
 
 const KEY = 'secret';
 
-// --- sign (valid) ---
 const token: string = jwt.sign({ foo: 'bar' }, KEY);
 const s2: string = sign('a-string-payload', KEY);
 const s3: string = sign({ foo: 'bar' }, KEY, {
@@ -32,7 +31,6 @@ sign({ foo: 'bar' }, KEY, (err, encoded) => {
 });
 sign({ foo: 'bar' }, KEY, { algorithm: 'RS256' }, (err, encoded) => {});
 
-// --- verify (valid) ---
 verify(token, KEY);
 verify(token, KEY, { algorithms: ['RS256'], issuer: 'me' });
 verify(
@@ -47,11 +45,9 @@ verify(
   },
 );
 
-// --- decode (valid) ---
 decode(token);
 decode(token, { complete: true });
 
-// --- error classes (received, not constructed) ---
 const maybeError: mixed = null;
 if (maybeError instanceof TokenExpiredError) {
   const expiredAt: Date = maybeError.expiredAt;
@@ -63,10 +59,9 @@ if (maybeError instanceof JsonWebTokenError) {
   const inner: Error = maybeError.inner;
 }
 
-// --- intended type errors ---
-// $FlowExpectedError - token must be a string
+// $FlowExpectedError[incompatible-type] - token must be a string
 verify(123, KEY);
-// $FlowExpectedError - invalid algorithm
+// $FlowExpectedError[incompatible-type] - invalid algorithm
 sign({ foo: 'bar' }, KEY, { algorithm: 'NOPE' });
-// $FlowExpectedError - secret/key is required
+// $FlowExpectedError[incompatible-type] - secret/key is required
 sign({ foo: 'bar' });
