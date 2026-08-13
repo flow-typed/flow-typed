@@ -50,7 +50,7 @@ const legacyStore9: Store = legacy_createStore(reducer, undefined, myEnhancer);
 //
 
 const s: State = store2.getState()
-// $FlowExpectedError[name-already-bound]
+// $FlowExpectedError[incompatible-type]
 const s: number = store2.getState() // wrong return type
 
 store2.dispatch({ type: 'A' })
