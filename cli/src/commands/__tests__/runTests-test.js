@@ -27,10 +27,12 @@ describe('run-tests (command)', () => {
       jest.resetAllMocks();
     });
 
+    // This first run is what fetches the flow release list and downloads the
+    // flow binaries it tests against, so it needs a generous timeout.
     it("returns error code if $FlowExpectedError test doesn't fail", async () => {
       const status = await runTest(false);
       expect(status).toEqual(1);
-    }, 10000);
+    }, 60000);
 
     it('console logs about unused suppression', async () => {
       await runTest(true);
@@ -216,6 +218,45 @@ describe('run-tests (command)', () => {
       matches.forEach((match, i) => {
         expect(flowConfigSplit[i]).toMatch(match);
       });
+    });
+
+    it('drops options and ignores that modern flow versions reject', async () => {
+      const flowConfigSplit = await createFlowConfig('0.328.0');
+
+      const matches = [
+        '[libs]',
+        'def',
+        /.*cli\/src\/commands\/__tests__\/__util__\/tdd_framework\.js$/,
+        '',
+        '[options]',
+        'all=true',
+        'include_warnings=true',
+        'server.max_workers=1',
+        'exact_by_default=true',
+        // `sharedmemory.heap_size` was removed in 0.326.0
+        '',
+        '',
+        '',
+        '[ignore]',
+        // `[ignore]` globs cannot reach outside of the project root from 0.328.0
+        '',
+        '',
+        '[lints]',
+        '',
+        'ambiguous-object-type=error',
+      ];
+
+      matches.forEach((match, i) => {
+        expect(flowConfigSplit[i]).toMatch(match);
+      });
+    });
+
+    it('keeps the options that flow versions below 0.319.0 accept', async () => {
+      const flowConfigSplit = await createFlowConfig('0.318.0');
+
+      expect(flowConfigSplit[7]).toBe('server.max_workers=0');
+      expect(flowConfigSplit[9]).toBe('sharedmemory.heap_size=3221225472');
+      expect(flowConfigSplit[13]).toMatch(/.*\/cli\/node_modules$/);
     });
 
     it('writes the dependency definitions correctly', async () => {
