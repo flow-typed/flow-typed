@@ -41,16 +41,18 @@ export type Args = {
  * we will return `linux-arm64`
  */
 const BIN_PLATFORM = (() => {
-  const arch = os.arch();
+  // Annotated as `string` because the bundled node libdef still types `arch()`
+  // as "x64" | "arm" | "ia32" and doesn't know about "arm64".
+  const arch: string = os.arch();
 
   switch (os.type()) {
     case 'Linux':
-      if (arch === 'arm') {
+      if (arch === 'arm64') {
         return 'linux-arm64';
       }
       return 'linux64';
     case 'Darwin':
-      if (arch === 'arm') {
+      if (arch === 'arm64') {
         return 'osx-arm64';
       }
       return 'osx';
@@ -423,10 +425,16 @@ export async function writeFlowConfig(
     '[options]',
     'all=true',
     'include_warnings=true',
-    'server.max_workers=0',
+    // Flow rejects a worker count of 0 from 0.319.0 ("workers are not
+    // initialized"), so keep it at the lowest value it still accepts. Tests run
+    // several Flow instances in parallel, so we don't want more than that.
+    semver.lt(version, '0.319.0')
+      ? 'server.max_workers=0'
+      : 'server.max_workers=1',
     semver.gte(version, '0.200.0') ? 'exact_by_default=true' : '', // from version 0.202.0 default is true
     // Fixes out of shared memory error for Mac Rosetta 2, see https://github.com/facebook/flow/issues/8538
-    'sharedmemory.heap_size=3221225472',
+    // The option was removed in 0.326.0 and is rejected from then on.
+    semver.lt(version, '0.326.0') ? 'sharedmemory.heap_size=3221225472' : '',
     semver.lt(version, '0.125.0')
       ? 'suppress_comment=\\\\(.\\\\|\\n\\\\)*\\\\$FlowExpectedError'
       : '',
@@ -434,8 +442,15 @@ export async function writeFlowConfig(
 
     // Be sure to ignore stuff in the node_modules directory of the flow-typed
     // CLI repository!
+    // From 0.328.0 `[ignore]` entries are globs that must be relative to the
+    // project root, so they cannot reach the CLI's node_modules, which sits
+    // above the test directory. Flow doesn't pick up files outside of the
+    // project root on those versions anyway, so there is nothing left to
+    // ignore.
     '[ignore]',
-    path.join(testDirPath, '..', '..', 'node_modules'),
+    semver.lt(version, '0.328.0')
+      ? path.join(testDirPath, '..', '..', 'node_modules')
+      : '',
     '',
     '[lints]',
     semver.gte(version, '0.104.0') && semver.lt(version, '0.201.0')
@@ -599,6 +614,9 @@ const CONFIGURATION_CHANGE_VERSIONS = [
   'v0.104.0', // Adding lint
   'v0.125.0', // Remove suppress_comments
   'v0.200.0', // exact_by_default become required
+  'v0.319.0', // server.max_workers no longer accepts 0
+  'v0.326.0', // sharedmemory.heap_size removed
+  'v0.328.0', // [ignore] entries became project relative globs
 ];
 
 /**
