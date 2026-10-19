@@ -251,6 +251,13 @@ describe('run-tests (command)', () => {
       });
     });
 
+    it('drops exact_by_default and its lint from 0.335.0', async () => {
+      const flowConfigSplit = await createFlowConfig('0.335.0');
+
+      expect(flowConfigSplit).not.toContain('exact_by_default=true');
+      expect(flowConfigSplit).not.toContain('ambiguous-object-type=error');
+    });
+
     it('keeps the options that flow versions below 0.319.0 accept', async () => {
       const flowConfigSplit = await createFlowConfig('0.318.0');
 
