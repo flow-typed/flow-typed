@@ -1,6 +1,6 @@
 // @flow
 import whichCb from 'which';
-import simpleGit from 'simple-git';
+import {simpleGit} from 'simple-git';
 
 import {child_process} from './node';
 

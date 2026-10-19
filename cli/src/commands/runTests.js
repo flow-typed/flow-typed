@@ -431,7 +431,11 @@ export async function writeFlowConfig(
     semver.lt(version, '0.319.0')
       ? 'server.max_workers=0'
       : 'server.max_workers=1',
-    semver.gte(version, '0.200.0') ? 'exact_by_default=true' : '', // from version 0.202.0 default is true
+    // From version 0.202.0 the default is true. The option was removed in
+    // 0.335.0, where objects are always exact, and is rejected from then on.
+    semver.gte(version, '0.200.0') && semver.lt(version, '0.335.0')
+      ? 'exact_by_default=true'
+      : '',
     // Fixes out of shared memory error for Mac Rosetta 2, see https://github.com/facebook/flow/issues/8538
     // The option was removed in 0.326.0 and is rejected from then on.
     semver.lt(version, '0.326.0') ? 'sharedmemory.heap_size=3221225472' : '',
@@ -456,7 +460,12 @@ export async function writeFlowConfig(
     semver.gte(version, '0.104.0') && semver.lt(version, '0.201.0')
       ? 'implicit-inexact-object=error'
       : '',
-    semver.gte(version, '0.201.0') ? 'ambiguous-object-type=error' : '',
+    // Without `exact_by_default` this lint fires on every plain object type,
+    // including the ones in Flow's own builtin libs, so drop it along with the
+    // option from 0.335.0.
+    semver.gte(version, '0.201.0') && semver.lt(version, '0.335.0')
+      ? 'ambiguous-object-type=error'
+      : '',
   ].join('\n');
   await fs.writeFile(destFlowConfigPath, flowConfigData);
 }
@@ -472,6 +481,12 @@ function testTypeDefinition(
         path.join(BIN_DIR, 'flow-' + flowVer + (IS_WINDOWS ? '.exe' : '')),
         'check',
         '--strip-root',
+        // Versions are checked in parallel against the same test directory,
+        // and `flow check` still takes the server lock for its root. Without a
+        // temp dir per version they collide ("There is already a server
+        // running") and the slower one fails.
+        '--temp-dir',
+        path.join(os.tmpdir(), 'flow-typed', flowVer),
         testDirPath,
       ].join(' '),
     );
@@ -617,6 +632,7 @@ const CONFIGURATION_CHANGE_VERSIONS = [
   'v0.319.0', // server.max_workers no longer accepts 0
   'v0.326.0', // sharedmemory.heap_size removed
   'v0.328.0', // [ignore] entries became project relative globs
+  'v0.335.0', // exact_by_default removed, objects are always exact
 ];
 
 /**
