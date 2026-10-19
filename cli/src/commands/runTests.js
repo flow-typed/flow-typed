@@ -481,6 +481,12 @@ function testTypeDefinition(
         path.join(BIN_DIR, 'flow-' + flowVer + (IS_WINDOWS ? '.exe' : '')),
         'check',
         '--strip-root',
+        // Versions are checked in parallel against the same test directory,
+        // and `flow check` still takes the server lock for its root. Without a
+        // temp dir per version they collide ("There is already a server
+        // running") and the slower one fails.
+        '--temp-dir',
+        path.join(os.tmpdir(), 'flow-typed', flowVer),
         testDirPath,
       ].join(' '),
     );
