@@ -13,7 +13,9 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node: [ 'lts/*', 'current' ]
+        # '*' resolves to the latest stable release; 'current' picks up
+        # prereleases (e.g. v27.0.0-alpha) that yarn rejects.
+        node: [ 'lts/*', '*' ]
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
