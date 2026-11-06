@@ -1,5 +1,5 @@
-// flow-typed signature: 553472410ab87c5fe8a2140e647f049d
-// flow-typed version: 6912183195/jest_v29.x.x/flow_>=v0.134.x <=v0.200.x
+// flow-typed signature: f3f75dec8a0c58e78c2a57e2f81e6f7f
+// flow-typed version: 00ecb7849a/jest_v29.x.x/flow_>=v0.201.x
 
 type JestMockFn<TArguments: $ReadOnlyArray<any>, TReturn> = {
   (...args: TArguments): TReturn,
@@ -659,7 +659,7 @@ interface JestExpectType {
    * Use .toBeInstanceOf(Class) to check that an object is an instance of a
    * class.
    */
-  toBeInstanceOf(cls: Class<*>): void;
+  toBeInstanceOf(cls: Class<any>): void;
   /**
    * .toBeNull() is the same as .toBe(null) but the error messages are a bit
    * nicer.
@@ -858,7 +858,7 @@ type JestObjectType = {
    * Returns a new, unused mock function. Optionally takes a mock
    * implementation.
    */
-  fn<TArguments: $ReadOnlyArray<*>, TReturn>(
+  fn<TArguments: $ReadOnlyArray<any>, TReturn>(
     implementation?: (...args: TArguments) => TReturn
   ): JestMockFn<TArguments, TReturn>,
   /**
@@ -1224,8 +1224,8 @@ declare var expect: {
   hasAssertions(): void,
   any(value: mixed): JestAsymmetricEqualityType,
   anything(): any,
-  arrayContaining(value: Array<mixed>): Array<mixed>,
-  objectContaining(value: Object): Object,
+  arrayContaining(value: $ReadOnlyArray<mixed>): Array<mixed>,
+  objectContaining(value: { ... }): Object,
   /** Matches any received string that contains the exact expected string. */
   stringContaining(value: string): string,
   stringMatching(value: string | RegExp): string,

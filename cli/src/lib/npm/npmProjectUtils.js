@@ -41,9 +41,9 @@ const PKG_JSON_DEP_FIELDS = [
 export async function findPackageJsonDepVersionStr(
   pkgJson: PkgJson,
   depName: string,
-): Promise<null | string> {
+): Promise<?string> {
   let matchedFields = [];
-  const deps = PKG_JSON_DEP_FIELDS.reduce((deps, section) => {
+  const deps = PKG_JSON_DEP_FIELDS.reduce((deps: Array<string>, section) => {
     const contentSection = pkgJson.content[section];
     if (contentSection && contentSection[depName]) {
       matchedFields.push(section);
@@ -106,7 +106,7 @@ async function findWorkspacesPackagePaths(
 ): Promise<string[]> {
   const tasks = await Promise.all(
     workspaces.map(pattern => {
-      return new Promise((resolve, reject) => {
+      return new Promise<Array<string>>((resolve, reject) => {
         glob(
           `${path.dirname(pkgJson.pathStr)}/${pattern}/package.json`,
           {absolute: true},
@@ -245,7 +245,7 @@ export async function determineFlowVersion(
     'flow-bin',
   );
 
-  if (flowBinVersionStr !== null) {
+  if (flowBinVersionStr != null) {
     let flowVerStr;
     if (semver.valid(flowBinVersionStr)) {
       flowVerStr = flowBinVersionStr;

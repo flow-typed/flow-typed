@@ -373,7 +373,7 @@ async function installNpmLibDefs({
 
   const libdefsToSearchFor: Map<string, string> = new Map();
 
-  let ignoreDefs;
+  let ignoreDefs: Array<string>;
 
   if (Array.isArray(ftConfig.ignore)) {
     ignoreDefs = ftConfig.ignore;
@@ -613,7 +613,7 @@ async function installNpmLibDefs({
     while (Object.keys(defDepsToInstall).length > 0) {
       await getLibDefsToInstall(
         Object.keys(defDepsToInstall)
-          .map(dep => {
+          .map((dep): [string, string] => {
             const libDef = libDefsToInstall.get(dep);
             const defVersions = defDepsToInstall[dep];
             if (libDef) {
@@ -649,7 +649,7 @@ async function installNpmLibDefs({
   }
 
   // Scan libdefs that are already installed
-  const libDefsToUninstall = new Map();
+  const libDefsToUninstall = new Map<string, string>();
   const alreadyInstalledLibDefs = await getInstalledNpmLibDefs(
     path.join(flowProjectRoot),
     libdefDir,

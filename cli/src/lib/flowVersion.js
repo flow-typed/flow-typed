@@ -110,13 +110,15 @@ function _parseVersion(
         // It's possible that a prerel *and* a range co-exist!
         // v0.1.x-prerel-v0.2.x
         let prerelParts = verAfterParts.substr(1).split('-'); // ['prerel', 'v0.2.x']
-        let prerel = prerelParts.shift(); // 'prerel'
+        // $FlowFixMe[incompatible-type]
+        let prerel: string = prerelParts.shift(); // 'prerel'
         while (prerelParts.length > 0) {
           try {
             _parseVersion(prerelParts.join('-'), false);
             break;
           } catch (e) {
-            prerel += '-' + prerelParts.shift();
+            // $FlowFixMe[incompatible-cast]
+            prerel += '-' + (prerelParts.shift(): string);
           }
         }
 
@@ -311,7 +313,7 @@ function _disjointVersionsAll(
   vers: Array<FlowVersion>,
   len: number,
   i: number,
-) {
+): boolean {
   if (i + 1 >= len) return true;
   for (let j = i + 1; j < len; j++) {
     if (!disjointVersions(vers[i], vers[j])) {

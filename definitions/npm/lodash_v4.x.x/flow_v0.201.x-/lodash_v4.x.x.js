@@ -1733,8 +1733,8 @@ declare module "lodash/fp" {
   declare type Lodash = {|
     // Array
     chunk:
-      & (<T>(size: number) => ((array: $ReadOnlyArray<T>) => Array<Array<T>>))
-      & (<T>(size: number, array: $ReadOnlyArray<T>) => Array<Array<T>>);
+      & (<T>(array: $ReadOnlyArray<T>, size?: number) => Array<Array<T>>)
+      & (<T>(array: void | null, size?: number) => Array<[]>);
     compact<T, N: ?T>(array?: ?$ReadOnlyArray<N>): Array<T>;
     concat:
       & (<T, U, A: Array<T> | T, B: Array<U> | U>(

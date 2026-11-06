@@ -21,6 +21,7 @@ export const child_process = {
         if (err) {
           rej(err);
         } else {
+          // $FlowFixMe[incompatible-call]
           res({stdout: Buffer.from(stdout), stderr: Buffer.from(stderr)});
         }
       });

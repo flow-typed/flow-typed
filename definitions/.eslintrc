@@ -1,5 +1,11 @@
 {
-  "parser": "babel-eslint",
+  "parser": "@babel/eslint-parser",
+  "parserOptions": {
+    "requireConfigFile": false,
+    "babelOptions": {
+      "plugins": ["@babel/plugin-syntax-flow", "@babel/plugin-syntax-jsx"]
+    }
+  },
   "plugins": ["flowtype", "fb-flow"],
   "rules": {
     "flowtype/no-weak-types": "warn",
