@@ -19,7 +19,7 @@ declare module 'zustand/vanilla' {
       state: S | (S => S),
       replace: true
     ) => void)
-  declare export type StoreApi<S> = $ReadOnly<{|
+  declare export type StoreApi<S> = Readonly<{|
     getInitialState: () => S,
     getState: () => S,
     setState: SetStateInternal<S>,
@@ -83,7 +83,7 @@ declare module 'zustand' {
  */
 
 declare module 'zustand/vanilla/shallow' {
-  declare export function shallow(a: mixed, b: mixed): boolean
+  declare export function shallow(a: unknown, b: unknown): boolean
 }
 declare module 'zustand/vanilla/shallow.js' {
   declare export * from 'zustand/vanilla/shallow'
@@ -149,14 +149,14 @@ declare module 'zustand/middleware' {
 
   type PersistStorage<S> = {|
     getItem: (name: string) => StorageValue<S>,
-    setItem: (name: string, value: StorageValue<S>) => mixed,
-    removeItem: (name: string) => mixed,
+    setItem: (name: string, value: StorageValue<S>) => unknown,
+    removeItem: (name: string) => unknown,
   |}
 
   type StateStorage = {|
     getItem: (key: string) => string | null,
-    removeItem(key: string): void,
-    setItem(key: string, value: string): void
+    removeItem: (key: string) => void,
+    setItem: (key: string, value: string) => void,
   |}
 
   type DevtoolsOptions = {|
@@ -201,7 +201,7 @@ declare module 'zustand/middleware' {
      * The main function will be called before the state rehydration.
      * The returned function will be called after the state rehydration or when an error occurred.
      */
-    onRehydrateStorage?: (state: S) => ((state?: S, error?: mixed) => void) | void,
+    onRehydrateStorage?: (state: S) => ((state?: S, error?: unknown) => void) | void,
     /**
      * If the stored state's version mismatch the one specified here, the storage will not be used.
      * This is useful when adding a breaking change to your store.
@@ -211,12 +211,12 @@ declare module 'zustand/middleware' {
      * A function to perform persisted state migration.
      * This function will be called when persisted state versions mismatch with the one specified here.
      */
-    migrate?: (persistedState: mixed, version: number) => PersistedState | Promise<PersistedState>,
+    migrate?: (persistedState: unknown, version: number) => PersistedState | Promise<PersistedState>,
     /**
      * A function to perform custom hydration merges when combining the stored state with the current one.
      * By default, this function does a shallow merge.
      */
-    merge?: (persistedState: mixed, currentState: S) => S,
+    merge?: (persistedState: unknown, currentState: S) => S,
     /**
      * An optional boolean that will prevent the persist middleware from triggering hydration on initialization,
      * This allows you to call `rehydrate()` at a specific point in your apps rendering life-cycle.
@@ -232,11 +232,11 @@ declare module 'zustand/middleware' {
     /**
      * Is a function that is passed to `JSON.parse` to deserialize the data.
      */
-    reviver?: (key: string, value: mixed) => mixed,
+    reviver?: (key: string, value: unknown) => unknown,
     /**
      * Is a function that is passed to `JSON.stringify` to serialize the data.
      */
-    replacer?: (key: string, value: mixed) => mixed
+    replacer?: (key: string, value: unknown) => unknown
   |}
 
   declare export function combine<S, T, R = {|...S, ...T|}>(
