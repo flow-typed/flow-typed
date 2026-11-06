@@ -475,6 +475,34 @@ describe('run-tests (command)', () => {
       ]);
     });
 
+    it('returns every version when there are fewer than requested', () => {
+      expect(
+        selectFlowTestVersions(
+          ['v0.193.0', 'v0.192.0'],
+          {
+            kind: 'ranged',
+            lower: {major: 0, minor: 104, patch: 'x', prerel: null},
+            upper: null,
+          },
+          15,
+        ),
+      ).toEqual(['v0.193.0', 'v0.192.0']);
+    });
+
+    it('returns no versions when there are none', () => {
+      expect(
+        selectFlowTestVersions(
+          [],
+          {
+            kind: 'ranged',
+            lower: {major: 0, minor: 104, patch: 'x', prerel: null},
+            upper: null,
+          },
+          15,
+        ),
+      ).toEqual([]);
+    });
+
     it('returns versions only within set range', () => {
       expect(
         selectFlowTestVersions(

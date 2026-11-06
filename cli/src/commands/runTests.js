@@ -229,6 +229,11 @@ async function getOrderedFlowBinVersions(
           foundAllFlowVersions = true;
         }
       } catch (e) {
+        // Without any release we can't pick versions to test against, so let
+        // the caller fall back to the cached binaries instead.
+        if (_flowReleases.length === 0) {
+          throw e;
+        }
         console.error(e);
         foundAllFlowVersions = true;
       }
@@ -393,6 +398,14 @@ async function getCachedFlowBinVersions(
   const versions: any[] = (await fs.readdir(path.join(BIN_DIR)))
     .filter(checkFlowFilename)
     .map(dir => dir.slice('flow-'.length));
+
+  if (versions.length === 0) {
+    throw new Error(
+      'Could not fetch the list of Flow releases from GitHub and there are ' +
+        'no cached Flow binaries to fall back to. If GitHub rate limited ' +
+        'the request, set GITHUB_TOKEN and try again.',
+    );
+  }
 
   // sort the versions that we have in-place
   // removing the `v` prefix before semver comparison
@@ -982,6 +995,7 @@ export function selectFlowTestVersions(
     let versionExceedsLower = false;
     while (
       selectedFlowVersions.length < numberOfFlowVersions &&
+      selectedFlowVersions.length < flowVersions.length &&
       !versionExceedsLower
     ) {
       const version = flowVersions[selectedFlowVersions.length];
