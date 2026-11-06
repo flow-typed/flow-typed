@@ -243,12 +243,28 @@ describe('run-tests (command)', () => {
         '',
         '[lints]',
         '',
-        'ambiguous-object-type=error',
+        // `ambiguous-object-type` fires on Flow's own builtins from 0.315.0
+        '',
       ];
 
       matches.forEach((match, i) => {
         expect(flowConfigSplit[i]).toMatch(match);
       });
+      expect(flowConfigSplit).not.toContain('ambiguous-object-type=error');
+    });
+
+    it('keeps the ambiguous obj lint below 0.315.0', async () => {
+      const flowConfigSplit = await createFlowConfig('0.314.0');
+
+      expect(flowConfigSplit).toContain('exact_by_default=true');
+      expect(flowConfigSplit).toContain('ambiguous-object-type=error');
+    });
+
+    it('drops the ambiguous obj lint from 0.315.0', async () => {
+      const flowConfigSplit = await createFlowConfig('0.315.0');
+
+      expect(flowConfigSplit).toContain('exact_by_default=true');
+      expect(flowConfigSplit).not.toContain('ambiguous-object-type=error');
     });
 
     it('drops exact_by_default and its lint from 0.335.0', async () => {
