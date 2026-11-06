@@ -30,6 +30,10 @@ jobs:
           git config --global user.name "flow-typed CI"
           git config --global user.email "noemail@example.com"
       - name: Tests
+        # The test runner lists Flow releases through the GitHub API, which
+        # rate limits unauthenticated requests per (shared) runner IP.
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: ./build.sh
   analyze:
     name: Analyze ${{ matrix.language }}
