@@ -1,11 +1,5 @@
 {
-  "parser": "@babel/eslint-parser",
-  "parserOptions": {
-    "requireConfigFile": false,
-    "babelOptions": {
-      "plugins": ["@babel/plugin-syntax-flow", "@babel/plugin-syntax-jsx"]
-    }
-  },
+  "parser": "hermes-eslint",
   "plugins": ["flowtype", "fb-flow"],
   "rules": {
     "flowtype/no-weak-types": "warn",
