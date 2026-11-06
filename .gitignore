@@ -43,3 +43,6 @@ harness/
 .vscode
 .idea
 *.iml
+
+# Claude Code worktrees
+.claude/worktrees

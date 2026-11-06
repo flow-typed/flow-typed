@@ -460,10 +460,11 @@ export async function writeFlowConfig(
     semver.gte(version, '0.104.0') && semver.lt(version, '0.201.0')
       ? 'implicit-inexact-object=error'
       : '',
-    // Without `exact_by_default` this lint fires on every plain object type,
-    // including the ones in Flow's own builtin libs, so drop it along with the
-    // option from 0.335.0.
-    semver.gte(version, '0.201.0') && semver.lt(version, '0.335.0')
+    // From 0.315.0 Flow's own builtin libs (core.js, lib.dom.d.ts, ...) contain
+    // plain object types, so this lint reports errors in them for every
+    // libdef. From 0.335.0 `exact_by_default` is gone and the lint would fire
+    // on every plain object type anyway. Only enable it before 0.315.0.
+    semver.gte(version, '0.201.0') && semver.lt(version, '0.315.0')
       ? 'ambiguous-object-type=error'
       : '',
   ].join('\n');
@@ -636,6 +637,7 @@ const CONFIGURATION_CHANGE_VERSIONS = [
   'v0.104.0', // Adding lint
   'v0.125.0', // Remove suppress_comments
   'v0.200.0', // exact_by_default become required
+  'v0.315.0', // ambiguous-object-type lint dropped, builtins trip it
   'v0.319.0', // server.max_workers no longer accepts 0
   'v0.326.0', // sharedmemory.heap_size removed
   'v0.328.0', // [ignore] entries became project relative globs
