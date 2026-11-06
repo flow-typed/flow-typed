@@ -505,6 +505,13 @@ function testTypeDefinition(
   });
 }
 
+// A clean `flow check` ends with "Found 0 errors" on older Flow versions and
+// with "No errors!" from 0.337.0 on.
+function isCleanFlowOutput(stdErrOut: string): boolean {
+  const output = stdErrOut.trimEnd();
+  return output.endsWith('Found 0 errors') || output.endsWith('No errors!');
+}
+
 async function runFlowTypeDefTests(
   flowVersionsToRun: Array<string>,
   groupId: string,
@@ -532,7 +539,7 @@ async function runFlowTypeDefTests(
           errors.push(
             testRunId + ': Error executing Flow process: ' + execError.stack,
           );
-        } else if (!stdErrOut.endsWith('Found 0 errors\n')) {
+        } else if (!isCleanFlowOutput(stdErrOut)) {
           errors.push(
             testRunId +
               ': Unexpected Flow errors (' +
@@ -566,7 +573,7 @@ async function testLowestCapableFlowVersion(
           testDirPath,
         );
 
-        if (execError !== null || !stdErrOut.endsWith('Found 0 errors\n')) {
+        if (execError !== null || !isCleanFlowOutput(stdErrOut)) {
           lowerFlowVersionsToRun = [];
         } else {
           lowestCapableFlowVersion = semver.lt(
